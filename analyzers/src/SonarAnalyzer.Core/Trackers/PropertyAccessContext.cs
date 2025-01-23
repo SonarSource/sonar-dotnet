@@ -24,7 +24,7 @@ public class PropertyAccessContext : SyntaxBaseContext
     public PropertyAccessContext(SonarSyntaxNodeReportingContext context, string propertyName) : base(context)
     {
         PropertyName = propertyName;
-        PropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
+        PropertySymbol = new Lazy<IPropertySymbol>(() => context.Model.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
     }
 
     public PropertyAccessContext(SyntaxNode node, SemanticModel model, string propertyName) : base(node, model)

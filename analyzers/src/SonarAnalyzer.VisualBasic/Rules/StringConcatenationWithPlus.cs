@@ -31,10 +31,10 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    var leftType = c.SemanticModel.GetTypeInfo(binary.Left).Type;
+                    var leftType = c.Model.GetTypeInfo(binary.Left).Type;
                     if (leftType.Is(KnownType.System_String)
                         // If op_Addition exist, there's areason for it => don't raise. We don't care about type of op_Addition arguments, they match because it compiles.
-                        || (leftType.GetMembers("op_Addition").IsEmpty && c.SemanticModel.GetTypeInfo(binary.Right).Type.Is(KnownType.System_String)))
+                        || (leftType.GetMembers("op_Addition").IsEmpty && c.Model.GetTypeInfo(binary.Right).Type.Is(KnownType.System_String)))
                     {
                         c.ReportIssue(Rule, binary.OperatorToken);
                     }

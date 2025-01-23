@@ -46,13 +46,13 @@ public abstract class ObsoleteAttributesBase<TSyntaxKind> : SonarDiagnosticAnaly
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is { } attribute
+                if (c.Model.GetSymbolInfo(c.Node).Symbol is { } attribute
                     && attribute.IsInType(KnownType.System_ObsoleteAttribute))
                 {
                     var location = c.Node.GetLocation();
                     c.ReportIssue(RemoveRule, location);
 
-                    if (NoExplanation(c.Node, c.SemanticModel))
+                    if (NoExplanation(c.Node, c.Model))
                     {
                         c.ReportIssue(ExplanationNeededRule, location);
                     }

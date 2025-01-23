@@ -72,8 +72,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var type = c.SemanticModel.GetDeclaredSymbol(typeDeclaration);
-                    var collector = new TypeDependencyCollector(c.SemanticModel, typeDeclaration);
+                    var type = c.Model.GetDeclaredSymbol(typeDeclaration);
+                    var collector = new TypeDependencyCollector(c.Model, typeDeclaration);
                     collector.SafeVisit(typeDeclaration);
                     var dependentTypes = collector.DependentTypes
                         .SelectMany(ExpandGenericTypes)

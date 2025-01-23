@@ -51,7 +51,7 @@ public abstract class TooManyLabelsInSwitchBase<TSyntaxKind, TSwitchStatementSyn
             {
                 var switchNode = (TSwitchStatementSyntax)c.Node;
 
-                if (c.SemanticModel.GetTypeInfo(GetExpression(switchNode)).Type is { TypeKind: not TypeKind.Enum }
+                if (c.Model.GetTypeInfo(GetExpression(switchNode)).Type is { TypeKind: not TypeKind.Enum }
                     && GetSectionsCount(switchNode) > Maximum
                     && !AllSectionsAreOneLiners(switchNode))
                 {

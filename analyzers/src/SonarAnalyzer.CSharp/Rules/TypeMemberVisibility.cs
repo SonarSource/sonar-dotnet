@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
                     var typeDeclaration = (BaseTypeDeclarationSyntax)c.Node;
-                    var secondaryLocations = GetInvalidMemberLocations(c.SemanticModel, typeDeclaration);
+                    var secondaryLocations = GetInvalidMemberLocations(c.Model, typeDeclaration);
                     if (secondaryLocations.Any())
                     {
                         c.ReportIssue(Rule, typeDeclaration.Identifier, secondaryLocations);

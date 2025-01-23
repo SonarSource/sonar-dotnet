@@ -39,9 +39,9 @@ public sealed class DontUseTraceSwitchLevels : SonarDiagnosticAnalyzer
                 var invocation = (InvocationExpressionSyntax)c.Node;
                 if (invocation.GetName() is "WriteIf" or "WriteLineIf"
                     && invocation.ArgumentList.Arguments.Count > 1
-                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                    && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Trace)
-                    && UsesTraceSwitchAsCondition(c.SemanticModel, methodSymbol, invocation) is { } traceSwitchProperty)
+                    && UsesTraceSwitchAsCondition(c.Model, methodSymbol, invocation) is { } traceSwitchProperty)
                 {
                     c.ReportIssue(Rule, traceSwitchProperty, invocation.GetName());
                 }

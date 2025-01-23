@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules
                     if (!c.IsRedundantPositionalRecordContext()
                         && IsEnabled(c.Options)
                         && DerivesOrImplementsAny(declaration)
-                        && DeclaredSymbol(declaration, c.SemanticModel).DerivesOrImplementsAny(nonInheritableClassesAndInterfaces))
+                        && DeclaredSymbol(declaration, c.Model).DerivesOrImplementsAny(nonInheritableClassesAndInterfaces))
                     {
                         c.ReportIssue(rule, Location(declaration));
                     }

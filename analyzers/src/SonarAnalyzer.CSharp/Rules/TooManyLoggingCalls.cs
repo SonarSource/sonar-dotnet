@@ -79,7 +79,7 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         var node = context.Node;
         if (IsBlockNodeSupported(node))
         {
-            var logCallCollector = new LoggingCallCollector(context.SemanticModel, node);
+            var logCallCollector = new LoggingCallCollector(context.Model, node);
             logCallCollector.Visit(node);
             foreach (var group in logCallCollector.GroupedLoggingInvocations)
             {

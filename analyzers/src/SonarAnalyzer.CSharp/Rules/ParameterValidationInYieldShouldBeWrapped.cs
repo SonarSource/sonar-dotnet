@@ -34,7 +34,7 @@ public sealed class ParameterValidationInYieldShouldBeWrapped : SonarDiagnosticA
             {
                 var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
-                var walker = new ParameterValidationInYieldWalker(c.SemanticModel);
+                var walker = new ParameterValidationInYieldWalker(c.Model);
                 walker.SafeVisit(methodDeclaration);
 
                 if (walker.HasYieldStatement &&

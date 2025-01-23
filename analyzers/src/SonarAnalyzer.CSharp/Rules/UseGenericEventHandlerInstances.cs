@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             Func<Location> getLocationToReportOn)
         {
 
-            if (analysisContext.SemanticModel.GetDeclaredSymbol(eventNode) is IEventSymbol eventSymbol &&
+            if (analysisContext.Model.GetDeclaredSymbol(eventNode) is IEventSymbol eventSymbol &&
                 !eventSymbol.IsOverride &&
                 eventSymbol.GetInterfaceMember() == null &&
                 (eventSymbol.Type as INamedTypeSymbol)?.ConstructedFrom.IsAny(allowedTypes) == false)

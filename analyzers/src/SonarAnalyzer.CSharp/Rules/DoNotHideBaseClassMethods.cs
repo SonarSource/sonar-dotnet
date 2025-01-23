@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var declarationSyntax = (TypeDeclarationSyntax)c.Node;
                     if (declarationSyntax.Identifier.IsMissing
                         || c.IsRedundantPositionalRecordContext()
-                        || !(c.SemanticModel.GetDeclaredSymbol(declarationSyntax) is { } declaredSymbol))
+                        || !(c.Model.GetDeclaredSymbol(declarationSyntax) is { } declaredSymbol))
                     {
                         return;
                     }
@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
             public void ReportIssue(MemberDeclarationSyntax memberDeclaration)
             {
                 if (memberDeclaration is MethodDeclarationSyntax { Identifier: { } identifier }
-                    && context.SemanticModel.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol
+                    && context.Model.GetDeclaredSymbol(memberDeclaration) is IMethodSymbol methodSymbol
                     && FindBaseMethodHiddenByMethod(methodSymbol) is { } baseMethodHidden)
                 {
                     context.ReportIssue(Rule, identifier, baseMethodHidden.ToDisplayString());

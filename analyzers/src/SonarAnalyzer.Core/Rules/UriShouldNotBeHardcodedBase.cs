@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (UriRegex.SafeIsMatch(Language.Syntax.LiteralText(c.Node)) && IsInCheckedContext(c.Node, c.SemanticModel))
+                    if (UriRegex.SafeIsMatch(Language.Syntax.LiteralText(c.Node)) && IsInCheckedContext(c.Node, c.Model))
                     {
                         c.ReportIssue(SupportedDiagnostics[0], c.Node, AbsoluteUriMessage);
                     }
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules
                 GeneratedCodeRecognizer,
                 c =>
                 {
-                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(c.Node, c.SemanticModel));
+                    var isInCheckedContext = new Lazy<bool>(() => IsInCheckedContext(c.Node, c.Model));
 
                     var leftNode = Language.Syntax.BinaryExpressionLeft(c.Node);
                     if (IsPathDelimiter(leftNode) && isInCheckedContext.Value)

@@ -57,9 +57,9 @@ public sealed class LoggersShouldBeNamedForEnclosingType : SonarDiagnosticAnalyz
         if (invocation.GetName() is "GetLogger" or "CreateLogger"
             && EnclosingTypeNode(invocation) is { } enclosingType // filter out top-level statements, choose new() first and then enclosing type
             && ExtractArgument(invocation) is { } argument
-            && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
+            && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
             && IsValidMethod(method)
-            && !MatchesEnclosingType(argument, enclosingType, context.SemanticModel))
+            && !MatchesEnclosingType(argument, enclosingType, context.Model))
         {
             context.ReportIssue(Rule, argument);
         }

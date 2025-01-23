@@ -83,7 +83,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             return;
         }
 
-        if (context.SemanticModel.GetDeclaredSymbol(declaration) is not { } methodOrPropertySymbol
+        if (context.Model.GetDeclaredSymbol(declaration) is not { } methodOrPropertySymbol
             || IsStaticVirtualAbstractOrOverride()
             || MethodNameWhitelist.Contains(methodOrPropertySymbol.Name)
             || IsOverrideInterfaceOrNew()
@@ -97,7 +97,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
         }
 
         var descendants = getDescendants(declaration);
-        if (descendants is null || HasInstanceReferences(descendants, context.SemanticModel))
+        if (descendants is null || HasInstanceReferences(descendants, context.Model))
         {
             return;
         }

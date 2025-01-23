@@ -40,13 +40,13 @@ namespace SonarAnalyzer.Rules.CSharp
                     var attribute = (AttributeSyntax)c.Node;
                     if (HasReasonPhrase(attribute)
                         || HasTrailingComment(attribute)
-                        || !IsKnownIgnoreAttribute(attribute, c.SemanticModel)
+                        || !IsKnownIgnoreAttribute(attribute, c.Model)
                         || attribute.Parent?.Parent is not { } attributeTarget)
                     {
                         return;
                     }
 
-                    var attributes = GetAllAttributes(attributeTarget, c.SemanticModel);
+                    var attributes = GetAllAttributes(attributeTarget, c.Model);
 
                     if (attributes.Any(IsTestOrTestClassAttribute)
                         && !attributes.Any(IsWorkItemAttribute))

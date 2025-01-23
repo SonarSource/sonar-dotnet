@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
                     if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
-                        && IsEventHandler(methodDeclaration, c.SemanticModel))
+                        && IsEventHandler(methodDeclaration, c.Model))
                     {
                         c.ReportIssue(Rule, methodDeclaration.Identifier, methodDeclaration.Identifier.ValueText, Pattern);
                     }

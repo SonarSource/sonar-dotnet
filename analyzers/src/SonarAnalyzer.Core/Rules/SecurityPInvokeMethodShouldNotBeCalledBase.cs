@@ -58,11 +58,11 @@ namespace SonarAnalyzer.Rules
         {
             if (analysisContext.Node is TInvocationExpressionSyntax invocation
                 && Language.Syntax.NodeExpression(invocation) is { } directMethodCall
-                && MethodSymbolForInvalidInvocation(directMethodCall, analysisContext.SemanticModel) is IMethodSymbol methodSymbol
+                && MethodSymbolForInvalidInvocation(directMethodCall, analysisContext.Model) is IMethodSymbol methodSymbol
                 && methodSymbol.IsStatic
-                && IsImportFromInteropDll(methodSymbol, analysisContext.SemanticModel))
+                && IsImportFromInteropDll(methodSymbol, analysisContext.Model))
             {
-                analysisContext.ReportIssue(Rule, Language.Syntax.NodeIdentifier(directMethodCall).Value, GetMethodName(methodSymbol, analysisContext.SemanticModel));
+                analysisContext.ReportIssue(Rule, Language.Syntax.NodeIdentifier(directMethodCall).Value, GetMethodName(methodSymbol, analysisContext.Model));
             }
         }
     }

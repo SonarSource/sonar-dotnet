@@ -47,8 +47,8 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForIssue(SonarSyntaxNodeReportingContext context, SyntaxNode fromExpression, SyntaxNode toExpression)
         {
-            var castedFrom = context.SemanticModel.GetTypeInfo(fromExpression).Type;
-            var castedTo = context.SemanticModel.GetTypeInfo(toExpression).Type;
+            var castedFrom = context.Model.GetTypeInfo(fromExpression).Type;
+            var castedTo = context.Model.GetTypeInfo(toExpression).Type;
             if (castedFrom.Is(TypeKind.Interface)
                 && castedFrom.DeclaringSyntaxReferences.Any()
                 && castedTo.Is(TypeKind.Class)

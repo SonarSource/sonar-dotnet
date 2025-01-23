@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                    var invocation = (InvocationExpressionSyntax)c.Node;
 
                    if (invocation.Expression.ToStringContainsEitherOr(nameof(Type.IsInstanceOfType), nameof(Type.GetType))
-                       && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
+                       && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
                    {
                        CheckGetTypeCallOnType(c, invocation, methodSymbol);
                        CheckIsInstanceOfTypeCallWithTypeArgument(c, invocation, methodSymbol);
@@ -52,14 +52,14 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var argument = invocation.ArgumentList.Arguments.First().Expression;
 
-            var typeInfo = context.SemanticModel.GetTypeInfo(argument).Type;
+            var typeInfo = context.Model.GetTypeInfo(argument).Type;
             if (!typeInfo.Is(KnownType.System_Type))
             {
                 return;
             }
 
             var invocationInArgument = argument as InvocationExpressionSyntax;
-            var message = invocationInArgument.IsGetTypeCall(context.SemanticModel)
+            var message = invocationInArgument.IsGetTypeCall(context.Model)
                 ? MessageIsInstanceOfTypeWithGetType
                 : MessageIsInstanceOfType;
 
@@ -69,13 +69,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckGetTypeCallOnType(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, IMethodSymbol invokedMethod)
         {
             if (!(invocation.Expression is MemberAccessExpressionSyntax memberCall)
-                || IsException(memberCall, context.SemanticModel)
+                || IsException(memberCall, context.Model)
                 || !invokedMethod.IsGetTypeCall())
             {
                 return;
             }
 
-            var expressionType = context.SemanticModel.GetTypeInfo(memberCall.Expression).Type;
+            var expressionType = context.Model.GetTypeInfo(memberCall.Expression).Type;
             if (!expressionType.Is(KnownType.System_Type))
             {
                 return;

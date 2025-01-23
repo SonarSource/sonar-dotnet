@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             context.RegisterNodeAction(c =>
             {
                 var invocationExpression = (InvocationExpressionSyntax)c.Node;
-                var invokedMethod = c.SemanticModel.GetSymbolInfo(invocationExpression).Symbol as IMethodSymbol;
+                var invokedMethod = c.Model.GetSymbolInfo(invocationExpression).Symbol as IMethodSymbol;
 
                 if (IsIIf(invokedMethod))
                 {

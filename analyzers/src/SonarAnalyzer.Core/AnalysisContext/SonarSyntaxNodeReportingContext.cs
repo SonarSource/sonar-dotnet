@@ -23,7 +23,7 @@ public readonly record struct SonarSyntaxNodeReportingContext(SonarAnalysisConte
     public AnalyzerOptions Options => Context.Options;
     public CancellationToken Cancel => Context.CancellationToken;
     public SyntaxNode Node => Context.Node;
-    public SemanticModel SemanticModel => Context.SemanticModel;
+    public SemanticModel Model => Context.SemanticModel;
     public ISymbol ContainingSymbol => Context.ContainingSymbol;
 
     /// <summary>

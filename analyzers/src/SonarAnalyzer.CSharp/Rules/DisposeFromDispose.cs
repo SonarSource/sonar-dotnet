@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 var invocation = (InvocationExpressionSyntax)c.Node;
                 var languageVersion = c.Compilation.GetLanguageVersion();
                 if (InvocationTargetAndName(invocation, out var fieldCandidate, out var name)
-                    && c.SemanticModel.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
+                    && c.Model.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
                     && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)
-                    && IsDisposeMethodCalled(invocation, c.SemanticModel, languageVersion)
+                    && IsDisposeMethodCalled(invocation, c.Model, languageVersion)
                     && IsDisposableClassOrStruct(invocationTarget.ContainingType, languageVersion)
-                    && !IsCalledInsideDispose(invocation, c.SemanticModel)
-                    && FieldDeclaredInType(c.SemanticModel, invocation, invocationTarget)
-                    && !FieldDisposedInDispose(c.SemanticModel, invocationTarget))
+                    && !IsCalledInsideDispose(invocation, c.Model)
+                    && FieldDeclaredInType(c.Model, invocation, invocationTarget)
+                    && !FieldDisposedInDispose(c.Model, invocationTarget))
                 {
                     c.ReportIssue(Rule, name);
                 }

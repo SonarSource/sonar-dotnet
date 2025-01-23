@@ -357,7 +357,7 @@ public partial class SonarAnalysisContextTest
         sut.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, x =>
         {
             registrationCalled = true;
-            x.SemanticModel.Should().Be(context.Model);
+            x.Model.Should().Be(context.Model);
             x.CodeBlock.Should().Be(context.ClassDeclarationNode);
             x.OwningSymbol.Should().Be(context.OwningSymbol);
         });

@@ -39,13 +39,13 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
                 compilationStartContext.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                     {
                         var type = Language.Syntax.CastType(c.Node);
-                        var interfaceType = c.SemanticModel.GetTypeInfo(type).Type as INamedTypeSymbol;
-                        var expressionType = c.SemanticModel.GetTypeInfo(Language.Syntax.CastExpression(c.Node)).Type as INamedTypeSymbol;
+                        var interfaceType = c.Model.GetTypeInfo(type).Type as INamedTypeSymbol;
+                        var expressionType = c.Model.GetTypeInfo(Language.Syntax.CastExpression(c.Node)).Type as INamedTypeSymbol;
                         if (IsImpossibleCast(interfaceImplementers, interfaceType, expressionType))
                         {
                             var location = type.GetLocation();
-                            var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
-                            var expressionTypeName = expressionType.ToMinimalDisplayString(c.SemanticModel, location.SourceSpan.Start);
+                            var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.Model, location.SourceSpan.Start);
+                            var expressionTypeName = expressionType.ToMinimalDisplayString(c.Model, location.SourceSpan.Start);
                             var message = expressionType.IsInterface() ? MessageInterface : MessageClass;
                             c.ReportIssue(Rule, location, string.Format(message, expressionTypeName, interfaceTypeName));
                         }

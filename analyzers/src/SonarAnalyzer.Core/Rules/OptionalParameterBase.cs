@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var method = (TMethodSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(method);
+                    var symbol = c.Model.GetDeclaredSymbol(method);
 
                     if (symbol == null ||
                         !symbol.IsPubliclyAccessible() ||
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules
 
                     var parameters = GetParameters(method);
 
-                    foreach (var parameter in parameters.Where(p => IsOptional(p) && !HasAllowedAttribute(p, c.SemanticModel)))
+                    foreach (var parameter in parameters.Where(p => IsOptional(p) && !HasAllowedAttribute(p, c.Model)))
                     {
                         var location = GetReportLocation(parameter);
                         c.ReportIssue(SupportedDiagnostics[0], location);

@@ -44,7 +44,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
                     && HasNestedTypeDeclarations(outerType)
                     && PrivateStaticMethodsOf(outerType) is { Length: > 0 } candidates)
                 {
-                    var methodReferences = TypesWhichUseTheMethods(candidates, outerType, c.SemanticModel);
+                    var methodReferences = TypesWhichUseTheMethods(candidates, outerType, c.Model);
 
                     foreach (var reference in methodReferences)
                     {

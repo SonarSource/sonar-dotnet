@@ -40,7 +40,7 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
                     && invocation.HasExactlyNArguments(1)
                     && memberAccess.Name.Identifier.ValueText is var methodName
                     && (methodName == "IsInstanceOfType" || methodName == "IsAssignableFrom")
-                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                    && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.IsInType(KnownType.System_Type))
                 {
                     CheckForIsAssignableFrom(c, memberAccess, methodSymbol, invocation.ArgumentList.Arguments.First().Expression);
@@ -65,9 +65,9 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var isExpression = (BinaryExpressionSyntax)c.Node;
-                if (c.SemanticModel.GetTypeInfo(isExpression.Left).Type is var objectToCast
+                if (c.Model.GetTypeInfo(isExpression.Left).Type is var objectToCast
                     && objectToCast.IsClass()
-                    && c.SemanticModel.GetSymbolInfo(isExpression.Right).Symbol is INamedTypeSymbol namedSymbol
+                    && c.Model.GetSymbolInfo(isExpression.Right).Symbol is INamedTypeSymbol namedSymbol
                     && namedSymbol.GetSymbolType() is var typeCastTo
                     && typeCastTo.IsClass()
                     && !typeCastTo.Is(KnownType.System_Object)
@@ -101,8 +101,8 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
     {
         if (sideA.ToStringContains("GetType")
             && sideB is TypeOfExpressionSyntax sideBTypeOf
-            && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel)
-            && context.SemanticModel.GetTypeInfo(sideBTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
+            && (sideA as InvocationExpressionSyntax).IsGetTypeCall(context.Model)
+            && context.Model.GetTypeInfo(sideBTypeOf.Type).Type is { } typeSymbol // Can be null for empty identifier from 'typeof' unfinished syntax
             && typeSymbol.IsSealed
             && !typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
         {
@@ -122,7 +122,7 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
 
     private static void CheckForIsAssignableFrom(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax memberAccess, IMethodSymbol methodSymbol, ExpressionSyntax argument)
     {
-        if (methodSymbol.Name == nameof(Type.IsAssignableFrom) && (argument as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
+        if (methodSymbol.Name == nameof(Type.IsAssignableFrom) && (argument as InvocationExpressionSyntax).IsGetTypeCall(context.Model))
         {
             if (memberAccess.Expression is TypeOfExpressionSyntax typeOf)
             {

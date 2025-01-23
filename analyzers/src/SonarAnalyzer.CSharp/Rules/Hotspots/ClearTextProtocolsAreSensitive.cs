@@ -138,11 +138,11 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
 
-            if (!IsServerSafe(objectCreation, context.SemanticModel) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.SemanticModel, false))
+            if (!IsServerSafe(objectCreation, context.Model) && ObjectInitializationTracker.ShouldBeReported(objectCreation, context.Model, false))
             {
                 context.ReportIssue(EnableSslRule, objectCreation.Expression);
             }
-            else if (objectCreation.TypeAsString(context.SemanticModel) is { } typeAsString && TelnetRegexForIdentifier.SafeIsMatch(typeAsString))
+            else if (objectCreation.TypeAsString(context.Model) is { } typeAsString && TelnetRegexForIdentifier.SafeIsMatch(typeAsString))
             {
                 context.ReportIssue(DefaultRule, objectCreation.Expression, TelnetKey, RecommendedProtocols[TelnetKey]);
             }
@@ -161,8 +161,8 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
             if (assignment.Left is MemberAccessExpressionSyntax memberAccess
-                && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, context.SemanticModel)
-                && assignment.Right.FindConstantValue(context.SemanticModel) is bool enableSslValue
+                && memberAccess.IsMemberAccessOnKnownType(EnableSslName, KnownType.System_Net_FtpWebRequest, context.Model)
+                && assignment.Right.FindConstantValue(context.Model) is bool enableSslValue
                 && !enableSslValue)
             {
                 context.ReportIssue(EnableSslRule, assignment);
@@ -171,7 +171,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void VisitStringExpressions(SonarSyntaxNodeReportingContext c)
         {
-            if (GetUnsafeProtocol(c.Node, c.SemanticModel) is { } unsafeProtocol)
+            if (GetUnsafeProtocol(c.Node, c.Model) is { } unsafeProtocol)
             {
                 c.ReportIssue(DefaultRule, c.Node, unsafeProtocol, RecommendedProtocols[unsafeProtocol]);
             }

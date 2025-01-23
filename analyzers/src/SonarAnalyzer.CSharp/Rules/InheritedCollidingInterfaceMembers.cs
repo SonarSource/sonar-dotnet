@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
+                    var interfaceSymbol = c.Model.GetDeclaredSymbol(interfaceDeclaration);
                     if (interfaceSymbol == null)
                     {
                         return;
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var collidingMembers = GetCollidingMembers(interfaceSymbol).Take(MaxMemberDisplayCount + 1).ToList();
                     if (collidingMembers.Any())
                     {
-                        var membersText = GetIssueMessageText(collidingMembers, c.SemanticModel, interfaceDeclaration.SpanStart);
+                        var membersText = GetIssueMessageText(collidingMembers, c.Model, interfaceDeclaration.SpanStart);
                         var pluralize = collidingMembers.Count > 1 ? "s" : string.Empty;
                         var secondaryLocations = collidingMembers.SelectMany(x => x.Locations).Where(x => x.IsInSource).ToSecondary();
                         c.ReportIssue(Rule, interfaceDeclaration.Identifier, secondaryLocations, membersText, pluralize);

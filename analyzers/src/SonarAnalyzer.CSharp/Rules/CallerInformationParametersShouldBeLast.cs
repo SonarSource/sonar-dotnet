@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodSymbol = context.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+            var methodSymbol = context.Model.GetDeclaredSymbol(methodDeclaration);
             if (methodSymbol == null ||
                 methodSymbol.IsOverride ||
                 methodSymbol.GetInterfaceMember() != null)
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ParameterSyntax noCallerInfoParameter = null;
             foreach (var parameter in parameterList.Parameters.Reverse())
             {
-                if (parameter.AttributeLists.GetAttributes(KnownType.CallerInfoAttributes, context.SemanticModel).Any())
+                if (parameter.AttributeLists.GetAttributes(KnownType.CallerInfoAttributes, context.Model).Any())
                 {
                     if (noCallerInfoParameter != null && HasIdentifier(parameter))
                     {

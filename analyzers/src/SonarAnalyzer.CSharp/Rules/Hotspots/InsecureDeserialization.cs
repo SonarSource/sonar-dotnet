@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (!c.IsRedundantPositionalRecordContext()
                     && IsEnabled(c.Options)
                     && HasConstructorsWithParameters(declaration) // If there are no constructors, or if these don't have parameters, there is no validation done and the type is considered safe.
-                    && c.SemanticModel.GetDeclaredSymbol(declaration) is { } typeSymbol
+                    && c.Model.GetDeclaredSymbol(declaration) is { } typeSymbol
                     && HasSerializableAttribute(typeSymbol))
                 {
                     ReportOnInsecureDeserializations(c, declaration, typeSymbol);
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var implementsISerializable = ImplementsISerializable(typeSymbol);
             var implementsIDeserializationCallback = ImplementsIDeserializationCallback(typeSymbol);
 
-            var walker = new ConstructorDeclarationWalker(context.SemanticModel);
+            var walker = new ConstructorDeclarationWalker(context.Model);
             walker.SafeVisit(declaration);
 
             if (!implementsISerializable && !implementsIDeserializationCallback)
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
             }
 
-            if (implementsIDeserializationCallback && !OnDeserializationHasConditions(declaration, context.SemanticModel))
+            if (implementsIDeserializationCallback && !OnDeserializationHasConditions(declaration, context.Model))
             {
                 foreach (var constructor in walker.GetConstructorsInfo(x => x.HasConditionalConstructs))
                 {

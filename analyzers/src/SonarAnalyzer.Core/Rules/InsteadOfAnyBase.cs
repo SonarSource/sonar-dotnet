@@ -57,21 +57,21 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
             if (IsNameEqualTo(invocation, nameof(Enumerable.Any))
                 && Language.Syntax.HasExactlyNArguments(invocation, 1)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
-                && IsCorrectCall(right, c.SemanticModel)
-                && c.SemanticModel.GetTypeInfo(left).Type is { } type
-                && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
+                && IsCorrectCall(right, c.Model)
+                && c.Model.GetTypeInfo(left).Type is { } type
+                && !Language.Syntax.IsInExpressionTree(c.Model, invocation))
             {
                 if (ExistsTypes.Any(x => type.DerivesFrom(x)))
                 {
                     RaiseIssue(c, invocation, existsRule, "Exists");
                 }
-                else if (ContainsTypes.Any(x => type.DerivesFrom(x) && IsSimpleEqualityCheck(invocation, c.SemanticModel)))
+                else if (ContainsTypes.Any(x => type.DerivesFrom(x) && IsSimpleEqualityCheck(invocation, c.Model)))
                 {
                     RaiseIssue(c, invocation, containsRule, "Contains");
                 }
                 else if (type.DerivesFrom(KnownType.System_Collections_Generic_List_T))
                 {
-                    if (IsSimpleEqualityCheck(invocation, c.SemanticModel))
+                    if (IsSimpleEqualityCheck(invocation, c.Model))
                     {
                         RaiseIssue(c, invocation, containsRule, "Contains");
                     }

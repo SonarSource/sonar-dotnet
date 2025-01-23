@@ -87,9 +87,9 @@ namespace SonarAnalyzer.Rules.CSharp
                         Expression: { } memberAccessExpression
                     }
                 }
-                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
+                && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
                 && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                && HasCountProperty(memberAccessExpression, context.SemanticModel))
+                && HasCountProperty(memberAccessExpression, context.Model))
             {
                 context.ReportIssue(Rule, GetReportLocation(invocation), string.Format(MessageUseInstead, $"'{CountName}' property"));
             }
@@ -101,8 +101,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckToCollectionCalls(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            if (context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
-                || !MethodExistsOnIEnumerable(outerMethodSymbol, context.SemanticModel))
+            if (context.Model.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
+                || !MethodExistsOnIEnumerable(outerMethodSymbol, context.Model))
             {
                 return;
             }
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
+            if (context.Model.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
                 && IsToCollectionCall(innerMethodSymbol))
             {
                 context.ReportIssue(Rule, GetReportLocation(innerInvocation), GetToCollectionCallsMessage(context, innerInvocation, innerMethodSymbol));
@@ -168,7 +168,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 || methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
 
         private static string GetToCollectionCallsMessage(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
-            IsLinqDatabaseQuery(invocation, context.SemanticModel)
+            IsLinqDatabaseQuery(invocation, context.Model)
                 ? string.Format(MessageUseInstead, "'AsEnumerable'")
                 : string.Format(MessageDropFromMiddle, methodSymbol.Name);
 
@@ -197,7 +197,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeReportingContext context)
         {
             var outerInvocation = (InvocationExpressionSyntax)context.Node;
-            if (context.SemanticModel.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
+            if (context.Model.GetSymbolInfo(outerInvocation).Symbol is not IMethodSymbol outerMethodSymbol
                 || !outerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;
@@ -209,7 +209,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (context.SemanticModel.GetSymbolInfo(innerInvocation).Symbol is not IMethodSymbol innerMethodSymbol
+            if (context.Model.GetSymbolInfo(innerInvocation).Symbol is not IMethodSymbol innerMethodSymbol
                 || !innerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
             {
                 return;

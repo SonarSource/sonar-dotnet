@@ -49,7 +49,7 @@ public sealed class StreamReadStatement : SonarDiagnosticAnalyzer
                 if (expression is InvocationExpressionSyntax invocation
                     && invocation.GetMethodCallIdentifier() is { } methodIdentifier
                     && ReadMethodNames.Contains(methodIdentifier.Text)
-                    && c.SemanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol method
+                    && c.Model.GetSymbolInfo(expression).Symbol is IMethodSymbol method
                     && (method.ContainingType.Is(KnownType.System_IO_Stream)
                         || (method.IsOverride && method.ContainingType.DerivesOrImplements(KnownType.System_IO_Stream))))
                 {

@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Rules
 
         protected void ReportOptionalParameterNotPassedToBase(SonarSyntaxNodeReportingContext c, TInvocationExpressionSyntax invocation)
         {
-            if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
+            if (!(c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
             {
                 return;
             }
@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules
 
             if (!calledMethod.IsVirtual ||
                 difference == 0 ||
-                !IsCallInsideOverride(invocation, calledMethod, c.SemanticModel))
+                !IsCallInsideOverride(invocation, calledMethod, c.Model))
             {
                 return;
             }

@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
                     if (!fieldDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.ShadowsKeyword)))
                     {
-                        foreach (var diagnostics in fieldDeclaration.Declarators.SelectMany(x => x.Names).SelectMany(x => CheckFields(c.SemanticModel, x)))
+                        foreach (var diagnostics in fieldDeclaration.Declarators.SelectMany(x => x.Names).SelectMany(x => CheckFields(c.Model, x)))
                         {
                             c.ReportIssue(diagnostics);
                         }

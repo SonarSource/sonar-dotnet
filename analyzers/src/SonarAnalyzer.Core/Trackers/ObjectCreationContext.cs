@@ -21,5 +21,5 @@ public class ObjectCreationContext : SyntaxBaseContext
     public Lazy<IMethodSymbol> InvokedConstructorSymbol { get; }
 
     public ObjectCreationContext(SonarSyntaxNodeReportingContext context) : base(context) =>
-        InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IMethodSymbol);
+        InvokedConstructorSymbol = new Lazy<IMethodSymbol>(() => context.Model.GetSymbolInfo(context.Node).Symbol as IMethodSymbol);
 }

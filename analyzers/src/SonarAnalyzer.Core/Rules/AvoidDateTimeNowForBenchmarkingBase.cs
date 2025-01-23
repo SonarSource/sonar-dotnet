@@ -37,9 +37,9 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvoca
     private void CheckBinaryExpression(SonarSyntaxNodeReportingContext context)
     {
         if (Language.Syntax.BinaryExpressionLeft(context.Node) is TMemberAccess memberAccess
-            && IsDateTimeNow(memberAccess, context.SemanticModel)
+            && IsDateTimeNow(memberAccess, context.Model)
             && Language.Syntax.BinaryExpressionRight(context.Node) is var right
-            && context.SemanticModel.GetTypeInfo(right).Type.Is(KnownType.System_DateTime))
+            && context.Model.GetTypeInfo(right).Type.Is(KnownType.System_DateTime))
         {
             context.ReportIssue(Rule, context.Node);
         }
@@ -51,10 +51,10 @@ public abstract class AvoidDateTimeNowForBenchmarkingBase<TMemberAccess, TInvoca
 
         if (Language.Syntax.NodeExpression(invocation) is TMemberAccess subtract
             && Language.Syntax.NodeExpression(subtract) is TMemberAccess now
-            && Language.Syntax.IsMemberAccessOnKnownType(subtract, "Subtract", KnownType.System_DateTime, context.SemanticModel)
-            && IsDateTimeNow(now, context.SemanticModel)
+            && Language.Syntax.IsMemberAccessOnKnownType(subtract, "Subtract", KnownType.System_DateTime, context.Model)
+            && IsDateTimeNow(now, context.Model)
             && Language.Syntax.HasExactlyNArguments(invocation, 1)
-            && ContainsDateTimeArgument(invocation, context.SemanticModel))
+            && ContainsDateTimeArgument(invocation, context.Model))
         {
             context.ReportIssue(Rule, subtract);
         }

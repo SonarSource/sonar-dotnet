@@ -37,7 +37,7 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
                 cc.RegisterNodeAction(c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (MessageTemplateExtractor.TemplateArgument(invocation, c.SemanticModel) is { } argument
+                    if (MessageTemplateExtractor.TemplateArgument(invocation, c.Model) is { } argument
                         && argument.Expression.IsKind(SyntaxKind.StringLiteralExpression)
                         && TemplateValidator.ContainsErrors(argument.Expression.ToString(), out var errors))
                     {

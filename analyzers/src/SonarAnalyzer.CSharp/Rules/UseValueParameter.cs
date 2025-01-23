@@ -34,12 +34,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if ((accessor.Body == null && accessor.ExpressionBody() == null)
                         || OnlyThrows(accessor)
-                        || accessor.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => IsAccessorValue(x, c.SemanticModel)))
+                        || accessor.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => IsAccessorValue(x, c.Model)))
                     {
                         return;
                     }
 
-                    var interfaceMember = c.SemanticModel.GetDeclaredSymbol(accessor).GetInterfaceMember();
+                    var interfaceMember = c.Model.GetDeclaredSymbol(accessor).GetInterfaceMember();
                     if (interfaceMember != null && accessor.Body?.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
                     {
                         return;

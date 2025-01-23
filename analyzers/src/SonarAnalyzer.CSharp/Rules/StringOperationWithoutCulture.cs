@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
+            if (!(context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol calledMethod))
             {
                 return;
             }

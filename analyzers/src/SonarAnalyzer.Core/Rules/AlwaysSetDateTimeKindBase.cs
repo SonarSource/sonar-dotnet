@@ -33,7 +33,7 @@ public abstract class AlwaysSetDateTimeKindBase<TSyntaxKind> : SonarDiagnosticAn
         {
             if (Language.Syntax.ObjectCreationTypeIdentifier(c.Node) is { IsMissing: false } identifier
                 && Array.Exists(ValidNames, x => x.Equals(identifier.ValueText, Language.NameComparison))
-                && IsDateTimeConstructorWithoutKindParameter(c.Node, c.SemanticModel))
+                && IsDateTimeConstructorWithoutKindParameter(c.Node, c.Model))
             {
                 c.ReportIssue(Rule, c.Node);
             }

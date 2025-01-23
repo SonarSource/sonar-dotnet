@@ -83,7 +83,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(context.SemanticModel.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol))
+            if (!(context.Model.GetSymbolInfo(lambda).Symbol is IMethodSymbol symbol))
             {
                 return;
             }
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var newParameterList = SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(lambda.ParameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier))));
             var newLambda = lambda.WithParameterList(newParameterList);
 
-            newLambda = ChangeSyntaxElement(lambda, newLambda, context.SemanticModel, out var newSemanticModel);
+            newLambda = ChangeSyntaxElement(lambda, newLambda, context.Model, out var newSemanticModel);
 
             if (!(newSemanticModel.GetSymbolInfo(newLambda).Symbol is IMethodSymbol newSymbol) || ParameterTypesDoNotMatch(symbol, newSymbol))
             {
@@ -154,14 +154,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportRedundantNullableConstructorCall(SonarSyntaxNodeReportingContext context)
         {
             var objectCreation = ObjectCreationFactory.Create(context.Node);
-            if (!IsNullableCreation(objectCreation, context.SemanticModel))
+            if (!IsNullableCreation(objectCreation, context.Model))
             {
                 return;
             }
 
             if (IsInNotVarDeclaration(objectCreation.Expression)
                 || IsInAssignmentOrReturnValue(objectCreation.Expression)
-                || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel))
+                || IsInArgumentAndCanBeChanged(objectCreation, context.Model))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation.Expression, "explicit nullable type creation", RedundancyType.ExplicitNullable);
             }
@@ -237,13 +237,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(context.SemanticModel.GetTypeInfo(array.Type).Type is IArrayTypeSymbol arrayType))
+            if (!(context.Model.GetTypeInfo(array.Type).Type is IArrayTypeSymbol arrayType))
             {
                 return;
             }
 
             var canBeSimplified = array.Initializer.Expressions
-                .Select(exp => context.SemanticModel.GetTypeInfo(exp).Type)
+                .Select(exp => context.Model.GetTypeInfo(exp).Type)
                 .All(type => Equals(type, arrayType.ElementType));
 
             if (canBeSimplified)
@@ -280,16 +280,16 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!IsDelegateCreation(objectCreation, context.SemanticModel))
+            if (!IsDelegateCreation(objectCreation, context.Model))
             {
                 return;
             }
 
-            if (IsInDeclarationNotVarNotDelegate(objectCreation.Expression, context.SemanticModel)
-                || IsAssignmentNotDelegate(objectCreation.Expression, context.SemanticModel)
-                || IsReturnValueNotDelegate(objectCreation.Expression, context.SemanticModel)
-                || IsInArgumentAndCanBeChanged(objectCreation, context.SemanticModel,
-                    invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.SemanticModel))))
+            if (IsInDeclarationNotVarNotDelegate(objectCreation.Expression, context.Model)
+                || IsAssignmentNotDelegate(objectCreation.Expression, context.Model)
+                || IsReturnValueNotDelegate(objectCreation.Expression, context.Model)
+                || IsInArgumentAndCanBeChanged(objectCreation, context.Model,
+                    invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.Model))))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation.Expression, "explicit delegate creation", RedundancyType.ExplicitDelegate);
             }
@@ -360,7 +360,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!(context.SemanticModel.GetSymbolInfo(anonymousMethod).Symbol is IMethodSymbol methodSymbol))
+            if (!(context.Model.GetSymbolInfo(anonymousMethod).Symbol is IMethodSymbol methodSymbol))
             {
                 return;
             }
@@ -370,7 +370,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var usedParameters = anonymousMethod.Body.DescendantNodes()
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => parameterNames.Contains(id.Identifier.ValueText))
-                .Select(id => context.SemanticModel.GetSymbolInfo(id).Symbol as IParameterSymbol)
+                .Select(id => context.Model.GetSymbolInfo(id).Symbol as IParameterSymbol)
                 .WhereNotNull()
                 .ToHashSet();
 

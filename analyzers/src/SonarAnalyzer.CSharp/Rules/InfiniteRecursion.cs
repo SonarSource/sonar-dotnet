@@ -70,7 +70,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var property = (PropertyDeclarationSyntax)c.Node;
-                checker.CheckForNoExitProperty(c, property, c.SemanticModel.GetDeclaredSymbol(property));
+                checker.CheckForNoExitProperty(c, property, c.Model.GetDeclaredSymbol(property));
             },
             SyntaxKind.PropertyDeclaration);
 
@@ -78,7 +78,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var indexer = (IndexerDeclarationSyntax)c.Node;
-                checker.CheckForNoExitIndexer(c, indexer, c.SemanticModel.GetDeclaredSymbol(indexer));
+                checker.CheckForNoExitIndexer(c, indexer, c.Model.GetDeclaredSymbol(indexer));
             },
             SyntaxKind.IndexerDeclaration);
 
@@ -86,14 +86,14 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
             c =>
             {
                 var eventDeclaration = (EventDeclarationSyntax)c.Node;
-                checker.CheckForNoExitEvent(c, eventDeclaration, c.SemanticModel.GetDeclaredSymbol(eventDeclaration));
+                checker.CheckForNoExitEvent(c, eventDeclaration, c.Model.GetDeclaredSymbol(eventDeclaration));
             },
             SyntaxKind.EventDeclaration);
     }
 
     private void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
     {
-        if (c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
+        if (c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
         {
             checker.CheckForNoExitMethod(c, c.Node, identifier, symbol);
         }
@@ -118,7 +118,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
 
         public TControlFlowGraph ControlFlowGraph { get; }
         public ISymbol AnalyzedSymbol { get; }
-        public SemanticModel Model => analysisContext.SemanticModel;
+        public SemanticModel Model => analysisContext.Model;
 
         public RecursionContext(SonarSyntaxNodeReportingContext analysisContext,
                                 TControlFlowGraph controlFlowGraph,

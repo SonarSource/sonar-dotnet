@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             if (thisExpression != null &&
                                 !IsClassMember(invocation.Expression) &&
-                                c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol)
+                                c.Model.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol)
                             {
                                 c.ReportIssue(rule, thisExpression);
                             }
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                             if (IsThisExpression(right) &&
                                 !IsClassMember(assignment.Left) &&
-                                c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol)
+                                c.Model.GetSymbolInfo(assignment.Left).Symbol is IPropertySymbol)
                             {
                                 c.ReportIssue(rule, right);
                             }

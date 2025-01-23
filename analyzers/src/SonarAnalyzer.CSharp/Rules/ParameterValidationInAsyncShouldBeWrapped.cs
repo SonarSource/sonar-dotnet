@@ -36,12 +36,12 @@ public sealed class ParameterValidationInAsyncShouldBeWrapped : SonarDiagnosticA
                 var method = (MethodDeclarationSyntax)c.Node;
                 if (!method.Modifiers.Any(SyntaxKind.AsyncKeyword)
                     || method.HasReturnTypeVoid()
-                    || (method.Identifier.ValueText == "Main" && c.SemanticModel.GetDeclaredSymbol(method).IsMainMethod()))
+                    || (method.Identifier.ValueText == "Main" && c.Model.GetDeclaredSymbol(method).IsMainMethod()))
                 {
                     return;
                 }
 
-                var walker = new ParameterValidationInAsyncWalker(c.SemanticModel);
+                var walker = new ParameterValidationInAsyncWalker(c.Model);
                 walker.SafeVisit(method);
                 if (walker.ArgumentExceptionLocations.Any())
                 {

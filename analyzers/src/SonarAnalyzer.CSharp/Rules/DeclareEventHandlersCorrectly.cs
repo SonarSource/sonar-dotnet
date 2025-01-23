@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             if (!eventSymbol.IsOverride
                 && eventSymbol.GetInterfaceMember() is null
-                && analysisContext.SemanticModel.GetSymbolInfo(typeSyntax).Symbol is INamedTypeSymbol eventHandlerType
+                && analysisContext.Model.GetSymbolInfo(typeSyntax).Symbol is INamedTypeSymbol eventHandlerType
                 && eventHandlerType.DelegateInvokeMethod is { } methodSymbol
                 && !IsCorrectEventHandlerSignature(methodSymbol))
             {

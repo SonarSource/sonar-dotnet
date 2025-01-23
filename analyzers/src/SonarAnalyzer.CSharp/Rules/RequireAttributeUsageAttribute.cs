@@ -32,7 +32,7 @@ public sealed class RequireAttributeUsageAttribute : SonarDiagnosticAnalyzer
         {
             var classDeclaration = (ClassDeclarationSyntax)c.Node;
 
-            if (c.SemanticModel.GetDeclaredSymbol(classDeclaration) is { IsAbstract: false } classSymbol
+            if (c.Model.GetDeclaredSymbol(classDeclaration) is { IsAbstract: false } classSymbol
                 && classSymbol.DerivesFrom(KnownType.System_Attribute)
                 && !classSymbol.HasAttribute(KnownType.System_AttributeUsageAttribute))
             {

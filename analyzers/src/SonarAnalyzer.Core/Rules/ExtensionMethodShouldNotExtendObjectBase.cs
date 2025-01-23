@@ -33,8 +33,8 @@ public abstract class ExtensionMethodShouldNotExtendObjectBase<TSyntaxKind, TMet
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (IsExtensionMethod((TMethodDeclaration)c.Node, c.SemanticModel)
-                    && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol method
+                if (IsExtensionMethod((TMethodDeclaration)c.Node, c.Model)
+                    && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol method
                     && method.IsExtensionMethod
                     && method.Parameters.Length > 0
                     && method.Parameters[0].Type.Is(KnownType.System_Object))

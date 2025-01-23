@@ -36,7 +36,7 @@ public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
     protected bool IsReusableClient(SonarSyntaxNodeReportingContext context)
     {
         var objectCreation = ObjectCreationFactory.Create(context.Node);
-        return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.SemanticModel));
+        return ReusableClients.Any(x => objectCreation.IsKnownType(x, context.Model));
     }
 
     private static bool IsInVariableDeclaration(SyntaxNode node) =>
@@ -52,5 +52,5 @@ public abstract class ReuseClientBase : SonarDiagnosticAnalyzer
 
     private static bool IsAssignedToStaticFieldOrProperty(SonarSyntaxNodeReportingContext context) =>
         context.Node.Parent.WalkUpParentheses() is AssignmentExpressionSyntax assignment
-        && context.SemanticModel.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
+        && context.Model.GetSymbolInfo(assignment.Left, context.Cancel).Symbol is { IsStatic: true, Kind: SymbolKind.Field or SymbolKind.Property };
 }

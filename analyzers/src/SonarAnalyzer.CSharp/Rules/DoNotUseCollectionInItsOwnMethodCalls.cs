@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var operands = GetOperandsToCheckIfTrackedMethod(invocation, c.SemanticModel);
+                    var operands = GetOperandsToCheckIfTrackedMethod(invocation, c.Model);
                     if (operands is not null && CSharpEquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
                     {
                         c.ReportIssue(rule, operands.Left, [operands.Right.ToSecondaryLocation()], operands.Right.ToString(), operands.ErrorMessage);

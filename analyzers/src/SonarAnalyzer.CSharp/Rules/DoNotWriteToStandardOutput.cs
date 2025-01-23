@@ -36,10 +36,10 @@ public class DoNotWriteToStandardOutput : SonarDiagnosticAnalyzer
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
                 if (c.Compilation.Options.OutputKind != OutputKind.ConsoleApplication
-                    && c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
+                    && c.Model.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
                     && method.IsAny(KnownType.System_Console, BannedConsoleMembers)
                     && !c.Node.IsInDebugBlock()
-                    && !invocation.IsInConditionalDebug(c.SemanticModel))
+                    && !invocation.IsInConditionalDebug(c.Model))
                 {
                     c.ReportIssue(Rule, invocation.Expression);
                 }

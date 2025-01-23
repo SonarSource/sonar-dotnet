@@ -36,9 +36,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (body is not null
                         && body.DescendantNodes()
                                .OfType<InvocationExpressionSyntax>()
-                               .Any(x => x.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_IBrowserFile, "OpenReadStream", c.SemanticModel)))
+                               .Any(x => x.IsMethodInvocation(KnownType.Microsoft_AspNetCore_Components_Forms_IBrowserFile, "OpenReadStream", c.Model)))
                     {
-                        var walker = new StreamReadSizeCheck(c.SemanticModel, FileUploadSizeLimit);
+                        var walker = new StreamReadSizeCheck(c.Model, FileUploadSizeLimit);
                         if (walker.SafeVisit(body))
                         {
                             foreach (var location in walker.Locations)

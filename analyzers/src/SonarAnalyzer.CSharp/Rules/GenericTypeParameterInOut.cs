@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckInterfaceVariance(SonarSyntaxNodeReportingContext context, InterfaceDeclarationSyntax declaration)
         {
-            var interfaceType = context.SemanticModel.GetDeclaredSymbol(declaration);
+            var interfaceType = context.Model.GetDeclaredSymbol(declaration);
             if (interfaceType == null)
             {
                 return;
@@ -56,13 +56,13 @@ namespace SonarAnalyzer.Rules.CSharp
         }
         private static void CheckDelegateVariance(SonarSyntaxNodeReportingContext context, DelegateDeclarationSyntax declaration)
         {
-            var declaredSymbol = context.SemanticModel.GetDeclaredSymbol(declaration);
+            var declaredSymbol = context.Model.GetDeclaredSymbol(declaration);
             if (declaredSymbol == null)
             {
                 return;
             }
 
-            var returnType = context.SemanticModel.GetTypeInfo(declaration.ReturnType).Type;
+            var returnType = context.Model.GetTypeInfo(declaration.ReturnType).Type;
             if (returnType == null)
             {
                 return;
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var parameterSymbols = declaration.ParameterList == null
                 ? ImmutableArray<IParameterSymbol>.Empty
                 : declaration.ParameterList.Parameters
-                    .Select(p => context.SemanticModel.GetDeclaredSymbol(p))
+                    .Select(p => context.Model.GetDeclaredSymbol(p))
                     .ToImmutableArray();
             if (parameterSymbols.Any(parameter => parameter == null))
             {

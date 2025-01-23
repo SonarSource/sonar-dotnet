@@ -86,7 +86,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     continue;
                 }
-                if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
+                if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                     && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
                 {
                     context.ReportIssue(Rule, usingDirective);
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var addExpression in node.Expressions)
                     {
-                        VisitSymbol(context.SemanticModel.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
+                        VisitSymbol(context.Model.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
                     }
                 }
                 base.VisitInitializerExpression(node);
@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public override void VisitAwaitExpression(AwaitExpressionSyntax node)
             {
-                VisitSymbol(context.SemanticModel.GetAwaitExpressionInfo(node).GetAwaiterMethod);
+                VisitSymbol(context.Model.GetAwaitExpressionInfo(node).GetAwaiterMethod);
                 base.VisitAwaitExpression(node);
             }
 
@@ -178,7 +178,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
 
                 // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
-                var visitingNamespace = context.SemanticModel.GetSymbolInfo(name).Symbol as INamespaceSymbol;
+                var visitingNamespace = context.Model.GetSymbolInfo(name).Symbol as INamespaceSymbol;
                 var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
 
                 VisitContent(visitor, members, node.DescendantTrivia());
@@ -191,7 +191,7 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 foreach (var usingDirective in usingDirectivesFromParent)
                 {
-                    if (context.SemanticModel.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
+                    if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
                         && namespaceSymbol.ToDisplayString() == "System.Linq")
                     {
                         systemLinqNamespace = namespaceSymbol;
@@ -208,7 +208,7 @@ namespace SonarAnalyzer.Rules.CSharp
             /// importing that namespace is indeed necessary.
             /// </summary>
             private void VisitNameNode(ExpressionSyntax node) =>
-                VisitSymbol(context.SemanticModel.GetSymbolInfo(node).Symbol);
+                VisitSymbol(context.Model.GetSymbolInfo(node).Symbol);
 
             private void VisitSymbol(ISymbol symbol)
             {

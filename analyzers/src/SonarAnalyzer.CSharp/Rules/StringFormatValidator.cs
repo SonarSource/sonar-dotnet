@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var invocation = (InvocationExpressionSyntax)analysisContext.Node;
 
-            if (!(analysisContext.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
+            if (!(analysisContext.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol)
                 || !methodSymbol.Parameters.Any()
                 || methodSymbol.Parameters.All(x => x.Name != "format"))
             {
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var formatStringExpression = invocation.ArgumentList.Arguments[formatArgumentIndex].Expression;
             var failure = formatStringExpression.IsNullLiteral()
                 ? new ValidationFailureWithAdditionalData(ValidationFailure.NullFormatString)
-                : TryParseAndValidate(formatStringExpression.FindStringConstant(analysisContext.SemanticModel), invocation.ArgumentList, formatArgumentIndex, analysisContext.SemanticModel);
+                : TryParseAndValidate(formatStringExpression.FindStringConstant(analysisContext.Model), invocation.ArgumentList, formatArgumentIndex, analysisContext.Model);
             if (failure == null || CanIgnoreFailure(failure, currentMethodSignature.Name, invocation.ArgumentList.Arguments.Count))
             {
                 return;

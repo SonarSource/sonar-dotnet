@@ -31,8 +31,8 @@ namespace SonarAnalyzer.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    if (IsInvalidCtor(c.Node, c.SemanticModel)
-                        && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
+                    if (IsInvalidCtor(c.Node, c.Model)
+                        && c.Model.GetSymbolInfo(c.Node).Symbol is IMethodSymbol methodSymbol
                         && methodSymbol.ContainingType.Is(KnownType.System_Guid))
                     {
                         c.ReportIssue(Rule, c.Node);
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     if (!IsInParameter(c.Node)
-                        && c.SemanticModel.GetTypeInfo(c.Node).ConvertedType.Is(KnownType.System_Guid))
+                        && c.Model.GetTypeInfo(c.Node).ConvertedType.Is(KnownType.System_Guid))
                     {
                         c.ReportIssue(Rule, c.Node);
                     }

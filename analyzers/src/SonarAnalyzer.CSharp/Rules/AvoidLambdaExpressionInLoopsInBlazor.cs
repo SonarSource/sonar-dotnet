@@ -42,7 +42,7 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
                     var node = (LambdaExpressionSyntax)c.Node;
 
                     if (IsWithinLoopBody(node)
-                        && IsWithinRenderTreeBuilderInvocation(node, c.SemanticModel))
+                        && IsWithinRenderTreeBuilderInvocation(node, c.Model))
                     {
                         c.ReportIssue(Rule, node);
                     }

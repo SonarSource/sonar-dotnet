@@ -39,11 +39,11 @@ namespace SonarAnalyzer.Rules
         {
             var methodDeclaration = (TMethodSyntax)c.Node;
 
-            if (c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol
+            if (c.Model.GetDeclaredSymbol(methodDeclaration) is IMethodSymbol methodSymbol
                 && methodSymbol.IsMainMethod()
                 && !methodSymbol.IsAsync
                 && !methodSymbol.HasAttribute(KnownType.System_STAThreadAttribute)
-                && IsAssemblyReferencingWindowsForms(c.SemanticModel.Compilation)
+                && IsAssemblyReferencingWindowsForms(c.Model.Compilation)
                 && c.Compilation.Options.OutputKind == OutputKind.WindowsApplication)
             {
                 var message = methodSymbol.HasAttribute(KnownType.System_MTAThreadAttribute)

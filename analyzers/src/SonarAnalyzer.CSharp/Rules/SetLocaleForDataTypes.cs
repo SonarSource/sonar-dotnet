@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ProcessObjectCreations(SonarSyntaxNodeReportingContext c, IDictionary<ISymbol, SyntaxNode> symbolsWhereTypeIsCreated)
         {
-            if (GetSymbolFromConstructorInvocation(c.Node, c.SemanticModel) is ITypeSymbol objectType
+            if (GetSymbolFromConstructorInvocation(c.Node, c.Model) is ITypeSymbol objectType
                 && objectType.IsAny(CheckedTypes)
                 && GetAssignmentTargetVariable(c.Node) is { } variableSyntax)
             {
@@ -57,8 +57,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 }
 
                 var variableSymbol = variableSyntax is IdentifierNameSyntax
-                    ? c.SemanticModel.GetSymbolInfo(variableSyntax).Symbol
-                    : c.SemanticModel.GetDeclaredSymbol(variableSyntax);
+                    ? c.Model.GetSymbolInfo(variableSyntax).Symbol
+                    : c.Model.GetDeclaredSymbol(variableSyntax);
 
                 if (variableSymbol != null && !symbolsWhereTypeIsCreated.ContainsKey(variableSymbol))
                 {
@@ -71,10 +71,10 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
             var variableSymbols = assignmentExpression.AssignmentTargets()
-                .Where(x => c.SemanticModel.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
+                .Where(x => c.Model.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
                             && propertySymbol.Name == "Locale"
                             && propertySymbol.ContainingType.IsAny(CheckedTypes))
-                .Select(x => GetAccessedVariable(x, c.SemanticModel))
+                .Select(x => GetAccessedVariable(x, c.Model))
                 .WhereNotNull();
             symbolsWhereLocaleIsSet.UnionWith(variableSymbols);
         }

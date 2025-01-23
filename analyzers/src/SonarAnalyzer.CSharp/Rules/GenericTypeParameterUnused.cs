@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             context.RegisterNodeAction(c =>
                 {
-                    if (c.SemanticModel.GetDeclaredSymbol(c.Node) is { } declarationSymbol)
+                    if (c.Model.GetDeclaredSymbol(c.Node) is { } declarationSymbol)
                     {
                         CheckGenericTypeParameters(c, declarationSymbol);
                     }
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 InterfaceDeclarationSyntax interfaceDeclaration => new ParametersInfo(interfaceDeclaration.TypeParameterList, "interface"),
                 ClassDeclarationSyntax classDeclaration => new ParametersInfo(classDeclaration.TypeParameterList, "class"),
                 StructDeclarationSyntax structDeclaration => new ParametersInfo(structDeclaration.TypeParameterList, "struct"),
-                MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, c.SemanticModel) => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),
+                MethodDeclarationSyntax methodDeclaration when IsMethodCandidate(methodDeclaration, c.Model) => new ParametersInfo(methodDeclaration.TypeParameterList, "method"),
                 var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((LocalFunctionStatementSyntaxWrapper)c.Node).TypeParameterList, "local function"),
                 var wrapper when RecordDeclarationSyntaxWrapper.IsInstance(wrapper) => new ParametersInfo(((RecordDeclarationSyntaxWrapper)c.Node).TypeParameterList, "record"),
                 _ => null
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
             declarations.SelectMany(x => x.DescendantNodes())
                 .OfType<IdentifierNameSyntax>()
                 .Where(x => x.Parent is not TypeParameterConstraintClauseSyntax && typeParameterNames.Contains(x.Identifier.ValueText))
-                .Select(x => x.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)?.GetSymbolInfo(x).Symbol)
+                .Select(x => x.EnsureCorrectSemanticModelOrDefault(context.Model)?.GetSymbolInfo(x).Symbol)
                 .Where(x => x is { Kind: SymbolKind.TypeParameter })
                 .Select(x => x.Name)
                 .ToList();

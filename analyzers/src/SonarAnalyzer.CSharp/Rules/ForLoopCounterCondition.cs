@@ -36,13 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var forNode = (ForStatementSyntax)c.Node;
 
-                    var incrementedSymbols = GetIncrementorSymbols(forNode, c.SemanticModel).ToList();
+                    var incrementedSymbols = GetIncrementorSymbols(forNode, c.Model).ToList();
                     if (!incrementedSymbols.Any())
                     {
                         return;
                     }
 
-                    var conditionSymbols = GetReadSymbolsCondition(forNode, c.SemanticModel).ToList();
+                    var conditionSymbols = GetReadSymbolsCondition(forNode, c.Model).ToList();
                     if (conditionSymbols.Intersect(incrementedSymbols).Any())
                     {
                         return;

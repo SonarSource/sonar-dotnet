@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    var argumentTypeSymbols = GetParametersSyntaxNodes(c.Node).Where(p => MaxDepthReached(p, c.SemanticModel));
+                    var argumentTypeSymbols = GetParametersSyntaxNodes(c.Node).Where(p => MaxDepthReached(p, c.Model));
 
                     foreach (var argument in argumentTypeSymbols)
                     {

@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckForRedundantJumps(SonarSyntaxNodeReportingContext context)
         {
-            if (!CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
+            if (!CSharpControlFlowGraph.TryGet(context.Node, context.Model, out var cfg))
             {
                 return;
             }

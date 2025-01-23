@@ -48,10 +48,10 @@ namespace SonarAnalyzer.Rules
                 && Language.Syntax.InvocationIdentifier(invocation) is { } identifier
                 && CheckedMethods.Where(x => x.Name.Equals(identifier.ValueText)) is var nameMatch
                 && nameMatch.Any()
-                && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
+                && analysisContext.Model.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
                 && nameMatch.FirstOrDefault(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x.ContainingType)) is { } disallowedMethodSignature
-                && IsInValidContext(invocation, analysisContext.SemanticModel)
-                && ShouldReportOnMethodCall(invocation, analysisContext.SemanticModel, disallowedMethodSignature))
+                && IsInValidContext(invocation, analysisContext.Model)
+                && ShouldReportOnMethodCall(invocation, analysisContext.Model, disallowedMethodSignature))
             {
                 analysisContext.ReportIssue(SupportedDiagnostics[0], identifier.GetLocation(), disallowedMethodSignature.ToString());
             }

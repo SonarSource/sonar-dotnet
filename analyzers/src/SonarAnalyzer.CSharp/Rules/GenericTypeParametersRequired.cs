@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typeParameters = methodDeclaration
                             .TypeParameterList
                             ?.Parameters
-                            .Select(p => c.SemanticModel.GetDeclaredSymbol(p));
+                            .Select(p => c.Model.GetDeclaredSymbol(p));
 
                     if (typeParameters == null)
                     {
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var argumentTypes = methodDeclaration
                             .ParameterList
                             .Parameters
-                            .Select(p => c.SemanticModel.GetDeclaredSymbol(p)?.Type);
+                            .Select(p => c.Model.GetDeclaredSymbol(p)?.Type);
 
                     var typeParametersInArguments = new HashSet<ITypeParameterSymbol>();
                     foreach (var argumentType in argumentTypes)

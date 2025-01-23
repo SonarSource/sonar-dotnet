@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules
                     var declaration = (TDeclaration)c.Node;
 
                     if (!c.IsRedundantPositionalRecordContext()
-                        && IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.SemanticModel)))
+                        && IsRecursiveInheritance(GetNamedTypeSymbol(declaration, c.Model)))
                     {
                         c.ReportIssue(Rule, GetLocation(declaration), GetKeyword(declaration).ValueText);
                     }

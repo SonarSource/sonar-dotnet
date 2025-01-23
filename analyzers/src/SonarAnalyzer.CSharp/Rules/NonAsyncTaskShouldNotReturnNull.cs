@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var enclosingMember = GetEnclosingMember(nullLiteral);
                     if (enclosingMember != null &&
                         !enclosingMember.IsKind(SyntaxKind.VariableDeclaration) &&
-                        IsInvalidEnclosingSymbolContext(enclosingMember, c.SemanticModel))
+                        IsInvalidEnclosingSymbolContext(enclosingMember, c.Model))
                     {
                         c.ReportIssue(rule, nullLiteral);
                     }

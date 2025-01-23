@@ -39,6 +39,6 @@ public class SonarCodeBlockReportingContextTest
         sut.Cancel.Should().Be(cancel);
         sut.CodeBlock.Should().BeSameAs(codeBlock);
         sut.OwningSymbol.Should().BeSameAs(owningSymbol);
-        sut.SemanticModel.Should().BeSameAs(model);
+        sut.Model.Should().BeSameAs(model);
     }
 }

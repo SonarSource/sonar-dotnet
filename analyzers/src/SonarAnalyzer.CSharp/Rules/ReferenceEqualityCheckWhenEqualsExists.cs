@@ -55,13 +55,13 @@ namespace SonarAnalyzer.Rules.CSharp
                         c =>
                         {
                             var binary = (BinaryExpressionSyntax)c.Node;
-                            if (!IsBinaryCandidateForReporting(binary, c.SemanticModel))
+                            if (!IsBinaryCandidateForReporting(binary, c.Model))
                             {
                                 return;
                             }
 
-                            var typeLeft = c.SemanticModel.GetTypeInfo(binary.Left).Type;
-                            var typeRight = c.SemanticModel.GetTypeInfo(binary.Right).Type;
+                            var typeLeft = c.Model.GetTypeInfo(binary.Left).Type;
+                            var typeRight = c.Model.GetTypeInfo(binary.Right).Type;
                             if (IsAllowedTypeOrNull(typeLeft) || IsAllowedTypeOrNull(typeRight))
                             {
                                 return;

@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VerifyMethodDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var methodDeclaration = (BaseMethodDeclarationSyntax)context.Node;
-            var methodSymbol = context.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+            var methodSymbol = context.Model.GetDeclaredSymbol(methodDeclaration);
             if (methodSymbol == null || methodSymbol.IsOverride)
             {
                 return;
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodOverloads.Any())
             {
                 if (!methodDeclaration.IsKind(SyntaxKind.ConstructorDeclaration)
-                    && !methodDeclaration.ContainsMethodInvocation(context.SemanticModel, x => true, x => methodOverloads.Contains(x)))
+                    && !methodDeclaration.ContainsMethodInvocation(context.Model, x => true, x => methodOverloads.Contains(x)))
                 {
                     context.ReportIssue(RuleS3997, methodDeclaration.FindIdentifierLocation());
                 }
@@ -96,7 +96,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VerifyPropertyDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
-            var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
+            var propertySymbol = context.Model.GetDeclaredSymbol(propertyDeclaration);
             if (propertySymbol.Type.Is(KnownType.System_String)
                 && !propertySymbol.IsOverride
                 && NameContainsUri(propertySymbol.Name))
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void VerifyRecordDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var declaration = (RecordDeclarationSyntaxWrapper)context.Node;
-            if (!context.IsRedundantPositionalRecordContext() && HasStringUriParams(declaration.ParameterList, context.SemanticModel))
+            if (!context.IsRedundantPositionalRecordContext() && HasStringUriParams(declaration.ParameterList, context.Model))
             {
                 context.ReportIssue(RuleS3996, declaration.SyntaxNode);
             }
@@ -120,7 +120,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void VerifyInvocationAndCreation(SonarSyntaxNodeReportingContext context)
         {
-            if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol
+            if (context.Model.GetSymbolInfo(context.Node).Symbol is IMethodSymbol invokedMethodSymbol
                 && !invokedMethodSymbol.IsInType(KnownType.System_Uri)
                 && StringUrlParamIndexes(invokedMethodSymbol) is { Count: not 0 } stringUrlParams
                 && FindOverloadsThatUseUriTypeInPlaceOfString(invokedMethodSymbol, stringUrlParams).Any())

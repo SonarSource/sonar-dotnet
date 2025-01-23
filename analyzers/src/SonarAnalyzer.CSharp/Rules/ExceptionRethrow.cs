@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var exceptionIdentifier = c.SemanticModel.GetDeclaredSymbol(catchClause.Declaration);
+                    var exceptionIdentifier = c.Model.GetDeclaredSymbol(catchClause.Declaration);
                     if (exceptionIdentifier == null)
                     {
                         return;
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     foreach (var @throw in throws)
                     {
-                        var thrown = c.SemanticModel.GetSymbolInfo(@throw.Expression).Symbol as ILocalSymbol;
+                        var thrown = c.Model.GetSymbolInfo(@throw.Expression).Symbol as ILocalSymbol;
                         if (Equals(thrown, exceptionIdentifier))
                         {
                             c.ReportIssue(rule, @throw);

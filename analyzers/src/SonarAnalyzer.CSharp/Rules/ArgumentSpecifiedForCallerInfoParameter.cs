@@ -35,12 +35,12 @@ namespace SonarAnalyzer.Rules.CSharp
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(c =>
             {
-                if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup
+                if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.Model) is { MethodSymbol: { } } methodParameterLookup
                     && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)
                 {
                     foreach (var argumentMapping in argumentMappings.Where(x =>
                         x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()
-                        && !IsArgumentPassthroughOfParameter(c.SemanticModel, x.Node, x.Symbol)))
+                        && !IsArgumentPassthroughOfParameter(c.Model, x.Node, x.Symbol)))
                     {
                         c.ReportIssue(Rule, argumentMapping.Node);
                     }

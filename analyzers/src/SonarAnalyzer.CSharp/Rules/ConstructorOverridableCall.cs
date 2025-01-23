@@ -45,14 +45,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var enclosingSymbol = context.SemanticModel.GetEnclosingSymbol(invocationExpression.SpanStart) as IMethodSymbol;
+            var enclosingSymbol = context.Model.GetEnclosingSymbol(invocationExpression.SpanStart) as IMethodSymbol;
             if (!IsMethodConstructor(enclosingSymbol))
             {
                 return;
             }
 
 
-            if (context.SemanticModel.GetSymbolInfo(invocationExpression.Expression).Symbol is IMethodSymbol methodSymbol &&
+            if (context.Model.GetSymbolInfo(invocationExpression.Expression).Symbol is IMethodSymbol methodSymbol &&
                 IsMethodOverridable(methodSymbol) &&
                 enclosingSymbol.IsInType(methodSymbol.ContainingType))
             {

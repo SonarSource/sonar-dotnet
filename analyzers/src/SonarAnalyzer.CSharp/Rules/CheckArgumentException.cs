@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckForIssue(SonarSyntaxNodeReportingContext analysisContext)
         {
             var objectCreation = ObjectCreationFactory.Create(analysisContext.Node);
-            var methodSymbol = objectCreation.MethodSymbol(analysisContext.SemanticModel);
+            var methodSymbol = objectCreation.MethodSymbol(analysisContext.Model);
             if (methodSymbol?.ContainingType == null || !methodSymbol.ContainingType.IsAny(ArgumentExceptionTypesToCheck))
             {
                 return;
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var parameterAndMessage = RetrieveParameterAndMessageArgumentValue(methodSymbol, objectCreation, analysisContext.SemanticModel);
+            var parameterAndMessage = RetrieveParameterAndMessageArgumentValue(methodSymbol, objectCreation, analysisContext.Model);
 
             var constructorParameterArgument = parameterAndMessage.Item1;
             var constructorMessageArgument = parameterAndMessage.Item2;

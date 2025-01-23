@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                 {
                     var creationSyntax = (ObjectCreationExpressionSyntax)c.Node;
 
-                    var createdType = c.SemanticModel.GetTypeInfo(creationSyntax).Type;
+                    var createdType = c.Model.GetTypeInfo(creationSyntax).Type;
                     if (createdType != null &&
                         createdType.GetAttributes(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute).Any(IsShared))
                     {

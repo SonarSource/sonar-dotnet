@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
 
                             foreach (var target in assignment.AssignmentTargets())
                             {
-                                if (GetStaticFieldSymbol(c.SemanticModel, target) is { } fieldSymbol)
+                                if (GetStaticFieldSymbol(c.Model, target) is { } fieldSymbol)
                                 {
                                     locationsForFields.Add(fieldSymbol, target.CreateLocation(to: assignment.OperatorToken));
                                 }
@@ -64,7 +64,7 @@ namespace SonarAnalyzer.Rules
                     cbc.RegisterNodeAction(c =>
                         {
                             var unary = (PrefixUnaryExpressionSyntax)c.Node;
-                            CollectLocationOfStaticField(c.SemanticModel, locationsForFields, unary.Operand);
+                            CollectLocationOfStaticField(c.Model, locationsForFields, unary.Operand);
                         },
                         SyntaxKind.PreDecrementExpression,
                         SyntaxKind.PreIncrementExpression);
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
                     cbc.RegisterNodeAction(c =>
                         {
                             var unary = (PostfixUnaryExpressionSyntax)c.Node;
-                            CollectLocationOfStaticField(c.SemanticModel, locationsForFields, unary.Operand);
+                            CollectLocationOfStaticField(c.Model, locationsForFields, unary.Operand);
                         },
                         SyntaxKind.PostDecrementExpression,
                         SyntaxKind.PostIncrementExpression);

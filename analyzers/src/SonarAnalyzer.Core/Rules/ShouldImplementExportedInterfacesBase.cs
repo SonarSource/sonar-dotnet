@@ -46,14 +46,14 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var attributeSyntax = (TAttributeSyntax)c.Node;
-                    if (c.SemanticModel.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is not IMethodSymbol attributeCtorSymbol
+                    if (c.Model.GetSymbolInfo(GetAttributeName(attributeSyntax)).Symbol is not IMethodSymbol attributeCtorSymbol
                         || !attributeCtorSymbol.ContainingType.IsAny(exportAttributes))
                     {
                         return;
                     }
 
-                    var exportedType = GetExportedTypeSymbol(GetAttributeArguments(attributeSyntax), c.SemanticModel);
-                    var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.SemanticModel);
+                    var exportedType = GetExportedTypeSymbol(GetAttributeArguments(attributeSyntax), c.Model);
+                    var attributeTargetType = GetAttributeTargetSymbol(attributeSyntax, c.Model);
                     if (exportedType is null
                         || attributeTargetType is null
                         || IsOfExportType(attributeTargetType, exportedType))

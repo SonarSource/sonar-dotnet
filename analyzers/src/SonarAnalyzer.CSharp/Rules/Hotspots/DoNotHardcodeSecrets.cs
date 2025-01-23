@@ -70,7 +70,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
                 var node = c.Node;
                 if (FindIdentifier(node) is { } identifier
                     && FindRightHandSide(node) is { } rhs
-                    && rhs.FindStringConstant(c.SemanticModel) is { } secret)
+                    && rhs.FindStringConstant(c.Model) is { } secret)
                 {
                     if (ShouldRaiseBinary(identifier.ValueText, secret))
                     {
@@ -97,9 +97,9 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
                 if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
                     && memberAccessExpression.Name.Identifier.ValueText == EqualsName
                     && invocationExpression.TryGetFirstArgument(out var firstArgument)
-                    && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.SemanticModel)
+                    && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.Model)
                     && GetIdentifierAndValue(memberAccessExpression.Expression, firstArgument, out var identifier, out var value)
-                    && value.FindStringConstant(c.SemanticModel) is { } secret
+                    && value.FindStringConstant(c.Model) is { } secret
                     && ShouldRaiseBinary(identifier.Value.ValueText, secret))
                 {
                     c.ReportIssue(rule, memberAccessExpression, identifier.Value.ValueText);

@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Rules
             {
                 if (membersGroupedByInterface.TryGetValue(member, out var interfaces))
                 {
-                    return interfaces.Length == 1 && others.Any(other => FindInterfaces(c.SemanticModel, other.Member).Contains(interfaces.Single()));
+                    return interfaces.Length == 1 && others.Any(other => FindInterfaces(c.Model, other.Member).Contains(interfaces.Single()));
                 }
                 return true; // Not member of an interface => process
             }
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.Rules
             TMemberDeclarationSyntax previous = null;
             foreach (var member in members)
             {
-                currentInterfaces = FindInterfaces(c.SemanticModel, member);
+                currentInterfaces = FindInterfaces(c.Model, member);
                 if (currentInterfaces.Intersect(previousInterfaces).Any())
                 {
                     ret.Add(member, currentInterfaces);
@@ -157,7 +157,7 @@ namespace SonarAnalyzer.Rules
             public MemberInfo(SonarSyntaxNodeReportingContext context, TMemberDeclarationSyntax member, SyntaxToken nameSyntax, bool isStatic, bool isAbstract, bool isCaseSensitive)
             {
                 Member = member;
-                accessibility = context.SemanticModel.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();
+                accessibility = context.Model.GetDeclaredSymbol(member)?.DeclaredAccessibility.ToString();
                 NameSyntax = nameSyntax;
                 this.isStatic = isStatic;
                 this.isAbstract = isAbstract;

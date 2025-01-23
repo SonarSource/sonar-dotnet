@@ -42,7 +42,7 @@ public sealed class UseRegexSafeIsMatch : StylingAnalyzer
             {
                 var memberAccess = (MemberAccessExpressionSyntax)c.Node;
                 if (memberAccess.NameIs(methodName)
-                    && c.SemanticModel.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol method
+                    && c.Model.GetSymbolInfo(memberAccess).Symbol is IMethodSymbol method
                     && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex))
                 {
                     c.ReportIssue(

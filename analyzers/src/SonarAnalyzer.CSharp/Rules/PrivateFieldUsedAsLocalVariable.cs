@@ -43,8 +43,8 @@ public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
                 }
 
                 var methodNames = typeDeclaration.Members.OfType<MethodDeclarationSyntax>().Select(x => x.Identifier.ValueText).ToHashSet();
-                var privateFields = GetPrivateFields(c.SemanticModel, typeDeclaration);
-                var collector = new FieldAccessCollector(c.SemanticModel, privateFields, methodNames);
+                var privateFields = GetPrivateFields(c.Model, typeDeclaration);
+                var collector = new FieldAccessCollector(c.Model, privateFields, methodNames);
                 if (!collector.SafeVisit(typeDeclaration))
                 {
                     // We couldn't finish the exploration so we cannot take any decision

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (partialKeyword != default
                 && !declaration.HasBodyOrExpressionBody()
                 && !declaration.Modifiers.Any(HasAccessModifier)
-                && context.SemanticModel.GetDeclaredSymbol(declaration) is { } methodSymbol
+                && context.Model.GetDeclaredSymbol(declaration) is { } methodSymbol
                 && methodSymbol.PartialImplementationPart == null)
             {
                 context.ReportIssue(Rule, partialKeyword, "this", string.Empty);
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var invocation = (InvocationExpressionSyntax)context.Node;
 
             if (invocation.Parent is StatementSyntax statement
-                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                 && methodSymbol.PartialImplementationPart == null
                 && PartialMethodsWithoutAccessModifier(methodSymbol).Any())
             {

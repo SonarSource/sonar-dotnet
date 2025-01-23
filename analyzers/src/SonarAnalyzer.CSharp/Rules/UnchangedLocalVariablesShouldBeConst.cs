@@ -44,7 +44,7 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
                     return;
                 }
 
-                var declaredType = FindDeclarationType(localDeclaration, c.SemanticModel);
+                var declaredType = FindDeclarationType(localDeclaration, c.Model);
                 if (declaredType == DeclarationType.CannotBeConst)
                 {
                     return;
@@ -53,9 +53,9 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
                 localDeclaration.Declaration?.Variables
                     .Where(v => v is { Identifier: { } }
                         // constant string interpolation is only valid in C# 10 and above
-                        && (c.SemanticModel.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10) || !ContainsInterpolation(v))
-                        && IsInitializedWithCompatibleConstant(v, c.SemanticModel, declaredType)
-                        && !HasMutableUsagesInMethod(c.SemanticModel, v))
+                        && (c.Model.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10) || !ContainsInterpolation(v))
+                        && IsInitializedWithCompatibleConstant(v, c.Model, declaredType)
+                        && !HasMutableUsagesInMethod(c.Model, v))
                     .ToList()
                     .ForEach(x => Report(c, x));
             },
@@ -172,7 +172,7 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
             Rule,
             declaratorSyntax.Identifier,
             declaratorSyntax.Identifier.ValueText,
-            AdditionalMessageHints(c.SemanticModel, declaratorSyntax));
+            AdditionalMessageHints(c.Model, declaratorSyntax));
 
     private static string AdditionalMessageHints(SemanticModel model, VariableDeclaratorSyntax declaratorSyntax) =>
         declaratorSyntax is { Parent: VariableDeclarationSyntax { Type: { IsVar: true } typeSyntax } }

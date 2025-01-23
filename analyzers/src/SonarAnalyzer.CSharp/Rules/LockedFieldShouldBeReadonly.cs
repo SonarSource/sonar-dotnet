@@ -40,7 +40,7 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
         }
         else
         {
-            var lazySymbol = new Lazy<ISymbol>(() => context.SemanticModel.GetSymbolInfo(expression).Symbol);
+            var lazySymbol = new Lazy<ISymbol>(() => context.Model.GetSymbolInfo(expression).Symbol);
             if (IsOfTypeString(expression, lazySymbol))
             {
                 context.ReportIssue(LockedFieldRule, expression, "strings as they can be interned");

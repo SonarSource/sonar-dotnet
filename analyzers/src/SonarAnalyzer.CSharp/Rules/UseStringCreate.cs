@@ -51,7 +51,7 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
                     && NameIsEqual(left, nameof(FormattableString))
                     && node.HasExactlyNArguments(1)
                     && node.ArgumentList.Arguments[0].Expression is InterpolatedStringExpressionSyntax
-                    && c.SemanticModel.GetTypeInfo(left).Type.Is(KnownType.System_FormattableString))
+                    && c.Model.GetTypeInfo(left).Type.Is(KnownType.System_FormattableString))
                 {
                     c.ReportIssue(Rule, node.GetIdentifier()?.GetLocation());
                 }

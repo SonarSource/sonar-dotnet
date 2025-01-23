@@ -24,7 +24,7 @@ public sealed class UseNullInsteadOfDefault : StylingAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                if (IsReferenceType(c.Node, c.SemanticModel))
+                if (IsReferenceType(c.Node, c.Model))
                 {
                     c.ReportIssue(Rule, c.Node);
                 }

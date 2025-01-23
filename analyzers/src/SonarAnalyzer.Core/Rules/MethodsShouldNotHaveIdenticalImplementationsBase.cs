@@ -46,7 +46,7 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
                 {
                     var method = methodsToHandle.First.Value;
                     methodsToHandle.RemoveFirst();
-                    var duplicates = methodsToHandle.Where(x => AreDuplicates(c.SemanticModel, method, x)).ToList();
+                    var duplicates = methodsToHandle.Where(x => AreDuplicates(c.Model, method, x)).ToList();
 
                     foreach (var duplicate in duplicates)
                     {

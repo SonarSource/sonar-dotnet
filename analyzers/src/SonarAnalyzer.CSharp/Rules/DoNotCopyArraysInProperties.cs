@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var walker = new PropertyWalker(c.SemanticModel);
+                    var walker = new PropertyWalker(c.Model);
 
                     walker.SafeVisit(body);
 

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                    var symbol = c.Model.GetDeclaredSymbol(classDeclaration);
                     if (symbol == null)
                     {
                         return;

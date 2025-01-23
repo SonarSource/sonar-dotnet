@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     if (IsEnabled(c.Options)
-                        && Language.Syntax.StringValue(c.Node, c.SemanticModel) is { } stringValue
+                        && Language.Syntax.StringValue(c.Node, c.Model) is { } stringValue
                         && IsSensitiveDirectoryUsage(stringValue))
                     {
                         c.ReportIssue(rule, c.Node);
@@ -83,8 +83,8 @@ namespace SonarAnalyzer.Rules
                 {
                     if (IsEnabled(c.Options)
                         && c.Node is TInvocationExpression invocation
-                        && (IsGetTempPathAssignment(invocation, KnownType.System_IO_Path, "GetTempPath", c.SemanticModel)
-                            || IsInsecureEnvironmentVariableRetrieval(invocation, KnownType.System_Environment, "GetEnvironmentVariable", c.SemanticModel)))
+                        && (IsGetTempPathAssignment(invocation, KnownType.System_IO_Path, "GetTempPath", c.Model)
+                            || IsInsecureEnvironmentVariableRetrieval(invocation, KnownType.System_Environment, "GetEnvironmentVariable", c.Model)))
                     {
                         c.ReportIssue(rule, c.Node);
                     }

@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                             var argumentsCount = objectCreationSyntax.ArgumentList?.Arguments.Count;
 
                             if (argumentsCount <= 1 // Random has two ctors - with zero and one parameter
-                                && c.SemanticModel.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol
+                                && c.Model.GetSymbolInfo(objectCreationSyntax).Symbol is IMethodSymbol methodSymbol
                                 && methodSymbol.ContainingType.Is(KnownType.System_Random))
                             {
                                 c.ReportIssue(Rule, objectCreationSyntax);

@@ -31,17 +31,17 @@ public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosti
     {
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromCtor(Language, c.SemanticModel, c.Node)),
+            c => Analyze(c, RegexContext.FromCtor(Language, c.Model, c.Node)),
             Language.SyntaxKind.ObjectCreationExpressions);
 
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromMethod(Language, c.SemanticModel, c.Node)),
+            c => Analyze(c, RegexContext.FromMethod(Language, c.Model, c.Node)),
             Language.SyntaxKind.InvocationExpression);
 
         context.RegisterNodeAction(
             Language.GeneratedCodeRecognizer,
-            c => Analyze(c, RegexContext.FromAttribute(Language, c.SemanticModel, c.Node)),
+            c => Analyze(c, RegexContext.FromAttribute(Language, c.Model, c.Node)),
             Language.SyntaxKind.Attribute);
     }
 

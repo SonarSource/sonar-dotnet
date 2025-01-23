@@ -34,7 +34,7 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
     protected void RaiseOnInvalidCatch(SonarSyntaxNodeReportingContext context)
     {
         var catches = AllCatches(context.Node);
-        var caughtExceptionTypes = new Lazy<INamedTypeSymbol[]>(() => ComputeExceptionTypes(catches, context.SemanticModel));
+        var caughtExceptionTypes = new Lazy<INamedTypeSymbol[]>(() => ComputeExceptionTypes(catches, context.Model));
         var redundantCatches = new HashSet<TCatchClause>();
         // We handle differently redundant catch clauses (just throw inside) that are followed by a non-redundant catch clause, because if they are removed, the method behavior will change.
         var followingCatchesOnlyThrow = true;

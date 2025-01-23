@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var interfaceSymbol = c.SemanticModel.GetDeclaredSymbol(interfaceDeclaration);
+                    var interfaceSymbol = c.Model.GetDeclaredSymbol(interfaceDeclaration);
                     if (interfaceSymbol is { DeclaredAccessibility: Accessibility.Public }
                         && !IsAggregatingOtherInterfaces(interfaceSymbol)
                         && !IsSpecializedGeneric(interfaceSymbol)

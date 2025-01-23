@@ -37,12 +37,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var expressionSyntax = GetSingleExpressionOrDefault(methodDeclaration);
-                    if (!IsConstantExpression(expressionSyntax, c.SemanticModel))
+                    if (!IsConstantExpression(expressionSyntax, c.Model))
                     {
                         return;
                     }
 
-                    if (c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
+                    if (c.Model.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
                         && !methodSymbol.ContainingType.IsInterface()
                         && methodSymbol.GetInterfaceMember() == null
                         && methodSymbol.GetOverriddenMember() == null)

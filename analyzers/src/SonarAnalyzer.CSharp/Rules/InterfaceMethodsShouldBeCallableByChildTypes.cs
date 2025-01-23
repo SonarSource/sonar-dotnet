@@ -59,7 +59,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var declaration = (TypeDeclarationSyntax)memberDeclaration.FirstAncestorOrSelf<SyntaxNode>(node => node is TypeDeclarationSyntax);
             if (declaration == null
                 || declaration.Identifier.IsMissing
-                || !IsDeclarationTracked(declaration, analysisContext.SemanticModel))
+                || !IsDeclarationTracked(declaration, analysisContext.Model))
             {
                 return;
             }

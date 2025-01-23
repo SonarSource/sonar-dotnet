@@ -75,14 +75,14 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             {
                 if (!isModelValidated)
                 {
-                    isModelValidated = IsCheckingValidityProperty(nodeContext.Node, nodeContext.SemanticModel);
+                    isModelValidated = IsCheckingValidityProperty(nodeContext.Node, nodeContext.Model);
                 }
             }, PropertyAccessSyntaxNodesToVisit);
             codeBlockContext.RegisterNodeAction(nodeContext =>
             {
                 if (!isModelValidated)
                 {
-                    isModelValidated = IsTryValidateInvocation(nodeContext.Node, nodeContext.SemanticModel);
+                    isModelValidated = IsTryValidateInvocation(nodeContext.Node, nodeContext.Model);
                 }
             }, SyntaxKind.InvocationExpression);
             codeBlockContext.RegisterCodeBlockEndAction(blockEnd =>

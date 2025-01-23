@@ -94,8 +94,8 @@ namespace SonarAnalyzer.Rules.CSharp
         private void VisitAttribute(SonarSyntaxNodeReportingContext context)
         {
             var attribute = (AttributeSyntax)context.Node;
-            if (attribute.IsKnownType(KnownType.System_Web_Http_Cors_EnableCorsAttribute, context.SemanticModel)
-                && IsStar(attribute.ArgumentList.Arguments[0].Expression, context.SemanticModel))
+            if (attribute.IsKnownType(KnownType.System_Web_Http_Cors_EnableCorsAttribute, context.Model)
+                && IsStar(attribute.ArgumentList.Arguments[0].Expression, context.Model))
             {
                 context.ReportIssue(Rule, attribute);
             }

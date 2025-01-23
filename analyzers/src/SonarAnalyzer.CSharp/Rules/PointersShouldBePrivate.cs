@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 foreach (var variable in fieldDeclaration.Declaration.Variables)
                 {
-                    if (SymbolIfPointerType(fieldDeclaration.Declaration, variable, c.SemanticModel) is { } variableSymbol
+                    if (SymbolIfPointerType(fieldDeclaration.Declaration, variable, c.Model) is { } variableSymbol
                         && variableSymbol.GetEffectiveAccessibility() is var accessibility
                         && accessibility != Accessibility.Private
                         && accessibility != Accessibility.Internal

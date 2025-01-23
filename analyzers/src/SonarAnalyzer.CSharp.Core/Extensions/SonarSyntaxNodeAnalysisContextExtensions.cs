@@ -24,5 +24,5 @@ public static class SonarSyntaxNodeAnalysisContextExtensions
         && context.ContainingSymbol.IsGlobalNamespace(); // Needed to avoid the duplicate calls from Roslyn 4.0.0
 
     public static bool IsInExpressionTree(this SonarSyntaxNodeReportingContext context) =>
-        context.Node.IsInExpressionTree(context.SemanticModel);
+        context.Node.IsInExpressionTree(context.Model);
 }

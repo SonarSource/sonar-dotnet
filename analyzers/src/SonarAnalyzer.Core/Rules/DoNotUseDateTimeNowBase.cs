@@ -38,7 +38,7 @@ public abstract class DoNotUseDateTimeNowBase<TSyntaxKind> : SonarDiagnosticAnal
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
-            if ((IsDateTimeNowOrToday(c.Node, c.SemanticModel) || IsDateTimeOffsetNowDateTime(c.Node, c.SemanticModel))
+            if ((IsDateTimeNowOrToday(c.Node, c.Model) || IsDateTimeOffsetNowDateTime(c.Node, c.Model))
                 && !IsInsideNameOf(c.Node))
                 {
                     c.ReportIssue(Rule, c.Node);

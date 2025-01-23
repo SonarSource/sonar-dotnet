@@ -34,9 +34,9 @@ namespace SonarAnalyzer.Rules
                 {
                     foreach (var target in Language.Syntax.AssignmentTargets(c.Node))
                     {
-                        if (c.SemanticModel.GetSymbolInfo(target).Symbol is { } symbol
+                        if (c.Model.GetSymbolInfo(target).Symbol is { } symbol
                             && (symbol is IParameterSymbol { RefKind: RefKind.None } || IsAssignmentToCatchVariable(symbol, target))
-                            && !IsReadBefore(c.SemanticModel, symbol, c.Node))
+                            && !IsReadBefore(c.Model, symbol, c.Node))
                         {
                             c.ReportIssue(Rule, target, target.ToString());
                         }

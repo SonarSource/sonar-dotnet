@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (!HasStatements(catchClause) &&
                         !HasComments(catchClause) &&
-                        IsGenericCatch(catchClause, c.SemanticModel))
+                        IsGenericCatch(catchClause, c.Model))
                     {
                         c.ReportIssue(rule, c.Node);
                     }

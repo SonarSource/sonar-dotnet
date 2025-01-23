@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules
                     if (parametersCount - baseCount > Maximum
                         && c.Node.Parent is { } parent
                         && !IsExtern(parent)
-                        && CanBeChanged(parent, c.SemanticModel))
+                        && CanBeChanged(parent, c.Model))
                     {
                         var valueText = baseCount == 0 ? parametersCount.ToString() : $"{parametersCount - baseCount} new";
                         c.ReportIssue(SupportedDiagnostics[0], c.Node, UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum.ToString());

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             // No need to check for ExpressionBody as it can't contain variable assignment
             context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.SemanticModel.GetDeclaredSymbol(c.Node)),
+                c => CheckForDeadStores(c, c.Model.GetDeclaredSymbol(c.Node)),
                 SyntaxKind.AddAccessorDeclaration,
                 SyntaxKind.ConstructorDeclaration,
                 SyntaxKind.ConversionOperatorDeclaration,
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 SyntaxKindEx.LocalFunctionStatement);
 
             context.RegisterNodeAction(
-                c => CheckForDeadStores(c, c.SemanticModel.GetSymbolInfo(c.Node).Symbol),
+                c => CheckForDeadStores(c, c.Model.GetSymbolInfo(c.Node).Symbol),
                 SyntaxKind.AnonymousMethodExpression,
                 SyntaxKind.ParenthesizedLambdaExpression,
                 SyntaxKind.SimpleLambdaExpression);
@@ -70,14 +70,14 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (useSonarCfg)
                 {
                     // Tuple expressions are not supported. See https://github.com/SonarSource/sonar-dotnet/issues/3094
-                    if (!context.Node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(context.Node, context.SemanticModel, out var cfg))
+                    if (!context.Node.DescendantNodes().AnyOfKind(SyntaxKindEx.TupleExpression) && CSharpControlFlowGraph.TryGet(context.Node, context.Model, out var cfg))
                     {
-                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.SemanticModel, context.Cancel);
+                        var lva = new SonarCSharpLiveVariableAnalysis(cfg, symbol, context.Model, context.Cancel);
                         var checker = new SonarChecker(context, lva, context.Node);
                         checker.Analyze(cfg.Blocks);
                     }
                 }
-                else if (context.Node.CreateCfg(context.SemanticModel, context.Cancel) is { } cfg)
+                else if (context.Node.CreateCfg(context.Model, context.Cancel) is { } cfg)
                 {
                     var lva = new RoslynLiveVariableAnalysis(cfg, CSharpSyntaxClassifier.Instance, context.Cancel);
                     var checker = new RoslynChecker(context, lva);
@@ -121,7 +121,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 public abstract void AnalyzeBlock();
 
-                protected SemanticModel SemanticModel => owner.context.SemanticModel;
+                protected SemanticModel SemanticModel => owner.context.Model;
 
                 protected State(CheckerBase<TCfg, TBlock> owner, TBlock block)
                 {

@@ -57,14 +57,14 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(firstVariableWithInitialization)
+                    var fieldSymbol = c.Model.GetDeclaredSymbol(firstVariableWithInitialization)
                         as IFieldSymbol;
                     if (!IsFieldRelevant(fieldSymbol))
                     {
                         return;
                     }
 
-                    var constValue = c.SemanticModel.GetConstantValue(
+                    var constValue = c.Model.GetConstantValue(
                         firstVariableWithInitialization.Initializer.Value);
                     if (!constValue.HasValue)
                     {

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodSyntax = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodSyntax);
+                    var methodSymbol = c.Model.GetDeclaredSymbol(methodSyntax);
 
                     if (methodSymbol.ContainingType.IsValueType || !methodSymbol.IsObjectGetHashCode())
                     {
@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     ImmutableArray<ISymbol> baseMembers;
                     try
                     {
-                        baseMembers = c.SemanticModel.LookupBaseMembers(methodSyntax.SpanStart);
+                        baseMembers = c.Model.LookupBaseMembers(methodSyntax.SpanStart);
                     }
                     catch (ArgumentException)
                     {
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var identifier in identifiers)
             {
-                if (context.SemanticModel.GetSymbolInfo(identifier).Symbol is not IFieldSymbol identifierSymbol)
+                if (context.Model.GetSymbolInfo(identifier).Symbol is not IFieldSymbol identifierSymbol)
                 {
                     continue;
                 }

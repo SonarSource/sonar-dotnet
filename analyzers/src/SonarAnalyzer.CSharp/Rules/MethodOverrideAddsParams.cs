@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(method);
+                    var methodSymbol = c.Model.GetDeclaredSymbol(method);
 
                     if (methodSymbol is not { IsOverride: true }
                         || methodSymbol.OverriddenMethod == null)
@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var paramsKeyword = lastParameter.Modifiers.FirstOrDefault(modifier => modifier.IsKind(SyntaxKind.ParamsKeyword));
                     if (paramsKeyword != default
-                        && IsNotSemanticallyParams(lastParameter, c.SemanticModel))
+                        && IsNotSemanticallyParams(lastParameter, c.Model))
                     {
                         c.ReportIssue(Rule, paramsKeyword);
                     }

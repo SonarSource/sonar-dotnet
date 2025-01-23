@@ -40,19 +40,19 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
                         && memberAccessExpression.Name.Identifier.ValueText == EqualsName
                         && invocationExpression.TryGetFirstArgument(out var firstArgument)
-                        && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.SemanticModel))
+                        && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.Model))
                     {
                         // x.Equals(value), where x is string.Empty, "" or const "", and value is some string
-                        if (IsStringIdentifier(firstArgument.Expression, c.SemanticModel)
-                            && IsConstantEmptyString(memberAccessExpression.Expression, c.SemanticModel))
+                        if (IsStringIdentifier(firstArgument.Expression, c.Model)
+                            && IsConstantEmptyString(memberAccessExpression.Expression, c.Model))
                         {
                             c.ReportIssue(rule, invocationExpression, MessageFormat);
                             return;
                         }
 
                         // value.Equals(x), where x is string.Empty, "" or const "", and value is some string
-                        if (IsStringIdentifier(memberAccessExpression.Expression, c.SemanticModel)
-                            && IsConstantEmptyString(firstArgument.Expression, c.SemanticModel))
+                        if (IsStringIdentifier(memberAccessExpression.Expression, c.Model)
+                            && IsConstantEmptyString(firstArgument.Expression, c.Model))
                         {
                             c.ReportIssue(rule, invocationExpression, MessageFormat);
                         }

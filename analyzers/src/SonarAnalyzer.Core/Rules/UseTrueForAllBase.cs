@@ -34,8 +34,8 @@ public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<T
         {
             if (Language.GetName(c.Node).Equals(nameof(Enumerable.All), Language.NameComparison)
                 && Language.Syntax.TryGetOperands(c.Node, out var left, out var right)
-                && IsCorrectType(left, c.SemanticModel)
-                && IsCorrectCall(right, c.SemanticModel))
+                && IsCorrectType(left, c.Model)
+                && IsCorrectCall(right, c.Model))
             {
                 c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(c.Node)?.GetLocation());
             }

@@ -94,14 +94,14 @@ namespace SonarAnalyzer.Rules
             var attribute = (TAttributeSyntax)context.Node;
 
             if (IsDisableRequestSizeLimit(AttributeName(attribute))
-                && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.SemanticModel))
+                && attribute.IsKnownType(KnownType.Microsoft_AspNetCore_Mvc_DisableRequestSizeLimitAttribute, context.Model))
             {
                 context.ReportIssue(Rule, attribute);
                 return;
             }
 
-            var requestSizeLimit = IsInvalidRequestSizeLimit(attribute, context.SemanticModel);
-            var requestFormLimits = IsInvalidRequestFormLimits(attribute, context.SemanticModel);
+            var requestSizeLimit = IsInvalidRequestSizeLimit(attribute, context.Model);
+            var requestFormLimits = IsInvalidRequestFormLimits(attribute, context.Model);
 
             if ((requestSizeLimit != null || requestFormLimits != null)
                 && GetMethodLocalFunctionOrClassDeclaration(attribute) is { } declaration)

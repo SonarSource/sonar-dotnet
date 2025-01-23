@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (c.IsAzureFunction())
                     {
                         var method = (MethodDeclarationSyntax)c.Node;
-                        var walker = new Walker(c.SemanticModel);
+                        var walker = new Walker(c.Model);
                         if (walker.SafeVisit(method.GetBodyOrExpressionBody()) && walker.HasInvocationOutsideTryCatch)
                         {
                             c.ReportIssue(Rule, method.Identifier);

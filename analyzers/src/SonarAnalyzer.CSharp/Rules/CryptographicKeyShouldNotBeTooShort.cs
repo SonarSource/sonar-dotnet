@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var containingType = new Lazy<ITypeSymbol>(() => c.SemanticModel.GetSymbolInfo(invocation).Symbol?.ContainingType);
+                    var containingType = new Lazy<ITypeSymbol>(() => c.Model.GetSymbolInfo(invocation).Symbol?.ContainingType);
 
                     switch (GetMethodName(invocation))
                     {
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var objectCreation = ObjectCreationFactory.Create(c.Node);
-                    var containingType = objectCreation.TypeSymbol(c.SemanticModel);
+                    var containingType = objectCreation.TypeSymbol(c.Model);
                     CheckSystemSecurityEllipticCurve(c, containingType, objectCreation.Expression, objectCreation.ArgumentList);
                     CheckSystemSecurityCryptographyAlgorithms(c, containingType, objectCreation);
                     CheckBouncyCastleKeyGenerationParameters(c, containingType, objectCreation);
@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var assignment = (AssignmentExpressionSyntax)c.Node;
                     if (GetPropertyName(assignment.Left) == nameof(AsymmetricAlgorithm.KeySize)
                         && assignment.Left is MemberAccessExpressionSyntax { Expression: { } expression }
-                        && c.SemanticModel.GetTypeInfo(expression).Type is ITypeSymbol containingType)
+                        && c.Model.GetTypeInfo(expression).Type is ITypeSymbol containingType)
                     {
                         // Using the KeySize setter on DSACryptoServiceProvider/RSACryptoServiceProvider does not actually change the underlying key size
                         // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.dsacryptoserviceprovider.keysize
@@ -144,7 +144,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (firstParam.FindStringConstant(c.SemanticModel) is { } curveId)
+            if (firstParam.FindStringConstant(c.Model) is { } curveId)
             {
                 CheckCurveNameKeyLength(c, invocation, curveId);
             }
@@ -158,7 +158,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (c.SemanticModel.GetSymbolInfo(firstParam).Symbol is { } paramSymbol)
+            if (c.Model.GetSymbolInfo(firstParam).Symbol is { } paramSymbol)
             {
                 CheckCurveNameKeyLength(c, syntaxElement, paramSymbol.Name);
             }
@@ -193,7 +193,7 @@ namespace SonarAnalyzer.Rules.CSharp
             argumentList == null
             || argumentList.Arguments.Count == 0
             || (argumentList.Arguments.Count == 1
-                && c.SemanticModel.GetTypeInfo(argumentList.Arguments[0].Expression).Type is ITypeSymbol type
+                && c.Model.GetTypeInfo(argumentList.Arguments[0].Expression).Type is ITypeSymbol type
                 && type.Is(KnownType.System_Security_Cryptography_CspParameters));
 
         private static void CheckGenericDsaRsaCryptographyAlgorithms(SonarSyntaxNodeReportingContext c, ITypeSymbol containingType, SyntaxNode syntaxElement, SyntaxNode keyLengthSyntax)
@@ -227,7 +227,7 @@ namespace SonarAnalyzer.Rules.CSharp
         }
 
         private static bool IsInvalidCommonKeyLength(SonarSyntaxNodeReportingContext c, SyntaxNode keyLengthSyntax) =>
-            keyLengthSyntax.FindConstantValue(c.SemanticModel) is int keyLength && keyLength < MinimalCommonKeyLength;
+            keyLengthSyntax.FindConstantValue(c.Model) is int keyLength && keyLength < MinimalCommonKeyLength;
 
         private static string GetMethodName(InvocationExpressionSyntax invocationExpression) =>
             invocationExpression.Expression.GetIdentifier()?.ValueText;

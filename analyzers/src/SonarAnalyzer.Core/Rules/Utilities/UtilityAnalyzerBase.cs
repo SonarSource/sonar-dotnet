@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Rules
                 {
                     if (ShouldGenerateMetrics(parameters, modelContext))
                     {
-                        var message = CreateMessage(parameters, modelContext.Tree, modelContext.SemanticModel);
+                        var message = CreateMessage(parameters, modelContext.Tree, modelContext.Model);
                         treeMessages.Push(message);
                     }
                 });

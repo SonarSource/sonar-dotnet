@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
-                    if (c.Node.HasFlagsAttribute(c.SemanticModel) && !AreAllRequiredMembersInitialized(c.Node) && Language.Syntax.NodeIdentifier(c.Node) is { } identifier)
+                    if (c.Node.HasFlagsAttribute(c.Model) && !AreAllRequiredMembersInitialized(c.Node) && Language.Syntax.NodeIdentifier(c.Node) is { } identifier)
                     {
                         c.ReportIssue(Rule, identifier);
                     }

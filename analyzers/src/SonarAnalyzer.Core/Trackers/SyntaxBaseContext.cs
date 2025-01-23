@@ -22,7 +22,7 @@ public class SyntaxBaseContext : BaseContext
     public SyntaxNode Node { get; }
     public Location PrimaryLocation { get; set; }
 
-    public SyntaxBaseContext(SonarSyntaxNodeReportingContext context) : this(context.Node, context.SemanticModel) { }
+    public SyntaxBaseContext(SonarSyntaxNodeReportingContext context) : this(context.Node, context.Model) { }
 
     public SyntaxBaseContext(SyntaxNode node, SemanticModel model)
     {

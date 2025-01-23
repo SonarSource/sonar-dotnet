@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var enumBaseType = enumDeclaration?.BaseList?.Types.FirstOrDefault()?.Type;
 
                     if (enumDeclaration != null &&
-                        !IsDefaultOrLarger(enumBaseType, c.SemanticModel))
+                        !IsDefaultOrLarger(enumBaseType, c.Model))
                     {
                         c.ReportIssue(rule, enumDeclaration.Identifier);
                     }

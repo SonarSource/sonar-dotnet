@@ -173,8 +173,8 @@ namespace SonarAnalyzer.Rules
                 context =>
                 {
                     var declarator = (TSyntaxNode)context.Node;
-                    if (ShouldHandle(declarator, context.SemanticModel)
-                        && GetAssignedValue(declarator, context.SemanticModel) is { } variableValue
+                    if (ShouldHandle(declarator, context.Model)
+                        && GetAssignedValue(declarator, context.Model) is { } variableValue
                         && analyzer.ShouldRaise(GetVariableName(declarator), variableValue, out string message))
                     {
                         context.ReportIssue(analyzer.rule, declarator, message);

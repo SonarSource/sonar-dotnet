@@ -44,7 +44,7 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
             {
-                var walker = new ConsumeValueTaskWalker(c.SemanticModel);
+                var walker = new ConsumeValueTaskWalker(c.Model);
                 walker.SafeVisit(c.Node);
 
                 foreach (var syntaxNodes in walker.SymbolUsages.Values)

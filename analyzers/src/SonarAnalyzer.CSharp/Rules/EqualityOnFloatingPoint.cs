@@ -53,8 +53,8 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
             && TryGetBinaryExpression(binaryExpression.Right) is { } right
             && CSharpEquivalenceChecker.AreEquivalent(right.Right, left.Right)
             && CSharpEquivalenceChecker.AreEquivalent(right.Left, left.Left)
-            && IsIndirectEquality(context.SemanticModel, binaryExpression, left, right) is var isEquality
-            && IsIndirectInequality(context.SemanticModel, binaryExpression, left, right) is var isInequality
+            && IsIndirectEquality(context.Model, binaryExpression, left, right) is var isEquality
+            && IsIndirectInequality(context.Model, binaryExpression, left, right) is var isInequality
             && (isEquality || isInequality))
         {
             context.ReportIssue(Rule, binaryExpression, MessageEqualityPart(isEquality), "a range");
@@ -67,7 +67,7 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     private static void CheckEquality(SonarSyntaxNodeReportingContext context)
     {
         var equals = (BinaryExpressionSyntax)context.Node;
-        if (context.SemanticModel.GetSymbolInfo(equals).Symbol is IMethodSymbol { ContainingType: { } container } method
+        if (context.Model.GetSymbolInfo(equals).Symbol is IMethodSymbol { ContainingType: { } container } method
             && IsFloatingPointType(container)
             && (method.IsOperatorEquals() || method.IsOperatorNotEquals()))
         {
@@ -84,15 +84,15 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     private static string ProposedMessageForMemberAccess(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
         expression is MemberAccessExpressionSyntax memberAccess
         && SpecialMembers.TryGetValue(memberAccess.GetName(), out var proposedMethod)
-        && context.SemanticModel.GetTypeInfo(memberAccess).ConvertedType is { } type
+        && context.Model.GetTypeInfo(memberAccess).ConvertedType is { } type
         && IsFloatingPointType(type)
-            ? $"'{type.ToMinimalDisplayString(context.SemanticModel, memberAccess.SpanStart)}.{proposedMethod}()'"
+            ? $"'{type.ToMinimalDisplayString(context.Model, memberAccess.SpanStart)}.{proposedMethod}()'"
             : null;
 
     private static string ProposedMessageForIdentifier(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
         expression is IdentifierNameSyntax identifier
         && SpecialMembers.TryGetValue(identifier.GetName(), out var proposedMethod)
-        && context.SemanticModel.GetSymbolInfo(identifier).Symbol is { ContainingType: { } type }
+        && context.Model.GetSymbolInfo(identifier).Symbol is { ContainingType: { } type }
         && IsFloatingPointType(type)
             ? $"'{proposedMethod}()'"
             : null;

@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var typeDeclaration = (TypeDeclarationSyntax)c.Node;
                     if (!c.IsRedundantPositionalRecordContext()
                         && !typeDeclaration.Identifier.IsMissing
-                        && c.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol
+                        && c.Model.GetDeclaredSymbol(typeDeclaration) is { } typeSymbol
                         && IsViolatingRule(typeSymbol)
                         && !IsExceptionToTheRule(typeSymbol))
                     {

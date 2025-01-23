@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var assignment = (AssignmentExpressionSyntax)c.Node;
-                    var operation = c.SemanticModel.GetSymbolInfo(assignment).Symbol as IMethodSymbol;
+                    var operation = c.Model.GetSymbolInfo(assignment).Symbol as IMethodSymbol;
                     if (!IsOperationAddOnString(operation))
                     {
                         return;
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var binary = (BinaryExpressionSyntax)c.Node;
-                    var operation = c.SemanticModel.GetSymbolInfo(binary).Symbol as IMethodSymbol;
+                    var operation = c.Model.GetSymbolInfo(binary).Symbol as IMethodSymbol;
                     if (!IsOperationAddOnString(operation))
                     {
                         return;
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!IsArgumentlessToStringCallNotOnBaseExpression(invocation, c.SemanticModel, out var location, out var methodSymbol))
+                    if (!IsArgumentlessToStringCallNotOnBaseExpression(invocation, c.Model, out var location, out var methodSymbol))
                     {
                         return;
                     }
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (!TryGetExpressionTypeOfOwner(invocation, c.SemanticModel, out var subExpressionType) ||
+                    if (!TryGetExpressionTypeOfOwner(invocation, c.Model, out var subExpressionType) ||
                         subExpressionType.IsValueType)
                     {
                         return;
@@ -98,12 +98,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var stringFormatArgument = invocation?.Parent as ArgumentSyntax;
                     if (!(stringFormatArgument?.Parent?.Parent is InvocationExpressionSyntax stringFormatInvocation) ||
-                        !IsStringFormatCall(c.SemanticModel.GetSymbolInfo(stringFormatInvocation).Symbol as IMethodSymbol))
+                        !IsStringFormatCall(c.Model.GetSymbolInfo(stringFormatInvocation).Symbol as IMethodSymbol))
                     {
                         return;
                     }
 
-                    var parameterLookup = new CSharpMethodParameterLookup(stringFormatInvocation, c.SemanticModel);
+                    var parameterLookup = new CSharpMethodParameterLookup(stringFormatInvocation, c.Model);
                     if (parameterLookup.TryGetSymbol(stringFormatArgument, out var argParameter) &&
                         argParameter.Name.StartsWith("arg", StringComparison.Ordinal))
                     {
@@ -132,19 +132,19 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExpressionForRemovableToStringCall(SonarSyntaxNodeReportingContext context,
             ExpressionSyntax expressionWithToStringCall, ExpressionSyntax otherOperandOfAddition, int checkedSideIndex)
         {
-            if (!IsArgumentlessToStringCallNotOnBaseExpression(expressionWithToStringCall, context.SemanticModel, out var location, out var methodSymbol) ||
+            if (!IsArgumentlessToStringCallNotOnBaseExpression(expressionWithToStringCall, context.Model, out var location, out var methodSymbol) ||
                 methodSymbol.IsInType(KnownType.System_String))
             {
                 return;
             }
 
-            var sideBType = context.SemanticModel.GetTypeInfo(otherOperandOfAddition).Type;
+            var sideBType = context.Model.GetTypeInfo(otherOperandOfAddition).Type;
             if (!sideBType.Is(KnownType.System_String))
             {
                 return;
             }
 
-            if (!TryGetExpressionTypeOfOwner((InvocationExpressionSyntax)expressionWithToStringCall, context.SemanticModel, out var subExpressionType) ||
+            if (!TryGetExpressionTypeOfOwner((InvocationExpressionSyntax)expressionWithToStringCall, context.Model, out var subExpressionType) ||
                 subExpressionType.IsValueType)
             {
                 return;

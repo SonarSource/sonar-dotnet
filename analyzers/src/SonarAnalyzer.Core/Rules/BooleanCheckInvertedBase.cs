@@ -34,8 +34,8 @@ namespace SonarAnalyzer.Rules
             {
                 var expression = (TBinaryExpression)c.Node;
 
-                if (IsUserDefinedOperator(expression, c.SemanticModel) ||
-                    IsIgnoredNullableOperation(expression, c.SemanticModel))
+                if (IsUserDefinedOperator(expression, c.Model) ||
+                    IsIgnoredNullableOperation(expression, c.Model))
                 {
                     return;
                 }

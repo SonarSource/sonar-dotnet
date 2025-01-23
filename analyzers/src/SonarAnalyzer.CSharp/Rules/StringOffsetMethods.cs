@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(analysisContext =>
                 {
                     var invocationExpression = (InvocationExpressionSyntax)analysisContext.Node;
-                    var semanticModel = analysisContext.SemanticModel;
+                    var semanticModel = analysisContext.Model;
 
                     if (IsTargetMethodInvocation(invocationExpression, semanticModel) &&
                         HasSubstringMethodInvocationChild(invocationExpression, semanticModel))

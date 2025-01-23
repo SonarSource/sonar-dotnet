@@ -40,25 +40,25 @@ public sealed class InvocationResolvesToOverrideWithParams : SonarDiagnosticAnal
     private static void CheckCall(SonarSyntaxNodeReportingContext context, SyntaxNode node, ArgumentListSyntax argumentList)
     {
         if (argumentList is { Arguments.Count: > 0 }
-            && context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol method
+            && context.Model.GetSymbolInfo(node).Symbol is IMethodSymbol method
             && method.Parameters.LastOrDefault() is { IsParams: true }
-            && !IsInvocationWithExplicitArray(argumentList, method, context.SemanticModel)
+            && !IsInvocationWithExplicitArray(argumentList, method, context.Model)
             && ArgumentTypes(context, argumentList) is var argumentTypes
             && Array.TrueForAll(argumentTypes, x => x is not IErrorTypeSymbol)
             && OtherOverloadsOf(method).FirstOrDefault(IsPossibleMatch) is { } otherMethod
             && method.IsGenericMethod == otherMethod.IsGenericMethod)
         {
-            context.ReportIssue(Rule, node, otherMethod.ToMinimalDisplayString(context.SemanticModel, node.SpanStart));
+            context.ReportIssue(Rule, node, otherMethod.ToMinimalDisplayString(context.Model, node.SpanStart));
         }
 
         bool IsPossibleMatch(IMethodSymbol method) =>
-            ArgumentsMatchParameters(argumentList, argumentTypes, method, context.SemanticModel)
+            ArgumentsMatchParameters(argumentList, argumentTypes, method, context.Model)
             && MethodAccessibleWithinType(method, context.ContainingSymbol.ContainingType);
     }
 
     private static ITypeSymbol[] ArgumentTypes(SonarSyntaxNodeReportingContext context, ArgumentListSyntax argumentList) =>
         argumentList.Arguments
-            .Select(x => context.SemanticModel.GetTypeInfo(x.Expression))
+            .Select(x => context.Model.GetTypeInfo(x.Expression))
             .Select(x => x.Type ?? x.ConvertedType) // Action and Func won't always resolve properly with Type
             .ToArray();
 

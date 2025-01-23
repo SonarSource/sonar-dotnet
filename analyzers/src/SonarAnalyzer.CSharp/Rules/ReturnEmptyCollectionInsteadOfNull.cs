@@ -76,7 +76,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
 
     private static ITypeSymbol GetType(SonarSyntaxNodeReportingContext context)
     {
-        var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
+        var symbol = context.Model.GetDeclaredSymbol(context.Node);
         return symbol is IPropertySymbol property ? property.Type : ((IMethodSymbol)symbol).ReturnType;
     }
 

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(method);
+                    var methodSymbol = c.Model.GetDeclaredSymbol(method);
 
                     if (methodSymbol is not null
                         && methodSymbol.IsOverride

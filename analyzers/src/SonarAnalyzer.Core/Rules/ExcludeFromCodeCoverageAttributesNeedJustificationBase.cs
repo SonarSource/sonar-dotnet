@@ -34,8 +34,8 @@ public abstract class ExcludeFromCodeCoverageAttributesNeedJustificationBase<TSy
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (NoJustification(c.Node, c.SemanticModel)
-                    && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol attribute
+                if (NoJustification(c.Node, c.Model)
+                    && c.Model.GetSymbolInfo(c.Node).Symbol is IMethodSymbol attribute
                     && attribute.IsInType(KnownType.System_Diagnostics_CodeAnalysis_ExcludeFromCodeCoverageAttribute)
                     && HasJustificationProperty(attribute.ContainingType))
                 {

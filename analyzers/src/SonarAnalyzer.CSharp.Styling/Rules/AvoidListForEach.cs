@@ -26,7 +26,7 @@ public sealed class AvoidListForEach : StylingAnalyzer
             {
                 var name = ((MemberAccessExpressionSyntax)c.Node).Name;
                 if (name.Identifier.ValueText == nameof(List<int>.ForEach)
-                    && c.SemanticModel.GetSymbolInfo(name).Symbol is IMethodSymbol method
+                    && c.Model.GetSymbolInfo(name).Symbol is IMethodSymbol method
                     && method.Is(KnownType.System_Collections_Generic_List_T, nameof(List<int>.ForEach)))
                 {
                     c.ReportIssue(Rule, name);

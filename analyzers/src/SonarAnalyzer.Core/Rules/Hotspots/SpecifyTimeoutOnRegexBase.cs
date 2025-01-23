@@ -60,7 +60,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
                 }
 
                 if (IsCandidateCtor(c.Node)
-                    && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
+                    && RegexMethodLacksTimeout(c.Node, c.Model))
                 {
                     c.ReportIssue(Rule, c.Node);
                 }
@@ -77,7 +77,7 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
                 }
 
                 if (IsRegexMatchMethod(Language.Syntax.NodeIdentifier(c.Node).GetValueOrDefault().Text)
-                    && RegexMethodLacksTimeout(c.Node, c.SemanticModel))
+                    && RegexMethodLacksTimeout(c.Node, c.Model))
                 {
                     c.ReportIssue(Rule, c.Node);
                 }

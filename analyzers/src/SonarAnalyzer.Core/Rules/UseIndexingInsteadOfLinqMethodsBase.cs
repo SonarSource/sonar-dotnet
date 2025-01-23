@@ -39,8 +39,8 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
 
             if (HasValidSignature(invocation, out var methodName, out var indexDescriptor)
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
-                && IsCorrectType(left, c.SemanticModel)
-                && IsCorrectCall(right, c.SemanticModel))
+                && IsCorrectType(left, c.Model)
+                && IsCorrectCall(right, c.Model))
             {
                 c.ReportIssue(
                     Rule,

@@ -49,10 +49,10 @@ namespace SonarAnalyzer.Rules
             var left = getLeft(expression);
             var right = getRight(expression);
 
-            if (!IsErrorType(right, context.SemanticModel, out var typeOfRight)
-                && ShouldRaise(context.SemanticModel, left, right))
+            if (!IsErrorType(right, context.Model, out var typeOfRight)
+                && ShouldRaise(context.Model, left, right))
             {
-                var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.SemanticModel);
+                var typeInMessage = GetTypeNameForMessage(right, typeOfRight, context.Model);
                 context.ReportIssue(Rule, right, typeInMessage);
             }
         }

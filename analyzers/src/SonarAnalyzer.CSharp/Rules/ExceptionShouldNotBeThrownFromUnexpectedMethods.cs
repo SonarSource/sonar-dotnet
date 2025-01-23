@@ -47,7 +47,7 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(
-            c => CheckForIssue<MethodDeclarationSyntax>(c, mds => IsTrackedMethod(mds, c.SemanticModel), DefaultAllowedExceptions),
+            c => CheckForIssue<MethodDeclarationSyntax>(c, mds => IsTrackedMethod(mds, c.Model), DefaultAllowedExceptions),
             SyntaxKind.MethodDeclaration);
 
         context.RegisterNodeAction(
@@ -133,7 +133,7 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
         // Because of the ShimLayer ThrowExpression implementation, we need to provide extra boilerplate as the wrappers to extract the node and the expression.
         // The location is returned only if an issue should be reported. Otherwise, null is returned.
         Location GetLocationToReport<TThrow>(IEnumerable<TThrow> throwNodes, Func<TThrow, SyntaxNode> getNode, Func<TThrow, ExpressionSyntax> getExpression) =>
-            throwNodes.Select(x => new NodeAndSymbol(getNode(x), context.SemanticModel.GetSymbolInfo(getExpression(x)).Symbol))
+            throwNodes.Select(x => new NodeAndSymbol(getNode(x), context.Model.GetSymbolInfo(getExpression(x)).Symbol))
                 .FirstOrDefault(x => x.Symbol is not null && ShouldReport(x.Symbol.ContainingType, allowedTypes))?
                 .Node
                 .GetLocation();

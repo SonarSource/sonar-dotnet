@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules
                                 return;
                             }
 
-                            var type = c.SemanticModel.GetTypeInfo(throwExpression).Type;
+                            var type = c.Model.GetTypeInfo(throwExpression).Type;
                             if (type == null || type.DerivesFromAny(AllowedExceptionBaseTypes))
                             {
                                 return;

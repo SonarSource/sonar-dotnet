@@ -92,7 +92,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
             {
                 var operatorDeclaration = (OperatorDeclarationSyntax)c.Node;
-                var operatorSymbol = c.SemanticModel.GetDeclaredSymbol(operatorDeclaration);
+                var operatorSymbol = c.Model.GetDeclaredSymbol(operatorDeclaration);
                 if (operatorSymbol == null ||
                     operatorSymbol.MethodKind != MethodKind.UserDefinedOperator)
                 {

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var hasResx = false;
                     context.RegisterNodeActionInAllFiles(cc =>
-                        hasResx = hasResx || IsResxGeneratedFile(cc.SemanticModel, (ClassDeclarationSyntax)cc.Node),
+                        hasResx = hasResx || IsResxGeneratedFile(cc.Model, (ClassDeclarationSyntax)cc.Node),
                         SyntaxKind.ClassDeclaration);
 
                     c.RegisterCompilationEndAction(cc =>

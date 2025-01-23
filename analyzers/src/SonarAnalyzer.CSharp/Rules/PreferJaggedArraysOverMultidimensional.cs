@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             where TSyntax : SyntaxNode
         {
             var syntax = (TSyntax)context.Node;
-            var typeSymbol = getTypeSymbol(context.SemanticModel, syntax);
+            var typeSymbol = getTypeSymbol(context.Model, syntax);
             if (typeSymbol == null)
             {
                 return;

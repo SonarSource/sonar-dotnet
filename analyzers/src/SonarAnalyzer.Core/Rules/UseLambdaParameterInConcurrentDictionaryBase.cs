@@ -38,8 +38,8 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
 
             if (HasCorrectName(Language.GetName(invocation))
                 && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
-                && IsCorrectType(left, c.SemanticModel)
-                && IsCorrectCall(right, c.SemanticModel)
+                && IsCorrectType(left, c.Model)
+                && IsCorrectCall(right, c.Model)
                 && GetArguments(invocation) is { Count: > 1 } arguments
                 && TryGetKeyName(arguments[0], out var keyName))
             {

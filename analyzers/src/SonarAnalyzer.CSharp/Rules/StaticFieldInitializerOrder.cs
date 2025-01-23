@@ -48,12 +48,12 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-                    var containingType = c.SemanticModel.GetDeclaredSymbol(variables[0]).ContainingType;
+                    var containingType = c.Model.GetDeclaredSymbol(variables[0]).ContainingType;
                     var typeDeclaration = fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>(x => x.IsAnyKind(EnclosingTypes));
 
                     foreach (var variable in variables)
                     {
-                        if (IdentifierFields(variable, containingType, c.SemanticModel)
+                        if (IdentifierFields(variable, containingType, c.Model)
                                 .Select(x => new IdentifierTypeDeclarationMapping(x, GetTypeDeclaration(x)))
                                 .Any(x => x.TypeDeclaration is not null && (x.TypeDeclaration != typeDeclaration || x.Field.DeclaringSyntaxReferences.First().Span.Start > variable.SpanStart)))
                         {

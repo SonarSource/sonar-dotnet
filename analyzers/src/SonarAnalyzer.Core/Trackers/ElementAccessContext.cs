@@ -21,5 +21,5 @@ public class ElementAccessContext : SyntaxBaseContext
     public Lazy<IPropertySymbol> InvokedPropertySymbol { get; }
 
     public ElementAccessContext(SonarSyntaxNodeReportingContext context) : base(context) =>
-        InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => context.SemanticModel.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
+        InvokedPropertySymbol = new Lazy<IPropertySymbol>(() => context.Model.GetSymbolInfo(context.Node).Symbol as IPropertySymbol);
 }

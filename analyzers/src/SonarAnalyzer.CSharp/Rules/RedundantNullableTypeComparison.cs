@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckGetTypeAndTypeOfEquality(SonarSyntaxNodeReportingContext context, ExpressionSyntax sideA, ExpressionSyntax sideB, Location location)
         {
-            if (!(sideA as InvocationExpressionSyntax).IsGetTypeCall(context.SemanticModel))
+            if (!(sideA as InvocationExpressionSyntax).IsGetTypeCall(context.Model))
             {
                 return;
             }
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var typeSymbol = context.SemanticModel.GetTypeInfo(typeSyntax).Type;
+            var typeSymbol = context.Model.GetTypeInfo(typeSyntax).Type;
             if (typeSymbol != null &&
                 typeSymbol.OriginalDefinition.Is(KnownType.System_Nullable_T))
             {

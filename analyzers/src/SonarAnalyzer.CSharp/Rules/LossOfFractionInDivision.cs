@@ -32,17 +32,17 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var division = (BinaryExpressionSyntax)c.Node;
 
-                    if (c.SemanticModel.GetSymbolInfo(division).Symbol as IMethodSymbol is not { } symbol
+                    if (c.Model.GetSymbolInfo(division).Symbol as IMethodSymbol is not { } symbol
                         || !symbol.ContainingType.IsAny(KnownType.IntegralNumbersIncludingNative))
                     {
                         return;
                     }
 
-                    if (DivisionIsInAssignmentAndTypeIsNonIntegral(division, c.SemanticModel, out var divisionResultType)
-                        || DivisionIsArgumentAndTypeIsNonIntegral(division, c.SemanticModel, out divisionResultType)
-                        || DivisionIsInReturnAndTypeIsNonIntegral(division, c.SemanticModel, out divisionResultType))
+                    if (DivisionIsInAssignmentAndTypeIsNonIntegral(division, c.Model, out var divisionResultType)
+                        || DivisionIsArgumentAndTypeIsNonIntegral(division, c.Model, out divisionResultType)
+                        || DivisionIsInReturnAndTypeIsNonIntegral(division, c.Model, out divisionResultType))
                     {
-                        c.ReportIssue(Rule, division, divisionResultType.ToMinimalDisplayString(c.SemanticModel, division.SpanStart));
+                        c.ReportIssue(Rule, division, divisionResultType.ToMinimalDisplayString(c.Model, division.SpanStart));
                     }
                 },
                 SyntaxKind.DivideExpression);

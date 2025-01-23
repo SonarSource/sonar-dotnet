@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var attributes = AttributeSyntaxSymbolMapping.GetAttributesForParameter(parameter, c.SemanticModel).ToList();
+                    var attributes = AttributeSyntaxSymbolMapping.GetAttributesForParameter(parameter, c.Model).ToList();
 
                     var hasNoOptional = attributes.All(attr => !attr.Symbol.IsInType(KnownType.System_Runtime_InteropServices_OptionalAttribute));
                     if (hasNoOptional)

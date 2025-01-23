@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules
                 return;
             }
 
-            if (!(c.SemanticModel.GetDeclaredSymbol(declaration) is ITypeSymbol symbol)
+            if (!(c.Model.GetDeclaredSymbol(declaration) is ITypeSymbol symbol)
                 || symbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute)
                 || symbol.GetSelfAndBaseTypes()
                          .Union(symbol.AllInterfaces)
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules
             c.ReportIssue(SupportedDiagnostics[0], attribute);
 
             bool IsPartCreationPolicyAttribute(TAttributeSyntax attributeSyntax) =>
-                c.SemanticModel.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol
+                c.Model.GetSymbolInfo(attributeSyntax).Symbol is IMethodSymbol attributeSymbol
                 && attributeSymbol.ContainingType.Is(KnownType.System_ComponentModel_Composition_PartCreationPolicyAttribute);
         }
     }

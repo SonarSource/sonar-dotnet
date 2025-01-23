@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var assignment = (AssignmentExpressionSyntax)c.Node;
 
 
-                    if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is IEventSymbol @event &&
+                    if (c.Model.GetSymbolInfo(assignment.Left).Symbol is IEventSymbol @event &&
                         assignment.Right is AnonymousFunctionExpressionSyntax)
                     {
                         c.ReportIssue(rule, assignment.OperatorToken.CreateLocation(assignment));

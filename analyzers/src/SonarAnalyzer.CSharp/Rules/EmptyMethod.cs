@@ -44,7 +44,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool ShouldBeExcluded(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxTokenList modifiers) =>
             modifiers.Any(SyntaxKind.VirtualKeyword) // This quick check only works for methods, for accessors we need to check the symbol
-            || (context.SemanticModel.GetDeclaredSymbol(node) is IMethodSymbol symbol
+            || (context.Model.GetDeclaredSymbol(node) is IMethodSymbol symbol
                 && (symbol is { IsVirtual: true }
                     || symbol is { IsOverride: true, OverriddenMethod.IsAbstract: true }
                     || !symbol.ExplicitOrImplicitInterfaceImplementations().IsEmpty))

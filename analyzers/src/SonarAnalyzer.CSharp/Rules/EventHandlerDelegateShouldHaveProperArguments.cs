@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    if (!(c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
+                    if (!(c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol) ||
                         methodSymbol.MethodKind != MethodKind.DelegateInvoke ||
                         !methodSymbol.ContainingType.ConstructedFrom.IsAny(EventHandlerTypes))
                     {
@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         c.ReportIssue(rule, invocation, NullEventArgsMessage);
                     }
 
-                    var eventSymbol = GetEventSymbol(invocation.Expression, c.SemanticModel);
+                    var eventSymbol = GetEventSymbol(invocation.Expression, c.Model);
                     if (eventSymbol == null)
                     {
                         return;

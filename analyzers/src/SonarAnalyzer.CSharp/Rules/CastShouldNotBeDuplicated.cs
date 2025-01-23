@@ -78,7 +78,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
 
     private static Location[] DuplicatedCastLocations(SonarSyntaxNodeReportingContext context, SyntaxNode parentStatement, TypeSyntax castType, SyntaxNode typedVariable)
     {
-        var typeExpressionSymbol = context.SemanticModel.GetSymbolInfo(typedVariable).Symbol ?? context.SemanticModel.GetDeclaredSymbol(typedVariable);
+        var typeExpressionSymbol = context.Model.GetSymbolInfo(typedVariable).Symbol ?? context.Model.GetDeclaredSymbol(typedVariable);
         return typeExpressionSymbol is null ? [] : parentStatement.DescendantNodes().Where(IsDuplicatedCast).Select(x => x.GetLocation()).ToArray();
 
         bool IsDuplicatedCast(SyntaxNode node)
@@ -100,11 +100,11 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
         bool IsDuplicatedCastOnSameSymbol(ExpressionSyntax expression, SyntaxNode type) =>
             type.WithoutTrivia().IsEquivalentTo(castType.WithoutTrivia())
             && IsCastOnSameSymbol(expression)
-            && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.SemanticModel, expression); // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
+            && !CSharpFacade.Instance.Syntax.IsInExpressionTree(context.Model, expression); // see https://github.com/SonarSource/sonar-dotnet/issues/8735#issuecomment-1943419398
 
         bool IsCastOnSameSymbol(ExpressionSyntax expression) =>
             IsEquivalentVariable(expression, typedVariable)
-            && Equals(context.SemanticModel.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
+            && Equals(context.Model.GetSymbolInfo(expression).Symbol, typeExpressionSymbol);
     }
 
     private static void ProcessPatternExpression(SonarSyntaxNodeReportingContext analysisContext, SyntaxNode isPattern, SyntaxNode mainVariableExpression, SyntaxNode parentStatement)

@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules
         {
             SplitAssignment((TAssignmentExpressionSyntax)c.Node, out var leftIdentifier, out var right);
             if (leftIdentifier != null && right != null
-                && c.SemanticModel.GetSymbolInfo(leftIdentifier).Symbol is IPropertySymbol left
+                && c.Model.GetSymbolInfo(leftIdentifier).Symbol is IPropertySymbol left
                 && IsValidationDelegateType(left.Type))
             {
                 TryReportLocations(new InspectionContext(c), leftIdentifier.GetLocation(), right);
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
 
         protected void CheckConstructorParameterSyntax(SonarSyntaxNodeReportingContext c)
         {
-            if (c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor)
+            if (c.Model.GetSymbolInfo(c.Node).Symbol is IMethodSymbol ctor)
             {
                 MethodParameterLookupBase<TArgumentSyntax> methodParamLookup = null;       // Cache, there might be more of them
                 // Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules
             if (containingMethodDeclaration != null && !c.VisitedMethods.Contains(containingMethodDeclaration))
             {
                 c.VisitedMethods.Add(containingMethodDeclaration);
-                var containingMethod = c.Context.SemanticModel.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
+                var containingMethod = c.Context.Model.GetDeclaredSymbol(containingMethodDeclaration) as IMethodSymbol;
                 var identText = Language.Syntax.NodeIdentifier(param)?.ValueText;
                 var paramSymbol = containingMethod?.Parameters.Single(x => x.Name == identText);
                 if (paramSymbol is {IsParams: false})  // Validation for TryGetNonParamsSyntax, ParamArray/params and therefore array arguments are not inspected
@@ -177,7 +177,7 @@ namespace SonarAnalyzer.Rules
             switch (ExtractArgumentExpressionNode(expression))
             {
                 case TIdentifierNameSyntax identifier:
-                    if (c.Context.SemanticModel.GetSymbolInfo(identifier).Symbol is {DeclaringSyntaxReferences: {Length: 1}} identSymbol)
+                    if (c.Context.Model.GetSymbolInfo(identifier).Symbol is {DeclaringSyntaxReferences: {Length: 1}} identSymbol)
                     {
                         return IdentifierLocations(c, SyntaxFromReference(identSymbol.DeclaringSyntaxReferences.Single()));
                     }
@@ -187,7 +187,7 @@ namespace SonarAnalyzer.Rules
                 case TInvocationExpressionSyntax invocation:
                     return VisitInvocation(invocation, c);
                 case TMemberAccessSyntax memberAccess:
-                    if (c.Context.SemanticModel.GetSymbolInfo(memberAccess).Symbol is { } maSymbol
+                    if (c.Context.Model.GetSymbolInfo(memberAccess).Symbol is { } maSymbol
                         && maSymbol.IsInType(KnownType.System_Net_Http_HttpClientHandler)
                         && maSymbol.Name == "DangerousAcceptAnyServerCertificateValidator")
                     {
@@ -200,7 +200,7 @@ namespace SonarAnalyzer.Rules
 
         private ImmutableArray<Location> VisitInvocation(TInvocationExpressionSyntax invocation, InspectionContext c)
         {
-            var invSymbol = (IMethodSymbol)c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+            var invSymbol = (IMethodSymbol)c.Context.Model.GetSymbolInfo(invocation).Symbol;
             var references = invSymbol.PartialImplementationPart?.DeclaringSyntaxReferences ?? invSymbol.DeclaringSyntaxReferences;
             if (references.Length == 0)
             {
@@ -256,7 +256,7 @@ namespace SonarAnalyzer.Rules
 
         private bool IsVisited(InspectionContext c, SyntaxNode expression) =>
             expression is TInvocationExpressionSyntax invocation
-            && c.Context.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
+            && c.Context.Model.GetSymbolInfo(invocation).Symbol is { } symbol
             && symbol.DeclaringSyntaxReferences.Select(SyntaxFromReference).Any(x => c.VisitedMethods.Contains(x));
 
         private ImmutableArray<Location> MultiExpressionSublocations(InspectionContext c, IEnumerable<TExpressionSyntax> expressions)
@@ -298,7 +298,7 @@ namespace SonarAnalyzer.Rules
             {
                 if (Language.Syntax.InvocationIdentifier(invocation) is { } invocationIdentifier
                     && invocationIdentifier.ValueText.Equals(method.Name, Language.NameComparison)
-                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is { } symbol
+                    && c.Model.GetSymbolInfo(invocation).Symbol is { } symbol
                     && symbol.Equals(method))
                 {
                     ret.Add(invocation);

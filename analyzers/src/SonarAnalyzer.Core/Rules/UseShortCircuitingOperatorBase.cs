@@ -37,11 +37,11 @@ namespace SonarAnalyzer.Rules
                     if (c.Node is TBinaryExpression node
                         && Language.Syntax.BinaryExpressionLeft(node) is { } left
                         && Language.Syntax.BinaryExpressionRight(node) is { } right
-                        && IsBool(left, c.SemanticModel)
-                        && IsBool(right, c.SemanticModel))
+                        && IsBool(left, c.Model)
+                        && IsBool(right, c.Model))
                     {
-                        var extractText = c.SemanticModel.GetConstantValue(right) is { HasValue: true }
-                            || c.SemanticModel.GetSymbolInfo(right).Symbol is ILocalSymbol or IFieldSymbol or IPropertySymbol or IParameterSymbol
+                        var extractText = c.Model.GetConstantValue(right) is { HasValue: true }
+                            || c.Model.GetSymbolInfo(right).Symbol is ILocalSymbol or IFieldSymbol or IPropertySymbol or IParameterSymbol
                                 ? string.Empty
                                 : " and extract the right operand to a variable if it should always be evaluated";
                         c.ReportIssue(SupportedDiagnostics[0], GetOperator(node), GetCurrentOpName(node), GetSuggestedOpName(node), extractText);

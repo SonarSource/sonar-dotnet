@@ -67,9 +67,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     var invocation = (InvocationExpressionSyntax)c.Node;
                     if (invocation.ArgumentList != null
                         && IsFirstOrSecondArgumentABoolLiteral(invocation.ArgumentList.Arguments)
-                        && c.SemanticModel.GetSymbolOrCandidateSymbol(invocation) is IMethodSymbol methodSymbol
+                        && c.Model.GetSymbolOrCandidateSymbol(invocation) is IMethodSymbol methodSymbol
                         && IsTrackedMethod(methodSymbol)
-                        && !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.SemanticModel))
+                        && !IsWorkingWithNullableType(methodSymbol, invocation.ArgumentList.Arguments, c.Model))
                     {
                         c.ReportIssue(Rule, invocation);
                     }

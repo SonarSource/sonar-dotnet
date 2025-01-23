@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
-                    var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
+                    var propertySymbol = c.Model.GetDeclaredSymbol(propertyDeclaration);
 
                     if (propertyDeclaration.AccessorList != null
                         && !propertyDeclaration.AccessorList.Accessors.AnyOfKind(SyntaxKindEx.InitAccessorDeclaration)

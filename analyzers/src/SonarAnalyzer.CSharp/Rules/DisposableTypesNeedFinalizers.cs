@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var declaration = (TypeDeclarationSyntax)c.Node;
                 if (!c.IsRedundantPositionalRecordContext()
                     && ((ITypeSymbol)c.ContainingSymbol).Implements(KnownType.System_IDisposable)
-                    && HasNativeHandleFields(declaration, c.SemanticModel)
+                    && HasNativeHandleFields(declaration, c.Model)
                     && !HasFinalizer(declaration))
                 {
                     c.ReportIssue(Rule, declaration.Identifier);

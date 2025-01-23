@@ -50,8 +50,8 @@ public sealed class FieldsShouldBeEncapsulatedInProperties : SonarDiagnosticAnal
                 }
 
                 var firstVariable = fieldDeclaration.Declaration.Variables[0];
-                var symbol = c.SemanticModel.GetDeclaredSymbol(firstVariable);
-                var parentSymbol = c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Parent);
+                var symbol = c.Model.GetDeclaredSymbol(firstVariable);
+                var parentSymbol = c.Model.GetDeclaredSymbol(fieldDeclaration.Parent);
                 if (symbol.ContainingType.DerivesFromAny(IgnoredTypes)
                     || parentSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute)
                     || Serializable(symbol, parentSymbol))

@@ -35,8 +35,8 @@ namespace SonarAnalyzer.Rules.CSharp
                     var outerInvocation = (InvocationExpressionSyntax)c.Node;
                     if (outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess &&
                         memberAccess.Expression is InvocationExpressionSyntax innerInvocation &&
-                        IsMethodOrderByExtension(outerInvocation, c.SemanticModel) &&
-                        IsOrderByOrThenBy(innerInvocation, c.SemanticModel))
+                        IsMethodOrderByExtension(outerInvocation, c.Model) &&
+                        IsOrderByOrThenBy(innerInvocation, c.Model))
                     {
                         c.ReportIssue(rule, memberAccess.Name);
                     }

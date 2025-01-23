@@ -33,9 +33,9 @@ public abstract class ConstructorArgumentValueShouldExistBase<TSyntaxKind, TAttr
             c =>
             {
                 var attribute = (TAttribute)c.Node;
-                if (Language.Syntax.IsKnownAttributeType(c.SemanticModel, c.Node, KnownType.System_Windows_Markup_ConstructorArgumentAttribute)
+                if (Language.Syntax.IsKnownAttributeType(c.Model, c.Node, KnownType.System_Windows_Markup_ConstructorArgumentAttribute)
                     && GetFirstAttributeArgument(attribute) is { } firstAttribute
-                    && c.SemanticModel.GetConstantValue(Language.Syntax.NodeExpression(firstAttribute)) is { HasValue: true, Value: string constructorParameterName }
+                    && c.Model.GetConstantValue(Language.Syntax.NodeExpression(firstAttribute)) is { HasValue: true, Value: string constructorParameterName }
                     && c.ContainingSymbol is IPropertySymbol { ContainingType: { } containingType }
                     && !GetConstructorParameterNames(containingType).Contains(constructorParameterName))
                 {

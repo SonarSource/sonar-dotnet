@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (c.SemanticModel.GetSymbolInfo(assignment.Left).Symbol is not IPropertySymbol)
+            if (c.Model.GetSymbolInfo(assignment.Left).Symbol is not IPropertySymbol)
             {
                 c.ReportIssue(Rule, condition);
             }

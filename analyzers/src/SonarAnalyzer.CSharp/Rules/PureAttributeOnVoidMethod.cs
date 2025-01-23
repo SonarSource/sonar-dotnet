@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     if ((LocalFunctionStatementSyntaxWrapper)c.Node is var localFunction
                         && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(IsPureAttribute)
-                        && InvalidPureDataAttributeUsage((IMethodSymbol)c.SemanticModel.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
+                        && InvalidPureDataAttributeUsage((IMethodSymbol)c.Model.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
                     {
                         c.ReportIssue(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax());
                     }

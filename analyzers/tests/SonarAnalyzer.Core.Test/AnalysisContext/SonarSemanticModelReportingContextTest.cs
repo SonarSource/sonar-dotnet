@@ -34,7 +34,7 @@ public class SonarSemanticModelReportingContextTest
 
         sut.Tree.Should().BeSameAs(tree);
         sut.Compilation.Should().BeSameAs(model.Compilation);
-        sut.SemanticModel.Should().BeSameAs(model);
+        sut.Model.Should().BeSameAs(model);
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
     }

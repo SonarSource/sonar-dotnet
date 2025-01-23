@@ -27,7 +27,7 @@ public sealed class LambdaParameterName : StylingAnalyzer
                 if (c.Node is SimpleLambdaExpressionSyntax { Parameter: { Identifier.ValueText: not ("x" or "_") } parameter, Parent: { } parent } lambda
                     && parent.FirstAncestorOrSelf<LambdaExpressionSyntax>() is null
                     && !IsSonarContextAction(c)
-                    && !MatchesDelegateParameterName(c.SemanticModel, lambda))
+                    && !MatchesDelegateParameterName(c.Model, lambda))
                 {
                     c.ReportIssue(Rule, parameter);
                 }
@@ -48,7 +48,7 @@ public sealed class LambdaParameterName : StylingAnalyzer
         delegateType.IsAny(KnownType.System_Func_T_TResult, KnownType.System_Action_T);
 
     private static bool IsSonarContextAction(SonarSyntaxNodeReportingContext context) =>
-        context.SemanticModel.GetSymbolInfo(context.Node).Symbol is IMethodSymbol lambda
+        context.Model.GetSymbolInfo(context.Node).Symbol is IMethodSymbol lambda
         && lambda.ReturnsVoid
         && IsSonarContextName(lambda.Parameters.Single().Type.Name);
 

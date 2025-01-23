@@ -52,7 +52,7 @@ public abstract class ClassShouldNotBeEmptyBase<TSyntaxKind, TDeclarationSyntax>
                     && !HasAnyAttribute(c.Node)
                     && !HasConditionalCompilationDirectives(c.Node)
                     && !ShouldIgnoreBecauseOfName(identifier)
-                    && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, c.SemanticModel))
+                    && !ShouldIgnoreBecauseOfBaseClassOrInterface(c.Node, c.Model))
                 {
                     c.ReportIssue(Rule, identifier, DeclarationTypeKeyword(c.Node));
                 }

@@ -31,7 +31,7 @@ public sealed class UseGenericWithRefParameters : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+                var methodSymbol = c.Model.GetDeclaredSymbol(methodDeclaration);
 
                 if (methodSymbol is null ||
                     methodDeclaration.Identifier.IsMissing)

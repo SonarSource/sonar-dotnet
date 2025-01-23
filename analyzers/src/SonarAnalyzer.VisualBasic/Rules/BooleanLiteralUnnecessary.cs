@@ -59,8 +59,8 @@ namespace SonarAnalyzer.Rules.VisualBasic
             var conditional = (TernaryConditionalExpressionSyntax)context.Node;
             var whenTrue = conditional.WhenTrue;
             var whenFalse = conditional.WhenFalse;
-            var typeLeft = context.SemanticModel.GetTypeInfo(whenTrue).Type;
-            var typeRight = context.SemanticModel.GetTypeInfo(whenFalse).Type;
+            var typeLeft = context.Model.GetTypeInfo(whenTrue).Type;
+            var typeRight = context.Model.GetTypeInfo(whenFalse).Type;
             if (typeLeft.IsNullableBoolean()
                 || typeRight.IsNullableBoolean()
                 || typeLeft == null

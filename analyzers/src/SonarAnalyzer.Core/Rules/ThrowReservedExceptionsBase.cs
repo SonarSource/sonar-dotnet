@@ -38,7 +38,7 @@ public abstract class ThrowReservedExceptionsBase<TSyntaxKind> : SonarDiagnostic
     {
         if (thrownExpression is not null && Language.Syntax.IsAnyKind(thrownExpression, Language.SyntaxKind.ObjectCreationExpressions))
         {
-            var expressionType = context.SemanticModel.GetTypeInfo(thrownExpression).Type;
+            var expressionType = context.Model.GetTypeInfo(thrownExpression).Type;
             if (expressionType.IsAny(reservedExceptions))
             {
                 context.ReportIssue(Rule, thrownExpression, expressionType.ToDisplayString());

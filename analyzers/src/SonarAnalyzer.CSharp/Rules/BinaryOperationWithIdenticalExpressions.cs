@@ -66,7 +66,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportOnObjectEqualsMatches(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation)
         {
-            var methodSymbol = context.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+            var methodSymbol = context.Model.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
 
             var operands = GetOperands(invocation, methodSymbol);
             if (operands is not null && CSharpEquivalenceChecker.AreEquivalent(RemoveParentheses(operands.Item1), RemoveParentheses(operands.Item2)))

@@ -32,7 +32,7 @@ public abstract class ValueTypeShouldImplementIEquatableBase<TSyntaxKind> : Sona
             {
                 var modifiers = Language.Syntax.ModifierKinds(c.Node);
                 if (!modifiers.Any(x => x.Equals(Language.SyntaxKind.RefKeyword))
-                    && c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol structSymbol
+                    && c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol structSymbol
                     && !structSymbol.Implements(KnownType.System_IEquatable_T))
                 {
                     var identifier = Language.Syntax.NodeIdentifier(c.Node).Value;

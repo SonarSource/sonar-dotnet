@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+            var methodSymbol = c.Model.GetDeclaredSymbol(methodDeclaration);
             if (methodSymbol == null
                 || (methodSymbol.IsExtern && methodDeclaration.ParameterList == null))
             {
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             descendants.OfType<InvocationExpressionSyntax>()
                 .Where(ParametersMatchContainingMethodDeclaration)
-                .Select(i => c.SemanticModel.GetSymbolInfo(i).Symbol)
+                .Select(i => c.Model.GetSymbolInfo(i).Symbol)
                 .OfType<IMethodSymbol>()
                 .Where(externalMethodSymbols.Contains)
                 .ToList()

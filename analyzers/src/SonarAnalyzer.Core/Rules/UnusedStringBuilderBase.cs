@@ -40,9 +40,9 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
         {
             var variableDeclarator = (TVariableDeclarator)c.Node;
 
-            if (RetrieveStringBuilderObject(c.SemanticModel, variableDeclarator) is { } symbol
+            if (RetrieveStringBuilderObject(c.Model, variableDeclarator) is { } symbol
                 && GetScope(variableDeclarator) is { } scope
-                && !IsStringBuilderAccessed(c.SemanticModel, symbol, scope))
+                && !IsStringBuilderAccessed(c.Model, symbol, scope))
             {
                 c.ReportIssue(Rule, variableDeclarator);
             }

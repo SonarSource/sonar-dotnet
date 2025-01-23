@@ -192,7 +192,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 // if this is a nested binary, we skip it so that we can raise when we visit it.
                 // Otherwise, FindConstantValue will merge it into one value.
                 else if (expression.RemoveParentheses() is not BinaryExpressionSyntax
-                    && expression.FindConstantValue(context.SemanticModel) is string constantValue)
+                    && expression.FindConstantValue(context.Model) is string constantValue)
                 {
                     stringWrapper = new StringWrapper(expression, constantValue);
                     return true;
@@ -238,7 +238,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 foreach (var content in interpolatedStringExpression.Contents)
                 {
                     if (content is InterpolationSyntax interpolation
-                        && interpolation.Expression.FindConstantValue(context.SemanticModel) is string constantValue)
+                        && interpolation.Expression.FindConstantValue(context.Model) is string constantValue)
                     {
                         parts.Add(new StringWrapper(content, constantValue));
                     }

@@ -28,7 +28,7 @@ public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
     protected override void VisitAssignments(SonarSyntaxNodeReportingContext context)
     {
         var node = context.Node;
-        if (IsFileAccessPermissions(node, context.SemanticModel) && !node.IsPartOfBinaryNegationOrCondition())
+        if (IsFileAccessPermissions(node, context.Model) && !node.IsPartOfBinaryNegationOrCondition())
         {
             context.ReportIssue(Rule, node);
         }
@@ -37,8 +37,8 @@ public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
     protected override void VisitInvocations(SonarSyntaxNodeReportingContext context)
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
-        if ((IsSetAccessRule(invocation, context.SemanticModel) || IsAddAccessRule(invocation, context.SemanticModel))
-            && (GetObjectCreation(invocation, context.SemanticModel) is { } objectCreation))
+        if ((IsSetAccessRule(invocation, context.Model) || IsAddAccessRule(invocation, context.Model))
+            && (GetObjectCreation(invocation, context.Model) is { } objectCreation))
         {
             var invocationLocation = invocation.GetLocation();
             var secondaryLocation = objectCreation.Expression.GetLocation();

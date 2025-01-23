@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
                 {
                     var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                    var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
+                    var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.Model);
                     ReportOnAttributes(c, attributes, "local functions");
                 },
                 SyntaxKindEx.LocalFunctionStatement);
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
                 {
                     var wrapper = (ParenthesizedLambdaExpressionSyntaxWrapper)c.Node;
-                    var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.SemanticModel);
+                    var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.Model);
                     ReportOnAttributes(c, attributes, "lambdas");
                 },
                 SyntaxKind.ParenthesizedLambdaExpression);

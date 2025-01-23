@@ -41,7 +41,7 @@ public partial class InfiniteRecursion
             {
                 foreach (var accessor in eventDeclaration.AccessorList.Accessors.Where(x => x.HasBodyOrExpressionBody()))
                 {
-                    var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
+                    var cfg = ControlFlowGraph.Create(accessor, c.Model, c.Cancel);
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, eventSymbol, accessor.Keyword.GetLocation(), "event accessor's recursion");
                     var walker = new RecursionSearcher(context);
                     walker.CheckPaths();
@@ -51,7 +51,7 @@ public partial class InfiniteRecursion
 
         public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
         {
-            if (body.CreateCfg(c.SemanticModel, c.Cancel) is { } cfg)
+            if (body.CreateCfg(c.Model, c.Cancel) is { } cfg)
             {
                 var context = new RecursionContext<ControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion");
                 var walker = new RecursionSearcher(context);
@@ -84,7 +84,7 @@ public partial class InfiniteRecursion
 
             if (expressionBody?.Expression is not null)
             {
-                var cfg = ControlFlowGraph.Create(expressionBody, c.SemanticModel, c.Cancel);
+                var cfg = ControlFlowGraph.Create(expressionBody, c.Model, c.Cancel);
                 var walker = new RecursionSearcher(new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, location, arrowExpressionMessageArg));
                 walker.CheckPaths();
             }
@@ -92,7 +92,7 @@ public partial class InfiniteRecursion
             {
                 foreach (var accessor in accessorList.Accessors.Where(x => x.HasBodyOrExpressionBody()))
                 {
-                    var cfg = ControlFlowGraph.Create(accessor, c.SemanticModel, c.Cancel);
+                    var cfg = ControlFlowGraph.Create(accessor, c.Model, c.Cancel);
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), accessorMessageArg);
                     var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
                     walker.CheckPaths();

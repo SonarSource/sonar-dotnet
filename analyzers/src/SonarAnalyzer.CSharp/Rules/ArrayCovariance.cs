@@ -36,13 +36,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void RaiseOnArrayCovarianceInSimpleAssignmentExpression(SonarSyntaxNodeReportingContext context)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
-            VerifyExpression(assignment.Right, context.SemanticModel.GetTypeInfo(assignment.Left).Type, context);
+            VerifyExpression(assignment.Right, context.Model.GetTypeInfo(assignment.Left).Type, context);
         }
 
         private static void RaiseOnArrayCovarianceInVariableDeclaration(SonarSyntaxNodeReportingContext context)
         {
             var variableDeclaration = (VariableDeclarationSyntax)context.Node;
-            var baseType = context.SemanticModel.GetTypeInfo(variableDeclaration.Type).Type;
+            var baseType = context.Model.GetTypeInfo(variableDeclaration.Type).Type;
 
             foreach (var declaration in variableDeclaration.Variables.Where(syntax => syntax.Initializer != null))
             {
@@ -53,7 +53,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void RaiseOnArrayCovarianceInInvocationExpression(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            var methodParameterLookup = new CSharpMethodParameterLookup(invocation, context.SemanticModel);
+            var methodParameterLookup = new CSharpMethodParameterLookup(invocation, context.Model);
 
             foreach (var argument in invocation.ArgumentList.Arguments)
             {
@@ -69,14 +69,14 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void RaiseOnArrayCovarianceInCastExpression(SonarSyntaxNodeReportingContext context)
         {
             var castExpression = (CastExpressionSyntax)context.Node;
-            var baseType = context.SemanticModel.GetTypeInfo(castExpression.Type).Type;
+            var baseType = context.Model.GetTypeInfo(castExpression.Type).Type;
 
             VerifyExpression(castExpression.Expression, baseType, context);
         }
 
         private static void VerifyExpression(SyntaxNode node, ITypeSymbol baseType, SonarSyntaxNodeReportingContext context)
         {
-            foreach (var pair in GetPossibleTypes(node, context.SemanticModel).Where(pair => AreCovariantArrayTypes(pair.Symbol, baseType)))
+            foreach (var pair in GetPossibleTypes(node, context.Model).Where(pair => AreCovariantArrayTypes(pair.Symbol, baseType)))
             {
                 context.ReportIssue(Rule, pair.Node);
             }

@@ -65,11 +65,11 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var forNode = (ForStatementSyntax)c.Node;
-                    var loopCounters = LoopCounters(forNode, c.SemanticModel).ToList();
+                    var loopCounters = LoopCounters(forNode, c.Model).ToList();
 
                     foreach (var affectedExpression in ComputeAffectedExpressions(forNode.Statement))
                     {
-                        var symbol = c.SemanticModel.GetSymbolInfo(affectedExpression).Symbol;
+                        var symbol = c.Model.GetSymbolInfo(affectedExpression).Symbol;
 
                         if (symbol != null && loopCounters.Contains(symbol))
                         {

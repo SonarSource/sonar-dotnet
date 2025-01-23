@@ -115,7 +115,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             return currentMemberExpression != null &&
                 !currentMemberExpression.IsKind(SyntaxKind.IdentifierName) &&
                 !(currentMemberExpression is InstanceExpressionSyntax) &&
-                !(context.SemanticModel.GetSymbolInfo(currentMemberExpression).Symbol is ITypeSymbol);
+                !(context.Model.GetSymbolInfo(currentMemberExpression).Symbol is ITypeSymbol);
         }
 
         private static ExecutableStatementSyntax GetParentStatement(ExpressionSyntax expression)

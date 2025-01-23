@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var attribute = (AttributeSyntax)c.Node;
 
-                    if (!(c.SemanticModel.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor) ||
+                    if (!(c.Model.GetSymbolInfo(attribute).Symbol is IMethodSymbol attributeConstructor) ||
                         !attributeConstructor.ContainingType.Is(KnownType.System_Diagnostics_CodeAnalysis_SuppressMessageAttribute))
                     {
                         return;

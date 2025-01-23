@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     if (((AwaitExpressionSyntax)c.Node).Expression is { } expression
-                        && c.SemanticModel.GetTypeInfo(expression).Type is { } type
+                        && c.Model.GetTypeInfo(expression).Type is { } type
                         && type.DerivesFrom(KnownType.System_Threading_Tasks_Task))
                     {
                         c.ReportIssue(rule, expression);

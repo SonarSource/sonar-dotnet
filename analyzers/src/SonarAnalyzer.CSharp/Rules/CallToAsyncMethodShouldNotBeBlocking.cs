@@ -79,15 +79,15 @@ namespace SonarAnalyzer.Rules.CSharp
             if (memberAccessNameName == null
                 || !InvalidMemberAccess.ContainsKey(memberAccessNameName)
                 || IsResultInContinueWithCall(memberAccessNameName, simpleMemberAccess)
-                || IsChainedAfterThreadPoolCall(context.SemanticModel, simpleMemberAccess)
-                || simpleMemberAccess.IsInNameOfArgument(context.SemanticModel)
+                || IsChainedAfterThreadPoolCall(context.Model, simpleMemberAccess)
+                || simpleMemberAccess.IsInNameOfArgument(context.Model)
                 || simpleMemberAccess.HasAncestor(SyntaxKind.GlobalStatement))
             {
                 return;
             }
 
             var possibleMemberAccesses = InvalidMemberAccess[memberAccessNameName];
-            var memberAccessSymbol = context.SemanticModel.GetSymbolInfo(simpleMemberAccess).Symbol;
+            var memberAccessSymbol = context.Model.GetSymbolInfo(simpleMemberAccess).Symbol;
             if (memberAccessSymbol?.ContainingType == null || !memberAccessSymbol.ContainingType.ConstructedFrom.IsAny(possibleMemberAccesses))
             {
                 return;
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     return; // Thread.Sleep should not be used only in async methods
                 }
-                if (context.SemanticModel.GetDeclaredSymbol(enclosingMethod).IsMainMethod())
+                if (context.Model.GetDeclaredSymbol(enclosingMethod).IsMainMethod())
                 {
                     return; // Main methods are not subject to deadlock issue so no need to report an issue
                 }
@@ -112,7 +112,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static bool IsAwaited(SonarSyntaxNodeReportingContext context, MemberAccessExpressionSyntax simpleMemberAccess)
         {
-            return context.SemanticModel.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
+            return context.Model.GetSymbolInfo(simpleMemberAccess.Expression).Symbol is { } accessedSymbol
                    && simpleMemberAccess.FirstAncestorOrSelf<StatementSyntax>() is { } currentStatement
                    && currentStatement.GetPreviousStatements().Any(ContainsAwaitedInvocation);
 
@@ -120,8 +120,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 statement.DescendantNodes().OfType<InvocationExpressionSyntax>().Where(x => x.Expression.IsKind(SyntaxKind.SimpleMemberAccessExpression)).Any(IsTaskAwaited);
 
             bool IsTaskAwaited(InvocationExpressionSyntax invocation) =>
-                IsAwaitForMultipleTasksExecutionCall(context.SemanticModel, invocation, accessedSymbol)
-                || IsAwaitForSingleTaskExecutionCall(context.SemanticModel, invocation, accessedSymbol);
+                IsAwaitForMultipleTasksExecutionCall(context.Model, invocation, accessedSymbol)
+                || IsAwaitForSingleTaskExecutionCall(context.Model, invocation, accessedSymbol);
         }
 
         private static bool IsAwaitForMultipleTasksExecutionCall(SemanticModel model, InvocationExpressionSyntax invocation, ISymbol accessedSymbol) =>

@@ -60,7 +60,7 @@ public sealed class LoggerFieldsShouldBePrivateStaticReadonly : SonarDiagnosticA
             {
                 cc.RegisterNodeAction(c =>
                 {
-                    foreach (var invalid in InvalidFields((FieldDeclarationSyntax)c.Node, c.SemanticModel))
+                    foreach (var invalid in InvalidFields((FieldDeclarationSyntax)c.Node, c.Model))
                     {
                         c.ReportIssue(Rule, invalid, invalid.ValueText);
                     }

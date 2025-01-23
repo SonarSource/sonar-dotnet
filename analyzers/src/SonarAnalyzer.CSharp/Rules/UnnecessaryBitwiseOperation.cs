@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private void CheckAssignment(SonarSyntaxNodeReportingContext context, int constValueToLookFor)
         {
             var assignment = (AssignmentExpressionSyntax)context.Node;
-            if (FindIntConstant(context.SemanticModel, assignment.Right) is { } constValue
+            if (FindIntConstant(context.Model, assignment.Right) is { } constValue
                 && constValue == constValueToLookFor)
             {
                 var location = assignment.Parent is StatementSyntax

@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var methodDeclaration = (MethodStatementSyntax)c.Node;
                     if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
                         && !NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
-                        && !EventHandlerName.IsEventHandler(methodDeclaration, c.SemanticModel))
+                        && !EventHandlerName.IsEventHandler(methodDeclaration, c.Model))
                     {
                         c.ReportIssue(Rule, methodDeclaration.Identifier, "procedure", methodDeclaration.Identifier.ValueText, Pattern);
                     }

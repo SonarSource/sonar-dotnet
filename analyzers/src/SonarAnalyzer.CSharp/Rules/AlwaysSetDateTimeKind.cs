@@ -30,7 +30,7 @@ public sealed class AlwaysSetDateTimeKind : AlwaysSetDateTimeKindBase<SyntaxKind
         base.Initialize(context);
         context.RegisterNodeAction(c =>
         {
-            if (IsDateTimeConstructorWithoutKindParameter(c.Node, c.SemanticModel))
+            if (IsDateTimeConstructorWithoutKindParameter(c.Node, c.Model))
             {
                 c.ReportIssue(Rule, c.Node);
             }

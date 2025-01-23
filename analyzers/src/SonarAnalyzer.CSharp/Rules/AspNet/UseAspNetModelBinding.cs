@@ -94,7 +94,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             codeBlockStart.RegisterNodeAction(nodeContext =>
             {
                 var argument = (ArgumentSyntax)nodeContext.Node;
-                var model = nodeContext.SemanticModel;
+                var model = nodeContext.Model;
                 if (allConstantAccesses
                     && AddMatchingArgumentToCandidates(model, codeBlockCandidates, argument, argumentDescriptors)
                     && model.GetConstantValue(argument.Expression) is not { HasValue: true, Value: string })
@@ -110,12 +110,12 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
                 // The property access of Request.Form.Files can be replaced by an IFormFile binding.
                 // Any access to a "Files" property is therefore noncompliant. This is different from the Argument handling above.
                 var memberAccess = (MemberAccessExpressionSyntax)nodeContext.Node;
-                var context = new PropertyAccessContext(memberAccess, nodeContext.SemanticModel, memberAccess.Name.Identifier.ValueText);
+                var context = new PropertyAccessContext(memberAccess, nodeContext.Model, memberAccess.Name.Identifier.ValueText);
                 if (Language.Tracker.PropertyAccess.MatchProperty(propertyAccessDescriptors)(context)
                     // form.Files is okay, if "form" is a parameter, because IFormCollection binding is considered appropriate for binding as well
-                    && nodeContext.SemanticModel.GetSymbolInfo(memberAccess.Expression).Symbol is not IParameterSymbol)
+                    && nodeContext.Model.GetSymbolInfo(memberAccess.Expression).Symbol is not IParameterSymbol)
                 {
-                    codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), IsOriginatingFromParameter(nodeContext.SemanticModel, memberAccess)));
+                    codeBlockCandidates.Push(new(UseIFormFileBindingMessage, memberAccess.GetLocation(), IsOriginatingFromParameter(nodeContext.Model, memberAccess)));
                 }
             }, SyntaxKind.SimpleMemberAccessExpression);
         }

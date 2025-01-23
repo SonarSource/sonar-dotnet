@@ -45,14 +45,14 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
             c =>
             {
                 var attributeArgument = (TAttributeArgumentSyntax)c.Node;
-                var trackingContext = new ArgumentContext(attributeArgument, c.SemanticModel);
+                var trackingContext = new ArgumentContext(attributeArgument, c.Model);
                 var argumentMatcher = Language.Tracker.Argument;
                 if (argumentMatcher.Or(
                     argumentMatcher.MatchArgument(ConstructorDescriptor),
                     argumentMatcher.MatchArgument(NameDescriptor),
                     argumentMatcher.MatchArgument(TypeDescriptor))(trackingContext)
                     && Language.Syntax.NodeExpression(attributeArgument) is { } formatString
-                    && Language.FindConstantValue(c.SemanticModel, formatString) is string formatStringText
+                    && Language.FindConstantValue(c.Model, formatString) is string formatStringText
                     && FirstInvalidExpression(c, formatStringText, attributeArgument) is { } firstInvalidMember)
                 {
                     c.ReportIssue(Rule, formatString, firstInvalidMember);
@@ -63,7 +63,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
     private string FirstInvalidExpression(SonarSyntaxNodeReportingContext context, string formatString, TAttributeArgumentSyntax attributeSyntax)
     {
         return (AttributeTarget(attributeSyntax) is { } targetSyntax
-            && context.SemanticModel.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
+            && context.Model.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
             && TypeContainingReferencedMembers(targetSymbol) is { } typeSymbol)
                 ? FirstInvalidMemberName(typeSymbol)
                 : null;

@@ -35,7 +35,7 @@ public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
                 {
                     return;
                 }
-                if (c.SemanticModel.GetDeclaredSymbol(constructor).ContainingType is { } currentType)
+                if (c.Model.GetDeclaredSymbol(constructor).ContainingType is { } currentType)
                 {
                     var bodyDescendantNodes = constructor.Body?.DescendantNodes().ToArray()
                                               ?? constructor.ExpressionBody()?.DescendantNodes().ToArray()
@@ -43,13 +43,13 @@ public sealed class InitializeStaticFieldsInline : SonarDiagnosticAnalyzer
 
                     var assignedFieldCount = bodyDescendantNodes
                         .OfType<AssignmentExpressionSyntax>()
-                        .SelectMany(x => FieldSymbolsFromLeftSide(x, c.SemanticModel, currentType))
+                        .SelectMany(x => FieldSymbolsFromLeftSide(x, c.Model, currentType))
                         .Select(x => x.Name)
                         .Distinct()
                         .Count();
                     var hasIfOrSwitch = Array.Exists(bodyDescendantNodes, x => x.Kind() is SyntaxKind.IfStatement or SyntaxKind.SwitchStatement);
                     if (((hasIfOrSwitch && assignedFieldCount == 1) || (!hasIfOrSwitch && assignedFieldCount > 0))
-                        && !HasTupleAssignmentForMultipleFields(bodyDescendantNodes, c.SemanticModel, currentType))
+                        && !HasTupleAssignmentForMultipleFields(bodyDescendantNodes, c.Model, currentType))
                     {
                         c.ReportIssue(Rule, constructor.Identifier);
                     }

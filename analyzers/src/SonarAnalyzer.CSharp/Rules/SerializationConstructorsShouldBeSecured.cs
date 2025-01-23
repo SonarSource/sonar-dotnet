@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var serializationConstructor = c.SemanticModel.GetDeclaredSymbol(constructorSyntax);
+            var serializationConstructor = c.Model.GetDeclaredSymbol(constructorSyntax);
             if (!serializationConstructor.IsSerializationConstructor())
             {
                 return;
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var isAssemblyIsPartiallyTrusted = c.SemanticModel.Compilation.Assembly
+            var isAssemblyIsPartiallyTrusted = c.Model.Compilation.Assembly
                 .HasAttribute(KnownType.System_Security_AllowPartiallyTrustedCallersAttribute);
             if (!isAssemblyIsPartiallyTrusted)
             {

@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static bool IsDebugAssert(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation) =>
             invocation.Expression is MemberAccessExpressionSyntax memberAccess
             && memberAccess.Name.Identifier.ValueText == nameof(System.Diagnostics.Debug.Assert)
-            && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol
+            && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol symbol
             && symbol.IsDebugAssert();
 
         private static bool ContainsCallsWithSideEffects(InvocationExpressionSyntax invocation) =>

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                 var parameter = indexerDeclaration.ParameterList.Parameters.First();
 
-                var parameterSymbol = c.SemanticModel.GetDeclaredSymbol(parameter);
+                var parameterSymbol = c.Model.GetDeclaredSymbol(parameter);
                 if (parameterSymbol.Type == null
                     || parameterSymbol.Type.TypeKind == TypeKind.Dynamic
                     || parameterSymbol.Type.IsAny(AllowedIndexerTypes)

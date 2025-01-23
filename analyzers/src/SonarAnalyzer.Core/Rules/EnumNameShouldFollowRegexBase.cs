@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
-                    var pattern = c.Node.HasFlagsAttribute(c.SemanticModel) ? FlagsEnumNamePattern : EnumNamePattern;
+                    var pattern = c.Node.HasFlagsAttribute(c.Model) ? FlagsEnumNamePattern : EnumNamePattern;
                     if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingHelper.IsRegexMatch(identifier.ValueText, pattern))
                     {
                         c.ReportIssue(SupportedDiagnostics[0], identifier, pattern);

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    var suppressFinalizeSymbol = c.SemanticModel.GetSymbolInfo(invocation.Expression).Symbol as IMethodSymbol;
+                    var suppressFinalizeSymbol = c.Model.GetSymbolInfo(invocation.Expression).Symbol as IMethodSymbol;
 
                     if (suppressFinalizeSymbol?.Name != "SuppressFinalize" ||
                         !invocation.HasExactlyNArguments(1) ||
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var argument = invocation.ArgumentList.Arguments.First();
-                    var argumentType = c.SemanticModel.GetTypeInfo(argument.Expression).Type as INamedTypeSymbol;
+                    var argumentType = c.Model.GetTypeInfo(argument.Expression).Type as INamedTypeSymbol;
 
                     if (!argumentType.IsClass() ||
                         !argumentType.IsSealed)

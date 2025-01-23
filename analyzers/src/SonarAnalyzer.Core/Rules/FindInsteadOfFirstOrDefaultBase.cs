@@ -41,9 +41,9 @@ public abstract class FindInsteadOfFirstOrDefaultBase<TSyntaxKind, TInvocationEx
                 if (Language.GetName(invocation).Equals(nameof(Enumerable.FirstOrDefault), Language.NameComparison)
                     && Language.Syntax.HasExactlyNArguments(invocation, NumberOfArgument)
                     && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
-                    && IsCorrectCall(right, c.SemanticModel)
-                    && IsCorrectType(left, c.SemanticModel, out var isArray)
-                    && !Language.Syntax.IsInExpressionTree(c.SemanticModel, invocation))
+                    && IsCorrectCall(right, c.Model)
+                    && IsCorrectType(left, c.Model, out var isArray)
+                    && !Language.Syntax.IsInExpressionTree(c.Model, invocation))
                 {
                     c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), isArray ? ArrayMessage : GenericMessage);
                 }

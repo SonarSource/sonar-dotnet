@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     var modifier = parameter.Modifiers.First(IsRefOrOut);
 
-                    var parameterSymbol = c.SemanticModel.GetDeclaredSymbol(parameter);
+                    var parameterSymbol = c.Model.GetDeclaredSymbol(parameter);
 
                     if (parameterSymbol?.ContainingSymbol is not IMethodSymbol containingMethod
                         || containingMethod.IsOverride

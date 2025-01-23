@@ -49,7 +49,7 @@ public sealed class AnnotateApiActionsWithHttpVerb : SonarDiagnosticAnalyzer
                     symbolStartContext.RegisterSyntaxNodeAction(c =>
                     {
                         var methodNode = (MethodDeclarationSyntax)c.Node;
-                        var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodNode);
+                        var methodSymbol = c.Model.GetDeclaredSymbol(methodNode);
                         var methodAttributes = methodSymbol.GetAttributesWithInherited();
 
                         if (methodSymbol.IsControllerActionMethod()

@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
             // Return value set by assignment to function variable/value
             var assignments = block.DescendantNodes()
                 .OfType<AssignmentStatementSyntax>()
-                .Where(x => c.Context.SemanticModel.GetSymbolInfo(x.Left).Symbol is ILocalSymbol {IsFunctionValue: true});
+                .Where(x => c.Context.Model.GetSymbolInfo(x.Left).Symbol is ILocalSymbol {IsFunctionValue: true});
             // And normal Return statements and throws
             return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
                 // Throw statements #2825. x.Expression can be NULL for standalone Throw and we need that one as well.

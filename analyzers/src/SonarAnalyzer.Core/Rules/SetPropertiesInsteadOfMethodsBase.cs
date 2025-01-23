@@ -41,8 +41,8 @@ public abstract class SetPropertiesInsteadOfMethodsBase<TSyntaxKind, TInvocation
             if (HasCorrectName(methodName)
                 && HasCorrectArgumentCount(invocation)
                 && TryGetOperands(invocation, out var typeNode, out var methodNode)
-                && IsCorrectType(typeNode, c.SemanticModel)
-                && IsCorrectCall(methodNode, c.SemanticModel))
+                && IsCorrectType(typeNode, c.Model)
+                && IsCorrectCall(methodNode, c.Model))
             {
                 c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName);
             }

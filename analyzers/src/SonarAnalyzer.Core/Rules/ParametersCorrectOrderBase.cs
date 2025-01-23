@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
                     if (!c.IsRedundantPrimaryConstructorBaseTypeContext()
                         && Language.Syntax.ArgumentList(c.Node) is { Count: >= MinNumberOfNameableArguments } argumentList  // there must be at least two arguments to be able to swap, and further
                         && argumentList.Select(ArgumentName).WhereNotNull().Take(MinNumberOfNameableArguments).Count() == MinNumberOfNameableArguments // at least two arguments with a "name"
-                        && Language.MethodParameterLookup(c.Node, c.SemanticModel) is var methodParameterLookup)
+                        && Language.MethodParameterLookup(c.Node, c.Model) is var methodParameterLookup)
                     {
                         foreach (var argument in argumentList)
                         {

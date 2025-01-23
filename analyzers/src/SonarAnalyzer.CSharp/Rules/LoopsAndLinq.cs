@@ -90,11 +90,11 @@ namespace SonarAnalyzer.Rules.CSharp
         /// </remarks>
         private static void CheckIfCanBeSimplifiedUsingSelect(SonarSyntaxNodeReportingContext c, ForEachStatementSyntax forEachStatementSyntax)
         {
-            var declaredSymbol = new Lazy<ILocalSymbol>(() => c.SemanticModel.GetDeclaredSymbol(forEachStatementSyntax));
+            var declaredSymbol = new Lazy<ILocalSymbol>(() => c.Model.GetDeclaredSymbol(forEachStatementSyntax));
             var expressionTypeIsOrImplementsIEnumerable = new Lazy<bool>(
                 () =>
                 {
-                    var expressionType = c.SemanticModel.GetTypeInfo(forEachStatementSyntax.Expression).Type;
+                    var expressionType = c.Model.GetTypeInfo(forEachStatementSyntax.Expression).Type;
                     return expressionType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
                            || expressionType.Implements(KnownType.System_Collections_Generic_IEnumerable_T);
                 });
@@ -106,8 +106,8 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
                     && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
                     && expressionTypeIsOrImplementsIEnumerable.Value
-                    && c.SemanticModel.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
-                    && c.SemanticModel.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol)
+                    && c.Model.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
+                    && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol)
                 {
                     var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 

@@ -45,7 +45,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                 symbolStart.RegisterSyntaxNodeAction(nodeContext =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)nodeContext.Node;
-                    if (nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is { } method
+                    if (nodeContext.Model.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is { } method
                         && !method.ContainingType.IsAbstract
                         && method.IsControllerActionMethod()
                         && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate())))

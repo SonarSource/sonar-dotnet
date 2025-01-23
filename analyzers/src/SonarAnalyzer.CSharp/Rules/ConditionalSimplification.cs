@@ -107,9 +107,9 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var possiblyCoalescing = ifStatement.Condition.TryGetExpressionComparedToNull(out var comparedToNull, out var comparedIsNullInTrue)
-                                     && comparedToNull.CanBeNull(context.SemanticModel);
+                                     && comparedToNull.CanBeNull(context.Model);
 
-            if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.SemanticModel, comparedIsNullInTrue, out var simplifiedOperator))
+            if (CanBeSimplified(context, whenTrue, whenFalse, possiblyCoalescing ? comparedToNull : null, context.Model, comparedIsNullInTrue, out var simplifiedOperator))
             {
                 context.ReportIssue(Rule, ifStatement.IfKeyword, BuildCodeFixProperties(context, simplifiedOperator), simplifiedOperator);
             }
@@ -129,8 +129,8 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             if (condition.TryGetExpressionComparedToNull(out var comparedToNull, out var comparedIsNullInTrue)
-                && comparedToNull.CanBeNull(context.SemanticModel)
-                && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.SemanticModel, comparedIsNullInTrue))
+                && comparedToNull.CanBeNull(context.Model)
+                && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.Model, comparedIsNullInTrue))
             {
                 if (context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
                 {

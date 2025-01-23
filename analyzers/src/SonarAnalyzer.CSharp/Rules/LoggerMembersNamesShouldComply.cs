@@ -81,7 +81,7 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
                     foreach (var memberData in Declarations(c.Node))
                     {
                         if (!MatchesFormat(memberData.Name)
-                            && c.SemanticModel.GetDeclaredSymbol(memberData.Member).GetSymbolType() is { } type
+                            && c.Model.GetDeclaredSymbol(memberData.Member).GetSymbolType() is { } type
                             && type.DerivesOrImplementsAny(Loggers))
                         {
                             c.ReportIssue(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format);

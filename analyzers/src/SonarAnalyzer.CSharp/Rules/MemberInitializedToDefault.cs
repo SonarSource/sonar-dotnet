@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var propertySymbol = context.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
+            var propertySymbol = context.Model.GetDeclaredSymbol(propertyDeclaration);
 
             if (propertySymbol != null
                 && IsDefaultValueInitializer(propertyDeclaration.Initializer, propertySymbol.Type))
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var eventDeclaration in field.Declaration.Variables.Where(v => v.Initializer != null))
             {
-                if (!(context.SemanticModel.GetDeclaredSymbol(eventDeclaration) is IEventSymbol eventSymbol))
+                if (!(context.Model.GetDeclaredSymbol(eventDeclaration) is IEventSymbol eventSymbol))
                 {
                     continue;
                 }
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             foreach (var variableDeclarator in field.Declaration.Variables.Where(v => v.Initializer != null))
             {
-                if (context.SemanticModel.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol {IsConst: false} fieldSymbol
+                if (context.Model.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol {IsConst: false} fieldSymbol
                     && IsDefaultValueInitializer(variableDeclarator.Initializer, fieldSymbol.Type))
                 {
                     context.ReportIssue(Rule, variableDeclarator.Initializer, fieldSymbol.Name);

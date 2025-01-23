@@ -84,12 +84,12 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
         {
             var invocation = (InvocationExpressionSyntax)c.Node;
             if (LoggerMethodNames.Contains(invocation.GetName())
-                && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
+                && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
                 && !IsLog4NetExceptionMethod(method)
                 && LoggerTypes.Any(x => x.Matches(method.ContainingType))
                 && method.Parameters.FirstOrDefault(x => LogMessageParameterNames.Contains(x.Name)) is { } messageParameter
                 && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
-                && InvalidSyntaxNode(argumentValue, c.SemanticModel) is { } invalidNode)
+                && InvalidSyntaxNode(argumentValue, c.Model) is { } invalidNode)
             {
                 c.ReportIssue(Rule, invalidNode, Messages[invalidNode.Kind()]);
             }

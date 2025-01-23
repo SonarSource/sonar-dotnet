@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var method = (MethodDeclarationSyntax)c.Node;
-                    if (IsMethodCandidate(method, c.SemanticModel))
+                    if (IsMethodCandidate(method, c.Model))
                     {
                         c.ReportIssue(Rule, method, method.Identifier.ValueText, "method");
                     }
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var property = (PropertyDeclarationSyntax)c.Node;
-                    if (IsPropertyCandidate(property, c.SemanticModel))
+                    if (IsPropertyCandidate(property, c.Model))
                     {
                         c.ReportIssue(Rule, property, property.Identifier.ValueText, "property");
                     }

@@ -100,7 +100,7 @@ namespace SonarAnalyzer.Rules.CSharp
             else
             {
                 MarkAllUnsafeBlockInside(context, typeDeclaration);
-                if (!HasUnsafeConstructInside(typeDeclaration, context.SemanticModel))
+                if (!HasUnsafeConstructInside(typeDeclaration, context.Model))
                 {
                     ReportOnUnsafeBlock(context, unsafeKeyword.GetLocation());
                 }
@@ -113,7 +113,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (unsafeKeyword != default)
             {
                 MarkAllUnsafeBlockInside(context, member);
-                if (!HasUnsafeConstructInside(member, context.SemanticModel))
+                if (!HasUnsafeConstructInside(member, context.Model))
                 {
                     ReportOnUnsafeBlock(context, unsafeKeyword.GetLocation());
                 }
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 foreach (var topLevelUnsafeBlock in topLevelUnsafeBlocks)
                 {
                     MarkAllUnsafeBlockInside(context, topLevelUnsafeBlock);
-                    if (!HasUnsafeConstructInside(member, context.SemanticModel))
+                    if (!HasUnsafeConstructInside(member, context.Model))
                     {
                         ReportOnUnsafeBlock(context, topLevelUnsafeBlock.UnsafeKeyword.GetLocation());
                     }
@@ -190,7 +190,7 @@ namespace SonarAnalyzer.Rules.CSharp
             var typeDeclaration = (TypeDeclarationSyntax)context.Node;
             if (!context.IsRedundantPositionalRecordContext()
                 && typeDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-                && context.SemanticModel.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
+                && context.Model.GetDeclaredSymbol(typeDeclaration) is { DeclaringSyntaxReferences.Length: <= 1 })
             {
                 var keyword = typeDeclaration.Modifiers.First(m => m.IsKind(SyntaxKind.PartialKeyword));
                 context.ReportIssue(Rule, keyword, "partial", "gratuitous");
@@ -331,15 +331,15 @@ namespace SonarAnalyzer.Rules.CSharp
             {
                 if (!currentContextHasIntegralOperation)
                 {
-                    var expressionType = context.SemanticModel.GetTypeInfo(node.Expression).Type;
-                    var castedToType = context.SemanticModel.GetTypeInfo(node.Type).Type;
+                    var expressionType = context.Model.GetTypeInfo(node.Expression).Type;
+                    var castedToType = context.Model.GetTypeInfo(node.Type).Type;
                     currentContextHasIntegralOperation = castedToType is not null && expressionType is not null && castedToType.IsAny(KnownType.IntegralNumbers);
                 }
             }
 
             private void SetHasIntegralOperation(ExpressionSyntax node) =>
                 currentContextHasIntegralOperation = currentContextHasIntegralOperation
-                    || (context.SemanticModel.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers));
+                    || (context.Model.GetSymbolInfo(node).Symbol is IMethodSymbol methodSymbol && methodSymbol.ReceiverType.IsAny(KnownType.IntegralNumbers));
         }
     }
 }

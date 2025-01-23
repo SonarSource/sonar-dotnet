@@ -47,13 +47,13 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void CheckExpressionWithOperator<T>(SonarSyntaxNodeReportingContext context, Func<T, SyntaxToken> operatorSelector)
             where T : SyntaxNode
         {
-            if (context.SemanticModel.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation
+            if (context.Model.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation
                 || operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute))
             {
                 return;
             }
 
-            var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.SemanticModel, context.Node.SpanStart);
+            var friendlyTypeName = operation.ReturnType.ToMinimalDisplayString(context.Model, context.Node.SpanStart);
             var messageFormat = operation.ReturnType.DeclaringSyntaxReferences.Any()
                 ? MessageChangeOrRemove
                 : MessageRemove;

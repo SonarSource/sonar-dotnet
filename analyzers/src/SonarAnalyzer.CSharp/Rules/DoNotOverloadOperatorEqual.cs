@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Rules.CSharp
                       .OfType<OperatorDeclarationSyntax>()
                       .Any(op => op.OperatorToken.IsKind(SyntaxKind.PlusToken)
                                  || op.OperatorToken.IsKind(SyntaxKind.MinusToken))
-               && analysisContext.SemanticModel.GetDeclaredSymbol(classDeclaration) is { } namedTypeSymbol
+               && analysisContext.Model.GetDeclaredSymbol(classDeclaration) is { } namedTypeSymbol
                && !namedTypeSymbol.ImplementsAny(InterfacesRelyingOnOperatorEqualOverload))
             {
                 analysisContext.ReportIssue(Rule, declaration.OperatorToken);

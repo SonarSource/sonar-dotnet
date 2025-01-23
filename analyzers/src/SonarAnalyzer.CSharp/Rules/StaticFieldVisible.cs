@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(
                 c =>
                 {
-                    foreach (var diagnostic in GetDiagnostics(c.SemanticModel, (FieldDeclarationSyntax)c.Node))
+                    foreach (var diagnostic in GetDiagnostics(c.Model, (FieldDeclarationSyntax)c.Node))
                     {
                         c.ReportIssue(diagnostic);
                     }

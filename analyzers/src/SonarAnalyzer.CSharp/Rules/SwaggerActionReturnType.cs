@@ -77,9 +77,9 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
 
     private static InvalidMethodResult InvalidMethod(BaseMethodDeclarationSyntax methodDeclaration, SonarSyntaxNodeReportingContext nodeContext)
     {
-        var responseInvocations = FindSuccessResponses(methodDeclaration, nodeContext.SemanticModel);
+        var responseInvocations = FindSuccessResponses(methodDeclaration, nodeContext.Model);
         return responseInvocations.Length == 0
-               || nodeContext.SemanticModel.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
+               || nodeContext.Model.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
                || !method.IsControllerActionMethod()
                || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
                || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)

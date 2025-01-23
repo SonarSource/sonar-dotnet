@@ -34,9 +34,9 @@ public sealed class DoNotMarkEnumsWithFlags : SonarDiagnosticAnalyzer
             c =>
             {
                 var enumDeclaration = (EnumDeclarationSyntax)c.Node;
-                var enumSymbol = c.SemanticModel.GetDeclaredSymbol(enumDeclaration);
+                var enumSymbol = c.Model.GetDeclaredSymbol(enumDeclaration);
 
-                if (!enumDeclaration.HasFlagsAttribute(c.SemanticModel)
+                if (!enumDeclaration.HasFlagsAttribute(c.Model)
                     || enumDeclaration.Identifier.IsMissing
                     || enumSymbol is null)
                 {

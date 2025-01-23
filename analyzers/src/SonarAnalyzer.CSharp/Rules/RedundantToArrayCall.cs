@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             bool IsTargetMethod(MemberAccessExpressionSyntax memberAccess) =>
                 memberAccess.Name.Identifier.ValueText == targetMethodName
-                && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                 && methodSymbol.IsInType(targetKnownType)
                 && methodSymbol.Parameters.Length == 0;
         }

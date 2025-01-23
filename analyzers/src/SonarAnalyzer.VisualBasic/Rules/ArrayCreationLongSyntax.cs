@@ -32,15 +32,15 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     var arrayCreation = (ArrayCreationExpressionSyntax)c.Node;
                     if (arrayCreation.Initializer == null
                         || HasSizeSpecifier(arrayCreation)
-                        || c.SemanticModel.GetTypeInfo(arrayCreation).Type is not IArrayTypeSymbol arrayType
+                        || c.Model.GetTypeInfo(arrayCreation).Type is not IArrayTypeSymbol arrayType
                         || arrayType.ElementType is null or IErrorTypeSymbol)
                     {
                         return;
                     }
                     if (arrayCreation.Initializer.Initializers.Any())
                     {
-                        if (AtLeastOneExactTypeMatch(c.SemanticModel, arrayCreation, arrayType)
-                            && AllTypesAreConvertible(c.SemanticModel, arrayCreation, arrayType))
+                        if (AtLeastOneExactTypeMatch(c.Model, arrayCreation, arrayType)
+                            && AllTypesAreConvertible(c.Model, arrayCreation, arrayType))
                         {
                             c.ReportIssue(Rule, arrayCreation);
                         }

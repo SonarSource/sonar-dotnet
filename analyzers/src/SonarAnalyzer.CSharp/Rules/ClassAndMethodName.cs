@@ -114,7 +114,7 @@ namespace SonarAnalyzer.Rules.CSharp
         {
             var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
             var identifier = typeDeclaration.Identifier;
-            var symbol = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
+            var symbol = context.Model.GetDeclaredSymbol(typeDeclaration);
 
             if (symbol.GetAttributes(ComRelatedTypes).Any())
             {
@@ -154,7 +154,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckMemberName(SonarSyntaxNodeReportingContext context, SyntaxToken identifier)
         {
-            var symbol = context.SemanticModel.GetDeclaredSymbol(context.Node);
+            var symbol = context.Model.GetDeclaredSymbol(context.Node);
             if (symbol == null)
             {
                 return;

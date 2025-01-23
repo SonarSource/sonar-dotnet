@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
                     var methodSyntax = (TMethodDeclarationSyntax)c.Node;
-                    if (c.SemanticModel.GetDeclaredSymbol(methodSyntax) is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any())
+                    if (c.Model.GetDeclaredSymbol(methodSyntax) is IMethodSymbol methodSymbol && methodSymbol.Parameters.Any())
                     {
                         if (methodSymbol.PartialImplementationPart != null)
                         {

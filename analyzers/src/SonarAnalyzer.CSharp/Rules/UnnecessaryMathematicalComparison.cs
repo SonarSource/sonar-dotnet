@@ -33,12 +33,12 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void CheckComparisonOutOfRange(SonarSyntaxNodeReportingContext context)
         {
-            if (TryGetConstantValue(context.SemanticModel, (BinaryExpressionSyntax)context.Node, out var constant, out var other)
-               && context.SemanticModel.GetTypeInfo(other).Type is { } typeSymbolOfOther
+            if (TryGetConstantValue(context.Model, (BinaryExpressionSyntax)context.Node, out var constant, out var other)
+               && context.Model.GetTypeInfo(other).Type is { } typeSymbolOfOther
                && TryGetRange(typeSymbolOfOther) is { } range
                && range.IsOutOfRange(constant))
             {
-                var typeName = typeSymbolOfOther.ToMinimalDisplayString(context.SemanticModel, other.GetLocation().SourceSpan.Start);
+                var typeName = typeSymbolOfOther.ToMinimalDisplayString(context.Model, other.GetLocation().SourceSpan.Start);
                 context.ReportIssue(MathComparisonRule, other.Parent, typeName);
             }
         }

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var assignment = (AssignmentExpressionSyntax)c.Node;
                     var expression = assignment.Left;
 
-                    ProcessPropertyChange(c, c.SemanticModel, expression);
+                    ProcessPropertyChange(c, c.Model, expression);
                 },
                 SyntaxKind.SimpleAssignmentExpression,
                 SyntaxKind.AddAssignmentExpression,
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
                 {
                     var unary = (PrefixUnaryExpressionSyntax)c.Node;
-                    ProcessPropertyChange(c, c.SemanticModel, unary.Operand);
+                    ProcessPropertyChange(c, c.Model, unary.Operand);
                 },
                 SyntaxKind.PreDecrementExpression,
                 SyntaxKind.PreIncrementExpression);
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
                 {
                     var unary = (PostfixUnaryExpressionSyntax)c.Node;
-                    ProcessPropertyChange(c, c.SemanticModel, unary.Operand);
+                    ProcessPropertyChange(c, c.Model, unary.Operand);
                 },
                 SyntaxKind.PostDecrementExpression,
                 SyntaxKind.PostIncrementExpression);

@@ -34,7 +34,7 @@ public abstract class LinkedListPropertiesInsteadOfMethodsBase<TSyntaxKind, TInv
             var invocation = (TInvocationExpression)c.Node;
             var methodName = Language.GetName(invocation);
 
-            if (IsFirstOrLast(methodName) && IsRelevantCallAndType(invocation, c.SemanticModel))
+            if (IsFirstOrLast(methodName) && IsRelevantCallAndType(invocation, c.Model))
             {
                 c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName);
             }

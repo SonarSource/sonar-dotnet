@@ -46,7 +46,7 @@ public sealed class RedundancyInConstructorDestructorDeclaration : SonarDiagnost
         var typeDeclaration = (TypeDeclarationSyntax)context.Node;
         if (!IsInheritingFromTypeWithValueInPrimaryConstructor(typeDeclaration)
             && typeDeclaration.ParameterList() is { Parameters.Count: 0 } parameterList
-            && !IsStructWithInitializedFieldOrProperty(typeDeclaration, context.SemanticModel))
+            && !IsStructWithInitializedFieldOrProperty(typeDeclaration, context.Model))
         {
             context.ReportIssue(Rule, parameterList, "primary constructor");
         }
@@ -70,7 +70,7 @@ public sealed class RedundancyInConstructorDestructorDeclaration : SonarDiagnost
     {
         var constructorDeclaration = (ConstructorDeclarationSyntax)context.Node;
 
-        if (IsConstructorRedundant(constructorDeclaration, context.SemanticModel))
+        if (IsConstructorRedundant(constructorDeclaration, context.Model))
         {
             context.ReportIssue(Rule, constructorDeclaration, "constructor");
             return;

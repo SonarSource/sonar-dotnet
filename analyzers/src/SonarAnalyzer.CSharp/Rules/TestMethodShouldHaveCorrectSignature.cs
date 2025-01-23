@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void AnalyzeMethod(SonarSyntaxNodeReportingContext c)
         {
-            if (HasAttributes(c.Node) && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol)
+            if (HasAttributes(c.Node) && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol)
             {
                 var validator = GetValidator(methodSymbol);
                 var message = validator(c.Node, methodSymbol);

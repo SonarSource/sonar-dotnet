@@ -45,11 +45,11 @@ namespace SonarAnalyzer.Rules.VisualBasic
         {
             if (methodStatement.Modifiers.Any(SyntaxKind.MustOverrideKeyword)
                 || methodStatement.Modifiers.Any(SyntaxKind.OverridableKeyword)
-                || IsDllImport(context.SemanticModel, methodStatement))
+                || IsDllImport(context.Model, methodStatement))
             {
                 return true;
             }
-            else if (context.SemanticModel.GetDeclaredSymbol(methodStatement) is { IsOverride: true } methodSymbol)
+            else if (context.Model.GetDeclaredSymbol(methodStatement) is { IsOverride: true } methodSymbol)
             {
                 return methodSymbol.OverriddenMethod is { IsAbstract: true } || context.IsTestProject();
             }

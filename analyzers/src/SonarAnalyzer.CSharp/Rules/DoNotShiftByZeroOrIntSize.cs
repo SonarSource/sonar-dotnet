@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var shiftInstances = ((MemberDeclarationSyntax)c.Node)
                         .DescendantNodes()
-                        .Select(n => FindShiftInstance(n, c.SemanticModel))
+                        .Select(n => FindShiftInstance(n, c.Model))
                         .WhereNotNull();
 
                     var zeroShiftIssues = new List<ShiftInstance>();

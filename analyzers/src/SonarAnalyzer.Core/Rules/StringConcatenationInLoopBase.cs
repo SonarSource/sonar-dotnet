@@ -43,9 +43,9 @@ namespace SonarAnalyzer.Rules
                 && Language.Syntax.IsAnyKind(rightExpression, ExpressionConcatenationKinds)
                 && Language.Syntax.AssignmentLeft(assignment) is var assigned
                 && IsIdentifierOnTheRight(assigned, rightExpression)
-                && IsSystemString(assigned, context.SemanticModel)
-                && context.SemanticModel.GetSymbolInfo(assigned).Symbol is ILocalSymbol
-                && AreNotDefinedInTheSameLoop(assigned, assignment, context.SemanticModel))
+                && IsSystemString(assigned, context.Model)
+                && context.Model.GetSymbolInfo(assigned).Symbol is ILocalSymbol
+                && AreNotDefinedInTheSameLoop(assigned, assignment, context.Model))
             {
                 context.ReportIssue(SupportedDiagnostics[0], assignment);
             }
@@ -56,9 +56,9 @@ namespace SonarAnalyzer.Rules
             var addAssignment = (TAssignmentExpression)context.Node;
 
             if (Language.Syntax.AssignmentLeft(addAssignment) is var expression
-                && IsSystemString(expression, context.SemanticModel)
-                && context.SemanticModel.GetSymbolInfo(expression).Symbol is ILocalSymbol
-                && AreNotDefinedInTheSameLoop(expression, addAssignment, context.SemanticModel))
+                && IsSystemString(expression, context.Model)
+                && context.Model.GetSymbolInfo(expression).Symbol is ILocalSymbol
+                && AreNotDefinedInTheSameLoop(expression, addAssignment, context.Model))
             {
                 context.ReportIssue(SupportedDiagnostics[0], addAssignment);
             }

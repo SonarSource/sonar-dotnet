@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules
         private void Visit(SonarSyntaxNodeReportingContext context)
         {
             var memberAccess = (TMemberAccessSyntax)context.Node;
-            if (Language.Syntax.IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.SemanticModel))
+            if (Language.Syntax.IsMemberAccessOnKnownType(memberAccess, VulnerableApiName, KnownType.System_IO_Path, context.Model))
             {
                 context.ReportIssue(Rule, memberAccess);
             }

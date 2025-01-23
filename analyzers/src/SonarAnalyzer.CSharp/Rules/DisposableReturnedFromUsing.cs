@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (declaration != null)
                     {
                         symbolsDeclaredInUsing =
-                            declaration.Variables.Select(syntax => c.SemanticModel.GetDeclaredSymbol(syntax))
+                            declaration.Variables.Select(syntax => c.Model.GetDeclaredSymbol(syntax))
                                 .WhereNotNull()
                                 .ToHashSet();
                     }
@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         {
                             return;
                         }
-                        var symbol = c.SemanticModel.GetSymbolInfo(identifierName).Symbol;
+                        var symbol = c.Model.GetSymbolInfo(identifierName).Symbol;
                         if (symbol == null)
                         {
                             return;
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     }
 
                     var declaredSymbols = localDeclarationStatement.Declaration.Variables
-                                .Select(syntax => c.SemanticModel.GetDeclaredSymbol(syntax))
+                                .Select(syntax => c.Model.GetDeclaredSymbol(syntax))
                                 .WhereNotNull()
                                 .ToHashSet();
 
@@ -87,7 +87,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var returnedSymbols = GetReturnedSymbols(body, c.SemanticModel);
+            var returnedSymbols = GetReturnedSymbols(body, c.Model);
             returnedSymbols.IntersectWith(declaredSymbols);
 
             if (returnedSymbols.Any())

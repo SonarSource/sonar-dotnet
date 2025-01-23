@@ -49,7 +49,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
                         var invocationExpression = (InvocationExpressionSyntax)nodeContext.Node;
 
                         var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, exclusions, invocationExpression,
-                            nodeContext.SemanticModel, nodeContext.ContainingSymbol, nodeContext.Cancel);
+                            nodeContext.Model, nodeContext.ContainingSymbol, nodeContext.Cancel);
                         if (awaitableAlternatives.FirstOrDefault() is { Name: { } alternative })
                         {
                             nodeContext.ReportIssue(Rule, invocationExpression, alternative);

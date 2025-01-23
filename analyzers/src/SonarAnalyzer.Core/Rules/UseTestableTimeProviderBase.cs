@@ -32,9 +32,9 @@ public abstract class UseTestableTimeProviderBase<TSyntaxKind> : SonarDiagnostic
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (IsDateTimeProviderProperty(Language.Syntax.NodeIdentifier(c.Node).Value.Text)
-                && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
+                && c.Model.GetSymbolInfo(c.Node).Symbol is IPropertySymbol property
                 && property.IsInType(trackedTypes)
-                && !c.Node.Ancestors().Any(x => Ignore(x, c.SemanticModel)))
+                && !c.Node.Ancestors().Any(x => Ignore(x, c.Model)))
             {
                 c.ReportIssue(Rule, c.Node.Parent);
             }

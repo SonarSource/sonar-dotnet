@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         && parameters[count - 1].Identifier.IsKind(SyntaxKind.ArgListKeyword)
                         && CheckModifiers(c.Node)
                         && c.Node.GetIdentifier() is { IsMissing: false } identifier
-                        && MethodSymbol(c.Node, c.SemanticModel) is { } methodSymbol
+                        && MethodSymbol(c.Node, c.Model) is { } methodSymbol
                         && !methodSymbol.IsOverride
                         && methodSymbol.IsPubliclyAccessible()
                         && methodSymbol.GetInterfaceMember() == null)

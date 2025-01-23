@@ -55,18 +55,18 @@ public abstract class MutableFieldsShouldNotBe : SonarDiagnosticAnalyzer
             }
             var typeDeclaration = (TypeDeclarationSyntax)c.Node;
             var fieldDeclarations = typeDeclaration.Members.OfType<FieldDeclarationSyntax>();
-            var assignmentsImmutability = FieldAssignmentImmutability(typeDeclaration, fieldDeclarations, c.SemanticModel);
+            var assignmentsImmutability = FieldAssignmentImmutability(typeDeclaration, fieldDeclarations, c.Model);
 
             foreach (var fieldDeclaration in fieldDeclarations)
             {
                 if (HasAllInvalidModifiers(fieldDeclaration)
                     && fieldDeclaration.Declaration.Variables.Count > 0
-                    && c.SemanticModel.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol { Type: not null } fieldSymbol
+                    && c.Model.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol { Type: not null } fieldSymbol
                     && fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public
                     && !IsImmutableOrValidMutableType(fieldSymbol.Type)
                     // The field seems to be violating the rule but we should exclude the cases where the field is read-only
                     // and all initializations to this field are immutable
-                    && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, c.SemanticModel).ToList() is { Count: > 0 } incorrectFieldVariables)
+                    && CollectInvalidFieldVariables(fieldDeclaration, assignmentsImmutability, c.Model).ToList() is { Count: > 0 } incorrectFieldVariables)
                 {
                     var pluralizeSuffix = incorrectFieldVariables.Count > 1 ? "s" : string.Empty;
                     c.ReportIssue(rule, fieldDeclaration.Declaration.Type, pluralizeSuffix, incorrectFieldVariables.ToSentence(quoteWords: true));

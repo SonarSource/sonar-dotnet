@@ -32,7 +32,7 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (MethodSymbolOfNode(c.SemanticModel, c.Node) is { } methodSymbol
+                if (MethodSymbolOfNode(c.Model, c.Node) is { } methodSymbol
                     && methodSymbol.GetInterfaceMember() == null
                     && !methodSymbol.IsOverride
                     && methodSymbol.IsPubliclyAccessible()

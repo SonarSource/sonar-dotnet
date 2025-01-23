@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var node = c.Node;
-                    if (!IsPartOfBinaryNegationOrCondition(node) && IsWeakProtocol(node, c.SemanticModel))
+                    if (!IsPartOfBinaryNegationOrCondition(node) && IsWeakProtocol(node, c.Model))
                     {
                         c.ReportIssue(Rule, node);
                     }

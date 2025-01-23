@@ -56,7 +56,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportDiagnostics(SonarSyntaxNodeReportingContext context, SyntaxNode declaration, IEnumerable<SyntaxToken> modifiers)
         {
-            var symbol = context.SemanticModel.GetDeclaredSymbol(declaration);
+            var symbol = context.Model.GetDeclaredSymbol(declaration);
             if (symbol == null || symbol.IsOverride || !symbol.ContainingType.IsSealed)
             {
                 return;

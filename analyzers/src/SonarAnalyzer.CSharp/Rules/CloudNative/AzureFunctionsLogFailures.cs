@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 if (c.AzureFunctionMethod() is { } entryPoint
                     && HasLoggerInScope(entryPoint))
                 {
-                    var walker = new LoggerCallWalker(c.SemanticModel, c.Cancel);
+                    var walker = new LoggerCallWalker(c.Model, c.Cancel);
                     walker.SafeVisit(catchClause.Block);
                     // Exception handling in the filter clause preserves log scopes and is therefore recommended
                     // See https://blog.stephencleary.com/2020/06/a-new-pattern-for-exception-logging.html

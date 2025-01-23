@@ -36,10 +36,10 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     var invocation = (InvocationExpressionSyntax) c.Node;
 
-                    var methodSymbol = c.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+                    var methodSymbol = c.Model.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
                     if (methodSymbol.IsInType(KnownType.System_Object) &&
                         methodSymbol.Name == ReferenceEqualsName &&
-                        AnyArgumentIsValueType(invocation.ArgumentList, c.SemanticModel))
+                        AnyArgumentIsValueType(invocation.ArgumentList, c.Model))
                     {
                         c.ReportIssue(rule, invocation.Expression);
                     }

@@ -19,5 +19,5 @@ namespace SonarAnalyzer.VisualBasic.Core.Extensions;
 public static class SonarSyntaxNodeAnalysisContextExtensions
 {
     public static bool IsInExpressionTree(this SonarSyntaxNodeReportingContext context) =>
-        context.Node.IsInExpressionTree(context.SemanticModel);
+        context.Node.IsInExpressionTree(context.Model);
 }

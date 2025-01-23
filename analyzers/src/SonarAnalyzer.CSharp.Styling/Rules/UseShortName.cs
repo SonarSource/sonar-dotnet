@@ -56,7 +56,7 @@ public sealed class UseShortName : StylingAnalyzer
     private void ValidateDeclaration(SonarSyntaxNodeReportingContext context, SyntaxToken identifier)
     {
         if (FindRename(identifier.ValueText) is { } name
-            && context.SemanticModel.GetDeclaredSymbol(context.Node).GetSymbolType() is { } type
+            && context.Model.GetDeclaredSymbol(context.Node).GetSymbolType() is { } type
             && type.Name == name.TypeName)
         {
             context.ReportIssue(Rule, identifier, identifier.ValueText.Replace(name.UsedName, name.SuggestedName));

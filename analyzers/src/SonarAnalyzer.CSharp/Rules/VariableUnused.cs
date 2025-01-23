@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterCodeBlockStartAction(cbc =>
             {
                 var collector = new UnusedLocalsCollector();
-                var walker = new QueryExpressionWalker(cbc.SemanticModel);
+                var walker = new QueryExpressionWalker(cbc.Model);
 
                 cbc.RegisterNodeAction(collector.CollectDeclarations,
                     SyntaxKind.LocalDeclarationStatement,

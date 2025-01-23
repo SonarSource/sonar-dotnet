@@ -78,7 +78,7 @@ public sealed class ReturnValueIgnored : SonarDiagnosticAnalyzer
             {
                 var lambda = (LambdaExpressionSyntax)c.Node;
 
-                if (c.SemanticModel.GetSymbolInfo(lambda).Symbol is not IMethodSymbol { ReturnsVoid: true } symbol)
+                if (c.Model.GetSymbolInfo(lambda).Symbol is not IMethodSymbol { ReturnsVoid: true } symbol)
                 {
                     return;
                 }
@@ -93,7 +93,7 @@ public sealed class ReturnValueIgnored : SonarDiagnosticAnalyzer
     private static void CheckExpressionForPureMethod(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression)
     {
         if (expression is InvocationExpressionSyntax invocation
-            && context.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol { ReturnsVoid: false } invokedMethodSymbol
+            && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { ReturnsVoid: false } invokedMethodSymbol
             && invokedMethodSymbol.Parameters.All(p => p.RefKind == RefKind.None)
             && IsSideEffectFreeOrPure(invokedMethodSymbol))
         {

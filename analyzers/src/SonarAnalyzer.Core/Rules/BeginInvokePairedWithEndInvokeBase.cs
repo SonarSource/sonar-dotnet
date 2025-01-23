@@ -45,13 +45,13 @@ namespace SonarAnalyzer.Rules
                 var invocation = (TInvocationExpressionSyntax)c.Node;
                 if (Language.Syntax.NodeExpression(invocation) is { } expression
                     && expression.ToStringContains(BeginInvoke)
-                    && c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                    && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
                     && methodSymbol.Name == BeginInvoke
                     && IsDelegate(methodSymbol)
                     && methodSymbol.Parameters.SingleOrDefault(x => x.Name == CallbackParameterName) is { } parameter
                     && Language.MethodParameterLookup(invocation, methodSymbol).TryGetNonParamsSyntax(parameter, out var callbackArg)
-                    && IsInvalidCallback(callbackArg, c.SemanticModel)
-                    && !ParentMethodContainsEndInvoke(invocation, c.SemanticModel))
+                    && IsInvalidCallback(callbackArg, c.Model)
+                    && !ParentMethodContainsEndInvoke(invocation, c.Model))
                 {
                     c.ReportIssue(Rule, Language.Syntax.InvocationIdentifier(invocation).Value);
                 }

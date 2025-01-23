@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (expression is MemberAccessExpressionSyntax memberAccess &&
                         memberAccess.Name.Identifier.ValueText == "Sum" &&
                         IsSumInsideUnchecked(invocation) &&
-                        c.SemanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+                        c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
                         IsSumOnInteger(methodSymbol))
                     {
                         c.ReportIssue(rule, memberAccess.Name);

@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
 
                     if (methodDeclaration.IsExtensionMethod()
-                        && c.SemanticModel.GetDeclaredSymbol(methodDeclaration) is { IsExtensionMethod: true, Parameters: { Length: > 0 } } methodSymbol
+                        && c.Model.GetDeclaredSymbol(methodDeclaration) is { IsExtensionMethod: true, Parameters: { Length: > 0 } } methodSymbol
                         && methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType
                         && methodSymbol.Parameters[0].Type.IsClass()
                         && methodSymbol.ContainingNamespace.Equals(methodSymbol.Parameters[0].Type.ContainingNamespace)

@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
                     if (c.AzureFunctionMethod() is null
                         && IsCatchClauseEmptyOrNotPattern(catchClause)
-                        && IsSystemException(catchClause.Declaration, c.SemanticModel)
+                        && IsSystemException(catchClause.Declaration, c.Model)
                         && !IsThrowTheLastStatementInTheBlock(catchClause.Block))
                     {
                         c.ReportIssue(Rule, GetLocation(catchClause));

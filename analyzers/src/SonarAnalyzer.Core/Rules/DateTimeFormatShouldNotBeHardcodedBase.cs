@@ -46,8 +46,8 @@ public abstract class DateTimeFormatShouldNotBeHardcodedBase<TSyntaxKind, TInvoc
         if ((TInvocation)analysisContext.Node is var invocation
             && Language.Syntax.InvocationIdentifier(invocation) is { } identifier
             && identifier.ValueText.Equals("ToString", Language.NameComparison)
-            && HasInvalidFirstArgument(invocation, analysisContext.SemanticModel) // Standard date and time format strings are 1 char long and they are allowed
-            && analysisContext.SemanticModel.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
+            && HasInvalidFirstArgument(invocation, analysisContext.Model) // Standard date and time format strings are 1 char long and they are allowed
+            && analysisContext.Model.GetSymbolInfo(identifier.Parent).Symbol is { } methodCallSymbol
             && CheckedTypes.Any(x => methodCallSymbol.ContainingType.ConstructedFrom.Is(x)))
         {
             analysisContext.ReportIssue(SupportedDiagnostics[0], HardCodedArgumentLocation(invocation));

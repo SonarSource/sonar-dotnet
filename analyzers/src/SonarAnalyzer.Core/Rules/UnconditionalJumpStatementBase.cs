@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Rules
         protected LoopWalkerBase(SonarSyntaxNodeReportingContext context, ISet<TLanguageKindEnum> loopStatements)
         {
             rootExpression = context.Node;
-            semanticModel = context.SemanticModel;
+            semanticModel = context.Model;
             ignoredSyntaxesKind = LambdaSyntaxes.Union(LocalFunctionSyntaxes).Union(loopStatements).ToHashSet();
         }
 

@@ -34,12 +34,12 @@ namespace SonarAnalyzer.Rules
         {
             Location location;
             bool isReportingOnLeftKey;
-            if (FindIntConstant(context.SemanticModel, left) is { } valueLeft && valueLeft == constValueToLookFor)
+            if (FindIntConstant(context.Model, left) is { } valueLeft && valueLeft == constValueToLookFor)
             {
                 location = left.CreateLocation(@operator);
                 isReportingOnLeftKey = true;
             }
-            else if (FindIntConstant(context.SemanticModel, right) is { } valueRight && valueRight == constValueToLookFor)
+            else if (FindIntConstant(context.Model, right) is { } valueRight && valueRight == constValueToLookFor)
             {
                 location = @operator.CreateLocation(right);
                 isReportingOnLeftKey = false;

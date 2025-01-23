@@ -51,20 +51,20 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         return;
                     }
 
-                    var bound = GetConstantArgumentValue(name.ArrayBounds.Arguments.First(), c.SemanticModel);
+                    var bound = GetConstantArgumentValue(name.ArrayBounds.Arguments.First(), c.Model);
                     if (!bound.HasValue)
                     {
                         return;
                     }
 
-                    if (!(c.SemanticModel.GetDeclaredSymbol(name) is ILocalSymbol variableSymbol) ||
+                    if (!(c.Model.GetDeclaredSymbol(name) is ILocalSymbol variableSymbol) ||
                         !(variableSymbol.Type is IArrayTypeSymbol))
                     {
                         return;
                     }
 
                     var statements = GetFollowingStatements(declaration);
-                    var indexes = GetAssignedIndexes(statements, variableSymbol, c.SemanticModel).ToHashSet();
+                    var indexes = GetAssignedIndexes(statements, variableSymbol, c.Model).ToHashSet();
 
                     var upperBound = Math.Max(bound.Value, 0);
 

@@ -23,7 +23,7 @@ public sealed class SonarCodeBlockStartAnalysisContext<TSyntaxKind> : SonarAnaly
     public override CancellationToken Cancel => Context.CancellationToken;
     public SyntaxNode CodeBlock => Context.CodeBlock;
     public ISymbol OwningSymbol => Context.OwningSymbol;
-    public SemanticModel SemanticModel => Context.SemanticModel;
+    public SemanticModel Model => Context.SemanticModel;
 
     internal SonarCodeBlockStartAnalysisContext(SonarAnalysisContext analysisContext, CodeBlockStartAnalysisContext<TSyntaxKind> context) : base(analysisContext, context) { }
 

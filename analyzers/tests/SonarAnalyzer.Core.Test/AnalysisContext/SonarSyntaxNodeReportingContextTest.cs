@@ -39,7 +39,7 @@ public class SonarSyntaxNodeReportingContextTest
         sut.Options.Should().BeSameAs(options);
         sut.Cancel.Should().Be(cancel);
         sut.Node.Should().BeSameAs(node);
-        sut.SemanticModel.Should().BeSameAs(model);
+        sut.Model.Should().BeSameAs(model);
         sut.ContainingSymbol.Should().BeSameAs(containingSymbol);
     }
 

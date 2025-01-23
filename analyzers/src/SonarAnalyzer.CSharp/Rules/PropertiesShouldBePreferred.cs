@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
                 {
                     if (c.IsRedundantPositionalRecordContext()
-                        || c.SemanticModel.GetDeclaredSymbol(c.Node) is not INamedTypeSymbol typeSymbol)
+                        || c.Model.GetDeclaredSymbol(c.Node) is not INamedTypeSymbol typeSymbol)
                     {
                         return;
                     }

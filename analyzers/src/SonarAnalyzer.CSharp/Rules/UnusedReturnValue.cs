@@ -78,13 +78,13 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var localFunctionSymbol = (IMethodSymbol)context.SemanticModel.GetDeclaredSymbol(localFunctionSyntax);
+            var localFunctionSymbol = (IMethodSymbol)context.Model.GetDeclaredSymbol(localFunctionSyntax);
             if (localFunctionSymbol.ReturnsVoid || localFunctionSymbol.IsAsync)
             {
                 return;
             }
 
-            var matchingInvocations = GetLocalMatchingInvocations(topMostContainingMethod, localFunctionSymbol, context.SemanticModel).ToList();
+            var matchingInvocations = GetLocalMatchingInvocations(topMostContainingMethod, localFunctionSymbol, context.Model).ToList();
             // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
             if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
             {

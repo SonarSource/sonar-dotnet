@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     var name = (GenericNameSyntax)c.Node;
                     if (name.Identifier.ValueText is SignalEntityName or SignalEntityAsyncName or CreateEntityProxyName
                         && name.TypeArgumentList.Arguments.Count == 1
-                        && c.SemanticModel.GetSymbolInfo(name).Symbol is IMethodSymbol method
+                        && c.Model.GetSymbolInfo(name).Symbol is IMethodSymbol method
                         && IsRestrictedMethod(method)
                         && method.TypeArguments.Single() is INamedTypeSymbol { TypeKind: not TypeKind.Error } entityInterface
                         && InterfaceErrorMessage(entityInterface) is { } message)

@@ -27,8 +27,8 @@ namespace SonarAnalyzer.Rules
         protected sealed override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                 {
-                    if (c.Node.HasFlagsAttribute(c.SemanticModel)
-                        && ZeroMember(c.Node, c.SemanticModel) is { } zeroMember
+                    if (c.Node.HasFlagsAttribute(c.Model)
+                        && ZeroMember(c.Node, c.Model) is { } zeroMember
                         && Language.Syntax.NodeIdentifier(zeroMember) is { } identifier
                         && identifier.ValueText != "None")
                     {

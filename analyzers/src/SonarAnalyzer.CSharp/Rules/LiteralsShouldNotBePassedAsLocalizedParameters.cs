@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeInvocations(SonarSyntaxNodeReportingContext context)
         {
             var invocationSyntax = (InvocationExpressionSyntax)context.Node;
-            if (!(context.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol) || invocationSyntax.ArgumentList is null)
+            if (!(context.Model.GetSymbolInfo(invocationSyntax).Symbol is IMethodSymbol methodSymbol) || invocationSyntax.ArgumentList is null)
             {
                 return;
             }
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
             // Calling to/from debug-only code
             if (methodSymbol.IsDiagnosticDebugMethod()
                 || methodSymbol.IsConditionalDebugMethod()
-                || invocationSyntax.IsInConditionalDebug(context.SemanticModel))
+                || invocationSyntax.IsInConditionalDebug(context.Model))
             {
                 return;
             }
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Rules.CSharp
             if (methodSymbol.IsConsoleWrite() || methodSymbol.IsConsoleWriteLine())
             {
                 var firstArgument = invocationSyntax.ArgumentList.Arguments.FirstOrDefault();
-                if (IsStringLiteral(firstArgument?.Expression, context.SemanticModel))
+                if (IsStringLiteral(firstArgument?.Expression, context.Model))
                 {
                     context.ReportIssue(Rule, firstArgument);
                 }
@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             var nonCompliantParameters = methodSymbol.Parameters
                 .Merge(invocationSyntax.ArgumentList.Arguments, (parameter, syntax) => new { parameter, syntax })
-                .Where(x => IsLocalizableStringLiteral(x.parameter, x.syntax, context.SemanticModel));
+                .Where(x => IsLocalizableStringLiteral(x.parameter, x.syntax, context.Model));
 
             foreach (var nonCompliantParameter in nonCompliantParameters)
             {
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void AnalyzeAssignments(SonarSyntaxNodeReportingContext context)
         {
             var assignmentSyntax = (AssignmentExpressionSyntax)context.Node;
-            if (assignmentSyntax.IsInConditionalDebug(context.SemanticModel))
+            if (assignmentSyntax.IsInConditionalDebug(context.Model))
             {
                 return;
             }
@@ -86,9 +86,9 @@ namespace SonarAnalyzer.Rules.CSharp
             var assignmentMappings = assignmentSyntax.MapAssignmentArguments();
             foreach (var assignmentMapping in assignmentMappings)
             {
-                if (context.SemanticModel.GetSymbolInfo(assignmentMapping.Left).Symbol is IPropertySymbol propertySymbol
+                if (context.Model.GetSymbolInfo(assignmentMapping.Left).Symbol is IPropertySymbol propertySymbol
                     && IsLocalizable(propertySymbol)
-                    && IsStringLiteral(assignmentMapping.Right, context.SemanticModel))
+                    && IsStringLiteral(assignmentMapping.Right, context.Model))
                 {
                     context.ReportIssue(Rule, assignmentMapping.Right);
                 }

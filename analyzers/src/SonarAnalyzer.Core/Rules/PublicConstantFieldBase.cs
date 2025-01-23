@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Rules
                     }
 
                     var anyVariable = variables.First();
-                    if (!(c.SemanticModel.GetDeclaredSymbol(anyVariable) is IFieldSymbol symbol) ||
+                    if (!(c.Model.GetDeclaredSymbol(anyVariable) is IFieldSymbol symbol) ||
                         !symbol.IsConst ||
                         symbol.GetEffectiveAccessibility() != Accessibility.Public)
                     {

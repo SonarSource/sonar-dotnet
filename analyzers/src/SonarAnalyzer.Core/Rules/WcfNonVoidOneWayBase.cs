@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Rules
                 c =>
                 {
                     var methodDeclaration = (TMethodSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration) as IMethodSymbol;
+                    var methodSymbol = c.Model.GetDeclaredSymbol(methodDeclaration) as IMethodSymbol;
                     if (methodSymbol == null ||
                         methodSymbol.ReturnsVoid)
                     {

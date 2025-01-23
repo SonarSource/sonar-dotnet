@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 var objectCreation = (ObjectCreationExpressionSyntax)c.Node;
                 var parent = objectCreation.GetFirstNonParenthesizedParent();
                 if (parent.IsKind(SyntaxKind.ExpressionStatement)
-                    && c.SemanticModel.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol createdObjectType
+                    && c.Model.GetSymbolInfo(objectCreation.Type).Symbol is INamedTypeSymbol createdObjectType
                     && createdObjectType.DerivesFrom(KnownType.System_Exception))
                 {
                     c.ReportIssue(Rule, objectCreation);

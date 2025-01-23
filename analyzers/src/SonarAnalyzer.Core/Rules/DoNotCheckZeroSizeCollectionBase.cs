@@ -38,11 +38,11 @@ namespace SonarAnalyzer.Rules
                     var binaryLeft = Language.Syntax.BinaryExpressionLeft(binary);
                     var binaryRight = Language.Syntax.BinaryExpressionRight(binary);
 
-                    if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.SemanticModel, binaryLeft, out var left))
+                    if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.Model, binaryLeft, out var left))
                     {
                         CheckExpression(c, binary, binaryRight, left, Language.Syntax.ComparisonKind(binary).Mirror());
                     }
-                    else if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.SemanticModel, binaryRight, out var right))
+                    else if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.Model, binaryRight, out var right))
                     {
                         CheckExpression(c, binary, binaryLeft, right, Language.Syntax.ComparisonKind(binary));
                     }
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Rules
             var result = comparison.Compare(constant);
             if (result.IsInvalid()
                 && HasCandidateName(Language.Syntax.NodeIdentifier(expression)?.ValueText)
-                && context.SemanticModel.GetSymbolInfo(expression).Symbol is ISymbol symbol
+                && context.Model.GetSymbolInfo(expression).Symbol is ISymbol symbol
                 && CollecionSizeTypeName(symbol) is { } symbolType)
             {
                 context.ReportIssue(Rule, issue, symbol.Name, symbolType, (result == CountComparisonResult.AlwaysTrue).ToString());

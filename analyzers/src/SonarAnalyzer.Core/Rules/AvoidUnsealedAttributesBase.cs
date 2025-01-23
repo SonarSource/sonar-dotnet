@@ -31,7 +31,7 @@ public abstract class AvoidUnsealedAttributesBase<TSyntaxKind> : SonarDiagnostic
             c =>
             {
                 if (Language.Syntax.NodeIdentifier(c.Node) is { IsMissing: false } identifier
-                    && c.SemanticModel.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { IsAbstract: false, IsSealed: false } symbol
+                    && c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { IsAbstract: false, IsSealed: false } symbol
                     && symbol.DerivesFrom(KnownType.System_Attribute)
                     && symbol.IsPubliclyAccessible())
                 {

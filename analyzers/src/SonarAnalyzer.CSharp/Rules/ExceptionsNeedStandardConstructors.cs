@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
             context.RegisterNodeAction(c =>
             {
                 var classDeclaration = c.Node as ClassDeclarationSyntax;
-                var classSymbol = c.SemanticModel.GetDeclaredSymbol(classDeclaration);
+                var classSymbol = c.Model.GetDeclaredSymbol(classDeclaration);
 
                 if (!classDeclaration.Identifier.IsMissing &&
                     classSymbol.DerivesFrom(KnownType.System_Exception) &&

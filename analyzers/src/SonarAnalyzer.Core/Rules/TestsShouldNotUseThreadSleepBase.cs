@@ -32,9 +32,9 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
         {
             if (c.Node.ToStringContains(nameof(Thread.Sleep), Language.NameComparison)
-                && c.SemanticModel.GetSymbolInfo(c.Node).Symbol is IMethodSymbol method
+                && c.Model.GetSymbolInfo(c.Node).Symbol is IMethodSymbol method
                 && method.Is(KnownType.System_Threading_Thread, nameof(Thread.Sleep))
-                && IsInTestMethod(c.Node, c.SemanticModel))
+                && IsInTestMethod(c.Node, c.Model))
             {
                 c.ReportIssue(Rule, c.Node);
             }

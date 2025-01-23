@@ -56,8 +56,8 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
     private static void CheckCastExpression(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression, ExpressionSyntax type, Location location)
     {
         if (!expression.IsKind(SyntaxKindEx.DefaultLiteralExpression)
-            && context.SemanticModel.GetTypeInfo(expression) is { Type: { } expressionType } expressionTypeInfo
-            && context.SemanticModel.GetTypeInfo(type) is { Type: { } castType }
+            && context.Model.GetTypeInfo(expression) is { Type: { } expressionType } expressionTypeInfo
+            && context.Model.GetTypeInfo(type) is { Type: { } castType }
             && expressionType.Equals(castType)
             && FlowStateEquals(expressionTypeInfo, type))
         {
@@ -80,7 +80,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
     private static void CheckExtensionMethodInvocation(SonarSyntaxNodeReportingContext context)
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
-        if (GetEnumerableExtensionSymbol(invocation, context.SemanticModel) is { } methodSymbol)
+        if (GetEnumerableExtensionSymbol(invocation, context.Model) is { } methodSymbol)
         {
             var returnType = methodSymbol.ReturnType;
             if (GetGenericTypeArgument(returnType) is { } castType)
@@ -91,7 +91,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
                     return;
                 }
 
-                var elementType = GetElementType(invocation, methodSymbol, context.SemanticModel);
+                var elementType = GetElementType(invocation, methodSymbol, context.Model);
                 if (elementType != null && elementType.Equals(castType) && elementType.NullableAnnotation() == castType.NullableAnnotation())
                 {
                     var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
@@ -102,7 +102,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
     }
 
     private static void ReportIssue(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression, ITypeSymbol castType, Location location) =>
-        context.ReportIssue(Rule, location, castType.ToMinimalDisplayString(context.SemanticModel, expression.SpanStart));
+        context.ReportIssue(Rule, location, castType.ToMinimalDisplayString(context.Model, expression.SpanStart));
 
     /// If the invocation one of the <see cref="CastIEnumerableMethods"/> extensions, returns the method symbol.
     private static IMethodSymbol GetEnumerableExtensionSymbol(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>

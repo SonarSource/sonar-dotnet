@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodDeclaration);
+                    var methodSymbol = c.Model.GetDeclaredSymbol(methodDeclaration);
 
                     if (IsViolatingRule(methodSymbol) && !IsExceptionToTheRule(methodDeclaration, methodSymbol))
                     {

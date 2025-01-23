@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var declaration = (TypeDeclarationSyntax)c.Node;
-                    if (c.SemanticModel.GetDeclaredSymbol(declaration)?.GetMembers() is { Length: > 0 } members)
+                    if (c.Model.GetDeclaredSymbol(declaration)?.GetMembers() is { Length: > 0 } members)
                     {
                         // structs cannot initialize fields/properties at declaration time
                         // interfaces cannot have instance fields and instance properties cannot have initializers
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // only retrieve the member symbols (an expensive call) if there are explicit class initializers
-            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, IsNotStaticOrConst);
+            var initializedMembers = GetInitializedMembers(c.Model, declaration, IsNotStaticOrConst);
             if (initializedMembers.Count == 0)
             {
                 return;
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             // only retrieve the member symbols (an expensive call) if there are explicit class initializers
-            var initializedMembers = GetInitializedMembers(c.SemanticModel, declaration, IsStatic);
+            var initializedMembers = GetInitializedMembers(c.Model, declaration, IsStatic);
             if (initializedMembers.Count == 0)
             {
                 return;
@@ -168,7 +168,7 @@ namespace SonarAnalyzer.Rules.CSharp
             where TSyntax : SyntaxNode =>
                 (from constructorSymbol in constructorSymbols
                  from declarationNode in constructorSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).OfType<TSyntax>()
-                 let model = declarationNode.EnsureCorrectSemanticModelOrDefault(context.SemanticModel)
+                 let model = declarationNode.EnsureCorrectSemanticModelOrDefault(context.Model)
                  where model != null
                  select new NodeSymbolAndModel<TSyntax, IMethodSymbol>(model, declarationNode, constructorSymbol)).ToList();
 

@@ -38,7 +38,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                         || IsInterfaceImplementation(methodBlock)
                         || IsWithEventsHandler(methodBlock)
                         || HasAnyAttribute(methodBlock)
-                        || OnlyThrowsNotImplementedException(methodBlock, c.SemanticModel))
+                        || OnlyThrowsNotImplementedException(methodBlock, c.Model))
                     {
                         return;
                     }
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
                     }
 
                     // Bail-out if this is not a method we want to report on (only based on symbols checks)
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(methodBlock);
+                    var methodSymbol = c.Model.GetDeclaredSymbol(methodBlock);
                     if (methodSymbol == null
                         || methodSymbol.IsMainMethod()
                         || methodSymbol.IsEventHandler()

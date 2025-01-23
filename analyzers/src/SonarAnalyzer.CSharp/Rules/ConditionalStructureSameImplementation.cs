@@ -39,11 +39,11 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
                 var precedingStatements = ifStatement.PrecedingStatementsInConditionChain().ToList();
                 var hasElse = HasLeafElseClause(ifStatement);
 
-                CheckStatement(c, ifStatement.Statement, precedingStatements, c.SemanticModel, hasElse, "branch");
+                CheckStatement(c, ifStatement.Statement, precedingStatements, c.Model, hasElse, "branch");
 
                 if (ifStatement.Else is not null)
                 {
-                    CheckStatement(c, ifStatement.Else.Statement, [..precedingStatements, ifStatement.Statement], c.SemanticModel, hasElse, "branch");
+                    CheckStatement(c, ifStatement.Else.Statement, [..precedingStatements, ifStatement.Statement], c.Model, hasElse, "branch");
                 }
             },
             SyntaxKind.IfStatement);
@@ -54,7 +54,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
                 var switchSection = (SwitchSectionSyntax)c.Node;
                 var precedingSections = switchSection.PrecedingSections().ToList();
 
-                CheckStatement(c, switchSection, precedingSections, c.SemanticModel, HasDefaultClause((SwitchStatementSyntax)switchSection.Parent), "case");
+                CheckStatement(c, switchSection, precedingSections, c.Model, HasDefaultClause((SwitchStatementSyntax)switchSection.Parent), "case");
             },
             SyntaxKind.SwitchSection);
     }

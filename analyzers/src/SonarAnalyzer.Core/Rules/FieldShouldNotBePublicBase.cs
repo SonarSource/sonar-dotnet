@@ -42,7 +42,7 @@ namespace SonarAnalyzer.Rules
                     var fieldDeclaration = (TFieldDeclarationSyntax)c.Node;
                     var variables = Variables(fieldDeclaration);
 
-                    foreach (var variable in variables.Select(x => new Pair(x, c.SemanticModel.GetDeclaredSymbol(x) as IFieldSymbol)).Where(x => FieldIsRelevant(x.Symbol)))
+                    foreach (var variable in variables.Select(x => new Pair(x, c.Model.GetDeclaredSymbol(x) as IFieldSymbol)).Where(x => FieldIsRelevant(x.Symbol)))
                     {
                         var identifier = Language.Syntax.NodeIdentifier(variable.Node);
                         c.ReportIssue(Rule, identifier.Value, identifier.Value.ValueText);

@@ -63,12 +63,12 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
                 var methodDeclaration = MethodDeclarationFactory.Create(c.Node);
                 if (!methodDeclaration.Identifier.IsMissing
                     && methodDeclaration.HasImplementation
-                    && c.SemanticModel.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol
+                    && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol
                     && IsTestMethod(methodSymbol, methodDeclaration.IsLocal)
                     && !methodSymbol.HasExpectedExceptionAttribute()
                     && !methodSymbol.HasAssertionInAttribute()
                     && !IsTestIgnored(methodSymbol)
-                    && !ContainsAssertion(c.Node, c.SemanticModel, new HashSet<IMethodSymbol>(), 0))
+                    && !ContainsAssertion(c.Node, c.Model, new HashSet<IMethodSymbol>(), 0))
                 {
                     c.ReportIssue(Rule, methodDeclaration.Identifier);
                 }

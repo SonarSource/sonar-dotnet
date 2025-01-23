@@ -59,15 +59,15 @@ public abstract class UseUnixEpochBase<TSyntaxKind, TLiteralExpression, TMemberA
 
                     if (literalsArguments.Any(x => IsValueEqualTo(x, EpochYear)
                         && literalsArguments.Count(x => IsValueEqualTo(x, EpochMonth)) == 2)
-                        && CheckAndGetTypeName(cc.Node, cc.SemanticModel) is { } name
-                        && IsEpochCtor(cc.Node, cc.SemanticModel))
+                        && CheckAndGetTypeName(cc.Node, cc.Model) is { } name
+                        && IsEpochCtor(cc.Node, cc.Model))
                     {
                         cc.ReportIssue(Rule, cc.Node, name);
                     }
                     else if (arguments.Count() == 1
                         && ((literalsArguments.Count() == 1  && IsValueEqualTo(literalsArguments.First(), EpochTicks))
-                            || (Language.FindConstantValue(cc.SemanticModel, arguments.First()) is long ticks && ticks == EpochTicks))
-                        && CheckAndGetTypeName(cc.Node, cc.SemanticModel) is { } typeName)
+                            || (Language.FindConstantValue(cc.Model, arguments.First()) is long ticks && ticks == EpochTicks))
+                        && CheckAndGetTypeName(cc.Node, cc.Model) is { } typeName)
                     {
                         cc.ReportIssue(Rule, cc.Node, typeName);
                     }

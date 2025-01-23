@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportDiagnostic(SonarSyntaxNodeReportingContext c, ExpressionSyntax newExceptionExpression, SyntaxNode throwExpression)
         {
-            if (c.SemanticModel.GetTypeInfo(newExceptionExpression).Type.Is(KnownType.System_NotImplementedException))
+            if (c.Model.GetTypeInfo(newExceptionExpression).Type.Is(KnownType.System_NotImplementedException))
             {
                 c.ReportIssue(rule, throwExpression);
             }

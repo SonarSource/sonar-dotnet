@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var increment = (PostfixUnaryExpressionSyntax)c.Node;
-                    var symbol = c.SemanticModel.GetSymbolInfo(increment.Operand).Symbol;
+                    var symbol = c.Model.GetSymbolInfo(increment.Operand).Symbol;
 
                     if (symbol is ILocalSymbol || symbol is IParameterSymbol { RefKind: RefKind.None })
                     {

@@ -18,11 +18,11 @@ namespace SonarAnalyzer.Core.AnalysisContext;
 
 public readonly record struct SonarSemanticModelReportingContext(SonarAnalysisContext AnalysisContext, SemanticModelAnalysisContext Context) : ITreeReport, IAnalysisContext
 {
-    public SyntaxTree Tree => SemanticModel.SyntaxTree;
+    public SyntaxTree Tree => Model.SyntaxTree;
     public Compilation Compilation => Context.SemanticModel.Compilation;
     public AnalyzerOptions Options => Context.Options;
     public CancellationToken Cancel => Context.CancellationToken;
-    public SemanticModel SemanticModel => Context.SemanticModel;
+    public SemanticModel Model => Context.SemanticModel;
 
     public ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

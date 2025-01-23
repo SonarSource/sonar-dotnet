@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Rules.CSharp
                     {
                         return;
                     }
-                    var objectTypeInfo = new ObjectTypeInfo(c.Node, c.SemanticModel);
+                    var objectTypeInfo = new ObjectTypeInfo(c.Node, c.Model);
                     if (objectTypeInfo.Symbol is null)
                     {
                         return;

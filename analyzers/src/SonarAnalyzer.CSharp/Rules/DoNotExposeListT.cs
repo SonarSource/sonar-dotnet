@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var baseMethodDeclaration = (BaseMethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.SemanticModel.GetDeclaredSymbol(baseMethodDeclaration);
+                    var methodSymbol = c.Model.GetDeclaredSymbol(baseMethodDeclaration);
 
                     if (methodSymbol == null
                         || !methodSymbol.IsPubliclyAccessible()
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
-                    var propertySymbol = c.SemanticModel.GetDeclaredSymbol(propertyDeclaration);
+                    var propertySymbol = c.Model.GetDeclaredSymbol(propertyDeclaration);
 
                     if (propertySymbol != null
                         && propertySymbol.IsPubliclyAccessible()
@@ -84,7 +84,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         return;
                     }
 
-                    var fieldSymbol = c.SemanticModel.GetDeclaredSymbol(variableDeclaration);
+                    var fieldSymbol = c.Model.GetDeclaredSymbol(variableDeclaration);
 
                     if (fieldSymbol != null
                         && fieldSymbol.IsPubliclyAccessible()
@@ -98,7 +98,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportIfListT(SonarSyntaxNodeReportingContext context, TypeSyntax typeSyntax, string memberType)
         {
-            if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.SemanticModel))
+            if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.Model))
             {
                 context.ReportIssue(Rule, typeSyntax, memberType);
             }

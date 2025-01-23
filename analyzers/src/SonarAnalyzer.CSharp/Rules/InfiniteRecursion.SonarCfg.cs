@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 IControlFlowGraph cfg;
                 if (property.ExpressionBody?.Expression != null)
                 {
-                    if (CSharpControlFlowGraph.TryGet(property, c.SemanticModel, out cfg))
+                    if (CSharpControlFlowGraph.TryGet(property, c.Model, out cfg))
                     {
                         var walker = new RecursionSearcherForProperty(
                             new RecursionContext<IControlFlowGraph>(c, cfg, propertySymbol, property.Identifier.GetLocation(), "property's recursion"),
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 {
                     foreach (var accessor in accessors)
                     {
-                        if (CSharpControlFlowGraph.TryGet(accessor, c.SemanticModel, out cfg))
+                        if (CSharpControlFlowGraph.TryGet(accessor, c.Model, out cfg))
                         {
                             var walker = new RecursionSearcherForProperty(
                                 new RecursionContext<IControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), "property accessor's recursion"),
@@ -68,7 +68,7 @@ namespace SonarAnalyzer.Rules.CSharp
 
             public void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxNode body, SyntaxToken identifier, IMethodSymbol symbol)
             {
-                if (CSharpControlFlowGraph.TryGet(body, c.SemanticModel, out var cfg))
+                if (CSharpControlFlowGraph.TryGet(body, c.Model, out var cfg))
                 {
                     var walker = new RecursionSearcherForMethod(new RecursionContext<IControlFlowGraph>(c, cfg, symbol, identifier.GetLocation(), "method's recursion"));
                     walker.CheckPaths();

@@ -63,7 +63,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private static void ReportRedundantBaseType(SonarSyntaxNodeReportingContext context, BaseTypeDeclarationSyntax typeDeclaration, KnownType redundantType, string message)
         {
             var baseTypeSyntax = typeDeclaration.BaseList.Types.First().Type;
-            if (context.SemanticModel.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol
+            if (context.Model.GetSymbolInfo(baseTypeSyntax).Symbol is ITypeSymbol baseTypeSymbol
                 && baseTypeSymbol.Is(redundantType))
             {
                 var location = GetLocationWithToken(baseTypeSyntax, typeDeclaration.BaseList.Types);
@@ -73,26 +73,26 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private static void ReportRedundantInterfaces(SonarSyntaxNodeReportingContext context, BaseTypeDeclarationSyntax typeDeclaration)
         {
-            var declaredType = context.SemanticModel.GetDeclaredSymbol(typeDeclaration);
+            var declaredType = context.Model.GetDeclaredSymbol(typeDeclaration);
             if (declaredType is null)
             {
                 return;
             }
 
             var baseList = typeDeclaration.BaseList;
-            var interfaceTypesWithAllInterfaces = GetImplementedInterfaceMappings(baseList, context.SemanticModel);
+            var interfaceTypesWithAllInterfaces = GetImplementedInterfaceMappings(baseList, context.Model);
 
             for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
-                if (context.SemanticModel.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
+                if (context.Model.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
                     && interfaceType.IsInterface()
                     && CollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces) is { } collidingDeclaration)
                 {
                     var location = GetLocationWithToken(baseType.Type, baseList.Types);
                     var message = string.Format(MessageAlreadyImplements,
-                        collidingDeclaration.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart),
-                        interfaceType.ToMinimalDisplayString(context.SemanticModel, baseType.Type.SpanStart));
+                        collidingDeclaration.ToMinimalDisplayString(context.Model, baseType.Type.SpanStart),
+                        interfaceType.ToMinimalDisplayString(context.Model, baseType.Type.SpanStart));
 
                     context.ReportIssue(Rule, location, DiagnosticsProperties(i), message);
                 }

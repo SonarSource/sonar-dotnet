@@ -53,8 +53,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
 
                             var trackers = TrackerFactory.Create();
-                            if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe)
-                               || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.SemanticModel, constructorIsSafe))
+                            if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.Model, constructorIsSafe)
+                               || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.Model, constructorIsSafe))
                             {
                                 c.ReportIssue(Rule, objectCreation.Expression);
                             }
@@ -69,8 +69,8 @@ namespace SonarAnalyzer.Rules.CSharp
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
                             var trackers = TrackerFactory.Create();
-                            if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.SemanticModel)
-                               || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.SemanticModel))
+                            if (trackers.XmlDocumentTracker.ShouldBeReported(assignment, c.Model)
+                               || trackers.XmlTextReaderTracker.ShouldBeReported(assignment, c.Model))
                             {
                                 c.ReportIssue(Rule, assignment);
                             }
@@ -83,18 +83,18 @@ namespace SonarAnalyzer.Rules.CSharp
         private void VerifyXmlReaderInvocations(SonarSyntaxNodeReportingContext context)
         {
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Xml_XmlReader, context.SemanticModel))
+            if (!invocation.IsMemberAccessOnKnownType("Create", KnownType.System_Xml_XmlReader, context.Model))
             {
                 return;
             }
 
-            var settings = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.SemanticModel).FirstOrDefault();
+            var settings = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Xml_XmlReaderSettings, context.Model).FirstOrDefault();
             if (settings == null)
             {
                 return; // safe by default
             }
 
-            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.SemanticModel, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
+            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.Model, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
             if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings, SecondaryMessage) is { } secondaryLocations && secondaryLocations.Any())
             {
                 context.ReportIssue(Rule, invocation, secondaryLocations);
@@ -103,10 +103,10 @@ namespace SonarAnalyzer.Rules.CSharp
 
         private void VerifyXPathDocumentConstructor(SonarSyntaxNodeReportingContext context, IObjectCreation objectCreation)
         {
-            if (!context.SemanticModel.GetTypeInfo(objectCreation.Expression).Type.Is(KnownType.System_Xml_XPath_XPathDocument)
+            if (!context.Model.GetTypeInfo(objectCreation.Expression).Type.Is(KnownType.System_Xml_XPath_XPathDocument)
                 // If a XmlReader is provided in the constructor, XPathDocument will be as safe as the received reader.
                 // In this case we don't raise a warning since the XmlReader has it's own checks.
-                || objectCreation.ArgumentList.Arguments.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.SemanticModel).Any())
+                || objectCreation.ArgumentList.Arguments.GetArgumentsOfKnownType(KnownType.System_Xml_XmlReader, context.Model).Any())
             {
                 return;
             }

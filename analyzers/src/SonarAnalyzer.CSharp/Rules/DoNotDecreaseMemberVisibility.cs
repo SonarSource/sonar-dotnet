@@ -70,7 +70,7 @@ public sealed class DoNotDecreaseMemberVisibility : SonarDiagnosticAnalyzer
 
         public void ReportIssue(MemberDeclarationSyntax memberDeclaration)
         {
-            switch (context.SemanticModel.GetDeclaredSymbol(memberDeclaration))
+            switch (context.Model.GetDeclaredSymbol(memberDeclaration))
             {
                 case IMethodSymbol methodSymbol:
                     ReportMethodIssue(memberDeclaration, methodSymbol);

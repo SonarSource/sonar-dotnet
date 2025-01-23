@@ -33,9 +33,9 @@ namespace SonarAnalyzer.Rules.CSharp
                     if (c.Node.ArgumentList() is { Arguments.Count: > 0 } argumentList
                         && !c.IsRedundantPrimaryConstructorBaseTypeContext()
                         && !c.IsInExpressionTree() // Can't use optional arguments in expression trees (CS0584), so skip those
-                        && new CSharpMethodParameterLookup(argumentList, c.SemanticModel) is { MethodSymbol: { } } methodParameterLookup)
+                        && new CSharpMethodParameterLookup(argumentList, c.Model) is { MethodSymbol: { } } methodParameterLookup)
                     {
-                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => ArgumentHasDefaultValue(x, c.SemanticModel)))
+                        foreach (var argumentMapping in methodParameterLookup.GetAllArgumentParameterMappings().Reverse().Where(x => ArgumentHasDefaultValue(x, c.Model)))
                         {
                             c.ReportIssue(Rule, argumentMapping.Node, argumentMapping.Symbol.Name);
                         }

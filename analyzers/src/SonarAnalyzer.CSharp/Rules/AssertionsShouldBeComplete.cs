@@ -34,7 +34,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("Should")
-                            && c.SemanticModel.GetSymbolInfo(invocation).AllSymbols().Any(x =>
+                            && c.Model.GetSymbolInfo(invocation).AllSymbols().Any(x =>
                                 x is IMethodSymbol
                                 {
                                     IsExtensionMethod: true,
@@ -52,7 +52,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("That", "ThatEnum", "ThatCode", "ThatAsyncCode", "ThatDynamic")
-                            && c.SemanticModel.GetSymbolInfo(invocation) is
+                            && c.Model.GetSymbolInfo(invocation) is
                             {
                                 Symbol: IMethodSymbol
                                 {
@@ -69,7 +69,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                     start.RegisterNodeAction(c =>
                         CheckInvocation(c, invocation =>
                             invocation.NameIs("Received", "DidNotReceive", "ReceivedWithAnyArgs", "DidNotReceiveWithAnyArgs", "ReceivedCalls")
-                            && c.SemanticModel.GetSymbolInfo(invocation) is
+                            && c.Model.GetSymbolInfo(invocation) is
                             {
                                 Symbol: IMethodSymbol
                                 {

@@ -30,7 +30,7 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
 
     public void Execute(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, ArgumentSyntax templateArgument, MessageTemplatesParser.Placeholder[] placeholders)
     {
-        var methodSymbol = (IMethodSymbol)context.SemanticModel.GetSymbolInfo(invocation).Symbol;
+        var methodSymbol = (IMethodSymbol)context.Model.GetSymbolInfo(invocation).Symbol;
         var placeholderValues = PlaceholderValues(invocation, methodSymbol).ToImmutableArray();
         for (var i = 0; i < placeholders.Length; i++)
         {

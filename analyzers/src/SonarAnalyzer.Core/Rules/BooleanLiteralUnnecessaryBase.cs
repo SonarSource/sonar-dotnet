@@ -150,8 +150,8 @@ namespace SonarAnalyzer.Rules
             var right = Language.Syntax.RemoveParentheses(GetRightNode(node));
 
             if (right is null // Avoids DeclarationPattern or RecursivePattern
-                || TypeShouldBeIgnored(left, context.SemanticModel)
-                || TypeShouldBeIgnored(right, context.SemanticModel))
+                || TypeShouldBeIgnored(left, context.Model)
+                || TypeShouldBeIgnored(right, context.Model))
             {
                 return true;
             }

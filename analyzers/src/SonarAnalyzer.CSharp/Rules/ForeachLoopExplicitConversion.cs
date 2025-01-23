@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 c =>
                 {
                     var foreachStatement = (ForEachStatementSyntax)c.Node;
-                    var foreachInfo = c.SemanticModel.GetForEachStatementInfo(foreachStatement);
+                    var foreachInfo = c.Model.GetForEachStatementInfo(foreachStatement);
 
                     if (foreachInfo.Equals(default(ForEachStatementInfo))
                         || foreachInfo.ElementConversion.IsImplicit
@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         Rule,
                         foreachStatement.Type,
                         foreachStatement.Identifier.ValueText,
-                        foreachInfo.ElementType.ToMinimalDisplayString(c.SemanticModel, foreachStatement.Type.SpanStart),
+                        foreachInfo.ElementType.ToMinimalDisplayString(c.Model, foreachStatement.Type.SpanStart),
                         foreachStatement.Type.ToString());
                 },
                 SyntaxKind.ForEachStatement);

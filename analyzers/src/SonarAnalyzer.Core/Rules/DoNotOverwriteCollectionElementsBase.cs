@@ -57,7 +57,7 @@ public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStateme
         if (collectionIdentifier is null
             || indexOrKey is null
             || !IsIdentifierOrLiteral(indexOrKey)
-            || !IsDictionaryOrCollection(collectionIdentifier, context.SemanticModel))
+            || !IsDictionaryOrCollection(collectionIdentifier, context.Model))
         {
             return;
         }
