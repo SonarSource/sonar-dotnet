@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 },
                 context.Diagnostics);
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var semanticModel = await context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false);
 
             var systemNeedsToBeAdded = NamespaceNeedsToBeAdded(methodBody, semanticModel);
 

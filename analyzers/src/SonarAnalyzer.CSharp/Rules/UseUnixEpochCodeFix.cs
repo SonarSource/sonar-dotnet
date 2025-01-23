@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Rules.CSharp
             ExpressionSyntax typeNode;
             if (node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression))
             {
-                var semanticModel = context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
+                var semanticModel = context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false).GetAwaiter().GetResult();
                 typeNode = SyntaxFactory.IdentifierName(semanticModel.GetTypeInfo(node).Type.Name);
             }
             else

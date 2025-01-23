@@ -31,10 +31,10 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var node = root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var semanticModel = await context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false);
             var operation = semanticModel.GetSymbolInfo(node).Symbol as IMethodSymbol;
 
-            if (!(operation?.ReturnType?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax(context.CancellationToken) is EnumDeclarationSyntax enumDeclaration))
+            if (!(operation?.ReturnType?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax(context.Cancel) is EnumDeclarationSyntax enumDeclaration))
             {
                 return;
             }

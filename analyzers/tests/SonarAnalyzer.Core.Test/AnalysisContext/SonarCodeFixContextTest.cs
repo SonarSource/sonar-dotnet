@@ -34,7 +34,7 @@ public class SonarCodeFixContextTest
         var diagnostic = Diagnostic.Create(new DiagnosticDescriptor("1", "title", "format", "category", DiagnosticSeverity.Hidden, false), literal.GetLocation());
         var sonarCodefix = new SonarCodeFixContext(new CodeFixContext(document, diagnostic, (_, _) => { }, cancel));
 
-        sonarCodefix.CancellationToken.Should().Be(cancel);
+        sonarCodefix.Cancel.Should().Be(cancel);
         sonarCodefix.Document.Should().Be(document);
         sonarCodefix.Diagnostics.Should().Contain(diagnostic);
         sonarCodefix.Span.Should().Be(new TextSpan(18, 13));

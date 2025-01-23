@@ -42,10 +42,10 @@ namespace SonarAnalyzer.Rules.CSharp
             }
 
             var semanticModel = await context.Document
-                .GetSemanticModelAsync(context.CancellationToken)
+                .GetSemanticModelAsync(context.Cancel)
                 .ConfigureAwait(false);
             var allFieldDeclarationTasks = identifiersToFix.Select(identifier =>
-                GetFieldDeclarationSyntaxAsync(semanticModel, identifier, context.CancellationToken));
+                GetFieldDeclarationSyntaxAsync(semanticModel, identifier, context.Cancel));
             var allFieldDeclarations = await Task.WhenAll(allFieldDeclarationTasks).ConfigureAwait(false);
             allFieldDeclarations = allFieldDeclarations.WhereNotNull().ToArray();
 

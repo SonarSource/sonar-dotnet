@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 ? binary.Right
                 : binary.Left;
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var semanticModel = await context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false);
             var typeSymbol = (ITypeParameterSymbol)semanticModel.GetTypeInfo(otherNode).Type;
             var defaultExpression = SyntaxFactory.DefaultExpression(SyntaxFactory.ParseTypeName(typeSymbol.Name));
 

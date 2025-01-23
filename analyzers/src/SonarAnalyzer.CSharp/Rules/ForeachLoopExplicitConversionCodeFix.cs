@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return Task.CompletedTask;
             }
 
-            var semanticModel = context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
+            var semanticModel = context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false).GetAwaiter().GetResult();
             var enumerableHelperType = semanticModel.Compilation.GetTypeByMetadataName(KnownType.System_Linq_Enumerable);
 
             if (enumerableHelperType != null)

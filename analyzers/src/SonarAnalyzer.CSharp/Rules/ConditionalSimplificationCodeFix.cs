@@ -35,7 +35,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 oldNode = globalStatementSyntax.Statement;
             }
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var semanticModel = await context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false);
             var newNode = Simplify(diagnostic, semanticModel, oldNode);
             if (newNode != null)
             {

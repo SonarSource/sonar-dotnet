@@ -35,13 +35,13 @@ namespace SonarAnalyzer.Rules.CSharp
             var diagnosticSpan = diagnostic.Location.SourceSpan;
             var memberAccess = (MemberAccessExpressionSyntax)root.FindNode(diagnosticSpan, getInnermostNodeForTie: true);
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var semanticModel = await context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false);
             var fieldSymbol = (IFieldSymbol)semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol;
             var typeParameterSymbol = (ITypeParameterSymbol)fieldSymbol.Type;
             var genericType = typeParameterSymbol.ContainingType;
 
             var classDeclarationTasks = genericType.DeclaringSyntaxReferences
-                .Select(reference => reference.GetSyntaxAsync(context.CancellationToken))
+                .Select(reference => reference.GetSyntaxAsync(context.Cancel))
                 .ToList();
 
             var taskResults = await Task.WhenAll(classDeclarationTasks).ConfigureAwait(false);
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Rules.CSharp
                         foreach (var classes in mapping)
                         {
                             var document = currentSolution.GetDocument(classes.Key);
-                            var docRoot = await document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+                            var docRoot = await document.GetSyntaxRootAsync(context.Cancel).ConfigureAwait(false);
                             var newDocRoot = GetNewDocumentRoot(docRoot, typeParameterSymbol, classes);
                             currentSolution = currentSolution.WithDocumentSyntaxRoot(classes.Key, newDocRoot);
                         }

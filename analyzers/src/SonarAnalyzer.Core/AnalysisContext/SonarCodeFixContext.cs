@@ -24,7 +24,7 @@ public readonly struct SonarCodeFixContext
 {
     private readonly CodeFixContext context;
 
-    public readonly CancellationToken CancellationToken => context.CancellationToken;
+    public readonly CancellationToken Cancel => context.CancellationToken;
     public readonly Document Document => context.Document;
     public readonly ImmutableArray<Diagnostic> Diagnostics => context.Diagnostics;
     public readonly TextSpan Span => context.Span;

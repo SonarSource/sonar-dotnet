@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken).ConfigureAwait(false);
+            var semanticModel = await context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false);
             var methodParameterLookup = new CSharpMethodParameterLookup(invocation, semanticModel);
             var argumentMappings = methodParameterLookup.GetAllArgumentParameterMappings().ToList();
 
