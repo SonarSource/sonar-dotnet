@@ -15,7 +15,7 @@
  */
 
 using NSubstitute;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 
 namespace SonarAnalyzer.Core.Test.AnalysisContext;
 

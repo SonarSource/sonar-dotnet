@@ -18,7 +18,7 @@ using System.IO;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 using NSubstitute;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
 namespace SonarAnalyzer.TestFramework.Common;

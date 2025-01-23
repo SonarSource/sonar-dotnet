@@ -16,7 +16,7 @@
 
 using System.Collections.Concurrent;
 using System.Reflection;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 
 namespace SonarAnalyzer.TestFramework.Verification;
 

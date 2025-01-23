@@ -16,7 +16,7 @@
 
 using Roslyn.Utilities;
 
-namespace SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext;
 
 internal class ShouldAnalyzeTreeCache
 {

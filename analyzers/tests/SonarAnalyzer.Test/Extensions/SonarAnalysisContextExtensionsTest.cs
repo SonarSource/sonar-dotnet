@@ -15,7 +15,7 @@
  */
 
 using NSubstitute;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 using ExtensionsCS = SonarAnalyzer.CSharp.Core.Extensions.SonarAnalysisContextExtensions;
 using ExtensionsVB = SonarAnalyzer.VisualBasic.Core.Extensions.SonarAnalysisContextExtensions;
 

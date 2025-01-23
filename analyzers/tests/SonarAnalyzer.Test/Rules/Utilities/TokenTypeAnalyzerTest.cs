@@ -15,8 +15,7 @@
  */
 
 using System.IO;
-using SonarAnalyzer.AnalysisContext;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
@@ -153,7 +152,8 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
         {
-            var builder = CreateBuilder(ProjectType.Product, "Tokens.cs").WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
+            var builder = CreateBuilder(ProjectType.Product, "Tokens.cs")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithUnchangedFiles(TestContext, BasePath + unchangedFileName));
             if (expectedProtobufIsEmpty)
             {
                 builder.VerifyUtilityAnalyzerProducesEmptyProtobuf();

@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.ShimLayer.AnalysisContext;
 
-namespace SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext;
 
 public sealed class SonarSymbolStartAnalysisContext : SonarAnalysisContextBase<SymbolStartAnalysisContextWrapper>
 {

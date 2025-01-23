@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext;
 
 // SyntaxTreeAnalysisContext doesn't hold a Compilation reference, we need to provide it from CompilationStart context via constructor
 public readonly record struct SonarSyntaxTreeReportingContext(SonarAnalysisContext AnalysisContext, SyntaxTreeAnalysisContext Context, Compilation Compilation) : ITreeReport, IAnalysisContext

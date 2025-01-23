@@ -18,7 +18,7 @@ using System.IO;
 using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 

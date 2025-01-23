@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 
 namespace SonarAnalyzer.Core.Test.AnalysisContext;
 

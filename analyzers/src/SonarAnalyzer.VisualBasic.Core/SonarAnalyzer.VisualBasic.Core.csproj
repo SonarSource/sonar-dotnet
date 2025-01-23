@@ -33,8 +33,8 @@
     <Using Include="Microsoft.CodeAnalysis.VisualBasic" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Syntax" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Extensions" />
-    <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Core.AnalysisContext" />
     <Using Include="SonarAnalyzer.Core.Analyzers" />
     <Using Include="SonarAnalyzer.Core.Extensions" />
     <Using Include="SonarAnalyzer.Core.Facade" />

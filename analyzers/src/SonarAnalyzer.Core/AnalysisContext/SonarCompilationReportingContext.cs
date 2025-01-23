@@ -17,7 +17,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext;
 
 public readonly record struct SonarCompilationReportingContext(SonarAnalysisContext AnalysisContext, CompilationAnalysisContext Context) : ICompilationReport, IAnalysisContext
 {

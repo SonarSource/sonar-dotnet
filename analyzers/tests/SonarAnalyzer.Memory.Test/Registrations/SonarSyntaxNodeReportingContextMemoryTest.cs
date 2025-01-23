@@ -14,15 +14,11 @@
 * along with this program; if not, see https://sonarsource.com/license/ssal/
 */
 
-extern alias common;
-
 using System.Collections.Concurrent;
 using System.Text;
-using common::SonarAnalyzer.AnalysisContext;
 using JetBrains.dotMemoryUnit;
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Core.Facade;
-using SonarAnalyzer.CSharp.Core.Facade;
+using SonarAnalyzer.Core.AnalysisContext;
 
 namespace SonarAnalyzer.Memory.Test.Registrations;
 

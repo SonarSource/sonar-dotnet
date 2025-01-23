@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using NSubstitute;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using CS = SonarAnalyzer.CSharp.Core.Extensions.SonarAnalysisContextExtensions;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;

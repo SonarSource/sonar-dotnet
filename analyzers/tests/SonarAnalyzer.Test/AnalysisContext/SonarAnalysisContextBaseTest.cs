@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
 namespace SonarAnalyzer.Test.AnalysisContext;

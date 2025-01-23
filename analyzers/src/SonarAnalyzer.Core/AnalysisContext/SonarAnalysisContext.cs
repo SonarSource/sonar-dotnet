@@ -17,7 +17,7 @@
 using Microsoft.CodeAnalysis.Text;
 using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext;
 
-namespace SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext;
 
 public class SonarAnalysisContext
 {

@@ -16,7 +16,7 @@
 
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.AnalysisContext;
+using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Helpers;

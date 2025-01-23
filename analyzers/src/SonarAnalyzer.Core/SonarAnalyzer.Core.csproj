@@ -35,8 +35,8 @@
   <ItemGroup>
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
-    <Using Include="SonarAnalyzer.AnalysisContext" />
     <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Core.AnalysisContext" />
     <Using Include="SonarAnalyzer.Core.Analyzers" />
     <Using Include="SonarAnalyzer.Core.Extensions" />
     <Using Include="SonarAnalyzer.Core.Facade" />

@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.CFG.Common;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.AnalysisContext;
 
 public static class IssueReporter
 {
@@ -37,37 +37,26 @@ public static class IssueReporter
     // https://learn.microsoft.com/en-us/visualstudio/extensibility/roslyn-version-support?view=vs-2022
     private static Version minimumDesignTimeRoslynVersion = new("4.9.2");
 
-    public static void ReportIssueCore(
-                    Compilation compilation,
-                    Func<DiagnosticDescriptor, bool> hasMatchingScope,
-                    Func<Diagnostic, ReportingContext> createReportingContext,
-                    DiagnosticDescriptor rule,
-                    Location primaryLocation,
-                    IEnumerable<SecondaryLocation> secondaryLocations = null,
-                    ImmutableDictionary<string, string> properties = null,
-                    params string[] messageArgs)
+    public static void ReportIssueCore(Compilation compilation,
+                                       Func<DiagnosticDescriptor, bool> hasMatchingScope,
+                                       Func<Diagnostic, ReportingContext> createReportingContext,
+                                       DiagnosticDescriptor rule,
+                                       Location primaryLocation,
+                                       IEnumerable<SecondaryLocation> secondaryLocations = null,
+                                       ImmutableDictionary<string, string> properties = null,
+                                       params string[] messageArgs)
     {
         _ = rule ?? throw new ArgumentNullException(nameof(rule));
         secondaryLocations ??= [];
         properties ??= ImmutableDictionary<string, string>.Empty;
-
         secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(compilation)).ToArray();
         properties = properties.AddRange(secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)));
-
-        var diagnostic = Diagnostic.Create(
-            descriptor: rule,
-            location: primaryLocation,
-            additionalLocations: secondaryLocations.Select(x => x.Location),
-            properties: properties,
-            messageArgs);
+        var diagnostic = Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs);
         ReportIssueCore(hasMatchingScope, createReportingContext, diagnostic);
     }
 
     [Obsolete("Use another overload of ReportIssue, without calling Diagnostic.Create")]
-    public static void ReportIssueCore(
-                    Func<DiagnosticDescriptor, bool> hasMatchingScope,
-                    Func<Diagnostic, ReportingContext> createReportingContext,
-                    Diagnostic diagnostic)
+    public static void ReportIssueCore(Func<DiagnosticDescriptor, bool> hasMatchingScope, Func<Diagnostic, ReportingContext> createReportingContext, Diagnostic diagnostic)
     {
         if (ShouldRaiseOnRazorFile(ref diagnostic)
             && hasMatchingScope(diagnostic.Descriptor)

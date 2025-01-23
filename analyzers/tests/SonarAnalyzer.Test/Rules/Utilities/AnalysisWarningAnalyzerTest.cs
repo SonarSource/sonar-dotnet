@@ -15,8 +15,8 @@
  */
 
 using System.IO;
-using SonarAnalyzer.AnalysisContext;
 using SonarAnalyzer.CFG.Common;
+using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
@@ -111,6 +111,7 @@ public class AnalysisWarningAnalyzerTest
     {
         private readonly bool isAnalyzerEnabled;
         private readonly string outPath;
+
         protected override int VS2017MajorVersion { get; }
         protected override int MinimalSupportedRoslynVersion { get; }
 
@@ -130,6 +131,7 @@ public class AnalysisWarningAnalyzerTest
     {
         private readonly bool isAnalyzerEnabled;
         private readonly string outPath;
+
         protected override int VS2017MajorVersion { get; }
         protected override int MinimalSupportedRoslynVersion { get; }
 

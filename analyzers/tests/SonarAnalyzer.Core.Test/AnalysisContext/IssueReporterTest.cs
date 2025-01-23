@@ -16,9 +16,9 @@
 
 using System.Reflection;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Helpers;
+using SonarAnalyzer.Core.AnalysisContext;
 
-namespace SonarAnalyzer.Core.Test.Common;
+namespace SonarAnalyzer.Core.Test.AnalysisContext;
 
 #pragma warning disable CS0618 // Type or member is obsolete
 [TestClass]

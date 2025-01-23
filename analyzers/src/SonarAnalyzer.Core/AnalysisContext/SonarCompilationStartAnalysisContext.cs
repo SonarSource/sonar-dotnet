@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 using SonarAnalyzer.ShimLayer.AnalysisContext;
 
-namespace SonarAnalyzer.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext;
 
 public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextBase<CompilationStartAnalysisContext>
 {
