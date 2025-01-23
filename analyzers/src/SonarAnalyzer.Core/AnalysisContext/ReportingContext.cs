@@ -20,7 +20,7 @@ public class ReportingContext : IReportingContext
 {
     private readonly Action<Diagnostic> roslynReportDiagnostic;
 
-    public SyntaxTree SyntaxTree { get; }
+    public SyntaxTree Tree { get; }
     public Diagnostic Diagnostic { get; }
     public Compilation Compilation { get; }
 
@@ -42,15 +42,12 @@ public class ReportingContext : IReportingContext
     public ReportingContext(SonarSemanticModelReportingContext context, Diagnostic diagnostic)
         : this(diagnostic, context.Context.ReportDiagnostic, context.Compilation, context.Tree) { }
 
-    internal ReportingContext(Diagnostic diagnostic,
-                             Action<Diagnostic> roslynReportDiagnostic,
-                             Compilation compilation,
-                             SyntaxTree syntaxTree)
+    internal ReportingContext(Diagnostic diagnostic, Action<Diagnostic> roslynReportDiagnostic, Compilation compilation, SyntaxTree tree)
     {
         Diagnostic = diagnostic;
         this.roslynReportDiagnostic = roslynReportDiagnostic;
         Compilation = compilation;
-        SyntaxTree = syntaxTree;
+        Tree = tree;
     }
 
     public void ReportDiagnostic(Diagnostic diagnostic) =>

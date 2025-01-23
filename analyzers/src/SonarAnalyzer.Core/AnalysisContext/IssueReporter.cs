@@ -77,7 +77,7 @@ public static class IssueReporter
             }
             // Standalone NuGet, Scanner run and SonarLint < 4.0 used with latest NuGet
             if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
-                && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.SyntaxTree, reportingContext.Diagnostic) ?? true))
+                && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.Tree, reportingContext.Diagnostic) ?? true))
             {
                 reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
             }

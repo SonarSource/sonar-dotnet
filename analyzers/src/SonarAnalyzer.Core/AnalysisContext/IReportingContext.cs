@@ -18,7 +18,7 @@ namespace SonarAnalyzer.Core.AnalysisContext;
 
 public interface IReportingContext
 {
-    SyntaxTree SyntaxTree { get; }
+    SyntaxTree Tree { get; }
     Diagnostic Diagnostic { get; }
 
     void ReportDiagnostic(Diagnostic diagnostic);
