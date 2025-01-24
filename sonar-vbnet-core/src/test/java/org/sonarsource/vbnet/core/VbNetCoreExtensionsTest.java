@@ -36,7 +36,6 @@ import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.filters.GeneratedFileFilter;
@@ -94,12 +93,11 @@ class VbNetCoreExtensionsTest {
       WrongEncodingFileFilter.class,
       // importers / exporters
       ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      SonarLintProfileExporter.class
+      RoslynDataImporter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);
-    
+
     assertThat(extensions).hasSize(
       expectedExtensions.length
         + new CodeCoverageProvider(TestVbNetMetadata.INSTANCE).extensions().size()

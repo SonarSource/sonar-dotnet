@@ -36,7 +36,6 @@ import org.sonarsource.dotnet.shared.plugins.RealPathProvider;
 import org.sonarsource.dotnet.shared.plugins.ReportPathCollector;
 import org.sonarsource.dotnet.shared.plugins.RoslynDataImporter;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
-import org.sonarsource.dotnet.shared.plugins.SonarLintProfileExporter;
 import org.sonarsource.dotnet.shared.plugins.TelemetryCollector;
 import org.sonarsource.dotnet.shared.plugins.UnitTestResultsProvider;
 import org.sonarsource.dotnet.shared.plugins.filters.GeneratedFileFilter;
@@ -62,7 +61,7 @@ class CSharpCoreExtensionsTest {
     CSharpCoreExtensions.register(context, TestCSharpMetadata.INSTANCE);
     var extensions = context.getExtensions();
 
-    Object[] expectedExtensions = new Object[] {
+    Object[] expectedExtensions = new Object[]{
       ModuleConfiguration.class,
       FileTypeSensor.class,
       LogSensor.class,
@@ -90,8 +89,7 @@ class CSharpCoreExtensionsTest {
       AnalysisWarningsSensor.class,
       CSharpFileCacheSensor.class,
       ProtobufDataImporter.class,
-      RoslynDataImporter.class,
-      SonarLintProfileExporter.class
+      RoslynDataImporter.class
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);
@@ -110,7 +108,7 @@ class CSharpCoreExtensionsTest {
     CSharpCoreExtensions.register(context, TestCSharpMetadata.INSTANCE);
     var extensions = context.getExtensions();
 
-    Object[] expectedExtensions = new Object[] {
+    Object[] expectedExtensions = new Object[]{
       DotNetRulesDefinition.class,
       RoslynRules.class,
       TestCSharpMetadata.INSTANCE,
