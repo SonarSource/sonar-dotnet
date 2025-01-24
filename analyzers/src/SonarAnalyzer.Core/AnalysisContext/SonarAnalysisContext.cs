@@ -21,8 +21,6 @@ namespace SonarAnalyzer.Core.AnalysisContext;
 
 public class SonarAnalysisContext
 {
-    internal ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
-
     private readonly RoslynAnalysisContext analysisContext;
 
     /// <summary>
@@ -54,6 +52,8 @@ public class SonarAnalysisContext
     /// </remarks>
     public static Action<IReportingContext> ReportDiagnostic { get; set; }
 
+    internal ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
+
     internal SonarAnalysisContext(RoslynAnalysisContext analysisContext, ImmutableArray<DiagnosticDescriptor> supportedDiagnostics)
     {
         this.analysisContext = analysisContext ?? throw new ArgumentNullException(nameof(analysisContext));
@@ -64,18 +64,6 @@ public class SonarAnalysisContext
 
     public bool TryGetValue<TValue>(SourceText text, SourceTextValueProvider<TValue> valueProvider, out TValue value) =>
         analysisContext.TryGetValue(text, valueProvider, out value);
-
-    /// <summary>
-    /// Legacy API for backward compatibility with SonarLint v4.0 - v5.5. See <see cref="ShouldExecuteRegisteredAction"/>.
-    /// </summary>
-    internal static bool LegacyIsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
-        ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(diagnostics, tree);
-
-    /// <summary>
-    /// Legacy API for backward compatibility with SonarLint v4.0 - v5.5. See <see cref="ShouldExecuteRegisteredAction"/>.
-    /// </summary>
-    internal static bool LegacyIsRegisteredActionEnabled(DiagnosticDescriptor diagnostic, SyntaxTree tree) =>
-        ShouldExecuteRegisteredAction == null || tree == null || ShouldExecuteRegisteredAction(new[] { diagnostic }, tree);
 
     public void RegisterCodeBlockStartAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarCodeBlockStartAnalysisContext<TSyntaxKind>> action)
         where TSyntaxKind : struct =>
@@ -115,7 +103,19 @@ public class SonarAnalysisContext
     /// This should NOT be used for actions that report issues.
     /// </summary>
     public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
-        analysisContext.RegisterSyntaxNodeAction(c => action(new(this, c)), syntaxKinds);
+        analysisContext.RegisterSyntaxNodeAction(x => action(new(this, x)), syntaxKinds);
+
+    /// <summary>
+    /// Legacy API for backward compatibility with SonarLint v4.0 - v5.5. See <see cref="ShouldExecuteRegisteredAction"/>.
+    /// </summary>
+    internal static bool LegacyIsRegisteredActionEnabled(IEnumerable<DiagnosticDescriptor> diagnostics, SyntaxTree tree) =>
+        ShouldExecuteRegisteredAction is null || tree is null || ShouldExecuteRegisteredAction(diagnostics, tree);
+
+    /// <summary>
+    /// Legacy API for backward compatibility with SonarLint v4.0 - v5.5. See <see cref="ShouldExecuteRegisteredAction"/>.
+    /// </summary>
+    internal static bool LegacyIsRegisteredActionEnabled(DiagnosticDescriptor diagnostic, SyntaxTree tree) =>
+        ShouldExecuteRegisteredAction is null || tree is null || ShouldExecuteRegisteredAction(new[] { diagnostic }, tree);
 
     private void Execute<TSonarContext>(TSonarContext context, Action<TSonarContext> action)
         where TSonarContext : IAnalysisContext
