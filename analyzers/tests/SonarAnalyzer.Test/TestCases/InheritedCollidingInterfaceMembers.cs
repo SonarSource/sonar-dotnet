@@ -11,7 +11,7 @@ namespace Tests.Diagnostics
     public interface IMyInterface2
     {
         unsafe int Method(int[,] parameter, int* pointer);
-//                 ^^^^^^ Secondary
+//                 ^^^^^^ Secondary {{This member collides with 'IMyInterface1.Method(int[*,*], int*)'}}
     }
     public interface IMyInterfaceCommon1 : IMyInterface1, IMyInterface2 // Noncompliant {{Rename or add member 'Method(int[*,*], int*)' to this interface to resolve ambiguities.}}
 //                   ^^^^^^^^^^^^^^^^^^^
@@ -38,8 +38,8 @@ namespace Tests.Diagnostics
     public interface IMyInterfaceGeneric3<T>
     {
         unsafe int Method(T[,] parameter, int* pointer);
-//                 ^^^^^^ Secondary
-//                 ^^^^^^ Secondary@-1
+//                 ^^^^^^ Secondary {{This member collides with 'IMyInterface1.Method(int[*,*], int*)'}}
+//                 ^^^^^^ Secondary@-1 {{This member collides with 'IMyInterfaceGeneric4<T>.Method(T[*,*], int*)'}}
     }
 
     public interface IMyInterfaceGeneric4<T>
@@ -67,12 +67,33 @@ namespace Tests.Diagnostics
     public interface IMyInterfaceEvent2
     {
         event EventHandler X;
-//                         ^ Secondary
+//                         ^ Secondary {{This member collides with 'IMyInterfaceEvent1.X'}}
     }
     public interface IMyInterfaceCommonEvent : IMyInterfaceEvent1, IMyInterfaceEvent2 // Noncompliant
     {
     }
 
+    public interface IMultipleMember1
+    {
+        int Method(int i);
+        void Method2(string s);
+    }
+
+    public interface IMultipleMember2
+    {
+        void Method2(string s);
+//           ^^^^^^^ Secondary {{This member collides with 'IMultipleMember1.Method2(string)'}}
+    }
+
+    public interface IMultipleMember3
+    {
+        int Method(int i);
+//          ^^^^^^ Secondary {{This member collides with 'IMultipleMember1.Method(int)'}}
+    }
+
+    public interface IMultipleMemberCommon : IMultipleMember1, IMultipleMember2, IMultipleMember3 // Noncompliant {{Rename or add members 'Method(int)' and 'Method2(string)' to this interface to resolve ambiguities.}}
+    {
+    }
 
     public interface IReadOnlyDictionary<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>, //Noncompliant
         IEnumerable<KeyValuePair<TKey, TValue>>, IEnumerable
