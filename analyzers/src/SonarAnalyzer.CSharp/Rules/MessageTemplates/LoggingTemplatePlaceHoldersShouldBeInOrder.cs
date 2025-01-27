@@ -49,7 +49,10 @@ public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplat
     }
 
     private static IEnumerable<SecondaryLocation> SecondaryLocations(SyntaxNode node, SyntaxNode betterFitArgument, MessageTemplatesParser.Placeholder placeholder) =>
-        [node.ToSecondaryLocation(SecondaryMessageFormat, betterFitArgument.GetName(), placeholder.Name)];
+        [node.ToSecondaryLocation(SecondaryMessageFormat, BetterFitName(betterFitArgument), placeholder.Name)];
+
+    private static string BetterFitName(SyntaxNode node) =>
+        node is MemberAccessExpressionSyntax or CastExpressionSyntax ? node.ToString() : node.GetName();
 
     private static IEnumerable<SyntaxNode> PlaceholderValues(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol)
     {

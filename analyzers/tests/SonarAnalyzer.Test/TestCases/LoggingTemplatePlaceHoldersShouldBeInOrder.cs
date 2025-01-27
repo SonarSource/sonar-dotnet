@@ -94,15 +94,15 @@ public class Program
     {
         logger.LogInformation("Person: {FirstName} {Age}", person.FirstName, person.Age);       // Compliant
         logger.LogInformation("Person: {Age} {FirstName}", person.FirstName, person.Age);       // Noncompliant
-                                                                                                // Secondary @-1
+                                                                                                // Secondary @-1 {{The argument should be 'person.Age' to match placeholder 'Age'.}}
 
         logger.LogInformation("Person: {FirstName} {Age}", _person.FirstName, _person.Age);     // Compliant
         logger.LogInformation("Person: {Age} {FirstName}", _person.FirstName, _person.Age);     // Noncompliant
-                                                                                                // Secondary @-1
+                                                                                                // Secondary @-1  {{The argument should be '_person.Age' to match placeholder 'Age'.}}
 
         logger.LogInformation("Person: {FirstName} {Age}", Person.FirstName, Person.Age);       // Compliant
         logger.LogInformation("Person: {Age} {FirstName}", Person.FirstName, Person.Age);       // Noncompliant
-                                                                                                // Secondary @-1
+                                                                                                // Secondary @-1  {{The argument should be 'Person.Age' to match placeholder 'Age'.}}
 
         logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Father.LastName, person.Mother.LastName);    // Compliant
         logger.LogInformation("Father: {Father}, Mother: {Mother}", person.Mother.LastName, person.Father.LastName);    // FN
