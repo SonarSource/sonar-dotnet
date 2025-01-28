@@ -72,3 +72,22 @@ namespace Repro_8115
         }
     }
 }
+
+// https://sonarsource.atlassian.net/browse/NET-882
+namespace ReproNET882
+{
+    public class ReproNet882
+    {
+        public void Method()
+        {
+            // In this example Action<object, RoutedEventArgs> is down-casted by AddHandler to EventHandler  (EventHandler has the exact same definition as the Action but they are different).
+            AddHandler(OnErrorEvent);
+            AddHandler(new EventHandler(OnErrorEvent)); // Fixed
+        }
+        private void OnErrorEvent(object sender, EventArgs e) { }
+
+        public void AddHandler(Delegate handler)
+        {
+        }
+    }
+}
