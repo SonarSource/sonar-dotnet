@@ -16,7 +16,7 @@
 
 using System.Xml.Linq;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 /// <summary>
 /// Data class to describe an analysis configuration.

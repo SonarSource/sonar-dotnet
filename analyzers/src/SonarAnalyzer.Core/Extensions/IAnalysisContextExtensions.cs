@@ -17,7 +17,7 @@
 using System.Collections.Concurrent;
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
-using SonarAnalyzer.Core.AnalysisContext;
+using SonarAnalyzer.Core.Configuration;
 using static SonarAnalyzer.Core.Analyzers.DiagnosticDescriptorFactory;
 
 namespace SonarAnalyzer.Core.Extensions;

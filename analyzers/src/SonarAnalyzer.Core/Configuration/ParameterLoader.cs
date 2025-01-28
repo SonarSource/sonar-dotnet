@@ -17,7 +17,7 @@
 using System.Globalization;
 using System.Reflection;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 internal static class ParameterLoader
 {
@@ -44,7 +44,7 @@ internal static class ParameterLoader
             .Select(x => new { Property = x, Descriptor = x.GetCustomAttributes<RuleParameterAttribute>().SingleOrDefault() })
             .Where(x => x.Descriptor is not null);
 
-        var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(diagnostic => diagnostic.Id));
+        var ids = new HashSet<string>(parameteredAnalyzer.SupportedDiagnostics.Select(x => x.Id));
         foreach (var propertyParameterPair in propertyParameterPairs)
         {
             var parameter = sonarLintXml.ParametrizedRules.FirstOrDefault(x => ids.Contains(x.Key));
@@ -58,7 +58,7 @@ internal static class ParameterLoader
 
     private static bool TryConvertToParameterType(string parameter, PropertyType type, out object result)
     {
-        if (parameter == null)
+        if (parameter is null)
         {
             result = null;
             return false;

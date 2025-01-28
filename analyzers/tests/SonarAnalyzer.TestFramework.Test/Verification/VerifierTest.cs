@@ -16,6 +16,7 @@
 
 using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
+using SonarAnalyzer.Core.Configuration;
 using SonarAnalyzer.Protobuf;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.TestFramework.Verification;

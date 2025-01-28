@@ -16,8 +16,9 @@
 
 using System.IO;
 using System.Xml.Serialization;
+using SonarAnalyzer.Core.Configuration;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Test.Configuration;
 
 [TestClass]
 public class SonarLintXmlTest

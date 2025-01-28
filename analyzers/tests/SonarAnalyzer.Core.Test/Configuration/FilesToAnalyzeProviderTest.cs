@@ -16,8 +16,9 @@
 
 using System.IO;
 using System.Text.RegularExpressions;
+using SonarAnalyzer.Core.Configuration;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Test.Configuration;
 
 [TestClass]
 public class FilesToAnalyzeProviderTest

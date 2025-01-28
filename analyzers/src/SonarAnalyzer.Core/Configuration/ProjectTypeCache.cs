@@ -16,9 +16,9 @@
 
 using System.Runtime.CompilerServices;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
-internal static class ProjectTypeHelper
+internal static class ProjectTypeCache
 {
     // This list is duplicated in sonar-scanner-msbuild and sonar-security and should be manually synchronized after each change.
     public /* for testing */ static readonly ISet<string> TestAssemblyNames = new HashSet<string>
@@ -48,9 +48,9 @@ internal static class ProjectTypeHelper
     // Should only be used by SonarAnalysisContext
     public static bool IsTest(this Compilation compilation) =>
         // We can't detect references => it's MAIN
-        compilation != null && Cache.GetValue(compilation, x => new IsTestWrapper(x)).Value;
+        compilation is not null && Cache.GetValue(compilation, x => new IsTestWrapper(x)).Value;
 
-    private class IsTestWrapper
+    private sealed class IsTestWrapper
     {
         public readonly bool Value;
 

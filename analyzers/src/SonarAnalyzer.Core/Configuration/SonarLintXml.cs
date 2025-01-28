@@ -16,7 +16,7 @@
 
 using System.Xml.Serialization;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 /// <summary>
 /// Data class to represent the SonarLint.xml for our analyzers.

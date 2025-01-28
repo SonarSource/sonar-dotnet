@@ -16,6 +16,7 @@
 
 using System.IO;
 using Roslyn.Utilities;
+using SonarAnalyzer.Core.Configuration;
 
 namespace SonarAnalyzer.Core.Extensions;
 

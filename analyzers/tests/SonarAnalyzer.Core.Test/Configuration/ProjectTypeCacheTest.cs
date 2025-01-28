@@ -14,10 +14,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Test.Helpers;
+using SonarAnalyzer.Core.Configuration;
+
+namespace SonarAnalyzer.Core.Test.Configuration;
 
 [TestClass]
-public class ProjectTypeHelperTest
+public class ProjectTypeCacheTest
 {
     [TestMethod]
     public void TestReference_ShouldBeSynchronized()
@@ -42,7 +44,7 @@ public class ProjectTypeHelperTest
             "Rhino.Mocks",
             "Telerik.JustMock"
         };
-        ProjectTypeHelper.TestAssemblyNames.OrderBy(x => x).Should().BeEquivalentTo(synchronizedSortedReferences);
+        ProjectTypeCache.TestAssemblyNames.OrderBy(x => x).Should().BeEquivalentTo(synchronizedSortedReferences);
     }
 
     [TestMethod]

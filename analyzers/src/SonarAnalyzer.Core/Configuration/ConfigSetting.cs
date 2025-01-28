@@ -14,14 +14,17 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+using System.Xml.Linq;
+
+namespace SonarAnalyzer.Core.Configuration;
 
 /// <summary>
-/// Possible types of project. Note that we expect only the string format to be passed from the Scanner.
+/// Data class to describe an analysis setting.
 /// </summary>
-public enum ProjectType
+/// <remarks>
+/// This class is the counterpart of SonarScanner.MSBuild.Common.ConfigSetting.
+/// </remarks>
+internal sealed record ConfigSetting(string Id, string Value)
 {
-    Unknown,
-    Product,
-    Test
+    public ConfigSetting(XElement element) : this(element.Attribute("Id").Value, element.Attribute("Value")?.Value) { }
 }

@@ -1,4 +1,4 @@
-﻿  <Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -34,6 +34,12 @@
     <Using Include="SonarAnalyzer.TestFramework.Extensions" />
     <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
     <Using Include="SonarAnalyzer.TestFramework.Verification" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestResources\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

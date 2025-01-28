@@ -16,8 +16,9 @@
 
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Core.Configuration;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Test.Configuration;
 
 [TestClass]
 public class ProjectConfigReaderTest
@@ -93,13 +94,14 @@ public class ProjectConfigReaderTest
     [TestMethod]
     public void FilesToAnalyze_LoadsFileFromConfig()
     {
-        var config = SourceText.From(@"
-<SonarProjectConfig xmlns=""http://www.sonarsource.com/msbuild/analyzer/2021/1"">
-    <FilesToAnalyzePath>TestResources\FilesToAnalyze\FilesToAnalyze.txt</FilesToAnalyzePath>
-</SonarProjectConfig>");
+        var config = SourceText.From("""
+            <SonarProjectConfig xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
+                <FilesToAnalyzePath>TestResources\FilesToAnalyze\FilesToAnalyze.txt</FilesToAnalyzePath>
+            </SonarProjectConfig>
+            """);
         var files = new ProjectConfigReader(config).FilesToAnalyze.FindFiles("web.config", false);
 
-        files.Should().BeEquivalentTo(new[] { @"C:\Projects/DummyProj/wEB.config", @"C:\Projects/DummyProj/Views\Web.confiG" });
+        files.Should().BeEquivalentTo(@"C:\Projects/DummyProj/wEB.config", @"C:\Projects/DummyProj/Views\Web.confiG");
     }
 
     [TestMethod]

@@ -17,7 +17,7 @@
 using System.IO;
 using System.Xml.Linq;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 /// <summary>
 /// This class reads and encapsulates <see cref="AnalysisConfig"/>, exposing only the configuration our analyzers need.

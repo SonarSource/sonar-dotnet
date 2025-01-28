@@ -18,7 +18,7 @@ using System.IO;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 public class SonarLintXmlReader
 {

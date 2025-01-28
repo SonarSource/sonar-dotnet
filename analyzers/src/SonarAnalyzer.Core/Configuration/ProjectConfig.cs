@@ -16,7 +16,7 @@
 
 using System.Xml.Linq;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 /// <summary>
 /// Data class to describe a single project configuration for our analyzers.
@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Helpers;
 /// </remarks>
 internal class ProjectConfig
 {
-    public static readonly ProjectConfig Empty = new(nameof(Helpers.ProjectType.Unknown));
+    public static readonly ProjectConfig Empty = new(nameof(Configuration.ProjectType.Unknown));
 
     /// <summary>
     /// Full path to the SonarQubeAnalysisConfig.xml file.

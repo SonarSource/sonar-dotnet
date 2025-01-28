@@ -32,7 +32,7 @@ public class FileScopeNamespaceTest
     [TestMethod]
     public void FileScopeNamespace_TestCode() =>
         builder.AddPaths("FileScopeNamespace.cs")
-            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, Helpers.ProjectType.Test))
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Test))
             .Verify();
 
     [TestMethod]

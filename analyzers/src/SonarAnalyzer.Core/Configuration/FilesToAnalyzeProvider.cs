@@ -17,7 +17,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 public class FilesToAnalyzeProvider
 {

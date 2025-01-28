@@ -15,6 +15,7 @@
  */
 
 using System.IO;
+using SonarAnalyzer.Core.Configuration;
 
 namespace SonarAnalyzer.Core.Extensions;
 

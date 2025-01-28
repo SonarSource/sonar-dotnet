@@ -17,7 +17,7 @@
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Configuration;
 
 /// <summary>
 /// This class reads and encapsulates <see cref="ProjectConfig"/>, exposing only the configuration our analyzers need.
@@ -43,10 +43,10 @@ public class ProjectConfigReader
 
     public ProjectConfigReader(SourceText sonarProjectConfig)
     {
-        projectConfig = sonarProjectConfig == null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig);
+        projectConfig = sonarProjectConfig is null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig);
         projectType = new Lazy<ProjectType>(ParseProjectType);
         filesToAnalyze = new Lazy<FilesToAnalyzeProvider>(() => new FilesToAnalyzeProvider(FilesToAnalyzePath));
-        analysisConfig = new(() => sonarProjectConfig == null ? null : new(AnalysisConfigPath));
+        analysisConfig = new(() => sonarProjectConfig is null ? null : new(AnalysisConfigPath));
     }
 
     private static ProjectConfig ReadContent(SourceText sonarProjectConfig)
