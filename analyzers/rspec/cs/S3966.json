@@ -14,7 +14,8 @@
   },
   "tags": [
     "confusing",
-    "pitfall"
+    "pitfall",
+    "symbolic-execution"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-3966",

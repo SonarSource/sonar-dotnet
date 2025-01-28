@@ -13,7 +13,8 @@
     "constantCost": "30min"
   },
   "tags": [
-    "cwe"
+    "cwe",
+    "symbolic-execution"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6781",

@@ -6,7 +6,9 @@
     "func": "Constant\/Issue",
     "constantCost": "1min"
   },
-  "tags": [],
+  "tags": [
+    "symbolic-execution"
+  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-7130",
   "sqKey": "S7130",
