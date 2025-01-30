@@ -34,11 +34,11 @@ namespace SonarAnalyzer.Rules.CSharp
 
         // For the XXE rule we actually need to know about .NET 4.5.2,
         // but it is good enough given the other .NET 4.x do not have support anymore
-        private readonly INetFrameworkVersionProvider versionProvider;
+        private readonly NetFrameworkVersionProvider versionProvider;
 
         public XmlExternalEntityShouldNotBeParsed() : this(new NetFrameworkVersionProvider()) { }
 
-        internal /*for testing*/ XmlExternalEntityShouldNotBeParsed(INetFrameworkVersionProvider netFrameworkVersionProvider) =>
+        internal /*for testing*/ XmlExternalEntityShouldNotBeParsed(NetFrameworkVersionProvider netFrameworkVersionProvider) =>
             versionProvider = netFrameworkVersionProvider;
 
         protected override void Initialize(SonarAnalysisContext context) =>
@@ -49,9 +49,8 @@ namespace SonarAnalyzer.Rules.CSharp
                         c =>
                         {
                             var objectCreation = ObjectCreationFactory.Create(c.Node);
-                            var netFrameworkVersion = versionProvider.GetDotNetFrameworkVersion(c.Compilation);
+                            var netFrameworkVersion = versionProvider.Version(c.Compilation);
                             var constructorIsSafe = ConstructorIsSafe(netFrameworkVersion);
-
                             var trackers = TrackerFactory.Create();
                             if (trackers.XmlDocumentTracker.ShouldBeReported(objectCreation, c.Model, constructorIsSafe)
                                || trackers.XmlTextReaderTracker.ShouldBeReported(objectCreation, c.Model, constructorIsSafe))
@@ -94,7 +93,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return; // safe by default
             }
 
-            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.Model, versionProvider.GetDotNetFrameworkVersion(context.Compilation));
+            var xmlReaderSettingsValidator = new XmlReaderSettingsValidator(context.Model, versionProvider.Version(context.Compilation));
             if (xmlReaderSettingsValidator.GetUnsafeAssignmentLocations(invocation, settings, SecondaryMessage) is { } secondaryLocations && secondaryLocations.Any())
             {
                 context.ReportIssue(Rule, invocation, secondaryLocations);
@@ -111,7 +110,7 @@ namespace SonarAnalyzer.Rules.CSharp
                 return;
             }
 
-            if (!IsXPathDocumentSecureByDefault(versionProvider.GetDotNetFrameworkVersion(context.Compilation)))
+            if (!IsXPathDocumentSecureByDefault(versionProvider.Version(context.Compilation)))
             {
                 context.ReportIssue(Rule, objectCreation.Expression);
             }

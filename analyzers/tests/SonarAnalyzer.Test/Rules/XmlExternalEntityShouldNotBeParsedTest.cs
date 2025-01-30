@@ -114,8 +114,8 @@ namespace SonarAnalyzer.Test.Rules
 
         private VerifierBuilder WithAnalyzer(NetFrameworkVersion version)
         {
-            var fxVersion = Substitute.For<INetFrameworkVersionProvider>();
-            fxVersion.GetDotNetFrameworkVersion(Arg.Any<Compilation>()).Returns(version);
+            var fxVersion = Substitute.For<NetFrameworkVersionProvider>();
+            fxVersion.Version(Arg.Any<Compilation>()).Returns(version);
             return builder.AddAnalyzer(() => new XmlExternalEntityShouldNotBeParsed(fxVersion));
         }
     }
