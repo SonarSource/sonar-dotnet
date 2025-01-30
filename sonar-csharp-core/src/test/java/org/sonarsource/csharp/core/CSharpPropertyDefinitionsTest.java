@@ -29,7 +29,7 @@ class CSharpPropertyDefinitionsTest {
     CSharpPropertyDefinitions sut = new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE);
     List<PropertyDefinition> properties = sut.create();
     assertThat(properties)
-      .hasSize(20)
+      .hasSize(18)
       .extracting(PropertyDefinition::name).containsOnlyOnce("Analyze Razor code");
   }
 
@@ -41,8 +41,6 @@ class CSharpPropertyDefinitionsTest {
     assertThat(properties)
       .extracting(PropertyDefinition::key)
       .contains(
-        "sonar.cs.analyzer.dotnet.analyzerId",
-        "sonar.cs.analyzer.dotnet.ruleNamespace",
         "sonar.cs.analyzer.dotnet.pluginKey",
         "sonar.cs.analyzer.dotnet.pluginVersion",
         "sonar.cs.analyzer.dotnet.staticResourceName");

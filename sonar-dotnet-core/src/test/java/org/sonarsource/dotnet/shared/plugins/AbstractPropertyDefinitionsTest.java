@@ -45,8 +45,6 @@ public class AbstractPropertyDefinitionsTest {
         tuple("sonar.language-key.analyzer.dotnet.pluginKey", "plugin-key"),
         tuple("sonar.language-key.analyzer.dotnet.pluginVersion", "1.2.3.4"),
         tuple("sonar.language-key.analyzer.dotnet.staticResourceName", "SonarAnalyzer-plugin-key-1.2.3.4.zip"),
-        tuple("sonar.language-key.analyzer.dotnet.analyzerId", "Project-Name"),
-        tuple("sonar.language-key.analyzer.dotnet.ruleNamespace", "Project-Name"),
         tuple("sonaranalyzer-language-key.pluginKey", "plugin-key"),
         tuple("sonaranalyzer-language-key.pluginVersion", "1.2.3.4"),
         tuple("sonaranalyzer-language-key.staticResourceName", "SonarAnalyzer-plugin-key-1.2.3.4.zip"),

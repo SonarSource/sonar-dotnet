@@ -146,16 +146,6 @@ public abstract class AbstractPropertyDefinitions {
         .onQualifiers(Qualifiers.PROJECT)
         .build());
     result.add(
-      PropertyDefinition.builder(analyzerIdScannerPropertyKey(languageKey))
-        .defaultValue(metadata.analyzerProjectName())
-        .hidden()
-        .build());
-    result.add(
-      PropertyDefinition.builder(ruleNamespaceScannerPropertyKey(languageKey))
-        .defaultValue(metadata.analyzerProjectName())
-        .hidden()
-        .build());
-    result.add(
       PropertyDefinition.builder(pluginKeyLegacyScannerPropertyKey(languageKey))
         .defaultValue(metadata.pluginKey())
         .hidden()
@@ -237,12 +227,6 @@ public abstract class AbstractPropertyDefinitions {
 
   public static String staticResourceNameScannerPropertyKey(String languageKey) {
     return scannerForDotNetProperty(languageKey, "staticResourceName");
-  }
-  public static String analyzerIdScannerPropertyKey(String languageKey) {
-    return scannerForDotNetProperty(languageKey, "analyzerId");
-  }
-  public static String ruleNamespaceScannerPropertyKey(String languageKey) {
-    return scannerForDotNetProperty(languageKey, "ruleNamespace");
   }
 
   private static String scannerForDotNetProperty(String languageKey, String name) {

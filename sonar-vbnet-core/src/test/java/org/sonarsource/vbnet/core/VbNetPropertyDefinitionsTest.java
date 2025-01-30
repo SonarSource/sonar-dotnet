@@ -29,7 +29,7 @@ class VbNetPropertyDefinitionsTest {
     VbNetPropertyDefinitions sut = new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE);
     List<PropertyDefinition> properties = sut.create();
     assertThat(properties)
-      .hasSize(19);
+      .hasSize(17);
   }
 
   @Test
@@ -40,8 +40,6 @@ class VbNetPropertyDefinitionsTest {
     assertThat(properties)
       .extracting(PropertyDefinition::key)
       .contains(
-        "sonar.vbnet.analyzer.dotnet.analyzerId",
-        "sonar.vbnet.analyzer.dotnet.ruleNamespace",
         "sonar.vbnet.analyzer.dotnet.pluginKey",
         "sonar.vbnet.analyzer.dotnet.pluginVersion",
         "sonar.vbnet.analyzer.dotnet.staticResourceName");
