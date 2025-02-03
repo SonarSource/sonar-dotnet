@@ -222,7 +222,8 @@ public static class SyntaxNodeExtensionsCSharp
             { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
                 && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),
             { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
-            { } subPattern when SubpatternSyntaxWrapper.IsInstance(subPattern) => GetIdentifier(((SubpatternSyntaxWrapper)subPattern).ExpressionColon.Expression),
+            { } subPattern when SubpatternSyntaxWrapper.IsInstance(subPattern) && ((SubpatternSyntaxWrapper)subPattern).ExpressionColon is { SyntaxNode: not null } expressionColon =>
+                GetIdentifier(expressionColon.Expression),
             _ => null
         };
 

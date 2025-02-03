@@ -1130,6 +1130,8 @@ End Class";
     [DataRow("""$$int*$$ i;""", "int")]                                           // PointerTypeSyntax
     [DataRow("""$$System.Collections.ArrayList$$ l;""", "ArrayList")]             // QualifiedNameSyntax
     [DataRow("""$$List<int>$$ l;""", "List")]                                     // SimpleNameSyntax
+    [DataRow("""bool M() => (0, Name: "a") is (_, $$Name: null$$);""", "Name")]   // SubpatternSyntax
+    [DataRow("""bool M() => (0, Name: "a") is ($$_$$, Name: null);""", null)]     // SubpatternSyntax
     [DataRow("""void M<T>() where $$T : class$$ { }""", "T")]                     // TypeParameterConstraintClauseSyntax
     [DataRow("""void M<$$T$$>() { }""", "T")]                                     // TypeParameterSyntax
     [DataRow("""int $$i$$;""", "i")]                                              // VariableDeclaratorSyntax
