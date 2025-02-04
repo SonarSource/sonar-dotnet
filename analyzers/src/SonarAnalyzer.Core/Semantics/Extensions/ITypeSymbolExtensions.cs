@@ -137,7 +137,7 @@ public static class ITypeSymbolExtensions
         var currentType = typeSymbol;
         while (currentType is not null)
         {
-            if (currentType.Equals(type))
+            if (currentType.Equals(type) || (currentType is INamedTypeSymbol { ConstructedFrom: { } constructedFrom } && constructedFrom.Equals(type)))
             {
                 return true;
             }

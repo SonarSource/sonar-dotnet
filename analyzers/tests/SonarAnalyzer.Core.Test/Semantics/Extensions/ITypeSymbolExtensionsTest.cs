@@ -106,7 +106,7 @@ public class ITypeSymbolExtensionsTest
     [DataTestMethod]
     [DataRow("System.Collections.Generic.IEnumerable<T>", "System.Collections.Generic.IEnumerable<T>", true)]
     [DataRow("System.Collections.Generic.IEnumerable<T>", "System.IDisposable", false)]
-    [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<T>", false)]    // Because it doesn't implement itself
+    [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<T>", true)]
     [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<string>", false)]
     [DataRow("System.Collections.Generic.IEnumerable<int>", "System.IDisposable", false)]
     [DataRow("System.Collections.Generic.List<T>", "System.Collections.Generic.IEnumerable<T>", true)]
@@ -132,6 +132,33 @@ public class ITypeSymbolExtensionsTest
         var type = allTypes.Single(x => x.ToString() == typeName);
 
         typeSymbol.DerivesOrImplements(type).Should().Be(expected);
+    }
+
+    [DataTestMethod]
+    [DataRow("Open`3", "Open`3", true)]
+    [DataRow("Half2`2", "Open`3", true)]
+    [DataRow("Half1`1", "Open`3", true)]
+    [DataRow("Closed", "Open`3", true)]
+    [DataRow("Half2`2", "Half2`2", true)]
+    [DataRow("Half1`1", "Half2`2", true)]
+    [DataRow("Closed", "Half2`2", true)]
+    [DataRow("Half1`1", "Half1`1", true)]
+    [DataRow("Closed", "Half1`1", true)]
+    [DataRow("Closed", "Closed", true)]
+    [DataRow("Half2`2", "Closed", false)]
+    [DataRow("Half1`1", "Closed", false)]
+    [DataRow("Half2`2", "Half1`1", false)]
+    public void Type_DerivesOrImplements_HalfClosed(string typeName, string derivesFromName, bool expected)
+    {
+        var compilation = TestCompiler.CompileCS("""
+            public class Open<A, B, C> { }
+            public class Half2<A, B>: Open<A, B, int> { }
+            public class Half1<A>: Half2<A, int> { }
+            public class Closed: Half1<int> { }
+            """).Model.Compilation;
+        var type = compilation.GetTypeByMetadataName(typeName);
+        var derivesFrom = compilation.GetTypeByMetadataName(derivesFromName);
+        type.DerivesOrImplements(derivesFrom).Should().Be(expected);
     }
 
     [DataTestMethod]
