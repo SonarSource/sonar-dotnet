@@ -36,6 +36,11 @@ public class OptionalParameterTest
 #if NET
 
     [TestMethod]
+    public void OptionalParameter_CS_Web() =>
+        builderCS.AddPaths("OptionalParameter.Web.cs")
+            .AddReferences(MetadataReferenceFacade.AspNetCoreReferences).Verify();
+
+    [TestMethod]
     public void OptionalParameter_CSharp10() =>
         builderCS.AddPaths("OptionalParameter.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
 

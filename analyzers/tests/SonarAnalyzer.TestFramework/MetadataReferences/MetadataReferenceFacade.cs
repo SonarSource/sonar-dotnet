@@ -20,6 +20,20 @@ namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 public static class MetadataReferenceFacade
 {
+#if NET
+    public static IEnumerable<MetadataReference> AspNetCoreReferences =>
+    [
+        AspNetCoreMetadataReference.MicrosoftAspNetCore,                    // For WebApplication
+        AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions, // For IHost
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,    // For HttpContext, RouteValueDictionary
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazorPages,       // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
+    ];
+#endif
     public static References NetStandard { get; } = MetadataReferenceFactory.Create("netstandard.dll");
 
     public static References MsCorLib =>
