@@ -695,4 +695,26 @@ namespace Tests.TestCases
             }
         }
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-1090
+    public static class Repro_1090
+    {
+        private static bool InstanceMethod(IDictionary<int, bool> dict)
+        {
+            return Enumerable.Range(0, 1).Any(dict.Keys.Contains);
+        }
+
+        private static bool ExtensionMethod(IDictionary<int, bool> dict)
+        {
+            return Enumerable.Range(0, 1).Any(dict.ContainsExt);
+        }
+
+        private static bool ExtensionMethodWithMemberAccess(IDictionary<int, bool> dict) // Noncompliant FP (NET-1090)
+        {
+            return Enumerable.Range(0, 1).Any(dict.Keys.ContainsExt); // The member access dict.Key is not supported
+        }
+
+        private static bool ContainsExt(this ICollection<int> ints, int value) => ints.Contains(value);
+        private static bool ContainsExt(this IDictionary<int, bool> dict, int value) => dict.Keys.Contains(value);
+    }
 }
