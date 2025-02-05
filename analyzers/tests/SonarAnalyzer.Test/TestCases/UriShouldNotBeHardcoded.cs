@@ -48,11 +48,15 @@ namespace Tests.Diagnostics
             var webChemin = "http://www.mywebsite.com"; // FN
             var windowsChemin = "c:\\blah\\blah\\blah.txt"; // FN
 
+            var literalConcat = "http://" + "example.com"; // FN
+            string GetPath() => "C:/test.txt"; // FN
+
             // The rule only checks the string literals that are [arguments in methods/constructors] or [assignment]
-            bool ReturnStement(string uri)
+            bool ReturnStatement(string uri)
             {
                 return uri is "\\my-network-drive\folder\file.txt"; // FN
             }
+
 
             bool ExpressionBody(string uri) =>
                 uri is "\\my-network-drive\folder\file.txt"; // FN
@@ -93,17 +97,17 @@ class ReproFN_7815
 
         var myClass2 = new MyClass
         {
-            FilePath = @"\\my-network-drive\folder\file.txt" // FN
+            FilePath = @"\\my-network-drive\folder\file.txt" // Noncompliant
         };
 
         var myClass3 = new MyClass
         {
-            FilePath = "http://www.mywebsite.com" // FN
+            FilePath = "http://www.mywebsite.com" // Noncompliant
         };
 
         var myClass4 = new MyClass
         {
-            FilePath = "c:\\blah\\blah\\blah.txt" // FN
+            FilePath = "c:\\blah\\blah\\blah.txt" // Noncompliant
         };
     }
 }

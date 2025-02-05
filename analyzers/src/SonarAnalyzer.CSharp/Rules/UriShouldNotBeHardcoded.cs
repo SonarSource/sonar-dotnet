@@ -14,17 +14,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.CSharp
-{
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind, LiteralExpressionSyntax, ArgumentSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] StringConcatenateExpressions => new[] { SyntaxKind.AddExpression };
-        protected override SyntaxKind[] InvocationOrObjectCreationKind => new[] { SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression };
+namespace SonarAnalyzer.Rules.CSharp;
 
-        protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
-            (SyntaxNode)node.FirstAncestorOrSelf<ParameterSyntax>() ?? node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-    }
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind, LiteralExpressionSyntax, ArgumentSyntax>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => CSharpGeneratedCodeRecognizer.Instance;
+    protected override SyntaxKind[] StringConcatenateExpressions => [SyntaxKind.AddExpression];
+    protected override SyntaxKind[] InvocationOrObjectCreationKind => [SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression];
+
+    protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
+        node switch
+        {
+            _ when node.FirstAncestorOrSelf<AssignmentExpressionSyntax>() is { } propertyAssignment => propertyAssignment.Left,
+            _ when node.FirstAncestorOrSelf<ParameterSyntax>() is { } parameterSyntax => parameterSyntax,
+            _ when node.FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { } variableDeclaratorSyntax => variableDeclaratorSyntax,
+            _ => null
+        };
 }

@@ -14,17 +14,16 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
-{
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind, LiteralExpressionSyntax, ArgumentSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
-        protected override SyntaxKind[] StringConcatenateExpressions => new[] { SyntaxKind.AddExpression, SyntaxKind.ConcatenateExpression };
-        protected override SyntaxKind[] InvocationOrObjectCreationKind => new[] { SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression };
+namespace SonarAnalyzer.Rules.VisualBasic;
 
-        protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
-            (SyntaxNode)node.FirstAncestorOrSelf<ParameterSyntax>() ?? node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
-    }
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class UriShouldNotBeHardcoded : UriShouldNotBeHardcodedBase<SyntaxKind, LiteralExpressionSyntax, ArgumentSyntax>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override GeneratedCodeRecognizer GeneratedCodeRecognizer => VisualBasicGeneratedCodeRecognizer.Instance;
+    protected override SyntaxKind[] StringConcatenateExpressions => [SyntaxKind.AddExpression, SyntaxKind.ConcatenateExpression];
+    protected override SyntaxKind[] InvocationOrObjectCreationKind => [SyntaxKind.InvocationExpression, SyntaxKind.ObjectCreationExpression];
+
+    protected override SyntaxNode GetRelevantAncestor(SyntaxNode node) =>
+        (SyntaxNode)node.FirstAncestorOrSelf<ParameterSyntax>() ?? node.FirstAncestorOrSelf<VariableDeclaratorSyntax>();
 }

@@ -32,7 +32,12 @@ Class Program
         Dim z = New Uri(New Uri("a"), ("C:/test.txt")) ' Noncompliant
         File.OpenRead("\\drive\foo.csv") ' Noncompliant
         File.OpenRead("/etc/foo.csv") ' FN
+        Dim literalConcat = "http://" & "example.com" ' FN
     End Sub
+
+    Private Function GetPath() As String
+        Return "C:/test.txt" ' FN
+    End Function
 
     Private Sub ValidCases(s As String, Optional methodParam As String = "file://blah.txt") ' Compliant: methodParam doesn't contain uri within the name
         Dim windowsPathStartingWithVariable = "%AppData%\Adobe"

@@ -49,7 +49,8 @@ class Repro_8146
         var uris5 = new[] { "C:/test.txt" }; // Noncompliant
         string[] uris6 = ["C:/test.txt"]; // Noncompliant
         string[][] urisMatrix1 = [["C:/test.txt"]]; // Noncompliant
-        IDictionary<string, string> urisDict = new Dictionary<string, string> { ["a"] = "C:/test.txt" }; // Noncompliant
+        IDictionary<string, string> urisDict = new Dictionary<string, string> { ["a"] = "C:/test.txt" }; // FN
+        IDictionary<string, string> urisDict2 = new Dictionary<string, string> { ["urisDict2"] = "C:/test.txt" }; // FN
 
         IList<string> paths = new[] { "c:\\blah.txt" }; // Noncompliant
         IList<string> files = new[] { "file://blah.txt" }; // Noncompliant
