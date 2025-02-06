@@ -17,10 +17,6 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
-  </ItemGroup>
-
   <Import Project="..\SonarAnalyzer.Shared\SonarAnalyzer.Shared.projitems" Label="Shared" />
 
   <ItemGroup>

@@ -18,10 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\Signing.cs" Link="Properties\Signing.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <AdditionalFiles Include="OperationInterfaces.xml" />
     <AdditionalFiles Include="Syntax.xml" />
   </ItemGroup>
@@ -31,10 +27,5 @@
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
   </ItemGroup>
-
-  <Target Name="SignDlls" Condition="'$(SignAssembly)' == 'true' and $(TargetFramework) != ''" AfterTargets="Build">
-    <Message Importance="high" Text="Signing SonarAnalyzer.CFG assemblies from $(OutDir)" />
-    <Exec WorkingDirectory="$(OutDir)" Command="signtool sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /csp &quot;DigiCert Signing Manager KSP&quot; /kc &quot;$(SM_KP)&quot; /f &quot;$(SM_CLIENT_CRT_FILE)&quot; SonarAnalyzer.ShimLayer.dll" />
-  </Target>
 
 </Project>

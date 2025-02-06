@@ -39,10 +39,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)\src\AssemblyInfo.Shared.cs" Link="Properties\AssemblyInfo.Shared.cs" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(SignAssembly)' == 'true' ">
-    <DefineConstants>$(DefineConstants);SignAssembly</DefineConstants>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Deterministic>true</Deterministic>
