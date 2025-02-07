@@ -51,7 +51,7 @@ internal sealed class RegexContext
         {
             try
             {
-                Regex = new(Pattern, options.GetValueOrDefault() & ValidationMask, RegexConstants.DefaultTimeout);
+                Regex = new(Pattern, options.GetValueOrDefault() & ValidationMask, Constants.DefaultRegexTimeout);
             }
             catch (Exception ex)
             {

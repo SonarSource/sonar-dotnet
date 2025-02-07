@@ -67,7 +67,7 @@ namespace SonarAnalyzer.Rules
         {
             try
             {
-                Regex.Match(string.Empty, pattern, RegexOptions.None, RegexConstants.DefaultTimeout);
+                Regex.Match(string.Empty, pattern, RegexOptions.None, Constants.DefaultRegexTimeout);
                 return true;
             }
             catch (ArgumentException)

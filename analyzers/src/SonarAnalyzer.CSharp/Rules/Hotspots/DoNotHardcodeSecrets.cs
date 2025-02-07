@@ -30,8 +30,8 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
     private const string EqualsName = nameof(string.Equals);
 
     // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
-    private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, RegexConstants.DefaultTimeout);
-    private static readonly Regex BanList = new(@"public[_.-]?key|document_?key|client[_.-]?id|localhost|127\.0\.0\.1|test|xsrf|csrf", RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+    private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, Constants.DefaultRegexTimeout);
+    private static readonly Regex BanList = new(@"public[_.-]?key|document_?key|client[_.-]?id|localhost|127\.0\.0\.1|test|xsrf|csrf", RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
 
     private Regex keyWordInVariablePattern;
 

@@ -30,9 +30,9 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
     private static readonly ArgumentDescriptor TypeDescriptor = ArgumentDescriptor.AttributeProperty(KnownType.System_Diagnostics_DebuggerDisplayAttribute, nameof(DebuggerDisplayAttribute.Type));
 
     // Source of the regex: https://stackoverflow.com/questions/546433/regular-expression-to-match-balanced-parentheses#comment120990638_35271017
-    private static readonly Regex EvaluatedExpressionRegex = new(@"\{(?>\{(?<c>)|[^{}]+|\}(?<-c>))*(?(c)(?!))\}", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private static readonly Regex EvaluatedExpressionRegex = new(@"\{(?>\{(?<c>)|[^{}]+|\}(?<-c>))*(?(c)(?!))\}", RegexOptions.None, Constants.DefaultRegexTimeout);
     // Remove the "nq" (no quotes) modifier, others like "d" or "raw" are undocumented. We allow any word here.
-    private static readonly Regex RemoveNqModifierRegex = new(@"\s*,\s*[a-zA-Z]*\s*$", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private static readonly Regex RemoveNqModifierRegex = new(@"\s*,\s*[a-zA-Z]*\s*$", RegexOptions.None, Constants.DefaultRegexTimeout);
     protected abstract SyntaxNode AttributeTarget(TAttributeArgumentSyntax attribute);
     protected abstract ImmutableArray<SyntaxNode> ResolvableIdentifiers(SyntaxNode expression);
 

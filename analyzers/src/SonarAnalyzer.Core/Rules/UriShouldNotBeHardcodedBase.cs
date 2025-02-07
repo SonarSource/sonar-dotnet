@@ -36,8 +36,8 @@ public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressio
     private const string AbsoluteDiskUri = @"^[A-Za-z]:(/|\\)";
     private const string AbsoluteMappedDiskUri = @"^\\\\\w[ \w\.]*";
 
-    protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
-    protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+    protected static readonly Regex UriRegex = new($"{UriScheme}|{AbsoluteDiskUri}|{AbsoluteMappedDiskUri}", RegexOptions.Compiled, Constants.DefaultRegexTimeout);
+    protected static readonly Regex PathDelimiterRegex = new(@"^(\\|/)$", RegexOptions.Compiled, Constants.DefaultRegexTimeout);
 
     protected static readonly ISet<string> CheckedVariableNames =
         new HashSet<string>

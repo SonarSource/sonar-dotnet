@@ -41,7 +41,7 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
     private static string GetDocumentationText(SyntaxTrivia trivia)
     {
         var stringBuilder = new StringBuilder();
-        foreach (var line in trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None))
+        foreach (var line in trivia.ToFullString().Split(Constants.LineTerminators, StringSplitOptions.None))
         {
             var trimmedLine = line.TrimStart(null);
             trimmedLine = trimmedLine.StartsWith("'''")

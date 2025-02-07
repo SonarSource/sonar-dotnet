@@ -29,7 +29,7 @@ internal class Verifier
 {
     private const string TestCases = "TestCases";
 
-    private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft, RegexConstants.DefaultTimeout);
+    private static readonly Regex ImportsRegexVB = new(@"^\s*Imports\s+.+$", RegexOptions.Multiline | RegexOptions.RightToLeft, Constants.DefaultRegexTimeout);
     private readonly VerifierBuilder builder;
     private readonly DiagnosticAnalyzer[] analyzers;
     private readonly SonarCodeFix codeFix;

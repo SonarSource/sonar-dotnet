@@ -23,8 +23,6 @@ public abstract class MetricsBase
     private readonly SyntaxTree tree;
     private readonly string filePath;
 
-    internal static readonly string[] LineTerminators = { "\r\n", "\n", "\r" };
-
     public abstract ImmutableArray<int> ExecutableLines { get; }
     public abstract int ComputeCyclomaticComplexity(SyntaxNode node);
     protected abstract bool IsEndOfFile(SyntaxToken token);
@@ -75,7 +73,7 @@ public abstract class MetricsBase
             }
 
             var lineNumber = mappedSpan.StartLinePosition.Line + 1;
-            var triviaLines = trivia.ToFullString().Split(LineTerminators, StringSplitOptions.None);
+            var triviaLines = trivia.ToFullString().Split(Constants.LineTerminators, StringSplitOptions.None);
 
             foreach (var line in triviaLines)
             {

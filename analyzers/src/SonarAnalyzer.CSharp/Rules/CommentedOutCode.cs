@@ -66,7 +66,7 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
 
     private static void CheckMultilineComment(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivia)
     {
-        var triviaLines = TriviaContent().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
+        var triviaLines = TriviaContent().Split(Constants.LineTerminators, StringSplitOptions.None);
 
         for (var triviaLineNumber = 0; triviaLineNumber < triviaLines.Length; triviaLineNumber++)
         {

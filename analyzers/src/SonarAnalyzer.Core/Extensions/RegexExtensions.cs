@@ -20,7 +20,7 @@ namespace SonarAnalyzer.Core.Extensions;
 
 public static class RegexExtensions
 {
-    private static readonly MatchCollection EmptyMatchCollection = Regex.Matches(string.Empty, "a", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private static readonly MatchCollection EmptyMatchCollection = Regex.Matches(string.Empty, "a", RegexOptions.None, Constants.DefaultRegexTimeout);
 
     /// <summary>
     /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
@@ -102,7 +102,7 @@ public static class SafeRegex
 
     /// <inheritdoc cref="IsMatch(string, string)"/>
     public static bool IsMatch(string input, string pattern, RegexOptions options) =>
-        IsMatch(input, pattern, options, RegexConstants.DefaultTimeout);
+        IsMatch(input, pattern, options, Constants.DefaultRegexTimeout);
 
     /// <inheritdoc cref="IsMatch(string, string)"/>
     public static bool IsMatch(string input, string pattern, RegexOptions options, TimeSpan matchTimeout)

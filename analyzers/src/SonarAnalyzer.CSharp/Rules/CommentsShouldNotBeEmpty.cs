@@ -43,7 +43,7 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
     private static string GetSingleLineDocumentationText(SyntaxTrivia trivia)
     {
         var stringBuilder = new StringBuilder();
-        foreach (var line in trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None))
+        foreach (var line in trivia.ToFullString().Split(Constants.LineTerminators, StringSplitOptions.None))
         {
             var trimmedLine = line.TrimStart(null);
             trimmedLine = trimmedLine.StartsWith("///")
@@ -71,7 +71,7 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
         }
 
         var stringBuilder = new StringBuilder();
-        foreach (var line in commentText.Split(MetricsBase.LineTerminators, StringSplitOptions.None))
+        foreach (var line in commentText.Split(Constants.LineTerminators, StringSplitOptions.None))
         {
             var trimmedLine = line.TrimStart(null);
             if (trimmedLine.StartsWith("*", StringComparison.Ordinal))

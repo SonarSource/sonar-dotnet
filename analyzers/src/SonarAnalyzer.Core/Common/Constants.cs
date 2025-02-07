@@ -16,7 +16,9 @@
 
 namespace SonarAnalyzer.Common;
 
-public static class RegexConstants
+public static class Constants
 {
-    public static TimeSpan DefaultTimeout => TimeSpan.FromMilliseconds(100);
+    internal static readonly string[] LineTerminators = { "\r\n", "\n", "\r" };
+
+    public static TimeSpan DefaultRegexTimeout => TimeSpan.FromMilliseconds(100);
 }

@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Rules.CSharp
         private const string MessageFormat = "Use a secure password when connecting to this database.";
 
         private static readonly Regex Sanitizers = new(@"((integrated[_\s]security)|(trusted[_\s]connection))=(sspi|yes|true)",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+            RegexOptions.Compiled | RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
 
         private static readonly MemberDescriptor[] TrackedInvocations =
         {

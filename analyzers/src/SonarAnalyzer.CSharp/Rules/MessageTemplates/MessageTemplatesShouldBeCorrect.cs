@@ -63,8 +63,8 @@ public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer
         // This is similar to the regex used for MessageTemplatesAnalyzer, but it is far more permissive.
         // The goal is to manually parse the placeholders, so that we can report more specific issues than just "malformed template".
         private static readonly Regex TemplateRegex = new(TemplatePattern, RegexOptions.Compiled, TimeSpan.FromMilliseconds(300));
-        private static readonly Regex PlaceholderNameRegex = new("^[0-9a-zA-Z_]+$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
-        private static readonly Regex PlaceholderAlignmentRegex = new("^-?[0-9]+$", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+        private static readonly Regex PlaceholderNameRegex = new("^[0-9a-zA-Z_]+$", RegexOptions.Compiled, Constants.DefaultRegexTimeout);
+        private static readonly Regex PlaceholderAlignmentRegex = new("^-?[0-9]+$", RegexOptions.Compiled, Constants.DefaultRegexTimeout);
 
         public static bool ContainsErrors(string template, out List<ParsingError> errors)
         {

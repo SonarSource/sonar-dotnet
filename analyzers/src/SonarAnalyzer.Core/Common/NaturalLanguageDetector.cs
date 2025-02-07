@@ -88,7 +88,7 @@ public static class NaturalLanguageDetector
       0.1036998d, 0.0025679d, 0.0009882d, 0.0047487d, 0.0052224d, 0.005546d, 0.0411031d, 0.0031899d, 0.0047273d, 0.0007615d, 0.0223349d, 0.0495398d],
   ];
 
-    private static readonly Regex Pattern = new("[a-z]+|[A-Z][a-z]+|[A-Za-z]+", RegexOptions.None, RegexConstants.DefaultTimeout);
+    private static readonly Regex Pattern = new("[a-z]+|[A-Z][a-z]+|[A-Za-z]+", RegexOptions.None, Constants.DefaultRegexTimeout);
 
     /**
      * @param text to analyze

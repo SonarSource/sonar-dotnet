@@ -42,9 +42,9 @@ public abstract class GeneratedCodeRecognizer
         "CompilerGenerated",
         "CompilerGeneratedAttribute");
 
-    private static readonly Regex RazorPattern = new(@".*razor(?!.cshtml)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+    private static readonly Regex RazorPattern = new(@".*razor(?!.cshtml)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
 
-    private static readonly Regex CshtmlPattern = new(@".*cshtml(?!.razor)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, RegexConstants.DefaultTimeout);
+    private static readonly Regex CshtmlPattern = new(@".*cshtml(?!.razor)(\.[-\w]*)?(\.ide)?\.g\.cs$", RegexOptions.Compiled | RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
 
     protected abstract bool IsTriviaComment(SyntaxTrivia trivia);
     protected abstract string GetAttributeName(SyntaxNode node);

@@ -38,11 +38,11 @@ namespace SonarAnalyzer.Rules
         {
             var insecureEnvironmentVariables = new[] { "tmp", "temp", "tmpdir" };
             InsecureEnvironmentVariables = insecureEnvironmentVariables;
-            UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
-            LinuxDirectories = new($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled, RegexConstants.DefaultTimeout);
-            MacDirectories = new($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
-            WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
-            EnvironmentVariables = new($@"^%({insecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions, RegexConstants.DefaultTimeout);
+            UserProfile = new("""^%USERPROFILE%[\\\/]AppData[\\\/]Local[\\\/]Temp""", WindowsAndUnixOptions, Constants.DefaultRegexTimeout);
+            LinuxDirectories = new($@"^({LinuxDirs().JoinStr("|", Regex.Escape)})(\/|$)", RegexOptions.Compiled, Constants.DefaultRegexTimeout);
+            MacDirectories = new($@"^({MacDirs().JoinStr("|", Regex.Escape)})(\/|$)", WindowsAndUnixOptions, Constants.DefaultRegexTimeout);
+            WindowsDirectories = new("""^([a-z]:[\\\/]?|[\\\/][\\\/][^\\\/]+[\\\/]|[\\\/])(windows[\\\/])?te?mp([\\\/]|$)""", WindowsAndUnixOptions, Constants.DefaultRegexTimeout);
+            EnvironmentVariables = new($@"^%({insecureEnvironmentVariables.JoinStr("|")})%([\\\/]|$)", WindowsAndUnixOptions, Constants.DefaultRegexTimeout);
         }
 
         private readonly DiagnosticDescriptor rule;

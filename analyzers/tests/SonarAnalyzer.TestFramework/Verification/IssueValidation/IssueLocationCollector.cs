@@ -221,5 +221,5 @@ internal static class IssueLocationCollector
             """);
 
     private static Regex CreateRegex(string pattern) =>
-        new(pattern, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+        new(pattern, RegexOptions.Compiled, Constants.DefaultRegexTimeout);
 }

@@ -55,7 +55,7 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
     }
 
     private static string[] Lines(SyntaxTrivia trivia) =>
-        trivia.ToFullString().Split(MetricsBase.LineTerminators, StringSplitOptions.None);
+        trivia.ToFullString().Split(Constants.LineTerminators, StringSplitOptions.None);
 
     private sealed class Context
     {

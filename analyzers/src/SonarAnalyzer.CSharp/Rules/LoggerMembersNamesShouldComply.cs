@@ -74,7 +74,7 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
         {
             if (cc.Compilation.ReferencesAny(Assemblies))
             {
-                NameRegex = UsesDefaultFormat ? null : new(Format, RegexOptions.Compiled, RegexConstants.DefaultTimeout);
+                NameRegex = UsesDefaultFormat ? null : new(Format, RegexOptions.Compiled, Constants.DefaultRegexTimeout);
 
                 cc.RegisterNodeAction(c =>
                 {
