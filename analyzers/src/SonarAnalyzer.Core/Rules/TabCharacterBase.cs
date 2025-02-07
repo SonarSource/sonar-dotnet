@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class TabCharacterBase : SonarDiagnosticAnalyzer
     {

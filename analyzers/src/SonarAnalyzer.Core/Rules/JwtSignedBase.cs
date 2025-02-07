@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct

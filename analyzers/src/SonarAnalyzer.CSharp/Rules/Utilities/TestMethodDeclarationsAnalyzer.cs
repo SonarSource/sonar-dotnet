@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Core.Rules.Utilities;
+using SonarAnalyzer.Core.Rules;
 
 namespace SonarAnalyzer.Rules.CSharp;
 

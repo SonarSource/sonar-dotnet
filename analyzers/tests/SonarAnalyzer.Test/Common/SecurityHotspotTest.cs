@@ -15,7 +15,7 @@
  */
 
 using System.Reflection;
-using SonarAnalyzer.Rules;
+using SonarAnalyzer.Core.Rules;
 using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.Test.Rules;
 

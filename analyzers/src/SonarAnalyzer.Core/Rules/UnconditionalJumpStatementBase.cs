@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class UnconditionalJumpStatementBase<TStatementSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
         where TStatementSyntax : SyntaxNode

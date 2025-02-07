@@ -20,7 +20,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Google.Protobuf;
 using Microsoft.CodeAnalysis.CodeFixes;
-using SonarAnalyzer.Rules;
+using SonarAnalyzer.Core.Rules;
 using SonarAnalyzer.TestFramework.Build;
 
 namespace SonarAnalyzer.TestFramework.Verification;

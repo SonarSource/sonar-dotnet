@@ -17,7 +17,7 @@
 using SonarAnalyzer.Common;
 using SonarAnalyzer.Protobuf;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class MetricsAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, MetricsInfo>
         where TSyntaxKind : struct

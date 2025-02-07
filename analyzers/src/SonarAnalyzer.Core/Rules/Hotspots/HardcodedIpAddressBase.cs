@@ -17,7 +17,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class HardcodedIpAddressBase<TSyntaxKind, TLiteralExpression> : HotspotDiagnosticAnalyzer
         where TSyntaxKind : struct

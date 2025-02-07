@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Protobuf;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, SymbolReferenceInfo>
     where TSyntaxKind : struct

@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
 using static SonarAnalyzer.Protobuf.TokenTypeInfo.Types;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class TokenTypeAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, TokenTypeInfo>
         where TSyntaxKind : struct

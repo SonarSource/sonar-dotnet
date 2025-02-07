@@ -17,7 +17,7 @@
 using System.IO;
 using Google.Protobuf;
 using SonarAnalyzer.Core.AnalysisContext;
-using SonarAnalyzer.Rules;
+using SonarAnalyzer.Core.Rules;
 
 namespace SonarAnalyzer.TestFramework.Analyzers;
 

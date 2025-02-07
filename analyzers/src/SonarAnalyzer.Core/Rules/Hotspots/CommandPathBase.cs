@@ -17,7 +17,7 @@
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class CommandPathBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
         where TSyntaxKind : struct

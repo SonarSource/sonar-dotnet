@@ -17,7 +17,7 @@
 using System.Text.RegularExpressions;
 using SonarAnalyzer.CFG.Extensions;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class UriShouldNotBeHardcodedBase<TSyntaxKind, TLiteralExpressionSyntax, TArgumentSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct

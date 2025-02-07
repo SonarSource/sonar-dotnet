@@ -16,7 +16,7 @@
 
 using TypeMap = System.Collections.Generic.Dictionary<Microsoft.CodeAnalysis.INamedTypeSymbol, System.Collections.Generic.HashSet<Microsoft.CodeAnalysis.INamedTypeSymbol>>;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticAnalyzer
     where TSyntaxKind : struct

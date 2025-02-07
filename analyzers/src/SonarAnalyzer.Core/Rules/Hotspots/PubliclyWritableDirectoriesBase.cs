@@ -16,7 +16,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class PubliclyWritableDirectoriesBase<TSyntaxKind, TInvocationExpression> : HotspotDiagnosticAnalyzer
         where TSyntaxKind : struct

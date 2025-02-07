@@ -17,7 +17,7 @@
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentSyntax, TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TAttributeArgumentSyntax : SyntaxNode

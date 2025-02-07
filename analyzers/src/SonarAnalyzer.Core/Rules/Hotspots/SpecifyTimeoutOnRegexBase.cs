@@ -16,7 +16,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnosticAnalyzer
         where TSyntaxKind : struct

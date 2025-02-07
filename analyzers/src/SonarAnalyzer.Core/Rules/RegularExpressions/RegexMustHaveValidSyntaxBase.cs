@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.RegularExpressions;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class RegexMustHaveValidSyntaxBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
     where TSyntaxKind : struct

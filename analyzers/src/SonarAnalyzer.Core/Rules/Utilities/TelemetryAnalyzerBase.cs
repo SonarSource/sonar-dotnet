@@ -18,7 +18,7 @@ using System.IO;
 using Google.Protobuf;
 using SonarAnalyzer.Protobuf;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class TelemetryAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase
     where TSyntaxKind : struct

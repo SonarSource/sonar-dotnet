@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Common;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class CognitiveComplexityBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct

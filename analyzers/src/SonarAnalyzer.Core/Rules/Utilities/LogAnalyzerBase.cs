@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Protobuf;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class LogAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase<TSyntaxKind, LogInfo>
         where TSyntaxKind : struct

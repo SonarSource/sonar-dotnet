@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 [Obsolete("This rule has been deprecated since 9.32")]
 public abstract class FieldShadowsParentFieldBase<TSyntaxKind, TVariableDeclaratorSyntax> : SonarDiagnosticAnalyzer

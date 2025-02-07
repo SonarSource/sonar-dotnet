@@ -15,8 +15,8 @@
  */
 
 using SonarAnalyzer.Core.AnalysisContext;
+using SonarAnalyzer.Core.Rules;
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 

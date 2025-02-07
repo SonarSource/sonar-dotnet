@@ -16,7 +16,7 @@
 
 using System.Collections.Concurrent;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : SonarDiagnosticAnalyzer<TSyntaxKind>(DiagnosticId)
     where TSyntaxKind : struct

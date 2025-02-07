@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeBase<TSyntaxKind>
         where TSyntaxKind : struct

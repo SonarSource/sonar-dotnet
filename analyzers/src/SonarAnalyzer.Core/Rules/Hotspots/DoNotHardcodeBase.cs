@@ -20,7 +20,7 @@ using System.Xml.Linq;
 using SonarAnalyzer.Json;
 using SonarAnalyzer.Json.Parsing;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer where TSyntaxKind : struct
 {

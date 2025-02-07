@@ -17,7 +17,7 @@
 using System.IO;
 using SonarAnalyzer.CFG.Common;
 
-namespace SonarAnalyzer.Rules;
+namespace SonarAnalyzer.Core.Rules;
 
 public abstract class AnalysisWarningAnalyzerBase : UtilityAnalyzerBase
 {

@@ -18,7 +18,7 @@ using System.IO;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     public abstract class RequestsWithExcessiveLengthBase<TSyntaxKind, TAttributeSyntax> : ParametrizedDiagnosticAnalyzer
         where TSyntaxKind : struct

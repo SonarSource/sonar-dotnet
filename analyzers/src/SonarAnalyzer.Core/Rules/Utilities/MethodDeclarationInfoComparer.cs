@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Protobuf;
 
-namespace SonarAnalyzer.Core.Rules.Utilities;
+namespace SonarAnalyzer.Core.Rules;
 
 public sealed record MethodDeclarationInfoComparer : IEqualityComparer<MethodDeclarationInfo>
 {

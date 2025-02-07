@@ -19,7 +19,7 @@ using System.IO;
 using System.Reflection;
 using System.Text.Json;
 using SonarAnalyzer.Core.Common;
-using SonarAnalyzer.Rules;
+using SonarAnalyzer.Core.Rules;
 
 namespace RuleDescriptorGenerator;
 

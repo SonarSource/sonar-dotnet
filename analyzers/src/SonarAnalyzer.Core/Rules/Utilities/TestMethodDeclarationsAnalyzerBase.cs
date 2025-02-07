@@ -15,9 +15,8 @@
  */
 
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules;
 
-namespace SonarAnalyzer.Core.Rules.Utilities;
+namespace SonarAnalyzer.Core.Rules;
 
 /// <summary>
 /// This class is responsible for exporting the method declarations to a protobuf file which will later be

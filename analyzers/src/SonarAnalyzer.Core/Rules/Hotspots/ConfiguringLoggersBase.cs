@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.Core.Rules
 {
     [Obsolete("This rule has been deprecated since 9.16")]
     public abstract class ConfiguringLoggersBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
