@@ -23,6 +23,8 @@ public class UnchangedLocalVariablesShouldBeConstTest
 {
     private readonly VerifierBuilder verifier = new VerifierBuilder<UnchangedLocalVariablesShouldBeConst>();
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst() =>
         verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.cs").Verify();
@@ -58,6 +60,23 @@ public class UnchangedLocalVariablesShouldBeConstTest
         verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.Latest.cs")
         .WithOptions(LanguageOptions.CSharpLatest)
         .Verify();
+
+    [TestMethod]
+    public void UnchangedLocalVariablesShouldBeConst_CshtmlIdeGenerated() =>
+        verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.cshtml.ide.g.cs")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
+            .WithConcurrentAnalysis(false) // With concurrent analysis the issues are not raised
+            .AddReferences(
+            [
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazor,
+                AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+                ..NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions("9.0.1"),
+                ..NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime("2.3.0"),
+            ])
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
 #endif
 

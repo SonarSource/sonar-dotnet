@@ -33,6 +33,7 @@ public static class AspNetCoreMetadataReference
     public static MetadataReference MicrosoftAspNetCoreMvc { get; } = CreateReference("Microsoft.AspNetCore.Mvc.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreMvcAbstractions { get; } = CreateReference("Microsoft.AspNetCore.Mvc.Abstractions.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreMvcCore { get; } = CreateReference("Microsoft.AspNetCore.Mvc.Core.dll", Sdk.AspNetCore);
+    public static MetadataReference MicrosoftAspNetCoreMvcRazor { get; } = CreateReference("Microsoft.AspNetCore.Mvc.Razor.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreMvcRazorPages { get; } = CreateReference("Microsoft.AspNetCore.Mvc.RazorPages.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreMvcViewFeatures { get; } = CreateReference("Microsoft.AspNetCore.Mvc.ViewFeatures.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreRouting { get; } = CreateReference("Microsoft.AspNetCore.Routing.dll", Sdk.AspNetCore);
