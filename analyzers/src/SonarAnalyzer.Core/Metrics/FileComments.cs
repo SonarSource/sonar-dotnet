@@ -14,17 +14,16 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
-{
-    public class FileComments
-    {
-        public ISet<int> NoSonar { get; }
-        public ISet<int> NonBlank { get; }
+namespace SonarAnalyzer.Common;
 
-        public FileComments(ISet<int> noSonar, ISet<int> nonBlank)
-        {
-            NoSonar = noSonar;
-            NonBlank = nonBlank;
-        }
+public class FileComments
+{
+    public ISet<int> NoSonar { get; }
+    public ISet<int> NonBlank { get; }
+
+    public FileComments(ISet<int> noSonar, ISet<int> nonBlank)
+    {
+        NoSonar = noSonar;
+        NonBlank = nonBlank;
     }
 }

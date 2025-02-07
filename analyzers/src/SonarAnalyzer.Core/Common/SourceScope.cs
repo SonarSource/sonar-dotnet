@@ -14,12 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public enum SourceScope
 {
-    public enum SourceScope
-    {
-        Main,
-        Tests,
-        All
-    }
+    Main,
+    Tests,
+    All
 }

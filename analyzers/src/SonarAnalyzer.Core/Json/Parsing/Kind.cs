@@ -14,13 +14,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Json.Parsing
+namespace SonarAnalyzer.Json.Parsing;
+
+public enum Kind
 {
-    public enum Kind
-    {
-        Unknown,
-        Object,
-        List,
-        Value
-    }
+    Unknown,
+    Object,
+    List,
+    Value
 }

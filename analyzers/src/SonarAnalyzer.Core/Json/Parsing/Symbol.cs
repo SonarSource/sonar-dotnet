@@ -14,20 +14,19 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Json.Parsing
+namespace SonarAnalyzer.Json.Parsing;
+
+internal enum Symbol
 {
-    internal enum Symbol
-    {
-        Unknown,
-        EndOfInput,
-        // Special
-        OpenCurlyBracket,
-        CloseCurlyBracket,
-        OpenSquareBracket,
-        CloseSquareBracket,
-        Comma,
-        Colon,
-        // Terms
-        Value   // String, Number (Integer, Decimal, Double), Null, True, False
-    }
+    Unknown,
+    EndOfInput,
+    // Special
+    OpenCurlyBracket,
+    CloseCurlyBracket,
+    OpenSquareBracket,
+    CloseSquareBracket,
+    Comma,
+    Colon,
+    // Terms
+    Value   // String, Number (Integer, Decimal, Double), Null, True, False
 }

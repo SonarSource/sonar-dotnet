@@ -14,23 +14,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, string Status, SourceScope Scope, bool SonarWay, string Description)
 {
-    public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, string Status, SourceScope Scope, bool SonarWay, string Description)
-    {
-        public string Category =>
-            $"{DefaultSeverity} {ReadableType}";
+    public string Category =>
+        $"{DefaultSeverity} {ReadableType}";
 
-        private string ReadableType =>
-            Type switch
-            {
-                "BUG" => "Bug",
-                "CODE_SMELL" => "Code Smell",
-                "VULNERABILITY" => "Vulnerability",
-                "SECURITY_HOTSPOT" => "Security Hotspot",
-                _ => throw new UnexpectedValueException(nameof(Type), Type)
-            };
+    private string ReadableType =>
+        Type switch
+        {
+            "BUG" => "Bug",
+            "CODE_SMELL" => "Code Smell",
+            "VULNERABILITY" => "Vulnerability",
+            "SECURITY_HOTSPOT" => "Security Hotspot",
+            _ => throw new UnexpectedValueException(nameof(Type), Type)
+        };
 
-        public bool IsHotspot => Type == "SECURITY_HOTSPOT";
-    }
+    public bool IsHotspot => Type == "SECURITY_HOTSPOT";
 }

@@ -17,18 +17,17 @@
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public sealed class AnalyzerAdditionalFile : AdditionalText
 {
-    public sealed class AnalyzerAdditionalFile : AdditionalText
+    public AnalyzerAdditionalFile(string path)
     {
-        public AnalyzerAdditionalFile(string path)
-        {
-            Path = path;
-        }
-
-        public override string Path { get; }
-
-        public override SourceText GetText(CancellationToken cancel = default) =>
-            SourceText.From(File.ReadAllText(Path));
+        Path = path;
     }
+
+    public override string Path { get; }
+
+    public override SourceText GetText(CancellationToken cancel = default) =>
+        SourceText.From(File.ReadAllText(Path));
 }

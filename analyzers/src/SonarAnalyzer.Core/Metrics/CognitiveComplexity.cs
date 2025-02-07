@@ -14,59 +14,58 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
-{
-    public class CognitiveComplexity
-    {
-        public int Complexity { get; }
-        public ImmutableArray<SecondaryLocation> Locations { get; }
+namespace SonarAnalyzer.Common;
 
-        public CognitiveComplexity(int complexity, ImmutableArray<SecondaryLocation> locations)
-        {
-            Complexity = complexity;
-            Locations = locations;
-        }
+public class CognitiveComplexity
+{
+    public int Complexity { get; }
+    public ImmutableArray<SecondaryLocation> Locations { get; }
+
+    public CognitiveComplexity(int complexity, ImmutableArray<SecondaryLocation> locations)
+    {
+        Complexity = complexity;
+        Locations = locations;
+    }
+}
+
+public class CognitiveComplexityWalkerState<TMethodSyntax>
+    where TMethodSyntax : SyntaxNode
+{
+    public TMethodSyntax CurrentMethod { get; set; }
+
+    public IList<SecondaryLocation> IncrementLocations { get; } = new List<SecondaryLocation>();
+
+    // used to track logical operations inside parentheses
+    public IList<SyntaxNode> LogicalOperationsToIgnore { get; } = new List<SyntaxNode>();
+
+    public bool HasDirectRecursiveCall { get; set; }
+
+    public int NestingLevel { get; set; }
+
+    public int Complexity { get; set; }
+
+    public void VisitWithNesting<TSyntaxNode>(TSyntaxNode node, Action<TSyntaxNode> visit)
+    {
+        NestingLevel++;
+        visit(node);
+        NestingLevel--;
     }
 
-    public class CognitiveComplexityWalkerState<TMethodSyntax>
-        where TMethodSyntax : SyntaxNode
+    public void IncreaseComplexityByOne(SyntaxToken token) =>
+        IncreaseComplexity(token, 1, "+1");
+
+    public void IncreaseComplexityByNestingPlusOne(SyntaxToken token)
     {
-        public TMethodSyntax CurrentMethod { get; set; }
+        var increment = NestingLevel + 1;
+        var message = increment == 1
+            ? "+1"
+            : $"+{increment} (incl {increment - 1} for nesting)";
+        IncreaseComplexity(token, increment, message);
+    }
 
-        public IList<SecondaryLocation> IncrementLocations { get; } = new List<SecondaryLocation>();
-
-        // used to track logical operations inside parentheses
-        public IList<SyntaxNode> LogicalOperationsToIgnore { get; } = new List<SyntaxNode>();
-
-        public bool HasDirectRecursiveCall { get; set; }
-
-        public int NestingLevel { get; set; }
-
-        public int Complexity { get; set; }
-
-        public void VisitWithNesting<TSyntaxNode>(TSyntaxNode node, Action<TSyntaxNode> visit)
-        {
-            NestingLevel++;
-            visit(node);
-            NestingLevel--;
-        }
-
-        public void IncreaseComplexityByOne(SyntaxToken token) =>
-            IncreaseComplexity(token, 1, "+1");
-
-        public void IncreaseComplexityByNestingPlusOne(SyntaxToken token)
-        {
-            var increment = NestingLevel + 1;
-            var message = increment == 1
-                ? "+1"
-                : $"+{increment} (incl {increment - 1} for nesting)";
-            IncreaseComplexity(token, increment, message);
-        }
-
-        public void IncreaseComplexity(SyntaxToken token, int increment, string message)
-        {
-            Complexity += increment;
-            IncrementLocations.Add(new SecondaryLocation(token.GetLocation(), message));
-        }
+    public void IncreaseComplexity(SyntaxToken token, int increment, string message)
+    {
+        Complexity += increment;
+        IncrementLocations.Add(new SecondaryLocation(token.GetLocation(), message));
     }
 }

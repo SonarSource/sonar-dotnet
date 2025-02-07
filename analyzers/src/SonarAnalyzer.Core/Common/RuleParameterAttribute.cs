@@ -16,42 +16,41 @@
 
 using System.Globalization;
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class RuleParameterAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class RuleParameterAttribute : Attribute
+    public string Key { get; }
+    public string Description { get; }
+    public PropertyType Type { get; }
+    public string DefaultValue { get; }
+
+    public RuleParameterAttribute(string key, PropertyType type, string description, string defaultValue)
     {
-        public string Key { get; }
-        public string Description { get; }
-        public PropertyType Type { get; }
-        public string DefaultValue { get; }
+        Key = key;
+        Description = description;
+        Type = type;
+        DefaultValue = defaultValue;
+    }
 
-        public RuleParameterAttribute(string key, PropertyType type, string description, string defaultValue)
-        {
-            Key = key;
-            Description = description;
-            Type = type;
-            DefaultValue = defaultValue;
-        }
+    public RuleParameterAttribute(string key, PropertyType type, string description, int defaultValue)
+        : this(key, type, description, defaultValue.ToString(CultureInfo.InvariantCulture))
+    {
+    }
 
-        public RuleParameterAttribute(string key, PropertyType type, string description, int defaultValue)
-            : this(key, type, description, defaultValue.ToString(CultureInfo.InvariantCulture))
-        {
-        }
+    public RuleParameterAttribute(string key, PropertyType type, string description, double defaultValue)
+        : this(key, type, description, defaultValue.ToString(CultureInfo.InvariantCulture))
+    {
+    }
 
-        public RuleParameterAttribute(string key, PropertyType type, string description, double defaultValue)
-            : this(key, type, description, defaultValue.ToString(CultureInfo.InvariantCulture))
-        {
-        }
+    public RuleParameterAttribute(string key, PropertyType type, string description)
+        : this(key, type, description, null)
+    {
+    }
 
-        public RuleParameterAttribute(string key, PropertyType type, string description)
-            : this(key, type, description, null)
-        {
-        }
-
-        public RuleParameterAttribute(string key, PropertyType type)
-            : this(key, type, null, null)
-        {
-        }
+    public RuleParameterAttribute(string key, PropertyType type)
+        : this(key, type, null, null)
+    {
     }
 }

@@ -14,65 +14,64 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public sealed class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, ICollection<TValue>>
 {
-    public sealed class MultiValueDictionary<TKey, TValue> : Dictionary<TKey, ICollection<TValue>>
+    public static MultiValueDictionary<TKey, TValue> Create<TUnderlying>()
+        where TUnderlying : ICollection<TValue>, new() =>
+        new MultiValueDictionary<TKey, TValue>
+        {
+            UnderlyingCollectionFactory = () => new TUnderlying()
+        };
+
+    private Func<ICollection<TValue>> UnderlyingCollectionFactory { get; set; } = () => new List<TValue>();
+
+    public void Add(TKey key, TValue value) =>
+        AddWithKey(key, value);
+
+    public void AddWithKey(TKey key, TValue value)
     {
-        public static MultiValueDictionary<TKey, TValue> Create<TUnderlying>()
-            where TUnderlying : ICollection<TValue>, new() =>
-            new MultiValueDictionary<TKey, TValue>
-            {
-                UnderlyingCollectionFactory = () => new TUnderlying()
-            };
-
-        private Func<ICollection<TValue>> UnderlyingCollectionFactory { get; set; } = () => new List<TValue>();
-
-        public void Add(TKey key, TValue value) =>
-            AddWithKey(key, value);
-
-        public void AddWithKey(TKey key, TValue value)
+        if (!TryGetValue(key, out var values))
         {
-            if (!TryGetValue(key, out var values))
-            {
-                values = UnderlyingCollectionFactory();
-                Add(key, values);
-            }
-            values.Add(value);
+            values = UnderlyingCollectionFactory();
+            Add(key, values);
         }
-
-        public void AddRangeWithKey(TKey key, IEnumerable<TValue> addedValues)
-        {
-            if (!TryGetValue(key, out var values))
-            {
-                values = UnderlyingCollectionFactory();
-                Add(key, values);
-            }
-            foreach (var addedValue in addedValues)
-            {
-                values.Add(addedValue);
-            }
-        }
+        values.Add(value);
     }
 
-    #region Extensions
-
-    public static class MultiValueDictionaryExtensions
+    public void AddRangeWithKey(TKey key, IEnumerable<TValue> addedValues)
     {
-        public static MultiValueDictionary<TSource, TElement> ToMultiValueDictionary<TSource, TElement>(this IEnumerable<TSource> source, Func<TSource, ICollection<TElement>> elementSelector) =>
-            source.ToMultiValueDictionary(x => x, elementSelector);
-
-        public static MultiValueDictionary<TKey, TElement> ToMultiValueDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source,
-                                                                                                           Func<TSource, TKey> keySelector,
-                                                                                                           Func<TSource, ICollection<TElement>> elementSelector)
+        if (!TryGetValue(key, out var values))
         {
-            var dictionary = new MultiValueDictionary<TKey, TElement>();
-            foreach (var item in source)
-            {
-                dictionary.Add(keySelector(item), elementSelector(item));
-            }
-            return dictionary;
+            values = UnderlyingCollectionFactory();
+            Add(key, values);
+        }
+        foreach (var addedValue in addedValues)
+        {
+            values.Add(addedValue);
         }
     }
-
-    #endregion Extensions
 }
+
+#region Extensions
+
+public static class MultiValueDictionaryExtensions
+{
+    public static MultiValueDictionary<TSource, TElement> ToMultiValueDictionary<TSource, TElement>(this IEnumerable<TSource> source, Func<TSource, ICollection<TElement>> elementSelector) =>
+        source.ToMultiValueDictionary(x => x, elementSelector);
+
+    public static MultiValueDictionary<TKey, TElement> ToMultiValueDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source,
+                                                                                                       Func<TSource, TKey> keySelector,
+                                                                                                       Func<TSource, ICollection<TElement>> elementSelector)
+    {
+        var dictionary = new MultiValueDictionary<TKey, TElement>();
+        foreach (var item in source)
+        {
+            dictionary.Add(keySelector(item), elementSelector(item));
+        }
+        return dictionary;
+    }
+}
+
+#endregion Extensions

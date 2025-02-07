@@ -14,24 +14,23 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public class NodeAndSymbol<TSyntaxNode, TSymbol>
+    where TSyntaxNode : SyntaxNode
+    where TSymbol : ISymbol
 {
-    public class NodeAndSymbol<TSyntaxNode, TSymbol>
-        where TSyntaxNode : SyntaxNode
-        where TSymbol : ISymbol
-    {
-        public TSyntaxNode Node { get; }
-        public TSymbol Symbol { get; }
+    public TSyntaxNode Node { get; }
+    public TSymbol Symbol { get; }
 
-        public NodeAndSymbol(TSyntaxNode node, TSymbol symbol)
-        {
-            Node = node;
-            Symbol = symbol;
-        }
-    }
-
-    public class NodeAndSymbol : NodeAndSymbol<SyntaxNode, ISymbol>
+    public NodeAndSymbol(TSyntaxNode node, TSymbol symbol)
     {
-        public NodeAndSymbol(SyntaxNode node, ISymbol symbol) : base(node, symbol) { }
+        Node = node;
+        Symbol = symbol;
     }
+}
+
+public class NodeAndSymbol : NodeAndSymbol<SyntaxNode, ISymbol>
+{
+    public NodeAndSymbol(SyntaxNode node, ISymbol symbol) : base(node, symbol) { }
 }

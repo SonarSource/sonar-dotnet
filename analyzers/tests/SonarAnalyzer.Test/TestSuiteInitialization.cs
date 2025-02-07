@@ -18,30 +18,29 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
 using SonarAnalyzer.Test.Helpers;
 
-namespace SonarAnalyzer.Test
+namespace SonarAnalyzer.Test;
+
+[TestClass]
+public class TestSuiteInitialization
 {
-    [TestClass]
-    public class TestSuiteInitialization
+    [AssemblyInitialize]
+    public static void AssemblyInit(TestContext context)
     {
-        [AssemblyInitialize]
-        public static void AssemblyInit(TestContext context)
-        {
-            ConfigureFluentValidation();
+        ConfigureFluentValidation();
 
-            Console.WriteLine(@"Running tests initialization...");
-            Console.WriteLine(@$"Build reason: {TestEnvironment.BuildReason() ?? "Not set / Local build"}");
+        Console.WriteLine(@"Running tests initialization...");
+        Console.WriteLine(@$"Build reason: {TestEnvironment.BuildReason() ?? "Not set / Local build"}");
 
-            var csVersions = LanguageOptions.Default(LanguageNames.CSharp).Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
-            Console.WriteLine(@"C# versions used for analysis: " + string.Join(", ", csVersions));
+        var csVersions = LanguageOptions.Default(LanguageNames.CSharp).Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
+        Console.WriteLine(@"C# versions used for analysis: " + string.Join(", ", csVersions));
 
-            var vbVersions = LanguageOptions.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
-            Console.WriteLine(@"VB.Net versions used for analysis: " + string.Join(", ", vbVersions));
-        }
+        var vbVersions = LanguageOptions.Default(LanguageNames.VisualBasic).Cast<VisualBasicParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
+        Console.WriteLine(@"VB.Net versions used for analysis: " + string.Join(", ", vbVersions));
+    }
 
-        private static void ConfigureFluentValidation()
-        {
-            AssertionOptions.FormattingOptions.MaxLines = -1;
-            AssertionOptions.FormattingOptions.MaxDepth = 5; // Keeping the default for MaxDepth of 5 as a good compromise. Change it here if needed.
-        }
+    private static void ConfigureFluentValidation()
+    {
+        AssertionOptions.FormattingOptions.MaxLines = -1;
+        AssertionOptions.FormattingOptions.MaxDepth = 5; // Keeping the default for MaxDepth of 5 as a good compromise. Change it here if needed.
     }
 }

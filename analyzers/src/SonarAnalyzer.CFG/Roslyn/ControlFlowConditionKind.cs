@@ -14,15 +14,14 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CFG.Roslyn
+namespace SonarAnalyzer.CFG.Roslyn;
+
+/// <summary>
+/// Copy of Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowConditionKind.
+/// </summary>
+public enum ControlFlowConditionKind
 {
-    /// <summary>
-    /// Copy of Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowConditionKind.
-    /// </summary>
-    public enum ControlFlowConditionKind
-    {
-        None = 0,
-        WhenFalse = 1,
-        WhenTrue = 2
-    }
+    None = 0,
+    WhenFalse = 1,
+    WhenTrue = 2
 }

@@ -14,37 +14,36 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Utilities
+namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Utilities;
+
+[TestClass]
+public class SafeCSharpSyntaxWalkerTest
 {
-    [TestClass]
-    public class SafeCSharpSyntaxWalkerTest
+    [TestMethod]
+    public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue() =>
+        new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("void Method() { }").GetRoot()).Should().BeTrue();
+
+    [TestMethod]
+    public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
     {
-        [TestMethod]
-        public void GivenSyntaxNodeWithReasonableDepth_SafeVisit_ReturnsTrue() =>
-            new Walker().SafeVisit(SyntaxFactory.ParseSyntaxTree("void Method() { }").GetRoot()).Should().BeTrue();
+        var method = SyntaxFactory.MethodDeclaration(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)), "Method");
 
-        [TestMethod]
-        public void GivenSyntaxNodeWithHighDepth_SafeVisit_ReturnsFalse()
+        var condition = SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression,
+                                                       SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("a")),
+                                                       SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("b")));
+
+        var ifStatement = SyntaxFactory.IfStatement(condition, SyntaxFactory.Block());
+
+        var node = ifStatement;
+        for (var index = 0; index < 5000; index++)
         {
-            var method = SyntaxFactory.MethodDeclaration(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.VoidKeyword)), "Method");
-
-            var condition = SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression,
-                                                           SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("a")),
-                                                           SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("b")));
-
-            var ifStatement = SyntaxFactory.IfStatement(condition, SyntaxFactory.Block());
-
-            var node = ifStatement;
-            for (var index = 0; index < 5000; index++)
-            {
-                node = SyntaxFactory.IfStatement(condition, SyntaxFactory.Block().AddStatements(node));
-            }
-
-            method = method.AddBodyStatements(node);
-
-            new Walker().SafeVisit(method).Should().BeFalse();
+            node = SyntaxFactory.IfStatement(condition, SyntaxFactory.Block().AddStatements(node));
         }
 
-        private class Walker : SafeCSharpSyntaxWalker { }
+        method = method.AddBodyStatements(node);
+
+        new Walker().SafeVisit(method).Should().BeFalse();
     }
+
+    private class Walker : SafeCSharpSyntaxWalker { }
 }

@@ -14,17 +14,16 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
-{
-    public class NodeAndModel<TSyntax> where TSyntax : SyntaxNode
-    {
-        public SemanticModel Model { get; }
-        public TSyntax Node { get; }
+namespace SonarAnalyzer.Common;
 
-        public NodeAndModel(SemanticModel model, TSyntax node)
-        {
-            Model = model;
-            Node = node;
-        }
+public class NodeAndModel<TSyntax> where TSyntax : SyntaxNode
+{
+    public SemanticModel Model { get; }
+    public TSyntax Node { get; }
+
+    public NodeAndModel(SemanticModel model, TSyntax node)
+    {
+        Model = model;
+        Node = node;
     }
 }

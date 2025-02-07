@@ -16,14 +16,14 @@
 
 using SonarAnalyzer.VisualBasic.Metrics;
 
-namespace SonarAnalyzer.Test.Common
+namespace SonarAnalyzer.Test.Common;
+
+[TestClass]
+public class VisualBasicExecutableLinesMetricTest
 {
-    [TestClass]
-    public class VisualBasicExecutableLinesMetricTest
-    {
-        [TestMethod]
-        public void AttributeList() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void AttributeList() =>
+        AssertLinesOfCode(
 @"<Serializable()>
 Public Class Sample
     <Runtime.InteropServices.DllImport(""user32.dll"")>
@@ -31,9 +31,9 @@ Public Class Sample
     End Sub
 End Class");
 
-        [TestMethod]
-        public void SyncLockStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SyncLockStatement() =>
+        AssertLinesOfCode(
 @"Class simpleMessageList
     Private messagesLock As New Object
 
@@ -43,9 +43,9 @@ End Class");
     End Sub
 End Class", 5);
 
-        [TestMethod]
-        public void UsingStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void UsingStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Using MS As New IO.MemoryStream
@@ -53,9 +53,9 @@ End Class", 5);
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void DoUntilStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void DoUntilStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Dim index As Integer = 0
@@ -64,9 +64,9 @@ End Module", 3);
     End Sub
 End Module");
 
-        [TestMethod]
-        public void DoWhileStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void DoWhileStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Dim index As Integer = 0
@@ -75,9 +75,9 @@ End Module");
     End Sub
 End Module", 4);
 
-        [TestMethod]
-        public void ForEachStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ForEachStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         For Each item As String In {""a"", ""b"", ""c""} ' +1
@@ -85,9 +85,9 @@ End Module", 4);
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void ForStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ForStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         For index As Integer = 1 To 5
@@ -95,9 +95,9 @@ End Module", 3);
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void WhileStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void WhileStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go(Index As Integer)
         While Index <= 10
@@ -105,9 +105,9 @@ End Module", 3);
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void IfStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void IfStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go(Count As Integer)
         Dim Message As String
@@ -121,9 +121,9 @@ End Module", 3);
     End Sub
 End Module", 4, 5, 6, 7, 9);
 
-        [TestMethod]
-        public void SelectStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SelectStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Dim number As Integer = 8
@@ -136,36 +136,36 @@ End Module", 4, 5, 6, 7, 9);
     End Sub
 End Module", 4, 6, 8);
 
-        [TestMethod]
-        public void ConditionalAccessExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ConditionalAccessExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go(Customers() As Integer)
         Dim length As Integer? = Customers?.Length
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void BinaryConditionalExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void BinaryConditionalExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Function Go(First As String, Second As String) As String
         Return If(First, Second)
     End Function
 End Module", 3);
 
-        [TestMethod]
-        public void TernaryConditionalExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void TernaryConditionalExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go(A As String, B As String, C As String, D As String)
         Dim Ret As String = If(A = B, C, D)
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void GoToStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void GoToStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         GoTo LastLine
@@ -173,27 +173,27 @@ LastLine:
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
-        public void ThrowStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ThrowStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Throw New Exception()
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void ReturnStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ReturnStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Function getAgePhrase(ByVal age As Integer) As String
         Return ""Infant""
     End Function
 End Module", 3);
 
-        [TestMethod]
-        public void ExitDoStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ExitDoStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go(Index As Integer)
         Do While Index <= 100
@@ -204,9 +204,9 @@ End Module", 3);
     End Sub
 End Module", 3, 4, 5);
 
-        [TestMethod]
-        public void ExitForStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ExitForStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         For index As Integer = 1 To 100000
@@ -215,9 +215,9 @@ End Module", 3, 4, 5);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
-        public void ExitWhileStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ExitWhileStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go(Index As Integer)
         While Index < 100000
@@ -226,9 +226,9 @@ End Module", 3, 4);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
-        public void ContinueDoStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ContinueDoStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go(Cnt As Integer)
         Do
@@ -237,9 +237,9 @@ End Module", 3, 4);
     End Sub
 End Module", 4);
 
-        [TestMethod]
-        public void ContinueForStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ContinueForStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         For index As Integer = 1 To 100000
@@ -248,18 +248,18 @@ End Module", 4);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
-        public void SimpleMemberAccessExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SimpleMemberAccessExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Console.WriteLine(""Found"")
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void InvocationExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void InvocationExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub foo()
     End Sub
@@ -269,27 +269,27 @@ End Module", 3);
     End Sub
 End Module", 6);
 
-        [TestMethod]
-        public void SingleLineSubLambdaExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SingleLineSubLambdaExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Dim writeline1 = Sub(x) Console.WriteLine(x)
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void SingleLineFunctionLambdaExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SingleLineFunctionLambdaExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Dim increment1 = Function(x) x + 1
     End Sub
 End Module", 3);
 
-        [TestMethod]
-        public void MultiLineSubLambdaExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void MultiLineSubLambdaExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Dim writeline2 = Sub(x)
@@ -298,9 +298,9 @@ End Module", 3);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
-        public void MultiLineFunctionLambdaExpression() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void MultiLineFunctionLambdaExpression() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Go()
         Dim increment2 = Function(x)
@@ -309,66 +309,66 @@ End Module", 3, 4);
     End Sub
 End Module", 3, 4);
 
-        [TestMethod]
-        public void StructureStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void StructureStatement() =>
+        AssertLinesOfCode(
 @"Structure foo
 End Structure");
 
-        [TestMethod]
-        public void ClassStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ClassStatement() =>
+        AssertLinesOfCode(
 @"Class foo
 End Class");
 
-        [TestMethod]
-        public void ModuleStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void ModuleStatement() =>
+        AssertLinesOfCode(
 @"Module foo
 End Module");
 
-        [TestMethod]
-        public void FunctionStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void FunctionStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Function myFunction(ByVal j As Integer) As Double
         Return 3.87 * j
     End Function
 End Module", 3);
 
-        [TestMethod]
-        public void SubStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SubStatement() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Sub computeArea(ByVal length As Double, ByVal width As Double)
     End Sub
 End Module");
 
-        [TestMethod]
-        public void SubNewStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SubNewStatement() =>
+        AssertLinesOfCode(
 @"Public Class Sample
     Public Sub New()
     End Sub
 End Class");
 
-        [TestMethod]
-        public void PropertyStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void PropertyStatement() =>
+        AssertLinesOfCode(
 @"Public Class Sample
     Public Property Name As String
 End Class");
 
-        [TestMethod]
-        public void EventStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void EventStatement() =>
+        AssertLinesOfCode(
 @"Public Class Sample
     Public Event LogonCompleted(ByVal UserName As String)
 End Class");
 
-        [TestMethod]
-        public void AddHandlerAccessorStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void AddHandlerAccessorStatement() =>
+        AssertLinesOfCode(
 @"Public Class Sample
     Public Event SomeEvent
 
@@ -381,9 +381,9 @@ End Class");
     End Sub
 End Class", 6);
 
-        [TestMethod]
-        public void RemoveHandlerAccessorStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void RemoveHandlerAccessorStatement() =>
+        AssertLinesOfCode(
 @"Public Class Sample
     Public Event SomeEvent
 
@@ -396,9 +396,9 @@ End Class", 6);
     End Sub
 End Class", 6);
 
-        [TestMethod]
-        public void SetAccessorStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void SetAccessorStatement() =>
+        AssertLinesOfCode(
 @"Public Class Sample
     Private QuoteValue As String
 
@@ -409,9 +409,9 @@ End Class", 6);
     End Property
 End Class", 6);
 
-        [TestMethod]
-        public void GetAccessorStatement() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void GetAccessorStatement() =>
+        AssertLinesOfCode(
 @"Public Class Sample
     ReadOnly Property quoteForTheDay() As String
         Get
@@ -419,9 +419,9 @@ End Class", 6);
     End Property
 End Class");
 
-        [TestMethod]
-        public void Assignments() =>
-            AssertLinesOfCode(
+    [TestMethod]
+    public void Assignments() =>
+        AssertLinesOfCode(
 @"Public Module Sample
     Public Sub Foo(ByVal flag _
                     As Boolean)
@@ -432,41 +432,40 @@ End Class");
     End Sub
 End Module", 4, 6);
 
-        [TestMethod]
-        public void ExcludedFromCodeCoverage_Class() =>
-            AssertLinesOfCode(
-                """
-                Imports System.Diagnostics.CodeAnalysis
+    [TestMethod]
+    public void ExcludedFromCodeCoverage_Class() =>
+        AssertLinesOfCode(
+            """
+            Imports System.Diagnostics.CodeAnalysis
 
+            <ExcludeFromCodeCoverage>
+            Public Module Class1
+                Public Sub TestMe()
+                    Console.WriteLine("Exclude me") ' +1, FP
+                End Sub
+            End Module
+            """, 6); // There should be no executable lines in the module
+
+    [TestMethod]
+    public void ExcludedFromCodeCoverage_Methods() =>
+        AssertLinesOfCode(
+            """
+            Imports System.Diagnostics.CodeAnalysis
+
+            Public Module Class3
                 <ExcludeFromCodeCoverage>
-                Public Module Class1
-                    Public Sub TestMe()
-                        Console.WriteLine("Exclude me") ' +1, FP
-                    End Sub
-                End Module
-                """, 6); // There should be no executable lines in the module
+                Public Sub Excluded()
+                    Console.WriteLine("Exclude me") ' +1, FP
+                End Sub
+                Public Sub NotCovered()
+                    Console.WriteLine("Not covered") ' +1
+                End Sub
+            End Module
+            """, 6, 9);
 
-        [TestMethod]
-        public void ExcludedFromCodeCoverage_Methods() =>
-            AssertLinesOfCode(
-                """
-                Imports System.Diagnostics.CodeAnalysis
-
-                Public Module Class3
-                    <ExcludeFromCodeCoverage>
-                    Public Sub Excluded()
-                        Console.WriteLine("Exclude me") ' +1, FP
-                    End Sub
-                    Public Sub NotCovered()
-                        Console.WriteLine("Not covered") ' +1
-                    End Sub
-                End Module
-                """, 6, 9);
-
-        private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
-        {
-            var (syntaxTree, semanticModel) = TestCompiler.CompileVB(code);
-            VisualBasicExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
-        }
+    private static void AssertLinesOfCode(string code, params int[] expectedExecutableLines)
+    {
+        var (syntaxTree, semanticModel) = TestCompiler.CompileVB(code);
+        VisualBasicExecutableLinesMetric.GetLineNumbers(syntaxTree, semanticModel).Should().BeEquivalentTo(expectedExecutableLines);
     }
 }

@@ -14,10 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public interface IRuleLoader
 {
-    public interface IRuleLoader
-    {
-        ISet<string> GetEnabledRules(string content);
-    }
+    ISet<string> GetEnabledRules(string content);
 }

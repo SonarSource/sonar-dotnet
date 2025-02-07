@@ -14,20 +14,19 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CFG.Roslyn
+namespace SonarAnalyzer.CFG.Roslyn;
+
+/// <summary>
+/// Copy of Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowBranchSemantics.
+/// </summary>
+public enum ControlFlowBranchSemantics
 {
-    /// <summary>
-    /// Copy of Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowBranchSemantics.
-    /// </summary>
-    public enum ControlFlowBranchSemantics
-    {
-        None = 0,
-        Regular = 1,
-        Return = 2,
-        StructuredExceptionHandling = 3,
-        ProgramTermination = 4,
-        Throw = 5,
-        Rethrow = 6,
-        Error = 7
-    }
+    None = 0,
+    Regular = 1,
+    Return = 2,
+    StructuredExceptionHandling = 3,
+    ProgramTermination = 4,
+    Throw = 5,
+    Rethrow = 6,
+    Error = 7
 }

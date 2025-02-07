@@ -16,33 +16,32 @@
 
 using SonarAnalyzer.Helpers;
 
-namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
+namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
+
+[TestClass]
+public class ObjectCreationExpressionSyntaxExtensionsTest
 {
-    [TestClass]
-    public class ObjectCreationExpressionSyntaxExtensionsTest
+    [TestMethod]
+    [DataRow("new System.DateTime()", true)]
+    [DataRow("using System; class T { DateTime field = new DateTime(); }", true)]
+    [DataRow("new double()", false)]
+    [DataRow("using DT = System.DateTime; class T { DT field = new DT(); }", false)]
+    public void IsKnownType_ChecksCtorType(string code, bool expectedResult)
     {
-        [TestMethod]
-        [DataRow("new System.DateTime()", true)]
-        [DataRow("using System; class T { DateTime field = new DateTime(); }", true)]
-        [DataRow("new double()", false)]
-        [DataRow("using DT = System.DateTime; class T { DT field = new DT(); }", false)]
-        public void IsKnownType_ChecksCtorType(string code, bool expectedResult)
-        {
-            var compilation = CreateCompilation(code);
-            var syntaxTree = compilation.SyntaxTrees.First();
-            var objectCreation = syntaxTree.First<ObjectCreationExpressionSyntax>();
+        var compilation = CreateCompilation(code);
+        var syntaxTree = compilation.SyntaxTrees.First();
+        var objectCreation = syntaxTree.First<ObjectCreationExpressionSyntax>();
 
-            objectCreation.IsKnownType(KnownType.System_DateTime, compilation.GetSemanticModel(syntaxTree)).Should().Be(expectedResult);
-        }
-
-        [TestMethod]
-        public void GetObjectCreationTypeIdentifier_Null_CS() =>
-            ObjectCreationExpressionSyntaxExtensions.GetObjectCreationTypeIdentifier(null).Should().BeNull();
-
-        private static CSharpCompilation CreateCompilation(string code) =>
-            CSharpCompilation.Create("TempAssembly.dll")
-                             .AddSyntaxTrees(CSharpSyntaxTree.ParseText(code))
-                             .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences)
-                             .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        objectCreation.IsKnownType(KnownType.System_DateTime, compilation.GetSemanticModel(syntaxTree)).Should().Be(expectedResult);
     }
+
+    [TestMethod]
+    public void GetObjectCreationTypeIdentifier_Null_CS() =>
+        ObjectCreationExpressionSyntaxExtensions.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+
+    private static CSharpCompilation CreateCompilation(string code) =>
+        CSharpCompilation.Create("TempAssembly.dll")
+                         .AddSyntaxTrees(CSharpSyntaxTree.ParseText(code))
+                         .AddReferences(MetadataReferenceFacade.ProjectDefaultReferences)
+                         .WithOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 }

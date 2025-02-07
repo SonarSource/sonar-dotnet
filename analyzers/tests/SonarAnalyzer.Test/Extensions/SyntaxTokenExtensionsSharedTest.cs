@@ -17,68 +17,67 @@
 using Microsoft.CodeAnalysis.CSharp;
 using static SonarAnalyzer.CSharp.Core.Syntax.Extensions.SyntaxTokenExtensionsShared;
 
-namespace SonarAnalyzer.Test.Extensions
+namespace SonarAnalyzer.Test.Extensions;
+
+[TestClass]
+public class SyntaxTokenExtensionsSharedTest
 {
-    [TestClass]
-    public class SyntaxTokenExtensionsSharedTest
+    [TestMethod]
+    public void GetBindableParent_ForEmptyToken_ReturnsNull()
     {
-        [TestMethod]
-        public void GetBindableParent_ForEmptyToken_ReturnsNull()
-        {
-            SyntaxToken empty = default;
+        SyntaxToken empty = default;
 
-            empty.GetBindableParent().Should().BeNull();
-        }
-
-        [TestMethod]
-        public void GetBindableParent_ForInterpolatedStringTextTokenInInterpolatedStringTextToken_ReturnsInterpolatedStringExpression()
-        {
-            const string code = @"string x = $""a"";";
-
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.InterpolatedStringTextToken);
-
-            var parent = aToken.GetBindableParent();
-            parent.Kind().Should().Be(SyntaxKind.InterpolatedStringExpression);
-        }
-
-        [TestMethod]
-        public void GetBindableParent_ForOpenBraceInsideInterpolatedStringTextToken_ReturnsInterpolation()
-        {
-            const string code = @"string x = $""{1}"";";
-
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.OpenBraceToken);
-
-            var parent = aToken.GetBindableParent();
-            parent.Kind().Should().Be(SyntaxKind.Interpolation);
-        }
-
-        [TestMethod]
-        public void GetBindableParent_ForMemberAccessExpressionSyntax_ReturnsTheExpression()
-        {
-            const string code = @"this.Value;";
-
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var thisToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.ThisKeyword);
-
-            var parent = thisToken.GetBindableParent();
-            parent.Kind().Should().Be(SyntaxKind.ThisExpression);
-        }
-
-        [TestMethod]
-        public void GetBindableParent_ForObjectCreationExpressionSyntax_ReturnsArgumentList()
-        {
-            const string code = @"var s = new string();";
-
-            var syntaxTree = CSharpSyntaxTree.ParseText(code);
-            var openParentToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.OpenParenToken);
-
-            var parent = openParentToken.GetBindableParent();
-            parent.Kind().Should().Be(SyntaxKind.ArgumentList);
-        }
-
-        private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
-            syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
+        empty.GetBindableParent().Should().BeNull();
     }
+
+    [TestMethod]
+    public void GetBindableParent_ForInterpolatedStringTextTokenInInterpolatedStringTextToken_ReturnsInterpolatedStringExpression()
+    {
+        const string code = @"string x = $""a"";";
+
+        var syntaxTree = CSharpSyntaxTree.ParseText(code);
+        var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.InterpolatedStringTextToken);
+
+        var parent = aToken.GetBindableParent();
+        parent.Kind().Should().Be(SyntaxKind.InterpolatedStringExpression);
+    }
+
+    [TestMethod]
+    public void GetBindableParent_ForOpenBraceInsideInterpolatedStringTextToken_ReturnsInterpolation()
+    {
+        const string code = @"string x = $""{1}"";";
+
+        var syntaxTree = CSharpSyntaxTree.ParseText(code);
+        var aToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.OpenBraceToken);
+
+        var parent = aToken.GetBindableParent();
+        parent.Kind().Should().Be(SyntaxKind.Interpolation);
+    }
+
+    [TestMethod]
+    public void GetBindableParent_ForMemberAccessExpressionSyntax_ReturnsTheExpression()
+    {
+        const string code = @"this.Value;";
+
+        var syntaxTree = CSharpSyntaxTree.ParseText(code);
+        var thisToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.ThisKeyword);
+
+        var parent = thisToken.GetBindableParent();
+        parent.Kind().Should().Be(SyntaxKind.ThisExpression);
+    }
+
+    [TestMethod]
+    public void GetBindableParent_ForObjectCreationExpressionSyntax_ReturnsArgumentList()
+    {
+        const string code = @"var s = new string();";
+
+        var syntaxTree = CSharpSyntaxTree.ParseText(code);
+        var openParentToken = GetFirstTokenOfKind(syntaxTree, SyntaxKind.OpenParenToken);
+
+        var parent = openParentToken.GetBindableParent();
+        parent.Kind().Should().Be(SyntaxKind.ArgumentList);
+    }
+
+    private static SyntaxToken GetFirstTokenOfKind(SyntaxTree syntaxTree, SyntaxKind kind) =>
+        syntaxTree.GetRoot().DescendantTokens().First(token => token.IsKind(kind));
 }

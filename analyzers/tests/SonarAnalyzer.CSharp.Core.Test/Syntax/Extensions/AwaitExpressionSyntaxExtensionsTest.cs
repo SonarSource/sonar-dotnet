@@ -16,42 +16,41 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
-{
-    [TestClass]
-    public class AwaitExpressionSyntaxExtensionsTest
-    {
-        [DataTestMethod]
-        [DataRow("[|await t|];", "t")]
-        [DataRow("[|await t.ConfigureAwait(false)|];", "t")]
-        [DataRow("[|await (t.ConfigureAwait(false))|];", "t")]
-        [DataRow("[|await (t).ConfigureAwait(false)|];", "(t)")]
-        [DataRow("[|await M(t).ConfigureAwait(false)|];", "M(t)")]
-        [DataRow("[|await await TaskOfTask().ConfigureAwait(false)|];", "await TaskOfTask().ConfigureAwait(false)")]
-        [DataRow("await [|await TaskOfTask().ConfigureAwait(false)|];", "TaskOfTask()")]
-        [DataRow("[|await (await TaskOfTask()).ConfigureAwait(false)|];", "(await TaskOfTask())")]
-        public void AwaitedExpressionWithoutConfigureAwait(string expression, string expected)
-        {
-            var code = $$"""
-                using System.Threading.Tasks;
-                class C
-                {
-                    async Task M(Task t)
-                    {
-                        {{expression}}
-                    }
+namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 
-                    Task<Task> TaskOfTask() => default;
+[TestClass]
+public class AwaitExpressionSyntaxExtensionsTest
+{
+    [DataTestMethod]
+    [DataRow("[|await t|];", "t")]
+    [DataRow("[|await t.ConfigureAwait(false)|];", "t")]
+    [DataRow("[|await (t.ConfigureAwait(false))|];", "t")]
+    [DataRow("[|await (t).ConfigureAwait(false)|];", "(t)")]
+    [DataRow("[|await M(t).ConfigureAwait(false)|];", "M(t)")]
+    [DataRow("[|await await TaskOfTask().ConfigureAwait(false)|];", "await TaskOfTask().ConfigureAwait(false)")]
+    [DataRow("await [|await TaskOfTask().ConfigureAwait(false)|];", "TaskOfTask()")]
+    [DataRow("[|await (await TaskOfTask()).ConfigureAwait(false)|];", "(await TaskOfTask())")]
+    public void AwaitedExpressionWithoutConfigureAwait(string expression, string expected)
+    {
+        var code = $$"""
+            using System.Threading.Tasks;
+            class C
+            {
+                async Task M(Task t)
+                {
+                    {{expression}}
                 }
-                """;
-            var start = code.IndexOf("[|");
-            code = code.Replace("[|", string.Empty);
-            var end = code.IndexOf("|]");
-            code = code.Replace("|]", string.Empty);
-            var root = CSharpSyntaxTree.ParseText(code).GetRoot();
-            var node = root.FindNode(TextSpan.FromBounds(start, end)) as AwaitExpressionSyntax;
-            var actual = node.AwaitedExpressionWithoutConfigureAwait();
-            actual.ToString().Should().Be(expected);
-        }
+
+                Task<Task> TaskOfTask() => default;
+            }
+            """;
+        var start = code.IndexOf("[|");
+        code = code.Replace("[|", string.Empty);
+        var end = code.IndexOf("|]");
+        code = code.Replace("|]", string.Empty);
+        var root = CSharpSyntaxTree.ParseText(code).GetRoot();
+        var node = root.FindNode(TextSpan.FromBounds(start, end)) as AwaitExpressionSyntax;
+        var actual = node.AwaitedExpressionWithoutConfigureAwait();
+        actual.ToString().Should().Be(expected);
     }
 }

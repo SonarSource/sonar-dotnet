@@ -14,15 +14,14 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CFG.Roslyn
+namespace SonarAnalyzer.CFG.Roslyn;
+
+/// <summary>
+/// Copy of Microsoft.CodeAnalysis.FlowAnalysis.BasicBlockKind.
+/// </summary>
+public enum BasicBlockKind
 {
-    /// <summary>
-    /// Copy of Microsoft.CodeAnalysis.FlowAnalysis.BasicBlockKind.
-    /// </summary>
-    public enum BasicBlockKind
-    {
-        Entry = 0,
-        Exit = 1,
-        Block = 2
-    }
+    Entry = 0,
+    Exit = 1,
+    Block = 2
 }

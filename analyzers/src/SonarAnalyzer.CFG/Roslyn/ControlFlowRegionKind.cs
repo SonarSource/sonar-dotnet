@@ -14,23 +14,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CFG.Roslyn
+namespace SonarAnalyzer.CFG.Roslyn;
+
+/// <summary>
+/// Copy of Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowRegionKind.
+/// </summary>
+public enum ControlFlowRegionKind
 {
-    /// <summary>
-    /// Copy of Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowRegionKind.
-    /// </summary>
-    public enum ControlFlowRegionKind
-    {
-        Root = 0,
-        LocalLifetime = 1,
-        Try = 2,
-        Filter = 3,
-        Catch = 4,
-        FilterAndHandler = 5,
-        TryAndCatch = 6,
-        Finally = 7,
-        TryAndFinally = 8,
-        StaticLocalInitializer = 9,
-        ErroneousBody = 10
-    }
+    Root = 0,
+    LocalLifetime = 1,
+    Try = 2,
+    Filter = 3,
+    Catch = 4,
+    FilterAndHandler = 5,
+    TryAndCatch = 6,
+    Finally = 7,
+    TryAndFinally = 8,
+    StaticLocalInitializer = 9,
+    ErroneousBody = 10
 }

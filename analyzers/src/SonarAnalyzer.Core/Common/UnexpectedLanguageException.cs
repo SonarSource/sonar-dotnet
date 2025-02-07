@@ -14,12 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
-{
-    public sealed class UnexpectedLanguageException : Exception
-    {
-        public UnexpectedLanguageException(AnalyzerLanguage language) : this(language.LanguageName) { }
+namespace SonarAnalyzer.Common;
 
-        public UnexpectedLanguageException(string language) : base($"Unexpected language: {language}") { }
-    }
+public sealed class UnexpectedLanguageException : Exception
+{
+    public UnexpectedLanguageException(AnalyzerLanguage language) : this(language.LanguageName) { }
+
+    public UnexpectedLanguageException(string language) : base($"Unexpected language: {language}") { }
 }

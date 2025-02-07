@@ -16,23 +16,22 @@
 
 using SonarAnalyzer.CFG.Extensions;
 
-namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
-{
-    [TestClass]
-    public class PatternSyntaxWrapperExtensionsTest
-    {
-        [TestMethod]
-        public void IsNull_ForNullPattern_ReturnsTrue()
-        {
-            var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is null");
-            isPattern.Pattern.IsNull().Should().BeTrue();
-        }
+namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 
-        [TestMethod]
-        public void IsNull_ForDifferentPattern_ReturnsFalse()
-        {
-            var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is not 1");
-            isPattern.Pattern.IsNull().Should().BeFalse();
-        }
+[TestClass]
+public class PatternSyntaxWrapperExtensionsTest
+{
+    [TestMethod]
+    public void IsNull_ForNullPattern_ReturnsTrue()
+    {
+        var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is null");
+        isPattern.Pattern.IsNull().Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsNull_ForDifferentPattern_ReturnsFalse()
+    {
+        var isPattern = (IsPatternExpressionSyntaxWrapper)SyntaxFactory.ParseExpression("is not 1");
+        isPattern.Pattern.IsNull().Should().BeFalse();
     }
 }

@@ -21,15 +21,15 @@ using NullabilityInfo = StyleCop.Analyzers.Lightup.NullabilityInfo;
 using NullableAnnotation = StyleCop.Analyzers.Lightup.NullableAnnotation;
 using NullableFlowState = StyleCop.Analyzers.Lightup.NullableFlowState;
 
-namespace SonarAnalyzer.Test.Wrappers
+namespace SonarAnalyzer.Test.Wrappers;
+
+[TestClass]
+public class TypeInfoExtensionsTest
 {
-    [TestClass]
-    public class TypeInfoExtensionsTest
+    [TestMethod]
+    public void NullabilityInfoFromShimEqualsOriginal()
     {
-        [TestMethod]
-        public void NullabilityInfoFromShimEqualsOriginal()
-        {
-            var code = @"
+        var code = @"
 #nullable enable
 public class C
 {
@@ -40,31 +40,31 @@ public class C
     }
 }
 ";
-            var (tree, semanticModel) = TestCompiler.CompileCS(code);
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
-            var typeInfo = semanticModel.GetTypeInfo(identifier);
+        var (tree, semanticModel) = TestCompiler.CompileCS(code);
+        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
+        var typeInfo = semanticModel.GetTypeInfo(identifier);
 
-            var nullabilityShim = typeInfo.Nullability();
-            nullabilityShim.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
-                .And.BeEquivalentTo(new
-                {
-                    typeInfo.Nullability.Annotation,
-                    typeInfo.Nullability.FlowState
-                }, options => options.ComparingEnumsByValue());
+        var nullabilityShim = typeInfo.Nullability();
+        nullabilityShim.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+            .And.BeEquivalentTo(new
+            {
+                typeInfo.Nullability.Annotation,
+                typeInfo.Nullability.FlowState
+            }, options => options.ComparingEnumsByValue());
 
-            var convertedNullability = typeInfo.ConvertedNullability();
-            convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
-                .And.BeEquivalentTo(new
-                {
-                    typeInfo.ConvertedNullability.Annotation,
-                    typeInfo.ConvertedNullability.FlowState
-                }, options => options.ComparingEnumsByValue());
-        }
+        var convertedNullability = typeInfo.ConvertedNullability();
+        convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+            .And.BeEquivalentTo(new
+            {
+                typeInfo.ConvertedNullability.Annotation,
+                typeInfo.ConvertedNullability.FlowState
+            }, options => options.ComparingEnumsByValue());
+    }
 
-        [TestMethod]
-        public void NullabilityInfoFromShimEqualsOriginalConvertedNullabilityDiffersNullability()
-        {
-            var code = @"
+    [TestMethod]
+    public void NullabilityInfoFromShimEqualsOriginalConvertedNullabilityDiffersNullability()
+    {
+        var code = @"
 #nullable enable
 
 public class B { }
@@ -79,31 +79,31 @@ public class C {
 
     public static implicit operator B?(C c) => null;
 }";
-            var (tree, semanticModel) = TestCompiler.CompileCS(code);
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("c")); // c in M(c)
-            var typeInfo = semanticModel.GetTypeInfo(identifier);
+        var (tree, semanticModel) = TestCompiler.CompileCS(code);
+        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("c")); // c in M(c)
+        var typeInfo = semanticModel.GetTypeInfo(identifier);
 
-            var nullabilityShim = typeInfo.Nullability();
-            nullabilityShim.Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull))
-                .And.BeEquivalentTo(new
-                {
-                    typeInfo.Nullability.Annotation,
-                    typeInfo.Nullability.FlowState
-                }, options => options.ComparingEnumsByValue());
+        var nullabilityShim = typeInfo.Nullability();
+        nullabilityShim.Should().Be(new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull))
+            .And.BeEquivalentTo(new
+            {
+                typeInfo.Nullability.Annotation,
+                typeInfo.Nullability.FlowState
+            }, options => options.ComparingEnumsByValue());
 
-            var convertedNullability = typeInfo.ConvertedNullability();
-            convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
-                .And.BeEquivalentTo(new
-                {
-                    typeInfo.ConvertedNullability.Annotation,
-                    typeInfo.ConvertedNullability.FlowState
-                }, options => options.ComparingEnumsByValue());
-        }
+        var convertedNullability = typeInfo.ConvertedNullability();
+        convertedNullability.Should().Be(new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull))
+            .And.BeEquivalentTo(new
+            {
+                typeInfo.ConvertedNullability.Annotation,
+                typeInfo.ConvertedNullability.FlowState
+            }, options => options.ComparingEnumsByValue());
+    }
 
-        [TestMethod]
-        public void NullabilityInfoIsMissingIfNullableDisabled()
-        {
-            var code = @"
+    [TestMethod]
+    public void NullabilityInfoIsMissingIfNullableDisabled()
+    {
+        var code = @"
 #nullable disable
 public class C
 {
@@ -114,19 +114,19 @@ public class C
     }
 }
 ";
-            var (tree, semanticModel) = TestCompiler.CompileCS(code);
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
-            var typeInfo = semanticModel.GetTypeInfo(identifier);
-            typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
-            typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
-        }
+        var (tree, semanticModel) = TestCompiler.CompileCS(code);
+        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
+        var typeInfo = semanticModel.GetTypeInfo(identifier);
+        typeInfo.Nullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
+        typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
+    }
 
-        [DataTestMethod]
-        [DataRow("Debug.Assert(o != null);")]
-        [DataRow("Debug.Fail(string.Empty);")]
-        public void NullabilityInfoRecognizesDebug(string debug)
-        {
-            var code = $@"
+    [DataTestMethod]
+    [DataRow("Debug.Assert(o != null);")]
+    [DataRow("Debug.Fail(string.Empty);")]
+    public void NullabilityInfoRecognizesDebug(string debug)
+    {
+        var code = $@"
 #nullable enable
 using System.Diagnostics;
 public class C
@@ -139,28 +139,27 @@ public class C
     }}
 }}
 ";
-            var (tree, semanticModel) = TestCompiler.CompileCS(code);
-            var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
-            var typeInfo = semanticModel.GetTypeInfo(identifier);
-            var expected =
+        var (tree, semanticModel) = TestCompiler.CompileCS(code);
+        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
+        var typeInfo = semanticModel.GetTypeInfo(identifier);
+        var expected =
 #if NET
-                new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull);
+            new NullabilityInfo(NullableAnnotation.NotAnnotated, NullableFlowState.NotNull);
 #else
-                new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull);
+            new NullabilityInfo(NullableAnnotation.Annotated, NullableFlowState.MaybeNull);
 #endif
-            typeInfo.Nullability().Should().Be(expected);
-            typeInfo.ConvertedNullability().Should().Be(expected);
-        }
+        typeInfo.Nullability().Should().Be(expected);
+        typeInfo.ConvertedNullability().Should().Be(expected);
+    }
 
-        [DataTestMethod]
-        [DataRow(typeof(NullableAnnotation), typeof(Microsoft.CodeAnalysis.NullableAnnotation))]
-        [DataRow(typeof(NullableFlowState), typeof(Microsoft.CodeAnalysis.NullableFlowState))]
-        public void NullableEnumsAreIdentical(Type fromShim, Type fromRoslyn)
-        {
-            fromShim.GetEnumNames().Should().Equal(fromRoslyn.GetEnumNames());
-            var enumValues = fromShim.GetEnumValues().Cast<byte>();
-            enumValues.Should().SatisfyRespectively(enumValues.Select(x => new Action<byte>(y => fromShim.GetEnumName(y).Should().Be(fromRoslyn.GetEnumName(y)))),
-                "the member values should be assigned to the same member names");
-        }
+    [DataTestMethod]
+    [DataRow(typeof(NullableAnnotation), typeof(Microsoft.CodeAnalysis.NullableAnnotation))]
+    [DataRow(typeof(NullableFlowState), typeof(Microsoft.CodeAnalysis.NullableFlowState))]
+    public void NullableEnumsAreIdentical(Type fromShim, Type fromRoslyn)
+    {
+        fromShim.GetEnumNames().Should().Equal(fromRoslyn.GetEnumNames());
+        var enumValues = fromShim.GetEnumValues().Cast<byte>();
+        enumValues.Should().SatisfyRespectively(enumValues.Select(x => new Action<byte>(y => fromShim.GetEnumName(y).Should().Be(fromRoslyn.GetEnumName(y)))),
+            "the member values should be assigned to the same member names");
     }
 }

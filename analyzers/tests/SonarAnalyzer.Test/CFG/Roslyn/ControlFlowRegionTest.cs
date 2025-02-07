@@ -16,15 +16,15 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Test.CFG.Roslyn
+namespace SonarAnalyzer.Test.CFG.Roslyn;
+
+[TestClass]
+public class ControlFlowRegionTest
 {
-    [TestClass]
-    public class ControlFlowRegionTest
+    [TestMethod]
+    public void ValidateReflection()
     {
-        [TestMethod]
-        public void ValidateReflection()
-        {
-            const string code = @"
+        const string code = @"
 public class Sample
 {
     public void Method()
@@ -45,43 +45,42 @@ public class Sample
         int LocalMethod() => 42;
     }
 }";
-            var root = TestCompiler.CompileCfgCS(code).Root;
+        var root = TestCompiler.CompileCfgCS(code).Root;
 
-            root.Should().NotBeNull();
-            root.Kind.Should().Be(ControlFlowRegionKind.Root);
-            root.EnclosingRegion.Should().BeNull();
-            root.ExceptionType.Should().BeNull();
-            root.FirstBlockOrdinal.Should().Be(0);
-            root.LastBlockOrdinal.Should().Be(5);
-            root.NestedRegions.Should().HaveCount(1);
-            root.Locals.Should().BeEmpty();
-            root.LocalFunctions.Should().BeEmpty();
-            root.CaptureIds.Should().BeEmpty();
+        root.Should().NotBeNull();
+        root.Kind.Should().Be(ControlFlowRegionKind.Root);
+        root.EnclosingRegion.Should().BeNull();
+        root.ExceptionType.Should().BeNull();
+        root.FirstBlockOrdinal.Should().Be(0);
+        root.LastBlockOrdinal.Should().Be(5);
+        root.NestedRegions.Should().HaveCount(1);
+        root.Locals.Should().BeEmpty();
+        root.LocalFunctions.Should().BeEmpty();
+        root.CaptureIds.Should().BeEmpty();
 
-            var localLifetime = root.NestedRegions.Single();
-            localLifetime.Kind.Should().Be(ControlFlowRegionKind.LocalLifetime);
-            localLifetime.EnclosingRegion.Should().Be(root);
-            localLifetime.ExceptionType.Should().BeNull();
-            localLifetime.FirstBlockOrdinal.Should().Be(1);
-            localLifetime.LastBlockOrdinal.Should().Be(4);
-            localLifetime.NestedRegions.Should().HaveCount(1);
-            localLifetime.Locals.Should().HaveCount(1).And.Contain(x => x.Name == "value");
-            localLifetime.LocalFunctions.Should().HaveCount(1).And.Contain(x => x.Name == "LocalMethod");
-            localLifetime.CaptureIds.Should().BeEmpty();
+        var localLifetime = root.NestedRegions.Single();
+        localLifetime.Kind.Should().Be(ControlFlowRegionKind.LocalLifetime);
+        localLifetime.EnclosingRegion.Should().Be(root);
+        localLifetime.ExceptionType.Should().BeNull();
+        localLifetime.FirstBlockOrdinal.Should().Be(1);
+        localLifetime.LastBlockOrdinal.Should().Be(4);
+        localLifetime.NestedRegions.Should().HaveCount(1);
+        localLifetime.Locals.Should().HaveCount(1).And.Contain(x => x.Name == "value");
+        localLifetime.LocalFunctions.Should().HaveCount(1).And.Contain(x => x.Name == "LocalMethod");
+        localLifetime.CaptureIds.Should().BeEmpty();
 
-            var tryFinallyRegion = localLifetime.NestedRegions.Single();
-            tryFinallyRegion.Kind.Should().Be(ControlFlowRegionKind.TryAndFinally);
+        var tryFinallyRegion = localLifetime.NestedRegions.Single();
+        tryFinallyRegion.Kind.Should().Be(ControlFlowRegionKind.TryAndFinally);
 
-            var tryRegion = tryFinallyRegion.NestedRegions.First();
-            tryRegion.Kind.Should().Be(ControlFlowRegionKind.Try);
+        var tryRegion = tryFinallyRegion.NestedRegions.First();
+        tryRegion.Kind.Should().Be(ControlFlowRegionKind.Try);
 
-            var tryCatchRegion = tryRegion.NestedRegions.First();
-            tryCatchRegion.Kind.Should().Be(ControlFlowRegionKind.TryAndCatch);
+        var tryCatchRegion = tryRegion.NestedRegions.First();
+        tryCatchRegion.Kind.Should().Be(ControlFlowRegionKind.TryAndCatch);
 
-            var catchRegion = tryCatchRegion.NestedRegions.Last();
-            catchRegion.Kind.Should().Be(ControlFlowRegionKind.Catch);
-            catchRegion.ExceptionType.Should().NotBeNull();
-            catchRegion.ExceptionType.Name.Should().Be("InvalidOperationException");
-        }
+        var catchRegion = tryCatchRegion.NestedRegions.Last();
+        catchRegion.Kind.Should().Be(ControlFlowRegionKind.Catch);
+        catchRegion.ExceptionType.Should().NotBeNull();
+        catchRegion.ExceptionType.Name.Should().Be("InvalidOperationException");
     }
 }

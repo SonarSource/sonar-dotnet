@@ -16,105 +16,104 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Json.Parsing
+namespace SonarAnalyzer.Json.Parsing;
+
+internal class SyntaxAnalyzer
 {
-    internal class SyntaxAnalyzer
+    // Parse   -> { ParseObject | [ ParseList
+
+    // ParseObject -> } | ObjectKeyValue ObjectRest
+    // ObjectRest -> , ObjectKeyValue ObjectRest | }
+    // ObjectKeyValue -> String : ParseValue
+
+    // ParseList -> ] | ParseValue ArrayRest
+    // ArrayRest -> , ParseValue ] | ]
+
+    // ParseValue -> { ParseObject | [ ParseList | Symbol.Value (Where .Value is true | false | null | String | Number)
+    private readonly LexicalAnalyzer lexer;
+    private Symbol symbol;
+
+    public SyntaxAnalyzer(string source) =>
+        lexer = new LexicalAnalyzer(source);
+
+    public JsonNode Parse() =>
+        ReadNext() switch
+        {
+            Symbol.OpenCurlyBracket => ParseObject(),
+            Symbol.OpenSquareBracket => ParseList(),
+            _ => throw Unexpected("{ or [")
+        };
+
+    private Symbol ReadNext() =>
+        symbol = lexer.NextSymbol();
+
+    private JsonNode ParseObject()
     {
-        // Parse   -> { ParseObject | [ ParseList
-
-        // ParseObject -> } | ObjectKeyValue ObjectRest
-        // ObjectRest -> , ObjectKeyValue ObjectRest | }
-        // ObjectKeyValue -> String : ParseValue
-
-        // ParseList -> ] | ParseValue ArrayRest
-        // ArrayRest -> , ParseValue ] | ]
-
-        // ParseValue -> { ParseObject | [ ParseList | Symbol.Value (Where .Value is true | false | null | String | Number)
-        private readonly LexicalAnalyzer lexer;
-        private Symbol symbol;
-
-        public SyntaxAnalyzer(string source) =>
-            lexer = new LexicalAnalyzer(source);
-
-        public JsonNode Parse() =>
-            ReadNext() switch
-            {
-                Symbol.OpenCurlyBracket => ParseObject(),
-                Symbol.OpenSquareBracket => ParseList(),
-                _ => throw Unexpected("{ or [")
-            };
-
-        private Symbol ReadNext() =>
-            symbol = lexer.NextSymbol();
-
-        private JsonNode ParseObject()
+        var ret = new JsonNode(lexer.LastStart, Kind.Object);
+        if (ReadNext() != Symbol.CloseCurlyBracket)  // Could be empty object {}
         {
-            var ret = new JsonNode(lexer.LastStart, Kind.Object);
-            if (ReadNext() != Symbol.CloseCurlyBracket)  // Could be empty object {}
+            ObjectKeyValue(ret);
+            while (ReadNext() == Symbol.Comma)
             {
+                ReadNext();
                 ObjectKeyValue(ret);
-                while (ReadNext() == Symbol.Comma)
-                {
-                    ReadNext();
-                    ObjectKeyValue(ret);
-                }
-                if (symbol != Symbol.CloseCurlyBracket)
-                {
-                    throw Unexpected("}");
-                }
             }
-            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
-            return ret;
-        }
-
-        private void ObjectKeyValue(JsonNode target)
-        {
-            if (symbol == Symbol.Value && lexer.Value is string key)
+            if (symbol != Symbol.CloseCurlyBracket)
             {
-                if (ReadNext() != Symbol.Colon)
-                {
-                    throw Unexpected(":");
-                }
-                ReadNext(); // Prepare before reading Value
-                target.Add(key, ParseValue());
-            }
-            else
-            {
-                throw Unexpected("String Value");
+                throw Unexpected("}");
             }
         }
-
-        private JsonNode ParseList()
-        {
-            var ret = new JsonNode(lexer.LastStart, Kind.List);
-            if (ReadNext() != Symbol.CloseSquareBracket)    // Could be empty array []
-            {
-                ret.Add(ParseValue());
-                while (ReadNext() == Symbol.Comma)
-                {
-                    ReadNext();
-                    ret.Add(ParseValue());
-                }
-                if (symbol != Symbol.CloseSquareBracket)
-                {
-                    throw Unexpected("]");
-                }
-            }
-            ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
-            return ret;
-        }
-
-        private JsonNode ParseValue() =>
-            // Symbol is already read
-            symbol switch
-            {
-                Symbol.OpenCurlyBracket => ParseObject(),
-                Symbol.OpenSquareBracket => ParseList(),
-                Symbol.Value => new JsonNode(lexer.LastStart, lexer.CurrentPosition(1), lexer.Value),
-                _ => throw Unexpected("{, [ or Value (true, false, null, String, Number)")
-            };
-
-        private JsonException Unexpected(string expected) =>
-            new JsonException($"{expected} expected, but {symbol} found", lexer.LastStart);
+        ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
+        return ret;
     }
+
+    private void ObjectKeyValue(JsonNode target)
+    {
+        if (symbol == Symbol.Value && lexer.Value is string key)
+        {
+            if (ReadNext() != Symbol.Colon)
+            {
+                throw Unexpected(":");
+            }
+            ReadNext(); // Prepare before reading Value
+            target.Add(key, ParseValue());
+        }
+        else
+        {
+            throw Unexpected("String Value");
+        }
+    }
+
+    private JsonNode ParseList()
+    {
+        var ret = new JsonNode(lexer.LastStart, Kind.List);
+        if (ReadNext() != Symbol.CloseSquareBracket)    // Could be empty array []
+        {
+            ret.Add(ParseValue());
+            while (ReadNext() == Symbol.Comma)
+            {
+                ReadNext();
+                ret.Add(ParseValue());
+            }
+            if (symbol != Symbol.CloseSquareBracket)
+            {
+                throw Unexpected("]");
+            }
+        }
+        ret.UpdateEnd(new LinePosition(lexer.LastStart.Line, lexer.LastStart.Character + 1));
+        return ret;
+    }
+
+    private JsonNode ParseValue() =>
+        // Symbol is already read
+        symbol switch
+        {
+            Symbol.OpenCurlyBracket => ParseObject(),
+            Symbol.OpenSquareBracket => ParseList(),
+            Symbol.Value => new JsonNode(lexer.LastStart, lexer.CurrentPosition(1), lexer.Value),
+            _ => throw Unexpected("{, [ or Value (true, false, null, String, Number)")
+        };
+
+    private JsonException Unexpected(string expected) =>
+        new JsonException($"{expected} expected, but {symbol} found", lexer.LastStart);
 }

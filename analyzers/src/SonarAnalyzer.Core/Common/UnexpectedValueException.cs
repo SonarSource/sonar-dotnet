@@ -14,10 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public sealed class UnexpectedValueException : Exception
 {
-    public sealed class UnexpectedValueException : Exception
-    {
-        public UnexpectedValueException(string name, object value) : base($"Unexpected {name} value: {value}") { }
-    }
+    public UnexpectedValueException(string name, object value) : base($"Unexpected {name} value: {value}") { }
 }

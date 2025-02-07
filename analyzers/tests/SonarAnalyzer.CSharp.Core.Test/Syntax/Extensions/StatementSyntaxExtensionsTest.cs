@@ -14,15 +14,15 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
+namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
+
+[TestClass]
+public class StatementSyntaxExtensionsTest
 {
-    [TestClass]
-    public class StatementSyntaxExtensionsTest
+    [TestMethod]
+    public void GetPrecedingStatement()
     {
-        [TestMethod]
-        public void GetPrecedingStatement()
-        {
-            var source = @"
+        var source = @"
 namespace Test
 {
     class TestClass
@@ -38,23 +38,23 @@ namespace Test
         }
     }
 }";
-            var ifMethodStatements = CSharpSyntaxTree.ParseText(source)
-                                             .GetRoot()
-                                             .DescendantNodes()
-                                             .OfType<MethodDeclarationSyntax>()
-                                             .First(m => m.Identifier.ValueText == "IfMethod")
-                                             .Body.Statements.ToList();
+        var ifMethodStatements = CSharpSyntaxTree.ParseText(source)
+                                         .GetRoot()
+                                         .DescendantNodes()
+                                         .OfType<MethodDeclarationSyntax>()
+                                         .First(m => m.Identifier.ValueText == "IfMethod")
+                                         .Body.Statements.ToList();
 
-            var ifStatementA = ifMethodStatements[0];
-            var ifStatementB = ifMethodStatements[1];
-            ifStatementB.GetPrecedingStatement().Should().BeEquivalentTo(ifStatementA);
-            ifStatementA.GetPrecedingStatement().Should().Be(null);
-        }
+        var ifStatementA = ifMethodStatements[0];
+        var ifStatementB = ifMethodStatements[1];
+        ifStatementB.GetPrecedingStatement().Should().BeEquivalentTo(ifStatementA);
+        ifStatementA.GetPrecedingStatement().Should().Be(null);
+    }
 
-        [TestMethod]
-        public void GetPrecedingStatementTopLevelStatements()
-        {
-            var sourceTopLevelStatement = @"
+    [TestMethod]
+    public void GetPrecedingStatementTopLevelStatements()
+    {
+        var sourceTopLevelStatement = @"
 var a = 1;
 var b = 2;
 if (a == b)
@@ -62,15 +62,14 @@ if (a == b)
     DoSomething();
 }
 void DoSomething() { }";
-            var variableDeclarators = CSharpSyntaxTree.ParseText(sourceTopLevelStatement)
-                                                      .GetRoot()
-                                                      .DescendantNodes()
-                                                      .OfType<LocalDeclarationStatementSyntax>()
-                                                      .ToArray();
-            var aDeclaration = variableDeclarators[0];
-            var bDeclaration = variableDeclarators[1];
-            aDeclaration.GetPrecedingStatement().Should().Be(null);
-            bDeclaration.GetPrecedingStatement().Should().BeEquivalentTo(aDeclaration);
-        }
+        var variableDeclarators = CSharpSyntaxTree.ParseText(sourceTopLevelStatement)
+                                                  .GetRoot()
+                                                  .DescendantNodes()
+                                                  .OfType<LocalDeclarationStatementSyntax>()
+                                                  .ToArray();
+        var aDeclaration = variableDeclarators[0];
+        var bDeclaration = variableDeclarators[1];
+        aDeclaration.GetPrecedingStatement().Should().Be(null);
+        bDeclaration.GetPrecedingStatement().Should().BeEquivalentTo(aDeclaration);
     }
 }

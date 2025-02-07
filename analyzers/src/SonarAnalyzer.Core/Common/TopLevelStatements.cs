@@ -14,12 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
-{
-    public static class TopLevelStatements
-    {
-        public const string MainMethodImplicitName = "<Main>$";
+namespace SonarAnalyzer.Common;
 
-        public static readonly ImmutableHashSet<string> ProgramClassImplicitName = ImmutableHashSet.Create("Program", "<Program>$");
-    }
+public static class TopLevelStatements
+{
+    public const string MainMethodImplicitName = "<Main>$";
+
+    public static readonly ImmutableHashSet<string> ProgramClassImplicitName = ImmutableHashSet.Create("Program", "<Program>$");
 }

@@ -14,26 +14,26 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
+namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
+
+[TestClass]
+public class PropertyDeclarationSyntaxExtensionsTest
 {
-    [TestClass]
-    public class PropertyDeclarationSyntaxExtensionsTest
+    [TestMethod]
+    public void IsAutoProperty_AccessorWithBody_ReturnsFalse()
     {
-        [TestMethod]
-        public void IsAutoProperty_AccessorWithBody_ReturnsFalse()
-        {
-            const string code = @"class TestCases
+        const string code = @"class TestCases
 {
     public int Property { get { return 0; } }
 }
 ";
-            GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
-        }
+        GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void IsAutoProperty_AccessorWithExpressionBody_ReturnsFalse()
-        {
-            const string code = @"record TestCases
+    [TestMethod]
+    public void IsAutoProperty_AccessorWithExpressionBody_ReturnsFalse()
+    {
+        const string code = @"record TestCases
 {
     public int Property
     {
@@ -41,36 +41,35 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
     }
 }
 ";
-            GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
-        }
+        GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void IsAutoProperty_ExpressionBody_ReturnsFalse()
-        {
-            const string code = @"record TestCases
+    [TestMethod]
+    public void IsAutoProperty_ExpressionBody_ReturnsFalse()
+    {
+        const string code = @"record TestCases
 {
     public int Property => 0;
 }
 ";
-            GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
-        }
+        GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
+    }
 
-        [TestMethod]
-        public void IsAutoProperty_AccessorsWithoutBody_ReturnsTrue()
-        {
-            const string code = @"class TestCases
+    [TestMethod]
+    public void IsAutoProperty_AccessorsWithoutBody_ReturnsTrue()
+    {
+        const string code = @"class TestCases
 {
     public int Property { get; set; }
 }
 ";
-            GetPropertyDeclaration(code).IsAutoProperty().Should().BeTrue();
-        }
-
-        private static PropertyDeclarationSyntax GetPropertyDeclaration(string code) =>
-            SyntaxFactory.ParseSyntaxTree(code)
-                         .GetRoot()
-                         .DescendantNodes()
-                         .OfType<PropertyDeclarationSyntax>()
-                         .First();
+        GetPropertyDeclaration(code).IsAutoProperty().Should().BeTrue();
     }
+
+    private static PropertyDeclarationSyntax GetPropertyDeclaration(string code) =>
+        SyntaxFactory.ParseSyntaxTree(code)
+                     .GetRoot()
+                     .DescendantNodes()
+                     .OfType<PropertyDeclarationSyntax>()
+                     .First();
 }

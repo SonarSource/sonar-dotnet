@@ -14,20 +14,19 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+/// <summary>
+/// sonar-plugin-api / RuleParamType also supports lists with single/multi selection.
+/// We don't have a way how to annotate those on .NET side.
+/// See sonar-plugin-api / RuleParamTypeTest.java for format an usages.
+/// </summary>
+public enum PropertyType
 {
-    /// <summary>
-    /// sonar-plugin-api / RuleParamType also supports lists with single/multi selection.
-    /// We don't have a way how to annotate those on .NET side.
-    /// See sonar-plugin-api / RuleParamTypeTest.java for format an usages.
-    /// </summary>
-    public enum PropertyType
-    {
-        String,
-        Text,
-        Boolean,
-        Integer,
-        Float,
-        RegularExpression,  // This will be translated to String by RuleParamType.parse() on the API side
-    }
+    String,
+    Text,
+    Boolean,
+    Integer,
+    Float,
+    RegularExpression,  // This will be translated to String by RuleParamType.parse() on the API side
 }

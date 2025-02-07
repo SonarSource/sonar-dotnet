@@ -16,15 +16,14 @@
 
 using System.Xml.Linq;
 
-namespace SonarAnalyzer.Common
+namespace SonarAnalyzer.Common;
+
+public class RuleLoader : IRuleLoader
 {
-    public class RuleLoader : IRuleLoader
-    {
-        public ISet<string> GetEnabledRules(string content) =>
-            XDocument.Parse(content)
-                .Descendants("Rule")
-                .Select(r => r.Element("Key")?.Value)
-                .WhereNotNull()
-                .ToHashSet();
-    }
+    public ISet<string> GetEnabledRules(string content) =>
+        XDocument.Parse(content)
+            .Descendants("Rule")
+            .Select(r => r.Element("Key")?.Value)
+            .WhereNotNull()
+            .ToHashSet();
 }

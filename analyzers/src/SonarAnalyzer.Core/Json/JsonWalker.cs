@@ -16,50 +16,49 @@
 
 using SonarAnalyzer.Json.Parsing;
 
-namespace SonarAnalyzer.Json
+namespace SonarAnalyzer.Json;
+
+public class JsonWalker
 {
-    public class JsonWalker
+    protected JsonWalker() { }
+
+    public virtual void Visit(JsonNode node)
     {
-        protected JsonWalker() { }
-
-        public virtual void Visit(JsonNode node)
+        switch (node.Kind)
         {
-            switch (node.Kind)
-            {
-                case Kind.Object:
-                    VisitObject(node);
-                    break;
-                case Kind.List:
-                    VisitList(node);
-                    break;
-                case Kind.Value:
-                    VisitValue(node);
-                    break;
-            }
+            case Kind.Object:
+                VisitObject(node);
+                break;
+            case Kind.List:
+                VisitList(node);
+                break;
+            case Kind.Value:
+                VisitValue(node);
+                break;
         }
+    }
 
-        protected virtual void VisitObject(JsonNode node)
+    protected virtual void VisitObject(JsonNode node)
+    {
+        foreach (var key in node.Keys)
         {
-            foreach (var key in node.Keys)
-            {
-                VisitObject(key, node[key]);
-            }
+            VisitObject(key, node[key]);
         }
+    }
 
-        protected virtual void VisitObject(string key, JsonNode value) =>
-            Visit(value);
+    protected virtual void VisitObject(string key, JsonNode value) =>
+        Visit(value);
 
-        protected virtual void VisitList(JsonNode node)
+    protected virtual void VisitList(JsonNode node)
+    {
+        foreach (var item in node)
         {
-            foreach (var item in node)
-            {
-                Visit(item);
-            }
+            Visit(item);
         }
+    }
 
-        protected virtual void VisitValue(JsonNode node)
-        {
-            // Override me
-        }
+    protected virtual void VisitValue(JsonNode node)
+    {
+        // Override me
     }
 }

@@ -14,27 +14,27 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions
-{
-    [TestClass]
-    public class VariableDesignationSyntaxWrapperTest
-    {
-        [DataTestMethod]
-        [DataRow("var (a, b) = (1, 2);", "a,b")]
-        [DataRow("var (a, _) = (1, 2);", "a")]
-        [DataRow("var (a, (b, c), d) = (1, (2, 3), 4);", "a,b,c,d")]
-        [DataRow("_ = (1, 2) is var (a, b);", "a,b")]
-        [DataRow("_ = (1, 2) switch { var (a, b) => true };", "a,b")]
-        public void VariableDesignationSyntaxWrapper_DifferentDesignations(string designation, string expectedVariables)
-        {
-            var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(designation));
-            var variableDesignation = (VariableDesignationSyntaxWrapper)syntaxTree.GetRoot().DescendantNodesAndSelf().First(VariableDesignationSyntaxWrapper.IsInstance);
-            var allVariables = variableDesignation.AllVariables();
-            var allVariablesAsString = string.Join(",", allVariables.Select(x => x.SyntaxNode.ToString()));
-            allVariablesAsString.Should().Be(expectedVariables);
-        }
+namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 
-        private static string WrapInMethod(string code) =>
+[TestClass]
+public class VariableDesignationSyntaxWrapperTest
+{
+    [DataTestMethod]
+    [DataRow("var (a, b) = (1, 2);", "a,b")]
+    [DataRow("var (a, _) = (1, 2);", "a")]
+    [DataRow("var (a, (b, c), d) = (1, (2, 3), 4);", "a,b,c,d")]
+    [DataRow("_ = (1, 2) is var (a, b);", "a,b")]
+    [DataRow("_ = (1, 2) switch { var (a, b) => true };", "a,b")]
+    public void VariableDesignationSyntaxWrapper_DifferentDesignations(string designation, string expectedVariables)
+    {
+        var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(designation));
+        var variableDesignation = (VariableDesignationSyntaxWrapper)syntaxTree.GetRoot().DescendantNodesAndSelf().First(VariableDesignationSyntaxWrapper.IsInstance);
+        var allVariables = variableDesignation.AllVariables();
+        var allVariablesAsString = string.Join(",", allVariables.Select(x => x.SyntaxNode.ToString()));
+        allVariablesAsString.Should().Be(expectedVariables);
+    }
+
+    private static string WrapInMethod(string code) =>
 $@"
 public class C
 {{
@@ -44,5 +44,4 @@ public class C
     }}
 }}
 ";
-    }
 }
