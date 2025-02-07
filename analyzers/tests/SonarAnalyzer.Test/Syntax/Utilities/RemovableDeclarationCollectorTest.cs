@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 using CodeAnalysisAccessibility = Microsoft.CodeAnalysis.Accessibility; // This is needed because there is an Accessibility namespace in the windows forms binaries.
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Syntax.Utilities;
 
 [TestClass]
 public class RemovableDeclarationCollectorTest

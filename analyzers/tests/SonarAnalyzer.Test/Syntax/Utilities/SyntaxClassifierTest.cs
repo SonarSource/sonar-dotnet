@@ -13,7 +13,7 @@ using SyntaxCS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using SyntaxVB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 
-namespace SonarAnalyzer.Test.SymbolicExecution.Roslyn;
+namespace SonarAnalyzer.Test.Syntax.Utilities;
 
 [TestClass]
 public class SyntaxClassifierTest
