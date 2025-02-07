@@ -16,13 +16,12 @@
 
 using SonarAnalyzer.Rules.VisualBasic;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ExitStatementUsageTest
 {
-    [TestClass]
-    public class ExitStatementUsageTest
-    {
-        [TestMethod]
-        public void ExitStatementUsage() =>
-            new VerifierBuilder<ExitStatementUsage>().AddPaths("ExitStatementUsage.vb").Verify();
-    }
+    [TestMethod]
+    public void ExitStatementUsage() =>
+        new VerifierBuilder<ExitStatementUsage>().AddPaths("ExitStatementUsage.vb").Verify();
 }

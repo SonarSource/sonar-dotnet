@@ -14,49 +14,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.Rules.VisualBasic;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ExitStatementUsage : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ExitStatementUsage : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S3385";
-        private const string MessageFormat = "Remove this 'Exit' statement.";
+    private const string DiagnosticId = "S3385";
+    private const string MessageFormat = "Remove this 'Exit' statement.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c => c.ReportIssue(rule, c.Node),
-                SyntaxKind.ExitForStatement,
-                SyntaxKind.ExitFunctionStatement,
-                SyntaxKind.ExitPropertyStatement,
-                SyntaxKind.ExitSubStatement,
-                SyntaxKind.ExitTryStatement,
-                SyntaxKind.ExitWhileStatement);
-
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var parent = c.Node.Parent;
-                    while(parent != null &&
-                        !(parent is DoLoopBlockSyntax))
-                    {
-                        parent = parent.Parent;
-                    }
-
-                    if (parent == null ||
-                        parent.IsKind(SyntaxKind.SimpleDoLoopBlock))
-                    {
-                        return;
-                    }
-
-                    c.ReportIssue(rule, c.Node);
-                },
-                SyntaxKind.ExitDoStatement);
-        }
-    }
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c => c.ReportIssue(Rule, c.Node),
+            SyntaxKind.ExitFunctionStatement,
+            SyntaxKind.ExitPropertyStatement,
+            SyntaxKind.ExitSubStatement);
 }

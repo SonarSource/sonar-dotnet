@@ -1,54 +1,41 @@
 <h2>Why is this an issue?</h2>
-<p>Other than <code>Exit Select</code>, using an <code>Exit</code> statement is never a good idea.</p>
-<p><code>Exit Do</code>, <code>Exit For</code>, <code>Exit Try</code>, and <code>Exit While</code> will all result in unstructured control flow, i.e.
-spaghetti code.</p>
 <p><code>Exit Function</code>, <code>Exit Property</code>, and <code>Exit Sub</code> are all poor, less-readable substitutes for a simple
-<code>return</code>, and if used with code that should return a value (<code>Exit Function</code> and in some cases <code>Exit Property</code>) they
+<code>Return</code>, and if used with code that should return a value (<code>Exit Function</code> and in some cases <code>Exit Property</code>) they
 could result in a <code>NullReferenceException</code>.</p>
-<p>This rule raises an issue for all uses of <code>Exit</code> except <code>Exit Select</code> and <code>Exit Do</code> statements in loops without
-condition.</p>
+<p>This rule raises an issue for all their usages.</p>
 <h3>Noncompliant code example</h3>
 <pre>
 Public Class Sample
-  Dim condition As Boolean
 
-  Public Sub MySub()
-    If condition Then
-      Exit Sub                  ' Noncompliant
-    End If
-
-    For index = 1 To 10
-      If index = 5 Then
-          Exit For               ' Noncompliant
-      End If
-      ' ...
-    Next
-  End Sub
-  Function MyFunction() As Object
+  Public Sub MySub(Condition As Boolean)
+    If Condition Then Exit Sub                  ' Noncompliant
     ' ...
-    MyFunction = 42
-    Exit Function              ' Noncompliant
+  End Sub
+
+  Public Function MyFunction(Condition As Boolean) As Integer
+    If Condition Then
+        MyFunction = 42
+        Exit Function              ' Noncompliant
+    End If
+    ' ...
   End Function
+
 End Class
 </pre>
 <h3>Compliant solution</h3>
 <pre>
 Public Class Sample
-  Dim condition As Boolean
 
-  Public Sub MySub()
-    If condition Then
-        Return
-    End If
-
-    For index = 1 To 4
-        ' ...
-    Next
-  End Sub
-  Function MyFunction() As Object
+  Public Sub MySub(Condition As Boolean)
+    If Condition Then Return                  ' Noncompliant
     ' ...
-    Return 42
+  End Sub
+
+  Public Function MyFunction(Condition As Boolean) As Integer
+    If Condition Then Return 42
+    ' ...
   End Function
+
 End Class
 </pre>
 
