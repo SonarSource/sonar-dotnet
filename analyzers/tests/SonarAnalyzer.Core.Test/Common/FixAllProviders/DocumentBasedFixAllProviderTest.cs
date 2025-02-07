@@ -31,7 +31,7 @@ public class DocumentBasedFixAllProviderTest
         var codeFix = new DummyCodeFixCS();
         var document = CreateProject().FindDocument("MyFile1.cs");
         var fixAllContext = new FixAllContext(document, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
-        var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
+        var result = await SonarAnalyzer.Core.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
         result.Title.Should().Be(expectedTitle);
     }
 
@@ -41,7 +41,7 @@ public class DocumentBasedFixAllProviderTest
         var codeFix = new DummyCodeFixCS();
         var document = CreateProject().FindDocument("MyFile1.cs");
         var fixAllContext = new FixAllContext(document, codeFix, FixAllScope.Custom, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(null), default);
-        var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
+        var result = await SonarAnalyzer.Core.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
         result.Should().BeNull();
     }
 
@@ -56,7 +56,7 @@ public class DocumentBasedFixAllProviderTest
         var diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
         var fixAllContext = new FixAllContext(document1Before, codeFix, FixAllScope.Document, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(diagnostics), default);
-        var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
+        var result = await SonarAnalyzer.Core.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
         var executedOperation = await result.GetOperationsAsync(default);
         var document1After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document1Before.Id);
         var document2After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document2Before.Id);
@@ -89,7 +89,7 @@ public class DocumentBasedFixAllProviderTest
         var diagnostics = DiagnosticVerifier.AnalyzerDiagnostics(compilation, new DummyAnalyzerCS(), CompilationErrorBehavior.Ignore).ToImmutableArray();
 
         var fixAllContext = new FixAllContext(project.Project, codeFix, scope, "Dummy Action", codeFix.FixableDiagnosticIds, new FixAllDiagnosticProvider(diagnostics), default);
-        var result = await SonarAnalyzer.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
+        var result = await SonarAnalyzer.Core.Common.DocumentBasedFixAllProvider.Instance.GetFixAsync(fixAllContext);
         var executedOperation = await result.GetOperationsAsync(default);
         var document1After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document1Before.Id);
         var document2After = executedOperation.OfType<ApplyChangesOperation>().Single().ChangedSolution.GetDocument(document2Before.Id);

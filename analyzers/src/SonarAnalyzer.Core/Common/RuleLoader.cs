@@ -16,7 +16,7 @@
 
 using System.Xml.Linq;
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Core.Common;
 
 public class RuleLoader : IRuleLoader
 {

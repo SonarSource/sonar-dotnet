@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Rules.CSharp
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public RequestsWithExcessiveLength() : this(Common.AnalyzerConfiguration.Hotspot) { }
+        public RequestsWithExcessiveLength() : this(Core.Common.AnalyzerConfiguration.Hotspot) { }
 
         internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 

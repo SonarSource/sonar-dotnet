@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Core.Common;
 
 /// <summary>
 /// Data structure for working with disjoint sets of strings, to perform union-find operations with equality semantics:

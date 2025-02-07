@@ -16,7 +16,7 @@
 
 using System.Globalization;
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Core.Common;
 
 [AttributeUsage(AttributeTargets.Property)]
 public sealed class RuleParameterAttribute : Attribute

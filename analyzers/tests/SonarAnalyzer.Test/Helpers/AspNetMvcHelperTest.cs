@@ -23,7 +23,7 @@ public class AspNetMvcHelperTest
 {
     [DataTestMethod]
     [DataRow("3.0.20105.1")]
-    [DataRow(SonarAnalyzer.TestFramework.Common.TestConstants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void Public_Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
     {
         const string code = @"

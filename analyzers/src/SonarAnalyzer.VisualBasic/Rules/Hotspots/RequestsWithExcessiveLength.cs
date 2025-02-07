@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Rules.VisualBasic
     {
         protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public RequestsWithExcessiveLength() : this(Common.AnalyzerConfiguration.Hotspot) { }
+        public RequestsWithExcessiveLength() : this(Core.Common.AnalyzerConfiguration.Hotspot) { }
 
         public RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 

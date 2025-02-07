@@ -15,7 +15,7 @@
  */
 
 using Microsoft.CodeAnalysis.Shared.Extensions;
-using WellKnownExtensionMethodContainer = SonarAnalyzer.Common.MultiValueDictionary<Microsoft.CodeAnalysis.ITypeSymbol, Microsoft.CodeAnalysis.INamedTypeSymbol>;
+using WellKnownExtensionMethodContainer = SonarAnalyzer.Core.Common.MultiValueDictionary<Microsoft.CodeAnalysis.ITypeSymbol, Microsoft.CodeAnalysis.INamedTypeSymbol>;
 
 namespace SonarAnalyzer.Rules.CSharp;
 

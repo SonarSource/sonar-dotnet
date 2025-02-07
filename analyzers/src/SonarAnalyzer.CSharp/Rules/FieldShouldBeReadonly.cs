@@ -14,8 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using FieldTuple = SonarAnalyzer.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
-using TypeDeclarationTuple = SonarAnalyzer.Common.NodeAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
+using FieldTuple = SonarAnalyzer.Core.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
+using TypeDeclarationTuple = SonarAnalyzer.Core.Common.NodeAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
 
 namespace SonarAnalyzer.Rules.CSharp;
 

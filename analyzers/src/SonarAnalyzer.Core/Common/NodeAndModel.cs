@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Core.Common;
 
 public class NodeAndModel<TSyntax> where TSyntax : SyntaxNode
 {

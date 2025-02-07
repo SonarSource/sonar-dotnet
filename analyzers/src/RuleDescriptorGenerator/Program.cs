@@ -18,7 +18,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Text.Json;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.Core.Common;
 using SonarAnalyzer.Rules;
 
 namespace RuleDescriptorGenerator;

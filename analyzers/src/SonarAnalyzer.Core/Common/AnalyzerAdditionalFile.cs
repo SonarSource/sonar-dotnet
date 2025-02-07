@@ -17,7 +17,7 @@
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Core.Common;
 
 public sealed class AnalyzerAdditionalFile : AdditionalText
 {

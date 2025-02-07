@@ -16,7 +16,7 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Core.Common;
 
 public sealed class AnalyzerLanguage
 {

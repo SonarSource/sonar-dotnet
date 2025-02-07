@@ -17,7 +17,7 @@
     <Using Include="Microsoft.CodeAnalysis.VisualBasic" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic.Syntax" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
-    <Using Include="SonarAnalyzer.Common" />
+    <Using Include="SonarAnalyzer.Core.Common" />
     <Using Include="SonarAnalyzer.Core.Extensions" />
     <Using Include="SonarAnalyzer.Core.Semantics" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />

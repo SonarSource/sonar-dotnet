@@ -16,7 +16,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using SonarAnalyzer.Common;
+using SonarAnalyzer.Core.Common;
 
 namespace RuleDescriptorGenerator;
 
