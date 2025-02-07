@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.CodeFixes" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.CodeAnalysis.Shared.Extensions" />
     <Using Include="Microsoft.CodeAnalysis.VisualBasic" />

@@ -40,6 +40,7 @@
     <Using Include="SonarAnalyzer.TestFramework.Extensions" />
     <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
     <Using Include="System.Diagnostics.CodeAnalysis" />
+    <Using Include="System.IO" />
   </ItemGroup>
 
 </Project>
