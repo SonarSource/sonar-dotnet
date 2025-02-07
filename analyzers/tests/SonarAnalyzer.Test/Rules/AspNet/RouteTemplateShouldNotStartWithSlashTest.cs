@@ -156,7 +156,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
 
 #if NETFRAMEWORK
     // ASP.NET 4x MVC 3 and 4 don't support attribute routing, nor MapControllerRoute and similar
-    public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest => [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
+    public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest => [["5.2.7"] /* Most used */, [TestConstants.NuGetLatestVersion]];
 
     private static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
         MetadataReferenceFacade.SystemWeb

@@ -25,7 +25,7 @@ public class MethodShouldBeNamedAccordingToSynchronicityTest
 
     [TestMethod]
     [DataRow("4.0.0")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity(string tasksVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.cs")
             .AddReferences(MetadataReferenceFacade.SystemThreadingTasksExtensions(tasksVersion)
@@ -35,13 +35,13 @@ public class MethodShouldBeNamedAccordingToSynchronicityTest
 
     [TestMethod]
     [DataRow("3.0.20105.1")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_MVC(string mvcVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MVC.cs").AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(mvcVersion)).VerifyNoIssues();
 
     [TestMethod]
     [DataRow("2.0.4", "2.0.3")]
-    [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion, TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_MVC_Core(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MVC.Core.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
@@ -51,19 +51,19 @@ public class MethodShouldBeNamedAccordingToSynchronicityTest
 
     [DataTestMethod]
     [DataRow("1.1.11")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_MsTest(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)).VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("2.5.7.10213")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_NUnit(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.NUnit.cs").AddReferences(NuGetMetadataReference.NUnit(testFwkVersion)).VerifyNoIssues();
 
     [DataTestMethod]
     [DataRow("2.0.0")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_Xunit(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)).VerifyNoIssues();
 

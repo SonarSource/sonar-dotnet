@@ -27,7 +27,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
 
     [DataTestMethod]
     [DataRow("1.1.11")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_CS(string testFwkVersion) =>
         builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs")
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
@@ -43,7 +43,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
 
     [DataTestMethod]
     [DataRow("3.0.0")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     [Description("Starting with version 3.0.0 the attribute was removed.")]
     public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue_CS(string testFwkVersion) =>
         builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
@@ -53,7 +53,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
 
     [DataTestMethod]
     [DataRow("1.1.11")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_VB(string testFwkVersion) =>
         builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.vb")
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
@@ -69,7 +69,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
 
     [DataTestMethod]
     [DataRow("3.0.0")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     [Description("Starting with version 3.0.0 the attribute was removed.")]
     public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_NoIssue_VB(string testFwkVersion) =>
         builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.vb")

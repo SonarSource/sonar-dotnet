@@ -61,7 +61,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
 #if NETFRAMEWORK
     // ASP.NET 4x MVC 3 and 4 don't support attribute routing, nor MapControllerRoute and similar
     public static IEnumerable<object[]> AspNet4xMvcVersionsUnderTest =>
-        [["5.2.7"] /* Most used */, [Constants.NuGetLatestVersion]];
+        [["5.2.7"] /* Most used */, [TestConstants.NuGetLatestVersion]];
 
     private static IEnumerable<MetadataReference> AspNet4xReferences(string aspNetMvcVersion) =>
         MetadataReferenceFacade.SystemWeb                                          // For HttpAttributeMethod and derived attributes
@@ -121,7 +121,7 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             (attribute, httpMethod) => new object[] { ((string)attribute[0]).Replace(AttributePlaceholder, httpMethod), attribute[1], attribute[2] });
 
     public static IEnumerable<object[]> AspNetCore2xVersionsUnderTest =>
-        [["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [Constants.NuGetLatestVersion]];
+        [["2.0.4"] /* Latest 2.0.x */, ["2.2.0"] /* 2nd most used */, [TestConstants.NuGetLatestVersion]];
 
     private static IEnumerable<MetadataReference> AspNetCore2xReferences(string aspNetCoreVersion) =>
         NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreVersion)                       // For Controller

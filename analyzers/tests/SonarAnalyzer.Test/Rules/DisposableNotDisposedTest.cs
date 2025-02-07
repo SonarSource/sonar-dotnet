@@ -33,7 +33,7 @@ public class DisposableNotDisposedTest
     [TestMethod]
     public void DisposableNotDisposed_ILogger() =>
         builder.AddPaths("DisposableNotDisposed.ILogger.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion).ToArray())
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(TestConstants.NuGetLatestVersion).ToArray())
             .VerifyNoIssues();
 
 #if NET

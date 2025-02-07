@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataTestMethod]
         [DataRow("3.0.0")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_NUnit3(string testFwkVersion) =>
             builder
                 .AddPaths("TestClassShouldHaveTestMethod.NUnit3.cs")
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
             builder
                 .AddPaths("TestClassShouldHaveTestMethod.MsTest.cs")
@@ -57,8 +57,8 @@ namespace SonarAnalyzer.Test.Rules
             builder
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .AddPaths("TestClassShouldHaveTestMethod.CSharp9.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
-                .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                 .Verify();
 
         [DataTestMethod]
@@ -66,8 +66,8 @@ namespace SonarAnalyzer.Test.Rules
             builder
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .AddPaths("TestClassShouldHaveTestMethod.CSharp11.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
-                .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                 .Verify();
 
         [DataTestMethod]
@@ -75,8 +75,8 @@ namespace SonarAnalyzer.Test.Rules
             builder
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .AddPaths("TestClassShouldHaveTestMethod.CSharp12.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
-                .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                 .Verify();
 
 #endif

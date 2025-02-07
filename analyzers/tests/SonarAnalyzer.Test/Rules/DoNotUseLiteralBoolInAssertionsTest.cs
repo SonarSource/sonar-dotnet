@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(TestConstants.NuGetLatestVersion)]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
             builder.AddPaths("DoNotUseLiteralBoolInAssertions.MsTest.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))

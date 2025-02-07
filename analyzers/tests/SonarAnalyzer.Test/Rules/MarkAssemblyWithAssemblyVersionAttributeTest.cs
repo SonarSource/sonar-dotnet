@@ -94,5 +94,5 @@ public class MarkAssemblyWithAssemblyVersionAttributeTest
             .Verify();
 
     private static IEnumerable<MetadataReference> GetAspNetCoreRazorReferences() =>
-        NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime(Constants.NuGetLatestVersion);
+        NuGetMetadataReference.MicrosoftAspNetCoreMvcRazorRuntime(TestConstants.NuGetLatestVersion);
 }

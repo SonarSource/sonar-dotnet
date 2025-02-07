@@ -45,7 +45,7 @@ public static class MetadataReferenceFacade
 
     public static References MicrosoftExtensionsDependencyInjectionAbstractions =>
 #if NETFRAMEWORK
-        NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(Constants.DotNetCore220Version);
+        NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(TestConstants.DotNetCore220Version);
 #else
         new[] { AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions };
 #endif

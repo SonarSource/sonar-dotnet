@@ -52,9 +52,9 @@ public class PermissiveCorsTest
 
     private static IEnumerable<MetadataReference> AdditionalReferences =>
         NuGetMetadataReference.MicrosoftNetHttpHeaders("2.1.14")
-                              .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion))
-                              .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(Constants.NuGetLatestVersion))
-                              .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(Constants.NuGetLatestVersion))
+                              .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion))
+                              .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(TestConstants.NuGetLatestVersion))
+                              .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(TestConstants.NuGetLatestVersion))
                               .Concat(FrameworkMetadataReference.SystemWeb)
                               .Concat(FrameworkMetadataReference.SystemNetHttp);
 

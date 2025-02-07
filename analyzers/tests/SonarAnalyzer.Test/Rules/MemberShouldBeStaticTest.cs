@@ -25,7 +25,7 @@ public class MemberShouldBeStaticTest
 
     [DataTestMethod]
     [DataRow("1.0.0", "3.0.20105.1")]
-    [DataRow(Constants.NuGetLatestVersion, Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion, TestConstants.NuGetLatestVersion)]
     public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
         builder.AddPaths("MemberShouldBeStatic.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)

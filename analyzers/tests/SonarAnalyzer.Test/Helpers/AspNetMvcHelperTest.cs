@@ -23,7 +23,7 @@ public class AspNetMvcHelperTest
 {
     [DataTestMethod]
     [DataRow("3.0.20105.1")]
-    [DataRow(SonarAnalyzer.TestFramework.Common.Constants.NuGetLatestVersion)]
+    [DataRow(SonarAnalyzer.TestFramework.Common.TestConstants.NuGetLatestVersion)]
     public void Public_Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
     {
         const string code = @"
@@ -86,7 +86,7 @@ public abstract class Foo : System.Web.Mvc.Controller
 
     [DataTestMethod]
     [DataRow("3.0.20105.1")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void Controller_Methods_Are_EntryPoints(string aspNetMvcVersion)
     {
         const string code = @"
@@ -118,7 +118,7 @@ public class MyController : Controller
 
     [DataTestMethod]
     [DataRow("2.1.3")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void Methods_In_Classes_With_ControllerAttribute_Are_EntryPoints(string aspNetMvcVersion)
     {
         const string code = @"
@@ -141,7 +141,7 @@ public class Foo
 
     [DataTestMethod]
     [DataRow("2.1.3")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void Methods_In_Classes_With_NonControllerAttribute_Are_Not_EntryPoints(string aspNetMvcVersion)
     {
         const string code = @"
@@ -160,7 +160,7 @@ public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
 
     [DataTestMethod]
     [DataRow("2.1.3")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void Constructors_In_Classes_IsControllerMethod_Returns_False(string aspNetMvcVersion)
     {
         const string code = @"

@@ -18,7 +18,7 @@ using System.IO;
 
 namespace SonarAnalyzer.TestFramework.Common;
 
-public static class Constants
+public static class TestConstants
 {
     public const string NuGetLatestVersion = "LATEST";
     public const string DotNet9Preview7 = "9.0.0-preview.7.24405.7";

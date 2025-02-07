@@ -89,7 +89,7 @@ public class CookieShouldBeHttpOnlyTest
             .Verify();
 
     private static IEnumerable<MetadataReference> GetAdditionalReferences_NetCore() =>
-        NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(Constants.NuGetLatestVersion);
+        NuGetMetadataReference.MicrosoftAspNetCoreHttpFeatures(TestConstants.NuGetLatestVersion);
 
 #endif
 

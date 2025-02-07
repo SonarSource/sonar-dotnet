@@ -54,14 +54,14 @@ public class ExecutingSqlQueriesTest
         builderCS
             .AddPaths(@"ExecutingSqlQueries.OrmLite.cs")
             .AddReferences(MetadataReferenceFacade.SystemData)
-            .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(TestConstants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
     public void ExecutingSqlQueries_NHibernate_CS() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.NHibernate.cs")
-            .AddReferences(NuGetMetadataReference.NHibernate(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.NHibernate(TestConstants.NuGetLatestVersion))
             .Verify();
 
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
@@ -70,7 +70,7 @@ public class ExecutingSqlQueriesTest
     public void ExecutingSqlQueries_CS_Net46() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.Net46.cs")
-            .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
+            .AddReferences(GetReferencesNet46(TestConstants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
@@ -78,7 +78,7 @@ public class ExecutingSqlQueriesTest
         builderVB
             .AddPaths("ExecutingSqlQueries.Net46.vb")
             .WithOptions(LanguageOptions.FromVisualBasic15)
-            .AddReferences(GetReferencesNet46(Constants.NuGetLatestVersion))
+            .AddReferences(GetReferencesNet46(TestConstants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
@@ -130,7 +130,7 @@ public class ExecutingSqlQueriesTest
         builderCS.AddPaths("ExecutingSqlQueries.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
-            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+            .AddReferences(GetReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
             .Verify();
 
     [TestMethod]
@@ -138,7 +138,7 @@ public class ExecutingSqlQueriesTest
         builderVB
             .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.vb")
             .WithOptions(LanguageOptions.FromVisualBasic15)
-            .AddReferences(GetReferencesEntityFrameworkNetCore(Constants.DotNetCore220Version))
+            .AddReferences(GetReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version))
             .Verify();
 
     [TestMethod]

@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataTestMethod]
         [DataRow("1.1.11")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.MsTest.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataTestMethod]
         [DataRow("2.5.7.10213")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion) =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.NUnit.cs")
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataTestMethod]
         [DataRow("2.0.0")]
-        [DataRow(Constants.NuGetLatestVersion)]
+        [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion) =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.Xunit.cs")
                 .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion))
@@ -68,8 +68,8 @@ namespace SonarAnalyzer.Test.Rules
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.CSharp9.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1
-                    .Concat(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion))
-                    .Concat(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+                    .Concat(NuGetMetadataReference.XunitFramework(TestConstants.NuGetLatestVersion))
+                    .Concat(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                     .ToArray())
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();

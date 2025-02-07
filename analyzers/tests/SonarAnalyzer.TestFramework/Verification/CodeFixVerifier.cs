@@ -120,10 +120,10 @@ internal class CodeFixVerifier
 
         private string ActualCodeWithReplacedComments() =>
             ActualCode.ToUnixLineEndings()
-                .Split(new[] { Constants.UnixLineEnding }, StringSplitOptions.None)
+                .Split(new[] { TestConstants.UnixLineEnding }, StringSplitOptions.None)
                 .Where(x => !IssueLocationCollector.RxPreciseLocation.IsMatch(x))
                 .Select(ReplaceNonCompliantComment)
-                .JoinStr(Constants.UnixLineEnding);
+                .JoinStr(TestConstants.UnixLineEnding);
 
         private static string ReplaceNonCompliantComment(string line)
         {

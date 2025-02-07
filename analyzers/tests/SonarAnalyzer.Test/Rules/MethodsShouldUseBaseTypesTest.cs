@@ -71,7 +71,7 @@ internal class Bar
         [TestMethod]
         public void MethodsShouldUseBaseTypes_Controllers() =>
             builder.AddPaths("MethodsShouldUseBaseTypes.AspControllers.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(TestConstants.NuGetLatestVersion))
                 .Verify();
 #if NET
         [TestMethod]

@@ -62,7 +62,7 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
     [DataRow("Warning")]
     [DataRow("Verbose")]
     public void LoggingTemplatePlaceHoldersShouldBeInOrder_Serilog_CS(string methodName) =>
-        Builder.AddReferences(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion))
+        Builder.AddReferences(NuGetMetadataReference.Serilog(TestConstants.NuGetLatestVersion))
             .AddSnippet($$"""
                 using Serilog;
                 using Serilog.Events;
@@ -88,7 +88,7 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
     [DataRow("ConditionalTrace")]
     [DataRow("Warn")]
     public void LoggingTemplatePlaceHoldersShouldBeInOrder_NLog_CS(string methodName) =>
-        Builder.AddReferences(NuGetMetadataReference.NLog(Constants.NuGetLatestVersion))
+        Builder.AddReferences(NuGetMetadataReference.NLog(TestConstants.NuGetLatestVersion))
             .AddSnippet($$"""
                 using NLog;
 

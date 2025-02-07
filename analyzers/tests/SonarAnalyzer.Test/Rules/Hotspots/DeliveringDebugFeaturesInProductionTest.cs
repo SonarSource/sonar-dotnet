@@ -78,8 +78,8 @@ public class DeliveringDebugFeaturesInProductionTest
     internal static IEnumerable<MetadataReference> AdditionalReferencesForAspNetCore2 =>
         Enumerable.Empty<MetadataReference>()
                   .Concat(MetadataReferenceFacade.NetStandard)
-                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(Constants.DotNetCore220Version))
-                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(Constants.DotNetCore220Version))
-                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
-                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version));
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnostics(TestConstants.DotNetCore220Version))
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreDiagnosticsEntityFrameworkCore(TestConstants.DotNetCore220Version))
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(TestConstants.DotNetCore220Version))
+                  .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(TestConstants.DotNetCore220Version));
 }

@@ -32,13 +32,13 @@ public static class SdkPathProvider
     ];
 
     public static string LatestSdkFolder() =>
-        LatestFolder(Constants.SdkPath, "dotnet.dll");
+        LatestFolder(TestConstants.SdkPath, "dotnet.dll");
 
     public static string LatestAspNetCoreSdkFolder() =>
-        LatestFolder(Constants.AspNetCorePath, "Microsoft.AspNetCore.dll");
+        LatestFolder(TestConstants.AspNetCorePath, "Microsoft.AspNetCore.dll");
 
     public static string LatestWindowsDesktopSdkFolder() =>
-        LatestFolder(Constants.WindowsDesktopPath, "PresentationCore.dll");
+        LatestFolder(TestConstants.WindowsDesktopPath, "PresentationCore.dll");
 
     public static string LatestFolder(string path, string assemblyName)
     {

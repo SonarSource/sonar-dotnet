@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ConfiguringLoggers_AspNetCoreLatest_CS() =>
             builderCS.AddPaths("ConfiguringLoggers_AspNetCore6.cs")
-                .AddReferences(AspNetCoreLoggingReferences(Constants.NuGetLatestVersion))
+                .AddReferences(AspNetCoreLoggingReferences(TestConstants.NuGetLatestVersion))
                 .Verify();
 
         [TestMethod]
@@ -97,13 +97,13 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
         private static IEnumerable<MetadataReference> AspNetCore2LoggingReferences =>
             Enumerable.Empty<MetadataReference>()
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCore(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(Constants.DotNetCore220Version))
-                .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCore(TestConstants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHosting(TestConstants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHostingAbstractions(TestConstants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreHttpAbstractions(TestConstants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(TestConstants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsOptions(TestConstants.DotNetCore220Version))
+                .Concat(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(TestConstants.DotNetCore220Version))
                 .Concat(new[] { AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions });
 
         private static IEnumerable<MetadataReference> AspNetCoreLoggingReferences(string version) =>

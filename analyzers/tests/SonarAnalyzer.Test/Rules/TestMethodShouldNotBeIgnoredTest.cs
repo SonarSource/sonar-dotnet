@@ -31,7 +31,7 @@ public class TestMethodShouldNotBeIgnoredTest
 
     [DataTestMethod]
     [DataRow("1.2.0")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
         new VerifierBuilder<TestMethodShouldNotBeIgnored>()
             .AddPaths("TestMethodShouldNotBeIgnored.MsTest.cs")
@@ -63,13 +63,13 @@ public class TestMethodShouldNotBeIgnoredTest
 
     [DataTestMethod]
     [DataRow("3.0.0")] // Ignore without reason no longer exist
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion) =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.NUnit.cs").AddReferences(NuGetMetadataReference.NUnit(testFwkVersion)).Verify();
 
     [DataTestMethod]
     [DataRow("2.0.0")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.cs").AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion)).VerifyNoIssues();
 
@@ -83,14 +83,14 @@ public class TestMethodShouldNotBeIgnoredTest
     public void TestMethodShouldNotBeIgnored_CSharp9() =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp9.cs")
             .AddReferences(NuGetMetadataReference.XunitFrameworkV1)
-            .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
             .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
     [TestMethod]
     public void TestMethodShouldNotBeIgnored_CSharp11() =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp11.cs")
-            .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 

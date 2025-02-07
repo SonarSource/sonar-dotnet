@@ -27,7 +27,7 @@ public class LoggersShouldBeNamedForEnclosingTypeTest
     public void LoggersShouldBeNamedForEnclosingType_CS() =>
         Builder
             .AddPaths("LoggersShouldBeNamedForEnclosingType.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(Constants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(TestConstants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]

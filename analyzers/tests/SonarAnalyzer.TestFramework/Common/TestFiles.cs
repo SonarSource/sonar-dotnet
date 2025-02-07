@@ -21,7 +21,7 @@ namespace SonarAnalyzer.TestFramework.Common;
 public static class TestFiles
 {
     public static string ToUnixLineEndings(this string value) =>
-        value.Replace(Constants.WindowsLineEnding, Constants.UnixLineEnding);
+        value.Replace(TestConstants.WindowsLineEnding, TestConstants.UnixLineEnding);
 
     public static string TestPath(TestContext context, string fileName)
     {

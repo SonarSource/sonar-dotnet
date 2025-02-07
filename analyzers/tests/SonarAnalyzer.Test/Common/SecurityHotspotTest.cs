@@ -99,7 +99,7 @@ public class SecurityHotspotTest
             nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
             nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
-            nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(Constants.NuGetLatestVersion),
+            nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion),
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
             nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
             nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
@@ -113,7 +113,7 @@ public class SecurityHotspotTest
             nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
             nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else
-            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(Constants.NuGetLatestVersion),
+            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(TestConstants.NuGetLatestVersion),
 #endif
             _ => MetadataReferenceFacade.SystemNetHttp
                                         .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)

@@ -309,7 +309,7 @@ public class KnownAssemblyTest
 
     [TestMethod]
     public void Serilog_Latest() =>
-        CompilationShouldReference(NuGetMetadataReference.Serilog(Constants.NuGetLatestVersion), Serilog);
+        CompilationShouldReference(NuGetMetadataReference.Serilog(TestConstants.NuGetLatestVersion), Serilog);
 
     [TestMethod]
     public void NLog_Latest() =>

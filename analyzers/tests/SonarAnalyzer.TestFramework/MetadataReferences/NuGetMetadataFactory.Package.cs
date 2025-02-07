@@ -39,7 +39,7 @@ internal static partial class NuGetMetadataFactory
         {
             Id = id;
             this.runtime = runtime;
-            this.version = version == Constants.NuGetLatestVersion
+            this.version = version == TestConstants.NuGetLatestVersion
                 ? GetLatestVersion().Result
                 : version;
         }

@@ -26,7 +26,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
 
     [DataTestMethod]
     [DataRow("1.1.11")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
         builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
@@ -34,7 +34,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
 
     [TestMethod]
     public void AssertionArgsShouldBePassedInCorrectOrder_MsTest_Static() =>
-        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).AddSnippet("""
+        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion)).AddSnippet("""
             using static Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
             var str = "";
             AreEqual(str, ""); // Noncompliant

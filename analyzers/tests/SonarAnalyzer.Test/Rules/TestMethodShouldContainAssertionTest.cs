@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class TestMethodShouldContainAssertionTest
 {
-    private const string Latest = Constants.NuGetLatestVersion; // Rename only
+    private const string Latest = TestConstants.NuGetLatestVersion; // Rename only
 
     private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldContainAssertion>();
 

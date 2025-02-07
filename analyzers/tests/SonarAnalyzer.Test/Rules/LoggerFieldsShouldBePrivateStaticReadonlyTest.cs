@@ -115,7 +115,7 @@ public class LoggerFieldsShouldBePrivateStaticReadonlyTest
                     public MyLogger(string name) : base(name) { }
                 }
                 """)
-            .AddReferences(NuGetMetadataReference.Log4Net(Constants.NuGetLatestVersion, "netstandard2.0"))
+            .AddReferences(NuGetMetadataReference.Log4Net(TestConstants.NuGetLatestVersion, "netstandard2.0"))
             .Verify();
 
     [TestMethod]

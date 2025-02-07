@@ -50,7 +50,7 @@ public class UriShouldNotBeHardcodedTest
 
     [DataTestMethod]
     [DataRow("3.0.20105.1")]
-    [DataRow(Constants.NuGetLatestVersion)]
+    [DataRow(TestConstants.NuGetLatestVersion)]
     public void UriShouldNotBeHardcoded_CS_VirtualPath_AspNet(string aspNetMvcVersion) =>
         builderCS
             .AddPaths("UriShouldNotBeHardcoded.AspNet.cs")

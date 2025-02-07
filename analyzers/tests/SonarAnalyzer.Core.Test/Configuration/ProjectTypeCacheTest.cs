@@ -50,27 +50,27 @@ public class ProjectTypeCacheTest
     [TestMethod]
     public void IsTest_ReturnsTrueForTestFrameworks()
     {
-        IsTest(NuGetMetadataReference.JetBrainsDotMemoryUnit(Constants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.JetBrainsDotMemoryUnit(TestConstants.NuGetLatestVersion)).Should().BeTrue();
         IsTest(NuGetMetadataReference.MSTestTestFrameworkV1).Should().BeTrue();
-        IsTest(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion)).Should().BeTrue();
         IsTest(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework).Should().BeTrue();
-        IsTest(NuGetMetadataReference.MachineSpecifications(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.NUnitLite(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.SpecFlow(Constants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.MachineSpecifications(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.NUnitLite(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.SpecFlow(TestConstants.NuGetLatestVersion)).Should().BeTrue();
         IsTest(NuGetMetadataReference.XunitFrameworkV1).Should().BeTrue();
-        IsTest(NuGetMetadataReference.XunitFramework(Constants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.XunitFramework(TestConstants.NuGetLatestVersion)).Should().BeTrue();
 
         // Assertion
-        IsTest(NuGetMetadataReference.FluentAssertions(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.Shouldly(Constants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.FluentAssertions(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.Shouldly(TestConstants.NuGetLatestVersion)).Should().BeTrue();
 
         // Mock
-        IsTest(NuGetMetadataReference.FakeItEasy(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.JustMock(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.Moq(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.NSubstitute(Constants.NuGetLatestVersion)).Should().BeTrue();
-        IsTest(NuGetMetadataReference.RhinoMocks(Constants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.FakeItEasy(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.JustMock(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.Moq(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.NSubstitute(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.RhinoMocks(TestConstants.NuGetLatestVersion)).Should().BeTrue();
     }
 
     [TestMethod]
@@ -78,7 +78,7 @@ public class ProjectTypeCacheTest
     {
         IsTest(null).Should().BeFalse();
         // Any non-test reference
-        IsTest(NuGetMetadataReference.SystemValueTuple(Constants.NuGetLatestVersion)).Should().BeFalse();
+        IsTest(NuGetMetadataReference.SystemValueTuple(TestConstants.NuGetLatestVersion)).Should().BeFalse();
     }
 
     [TestMethod]

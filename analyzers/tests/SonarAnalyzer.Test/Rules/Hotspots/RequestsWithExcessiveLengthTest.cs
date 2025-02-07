@@ -153,8 +153,8 @@ namespace SonarAnalyzer.Test.Rules
         }
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(Constants.NuGetLatestVersion)
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(Constants.NuGetLatestVersion));
+            NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(TestConstants.NuGetLatestVersion)
+                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(TestConstants.NuGetLatestVersion));
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
 

@@ -24,13 +24,13 @@ namespace SonarAnalyzer.Test.Rules;
 public class TestsShouldNotUseThreadSleepTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.TestsShouldNotUseThreadSleep>()
-        .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
-        .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
         .AddReferences(NuGetMetadataReference.XunitFramework(XUnitVersions.Ver253));
 
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.TestsShouldNotUseThreadSleep>()
-        .AddReferences(NuGetMetadataReference.NUnit(Constants.NuGetLatestVersion))
-        .AddReferences(NuGetMetadataReference.MSTestTestFramework(Constants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
+        .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
         .AddReferences(NuGetMetadataReference.XunitFramework(XUnitVersions.Ver253));
 
     [TestMethod]
