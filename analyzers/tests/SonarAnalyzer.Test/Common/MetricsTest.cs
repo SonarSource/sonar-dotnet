@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Common;
+using SonarAnalyzer.Core.Metrics;
 using SonarAnalyzer.CSharp.Metrics;
 using SonarAnalyzer.VisualBasic.Metrics;
 

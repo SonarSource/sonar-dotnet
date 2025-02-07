@@ -16,8 +16,8 @@
 
 using System.Collections;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Json;
-using SonarAnalyzer.Json.Parsing;
+using SonarAnalyzer.Core.Json;
+using SonarAnalyzer.Core.Json.Parsing;
 
 namespace SonarAnalyzer.Core.Test.Json;
 

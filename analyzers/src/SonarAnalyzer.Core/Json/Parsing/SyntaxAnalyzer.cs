@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Json.Parsing;
+namespace SonarAnalyzer.Core.Json.Parsing;
 
 internal class SyntaxAnalyzer
 {

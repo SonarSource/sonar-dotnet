@@ -15,8 +15,8 @@
  */
 
 using System.Linq.Expressions;
-using SonarAnalyzer.Json;
-using SonarAnalyzer.Json.Parsing;
+using SonarAnalyzer.Core.Json;
+using SonarAnalyzer.Core.Json.Parsing;
 
 namespace SonarAnalyzer.Core.Test.Json;
 

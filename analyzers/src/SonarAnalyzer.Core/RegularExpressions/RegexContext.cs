@@ -16,7 +16,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.RegularExpressions;
+namespace SonarAnalyzer.Core.RegularExpressions;
 
 internal sealed class RegexContext
 {

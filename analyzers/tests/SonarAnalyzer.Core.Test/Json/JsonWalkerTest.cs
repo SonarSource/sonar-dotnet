@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Json;
+using SonarAnalyzer.Core.Json;
 
 namespace SonarAnalyzer.Core.Test.Json;
 

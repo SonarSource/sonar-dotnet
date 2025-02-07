@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Json.Parsing;
+namespace SonarAnalyzer.Core.Json.Parsing;
 
 public enum Kind
 {

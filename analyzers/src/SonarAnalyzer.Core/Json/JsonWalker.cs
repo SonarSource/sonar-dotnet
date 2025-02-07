@@ -14,9 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Json.Parsing;
+using SonarAnalyzer.Core.Json.Parsing;
 
-namespace SonarAnalyzer.Json;
+namespace SonarAnalyzer.Core.Json;
 
 public class JsonWalker
 {

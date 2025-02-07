@@ -17,8 +17,8 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
-using SonarAnalyzer.Json;
-using SonarAnalyzer.Json.Parsing;
+using SonarAnalyzer.Core.Json;
+using SonarAnalyzer.Core.Json.Parsing;
 
 namespace SonarAnalyzer.Core.Rules;
 

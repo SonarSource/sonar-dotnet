@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Common;
+namespace SonarAnalyzer.Core.Metrics;
 
 public abstract class MetricsBase
 {
@@ -61,7 +61,7 @@ public abstract class MetricsBase
         foreach (var trivia in tree.GetRoot().DescendantTrivia())
         {
             if (!IsCommentTrivia(trivia)
-                || (ignoreHeaderComments && IsNoneToken(trivia.Token.GetPreviousToken())))
+                || ignoreHeaderComments && IsNoneToken(trivia.Token.GetPreviousToken()))
             {
                 continue;
             }

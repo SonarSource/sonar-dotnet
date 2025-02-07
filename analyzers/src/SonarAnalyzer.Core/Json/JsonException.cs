@@ -18,7 +18,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Json;
+namespace SonarAnalyzer.Core.Json;
 
 [Serializable]
 public sealed class JsonException : Exception

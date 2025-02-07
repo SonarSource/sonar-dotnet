@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.RegularExpressions;
+using SonarAnalyzer.Core.RegularExpressions;
 
 namespace SonarAnalyzer.Core.Rules;
 

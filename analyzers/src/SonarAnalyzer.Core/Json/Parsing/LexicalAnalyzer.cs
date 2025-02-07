@@ -14,12 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System;
 using System.Globalization;
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Json.Parsing;
+namespace SonarAnalyzer.Core.Json.Parsing;
 
 internal class LexicalAnalyzer
 {

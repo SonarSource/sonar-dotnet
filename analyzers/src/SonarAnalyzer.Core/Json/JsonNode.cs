@@ -16,9 +16,9 @@
 
 using System.Collections;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Json.Parsing;
+using SonarAnalyzer.Core.Json.Parsing;
 
-namespace SonarAnalyzer.Json;
+namespace SonarAnalyzer.Core.Json;
 
 public sealed class JsonNode : IEnumerable<JsonNode>
 {
