@@ -14,7 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Test.Helpers;
 using CS = SonarAnalyzer.Rules.CSharp;
 using VB = SonarAnalyzer.Rules.VisualBasic;
 

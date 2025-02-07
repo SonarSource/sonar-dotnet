@@ -14,7 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.IO;
 using System.Reflection;
 
 namespace SonarAnalyzer.TestFramework.Common;

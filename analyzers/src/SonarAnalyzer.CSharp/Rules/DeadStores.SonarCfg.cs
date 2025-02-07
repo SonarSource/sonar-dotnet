@@ -17,7 +17,6 @@
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
-using SonarAnalyzer.CSharp.Walkers;
 
 namespace SonarAnalyzer.Rules.CSharp
 {

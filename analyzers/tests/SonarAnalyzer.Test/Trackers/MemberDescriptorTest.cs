@@ -14,7 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using NSubstitute;
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;

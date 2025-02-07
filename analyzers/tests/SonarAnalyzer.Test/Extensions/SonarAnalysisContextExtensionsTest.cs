@@ -14,7 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using NSubstitute;
 using SonarAnalyzer.Core.AnalysisContext;
 using ExtensionsCS = SonarAnalyzer.CSharp.Core.Extensions.SonarAnalysisContextExtensions;
 using ExtensionsVB = SonarAnalyzer.VisualBasic.Core.Extensions.SonarAnalysisContextExtensions;

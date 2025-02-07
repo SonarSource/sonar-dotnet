@@ -15,7 +15,6 @@
  */
 
 using System.Collections;
-using System.IO;
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 

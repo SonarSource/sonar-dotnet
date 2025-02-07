@@ -16,7 +16,6 @@
 
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Roslyn;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test.CFG.Roslyn;
 

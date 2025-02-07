@@ -14,7 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Text;
 using NodeAndSymbol = SonarAnalyzer.Core.Common.NodeAndSymbol<Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax, Microsoft.CodeAnalysis.IParameterSymbol>;
 

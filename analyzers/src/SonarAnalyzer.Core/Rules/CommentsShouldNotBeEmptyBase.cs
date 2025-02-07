@@ -14,9 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.Linq;
-using Microsoft.CodeAnalysis.Text;
-
 namespace SonarAnalyzer.Core.Rules;
 
 public abstract class CommentsShouldNotBeEmptyBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>

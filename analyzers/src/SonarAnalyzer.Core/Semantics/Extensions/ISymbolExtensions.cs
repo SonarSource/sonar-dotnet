@@ -15,7 +15,6 @@
  */
 
 using System.Diagnostics.CodeAnalysis;
-using SonarAnalyzer.Core.Syntax.Extensions;
 
 namespace SonarAnalyzer.Core.Semantics.Extensions;
 

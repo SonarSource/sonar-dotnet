@@ -15,7 +15,6 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Helpers;
 
 namespace SonarAnalyzer.VisualBasic.Core.Test.Syntax.Extensions;
 

@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.IO;
-
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 internal sealed record VerificationMessage(string ShortDescription, string FullDescription, string FilePath, int LineNumber)

@@ -15,7 +15,6 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
-using NSubstitute;
 using static SonarAnalyzer.Core.Common.AnalyzerConfiguration;
 
 namespace SonarAnalyzer.Core.Test.Common;

@@ -15,7 +15,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.CFG.Sonar;
 
 namespace SonarAnalyzer.CFG;

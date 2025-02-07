@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG.Extensions;
-
 namespace SonarAnalyzer.Rules.CSharp
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

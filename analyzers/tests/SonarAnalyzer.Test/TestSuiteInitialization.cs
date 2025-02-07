@@ -16,7 +16,6 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Test.Helpers;
 
 namespace SonarAnalyzer.Test;
 

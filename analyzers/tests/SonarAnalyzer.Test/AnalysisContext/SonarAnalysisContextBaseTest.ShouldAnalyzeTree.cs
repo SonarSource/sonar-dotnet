@@ -16,8 +16,6 @@
 
 using System.Text;
 using Microsoft.CodeAnalysis.Text;
-using NSubstitute;
-using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.Core.Syntax.Utilities;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;

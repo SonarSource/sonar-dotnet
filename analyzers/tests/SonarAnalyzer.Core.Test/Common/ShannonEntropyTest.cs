@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Core.Common;
-
 namespace SonarAnalyzer.Core.Test.Common;
 
 [TestClass]

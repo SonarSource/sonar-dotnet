@@ -15,7 +15,6 @@
  */
 
 using System.IO;
-using NSubstitute.ExceptionExtensions;
 
 namespace SonarAnalyzer.TestFramework.Test.Common;
 

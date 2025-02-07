@@ -15,7 +15,6 @@
  */
 
 using System.IO;
-using NSubstitute;
 using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using SonarAnalyzer.Rules.CSharp;
