@@ -15,10 +15,8 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.CFG;
-using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.Test.CFG.Sonar;
+namespace SonarAnalyzer.CFG.Sonar.Test;
 
 [TestClass]
 public class SonarCfgSerializerTest

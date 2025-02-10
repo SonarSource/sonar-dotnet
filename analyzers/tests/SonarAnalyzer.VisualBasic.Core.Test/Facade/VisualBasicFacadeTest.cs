@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Core.Test.Facade;
+namespace SonarAnalyzer.VisualBasic.Core.Facade.Test;
 
 [TestClass]
 public class VisualBasicFacadeTest

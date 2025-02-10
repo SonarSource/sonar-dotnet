@@ -15,9 +15,8 @@
  */
 
 using SonarAnalyzer.Core.Trackers;
-using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Core.Test.Trackers;
+namespace SonarAnalyzer.CSharp.Core.Trackers.Test;
 
 [TestClass]
 public class FieldAccessTrackerTest

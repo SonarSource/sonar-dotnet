@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.Diagnostics;
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Common;
+namespace SonarAnalyzer.CSharp.Styling.Common.Test;
 
 public static class StylingVerifierBuilder
 {

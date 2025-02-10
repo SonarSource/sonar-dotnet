@@ -17,7 +17,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Metrics;
 
-namespace SonarAnalyzer.Test.Common;
+namespace SonarAnalyzer.Metrics.Test;
 
 [TestClass]
 public class CSharpExecutableLinesMetricTest

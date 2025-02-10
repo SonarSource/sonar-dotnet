@@ -17,11 +17,10 @@
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Common;
 using SonarAnalyzer.CFG.Extensions;
-using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 
-namespace SonarAnalyzer.Test.CFG.Roslyn;
+namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]
 public class RoslynControlFlowGraphTest

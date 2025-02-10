@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.VisualBasic.Metrics;
 
-namespace SonarAnalyzer.Test.Common;
+namespace SonarAnalyzer.Metrics.Test;
 
 [TestClass]
 public class VisualBasicExecutableLinesMetricTest

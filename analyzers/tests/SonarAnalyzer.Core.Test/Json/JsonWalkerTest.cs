@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Core.Json;
-
-namespace SonarAnalyzer.Core.Test.Json;
+namespace SonarAnalyzer.Core.Json.Test;
 
 [TestClass]
 public class JsonWalkerTest

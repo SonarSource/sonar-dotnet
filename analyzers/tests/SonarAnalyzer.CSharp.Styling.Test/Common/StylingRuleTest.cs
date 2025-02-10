@@ -18,7 +18,7 @@ using FluentAssertions;
 using Microsoft.CodeAnalysis.Diagnostics;
 using SonarAnalyzer.CSharp.Styling.Common;
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+namespace SonarAnalyzer.CSharp.Styling.Rules.Test;
 
 [TestClass]
 public class StylingRuleTest

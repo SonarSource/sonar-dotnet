@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG.Roslyn;
-
-namespace SonarAnalyzer.Test.CFG.Roslyn;
+namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]
 public class ControlFlowRegionTest

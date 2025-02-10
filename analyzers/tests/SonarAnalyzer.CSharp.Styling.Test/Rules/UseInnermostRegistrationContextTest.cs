@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis;
 using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.TestFramework.MetadataReferences;
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+namespace SonarAnalyzer.CSharp.Styling.Rules.Test;
 
 [TestClass]
 public class UseInnermostRegistrationContextTest

@@ -16,9 +16,8 @@
 
 using System.IO;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Core.Configuration;
 
-namespace SonarAnalyzer.Core.Test.Configuration;
+namespace SonarAnalyzer.Core.Configuration.Test;
 
 [TestClass]
 public class ProjectConfigReaderTest

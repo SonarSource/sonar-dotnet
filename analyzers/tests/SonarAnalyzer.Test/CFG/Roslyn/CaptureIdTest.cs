@@ -14,11 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG.Roslyn;
 using StyleCop.Analyzers.Lightup;
 using IFlowCaptureReferenceOperation = Microsoft.CodeAnalysis.FlowAnalysis.IFlowCaptureReferenceOperation;
 
-namespace SonarAnalyzer.Test.CFG.Roslyn;
+namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]
 public class CaptureIdTest

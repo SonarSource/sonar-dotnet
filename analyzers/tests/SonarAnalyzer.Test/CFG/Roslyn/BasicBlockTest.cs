@@ -15,9 +15,8 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
-using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Test.CFG.Roslyn;
+namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]
 public class BasicBlockTest

@@ -15,9 +15,8 @@
  */
 
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Core.RegularExpressions;
 
-namespace SonarAnalyzer.Core.Test.RegularExpressions;
+namespace SonarAnalyzer.Core.RegularExpressions.Test;
 
 [TestClass]
 public class RegexContextTest

@@ -17,8 +17,8 @@
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
+using SonarAnalyzer.CFG.Sonar.Test;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
-using SonarAnalyzer.Test.CFG.Sonar;
 using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;

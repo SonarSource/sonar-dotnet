@@ -16,9 +16,8 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Core.Syntax.Extensions;
 
-namespace SonarAnalyzer.Core.Test.Syntax.Extensions;
+namespace SonarAnalyzer.Core.Syntax.Extensions.Test;
 
 [TestClass]
 public class LocationExtensionsTest

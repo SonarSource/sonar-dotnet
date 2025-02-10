@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.VisualBasic.Core.Test.Syntax.Extensions;
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions.Test;
 
 [TestClass]
 public class InvocationExpressionSyntaxExtensionsTest

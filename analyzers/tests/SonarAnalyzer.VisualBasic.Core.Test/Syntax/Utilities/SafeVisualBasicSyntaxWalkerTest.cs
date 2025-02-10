@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Core.Test.Syntax.Utilities;
+namespace SonarAnalyzer.VisualBasic.Core.Syntax.Utilities.Test;
 
 [TestClass]
 public class SafeVisualBasicSyntaxWalkerTest

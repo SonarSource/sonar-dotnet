@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG;
-
-namespace SonarAnalyzer.Test.CFG.Sonar;
+namespace SonarAnalyzer.CFG.Sonar.Test;
 
 [TestClass]
 public class RoslynCfgSerializerTest

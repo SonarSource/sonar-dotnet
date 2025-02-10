@@ -15,9 +15,8 @@
  */
 
 using System.IO;
-using SonarAnalyzer.Core.Configuration;
 
-namespace SonarAnalyzer.Core.Test.Configuration;
+namespace SonarAnalyzer.Core.Configuration.Test;
 
 [TestClass]
 public class AnalysisConfigReaderTest

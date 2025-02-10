@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.VisualBasic.Core.Facade.Implementation;
-
-namespace SonarAnalyzer.VisualBasic.Core.Test.Facade.Implementation;
+namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation.Test;
 
 [TestClass]
 public class VisualBasicSyntaxFacadeTest

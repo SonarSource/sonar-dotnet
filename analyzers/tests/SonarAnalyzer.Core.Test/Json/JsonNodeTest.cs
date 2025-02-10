@@ -16,10 +16,9 @@
 
 using System.Collections;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Core.Json;
 using SonarAnalyzer.Core.Json.Parsing;
 
-namespace SonarAnalyzer.Core.Test.Json;
+namespace SonarAnalyzer.Core.Json.Test;
 
 [TestClass]
 public class JsonNodeTest

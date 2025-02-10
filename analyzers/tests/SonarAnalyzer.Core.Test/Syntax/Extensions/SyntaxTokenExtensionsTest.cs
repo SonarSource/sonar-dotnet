@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Core.Syntax.Extensions;
-
-namespace SonarAnalyzer.Core.Test.Syntax.Extensions;
+namespace SonarAnalyzer.Core.Syntax.Extensions.Test;
 
 [TestClass]
 public class SyntaxTokenExtensionsTest

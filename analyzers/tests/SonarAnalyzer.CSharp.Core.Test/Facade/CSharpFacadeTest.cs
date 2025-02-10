@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Core.Test.Facade;
+namespace SonarAnalyzer.CSharp.Core.Facade.Test;
 
 [TestClass]
 public class CSharpFacadeTest

@@ -15,10 +15,9 @@
  */
 
 using System.Globalization;
-using SonarAnalyzer.Core.Json;
 using SonarAnalyzer.Core.Json.Parsing;
 
-namespace SonarAnalyzer.Core.Test.Json;
+namespace SonarAnalyzer.Core.Json.Test;
 
 [TestClass]
 public class LexicalAnalyzerTest

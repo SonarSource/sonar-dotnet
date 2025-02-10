@@ -16,11 +16,9 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.CFG;
-using SonarAnalyzer.CFG.Sonar;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Test.CFG.Sonar
+namespace SonarAnalyzer.CFG.Sonar.Test
 {
     [TestClass]
     public class SonarControlFlowGraphTest

@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.TestFramework.Common;
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+namespace SonarAnalyzer.CSharp.Styling.Rules.Test;
 
 [TestClass]
 public class FileScopeNamespaceTest

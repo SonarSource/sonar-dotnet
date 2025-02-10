@@ -22,7 +22,7 @@
   <ItemGroup>
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.Core.Configuration" />
-    <Using Include="SonarAnalyzer.CSharp.Styling.Test.Common" />
+    <Using Include="SonarAnalyzer.CSharp.Styling.Common.Test" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Rules" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.Verification" />

@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Styling.Test.Rules;
+namespace SonarAnalyzer.CSharp.Styling.Rules.Test;
 
 [TestClass]
 public class MemberVisibilityOrderingTest

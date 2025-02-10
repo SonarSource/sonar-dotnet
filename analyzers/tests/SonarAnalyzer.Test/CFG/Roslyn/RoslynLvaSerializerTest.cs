@@ -14,11 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 
-namespace SonarAnalyzer.Test.CFG.Roslyn;
+namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]
 public class RoslynLvaSerializerTest
