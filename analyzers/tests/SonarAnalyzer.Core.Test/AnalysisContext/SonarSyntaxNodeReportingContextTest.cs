@@ -15,10 +15,9 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Core.AnalysisContext;
 using StyleCop.Analyzers.Lightup;
 
-namespace SonarAnalyzer.Core.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext.Test;
 
 [TestClass]
 public class SonarSyntaxNodeReportingContextTest

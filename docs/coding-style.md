@@ -107,6 +107,8 @@ Unit tests for common C# and VB.NET rules should use two aliases `using CS = Son
 
 Unit tests for single language rule should not use alias nor language method suffix.
 
+Unit test namespaces should be the same as the tested production code, with a `.Test` suffix to avoid adding boring `using` statements, e.g. `SonarAnalyzer.Core.Test` project will have `SonarAnalyzer.Core.AnalysisContext.Test` to test classes from `AnalysisContext` namespace.
+
 Variable name `sut` (System Under Test) is recommended in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
 
 ## Multi-line statements

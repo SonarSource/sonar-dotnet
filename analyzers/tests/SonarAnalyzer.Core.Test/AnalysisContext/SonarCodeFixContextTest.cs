@@ -17,9 +17,8 @@
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.Core.AnalysisContext;
 
-namespace SonarAnalyzer.Core.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext.Test;
 
 [TestClass]
 public class SonarCodeFixContextTest

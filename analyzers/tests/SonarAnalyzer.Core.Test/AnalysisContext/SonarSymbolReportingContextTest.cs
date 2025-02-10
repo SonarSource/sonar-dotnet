@@ -16,9 +16,8 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.Core.AnalysisContext;
 
-namespace SonarAnalyzer.Core.Test.AnalysisContext;
+namespace SonarAnalyzer.Core.AnalysisContext.Test;
 
 [TestClass]
 public class SonarSymbolReportingContextTest
