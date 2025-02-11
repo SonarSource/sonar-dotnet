@@ -15,10 +15,10 @@
  */
 
 #if NET
-using CS = SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.CSharp.Rules;
 #else
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.CSharp.Rules;
+using VB = SonarAnalyzer.VisualBasic.Rules;
 #endif
 
 namespace SonarAnalyzer.Test.Rules;

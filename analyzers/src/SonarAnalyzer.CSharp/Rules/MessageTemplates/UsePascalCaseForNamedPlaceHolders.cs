@@ -16,7 +16,7 @@
 
 using static SonarAnalyzer.Helpers.MessageTemplatesParser;
 
-namespace SonarAnalyzer.Rules.MessageTemplates;
+namespace SonarAnalyzer.CSharp.Rules.MessageTemplates;
 
 public sealed class UsePascalCaseForNamedPlaceHolders : IMessageTemplateCheck
 {

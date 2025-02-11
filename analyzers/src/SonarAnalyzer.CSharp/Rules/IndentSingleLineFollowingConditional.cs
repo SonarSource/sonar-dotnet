@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     // Note: this rule only covers the indentation of the first line after a conditional.
     // Rule 2681 covers the misleading indentation of other lines of multiline blocks (https://jira.sonarsource.com/browse/RSPEC-2681)

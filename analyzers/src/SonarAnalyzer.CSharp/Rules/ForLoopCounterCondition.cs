@@ -16,7 +16,7 @@
 
 using System.Globalization;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class ForLoopCounterCondition : SonarDiagnosticAnalyzer

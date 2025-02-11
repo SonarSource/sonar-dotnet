@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class LdapConnectionShouldBeSecure : ObjectShouldBeInitializedCorrectlyBase

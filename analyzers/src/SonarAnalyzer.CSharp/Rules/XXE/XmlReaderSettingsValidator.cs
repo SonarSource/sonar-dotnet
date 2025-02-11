@@ -16,7 +16,7 @@
 
 using System.Xml;
 
-namespace SonarAnalyzer.Rules.XXE
+namespace SonarAnalyzer.CSharp.Rules.XXE
 {
     /// <summary>
     /// This class is responsible to check if a XmlReaderSettings node is vulnerable to XXE attacks.

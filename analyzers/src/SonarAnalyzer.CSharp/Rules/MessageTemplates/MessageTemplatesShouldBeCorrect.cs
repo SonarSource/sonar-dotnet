@@ -15,9 +15,9 @@
  */
 
 using System.Text.RegularExpressions;
-using SonarAnalyzer.Rules.MessageTemplates;
+using SonarAnalyzer.CSharp.Rules.MessageTemplates;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MessageTemplatesShouldBeCorrect : SonarDiagnosticAnalyzer

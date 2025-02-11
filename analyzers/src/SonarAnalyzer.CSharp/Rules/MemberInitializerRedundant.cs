@@ -18,7 +18,7 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 using SymbolWithInitializer = System.Collections.Generic.KeyValuePair<Microsoft.CodeAnalysis.ISymbol, Microsoft.CodeAnalysis.CSharp.Syntax.EqualsValueClauseSyntax>;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer

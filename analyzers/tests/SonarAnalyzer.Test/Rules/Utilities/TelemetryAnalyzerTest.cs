@@ -18,8 +18,8 @@ using System.IO;
 using Microsoft.CodeAnalysis.Text;
 using CodeAnalysisCS = Microsoft.CodeAnalysis.CSharp;
 using CodeAnalysisVB = Microsoft.CodeAnalysis.VisualBasic;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.CSharp.Rules;
+using VB = SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
 

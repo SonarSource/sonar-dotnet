@@ -19,7 +19,7 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MethodParameterUnused : MethodParameterUnusedBase

@@ -18,8 +18,8 @@ using System.IO;
 using SonarAnalyzer.CFG.Common;
 using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.Core.Rules;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.CSharp.Rules;
+using VB = SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
 

@@ -17,7 +17,7 @@
 using FieldTuple = SonarAnalyzer.Core.Common.NodeSymbolAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.VariableDeclaratorSyntax, Microsoft.CodeAnalysis.IFieldSymbol>;
 using TypeDeclarationTuple = SonarAnalyzer.Core.Common.NodeAndModel<Microsoft.CodeAnalysis.CSharp.Syntax.TypeDeclarationSyntax>;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer

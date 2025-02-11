@@ -22,7 +22,7 @@ using SonarAnalyzer.Core.Json;
 using SonarAnalyzer.Core.Json.Parsing;
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class DatabasePasswordsShouldBeSecure : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>

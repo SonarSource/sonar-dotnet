@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     public partial class InfiniteRecursion
     {

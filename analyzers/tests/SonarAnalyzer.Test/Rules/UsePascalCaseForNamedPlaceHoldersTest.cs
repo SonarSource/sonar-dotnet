@@ -15,8 +15,8 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using SonarAnalyzer.Rules.CSharp;
-using SonarAnalyzer.Rules.MessageTemplates;
+using SonarAnalyzer.CSharp.Rules;
+using SonarAnalyzer.CSharp.Rules.MessageTemplates;
 
 namespace SonarAnalyzer.Test.Rules;
 

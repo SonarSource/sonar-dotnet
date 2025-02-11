@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.Shared.Extensions;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class DebuggerDisplayUsesExistingMembers : DebuggerDisplayUsesExistingMembersBase<AttributeArgumentSyntax, SyntaxKind>

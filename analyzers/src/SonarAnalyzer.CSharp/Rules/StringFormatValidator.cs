@@ -18,7 +18,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class StringFormatValidator : SonarDiagnosticAnalyzer

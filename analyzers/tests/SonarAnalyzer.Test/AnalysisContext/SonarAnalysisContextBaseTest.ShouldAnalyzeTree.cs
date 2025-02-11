@@ -19,8 +19,8 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Core.Syntax.Utilities;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using CS = SonarAnalyzer.CSharp.Rules;
+using VB = SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.AnalysisContext;
 

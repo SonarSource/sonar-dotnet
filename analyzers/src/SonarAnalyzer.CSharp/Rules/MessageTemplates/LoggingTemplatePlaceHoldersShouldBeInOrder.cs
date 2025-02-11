@@ -16,7 +16,7 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.Rules.MessageTemplates;
+namespace SonarAnalyzer.CSharp.Rules.MessageTemplates;
 
 public sealed class LoggingTemplatePlaceHoldersShouldBeInOrder : IMessageTemplateCheck
 {

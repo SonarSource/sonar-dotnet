@@ -17,8 +17,8 @@
 using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Core.Configuration;
+using SonarAnalyzer.CSharp.Rules;
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules.CSharp;
 using SonarAnalyzer.TestFramework.Verification;
 using static SonarAnalyzer.TestFramework.Verification.Verifier;
 
@@ -59,7 +59,7 @@ public class VerifierTest
 
     [TestMethod]
     public void Constructor_MixedLanguageAnalyzers_Throws() =>
-        DummyCS.AddAnalyzer(() => new SonarAnalyzer.Rules.VisualBasic.OptionStrictOn())
+        DummyCS.AddAnalyzer(() => new SonarAnalyzer.VisualBasic.Rules.OptionStrictOn())
             .Invoking(x => x.Build()).Should().Throw<ArgumentException>().WithMessage("All Analyzers must declare the same language in their DiagnosticAnalyzerAttribute.");
 
     [TestMethod]

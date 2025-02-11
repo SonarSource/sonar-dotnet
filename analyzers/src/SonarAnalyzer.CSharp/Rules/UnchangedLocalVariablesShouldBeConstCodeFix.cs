@@ -16,7 +16,7 @@
 
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [ExportCodeFixProvider(LanguageNames.CSharp)]
 public sealed class UnchangedLocalVariablesShouldBeConstCodeFix : SonarCodeFix

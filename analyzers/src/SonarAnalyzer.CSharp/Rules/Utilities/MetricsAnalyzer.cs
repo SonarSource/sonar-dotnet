@@ -17,7 +17,7 @@
 using SonarAnalyzer.Core.Metrics;
 using SonarAnalyzer.CSharp.Metrics;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class MetricsAnalyzer : MetricsAnalyzerBase<SyntaxKind>

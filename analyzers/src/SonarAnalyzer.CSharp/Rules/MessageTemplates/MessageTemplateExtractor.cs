@@ -16,7 +16,7 @@
 
 using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
 
-namespace SonarAnalyzer.Rules.MessageTemplates;
+namespace SonarAnalyzer.CSharp.Rules.MessageTemplates;
 
 internal static class MessageTemplateExtractor
 {

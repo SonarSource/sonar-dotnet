@@ -17,7 +17,7 @@
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CSharp.Metrics;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class CognitiveComplexity : CognitiveComplexityBase<SyntaxKind>

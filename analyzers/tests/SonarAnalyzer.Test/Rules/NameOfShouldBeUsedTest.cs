@@ -14,10 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using CS = SonarAnalyzer.Rules.CSharp;
+using CS = SonarAnalyzer.CSharp.Rules;
 using RoslynCS = Microsoft.CodeAnalysis.CSharp;
 using RoslynVB = Microsoft.CodeAnalysis.VisualBasic;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using VB = SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.Rules
 {

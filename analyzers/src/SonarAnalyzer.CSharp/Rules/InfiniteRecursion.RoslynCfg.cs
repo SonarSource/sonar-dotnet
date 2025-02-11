@@ -17,7 +17,7 @@
 using SonarAnalyzer.CFG.Roslyn;
 using CfgAllPathValidator = SonarAnalyzer.CFG.Roslyn.CfgAllPathValidator;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 public partial class InfiniteRecursion
 {

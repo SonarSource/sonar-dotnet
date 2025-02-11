@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.CFG.Extensions;
 
-namespace SonarAnalyzer.Rules.VisualBasic;
+namespace SonarAnalyzer.VisualBasic.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptionAttributeShouldNotBeUsedBase<SyntaxKind>

@@ -16,7 +16,7 @@
 
 using static Microsoft.CodeAnalysis.VisualBasic.SyntaxKind;
 
-namespace SonarAnalyzer.Rules.VisualBasic;
+namespace SonarAnalyzer.VisualBasic.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey : DateAndTimeShouldNotBeUsedasTypeForPrimaryKeyBase<SyntaxKind>

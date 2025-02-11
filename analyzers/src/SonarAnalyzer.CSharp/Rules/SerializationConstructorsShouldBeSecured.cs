@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [Obsolete("This rule has been deprecated since 9.14")]
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

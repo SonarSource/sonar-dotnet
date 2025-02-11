@@ -17,7 +17,7 @@
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class UnnecessaryBitwiseOperationCodeFix : UnnecessaryBitwiseOperationCodeFixBase

@@ -16,7 +16,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnalyzer

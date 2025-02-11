@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.Formatting;
 
-namespace SonarAnalyzer.Rules.VisualBasic;
+namespace SonarAnalyzer.VisualBasic.Rules;
 
 [ExportCodeFixProvider(LanguageNames.VisualBasic)]
 public sealed class MultipleVariableDeclarationCodeFix : MultipleVariableDeclarationCodeFixBase

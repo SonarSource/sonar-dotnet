@@ -18,7 +18,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.Protobuf;
-using static SonarAnalyzer.Rules.CSharp.TokenTypeAnalyzer;
+using static SonarAnalyzer.CSharp.Rules.TokenTypeAnalyzer;
 using Match = System.Text.RegularExpressions.Match;
 
 namespace SonarAnalyzer.Test.Rules;

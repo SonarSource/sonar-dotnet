@@ -19,7 +19,7 @@ using System.Xml.XPath;
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.Rules
+namespace SonarAnalyzer.CSharp.Rules
 {
     public abstract class ObjectShouldBeInitializedCorrectlyBase : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
     {

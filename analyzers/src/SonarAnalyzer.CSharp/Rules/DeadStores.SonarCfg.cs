@@ -18,7 +18,7 @@ using Microsoft.CodeAnalysis.Text;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     public partial class DeadStores : SonarDiagnosticAnalyzer
     {

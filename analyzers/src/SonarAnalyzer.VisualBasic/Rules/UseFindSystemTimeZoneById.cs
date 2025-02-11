@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.VisualBasic;
+namespace SonarAnalyzer.VisualBasic.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class UseFindSystemTimeZoneById : UseFindSystemTimeZoneByIdBase<SyntaxKind, InvocationExpressionSyntax>

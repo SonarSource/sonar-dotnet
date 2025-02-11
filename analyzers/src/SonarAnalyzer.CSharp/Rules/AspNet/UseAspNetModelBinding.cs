@@ -17,7 +17,7 @@
 using System.Collections.Concurrent;
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>

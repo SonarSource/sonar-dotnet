@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.CSharp.Walkers;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class ParameterValidationInAsyncShouldBeWrapped : SonarDiagnosticAnalyzer

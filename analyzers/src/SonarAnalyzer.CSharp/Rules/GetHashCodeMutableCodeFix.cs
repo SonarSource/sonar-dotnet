@@ -16,7 +16,7 @@
 
 using Microsoft.CodeAnalysis.Editing;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class GetHashCodeMutableCodeFix : SonarCodeFix

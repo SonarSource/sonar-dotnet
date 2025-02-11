@@ -17,7 +17,7 @@
 using Microsoft.CodeAnalysis.Text;
 using NodeAndSymbol = SonarAnalyzer.Core.Common.NodeAndSymbol<Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax, Microsoft.CodeAnalysis.IParameterSymbol>;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [ExportCodeFixProvider(LanguageNames.CSharp)]
     public sealed class RedundantArgumentCodeFix : SonarCodeFix

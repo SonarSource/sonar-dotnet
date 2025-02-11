@@ -16,7 +16,7 @@
 
 using System.Runtime.Serialization;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ImplementISerializableCorrectly : SonarDiagnosticAnalyzer

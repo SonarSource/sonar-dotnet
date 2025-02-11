@@ -17,7 +17,7 @@
 using Roslyn.Utilities;
 using SonarAnalyzer.Protobuf;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class TokenTypeAnalyzer : TokenTypeAnalyzerBase<SyntaxKind>

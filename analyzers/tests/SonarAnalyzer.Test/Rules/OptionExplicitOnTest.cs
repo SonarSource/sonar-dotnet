@@ -15,7 +15,7 @@
  */
 
 using Microsoft.CodeAnalysis.VisualBasic;
-using SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
 

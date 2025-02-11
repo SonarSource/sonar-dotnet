@@ -17,8 +17,8 @@
 using System.IO;
 using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.Core.Rules;
+using SonarAnalyzer.CSharp.Rules;
 using SonarAnalyzer.Protobuf;
-using SonarAnalyzer.Rules.CSharp;
 
 namespace SonarAnalyzer.Test.Rules
 {

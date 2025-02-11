@@ -15,7 +15,7 @@
  */
 
 using System.IO;
-using SonarAnalyzer.Rules.CSharp;
+using SonarAnalyzer.CSharp.Rules;
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]

@@ -14,9 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Rules.CSharp;
-using CS = SonarAnalyzer.Rules.CSharp;
-using VB = SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.CSharp.Rules;
+using CS = SonarAnalyzer.CSharp.Rules;
+using VB = SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.Rules
 {

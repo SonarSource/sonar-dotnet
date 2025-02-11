@@ -17,7 +17,7 @@
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     public partial class DeadStores : SonarDiagnosticAnalyzer
     {

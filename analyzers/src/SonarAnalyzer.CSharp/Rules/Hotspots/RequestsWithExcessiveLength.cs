@@ -14,14 +14,14 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class RequestsWithExcessiveLength : RequestsWithExcessiveLengthBase<SyntaxKind, AttributeSyntax>
     {
         protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public RequestsWithExcessiveLength() : this(Core.Common.AnalyzerConfiguration.Hotspot) { }
+        public RequestsWithExcessiveLength() : this(SonarAnalyzer.Core.Common.AnalyzerConfiguration.Hotspot) { }
 
         internal RequestsWithExcessiveLength(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
 

@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.VisualBasic.Metrics;
 
-namespace SonarAnalyzer.Rules.VisualBasic
+namespace SonarAnalyzer.VisualBasic.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
     public sealed class FunctionComplexity : FunctionComplexityBase

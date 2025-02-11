@@ -16,7 +16,7 @@
 
 using SonarAnalyzer.CFG.Roslyn;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     public sealed partial class MemberInitializerRedundant
     {

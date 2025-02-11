@@ -18,7 +18,7 @@ using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed partial class DeadStores : SonarDiagnosticAnalyzer

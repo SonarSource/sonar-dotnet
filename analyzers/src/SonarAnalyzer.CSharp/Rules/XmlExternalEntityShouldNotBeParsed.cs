@@ -16,9 +16,9 @@
 
 using System.Xml;
 using SonarAnalyzer.CSharp.Core.Trackers;
-using SonarAnalyzer.Rules.XXE;
+using SonarAnalyzer.CSharp.Rules.XXE;
 
-namespace SonarAnalyzer.Rules.CSharp
+namespace SonarAnalyzer.CSharp.Rules
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public sealed class XmlExternalEntityShouldNotBeParsed : SonarDiagnosticAnalyzer

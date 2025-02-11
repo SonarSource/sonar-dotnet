@@ -16,7 +16,7 @@
 
 using static Roslyn.Utilities.SonarAnalyzer.Shared.LoggingFrameworkMethods;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAnalyzer

@@ -201,13 +201,13 @@ public class TestMethodDeclarationsAnalyzerTest
 
     private string GetFilePath() => Path.Combine(BasePath, TestContext.TestName!);
 
-    private sealed class TestMetricsAnalyzerCSharp(string outPath, bool isTestProject) : SonarAnalyzer.Rules.CSharp.TestMethodDeclarationsAnalyzer
+    private sealed class TestMetricsAnalyzerCSharp(string outPath, bool isTestProject) : SonarAnalyzer.CSharp.Rules.TestMethodDeclarationsAnalyzer
     {
         protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };
     }
 
-    private sealed class TestMetricsAnalyzerVisualBasic(string outPath, bool isTestProject) : SonarAnalyzer.Rules.VisualBasic.TestMethodDeclarationsAnalyzer
+    private sealed class TestMetricsAnalyzerVisualBasic(string outPath, bool isTestProject) : SonarAnalyzer.VisualBasic.Rules.TestMethodDeclarationsAnalyzer
     {
         protected override UtilityAnalyzerParameters ReadParameters(IAnalysisContext context) =>
             base.ReadParameters(context) with { IsAnalyzerEnabled = true, OutPath = outPath, IsTestProject = isTestProject };

@@ -14,9 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Rules.MessageTemplates;
+using SonarAnalyzer.CSharp.Rules.MessageTemplates;
 
-namespace SonarAnalyzer.Rules.CSharp;
+namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
