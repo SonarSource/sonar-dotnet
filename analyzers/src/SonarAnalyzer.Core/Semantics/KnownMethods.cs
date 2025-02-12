@@ -14,11 +14,23 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Semantics;
 
 public static class KnownMethods
 {
     private const int NumberOfParamsForBinaryOperator = 2;
+
+    /// <summary>
+    /// List of partial names that are assumed to indicate an assertion method.
+    /// </summary>
+    public static readonly ImmutableArray<string> AssertionMethodParts = ImmutableArray.Create(
+            "ASSERT",
+            "CHECK",
+            "EXPECT",
+            "MUST",
+            "SHOULD",
+            "VERIFY",
+            "VALIDATE");
 
     public static bool IsMainMethod(this IMethodSymbol methodSymbol)
     {
@@ -44,7 +56,7 @@ public static class KnownMethods
     public static bool IsObjectEquals(this IMethodSymbol methodSymbol) =>
         methodSymbol is not null
             && methodSymbol.MethodKind == MethodKind.Ordinary
-            && methodSymbol.Name == nameof(object.Equals)
+            && methodSymbol.Name == nameof(Equals)
             && (methodSymbol.IsOverride || methodSymbol.IsInType(KnownType.System_Object))
             && methodSymbol.Parameters.Length == 1
             && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
@@ -56,7 +68,7 @@ public static class KnownMethods
             && !methodSymbol.IsOverride
             && methodSymbol.IsStatic
             && methodSymbol.MethodKind == MethodKind.Ordinary
-            && methodSymbol.Name == nameof(object.Equals)
+            && methodSymbol.Name == nameof(Equals)
             && methodSymbol.IsInType(KnownType.System_Object)
             && HasCorrectParameters()
             && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
@@ -113,7 +125,7 @@ public static class KnownMethods
     {
         const string explicitName = "System.IEquatable.Equals";
         return methodSymbol is not null
-            && (methodSymbol.Name == nameof(object.Equals) || methodSymbol.Name == explicitName)
+            && (methodSymbol.Name == nameof(Equals) || methodSymbol.Name == explicitName)
             && methodSymbol.Parameters.Length == 1
             && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
     }

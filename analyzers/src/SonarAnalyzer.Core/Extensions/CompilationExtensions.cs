@@ -53,4 +53,11 @@ internal static class CompilationExtensions
             ? memberSymbols.Any()
             : memberSymbols.Any(memberCheck);
     }
+
+    public static bool ReferencesNetCoreControllers(this Compilation compilation) =>
+        compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_Controller) is not null
+        || compilation.GetTypeByMetadataName(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) is not null;
+
+    public static bool ReferencesNetFrameworkControllers(this Compilation compilation) =>
+        compilation.GetTypeByMetadataName(KnownType.System_Web_Mvc_Controller) is not null;
 }

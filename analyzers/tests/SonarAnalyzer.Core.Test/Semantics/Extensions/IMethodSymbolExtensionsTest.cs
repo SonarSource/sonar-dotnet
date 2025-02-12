@@ -236,6 +236,132 @@ public class IMethodSymbolExtensionsTest
         methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
     }
 
+    [DataTestMethod]
+    [DataRow("3.0.20105.1")]
+    [DataRow(TestConstants.NuGetLatestVersion)]
+    public void IsControllerActionMethod_PublicControllerMethods_AreEntryPoints(string aspNetMvcVersion)
+    {
+        const string code = """
+            public abstract class Foo : System.Web.Mvc.Controller
+            {
+                public Foo() { }
+                public void PublicFoo() { }
+                protected void ProtectedFoo() { }
+                internal void InternalFoo() { }
+                private void PrivateFoo() { }
+                public static void StaticFoo() { }
+                public virtual void VirtualFoo() { }
+                public abstract void AbstractFoo();
+                public void InFoo(in string arg) { }
+                public void OutFoo(out string arg) { arg = null; }
+                public void RefFoo(ref string arg) { }
+                public void ReadonlyRefFoo(ref readonly string arg) { }
+                public void GenericFoo<T>(T arg) { }
+                private class Bar : System.Web.Mvc.Controller
+                {
+                    public void InnerFoo() { }
+                }
+                [System.Web.Mvc.NonActionAttribute]
+                public void PublicNonAction() { }
+            }
+            """;
+        var compilation = new SnippetCompiler(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+        compilation.GetTypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.GetMethodSymbol("Foo.ProtectedFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.InternalFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.PrivateFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.StaticFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.VirtualFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.GetMethodSymbol("Foo.AbstractFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.GetMethodSymbol("Foo.InFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.OutFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.ReadonlyRefFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.RefFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.GenericFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.InnerFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+    }
+
+    [DataTestMethod]
+    [DataRow("3.0.20105.1")]
+    [DataRow(TestConstants.NuGetLatestVersion)]
+    public void IsControllerActionMethod_ControllerMethods_AreEntryPoints(string aspNetMvcVersion)
+    {
+        const string code = """
+            public class Foo : System.Web.Mvc.Controller
+            {
+                public void PublicFoo() { }
+                [System.Web.Mvc.NonActionAttribute]
+                public void PublicNonAction() { }
+            }
+            public class Controller
+            {
+                public void PublicBar() { }
+            }
+            public class MyController : Controller
+            {
+                public void PublicDiz() { }
+            }
+            """;
+        var compilation = new SnippetCompiler(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
+        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.GetMethodSymbol("Controller.PublicBar").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("MyController.PublicDiz").IsControllerActionMethod().Should().BeFalse();
+        compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+    }
+
+    [DataTestMethod]
+    [DataRow("2.1.3")]
+    [DataRow(TestConstants.NuGetLatestVersion)]
+    public void IsControllerActionMethod_MethodsInClassesWithControllerAttribute_AreEntryPoints(string aspNetMvcVersion)
+    {
+        const string code = """
+            [Microsoft.AspNetCore.Mvc.ControllerAttribute]
+            public class Foo
+            {
+                public void PublicFoo() { }
+                [Microsoft.AspNetCore.Mvc.NonActionAttribute]
+                public void PublicNonAction() { }
+            }
+            """;
+        var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
+        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+    }
+
+    [DataTestMethod]
+    [DataRow("2.1.3")]
+    [DataRow(TestConstants.NuGetLatestVersion)]
+    public void IsControllerActionMethod_MethodsInClassesWithNonControllerAttribute_AreNotEntryPoints(string aspNetMvcVersion)
+    {
+        const string code = """
+            [Microsoft.AspNetCore.Mvc.NonControllerAttribute]
+            public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
+            {
+                public void PublicFoo() { }
+            }
+            """;
+        var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
+        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeFalse();
+    }
+
+    [DataTestMethod]
+    [DataRow("2.1.3")]
+    [DataRow(TestConstants.NuGetLatestVersion)]
+    public void IsControllerActionMethod_ConstructorsInClasses_AreNotEntryPoints(string aspNetMvcVersion)
+    {
+        const string code = """
+            [Microsoft.AspNetCore.Mvc.ControllerAttribute]
+            public class Foo : Microsoft.AspNetCore.Mvc.ControllerBase
+            {
+                public Foo() { }
+            }
+            """;
+        var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
+        compilation.GetTypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
+    }
+
     private IMethodSymbol GetMethodSymbolForIndex(int index)
     {
         var statement = (ExpressionStatementSyntax)statements[index];

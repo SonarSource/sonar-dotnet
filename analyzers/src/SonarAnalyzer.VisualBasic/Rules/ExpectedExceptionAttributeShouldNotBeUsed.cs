@@ -46,18 +46,7 @@ public sealed class ExpectedExceptionAttributeShouldNotBeUsed : ExpectedExceptio
     {
         public bool HasAssertion { get; set; }
 
-        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
-        {
-            if (HasAssertion)
-            {
-                return;
-            }
-
-            HasAssertion = node.Expression
-                .ToString()
-                .SplitCamelCaseToWords()
-                .Intersect(UnitTestHelper.KnownAssertionMethodParts)
-                .Any();
-        }
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node) =>
+            HasAssertion = HasAssertion || node.Expression.ToString().SplitCamelCaseToWords().Intersect(KnownMethods.AssertionMethodParts).Any();
     }
 }

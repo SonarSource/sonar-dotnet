@@ -30,7 +30,7 @@ public static class SyntaxNodeExtensions
         model.GetDeclaredSymbol(node)?.GetSymbolType().Is(knownType) ?? false;
 
     public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel model) =>
-        node.SyntaxTree.GetSemanticModelOrDefault(model);
+        node.SyntaxTree.SemanticModelOrDefault(model);
 
     public static bool ToStringContains(this SyntaxNode node, string s) =>
         node.ToString().Contains(s);

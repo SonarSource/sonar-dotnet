@@ -20,6 +20,23 @@ namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 public static class IMethodSymbolExtensions
 {
+    private static readonly ImmutableArray<KnownType> NonActionTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonActionAttribute, KnownType.System_Web_Mvc_NonActionAttribute);
+
+    private static readonly ImmutableArray<KnownType> KnownTestMethodAttributes = ImmutableArray.Create(
+        KnownType.TestMethodAttributesOfMSTest
+        .Concat(KnownType.TestMethodAttributesOfNUnit)
+        .Concat(KnownType.TestMethodAttributesOfxUnit)
+        .ToArray());
+
+    private static readonly ImmutableArray<KnownType> KnownTestClassAttributes = ImmutableArray.Create(
+            // xUnit does not have have attributes to identity test classes
+            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
+            KnownType.NUnit_Framework_TestFixtureAttribute);
+
+    private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes = ImmutableArray.Create(
+            KnownType.Void,
+            KnownType.System_Threading_Tasks_Task);
+
     public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
     {
         if (methodSymbol is { IsExtensionMethod: true })
@@ -52,10 +69,70 @@ public static class IMethodSymbolExtensions
         && (methodSymbol.Is(knownInterfaceType, name)
             || (methodSymbol.GetInterfaceMember() is { } implementedInterfaceMember && implementedInterfaceMember.Is(knownInterfaceType, name)));
 
+    /// <summary>
+    /// Returns a value indicating whether the provided method symbol is a ASP.NET MVC
+    /// controller method.
+    /// </summary>
+    public static bool IsControllerActionMethod(this IMethodSymbol methodSymbol) =>
+        methodSymbol is { MethodKind: MethodKind.Ordinary, IsStatic: false }
+        && (methodSymbol.OverriddenMethod is null
+            || !methodSymbol.OverriddenMethod.ContainingType.IsAny(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase, KnownType.Microsoft_AspNetCore_Mvc_Controller))
+        && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
+        && !methodSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(NonActionTypes))
+        && methodSymbol.TypeParameters.Length == 0
+        && methodSymbol.Parameters.All(x => x.RefKind == RefKind.None)
+        && methodSymbol.ContainingType.IsControllerType();
+
     public static Comparison ComparisonKind(this IMethodSymbol method) =>
         method?.MethodKind == MethodKind.UserDefinedOperator
             ? ComparisonKind(method.Name)
             : Comparison.None;
+
+    /// <summary>
+    /// Returns whether the class has an attribute that marks the class
+    /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
+    /// </summary>
+    public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
+        classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
+
+    public static bool IsTestMethod(this IMethodSymbol method) =>
+        method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
+
+    public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
+        method.GetAttributes().Any(x =>
+            x.AttributeClass.IsAny(KnownType.ExpectedExceptionAttributes)
+            || x.AttributeClass.DerivesFrom(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionBaseAttribute));
+
+    public static bool HasAssertionInAttribute(this IMethodSymbol method) =>
+        !NoExpectedResultTestMethodReturnTypes.Any(method.ReturnType.Is)
+        && method.GetAttributes().Any(IsAnyTestCaseAttributeWithExpectedResult);
+
+    public static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method) =>
+        method.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.IgnoreAttributes));
+
+    public static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
+        method.GetAttributes().FirstOrDefault(x =>
+            x.AttributeClass.Is(KnownType.Xunit_FactAttribute)
+            || x.AttributeClass.Is(KnownType.Xunit_TheoryAttribute)
+            || x.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
+
+    /// <summary>
+    /// Returns the <see cref="KnownType"/> that indicates the type of the test method or
+    /// null if the method is not decorated with a known type.
+    /// </summary>
+    /// <remarks>We assume that a test is only marked with a single test attribute e.g.
+    /// not both [Fact] and [Theory]. If there are multiple attributes only one will be
+    /// returned.</remarks>
+    public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
+        KnownTestMethodAttributes.FirstOrDefault(x => method.GetAttributes().Any(att => att.AttributeClass.DerivesFrom(x)));
+
+    private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
+        IsTestAttributeWithExpectedResult(a)
+        || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
+
+    private static bool IsTestAttributeWithExpectedResult(AttributeData attribute) =>
+        attribute.AttributeClass.IsAny(KnownType.NUnit_Framework_TestCaseAttribute, KnownType.NUnit_Framework_TestAttribute)
+        && attribute.NamedArguments.Any(x => x.Key == "ExpectedResult");
 
     private static Comparison ComparisonKind(string method) =>
         method switch

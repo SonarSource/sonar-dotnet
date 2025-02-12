@@ -18,6 +18,10 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class AttributeDataExtensions
 {
+    private static readonly ImmutableArray<KnownType> RouteTemplateProviders = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_Routing_IRouteTemplateProvider,
+        KnownType.System_Web_Mvc_Routing_IRouteInfoProvider);
+
     public static bool HasName(this AttributeData attribute, string name) =>
         attribute is { AttributeClass.Name: { } attributeClassName } && attributeClassName == name;
 
@@ -25,7 +29,7 @@ public static class AttributeDataExtensions
         names.Any(x => attribute.HasName(x));
 
     public static string GetAttributeRouteTemplate(this AttributeData attribute) =>
-        attribute.AttributeClass.DerivesOrImplementsAny(AspNetMvcHelper.RouteTemplateProviders)
+        attribute.AttributeClass.DerivesOrImplementsAny(RouteTemplateProviders)
         && attribute.TryGetAttributeValue<string>("template", out var template)
             ? template
             : null;

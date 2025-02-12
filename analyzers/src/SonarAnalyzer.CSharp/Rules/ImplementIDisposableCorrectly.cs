@@ -198,7 +198,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 // Because of partial classes we cannot always rely on the current semantic model.
                 // See issue: https://github.com/SonarSource/sonar-dotnet/issues/690
-                var disposeMethodSymbol = disposeMethod.SyntaxTree.GetSemanticModelOrDefault(semanticModel)?.GetDeclaredSymbol(disposeMethod);
+                var disposeMethodSymbol = disposeMethod.SyntaxTree.SemanticModelOrDefault(semanticModel)?.GetDeclaredSymbol(disposeMethod);
                 if (disposeMethodSymbol == null)
                 {
                     return;

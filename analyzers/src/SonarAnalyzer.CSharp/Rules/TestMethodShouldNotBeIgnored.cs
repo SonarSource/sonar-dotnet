@@ -23,15 +23,15 @@ namespace SonarAnalyzer.CSharp.Rules
         private const string MessageFormat = "Either remove this 'Ignore' attribute or add an explanation about why this test is ignored.";
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         private static readonly ImmutableArray<KnownType> TrackedTestIdentifierAttributes =
-            // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in
-            // the attribute, so there is always an explanation for the test being skipped).
-            UnitTestHelper.KnownTestMethodAttributesOfMSTest
-            .Concat(new[] { KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute })
-            .Concat(UnitTestHelper.KnownTestMethodAttributesOfNUnit)
+            // xUnit has it's own "ignore" mechanism (by providing a (Skip = "reason") string in the attribute, so there is always an explanation for the test being skipped).
+            KnownType.TestMethodAttributesOfMSTest
+            .Concat(KnownType.TestMethodAttributesOfNUnit)
+            .Append(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute)
             .ToImmutableArray();
+
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             var attributeConstructor = symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.FirstOrDefault();
 
-            return attributeConstructor != null && attributeConstructor.ContainingType.DerivesFromAny(UnitTestHelper.KnownIgnoreAttributes);
+            return attributeConstructor is not null && attributeConstructor.ContainingType.DerivesFromAny(KnownType.IgnoreAttributes);
         }
 
         private static bool IsTestOrTestClassAttribute(AttributeData a) =>

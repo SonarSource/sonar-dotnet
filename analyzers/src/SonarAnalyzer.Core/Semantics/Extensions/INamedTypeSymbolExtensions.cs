@@ -18,6 +18,10 @@ namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 public static class INamedTypeSymbolExtensions
 {
+    private static readonly ImmutableArray<KnownType> ControllerTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase, KnownType.System_Web_Mvc_Controller);
+    private static readonly ImmutableArray<KnownType> ControllerAttributeTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute);
+    private static readonly ImmutableArray<KnownType> NonControllerAttributeTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute);
+
     public static bool IsTopLevelProgram(this INamedTypeSymbol symbol) =>
         TopLevelStatements.ProgramClassImplicitName.Contains(symbol.Name)
         && symbol.ContainingNamespace.IsGlobalNamespace
@@ -37,4 +41,23 @@ public static class INamedTypeSymbolExtensions
             yield return nestedType;
         }
     }
+
+    /// <summary>
+    /// Whether the provided type symbol is a ASP.NET MVC controller.
+    /// </summary>
+    public static bool IsControllerType(this INamedTypeSymbol namedType) =>
+        namedType is not null
+        && namedType.ContainingSymbol is not INamedTypeSymbol
+        && (namedType.DerivesFromAny(ControllerTypes)
+            || namedType.GetAttributes(ControllerAttributeTypes).Any())
+        && !namedType.GetAttributes(NonControllerAttributeTypes).Any();
+
+    /// <summary>
+    /// Whether the provided type symbol is an ASP.NET Core API controller.
+    /// Considers as API controllers also controllers deriving from ControllerBase but not Controller.
+    /// </summary>
+    public static bool IsCoreApiController(this INamedTypeSymbol namedType) =>
+        namedType.IsControllerType()
+        && (namedType.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
+            || (namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
 }

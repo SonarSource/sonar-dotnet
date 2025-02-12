@@ -79,7 +79,7 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         isLocalFunction ? IsXunitTestMethod(symbol) : symbol.IsTestMethod();
 
     private static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
-        methodSymbol.AnyAttributeDerivesFromAny(UnitTestHelper.KnownTestMethodAttributesOfxUnit);
+        methodSymbol.AnyAttributeDerivesFromAny(KnownType.TestMethodAttributesOfxUnit);
 
     private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel model, ISet<IMethodSymbol> visitedSymbols, int level)
     {
@@ -139,7 +139,7 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         invocation.Expression
             .ToString()
             .SplitCamelCaseToWords()
-            .Intersect(UnitTestHelper.KnownAssertionMethodParts)
+            .Intersect(KnownMethods.AssertionMethodParts)
             .Any();
 
     private static bool IsKnownAssertion(ISymbol methodSymbol) =>

@@ -701,27 +701,23 @@ public sealed partial class KnownType
     public static readonly KnownType Xunit_Sdk_XunitException = new("Xunit.Sdk.XunitException");
     public static readonly KnownType Xunit_TheoryAttribute = new("Xunit.TheoryAttribute");
     public static readonly KnownType LegacyXunit_TheoryAttribute = new("Xunit.Extensions.TheoryAttribute");
-    public static readonly ImmutableArray<KnownType> CallerInfoAttributes =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> CallerInfoAttributes = ImmutableArray.Create(
             System_Runtime_CompilerServices_CallerArgumentExpressionAttribute,
             System_Runtime_CompilerServices_CallerFilePathAttribute,
             System_Runtime_CompilerServices_CallerLineNumberAttribute,
             System_Runtime_CompilerServices_CallerMemberNameAttribute);
-    public static readonly ImmutableArray<KnownType> DatabaseBaseQueryTypes =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> DatabaseBaseQueryTypes = ImmutableArray.Create(
             System_Data_Entity_Infrastructure_DbQuery,
             System_Data_Entity_Infrastructure_DbQuery_TResult,
             Microsoft_EntityFrameworkCore_DbSet_TEntity,
             System_Data_Linq_ITable,
             System_Data_Entity_Core_Objects_ObjectQuery);
-    public static readonly ImmutableArray<KnownType> FloatingPointNumbers =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> FloatingPointNumbers = ImmutableArray.Create(
             System_Half,
             System_Single,
             System_Double,
             System_Runtime_InteropServices_NFloat);
-    public static readonly ImmutableArray<KnownType> IntegralNumbers =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> IntegralNumbers = ImmutableArray.Create(
             System_Int16,
             System_Int32,
             System_Int64,
@@ -731,8 +727,7 @@ public sealed partial class KnownType
             System_Char,
             System_Byte,
             System_SByte);
-    public static readonly ImmutableArray<KnownType> IntegralNumbersIncludingNative =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> IntegralNumbersIncludingNative = ImmutableArray.Create(
             System_Int16,
             System_Int32,
             System_Int64,
@@ -744,22 +739,39 @@ public sealed partial class KnownType
             System_SByte,
             System_IntPtr,
             System_UIntPtr);
-    public static readonly ImmutableArray<KnownType> NonIntegralNumbers =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> NonIntegralNumbers = ImmutableArray.Create(
             System_Single,
             System_Double,
             System_Decimal);
-    public static readonly ImmutableArray<KnownType> PointerTypes =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> PointerTypes = ImmutableArray.Create(
             System_IntPtr,
             System_UIntPtr);
-    public static readonly ImmutableArray<KnownType> UnsignedIntegers =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> UnsignedIntegers = ImmutableArray.Create(
             System_UInt64,
             System_UInt32,
             System_UInt16);
-    public static readonly ImmutableArray<KnownType> RouteAttributes =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> RouteAttributes = ImmutableArray.Create(
             Microsoft_AspNetCore_Mvc_RouteAttribute,
             System_Web_Mvc_RouteAttribute);
+    public static readonly ImmutableArray<KnownType> TestMethodAttributesOfMSTest = ImmutableArray.Create(
+            Microsoft_VisualStudio_TestTools_UnitTesting_TestMethodAttribute,
+            Microsoft_VisualStudio_TestTools_UnitTesting_DataTestMethodAttribute);
+    public static readonly ImmutableArray<KnownType> TestMethodAttributesOfNUnit = ImmutableArray.Create(
+            NUnit_Framework_TestAttribute,
+            NUnit_Framework_TestCaseAttribute,
+            NUnit_Framework_TestCaseSourceAttribute,
+            NUnit_Framework_TheoryAttribute,
+            NUnit_Framework_ITestBuilderInterface);
+    public static readonly ImmutableArray<KnownType> TestMethodAttributesOfxUnit = ImmutableArray.Create(
+            Xunit_TheoryAttribute,
+            LegacyXunit_TheoryAttribute,
+            Xunit_FactAttribute);   // In order for the FindFirstTestMethodType to work, FactAttribute should go last as the Theory attribute derives from it.
+    public static readonly ImmutableArray<KnownType> ExpectedExceptionAttributes = ImmutableArray.Create(
+            // Note: XUnit doesn't have a exception attribute
+            Microsoft_VisualStudio_TestTools_UnitTesting_ExpectedExceptionAttribute,
+            NUnit_Framework_ExpectedExceptionAttribute);
+    public static readonly ImmutableArray<KnownType> IgnoreAttributes = ImmutableArray.Create(
+            // Note: XUnit doesn't have a separate "Ignore" attribute. It has a "Skip" parameter on the test attribute
+            Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
+            NUnit_Framework_IgnoreAttribute);
 }

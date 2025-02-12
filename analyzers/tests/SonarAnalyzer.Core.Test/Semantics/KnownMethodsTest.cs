@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Semantics;
 
 [TestClass]
 public class KnownMethodsTest

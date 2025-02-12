@@ -48,7 +48,7 @@ public static class BaseMethodDeclarationSyntaxExtensions
         return childNodes
             .OfType<InvocationExpressionSyntax>()
             .Where(syntaxPredicate)
-            .Select(x => x.Expression.SyntaxTree.GetSemanticModelOrDefault(semanticModel)?.GetSymbolInfo(x.Expression).Symbol)
+            .Select(x => x.Expression.SyntaxTree.SemanticModelOrDefault(semanticModel)?.GetSymbolInfo(x.Expression).Symbol)
             .OfType<IMethodSymbol>()
             .Any(symbolPredicate);
     }
