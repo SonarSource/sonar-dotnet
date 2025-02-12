@@ -102,7 +102,7 @@ namespace SonarAnalyzer.CSharp.Rules
             ?? Enumerable.Empty<SyntaxToken>();
 
         private static long CountLines(LocalFunctionStatementSyntaxWrapper wrapper) =>
-            GetMethodTokens(wrapper).SelectMany(x => x.GetLineNumbers())
+            GetMethodTokens(wrapper).SelectMany(x => x.LineNumbers())
                                     .Distinct()
                                     .LongCount();
 

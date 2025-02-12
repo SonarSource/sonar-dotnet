@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Syntax.Extensions;
+
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 internal enum IssueType
@@ -59,7 +61,7 @@ internal sealed class IssueLocation
     }
 
     private IssueLocation(IssueType type, string ruleId, string message, Location location, FileLinePositionSpan span)
-        : this(type, span.Path ?? string.Empty, location.GetLineNumberToReport(), message ?? string.Empty, null, span.StartLinePosition.Character, location.SourceSpan.Length, ruleId) { }
+        : this(type, span.Path ?? string.Empty, location.LineNumberToReport(), message ?? string.Empty, null, span.StartLinePosition.Character, location.SourceSpan.Length, ruleId) { }
 
     public void UpdatePrimaryIssueIdFrom(IssueLocation expected)
     {

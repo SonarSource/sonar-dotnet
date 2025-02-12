@@ -109,7 +109,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
     }
 
     private static void ReportSyntaxNode(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxNode precedingNode, string errorMessageDiscriminator) =>
-        context.ReportIssue(Rule, node, [precedingNode.ToSecondaryLocation()], precedingNode.GetLineNumberToReport().ToString(), errorMessageDiscriminator);
+        context.ReportIssue(Rule, node, [precedingNode.ToSecondaryLocation()], precedingNode.LineNumberToReport().ToString(), errorMessageDiscriminator);
 
     private static bool IsApprovedStatement(SyntaxNode statement) =>
         !statement.IsAnyKind(IgnoredStatementsInSwitch);

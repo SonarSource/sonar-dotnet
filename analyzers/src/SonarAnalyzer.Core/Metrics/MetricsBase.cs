@@ -41,8 +41,8 @@ public abstract class MetricsBase
             .SelectMany(
                 x =>
                 {
-                    var start = x.Value.StartLinePosition.GetLineNumberToReport();
-                    var end = x.Value.EndLinePosition.GetLineNumberToReport();
+                    var start = x.Value.StartLinePosition.LineNumberToReport();
+                    var end = x.Value.EndLinePosition.LineNumberToReport();
                     return Enumerable.Range(start, end - start + 1);
                 })
             .ToHashSet();

@@ -14,10 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
-public static class EnumHelper
+public static class SyntaxTriviaExtensions
 {
-    internal static bool HasFlagsAttribute(this SyntaxNode node, SemanticModel semanticModel) =>
-        semanticModel.GetDeclaredSymbol(node).HasAttribute(KnownType.System_FlagsAttribute);
+    public static IEnumerable<int> LineNumbers(this SyntaxTrivia trivia, bool isZeroBasedCount = true) =>
+        trivia.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
 }

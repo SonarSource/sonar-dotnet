@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers.Common;
+namespace SonarAnalyzer.Core.Syntax.Utilities;
 
 public static class EquivalenceChecker
 {

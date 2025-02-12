@@ -16,6 +16,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.CSharp.Syntax.Extensions;
 
 namespace SonarAnalyzer.Test.Syntax.Extensions;
@@ -463,6 +464,80 @@ public class SyntaxNodeExtensionsTest
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK2");
     }
+
+    [TestMethod]
+    public void GetName_CS()
+    {
+        const string code = """
+            using System;
+            using C = System.Collections;
+            namespace MyNamespace.MyNamespaceNested
+            {
+                class Example
+                {
+                    delegate void MyDelegate();
+                    enum MyEnum { MyEnumValue };
+
+                    Example() { }
+                    ~Example() { }
+                    int MyProp { get; }
+
+                    unsafe ref byte Method<T>(byte[] input) where T: new()
+                    {
+                        int? i = null;
+                        int* iPtr;
+                        System.Exception qualified;
+                        global::System.Exception global;
+                        input.ToString()?.ToString();
+                        Func<Action> fun = () => () => {};
+                        fun()();
+                        ref byte result = ref input[0];
+                        return ref result;
+                    }
+                    public static explicit operator int(Example e) => 0;
+                    public static int operator +(Example e) => 0;
+                    ref struct MyRefStruct { }
+                }
+            }
+            """;
+
+        var nodes = CSharpSyntaxTree.ParseText(code).GetRoot().DescendantNodes().ToArray();
+        Assert<AliasQualifiedNameSyntax>("global");
+        Assert<ArrayTypeSyntax>("byte");
+        Assert<BaseTypeDeclarationSyntax>("Example", "MyEnum", "MyRefStruct");
+        Assert<ConstructorDeclarationSyntax>("Example");
+        Assert<ConversionOperatorDeclarationSyntax>("int");
+        Assert<DelegateDeclarationSyntax>("MyDelegate");
+        Assert<DestructorDeclarationSyntax>("Example");
+        Assert<EnumMemberDeclarationSyntax>("MyEnumValue");
+        Assert<IdentifierNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Action", "fun", "input", "result", "Example", "Example");
+        Assert<InvocationExpressionSyntax>("ToString", "ToString", string.Empty, "fun");
+        Assert<MethodDeclarationSyntax>("Method");
+        Assert<MemberAccessExpressionSyntax>("ToString");
+        Assert<MemberBindingExpressionSyntax>("ToString");
+        Assert<NamespaceDeclarationSyntax>("MyNamespaceNested");
+        Assert<NullableTypeSyntax>("int");
+        Assert<OperatorDeclarationSyntax>("+");
+        Assert<ParameterSyntax>("input", "e", "e");
+        Assert<PropertyDeclarationSyntax>("MyProp");
+        Assert<PointerTypeSyntax>("int");
+        Assert<PredefinedTypeSyntax>("void", "int", "int", "int", "int", "int", "byte", "byte", "byte");
+        Assert<QualifiedNameSyntax>("Collections", "MyNamespaceNested", "Exception", "Exception");
+        Assert<SimpleNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Func", "Action", "fun", "input", "result", "Example", "Example");
+        Assert<TypeParameterConstraintClauseSyntax>("T");
+        Assert<TypeParameterSyntax>("T");
+        Assert<UsingDirectiveSyntax>(string.Empty, "C");
+        Assert<VariableDeclaratorSyntax>("i", "iPtr", "qualified", "global", "fun", "result");
+        Assert<RefTypeSyntax>("byte", "byte");
+        Assert<ReturnStatementSyntax>(string.Empty);
+
+        void Assert<T>(params string[] expectedNames) where T : SyntaxNode =>
+            nodes.OfType<T>().Select(x => SyntaxNodeExtensionsCSharp.GetName(x)).Should().BeEquivalentTo(expectedNames, because: "GetName for {0} should return the identifier", typeof(T));
+    }
+
+    [TestMethod]
+    public void IsNullLiteral_Null_CS() =>
+        SyntaxNodeExtensionsCSharp.IsNullLiteral(null).Should().BeFalse();
 
     private static MethodDeclarationSyntax GetMainNode(string source) =>
         CSharpSyntaxTree.ParseText(source).GetRoot()

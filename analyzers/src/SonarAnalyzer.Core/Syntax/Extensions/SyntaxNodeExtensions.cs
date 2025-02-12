@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class SyntaxNodeExtensions
@@ -65,4 +67,16 @@ public static class SyntaxNodeExtensions
         message is not null && messageArgs?.Length > 0
             ? new(node.GetLocation(), string.Format(message, messageArgs))
             : new(node.GetLocation(), message);
+
+    public static int LineNumberToReport(this SyntaxNode node) =>
+        node.GetLocation().LineNumberToReport();
+
+    public static bool HasFlagsAttribute(this SyntaxNode node, SemanticModel model) =>
+        model.GetDeclaredSymbol(node).HasAttribute(KnownType.System_FlagsAttribute);
+
+    public static Location CreateLocation(this SyntaxNode from, SyntaxNode to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+
+    public static Location CreateLocation(this SyntaxNode from, SyntaxToken to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
 }

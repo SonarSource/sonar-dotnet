@@ -91,7 +91,7 @@ namespace SonarAnalyzer.CSharp.Rules
             SyntaxToken startToken;
             string conditionLabelText;
             if (ifStatement.Parent is ElseClauseSyntax elseClause
-                && ifStatement.GetLineNumberToReport() == elseClause.GetLineNumberToReport())
+                && ifStatement.LineNumberToReport() == elseClause.LineNumberToReport())
             {
                 controlNode = elseClause;
                 startToken = elseClause.ElseKeyword;

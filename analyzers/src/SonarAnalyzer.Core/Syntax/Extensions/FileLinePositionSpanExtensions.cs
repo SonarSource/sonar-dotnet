@@ -14,17 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
-internal static class SyntaxHelper
+public static class FileLinePositionSpanExtensions
 {
-    public static IEnumerable<int> GetLineNumbers(this SyntaxToken token, bool isZeroBasedCount = true)
-        => token.GetLocation().GetLineSpan().GetLineNumbers(isZeroBasedCount);
-
-    public static IEnumerable<int> GetLineNumbers(this SyntaxTrivia trivia, bool isZeroBasedCount = true)
-        => trivia.GetLocation().GetLineSpan().GetLineNumbers(isZeroBasedCount);
-
-    public static IEnumerable<int> GetLineNumbers(this FileLinePositionSpan lineSpan, bool isZeroBasedCount = true)
+    public static IEnumerable<int> LineNumbers(this FileLinePositionSpan lineSpan, bool isZeroBasedCount = true)
     {
         var offset = isZeroBasedCount ? 0 : 1;
         var start = lineSpan.StartLinePosition.Line + offset;

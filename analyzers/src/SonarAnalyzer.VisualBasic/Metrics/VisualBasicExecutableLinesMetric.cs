@@ -114,7 +114,7 @@ public static class VisualBasicExecutableLinesMetric
                 case SyntaxKind.SingleLineFunctionLambdaExpression:
                 case SyntaxKind.MultiLineSubLambdaExpression:
                 case SyntaxKind.MultiLineFunctionLambdaExpression:
-                    this.executableLineNumbers.Add(node.GetLocation().GetLineNumberToReport());
+                    this.executableLineNumbers.Add(node.GetLocation().LineNumberToReport());
                     return true;
 
                 case SyntaxKind.StructureStatement:

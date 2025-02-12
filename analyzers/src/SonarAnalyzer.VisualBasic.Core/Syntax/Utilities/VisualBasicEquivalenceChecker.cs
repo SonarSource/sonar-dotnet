@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Helpers.Common;
-
 namespace SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 public static class VisualBasicEquivalenceChecker

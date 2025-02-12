@@ -14,10 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Utilities.Test;
 
 [TestClass]
-public class VisualIndentHelperTest
+public class VisualIndentComparerTest
 {
     [TestMethod]
     public void TestVisualIndent_NonTabsOnly()

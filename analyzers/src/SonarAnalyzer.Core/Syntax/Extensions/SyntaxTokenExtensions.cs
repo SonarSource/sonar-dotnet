@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class SyntaxTokenExtensions
@@ -25,4 +27,13 @@ public static class SyntaxTokenExtensions
         message is not null && messageArgs?.Length > 0
             ? new(token.GetLocation(), string.Format(message, messageArgs))
             : new(token.GetLocation(), message);
+
+    public static Location CreateLocation(this SyntaxToken from, SyntaxToken to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+
+    public static Location CreateLocation(this SyntaxToken from, SyntaxNode to) =>
+        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+
+    public static IEnumerable<int> LineNumbers(this SyntaxToken token, bool isZeroBasedCount = true) =>
+        token.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
 }

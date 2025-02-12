@@ -19,10 +19,10 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 public static class CSharpEquivalenceChecker
 {
     public static bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) =>
-        Helpers.Common.EquivalenceChecker.AreEquivalent(node1, node2, NodeComparator);
+        EquivalenceChecker.AreEquivalent(node1, node2, NodeComparator);
 
     public static bool AreEquivalent(SyntaxList<SyntaxNode> nodeList1, SyntaxList<SyntaxNode> nodeList2) =>
-        Helpers.Common.EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, NodeComparator);
+        EquivalenceChecker.AreEquivalent(nodeList1, nodeList2, NodeComparator);
 
     private static bool NodeComparator(SyntaxNode node1, SyntaxNode node2) =>
         NullCheckState(node1, true) is { } nullCheck1

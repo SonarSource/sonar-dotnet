@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Core.Rules
                         .GetRoot()
                         .DescendantTokens()
                         .Where(token => !IsEndOfFileToken(token))
-                        .SelectMany(token => token.GetLineNumbers(isZeroBasedCount: false))
+                        .SelectMany(token => token.LineNumbers(isZeroBasedCount: false))
                         .Distinct()
                         .LongCount();
 

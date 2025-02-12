@@ -108,7 +108,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
         var lastStatement = statementsToReport.Last();
 
         context.ReportIssue(Rule, firstStatement.CreateLocation(lastStatement),
-            locationProvider.First().GetLineNumberToReport().ToString(), constructType);
+            locationProvider.First().LineNumberToReport().ToString(), constructType);
     }
 
     private static bool IsApprovedStatement(StatementSyntax statement) =>

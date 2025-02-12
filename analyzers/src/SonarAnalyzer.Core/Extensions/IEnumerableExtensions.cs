@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Text;
+
 namespace SonarAnalyzer.Core.Extensions;
 
 public static class IEnumerableExtensions
@@ -152,4 +154,24 @@ public static class IEnumerableExtensions
 
     public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxToken> nodes, string message = null, params string[] messageArgs) =>
         nodes.Select(x => x.ToSecondaryLocation(message, messageArgs));
+
+    public static string ToSentence(this IEnumerable<string> words, bool quoteWords = false)
+    {
+        var wordCollection = words as ICollection<string> ?? words.ToList();
+        var singleQuoteOrBlank = quoteWords ? "'" : string.Empty;
+
+        return wordCollection.Count switch
+        {
+            0 => null,
+            1 => string.Concat(singleQuoteOrBlank, wordCollection.First(), singleQuoteOrBlank),
+            _ => new StringBuilder(singleQuoteOrBlank)
+                    .Append(string.Join($"{singleQuoteOrBlank}, {singleQuoteOrBlank}", wordCollection.Take(wordCollection.Count - 1)))
+                    .Append(singleQuoteOrBlank)
+                    .Append(" and ")
+                    .Append(singleQuoteOrBlank)
+                    .Append(wordCollection.Last())
+                    .Append(singleQuoteOrBlank)
+                    .ToString(),
+        };
+    }
 }

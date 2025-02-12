@@ -47,7 +47,7 @@ namespace SonarAnalyzer.Core.Rules
                     }
 
                     var baseMethod = (TBaseMethodSyntax)c.Node;
-                    var linesCount = GetMethodTokens(baseMethod).SelectMany(token => token.GetLineNumbers())
+                    var linesCount = GetMethodTokens(baseMethod).SelectMany(token => token.LineNumbers())
                                                                 .Distinct()
                                                                 .LongCount();
 

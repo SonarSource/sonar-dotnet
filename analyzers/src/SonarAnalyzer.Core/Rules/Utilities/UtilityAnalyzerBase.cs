@@ -42,8 +42,8 @@ namespace SonarAnalyzer.Core.Rules
         internal static TextRange GetTextRange(FileLinePositionSpan lineSpan) =>
             new()
             {
-                StartLine = lineSpan.StartLinePosition.GetLineNumberToReport(),
-                EndLine = lineSpan.EndLinePosition.GetLineNumberToReport(),
+                StartLine = lineSpan.StartLinePosition.LineNumberToReport(),
+                EndLine = lineSpan.EndLinePosition.LineNumberToReport(),
                 StartOffset = lineSpan.StartLinePosition.Character,
                 EndOffset = lineSpan.EndLinePosition.Character
             };

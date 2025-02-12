@@ -14,89 +14,91 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Syntax.Utilities;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
-using SonarAnalyzer.Helpers.Common;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 using CS = Microsoft.CodeAnalysis.CSharp.Syntax;
 using VB = Microsoft.CodeAnalysis.VisualBasic.Syntax;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Syntax.Utilities;
 
 [TestClass]
 public class EquivalenceCheckerTest
 {
-    private const string CsSource = @"
-namespace Test
-{
-    class TestClass
-    {
-        int Property {get;set;}
-
-        public void Method1()
+    private const string CsSource = """
+        namespace Test
         {
-            var x = Property;
-            Console.WriteLine(x);
+            class TestClass
+            {
+                int Property {get;set;}
+
+                public void Method1()
+                {
+                    var x = Property;
+                    Console.WriteLine(x);
+                }
+
+                public void Method2()
+                {
+                    var x = Property;
+                    Console.WriteLine(x);
+                }
+
+                public void Method3()
+                {
+                    var x = Property+2;
+                    Console.Write(x);
+                }
+
+                public void Method4()
+                {
+                    var x = Property-2;
+                    Console.Write(x);
+                }
+            }
         }
+        """;
 
-        public void Method2()
-        {
-            var x = Property;
-            Console.WriteLine(x);
-        }
+    private const string VbSource = """
+        Namespace Test
 
-        public void Method3()
-        {
-            var x = Property+2;
-            Console.Write(x);
-        }
+            Class TestClass
 
-        public void Method4()
-        {
-            var x = Property-2;
-            Console.Write(x);
-        }
-    }
-}";
+                Public Property Value As Integer
 
-    private const string VbSource = @"
-Namespace Test
+                Public Sub Method1()
+                    If True Then
+                        Dim x As Integer = Value
+                        Console.WriteLine(x)
+                    End If
+                End Sub
 
-    Class TestClass
+                Public Sub Method2()
+                    If True Then
+                        Dim x As Integer = Value
+                        Console.WriteLine(x)
+                    End If
+                End Sub
 
-        Public Property Value As Integer
+                Public Sub Method3()
+                    If True Then
+                        Dim x As Integer = Value + 2
+                        Console.Write(x)
+                    End If
+                End Sub
 
-        Public Sub Method1()
-            If True Then
-                Dim x As Integer = Value
-                Console.WriteLine(x)
-            End If
-        End Sub
+                Public Sub Method4()
+                    If True Then
+                        Dim x As Integer = Value - 2
+                        Console.Write(x)
+                    End If
+                End Sub
 
-        Public Sub Method2()
-            If True Then
-                Dim x As Integer = Value
-                Console.WriteLine(x)
-            End If
-        End Sub
+            End Class
 
-        Public Sub Method3()
-            If True Then
-                Dim x As Integer = Value + 2
-                Console.Write(x)
-            End If
-        End Sub
-
-        Public Sub Method4()
-            If True Then
-                Dim x As Integer = Value - 2
-                Console.Write(x)
-            End If
-        End Sub
-
-    End Class
-
-End Namespace";
+        End Namespace
+        """;
 
     private CSharpMethods csMethods;
     private VisualBasicMethods vbMethods;
@@ -230,10 +232,10 @@ End Namespace";
         public CSharpMethods(string source)
         {
             var methods = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<CS.MethodDeclarationSyntax>().ToArray();
-            Method1 = methods.Single(m => m.Identifier.ValueText == "Method1").Body;
-            Method2 = methods.Single(m => m.Identifier.ValueText == "Method2").Body;
-            Method3 = methods.Single(m => m.Identifier.ValueText == "Method3").Body;
-            Method4 = methods.Single(m => m.Identifier.ValueText == "Method4").Body;
+            Method1 = methods.Single(x => x.Identifier.ValueText == "Method1").Body;
+            Method2 = methods.Single(x => x.Identifier.ValueText == "Method2").Body;
+            Method3 = methods.Single(x => x.Identifier.ValueText == "Method3").Body;
+            Method4 = methods.Single(x => x.Identifier.ValueText == "Method4").Body;
         }
     }
 
@@ -247,10 +249,10 @@ End Namespace";
         public VisualBasicMethods(string source)
         {
             var methods = Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<VB.MethodBlockSyntax>().ToArray();
-            Method1 = methods.Single(m => m.GetIdentifierText() == "Method1").Statements;
-            Method2 = methods.Single(m => m.GetIdentifierText() == "Method2").Statements;
-            Method3 = methods.Single(m => m.GetIdentifierText() == "Method3").Statements;
-            Method4 = methods.Single(m => m.GetIdentifierText() == "Method4").Statements;
+            Method1 = methods.Single(x => x.GetIdentifierText() == "Method1").Statements;
+            Method2 = methods.Single(x => x.GetIdentifierText() == "Method2").Statements;
+            Method3 = methods.Single(x => x.GetIdentifierText() == "Method3").Statements;
+            Method4 = methods.Single(x => x.GetIdentifierText() == "Method4").Statements;
         }
     }
 }

@@ -39,7 +39,7 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
     }
 
     private static bool IsCode(SyntaxTrivia trivia) =>
-        trivia.GetLineNumbers().Count() == 1
+        trivia.LineNumbers().Count() == 1
         || Array.TrueForAll(Lines(trivia), IsCode);
 
     private static bool IsCode(string line)
@@ -109,10 +109,10 @@ public sealed class CommentedOutCodeCodeFix : SonarCodeFix
                 .WithTrailingTrivia(Trailing);
 
         private static bool ShareLine(SyntaxToken token, SyntaxTrivia trivia) =>
-            ShareLine(token.GetLineNumbers(), trivia.GetLineNumbers());
+            ShareLine(token.LineNumbers(), trivia.LineNumbers());
 
         private static bool ShareLine(SyntaxTrivia l, SyntaxTrivia r) =>
-            ShareLine(l.GetLineNumbers(), r.GetLineNumbers());
+            ShareLine(l.LineNumbers(), r.LineNumbers());
 
         private static bool ShareLine(IEnumerable<int> l, IEnumerable<int> r) =>
             l.Intersect(r).Any();

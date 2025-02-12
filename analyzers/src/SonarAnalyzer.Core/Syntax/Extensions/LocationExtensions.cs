@@ -48,4 +48,7 @@ public static class LocationExtensions
         message is not null && messageArgs?.Length > 0
             ? new(location, string.Format(message, messageArgs))
             : new(location, message);
+
+    public static int LineNumberToReport(this Location location) =>
+        location.GetMappedLineSpan().StartLinePosition.LineNumberToReport();
 }

@@ -45,7 +45,7 @@ public static class VbcHelper
         }
 
         var text = diagnostic.Location.SourceTree.GetText();
-        var lineNumber = diagnostic.Location.GetLineNumberToReport();
+        var lineNumber = diagnostic.Location.LineNumberToReport();
 
         return IsTextMatchingVbcErrorPattern(text.Lines[lineNumber - 1].ToString());
     }

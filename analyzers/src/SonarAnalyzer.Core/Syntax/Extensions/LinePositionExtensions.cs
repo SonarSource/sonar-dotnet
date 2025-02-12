@@ -14,29 +14,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Syntax.Extensions;
 
-[TestClass]
-public class DiagnosticReportHelperTest
+public static class LinePositionExtensions
 {
-    private const string Source =
-@"namespace Test
-{
-    class TestClass
-    {
-    }
-}";
-    [TestMethod]
-    public void GetLineNumberToReport()
-    {
-        var syntaxTree = CSharpSyntaxTree.ParseText(Source);
-        var method = syntaxTree.Single<ClassDeclarationSyntax>();
-        method.GetLineNumberToReport()
-            .Should().Be(3);
-        method.GetLocation().GetLineSpan().StartLinePosition.GetLineNumberToReport()
-            .Should().Be(3);
-    }
+    public static int LineNumberToReport(this LinePosition position) =>
+        position.Line + 1;
 }
