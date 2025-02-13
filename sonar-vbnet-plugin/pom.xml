@@ -25,14 +25,6 @@
     </license>
   </licenses>
 
-  <properties>
-    <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
-    <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>
-    <rspec.directory>${project.build.directory}/../../analyzers/rspec</rspec.directory>
-    <packaging.directory>${project.build.directory}/../../analyzers/packaging</packaging.directory>
-    <maven.deploy.skip>false</maven.deploy.skip>
-  </properties>
-
   <dependencies>
     <!-- provided at runtime -->
     <dependency>
