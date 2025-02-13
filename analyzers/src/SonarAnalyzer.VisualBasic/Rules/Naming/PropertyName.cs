@@ -14,37 +14,29 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class PropertyName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class PropertyName : ParametrizedDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S2366";
-        private const string MessageFormat = "Rename this property to match the regular expression: '{0}'.";
+    private const string DiagnosticId = "S2366";
+    private const string MessageFormat = "Rename this property to match the regular expression: '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the property names against.", NamingHelper.PascalCasingPattern)]
-        public string Pattern { get; set; } = NamingHelper.PascalCasingPattern;
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the property names against.", NamingPatterns.PascalCasingPattern)]
+    public string Pattern { get; set; } = NamingPatterns.PascalCasingPattern;
 
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var propertyDeclaration = (PropertyStatementSyntax)c.Node;
+                if (!NamingPatterns.IsRegexMatch(propertyDeclaration.Identifier.ValueText, Pattern))
                 {
-                    var propertyDeclaration = (PropertyStatementSyntax)c.Node;
-
-                    if (!NamingHelper.IsRegexMatch(propertyDeclaration.Identifier.ValueText, Pattern))
-                    {
-                        c.ReportIssue(rule, propertyDeclaration.Identifier, Pattern);
-                    }
-                },
-                SyntaxKind.PropertyStatement);
-        }
-    }
+                    c.ReportIssue(Rule, propertyDeclaration.Identifier, Pattern);
+                }
+            },
+            SyntaxKind.PropertyStatement);
 }

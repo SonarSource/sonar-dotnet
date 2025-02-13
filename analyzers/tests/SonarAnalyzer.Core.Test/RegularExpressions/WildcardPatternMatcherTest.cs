@@ -16,7 +16,7 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.RegularExpressions.Test;
 
 [TestClass]
 public class WildcardPatternMatcherTest

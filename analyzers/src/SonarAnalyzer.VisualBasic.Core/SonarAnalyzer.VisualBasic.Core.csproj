@@ -38,7 +38,6 @@
     <Using Include="SonarAnalyzer.Core.Semantics.Extensions" />
     <Using Include="SonarAnalyzer.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.Core.Syntax.Utilities" />
-    <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Common" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Facade" />

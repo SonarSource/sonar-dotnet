@@ -43,19 +43,21 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var equalsExpression = (BinaryExpressionSyntax)c.Node;
 
-            if (CheckExpression(equalsExpression.Left, equalsExpression.Right, c.Model, out var constantValue)
-                || CheckExpression(equalsExpression.Right, equalsExpression.Left, c.Model, out constantValue))
+            if ((CheckExpression(equalsExpression.Left, equalsExpression.Right, c.Model)
+                ?? CheckExpression(equalsExpression.Right, equalsExpression.Left, c.Model)) is { } constantValue)
             {
                 c.ReportIssue(Rule, equalsExpression, constantValue < 0 ? "negative" : "positive");
             }
         }
 
-        private static bool CheckExpression(SyntaxNode node, ExpressionSyntax expression, SemanticModel semanticModel, out int constantValue) =>
-            ExpressionNumericConverter.TryGetConstantIntValue(node, out constantValue)
+        private static int? CheckExpression(SyntaxNode node, ExpressionSyntax expression, SemanticModel model) =>
+            ExpressionNumericConverter.ConstantIntValue(node) is { } constantValue
             && constantValue != 0
             && expression.RemoveParentheses() is BinaryExpressionSyntax binary
             && binary.IsKind(SyntaxKind.ModuloExpression)
-            && !ExpressionIsAlwaysPositive(binary, semanticModel);
+            && !ExpressionIsAlwaysPositive(binary, model)
+                ? constantValue
+                : null;
 
         private static bool ExpressionIsAlwaysPositive(BinaryExpressionSyntax binaryExpression, SemanticModel semantic)
         {
@@ -83,7 +85,7 @@ namespace SonarAnalyzer.CSharp.Rules
             (CountName.Equals(symbol.Name) || LongCountName.Equals(symbol.Name))
             && symbol is IMethodSymbol methodSymbol
             && methodSymbol.IsExtensionMethod
-            && methodSymbol.ReceiverType != null
+            && methodSymbol.ReceiverType is not null
             && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
         private static bool IsLengthProperty(IPropertySymbol propertySymbol) =>

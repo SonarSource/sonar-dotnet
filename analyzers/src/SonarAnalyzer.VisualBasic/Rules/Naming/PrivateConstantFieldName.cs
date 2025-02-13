@@ -14,28 +14,21 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class PrivateConstantFieldName : FieldNameChecker
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class PrivateConstantFieldName : FieldNameChecker
-    {
-        internal const string DiagnosticId = "S2362";
-        private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
+    private const string DiagnosticId = "S2362";
+    private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the private constant names against.",
-            NamingHelper.CamelCasingPatternWithOptionalPrefixes)]
-        public override string Pattern { get; set; } = NamingHelper.CamelCasingPatternWithOptionalPrefixes;
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override bool IsCandidateSymbol(IFieldSymbol symbol)
-        {
-            return symbol.DeclaredAccessibility == Accessibility.Private &&
-                symbol.IsConst;
-        }
-    }
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the private constant names against.", NamingPatterns.CamelCasingPatternWithOptionalPrefixes)]
+    public override string Pattern { get; set; } = NamingPatterns.CamelCasingPatternWithOptionalPrefixes;
+
+    protected override bool IsCandidateSymbol(IFieldSymbol symbol) =>
+        symbol.DeclaredAccessibility == Accessibility.Private && symbol.IsConst;
 }

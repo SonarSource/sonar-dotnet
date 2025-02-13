@@ -14,11 +14,21 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Syntax.Utilities;
+using System.Xml.Linq;
 
-public interface IExpressionNumericConverter
+namespace SonarAnalyzer.Core.Extensions;
+
+public static class StringExtensions
 {
-    int? ConstantIntValue(SemanticModel model, SyntaxNode expression);
-    int? ConstantIntValue(SyntaxNode expression);
-    double? ConstantDoubleValue(SyntaxNode expression);
+    public static XDocument ParseXDocument(this string text)
+    {
+        try
+        {
+            return XDocument.Parse(text, LoadOptions.SetLineInfo);
+        }
+        catch
+        {
+            return null;
+        }
+    }
 }

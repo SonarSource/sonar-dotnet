@@ -17,7 +17,7 @@
 using System.Runtime.CompilerServices;
 using Roslyn.Utilities;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.Common;
 
 public static class HashCode    // Replacement for System.HashCode that is available from .NET Standard 2.1
 {

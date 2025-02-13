@@ -32,7 +32,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                     {
                         if (c.Model.GetDeclaredSymbol(name) is IFieldSymbol symbol &&
                             IsCandidateSymbol(symbol) &&
-                            !NamingHelper.IsRegexMatch(symbol.Name, Pattern))
+                            !NamingPatterns.IsRegexMatch(symbol.Name, Pattern))
                         {
                             c.ReportIssue(SupportedDiagnostics[0], name, symbol.Name, Pattern);
                         }

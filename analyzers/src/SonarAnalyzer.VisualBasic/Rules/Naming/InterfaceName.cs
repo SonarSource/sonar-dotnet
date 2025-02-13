@@ -14,38 +14,30 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class InterfaceName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class InterfaceName : ParametrizedDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S114";
-        private const string MessageFormat = "Rename this interface to match the regular expression: '{0}'.";
+    private const string DiagnosticId = "S114";
+    private const string MessageFormat = "Rename this interface to match the regular expression: '{0}'.";
+    private const string DefaultPattern = "^I" + NamingPatterns.PascalCasingInternalPattern + "$";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        private const string DefaultPattern = "^I" + NamingHelper.PascalCasingInternalPattern + "$";
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the interface names against.", DefaultPattern)]
+    public string Pattern { get; set; } = DefaultPattern;
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the interface names against.", DefaultPattern)]
-        public string Pattern { get; set; } = DefaultPattern;
-
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var declaration = (InterfaceStatementSyntax)c.Node;
+                if (!NamingPatterns.IsRegexMatch(declaration.Identifier.ValueText, Pattern))
                 {
-                    var declaration = (InterfaceStatementSyntax)c.Node;
-                    if (!NamingHelper.IsRegexMatch(declaration.Identifier.ValueText, Pattern))
-                    {
-                        c.ReportIssue(rule, declaration.Identifier, Pattern);
-                    }
-                },
-                SyntaxKind.InterfaceStatement);
-        }
-    }
+                    c.ReportIssue(Rule, declaration.Identifier, Pattern);
+                }
+            },
+            SyntaxKind.InterfaceStatement);
 }

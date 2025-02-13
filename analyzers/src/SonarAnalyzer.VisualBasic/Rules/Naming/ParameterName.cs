@@ -26,17 +26,16 @@ public sealed class ParameterName : ParametrizedDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    [RuleParameter("format", PropertyType.String, "Regular expression used to check the parameter names against.", NamingHelper.CamelCasingPattern)]
-    public string Pattern { get; set; } = NamingHelper.CamelCasingPattern;
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the parameter names against.", NamingPatterns.CamelCasingPattern)]
+    public string Pattern { get; set; } = NamingPatterns.CamelCasingPattern;
 
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-        context.RegisterNodeAction(
-            c =>
+        context.RegisterNodeAction(c =>
             {
                 var parameter = (ParameterSyntax)c.Node;
                 if (parameter.Identifier is not null
                     && !HasPredefinedName(parameter)
-                    && !NamingHelper.IsRegexMatch(parameter.Identifier.Identifier.ValueText, Pattern))
+                    && !NamingPatterns.IsRegexMatch(parameter.Identifier.Identifier.ValueText, Pattern))
                 {
                     c.ReportIssue(Rule, parameter.Identifier.Identifier, Pattern);
                 }

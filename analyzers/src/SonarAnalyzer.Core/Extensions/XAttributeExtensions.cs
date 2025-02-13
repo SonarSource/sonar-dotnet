@@ -14,11 +14,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Syntax.Utilities;
+using System.Xml.Linq;
 
-public interface IExpressionNumericConverter
+namespace SonarAnalyzer.Core.Extensions;
+
+public static class XAttributeExtensions
 {
-    int? ConstantIntValue(SemanticModel model, SyntaxNode expression);
-    int? ConstantIntValue(SyntaxNode expression);
-    double? ConstantDoubleValue(SyntaxNode expression);
+    public static Location CreateLocation(this XAttribute attribute, string path) =>
+        attribute.CreateLocation(path, attribute.Name);
 }

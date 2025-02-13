@@ -16,7 +16,7 @@
 
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.RegularExpressions;
 
 /// <summary>
 /// Grammar can be found <a href="https://github.com/messagetemplates/grammar"> here</a>.

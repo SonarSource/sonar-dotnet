@@ -5055,7 +5055,7 @@ int LocalInt() => 40;
 
         #endregion
 
-        #region Helpers to build the CFG for the tests
+        #region Methods to build the CFG for the tests
 
         internal const string TestInput = @"
 using System;

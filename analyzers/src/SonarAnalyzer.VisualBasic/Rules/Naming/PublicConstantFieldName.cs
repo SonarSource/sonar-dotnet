@@ -14,28 +14,21 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class PublicConstantFieldName : FieldNameChecker
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class PublicConstantFieldName : FieldNameChecker
-    {
-        internal const string DiagnosticId = "S2367";
-        private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
+    private const string DiagnosticId = "S2367";
+    private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the non-private constant names against.", NamingHelper.PascalCasingPattern)]
-        public override string Pattern { get; set; } = NamingHelper.PascalCasingPattern;
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the non-private constant names against.", NamingPatterns.PascalCasingPattern)]
+    public override string Pattern { get; set; } = NamingPatterns.PascalCasingPattern;
 
-        protected override bool IsCandidateSymbol(IFieldSymbol symbol)
-        {
-            return symbol.DeclaredAccessibility != Accessibility.Private &&
-                symbol.IsConst;
-        }
-    }
+    protected override bool IsCandidateSymbol(IFieldSymbol symbol) =>
+        symbol.DeclaredAccessibility != Accessibility.Private && symbol.IsConst;
 }

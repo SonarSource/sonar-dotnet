@@ -14,40 +14,31 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class NamespaceName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class NamespaceName : ParametrizedDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S2304";
-        private const string MessageFormat = "Rename this namespace to match the regular expression: '{0}'.";
+    private const string DiagnosticId = "S2304";
+    private const string MessageFormat = "Rename this namespace to match the regular expression: '{0}'.";
+    private const string DefaultPattern = "^" + NamingPatterns.PascalCasingInternalPattern + @"(\." + NamingPatterns.PascalCasingInternalPattern + ")*$";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        private const string DefaultPattern =
-            "^" + NamingHelper.PascalCasingInternalPattern + @"(\." + NamingHelper.PascalCasingInternalPattern + ")*$";
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the namespace names against.", DefaultPattern)]
-        public string Pattern { get; set; } = DefaultPattern;
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the namespace names against.", DefaultPattern)]
+    public string Pattern { get; set; } = DefaultPattern;
 
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var declaration = (NamespaceStatementSyntax)c.Node;
+                var declarationName = declaration.Name?.ToString();
+                if (declarationName is not null && !NamingPatterns.IsRegexMatch(declarationName, Pattern))
                 {
-                    var declaration = (NamespaceStatementSyntax)c.Node;
-                    var declarationName = declaration.Name?.ToString();
-                    if (declarationName != null &&
-                        !NamingHelper.IsRegexMatch(declarationName, Pattern))
-                    {
-                        c.ReportIssue(rule, declaration.Name, Pattern);
-                    }
-                },
-                SyntaxKind.NamespaceStatement);
-        }
-    }
+                    c.ReportIssue(Rule, declaration.Name, Pattern);
+                }
+            },
+            SyntaxKind.NamespaceStatement);
 }

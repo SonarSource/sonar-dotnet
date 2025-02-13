@@ -23,9 +23,9 @@ namespace SonarAnalyzer.CSharp.Rules
     {
         private const string Title = "Use Any() instead";
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CollectionEmptinessChecking.DiagnosticId);
-
         private readonly CSharpFacade language = CSharpFacade.Instance;
+
+        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(CollectionEmptinessChecking.DiagnosticId);
 
         protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
         {
@@ -34,11 +34,11 @@ namespace SonarAnalyzer.CSharp.Rules
                 var binaryLeft = binary.Left;
                 var binaryRight = binary.Right;
 
-                if (language.ExpressionNumericConverter.TryGetConstantIntValue(binaryLeft, out var left))
+                if (language.ExpressionNumericConverter.ConstantIntValue(binaryLeft) is { } left)
                 {
                     Simplify(root, binary, binaryRight, language.Syntax.ComparisonKind(binary).Mirror().Compare(left), context);
                 }
-                else if (language.ExpressionNumericConverter.TryGetConstantIntValue(binaryRight, out var right))
+                else if (language.ExpressionNumericConverter.ConstantIntValue(binaryRight) is { } right)
                 {
                     Simplify(root, binary, binaryLeft, language.Syntax.ComparisonKind(binary).Compare(right), context);
                 }
@@ -46,10 +46,10 @@ namespace SonarAnalyzer.CSharp.Rules
             return Task.CompletedTask;
         }
 
-        public static void Simplify(SyntaxNode root, ExpressionSyntax expression, ExpressionSyntax countExpression, CountComparisonResult comparisonResult, SonarCodeFixContext context) =>
+        private static void Simplify(SyntaxNode root, ExpressionSyntax expression, ExpressionSyntax countExpression, CountComparisonResult comparisonResult, SonarCodeFixContext context) =>
             context.RegisterCodeFix(
                 Title,
-                c => Replacement(root, expression, (InvocationExpressionSyntax)countExpression, comparisonResult, context),
+                _ => Replacement(root, expression, (InvocationExpressionSyntax)countExpression, comparisonResult, context),
                 context.Diagnostics);
 
         private static Task<Document> Replacement(SyntaxNode root, ExpressionSyntax expression, InvocationExpressionSyntax count, CountComparisonResult comparison, SonarCodeFixContext context)

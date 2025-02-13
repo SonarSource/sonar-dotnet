@@ -14,35 +14,29 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class EventName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class EventName : ParametrizedDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S2348";
-        private const string MessageFormat = "Rename this event to match the regular expression: '{0}'.";
+    private const string DiagnosticId = "S2348";
+    private const string MessageFormat = "Rename this event to match the regular expression: '{0}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the event names against.", NamingHelper.PascalCasingPattern)]
-        public string Pattern { get; set; } = NamingHelper.PascalCasingPattern;
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the event names against.", NamingPatterns.PascalCasingPattern)]
+    public string Pattern { get; set; } = NamingPatterns.PascalCasingPattern;
+
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var eventDeclaration = (EventStatementSyntax)c.Node;
+                if (!NamingPatterns.IsRegexMatch(eventDeclaration.Identifier.ValueText, Pattern))
                 {
-                    var eventDeclaration = (EventStatementSyntax)c.Node;
-                    if (!NamingHelper.IsRegexMatch(eventDeclaration.Identifier.ValueText, Pattern))
-                    {
-                        c.ReportIssue(rule, eventDeclaration.Identifier, Pattern);
-                    }
-                },
-                SyntaxKind.EventStatement);
-        }
-    }
+                    c.ReportIssue(Rule, eventDeclaration.Identifier, Pattern);
+                }
+            },
+            SyntaxKind.EventStatement);
 }

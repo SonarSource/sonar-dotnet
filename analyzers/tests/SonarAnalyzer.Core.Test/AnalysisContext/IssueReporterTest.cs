@@ -105,6 +105,31 @@ public class IssueReporterTest
     public void ReportIssueCore_MinimumRoslyVersion_Is_4_9_2() =>
         Assert.AreEqual(defaultVersion, IssueReporter.GetMinimumDesignTimeRoslynVersion());
 
+    [DataTestMethod]
+    [DataRow(null, false)]
+    [DataRow("error", false)]
+    [DataRow("error:", false)]
+    [DataRow(" error:", true)]
+    [DataRow("   error:", true)]
+    [DataRow("   error", false)]
+    [DataRow(" error :", true)]
+    [DataRow(" ErRoR :", true)]
+    [DataRow(" error   :", true)]
+    [DataRow(" error   ", false)]
+    [DataRow("error foo", false)]
+    [DataRow("error foo:", false)]
+    [DataRow(" error foo:", true)]
+    [DataRow(" error foo :", true)]
+    [DataRow(" error   foo:", true)]
+    [DataRow(" error foo   :", true)]
+    [DataRow(" errorfoo:", false)]
+    [DataRow("   error foo:", true)]
+    [DataRow("   eRrOr fOo:", true)]
+    [DataRow("   error in foo:", false)]
+    [DataRow("   error in foo :", false)]
+    public void IsTextMatchingVbcErrorPattern_ReturnsExpected(string text, bool expectedResult) =>
+        IssueReporter.IsTextMatchingVbcErrorPattern(text).Should().Be(expectedResult);
+
     private Diagnostic ReportDiagnostic(string filePath, bool hasMappedPath, string diagnosticId = "id", Version roslynVersion = null)
     {
         roslynVersion ??= defaultVersion;

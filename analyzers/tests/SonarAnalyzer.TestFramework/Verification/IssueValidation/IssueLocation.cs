@@ -15,6 +15,7 @@
  */
 
 using SonarAnalyzer.Core.Syntax.Extensions;
+using HashCode = SonarAnalyzer.Core.Common.HashCode;
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
@@ -72,7 +73,7 @@ internal sealed class IssueLocation
     }
 
     public override int GetHashCode() =>
-        Helpers.HashCode.Combine(FilePath.GetHashCode(), LineNumber, Type);
+        HashCode.Combine(FilePath.GetHashCode(), LineNumber, Type);
 
     public override bool Equals(object obj) =>
         obj is IssueLocation issue

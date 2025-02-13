@@ -19,7 +19,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace SonarAnalyzer.Helpers;
+namespace SonarAnalyzer.Core.RegularExpressions;
 
 internal static class WildcardPatternMatcher
 {

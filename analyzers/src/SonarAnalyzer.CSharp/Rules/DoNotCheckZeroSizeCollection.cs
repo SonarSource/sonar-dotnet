@@ -93,13 +93,13 @@ namespace SonarAnalyzer.CSharp.Rules
                 && ((RelationalPatternSyntaxWrapper)relationalPatternNode) is var relationalPattern
                 && ComparisonKind(relationalPattern.OperatorToken) is { } comparison
                 && comparison != Comparison.None
-                && Language.ExpressionNumericConverter.TryGetConstantIntValue(context.Model, relationalPattern.Expression, out var constant))
+                && Language.ExpressionNumericConverter.ConstantIntValue(context.Model, relationalPattern.Expression) is { } constant)
             {
                 CheckExpression(context, relationalPattern.SyntaxNode, expression, constant, comparison);
             }
 
-            static ComparisonKind ComparisonKind(SyntaxToken syntaxToken) =>
-                syntaxToken.ValueText switch
+            static ComparisonKind ComparisonKind(SyntaxToken token) =>
+                token.ValueText switch
                 {
                     "<" => Comparison.LessThan,
                     "<=" => Comparison.LessThanOrEqual,

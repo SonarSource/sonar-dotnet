@@ -81,7 +81,7 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
 
         foreach (var path in context.WebConfigFiles())
         {
-            if (XmlHelper.ParseXDocument(File.ReadAllText(path)) is { } doc)
+            if (File.ReadAllText(path).ParseXDocument() is { } doc)
             {
                 CheckWebConfig(context, path, doc.Descendants());
             }

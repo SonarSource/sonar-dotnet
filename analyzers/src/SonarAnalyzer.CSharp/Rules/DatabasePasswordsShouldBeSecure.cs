@@ -72,7 +72,7 @@ namespace SonarAnalyzer.CSharp.Rules
             foreach (var fullPath in c.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<connectionStrings>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
+                if (webConfig.Contains("<connectionStrings>") && webConfig.ParseXDocument() is { } doc)
                 {
                     ReportEmptyPassword(c, doc, fullPath);
                 }

@@ -14,10 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.RegularExpressions.Test;
 
 [TestClass]
-public class MessageTemplatesTest
+public class MessageTemplateParserTest
 {
     [DataTestMethod]
     [DataRow("")]

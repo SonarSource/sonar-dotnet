@@ -114,10 +114,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 case SpecialType.System_Decimal:
                 case SpecialType.System_Double:
                 case SpecialType.System_Single:
-                    {
-                        return ExpressionNumericConverter.TryGetConstantDoubleValue(initializer.Value, out var constantValue) &&
-                            Math.Abs(constantValue - default(double)) < double.Epsilon;
-                    }
+                    return ExpressionNumericConverter.ConstantDoubleValue(initializer.Value) is { } constantValue && Math.Abs(constantValue - default(double)) < double.Epsilon;
                 case SpecialType.System_Char:
                 case SpecialType.System_Byte:
                 case SpecialType.System_Int16:
@@ -130,26 +127,23 @@ namespace SonarAnalyzer.CSharp.Rules
                 case SpecialType.System_IntPtr:
                 case SpecialType.System_UIntPtr:
                     {
-                        if (initializer.Value is MemberAccessExpressionSyntax memberAccess
-                            && memberAccess.Name.Identifier.Text == Zero)
+                        if (initializer.Value is MemberAccessExpressionSyntax memberAccess && memberAccess.Name.Identifier.Text == Zero)
                         {
                             return true;
                         }
                         else if (ObjectCreationFactory.TryCreate(initializer.Value) is { } objectCreation)
                         {
                             var argCount = objectCreation.ArgumentList?.Arguments.Count;
-                            if (argCount == null || argCount == 0)
+                            if (argCount is null || argCount == 0)
                             {
                                 return true;
                             }
 
-                            return ExpressionNumericConverter.TryGetConstantIntValue(objectCreation.ArgumentList.Arguments.First().Expression, out var ctorParameter)
-                                   && ctorParameter == default;
+                            return ExpressionNumericConverter.ConstantIntValue(objectCreation.ArgumentList.Arguments.First().Expression) is 0;
                         }
                         else
                         {
-                            return ExpressionNumericConverter.TryGetConstantIntValue(initializer.Value, out var constantValue)
-                                   && constantValue == default;
+                            return ExpressionNumericConverter.ConstantIntValue(initializer.Value) is 0;
                         }
                     }
                 default:

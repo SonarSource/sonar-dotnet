@@ -79,7 +79,7 @@ namespace SonarAnalyzer.CSharp.Rules
             foreach (var fullPath in context.ProjectConfiguration().FilesToAnalyze.FindFiles("web.config"))
             {
                 var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc
+                if (webConfig.Contains("<system.web>") && webConfig.ParseXDocument() is { } doc
                     && doc.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs(attribute, true) != null))
                 {
                     return true;

@@ -80,7 +80,7 @@ namespace SonarAnalyzer.Core.Rules
             foreach (var fullPath in context.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<system.web>") && XmlHelper.ParseXDocument(webConfig) is { } doc)
+                if (webConfig.Contains("<system.web>") && webConfig.ParseXDocument() is { } doc)
                 {
                     ReportValidateRequest(context, doc, fullPath);
                     ReportRequestValidationMode(context, doc, fullPath);

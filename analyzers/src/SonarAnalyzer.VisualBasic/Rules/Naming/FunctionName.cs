@@ -14,62 +14,60 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class FunctionName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class FunctionName : ParametrizedDiagnosticAnalyzer
+    private const string DiagnosticId = "S1542";
+    private const string MessageFormat = "Rename {0} '{1}' to match the regular expression: '{2}'.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the function names against.", NamingPatterns.PascalCasingPattern)]
+    public string Pattern { get; set; } = NamingPatterns.PascalCasingPattern;
+
+    protected override void Initialize(SonarParametrizedAnalysisContext context)
     {
-        internal const string DiagnosticId = "S1542";
-        private const string MessageFormat = "Rename {0} '{1}' to match the regular expression: '{2}'.";
-
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        [RuleParameter("format", PropertyType.String, "Regular expression used to check the function names against.", NamingHelper.PascalCasingPattern)]
-        public string Pattern { get; set; } = NamingHelper.PascalCasingPattern;
-
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var methodDeclaration = (MethodStatementSyntax)c.Node;
+                if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
+                    && !NamingPatterns.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern))
                 {
-                    var methodDeclaration = (MethodStatementSyntax)c.Node;
-                    if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
-                        && !NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern))
-                    {
-                        c.ReportIssue(Rule, methodDeclaration.Identifier, "function", methodDeclaration.Identifier.ValueText, Pattern);
-                    }
-                },
-                SyntaxKind.FunctionStatement);
+                    c.ReportIssue(Rule, methodDeclaration.Identifier, "function", methodDeclaration.Identifier.ValueText, Pattern);
+                }
+            },
+            SyntaxKind.FunctionStatement);
 
-            context.RegisterNodeAction(
-                c =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var methodDeclaration = (MethodStatementSyntax)c.Node;
+                if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
+                    && !NamingPatterns.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
+                    && !EventHandlerName.IsEventHandler(methodDeclaration, c.Model))
                 {
-                    var methodDeclaration = (MethodStatementSyntax)c.Node;
-                    if (ShouldBeChecked(methodDeclaration, c.ContainingSymbol)
-                        && !NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
-                        && !EventHandlerName.IsEventHandler(methodDeclaration, c.Model))
-                    {
-                        c.ReportIssue(Rule, methodDeclaration.Identifier, "procedure", methodDeclaration.Identifier.ValueText, Pattern);
-                    }
-                },
-                SyntaxKind.SubStatement);
+                    c.ReportIssue(Rule, methodDeclaration.Identifier, "procedure", methodDeclaration.Identifier.ValueText, Pattern);
+                }
+            },
+            SyntaxKind.SubStatement);
 
-            static bool ShouldBeChecked(MethodStatementSyntax methodStatement, ISymbol declaredSymbol) =>
-                !declaredSymbol.IsOverride
-                && !IsExternImport(declaredSymbol)
-                && !ImplementsSingleMethodWithoutOverride(methodStatement, declaredSymbol);
+        static bool ShouldBeChecked(MethodStatementSyntax methodStatement, ISymbol declaredSymbol) =>
+            !declaredSymbol.IsOverride
+            && !IsExternImport(declaredSymbol)
+            && !ImplementsSingleMethodWithoutOverride(methodStatement, declaredSymbol);
 
-            static bool IsExternImport(ISymbol methodSymbol) =>
-                methodSymbol.IsExtern && methodSymbol.IsStatic && methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute);
+        static bool IsExternImport(ISymbol methodSymbol) =>
+            methodSymbol.IsExtern && methodSymbol.IsStatic && methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute);
 
-            static bool ImplementsSingleMethodWithoutOverride(MethodStatementSyntax methodStatement, ISymbol methodSymbol) =>
-                methodStatement.ImplementsClause is { } implementsClause
-                && implementsClause.InterfaceMembers.Count == 1
-                && methodSymbol.GetInterfaceMember() is { } interfaceMember
-                && string.Equals(interfaceMember.Name, methodStatement.Identifier.ValueText, StringComparison.Ordinal);
-        }
+        static bool ImplementsSingleMethodWithoutOverride(MethodStatementSyntax methodStatement, ISymbol methodSymbol) =>
+            methodStatement.ImplementsClause is { } implementsClause
+            && implementsClause.InterfaceMembers.Count == 1
+            && methodSymbol.GetInterfaceMember() is { } interfaceMember
+            && string.Equals(interfaceMember.Name, methodStatement.Identifier.ValueText, StringComparison.Ordinal);
     }
 }

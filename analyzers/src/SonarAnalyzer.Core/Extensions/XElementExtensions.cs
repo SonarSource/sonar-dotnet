@@ -16,15 +16,16 @@
 
 using System.Xml.Linq;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Extensions;
 
-[TestClass]
-public class XmlHelperTest
+public static class XElementExtensions
 {
-    [TestMethod]
-    public void CreateLocation_WithNoLineInfo_ReturnsNull()
-    {
-        var sut = new XAttribute(XName.Get("name"), "A");
-        sut.CreateLocation("").Should().BeNull();
-    }
+    public static XAttribute GetAttributeIfBoolValueIs(this XElement element, string attributeName, bool value) =>
+        element.Attribute(attributeName) is { } attribute
+            && attribute.Value.Equals(value.ToString(), StringComparison.OrdinalIgnoreCase)
+            ? attribute
+            : null;
+
+    public static Location CreateLocation(this XElement element, string path) =>
+        element.CreateLocation(path, element.Name);
 }

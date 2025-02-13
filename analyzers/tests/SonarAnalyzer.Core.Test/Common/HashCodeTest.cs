@@ -16,9 +16,9 @@
 
 #pragma warning disable CA1825 // Avoid zero-length array allocations
 
-using HashCode = SonarAnalyzer.Helpers.HashCode;
+using HashCode = SonarAnalyzer.Core.Common.HashCode;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Core.Common.Test;
 
 [TestClass]
 public class HashCodeTest

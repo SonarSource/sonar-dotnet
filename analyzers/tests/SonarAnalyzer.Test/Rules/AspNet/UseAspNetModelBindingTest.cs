@@ -62,12 +62,12 @@ public class UseAspNetModelBindingTest
             using System;
             using System.Linq;
             using System.Threading.Tasks;
-            
+
             public class TestController : Controller
             {
                 async Task NoncompliantKeyVariations(IFormCollection form, HttpRequest request)
                 {
-                    _ = {{filesAccess}}; // {{(compliant ? string.Empty : "//Noncompliant")}} 
+                    _ = {{filesAccess}}; // {{(compliant ? string.Empty : "//Noncompliant")}}
                 }
             }
             """");
@@ -103,7 +103,7 @@ public class UseAspNetModelBindingTest
                     _ = Request.{{property}}.TryGetValue(@"key", out _);              // Noncompliant
                     _ = Request.{{property}}["""key"""];                              // Noncompliant
                     _ = Request.{{property}}.TryGetValue("""key""", out _);           // Noncompliant
-            
+
                     const string key = "id";
                     _ = Request.{{property}}[key];                                    // Noncompliant
                     _ = Request.{{property}}.TryGetValue(key, out _);                 // Noncompliant
@@ -111,7 +111,7 @@ public class UseAspNetModelBindingTest
                     _ = Request.{{property}}.TryGetValue($"prefix.{key}", out _);     // Noncompliant
                     _ = Request.{{property}}[$"""prefix.{key}"""];                    // Noncompliant
                     _ = Request.{{property}}.TryGetValue($"""prefix.{key}""", out _); // Noncompliant
-            
+
                     _ = Request.{{property}}[key: "id"];                              // Noncompliant
                     _ = Request.{{property}}.TryGetValue(value: out _, key: "id");    // Noncompliant
                 }
@@ -259,7 +259,7 @@ public class UseAspNetModelBindingTest
     [DataRow("Headers")]
     [DataRow("Query")]
     [DataRow("RouteValues")]
-    public void UseAspNetModelBinding_NoControllerHelpers(string property) =>
+    public void UseAspNetModelBinding_NoController_Properties(string property) =>
         builderAspNetCore.AddSnippet($$""""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -285,7 +285,7 @@ public class UseAspNetModelBindingTest
                     _ = Request.{{property}}["id"]; // Compliant: Not in a controller
                     _ = request.{{property}}["id"]; // Compliant: Not in a controller
                 }
-            }            
+            }
             """").VerifyNoIssues();
 
     [CombinatorialDataTestMethod]

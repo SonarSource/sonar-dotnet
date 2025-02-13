@@ -76,7 +76,7 @@ namespace SonarAnalyzer.Core.Rules
         }
 
         private bool IsInvalidComparison(SyntaxNode constantExpression, SyntaxNode methodInvocationExpression, SemanticModel semanticModel) =>
-            Language.ExpressionNumericConverter.TryGetConstantIntValue(constantExpression, out var constValue)
+            Language.ExpressionNumericConverter.ConstantIntValue(constantExpression) is { } constValue
             && constValue == 0
             && semanticModel.GetSymbolInfo(methodInvocationExpression).Symbol is IMethodSymbol indexOfSymbol
             && TrackedMethods.Any(x => x.Equals(indexOfSymbol.Name, Language.NameComparison))

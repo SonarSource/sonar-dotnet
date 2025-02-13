@@ -14,36 +14,31 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class EnumerationValueName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class EnumerationValueName : ParametrizedDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S2343";
-        private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
+    private const string DiagnosticId = "S2343";
+    private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the enumeration value names against.", NamingHelper.PascalCasingPattern)]
-        public string Pattern { get; set; } = NamingHelper.PascalCasingPattern;
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarParametrizedAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the enumeration value names against.", NamingPatterns.PascalCasingPattern)]
+    public string Pattern { get; set; } = NamingPatterns.PascalCasingPattern;
+
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var enumMemberDeclaration = (EnumMemberDeclarationSyntax)c.Node;
+                if (!NamingPatterns.IsRegexMatch(enumMemberDeclaration.Identifier.ValueText, Pattern))
                 {
-                    var enumMemberDeclaration = (EnumMemberDeclarationSyntax)c.Node;
-                    if (!NamingHelper.IsRegexMatch(enumMemberDeclaration.Identifier.ValueText, Pattern))
-                    {
-                        c.ReportIssue(rule, enumMemberDeclaration.Identifier,
-                            enumMemberDeclaration.Identifier.ValueText, Pattern);
-                    }
-                },
-                SyntaxKind.EnumMemberDeclaration);
-        }
-    }
+                    c.ReportIssue(Rule, enumMemberDeclaration.Identifier,
+                        enumMemberDeclaration.Identifier.ValueText, Pattern);
+                }
+            },
+            SyntaxKind.EnumMemberDeclaration);
 }

@@ -50,26 +50,23 @@ namespace SonarAnalyzer.CSharp.Rules
 
             if (optionalLeft.HasValue ^ optionalRight.HasValue)
             {
-                if (optionalLeft.HasValue && TryConvertToDouble(optionalLeft.Value, out constant))
+                if (optionalLeft.HasValue && Conversions.ToDouble(optionalLeft.Value) is { } left)
                 {
+                    constant = left;
                     other = binary.Right;
                     return true;
                 }
-                else if (optionalRight.HasValue && TryConvertToDouble(optionalRight.Value, out constant))
+                else if (optionalRight.HasValue && Conversions.ToDouble(optionalRight.Value) is { } right)
                 {
+                    constant = right;
                     other = binary.Left;
                     return true;
                 }
             }
             constant = default;
-            other = default;
+            other = null;
             return false;
         }
-
-        // 'char' needs to roundtrip {{char -> int -> double}}, can't go {{char -> double}}
-        private static bool TryConvertToDouble(object constant, out double typedConstant) =>
-            ConversionHelper.TryConvertWith(constant is char ? Convert.ToInt32(constant) : constant, Convert.ToDouble, out typedConstant)
-            && !double.IsInfinity(typedConstant);
 
         private static ValuesRange? TryGetRange(ITypeSymbol typeSymbol) =>
             typeSymbol switch

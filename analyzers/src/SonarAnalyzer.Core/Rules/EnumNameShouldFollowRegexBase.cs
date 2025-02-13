@@ -14,39 +14,41 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+using SonarAnalyzer.Core.RegularExpressions;
+
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
+    where TSyntaxKind : struct
 {
-    public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
-        where TSyntaxKind : struct
-    {
-        protected const string DiagnosticId = "S2342";
-        private const string MessageFormat = "Rename this enumeration to match the regular expression: '{0}'.";
-        private const string DefaultEnumNamePattern = NamingHelper.PascalCasingPattern;
-        private const string DefaultFlagsEnumNamePattern = "^" + NamingHelper.PascalCasingInternalPattern + "s$";
+    protected const string DiagnosticId = "S2342";
+    private const string MessageFormat = "Rename this enumeration to match the regular expression: '{0}'.";
+    private const string DefaultEnumNamePattern = NamingPatterns.PascalCasingPattern;
+    private const string DefaultFlagsEnumNamePattern = "^" + NamingPatterns.PascalCasingInternalPattern + "s$";
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+    private readonly DiagnosticDescriptor rule;
 
-        [RuleParameter("format", PropertyType.String, "Regular expression used to check the enumeration type names against.", DefaultEnumNamePattern)]
-        public string EnumNamePattern { get; set; } = DefaultEnumNamePattern;
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
 
-        [RuleParameter("flagsAttributeFormat", PropertyType.String, "Regular expression used to check the flags enumeration type names against.", DefaultFlagsEnumNamePattern)]
-        public string FlagsEnumNamePattern { get; set; } = DefaultFlagsEnumNamePattern;
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the enumeration type names against.", DefaultEnumNamePattern)]
+    public string EnumNamePattern { get; set; } = DefaultEnumNamePattern;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-        private readonly DiagnosticDescriptor rule;
+    [RuleParameter("flagsAttributeFormat", PropertyType.String, "Regular expression used to check the flags enumeration type names against.", DefaultFlagsEnumNamePattern)]
+    public string FlagsEnumNamePattern { get; set; } = DefaultFlagsEnumNamePattern;
 
-        protected EnumNameShouldFollowRegexBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+    protected EnumNameShouldFollowRegexBase() =>
+        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
+
+    protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
+            {
+                var pattern = c.Node.HasFlagsAttribute(c.Model) ? FlagsEnumNamePattern : EnumNamePattern;
+                if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingPatterns.IsRegexMatch(identifier.ValueText, pattern))
                 {
-                    var pattern = c.Node.HasFlagsAttribute(c.Model) ? FlagsEnumNamePattern : EnumNamePattern;
-                    if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingHelper.IsRegexMatch(identifier.ValueText, pattern))
-                    {
-                        c.ReportIssue(SupportedDiagnostics[0], identifier, pattern);
-                    }
-                },
-                Language.SyntaxKind.EnumDeclaration);
-    }
+                    c.ReportIssue(SupportedDiagnostics[0], identifier, pattern);
+                }
+            },
+            Language.SyntaxKind.EnumDeclaration);
 }

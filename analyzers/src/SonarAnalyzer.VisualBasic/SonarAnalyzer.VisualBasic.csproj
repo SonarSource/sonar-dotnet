@@ -35,12 +35,12 @@
     <Using Include="SonarAnalyzer.Core.Common" />
     <Using Include="SonarAnalyzer.Core.Extensions" />
     <Using Include="SonarAnalyzer.Core.Facade" />
+    <Using Include="SonarAnalyzer.Core.RegularExpressions" />
     <Using Include="SonarAnalyzer.Core.Rules" />
     <Using Include="SonarAnalyzer.Core.Semantics" />
     <Using Include="SonarAnalyzer.Core.Semantics.Extensions" />
     <Using Include="SonarAnalyzer.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.Core.Syntax.Utilities" />
-    <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Common" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Extensions" />
     <Using Include="SonarAnalyzer.VisualBasic.Core.Syntax.Extensions" />

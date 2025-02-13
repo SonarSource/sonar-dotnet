@@ -16,17 +16,17 @@
 
 using SonarAnalyzer.CFG.Sonar;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.CFG.Sonar;
 
 [TestClass]
-public class BlockIdMapTest
+public class BlockIdProviderTest
 {
     private BlockIdProvider blockId;
 
     [TestInitialize]
     public void TestInitialize()
     {
-        this.blockId = new BlockIdProvider();
+        blockId = new BlockIdProvider();
     }
 
     [TestMethod]
@@ -34,17 +34,17 @@ public class BlockIdMapTest
     {
         var block = new TemporaryBlock();
 
-        this.blockId.Get(block).Should().Be("0");
-        this.blockId.Get(block).Should().Be("0");
-        this.blockId.Get(block).Should().Be("0");
+        blockId.Get(block).Should().Be("0");
+        blockId.Get(block).Should().Be("0");
+        blockId.Get(block).Should().Be("0");
     }
 
     [TestMethod]
     public void Get_Returns_Different_Id_For_Different_Block()
     {
-        var id1 = this.blockId.Get(new TemporaryBlock());
-        var id2 = this.blockId.Get(new TemporaryBlock());
-        var id3 = this.blockId.Get(new TemporaryBlock());
+        var id1 = blockId.Get(new TemporaryBlock());
+        var id2 = blockId.Get(new TemporaryBlock());
+        var id3 = blockId.Get(new TemporaryBlock());
 
         id1.Should().Be("0");
         id2.Should().Be("1");

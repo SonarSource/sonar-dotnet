@@ -18,7 +18,7 @@ using System.IO;
 using RuleCatalogCS = SonarAnalyzer.CSharp.Core.Rspec.RuleCatalog;
 using RuleCatalogVB = SonarAnalyzer.VisualBasic.Core.Rspec.RuleCatalog;
 
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.Test.Common;
 
 [TestClass]
 public class RuleCatalogTest

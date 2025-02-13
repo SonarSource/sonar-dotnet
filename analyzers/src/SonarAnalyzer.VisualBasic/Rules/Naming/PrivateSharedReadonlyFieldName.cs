@@ -14,30 +14,23 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class PrivateSharedReadonlyFieldName : FieldNameChecker
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class PrivateSharedReadonlyFieldName : FieldNameChecker
-    {
-        internal const string DiagnosticId = "S2363";
-        private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
+    private const string DiagnosticId = "S2363";
+    private const string MessageFormat = "Rename '{0}' to match the regular expression: '{1}'.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat,
-                isEnabledByDefault: false);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        [RuleParameter("format", PropertyType.String,
-            "Regular expression used to check the 'Private Shared ReadOnly' field names against.",
-            NamingHelper.CamelCasingPatternWithOptionalPrefixes)]
-        public override string Pattern { get; set; } = NamingHelper.CamelCasingPatternWithOptionalPrefixes;
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the 'Private Shared ReadOnly' field names against.", NamingPatterns.CamelCasingPatternWithOptionalPrefixes)]
+    public override string Pattern { get; set; } = NamingPatterns.CamelCasingPatternWithOptionalPrefixes;
 
-        protected override bool IsCandidateSymbol(IFieldSymbol symbol)
-        {
-            return symbol.DeclaredAccessibility == Accessibility.Private &&
-                symbol.IsShared() &&
-                symbol.IsReadOnly;
-        }
-    }
+    protected override bool IsCandidateSymbol(IFieldSymbol symbol) =>
+        symbol.DeclaredAccessibility == Accessibility.Private
+        && symbol.IsShared()
+        && symbol.IsReadOnly;
 }

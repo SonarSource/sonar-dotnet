@@ -20,7 +20,6 @@
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.Core.Common" />
-    <Using Include="SonarAnalyzer.Helpers" />
     <Using Include="SonarAnalyzer.TestFramework.Analyzers" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.Common" />

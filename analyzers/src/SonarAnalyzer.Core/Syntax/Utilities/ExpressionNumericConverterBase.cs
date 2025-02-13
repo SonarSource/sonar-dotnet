@@ -26,43 +26,39 @@ public abstract class ExpressionNumericConverterBase<TLiteralExpressionSyntax, T
     protected abstract bool IsMinusOperator(TUnaryExpressionSyntax unaryExpression);
     protected abstract SyntaxNode RemoveParentheses(SyntaxNode expression);
 
-    public bool TryGetConstantIntValue(SemanticModel model, SyntaxNode expression, out int value) =>
-        TryGetConstantValue(model, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
+    public int? ConstantIntValue(SemanticModel model, SyntaxNode expression) =>
+        ConstantValue(model, expression, Convert.ToInt32, (multiplier, v) => multiplier * v);
 
-    public bool TryGetConstantIntValue(SyntaxNode expression, out int value) =>
-        TryGetConstantValue(null, expression, Convert.ToInt32, (multiplier, v) => multiplier * v, out value);
+    public int? ConstantIntValue(SyntaxNode expression) =>
+        ConstantValue(null, expression, Convert.ToInt32, (multiplier, v) => multiplier * v);
 
-    public bool TryGetConstantDoubleValue(SyntaxNode expression, out double value) =>
-        TryGetConstantValue(null, expression, Convert.ToDouble, (multiplier, v) => multiplier * v, out value);
+    public double? ConstantDoubleValue(SyntaxNode expression) =>
+        ConstantValue(null, expression, Convert.ToDouble, (multiplier, v) => multiplier * v);
 
-    public bool TryGetConstantDecimalValue(SyntaxNode expression, out decimal value) =>
-        TryGetConstantValue(null, expression, Convert.ToDecimal, (multiplier, v) => multiplier * v, out value);
+    public decimal? ConstantDecimalValue(SyntaxNode expression) =>
+        ConstantValue(null, expression, Convert.ToDecimal, (multiplier, v) => multiplier * v);
 
-    private bool TryGetConstantValue<T>(SemanticModel model, SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator, out T value)
+    private T? ConstantValue<T>(SemanticModel model, SyntaxNode expression, Func<object, T> converter, Func<int, T, T> multiplierCalculator)
         where T : struct
     {
         expression = RemoveParentheses(expression);
-
-        if (GetMultiplier(expression, out var internalExpression) is int multiplier
+        if (Multiplier(expression, out var internalExpression) is int multiplier
             && internalExpression is TLiteralExpressionSyntax literalExpression
-            && ConversionHelper.TryConvertWith(TokenValue(literalExpression), converter, out value))
+            && Conversions.ConvertWith(TokenValue(literalExpression), converter) is { } value)
         {
-            value = multiplierCalculator(multiplier, value);
-            return true;
+            return multiplierCalculator(multiplier, value);
         }
-        else if (model?.GetConstantValue(expression) is { HasValue: true } optional && optional.Value is T val)
+        else if (model?.GetConstantValue(expression) is { HasValue: true } optional && optional.Value is T constantValue)
         {
-            value = val;
-            return true;
+            return constantValue;
         }
         else
         {
-            value = default;
-            return false;
+            return null;
         }
     }
 
-    private int? GetMultiplier(SyntaxNode expression, out SyntaxNode internalExpression)
+    private int? Multiplier(SyntaxNode expression, out SyntaxNode internalExpression)
     {
         var multiplier = 1;
         internalExpression = expression;

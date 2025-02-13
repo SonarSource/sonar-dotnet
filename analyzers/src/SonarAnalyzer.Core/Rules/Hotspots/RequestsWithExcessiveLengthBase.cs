@@ -139,7 +139,7 @@ namespace SonarAnalyzer.Core.Rules
             foreach (var fullPath in c.WebConfigFiles())
             {
                 var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<system.web") && XmlHelper.ParseXDocument(webConfig) is { } doc)
+                if (webConfig.Contains("<system.web") && webConfig.ParseXDocument() is { } doc)
                 {
                     ReportRequestLengthViolation(c, doc, fullPath);
                 }

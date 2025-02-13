@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Text.RegularExpressions;
 using SonarAnalyzer.CFG.Common;
 
 namespace SonarAnalyzer.Core.AnalysisContext;
@@ -32,6 +33,10 @@ public static class IssueReporter
         "S1117",
         "S1481",
         "S1871");
+
+    private static readonly Regex VbNetErrorPattern = new Regex(@"\s+error(\s+\S+)?\s*:",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
+        Constants.DefaultRegexTimeout);
 
     // Minimum supported version for Razor IDE is Visual Studio 17.9/Roslyn 4.9.2
     // https://learn.microsoft.com/en-us/visualstudio/extensibility/roslyn-version-support?view=vs-2022
@@ -76,8 +81,7 @@ public static class IssueReporter
                 return;
             }
             // Standalone NuGet, Scanner run and SonarLint < 4.0 used with latest NuGet
-            if (!VbcHelper.IsTriggeringVbcError(reportingContext.Diagnostic)
-                && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.Tree, reportingContext.Diagnostic) ?? true))
+            if (!IsTriggeringVbcError(reportingContext.Diagnostic) && (SonarAnalysisContext.ShouldDiagnosticBeReported?.Invoke(reportingContext.Tree, reportingContext.Diagnostic) ?? true))
             {
                 reportingContext.ReportDiagnostic(reportingContext.Diagnostic);
             }
@@ -89,6 +93,9 @@ public static class IssueReporter
 
     internal static Version GetMinimumDesignTimeRoslynVersion() =>
         minimumDesignTimeRoslynVersion;
+
+    internal static bool IsTextMatchingVbcErrorPattern(string text) =>
+        text is not null && VbNetErrorPattern.SafeIsMatch(text);
 
     private static bool ShouldRaiseOnRazorFile(ref Diagnostic diagnostic)
     {
@@ -141,5 +148,31 @@ public static class IssueReporter
             mappedLocation,
             diagnostic.AdditionalLocations.Select(x => x.EnsureMappedLocation()).ToImmutableList(),
             diagnostic.Properties);
+    }
+
+    /// <summary>
+    /// VB.Net Complier (VBC) post-process issues and will fail if the line contains the <see cref="VbNetErrorPattern"/>.
+    /// </summary>
+    /// <remarks>
+    /// This helper method is intended to be used only while waiting for the bug to be fixed on Microsoft side.
+    /// <see href="https://github.com/dotnet/roslyn/issues/5724"/>.
+    /// </remarks>
+    /// <param name="diagnostic">
+    /// The diagnostic to test.
+    /// </param>
+    /// <returns>
+    /// Returns <c>true</c> when reporting the diagnostic will trigger a VBC post-process error and <c>false</c> otherwise.
+    /// </returns>
+    private static bool IsTriggeringVbcError(Diagnostic diagnostic)
+    {
+        if (diagnostic.Location is null || diagnostic.Location.SourceTree?.GetRoot().Language != LanguageNames.VisualBasic)
+        {
+            return false;
+        }
+
+        var text = diagnostic.Location.SourceTree.GetText();
+        var lineNumber = diagnostic.Location.LineNumberToReport();
+
+        return IsTextMatchingVbcErrorPattern(text.Lines[lineNumber - 1].ToString());
     }
 }

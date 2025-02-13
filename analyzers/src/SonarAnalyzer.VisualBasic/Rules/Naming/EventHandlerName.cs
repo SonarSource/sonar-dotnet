@@ -14,45 +14,42 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class EventHandlerName : ParametrizedDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class EventHandlerName : ParametrizedDiagnosticAnalyzer
+    private const string DiagnosticId = "S2347";
+    private const string MessageFormat = "Rename event handler '{0}' to match the regular expression: '{1}'.";
+    private const string DefaultPattern = "^(([a-z][a-z0-9]*)?" + NamingPatterns.PascalCasingInternalPattern + "_)?" + NamingPatterns.PascalCasingInternalPattern + "$";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, false);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    [RuleParameter("format", PropertyType.String, "Regular expression used to check the even handler names against.", DefaultPattern)]
+    public string Pattern { get; set; } = DefaultPattern;
+
+    internal static bool IsEventHandler(MethodStatementSyntax declaration, SemanticModel model)
     {
-        internal const string DiagnosticId = "S2347";
-        private const string MessageFormat = "Rename event handler '{0}' to match the regular expression: '{1}'.";
-
-        private const string DefaultPattern = "^(([a-z][a-z0-9]*)?" + NamingHelper.PascalCasingInternalPattern + "_)?" + NamingHelper.PascalCasingInternalPattern + "$";
-
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        [RuleParameter("format", PropertyType.String, "Regular expression used to check the even handler names against.", DefaultPattern)]
-        public string Pattern { get; set; } = DefaultPattern;
-
-        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var methodDeclaration = (MethodStatementSyntax)c.Node;
-                    if (!NamingHelper.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
-                        && IsEventHandler(methodDeclaration, c.Model))
-                    {
-                        c.ReportIssue(Rule, methodDeclaration.Identifier, methodDeclaration.Identifier.ValueText, Pattern);
-                    }
-                },
-                SyntaxKind.SubStatement);
-
-        internal static bool IsEventHandler(MethodStatementSyntax declaration, SemanticModel semanticModel)
+        if (declaration.HandlesClause is not null)
         {
-            if (declaration.HandlesClause != null)
-            {
-                return true;
-            }
-
-            var symbol = semanticModel.GetDeclaredSymbol(declaration);
-            return symbol != null && symbol.IsEventHandler();
+            return true;
         }
+
+        var symbol = model.GetDeclaredSymbol(declaration);
+        return symbol is not null && symbol.IsEventHandler();
     }
+
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var methodDeclaration = (MethodStatementSyntax)c.Node;
+                if (!NamingPatterns.IsRegexMatch(methodDeclaration.Identifier.ValueText, Pattern)
+                    && IsEventHandler(methodDeclaration, c.Model))
+                {
+                    c.ReportIssue(Rule, methodDeclaration.Identifier, methodDeclaration.Identifier.ValueText, Pattern);
+                }
+            },
+            SyntaxKind.SubStatement);
 }

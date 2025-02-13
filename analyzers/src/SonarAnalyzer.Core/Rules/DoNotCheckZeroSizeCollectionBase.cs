@@ -38,11 +38,11 @@ namespace SonarAnalyzer.Core.Rules
                     var binaryLeft = Language.Syntax.BinaryExpressionLeft(binary);
                     var binaryRight = Language.Syntax.BinaryExpressionRight(binary);
 
-                    if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.Model, binaryLeft, out var left))
+                    if (Language.ExpressionNumericConverter.ConstantIntValue(c.Model, binaryLeft) is { } left)
                     {
                         CheckExpression(c, binary, binaryRight, left, Language.Syntax.ComparisonKind(binary).Mirror());
                     }
-                    else if (Language.ExpressionNumericConverter.TryGetConstantIntValue(c.Model, binaryRight, out var right))
+                    else if (Language.ExpressionNumericConverter.ConstantIntValue(c.Model, binaryRight) is { } right)
                     {
                         CheckExpression(c, binary, binaryLeft, right, Language.Syntax.ComparisonKind(binary));
                     }
@@ -71,7 +71,7 @@ namespace SonarAnalyzer.Core.Rules
             CountName.Equals(symbol.Name, Language.NameComparison)
             && symbol is IMethodSymbol methodSymbol
             && methodSymbol.IsExtensionMethod
-            && methodSymbol.ReceiverType != null
+            && methodSymbol.ReceiverType is not null
             && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
         private bool IsArrayLengthProperty(ISymbol symbol) =>

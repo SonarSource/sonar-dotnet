@@ -17,6 +17,7 @@
 using System.IO;
 using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.Text;
+using SonarAnalyzer.Core.RegularExpressions;
 
 namespace SonarAnalyzer.Core.Configuration;
 

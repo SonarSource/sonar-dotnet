@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG;
-
-namespace SonarAnalyzer.Test.Helpers;
+namespace SonarAnalyzer.CFG.Test;
 
 [TestClass]
 public class DotWriterTest
