@@ -17,11 +17,6 @@
   <url>http://redirect.sonarsource.com/plugins/csharp.html</url>
   <inceptionYear>2014</inceptionYear>
 
-  <organization>
-    <name>SonarSource</name>
-    <url>http://www.sonarsource.com</url>
-  </organization>
-
   <licenses>
     <license>
       <name>SSALv1</name>
@@ -29,13 +24,6 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
-
-  <scm>
-    <connection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</connection>
-    <developerConnection>scm:git:git@github.com:SonarSource/sonar-dotnet.git</developerConnection>
-    <url>https://github.com/SonarSource/sonar-dotnet</url>
-    <tag>HEAD</tag>
-  </scm>
 
   <properties>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
