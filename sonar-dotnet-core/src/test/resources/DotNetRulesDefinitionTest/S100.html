@@ -1,0 +1,29 @@
+<h2>Why is this an issue?</h2>
+<p>Shared naming conventions allow teams to collaborate efficiently.</p>
+<p>This rule raises an issue when a method or a property name is not PascalCased.</p>
+<p>For example, the method</p>
+<pre>
+public int doSomething() {...} // Noncompliant
+</pre>
+<p>should be renamed to</p>
+<pre>
+public int DoSomething() {...}
+</pre>
+<h3>Exceptions</h3>
+<ul>
+  <li> The rule ignores members in types marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. </li>
+  <li> The rule ignores <code>extern</code> methods. </li>
+  <li> To reduce noise, two consecutive upper-case characters are allowed unless they form the full name. So, <code>MyXMethod</code> is compliant, but
+  <code>XM</code> is not. </li>
+  <li> The camel casing is not enforced when a name contains the <code>'_'</code> character. </li>
+</ul>
+<pre>
+void My_method_(){...} // Noncompliant, leading and trailing underscores are reported
+
+void My_method(){...} // Compliant by exception
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions">Microsoft Capitalization
+Conventions</a></p>
+

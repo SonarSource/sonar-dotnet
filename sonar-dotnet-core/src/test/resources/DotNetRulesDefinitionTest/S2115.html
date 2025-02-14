@@ -1,0 +1,197 @@
+<p>When accessing a database, an empty password should be avoided as it introduces a weakness.</p>
+<h2>Why is this an issue?</h2>
+<p>When a database does not require a password for authentication, it allows anyone to access and manipulate the data stored within it. Exploiting
+this vulnerability typically involves identifying the target database and establishing a connection to it without the need for any authentication
+credentials.</p>
+<h3>What is the potential impact?</h3>
+<p>Once connected, an attacker can perform various malicious actions, such as viewing, modifying, or deleting sensitive information, potentially
+leading to data breaches or unauthorized access to critical systems. It is crucial to address this vulnerability promptly to ensure the security and
+integrity of the database and the data it contains.</p>
+<h4>Unauthorized Access to Sensitive Data</h4>
+<p>When a database lacks a password for authentication, it opens the door for unauthorized individuals to gain access to sensitive data. This can
+include personally identifiable information (PII), financial records, intellectual property, or any other confidential information stored in the
+database. Without proper access controls in place, malicious actors can exploit this vulnerability to retrieve sensitive data, potentially leading to
+identity theft, financial loss, or reputational damage.</p>
+<h4>Compromise of System Integrity</h4>
+<p>Without a password requirement, unauthorized individuals can gain unrestricted access to a database, potentially compromising the integrity of the
+entire system. Attackers can inject malicious code, alter configurations, or manipulate data within the database, leading to system malfunctions,
+unauthorized system access, or even complete system compromise. This can disrupt business operations, cause financial losses, and expose the
+organization to further security risks.</p>
+<h4>Unwanted Modifications or Deletions</h4>
+<p>The absence of a password for database access allows anyone to make modifications or deletions to the data stored within it. This poses a
+significant risk, as unauthorized changes can lead to data corruption, loss of critical information, or the introduction of malicious content. For
+example, an attacker could modify financial records, tamper with customer orders, or delete important files, causing severe disruptions to business
+processes and potentially leading to financial and legal consequences.</p>
+<p>Overall, the lack of a password configured to access a database poses a serious security risk, enabling unauthorized access, data breaches, system
+compromise, and unwanted modifications or deletions. It is essential to address this vulnerability promptly to safeguard sensitive data, maintain
+system integrity, and protect the organization from potential harm.</p>
+<h2>How to fix it in Entity Framework Core</h2>
+<h3>Code examples</h3>
+<p>The following code uses an empty password to connect to a SQL Server database.</p>
+<p>The vulnerability can be fixed by using Windows authentication (sometimes referred to as integrated security).</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="302" data-diff-type="noncompliant">
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+  optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password="); // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="302" data-diff-type="compliant">
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+{
+  optionsBuilder.UseSqlServer("Server=myServerAddress;Database=myDataBase;Integrated Security=True");
+}
+</pre>
+<h3>How does this work?</h3>
+<h4>Windows authentication (integrated security)</h4>
+<p>When the connection string includes the <code>Integrated Security=true</code> parameter, it enables Windows authentication (sometimes called
+integrated security) for the database connection. With integrated security, the user’s Windows credentials are used to authenticate and authorize
+access to the database. It eliminates the need for a separate username and password for the database connection. Integrated security simplifies
+authentication and leverages the existing Windows authentication infrastructure for secure database access in your C# application.</p>
+<p>It’s important to note that when using integrated security, the user running the application must have the necessary permissions to access the
+database. Ensure that the user account running the application has the appropriate privileges and is granted access to the database.</p>
+<p>The syntax employed in connection strings varies by provider:</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td><p>Syntax</p></td>
+      <td><p>Supported by</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Integrated Security=true;</code></p></td>
+      <td><p>SQL Server, Oracle, Postgres</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Integrated Security=SSPI;</code></p></td>
+      <td><p>SQL Server, OLE DB</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Integrated Security=yes;</code></p></td>
+      <td><p>MySQL</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Trusted_Connection=true;</code></p></td>
+      <td><p>SQL Server</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Trusted_Connection=yes;</code></p></td>
+      <td><p>ODBC</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>Note: Some providers such as MySQL do not support Windows authentication with .NET Core.</p>
+<h3>Pitfalls</h3>
+<h4>Hard-coded passwords</h4>
+<p>It could be tempting to replace the empty password with a hard-coded one. Hard-coding passwords in the code can pose significant security risks.
+Here are a few reasons why it is not recommended:</p>
+<ol>
+  <li> Security Vulnerability: Hard-coded passwords can be easily discovered by anyone who has access to the code, such as other developers or
+  attackers. This can lead to unauthorized access to the database and potential data breaches. </li>
+  <li> Lack of Flexibility: Hard-coded passwords make it difficult to change the password without modifying the code. If the password needs to be
+  updated, it would require recompiling and redeploying the code, which can be time-consuming and error-prone. </li>
+  <li> Version Control Issues: Storing passwords in code can lead to version control issues. If the code is shared or stored in a version control
+  system, the password will be visible to anyone with access to the repository, which is a security risk. </li>
+</ol>
+<p>To mitigate these risks, it is recommended to use secure methods for storing and retrieving passwords, such as using environment variables,
+configuration files, or secure key management systems. These methods allow for better security, flexibility, and separation of sensitive information
+from the codebase.</p>
+<h2>How to fix it in ASP.NET</h2>
+<h3>Code examples</h3>
+<p>The following configuration file uses an empty password to connect to a database.</p>
+<p>The vulnerability can be fixed by using Windows authentication (sometimes referred to as integrated security)</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="301" data-diff-type="noncompliant">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+  &lt;connectionStrings&gt;
+    &lt;add name="myConnection" connectionString="Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=" /&gt; &lt;!-- Noncompliant --&gt;
+  &lt;/connectionStrings&gt;
+&lt;/configuration&gt;
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="301" data-diff-type="compliant">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+  &lt;connectionStrings&gt;
+    &lt;add name="myConnection" connectionString="Server=myServerAddress;Database=myDataBase;Integrated Security=True" /&gt;
+  &lt;/connectionStrings&gt;
+&lt;/configuration&gt;
+</pre>
+<h3>How does this work?</h3>
+<h4>Windows authentication (integrated security)</h4>
+<p>When the connection string includes the <code>Integrated Security=true</code> parameter, it enables Windows authentication (sometimes called
+integrated security) for the database connection. With integrated security, the user’s Windows credentials are used to authenticate and authorize
+access to the database. It eliminates the need for a separate username and password for the database connection. Integrated security simplifies
+authentication and leverages the existing Windows authentication infrastructure for secure database access in your C# application.</p>
+<p>It’s important to note that when using integrated security, the user running the application must have the necessary permissions to access the
+database. Ensure that the user account running the application has the appropriate privileges and is granted access to the database.</p>
+<p>The syntax employed in connection strings varies by provider:</p>
+<table>
+  <colgroup>
+    <col style="width: 50%;">
+    <col style="width: 50%;">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td><p>Syntax</p></td>
+      <td><p>Supported by</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Integrated Security=true;</code></p></td>
+      <td><p>SQL Server, Oracle, Postgres</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Integrated Security=SSPI;</code></p></td>
+      <td><p>SQL Server, OLE DB</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Integrated Security=yes;</code></p></td>
+      <td><p>MySQL</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Trusted_Connection=true;</code></p></td>
+      <td><p>SQL Server</p></td>
+    </tr>
+    <tr>
+      <td><p><code>Trusted_Connection=yes;</code></p></td>
+      <td><p>ODBC</p></td>
+    </tr>
+  </tbody>
+</table>
+<p>Note: Some providers such as MySQL do not support Windows authentication with .NET Core.</p>
+<h3>Pitfalls</h3>
+<h4>Hard-coded passwords</h4>
+<p>It could be tempting to replace the empty password with a hard-coded one. Hard-coding passwords in the code can pose significant security risks.
+Here are a few reasons why it is not recommended:</p>
+<ol>
+  <li> Security Vulnerability: Hard-coded passwords can be easily discovered by anyone who has access to the code, such as other developers or
+  attackers. This can lead to unauthorized access to the database and potential data breaches. </li>
+  <li> Lack of Flexibility: Hard-coded passwords make it difficult to change the password without modifying the code. If the password needs to be
+  updated, it would require recompiling and redeploying the code, which can be time-consuming and error-prone. </li>
+  <li> Version Control Issues: Storing passwords in code can lead to version control issues. If the code is shared or stored in a version control
+  system, the password will be visible to anyone with access to the repository, which is a security risk. </li>
+</ol>
+<p>To mitigate these risks, it is recommended to use secure methods for storing and retrieving passwords, such as using environment variables,
+configuration files, or secure key management systems. These methods allow for better security, flexibility, and separation of sensitive information
+from the codebase.</p>
+<h2>Resources</h2>
+<ul>
+  <li> <a href="https://docs.microsoft.com/en-us/troubleshoot/aspnet/create-web-config">Create the Web.config file for an ASP.NET application</a>
+  </li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li> OWASP - <a href="https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/">Top 10 2021 Category A7 - Identification and
+  Authentication Failures</a> </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A2_2017-Broken_Authentication">Top 10 2017 Category A2 - Broken Authentication</a>
+  </li>
+  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a> </li>
+  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/521">CWE-521 - Weak Password Requirements</a> </li>
+</ul>
+

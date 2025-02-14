@@ -1,6 +1,31 @@
 [
   {
+    "id": "S100",
+    "parameters": []
+  },
+  {
     "id": "S1111",
+    "parameters": []
+  },
+  {
+    "id": "S1112",
+    "parameters": [
+      {
+        "key": "random",
+        "description": "chosen by fair dice roll. guaranteed to be random.",
+        "type": "INTEGER",
+        "defaultValue": "4"
+      },
+      {
+        "key": "Tr0ub4dor&3",
+        "description": "ELI5 entropy please!",
+        "type": "STRING",
+        "defaultValue": "correct horse battery staple"
+      }
+    ]
+  },
+  {
+    "id": "S1113",
     "parameters": [
       {
         "key": "answer",
@@ -11,27 +36,27 @@
     ]
   },
   {
-    "id": "S1112",
-    "parameters": [ ]
-  },
-  {
-    "id": "S1113",
-    "parameters": [ ]
-  },
-  {
     "id": "S1114",
-    "parameters": [ ]
+    "parameters": []
   },
   {
     "id": "S1115",
-    "parameters": [ ]
+    "parameters": []
   },
   {
     "id": "S1116",
-    "parameters": [ ]
+    "parameters": []
   },
   {
     "id": "S1117",
-    "parameters": [ ]
+    "parameters": []
+  },
+  {
+    "id": "S4502",
+    "parameters": []
+  },
+  {
+    "id": "S2115",
+    "parameters": []
   }
 ]
