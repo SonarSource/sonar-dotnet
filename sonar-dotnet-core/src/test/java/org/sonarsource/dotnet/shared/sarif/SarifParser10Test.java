@@ -346,4 +346,16 @@ public class SarifParser10Test {
     inOrder.verify(callback).onIssue("S1144", "warning", primaryLocation, new ArrayList<>(), false);
   }
 
+  // https://sonarsource.atlassian.net/browse/NET-1139
+  @Test
+  public void sarif_version_1_0_same_start_end_location() throws IOException {
+    SarifParserCallback callback = mock(SarifParserCallback.class);
+    new SarifParser10(null, getRoot("v1_0_same_start_end_location.json"), String::toString).accept(callback);
+    InOrder inOrder = inOrder(callback);
+
+    var filePath = new File(baseDir, "Foo.cs").getAbsolutePath();
+    // Once NET-1139 is fixed, the check should be on onIssue instead of onFileIssue
+    inOrder.verify(callback).onFileIssue("IDE0055", "note", filePath, emptyList(), "Fix formatting");
+  }
+
 }
