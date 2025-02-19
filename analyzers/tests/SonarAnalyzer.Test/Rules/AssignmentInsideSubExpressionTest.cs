@@ -30,16 +30,12 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void AssignmentInsideSubExpression_CSharp9() =>
-            builder.AddPaths("AssignmentInsideSubExpression.CSharp9.cs").WithTopLevelStatements().Verify();
+        public void AssignmentInsideSubExpression_TopLevelStatements() =>
+            builder.AddPaths("AssignmentInsideSubExpression.TopLevelStatements.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
         [TestMethod]
-        public void AssignmentInsideSubExpression_CSharp10() =>
-            builder.AddPaths("AssignmentInsideSubExpression.CSharp10.cs").WithTopLevelStatements().WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void AssignmentInsideSubExpression_CSharp11() =>
-            builder.AddPaths("AssignmentInsideSubExpression.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
+        public void AssignmentInsideSubExpression_Latest() =>
+            builder.AddPaths("AssignmentInsideSubExpression.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 
