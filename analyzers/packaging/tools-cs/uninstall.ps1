@@ -15,41 +15,6 @@ if ($project.Object.AnalyzerReferences -eq $null) {
 $analyzersPath = Split-Path -Path $toolsPath -Parent
 $analyzersPath = Join-Path $analyzersPath "analyzers"
 
-$analyzerFilePath = Join-Path $analyzersPath "Google.Protobuf.dll"
-try {
-    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
-}
-catch {
-}
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CFG.dll"
-try {
-    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
-}
-catch {
-}
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.Core.dll"
-try {
-    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
-}
-catch {
-}
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CSharp.Core.dll"
-try {
-    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
-}
-catch {
-}
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.ShimLayer.dll"
-try {
-    $project.Object.AnalyzerReferences.Remove($analyzerFilePath)
-}
-catch {
-}
-
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CSharp.dll"
 try {
     $project.Object.AnalyzerReferences.Remove($analyzerFilePath)

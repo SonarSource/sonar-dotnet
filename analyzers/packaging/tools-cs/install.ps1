@@ -42,21 +42,6 @@ if ($project.Type -ne "C#") {
 $analyzersPath = Split-Path -Path $toolsPath -Parent
 $analyzersPath = Join-Path $analyzersPath "analyzers"
 
-$analyzerFilePath = Join-Path $analyzersPath "Google.Protobuf.dll"
-$project.Object.AnalyzerReferences.Add($analyzerFilePath)
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CFG.dll"
-$project.Object.AnalyzerReferences.Add($analyzerFilePath)
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.Core.dll"
-$project.Object.AnalyzerReferences.Add($analyzerFilePath)
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CSharp.Core.dll"
-$project.Object.AnalyzerReferences.Add($analyzerFilePath)
-
-$analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.ShimLayer.dll"
-$project.Object.AnalyzerReferences.Add($analyzerFilePath)
-
 $analyzerFilePath = Join-Path $analyzersPath "SonarAnalyzer.CSharp.dll"
 $project.Object.AnalyzerReferences.Add($analyzerFilePath)
 
