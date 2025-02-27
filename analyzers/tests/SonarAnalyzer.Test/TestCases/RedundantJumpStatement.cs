@@ -259,4 +259,32 @@ namespace Tests.Diagnostics
     {
         public void Finally() { }
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-1149
+    public class Repro_1149
+    {
+        public void Method(List<string> items)
+        {
+            items.ForEach(LocalFunction);
+
+            return; // Noncompliant - FP
+
+            void LocalFunction(string item)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        public void Method2(List<string> items)
+        {
+            void LocalFunction(string item)
+            {
+                Console.WriteLine(item);
+            }
+
+            items.ForEach(LocalFunction);
+
+            return; // Noncompliant
+        }
+    }
 }
+
