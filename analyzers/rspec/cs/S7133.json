@@ -9,7 +9,7 @@
   "tags": [
     "symbolic-execution"
   ],
-  "defaultSeverity": "Major",
+  "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-7133",
   "sqKey": "S7133",
   "scope": "All",
