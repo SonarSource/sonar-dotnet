@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Rules;
 
 namespace SonarAnalyzer.Test.Rules
@@ -59,7 +60,26 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixTitle(RedundantModifierCodeFix.TitleSealed)
                 .VerifyCodeFix();
 
+#if NETFRAMEWORK
+        [TestMethod]
+        public void RedundantModifier_Preprocessor()
+        {
+            var options = new CSharpParseOptions();
+            builder.AddPaths("RedundantModifier.Preprocessor.NetFx.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp13)
+                .AddReferences(MetadataReferenceFacade.RegularExpressions)
+                .WithOptions([options.WithPreprocessorSymbols("NETFRAMEWORK")])
+                .Verify();
+        }
+#endif
+
 #if NET
+        [TestMethod]
+        public void RedundantModifier_Preprocessor() =>
+            builder.AddPaths("RedundantModifier.Preprocessor.Net.cs", "RedundantModifier.Preprocessor.Net.Partial.cs")
+                .WithLanguageVersion(LanguageVersion.CSharp13)
+                .AddReferences(MetadataReferenceFacade.RegularExpressions)
+                .VerifyNoIssues();
 
         [TestMethod]
         public void RedundantModifier_Latest() =>
