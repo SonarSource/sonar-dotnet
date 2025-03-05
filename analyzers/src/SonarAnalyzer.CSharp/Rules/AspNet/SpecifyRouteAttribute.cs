@@ -53,7 +53,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                         secondaryLocations.Push(methodDeclaration.Identifier.ToSecondaryLocation(SecondaryLocationMessage));
                     }
                 }, SyntaxKind.MethodDeclaration);
-                symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolStart.Symbol, secondaryLocations));
+                symbolStart.RegisterSymbolEndAction(symbolEnd => ReportIssues(symbolEnd, symbolEnd.Symbol, secondaryLocations));
             }, SymbolKind.NamedType);
         });
 

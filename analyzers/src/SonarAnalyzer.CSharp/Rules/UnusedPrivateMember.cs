@@ -59,8 +59,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                             return;
                         }
 
-                        var usageCollector = new SymbolUsageCollector(c.Compilation, removableInternalTypes);
-                        foreach (var syntaxTree in c.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.IsRazorAnalysisEnabled())))
+                        var usageCollector = new SymbolUsageCollector(cc.Compilation, removableInternalTypes);
+                        foreach (var syntaxTree in cc.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, cc.IsRazorAnalysisEnabled())))
                         {
                             usageCollector.SafeVisit(syntaxTree.GetRoot());
                         }

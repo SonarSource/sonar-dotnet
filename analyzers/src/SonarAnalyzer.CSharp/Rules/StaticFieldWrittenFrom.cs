@@ -83,7 +83,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         {
                             var firstPosition = fieldWithLocations.Value.Select(x => x.SourceSpan.Start).Min();
                             var location = fieldWithLocations.Value.First(x => x.SourceSpan.Start == firstPosition);
-                            var message = GetDiagnosticMessageArgument(cbc.CodeBlock, cbc.OwningSymbol, fieldWithLocations.Key);
+                            var message = GetDiagnosticMessageArgument(c.CodeBlock, c.OwningSymbol, fieldWithLocations.Key);
                             var secondaryLocations = fieldWithLocations.Key.DeclaringSyntaxReferences.Select(x => x.GetSyntax().ToSecondaryLocation());
                             c.ReportIssue(Rule, location, secondaryLocations, message);
                         }

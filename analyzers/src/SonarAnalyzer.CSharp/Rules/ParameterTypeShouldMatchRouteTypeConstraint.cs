@@ -61,7 +61,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
 
             cc.RegisterSymbolAction(c =>
                 {
-                    foreach (var property in GetPropertyTypeMismatches((INamedTypeSymbol)c.Symbol, cc.Compilation))
+                    foreach (var property in GetPropertyTypeMismatches((INamedTypeSymbol)c.Symbol, c.Compilation))
                     {
                         c.ReportIssue(Rule, property.Type.GetLocation(), property.ToSecondaryLocations(), property.ToPrimaryMessage());
                     }
