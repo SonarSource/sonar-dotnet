@@ -715,4 +715,20 @@ namespace Tests.TestCases
         private static bool ContainsExt(this ICollection<int> ints, int value) => ints.Contains(value);
         private static bool ContainsExt(this IDictionary<int, bool> dict, int value) => dict.Keys.Contains(value);
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-1168
+    public class Repro_1168
+    {
+        private void Repro(string s1, string s2)  // Fixed
+                                                  // Fixed
+        {
+            LocalFunction();
+
+            void LocalFunction()
+            {
+                s1 = s1?.ToString();
+                Console.WriteLine(s2 ?? "Nothing");
+            }
+        }
+    }
 }
