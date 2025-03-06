@@ -20,7 +20,7 @@ namespace SonarAnalyzer.CSharp.Core.Common;
 
 public static class DescriptorFactory
 {
-    public static DiagnosticDescriptor Create(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
+    public static DiagnosticDescriptor Create(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false, bool isCompilationEnd = false) =>
         // RuleCatalog class is created from SonarAnalyzer.SourceGenerator
-        DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, RuleCatalog.Rules[id], messageFormat, isEnabledByDefault, fadeOutCode);
+        DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, RuleCatalog.Rules[id], messageFormat, isEnabledByDefault, fadeOutCode, isCompilationEnd);
 }

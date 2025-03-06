@@ -59,6 +59,10 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     public void RegisterTreeAction(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxTreeReportingContext> action) =>
         Context.RegisterSyntaxTreeAction(x => Execute(new(AnalysisContext, x, Context.Compilation), action, x.Tree, generatedCodeRecognizer));
 
+    /// <inheritdoc cref="SonarAnalysisContext.RegisterNodeActionInAllFiles{TSyntaxKind}(Action{SonarSyntaxNodeReportingContext}, TSyntaxKind[])"/>
+    public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
+        Context.RegisterSyntaxNodeAction(x => action(new(AnalysisContext, x)), syntaxKinds);
+
 #pragma warning disable HAA0303, HAA0302, HAA0301, HAA0502
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]

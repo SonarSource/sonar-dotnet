@@ -23,6 +23,22 @@ public static class DiagnosticDescriptorFactory
     public static readonly string MainSourceScopeTag = "MainSourceScope";
     public static readonly string TestSourceScopeTag = "TestSourceScope";
 
+    /// <summary>
+    /// Indicates that the diagnostic is a compilation end diagnostic reported from a compilation end action.
+    /// </summary>
+    /// <remarks>
+    /// See also:
+    /// <list type="table">
+    /// <item>
+    /// <see href="https://github.com/dotnet/roslyn/blob/371953b0685063eae905ac3afa12028d73ecbfa8/src/Compilers/Core/Portable/Diagnostic/WellKnownDiagnosticTags.cs#L64-L68">WellKnownDiagnosticTags.cs</see>
+    /// </item>
+    /// <item>
+    /// <see href="https://github.com/dotnet/roslyn-analyzers/blob/main/src/Microsoft.CodeAnalysis.Analyzers/Microsoft.CodeAnalysis.Analyzers.md#rs1037-add-compilationend-custom-tag-to-compilation-end-diagnostic-descriptor">RS1037</see>
+    /// </item>
+    /// </list>
+    /// </remarks>
+    public static readonly string CompilationEnd = nameof(CompilationEnd);
+
     public static DiagnosticDescriptor CreateUtility(string diagnosticId, string title) =>
         new(diagnosticId,
             title,
@@ -32,7 +48,7 @@ public static class DiagnosticDescriptorFactory
             isEnabledByDefault: true,
             customTags: BuildUtilityTags());
 
-    public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool? isEnabledByDefault, bool fadeOutCode) =>
+    public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool? isEnabledByDefault, bool fadeOutCode, bool isCompilationEnd) =>
         new(rule.Id,
             rule.Title,
             messageFormat,
@@ -41,14 +57,15 @@ public static class DiagnosticDescriptorFactory
             rule.IsHotspot || (isEnabledByDefault ?? rule.SonarWay),
             rule.Description,
             language.HelpLink(rule.Id),
-            BuildTags(language, rule, fadeOutCode));
+            BuildTags(language, rule, fadeOutCode, isCompilationEnd));
 
-    private static string[] BuildTags(AnalyzerLanguage language, RuleDescriptor rule, bool fadeOutCode)
+    private static string[] BuildTags(AnalyzerLanguage language, RuleDescriptor rule, bool fadeOutCode, bool isCompilationEnd)
     {
         var tags = new List<string> { language.LanguageName };
         tags.AddRange(rule.Scope.ToTags());
         Add(rule.SonarWay, SonarWayTag);
         Add(fadeOutCode, WellKnownDiagnosticTags.Unnecessary);
+        Add(isCompilationEnd, CompilationEnd);
         return tags.ToArray();
 
         void Add(bool condition, string tag)

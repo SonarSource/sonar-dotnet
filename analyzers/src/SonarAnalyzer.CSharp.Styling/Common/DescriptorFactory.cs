@@ -20,11 +20,12 @@ namespace SonarAnalyzer.CSharp.Styling.Common;
 
 internal static class DescriptorFactory
 {
-    public static DiagnosticDescriptor Create(string id, string messageFormat, SourceScope scope = SourceScope.All) =>
+    public static DiagnosticDescriptor Create(string id, string messageFormat, SourceScope scope = SourceScope.All, bool isCompilationEnd = false) =>
         DiagnosticDescriptorFactory.Create(
             AnalyzerLanguage.CSharp,
             new RuleDescriptor(id, $"Internal Styling Rule {id}", "CODE_SMELL", "Major", null, scope, true, null),
             messageFormat,
             true,
-            false);
+            false,
+            isCompilationEnd);
 }

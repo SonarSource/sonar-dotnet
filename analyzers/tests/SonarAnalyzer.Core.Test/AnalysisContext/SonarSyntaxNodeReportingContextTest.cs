@@ -108,7 +108,7 @@ public class SonarSyntaxNodeReportingContextTest
         private readonly Func<SonarSyntaxNodeReportingContext, string> message;
 
         public DiagnosticDescriptor Rule { get; } = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp,
-            new RuleDescriptor("Test", "Test", "BUG", "BLOCKER", "READY", SourceScope.All, true, "Test"), "{0}", true, false);
+            new RuleDescriptor("Test", "Test", "BUG", "BLOCKER", "READY", SourceScope.All, true, "Test"), "{0}", true, false, false);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [Rule];
 

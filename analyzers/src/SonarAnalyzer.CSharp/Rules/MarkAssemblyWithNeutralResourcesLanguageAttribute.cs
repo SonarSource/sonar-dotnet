@@ -23,14 +23,14 @@ namespace SonarAnalyzer.CSharp.Rules
         private const string MessageFormat = "Provide a 'System.Resources.NeutralResourcesLanguageAttribute' attribute for assembly '{0}'.";
         private const string StronglyTypedResourceBuilder = "System.Resources.Tools.StronglyTypedResourceBuilder";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isCompilationEnd: true);
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
         protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterCompilationStartAction(c =>
                 {
                     var hasResx = false;
-                    context.RegisterNodeActionInAllFiles(cc =>
+                    c.RegisterNodeActionInAllFiles(cc =>
                         hasResx = hasResx || IsResxGeneratedFile(cc.Model, (ClassDeclarationSyntax)cc.Node),
                         SyntaxKind.ClassDeclaration);
 

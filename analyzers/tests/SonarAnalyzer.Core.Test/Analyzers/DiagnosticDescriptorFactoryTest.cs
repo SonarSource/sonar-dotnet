@@ -33,7 +33,7 @@ public class DiagnosticDescriptorFactoryTest
     [TestMethod]
     public void Create_ConfiguresProperties_CS()
     {
-        var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false);
+        var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false, false);
 
         result.Id.Should().Be("Sxxxx");
         result.Title.ToString().Should().Be("Sxxxx Title");
@@ -49,7 +49,7 @@ public class DiagnosticDescriptorFactoryTest
     [TestMethod]
     public void Create_ConfiguresProperties_VB()
     {
-        var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.VisualBasic, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false);
+        var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.VisualBasic, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false, false);
 
         result.Id.Should().Be("Sxxxx");
         result.Title.ToString().Should().Be("Sxxxx Title");
@@ -65,10 +65,25 @@ public class DiagnosticDescriptorFactoryTest
     [TestMethod]
     public void Create_FadeOutCode_HasUnnecessaryTag_HasInfoSeverity()
     {
-        var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, true);
+        var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, true, false);
 
         result.DefaultSeverity.Should().Be(DiagnosticSeverity.Info);
         result.CustomTags.Should().Contain(WellKnownDiagnosticTags.Unnecessary);
+    }
+
+    [CombinatorialDataTestMethod]
+    public void Create_CompilationEndDiagnostic([DataValues(LanguageNames.CSharp, LanguageNames.VisualBasic)] string language, [DataValues(true, false)] bool isCompilationEnd)
+    {
+        var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.FromName(language), CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false, isCompilationEnd);
+
+        if (isCompilationEnd)
+        {
+            result.CustomTags.Should().Contain(DiagnosticDescriptorFactory.CompilationEnd);
+        }
+        else
+        {
+            result.CustomTags.Should().NotContain(DiagnosticDescriptorFactory.CompilationEnd);
+        }
     }
 
     [TestMethod]
@@ -78,7 +93,7 @@ public class DiagnosticDescriptorFactoryTest
         CreateTags(false).Should().NotContain(DiagnosticDescriptorFactory.SonarWayTag);
 
         static IEnumerable<string> CreateTags(bool sonarWay) =>
-            DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, sonarWay), "Sxxxx Message", null, false).CustomTags;
+            DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(SourceScope.Main, sonarWay), "Sxxxx Message", null, false, false).CustomTags;
     }
 
     [TestMethod]
@@ -89,14 +104,14 @@ public class DiagnosticDescriptorFactoryTest
         CreateTags(SourceScope.All).Should().Contain(DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.TestSourceScopeTag);
 
         static IEnumerable<string> CreateTags(SourceScope scope) =>
-            DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(scope, true), "Sxxxx Message", null, false).CustomTags;
+            DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, CreateRuleDescriptor(scope, true), "Sxxxx Message", null, false, false).CustomTags;
     }
 
     [TestMethod]
     public void Create_UnexpectedType_Throws()
     {
         var rule = new RuleDescriptor("Sxxxx", string.Empty, "Lorem Ipsum", string.Empty, string.Empty, SourceScope.Main, true, string.Empty);
-        var f = () => DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, rule, string.Empty, null, false);
+        var f = () => DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, rule, string.Empty, null, false, false);
         f.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected Type value: Lorem Ipsum");
     }
 
@@ -112,7 +127,7 @@ public class DiagnosticDescriptorFactoryTest
     public void Create_ComputesCategory(string severity, string type, string expected)
     {
         var rule = new RuleDescriptor("Sxxxx", string.Empty, type, severity, string.Empty, SourceScope.Main, true, string.Empty);
-        DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, rule, "Sxxxx Message", null, false).Category.Should().Be(expected);
+        DiagnosticDescriptorFactory.Create(AnalyzerLanguage.CSharp, rule, "Sxxxx Message", null, false, false).Category.Should().Be(expected);
     }
 
     private static RuleDescriptor CreateRuleDescriptor(SourceScope scope, bool sonarWay) =>

@@ -97,9 +97,11 @@ public class SonarAnalysisContext
 
     /// <summary>
     /// Register action for a SyntaxNode that is executed unconditionally:
-    /// * For all non-generated code.
-    /// * For all generated code.
-    /// * For all unchanged files under PR analysis.
+    /// <list type="bullet">
+    /// <item>For all non-generated code.</item>
+    /// <item>For all generated code.</item>
+    /// <item>For all unchanged files under PR analysis.</item>
+    /// </list>
     /// This should NOT be used for actions that report issues.
     /// </summary>
     public void RegisterNodeActionInAllFiles<TSyntaxKind>(Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds) where TSyntaxKind : struct =>
