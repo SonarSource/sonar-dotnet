@@ -7,8 +7,6 @@
 |Analyzer|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=sonaranalyzer-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=sonaranalyzer-dotnet&metric=coverage)|
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)|
 
-[Static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) of C# and VB.NET
-languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube), [SonarQube cloud](https://www.sonarsource.com/products/sonarcloud) and [SonarQube for IDE](https://www.sonarsource.com/products/sonarlint) code quality and security products. These Roslyn analyzers allow you to produce [Clean Code](https://www.sonarsource.com/solutions/clean-code/) that is safe, reliable, and maintainable by helping you find and correct bugs, vulnerabilities, and code smells in your codebase.
 
 ## Features
 
