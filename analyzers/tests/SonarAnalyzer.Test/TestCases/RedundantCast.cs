@@ -9,23 +9,23 @@ namespace Tests.Diagnostics
     {
         void foo(long l)
         {
-            var x = new int[] {1, 2, 3}.Cast<int>(); // Noncompliant
-//                                     ^^^^^^^^^^^^
+            var x = new int[] { 1, 2, 3 }.Cast<int>(); // Noncompliant
+//                                       ^^^^^^^^^^^^
             x = Enumerable // Noncompliant
-                .Cast<int>(new int[] {1, 2, 3});
+                .Cast<int>(new int[] { 1, 2, 3 });
             x = x
                 .OfType<int>(); //Noncompliant
             x = x.Cast<int>(); //Noncompliant
 
             var y = x.OfType<object>();
 
-            var zz = (int) l;
+            var zz = (int)l;
             int i = 0;
-            var z = (int) i; // Noncompliant {{Remove this unnecessary cast to 'int'.}}
+            var z = (int)i; // Noncompliant {{Remove this unnecessary cast to 'int'.}}
 //                   ^^^
-            z = (Int32) i; // Noncompliant {{Remove this unnecessary cast to 'int'.}}
+            z = (Int32)i; // Noncompliant {{Remove this unnecessary cast to 'int'.}}
 
-            var w = (object) i;
+            var w = (object)i;
 
             method(new int[] { 1, 2, 3 }.Cast<int>()); // Noncompliant {{Remove this unnecessary cast to 'IEnumerable<int>'.}}
         }
@@ -122,6 +122,28 @@ namespace Tests.Diagnostics
         void Sample(float x)
         {
             float res = 1 / (float)(x * 2); // Noncompliant FP
+        }
+    }
+
+    // https://sonarsource.atlassian.net/browse/NET-1183
+    public class NumberLiteralSuffixes
+    {
+        void Numbers()
+        {
+            var d0 = (decimal)12.0;     // FN: use 12.0m
+            var d1 = (decimal)12;       // FN: use 12m
+            var d2 = (double)12;        // FN: use 12d
+            var f0 = (float)12.0;       // FN: use 12.0f
+            var n0 = (uint)12;          // FN: use 12u
+            var n1 = (long)12;          // FN: use 12l
+            var n2 = (ulong)12;         // FN: use 12ul
+
+            var n3 = (uint)0x12;        // FN: use 0x12u
+            var n4 = (uint)0b101;       // FN: use 0b101u
+
+            var n5 = (UInt32)12;        // FN: use 12u
+            var n6 = (byte)12;          // Compliant, there is no suffix for byte
+            var n7 = 0xFF_FF_FF_FF_FFl; // Compliant, "l" is redundant here but for readability it's better to keep it
         }
     }
 }
