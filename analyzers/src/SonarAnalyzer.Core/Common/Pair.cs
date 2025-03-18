@@ -22,4 +22,11 @@ public static class Pair
 {
     public static Pair<TLeft, TRight> From<TLeft, TRight>(TLeft left, TRight right) =>
         new(left, right);
+
+    public static void Swap<T>(ref T left, ref T right)
+    {
+        var tmp = left;
+        left = right;
+        right = tmp;
+    }
 }
