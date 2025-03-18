@@ -43,7 +43,7 @@ public abstract class UseCharOverloadOfStringMethodsBase<TSyntaxKind, TInvocatio
 
                 if (HasCorrectName(methodName)
                     && HasCorrectArguments(invocation)
-                    && Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                    && Language.Syntax.Operands(invocation).Left is { } left
                     && IsCorrectType(left, c.Model))
                 {
                     c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(invocation)?.GetLocation(), methodName);

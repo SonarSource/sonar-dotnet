@@ -33,7 +33,7 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
             var invocation = (TInvocation)c.Node;
 
             if (Language.GetName(invocation).Equals("Where", Language.NameComparison)
-                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+                && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
                 && LeftHasCorrectName(left, out var orderByMethodDescription)
                 && MethodIsLinqExtension(left, c.Model)
                 && MethodIsLinqExtension(right, c.Model)

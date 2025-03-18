@@ -24,6 +24,19 @@ public sealed class SetPropertiesInsteadOfMethods : SetPropertiesInsteadOfMethod
     protected override bool HasCorrectArgumentCount(InvocationExpressionSyntax invocation) =>
         invocation.HasExactlyNArguments(0);
 
-    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode typeNode, out SyntaxNode methodNode) =>
-        invocation.TryGetOperands(out typeNode, out methodNode);
+    protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode typeNode, out SyntaxNode methodNode)
+    {
+        if (invocation.Operands() is { Left: { } left, Right: { } right })
+        {
+            typeNode = left;
+            methodNode = right;
+            return true;
+        }
+        else
+        {
+            typeNode = null;
+            methodNode = null;
+            return false;
+        }
+    }
 }

@@ -47,7 +47,7 @@ public sealed class UseStringCreate : SonarDiagnosticAnalyzer
                 var node = (InvocationExpressionSyntax)c.Node;
 
                 if (methodNames.Any(x => NameIsEqual(node, x))
-                    && node.TryGetOperands(out var left, out _)
+                    && node.Operands().Left is { } left
                     && NameIsEqual(left, nameof(FormattableString))
                     && node.HasExactlyNArguments(1)
                     && node.ArgumentList.Arguments[0].Expression is InterpolatedStringExpressionSyntax

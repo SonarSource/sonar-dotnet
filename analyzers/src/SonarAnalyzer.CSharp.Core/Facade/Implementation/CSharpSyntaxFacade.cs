@@ -162,8 +162,8 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override string InterpolatedTextValue(SyntaxNode node, SemanticModel model) =>
         Cast<InterpolatedStringExpressionSyntax>(node).InterpolatedTextValue(model);
 
-    public override bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right) =>
-        Cast<InvocationExpressionSyntax>(invocation).TryGetOperands(out left, out right);
+    public override Pair<SyntaxNode, SyntaxNode> Operands(SyntaxNode invocation) =>
+        Cast<InvocationExpressionSyntax>(invocation).Operands();
 
     public override SyntaxNode ParseExpression(string expression) =>
         SyntaxFactory.ParseExpression(expression);

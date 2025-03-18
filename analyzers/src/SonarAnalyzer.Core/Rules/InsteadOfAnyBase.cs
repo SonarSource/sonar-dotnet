@@ -56,7 +56,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
 
             if (IsNameEqualTo(invocation, nameof(Enumerable.Any))
                 && Language.Syntax.HasExactlyNArguments(invocation, 1)
-                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+                && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
                 && IsCorrectCall(right, c.Model)
                 && c.Model.GetTypeInfo(left).Type is { } type
                 && !Language.Syntax.IsInExpressionTree(c.Model, invocation))
@@ -96,7 +96,7 @@ public abstract class InsteadOfAnyBase<TSyntaxKind, TInvocationExpression> : Son
         {
             if (Language.Syntax.HasExactlyNArguments(invocation, 1)) // x.Equals(y)
             {
-                return Language.Syntax.TryGetOperands(invocation, out var left, out _)
+                return Language.Syntax.Operands(invocation).Left is { } left
                     && HasInvocationValidOperands(left, GetArgumentExpression(invocation, 0))
                     && IsSystemEquals();
             }

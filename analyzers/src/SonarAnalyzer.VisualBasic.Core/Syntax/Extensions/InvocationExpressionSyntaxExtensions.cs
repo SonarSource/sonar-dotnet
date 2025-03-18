@@ -30,18 +30,10 @@ public static class InvocationExpressionSyntaxExtensions
             ? count == 0
             : invocation.ArgumentList.Arguments.Count == count;
 
-    public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
-    {
-        left = right = null;
-
-        if (invocation is { Expression: MemberAccessExpressionSyntax access })
-        {
-            left = access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression;
-            right = access.Name;
-        }
-
-        return left is not null && right is not null;
-    }
+    public static Pair<SyntaxNode, SyntaxNode> Operands(this InvocationExpressionSyntax invocation) =>
+        invocation is { Expression: MemberAccessExpressionSyntax access }
+            ? new(access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression, access.Name)
+            : default;
 
     public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
         invocation?.Expression.GetIdentifier();

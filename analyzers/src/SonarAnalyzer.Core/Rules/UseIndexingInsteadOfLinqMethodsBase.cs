@@ -38,7 +38,7 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
             var invocation = (TInvocation)c.Node;
 
             if (HasValidSignature(invocation, out var methodName, out var indexDescriptor)
-                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+                && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
                 && IsCorrectType(left, c.Model)
                 && IsCorrectCall(right, c.Model))
             {

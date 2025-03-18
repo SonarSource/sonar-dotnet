@@ -59,7 +59,7 @@ public abstract class SyntaxFacade<TSyntaxKind> where TSyntaxKind : struct
     public abstract SyntaxNode RemoveParentheses(SyntaxNode node);
     public abstract string StringValue(SyntaxNode node, SemanticModel model);
     public abstract string InterpolatedTextValue(SyntaxNode node, SemanticModel model);
-    public abstract bool TryGetOperands(SyntaxNode invocation, out SyntaxNode left, out SyntaxNode right);
+    public abstract Pair<SyntaxNode, SyntaxNode> Operands(SyntaxNode invocation);
     public abstract SyntaxNode ParseExpression(string expression);
 
     protected static T Cast<T>(SyntaxNode node) where T : SyntaxNode =>

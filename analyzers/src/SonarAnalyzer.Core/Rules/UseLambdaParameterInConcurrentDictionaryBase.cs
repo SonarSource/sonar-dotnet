@@ -37,7 +37,7 @@ public abstract class UseLambdaParameterInConcurrentDictionaryBase<TSyntaxKind, 
             var invocation = (TInvocationExpression)c.Node;
 
             if (HasCorrectName(Language.GetName(invocation))
-                && Language.Syntax.TryGetOperands(invocation, out var left, out var right)
+                && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
                 && IsCorrectType(left, c.Model)
                 && IsCorrectCall(right, c.Model)
                 && GetArguments(invocation) is { Count: > 1 } arguments

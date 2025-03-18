@@ -39,9 +39,8 @@ public class InvocationExpressionSyntaxExtensionsTest
             }
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as InvocationExpressionSyntax;
-        var result = InvocationExpressionSyntaxExtensions.TryGetOperands(node, out var left, out var right);
+        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
 
-        result.Should().BeTrue();
         left.Should().NotBeNull();
         left.ToString().Should().Be(expectedLeft);
         right.Should().NotBeNull();
@@ -50,6 +49,7 @@ public class InvocationExpressionSyntaxExtensionsTest
 
     [DataTestMethod]
     [DataRow("$$M()$$")]
+    [DataRow("new System.Func<int>(() => 1)$$()$$")]
     public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_CS(string expression)
     {
         var code = $$"""
@@ -65,9 +65,8 @@ public class InvocationExpressionSyntaxExtensionsTest
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as InvocationExpressionSyntax;
 
-        var result = InvocationExpressionSyntaxExtensions.TryGetOperands(node, out var left, out var right);
+        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
 
-        result.Should().BeFalse();
         left.Should().BeNull();
         right.Should().BeNull();
     }

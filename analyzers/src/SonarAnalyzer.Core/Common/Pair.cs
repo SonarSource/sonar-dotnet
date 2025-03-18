@@ -14,13 +14,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Styling.Rules;
+namespace SonarAnalyzer.Core.Common;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class AvoidValueTuple : StylingAnalyzer
+public readonly record struct Pair<TLeft, TRight>(TLeft Left, TRight Right);
+
+public static class Pair
 {
-    public AvoidValueTuple() : base("T0003", "Do not use ValueTuple in the production code due to missing System.ValueTuple.dll.", SourceScope.Main) { }    // It's not a problem in UTs
-
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(c => c.ReportIssue(Rule, c.Node), SyntaxKind.TupleType, SyntaxKind.TupleExpression);
+    public static Pair<TLeft, TRight> From<TLeft, TRight>(TLeft left, TRight right) =>
+        new(left, right);
 }

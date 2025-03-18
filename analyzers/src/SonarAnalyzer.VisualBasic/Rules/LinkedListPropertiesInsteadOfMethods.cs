@@ -22,7 +22,7 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override bool IsRelevantCallAndType(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.TryGetOperands(out _, out var right)
+        invocation.Operands().Right is { } right
         && IsRelevantType(right, model)
         && IsCorrectType(invocation, model);
 

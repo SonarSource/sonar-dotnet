@@ -36,7 +36,7 @@ public static class InvocationExpressionSyntaxExtensions
         (invocation.Expression as MemberAccessExpressionSyntax)?.Expression is BaseExpressionSyntax;
 
     public static bool IsEqualTo(this InvocationExpressionSyntax first, InvocationExpressionSyntax second, SemanticModel model) =>
-        (model.GetSymbolInfo(first).Symbol, model.GetSymbolInfo(second).Symbol) switch
+        Pair.From(model.GetSymbolInfo(first).Symbol, model.GetSymbolInfo(second).Symbol) switch
         {
             // the nameof(someVariable) is considered an Invocation Expression, but it is not a method call, and GetSymbolInfo returns null for it.
             (null, null) when first.GetName() == "nameof" && second.GetName() == "nameof" => model.GetConstantValue(first).Equals(model.GetConstantValue(second)),
@@ -44,17 +44,13 @@ public static class InvocationExpressionSyntaxExtensions
             _ => false
         };
 
-    public static bool TryGetOperands(this InvocationExpressionSyntax invocation, out SyntaxNode left, out SyntaxNode right)
-    {
-        (left, right) = invocation switch
+    public static Pair<SyntaxNode, SyntaxNode> Operands(this InvocationExpressionSyntax invocation) =>
+        invocation switch
         {
-            { Expression: MemberAccessExpressionSyntax access } => (access.Expression, access.Name),
-            { Expression: MemberBindingExpressionSyntax binding } => (invocation.GetParentConditionalAccessExpression()?.Expression, binding.Name),
-            _ => (null, null)
+            { Expression: MemberAccessExpressionSyntax access } => new Pair<SyntaxNode, SyntaxNode>(access.Expression, access.Name),
+            { Expression: MemberBindingExpressionSyntax binding } => new(invocation.GetParentConditionalAccessExpression()?.Expression, binding.Name),
+            _ => default
         };
-
-        return left is not null && right is not null;
-    }
 
     public static bool TryGetFirstArgument(this InvocationExpressionSyntax invocationExpression, out ArgumentSyntax firstArgument)
     {

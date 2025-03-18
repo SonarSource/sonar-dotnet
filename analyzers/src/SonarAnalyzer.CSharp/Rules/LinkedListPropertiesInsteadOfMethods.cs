@@ -23,7 +23,7 @@ public sealed class LinkedListPropertiesInsteadOfMethods : LinkedListPropertiesI
 
     protected override bool IsRelevantCallAndType(InvocationExpressionSyntax invocation, SemanticModel model) =>
         invocation.HasExactlyNArguments(0)
-        && invocation.TryGetOperands(out var left, out var right)
+        && invocation.Operands() is { Left: { } left, Right: { } right }
         && IsRelevantType(right, model)
         && IsCorrectType(left, model);
 

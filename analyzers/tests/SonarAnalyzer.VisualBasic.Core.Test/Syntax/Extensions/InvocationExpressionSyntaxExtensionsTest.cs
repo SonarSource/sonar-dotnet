@@ -38,9 +38,8 @@ public class InvocationExpressionSyntaxExtensionsTest
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as InvocationExpressionSyntax;
 
-        var result = InvocationExpressionSyntaxExtensions.TryGetOperands(node, out var left, out var right);
+        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
 
-        result.Should().BeTrue();
         left.Should().NotBeNull();
         left.ToString().Should().Be(expectedLeft);
         right.Should().NotBeNull();
@@ -62,9 +61,8 @@ public class InvocationExpressionSyntaxExtensionsTest
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as InvocationExpressionSyntax;
 
-        var result = InvocationExpressionSyntaxExtensions.TryGetOperands(node, out var left, out var right);
+        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
 
-        result.Should().BeFalse();
         left.Should().BeNull();
         right.Should().BeNull();
     }

@@ -174,7 +174,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool IsLinqDatabaseQuery(InvocationExpressionSyntax node, SemanticModel model)
         {
-            while (node is not null && node.TryGetOperands(out var left, out _))
+            while (node?.Operands().Left is { } left)
             {
                 if (GetNodeTypeSymbol(left, model).DerivesOrImplementsAny(KnownType.DatabaseBaseQueryTypes))
                 {
