@@ -73,7 +73,7 @@ internal static partial class NuGetMetadataFactory
         // some packages (see Mono.Posix.NETStandard.1.0.0) may contain target framework only in ref folder
         var dllsPerDirectory = Directory.GetFiles(packageDir, "*.dll", SearchOption.AllDirectories)
                                         .GroupBy(x => Path.GetDirectoryName(x).Split('+').First())
-                                        .Select(x => (directory: Path.GetFileName(x.Key), dllPaths: x.AsEnumerable()))
+                                        .Select(x => new { directory = Path.GetFileName(x.Key), dllPaths = x.AsEnumerable() })
                                         .ToArray();
 
         foreach (var allowedDirectory in allowedDirectories)

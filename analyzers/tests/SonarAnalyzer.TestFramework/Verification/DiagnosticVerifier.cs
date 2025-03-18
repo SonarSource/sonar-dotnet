@@ -120,7 +120,7 @@ public static class DiagnosticVerifier
         foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
         {
             messages.Add(new(null, $"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:", null, 0));
-            foreach (var pair in filePairs.OrderBy(x => (x.Type, x.LineNumber, x.Start, x.IssueId, x.RuleId)))
+            foreach (var pair in from x in filePairs orderby x.Type, x.LineNumber, x.Start, x.IssueId, x.RuleId select x)
             {
                 messages.Add(pair.CreateMessage());
             }

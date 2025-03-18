@@ -55,31 +55,31 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
         return new($"{Type} {concise}", builder.ToString(), FilePath, LineNumber);
     }
 
-    private (string Concise, string Detailed) AssertionMessage()
+    private Message AssertionMessage()
     {
         if (Actual is null)
         {
-            return ("Missing", MissingMessage());
+            return new("Missing", MissingMessage());
         }
         else if (Expected is null)
         {
-            return ("Unexpected", UnexpectedMessage());
+            return new("Unexpected", UnexpectedMessage());
         }
         else if (Expected.IssueId != Actual.IssueId)
         {
-            return ("Different ID", $"The expected issueId '{Expected.IssueId}' does not match the actual issueId '{Actual.IssueId}'");
+            return new("Different ID", $"The expected issueId '{Expected.IssueId}' does not match the actual issueId '{Actual.IssueId}'");
         }
         else if (Expected.Message is not null && Actual.Message != Expected.Message)
         {
-            return ("Different Message", $"The expected message '{Expected.Message}' does not match the actual message '{Actual.Message}'");
+            return new("Different Message", $"The expected message '{Expected.Message}' does not match the actual message '{Actual.Message}'");
         }
         else if (Expected.Start.HasValue && Actual.Start != Expected.Start)
         {
-            return ("Different Location", $"Should start on column {Expected.Start} but got column {Actual.Start}");
+            return new("Different Location", $"Should start on column {Expected.Start} but got column {Actual.Start}");
         }
         else if (Expected.Length.HasValue && Actual.Length != Expected.Length)
         {
-            return ("Different Length", $"Should have a length of {Expected.Length} but got a length of {Actual.Length}");
+            return new("Different Length", $"Should have a length of {Expected.Length} but got a length of {Actual.Length}");
         }
         else
         {
@@ -99,4 +99,6 @@ internal sealed record IssueLocationPair(IssueLocation Actual, IssueLocation Exp
             ? $"Unexpected error, use {comment} Error [{Actual.RuleId}] {Actual.Message}"   // We don't want to assert the precise {{Message}}
             : $"Unexpected issue '{Actual.Message}'";
     }
+
+    private readonly record struct Message(string Concise, string Detailed);
 }
