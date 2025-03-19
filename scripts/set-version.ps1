@@ -1,12 +1,3 @@
-[CmdletBinding()]
-Param(
-    [Parameter(Mandatory = $True, Position = 1)]
-    [ValidatePattern("^\d{1,3}\.\d{1,3}(\.\d{1,3})?$")]
-    [String]$Version,
-    [Int]$BuildNumber=0,
-    [String]$Branch,
-    [string]$Sha1
-)
 
 Set-StrictMode -version 2.0
 $ErrorActionPreference = "Stop"
