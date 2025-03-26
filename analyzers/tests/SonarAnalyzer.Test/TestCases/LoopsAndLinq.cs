@@ -355,4 +355,22 @@ namespace Tests.Diagnostics
                 if (c != ' ') { }
         }
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-1222
+    static class Repo_1222
+    {
+        public static T? FirstOrNone<T>(this IEnumerable<T> enumerable, Predicate<T> predicate) where T : struct
+        {
+            // this could be re-written via LINQ but it isn't obvious:
+            // enumerable.Cast<T?>().FirstOrDefault(x => predicate(x!.Value));
+            foreach (var element in enumerable) // Noncompliant FP
+            {
+                if (predicate(element))         // Secondary
+                {
+                    return element;
+                }
+            }
+            return null;
+        }
+    }
 }
