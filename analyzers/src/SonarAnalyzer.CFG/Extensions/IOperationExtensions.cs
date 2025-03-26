@@ -154,6 +154,9 @@ public static class IOperationExtensions
     public static IArgumentOperationWrapper ToArgument(this IOperation operation) =>
         IArgumentOperationWrapper.FromOperation(operation);
 
+    public static IArrayCreationOperationWrapper ToArrayCreation(this IOperation operation) =>
+        IArrayCreationOperationWrapper.FromOperation(operation);
+
     public static IAssignmentOperationWrapper ToAssignment(this IOperation operation) =>
         IAssignmentOperationWrapper.FromOperation(operation);
 
@@ -189,6 +192,12 @@ public static class IOperationExtensions
 
     public static IFlowCaptureReferenceOperationWrapper ToFlowCaptureReference(this IOperation operation) =>
         IFlowCaptureReferenceOperationWrapper.FromOperation(operation);
+
+    public static IForEachLoopOperationWrapper ToForEachLoop(this IOperation operation) =>
+        IForEachLoopOperationWrapper.FromOperation(operation);
+
+    public static ILoopOperationWrapper ToLoop(this IOperation operation) =>
+        ILoopOperationWrapper.FromOperation(operation);
 
     public static IIncrementOrDecrementOperationWrapper ToIncrementOrDecrement(this IOperation operation) =>
         IIncrementOrDecrementOperationWrapper.FromOperation(operation);
@@ -231,6 +240,12 @@ public static class IOperationExtensions
 
     public static IUnaryOperationWrapper ToUnary(this IOperation operation) =>
         IUnaryOperationWrapper.FromOperation(operation);
+
+    public static IVariableDeclarationOperationWrapper ToVariableDeclaration(this IOperation operation) =>
+        IVariableDeclarationOperationWrapper.FromOperation(operation);
+
+    public static IVariableDeclaratorOperationWrapper ToVariableDeclarator(this IOperation operation) =>
+        IVariableDeclaratorOperationWrapper.FromOperation(operation);
 
     public static IOperation UnwrapConversion(this IOperation operation)
     {
