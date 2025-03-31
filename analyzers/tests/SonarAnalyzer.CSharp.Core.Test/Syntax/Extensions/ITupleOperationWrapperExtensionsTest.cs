@@ -74,7 +74,7 @@ public class ITupleOperationWrapperExtensionsTest
     {
         var largeTuple = LargeTuple(500); // (1, 2,... , 500)
         // Actual execution time is about 0.4ms - 0.7ms
-        AssertAllElementsExecutionTimeBeLessThan(largeTuple, 20.Milliseconds());
+        AssertAllElementsExecutionTimeBeLessThan(largeTuple, 0.Milliseconds());
 
         static string LargeTuple(int length)
         {
