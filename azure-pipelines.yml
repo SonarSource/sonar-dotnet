@@ -105,8 +105,14 @@ stages:
     - powershell: |
         $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
         dotnet test $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
-        dotnet build analyzers\src\RuleDescriptorGenerator\RuleDescriptorGenerator.csproj -c $(BuildConfiguration) /p:RunAnalyzers=true # This does not have a test project => we need to build it separately
       displayName: '.Net Build and UTs'
+      env:
+        ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+        ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
+
+    - powershell: |
+        dotnet build analyzers\src\RuleDescriptorGenerator\RuleDescriptorGenerator.csproj -c $(BuildConfiguration) /p:RunAnalyzers=true # This does not have a test project => we need to build it separately
+      displayName: '.Net RuleDescriptor Build'
       env:
         ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
         ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
