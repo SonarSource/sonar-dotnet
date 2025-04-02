@@ -608,10 +608,6 @@ namespace StyleCop.Analyzers.CodeGeneration
             {
                 usingDirectives.Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Generic")));
             }
-            if (node.Name.Contains("Loop")) // Sonar
-            {
-                usingDirectives.Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Microsoft.CodeAnalysis.Semantics")));
-            }
 
             usingDirectives.Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Immutable")));
             usingDirectives.Add(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Microsoft.CodeAnalysis")));
@@ -1151,6 +1147,7 @@ namespace StyleCop.Analyzers.CodeGeneration
                     "IDiscardSymbol" => true,
                     "InstanceReferenceKind" => true,
                     "InterpolatedStringArgumentPlaceholderKind" => true,    // Sonar: Skipped because it's not available
+                    "LoopKind" => true,
                     "PlaceholderKind" => true,
                     _ => !this.IsPublicProperty || this.IsOverride, // Sonar
                 };
