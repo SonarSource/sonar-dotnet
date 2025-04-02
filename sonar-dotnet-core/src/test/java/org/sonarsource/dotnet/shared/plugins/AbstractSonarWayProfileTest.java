@@ -31,6 +31,7 @@ public class AbstractSonarWayProfileTest {
 
   private static PluginMetadata metadata;
   private static RoslynRules roslynRules;
+  private static ProfileRegistrar[] profileRegistrars;
 
   @BeforeClass
   public static void beforeAll() {
@@ -45,6 +46,18 @@ public class AbstractSonarWayProfileTest {
     rule2.id = "S-REAL-2";
     roslynRules = mock(RoslynRules.class);
     when(roslynRules.rules()).thenReturn(List.of(rule1, rule2));
+
+    profileRegistrars = new ProfileRegistrar[]{
+         registrarContext -> {
+           registrarContext.registerDefaultQualityProfileRules(
+             "LANG",
+             List.of(RuleKey.of("OTHER-REPO", "additionalRule"))
+           );
+           registrarContext.registerDefaultQualityProfileRules(
+             "OTHER_LANG",
+             List.of(RuleKey.of("OTHER-REPO", "otherLangAdditionalRule"))
+           );
+         }};
   }
 
   @Test
@@ -73,5 +86,19 @@ public class AbstractSonarWayProfileTest {
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("LANG", "Sonar way");
     assertThat(profile).isNotNull();
     assertThat(profile.rule(RuleKey.of("SECURITY-REPO", "SECURITY-RULE"))).isNotNull();
+  }
+
+  @Test
+  public void define_activateAdditionalRules() {
+    AbstractSonarWayProfile sut = new AbstractSonarWayProfile(metadata, roslynRules, profileRegistrars) {};
+    Context context = new Context();
+    sut.define(context);
+
+    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("LANG", "Sonar way");
+    assertThat(profile).isNotNull();
+    assertThat(profile.rule(RuleKey.of("OTHER-REPO", "additionalRule"))).isNotNull();
+    assertThat(profile.rule(RuleKey.of("OTHER-REPO", "otherLangAdditionalRule"))).isNull();
+    BuiltInQualityProfilesDefinition.BuiltInQualityProfile otherProfile = context.profile("OTHER_LANG", "Sonar way");
+    assertThat(otherProfile).isNull();
   }
 }
