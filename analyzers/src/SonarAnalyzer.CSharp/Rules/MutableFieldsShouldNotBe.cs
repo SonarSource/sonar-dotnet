@@ -30,7 +30,7 @@ public abstract class MutableFieldsShouldNotBe : SonarDiagnosticAnalyzer
             KnownType.System_Collections_ObjectModel_ReadOnlySet_T,
             KnownType.System_Collections_Frozen_FrozenDictionary_TKey_TValue,
             KnownType.System_Collections_Frozen_FrozenSet_T,
-            KnownType.System_Collections_Immutable_IImmutableArray_T,
+            KnownType.System_Collections_Immutable_ImmutableArray_T,
             KnownType.System_Collections_Immutable_IImmutableDictionary_TKey_TValue,
             KnownType.System_Collections_Immutable_IImmutableList_T,
             KnownType.System_Collections_Immutable_IImmutableSet_T,
