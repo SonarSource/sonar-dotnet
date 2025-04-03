@@ -69,11 +69,11 @@ public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
             .Where(x => MethodIsDisposeImplementation(x, disposeMethod)))
         {
             var methodDeclarations = method.DeclaringSyntaxReferences
-                .Select(x => new NodeAndModel<MethodDeclarationSyntax>(compilation.GetSemanticModel(x.SyntaxTree), x.GetSyntax() as MethodDeclarationSyntax))
+                .Select(x => new NodeAndModel<MethodDeclarationSyntax>(x.GetSyntax() as MethodDeclarationSyntax, compilation.GetSemanticModel(x.SyntaxTree)))
                 .Where(x => x.Node is not null);
 
             var methodDeclaration = methodDeclarations.FirstOrDefault(m => m.Node.HasBodyOrExpressionBody());
-            if (methodDeclaration is null)
+            if (methodDeclaration == default)
             {
                 continue;
             }

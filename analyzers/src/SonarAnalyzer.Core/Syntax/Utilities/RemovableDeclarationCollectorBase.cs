@@ -37,7 +37,7 @@ public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDecla
         typeDeclarations ??= namedType.DeclaringSyntaxReferences
             .Select(x => x.GetSyntax())
             .OfType<TDeclaration>()
-            .Select(x => new NodeAndModel<TOwnerOfSubnodes>(compilation.GetSemanticModel(x.SyntaxTree), GetOwnerOfSubnodes(x)))
+            .Select(x => new NodeAndModel<TOwnerOfSubnodes>(GetOwnerOfSubnodes(x), compilation.GetSemanticModel(x.SyntaxTree)))
             .Where(x => x.Model is not null);
 
     protected RemovableDeclarationCollectorBase(INamedTypeSymbol namedType, Compilation compilation)
@@ -70,5 +70,5 @@ public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDecla
         && symbol.GetOverriddenMember() is null;
 
     protected static NodeSymbolAndModel SelectNodeTuple(SyntaxNode node, SemanticModel model) =>
-        new(model, node, model.GetDeclaredSymbol(node));
+        new(node, model.GetDeclaredSymbol(node), model);
 }

@@ -130,14 +130,14 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
                 .Where(node => node.IsKind(SyntaxKind.IdentifierName))
                 .Cast<IdentifierNameSyntax>()
                 .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                .Select(x => new MemberUsage(container.Model, x, container.Model.GetSymbolInfo(x).Symbol)));
+                .Select(x => new MemberUsage(x, container.Model.GetSymbolInfo(x).Symbol, container.Model)));
 
         var generic = removableDeclarationCollector.TypeDeclarations
             .SelectMany(container => container.Node.DescendantNodes()
                 .Where(node => node.IsKind(SyntaxKind.GenericName))
                 .Cast<GenericNameSyntax>()
                 .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                .Select(x => new MemberUsage(container.Model, x, container.Model.GetSymbolInfo(x).Symbol)));
+                .Select(x => new MemberUsage(x, container.Model.GetSymbolInfo(x).Symbol, container.Model)));
 
         return identifiers.Concat(generic)
             .Where(x => x.Symbol is IFieldSymbol or IPropertySymbol)

@@ -92,15 +92,18 @@ public class SnippetCompiler
         return symbol;
     }
 
-    public ITypeSymbol GetTypeSymbol(string typeName)
+    public ISymbol GetDeclaredSymbol(string name)
     {
-        var type = (SyntaxNode)GetNodes<CS.TypeDeclarationSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName)
-            ?? GetNodes<VB.TypeStatementSyntax>().FirstOrDefault(m => m.Identifier.ValueText == typeName);
-
-        var symbol = SemanticModel.GetDeclaredSymbol(type) as ITypeSymbol;
-        symbol.Should().NotBeNull($"Test setup error: could not find type in code snippet: {type}");
+        var indentifierKind = IsCSharp() ? (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.IdentifierToken : (int)Microsoft.CodeAnalysis.VisualBasic.SyntaxKind.IdentifierToken;
+        var identfierTokens = SyntaxTree.GetRoot().DescendantTokens().Where(x => x.RawKind == indentifierKind && x.ValueText == name).ToList();
+        identfierTokens.Should().NotBeEmpty($"Test setup error: could not find identifier in code snippet: {name}");
+        var symbol = identfierTokens.Select(x => SemanticModel.GetDeclaredSymbol(x.Parent)).FirstOrDefault(x => x is not null);
+        symbol.Should().NotBeNull($"Test setup error: could not find symbol in code snippet: {name}");
         return symbol;
     }
+
+    public T GetDeclaredSymbol<T>(string name) where T : ISymbol =>
+        GetDeclaredSymbol(name).Should().BeAssignableTo<T>($"Test setup error: found symbol is not of the expected symbol kind: {name}").Subject;
 
     public IMethodSymbol GetMethodSymbol(string typeDotMethodName)
     {
@@ -108,9 +111,9 @@ public class SnippetCompiler
         return SemanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
     }
 
-    public IPropertySymbol GetPropertySymbol(string typeDotMethodName)
+    public IPropertySymbol GetPropertySymbol(string typeDotPropertyName)
     {
-        var nameParts = typeDotMethodName.Split('.');
+        var nameParts = typeDotPropertyName.Split('.');
         SyntaxNode property = null;
 
         if (IsCSharp())

@@ -68,7 +68,7 @@ public class ISymbolExtensionsTest
     [DataRow("readonly struct SymbolMember { public @SymbolMember() { } };", false)]
     public void IsPrimaryConstructor(string code, bool hasPrimaryConstructor)
     {
-        var typeSymbol = new SnippetCompiler(code).GetTypeSymbol("SymbolMember");
+        var typeSymbol = new SnippetCompiler(code).GetDeclaredSymbol<INamedTypeSymbol>("SymbolMember");
         var methodSymbols = typeSymbol.GetMembers().OfType<IMethodSymbol>();
 
         methodSymbols.Count(ISymbolExtensionsCS.IsPrimaryConstructor).Should().Be(hasPrimaryConstructor ? 1 : 0);

@@ -170,7 +170,7 @@ namespace SonarAnalyzer.CSharp.Rules
                  from declarationNode in constructorSymbol.DeclaringSyntaxReferences.Select(x => x.GetSyntax()).OfType<TSyntax>()
                  let model = declarationNode.EnsureCorrectSemanticModelOrDefault(context.Model)
                  where model != null
-                 select new NodeSymbolAndModel<TSyntax, IMethodSymbol>(model, declarationNode, constructorSymbol)).ToList();
+                 select new NodeSymbolAndModel<TSyntax, IMethodSymbol>(declarationNode, constructorSymbol, model)).ToList();
 
         private static IEnumerable<DeclarationTuple<IPropertySymbol>> GetInitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
                                                                                                          Func<SyntaxTokenList, bool> filterModifiers,

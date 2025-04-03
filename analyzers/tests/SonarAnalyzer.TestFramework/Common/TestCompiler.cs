@@ -53,19 +53,25 @@ public static class TestCompiler
     }
 
     // Get the SyntaxNode between the markers $$ in the snippet
-    public static SyntaxNode NodeBetweenMarkersCS(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
-        NodeBetweenMarkers(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, outputKind);
+    public static NodeAndModel<T> NodeBetweenMarkersCS<T>(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode =>
+        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, outputKind);
+
+    public static NodeAndModel<CS.CSharpSyntaxNode> NodeBetweenMarkersCS(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+        NodeBetweenMarkers<CS.CSharpSyntaxNode>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, outputKind);
 
     // Get the SyntaxNode between the markers $$ in the snippet
-    public static SyntaxNode NodeBetweenMarkersVB(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
-        NodeBetweenMarkers(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, outputKind);
+    public static NodeAndModel<T> NodeBetweenMarkersVB<T>(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode =>
+        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, outputKind);
+
+    public static NodeAndModel<VB.VisualBasicSyntaxNode> NodeBetweenMarkersVB(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+        NodeBetweenMarkers<VB.VisualBasicSyntaxNode>(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, outputKind);
 
     // Get the SyntaxToken between the markers $$ in the snippet
-    public static SyntaxToken TokenBetweenMarkersCS(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+    public static TokenAndModel TokenBetweenMarkersCS(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
         TokenBetweenMarkers(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, outputKind);
 
     // Get the SyntaxToken between the markers $$ in the snippet
-    public static SyntaxToken TokenBetweenMarkersVB(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+    public static TokenAndModel TokenBetweenMarkersVB(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
         TokenBetweenMarkers(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, outputKind);
 
     public static ControlFlowGraph CompileCfgBodyCS(string body = null, string additionalParameters = null) =>
@@ -146,22 +152,28 @@ public static class TestCompiler
         return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
     }
 
-    private static SyntaxNode NodeBetweenMarkers(string snippet, AnalyzerLanguage language, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+    private static NodeAndModel<T> NodeBetweenMarkers<T>(string snippet,
+                                                         AnalyzerLanguage language,
+                                                         bool getInnermostNodeForTie = false,
+                                                         OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode
     {
         var position = snippet.IndexOf("$$");
         var lastPosition = snippet.LastIndexOf("$$");
         var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
         snippet = snippet.Replace("$$", string.Empty);
-        var (tree, _) = Compile(snippet, ignoreErrors: false, language, outputKind: outputKind);
-        var node = tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
-        return node;
+        var (tree, model) = Compile(snippet, ignoreErrors: false, language, outputKind: outputKind);
+        var node = (T)tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
+        return new(node, model);
     }
 
-    private static SyntaxToken TokenBetweenMarkers(string snippet, AnalyzerLanguage language, bool findInsideTrivia = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+    private static TokenAndModel TokenBetweenMarkers(string snippet,
+                                                     AnalyzerLanguage language,
+                                                     bool findInsideTrivia = false,
+                                                     OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
     {
         var position = snippet.IndexOf("$$");
         snippet = snippet.Replace("$$", string.Empty);
-        var (tree, _) = TestCompiler.Compile(snippet, ignoreErrors: false, language, outputKind: outputKind);
-        return tree.GetRoot().FindToken(position, findInsideTrivia);
+        var (tree, model) = TestCompiler.Compile(snippet, ignoreErrors: false, language, outputKind: outputKind);
+        return new(tree.GetRoot().FindToken(position, findInsideTrivia), model);
     }
 }

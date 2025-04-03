@@ -218,7 +218,7 @@ public class AttributeDataExtensionsTest
     }
 
     private static AttributeData CompileAttribute(string code, bool ignoreErrors = false) =>
-        new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).GetTypeSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+        new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).GetDeclaredSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
 
     private static AttributeDataMock AttributeDataWithName(string attributeClassName)
     {

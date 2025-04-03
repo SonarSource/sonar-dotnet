@@ -35,7 +35,7 @@ public class VisualBasicRemovableDeclarationCollector : RemovableDeclarationColl
     {
         var fieldLikeNodes = TypeDeclarations
             .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
-                .Select(x => new NodeAndModel<FieldDeclarationSyntax>(typeDeclaration.Model, (FieldDeclarationSyntax)x)));
+                .Select(x => new NodeAndModel<FieldDeclarationSyntax>((FieldDeclarationSyntax)x, typeDeclaration.Model)));
 
         return fieldLikeNodes
             .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators.SelectMany(x => x.Names)

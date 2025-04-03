@@ -73,12 +73,12 @@ namespace SonarAnalyzer.CSharp.Rules
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.InvocationExpression))
                     .Cast<InvocationExpressionSyntax>()
-                    .Select(x => new NodeSymbolAndModel<InvocationExpressionSyntax, IMethodSymbol>(container.Model, x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol)))
+                    .Select(x => new NodeSymbolAndModel<InvocationExpressionSyntax, IMethodSymbol>(x, container.Model.GetSymbolInfo(x).Symbol as IMethodSymbol, container.Model)))
                  .Where(x => x.Symbol != null && IsDelegateInvocation(x.Symbol));
 
             var invokedEventSymbols = delegateInvocations
-                .Select(x => new NodeAndModel<ExpressionSyntax>(x.Model, GetEventExpressionFromInvocation(x.Node, x.Symbol)))
-                .Select(x => new NodeSymbolAndModel<ExpressionSyntax, IEventSymbol>(x.Model, x.Node, x.Model.GetSymbolInfo(x.Node).Symbol as IEventSymbol))
+                .Select(x => new NodeAndModel<ExpressionSyntax>(GetEventExpressionFromInvocation(x.Node, x.Symbol), x.Model))
+                .Select(x => new NodeSymbolAndModel<ExpressionSyntax, IEventSymbol>(x.Node, x.Model.GetSymbolInfo(x.Node).Symbol as IEventSymbol, x.Model))
                 .Where(x => x.Symbol != null)
                 .Select(x => x.Symbol.OriginalDefinition);
 
@@ -91,18 +91,18 @@ namespace SonarAnalyzer.CSharp.Rules
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.Argument))
                     .Cast<ArgumentSyntax>()
-                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Expression)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(x.Expression, container.Model)));
 
             var equalsValue = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.Node.DescendantNodes()
                     .OfType<EqualsValueClauseSyntax>()
-                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Value)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(x.Value, container.Model)));
 
             var assignment = removableDeclarationCollector.TypeDeclarations
                 .SelectMany(container => container.Node.DescendantNodes()
                     .Where(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression))
                     .Cast<AssignmentExpressionSyntax>()
-                    .Select(x => new NodeAndModel<SyntaxNode>(container.Model, x.Right)));
+                    .Select(x => new NodeAndModel<SyntaxNode>(x.Right, container.Model)));
 
             var allNodes = arguments.Concat(equalsValue).Concat(assignment);
 

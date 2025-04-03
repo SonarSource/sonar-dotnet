@@ -120,11 +120,11 @@ public class INamespaceSymbolExtensionsTest
         baseTypes.Should().ContainSingle();
         baseTypes.First().Should().Be(objectType);
 
-        var derivedType = snippet.GetTypeSymbol("Derived") as INamedTypeSymbol;
+        var derivedType = snippet.GetDeclaredSymbol<INamedTypeSymbol>("Derived");
         baseTypes = derivedType.GetSelfAndBaseTypes().ToList();
         baseTypes.Should().HaveCount(3);
         baseTypes.Should().HaveElementAt(0, derivedType);
-        baseTypes.Should().HaveElementAt(1, snippet.GetTypeSymbol("Base").Should().BeAssignableTo<INamedTypeSymbol>().Subject);
+        baseTypes.Should().HaveElementAt(1, snippet.GetDeclaredSymbol("Base").Should().BeAssignableTo<INamedTypeSymbol>().Subject);
         baseTypes.Should().HaveElementAt(2, objectType);
     }
 
@@ -140,7 +140,7 @@ public class INamespaceSymbolExtensionsTest
                 }
             }
             """);
-        var typeSymbol = snippet.GetTypeSymbol("Outer") as INamedTypeSymbol;
+        var typeSymbol = snippet.GetDeclaredSymbol<INamedTypeSymbol>("Outer");
         typeSymbol.GetAllNamedTypes().Should().HaveCount(3);
     }
 

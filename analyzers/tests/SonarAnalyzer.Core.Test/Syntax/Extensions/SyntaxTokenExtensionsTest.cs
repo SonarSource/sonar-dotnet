@@ -23,7 +23,7 @@ public class SyntaxTokenExtensionsTest
     public void ToSecondaryLocation_NullMessage()
     {
         var code = "public class $$C$$ {}";
-        var token = TestCompiler.TokenBetweenMarkersCS(code);
+        var token = TestCompiler.TokenBetweenMarkersCS(code).Token;
         var secondaryLocation = token.ToSecondaryLocation(null);
         secondaryLocation.Should().NotBeNull();
         secondaryLocation.Location.Should().Be(token.GetLocation());
@@ -36,7 +36,7 @@ public class SyntaxTokenExtensionsTest
     public void ToSecondaryLocation_MessageArgs(string[] messageArgs)
     {
         var code = "public class $$C$$ {}";
-        var token = TestCompiler.TokenBetweenMarkersCS(code);
+        var token = TestCompiler.TokenBetweenMarkersCS(code).Token;
         var secondaryLocation = token.ToSecondaryLocation("Message", messageArgs);
         secondaryLocation.Should().NotBeNull();
         secondaryLocation.Location.Should().Be(token.GetLocation());
@@ -49,7 +49,7 @@ public class SyntaxTokenExtensionsTest
     public void ToSecondaryLocation_MessageFormat(string format, params string[] messageArgs)
     {
         var code = "public class $$C$$ {}";
-        var token = TestCompiler.TokenBetweenMarkersCS(code);
+        var token = TestCompiler.TokenBetweenMarkersCS(code).Token;
         var secondaryLocation = token.ToSecondaryLocation(format, messageArgs);
         secondaryLocation.Should().NotBeNull();
         secondaryLocation.Location.Should().Be(token.GetLocation());

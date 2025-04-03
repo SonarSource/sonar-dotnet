@@ -210,19 +210,19 @@ public class SnippetCompilerTest
     }
 
     [TestMethod]
-    public void GetTypeSymbol_CS()
+    public void GetDeclaredSymbol_CS()
     {
         var sut = new SnippetCompiler("public class Sample { public class Nested { } }");
-        var type = sut.GetTypeSymbol("Nested");
+        var type = sut.GetDeclaredSymbol("Nested");
         type.Should().NotBeNull();
         type.Name.Should().Be("Nested");
     }
 
     [TestMethod]
-    public void GetTypeSymbol_VB()
+    public void GetDeclaredSymbol_VB()
     {
         var sut = new SnippetCompiler("Public Class Sample : Public Class Nested : End Class : End Class", false, AnalyzerLanguage.VisualBasic);
-        var type = sut.GetTypeSymbol("Nested");
+        var type = sut.GetDeclaredSymbol("Nested");
         type.Should().NotBeNull();
         type.Name.Should().Be("Nested");
     }

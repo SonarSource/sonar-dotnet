@@ -27,7 +27,7 @@ public class CSharpRemovableDeclarationCollector : RemovableDeclarationCollector
     {
         var fieldLikeNodes = TypeDeclarations
             .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
-                .Select(node => new NodeAndModel<BaseFieldDeclarationSyntax>(typeDeclaration.Model, (BaseFieldDeclarationSyntax)node)));
+                .Select(node => new NodeAndModel<BaseFieldDeclarationSyntax>((BaseFieldDeclarationSyntax)node, typeDeclaration.Model)));
 
         return fieldLikeNodes
             .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declaration.Variables

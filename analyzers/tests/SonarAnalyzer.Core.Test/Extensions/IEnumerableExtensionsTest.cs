@@ -278,9 +278,9 @@ public class IEnumerableExtensionsTest
     {
         List<SyntaxNode> nodes =
         [
-            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}"),
-            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}"),
-            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}"),
+            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}").Node,
+            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}").Node,
+            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}").Node,
         ];
 
         var secondaryLocations = nodes.ToSecondaryLocations(null);
@@ -297,9 +297,9 @@ public class IEnumerableExtensionsTest
     {
         List<SyntaxNode> nodes =
         [
-            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}"),
-            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}"),
-            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}"),
+            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}").Node,
+            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}").Node,
+            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}").Node,
         ];
 
         var secondaryLocations = nodes.ToSecondaryLocations("Message", messageArgs);
@@ -316,9 +316,9 @@ public class IEnumerableExtensionsTest
     {
         List<SyntaxNode> nodes =
         [
-            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}"),
-            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}"),
-            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}"),
+            TestCompiler.NodeBetweenMarkersCS("$$public$$ class C {}").Node,
+            TestCompiler.NodeBetweenMarkersCS("public $$class$$ C {}").Node,
+            TestCompiler.NodeBetweenMarkersCS("public class $$C$$ {}").Node,
         ];
 
         var secondaryLocations = nodes.ToSecondaryLocations(format, messageArgs);
@@ -333,9 +333,9 @@ public class IEnumerableExtensionsTest
     {
         List<SyntaxToken> nodes =
         [
-            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}"),
-            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}"),
-            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}"),
+            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}").Token,
+            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}").Token,
+            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}").Token,
         ];
 
         var secondaryLocations = nodes.ToSecondaryLocations(null);
@@ -352,9 +352,9 @@ public class IEnumerableExtensionsTest
     {
         List<SyntaxToken> nodes =
         [
-            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}"),
-            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}"),
-            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}"),
+            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}").Token,
+            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}").Token,
+            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}").Token,
         ];
 
         var secondaryLocations = nodes.ToSecondaryLocations("Message", messageArgs);
@@ -371,9 +371,9 @@ public class IEnumerableExtensionsTest
     {
         List<SyntaxToken> nodes =
         [
-            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}"),
-            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}"),
-            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}"),
+            TestCompiler.TokenBetweenMarkersCS("$$public$$ class C {}").Token,
+            TestCompiler.TokenBetweenMarkersCS("public $$class$$ C {}").Token,
+            TestCompiler.TokenBetweenMarkersCS("public class $$C$$ {}").Token,
         ];
 
         var secondaryLocations = nodes.ToSecondaryLocations(format, messageArgs);
