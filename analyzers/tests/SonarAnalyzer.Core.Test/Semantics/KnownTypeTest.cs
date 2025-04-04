@@ -48,6 +48,11 @@ public class KnownTypeTest
     [DataRow("System.Action<T1, T2>", false, "System.Action", true, "T1")]
     [DataRow("System.Action", false, "System.Action", false, "T")]
     [DataRow("System.Action<T>", false, "System.Action", true, "T")]
+    [DataRow("OuterNamespace.InnerNamespace.TheType", true, "OuterNamespace.InnerNamespace.TheType", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", false, "OuterNamespace.InnerNamespace.TheType", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false)]
     public void Matches_TypeSymbol_CS(string symbolName, bool expectedMatch, string fullTypeName, bool isArray, params string[] genericParameters) =>
         new KnownType(fullTypeName, genericParameters) { IsArray = isArray }
             .Matches(GetSymbol_CS(symbolName))
@@ -60,6 +65,11 @@ public class KnownTypeTest
     [DataRow("System.Collections.Generic.IDictionary(Of TKey, TValue)", false, "System.Collections.Generic.IDictionary", false, "TValue", "TKey")]
     [DataRow("String()", true, "System.String", true)]
     [DataRow("String()", false, "System.Byte", true)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType", true, "OuterNamespace.InnerNamespace.TheType", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", false, "OuterNamespace.InnerNamespace.TheType", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false)]
     public void Matches_TypeSymbol_VB(string symbolName, bool expectedMatch, string fullTypeName, bool isArray, params string[] genericParameters) =>
         new KnownType(fullTypeName, genericParameters) { IsArray = isArray }
             .Matches(GetSymbol_VB(symbolName))
@@ -79,6 +89,19 @@ public class KnownTypeTest
         var (tree, model) = TestCompiler.CompileCS($$"""
             namespace Exceptions { public class Exception { } }
             public class Test<T, T1, T2, T3> { public {{type}} Value; }
+            namespace OuterNamespace
+            {
+                namespace InnerNamespace
+                {
+                    public class TheType
+                    {
+                        public class NestedOnce
+                        {
+                            public class NestedTwice { }
+                        }
+                    }
+                }
+            }
             """);
         var expression = tree.Single<CS.VariableDeclaratorSyntax>();
         return model.GetDeclaredSymbol(expression).GetSymbolType();
@@ -86,7 +109,19 @@ public class KnownTypeTest
 
     private static ITypeSymbol GetSymbol_VB(string type)
     {
-        var (tree, model) = TestCompiler.CompileVB($"Public Class Test(Of TKey, TValue) : Public Value As {type} : End Class");
+        var (tree, model) = TestCompiler.CompileVB($"""
+            Public Class Test(Of TKey, TValue) : Public Value As {type} : End Class
+            Namespace OuterNamespace
+                Namespace InnerNamespace
+                    Public Class TheType
+                        Public Class NestedOnce
+                            Public Class NestedTwice
+                            End Class
+                        End Class
+                    End Class
+                End Namespace
+            End Namespace
+            """);
         var expression = tree.Single<VB.ModifiedIdentifierSyntax>();
         return model.GetDeclaredSymbol(expression).GetSymbolType();
     }

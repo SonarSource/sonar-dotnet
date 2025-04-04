@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Core.Semantics;
 [DebuggerDisplay("{DebuggerDisplay}")]
 public sealed partial class KnownType
 {
-    private readonly IList<string> namespaceParts;
+    private readonly string[] parts;
     private readonly string[] genericParameters;
 
     public string TypeName { get; }
@@ -49,8 +49,7 @@ public sealed partial class KnownType
 
     public KnownType(string fullName, params string[] genericParameters)
     {
-        var parts = fullName.Split('.');
-        namespaceParts = new ArraySegment<string>(parts, 0, parts.Length - 1);
+        parts = fullName.Split('.');
         this.genericParameters = genericParameters;
         FullName = fullName;
         TypeName = parts[parts.Length - 1];
@@ -75,7 +74,8 @@ public sealed partial class KnownType
         }
 
         return symbol.Name == TypeName
-            && NamespaceMatches(symbol)
+            && OuterClassMatches(symbol, out var parentClassCount)
+            && NamespaceMatches(symbol, parentClassCount)
             && GenericParametersMatch(symbol);
     }
 
@@ -84,13 +84,30 @@ public sealed partial class KnownType
             ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
             : genericParameters.Length == 0;
 
-    private bool NamespaceMatches(ISymbol symbol)
+    private bool OuterClassMatches(ISymbol symbol, out int parentClassCount)
+    {
+        var index = parts.Length - 1;
+        while (symbol.ContainingType is not null)
+        {
+            index--;    // First visit skips the TypeName itself
+            symbol = symbol.ContainingType;
+            if (symbol.Name != parts[index])
+            {
+                parentClassCount = 0;
+                return false;
+            }
+        }
+        parentClassCount = parts.Length - 1 - index;
+        return true;
+    }
+
+    private bool NamespaceMatches(ISymbol symbol, int parentClassCount)
     {
         var currentNamespace = symbol.ContainingNamespace;
-        var index = namespaceParts.Count - 1;
+        var index = parts.Length - parentClassCount - 2;
         while (currentNamespace is not null && !string.IsNullOrEmpty(currentNamespace.Name) && index >= 0)
         {
-            if (currentNamespace.Name != namespaceParts[index])
+            if (currentNamespace.Name != parts[index])
             {
                 return false;
             }
