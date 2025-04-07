@@ -16,21 +16,8 @@
 
 namespace SonarAnalyzer.Core.Common;
 
-public class NodeAndSymbol<TSyntaxNode, TSymbol>
+public readonly record struct NodeAndSymbol<TSyntaxNode, TSymbol>(TSyntaxNode Node, TSymbol Symbol)
     where TSyntaxNode : SyntaxNode
-    where TSymbol : ISymbol
-{
-    public TSyntaxNode Node { get; }
-    public TSymbol Symbol { get; }
+    where TSymbol : ISymbol;
 
-    public NodeAndSymbol(TSyntaxNode node, TSymbol symbol)
-    {
-        Node = node;
-        Symbol = symbol;
-    }
-}
-
-public class NodeAndSymbol : NodeAndSymbol<SyntaxNode, ISymbol>
-{
-    public NodeAndSymbol(SyntaxNode node, ISymbol symbol) : base(node, symbol) { }
-}
+public readonly record struct NodeAndSymbol(SyntaxNode Node, ISymbol Symbol);

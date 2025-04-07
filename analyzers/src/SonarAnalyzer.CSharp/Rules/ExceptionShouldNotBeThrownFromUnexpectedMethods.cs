@@ -134,9 +134,8 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
         // The location is returned only if an issue should be reported. Otherwise, null is returned.
         Location GetLocationToReport<TThrow>(IEnumerable<TThrow> throwNodes, Func<TThrow, SyntaxNode> getNode, Func<TThrow, ExpressionSyntax> getExpression) =>
             throwNodes.Select(x => new NodeAndSymbol(getNode(x), context.Model.GetSymbolInfo(getExpression(x)).Symbol))
-                .FirstOrDefault(x => x.Symbol is not null && ShouldReport(x.Symbol.ContainingType, allowedTypes))?
-                .Node
-                .GetLocation();
+                .FirstOrDefault(x => x.Symbol is not null && ShouldReport(x.Symbol.ContainingType, allowedTypes))
+                .Node?.GetLocation();
     }
 
     private static bool ShouldReport(INamedTypeSymbol exceptionType, ImmutableArray<KnownType> allowedTypes) =>
