@@ -26,6 +26,36 @@ public static class IOperationExtensions
     public static IOperationWrapperSonar ToSonar(this IOperationWrapper operation) =>
         new(operation.WrappedOperation);
 
+    public static IOperation Parent(this IOperation operation) =>
+        operation.ToSonar().Parent;
+
+    public static IOperation Parent(this IOperationWrapper operation) =>
+        operation.WrappedOperation.Parent();
+
+    public static IEnumerable<IOperation> Children(this IOperation operation) =>
+    operation.ToSonar().Children;
+
+    public static IEnumerable<IOperation> Children(this IOperationWrapper operation) =>
+        operation.WrappedOperation.Children();
+
+    public static string Language(this IOperation operation) =>
+        operation.ToSonar().Language;
+
+    public static string Language(this IOperationWrapper operation) =>
+        operation.WrappedOperation.Language();
+
+    public static bool IsImplicit(this IOperation operation) =>
+        operation.ToSonar().IsImplicit;
+
+    public static bool IsImplicit(this IOperationWrapper operation) =>
+        operation.WrappedOperation.IsImplicit();
+
+    public static SemanticModel SemanticModel(this IOperation operation) =>
+        operation.ToSonar().SemanticModel;
+
+    public static SemanticModel SemanticModel(this IOperationWrapper operation) =>
+        operation.WrappedOperation.SemanticModel();
+
     public static bool IsOutArgumentReference(this IOperation operation) =>
         operation.ToSonar() is var wrapped
         && IArgumentOperationWrapper.IsInstance(wrapped.Parent)
@@ -176,6 +206,9 @@ public static class IOperationExtensions
     public static IBinaryPatternOperationWrapper ToBinaryPattern(this IOperation operation) =>
         IBinaryPatternOperationWrapper.FromOperation(operation);
 
+    public static ICatchClauseOperationWrapper ToCatchClause(this IOperation operation) =>
+        ICatchClauseOperationWrapper.FromOperation(operation);
+
     public static ICompoundAssignmentOperationWrapper ToCompoundAssignment(this IOperation operation) =>
         ICompoundAssignmentOperationWrapper.FromOperation(operation);
 
@@ -215,6 +248,9 @@ public static class IOperationExtensions
     public static IIsTypeOperationWrapper ToIsType(this IOperation operation) =>
         IIsTypeOperationWrapper.FromOperation(operation);
 
+    public static ILocalFunctionOperationWrapper ToLocalFunction(this IOperation operation) =>
+        ILocalFunctionOperationWrapper.FromOperation(operation);
+
     public static ILocalReferenceOperationWrapper ToLocalReference(this IOperation operation) =>
         ILocalReferenceOperationWrapper.FromOperation(operation);
 
@@ -229,6 +265,9 @@ public static class IOperationExtensions
 
     public static IObjectCreationOperationWrapper ToObjectCreation(this IOperation operation) =>
         IObjectCreationOperationWrapper.FromOperation(operation);
+
+    public static IPatternOperationWrapper ToPattern(this IOperation operation) =>
+        IPatternOperationWrapper.FromOperation(operation);
 
     public static IParameterReferenceOperationWrapper ToParameterReference(this IOperation operation) =>
         IParameterReferenceOperationWrapper.FromOperation(operation);
