@@ -102,6 +102,8 @@ namespace Tests.Diagnostics
                         from z in c //Noncompliant 
                         select "1"
                 };
+            _ = from _ in byteArray // Noncompliant FP NET-1246 Don't report on discard like variables
+                select 1;
         }
 
         void F1()
@@ -156,6 +158,7 @@ namespace Tests.Diagnostics
 
         void F2(int a)
         {
+            var _ = 1; // Noncompliant FP NET-1246 Don't report on discard like variables
         }
     }
 
@@ -351,4 +354,22 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class Loops
+    {
+        public void ForEach()
+        {
+            foreach (var unused in new int[] { 1, 2, 3 }) // Compliant
+            { }
+            foreach (var _ in new int[] { 1, 2, 3 })      // Compliant
+            { }
+        }
+
+        public void For()
+        {
+            for (var i = 0; ;) // Compliant
+            { }
+            for (var _ = 0; ;) // Compliant
+            { }
+        }
+    }
 }
