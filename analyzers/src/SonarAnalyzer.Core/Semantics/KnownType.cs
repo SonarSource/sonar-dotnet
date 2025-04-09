@@ -587,6 +587,8 @@ public sealed partial class KnownType
     public static readonly KnownType System_Threading_Mutex = new("System.Threading.Mutex");
     public static readonly KnownType System_Threading_ReaderWriterLock = new("System.Threading.ReaderWriterLock");
     public static readonly KnownType System_Threading_ReaderWriterLockSlim = new("System.Threading.ReaderWriterLockSlim");
+    public static readonly KnownType System_Threading_Semaphore = new("System.Threading.Semaphore");
+    public static readonly KnownType System_Threading_SemaphoreSlim = new("System.Threading.SemaphoreSlim");
     public static readonly KnownType System_Threading_SpinLock = new("System.Threading.SpinLock");
     public static readonly KnownType System_Threading_Tasks_Task = new("System.Threading.Tasks.Task");
     public static readonly KnownType System_Threading_Tasks_Task_T = new("System.Threading.Tasks.Task", "TResult");
