@@ -582,7 +582,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Threading_CancellationToken = new("System.Threading.CancellationToken");
     public static readonly KnownType System_Threading_CancellationTokenSource = new("System.Threading.CancellationTokenSource");
     public static readonly KnownType System_Threading_Lock = new("System.Threading.Lock");
-    public static readonly KnownType System_Threading_Lock_Scope = new("System.Threading.Lock.Scope");
+    public static readonly KnownType System_Threading_Lock_Scope = new("System.Threading.Lock+Scope");
     public static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
     public static readonly KnownType System_Threading_Mutex = new("System.Threading.Mutex");
     public static readonly KnownType System_Threading_ReaderWriterLock = new("System.Threading.ReaderWriterLock");

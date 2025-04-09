@@ -26,6 +26,10 @@ public class KnownTypeTest
     public void Matches_TypeSymbolIsNull_ThrowsArgumentNullException() =>
         new KnownType("typeName").Invoking(x => x.Matches(null)).Should().Throw<ArgumentNullException>();
 
+    [TestMethod]
+    public void Constructor_InvalidName_Throws() =>
+        ((Func<KnownType>)(() => new KnownType("Invalid.Order+Of.Separators"))).Should().Throw<ArgumentException>();
+
     [DataTestMethod]
     [DataRow("System.Action", true, "System.Action", false)]
     [DataRow("System.DateTime", false, "System.Action", false)]
@@ -50,9 +54,16 @@ public class KnownTypeTest
     [DataRow("System.Action<T>", false, "System.Action", true, "T")]
     [DataRow("OuterNamespace.InnerNamespace.TheType", true, "OuterNamespace.InnerNamespace.TheType", false)]
     [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", false, "OuterNamespace.InnerNamespace.TheType", false)]
-    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
-    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
-    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", true, "OuterNamespace.InnerNamespace.TheType+NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false, "OuterNamespace.InnerNamespace.TheType+NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", true, "OuterNamespace.InnerNamespace.TheType+NestedOnce+NestedTwice", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", false, "NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType", false, "OuterNamespace.InnerNamespace.TheType+NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedGeneric<T1>", true, "OuterNamespace.InnerNamespace.TheType+NestedGeneric", false, "T")]
+    [DataRow("OuterNamespace.InnerNamespace.GenericType<T1>.Nested", true, "OuterNamespace.InnerNamespace.GenericType+Nested", false)]
+    [DataRow("OuterNamespace.InnerNamespace.GenericType<T1>", true, "OuterNamespace.InnerNamespace.GenericType", false, "TOuter")]
+    [DataRow("OuterNamespace.InnerNamespace.GenericType<T1>.NestedGeneric<T2>", true, "OuterNamespace.InnerNamespace.GenericType+NestedGeneric", false, "TInner")]  // Only the most-inner Generic type is relevant
+    [DataRow("OuterNamespace.InnerNamespace.GenericType<T1>.NestedGeneric<T2>.NestedTwice", true, "OuterNamespace.InnerNamespace.GenericType+NestedGeneric+NestedTwice", false)]
     public void Matches_TypeSymbol_CS(string symbolName, bool expectedMatch, string fullTypeName, bool isArray, params string[] genericParameters) =>
         new KnownType(fullTypeName, genericParameters) { IsArray = isArray }
             .Matches(GetSymbol_CS(symbolName))
@@ -67,9 +78,9 @@ public class KnownTypeTest
     [DataRow("String()", false, "System.Byte", true)]
     [DataRow("OuterNamespace.InnerNamespace.TheType", true, "OuterNamespace.InnerNamespace.TheType", false)]
     [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", false, "OuterNamespace.InnerNamespace.TheType", false)]
-    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
-    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false, "OuterNamespace.InnerNamespace.TheType.NestedOnce", false)]
-    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", true, "OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce", true, "OuterNamespace.InnerNamespace.TheType+NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", false, "OuterNamespace.InnerNamespace.TheType+NestedOnce", false)]
+    [DataRow("OuterNamespace.InnerNamespace.TheType.NestedOnce.NestedTwice", true, "OuterNamespace.InnerNamespace.TheType+NestedOnce+NestedTwice", false)]
     public void Matches_TypeSymbol_VB(string symbolName, bool expectedMatch, string fullTypeName, bool isArray, params string[] genericParameters) =>
         new KnownType(fullTypeName, genericParameters) { IsArray = isArray }
             .Matches(GetSymbol_VB(symbolName))
@@ -96,6 +107,15 @@ public class KnownTypeTest
                     public class TheType
                     {
                         public class NestedOnce
+                        {
+                            public class NestedTwice { }
+                        }
+                        public class NestedGeneric<T> { }
+                    }
+                    public class GenericType<TOuter>
+                    {
+                        public class Nested { }
+                        public class NestedGeneric<TInner>
                         {
                             public class NestedTwice { }
                         }

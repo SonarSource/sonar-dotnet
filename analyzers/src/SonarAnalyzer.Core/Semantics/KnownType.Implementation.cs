@@ -23,6 +23,7 @@ public sealed partial class KnownType
 {
     private readonly string[] parts;
     private readonly string[] genericParameters;
+    private readonly int parentClassCount;
 
     public string TypeName { get; }
     public string FullName { get; }
@@ -49,7 +50,12 @@ public sealed partial class KnownType
 
     public KnownType(string fullName, params string[] genericParameters)
     {
-        parts = fullName.Split('.');
+        parts = fullName.Split('.', '+');
+        parentClassCount = fullName.Count(x => x == '+');
+        if (parentClassCount > 0 && fullName.LastIndexOf('.') > fullName.LastIndexOf('+'))
+        {
+            throw new ArgumentException($"Invalid type name '{fullName}'. It should not contain '.' after the nested type '+'.");
+        }
         this.genericParameters = genericParameters;
         FullName = fullName;
         TypeName = parts[parts.Length - 1];
@@ -74,8 +80,8 @@ public sealed partial class KnownType
         }
 
         return symbol.Name == TypeName
-            && OuterClassMatches(symbol, out var parentClassCount)
-            && NamespaceMatches(symbol, parentClassCount)
+            && OuterClassMatches(symbol)
+            && NamespaceMatches(symbol)
             && GenericParametersMatch(symbol);
     }
 
@@ -84,24 +90,22 @@ public sealed partial class KnownType
             ? namedType.TypeParameters.Select(x => x.Name).SequenceEqual(genericParameters)
             : genericParameters.Length == 0;
 
-    private bool OuterClassMatches(ISymbol symbol, out int parentClassCount)
+    private bool OuterClassMatches(ISymbol symbol)
     {
         var index = parts.Length - 1;
-        while (symbol.ContainingType is not null)
+        while (symbol.ContainingType is not null && index > 0)
         {
             index--;    // First visit skips the TypeName itself
             symbol = symbol.ContainingType;
             if (symbol.Name != parts[index])
             {
-                parentClassCount = 0;
                 return false;
             }
         }
-        parentClassCount = parts.Length - 1 - index;
-        return true;
+        return index == parts.Length - 1 - parentClassCount;
     }
 
-    private bool NamespaceMatches(ISymbol symbol, int parentClassCount)
+    private bool NamespaceMatches(ISymbol symbol)
     {
         var currentNamespace = symbol.ContainingNamespace;
         var index = parts.Length - parentClassCount - 2;
