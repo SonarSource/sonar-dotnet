@@ -1,4 +1,5 @@
 {
-  "SonarCloudOrganization": "sonarsource",
-  "ProjectKey": "SonarSource_sonar-dotnet-enterprise"
+  "sonarCloudOrganization": "sonarsource",
+  "region": "EU",
+  "projectKey": "SonarSource_sonar-dotnet-enterprise"
 }
