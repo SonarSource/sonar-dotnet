@@ -158,6 +158,9 @@ public static class IOperationExtensions
     public static ILocalReferenceOperationWrapper? AsLocalReference(this IOperation operation) =>
         operation.As(OperationKindEx.LocalReference, ILocalReferenceOperationWrapper.FromOperation);
 
+    public static IIsNullOperationWrapper? AsIsNull(this IOperation operation) =>
+        operation.As(OperationKindEx.IsNull, IIsNullOperationWrapper.FromOperation);
+
     public static IIsPatternOperationWrapper? AsIsPattern(this IOperation operation) =>
         operation.As(OperationKindEx.IsPattern, IIsPatternOperationWrapper.FromOperation);
 
