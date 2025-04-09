@@ -130,6 +130,9 @@ public static class IOperationExtensions
     public static IArrayCreationOperationWrapper? AsArrayCreation(this IOperation operation) =>
         operation.As(OperationKindEx.ArrayCreation, IArrayCreationOperationWrapper.FromOperation);
 
+    public static IArrayElementReferenceOperationWrapper? AsArrayElementReference(this IOperation operation) =>
+        operation.As(OperationKindEx.ArrayElementReference, IArrayElementReferenceOperationWrapper.FromOperation);
+
     public static IConversionOperationWrapper? AsConversion(this IOperation operation) =>
         operation.As(OperationKindEx.Conversion, IConversionOperationWrapper.FromOperation);
 
@@ -179,8 +182,8 @@ public static class IOperationExtensions
     public static IRecursivePatternOperationWrapper? AsRecursivePattern(this IOperation operation) =>
         operation.As(OperationKindEx.RecursivePattern, IRecursivePatternOperationWrapper.FromOperation);
 
-    public static IArrayElementReferenceOperationWrapper? AsArrayElementReference(this IOperation operation) =>
-        operation.As(OperationKindEx.ArrayElementReference, IArrayElementReferenceOperationWrapper.FromOperation);
+    public static ISpreadOperationWrapper? AsSpread(this IOperation operation) =>
+        operation.As(OperationKindEx.Spread, ISpreadOperationWrapper.FromOperation);
 
     public static ITupleOperationWrapper? AsTuple(this IOperation operation) =>
         operation.As(OperationKindEx.Tuple, ITupleOperationWrapper.FromOperation);
