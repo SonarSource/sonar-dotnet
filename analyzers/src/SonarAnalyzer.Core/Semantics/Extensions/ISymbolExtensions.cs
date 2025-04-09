@@ -76,14 +76,18 @@ public static class ISymbolExtensions
     public static bool IsInType(this ISymbol symbol, ImmutableArray<KnownType> types) =>
         symbol is not null && symbol.ContainingType.IsAny(types);
 
-    public static T GetInterfaceMember<T>(this T symbol) where T : class, ISymbol =>
+    /// <summary>
+    /// Returns all interface members this member implements.
+    /// A single member can implement members from multiple interface.
+    /// </summary>
+    public static IEnumerable<T> InterfaceMembers<T>(this T symbol) where T : class, ISymbol =>
         symbol is null || symbol.IsOverride || !CanBeInterfaceMember(symbol)
-            ? null
+            ? Enumerable.Empty<T>()
             : symbol.ContainingType
                 .AllInterfaces
                 .SelectMany(x => x.GetMembers())
                 .OfType<T>()
-                .FirstOrDefault(x => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(x)));
+                .Where(x => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(x)));
 
     public static T GetOverriddenMember<T>(this T symbol) where T : class, ISymbol =>
         symbol is { IsOverride: true }
@@ -99,7 +103,7 @@ public static class ISymbolExtensions
     public static bool IsChangeable(this ISymbol symbol) =>
         !symbol.IsAbstract
         && !symbol.IsVirtual
-        && symbol.GetInterfaceMember() is null
+        && symbol.InterfaceMembers().IsEmpty()
         && symbol.GetOverriddenMember() is null;
 
     public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol) =>

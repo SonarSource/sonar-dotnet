@@ -46,7 +46,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         || containingMethod.IsOverride
                         || !containingMethod.IsPubliclyAccessible()
                         || IsTryPattern(containingMethod, modifier)
-                        || containingMethod.GetInterfaceMember() != null)
+                        || containingMethod.InterfaceMembers().Any())
                     {
                         return;
                     }

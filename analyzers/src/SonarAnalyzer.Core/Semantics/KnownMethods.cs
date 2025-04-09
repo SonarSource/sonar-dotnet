@@ -266,7 +266,7 @@ public static class KnownMethods
 
     private static INamedTypeSymbol ContainingInterface(IMethodSymbol symbol)
     {
-        if (symbol.GetInterfaceMember() is { } interfaceMember)
+        if (symbol.InterfaceMembers().FirstOrDefault() is { } interfaceMember)
         {
             return interfaceMember.ContainingType;
         }

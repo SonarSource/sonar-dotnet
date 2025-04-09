@@ -22,14 +22,10 @@ public static class IEnumerableExtensions
 {
     public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> equalityComparer = null)
     {
-        if (enumerable is null)
-        {
-            return equalityComparer is null ? new() : new(equalityComparer);
-        }
-        else
-        {
-            return equalityComparer is null ? new(enumerable) : new(enumerable, equalityComparer);
-        }
+        enumerable ??= [];
+        return equalityComparer is null
+            ? new(enumerable)
+            : new(enumerable, equalityComparer);
     }
 
     /// <summary>
@@ -61,6 +57,9 @@ public static class IEnumerableExtensions
 
     public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable) where T : struct =>
         enumerable.Where(x => x.HasValue).Select(x => x.Value);
+
+    public static bool IsEmpty<T>(this IEnumerable<T> enumerable) =>
+        !enumerable.Any();
 
     /// <summary>
     /// Applies a specified function to the corresponding elements of two sequences,

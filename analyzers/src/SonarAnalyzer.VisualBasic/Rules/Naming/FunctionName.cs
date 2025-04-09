@@ -67,7 +67,7 @@ public sealed class FunctionName : ParametrizedDiagnosticAnalyzer
         static bool ImplementsSingleMethodWithoutOverride(MethodStatementSyntax methodStatement, ISymbol methodSymbol) =>
             methodStatement.ImplementsClause is { } implementsClause
             && implementsClause.InterfaceMembers.Count == 1
-            && methodSymbol.GetInterfaceMember() is { } interfaceMember
+            && methodSymbol.InterfaceMembers().FirstOrDefault() is { } interfaceMember
             && string.Equals(interfaceMember.Name, methodStatement.Identifier.ValueText, StringComparison.Ordinal);
     }
 }

@@ -68,7 +68,7 @@ public sealed class UseShortName : StylingAnalyzer
 
     private static bool FollowsPredefinedName(ISymbol symbol) =>
         symbol is IMethodSymbol method
-        && (symbol.IsOverride || symbol.GetInterfaceMember() is not null || method.PartialDefinitionPart is not null);
+        && (symbol.IsOverride || symbol.InterfaceMembers().Any() || method.PartialDefinitionPart is not null);
 
     private sealed record RenameInfo(string TypeName, string UsedName, string SuggestedName);
 }

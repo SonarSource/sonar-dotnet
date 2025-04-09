@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Core.Rules
                         {
                             VerifyGenericParameters(c, methodSyntax, methodSymbol.Parameters, methodSymbol.OverriddenMethod.OriginalDefinition.Parameters, "base class");
                         }
-                        else if (methodSymbol.GetInterfaceMember() is { } interfaceMember)
+                        else if (methodSymbol.InterfaceMembers().FirstOrDefault() is { } interfaceMember)
                         {
                             VerifyGenericParameters(c, methodSyntax, methodSymbol.Parameters, interfaceMember.OriginalDefinition.Parameters, "interface");
                         }

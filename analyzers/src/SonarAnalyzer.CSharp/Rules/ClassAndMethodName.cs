@@ -162,7 +162,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             if (string.IsNullOrWhiteSpace(identifier.ValueText)
                 || symbol.ContainingType.GetAttributes(ComRelatedTypes).Any()
-                || symbol.GetInterfaceMember() != null
+                || symbol.InterfaceMembers().Any()
                 || symbol.GetOverriddenMember() != null
                 || symbol.IsExtern)
             {

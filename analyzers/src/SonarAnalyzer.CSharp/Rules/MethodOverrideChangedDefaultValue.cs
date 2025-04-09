@@ -39,7 +39,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var method = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.Model.GetDeclaredSymbol(method);
 
-                    var overriddenMember = methodSymbol.GetOverriddenMember() ?? methodSymbol.GetInterfaceMember();
+                    var overriddenMember = methodSymbol.GetOverriddenMember() ?? methodSymbol.InterfaceMembers().FirstOrDefault();
                     if (methodSymbol == null ||
                         overriddenMember == null)
                     {

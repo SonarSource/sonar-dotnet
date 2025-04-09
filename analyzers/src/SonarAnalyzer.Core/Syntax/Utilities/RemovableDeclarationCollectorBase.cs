@@ -64,9 +64,9 @@ public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDecla
         && !symbol.IsImplicitlyDeclared
         && !symbol.IsAbstract
         && !symbol.IsVirtual
-        && !symbol.GetAttributes().Any()
+        && symbol.GetAttributes().IsEmpty()
         && !symbol.ContainingType.IsInterface()
-        && symbol.GetInterfaceMember() is null
+        && symbol.InterfaceMembers().IsEmpty()
         && symbol.GetOverriddenMember() is null;
 
     protected static NodeSymbolAndModel SelectNodeTuple(SyntaxNode node, SemanticModel model) =>

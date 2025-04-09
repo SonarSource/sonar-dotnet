@@ -44,7 +44,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                     if (c.Model.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
                         && !methodSymbol.ContainingType.IsInterface()
-                        && methodSymbol.GetInterfaceMember() == null
+                        && methodSymbol.InterfaceMembers().IsEmpty()
                         && methodSymbol.GetOverriddenMember() == null)
                     {
                         c.ReportIssue(Rule, methodDeclaration.Identifier);

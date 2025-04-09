@@ -29,6 +29,11 @@ public class ISymbolExtensionsTest
             void Method3();
         }
 
+        public interface IOtherInterface
+        {
+            void Method3();
+        }
+
         public abstract class Base
         {
             public virtual void Method1() { }
@@ -52,9 +57,21 @@ public class ISymbolExtensionsTest
         {
             public override int Property { get; set; }
             public int Property2 { get; set; }
-            public void Method3(){}
+            public virtual void Method3(){}
 
             public abstract void Method5();
+        }
+
+        public class Derived3: Derived2, IInterface, IOtherInterface
+        {
+            public override void Method3(){}
+            public override void Method5() {}
+        }
+
+        public class TwoInterfaces: IInterface, IOtherInterface
+        {
+            public int Property2 { get; set; }
+            public void Method3(){}
         }
         """;
 
@@ -189,17 +206,22 @@ public class ISymbolExtensionsTest
     }
 
     [TestMethod]
-    public void Symbol_IsInterfaceImplementationOrMemberOverride()
+    public void Symbol_InterfaceMembersOrMemberOverride()
     {
-        testSnippet.GetMethodSymbol("Base.Method1").GetInterfaceMember().Should().BeNull();
+        testSnippet.GetMethodSymbol("Base.Method1").InterfaceMembers().Should().BeEmpty();
         testSnippet.GetMethodSymbol("Base.Method1").GetOverriddenMember().Should().BeNull();
         testSnippet.GetPropertySymbol("Derived2.Property").GetOverriddenMember().Should().NotBeNull();
-        testSnippet.GetPropertySymbol("Derived2.Property2").GetInterfaceMember().Should().NotBeNull();
-        testSnippet.GetMethodSymbol("Derived2.Method3").GetInterfaceMember().Should().NotBeNull();
+        testSnippet.GetPropertySymbol("Derived2.Property2").InterfaceMembers().Should().ContainSingle();
+        testSnippet.GetMethodSymbol("Derived2.Method3").InterfaceMembers().Should().ContainSingle().Which.Should().Be(testSnippet.GetMethodSymbol("IInterface.Method3"));
+        testSnippet.GetMethodSymbol("TwoInterfaces.Method3").InterfaceMembers().Should().BeEquivalentTo([
+            testSnippet.GetMethodSymbol("IInterface.Method3"),
+            testSnippet.GetMethodSymbol("IOtherInterface.Method3")]);
+        // https://sonarsource.atlassian.net/browse/NET-1239
+        testSnippet.GetMethodSymbol("Derived3.Method3").InterfaceMembers().Should().BeEmpty("Should return IInterface.Method3 and IOtherInterface.Method3");
     }
 
     [TestMethod]
-    public void Symbol_TryGetOverriddenOrInterfaceMember()
+    public void Symbol_GetOverriddenMember()
     {
         var actualOverriddenMethod = testSnippet.GetMethodSymbol("Base.Method1").GetOverriddenMember();
         actualOverriddenMethod.Should().BeNull();
@@ -211,10 +233,8 @@ public class ISymbolExtensionsTest
         actualOverriddenProperty.Should().NotBeNull();
         actualOverriddenProperty.Should().Be(expectedOverriddenProperty);
 
-        var expectedOverriddenMethod = testSnippet.GetMethodSymbol("IInterface.Method3");
-        actualOverriddenMethod = testSnippet.GetMethodSymbol("Derived2.Method3").GetInterfaceMember();
-        actualOverriddenMethod.Should().NotBeNull();
-        actualOverriddenMethod.Should().Be(expectedOverriddenMethod);
+        testSnippet.GetMethodSymbol("Derived3.Method3").GetOverriddenMember().Should().Be(testSnippet.GetMethodSymbol("Derived2.Method3"));
+        testSnippet.GetMethodSymbol("Derived3.Method5").GetOverriddenMember().Should().Be(testSnippet.GetMethodSymbol("Derived2.Method5"));
     }
 
     [TestMethod]
@@ -251,11 +271,11 @@ public class ISymbolExtensionsTest
     }
 
     [TestMethod]
-    public void GetInterfaceMember_WhenSymbolIsNull_ReturnsEmpty() =>
-        ((ISymbol)null).GetInterfaceMember().Should().BeNull();
+    public void InterfaceMembers_WhenSymbolIsNull_ReturnsEmpty() =>
+        ((ISymbol)null).InterfaceMembers().Should().BeEmpty();
 
     [TestMethod]
-    public void GetOverriddenMember_WhenSymbolIsNull_ReturnsEmpty() =>
+    public void GetOverriddenMember_WhenSymbolIsNull_ReturnsNull() =>
         ((ISymbol)null).GetOverriddenMember().Should().BeNull();
 
     [TestMethod]

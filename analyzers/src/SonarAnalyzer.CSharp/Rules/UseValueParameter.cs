@@ -39,8 +39,8 @@ namespace SonarAnalyzer.CSharp.Rules
                         return;
                     }
 
-                    var interfaceMember = c.Model.GetDeclaredSymbol(accessor).GetInterfaceMember();
-                    if (interfaceMember != null && accessor.Body?.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
+                    var interfaceMember = c.Model.GetDeclaredSymbol(accessor).InterfaceMembers();
+                    if (interfaceMember.Any() && accessor.Body?.Statements.Count == 0) // No need to check ExpressionBody, it can't be empty
                     {
                         return;
                     }

@@ -49,7 +49,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var methodSymbol = context.Model.GetDeclaredSymbol(methodDeclaration);
             if (methodSymbol == null ||
                 methodSymbol.IsOverride ||
-                methodSymbol.GetInterfaceMember() != null)
+                methodSymbol.InterfaceMembers().Any())
             {
                 return;
             }

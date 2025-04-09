@@ -37,7 +37,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 || methodSymbol.IsOverride
                 || methodSymbol.IsVirtual
                 || methodSymbol.IsControllerActionMethod()
-                || methodSymbol.GetInterfaceMember() != null
+                || methodSymbol.InterfaceMembers().Any()
                 || methodSymbol.IsEventHandler())
             {
                 return Enumerable.Empty<Diagnostic>().ToList();
@@ -168,7 +168,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return null;
             }
 
-            var originatingInterface = accessedMember.GetInterfaceMember()?.ContainingType;
+            var originatingInterface = accessedMember.InterfaceMembers().FirstOrDefault()?.ContainingType;
             if (originatingInterface != null && IsNotInternalOrSameAssembly(originatingInterface))
             {
                 return originatingInterface;

@@ -59,7 +59,7 @@ namespace SonarAnalyzer.CSharp.Rules
             && !method.IsConstructor()
             && !method.IsOverride
             && method.MethodKind != MethodKind.PropertyGet
-            && method.GetInterfaceMember() is null;
+            && method.InterfaceMembers().IsEmpty();
 
         private static bool HasCandidateReturnType(IMethodSymbol method) =>
             !method.ReturnsVoid

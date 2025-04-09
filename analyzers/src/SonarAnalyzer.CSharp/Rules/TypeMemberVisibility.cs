@@ -69,7 +69,7 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static bool IsInterfaceImplementation(SemanticModel semanticModel, MemberDeclarationSyntax declaration) =>
-            semanticModel.GetDeclaredSymbol(declaration)?.GetInterfaceMember() is not null;
+            semanticModel.GetDeclaredSymbol(declaration)?.InterfaceMembers().Any() is true;
 
         private static BaseTypeDeclarationSyntax GetParentType(SyntaxNode node) =>
             (BaseTypeDeclarationSyntax)node.Ancestors().FirstOrDefault(x => x.IsAnyKind(TypeKinds));

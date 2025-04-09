@@ -127,7 +127,7 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static bool ShouldSkip(IMethodSymbol methodSymbol) =>
-            methodSymbol.GetInterfaceMember() is not null
+            methodSymbol.InterfaceMembers().Any()
             || methodSymbol.GetOverriddenMember() is not null
             || !methodSymbol.Parameters.Any(p => p.IsOptional);
 

@@ -521,7 +521,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             && !symbol.IsSerializableMember()
             && !symbol.ContainingType.IsInterface()
             && !(symbol.Kind is SymbolKind.Field && symbol.ContainingType.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
-            && symbol.GetInterfaceMember() is null
+            && symbol.InterfaceMembers().IsEmpty()
             && symbol.GetOverriddenMember() is null;
 
         private static bool HasAttributes(ISymbol symbol)

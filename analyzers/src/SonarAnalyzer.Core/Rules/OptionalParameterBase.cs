@@ -40,7 +40,7 @@ namespace SonarAnalyzer.Core.Rules
 
                     if (symbol == null ||
                         !symbol.IsPubliclyAccessible() ||
-                        symbol.GetInterfaceMember() != null ||
+                        symbol.InterfaceMembers().Any() ||
                         symbol.GetOverriddenMember() != null)
                     {
                         return;

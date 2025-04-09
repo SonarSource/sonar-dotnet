@@ -66,8 +66,7 @@ public static class IMethodSymbolExtensions
 
     public static bool IsImplementingInterfaceMember(this IMethodSymbol methodSymbol, KnownType knownInterfaceType, string name) =>
         methodSymbol.Name == name
-        && (methodSymbol.Is(knownInterfaceType, name)
-            || (methodSymbol.GetInterfaceMember() is { } implementedInterfaceMember && implementedInterfaceMember.Is(knownInterfaceType, name)));
+        && (methodSymbol.Is(knownInterfaceType, name) || methodSymbol.InterfaceMembers().Any(x => x.Is(knownInterfaceType, name)));
 
     /// <summary>
     /// Returns a value indicating whether the provided method symbol is a ASP.NET MVC

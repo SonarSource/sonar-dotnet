@@ -108,7 +108,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             methodOrPropertySymbol.IsStatic || methodOrPropertySymbol.IsVirtual || methodOrPropertySymbol.IsAbstract || methodOrPropertySymbol.IsOverride;
 
         bool IsOverrideInterfaceOrNew() =>
-            methodOrPropertySymbol.GetInterfaceMember() is not null
+            methodOrPropertySymbol.InterfaceMembers().Any()
             || IsNewMethod(methodOrPropertySymbol)
             || IsNewProperty(methodOrPropertySymbol);
 

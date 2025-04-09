@@ -51,7 +51,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var methodSymbol = c.Model.GetDeclaredSymbol(methodDeclaration);
                     if (methodSymbol == null
                         || methodSymbol.IsMainMethod()
-                        || methodSymbol.GetInterfaceMember() != null
+                        || methodSymbol.InterfaceMembers().Any()
                         || methodSymbol.GetOverriddenMember() != null
                         || methodSymbol.IsTestMethod()
                         || methodSymbol.IsControllerActionMethod()

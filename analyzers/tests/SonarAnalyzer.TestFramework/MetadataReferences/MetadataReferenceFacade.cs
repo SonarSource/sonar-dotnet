@@ -93,7 +93,7 @@ public static class MetadataReferenceFacade
 
     public static References SystemCollections =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        NuGetMetadataReference.SystemCollectionsImmutable(TestConstants.NuGetLatestVersion);
 #else
         new[]
         {
