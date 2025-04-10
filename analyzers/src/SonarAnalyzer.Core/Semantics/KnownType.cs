@@ -622,6 +622,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Web_Mvc_Routing_IRouteInfoProvider = new("System.Web.Mvc.Routing.IRouteInfoProvider");
     public static readonly KnownType System_Web_Mvc_RoutePrefixAttribute = new("System.Web.Mvc.RoutePrefixAttribute");
     public static readonly KnownType System_Web_Mvc_ValidateInputAttribute = new("System.Web.Mvc.ValidateInputAttribute");
+    public static readonly KnownType System_Web_Routing_RouteValueDictionary = new("System.Web.Routing.RouteValueDictionary");
     public static readonly KnownType System_Web_Script_Serialization_JavaScriptSerializer = new("System.Web.Script.Serialization.JavaScriptSerializer");
     public static readonly KnownType System_Web_Script_Serialization_JavaScriptTypeResolver = new("System.Web.Script.Serialization.JavaScriptTypeResolver");
     public static readonly KnownType System_Web_Script_Serialization_SimpleTypeResolver = new("System.Web.Script.Serialization.SimpleTypeResolver");
