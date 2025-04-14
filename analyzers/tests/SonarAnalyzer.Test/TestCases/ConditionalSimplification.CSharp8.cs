@@ -55,7 +55,8 @@ class Repro_134362
     public void Method(bool condition1, bool condition2)
     {
         string s1 = string.Empty;
-        if (condition1) // Noncompliant - FP
+        if (condition1) // Compliant, we don't raise if one of the if branches contains ternary
+                        // Otherwise the fix, raises S3358
         {
             s1 = "some value";
         }
@@ -68,7 +69,8 @@ class Repro_134362
     public void Method2(bool condition1, bool condition2)
     {
         string s1 = string.Empty;
-        if (condition1) // Noncompliant - FP
+        if (condition1) // Compliant, we don't raise if one of the if branches contains ternary
+                        // Otherwise the fix, raises S3358
         {
             s1 = "some value";
         }
