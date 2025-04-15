@@ -16,38 +16,38 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class UseUriInsteadOfStringTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<UseUriInsteadOfString>().AddReferences(MetadataReferenceFacade.SystemDrawing);
+namespace SonarAnalyzer.Test.Rules;
 
-        [DataTestMethod]
-        [DataRow(ProjectType.Product)]
-        [DataRow(ProjectType.Test)]
-        public void UseUriInsteadOfString(ProjectType projectType) =>
-            builder.AddPaths("UseUriInsteadOfString.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
+[TestClass]
+public class UseUriInsteadOfStringTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<UseUriInsteadOfString>().AddReferences(MetadataReferenceFacade.SystemDrawing);
+
+    [DataTestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void UseUriInsteadOfString(ProjectType projectType) =>
+        builder.AddPaths("UseUriInsteadOfString.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void UseUriInsteadOfString_TopLevelStatements() =>
-            builder.AddPaths("UseUriInsteadOfString.TopLevelStatements.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void UseUriInsteadOfString_TopLevelStatements() =>
+        builder.AddPaths("UseUriInsteadOfString.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void UseUriInsteadOfString_Latest() =>
-            builder.AddPaths("UseUriInsteadOfString.Latest.cs", "UseUriInsteadOfString.Latest.Partial.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void UseUriInsteadOfString_Latest() =>
+        builder.AddPaths("UseUriInsteadOfString.Latest.cs", "UseUriInsteadOfString.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void UseUriInsteadOfString_InvalidCode() =>
-            builder.AddSnippet(@"
+    [TestMethod]
+    public void UseUriInsteadOfString_InvalidCode() =>
+        builder.AddSnippet(@"
 public class NoMembers
 {
 }
@@ -65,5 +65,4 @@ public class InvalidCode : NoMembers
         // Error@-3 [CS0103] The name 'result' does not exist in the current context
     }
 }").Verify();
-    }
 }

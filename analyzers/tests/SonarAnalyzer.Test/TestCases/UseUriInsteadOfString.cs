@@ -5,7 +5,7 @@ namespace Tests.Diagnostics
     #region S3996 Property type
     class S3996_Foo
     {
-        public virtual string Url { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+        public virtual string Url { get; set; } // Noncompliant {{Change the 'Url' property type to 'System.Uri'.}}
 //                     ^^^^^^
     }
 
@@ -16,31 +16,31 @@ namespace Tests.Diagnostics
 
     class S3996
     {
-        string Url { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string Url { get; set; } // Noncompliant {{Change the 'Url' property type to 'System.Uri'.}}
 //      ^^^^^^
-        string url // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string url // Noncompliant {{Change the 'url' property type to 'System.Uri'.}}
 //      ^^^^^^
         {
             get;
             set;
         }
 
-        string Url2 => ""; // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string Url2 => ""; // Noncompliant {{Change the 'Url2' property type to 'System.Uri'.}}
 //      ^^^^^^
-        string FooUrlBar { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string FooUrlBar { get; set; } // Noncompliant {{Change the 'FooUrlBar' property type to 'System.Uri'.}}
         int ThisIsAnUrlProperty { get; set; } // Compliant
 
 
         // Urn
-        string Urn { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string Urn { get; set; } // Noncompliant {{Change the 'Urn' property type to 'System.Uri'.}}
 //      ^^^^^^
-        string FooUrnBar{ get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string FooUrnBar{ get; set; } // Noncompliant {{Change the 'FooUrnBar' property type to 'System.Uri'.}}
 
 
         // Uri
-        string Uri { get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string Uri { get; set; } // Noncompliant {{Change the 'Uri' property type to 'System.Uri'.}}
 //      ^^^^^^
-        string FooUriBar{ get; set; } // Noncompliant {{Change this property type to 'System.Uri'.}}
+        string FooUriBar{ get; set; } // Noncompliant {{Change the 'FooUriBar' property type to 'System.Uri'.}}
 
         string Urn2 // Noncompliant
         {
