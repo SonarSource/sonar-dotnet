@@ -1,5 +1,7 @@
 # Code Quality and Security for C\# and VB.NET
 
+Test
+
 [![Build Status](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_apis/build/status/Sonar.Net?branchName=master)](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_build/latest?definitionId=77&branchName=master)
 
 |Product|Quality Gate|Coverage|
