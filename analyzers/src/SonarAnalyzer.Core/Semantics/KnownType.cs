@@ -277,8 +277,10 @@ public sealed partial class KnownType
     public static readonly KnownType System_Collections_Generic_HashSet_T = new("System.Collections.Generic.HashSet", "T");
     public static readonly KnownType System_Collections_Generic_IAsyncEnumerable_T = new("System.Collections.Generic.IAsyncEnumerable", "T");
     public static readonly KnownType System_Collections_Generic_ICollection_T = new("System.Collections.Generic.ICollection", "T");
+    public static readonly KnownType System_Collections_Generic_IComparer_T = new("System.Collections.Generic.IComparer", "T");
     public static readonly KnownType System_Collections_Generic_IDictionary_TKey_TValue = new("System.Collections.Generic.IDictionary", "TKey", "TValue");
     public static readonly KnownType System_Collections_Generic_IEnumerable_T = new("System.Collections.Generic.IEnumerable", "T");
+    public static readonly KnownType System_Collections_Generic_IEqualityComparer_T = new("System.Collections.Generic.IEqualityComparer", "T");
     public static readonly KnownType System_Collections_Generic_IList_T = new("System.Collections.Generic.IList", "T");
     public static readonly KnownType System_Collections_Generic_IReadOnlyCollection_T = new("System.Collections.Generic.IReadOnlyCollection", "T");
     public static readonly KnownType System_Collections_Generic_IReadOnlyList_T = new("System.Collections.Generic.IReadOnlyList", "T");
