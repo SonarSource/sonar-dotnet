@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using A;
+using B;
 
 namespace Tests.Diagnostics
 {
@@ -99,10 +101,10 @@ namespace Tests.Diagnostics
                 {
                     Key = c.Key,
                     Value =
-                        from z in c //Noncompliant 
+                        from z in c //Noncompliant
                         select "1"
                 };
-            _ = from _ in byteArray // Noncompliant FP NET-1246 Don't report on discard like variables
+            _ = from _ in byteArray // Compliant, don't report on discard like variables
                 select 1;
         }
 
@@ -158,7 +160,20 @@ namespace Tests.Diagnostics
 
         void F2(int a)
         {
-            var _ = 1; // Noncompliant FP NET-1246 Don't report on discard like variables
+            var _ = 1; // Compliant, don't report on discard like variables
+        }
+
+        void Bar(out string a)
+        {
+            a = "1";
+        }
+
+        void F3()
+        {
+            var (_, b) = (1, 2); // Noncompliant
+            //      ^
+
+            Bar(out _);
         }
     }
 
@@ -259,7 +274,7 @@ namespace Tests.Diagnostics
             var x = "hello";
             if (x is string s) // Noncompliant
 //                          ^
-            {           
+            {
                 x += ":)";
             }
 
@@ -372,4 +387,26 @@ namespace Tests.Diagnostics
             { }
         }
     }
+}
+
+public class TestWithAmbiguous
+{
+
+    public void SomeMethod()
+    {
+        var a = new Ambiguous();    // Noncompliant
+                                    // Error@-1 [CS0104]
+    }
+}
+
+namespace A
+{
+    public class Ambiguous
+    { }
+}
+
+namespace B
+{
+    public class Ambiguous
+    { }
 }

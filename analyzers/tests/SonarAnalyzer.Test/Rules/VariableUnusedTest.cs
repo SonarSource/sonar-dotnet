@@ -17,39 +17,38 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class VariableUnusedTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.VariableUnused>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void VariableUnused_CS() =>
-            builderCS.AddPaths("VariableUnused.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+[TestClass]
+public class VariableUnusedTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.VariableUnused>();
+
+    [TestMethod]
+    public void VariableUnused_CS() =>
+        builderCS.AddPaths("VariableUnused.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
 #if NET
 
-        [TestMethod]
-        public void VariableUnused_CSharp9() =>
-            builderCS.AddPaths("VariableUnused.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void VariableUnused_CSharp9() =>
+        builderCS.AddPaths("VariableUnused.CSharp9.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void VariableUnused_CSharp10() =>
-            builderCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
+    [TestMethod]
+    public void VariableUnused_CSharp10() =>
+        builderCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
 
-        [TestMethod]
-        public void VariableUnused_CSharp11() =>
-            builderCS.AddPaths("VariableUnused.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
+    [TestMethod]
+    public void VariableUnused_CSharp11() =>
+        builderCS.AddPaths("VariableUnused.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
 
-        [TestMethod]
-        public void VariableUnused_CSharp12() =>
-            builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
+    [TestMethod]
+    public void VariableUnused_CSharp12() =>
+        builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
 
 #endif
 
-        [TestMethod]
-        public void VariableUnused_VB() =>
-            new VerifierBuilder<VB.VariableUnused>().AddPaths("VariableUnused.vb").Verify();
-    }
+    [TestMethod]
+    public void VariableUnused_VB() =>
+        new VerifierBuilder<VB.VariableUnused>().AddPaths("VariableUnused.vb").Verify();
 }

@@ -14,29 +14,28 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class VariableUnused : VariableUnusedBase
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class VariableUnused : VariableUnusedBase
-    {
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCodeBlockStartAction(cbc =>
-            {
-                var collector = new UnusedLocalsCollector();
-
-                cbc.RegisterNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement);
-                cbc.RegisterNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
-                cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
-            });
-
-        private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterCodeBlockStartAction(cbc =>
         {
-            protected override IEnumerable<SyntaxNode> GetDeclaredVariables(LocalDeclarationStatementSyntax localDeclaration) =>
-                localDeclaration.Declarators.SelectMany(d => d.Names);
-        }
+            var collector = new UnusedLocalsCollector();
+
+            cbc.RegisterNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement);
+            cbc.RegisterNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
+            cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
+        });
+
+    private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
+    {
+        protected override IEnumerable<SyntaxNode> GetDeclaredVariables(LocalDeclarationStatementSyntax localDeclaration) =>
+            localDeclaration.Declarators.SelectMany(x => x.Names);
     }
 }
