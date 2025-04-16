@@ -14,85 +14,84 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public sealed class RedundantConditionalAroundAssignmentCodeFix : SonarCodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class RedundantConditionalAroundAssignmentCodeFix : SonarCodeFix
+    private const string Title = "Remove redundant conditional";
+
+    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantConditionalAroundAssignment.DiagnosticId);
+
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
-        private const string Title = "Remove redundant conditional";
+        var diagnostic = context.Diagnostics.First();
+        var diagnosticSpan = diagnostic.Location.SourceSpan;
+        var condition = root.FindNode(diagnosticSpan) as ExpressionSyntax;
+        var ifStatement = condition?.FirstAncestorOrSelf<IfStatementSyntax>();
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(RedundantConditionalAroundAssignment.DiagnosticId);
-
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+        if (ifStatement is not null)
         {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var condition = root.FindNode(diagnosticSpan) as ExpressionSyntax;
-            var ifStatement = condition?.FirstAncestorOrSelf<IfStatementSyntax>();
-
-            if (ifStatement != null)
-            {
-                return HandleIfStatement(root, context, ifStatement);
-            }
-
-            var switchExpression = root.FindNode(diagnosticSpan).FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.SwitchExpression));
-            if (switchExpression != null)
-            {
-                return HandleSwitchExpression(root, context, switchExpression);
-            }
-            else
-            {
-                return Task.CompletedTask;
-            }
+            return HandleIfStatement(root, context, ifStatement);
         }
 
-        private static Task HandleIfStatement(SyntaxNode root, SonarCodeFixContext context, IfStatementSyntax ifStatement)
+        var switchExpression = root.FindNode(diagnosticSpan).FirstAncestorOrSelf<SyntaxNode>(x => x.IsKind(SyntaxKindEx.SwitchExpression));
+        if (switchExpression is not null)
         {
-            var statement = ifStatement.Statement;
-            if (statement is BlockSyntax block)
-            {
-                statement = block.Statements.FirstOrDefault();
-            }
+            return HandleSwitchExpression(root, context, switchExpression);
+        }
+        else
+        {
+            return Task.CompletedTask;
+        }
+    }
 
-            if (statement == null)
-            {
-                return Task.CompletedTask;
-            }
+    private static Task HandleIfStatement(SyntaxNode root, SonarCodeFixContext context, IfStatementSyntax ifStatement)
+    {
+        var statement = ifStatement.Statement;
+        if (statement is BlockSyntax block)
+        {
+            statement = block.Statements.FirstOrDefault();
+        }
 
-            context.RegisterCodeFix(
-                Title,
-                c =>
-                {
-                    var newRoot = root.ReplaceNode(
-                        ifStatement,
-                        statement.WithTriviaFrom(ifStatement));
-                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                },
-                context.Diagnostics);
-
+        if (statement is null)
+        {
             return Task.CompletedTask;
         }
 
-        private static Task HandleSwitchExpression(SyntaxNode root, SonarCodeFixContext context, SyntaxNode switchExpression)
-        {
-            var switchArm = ((SwitchExpressionSyntaxWrapper)switchExpression).Arms.FirstOrDefault();
-            if (switchArm.SyntaxNode == null || switchArm.SyntaxNode.Parent.ChildNodes().Count(x => x.IsKind(SyntaxKindEx.SwitchExpressionArm)) != 1)
+        context.RegisterCodeFix(
+            Title,
+            c =>
             {
-                return Task.CompletedTask;
-            }
+                var newRoot = root.ReplaceNode(
+                    ifStatement,
+                    statement.WithTriviaFrom(ifStatement));
+                return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+            },
+            context.Diagnostics);
 
-            context.RegisterCodeFix(
-                Title,
-                c =>
-                {
-                    var newRoot = root.ReplaceNode(
-                        switchExpression,
-                        switchArm.Expression.WithTriviaFrom(switchExpression));
-                    return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
-                },
-                context.Diagnostics);
+        return Task.CompletedTask;
+    }
 
+    private static Task HandleSwitchExpression(SyntaxNode root, SonarCodeFixContext context, SyntaxNode switchExpression)
+    {
+        var switchArm = ((SwitchExpressionSyntaxWrapper)switchExpression).Arms.FirstOrDefault();
+        if (switchArm.SyntaxNode is null || switchArm.SyntaxNode.Parent.ChildNodes().Count(x => x.IsKind(SyntaxKindEx.SwitchExpressionArm)) != 1)
+        {
             return Task.CompletedTask;
         }
+
+        context.RegisterCodeFix(
+            Title,
+            c =>
+            {
+                var newRoot = root.ReplaceNode(
+                    switchExpression,
+                    switchArm.Expression.WithTriviaFrom(switchExpression));
+                return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
+            },
+            context.Diagnostics);
+
+        return Task.CompletedTask;
     }
 }
