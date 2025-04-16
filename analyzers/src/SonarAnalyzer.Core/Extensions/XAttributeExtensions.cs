@@ -21,5 +21,5 @@ namespace SonarAnalyzer.Core.Extensions;
 public static class XAttributeExtensions
 {
     public static Location CreateLocation(this XAttribute attribute, string path) =>
-        attribute.CreateLocation(path, attribute.Name);
+        attribute.CreateLocation(path, attribute.Name, attribute.Parent);
 }

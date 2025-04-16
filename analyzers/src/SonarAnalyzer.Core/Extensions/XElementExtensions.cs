@@ -27,5 +27,5 @@ public static class XElementExtensions
             : null;
 
     public static Location CreateLocation(this XElement element, string path) =>
-        element.CreateLocation(path, element.Name);
+        element.CreateLocation(path, element.Name, element);
 }
