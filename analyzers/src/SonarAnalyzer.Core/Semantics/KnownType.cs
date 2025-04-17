@@ -294,6 +294,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Collections_Generic_OrderedDictionary_TKey_TValue = new("System.Collections.Generic.OrderedDictionary", "TKey", "TValue");
     public static readonly KnownType System_Collections_ICollection = new("System.Collections.ICollection");
     public static readonly KnownType System_Collections_IEnumerable = new("System.Collections.IEnumerable");
+    public static readonly KnownType System_Collections_IEnumerator = new("System.Collections.IEnumerator");
     public static readonly KnownType System_Collections_IList = new("System.Collections.IList");
     public static readonly KnownType System_Collections_Immutable_IImmutableDictionary_TKey_TValue = new("System.Collections.Immutable.IImmutableDictionary", "TKey", "TValue");
     public static readonly KnownType System_Collections_Immutable_IImmutableList_T = new("System.Collections.Immutable.IImmutableList", "T");

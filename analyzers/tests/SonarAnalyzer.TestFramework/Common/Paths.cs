@@ -48,7 +48,7 @@ public static class Paths
         // Under AltCover, this starts deeper than usually and we need to avoid the copied TestCases from TFM folder
         // C:\...\sonar-dotnet\analyzers\tests\SonarAnalyzer.TestFramework.Test\bin\Debug\net7.0-windows\__Instrumented_SonarAnalyzer.TestFramework.Test\
         var current = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetFullPath(".")));
-        while (current != TestsRoot)
+        while (current is not null && current != TestsRoot)
         {
             var testCases = Path.Combine(current, "TestCases");
             if (Directory.Exists(testCases))
@@ -60,7 +60,7 @@ public static class Paths
                 current = Path.GetDirectoryName(current);
             }
         }
-        throw new InvalidOperationException("Could not find TestCases directory from current path: " + Path.GetFullPath("."));
+        return null; // Some test projects don't have TestCases, like the SonarAnalyzer.Enterprise.SymbolicExecution.Test
     }
 
     private static string FindRoot(string expectedSubdirectory)

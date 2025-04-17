@@ -20,7 +20,7 @@ internal sealed record VerificationMessage(string ShortDescription, string FullD
 {
     public static readonly VerificationMessage EmptyLine = new(null, null, null, 0);
 
-    public string FullPath => Path.Combine(Paths.CurrentTestCases(), FilePath);
+    public string FullPath => Paths.CurrentTestCases() is { } testCases ? Path.Combine(testCases, FilePath) : null;
 
     public string ToInvocation()
     {
