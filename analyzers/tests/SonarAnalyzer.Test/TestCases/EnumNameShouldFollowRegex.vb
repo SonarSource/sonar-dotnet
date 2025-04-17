@@ -4,7 +4,7 @@ Namespace Tests.Diagnostics
     Public Enum MyEnum
         Value
     End Enum
-    Public Enum myEnum2 ' Noncompliant {{Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.}}
+    Public Enum myEnum2 ' Noncompliant {{Rename the enumeration 'myEnum2' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.}}
 '               ^^^^^^^
         Value
     End Enum
@@ -16,7 +16,7 @@ Namespace Tests.Diagnostics
         Value
     End Enum
     <Flags()>
-    Public Enum MyFlagEnum ' Noncompliant {{Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$'.}}
+    Public Enum MyFlagEnum ' Noncompliant {{Rename the enumeration 'MyFlagEnum' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$'.}}
 '               ^^^^^^^^^^
         Value
     End Enum

@@ -26,20 +26,22 @@ public class RegexExtensionsTest
     private const string TimeoutPattern =
         @"^((?<DRIVE>[a-zA-Z]):\\)*((?<DIR>[a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+)))\\)*(?<FILE>([a-zA-Z0-9_]+(([a-zA-Z0-9_\s_\-\.]*[a-zA-Z0-9_]+)|([a-zA-Z0-9_]+))\.(?<EXTENSION>[a-zA-Z0-9]{1,6})$))";
 
+    private const string MatchingPath = @"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj";
+
     [DataTestMethod]
     [DataRow(true)]
     [DataRow(false)]
     public void SafeIsMatch_Timeout_Fallback(bool timeoutFallback)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1));
-        regex.SafeIsMatch(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", timeoutFallback).Should().Be(timeoutFallback);
+        regex.SafeIsMatch(MatchingPath, timeoutFallback).Should().Be(timeoutFallback);
     }
 
     [DataTestMethod]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, false)]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, true)]
-    [DataRow(@"äöü", 1, false)]
-    [DataRow(@"äöü", 1_000_000, false)]
+    [DataRow(MatchingPath, 1, false)]
+    [DataRow(MatchingPath, 1_000_000, true)]
+    [DataRow("äöü", 1, false)]
+    [DataRow("äöü", 1_000_000, false)]
     public void SafeMatch_Timeout(string input, long timeoutTicks, bool matchSucceed)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
@@ -47,10 +49,10 @@ public class RegexExtensionsTest
     }
 
     [DataTestMethod]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, 0)]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, 1)]
-    [DataRow(@"äöü", 1, 0)]
-    [DataRow(@"äöü", 1_000_000, 0)]
+    [DataRow(MatchingPath, 1, 0)]
+    [DataRow(MatchingPath, 1_000_000, 1)]
+    [DataRow("äöü", 1, 0)]
+    [DataRow("äöü", 1_000_000, 0)]
     public void SafeMatches_Timeout(string input, long timeoutTicks, int matchCount)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
@@ -64,10 +66,10 @@ public class RegexExtensionsTest
     }
 
     [DataTestMethod]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, @"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj")]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, @"Replaced")]
-    [DataRow(@"äöü", 1, "äöü")]
-    [DataRow(@"äöü", 1_000_000, "äöü")]
+    [DataRow(MatchingPath, 1, MatchingPath)]
+    [DataRow(MatchingPath, 1_000_000, "Replaced")]
+    [DataRow("äöü", 1, "äöü")]
+    [DataRow("äöü", 1_000_000, "äöü")]
     public void SafeReplace_Timeout(string input, long timeoutTicks, string expected)
     {
         var regex = new Regex(TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
@@ -76,13 +78,22 @@ public class RegexExtensionsTest
     }
 
     [DataTestMethod]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1, false)]
-    [DataRow(@"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj", 1_000_000, true)]
-    [DataRow(@"äöü", 1, false)]
-    [DataRow(@"äöü", 1_000_000, false)]
+    [DataRow(MatchingPath, 1, false)]
+    [DataRow(MatchingPath, 1_000_000, true)]
+    [DataRow("äöü", 1, false)]
+    [DataRow("äöü", 1_000_000, false)]
     public void SafeRegex_IsMatch_Timeout(string input, long timeoutTicks, bool isMatch)
     {
         var actual = SafeRegex.IsMatch(input, TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(timeoutTicks));
         actual.Should().Be(isMatch);
+    }
+
+    [DataTestMethod]
+    [DataRow(false)]
+    [DataRow(true)]
+    public void SafeRegex_IsMatch_TimeoutFallback(bool fallback)
+    {
+        var actual = SafeRegex.IsMatch(MatchingPath, TimeoutPattern, RegexOptions.None, TimeSpan.FromTicks(1), fallback);
+        actual.Should().Be(fallback);
     }
 }

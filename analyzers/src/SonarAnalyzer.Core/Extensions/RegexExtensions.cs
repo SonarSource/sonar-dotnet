@@ -95,17 +95,17 @@ public static class RegexExtensions
 public static class SafeRegex
 {
     /// <summary>
-    /// Matches the input to the regex. Returns <see langword="false" /> in case of an <see cref="RegexMatchTimeoutException" />.
+    /// Matches the input to the regex. Returns <paramref name="timeoutFallback" /> (false by default) in case of an <see cref="RegexMatchTimeoutException" />.
     /// </summary>
-    public static bool IsMatch(string input, string pattern) =>
-        IsMatch(input, pattern, RegexOptions.None);
+    public static bool IsMatch(string input, string pattern, bool timeoutFallback = false) =>
+        IsMatch(input, pattern, RegexOptions.None, timeoutFallback);
 
-    /// <inheritdoc cref="IsMatch(string, string)"/>
-    public static bool IsMatch(string input, string pattern, RegexOptions options) =>
-        IsMatch(input, pattern, options, Constants.DefaultRegexTimeout);
+    /// <inheritdoc cref="IsMatch(string, string, bool)"/>
+    public static bool IsMatch(string input, string pattern, RegexOptions options, bool timeoutFallback = false) =>
+        IsMatch(input, pattern, options, Constants.DefaultRegexTimeout, timeoutFallback);
 
-    /// <inheritdoc cref="IsMatch(string, string)"/>
-    public static bool IsMatch(string input, string pattern, RegexOptions options, TimeSpan matchTimeout)
+    /// <inheritdoc cref="IsMatch(string, string, bool)"/>
+    public static bool IsMatch(string input, string pattern, RegexOptions options, TimeSpan matchTimeout, bool timeoutFallback = false)
     {
         try
         {
@@ -113,7 +113,7 @@ public static class SafeRegex
         }
         catch (RegexMatchTimeoutException)
         {
-            return false;
+            return timeoutFallback;
         }
     }
 }

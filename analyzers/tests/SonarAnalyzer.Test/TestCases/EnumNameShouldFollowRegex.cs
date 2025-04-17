@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         Value
     }
-    public enum myEnum // Noncompliant {{Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.}}
+    public enum myEnum // Noncompliant {{Rename the enumeration 'myEnum' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$'.}}
 //              ^^^^^^
     {
         Value
@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
         Value
     }
     [Flags]
-    public enum MyFlagEnum // Noncompliant {{Rename this enumeration to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$'.}}
+    public enum MyFlagEnum // Noncompliant {{Rename the enumeration 'MyFlagEnum' to match the regular expression: '^([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?s$'.}}
 //              ^^^^^^^^^^
     {
         Value

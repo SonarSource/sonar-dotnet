@@ -22,7 +22,7 @@ public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParametrizedD
     where TSyntaxKind : struct
 {
     protected const string DiagnosticId = "S2342";
-    private const string MessageFormat = "Rename this enumeration to match the regular expression: '{0}'.";
+    private const string MessageFormat = "Rename the enumeration '{0}' to match the regular expression: '{1}'.";
     private const string DefaultEnumNamePattern = NamingPatterns.PascalCasingPattern;
     private const string DefaultFlagsEnumNamePattern = "^" + NamingPatterns.PascalCasingInternalPattern + "s$";
 
@@ -45,9 +45,9 @@ public abstract class EnumNameShouldFollowRegexBase<TSyntaxKind> : ParametrizedD
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
             {
                 var pattern = c.Node.HasFlagsAttribute(c.Model) ? FlagsEnumNamePattern : EnumNamePattern;
-                if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingPatterns.IsRegexMatch(identifier.ValueText, pattern))
+                if (Language.Syntax.NodeIdentifier(c.Node) is { } identifier && !NamingPatterns.IsRegexMatch(identifier.ValueText, pattern, true))
                 {
-                    c.ReportIssue(SupportedDiagnostics[0], identifier, pattern);
+                    c.ReportIssue(SupportedDiagnostics[0], identifier, identifier.ValueText, pattern);
                 }
             },
             Language.SyntaxKind.EnumDeclaration);

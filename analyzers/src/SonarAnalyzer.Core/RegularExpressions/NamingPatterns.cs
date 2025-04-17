@@ -27,6 +27,6 @@ public static class NamingPatterns
     private const string CamelCasingInternalPattern = "[a-z][a-z0-9]*" + PascalCasingInternalPattern;
     private const string MaxTwoLongIdPattern = "([A-Z]{2})?";
 
-    internal static bool IsRegexMatch(string name, string pattern) =>
-        SafeRegex.IsMatch(name, pattern, RegexOptions.CultureInvariant | RegexOptions.Compiled);
+    internal static bool IsRegexMatch(string name, string pattern, bool timeoutFallback = false) =>
+        SafeRegex.IsMatch(name, pattern, RegexOptions.CultureInvariant | RegexOptions.Compiled, timeoutFallback);
 }

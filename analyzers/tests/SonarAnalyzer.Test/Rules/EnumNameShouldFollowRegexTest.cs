@@ -17,17 +17,16 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class EnumNameShouldFollowRegexTest
-    {
-        [TestMethod]
-        public void EnumNameShouldFollowRegex_CS() =>
-            new VerifierBuilder<CS.EnumNameShouldFollowRegex>().AddPaths("EnumNameShouldFollowRegex.cs").Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void EnumNameShouldFollowRegex_VB() =>
-            new VerifierBuilder<VB.EnumNameShouldFollowRegex>().AddPaths("EnumNameShouldFollowRegex.vb").Verify();
-    }
+[TestClass]
+public class EnumNameShouldFollowRegexTest
+{
+    [TestMethod]
+    public void EnumNameShouldFollowRegex_CS() =>
+        new VerifierBuilder<CS.EnumNameShouldFollowRegex>().AddPaths("EnumNameShouldFollowRegex.cs").Verify();
+
+    [TestMethod]
+    public void EnumNameShouldFollowRegex_VB() =>
+        new VerifierBuilder<VB.EnumNameShouldFollowRegex>().AddPaths("EnumNameShouldFollowRegex.vb").Verify();
 }
