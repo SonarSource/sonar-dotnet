@@ -16,32 +16,31 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ArgumentSpecifiedForCallerInfoParameterTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ArgumentSpecifiedForCallerInfoParameter>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ArgumentSpecifiedForCallerInfoParameter() =>
-            builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.cs").Verify();
+[TestClass]
+public class ArgumentSpecifiedForCallerInfoParameterTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<ArgumentSpecifiedForCallerInfoParameter>();
+
+    [TestMethod]
+    public void ArgumentSpecifiedForCallerInfoParameter() =>
+        builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ArgumentSpecifiedForCallerInfoParameter_CSharp10() =>
-            builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void ArgumentSpecifiedForCallerInfoParameter_CSharp10() =>
+        builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs")
+            .WithOptions(LanguageOptions.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void ArgumentSpecifiedForCallerInfoParameter_CSharp11() =>
-            builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ArgumentSpecifiedForCallerInfoParameter_CSharp11() =>
+        builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp11.cs")
+            .WithOptions(LanguageOptions.FromCSharp11)
+            .Verify();
 
 #endif
 
-    }
 }

@@ -14,44 +14,44 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ArgumentSpecifiedForCallerInfoParameter : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ArgumentSpecifiedForCallerInfoParameter : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S3236";
-        private const string MessageFormat = "Remove this argument from the method call; it hides the caller information.";
+    private const string DiagnosticId = "S3236";
+    private const string MessageFormat = "Remove this argument from the method call; it hides the caller information.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly ImmutableArray<KnownType> CallerInfoAttributesToReportOn =
+    ImmutableArray.Create(
+        KnownType.System_Runtime_CompilerServices_CallerArgumentExpressionAttribute,
+        KnownType.System_Runtime_CompilerServices_CallerFilePathAttribute,
+        KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        private static readonly ImmutableArray<KnownType> CallerInfoAttributesToReportOn =
-            ImmutableArray.Create(
-                KnownType.System_Runtime_CompilerServices_CallerArgumentExpressionAttribute,
-                KnownType.System_Runtime_CompilerServices_CallerFilePathAttribute,
-                KnownType.System_Runtime_CompilerServices_CallerLineNumberAttribute);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+        {
+            if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.Model) is { MethodSymbol: { } } methodParameterLookup
+                && !(methodParameterLookup.MethodSymbol.ContainingType.Is(KnownType.System_Diagnostics_Debug) && (methodParameterLookup.MethodSymbol.Name == "Assert"))
+                && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)
             {
-                if (new CSharpMethodParameterLookup((InvocationExpressionSyntax)c.Node, c.Model) is { MethodSymbol: { } } methodParameterLookup
-                    && methodParameterLookup.GetAllArgumentParameterMappings() is { } argumentMappings)
+                foreach (var argumentMapping in argumentMappings.Where(x =>
+                    x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()
+                    && !IsArgumentPassthroughOfParameter(c.Model, x.Node, x.Symbol)))
                 {
-                    foreach (var argumentMapping in argumentMappings.Where(x =>
-                        x.Symbol.GetAttributes(CallerInfoAttributesToReportOn).Any()
-                        && !IsArgumentPassthroughOfParameter(c.Model, x.Node, x.Symbol)))
-                    {
-                        c.ReportIssue(Rule, argumentMapping.Node);
-                    }
+                    c.ReportIssue(Rule, argumentMapping.Node);
                 }
-            }, SyntaxKind.InvocationExpression);
+            }
+        }, SyntaxKind.InvocationExpression);
 
-        private static bool IsArgumentPassthroughOfParameter(SemanticModel semanticModel, ArgumentSyntax argument, IParameterSymbol targetParameter) =>
-            semanticModel.GetSymbolInfo(argument.Expression).Symbol is IParameterSymbol sourceParameter // the argument passed to the method is itself an parameter.
-                                                                                                        // Let's check if it has the same attributes.
-                && sourceParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var sourceAttributes
-                && targetParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var targetAttributes
-                && targetAttributes.All(target => sourceAttributes.Any(source => target.AttributeClass.Name == source.AttributeClass.Name));
-    }
+    private static bool IsArgumentPassthroughOfParameter(SemanticModel model, ArgumentSyntax argument, IParameterSymbol targetParameter) =>
+        model.GetSymbolInfo(argument.Expression).Symbol is IParameterSymbol sourceParameter // the argument passed to the method is itself an parameter.
+                                                                                            // Let's check if it has the same attributes.
+            && sourceParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var sourceAttributes
+            && targetParameter.GetAttributes(CallerInfoAttributesToReportOn).ToList() is var targetAttributes
+            && targetAttributes.All(x => sourceAttributes.Any(y => x.AttributeClass.Name == y.AttributeClass.Name));
 }
