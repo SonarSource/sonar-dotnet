@@ -191,6 +191,9 @@ public static class IOperationExtensions
     public static IVariableDeclaratorOperationWrapper? AsVariableDeclarator(this IOperation operation) =>
         operation.As(OperationKindEx.VariableDeclarator, IVariableDeclaratorOperationWrapper.FromOperation);
 
+    public static IAddressOfOperationWrapper ToAddressOf(this IOperation operation) =>
+        IAddressOfOperationWrapper.FromOperation(operation);
+
     public static IAwaitOperationWrapper ToAwait(this IOperation operation) =>
         IAwaitOperationWrapper.FromOperation(operation);
 
