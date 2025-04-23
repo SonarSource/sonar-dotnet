@@ -81,13 +81,18 @@ public static class ISymbolExtensions
     /// A single member can implement members from multiple interface.
     /// </summary>
     public static IEnumerable<T> InterfaceMembers<T>(this T symbol) where T : class, ISymbol =>
-        symbol is null || symbol.IsOverride || !CanBeInterfaceMember(symbol)
-            ? Enumerable.Empty<T>()
-            : symbol.ContainingType
+        symbol switch
+        {
+            null => [],
+            { } when !CanBeInterfaceMember(symbol) => [],
+            _ => symbol.ContainingType
                 .AllInterfaces
                 .SelectMany(x => x.GetMembers())
                 .OfType<T>()
-                .Where(x => symbol.Equals(symbol.ContainingType.FindImplementationForInterfaceMember(x)));
+                .Where(x =>
+                    symbol.GetOverriddenMembersAndSelf().Any(m =>
+                        m.Equals(m.ContainingType.FindImplementationForInterfaceMember(x)))),
+        };
 
     public static T GetOverriddenMember<T>(this T symbol) where T : class, ISymbol =>
         symbol is { IsOverride: true }
@@ -99,6 +104,17 @@ public static class ISymbolExtensions
                 _ => throw new ArgumentException($"Only methods, properties and events can be overridden. {typeof(T).Name} was provided", nameof(symbol))
             }
             : null;
+
+    public static IEnumerable<T> GetOverriddenMembersAndSelf<T>(this T symbol) where T : class, ISymbol
+    {
+        yield return symbol;
+        var overriden = symbol.GetOverriddenMember();
+        while (overriden is not null)
+        {
+            yield return overriden;
+            overriden = overriden.GetOverriddenMember();
+        }
+    }
 
     public static bool IsChangeable(this ISymbol symbol) =>
         !symbol.IsAbstract

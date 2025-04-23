@@ -104,7 +104,7 @@ namespace Tests.Diagnostics
         public override int Foo1
         {
             get { return 42; }
-            set { } // Noncompliant
+            set { } // Compliant because interface implementation
         }
 
         public override float Bar2
@@ -115,8 +115,8 @@ namespace Tests.Diagnostics
 
         public override event EventHandler Bar3
         {
-            add { } // Noncompliant
-            remove { } // Noncompliant
+            add { } // Compliant because interface implementation
+            remove { } // Compliant because interface implementation
         }
     }
 

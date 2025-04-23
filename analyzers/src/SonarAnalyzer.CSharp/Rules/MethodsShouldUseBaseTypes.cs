@@ -169,7 +169,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             var originatingInterface = accessedMember.InterfaceMembers().FirstOrDefault()?.ContainingType;
-            if (originatingInterface != null && IsNotInternalOrSameAssembly(originatingInterface))
+            if (originatingInterface != null && IsNotInternalOrSameAssembly(originatingInterface) && !originatingInterface.Is(KnownType.System_Runtime_InteropServices_Exception))
             {
                 return originatingInterface;
             }

@@ -362,6 +362,61 @@ public class IMethodSymbolExtensionsTest
         compilation.GetTypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
     }
 
+    [DataTestMethod]
+    [DataRow("List<int>", "Clear()", "Clear", "System.Collections.Generic.ICollection", "T")]
+    [DataRow("List<int>", "Clear()", "Clear", "System.Collections.IList")]
+    [DataRow("List<int>", "RemoveAt(1)", "RemoveAt", "System.Collections.Generic.IList", "T")]
+    [DataRow("List<int>", "RemoveAt(1)", "RemoveAt", "System.Collections.IList")]
+    [DataRow("ObservableCollection<int>", "RemoveAt(1)", "RemoveAt", "System.Collections.Generic.IList", "T")]
+    [DataRow("ObservableCollection<int>", "RemoveAt(1)", "RemoveAt", "System.Collections.IList")]
+    [DataRow("Derived1", "ToString(string.Empty, null)", "ToString", "System.IFormattable")]
+    [DataRow("Derived2", "ToString(string.Empty, null)", "ToString", "System.IFormattable")]
+    [DataRow("Derived3", "ToString(string.Empty, null)", "ToString", "System.IFormattable")]
+    [DataRow("Derived4", "ToString(string.Empty, null)", "ToString", "System.IFormattable")]
+    public void IsImplementingInterfaceMember_Methods(string declaration, string invocation, string methodName, string interfaceType, params string[] genericParameter)
+    {
+        var code = $$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Collections.ObjectModel;
+
+            public class Test
+            {
+                public void Method({{declaration}} instance)
+                {
+                    instance.{{invocation}};
+                }
+            }
+
+            public class Base
+            {
+                public virtual string ToString(string format, IFormatProvider formatProvider) => "";
+            }
+
+            public class Derived1: Base, IFormattable
+            {
+                public override string ToString(string format, IFormatProvider formatProvider) => "";
+            }
+
+            public class Derived2: Derived1
+            {
+                public override string ToString(string format, IFormatProvider formatProvider) => "";
+            }
+
+            public class Derived3: Derived2
+            { }
+
+            public class Derived4: Derived3
+            {
+                public override string ToString(string format, IFormatProvider formatProvider) => "";
+            }
+            """;
+        var compilation = new SnippetCompiler(code);
+        var invocationSyntax = compilation.SyntaxTree.GetRoot().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>().First();
+        var methodSymbol = compilation.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol as IMethodSymbol;
+        methodSymbol.IsImplementingInterfaceMember(new KnownType(interfaceType, genericParameter), methodName).Should().BeTrue();
+    }
+
     private IMethodSymbol GetMethodSymbolForIndex(int index)
     {
         var statement = (ExpressionStatementSyntax)statements[index];

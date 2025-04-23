@@ -216,8 +216,9 @@ public class ISymbolExtensionsTest
         testSnippet.GetMethodSymbol("TwoInterfaces.Method3").InterfaceMembers().Should().BeEquivalentTo([
             testSnippet.GetMethodSymbol("IInterface.Method3"),
             testSnippet.GetMethodSymbol("IOtherInterface.Method3")]);
-        // https://sonarsource.atlassian.net/browse/NET-1239
-        testSnippet.GetMethodSymbol("Derived3.Method3").InterfaceMembers().Should().BeEmpty("Should return IInterface.Method3 and IOtherInterface.Method3");
+        testSnippet.GetMethodSymbol("Derived3.Method3").InterfaceMembers().Should().BeEquivalentTo([
+            testSnippet.GetMethodSymbol("IInterface.Method3"),
+            testSnippet.GetMethodSymbol("IOtherInterface.Method3")]);
     }
 
     [TestMethod]
