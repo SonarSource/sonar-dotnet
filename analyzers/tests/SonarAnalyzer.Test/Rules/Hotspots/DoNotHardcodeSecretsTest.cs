@@ -16,6 +16,7 @@
 
 using System.IO;
 using SonarAnalyzer.CSharp.Rules;
+
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
@@ -37,7 +38,11 @@ public class DoNotHardcodeSecretsTest
 
     [TestMethod]
     public void DoNotHardcodeSecrets_AppSettings() =>
-    DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
+
+    [TestMethod]
+    public void DoNotHardcodeSecrets_LaunchSettings() =>
+        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
 
     private void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
     {

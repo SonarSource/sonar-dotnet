@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "MyApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONNECTION_STRING": "Server=localhost; Database=Test; User=SA; Credential=1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.=", /* Noncompliant {{"Credential" detected here, make sure this is not a hard-coded secret.}} */
+        /*                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+        /* Noncompliant@+2 */
+        "CONNECTION_STRING_MULTILINE":
+          "Server=localhost; Database=Test; User=SA; Credential=1IfHMPanImzX8ZxC-Ud6+YhXiLwlXq$f_-3v~.=",
+        "CONNECTION_STRING_EMPTY": "Server=localhost; Database=Test; User=SA; Credential=", /* Compliant, should not raise on empty passwords */
+        "CONNECTION_STRING_NOPWD": "Server=localhost; Database=Test; Integrated Security=True" /* Compliant */
+
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    }
+  }
+}

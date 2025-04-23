@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "MyApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONNECTION_STRING": "Server=localhost; Database=Test; User=SA; Password=Secret123", /* Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}} */
+        /*                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
+        /* Noncompliant@+2 */
+        "CONNECTION_STRING_MULTILINE":
+          "Server=localhost; Database=Test; User=SA; Password=Secret123",
+        "CONNECTION_STRING_EMPTY": "Server=localhost; Database=Test; User=SA; Password=", /* Compliant, should not raise on empty passwords */
+        "CONNECTION_STRING_NOPWD": "Server=localhost; Database=Test; Integrated Security=True" /* Compliant */
+
+      },
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    }
+  }
+}

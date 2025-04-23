@@ -1,0 +1,9 @@
+﻿{
+  "profiles": {
+    "MyApp": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONNECTION_STRING": "Server=localhost; Database=Test; User=SA; Password=Secret123",
+
+        <<< Corrupted, we don't raise here

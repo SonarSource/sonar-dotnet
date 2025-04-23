@@ -36,7 +36,6 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
     protected Regex keyWordPattern;
 
     protected abstract void ExtractKeyWords(string value);
-    protected abstract IEnumerable<string> FindKeyWords(string variableName, string variableValue);
     protected abstract bool ShouldRaise(string variableName, string variableValue, out string message);
 
     protected abstract string DiagnosticId { get; }
@@ -88,14 +87,20 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
         }
     }
 
-    protected void CheckAppSettings(SonarCompilationReportingContext context)
+    protected void CheckAppSettings(SonarCompilationReportingContext context) =>
+        CheckJsonSettings(context, context.AppSettingsFiles());
+
+    protected void CheckLaunchSettings(SonarCompilationReportingContext context) =>
+        CheckJsonSettings(context, context.LaunchSettingsFiles());
+
+    private void CheckJsonSettings(SonarCompilationReportingContext context, IEnumerable<string> jsonFiles)
     {
         if (!IsEnabled(context.Options))
         {
             return;
         }
 
-        foreach (var path in context.AppSettingsFiles())
+        foreach (var path in jsonFiles)
         {
             if (JsonNode.FromString(File.ReadAllText(path)) is { } json)
             {

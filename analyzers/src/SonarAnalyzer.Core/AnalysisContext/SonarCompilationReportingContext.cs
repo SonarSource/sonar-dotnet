@@ -21,6 +21,9 @@ namespace SonarAnalyzer.Core.AnalysisContext;
 
 public readonly record struct SonarCompilationReportingContext(SonarAnalysisContext AnalysisContext, CompilationAnalysisContext Context) : ICompilationReport, IAnalysisContext
 {
+    // https://learn.microsoft.com/en-us/aspnet/core/fundamentals/environments#development-and-launchsettingsjson
+    private const string LaunchSettingsFileName = "launchSettings.json";
+
     private static readonly TimeSpan FileNameTimeout = TimeSpan.FromMilliseconds(100);
     private static readonly Regex WebConfigRegex = new(@"[\\\/]web\.([^\\\/]+\.)?config$", RegexOptions.IgnoreCase, FileNameTimeout);
     private static readonly Regex AppSettingsRegex = new(@"[\\\/]appsettings\.([^\\\/]+\.)?json$", RegexOptions.IgnoreCase, FileNameTimeout);
@@ -44,6 +47,9 @@ public readonly record struct SonarCompilationReportingContext(SonarAnalysisCont
         static bool ShouldProcess(string path) =>
             !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
     }
+
+    public IEnumerable<string> LaunchSettingsFiles() =>
+        this.ProjectConfiguration().FilesToAnalyze.FindFiles(LaunchSettingsFileName);
 
     public ReportingContext CreateReportingContext(Diagnostic diagnostic) =>
         new(this, diagnostic);

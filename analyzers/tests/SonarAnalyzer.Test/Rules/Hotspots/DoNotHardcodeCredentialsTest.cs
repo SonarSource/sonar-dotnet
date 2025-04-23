@@ -28,6 +28,9 @@ public class DoNotHardcodeCredentialsTest
 
     public TestContext TestContext { get; set; }
 
+    internal static IEnumerable<MetadataReference> AdditionalReferences =>
+        MetadataReferenceFacade.SystemSecurityCryptography.Concat(MetadataReferenceFacade.SystemNetHttp);
+
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_DefaultValues() =>
         builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.cs").Verify();
@@ -68,6 +71,10 @@ public class DoNotHardcodeCredentialsTest
         DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
 
     [TestMethod]
+    public void DoNotHardcodeCredentials_CS_LaunchSettings() =>
+        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
+
+    [TestMethod]
     public void DoNotHardcodeCredentials_CS_AppSettings() =>
         DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
 
@@ -92,6 +99,10 @@ public class DoNotHardcodeCredentialsTest
         DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
 
     [TestMethod]
+    public void DoNotHardcodeCredentials_VB_LaunchSettings() =>
+        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
+
+    [TestMethod]
     public void DoNotHardcodeCredentials_VB_AppSettings() =>
         DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
 
@@ -104,9 +115,6 @@ public class DoNotHardcodeCredentialsTest
         var vb = new CS.DoNotHardcodeCredentials { CredentialWords = "Lorem, ipsum" };
         vb.CredentialWords.Should().Be("Lorem, ipsum");
     }
-
-    internal static IEnumerable<MetadataReference> AdditionalReferences =>
-        MetadataReferenceFacade.SystemSecurityCryptography.Concat(MetadataReferenceFacade.SystemNetHttp);
 
     private static VerifierBuilder CreateVerifierCS(string credentialWords = null) =>
         new VerifierBuilder().AddAnalyzer(() => credentialWords is null

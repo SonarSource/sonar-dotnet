@@ -64,20 +64,20 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
                 return;
             }
 
-            c.RegisterNodeAction(c =>
+            c.RegisterNodeAction(cc =>
             {
-                var node = c.Node;
+                var node = cc.Node;
                 if (FindIdentifier(node) is { } identifier
                     && FindRightHandSide(node) is { } rhs
-                    && rhs.FindStringConstant(c.Model) is { } secret)
+                    && rhs.FindStringConstant(cc.Model) is { } secret)
                 {
                     if (ShouldRaiseBinary(identifier.ValueText, secret))
                     {
-                        c.ReportIssue(rule, rhs, identifier.ValueText);
+                        cc.ReportIssue(rule, rhs, identifier.ValueText);
                     }
                     else if (ShouldRaiseLiteral(secret, out var message))
                     {
-                        c.ReportIssue(rule, rhs, message);
+                        cc.ReportIssue(rule, rhs, message);
                     }
                 }
             },
@@ -89,19 +89,19 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
             SyntaxKind.SetAccessorDeclaration,
             SyntaxKind.EqualsExpression);
 
-            c.RegisterNodeAction(c =>
+            c.RegisterNodeAction(cc =>
             {
-                var invocationExpression = (InvocationExpressionSyntax)c.Node;
+                var invocationExpression = (InvocationExpressionSyntax)cc.Node;
 
                 if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
                     && memberAccessExpression.Name.Identifier.ValueText == EqualsName
                     && invocationExpression.TryGetFirstArgument(out var firstArgument)
-                    && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.Model)
+                    && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, cc.Model)
                     && GetIdentifierAndValue(memberAccessExpression.Expression, firstArgument, out var identifier, out var value)
-                    && value.FindStringConstant(c.Model) is { } secret
+                    && value.FindStringConstant(cc.Model) is { } secret
                     && ShouldRaiseBinary(identifier.Value.ValueText, secret))
                 {
-                    c.ReportIssue(rule, memberAccessExpression, identifier.Value.ValueText);
+                    cc.ReportIssue(rule, memberAccessExpression, identifier.Value.ValueText);
                 }
             },
             SyntaxKind.InvocationExpression);
@@ -109,6 +109,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
 
         context.RegisterCompilationAction(CheckWebConfig);
         context.RegisterCompilationAction(CheckAppSettings);
+        context.RegisterCompilationAction(CheckLaunchSettings);
     }
 
     protected override void ExtractKeyWords(string value)
@@ -132,9 +133,6 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
         }
         return false;
     }
-
-    protected override IEnumerable<string> FindKeyWords(string variableName, string variableValue) =>
-        [];
 
     private bool ShouldRaiseLiteral(string secret, out string message)
     {
@@ -177,7 +175,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeBase<SyntaxKind>
             _ => null
         };
 
-    private static SyntaxNode? GetBinaryExpressionValue(BinaryExpressionSyntax node) =>
+    private static SyntaxNode GetBinaryExpressionValue(BinaryExpressionSyntax node) =>
         node switch
         {
             { Left: IdentifierNameSyntax } => node.Right,
