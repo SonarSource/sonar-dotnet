@@ -40,6 +40,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewExternalIssue;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
+import org.sonar.api.issue.impact.SoftwareQuality;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.scanner.fs.InputProject;
@@ -181,16 +182,19 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
   }
 
   private void setExternalIssueSeverityAndType(String ruleId, @Nullable String level, NewExternalIssue newIssue) {
+    Severity severity;
     if (level != null) {
-      newIssue.severity(mapSeverity(level));
+      severity = mapSeverity(level);
     } else if (defaultLevelByRuleId.containsKey(ruleId)) {
-      newIssue.severity(mapSeverity(defaultLevelByRuleId.get(ruleId)));
+      severity = mapSeverity(defaultLevelByRuleId.get(ruleId));
     } else {
       LOG.warn("Rule {} was not found in the SARIF report, assuming default severity", ruleId);
-      newIssue.severity(Severity.MAJOR);
+      severity = Severity.MAJOR;
     }
-
-    newIssue.type(Optional.ofNullable(ruleTypeByRuleId.get(ruleId)).orElse(RuleType.CODE_SMELL));
+    var ruleType = Optional.ofNullable(ruleTypeByRuleId.get(ruleId)).orElse(RuleType.CODE_SMELL);
+    newIssue.severity(severity);
+    newIssue.addImpact(mapSoftwareQuality(ruleType), mapImpactSeverity(severity));
+    newIssue.type(ruleType);
   }
 
   private NewExternalIssue newExternalIssue(String ruleId) {
@@ -304,6 +308,31 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       .save();
   }
 
+  // Severity mapping as defined in ImpactMapper::convertToRuleSeverity
+  // https://github.com/SonarSource/sonar-plugin-api/blob/44df6a8f35ba3001053799dff2a4c1cbbad37911/plugin-api/src/main/java/org/sonar/api/server/rule/internal/ImpactMapper.java
+  public /* for testing */ static org.sonar.api.issue.impact.Severity mapImpactSeverity(Severity severity) {
+    return switch (severity) {
+      case BLOCKER -> org.sonar.api.issue.impact.Severity.BLOCKER;
+      case CRITICAL -> org.sonar.api.issue.impact.Severity.HIGH;
+      case MAJOR -> org.sonar.api.issue.impact.Severity.MEDIUM;
+      case MINOR -> org.sonar.api.issue.impact.Severity.LOW;
+      case INFO -> org.sonar.api.issue.impact.Severity.INFO;
+      default -> throw new IllegalStateException("This severity value " + severity + " is illegal.");
+    };
+  }
+
+  // SoftwareQuality mapping as defined in ImpactMapper::convertToSoftwareQuality
+  // https://github.com/SonarSource/sonar-plugin-api/blob/44df6a8f35ba3001053799dff2a4c1cbbad37911/plugin-api/src/main/java/org/sonar/api/server/rule/internal/ImpactMapper.java
+  public /* for testing */ static SoftwareQuality mapSoftwareQuality(RuleType type) {
+    return switch (type) {
+      case CODE_SMELL -> SoftwareQuality.MAINTAINABILITY;
+      case BUG -> SoftwareQuality.RELIABILITY;
+      case VULNERABILITY -> SoftwareQuality.SECURITY;
+      case SECURITY_HOTSPOT -> throw new IllegalStateException("Can not map Security Hotspot to Software Quality");
+      default -> throw new IllegalStateException("Unknown rule type");
+    };
+  }
+
   private boolean shouldCreateExternalIssue(String ruleId) {
     return !ignoreThirdPartyIssues && !ruleId.matches("^S\\d{3,4}$");
   }
@@ -323,15 +352,13 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     return "Error".equalsIgnoreCase(defaultLevel) ? RuleType.BUG : RuleType.CODE_SMELL;
   }
 
+  // these are the available severities from Roslyn that need mapping
   private static Severity mapSeverity(String defaultLevel) {
-    switch (defaultLevel.toLowerCase(Locale.ENGLISH)) {
-      case "error":
-        return Severity.CRITICAL;
-      case "warning":
-        return Severity.MAJOR;
-      default:
-        return Severity.INFO;
-    }
+    return switch (defaultLevel.toLowerCase(Locale.ENGLISH)) {
+      case "error" -> Severity.CRITICAL;
+      case "warning" -> Severity.MAJOR;
+      default -> Severity.INFO;
+    };
   }
 
   private static boolean isSonarSourceRepository(String repositoryKey) {

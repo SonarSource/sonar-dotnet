@@ -18,9 +18,10 @@ package org.sonarsource.dotnet.shared.sarif;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
+import java.util.AbstractMap.SimpleEntry;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,6 +36,7 @@ import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
+import org.sonar.api.issue.impact.SoftwareQuality;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTester;
@@ -46,6 +48,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
+import static org.junit.Assert.assertThrows;
 
 public class SarifParserCallbackImplTest {
   @Rule
@@ -268,6 +271,29 @@ public class SarifParserCallbackImplTest {
   }
 
   @Test
+  public void should_create_external_issues_with_correct_impact_mapping() {
+    callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    callback.onIssue("rule46", "error", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    callback.onIssue("rule47", "info", createLocation("file1", 2, 3), Collections.emptyList(), false);
+
+    assertThat(ctx.allIssues()).isEmpty();
+    assertThat(ctx.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, x -> x.impacts().entrySet().toArray()[0])
+      .containsExactlyInAnyOrder(
+        tuple("rule45", new SimpleEntry<>(SoftwareQuality.MAINTAINABILITY, org.sonar.api.issue.impact.Severity.MEDIUM)),
+        tuple("rule46", new SimpleEntry<>(SoftwareQuality.MAINTAINABILITY, org.sonar.api.issue.impact.Severity.HIGH)),
+        tuple("rule47", new SimpleEntry<>(SoftwareQuality.MAINTAINABILITY, org.sonar.api.issue.impact.Severity.INFO))
+        );
+    assertThat(logTester.logs(Level.DEBUG)).containsExactlyInAnyOrder(
+      "Adding external issue rule45: " + createAbsolutePath("file1"),
+      "Adding external issue rule46: " + createAbsolutePath("file1"),
+      "Adding external issue rule47: " + createAbsolutePath("file1")
+      );
+  }
+
+  @Test
   public void external_issue_with_invalid_precise_location_reports_on_line() {
     callback = new SarifParserCallbackImpl(ctx, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
 
@@ -485,6 +511,23 @@ public class SarifParserCallbackImplTest {
 
     callback.onProjectIssue("S3990", "level", ctx.project(), "Provide a 'CLSCompliant' attribute for assembly 'Second'.");
     assertThat(ctx.allIssues()).hasSize(2); // A different message leads to a different issue
+  }
+
+  @Test
+  public void impact_severity_mapping_is_correct() {
+    assertThat(SarifParserCallbackImpl.mapImpactSeverity(Severity.BLOCKER)).isEqualTo(org.sonar.api.issue.impact.Severity.BLOCKER);
+    assertThat(SarifParserCallbackImpl.mapImpactSeverity(Severity.CRITICAL)).isEqualTo(org.sonar.api.issue.impact.Severity.HIGH);
+    assertThat(SarifParserCallbackImpl.mapImpactSeverity(Severity.MAJOR)).isEqualTo(org.sonar.api.issue.impact.Severity.MEDIUM);
+    assertThat(SarifParserCallbackImpl.mapImpactSeverity(Severity.MINOR)).isEqualTo(org.sonar.api.issue.impact.Severity.LOW);
+    assertThat(SarifParserCallbackImpl.mapImpactSeverity(Severity.INFO)).isEqualTo(org.sonar.api.issue.impact.Severity.INFO);
+  }
+
+  @Test
+  public void impact_softwareQuality_mapping_is_correct() {
+    assertThat(SarifParserCallbackImpl.mapSoftwareQuality(RuleType.CODE_SMELL)).isEqualTo(SoftwareQuality.MAINTAINABILITY);
+    assertThat(SarifParserCallbackImpl.mapSoftwareQuality(RuleType.BUG)).isEqualTo(SoftwareQuality.RELIABILITY);
+    assertThat(SarifParserCallbackImpl.mapSoftwareQuality(RuleType.VULNERABILITY)).isEqualTo(SoftwareQuality.SECURITY);
+    assertThrows(IllegalStateException.class, () -> SarifParserCallbackImpl.mapSoftwareQuality(RuleType.SECURITY_HOTSPOT));
   }
 
   private void assertIssueReportedOnLine(String fileName) {
