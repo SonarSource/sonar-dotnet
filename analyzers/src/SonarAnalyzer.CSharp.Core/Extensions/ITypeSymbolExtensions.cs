@@ -24,9 +24,7 @@ public static class ITypeSymbolExtensions
         && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
 
     public static bool IsRefStruct(this ITypeSymbol symbol) =>
-        symbol != null
+        symbol is not null
         && symbol.IsStruct()
-        && symbol.DeclaringSyntaxReferences.Length > 0
-        && symbol.DeclaringSyntaxReferences[0].GetSyntax() is StructDeclarationSyntax structDeclaration
-        && structDeclaration.Modifiers.Any(SyntaxKind.RefKeyword);
+        && symbol.IsRefLikeType();
 }

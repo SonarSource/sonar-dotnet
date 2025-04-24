@@ -38,7 +38,7 @@ namespace CSharpEight
 
             foreach (var s in strings) // Noncompliant
             {
-                if (s is target) // Secondary 
+                if (s is target) // Secondary
                 {
                     Console.WriteLine("Pattern match successful");
                 }
@@ -72,7 +72,7 @@ namespace CSharpEight
 }
 
 namespace CSharpEleven
-{ 
+{
     class IsPatternTests
     {
         void ListPattern(List<int[]> list)
@@ -205,14 +205,33 @@ namespace CSharpEleven
     class Repro_8430
     {
         void Visit(ReadOnlySpan<char> x) { }
+        void Visit(MyRefStruct x) { }
 
         void Test(IEnumerable<ReadOnlyMemory<char>> tokens)
         {
-            // rule suggests "Select(token => token.Span)", but "Span" is ref-struct, so it cannot be used a type parameter.
-            foreach (ReadOnlyMemory<char> token in tokens) // Noncompliant FP
+            foreach (ReadOnlyMemory<char> token in tokens) // Compliant
             {
                 ReadOnlySpan<char> chars = token.Span;
                 Visit(chars);
+            }
+        }
+
+        public class Data
+        {
+            public MyRefStruct RefStruct => new MyRefStruct();
+        }
+
+        public ref struct MyRefStruct
+        {
+
+        }
+
+        void TestRefStruct(IEnumerable<Data> datas)
+        {
+            foreach (Data data in datas) // Compliant
+            {
+                MyRefStruct refStruct = data.RefStruct;
+                Visit(refStruct);
             }
         }
     }
@@ -236,10 +255,10 @@ namespace CSharp13
         void IndexTest(List<string> strings)
         {
             foreach (var s in strings.Index()) // Noncompliant
-            {    
+            {
                 if (s is (42, "42"))    // Secondary
                 {
-                    Console.WriteLine(s); 
+                    Console.WriteLine(s);
                 }
             }
         }

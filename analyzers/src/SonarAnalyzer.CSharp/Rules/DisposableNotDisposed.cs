@@ -268,8 +268,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel model) =>
             expression?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression
             && model.GetTypeInfo(expression).Type is var type
-            && type.IsStruct()
-            && type.IsRefLikeType()
+            && type.IsRefStruct()
             && type.GetMembers().OfType<IMethodSymbol>().Any(x => x.Name == "Dispose");
 
         private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel model) =>

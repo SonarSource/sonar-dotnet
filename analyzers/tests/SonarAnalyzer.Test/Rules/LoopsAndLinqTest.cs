@@ -16,28 +16,26 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class LoopsAndLinqTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<LoopsAndLinq>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void LoopsAndLinq_CS() =>
-            builder.AddPaths("LoopsAndLinq.cs")
-                .AddReferences(MetadataReferenceFacade.SystemData)
-                .Verify();
+[TestClass]
+public class LoopsAndLinqTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<LoopsAndLinq>();
+
+    [TestMethod]
+    public void LoopsAndLinq_CS() =>
+        builder.AddPaths("LoopsAndLinq.cs")
+            .AddReferences(MetadataReferenceFacade.SystemData)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void LoopsAndLinq_CS_Latest() =>
-            builder.AddPaths("LoopsAndLinq.Latest.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void LoopsAndLinq_CS_Latest() =>
+        builder.AddPaths("LoopsAndLinq.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
 #endif
-
-    }
 }
