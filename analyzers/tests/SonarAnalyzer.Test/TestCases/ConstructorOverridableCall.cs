@@ -68,10 +68,8 @@ namespace Tests.Diagnostics
 
     public class InlineBaseThisCall : BaseClass
     {
-        // Error@+1 [CS0120]
-        public InlineBaseThisCall() : this(DoSomething()) { } // Noncompliant
-        // Error@+1 [CS0120]
-        public InlineBaseThisCall(int a) : base(DoSomething(a)) { } // Noncompliant
+        public InlineBaseThisCall() : this(DoSomething()) { } // Error [CS0120]
+        public InlineBaseThisCall(int a) : base(DoSomething(a)) { } // Error [CS0120]
     }
 
     // https://sonarsource.atlassian.net/browse/NET-1318

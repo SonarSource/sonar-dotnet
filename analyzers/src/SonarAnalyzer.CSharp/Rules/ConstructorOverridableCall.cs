@@ -41,7 +41,8 @@ public sealed class ConstructorOverridableCall : SonarDiagnosticAnalyzer
     {
         var invocationExpression = (InvocationExpressionSyntax)context.Node;
 
-        if (invocationExpression.Expression is IdentifierNameSyntax or MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax }
+        if (invocationExpression.EnclosingScope().Kind() is not SyntaxKind.ThisConstructorInitializer and not SyntaxKind.BaseConstructorInitializer
+            && invocationExpression.Expression is IdentifierNameSyntax or MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax }
             && context.Model.GetEnclosingSymbol(invocationExpression.SpanStart).Equals(constructor)
             && context.Model.GetSymbolInfo(invocationExpression.Expression).Symbol is IMethodSymbol methodSymbol
             && IsMethodOverridable(methodSymbol))
