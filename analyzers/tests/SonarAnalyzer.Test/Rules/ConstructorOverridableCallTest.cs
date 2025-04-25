@@ -16,13 +16,21 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ConstructorOverridableCallTest
 {
-    [TestClass]
-    public class ConstructorOverridableCallTest
-    {
-        [TestMethod]
-        public void ConstructorOverridableCall() =>
-            new VerifierBuilder<ConstructorOverridableCall>().AddPaths("ConstructorOverridableCall.cs").Verify();
-    }
+    private readonly VerifierBuilder builder = new VerifierBuilder<ConstructorOverridableCall>();
+
+    [TestMethod]
+    public void ConstructorOverridableCall() =>
+        builder.AddPaths("ConstructorOverridableCall.cs").Verify();
+
+    [TestMethod]
+    public void ConstructorOverridableCall_Nancy() =>
+        builder
+            .WithConcurrentAnalysis(false)
+            .AddPaths("ConstructorOverridableCall.Nancy.cs")
+            .VerifyNoIssues();
 }

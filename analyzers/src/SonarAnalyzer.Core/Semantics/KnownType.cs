@@ -194,6 +194,7 @@ public sealed partial class KnownType
     public static readonly KnownType MySql_Data_MySqlClient_MySqlHelper = new("MySql.Data.MySqlClient.MySqlHelper");
     public static readonly KnownType MySql_Data_MySqlClient_MySqlScript = new("MySql.Data.MySqlClient.MySqlScript");
     public static readonly KnownType Nancy_Cookies_NancyCookie = new("Nancy.Cookies.NancyCookie");
+    public static readonly KnownType Nancy_NancyModule = new("Nancy.NancyModule");
     public static readonly KnownType NFluent_Check = new("NFluent.Check");
     public static readonly KnownType NFluent_FluentCheckException = new("NFluent.FluentCheckException");
     public static readonly KnownType NFluent_Kernel_FluentCheckException = new("NFluent.Kernel.FluentCheckException");

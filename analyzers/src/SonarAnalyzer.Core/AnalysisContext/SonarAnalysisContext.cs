@@ -82,6 +82,10 @@ public class SonarAnalysisContext
         RegisterCompilationStartAction(
             x => x.RegisterSymbolAction(action, symbolKinds));
 
+    public void RegisterSymbolStartAction(Action<SonarSymbolStartAnalysisContext> action, SymbolKind symbolKind) =>
+        RegisterCompilationStartAction(
+            x => x.RegisterSymbolStartAction(action, symbolKind));
+
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
         RegisterCompilationStartAction(

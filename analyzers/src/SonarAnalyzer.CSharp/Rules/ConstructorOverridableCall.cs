@@ -14,61 +14,44 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ConstructorOverridableCall : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ConstructorOverridableCall : SonarDiagnosticAnalyzer
+    private const string DiagnosticId = "S1699";
+    private const string MessageFormat = "Remove this call from a constructor to the overridable '{0}' method.";
+
+    private static readonly DiagnosticDescriptor Rule =
+        DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterSymbolStartAction(c =>
+        {
+            if (c.Symbol is IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType.IsSealed: false } constructor
+                && !constructor.ContainingType.DerivesFrom(KnownType.Nancy_NancyModule))
+            {
+                c.RegisterSyntaxNodeAction(cc => CheckOverridableCallInConstructor(cc, constructor), SyntaxKind.InvocationExpression);
+            }
+        }, SymbolKind.Method);
+
+    private static void CheckOverridableCallInConstructor(SonarSyntaxNodeReportingContext context, IMethodSymbol constructor)
     {
-        internal const string DiagnosticId = "S1699";
-        private const string MessageFormat = "Remove this call from a constructor to the overridable '{0}' method.";
+        var invocationExpression = (InvocationExpressionSyntax)context.Node;
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        if (invocationExpression.Expression is IdentifierNameSyntax or MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax }
+            && context.Model.GetEnclosingSymbol(invocationExpression.SpanStart).Equals(constructor)
+            && context.Model.GetSymbolInfo(invocationExpression.Expression).Symbol is IMethodSymbol methodSymbol
+            && IsMethodOverridable(methodSymbol))
         {
-            context.RegisterNodeAction(
-                CheckOverridableCallInConstructor,
-                SyntaxKind.InvocationExpression);
-        }
-
-        private static void CheckOverridableCallInConstructor(SonarSyntaxNodeReportingContext context)
-        {
-            var invocationExpression = (InvocationExpressionSyntax)context.Node;
-
-            var calledOn = (invocationExpression.Expression as MemberAccessExpressionSyntax)?.Expression;
-            var isCalledOnThis = calledOn == null || calledOn is ThisExpressionSyntax;
-            if (!isCalledOnThis)
-            {
-                return;
-            }
-
-            var enclosingSymbol = context.Model.GetEnclosingSymbol(invocationExpression.SpanStart) as IMethodSymbol;
-            if (!IsMethodConstructor(enclosingSymbol))
-            {
-                return;
-            }
-
-
-            if (context.Model.GetSymbolInfo(invocationExpression.Expression).Symbol is IMethodSymbol methodSymbol &&
-                IsMethodOverridable(methodSymbol) &&
-                enclosingSymbol.IsInType(methodSymbol.ContainingType))
-            {
-                context.ReportIssue(rule, invocationExpression.Expression, methodSymbol.Name);
-            }
-        }
-
-        private static bool IsMethodOverridable(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol.IsVirtual || methodSymbol.IsAbstract;
-        }
-
-        private static bool IsMethodConstructor(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.MethodKind == MethodKind.Constructor;
+            context.ReportIssue(Rule, invocationExpression.Expression, methodSymbol.Name);
         }
     }
+
+    private static bool IsMethodOverridable(IMethodSymbol methodSymbol) =>
+        methodSymbol.IsVirtual
+        || methodSymbol.IsAbstract
+        || (methodSymbol.IsOverride && !methodSymbol.IsSealed);
 }
