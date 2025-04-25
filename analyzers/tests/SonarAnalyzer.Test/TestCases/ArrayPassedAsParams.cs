@@ -29,8 +29,8 @@ public class Program
         Method3(new string[] { "s1", "s2" }, new string[] { "s1", "s2" }); // Noncompliant
 //                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         Method3(null, null);        // Compliant
-        Method4(new [] { "s1" });   // Compliant
-        Method4(new [] { "s1", "s2" }); // Compliant
+        Method4(new[] { "s1" });   // Compliant
+        Method4(new[] { "s1", "s2" }); // Compliant
 
         Method3(args: new string[] { "s1", "s2" }, a: new string[12]); // Compliant (if you specifically require the arguments to be passed in this order there is no way of making this compliant, thus we shouldn't raise)
         Method3(args: new string[12], a: new string[] { "s1", "s2" }); // Compliant
@@ -92,7 +92,7 @@ public class Repro6894
         Method(new object[] { new int[] { 1, 2 } });                            // FN, elements in args: [System.Int32[]]
         Method(new int[] { 1, 2, 3, });                                         // Compliant, Elements in args: [System.Int32[]]
         Method(new String[] { "1", "2" }, new String[] { "1", "2" });           // Compliant, elements in args: [System.String[], System.String[]]
-        Method(new String[] { "1", "2"}, new int[] { 1, 2});                    // Compliant, elements in args: [System.String[], System.Int32[]]
+        Method(new String[] { "1", "2" }, new int[] { 1, 2 });                    // Compliant, elements in args: [System.String[], System.Int32[]]
         MethodMixed(1, new String[] { "1", "2" });                              // Noncompliant
         MethodArray(new String[] { "1", "2" }, new String[] { "1", "2" });      // Compliant, elements in args: [System.String[], System.String[]]
         MethodArray(new int[] { 1, 2 }, new int[] { 1, 2 });                    // Compliant, elements in args: [System.Int32[], System.Int32[]]
@@ -127,14 +127,25 @@ public class Repro6977
     class ParamsAttribute : Attribute
     {
         public ParamsAttribute(params string[] values) { }
+        public ParamsAttribute(int a, string b, params string[] values) { }
+        public ParamsAttribute() { }
     }
 
     internal enum Foo
     {
-        [Params(new[] { "1", "2" })] // FN
-        Bar,
+        [Params(new[] { "1", "2" })] // Noncompliant
+        Red,
 
         [Params("1", "2")]
-        FooBar
+        Yellow,
+
+        [Params(a: 1, b: "hello", values : new[] { "1", "2" })] // Noncompliant
+        Blue,
+
+        [Params(a: 1, values: new[] { "1", "2" }, b: "hello")]  // FN
+        Green,
+
+        [Params]
+        Violet
     }
 }
