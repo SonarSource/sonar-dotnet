@@ -16,75 +16,103 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+    protected const string DiagnosticId = "S4790";
+    protected const string MessageFormat = "Make sure this weak hash algorithm is not used in a sensitive context here.";
+
+    private const string CreateMethodName = "Create";
+    private const string HashDataName = "HashData";
+    private const string HashDataAsyncName = "HashDataAsync";
+    private const string TryHashDataName = "TryHashData";
+
+    private readonly KnownType[] algorithmTypes =
+    [
+        KnownType.System_Security_Cryptography_DSA,
+        KnownType.System_Security_Cryptography_HMACMD5,
+        KnownType.System_Security_Cryptography_HMACRIPEMD160,
+        KnownType.System_Security_Cryptography_HMACSHA1,
+        KnownType.System_Security_Cryptography_MD5,
+        KnownType.System_Security_Cryptography_RIPEMD160,
+        KnownType.System_Security_Cryptography_SHA1
+    ];
+
+    private readonly string[] unsafeAlgorithms =
+    [
+        "DSA",
+        "System.Security.Cryptography.DSA",
+        "HMACMD5",
+        "System.Security.Cryptography.HMACMD5",
+        "HMACRIPEMD160",
+        "System.Security.Cryptography.HMACRIPEMD160",
+        "HMACSHA1",
+        "System.Security.Cryptography.HMACSHA1",
+        "MD5",
+        "System.Security.Cryptography.MD5",
+        "RIPEMD160",
+        "System.Security.Cryptography.RIPEMD160",
+        "SHA1",
+        "System.Security.Cryptography.SHA1",
+    ];
+
+    protected abstract bool IsUnsafeAlgorithm(SyntaxNode argumentNode, SemanticModel model);
+
+    protected CreatingHashAlgorithmsBase(IAnalyzerConfiguration configuration)
+        : base(configuration, DiagnosticId, MessageFormat) { }
+
+    protected override void Initialize(TrackerInput input)
     {
-        protected const string DiagnosticId = "S4790";
-        protected const string MessageFormat = "Make sure this weak hash algorithm is not used in a sensitive context here.";
+        var oc = Language.Tracker.ObjectCreation;
+        oc.Track(input, oc.WhenDerivesOrImplementsAny(algorithmTypes));
 
-        private const string CreateMethodName = "Create";
+        var tracker = Language.Tracker.Invocation;
+        tracker.Track(input,
+            tracker.MatchMethod(
+                new MemberDescriptor(KnownType.System_Security_Cryptography_DSA,       CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC,      CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_MD5,       CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1,      CreateMethodName)),
+            tracker.MethodHasParameters(0));
 
-        private readonly KnownType[] algorithmTypes =
-        {
-            KnownType.System_Security_Cryptography_DSA,
-            KnownType.System_Security_Cryptography_HMACMD5,
-            KnownType.System_Security_Cryptography_HMACRIPEMD160,
-            KnownType.System_Security_Cryptography_HMACSHA1,
-            KnownType.System_Security_Cryptography_MD5,
-            KnownType.System_Security_Cryptography_RIPEMD160,
-            KnownType.System_Security_Cryptography_SHA1
-        };
+        tracker.Track(input,
+            tracker.MatchMethod(
+                new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptoConfig,        "CreateFromName"),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_DSA,                 CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_HashAlgorithm,       CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC,                CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_KeyedHashAlgorithm,  CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_MD5,                 CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160,           CreateMethodName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1,                CreateMethodName)),
+            tracker.ArgumentAtIndexIsAny(0, unsafeAlgorithms));
 
-        private readonly string[] unsafeAlgorithms =
-        {
-            "DSA",
-            "System.Security.Cryptography.DSA",
-            "HMACMD5",
-            "System.Security.Cryptography.HMACMD5",
-            "HMACRIPEMD160",
-            "System.Security.Cryptography.HMACRIPEMD160",
-            "HMACSHA1",
-            "System.Security.Cryptography.HMACSHA1",
-            "MD5",
-            "System.Security.Cryptography.MD5",
-            "RIPEMD160",
-            "System.Security.Cryptography.RIPEMD160",
-            "SHA1",
-            "System.Security.Cryptography.SHA1"
-        };
+        tracker.Track(input,
+            tracker.MatchMethod(
+                new MemberDescriptor(KnownType.System_Security_Cryptography_MD5,  HashDataName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_MD5,  TryHashDataName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_MD5,  HashDataAsyncName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, HashDataName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, TryHashDataName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, HashDataAsyncName)));
 
-        protected CreatingHashAlgorithmsBase(IAnalyzerConfiguration configuration)
-            : base(configuration, DiagnosticId, MessageFormat) { }
+        tracker.Track(input,
+            tracker.MatchMethod(
+                new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, HashDataName)),
+            tracker.ArgumentAtIndexIs(3, IsUnsafeAlgorithm));
 
-        protected override void Initialize(TrackerInput input)
-        {
-            var oc = Language.Tracker.ObjectCreation;
-            oc.Track(input, oc.WhenDerivesOrImplementsAny(algorithmTypes));
+        tracker.Track(input,
+            tracker.MatchMethod(
+                new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, HashDataName)),
+            tracker.ArgumentAtIndexIs(1, IsUnsafeAlgorithm));
 
-            var t = Language.Tracker.Invocation;
-            t.Track(input,
-                t.MatchMethod(
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
-                t.MethodHasParameters(0));
-
-            t.Track(input,
-                t.MatchMethod(
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_CryptoConfig, "CreateFromName"),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_HashAlgorithm, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_KeyedHashAlgorithm, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_MD5, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_RIPEMD160, CreateMethodName),
-                    new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, CreateMethodName)),
-                t.ArgumentAtIndexIsAny(0, unsafeAlgorithms));
-        }
+        tracker.Track(input,
+            tracker.MatchMethod(
+                new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, TryHashDataName)),
+            tracker.ArgumentAtIndexIs(2, IsUnsafeAlgorithm));
     }
 }

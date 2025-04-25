@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 public class InsecureHashAlgorithm
 {
@@ -30,12 +31,75 @@ public class InsecureHashAlgorithm
 // https://github.com/SonarSource/sonar-dotnet/issues/8758
 public class Repro_FN_8758
 {
-    void Method()
+    public void Method()
     {
         var data = new byte[42];
+        var hashBuffer = new byte[SHA1.HashSizeInBytes];
         using var stream = new System.IO.MemoryStream(data);
-        SHA1.HashData(stream);          // FN
-        SHA1.HashData(data);            // FN
+        SHA1.HashData(stream);                                                 // Noncompliant
+        SHA1.HashData(data);                                                   // Noncompliant
+        if (SHA1.TryHashData(data, hashBuffer, out int bytesWrittenSHA1))      // Noncompliant
+        { }
+
+        MD5.HashData(data);                                                    // Noncompliant
+        if (MD5.TryHashData(data, hashBuffer, out int bytesWrittenMD5))        // Noncompliant
+        { }
+    }
+
+    public async Task Method2()
+    {
+        using var stream = new System.IO.MemoryStream(new byte[42]);
+        await SHA1.HashDataAsync(stream);          // Noncompliant
+        await MD5.HashDataAsync(stream);           // Noncompliant
+    }
+
+    private sealed class MyDSA : DSA
+    {
+        public override byte[] CreateSignature(byte[] rgbHash) => [];
+
+        public override DSAParameters ExportParameters(bool includePrivateParameters) => new DSAParameters();
+
+        public override void ImportParameters(DSAParameters parameters)
+        { }
+
+        public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) => true;
+
+        protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm) => [];
+
+        protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) => [];
+
+        protected override bool TryHashData(ReadOnlySpan<byte> data, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten)
+        {
+            bytesWritten = 0;
+            return false;
+        }
+
+        public void UseHashData()
+        {
+            var data = new byte[42];
+            var hashBuffer = new byte[SHA1.HashSizeInBytes];
+            using var stream = new System.IO.MemoryStream(data);
+
+            _ = HashData(data, 0, data.Length, HashAlgorithmName.SHA1);                          // Noncompliant
+            _ = HashData(stream, HashAlgorithmName.SHA1);                                        // Noncompliant
+            if (TryHashData(data, hashBuffer, HashAlgorithmName.SHA1, out int bytesWrittenSHA1)) // Noncompliant
+            { }
+
+            _ = HashData(data, 0, data.Length, HashAlgorithmName.SHA3_256);
+            _ = HashData(stream, HashAlgorithmName.SHA3_384);
+            if (TryHashData(data, hashBuffer, HashAlgorithmName.SHA3_384, out int bytesWrittenSHA3))
+            { }
+
+            _ = base.HashData(data, 0, data.Length, HashAlgorithmName.SHA1);                              // Noncompliant
+            _ = base.HashData(stream, HashAlgorithmName.SHA1);                                            // Noncompliant
+            if (base.TryHashData(data, hashBuffer, HashAlgorithmName.SHA1, out int bytesWrittenSHA1Base)) // Noncompliant
+            { }
+
+            _ = base.HashData(data, 0, data.Length, HashAlgorithmName.SHA3_256);
+            _ = base.HashData(stream, HashAlgorithmName.SHA3_384);
+            if (base.TryHashData(data, hashBuffer, HashAlgorithmName.SHA3_384, out int bytesWrittenSHA3Base))
+            { }
+        }
     }
 }
 

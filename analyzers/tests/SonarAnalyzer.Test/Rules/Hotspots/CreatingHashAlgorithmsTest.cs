@@ -60,6 +60,10 @@ public class CreatingHashAlgorithmsTest
     public void CreatingHashAlgorithms_CS_Latest() =>
         builderCS.AddPaths("CreatingHashAlgorithms.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
+    [TestMethod]
+    public void CreatingHashAlgorithms_VB_NET() =>
+    builderVB.AddPaths("CreatingHashAlgorithms.NET.vb").Verify();
+
 #endif
 
 }

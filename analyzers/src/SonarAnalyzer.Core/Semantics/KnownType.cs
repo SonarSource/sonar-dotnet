@@ -544,6 +544,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_Cryptography_ECDsa = new("System.Security.Cryptography.ECDsa");
     public static readonly KnownType System_Security_Cryptography_ECAlgorythm = new("System.Security.Cryptography.ECAlgorithm");
     public static readonly KnownType System_Security_Cryptography_HashAlgorithm = new("System.Security.Cryptography.HashAlgorithm");
+    public static readonly KnownType System_Security_Cryptography_HashAlgorithmName = new("System.Security.Cryptography.HashAlgorithmName");
     public static readonly KnownType System_Security_Cryptography_HMAC = new("System.Security.Cryptography.HMAC");
     public static readonly KnownType System_Security_Cryptography_HMACMD5 = new("System.Security.Cryptography.HMACMD5");
     public static readonly KnownType System_Security_Cryptography_HMACRIPEMD160 = new("System.Security.Cryptography.HMACRIPEMD160");
