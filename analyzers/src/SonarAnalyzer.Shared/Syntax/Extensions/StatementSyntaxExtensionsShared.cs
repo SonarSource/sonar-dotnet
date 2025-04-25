@@ -34,26 +34,4 @@ public static class StatementSyntaxExtensionsShared
             ? previousStatements.Union(GetPreviousStatements(parentStatement))
             : previousStatements;
     }
-
-#if CS
-    /// <summary>
-    /// Returns the statement before the statement given as input.
-    /// </summary>
-    public static StatementSyntax GetPrecedingStatement(this StatementSyntax statement)
-    {
-        var siblings = statement.Parent is GlobalStatementSyntax
-                       ? statement.SyntaxTree
-                                  .GetCompilationUnitRoot()
-                                  .ChildNodes()
-                                  .OfType<GlobalStatementSyntax>()
-                                  .Select(x => x.Statement)
-                       : statement.Parent.ChildNodes();
-        return statement.GetPrecedingStatement(siblings);
-    }
-
-    private static StatementSyntax GetPrecedingStatement(this StatementSyntax statement, IEnumerable<SyntaxNode> statementSiblingNodes) =>
-        statementSiblingNodes.OfType<StatementSyntax>()
-                             .TakeWhile(x => x != statement)
-                             .LastOrDefault();
-#endif
 }

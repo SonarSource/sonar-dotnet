@@ -32,7 +32,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
-                if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, out var ifConditionLocation))
+                if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, c, out var ifConditionLocation))
                 {
                     c.ReportIssue(Rule, forEachStatementSyntax.Expression, [ifConditionLocation], WhereMessageFormat);
                 }
@@ -43,16 +43,49 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
             },
             SyntaxKind.ForEachStatement);
 
-    private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement, out SecondaryLocation ifConditionLocation)
+    private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement, SonarSyntaxNodeReportingContext context, out SecondaryLocation ifConditionLocation)
     {
         if (GetIfStatement(statement) is { } ifStatementSyntax && CanIfStatementBeMoved(ifStatementSyntax))
         {
             ifConditionLocation = ifStatementSyntax.Condition.ToSecondaryLocation();
-            return true;
+            // If the 'if' block contains a single return or assignment with a break,
+            // we cannot simplify the loop using LINQ if the return or assignment is a nullable conversion.
+            // also see https://sonarsource.atlassian.net/browse/NET-1222
+            return SingleReturnOrBreakingAssignment(ifStatementSyntax) is not { } returnOrAssignment
+                || !RequiresNullableConversion(returnOrAssignment, context);
         }
 
         ifConditionLocation = null;
         return false;
+    }
+
+    private static bool RequiresNullableConversion(SyntaxNode returnOrAssignment, SonarSyntaxNodeReportingContext context)
+    {
+        var typeInfo = context.Model.GetTypeInfo(returnOrAssignment switch
+        {
+            ReturnStatementSyntax returnStatement => returnStatement.Expression,
+            AssignmentExpressionSyntax assignment => assignment.Right,
+            _ => throw new InvalidOperationException("Unreachable")
+        });
+        return context.Compilation.ClassifyConversion(typeInfo.Type, typeInfo.ConvertedType).IsNullable;
+    }
+
+    private static SyntaxNode SingleReturnOrBreakingAssignment(IfStatementSyntax ifStatementSyntax)
+    {
+        // Check if the first statement of the block is a return
+        if (ifStatementSyntax.Statement.FirstNonBlockStatement() is ReturnStatementSyntax returnStatement)
+        {
+            return returnStatement;
+        }
+
+        // Check if the statement is a block with a single assignment followed by a break
+        if (ifStatementSyntax.Statement is BlockSyntax { Statements: { Count: 2 } statements }
+            && statements[0] is ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax assignment }
+            && statements[1] is BreakStatementSyntax)
+        {
+            return assignment;
+        }
+        return null;
     }
 
     private static IfStatementSyntax GetIfStatement(SyntaxNode node) =>

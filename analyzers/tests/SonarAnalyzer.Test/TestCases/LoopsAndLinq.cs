@@ -357,20 +357,195 @@ namespace Tests.Diagnostics
     }
 
     // https://sonarsource.atlassian.net/browse/NET-1222
-    static class Repo_1222
+    class Repro_1222
     {
-        public static T? FirstOrNone<T>(this IEnumerable<T> enumerable, Predicate<T> predicate) where T : struct
+        public static T? FirstOrNone<T>(IEnumerable<T> enumerable, Predicate<T> predicate) where T : struct
         {
             // this could be re-written via LINQ but it isn't obvious:
             // enumerable.Cast<T?>().FirstOrDefault(x => predicate(x!.Value));
-            foreach (var element in enumerable) // Noncompliant FP
+            foreach (var element in enumerable)
+            {
+                if (predicate(element))
+                {
+                    return element;
+                }
+            }
+            return null;
+        }
+
+        public static T FirstOrNone<T>(IEnumerable<T?> enumerable, Predicate<T?> predicate) where T : struct
+        {
+            foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (predicate(element))         // Secondary
+                {
+                    return (T)element;
+                }
+            }
+            return default(T);
+        }
+
+        private static IEnumerable<T> GetEnumerable<T>() { return null; }
+        private static bool Filter<T>(T v) { return true; }
+
+        public static int? LocalFunction()
+        {
+            int? value = null;
+            foreach (var i in GetEnumerable<int>())
+            {
+                if (Filter(i))
+                {
+                    value = i;
+                    break;
+                }
+            }
+            foreach (var element in GetEnumerable<int>())
+            {
+                if (Filter(element))
+                    return element;
+            }
+            return null;
+            int? MyLocalFunction(IEnumerable<int> enumerable, Predicate<int> predicate)
+            {
+                foreach (var element in enumerable)
+                {
+                    if (predicate(element))
+                    {
+                        {
+                            return element;
+                        }
+                    }
+                }
+                return null;
+            }
+        }
+
+        public static int? operator +(Repro_1222 _i1, int _i2)
+        {
+            foreach (var i in GetEnumerable<int>()) // Compliant
+            {
+                if (Filter(i))
+                {
+                    return i;
+                }
+            }
+            return null;
+        }
+
+        public int? Integer
+        {
+            get
+            {
+                foreach (var i in GetEnumerable<int>()) // Compliant
+                {
+                    if (Filter(i))
+                    {
+                        return i;
+                    }
+                }
+                return null;
+            }
+            set
+            {
+                value = null;
+                foreach (var i in GetEnumerable<int>()) // Compliant
+                {
+                    if (Filter(i))
+                    {
+                        value = i;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    class NotNullable
+    {
+        public static T FirstOrNone<T>(IEnumerable<T> enumerable, Predicate<T> predicate) where T : struct
+        {
+            foreach (var element in enumerable) // Noncompliant
             {
                 if (predicate(element))         // Secondary
                 {
                     return element;
                 }
             }
-            return null;
+            return default(T);
+        }
+
+        private static IEnumerable<T> GetEnumerable<T>() { return null; }
+        private static bool Filter<T>(T v) { return true; }
+
+        public static int LocalFunction()
+        {
+            int value = 0;
+            foreach (var i in GetEnumerable<int>()) // Noncompliant
+            {
+                if (Filter(i))                      // Secondary
+                {
+                    value = i;
+                    break;
+                }
+            }
+            foreach (var element in GetEnumerable<int>()) // Noncompliant
+            {
+                if (Filter(element))                      // Secondary
+                    return element;
+            }
+            return 0;
+            int MyLocalFunction(IEnumerable<int> enumerable, Predicate<int> predicate)
+            {
+                foreach (var element in enumerable) // Noncompliant
+                {
+                    if (predicate(element))         // Secondary
+                    {
+                        {
+                            return element;
+                        }
+                    }
+                }
+                return 0;
+            }
+        }
+
+        public static int operator +(NotNullable _i1, int _i2)
+        {
+            foreach (var i in GetEnumerable<int>()) // Noncompliant
+            {
+                if (Filter(i))                      // Secondary
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        public int Integer
+        {
+            get
+            {
+                foreach (var i in GetEnumerable<int>()) // Noncompliant
+                {
+                    if (Filter(i))                      // Secondary
+                    {
+                        return i;
+                    }
+                }
+                return 0;
+            }
+            set
+            {
+                value = 0;
+                foreach (var i in GetEnumerable<int>()) // Noncompliant
+                {
+                    if (Filter(i))                      // Secondary
+                    {
+                        value = i;
+                        break;
+                    }
+                }
+            }
         }
     }
 }
