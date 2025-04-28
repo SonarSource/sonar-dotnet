@@ -61,13 +61,17 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
 
     private static bool RequiresNullableConversion(SyntaxNode returnOrAssignment, SonarSyntaxNodeReportingContext context)
     {
-        var typeInfo = context.Model.GetTypeInfo(returnOrAssignment switch
+        var expression = returnOrAssignment switch
         {
             ReturnStatementSyntax returnStatement => returnStatement.Expression,
             AssignmentExpressionSyntax assignment => assignment.Right,
             _ => throw new InvalidOperationException("Unreachable")
-        });
-        return context.Compilation.ClassifyConversion(typeInfo.Type, typeInfo.ConvertedType).IsNullable;
+        };
+
+        // expression can be null if the return statement is empty
+        return expression is not null
+            && context.Model.GetTypeInfo(expression) is { Type: { } type, ConvertedType: { } convertedType }
+            && context.Compilation.ClassifyConversion(type, convertedType).IsNullable;
     }
 
     private static SyntaxNode SingleReturnOrBreakingAssignment(IfStatementSyntax ifStatementSyntax)

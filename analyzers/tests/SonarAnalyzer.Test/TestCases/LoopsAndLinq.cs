@@ -548,4 +548,36 @@ namespace Tests.Diagnostics
             }
         }
     }
+
+    class EmptyReturn
+    {
+        public static void MyMethod<T>(IEnumerable<T> enumerable, Predicate<T> predicate) where T : struct
+        {
+            foreach (var element in enumerable) // Noncompliant
+            {
+                if (predicate(element))         // Secondary
+                {
+                    return;
+                }
+            }
+        }
+    }
+
+    class Lambda
+    {
+        private Predicate<Object> LambdaMethod(IEnumerable<int> enumerable, Predicate<int> predicate)
+        {
+            Predicate<Object> lambda = null;
+            foreach (var element in enumerable) // Noncompliant
+            {
+                if (predicate(element))         // Secondary
+                {
+                    lambda = instance => false;
+                    break;
+                }
+            }
+
+            return lambda;
+        }
+    }
 }

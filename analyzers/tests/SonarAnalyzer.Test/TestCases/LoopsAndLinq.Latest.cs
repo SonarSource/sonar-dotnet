@@ -263,4 +263,43 @@ namespace CSharp13
             }
         }
     }
+
+    class ReturnNull
+    {
+        interface IInterface { }
+
+        private IInterface? ReturnNullInterface(IEnumerable<int> enumerable, Predicate<int> predicate)
+        {
+            foreach (var element in enumerable) // Noncompliant
+            {
+                if (predicate(element))         // Secondary
+                {
+                    return null;
+                }
+            }
+
+            return null;
+        }
+
+        private int? ReturnDefault(IEnumerable<int> enumerable, Predicate<int> predicate)
+        {
+            foreach (var element in enumerable) // Noncompliant
+            {
+                if (predicate(element))         // Secondary
+                {
+                    return default;
+                }
+            }
+
+            foreach (var element in enumerable) // Noncompliant
+            {
+                if (predicate(element))         // Secondary
+                {
+                    return null;
+                }
+            }
+
+            return null;
+        }
+    }
 }
