@@ -32,5 +32,9 @@ void MyMethod()
 }
 </pre>
 <h3>Exceptions</h3>
-<p><code>CallerMemberName</code> is not checked to avoid False-Positives with WPF/UWP applications.</p>
+<ul>
+  <li> <code>CallerMemberName</code> is not checked to avoid False-Positives with WPF/UWP applications. </li>
+  <li> <code>System.Diagnostics.Debug.Assert</code> is excluded as a custom message from the developer is sometimes preferred as an explanation of the
+  failed assertion. </li>
+</ul>
 
