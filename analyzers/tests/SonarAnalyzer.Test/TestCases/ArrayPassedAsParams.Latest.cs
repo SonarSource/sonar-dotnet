@@ -76,22 +76,3 @@ public struct MyImmutableArray<T> : IEnumerable<T>
     IEnumerator<T> IEnumerable<T>.GetEnumerator() => default!;
     IEnumerator IEnumerable.GetEnumerator() => default!;
 }
-
-// Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/6977
-public class Repro6977_CollectionExpression
-{
-    class ParamsAttribute : Attribute
-    {
-        public ParamsAttribute(params string[] values) { }
-        public ParamsAttribute(int a, string b, params string[] values) { }
-    }
-
-    internal enum Foo
-    {
-        [Params(["1", "2" ])] // Noncompliant
-        Red,
-
-        [Params("1", "2")]
-        Yellow
-    }
-}
