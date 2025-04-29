@@ -142,15 +142,18 @@ public static class IOperationExtensions
     public static IDeclarationPatternOperationWrapper? AsDeclarationPattern(this IOperation operation) =>
         operation.As(OperationKindEx.DeclarationPattern, IDeclarationPatternOperationWrapper.FromOperation);
 
-    public static IFlowCaptureOperationWrapper? AsFlowCapture(this IOperation operation) =>
-        operation.As(OperationKindEx.FlowCapture, IFlowCaptureOperationWrapper.FromOperation);
-
     public static IFlowCaptureReferenceOperationWrapper? AsFlowCaptureReference(this IOperation operation) =>
         operation.As(OperationKindEx.FlowCaptureReference, IFlowCaptureReferenceOperationWrapper.FromOperation);
 
-    // Other LoopKinds (e.g. For, While) are still OperationKindEx.Loop, but cannot be cast to IForEachLoopOperationWrapper so we need an additional check
-    public static IForEachLoopOperationWrapper? AsForEachLoop(this IOperation operation) =>
-        IForEachLoopOperationWrapper.IsInstance(operation) ? IForEachLoopOperationWrapper.FromOperation(operation) : null;
+    public static IForEachLoopOperationWrapper? AsForEachLoop(this IOperation operation)
+    {
+        if (operation is null)  // null check to be consistent with other the other As methods
+        {
+            throw new NullReferenceException(nameof(operation));
+        }
+        // Other LoopKinds (e.g. For, While) are still OperationKindEx.Loop, but cannot be cast to IForEachLoopOperationWrapper so we need an additional check
+        return IForEachLoopOperationWrapper.IsInstance(operation) ? IForEachLoopOperationWrapper.FromOperation(operation) : null;
+    }
 
     public static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
         operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.FromOperation);
@@ -241,12 +244,6 @@ public static class IOperationExtensions
 
     public static IFlowCaptureReferenceOperationWrapper ToFlowCaptureReference(this IOperation operation) =>
         IFlowCaptureReferenceOperationWrapper.FromOperation(operation);
-
-    public static IForEachLoopOperationWrapper ToForEachLoop(this IOperation operation) =>
-        IForEachLoopOperationWrapper.FromOperation(operation);
-
-    public static ILoopOperationWrapper ToLoop(this IOperation operation) =>
-        ILoopOperationWrapper.FromOperation(operation);
 
     public static IIncrementOrDecrementOperationWrapper ToIncrementOrDecrement(this IOperation operation) =>
         IIncrementOrDecrementOperationWrapper.FromOperation(operation);
