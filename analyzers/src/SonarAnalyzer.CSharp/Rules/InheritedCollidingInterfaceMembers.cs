@@ -69,10 +69,13 @@ public sealed class InheritedCollidingInterfaceMembers : SonarDiagnosticAnalyzer
             .Where(x => x.Location.IsInSource)
             .Select(x => x.Location.ToSecondary(x.CollideWithSymbolName is { Length: > 0 } ? SecondaryMessageFormat : null, x.CollideWithSymbolName));
 
-        string CollideWithSymbolName(CollidingMember collidingMember) =>
-            collidingMember.CollideWith.Locations.FirstOrDefault() is { } location
-                ? GetMemberDisplayName(collidingMember.CollideWith, location.SourceSpan.Start, model, [SymbolDisplayPartKind.ClassName, SymbolDisplayPartKind.InterfaceName])
+        string CollideWithSymbolName(CollidingMember collidingMember)
+        {
+            return collidingMember.CollideWith.Locations.FirstOrDefault() is { } location
+                && location.SourceTree.SemanticModelOrDefault(model) is { } semanticModel
+                ? GetMemberDisplayName(collidingMember.CollideWith, location.SourceSpan.Start, semanticModel, [SymbolDisplayPartKind.ClassName, SymbolDisplayPartKind.InterfaceName])
                 : string.Empty;
+        }
     }
 
     private static IEnumerable<CollidingMember> GetCollidingMembers(ITypeSymbol interfaceSymbol)

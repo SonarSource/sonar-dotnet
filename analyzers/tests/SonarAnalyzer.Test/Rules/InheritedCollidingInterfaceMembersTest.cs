@@ -16,26 +16,32 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class InheritedCollidingInterfaceMembersTest
 {
-    [TestClass]
-    public class InheritedCollidingInterfaceMembersTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<InheritedCollidingInterfaceMembers>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<InheritedCollidingInterfaceMembers>();
 
-        [TestMethod]
-        public void InheritedCollidingInterfaceMembers() =>
-            builder.AddPaths("InheritedCollidingInterfaceMembers.cs").Verify();
+    [TestMethod]
+    public void InheritedCollidingInterfaceMembers() =>
+        builder.AddPaths("InheritedCollidingInterfaceMembers.cs").Verify();
 
-        [TestMethod]
-        public void InheritedCollidingInterfaceMembers_CSharp8() =>
-            builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp8.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .Verify();
+    [TestMethod]
+    public void InheritedCollidingInterfaceMembers_DifferentFileSizes() =>
+        builder.AddPaths(
+                "InheritedCollidingInterfaceMembers.DifferentFile.cs",
+                "InheritedCollidingInterfaceMembers.AnotherFile.cs")
+            .Verify();
+
+    [TestMethod]
+    public void InheritedCollidingInterfaceMembers_CSharp8() =>
+        builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp8.cs")
+            .WithOptions(LanguageOptions.FromCSharp8)
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
+            .Verify();
 
 #if NET
-
         [TestMethod]
         public void InheritedCollidingInterfaceMembers_CSharp11() =>
             builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp11.cs")
@@ -43,6 +49,4 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
 #endif
-
-    }
 }
