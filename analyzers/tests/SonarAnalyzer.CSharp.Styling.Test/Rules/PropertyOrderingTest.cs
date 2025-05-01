@@ -21,5 +21,5 @@ public class PropertyOrderingTest
 {
     [TestMethod]
     public void PropertyOrdering() =>
-        StylingVerifierBuilder.Create<PropertyOrdering>().AddPaths("PropertyOrdering.cs").Verify();
+        StylingVerifierBuilder.Verify<PropertyOrdering>();
 }

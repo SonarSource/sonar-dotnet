@@ -21,5 +21,5 @@ public class UseShortNameTest
 {
     [TestMethod]
     public void UseShortName() =>
-        StylingVerifierBuilder.Create<UseShortName>().AddPaths("UseShortName.cs").Verify();
+        StylingVerifierBuilder.Verify<UseShortName>();
 }

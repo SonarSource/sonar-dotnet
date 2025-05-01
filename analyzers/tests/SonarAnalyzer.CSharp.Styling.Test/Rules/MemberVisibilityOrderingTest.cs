@@ -21,5 +21,5 @@ public class MemberVisibilityOrderingTest
 {
     [TestMethod]
     public void MemberVisibilityOrdering() =>
-        StylingVerifierBuilder.Create<MemberVisibilityOrdering>().AddPaths("MemberVisibilityOrdering.cs").Verify();
+        StylingVerifierBuilder.Verify<MemberVisibilityOrdering>();
 }

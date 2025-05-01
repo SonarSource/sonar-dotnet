@@ -21,5 +21,5 @@ public class NullPatternMatchingTest
 {
     [TestMethod]
     public void NullPatternMatching() =>
-        StylingVerifierBuilder.Create<NullPatternMatching>().AddPaths("NullPatternMatching.cs").Verify();
+        StylingVerifierBuilder.Verify<NullPatternMatching>();
 }

@@ -21,5 +21,5 @@ public class TypeMemberOrderingTest
 {
     [TestMethod]
     public void TypeMemberOrdering() =>
-        StylingVerifierBuilder.Create<TypeMemberOrdering>().AddPaths("TypeMemberOrdering.cs").Verify();
+        StylingVerifierBuilder.Verify<TypeMemberOrdering>();
 }

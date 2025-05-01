@@ -21,5 +21,5 @@ public class AllParametersOnSameLineTest
 {
     [TestMethod]
     public void AllParametersOnSameLine() =>
-        StylingVerifierBuilder.Create<AllParametersOnSameLine>().AddPaths("AllParametersOnSameLine.cs").Verify();
+        StylingVerifierBuilder.Verify<AllParametersOnSameLine>();
 }

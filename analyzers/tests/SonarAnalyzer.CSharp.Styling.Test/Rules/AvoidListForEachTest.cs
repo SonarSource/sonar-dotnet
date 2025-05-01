@@ -21,5 +21,5 @@ public class AvoidListForEachTest
 {
     [TestMethod]
     public void AvoidListForEach() =>
-        StylingVerifierBuilder.Create<AvoidListForEach>().AddPaths("AvoidListForEach.cs").Verify();
+        StylingVerifierBuilder.Verify<AvoidListForEach>();
 }

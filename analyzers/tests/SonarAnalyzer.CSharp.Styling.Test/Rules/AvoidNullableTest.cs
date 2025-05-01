@@ -21,5 +21,5 @@ public class AvoidNullableTest
 {
     [TestMethod]
     public void AvoidNullable() =>
-        StylingVerifierBuilder.Create<AvoidNullable>().AddPaths("AvoidNullable.cs").Verify();
+        StylingVerifierBuilder.Verify<AvoidNullable>();
 }

@@ -21,5 +21,5 @@ public class LambdaParameterNameTest
 {
     [TestMethod]
     public void LambdaParameterName() =>
-        StylingVerifierBuilder.Create<LambdaParameterName>().AddPaths("LambdaParameterName.cs").Verify();
+        StylingVerifierBuilder.Verify<LambdaParameterName>();
 }

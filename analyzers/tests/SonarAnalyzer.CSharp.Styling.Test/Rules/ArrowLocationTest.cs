@@ -21,5 +21,5 @@ public class ArrowLocationTest
 {
     [TestMethod]
     public void ArrowLocation() =>
-        StylingVerifierBuilder.Create<ArrowLocation>().AddPaths("ArrowLocation.cs").Verify();
+        StylingVerifierBuilder.Verify<ArrowLocation>();
 }

@@ -38,7 +38,7 @@ public class UseRegexSafeIsMatchTest
                                 {
                                     regex.IsMatch(content);         // Compliant
                                     regex.Matches(content);         // Compliant
-                                    regex.Match(content);           // Compliant                                          
+                                    regex.Match(content);           // Compliant
                                 }
                             }
                             """)
@@ -60,7 +60,7 @@ public class UseRegexSafeIsMatchTest
                                     {
                                         regex.IsMatch(content);         // Noncompliant
                                         regex.Matches(content);         // Compliant
-                                        regex.Match(content);           // Compliant                            
+                                        regex.Match(content);           // Compliant
                                     }
                                 }
                             }
@@ -88,9 +88,9 @@ public class UseRegexSafeIsMatchTest
                                     private Regex regex;
                                     void InstanceRegex(string content)
                                     {
-                                        regex.IsMatch(content);         // Compliant 
+                                        regex.IsMatch(content);         // Compliant
                                         regex.Matches(content);         // Compliant
-                                        regex.Match(content);           // Noncompliant                           
+                                        regex.Match(content);           // Noncompliant
                                     }
                                 }
 
@@ -116,7 +116,7 @@ public class UseRegexSafeIsMatchTest
                                     {
                                         regex.IsMatch(content);         // Compliant
                                         regex.Matches(content);         // Noncompliant
-                                        regex.Match(content);           // Compliant                            
+                                        regex.Match(content);           // Compliant
                                     }
                                 }
 

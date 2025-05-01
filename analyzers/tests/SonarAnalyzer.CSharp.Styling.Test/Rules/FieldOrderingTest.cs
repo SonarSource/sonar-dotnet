@@ -21,5 +21,5 @@ public class FieldOrderingTest
 {
     [TestMethod]
     public void FieldOrdering() =>
-        StylingVerifierBuilder.Create<FieldOrdering>().AddPaths("FieldOrdering.cs").Verify();
+        StylingVerifierBuilder.Verify<FieldOrdering>();
 }
