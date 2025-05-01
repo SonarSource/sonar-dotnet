@@ -25,6 +25,14 @@ public sealed class NullPatternMatching : StylingAnalyzer
     {
         context.RegisterNodeAction(c => Validate(c, null), SyntaxKind.EqualsExpression);
         context.RegisterNodeAction(c => Validate(c, "not "), SyntaxKind.NotEqualsExpression);
+        context.RegisterNodeAction(c =>
+            {
+                if (((RecursivePatternSyntax)c.Node) is { Designation: null, PropertyPatternClause.Subpatterns.Count: 0 })
+                {
+                    c.ReportIssue(Rule, c.Node, "not ");
+                }
+            },
+            SyntaxKind.RecursivePattern);
     }
 
     private void Validate(SonarSyntaxNodeReportingContext context, string messageInfix)

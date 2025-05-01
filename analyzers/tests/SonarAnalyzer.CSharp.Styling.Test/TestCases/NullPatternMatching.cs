@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Linq.Expressions;
 
 public class Sample
@@ -70,4 +69,29 @@ public class Sample
 
     public static bool operator !=(Sample a, Sample b) =>
         b is not null;
+}
+
+public class IsPattern
+{
+    public void Method(object value, Exception ex)
+    {
+        _ = value is { };           // Noncompliant {{Use 'is not null' pattern matching.}}
+        //           ^^^
+        _ = ex is { Message: { } }; // Noncompliant {{Use 'is not null' pattern matching.}}
+        //                   ^^^
+    }
+
+    public void Compliant(object value, string str, Exception ex)
+    {
+        _ = value is null;
+        _ = value is not null;
+        _ = value is { } renamed;
+        _ = Value() is { } captured;
+        _ = value is Exception;
+        _ = value is Exception e;
+        _ = str is { Length: 0 };
+        _ = ex is { Message: { } message };
+    }
+
+    private object Value() => null;
 }
