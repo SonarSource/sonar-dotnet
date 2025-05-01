@@ -6,6 +6,10 @@ When contributing to the project, and if otherwise not mentioned in this documen
 follow the Microsoft [C# Coding Conventions](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/coding-conventions)
 and standard [Naming Guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/naming-guidelines).
 
+Less is more - keep it simple.
+
+Two is a group, three is a crowd - guideline for when to extract similar logic.
+
 ## Class Members
 
 Members and types should always have the lowest possible visibility.
@@ -97,6 +101,8 @@ public void MethodB()
 
 ## Naming conventions
 
+Use minimal and valuable names.
+
 Don't use 'Get' method prefixes. Omit it in most of the cases, or use a true verb like `Create`, `Find`, etc.
 
 Generic words in class names that don't convey meaning (e.g. `Helper`) should be avoided. Overwordy and complex names should be avoided as well.
@@ -105,20 +111,28 @@ Single variable lambdas should use `x` as the variable name (based on lambda cal
 
 Short names can be used as parameter and variable names, namely `SyntaxTree tree`, `SemanticModel model`, `SyntaxNode node` and `CancellationToken cancel`.
 
+All PowerShell names (parameters, variables, methods, ...) use PascalCasing.
+
+### Unit Tests
+
 Unit tests for common C# and VB.NET rules should use two aliases `using CS = SonarAnalyzer.Rules.CSharp` and `using VB = SonarAnalyzer.Rules.VisualBasic`. Test method names should have `_CS` and `_VB` suffixes.
 
 Unit tests for single language rule should not use alias nor language method suffix.
 
 Unit test namespaces should be the same as the tested production code, with a `.Test` suffix to avoid adding boring `using` statements, e.g. `SonarAnalyzer.Core.Test` project will have `SonarAnalyzer.Core.AnalysisContext.Test` to test classes from `AnalysisContext` namespace.
 
+Underscore in UT names separates logical groups (tested method, scenario, optionally expected outcome), not individual words.
+
 Variable name `sut` (System Under Test) is recommended in unit tests that really tests a single unit (contrary to our usual rule integration unit tests).
+
+Use semantic names in test cases like `class Sample { }`, `void Method()`, `WithAttribute()`, `Overriden()`, etc. describing the purpose instead of `foo`, `bar`, etc.
 
 ## Multi-line statements
 
 * Operators (`&&`, `||`, `and`, `or`, `+`, `:`, `?`, `??` and others) are placed at the beginning of a line.
     * Indented at the same level if the syntax at the beginning of the previous line is a sibling.
       ```csharp
-      void Foo() =>
+      bool Method() =>
           A
           && B; // A and B are siblings => we don't indent
       ```
@@ -193,10 +207,24 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
   * when chained conditions cannot be used, use early returns
   * otherwise, use nested conditions
 * Use positive logic.
-* Use `is {}` and `is not null` as null-checks (instead of `!= null`).
+* Use `is null` and `is not null`.
 * Var pattern `is var o` can be used only where variable declarations would require additional nesting.
 * Var pattern `o is { P: var p }` can be used only where `o` can be `null` and `p` is used at least 3 times.
 * Do not use `nullable`.
+* Use `var`, also for `var value = new SomeType();`. Do not use `SomeType value = new();`.
+* Avoid single-use variables, unless they really bring readability value.
+* Avoid primary constructors on normal classes.
+* Avoid empty lines inside methods, unless they bring significant clarity in separating major logical parts (like before assertion in UTs).
+* Avoid Linq query syntax.
+* Tested variable is on the left, like `iterated == 42` or `iterated == searchParameter`.
+* Use fields instead of auto-implemented private or protected properties.
+* Use raw string literals for multi-line strings.
+  ```
+  const string code = """
+      First("line");
+      Another("line");
+      """;
+   ```
 
 ## Comments
 
@@ -204,6 +232,9 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
 * Comments should generally be on separate lines.
 * Comments on the same line with code are acceptable for short lines of code and short comments.
 * Documentation comments for abstract methods and their implementations should be placed only on the abstract method, to avoid duplication. _When reading the implementation, the IDE offers the tooling to peek in the base class and read the method comment._
+* Prefer well-named methods instead of documentation.
+* Avoid superfluous documentation tags, like `<param>` for parameters with obvious name.
+* Avoid using comments for `// Arrange`, `// Act` and `// Assert` in UTs.
 
 ## FIXME and ToDo
 
@@ -213,6 +244,10 @@ be done here. A `FIXME` should never appear in a PR or be merged into master.
 * `ToDo` can be used to mark part of the code that will need to be updated at a later time. It can be used to
 track updates that should be done at some point, but that either cannot be done at that moment, or can be fixed later.
 Ideally, a `ToDo` comment should be followed by an issue number (what needs to be done should be in the github issues).
+
+## Unit Tests
+
+* `VerifierBuilder.AddSnippet` can only be used to assert Compliant/Noncompliant case in parametrized test. Everything else should be in a TestCases file.
 
 ## Regions
 
