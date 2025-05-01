@@ -1,37 +1,77 @@
 <h2>Why is this an issue?</h2>
-<p>When a loop is filtering, selecting or aggregating, those functions can be handled with a clearer, more concise LINQ expression instead.</p>
-<h3>Noncompliant code example</h3>
-<pre>
-var result = new List&lt;string&gt;();
-foreach (var element in collection)  // Noncompliant
+<p>Using explicit loops for filtering, selecting, or aggregating elements can make code more verbose and harder to read. LINQ expressions provide a
+more concise and expressive way to perform these operations, improving code clarity and maintainability.</p>
+<h2>How to fix it</h2>
+<p>Replace explicit loops and conditional blocks with equivalent LINQ expressions.</p>
+<p>Use the <a href="https://www.nuget.org/packages/System.Linq.Async">System.Linq.Async</a> package to enable LINQ operations on <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.iasyncenumerable-1">IAsyncEnumerable</a> prior to .NET 10.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+List&lt;string&gt; Method(IEnumerable&lt;string&gt; collection, Predicate&lt;string&gt; condition)
 {
-  if (condition(element))
+  var result = new List&lt;string&gt;();
+  foreach (var element in collection)  // Noncompliant
   {
-    result.Add(element);
+    if (condition(element))
+    {
+      result.Add(element);
+    }
   }
-}
-
-foreach (var element in collection2) // Noncompliant
-{
-  var someValue = element.Property;
-  if (someValue != null)
-  {
-    result.Add(someValue);
-  }
+  return result;
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-var result = new List&lt;string&gt;();
-
-foreach (var element in collection.Where(x =&gt; condition(x)))
+<pre data-diff-id="2" data-diff-type="noncompliant">
+List&lt;string&gt; Method(IEnumerable&lt;MyDto&gt; collection)
 {
-  result.Add(element);
-}
-
-foreach (var someValue in collection2.Select(x =&gt; x.Property).Where(y =&gt; y != null))
-{
-  result.Add(someValue);
+  var result = new List&lt;string&gt;();
+  foreach (var element in collection) // Noncompliant
+  {
+    var someValue = element.Property;
+    if (someValue != null)
+    {
+      result.Add(someValue);
+    }
+  }
+  return result;
 }
 </pre>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+async Task&lt;List&lt;string&gt;&gt; Method(IAsyncEnumerable&lt;string&gt; collection)
+{
+  var result = new List&lt;string&gt;();
+  await foreach (var element in collection) // Noncompliant
+  {
+    if (element != null)
+    {
+      result.Add(element);
+    }
+  }
+  return result;
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+List&lt;string&gt; Method(IEnumerable&lt;string&gt; collection, Predicate&lt;string&gt; condition) =&gt;
+  collection.Where(x =&gt; condition(x)).ToList();
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+List&lt;string&gt; Method(IEnumerable&lt;MyDto&gt; collection) =&gt;
+  collection.Select(x =&gt; x.Property).Where(y =&gt; y != null).ToList();
+</pre>
+<pre data-diff-id="3" data-diff-type="compliant">
+List&lt;string&gt; Method(IAsyncEnumerable&lt;string&gt; collection) =&gt;
+  collection.Where(x =&gt; x != null).ToList();
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/linq">Language Integrated Query (LINQ)</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.iasyncenumerable-">https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.iasyncenumerable-</a> 1[IAsyncEnumerable&lt;T&gt; Interface] </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/10.0/asyncenumerable">System.Linq.AsyncEnumerable in .NET 10</a>
+  </li>
+  <li> NuGet - <a href="https://www.nuget.org/packages/System.Linq.Async">System.Linq.Async</a> </li>
+</ul>
 
