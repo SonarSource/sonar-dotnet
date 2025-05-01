@@ -97,6 +97,8 @@ public void MethodB()
 
 ## Naming conventions
 
+Don't use 'Get' method prefixes. Omit it in most of the cases, or use a true verb like `Create`, `Find`, etc.
+
 Generic words in class names that don't convey meaning (e.g. `Helper`) should be avoided. Overwordy and complex names should be avoided as well.
 
 Single variable lambdas should use `x` as the variable name (based on lambda calculus λx). Multi variable lambdas should use descriptive names, where `x` can be used for the main iterated item like `(x, index) => ...`. Name `c` can be used for context of Roslyn callback.
@@ -133,7 +135,7 @@ Variable name `sut` (System Under Test) is recommended in unit tests that really
                                          string secondParameter,
                                          Function<int, string, string> complexParameter);
     ```
-* Long ternary operator statements should have `?` and `:` on separate lines, aligned with a left-most single indendation.
+* Long ternary operator statements should have `?` and `:` on separate lines, aligned with a left-most single indentation.
     ```csharp
     object.Property is SomeType something
     && something.AnotherProperty is OtherType other

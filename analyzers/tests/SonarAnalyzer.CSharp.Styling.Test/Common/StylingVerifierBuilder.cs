@@ -20,7 +20,14 @@ namespace SonarAnalyzer.CSharp.Styling.Common.Test;
 
 public static class StylingVerifierBuilder
 {
-    // This shoudl solve only simple cases. Do not add parametrized overloads to preserver the builder logic.
+    // This should solve only simple cases. Do not add parametrized overloads to preserve the builder logic.
     public static VerifierBuilder Create<TAnalyzer>() where TAnalyzer : DiagnosticAnalyzer, new() =>
         new VerifierBuilder<TAnalyzer>().WithOptions(LanguageOptions.CSharpLatest);  // We don't use older version on our codebase => we don't need to waste time testing them.
+
+    // This should solve only simple cases. Do not add parametrized overloads.
+    public static void Verify<TAnalyzer>() where TAnalyzer : DiagnosticAnalyzer, new() =>
+        new VerifierBuilder<TAnalyzer>()
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddPaths(typeof(TAnalyzer).Name + ".cs")
+            .Verify();
 }
