@@ -26,6 +26,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.sonar.api.SonarEdition;
+import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.TextRange;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.Severity;
@@ -36,11 +38,13 @@ import org.sonar.api.batch.sensor.issue.Issue.Flow;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
+import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.issue.impact.SoftwareQuality;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
+import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
 import static java.util.Arrays.asList;
@@ -290,6 +294,28 @@ public class SarifParserCallbackImplTest {
       "Adding external issue rule45: " + createAbsolutePath("file1"),
       "Adding external issue rule46: " + createAbsolutePath("file1"),
       "Adding external issue rule47: " + createAbsolutePath("file1")
+    );
+  }
+
+  @Test
+  public void should_create_external_issues_without_impact_cloud() {
+    SensorContextTester ctxCloud = SensorContextTester.create(temp.getRoot().toPath());
+    ctxCloud.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(10, 1), SonarQubeSide.SCANNER, SonarEdition.SONARCLOUD));
+    ctxCloud.fileSystem().add(TestInputFileBuilder.create("module1", "file1")
+      .setContents("My file\ncontents\nwith some\n lines")
+      .build());
+    callback = new SarifParserCallbackImpl(ctxCloud, repositoryKeyByRoslynRuleKey, false, emptySet(), emptySet(), emptySet());
+
+    callback.onIssue("rule45", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    callback.onIssue("rule46", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    callback.onIssue("rule47", "warning", createLocation("file1", 2, 3), Collections.emptyList(), false);
+    
+    assertThat(ctxCloud.allExternalIssues())
+      .extracting(ExternalIssue::ruleId, x -> x.impacts().keySet())
+      .containsExactlyInAnyOrder(
+        tuple("rule45", Collections.emptySet()),
+        tuple("rule46", Collections.emptySet()),
+        tuple("rule47", Collections.emptySet())
       );
   }
 

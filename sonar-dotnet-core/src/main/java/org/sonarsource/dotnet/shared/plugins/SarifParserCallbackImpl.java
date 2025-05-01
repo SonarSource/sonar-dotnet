@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.SonarEdition;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -193,7 +194,9 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
     }
     var ruleType = Optional.ofNullable(ruleTypeByRuleId.get(ruleId)).orElse(RuleType.CODE_SMELL);
     newIssue.severity(severity);
-    newIssue.addImpact(mapSoftwareQuality(ruleType), mapImpactSeverity(severity));
+    if (context.runtime().getEdition() != SonarEdition.SONARCLOUD) {
+      newIssue.addImpact(mapSoftwareQuality(ruleType), mapImpactSeverity(severity));
+    }
     newIssue.type(ruleType);
   }
 
