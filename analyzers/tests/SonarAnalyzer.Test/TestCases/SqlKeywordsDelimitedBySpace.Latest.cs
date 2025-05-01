@@ -137,6 +137,14 @@ namespace CSharp10
             string s24 = $"{{{nonConstOne}}}";              // Compliant
         }
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-1322
+    public class Repro_NET1322
+    {
+        const string tableName = "MyTableName";
+        const string strQuery = $"SELECT * FROM [{tableName}] "; // Noncompliant {{Add a space before 'MyTableName'.}} FP
+                                                                 // Noncompliant@-1 {{Add a space before ']'.}} FP
+    }
 }
 
 namespace CSharp11
