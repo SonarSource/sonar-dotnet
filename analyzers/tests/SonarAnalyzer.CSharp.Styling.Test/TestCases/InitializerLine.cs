@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
-public class Sample
+public class Fields
 {
     private string nextLineString =
         "Ipsum"; // Noncompliant {{Move this initializer to the previous line.}}
@@ -75,4 +76,77 @@ public class Sample
     private int multipleMultiLineA =
         1, multipleMultiLineB = // Noncompliant
         2;                      // Noncompliant
+}
+
+public class Properties
+{
+    private int field;
+    private event EventHandler eventField;
+
+    public string NextLineStringExpressionBody =>
+        "Ipsum"; // Noncompliant {{Move this expression to the previous line.}}
+    //  ^^^^^^^
+
+    public string NextLineStringInitializer { get; } =
+        "Ipsum"; // Noncompliant {{Move this initializer to the previous line.}}
+    //  ^^^^^^^
+
+    public string SameLineExpressionBody => "Lorem";
+    public string SameLineInitializer { get; } = "Lorem";
+
+    public string NextLineWhereTheFinalLinewouldBeLongButWithin200Limit_Noncompliant =>
+        "Lorem ipsum dolor sit amet consectetur adipiscing elit. Phasellus faucibus elit et phasellus, Length is 200.";    // Noncompliant, it fits
+
+    public string NextLineWhereTheFinalLinewouldBeTooLongSoItMustBeOnTheNextLineAnyway_Length201_Compliant =>
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus. Final Length is 201.";
+
+    public string NextLineWhereTheFinalLinewouldBeTooLongSoItMustBeOnTheNextLineAnyway_Length223_Compliant =
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus. Final Length is definitely more than 200.";
+
+    public int[] Values =>
+        [
+        ];
+
+    public string MultiLine => "Lorem" +
+        "Ipsum";
+
+    public int ArrowNoncompliant
+    {
+        get =>
+            field;          // Noncompliant
+        set =>
+            field = value;  // Noncompliant
+    }
+
+    public int ArrowInitNoncompliant
+    {
+        get =>
+            field;          // Noncompliant
+        init =>
+            field = value;  // Noncompliant
+    }
+
+    public event EventHandler MyEvent
+    {
+        add =>
+            eventField += value;    // Noncompliant
+        remove =>
+            eventField -= value;    // Noncompliant
+    }
+
+    public int ArrowCompliant
+    {
+        get => field;
+        set => field = value;
+    }
+
+    public int BodyGetter
+    {
+        get
+        {
+            return 42;
+        }
+    }
+
+    public int AutoImplemented { get; set; }
 }

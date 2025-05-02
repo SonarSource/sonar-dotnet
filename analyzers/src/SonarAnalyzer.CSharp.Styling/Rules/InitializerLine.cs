@@ -23,22 +23,54 @@ public sealed class InitializerLine : StylingAnalyzer
 {
     private const int MaxLineLength = 200;  // According to S103
 
-    public InitializerLine() : base("T0030", "Move this initializer to the previous line.") { }
+    public InitializerLine() : base("T0030", "Move this {0} to the previous line.") { }
 
-    protected override void Initialize(SonarAnalysisContext context) =>
+    protected override void Initialize(SonarAnalysisContext context)
+    {
         context.RegisterNodeAction(c =>
             {
                 foreach (var declarator in ((FieldDeclarationSyntax)c.Node).Declaration.Variables.Where(x => x.Initializer is not null))
                 {
-                    var expectedLine = declarator.GetLocation().StartLine();
-                    if (MissplacedLocation(declarator.Initializer.Value, expectedLine) is { } location
-                        && c.Node.SyntaxTree.GetText().Lines[expectedLine].Span.Length + location.SourceSpan.Length + 1 < MaxLineLength)
-                    {
-                        c.ReportIssue(Rule, location);
-                    }
+                    Verify(c, declarator.Initializer.Value, declarator.GetLocation().StartLine(), "initializer");
                 }
             },
             SyntaxKind.FieldDeclaration);
+        context.RegisterNodeAction(c =>
+            {
+                var property = (PropertyDeclarationSyntax)c.Node;
+                if (property.Initializer is not null)
+                {
+                    Verify(c, property.Initializer.Value, property.GetLocation().StartLine(), "initializer");
+                }
+                if (property.ExpressionBody is not null)
+                {
+                    Verify(c, property.ExpressionBody.Expression, property.GetLocation().StartLine(), "expression");
+                }
+            },
+            SyntaxKind.PropertyDeclaration);
+        context.RegisterNodeAction(c =>
+            {
+                var accessor = (AccessorDeclarationSyntax)c.Node;
+                if (accessor.ExpressionBody() is not null)
+                {
+                    Verify(c, accessor.ExpressionBody().Expression, accessor.GetLocation().StartLine(), "expression");
+                }
+            },
+            SyntaxKind.AddAccessorDeclaration,
+            SyntaxKind.GetAccessorDeclaration,
+            SyntaxKind.InitAccessorDeclaration,
+            SyntaxKind.RemoveAccessorDeclaration,
+            SyntaxKind.SetAccessorDeclaration);
+    }
+
+    private void Verify(SonarSyntaxNodeReportingContext context, ExpressionSyntax value, int expectedLine, string message)
+    {
+        if (MissplacedLocation(value, expectedLine) is { } location
+            && context.Node.SyntaxTree.GetText().Lines[expectedLine].Span.Length + location.SourceSpan.Length + 1 < MaxLineLength)
+        {
+            context.ReportIssue(Rule, location, message);
+        }
+    }
 
     private static Location MissplacedLocation(ExpressionSyntax value, int expectedLine)
     {
