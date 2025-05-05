@@ -17,19 +17,29 @@
 namespace SonarAnalyzer.CSharp.Styling.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class IndentTernary : IndentBase
+public sealed class IndentInvocation : IndentBase
 {
-    public IndentTernary() : base("T0025", "ternary") { }
+    public IndentInvocation() : base("T0026", "member access") { }
 
-    protected override void Initialize(SonarAnalysisContext context) =>
+    protected override void Initialize(SonarAnalysisContext context)
+    {
         context.RegisterNodeAction(c =>
             {
-                var ternary = (ConditionalExpressionSyntax)c.Node;
-                if (ExpectedPosition(ternary) is { } expected)
+                var memberAccess = (MemberAccessExpressionSyntax)c.Node;
+                if (ExpectedPosition(memberAccess) is { } expected)
                 {
-                    Verify(c, expected, ternary.QuestionToken, ternary.WhenTrue);
-                    Verify(c, expected, ternary.ColonToken, ternary.WhenFalse);
+                    Verify(c, expected, memberAccess.OperatorToken, memberAccess.Name);
                 }
             },
-            SyntaxKind.ConditionalExpression);
+            SyntaxKind.SimpleMemberAccessExpression);
+        context.RegisterNodeAction(c =>
+            {
+                var memberBinding = (MemberBindingExpressionSyntax)c.Node;
+                if (ExpectedPosition(memberBinding) is { } expected)
+                {
+                    Verify(c, expected, memberBinding.OperatorToken, memberBinding.Name);
+                }
+            },
+            SyntaxKind.MemberBindingExpression);
+    }
 }
