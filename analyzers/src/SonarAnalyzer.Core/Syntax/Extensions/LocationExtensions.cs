@@ -38,6 +38,9 @@ public static class LocationExtensions
     public static int StartLine(this Location location) =>
         location.GetLineSpan().StartLinePosition.Line;
 
+    public static int StartColumn(this Location location) =>
+        location.GetLineSpan().StartLinePosition.Character;
+
     public static int EndLine(this Location location) =>
         location.GetLineSpan().EndLinePosition.Line;
 

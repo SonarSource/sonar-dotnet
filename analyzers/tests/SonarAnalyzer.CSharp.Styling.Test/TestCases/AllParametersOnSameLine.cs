@@ -2,14 +2,14 @@
 
 public abstract class Sample
 {
-    public abstract void Empty(); //Compliant
-    public abstract void SingleParam(int param); //Compliant
-    public abstract void DoubleParam1(int a, int b); //Compliant
-    public abstract void DoubleParam2(int a, 
-        int b); //Compliant
+    public abstract void Empty(); // Compliant
+    public abstract void SingleParam(int param); // Compliant
+    public abstract void DoubleParam1(int a, int b); // Compliant
+    public abstract void DoubleParam2(int a,
+        int b); // Compliant
     public abstract void DoubleParam3(
         int a,
-        int b); //Compliant
+        int b); // Compliant
 
     public abstract void CompliantSingleLineMethod(string first, string second, string third, string fourth); // Compliant
 
@@ -73,7 +73,7 @@ public abstract class Sample
     string fourth);
 
     public abstract void Foo7(
-    string first //compliant
+    string first // compliant
 
 
     ,
@@ -83,106 +83,111 @@ public abstract class Sample
     , string third,
     string fourth);
 
-    //DelegateDeclarationSyntax
+    // DelegateDeclarationSyntax
     public delegate void Compliant(int a, int b, int c);
     public delegate void Noncompliant(int a, int b,
         int c); // Noncompliant
 
-    //ParenthesizedLambdaExpressionSyntax
-    Func<int, int, int> pleC = (int x, int y) => x + y; //Compliant
+    // ParenthesizedLambdaExpressionSyntax
+    Func<int, int, int> pleC = (int x, int y) => x + y; // Compliant
     Func<int,
         int, int, int> pleNC = (int x, int y
-        , int z) => x + y + z; //Noncompliant
+        , int z) => x + y + z; // Noncompliant
 
-    //AnonymousMethodExpression
+    // AnonymousMethodExpression
     public void Ame()
     {
-        Action<int, int, int> ame = delegate (int x, int y, int z) //Compliant
+        Action<int, int, int> ame = delegate (int x, int y, int z) // Compliant
         { };
         ame = delegate (int x, int y,
-            int z) //Noncompliant
+            int z) // Noncompliant
         { };
     }
 
-    //LocalFunctionStatementSyntax
+    // LocalFunctionStatementSyntax
     public void lfs()
     {
-        void localFS(int x, int y, int z) //Compliant
+        void localFS(int x, int y, int z) // Compliant
         { };
 
         void localFSNoncompliant(int x,
-            int y, int z) //Noncompliant
+            int y, int z) // Noncompliant
         { };
     }
 
-    public abstract void EndOfLineInParameter(int x, string y, params //Noncompliant
+    public abstract void EndOfLineInParameter(int x, string y, params // Compliant
     int
     []
     otherParams);
 
-    public abstract void EndOfLineEndParameters(int x, string y, params int[] otherParams //Compliant
+    public abstract void EndOfLineEndParameters(int x, string y, params int[] otherParams // Compliant
         );
 
     public abstract void CommaInParams1((int,
-int) x, int y, int z);  //Compliant
+int) x, int y, int z);  // Noncompliant
 
-    public abstract void CommaInParams2(
-    Action<int,
-    int> a, int b, int c); //Compliant
+    public abstract void CommaInParams2((int, int) x, int y, int z);  // Compliant
 
-    public abstract void CommaInParams3((int,
-        int) x, int y,
-        int z); //Noncompliant
+    public abstract void CommaInParams3(
+        Action<int,
+            int> a, int b, int c); // Noncompliant
 
     public abstract void CommaInParams4(
-        Action<int,
-        int> a, int b
-            , int c); //Noncompliant
+        Action<int, int> a, int b, int c); // Compliant
 
-    public abstract void CommaInParams5(
-        Action<int,
-        int> a,
-        int b, int c); //Noncompliant
+    public abstract void CommaInParams5((int,
+        int) x, int y,
+        int z); // Compliant - FN
 
     public abstract void CommaInParams6(
+        Action<int,
+        int> a, int b
+            , int c); // Compliant - FN
+
+    public abstract void CommaInParams7(
+        Action<int,
+        int> a,
+        int b, int c); // Noncompliant
+
+    public abstract void CommaInParams8(
         Func<string,
         int> a, Action<int,
         int> b
-            , string c = "Hello"); //Compliant
+            , string c = "Hello"); // Compliant
 }
-//FunctionPointerSyntax
+// FunctionPointerSyntax
 public unsafe class Example
 {
-    public delegate*<int, int, int> Compliant; //Compliant
+    public delegate*<int, int, int> Compliant; // Compliant
     public delegate*<int,
-        int, int> Noncompliant; //Noncompliant
+        int, int> Noncompliant; // Noncompliant
 }
 
-//ClassDeclarationSyntax
-public class cdsC(int a, int b, int c) { } //Compliant
+// ClassDeclarationSyntax
+public class cdsC(int a, int b, int c) { } // Compliant
 public class cdsNC(int a,
-    int b, int c) //Noncompliant
-{ } 
+    int b, int c) // Noncompliant
+{ }
 
-//StructDeclarationSyntax
-public struct sdsC(int a, int b, int c) { } //Compliant
+// StructDeclarationSyntax
+public struct sdsC(int a, int b, int c) { } // Compliant
 public struct sdsNC(int a,
-    int b, int c) //Noncompliant
-{ } 
+    int b, int c) // Noncompliant
+{ }
 
-//InterfaceDeclarationSyntax
-public interface ICompliant<T, X, Y> //Compliant
+// InterfaceDeclarationSyntax
+public interface ICompliant<T, X, Y> // Compliant
 { }
 public interface INoncompliant<T,
-    X, Y> //Noncompliant
+    X, Y> // Noncompliant
 { }
 
-//RecordDeclarationSyntax
-public record rdsC(int a, int b, int c); //Compliant
+// RecordDeclarationSyntax
+public record rdsC(int a, int b, int c); // Compliant
 public record rdsNC(int a, int b,
-    int c); //Noncompliant
+    int c); // Noncompliant
 
-//ConstructorDeclarationSyntax
+// ConstructorDeclarationSyntax
 public abstract class Constructor
 {
     public abstract void Compliant(
@@ -194,13 +199,13 @@ public abstract class Constructor
     public abstract void Noncompliant(
         int a,
         int b,
-        int c, int d); //Noncompliant
+        int c, int d); // Noncompliant
 }
 
-//IndexerDeclarationSyntax
+// IndexerDeclarationSyntax
 public class idsC
 {
-    public int this[int a, int b, int c] //Compliant
+    public int this[int a, int b, int c] // Compliant
     {
         get
         {
@@ -213,7 +218,7 @@ public class idsC
 public class idsNC
 {
     public int this[int a,
-        int b, int c] //Noncompliant
+        int b, int c] // Noncompliant
     {
         get
         {

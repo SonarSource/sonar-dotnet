@@ -17,25 +17,21 @@
 namespace SonarAnalyzer.CSharp.Styling.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class AllParametersOnSameLine : AllParametersBase
+public class AllParametersOnSameColumn : AllParametersBase
 {
-    public AllParametersOnSameLine() : base("T0023", "Parameters should be on the same line or all on separate lines.") { }
+    public AllParametersOnSameColumn() : base("T0022", "Parameters should start on the same column.") { }
 
     protected override void Verify(SonarSyntaxNodeReportingContext context, SyntaxNode[] parameters)
     {
-        if (parameters.Length < 3)
+        foreach (var parameter in parameters.Skip(1))
         {
-            return;
-        }
-
-        var isSameLine = IsSameLine(parameters[0], parameters[1]);
-        for (var i = 2; i < parameters.Length; i++)
-        {
-            if (isSameLine != IsSameLine(parameters[i - 1], parameters[i]))
+            if (!IsSameLine(parameters[0], parameter) && !IsSameColumn(parameters[0], parameter))
             {
-                context.ReportIssue(Rule, parameters[i]);
-                return;
+                context.ReportIssue(Rule, parameter);
             }
         }
     }
+
+    private static bool IsSameColumn(SyntaxNode first, SyntaxNode second) =>
+        first.GetLocation().StartColumn() == second.GetLocation().StartColumn();
 }
