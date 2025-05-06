@@ -216,9 +216,10 @@ public static class SyntaxNodeExtensionsCSharp
             PostfixUnaryExpressionSyntax { Operand: { } operand } => GetIdentifier(operand),
             UsingDirectiveSyntax { Alias.Name: { } name } => GetIdentifier(name),
             VariableDeclaratorSyntax { Identifier: var identifier } => identifier,
-            { } implicitNew when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(implicitNew) => ((ImplicitObjectCreationExpressionSyntaxWrapper)implicitNew).NewKeyword,
             { } fileScoped when FileScopedNamespaceDeclarationSyntaxWrapper.IsInstance(fileScoped)
                 && ((FileScopedNamespaceDeclarationSyntaxWrapper)fileScoped).Name is { } name => GetIdentifier(name),
+            { } localFunction when LocalFunctionStatementSyntaxWrapper.IsInstance(localFunction) => ((LocalFunctionStatementSyntaxWrapper)localFunction).Identifier,
+            { } implicitNew when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(implicitNew) => ((ImplicitObjectCreationExpressionSyntaxWrapper)implicitNew).NewKeyword,
             { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
                 && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),
             { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),

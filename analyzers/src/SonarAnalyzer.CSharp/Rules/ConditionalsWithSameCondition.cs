@@ -40,7 +40,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckMatchingExpressionsInSucceedingStatements<T>(SonarSyntaxNodeReportingContext context, Func<T, ExpressionSyntax> expression) where T : StatementSyntax
         {
             var currentStatement = (T)context.Node;
-            if (currentStatement.GetPrecedingStatement() is T previousStatement)
+            if (currentStatement.PrecedingStatement() is T previousStatement)
             {
                 var currentExpression = expression(currentStatement);
                 var previousExpression = expression(previousStatement);

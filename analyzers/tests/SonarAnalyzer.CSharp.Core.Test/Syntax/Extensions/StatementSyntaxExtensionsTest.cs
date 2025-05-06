@@ -20,37 +20,31 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 public class StatementSyntaxExtensionsTest
 {
     [TestMethod]
-    public void GetPrecedingStatement()
+    public void PrecedingStatement()
     {
-        var source = """
-            namespace Test
-            {
-                class TestClass
-                {
-                    int a = 1;
-                    public void DoSomething(){}
-                    public void IfMethod()
-                    {
-                        if (a>1)
-                            DoSomething();
-                        if (a<0)
-                            DoSomething();
-                    }
-                }
-            }
-            """;
-        var ifMethodStatements = DescendantNodes<MethodDeclarationSyntax>(source)
-            .First(m => m.Identifier.ValueText == "IfMethod")
+        var ifMethodStatements = DescendantNodes<MethodDeclarationSyntax>()
+            .First(x => x.Identifier.ValueText == "IfMethod")
             .Body.Statements.ToList();
 
-        var ifStatementA = ifMethodStatements[0];
-        var ifStatementB = ifMethodStatements[1];
-        ifStatementB.GetPrecedingStatement().Should().BeEquivalentTo(ifStatementA);
-        ifStatementA.GetPrecedingStatement().Should().Be(null);
+        ifMethodStatements[2].PrecedingStatement().Should().BeEquivalentTo(ifMethodStatements[1]);
+        ifMethodStatements[1].PrecedingStatement().Should().BeEquivalentTo(ifMethodStatements[0]);
+        ifMethodStatements[0].PrecedingStatement().Should().Be(null);
     }
 
     [TestMethod]
-    public void GetPrecedingStatementTopLevelStatements()
+    public void FollowingStatement()
+    {
+        var ifMethodStatements = DescendantNodes<MethodDeclarationSyntax>()
+            .First(x => x.Identifier.ValueText == "IfMethod")
+            .Body.Statements.ToList();
+
+        ifMethodStatements[0].FollowingStatement().Should().BeEquivalentTo(ifMethodStatements[1]);
+        ifMethodStatements[1].FollowingStatement().Should().BeEquivalentTo(ifMethodStatements[2]);
+        ifMethodStatements[2].FollowingStatement().Should().Be(null);
+    }
+
+    [TestMethod]
+    public void PrecedingStatementTopLevelStatements()
     {
         var sourceTopLevelStatement = """
             var a = 1;
@@ -64,12 +58,23 @@ public class StatementSyntaxExtensionsTest
         var variableDeclarators = DescendantNodes<LocalDeclarationStatementSyntax>(sourceTopLevelStatement).ToArray();
         var aDeclaration = variableDeclarators[0];
         var bDeclaration = variableDeclarators[1];
-        aDeclaration.GetPrecedingStatement().Should().Be(null);
-        bDeclaration.GetPrecedingStatement().Should().BeEquivalentTo(aDeclaration);
+        aDeclaration.PrecedingStatement().Should().Be(null);
+        bDeclaration.PrecedingStatement().Should().BeEquivalentTo(aDeclaration);
     }
 
     [TestMethod]
     public void FirstNonBlockStatement_NoBlock()
+    {
+        var ifStatements = DescendantNodes<IfStatementSyntax>()
+            .Select(x => x.Statement)
+            .ToArray();
+        var expressionStatements = DescendantNodes<ExpressionStatementSyntax>().ToArray();
+        ifStatements[0].FirstNonBlockStatement().Span.Should().Be(expressionStatements[0].Span);
+        ifStatements[1].FirstNonBlockStatement().Span.Should().Be(expressionStatements[1].Span);
+        ifStatements[2].FirstNonBlockStatement().Span.Should().Be(expressionStatements[2].Span);
+    }
+
+    private static IEnumerable<T> DescendantNodes<T>()
     {
         var source = """
             namespace Test
@@ -95,13 +100,7 @@ public class StatementSyntaxExtensionsTest
                 }
             }
             """;
-        var ifStatements = DescendantNodes<IfStatementSyntax>(source)
-            .Select(x => x.Statement)
-            .ToArray();
-        var expressionStatements = DescendantNodes<ExpressionStatementSyntax>(source).ToArray();
-        ifStatements[0].FirstNonBlockStatement().Span.Should().Be(expressionStatements[0].Span);
-        ifStatements[1].FirstNonBlockStatement().Span.Should().Be(expressionStatements[1].Span);
-        ifStatements[2].FirstNonBlockStatement().Span.Should().Be(expressionStatements[2].Span);
+        return DescendantNodes<T>(source);
     }
 
     private static IEnumerable<T> DescendantNodes<T>(string source) =>

@@ -21,17 +21,21 @@ public static class StatementSyntaxExtensions
     /// <summary>
     /// Returns the statement before the statement given as input.
     /// </summary>
-    public static StatementSyntax GetPrecedingStatement(this StatementSyntax statement)
-    {
-        var siblings = statement.Parent is GlobalStatementSyntax
-            ? statement.SyntaxTree
-                .GetCompilationUnitRoot()
-                .ChildNodes()
-                .OfType<GlobalStatementSyntax>()
-                .Select(x => x.Statement)
-            : statement.Parent.ChildNodes();
-        return statement.GetPrecedingStatement(siblings);
-    }
+    public static StatementSyntax PrecedingStatement(this StatementSyntax statement) =>
+        statement.SiblingStatements()
+            .OfType<StatementSyntax>()
+            .TakeWhile(x => x != statement)
+            .LastOrDefault();
+
+    /// <summary>
+    /// Returns the statement after the statement given as input.
+    /// </summary>
+    public static StatementSyntax FollowingStatement(this StatementSyntax statement) =>
+        statement.SiblingStatements()
+            .OfType<StatementSyntax>()
+            .SkipWhile(x => x != statement)
+            .Skip(1)
+            .FirstOrDefault();
 
     public static StatementSyntax FirstNonBlockStatement(this StatementSyntax statement)
     {
@@ -46,8 +50,12 @@ public static class StatementSyntaxExtensions
         return null;
     }
 
-    private static StatementSyntax GetPrecedingStatement(this StatementSyntax statement, IEnumerable<SyntaxNode> statementSiblingNodes) =>
-        statementSiblingNodes.OfType<StatementSyntax>()
-            .TakeWhile(x => x != statement)
-            .LastOrDefault();
+    private static IEnumerable<SyntaxNode> SiblingStatements(this StatementSyntax statement) =>
+        statement.Parent is GlobalStatementSyntax
+            ? statement.SyntaxTree
+                .GetCompilationUnitRoot()
+                .ChildNodes()
+                .OfType<GlobalStatementSyntax>()
+                .Select(x => x.Statement)
+            : statement.Parent.ChildNodes();
 }
