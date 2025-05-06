@@ -22,34 +22,49 @@ public abstract class IndentBase : StylingAnalyzer
 {
     protected IndentBase(string id, string expressionName) : base(id, $$"""Indent this {{expressionName}} at line position {0}.""") { }
 
-    protected void Verify(SonarSyntaxNodeReportingContext context, int expected, SyntaxToken token, SyntaxNode reportingLocationExpression)
+    protected void Verify(SonarSyntaxNodeReportingContext context, int expected, SyntaxToken token, SyntaxNode reportingLocationExpression = null)
     {
         if (token.Line() != token.GetPreviousToken().Line() // Raise only when the line starts with this token to avoid collisions with T0024, T0027, etc.
             && token.GetLocation().GetLineSpan().StartLinePosition.Character != expected)
         {
-            context.ReportIssue(Rule, Location.Create(token.SyntaxTree, TextSpan.FromBounds(token.SpanStart, reportingLocationExpression.Span.End)), (expected + 1).ToString());
+            context.ReportIssue(Rule, Location.Create(token.SyntaxTree, TextSpan.FromBounds(token.SpanStart, (reportingLocationExpression?.Span ?? token.Span).End)), (expected + 1).ToString());
         }
     }
 
-    protected static int? ExpectedPosition(SyntaxNode node) =>
+    protected virtual int Offset(SyntaxNode node, SyntaxNode root) =>
+        4;
+
+    protected int? ExpectedPosition(SyntaxNode node) =>
         StatementRoot(node) is { } root
-            ? (root.GetLocation().GetLineSpan().StartLinePosition.Character + 4) / 4 * 4    // Nearest next tab distance
+            ? (root.GetLocation().GetLineSpan().StartLinePosition.Character + Offset(node, root)) / 4 * 4    // Nearest next tab distance
             : null;
 
-    private static SyntaxNode StatementRoot(SyntaxNode node)
+    protected virtual SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
+    {
+        if (current is ForStatementSyntax)
+        {
+            return node;    // Root from the ternary condition itself
+        }
+        else if (current is StatementSyntax
+            || current is ExpressionSyntax { Parent: IfStatementSyntax or WhileStatementSyntax }
+            || current.Parent is ArrowExpressionClauseSyntax or ArgumentSyntax or LambdaExpressionSyntax)
+        {
+            return current;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private SyntaxNode StatementRoot(SyntaxNode node)
     {
         var current = node;
         while (current is not null)
         {
-            if (current is ForStatementSyntax)
+            if (NodeRoot(node, current) is { } result)
             {
-                return node;    // Root from the ternary condition itself
-            }
-            else if (current is StatementSyntax
-                || (current is ExpressionSyntax && current.Parent is IfStatementSyntax or WhileStatementSyntax)
-                || current.Parent is ArrowExpressionClauseSyntax or ArgumentSyntax or LambdaExpressionSyntax)
-            {
-                return current;
+                return result;
             }
             else
             {
