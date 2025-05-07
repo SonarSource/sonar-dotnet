@@ -43,7 +43,7 @@ public abstract class IndentBase : StylingAnalyzer
     {
         if (current is ForStatementSyntax)
         {
-            return node;    // Root from the ternary condition itself
+            return node;    // Root from the original node itself (ternary, binary, ...)
         }
         else if (current is StatementSyntax
             || current is ExpressionSyntax { Parent: IfStatementSyntax or WhileStatementSyntax }
