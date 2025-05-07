@@ -20,9 +20,11 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 public static class IOperationExtensions
 {
+    [Obsolete("Use extension methods for IOperation properties instead.")] // should be made private and ObsoleteAttribute removed when there is no usage outside of this file left
     public static IOperationWrapperSonar ToSonar(this IOperation operation) =>
         new(operation);
 
+    [Obsolete("Use extension methods for IOperation properties instead.")] // should be made private and ObsoleteAttribute removed when there is no usage outside of this file left
     public static IOperationWrapperSonar ToSonar(this IOperationWrapper operation) =>
         new(operation.WrappedOperation);
 
@@ -33,7 +35,7 @@ public static class IOperationExtensions
         operation.WrappedOperation.Parent();
 
     public static IEnumerable<IOperation> Children(this IOperation operation) =>
-    operation.ToSonar().Children;
+        operation.ToSonar().Children;
 
     public static IEnumerable<IOperation> Children(this IOperationWrapper operation) =>
         operation.WrappedOperation.Children();
