@@ -60,6 +60,12 @@ public class OperatorLocation : StylingAnalyzer
                 Validate(c, conditional.ColonToken);
             },
             SyntaxKind.ConditionalExpression);
+        context.RegisterNodeAction(c => Validate(c, ((MemberAccessExpressionSyntax)c.Node).OperatorToken),
+            SyntaxKind.SimpleMemberAccessExpression);
+        context.RegisterNodeAction(c => Validate(c, ((MemberBindingExpressionSyntax)c.Node).OperatorToken),
+            SyntaxKind.MemberBindingExpression);
+        context.RegisterNodeAction(c => Validate(c, ((QualifiedNameSyntax)c.Node).DotToken),
+            SyntaxKind.QualifiedName);
     }
 
     private void Validate(SonarSyntaxNodeReportingContext context, SyntaxToken token)

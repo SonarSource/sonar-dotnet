@@ -1,8 +1,14 @@
 ﻿using System.Collections.Generic;
+using System
+    .Collections
+    .Generic;
+using System.       // Noncompliant
+    Collections.    // Noncompliant
+    Generic;
 
 class MyClass
 {
-    void Compliant(int a, int b, int c, object o, List<int> list)
+    void Compliant(int a, int b, int c, object o, List<int?> list)
     {
         _ = a + b;
         _ =
@@ -32,12 +38,6 @@ class MyClass
             a - b;
         c ^=
             a - b;
-        o?
-            .
-            ToString();
-        o!
-            .
-            ToString();
 
         o.ToString
             ();
@@ -45,6 +45,10 @@ class MyClass
             [0];
         _ = list!
             [0];
+        _ = list[0]
+            .ToString();
+        _ = list?[0]?
+            .ToString();
     }
 
     void LogicalOperator(bool a, bool b)
@@ -82,11 +86,11 @@ class MyClass
             2;
 
         _ = a
-            && // Noncompliant
+            &&  // Noncompliant
             b
-            ? // Noncompliant {{The '?' operator should not be at the end of the line.}}
+            ?   // Noncompliant {{The '?' operator should not be at the end of the line.}}
             1
-            : // Noncompliant {{The ':' operator should not be at the end of the line.}}
+            :   // Noncompliant {{The ':' operator should not be at the end of the line.}}
             2;
     }
 
@@ -108,135 +112,135 @@ class MyClass
     void AsIs(object o)
     {
         _ = o as string;
-        _ = o as // Noncompliant
+        _ = o as    // Noncompliant
             string;
         _ = o
-            as // Noncompliant
+            as      // Noncompliant
             string;
         _ = o is string;
-        _ = o is // Noncompliant
+        _ = o is    // Noncompliant
             string;
         _ = o
-            is // Noncompliant
+            is      // Noncompliant
             string;
     }
 
     void Pattern(object o1, object o2)
     {
         _ = o1 is int or float;
-        _ = o1 is // Noncompliant
+        _ = o1 is                               // Noncompliant
             int or float;
-        _ = o1 is int or // Noncompliant
+        _ = o1 is int or                        // Noncompliant
             float;
 
-        _ = o1 is string { Length: > 5 } and // Noncompliant {{The 'and' operator should not be at the end of the line.}}
+        _ = o1 is string { Length: > 5 } and    // Noncompliant {{The 'and' operator should not be at the end of the line.}}
             { Length: < 10 };
 
         _ = o2 is string { Length: > 5 }
-            and // Noncompliant
+            and                                 // Noncompliant
             { Length: < 10 };
     }
 
     void Arithmetic(int a, int b, string str)
     {
         _ = a + b;
-        _ = a + // Noncompliant
+        _ = a +             // Noncompliant
             b;
         _ = a
-            + // Noncompliant
+            +               // Noncompliant
             b;
         _ = a - b;
-        _ = a - // Noncompliant
+        _ = a -             // Noncompliant
             b;
         _ = a
-            - // Noncompliant
+            -               // Noncompliant
             b;
         _ = a * b;
-        _ = a * // Noncompliant
+        _ = a *             // Noncompliant
             b;
         _ = a
-            * // Noncompliant
+            *               // Noncompliant
             b;
         _ = a / b;
-        _ = a / // Noncompliant
+        _ = a /             // Noncompliant
             b;
         _ = a
-            / // Noncompliant
+            /               // Noncompliant
             b;
         _ = a % b;
-        _ = a % // Noncompliant
+        _ = a %             // Noncompliant
             b;
         _ = a
-            % // Noncompliant
+            %               // Noncompliant
             b;
 
         _ = str + " text " + str;
-        _ = str + // Noncompliant
+        _ = str +           // Noncompliant
             " text " + str;
         _ = str
-            + " text " + // Noncompliant
+            + " text " +    // Noncompliant
             str;
     }
 
     void Comparison(int a, int b)
     {
         _ = a == b;
-        _ = a == // Noncompliant
+        _ = a ==    // Noncompliant
             b;
         _ = a
-            == // Noncompliant
+            ==      // Noncompliant
             b;
         _ = a != b;
-        _ = a != // Noncompliant
+        _ = a !=    // Noncompliant
             b;
         _ = a
-            != // Noncompliant
+            !=      // Noncompliant
             b;
         _ = a < b;
-        _ = a < // Noncompliant
+        _ = a <     // Noncompliant
             b;
         _ = a
-            < // Noncompliant
+            <       // Noncompliant
             b;
         _ = a > b;
-        _ = a > // Noncompliant
+        _ = a >     // Noncompliant
             b;
         _ = a
-            > // Noncompliant
+            >       // Noncompliant
             b;
         _ = a <= b;
-        _ = a <= // Noncompliant
+        _ = a <=    // Noncompliant
             b;
         _ = a
-            <= // Noncompliant
+            <=      // Noncompliant
             b;
         _ = a >= b;
-        _ = a >= // Noncompliant
+        _ = a >=    // Noncompliant
             b;
         _ = a
-            >= // Noncompliant
+            >=      // Noncompliant
             b;
     }
 
     void Shift(int a, int b)
     {
         _ = a << b;
-        _ = a << // Noncompliant
+        _ = a <<    // Noncompliant
             b;
         _ = a
-            << // Noncompliant
+            <<      // Noncompliant
             b;
         _ = a >> b;
-        _ = a >> // Noncompliant
+        _ = a >>    // Noncompliant
             b;
         _ = a
-            >> // Noncompliant
+            >>      // Noncompliant
             b;
         _ = a >>> b;
-        _ = a >>> // Noncompliant
+        _ = a >>>   // Noncompliant
             b;
         _ = a
-            >>> // Noncompliant
+            >>>     // Noncompliant
             b;
     }
 
@@ -283,10 +287,69 @@ class MyClass
     void Range()
     {
         _ = 1..2;
+        _ = 1
+            ..2;
         _ = 1.. // Noncompliant
             2;
         _ = 1
             .. // Noncompliant
             2;
     }
+
+    void MemberAccess(object o)
+    {
+        _ = o.ToString();
+        _ = o
+            .ToString();
+        _ = o.              // Noncompliant
+            ToString();
+        _ = o?.ToString().ToString();
+        _ = o?
+            .ToString()!
+            .ToString();
+        _ = o!
+            .ToString()?
+            .ToString();
+        _ = o?.             // Noncompliant {{The '.' operator should not be at the end of the line.}}
+        //    ^
+            ToString()?.    // Noncompliant
+            ToString();
+        _ = o!.             // Noncompliant
+            ToString()!.    // Noncompliant
+            ToString();
+
+        o?
+            .               // Noncompliant
+            ToString();
+        o!
+            .               // Noncompliant
+            ToString();
+    }
+
+    void QualifiedName()
+    {
+        System.Console.BackgroundColor = System.ConsoleColor.Yellow;
+        System
+            .Console
+            .BackgroundColor = System
+                .ConsoleColor
+                .Yellow;
+        System.                         // Noncompliant
+            Console.                    // Noncompliant
+            BackgroundColor = System.   // Noncompliant
+                ConsoleColor.           // Noncompliant
+                Yellow;
+
+    }
 }
+
+namespace MyNamespace.With.Some.Dots { }
+namespace MyNamespace
+    .With
+    .Some
+    .Dots { }
+namespace MyNamespace.  // FN, Roslyn doesn't call us back in this case => we don't care
+    With.               // FN, Roslyn doesn't call us back in this case => we don't care
+    Some.               // Noncompliant
+    Dots { }
+
