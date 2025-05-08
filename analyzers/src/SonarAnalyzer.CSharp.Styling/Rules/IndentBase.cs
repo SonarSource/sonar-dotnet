@@ -57,12 +57,19 @@ public abstract class IndentBase : StylingAnalyzer
         }
     }
 
+    protected virtual bool IsIgnored(SyntaxNode node) =>
+        false;
+
     private SyntaxNode StatementRoot(SyntaxNode node)
     {
         var current = node;
         while (current is not null)
         {
-            if (NodeRoot(node, current) is { } result)
+            if (IsIgnored(current))
+            {
+                return null;
+            }
+            else if (NodeRoot(node, current) is { } result)
             {
                 return result;
             }
