@@ -137,13 +137,20 @@ public static class IEnumerableExtensions
     /// </list>
     /// </summary>
     public static string JoinAnd<T>(this IEnumerable<T> values) =>
-        values?.Select(x => x?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToList() switch
-        {
-            { Count: > 2 } serial => $"{serial.Take(serial.Count - 1).JoinStr(", ")}, and {serial.Last()}",
-            { Count: 2 } pair => $"{pair[0]} and {pair[1]}",
-            { Count: 1 } single => single[0],
-            _ => string.Empty,
-        };
+        values.JoinWith("and");
+
+    /// <summary>
+    /// Concatenates the members of <paramref name="values"/> using "or" as the last separator and using a
+    /// <see href="https://en.wikipedia.org/wiki/Serial_comma">serial comma</see>.
+    /// <list type="table">
+    /// <item><c>[a, b, c] => "a, b, or c"</c></item>
+    /// <item><c>[a, b] => "a or b"</c></item>
+    /// <item><c>[a] => "a"</c></item>
+    /// <item><c>[] or null => ""</c></item>
+    /// </list>
+    /// </summary>
+    public static string JoinOr<T>(this IEnumerable<T> values) =>
+        values.JoinWith("or");
 
     public static IEnumerable<SecondaryLocation> ToSecondary(this IEnumerable<Location> locations, string message = null, params string[] messageArgs) =>
         locations.Select(x => x.ToSecondary(message, messageArgs));
@@ -173,4 +180,13 @@ public static class IEnumerableExtensions
                     .ToString(),
         };
     }
+
+    private static string JoinWith<T>(this IEnumerable<T> values, string with) =>
+        values?.Select(x => x?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToList() switch
+        {
+            { Count: > 2 } serial => $"{serial.Take(serial.Count - 1).JoinStr(", ")}, {with} {serial[serial.Count - 1]}",
+            { Count: 2 } pair => $"{pair[0]} {with} {pair[1]}",
+            { Count: 1 } single => single[0],
+            _ => string.Empty,
+        };
 }
