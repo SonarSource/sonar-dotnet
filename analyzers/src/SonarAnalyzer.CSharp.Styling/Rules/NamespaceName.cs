@@ -28,7 +28,7 @@ public sealed class NamespaceName : StylingAnalyzer
                 var removableUsing = declaration.Name.ToString().Replace(".Test.", ".");
                 if (c.Tree.GetRoot().ChildNodes().OfType<UsingDirectiveSyntax>().Any(x => x.Name.ToString() == removableUsing))
                 {
-                    c.ReportIssue(Rule, c.Node, removableUsing + ".Test");
+                    c.ReportIssue(Rule, declaration.Name, removableUsing + ".Test");
                 }
             },
             SyntaxKind.FileScopedNamespaceDeclaration);

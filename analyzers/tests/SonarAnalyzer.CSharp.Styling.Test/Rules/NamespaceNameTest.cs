@@ -46,6 +46,16 @@ public class NamespaceNameTest
             .Verify();
 
     [TestMethod]
+    public void NamespaceName_NoncompliantLocation() =>
+        builder
+            .AddSnippet("""
+                using SonarAnalyzer.Project.Folder.Something;
+                namespace SonarAnalyzer.Project.Test.Folder.Something;   // Noncompliant {{Use SonarAnalyzer.Project.Folder.Something.Test namespace.}}
+                //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                """)
+            .Verify();
+
+    [TestMethod]
     public void NamespaceName_ExpectedWithUsing() =>
         builder
             .AddSnippet($"""
