@@ -30,9 +30,6 @@ public abstract class AllParametersBase : StylingAnalyzer
             SyntaxKind.TypeParameterList,
             SyntaxKindEx.FunctionPointerParameterList);
 
-    protected static bool IsSameLine(SyntaxNode first, SyntaxNode second) =>
-        first.GetLocation().StartLine() == second.GetLocation().StartLine();
-
     private static IEnumerable<SyntaxNode> Parameters(SyntaxNode node) =>
         node switch
         {

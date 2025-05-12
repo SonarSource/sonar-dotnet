@@ -25,7 +25,7 @@ public class AllParametersOnSameColumn : AllParametersBase
     {
         foreach (var parameter in parameters.Skip(1))
         {
-            if (!IsSameLine(parameters[0], parameter) && !IsSameColumn(parameters[0], parameter))
+            if (!parameters[0].HasSameStartLineAs(parameter) && !IsSameColumn(parameters[0], parameter))
             {
                 context.ReportIssue(Rule, parameter);
             }

@@ -28,10 +28,10 @@ public sealed class AllParametersOnSameLine : AllParametersBase
             return;
         }
 
-        var isSameLine = IsSameLine(parameters[0], parameters[1]);
+        var isSameLine = parameters[0].HasSameStartLineAs(parameters[1]);
         for (var i = 2; i < parameters.Length; i++)
         {
-            if (isSameLine != IsSameLine(parameters[i - 1], parameters[i]))
+            if (isSameLine != parameters[i - 1].HasSameStartLineAs(parameters[i]))
             {
                 context.ReportIssue(Rule, parameters[i]);
                 return;

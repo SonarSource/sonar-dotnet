@@ -27,9 +27,8 @@ public sealed class MemberAccessLine : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var memberAccess = (MemberAccessExpressionSyntax)c.Node;
-                var nameLine = memberAccess.Name.GetLocation().StartLine();
-                if (memberAccess.GetLocation().StartLine() != nameLine   // ToDo: Use HasSameLineAs
-                    && memberAccess.OperatorToken.GetPreviousToken().GetLocation().EndLine() == nameLine
+                if (!memberAccess.HasSameStartLineAs(memberAccess.Name)
+                    && memberAccess.OperatorToken.GetPreviousToken().GetLocation().EndLine() == memberAccess.Name.GetLocation().StartLine()
                     && !IsIgnored(memberAccess))
                 {
                     c.ReportIssue(Rule, Location.Create(c.Tree, TextSpan.FromBounds(memberAccess.OperatorToken.SpanStart, memberAccess.Span.End)));
