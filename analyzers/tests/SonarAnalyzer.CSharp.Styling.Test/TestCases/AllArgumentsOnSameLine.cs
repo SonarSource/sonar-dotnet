@@ -25,7 +25,7 @@ class ILiedObsolete { }
 
 class ArgumentsOnSameLine
 {
-    static void Method(params object[] args) { }
+    static object Method(params object[] args) => null;
 
     static void TypedMethod<T1, T2, T3, T4>() { }
 
@@ -85,6 +85,42 @@ class ArgumentsOnSameLine
             c: 0,
             b: 0,
             a: 0);
+
+        Method("""
+            We want to ignore this
+            """,
+            true);
+        Method($"""
+            We want to ignore {this}
+            """,
+            true);
+        Method("""
+            We want to ignore this
+            """, """
+            And also this
+            """);
+        Method($"""
+            We want to ignore {this}
+            """, $"""
+            And also {this}
+            """);
+        Method(
+            true,
+            true, """
+            This isn't great, but also ignorable
+            """);
+        Method( // Noncompliant@+1, because this is evaluated as a single-line scenario
+            true, """
+            This isn't great, but also ignorable
+            """);
+        Method(true, """
+            This isn't great, but also ignorable
+            """);
+
+        // We don't want to raise on the outer invocation if the inner one is too long
+        Method("first", Method("""
+            Last argument is long, we start to raise here
+            """));
     }
 
     void NonCompliant(List<string> list, int a)
@@ -153,6 +189,14 @@ class ArgumentsOnSameLine
             d: 0,
             c: 0, b: 0,             // Noncompliant
             a: 0);
+
+        Method("""Not OK""",        // Noncompliant
+            true);
+        Method($"""Not {42} OK""",  // Noncompliant
+            true);
+        Method($"Not {42} OK",      // Noncompliant
+            true);
+
     }
 
     void LocalFunction()
