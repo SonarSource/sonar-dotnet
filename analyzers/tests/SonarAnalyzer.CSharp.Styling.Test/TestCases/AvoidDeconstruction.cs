@@ -113,7 +113,22 @@ public class Sample
         return name + name + name;  // Same name, different symbol
     }
 
-    public object MayReturnPerson() => null;
+    public object SwitchExpressionVar(object o) =>
+        MayReturnPerson(o) switch
+        {
+            var necessary when necessary.ToString() == "" => necessary,
+            var _ when o is null => null,
+            var acceptable => acceptable
+        };
+
+    public object SwitchExpressionDiscard(object o) =>
+        MayReturnPerson(o) switch
+        {
+            _ when o is null => "Also needed",
+            _ => null
+        };
+
+    public object MayReturnPerson(object arg = null) => null;
 }
 
 public record Person(string Name, Address Address);

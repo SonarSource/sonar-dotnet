@@ -30,7 +30,7 @@ public sealed class AvoidDeconstruction : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var varPattern = (VarPatternSyntax)c.Node;
-                if (varPattern.Parent is not IsPatternExpressionSyntax)
+                if (varPattern.Parent is not IsPatternExpressionSyntax and not SwitchExpressionArmSyntax)
                 {
                     if (varPattern.Designation is DiscardDesignationSyntax)
                     {
