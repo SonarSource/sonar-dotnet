@@ -38,6 +38,10 @@ public class Sample
             && second.Name == name
             && second.Count > min)
         { }
+        else if (Invocation() is var unavoidable
+            && unavoidable.Name == name
+            && unavoidable.Count > min)
+        { }
 
         while (Invocation() is var inWhile  // Noncompliant
             && inWhile.Name == name

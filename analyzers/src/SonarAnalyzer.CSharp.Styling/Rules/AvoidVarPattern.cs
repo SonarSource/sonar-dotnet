@@ -44,6 +44,6 @@ public sealed class AvoidVarPattern : StylingAnalyzer
                 node = node.Parent;
             }
         }
-        return node.Parent is IfStatementSyntax or WhileStatementSyntax or ForStatementSyntax;
+        return node.Parent is IfStatementSyntax { Parent: not ElseClauseSyntax } or WhileStatementSyntax or ForStatementSyntax;
     }
 }
