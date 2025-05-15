@@ -110,7 +110,37 @@ public class Sample
         Invocation(Invocation(Invocation(   // This is bad already for other reasons
                                 "First",
                                 "Second")));
-    }
+
+        // Simple lambda
+        RegisterNodeAction(c =>
+        {                               // Noncompliant
+        },
+            42);
+        RegisterNodeAction(c => { }, 42);
+        RegisterNodeAction(c =>
+            {
+            },
+            42);
+        // Parenthesized lambda
+        RegisterNodeAction((c) =>
+        {                               // Noncompliant
+        },
+            42);
+        RegisterNodeAction((c) => { }, 42);
+        RegisterNodeAction((c) =>
+            {
+            },
+            42);
+        // Expression-body lambda
+        AcceptFunc(c =>
+        c,                              // Noncompliant
+            42);
+        AcceptFunc(c => c, 42);
+        AcceptFunc(c =>
+            c,
+            42);
+
+}
 
     public void Lambdas(int[] list, int[] longer)
     {
@@ -133,7 +163,7 @@ public class Sample
                                 "Good"));   // Compliant, as long as it's after the invocation and aligned to the grid of 4
 
         list.Where(x =>
-        {
+        {                                   // Noncompliant
             return Invocation(
                 "Good");
         });
@@ -194,6 +224,8 @@ public class Sample
 
     public static bool Invocation(params object[] args) => true;
     public static string ReturnString(string arg) => arg;
+    public void RegisterNodeAction(Action<object> action, params object[] syntaxKinds) { }
+    public void AcceptFunc(Func<object, object> func, params object[] args) { }
 
     [Obsolete(ReturnString("For coverage"))]    // Error [CS0182] An attribute argument must be a constant expression
     public void Coverage() { }
