@@ -28,6 +28,8 @@ public sealed class IndentRawString : IndentBase
             {
                 var token = c.Node.GetLastToken();
                 if (token.Kind() is SyntaxKind.MultiLineRawStringLiteralToken or SyntaxKind.InterpolatedRawStringEndToken or SyntaxKind.Utf8MultiLineRawStringLiteralToken
+                    && c.Node.GetLocation() is var location
+                    && location.StartLine() != location.EndLine()
                     && ExpectedPosition(c.Node) is { } expected)
                 {
                     var line = c.Node.SyntaxTree.GetText().Lines[token.GetLocation().GetLineSpan().EndLinePosition.Line];

@@ -48,6 +48,8 @@ public class Sample
         _ = """
             Good
             """;
+        _ = $"""{this} is not relevant""";
+        _ = $$"""{{this}} is not relevant""";
     }
 
     public string ArrowNoncompliant() =>
