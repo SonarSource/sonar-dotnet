@@ -18,6 +18,8 @@ using RoslynAnalysisContext = Microsoft.CodeAnalysis.Diagnostics.AnalysisContext
 
 namespace SonarAnalyzer.Core.Analyzers;
 
+#pragma warning disable T0038 // Use field instead of protected auto-property. We want these class to provide uniform experience.
+
 public abstract class SonarDiagnosticAnalyzer : DiagnosticAnalyzer
 {
     public static readonly string EnableConcurrentExecutionVariable = "SONAR_DOTNET_ENABLE_CONCURRENT_EXECUTION";
