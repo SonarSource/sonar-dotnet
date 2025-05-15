@@ -40,11 +40,11 @@ public sealed class InitializerLine : StylingAnalyzer
                 var property = (PropertyDeclarationSyntax)c.Node;
                 if (property.Initializer is not null)
                 {
-                    Verify(c, property.Initializer.Value, property.GetLocation().StartLine(), "initializer");
+                    Verify(c, property.Initializer.Value, property.Identifier.GetLocation().StartLine(), "initializer");
                 }
                 if (property.ExpressionBody is not null)
                 {
-                    Verify(c, property.ExpressionBody.Expression, property.GetLocation().StartLine(), "expression");
+                    Verify(c, property.ExpressionBody.Expression, property.Identifier.GetLocation().StartLine(), "expression");
                 }
             },
             SyntaxKind.PropertyDeclaration);
@@ -53,7 +53,7 @@ public sealed class InitializerLine : StylingAnalyzer
                 var accessor = (AccessorDeclarationSyntax)c.Node;
                 if (accessor.ExpressionBody() is not null)
                 {
-                    Verify(c, accessor.ExpressionBody().Expression, accessor.GetLocation().StartLine(), "expression");
+                    Verify(c, accessor.ExpressionBody().Expression, accessor.Keyword.GetLocation().StartLine(), "expression");
                 }
             },
             SyntaxKind.AddAccessorDeclaration,

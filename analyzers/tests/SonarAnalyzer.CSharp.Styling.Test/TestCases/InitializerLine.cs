@@ -76,6 +76,13 @@ public class Fields
     private int multipleMultiLineA =
         1, multipleMultiLineB = // Noncompliant
         2;                      // Noncompliant
+
+    [Obsolete]
+    public string sameLineAttribute = "Lorem";
+
+    [Obsolete]
+    public string nextLineAttribute =
+        "Ipsum";    // Noncompliant
 }
 
 public class Properties
@@ -149,4 +156,21 @@ public class Properties
     }
 
     public int AutoImplemented { get; set; }
+
+    [Obsolete]
+    public string SameLineAttribute => "Lorem";
+
+    [Obsolete]
+    public string NextLineAttribute { get; } =
+        "Ipsum";    // Noncompliant
+
+    public int AccessorsWithAttributes
+    {
+        [Obsolete]
+        get => field;
+        [Obsolete]
+        set =>
+            field = value;  // Noncompliant
+    }
+
 }
