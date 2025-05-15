@@ -29,6 +29,7 @@ public sealed class MemberAccessLine : StylingAnalyzer
                 var memberAccess = (MemberAccessExpressionSyntax)c.Node;
                 if (!memberAccess.HasSameStartLineAs(memberAccess.Name)
                     && memberAccess.OperatorToken.GetPreviousToken().GetLocation().EndLine() == memberAccess.Name.GetLocation().StartLine()
+                    && IsAfterNewLineMemberAccess(memberAccess)
                     && !IsIgnored(memberAccess))
                 {
                     c.ReportIssue(Rule, Location.Create(c.Tree, TextSpan.FromBounds(memberAccess.OperatorToken.SpanStart, memberAccess.Span.End)));
@@ -36,9 +37,20 @@ public sealed class MemberAccessLine : StylingAnalyzer
             },
             SyntaxKind.SimpleMemberAccessExpression);
 
+    private static bool IsAfterNewLineMemberAccess(SyntaxNode node) =>
+        node switch
+        {
+            MemberAccessExpressionSyntax memberAccess when memberAccess.OperatorToken.Line() != memberAccess.OperatorToken.GetPreviousToken().Line() => true,
+            MemberAccessExpressionSyntax memberAccess => IsAfterNewLineMemberAccess(memberAccess.Expression),
+            InvocationExpressionSyntax invocation => IsAfterNewLineMemberAccess(invocation.Expression),
+            ElementAccessExpressionSyntax elementAccess => IsAfterNewLineMemberAccess(elementAccess.Expression),
+            _ => false
+        };
+
     private static bool IsIgnored(MemberAccessExpressionSyntax memberAccess) =>
         memberAccess.Expression is MemberAccessExpressionSyntax
         {
             Name: IdentifierNameSyntax { Identifier.ValueText: "And" }
-        };
+        }
+        || (memberAccess.Expression is InvocationExpressionSyntax invocation && invocation.NameIs("Should"));
 }

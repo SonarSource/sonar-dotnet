@@ -1,4 +1,6 @@
-﻿public class Sample
+﻿using System.Linq;
+
+public class Sample
 {
     Builder builder;
 
@@ -41,6 +43,18 @@
             .Build();
     }
 
+    public void Prerequisites() // These nodes start a multi-line chain
+    {
+        builder
+            .Build().Build();          // Noncompliant
+        builder
+            .Variable.Build();          // Noncompliant
+        builder
+            .Build()[42].Build();       // Noncompliant
+        builder
+            .Variable[42].Build();      // Noncompliant
+    }
+
     public void FluentAssertions()
     {
         builder.Should().BeSomething()
@@ -50,6 +64,9 @@
             .And.BeSomething()
             .And            // Allowed
             .BeSomething();
+        builder.Build("Something long")
+            .Should().BeSomething();
+
     }
 
     public void ConditionalAccess()
@@ -77,6 +94,25 @@
             .StaticMethod()
             .Build();
     }
+
+    public void ContinuesLines()
+    {
+        var typicallyForImmutableField = new int[]
+            {
+                0,
+                1,
+                2
+            }.ToList();
+
+        _ = builder
+            .Build("""
+                This is a long argument
+                """).Variable;  // Noncompliant, because there's .Build() already in the chain
+
+        _ = builder.Build("""
+            This is a long argument
+            """).Variable.Build();  // Useful for TestSnippet(...).Model.Compilation
+    }
 }
 
 public class Builder
@@ -86,7 +122,7 @@ public class Builder
     public Builder[] Indexed;
     public Builder this[int index] => null;
 
-    public Builder Build() => this;
+    public Builder Build(params object[] args) => this;
     public static Builder StaticMethod() => null;
     public bool IsTrue() => true;
 
