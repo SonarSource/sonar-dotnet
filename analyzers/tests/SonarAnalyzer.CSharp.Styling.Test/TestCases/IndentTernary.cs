@@ -239,6 +239,19 @@ public class Sample
                 : false);           // Noncompliant
     }
 
+    public void SwitchExpressions(object arg)
+    {
+        _ = arg switch
+        {
+            Exception someLongerName => condition
+                ? true
+                    : false,        // Noncompliant
+            _ => condition
+                ? true
+                    : false         // Noncompliant
+        };
+    }
+
     [Obsolete(true  // Not supported, used for coverage
     ? "true"
     : "false")]

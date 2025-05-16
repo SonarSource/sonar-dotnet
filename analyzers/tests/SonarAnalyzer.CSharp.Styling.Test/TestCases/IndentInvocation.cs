@@ -258,6 +258,23 @@ public class Sample
             .StaticMethod();
     }
 
+    public void SwitchExpressions(object arg)
+    {
+        _ = arg switch
+        {
+            ArgumentException someLongerName =>
+                builder
+                    .Build()
+                        .Build(),   // Noncompliant
+            Exception someLongerName => builder
+                .Build()
+                    .Build(),       // Noncompliant
+            _ => builder
+                .Build()
+                    .Build()        // Noncompliant
+        };
+    }
+
     public static bool Something(object arg, object another = null) => true;
 }
 

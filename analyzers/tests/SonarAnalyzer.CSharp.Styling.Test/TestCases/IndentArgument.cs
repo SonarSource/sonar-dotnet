@@ -252,6 +252,19 @@ public class Sample
             "Second");
     }
 
+    public void SwitchExpressions(object arg)
+    {
+        _ = arg switch
+        {
+            Exception someLongerName => Invocation( // This is already bad
+                "Good",
+                    "Too far"), // Noncompliant
+            _ => Invocation(
+                "Good",
+                    "Too far"), // Noncompliant
+        };
+    }
+
     public void OtherSyntaxes()
     {
         _ = new int[

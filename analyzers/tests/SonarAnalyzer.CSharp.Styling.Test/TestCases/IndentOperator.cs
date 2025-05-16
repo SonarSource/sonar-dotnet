@@ -266,6 +266,19 @@ public class Sample
                 || false);               // Noncompliant
     }
 
+    public void SwitchExpressions(object arg)
+    {
+        _ = arg switch
+        {
+            Exception someLongerName => condition
+                && true
+                    && true,            // Noncompliant
+            _ => condition
+                && true
+                    && true             // Noncompliant
+        };
+    }
+
     public static bool Something(bool arg, object another = null) => true;
 }
 

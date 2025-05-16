@@ -306,6 +306,22 @@ public class Sample
                 """);               // Noncompliant
     }
 
+    public void SwitchExpressions(object arg)
+    {
+        _ = arg switch
+        {
+            ArgumentException someLongerName => """
+                Good
+                """,
+            Exception someLongerName => """
+            Too close
+            """,                    // Noncompliant
+            _ => """
+                Good
+                """
+        };
+    }
+
     public static bool Invocation(params object[] args) => true;
 
     [Obsolete("""

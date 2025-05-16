@@ -45,7 +45,7 @@ public abstract class IndentBase : StylingAnalyzer
         {
             return node;    // Root from the original node itself (ternary, binary, ...)
         }
-        else if (current is StatementSyntax or AssignmentExpressionSyntax
+        else if (current is StatementSyntax or AssignmentExpressionSyntax or SwitchExpressionArmSyntax
             || current is ExpressionSyntax { Parent: IfStatementSyntax or WhileStatementSyntax }
             || current.Parent is ArrowExpressionClauseSyntax or LambdaExpressionSyntax
             || (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
