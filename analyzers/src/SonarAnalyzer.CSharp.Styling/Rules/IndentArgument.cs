@@ -27,13 +27,16 @@ public sealed class IndentArgument : IndentBase
                 if (ExpectedPosition(c.Node) is { } expected)
                 {
                     Verify(c, expected, c.Node.GetFirstToken(), c.Node);
-                    if (((ArgumentSyntax)c.Node).Expression is LambdaExpressionSyntax lambda && (lambda.Body ?? lambda.ExpressionBody) is { } expressionOrBody)
+                    if (c.Node is ArgumentSyntax argument
+                        && argument.Expression is LambdaExpressionSyntax lambda
+                        && (lambda.Body ?? lambda.ExpressionBody) is { } expressionOrBody)
                     {
                         Verify(c, expected, expressionOrBody.GetFirstToken(), expressionOrBody);
                     }
                 }
             },
-            SyntaxKind.Argument);
+            SyntaxKind.Argument,
+            SyntaxKind.ExpressionElement);
 
     protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current) =>
         current is ForStatementSyntax

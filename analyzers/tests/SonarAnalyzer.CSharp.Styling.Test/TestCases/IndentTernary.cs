@@ -137,6 +137,16 @@ public class Sample
             "Some other argument")));
     }
 
+    public void ObjectInitializer()
+    {
+        _ = new WithProperty
+        {
+            Value = condition
+                ? true
+            :false              // Noncompliant
+        };
+    }
+
     public void Lambdas(int[] list, int[] longer)
     {
         list.Where(x => condition
@@ -238,4 +248,9 @@ public class Sample
 public class Builder
 {
     public Builder Build(params object[] args) => this;
+}
+
+public class WithProperty
+{
+    public bool Value { get; set; }
 }

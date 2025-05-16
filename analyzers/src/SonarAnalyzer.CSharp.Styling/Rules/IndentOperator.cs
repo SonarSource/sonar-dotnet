@@ -94,7 +94,7 @@ public sealed class IndentOperator : IndentBase
         {
             return node;
         }
-        else if (current is StatementSyntax || (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
+        else if (current is StatementSyntax or AssignmentExpressionSyntax || (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
         {
             return current;
         }

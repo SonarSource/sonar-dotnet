@@ -112,6 +112,17 @@ public class Sample
             "Some other argument")));
     }
 
+    public void ObjectInitializer()
+    {
+        _ = new WithProperty
+        {
+            Value = condition
+                && true
+            && true             // Noncompliant
+                    && true     // Noncompliant
+        };
+    }
+
     public void Lambdas(int[] list, int[] longer)
     {
         list.Where(x => condition
@@ -381,6 +392,11 @@ class Operators
                 ..2;    // Noncompliant
         //      ^^^
     }
+}
+
+public class WithProperty
+{
+    public bool Value { get; set; }
 }
 
 public class Coverage

@@ -189,6 +189,19 @@ public class Sample
             """)));
     }
 
+    public void ObjectInitializer()
+    {
+        _ = new WithProperty
+        {
+            First = """
+                Good
+                """,
+            Second = """
+            Good
+            """,        // Noncompliant
+        };
+    }
+
     public void Lambdas(int[] list)
     {
         // Simple lambda
@@ -304,4 +317,10 @@ public class Sample
 public class Builder
 {
     public Builder Build(params object[] args) => this;
+}
+
+public class WithProperty
+{
+    public string First { get; set; }
+    public string Second { get; set; }
 }

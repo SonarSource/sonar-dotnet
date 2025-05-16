@@ -142,6 +142,17 @@ public class Sample
 
 }
 
+    public void ObjectInitializer()
+    {
+        _ = new WithProperty
+        {
+            Value = Invocation(
+                "Good",
+            "Too close",        // Noncompliant
+                    "Too far")  // Noncompliant
+        };
+    }
+
     public void Lambdas(int[] list, int[] longer)
     {
         list.Where(x => Invocation(
@@ -241,6 +252,20 @@ public class Sample
             "Second");
     }
 
+    public void OtherSyntaxes()
+    {
+        _ = new int[
+            1,
+        2,          // FN, we don't care. Nobody should specify array ranks on multiple lines
+                3
+            ];
+        int[] array = [
+            1,
+        2,          // Noncompliant
+                3   // Noncompliant
+            ];
+    }
+
     public static bool Invocation(params object[] args) => true;
     public static string ReturnString(string arg) => arg;
     public void RegisterNodeAction(Action<object> action, params object[] syntaxKinds) { }
@@ -253,4 +278,9 @@ public class Sample
 public class Builder
 {
     public Builder Build(params object[] args) => this;
+}
+
+public class WithProperty
+{
+    public object Value { get; set; }
 }

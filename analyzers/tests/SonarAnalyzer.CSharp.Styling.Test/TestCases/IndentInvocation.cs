@@ -143,6 +143,17 @@ public class Sample
             "Some other argument")));
     }
 
+    public void ObjectInitializer()
+    {
+        _ = new Builder
+        {
+            Variable = builder.Build()
+                .Build()
+            .Build()            // Noncompliant
+                    .Build()    // Noncompliant
+        };
+    }
+
     public void Lambdas(int[] list, int[] longer)
     {
         list.Where(x => builder
