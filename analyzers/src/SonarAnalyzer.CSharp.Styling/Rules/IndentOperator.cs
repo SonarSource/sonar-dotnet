@@ -84,15 +84,19 @@ public sealed class IndentOperator : IndentBase
     }
 
     protected override int Offset(SyntaxNode node, SyntaxNode root) =>
-        node == root
+        CoalesceRoot(node) == root
             ? 3     // When rooted from the same expression, align itself to the same expression from the previous line
             : 4;    // Otherwise force one tab, like in the base class
 
     protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
     {
-        if (current is ArrowExpressionClauseSyntax or LambdaExpressionSyntax or ConditionalExpressionSyntax or ForStatementSyntax)
+        if (current is ArrowExpressionClauseSyntax { Parent: AccessorDeclarationSyntax })
         {
-            return node;
+            return current.Parent;
+        }
+        else if (current is ArrowExpressionClauseSyntax or LambdaExpressionSyntax or ConditionalExpressionSyntax or ForStatementSyntax)
+        {
+            return CoalesceRoot(node);
         }
         else if (current is IfStatementSyntax { Parent: ElseClauseSyntax })
         {
@@ -115,5 +119,15 @@ public sealed class IndentOperator : IndentBase
         {
             return null;
         }
+    }
+
+    private static SyntaxNode CoalesceRoot(SyntaxNode node)
+    {
+        // Coalesce expressions have right-associative tree, so the trick of returning "node" itself as the starting point doesn't work. We need to find the first in 'first ?? node ?? last'
+        while (node.Parent.IsKind(SyntaxKind.CoalesceExpression))
+        {
+            node = node.Parent;
+        }
+        return node;
     }
 }

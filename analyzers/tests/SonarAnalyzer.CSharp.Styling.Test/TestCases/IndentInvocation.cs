@@ -61,6 +61,8 @@ public class Sample
 
     public Builder ArrowCompliant() =>
         builder
+            .Build()
+            .Build()
             .Build();
 
     public Builder ArrowNotInScope() =>

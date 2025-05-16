@@ -4,6 +4,7 @@ using System.Linq;
 public class Sample
 {
     private bool condition;
+    private object first, middle, last;
 
     public void Method()
     {
@@ -38,19 +39,36 @@ public class Sample
 
     public bool ArrowNoncompliant() =>
         condition
-            && true;    // Noncompliant {{Indent this operator at line position 9.}}
+            && true     // Noncompliant {{Indent this operator at line position 9.}}
+            && true;    // Noncompliant
 
     public bool ArrowCompliant() =>
         condition
+        && true
+        && true
         && true;
+
+    public object ArrowNullCoalescing() =>
+        first
+        ?? middle
+        ?? middle
+            ?? last;    // Noncompliant
 
     public bool ArrowNotInScope() =>
         condition && true;
 
     public object ArrowInInvocationArgument() =>
         Something(condition
-        && true             // Noncompliant
-            && true);
+            && true
+            && true
+                && true);   // Noncompliant
+
+    public object ArrowInInvocationArgumentStartsOnNextLIne() =>
+        Something(
+            condition
+            && true
+            && true
+                && true);   // Noncompliant
 
     public object ArrowInConstructorArgument() =>
         new Nullable<bool>(condition
@@ -66,6 +84,7 @@ public class Sample
     public bool ReturnCompliant()
     {
         return condition
+            && true
             && true;
     }
 
@@ -132,6 +151,8 @@ public class Sample
                                 && true // Noncompliant, too far
                              && true);  // Noncompliant, too far
         list.Where(x => condition       // Simple lambda
+                        && true
+                        && true
                         && true);
         list.Where((x) => condition     // Parenthesized lambda
                             && true
@@ -140,6 +161,10 @@ public class Sample
                             && true);   // Compliant, as long as it's after the condition and aligned to the grid of 4
         longer.Where((x) => condition   // Parenthesized lambda, longer name
                             && true);   // Compliant, as long as it's after the condition and aligned to the grid of 4
+        list.Select(xxxx => first
+                            ?? middle
+                            ?? middle
+                                ?? last);   // Noncompliant
         list.Where(x =>
         {
             return condition
@@ -190,16 +215,24 @@ public class Sample
         for (int i = 0; condition
                         && true; i++)
         { }
+        for (int i = 0; condition
+                        && true
+                        && true; i++)
+        { }
         for (int ii = 0; condition
+                            && true
                             && true; ii++)
         { }
         for (int iii = 0; condition
+                            && true
                             && true; iii++)
         { }
         for (int iiii = 0; condition
+                            && true
                             && true; iiii++)
         { }
         for (int iiiii = 0; condition
+                            && true
                             && true; iiiii++)
         { }
     }
@@ -284,11 +317,34 @@ public class Sample
         };
     }
 
+    public object Property =>
+        first
+        ?? middle
+        ?? middle
+            ?? last;  // Noncompliant
+
+    public object AccessorCoalesce
+    {
+        get => first
+            ?? middle
+            ?? middle
+                ?? last;  // Noncompliant
+    }
+
+    public bool Accessor
+    {
+        get => condition
+            && true
+                && true;    // Noncompliant
+    }
+
     public static bool Something(bool arg, object another = null) => true;
 }
 
 class Operators
 {
+    object first, middle, last;
+
     void LogicalOperator(bool a, bool b)
     {
         _ = a
@@ -335,12 +391,22 @@ class Operators
                 && false
             : false
                 || true;
+
+        _ = true
+            ? first
+                ?? middle
+                ?? middle
+                    ?? last     // Noncompliant
+            : null;
     }
 
-    void Coelesce(object o1, object o2)
+    void Coelesce(object o1, object o2, object o3)
     {
         _ = o1
-                ?? o2;      // Noncompliant
+            ?? o2
+            ?? o2
+            ?? o2
+                ?? o3;      // Noncompliant
     }
 
     void AsIs(object o)

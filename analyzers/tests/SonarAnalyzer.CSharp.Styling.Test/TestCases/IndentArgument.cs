@@ -50,7 +50,8 @@ public class Sample
     public bool ArrowCompliant() =>
         Invocation(
             "Arg",
-            "Another");
+            "Another",
+            "One more");
 
     public bool ArrowNotInScope() =>
         Invocation("Arg", "Another");
