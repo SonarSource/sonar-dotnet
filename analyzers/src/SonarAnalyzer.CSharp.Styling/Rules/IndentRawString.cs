@@ -50,7 +50,7 @@ public sealed class IndentRawString : IndentBase
 
     protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
     {
-        if (current is StatementSyntax or InvocationExpressionSyntax)
+        if (current is StatementSyntax or InvocationExpressionSyntax or ObjectCreationExpressionSyntax or ImplicitObjectCreationExpressionSyntax)
         {
             return current;
         }

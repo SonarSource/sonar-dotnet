@@ -47,6 +47,16 @@ public class Sample
     public bool ArrowNotInScope() =>
         condition && true;
 
+    public object ArrowInInvocationArgument() =>
+        Something(condition
+                && true             // Noncompliant
+                    && true);
+
+    public object ArrowInConstructorArgument() =>
+        new Nullable<bool>(condition
+                        && true     // Noncompliant
+                            && true);
+
     public bool ReturnNoncompliant()
     {
         return condition

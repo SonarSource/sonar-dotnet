@@ -66,6 +66,16 @@ public class Sample
     public Builder ArrowNotInScope() =>
         builder.Build();
 
+    public object ArrowInInvocationArgument() =>
+        Something(builder
+                .Build()        // Noncompliant
+                    .Build());
+
+    public object ArrowInConstructorArgument() =>
+        new Exception(builder
+                    .Build()    // Noncompliant
+                        .ToString());
+
     public Builder ReturnNoncompliant()
     {
         return builder

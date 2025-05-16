@@ -62,6 +62,21 @@ public class Sample
         Good
         """;
 
+    public object ArrowInInvocationArgument() =>
+        Invocation("""
+            Good
+            """);
+
+    public object ArrowInConstructorArgument() =>
+        new Exception("""
+            Good
+            """);
+
+    public Exception ArrowInConstructorArgumentImplicit() =>
+        new("""
+            Good
+            """);
+
     public string ReturnNoncompliant()
     {
         return """
