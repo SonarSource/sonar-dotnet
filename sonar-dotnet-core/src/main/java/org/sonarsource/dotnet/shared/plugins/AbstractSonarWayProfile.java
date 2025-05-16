@@ -18,8 +18,6 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.util.Set;
 import java.util.stream.Collectors;
-import javax.annotation.Nullable;
-import org.sonar.api.rule.RuleKey;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonarsource.analyzer.commons.BuiltInQualityProfileJsonLoader;
 
@@ -27,16 +25,10 @@ public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesD
 
   protected final PluginMetadata metadata;
   private final RoslynRules roslynRules;
-  private final ProfileRegistrar[] profileRegistrars;
 
   protected AbstractSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
-    this(metadata, roslynRules, null);
-  }
-
-  protected AbstractSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules, @Nullable ProfileRegistrar[] profileRegistrars) {
     this.metadata = metadata;
     this.roslynRules = roslynRules;
-    this.profileRegistrars = profileRegistrars;
   }
 
   @Override
@@ -54,19 +46,9 @@ public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesD
     sonarWay.done();
   }
 
-  private void registerRulesFromRegistrars(NewBuiltInQualityProfile profile) {
-    if(profileRegistrars != null) {
-      for (var profileRegistrar : profileRegistrars) {
-        profileRegistrar.register((languageKey, rules) -> {
-          if(languageKey.equals(metadata.languageKey())) {
-            for(RuleKey ruleKey : rules) {
-              profile.activateRule(ruleKey.repository(), ruleKey.rule());
-            }
-          }
-        });
-      }
-    }
+  protected void registerRulesFromRegistrars(NewBuiltInQualityProfile profile) {
   }
+
   protected void activateSecurityRules(NewBuiltInQualityProfile sonarWay) {
   }
 }

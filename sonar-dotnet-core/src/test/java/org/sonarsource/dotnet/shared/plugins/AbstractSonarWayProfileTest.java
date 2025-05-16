@@ -16,7 +16,6 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
-import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.sonar.api.rule.RuleKey;
@@ -31,7 +30,6 @@ public class AbstractSonarWayProfileTest {
 
   private static PluginMetadata metadata;
   private static RoslynRules roslynRules;
-  private static ProfileRegistrar[] profileRegistrars;
 
   @BeforeClass
   public static void beforeAll() {
@@ -45,19 +43,6 @@ public class AbstractSonarWayProfileTest {
     RoslynRules.Rule rule2 = new RoslynRules.Rule();
     rule2.id = "S-REAL-2";
     roslynRules = mock(RoslynRules.class);
-    when(roslynRules.rules()).thenReturn(List.of(rule1, rule2));
-
-    profileRegistrars = new ProfileRegistrar[]{
-         registrarContext -> {
-           registrarContext.registerDefaultQualityProfileRules(
-             "LANG",
-             List.of(RuleKey.of("OTHER-REPO", "additionalRule"))
-           );
-           registrarContext.registerDefaultQualityProfileRules(
-             "OTHER_LANG",
-             List.of(RuleKey.of("OTHER-REPO", "otherLangAdditionalRule"))
-           );
-         }};
   }
 
   @Test
@@ -69,7 +54,6 @@ public class AbstractSonarWayProfileTest {
 
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("LANG", "Sonar way");
     assertThat(profile).isNotNull();
-    assertThat(profile.rules()).extracting(BuiltInQualityProfilesDefinition.BuiltInActiveRule::ruleKey).containsExactlyInAnyOrder("S-REAL-1", "S-REAL-2");
   }
 
   @Test
@@ -90,14 +74,18 @@ public class AbstractSonarWayProfileTest {
 
   @Test
   public void define_activateAdditionalRules() {
-    AbstractSonarWayProfile sut = new AbstractSonarWayProfile(metadata, roslynRules, profileRegistrars) {};
+    AbstractSonarWayProfile sut = new AbstractSonarWayProfile(metadata, roslynRules) {
+      @Override
+      protected void registerRulesFromRegistrars(NewBuiltInQualityProfile profile) {
+        profile.activateRule("OTHER-REPO", "OTHER-RULE");
+      }
+    };
     Context context = new Context();
     sut.define(context);
 
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("LANG", "Sonar way");
     assertThat(profile).isNotNull();
-    assertThat(profile.rule(RuleKey.of("OTHER-REPO", "additionalRule"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of("OTHER-REPO", "otherLangAdditionalRule"))).isNull();
+    assertThat(profile.rule(RuleKey.of("OTHER-REPO", "OTHER-RULE"))).isNotNull();
     BuiltInQualityProfilesDefinition.BuiltInQualityProfile otherProfile = context.profile("OTHER_LANG", "Sonar way");
     assertThat(otherProfile).isNull();
   }

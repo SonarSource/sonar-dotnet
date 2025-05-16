@@ -1,5 +1,5 @@
 /*
- * SonarSource :: .NET :: Core
+ * SonarSource :: C# :: Core
  * Copyright (C) 2014-2025 SonarSource SA
  * mailto:info AT sonarsource DOT com
  *
@@ -14,7 +14,9 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonarsource.dotnet.shared.plugins;
+// This class needs to be in this specific package in order to be accessed by other plugins (e.g. sonar-architecture-csharp-frontend-plugin)
+// See https://docs.sonarsource.com/sonarqube-server/latest/extension-guide/developing-a-plugin/plugin-basics/#exposing-apis-to-other-plugins
+package org.sonar.plugins.csharpenterprise.api;
 
 import java.util.Collection;
 import org.sonar.api.rule.RuleKey;
@@ -31,8 +33,8 @@ import org.sonarsource.api.sonarlint.SonarLintSide;
  *     }
  *   }
  * </pre>
- *
- *  Note: It's possible to convert checkClass to RuleKey using:
+ * <p>
+ * Note: It's possible to convert checkClass to RuleKey using:
  * <pre>
  *   {@code
  *     RuleKey.of(repositoryKey, RuleAnnotationUtils.getRuleKey(checkClass))
