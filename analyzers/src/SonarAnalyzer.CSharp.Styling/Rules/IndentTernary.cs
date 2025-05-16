@@ -32,4 +32,9 @@ public sealed class IndentTernary : IndentBase
                 }
             },
             SyntaxKind.ConditionalExpression);
+
+    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current) =>
+        current == node && current.GetFirstToken().IsFirstTokenOnLine()
+            ? current
+            : base.NodeRoot(node, current);
 }

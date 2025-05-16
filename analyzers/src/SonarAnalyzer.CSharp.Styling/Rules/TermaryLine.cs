@@ -38,7 +38,7 @@ public sealed class TernaryLine : StylingAnalyzer
 
     private void Verify(SonarSyntaxNodeReportingContext context, SyntaxToken token, ExpressionSyntax expression)
     {
-        if (token.Line() == token.GetPreviousToken().Line())
+        if (!token.IsFirstTokenOnLine())
         {
             context.ReportIssue(Rule, Location.Create(expression.SyntaxTree, TextSpan.FromBounds(token.SpanStart, expression.Span.End)));
         }

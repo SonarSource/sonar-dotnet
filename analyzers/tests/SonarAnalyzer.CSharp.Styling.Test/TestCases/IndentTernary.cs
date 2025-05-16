@@ -64,13 +64,13 @@ public class Sample
 
     public object ArrowInInvocationArgument() =>
         Something(condition
-                ? true          // Noncompliant
-                    : false);
+        ? true          // Noncompliant
+            : false);
 
     public object ArrowInConstructorArgument() =>
         new Nullable<bool>(condition
-                        ? true  // Noncompliant
-                            : false);
+        ? true  // Noncompliant
+            : false);
 
     public bool ReturnNoncompliant()
     {
@@ -89,28 +89,28 @@ public class Sample
     public void Invocations()
     {
         Something(condition // This is bad already
-        ? true              // Noncompliant {{Indent this ternary at line position 21.}}
-            : false,        // Noncompliant, too close as well
+        ? true              // Noncompliant {{Indent this ternary at line position 13.}}
+            : false,
             "Some other argument");
         Something(condition // This is bad already
-                    ? true
-                    : false,
+            ? true
+            : false,
             "Some other argument");
         global::Sample.Something(condition  // This is bad already
-                ? true      // Noncompliant {{Indent this ternary at line position 37.}}
+                ? true      // Noncompliant {{Indent this ternary at line position 13.}}
                 : false,    // Noncompliant
             "Some other argument");
         global::Sample.Something(condition  // This is bad already
-                                    ? true
-                                    : false,
+            ? true
+            : false,
             "Some other argument");
         Something(Something(Something(condition // This is bad already
-                ? true      // Noncompliant {{Indent this ternary at line position 41.}}
+                ? true      // Noncompliant {{Indent this ternary at line position 13.}}
                 : false,    // Noncompliant
             "Some other argument")));
         Something(Something(Something(condition // This is bad already
-                                        ? true
-                                        : false,
+            ? true
+            : false,
             "Some other argument")));
 
         Something(

@@ -50,7 +50,11 @@ public sealed class IndentRawString : IndentBase
 
     protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
     {
-        if (current is StatementSyntax or InvocationExpressionSyntax or ObjectCreationExpressionSyntax or ImplicitObjectCreationExpressionSyntax)
+        if (current is StatementSyntax or ObjectCreationExpressionSyntax or ImplicitObjectCreationExpressionSyntax)
+        {
+            return current;
+        }
+        else if (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine())
         {
             return current;
         }

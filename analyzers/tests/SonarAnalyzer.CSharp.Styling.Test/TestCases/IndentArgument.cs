@@ -86,12 +86,12 @@ public class Sample
             "First",
             "Second");
         Invocation(Invocation(Invocation("First",   // This is bad already for other reasons
-                            "Too close",            // Noncompliant {{Indent this argument at line position 33.}}
-                                "Good",
-                                    "Too far")));   // Noncompliant
+        "Too close",            // Noncompliant {{Indent this argument at line position 13.}}
+            "Good",
+                "Too far")));   // Noncompliant
         Invocation(Invocation(Invocation(
-                                "First",
-                                "Second")));
+            "First",
+            "Second")));
 
         Invocation(
             Invocation(
@@ -108,8 +108,8 @@ public class Sample
             "Second");
 
         Invocation(Invocation(Invocation(   // This is bad already for other reasons
-                                "First",
-                                "Second")));
+            "First",
+            "Second")));
 
         // Simple lambda
         RegisterNodeAction(c =>

@@ -68,13 +68,13 @@ public class Sample
 
     public object ArrowInInvocationArgument() =>
         Something(builder
-                .Build()        // Noncompliant
-                    .Build());
+        .Build()        // Noncompliant
+            .Build());
 
     public object ArrowInConstructorArgument() =>
         new Exception(builder
-                    .Build()    // Noncompliant
-                        .ToString());
+        .Build()    // Noncompliant
+            .ToString());
 
     public Builder ReturnNoncompliant()
     {
@@ -95,28 +95,28 @@ public class Sample
     public void Invocations()
     {
         Something(builder
-        .Build()            // Noncompliant {{Indent this member access at line position 21.}}
-            .Build(),       // Noncompliant, too close as well
+        .Build()            // Noncompliant {{Indent this member access at line position 13.}}
+                .Build(),   // Noncompliant, too far
             "Some other argument");
         Something(builder   // This is bad already
-                    .Build()
-                    .Build(),
+            .Build()
+            .Build(),
             "Some other argument");
         global::Sample.Something(builder    // This is bad already
-                .Build()    // Noncompliant {{Indent this member access at line position 37.}}
+                .Build()    // Noncompliant {{Indent this member access at line position 13.}}
                 .Build(),   // Noncompliant
             "Some other argument");
         global::Sample.Something(builder  // This is bad already
-                                    .Build()
-                                    .Build(),
+            .Build()
+            .Build(),
             "Some other argument");
         Something(Something(Something(builder // This is bad already
-                .Build()    // Noncompliant {{Indent this member access at line position 41.}}
+                .Build()    // Noncompliant {{Indent this member access at line position 13.}}
                 .Build(),   // Noncompliant
             "Some other argument")));
         Something(Something(Something(builder // This is bad already
-                                        .Build()
-                                        .Build(),
+            .Build()
+            .Build(),
             "Some other argument")));
 
         Something(
@@ -219,8 +219,8 @@ public class Sample
         .Build();           // Noncompliant
 
         builder?
-            .Build()?
-            .Build();
+            .Build()?   // Noncompliant FP NET-1450
+            .Build();   // Noncompliant FP NET-1450
         builder
         ?.Build()       // Another problem that is out of scope
                 ?.Build();

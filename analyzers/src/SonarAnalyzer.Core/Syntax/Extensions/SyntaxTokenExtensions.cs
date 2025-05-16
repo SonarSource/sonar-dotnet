@@ -36,4 +36,7 @@ public static class SyntaxTokenExtensions
 
     public static IEnumerable<int> LineNumbers(this SyntaxToken token, bool isZeroBasedCount = true) =>
         token.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
+
+    public static bool IsFirstTokenOnLine(this SyntaxToken token) =>
+        token.Line() != token.GetPreviousToken().Line();
 }

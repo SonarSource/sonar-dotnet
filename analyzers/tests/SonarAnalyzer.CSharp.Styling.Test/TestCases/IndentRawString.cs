@@ -104,6 +104,19 @@ public class Sample
             """;
     }
 
+    public void Assignment()
+    {
+        _ = Invocation("""
+            Good
+            """);
+        _ = Invocation("""
+        Too close
+        """);       // Noncompliant
+        _ = Invocation("""
+                Too far
+                """);       // Noncompliant
+    }
+
     public void Invocations()
     {
         Invocation("""
@@ -134,17 +147,17 @@ public class Sample
             """);
         // This is bad already for other reasons
         Invocation(Invocation(Invocation("""
-                            Too close
-                            """,            // Noncompliant {{Indent this raw string literal at line position 33.}}
-                                """
-                                Good
-                                """, """
-                                    Too far
-                                    """))); // Noncompliant
+        Too close
+        """,            // Noncompliant {{Indent this raw string literal at line position 13.}}
+            """
+            Good
+            """, """
+                Too far
+                """))); // Noncompliant
         // This is bad already for other reasons
         Invocation(Invocation(Invocation("""
-                                Good
-                                """)));
+            Good
+            """)));
 
         Invocation(
             Invocation("""
@@ -169,11 +182,11 @@ public class Sample
             """);
 
         Invocation(Invocation(Invocation(   // This is bad already for other reasons
-                                """
-                                Good
-                                """, """
-                                Good
-                                """)));
+            """
+            Good
+            """, """
+            Good
+            """)));
     }
 
     public void Lambdas(int[] list)
