@@ -159,6 +159,11 @@ public class Sample
             && true)
         {
         }
+        else if (condition
+            && true
+                && true)    // Noncompliant
+        {
+        }
     }
 
     public void While()

@@ -94,6 +94,14 @@ public sealed class IndentOperator : IndentBase
         {
             return node;
         }
+        else if (current is IfStatementSyntax { Parent: ElseClauseSyntax })
+        {
+            return null;
+        }
+        else if (current is ElseClauseSyntax)
+        {
+            return current;
+        }
         else if (current is StatementSyntax or AssignmentExpressionSyntax or SwitchExpressionArmSyntax
             || (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
         {

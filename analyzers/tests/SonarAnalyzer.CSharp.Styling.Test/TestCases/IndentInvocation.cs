@@ -192,6 +192,12 @@ public class Sample
                 .IsTrue())
         {
         }
+        else if (builder
+                    .Build()
+                        .IsTrue())  // Noncompliant
+        {
+        }
+
     }
 
     public void While()

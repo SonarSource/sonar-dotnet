@@ -192,6 +192,11 @@ public class Sample
                 "Good"))
         {
         }
+        else if (Invocation(
+                    "Good",
+                        "Too far")) // Noncompliant
+        {
+        }
     }
 
     public void While()

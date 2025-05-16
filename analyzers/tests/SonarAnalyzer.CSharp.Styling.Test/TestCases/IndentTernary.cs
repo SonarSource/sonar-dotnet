@@ -190,6 +190,12 @@ public class Sample
                 : false)
         {
         }
+        else if (condition
+                    ? true
+                        : false)    // Noncompliant
+        {
+        }
+
     }
 
     public void While()
