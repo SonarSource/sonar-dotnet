@@ -210,8 +210,32 @@ public class Sample
         }
     }
 
+    public void ConditionalAccess(Builder builder)
+    {
+        builder?
+            .Build(condition
+                ? true
+                    : false);       // Noncompliant
+
+        builder?
+            .Build(condition
+                ? true
+                    : false)?       // Noncompliant
+            .Build(condition
+                ? true
+                    : false);       // Noncompliant
+        builder?.Build()?.Build(condition
+            ? true
+                : false);           // Noncompliant
+    }
+
     [Obsolete(true  // Not supported, used for coverage
     ? "true"
     : "false")]
     public static bool Something(bool arg, object another = null) => true;
+}
+
+public class Builder
+{
+    public Builder Build(params object[] args) => this;
 }

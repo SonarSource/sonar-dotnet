@@ -219,8 +219,8 @@ public class Sample
         .Build();           // Noncompliant
 
         builder?
-            .Build()?   // Noncompliant FP NET-1450
-            .Build();   // Noncompliant FP NET-1450
+            .Build()?
+            .Build();
         builder
         ?.Build()       // Another problem that is out of scope
                 ?.Build();

@@ -266,10 +266,42 @@ public class Sample
         }
     }
 
+    public void ConditionalAccess(Builder builder)
+    {
+        builder?
+            .Build("""
+                Good
+                """, """
+                    Too Far
+                    """);           // Noncompliant
+
+        builder?
+            .Build("""
+                Good
+                """, """
+                    Too Far
+                    """)?           // Noncompliant
+            .Build("""
+                Good
+                """, """
+                    Too Far
+                    """);           // Noncompliant
+        builder?.Build()?.Build("""
+            Good
+            """, """
+                Too Far
+                """);               // Noncompliant
+    }
+
     public static bool Invocation(params object[] args) => true;
 
     [Obsolete("""
         For coverage
         """)]
     public void Coverage() { }
+}
+
+public class Builder
+{
+    public Builder Build(params object[] args) => this;
 }

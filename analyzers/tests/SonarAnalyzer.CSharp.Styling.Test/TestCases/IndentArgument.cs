@@ -211,6 +211,25 @@ public class Sample
         }
     }
 
+    public void ConditionalAccess(Builder builder)
+    {
+        builder?
+            .Build(
+            "Too close",            // Noncompliant
+                "Good");
+
+        builder?
+            .Build(
+            "Too close",            // Noncompliant
+                "Good")?
+            .Build(
+            "Too close",            // Noncompliant
+                "Good");
+        builder?.Build()?.Build(
+        "Too close",                // Noncompliant
+            "Good");
+    }
+
     public void Global()
     {
         global::Sample.Invocation(
@@ -229,4 +248,9 @@ public class Sample
 
     [Obsolete(ReturnString("For coverage"))]    // Error [CS0182] An attribute argument must be a constant expression
     public void Coverage() { }
+}
+
+public class Builder
+{
+    public Builder Build(params object[] args) => this;
 }

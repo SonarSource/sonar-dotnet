@@ -42,4 +42,9 @@ public sealed class IndentInvocation : IndentBase
             },
             SyntaxKind.MemberBindingExpression);
     }
+
+    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current) =>
+        current is InvocationExpressionSyntax { Parent: ConditionalAccessExpressionSyntax }
+            ? null
+            : base.NodeRoot(node, current);
 }

@@ -49,8 +49,8 @@ public class Sample
 
     public object ArrowInInvocationArgument() =>
         Something(condition
-                && true             // Noncompliant
-                    && true);
+        && true             // Noncompliant
+            && true);
 
     public object ArrowInConstructorArgument() =>
         new Nullable<bool>(condition
@@ -236,6 +236,25 @@ public class Sample
                     is true));
     }
 
+    public void ConditionalAccess(Builder builder)
+    {
+        builder?
+            .Build(true
+                || false
+                    || false);           // Noncompliant
+
+        builder?
+            .Build(true
+                || false
+                    || false)?           // Noncompliant
+            .Build(true
+                || false
+                    || false);           // Noncompliant
+        builder?.Build()?.Build(true
+            || false
+                || false);               // Noncompliant
+    }
+
     public static bool Something(bool arg, object another = null) => true;
 }
 
@@ -371,4 +390,9 @@ public class Coverage
 
     [Obsolete(1..2)]    // Error [CS1503] Argument 1: cannot convert from 'System.Range' to 'string?'
     public void RangeOperator() { }
+}
+
+public class Builder
+{
+    public Builder Build(params object[] args) => this;
 }
