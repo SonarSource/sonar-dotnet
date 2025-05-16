@@ -29,28 +29,25 @@ public sealed class MemberAccessLine : StylingAnalyzer
                 var memberAccess = (MemberAccessExpressionSyntax)c.Node;
                 if (!memberAccess.HasSameStartLineAs(memberAccess.Name)
                     && memberAccess.OperatorToken.GetPreviousToken().GetLocation().EndLine() == memberAccess.Name.GetLocation().StartLine()
-                    && IsAfterNewLineMemberAccess(memberAccess)
-                    && !IsIgnored(memberAccess))
+                    && FindStartLineMemberAccess(memberAccess) is { } startLineMemberAccess
+                    && !IsIgnored(startLineMemberAccess, memberAccess))
                 {
                     c.ReportIssue(Rule, Location.Create(c.Tree, TextSpan.FromBounds(memberAccess.OperatorToken.SpanStart, memberAccess.Span.End)));
                 }
             },
             SyntaxKind.SimpleMemberAccessExpression);
 
-    private static bool IsAfterNewLineMemberAccess(SyntaxNode node) =>
+    private static MemberAccessExpressionSyntax FindStartLineMemberAccess(SyntaxNode node) =>
         node switch
         {
-            MemberAccessExpressionSyntax memberAccess when memberAccess.OperatorToken.Line() != memberAccess.OperatorToken.GetPreviousToken().Line() => true,
-            MemberAccessExpressionSyntax memberAccess => IsAfterNewLineMemberAccess(memberAccess.Expression),
-            InvocationExpressionSyntax invocation => IsAfterNewLineMemberAccess(invocation.Expression),
-            ElementAccessExpressionSyntax elementAccess => IsAfterNewLineMemberAccess(elementAccess.Expression),
-            _ => false
+            MemberAccessExpressionSyntax memberAccess when memberAccess.OperatorToken.Line() != memberAccess.OperatorToken.GetPreviousToken().Line() => memberAccess,
+            MemberAccessExpressionSyntax memberAccess => FindStartLineMemberAccess(memberAccess.Expression),
+            InvocationExpressionSyntax invocation => FindStartLineMemberAccess(invocation.Expression),
+            ElementAccessExpressionSyntax elementAccess => FindStartLineMemberAccess(elementAccess.Expression),
+            _ => null
         };
 
-    private static bool IsIgnored(MemberAccessExpressionSyntax memberAccess) =>
-        memberAccess.Expression is MemberAccessExpressionSyntax
-        {
-            Name: IdentifierNameSyntax { Identifier.ValueText: "And" }
-        }
-        || (memberAccess.Expression is InvocationExpressionSyntax invocation && invocation.NameIs("Should"));
+    private static bool IsIgnored(MemberAccessExpressionSyntax startLine, MemberAccessExpressionSyntax current) =>
+        (startLine.Name is IdentifierNameSyntax { Identifier.ValueText: "And" or "Which" or "Subject" } && startLine.OperatorToken.IsFirstTokenOnLine())
+        || (current.Expression is InvocationExpressionSyntax invocation && invocation.NameIs("Should"));
 }
