@@ -20,7 +20,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
-import javax.annotation.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.rule.RuleKey;
@@ -34,7 +33,13 @@ public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
 
   private final ProfileRegistrar[] profileRegistrars;
 
-  public CSharpSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules, @Nullable ProfileRegistrar[] profileRegistrars) {
+  // The constructors cannot be merged because SonarQube Cloud does not support dependency injection for @Nullable arguments.
+  public CSharpSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
+    super(metadata, roslynRules);
+    this.profileRegistrars = null;
+  }
+
+  public CSharpSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules, ProfileRegistrar[] profileRegistrars) {
     super(metadata, roslynRules);
     this.profileRegistrars = profileRegistrars;
   }
@@ -90,11 +95,9 @@ public class CSharpSonarWayProfile extends AbstractSonarWayProfile {
   protected void registerRulesFromRegistrars(NewBuiltInQualityProfile profile) {
     if (profileRegistrars != null) {
       for (var profileRegistrar : profileRegistrars) {
-        profileRegistrar.register((languageKey, rules) -> {
-          if (languageKey.equals(metadata.languageKey())) {
-            for (RuleKey ruleKey : rules) {
-              profile.activateRule(ruleKey.repository(), ruleKey.rule());
-            }
+        profileRegistrar.register(rules -> {
+          for (RuleKey ruleKey : rules) {
+            profile.activateRule(ruleKey.repository(), ruleKey.rule());
           }
         });
       }

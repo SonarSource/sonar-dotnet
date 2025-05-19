@@ -33,29 +33,22 @@ import org.sonarsource.api.sonarlint.SonarLintSide;
  *     }
  *   }
  * </pre>
- * <p>
- * Note: It's possible to convert checkClass to RuleKey using:
- * <pre>
- *   {@code
- *     RuleKey.of(repositoryKey, RuleAnnotationUtils.getRuleKey(checkClass))
- *   }
- * </pre>
  */
 @SonarLintSide
 @ServerSide
 public interface ProfileRegistrar {
 
   /**
-   * This method is called on server side and during an analysis to modify the builtin default quality profile for java.
+   * This method is called on server side and during an analysis to modify the builtin default quality profile for csharp.
    */
   void register(RegistrarContext registrarContext);
 
   interface RegistrarContext {
 
     /**
-     * Registers additional rules into the "Sonar Way" default quality profile for the language "java".
+     * Registers additional rules into the "Sonar Way" default quality profile for the language "csharp".
      */
-    void registerDefaultQualityProfileRules(String languageKey, Collection<RuleKey> ruleKeys);
+    void registerDefaultQualityProfileRules(Collection<RuleKey> ruleKeys);
 
   }
 

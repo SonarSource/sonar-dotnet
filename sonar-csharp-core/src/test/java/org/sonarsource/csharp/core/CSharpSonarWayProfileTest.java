@@ -74,7 +74,7 @@ class CSharpSonarWayProfileTest {
     when(context.createBuiltInQualityProfile(anyString(), anyString())).thenReturn(builtIn);
     CsRules.ruleKeys = Set.of("TEST");
 
-    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules, null);
+    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules);
     sonarWay.define(context);
 
     assertThat(logTester.logs(Level.WARN)).hasSize(1);
@@ -91,7 +91,7 @@ class CSharpSonarWayProfileTest {
     CsRules.ruleKeys = Set.of("TEST");
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules, null);
+    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules);
     sonarWay.define(context);
 
     assertThat(logTester.logs(Level.WARN)).hasSize(1);
@@ -103,7 +103,7 @@ class CSharpSonarWayProfileTest {
     CsRules.ruleKeys = Set.of("S3649");
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules, null);
+    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules);
     sonarWay.define(context);
 
     BuiltInQualityProfile builtIn = context.profile("cs", "Sonar way");
@@ -119,7 +119,7 @@ class CSharpSonarWayProfileTest {
     sonarWay.done();
     CsRules.ruleKeys = Set.of("S2");
 
-    CSharpSonarWayProfile builtIn = new CSharpSonarWayProfile(metadata, roslynRules, null);
+    CSharpSonarWayProfile builtIn = new CSharpSonarWayProfile(metadata, roslynRules);
 
     assertThrows(java.lang.IllegalArgumentException.class, () -> builtIn.define(context));
   }
@@ -128,7 +128,7 @@ class CSharpSonarWayProfileTest {
   void sonar_security_missing() {
     Context context = new Context();
 
-    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules, null);
+    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules);
     sonarWay.define(context);
 
     BuiltInQualityProfile builtIn = context.profile("cs", "Sonar way");
@@ -141,7 +141,7 @@ class CSharpSonarWayProfileTest {
     Context context = new Context();
     CsRules.ruleKeys = Set.of("S3649");
 
-    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules, null);
+    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules);
     sonarWay.define(context);
 
     BuiltInQualityProfile builtIn = context.profile("cs", "Sonar way");
@@ -155,7 +155,7 @@ class CSharpSonarWayProfileTest {
     CsRules.exceptionToThrow = new Exception();
     CsRules.returnRepository = true;
 
-    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules, null);
+    CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules);
     sonarWay.define(context);
 
     assertThat(logTester.logs(Level.DEBUG)).hasSize(1);
@@ -167,12 +167,7 @@ class CSharpSonarWayProfileTest {
     ProfileRegistrar[] profileRegistrars = new ProfileRegistrar[]{
       registrarContext -> {
         registrarContext.registerDefaultQualityProfileRules(
-          "cs",
           List.of(RuleKey.of(metadata.repositoryKey(), "additionalRule"))
-        );
-        registrarContext.registerDefaultQualityProfileRules(
-          "OTHER_LANG",
-          List.of(RuleKey.of(metadata.repositoryKey(), "otherLangAdditionalRule"))
         );
       }};
     CSharpSonarWayProfile sonarWay = new CSharpSonarWayProfile(metadata, roslynRules, profileRegistrars);
@@ -181,6 +176,5 @@ class CSharpSonarWayProfileTest {
     BuiltInQualityProfile builtIn = context.profile("cs", "Sonar way");
     assertThat(builtIn.language()).isEqualTo(metadata.languageKey());
     assertThat(builtIn.rule(RuleKey.of(metadata.repositoryKey(), "additionalRule"))).isNotNull();
-    assertThat(builtIn.rule(RuleKey.of(metadata.repositoryKey(), "otherLangAdditionalRule"))).isNull();
   }
 }
