@@ -43,8 +43,23 @@ public sealed class IndentInvocation : IndentBase
             SyntaxKind.MemberBindingExpression);
     }
 
-    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current) =>
-        current is InvocationExpressionSyntax { Parent: ConditionalAccessExpressionSyntax }
-            ? null
-            : base.NodeRoot(node, current);
+    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
+    {
+        if (current is InvocationExpressionSyntax { Parent: ConditionalAccessExpressionSyntax })
+        {
+            return null;
+        }
+        else if (current.Parent is ConditionalExpressionSyntax ternary && (ternary.WhenTrue == current || ternary.WhenFalse == current))
+        {
+            return current;
+        }
+        else if (current is BinaryExpressionSyntax binary && binary.OperatorToken.IsFirstTokenOnLine())
+        {
+            return binary;
+        }
+        else
+        {
+            return base.NodeRoot(node, current);
+        }
+    }
 }

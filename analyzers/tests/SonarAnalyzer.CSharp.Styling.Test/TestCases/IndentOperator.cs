@@ -88,6 +88,14 @@ public class Sample
             && true;
     }
 
+    public bool ReturnTernary()
+    {
+        return condition
+            && true
+                ? true
+                : false;
+    }
+
     public void Invocations()
     {
         Something(condition // This is bad already

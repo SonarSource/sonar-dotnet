@@ -37,4 +37,20 @@ public sealed class IndentTernary : IndentBase
         current == node && current.GetFirstToken().IsFirstTokenOnLine()
             ? current
             : base.NodeRoot(node, current);
+
+    private int? ExpectedPosition(ConditionalExpressionSyntax ternary)
+    {
+        if (ternary.Condition is BinaryExpressionSyntax binary && binary.OperatorToken.IsFirstTokenOnLine())
+        {
+            return ExpectedPosition(binary.OperatorToken.GetLocation().GetLineSpan().StartLinePosition.Character, 4);
+        }
+        else if (ternary.Condition.GetLocation() is var location && location.StartLine() != location.EndLine())
+        {
+            return null;    // Unexpected multiline condition => not known, not supported to avoid FPs
+        }
+        else
+        {
+            return base.ExpectedPosition(ternary);
+        }
+    }
 }

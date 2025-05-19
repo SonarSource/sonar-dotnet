@@ -36,8 +36,11 @@ public abstract class IndentBase : StylingAnalyzer
 
     protected int? ExpectedPosition(SyntaxNode node) =>
         StatementRoot(node) is { } root
-            ? (root.GetLocation().GetLineSpan().StartLinePosition.Character + Offset(node, root)) / 4 * 4    // Nearest next tab distance
+            ? ExpectedPosition(root.GetLocation().GetLineSpan().StartLinePosition.Character, Offset(node, root))
             : null;
+
+    protected static int ExpectedPosition(int character, int offset) =>
+        (character + offset) / 4 * 4;   // Nearest next tab distance
 
     protected virtual SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
     {

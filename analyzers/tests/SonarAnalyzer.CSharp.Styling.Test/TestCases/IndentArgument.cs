@@ -70,6 +70,14 @@ public class Sample
             "Another");
     }
 
+    public Builder ReturnNested()
+    {
+        return new Builder()
+            .Build(
+                "Arg",
+                    "Too far"); // Noncompliant
+    }
+
     public void Invocations()
     {
         Invocation("First",

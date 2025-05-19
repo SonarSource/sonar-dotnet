@@ -94,7 +94,7 @@ public sealed class IndentOperator : IndentBase
         {
             return current.Parent;
         }
-        else if (current is ArrowExpressionClauseSyntax or LambdaExpressionSyntax or ConditionalExpressionSyntax or ForStatementSyntax)
+        else if (current is ArrowExpressionClauseSyntax or LambdaExpressionSyntax or ConditionalExpressionSyntax { Parent: not ReturnStatementSyntax } or ForStatementSyntax)
         {
             return CoalesceRoot(node);
         }

@@ -94,6 +94,30 @@ public class Sample
             .Build("Are we sure it's really built?");
     }
 
+    public bool ReturnNestedExpressions()
+    {
+        return true
+            && true
+            && builder
+                .Build()
+                    .IsTrue();   // Noncompliant
+    }
+
+    public bool ArrowNestedExpressions() =>
+        true
+        && true
+        && builder
+            .Build()
+                .IsTrue();   // Noncompliant
+
+    public object ArrowNestedExpressionTernary() =>
+        true
+        && true
+            ? builder
+                .Build()
+                    .Build()    // Noncompliant
+            : null;
+
     public void Invocations()
     {
         Something(builder
@@ -254,7 +278,7 @@ public class Sample
             .StaticMethod();
     }
 
-    public void Nested()
+    public void NestedClasses()
     {
         Builder.NestedOnce
                 .StaticMethod();    // Noncompliant

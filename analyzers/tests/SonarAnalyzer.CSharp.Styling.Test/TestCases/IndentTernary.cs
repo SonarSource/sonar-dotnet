@@ -42,6 +42,11 @@ public class Sample
             ? true
              : false;   // Noncompliant
 
+        longVariableName = condition
+            && true
+                ? true
+                    : false;    // Noncompliant
+
         longVariableName = condition ? true : false;
         longVariableName = condition
             ? true : false;     // Compliant, this is T0024
@@ -59,6 +64,12 @@ public class Sample
             ? true
             : false;
 
+    public bool ArrowLongerCondition() =>
+        condition
+        && true
+            ? true
+                : false;    // Noncompliant
+
     public bool ArrowNotInScope() =>
         condition ? true : false;
 
@@ -66,6 +77,12 @@ public class Sample
         Something(condition
         ? true          // Noncompliant
             : false);
+
+    public object ArrowInInvocationArgumentLongerCondition() =>
+        Something(condition
+            && true
+            ? true          // Noncompliant
+                : false);
 
     public object ArrowInConstructorArgument() =>
         new Nullable<bool>(condition
@@ -84,6 +101,18 @@ public class Sample
         return condition
             ? true
             : false;
+    }
+
+    public bool ReturnLongerCondition()
+    {
+        return condition
+            && true
+                ? true
+                    : false;    // Noncompliant
+        return (condition
+            && true)
+                ? true
+                    : false;    // FN, we're only looking for binary expression at top level
     }
 
     public void Invocations()
@@ -135,6 +164,16 @@ public class Sample
                 ? true
                 : false,
             "Some other argument")));
+
+        Something(condition
+            && true
+                ? true
+                    : false);    // Noncompliant)
+        Something(
+            condition
+            && true
+                ? true
+                    : false);    // Noncompliant)
     }
 
     public void ObjectInitializer()
@@ -195,7 +234,12 @@ public class Sample
                         : false)    // Noncompliant
         {
         }
-
+        if(condition
+            && true
+                ? true
+                    : false)    // Noncompliant
+        {
+        }
     }
 
     public void While()
@@ -249,6 +293,10 @@ public class Sample
     {
         _ = arg switch
         {
+            ArgumentException someLongerName => condition
+                && true
+                    ? true
+                        : false,        // Noncompliant
             Exception someLongerName => condition
                 ? true
                     : false,        // Noncompliant

@@ -38,8 +38,19 @@ public sealed class IndentArgument : IndentBase
             SyntaxKind.Argument,
             SyntaxKind.ExpressionElement);
 
-    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current) =>
-        current is ForStatementSyntax
-            ? node.Ancestors().OfType<InvocationExpressionSyntax>().FirstOrDefault()
-            : base.NodeRoot(node, current);
+    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
+    {
+        if (current is ForStatementSyntax)
+        {
+            return node.Ancestors().OfType<InvocationExpressionSyntax>().FirstOrDefault();
+        }
+        else if (current is InvocationExpressionSyntax invocation && invocation.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.OperatorToken.IsFirstTokenOnLine())
+        {
+            return memberAccess.Name;   // Off by one due to the dot
+        }
+        else
+        {
+            return base.NodeRoot(node, current);
+        }
+    }
 }
