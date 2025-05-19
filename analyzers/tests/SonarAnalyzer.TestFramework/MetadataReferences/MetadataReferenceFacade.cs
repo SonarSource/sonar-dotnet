@@ -151,6 +151,13 @@ public static class MetadataReferenceFacade
         };
 #endif
 
+    public static References SystemMemory =>
+#if NETFRAMEWORK
+        NuGetMetadataReference.SystemMemory();
+#else
+        [];
+#endif
+
     public static References SystemServiceModel =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemServiceModel;

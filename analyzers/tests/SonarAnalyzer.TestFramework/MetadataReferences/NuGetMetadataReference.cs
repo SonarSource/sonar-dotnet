@@ -21,7 +21,8 @@ namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 public static class NuGetMetadataReference
 {
-#pragma warning disable S103 // Lines should not be too long
+#pragma warning disable S103  // Lines should not be too long
+#pragma warning disable T0016 // Add an empty line before this declaration
     // Hardcoded version
     public static References MicrosoftVisualStudioQualityToolsUnitTestFramework =>
         Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2", null, "Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll");
@@ -167,6 +168,7 @@ public static class NuGetMetadataReference
     public static References SystemDDirectoryServices(string packageVersion = "4.7.0") => Create("System.DirectoryServices", packageVersion);
     public static References SystemDrawingCommon(string packageVersion = "4.7.0") => Create("System.Drawing.Common", packageVersion);
     public static References SystemIdentityModelTokensJwt(string packageVersion = TestConstants.NuGetLatestVersion) => Create("System.IdentityModel.Tokens.Jwt", packageVersion);
+    public static References SystemMemory(string packageVersion = TestConstants.NuGetLatestVersion) => Create("System.Memory", packageVersion);
     public static References SystemNetHttp(string packageVersion = TestConstants.NuGetLatestVersion) => Create("System.Net.Http", packageVersion);
     public static References SystemSecurityCryptographyOpenSsl(string packageVersion = "4.7.0") => Create("System.Security.Cryptography.OpenSsl", packageVersion);
     public static References SystemSecurityCryptographyXml(string packageVersion = TestConstants.NuGetLatestVersion) => Create("System.Security.Cryptography.Xml", packageVersion);

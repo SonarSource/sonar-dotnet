@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -415,6 +417,47 @@ namespace Tests.Diagnostics
                          x = await valueTask; // Secondary
 
         }
+    }
 
+    // https://sonarsource.atlassian.net/browse/NET-1360
+    internal class Repro_1360
+    {
+        public static async Task MethodCallChain()
+        {
+            var stream = new ValueTaskProvider();
+            var t1 = stream.ReadAsync().AsTask(); // Noncompliant FP ReadAsync returns a new ValueTask on each invocation. t1 and t2 are not the same
+            var t2 = stream.ReadAsync().AsTask(); // Secondary
+
+            await Task.WhenAll(t1, t2);
+        }
+
+        public static async Task StaticMethodCallChain()
+        {
+            var t1 = Repro_1360.StaticValueTask().AsTask(); // Noncompliant FP
+            var t2 = Repro_1360.StaticValueTask().AsTask(); // Secondary
+
+            await Task.WhenAll(t1, t2);
+        }
+
+        public static async Task MethodCallChainThreeMethods()
+        {
+            var t1 = Repro_1360.Factory().InstanceValueTask().AsTask(); // Compliant
+            var t2 = Repro_1360.Factory().InstanceValueTask().AsTask();
+
+            await Task.WhenAll(t1, t2);
+        }
+
+        public static async Task MethodCallChainTwoMethods()
+        {
+            var c = Repro_1360.Factory();
+            var t1 = c.InstanceValueTask().AsTask(); // Noncompliant FP
+            var t2 = c.InstanceValueTask().AsTask(); // Secondary
+
+            await Task.WhenAll(t1, t2);
+        }
+
+        public ValueTask<int> InstanceValueTask() => new ValueTask<int>(1);
+        public static ValueTask<int> StaticValueTask() => new ValueTask<int>(1);
+        public static Repro_1360 Factory() => new Repro_1360();
     }
 }
