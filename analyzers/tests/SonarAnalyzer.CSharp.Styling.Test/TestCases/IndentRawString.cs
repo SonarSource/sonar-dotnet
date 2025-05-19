@@ -77,6 +77,16 @@ public class Sample
             Good
             """);
 
+    public object ArrowBuilderArgument() =>
+        new Builder()
+            .Build("""
+                Good
+                """)
+            .Build("""
+            Too close
+            """);       // Noncompliant
+
+
     public string ReturnNoncompliant()
     {
         return """
@@ -322,6 +332,54 @@ public class Sample
         };
     }
 
+    public void Throw(bool condition, object arg)
+    {
+        _ = arg ?? new Exception("""
+            Good
+            """);
+        if (condition)
+        {
+            throw new Exception("""
+                Good
+                """);
+        }
+        else
+        {
+            throw new ArgumentException("""
+            Too close
+            """,            // Noncompliant
+                    """
+                    Too far
+                    """);   // Noncompliant
+
+        }
+    }
+
+    public void Builders()
+    {
+        //EqualsValue
+        var builder = new Builder("""
+            Good
+            """, """
+                Too far
+                """);   // Noncompliant
+
+        // Assignment
+        builder = new Builder("""
+            Good
+            """, """
+                Too far
+                """);   // Noncompliant
+
+
+        builder.Build("""
+            Good
+            """,
+                """
+                Too far
+                """);   // Noncompliant
+    }
+
     public static bool Invocation(params object[] args) => true;
 
     [Obsolete("""
@@ -332,6 +390,7 @@ public class Sample
 
 public class Builder
 {
+    public Builder(params object[] args) { }
     public Builder Build(params object[] args) => this;
 }
 

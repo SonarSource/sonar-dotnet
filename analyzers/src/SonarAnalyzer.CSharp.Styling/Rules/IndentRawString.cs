@@ -50,9 +50,17 @@ public sealed class IndentRawString : IndentBase
 
     protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
     {
-        if (current is StatementSyntax or ObjectCreationExpressionSyntax or ImplicitObjectCreationExpressionSyntax or AssignmentExpressionSyntax or SwitchExpressionArmSyntax)
+        if (current is StatementSyntax
+            or ObjectCreationExpressionSyntax { Parent: ArrowExpressionClauseSyntax }
+            or ImplicitObjectCreationExpressionSyntax { Parent: ArrowExpressionClauseSyntax }
+            or AssignmentExpressionSyntax
+            or SwitchExpressionArmSyntax)
         {
             return current;
+        }
+        else if (current is InvocationExpressionSyntax invocation && invocation.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.OperatorToken.IsFirstTokenOnLine())
+        {
+            return memberAccess.Name;   // Off by one due to the dot
         }
         else if (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine())
         {
