@@ -16,6 +16,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.sensors;
 
+import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -47,7 +48,7 @@ public class TelemetryProcessor implements ProjectSensor {
   }
 
   @Override
-  public void execute(SensorContext context) {
+  public void execute(@Nonnull SensorContext context) {
     if (collector == null) {
       LOG.debug("TelemetryCollector is null, skipping telemetry processing.");
       return;
