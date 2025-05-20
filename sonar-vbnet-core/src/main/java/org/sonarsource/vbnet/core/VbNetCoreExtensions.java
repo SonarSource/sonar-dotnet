@@ -40,6 +40,7 @@ import org.sonarsource.dotnet.shared.plugins.sensors.FileTypeSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.MethodDeclarationsSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.PropertiesSensor;
+import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryJsonSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryProcessor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetrySensor;
 import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollector;
@@ -61,6 +62,7 @@ public class VbNetCoreExtensions {
       TelemetrySensor.class,
       TelemetryProcessor.class,
       TelemetryJsonCollector.class,
+      TelemetryJsonSensor.class,
       PropertiesSensor.class,
       ModuleConfiguration.class,
       RealPathProvider.class,

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,6 +28,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.slf4j.event.Level;
 import org.sonar.api.config.Configuration;
+import org.sonar.api.internal.apachecommons.lang3.function.Failable;
 import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -82,7 +84,8 @@ public class ModuleConfigurationTest {
 
     ModuleConfiguration config = createModuleConfiguration(configuration);
     assertThat(config.protobufReportPaths()).isEmpty();
-    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Project '<NONE>': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly(
+      "Project '<NONE>': Property missing: 'sonar.cs.analyzer.projectOutPaths'. No protobuf files will be loaded for this project.");
   }
 
   @Test
@@ -181,6 +184,21 @@ public class ModuleConfigurationTest {
     ModuleConfiguration config = createModuleConfiguration(configuration);
 
     assertThat(config.roslynReportPaths()).containsExactly(Paths.get("C#"));
+  }
+
+  @Test
+  public void telemetryJsonPathsAreFound() {
+    Configuration configuration = createEmptyMockConfiguration();
+    var expectedPaths = new Path[]{workDir.resolve("0").resolve(ModuleConfiguration.TELEMETRY_JSON), workDir.resolve("1").resolve(ModuleConfiguration.TELEMETRY_JSON)};
+    Arrays.stream(expectedPaths).forEach(Failable.asConsumer(x -> {
+      Files.createDirectory(x.getParent());
+      Files.createFile(x);
+    }));
+
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(Arrays.stream(expectedPaths).map(x -> x.getParent().toString()).toArray(String[]::new));
+
+    ModuleConfiguration config = createModuleConfiguration(configuration);
+    assertThat(config.telemetryJsonPaths()).containsExactly(expectedPaths);
   }
 
   private Path createProtobufOut(String name) throws IOException {

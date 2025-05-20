@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +52,7 @@ import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.
 @ScannerSide
 @InstantiationStrategy(InstantiationStrategy.PER_PROJECT)
 public class ModuleConfiguration {
+  public static final String TELEMETRY_JSON = "Telemetry.json";
   private static final Logger LOG = LoggerFactory.getLogger(ModuleConfiguration.class);
   private static final String MSG_SUFFIX = "Analyzer results won't be loaded from this directory.";
 
@@ -101,6 +103,14 @@ public class ModuleConfiguration {
       LOG.debug("Project '{}': No Roslyn issues reports have been found.", projectKey);
       return Collections.emptyList();
     }
+  }
+
+  public Collection<Path> telemetryJsonPaths() {
+    // TODO: replace with the logic described in https://sonarsource.atlassian.net/browse/SCAN4NET-480
+    return Arrays.stream(configuration.getStringArray(analyzerWorkDirProperty(metadata.languageKey())))
+      .map(x -> Paths.get(x, TELEMETRY_JSON))
+      .filter(Files::exists)
+      .toList();
   }
 
   private boolean validateOutputDir(Path analyzerOutputDir) {
