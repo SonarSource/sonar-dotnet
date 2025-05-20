@@ -17,10 +17,10 @@
 package org.sonarsource.dotnet.shared.plugins.telemetryjson;
 
 import java.io.StringReader;
+import java.util.Map;
 import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.event.Level;
-import org.sonar.api.internal.apachecommons.lang3.tuple.Pair;
 import org.sonar.api.testfixtures.log.LogTester;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +42,7 @@ public class TelemetryJsonParserTest {
         { key1: Duplicate }
       """)) {
       var result = sut.parse(reader);
-      assertThat(result).extracting(Pair::getKey, Pair::getValue).containsExactly(
+      assertThat(result).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactly(
         tuple("key1", "value1"),
         tuple("key2", "2"),
         tuple("key3", "true"),
@@ -77,7 +77,7 @@ public class TelemetryJsonParserTest {
         { key3: true }
       """)) {
       var result = sut.parse(reader);
-      assertThat(result).extracting(Pair::getKey, Pair::getValue).containsExactly(
+      assertThat(result).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactly(
         tuple("key1", "value1"),
         tuple("key3", "true"));
       assertThat(logTester.logs()).containsExactly("""
@@ -95,7 +95,7 @@ public class TelemetryJsonParserTest {
         { key3: "valid" }
       """)) {
       var result = sut.parse(reader);
-      assertThat(result).extracting(Pair::getKey, Pair::getValue).containsExactly(
+      assertThat(result).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactly(
         tuple("key1", "12"));
       assertThat(logTester.logs()).containsExactly("""
         Parsing of telemetry failed. JSON:   { key1: 12 }
@@ -115,7 +115,7 @@ public class TelemetryJsonParserTest {
         { key3: -1 }
       """)) {
       var result = sut.parse(reader);
-      assertThat(result).extracting(Pair::getKey, Pair::getValue).containsExactly(
+      assertThat(result).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactly(
         tuple("key1", "42"));
       assertThat(logTester.logs()).containsExactly("""
         Parsing of telemetry failed. JSON:   { key1: 42 }

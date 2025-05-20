@@ -23,11 +23,11 @@ import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.internal.apachecommons.io.IOUtils;
-import org.sonar.api.internal.apachecommons.lang3.tuple.ImmutablePair;
 
 /**
  * Takes a streaming json like
@@ -41,9 +41,9 @@ public class TelemetryJsonParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(TelemetryJsonParser.class);
 
-  public Stream<ImmutablePair<String, String>> parse(Reader jsonReader) {
+  public Stream<Map.Entry<String, String>> parse(Reader jsonReader) {
     JsonStreamParser p = new JsonStreamParser(jsonReader);
-    var result = new ArrayList<ImmutablePair<String, String>>();
+    var result = new ArrayList<Map.Entry<String, String>>();
 
     try {
       collectTelemetry(p, result);
@@ -61,13 +61,13 @@ public class TelemetryJsonParser {
     return result.stream();
   }
 
-  private static void collectTelemetry(JsonStreamParser parser, ArrayList<ImmutablePair<String, String>> result) {
+  private static void collectTelemetry(JsonStreamParser parser, ArrayList<Map.Entry<String, String>> result) {
     parser.forEachRemaining(x ->
     {
       if (x instanceof JsonObject object) {   // We expect a stream of something like { key: value }
         for (var entry : object.entrySet()) { // { key1: value1, key2: value2 } is also okay
           if (entry.getValue().isJsonPrimitive()) {
-            result.add(ImmutablePair.of(entry.getKey(), getString(entry.getValue().getAsJsonPrimitive())));
+            result.add(Map.entry(entry.getKey(), getString(entry.getValue().getAsJsonPrimitive())));
           } else {
             LOG.debug("Could not parse telemetry property {}", x);
           }

@@ -44,6 +44,7 @@ import org.sonarsource.dotnet.shared.plugins.sensors.MethodDeclarationsSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryProcessor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetrySensor;
+import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollector;
 
 public class CSharpCoreExtensions {
 
@@ -69,6 +70,7 @@ public class CSharpCoreExtensions {
         TelemetryCollector.class,
         TelemetrySensor.class,
         TelemetryProcessor.class,
+        TelemetryJsonCollector.class,
         PropertiesSensor.class,
         RealPathProvider.class,
         // global components
