@@ -25,7 +25,7 @@ public class EnvironmentVariableScopeTest
     public void SetVariable_SetsAndRestores()
     {
         Environment.GetEnvironmentVariable(VariableName).Should().BeNullOrEmpty();
-        using (var scope = new EnvironmentVariableScope(false))
+        using (var scope = new EnvironmentVariableScope())
         {
             scope.SetVariable(VariableName, "Lorem ipsum");
             Environment.GetEnvironmentVariable(VariableName).Should().Be("Lorem ipsum");
@@ -38,9 +38,9 @@ public class EnvironmentVariableScopeTest
     [TestMethod]
     public void Dispose_Twice_DoesNotFail()
     {
-        using var outer = new EnvironmentVariableScope(false);
+        using var outer = new EnvironmentVariableScope();
         outer.SetVariable(VariableName, "Original");
-        var sut = new EnvironmentVariableScope(false);
+        var sut = new EnvironmentVariableScope();
         sut.SetVariable(VariableName, "SUT");
         Environment.GetEnvironmentVariable(VariableName).Should().Be("SUT");
         sut.Dispose();

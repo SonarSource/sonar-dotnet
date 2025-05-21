@@ -36,7 +36,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void LogCompilationMessages_CS_NonConcurrent()
         {
-            using var scope = new EnvironmentVariableScope(false) { EnableConcurrentAnalysis = false };
+            using var scope = new EnvironmentVariableScope() { EnableConcurrentAnalysis = false };
             Verify(new[] { "Normal.cs", "Second.cs" }, VerifyCompilationMessagesNonConcurrentRuleExecution);
         }
 

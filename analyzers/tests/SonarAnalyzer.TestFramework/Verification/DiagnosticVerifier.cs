@@ -33,9 +33,10 @@ public static class DiagnosticVerifier
     public static int Verify(Compilation compilation,
                              DiagnosticAnalyzer[] analyzers,
                              CompilationErrorBehavior checkMode, // ToDo: Remove this parameter in https://github.com/SonarSource/sonar-dotnet/issues/8588
-                             string additionalFilePath = null,
-                             string[] onlyDiagnostics = null,
-                             string[] additionalSourceFiles = null)
+                             string additionalFilePath,
+                             string[] onlyDiagnostics,
+                             string[] additionalSourceFiles,
+                             bool? concurrentAnalysis = null)
     {
         SuppressionHandler.HookSuppression();
         try
@@ -43,7 +44,7 @@ public static class DiagnosticVerifier
             var sources = compilation.SyntaxTrees.ExceptRazorGeneratedFiles()
                 .Select(x => new FileContent(x))
                 .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
-            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics).ToArray();
+            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics, concurrentAnalysis).ToArray();
             var expected = new CompilationIssues(sources);
             VerifyNoExceptionThrown(diagnostics);
             Compare(compilation.LanguageVersionString(), new(diagnostics), expected);
@@ -78,21 +79,23 @@ public static class DiagnosticVerifier
     }
 
     public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer analyzer, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
-        AnalyzerDiagnostics(compilation, new[] { analyzer }, checkMode, additionalFilePath, onlyDiagnostics);
+        AnalyzerDiagnostics(compilation, [analyzer], checkMode, additionalFilePath, onlyDiagnostics);
 
     public static IEnumerable<Diagnostic> AnalyzerDiagnostics(Compilation compilation, DiagnosticAnalyzer[] analyzers, CompilationErrorBehavior checkMode, string additionalFilePath = null, string[] onlyDiagnostics = null) =>
         VerifyNoExceptionThrown(DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics));
 
     public static IEnumerable<Diagnostic> AnalyzerExceptions(Compilation compilation, DiagnosticAnalyzer analyzer) =>
-        DiagnosticsAndErrors(compilation, new[] { analyzer }, CompilationErrorBehavior.FailTest).Where(x => x.Id == AD0001);
+        DiagnosticsAndErrors(compilation, [analyzer], CompilationErrorBehavior.FailTest, null, null).Where(x => x.Id == AD0001);
 
     private static ImmutableArray<Diagnostic> DiagnosticsAndErrors(Compilation compilation,
                                                                    DiagnosticAnalyzer[] analyzer,
                                                                    CompilationErrorBehavior checkMode, // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
-                                                                   string additionalFilePath = null,
-                                                                   string[] onlyDiagnostics = null)
+                                                                   string additionalFilePath,
+                                                                   string[] onlyDiagnostics,
+                                                                   bool? concurrentAnalysis = null)
     {
-        onlyDiagnostics ??= Array.Empty<string>();
+        using var scope = concurrentAnalysis.HasValue ? new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis.Value } : null;
+        onlyDiagnostics ??= [];
         var supportedDiagnostics = analyzer
             .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
             .ToImmutableDictionary(x => x, Severity)

@@ -103,7 +103,8 @@ internal class Verifier
                 builder.ErrorBehavior,
                 builder.AdditionalFilePath,
                 onlyDiagnosticIds,
-                razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray()));
+                razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray(),
+                builder.ConcurrentAnalysis));
         numberOfIssues.Should().BeGreaterThan(0, $"otherwise you should use '{nameof(VerifyNoIssues)}' instead");
     }
 
@@ -185,11 +186,8 @@ internal class Verifier
         }
     }
 
-    public IEnumerable<CompilationData> Compile(bool concurrentAnalysis)
-    {
-        using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis };
-        return CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray()).Select(x => new CompilationData(x, null));
-    }
+    public IEnumerable<CompilationData> Compile(bool concurrentAnalysis) =>
+        CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray()).Select(x => new CompilationData(x, null));
 
     private ProjectBuilder CreateProject(bool concurrentAnalysis)
     {

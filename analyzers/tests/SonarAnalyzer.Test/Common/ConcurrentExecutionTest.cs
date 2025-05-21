@@ -36,7 +36,7 @@ public class ConcurrentExecutionTest
     [DataRow("loremipsum")]
     public void Verify_ConcurrentExecutionIsExplicitlyEnabled(string value)
     {
-        using var scope = new EnvironmentVariableScope(false);
+        using var scope = new EnvironmentVariableScope();
         scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
         var reader = new ConcurrentExecutionReader();
         reader.IsConcurrentExecutionEnabled.Should().BeNull();
@@ -49,7 +49,7 @@ public class ConcurrentExecutionTest
     [DataRow("fALSE")]
     public void Verify_ConcurrentExecutionIsExplicitlyDisabled(string value)
     {
-        using var scope = new EnvironmentVariableScope(false);
+        using var scope = new EnvironmentVariableScope();
         scope.SetVariable(SonarDiagnosticAnalyzer.EnableConcurrentExecutionVariable, value);
         var reader = new ConcurrentExecutionReader();
         reader.IsConcurrentExecutionEnabled.Should().BeNull();
