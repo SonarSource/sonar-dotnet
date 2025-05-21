@@ -37,13 +37,13 @@ public record VerifierBuilder
 {
     // All properties are (and should be) immutable.
     public ImmutableArray<Func<DiagnosticAnalyzer>> Analyzers { get; init; } = ImmutableArray<Func<DiagnosticAnalyzer>>.Empty;
-    public bool AutogenerateConcurrentFiles { get; init; } = true;
     public string BasePath { get; init; }
     public Func<SonarCodeFix> CodeFix { get; init; }
     public string CodeFixedPath { get; init; }
     public string CodeFixedPathBatch { get; init; }
     public string CodeFixTitle { get; init; }
-    public bool ConcurrentAnalysis { get; init; } = true;
+    public bool ConcurrentAnalysis { get; init; } = !Debugger.IsAttached;
+    public bool AutogenerateConcurrentFiles { get; init; } = !Debugger.IsAttached;
     public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
     public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = ImmutableArray<DiagnosticDescriptor>.Empty;
     public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
