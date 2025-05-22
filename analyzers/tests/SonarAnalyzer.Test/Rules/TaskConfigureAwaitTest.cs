@@ -14,7 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
@@ -39,20 +38,16 @@ public class TaskConfigureAwaitTest
 #endif
 
     [TestMethod]
-    public void TaskConfigureAwait_ConsoleApp()
-    {
-        const string code = @"
-using System.Threading.Tasks;
+    public void TaskConfigureAwait_ConsoleApp() =>
+        builder.AddSnippet("""
+            using System.Threading.Tasks;
 
-public static class EntryPoint
-{
-    public async static Task Main() => await Task.Delay(1000); // Compliant
-}";
-        var projectBuilder = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).AddSnippet(code);
-        var compilationOptions = new CSharpCompilationOptions(OutputKind.ConsoleApplication);
-        var analyzer = new TaskConfigureAwait();
-        var compilation = projectBuilder.GetCompilation(null, compilationOptions);
-
-        DiagnosticVerifier.Verify(compilation, analyzer);
-    }
+            public static class EntryPoint
+            {
+                public async static Task Main() => await Task.Delay(1000); // Compliant
+            }
+            """)
+            .WithOutputKind(OutputKind.ConsoleApplication)
+            .WithOptions(LanguageOptions.FromCSharp8)
+            .VerifyNoIssues();
 }

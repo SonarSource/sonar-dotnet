@@ -24,42 +24,32 @@ namespace SonarAnalyzer.Test.Rules
     {
         [TestMethod]
         public void OptionStrictOn_IsOff_ForProject() =>
-            VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Off);
+            CreateBuilder("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Off).Verify();
 
         [TestMethod]
         public void OptionStrictOn_IsCustom_ForProject() =>
-            VerifyAnalyzer("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Custom);
+            CreateBuilder("' Noncompliant ^1#0 {{Configure 'Option Strict On' for assembly 'project0'.}}", OptionStrict.Custom).Verify();
 
         [TestMethod]
         public void OptionStrictOn_IsOff() =>
-            VerifyAnalyzer("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}", OptionStrict.On);
+            CreateBuilder("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}", OptionStrict.On).Verify();
 
         [TestMethod]
         public void OptionStrictOn_IsOn() =>
-            VerifyAnalyzer("Option Strict On ' Compliant", OptionStrict.On);
+            CreateBuilder("Option Strict On ' Compliant", OptionStrict.On).VerifyNoIssues();
 
         [TestMethod]
-        public void OptionStrictOn_Concurrent()
-        {
-            using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
-            var project = SolutionBuilder.Create()
-                                         .AddProject(AnalyzerLanguage.VisualBasic)
-                                         .AddSnippet("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}")
-                                         .AddSnippet("Option Strict On ' Compliant");
-            VerifyAnalyzer(project, OptionStrict.On);
-        }
+        public void OptionStrictOn_Concurrent() =>
+            CreateBuilder(OptionStrict.On)
+                .AddSnippet("Option Strict Off ' Noncompliant ^1#17 {{Change this to 'Option Strict On'.}}")
+                .AddSnippet("Option Strict On ' Compliant")
+                .WithConcurrentAnalysis(true)
+                .Verify();
 
-        private static void VerifyAnalyzer(string snippet, OptionStrict optionStrict)
-        {
-            var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet(snippet);
-            VerifyAnalyzer(project, optionStrict);
-        }
+        private static VerifierBuilder CreateBuilder(string snippet, OptionStrict optionStrict) =>
+            CreateBuilder(optionStrict).AddSnippet(snippet);
 
-        private static void VerifyAnalyzer(ProjectBuilder project, OptionStrict optionStrict)
-        {
-            var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionStrict: optionStrict);
-            var compilation = project.GetCompilation(null, options);
-            DiagnosticVerifier.Verify(compilation, new OptionStrictOn());
-        }
+        private static VerifierBuilder CreateBuilder(OptionStrict optionStrict) =>
+            new VerifierBuilder<OptionStrictOn>().WithCompilationOptionsCustomization(x => ((VisualBasicCompilationOptions)x).WithOptionStrict(optionStrict));
     }
 }

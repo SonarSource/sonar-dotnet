@@ -136,15 +136,12 @@ public class DoNotHardcodeCredentialsTest
         var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
         paths.Should().NotBeEmpty();
         var compilation = CreateCompilation(language);
-        foreach (var path in paths)
-        {
-            DiagnosticVerifier.Verify(
-                compilation,
-                analyzer,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path),
-                null,
-                [path]);
-        }
+        new VerifierBuilder()
+            .AddAnalyzer(() => analyzer)
+            .AddSnippet(string.Empty) // Nothing to see here, C# and VB
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, paths))
+            .AddAdditionalSourceFiles(paths)
+            .Verify();
     }
 
     private static Compilation CreateCompilation(AnalyzerLanguage language) =>

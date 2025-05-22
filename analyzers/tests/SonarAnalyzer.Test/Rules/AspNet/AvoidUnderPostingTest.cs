@@ -31,7 +31,7 @@ public class AvoidUnderPostingTest
 
     private readonly VerifierBuilder builder = new VerifierBuilder<AvoidUnderPosting>()
             .WithBasePath("AspNet")
-            .AddReferences([..AspNetReferences, .. NuGetMetadataReference.SystemTextJson("7.0.4"), ..NuGetMetadataReference.NewtonsoftJson("13.0.3")]);
+            .AddReferences([.. AspNetReferences, .. NuGetMetadataReference.SystemTextJson("7.0.4"), .. NuGetMetadataReference.NewtonsoftJson("13.0.3")]);
 
     [TestMethod]
     public void AvoidUnderPosting_CSharp() =>
@@ -123,7 +123,7 @@ public class AvoidUnderPostingTest
             .AddSnippet(controllerCode)
             .Solution;
         var compiledAspNetProject = solution.Compile()[1];
-        DiagnosticVerifier.Verify(compiledAspNetProject, new AvoidUnderPosting());
+        DiagnosticVerifier.Verify(compiledAspNetProject, [new AvoidUnderPosting()], CompilationErrorBehavior.Default, null, [], []);
     }
 }
 

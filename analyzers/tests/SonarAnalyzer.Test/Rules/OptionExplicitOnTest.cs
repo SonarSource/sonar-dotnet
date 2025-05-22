@@ -22,39 +22,33 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class OptionExplicitOnTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<OptionExplicitOn>();
-
     [TestMethod]
-    public void OptionExplicitOn_IsOffForProject()
-    {
-        var project = SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}");
-        var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false);    // optionExplicit is true by default => tested in other tests
-        var compilation = project.GetCompilation(null, options);
-        DiagnosticVerifier.Verify(compilation, new OptionExplicitOn());
-    }
+    public void OptionExplicitOn_IsOffForProject() =>
+        CreateBuilder("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}", false).Verify();
 
     [TestMethod]
     public void OptionExplicitOn_IsOff() =>
-        builder.AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}").Verify();
+        CreateBuilder("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}", true).Verify();
 
     [TestMethod]
     public void OptionExplicitOn_IsOn() =>
-        builder.AddSnippet("Option Explicit On").VerifyNoIssues();
+        CreateBuilder("Option Explicit On", true).VerifyNoIssues();
 
     [TestMethod]
     public void OptionExplicitOn_IsMissing() =>
-        builder.AddSnippet("Option Strict Off").VerifyNoIssues();
+        CreateBuilder("Option Strict Off", true).VerifyNoIssues();
 
     [TestMethod]
-    public void OptionExplicitOn_Concurrent()
-    {
-        using var scope = new EnvironmentVariableScope { EnableConcurrentAnalysis = true};
-        var project = SolutionBuilder.Create()
-                                     .AddProject(AnalyzerLanguage.VisualBasic)
-                                     .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}")
-                                     .AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}");
-        var options = new VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary, optionExplicit: false);    // optionExplicit is true by default => tested in other tests
-        var compilation = project.GetCompilation(null, options);
-        DiagnosticVerifier.Verify(compilation, new OptionExplicitOn());
-    }
+    public void OptionExplicitOn_Concurrent()  =>
+        CreateBuilder(false)
+            .AddSnippet("' Noncompliant ^1#0 {{Configure 'Option Explicit On' for assembly 'project0'.}}")
+            .AddSnippet("Option Explicit Off ' Noncompliant ^1#19 {{Change this to 'Option Explicit On'.}}")
+            .WithConcurrentAnalysis(true)
+            .Verify();
+
+    private static VerifierBuilder CreateBuilder(string snippet, bool optionExplicit) =>
+        CreateBuilder(optionExplicit).AddSnippet(snippet);
+
+    private static VerifierBuilder CreateBuilder(bool optionExplicit) =>
+        new VerifierBuilder<OptionExplicitOn>().WithCompilationOptionsCustomization(x => ((VisualBasicCompilationOptions)x).WithOptionExplicit(optionExplicit));
 }

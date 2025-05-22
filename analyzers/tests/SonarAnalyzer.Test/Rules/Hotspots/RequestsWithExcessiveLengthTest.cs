@@ -100,41 +100,48 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [DataTestMethod]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ContentLength")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\DefaultSettings")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\RequestLength")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\RequestAndContentLength")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\CornerCases")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ValidValues")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\EmptySystemWeb")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\EmptySystemWebServer")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\SmallValues")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\InvalidConfig")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWeb")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWebServer")]
-        [DataRow(@"TestCases\WebConfig\RequestsWithExcessiveLength\UnexpectedContent")]
-        public void RequestsWithExcessiveLength_CS_WebConfig(string root)
+        [DataRow(true, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ContentLength")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\DefaultSettings")]
+        [DataRow(true, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\RequestLength")]
+        [DataRow(true, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\RequestAndContentLength")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\CornerCases")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ValidValues")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\EmptySystemWeb")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\EmptySystemWebServer")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\SmallValues")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\InvalidConfig")]
+        [DataRow(true, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWeb")]
+        [DataRow(true, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\NoSystemWebServer")]
+        [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\UnexpectedContent")]
+        public void RequestsWithExcessiveLength_CS_WebConfig(bool expectIssues, string root)
         {
             var webConfigPath = GetWebConfigPath(root);
-            DiagnosticVerifier.Verify(
-                CreateCompilation(),
-                new CS.RequestsWithExcessiveLength(),
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-                null,
-                [webConfigPath]);
+            var withAdditionalSourceFiles = builderCS
+                .AddSnippet("// Nothing to see here")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+                .AddAdditionalSourceFiles(webConfigPath);
+            if (expectIssues)
+            {
+                withAdditionalSourceFiles.Verify();
+            }
+            else
+            {
+                withAdditionalSourceFiles.VerifyNoIssues();
+            }
         }
 
         [TestMethod]
-        // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7867
         public void RequestsWithExcessiveLength_CS_WebConfig_CustomParameterValue()
         {
+            // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/7867
             var webConfigPath = GetWebConfigPath(@"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ContentLength_Compliant"); // 83886080
-            DiagnosticVerifier.Verify(
-                CreateCompilation(),
-                new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 83_8860_800 },
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-                null,
-                [webConfigPath]);
+            new VerifierBuilder()
+                .AddAnalyzer(() => new CS.RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled) { FileUploadSizeLimit = 83_8860_800 })
+                .AddReferences(GetAdditionalReferences())
+                .AddSnippet("// Nothing to see here")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+                .AddAdditionalSourceFiles(webConfigPath)
+                .VerifyNoIssues();
         }
 
         [TestMethod]
@@ -144,12 +151,11 @@ namespace SonarAnalyzer.Test.Rules
             const string missingDirectory = @"TestCases\WebConfig\RequestsWithExcessiveLength\NonExistingDirectory";
             var corruptFilePath = GetWebConfigPath(root);
             var nonExistingFilePath = GetWebConfigPath(missingDirectory);
-            DiagnosticVerifier.Verify(
-                CreateCompilation(),
-                new CS.RequestsWithExcessiveLength(),
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
-                null,
-                [corruptFilePath]);
+            builderCS
+                .AddSnippet("// Nothing to see here")
+                .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath))
+                .AddAdditionalSourceFiles(corruptFilePath)
+                .VerifyNoIssues();
         }
 
         internal static IEnumerable<MetadataReference> GetAdditionalReferences() =>
@@ -157,8 +163,6 @@ namespace SonarAnalyzer.Test.Rules
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(TestConstants.NuGetLatestVersion));
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
-
-        private static Compilation CreateCompilation() => SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
 
 #if NET
 

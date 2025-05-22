@@ -161,7 +161,7 @@ internal class Verifier
     {
         foreach (var compilation in Compile(false))
         {
-            DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.AdditionalFilePath);
+            DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
             new FileInfo(builder.ProtobufPath).Length.Should().Be(0, "protobuf file should be empty");
         }
     }
@@ -171,7 +171,7 @@ internal class Verifier
     {
         foreach (var compilation in Compile(false))
         {
-            DiagnosticVerifier.Verify(compilation.Compilation, analyzers.Single(), builder.AdditionalFilePath);
+            DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
             verifyProtobuf(ReadProtobuf().ToList());
         }
 
@@ -187,7 +187,7 @@ internal class Verifier
     }
 
     public IEnumerable<CompilationData> Compile(bool concurrentAnalysis) =>
-        CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray()).Select(x => new CompilationData(x, null));
+        CreateProject(concurrentAnalysis).Solution.Compile(builder.ParseOptions.ToArray()).Select(x => new CompilationData(x, builder.AdditionalSourceFiles.ToArray()));
 
     private ProjectBuilder CreateProject(bool concurrentAnalysis)
     {
@@ -204,6 +204,10 @@ internal class Verifier
             .AddDocuments(sourceFilePaths)
             .AddDocuments(concurrentSourceFiles)
             .AddReferences(builder.References);
+        if (builder.CompilationOptionsCustomization is not null)
+        {
+            projectBuilder = ProjectBuilder.FromProject(projectBuilder.Project.WithCompilationOptions(builder.CompilationOptionsCustomization(projectBuilder.Project.CompilationOptions)));
+        }
         if (hasRazorFiles)
         {
             projectBuilder = projectBuilder

@@ -22,8 +22,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class DoNotHardcodeSecretsTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled))
-            .WithBasePath("Hotspots");
+    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
 
     public TestContext TestContext { get; set; }
 
@@ -31,36 +30,27 @@ public class DoNotHardcodeSecretsTest
     public void DoNotHardcodeSecrets_DefaultValues() =>
         builder.AddPaths("DoNotHardcodeSecrets.cs").Verify();
 
-    // TODO: Add snippet with parametrisation
     [TestMethod]
     public void DoNotHardcodeSecrets_WebConfig() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
+        DoNotHardcodeCredentials_ExternalFiles("WebConfig", "*.config");
 
     [TestMethod]
     public void DoNotHardcodeSecrets_AppSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles("AppSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeSecrets_LaunchSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles("LaunchSettings", "*.json");
 
-    private void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
+    private void DoNotHardcodeCredentials_ExternalFiles(string testDirectory, string pattern)
     {
         var root = @$"TestCases\{testDirectory}\DoNotHardcodeSecrets";
         var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
         paths.Should().NotBeEmpty();
-        var compilation = CreateCompilation(language);
-        foreach (var path in paths)
-        {
-            DiagnosticVerifier.Verify(
-                compilation,
-                analyzer,
-                AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, path),
-                null,
-                [path]);
-        }
+        builder
+            .AddSnippet("// Nothing to see here")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, paths))
+            .AddAdditionalSourceFiles(paths)
+            .Verify();
     }
-
-    private static Compilation CreateCompilation(AnalyzerLanguage language) =>
-        SolutionBuilder.Create().AddProject(language).GetCompilation();
 }

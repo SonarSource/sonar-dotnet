@@ -26,24 +26,26 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MethodsShouldUseBaseTypes_Internals()
         {
-            const string code1 = @"
-internal interface IFoo
-{
-    bool IsFoo { get; }
-}
+            const string code1 = """
+                internal interface IFoo
+                {
+                    bool IsFoo { get; }
+                }
 
-public class Foo : IFoo
-{
-    public bool IsFoo { get; set; }
-}";
-            const string code2 = @"
-internal class Bar
-{
-    public void MethodOne(Foo foo)
-    {
-        var x = foo.IsFoo;
-    }
-}";
+                public class Foo : IFoo
+                {
+                    public bool IsFoo { get; set; }
+                }
+                """;
+            const string code2 = """
+                internal class Bar
+                {
+                    public void MethodOne(Foo foo)
+                    {
+                        var x = foo.IsFoo;
+                    }
+                }
+                """;
             var solution = SolutionBuilder.Create()
                 .AddProject(AnalyzerLanguage.CSharp)
                 .AddSnippet(code1)
@@ -54,7 +56,7 @@ internal class Bar
                 .Solution;
             foreach (var compilation in solution.Compile())
             {
-                DiagnosticVerifier.Verify(compilation, new MethodsShouldUseBaseTypes());
+                DiagnosticVerifier.Verify(compilation, [new MethodsShouldUseBaseTypes()], CompilationErrorBehavior.Default, null, [], []);
             }
         }
 

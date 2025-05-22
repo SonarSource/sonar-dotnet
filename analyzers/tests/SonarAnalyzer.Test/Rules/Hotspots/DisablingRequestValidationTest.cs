@@ -31,39 +31,31 @@ public class DisablingRequestValidationTest
 
     [TestMethod]
     public void DisablingRequestValidation_CS() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
+        CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
             .AddPaths("DisablingRequestValidation.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
             .Verify();
 
     [TestMethod]
     public void DisablingRequestValidation_CS_Disabled() =>
-         new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.Hotspot))
+         CreateBuilderCS(AnalyzerConfiguration.Hotspot)
             .AddPaths("DisablingRequestValidation.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
             .VerifyNoIssuesIgnoreErrors();
 
     [TestMethod]
     public void DisablingRequestValidation_CS_NoIssuesInTestCode() =>
-         new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
+         CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
             .AddPaths("DisablingRequestValidation.cs")
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
             .AddTestReference()
             .VerifyNoIssuesIgnoreErrors();
 
     [DataTestMethod]
-    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Values")]
-    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\Formatting")]
-    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
-    public void DisablingRequestValidation_CS_WebConfig(string root)
+    [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\Values")]
+    [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\Formatting")]
+    [DataRow(false, @"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
+    public void DisablingRequestValidation_CS_WebConfig(bool expectIssues, string root)
     {
         var webConfigPath = Path.Combine(root, WebConfig);
-        DiagnosticVerifier.Verify(
-            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-            null,
-            [webConfigPath]);
+        VerifyAdditionalFiles(expectIssues, webConfigPath);
     }
 
     [TestMethod]
@@ -72,13 +64,8 @@ public class DisablingRequestValidationTest
         var root = @"TestCases\WebConfig\DisablingRequestValidation\Corrupt";
         var nonexisting = @"TestCases\WebConfig\DisablingRequestValidation\NonExsitingDirectory";
         var corruptFilePath = Path.Combine(root, WebConfig);
-        var nonExistingFilePath = Path.Combine(nonexisting, WebConfig);
-        DiagnosticVerifier.Verify(
-            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, corruptFilePath, nonExistingFilePath),
-            null,
-            [corruptFilePath]);
+        var nonExistentFilePath = Path.Combine(nonexisting, WebConfig);
+        VerifyAdditionalFiles(false, corruptFilePath, nonExistentFilePath);
     }
 
     [DataTestMethod]
@@ -98,8 +85,12 @@ public class DisablingRequestValidationTest
             filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
         }
         var analyzer = new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled);
-        var additionalFilePath = AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray());
-        DiagnosticVerifier.Verify(compilation, analyzer, additionalFilePath, null, filesToAnalyze.ToArray());
+        filesToAnalyze.Add(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray()));
+        CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+            .AddSnippet("// Nothing to see here")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray()))
+            .AddAdditionalSourceFiles(filesToAnalyze.ToArray())
+            .Verify();
     }
 
     [TestMethod]
@@ -107,39 +98,27 @@ public class DisablingRequestValidationTest
     {
         var root = @"TestCases\WebConfig\DisablingRequestValidation\LowerCase";
         var webConfigPath = Path.Combine(root, "web.config");
-        DiagnosticVerifier.Verify(
-            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-            null,
-            [webConfigPath]);
+        VerifyAdditionalFiles(true, webConfigPath);
     }
 
     [DataTestMethod]
-    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformCustom\Web.Custom.config")]
-    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
-    [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
-    public void DisablingRequestValidation_CS_WebConfig_Transformation(string configPath) =>
-        DiagnosticVerifier.Verify(
-            SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation(),
-            new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, configPath),
-            null,
-            [configPath]);
+    [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\TransformCustom\Web.Custom.config")]
+    [DataRow(false, @"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
+    [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]
+    public void DisablingRequestValidation_CS_WebConfig_Transformation(bool expectIssues, string configPath) =>
+        VerifyAdditionalFiles(expectIssues, configPath);
 
     [TestMethod]
     public void DisablingRequestValidation_VB() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled))
+        CreateBuilderVB(AnalyzerConfiguration.AlwaysEnabled)
             .AddPaths("DisablingRequestValidation.vb")
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
             .WithOptions(LanguageOptions.FromVisualBasic14)
             .Verify();
 
     [TestMethod]
     public void DisablingRequestValidation_VB_Disabled() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DisablingRequestValidation(AnalyzerConfiguration.Hotspot))
+        CreateBuilderVB(AnalyzerConfiguration.Hotspot)
             .AddPaths("DisablingRequestValidation.vb")
-            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion))
             .VerifyNoIssuesIgnoreErrors();
 
     [TestMethod]
@@ -147,11 +126,38 @@ public class DisablingRequestValidationTest
     {
         var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";
         var webConfigPath = Path.Combine(root, WebConfig);
-        DiagnosticVerifier.Verify(
-            SolutionBuilder.Create().AddProject(AnalyzerLanguage.VisualBasic).GetCompilation(),
-            new VB.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled),
-            AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath),
-            null,
-            [webConfigPath]);
+        CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+            .AddSnippet("// Nothing to see here")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
+            .AddAdditionalSourceFiles(webConfigPath)
+            .Verify();
+    }
+
+    private static VerifierBuilder CreateBuilderCS(IAnalyzerConfiguration configuration) =>
+        new VerifierBuilder()
+            .WithBasePath("Hotspots")
+            .AddAnalyzer(() => new CS.DisablingRequestValidation(configuration))
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
+
+    private static VerifierBuilder CreateBuilderVB(IAnalyzerConfiguration configuration) =>
+        new VerifierBuilder()
+            .WithBasePath("Hotspots")
+            .AddAnalyzer(() => new VB.DisablingRequestValidation(configuration))
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
+
+    private void VerifyAdditionalFiles(bool expectIssues, string additionalSourceFile, params string[] additionalFilesToAnalyze)
+    {
+        var withAdditionalSourceFiles = CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+            .AddSnippet("// Nothing to see here")
+            .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, additionalFilesToAnalyze.Append(additionalSourceFile).ToArray()))
+            .AddAdditionalSourceFiles(additionalSourceFile);
+        if (expectIssues)
+        {
+            withAdditionalSourceFiles.Verify();
+        }
+        else
+        {
+            withAdditionalSourceFiles.VerifyNoIssues();
+        }
     }
 }
