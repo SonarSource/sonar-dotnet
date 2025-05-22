@@ -97,11 +97,7 @@ public class TelemetryJsonParserTest {
       var result = sut.parse(reader);
       assertThat(result).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactly(
         tuple("key1", "12"));
-      assertThat(logTester.logs()).containsExactly("""
-        Parsing of telemetry failed. JSON:   { key1: 12 }
-          { key2: # }
-          { key3: "valid" }
-        """);
+      assertThat(logTester.logs()).containsExactly("Parsing of telemetry failed.");
     }
   }
 
@@ -117,11 +113,7 @@ public class TelemetryJsonParserTest {
       var result = sut.parse(reader);
       assertThat(result).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactly(
         tuple("key1", "42"));
-      assertThat(logTester.logs()).containsExactly("""
-        Parsing of telemetry failed. JSON:   { key1: 42 }
-          { key2: 12
-          { key3: -1 }
-        """);
+      assertThat(logTester.logs()).containsExactly("Parsing of telemetry failed.");
     }
   }
 }

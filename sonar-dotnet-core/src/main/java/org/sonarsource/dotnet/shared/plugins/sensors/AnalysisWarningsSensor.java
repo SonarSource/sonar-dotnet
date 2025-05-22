@@ -20,7 +20,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.Configuration;
 import org.sonar.api.notifications.AnalysisWarnings;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.slf4j.Logger;
@@ -33,10 +32,10 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
+import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
 
 /**
  * This class is responsible to handle all the analysis warnings that need to be sent to Sonar Qube/Cloud.
@@ -45,14 +44,13 @@ import java.util.stream.Stream;
 public final class AnalysisWarningsSensor implements ProjectSensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(AnalysisWarningsSensor.class);
-  private static final String SUFFIX = ".sonar";
   private static final Gson GSON = new Gson();
 
   private static final Pattern AnalysisWarningsPattern = Pattern.compile("AnalysisWarnings\\..*\\.json");
-  private final Configuration configuration;
+  private final AbstractLanguageConfiguration configuration;
   private final AnalysisWarnings analysisWarnings;
 
-  public AnalysisWarningsSensor(Configuration configuration, AnalysisWarnings analysisWarnings){
+  public AnalysisWarningsSensor(AbstractLanguageConfiguration configuration, AnalysisWarnings analysisWarnings){
     this.configuration = configuration;
     this.analysisWarnings = analysisWarnings;
   }
@@ -64,20 +62,12 @@ public final class AnalysisWarningsSensor implements ProjectSensor {
 
   @Override
   public void execute(final SensorContext sensorContext) {
-    // Working directory folder is constructed from SonarOutputDir + ".sonar". We have to remove the suffix and search for valid configuration files.
-    // e.g.
+    // Search for AnalysisWarnings.*.json files:
     //    .sonarqube\out\AnalysisWarnings.AutoScan.json
     //    .sonarqube\out\AnalysisWarnings.Scanner.json
-    configuration
-      .get("sonar.working.directory")
-      .filter(s -> s.endsWith(SUFFIX))
-      .map(AnalysisWarningsSensor::getOutputDir)
+    configuration.outputDir()
       .map(AnalysisWarningsSensor::getFilePaths)
       .ifPresent(this::publishMessages);
-  }
-
-  private static Path getOutputDir(String workingDirectory) {
-    return Paths.get(workingDirectory).getParent();
   }
 
   private static Stream<Path> getFilePaths(Path outputDirectory) {

@@ -18,12 +18,14 @@ package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.util.ArrayList;
 import java.util.Map;
+import javax.annotation.Nonnull;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.stubbing.Answer;
 import org.slf4j.event.Level;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
@@ -60,7 +62,7 @@ public class TelemetryJsonProcessorTest {
     when(metadata.languageKey()).thenReturn(LANG_KEY);
     when(metadata.languageName()).thenReturn(LANG_NAME);
     collector = new TelemetryJsonCollector();
-    sensor = new TelemetryJsonProcessor(collector, metadata);
+    sensor = new TelemetryJsonProcessor(collector, new TelemetryJsonProjectCollector.Empty(), metadata);
   }
 
   @Test
@@ -73,7 +75,7 @@ public class TelemetryJsonProcessorTest {
 
   @Test
   public void executeTelemetryProcessor_withNullCollector() {
-    sensor = new TelemetryJsonProcessor(null, mock(PluginMetadata.class));
+    sensor = new TelemetryJsonProcessor(null, new TelemetryJsonProjectCollector.Empty(), mock(PluginMetadata.class));
     sensor.execute(context);
     assertThat(logTester.logs()).containsExactly(
       "TelemetryJsonCollector is null, skipping telemetry processing.");
@@ -98,5 +100,38 @@ public class TelemetryJsonProcessorTest {
       "Adding metric: key1=value1",
       "Adding metric: key2=value2",
       "Added 2 metrics.");
+  }
+
+  @Test
+  public void executeTelemetryProcessorWithTelemetryJsonProjectCollector() {
+    collector.addTelemetry("key1", "value1");
+    collector.addTelemetry("key2", "value2");
+    var projectSensor = new TelemetryJsonProjectCollector() {
+      @Override
+      public void execute(@Nonnull SensorContext sensorContext) {
+        collector.addTelemetry(Map.entry("projectKey1", "value1"));
+        collector.addTelemetry(Map.entry("projectKey2", "value2"));
+      }
+    };
+    final var telemetry = new ArrayList<Map.Entry<String, String>>();
+    doAnswer((Answer<Void>) invocationOnMock -> {
+      // Intercept the call to context.addTelemetryProperty and capture the send telemetry in a list
+      telemetry.add(Map.entry(invocationOnMock.getArgument(0), invocationOnMock.getArgument(1)));
+      return null;
+    }).when(context).addTelemetryProperty(anyString(), anyString());
+    var telemetryJsonProcessor = new TelemetryJsonProcessor(collector, projectSensor, mock(PluginMetadata.class));
+    telemetryJsonProcessor.execute(context);
+    assertThat(telemetry).containsExactlyInAnyOrder(
+      Map.entry("key1", "value1"),
+      Map.entry("key2", "value2"),
+      Map.entry("projectKey1", "value1"),
+      Map.entry("projectKey2", "value2"));
+    assertThat(logTester.logs()).containsExactly(
+      "Found 4 telemetry messages.",
+      "Adding metric: key1=value1",
+      "Adding metric: key2=value2",
+      "Adding metric: projectKey1=value1",
+      "Adding metric: projectKey2=value2",
+      "Added 4 metrics.");
   }
 }

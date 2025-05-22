@@ -31,6 +31,12 @@ import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollector;
 import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonParser;
 
+/**
+ * This class is executed once per module (csproj/vbproj). It takes the plugin-wide TelemetryJsonCollector and adds found telemetry to it.
+ * There are two instances of TelemetryJsonCollector (one for C# and one for VB).
+ * The TelemetryJsonProcessor is executed ones per project (sln) per plugin after all TelemetryJsonSensor are executed. It takes the TelemetryJsonCollector
+ * and sends them to the server.
+ */
 public class TelemetryJsonSensor implements Sensor {
 
   private static final Logger LOG = LoggerFactory.getLogger(TelemetryJsonSensor.class);

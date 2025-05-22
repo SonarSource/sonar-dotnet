@@ -20,14 +20,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonStreamParser;
 import com.google.gson.JsonSyntaxException;
-import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.internal.apachecommons.io.IOUtils;
 
 /**
  * Takes a streaming json like
@@ -48,14 +46,7 @@ public class TelemetryJsonParser {
     try {
       collectTelemetry(p, result);
     } catch (JsonSyntaxException exception) {
-      String json = "Reader reset failed";
-      try {
-        jsonReader.reset();
-        json = IOUtils.toString(jsonReader);
-      } catch (IOException ignored) {
-        // The debug message will be empty. Not the end of the world.
-      }
-      LOG.debug("Parsing of telemetry failed. JSON: {}", json);
+      LOG.debug("Parsing of telemetry failed.");
     }
 
     return result.stream();

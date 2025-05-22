@@ -46,6 +46,7 @@ import org.sonarsource.dotnet.shared.plugins.sensors.LogSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.MethodDeclarationsSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.PropertiesSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryJsonProcessor;
+import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryJsonProjectCollector;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryJsonSensor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryProcessor;
 import org.sonarsource.dotnet.shared.plugins.sensors.TelemetrySensor;
@@ -73,6 +74,7 @@ class VbNetCoreExtensionsTest {
       TelemetryProcessor.class,
       TelemetryJsonCollector.class,
       TelemetryJsonSensor.class,
+      TelemetryJsonProjectCollector.Empty.class,
       TelemetryJsonProcessor.class,
       PropertiesSensor.class,
       ModuleConfiguration.class,
@@ -103,7 +105,6 @@ class VbNetCoreExtensionsTest {
     };
 
     assertThat(nonProperties(extensions)).contains(expectedExtensions);
-
     assertThat(extensions).hasSize(
       expectedExtensions.length
         + new CodeCoverageProvider(TestVbNetMetadata.INSTANCE).extensions().size()
