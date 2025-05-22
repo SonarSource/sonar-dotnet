@@ -57,7 +57,7 @@ public class ScannerFileService implements FileService {
         .stream(
           fileSystem.inputFiles(fp.and(fp.hasLanguage(languageKey), new PathSuffixPredicate(pathSuffix))).spliterator(),
           false)
-        .map(x -> x.uri().getPath())
+        .map(x -> x.absolutePath())
         .toList();
 
       if (foundFiles.size() == 1) {

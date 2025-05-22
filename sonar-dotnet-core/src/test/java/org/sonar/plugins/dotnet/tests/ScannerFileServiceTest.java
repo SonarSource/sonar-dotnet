@@ -179,11 +179,10 @@ public class ScannerFileServiceTest {
     ScannerFileService sut = new ScannerFileService("key", fs);
     Optional<String> result = sut.getAbsolutePath("/_/path/file.cs");
 
-    assertThat(result).hasValue(expectedResult.uri().getPath());
+    assertThat(result).hasValue(expectedResult.absolutePath());
     assertThat(logTester.logs(Level.TRACE)).hasSize(1);
     assertThat(logTester.logs(Level.TRACE).get(0))
-      .startsWith("Found indexed file ")
-      .endsWith("/sonar-dotnet-core/mod/root/some/path/file.cs' for '/_/path/file.cs' (normalized to 'path/file.cs').");
+      .isEqualTo("Found indexed file 'mod/root/some/path/file.cs' for '/_/path/file.cs' (normalized to 'path/file.cs').");
   }
 
   @Test
