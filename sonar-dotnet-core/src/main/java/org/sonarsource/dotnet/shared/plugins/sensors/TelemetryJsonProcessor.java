@@ -23,6 +23,7 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.scanner.sensor.ProjectSensor;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
+import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonAggregator;
 import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollector;
 
 /**
@@ -69,7 +70,8 @@ public class TelemetryJsonProcessor implements ProjectSensor {
     }
     var messages = collector.getTelemetry();
     LOG.debug("Found {} telemetry messages.", messages.size());
-    messages.forEach(telemetry -> {
+    var aggregated = new TelemetryJsonAggregator().flatMap(messages.stream());
+    aggregated.forEach(telemetry -> {
       LOG.debug("Adding metric: {}={}", telemetry.getKey(), telemetry.getValue());
       sensorContext.addTelemetryProperty(telemetry.getKey(), telemetry.getValue());
     });

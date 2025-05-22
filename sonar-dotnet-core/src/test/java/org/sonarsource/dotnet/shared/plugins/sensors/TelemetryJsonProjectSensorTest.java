@@ -17,10 +17,10 @@
 package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
+import java.nio.file.Files;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
