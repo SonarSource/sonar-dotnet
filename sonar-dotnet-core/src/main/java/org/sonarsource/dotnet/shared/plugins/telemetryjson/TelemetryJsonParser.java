@@ -16,6 +16,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.telemetryjson;
 
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonStreamParser;
@@ -47,6 +48,8 @@ public class TelemetryJsonParser {
       collectTelemetry(p, result);
     } catch (JsonSyntaxException exception) {
       LOG.debug("Parsing of telemetry failed.");
+    } catch (JsonIOException exception) {
+      LOG.debug("Telemetry is empty.");
     }
 
     return result.stream();

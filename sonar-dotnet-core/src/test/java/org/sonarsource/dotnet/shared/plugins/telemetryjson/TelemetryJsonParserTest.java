@@ -116,4 +116,15 @@ public class TelemetryJsonParserTest {
       assertThat(logTester.logs()).containsExactly("Parsing of telemetry failed.");
     }
   }
+
+  @Test
+  public void parsingEmptyJson() {
+    logTester.setLevel(Level.DEBUG);
+    var sut = new TelemetryJsonParser();
+    try (var reader = new StringReader("")) {
+      var result = sut.parse(reader);
+      assertThat(result).extracting(Map.Entry::getKey, Map.Entry::getValue).isEmpty();
+      assertThat(logTester.logs()).containsExactly("Telemetry is empty.");
+    }
+  }
 }
