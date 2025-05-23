@@ -112,15 +112,28 @@ public static class DiagnosticVerifier
 
     private static void Compare(string languageVersion, CompilationIssues actual, CompilationIssues expected)
     {
+        const string ConcurrentInfix = ".Concurrent";
         var messages = new List<VerificationMessage>();
-        foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key))
+        var visited = new HashSet<string>();
+        foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key.Replace(ConcurrentInfix, null)).ThenBy(x => x.Key.Contains(ConcurrentInfix) ? 1 : 0))
         {
-            messages.Add(new(null, $"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:", null, 0));
-            foreach (var pair in from x in filePairs orderby x.Type, x.LineNumber, x.Start, x.IssueId, x.RuleId select x)
+            if (filePairs.Key.Contains(ConcurrentInfix) && visited.Contains(filePairs.Key.Replace(ConcurrentInfix, null)))
             {
-                messages.Add(pair.CreateMessage());
+                var line = filePairs.Count() == 1
+                    ? $"There is 1 more difference in {filePairs.Key}"
+                    : $"There are {filePairs.Count()} more differences in {filePairs.Key}";
+                messages.Add(new(null, line, null, 0)); // Avoid redundant message dumps
+            }
+            else
+            {
+                messages.Add(new(null, $"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:", null, 0));
+                foreach (var pair in filePairs.OrderBy(x => x.Type).ThenBy(x => x.LineNumber).ThenBy(x => x.Start).ThenBy(x => x.IssueId).ThenBy(x => x.RuleId))
+                {
+                    messages.Add(pair.CreateMessage());
+                }
             }
             messages.Add(VerificationMessage.EmptyLine);
+            visited.Add(filePairs.Key);
         }
         if (messages.Any())
         {
@@ -147,7 +160,7 @@ public static class DiagnosticVerifier
     {
         var ret = new List<IssueLocationPair>();
         // Process file-level issues before project-level that match to any expected file issue
-        // Then process primary before secondary, so we can update primary.IssueId for the purpose of matching seconday issues correctly.
+        // Then process primary before secondary, so we can update primary.IssueId for the purpose of matching secondary issues correctly.
         foreach (var key in actual.UniqueKeys().OrderBy(x => x.FilePath == string.Empty ? 1 : 0).ThenBy(x => x.Type))
         {
             ret.AddRange(MatchDifferences(actual.Remove(key), expected.Remove(key)));

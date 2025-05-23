@@ -399,13 +399,12 @@ public class VerifierTest
                 private bool c = true;
             }
             """).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp7 File.Concurrent.cs:
-              Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
-              Line 4: Unexpected issue 'Message for SDummy' Rule SDummy
-
             There are differences for CSharp7 File.cs:
               Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
               Line 4: Unexpected issue 'Message for SDummy' Rule SDummy
+
+            There are 2 more differences in File.Concurrent.cs
+
             """);
 
     [TestMethod]
@@ -417,13 +416,12 @@ public class VerifierTest
                 Private C As Boolean = True
             End Class
             """).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for VisualBasic12 File.Concurrent.vb:
-              Line 2: Unexpected issue 'Message for SDummy' Rule SDummy
-              Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
-
             There are differences for VisualBasic12 File.vb:
               Line 2: Unexpected issue 'Message for SDummy' Rule SDummy
               Line 3: Unexpected issue 'Message for SDummy' Rule SDummy
+
+            There are 2 more differences in File.Concurrent.vb
+
             """);
 
     [TestMethod]
@@ -436,13 +434,11 @@ public class VerifierTest
                 private bool c = true;
             }
             """).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp7 File.Concurrent.cs:
-              Line 3: Missing expected issue
-              Line 4: Missing expected issue
-
             There are differences for CSharp7 File.cs:
               Line 3: Missing expected issue
               Line 4: Missing expected issue
+
+            There are 2 more differences in File.Concurrent.cs
 
             """);
 
@@ -490,12 +486,10 @@ public class VerifierTest
         var builder = WithSnippetCS("// Noncompliant - FN");
         // Concurrent analysis by-default automatically generates concurrent files - File.Concurrent.cs
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp7 File.Concurrent.cs:
-              Line 1: Missing expected issue
-
             There are differences for CSharp7 File.cs:
               Line 1: Missing expected issue
 
+            There is 1 more difference in File.Concurrent.cs
             """);
         // When AutogenerateConcurrentFiles is turned off, only the provided snippet is analyzed
         builder.WithAutogenerateConcurrentFiles(false).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
@@ -529,11 +523,10 @@ public class VerifierTest
             """);
         builder.WithOptions(LanguageOptions.FromCSharp9).Invoking(x => x.Verify()).Should().NotThrow();
         builder.WithOptions(LanguageOptions.BeforeCSharp9).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp5 File.Concurrent.cs:
-              Line 4: Unexpected error, use // Error [CS8026] Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.
-
             There are differences for CSharp5 File.cs:
               Line 4: Unexpected error, use // Error [CS8026] Feature 'target-typed object creation' is not available in C# 5. Please use language version 9.0 or greater.
+
+            There is 1 more difference in File.Concurrent.cs
             """);
     }
 
@@ -557,9 +550,6 @@ public class VerifierTest
             """);
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>()
             .WithMessage("""
-            There are differences for CSharp7 File.Concurrent.cs:
-              Line 5: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
-
             There are differences for CSharp7 File.cs:
               Line 5: Unexpected error, use // Error [CS0246] The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)
               Line 5: Unexpected error, use // Error [CS8107] Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
@@ -567,11 +557,11 @@ public class VerifierTest
               Line 5: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
               Line 5: Unexpected error, use // Error [CS1001] Identifier expected
               Line 5: Unexpected error, use // Error [CS1002] ; expected
+
+            There is 1 more difference in File.Concurrent.cs
+
             """);
         builder.WithErrorBehavior(CompilationErrorBehavior.FailTest).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp7 File.Concurrent.cs:
-              Line 5: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
-
             There are differences for CSharp7 File.cs:
               Line 5: Unexpected error, use // Error [CS0246] The type or namespace name 'undefined' could not be found (are you missing a using directive or an assembly reference?)
               Line 5: Unexpected error, use // Error [CS8107] Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
@@ -579,6 +569,9 @@ public class VerifierTest
               Line 5: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
               Line 5: Unexpected error, use // Error [CS1001] Identifier expected
               Line 5: Unexpected error, use // Error [CS1002] ; expected
+
+            There is 1 more difference in File.Concurrent.cs
+
             """);
         builder.WithErrorBehavior(CompilationErrorBehavior.Ignore).Invoking(x => x.Verify()).Should().NotThrow();
     }
@@ -588,20 +581,19 @@ public class VerifierTest
     {
         var builder = new VerifierBuilder<ObsoleteAttributes>().AddPaths(WriteFile("File.cs", "[System.Obsolete]public class Sample { }"));
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp7 File.Concurrent.cs:
-              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
-              Line 1: Unexpected issue 'Do not forget to remove this deprecated code someday.' Rule S1133
-
             There are differences for CSharp7 File.cs:
               Line 1: Unexpected issue 'Add an explanation.' Rule S1123
               Line 1: Unexpected issue 'Do not forget to remove this deprecated code someday.' Rule S1133
+
+            There are 2 more differences in File.Concurrent.cs
+
             """);
         builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S1123")).Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp7 File.Concurrent.cs:
-              Line 1: Unexpected issue 'Add an explanation.' Rule S1123
-
             There are differences for CSharp7 File.cs:
               Line 1: Unexpected issue 'Add an explanation.' Rule S1123
+
+            There is 1 more difference in File.Concurrent.cs
+
             """);
         builder.WithOnlyDiagnostics(AnalysisScaffolding.CreateDescriptor("S0000")).Invoking(x => x.VerifyNoIssues()).Should().NotThrow();
     }
@@ -625,12 +617,11 @@ public class VerifierTest
         builder.WithTopLevelStatements().Invoking(x => x.Verify()).Should().NotThrow();
         builder.WithOutputKind(OutputKind.ConsoleApplication).WithConcurrentAnalysis(false).Invoking(x => x.Verify()).Should().NotThrow();
         builder.Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-            There are differences for CSharp9 File.Concurrent.cs:
-              Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
-              Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
-
             There are differences for CSharp9 File.cs:
               Line 1: Unexpected error, use // Error [CS8805] Program using top-level statements must be an executable.
+
+            There are 2 more differences in File.Concurrent.cs
+
             """);
     }
 

@@ -26,6 +26,8 @@ public class DiagnosticVerifierTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<CS.BinaryOperationWithIdenticalExpressions>();
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void PrimaryIssueNotExpected() =>
         VerifyThrows("""
@@ -420,10 +422,41 @@ public class DiagnosticVerifierTest
               Line 1: Unexpected error, use // Error [CS1733] Expected expression
             """);
 
+    [TestMethod]
+    public void Verify_ConcurrentFile_DuplicateIssues_Muted() =>
+        CreateConcurrentBuilder("var topLevelStatement = 42;")
+            .Invoking(x => x.Verify())
+            .Should().Throw<DiagnosticVerifierException>()
+            .WithMessage("""
+                There are differences for CSharp9 File.cs:
+                  Line 1: Unexpected issue 'Message for SDummy' Rule SDummy
+
+                There are 3 more differences in File.Concurrent.cs
+
+                """);
+
+    [TestMethod]
+    public void Verify_ConcurrentFile_IssuesOnlyInConcurrent_Reported() =>
+        CreateConcurrentBuilder("var topLevelStatement = 42; // Noncompliant")
+            .Invoking(x => x.Verify())
+            .Should().Throw<DiagnosticVerifierException>()
+            .WithMessage("""
+                There are differences for CSharp9 File.Concurrent.cs:
+                  Line 1: Unexpected error, use // Error [CS0825] The contextual keyword 'var' may only appear within a local variable declaration or in script code
+                  Line 1: Unexpected error, use // Error [CS0116] A namespace cannot directly contain members such as fields, methods or statements
+
+                """);
+
     private void VerifyThrows(string snippet, string expectedMessage) =>
         builder.AddSnippet(snippet)
             .WithConcurrentAnalysis(false)
             .Invoking(x => x.Verify())
             .Should().Throw<AssertFailedException>()
             .Which.Message.Should().ContainIgnoringLineEndings(expectedMessage);
+
+    private VerifierBuilder CreateConcurrentBuilder(string code) =>
+        new VerifierBuilder<DummyAnalyzerCS>()
+            .AddPaths(TestFiles.WriteFile(TestContext, @"TestCases\File.cs", code))
+            .WithTopLevelStatements()
+            .WithConcurrentAnalysis(true);   // Force concurrent analysis over the top level statements
 }

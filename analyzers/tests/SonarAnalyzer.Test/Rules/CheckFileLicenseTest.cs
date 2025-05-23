@@ -172,11 +172,11 @@ namespace SonarAnalyzer.Test.Rules
         public void CheckFileLicense_WhenEmptyFile_ShouldBeNonCompliant_CS() =>
             // While we put Noncompliant annotation on 1st line of any file, in this case, the file needs to be empty
             Builder(SingleLineHeader).AddPaths("CheckFileLicense_EmptyFile.cs").Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>().WithMessage("""
-                There are differences for CSharp7 CheckFileLicense_EmptyFile.Concurrent.cs:
-                  Line 1: Unexpected issue 'Add or update the header of this file.' Rule S1451
-
                 There are differences for CSharp7 CheckFileLicense_EmptyFile.cs:
                   Line 1: Unexpected issue 'Add or update the header of this file.' Rule S1451
+
+                There is 1 more difference in CheckFileLicense_EmptyFile.Concurrent.cs
+
                 """);
 
         [TestMethod]
