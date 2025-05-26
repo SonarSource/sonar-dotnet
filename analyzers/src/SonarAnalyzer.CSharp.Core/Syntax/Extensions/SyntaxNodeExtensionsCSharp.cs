@@ -17,6 +17,8 @@
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CSharp.Core.Trackers;
 
+#pragma warning disable T0046 // Move Extensions to dedicated class
+
 namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class SyntaxNodeExtensionsCSharp
@@ -147,6 +149,8 @@ public static class SyntaxNodeExtensionsCSharp
             OperatorDeclarationSyntax c => c.ExpressionBody,
             AccessorDeclarationSyntax d => d.ExpressionBody(),
             ConversionOperatorDeclarationSyntax e => e.ExpressionBody,
+            IndexerDeclarationSyntax f => f.ExpressionBody,
+            PropertyDeclarationSyntax g => g.ExpressionBody,
             _ => null
         };
 

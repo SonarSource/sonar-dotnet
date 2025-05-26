@@ -148,7 +148,7 @@ public class CSharp13
             get => ((null)); // Noncompliant
         }
 
-        partial IEnumerable<string> this[int i] => null; // FN
+        partial IEnumerable<string> this[int i] => null; // Noncompliant
     }
 
     partial class Partial

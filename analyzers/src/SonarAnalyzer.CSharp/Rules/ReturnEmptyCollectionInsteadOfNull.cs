@@ -23,33 +23,37 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     private const string MessageFormat = "Return an empty collection instead of null.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
     private static readonly ImmutableArray<KnownType> CollectionTypes = ImmutableArray.Create(
         KnownType.System_Collections_IEnumerable,
         KnownType.System_Array);
 
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(ReportIfReturnsNullOrDefault,
+        context.RegisterNodeAction(
+            ReportIfReturnsNullOrDefault,
             SyntaxKind.MethodDeclaration,
             SyntaxKindEx.LocalFunctionStatement,
             SyntaxKind.PropertyDeclaration,
-            SyntaxKind.OperatorDeclaration);
+            SyntaxKind.OperatorDeclaration,
+            SyntaxKind.IndexerDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration);
 
     private static void ReportIfReturnsNullOrDefault(SonarSyntaxNodeReportingContext context)
     {
-        if (GetExpressionBody(context.Node) is { } expressionBody)
+        if (ExpressionBody(context.Node) is { } expressionBody)
         {
-            var nullOrDefaultLiterals = GetNullOrDefaultExpressions(expressionBody.Expression)
-                .Select(statement => statement.GetLocation())
+            var nullOrDefaultLiterals = NullOrDefaultExpressions(expressionBody.Expression)
+                .Select(x => x.GetLocation())
                 .ToList();
 
             ReportIfAny(nullOrDefaultLiterals);
         }
-        else if (GetBody(context.Node) is { } body)
+        else if (Body(context.Node) is { } body)
         {
-            var nullOrDefaultLiterals = GetReturnNullOrDefaultExpressions(body)
-                .Select(returnStatement => returnStatement.GetLocation())
+            var nullOrDefaultLiterals = ReturnNullOrDefaultExpressions(body)
+                .Select(x => x.GetLocation())
                 .ToList();
 
             ReportIfAny(nullOrDefaultLiterals);
@@ -64,60 +68,56 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         }
     }
 
-    private static BlockSyntax GetBody(SyntaxNode node) =>
-        node is PropertyDeclarationSyntax property ? GetAccessor(property)?.Body : node.GetBody();
+    private static BlockSyntax Body(SyntaxNode node) =>
+        node is BasePropertyDeclarationSyntax property ? GetAccessor(property)?.Body : node.GetBody();
 
     private static bool IsReturningCollection(SonarSyntaxNodeReportingContext context) =>
-        GetType(context) is { } type
+        DeclaredType(context) is { } type
         && !type.Is(KnownType.System_String)
         && !type.DerivesFrom(KnownType.System_Xml_XmlNode)
         && type.DerivesOrImplementsAny(CollectionTypes)
         && type.NullableAnnotation() != NullableAnnotation.Annotated;
 
-    private static ITypeSymbol GetType(SonarSyntaxNodeReportingContext context)
+    private static ITypeSymbol DeclaredType(SonarSyntaxNodeReportingContext context)
     {
         var symbol = context.Model.GetDeclaredSymbol(context.Node);
         return symbol is IPropertySymbol property ? property.Type : ((IMethodSymbol)symbol).ReturnType;
     }
 
-    private static ArrowExpressionClauseSyntax GetExpressionBody(SyntaxNode node) =>
+    private static ArrowExpressionClauseSyntax ExpressionBody(SyntaxNode node) =>
         node switch
         {
             BaseMethodDeclarationSyntax method => method.ExpressionBody(),
-            PropertyDeclarationSyntax property => property.ExpressionBody ?? GetAccessor(property)?.ExpressionBody(),
+            BasePropertyDeclarationSyntax property => property.ArrowExpressionBody() ?? GetAccessor(property)?.ExpressionBody(),
             _ => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
         };
 
-    private static AccessorDeclarationSyntax GetAccessor(PropertyDeclarationSyntax property) =>
+    private static AccessorDeclarationSyntax GetAccessor(BasePropertyDeclarationSyntax property) =>
         property.AccessorList.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration));
 
-    private static IEnumerable<SyntaxNode> GetReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
+    private static IEnumerable<SyntaxNode> ReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
         methodBlock.DescendantNodes(x =>
-                !(x.Kind() is
-                    SyntaxKindEx.LocalFunctionStatement or
-                    SyntaxKind.SimpleLambdaExpression or
-                    SyntaxKind.ParenthesizedLambdaExpression))
-               .OfType<ReturnStatementSyntax>()
-               .SelectMany(x => GetNullOrDefaultExpressions(x.Expression));
+            !(x.Kind() is SyntaxKindEx.LocalFunctionStatement
+                or SyntaxKind.SimpleLambdaExpression
+                or SyntaxKind.ParenthesizedLambdaExpression))
+            .OfType<ReturnStatementSyntax>()
+            .SelectMany(x => NullOrDefaultExpressions(x.Expression));
 
-    private static IEnumerable<SyntaxNode> GetNullOrDefaultExpressions(SyntaxNode node)
+    private static IEnumerable<SyntaxNode> NullOrDefaultExpressions(SyntaxNode node)
     {
         node = node.RemoveParentheses();
-
         if (node.IsNullLiteral() || node?.Kind() is SyntaxKindEx.DefaultLiteralExpression or SyntaxKind.DefaultExpression)
         {
             yield return node;
             yield break;
         }
-
         if (node is ConditionalExpressionSyntax c)
         {
-            foreach (var innerNode in GetNullOrDefaultExpressions(c.WhenTrue))
+            foreach (var innerNode in NullOrDefaultExpressions(c.WhenTrue))
             {
                 yield return innerNode;
             }
-
-            foreach (var innerNode in GetNullOrDefaultExpressions(c.WhenFalse))
+            foreach (var innerNode in NullOrDefaultExpressions(c.WhenFalse))
             {
                 yield return innerNode;
             }

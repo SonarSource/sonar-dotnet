@@ -192,7 +192,21 @@ namespace Issue_6494
 {
     class MyClass
     {
-        public IEnumerable<string> this[int i] => null; // FN
-        public static implicit operator List<int>(MyClass c) => null; // FN
+        public IEnumerable<string> this[int i] => null; // Noncompliant
+        public static implicit operator List<int>(MyClass c) => null; // Noncompliant
+    }
+    class MyOtherClass
+    {
+        public IEnumerable<string> this[int index]
+        {
+            get
+            {
+                return null; // Noncompliant
+            }
+        }
+        public static implicit operator List<int>(MyOtherClass c)
+        {
+            return null; // Noncompliant
+        }
     }
 }
