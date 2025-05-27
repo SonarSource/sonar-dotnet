@@ -195,7 +195,7 @@ public class ModuleConfigurationTest {
       Files.createFile(x);
     }));
 
-    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths")).thenReturn(Arrays.stream(expectedPaths).map(x -> x.getParent().toString()).toArray(String[]::new));
+    when(configuration.getStringArray("sonar.cs.scanner.telemetry")).thenReturn(Arrays.stream(expectedPaths).map(Path::toString).toArray(String[]::new));
 
     ModuleConfiguration config = createModuleConfiguration(configuration);
     assertThat(config.telemetryJsonPaths()).containsExactly(expectedPaths);

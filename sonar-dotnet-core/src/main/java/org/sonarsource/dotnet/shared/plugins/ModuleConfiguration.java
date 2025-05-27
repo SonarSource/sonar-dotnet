@@ -36,6 +36,7 @@ import org.sonar.api.config.Configuration;
 import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.analyzerWorkDirProperty;
 import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.roslynJsonReportPathProperty;
+import static org.sonarsource.dotnet.shared.plugins.AbstractPropertyDefinitions.telemetryJsonReportPathProperty;
 
 /**
  * This configuration is at the level of the project ("module" in scanner-cli terminology).
@@ -106,9 +107,9 @@ public class ModuleConfiguration {
   }
 
   public Collection<Path> telemetryJsonPaths() {
-    // TODO: replace with the logic described in https://sonarsource.atlassian.net/browse/SCAN4NET-480
-    return Arrays.stream(configuration.getStringArray(analyzerWorkDirProperty(metadata.languageKey())))
-      .map(x -> Paths.get(x, TELEMETRY_JSON))
+    var telemetryJson = configuration.getStringArray(telemetryJsonReportPathProperty(metadata.languageKey()));
+    return Arrays.stream(telemetryJson)
+      .map(Paths::get)
       .filter(Files::exists)
       .toList();
   }

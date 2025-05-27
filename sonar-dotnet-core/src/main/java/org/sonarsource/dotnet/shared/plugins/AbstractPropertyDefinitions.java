@@ -189,6 +189,10 @@ public abstract class AbstractPropertyDefinitions {
     return PROP_PREFIX + languageKey + ".roslyn.reportFilePaths";
   }
 
+  public static String telemetryJsonReportPathProperty(String languageKey) {
+    return PROP_PREFIX + languageKey + ".scanner.telemetry";
+  }
+
   public static String analyzerWorkDirProperty(String languageKey) {
     return PROP_PREFIX + languageKey + ".analyzer.projectOutPaths";
   }
