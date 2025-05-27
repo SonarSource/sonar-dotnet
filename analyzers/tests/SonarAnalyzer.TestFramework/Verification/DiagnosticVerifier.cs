@@ -22,6 +22,7 @@ public static class DiagnosticVerifier
 {
     private const string AD0001 = nameof(AD0001);
     private const string LineContinuationVB12 = "BC36716";  // Visual Basic 12.0 does not support line continuation comments.
+    private const string ConcurrentInfix = ".Concurrent";
 
     public static int Verify(Compilation compilation,
                              DiagnosticAnalyzer[] analyzers,
@@ -34,7 +35,7 @@ public static class DiagnosticVerifier
         SuppressionHandler.HookSuppression();
         try
         {
-            var sources = compilation.SyntaxTrees.ExceptRazorGeneratedFiles()
+            var sources = ExceptRazorGeneratedFiles(compilation.SyntaxTrees)
                 .Select(x => new FileContent(x))
                 .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
             var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics, concurrentAnalysis).ToArray();
@@ -112,28 +113,17 @@ public static class DiagnosticVerifier
 
     private static void Compare(string languageVersion, CompilationIssues actual, CompilationIssues expected)
     {
-        const string ConcurrentInfix = ".Concurrent";
         var messages = new List<VerificationMessage>();
-        var visited = new HashSet<string>();
-        foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath).OrderBy(x => x.Key.Replace(ConcurrentInfix, null)).ThenBy(x => x.Key.Contains(ConcurrentInfix) ? 1 : 0))
+        foreach (var filePairs in MatchPairs(actual, expected).GroupBy(x => x.FilePath.Replace(ConcurrentInfix, null)).OrderBy(x => x.Key))
         {
-            if (filePairs.Key.Contains(ConcurrentInfix) && visited.Contains(filePairs.Key.Replace(ConcurrentInfix, null)))
+            var defaultPairs = new List<IssueLocationPair>();
+            var concurrentPairs = new List<IssueLocationPair>();
+            foreach (var pair in filePairs)
             {
-                var line = filePairs.Count() == 1
-                    ? $"There is 1 more difference in {filePairs.Key}"
-                    : $"There are {filePairs.Count()} more differences in {filePairs.Key}";
-                messages.Add(new(null, line, null, 0)); // Avoid redundant message dumps
+                (pair.FilePath.Contains(ConcurrentInfix) ? concurrentPairs : defaultPairs).Add(pair);
             }
-            else
-            {
-                messages.Add(new(null, $"There are differences for {languageVersion} {SerializePath(filePairs.Key)}:", null, 0));
-                foreach (var pair in filePairs.OrderBy(x => x.Type).ThenBy(x => x.LineNumber).ThenBy(x => x.Start).ThenBy(x => x.IssueId).ThenBy(x => x.RuleId))
-                {
-                    messages.Add(pair.CreateMessage());
-                }
-            }
+            messages.AddRange(SerializePairs(languageVersion, defaultPairs, concurrentPairs));
             messages.Add(VerificationMessage.EmptyLine);
-            visited.Add(filePairs.Key);
         }
         if (messages.Any())
         {
@@ -143,18 +133,44 @@ public static class DiagnosticVerifier
         {
             actual.Dump(languageVersion);
         }
+    }
+
+    private static IEnumerable<VerificationMessage> SerializePairs(string languageVersion, List<IssueLocationPair> defaultPairs, List<IssueLocationPair> concurrentPairs)
+    {
+        if (defaultPairs.Any())
+        {
+            return concurrentPairs.Count switch
+                {   // Avoid redundant message dumps
+                    0 => CreateMessages(defaultPairs),
+                    1 => CreateMessages(defaultPairs).Append(new(null, $"There is 1 more difference in {SerializePath(concurrentPairs[0].FilePath)}", null, 0)),
+                    _ => CreateMessages(defaultPairs).Append(new(null, $"There are {concurrentPairs.Count} more differences in {SerializePath(concurrentPairs[0].FilePath)}", null, 0))
+                };
+        }
+        else
+        {
+            return CreateMessages(concurrentPairs);
+        }
+
+        IEnumerable<VerificationMessage> CreateMessages(List<IssueLocationPair> pairs)
+        {
+            yield return new(null, $"There are differences for {languageVersion} {SerializePath(pairs[0].FilePath)}:", null, 0);
+            foreach (var pair in pairs.OrderBy(x => x.Type).ThenBy(x => x.LineNumber).ThenBy(x => x.Start).ThenBy(x => x.IssueId).ThenBy(x => x.RuleId))
+            {
+                yield return pair.CreateMessage();
+            }
+        }
 
         static string SerializePath(string path) =>
             path == string.Empty ? "<project-level-issue>" : path;
     }
 
-    private static IEnumerable<SyntaxTree> ExceptRazorGeneratedFiles(this IEnumerable<SyntaxTree> syntaxTrees) =>
+    private static IEnumerable<SyntaxTree> ExceptRazorGeneratedFiles(IEnumerable<SyntaxTree> syntaxTrees) =>
         syntaxTrees.Where(x =>
             !x.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
             && !x.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase));
 
     private static IEnumerable<Diagnostic> VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
-        diagnostics.Should().NotContain(d => d.Id == AD0001).And.Subject;
+        diagnostics.Should().NotContain(x => x.Id == AD0001).And.Subject;
 
     private static IEnumerable<IssueLocationPair> MatchPairs(CompilationIssues actual, CompilationIssues expected)
     {
