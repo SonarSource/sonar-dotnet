@@ -16,29 +16,32 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class RedundantJumpStatementTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantJumpStatement>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void RedundantJumpStatement_CSharp8() =>
-            builder.AddPaths("RedundantJumpStatement.cs")
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+[TestClass]
+public class RedundantJumpStatementTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<RedundantJumpStatement>();
+
+    [TestMethod]
+    public void RedundantJumpStatement() =>
+        builder.AddPaths("RedundantJumpStatement.cs")
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void RedundantJumpStatement_CSharp9() =>
-            builder.AddPaths("RedundantJumpStatement.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void RedundantJumpStatement_Latest() =>
+        builder.AddPaths("RedundantJumpStatement.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
+    public void RedundantJumpStatement_TopLevelStatements() =>
+        builder.AddPaths("RedundantJumpStatement.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
 #endif
 
-    }
 }

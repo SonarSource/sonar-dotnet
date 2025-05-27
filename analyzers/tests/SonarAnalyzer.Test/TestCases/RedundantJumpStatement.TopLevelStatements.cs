@@ -13,16 +13,3 @@ static void LocalMethod()
 {
     return; // Noncompliant
 };
-
-record Record
-{
-    int Prop
-    {
-        init
-        {
-            goto A; // Noncompliant
-A:
-            return; // Noncompliant
-        }
-    }
-}
