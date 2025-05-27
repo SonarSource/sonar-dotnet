@@ -153,11 +153,8 @@ public class Repro6977
         [Params(Name = "hello", Other = new[] { "1", "2" })] // Compliant, this is setting Properties
         Indigo,
 
-        [Params(a: 1, b: "hello", values: new[] { "1", "2" }, Name = "hello")] // Compliant
+        [Params(a: 1, b: "hello", values: new[] { "1", "2" }, Name = "hello")] // Compliant. Before C# 7.2 the 'correct' version does not compile 
         Orange,
-
-        [Params(a: 1, b: "hello", "1", "2", Name = "hello")] // Error [CS1738] 
-        OtherOrange,
 
         [Params(1,"hello", new[] { "1", "2" }, Name = "hello")] // Compliant FN 
         Grun,
