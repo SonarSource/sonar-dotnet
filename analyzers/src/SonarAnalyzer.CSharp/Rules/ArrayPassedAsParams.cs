@@ -17,7 +17,7 @@
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, ArgumentSyntax>
+public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, CSharpSyntaxNode>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
@@ -25,18 +25,26 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
         [
             SyntaxKind.ObjectCreationExpression,
             SyntaxKind.InvocationExpression,
-            SyntaxKindEx.ImplicitObjectCreationExpression
+            SyntaxKindEx.ImplicitObjectCreationExpression,
+            SyntaxKind.Attribute
         ];
 
-    protected override ArgumentSyntax LastArgumentIfArrayCreation(SyntaxNode expression) =>
-        ArgumentList(expression) is { Arguments: { Count: > 0 } arguments }
-        && arguments.Last() is var lastArgument
-        && IsArrayCreation(lastArgument.Expression)
+    protected override CSharpSyntaxNode LastArgumentIfArrayCreation(SyntaxNode expression)
+    {
+        CSharpSyntaxNode lastArgument = expression switch
+        {
+             AttributeSyntax { ArgumentList.Arguments: { Count: > 0 } args } when args.Last().NameEquals is null => args.Last(),
+            _ when ArgumentList(expression) is { Arguments: { Count: > 0 } args } => args.Last(),
+            _ => null
+        };
+
+        return IsArrayCreation(lastArgument)
             ? lastArgument
             : null;
+    }
 
-    protected override ITypeSymbol ArrayElementType(ArgumentSyntax argument, SemanticModel model) =>
-        argument.Expression switch
+    protected override ITypeSymbol ArrayElementType(CSharpSyntaxNode argument, SemanticModel model) =>
+        ArgumentExpression(argument) switch
         {
             ArrayCreationExpressionSyntax arrayCreation => model.GetTypeInfo(arrayCreation.Type.ElementType).Type,
             ImplicitArrayCreationExpressionSyntax implicitArrayCreation => (model.GetTypeInfo(implicitArrayCreation).Type as IArrayTypeSymbol)?.ElementType,
@@ -53,16 +61,27 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, Ar
             _ => null
         };
 
-    private static bool IsArrayCreation(ExpressionSyntax expression) =>
-        expression switch
+    private static bool IsArrayCreation(CSharpSyntaxNode argument)
+    {
+        var expression = ArgumentExpression(argument);
+        return expression switch
         {
             ArrayCreationExpressionSyntax { Initializer: not null } => true,
             ImplicitArrayCreationExpressionSyntax => true,
             _ when CollectionExpressionSyntaxWrapper.IsInstance(expression) => !ContainsSpread((CollectionExpressionSyntaxWrapper)expression),
             _ => false
         };
+    }
 
     // [x, y, ..z] is not possible to be passed as params
     private static bool ContainsSpread(CollectionExpressionSyntaxWrapper expression) =>
         expression.Elements.Any(x => x.SyntaxNode.IsKind(SyntaxKindEx.SpreadElement));
+
+    private static ExpressionSyntax ArgumentExpression(CSharpSyntaxNode node) =>
+        node switch
+        {
+            ArgumentSyntax arg => arg.Expression,
+            AttributeArgumentSyntax arg => arg.Expression,
+            _ => null
+        };
 }
