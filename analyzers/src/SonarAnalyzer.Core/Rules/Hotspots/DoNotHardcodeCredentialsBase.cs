@@ -52,7 +52,7 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
         keyWords = value;
         splitKeyWords = SplitKeyWordsByComma(keyWords);
         var credentialWordsPattern = splitKeyWords.Select(Regex.Escape).JoinStr("|");
-        keyWordPattern = new Regex($@"\b(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase, RegexTimeout);
+        keyWordPattern = new Regex($@"(?<credential>{credentialWordsPattern})\s*[:=]\s*(?<suffix>.+)$", RegexOptions.IgnoreCase, RegexTimeout);
     }
 
     protected sealed override void Initialize(SonarParametrizedAnalysisContext context)

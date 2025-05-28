@@ -35,11 +35,12 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class FalseNegatives
+    public class NoWordBound
     {
+        // This used to be an FN because the regex matched on word boundaries.
         public void Method()
         {
-            string x = "*=something"; // FN - current regex expects \b (word boundary) at the beginning
+            string x = "*=something"; // Noncompliant
         }
     }
 }

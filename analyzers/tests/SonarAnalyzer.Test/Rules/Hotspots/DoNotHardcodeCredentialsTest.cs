@@ -62,7 +62,7 @@ public class DoNotHardcodeCredentialsTest
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
-        CreateVerifierCS(@"KODE ,,,, FaCaL-FaIrE, x\*+?|}{][)(^$.# ")
+        CreateVerifierCS(@"KODE ,,,, FaCaL-FaIrE,*,x\*+?|}{][)(^$.# ")
             .AddPaths("DoNotHardcodeCredentials.CustomValues.cs")
             .Verify();
 
@@ -90,7 +90,7 @@ public class DoNotHardcodeCredentialsTest
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
-        CreateVerifierVB(@"KODE ,,,, FaCaL-FaIrE,x\*+?|}{][)(^$.# ")
+        CreateVerifierVB(@"KODE ,,,, FaCaL-FaIrE,*,x\*+?|}{][)(^$.# ")
             .AddPaths("DoNotHardcodeCredentials.CustomValues.vb")
             .Verify();
 

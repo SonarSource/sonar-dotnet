@@ -37,8 +37,10 @@ Namespace Tests.Diagnostics
             foo = "password"
             foo = "password="
             foo = "passwordpassword"
-            foo = "foo=1;password=1" 'Noncompliant
-            foo = "foo=1password=1"
+            foo = "foo=1;password=1"    'Noncompliant
+            foo = "foo=1password=1"     'Noncompliant
+            foo = "userpassword=1"      'Noncompliant
+            foo = "passwordfield=1"     'Compliant
 
             Dim myPassword1 As String = Nothing
             Dim myPassword2 As String = ""

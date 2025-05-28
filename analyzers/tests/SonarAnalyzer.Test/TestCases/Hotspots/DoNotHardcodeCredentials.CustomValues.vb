@@ -30,9 +30,10 @@ Namespace Tests.Diagnostics
         End Sub
     End Class
 
-    Class FalseNegatives
+    Class NoWordBound
+        ' This used to be an FN because the regex matched on word boundaries.
         Public Sub Test()
-            Dim x as String = "*=something" ' FN - current regex expects \b (word boundary) at the beginning
+            Dim x As String = "*=something" ' Noncompliant
         End Sub
     End Class
 End Namespace

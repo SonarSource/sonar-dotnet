@@ -51,9 +51,14 @@ namespace Tests.Diagnostics
             foo = "password";
             foo = "password=";
             foo = "passwordpassword";
-            foo = "foo=1;password=1"; // Noncompliant
-            foo = "foo=1password=1";
-            foo = ""; // Compliant
+            foo = "foo=1;password=1";   // Noncompliant
+            foo = "foo=1password=1";    // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+            foo = "";                   // Compliant
+            foo = "userpassword=1";     // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+            foo = "passwordfield=1";    // Compliant
+            foo = "user_password=1";    // Noncompliant
+            foo = "user-password=1";    // Noncompliant
+            foo = "user/password=1";    // Noncompliant
 
             var something1 = (foo = "foo") + (bar = "bar");
             var something2 = (foo = "foo") + (bar = "password=123"); // Noncompliant
