@@ -19,11 +19,10 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
+import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryUtils;
 
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.counting;
@@ -32,8 +31,6 @@ import static java.util.stream.Collectors.groupingBy;
 public class TelemetryAggregator {
   public final String languageVersion;
   public final String targetFramework;
-  // Replace any non-word-character and non-digit with "_"
-  private final Pattern sanitizeKeyPattern = Pattern.compile("[^a-zA-Z0-9]");
 
   public TelemetryAggregator(String pluginKey, String language) {
 
@@ -57,11 +54,7 @@ public class TelemetryAggregator {
   }
 
   private String[] sanitizeKeys(String[] keys) {
-    return Arrays.stream(keys).map(this::sanitizeKey).toArray(String[]::new);
-  }
-
-  private String sanitizeKey(String x) {
-    return sanitizeKeyPattern.matcher(x).replaceAll("_").toLowerCase(Locale.ROOT);
+    return Arrays.stream(keys).map(TelemetryUtils::sanitizeKey).toArray(String[]::new);
   }
 
   private Stream<Map.Entry<String, String>> languageVersion(Stream<String> languageVersions) {
@@ -83,8 +76,8 @@ public class TelemetryAggregator {
 
   public Collection<Map.Entry<String, String>> aggregate(Collection<SonarAnalyzer.Telemetry> telemetries) {
     return Stream.of(
-      languageVersion(telemetries.stream().map(SonarAnalyzer.Telemetry::getLanguageVersion)),
-      targetFrameworks(telemetries.stream().map(SonarAnalyzer.Telemetry::getTargetFrameworkList)))
+        languageVersion(telemetries.stream().map(SonarAnalyzer.Telemetry::getLanguageVersion)),
+        targetFrameworks(telemetries.stream().map(SonarAnalyzer.Telemetry::getTargetFrameworkList)))
       .flatMap(identity())
       .toList();
   }

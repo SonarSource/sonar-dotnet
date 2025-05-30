@@ -70,7 +70,7 @@ public class TelemetryJsonProcessor implements ProjectSensor {
     }
     var messages = collector.getTelemetry();
     LOG.debug("Found {} telemetry messages.", messages.size());
-    var aggregated = new TelemetryJsonAggregator().flatMap(messages.stream());
+    var aggregated = new TelemetryJsonAggregator().flatMapTelemetry(messages.stream());
     aggregated.forEach(telemetry -> {
       LOG.debug("Adding metric: {}={}", telemetry.getKey(), telemetry.getValue());
       sensorContext.addTelemetryProperty(telemetry.getKey(), telemetry.getValue());
