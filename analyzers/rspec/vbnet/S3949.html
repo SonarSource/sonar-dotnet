@@ -2,7 +2,7 @@
 <p>Numbers are infinite, but the types that hold them are not. Each numeric type has hard upper and lower bounds. Try to calculate numbers beyond
 those bounds, and the result will be an <code>OverflowException</code>. When the compilation is configured to remove integer overflow checking, the
 value will be silently wrapped around from the expected positive value to a negative one, or vice versa.</p>
-<h2>Noncompliant code example</h2>
+<h3>Noncompliant code example</h3>
 <pre>
 Public Function Transform(Value As Integer) As Integer
     If Value &lt;= 0 Then Return Value
@@ -10,7 +10,7 @@ Public Function Transform(Value As Integer) As Integer
     Return Number + Value       ' Noncompliant
 End Function
 </pre>
-<h2>Compliant solution</h2>
+<h3>Compliant solution</h3>
 <pre>
 Public Function Transform(Value As Integer) As Long
     If Value &lt;= 0 Then Return Value

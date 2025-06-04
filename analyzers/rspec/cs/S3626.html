@@ -1,6 +1,6 @@
 <h2>Why is this an issue?</h2>
-<p>Jump statements, such as <code>return</code>, <code>yield break</code>, <code>goto</code>, and <code>continue</code> let you change the default
-flow of program execution, but jump statements that direct the control flow to the original direction are just a waste of keystrokes.</p>
+<p>Jump statements, such as <code>return</code>, <code>yield break</code>, <code>goto</code>, and <code>continue</code> are used to change the normal
+flow of execution in a program. However, redundant jump statements can make code difficult to read and maintain.</p>
 <h3>Noncompliant code example</h3>
 <pre>
 void Foo()
@@ -34,4 +34,8 @@ void Foo()
   }
 }
 </pre>
+<h3>Exceptions</h3>
+<ul>
+  <li> <code>return</code> statements followed by a local function declaration are not considered redundant, as they help with readability. </li>
+</ul>
 
