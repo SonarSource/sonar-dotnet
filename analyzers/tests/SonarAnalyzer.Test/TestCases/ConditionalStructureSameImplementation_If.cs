@@ -161,19 +161,19 @@ namespace Tests.TestCases
             }
 
             if (s == 0)
-            {
+            {   // Compliant
                 DoSomething1();
             }
             else
             {
                 if (s > 0 && s < 11)
-                { // FN [NestedIfChain]
+                {   // Compliant
                     DoSomething1();
                 }
                 else
                 {
                     if (s > 11 && s < 20)
-                    { // FN [NestedIfChain2]
+                    {   // Compliant
                         DoSomething1();
                     }
                     else
@@ -183,7 +183,46 @@ namespace Tests.TestCases
                 }
             }
 
-            return false;
+            if (s == 0)
+            {   // Secondary [NestedIfChain]
+                // Secondary@-1 [NestedIfChain2]
+                DoSomething1();
+                DoSomething1();
+            }
+            else
+            {
+                if (s > 0 && s < 11)
+                {   // Noncompliant [NestedIfChain]
+                    DoSomething1();
+                    DoSomething1();
+
+                }
+                else
+                {
+                    if (s > 11 && s < 20)
+                    {// Noncompliant [NestedIfChain2]
+
+                        DoSomething1();
+                        DoSomething1();
+                    }
+                }
+            }
+
+            if (s == 0)
+            {   // Compliant as the DoSomething2() call breaks the conditional chain
+                DoSomething1();
+                DoSomething1();
+            }
+            else
+            {
+                DoSomething2();
+                if (s > 0 && s < 11)
+                {   // Compliant
+                    DoSomething1();
+                    DoSomething1();
+                }
+            }
+                return false;
         }
     }
 
