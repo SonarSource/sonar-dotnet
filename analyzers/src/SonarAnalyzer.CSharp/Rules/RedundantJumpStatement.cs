@@ -99,6 +99,5 @@ public sealed class RedundantJumpStatement : SonarDiagnosticAnalyzer
         jumpBlock.JumpNode is ReturnStatementSyntax { Expression: not null };
 
     private static bool IsReturnWithFollowingLocalFunction(JumpBlock jumpBlock) =>
-        jumpBlock.JumpNode.IsKind(SyntaxKind.ReturnStatement)
-        && jumpBlock.JumpNode.Parent.ChildNodes().Reverse().TakeWhile(x => x != jumpBlock.JumpNode).Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement));
+        jumpBlock.JumpNode.Parent.ChildNodes().Reverse().TakeWhile(x => x != jumpBlock.JumpNode).Any(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement));
 }

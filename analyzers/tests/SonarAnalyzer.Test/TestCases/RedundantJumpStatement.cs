@@ -223,7 +223,7 @@ public class Repro_1149
     {
         items.ForEach(LocalFunction);
 
-        return; // Compliant, exception for readability
+        return; // Compliant: exception for readability
 
         void LocalFunction(string item)
         {
@@ -260,7 +260,7 @@ public class Repro_1149
     {
         items.ForEach(LocalFunction);
 
-        return; // Compliant, exception for readability
+        return; // Compliant: exception for readability
         A:
 
         void LocalFunction(string item)
@@ -274,7 +274,10 @@ public class Repro_1149
         items.ForEach(LocalFunction);
 
         yield return 1;
-        yield break; // Noncompliant
+
+        Console.WriteLine("Some code");
+
+        yield break; // Compliant: exception for readability
 
         void LocalFunction(string item)
         {
