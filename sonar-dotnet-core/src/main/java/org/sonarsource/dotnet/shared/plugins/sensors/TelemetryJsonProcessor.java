@@ -16,6 +16,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.sensors;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.annotation.Nonnull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,13 +69,15 @@ public class TelemetryJsonProcessor implements ProjectSensor {
       LOG.debug("TelemetryJsonCollector is null, skipping telemetry processing.");
       return;
     }
-    var messages = collector.getTelemetry();
+    final var messages = collector.getTelemetry();
     LOG.debug("Found {} telemetry messages.", messages.size());
-    var aggregated = new TelemetryJsonAggregator().flatMapTelemetry(messages.stream());
+    final var aggregated = new TelemetryJsonAggregator().flatMapTelemetry(messages.stream());
+    final var count = new AtomicInteger();
     aggregated.forEach(telemetry -> {
       LOG.debug("Adding metric: {}={}", telemetry.getKey(), telemetry.getValue());
       sensorContext.addTelemetryProperty(telemetry.getKey(), telemetry.getValue());
+      count.getAndIncrement();
     });
-    LOG.debug("Added {} metrics.", messages.size());
+    LOG.debug("Added {} metrics.", count);
   }
 }
