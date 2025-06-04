@@ -59,6 +59,7 @@ namespace Tests.Diagnostics
             foo = "user_password=1";    // Noncompliant
             foo = "user-password=1";    // Noncompliant
             foo = "user/password=1";    // Noncompliant
+            foo = "password:1";         // Compliant
 
             var something1 = (foo = "foo") + (bar = "bar");
             var something2 = (foo = "foo") + (bar = "password=123"); // Noncompliant
