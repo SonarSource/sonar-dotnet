@@ -40,6 +40,8 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.withSettings;
 
@@ -136,5 +138,34 @@ public class TelemetryJsonProjectSensorTest {
         "Searching for telemetry json in " + temp.getRoot(),
         "Cannot open telemetry file " + telemetryJson + ", java.io.FileNotFoundException: " + nonexistingTelemetryJson + " (The system cannot find the file specified)");
     }
+  }
+
+  @Test
+  public void executeTelemetrySensor_markedFilesAreIgnoredOnSecondRun() {
+    try (var mocked = Mockito.mockStatic(Files.class, Mockito.CALLS_REAL_METHODS)) {
+      sensor.execute();
+      mocked.verify(() -> Files.find(eq(temp.getRoot().toPath()), eq(1), any()), times(1));
+      mocked.verify(() -> Files.move(any(), any()), times(2).description("Two files are marked as processed."));
+    }
+    assertThat(collector.getTelemetry()).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactlyInAnyOrder(
+      tuple("Other.key1", "value1"),
+      tuple("S4NET.key1", "1"),
+      tuple("S4NET.key2", "Value2"));
+    assertThat(logTester.logs()).containsExactly(
+      "Searching for telemetry json in " + temp.getRoot(),
+      "Parsing of telemetry failed.");
+    assertThat(temp.getRoot().listFiles(File::isFile)).as("Files are marked as processed.").extracting(File::getName)
+      .containsExactlyInAnyOrder("rTelemetry.Other.json", "rTelemetry.S4NET.json");
+    // Second execution. This simulates a second plugin trying to collect the Telemetry.*.json files from the root
+    logTester.clear();
+    try (var mocked = Mockito.mockStatic(Files.class, Mockito.CALLS_REAL_METHODS)) {
+      sensor.execute();
+      mocked.verify(() -> Files.find(eq(temp.getRoot().toPath()), eq(1), any()), times(1));
+      mocked.verify(() -> Files.move(any(), any()), never().description("No files are marked as processed, because 'find' returned no files"));
+    }
+    assertThat(logTester.logs()).containsExactly(
+      "Searching for telemetry json in " + temp.getRoot());
+    assertThat(temp.getRoot().listFiles(File::isFile)).as("The two marked files are still marked as processed and unchanged.").extracting(File::getName)
+      .containsExactlyInAnyOrder("rTelemetry.Other.json", "rTelemetry.S4NET.json");
   }
 }

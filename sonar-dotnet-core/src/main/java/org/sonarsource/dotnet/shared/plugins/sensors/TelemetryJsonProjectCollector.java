@@ -45,7 +45,7 @@ import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonParser;
 @ScannerSide
 public class TelemetryJsonProjectCollector {
   private static final Logger LOG = LoggerFactory.getLogger(TelemetryJsonProjectCollector.class);
-  private static final Pattern TelemetryPattern = Pattern.compile("Telemetry\\..*\\.json");
+  private static final Pattern TelemetryPattern = Pattern.compile("^Telemetry\\..*\\.json$");
   private final TelemetryJsonCollector collector;
   private final AbstractLanguageConfiguration configuration;
 
