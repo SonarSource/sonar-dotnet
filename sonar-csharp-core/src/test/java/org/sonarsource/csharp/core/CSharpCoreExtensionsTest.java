@@ -77,7 +77,7 @@ class CSharpCoreExtensionsTest {
       TelemetryJsonCollector.class,
       TelemetryJsonSensor.class,
       TelemetryJsonProcessor.class,
-      TelemetryJsonProjectCollector.Impl.class,
+      TelemetryJsonProjectCollector.class,
       RealPathProvider.class,
       PropertiesSensor.class,
       ProjectTypeCollector.class,

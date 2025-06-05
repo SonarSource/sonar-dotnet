@@ -18,17 +18,16 @@ package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.util.ArrayList;
 import java.util.Map;
-import javax.annotation.Nonnull;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.stubbing.Answer;
 import org.slf4j.event.Level;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.internal.DefaultSensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.testfixtures.log.LogTester;
+import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollector;
 
@@ -61,8 +60,9 @@ public class TelemetryJsonProcessorTest {
     when(metadata.pluginKey()).thenReturn(PLUGIN_KEY);
     when(metadata.languageKey()).thenReturn(LANG_KEY);
     when(metadata.languageName()).thenReturn(LANG_NAME);
+    var config = mock(AbstractLanguageConfiguration.class);
     collector = new TelemetryJsonCollector();
-    sensor = new TelemetryJsonProcessor(collector, new TelemetryJsonProjectCollector.Empty(), metadata);
+    sensor = new TelemetryJsonProcessor(collector, new TelemetryJsonProjectCollector(collector, config), metadata);
   }
 
   @Test
@@ -75,7 +75,7 @@ public class TelemetryJsonProcessorTest {
 
   @Test
   public void executeTelemetryProcessor_withNullCollector() {
-    sensor = new TelemetryJsonProcessor(null, new TelemetryJsonProjectCollector.Empty(), mock(PluginMetadata.class));
+    sensor = new TelemetryJsonProcessor(null, new TelemetryJsonProjectCollector(new TelemetryJsonCollector(), mock(AbstractLanguageConfiguration.class)), mock(PluginMetadata.class));
     sensor.execute(context);
     assertThat(logTester.logs()).containsExactly(
       "TelemetryJsonCollector is null, skipping telemetry processing.");
@@ -106,9 +106,9 @@ public class TelemetryJsonProcessorTest {
   public void executeTelemetryProcessorWithTelemetryJsonProjectCollector() {
     collector.addTelemetry("key1", "value1");
     collector.addTelemetry("key2", "value2");
-    var projectSensor = new TelemetryJsonProjectCollector() {
+    var projectSensor = new TelemetryJsonProjectCollector(collector, mock(AbstractLanguageConfiguration.class)) {
       @Override
-      public void execute(@Nonnull SensorContext sensorContext) {
+      public void execute() {
         collector.addTelemetry(Map.entry("projectKey1", "value1"));
         collector.addTelemetry(Map.entry("projectKey2", "value2"));
       }

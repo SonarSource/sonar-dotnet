@@ -75,7 +75,7 @@ public class CSharpCoreExtensions {
         TelemetryProcessor.class,
         TelemetryJsonCollector.class,
         TelemetryJsonSensor.class,
-        TelemetryJsonProjectCollector.Impl.class,
+        TelemetryJsonProjectCollector.class,
         TelemetryJsonProcessor.class,
         PropertiesSensor.class,
         RealPathProvider.class,

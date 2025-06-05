@@ -17,6 +17,7 @@
 package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -27,13 +28,12 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.Mockito;
 import org.slf4j.event.Level;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonarsource.dotnet.shared.plugins.AbstractLanguageConfiguration;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
-import org.sonarsource.dotnet.shared.plugins.sensors.TelemetryJsonProjectCollector.Impl;
 import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollector;
+import org.sonarsource.dotnet.shared.plugins.testutils.FileUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
@@ -53,35 +53,36 @@ public class TelemetryJsonProjectSensorTest {
   @Rule
   public LogTester logTester = new LogTester();
 
-  private SensorContextTester context;
   private TelemetryJsonCollector collector;
   private TelemetryJsonProjectCollector sensor;
 
   @Before
-  public void prepare() {
+  public void prepare() throws IOException {
     logTester.setLevel(Level.DEBUG);
-    context = SensorContextTester.create(temp.getRoot());
+    FileUtils.copyDirectory(TEST_DATA_DIR.toPath(), temp.getRoot().toPath());
     PluginMetadata metadata = mock(PluginMetadata.class);
     when(metadata.languageName()).thenReturn(LANG_NAME);
     Configuration configuration = mock(Configuration.class);
-    when(configuration.get("sonar.working.directory")).thenReturn(Optional.of(TEST_DATA_DIR.toPath().resolve(".sonar").toString()));
+    when(configuration.get("sonar.working.directory")).thenReturn(Optional.of(temp.getRoot().toPath().resolve(".sonar").toString()));
     var languageConfiguration = mock(AbstractLanguageConfiguration.class, withSettings()
       .useConstructor(configuration, metadata)
       .defaultAnswer(Mockito.CALLS_REAL_METHODS));
     collector = new TelemetryJsonCollector();
-    sensor = new Impl(collector, languageConfiguration);
+    sensor = new TelemetryJsonProjectCollector(collector, languageConfiguration);
   }
 
   @Test
   public void executeTelemetrySensor() {
-    sensor.execute(context);
+    sensor.execute();
     assertThat(collector.getTelemetry()).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactlyInAnyOrder(
       tuple("Other.key1", "value1"),
       tuple("S4NET.key1", "1"),
       tuple("S4NET.key2", "Value2"));
     assertThat(logTester.logs()).containsExactly(
-      "Searching for telemetry json in " + TEST_DATA_DIR,
+      "Searching for telemetry json in " + temp.getRoot(),
       "Parsing of telemetry failed.");
+    assertThat(temp.getRoot().listFiles(File::isFile)).as("Files are marked as processed.").extracting(File::getName)
+      .containsExactlyInAnyOrder("rTelemetry.Other.json", "rTelemetry.S4NET.json");
   }
 
   @Test
@@ -93,8 +94,8 @@ public class TelemetryJsonProjectSensorTest {
       .useConstructor(configuration, metadata)
       .defaultAnswer(Mockito.CALLS_REAL_METHODS));
     collector = new TelemetryJsonCollector();
-    sensor = new Impl(collector, languageConfiguration);
-    sensor.execute(context);
+    sensor = new TelemetryJsonProjectCollector(collector, languageConfiguration);
+    sensor.execute();
     assertThat(collector.getTelemetry()).isEmpty();
     assertThat(logTester.logs()).containsExactly(
       "Searching for telemetry json in nonexistentPath",
@@ -102,19 +103,38 @@ public class TelemetryJsonProjectSensorTest {
   }
 
   @Test
-  public void executeTelemetrySensorFileCanNotBeOpened_printsDebugMessage() {
-    try (var mocked = Mockito.mockStatic(Files.class)) {
-      mocked.when(() -> Files.find(eq(TEST_DATA_DIR.toPath()), eq(1), any())).thenReturn(Stream.of(
-        TEST_DATA_DIR.toPath().resolve("NonexistentFile.json"),
-        TEST_DATA_DIR.toPath().resolve("Telemetry.S4NET.json")));
-      sensor.execute(context);
+  public void executeTelemetrySensorFileCanNotBeOpened() {
+    try (var mocked = Mockito.mockStatic(Files.class, Mockito.CALLS_REAL_METHODS)) {
+      mocked.when(() -> Files.find(eq(temp.getRoot().toPath()), eq(1), any())).thenReturn(Stream.of(
+        temp.getRoot().toPath().resolve("NonexistentFile.json"),
+        temp.getRoot().toPath().resolve("Telemetry.S4NET.json")));
+      sensor.execute();
       assertThat(collector.getTelemetry()).extracting(Map.Entry::getKey, Map.Entry::getValue).containsExactlyInAnyOrder(
         tuple("S4NET.key1", "1"),
         tuple("S4NET.key2", "Value2"));
-      var nonexistentFile = TEST_DATA_DIR.toPath().resolve("NonexistentFile.json");
       assertThat(logTester.logs()).containsExactly(
-        "Searching for telemetry json in " + TEST_DATA_DIR,
-        "Cannot open telemetry file " + nonexistentFile + ", java.io.FileNotFoundException: " + nonexistentFile + " (The system cannot find the file specified)");
+        "Searching for telemetry json in " + temp.getRoot());
+      assertThat(temp.getRoot().listFiles(File::isFile)).as("Found files are marked as processed.").extracting(File::getName)
+        .containsExactlyInAnyOrder("Telemetry.Other.json", "rTelemetry.S4NET.json");
+    }
+  }
+
+  @Test
+  public void executeTelemetrySensorRenamedFileCanNotBeOpened_printsDebugMessage() {
+    try (var mocked = Mockito.mockStatic(Files.class)) {
+      var root = temp.getRoot().toPath();
+      var telemetryJson = root.resolve("Telemetry.S4NET.json");
+      var renamedTelemetryJson = root.resolve("rTelemetry.S4NET.json");
+      var nonexistingTelemetryJson = root.resolve("Non-existing.json");
+      // find returns Telemetry.S4NET.json
+      mocked.when(() -> Files.find(eq(root), eq(1), any())).thenReturn(Stream.of(telemetryJson));
+      // move returns nonexistingTelemetryJson, which causes the FileInputStream to fail
+      mocked.when(() -> Files.move(eq(telemetryJson), eq(renamedTelemetryJson))).thenReturn(nonexistingTelemetryJson);
+      sensor.execute();
+      assertThat(collector.getTelemetry()).isEmpty();
+      assertThat(logTester.logs()).containsExactly(
+        "Searching for telemetry json in " + temp.getRoot(),
+        "Cannot open telemetry file " + telemetryJson + ", java.io.FileNotFoundException: " + nonexistingTelemetryJson + " (The system cannot find the file specified)");
     }
   }
 }

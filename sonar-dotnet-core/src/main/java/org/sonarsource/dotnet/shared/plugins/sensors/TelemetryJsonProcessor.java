@@ -31,16 +31,16 @@ import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollecto
  * The TelemetryJsonProcessor is executed once per project (sln) and plugin (vb and c#) after all module sensors (TelemetryJsonSensor) are run.
  * It takes the TelemetryJsonCollector, which contains all telemetry found by the module sensors (.\sonarqube\out\0\Telemetry.json).
  * In execute, this TelemetryJsonProcessor first executes TelemetryJsonProjectCollector. TelemetryJsonProjectCollector adds the global
- * .\sonarqube\out\Telemetry.*.json to the TelemetryJsonCollector. This is done in the C# plugin only because otherwise, such telemetry would be processed twice.
- * TelemetryJsonProjectCollector.Impl is registered in the C# plugin as TelemetryJsonProjectCollector.
- * TelemetryJsonProjectCollector.Empty is registered in the VB plugin as TelemetryJsonProjectCollector.
+ * .\sonarqube\out\Telemetry.*.json to the TelemetryJsonCollector. This is done in the C# plugin and the VB plugin. To avoid adding such telemetry
+ * twice, the Telemetry files are marked as processed by the plugin that comes first.
  * This means TelemetryJsonCollector is filled up this way:
  * TelemetryJsonCollector in the C# plugin:
  * 1. csproj specific telemetry is collected by TelemetryJsonSensor
- * 2. TelemetryJsonProjectCollector.Impl adds the project wide scanner telemetry (from e.g. the begin step and the end step)
+ * 2. TelemetryJsonProjectCollector adds the project wide scanner telemetry (from e.g. the begin step and the end step) and renames the files.
  * TelemetryJsonCollector in the VB plugin
  * 1. vbproj specific telemetry is collected by TelemetryJsonSensor
- * 2. TelemetryJsonProjectCollector.Empty does not add anymore telemetry because that telemetry is already processed by the C# plugin
+ * 2. TelemetryJsonProjectCollector tries to add the project wide scanner telemetry, but can not find them because the C# plugin marked them.
+ * The order of the C# plugin and VB plugin is non-deterministic, so it could also be the other way around.
  * All telemetry in TelemetryJsonCollector is then aggregated and send to the server (this happens in the C# plugin and the VB plugin).
  */
 public class TelemetryJsonProcessor implements ProjectSensor {
@@ -63,7 +63,7 @@ public class TelemetryJsonProcessor implements ProjectSensor {
 
   @Override
   public void execute(@Nonnull SensorContext sensorContext) {
-    projectSensor.execute(sensorContext);
+    projectSensor.execute();
 
     if (collector == null) {
       LOG.debug("TelemetryJsonCollector is null, skipping telemetry processing.");

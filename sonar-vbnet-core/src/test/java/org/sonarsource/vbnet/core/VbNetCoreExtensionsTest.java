@@ -74,7 +74,7 @@ class VbNetCoreExtensionsTest {
       TelemetryProcessor.class,
       TelemetryJsonCollector.class,
       TelemetryJsonSensor.class,
-      TelemetryJsonProjectCollector.Empty.class,
+      TelemetryJsonProjectCollector.class,
       TelemetryJsonProcessor.class,
       PropertiesSensor.class,
       ModuleConfiguration.class,
