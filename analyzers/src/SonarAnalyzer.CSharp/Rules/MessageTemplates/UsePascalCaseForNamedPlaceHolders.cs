@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using static SonarAnalyzer.Core.RegularExpressions.MessageTemplatesParser;
+using static SonarAnalyzer.CSharp.Core.RegularExpressions.MessageTemplatesParser;
 
 namespace SonarAnalyzer.CSharp.Rules.MessageTemplates;
 

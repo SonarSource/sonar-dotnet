@@ -39,9 +39,9 @@ public class Program
         logger.LogInformation(@"
              Arg: {arg}
              {arg}", arg, arg);
-        // Noncompliant @-3
-        // Secondary @-3
-        // Secondary @-3
+        // Noncompliant @-3 ^31#46
+        // Secondary @-3    ^20#3
+        // Secondary @-3    ^15#3
 
         LoggerExtensions.LogInformation(logger, "Arg: {arg}", arg); // Noncompliant
                                                                     // Secondary @-1
@@ -108,9 +108,12 @@ public class Program
     {
         public void Method(ILogger logger, int number)
         {
-            logger.LogDebug($"{nameof(Repro_9545)} filter: {{number}}", number);    // Compliant - FN
-            logger.LogDebug("Repro_9545) filter: {number}", number);                // Noncompliant
-                                                                                    // Secondary @-1
+            logger.LogDebug($"{nameof(Repro_9545)} filter: {{number}}", number);
+            //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            //                                               ^^^^^^                    Secondary @-1
+            logger.LogDebug($"Repro_9545 filter: {{number}}", number);
+            //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            //                                     ^^^^^^                              Secondary @-1
         }
     }
 }

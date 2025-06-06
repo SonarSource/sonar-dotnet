@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.RegularExpressions.Test;
+namespace SonarAnalyzer.CSharp.Core.RegularExpressions.Test;
 
 [TestClass]
 public class MessageTemplateParserTest
@@ -31,7 +31,7 @@ public class MessageTemplateParserTest
     [DataRow("{{hello {{world}}}}")]
     public void Parse_NoPlaceholder(string template)
     {
-        var result = MessageTemplatesParser.Parse(template);
+        var result = MessageTemplatesParser.Parse(template, MessageTemplatesParser.TemplateRegex);
         ShouldBeSuccess(result);
     }
 
@@ -57,7 +57,7 @@ public class MessageTemplateParserTest
     [DataRow(""" "hello" + "{world}" + "!" """, "world", 13, 5)]
     public void Parse_Placeholder(string template, string placeholder, int start, int length)
     {
-        var result = MessageTemplatesParser.Parse(template);
+        var result = MessageTemplatesParser.Parse(template, MessageTemplatesParser.TemplateRegex);
         ShouldBeSuccess(result, 1);
         ShouldBe(result.Placeholders[0], placeholder, start, length);
     }
@@ -83,7 +83,7 @@ public class MessageTemplateParserTest
     [DataRow("hello {world:format,42}")] // semantically looks like a typo, format and alignment are reversed, but it's syntactically valid.
     public void Parse_Placeholder_Named_Alignment_Format(string template)
     {
-        var result = MessageTemplatesParser.Parse(template);
+        var result = MessageTemplatesParser.Parse(template, MessageTemplatesParser.TemplateRegex);
         ShouldBeSuccess(result, 1);
         ShouldBe(result.Placeholders[0], "world", 7, 5);
     }
@@ -100,7 +100,7 @@ public class MessageTemplateParserTest
             Logic {@_orchestrates42} the mind,
             Programmer's {ballet:_}.
             """;
-        var result = MessageTemplatesParser.Parse(template);
+        var result = MessageTemplatesParser.Parse(template, MessageTemplatesParser.TemplateRegex);
         ShouldBeSuccess(result, 6);
         ShouldBe(result.Placeholders[0], "silent", 12, 6);
         ShouldBe(result.Placeholders[1], "0", 56, 1);
@@ -125,7 +125,7 @@ public class MessageTemplateParserTest
     [DataRow(""" "hello {" + "world" + "}" """)]    // '+' and '"' is not allowed in placeholders
     public void Parse_Placeholder_Failure(string template)
     {
-        var result = MessageTemplatesParser.Parse(template);
+        var result = MessageTemplatesParser.Parse(template, MessageTemplatesParser.TemplateRegex);
         result.Should().NotBeNull();
         result.Success.Should().BeFalse();
         result.Placeholders.Should().BeNull();

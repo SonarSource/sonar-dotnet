@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Core.RegularExpressions;
+using SonarAnalyzer.CSharp.Core.RegularExpressions;
 using SonarAnalyzer.CSharp.Rules.MessageTemplates;
 
 namespace SonarAnalyzer.CSharp.Rules;
@@ -27,37 +27,28 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
                new NamedPlaceholdersShouldBeUnique(),
                new UsePascalCaseForNamedPlaceHolders());
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-        Checks.Select(x => x.Rule).ToImmutableArray();
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => Checks.Select(x => x.Rule).ToImmutableArray();
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
-        {
-            if (cc.Compilation.ReferencesAny(KnownAssembly.MicrosoftExtensionsLoggingAbstractions, KnownAssembly.Serilog, KnownAssembly.NLog))
             {
-                cc.RegisterNodeAction(c =>
+                if (cc.Compilation.ReferencesAny(KnownAssembly.MicrosoftExtensionsLoggingAbstractions, KnownAssembly.Serilog, KnownAssembly.NLog))
                 {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
-                    if (enabledChecks.Length > 0
-                        && MessageTemplateExtractor.TemplateArgument(invocation, c.Model) is { } argument
-                        && HasValidExpression(argument)
-                        && MessageTemplatesParser.Parse(argument.Expression.ToString()) is { Success: true } result)
-                    {
-                        foreach (var check in enabledChecks)
+                    cc.RegisterNodeAction(c =>
                         {
-                            check.Execute(c, invocation, argument, result.Placeholders);
-                        }
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-            }
-        });
-
-    private static bool HasValidExpression(ArgumentSyntax argument) =>
-        argument.Expression.DescendantNodes().All(x => x.Kind() is
-            SyntaxKind.StringLiteralExpression or
-            SyntaxKind.AddExpression or
-            SyntaxKind.InterpolatedStringExpression or
-            SyntaxKind.InterpolatedStringText);
+                            var invocation = (InvocationExpressionSyntax)c.Node;
+                            var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
+                            if (enabledChecks.Length > 0
+                                && MessageTemplateExtractor.TemplateArgument(invocation, c.Model) is { } argument
+                                && MessageTemplatesParser.Parse(argument.Expression) is { Success: true } result)
+                            {
+                                foreach (var check in enabledChecks)
+                                {
+                                    check.Execute(c, invocation, argument, result.Placeholders);
+                                }
+                            }
+                        },
+                        SyntaxKind.InvocationExpression);
+                }
+            });
 }

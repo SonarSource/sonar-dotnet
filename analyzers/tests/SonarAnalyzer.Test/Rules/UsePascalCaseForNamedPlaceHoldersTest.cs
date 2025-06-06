@@ -40,7 +40,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
 
     [TestMethod]
     public void UsePascalCaseForNamedPlaceHolders_Latest_CS() =>
-        Builder.AddPaths("UsePascalCaseForNamedPlaceHolders.Latest.cs").WithLanguageVersion(LanguageVersion.Latest).VerifyNoIssues();
+        Builder.AddPaths("UsePascalCaseForNamedPlaceHolders.Latest.cs").WithLanguageVersion(LanguageVersion.Latest).Verify();
 
 #endif
 

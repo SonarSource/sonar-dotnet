@@ -46,16 +46,20 @@ namespace MicrosoftTests
             logger.LogInformation("Hey {foo} and {{foo}}", foo, foo);        // Compliant
 
             // Contains Interpolation
-            logger.LogWarning($"Hey {foo} and {foo}", foo, foo);             // Compliant
-            logger.LogWarning($"Hey {foo}" + "and {foo}", foo, foo);         // Compliant
-            logger.LogInformation("Hey {foo}" + $"and {foo}" + "{foo}", foo, foo); // Compliant FN
+            logger.LogWarning($"Hey {foo} and {foo}", foo, foo);                    // Compliant
+            logger.LogWarning($"Hey {foo}" + "and {foo}", foo, foo);                // Noncompliant FP
+                                                                                    // Secondary @-1 FP
+            logger.LogInformation("Hey {foo}" + $"and {foo}" + "{foo}", foo, foo);  // the first secondary location is an FP
+            //                          ^^^                                            Noncompliant
+            //                                         ^^^                             Secondary @-1
+            //                                                   ^^^                   Secondary @-2
 
             // Contains Identifier name
             logger.LogWarning("Hey {" + foo + "} and {" + foo + "}");        // Compliant
 
-            // False Negatives
-            logger.LogInformation($"Hey {{foo}} and {{foo}}", foo, foo);     // Compliant, we get the template value at syntax level, so we don't escape {{
-            logger.LogInformation("Hey" + "{" + "foo} and {foo" +"}");       // Compliant, same as above (I hope this does not exist out there)
+            logger.LogInformation($"Hey {{foo}} and {{foo}}", foo, foo);     // Noncompliant
+                                                                             // Secondary @-1
+            logger.LogInformation("Hey" + "{" + "foo} and {foo" +"}");       // FN
         }
 
         void Noncompliant(ILogger logger, string foo, string bar, string baz, Exception ex, EventId eventId)
