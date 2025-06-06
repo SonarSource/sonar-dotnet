@@ -32,6 +32,11 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
+                if (!IsOrImplementsIEnumerable(c.Model, forEachStatementSyntax))
+                {
+                    return;
+                }
+
                 if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, c, out var ifConditionLocation))
                 {
                     c.ReportIssue(Rule, forEachStatementSyntax.Expression, [ifConditionLocation], WhereMessageFormat);
@@ -128,13 +133,6 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
     private static void CheckIfCanBeSimplifiedUsingSelect(SonarSyntaxNodeReportingContext c, ForEachStatementSyntax forEachStatementSyntax)
     {
         var declaredSymbol = new Lazy<ILocalSymbol>(() => c.Model.GetDeclaredSymbol(forEachStatementSyntax));
-        var expressionTypeIsOrImplementsIEnumerable = new Lazy<bool>(
-            () =>
-            {
-                var expressionType = c.Model.GetTypeInfo(forEachStatementSyntax.Expression).Type;
-                return expressionType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
-                    || expressionType.Implements(KnownType.System_Collections_Generic_IEnumerable_T);
-            });
 
         var accessedProperties = new Dictionary<ISymbol, UsageStats>();
 
@@ -142,7 +140,6 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         {
             if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
                 && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
-                && expressionTypeIsOrImplementsIEnumerable.Value
                 && c.Model.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
                 && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol
                 && !symbol.GetSymbolType().IsRefStruct())
@@ -174,6 +171,13 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         static bool IsNotLeftSideOfAssignment(MemberAccessExpressionSyntax memberAccess) =>
             !(memberAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == memberAccess);
     }
+
+    private static bool IsOrImplementsIEnumerable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
+        model.GetTypeInfo(forEachStatementSyntax.Expression).Type is var expressionType
+        && (expressionType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
+            || expressionType.Implements(KnownType.System_Collections_Generic_IEnumerable_T)
+            || expressionType.Is(KnownType.System_Collections_Generic_IAsyncEnumerable_T)
+            || expressionType.Implements(KnownType.System_Collections_Generic_IAsyncEnumerable_T));
 
     private sealed class UsageStats
     {

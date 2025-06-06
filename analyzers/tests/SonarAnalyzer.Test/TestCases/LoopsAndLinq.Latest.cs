@@ -110,19 +110,19 @@ namespace CSharpEleven
     {
         void SpansAndLogicalPatterns(Span<char> s, ReadOnlySpan<char> ros)
         {
-            foreach (var c in s)                   // Noncompliant, FP: iterable but not enumerable, nor queriable
-                if (c is ' ') { }                  // Secondary
-            foreach (var c in s)                   // Noncompliant, FP
-                if (c is not ' ') { }              // Secondary
-            foreach (var c in s)                   // Noncompliant, FP
-                if (c is ' ' or '\n' or '\r') { }  // Secondary
+            foreach (var c in s)                   // Compliant iterable but not enumerable, nor queriable
+                if (c is ' ') { }
+            foreach (var c in s)                   // Compliant
+                if (c is not ' ') { }
+            foreach (var c in s)                   // Compliant
+                if (c is ' ' or '\n' or '\r') { }
 
-            foreach (var c in ros)                 // Noncompliant, FP
-                if (c is ' ') { }                  // Secondary
-            foreach (var c in ros)                 // Noncompliant, FP
-                if (c is not ' ') { }              // Secondary
-            foreach (var c in ros)                 // Noncompliant, FP
-                if (c is ' ' or '\n' or '\r') { }  // Secondary
+            foreach (var c in ros)                 // Compliant
+                if (c is ' ') { }
+            foreach (var c in ros)                 // Compliant
+                if (c is not ' ') { }
+            foreach (var c in ros)                 // Compliant
+                if (c is ' ' or '\n' or '\r') { }
         }
 
         void SpansAndLogicalOperators(Span<char> s, ReadOnlySpan<char> ros)
@@ -144,12 +144,12 @@ namespace CSharpEleven
 
         void IterableNotEnumerableAndLogicalPatterns(IterableNotEnumerable s)
         {
-            foreach (var c in s)                   // Noncompliant, FP: iterable but not enumerable, nor queriable
-                if (c is ' ') { }                  // Secondary
-            foreach (var c in s)                   // Noncompliant, FP
-                if (c is not ' ') { }              // Secondary
-            foreach (var c in s)                   // Noncompliant, FP
-                if (c is ' ' or '\n' or '\r') { }  // Secondary
+            foreach (var c in s)                   // Compliant: iterable but not enumerable, nor queriable
+                if (c is ' ') { }
+            foreach (var c in s)                   // Compliant
+                if (c is not ' ') { }
+            foreach (var c in s)                   // Compliant
+                if (c is ' ' or '\n' or '\r') { }
         }
 
         void EnumerableNotCollectionAndLogicalPatterns()
@@ -243,9 +243,9 @@ namespace CSharp13
     {
         async void WhenEach(List<Task<string>> tasks)
         {
-            await foreach (var s in Task.WhenEach(tasks)) // Noncompliant
+            await foreach (var s in Task.WhenEach(tasks)) // Noncompliant IAsyncEnumerable
             {
-                if (s.Result is "42")  //Secondary
+                if (s.Result is "42")  // Secondary
                 {
                     Console.WriteLine(s.Result);
                 }
