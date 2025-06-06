@@ -14,16 +14,7 @@ Please report all exceptions thrown from analyzer as well as False-Positive and 
 
 You can ask for help, request new rule or feature on [Community Forum](https://community.sonarsource.com/).
 
-## Labels
-
-Labels are divided into several categories. One issue can have:
-
-* multiple labels from Area category,
-* only one label from Status category,
-* only one label from Type category.
-
 ## Implicit rules
 
 * Any issue without labels needs review.
 * Every issue containing labels is confirmed.
-* Issues marked as `Status: On Hold` are treated case by case. Reference timeout is 3 months without reply.
