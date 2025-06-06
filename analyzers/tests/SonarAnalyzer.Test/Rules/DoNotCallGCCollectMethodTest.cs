@@ -16,28 +16,25 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DoNotCallGCCollectMethodTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallGCCollectMethod>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DoNotCallGCCollectMethod() =>
-            builder.AddPaths("DoNotCallGCCollectMethod.cs")
-                .Verify();
+[TestClass]
+public class DoNotCallGCCollectMethodTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallGCCollectMethod>();
+
+    [TestMethod]
+    public void DoNotCallGCCollectMethod() =>
+        builder.AddPaths("DoNotCallGCCollectMethod.cs")
+            .Verify();
 
 #if NET
-
-        [TestMethod]
-        public void DoNotCallGCCollectMethod_CSharp9() =>
-            builder.AddPaths("DoNotCallGCCollectMethod.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .WithTopLevelStatements()
-                .Verify();
-
+    [TestMethod]
+    public void DoNotCallGCCollectMethod_Latest() =>
+        builder.AddPaths("DoNotCallGCCollectMethod.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithTopLevelStatements()
+            .Verify();
 #endif
 
-    }
 }
