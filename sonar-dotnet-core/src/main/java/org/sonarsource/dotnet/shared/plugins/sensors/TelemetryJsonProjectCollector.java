@@ -81,7 +81,7 @@ public class TelemetryJsonProjectCollector {
    * the telemetry should only be imported once.
   */
   private static Optional<Path> markAsProcessed(Path file) {
-    var newFile = file.resolveSibling("r" + file.getFileName());
+    var newFile = file.resolveSibling("Processed." + file.getFileName());
     try {
       var result = Files.move(file, newFile);
       return Optional.ofNullable(result);

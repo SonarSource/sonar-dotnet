@@ -18,10 +18,10 @@ package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
-import java.nio.file.Files;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -84,7 +84,7 @@ public class TelemetryJsonProjectSensorTest {
       "Searching for telemetry json in " + temp.getRoot(),
       "Parsing of telemetry failed.");
     assertThat(temp.getRoot().listFiles(File::isFile)).as("Files are marked as processed.").extracting(File::getName)
-      .containsExactlyInAnyOrder("rTelemetry.Other.json", "rTelemetry.S4NET.json");
+      .containsExactlyInAnyOrder("Processed.Telemetry.Other.json", "Processed.Telemetry.S4NET.json");
   }
 
   @Test
@@ -117,7 +117,7 @@ public class TelemetryJsonProjectSensorTest {
       assertThat(logTester.logs()).containsExactly(
         "Searching for telemetry json in " + temp.getRoot());
       assertThat(temp.getRoot().listFiles(File::isFile)).as("Found files are marked as processed.").extracting(File::getName)
-        .containsExactlyInAnyOrder("Telemetry.Other.json", "rTelemetry.S4NET.json");
+        .containsExactlyInAnyOrder("Telemetry.Other.json", "Processed.Telemetry.S4NET.json");
     }
   }
 
@@ -126,7 +126,7 @@ public class TelemetryJsonProjectSensorTest {
     try (var mocked = Mockito.mockStatic(Files.class)) {
       var root = temp.getRoot().toPath();
       var telemetryJson = root.resolve("Telemetry.S4NET.json");
-      var renamedTelemetryJson = root.resolve("rTelemetry.S4NET.json");
+      var renamedTelemetryJson = root.resolve("Processed.Telemetry.S4NET.json");
       var nonexistingTelemetryJson = root.resolve("Non-existing.json");
       // find returns Telemetry.S4NET.json
       mocked.when(() -> Files.find(eq(root), eq(1), any())).thenReturn(Stream.of(telemetryJson));
@@ -155,7 +155,7 @@ public class TelemetryJsonProjectSensorTest {
       "Searching for telemetry json in " + temp.getRoot(),
       "Parsing of telemetry failed.");
     assertThat(temp.getRoot().listFiles(File::isFile)).as("Files are marked as processed.").extracting(File::getName)
-      .containsExactlyInAnyOrder("rTelemetry.Other.json", "rTelemetry.S4NET.json");
+      .containsExactlyInAnyOrder("Processed.Telemetry.Other.json", "Processed.Telemetry.S4NET.json");
     // Second execution. This simulates a second plugin trying to collect the Telemetry.*.json files from the root
     logTester.clear();
     try (var mocked = Mockito.mockStatic(Files.class, Mockito.CALLS_REAL_METHODS)) {
@@ -166,6 +166,6 @@ public class TelemetryJsonProjectSensorTest {
     assertThat(logTester.logs()).containsExactly(
       "Searching for telemetry json in " + temp.getRoot());
     assertThat(temp.getRoot().listFiles(File::isFile)).as("The two marked files are still marked as processed and unchanged.").extracting(File::getName)
-      .containsExactlyInAnyOrder("rTelemetry.Other.json", "rTelemetry.S4NET.json");
+      .containsExactlyInAnyOrder("Processed.Telemetry.Other.json", "Processed.Telemetry.S4NET.json");
   }
 }
