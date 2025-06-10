@@ -47,12 +47,8 @@ namespace MicrosoftTests
 
             // Contains Interpolation
             logger.LogWarning($"Hey {foo} and {foo}", foo, foo);                    // Compliant
-            logger.LogWarning($"Hey {foo}" + "and {foo}", foo, foo);                // Noncompliant FP
-                                                                                    // Secondary @-1 FP
-            logger.LogInformation("Hey {foo}" + $"and {foo}" + "{foo}", foo, foo);  // the first secondary location is an FP
-            //                          ^^^                                            Noncompliant
-            //                                         ^^^                             Secondary @-1
-            //                                                   ^^^                   Secondary @-2
+            logger.LogWarning($"Hey {foo}" + "and {foo}", foo, foo);                // Compliant
+            logger.LogInformation("Hey {foo}" + $"and {foo}" + "{foo}", foo, foo);  // FN due to interpolation being ignored in complex cases
 
             // Contains Identifier name
             logger.LogWarning("Hey {" + foo + "} and {" + foo + "}");        // Compliant
@@ -60,6 +56,8 @@ namespace MicrosoftTests
             logger.LogInformation($"Hey {{foo}} and {{foo}}", foo, foo);     // Noncompliant
                                                                              // Secondary @-1
             logger.LogInformation("Hey" + "{" + "foo} and {foo" +"}");       // FN
+
+            logger.LogInformation(true ? "Hey {foo}" : "Hi {foo}", foo);     // Compliant
         }
 
         void Noncompliant(ILogger logger, string foo, string bar, string baz, Exception ex, EventId eventId)

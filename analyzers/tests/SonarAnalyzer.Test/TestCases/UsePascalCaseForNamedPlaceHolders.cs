@@ -83,6 +83,18 @@ public class Program
         notILogger.LogCritical("Arg: {arg}", arg);
     }
 
+    public void Interpolation(ILogger logger, int arg)
+    {
+        logger.LogInformation($"Arg: {arg}");                       // Compliant
+        logger.LogInformation($"Arg: {{arg}}", arg);                // Noncompliant
+                                                                    // Secondary @-1
+        logger.LogInformation($"{arg}: {{arg}}", arg);
+        //                    ^^^^^^^^^^^^^^^^^
+        //                               ^^^                           Secondary @-1
+        logger.LogInformation("Arg: " + $"{{arg}}", arg);           // FN
+        logger.LogInformation("Arg: " + $"{arg} {{arg}}", arg);     // FN
+    }
+
     public class CustomLogger : ILogger
     {
         public IDisposable BeginScope<TState>(TState state) => null;

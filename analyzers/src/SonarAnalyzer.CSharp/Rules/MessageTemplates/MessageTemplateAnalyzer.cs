@@ -23,9 +23,17 @@ namespace SonarAnalyzer.CSharp.Rules;
 public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
 {
     private static readonly ImmutableHashSet<IMessageTemplateCheck> Checks = ImmutableHashSet.Create<IMessageTemplateCheck>(
-               new LoggingTemplatePlaceHoldersShouldBeInOrder(),
-               new NamedPlaceholdersShouldBeUnique(),
-               new UsePascalCaseForNamedPlaceHolders());
+        new LoggingTemplatePlaceHoldersShouldBeInOrder(),
+        new NamedPlaceholdersShouldBeUnique(),
+        new UsePascalCaseForNamedPlaceHolders());
+
+    private static readonly HashSet<SyntaxKind> StringExpressionSyntaxKinds =
+    [
+        SyntaxKind.StringLiteralExpression,
+        SyntaxKind.AddExpression,
+        SyntaxKind.InterpolatedStringExpression,
+        SyntaxKind.InterpolatedStringText
+    ];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => Checks.Select(x => x.Rule).ToImmutableArray();
 
@@ -40,6 +48,7 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
                             var enabledChecks = Checks.Where(x => x.Rule.IsEnabled(c)).ToArray();
                             if (enabledChecks.Length > 0
                                 && MessageTemplateExtractor.TemplateArgument(invocation, c.Model) is { } argument
+                                && HasValidExpression(argument)
                                 && MessageTemplatesParser.Parse(argument.Expression) is { Success: true } result)
                             {
                                 foreach (var check in enabledChecks)
@@ -51,4 +60,16 @@ public sealed class MessageTemplateAnalyzer : SonarDiagnosticAnalyzer
                         SyntaxKind.InvocationExpression);
                 }
             });
+
+    // Allow:
+    // "regular string"
+    // "concatenated " + "string"
+    // condition ? "ternary" : "scenarios"
+    // $"interpolated {string}"
+    // Do not allow:
+    // "complex" + $"interpolated {scenarios}"
+    // condition ? "complex : $"interpolated {scenarios}"
+    private static bool HasValidExpression(ArgumentSyntax argument) =>
+        argument.Expression.IsKind(SyntaxKind.InterpolatedStringExpression)
+        || argument.Expression.DescendantNodes().All(x => x.IsAnyKind(StringExpressionSyntaxKinds));
 }
