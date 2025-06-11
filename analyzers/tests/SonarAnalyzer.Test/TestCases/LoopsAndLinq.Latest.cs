@@ -52,6 +52,23 @@ namespace CSharpEight
                 }
             }
 
+            foreach (var s in strings)  // Compliant, do not raise when 1 side of a binary expression is invalid
+            {
+                if (s is var s2 && s == ":)")
+                {
+                    Console.WriteLine("Pattern match successful");
+                }
+            }
+
+            int count = 0;
+            foreach (var s in strings)  // Compliant, do not raise when 1 side of a binary expression is invalid
+            {
+                if (count++ && s == ":)")  // Error [CS0019] Operator '&&' cannot be applied to operands of type 'int' and 'bool'
+                {
+                    Console.WriteLine("Pattern match successful");
+                }
+            }
+
             foreach (var s in strings) // Compliant, do not raise on SingleVariableDeclaration in IsPattern
             {
                 if (s is { Length: 42 } str)
@@ -189,10 +206,10 @@ namespace CSharpEleven
                     if (c is ' ') { }                  // Secondary
                 foreach (var c in s)                   // Noncompliant
                     if (c is not ' ') { }              // Secondary
-                foreach (var c in s)                   // FN, equivalent to c is ' '
-                    if (c == ' ') { }
-                foreach (var c in s)                   // FN, equivalent to c is not ' '
-                    if (c != ' ') { }
+                foreach (var c in s)                   // Noncompliant
+                    if (c == ' ') { }                  // Secondary
+                foreach (var c in s)                   // Noncompliant
+                    if (c != ' ') { }                  // Secondary
             }
 
             class CustomList : List<char>

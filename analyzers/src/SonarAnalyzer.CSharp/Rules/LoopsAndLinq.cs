@@ -50,7 +50,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
 
     private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement, SonarSyntaxNodeReportingContext context, out SecondaryLocation ifConditionLocation)
     {
-        if (GetIfStatement(statement) is { } ifStatementSyntax && CanIfStatementBeMoved(ifStatementSyntax))
+        if (IfStatement(statement) is { } ifStatementSyntax && CanIfStatementBeMoved(ifStatementSyntax))
         {
             ifConditionLocation = ifStatementSyntax.Condition.ToSecondaryLocation();
             // If the 'if' block contains a single return or assignment with a break,
@@ -97,29 +97,42 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         return null;
     }
 
-    private static IfStatementSyntax GetIfStatement(SyntaxNode node) =>
+    private static IfStatementSyntax IfStatement(SyntaxNode node) =>
         node switch
         {
             IfStatementSyntax ifStatementSyntax => ifStatementSyntax,
-            BlockSyntax blockSyntax when blockSyntax.ChildNodes().Count() == 1 => GetIfStatement(blockSyntax.ChildNodes().Single()),
+            BlockSyntax blockSyntax when blockSyntax.ChildNodes().Count() == 1 => IfStatement(blockSyntax.ChildNodes().Single()),
             _ => null
         };
 
-    private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax)
-    {
-        return ifStatementSyntax.Else is null && (ConditionValidIsPattern() || ConditionValidInvocation());
+    private static bool CanIfStatementBeMoved(IfStatementSyntax ifStatementSyntax) =>
+        ifStatementSyntax.Else is null && IsValidCondition(ifStatementSyntax.Condition);
 
-        bool ConditionValidIsPattern() => ifStatementSyntax.Condition?.Kind() is SyntaxKind.IsExpression or SyntaxKindEx.IsPatternExpression
-            && !ifStatementSyntax.Condition.DescendantNodes()
-                .Any(x => x.Kind() is SyntaxKindEx.VarPattern or
-                    SyntaxKindEx.SingleVariableDesignation or
-                    SyntaxKindEx.ParenthesizedVariableDesignation);
+    private static bool IsValidCondition(ExpressionSyntax condition) =>
+        condition switch
+        {
+            _ when condition.Kind() is SyntaxKind.IsExpression or SyntaxKindEx.IsPatternExpression => IsValidIsPattern(condition),
+            InvocationExpressionSyntax invocation => IsValidInvocation(invocation),
+            BinaryExpressionSyntax binary => IsValidBinaryExpression(binary),
+            PrefixUnaryExpressionSyntax unary => IsValidCondition(unary.Operand),
+            IdentifierNameSyntax => true,
+            LiteralExpressionSyntax => true,
+            _ => false
+        };
 
-        bool ConditionValidInvocation() => ifStatementSyntax.Condition is InvocationExpressionSyntax invocationExpressionSyntax
-            && !invocationExpressionSyntax.DescendantNodes()
-                .OfType<ArgumentSyntax>()
-                .Any(x => x.RefOrOutKeyword.Kind() is SyntaxKind.OutKeyword or SyntaxKind.RefKeyword);
-    }
+    private static bool IsValidBinaryExpression(BinaryExpressionSyntax expression) =>
+        IsValidCondition(expression.Left) && IsValidCondition(expression.Right);
+
+    private static bool IsValidInvocation(InvocationExpressionSyntax invocationExpressionSyntax) =>
+        !invocationExpressionSyntax.DescendantNodes()
+            .OfType<ArgumentSyntax>()
+            .Any(x => x.RefOrOutKeyword.Kind() is SyntaxKind.OutKeyword or SyntaxKind.RefKeyword);
+
+    private static bool IsValidIsPattern(SyntaxNode isPattern) =>
+        !isPattern.DescendantNodes()
+            .Any(x => x.Kind() is SyntaxKindEx.VarPattern
+                                    or SyntaxKindEx.SingleVariableDesignation
+                                    or SyntaxKindEx.ParenthesizedVariableDesignation);
 
     /// <remarks>
     /// There are multiple scenarios where the code can be simplified using LINQ.

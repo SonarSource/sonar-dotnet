@@ -230,22 +230,40 @@ namespace Tests.Diagnostics
                 sum -= values[i];
 
             var min = 0;
-            foreach (var t in values) // Compliant `min` var is changing during the loop. We should sugest Linq Min() instead.
+            foreach (var t in values)   // Noncompliant
             {
-                if (min > t)
+                if (min > t)            // Secondary
                 {
                     min = t;
                 }
             }
 
             var max = 0;
-            foreach (var t in values) // Compliant `min` var is changing during the loop. We should sugest Linq Max() instead.
+            foreach (var t in values)   // Noncompliant
             {
-                if (max < t)
+                if (max < t)            // Secondary
                 {
                     max = t;
                 }
             }
+
+            bool test = false;
+            foreach (var t in values)   // Noncompliant
+            {
+                if(test)                // Secondary
+                {
+                    test = t == 42;
+                }
+            }
+
+            foreach (var t in values)   // Noncompliant
+            {
+                if (!test)              // Secondary
+                {
+                    test = t == 42;
+                }
+            }
+
         }
 
         public void ForEachWithEarlyExitIsNotCompliant(ICollection<string> collection, Predicate<string> condition)
@@ -349,10 +367,12 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/7776
         public void ForEach_WithListAndLogicalOperators(List<char> s)
         {
-            foreach (var c in s)                   // FN, equivalent to c is ' '
-                if (c == ' ') { }
-            foreach (var c in s)                   // FN, equivalent to c is not ' '
-                if (c != ' ') { }
+            foreach (var c in s)                    // Noncompliant
+                if (c == ' ') { }                   // Secondary
+            foreach (var c in s)                    // Noncompliant
+                if (c != ' ') { }                   // Secondary
+            foreach (var c in s)                    // Noncompliant
+                if (c != ' ' || c == ' ' && c != '4') { }       // Secondary
         }
     }
 
