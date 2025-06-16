@@ -15,14 +15,13 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests.Verification.IssueValidation;
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation.Tests;
 
 [TestClass]
 public partial class IssueLocationCollectorTest
 {
-    private static TextLine GetLine(int lineNumber, string code) =>
+    private static TextLine Line(int lineNumber, string code) =>
         SourceText.From(code).Lines[lineNumber];
 
     private static void VerifyIssueLocations(IEnumerable<IssueLocation> result,

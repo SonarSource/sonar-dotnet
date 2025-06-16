@@ -35,14 +35,10 @@ internal static class IssueLocationCollector
     private const string IssueIdsPattern = @"(\s*\[(?<IssueIds>[^]]+)\])?";
     private const string MessagePattern = @"(\s*\{\{(?<Message>.+)\}\})?";
 
-    public static readonly Regex RxIssue =
-        CreateRegex(CommentPattern + NoPrecisePositionPattern + IssueTypePattern + OffsetPattern + ExactColumnPattern + IssueIdsPattern + MessagePattern);
-
-    public static readonly Regex RxPreciseLocation =
-        CreateRegex(@"^\s*" + CommentPattern + PrecisePositionPattern + IssueTypePattern + "?" + OffsetPattern + IssueIdsPattern + MessagePattern + @"\s*(-->|\*/|\*@)?$");
-
-    private static readonly Regex RxInvalidType = CreateRegex(CommentPattern + ".*" + IssueTypePattern);
-    private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@"^\s*" + CommentPattern + ".*" + PrecisePositionPattern);
+    public static readonly Regex RxIssue = CreateRegex($"{CommentPattern}{NoPrecisePositionPattern}{IssueTypePattern}{OffsetPattern}{ExactColumnPattern}{IssueIdsPattern}{MessagePattern}");
+    public static readonly Regex RxPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}{PrecisePositionPattern}{IssueTypePattern}?{OffsetPattern}{IssueIdsPattern}{MessagePattern}\s*(-->|\*/|\*@)?$");
+    private static readonly Regex RxInvalidType = CreateRegex($"{CommentPattern}.*{IssueTypePattern}");
+    private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}.*{PrecisePositionPattern}");
 
     public static IList<IssueLocation> ExpectedIssueLocations(string filePath, IEnumerable<TextLine> lines)
     {
@@ -81,10 +77,8 @@ internal static class IssueLocationCollector
             {
                 if (location.Start.HasValue)
                 {
-                    throw new InvalidOperationException($"Unexpected redundant issue location on line {location.LineNumber}. Issue location can " +
-                                                        "be set either with 'precise issue location' or 'exact column location' pattern but not both.");
+                    throw new InvalidOperationException($"Unexpected redundant issue location on line {location.LineNumber}. Issue location can be set either with 'precise issue location' or 'exact column location' pattern but not both.");
                 }
-
                 location.Start = preciseLocation.Start;
                 location.Length = preciseLocation.Length;
                 preciseLocations.Remove(preciseLocation);
@@ -147,7 +141,7 @@ internal static class IssueLocationCollector
                 { Value: "Noncompliant" } => IssueType.Primary,
                 { Value: "Secondary" } => IssueType.Secondary,
                 { Value: "Error" } => IssueType.Error,
-                _ => throw new  UnexpectedValueException(IssueTypeGroup, match.Groups[IssueTypeGroup].Value)
+                _ => throw new UnexpectedValueException(IssueTypeGroup, match.Groups[IssueTypeGroup].Value)
             };
 
         string Message() =>
@@ -189,12 +183,12 @@ internal static class IssueLocationCollector
     private static IList<IssueLocation> EnsureNoDuplicatedPrimaryIds(IList<IssueLocation> mergedLocations)
     {
         var duplicateLocationsIds = mergedLocations
-            .Where(x => x.Type == IssueType.Primary && x.IssueId != null)
+            .Where(x => x.Type == IssueType.Primary && x.IssueId is not null)
             .GroupBy(x => x.IssueId)
             .FirstOrDefault(x => x.Count() > 1);
         if (duplicateLocationsIds is not null)
         {
-            var duplicatedIdLines = duplicateLocationsIds.Select(issueLocation => issueLocation.LineNumber).JoinStr(", ");
+            var duplicatedIdLines = duplicateLocationsIds.Select(x => x.LineNumber).JoinStr(", ");
             throw new InvalidOperationException($"Primary location with id [{duplicateLocationsIds.Key}] found on multiple lines: {duplicatedIdLines}");
         }
         return mergedLocations;
@@ -207,7 +201,8 @@ internal static class IssueLocationCollector
         {
             Execute.Assertion.FailWith("""
                 Unexpected '{{' or '}}' found on line: {0}. Either correctly use the '{{{{message}}}}' format or remove the curly braces on the line of the expected issue
-                """, line.LineNumber);
+                """,
+                line.LineNumber);
         }
     }
 

@@ -30,17 +30,17 @@ internal enum IssueType
 [DebuggerDisplay("ID:{RuleId} {Type} @{LineNumber} Start:{Start} Length:{Length} ID:{IssueId} {Message} {FilePath}")]
 internal sealed class IssueLocation
 {
+    private string issueId;
+
     public IssueLocation Primary { get; }   // Only for actual secondary issues
     public string RuleId { get; }           // Diagnostic ID for actual issues
     public string FilePath { get; }
     public int LineNumber { get; }
     public IssueType Type { get; }
     public string Message { get; }
-    public string IssueId { get => Primary?.IssueId ?? issueId; }    // Issue location ID to pair primary and secondary locations
+    public string IssueId => Primary?.IssueId ?? issueId;   // Issue location ID to pair primary and secondary locations
     public int? Start { get; set; }
     public int? Length { get; set; }
-
-    private string issueId;
 
     public IssueLocation(Diagnostic diagnostic)
         : this(diagnostic.Severity == DiagnosticSeverity.Error ? IssueType.Error : IssueType.Primary, diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location, diagnostic.Location.GetLineSpan()) =>

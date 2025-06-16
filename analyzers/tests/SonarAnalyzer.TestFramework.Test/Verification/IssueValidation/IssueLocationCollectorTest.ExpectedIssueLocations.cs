@@ -15,9 +15,8 @@
  */
 
 using Microsoft.CodeAnalysis.Text;
-using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
-namespace SonarAnalyzer.Test.TestFramework.Tests.Verification.IssueValidation;
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation.Tests;
 
 public partial class IssueLocationCollectorTest
 {
@@ -155,7 +154,7 @@ public partial class IssueLocationCollectorTest
         var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
         locations.Should().HaveCount(4);
-        locations.Select(x => x.Type).Should().BeEquivalentTo(new[] { IssueType.Primary, IssueType.Secondary, IssueType.Secondary, IssueType.Secondary });
+        locations.Select(x => x.Type).Should().BeEquivalentTo([IssueType.Primary, IssueType.Secondary, IssueType.Secondary, IssueType.Secondary]);
         locations.Select(x => x.LineNumber).Should().Equal(3, 3, 3, 3);
         locations.Select(x => x.Start).Should().Equal(16, 27, 20, 21);
         locations.Select(x => x.Length).Should().Equal(3, 1, 6, 4);
@@ -176,7 +175,7 @@ public partial class IssueLocationCollectorTest
             """;
         var locations = IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
         locations.Should().HaveCount(2);
-        locations.Select(x => x.Type).Should().BeEquivalentTo(new[] { IssueType.Primary, IssueType.Secondary });
+        locations.Select(x => x.Type).Should().BeEquivalentTo([IssueType.Primary, IssueType.Secondary]);
         locations.Select(x => x.LineNumber).Should().Equal(3, 3);
         locations.Select(x => x.Start).Should().Equal(16, 27);
         locations.Select(x => x.Length).Should().Equal(3, 1);
@@ -197,9 +196,8 @@ public partial class IssueLocationCollectorTest
             """;
         Action action = () => IssueLocationCollector.ExpectedIssueLocations("File.cs", SourceText.From(code).Lines);
 
-        action.Should()
-              .Throw<InvalidOperationException>()
-              .WithMessage("Unexpected redundant issue location on line 3. Issue location can be set either with 'precise issue location' or 'exact column location' pattern but not both.");
+        action.Should().Throw<InvalidOperationException>()
+            .WithMessage("Unexpected redundant issue location on line 3. Issue location can be set either with 'precise issue location' or 'exact column location' pattern but not both.");
     }
 
     [TestMethod]

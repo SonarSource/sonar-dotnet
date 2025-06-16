@@ -14,202 +14,211 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.TestFramework.Verification.IssueValidation;
-
-namespace SonarAnalyzer.Test.TestFramework.Tests.Verification.IssueValidation;
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation.Tests;
 
 public partial class IssueLocationCollectorTest
 {
     [TestMethod]
     public void FindPreciseIssueLocations_NoMessage_NoIds()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Primary },
-            expectedLineNumbers: new[] { 3 },
-            expectedMessages: new string[] { null },
-            expectedIssueIds: new string[] { null });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Primary],
+            expectedLineNumbers: [3],
+            expectedMessages: [null],
+            expectedIssueIds: [null]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_With_Offset()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ @-1
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Primary },
-            expectedLineNumbers: new[] { 2 },
-            expectedMessages: new string[] { null },
-            expectedIssueIds: new string[] { null });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Primary],
+            expectedLineNumbers: [2],
+            expectedMessages: [null],
+            expectedIssueIds: [null]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_NoMessage_NoIds_Secondary()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ Secondary
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Secondary },
-            expectedLineNumbers: new[] { 3 },
-            expectedMessages: new string[] { null },
-            expectedIssueIds: new string[] { null });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary],
+            expectedLineNumbers: [3],
+            expectedMessages: [null],
+            expectedIssueIds: [null]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_Secondary_With_Offset()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ Secondary@-1
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Secondary },
-            expectedLineNumbers: new[] { 2 },
-            expectedMessages: new string[] { null },
-            expectedIssueIds: new string[] { null });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary],
+            expectedLineNumbers: [2],
+            expectedMessages: [null],
+            expectedIssueIds: [null]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_IssueIds()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ [flow1,flow2]
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Primary, IssueType.Primary },
-            expectedLineNumbers: new[] { 3, 3 },
-            expectedMessages: new string[] { null, null },
-            expectedIssueIds: new[] { "flow1", "flow2" });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Primary, IssueType.Primary],
+            expectedLineNumbers: [3, 3],
+            expectedMessages: [null, null],
+            expectedIssueIds: ["flow1", "flow2"]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_IssueIds_Secondary()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ Secondary [last1,flow1,flow2]
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Secondary, IssueType.Secondary, IssueType.Secondary },
-            expectedLineNumbers: new[] { 3, 3, 3 },
-            expectedMessages: new string[] { null, null, null },
-            expectedIssueIds: new[] { "flow1", "flow2", "last1" });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary, IssueType.Secondary, IssueType.Secondary],
+            expectedLineNumbers: [3, 3, 3],
+            expectedMessages: [null, null, null],
+            expectedIssueIds: ["flow1", "flow2", "last1"]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_Message_And_IssueIds()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ [flow1,flow2] {{Some message}}
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Primary, IssueType.Primary },
-            expectedLineNumbers: new[] { 3, 3 },
-            expectedMessages: new[] { "Some message", "Some message" },
-            expectedIssueIds: new[] { "flow1", "flow2" });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Primary, IssueType.Primary],
+            expectedLineNumbers: [3, 3],
+            expectedMessages: ["Some message", "Some message"],
+            expectedIssueIds: ["flow1", "flow2"]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_Message_And_IssueIds_Secondary_CS()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ Secondary [flow1,flow2] {{Some message}}
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Secondary, IssueType.Secondary },
-            expectedLineNumbers: new[] { 3, 3 },
-            expectedMessages: new[] { "Some message", "Some message" },
-            expectedIssueIds: new[] { "flow1", "flow2" });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary, IssueType.Secondary],
+            expectedLineNumbers: [3, 3],
+            expectedMessages: ["Some message", "Some message"],
+            expectedIssueIds: ["flow1", "flow2"]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_Message_And_IssueIds_Secondary_XML()
     {
-        var line = GetLine(2, """
+        var line = Line(2, """
             <Root>
                         <Baaad />
             <!--        ^^^^^^^^^ Secondary [flow1,flow2] {{Some message}}         -->
             </Root>
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Secondary, IssueType.Secondary },
-            expectedLineNumbers: new[] { 2, 2 },
-            expectedMessages: new[] { "Some message", "Some message" },
-            expectedIssueIds: new[] { "flow1", "flow2" });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary, IssueType.Secondary],
+            expectedLineNumbers: [2, 2],
+            expectedMessages: ["Some message", "Some message"],
+            expectedIssueIds: ["flow1", "flow2"]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_Message()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ {{Some message}}
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Primary },
-            expectedLineNumbers: new[] { 3 },
-            expectedMessages: new[] { "Some message" },
-            expectedIssueIds: new string[] { null });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Primary],
+            expectedLineNumbers: [3],
+            expectedMessages: ["Some message"],
+            expectedIssueIds: [null]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_Message_Secondary()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
             //          ^^^^^^^^^ Secondary {{Some message}}
             }
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Secondary },
-            expectedLineNumbers: new[] { 3 },
-            expectedMessages: new[] { "Some message" },
-            expectedIssueIds: new string[] { null });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary],
+            expectedLineNumbers: [3],
+            expectedMessages: ["Some message"],
+            expectedIssueIds: [null]);
     }
 
     [TestMethod]
     public void FindPreciseIssueLocations_NoComment()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
@@ -221,7 +230,7 @@ public partial class IssueLocationCollectorTest
     [TestMethod]
     public void FindPreciseIssueLocations_NotStartOfLineIsOk()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
@@ -238,7 +247,7 @@ public partial class IssueLocationCollectorTest
     [TestMethod]
     public void FindPreciseIssueLocations_InvalidPattern()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
@@ -251,7 +260,7 @@ public partial class IssueLocationCollectorTest
     [TestMethod]
     public void FindPreciseIssueLocations_MultiplePatternsOnSameLine()
     {
-        var line = GetLine(3, """
+        var line = Line(3, """
             if (a > b)
             {
                 Console.WriteLine(a);
@@ -281,17 +290,17 @@ public partial class IssueLocationCollectorTest
             -->
             </Root>
             """;
-        var line = GetLine(2, code);
+        var line = Line(2, code);
         var issueLocation = IssueLocationCollector.FindPreciseIssueLocations("File.cs", line).Should().ContainSingle().Subject;
         issueLocation.Start.Should().Be(7);
         issueLocation.Length.Should().Be(15);
 
-        line = GetLine(4, code);
+        line = Line(4, code);
         issueLocation = IssueLocationCollector.FindPreciseIssueLocations("File.cs", line).Should().ContainSingle().Subject;
         issueLocation.Start.Should().Be(9);
         issueLocation.Length.Should().Be(15);
 
-        line = GetLine(6, code);
+        line = Line(6, code);
         issueLocation = IssueLocationCollector.FindPreciseIssueLocations("File.cs", line).Should().ContainSingle().Subject;
         issueLocation.Start.Should().Be(11);
         issueLocation.Length.Should().Be(15);
@@ -300,7 +309,7 @@ public partial class IssueLocationCollectorTest
     [TestMethod]
     public void FindPreciseIssueLocations_RazorWithSpaces()
     {
-        var line = GetLine(1, """
+        var line = Line(1, """
             <p>With spaces: 42</p>
             @*              ^^ *@
             """);
@@ -312,7 +321,7 @@ public partial class IssueLocationCollectorTest
     [TestMethod]
     public void FindPreciseIssueLocations_RazorWithoutSpaces()
     {
-        var line = GetLine(1, """
+        var line = Line(1, """
             <p>Without spaces: 42</p>
                              @*^^*@
             """);
@@ -324,7 +333,7 @@ public partial class IssueLocationCollectorTest
     [TestMethod]
     public void FindPreciseIssueLocations_RazorWithMultiline()
     {
-        var line = GetLine(1, """
+        var line = Line(1, """
             <p>Multiline: 42</p>
             @*            ^^
             *@
@@ -337,14 +346,15 @@ public partial class IssueLocationCollectorTest
     [TestMethod]
     public void FindPreciseIssueLocations_Message_And_IssueIds_Secondary_Razor()
     {
-        var line = GetLine(1, """
+        var line = Line(1, """
                         <p>The solution is: 42</p>
             @*                              ^^ Secondary [flow1,flow2] {{Some message}}         *@
             """);
-        VerifyIssueLocations(IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
-            expectedTypes: new[] { IssueType.Secondary, IssueType.Secondary },
-            expectedLineNumbers: new[] { 1, 1 },
-            expectedMessages: new[] { "Some message", "Some message" },
-            expectedIssueIds: new[] { "flow1", "flow2" });
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary, IssueType.Secondary],
+            expectedLineNumbers: [1, 1],
+            expectedMessages: ["Some message", "Some message"],
+            expectedIssueIds: ["flow1", "flow2"]);
     }
 }

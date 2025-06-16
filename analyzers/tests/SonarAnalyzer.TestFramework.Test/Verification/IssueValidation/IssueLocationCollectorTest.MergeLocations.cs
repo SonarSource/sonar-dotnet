@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.TestFramework.Verification.IssueValidation;
-
-namespace SonarAnalyzer.Test.TestFramework.Tests.Verification.IssueValidation;
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation.Tests;
 
 public partial class IssueLocationCollectorTest
 {
@@ -78,11 +76,11 @@ public partial class IssueLocationCollectorTest
     public void MergeLocations_MoreThanOnePreciseLocationForSameIssue()
     {
         Action action = () => IssueLocationCollector.MergeLocations(
-            [new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)],
-            [
-                new(IssueType.Primary, "File.cs", 3, "Message", null, null, null),
-                new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)
-            ]);
+                                [new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)],
+                                [
+                                    new(IssueType.Primary, "File.cs", 3, "Message", null, null, null),
+                                    new(IssueType.Primary, "File.cs", 3, "Message", null, null, null)
+                                ]);
         action.Should().Throw<InvalidOperationException>();
     }
 

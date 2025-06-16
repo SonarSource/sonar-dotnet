@@ -14,9 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.TestFramework.Verification.IssueValidation;
-
-namespace SonarAnalyzer.TestFramework.Test.Verification.IssueValidation;
+namespace SonarAnalyzer.TestFramework.Verification.IssueValidation.Test;
 
 [TestClass]
 public class IssueLocationTest
