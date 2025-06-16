@@ -15,6 +15,6 @@ namespace Outer // Noncompliant {{Use file-scoped namespace.}}
 
 
 namespace   // Error [CS1001] Identifier expected
-{           // Noncompliant^-1#0
+{           // Noncompliant^1#0
 
 }

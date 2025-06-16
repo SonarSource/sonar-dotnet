@@ -15,7 +15,6 @@
  */
 
 using System.Text.RegularExpressions;
-using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
@@ -34,11 +33,14 @@ internal static class IssueLocationCollector
     private const string ExactColumnPattern = @"(\s*\^(?<ColumnStart>\d+)#(?<Length>\d+))?";
     private const string IssueIdsPattern = @"(\s*\[(?<IssueIds>[^]]+)\])?";
     private const string MessagePattern = @"(\s*\{\{(?<Message>.+)\}\})?";
+    private const string NotePattern = @"(?<Note>.*)$";
+    private const string InvalidNote = @"(?<Invalid>({|}|@|\^|#\d+|Noncompliant|Secondary))";
 
-    public static readonly Regex RxIssue = CreateRegex($"{CommentPattern}{NoPrecisePositionPattern}{IssueTypePattern}{OffsetPattern}{ExactColumnPattern}{IssueIdsPattern}{MessagePattern}");
-    public static readonly Regex RxPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}{PrecisePositionPattern}{IssueTypePattern}?{OffsetPattern}{IssueIdsPattern}{MessagePattern}");
+    public static readonly Regex RxIssue = CreateRegex($"{CommentPattern}{NoPrecisePositionPattern}{IssueTypePattern}{OffsetPattern}{ExactColumnPattern}{IssueIdsPattern}{MessagePattern}{NotePattern}");
+    public static readonly Regex RxPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}{PrecisePositionPattern}{IssueTypePattern}?{OffsetPattern}{IssueIdsPattern}{MessagePattern}{NotePattern}");
     private static readonly Regex RxInvalidType = CreateRegex($"{CommentPattern}.*{IssueTypePattern}");
     private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}.*{PrecisePositionPattern}");
+    private static readonly Regex RxInvalidNote = CreateRegex(InvalidNote, RegexOptions.IgnoreCase);
 
     public static IList<IssueLocation> ExpectedIssueLocations(string filePath, IEnumerable<TextLine> lines)
     {
@@ -92,7 +94,7 @@ internal static class IssueLocationCollector
         var match = RxIssue.Match(line.ToString());
         if (match.Success)
         {
-            EnsureNoRemainingCurlyBrace(line, match);
+            ValidateNote(filePath, line, match);
             return CreateIssueLocations(match, filePath, line.LineNumber + 1);
         }
         return [];
@@ -103,7 +105,7 @@ internal static class IssueLocationCollector
         var match = RxPreciseLocation.Match(line.ToString());
         if (match.Success)
         {
-            EnsureNoRemainingCurlyBrace(line, match);
+            ValidateNote(filePath, line, match);
             return CreateIssueLocations(match, filePath, line.LineNumber);
         }
 
@@ -194,15 +196,20 @@ internal static class IssueLocationCollector
         return mergedLocations;
     }
 
-    private static void EnsureNoRemainingCurlyBrace(TextLine line, Capture match)
+    private static void ValidateNote(string filePath, TextLine line, Match match)
     {
-        var remainingLine = line.ToString().Substring(match.Index + match.Length);
-        if (remainingLine.Contains('{') || remainingLine.Contains('}'))
+        var note = match.Groups["Note"].Value;
+        if (note.EndsWith("*@"))    // Razor token for end of comment should not checked against invalid @-1
         {
-            Execute.Assertion.FailWith("""
-                Unexpected '{{' or '}}' found on line: {0}. Either correctly use the '{{{{message}}}}' format or remove the curly braces on the line of the expected issue
-                """,
-                line.LineNumber);
+            note = note.Substring(0, note.Length - 2);
+        }
+        if (RxInvalidNote.Match(note) is { Success: true } invalidMatch)
+        {
+            var fullDescription = $$$"""
+                Unexpected '{{{invalidMatch.Groups["Invalid"].Value}}}' is used after the recognized issue pattern. Remove it, or fix the pattern to the valid format:
+                // ^^^^ (Noncompliant|Secondary|Error) ^1#10 [issue-id1, issue-id2] {{Expected message.}} Final note without significant special characters
+                """;
+            throw new DiagnosticVerifierException([new VerificationMessage("Unexpected Format", fullDescription, filePath, line.LineNumber + 1)]);
         }
     }
 
@@ -214,6 +221,6 @@ internal static class IssueLocationCollector
                                      ^^^^^^^^^^^ @-1 {{IInterface1 is bad for your health.}}
             """);
 
-    private static Regex CreateRegex(string pattern) =>
-        new(pattern, RegexOptions.None, Constants.DefaultRegexTimeout); // Do NOT use Compiled, it slowed down the execution by 37%
+    private static Regex CreateRegex(string pattern, RegexOptions options = RegexOptions.None) =>
+        new(pattern, options, Constants.DefaultRegexTimeout); // Do NOT use Compiled, it slowed down the execution by 37%
 }

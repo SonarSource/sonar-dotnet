@@ -129,12 +129,34 @@ public partial class IssueLocationCollectorTest
                 Console.WriteLine(a); //Noncompliant@=1
             }
             """);
-        VerifyIssueLocations(
-            IssueLocationCollector.FindIssueLocations("File.cs", line),
-            expectedTypes: [IssueType.Primary],
-            expectedLineNumbers: [3],
-            expectedMessages: [null],
-            expectedIssueIds: [null]);
+        ((Func<IEnumerable<IssueLocation>>)(() => IssueLocationCollector.FindIssueLocations("File.cs", line))).Should().Throw<DiagnosticVerifierException>()
+            .WithMessage("""
+                Unexpected '@' is used after the recognized issue pattern. Remove it, or fix the pattern to the valid format:
+                // ^^^^ (Noncompliant|Secondary|Error) ^1#10 [issue-id1, issue-id2] {{Expected message.}} Final note without significant special characters
+                """);
+    }
+
+    [DataTestMethod]
+    [DataRow("Opening { collides with message assertion")]
+    [DataRow("Closing } collides with message assertion")]
+    [DataRow("The @ collides with line offset @-1 or @+1")]
+    [DataRow("The ^ collides numeric location ^1#10 or precise location ^^^^")]
+    [DataRow("The # collides numeric location ^1#10")]
+    [DataRow("Noncompliant collides with itself, on a wrong place")]
+    [DataRow("Secondary collides with itself, on a wrong place")]
+    public void FindIssueLocations_Noncompliant_InvalidNote(string note)
+    {
+        var line = Line(2, $$$"""
+            if (a > b)
+            {
+                Console.WriteLine(a); //Noncompliant {{Valid message}} {{{note}}}
+            }
+            """);
+        ((Func<IEnumerable<IssueLocation>>)(() => IssueLocationCollector.FindIssueLocations("File.cs", line))).Should().Throw<DiagnosticVerifierException>()
+            .WithMessage("""
+                Unexpected '*' is used after the recognized issue pattern. Remove it, or fix the pattern to the valid format:
+                // ^^^^ (Noncompliant|Secondary|Error) ^1#10 [issue-id1, issue-id2] {{Expected message.}} Final note without significant special characters
+                """);
     }
 
     [TestMethod]

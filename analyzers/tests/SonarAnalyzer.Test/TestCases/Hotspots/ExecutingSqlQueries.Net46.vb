@@ -251,30 +251,30 @@ Namespace Tests.Diagnostics
 
             Dim stillSensitive As String = sensitiveQuery                                                       ' Secondary [3] {{SQL query is assigned to stillSensitive.}}
             '   ^^^^^^^^^^^^^^
-            command.CommandText = STILLsENSITIVE                                                                ' Noncompliant [3] ^13#19
+            command.CommandText = stillSensitive                                                                ' Noncompliant ^13#19 [3]
 
             Dim sensitiveConcatQuery As String = "SELECT * FROM Table1 WHERE col1 = '" + param + "'"            ' Secondary [5,6,7] {{SQL Query is dynamically formatted and assigned to sensitiveConcatQuery.}}
 
             command = New SqlCommand(sensitiveConcatQuery)                                                      ' Noncompliant [5]
             command.CommandText = sensitiveConcatQuery                                                          ' Noncompliant [6]
 
-            Dim stillSensitiveConcat As String = sensitiveConcatQuery                                           ' Secondary [7] {{SQL query is assigned to stillSensitiveConcat.}}
+            Dim stillSensitiveConcat As String = sensitiveConcatQuery                                           ' Secondary    [7] {{SQL query is assigned to stillSensitiveConcat.}}
             command.CommandText = stillSensitiveConcat                                                          ' Noncompliant [7]
 
-            Dim sensitiveConcatQuery2 As String = "SELECT * FROM Table1 WHERE col1 = '" & param & "'"           ' Secondary [8,9,10] {{SQL Query is dynamically formatted and assigned to sensitiveConcatQuery2.}}
+            Dim sensitiveConcatQuery2 As String = "SELECT * FROM Table1 WHERE col1 = '" & param & "'"           ' Secondary    [8,9,10] {{SQL Query is dynamically formatted and assigned to sensitiveConcatQuery2.}}
             command = New SqlCommand(sensitiveConcatQuery2)                                                     ' Noncompliant [8]
             command.CommandText = sensitiveConcatQuery2                                                         ' Noncompliant [9]
 
-            Dim stillSensitiveConcat2 As String = sensitiveConcatQuery2                                         ' Secondary [10] {{SQL query is assigned to stillSensitiveConcat2.}} ^13#1
-            command.CommandText = stillSensitiveConcat2                                                         ' Noncompliant [10]
+            Dim stillSensitiveConcat2 As String = sensitiveConcatQuery2                                         ' Secondary ^17#21 [10] {{SQL query is assigned to stillSensitiveConcat2.}}
+            command.CommandText = stillSensitiveConcat2                                                         ' Noncompliant     [10]
 
             Dim x As String
-            x = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)                               ' Secondary {{SQL Query is dynamically formatted and assigned to x.}} ^13#1
+            x = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", param)                               ' Secondary ^13#1 {{SQL Query is dynamically formatted and assigned to x.}}
             command.CommandText = x                                                                             ' Noncompliant
 
             Dim y As String
-            y = sensitiveQuery                                                                                  ' Secondary [4] {{SQL query is assigned to y.}} ^13#1
-            command.CommandText = y                                                                             ' Noncompliant  [4]
+            y = sensitiveQuery                                                                                  ' Secondary ^13#1 [4] {{SQL query is assigned to y.}}
+            command.CommandText = y                                                                             ' Noncompliant    [4]
         End Sub
     End Class
 

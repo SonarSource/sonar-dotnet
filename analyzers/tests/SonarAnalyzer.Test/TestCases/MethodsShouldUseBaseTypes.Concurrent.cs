@@ -814,7 +814,7 @@ namespace AppendedNamespaceForConcurrencyTest.Test_27
 {
     public sealed class ReproIssue2479
     {
-        public void SomeMethod(IReadOnlyList<S3242DeconstructibleType> list) // Noncompliant FP #2479, using IReadOnlyCollection gives compile error
+        public void SomeMethod(IReadOnlyList<S3242DeconstructibleType> list) // Noncompliant FP, using IReadOnlyCollection gives compile error
         {
             for (var i = 0; i < list.Count; ++i)
             {

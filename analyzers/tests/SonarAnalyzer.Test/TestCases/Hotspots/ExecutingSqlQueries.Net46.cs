@@ -285,8 +285,8 @@ namespace Tests.Diagnostics
 
             command.CommandText = sensitiveQuery;                                                       // Noncompliant [2]
 
-            string stillSensitive = sensitiveQuery;                                                     // Secondary [3] {{SQL query is assigned to stillSensitive.}} ^20#14
-            command.CommandText = stillSensitive;                                                       // Noncompliant [3] ^13#19
+            string stillSensitive = sensitiveQuery;                                                     // Secondary    ^20#14 [3] {{SQL query is assigned to stillSensitive.}}
+            command.CommandText = stillSensitive;                                                       // Noncompliant ^13#19 [3]
 
             string sensitiveConcatQuery = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";          // Secondary [6,7,8] {{SQL Query is dynamically formatted and assigned to sensitiveConcatQuery.}}
 
@@ -304,12 +304,12 @@ namespace Tests.Diagnostics
             command.CommandText = "SELECT * FROM Table1 WHERE col1 = '" + param + "'";                  // Noncompliant
 
             string x = null;
-            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);                      // Secondary [9] {{SQL Query is dynamically formatted and assigned to x.}} ^13#1
-            command.CommandText = x;                                                                    // Noncompliant [9]
+            x = string.Format("INSERT INTO Users (name) VALUES (\"{0}\")", param);                      // Secondary ^13#1 [9] {{SQL Query is dynamically formatted and assigned to x.}}
+            command.CommandText = x;                                                                    // Noncompliant    [9]
 
             string y;
-            y = sensitiveQuery;                                                                         // Secondary [5] {{SQL query is assigned to y.}} ^13#1
-            command.CommandText = y;                                                                    // Noncompliant [5]
+            y = sensitiveQuery;                                                                         // Secondary ^13#1 [5] {{SQL query is assigned to y.}}
+            command.CommandText = y;                                                                    // Noncompliant    [5]
         }
 
         public void DbCommand_CommandText(DbCommand command, string param)

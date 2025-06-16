@@ -115,7 +115,7 @@ Namespace SqlNamedParameters
     Public Class Program
         Public Sub ExecuteSqlCommands()
             Dim userCommand = New SqlCommand("SELECT * FROM Users WHERE Name = @Name")
-            userCommand.AddParameter(New SqlParameter("@Name", "John Doe"))                    ' Noncompliant - FP: @Name refers to parameters in different SQL tables.
+            userCommand.AddParameter(New SqlParameter("@Name", "John Doe"))                    ' Noncompliant - FP: Name refers to parameters in different SQL tables.
             Dim users = userCommand.ExecuteQuery()                                             ' Renaming one does not necessitate renaming of parameters with the same name from other tables.
 
             Dim companyCommand = New SqlCommand("SELECT * FROM Companies WHERE Name = @Name")

@@ -6,7 +6,7 @@ Public Class RepeatedParameterNamesInDatabase
     Public Sub ExecuteSqlCommandsForUsers(connection As SqlConnection)
         Dim query = "SELECT * FROM Users WHERE Name = @name"
         Dim param = New DynamicParameters()
-        param.Add("@name", "John Doe")                          ' Noncompliant - FP: @Name refers to parameters in different SQL tables.
+        param.Add("@name", "John Doe")                          ' Noncompliant - FP: Name refers to parameters in different SQL tables.
         Dim result = connection.Query(Of User)(query, param)    ' Renaming one does not necessitate renaming of parameters with the same name from other tables.
     End Sub
 

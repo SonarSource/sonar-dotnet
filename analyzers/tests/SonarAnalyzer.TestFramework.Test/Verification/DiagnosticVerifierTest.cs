@@ -267,7 +267,10 @@ public class DiagnosticVerifierTest
                 }
             }
             """,
-            "Unexpected '{' or '}' found on line: 4. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
+            """
+            Unexpected '{' is used after the recognized issue pattern. Remove it, or fix the pattern to the valid format:
+            // ^^^^ (Noncompliant|Secondary|Error) ^1#10 [issue-id1, issue-id2] {{Expected message.}} Final note without significant special characters
+            """);
 
     [TestMethod]
     public void UnexpectedRemainingClosingCurlyBrace() =>
@@ -281,7 +284,10 @@ public class DiagnosticVerifierTest
                 }
             }
             """,
-            "Unexpected '{' or '}' found on line: 4. Either correctly use the '{{message}}' format or remove the curly braces on the line of the expected issue");
+            """
+            Unexpected '}' is used after the recognized issue pattern. Remove it, or fix the pattern to the valid format:
+            // ^^^^ (Noncompliant|Secondary|Error) ^1#10 [issue-id1, issue-id2] {{Expected message.}} Final note without significant special characters
+            """);
 
     [TestMethod]
     public void ExpectedIssuesNotRaised() =>

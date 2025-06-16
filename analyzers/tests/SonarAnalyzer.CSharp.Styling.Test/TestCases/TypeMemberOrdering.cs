@@ -148,7 +148,7 @@ public abstract class AllWrong
     //          ^^^^^^
 
     public void Method2() { }   // Noncompliant [AllWrongMethod2] {{Move Methods after Destructor, before Operators.}}
-                                                                // Secondary@+1 [AllWrongMethod1, AllWrongMethod2] This secondary is not very useful, because it's already where it should be. "After" part would be more helpful.
+                                                                // Secondary@+1 [AllWrongMethod1, AllWrongMethod2] This is not very useful, because it's already where it should be. "After" part would be more helpful.
     public static int operator +(AllWrong a, AllWrong b) => 42; // Noncompliant [AllWrongOperator1] {{Move Operators after Methods, before Nested Types.}}
     //                         ^
     public static int operator -(AllWrong a, AllWrong b) => 42; // Noncompliant [AllWrongOperator2] {{Move Operators after Methods, before Nested Types.}}

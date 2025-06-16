@@ -8,7 +8,7 @@ public class RepeatedParameterNamesInDatabase
     {
         var query = "SELECT * FROM Users WHERE Name = @name";
         var param = new DynamicParameters();
-        param.Add("@name", "John Doe");                     // Noncompliant - FP: @Name refers to parameters in different SQL tables.
+        param.Add("@name", "John Doe");                     // Noncompliant - FP: Name refers to parameters in different SQL tables.
         var result = connection.Query<User>(query, param);  // Renaming one does not necessitate renaming of parameters with the same name from other tables.
     }
 
