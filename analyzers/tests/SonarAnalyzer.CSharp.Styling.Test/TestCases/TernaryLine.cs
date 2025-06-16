@@ -8,8 +8,8 @@ public class Sample
     {
         _ = condition
             && condition ? trueBranch : falseBranch;
-        //               ^^^^^^^^^^^^                   // Noncompliant@-1 {{Place branches of the multiline ternary on a separate line.}}
-        //                            ^^^^^^^^^^^^^     // Noncompliant@-2 {{Place branches of the multiline ternary on a separate line.}}        _ = condition
+        //               ^^^^^^^^^^^^                   Noncompliant    {{Place branches of the multiline ternary on a separate line.}}
+        //                            ^^^^^^^^^^^^^     Noncompliant@-1 {{Place branches of the multiline ternary on a separate line.}}
 
         _ = condition
             ? trueBranch : falseBranch;     // Noncompliant

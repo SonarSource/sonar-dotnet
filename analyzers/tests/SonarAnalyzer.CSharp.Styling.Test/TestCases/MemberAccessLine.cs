@@ -26,9 +26,9 @@ public class Sample
 
         builder.Build()
             .Build().Build().Build().Build();
-        //          ^^^^^^                  // Noncompliant@-1
-        //                   ^^^^^^         // Noncompliant@-2
-        //                          ^^^^^^  // Noncompliant@-3
+        //          ^^^^^^                  Noncompliant
+        //                  ^^^^^^          Noncompliant@-1
+        //                          ^^^^^^  Noncompliant@-2
 
         builder.Build()
             .Variable

@@ -36,7 +36,7 @@ internal static class IssueLocationCollector
     private const string MessagePattern = @"(\s*\{\{(?<Message>.+)\}\})?";
 
     public static readonly Regex RxIssue = CreateRegex($"{CommentPattern}{NoPrecisePositionPattern}{IssueTypePattern}{OffsetPattern}{ExactColumnPattern}{IssueIdsPattern}{MessagePattern}");
-    public static readonly Regex RxPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}{PrecisePositionPattern}{IssueTypePattern}?{OffsetPattern}{IssueIdsPattern}{MessagePattern}\s*(-->|\*/|\*@)?$");
+    public static readonly Regex RxPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}{PrecisePositionPattern}{IssueTypePattern}?{OffsetPattern}{IssueIdsPattern}{MessagePattern}");
     private static readonly Regex RxInvalidType = CreateRegex($"{CommentPattern}.*{IssueTypePattern}");
     private static readonly Regex RxInvalidPreciseLocation = CreateRegex(@$"^\s*{CommentPattern}.*{PrecisePositionPattern}");
 
@@ -95,7 +95,7 @@ internal static class IssueLocationCollector
             EnsureNoRemainingCurlyBrace(line, match);
             return CreateIssueLocations(match, filePath, line.LineNumber + 1);
         }
-        return Enumerable.Empty<IssueLocation>();
+        return [];
     }
 
     internal static /* for testing */ IEnumerable<IssueLocation> FindPreciseIssueLocations(string filePath, TextLine line)
@@ -107,7 +107,7 @@ internal static class IssueLocationCollector
             return CreateIssueLocations(match, filePath, line.LineNumber);
         }
 
-        return Enumerable.Empty<IssueLocation>();
+        return [];
     }
 
     private static IEnumerable<IssueLocation> CreateIssueLocations(Match match, string filePath, int originalLineNumber)
@@ -215,5 +215,5 @@ internal static class IssueLocationCollector
             """);
 
     private static Regex CreateRegex(string pattern) =>
-        new(pattern, RegexOptions.Compiled, Constants.DefaultRegexTimeout);
+        new(pattern, RegexOptions.None, Constants.DefaultRegexTimeout); // Do NOT use Compiled, it slowed down the execution by 37%
 }

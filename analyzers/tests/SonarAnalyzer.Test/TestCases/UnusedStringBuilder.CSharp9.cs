@@ -14,8 +14,9 @@ public class MyClass
 
         (StringBuilder, StringBuilder) builder4 = (new(), new()); // FN
 
-        StringBuilder builderInLine1 = new(), builderInLine2 = new(); // Noncompliant
-//                    ^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^  // Noncompliant@-1
+        StringBuilder builderInLine1 = new(), builderInLine2 = new();
+//                    ^^^^^^^^^^^^^^^^^^^^^^                            Noncompliant
+//                                            ^^^^^^^^^^^^^^^^^^^^^^    Noncompliant@-1
 
         static void LocalStaticMethod()
         {

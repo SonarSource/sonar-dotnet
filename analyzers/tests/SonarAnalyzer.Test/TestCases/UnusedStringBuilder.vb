@@ -15,8 +15,9 @@ Public Class Program
         Dim builder8 As StringBuilder = New StringBuilder() ' Compliant
         builder8.Append("&").ToString()
 
-        Dim builderInLine1 As StringBuilder = New StringBuilder(), builderInLine2 As StringBuilder = New StringBuilder() ' Noncompliant
-        '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ' Noncompliant@-1
+        Dim builderInLine1 As StringBuilder = New StringBuilder(), builderInLine2 As StringBuilder = New StringBuilder()
+        '   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                                           Noncompliant
+        '                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    Noncompliant@-1
 
         Dim sb1, sb2 ' Compliant
         Dim sb3, sb4 As StringBuilder = New StringBuilder() ' Error [BC30671]: Explicit initialization is not permitted with multiple variables declared with a single type specifier.

@@ -73,6 +73,24 @@ public partial class IssueLocationCollectorTest
     }
 
     [TestMethod]
+    public void FindPreciseIssueLocations_Comment_Secondary()
+    {
+        var line = Line(3, """
+            if (a > b)
+            {
+                Console.WriteLine(a);
+            //          ^^^^^^^^^ Secondary Comment
+            }
+            """);
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary],
+            expectedLineNumbers: [3],
+            expectedMessages: [null],
+            expectedIssueIds: [null]);
+    }
+
+    [TestMethod]
     public void FindPreciseIssueLocations_Secondary_With_Offset()
     {
         var line = Line(3, """
@@ -216,6 +234,25 @@ public partial class IssueLocationCollectorTest
     }
 
     [TestMethod]
+    public void FindPreciseIssueLocations_Full_Secondary()
+    {
+        var line = Line(4, """
+            if (a > b)
+            {
+                Console.WriteLine(a);
+            // Extra line
+            //          ^^^^^^^^^ Secondary@-1 [flow1, flow2] {{Some message}} Comment
+            }
+            """);
+        VerifyIssueLocations(
+            IssueLocationCollector.FindPreciseIssueLocations("File.cs", line),
+            expectedTypes: [IssueType.Secondary, IssueType.Secondary],
+            expectedLineNumbers: [3, 3],
+            expectedMessages: ["Some message", "Some message"],
+            expectedIssueIds: ["flow1", "flow2"]);
+    }
+
+    [TestMethod]
     public void FindPreciseIssueLocations_NoComment()
     {
         var line = Line(3, """
@@ -242,19 +279,6 @@ public partial class IssueLocationCollectorTest
         issueLocation.LineNumber.Should().Be(3);
         issueLocation.Start.Should().Be(12);
         issueLocation.Length.Should().Be(9);
-    }
-
-    [TestMethod]
-    public void FindPreciseIssueLocations_InvalidPattern()
-    {
-        var line = Line(3, """
-            if (a > b)
-            {
-                Console.WriteLine(a);
-            //          ^^^^^^^^^ SecondaryNoncompliantSecondary {{Some message}}
-            }
-            """);
-        IssueLocationCollector.FindPreciseIssueLocations("File.cs", line).Should().BeEmpty();
     }
 
     [TestMethod]
