@@ -52,12 +52,6 @@ public static class InvocationExpressionSyntaxExtensions
             _ => default
         };
 
-    public static bool TryGetFirstArgument(this InvocationExpressionSyntax invocationExpression, out ArgumentSyntax firstArgument)
-    {
-        firstArgument = invocationExpression?.ArgumentList?.Arguments.FirstOrDefault();
-        return firstArgument is not null;
-    }
-
     public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
         invocation?.Expression.GetIdentifier();
 

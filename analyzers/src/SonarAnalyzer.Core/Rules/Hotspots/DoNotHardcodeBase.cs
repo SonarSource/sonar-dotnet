@@ -36,7 +36,7 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
     protected Regex keyWordPattern;
 
     protected abstract void ExtractKeyWords(string value);
-    protected abstract bool ShouldRaise(string variableName, string variableValue, out string message);
+    protected abstract string FindIssue(string variableName, string variableValue);
 
     protected abstract string DiagnosticId { get; }
     protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
@@ -114,13 +114,13 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
     {
         foreach (var element in elements)
         {
-            if (!element.HasElements && ShouldRaise(element.Name.LocalName, element.Value, out string message) && element.CreateLocation(path) is { } elementLocation)
+            if (!element.HasElements && FindIssue(element.Name.LocalName, element.Value) is { } message && element.CreateLocation(path) is { } elementLocation)
             {
                 context.ReportIssue(Language.GeneratedCodeRecognizer, rule, elementLocation, message);
             }
             foreach (var attribute in element.Attributes())
             {
-                if (ShouldRaise(attribute.Name.LocalName, attribute.Value, out string attributeMessage) && attribute.CreateLocation(path) is { } attributeLocation)
+                if (FindIssue(attribute.Name.LocalName, attribute.Value) is { } attributeMessage && attribute.CreateLocation(path) is { } attributeLocation)
                 {
                     context.ReportIssue(Language.GeneratedCodeRecognizer, rule, attributeLocation, attributeMessage);
                 }
@@ -158,10 +158,10 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
 
         private void CheckKeyValue(string key, JsonNode value)
         {
-            if (value.Value is string str && analyzer.ShouldRaise(key, str, out string message))
+            if (value.Value is string str && analyzer.FindIssue(key, str) is { } message)
             {
                 context.ReportIssue(analyzer.Language.GeneratedCodeRecognizer, analyzer.rule, value.ToLocation(path), message);
             }
         }
     }
-    }
+}

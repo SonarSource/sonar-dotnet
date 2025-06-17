@@ -39,7 +39,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                     if (invocationExpression.Expression is MemberAccessExpressionSyntax memberAccessExpression
                         && memberAccessExpression.Name.Identifier.ValueText == EqualsName
-                        && invocationExpression.TryGetFirstArgument(out var firstArgument)
+                        && invocationExpression.ArgumentList?.Arguments.FirstOrDefault() is { } firstArgument
                         && memberAccessExpression.IsMemberAccessOnKnownType(EqualsName, KnownType.System_String, c.Model))
                     {
                         // x.Equals(value), where x is string.Empty, "" or const "", and value is some string

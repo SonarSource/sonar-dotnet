@@ -1,10 +1,10 @@
 ﻿
 Public Class NamesAndValues
 
-    Private Auth As String = "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"  ' Noncompliant {{"auth" detected here, make sure this is not a hard-coded secret.}}
+    Private Auth As String = "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"  ' Noncompliant {{"Auth" detected here, make sure this is not a hard-coded secret.}}
     '                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     Private AuthWithBackSlash As String = "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"        ' Noncompliant
-    Private AuthStartBackSlash As String = @"\mf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"     ' Compliant starts with backslash
+    Private AuthStartBackSlash As String = "\mf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"     ' Compliant starts with backslash
     Private AuthBackSlashIsEscape As String = "rf6acB24J//1FZLRrKpj\tmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"  ' Compliant has escape char
 
     Private WillNotRaise As String = "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"             ' Compliant, name does not match
@@ -28,11 +28,11 @@ Public Class NamesAndValues
     Private VisualBasicAssemblyPublicKeyToken_Ampersant As String = "PublicKeyToken=" & OfficialDesktopPublicKeyToken   ' Compliant as it has 'Token' in name AND in value
     Private VisualBasicAssemblyPublicKeyToken_Plus As String = "PublicKeyToken=" + OfficialDesktopPublicKeyToken        ' Compliant as it has 'Token' in name AND in value
 
-    Private VarStrings As String = "PublicKeyToken=31bf3856ad364e35"                            ' Compliant, in Banlist
-    Private VarStringer As String = "PublicKeyToken=31bf3856ad364e35 Secret=31bf3856ad364e35"   ' Noncompliant
+    Private VarStrings As String = "PublicKeyToken=31bf3856ad364e35;"                            ' Compliant, in Banlist
+    Private VarStringer As String = "PublicKeyToken=31bf3856ad364e35; Secret=31bf3856ad364e35"   ' Noncompliant
 
     Private VarString As String = "token=rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"      ' Noncompliant {{"token" detected here, make sure this is not a hard-coded secret.}}
-    Private SecretString As String = "token=rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"   ' Noncompliant {{"secretString" detected here, make sure this is not a hard-coded secret.}}
+    Private SecretString As String = "token=rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"   ' Noncompliant {{"SecretString" detected here, make sure this is not a hard-coded secret.}}
 
 End Class
 
@@ -44,7 +44,7 @@ Public Class Usages
 
     Public Property Property_auth As String
         Get
-            Return "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"           ' Noncompliant
+            Return "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"           ' FN
         End Get
         Set(value As String)
             Field_Auth = "rf6acB24J//1FZLRrKpjmBUYSnUX5CHlt/iD5vVVcgVuAIOB6hzcWjDnv16V6hDLevW0Qs4hKPbP1M4YfuDI16sZna1/VGRLkAbTk6xMPs4epH6A3ZqSyyI-H92y"     ' Noncompliant

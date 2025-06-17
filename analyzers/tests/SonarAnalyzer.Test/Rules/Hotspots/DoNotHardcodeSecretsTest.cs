@@ -15,40 +15,58 @@
  */
 
 using System.IO;
-using SonarAnalyzer.CSharp.Rules;
+using CS = SonarAnalyzer.CSharp.Rules;
+using VB = SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class DoNotHardcodeSecretsTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
 
     public TestContext TestContext { get; set; }
 
     [TestMethod]
-    public void DoNotHardcodeSecrets_DefaultValues() =>
-        builder.AddPaths("DoNotHardcodeSecrets.cs").Verify();
+    public void DoNotHardcodeSecrets_DefaultValues_CS() =>
+        builderCS.AddPaths("DoNotHardcodeSecrets.cs").Verify();
 
     [TestMethod]
-    public void DoNotHardcodeSecrets_WebConfig() =>
-        DoNotHardcodeCredentials_ExternalFiles("WebConfig", "*.config");
+    public void DoNotHardcodeSecrets_DefaultValues_VB() =>
+        builderVB.AddPaths("DoNotHardcodeSecrets.vb").Verify();
 
     [TestMethod]
-    public void DoNotHardcodeSecrets_AppSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles("AppSettings", "*.json");
+    public void DoNotHardcodeSecrets_WebConfig_CS() =>
+        DoNotHardcodeCredentials_ExternalFiles(builderCS, "WebConfig", "*.config");
 
     [TestMethod]
-    public void DoNotHardcodeSecrets_LaunchSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles("LaunchSettings", "*.json");
+    public void DoNotHardcodeSecrets_WebConfig_VB() =>
+        DoNotHardcodeCredentials_ExternalFiles(builderVB, "WebConfig", "*.config");
 
-    private void DoNotHardcodeCredentials_ExternalFiles(string testDirectory, string pattern)
+    [TestMethod]
+    public void DoNotHardcodeSecrets_AppSettings_CS() =>
+        DoNotHardcodeCredentials_ExternalFiles(builderCS, "AppSettings", "*.json");
+
+    [TestMethod]
+    public void DoNotHardcodeSecrets_AppSettings_VB() =>
+        DoNotHardcodeCredentials_ExternalFiles(builderVB, "AppSettings", "*.json");
+
+    [TestMethod]
+    public void DoNotHardcodeSecrets_LaunchSettings_CS() =>
+        DoNotHardcodeCredentials_ExternalFiles(builderCS, "LaunchSettings", "*.json");
+
+    [TestMethod]
+    public void DoNotHardcodeSecrets_LaunchSettings_VB() =>
+        DoNotHardcodeCredentials_ExternalFiles(builderVB, "LaunchSettings", "*.json");
+
+    private void DoNotHardcodeCredentials_ExternalFiles(VerifierBuilder builder, string testDirectory, string pattern)
     {
         var root = @$"TestCases\{testDirectory}\DoNotHardcodeSecrets";
         var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
         paths.Should().NotBeEmpty();
         builder
-            .AddSnippet("// Nothing to see here")
+            .AddSnippet(string.Empty)
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, paths))
             .AddAdditionalSourceFiles(paths)
             .Verify();

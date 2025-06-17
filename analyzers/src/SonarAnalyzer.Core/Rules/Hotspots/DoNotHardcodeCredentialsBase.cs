@@ -87,30 +87,27 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
         context.RegisterCompilationAction(CheckLaunchSettings);
     }
 
-    protected override bool ShouldRaise(string variableName, string variableValue, out string message)
+    protected override string FindIssue(string variableName, string variableValue)
     {
-        message = string.Empty;
         if (string.IsNullOrWhiteSpace(variableValue))
         {
-            return false;
+            return null;
         }
-        if (FindKeyWords(variableName, variableValue) is var bannedWords && bannedWords.Any())
+        else if (FindKeyWords(variableName, variableValue) is { } bannedWords and not "")
         {
-            message = string.Format(MessageFormatCredential, bannedWords.JoinAnd());
-            return true;
+            return string.Format(MessageFormatCredential, bannedWords);
         }
         else if (ContainsUriUserInfo(variableValue))
         {
-            message = MessageUriUserInfo;
-            return true;
+            return MessageUriUserInfo;
         }
         else
         {
-            return false;
+            return null;
         }
     }
 
-    private IEnumerable<string> FindKeyWords(string variableName, string variableValue)
+    private string FindKeyWords(string variableName, string variableValue)
     {
         var credentialWordsFound = variableName
             .SplitCamelCaseToWords()
@@ -120,17 +117,16 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
         if (credentialWordsFound.Any(x => variableValue.IndexOf(x, StringComparison.InvariantCultureIgnoreCase) >= 0))
         {
             // See https://github.com/SonarSource/sonar-dotnet/issues/2868
-            return [];
+            return null;
         }
 
-        var match = keyWordPattern.SafeMatch(variableValue);
-        if (match.Success && !IsValidKeyword(match.Groups["suffix"].Value))
+        if (keyWordPattern.SafeMatch(variableValue) is { Success: true } match && !IsValidKeyword(match.Groups["suffix"].Value))
         {
             credentialWordsFound.Add(match.Groups["credential"].Value);
         }
 
         // Rule was initially implemented with everything lower (which is wrong) so we have to force lower before reporting to avoid new issues to appear on SQ/SC.
-        return credentialWordsFound.Select(x => x.ToLowerInvariant());
+        return credentialWordsFound.Select(x => x.ToLowerInvariant()).JoinAnd();
     }
 
     private static Regex CreateUriUserInfoPattern()
@@ -176,7 +172,7 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
                 var declarator = (TSyntaxNode)context.Node;
                 if (ShouldHandle(declarator, context.Model)
                     && GetAssignedValue(declarator, context.Model) is { } variableValue
-                    && analyzer.ShouldRaise(GetVariableName(declarator), variableValue, out string message))
+                    && analyzer.FindIssue(GetVariableName(declarator), variableValue) is { } message)
                 {
                     context.ReportIssue(analyzer.rule, declarator, message);
                 }
