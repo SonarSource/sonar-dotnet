@@ -38,6 +38,9 @@ stages:
       clean: all
 
     steps:
+    - powershell: Rename-Item -Path "analyzers/CI.NuGet.Config" -NewName "NuGet.Config"
+      displayName: "Prepare NuGet.Config"
+
     - task: NuGetToolInstaller@1
       displayName: "Install NuGet"
 
