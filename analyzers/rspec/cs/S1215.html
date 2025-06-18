@@ -21,11 +21,14 @@ static void Main(string[] args)
 </pre>
 <p>There may be exceptions to this rule: for example, you’ve just triggered some event that is unique in the run of your program that caused a lot of
 long-lived objects to die, and you want to release their memory.</p>
+<p>This rule also raises on <code>GC.GetTotalMemory</code> when <code>forceFullCollection</code> is true as it directly invokes
+<code>GC.Collect</code>.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/">Garbage collection</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.gc.collect">GC.Collect</a> </li>
+  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.gc.gettotalmemory">GC.GetTotalMemory</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/latency">Garbage collection latency modes</a> </li>
   <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/performance#troubleshoot-performance-issues">Garbage collection
   troubleshoot performance issues</a> </li>
