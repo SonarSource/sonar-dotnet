@@ -7,7 +7,7 @@ public unsafe record Record
     private string field1;
     private string field2;
     private int prop;
-    private Coord* coord1;
+    private Coord* coord1; // Error [CS8908]
     private Coord coord2;
     private Record r;
 

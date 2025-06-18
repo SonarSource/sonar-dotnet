@@ -31,13 +31,21 @@ public class UnsafeCodeBlocksTest
 
     [TestMethod]
     public void UnsafeRecord() =>
-        builder.AddSnippet("""unsafe record MyRecord(byte* Pointer);        // Noncompliant""")
-        .WithOptions(LanguageOptions.FromCSharp9).Verify();
+        builder.AddSnippet("""
+            unsafe record MyRecord(byte* Pointer);  // Noncompliant
+            // Error@-1 [CS8908]
+            """)
+            .WithOptions(LanguageOptions.FromCSharp9)
+            .Verify();
 
     [TestMethod]
     public void UnsafeRecordStruct() =>
-        builder.AddSnippet("""unsafe record struct MyRecord(byte* Pointer); // Noncompliant""")
-        .WithOptions(LanguageOptions.FromCSharp10).Verify();
+        builder.AddSnippet("""
+            unsafe record struct MyRecord(byte* Pointer); // Noncompliant
+            // Error@-1 [CS8908]
+            """)
+            .WithOptions(LanguageOptions.FromCSharp10)
+            .Verify();
 
 #endif
 }

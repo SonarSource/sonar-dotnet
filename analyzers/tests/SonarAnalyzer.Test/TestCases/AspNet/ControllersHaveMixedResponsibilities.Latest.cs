@@ -1161,7 +1161,7 @@ namespace CSharp13
 {
     //https://sonarsource.atlassian.net/browse/NET-509
     [ApiController]
-    public partial class WithFieldBackedPartialProperties : ControllerBase // Compliant FN
+    public partial class WithFieldBackedPartialProperties : ControllerBase // Noncompliant
     {
         private IS1 _s1;
         private IS2 _s2;
@@ -1171,12 +1171,14 @@ namespace CSharp13
 
         public WithFieldBackedPartialProperties(IS1 s1, IS2 s2) { _s1 = s1; _s2 = s2; }
 
-        public void A1() { S1.Use(); } // Compliant FN
-        public void A2() { S2.Use(); } // Compliant FN
+        public void A1() { S1.Use(); } // Secondary {{May belong to responsibility #1.}}
+                                       // Secondary @-1 {{May belong to responsibility #1.}}
+        public void A2() { S2.Use(); } // Secondary {{May belong to responsibility #2.}}
+                                       // Secondary @-1 {{May belong to responsibility #2.}}
     }
 
     [ApiController]
-    public partial class WithPartialIndexer : ControllerBase // Compliant FN
+    public partial class WithPartialIndexer : ControllerBase // Noncompliant
     {
         private readonly IS1 s1;
         private readonly IS2 s2;
@@ -1184,8 +1186,11 @@ namespace CSharp13
 
         public partial int this[int i] { get { s1.Use(); return 42; } set { s2.Use(); } } // Clamp A1 and A2 together
 
-        public void A1() { s1.Use(); } // Compliant FN
-        public void A2() { s2.Use(); } // Compliant FN
-        public void A3() { s3.Use(); } // Compliant FN
+        public void A1() { s1.Use(); } // Secondary {{May belong to responsibility #1.}}
+                                       // Secondary @-1 {{May belong to responsibility #1.}}
+        public void A2() { s2.Use(); } // Secondary {{May belong to responsibility #1.}}
+                                       // Secondary @-1 {{May belong to responsibility #1.}}
+        public void A3() { s3.Use(); } // Secondary {{May belong to responsibility #2.}}
+                                       // Secondary @-1 {{May belong to responsibility #2.}}
     }
 }

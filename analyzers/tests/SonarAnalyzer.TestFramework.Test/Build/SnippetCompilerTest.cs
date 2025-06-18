@@ -113,14 +113,14 @@ public class SnippetCompilerTest
         const string code = """
             public class Sample
             {
-            // Error CS1519 Invalid token '{' in class, record, struct, or interface member declaration
+            // Error CS1519 Invalid token '{' in a member declaration
             // Error CS1513 } expected
             {
             """;
         using var log = new LogTester();
         Func<SnippetCompiler> f = () => new SnippetCompiler(code);
         f.Should().Throw<InvalidOperationException>();
-        log.AssertContain("CS1519 Line: 4: Invalid token '{' in class, record, struct, or interface member declaration");
+        log.AssertContain("CS1519 Line: 4: Invalid token '{' in a member declaration");
         log.AssertContain("CS1513 Line: 4: } expected");
     }
 

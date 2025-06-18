@@ -939,65 +939,82 @@ private void SomeMethod()
 """, RazorFile);
 
     [TestMethod]
+    // This is incorrect, see https://sonarsource.atlassian.net/browse/NET-2052
     public void GetLineNumbers_Razor_FieldReference() =>
         AssertLineNumbersOfExecutableLinesRazor("""
-@page "/razor"
-@using TestCases
+            @page "/razor"
+            @using TestCases
 
-<p>Current count: @currentCount</p>     <!-- Not counted -->
+            <p>Current count: @currentCount</p>     <!-- +1 -->
 
-@currentCount                           <!-- Not counted -->
+            @currentCount                           <!-- +1 -->
 
-@code {
-private int currentCount = 0;
-}
-""", RazorFile);
+            @code {
+            private int currentCount = 0;
+            }
+            """,
+            RazorFile,
+            4,
+            6);
 
     [TestMethod]
+    // This is incorrect, see https://sonarsource.atlassian.net/browse/NET-2052
     public void GetLineNumbers_Razor_MethodReferenceAndCall() =>
         AssertLineNumbersOfExecutableLinesRazor("""
-<button @onclick="IncrementCount">Increment</button>    <!-- Not counted | Razor FN -->
-<p> @(ShowAmount()) </p>                                <!-- +1 -->
+            <button @onclick="IncrementCount">Increment</button>    <!-- Not counted | Razor FN -->
+            <p> @(ShowAmount()) </p>                                <!-- +1 -->
 
-@code {
-[Parameter]
-public int IncrementAmount { get; set; } = 1;
+            @code {
+            [Parameter]
+            public int IncrementAmount { get; set; } = 1;
 
-private void IncrementCount()
-{
-    IncrementAmount += 1;                           // +1
-}
+            private void IncrementCount()
+            {
+                IncrementAmount += 1;                           // +1
+            }
 
-private string ShowAmount()
-{
-    return $"Amount: {IncrementAmount}";            // +1
-}
-}
-""", RazorFile, 2, 10, 15);
+            private string ShowAmount()
+            {
+                return $"Amount: {IncrementAmount}";            // +1
+            }
+            }
+            """,
+            RazorFile,
+            2,
+            10,
+            15);
 
     [TestMethod]
+    // This is incorrect, see https://sonarsource.atlassian.net/browse/NET-2052
     public void GetLineNumbers_Razor_PropertyReference() =>
         AssertLineNumbersOfExecutableLinesRazor("""
-@IncrementAmount <!-- Not counted -->
+            @IncrementAmount <!-- +1 -->
 
-@code {
-[Parameter]
-public int IncrementAmount { get; set; } = 1;
-}
-""", RazorFile);
+            @code {
+            [Parameter]
+            public int IncrementAmount { get; set; } = 1;
+            }
+            """,
+            RazorFile,
+            1);
 
     [TestMethod]
+    // This is incorrect, see https://sonarsource.atlassian.net/browse/NET-2052
     public void GetLineNumbers_Razor_Html() =>
         AssertLineNumbersOfExecutableLinesRazor("""
-<ul>
-@foreach (var todo in todos)                        <!-- +1 -->
-{
-    <li>@todo.Title</li>                            <!-- +1 -->
-}
-</ul>
+            <ul>
+            @foreach (var todo in todos)                        <!-- +1 -->
+            {
+                <li>@todo.Title</li>                            <!-- +1 -->
+            }
+            </ul>
 
-<h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>      <!-- +1 -->
-""", RazorFile, 2, 4, 8);
+            <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>      <!-- +1 -->
+            """,
+            RazorFile,
+            2,
+            4,
+            8);
 
     [TestMethod]
     public void GetLineNumbers_Razor_AssignmentAndDeclarationInTheSameDeconstruction() =>

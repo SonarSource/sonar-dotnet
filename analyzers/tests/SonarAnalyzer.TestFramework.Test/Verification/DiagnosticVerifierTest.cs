@@ -353,7 +353,7 @@ public class DiagnosticVerifierTest
         ((Action)(() => DiagnosticVerifier.Verify(compilation, [new VB.OptionExplicitOn()], CompilationErrorBehavior.Default, null, [], [])))
             .Should().Throw<DiagnosticVerifierException>()
             .WithMessage("""
-                There are differences for VisualBasic16_9 <project-level-issue>:
+                There are differences for VisualBasic17_13 <project-level-issue>:
                   Line 1: The expected message 'This is not the correct message.' does not match the actual message 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
                 """);
     }
@@ -368,10 +368,10 @@ public class DiagnosticVerifierTest
         ((Action)(() => DiagnosticVerifier.Verify(compilation, [new VB.OptionExplicitOn()], CompilationErrorBehavior.Default, null, [], [])))
             .Should().Throw<DiagnosticVerifierException>()
             .WithMessage("""
-                There are differences for VisualBasic16_9 <project-level-issue>:
+                There are differences for VisualBasic17_13 <project-level-issue>:
                   Line 1: Unexpected issue 'Configure 'Option Explicit On' for assembly 'project0'.' Rule S6146
 
-                There are differences for VisualBasic16_9 snippet0.vb:
+                There are differences for VisualBasic17_13 snippet0.vb:
                   Line 2: Missing expected issue 'This is expected on a wrong line.'
                 """);
     }
