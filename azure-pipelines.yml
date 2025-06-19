@@ -38,6 +38,9 @@ stages:
       clean: all
 
     steps:
+    - powershell: Rename-Item "analyzers/CI.NuGet.Config" -NewName "NuGet.Config"
+      displayName: "Prepare NuGet.Config"
+
     - task: NuGetToolInstaller@1
       displayName: "Install NuGet"
 
@@ -113,9 +116,6 @@ stages:
     - powershell: |
         dotnet build analyzers\src\RuleDescriptorGenerator\RuleDescriptorGenerator.csproj -c $(BuildConfiguration) /p:RunAnalyzers=true # This does not have a test project => we need to build it separately
       displayName: '.Net RuleDescriptor Build'
-      env:
-        ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
-        ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
 
     - task: PublishTestResults@2
       condition: always()
