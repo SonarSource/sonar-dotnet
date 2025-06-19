@@ -74,10 +74,6 @@ Note: Our CI does not get automatically triggered on the PRs from external contr
 A member of our team will review the code and trigger the CI on demand by adding a comment on the PR (see [Azure Pipelines Comment triggers docs](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#comment-triggers)):
 - `/azp run Sonar.Net` - It will run the full pipeline, including plugin tests and promotion
 
-### Join us
-
-If you would like to work on this project full-time, [we are hiring!](https://www.sonarsource.com/company/jobs/static-code-analyzer-cs-developer)
-
 ## Custom Rules
 
 To request new rules, Contact us on [our Community Forum](https://community.sonarsource.com/c/suggestions/).
