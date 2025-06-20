@@ -79,6 +79,11 @@ public class WildcardPatternMatcherTest
     [DataRow("foo\\bar", "foo\\bar", true)]
     [DataRow("foo/bar", "foo\\bar", true)]
     [DataRow("foo\\bar/baz", "foo\\bar\\baz", true)]
+    [DataRow("*cshtml.g.cs", "hello_cshtml.g.cs", true)] // Compile time cshtml auto-generated files
+    [DataRow("*razor.g.cs", "hello_razor.g.cs", true)] // Compile time cshtml auto-generated files
+    [DataRow("**\\*cshtml.g.cs", "C:\\Something\\IndexCANBEANYTHINGINHEREcshtml.g.cs", true)] // Design time cshtml auto-generated files
+    [DataRow("**/*cshtml.g.cs", "C:\\Something\\Index_%#$@#JLDSJFLSDcshtml.g.cs", true)]
+    [DataRow("**/*razor.ide.g.cs", "C:\\Something\\Index_%#$@#JLDSJFLSDrazor.ide.g.cs", true)] // Design time razor auto-generated files
     public void IsMatch_MatchesPatternsAsExpected(string pattern, string input, bool expectedResult)
     {
         // The test cases are copied from the plugin-api and the directory separators need replacing as Roslyn will not give us the paths with '/'.
