@@ -34,9 +34,12 @@ public sealed class MoveMethodToDedicatedExtensionClass : StylingAnalyzer
 
     private static string ExpectedContainingType(IMethodSymbol method)
     {
-        var expectedPrefixes = method.Parameters[0].Type is ITypeParameterSymbol typeParameter
-            ? typeParameter.ConstraintTypes.Where(x => x.IsType).Select(x => x.Name)
-            : [method.Parameters[0].Type.Name];
+        var expectedPrefixes = method.Parameters[0].Type switch
+        {
+            ITypeParameterSymbol typeParameter => typeParameter.ConstraintTypes.Where(x => x.IsType).Select(x => x.Name),
+            INamedTypeSymbol namedType => ValidTypeArguments(namedType).Select(x => x.Name),
+            _ => [method.Parameters[0].Type.Name]
+        };
 
         if (!expectedPrefixes.Any() || expectedPrefixes.All(string.IsNullOrWhiteSpace))
         {
@@ -50,5 +53,18 @@ public sealed class MoveMethodToDedicatedExtensionClass : StylingAnalyzer
         {
             return expectedPrefixes.Select(x => $"{x}Extensions").JoinOr();
         }
+    }
+
+    private static IEnumerable<INamedTypeSymbol> ValidTypeArguments(INamedTypeSymbol namedType)
+    {
+        var validTypes = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)
+        {
+            namedType
+        };
+        foreach (var type in namedType.TypeArguments.OfType<INamedTypeSymbol>())
+        {
+            validTypes.AddRange(ValidTypeArguments(type));
+        }
+        return validTypes;
     }
 }
