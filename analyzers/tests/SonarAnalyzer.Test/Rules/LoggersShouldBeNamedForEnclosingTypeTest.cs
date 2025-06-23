@@ -51,38 +51,8 @@ public class LoggersShouldBeNamedForEnclosingTypeTest
     [TestMethod]
     public void LoggersShouldBeNamedForEnclosingType_NLog_CS() =>
         Builder
-            .AddSnippet("""
-                using NLog;
-                using static NLog.LogManager;
-
-                class EnclosingType
-                {
-                    void Method(LogFactory factory)
-                    {
-                        LogManager.GetLogger(nameof(EnclosingType));            // Compliant
-                        LogManager.GetLogger(typeof(EnclosingType).Name);       // Compliant
-
-                        LogManager.GetLogger(nameof(AnotherType));              // Noncompliant {{Update this logger to use its enclosing type.}}
-                        //                          ^^^^^^^^^^^
-                        LogManager.GetLogger(typeof(AnotherType).Name);         // Noncompliant
-                        //                          ^^^^^^^^^^^
-
-                        factory.GetLogger(nameof(EnclosingType));               // Compliant
-                        factory.GetLogger(typeof(EnclosingType).Name);          // Compliant
-
-                        factory.GetLogger(nameof(AnotherType));                 // Noncompliant {{Update this logger to use its enclosing type.}}
-                        //                       ^^^^^^^^^^^
-                        factory.GetLogger(typeof(AnotherType).Name);            // Noncompliant
-                        //                       ^^^^^^^^^^^
-
-                        GetLogger(typeof(AnotherType).Name);            // Noncompliant
-                        //               ^^^^^^^^^^^
-                    }
-                }
-
-                class AnotherType : EnclosingType { }
-                """)
-            .AddReferences(NuGetMetadataReference.NLog())
+            .AddPaths("LoggersShouldBeNamedForEnclosingType.NLog.cs")
+            .AddReferences(NuGetMetadataReference.NLog("5.5.0"))
             .Verify();
 
     [TestMethod]
@@ -116,4 +86,15 @@ public class LoggersShouldBeNamedForEnclosingTypeTest
                 """)
             .AddReferences(NuGetMetadataReference.Log4Net("2.0.8", "net45-full"))
             .Verify();
+
+#if NET
+
+    [TestMethod]
+    public void LoggersShouldBeNamedForEnclosingType_NLogLatest_CS() =>
+        Builder
+            .AddPaths("LoggersShouldBeNamedForEnclosingType.NLog.cs")
+            .AddReferences(NuGetMetadataReference.NLog())
+            .Verify();
+
+#endif
 }
