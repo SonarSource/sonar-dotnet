@@ -30,3 +30,23 @@
         }
     }
 }
+
+namespace Repro
+{
+    using System;
+    using System.Reflection;
+
+    // https://sonarsource.atlassian.net/browse/NET-2099
+    public class NET2099
+    {
+        private static Assembly OnAssemblyResolve(Object sender, ResolveEventArgs args)
+        {
+            return Assembly.LoadFrom("NonexistentDLL"); // Noncompliant
+        }
+
+        static void Main()
+        {
+            AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+        }
+    }
+}
