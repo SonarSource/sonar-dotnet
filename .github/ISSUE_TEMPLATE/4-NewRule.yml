@@ -1,0 +1,36 @@
+name: Suggest New Rule
+description: Suggest an idea for a new rule that does not exist yet.
+title: "New Rule Idea: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Take a look at [existing New Rule ideas](https://github.com/SonarSource/sonar-dotnet/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22Rule%20Idea%22&page=1) to avoid duplications. Leave a comment on rule ideas that you'd like to be implemented.
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: Explain why the rule is needed and what it should detect.
+      placeholder: Write rule description
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Noncompliant code snippet
+      description: Minimal code snippet which illustrates what the issue should detect.
+      value: |
+        ```
+        ```
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Compliant code snippet
+      description: Minimal code snippet which illustrates the expected fixed code.
+      value: |
+        ```
+        ```
+    validations:
+      required: true

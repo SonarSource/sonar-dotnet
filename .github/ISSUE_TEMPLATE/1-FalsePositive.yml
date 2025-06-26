@@ -1,0 +1,28 @@
+name: Report False Positive
+description: Analysis is raising an incorrect issue.
+title: "Fix Sxxxx FP: "
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: Explain the issue and context, why it should not be raised, and do not forget to mention the rule ID.
+      placeholder: Explain the issue and context, why it should not be raised, and do not forget to mention the rule ID.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reproducer
+      description: Minimal code snippet which reproduces the problem.
+      value: |
+        ```
+        ```
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Product and Version
+      description: What is the product name and version that you are using? SonarQube Cloud, SonarQube Server, SonarQube for Visual Studio, NuGet, etc.
+    validations:
+      required: true

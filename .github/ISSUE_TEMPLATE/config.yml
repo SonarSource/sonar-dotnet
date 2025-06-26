@@ -2,22 +2,14 @@ blank_issues_enabled: false
 
 contact_links:
 
-  - name: Report problems with raised issues.
-    url: https://community.sonarsource.com/tags/c/clean-code/fp/7/dotnet
-    about: Community Forum - Report False-positive / False-negative, or AD0001
-
-  - name: Request support or report a bug using SonarLint.
-    url: https://community.sonarsource.com/c/sl/11
-    about: Community Forum - SonarLint.
-
-  - name: Request support or report a bug using SonarCloud.
+  - name: Request support or report a bug using SonarQube Cloud.
     url: https://community.sonarsource.com/c/sc/9
-    about: Community Forum - SonarCloud.
+    about: Community Forum - SonarQube Cloud.
 
-  - name: Request support or report a bug using SonarQube.
+  - name: Request support or report a bug using SonarQube Server / Community Build.
     url: https://community.sonarsource.com/c/sq/10
-    about: Community Forum - SonarQube
+    about: Community Forum - SonarQube Server / Community Build.
 
-  - name: Suggest new feature
-    url: https://community.sonarsource.com/c/clean-code/rules/13
-    about: Community Forum - Clean Code / New rules
+  - name: Request support or report a bug using SonarQube for IDE.
+    url: https://community.sonarsource.com/c/sl/11
+    about: Community Forum - SonarQube for IDE.

@@ -1,0 +1,28 @@
+name: Report False Negative
+description: Analysis is not raising an issue where it should.
+title: "Fix Sxxxx FN: "
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: Explain the context, why the issue should be raised, and do not forget to mention rule ID.
+      placeholder: Explain the context, why the issue should be raised, and do not forget to mention rule ID.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reproducer
+      description: Minimal code snippet which reproduces the problem.
+      value: |
+        ```
+        ```
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Product and Version
+      description: What is the product name and version that you are using? SonarQube Cloud, SonarQube Server, SonarQube for Visual Studio, NuGet, etc.
+    validations:
+      required: true

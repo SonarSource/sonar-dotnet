@@ -1,0 +1,27 @@
+name: Report AD0001
+description: Analysis is throwing an AD0001 error.
+title: "Fix AD0001: "
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      placeholder: Explain the issue you are facing, including the full error message.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reproducer
+      description: Minimal code snippet which reproduces the problem, if possible.
+      value: |
+        ```
+        ```
+    validations:
+      required: false   # Optional for AD0001 as those can be hard to find but important to report
+
+  - type: input
+    attributes:
+      label: Product and Version
+      description: What is the product name and version that you are using? SonarQube Cloud, SonarQube Server, SonarQube for Visual Studio, NuGet, etc.
+    validations:
+      required: true
