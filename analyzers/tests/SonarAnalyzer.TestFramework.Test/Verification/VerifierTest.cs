@@ -695,19 +695,11 @@ public class VerifierTest
             }
             """);
         DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
-            Expected * to be*
-            "public class Sample
-            {
-                private int a = 0;     // Noncompliant
-                private int b = 0;     // Noncompliant
-                private bool c = true;
-            }" with a length of 136 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but*
-            "public class Sample
-            {
-                private int a = default;     // Fixed
-                private int b = default;     // Fixed
-                private bool c = true;
-            }" has a length of 134, differs near "def" (index 42).
+            Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but they differ on line 3 and column 21 (index 42):
+                        ↓ (actual)
+              "…int a = default;     //…"
+              "…int a = 0;     //…"
+                        ↑ (expected).
             """);
     }
 
@@ -722,17 +714,11 @@ public class VerifierTest
             End Class
             """);
         DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
-            Expected * to be*
-            "Public Class Sample
-                Private A As Integer = 42   ' Noncompliant
-                Private B As Integer = 42   ' Noncompliant
-                Private C As Boolean = True
-            End Class" with a length of 155 because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but*
-            "Public Class Sample
-                Private A As Integer = Nothing   ' Fixed
-                Private B As Integer = Nothing   ' Fixed
-                Private C As Boolean = True
-            End Class" has a length of 151, differs near "Not" (index 47).
+            Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but they differ on line 2 and column 28 (index 47):
+                               ↓ (actual)
+              "…A As Integer = Nothing  …"
+              "…A As Integer = 42   '…"
+                               ↑ (expected).
             """);
     }
 

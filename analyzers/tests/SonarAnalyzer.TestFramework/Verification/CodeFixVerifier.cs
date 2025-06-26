@@ -114,7 +114,17 @@ internal class CodeFixVerifier
         public void AssertExpected(string pathToExpected, string becauseMessage)
         {
             var expected = File.ReadAllText(pathToExpected).ToUnixLineEndings();
-            ActualCodeWithReplacedComments().ToUnixLineEndings().Should().Be(expected, $"{becauseMessage}. Language: {compilation.LanguageVersionString()}");
+            try
+            {
+                ActualCodeWithReplacedComments().ToUnixLineEndings().Should().Be(expected, $"{becauseMessage}. Language: {compilation.LanguageVersionString()}");
+            }
+            catch
+            {
+                Console.WriteLine();
+                Console.WriteLine($"--- Expected content of {Path.GetFileName(pathToExpected)} ---");
+                Console.WriteLine(expected);
+                throw;
+            }
         }
 
         private string ActualCodeWithReplacedComments() =>
