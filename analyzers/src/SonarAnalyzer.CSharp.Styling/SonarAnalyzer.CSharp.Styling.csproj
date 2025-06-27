@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
     <!-- Fody with ILMerge are buggy. Consult SONARSEC-4584 if you see TypeInitializationException, TypeLoadException, or similar at ITs runtime locally -->
-    <PackageReference Include="Fody" Version="6.8.0" PrivateAssets="All" />
+    <PackageReference Include="Fody" Version="6.9.2" PrivateAssets="All" />
     <PackageReference Include="ILMerge.Fody" Version="1.24.0" PrivateAssets="All" />
   </ItemGroup>
 
