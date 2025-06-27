@@ -126,8 +126,8 @@
       },
       "Microsoft.Build.Locator": {
         "type": "Transitive",
-        "resolved": "1.5.5",
-        "contentHash": "ZuXb72Shd0kiNyVx+R9x8b51cvIdtZRt6V5O5jbtl7+p6j+q9wNgU69qGp1Rmtq9/yPyqvd39tW4xQJvb/LLSA=="
+        "resolved": "1.9.1",
+        "contentHash": "UTO1acAAxYkpI8lU9ff5D9kn4p85bFwph28Y3QPVM9qy5HKQy3kpB6gWcuVGtlSPtvfzfC67CMDHO/JDys2gNQ=="
       },
       "Microsoft.Build.Tasks.Core": {
         "type": "Transitive",
@@ -696,7 +696,7 @@
           "FluentAssertions": "[7.2.0, )",
           "MSTest.TestAdapter": "[3.9.3, )",
           "MSTest.TestFramework": "[3.9.3, )",
-          "Microsoft.Build.Locator": "[1.5.5, )",
+          "Microsoft.Build.Locator": "[1.9.1, )",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[4.14.0, )",
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[4.14.0, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[4.14.0, )",
