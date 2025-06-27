@@ -46,9 +46,10 @@ class CSharpFileCacheSensorTest {
 
   @Test
   void execute_whenCacheIsEnabled_itAddsOnlyTheLanguageFiles() throws IOException, NoSuchAlgorithmException {
+    var canonicalBasePath = new File(basePath.toString()).getCanonicalPath();
     var settings = new MapSettings();
     settings.setProperty(TestCSharpMetadata.INSTANCE.fileSuffixesKey(), ".cs");
-    settings.setProperty("sonar.pullrequest.cache.basepath", new File(basePath.toString()).getCanonicalPath());
+    settings.setProperty("sonar.pullrequest.cache.basepath", canonicalBasePath);
     var hashProvider = mock(HashProvider.class);
     when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
     var context = SensorContextTester.create(basePath);
@@ -66,6 +67,7 @@ class CSharpFileCacheSensorTest {
     assertThat(logTester.logs(Level.WARN)).isEmpty();
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Incremental PR analysis: Preparing to upload file hashes.",
+      "Incremental PR analysis: basePathUri: " + Path.of(canonicalBasePath).toUri(),
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache.",
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.cshtml' to the cache.",
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.razor' to the cache."

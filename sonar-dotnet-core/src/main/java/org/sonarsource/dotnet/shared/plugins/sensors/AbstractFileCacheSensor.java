@@ -16,9 +16,11 @@
  */
 package org.sonarsource.dotnet.shared.plugins.sensors;
 
+import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,15 +67,15 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
       return;
     }
 
-    var basePath = configuration
-      .get(AbstractPropertyDefinitions.pullRequestCacheBasePath())
-      .map(x -> Paths.get(x).toUri());
+    var basePath = configuration.get(AbstractPropertyDefinitions.pullRequestCacheBasePath());
     if (basePath.isEmpty()) {
       LOG.warn("Incremental PR analysis: Could not determine common base path, cache will not be computed. Consider setting 'sonar.projectBaseDir' property.");
       return;
     }
-
+    var basePathUri = Paths.get(basePath.get()).toUri();
+    var basePathUpperCase = basePathUri.toString().toUpperCase(Locale.ROOT);
     LOG.debug("Incremental PR analysis: Preparing to upload file hashes.");
+    LOG.debug("Incremental PR analysis: basePathUri: {}", basePathUri);
     var fileSystem = context.fileSystem();
     var predicateFactory = fileSystem.predicates();
     var filePredicates = Arrays.stream(additionalSupportedExtensions()).map(predicateFactory::hasExtension).collect(Collectors.toList());
@@ -82,7 +84,19 @@ public abstract class AbstractFileCacheSensor implements ProjectSensor {
     fileSystem.inputFiles(predicateFactory.or(filePredicates)).forEach(inputFile -> {
       // Normalize to unix style separators. The scanner should be able to read the files on both windows and unix.
       var uri = inputFile.uri();
-      var key = basePath.get().relativize(uri).getPath().replace('\\', '/');
+      var relative = basePathUri.relativize(uri);
+      if (relative.equals(uri)) {
+        // If relativization failed => try case-insensitive
+        if (uri.toString().toUpperCase(Locale.ROOT).startsWith(basePathUpperCase)) {
+          relative = URI.create(uri.toString().substring(basePathUpperCase.length()));
+        } else {
+          // Having key with absolute path in the cache is useless. S4NET combines those with the base, and they start with "/" anyway.
+          LOG.debug("Incremental PR analysis: Could not compute relative path for {}", uri);
+          return;
+        }
+      }
+
+      var key = relative.getPath().replace('\\', '/');
       var next = context.nextCache();
       try {
         LOG.debug("Incremental PR analysis: Adding hash for '{}' to the cache.", key);

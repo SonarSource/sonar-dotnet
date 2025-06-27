@@ -18,6 +18,8 @@ package org.sonarsource.dotnet.shared.plugins.sensors;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
 import org.junit.Before;
 import org.junit.Rule;
@@ -112,6 +114,7 @@ public class AbstractFileCacheSensorTest {
     assertThat(logTester.logs(Level.WARN)).isEmpty();
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Incremental PR analysis: Preparing to upload file hashes.",
+      "Incremental PR analysis: basePathUri: " + readBasePath(context),
       "Incremental PR analysis: Adding hash for 'VB/Bar.vb' to the cache.",
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
     );
@@ -130,27 +133,78 @@ public class AbstractFileCacheSensorTest {
       "Incremental PR analysis: An error occurred while computing the hash for VB/Bar.vb",
       "Incremental PR analysis: An error occurred while computing the hash for CSharp/Foo.cs"
     );
+
     assertThat(logTester.logs(Level.DEBUG)).containsExactly(
       "Incremental PR analysis: Preparing to upload file hashes.",
+      "Incremental PR analysis: basePathUri: " + readBasePath(context),
       "Incremental PR analysis: Adding hash for 'VB/Bar.vb' to the cache.",
       "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
     );
   }
 
+  @Test
+  public void execute_basePathCaseMismatch_succeeds() throws IOException, NoSuchAlgorithmException {
+    var hashProvider = mock(HashProvider.class);
+    when(hashProvider.computeHash(any())).thenReturn(new byte[]{42});
+    var basePath = temp.newFolder();
+    var settings = new MapSettings();
+    var basePathString = basePath.getCanonicalPath();           // C:\\Users\Your.Name\AppData\Local\Temp\junit4048332838121816264\junit8308465819713760239
+    var basePathDifferentCasing = basePathString.toLowerCase(); // c:\\users\your.name\appdata\local\temp\junit4048332838121816264\junit8308465819713760239
+    settings.setProperty("sonar.pullrequest.cache.basepath", basePathDifferentCasing);
+    var context = CreateContextForCaching(basePath, settings);
+    var sut = new FileCacheSensor(hashProvider);
+    sut.execute(context);
+
+    assertThat(basePathDifferentCasing).isNotEqualTo(basePathString);
+    assertThat(basePathDifferentCasing.toUpperCase()).isEqualTo(basePathString.toUpperCase());
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
+      "Incremental PR analysis: Preparing to upload file hashes.",
+      "Incremental PR analysis: basePathUri: " + readBasePath(context), // file:///c:/users/your.name/appdata/local/temp/junit4048332838121816264/junit8308465819713760239/
+      "Incremental PR analysis: Adding hash for 'VB/Bar.vb' to the cache.",
+      "Incremental PR analysis: Adding hash for 'CSharp/Foo.cs' to the cache."
+    );
+  }
+
+  @Test
+  public void execute_basePathMismatch_doesNotAddKey() throws IOException {
+    var hashProvider = mock(HashProvider.class);
+    var settings = new MapSettings();
+    var basePathFiles = temp.newFolder();
+    var basePathCache = temp.newFolder();
+    settings.setProperty("sonar.pullrequest.cache.basepath", basePathCache.getCanonicalPath());
+    var context = CreateContextForCaching(basePathFiles, settings);
+    var sut = new FileCacheSensor(hashProvider);
+    sut.execute(context);
+
+    assertThat(logTester.logs(Level.WARN)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).containsExactly(
+      "Incremental PR analysis: Preparing to upload file hashes.",
+      "Incremental PR analysis: basePathUri: " + Path.of(basePathCache.getCanonicalPath()).toUri(),
+      "Incremental PR analysis: Could not compute relative path for " + Path.of(basePathFiles.getCanonicalPath()).toUri() + "VB/Bar.vb",
+      "Incremental PR analysis: Could not compute relative path for " + Path.of(basePathFiles.getCanonicalPath()).toUri() + "CSharp/Foo.cs"
+    );
+  }
+
   private SensorContext CreateContextForCaching() throws IOException {
     var basePath = temp.newFolder();
-
     var settings = new MapSettings();
     settings.setProperty("sonar.pullrequest.cache.basepath", basePath.getCanonicalPath());
+    return CreateContextForCaching(basePath, settings);
+  }
 
+  private SensorContext CreateContextForCaching(File basePath, MapSettings settings) {
     var context = SensorContextTester.create(basePath);
     context.setCacheEnabled(true);
     context.setSettings(settings);
     context.setNextCache(mock(WriteCache.class));
     context.fileSystem().add(new TestInputFileBuilder("foo", basePath, new File(basePath, "CSharp/Foo.cs")).setLanguage(LANGUAGE_KEY).setType(InputFile.Type.MAIN).build());
     context.fileSystem().add(new TestInputFileBuilder("bar", basePath, new File(basePath, "VB\\Bar.vb")).setLanguage(LANGUAGE_KEY).setType(InputFile.Type.MAIN).build());
-
     return context;
+  }
+
+  private static URI readBasePath(SensorContext context) {
+    return Path.of(context.config().get("sonar.pullrequest.cache.basepath").get()).toUri();
   }
 
   private static class FileCacheSensor extends AbstractFileCacheSensor {
