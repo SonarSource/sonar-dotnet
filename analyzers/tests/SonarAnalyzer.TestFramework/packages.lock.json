@@ -190,12 +190,12 @@
       },
       "NuGet.Protocol": {
         "type": "Direct",
-        "requested": "[6.11.1, )",
-        "resolved": "6.11.1",
-        "contentHash": "WkYlSuNHNt/j1tbHp/xjvwk2EsIdSM3raEjk3EfIFd62ER1+x4eC8/J1VKqnve6cTupF4LsuwD3Z4YCumnfCXw==",
+        "requested": "[6.14.0, )",
+        "resolved": "6.14.0",
+        "contentHash": "hYk9j/ZKErdiK0tFaqsrRtT5q+sJ2VjCUrgFCQG2wGhAlmb8YaBzYLOGDvRdFwuvTi5I+KRuVHPqhc010Np1Bg==",
         "dependencies": {
-          "NuGet.Packaging": "6.11.1",
-          "System.Text.Json": "7.0.3"
+          "NuGet.Packaging": "6.14.0",
+          "System.Text.Json": "8.0.5"
         }
       },
       "SonarAnalyzer.CSharp.Styling": {
@@ -535,39 +535,42 @@
       },
       "NuGet.Common": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "6ouw0UC3TGaFHNJyoEK2/Q5jSryRHzcbKGv9C0+t/TPnTP8PoLqnyFxO1dwmQUmJkWuKAUo6Vu0kIXHY/8LyKQ==",
+        "resolved": "6.14.0",
+        "contentHash": "E+IyoDez4kPrjNPYp41fScowTuSjGifXfjrtU9p9XlQDOGig6vrikQDCMeo6BT6YmT9vUZ+Tb1CX8ru8z0bkNg==",
         "dependencies": {
-          "NuGet.Frameworks": "6.11.1"
+          "NuGet.Frameworks": "6.14.0",
+          "System.Collections.Immutable": "8.0.0"
         }
       },
       "NuGet.Configuration": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "vbEe2acKrI2QmNx9U94ewhgUt6cLpwBeQfMtrie6NMz+GkJcX/4qIkKsX3SeBO4gFgCf8eeTyURl5hxPtiUctw==",
+        "resolved": "6.14.0",
+        "contentHash": "YwoF+Nm0IGdNP/LQ97xysCQlhy4oWIzD4oGcbvz5bQGogPrqn/5lSGwP8llmVv+zfJ6tZZDAT9vh4Q+gH0Aqqg==",
         "dependencies": {
-          "NuGet.Common": "6.11.1"
+          "NuGet.Common": "6.14.0"
         }
       },
       "NuGet.Frameworks": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "plTZ3ariSWQVsFn2mk83SsdmSg1VpgIMTSZpP/eSE/NNQF02p+M9ItxAYeUZBMX+cQ2nFkSwxQRJ0/fkaV9Hbg=="
+        "resolved": "6.14.0",
+        "contentHash": "xZ37J58DQAkVUX29qoMwla26iBYRScdcfSGNe1FIZjCX1tpafN9n7TinrkRxaJqYzW0D8Ob8a3eRSYhwEUauCA=="
       },
       "NuGet.Packaging": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "wiofIUUr7khwuaGXiOibMb7+dEkF97EVsAmzlaNc188HV9ujjqweQMuVCoAK2/MqXdhnrKjvicUfKo9CPsNnfg==",
+        "resolved": "6.14.0",
+        "contentHash": "BpQlGpkuAhrh6x00mGvwK13a5c30vX3FYQbWI11LIyXl/nWmoOQSZrB3yEAh9ihibeGo8SunWZBGXvkkJUxbEg==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
-          "NuGet.Configuration": "6.11.1",
-          "NuGet.Versioning": "6.11.1"
+          "NuGet.Configuration": "6.14.0",
+          "NuGet.Versioning": "6.14.0",
+          "System.Memory": "4.5.5",
+          "System.Text.Json": "8.0.5"
         }
       },
       "NuGet.Versioning": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "YNn3BB71F+guJW42TbAhGcMh3gpyqFMZcPVD9pm5vcvGivTALtRely/VCPWQQ6JQ5PfwIrjPaJMO7VnqyeK3rg=="
+        "resolved": "6.14.0",
+        "contentHash": "4v4blkhCv8mpKtfx+z0G/X0daVCzdIaHSC51GkUspugi5JIMn2Bo8xm5PdZYF0U68gOBfz/+aPWMnpRd85Jbow=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Transitive",
@@ -975,11 +978,11 @@
       },
       "NuGet.Protocol": {
         "type": "Direct",
-        "requested": "[6.11.1, )",
-        "resolved": "6.11.1",
-        "contentHash": "WkYlSuNHNt/j1tbHp/xjvwk2EsIdSM3raEjk3EfIFd62ER1+x4eC8/J1VKqnve6cTupF4LsuwD3Z4YCumnfCXw==",
+        "requested": "[6.14.0, )",
+        "resolved": "6.14.0",
+        "contentHash": "hYk9j/ZKErdiK0tFaqsrRtT5q+sJ2VjCUrgFCQG2wGhAlmb8YaBzYLOGDvRdFwuvTi5I+KRuVHPqhc010Np1Bg==",
         "dependencies": {
-          "NuGet.Packaging": "6.11.1"
+          "NuGet.Packaging": "6.14.0"
         }
       },
       "SonarAnalyzer.CSharp.Styling": {
@@ -1264,41 +1267,42 @@
       },
       "NuGet.Common": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "6ouw0UC3TGaFHNJyoEK2/Q5jSryRHzcbKGv9C0+t/TPnTP8PoLqnyFxO1dwmQUmJkWuKAUo6Vu0kIXHY/8LyKQ==",
+        "resolved": "6.14.0",
+        "contentHash": "E+IyoDez4kPrjNPYp41fScowTuSjGifXfjrtU9p9XlQDOGig6vrikQDCMeo6BT6YmT9vUZ+Tb1CX8ru8z0bkNg==",
         "dependencies": {
-          "NuGet.Frameworks": "6.11.1"
+          "NuGet.Frameworks": "6.14.0",
+          "System.Collections.Immutable": "8.0.0"
         }
       },
       "NuGet.Configuration": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "vbEe2acKrI2QmNx9U94ewhgUt6cLpwBeQfMtrie6NMz+GkJcX/4qIkKsX3SeBO4gFgCf8eeTyURl5hxPtiUctw==",
+        "resolved": "6.14.0",
+        "contentHash": "YwoF+Nm0IGdNP/LQ97xysCQlhy4oWIzD4oGcbvz5bQGogPrqn/5lSGwP8llmVv+zfJ6tZZDAT9vh4Q+gH0Aqqg==",
         "dependencies": {
-          "NuGet.Common": "6.11.1",
+          "NuGet.Common": "6.14.0",
           "System.Security.Cryptography.ProtectedData": "4.4.0"
         }
       },
       "NuGet.Frameworks": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "plTZ3ariSWQVsFn2mk83SsdmSg1VpgIMTSZpP/eSE/NNQF02p+M9ItxAYeUZBMX+cQ2nFkSwxQRJ0/fkaV9Hbg=="
+        "resolved": "6.14.0",
+        "contentHash": "xZ37J58DQAkVUX29qoMwla26iBYRScdcfSGNe1FIZjCX1tpafN9n7TinrkRxaJqYzW0D8Ob8a3eRSYhwEUauCA=="
       },
       "NuGet.Packaging": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "wiofIUUr7khwuaGXiOibMb7+dEkF97EVsAmzlaNc188HV9ujjqweQMuVCoAK2/MqXdhnrKjvicUfKo9CPsNnfg==",
+        "resolved": "6.14.0",
+        "contentHash": "BpQlGpkuAhrh6x00mGvwK13a5c30vX3FYQbWI11LIyXl/nWmoOQSZrB3yEAh9ihibeGo8SunWZBGXvkkJUxbEg==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
-          "NuGet.Configuration": "6.11.1",
-          "NuGet.Versioning": "6.11.1",
+          "NuGet.Configuration": "6.14.0",
+          "NuGet.Versioning": "6.14.0",
           "System.Security.Cryptography.Pkcs": "6.0.4"
         }
       },
       "NuGet.Versioning": {
         "type": "Transitive",
-        "resolved": "6.11.1",
-        "contentHash": "YNn3BB71F+guJW42TbAhGcMh3gpyqFMZcPVD9pm5vcvGivTALtRely/VCPWQQ6JQ5PfwIrjPaJMO7VnqyeK3rg=="
+        "resolved": "6.14.0",
+        "contentHash": "4v4blkhCv8mpKtfx+z0G/X0daVCzdIaHSC51GkUspugi5JIMn2Bo8xm5PdZYF0U68gOBfz/+aPWMnpRd85Jbow=="
       },
       "StyleCop.Analyzers.Unstable": {
         "type": "Transitive",
