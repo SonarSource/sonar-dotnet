@@ -19,9 +19,9 @@
       },
       "FluentAssertions.Analyzers": {
         "type": "Direct",
-        "requested": "[0.31.0, )",
-        "resolved": "0.31.0",
-        "contentHash": "KWyAnqT5gCx1vHr/oNhyEV8HV1aCJswREoxEbZcWOWBGTWm7aAeMnzwjfAPNNYumzhT8Y8IafgcLur0OXrLZrA=="
+        "requested": "[0.34.1, )",
+        "resolved": "0.34.1",
+        "contentHash": "2BnAAB8CCPdRA9P1+lAvBZOleR2BTmsxGMtGt+LnABJUARGqoGMWEFxG3znZYqHVIrMP0Za/kyw6atyt8x2mzA=="
       },
       "Microsoft.Build.Locator": {
         "type": "Direct",
@@ -830,9 +830,9 @@
       },
       "FluentAssertions.Analyzers": {
         "type": "Direct",
-        "requested": "[0.31.0, )",
-        "resolved": "0.31.0",
-        "contentHash": "KWyAnqT5gCx1vHr/oNhyEV8HV1aCJswREoxEbZcWOWBGTWm7aAeMnzwjfAPNNYumzhT8Y8IafgcLur0OXrLZrA=="
+        "requested": "[0.34.1, )",
+        "resolved": "0.34.1",
+        "contentHash": "2BnAAB8CCPdRA9P1+lAvBZOleR2BTmsxGMtGt+LnABJUARGqoGMWEFxG3znZYqHVIrMP0Za/kyw6atyt8x2mzA=="
       },
       "Microsoft.Build.Locator": {
         "type": "Direct",
