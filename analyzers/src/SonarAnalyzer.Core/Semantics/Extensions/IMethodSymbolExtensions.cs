@@ -101,7 +101,9 @@ public static class IMethodSymbolExtensions
         classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
 
     public static bool IsTestMethod(this IMethodSymbol method) =>
-        method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
+        method.MethodKind.HasFlag(MethodKindEx.LocalFunction)
+            ? method.IsXunitTestMethod()
+            : method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
 
     public static bool IsIgnoredTestMethod(this IMethodSymbol method) =>
         method.HasIgnoredAttribute()
@@ -145,6 +147,9 @@ public static class IMethodSymbolExtensions
     private static bool IsTestAttributeWithExpectedResult(AttributeData attribute) =>
         attribute.AttributeClass.IsAny(KnownType.NUnit_Framework_TestCaseAttribute, KnownType.NUnit_Framework_TestAttribute)
         && attribute.NamedArguments.Any(x => x.Key == "ExpectedResult");
+
+    private static bool IsXunitTestMethod(this IMethodSymbol methodSymbol) =>
+        methodSymbol.AnyAttributeDerivesFromAny(KnownType.TestMethodAttributesOfxUnit);
 
     private static Comparison ComparisonKind(string method) =>
         method switch

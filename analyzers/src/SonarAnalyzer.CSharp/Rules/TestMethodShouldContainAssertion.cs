@@ -62,7 +62,7 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
                 if (!declaration.Identifier.IsMissing
                     && declaration.HasImplementation
                     && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol method
-                    && IsTestMethod(method, declaration.IsLocal)
+                    && method.IsTestMethod()
                     && !method.HasExpectedExceptionAttribute()
                     && !method.HasAssertionInAttribute()
                     && !method.IsIgnoredTestMethod()
@@ -73,13 +73,6 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
             },
             SyntaxKind.MethodDeclaration,
             SyntaxKindEx.LocalFunctionStatement);
-
-    // only xUnit allows local functions to be test methods.
-    private static bool IsTestMethod(IMethodSymbol symbol, bool isLocalFunction) =>
-        isLocalFunction ? IsXunitTestMethod(symbol) : symbol.IsTestMethod();
-
-    private static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
-        methodSymbol.AnyAttributeDerivesFromAny(KnownType.TestMethodAttributesOfxUnit);
 
     private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel model, ISet<IMethodSymbol> visitedSymbols, int level)
     {
