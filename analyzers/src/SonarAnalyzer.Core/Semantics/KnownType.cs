@@ -433,6 +433,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Int16 = new("System.Int16");
     public static readonly KnownType System_Int32 = new("System.Int32");
     public static readonly KnownType System_Int64 = new("System.Int64");
+    public static readonly KnownType System_Int128 = new("System.Int128");
     public static readonly KnownType System_IntPtr = new("System.IntPtr");
     public static readonly KnownType System_InvalidOperationException = new("System.InvalidOperationException");
     public static readonly KnownType System_IO_Compression_ZipFile = new("System.IO.Compression.ZipFile");
@@ -453,14 +454,15 @@ public sealed partial class KnownType
     public static readonly KnownType System_MarshalByRefObject = new("System.MarshalByRefObject");
     public static readonly KnownType System_MTAThreadAttribute = new("System.MTAThreadAttribute");
     public static readonly KnownType System_Net_FtpWebRequest = new("System.Net.FtpWebRequest");
-    public static readonly KnownType System_Net_Http_HttpClient = new("System.Net.Http.HttpClient");
     public static readonly KnownType System_Net_Http_Headers_HttpHeaders = new("System.Net.Http.Headers.HttpHeaders");
+    public static readonly KnownType System_Net_Http_HttpClient = new("System.Net.Http.HttpClient");
     public static readonly KnownType System_Net_Http_HttpClientHandler = new("System.Net.Http.HttpClientHandler");
+    public static readonly KnownType System_Net_IPAddress = new("System.Net.IPAddress");
     public static readonly KnownType System_Net_Mail_SmtpClient = new("System.Net.Mail.SmtpClient");
     public static readonly KnownType System_Net_NetworkCredential = new("System.Net.NetworkCredential");
+    public static readonly KnownType System_Net_SecurityProtocolType = new("System.Net.SecurityProtocolType");
     public static readonly KnownType System_Net_Security_RemoteCertificateValidationCallback = new("System.Net.Security.RemoteCertificateValidationCallback");
     public static readonly KnownType System_Net_Security_SslPolicyErrors = new("System.Net.Security.SslPolicyErrors");
-    public static readonly KnownType System_Net_SecurityProtocolType = new("System.Net.SecurityProtocolType");
     public static readonly KnownType System_Net_Sockets_Socket = new("System.Net.Sockets.Socket");
     public static readonly KnownType System_Net_Sockets_SocketTaskExtensions = new("System.Net.Sockets.SocketTaskExtensions");
     public static readonly KnownType System_Net_Sockets_TcpClient = new("System.Net.Sockets.TcpClient");
