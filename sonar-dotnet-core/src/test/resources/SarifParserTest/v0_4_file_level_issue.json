@@ -107,10 +107,40 @@
                 {
                   "uri": "file:\/\/\/C:\/Program.cs",
                   "region": {
-                    "startLine": 1,
+                    "startLine": 2,
                     "startColumn": 1,
-                    "endLine": 1,
+                    "endLine": 2,
                     "endColumn": 1
+                  }
+                }
+              ]
+            }
+          ],
+          "shortMessage": "Dummy",
+          "fullMessage": "Dummy.",
+          "properties": {
+            "severity": "Warning",
+            "warningLevel": "1",
+            "defaultSeverity": "Warning",
+            "title": "...",
+            "category": "Maintainability",
+            "helpLink": "http:\/\/vs.sonarlint.org\/rules\/index.html#version=1.10.0&ruleId=S104",
+            "isEnabledByDefault": "True"
+          }
+        },
+        {
+          "ruleId": "S107",
+          "kind": "warning",
+          "locations": [
+            {
+              "analysisTarget": [
+                {
+                  "uri": "file:\/\/\/C:\/Program.cs",
+                  "region": {
+                    "startLine": 2,
+                    "startColumn": 5,
+                    "endLine": 2,
+                    "endColumn": 5
                   }
                 }
               ]

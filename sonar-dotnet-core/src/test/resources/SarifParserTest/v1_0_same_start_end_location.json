@@ -14,16 +14,58 @@
         {
           "ruleId": "IDE0055",
           "level": "note",
-          "message": "Fix formatting",
+          "message": "Fix formatting - middle of line",
           "locations": [
             {
               "resultFile": {
-                "uri": "%BASEDIR%Foo.cs",
+                "uri": "Foo.cs",
                 "region": {
                   "startLine": 8,
                   "startColumn": 6,
                   "endLine": 8,
                   "endColumn": 6
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "IDE0055",
+          "level": "note",
+          "message": "Fix formatting - start of line",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "Foo.cs",
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 1,
+                  "endLine": 8,
+                  "endColumn": 1
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "IDE0055",
+          "level": "note",
+          "message": "Fix formatting - First line",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "Foo.cs",
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1,
+                  "endLine": 1,
+                  "endColumn": 1
                 }
               }
             }

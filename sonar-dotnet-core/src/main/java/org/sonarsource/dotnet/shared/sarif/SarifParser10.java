@@ -212,8 +212,15 @@ class SarifParser10 implements SarifParser {
 
     int endLineOffset = endColumn - 1;
 
-    if (startColumn == endColumn && startLine == endLine) {
-      return null;
+    if (startLine == endLine && startLineOffset == endLineOffset) {
+      if (startLine == 1) {
+        // File level issue
+        return null;
+      } else if (startLineOffset == 0) {
+        endLineOffset++;
+      } else {
+        startLineOffset--;
+      }
     }
 
     return new Location(path, message, startLine, startLineOffset, endLine, endLineOffset);

@@ -124,7 +124,8 @@ public class SarifParser10Test {
 
     InOrder inOrder = inOrder(callback);
     inOrder.verify(callback).onRule("S1118", "Utility classes should not have public constructors",
-      "Utility classes, which are collections of static members, are not meant to be instantiated. Even abstract utility classes, which can be extended, should not have public constructors.",
+      "Utility classes, which are collections of static members, are not meant to be instantiated. Even abstract utility classes, which can be extended, should not have public " +
+        "constructors.",
       "warning", "Sonar Code Smell");
     Location location = new Location(new File(baseDir, "ConsoleApplication1/P@!$#&+-=r^{}og_r()a m[1].cs").getAbsolutePath(),
       "Add a 'protected' constructor or the 'static' keyword to the class declaration.", 9, 10, 9, 17);
@@ -144,7 +145,8 @@ public class SarifParser10Test {
     verifyNoMoreInteractions(callback);
 
     assertThat(logTester.logs(Level.WARN)).hasSize(1);
-    assertThat(logTester.logs(Level.WARN).get(0)).startsWith("Issue raised without a message for rule S1234. Content: {\"ruleId\":\"S1234\",\"level\":\"warning\",\"locations\":[{\"resultFile\":{\"uri\":\"file:");
+    assertThat(logTester.logs(Level.WARN).get(0)).startsWith("Issue raised without a message for rule S1234. Content: {\"ruleId\":\"S1234\",\"level\":\"warning\"," +
+      "\"locations\":[{\"resultFile\":{\"uri\":\"file:");
   }
 
   @Test
@@ -329,10 +331,12 @@ public class SarifParser10Test {
     new SarifParser10(null, getRoot("v1_0_relative_paths.json"), String::toString).accept(callback);
     InOrder inOrder = inOrder(callback);
 
-    Location s1144PrimaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Remove the unused private method 'UnusedMethod'.", 7, 8, 7, 46);
+    Location s1144PrimaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Remove the unused private method " +
+      "'UnusedMethod'.", 7, 8, 7, 46);
     inOrder.verify(callback).onIssue("S1144", "warning", s1144PrimaryLocation, new ArrayList<>(), false);
 
-    Location s1186PrimaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.", 7, 28, 7, 40);
+    Location s1186PrimaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Add a nested comment explaining why this " +
+      "method is empty, throw a 'NotSupportedException' or complete the implementation.", 7, 28, 7, 40);
     inOrder.verify(callback).onIssue("S1186", "warning", s1186PrimaryLocation, new ArrayList<>(), false);
   }
 
@@ -342,7 +346,8 @@ public class SarifParser10Test {
     new SarifParser10(null, getRoot("v1_0_region_with_length.json"), String::toString).accept(callback);
     InOrder inOrder = inOrder(callback);
 
-    Location primaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Remove the unused private method 'UnusedMethod'.", 7, 8, 7, 46);
+    Location primaryLocation = new Location("SourceGeneratorPOC.Generators\\SourceGeneratorPOC.SourceGenerator\\Greetings.cs", "Remove the unused private method 'UnusedMethod'."
+      , 7, 8, 7, 46);
     inOrder.verify(callback).onIssue("S1144", "warning", primaryLocation, new ArrayList<>(), false);
   }
 
@@ -352,10 +357,10 @@ public class SarifParser10Test {
     SarifParserCallback callback = mock(SarifParserCallback.class);
     new SarifParser10(null, getRoot("v1_0_same_start_end_location.json"), String::toString).accept(callback);
     InOrder inOrder = inOrder(callback);
-
-    var filePath = new File(baseDir, "Foo.cs").getAbsolutePath();
-    // Once NET-1139 is fixed, the check should be on onIssue instead of onFileIssue
-    inOrder.verify(callback).onFileIssue("IDE0055", "note", filePath, emptyList(), "Fix formatting");
+    Location primaryLocation = new Location("Foo.cs", "Fix formatting - middle of line", 8, 4, 8, 5);
+    inOrder.verify(callback).onIssue("IDE0055", "note", primaryLocation, emptyList(), false);
+    primaryLocation = new Location("Foo.cs", "Fix formatting - start of line", 8, 0, 8, 1);
+    inOrder.verify(callback).onIssue("IDE0055", "note", primaryLocation, emptyList(), false);
+    inOrder.verify(callback).onFileIssue(eq("IDE0055"), anyString(), eq("Foo.cs"), eq(emptyList()), eq("Fix formatting - First line"));
   }
-
 }

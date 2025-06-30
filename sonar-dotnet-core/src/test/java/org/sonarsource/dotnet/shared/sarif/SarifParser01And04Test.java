@@ -109,8 +109,10 @@ public class SarifParser01And04Test {
     inOrder.verify(callback).onFileIssue(eq("S105"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
     Location location = new Location("C:\\Program.cs", "Dummy", 1, 0, 1, 1);
     inOrder.verify(callback).onIssue("S105", null, location, emptyList(), false);
-
-    inOrder.verify(callback).onFileIssue(eq("S106"), Mockito.isNull(), Mockito.anyString(), eq(emptyList()), eq("Dummy"));
+    location = new Location("C:\\Program.cs", "Dummy", 2, 0, 2, 1);
+    inOrder.verify(callback).onIssue("S106", null, location, emptyList(), false);
+    location = new Location("C:\\Program.cs", "Dummy", 2, 3, 2, 4);
+    inOrder.verify(callback).onIssue("S107", null, location, emptyList(), false);
 
     verifyNoMoreInteractions(callback);
   }
