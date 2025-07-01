@@ -123,9 +123,10 @@ public static class IMethodSymbolExtensions
 
     public static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
         method.GetAttributes().FirstOrDefault(x =>
-            x.AttributeClass.Is(KnownType.Xunit_FactAttribute)
-            || x.AttributeClass.Is(KnownType.Xunit_TheoryAttribute)
-            || x.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
+            x.AttributeClass.IsAny(
+                KnownType.Xunit_FactAttribute,
+                KnownType.Xunit_TheoryAttribute,
+                KnownType.LegacyXunit_TheoryAttribute));
 
     /// <summary>
     /// Returns the <see cref="KnownType"/> that indicates the type of the test method or
