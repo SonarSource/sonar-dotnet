@@ -107,7 +107,7 @@ public static class IMethodSymbolExtensions
 
     public static bool IsIgnoredTestMethod(this IMethodSymbol method) =>
         method.HasIgnoredAttribute()
-        || method.FindXUnitTestAttribute().NamedArguments.Any(x => x.Key == "Skip");
+        || method.FindXUnitTestAttribute()?.NamedArguments.Any(x => x.Key == "Skip") is true;
 
     public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
         method.GetAttributes().Any(x =>
