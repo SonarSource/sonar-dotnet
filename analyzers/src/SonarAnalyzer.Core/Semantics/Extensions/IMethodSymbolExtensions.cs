@@ -28,11 +28,6 @@ public static class IMethodSymbolExtensions
             .Concat(KnownType.TestMethodAttributesOfxUnit)
             .ToArray());
 
-    private static readonly ImmutableArray<KnownType> KnownTestClassAttributes = ImmutableArray.Create(
-            // xUnit does not have have attributes to identity test classes
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
-            KnownType.NUnit_Framework_TestFixtureAttribute);
-
     private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes = ImmutableArray.Create(
             KnownType.Void,
             KnownType.System_Threading_Tasks_Task);
@@ -92,13 +87,6 @@ public static class IMethodSymbolExtensions
         method?.MethodKind == MethodKind.UserDefinedOperator
             ? ComparisonKind(method.Name)
             : Comparison.None;
-
-    /// <summary>
-    /// Returns whether the class has an attribute that marks the class
-    /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
-    /// </summary>
-    public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
-        classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
 
     public static bool IsTestMethod(this IMethodSymbol method) =>
         method.MethodKind.HasFlag(MethodKindEx.LocalFunction)
