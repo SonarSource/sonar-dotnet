@@ -103,6 +103,7 @@ See: https://learn.microsoft.com/en-us/visualstudio/code-quality/use-roslyn-anal
 If the rules are parameterized, the parameter values can be changed using `SonarLint.xml` additional files.
 
 The first step is to create a new file, named `SonarLint.xml`, that has the following structure:
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <AnalysisInput xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
