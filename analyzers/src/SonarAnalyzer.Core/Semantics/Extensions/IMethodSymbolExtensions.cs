@@ -37,7 +37,7 @@ public static class IMethodSymbolExtensions
             KnownType.Void,
             KnownType.System_Threading_Tasks_Task);
 
-    private static readonly ImmutableArray<KnownType> KnownIgnoreAttributes = ImmutableArray.Create(
+    private static readonly ImmutableArray<KnownType> KnownTestIgnoreAttributes = ImmutableArray.Create(
            // Note: XUnit doesn't have a separate "Ignore" attribute. It has a "Skip" parameter
            // on the test attribute
            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
