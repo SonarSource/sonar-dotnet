@@ -106,7 +106,7 @@ public static class IMethodSymbolExtensions
             : method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
 
     public static bool IsIgnoredTestMethod(this IMethodSymbol method) =>
-        method.HasIgnoredAttribute()
+        method.HasTestIgnoreAttribute()
         || method.FindXUnitTestAttribute()?.NamedArguments.Any(x => x.Key == "Skip") is true;
 
     public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
@@ -143,7 +143,7 @@ public static class IMethodSymbolExtensions
         || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
 
     private static bool HasTestIgnoreAttribute(this IMethodSymbol method) =>
-       method.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownIgnoreAttributes));
+       method.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownTestIgnoreAttributes));
 
     private static bool IsTestAttributeWithExpectedResult(AttributeData attribute) =>
         attribute.AttributeClass.IsAny(KnownType.NUnit_Framework_TestCaseAttribute, KnownType.NUnit_Framework_TestAttribute)
