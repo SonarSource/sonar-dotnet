@@ -142,7 +142,7 @@ public static class IMethodSymbolExtensions
         IsTestAttributeWithExpectedResult(a)
         || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
 
-    private static bool HasIgnoredAttribute(this IMethodSymbol method) =>
+    private static bool HasTestIgnoreAttribute(this IMethodSymbol method) =>
        method.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownIgnoreAttributes));
 
     private static bool IsTestAttributeWithExpectedResult(AttributeData attribute) =>
