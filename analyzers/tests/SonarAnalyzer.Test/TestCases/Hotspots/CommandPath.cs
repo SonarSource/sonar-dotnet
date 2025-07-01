@@ -17,7 +17,7 @@ public class Program
         var compliantVariable = @"C:\file.exe";
         var noncompliantVariable = @"file.exe";
         string nullVariable = null;
-        var startInfo = new ProcessStartInfo("bad.exe");    // Noncompliant {{Make sure the "PATH" used to find this command includes only what you intend.}}
+        var startInfo = new ProcessStartInfo("bad.exe");    // Noncompliant {{Make sure the "PATH" variable only contains fixed, unwriteable directories.}}
         //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         // Compliant

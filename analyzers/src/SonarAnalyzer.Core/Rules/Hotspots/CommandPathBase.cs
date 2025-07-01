@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Core.Rules
         where TSyntaxKind : struct
     {
         protected const string DiagnosticId = "S4036";
-        private const string MessageFormat = "Make sure the \"PATH\" used to find this command includes only what you intend.";
+        private const string MessageFormat = """Make sure the "PATH" variable only contains fixed, unwriteable directories.""";
 
         private readonly Regex validPath = new Regex(@"^(\.{0,2}[\\/]|\w+:)", RegexOptions.None, Constants.DefaultRegexTimeout);
 
