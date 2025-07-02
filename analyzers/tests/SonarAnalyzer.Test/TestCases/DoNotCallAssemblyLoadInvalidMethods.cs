@@ -39,14 +39,47 @@ namespace Repro
     // https://sonarsource.atlassian.net/browse/NET-2099
     public class NET2099
     {
-        private static Assembly OnAssemblyResolve(Object sender, ResolveEventArgs args)
+        private static Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
         {
-            return Assembly.LoadFrom("NonexistentDLL"); // Noncompliant
+            return Assembly.LoadFrom("NonexistentDLL");
+        }
+
+        private static Assembly OnTypeResolve(object sender, ResolveEventArgs args)
+        {
+            return Assembly.LoadFrom("NonexistentDLL"); // FN
+        }
+
+        private static Assembly OnResourceResolve(object sender, ResolveEventArgs args)
+        {
+            return Assembly.LoadFrom("NonexistentDLL"); // FN
+        }
+
+        private static Assembly OnReflectionOnlyAssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            return Assembly.LoadFrom("NonexistentDLL"); // FN
         }
 
         static void Main()
         {
             AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+            AppDomain.CurrentDomain.AssemblyResolve += LocalOnAssemblyResolve;
+            AppDomain.CurrentDomain.AssemblyResolve += delegate(object sender, ResolveEventArgs args)
+            {
+                return Assembly.LoadFrom("NonexistentDLL");
+            };
+            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
+            {
+                return Assembly.LoadFrom("NonexistentDLL");
+            };
+
+            AppDomain.CurrentDomain.TypeResolve += OnTypeResolve;
+            AppDomain.CurrentDomain.ResourceResolve += OnResourceResolve;
+            AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += OnReflectionOnlyAssemblyResolve;
+
+            Assembly LocalOnAssemblyResolve(object sender, ResolveEventArgs args)
+            {
+                return Assembly.LoadFrom("NonexistentDLL");
+            }
         }
     }
 }

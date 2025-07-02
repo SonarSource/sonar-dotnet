@@ -483,11 +483,12 @@ public sealed partial class KnownType
     public static readonly KnownType System_Range = new("System.Range");
     public static readonly KnownType System_ReadOnlySpan_T = new("System.ReadOnlySpan", "T");
     public static readonly KnownType System_Reflection_Assembly = new("System.Reflection.Assembly");
-    public static readonly KnownType System_Reflection_BindingFlags = new("System.Reflection.BindingFlags");
     public static readonly KnownType System_Reflection_AssemblyVersionAttribute = new("System.Reflection.AssemblyVersionAttribute");
+    public static readonly KnownType System_Reflection_BindingFlags = new("System.Reflection.BindingFlags");
     public static readonly KnownType System_Reflection_MemberInfo = new("System.Reflection.MemberInfo");
     public static readonly KnownType System_Reflection_Module = new("System.Reflection.Module");
     public static readonly KnownType System_Reflection_ParameterInfo = new("System.Reflection.ParameterInfo");
+    public static readonly KnownType System_ResolveEventArgs = new("System.ResolveEventArgs");
     public static readonly KnownType System_Resources_NeutralResourcesLanguageAttribute = new("System.Resources.NeutralResourcesLanguageAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_ExtensionAttribute = new("System.Runtime.CompilerServices.ExtensionAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_CallerArgumentExpressionAttribute = new("System.Runtime.CompilerServices.CallerArgumentExpressionAttribute");

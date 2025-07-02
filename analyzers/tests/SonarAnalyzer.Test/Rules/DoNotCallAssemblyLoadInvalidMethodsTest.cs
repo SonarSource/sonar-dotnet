@@ -16,39 +16,38 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DoNotCallAssemblyLoadInvalidMethodsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallAssemblyLoadInvalidMethods>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DoNotCallAssemblyLoadInvalidMethods() =>
-            builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.cs")
-                .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
-                .Verify();
+[TestClass]
+public class DoNotCallAssemblyLoadInvalidMethodsTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotCallAssemblyLoadInvalidMethods>();
+
+    [TestMethod]
+    public void DoNotCallAssemblyLoadInvalidMethods() =>
+        builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.cs")
+            .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
-            builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .WithTopLevelStatements()
-                .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
-                .Verify();
+    [TestMethod]
+    public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
+        builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs")
+            .WithOptions(LanguageOptions.FromCSharp9)
+            .WithTopLevelStatements()
+            .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
+            .Verify();
 
 #endif
 
 #if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
 
-        [TestMethod]
-        public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
-            builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.Evidence.cs")
-                .Verify();
+    [TestMethod]
+    public void DoNotCallAssemblyLoadInvalidMethods_EvidenceParameter() =>
+        builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.Evidence.cs")
+            .Verify();
 
 #endif
 
-    }
 }

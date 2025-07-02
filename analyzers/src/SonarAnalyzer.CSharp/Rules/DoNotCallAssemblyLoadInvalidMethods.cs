@@ -16,22 +16,44 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsCSharpBase
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DoNotCallAssemblyLoadInvalidMethods : DoNotCallMethodsCSharpBase
+    private const string DiagnosticId = "S3885";
+
+    private static readonly HashSet<SyntaxKind> EventHandlerSyntaxes =
+    [
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.ParenthesizedLambdaExpression,
+        SyntaxKind.AnonymousMethodExpression,
+        SyntaxKindEx.LocalFunctionStatement
+    ];
+
+    protected override string MessageFormat => "Replace this call to '{0}' with 'Assembly.Load'.";
+
+    protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
     {
-        private const string DiagnosticId = "S3885";
+        new(KnownType.System_Reflection_Assembly, "LoadFrom"),
+        new(KnownType.System_Reflection_Assembly, "LoadFile"),
+        new(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
+    };
 
-        protected override string MessageFormat => "Replace this call to '{0}' with 'Assembly.Load'.";
+    public DoNotCallAssemblyLoadInvalidMethods() : base(DiagnosticId) { }
 
-        protected override IEnumerable<MemberDescriptor> CheckedMethods { get; } = new List<MemberDescriptor>
-        {
-            new(KnownType.System_Reflection_Assembly, "LoadFrom"),
-            new(KnownType.System_Reflection_Assembly, "LoadFile"),
-            new(KnownType.System_Reflection_Assembly, "LoadWithPartialName")
-        };
+    protected override bool IsInValidContext(InvocationExpressionSyntax invocationSyntax, SemanticModel semanticModel) =>
+        !IsInResolutionHandler(invocationSyntax, semanticModel);
 
-        public DoNotCallAssemblyLoadInvalidMethods() : base(DiagnosticId) { }
-    }
+    // Checks if the invocation is inside an event handler for the AppDomain.AssemblyResolve event.
+    // This check creates FN for the other Resolution events:
+    // AppDomain.TypeResolve, AppDomain.ResourceResolve, AppDomain.ReflectionOnlyAssemblyResolve.
+    // https://learn.microsoft.com/en-us/dotnet/api/system.resolveeventargs
+    private static bool IsInResolutionHandler(InvocationExpressionSyntax invocationSyntax, SemanticModel model) =>
+        invocationSyntax
+            .AncestorsAndSelf()
+            .Any(x => x.IsAnyKind(EventHandlerSyntaxes)
+                        && (model.GetSymbolInfo(x).Symbol ?? model.GetDeclaredSymbol(x)) is IMethodSymbol methodSymbol
+                        && methodSymbol.IsEventHandler()
+                        && methodSymbol.Parameters[1].Type.Is(KnownType.System_ResolveEventArgs));
 }

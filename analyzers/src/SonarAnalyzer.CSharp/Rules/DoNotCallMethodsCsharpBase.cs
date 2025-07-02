@@ -14,12 +14,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
-{
-    public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<SyntaxKind, InvocationExpressionSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+namespace SonarAnalyzer.CSharp.Rules;
 
-        protected DoNotCallMethodsCSharpBase(string diagnosticId) : base(diagnosticId) { }
-    }
+public abstract class DoNotCallMethodsCSharpBase : DoNotCallMethodsBase<SyntaxKind, InvocationExpressionSyntax>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected DoNotCallMethodsCSharpBase(string diagnosticId) : base(diagnosticId) { }
 }
