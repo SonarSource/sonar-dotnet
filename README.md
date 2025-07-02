@@ -1,5 +1,3 @@
-Please don't merge. This is for testing.
-
 # Code Quality and Security for C\# and VB.NET
 
 [![Build Status](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_apis/build/status/Sonar.Net?branchName=master)](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_build/latest?definitionId=77&branchName=master)
@@ -145,7 +143,7 @@ Then, update the projects to include this additional file:
 
 ## Security Issues
 
-If you believe you have discovered a security vulnerability in Sonar's products, please check [this document](./SECURITY.md)
+If you believe you have discovered a security vulnerability in Sonar's products, please check [this document](./SECURITY.md).
 
 ## License
 
