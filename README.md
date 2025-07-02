@@ -65,8 +65,7 @@ please read the [Get started](#get-started) pages first and make sure that you f
 
 Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#running-unit-tests) are passing (all checks must be green).
 
-* We suggest you do not pick issues with the `Area: CFG` label
-_(they are difficult, can have many side effects and are less likely to be accepted)_.
+* We suggest you do not pick issues with the `Area: CFG` label _(they are difficult, can have many side effects and are less likely to be accepted)_.
 * We suggest you do not implement new rules unless they are already specified for C# and/or VB.NET on
 our [rules repository](https://jira.sonarsource.com/projects/RSPEC).
 
@@ -103,6 +102,7 @@ See: https://learn.microsoft.com/en-us/visualstudio/code-quality/use-roslyn-anal
 If the rules are parameterized, the parameter values can be changed using `SonarLint.xml` additional files.
 
 The first step is to create a new file, named `SonarLint.xml`, that has the following structure:
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <AnalysisInput xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
