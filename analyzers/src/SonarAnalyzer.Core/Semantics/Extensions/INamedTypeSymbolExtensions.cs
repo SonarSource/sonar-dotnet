@@ -20,6 +20,12 @@ public static class INamedTypeSymbolExtensions
 {
     private static readonly ImmutableArray<KnownType> ControllerTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase, KnownType.System_Web_Mvc_Controller);
     private static readonly ImmutableArray<KnownType> ControllerAttributeTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute);
+
+    private static readonly ImmutableArray<KnownType> KnownTestClassAttributes = ImmutableArray.Create(
+        // xUnit does not have have attributes to identity test classes
+        KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
+        KnownType.NUnit_Framework_TestFixtureAttribute);
+
     private static readonly ImmutableArray<KnownType> NonControllerAttributeTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute);
 
     public static bool IsTopLevelProgram(this INamedTypeSymbol symbol) =>
@@ -60,4 +66,11 @@ public static class INamedTypeSymbolExtensions
         namedType.IsControllerType()
         && (namedType.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
             || (namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
+
+    /// <summary>
+    /// Returns whether the class has an attribute that marks the class
+    /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
+    /// </summary>
+    public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
+        classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
 }

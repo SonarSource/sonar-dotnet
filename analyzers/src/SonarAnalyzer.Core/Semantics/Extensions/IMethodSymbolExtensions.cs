@@ -23,19 +23,21 @@ public static class IMethodSymbolExtensions
     private static readonly ImmutableArray<KnownType> NonActionTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonActionAttribute, KnownType.System_Web_Mvc_NonActionAttribute);
 
     private static readonly ImmutableArray<KnownType> KnownTestMethodAttributes = ImmutableArray.Create(
-        KnownType.TestMethodAttributesOfMSTest
-        .Concat(KnownType.TestMethodAttributesOfNUnit)
-        .Concat(KnownType.TestMethodAttributesOfxUnit)
-        .ToArray());
-
-    private static readonly ImmutableArray<KnownType> KnownTestClassAttributes = ImmutableArray.Create(
-            // xUnit does not have have attributes to identity test classes
-            KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_TestClassAttribute,
-            KnownType.NUnit_Framework_TestFixtureAttribute);
+        [
+            ..KnownType.TestMethodAttributesOfMSTest,
+            ..KnownType.TestMethodAttributesOfNUnit,
+            ..KnownType.TestMethodAttributesOfxUnit,
+        ]);
 
     private static readonly ImmutableArray<KnownType> NoExpectedResultTestMethodReturnTypes = ImmutableArray.Create(
             KnownType.Void,
             KnownType.System_Threading_Tasks_Task);
+
+    private static readonly ImmutableArray<KnownType> KnownTestIgnoreAttributes = ImmutableArray.Create(
+           // Note: XUnit doesn't have a separate "Ignore" attribute. It has a "Skip" parameter
+           // on the test attribute
+           KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
+           KnownType.NUnit_Framework_IgnoreAttribute);
 
     public static bool IsExtensionOn(this IMethodSymbol methodSymbol, KnownType type)
     {
@@ -87,15 +89,14 @@ public static class IMethodSymbolExtensions
             ? ComparisonKind(method.Name)
             : Comparison.None;
 
-    /// <summary>
-    /// Returns whether the class has an attribute that marks the class
-    /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
-    /// </summary>
-    public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
-        classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
-
     public static bool IsTestMethod(this IMethodSymbol method) =>
-        method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
+        method.MethodKind.HasFlag(MethodKindEx.LocalFunction)
+            ? method.IsXunitTestMethod()
+            : method.AnyAttributeDerivesFromOrImplementsAny(KnownTestMethodAttributes);
+
+    public static bool IsIgnoredTestMethod(this IMethodSymbol method) =>
+        method.HasTestIgnoreAttribute()
+        || method.FindXUnitTestAttribute()?.NamedArguments.Any(x => x.Key == "Skip") is true;
 
     public static bool HasExpectedExceptionAttribute(this IMethodSymbol method) =>
         method.GetAttributes().Any(x =>
@@ -109,12 +110,6 @@ public static class IMethodSymbolExtensions
     public static bool IsMsTestOrNUnitTestIgnored(this IMethodSymbol method) =>
         method.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownType.IgnoreAttributes));
 
-    public static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
-        method.GetAttributes().FirstOrDefault(x =>
-            x.AttributeClass.Is(KnownType.Xunit_FactAttribute)
-            || x.AttributeClass.Is(KnownType.Xunit_TheoryAttribute)
-            || x.AttributeClass.Is(KnownType.LegacyXunit_TheoryAttribute));
-
     /// <summary>
     /// Returns the <see cref="KnownType"/> that indicates the type of the test method or
     /// null if the method is not decorated with a known type.
@@ -125,13 +120,22 @@ public static class IMethodSymbolExtensions
     public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
         KnownTestMethodAttributes.FirstOrDefault(x => method.GetAttributes().Any(att => att.AttributeClass.DerivesFrom(x)));
 
+    private static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
+        method.GetAttributes().FirstOrDefault(x => x.AttributeClass.IsAny(KnownType.TestMethodAttributesOfxUnit));
+
     private static bool IsAnyTestCaseAttributeWithExpectedResult(AttributeData a) =>
         IsTestAttributeWithExpectedResult(a)
         || a.AttributeClass.Is(KnownType.NUnit_Framework_TestCaseSourceAttribute);
 
+    private static bool HasTestIgnoreAttribute(this IMethodSymbol method) =>
+       method.GetAttributes().Any(x => x.AttributeClass.IsAny(KnownTestIgnoreAttributes));
+
     private static bool IsTestAttributeWithExpectedResult(AttributeData attribute) =>
         attribute.AttributeClass.IsAny(KnownType.NUnit_Framework_TestCaseAttribute, KnownType.NUnit_Framework_TestAttribute)
         && attribute.NamedArguments.Any(x => x.Key == "ExpectedResult");
+
+    private static bool IsXunitTestMethod(this IMethodSymbol methodSymbol) =>
+        methodSymbol.AnyAttributeDerivesFromAny(KnownType.TestMethodAttributesOfxUnit);
 
     private static Comparison ComparisonKind(string method) =>
         method switch

@@ -58,28 +58,21 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(
             c =>
             {
-                var methodDeclaration = MethodDeclarationFactory.Create(c.Node);
-                if (!methodDeclaration.Identifier.IsMissing
-                    && methodDeclaration.HasImplementation
-                    && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol methodSymbol
-                    && IsTestMethod(methodSymbol, methodDeclaration.IsLocal)
-                    && !methodSymbol.HasExpectedExceptionAttribute()
-                    && !methodSymbol.HasAssertionInAttribute()
-                    && !IsTestIgnored(methodSymbol)
+                var declaration = MethodDeclarationFactory.Create(c.Node);
+                if (!declaration.Identifier.IsMissing
+                    && declaration.HasImplementation
+                    && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol method
+                    && method.IsTestMethod()
+                    && !method.HasExpectedExceptionAttribute()
+                    && !method.HasAssertionInAttribute()
+                    && !method.IsIgnoredTestMethod()
                     && !ContainsAssertion(c.Node, c.Model, new HashSet<IMethodSymbol>(), 0))
                 {
-                    c.ReportIssue(Rule, methodDeclaration.Identifier);
+                    c.ReportIssue(Rule, declaration.Identifier);
                 }
             },
             SyntaxKind.MethodDeclaration,
             SyntaxKindEx.LocalFunctionStatement);
-
-    // only xUnit allows local functions to be test methods.
-    private static bool IsTestMethod(IMethodSymbol symbol, bool isLocalFunction) =>
-        isLocalFunction ? IsXunitTestMethod(symbol) : symbol.IsTestMethod();
-
-    private static bool IsXunitTestMethod(IMethodSymbol methodSymbol) =>
-        methodSymbol.AnyAttributeDerivesFromAny(KnownType.TestMethodAttributesOfxUnit);
 
     private static bool ContainsAssertion(SyntaxNode methodDeclaration, SemanticModel model, ISet<IMethodSymbol> visitedSymbols, int level)
     {
@@ -118,21 +111,6 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         }
 
         return false;
-    }
-
-    private static bool IsTestIgnored(IMethodSymbol method)
-    {
-        if (method.IsMsTestOrNUnitTestIgnored())
-        {
-            return true;
-        }
-
-        // Checking whether an Xunit test is ignore or not needs to be done at the syntax level i.e. language-specific
-        var factAttributeSyntax = method.FindXUnitTestAttribute()
-            ?.ApplicationSyntaxReference.GetSyntax() as AttributeSyntax;
-
-        return factAttributeSyntax?.ArgumentList is not null
-               && factAttributeSyntax.ArgumentList.Arguments.Any(x => x.NameEquals.Name.Identifier.ValueText == "Skip");
     }
 
     private static bool IsAssertion(InvocationExpressionSyntax invocation) =>

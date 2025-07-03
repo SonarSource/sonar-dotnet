@@ -706,8 +706,7 @@ public sealed partial class KnownType
             new("System.Func", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "TResult"),
             new("System.Func", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "TResult"),
             new("System.Func", "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11", "T12", "T13", "T14", "T15", "T16", "TResult"));
-    public static readonly ImmutableArray<KnownType> SystemTasks =
-        ImmutableArray.Create(
+    public static readonly ImmutableArray<KnownType> SystemTasks = ImmutableArray.Create(
             System_Threading_Tasks_Task,
             System_Threading_Tasks_Task_T,
             System_Threading_Tasks_ValueTask_TResult);
