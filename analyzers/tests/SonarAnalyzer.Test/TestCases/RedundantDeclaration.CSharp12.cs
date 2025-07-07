@@ -80,9 +80,11 @@ namespace ReproNET882
     {
         public void Method()
         {
-            // In this example Action<object, RoutedEventArgs> is down-casted by AddHandler to EventHandler  (EventHandler has the exact same definition as the Action but they are different).
-            AddHandler(OnErrorEvent);
-            AddHandler(new EventHandler(OnErrorEvent)); // Noncompliant FP, the inferred natural type is wrong and therefore an explicit delegate creation is needed. This is relevant for C# 10 and later.
+            // In this example, the method group has a natural type of Action<object, EventArgs> and the action delegate is up-casted by AddHandler to Delegate.
+            // (The EventHandler delegate has the exact same definition as the Action but they are different delegate types).
+            // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-10.0/lambda-improvements#natural-function-type
+            AddHandler(OnErrorEvent);                   // Could lead to a runtime error (e.g.: WPF) because the delegate type of the method group is Action<object, EventArgs> instead of EventHandler.
+            AddHandler(new EventHandler(OnErrorEvent)); // Compliant, the inferred natural type is Action<object, EventArgs> and therefore the delegate type must be explicit specified.
         }
         private void OnErrorEvent(object sender, EventArgs e) { }
 

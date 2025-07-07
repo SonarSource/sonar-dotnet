@@ -695,7 +695,7 @@ public class VerifierTest
             }
             """);
         DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
-            Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but they differ on line 3 and column 21 (index 42):
+            Expected actual to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but they differ on line 3 and column 21 (index 42):
                         ↓ (actual)
               "…int a = default;     //…"
               "…int a = 0;     //…"
@@ -714,7 +714,7 @@ public class VerifierTest
             End Class
             """);
         DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
-            Expected ActualCodeWithReplacedComments().ToUnixLineEndings() to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but they differ on line 2 and column 28 (index 47):
+            Expected actual to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but they differ on line 2 and column 28 (index 47):
                                ↓ (actual)
               "…A As Integer = Nothing  …"
               "…A As Integer = 42   '…"

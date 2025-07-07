@@ -79,4 +79,53 @@ public class SyntaxNodeExtensionsCSharpTest
         var returnStatement = SyntaxFactory.ReturnStatement();
         returnStatement.NameIs("A", "B", "C").Should().BeFalse();
     }
+
+    [DataTestMethod]
+    [DataRow("""void M() { var i = 42; }""")]
+    [DataRow("""int M() => 42;""")]
+    [DataRow("""Sample() : this(42) { }""")]
+    [DataRow("""int field = 42;""")]
+    [DataRow("""int Property { get; } = 42;""")]
+    [DataRow("""int Property { get => 42; }""")]
+    [DataRow("""int Property { get { return 42; } }""")]
+    [DataRow("""[Priority(42)] void M() { }""")]
+    [DataRow("""[Priority(Order = 42)] void M() { }""")]
+    [DataRow("""void M(int i = 42) { }""")]
+    public void ChangeSyntaxElement_ReturnsNewNodeAndModel(string expressionScope)
+    {
+        var code = $$"""
+            using System;
+            public class PriorityAttribute : Attribute
+            {
+                public PriorityAttribute() { }
+                public PriorityAttribute(int priority) { }
+                public int Order { get; set; }
+            }
+
+            public class Sample
+            {
+                public Sample(int i) { }
+
+                {{expressionScope}}
+            }
+            """;
+        var (tree, model) = TestCompiler.CompileCS(code);
+        var literal = tree.GetRoot().DescendantNodes().OfType<LiteralExpressionSyntax>().Single();
+        var newLiteral = literal.ChangeSyntaxElement(literal.WithToken(SyntaxFactory.Literal(-42)), model, out var newModel);
+        newLiteral.Should().NotBeNull();
+        newModel.Should().NotBeNull();
+        newLiteral.Token.ValueText.Should().Be("-42");
+        model.GetConstantValue(literal).Value.Should().Be(42);
+        newModel.GetConstantValue(newLiteral).Value.Should().Be(-42);
+    }
+
+    [TestMethod]
+    public void ChangeSyntaxElement_FailsForUnsupportedSyntaxKind()
+    {
+        var (tree, model) = TestCompiler.CompileCS("""namespace N { }""");
+        var namespaceDeclaration = tree.GetRoot().DescendantNodes().OfType<NamespaceDeclarationSyntax>().Single();
+        var newNamespaceDeclaration = namespaceDeclaration.ChangeSyntaxElement(namespaceDeclaration.WithName(SyntaxFactory.IdentifierName("M")), model, out var newModel);
+        newNamespaceDeclaration.Should().BeNull();
+        newModel.Should().BeNull();
+    }
 }

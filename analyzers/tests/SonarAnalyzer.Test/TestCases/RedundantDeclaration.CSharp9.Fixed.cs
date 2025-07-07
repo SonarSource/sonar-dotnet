@@ -18,7 +18,7 @@ static Record LocalStatic(Record r) => r;
 
 int? xx = ((new int?(5))); // Fixed
 
-EventHandler myEvent = new ((_, _) => { });
+EventHandler myEvent = new((_, _) => { });
 
 record Record
 {
@@ -48,4 +48,16 @@ public class RedundantDeclaration
     private event EventHandler MyEvent;
 
     public record Point(int x, int y);
+}
+
+abstract class NaturalDelegateTypes
+{
+    public void M()
+    {
+        Test(null, new BoolDelegate(() => true)); // Compliant
+        Test(null, new Func<bool>(() => true));   // Compliant. In C#9 "CS1660: Cannot convert lambda expression to type 'Delegate' because it is not a delegate type" is raised without the new Func<bool>(..)
+    }
+
+    public abstract void Test(object o, Delegate f);
+    public delegate bool BoolDelegate();
 }

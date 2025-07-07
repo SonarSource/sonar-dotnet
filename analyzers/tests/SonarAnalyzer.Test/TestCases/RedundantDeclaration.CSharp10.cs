@@ -7,7 +7,8 @@ namespace Tests.Diagnostics
     {
         public void M()
         {
-            Test(null, new BoolDelegate(() => true)); // Noncompliant
+            Test(null, new BoolDelegate(() => true)); // Compliant (natural type is Func<bool> and not BoolDelegate)
+            Test(null, new Func<bool>(() => true));   // Noncompliant
         }
 
         public abstract void Test(object o, Delegate f);

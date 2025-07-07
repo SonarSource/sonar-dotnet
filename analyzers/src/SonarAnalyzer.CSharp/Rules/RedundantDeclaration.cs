@@ -89,22 +89,18 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             var newParameterList = SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(lambda.ParameterList.Parameters.Select(p => SyntaxFactory.Parameter(p.Identifier))));
-            var newLambda = lambda.WithParameterList(newParameterList);
-
-            newLambda = ChangeSyntaxElement(lambda, newLambda, context.Model, out var newSemanticModel);
-
-            if (!(newSemanticModel.GetSymbolInfo(newLambda).Symbol is IMethodSymbol newSymbol) || ParameterTypesDoNotMatch(symbol, newSymbol))
+            if (lambda.ChangeSyntaxElement(lambda.WithParameterList(newParameterList), context.Model, out var newSemanticModel) is { } newLambda
+                && newSemanticModel.GetSymbolInfo(newLambda) is { Symbol: IMethodSymbol newSymbol }
+                && ParameterTypesMatch(symbol, newSymbol))
             {
-                return;
-            }
-
-            foreach (var parameter in lambda.ParameterList.Parameters)
-            {
-                context.ReportIssue(
-                    Rule,
-                    parameter.Type,
-                    ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
-                    "type specification");
+                foreach (var parameter in lambda.ParameterList.Parameters)
+                {
+                    context.ReportIssue(
+                        Rule,
+                        parameter.Type,
+                        ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, RedundancyType.LambdaParameterType.ToString()),
+                        "type specification");
+                }
             }
         }
 
@@ -133,18 +129,19 @@ namespace SonarAnalyzer.CSharp.Rules
             lambda.Body.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Select(x => x.Identifier.Text);
 
         private static bool IsParameterListModifiable(ParenthesizedLambdaExpressionSyntax lambda) =>
-            lambda.ParameterList != null && lambda.ParameterList.Parameters.All(p => p.Type != null && p.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
+            lambda is { ParameterList.Parameters: { Count: > 0 } parameters }
+            && parameters.All(x => x.Type is not null && x.Modifiers.All(m => !RefOutKeywords.Contains(m.Kind())));
 
-        private static bool ParameterTypesDoNotMatch(IMethodSymbol method1, IMethodSymbol method2)
+        private static bool ParameterTypesMatch(IMethodSymbol method1, IMethodSymbol method2)
         {
             for (var i = 0; i < method1.Parameters.Length; i++)
             {
-                if (method1.Parameters[i].Type.ToDisplayString() != method2.Parameters[i].Type.ToDisplayString())
+                if (!method1.Parameters[i].Type.Equals(method2.Parameters[i].Type))
                 {
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
         }
 
         #endregion
@@ -382,37 +379,45 @@ namespace SonarAnalyzer.CSharp.Rules
 
         #endregion
 
-        private static bool IsInArgumentAndCanBeChanged(IObjectCreation objectCreation, SemanticModel semanticModel, Func<InvocationExpressionSyntax, bool> additionalFilter = null)
+        private static bool IsInArgumentAndCanBeChanged(IObjectCreation objectCreation, SemanticModel model, Func<InvocationExpressionSyntax, bool> additionalFilter = null)
         {
-            var parent = objectCreation.Expression.GetFirstNonParenthesizedParent();
-            var argument = parent as ArgumentSyntax;
-
-            if (!(argument?.Parent?.Parent is InvocationExpressionSyntax invocation))
+            if (!(objectCreation.Expression.GetFirstNonParenthesizedParent() is ArgumentSyntax { Parent: ArgumentListSyntax { Parent: InvocationExpressionSyntax invocation } } argument))
             {
                 return false;
             }
 
-            if (additionalFilter != null && additionalFilter(invocation))
+            if (additionalFilter is not null && additionalFilter(invocation))
             {
                 return false;
             }
 
-            var methodSymbol = semanticModel.GetSymbolInfo(invocation).Symbol;
-            if (methodSymbol == null)
+            // In C# 10 and later, the natural type of a lambda expression is Func<T> or Action<T>,
+            // which are implicit convertable to Delegate. In earlier versions
+            // CS1660: Cannot convert lambda expression to type 'Delegate' because it is not a delegate type
+            // is raised.
+            // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-10.0/lambda-improvements#natural-function-type
+            // If the user specified another delegate type than Action<T> or Func<T>, like EventHandler, we
+            // assume that the called method explicitly requires the more specific concrete delegate type.
+            if (model.GetTypeInfo(objectCreation.Expression) is { Type: { } from, ConvertedType: { } convertedTo }
+                && convertedTo.Is(KnownType.System_Delegate)
+                && (model.SyntaxTree.Options is CSharpParseOptions { LanguageVersion: < LanguageVersionEx.CSharp10 }
+                    || !(from.IsAny(KnownType.SystemFuncVariants) || from.IsAny(KnownType.SystemActionVariants))))
             {
                 return false;
             }
 
-            var newArgumentList = SyntaxFactory.ArgumentList(
-                SyntaxFactory.SeparatedList(invocation.ArgumentList.Arguments
-                    .Select(a => a == argument
-                        ? SyntaxFactory.Argument(objectCreation.ArgumentList.Arguments.First().Expression)
-                        : a)));
-            var newInvocation = invocation.WithArgumentList(newArgumentList);
-            newInvocation = ChangeSyntaxElement(invocation, newInvocation, semanticModel, out var newSemanticModel);
-
-            return newSemanticModel.GetSymbolInfo(newInvocation).Symbol is IMethodSymbol newMethodSymbol
-                   && methodSymbol.ToDisplayString() == newMethodSymbol.ToDisplayString();
+            var methodSymbol = model.GetSymbolInfo(invocation).Symbol;
+            if (methodSymbol is null)
+            {
+                return false;
+            }
+            var newArgument = argument.WithExpression(objectCreation.ArgumentList.Arguments.First().Expression);
+            var newInvocation = invocation.WithArgumentList(invocation.ArgumentList.ReplaceNode(argument, newArgument));
+            var overloadResolution = model.GetSpeculativeSymbolInfo(invocation.SpanStart, newInvocation, SpeculativeBindingOption.BindAsExpression);
+            // The speculative binding is sometimes unable to do proper overload resolution and returns candidate overloads.
+            // This is good enough for us as long as the original method is part of that list. Note: Any attempts with ChangeSyntaxElement and
+            // TryGetSpeculativeSemanticModel failed to produce better results.
+            return overloadResolution.AllSymbols().Any(x => x.Equals(methodSymbol));
         }
 
         private static void ReportIssueOnRedundantObjectCreation(SonarSyntaxNodeReportingContext context, SyntaxNode node, string message, RedundancyType redundancyType)
@@ -421,30 +426,6 @@ namespace SonarAnalyzer.CSharp.Rules
                 ? objectCreation.CreateLocation(objectCreation.Type)
                 : node.GetLocation();
             context.ReportIssue(Rule, location, ImmutableDictionary<string, string>.Empty.Add(DiagnosticTypeKey, redundancyType.ToString()), message);
-        }
-
-        private static T ChangeSyntaxElement<T>(T originalNode, T newNode, SemanticModel originalSemanticModel,
-            out SemanticModel newSemanticModel)
-            where T : SyntaxNode
-        {
-            var annotation = new SyntaxAnnotation();
-            var annotatedNode = newNode.WithAdditionalAnnotations(annotation);
-
-            var newSyntaxRoot = originalNode.SyntaxTree.GetRoot().ReplaceNode(
-                originalNode,
-                annotatedNode);
-
-            var newTree = newSyntaxRoot.SyntaxTree.WithRootAndOptions(
-                newSyntaxRoot,
-                originalNode.SyntaxTree.Options);
-
-            var newCompilation = originalSemanticModel.Compilation.ReplaceSyntaxTree(
-                originalNode.SyntaxTree,
-                newTree);
-
-            newSemanticModel = newCompilation.GetSemanticModel(newTree);
-
-            return (T)newTree.GetRoot().GetAnnotatedNodes(annotation).First();
         }
     }
 }

@@ -42,6 +42,7 @@ public class RedundantDeclarationTest
     public void RedundantDeclaration_CSharp9() =>
         builder.AddPaths("RedundantDeclaration.CSharp9.cs")
             .WithTopLevelStatements()
+            .WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp9)
             .Verify();
 
     [TestMethod]
@@ -49,7 +50,7 @@ public class RedundantDeclarationTest
         codeFixBuilder.AddPaths("RedundantDeclaration.CSharp9.cs")
             .WithCodeFixedPaths("RedundantDeclaration.CSharp9.Fixed.cs")
             .WithCodeFixTitle(RedundantDeclarationCodeFix.TitleRedundantParameterName)
-            .WithOptions(LanguageOptions.FromCSharp9)
+            .WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp9)
             .VerifyCodeFix();
 
     [TestMethod]

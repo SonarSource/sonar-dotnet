@@ -518,6 +518,51 @@ public static class SyntaxNodeExtensionsCSharp
     public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
         nodes.Any(x => x.RawKind == (int)kind);
 
+    /// <summary>
+    /// Replaces the syntax element <paramref name="originalNode"/> with <paramref name="newNode"/> and returns a speculative semantic model.
+    /// This model can then be used to analyze the new syntax element within the context of the new tree. Use the <paramref name="newModel"/>
+    /// and the returned <typeparamref name="T"/> for semantic queries.
+    /// </summary>
+    /// <typeparam name="T">The node type to replace.</typeparam>
+    /// <param name="originalNode">The node of the tree associated with the <paramref name="originalModel"/>.</param>
+    /// <param name="newNode">The replacement, constructed via <see cref="SyntaxFactory"/> or similar methods.</param>
+    /// <param name="originalModel">The <see cref="SemanticModel"/> of the <paramref name="originalNode"/>.</param>
+    /// <param name="newModel">The speculative semantic model of the tree with the replacement.</param>
+    /// <returns>The <paramref name="newNode"/> inside the tree with the replacement. Use this node along with <paramref name="newModel"/> to
+    /// query for semantic information inside the replacement node.</returns>
+    public static T ChangeSyntaxElement<T>(this T originalNode, T newNode, SemanticModel originalModel, out SemanticModel newModel)
+        where T : SyntaxNode
+    {
+        newModel = null;
+        if (originalNode.AncestorsAndSelf().FirstOrDefault(x => x is BaseMethodDeclarationSyntax
+            or AccessorDeclarationSyntax
+            or EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: FieldDeclarationSyntax } } }
+            or EqualsValueClauseSyntax { Parent: PropertyDeclarationSyntax }
+            or EqualsValueClauseSyntax { Parent: ParameterSyntax }
+            or ArrowExpressionClauseSyntax
+            or ConstructorInitializerSyntax
+            or AttributeSyntax) is { } enclosingNode)
+        {
+            var annotation = new SyntaxAnnotation();
+            var annotated = newNode.WithAdditionalAnnotations(annotation);
+            var replaced = enclosingNode.ReplaceNode(originalNode, annotated);
+            if (replaced switch
+            {
+                BaseMethodDeclarationSyntax baseMethod => originalModel.TryGetSpeculativeSemanticModelForMethodBody(originalNode.SpanStart, baseMethod, out newModel),
+                AccessorDeclarationSyntax accessor => originalModel.TryGetSpeculativeSemanticModelForMethodBody(originalNode.SpanStart, accessor, out newModel),
+                EqualsValueClauseSyntax field => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, field, out newModel),
+                ArrowExpressionClauseSyntax arrow => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, arrow, out newModel),
+                ConstructorInitializerSyntax initializer => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, initializer, out newModel),
+                AttributeSyntax attribute => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, attribute, out newModel),
+                _ => throw new NotSupportedException("Unreachable case. Make sure to handle all node kinds from the ancestors if."),
+            })
+            {
+                return replaced.GetAnnotatedNodes(annotation).FirstOrDefault() as T;
+            }
+        }
+        return null;
+    }
+
     private readonly record struct PathPosition(int Index, int TupleLength);
 
     private sealed class ControlFlowGraphCache : ControlFlowGraphCacheBase
