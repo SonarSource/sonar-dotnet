@@ -34,15 +34,19 @@ public sealed class IfCollapsible : IfCollapsibleBase
                     return;
                 }
 
-                var parentIfStatement = GetParentIfStatement(ifStatement);
-                if (parentIfStatement is { Else: null })
+                var parentIfStatement = ParentIfStatement(ifStatement);
+                if (parentIfStatement is { Else: null }
+                    && !ContainsDynamicReference(ifStatement, c.Model))
                 {
                     c.ReportIssue(Rule, ifStatement.IfKeyword, [parentIfStatement.IfKeyword.ToSecondaryLocation(SecondaryMessage)]);
                 }
             },
             SyntaxKind.IfStatement);
 
-    private static IfStatementSyntax GetParentIfStatement(IfStatementSyntax ifStatement)
+    private static bool ContainsDynamicReference(IfStatementSyntax ifStatement, SemanticModel model) =>
+        ifStatement.Condition.DescendantNodes().Any(x => x is ExpressionSyntax && x.IsDynamic(model));
+
+    private static IfStatementSyntax ParentIfStatement(IfStatementSyntax ifStatement)
     {
         var parent = ifStatement.Parent;
 

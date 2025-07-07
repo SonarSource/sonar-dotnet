@@ -14,21 +14,16 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool ShouldRaise(SemanticModel semanticModel, SyntaxNode left, SyntaxNode right) =>
-            IsDynamic(left, semanticModel) && !IsConvertibleToInt(right, semanticModel);
+    protected override bool ShouldRaise(SemanticModel model, SyntaxNode left, SyntaxNode right) =>
+        left.IsDynamic(model) && !IsConvertibleToInt(right, model);
 
-        protected override bool CanBeConvertedTo(SyntaxNode expression, ITypeSymbol type, SemanticModel semanticModel) =>
-            semanticModel.ClassifyConversion(expression as ExpressionSyntax, type) is { Exists: true } conversion
-            && (conversion.IsIdentity || conversion.IsImplicit);
-
-        private static bool IsDynamic(SyntaxNode expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type is { TypeKind: TypeKind.Dynamic };
-    }
+    protected override bool CanBeConvertedTo(SyntaxNode expression, ITypeSymbol type, SemanticModel model) =>
+        model.ClassifyConversion(expression as ExpressionSyntax, type) is { Exists: true } and ({ IsIdentity: true } or { IsImplicit: true });
 }

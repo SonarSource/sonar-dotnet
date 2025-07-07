@@ -73,14 +73,26 @@ namespace Tests.TestCases
         public DateTime? ThisWorks()
         {
             dynamic anything = "2024-05-13";
+            object anythingObj = "2024-05-13";
             string notDynamic = "2024-05-13";
 
-            if (anything is string) // Secondary
-                if (DateTime.TryParseExact(anything, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt)) // Noncompliant FP
+            if (anything is string)
+                if (DateTime.TryParseExact(anything, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt)) // Compliant - Contains dynamic identifier
                     return dt;
 
-            if (notDynamic != null) // Secondary
-                if (notDynamic == "something" && anything is string) // Noncompliant FP
+            if (anythingObj is string) // Secondary
+                if (DateTime.TryParseExact((string)anythingObj, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt1)) // Noncompliant
+                    return dt1;
+
+            if (anythingObj is string && DateTime.TryParseExact((string)anythingObj, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt2))
+                    return dt2;
+
+            if (notDynamic != null)
+                if (notDynamic == "something" && anything is string) // Compliant - Contains dynamic identifier
+                    return null;
+
+            if (notDynamic != null)
+                if (notDynamic == (anything is string ? notDynamic : string.Empty) && notDynamic is string) // Compliant - Contains dynamic identifier
                     return null;
 
             if (notDynamic != null) // Secondary

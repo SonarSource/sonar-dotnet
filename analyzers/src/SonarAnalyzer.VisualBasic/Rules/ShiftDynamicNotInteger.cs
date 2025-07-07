@@ -14,22 +14,21 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ShiftDynamicNotInteger : ShiftDynamicNotIntegerBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override bool ShouldRaise(SemanticModel semanticModel, SyntaxNode left, SyntaxNode right) =>
-            IsObject(left, semanticModel) || !IsConvertibleToInt(right, semanticModel);
+    protected override bool ShouldRaise(SemanticModel model, SyntaxNode left, SyntaxNode right) =>
+        IsObject(left, model) || !IsConvertibleToInt(right, model);
 
-        protected override bool CanBeConvertedTo(SyntaxNode expression, ITypeSymbol type, SemanticModel semanticModel) =>
-            expression.IsKind(SyntaxKind.NothingLiteralExpression) // x >> Nothing will not throw, so ignore
-            || semanticModel.GetTypeInfo(expression).Type.IsAny(KnownType.IntegralNumbers);
+    protected override bool CanBeConvertedTo(SyntaxNode expression, ITypeSymbol type, SemanticModel model) =>
+        expression.IsKind(SyntaxKind.NothingLiteralExpression) // x >> Nothing will not throw, so ignore
+        || model.GetTypeInfo(expression).Type.IsAny(KnownType.IntegralNumbers);
 
-        private static bool IsObject(SyntaxNode expression, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(expression).Type is { } type
-            && type.Is(KnownType.System_Object);
-    }
+    private static bool IsObject(SyntaxNode expression, SemanticModel model) =>
+        model.GetTypeInfo(expression).Type is { } type
+        && type.Is(KnownType.System_Object);
 }

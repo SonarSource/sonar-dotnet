@@ -286,14 +286,11 @@ namespace SonarAnalyzer.CSharp.Rules
                 || IsAssignmentNotDelegate(objectCreation.Expression, context.Model)
                 || IsReturnValueNotDelegate(objectCreation.Expression, context.Model)
                 || IsInArgumentAndCanBeChanged(objectCreation, context.Model,
-                    invocation => invocation.ArgumentList.Arguments.Any(a => IsDynamic(a, context.Model))))
+                    invocation => invocation.ArgumentList.Arguments.Any(a => a.Expression.IsDynamic(context.Model))))
             {
                 ReportIssueOnRedundantObjectCreation(context, objectCreation.Expression, "explicit delegate creation", RedundancyType.ExplicitDelegate);
             }
         }
-
-        private static bool IsDynamic(ArgumentSyntax argument, SemanticModel semanticModel) =>
-            semanticModel.GetTypeInfo(argument.Expression).Type is IDynamicTypeSymbol;
 
         private static bool IsInDeclarationNotVarNotDelegate(SyntaxNode objectCreation, SemanticModel semanticModel)
         {

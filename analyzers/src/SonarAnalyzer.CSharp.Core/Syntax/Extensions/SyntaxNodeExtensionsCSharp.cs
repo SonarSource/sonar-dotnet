@@ -458,6 +458,9 @@ public static class SyntaxNodeExtensionsCSharp
             _ => false,
         };
 
+    public static bool IsDynamic(this SyntaxNode node, SemanticModel model) =>
+        model.GetTypeInfo(node) is { Type.Kind: SymbolKind.DynamicType };
+
     public static SyntaxNode EnclosingScope(this SyntaxNode node) =>
         node.AncestorsAndSelf().FirstOrDefault(x => x.IsAnyKind(EnclosingScopeSyntaxKinds));
 
