@@ -1,6 +1,36 @@
 <h2>Why is this an issue?</h2>
 <p>Using explicit loops for filtering, selecting, or aggregating elements can make code more verbose and harder to read. LINQ expressions provide a
 more concise and expressive way to perform these operations, improving code clarity and maintainability.</p>
+<h3>Performance Considerations</h3>
+<p>If the affected code is part of a performance-critical hot path and that the fix would negatively impact performance, you can self-declare the
+<code>PerformanceSensitiveAttribute</code> in your codebase, or use the one provided by <a
+href="https://www.nuget.org/packages/Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers">Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers</a>:</p>
+<pre>
+[AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+public sealed class PerformanceSensitiveAttribute() : Attribute;
+
+[PerformanceSensitiveAttribute]
+List&lt;string&gt; Method(IEnumerable&lt;string&gt; collection, Predicate&lt;string&gt; condition)
+{
+  var result = new List&lt;string&gt;();
+  foreach (var element in collection)  // Without the attribute, this would raise an issue
+  {
+    if (condition(element))
+    {
+      result.Add(element);
+    }
+  }
+  return result;
+}
+</pre>
+<p>The rule will respect the <a
+href="https://github.com/dotnet/roslyn-analyzers/blob/b924542a1b526322929725a1aaa9586c21b1b231/nuget/PerformanceSensitiveAnalyzers/PerformanceSensitiveAttribute.cs#L68-L72"><code>AllowGenericEnumeration</code></a>
+property:</p>
+<pre>
+[PerformanceSensitive("Enumeration", AllowGenericEnumeration = true)]
+List&lt;string&gt; Method(IEnumerable&lt;string&gt; collection, Predicate&lt;string&gt; condition) { }
+</pre>
+<p>In this case, the rule will not be disabled even if the method is marked with the <code>PerformanceSensitiveAttribute</code> attribute.</p>
 <h2>How to fix it</h2>
 <p>Replace explicit loops and conditional blocks with equivalent LINQ expressions.</p>
 <p>Use the <a href="https://www.nuget.org/packages/System.Linq.Async">System.Linq.Async</a> package to enable LINQ operations on <a
@@ -37,17 +67,24 @@ List&lt;string&gt; Method(IEnumerable&lt;MyDto&gt; collection)
 }
 </pre>
 <pre data-diff-id="3" data-diff-type="noncompliant">
-async Task&lt;List&lt;string&gt;&gt; Method(IAsyncEnumerable&lt;string&gt; collection)
+public void Method(List&lt;string&gt; list)
 {
-  var result = new List&lt;string&gt;();
-  await foreach (var element in collection) // Noncompliant
+  foreach (var element in list)
   {
-    if (element != null)
+    var someValue = element.Length;
+  }
+}
+</pre>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+async void Method(IAsyncEnumerable&lt;int&gt; collection)
+{
+  await foreach (var element in collection)
+  {
+    if (element is 42)
     {
-      result.Add(element);
+      Console.WriteLine("The meaning of Life.");
     }
   }
-  return result;
 }
 </pre>
 <h4>Compliant solution</h4>
@@ -60,8 +97,22 @@ List&lt;string&gt; Method(IEnumerable&lt;MyDto&gt; collection) =&gt;
   collection.Select(x =&gt; x.Property).Where(y =&gt; y != null).ToList();
 </pre>
 <pre data-diff-id="3" data-diff-type="compliant">
-List&lt;string&gt; Method(IAsyncEnumerable&lt;string&gt; collection) =&gt;
-  collection.Where(x =&gt; x != null).ToList();
+void Method(List&lt;int&gt; list)
+{
+  foreach (var length in list.Select(x =&gt; x.Length))
+  {
+    var someValue = length;
+  }
+}
+</pre>
+<pre data-diff-id="4" data-diff-type="compliant">
+async void Method(IAsyncEnumerable&lt;int&gt; collection)
+{
+  await foreach (var element in collection.Where(x =&gt; x is 42)))
+  {
+    Console.WriteLine("The meaning of Life.");
+  }
+}
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
@@ -73,5 +124,8 @@ List&lt;string&gt; Method(IAsyncEnumerable&lt;string&gt; collection) =&gt;
   href="https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/10.0/asyncenumerable">System.Linq.AsyncEnumerable in .NET 10</a>
   </li>
   <li> NuGet - <a href="https://www.nuget.org/packages/System.Linq.Async">System.Linq.Async</a> </li>
+  <li> NuGet - <a
+  href="https://www.nuget.org/packages/Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers">Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers</a>
+  </li>
 </ul>
 
