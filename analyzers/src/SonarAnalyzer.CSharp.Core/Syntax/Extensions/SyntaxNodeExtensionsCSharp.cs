@@ -25,6 +25,15 @@ public static class SyntaxNodeExtensionsCSharp
 {
     private static readonly ControlFlowGraphCache CfgCache = new();
 
+    private static readonly HashSet<SyntaxKind> PerformanceSensitiveSyntaxes =
+    [
+        SyntaxKind.MethodDeclaration,
+        SyntaxKind.ConstructorDeclaration,
+        SyntaxKind.ParenthesizedLambdaExpression,
+        SyntaxKind.PropertyDeclaration,
+        SyntaxKindEx.LocalFunctionStatement
+    ];
+
     private static readonly HashSet<SyntaxKind> EnclosingScopeSyntaxKinds =
         [
             SyntaxKind.AddAccessorDeclaration,
@@ -520,6 +529,13 @@ public static class SyntaxNodeExtensionsCSharp
 
     public static bool AnyOfKind(this IEnumerable<SyntaxNode> nodes, SyntaxKind kind) =>
         nodes.Any(x => x.RawKind == (int)kind);
+
+    public static AttributeData PerformanceSensitiveAttribute(this SyntaxNode node, SemanticModel model) =>
+        node?
+            .AncestorsAndSelf()
+            .Where(x => x.IsAnyKind(PerformanceSensitiveSyntaxes) || x is VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: FieldDeclarationSyntax } })
+            .Select(x => (model.GetSymbolInfo(x).Symbol ?? model.GetDeclaredSymbol(x))?.GetAttributes().FirstOrDefault(y => y.HasName(nameof(PerformanceSensitiveAttribute))))
+            .FirstOrDefault(x => x is not null);
 
     /// <summary>
     /// Replaces the syntax element <paramref name="originalNode"/> with <paramref name="newNode"/> and returns a speculative semantic model.

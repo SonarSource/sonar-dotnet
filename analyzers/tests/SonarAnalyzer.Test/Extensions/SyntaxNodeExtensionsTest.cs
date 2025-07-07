@@ -1354,6 +1354,130 @@ End Class";
         secondaryLocation.Message.Should().Be(string.Format(format, messageArgs));
     }
 
+    [DataTestMethod]
+    [DataRow("public void M() { _ = $$42$$; }")]
+    [DataRow("public void M() { int Local() => $$42$$; }")]
+    [DataRow("public void M() { Func<int> _ = () => $$42$$; }")]
+    [DataRow("public string P { get { $$return P$$; } }")]
+    [DataRow("public C() { _ = $$42$$; }")]
+    [DataRow("private readonly int f = $$42$$;")]
+    public void PerformanceSensitiveAttribute(string node)
+    {
+        var code = $$"""
+            using System;
+
+            [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+            public sealed class PerformanceSensitiveAttribute(): Attribute;
+
+            public class C
+            {
+                [PerformanceSensitive]
+                {{node}}
+            }
+            """;
+        var nodeAndModel = TestCompiler.NodeBetweenMarkersCS(code);
+        nodeAndModel.Node.PerformanceSensitiveAttribute(nodeAndModel.Model).Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void PerformanceSensitiveAttribute_NullNode() =>
+        SyntaxNodeExtensionsCSharp.PerformanceSensitiveAttribute(null, null).Should().BeNull();
+
+    [DataTestMethod]
+    [DataRow("Func<int> f = [PerformanceSensitive] () => $$42$$;")]
+    [DataRow("[PerformanceSensitive] int Local() => $$42$$;")]
+    [DataRow("LM([PerformanceSensitive] () => $$42$$); int LM(Func<int> f) => f();")]
+    public void PerformanceSensitiveAttribute_AnonymousAndLocalMethods(string node)
+    {
+        var code = $$"""
+            using System;
+
+            [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+            public sealed class PerformanceSensitiveAttribute(): Attribute;
+
+            public class C
+            {
+                public void M()
+                {
+                    {{node}}
+                }
+            }
+            """;
+        var nodeAndModel = TestCompiler.NodeBetweenMarkersCS(code);
+        nodeAndModel.Node.PerformanceSensitiveAttribute(nodeAndModel.Model).Should().NotBeNull();
+    }
+
+    [DataTestMethod]
+    [DataRow("class Inner { public void M() { _ = $$42$$; } }")]
+    [DataRow("interface Inner { void $$M$$(); }")]
+    [DataRow("struct Inner { public void M() { _ = $$42$$; } }")]
+    [DataRow("enum Inner { Value = $$1$$ }")]
+    [DataRow("public event System.Action E = $$null$$;")]
+    [DataRow("public delegate void MyDelegate(int $$param$$);")]
+    public void PerformanceSensitiveAttribute_InvalidAttributeTarget(string node)
+    {
+        var code = $$"""
+            [System.AttributeUsage(System.AttributeTargets.All, AllowMultiple = true, Inherited = false)]
+            public sealed class PerformanceSensitiveAttribute(): System.Attribute;
+
+            public class C
+            {
+                [PerformanceSensitive]
+                {{node}}
+            }
+            """;
+        var nodeAndModel = TestCompiler.NodeBetweenMarkersCS(code);
+        nodeAndModel.Node.PerformanceSensitiveAttribute(nodeAndModel.Model).Should().BeNull();
+    }
+
+    [DataTestMethod]
+    [DataRow("Func<int, int> f = [PerformanceSensitive] x => $$x$$;")] // error CS8916: Attributes on lambda expressions require a parenthesized parameter list.
+    [DataRow("Func<int, int> f = [PerformanceSensitive] delegate(int x) { return $$x$$; };")]
+    public void PerformanceSensitiveAttribute_DoNotCompile(string node)
+    {
+        var code = $$"""
+            using System;
+
+            [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
+            public sealed class PerformanceSensitiveAttribute(): Attribute;
+
+            public class C
+            {
+                public void M()
+                {
+                    {{node}}
+                }
+            }
+            """;
+        Action action = () => TestCompiler.NodeBetweenMarkersCS(code);
+        action.Should().Throw<InvalidOperationException>().WithMessage("Test setup error: test code snippet did not compile. See output window for details.");
+    }
+
+    [DataTestMethod]
+    [DataRow("public void M() { _ = $$42$$; }")]
+    [DataRow("[Some] public void M() { Func<int> f = () => $$42$$; }")]
+    [DataRow("public void M() { int Local() => $$42$$; }")]
+    [DataRow("public void M() { LM([Some] () => $$42$$); int LM(Func<int> f) => f(); }")]
+    [DataRow("public string P { get { return $$P$$; } }")]
+    [DataRow("public C() { _ = $$42$$; }")]
+    [DataRow("private readonly int f = $$42$$;")]
+    public void PerformanceSensitiveAttribute_NoPerformanceSensitiveAttribute(string node)
+    {
+        var code = $$"""
+            using System;
+
+            [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+            public sealed class SomeAttribute(): Attribute;
+
+            public class C
+            {
+                {{node}}
+            }
+            """;
+        var nodeAndModel = TestCompiler.NodeBetweenMarkersCS(code);
+        nodeAndModel.Node.PerformanceSensitiveAttribute(nodeAndModel.Model).Should().BeNull();
+    }
+
     private static SyntaxToken GetFirstTokenOfKind(SyntaxTree tree, SyntaxKind kind) =>
         tree.GetRoot().DescendantTokens().First(x => x.IsKind(kind));
 

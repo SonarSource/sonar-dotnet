@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Roslyn.Utilities;
+
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -32,7 +34,8 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
-                if (!IsOrImplementsIEnumerable(c.Model, forEachStatementSyntax))
+                if (!IsOrImplementsIEnumerable(c.Model, forEachStatementSyntax)
+                    || IsInPerformanceSensitiveContext(forEachStatementSyntax, c.Model))
                 {
                     return;
                 }
@@ -47,6 +50,11 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
                 }
             },
             SyntaxKind.ForEachStatement);
+
+    private static bool IsInPerformanceSensitiveContext(ForEachStatementSyntax node, SemanticModel model) =>
+        node.PerformanceSensitiveAttribute(model) is { } attribute
+        // If AllowGenericEnumeration property is configured to true, in the context of the rule, we are not in a performance sensitive context
+        && (!attribute.TryGetAttributeValue<bool>(nameof(PerformanceSensitiveAttribute.AllowGenericEnumeration), out var allow) || allow);
 
     private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement, SonarSyntaxNodeReportingContext context, out SecondaryLocation ifConditionLocation)
     {

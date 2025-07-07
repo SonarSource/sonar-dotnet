@@ -4,6 +4,12 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
+[AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+public sealed class PerformanceSensitiveAttribute : Attribute
+{
+    public bool AllowGenericEnumeration { get; set; }
+}
+
 namespace Tests.Diagnostics
 {
     public class S3267
@@ -477,6 +483,107 @@ namespace Tests.Diagnostics
                     }
                 }
             }
+        }
+    }
+
+    class PerformanceSensitive
+    {
+        private static IEnumerable<T> GetEnumerable<T>() { return null; }
+        private static bool Filter<T>(T v) { return true; }
+
+        [PerformanceSensitive]
+        public PerformanceSensitive()
+        {
+            int value = 0;
+            foreach (var i in GetEnumerable<int>())
+            {
+                if (Filter(i))
+                {
+                    value = i;
+                    break;
+                }
+            }
+        }
+
+
+        [PerformanceSensitive]
+        public int Property
+        {
+            get
+            {
+                foreach (var i in GetEnumerable<int>())
+                {
+                    if (Filter(i))
+                    {
+                        return i;
+                    }
+                }
+                return 0;
+            }
+            set
+            {
+                value = 0;
+                foreach (var i in GetEnumerable<int>())
+                {
+                    if (Filter(i))
+                    {
+                        value = i;
+                        break;
+                    }
+                }
+            }
+        }
+
+        [PerformanceSensitive]
+        public static int Method()
+        {
+            foreach (var i in GetEnumerable<int>())
+            {
+                if (Filter(i))
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        [PerformanceSensitive(AllowGenericEnumeration = true)]
+        public static int AllowGenericEnumerationTrue()
+        {
+            foreach (var i in GetEnumerable<int>())
+            {
+                if (Filter(i))
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        [PerformanceSensitive(AllowGenericEnumeration = false)]
+        public static int AllowGenericEnumerationFalse()
+        {
+            foreach (var i in GetEnumerable<int>()) // Noncompliant
+            {
+                if (Filter(i))                      // Secondary
+                {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        [Obsolete("Not PerformanceSensitive")]
+        public static int AnotherAttribute()
+        {
+            foreach (var i in GetEnumerable<int>()) // Noncompliant
+            {
+                if (Filter(i))                      // Secondary
+                {
+                    return i;
+                }
+            }
+            return 0;
         }
     }
 
