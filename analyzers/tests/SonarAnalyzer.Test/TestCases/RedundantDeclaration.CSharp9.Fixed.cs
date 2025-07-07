@@ -40,14 +40,54 @@ public class RedundantDeclaration
         object o = new() { }; // Fixed
 
         _ = new Point[] // Fixed
-            {
-                new(1, 2)
-            };
+        {
+            new Point(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new Point[] // Fixed
+        {
+            new(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new Point[] // Compliant
+        {
+            new(1, 2),
+            new ChildPoint(1, 2),
+        };
+
+        // https://sonarsource.atlassian.net/browse/NET-2122
+        _ = new[] // FN
+        {
+            new Point(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new Point[] // Fixed
+        {
+            new Point(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new [] // Error [CS0826]
+        {
+            new(1, 2),
+            new(1, 2),
+        };
+
+        Point[] typed = new[] // Error [CS0826]
+        {
+            new(1, 2),
+            new(1, 2),
+        };
     }
 
     private event EventHandler MyEvent;
 
     public record Point(int x, int y);
+
+    public record ChildPoint(int x, int y) : Point(x ,y);
 }
 
 abstract class NaturalDelegateTypes

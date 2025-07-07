@@ -50,15 +50,55 @@ public class RedundantDeclaration
         object o = new() { }; // Noncompliant {{Remove the initializer; it is redundant.}}
 //                       ^^^
 
-        _ = new Point[] // Noncompliant - FP
-            {
-                new(1, 2)
-            };
+        _ = new Point[] // Noncompliant
+        {
+            new Point(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new Point[] // Noncompliant
+        {
+            new(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new Point[] // Compliant
+        {
+            new(1, 2),
+            new ChildPoint(1, 2),
+        };
+
+        // https://sonarsource.atlassian.net/browse/NET-2122
+        _ = new[] // FN
+        {
+            new Point(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new Point[] // Noncompliant
+        {
+            new Point(1, 2),
+            new Point(1, 2),
+        };
+
+        _ = new [] // Error [CS0826]
+        {
+            new(1, 2),
+            new(1, 2),
+        };
+
+        Point[] typed = new[] // Error [CS0826]
+        {
+            new(1, 2),
+            new(1, 2),
+        };
     }
 
     private event EventHandler MyEvent;
 
     public record Point(int x, int y);
+
+    public record ChildPoint(int x, int y) : Point(x ,y);
 }
 
 abstract class NaturalDelegateTypes
