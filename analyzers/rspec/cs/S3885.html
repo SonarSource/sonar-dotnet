@@ -3,13 +3,74 @@
 a dll other than the one you expected.</p>
 <p>This rule raises an issue when <code>Assembly.LoadFrom</code>, <code>Assembly.LoadFile</code>, or <code>Assembly.LoadWithPartialName</code> is
 called.</p>
-<h3>Noncompliant code example</h3>
+<h3>Exceptions</h3>
+<p>The rule does not raise an issue when the methods are used within an <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.assemblyresolve"><code>AssemblyResolve</code> event handler</a>. In this context,
+using <code>Assembly.Load</code> can cause a <code>StackOverflowException</code> due to recursive event firing, making <code>Assembly.LoadFrom</code>
+or <code>Assembly.LoadFile</code> the appropriate choices.</p>
 <pre>
-static void Main(string[] args)
+static void Main()
 {
-    Assembly.LoadFrom(...); // Noncompliant
-    Assembly.LoadFile(...); // Noncompliant
-    Assembly.LoadWithPartialName(...); // Noncompliant + deprecated
+    AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+}
+
+static Assembly OnAssemblyResolve(object sender, ResolveEventArgs args)
+{
+    return Assembly.LoadFrom("MyAssembly.dll"); // Compliant: within AssemblyResolve handler
 }
 </pre>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+static void Main(string[] args)
+{
+    Assembly.LoadFrom("MyAssembly.dll"); // Noncompliant
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+static void Main(string[] args)
+{
+    Assembly.LoadFile(@"C:\MyPath\MyAssembly.dll"); // Noncompliant
+}
+</pre>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+static void Main(string[] args)
+{
+    Assembly.LoadWithPartialName("MyAssembly"); // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+static void Main(string[] args)
+{
+    Assembly.Load("MyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"); // Compliant
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+static void Main(string[] args)
+{
+    Assembly.Load("MyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"); // Compliant
+}
+</pre>
+<pre data-diff-id="3" data-diff-type="compliant">
+static void Main(string[] args)
+{
+    Assembly.Load("MyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"); // Compliant
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.load">Assembly.Load Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.loadfrom">Assembly.LoadFrom Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.loadfile">Assembly.LoadFile Method</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.appdomain.assemblyresolve">AppDomain.AssemblyResolve Event</a>
+  </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.reflection.assembly.loadwithpartialname">Assembly.LoadWithPartialName Method</a> </li>
+  <li> Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/standard/assembly/resolve-loads#what-the-event-handler-should-not-do">Resolve assembly loads - What
+  the event handler should not do</a> </li>
+</ul>
 
