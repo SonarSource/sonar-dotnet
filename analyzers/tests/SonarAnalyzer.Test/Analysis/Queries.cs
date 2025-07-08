@@ -6,6 +6,14 @@ namespace SonarAnalyzer.UnitTest.Analysis;
 [TestClass]
 public class Queries
 {
+    private static readonly HashSet<string> CSharpOnly =
+    [
+        "S1116",
+        "S1199",
+        "S1264",
+        "S1848",
+    ];
+
     [TestMethod]
     public void Find_rules_with_limited_code_size_to_implement_to_VB()
     {
@@ -13,7 +21,10 @@ public class Queries
             .GetExportedTypes()
             .Where(x => !x.IsAbstract && x.GetCustomAttributes<DiagnosticAnalyzerAttribute>().Any())
             .Select(AnalyzerInfo.FromType)
-            .Where(x => x.Size.HasValue && x.Base == typeof(SonarDiagnosticAnalyzer))
+            .Where(x =>
+                x.Size.HasValue
+                && x.Base == typeof(SonarDiagnosticAnalyzer)
+                && !x.DiagnosticIds.Any(CSharpOnly.Contains))
             .OrderBy(x => x.Size)
             .ToArray();
 
