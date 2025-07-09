@@ -13,7 +13,7 @@ of computing resources.</p>
   <code>""</code> or <code>string.Empty</code> </li>
 </ul>
 <h2>How to fix it</h2>
-<p>Remove the unnecessary assignment, then test the code to make sure that the right-hand side of a given assignment had no side effects (e.g. a
+<p>Remove the unnecesarry assignment, then test the code to make sure that the right-hand side of a given assignment had no side effects (e.g. a
 method that writes certain data to a file and returns the number of written bytes).</p>
 <p>You can also use <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/discards">discards</a> (rather than a variable)
 to express that result of a method call is ignored on purpose.</p>
