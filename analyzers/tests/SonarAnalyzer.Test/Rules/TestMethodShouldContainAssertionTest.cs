@@ -92,6 +92,16 @@ public class TestMethodShouldContainAssertionTest
     public void TestMethodShouldContainAssertion_Xunit_Legacy() =>
         WithTestReferences(NuGetMetadataReference.XunitFrameworkV1).AddPaths("TestMethodShouldContainAssertion.Xunit.Legacy.cs").Verify();
 
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_XunitV3() =>
+        WithTestReferences(NuGetMetadataReference.XunitFrameworkV3(TestConstants.NuGetLatestVersion))
+            .AddPaths("TestMethodShouldContainAssertion.Xunit.cs")
+            .AddPaths("TestMethodShouldContainAssertion.XunitV3.cs")
+            .AddReferences(NuGetMetadataReference.SystemMemory(TestConstants.NuGetLatestVersion))
+            .AddReferences(MetadataReferenceFacade.NetStandard)
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .Verify();
+
     [DataTestMethod]
     [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver1)]
     [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
