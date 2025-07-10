@@ -34,6 +34,7 @@ public class ProjectTypeCacheTest
             "TechTalk.SpecFlow",
             "xunit",
             "xunit.core",
+            "xunit.v3.core",
             "FluentAssertions",
             "Shouldly",
             "FakeItEasy",
@@ -58,6 +59,7 @@ public class ProjectTypeCacheTest
         IsTest(NuGetMetadataReference.SpecFlow(TestConstants.NuGetLatestVersion)).Should().BeTrue();
         IsTest(NuGetMetadataReference.XunitFrameworkV1).Should().BeTrue();
         IsTest(NuGetMetadataReference.XunitFramework(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.XunitFrameworkV3(TestConstants.NuGetLatestVersion)).Should().BeTrue();
 
         // Assertion
         IsTest(NuGetMetadataReference.FluentAssertions(TestConstants.NuGetLatestVersion)).Should().BeTrue();

@@ -95,13 +95,12 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         NuGetMetadataReference.SystemCollectionsImmutable(TestConstants.NuGetLatestVersion);
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemCollections,
             CoreMetadataReference.SystemCollectionsImmutable,
             CoreMetadataReference.SystemCollectionsNonGeneric,
             CoreMetadataReference.SystemCollectionsConcurrent
-        };
+        ];
 #endif
 
     public static References SystemData =>

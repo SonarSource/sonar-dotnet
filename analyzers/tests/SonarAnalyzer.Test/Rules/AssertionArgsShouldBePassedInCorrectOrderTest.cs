@@ -67,6 +67,17 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
             .Verify();
 
     [TestMethod]
+    public void AssertionArgsShouldBePassedInCorrectOrder_XUnitV3() =>
+        builder
+            .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.Xunit.cs")
+            .AddPaths("AssertionArgsShouldBePassedInCorrectOrder.XunitV3.cs")
+            .AddReferences(NuGetMetadataReference.XunitFrameworkV3())
+            .AddReferences(NuGetMetadataReference.SystemMemory(TestConstants.NuGetLatestVersion))
+            .AddReferences(MetadataReferenceFacade.NetStandard)
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .Verify();
+
+    [TestMethod]
     public void AssertionArgsShouldBePassedInCorrectOrder_XUnit_Static() =>
         builder.WithTopLevelStatements()
                .AddReferences(NuGetMetadataReference.XunitFramework(XUnitVersions.Ver253))

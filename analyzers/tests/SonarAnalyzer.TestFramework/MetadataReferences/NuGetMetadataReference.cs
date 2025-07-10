@@ -184,6 +184,7 @@ public static class NuGetMetadataReference
     public static References SwashbuckleAspNetCoreSwagger(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Swashbuckle.AspNetCore.Swagger", packageVersion);
     public static References TimeZoneConverter(string packageVersion = TestConstants.NuGetLatestVersion) => Create("TimeZoneConverter", packageVersion);
     public static References XunitFramework(string packageVersion) =>
-        Create("xunit.assert", packageVersion)
-        .Concat(Create("xunit.extensibility.core", packageVersion));
+        [.. Create("xunit.assert", packageVersion), .. Create("xunit.extensibility.core", packageVersion)];
+    public static References XunitFrameworkV3(string packageVersion = TestConstants.NuGetLatestVersion) =>
+        [.. Create("xunit.v3.assert", packageVersion), .. Create("xunit.v3.extensibility.core", packageVersion)];
 }

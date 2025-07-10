@@ -22,7 +22,11 @@ public sealed partial class KnownAssembly
 {
     private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
 
-    public static KnownAssembly XUnit_Assert { get; } = new(And(NameIs("xunit.assert").Or(NameIs("xunit").And(VersionLowerThen("2.0"))), PublicKeyTokenIs("8d05b1bb7a6fdb6c")));
+    public static KnownAssembly XUnit_Assert { get; } = new(And(
+        NameIs("xunit.assert")
+            .Or(NameIs("xunit").And(VersionLowerThen("2.0")))
+            .Or(NameIs("xunit.v3.assert")),
+        PublicKeyTokenIs("8d05b1bb7a6fdb6c")));
 
     /// <summary>
     /// Any MSTest framework either referenced via

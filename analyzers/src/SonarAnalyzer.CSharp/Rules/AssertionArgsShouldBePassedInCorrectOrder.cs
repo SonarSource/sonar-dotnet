@@ -23,56 +23,69 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
     private const string MessageFormat = "Make sure these 2 arguments are in the correct order: expected value, actual value.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
-        {
-            if (c.Node is InvocationExpressionSyntax { ArgumentList.Arguments.Count: >= 2 } invocation
-                && GetParameters(invocation.GetName()) is { } knownAssertParameters
-                && c.Model.GetSymbolInfo(invocation).AllSymbols()
-                    .SelectMany(symbol =>
-                        symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
-                            ? knownAssertParameters.Select(knownParameters => FindWrongArguments(c.Model, container, methodSymbol, invocation, knownParameters))
-                            : Enumerable.Empty<WrongArguments?>())
-                    .FirstOrDefault(x => x is not null) is (Expected: var expected, Actual: var actual))
             {
-                c.ReportIssue(Rule, CreateLocation(expected, actual));
-            }
-        },
-        SyntaxKind.InvocationExpression);
+                if (c.Node is InvocationExpressionSyntax { ArgumentList.Arguments.Count: >= 2 } invocation
+                    && Parameters(invocation.GetName()) is { } knownAssertParameters
+                    && c.Model.GetSymbolInfo(invocation).AllSymbols()
+                        .SelectMany(symbol =>
+                            symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
+                                ? knownAssertParameters.Select(knownParameters => FindWrongArguments(c.Model, container, methodSymbol, invocation, knownParameters))
+                                : [])
+                        .FirstOrDefault(x => x is not null) is { Expected: { } wrongExpected, Actual: { } wrongActual })
+                {
+                    c.ReportIssue(Rule, CreateLocation(wrongExpected, wrongActual));
+                }
+            },
+            SyntaxKind.InvocationExpression);
 
-    private static KnownAssertParameters[] GetParameters(string name) =>
+    private static KnownAssertParameters[] Parameters(string name) =>
         name switch
         {
-            "AreEqual" => new KnownAssertParameters[]
-                {
-                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
-                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
-                },
-            "AreNotEqual" => new KnownAssertParameters[]
-                {
-                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
-                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
-                },
-            "AreSame" => new KnownAssertParameters[]
-                {
-                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
-                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
-                },
-            "AreNotSame" => new KnownAssertParameters[]
-                {
-                    new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
-                    new(KnownType.NUnit_Framework_Assert, "expected", "actual")
-                },
-            "Equal" or "NotEqual" or "Same" or "NotSame" => new KnownAssertParameters[]
-                {
-                    new(KnownType.Xunit_Assert, "expected", "actual")
-                },
+            "AreEqual" =>
+            [
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
+                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+            ],
+            "AreNotEqual" =>
+            [
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
+                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+            ],
+            "AreSame" =>
+            [
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
+                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+            ],
+            "AreNotSame" =>
+            [
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
+                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+            ],
+            "Equal" or "NotEqual" or "Same" or "NotSame" or "Equivalent" or "EquivalentWithExclusions" or "StrictEqual" or "NotStrictEqual" =>
+            [
+                new(KnownType.Xunit_Assert, "expected", "actual")
+            ],
+            "Contains" or "DoesNotContain" =>
+            [
+                new(KnownType.Xunit_Assert, "expectedSubstring", "actualString"),
+            ],
+            "EndsWith" =>
+            [
+                new(KnownType.Xunit_Assert, "expectedEndString", "actualString")
+            ],
+            "StartsWith" =>
+            [
+                new(KnownType.Xunit_Assert, "expectedStartString", "actualString")
+            ],
             _ => null
         };
 
-    private static WrongArguments? FindWrongArguments(SemanticModel semanticModel,
+    private static WrongArguments? FindWrongArguments(SemanticModel model,
                                                       INamedTypeSymbol container,
                                                       IMethodSymbol symbol,
                                                       InvocationExpressionSyntax invocation,
@@ -81,10 +94,10 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
         && CSharpFacade.Instance.MethodParameterLookup(invocation, symbol) is var parameterLookup
         && parameterLookup.TryGetSyntax(knownParameters.ExpectedParameterName, out var expectedArguments)
         && expectedArguments.FirstOrDefault() is { } expected
-        && semanticModel.GetConstantValue(expected).HasValue is false
+        && !model.GetConstantValue(expected).HasValue
         && parameterLookup.TryGetSyntax(knownParameters.ActualParameterName, out var actualArguments)
         && actualArguments.FirstOrDefault() is { } actual
-        && semanticModel.GetConstantValue(actual).HasValue
+        && model.GetConstantValue(actual).HasValue
             ? new(expected, actual)
             : null;
 
@@ -94,5 +107,6 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             : argument2.Parent.CreateLocation(argument1.Parent);
 
     private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParameterName, string ActualParameterName);
+
     private readonly record struct WrongArguments(SyntaxNode Expected, SyntaxNode Actual);
 }

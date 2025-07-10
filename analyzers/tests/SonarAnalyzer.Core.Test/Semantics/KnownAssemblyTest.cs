@@ -275,6 +275,10 @@ public class KnownAssemblyTest
         CompilationShouldReference(NuGetMetadataReference.XunitFrameworkV1, XUnit_Assert);
 
     [TestMethod]
+    public void XUnitAssert_3_0() =>
+        CompilationShouldReference(NuGetMetadataReference.XunitFrameworkV3(), XUnit_Assert);
+
+    [TestMethod]
     public void MSTest_V1() =>
         CompilationShouldReference(NuGetMetadataReference.MSTestTestFrameworkV1, MSTest);
 
