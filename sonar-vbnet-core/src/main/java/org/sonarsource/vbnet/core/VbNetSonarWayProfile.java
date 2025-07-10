@@ -16,12 +16,36 @@
  */
 package org.sonarsource.vbnet.core;
 
+import org.sonar.api.rule.RuleKey;
+import org.sonar.plugins.vbnetenterprise.api.ProfileRegistrar;
 import org.sonarsource.dotnet.shared.plugins.AbstractSonarWayProfile;
 import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.RoslynRules;
 
 public class VbNetSonarWayProfile extends AbstractSonarWayProfile {
-  public  VbNetSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
+  private final ProfileRegistrar[] profileRegistrars;
+
+  // The constructors cannot be merged because SonarQube Cloud does not support dependency injection for @Nullable arguments.
+  public VbNetSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules) {
     super(metadata, roslynRules);
+    this.profileRegistrars = null;
+  }
+
+  public VbNetSonarWayProfile(PluginMetadata metadata, RoslynRules roslynRules, ProfileRegistrar[] profileRegistrars) {
+    super(metadata, roslynRules);
+    this.profileRegistrars = profileRegistrars;
+  }
+
+  @Override
+  protected void registerRulesFromRegistrars(NewBuiltInQualityProfile profile) {
+    if (profileRegistrars != null) {
+      for (var profileRegistrar : profileRegistrars) {
+        profileRegistrar.register(rules -> {
+          for (RuleKey ruleKey : rules) {
+            profile.activateRule(ruleKey.repository(), ruleKey.rule());
+          }
+        });
+      }
+    }
   }
 }
