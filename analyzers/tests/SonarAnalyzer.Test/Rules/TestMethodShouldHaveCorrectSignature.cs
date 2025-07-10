@@ -54,6 +54,15 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
+        public void TestMethodShouldHaveCorrectSignature_XunitV3() =>
+            builder.AddPaths("TestMethodShouldHaveCorrectSignature.Xunit.cs")
+                .AddReferences(NuGetMetadataReference.XunitFrameworkV3(TestConstants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.SystemMemory(TestConstants.NuGetLatestVersion))
+                .AddReferences(MetadataReferenceFacade.NetStandard)
+                .AddReferences(MetadataReferenceFacade.SystemCollections)
+                .Verify();
+
+        [TestMethod]
         public void TestMethodShouldHaveCorrectSignature_MSTest_Miscellaneous() =>
             // Additional test cases e.g. partial classes, and methods with multiple faults.
             // We have to specify a test framework for the tests, but it doesn't really matter which
