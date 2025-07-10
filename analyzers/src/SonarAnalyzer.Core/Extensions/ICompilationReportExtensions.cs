@@ -16,6 +16,7 @@
 
 namespace SonarAnalyzer.Core.AnalysisContext;
 
+// Don't change the this parameter to (this IAnalysisContext context) because it would cause boxing
 public static class ICompilationReportExtensions
 {
     public static void ReportIssue<T>(this T context, GeneratedCodeRecognizer generatedCodeRecognizer,

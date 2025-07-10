@@ -15,13 +15,13 @@
  */
 
 using SonarAnalyzer.Core.AnalysisContext;
-using ExtensionsCS = SonarAnalyzer.CSharp.Core.Extensions.SonarAnalysisContextExtensions;
-using ExtensionsVB = SonarAnalyzer.VisualBasic.Core.Extensions.SonarAnalysisContextExtensions;
+using ExtensionsCS = SonarAnalyzer.CSharp.Core.Extensions.ICompilationReportExtensions;
+using ExtensionsVB = SonarAnalyzer.VisualBasic.Core.Extensions.ICompilationReportExtensions;
 
 namespace SonarAnalyzer.Test.Extensions;
 
 [TestClass]
-public class SonarAnalysisContextExtensions
+public class ICompilationReportExtensionsTests
 {
     private static readonly DiagnosticDescriptor DummyMainDescriptor = AnalysisScaffolding.CreateDescriptorMain();
 
@@ -31,9 +31,9 @@ public class SonarAnalysisContextExtensions
     public void ReportIssue_SonarSymbolAnalysisContext_CS(string comment, bool expected)
     {
         var (tree, model) = TestCompiler.CompileCS($$"""
-                {{comment}}
-                public class Sample {}
-                """);
+            {{comment}}
+            public class Sample {}
+            """);
         var wasReported = false;
         var symbolContext = new SymbolAnalysisContext(Substitute.For<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), symbolContext);
@@ -48,10 +48,10 @@ public class SonarAnalysisContextExtensions
     public void ReportIssue_SonarSymbolAnalysisContext_VB(string comment, bool expected)
     {
         var (tree, model) = TestCompiler.CompileVB($"""
-                {comment}
-                Public Class Sample
-                End Class
-                """);
+            {comment}
+            Public Class Sample
+            End Class
+            """);
         var wasReported = false;
         var symbolContext = new SymbolAnalysisContext(Substitute.For<ISymbol>(), model.Compilation, AnalysisScaffolding.CreateOptions(), _ => wasReported = true, _ => true, default);
         var context = new SonarSymbolReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), symbolContext);

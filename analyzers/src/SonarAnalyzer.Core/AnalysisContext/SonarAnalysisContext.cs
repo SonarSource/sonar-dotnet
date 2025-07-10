@@ -124,7 +124,7 @@ public class SonarAnalysisContext
         ShouldExecuteRegisteredAction is null || tree is null || ShouldExecuteRegisteredAction(new[] { diagnostic }, tree);
 
     private void Execute<TSonarContext>(TSonarContext context, Action<TSonarContext> action)
-        where TSonarContext : IAnalysisContext
+        where TSonarContext : IAnalysisContext // Generic specialization: The JIT emmits a specialized version of Execute() for each struct TSonarContext, which means it gets called without boxing.
     {
         // For each action registered on context we need to do some pre-processing before actually calling the rule.
         // We need to ensure the rule does apply to the current scope (main vs test source).

@@ -16,6 +16,9 @@
 
 namespace SonarAnalyzer.Core.AnalysisContext;
 
+// Performance note: this struct is used in the Roslyn analysis context and should be as lightweight as possible. It should not be boxed on the hot-path in the
+// registration (e.g. in SonarCompilationStartAnalysisContext.RegisterNodeAction) which is called for all matching syntax kinds of all syntax trees.
+// It is okay to box during issue reporting because reporting is rare in comparission.
 public readonly record struct SonarSyntaxNodeReportingContext(SonarAnalysisContext AnalysisContext, SyntaxNodeAnalysisContext Context) : ITreeReport, IAnalysisContext
 {
     public SyntaxTree Tree => Context.Node.SyntaxTree;
@@ -76,7 +79,7 @@ public readonly record struct SonarSyntaxNodeReportingContext(SonarAnalysisConte
                             ImmutableDictionary<string, string> properties = null,
                             params string[] messageArgs)
     {
-        var @this = this;
+        var @this = this; // This boxes this struct in the capture below, but that is okay because reporting is rare and not on the hot-path.
         IssueReporter.ReportIssueCore(
             Compilation,
             x => @this.HasMatchingScope(x),

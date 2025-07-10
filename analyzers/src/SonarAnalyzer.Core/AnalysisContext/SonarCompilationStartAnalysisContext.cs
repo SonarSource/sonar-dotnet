@@ -68,10 +68,17 @@ public sealed class SonarCompilationStartAnalysisContext : SonarAnalysisContextB
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8406", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     public void RegisterNodeAction<TSyntaxKind>(GeneratedCodeRecognizer generatedCodeRecognizer, Action<SonarSyntaxNodeReportingContext> action, params TSyntaxKind[] syntaxKinds)
         where TSyntaxKind : struct =>
-        Context.RegisterSyntaxNodeAction(x => Execute(new(AnalysisContext, x), action, x.Node.SyntaxTree, generatedCodeRecognizer), syntaxKinds);
+        Context.RegisterSyntaxNodeAction(
+            x => Execute(
+                    new(AnalysisContext, x), // Critical hot-path: The newed SonarSyntaxNodeReportingContext is a struct and we need to ensure it is not boxed.
+                                             // This is achieved by generic specialization of "Execute" and under test by the SonarSyntaxNodeReportingContextMemoryTest UTs.
+                    action,
+                    x.Node.SyntaxTree,
+                    generatedCodeRecognizer),
+            syntaxKinds);
 
     private void Execute<TSonarContext>(TSonarContext context, Action<TSonarContext> action, SyntaxTree sourceTree, GeneratedCodeRecognizer generatedCodeRecognizer = null)
-        where TSonarContext : IAnalysisContext
+        where TSonarContext : IAnalysisContext // Generic specialization: The JIT emmits a specialized version of Execute() for each struct TSonarContext, which means it gets called without boxing.
     {
         Debug.Assert(context.HasMatchingScope(AnalysisContext.SupportedDiagnostics), "SonarAnalysisContext.Execute does this check. It should never be needed here.");
         if (!TryGetValue(sourceTree, ShouldAnalyzeValueProvider, out var shouldAnalyzeTree))

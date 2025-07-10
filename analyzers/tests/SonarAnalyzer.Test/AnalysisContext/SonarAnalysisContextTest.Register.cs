@@ -45,20 +45,6 @@ public partial class SonarAnalysisContextTest
     }
 
     [DataTestMethod]
-    [DataRow(SnippetFileName, false)]
-    [DataRow(AnotherFileName, true)]
-    public void RegisterNodeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
-    {
-        var context = new DummyAnalysisContext(TestContext, unchangedFileName);
-        var sonarContext = new SonarAnalysisContext(context, DummyMainDescriptor);
-        var sut = new SonarParametrizedAnalysisContext(sonarContext);
-        sut.RegisterNodeAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
-        sonarContext.RegisterCompilationStartAction(c => sut.ExecutePostponedActions(c));
-
-        context.AssertDelegateInvoked(expected);
-    }
-
-    [DataTestMethod]
     [DataRow("snippet1.cs")]
     [DataRow("Other file is unchanged.cs")]
     public void RegisterNodeActionInAllFiles_UnchangedFiles_GeneratedFiles_AlwaysRuns(string unchangedFileName) =>
@@ -80,41 +66,6 @@ public partial class SonarAnalysisContextTest
         sut.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
 
         context.AssertDelegateInvoked(expected);
-    }
-
-    [DataTestMethod]
-    [DataRow(SnippetFileName, false)]
-    [DataRow(AnotherFileName, true)]
-    public void RegisterTreeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
-    {
-        var context = new DummyAnalysisContext(TestContext, unchangedFileName);
-        var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        sut.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
-        sut.ExecutePostponedActions(new(sut, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
-
-        context.AssertDelegateInvoked(expected);
-    }
-
-    [TestMethod]
-    public void RegisterTreeAction_Extension_SonarParametrizedAnalysisContext_CS()
-    {
-        var context = new DummyAnalysisContext(TestContext);
-        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        CS.RegisterTreeAction(self, context.DelegateAction);
-        self.ExecutePostponedActions(new(self, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
-
-        context.AssertDelegateInvoked(true);
-    }
-
-    [TestMethod]
-    public void RegisterTreeAction_Extension_SonarParametrizedAnalysisContext_VB()
-    {
-        var context = new DummyAnalysisContext(TestContext);
-        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        VB.RegisterTreeAction(self, context.DelegateAction);
-        self.ExecutePostponedActions(new(self, MockCompilationStartAnalysisContext(context)));  // Manual invocation, because SonarParametrizedAnalysisContext stores actions separately
-
-        context.AssertDelegateInvoked(true);
     }
 
     [DataTestMethod]
@@ -189,47 +140,12 @@ public partial class SonarAnalysisContextTest
         context.AssertDelegateInvoked(expected);
     }
 
-    [DataTestMethod]
-    [DataRow(SnippetFileName, false)]
-    [DataRow(AnotherFileName, true)]
-    public void RegisterSemanticModelAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
-    {
-        var context = new DummyAnalysisContext(TestContext, unchangedFileName);
-        var sut = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        sut.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, context.DelegateAction);
-        ExecutePostponedActions(sut, context);
-
-        context.AssertDelegateInvoked(expected);
-    }
-
     [TestMethod]
     public void RegisterSemanticModelAction_Extension_SonarAnalysisContext_CS()
     {
         var context = new DummyAnalysisContext(TestContext);
         var self = new SonarAnalysisContext(context, DummyMainDescriptor);
         CS.RegisterSemanticModelAction(self, context.DelegateAction);
-
-        context.AssertDelegateInvoked(true);
-    }
-
-    [TestMethod]
-    public void RegisterSemanticModelAction_Extension_SonarParametrizedAnalysisContext_CS()
-    {
-        var context = new DummyAnalysisContext(TestContext);
-        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        CS.RegisterSemanticModelAction(self, context.DelegateAction);
-        ExecutePostponedActions(self, context);
-
-        context.AssertDelegateInvoked(true);
-    }
-
-    [TestMethod]
-    public void RegisterSemanticModelAction_Extension_SonarParametrizedAnalysisContext_VB()
-    {
-        var context = new DummyAnalysisContext(TestContext);
-        var self = new SonarParametrizedAnalysisContext(new(context, DummyMainDescriptor));
-        VB.RegisterSemanticModelAction(self, context.DelegateAction);
-        ExecutePostponedActions(self, context);
 
         context.AssertDelegateInvoked(true);
     }
@@ -640,15 +556,6 @@ public partial class SonarAnalysisContextTest
         mock.When(x => x.RegisterCodeBlockStartAction(Arg.Any<Action<CodeBlockStartAnalysisContext<SyntaxKind>>>()))
             .Do(x => x.Arg<Action<CodeBlockStartAnalysisContext<SyntaxKind>>>()(context.CreateCodeBlockStartAnalysisContext<SyntaxKind>()));
         return mock;
-    }
-
-    private static void ExecutePostponedActions(SonarParametrizedAnalysisContext self, DummyAnalysisContext dummyAnalysisContext)
-    {
-        var sub = Substitute.For<CompilationStartAnalysisContext>(dummyAnalysisContext.Model.Compilation, dummyAnalysisContext.Options, CancellationToken.None);
-        sub
-            .When(x => x.RegisterSemanticModelAction(Arg.Any<Action<SemanticModelAnalysisContext>>()))
-            .Do(x => x.Arg<Action<SemanticModelAnalysisContext>>().Invoke(dummyAnalysisContext.CreateSemanticModelAnalysisContext()));
-        self.ExecutePostponedActions(new(self, sub));
     }
 
     private sealed class DummyAnalysisContext : RoslynAnalysisContext

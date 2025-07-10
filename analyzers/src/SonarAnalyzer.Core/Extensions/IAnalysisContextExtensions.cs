@@ -32,10 +32,10 @@ public static class IAnalysisContextExtensions
     /// <summary>
     /// Reads the properties from the SonarLint.xml file and caches the result for the scope of this analysis.
     /// </summary>
-    public static SonarLintXmlReader SonarLintXml<T>(this T context) where T : IAnalysisContext =>
+    public static SonarLintXmlReader SonarLintXml<T>(this T context) where T : IAnalysisContext => // Don't change to (this IAnalysisContext context) because this would cause boxing
         context.Options.SonarLintXml(context.AnalysisContext);
 
-    public static bool IsRazorAnalysisEnabled<T>(this T context) where T : IAnalysisContext =>
+    public static bool IsRazorAnalysisEnabled<T>(this T context) where T : IAnalysisContext => // Don't change to (this IAnalysisContext context) because this would cause boxing
         context.AnalysisContext.IsRazorAnalysisEnabled(context.Options, context.Compilation);
 
     public static bool IsTestProject<T>(this T context) where T : IAnalysisContext
@@ -49,10 +49,11 @@ public static class IAnalysisContextExtensions
     /// <summary>
     /// Reads configuration from SonarProjectConfig.xml file and caches the result for scope of this analysis.
     /// </summary>
-    public static ProjectConfigReader ProjectConfiguration<T>(this T context) where T : IAnalysisContext =>
+    public static ProjectConfigReader ProjectConfiguration<T>(this T context) where T : IAnalysisContext => // Don't change to (this IAnalysisContext context) because this would cause boxing
         context.AnalysisContext.ProjectConfiguration(context.Options);
 
-    public static bool HasMatchingScope<T>(this T context, ImmutableArray<DiagnosticDescriptor> descriptors) where T : IAnalysisContext
+    public static bool HasMatchingScope<T>(this T context, ImmutableArray<DiagnosticDescriptor> descriptors)
+        where T : IAnalysisContext // Don't change to (this IAnalysisContext context) because this would cause boxing
     {
         // Performance: Don't use descriptors.Any(HasMatchingScope), the delegate creation allocates too much memory. https://github.com/SonarSource/sonar-dotnet/issues/7438
         foreach (var descriptor in descriptors)
@@ -65,7 +66,8 @@ public static class IAnalysisContextExtensions
         return false;
     }
 
-    public static bool HasMatchingScope<T>(this T context, DiagnosticDescriptor descriptor) where T : IAnalysisContext
+    public static bool HasMatchingScope<T>(this T context, DiagnosticDescriptor descriptor)
+        where T : IAnalysisContext // Don't change to (this IAnalysisContext context) because this would cause boxing
     {
         // MMF-2297: Test Code as 1st Class Citizen is not ready on server side yet.
         // ScannerRun: Only utility rules and rules with TEST-ONLY scope are executed for test projects for now.
@@ -80,7 +82,8 @@ public static class IAnalysisContextExtensions
 
     /// <param name="tree">Tree to decide on. Can be null for Symbol-based and Compilation-based scenarios. And we want to analyze those too.</param>
     /// <param name="generatedCodeRecognizer">When set, generated trees are analyzed only when language-specific 'analyzeGeneratedCode' configuration property is also set.</param>
-    public static bool ShouldAnalyzeTree<T>(this T context, SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) where T : IAnalysisContext =>
+    public static bool ShouldAnalyzeTree<T>(this T context, SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer)
+        where T : IAnalysisContext => // Don't change to (this IAnalysisContext context) because this would cause boxing
         context.SonarLintXml() is var sonarLintXml
         && (generatedCodeRecognizer is null
             || sonarLintXml.AnalyzeGeneratedCode(context.Compilation.Language)
@@ -88,7 +91,7 @@ public static class IAnalysisContextExtensions
         && (tree is null || (!context.IsUnchanged(tree) && !context.IsExcluded(sonarLintXml, tree.FilePath)));
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = true, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    public static bool IsUnchanged<T>(this T context, SyntaxTree tree) where T : IAnalysisContext
+    public static bool IsUnchanged<T>(this T context, SyntaxTree tree) where T : IAnalysisContext // Don't change to (this IAnalysisContext context) because this would cause boxing
     {
         // Hot path: Use TryGetValue to prevent the allocation of the GetValue factory delegate in the common case
         var unchangedFiles = UnchangedFilesCache.TryGetValue(context.Compilation, out var unchangedFilesFromCache)
@@ -98,7 +101,8 @@ public static class IAnalysisContextExtensions
     }
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    private static bool IsExcluded<T>(this T context, SonarLintXmlReader sonarLintXml, string filePath) where T : IAnalysisContext
+    private static bool IsExcluded<T>(this T context, SonarLintXmlReader sonarLintXml, string filePath)
+        where T : IAnalysisContext // Don't change to (this IAnalysisContext context) because this would cause boxing
     {
         // If ProjectType is not 'Unknown' it means we are in S4NET context and all files are analyzed.
         // If ProjectType is 'Unknown' then we are in SonarLint or NuGet context and we need to check if the file has been excluded from analysis through SonarLint.xml.
