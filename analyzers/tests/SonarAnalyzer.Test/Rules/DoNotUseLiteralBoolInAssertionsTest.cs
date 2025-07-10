@@ -47,5 +47,16 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
                 .AddReferences(NuGetMetadataReference.XunitFramework(testFwkVersion))
                 .Verify();
+
+        [TestMethod]
+        public void DoNotUseLiteralBoolInAssertions_XunitV3() =>
+            builder
+                .AddPaths("DoNotUseLiteralBoolInAssertions.Xunit.cs")
+                .AddPaths("DoNotUseLiteralBoolInAssertions.XunitV3.cs")
+                .AddReferences(NuGetMetadataReference.XunitFrameworkV3(TestConstants.NuGetLatestVersion))
+                .AddReferences(NuGetMetadataReference.SystemMemory(TestConstants.NuGetLatestVersion))
+                .AddReferences(MetadataReferenceFacade.NetStandard)
+                .AddReferences(MetadataReferenceFacade.SystemCollections)
+                .Verify();
     }
 }

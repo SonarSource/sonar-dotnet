@@ -28,7 +28,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 [KnownType.Xunit_Assert] =
                 [
                     // "True" and "False" are not here because there was no Assert.Fail in Xunit until 2020 and Assert.True(false) and Assert.False(true) were some ways to simulate it.
-                    "Equal", "NotEqual", "Same", "StrictEqual", "NotSame"
+                    "Equal", "NotEqual", "Same", "NotSame", "StrictEqual", "NotStrictEqual", "Equivalent"
                 ],
 
                 [KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert] =
