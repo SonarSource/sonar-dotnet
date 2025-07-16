@@ -102,6 +102,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_AspNetCore_Mvc_IgnoreAntiforgeryTokenAttribute = new("Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute = new("Microsoft.AspNetCore.Mvc.Infrastructure.ActionResultObjectValueAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_ModelBinding_BindNeverAttribute = new("Microsoft.AspNetCore.Mvc.ModelBinding.BindNeverAttribute");
+    public static readonly KnownType Microsoft_AspNetCore_Mvc_ModelBinding_BindRequiredAttribute = new("Microsoft.AspNetCore.Mvc.ModelBinding.BindRequiredAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary = new("Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_ModelBinding_Validation_ValidateNeverAttribute = new("Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidateNeverAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_NonActionAttribute = new("Microsoft.AspNetCore.Mvc.NonActionAttribute");

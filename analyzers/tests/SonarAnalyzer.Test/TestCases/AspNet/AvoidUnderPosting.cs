@@ -343,7 +343,7 @@ namespace Repro_GH9690
     public class DataModel
     {
         [BindRequired]
-        public int PasswordMinLength { get; set; } // Noncompliant FP BindRequiredAttribute ensure value are set with a value from the client request
+        public int PasswordMinLength { get; set; } // Compliant
     }
 
     public class DataModelController : Controller

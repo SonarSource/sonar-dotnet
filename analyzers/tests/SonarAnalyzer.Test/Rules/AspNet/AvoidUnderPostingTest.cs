@@ -65,8 +65,8 @@ public class AvoidUnderPostingTest
                 [HttpPost] public IActionResult Create(Model model) => View(model);
             }
             """)
-        .WithOptions(LanguageOptions.FromCSharp11)
-        .Verify();
+            .WithOptions(LanguageOptions.FromCSharp11)
+            .Verify();
 
     [DataTestMethod]
     [DataRow("HttpDelete")]

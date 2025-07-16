@@ -25,12 +25,15 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
     private const string MessageFormat = "Value type property used as input in a controller action should be nullable, required or annotated with the JsonRequiredAttribute to avoid under-posting.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
     private static readonly ImmutableArray<KnownType> IgnoredTypes = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Http_IFormCollection,
         KnownType.Microsoft_AspNetCore_Http_IFormFile,
         KnownType.Microsoft_AspNetCore_Http_IFormFileCollection);
+
     private static readonly ImmutableArray<KnownType> IgnoredAttributes = ImmutableArray.Create(
         KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_BindNeverAttribute,
+        KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_BindRequiredAttribute,
         KnownType.Newtonsoft_Json_JsonIgnoreAttribute,
         KnownType.Newtonsoft_Json_JsonRequiredAttribute,
         KnownType.System_ComponentModel_DataAnnotations_RangeAttribute,
@@ -41,22 +44,23 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
-        {
-            if (!compilationStart.Compilation.ReferencesNetCoreControllers())
             {
-                return;
-            }
-            var examinedTypes = new ConcurrentDictionary<ITypeSymbol, bool>();
-
-            compilationStart.RegisterSymbolStartAction(symbolStart =>
-            {
-                var type = (INamedTypeSymbol)symbolStart.Symbol;
-                if (type.IsControllerType())
+                if (!compilationStart.Compilation.ReferencesNetCoreControllers())
                 {
-                    symbolStart.RegisterSyntaxNodeAction(nodeContext => ProcessControllerMethods(nodeContext, examinedTypes), SyntaxKind.MethodDeclaration);
+                    return;
                 }
-            }, SymbolKind.NamedType);
-        });
+                var examinedTypes = new ConcurrentDictionary<ITypeSymbol, bool>();
+
+                compilationStart.RegisterSymbolStartAction(symbolStart =>
+                    {
+                        var type = (INamedTypeSymbol)symbolStart.Symbol;
+                        if (type.IsControllerType())
+                        {
+                            symbolStart.RegisterSyntaxNodeAction(nodeContext => ProcessControllerMethods(nodeContext, examinedTypes), SyntaxKind.MethodDeclaration);
+                        }
+                    },
+                    SymbolKind.NamedType);
+            });
 
     private static void ProcessControllerMethods(SonarSyntaxNodeReportingContext context, ConcurrentDictionary<ITypeSymbol, bool> examinedTypes)
     {
@@ -127,10 +131,10 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
             var properties = namedType.GetMembers()
                 .OfType<IPropertySymbol>()
                 .Where(x => x.GetEffectiveAccessibility() == Accessibility.Public
-                    && x.SetMethod?.DeclaredAccessibility is Accessibility.Public
-                    && !HasValidateNeverAttribute(x)
-                    && x.DeclaringSyntaxReferences.Length > 0
-                    && !IgnoreType(x.Type));
+                            && x.SetMethod?.DeclaredAccessibility is Accessibility.Public
+                            && !HasValidateNeverAttribute(x)
+                            && x.DeclaringSyntaxReferences.Length > 0
+                            && !IgnoreType(x.Type));
             foreach (var property in properties)
             {
                 declaredProperties.Add(property);
