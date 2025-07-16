@@ -59,22 +59,44 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             && context.Model.GetTypeInfo(expression) is { Type: { } expressionType } expressionTypeInfo
             && context.Model.GetTypeInfo(type) is { Type: { } castType }
             && expressionType.Equals(castType)
-            && FlowStateEquals(expressionTypeInfo, type))
+            && FlowStateEquals(context.Model, expressionTypeInfo, type, castType))
         {
             ReportIssue(context, expression, castType, location);
         }
     }
 
-    private static bool FlowStateEquals(TypeInfo expressionTypeInfo, ExpressionSyntax type)
+    private static bool FlowStateEquals(SemanticModel model, TypeInfo expressionTypeInfo, ExpressionSyntax castTypeExpression, ITypeSymbol castType)
     {
-        var castingToNullable = type.IsKind(SyntaxKind.NullableType); // The Nullability() annotation of the cast target type can not be found on the symbol
-        return expressionTypeInfo.Nullability().FlowState switch
+        // The Nullability() annotation of the castType symbol is always "None". We need to look at the syntax to determine the nullability.
+        var castingToNullable = castTypeExpression.IsKind(SyntaxKind.NullableType)
+            || castType.IsNullableValueType(); // Nullable<int> is considered the same as int? checked via SyntaxKind.NullableType above.
+        var outerNullability = expressionTypeInfo.Nullability().FlowState switch
         {
             NullableFlowState.None => true,
             NullableFlowState.MaybeNull => castingToNullable, // false when (string)maybeNull which is a narrowing cast and therefore not redundant
             NullableFlowState.NotNull => !castingToNullable,  // false when (string?)nonNull which is a widening cast but not redundant in cases like tuples (a: (string?)"", b: "")
             _ => true,
         };
+        return outerNullability && InnerNullabilityEquals(model, expressionTypeInfo.Type, castType);
+
+        // The nullable annotations of the type arguments also needs to be identical: IEnumerable<string?> is not the same as IEnumerable<string>.
+        // We recursively check the type arguments for ? annotations.
+        static bool InnerNullabilityEquals(SemanticModel model, ITypeSymbol expressionTypeSymbol, ITypeSymbol castTypeSymbol)
+        {
+            var expressionTypeArguments = (expressionTypeSymbol as INamedTypeSymbol)?.TypeArguments ?? ImmutableArray<ITypeSymbol>.Empty;
+            // In opposition to the outer Nullability(), the inner nullability is present on the cast symbol. Therefore we can use the symbols nullability for this check.
+            var castTypeArguments = (castTypeSymbol as INamedTypeSymbol)?.TypeArguments ?? ImmutableArray<ITypeSymbol>.Empty;
+            Debug.Assert(expressionTypeArguments.Length == castTypeArguments.Length, "Always true, because otherwise the expressionType.Equals(castType) check in CheckCastExpression is false.");
+            foreach (var typeArgumentPair in expressionTypeArguments.Zip(castTypeArguments, Pair.From))
+            {
+                var typeArgumentNullablityMatch = typeArgumentPair.Left.NullableAnnotation() == typeArgumentPair.Right.NullableAnnotation();
+                if (!typeArgumentNullablityMatch || !InnerNullabilityEquals(model, typeArgumentPair.Left, typeArgumentPair.Right))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     private static void CheckExtensionMethodInvocation(SonarSyntaxNodeReportingContext context)

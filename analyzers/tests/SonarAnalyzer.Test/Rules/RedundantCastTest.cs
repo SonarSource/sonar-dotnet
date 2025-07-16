@@ -85,6 +85,77 @@ public class RedundantCastTest
             }
             """).WithLanguageVersion(LanguageVersion.CSharp7_1).VerifyNoIssues();
 
+    [DataTestMethod]
+    [DataRow("IEnumerable<string?>", "IEnumerable<string>", false)]
+    [DataRow("IEnumerable<string>", "IEnumerable<string?>", false)]
+    [DataRow("IEnumerable<string?>", "IEnumerable<string?>", true)]
+    [DataRow("IEnumerable<int>", "IEnumerable<int?>", false)]
+    [DataRow("IEnumerable<Nullable<int>>", "IEnumerable<int?>", true)]
+    [DataRow("IEnumerable<int?>", "IEnumerable<Nullable<int>>", true)]
+    [DataRow("IEnumerable<Nullable<int>>", "IEnumerable<Nullable<int>>", true)]
+    [DataRow("IDictionary<string, KeyValuePair<string, string?>>", "IDictionary<string, KeyValuePair<string, string>>", false)]
+    [DataRow("IDictionary<string, KeyValuePair<string?, string>>?", "IDictionary<string, KeyValuePair<string, string>>?", false)]
+    [DataRow("IDictionary<string, KeyValuePair<string?, string?>>?", "IDictionary<string, KeyValuePair<string?, string?>>?", true)]
+    [DataRow("int?", "Nullable<int>", true)]
+    [DataRow("Nullable<int>", "int?", true)]
+    [DataRow("IEnumerable<IEnumerable<int>?>", "IEnumerable<IEnumerable<int>?>", true)]
+    [DataRow("IEnumerable<IEnumerable<int>?>", "IEnumerable<IEnumerable<int>>", false)]
+    [DataRow("IEnumerable<IEnumerable<int>>", "IEnumerable<IEnumerable<int>?>", false)]
+    [DataRow("IEnumerable<T?>", "IEnumerable<T>", false)]
+    [DataRow("IEnumerable<T>", "IEnumerable<T?>", false)]
+    [DataRow("IEnumerable<TClass?>", "IEnumerable<TClass>", false)]
+    [DataRow("IEnumerable<TClass>", "IEnumerable<TClass?>", false)]
+    [DataRow("IEnumerable<TStruct>", "IEnumerable<TStruct?>", false)]
+    [DataRow("IEnumerable<Nullable<TStruct>>", "IEnumerable<TStruct?>", true)]
+    [DataRow("IEnumerable<TStruct?>", "IEnumerable<Nullable<TStruct>>", true)]
+    [DataRow("IEnumerable<string>", "IEnumerable<object>", false)]
+    [DataRow("IEnumerable<object>", "IEnumerable<string>", false)]
+    [DataRow("List<int>", "IntList", true)]
+    [DataRow("IntList", "List<int>", true)]
+    [DataRow("List<string>", "StringList", true)]
+    [DataRow("StringList", "List<string>", true)]
+    [DataRow("List<string?>", "StringList", false)]
+    [DataRow("StringList", "List<string?>", false)]
+    [DataRow("List<string?>", "NullableStringList", true)]
+    [DataRow("NullableStringList", "List<string?>", true)]
+    [DataRow("List<string>", "NullableStringList", false)]
+    [DataRow("NullableStringList", "List<string>", false)]
+    [DataRow("string?", "string?", true)]
+    [DataRow("string", "string", true)]
+    [DataRow("string?", "string", false)]
+    [DataRow("string", "string?", false)]
+    public void RedundantCast_TypeArgumentAnnotations(string expressionType, string targetType, bool expected)
+    {
+        var verifier = builder.AddSnippet($$"""
+            #nullable enable
+
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            using IntList = System.Collections.Generic.List<int>;
+            using StringList = System.Collections.Generic.List<string>;
+            using NullableStringList = System.Collections.Generic.List<string?>;
+
+            class TypeArguments<T, TStruct, TClass>
+                where TStruct : struct
+                where TClass : class
+            {
+                public void Test({{expressionType}} expression)
+                {
+                    _ = ({{targetType}})expression; // {{(expected ? "Noncompliant" : string.Empty)}}
+                }
+            }
+            """).WithLanguageVersion(LanguageVersion.CSharp9);
+        if (expected)
+        {
+            verifier.Verify();
+        }
+        else
+        {
+            verifier.VerifyNoIssues();
+        }
+    }
+
     [TestMethod]
     [DynamicData(nameof(NullableTestDataWithFlowState))]
     public void RedundantCast_NullableEnabled(string snippet, bool compliant) =>

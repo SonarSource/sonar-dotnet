@@ -104,7 +104,7 @@ namespace Tests.Diagnostics
     {
         public IEnumerable<string> GetNonNullStringsDirectCast(IEnumerable<string?> strings)
         {
-            return (IEnumerable<string>)strings.Where(s => s != null); // Noncompliant - FP
+            return (IEnumerable<string>)strings.Where(s => s != null); // Compliant
         }
 
         public IEnumerable<string> GetNonNullStringsMethodCast(IEnumerable<string?> strings)
@@ -114,7 +114,7 @@ namespace Tests.Diagnostics
 
         public IEnumerable<string> GetNonNullStringsAsCast(IEnumerable<string?> strings)
         {
-            return strings.Where(s => s != null) as IEnumerable<string>;  // Noncompliant - FP
+            return strings.Where(s => s != null) as IEnumerable<string>;  // Compliant
         }
     }
 }
