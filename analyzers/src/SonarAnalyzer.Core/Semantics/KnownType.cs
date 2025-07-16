@@ -41,6 +41,8 @@ public sealed partial class KnownType
     public static readonly KnownType FluentAssertions_Primitives_ReferenceTypeAssertions = new("FluentAssertions.Primitives.ReferenceTypeAssertions", "TSubject", "TAssertions");
     public static readonly KnownType FluentValidation_IValidator = new("FluentValidation.IValidator");
     public static readonly KnownType FluentValidation_IValidator_T = new("FluentValidation.IValidator", "T");
+    public static readonly KnownType FsCheck_NUnit_PropertyAttribute = new("FsCheck.NUnit.PropertyAttribute");
+    public static readonly KnownType FsCheck_Xunit_PropertyAttribute = new("FsCheck.Xunit.PropertyAttribute");
     public static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
     public static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
     public static readonly KnownType JWT_JwtDecoderExtensions = new("JWT.JwtDecoderExtensions");

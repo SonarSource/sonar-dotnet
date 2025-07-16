@@ -48,6 +48,18 @@ public static class NuGetMetadataReference
     public static References FluentAssertions(string packageVersion) => Create("FluentAssertions", packageVersion);
     public static References FluentValidation(string packageVersion = TestConstants.NuGetLatestVersion) => Create("FluentValidation", packageVersion);
     public static References FakeItEasy(string packageVersion) => Create("FakeItEasy", packageVersion);
+    public static References FsCheckXunit(string packageVersion = TestConstants.NuGetLatestVersion) =>
+        [
+            .. Create("FsCheck", packageVersion),
+            .. Create("FsCheck.Xunit", packageVersion),
+            .. XunitFramework(TestConstants.NuGetLatestVersion),
+        ];
+    public static References FsCheckNunit(string packageVersion = TestConstants.NuGetLatestVersion) =>
+        [
+            .. Create("FsCheck", packageVersion),
+            .. Create("FsCheck.NUnit", packageVersion),
+            .. NUnit(TestConstants.NuGetLatestVersion),
+        ];
     public static References JetBrainsDotMemoryUnit(string packageVersion) => Create("JetBrains.DotMemoryUnit", packageVersion);
     public static References JustMock(string packageVersion) => Create("JustMock", packageVersion);
     public static References JWT(string packageVersion) => Create("JWT", packageVersion);

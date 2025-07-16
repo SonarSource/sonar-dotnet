@@ -162,6 +162,18 @@ public class TestMethodShouldContainAssertionTest
     public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
         builder.AddPaths("TestMethodShouldContainAssertion.Custom.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).Verify();
 
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_FsCheck_XUnit() =>
+        WithTestReferences(NuGetMetadataReference.FsCheckXunit(Latest))
+            .AddPaths("TestMethodShouldContainAssertion.XUnit.FsCheck.cs")
+            .VerifyNoIssues();
+
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_FsCheck_NUnit() =>
+        WithTestReferences(NuGetMetadataReference.FsCheckNunit(Latest))
+            .AddPaths("TestMethodShouldContainAssertion.NUnit.FsCheck.cs")
+            .VerifyNoIssues();
+
 #if NET
 
     [TestMethod]

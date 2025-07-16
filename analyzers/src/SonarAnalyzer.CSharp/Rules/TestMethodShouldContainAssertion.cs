@@ -30,10 +30,10 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         {"DidNotReceiveWithAnyArgs", [KnownType.NSubstitute_SubstituteExtensions] },
         {"Received", [KnownType.NSubstitute_SubstituteExtensions, KnownType.NSubstitute_ReceivedExtensions_ReceivedExtensions] },
         {"ReceivedWithAnyArgs", [KnownType.NSubstitute_SubstituteExtensions, KnownType.NSubstitute_ReceivedExtensions_ReceivedExtensions] },
-        {"InOrder", [KnownType.NSubstitute_Received] }
+        {"InOrder", [KnownType.NSubstitute_Received] },
     };
 
-    /// The assertions in the Shouldly and Moq libraries are supported by <see cref="UnitTestHelper.KnownAssertionMethodParts"/>
+    /// The assertions in the Shouldly, Moq and FsCheck libraries are supported by <see cref="UnitTestHelper.KnownAssertionMethodParts"/>
     /// - All assertions in Shouldly contain "Should" in their name.
     /// - All assertions in Moq contain "Verify" in their name.
     private static readonly ImmutableArray<KnownType> KnownAssertionTypes = ImmutableArray.Create(
@@ -49,6 +49,10 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         KnownType.NUnit_Framework_AssertionException,
         KnownType.Xunit_Sdk_AssertException,
         KnownType.Xunit_Sdk_XunitException);
+
+    private static readonly ImmutableArray<KnownType> FsCheckPropertyAttributes = ImmutableArray.Create(
+        KnownType.FsCheck_Xunit_PropertyAttribute,
+        KnownType.FsCheck_NUnit_PropertyAttribute);
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -66,6 +70,7 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
                     && !method.HasExpectedExceptionAttribute()
                     && !method.HasAssertionInAttribute()
                     && !method.IsIgnoredTestMethod()
+                    && !method.HasAnyAttribute(FsCheckPropertyAttributes)
                     && !ContainsAssertion(c.Node, c.Model, new HashSet<IMethodSymbol>(), 0))
                 {
                     c.ReportIssue(Rule, declaration.Identifier);
