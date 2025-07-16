@@ -38,7 +38,7 @@ public class PropertiesAccessCorrectFieldTest
     [TestMethod]
     public void PropertiesAccessCorrectField_CS_Latest() =>
         builderCS
-            .AddPaths("PropertiesAccessCorrectField.Latest.cs")
+            .AddPaths("PropertiesAccessCorrectField.Latest.cs", "PropertiesAccessCorrectField.Partial.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 #else

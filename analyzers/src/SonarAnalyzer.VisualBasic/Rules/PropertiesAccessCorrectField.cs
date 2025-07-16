@@ -109,8 +109,8 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
         }
 
         // Special case: ignore the accessor if the only statement/expression is a throw.
-        return accessor.DescendantNodes(x => x is StatementSyntax).Count() == 1
-               && accessor.DescendantNodes(x => x is ThrowStatementSyntax).Count() == 1;
+        return accessor.DescendantNodes(x => x is StatementSyntax).Take(2).Count() == 1
+            && accessor.DescendantNodes(x => x is ThrowStatementSyntax).Take(2).Count() == 1;
     }
 
     protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
@@ -129,8 +129,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
         if (expressions.Length == 1)
         {
             var expr = expressions.Single();
-            if (expr is IdentifierNameSyntax
-                || (expr is MemberAccessExpressionSyntax {Expression: MeExpressionSyntax _}))
+            if (expr is IdentifierNameSyntax or MemberAccessExpressionSyntax { Expression: MeExpressionSyntax })
             {
                 return expr;
             }
@@ -170,8 +169,8 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
             return new FieldData(accessorKind, directSymbol, strippedExpression, useFieldLocation);
         }
         // Check for "Me.Foo"
-        else if (strippedExpression is MemberAccessExpressionSyntax {Expression: MeExpressionSyntax _} member
-                 && model.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
+        else if (strippedExpression is MemberAccessExpressionSyntax { Expression: MeExpressionSyntax } member
+            && model.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol field)
         {
             return new FieldData(accessorKind, field, member.Name, useFieldLocation);
         }
@@ -186,7 +185,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
                 fieldSymbol = strippedExpressionSymbol;
                 return true;
             }
-            else if (symbol is IPropertySymbol {IsWithEvents: true} property)
+            else if (symbol is IPropertySymbol { IsWithEvents: true } property)
             {
                 fieldSymbol = property.ContainingType.GetMembers("_" + property.Name).OfType<IFieldSymbol>().SingleOrDefault();
                 return fieldSymbol is not null;
@@ -203,7 +202,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     {
         var strippedExpression = expression.RemoveParentheses();
         return strippedExpression.IsLeftSideOfAssignment()
-               || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for Me.field
+            || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for Me.field
     }
 
     private static bool HasExplicitAccessor(ISymbol symbol) =>

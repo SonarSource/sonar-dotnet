@@ -33,7 +33,7 @@
 
         public object Y
         {
-            get { return x; }  // Noncompliant {{Refactor this getter so that it actually refers to the field 'y'.}}
+            get { return x; }            // Noncompliant {{Refactor this getter so that it actually refers to the field 'y'.}}
             set { var y = x ??= value; } // Noncompliant {{Refactor this setter so that it actually refers to the field 'y'.}}
         }
     }
@@ -100,24 +100,10 @@ namespace CSharp13
     {
         public partial int X
         {
-            get { return y; } // FN
-            set { y = value; }
+            get { return y; }  // Noncompliant {{Refactor this getter so that it actually refers to the field 'x'.}}
+            set { y = value; } // Noncompliant {{Refactor this setter so that it actually refers to the field 'x'.}}
         }
 
         public partial int Y { get; set; }
-    }
-
-    public partial class PartialProperties
-    {
-        private int x;
-        private int y;
-
-        public partial int X { get; set; }
-
-        public partial int Y
-        {
-            get { return x; } // FN
-            set { x = value; }
-        }
     }
 }

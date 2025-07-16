@@ -26,6 +26,12 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
      * - directly via an assignment
      * - indirectly, when passed as 'out' or 'ref' parameter
      */
+    protected enum AccessorKind
+    {
+        Getter,
+        Setter
+    }
+
     protected abstract IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation);
     protected abstract IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation);
     protected abstract bool ImplementsExplicitGetterOrSetter(IPropertySymbol property);
@@ -47,8 +53,8 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
         && invocationSymbol.ContainingType.Equals(containingType)
         && invocationSymbol.DeclaringSyntaxReferences.Length == 1
         && invocationSymbol.DeclaringSyntaxReferences.Single().GetSyntax() is { } invokedMethod
-        ? invokedMethod
-        : null;
+            ? invokedMethod
+            : null;
 
     private void CheckType(SonarSymbolReportingContext context)
     {
@@ -65,7 +71,7 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
             return;
         }
 
-        var properties = GetExplicitlyDeclaredProperties(symbol);
+        var properties = ExplicitlyDeclaredProperties(symbol);
         if (!properties.Any())
         {
             return;
@@ -77,7 +83,7 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
         // Check that if there is a single matching field name it is used by the property
         foreach (var data in allPropertyData)
         {
-            var expectedField = propertyToFieldMatcher.GetSingleMatchingFieldOrNull(data.PropertySymbol);
+            var expectedField = propertyToFieldMatcher.SingleMatchingFieldOrNull(data.PropertySymbol);
             if (expectedField is not null)
             {
                 if (!data.IgnoreGetter)
@@ -103,11 +109,12 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
         return fieldSymbols;
     }
 
-    private IEnumerable<IPropertySymbol> GetExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
+    private IEnumerable<IPropertySymbol> ExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
         symbol.GetMembers()
-              .Where(x => x.Kind.Equals(SymbolKind.Property))
-              .OfType<IPropertySymbol>()
-              .Where(ImplementsExplicitGetterOrSetter);
+            .Where(x => x.Kind.Equals(SymbolKind.Property))
+            .SelectMany(x => x.AllPartialParts())
+            .OfType<IPropertySymbol>()
+            .Where(ImplementsExplicitGetterOrSetter);
 
     private void CheckExpectedFieldIsUsed(SonarSymbolReportingContext context, IMethodSymbol methodSymbol, IFieldSymbol expectedField, ImmutableArray<FieldData> actualFields)
     {
@@ -180,12 +187,6 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
         }
     }
 
-    protected enum AccessorKind
-    {
-        Getter,
-        Setter
-    }
-
     protected readonly struct FieldData
     {
         public AccessorKind AccessorKind { get; }
@@ -215,17 +216,16 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
     {
         private readonly IDictionary<IFieldSymbol, string> fieldToStandardNameMap;
 
-        public PropertyToFieldMatcher(IEnumerable<IFieldSymbol> fields)
-        {
+        public PropertyToFieldMatcher(IEnumerable<IFieldSymbol> fields) =>
             // Calculate and cache the standardised versions of the field names to avoid
             // calculating them every time
-            fieldToStandardNameMap = fields.ToDictionary(x => x, x => GetCanonicalName(x.Name));
-        }
+            fieldToStandardNameMap = fields.ToDictionary(x => x, x => CanonicalName(x.Name));
 
-        public IFieldSymbol GetSingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
+        public IFieldSymbol SingleMatchingFieldOrNull(IPropertySymbol propertySymbol)
         {
             var matchingFields = fieldToStandardNameMap.Keys
                 .Where(x => FieldMatchesTheProperty(x, propertySymbol))
+                .Take(2)
                 .ToList();
 
             return matchingFields.Count != 1
@@ -233,7 +233,7 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
                 : matchingFields[0];
         }
 
-        private static string GetCanonicalName(string name) =>
+        private static string CanonicalName(string name) =>
             name.Replace("_", string.Empty);
 
         private static bool AreCanonicalNamesEqual(string name1, string name2) =>
@@ -244,6 +244,6 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
             !field.IsConst
             && ((property.IsStatic && field.IsStatic) || (!property.IsStatic && !field.IsStatic))
             && field.Type.Equals(property.Type)
-            && AreCanonicalNamesEqual(fieldToStandardNameMap[field], GetCanonicalName(property.Name));
+            && AreCanonicalNamesEqual(fieldToStandardNameMap[field], CanonicalName(property.Name));
     }
 }

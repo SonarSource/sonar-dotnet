@@ -90,13 +90,11 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
         if (accessor.Body is null)
         {
             // Expression-bodied syntax
-            return accessor.DescendantNodes().FirstOrDefault() is ArrowExpressionClauseSyntax arrowClause
-                   && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
+            return accessor.ExpressionBody() is { } arrowClause && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
         }
 
         // Statement-bodied syntax
-        return  accessor.Body.DescendantNodes().Count(x => x is StatementSyntax) == 1
-                && accessor.Body.DescendantNodes().Count(x => x is ThrowStatementSyntax) == 1;
+        return accessor.Body.DescendantNodes().Count(x => x is StatementSyntax) == 1 && accessor.Body.DescendantNodes().Count(x => x is ThrowStatementSyntax) == 1;
     }
 
     protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
@@ -114,7 +112,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
                     .Select(x => ExtractFieldFromExpression(AccessorKind.Setter, x, compilation, useFieldLocation))
                     .FirstOrDefault(x => x is not null);
             }
-            else if (node is ArgumentSyntax argument && argument.RefOrOutKeyword.IsAnyKind(SyntaxKind.RefKeyword,SyntaxKind.OutKeyword))
+            else if (node is ArgumentSyntax argument && argument.RefOrOutKeyword.Kind() is SyntaxKind.RefKeyword or SyntaxKind.OutKeyword)
             {
                 foundField = ExtractFieldFromExpression(AccessorKind.Setter, argument.Expression, compilation, useFieldLocation);
             }
@@ -147,8 +145,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
         if (expressions.Length == 1)
         {
             var expr = expressions.Single();
-            if (expr is IdentifierNameSyntax
-                || (expr is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _}))
+            if (expr is IdentifierNameSyntax or MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax })
             {
                 return expr;
             }
@@ -173,14 +170,13 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
             return new FieldData(accessorKind, directAccessField, strippedExpression, useFieldLocation);
         }
         // Check for "this.foo"
-        else if (strippedExpression is MemberAccessExpressionSyntax {Expression: ThisExpressionSyntax _} member
-                 && model.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol fieldAccessedWithThis)
+        else if (strippedExpression is MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax } member && model.GetSymbolInfo(strippedExpression).Symbol is IFieldSymbol fieldAccessedWithThis)
         {
             return new FieldData(accessorKind, fieldAccessedWithThis, member.Name, useFieldLocation);
         }
         else if (strippedExpression is AssignmentExpressionSyntax assignmentExpression
-                 && assignmentExpression.Parent is ReturnStatementSyntax
-                 && model.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol fieldAssignedFromExpression)
+            && assignmentExpression.Parent is ReturnStatementSyntax
+            && model.GetSymbolInfo(assignmentExpression.Left).Symbol is IFieldSymbol fieldAssignedFromExpression)
         {
             return new FieldData(accessorKind, fieldAssignedFromExpression, assignmentExpression.Left, useFieldLocation);
         }
@@ -192,7 +188,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     {
         var strippedExpression = expression.RemoveParentheses();
         return strippedExpression.IsLeftSideOfAssignment()
-               || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for this.field
+            || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for this.field
     }
 
     private static bool HasExplicitAccessor(ISymbol symbol) =>
