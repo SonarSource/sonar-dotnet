@@ -90,6 +90,29 @@ public class ExpressionSyntaxExtensionsTest
         asString.Should().BeEquivalentTo(expected);
     }
 
+    [DataTestMethod]
+    [DataRow("default", true)]
+    [DataRow("default!", true)]
+    [DataRow("(default)!", true)]
+    [DataRow("(default!)", true)]
+    [DataRow("((default)!)", true)]
+    [DataRow("default(int)", false)]
+    [DataRow("default(int)!", false)]
+    [DataRow("(default(int)!)", false)]
+    [DataRow("(1 + 1)", false)]
+    [DataRow("", false)]
+    [DataRow("()", false)]
+    public void IsDefaultLiteral(string expression, bool expected)
+    {
+        var parsed = SyntaxFactory.ParseExpression(expression);
+        var result = parsed.IsDefaultLiteral();
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void IsDefaultLiteral_Null() =>
+        ((ExpressionSyntax)null).IsDefaultLiteral().Should().BeFalse();
+
     private static (ExpressionSyntax Expression, SemanticModel Model) Compile(string code)
     {
         var tree = CSharpSyntaxTree.ParseText(code);

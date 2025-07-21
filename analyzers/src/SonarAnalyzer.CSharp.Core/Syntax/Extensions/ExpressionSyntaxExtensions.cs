@@ -218,6 +218,18 @@ public static class ExpressionSyntaxExtensions
         _ => null,
     };
 
+    /// <summary>
+    /// Returns <see langword="true"/> if the expression is a default literal or a null supressed default literal, i.e. <c>default</c> or <c>default!</c>.
+    /// It returns <see langword="false"/> for other expressions, including <c>default(object)</c> or <c>default(object)!</c>.
+    /// </summary>
+    /// <param name="expression">The potential default literal.</param>
+    /// <returns>Returns <see langword="true"/> if the expressions is a default literal or a supressed null literal.</returns>
+    public static bool IsDefaultLiteral(this ExpressionSyntax expression) =>
+        expression?.RemoveParentheses() is { } innerExpression
+        && (innerExpression.IsKind(SyntaxKindEx.DefaultLiteralExpression)
+            || (innerExpression is PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression, Operand: { } supressionOperand }
+                && supressionOperand.RemoveParentheses() is { RawKind: (int)SyntaxKindEx.DefaultLiteralExpression }));
+
     private static bool IsOn(this ExpressionSyntax expression, SyntaxKind onKind) =>
         expression switch
         {

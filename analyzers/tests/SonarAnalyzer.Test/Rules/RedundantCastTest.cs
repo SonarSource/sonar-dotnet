@@ -24,8 +24,8 @@ public class RedundantCastTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<RedundantCast>();
 
-    private static IEnumerable<(string Snippet, bool CompliantWithFlowState, bool CompliantWithoutFlowState)> NullableTestData => new[]
-    {
+    private static IEnumerable<(string Snippet, bool CompliantWithFlowState, bool CompliantWithoutFlowState)> NullableTestData =>
+    [
         ("""_ = (string)"Test";""", false, false),
         ("""_ = (string?)"Test";""", true, false),
         ("""_ = (string)null;""", true, true),
@@ -42,13 +42,19 @@ public class RedundantCastTest
         ("""if (nonNullable == null) _ = (string)nonNullable;""", true, false),
         ("""if (nonNullable == null) _ = (string?)nonNullable;""", false, false),
         ("""if (nonNullable == null) _ = nonNullable as string;""", true, false),
-    };
+        ("""_ = (string)default!;""", true, true),
+        ("""_ = (string)(default)!;""", true, true),
+        ("""_ = (string)((default)!);""", true, true),
+        ("""_ = (string)(default!);""", true, true),
+        ("""_ = (string)(default(string));""", true, false),
+        ("""_ = (string)(default(string)!);""", false, false),
+        ("""_ = (string?)(default(string));""", false, false),
+        ("""_ = (string?)(default(string)!);""", true, false),
+    ];
 
-    private static IEnumerable<object[]> NullableTestDataWithFlowState =>
-        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithFlowState });
+    private static IEnumerable<object[]> NullableTestDataWithFlowState => NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithFlowState });
 
-    private static IEnumerable<object[]> NullableTestDataWithoutFlowState =>
-        NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithoutFlowState });
+    private static IEnumerable<object[]> NullableTestDataWithoutFlowState => NullableTestData.Select(x => new object[] { x.Snippet, x.CompliantWithoutFlowState });
 
     [TestMethod]
     public void RedundantCast() =>
@@ -61,7 +67,7 @@ public class RedundantCastTest
 #if NET
     [TestMethod]
     public void RedundantCast_CSharp9() =>
-        builder.AddPaths("RedundantCast.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
+        builder.AddPaths("RedundantCast.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).WithConcurrentAnalysis(false).Verify();
 #endif
 
     [TestMethod]
