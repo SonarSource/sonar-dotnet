@@ -21,7 +21,7 @@ namespace Tests.Diagnostics
     public class Bar
     {
         private async Task<int?> GetFooNullableAsyncTriggered() =>
-            await (a ??= _fooProvider.GetFooAsync()); // Noncompliant FP
+            await (a ??= _fooProvider.GetFooAsync()); // Compliant see e.g. https://stackoverflow.com/a/64666607
 
         public class FooProvider
         {

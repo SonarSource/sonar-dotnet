@@ -70,7 +70,6 @@ namespace SonarAnalyzer.CSharp.Rules
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.LeftShiftAssignmentExpression,
                 SyntaxKind.RightShiftAssignmentExpression,
-                SyntaxKindEx.CoalesceAssignmentExpression,
                 SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
 
         private static bool IsNonCompliantSubExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
