@@ -41,14 +41,10 @@ public abstract class AbstractSonarWayProfile implements BuiltInQualityProfilesD
         sonarWay.activateRule(metadata.repositoryKey(), ruleID);
       }
     }
-    activateSecurityRules(sonarWay);
     registerRulesFromRegistrars(sonarWay);
     sonarWay.done();
   }
 
   protected void registerRulesFromRegistrars(NewBuiltInQualityProfile profile) {
-  }
-
-  protected void activateSecurityRules(NewBuiltInQualityProfile sonarWay) {
   }
 }

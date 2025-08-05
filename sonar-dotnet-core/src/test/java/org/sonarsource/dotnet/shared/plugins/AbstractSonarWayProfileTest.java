@@ -57,22 +57,6 @@ public class AbstractSonarWayProfileTest {
   }
 
   @Test
-  public void define_activateSecurityRules() {
-    AbstractSonarWayProfile sut = new AbstractSonarWayProfile(metadata, roslynRules) {
-      @Override
-      protected void activateSecurityRules(NewBuiltInQualityProfile sonarWay) {
-        sonarWay.activateRule("SECURITY-REPO", "SECURITY-RULE");
-      }
-    };
-    Context context = new Context();
-    sut.define(context);
-
-    BuiltInQualityProfilesDefinition.BuiltInQualityProfile profile = context.profile("LANG", "Sonar way");
-    assertThat(profile).isNotNull();
-    assertThat(profile.rule(RuleKey.of("SECURITY-REPO", "SECURITY-RULE"))).isNotNull();
-  }
-
-  @Test
   public void define_activateAdditionalRules() {
     AbstractSonarWayProfile sut = new AbstractSonarWayProfile(metadata, roslynRules) {
       @Override
