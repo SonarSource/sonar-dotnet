@@ -174,6 +174,17 @@ public class TestMethodShouldContainAssertionTest
             .AddPaths("TestMethodShouldContainAssertion.NUnit.FsCheck.cs")
             .VerifyNoIssues();
 
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_CodeGenerator() =>
+        builder
+            .AddPaths("TestMethodShouldContainAssertion.SourceGenerators.cs")
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
+            .AddReferences(NuGetMetadataReference.MicrosoftCodeAnalysisCSharp())
+            .AddReferences(NuGetMetadataReference.MicrosoftCodeAnalysisCSharpSourceGeneratorsTesting())
+            .AddReferences(NuGetMetadataReference.MicrosoftCodeAnalysisAnalyzerTesting())
+            .WithOptions(LanguageOptions.FromCSharp13)
+            .Verify();
+
 #if NET
 
     [TestMethod]
@@ -195,11 +206,11 @@ public class TestMethodShouldContainAssertionTest
 #endif
 
     internal static VerifierBuilder WithTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
-                                                                          string fluentVersion = Latest,
-                                                                          string nSubstituteVersion = Latest,
-                                                                          string nFluentVersion = Latest,
-                                                                          string shouldlyVersion = Latest,
-                                                                          string moqVersion = Latest) =>
+                                                       string fluentVersion = Latest,
+                                                       string nSubstituteVersion = Latest,
+                                                       string nFluentVersion = Latest,
+                                                       string shouldlyVersion = Latest,
+                                                       string moqVersion = Latest) =>
         new VerifierBuilder<TestMethodShouldContainAssertion>()
             .AddReferences(testFrameworkReference)
             .AddReferences(NuGetMetadataReference.FluentAssertions(fluentVersion))

@@ -95,9 +95,20 @@ public static class NuGetMetadataReference
     public static References MicrosoftAzureWebJobsExtensionsDurableTask(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.DurableTask", packageVersion);
     public static References MicrosoftAzureWebJobsExtensionsHttp(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Microsoft.Azure.WebJobs.Extensions.Http", packageVersion);
     public static References MicrosoftBuildNoTargets(string packageVersion = "3.1.0") => Create("Microsoft.Build.NoTargets", packageVersion);
-    public static References MicrosoftCodeAnalysisCSharp(string packageVersion = TestConstants.NuGetLatestVersion) => [
+    public static References MicrosoftCodeAnalysisCSharp(string packageVersion = TestConstants.NuGetLatestVersion) =>
+        [
         ..Create("Microsoft.CodeAnalysis.Common", packageVersion),
         ..Create("Microsoft.CodeAnalysis.CSharp", packageVersion),
+        ];
+    public static References MicrosoftCodeAnalysisCSharpSourceGeneratorsTesting(string packageVersion = TestConstants.NuGetLatestVersion) =>
+        [
+        ..Create("Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing", packageVersion),
+        ..Create("Microsoft.CodeAnalysis.SourceGenerators.Testing", packageVersion),
+        ];
+    public static References MicrosoftCodeAnalysisAnalyzerTesting(string packageVersion = TestConstants.NuGetLatestVersion) =>
+        [
+        ..Create("Microsoft.CodeAnalysis.CSharp.Analyzer.Testing", packageVersion),
+        ..Create("Microsoft.CodeAnalysis.Analyzer.Testing", packageVersion),
         ];
     public static References MicrosoftDataSqlClient(string packageVersion = "5.1.0") => Create("Microsoft.Data.SqlClient", packageVersion);
     public static References MicrosoftDataSqliteCore(string packageVersion = "2.0.0") => Create("Microsoft.Data.Sqlite.Core", packageVersion);
