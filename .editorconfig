@@ -289,6 +289,7 @@ dotnet_diagnostic.IDE0290.severity = none   # Use primary constructor
 resharper_convert_to_primary_constructor_highlighting = none
 dotnet_diagnostic.IDE0303.severity = none   # Use collection expression for Create()
 dotnet_diagnostic.IDE0304.severity = none   # Use collection expression for builder
+dotnet_diagnostic.IDE0305.severity = none   # Use collection expression for fluent
 dotnet_diagnostic.IDE2006.severity = none   # Blank line not allowed after arrow expression clause token
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -525,3 +526,6 @@ resharper_check_namespace_highlighting = none
 [**/Rules/*/*.cs]      # Do not raise on files nested inside Rules (like Rules/AspNet/xxx.cs), as those are for logical separation and don't need a dedicated namespace
 dotnet_diagnostic.IDE0130.severity = none
 resharper_check_namespace_highlighting = none
+
+[**/ITs.JsonParser/**]     # Do not raise in ITs.JsonParser as it is not production code.
+dotnet_diagnostic.T0003.severity = none     # Do not use ValueTuple in the production code due to missing System.ValueTuple.dll.
