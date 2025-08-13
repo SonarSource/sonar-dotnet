@@ -22,7 +22,7 @@ public static class StringAssertionsExtensions
 {
     [CustomAssertion]
     public static void BeIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
-        stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings());
+        stringAssertions.Subject.ToUnixLineEndings().Should().Be(expected.ToUnixLineEndings(), $"Actual value: \n{stringAssertions.Subject}\n");
 
     [CustomAssertion]
     public static void ContainIgnoringLineEndings(this StringAssertions stringAssertions, string expected) =>
