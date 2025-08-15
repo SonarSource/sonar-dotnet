@@ -8,7 +8,7 @@
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)|
 
 [Static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) of C# and VB.NET
-languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube), [SonarQube cloud](https://www.sonarsource.com/products/sonarcloud) and [SonarQube for IDE](https://www.sonarsource.com/products/sonarlint) code quality and security products. These Roslyn analyzers allow you to produce [Clean Code](https://www.sonarsource.com/solutions/clean-code/) that is safe, reliable, and maintainable by helping you find and correct bugs, vulnerabilities, and code smells in your codebase.
+languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube), [SonarQube cloud](https://www.sonarsource.com/products/sonarcloud) and [SonarQube for IDE](https://www.sonarsource.com/products/sonarlint) code quality and security products. These Roslyn analyzers allow you to deliver code with integrated code quality and security that is safe, reliable and maintainable by helping you find and correct bugs, vulnerabilities and code smells in your codebase.
 
 ## Features
 
@@ -150,3 +150,4 @@ If you believe you have discovered a security vulnerability in Sonar's products,
 Copyright 2014-2025 SonarSource.
 
 Licensed under the [SONAR Source-Available License v1.0](https://www.sonarsource.com/license/ssal/)
+
