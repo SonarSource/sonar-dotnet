@@ -61,7 +61,7 @@
     
     <sonar.analyzer.commons.version>2.18.0.3393</sonar.analyzer.commons.version>
     <sonar.plugin.api.version>13.0.0.3026</sonar.plugin.api.version>
-    <sonar.api.impl.version>25.7.0.110598</sonar.api.impl.version>
+    <sonar.api.impl.version>25.8.0.112029</sonar.api.impl.version>
     <jdk.min.version>17</jdk.min.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
     <!-- See: https://github.com/SonarSource/sonar-plugin-api#compatibility -->
