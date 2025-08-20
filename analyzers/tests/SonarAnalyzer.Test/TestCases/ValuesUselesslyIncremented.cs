@@ -45,4 +45,14 @@ namespace Tests.Diagnostics
 
         public int pickNumber4(int i) => i++; // Noncompliant
     }
+
+    class Repro_2265
+    {
+        public int i { get; set; }
+        int Method(int i)
+        {
+            new Repro_2265 { i = i++ }; // Noncompliant FP
+            return i;
+        }
+    }
 }
