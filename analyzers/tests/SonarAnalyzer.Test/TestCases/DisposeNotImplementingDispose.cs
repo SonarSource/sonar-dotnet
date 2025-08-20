@@ -177,3 +177,29 @@ namespace Repro_9679
         }
     }
 }
+
+// https://sonarsource.atlassian.net/browse/NET-2257
+namespace Repro_NET_2257
+{
+    public class Parent : IDisposable
+    {
+        public virtual void Dispose()
+        {
+            // Do nothing
+        }
+    }
+
+    public class Child : Parent
+    {
+        public override void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool flag)  // Noncompliant FP, if the user has no access to the parent class, they have no choice but to implement this method in their own class
+        {
+            // Do nothing
+        }
+    }
+}
