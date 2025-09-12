@@ -248,6 +248,7 @@ Ideally, a `ToDo` comment should be followed by an issue number (what needs to b
 ## Unit Tests
 
 * `VerifierBuilder.AddSnippet` can only be used to assert Compliant/Noncompliant case in parametrized test. Everything else should be in a TestCases file.
+* Avoid empty lines between the `Act` and `Assert` sections. Empty lines beteween the `Arrange` and `Act` sections are encouraged, if possible.
 
 ## Regions
 
@@ -273,4 +274,4 @@ For any C# rule `TheRule`, there should be at least two test scenarios files:
 
 More test scenarios files can be created as needed, for code fixes, top-level statements etc.
 
-In the past, test scenarios were split by language (e.g. `TheRule.CSharpX.cs`). These files should be migrated, following a Clean as You Code approach.
+In the past, test scenarios were split by language version (e.g. `TheRule.CSharpX.cs`). These files should be migrated, following a Clean as You Code approach.
