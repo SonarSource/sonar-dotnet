@@ -26,8 +26,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.assertj.core.groups.Tuple;
 import org.junit.Before;
 import org.junit.Rule;
@@ -39,6 +37,8 @@ import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.rule.internal.NewActiveRule;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.internal.apachecommons.text.StringEscapeUtils;
+import org.sonar.api.internal.apachecommons.lang3.StringUtils;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
@@ -209,7 +209,7 @@ public class RoslynDataImporterTest {
     }
 
     String reportContent = new String(Files.readAllBytes(reportPath), StandardCharsets.UTF_8);
-    reportContent = StringUtils.replace(reportContent, "Program.cs", StringEscapeUtils.escapeJavaScript(csFilePath));
+    reportContent = StringUtils.replace(reportContent, "Program.cs", StringEscapeUtils.escapeEcmaScript(csFilePath));
     Files.write(reportPath, reportContent.getBytes(StandardCharsets.UTF_8), StandardOpenOption.WRITE);
     return reportPath;
   }
