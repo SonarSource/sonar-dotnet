@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Numerics;
 
@@ -80,7 +82,7 @@ class TernariesAndDefaults
             ? new List<string>()
             : false
                 ? default // Noncompliant
-                : null;  // Secondary 
+                : null;  // Secondary
     }
 }
 
@@ -134,7 +136,7 @@ class Operators : IAdditionOperators<Operators, Operators, IEnumerable<string>>
             ? new List<string>()
             : false
                 ? default // Noncompliant
-                : null;  // Secondary 
+                : null;  // Secondary
     }
 }
 
@@ -156,5 +158,30 @@ public class CSharp13
         partial IEnumerable<string> MyStrings { get; }
 
         partial IEnumerable<string> this[int i] { get; }
+    }
+}
+
+// https://sonarsource.atlassian.net/browse/NET-2347
+public class Repro_NET2347
+{
+
+    public static ValueTypeCollection StructCollection(byte b)
+    {
+        return b == 0
+            ? default // Noncompliant - FP - The returned struct is a valid ValueTypeCollection with the `bits` parameter initialized to 0
+            : new ValueTypeCollection(b);
+    }
+
+    public static ImmutableArray<T> ReturnImmutableArray<T>() => default; // Noncompliant TP, default here is an uninitialized ImmutableArray<T> with the private `T[]` field being `null`.
+
+
+    public readonly struct ValueTypeCollection(byte bits) : IReadOnlyCollection<int>
+    {
+        public int Count => BitOperations.PopCount(bits);
+
+        public IEnumerator<int> GetEnumerator() =>
+            Enumerable.Range(0, 8).GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

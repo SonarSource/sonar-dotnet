@@ -40,6 +40,7 @@ public class ReturnEmptyCollectionInsteadOfNullTest
     [TestMethod]
     public void ReturnEmptyCollectionInsteadOfNull_Latest() =>
         builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.Latest.cs")
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
