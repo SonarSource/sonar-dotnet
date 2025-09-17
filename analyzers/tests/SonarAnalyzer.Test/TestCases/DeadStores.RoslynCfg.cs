@@ -1541,6 +1541,27 @@ namespace Tests.Diagnostics
             }
         }
 
+        // https://sonarsource.atlassian.net/browse/NET-2346
+        public void UsedInFinally_AfterOtherAssignment()
+        {
+            int value = 42;
+            try
+            {
+                SomethingThatCanThrow();
+            }
+            catch (Exception ex)
+            {
+                value = 0; // Noncompliant FP NET-2346
+                throw;
+            }
+            finally
+            {
+                object o;
+                o = ""; // Noncompliant TP. Any assignment (also `var s = "";` or `var o = new object();`) hides the usage of `value` in the next line
+                Use(value);
+            }
+        }
+
         private void SomethingThatCanThrow() { }
         private void Use(int arg) { }
     }
