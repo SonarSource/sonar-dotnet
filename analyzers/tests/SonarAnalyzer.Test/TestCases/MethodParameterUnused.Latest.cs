@@ -477,3 +477,26 @@ namespace ReproCaptureInLocalFunction
         }
     }
 }
+
+namespace ReproNET2384
+{
+    class Test
+    {
+        // https://sonarsource.atlassian.net/browse/NET-2384
+        void Method(string? a, string? b) // Noncompliant FP for string? b. The b value is read if a is null
+        {
+            LocalFunction();
+            void LocalFunction()
+            {
+                if (a != null)
+                {
+                    b = null; // modify b only if a is not null
+                }
+                if (b != null)
+                {
+                    //...
+                }
+            }
+        }
+    }
+}
