@@ -167,6 +167,7 @@
                     <exclude>META-INF/NOTICE*</exclude>
                     <exclude>META-INF/*.RSA</exclude>
                     <exclude>META-INF/*.SF</exclude>
+                    <exclude>license/*</exclude>
                     <exclude>LICENSE*</exclude>
                     <exclude>NOTICE*</exclude>
                   </excludes>
