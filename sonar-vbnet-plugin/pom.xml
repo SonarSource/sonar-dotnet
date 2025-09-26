@@ -32,11 +32,6 @@
       <artifactId>sonar-plugin-api</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>jsr305</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <scope>provided</scope>
@@ -115,6 +110,20 @@
 
   <build>
     <resources>
+      <resource>
+        <directory>../</directory>
+        <targetPath>licenses</targetPath>
+        <includes>
+          <include>LICENSE.txt</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>../Licenses/THIRD_PARTY_LICENSES</directory>
+        <targetPath>licenses/THIRD_PARTY_LICENSES</targetPath>
+        <excludes>
+          <exclude>org.sonarsource.dotnet.sonar-csharp-core-LICENSE.txt</exclude>
+        </excludes>
+      </resource>
       <resource>
         <directory>${sonarAnalyzer.workDirectory}</directory>
         <includes>
