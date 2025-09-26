@@ -215,8 +215,15 @@
                   <fileset dir="${packaging.directory}/binaries/SonarAnalyzer.CSharp/">
                     <include name="*.dll"/>
                   </fileset>
+                </copy>
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/licenses/">
                   <fileset dir="${project.build.directory}/../..">
-                    <include name="THIRD-PARTY-NOTICES.txt"/>
+                    <include name="LICENSE.txt"/>
+                  </fileset>
+                </copy>
+                <copy todir="${sonarAnalyzer.workDirectory}/SonarAnalyzer.CSharp/licenses/THIRD_PARTY_LICENSES/">
+                  <fileset dir="${packaging.directory}/Licenses/THIRD_PARTY_LICENSES/">
+                    <include name="*.txt"/>
                   </fileset>
                 </copy>
                 <zip destfile="${sonarAnalyzer.workDirectory}/static/SonarAnalyzer-csharp-${project.version}.zip"

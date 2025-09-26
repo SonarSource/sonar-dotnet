@@ -6,7 +6,7 @@
     <title>SonarAnalyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="file">LICENSE.txt</license>
+    <license type="file">licenses\LICENSE.txt</license>
     <projectUrl>https://redirect.sonarsource.com/doc/sonar-visualstudio.html</projectUrl>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <icon>images\sonarsource_64.png</icon>
@@ -26,7 +26,7 @@
     <file src="binaries\SonarAnalyzer.CSharp\*.dll" target="analyzers" />
     <file src="tools-cs\*.ps1" target="tools\" />
     <file src="logos\sonarsource_64.png" target="images\" />
-    <file src="..\..\THIRD-PARTY-NOTICES.txt" target="license\" />
-    <file src="..\..\LICENSE.txt" />
+    <file src="licenses\THIRD_PARTY_LICENSES\*" target="licenses\THIRD_PARTY_LICENSES\" />
+    <file src="..\..\LICENSE.txt" target="licenses\" />
   </files>
 </package>
