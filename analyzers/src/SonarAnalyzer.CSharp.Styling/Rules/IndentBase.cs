@@ -51,7 +51,7 @@ public abstract class IndentBase : StylingAnalyzer
         else if (current is StatementSyntax or AssignmentExpressionSyntax or SwitchExpressionArmSyntax
             || current is ExpressionSyntax { Parent: IfStatementSyntax or WhileStatementSyntax }
             || current.Parent is ArrowExpressionClauseSyntax or LambdaExpressionSyntax
-            || (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
+            || (current is InvocationExpressionSyntax or CollectionExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
         {
             return current;
         }

@@ -62,7 +62,7 @@ public sealed class IndentRawString : IndentBase
         {
             return memberAccess.Name;   // Off by one due to the dot
         }
-        else if (current is InvocationExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine())
+        else if (current is InvocationExpressionSyntax or CollectionExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine())
         {
             return current;
         }

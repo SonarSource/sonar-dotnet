@@ -150,6 +150,23 @@ public class Sample
         };
     }
 
+    public void CollectionExpression()
+    {
+        _ = string.Join(" ",
+            [
+                ""
+            + "Too close"       // Noncompliant
+                + "Good"
+                    + "Too far" // Noncompliant
+            ]);
+        _ = string.Join(" ", [
+            ""
+        + "Too close"       // Noncompliant
+            + "Good"
+                + "Too far" // Noncompliant
+            ]);
+    }
+
     public void Lambdas(int[] list, int[] longer)
     {
         list.Where(x => condition

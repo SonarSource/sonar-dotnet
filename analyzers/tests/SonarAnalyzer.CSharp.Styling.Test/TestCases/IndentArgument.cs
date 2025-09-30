@@ -162,6 +162,22 @@ public class Sample
         };
     }
 
+    public void CollectionExpression()
+    {
+        _ = string.Join(
+            " ",
+            [
+            "Too Close",        // Noncompliant {{Indent this argument at line position 17.}}
+                "Good",
+                    "Too far"   // Noncompliant {{Indent this argument at line position 17.}}
+            ]);
+        _ = string.Join(" ", [
+        "Too Close",        // Noncompliant {{Indent this argument at line position 13.}}
+            "Good",
+                "Too far"   // Noncompliant {{Indent this argument at line position 13.}}
+            ]);
+    }
+
     public void Lambdas(int[] list, int[] longer)
     {
         list.Where(x => Invocation(

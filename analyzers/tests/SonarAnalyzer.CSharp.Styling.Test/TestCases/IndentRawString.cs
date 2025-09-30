@@ -212,6 +212,31 @@ public class Sample
         };
     }
 
+    public void CollectionExpression()
+    {
+        _ = string.Join(" ",
+            [
+            """
+            Too close
+            """,            // Noncompliant {{Indent this raw string literal at line position 17.}}
+                """
+                Good
+                """, """
+                    Too far
+                    """     // Noncompliant {{Indent this raw string literal at line position 17.}}
+            ]);
+        _ = string.Join(" ", [
+        """
+        Too close
+        """,            // Noncompliant {{Indent this raw string literal at line position 13.}}
+            """
+            Good
+            """, """
+                Too far
+                """     // Noncompliant {{Indent this raw string literal at line position 13.}}
+        ]);
+    }
+
     public void Lambdas(int[] list)
     {
         // Simple lambda

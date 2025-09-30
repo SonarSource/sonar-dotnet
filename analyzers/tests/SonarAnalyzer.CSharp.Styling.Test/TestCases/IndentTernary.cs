@@ -186,6 +186,21 @@ public class Sample
         };
     }
 
+    public void CollectionExpression()
+    {
+        _ = string.Join(" ",
+            [
+                condition
+                    ? "true"
+                : "false" // Noncompliant
+            ]);
+        _ = string.Join(" ", [
+            condition
+                ? "true"
+            : "false" // Noncompliant
+        ]);
+    }
+
     public void Lambdas(int[] list, int[] longer)
     {
         list.Where(x => condition
