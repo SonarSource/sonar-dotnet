@@ -28,16 +28,17 @@ public sealed class AvoidArrangeActAssertComment : StylingAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
-        {
-            var comments = c.Node
-                .DescendantTrivia()
-                .Where(x => x.IsComment() && !ExtractWords(x).Except(ForbiddenComments).Any());
-
-            foreach (var comment in comments)
             {
-                c.ReportIssue(Rule, comment.GetLocation());
-            }
-        }, SyntaxKind.MethodDeclaration);
+                var comments = c.Node
+                    .DescendantTrivia()
+                    .Where(x => x.IsComment() && !ExtractWords(x).Except(ForbiddenComments, StringComparer.OrdinalIgnoreCase).Any());
+
+                foreach (var comment in comments)
+                {
+                    c.ReportIssue(Rule, comment.GetLocation());
+                }
+            },
+            SyntaxKind.MethodDeclaration);
 
     private static string[] ExtractWords(SyntaxTrivia comment) =>
         WordRegex.SafeMatches(comment.ToString())

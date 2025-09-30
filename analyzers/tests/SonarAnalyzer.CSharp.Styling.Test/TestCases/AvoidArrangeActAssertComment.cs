@@ -87,6 +87,22 @@ public class TestClass
         _ = 4 == result;
     }
 
+    public void DifferentCase()
+    {
+        // Noncompliant@+1
+        // arrange
+        // Noncompliant@+1
+        // aRRange
+        // Noncompliant@+1
+        // act
+        // Noncompliant@+1
+        // acT
+        // Noncompliant@+1
+        // assert
+        // Noncompliant@+1
+        // assERT
+    }
+
     private void AreEqual(object expected, object actual) { }
 }
 
