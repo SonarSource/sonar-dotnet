@@ -405,6 +405,25 @@ public class Sample
                 """);   // Noncompliant
     }
 
+    public void ArgumentWithInvocation()
+    {
+        Invocation("""
+            Good
+            """
+                .ToString());
+
+        Invocation(
+            """
+            Good
+            """
+                .ToString());
+
+        Invocation("""
+                Too far
+                """ // Noncompliant
+                    .ToString());
+    }
+
     public static bool Invocation(params object[] args) => true;
 
     [Obsolete("""

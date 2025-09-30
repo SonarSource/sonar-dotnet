@@ -58,6 +58,10 @@ public sealed class IndentRawString : IndentBase
         {
             return current;
         }
+        else if (current is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccessOnRawString } && memberAccessOnRawString.Expression == node)
+        {
+            return null;    // We don't want anything, when the invocation is on the raw string itself
+        }
         else if (current is InvocationExpressionSyntax invocation && invocation.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.OperatorToken.IsFirstTokenOnLine())
         {
             return memberAccess.Name;   // Off by one due to the dot
