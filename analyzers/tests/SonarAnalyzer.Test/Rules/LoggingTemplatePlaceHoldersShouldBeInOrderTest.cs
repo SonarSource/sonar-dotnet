@@ -30,7 +30,7 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
             .AddPaths("LoggingTemplatePlaceHoldersShouldBeInOrder.cs")
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]
@@ -54,7 +54,7 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
                 }
                 """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Information")]
@@ -78,7 +78,7 @@ public class LoggingTemplatePlaceHoldersShouldBeInOrderTest
                 }
                 """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("ConditionalDebug")]
     [DataRow("Error")]

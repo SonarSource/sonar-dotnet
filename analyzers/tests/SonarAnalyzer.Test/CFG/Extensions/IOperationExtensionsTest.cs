@@ -62,7 +62,7 @@ public class IOperationExtensionsTest
             }
             """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop().Should().NotBeNull();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("for (var i = 0; i < 9; i++) { }")]
     [DataRow("while (true) { }")]
     [DataRow("do { } while (true);")]

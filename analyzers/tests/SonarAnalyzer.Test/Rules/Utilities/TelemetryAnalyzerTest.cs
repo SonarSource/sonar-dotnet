@@ -32,7 +32,7 @@ public class TelemetryAnalyzerTest
 
     public TestContext TestContext { get; set; }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(CodeAnalysisCS.LanguageVersion.CSharp7, "netstandard2.0")]
     [DataRow(CodeAnalysisCS.LanguageVersion.CSharp8, "netstandard2.1")]
     [DataRow(CodeAnalysisCS.LanguageVersion.CSharp9, "net5")]
@@ -64,7 +64,7 @@ public class TelemetryAnalyzerTest
         });
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", new string[] { })]
     [DataRow("   ", new string[] { })]
     [DataRow(" net6 ", new[] { "net6" })]
@@ -85,7 +85,7 @@ public class TelemetryAnalyzerTest
         });
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(CodeAnalysisVB.LanguageVersion.VisualBasic15_3, "netcoreapp3.1")]
     [DataRow(CodeAnalysisVB.LanguageVersion.VisualBasic15_5, "netstandard2.0")]
     [DataRow(CodeAnalysisVB.LanguageVersion.VisualBasic11, "net5")]

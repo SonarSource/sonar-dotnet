@@ -53,7 +53,7 @@ public class CookieShouldBeSecureTest
             .AddReferences(MetadataReferenceFacade.SystemWeb)
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\SecureCookieConfig")]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\Formatting")]
     public void CookieShouldBeSecure_WithWebConfigValueSetToTrue(string root)
@@ -66,7 +66,7 @@ public class CookieShouldBeSecureTest
             .Verify();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\NonSecureCookieConfig")]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\UnrelatedConfig")]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeSecure\ConfigWithoutAttribute")]

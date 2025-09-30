@@ -21,7 +21,7 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions.Test;
 [TestClass]
 public class InvocationExpressionSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System.Array.$$Empty(Of Integer)()$$", "System.Array", "Empty(Of Integer)")]
     [DataRow("Me.$$M()$$", "Me", "M")]
     [DataRow("A?.$$M()$$", "A", "M")]
@@ -46,7 +46,7 @@ public class InvocationExpressionSyntaxExtensionsTest
         right.ToString().Should().Be(expectedRight);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("$$M()$$")]
     public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_VB(string expression)
     {

@@ -145,7 +145,7 @@ public class CombinatorialDataAttributeTest_AttributeTest
         data.Should().Throw<InvalidOperationException>().WithMessage("Combinatorial test must specify parameters with [DataValues] attributes");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Test ()")]
     [DataRow("Test ()", null)]
     [DataRow("Test (a)", "a")]

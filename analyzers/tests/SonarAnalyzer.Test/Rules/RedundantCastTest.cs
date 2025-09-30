@@ -91,7 +91,7 @@ public class RedundantCastTest
             }
             """).WithLanguageVersion(LanguageVersion.CSharp7_1).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("IEnumerable<string?>", "IEnumerable<string>", false)]
     [DataRow("IEnumerable<string>", "IEnumerable<string?>", false)]
     [DataRow("IEnumerable<string?>", "IEnumerable<string?>", true)]

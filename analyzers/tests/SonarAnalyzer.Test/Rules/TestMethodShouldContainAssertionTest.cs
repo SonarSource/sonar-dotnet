@@ -26,7 +26,7 @@ public class TestMethodShouldContainAssertionTest
 
     private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldContainAssertion>();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(MsTestVersions.Ver1)]
     [DataRow(Latest)]
     public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
@@ -34,14 +34,14 @@ public class TestMethodShouldContainAssertionTest
             .AddPaths("TestMethodShouldContainAssertion.MsTest.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs")
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(NUnitVersions.Ver3, Latest, Latest)]
     [DataRow(NUnitVersions.Ver3Latest, FluentAssertionVersions.Ver5, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
     [DataRow(NUnitVersions.Ver3Latest, Latest, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
     public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
         WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.NUnit.cs").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(NUnitVersions.Ver25)]
     [DataRow(NUnitVersions.Ver27)]
     public void TestMethodShouldContainAssertion_NUnit_V2Specific(string testFwkVersion) =>
@@ -82,7 +82,7 @@ public class TestMethodShouldContainAssertionTest
             }
             """).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(XUnitVersions.Ver2, Latest, Latest)]
     [DataRow(XUnitVersions.Ver253, Latest, Latest)]
     public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
@@ -102,7 +102,7 @@ public class TestMethodShouldContainAssertionTest
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver1)]
     [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
     public void TestMethodShouldContainAssertion_NUnit_FluentAssertionsLegacy(string testFwkVersion, string fluentVersion) =>

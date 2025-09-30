@@ -43,7 +43,7 @@ public class AvoidUnderPostingTest
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class")]
     [DataRow("struct")]
     [DataRow("record")]
@@ -68,7 +68,7 @@ public class AvoidUnderPostingTest
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("HttpDelete")]
     [DataRow("HttpGet")]
     [DataRow("HttpPost")]

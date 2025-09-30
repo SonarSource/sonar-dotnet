@@ -24,7 +24,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.1.11")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
@@ -40,7 +40,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
             AreEqual(str, ""); // Noncompliant
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.5.7.10213")]
     [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
     public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
@@ -57,7 +57,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
             AreEqual(str, ""); // Noncompliant
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(XUnitVersions.Ver2)]
     [DataRow(XUnitVersions.Ver253)]
     public void AssertionArgsShouldBePassedInCorrectOrder_XUnit(string testFwkVersion) =>

@@ -44,7 +44,7 @@ public class SonarSyntaxNodeReportingContextTest
 
 #if NET // .NET Fx shows the message box directly, the exception cannot be caught
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true)] // Purpose of this is to make sure that the scaffolding works successfully end-to-end
     [DataRow(false)]
     public void ReportIssue_TreeNotInCompilation_DoNotReport(bool reportOnCorrectTree)
@@ -79,7 +79,7 @@ public class SonarSyntaxNodeReportingContextTest
     }
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class")]
 #if NET
     [DataRow("record")]

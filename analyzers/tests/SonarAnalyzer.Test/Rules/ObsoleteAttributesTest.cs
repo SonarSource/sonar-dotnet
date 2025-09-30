@@ -80,7 +80,7 @@ public class ObsoleteAttributesTest
     public void RemoveObsoleteCode_VB() =>
         removeVB.AddPaths("RemoveObsoleteCode.vb").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     // All attribute targets of [Obsolete]
     [DataRow("bool field;")]                   // AttributeTargets.Field
     [DataRow("event EventHandler SomeEvent;")] // AttributeTargets.Event
@@ -120,7 +120,7 @@ public class ObsoleteAttributesTest
             """;
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // All attribute targets of [Obsolete]
     [DataRow("Private field As Boolean")]        // AttributeTargets.Field
     [DataRow("Event SomeEvent As EventHandler")] // AttributeTargets.Event

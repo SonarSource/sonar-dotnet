@@ -56,13 +56,13 @@ public class ClassAndMethodNameTest
 
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void ClassAndMethodName_VB(ProjectType projectType) =>
         new VerifierBuilder<VB.ClassName>().AddPaths("ClassAndMethodName.vb").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void ClassAndMethodName_MethodName(ProjectType projectType) =>
@@ -70,7 +70,7 @@ public class ClassAndMethodNameTest
             .AddReferences(TestCompiler.ProjectTypeReference(projectType))
             .WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("foo", "foo")]
     [DataRow("Foo", "Foo")]
     [DataRow("FFF", "FFF")]

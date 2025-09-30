@@ -44,7 +44,7 @@ public class ArrayPassedAsParamsTest
     public void ArrayPassedAsParams_VB() =>
         builderVB.AddPaths("ArrayPassedAsParams.vb").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("{ }", false)]
     [DataRow("""{ "s", "s", "s", "s" }""", false)]
     [DataRow("New String(2) { }", true)]

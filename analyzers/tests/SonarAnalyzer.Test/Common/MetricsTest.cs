@@ -297,7 +297,7 @@ End Class")
 
 #if NET
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", 0)]
     [DataRow("class Sample { }", 0)]
     [DataRow("abstract class Sample { public abstract void MyMethod1(); }", 0)]
@@ -338,7 +338,7 @@ End Class")
     public void Functions_CSharp(string function, int expected) =>
         Functions(AnalyzerLanguage.CSharp, function).Should().Be(expected);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", 0)]
     [DataRow("Class Sample \n \n End Class", 0)]
     [DataRow("MustInherit Class Sample \n MustOverride Sub MyMethod() \n End Class", 0)]

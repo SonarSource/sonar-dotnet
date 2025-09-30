@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Test.Extensions;
 [TestClass]
 public class ISymbolExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class SymbolMember();", true)]
     [DataRow("class SymbolMember() { }", true)]
     [DataRow("class SymbolMember(int a) { }", true)]

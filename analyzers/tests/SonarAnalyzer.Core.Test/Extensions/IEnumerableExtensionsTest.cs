@@ -167,7 +167,7 @@ public class IEnumerableExtensionsTest
     public void JoinAndNull() =>
         ((object[])null).JoinAnd().Should().Be(string.Empty);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")] // empty collection
     [DataRow("", null)]
     [DataRow("", "")]
@@ -181,7 +181,7 @@ public class IEnumerableExtensionsTest
     public void JoinAndStrings(string expected, params string[] collection) =>
         collection.JoinAnd().Should().Be(expected);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")] // Empty collection
     [DataRow("0", 0)]
     [DataRow("0 and 1", 0, 1)]
@@ -190,7 +190,7 @@ public class IEnumerableExtensionsTest
     public void JoinAndInts(string expected, params int[] collection) =>
         collection.JoinAnd().Should().Be(expected);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")] // Empty collection
     [DataRow("08/30/2022 12:29:11", "2022-08-30T12:29:11")]
     [DataRow("08/30/2022 12:29:11 and 12/24/2022 16:00:00", "2022-08-30T12:29:11", "2022-12-24T16:00:00")]
@@ -233,7 +233,7 @@ public class IEnumerableExtensionsTest
             .And.AllSatisfy(x => x.Message.Should().BeNull());
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow([])]
     public void ToSecondary_MessageArgs(string[] messageArgs)
@@ -253,7 +253,7 @@ public class IEnumerableExtensionsTest
             .And.AllSatisfy(x => x.Message.Should().Be("Message"));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Message {0}", "42")]
     [DataRow("{1} Message {0} ", "42", "21")]
     public void ToSecondary_MessageFormat(string format, params string[] messageArgs)
@@ -290,7 +290,7 @@ public class IEnumerableExtensionsTest
             .And.AllSatisfy(x => x.Message.Should().BeNull());
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow([])]
     public void ToSecondarySecondary_SyntaxNode_MessageArgs(string[] messageArgs)
@@ -309,7 +309,7 @@ public class IEnumerableExtensionsTest
             .And.AllSatisfy(x => x.Message.Should().Be("Message"));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Message {0}", "42")]
     [DataRow("{1} Message {0} ", "42", "21")]
     public void ToSecondarySecondary_SyntaxNode_MessageFormat(string format, params string[] messageArgs)
@@ -345,7 +345,7 @@ public class IEnumerableExtensionsTest
             .And.AllSatisfy(x => x.Message.Should().BeNull());
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow([])]
     public void ToSecondarySecondary_SyntaxToken_MessageArgs(string[] messageArgs)
@@ -364,7 +364,7 @@ public class IEnumerableExtensionsTest
             .And.AllSatisfy(x => x.Message.Should().Be("Message"));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Message {0}", "42")]
     [DataRow("{1} Message {0} ", "42", "21")]
     public void ToSecondarySecondary_SyntaxToken_MessageFormat(string format, params string[] messageArgs)

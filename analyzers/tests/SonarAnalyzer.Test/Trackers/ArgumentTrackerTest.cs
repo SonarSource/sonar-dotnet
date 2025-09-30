@@ -60,7 +60,7 @@ public class ArgumentTrackerTest
         context.Parameter.Type.Name.Should().Be("IFormatProvider");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""M( $$ ,  , 1)""", "i", true)]
     [DataRow("""M( $$ ,  , 1)""", "j", false)]
     [DataRow("""M(  , $$ , 1)""", "j", true)]
@@ -82,7 +82,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""1.ToString($$provider);""", 0, true)]
     [DataRow("""1.ToString($$provider);""", 1, false)]
     [DataRow("""1.ToString("", $$provider);""", 1, true)]
@@ -104,7 +104,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""i.ToString($$provider)""", 0, true)]
     [DataRow("""i.ToString($$provider)""", 1, false)]
     [DataRow("""i.ToString("", $$provider)""", 1, true)]
@@ -127,7 +127,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""int.TryParse("", $$out var result);""")]
     [DataRow("""int.TryParse("", System.Globalization.NumberStyles.HexNumber, null, $$out var result);""")]
     public void Method_RefOut_True(string invocation)
@@ -144,7 +144,7 @@ public class ArgumentTrackerTest
         context.Parameter.RefKind.Should().Be(RefKind.Out);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Integer.TryParse("", $$result)""")]
     [DataRow("""Integer.TryParse("", System.Globalization.NumberStyles.HexNumber, Nothing, $$result)""")]
     public void Method_RefOut_True_VB(string invocation)
@@ -161,7 +161,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""int.TryParse("", $$out var result);""", RefKind.Ref)]
     [DataRow("""int.TryParse("", $$out var result);""", RefKind.In)]
     [DataRow("""int.TryParse("", $$out var result);""", RefKind.RefReadOnlyParameter)]
@@ -184,7 +184,7 @@ public class ArgumentTrackerTest
         context.Parameter.Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""int.TryParse("", $$out var result);""")]
     [DataRow("""int.TryParse("", System.Globalization.NumberStyles.HexNumber, null, $$out var result);""")]
     public void Method_RefOut_Unspecified(string invocation)
@@ -200,7 +200,7 @@ public class ArgumentTrackerTest
         context.Parameter.RefKind.Should().Be(RefKind.Out);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("in s")]
     [DataRow("s")] // "in" is optional on the call side
     [DataRow("ref s")] // Valid, but produces warning CS9191: The 'ref' modifier for argument 1 corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
@@ -227,7 +227,7 @@ public class ArgumentTrackerTest
         context.Parameter.RefKind.Should().Be(RefKind.In);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("in s")]
     [DataRow("s")] // Valid, produces warning CS9192: Argument 1 should be passed with 'ref' or 'in' keyword
     [DataRow("ref s")]
@@ -255,7 +255,7 @@ public class ArgumentTrackerTest
         context.Parameter.RefKind.Should().Be(RefKind.RefReadOnlyParameter);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""new Direct().M($$1);""", true)]
     [DataRow("""new DirectDifferentParameterName().M($$1);""", false)] // FN. This would require ExplicitOrImplicitInterfaceImplementations from the internal ISymbolExtensions in Roslyn.
     [DataRow("""(new Explicit() as I).M($$1);""", true)]
@@ -298,7 +298,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Dim a = New Direct().M($$1)""", true)]
     [DataRow("""Dim a = New DirectDifferentParameterName().M($$1)""", false)] // FN. This would require ExplicitOrImplicitInterfaceImplementations from the internal ISymbolExtensions in Roslyn.
     [DataRow("""
@@ -357,7 +357,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""comparer.Compare($$default, default);""")]
     [DataRow("""new MyComparer<int>().Compare($$1, 2);""")]
     public void Method_Inheritance_BaseClasses_Generics(string invocation)
@@ -384,7 +384,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""comparer.Compare($$Nothing, Nothing)""", "x", true)]
     [DataRow("""comparer.Compare($$Nothing, Nothing)""", "a", false)]
     [DataRow("""Call New MyComparer(Of Integer)().Compare($$1, 2)""", "x", true)]
@@ -415,7 +415,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""OnInsert($$1, null);""")]
     [DataRow("""OnInsert(position: $$1, null);""")]
     public void Method_Inheritance_BaseClasses_Overrides(string invocation)
@@ -439,7 +439,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""OnInsert($$1, Nothing)""")]
     [DataRow("""OnInsert(position:= $$1, Nothing)""")]
     public void Method_Inheritance_BaseClasses_Overrides_VB(string invocation)
@@ -465,7 +465,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // learn.microsoft.com/en-us/dotnet/api/system.string.format
     [DataRow("""string.Format("format", $$0)""", "arg0")]
     [DataRow("""string.Format("format", 0, $$1)""", "arg1")]
@@ -488,7 +488,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // learn.microsoft.com/en-us/dotnet/api/system.string.format
     [DataRow("""String.Format("format", $$0)""", "arg0")]
     [DataRow("""String.Format("format", 0, $$1)""", "arg1")]
@@ -567,7 +567,7 @@ public class ArgumentTrackerTest
         context.Parameter.ContainingType.Name.Should().Be("ICollection");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
     [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
     [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 1, true)]
@@ -595,7 +595,7 @@ public class ArgumentTrackerTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""ProcessStartInfo($$"fileName")""", "fileName", 0, true)]
     [DataRow("""ProcessStartInfo($$"fileName")""", "arguments", 1, false)]
     [DataRow("""ProcessStartInfo("fileName", $$"arguments")""", "arguments", 1, true)]
@@ -618,7 +618,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""($$"fileName")""", "fileName", 0, true)]
     [DataRow("""($$"fileName")""", "arguments", 1, false)]
     [DataRow("""("fileName", $$"arguments")""", "arguments", 1, true)]
@@ -640,7 +640,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""new Dictionary<TKey, TValue>($$1)""", "capacity", 0, true)]
     [DataRow("""new Dictionary<int, TValue>($$1)""", "capacity", 0, true)]
     [DataRow("""new Dictionary<int, string>($$1)""", "capacity", 0, true)]
@@ -666,7 +666,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Dim a = new Dictionary(Of TKey, TValue)($$1)""", "capacity", 0, true)]
     [DataRow("""Dim a = new Dictionary(Of Integer, TValue)($$1)""", "capacity", 0, true)]
     [DataRow("""Dim a = new Dictionary(Of Integer, String)($$1)""", "capacity", 0, true)]
@@ -744,7 +744,7 @@ public class ArgumentTrackerTest
         result.Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""new NumberList($$1)""", "capacity", 0, false)] // FN. Syntactic checks bail out before the semantic model can resolve the alias
     [DataRow("""new($$1)""", "capacity", 0, true)]             // Target typed new resolves the alias
     public void Constructor_TypeAlias(string constructor, string parameterName, int descriptorPosition, bool expected)
@@ -785,7 +785,7 @@ public class ArgumentTrackerTest
         result.Should().BeFalse("FN. Syntactic check does not respect aliases.");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""new($$1, 2)""", true)]
     [DataRow("""new C(1, $$2)""", true)]
     [DataRow("""new CAlias(1, $$2)""", true)]
@@ -945,7 +945,7 @@ public class ArgumentTrackerTest
         associatedSymbol.Name.Should().Be("Item");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("list[$$1] = 1;")]
     [DataRow("(list[$$1], list[2]) = (1, 2);")]
     [DataRow("list[$$1]++;")]
@@ -965,7 +965,7 @@ public class ArgumentTrackerTest
         context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.MethodKind.Should().Be(MethodKind.PropertySet);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("list($$1) = 1")]
     [DataRow("list($$1) += 1")]
     [DataRow("list($$1) -= 1")]
@@ -984,7 +984,7 @@ public class ArgumentTrackerTest
         context.Parameter.ContainingSymbol.Should().BeAssignableTo<IMethodSymbol>().Which.MethodKind.Should().Be(MethodKind.PropertySet);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Environment.GetEnvironmentVariables()[$$"TEMP"]""")]
     [DataRow("""Environment.GetEnvironmentVariables()?[$$"TEMP"]""")]
     public void Indexer_DictionaryGet(string environmentVariableAccess)
@@ -1014,7 +1014,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""_ = this[$$0,0];""", "x", true)]
     [DataRow("""_ = this[0,$$0];""", "y", true)]
     [DataRow("""_ = this[$$y: 0,x: 0];""", "y", true)]
@@ -1050,7 +1050,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Dim a = Me($$0, 0)""", "x", true)]
     [DataRow("""Dim a = Me(0, $$0)""", "y", true)]
     [DataRow("""Dim a = Me(y := $$0, x := 0)""", "y", true)]
@@ -1088,7 +1088,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""process.Modules[$$0]""")]
     [DataRow("""process?.Modules[$$0]""")]
     [DataRow("""process.Modules?[$$0]""")]
@@ -1117,7 +1117,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""processStartInfo.Environment[$$"TEMP"]""")]
     [DataRow("""processStartInfo?.Environment[$$"TEMP"]""")]
     [DataRow("""processStartInfo.Environment?[$$"TEMP"]""")]
@@ -1142,7 +1142,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""this[$$"TEMP"]""", true)]
     [DataRow("""this[42, $$"TEMP"]""", false)]
     [DataRow("""this[42, 43, $$"TEMP"]""", true)]
@@ -1170,7 +1170,7 @@ public class ArgumentTrackerTest
         result.Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System.Int32", false)]
     [DataRow("System.Collections.Generic.IDictionary", true)]
     public void Indexer_WrongKnownType(string type, bool expectedResult)
@@ -1245,7 +1245,7 @@ public class ArgumentTrackerTest
 
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""[Designer($$"designerTypeName")]""", "designerTypeName", 0)]
     [DataRow("""[DesignerAttribute($$"designerTypeName")]""", "designerTypeName", 0)]
     [DataRow("""[DesignerAttribute($$"designerTypeName", "designerBaseTypeName")]""", "designerTypeName", 0)]
@@ -1275,7 +1275,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""[Obsolete($$"message")]""", "message", 0)]
     [DataRow("""[ObsoleteAttribute($$"message")]""", "message", 0)]
     [DataRow("""[ObsoleteAttribute($$"message", true)]""", "message", 0)]
@@ -1337,7 +1337,7 @@ public class ArgumentTrackerTest
         result.Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""<Designer($$"designerTypeName")>""", "designerTypeName", 0)]
     [DataRow("""<DesignerAttribute($$"designerTypeName")>""", "designerTypeName", 0)]
     [DataRow("""<DesignerAttribute($$"designerTypeName", "designerBaseTypeName")>""", "designerTypeName", 0)]
@@ -1358,7 +1358,7 @@ public class ArgumentTrackerTest
         result.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true)]""", "AllowMultiple", true)]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "AllowMultiple", true)]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "Inherited", false)]
@@ -1388,7 +1388,7 @@ public class ArgumentTrackerTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true)]""", "AllowMultiple", true)]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "AllowMultiple", true)]
     [DataRow("""[AttributeUsage(AttributeTargets.All,  $$AllowMultiple = true, Inherited = true)]""", "Inherited", false)]
@@ -1418,7 +1418,7 @@ public class ArgumentTrackerTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""<AttributeUsage(AttributeTargets.All,  $$AllowMultiple := true)>""", "AllowMultiple", true)]
     [DataRow("""<AttributeUsage(AttributeTargets.All,  $$AllowMultiple := true, Inherited := true)>""", "AllowMultiple", true)]
     [DataRow("""<AttributeUsage(AttributeTargets.All,  $$AllowMultiple := true, Inherited := true)>""", "Inherited", false)]

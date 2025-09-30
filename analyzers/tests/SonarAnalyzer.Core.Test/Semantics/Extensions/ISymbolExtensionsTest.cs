@@ -93,7 +93,7 @@ public class ISymbolExtensionsTest
     public void IsInType_Null_ArrayOfTypeSymbols() =>
         ISymbolExtensionsCommon.IsInType(null, []).Should().BeFalse();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("{ get; set; }")]
     [DataRow("{ get; }")]
     [DataRow("{ get; } = string.Empty;")]
@@ -283,7 +283,7 @@ public class ISymbolExtensionsTest
     public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
         ISymbolExtensionsCommon.GetEffectiveAccessibility(null).Should().Be(Accessibility.NotApplicable);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(SymbolKind.Alias, "alias")]
     [DataRow(SymbolKind.ArrayType, "array")]
     [DataRow(SymbolKind.Assembly, "assembly")]

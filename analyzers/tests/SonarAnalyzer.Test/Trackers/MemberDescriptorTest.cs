@@ -77,7 +77,7 @@ namespace Test
     [DataRow("", StringComparison.InvariantCultureIgnoreCase)]
     [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]
     [DataRow("clonenode", StringComparison.InvariantCulture)]
-    [DataTestMethod]
+    [TestMethod]
     public void MatchesAny_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
     {
         var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");
@@ -89,7 +89,7 @@ namespace Test
     [DataRow("", StringComparison.InvariantCultureIgnoreCase)]
     [DataRow("Clone", StringComparison.InvariantCultureIgnoreCase)]
     [DataRow("clonenode", StringComparison.InvariantCulture)]
-    [DataTestMethod]
+    [TestMethod]
     public void IsMatch_WhenMethodNameDoesNotMatch_ReturnsFalseDoesNotEvaluateSymbol(string memberName, StringComparison stringComparison)
     {
         var sut = new MemberDescriptor(KnownType.System_Xml_XmlNode, "CloneNode");

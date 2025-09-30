@@ -23,7 +23,7 @@ public class MemberShouldBeStaticTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldBeStatic>();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.0.0", "3.0.20105.1")]
     [DataRow(TestConstants.NuGetLatestVersion, TestConstants.NuGetLatestVersion)]
     public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>

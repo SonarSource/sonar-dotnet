@@ -68,7 +68,7 @@ public class LexicalAnalyzerTest
         sut.NextSymbol().Should().Be(Symbol.EndOfInput);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("0")]
     [DataRow("000")]
     [DataRow("-0")]
@@ -97,7 +97,7 @@ public class LexicalAnalyzerTest
         sut.NextSymbol().Should().Be(Symbol.EndOfInput);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("0.0")]
     [DataRow("000.000")]
     [DataRow("111.111")]
@@ -111,7 +111,7 @@ public class LexicalAnalyzerTest
         sut.NextSymbol().Should().Be(Symbol.EndOfInput);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("0e0", 0.0)]
     [DataRow("1e1", 10.0)]
     [DataRow("42e0", 42.0)]
@@ -134,7 +134,7 @@ public class LexicalAnalyzerTest
         sut.NextSymbol().Should().Be(Symbol.EndOfInput);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(" \"\" ", "")]
     [DataRow(" \"Lorem Ipsum\" ", "Lorem Ipsum")]
     [DataRow(" /*\"Lorem Ipsum\"*/ \"dolor sit amet\" ", "dolor sit amet")]
@@ -153,7 +153,7 @@ public class LexicalAnalyzerTest
         sut.NextSymbol().Should().Be(Symbol.EndOfInput);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("null", null)]
     [DataRow("true", true)]
     [DataRow("false", false)]
@@ -165,7 +165,7 @@ public class LexicalAnalyzerTest
         sut.NextSymbol().Should().Be(Symbol.EndOfInput);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(".", "Unexpected character '.' at line 1 position 1")]
     [DataRow("tx", "Unexpected character 'x'. Keyword 'true' was expected at line 1 position 1")]
     [DataRow(@"""\u", @"Unexpected EOI, \uXXXX escape expected at line 1 position 1")]

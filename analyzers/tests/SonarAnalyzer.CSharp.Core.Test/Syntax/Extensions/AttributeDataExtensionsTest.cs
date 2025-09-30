@@ -22,7 +22,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class AttributeDataExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, "Test", "Test")]
     [DataRow(true, "TestAttribute", "TestAttribute")]
     [DataRow(false, "TestAttribute", null)]
@@ -40,7 +40,7 @@ public class AttributeDataExtensionsTest
     public void HasName(bool expected, string attributeClassName, string testName) =>
         AttributeDataWithName(attributeClassName).HasName(testName).Should().Be(expected);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, "Test", "Test", "Test")]
     [DataRow(true, "TestAttribute", "TestAttribute", "TestAttribute")]
     [DataRow(false, "Test", "test", "other")]
@@ -119,7 +119,7 @@ public class AttributeDataExtensionsTest
         actualValue.Should().Be(new DateTime(2022, 12, 24));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("SomeText", typeof(string))]
     [DataRow(42, typeof(int))]
     [DataRow(null, null)]
@@ -135,7 +135,7 @@ public class AttributeDataExtensionsTest
         actualValue.Should().Be(value);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true)]
     [DataRow(false)]
     public void HasAttributeUsageInherited_InheritedSpecified(bool inherited)
@@ -181,7 +181,7 @@ public class AttributeDataExtensionsTest
         CompileAttribute(code).HasAttributeUsageInherited().Should().Be(true); // The default for Inherited = true
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, true)]
     [DataRow(false, true)] // The "Inherited" flag is not inherited for the AttributeUsage attribute itself. See also the SymbolHelperTest.GetAttributesWithInherited... tests,
                            // where the reflection behavior of MemberInfo.GetCustomAttributes is also tested.

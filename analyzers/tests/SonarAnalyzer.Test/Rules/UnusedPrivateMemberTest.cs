@@ -156,7 +156,7 @@ public partial class UnusedPrivateMemberTest
         .AddReferences(EntityFrameworkCoreReferences("7.0.14"))
         .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void UnusedPrivateMember(ProjectType projectType) =>

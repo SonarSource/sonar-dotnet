@@ -71,7 +71,7 @@ public class ProjectBuilderTest
     public void AddAdditionalDocument_CsharpSupportsCshtmlFiles() =>
         AssertAdditionalDocumentContains(EmptyCS.AddAdditionalDocument(@"TestCases\ProjectBuilder.AddDocument.cshtml"), "ProjectBuilder.AddDocument.cshtml");
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("cshtml")]
     [DataRow("razor")]
     public void AddAdditionalDocument_VbnetDoesntSupportRazorFiles(string extension) =>

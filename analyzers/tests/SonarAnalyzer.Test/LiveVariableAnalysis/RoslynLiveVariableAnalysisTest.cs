@@ -174,7 +174,7 @@ public partial class RoslynLiveVariableAnalysisTest
         context.ValidateExit();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Capturing(x => field + variable + intParameter);", DisplayName = "SimpleLambda")]
     [DataRow("Capturing((x) => field + variable + intParameter);", DisplayName = "ParenthesizedLambda")]
     [DataRow("Capturing(x => { Func<int> xxx = () => field + variable + intParameter; return xxx();});", DisplayName = "NestedLambda")]

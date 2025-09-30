@@ -24,7 +24,7 @@ public class NamespaceNameTest
         .AddTestReference() // For now, we raise only in UTs
         .AddSnippet("namespace SonarAnalyzer.Project.Folder.Something;", "ProductionCode.cs");   // Production code to import via using statement
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("SonarAnalyzer.Project.Folder.Something")]
     [DataRow("SonarAnalyzer.Project.Folder.Something.Test")]
     [DataRow("SonarAnalyzer.Project.Test.Folder.Something")]
@@ -33,7 +33,7 @@ public class NamespaceNameTest
             .AddSnippet($"namespace {name};")   // No using to remove, no issue raised here
             .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("SonarAnalyzer.Test.Project.Folder.Something")]    // Anywhere the .Test is
     [DataRow("SonarAnalyzer.Project.Test.Folder.Something")]
     [DataRow("SonarAnalyzer.Project.Folder.Test.Something")]

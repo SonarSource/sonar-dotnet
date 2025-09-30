@@ -37,7 +37,7 @@ public class LinkedListPropertiesInsteadOfMethodsTest
 
 #if NET
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("First")]
     [DataRow("Last")]
     public void LinkedListPropertiesInsteadOfMethods_TopLevelStatements(string name) =>

@@ -19,7 +19,7 @@ namespace SonarAnalyzer.CSharp.Core.RegularExpressions.Test;
 [TestClass]
 public class MessageTemplateParserTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow("}")]
     [DataRow("{{}}")]
@@ -35,7 +35,7 @@ public class MessageTemplateParserTest
         ShouldBeSuccess(result);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // named
     [DataRow("{world}", "world", 1, 5)]
     [DataRow("hello {world}", "world", 7, 5)]
@@ -62,7 +62,7 @@ public class MessageTemplateParserTest
         ShouldBe(result.Placeholders[0], placeholder, start, length);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // alignment
     [DataRow("hello {world,1}")]
     [DataRow("hello {world,42}")]
@@ -111,7 +111,7 @@ public class MessageTemplateParserTest
         ShouldBe(result.Placeholders[5], "ballet", 173, 6);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("{")]                                  // Left bracket is not allowed
     [DataRow("{{{")]                                // Third left bracket is not allowed (first two are valid)
     [DataRow("{}")]                                 // Empty placeholder is not allowed

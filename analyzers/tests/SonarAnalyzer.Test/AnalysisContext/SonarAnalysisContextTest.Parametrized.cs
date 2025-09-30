@@ -26,7 +26,7 @@ namespace SonarAnalyzer.Test.AnalysisContext;
 
 public partial class SonarAnalysisContextTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
     public void RegisterNodeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
@@ -40,7 +40,7 @@ public partial class SonarAnalysisContextTest
         context.AssertDelegateInvoked(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
     public void RegisterTreeAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)
@@ -75,7 +75,7 @@ public partial class SonarAnalysisContextTest
         context.AssertDelegateInvoked(true);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
     public void RegisterSemanticModelAction_UnchangedFiles_SonarParametrizedAnalysisContext(string unchangedFileName, bool expected)

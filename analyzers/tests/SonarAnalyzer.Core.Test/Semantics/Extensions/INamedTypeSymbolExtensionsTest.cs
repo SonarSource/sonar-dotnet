@@ -23,7 +23,7 @@ public class INamedTypeSymbolExtensionsTest
     public void GetAllNamedTypesForNamedType_WhenSymbolIsNull_ReturnsEmpty() =>
         ((INamedTypeSymbol)null).GetAllNamedTypes().Should().BeEmpty();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(TypeKind.Array, "array")]
     [DataRow(TypeKind.Class, "class")]
     [DataRow(TypeKind.Delegate, "delegate")]
@@ -62,7 +62,7 @@ public class INamedTypeSymbolExtensionsTest
 #endif
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(TypeKind.Class, "record")]
     [DataRow(TypeKind.Struct, "record struct")]
     public void GetClassification_Record(TypeKind typeKind, string expected)

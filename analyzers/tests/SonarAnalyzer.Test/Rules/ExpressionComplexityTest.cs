@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("==")]
         [DataRow("!=")]
         [DataRow("<")]
@@ -50,7 +50,7 @@ namespace SonarAnalyzer.Test.Rules
             """)
             .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("o", "??")]
         [DataRow("i", "|")]
         [DataRow("i", "^")]

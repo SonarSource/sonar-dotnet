@@ -19,7 +19,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class TupleExpressionSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("(1, 2)", "1,2")]
     [DataRow("(1, (2, 3))", "1,2,3")]
     [DataRow("(1, (2, 3), 4)", "1,2,3,4")]

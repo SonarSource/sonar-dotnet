@@ -22,7 +22,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class ArgumentSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("($$a, b) = (42, 42);")]
     [DataRow("(a, $$b) = (42, 42);")]
     [DataRow("(a, (b, $$c)) = (42, (42, 42));")]
@@ -71,7 +71,7 @@ public class ArgumentSyntaxExtensionsTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // Simple tuple
     [DataRow("($$1, (2, 3))", "(1, (2, 3))")]
     [DataRow("(1, ($$2, 3))", "(1, (2, 3))")]

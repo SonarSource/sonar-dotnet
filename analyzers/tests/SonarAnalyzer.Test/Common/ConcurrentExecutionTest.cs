@@ -30,7 +30,7 @@ public class ConcurrentExecutionTest
         reader.IsConcurrentExecutionEnabled.Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("true")]
     [DataRow("tRUE")]
     [DataRow("loremipsum")]

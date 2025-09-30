@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Core.Json.Test;
 [TestClass]
 public class SyntaxAnalyzerTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[null]", null)]
     [DataRow("[true]", true)]
     [DataRow("[false]", false)]
@@ -40,7 +40,7 @@ public class SyntaxAnalyzerTest
         value.Value.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("{}")]
     [DataRow("{ }")]
     [DataRow(" { \t\n\r } ")]
@@ -52,7 +52,7 @@ public class SyntaxAnalyzerTest
         ret.Count.Should().Be(0);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[]")]
     [DataRow("[ ]")]
     [DataRow(" [ \t\n\r ] ")]
@@ -136,7 +136,7 @@ public class SyntaxAnalyzerTest
         c["list"].Select(x => x.Value).Should().ContainInOrder(42, 43, 44);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("true", "{ or [ expected, but Value found at line 1 position 1")]
     [DataRow(@"{ ""key"",", ": expected, but Comma found at line 1 position 8")]
     [DataRow("{,", "String Value expected, but Comma found at line 1 position 2")]

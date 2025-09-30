@@ -23,7 +23,7 @@ public class UnchangedFilesTest
 {
     public TestContext TestContext { get; set; }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("ClassNotInstantiatable.cs", true)]
     [DataRow("SomeOtherFile.cs", false)]
     public void UnchangedFiles_SymbolBasedRule(string unchangedFileName, bool expectEmptyResults)
@@ -32,7 +32,7 @@ public class UnchangedFilesTest
         UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("AbstractTypesShouldNotHaveConstructors.cs", true)]
     [DataRow("SomeOtherFile.cs", false)]
     public void UnchangedFiles_SyntaxNodesBasedRule(string unchangedFileName, bool expectEmptyResults)
@@ -41,7 +41,7 @@ public class UnchangedFilesTest
         UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("FileLines20.cs", true)]
     [DataRow("SomeOtherFile.cs", false)]
     public void UnchangedFiles_SyntaxTreeBasedRule(string unchangedFileName, bool expectEmptyResults)
@@ -50,7 +50,7 @@ public class UnchangedFilesTest
         UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"Hotspots\LooseFilePermissions.Windows.cs", true)]
     [DataRow("SomeOtherFile.cs", false)]
     public void UnchangedFiles_CompilationStartBasedRule(string unchangedFileName, bool expectEmptyResults)
@@ -59,7 +59,7 @@ public class UnchangedFilesTest
         UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("UnusedPrivateMember.cs", true)]
     [DataRow("SomeOtherFile.cs", false)]
     public void UnchangedFiles_ReportDiagnosticIfNonGeneratedBasedRule(string unchangedFileName, bool expectEmptyResults)

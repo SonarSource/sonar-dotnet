@@ -26,7 +26,7 @@ public class AnalyzerLanguageTest
         AnalyzerLanguage.VisualBasic.ToString().Should().Be("Visual Basic");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("File.cs")]
     [DataRow("File.Cs")]
     [DataRow("File.CS")]
@@ -37,7 +37,7 @@ public class AnalyzerLanguageTest
     public void FromPath_CS(string path) =>
         AnalyzerLanguage.FromPath(path).Should().Be(AnalyzerLanguage.CSharp);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("File.vb")]
     [DataRow("File.Vb")]
     [DataRow("File.VB")]
@@ -46,7 +46,7 @@ public class AnalyzerLanguageTest
     public void FromPath_VB(string path) =>
         AnalyzerLanguage.FromPath(path).Should().Be(AnalyzerLanguage.VisualBasic);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("File.txt", ".txt")]
     [DataRow("", "")]
     [DataRow(null, "")]

@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Test.Wrappers;
 [TestClass]
 public class INamedTypeSymbolExtensionsTests
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("#nullable enable", "?", NullableAnnotation.Annotated)]
     [DataRow("#nullable enable", "", NullableAnnotation.NotAnnotated)]
     [DataRow("", "?", NullableAnnotation.Annotated)]

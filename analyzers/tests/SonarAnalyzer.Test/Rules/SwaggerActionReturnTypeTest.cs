@@ -38,7 +38,7 @@ public class SwaggerActionReturnTypeTest
     public void SwaggerActionReturnType_CS() =>
         builder.AddPaths("SwaggerActionReturnType.cs").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Ok(bar)""")]
     [DataRow("""Created("uri", bar)""")]
     [DataRow("""Created(new Uri("uri"), bar)""")]
@@ -76,7 +76,7 @@ public class SwaggerActionReturnTypeTest
                 """)
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Accepted("uri")""")]
     [DataRow("""Accepted(uri)""")]
     public void SwaggerActionReturnType_IActionResult_Compliant(string invocation) =>
@@ -100,7 +100,7 @@ public class SwaggerActionReturnTypeTest
                 """)
             .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""Results.Ok(bar)""")]
     [DataRow("""Results.Ok((object) bar)""")]
     [DataRow("""Results.Ok(bar)""")]

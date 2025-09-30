@@ -25,7 +25,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ExpectedExceptionAttributeShouldNotBeUsed>();
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExpectedExceptionAttributeShouldNotBeUsed>();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.1.11")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_CS(string testFwkVersion) =>
@@ -33,7 +33,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.5.7.10213")] // Lowest NUnit version available
     [DataRow("2.7.1")] // Latest version of NUnit that contains the attribute
     public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_CS(string testFwkVersion) =>
@@ -41,7 +41,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("3.0.0")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     [Description("Starting with version 3.0.0 the attribute was removed.")]
@@ -51,7 +51,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)
             .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.1.11")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_VB(string testFwkVersion) =>
@@ -59,7 +59,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.5.7.10213")]
     [DataRow("2.6.7")]
     public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_VB(string testFwkVersion) =>
@@ -67,7 +67,7 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("3.0.0")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     [Description("Starting with version 3.0.0 the attribute was removed.")]

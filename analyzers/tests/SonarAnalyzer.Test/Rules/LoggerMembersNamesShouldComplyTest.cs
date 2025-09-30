@@ -23,7 +23,7 @@ public class LoggerMembersNamesShouldComplyTest
 {
     private static readonly VerifierBuilder Builder = new VerifierBuilder<LoggerMembersNamesShouldComply>();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("log")]
     [DataRow("_log")]
     [DataRow("Log")]

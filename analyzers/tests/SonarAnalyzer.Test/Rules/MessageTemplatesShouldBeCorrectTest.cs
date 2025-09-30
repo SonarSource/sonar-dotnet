@@ -30,7 +30,7 @@ public class MessageTemplatesShouldBeCorrectTest
         .AddPaths("MessageTemplatesShouldBeCorrect.cs")
         .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("LogCritical", "")]
     [DataRow("LogDebug", "")]
     [DataRow("LogError", "")]
@@ -59,7 +59,7 @@ public class MessageTemplatesShouldBeCorrectTest
             """)
         .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug", "")]
     [DataRow("Error", "")]
     [DataRow("Information", "")]
@@ -89,7 +89,7 @@ public class MessageTemplatesShouldBeCorrectTest
             """)
         .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("ConditionalDebug")]
     [DataRow("Error")]
@@ -121,7 +121,7 @@ public class MessageTemplatesShouldBeCorrectTest
             """)
         .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("ConditionalDebug")]
     [DataRow("ConditionalTrace")]
     public void MessageTemplatesShouldBeCorrect_NLog_ConditionalExtensions_CS(string methodName) =>

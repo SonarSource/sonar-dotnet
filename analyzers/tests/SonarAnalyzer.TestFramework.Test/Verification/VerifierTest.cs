@@ -150,7 +150,7 @@ public class VerifierTest
                 """))
             .Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Dummy.SecondaryLocation.razor")]
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation(string path) =>
@@ -159,7 +159,7 @@ public class VerifierTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Dummy.SecondaryLocation.CSharp10.razor")]
     [DataRow("Dummy.SecondaryLocation.cshtml")]
     public void Verify_RazorWithAdditionalLocation_CSharp10(string path) =>
@@ -196,7 +196,7 @@ public class VerifierTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_RazorAnalysisIsDisabled_DoesNotRaise(string path) =>
@@ -204,7 +204,7 @@ public class VerifierTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarLintXml(TestContext, analyzeRazorCode: false))
             .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Dummy.razor")]
     [DataRow("Dummy.cshtml")]
     public void Verify_RazorAnalysisInSLAndNugetContext(string path) =>

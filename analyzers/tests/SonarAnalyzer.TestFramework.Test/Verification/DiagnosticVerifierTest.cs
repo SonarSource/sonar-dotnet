@@ -376,7 +376,7 @@ public class DiagnosticVerifierTest
                 """);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("First.vb", "Second.vb")]  // File ordering should not confuse the matching
     [DataRow("Second.vb", "First.vb")]
     public void ProjectLevelIssues_HaveExpectedAnnotationWithPath(string projectLevelIssueFile, string fileLevelIssueFile)

@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Syntax.Utilities.Test;
 [TestClass]
 public class GeneratedCodeRecognizerTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow("")]
     public void IsGenerated_WithNullOrEmptyPathAndNullRoot_ReturnsFalse(string path)
@@ -30,7 +30,7 @@ public class GeneratedCodeRecognizerTest
         new TestRecognizer().IsGenerated(tree).Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"C:\SonarSource\SomeFile.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs")]
@@ -52,7 +52,7 @@ public class GeneratedCodeRecognizerTest
         new TestRecognizer().IsGenerated(tree).Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_RAZOR.g.cS")]
     [DataRow(@"C:\SonarSource\SomeFile_razor.ide.g.cs")]
@@ -69,7 +69,7 @@ public class GeneratedCodeRecognizerTest
         GeneratedCodeRecognizer.IsCshtml(tree).Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_CSHTML.g.cs")]
     [DataRow(@"SomeFile_cshtml.g.cs")]
@@ -87,7 +87,7 @@ public class GeneratedCodeRecognizerTest
         GeneratedCodeRecognizer.IsRazor(tree).Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"C:\SonarSource\SomeFile.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_razor.g.cs.randomEnding")]
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs.randomEnding")]

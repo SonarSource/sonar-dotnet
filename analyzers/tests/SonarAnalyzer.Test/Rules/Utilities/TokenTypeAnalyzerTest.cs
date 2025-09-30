@@ -30,7 +30,7 @@ namespace SonarAnalyzer.Test.Rules
 
         public TestContext TestContext { get; set; }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_MainTokens_CS(ProjectType projectType) =>
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #if NET
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_MainTokens_CSharp11(ProjectType projectType) =>
@@ -58,7 +58,7 @@ namespace SonarAnalyzer.Test.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_MainTokens_CSharp12(ProjectType projectType) =>
@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Test.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Comment);
             });
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("Razor.razor")]
         [DataRow("Razor.cshtml")]
         public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #endif
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_MainTokens_VB(ProjectType projectType) =>
@@ -94,7 +94,7 @@ namespace SonarAnalyzer.Test.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Identifiers_CS(ProjectType projectType) =>
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.Test.Rules
                 info.Count(x => x.TokenType == TokenType.StringLiteral).Should().Be(2);
             });
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Identifiers_VB(ProjectType projectType) =>
@@ -119,7 +119,7 @@ namespace SonarAnalyzer.Test.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.NumericLiteral);
             });
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Trivia_CS(ProjectType projectType) =>
@@ -130,7 +130,7 @@ namespace SonarAnalyzer.Test.Rules
                 info.Should().ContainSingle(x => x.TokenType == TokenType.Keyword);
             });
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void Verify_Trivia_VB(ProjectType projectType) =>
@@ -147,7 +147,7 @@ namespace SonarAnalyzer.Test.Rules
                 // IdentifierTokenThreshold.cs has 4001 identifiers which exceeds current threshold of 4000. Due to this, the identifiers are not classified
                 tokenInfo.Should().NotContain(token => token.TokenType == TokenType.TypeName));
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("Tokens.cs", true)]
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)

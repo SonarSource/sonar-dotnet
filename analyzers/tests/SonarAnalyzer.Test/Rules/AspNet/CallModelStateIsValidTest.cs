@@ -136,7 +136,7 @@ public class CallModelStateIsValidTest
             }
             """).AddReferences(NuGetMetadataReference.FluentValidation()).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("!ModelState.IsValid")]
     [DataRow("ModelState?.IsValid is false")]
     [DataRow("!ModelState!.IsValid")]

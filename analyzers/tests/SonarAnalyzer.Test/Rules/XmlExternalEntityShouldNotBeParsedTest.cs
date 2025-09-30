@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(NetFrameworkVersion.Probably35, "XmlExternalEntityShouldNotBeParsed_XmlDocument_Net35.cs")]
         [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XmlDocument_Net4.cs")]
         [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XmlDocument_UnknownFrameworkVersion.cs")]
-        [DataTestMethod]
+        [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlDocument(NetFrameworkVersion version, string testFilePath) =>
             WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(NetFrameworkVersion.Probably35, "XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net35.cs")]
         [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XmlTextReader_Net4.cs")]
         [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XmlTextReader_UnknownFrameworkVersion.cs")]
-        [DataTestMethod]
+        [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlTextReader(NetFrameworkVersion version, string testFilePath) =>
             WithAnalyzer(version).AddPaths(testFilePath).WithOptions(LanguageOptions.FromCSharp8).Verify();
 
@@ -73,7 +73,7 @@ namespace SonarAnalyzer.Test.Rules
 
         [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
         [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_AlwaysSafe.cs")]
-        [DataTestMethod]
+        [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_AlwaysSafe(NetFrameworkVersion version, string testFilePath) =>
             WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
@@ -81,7 +81,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XmlReader_Net4.cs")]
         [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
         [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XmlReader_Net452.cs")]
-        [DataTestMethod]
+        [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XmlReader(NetFrameworkVersion version, string testFilePath) =>
             WithAnalyzer(version).AddPaths(testFilePath).Verify();
 
@@ -101,7 +101,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow(NetFrameworkVersion.Between4And451, "XmlExternalEntityShouldNotBeParsed_XPathDocument_Net4.cs")]
         [DataRow(NetFrameworkVersion.After452, "XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
         [DataRow(NetFrameworkVersion.Unknown, "XmlExternalEntityShouldNotBeParsed_XPathDocument_Net452.cs")]
-        [DataTestMethod]
+        [TestMethod]
         public void XmlExternalEntityShouldNotBeParsed_XPathDocument(NetFrameworkVersion version, string testFilePath) =>
             WithAnalyzer(version).AddPaths(testFilePath).Verify();
 

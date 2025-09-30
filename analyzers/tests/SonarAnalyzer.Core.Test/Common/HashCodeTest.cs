@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Core.Common.Test;
 [TestClass]
 public class HashCodeTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow("Lorem Ipsum")]
     public void Combine_ProducesDifferentResults(string input)

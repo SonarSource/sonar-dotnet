@@ -103,7 +103,7 @@ public class ITypeSymbolExtensionsTest
         type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System.Collections.Generic.IEnumerable<T>", "System.Collections.Generic.IEnumerable<T>", true)]
     [DataRow("System.Collections.Generic.IEnumerable<T>", "System.IDisposable", false)]
     [DataRow("System.Collections.Generic.IEnumerable<int>", "System.Collections.Generic.IEnumerable<T>", true)]
@@ -134,7 +134,7 @@ public class ITypeSymbolExtensionsTest
         typeSymbol.DerivesOrImplements(type).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Open`3", "Open`3", true)]
     [DataRow("Half2`2", "Open`3", true)]
     [DataRow("Half1`1", "Open`3", true)]
@@ -161,7 +161,7 @@ public class ITypeSymbolExtensionsTest
         type.DerivesOrImplements(derivesFrom).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("int")]
     [DataRow("System.Int32")]
     [DataRow("int?")]
@@ -184,7 +184,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsStruct().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("object")]
     [DataRow("System.IComparable")]
     public void IsStruct_Simple_False(string type)
@@ -198,7 +198,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsStruct().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("struct")]
     [DataRow("unmanaged")]
     public void IsStruct_Generic(string typeConstraint)
@@ -213,7 +213,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsStruct().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("T")]
     [DataRow("T?")]
     [DataRow("Nullable<T>")]
@@ -229,7 +229,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsStruct().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow("where T: new()")]
     [DataRow("where T: class")]
@@ -252,7 +252,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsStruct().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]                      // Unbounded (can be reference type or value type)
     [DataRow("where T: new()")]        // Unbounded
     [DataRow("where T: notnull")]      // Unbounded
@@ -310,7 +310,7 @@ public class ITypeSymbolExtensionsTest
         parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("int")]
     [DataRow("System.Int32")]
     [DataRow("CustomStruct")]
@@ -331,7 +331,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("object")]
     [DataRow("System.IComparable")]
     [DataRow("int?")]
@@ -347,7 +347,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("struct")]
     [DataRow("unmanaged")]
     public void IsNonNullableValueType_Generic(string typeConstraint)
@@ -362,7 +362,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("T?")]
     [DataRow("Nullable<T>")]
     public void IsNonNullableValueType_Generic_ConstraintStruct_Nullable(string type)
@@ -377,7 +377,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]                      // Unbounded (can be reference type or value type)
     [DataRow("where T: new()")]        // Unbounded
     [DataRow("where T: notnull")]      // Unbounded
@@ -408,7 +408,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("int?")]
     [DataRow("System.Nullable<int>")]
     public void IsNullableValueType_Simple_True(string type)
@@ -422,7 +422,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("int")]
     [DataRow("System.Int32")]
     [DataRow("CustomStruct")]
@@ -445,7 +445,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("T?")]
     [DataRow("Nullable<T>")]
     [DataRow("CustomStruct?")]
@@ -464,7 +464,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("struct")]
     [DataRow("unmanaged")]
     [DataRow("struct, Enum")]
@@ -481,7 +481,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("struct")]
     [DataRow("unmanaged")]
     public void IsNullableValueType_Generic_ConstraintStruct_NonNullable(string typeConstraint)
@@ -496,7 +496,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]                      // Unbounded (can be reference type or value type)
     [DataRow("where T: new()")]        // Unbounded
     [DataRow("where T: notnull")]      // Unbounded
@@ -523,7 +523,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", "AttributeTargets")]
     [DataRow("where T: Enum", "T")]
     [DataRow("where T: struct, Enum", "T")]
@@ -541,7 +541,7 @@ public class ITypeSymbolExtensionsTest
         fieldSymbol.Type.IsEnum().Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", "int")]
     [DataRow("", "object")]
     [DataRow("", "IComparable")]
@@ -564,7 +564,7 @@ public class ITypeSymbolExtensionsTest
     public void GetSelfAndBaseTypes_WhenSymbolIsNull_ReturnsEmpty() =>
         ((ITypeSymbol)null).GetSelfAndBaseTypes().Should().BeEmpty();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("BaseClass<int>         ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
     [DataRow("DerivedOpenGeneric<int>", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
     [DataRow("DerivedClosedGeneric   ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]

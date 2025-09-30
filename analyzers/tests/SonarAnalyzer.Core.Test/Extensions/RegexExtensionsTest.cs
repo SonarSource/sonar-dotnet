@@ -28,7 +28,7 @@ public class RegexExtensionsTest
 
     private const string MatchingPath = @"C:\Users\username\AppData\Local\Temp\00af5451-626f-40db-af1d-89d376dc5ef6\SomeFile.csproj";
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true)]
     [DataRow(false)]
     public void SafeIsMatch_Timeout_Fallback(bool timeoutFallback)
@@ -37,7 +37,7 @@ public class RegexExtensionsTest
         regex.SafeIsMatch(MatchingPath, timeoutFallback).Should().Be(timeoutFallback);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(MatchingPath, 1, false)]
     [DataRow(MatchingPath, 1_000_000, true)]
     [DataRow("äöü", 1, false)]
@@ -48,7 +48,7 @@ public class RegexExtensionsTest
         regex.SafeMatch(input).Success.Should().Be(matchSucceed);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(MatchingPath, 1, 0)]
     [DataRow(MatchingPath, 1_000_000, 1)]
     [DataRow("äöü", 1, 0)]
@@ -65,7 +65,7 @@ public class RegexExtensionsTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(MatchingPath, 1, MatchingPath)]
     [DataRow(MatchingPath, 1_000_000, "Replaced")]
     [DataRow("äöü", 1, "äöü")]
@@ -77,7 +77,7 @@ public class RegexExtensionsTest
         actual.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(MatchingPath, 1, false)]
     [DataRow(MatchingPath, 1_000_000, true)]
     [DataRow("äöü", 1, false)]
@@ -88,7 +88,7 @@ public class RegexExtensionsTest
         actual.Should().Be(isMatch);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(false)]
     [DataRow(true)]
     public void SafeRegex_IsMatch_TimeoutFallback(bool fallback)

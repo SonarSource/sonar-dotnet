@@ -84,7 +84,7 @@ public partial class SonarAnalysisContextBaseTest
         ShouldAnalyzeTree(options, generatedFileName, content).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis.");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
     public void ShouldAnalyzeTree_GeneratedFile_NoSonarLintXml(string fileName, bool expected)
@@ -117,7 +117,7 @@ public partial class SonarAnalysisContextBaseTest
         sonarLintXml.ToStringCallCount.Should().Be(1); // ... but we should only try to read the file once
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(GeneratedFileName, false)]
     [DataRow(OtherFileName, true)]
     public void ShouldAnalyzeTree_GeneratedFile_InvalidSonarLintXml(string fileName, bool expected)
@@ -135,7 +135,7 @@ public partial class SonarAnalysisContextBaseTest
         sonarLintXml.ToStringCallCount.Should().Be(1); // should not have attempted to read the file again
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(GeneratedFileName)]
     [DataRow(OtherFileName)]
     public void ShouldAnalyzeTree_GeneratedFile_AnalyzeGenerated_AnalyzeAllFiles(string fileName)
@@ -147,7 +147,7 @@ public partial class SonarAnalysisContextBaseTest
         sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(GeneratedFileName, LanguageNames.CSharp, false)]
     [DataRow(OtherFileName, LanguageNames.CSharp, true)]
     [DataRow(GeneratedFileName, LanguageNames.VisualBasic, false)]
@@ -169,7 +169,7 @@ public partial class SonarAnalysisContextBaseTest
     }
 
     // Until https://github.com/SonarSource/sonar-dotnet/issues/2228, we were considering a file as generated if the word "generated" was contained inside a region.
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("generated stuff")]
     [DataRow("Contains FooGenerated methods")]
     [DataRow("Windows Form Designer generated code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
@@ -334,7 +334,7 @@ public partial class SonarAnalysisContextBaseTest
         VerifyEmpty("test.cs", sourceCs, new CS.EmptyStatement());
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
@@ -342,7 +342,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_Exclusions_ReturnExpected(string filePath, string[] exclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, exclusions: exclusions);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
@@ -350,7 +350,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_GlobalExclusions_ReturnExpected(string filePath, string[] globalExclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalExclusions: globalExclusions);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
@@ -358,7 +358,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_TestExclusions_ReturnExpected(string filePath, string[] testExclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testExclusions: testExclusions);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, false)]
@@ -366,7 +366,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_GlobalTestExclusions_ReturnExpected(string filePath, string[] globalTestExclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, globalTestExclusions: globalTestExclusions);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, false)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
@@ -374,7 +374,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_Inclusions_ReturnExpected(string filePath, string[] inclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, inclusions: inclusions);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "NotFoo" }, ProjectType.Product, true)]
     [DataRow("Foo", new string[] { "Foo" }, ProjectType.Test, true)]
@@ -382,7 +382,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_TestInclusions_ReturnExpected(string filePath, string[] testInclusions, ProjectType projectType, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, projectType, expectedResult, testInclusions: testInclusions);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
     [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]
@@ -390,7 +390,7 @@ public partial class SonarAnalysisContextBaseTest
     public void ShouldAnalyzeTree_MixedInput_ProductProject_ReturnExpected(string filePath, string[] inclusions, string[] exclusions, bool expectedResult) =>
         ShouldAnalyzeTree_WithExclusionInclusionParametersSet_ReturnsTrueForIncludedFilesOnly(filePath, ProjectType.Product, expectedResult, inclusions: inclusions, exclusions: exclusions);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", new string[] { "Foo" }, new string[] { "Foo" }, false)]
     [DataRow("Foo", new string[] { "NotFoo" }, new string[] { "Foo" }, false)]
     [DataRow("Foo", new string[] { "Foo" }, new string[] { "NotFoo" }, true)]

@@ -38,7 +38,7 @@ public class SyntaxNodeExtensionsCSharpTest
         toString.NameIs(null).Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, "Test")]
     [DataRow(true, "Test", "Test")]
     [DataRow(true, "Other", "Test")]
@@ -50,7 +50,7 @@ public class SyntaxNodeExtensionsCSharpTest
         identifier.NameIs("other", orNames).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Strasse", "Straße", false)] // StringComparison.InvariantCulture returns in this case and so do other cultures like de-DE
     [DataRow("\u00F6", "\u006F\u0308", false)] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
     [DataRow("ö", "Ö", false)]
@@ -61,7 +61,7 @@ public class SyntaxNodeExtensionsCSharpTest
         identifier.NameIs(actual).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(false, "Strasse", "Straße")] // StringComparison.InvariantCulture returns in this case and so do other cultures like de-DE
     [DataRow(false, "\u00F6", "\u006F\u0308")] // 00F6 = ö; 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
     [DataRow(false, "ö", "\u006F\u0308", "ä", "oe")] // 006F = o; 0308 = https://www.fileformat.info/info/unicode/char/0308/index.htm
@@ -80,7 +80,7 @@ public class SyntaxNodeExtensionsCSharpTest
         returnStatement.NameIs("A", "B", "C").Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""void M() { var i = 42; }""")]
     [DataRow("""int M() => 42;""")]
     [DataRow("""Sample() : this(42) { }""")]

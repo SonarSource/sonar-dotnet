@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Core.Test.Semantics.Extensions;
 [TestClass]
 public class INamespaceSymbolExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System", "System")]
     [DataRow("System.Collections.Generic", "System.Collections.Generic")]
     // Odd cases but nothing that needs a fix:
@@ -39,7 +39,7 @@ public class INamespaceSymbolExtensionsTest
         ns.Is(test).Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", true)]
     [DataRow("System", false)]
     public void Is_Global(string test, bool expected)
@@ -56,7 +56,7 @@ public class INamespaceSymbolExtensionsTest
         globalNs.Is(test).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System", "Microsoft")]
     [DataRow("System", "System.Collections")]
     [DataRow("System.Collections", "System")]
@@ -94,7 +94,7 @@ public class INamespaceSymbolExtensionsTest
         action.Should().Throw<ArgumentNullException>().WithMessage("*name*");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow("System")]
     [DataRow("System.Collection")]

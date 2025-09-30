@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Core.Configuration.Test;
 [TestClass]
 public class SonarLintXmlReaderTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageNames.CSharp, "cs")]
     [DataRow(LanguageNames.VisualBasic, "vbnet")]
     public void SonarLintXmlReader_WhenAllValuesAreSet_ExpectedValues(string language, string xmlLanguageName)
@@ -85,7 +85,7 @@ public class SonarLintXmlReaderTest
     public void SonarLintXmlReader_DuplicatedProperties_DoesNotFail() =>
         ((Action)(() => CreateSonarLintXmlReader(@"TestResources\SonarLintXml\Duplicated_Properties\SonarLint.xml"))).Should().NotThrow();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow("this is not an xml")]
     [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]

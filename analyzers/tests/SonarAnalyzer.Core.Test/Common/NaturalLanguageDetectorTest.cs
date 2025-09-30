@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Test.Common;
 [TestClass]
 public class NaturalLanguageDetectorTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null, 0)]
     [DataRow("Hello02139710238712987", 1.3262863)]
     [DataRow("This is an english text!", 4.6352161)]

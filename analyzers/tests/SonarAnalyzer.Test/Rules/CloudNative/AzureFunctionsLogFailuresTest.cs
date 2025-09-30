@@ -27,7 +27,7 @@ namespace SonarAnalyzer.Test.Rules
         public void AzureFunctionsLogFailures_CS() =>
             builder.AddPaths("AzureFunctionsLogFailures.cs").Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         // Calls to LoggerExtensions.LogSomething extension methods
         [DataRow(true, "log.LogError(ex, string.Empty);")]
         [DataRow(true, "log.LogCritical(ex, string.Empty);")]

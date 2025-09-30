@@ -31,7 +31,7 @@ public class RuleCatalogTest
     public void RuleCatalog_HasAllFieldsSet_VB() =>
         AssertRuleS103(RuleCatalogVB.Rules["S103"]);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("S103", "CODE_SMELL")]
     [DataRow("S1048", "BUG")]
     [DataRow("S1313", "SECURITY_HOTSPOT")]
@@ -41,7 +41,7 @@ public class RuleCatalogTest
         RuleCatalogVB.Rules[id].Type.Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("S101", SourceScope.All)]
     [DataRow("S112", SourceScope.Main)]
     [DataRow("S3431", SourceScope.Tests)]

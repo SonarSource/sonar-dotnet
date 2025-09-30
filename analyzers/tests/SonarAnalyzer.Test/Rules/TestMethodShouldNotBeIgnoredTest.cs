@@ -29,7 +29,7 @@ public class TestMethodShouldNotBeIgnoredTest
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)    // IgnoreAttribute doesn't contain any reason param
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.2.0")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
@@ -53,7 +53,7 @@ public class TestMethodShouldNotBeIgnoredTest
             """)
             .VerifyNoIssuesIgnoreErrors();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.5.7.10213")]
     [DataRow("2.7.0")]
     public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion) =>
@@ -61,13 +61,13 @@ public class TestMethodShouldNotBeIgnoredTest
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("3.0.0")] // Ignore without reason no longer exist
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_NUnit(string testFwkVersion) =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.NUnit.cs").AddReferences(NuGetMetadataReference.NUnit(testFwkVersion)).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.0.0")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void TestMethodShouldNotBeIgnored_Xunit(string testFwkVersion) =>

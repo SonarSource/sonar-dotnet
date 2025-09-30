@@ -19,7 +19,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class InterpolatedStringExpressionSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"var methodCall = $""{Foo()}"";")]
     [DataRow(@"var nestedMethodCall = $""{$""{$""{Foo()}""}""}"";")]
     [DataRow(@"const int constant = 1; var mixConstantNonConstant = $""{notConstant}{constant}"";")]
@@ -31,7 +31,7 @@ public class InterpolatedStringExpressionSyntaxExtensionsTest
         InterpolatedStringExpressionSyntaxExtensions.InterpolatedTextValue(expression, model).Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"var textOnly = $""TextOnly"";", "TextOnly")]
     [DataRow(@"const string constantString = ""Foo""; const string constantInterpolation = $""{constantString} with text."";", "Foo with text.")]
     [DataRow(@"const string constantString = ""Foo""; const string constantInterpolation = $""{$""Nested {constantString}""} with text."";", "Nested Foo with text.")]

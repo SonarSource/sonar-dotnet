@@ -30,7 +30,7 @@ public class KnownTypeTest
     public void Constructor_InvalidName_Throws() =>
         ((Func<KnownType>)(() => new KnownType("Invalid.Order+Of.Separators"))).Should().Throw<ArgumentException>();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System.Action", true, "System.Action", false)]
     [DataRow("System.DateTime", false, "System.Action", false)]
     [DataRow("System.Collections.ArrayList", true, "System.Collections.ArrayList", false)]
@@ -69,7 +69,7 @@ public class KnownTypeTest
             .Matches(GetSymbol_CS(symbolName))
             .Should().Be(expectedMatch);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System.Collections.Generic.IDictionary(Of TKey, TValue)", false, "System.Collections.Generic.IDictionary", false)]
     [DataRow("System.Collections.Generic.IDictionary(Of TKey, TValue)", false, "System.Collections.Generic.IDictionary", false, "TKey")]
     [DataRow("System.Collections.Generic.IDictionary(Of TKey, TValue)", true, "System.Collections.Generic.IDictionary", false, "TKey", "TValue")]
@@ -86,7 +86,7 @@ public class KnownTypeTest
             .Matches(GetSymbol_VB(symbolName))
             .Should().Be(expectedMatch);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System.String", "System.String", false)]
     [DataRow("System.String[]", "System.String", true)]
     [DataRow("System.Action<T>", "System.Action", false, "T")]

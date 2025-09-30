@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #endif
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("1_1_1", "Group size of 1")]
         [DataRow("123_12", "First group is bigger then the second")]
         [DataRow("1234_123_123", "First group is bigger then the others")]
@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("0xFF________FF___FF", "Multiple irregular _'s as separator")]
         public void HasIrregularPattern(string numericToken, string message) => Assert.IsTrue(NumberPatternShouldBeRegular.HasIrregularPattern(numericToken), message);
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(".123_123_123_1", "No group before the dot")]
         [DataRow("123", "No group character")]
         [DataRow("1_123_123LU", "With LU suffix")]

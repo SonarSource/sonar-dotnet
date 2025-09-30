@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Test.LiveVariableAnalysis;
 
 public partial class RoslynLiveVariableAnalysisTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("using (var ms = new MemoryStream()) {", "}")]
     [DataRow("using var ms = new MemoryStream();", null)]
     public void Using_LiveInUntilTheEnd(string usingStatement, string suffix)
@@ -1276,7 +1276,7 @@ public partial class RoslynLiveVariableAnalysisTest
         context.Validate("Method(2);");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("catch")]
     [DataRow("catch (Exception)")]
     [DataRow("catch (Exception ex)")]

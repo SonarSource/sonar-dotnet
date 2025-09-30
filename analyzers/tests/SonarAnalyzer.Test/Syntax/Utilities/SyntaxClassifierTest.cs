@@ -18,7 +18,7 @@ namespace SonarAnalyzer.Test.Syntax.Utilities;
 [TestClass]
 public class SyntaxClassifierTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("while (condition) { }")]
     [DataRow("while (a && (b || !condition)) { }")]
     [DataRow("do { } while (condition);")]
@@ -46,7 +46,7 @@ public class SyntaxClassifierTest
         IsInLoopConditionCS(code).Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("While Condition : End While")]
     [DataRow("While A AndAlso (B OrElse Not Condition) : End While")]
     [DataRow("Do While Condition : Loop")]
@@ -96,7 +96,7 @@ public class SyntaxClassifierTest
     public void MemberAccessExpression_Null_VB() =>
         VisualBasicSyntaxClassifier.Instance.MemberAccessExpression(VB.SyntaxFactory.IdentifierName("unexpectedNodeType")).Should().BeNull();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("x => condition")]
     [DataRow("x => a && (b || !condition)")]
     [DataRow("_ => condition")]
@@ -104,7 +104,7 @@ public class SyntaxClassifierTest
     public void IsInLoopCondition_LambdaInLoop_CS(string lambda) =>
         IsInLoopConditionCS($$"""while (Enumerable.Repeat(10, 10).Select({{lambda}}).Any()) { }""").Should().BeFalse();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Function(X) Condition")]
     [DataRow("Function(X) A AndAlso (B OrElse Not Condition)")]
     [DataRow("Function(Item, Index) Condition")]

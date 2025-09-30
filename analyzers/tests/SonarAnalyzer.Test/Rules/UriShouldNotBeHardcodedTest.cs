@@ -48,7 +48,7 @@ public class UriShouldNotBeHardcodedTest
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("3.0.20105.1")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void UriShouldNotBeHardcoded_CS_VirtualPath_AspNet(string aspNetMvcVersion) =>
@@ -59,7 +59,7 @@ public class UriShouldNotBeHardcodedTest
 
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.0.4", "2.0.3", "2.1.1")]
     [DataRow("2.2.0", "2.2.0", "2.2.0")]
     public void UriShouldNotBeHardcoded_CS_VirtualPath_AspNetCore(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>

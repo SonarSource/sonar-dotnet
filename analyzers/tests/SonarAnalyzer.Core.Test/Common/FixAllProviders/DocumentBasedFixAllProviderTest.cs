@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Core.Test.Common.FixAllProviders;
 [TestClass]
 public class DocumentBasedFixAllProviderTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(FixAllScope.Document, "Fix all 'SDummy' in 'MyFile1.cs'")]
     [DataRow(FixAllScope.Project, "Fix all 'SDummy' in 'project0'")]
     [DataRow(FixAllScope.Solution, "Fix all 'SDummy' in Solution")]
@@ -76,7 +76,7 @@ public class DocumentBasedFixAllProviderTest
         document2BeforeContent.Should().Be(document2AfterContent);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(FixAllScope.Project)]
     [DataRow(FixAllScope.Solution)]
     public async Task GetFixAsync_ForProjectAndSolution_AllFilesAreFixed(FixAllScope scope)

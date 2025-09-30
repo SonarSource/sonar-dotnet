@@ -19,7 +19,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class VariableDesignationSyntaxWrapperTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("var (a, b) = (1, 2);", "a,b")]
     [DataRow("var (a, _) = (1, 2);", "a")]
     [DataRow("var (a, (b, c), d) = (1, (2, 3), 4);", "a,b,c,d")]

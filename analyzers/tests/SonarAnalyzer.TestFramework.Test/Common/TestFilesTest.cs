@@ -28,7 +28,7 @@ public class TestFilesTest
         TestFiles.TestPath(TestContext, "This is also pretty long file name that will make sure we exceed the maximum reasonable file length 2.txt").Should().Contain("TooLongTestName.1");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"C:\", @"C:\", @"\")]
     [DataRow(@"C:\a", @"C:\a\", @"\")]
     [DataRow(@"C:\A", @"C:\a\", @"\")]

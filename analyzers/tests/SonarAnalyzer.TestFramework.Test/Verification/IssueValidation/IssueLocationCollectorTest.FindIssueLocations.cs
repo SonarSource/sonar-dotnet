@@ -136,7 +136,7 @@ public partial class IssueLocationCollectorTest
                 """);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Opening { collides with message assertion")]
     [DataRow("Closing } collides with message assertion")]
     [DataRow("The @ collides with line offset @-1 or @+1")]

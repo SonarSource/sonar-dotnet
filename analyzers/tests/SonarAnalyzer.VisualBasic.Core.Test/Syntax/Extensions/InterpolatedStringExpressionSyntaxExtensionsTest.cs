@@ -19,7 +19,7 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions.Test;
 [TestClass]
 public class InterpolatedStringExpressionSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"Dim methodCall = $""{Foo()}""")]
     [DataRow(@"Dim nestedMethodCall = $""{$""{$""{Foo()}""}""}""")]
     [DataRow(@"Const constant As Integer = 1 : Dim mixConstantNonConstant = $""{notConstant}{constant}""")]
@@ -31,7 +31,7 @@ public class InterpolatedStringExpressionSyntaxExtensionsTest
         InterpolatedStringExpressionSyntaxExtensions.InterpolatedTextValue(expression, model).Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"Dim textOnly = $""TextOnly""", "TextOnly")]
     [DataRow(@"Const constantString As String = ""Foo"" : Dim constantInterpolation As String = $""{constantString} with text.""", "Foo with text.")]
     [DataRow(@"Const constantString As String = ""Foo"" : Dim constantInterpolation As String = $""{$""Nested {constantString}""} with text.""", "Nested Foo with text.")]

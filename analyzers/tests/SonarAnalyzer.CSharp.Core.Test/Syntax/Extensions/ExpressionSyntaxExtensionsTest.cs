@@ -19,7 +19,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class ExpressionSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("null", false)]
     [DataRow("var o = new object();", true)]
     [DataRow("int? x = 1", true)]
@@ -31,7 +31,7 @@ public class ExpressionSyntaxExtensionsTest
         expression.CanBeNull(semanticModel).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("a", "a")]
     [DataRow("a + b", "a", "b")]
     [DataRow("a++", "a")]
@@ -64,7 +64,7 @@ public class ExpressionSyntaxExtensionsTest
         asString.Should().BeEquivalentTo(memberIdentifiers);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("a", "a")]
     [DataRow("null", "null")]
     [DataRow("a + b", "null")]
@@ -90,7 +90,7 @@ public class ExpressionSyntaxExtensionsTest
         asString.Should().BeEquivalentTo(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("default", true)]
     [DataRow("default!", true)]
     [DataRow("(default)!", true)]

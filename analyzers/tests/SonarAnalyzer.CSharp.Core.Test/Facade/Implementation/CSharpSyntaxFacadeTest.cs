@@ -69,7 +69,7 @@ public class CSharpSyntaxFacadeTest
     public void RemoveConditionalAccess_Null_CS() =>
         cs.RemoveConditionalAccess(null).Should().BeNull();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("M()", "M()")]
     [DataRow("this.M()", "this.M()")]
     [DataRow("A.B.C.M()", "A.B.C.M()")]

@@ -22,7 +22,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class ITupleOperationWrapperExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     // Tuple expression on the right side of assignment
     [DataRow("_ = (1, 2);", "1", "2")]
     [DataRow("_ = (x: 1, y: 2);", "1", "2")]

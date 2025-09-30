@@ -65,7 +65,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("where T: IEquatable<T>, IComparable", "where T: System.IComparable, IEquatable<T>")]
     [DataRow("where T: List<IEquatable<T>>, IList<T>, IComparable", "where T: List<IEquatable<T>>, IComparable, IList<T>")]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters_NonCompliant(string constraint1, string constraint2) =>
@@ -90,7 +90,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             }
             """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", "")]
     [DataRow("where TKey: TValue", "where TKey: TValue")]
     [DataRow("where TKey: TValue where TValue: IComparable", "where TKey: TValue where TValue: IComparable")]
@@ -125,7 +125,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             }
             """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Of TKey, TValue", "Of TKey, TValue")]
     [DataRow("Of TKey As Structure, TValue", "Of TKey As Structure, TValue")]
     [DataRow("Of TKey As Structure, TValue As Class", "Of TKey As Structure, TValue As Class")]
@@ -154,7 +154,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             End Class
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", "where TKey: struct")]
     [DataRow("where TKey: struct", "")]
     [DataRow("where TKey: struct", "where TKey: class")]
@@ -187,7 +187,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             }
             """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Of TKey, TValue", "Of TKey, TValue As Structure")]
     [DataRow("Of TKey, TValue As Class", "Of TKey, TValue As Structure")]
     [DataRow("Of TKey As Structure, TValue", "Of TKey, TValue As Structure")]
@@ -212,7 +212,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             End Class
             """).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow("where TKey: struct")]
     [DataRow("where TKey: struct where TValue: class")]
@@ -249,7 +249,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
 
 #if NET
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>")]
     [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>, TResult")]
     [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult> where TResult: IEqualityOperators<TSelf, TSelf, TResult>")]

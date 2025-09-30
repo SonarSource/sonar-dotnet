@@ -50,7 +50,7 @@ public class ProjectConfigReaderTest
         sut.TargetFramework.Should().Be("netcoreapp3.1");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Path_MixedSeparators", @"c:\foo\bar\.sonarqube\conf/0/FilesToAnalyze.txt")]
     [DataRow("Path_Unix", @"/home/user/.sonarqube/conf/0/FilesToAnalyze.txt")]
     [DataRow("Path_Windows", @"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt")]
@@ -73,7 +73,7 @@ public class ProjectConfigReaderTest
     public void WhenHasUnexpectedProjectType_FallsBackToProduct() =>
         CreateProjectConfigReader(@"TestResources\SonarProjectConfig\UnexpectedProjectTypeValue\SonarProjectConfig.xml").ProjectType.Should().Be(ProjectType.Product);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("MissingAnalysisConfigPath")]
     [DataRow("MissingOutPath")]
     [DataRow("MissingProjectPath")]
@@ -82,7 +82,7 @@ public class ProjectConfigReaderTest
     public void WhenHasMissingValues_FilesToAnalyzePath_ReturnsCorrectValue(string folder) =>
         CreateProjectConfigReader($@"TestResources\SonarProjectConfig\{folder}\SonarProjectConfig.xml").FilesToAnalyzePath.Should().Be(@"c:\foo\bar\.sonarqube\conf\0\FilesToAnalyze.txt");
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Invalid_DifferentClassName")]
     [DataRow("Invalid_DifferentNamespace")]
     [DataRow("Invalid_Xml")]

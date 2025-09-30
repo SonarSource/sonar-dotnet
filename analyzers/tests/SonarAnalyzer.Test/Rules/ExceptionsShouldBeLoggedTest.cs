@@ -33,7 +33,7 @@ public class ExceptionsShouldBeLoggedTest
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Log", LogLevelParameter)]
     [DataRow("Log", LogLevelParameter, EventIdParameter)]
     [DataRow("LogCritical")]
@@ -84,7 +84,7 @@ public class ExceptionsShouldBeLoggedTest
            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
            .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Error")]
     [DataRow("Debug")]
     [DataRow("Fatal")]
@@ -122,7 +122,7 @@ public class ExceptionsShouldBeLoggedTest
            .AddReferences(NuGetMetadataReference.CastleCore())
            .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Error")]
     [DataRow("Debug")]
     [DataRow("Fatal")]
@@ -164,7 +164,7 @@ public class ExceptionsShouldBeLoggedTest
             .AddReferences(NuGetMetadataReference.CommonLoggingCore())
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Fatal")]
@@ -204,7 +204,7 @@ public class ExceptionsShouldBeLoggedTest
             .AddReferences(NuGetMetadataReference.Log4Net("3.0.1", "netstandard2.0")) // After 3.0.2 they removed ILogExtensions.
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("ILogger", "Debug")]
     [DataRow("ILogger", "Error")]
     [DataRow("ILogger", "Fatal")]
@@ -283,7 +283,7 @@ public class ExceptionsShouldBeLoggedTest
            .AddReferences(NuGetMetadataReference.NLog())
            .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("ConditionalDebug")]
     [DataRow("ConditionalTrace")]
     // https://nlog-project.org/documentation/v5.0.0/html/Methods_T_NLog_Logger.htm

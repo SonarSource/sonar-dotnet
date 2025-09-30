@@ -121,7 +121,7 @@ public class C
         typeInfo.ConvertedNullability().Should().Be(new NullabilityInfo(NullableAnnotation.None, NullableFlowState.None));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug.Assert(o != null);")]
     [DataRow("Debug.Fail(string.Empty);")]
     public void NullabilityInfoRecognizesDebug(string debug)
@@ -152,7 +152,7 @@ public class C
         typeInfo.ConvertedNullability().Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(typeof(NullableAnnotation), typeof(Microsoft.CodeAnalysis.NullableAnnotation))]
     [DataRow(typeof(NullableFlowState), typeof(Microsoft.CodeAnalysis.NullableFlowState))]
     public void NullableEnumsAreIdentical(Type fromShim, Type fromRoslyn)

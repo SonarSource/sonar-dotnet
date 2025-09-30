@@ -27,7 +27,7 @@ public class UseConstantLoggingTemplateTest
     public void UseConstantLoggingTemplate_CS() =>
         builder.AddPaths("UseConstantLoggingTemplate.cs").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Debug")]
     [DataRow("Error")]
@@ -51,7 +51,7 @@ public class UseConstantLoggingTemplateTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Fatal")]
@@ -80,7 +80,7 @@ public class UseConstantLoggingTemplateTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Log", "LogLevel.Warning,")]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
@@ -102,7 +102,7 @@ public class UseConstantLoggingTemplateTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("ConditionalDebug")]
     [DataRow("ConditionalTrace")]
     [DataRow("Debug")]
@@ -143,7 +143,7 @@ public class UseConstantLoggingTemplateTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Fatal")]

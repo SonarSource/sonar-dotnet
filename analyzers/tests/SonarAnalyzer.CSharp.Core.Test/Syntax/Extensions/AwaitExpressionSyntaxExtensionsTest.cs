@@ -21,7 +21,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class AwaitExpressionSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[|await t|];", "t")]
     [DataRow("[|await t.ConfigureAwait(false)|];", "t")]
     [DataRow("[|await (t.ConfigureAwait(false))|];", "t")]

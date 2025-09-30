@@ -139,7 +139,7 @@ public interface IInterface
 }
 ").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("private", "Remove the unused private constructor 'Foo'.")]
     [DataRow("protected", "Remove unused constructor of private type 'Foo'.")]
     [DataRow("internal", "Remove unused constructor of private type 'Foo'.")]

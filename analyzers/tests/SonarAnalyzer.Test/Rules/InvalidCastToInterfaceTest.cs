@@ -25,7 +25,7 @@ public class InvalidCastToInterfaceTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InvalidCastToInterface>();  // Syntax-based part of the rule, there also exists Sonar SE part
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InvalidCastToInterface>();  // Syntax-based part only
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void InvalidCastToInterface_CS(ProjectType projectType) =>

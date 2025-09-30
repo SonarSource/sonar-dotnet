@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #endif
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void FieldsShouldNotDifferByCapitalization_CS(ProjectType projectType) =>
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void FieldsShouldNotDifferByCapitalization_VB(ProjectType projectType) =>

@@ -98,7 +98,7 @@ public class EditorConfigGeneratorTest
         generateWithNullElement.Should().Throw<NullReferenceException>();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow("          ")]
     public void GenerateEditorConfig_EmptyFile_Throws(string element)

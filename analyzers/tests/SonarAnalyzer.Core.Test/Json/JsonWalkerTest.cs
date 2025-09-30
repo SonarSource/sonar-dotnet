@@ -39,7 +39,7 @@ public class JsonWalkerTest
         sut.VisitedValues.Should().BeEquivalentTo(new object[] { "OuterValue", true, null, "Array1", "Array2-Nested1", null, "Array2-Nested2", "Array2-NestedObject", "Array3" });
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[]")]
     [DataRow("{}")]
     public void VisitsAtomicJson_VisitsEmpty(string json)

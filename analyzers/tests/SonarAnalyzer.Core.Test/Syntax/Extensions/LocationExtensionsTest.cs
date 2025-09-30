@@ -99,7 +99,7 @@ public class LocationExtensionsTest
         secondaryLocation.Message.Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow([])]
     public void ToSecondary_MessageArgs(string[] messageArgs)
@@ -114,7 +114,7 @@ public class LocationExtensionsTest
         secondaryLocation.Message.Should().Be("Message");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Message {0}", "42")]
     [DataRow("{1} Message {0} ", "42", "21")]
     public void ToSecondary_MessageFormat(string format, params string[] messageArgs)

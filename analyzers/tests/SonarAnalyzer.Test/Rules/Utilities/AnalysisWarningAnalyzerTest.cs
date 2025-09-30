@@ -28,7 +28,7 @@ public class AnalysisWarningAnalyzerTest
 {
     public TestContext TestContext { get; set; }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageNames.CSharp, true)]
     [DataRow(LanguageNames.CSharp, false)]
     [DataRow(LanguageNames.VisualBasic, true)]
@@ -39,7 +39,7 @@ public class AnalysisWarningAnalyzerTest
         File.Exists(expectedPath).Should().BeFalse("Analysis warning file should not be generated.");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageNames.CSharp)]
     [DataRow(LanguageNames.VisualBasic)]
     public void AnalysisWarning_MSBuild14UnsupportedScenario_GenerateWarning(string languageName)
@@ -49,7 +49,7 @@ public class AnalysisWarningAnalyzerTest
         File.ReadAllText(expectedPath).Should().Be("""[{"text": "The analysis using MsBuild 14 is no longer supported and the analysis with MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher."}]""");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageNames.CSharp)]
     [DataRow(LanguageNames.VisualBasic)]
     public void AnalysisWarning_MSBuild15DeprecatedScenario_GenerateWarning(string languageName)
@@ -59,7 +59,7 @@ public class AnalysisWarningAnalyzerTest
         File.ReadAllText(expectedPath).Should().Be("""[{"text": "The analysis using MsBuild 15 is deprecated. Please update your pipeline to MsBuild 16 or higher."}]""");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageNames.CSharp)]
     [DataRow(LanguageNames.VisualBasic)]
     public void AnalysisWarning_LockFile_PathShouldBeReused(string languageName)
@@ -70,7 +70,7 @@ public class AnalysisWarningAnalyzerTest
         ExecuteAnalyzer(languageName, true, RoslynVersion.VS2017MajorVersion, 1000).Should().Be(expectedPath, "path should be reused and analyzer should not fail");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageNames.CSharp)]
     [DataRow(LanguageNames.VisualBasic)]
     public void AnalysisWarning_FileExceptions_AreIgnored(string languageName)

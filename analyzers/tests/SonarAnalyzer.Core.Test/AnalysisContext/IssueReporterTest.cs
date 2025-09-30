@@ -26,7 +26,7 @@ public class IssueReporterTest
     private readonly Version defaultVersion = new Version("4.9.2");
     private readonly DummyDiagnosticReporter reporter = new();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("S1481")]
     [DataRow("S927")]
     [DataRow("S4487")]
@@ -105,7 +105,7 @@ public class IssueReporterTest
     public void ReportIssueCore_MinimumRoslyVersion_Is_4_9_2() =>
         Assert.AreEqual(defaultVersion, IssueReporter.GetMinimumDesignTimeRoslynVersion());
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null, false)]
     [DataRow("error", false)]
     [DataRow("error:", false)]

@@ -29,7 +29,7 @@ public class CompilationExtensionsTest
         }
         """;
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("NonExistingType", "NonExistingMember", false)]
     [DataRow("Sample", "NonExistingMember", false)]
     [DataRow("Sample", "_field", true)]

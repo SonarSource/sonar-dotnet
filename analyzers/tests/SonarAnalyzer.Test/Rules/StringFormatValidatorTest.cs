@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<StringFormatValidator>();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_RuntimeExceptionFree(ProjectType projectType) =>
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_TypoFree(ProjectType projectType) =>
@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #if NET
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_RuntimeExceptionFree_CSharp11(ProjectType projectType) =>
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void StringFormatValidator_TypoFree_CSharp11(ProjectType projectType) =>

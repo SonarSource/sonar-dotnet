@@ -28,7 +28,7 @@ public class NetFrameworkVersionProviderTest
         versionProvider.Version(null).Should().Be(NetFrameworkVersion.Unknown);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("3.5", NetFrameworkVersion.Probably35)]
     [DataRow("4.0_no_IO", NetFrameworkVersion.Between4And451)]
     [DataRow("4.0_with_IO", NetFrameworkVersion.Between4And451)]

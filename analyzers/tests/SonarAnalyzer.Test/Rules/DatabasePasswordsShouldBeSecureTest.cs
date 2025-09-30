@@ -28,7 +28,7 @@ namespace SonarAnalyzer.Test.Rules
 
         public TestContext TestContext { get; set; }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("3.1.11", "3.19.80")]
         [DataRow("5.0.2", "5.21.1")]
         public void DatabasePasswordsShouldBeSecure_CS(string entityFrameworkCoreVersion, string oracleVersion) =>
@@ -37,7 +37,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(GetReferences(entityFrameworkCoreVersion, oracleVersion))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("3.1.11", "3.19.80")]
         [DataRow("5.0.2", "5.21.1")]
         public void DatabasePasswordsShouldBeSecure_CS_Latest(string entityFrameworkCoreVersion, string oracleVersion) =>
@@ -60,7 +60,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(GetReferences("3.1.11", "3.19.80"))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(true, @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\Values")]
         [DataRow(false, @"TestCases\WebConfig\DatabasePasswordsShouldBeSecure\UnexpectedContent")]
         public void DatabasePasswordsShouldBeSecure_CS_WebConfig(bool expectIssues, string root)
@@ -88,7 +88,7 @@ namespace SonarAnalyzer.Test.Rules
             VerifyAdditionalFiles(false, corruptFilePath, nonExistentFilePath);
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(true, @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\Values")]
         [DataRow(false, @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\ArrayInside")]
         [DataRow(false, @"TestCases\AppSettings\DatabasePasswordsShouldBeSecure\UnexpectedContent\EmptyArray")]

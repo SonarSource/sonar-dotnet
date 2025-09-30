@@ -21,7 +21,7 @@ namespace SonarAnalyzer.Core.RegularExpressions.Test;
 [TestClass]
 public class RegexContextTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[A", RegexOptions.None)]
 #if NET
     [DataRow(@"^([0-9]{2})(?<!00)$", RegexOptions.NonBacktracking)]

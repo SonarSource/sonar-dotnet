@@ -49,19 +49,19 @@ public class MethodShouldBeNamedAccordingToSynchronicityTest
                 .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion)))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.1.11")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_MsTest(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.5.7.10213")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_NUnit(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.NUnit.cs").AddReferences(NuGetMetadataReference.NUnit(testFwkVersion)).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.0.0")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void MethodShouldBeNamedAccordingToSynchronicity_Xunit(string testFwkVersion) =>

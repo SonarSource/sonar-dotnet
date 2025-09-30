@@ -103,7 +103,7 @@ public class IMethodSymbolExtensionsTest
     public void IsAnyAttributeInOverridingChain_WhenMethodSymbolIsNull_ReturnsFalse() =>
         ((IMethodSymbol)null).IsAnyAttributeInOverridingChain().Should().BeFalse();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(MethodKind.AnonymousFunction, "method")]
     [DataRow(MethodKind.BuiltinOperator, "operator")]
     [DataRow(MethodKind.Constructor, "constructor")]
@@ -134,7 +134,7 @@ public class IMethodSymbolExtensionsTest
         symbol.GetClassification().Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("BaseClass<int>         ", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]
     [DataRow("DerivedOpenGeneric<int>", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
     [DataRow("DerivedClosedGeneric   ", "VirtualMethod               ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute")]
@@ -236,7 +236,7 @@ public class IMethodSymbolExtensionsTest
         methodInfo.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("3.0.20105.1")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void IsControllerActionMethod_PublicControllerMethods_AreEntryPoints(string aspNetMvcVersion)
@@ -283,7 +283,7 @@ public class IMethodSymbolExtensionsTest
         compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("3.0.20105.1")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void IsControllerActionMethod_ControllerMethods_AreEntryPoints(string aspNetMvcVersion)
@@ -311,7 +311,7 @@ public class IMethodSymbolExtensionsTest
         compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.1.3")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void IsControllerActionMethod_MethodsInClassesWithControllerAttribute_AreEntryPoints(string aspNetMvcVersion)
@@ -330,7 +330,7 @@ public class IMethodSymbolExtensionsTest
         compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.1.3")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void IsControllerActionMethod_MethodsInClassesWithNonControllerAttribute_AreNotEntryPoints(string aspNetMvcVersion)
@@ -346,7 +346,7 @@ public class IMethodSymbolExtensionsTest
         compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("2.1.3")]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void IsControllerActionMethod_ConstructorsInClasses_AreNotEntryPoints(string aspNetMvcVersion)
@@ -362,7 +362,7 @@ public class IMethodSymbolExtensionsTest
         compilation.GetTypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("List<int>", "Clear()", "Clear", "System.Collections.Generic.ICollection", "T")]
     [DataRow("List<int>", "Clear()", "Clear", "System.Collections.IList")]
     [DataRow("List<int>", "RemoveAt(1)", "RemoveAt", "System.Collections.Generic.IList", "T")]

@@ -348,7 +348,7 @@ public class ComplicatedCode
 
 public class SomeAttribute : System.Attribute { }", 8, 14);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("ExcludeFromCodeCoverage")]
     [DataRow("ExcludeFromCodeCoverage()")]
     [DataRow("ExcludeFromCodeCoverageAttribute")]

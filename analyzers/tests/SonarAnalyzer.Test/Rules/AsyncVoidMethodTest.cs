@@ -48,7 +48,7 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("1.1.11")]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2_CSharp11(string testFwkVersion) =>
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #endif
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("1.1.11")]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void AsyncVoidMethod_MsTestV2(string testFwkVersion) =>

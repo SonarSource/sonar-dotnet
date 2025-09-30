@@ -35,7 +35,7 @@ public class NamedPlaceholdersShouldBeUniqueTest
     public void NamedPlaceholdersShouldBeUnique_CS() =>
         Builder.AddPaths("NamedPlaceholdersShouldBeUnique.cs").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]
@@ -69,7 +69,7 @@ public class NamedPlaceholdersShouldBeUniqueTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Information")]
@@ -101,7 +101,7 @@ public class NamedPlaceholdersShouldBeUniqueTest
             """).Verify();
 
 #if NET
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Information")]
@@ -126,7 +126,7 @@ public class NamedPlaceholdersShouldBeUniqueTest
             """).Verify();
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("ConditionalDebug")]
     [DataRow("Error")]

@@ -30,7 +30,7 @@ public class SyntaxTokenExtensionsTest
         secondaryLocation.Message.Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow([])]
     public void ToSecondaryLocation_MessageArgs(string[] messageArgs)
@@ -43,7 +43,7 @@ public class SyntaxTokenExtensionsTest
         secondaryLocation.Message.Should().Be("Message");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Message {0}", "42")]
     [DataRow("{1} Message {0} ", "42", "21")]
     public void ToSecondaryLocation_MessageFormat(string format, params string[] messageArgs)

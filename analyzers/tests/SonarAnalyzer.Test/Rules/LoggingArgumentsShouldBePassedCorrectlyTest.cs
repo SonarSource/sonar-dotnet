@@ -27,7 +27,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
     public void LoggingArgumentsShouldBePassedCorrectly_CS() =>
         builder.AddPaths("LoggingArgumentsShouldBePassedCorrectly.cs").AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]
@@ -112,7 +112,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
            .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("DebugFormat")]
     [DataRow("ErrorFormat")]
     [DataRow("FatalFormat")]
@@ -145,7 +145,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
         .AddReferences(NuGetMetadataReference.CastleCore())
         .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Log", "LogLevel.Debug,", "")]
     [DataRow("Debug")]
     [DataRow("ConditionalDebug")]
@@ -198,7 +198,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
         .AddReferences(NuGetMetadataReference.NLog())
         .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("ConditionalDebug")]
     [DataRow("ConditionalTrace")]
     public void LoggingArgumentsShouldBePassedCorrectly_NLog_ConditionalExtensions_CS(string methodName) =>
@@ -242,7 +242,7 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
         .AddReferences(NuGetMetadataReference.NLog())
         .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Fatal")]

@@ -33,7 +33,7 @@ public class DiagnosticDescriptorExtensionsTest
         descriptor.IsSecurityHotspot().Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("S101")] // Both C# and VB rules
     [DataRow("S100")] // C# rule
     [DataRow("S117")] // VB rule

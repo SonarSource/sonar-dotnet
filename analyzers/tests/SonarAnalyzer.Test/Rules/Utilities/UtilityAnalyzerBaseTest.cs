@@ -29,7 +29,7 @@ namespace SonarAnalyzer.Test.Rules.Utilities
         private const string DefaultProjectOutFolderPath = @"TestResources\ProjectOutFolderPath.txt";
         public TestContext TestContext { get; set; }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(LanguageNames.CSharp, DefaultProjectOutFolderPath, @"path\output-cs")]
         [DataRow(LanguageNames.VisualBasic, DefaultProjectOutFolderPath, @"path\output-vbnet")]
         [DataRow(LanguageNames.CSharp, DefaultSonarProjectConfig, @"C:\foo\bar\.sonarqube\out\0\output-cs")]
@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Test.Rules.Utilities
             utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(DefaultProjectOutFolderPath, DefaultSonarProjectConfig)]
         [DataRow(DefaultSonarProjectConfig, DefaultProjectOutFolderPath)]
         public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority(string firstFile, string secondFile)
@@ -55,7 +55,7 @@ namespace SonarAnalyzer.Test.Rules.Utilities
             utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(LanguageNames.CSharp, true)]
         [DataRow(LanguageNames.CSharp, false)]
         [DataRow(LanguageNames.VisualBasic, true)]
@@ -69,7 +69,7 @@ namespace SonarAnalyzer.Test.Rules.Utilities
             utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
         }
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(LanguageNames.CSharp, true)]
         [DataRow(LanguageNames.CSharp, false)]
         [DataRow(LanguageNames.VisualBasic, true)]

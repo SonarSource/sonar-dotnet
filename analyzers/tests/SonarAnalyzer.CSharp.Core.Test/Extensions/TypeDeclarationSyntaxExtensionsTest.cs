@@ -84,7 +84,7 @@ public class TypeDeclarationSyntaxExtensionsTest
             });
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class")]
     [DataRow("struct")]
     [DataRow("readonly struct")]
@@ -114,7 +114,7 @@ public class TypeDeclarationSyntaxExtensionsTest
         parameterList.Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageVersion.CSharp1)]
     [DataRow(LanguageVersion.CSharp2)]
     [DataRow(LanguageVersion.CSharp3)]
@@ -138,7 +138,7 @@ public class TypeDeclarationSyntaxExtensionsTest
         typeDeclaration.PrimaryConstructor(compilation.GetSemanticModel(tree)).Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(LanguageVersion.CSharp9)]
     [DataRow(LanguageVersion.CSharp10)]
     [DataRow(LanguageVersion.CSharp11)]
@@ -156,7 +156,7 @@ public class TypeDeclarationSyntaxExtensionsTest
         entry.Type.SpecialType.Should().Be(SpecialType.System_Int32);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class")]
     [DataRow("struct")]
     [DataRow("readonly struct")]
@@ -221,7 +221,7 @@ public class TypeDeclarationSyntaxExtensionsTest
         methodSymbol.IsStatic.Should().BeFalse();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("__arglist", 0)]
     [DataRow("int i, __arglist", 1)]
     [DataRow("int i, int j, __arglist", 2)]

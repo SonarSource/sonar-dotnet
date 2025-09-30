@@ -424,7 +424,7 @@ public class SyntaxNodeExtensionsTest
         SyntaxNodeExtensionsVisualBasic.CreateCfg(lambda, model, default).Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"() =>")]
     [DataRow(@"} () => }")]
     [DataRow(@"{ () => .")]
@@ -521,7 +521,7 @@ public class SyntaxNodeExtensionsTest
         ReferenceEquals(cfg1, cfg2).Should().BeFalse("Different compilations should not reuse cache. They do not share semantic model and symbols.");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // Tuple. From right to left.
     [DataRow("(var a, (x, var b)) = (0, ($$x++, 1));", "x")]
     [DataRow("(var a, (x, var b)) = (0, $$(1, 2));", "(x, var b)")]
@@ -661,7 +661,7 @@ End Class";
         allIdentifiers.Where(x => x.Identifier.ValueText == "xExpres").Should().HaveCount(6).And.OnlyContain(x => SyntaxNodeExtensionsVisualBasic.IsInExpressionTree(x, model));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("A?.$$M()", "A?.M()", "A")]
     [DataRow("A?.B?.$$M()", ".B?.M()", ".B")]
     [DataRow("A?.M()?.$$B", ".M()?.B", ".M()")]
@@ -693,7 +693,7 @@ End Class";
         parentConditional.Expression.ToString().Should().Be(parentExpression);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("A?.$$M()", "A?.M()", "A")]
     [DataRow("A?.B?.$$M()", ".B?.M()", ".B")]
     [DataRow("A?.M()?.$$B", ".M()?.B", ".M()")]
@@ -729,7 +729,7 @@ End Class";
         parentConditional.Expression.ToString().Should().Be(parentExpression);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("A?.$$M()")]
     [DataRow("A?.B?.$$M()")]
     [DataRow("A?.M()?.$$B")]
@@ -764,7 +764,7 @@ End Class";
     public void Kind_Null_ReturnsNone() =>
         ExtensionsCore.Kind<SyntaxKind>(null).Should().Be(SyntaxKind.None);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class Test { }", DisplayName = "When there is no pragma, return default file name.")]
     [DataRow("#pragma checksum \"FileName.txt\" \"{guid}\" \"checksum bytes\"", "FileName.txt", DisplayName = "When pragma is present, return file name from pragma.")]
     public void GetMappedFilePath(string code, string expectedFileName = DefaultFileName)
@@ -773,7 +773,7 @@ End Class";
         tree.GetRoot().GetMappedFilePathFromRoot().Should().Be(expectedFileName);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("$$M(1)$$;")]
     [DataRow("_ = $$new C(1)$$;")]
     [DataRow("C c = $$new(1)$$;")]
@@ -792,7 +792,7 @@ End Class";
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("base")]
     [DataRow("this")]
     public void ArgumentList_CS_ConstructorInitializer(string keyword)
@@ -826,7 +826,7 @@ End Class";
         (argument is { Expression: SyntaxCS.LiteralExpressionSyntax { Token.ValueText: "1" } }).Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = $$new System.Collections.Generic.List<int> { 0 }$$;")]
     public void ArgumentList_CS_NoList(string statement)
     {
@@ -845,7 +845,7 @@ End Class";
     public void ArgumentList_CS_Null() =>
         SyntaxNodeExtensionsCSharp.ArgumentList(null).Should().BeNull();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = $$new int[] { 1 }$$;")]
     [DataRow("_ = $$new { A = 1 }$$;")]
     public void ArgumentList_CS_UnsupportedNodeKinds(string statement)
@@ -862,7 +862,7 @@ End Class";
         sut.Should().Throw<InvalidOperationException>();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("$$M(1)$$")]
     [DataRow("Call $$M(1)$$")]
     [DataRow("Dim c = $$New C(1)$$")]
@@ -922,7 +922,7 @@ End Class";
         (argument.GetExpression() is SyntaxVB.LiteralExpressionSyntax { Token.ValueText: "1" }).Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Dim $$i(1)$$ As Integer")]
     [DataRow("Dim sales()() As Double = $$New Double(1)() { }$$")]
     [DataRow("ReDim $$arr(1)$$")]
@@ -960,7 +960,7 @@ End Class";
     public void ArgumentList_VB_Null() =>
         SyntaxNodeExtensionsVisualBasic.ArgumentList(null).Should().BeNull();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("$$Dim a = 1$$")]
     public void ArgumentList_VB_UnsupportedNodeKinds(string statement)
     {
@@ -976,7 +976,7 @@ End Class";
         sut.Should().Throw<InvalidOperationException>();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""public C(int p) { }""")]
     [DataRow("""public void M(int p) { }""")]
     [DataRow("""public static C operator + (C p) => default;""")]
@@ -996,7 +996,7 @@ End Class";
         entry.Identifier.ValueText.Should().Be("p");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""$$void Local(int p) { }$$""")]
     [DataRow("""$$static void Local(int p) { }$$""")]
     [DataRow("""Func<int, int> f = $$(int p) => 0$$;""")]
@@ -1034,7 +1034,7 @@ End Class";
         actual.Parameters.Should().BeEmpty();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class")]
     [DataRow("struct")]
     [DataRow("record struct")]
@@ -1058,7 +1058,7 @@ End Class";
         entry.Identifier.ValueText.Should().Be("p");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("$$int i;$$")]
     [DataRow("$$class Nested { }$$")]
     public void ParameterList_ReturnsNull(string declaration)
@@ -1074,7 +1074,7 @@ End Class";
         actual.Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""$$global::System$$.Int32 i;""", "global")]                        // AliasQualifiedNameSyntax
     [DataRow("""int i = Math.Abs($$1$$);""", null)]                               // ArgumentSyntax
     [DataRow("""int i = Math.Abs($$value: 1$$);""", "value")]                     // ArgumentSyntax
@@ -1162,7 +1162,7 @@ End Class";
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""$$namespace A.B.C { }$$""", "C")]           // NamespaceDeclarationSyntax
     [DataRow("""$$namespace A.B.C;$$""", "C")]              // FileScopedNamespaceDeclarationSyntax
     [DataRow("""$$using A = System.Collections;$$""", "A")] // UsingDirectiveSyntax
@@ -1184,7 +1184,7 @@ End Class";
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(""" : $$Base(i)$$""", "Base")]       // NamespaceDeclarationSyntax
     [DataRow(""" : $$Test.Base(i)$$""", "Base")]  // NamespaceDeclarationSyntax
     public void GetIdentifier_PrimaryConstructor(string baseType, string expected)
@@ -1208,7 +1208,7 @@ End Class";
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""event EventHandler SomeEvent { add { $$int x = 42;$$ } remove { int x = 42; } }""", SyntaxKind.AddAccessorDeclaration)]
     [DataRow("""int Method() { Func<int, int, int> add = delegate (int a, int b) { return $$a + b$$; }; return add(1, 2); }""", SyntaxKind.AnonymousMethodExpression)]
     [DataRow("""Derived(int arg) : base($$arg$$) { }""", SyntaxKind.BaseConstructorInitializer)]
@@ -1267,7 +1267,7 @@ End Class";
         actual.Should().Be(SyntaxKind.CompilationUnit);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("from $$x$$ in qry select x", SyntaxKind.MethodDeclaration)] // Wrong. Should be FromClause
     [DataRow("from x in $$qry$$ select x", SyntaxKind.MethodDeclaration)]
     [DataRow("from x in qry from y in $$qry$$ select x", SyntaxKind.MethodDeclaration)] // Wrong. Should be FromClause
@@ -1328,7 +1328,7 @@ End Class";
         secondaryLocation.Message.Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow([])]
     public void ToSecondaryLocation_MessageArgs(string[] messageArgs)
@@ -1341,7 +1341,7 @@ End Class";
         secondaryLocation.Message.Should().Be("Message");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Message {0}", "42")]
     [DataRow("{1} Message {0} ", "42", "21")]
     public void ToSecondaryLocation_MessageFormat(string format, params string[] messageArgs)
@@ -1354,7 +1354,7 @@ End Class";
         secondaryLocation.Message.Should().Be(string.Format(format, messageArgs));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("public void M() { _ = $$42$$; }")]
     [DataRow("public void M() { int Local() => $$42$$; }")]
     [DataRow("public void M() { Func<int> _ = () => $$42$$; }")]
@@ -1383,7 +1383,7 @@ End Class";
     public void PerformanceSensitiveAttribute_NullNode() =>
         SyntaxNodeExtensionsCSharp.PerformanceSensitiveAttribute(null, null).Should().BeNull();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Func<int> f = [PerformanceSensitive] () => $$42$$;")]
     [DataRow("[PerformanceSensitive] int Local() => $$42$$;")]
     [DataRow("LM([PerformanceSensitive] () => $$42$$); int LM(Func<int> f) => f();")]
@@ -1407,7 +1407,7 @@ End Class";
         nodeAndModel.Node.PerformanceSensitiveAttribute(nodeAndModel.Model).Should().NotBeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class Inner { public void M() { _ = $$42$$; } }")]
     [DataRow("interface Inner { void $$M$$(); }")]
     [DataRow("struct Inner { public void M() { _ = $$42$$; } }")]
@@ -1430,7 +1430,7 @@ End Class";
         nodeAndModel.Node.PerformanceSensitiveAttribute(nodeAndModel.Model).Should().BeNull();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Func<int, int> f = [PerformanceSensitive] x => $$x$$;")] // error CS8916: Attributes on lambda expressions require a parenthesized parameter list.
     [DataRow("Func<int, int> f = [PerformanceSensitive] delegate(int x) { return $$x$$; };")]
     public void PerformanceSensitiveAttribute_DoNotCompile(string node)
@@ -1453,7 +1453,7 @@ End Class";
         action.Should().Throw<InvalidOperationException>().WithMessage("Test setup error: test code snippet did not compile. See output window for details.");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("public void M() { _ = $$42$$; }")]
     [DataRow("[Some] public void M() { Func<int> f = () => $$42$$; }")]
     [DataRow("public void M() { int Local() => $$42$$; }")]

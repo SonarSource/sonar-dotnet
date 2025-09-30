@@ -152,7 +152,7 @@ public class C
         declaration.Body.IsEmpty(treatConditionalCompilationAsContent: true).Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, true, false)]
     [DataRow(false, true, false)] // isEmpty should be true here, because the content of the conditional is just a comment and a comment should not be treated as content.
     [DataRow(true, false, true)]

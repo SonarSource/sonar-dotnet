@@ -25,7 +25,7 @@ namespace SonarAnalyzer.Test.Rules
         private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.CommentKeyword>();
         private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.CommentKeyword>();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentTodo_CS(ProjectType projectType) =>
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentFixme_CS(ProjectType projectType) =>
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentTodo_VB(ProjectType projectType) =>
@@ -49,7 +49,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(TestCompiler.ProjectTypeReference(projectType))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
         public void CommentFixme_VB(ProjectType projectType) =>

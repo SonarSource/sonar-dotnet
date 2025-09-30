@@ -44,7 +44,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
 
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("LogCritical")]
     [DataRow("LogDebug")]
     [DataRow("LogError")]
@@ -67,7 +67,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
     [DataRow("Information")]
@@ -90,7 +90,7 @@ public class UsePascalCaseForNamedPlaceHoldersTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Debug")]
     [DataRow("ConditionalDebug")]
     [DataRow("Error")]

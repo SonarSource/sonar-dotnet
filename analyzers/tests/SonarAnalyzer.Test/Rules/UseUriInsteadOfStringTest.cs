@@ -23,7 +23,7 @@ public class UseUriInsteadOfStringTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<UseUriInsteadOfString>().AddReferences(MetadataReferenceFacade.SystemDrawing);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void UseUriInsteadOfString(ProjectType projectType) =>

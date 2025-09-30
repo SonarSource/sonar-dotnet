@@ -58,7 +58,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [DataRow("""ViewData["foo"]""")]
     [DataRow("""ViewBag["foo"]""")]
     [DataRow("""TempData["foo"]""")]
-    [DataTestMethod]
+    [TestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithViewFunctionality(string invocation) =>
         builder.AddSnippet($$"""
             using Microsoft.AspNetCore.Mvc;
@@ -74,7 +74,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
 
     [DataRow("""OnActionExecuted(default(ActionExecutedContext))""")]
     [DataRow("""OnActionExecuting(default(ActionExecutingContext))""")]
-    [DataTestMethod]
+    [TestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseWithVoidInvocations(string assignment) =>
         builder.AddSnippet($$"""
             using Microsoft.AspNetCore.Mvc;
@@ -92,7 +92,7 @@ public class ApiControllersShouldNotDeriveDirectlyFromControllerTest
     [DataRow("object prop => View();", DisplayName = "PropertyGet")]
     [DataRow("object prop { set => _ = View(); }", DisplayName = "PropertySet")]
     [DataRow("object this[int index] => View();", DisplayName = "Indexer")]
-    [DataTestMethod]
+    [TestMethod]
     public void ApiControllersShouldNotDeriveDirectlyFromController_DoesNotRaiseInDifferentConstructs(string code) =>
         builder.AddSnippet($$"""
             using Microsoft.AspNetCore.Mvc;

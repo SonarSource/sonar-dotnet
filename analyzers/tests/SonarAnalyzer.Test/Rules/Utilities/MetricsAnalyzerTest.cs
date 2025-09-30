@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
 
         public TestContext TestContext { get; set; }
 
-        [DataTestMethod]
+        [TestMethod]
         public void VerifyMetrics() =>
             CreateBuilder(false, AllMetricsFileName)
                 .VerifyUtilityAnalyzer<MetricsInfo>(messages =>
@@ -129,7 +129,7 @@ namespace SonarAnalyzer.Test.Rules
         public void Verify_NotRunForTestProject() =>
             CreateBuilder(true, AllMetricsFileName).VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(AllMetricsFileName, true)]
         [DataRow("SomethingElse.cs", false)]
         public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)

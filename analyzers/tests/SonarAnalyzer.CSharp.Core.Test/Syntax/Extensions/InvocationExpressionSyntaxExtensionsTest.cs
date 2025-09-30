@@ -21,7 +21,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class InvocationExpressionSyntaxExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("System.Array.$$Empty<int>()$$", "System.Array", "Empty<int>")]
     [DataRow("this.$$M()$$", "this", "M")]
     [DataRow("A?.$$M()$$", "A", "M")]
@@ -47,7 +47,7 @@ public class InvocationExpressionSyntaxExtensionsTest
         right.ToString().Should().Be(expectedRight);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("$$M()$$")]
     [DataRow("new System.Func<int>(() => 1)$$()$$")]
     public void TryGetOperands_InvocationNodeDoesNotContainMemberAccess_ShouldReturnsFalse_CS(string expression)

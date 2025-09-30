@@ -52,7 +52,7 @@ public class CookieShouldBeHttpOnlyTest
             .AddReferences(MetadataReferenceFacade.SystemWeb)
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\HttpOnlyCookiesConfig")]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\Formatting")]
     public void CookiesShouldBeHttpOnly_WithWebConfigValueSetToTrue(string root)
@@ -64,7 +64,7 @@ public class CookieShouldBeHttpOnlyTest
             .Verify();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\NonHttpOnlyCookiesConfig")]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\UnrelatedConfig")]
     [DataRow(@"TestCases\WebConfig\CookieShouldBeHttpOnly\ConfigWithoutAttribute")]

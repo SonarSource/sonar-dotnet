@@ -84,7 +84,7 @@ public class FilesToAnalyzeProviderTest
         results.Should().BeEmpty();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow(null)]
     [DataRow("invalidPath")]

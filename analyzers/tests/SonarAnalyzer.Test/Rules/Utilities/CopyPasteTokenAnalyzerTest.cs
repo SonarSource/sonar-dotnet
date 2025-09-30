@@ -106,7 +106,7 @@ public class CopyPasteTokenAnalyzerTest
     public void Verify_NotRunForTestProject_CS() =>
         CreateBuilder(ProjectType.Test, "DuplicatedDifferentLiterals.cs").VerifyUtilityAnalyzerProducesEmptyProtobuf();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Unique.cs")]
     [DataRow("SomethingElse.cs")]
     public void Verify_UnchangedFiles(string unchangedFileName) =>
@@ -126,7 +126,7 @@ public class CopyPasteTokenAnalyzerTest
 
 #if NET
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Razor.razor")]
     [DataRow("Razor.cshtml")]
     public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>

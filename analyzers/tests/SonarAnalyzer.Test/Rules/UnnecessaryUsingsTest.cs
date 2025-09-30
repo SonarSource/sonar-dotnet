@@ -44,7 +44,7 @@ public class UnnecessaryUsingsTest
     public void UnnecessaryUsings_CSharp10_GlobalUsings() =>
         builder.AddPaths("UnnecessaryUsings.CSharp10.Global.cs", "UnnecessaryUsings.CSharp10.Consumer.cs").WithTopLevelStatements().WithOptions(LanguageOptions.FromCSharp10).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ViewImports.cshtml")]
     [DataRow("_viewimports.cshtml")]
     [DataRow("_viEwiMpoRts.cshtml")]
@@ -55,7 +55,7 @@ public class UnnecessaryUsingsTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_Imports.razor")]
     [DataRow("_imports.razor")]
     [DataRow("_iMpoRts.razor")]
@@ -66,7 +66,7 @@ public class UnnecessaryUsingsTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("RandomFile_ViewImports.cshtml")]
     [DataRow("RandomFile_Imports.cshtml")]
     [DataRow("_Imports.cshtml")]
@@ -78,7 +78,7 @@ public class UnnecessaryUsingsTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("RandomFile_ViewImports.razor")]
     [DataRow("RandomFile_Imports.razor")]
     [DataRow("_ViewImports.razor")]
@@ -90,7 +90,7 @@ public class UnnecessaryUsingsTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ViewImports.cs")]
     [DataRow("_Imports.cs")]
     public void UnnecessaryUsings_RazorViewImportsSimilarCSFile_IssuesReported(string fileName) =>

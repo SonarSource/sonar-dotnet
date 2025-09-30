@@ -36,7 +36,7 @@ public class ConditionalStructureSameImplementationTest
         builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.cs").Verify();
 
     // https://github.com/SonarSource/sonar-dotnet/issues/9637
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("nameof(first)", "nameof(first)", false)]
     [DataRow("nameof ( first ) ", "nameof(first)", false)]
     [DataRow("nameof(first)", "nameof(second)", true)]
@@ -75,7 +75,7 @@ public class ConditionalStructureSameImplementationTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("NameOf(first)", "NameOf(first)", false)]
     [DataRow("NameOf ( first ) ", "NameOf(first)", false)]
     [DataRow("NameOf(first)", "NameOf(second)", true)]

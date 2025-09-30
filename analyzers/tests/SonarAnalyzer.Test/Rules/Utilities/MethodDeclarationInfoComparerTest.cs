@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Test.Rules.Utilities;
 [TestClass]
 public class MethodDeclarationInfoComparerTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("type", "method", "type", "method", true)]
     [DataRow("Type", "method", "type", "method", false)] // Case-sensitive
     [DataRow("type", "Method", "type", "method", false)] // Case-sensitive

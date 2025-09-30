@@ -24,7 +24,7 @@ public class WildcardPatternMatcherTest
     /// <summary>
     /// Based on https://github.com/SonarSource/sonar-plugin-api/blob/master/plugin-api/src/test/java/org/sonar/api/utils/WildcardPatternTest.java.
     /// </summary>
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Foo", "Foo", true)]
     [DataRow("foo", "FOO", false)]
     [DataRow("Foo", "Foot", false)]
@@ -92,7 +92,7 @@ public class WildcardPatternMatcherTest
         WildcardPatternMatcher.IsMatch(pattern, input, false).Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("")]
     [DataRow("  ")]
     [DataRow("/")]
@@ -100,7 +100,7 @@ public class WildcardPatternMatcherTest
     public void IsMatch_InvalidPattern_ReturnsFalse(string pattern) =>
         WildcardPatternMatcher.IsMatch(pattern, "foo", false).Should().BeFalse();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null, "foo")]
     [DataRow("foo", null)]
     public void IsMatch_InputParametersArenull_DoesNotThrow(string pattern, string input) =>

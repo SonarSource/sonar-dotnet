@@ -115,7 +115,7 @@ public class DiagnosticDescriptorFactoryTest
         f.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected Type value: Lorem Ipsum");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Minor", "BUG", "Minor Bug")]
     [DataRow("Major", "BUG", "Major Bug")]
     [DataRow("Major", "CODE_SMELL", "Major Code Smell")]

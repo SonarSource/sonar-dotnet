@@ -330,7 +330,7 @@ public class AssignmentExpressionSyntaxExtensionsTest
                 },
             });
 
-    [DataTestMethod]
+    [TestMethod]
     // Tuples.
     [DataRow("(var a, (x, var b)) = (0, (x++, 1));", "var a | 0", "x | x++", "var b | 1")]
     [DataRow("(var a, (var b, var c, var d), var e) = (0, (1, 2, 3), 4);", "var a | 0", "var b | 1", "var c | 2", "var d | 3", "var e | 4")]
@@ -361,7 +361,7 @@ public class AssignmentExpressionSyntaxExtensionsTest
         actualMappingPairs.Should().BeEquivalentTo(pairs);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     // Normal assignment
     [DataRow("int a; a = 1;", "a")]
     // Deconstruction into tuple

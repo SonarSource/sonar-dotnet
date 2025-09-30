@@ -40,7 +40,7 @@ public partial class TokenTypeAnalyzerTest
             [u:}]
             """);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(""" [s:"Text"] """)]
     [DataRow(""" [s:""] """)]
     [DataRow(""" [s:"  "] """)]
@@ -193,7 +193,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("assembly")]
     [DataRow("module")]
     [DataRow("event")]
@@ -219,7 +219,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel: false, ignoreCompilationErrors: true);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("using [u:System];", false)]
     [DataRow("using [u:System].[u:Collections].[u:Generic];", false)]
     [DataRow("using [k:global]::[u:System].[u:Collections].[u:Generic];", false)]
@@ -245,7 +245,7 @@ public partial class TokenTypeAnalyzerTest
             class InGlobalNamespace { }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("namespace [u:A] { }", false)]
     [DataRow("namespace [u:A].[u:B] { }", false)]
     [DataRow("namespace [u:A];", false)]
@@ -253,7 +253,7 @@ public partial class TokenTypeAnalyzerTest
     public void IdentifierToken_Namespaces(string syntax, bool allowSemanticModel = true) =>
         ClassifierTestHarness.AssertTokenTypes(syntax, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class TypeParameter: [t:List]<[t:Exception]> { }", false)]
     // We cannot be sure without calling the model but we assume this will rarely be a type
     [DataRow("class TypeParameter: System.Collections.Generic.[t:List]<System.[t:Exception]> { }", false)]
@@ -273,7 +273,7 @@ public partial class TokenTypeAnalyzerTest
             {{syntax}}
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class [t:BaseTypeList]: System.[t:Exception] { }", false)]
     [DataRow("class BaseTypeList: [u:System].Exception { }", true)]
     [DataRow("class BaseTypeList: Outer.[t:Inner] { }", false)]
@@ -292,7 +292,7 @@ public partial class TokenTypeAnalyzerTest
             {{syntax}}
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("class", false)]
     [DataRow("struct", false)]
     [DataRow("record", false)]
@@ -308,7 +308,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = typeof(System.[t:Exception]);", false)]
     [DataRow("_ = typeof([u:System].Exception);", true)]
     [DataRow("_ = typeof([u:System].[u:Collections].[u:Generic].[t:Dictionary]<,>);", true)]
@@ -328,7 +328,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Exception]", false)]
     [DataRow("[u:System].Exception", true)]
     [DataRow("System.[t:Exception]", false)]
@@ -349,7 +349,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = nameof([t:Exception]);", true)]
     [DataRow("_ = nameof([u:System].[t:Exception]);", true)]
     [DataRow("_ = nameof([t:Dictionary]<[t:Int32], [t:Exception]>);", true)]
@@ -370,7 +370,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = [k:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
     [DataRow("int [u:Value] = 0; _ = [u:Value]++;", false)]
@@ -400,7 +400,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = [k:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
     [DataRow("int [u:Value] = 0; _ = [u:Value]++;", false)]
@@ -422,7 +422,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = [k:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
     public void IdentifierToken_ValueInEventAddRemove(string valueAccess, bool allowSemanticModel = true) =>
@@ -447,7 +447,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = [u:value];", true)]
     [DataRow("_ = this.[u:value];", false)]
     [DataRow("ValueMethod([u:value]: 1);", true)] // could be false, but it is an edge case not worth investing.
@@ -468,7 +468,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[n:42] is [t:Int32].[u:MinValue]", true)]                                          // IsPattern
     [DataRow("ex is [t:ArgumentException]", true)]
     [DataRow("ex is [u:System].[t:ArgumentException]", true)]
@@ -500,7 +500,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("([k:string], [t:Exception]) => true,", true)]
     [DataRow("""([s:""], [k:null]) => true,""", true)]
     [DataRow("""([s:""], [k:var] b) => true,""", true)]
@@ -532,7 +532,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("([t:String] s1, [t:String] s2)", false)]
     [DataRow("([u:System].String s1, int i)", true)]
     [DataRow("(([t:String] s, [k:int] i), [t:Boolean] b)", false)]
@@ -545,7 +545,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Exception] ex;", false)]
     [DataRow("[u:System].Exception ex;", true)]
     [DataRow("[t:List]<[t:Exception]> ex;", false)]
@@ -566,7 +566,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("__refvalue([u:tf], Exception)", false)]
     [DataRow("__refvalue(tf, [t:Exception])", false)]
     [DataRow("__refvalue(tf, [u:System].Exception)", true)]
@@ -585,7 +585,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("default([t:Exception])", false)]
     [DataRow("default([u:System].Exception)", true)]
     public void IdentifierToken_Type_DefaultValue(string defaultValueExpression, bool allowSemanticModel = true) =>
@@ -602,7 +602,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("sizeof([t:Int32])", false)]
     [DataRow("sizeof([u:System].Int32)", true)]
     public void IdentifierToken_Type_SizeOfValue(string sizeOfExpression, bool allowSemanticModel = true) =>
@@ -621,7 +621,7 @@ public partial class TokenTypeAnalyzerTest
 
 #if NET
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("stackalloc [t:Int32][2]", false)]
     [DataRow("stackalloc [u:System].Int32[2]", true)]
     [DataRow("stackalloc [t:Int32]", false, true)] // compilation error. Type can not be resolved (must be an array type)
@@ -639,7 +639,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel, ignoreCompilationErrors);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[t:Int32]?", false)]
     [DataRow("System.[t:Int32]", false)]
@@ -662,7 +662,7 @@ public partial class TokenTypeAnalyzerTest
 
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("""
         from [t:Int32] x in c
         select x
@@ -692,7 +692,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_ForEach(string forEachVariableType, bool allowSemanticModel = true) =>
@@ -709,7 +709,7 @@ public partial class TokenTypeAnalyzerTest
               }
               """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Exception]", false)]
     [DataRow("[u:System].Exception", true)]
     public void IdentifierToken_Type_Catch(string catchType, bool allowSemanticModel = true) =>
@@ -726,7 +726,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_DelegateDeclaration(string returnType, bool allowSemanticModel = true) =>
@@ -736,7 +736,7 @@ public partial class TokenTypeAnalyzerTest
             delegate {{returnType}} M();
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_MethodDeclaration(string returnType, bool allowSemanticModel = true) =>
@@ -749,7 +749,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_OperatorDeclaration(string returnType, bool allowSemanticModel = true) =>
@@ -762,7 +762,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("public static explicit operator [t:Int32](Test x)", false)]
     [DataRow("public static explicit operator [u:System].Int32(Test x)", true)]
     [DataRow("public static implicit operator [t:Int32](Test x)", false)]
@@ -777,7 +777,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("public [t:Int32] Prop { get; set; }", false)]
     [DataRow("public [t:Int32] Prop { get => 1; set { } }", false)]
     [DataRow("public [t:Int32] this[int index] { get => 1; set { } }", false)]
@@ -793,7 +793,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("public [k:partial] [t:Int32] Prop { get; set; }", "public [k:partial] Int32 Prop { get => 1; set { } }")]
     [DataRow("public partial [t:Int32] this[int index] { get; set; }", "public partial Int32 this[int index] { get => 1; set { } }")]
     public void IdentifierToken_Type_PartialPropertyDeclaration(string propertyDeclaration, string propertyImplementation) =>
@@ -810,7 +810,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_LocalFunction(string returnType, bool allowSemanticModel = true) =>
@@ -826,7 +826,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", false)]
     [DataRow("[u:System].Int32", true)]
     public void IdentifierToken_Type_ParenthesizedLambda(string returnType, bool allowSemanticModel = true) =>
@@ -842,7 +842,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[[t:Obsolete]]", false)]
     [DataRow("[[u:System].Obsolete]", true)]
     public void IdentifierToken_Type_Attribute(string attributeDeclaration, bool allowSemanticModel = true) =>
@@ -855,7 +855,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:IFormattable]", false)]
     [DataRow("[u:System].IFormattable", true)]
     public void IdentifierToken_Type_ExplicitInterfaceSpecifier(string interfaceName, bool allowSemanticModel = true) =>
@@ -868,7 +868,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]?", false)]
     [DataRow("[u:System].Int32?", true)]
     [DataRow("[k:int]?", false)]
@@ -887,7 +887,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[k:global]::[t:Test]", false)]
     [DataRow("[k:global]::[u:System].Int32", true)]
     [DataRow("[k:global]::System.[t:Int32]", false)]
@@ -901,7 +901,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[u:aInstance]", false)]                              // Some simple identifier syntax in an ordinary expression context must be boud to a field/property/local or something else that produces a value, but it can not be a type
     [DataRow("[u:ToString]()", false)]                             // Some simple invocation syntax in an ordinary expression. A type can not be invoked.
     [DataRow("aInstance.InstanceProp.[u:InstanceProp]", false)]    // Most right can not be a type in an ordinary expression context
@@ -967,7 +967,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("M([u:MethodGroup]<int>);", false)]
     [DataRow("M([u:MethodGroup]<T>);", false)]
     [DataRow("M(C<T>.[u:StaticMethodGroup]<T>);", false)]
@@ -990,7 +990,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = [u:i];")]
     [DataRow("[u:i] = [u:i] + [u:i];")]
     [DataRow("_ = [u:i].[u:ToString]().[u:ToString]();")]          // Heuristic: "i" is lower case and identified as "not a type".
@@ -1134,7 +1134,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [WorkItem(8388)] // https://github.com/SonarSource/sonar-dotnet/pull/8388
     [DataRow("""_ = [u:iPhone].Latest;""")]              // [u:iPhone] -> False classification because of heuristic. Should be t:
     [DataRow("""_ = [u:iPhone].[u:Latest];""")]          // [u:iPhone] -> False classification because of heuristic. Should be t:
@@ -1155,7 +1155,7 @@ public partial class TokenTypeAnalyzerTest
             """, allowSemanticModel: false);
 #if NET
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("_ = [u:r] with { [u:A] = [u:iConst] };", false)]
     [DataRow("_ = [u:r] is ([u:iConst], [t:Int32]);", true)] // semantic model must be called for iConst and Int32
     [DataRow("_ = [u:l][^[u:iConst]];", false)]
@@ -1187,7 +1187,7 @@ public partial class TokenTypeAnalyzerTest
 
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[Obsolete([u:sConst])]")]
     [DataRow("[AttributeUsage(AttributeTargets.All, AllowMultiple = [u:bConst])]")]
     [DataRow("[AttributeUsage([t:AttributeTargets].All, AllowMultiple = [u:bConst])]", true)]
@@ -1206,7 +1206,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[u:System]", true)]
     [DataRow("[t:Exception]", true)]
     [DataRow("[t:List]<[t:Int32]>", true)] // TODO false, generic names are always types in nameof
@@ -1226,7 +1226,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("{ [u:InnerException].[u:InnerException]: {} }", true)] // TODO false, in SubpatternSyntax.ExpressionColon context. Must be properties
     [DataRow("{ [u:InnerException].[u:InnerException].[u:Data]: {} }", true)] // TODO false, in SubpatternSyntax.ExpressionColon context. Must be properties
     public void IdentifierToken_SimpleMemberAccess_ExpressionColon(string pattern, bool allowSemanticModel) =>
@@ -1243,7 +1243,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", true)]
     [DataRow("[u:i]", true)]
     [DataRow("[t:Int32].[u:MaxValue]", true)]
@@ -1268,7 +1268,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", true)]
     [DataRow("[u:i]", true)]
     [DataRow("[t:Int32].[u:MaxValue]", true)]
@@ -1294,7 +1294,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[t:Int32]", true)]
     [DataRow("[u:i]", true)]
     [DataRow("[t:Int32].[u:MaxValue]", true)]
@@ -1320,7 +1320,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[k:scoped] ref S s2 = ref s1;", false)]
     [DataRow("scoped ref [t:S] s2 = ref s1;", false)]
     [DataRow("ref [t:S] s2 = ref s1;", false)]
@@ -1342,7 +1342,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[k:scoped] ref S s", false)]
     [DataRow("scoped ref [t:S] s", false)]
     [DataRow("ref [t:S] s", false)]
@@ -1363,7 +1363,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("var d = [u:dateTimePointer]->Date;", false)]
     [DataRow("var d = dateTimePointer->[u:Date];", false)]
     [DataRow("var d = (*[u:dateTimePointer]).Date;", false)]
@@ -1393,7 +1393,7 @@ public partial class TokenTypeAnalyzerTest
             }
             """, allowSemanticModel);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("[k:int] @int;", false)]
     [DataRow("[k:volatile] [t:@volatile] [u:@volatile];", false)]
     [DataRow("[t:Int32] [u:@someName];", false)]

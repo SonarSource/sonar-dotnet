@@ -48,7 +48,7 @@ public class DisablingRequestValidationTest
             .AddTestReference()
             .VerifyNoIssuesIgnoreErrors();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\Values")]
     [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\Formatting")]
     [DataRow(false, @"TestCases\WebConfig\DisablingRequestValidation\UnexpectedContent")]
@@ -68,7 +68,7 @@ public class DisablingRequestValidationTest
         VerifyAdditionalFiles(false, corruptFilePath, nonExistentFilePath);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\MultipleFiles", "SubFolder")]
     [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\EdgeValues", "3.9", "5.6")]
     public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
@@ -101,7 +101,7 @@ public class DisablingRequestValidationTest
         VerifyAdditionalFiles(true, webConfigPath);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\TransformCustom\Web.Custom.config")]
     [DataRow(false, @"TestCases\WebConfig\DisablingRequestValidation\TransformDebug\Web.Debug.config")]
     [DataRow(true, @"TestCases\WebConfig\DisablingRequestValidation\TransformRelease\Web.Release.config")]

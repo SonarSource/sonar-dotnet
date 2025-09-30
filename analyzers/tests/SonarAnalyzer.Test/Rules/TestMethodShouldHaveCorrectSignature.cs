@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldHaveCorrectSignature>();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("1.1.11")]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
@@ -31,7 +31,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion) =>
@@ -39,7 +39,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("2.0.0")]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestMethodShouldHaveCorrectSignature_Xunit(string testFwkVersion) =>

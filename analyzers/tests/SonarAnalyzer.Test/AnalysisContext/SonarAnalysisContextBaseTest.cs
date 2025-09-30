@@ -30,7 +30,7 @@ public partial class SonarAnalysisContextBaseTest
 
     public TestContext TestContext { get; set; }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, ProjectType.Product, MainTag)]
     [DataRow(true, ProjectType.Product, MainTag, UtilityTag)]
     [DataRow(true, ProjectType.Product, MainTag, TestTag)]
@@ -50,7 +50,7 @@ public partial class SonarAnalysisContextBaseTest
         sut.HasMatchingScope(AnalysisScaffolding.CreateDescriptor(StyleID, ruleTags)).Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, DummyID, ProjectType.Product, MainTag)]
     [DataRow(true, StyleID, ProjectType.Product, MainTag)]
     [DataRow(true, DummyID, ProjectType.Product, MainTag, UtilityTag)]
@@ -79,7 +79,7 @@ public partial class SonarAnalysisContextBaseTest
         CreateSut(projectType, true).HasMatchingScope(diagnostic).Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, ProjectType.Product, MainTag, MainTag)]
     [DataRow(true, ProjectType.Product, MainTag, MainTag)]
     [DataRow(true, ProjectType.Product, MainTag, TestTag)]
@@ -93,7 +93,7 @@ public partial class SonarAnalysisContextBaseTest
         CreateSut(projectType, false).HasMatchingScope(diagnostics).Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true, ProjectType.Product, MainTag, MainTag)]
     [DataRow(true, ProjectType.Product, MainTag, TestTag)]
     [DataRow(true, ProjectType.Test, TestTag, TestTag)]
@@ -138,7 +138,7 @@ public partial class SonarAnalysisContextBaseTest
         secondConfig.Should().NotBeSameAs(firstConfig);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow("/foo/bar/does-not-exit")]
     [DataRow("/foo/bar/x.xml")]
@@ -177,7 +177,7 @@ public partial class SonarAnalysisContextBaseTest
            .WithMessage("File 'SonarProjectConfig.xml' has been added as an AdditionalFile but could not be read and parsed.");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("cs")]
     [DataRow("vbnet")]
     public void SonarLintFile_LoadsExpectedValues(string language)
@@ -228,7 +228,7 @@ public partial class SonarAnalysisContextBaseTest
         secondFile.Should().NotBeSameAs(firstFile);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null)]
     [DataRow(@"\foo\bar\does-not-exit")]
     [DataRow(@"\foo\bar\x.xml")]

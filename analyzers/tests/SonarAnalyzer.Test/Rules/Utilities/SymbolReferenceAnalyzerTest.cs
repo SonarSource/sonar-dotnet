@@ -30,7 +30,7 @@ public class SymbolReferenceAnalyzerTest
 
     public TestContext TestContext { get; set; }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Method_PreciseLocation_CS(ProjectType projectType) =>
@@ -42,7 +42,7 @@ public class SymbolReferenceAnalyzerTest
             methodDeclaration.Reference.Should().Equal(new TextRange { StartLine = 9, EndLine = 9, StartOffset = 8, EndOffset = 14 });
         });
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Method_PreciseLocation_VB(ProjectType projectType) =>
@@ -63,19 +63,19 @@ public class SymbolReferenceAnalyzerTest
             functionDeclaration.Reference.Should().Equal(new TextRange { StartLine = 12, EndLine = 12, StartOffset = 8, EndOffset = 18 });
         });
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Event_CS(ProjectType projectType) =>
         Verify("Event.cs", projectType, 6, 5, 9, 10);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Event_VB(ProjectType projectType) =>
         Verify("Event.vb", projectType, 4, 3, 6, 8, 11);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Field.cs", ProjectType.Product)]
     [DataRow("Field.cs", ProjectType.Test)]
     [DataRow("Field.ReservedKeyword.cs", ProjectType.Product)]
@@ -85,19 +85,19 @@ public class SymbolReferenceAnalyzerTest
     public void Verify_Field_CS(string fileName, ProjectType projectType) =>
         Verify(fileName, projectType, 4, 3, 7, 8);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Field_EscapedSequences_CS(ProjectType projectType) =>
         Verify("Field.EscapedSequences.cs", projectType, 3, 3, 7, 8, 9, 10, 11, 12);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_MissingDeclaration_CS(ProjectType projectType) =>
         Verify("MissingDeclaration.cs", projectType, 1, 3);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Field.vb", ProjectType.Product)]
     [DataRow("Field.vb", ProjectType.Test)]
     [DataRow("Field.ReservedKeyword.vb", ProjectType.Product)]
@@ -107,31 +107,31 @@ public class SymbolReferenceAnalyzerTest
     public void Verify_Field_VB(string fileName, ProjectType projectType) =>
         Verify(fileName, projectType, 4, 3, 6, 7);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Tuples_CS(ProjectType projectType) =>
         Verify("Tuples.cs", projectType, 4, 7, 8);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Tuples_VB(ProjectType projectType) =>
         Verify("Tuples.vb", projectType, 4, 4, 8);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_LocalFunction_CS(ProjectType projectType) =>
         Verify("LocalFunction.cs", projectType, 4, 7, 5);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Method_CS(ProjectType projectType) =>
         Verify("Method.cs", projectType, 4, 3, 9);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Method_Partial_CS(ProjectType projectType)
@@ -178,7 +178,7 @@ public class SymbolReferenceAnalyzerTest
             }));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("NamedType.cs", ProjectType.Product)]
     [DataRow("NamedType.cs", ProjectType.Test)]
     [DataRow("NamedType.ReservedKeyword.cs", ProjectType.Product)]
@@ -186,7 +186,7 @@ public class SymbolReferenceAnalyzerTest
     public void Verify_NamedType_CS(string fileName, ProjectType projectType) =>
         Verify(fileName, projectType, 4, 3, 7);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("NamedType.vb", ProjectType.Product)]
     [DataRow("NamedType.vb", ProjectType.Test)]
     [DataRow("NamedType.ReservedKeyword.vb", ProjectType.Product)]
@@ -194,7 +194,7 @@ public class SymbolReferenceAnalyzerTest
     public void Verify_NamedType_VB(string fileName, ProjectType projectType) =>
         Verify(fileName, projectType, 5, 1, 4, 4, 5);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Parameter.cs", ProjectType.Product)]
     [DataRow("Parameter.cs", ProjectType.Test)]
     [DataRow("Parameter.ReservedKeyword.cs", ProjectType.Product)]
@@ -202,7 +202,7 @@ public class SymbolReferenceAnalyzerTest
     public void Verify_Parameter_CS(string fileName, ProjectType projectType) =>
         Verify(fileName, projectType, 4, 4, 6, 7);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Parameter.vb", ProjectType.Product)]
     [DataRow("Parameter.vb", ProjectType.Test)]
     [DataRow("Parameter.ReservedKeyword.vb", ProjectType.Product)]
@@ -210,13 +210,13 @@ public class SymbolReferenceAnalyzerTest
     public void Verify_Parameter_VB(string fileName, ProjectType projectType) =>
         Verify(fileName, projectType, 4, 4, 5, 6);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Property_CS(ProjectType projectType) =>
         Verify("Property.cs", projectType, 5, 3, 9, 10);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Property_Partial_CS(ProjectType projectType)
@@ -249,19 +249,19 @@ public class SymbolReferenceAnalyzerTest
             }));
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_Property_VB(ProjectType projectType) =>
         Verify("Property.vb", projectType, 5, 3, 6, 7, 8);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_TypeParameter_CS(ProjectType projectType) =>
         Verify("TypeParameter.cs", projectType, 5, 2, 4, 6);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_TypeParameter_VB(ProjectType projectType) =>
@@ -272,7 +272,7 @@ public class SymbolReferenceAnalyzerTest
         // In TokenThreshold.cs there are 40009 tokens which is more than the current limit of 40000
         Verify("TokenThreshold.cs", ProjectType.Product, _ => { }, false);
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Method.cs", true)]
     [DataRow("SomethingElse.cs", false)]
     public void Verify_UnchangedFiles(string unchangedFileName, bool expectedProtobufIsEmpty)
@@ -325,7 +325,7 @@ public class SymbolReferenceAnalyzerTest
                     orderedSymbols[1].Reference.Single().Reference.Single().Should().BeEquivalentTo(new TextRange { StartLine = 1, EndLine = 1, StartOffset = 35, EndOffset = 52 });
                 });
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
     public void Verify_PrimaryConstructor_PreciseLocation_CSharp12(ProjectType projectType) =>

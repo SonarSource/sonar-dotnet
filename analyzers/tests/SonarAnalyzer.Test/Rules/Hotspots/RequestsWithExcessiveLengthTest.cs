@@ -99,7 +99,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(GetAdditionalReferences())
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow(true, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\ContentLength")]
         [DataRow(false, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\DefaultSettings")]
         [DataRow(true, @"TestCases\WebConfig\RequestsWithExcessiveLength\Values\RequestLength")]

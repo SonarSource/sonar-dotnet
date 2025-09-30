@@ -43,7 +43,7 @@ public class UseAspNetModelBindingTest
     public void UseAspNetModelBinding_AspNetCore_CSharpLatest() =>
         builderAspNetCore.AddPaths("UseAspNetModelBinding_AspNetCore_Latest.cs").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("form.Files", true)] // "form" is a parameter and as such IFormCollection binding was (probably) used which is an alternative to direct IFormFileCollection binding
     [DataRow("form?.Files", true)]
     [DataRow("form!.Files", true)]
@@ -81,7 +81,7 @@ public class UseAspNetModelBindingTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Form")]
     [DataRow("Query")]
     [DataRow("RouteValues")]
@@ -159,7 +159,7 @@ public class UseAspNetModelBindingTest
             }
             """).VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Form")]
     [DataRow("Headers")]
     [DataRow("Query")]
@@ -209,7 +209,7 @@ public class UseAspNetModelBindingTest
             }
             """).Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("public class MyController: Controller")]
     [DataRow("public class MyController: ControllerBase")]
     [DataRow("[Controller] public class My: Controller")]
@@ -232,7 +232,7 @@ public class UseAspNetModelBindingTest
             }
             """").Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("public class My")]
     [DataRow("[NonController] public class My: Controller")]
     [DataRow("[NonController] public class MyController: Controller")]
@@ -254,7 +254,7 @@ public class UseAspNetModelBindingTest
             }
             """").VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Form")]
     [DataRow("Headers")]
     [DataRow("Query")]

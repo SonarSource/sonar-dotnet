@@ -78,7 +78,7 @@ public class SqlKeywordsDelimitedBySpaceTest
     [DataRow("Microsoft.Data.Sqlite")]
     [DataRow("NHibernate")]
     [DataRow("PetaPoco")]
-    [DataTestMethod]
+    [TestMethod]
     public void SqlKeywordsDelimitedBySpace_DotnetFramework(string sqlNamespace) =>
         Builder
             .AddReferences(MetadataReferenceFacade.SystemData)
@@ -107,7 +107,7 @@ namespace TestNamespace
     [DataRow("System.Data.OracleClient")]
     [DataRow("Microsoft.EntityFrameworkCore")]
     [DataRow("ServiceStack.OrmLite")]
-    [DataTestMethod]
+    [TestMethod]
     public void SqlKeywordsDelimitedBySpace_DotnetCore(string sqlNamespace) =>
         Builder
             .AddReferences(MetadataReferenceFacade.SystemData)

@@ -19,7 +19,7 @@ namespace SonarAnalyzer.Core.Test.Common;
 [TestClass]
 public class ShannonEntropyTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(null, 0)]
     [DataRow("", 0)]
     [DataRow("a", 0)]

@@ -238,7 +238,7 @@ public partial class SonarAnalysisContextTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product, false)]
     [DataRow(ProjectType.Test, true)]
     public void IsTestProject_Standalone(ProjectType projectType, bool expectedResult)
@@ -250,7 +250,7 @@ public partial class SonarAnalysisContextTest
         sut.IsTestProject().Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(ProjectType.Product, false)]
     [DataRow(ProjectType.Test, true)]
     public void IsTestProject_WithConfigFile(ProjectType projectType, bool expectedResult)
@@ -262,7 +262,7 @@ public partial class SonarAnalysisContextTest
         sut.IsTestProject().Should().Be(expectedResult);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(SnippetFileName, false)]
     [DataRow(AnotherFileName, true)]
     public void ReportDiagnosticIfNonGenerated_UnchangedFiles_CompilationAnalysisContext(string unchangedFileName, bool expected)

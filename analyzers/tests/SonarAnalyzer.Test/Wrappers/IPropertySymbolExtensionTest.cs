@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Test.Wrappers;
 [TestClass]
 public class IPropertySymbolExtensionTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("required")]
     [DataRow("")]
     public void IsRequired(string required)

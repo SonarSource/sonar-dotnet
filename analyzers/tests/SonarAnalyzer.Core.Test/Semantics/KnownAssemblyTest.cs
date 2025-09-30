@@ -43,7 +43,7 @@ public class KnownAssemblyTest
         sut.Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("predicate");
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Test", true)]
     [DataRow("test", true)]
     [DataRow("TEST", true)]
@@ -60,7 +60,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Test", true)]
     [DataRow("test", true)]
     [DataRow("TEST", true)]
@@ -76,7 +76,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Test", true)]
     [DataRow("test", true)]
     [DataRow("TEST", true)]
@@ -92,7 +92,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Test", true)]
     [DataRow("test", true)]
     [DataRow("TEST", true)]
@@ -108,7 +108,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.0.0.0", false)]
     [DataRow("1.9.9.99", false)]
     [DataRow("2.0.0.0", true)]
@@ -124,7 +124,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.0.0.0", true)]
     [DataRow("1.9.9.99", true)]
     [DataRow("2.0.0.0", false)]
@@ -140,7 +140,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("1.0.0.0", false)]
     [DataRow("1.9.9.99", false)]
     [DataRow("2.0.0.0", true)]
@@ -160,7 +160,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("c5b62af9de6d7244", true)]
     [DataRow("C5B62AF9DE6D7244", true)]
     [DataRow("c5-b6-2a-f9-de-6d-72-44", true)]
@@ -201,7 +201,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().BeTrue();
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Test", "1.0.0.0", false)]
     [DataRow("Test", "1.9.9.99", false)]
     [DataRow("TestMy", "2.0.0.0", true)]
@@ -216,7 +216,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Start", true)]
     [DataRow("End", true)]
     [DataRow("StartOrEnd", true)]
@@ -232,7 +232,7 @@ public class KnownAssemblyTest
         sut.IsReferencedBy(compilation).Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("Start", true)]
     [DataRow("End", true)]
     [DataRow("StartOrEnd", true)]

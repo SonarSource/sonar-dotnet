@@ -42,7 +42,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""[Route("Index2/SubPath")]""", "", true)]
     [DataRow("""[Route("/IndexA")]""", """[Route("/IndexB")]""", false)]
     [DataRow("""[Route("/IndexC")]""", """[HttpGet("/IndexD")]""", false)]
-    [DataTestMethod]
+    [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_RouteAttributes(string firstAttribute, string secondAttribute, bool compliant)
     {
         var builder = builderCS.AddReferences(MetadataReferenceFacade.AspNetCoreReferences)
@@ -80,7 +80,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""[HttpPatch("/IndexPatch")]""")]
     [DataRow("""[HttpHead("/IndexHead")]""")]
     [DataRow("""[HttpOptions("/IndexOptions")]""")]
-    [DataTestMethod]
+    [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_Attributes(string attribute)
     {
         var builder = builderCS.AddReferences(MetadataReferenceFacade.AspNetCoreReferences)
@@ -107,7 +107,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""(@"/[action]", Name = "a", Order = 42)""", false)]
     [DataRow("""($"{ConstA}/[action]")""", true)]
     [DataRow("""($"{ConstSlash}[action]")""", false)]
-    [DataTestMethod]
+    [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_WithAllTypesOfStrings(string attributeParameter, bool compliant)
     {
         var builder = builderCS
@@ -182,7 +182,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("/Index2", false)]
     [DataRow(@"\Index2", true)]
     [DataRow("Index1/SubPath", true)]
-    [DataTestMethod]
+    [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_WithHttpAttribute(string attributeParameter, bool compliant)
     {
         var builder = builderCS.AddReferences(AspNet4xReferences("5.2.7")).AddSnippet($$"""
@@ -213,7 +213,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""[RouteAttribute(@"/[action]")]""", false)]
     [DataRow("""[System.Web.Mvc.RouteAttribute(@"/[action]")]""", false)]
     [DataRow("""[method:Route(@"/[action]")]""", false)]
-    [DataTestMethod]
+    [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_WithAttributeSyntaxVariations(string attribute, bool compliant)
     {
         var builder = builderCS.AddReferences(AspNet4xReferences("5.2.7"))
@@ -248,7 +248,7 @@ public class RouteTemplateShouldNotStartWithSlashTest
     [DataRow("""(@"/[action]", Name = "a", Order = 42)""", false)]
     [DataRow("""($"{ConstA}/[action]")""", true)]
     [DataRow("""($"{ConstSlash}[action]")""", false)]
-    [DataTestMethod]
+    [TestMethod]
     public void RouteTemplateShouldNotStartWithSlash_WithAllTypesOfStrings(string attributeParameter, bool compliant)
     {
         var builder = builderCS

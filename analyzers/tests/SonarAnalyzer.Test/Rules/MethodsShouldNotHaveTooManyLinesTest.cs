@@ -97,7 +97,7 @@ i++;
                 """)
             .VerifyNoIssuesIgnoreErrors();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(1)]
     [DataRow(0)]
     [DataRow(-1)]
@@ -125,7 +125,7 @@ i++;
         .AddTestReference()
         .VerifyNoIssues();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(1)]
     [DataRow(0)]
     [DataRow(-1)]

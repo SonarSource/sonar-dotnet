@@ -41,7 +41,7 @@ public class UnusedStringBuilderTest
             .WithOptions(LanguageOptions.FromCSharp9)
             .Verify();
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", false)]
     [DataRow("sb.ToString();", true)]
     [DataRow("""var a = sb.Append("").Append("").Append("").Append("").ToString().ToLower();""", true)]
@@ -78,7 +78,7 @@ public class UnusedStringBuilderTest
 
 #endif
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", false)]
     [DataRow("sb.ToString();", true)]
     [DataRow("""var a = sb.Append("").Append("").Append("").Append("").ToString().ToLower();""", true)]
@@ -125,7 +125,7 @@ public class UnusedStringBuilderTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow("", false)]
     [DataRow("sb.ToString()", true)]
     [DataRow("""Dim a = sb.Append("").Append("").Append("").Append("").ToString().ToLower()""", true)]

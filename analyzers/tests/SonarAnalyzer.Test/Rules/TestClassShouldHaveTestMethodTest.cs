@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules
     {
         private readonly VerifierBuilder builder = new VerifierBuilder<TestClassShouldHaveTestMethod>();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("2.5.7.10213")]
         [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("3.0.0")]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_NUnit3(string testFwkVersion) =>
@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("1.1.11")]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
@@ -52,7 +52,7 @@ namespace SonarAnalyzer.Test.Rules
 
 #if NET
 
-        [DataTestMethod]
+        [TestMethod]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
             builder
                 .WithOptions(LanguageOptions.FromCSharp9)
@@ -61,7 +61,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         public void TestClassShouldHaveTestMethod_CSharp11() =>
             builder
                 .WithOptions(LanguageOptions.FromCSharp11)
@@ -70,7 +70,7 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                 .Verify();
 
-        [DataTestMethod]
+        [TestMethod]
         public void TestClassShouldHaveTestMethod_CSharp12() =>
             builder
                 .WithOptions(LanguageOptions.FromCSharp12)

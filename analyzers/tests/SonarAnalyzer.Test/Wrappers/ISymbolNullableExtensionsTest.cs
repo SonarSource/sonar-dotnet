@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Wrappers;
 [TestClass]
 public class ISymbolNullableExtensionsTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true)]
     [DataRow(false)]
     public void NullableAnnotation_SimpleAnnitations(bool nullable)
@@ -64,7 +64,7 @@ public class ISymbolNullableExtensionsTest
         }
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true)]
     [DataRow(false)]
     public void NullableAnnotation_Receiver(bool nullable)
@@ -88,7 +88,7 @@ public class ISymbolNullableExtensionsTest
         symbol.ReceiverNullableAnnotation().Should().Be(expected);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(true)]
     [DataRow(false)]
     public void NullableAnnotation_ReferenceTypeConstrain(bool nullable)

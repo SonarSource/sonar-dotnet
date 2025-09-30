@@ -65,7 +65,7 @@ namespace SonarAnalyzer.Test.Rules
             CreateBuilder("Generated_razor.g.cs")
                 .VerifyUtilityAnalyzer<LogInfo>(x => x.Select(x => x.Text).Should().Contain($"File 'Utilities\\LogAnalyzer\\Generated_razor.g.cs' was recognized as razor generated"));
 
-        [DataTestMethod]
+        [TestMethod]
         [DataRow("GeneratedByName.generated.cs", 0)]
         [DataRow("SomethingElse.cs", 1)]
         public void Verify_UnchangedFiles(string unchangedFileName, int expectedGeneratedFiles) =>

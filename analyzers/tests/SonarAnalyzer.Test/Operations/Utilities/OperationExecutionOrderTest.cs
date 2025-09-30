@@ -24,7 +24,7 @@ namespace SonarAnalyzer.Test.Operations.Utilities;
 [TestClass]
 public class OperationExecutionOrderTest
 {
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(false, DisplayName = "Execution order")]
     [DataRow(true, DisplayName = "Reversed execution order")]
     public void Linear(bool reverseOrder)
@@ -59,7 +59,7 @@ public class OperationExecutionOrderTest
         ValidateOrder(code, expected, reverseOrder);
     }
 
-    [DataTestMethod]
+    [TestMethod]
     [DataRow(false, DisplayName = "Execution order")]
     [DataRow(true, DisplayName = "Reversed execution order")]
     public void Nested(bool reverseOrder)
