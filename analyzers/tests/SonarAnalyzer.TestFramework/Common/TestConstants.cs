@@ -19,7 +19,6 @@ namespace SonarAnalyzer.TestFramework.Common;
 public static class TestConstants
 {
     public const string NuGetLatestVersion = "LATEST";
-    public const string DotNet9Preview7 = "9.0.0-preview.7.24405.7";
     public const string DotNetCore220Version = "2.2.0";
     public const string WindowsLineEnding = "\r\n";
     public const string UnixLineEnding = "\n";

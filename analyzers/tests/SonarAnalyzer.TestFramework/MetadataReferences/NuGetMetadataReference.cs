@@ -23,6 +23,7 @@ public static class NuGetMetadataReference
 {
 #pragma warning disable S103  // Lines should not be too long
 #pragma warning disable T0016 // Add an empty line before this declaration
+#pragma warning disable T0032 // Internal Styling Rule T0032
     // Hardcoded version
     public static References MicrosoftVisualStudioQualityToolsUnitTestFramework =>
         Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2", null, "Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll");
@@ -123,13 +124,11 @@ public static class NuGetMetadataReference
     public static References MicrosoftExtensionsHttp(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Microsoft.Extensions.Http", packageVersion);
     public static References MicrosoftExtensionsLoggingPackages(string packageVersion) =>
         Create("Microsoft.Extensions.Logging", packageVersion)
-        .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
-        .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion == TestConstants.NuGetLatestVersion
-                                                                            ? TestConstants.DotNet9Preview7                // Work around for .Net 9 preview. Can be removed after release.
-                                                                            : packageVersion))
-        .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
-        .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))
-        .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
+            .Concat(Create("Microsoft.Extensions.Logging.AzureAppServices", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Abstractions", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Console", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.Debug", packageVersion))
+            .Concat(Create("Microsoft.Extensions.Logging.EventLog", packageVersion));
     public static References MicrosoftExtensionsLoggingAbstractions(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Microsoft.Extensions.Logging.Abstractions", packageVersion);
     public static References MicrosoftExtensionsOptions(string packageVersion) => Create("Microsoft.Extensions.Options", packageVersion);
     public static References MicrosoftExtensionsPrimitives(string packageVersion) => Create("Microsoft.Extensions.Primitives", packageVersion);
@@ -138,19 +137,19 @@ public static class NuGetMetadataReference
     public static References MicrosoftNetHttpHeaders(string packageVersion) => Create("Microsoft.Net.Http.Headers", packageVersion);
     public static References MicrosoftNetSdkFunctions(string packageVersion = TestConstants.NuGetLatestVersion) =>
         Create("Microsoft.NET.Sdk.Functions", packageVersion)
-        .Concat(MicrosoftAzureWebJobs(packageVersion))
-        .Concat(MicrosoftAzureWebJobsCore(packageVersion))
-        .Concat(MicrosoftAzureWebJobsExtensionsHttp(packageVersion))
-        .Concat(MicrosoftExtensionsLoggingPackages(packageVersion))
-        .Concat(MicrosoftAspNetCoreMvcAbstractions(packageVersion))
-        .Concat(MicrosoftAspNetCoreMvcCore(packageVersion))
-        .Concat(MicrosoftAspNetCoreHttpAbstractions(packageVersion));
+            .Concat(MicrosoftAzureWebJobs(packageVersion))
+            .Concat(MicrosoftAzureWebJobsCore(packageVersion))
+            .Concat(MicrosoftAzureWebJobsExtensionsHttp(packageVersion))
+            .Concat(MicrosoftExtensionsLoggingPackages(packageVersion))
+            .Concat(MicrosoftAspNetCoreMvcAbstractions(packageVersion))
+            .Concat(MicrosoftAspNetCoreMvcCore(packageVersion))
+            .Concat(MicrosoftAspNetCoreHttpAbstractions(packageVersion));
     public static References MicrosoftNetWebApiCore(string packageVersion) => Create("Microsoft.AspNet.WebApi.Core", packageVersion);
     public static References MicrosoftSqlServerCompact(string packageVersion = "4.0.8876.1") => Create("Microsoft.SqlServer.Compact", packageVersion);
     public static References MicrosoftWebXdt(string packageVersion = "3.0.0") => Create("Microsoft.Web.Xdt", packageVersion);
     public static References MongoDBDriver(string packageVersion = TestConstants.NuGetLatestVersion) =>
         Create("MongoDB.Driver", packageVersion)
-        .Concat(MongoDBDriverCore(packageVersion));
+            .Concat(MongoDBDriverCore(packageVersion));
     public static References MongoDBDriverCore(string packageVersion = TestConstants.NuGetLatestVersion) => Create("MongoDB.Driver.Core", packageVersion);
     public static References MonoPosixNetStandard(string packageVersion = "1.0.0") => Create("Mono.Posix.NETStandard", packageVersion, "linux-x64");
     public static References MonoDataSqlite(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Mono.Data.Sqlite", packageVersion);

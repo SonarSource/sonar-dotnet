@@ -16,6 +16,7 @@
 
 using System.Globalization;
 using NuGet.Common;
+using NuGet.Configuration;
 using NuGet.Packaging;
 using NuGet.Protocol;
 using NuGet.Protocol.Core.Types;
@@ -39,14 +40,14 @@ internal static partial class NuGetMetadataFactory
             Id = id;
             this.runtime = runtime;
             this.version = version == TestConstants.NuGetLatestVersion
-                ? GetLatestVersion().Result
+                ? LatestVersion().Result
                 : version;
         }
 
         public string EnsureInstalled()
         {
             // Check to see if the specific package is already installed
-            var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, Id, PackageVersionPrefix + version, runtime == null ? string.Empty : $@"runtimes\{runtime}\"));
+            var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, Id, PackageVersionPrefix + version, runtime is null ? string.Empty : $@"runtimes\{runtime}\"));
             if (!Directory.Exists(packageDir))
             {
                 LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
@@ -58,11 +59,11 @@ internal static partial class NuGetMetadataFactory
 
         private async Task InstallPackageAsync(string packageDir)
         {
-            var resource = await GetNuGetRepository().ConfigureAwait(false);
+            var resource = await NuGetRepository().ConfigureAwait(false);
             using var packageStream = new MemoryStream();
             await resource.CopyNupkgToStreamAsync(Id, new NuGetVersion(version), packageStream, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
             using var packageReader = new PackageArchiveReader(packageStream);
-            var dllFiles = packageReader.GetFiles().Where(f => f.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)).ToArray();
+            var dllFiles = packageReader.GetFiles().Where(x => x.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)).ToArray();
             if (dllFiles.Any())
             {
                 foreach (var dllFile in dllFiles)
@@ -76,17 +77,33 @@ internal static partial class NuGetMetadataFactory
             }
         }
 
-        private static async Task<FindPackageByIdResource> GetNuGetRepository()
+        private static async Task<FindPackageByIdResource> NuGetRepository()
         {
-            var repository = Repository.Factory.GetCoreV3("https://api.nuget.org/v3/index.json");   // Can't use our default NuGet.config, because of trustedSigners
-            return await repository.GetResourceAsync<FindPackageByIdResource>().ConfigureAwait(false);
+            // We don't read and verify trustedSigners. These packages are stored in dedicated directories that are not used by regular NuGet restore.
+            var source = SettingsFileName() is { } fileName
+                ? PackageSourceProvider.LoadPackageSources(Settings.LoadSpecificSettings(Paths.AnalyzersRoot, fileName)).Single()   // CI, or Sonar local machine
+                : new PackageSource("https://api.nuget.org/v3/index.json");                                                         // External contributor local machine
+            return await Repository.Factory.GetCoreV3(source).GetResourceAsync<FindPackageByIdResource>().ConfigureAwait(false);
+
+            static string SettingsFileName()
+            {
+                if (File.Exists(Path.Combine(Paths.ProjectRoot, "CI.NuGet.Config")))
+                {
+                    return TestEnvironment.IsAzureDevOpsContext ? "CI.NuGet.Config" : null;
+                }
+                else
+                {
+                    return "NuGet.Config";
+                }
+            }
         }
 
-        private async Task<string> GetLatestVersion()
+        private async Task<string> LatestVersion()
         {
             const int VersionCheckDays = 5;
             var path = Path.Combine(PackagesFolder, Id, "Sonar.Latest.txt");
-            var (nextCheck, latest) = File.Exists(path)
+            var (nextCheck, latest) =
+                File.Exists(path)
                 && File.ReadAllText(path).Split(';') is var values
                 && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
                     ? Pair.From(nextCheckValue, values[1])
@@ -94,7 +111,7 @@ internal static partial class NuGetMetadataFactory
             LogMessage($"Next check for latest NuGets: {nextCheck}");
             if (nextCheck < DateTime.Now)
             {
-                var resource = await GetNuGetRepository().ConfigureAwait(false);
+                var resource = await NuGetRepository().ConfigureAwait(false);
                 var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
                 latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
                 new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
