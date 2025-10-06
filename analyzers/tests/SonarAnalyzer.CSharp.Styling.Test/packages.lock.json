@@ -74,6 +74,11 @@
           "System.Configuration.ConfigurationManager": "6.0.0"
         }
       },
+      "FluentAssertions.Analyzers": {
+        "type": "Transitive",
+        "resolved": "0.34.1",
+        "contentHash": "2BnAAB8CCPdRA9P1+lAvBZOleR2BTmsxGMtGt+LnABJUARGqoGMWEFxG3znZYqHVIrMP0Za/kyw6atyt8x2mzA=="
+      },
       "Google.Protobuf": {
         "type": "Transitive",
         "resolved": "3.6.1",
@@ -694,6 +699,7 @@
         "type": "Project",
         "dependencies": {
           "FluentAssertions": "[7.2.0, )",
+          "FluentAssertions.Analyzers": "[0.34.1, )",
           "MSTest.TestAdapter": "[3.11.0, )",
           "MSTest.TestFramework": "[3.11.0, )",
           "Microsoft.Build.Locator": "[1.9.1, )",

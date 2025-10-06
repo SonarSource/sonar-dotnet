@@ -8,7 +8,6 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="7.2.0" />
     <PackageReference Include="FluentAssertions.Analyzers" Version="0.34.1">
-      <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Build.Locator" Version="1.9.1" />
