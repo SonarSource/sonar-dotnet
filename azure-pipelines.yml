@@ -1,7 +1,9 @@
 trigger:
 - master
 
-pool: .net-bubble-aws-re-team-prod
+pool:
+  name: .net-bubble-aws-re-team-dev
+  demands: EnvName -equals pr-251
 
 variables:
   - group: sonar-dotnet-variables
