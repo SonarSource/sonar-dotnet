@@ -15,6 +15,7 @@
  */
 
 using SonarAnalyzer.CSharp.Rules;
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -50,14 +51,15 @@ public class MethodShouldBeNamedAccordingToSynchronicityTest
             .Verify();
 
     [TestMethod]
-    [DataRow("1.1.11")]
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(MsTest.Ver1_1)]
+    [DataRow(MsTest.Ver3)]
+    [DataRow(Latest)]
     public void MethodShouldBeNamedAccordingToSynchronicity_MsTest(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)).VerifyNoIssues();
 
     [TestMethod]
-    [DataRow("2.5.7.10213")]
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(NUnit.Ver25)]
+    [DataRow(Latest)]
     public void MethodShouldBeNamedAccordingToSynchronicity_NUnit(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.NUnit.cs").AddReferences(NuGetMetadataReference.NUnit(testFwkVersion)).VerifyNoIssues();
 

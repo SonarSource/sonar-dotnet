@@ -24,8 +24,9 @@ internal static class ProjectTypeCache
     public /* for testing */ static readonly ISet<string> TestAssemblyNames = new HashSet<string>
     {
         "dotMemory.Unit",
-        "Microsoft.VisualStudio.TestPlatform.TestFramework",
+        "Microsoft.VisualStudio.TestPlatform.TestFramework", // Name inside https://nuget.info/packages/MSTest.TestFramework/3.11.0
         "Microsoft.VisualStudio.QualityTools.UnitTestFramework",
+        "MSTest.TestFramework",                              // Name inside https://nuget.info/packages/MSTest.TestFramework/4.0.0
         "Machine.Specifications",
         "nunit.framework",
         "nunitlite",

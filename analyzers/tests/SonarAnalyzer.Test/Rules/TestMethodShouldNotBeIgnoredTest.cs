@@ -15,27 +15,33 @@
  */
 
 using SonarAnalyzer.CSharp.Rules;
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class TestMethodShouldNotBeIgnoredTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldNotBeIgnored>().AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1);
+    private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldNotBeIgnored>()
+        .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion));
 
     [TestMethod]
     public void TestMethodShouldNotBeIgnored_MsTest_Legacy() =>
-        builder.AddPaths("TestMethodShouldNotBeIgnored.MsTest.cs")
-            .WithErrorBehavior(CompilationErrorBehavior.Ignore)    // IgnoreAttribute doesn't contain any reason param
+        new VerifierBuilder<TestMethodShouldNotBeIgnored>()
+            .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
+            .AddPaths("TestMethodShouldNotBeIgnored.MsTest.cs")
+            .WithErrorBehavior(CompilationErrorBehavior.Ignore) // IgnoreAttribute doesn't contain any reason param
             .Verify();
 
     [TestMethod]
-    [DataRow("1.2.0")]
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(MsTest.Ver1_2)]
+    [DataRow(MsTest.Ver3)]
+    [DataRow(Latest)]
     public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
         new VerifierBuilder<TestMethodShouldNotBeIgnored>()
             .AddPaths("TestMethodShouldNotBeIgnored.MsTest.cs")
-            .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)).Verify();
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+            .Verify();
 
     [TestMethod]
     public void TestMethodShouldNotBeIgnored_MsTest_InvalidCases() =>
@@ -54,8 +60,8 @@ public class TestMethodShouldNotBeIgnoredTest
             .VerifyNoIssuesIgnoreErrors();
 
     [TestMethod]
-    [DataRow("2.5.7.10213")]
-    [DataRow("2.7.0")]
+    [DataRow(NUnit.Ver25)]
+    [DataRow(NUnit.Ver27)]
     public void TestMethodShouldNotBeIgnored_NUnit_V2(string testFwkVersion) =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.NUnit.V2.cs")
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))

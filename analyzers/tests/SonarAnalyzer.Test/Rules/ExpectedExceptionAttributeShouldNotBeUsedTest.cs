@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
@@ -26,16 +27,17 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExpectedExceptionAttributeShouldNotBeUsed>();
 
     [TestMethod]
-    [DataRow("1.1.11")]
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(MsTest.Ver1_1)]
+    [DataRow(MsTest.Ver3)]
+    // Removed in V4 https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-mstest-migration-v3-v4#expectedexceptionattribute-api-is-removed
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_CS(string testFwkVersion) =>
         builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs")
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
             .Verify();
 
     [TestMethod]
-    [DataRow("2.5.7.10213")] // Lowest NUnit version available
-    [DataRow("2.7.1")] // Latest version of NUnit that contains the attribute
+    [DataRow(NUnit.Ver25)] // Lowest NUnit version available
+    [DataRow(NUnit.Ver27)] // Latest version of NUnit that contains the attribute
     public void ExpectedExceptionAttributeShouldNotBeUsed_NUnit_CS(string testFwkVersion) =>
         builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.NUnit.cs")
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
@@ -52,8 +54,8 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .VerifyNoIssues();
 
     [TestMethod]
-    [DataRow("1.1.11")]
-    [DataRow(TestConstants.NuGetLatestVersion)]
+    [DataRow(MsTest.Ver1_1)]
+    [DataRow(MsTest.Ver3)]
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_VB(string testFwkVersion) =>
         builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.vb")
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))

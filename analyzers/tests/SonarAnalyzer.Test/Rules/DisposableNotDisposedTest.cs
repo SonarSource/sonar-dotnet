@@ -42,7 +42,7 @@ public class DisposableNotDisposedTest
     public void DisposableNotDisposed_CSharp8() =>
         builder.AddPaths("DisposableNotDisposed.CSharp8.cs")
             .WithOptions(LanguageOptions.FromCSharp8)
-            .AddReferences(NuGetMetadataReference.FluentAssertions("5.9.0"))
+            .AddReferences(NuGetMetadataReference.FluentAssertions(NugetPackageVersions.FluentAssertionsVersions.Ver5))
             .Verify();
 
     [TestMethod]

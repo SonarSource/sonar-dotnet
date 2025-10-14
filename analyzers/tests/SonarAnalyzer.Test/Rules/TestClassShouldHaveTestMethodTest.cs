@@ -15,6 +15,7 @@
  */
 
 using SonarAnalyzer.CSharp.Rules;
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 
 namespace SonarAnalyzer.Test.Rules
 {
@@ -24,8 +25,8 @@ namespace SonarAnalyzer.Test.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<TestClassShouldHaveTestMethod>();
 
         [TestMethod]
-        [DataRow("2.5.7.10213")]
-        [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+        [DataRow(NUnit.Ver25)]
+        [DataRow(NUnit.Ver3Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
         public void TestClassShouldHaveTestMethod_NUnit(string testFwkVersion) =>
             builder
                 .AddPaths("TestClassShouldHaveTestMethod.NUnit.cs")
@@ -42,8 +43,9 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
-        [DataRow("1.1.11")]
-        [DataRow(TestConstants.NuGetLatestVersion)]
+        [DataRow(MsTest.Ver1_1)]
+        [DataRow(MsTest.Ver3)]
+        [DataRow(Latest)]
         public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
             builder
                 .AddPaths("TestClassShouldHaveTestMethod.MsTest.cs")

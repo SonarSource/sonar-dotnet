@@ -16,6 +16,8 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
+
 namespace SonarAnalyzer.Test.Rules
 {
     [TestClass]
@@ -49,8 +51,9 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
-        [DataRow("1.1.11")]
-        [DataRow(TestConstants.NuGetLatestVersion)]
+        [DataRow(MsTest.Ver1_1)]
+        [DataRow(MsTest.Ver3)]
+        [DataRow(Latest)]
         public void AsyncVoidMethod_MsTestV2_CSharp11(string testFwkVersion) =>
             builder.AddPaths("AsyncVoidMethod_MsTestV2_CSharp11.cs")
                 // The first version of the framework is not compatible with Net 7 so we need to test only v2 with C#11 features

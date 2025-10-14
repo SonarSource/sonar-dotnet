@@ -17,6 +17,8 @@
 using SonarAnalyzer.CSharp.Rules;
 using SonarAnalyzer.Test.Common;
 
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
+
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
@@ -25,7 +27,8 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
     private readonly VerifierBuilder builder = new VerifierBuilder<AssertionArgsShouldBePassedInCorrectOrder>();
 
     [TestMethod]
-    [DataRow("1.1.11")]
+    [DataRow(MsTest.Ver1_1)]
+    [DataRow(MsTest.Ver3)]
     [DataRow(TestConstants.NuGetLatestVersion)]
     public void AssertionArgsShouldBePassedInCorrectOrder_MsTest(string testFwkVersion) =>
         builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.MsTest.cs")
@@ -41,8 +44,8 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
             """).Verify();
 
     [TestMethod]
-    [DataRow("2.5.7.10213")]
-    [DataRow("3.14.0")] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+    [DataRow(NUnit.Ver25)]
+    [DataRow(NUnit.Ver3Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
     public void AssertionArgsShouldBePassedInCorrectOrder_NUnit(string testFwkVersion) =>
         builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit.cs")
             .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))
@@ -51,7 +54,7 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
     [TestMethod]
     public void AssertionArgsShouldBePassedInCorrectOrder_NUnit_Static() =>
         // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
-        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.NUnit("3.14.0")).AddSnippet("""
+        builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver3Latest)).AddSnippet("""
             using static NUnit.Framework.Assert;
             var str = "";
             AreEqual(str, ""); // Noncompliant

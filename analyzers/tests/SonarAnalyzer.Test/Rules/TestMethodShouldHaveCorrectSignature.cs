@@ -15,6 +15,7 @@
  */
 
 using SonarAnalyzer.CSharp.Rules;
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 
 namespace SonarAnalyzer.Test.Rules
 {
@@ -24,16 +25,17 @@ namespace SonarAnalyzer.Test.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldHaveCorrectSignature>();
 
         [TestMethod]
-        [DataRow("1.1.11")]
-        [DataRow(TestConstants.NuGetLatestVersion)]
+        [DataRow(MsTest.Ver1_1)]
+        [DataRow(MsTest.Ver3)]
+        [DataRow(Latest)]
         public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.MsTest.cs")
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .Verify();
 
         [TestMethod]
-        [DataRow("2.5.7.10213")]
-        [DataRow(TestConstants.NuGetLatestVersion)]
+        [DataRow(NUnit.Ver25)]
+        [DataRow(Latest)]
         public void TestMethodShouldHaveCorrectSignature_NUnit(string testFwkVersion) =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.NUnit.cs")
                 .AddReferences(NuGetMetadataReference.NUnit(testFwkVersion))

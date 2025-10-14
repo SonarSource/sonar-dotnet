@@ -17,33 +17,46 @@
 using SonarAnalyzer.CSharp.Rules;
 using SonarAnalyzer.Test.Common;
 
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
+
 namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class TestMethodShouldContainAssertionTest
 {
-    private const string Latest = TestConstants.NuGetLatestVersion; // Rename only
-
     private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldContainAssertion>();
 
     [TestMethod]
-    [DataRow(MsTestVersions.Ver1)]
+    [DataRow(MsTest.Ver1_1)]
+    [DataRow(MsTest.Ver3)]
     [DataRow(Latest)]
-    public void TestMethodShouldContainAssertion_MSTest(string testFwkVersion) =>
+    public void TestMethodShouldContainAssertion_MSTest_Common(string testFwkVersion) =>
         WithTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
-            .AddPaths("TestMethodShouldContainAssertion.MsTest.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs")
+            .AddPaths("TestMethodShouldContainAssertion.MsTest.Common.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs")
             .Verify();
 
     [TestMethod]
-    [DataRow(NUnitVersions.Ver3, Latest, Latest)]
-    [DataRow(NUnitVersions.Ver3Latest, FluentAssertionVersions.Ver5, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
-    [DataRow(NUnitVersions.Ver3Latest, Latest, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+    public void TestMethodShouldContainAssertion_MSTest_V3() =>
+        WithTestReferences(NuGetMetadataReference.MSTestTestFrameworkV3)
+            .AddPaths("TestMethodShouldContainAssertion.MsTest.V3.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs")
+            .VerifyNoIssues();
+
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_MSTest_Latest() =>
+        WithTestReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
+            .AddPaths("TestMethodShouldContainAssertion.MsTest.Latest.cs", "TestMethodShouldContainAssertion.MsTest.AnotherFile.cs")
+            .Verify();
+
+    [TestMethod]
+    [DataRow(NUnit.Ver3, Latest, Latest)]
+    [DataRow(NUnit.Ver3Latest, FluentAssertionsVersions.Ver5, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+    [DataRow(NUnit.Ver3Latest, Latest, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
     public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
         WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.NUnit.cs").Verify();
 
     [TestMethod]
-    [DataRow(NUnitVersions.Ver25)]
-    [DataRow(NUnitVersions.Ver27)]
+    [DataRow(NUnit.Ver25)]
+    [DataRow(NUnit.Ver27)]
     public void TestMethodShouldContainAssertion_NUnit_V2Specific(string testFwkVersion) =>
         WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion)).AddSnippet("""
             using System;
@@ -103,8 +116,8 @@ public class TestMethodShouldContainAssertionTest
             .Verify();
 
     [TestMethod]
-    [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver1)]
-    [DataRow(NUnitVersions.Ver25, FluentAssertionVersions.Ver4)]
+    [DataRow(NUnit.Ver25, FluentAssertionsVersions.Ver1)]
+    [DataRow(NUnit.Ver25, FluentAssertionsVersions.Ver4)]
     public void TestMethodShouldContainAssertion_NUnit_FluentAssertionsLegacy(string testFwkVersion, string fluentVersion) =>
         WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion).AddSnippet("""
             using System;
@@ -138,7 +151,7 @@ public class TestMethodShouldContainAssertionTest
 
     [TestMethod]
     public void TestMethodShouldContainAssertion_NUnit_NFluentLegacy() =>
-       WithTestReferences(NuGetMetadataReference.NUnit(NUnitVersions.Ver25), nFluentVersion: "1.3.1").AddSnippet("""
+       WithTestReferences(NuGetMetadataReference.NUnit(NUnit.Ver25), nFluentVersion: "1.3.1").AddSnippet("""
            using System;
            using NFluent;
            using NUnit.Framework;
@@ -159,8 +172,15 @@ public class TestMethodShouldContainAssertionTest
         WithTestReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).AddPaths("TestMethodShouldContainAssertion.Moq.cs").Verify();
 
     [TestMethod]
-    public void TestMethodShouldContainAssertion_CustomAssertionMethod() =>
-        builder.AddPaths("TestMethodShouldContainAssertion.Custom.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).Verify();
+    [DataRow(MsTest.Ver1_1)]
+    [DataRow(MsTest.Ver3)]
+    [DataRow(Latest)]
+    public void TestMethodShouldContainAssertion_CustomAssertionMethod_Common(string version) =>
+        builder.AddPaths("TestMethodShouldContainAssertion.Custom.Common.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(version)).Verify();
+
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_CustomAssertionMethod_V3() =>
+        builder.AddPaths("TestMethodShouldContainAssertion.Custom.V3.cs").AddReferences(NuGetMetadataReference.MSTestTestFrameworkV3).VerifyNoIssues();
 
     [TestMethod]
     public void TestMethodShouldContainAssertion_FsCheck_XUnit() =>
@@ -223,24 +243,4 @@ public class TestMethodShouldContainAssertionTest
             .AddReferences(MetadataReferenceFacade.SystemXml)
             .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
             .AddReferences(MetadataReferenceFacade.SystemThreadingTasks);
-
-    private static class FluentAssertionVersions
-    {
-        public const string Ver1 = "1.6.0";
-        public const string Ver4 = "4.19.4";
-        public const string Ver5 = "5.9.0";
-    }
-
-    private static class MsTestVersions
-    {
-        public const string Ver1 = "1.1.11";
-    }
-
-    private static class NUnitVersions
-    {
-        public const string Ver3 = "3.11.0";
-        public const string Ver3Latest = "3.14.0";
-        public const string Ver25 = "2.5.7.10213";
-        public const string Ver27 = "2.7.0";
-    }
 }

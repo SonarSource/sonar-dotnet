@@ -35,13 +35,6 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void TestMethod4()
-        {
-            var x = System.IO.File.Open("", System.IO.FileMode.Open);
-        }
-
-        [TestMethod]
         public void TestMethod5()
         {
             var x = 42;
@@ -228,13 +221,6 @@
         {
             var x = 42;
             Microsoft.VisualStudio.TestTools.UnitTesting.Assert.AreEqual(x, 42);
-        }
-
-        [DataTestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void TestMethod4()
-        {
-            var x = System.IO.File.Open("", System.IO.FileMode.Open);
         }
 
         [DataTestMethod]

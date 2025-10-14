@@ -15,6 +15,7 @@
  */
 
 using static SonarAnalyzer.TestFramework.MetadataReferences.NuGetMetadataFactory;
+using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.MetadataReference>;
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
@@ -27,7 +28,8 @@ public static class NuGetMetadataReference
     // Hardcoded version
     public static References MicrosoftVisualStudioQualityToolsUnitTestFramework =>
         Create("VS.QualityTools.UnitTestFramework", "15.0.27323.2", null, "Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll");
-    public static References MSTestTestFrameworkV1 => Create("MSTest.TestFramework", "1.1.11");
+    public static References MSTestTestFrameworkV1 => Create("MSTest.TestFramework", MsTest.Ver1_1);
+    public static References MSTestTestFrameworkV3 => Create("MSTest.TestFramework", MsTest.Ver3);
     public static References XunitFrameworkV1 => Create("xunit", "1.9.1").Concat(Create("xunit.extensions", "1.9.1"));
 
     // Passed version
