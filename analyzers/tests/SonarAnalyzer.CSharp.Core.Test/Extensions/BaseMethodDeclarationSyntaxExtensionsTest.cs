@@ -32,13 +32,13 @@ public class BaseMethodDeclarationSyntaxExtensionsTest
 
         BaseMethodDeclarationSyntax sut = null;
 
-        var exception = Assert.ThrowsException<ArgumentNullException>(() => sut.GetBodyDescendantNodes());
+        var exception = Assert.Throws<ArgumentNullException>(sut.GetBodyDescendantNodes);
 
         exception.Message.Should().Be(string.Format(messageFormat, "method"));
     }
 
     [TestMethod]
-    [DynamicData(nameof(GetMethodDeclarationsAndExpectedBody), DynamicDataSourceType.Method)]
+    [DynamicData(nameof(GetMethodDeclarationsAndExpectedBody))]
     public void HasBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody)
     {
         var hasBody = methodDeclaration.HasBodyOrExpressionBody();

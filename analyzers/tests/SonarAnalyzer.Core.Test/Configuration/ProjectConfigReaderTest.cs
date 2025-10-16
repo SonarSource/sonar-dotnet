@@ -87,7 +87,7 @@ public class ProjectConfigReaderTest
     [DataRow("Invalid_DifferentNamespace")]
     [DataRow("Invalid_Xml")]
     public void WhenInvalid_FilesToReturnPath_ThrowsException(string folder) =>
-        Assert.ThrowsException<InvalidOperationException>(() => CreateProjectConfigReader($@"TestResources\SonarProjectConfig\{folder}\SonarProjectConfig.xml"))
+        Assert.Throws<InvalidOperationException>(() => CreateProjectConfigReader($@"TestResources\SonarProjectConfig\{folder}\SonarProjectConfig.xml"))
             .Message.Should().Be("sonarProjectConfig could not be parsed.");
 
     [TestMethod]

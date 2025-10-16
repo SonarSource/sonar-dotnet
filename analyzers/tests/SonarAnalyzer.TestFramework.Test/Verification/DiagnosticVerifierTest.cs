@@ -457,7 +457,7 @@ public class DiagnosticVerifierTest
         builder.AddSnippet(snippet)
             .WithConcurrentAnalysis(false)
             .Invoking(x => x.Verify())
-            .Should().Throw<AssertFailedException>()
+            .Should().Throw<DiagnosticVerifierException>()
             .Which.Message.Should().ContainIgnoringLineEndings(expectedMessage);
 
     private VerifierBuilder CreateConcurrentBuilder(string code) =>

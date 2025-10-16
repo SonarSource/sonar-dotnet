@@ -15,6 +15,7 @@
  */
 
 using System.IO;
+using FluentAssertions.Execution;
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.Core.Configuration;
 using SonarAnalyzer.CSharp.Rules;
@@ -505,7 +506,7 @@ public class VerifierTest
         var builder = new VerifierBuilder<DoNotWriteToStandardOutput>() // Rule with scope Main
             .AddSnippet("class Sample { void Main() { System.Console.WriteLine(); } }  // Noncompliant");
         builder.Invoking(x => x.Verify()).Should().NotThrow();
-        builder.AddTestReference().Invoking(x => x.Verify()).Should().Throw<AssertFailedException>("project references should be recognized as Test code").WithMessage("""
+        builder.AddTestReference().Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>("project references should be recognized as Test code").WithMessage("""
             There are differences for CSharp7 snippet0.cs:
               Line 1: Missing expected issue
             """);
@@ -534,7 +535,7 @@ public class VerifierTest
     public void Verify_BasePath()
     {
         DummyCS.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");
-        DummyCS.AddPaths("Verifier.BasePathAssertFails.cs").Invoking(x => x.Verify()).Should().Throw<AssertFailedException>("File should be found in TestCases directory.");
+        DummyCS.AddPaths("Verifier.BasePathAssertFails.cs").Invoking(x => x.Verify()).Should().Throw<DiagnosticVerifierException>("File should be found in TestCases directory.");
         DummyCS.WithBasePath("Verifier").AddPaths("Verifier.BasePath.cs").Invoking(x => x.Verify()).Should().NotThrow();
     }
 
@@ -694,7 +695,7 @@ public class VerifierTest
                 private bool c = true;
             }
             """);
-        DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
+        DummyCS.AddPaths(originalPath).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertionFailedException>().WithMessage("""
             Expected actual to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: CSharp7, but they differ on line 3 and column 21 (index 42):
                         ↓ (actual)
               "…int a = default;     //…"
@@ -713,7 +714,7 @@ public class VerifierTest
                 Private C As Boolean = True
             End Class
             """);
-        DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>().WithMessage("""
+        DummyVB.AddPaths(originalPath).WithCodeFix<DummyCodeFixVB>().WithCodeFixedPaths(originalPath).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertionFailedException>().WithMessage("""
             Expected actual to be the same string because VerifyWhileDocumentChanges updates the document until all issues are fixed, even if the fix itself creates a new issue again. Language: VisualBasic12, but they differ on line 2 and column 28 (index 47):
                                ↓ (actual)
               "…A As Integer = Nothing  …"
@@ -726,7 +727,7 @@ public class VerifierTest
     public void VerifyCodeFix_NoIssueRaised()
     {
         var path = WriteFile("File.cs", "// Nothing to see here");
-        DummyCS.AddPaths(path).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(path).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertFailedException>()
+        DummyCS.AddPaths(path).WithCodeFix<DummyCodeFixCS>().WithCodeFixedPaths(path).Invoking(x => x.VerifyCodeFix()).Should().Throw<AssertionFailedException>()
             .WithMessage("Expected state.Diagnostics not to be empty.");
     }
 
@@ -741,11 +742,11 @@ public class VerifierTest
             {
                 private int a = 42;     // Noncompliant
             }
-            """).Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertFailedException>();
+            """).Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertionFailedException>();
 
     [TestMethod]
     public void VerifyNoIssues_InvalidCode_Throws() =>
-        WithSnippetCS("Nonsense").Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertFailedException>();
+        WithSnippetCS("Nonsense").Invoking(x => x.VerifyNoIssues()).Should().Throw<AssertionFailedException>();
 
     [TestMethod]
     public void VerifyNoAD0001_AnalyzerException_Fail() =>
@@ -756,7 +757,8 @@ public class VerifierTest
                             public int X = 7;
                         }
                         """)
-            .Invoking(x => x.VerifyNoAD0001()).Should().Throw<AssertFailedException>();
+            .Invoking(x => x.VerifyNoAD0001())
+            .Should().Throw<AssertionFailedException>();
 
     [TestMethod]
     public void VerifyNoAD0001_NoAD0001_DoesNotFail() =>
@@ -780,7 +782,7 @@ public class VerifierTest
             {
                 private int a = 42;     // Noncompliant
             }
-            """).Invoking(x => x.VerifyNoIssuesIgnoreErrors()).Should().Throw<AssertFailedException>();
+            """).Invoking(x => x.VerifyNoIssuesIgnoreErrors()).Should().Throw<AssertionFailedException>();
 
     [TestMethod]
     public void VerifyNoIssuesIgnoreErrors_InvalidCode_Throws() =>
@@ -810,7 +812,8 @@ public class VerifierTest
         var message = new LogInfo { Text = "Lorem Ipsum" };
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, message)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
             .Invoking(x => x.VerifyUtilityAnalyzerProducesEmptyProtobuf())
-            .Should().Throw<AssertFailedException>().WithMessage("Expected value to be 0L because protobuf file should be empty, but found *");
+            .Should().Throw<AssertionFailedException>()
+            .WithMessage("Expected value to be 0L because protobuf file should be empty, but found *");
     }
 
     [TestMethod]
@@ -848,8 +851,9 @@ public class VerifierTest
     {
         var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerCS(protobufPath, null)).AddSnippet("// Nothing to see here").WithProtobufPath(protobufPath)
-            .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
-            .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
+            .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertionFailedException("Some failed assertion about Protobuf")))
+            .Should().Throw<AssertionFailedException>()
+            .WithMessage("Some failed assertion about Protobuf");
     }
 
     [TestMethod]
@@ -857,8 +861,9 @@ public class VerifierTest
     {
         var protobufPath = TestFiles.TestPath(TestContext, "Empty.pb");
         new VerifierBuilder().AddAnalyzer(() => new DummyUtilityAnalyzerVB(protobufPath, null)).AddSnippet("' Nothing to see here").WithProtobufPath(protobufPath)
-            .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertFailedException("Some failed assertion about Protobuf")))
-            .Should().Throw<AssertFailedException>().WithMessage("Some failed assertion about Protobuf");
+            .Invoking(x => x.VerifyUtilityAnalyzer<LogInfo>(x => throw new AssertionFailedException("Some failed assertion about Protobuf")))
+            .Should().Throw<AssertionFailedException>()
+            .WithMessage("Some failed assertion about Protobuf");
     }
 
     private VerifierBuilder WithSnippetCS(string code) =>

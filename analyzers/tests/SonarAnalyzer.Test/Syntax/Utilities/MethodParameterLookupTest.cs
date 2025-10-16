@@ -142,10 +142,10 @@ public class MethodParameterLookupTest
         var c = new CSharpInspection(SourceCS);
         var lookupThrow = c.CreateLookup(1, "DoSomething");
 
-        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        var invalidOperationEx = Assert.Throws<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
         invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
 
-        var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
+        var argumentEx = Assert.Throws<ArgumentException>(() =>
             lookupThrow.TryGetSymbol(CSharpCodeAnalysis.SyntaxFactory.LiteralExpression(CSharpCodeAnalysis.SyntaxKind.StringLiteralExpression), out var parameter));
         argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.CSharp.Syntax.ArgumentSyntax");
     }
@@ -156,10 +156,10 @@ public class MethodParameterLookupTest
         var c = new VisualBasicInspection(SourceVB);
         var lookupThrow = c.CreateLookup(1, "DoSomething");
 
-        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        var invalidOperationEx = Assert.Throws<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
         invalidOperationEx.Message.Should().Be("Sequence contains more than one element");
 
-        var argumentEx = Assert.ThrowsException<ArgumentException>(() =>
+        var argumentEx = Assert.Throws<ArgumentException>(() =>
             lookupThrow.TryGetSymbol(VBCodeAnalysis.SyntaxFactory.StringLiteralExpression(VBCodeAnalysis.SyntaxFactory.StringLiteralToken(string.Empty, string.Empty)), out var parameter));
         argumentEx.Message.Should().StartWith("argument must be of type Microsoft.CodeAnalysis.VisualBasic.Syntax.ArgumentSyntax");
     }
@@ -170,7 +170,7 @@ public class MethodParameterLookupTest
         var c = new CSharpInspection(SourceCS);
         var lookupThrow = c.CreateLookup(7, "WithParams");
 
-        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        var invalidOperationEx = Assert.Throws<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
         invalidOperationEx.Message.Should().Be("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
     }
 
@@ -180,7 +180,7 @@ public class MethodParameterLookupTest
         var c = new VisualBasicInspection(SourceVB);
         var lookupThrow = c.CreateLookup(5, "WithParams");
 
-        var invalidOperationEx = Assert.ThrowsException<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
+        var invalidOperationEx = Assert.Throws<InvalidOperationException>(() => lookupThrow.TryGetNonParamsSyntax(lookupThrow.MethodSymbol.Parameters.Single(), out var argument));
         invalidOperationEx.Message.Should().Be("Cannot call TryGetNonParamsSyntax on ParamArray/params parameters.");
     }
 

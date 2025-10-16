@@ -4097,7 +4097,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         [TestMethod]
         public void Cfg_VarPattern_InSwitchExpression_IsNotSupported()
         {
-            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"string a = taintedString switch {var x => null};"));
+            var exception = Assert.Throws<NotSupportedException>(() => Build(@"string a = taintedString switch {var x => null};"));
 
             exception.Message.Should().Be("VarPattern");
         }
@@ -4105,7 +4105,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         [TestMethod]
         public void Cfg_VarPattern_InIf_IsNotSupported()
         {
-            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is var x) { }"));
+            var exception = Assert.Throws<NotSupportedException>(() => Build(@"if (tainted is var x) { }"));
 
             exception.Message.Should().Be("VarPattern");
         }
@@ -4113,7 +4113,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         [TestMethod]
         public void Cfg_NotPattern_InIf_IsNotSupported()
         {
-            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is not null) { }"));
+            var exception = Assert.Throws<NotSupportedException>(() => Build(@"if (tainted is not null) { }"));
 
             exception.Message.Should().Be("NotPattern");
         }
@@ -4121,7 +4121,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         [TestMethod]
         public void Cfg_AndPattern_InIf_IsNotSupported()
         {
-            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is int and > 0) { }"));
+            var exception = Assert.Throws<NotSupportedException>(() => Build(@"if (tainted is int and > 0) { }"));
 
             exception.Message.Should().Be("AndPattern");
         }
@@ -4129,7 +4129,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         [TestMethod]
         public void Cfg_OrPattern_InIf_IsNotSupported()
         {
-            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is string or int) { }"));
+            var exception = Assert.Throws<NotSupportedException>(() => Build(@"if (tainted is string or int) { }"));
 
             exception.Message.Should().Be("OrPattern");
         }
@@ -4137,7 +4137,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         [TestMethod]
         public void Cfg_ParenthesizedPattern_InIf_IsNotSupported()
         {
-            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is (string s)) { }"));
+            var exception = Assert.Throws<NotSupportedException>(() => Build(@"if (tainted is (string s)) { }"));
 
             exception.Message.Should().Be("ParenthesizedPattern");
         }
@@ -4145,7 +4145,7 @@ var result = first switch {""a"" => second switch {""x"" => 1, _ => 2}, ""b"" =>
         [TestMethod]
         public void Cfg_ListPattern_InIf_IsNotSupported()
         {
-            var exception = Assert.ThrowsException<NotSupportedException>(() => Build(@"if (tainted is []) { }"));
+            var exception = Assert.Throws<NotSupportedException>(() => Build(@"if (tainted is []) { }"));
 
             exception.Message.Should().Be("ListPattern");
         }

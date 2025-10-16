@@ -82,8 +82,8 @@ public class IOperationExtensionsTest
     {
         IOperation operation = null;
         // These extension methods are used by sonar-architecture. Do not remove them.
-        Assert.ThrowsException<NullReferenceException>(() => operation.AsForEachLoop());
-        Assert.ThrowsException<NullReferenceException>(() => operation.AsVariableDeclarator());
+        Assert.Throws<NullReferenceException>(() => operation.AsForEachLoop());
+        Assert.Throws<NullReferenceException>(() => operation.AsVariableDeclarator());
         operation.ToArrayCreation();
         operation.ToCatchClause();
         operation.ToConversion();

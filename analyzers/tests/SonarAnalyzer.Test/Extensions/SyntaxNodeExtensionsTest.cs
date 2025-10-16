@@ -93,7 +93,7 @@ public class SyntaxNodeExtensionsTest
     [TestMethod]
     public void GetDeclarationTypeName_UnknownType() =>
 #if DEBUG
-        Assert.ThrowsException<UnexpectedValueException>(() => SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
+        Assert.Throws<UnexpectedValueException>(() => SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.Block()), "Unexpected type Block\r\nParameter name: kind");
 #else
         SyntaxNodeExtensionsCSharp.GetDeclarationTypeName(SyntaxFactory.Block()).Should().Be("type");
 #endif

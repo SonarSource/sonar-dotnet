@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using FluentAssertions.Execution;
+
 namespace SonarAnalyzer.Test.TestFramework.Tests.Common;
 
 [TestClass]
@@ -30,7 +32,7 @@ public class LogTesterTest
         Console.Error.WriteLine(ErrorMessage);
 
         sut.Invoking(x => x.AssertContain(StandardMessage)).Should().NotThrow();
-        sut.Invoking(x => x.AssertContain(ErrorMessage)).Should().Throw<AssertFailedException>();
+        sut.Invoking(x => x.AssertContain(ErrorMessage)).Should().Throw<AssertionFailedException>();
     }
 
     [TestMethod]
@@ -40,7 +42,7 @@ public class LogTesterTest
         Console.WriteLine(StandardMessage);
         Console.Error.WriteLine(ErrorMessage);
 
-        sut.Invoking(x => x.AssertContainError(StandardMessage)).Should().Throw<AssertFailedException>();
+        sut.Invoking(x => x.AssertContainError(StandardMessage)).Should().Throw<AssertionFailedException>();
         sut.Invoking(x => x.AssertContainError(ErrorMessage)).Should().NotThrow();
     }
 
@@ -55,7 +57,7 @@ public class LogTesterTest
         Console.WriteLine(StandardMessage);
         Console.Error.WriteLine(ErrorMessage);
 
-        sut.Invoking(x => x.AssertContain(StandardMessage)).Should().Throw<AssertFailedException>();
-        sut.Invoking(x => x.AssertContainError(ErrorMessage)).Should().Throw<AssertFailedException>();
+        sut.Invoking(x => x.AssertContain(StandardMessage)).Should().Throw<AssertionFailedException>();
+        sut.Invoking(x => x.AssertContainError(ErrorMessage)).Should().Throw<AssertionFailedException>();
     }
 }
