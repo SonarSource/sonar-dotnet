@@ -17,7 +17,7 @@ namespace Tests.Diagnostics
 
             for (int i = 0; i < length; i++)
             {
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
             }
 
             for (int i = 0; i < length; i++)
@@ -37,7 +37,7 @@ namespace Tests.Diagnostics
 
             foreach (var s in strings)
             {
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
             }
 
             foreach (var s in strings)
@@ -57,7 +57,7 @@ namespace Tests.Diagnostics
 
             while (true)
             {
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421 
             }
 
             while (true)
@@ -78,7 +78,7 @@ namespace Tests.Diagnostics
 
             do
             {
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
             }
             while (true);
 
@@ -141,7 +141,7 @@ namespace Tests.Diagnostics
 
                 while (true)
                 {
-                    continue; // Noncompliant
+                    continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
                 }
 
                 while (true)
@@ -238,7 +238,7 @@ namespace Tests.Diagnostics
                     break;
                 }
 
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
             }
         }
 
@@ -264,7 +264,7 @@ namespace Tests.Diagnostics
                     throw new Exception();
                 }
 
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
             }
         }
 
@@ -286,7 +286,7 @@ namespace Tests.Diagnostics
             {
                 foo();
                 bar();
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
             }
         }
         public void Test13()
@@ -294,7 +294,7 @@ namespace Tests.Diagnostics
             while (true)
             {
                 foo();
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
                 bar();
             }
         }
@@ -304,7 +304,7 @@ namespace Tests.Diagnostics
             while (true)
             {
                 foo();
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
                 bar();
             }
         }
@@ -318,7 +318,7 @@ namespace Tests.Diagnostics
                     return; // Compliant
                 });
 
-                continue; // Noncompliant
+                continue; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2421
             }
         }
 
