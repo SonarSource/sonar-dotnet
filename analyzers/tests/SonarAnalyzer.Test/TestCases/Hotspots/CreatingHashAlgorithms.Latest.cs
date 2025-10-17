@@ -113,7 +113,7 @@ class PrimaryConstructor(string ctorParam = "MD5")
     }
 }
 
-class CSHarp13
+class CSharp13
 {
     void KMAK_Hashing()
     {
@@ -134,29 +134,29 @@ class CSHarp13
     void CryptoOperations(byte[] data, Span<byte> hashSpan, ReadOnlySpan<byte> readOnlyData, Memory<byte> memoryData, CancellationToken cancellationToken)
     {
         using var stream = new MemoryStream(data);
-        CryptographicOperations.HashData(HashAlgorithmName.MD5, data);                                                   // FN
-        CryptographicOperations.HashData(HashAlgorithmName.MD5, readOnlyData, hashSpan);                                 // FN
-        CryptographicOperations.HashData(HashAlgorithmName.MD5, readOnlyData);                                           // FN
-        CryptographicOperations.HashData(HashAlgorithmName.MD5, stream, hashSpan);                                       // FN
-        CryptographicOperations.HashData(HashAlgorithmName.MD5, stream);                                                 // FN
-        CryptographicOperations.HashDataAsync(HashAlgorithmName.MD5, stream, cancellationToken);                         // FN
-        CryptographicOperations.HashDataAsync(HashAlgorithmName.MD5, stream, memoryData, cancellationToken);             // FN
-        CryptographicOperations.HmacData(HashAlgorithmName.MD5, data, data);                                             // FN
-        CryptographicOperations.HmacData(HashAlgorithmName.MD5, data, stream);                                           // FN
-        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, readOnlyData, hashSpan);                   // FN
-        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, readOnlyData);                             // FN
-        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, stream, hashSpan);                         // FN
-        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, stream);                                   // FN
-        CryptographicOperations.HmacDataAsync(HashAlgorithmName.MD5, data, stream, cancellationToken);                   // FN
-        CryptographicOperations.HmacDataAsync(HashAlgorithmName.MD5, memoryData, stream, cancellationToken);             // FN
-        CryptographicOperations.HmacDataAsync(HashAlgorithmName.MD5, memoryData, stream, memoryData, cancellationToken); // FN
-        CryptographicOperations.TryHashData(HashAlgorithmName.MD5, readOnlyData, hashSpan, out _);                       // FN
-        CryptographicOperations.TryHmacData(HashAlgorithmName.MD5, readOnlyData, readOnlyData, hashSpan, out _);         // FN
+        CryptographicOperations.HashData(HashAlgorithmName.MD5, data);                                                   // Noncompliant
+        CryptographicOperations.HashData(HashAlgorithmName.MD5, readOnlyData, hashSpan);                                 // Noncompliant
+        CryptographicOperations.HashData(HashAlgorithmName.MD5, readOnlyData);                                           // Noncompliant
+        CryptographicOperations.HashData(HashAlgorithmName.MD5, stream, hashSpan);                                       // Noncompliant
+        CryptographicOperations.HashData(HashAlgorithmName.MD5, stream);                                                 // Noncompliant
+        CryptographicOperations.HashDataAsync(HashAlgorithmName.MD5, stream, cancellationToken);                         // Noncompliant
+        CryptographicOperations.HashDataAsync(HashAlgorithmName.MD5, stream, memoryData, cancellationToken);             // Noncompliant
+        CryptographicOperations.HmacData(HashAlgorithmName.MD5, data, data);                                             // Noncompliant
+        CryptographicOperations.HmacData(HashAlgorithmName.MD5, data, stream);                                           // Noncompliant
+        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, readOnlyData, hashSpan);                   // Noncompliant
+        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, readOnlyData);                             // Noncompliant
+        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, stream, hashSpan);                         // Noncompliant
+        CryptographicOperations.HmacData(HashAlgorithmName.MD5, readOnlyData, stream);                                   // Noncompliant
+        CryptographicOperations.HmacDataAsync(HashAlgorithmName.MD5, data, stream, cancellationToken);                   // Noncompliant
+        CryptographicOperations.HmacDataAsync(HashAlgorithmName.MD5, memoryData, stream, cancellationToken);             // Noncompliant
+        CryptographicOperations.HmacDataAsync(HashAlgorithmName.MD5, memoryData, stream, memoryData, cancellationToken); // Noncompliant
+        CryptographicOperations.TryHashData(HashAlgorithmName.MD5, readOnlyData, hashSpan, out _);                       // Noncompliant
+        CryptographicOperations.TryHmacData(HashAlgorithmName.MD5, readOnlyData, readOnlyData, hashSpan, out _);         // Noncompliant
 
-        CryptographicOperations.HashData(HashAlgorithmName.SHA1, data);                                                  // FN
-        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA1, data, stream);                                     // FN
-        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA1, memoryData, stream, cancellationToken);            // FN
-        CryptographicOperations.TryHashData(HashAlgorithmName.SHA1, readOnlyData, hashSpan, out _);                      // FN
+        CryptographicOperations.HashData(HashAlgorithmName.SHA1, data);                                                  // Noncompliant
+        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA1, data, stream);                                     // Noncompliant
+        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA1, memoryData, stream, cancellationToken);            // Noncompliant
+        CryptographicOperations.TryHashData(HashAlgorithmName.SHA1, readOnlyData, hashSpan, out _);                      // Noncompliant
 
         CryptographicOperations.HashData(HashAlgorithmName.SHA256, data);                                         // Compliant
         CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA3_256, data, stream);                          // Compliant

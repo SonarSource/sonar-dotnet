@@ -69,7 +69,8 @@ public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : TrackerHotspotDi
         oc.Track(input, oc.WhenDerivesOrImplementsAny(algorithmTypes));
 
         var tracker = Language.Tracker.Invocation;
-        tracker.Track(input,
+        tracker.Track(
+            input,
             tracker.MatchMethod(
                 new MemberDescriptor(KnownType.System_Security_Cryptography_DSA,       CreateMethodName),
                 new MemberDescriptor(KnownType.System_Security_Cryptography_HMAC,      CreateMethodName),
@@ -78,7 +79,8 @@ public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : TrackerHotspotDi
                 new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1,      CreateMethodName)),
             tracker.MethodHasParameters(0));
 
-        tracker.Track(input,
+        tracker.Track(
+            input,
             tracker.MatchMethod(
                 new MemberDescriptor(KnownType.System_Security_Cryptography_AsymmetricAlgorithm, CreateMethodName),
                 new MemberDescriptor(KnownType.System_Security_Cryptography_CryptoConfig,        "CreateFromName"),
@@ -91,7 +93,8 @@ public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : TrackerHotspotDi
                 new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1,                CreateMethodName)),
             tracker.ArgumentAtIndexIsAny(0, unsafeAlgorithms));
 
-        tracker.Track(input,
+        tracker.Track(
+            input,
             tracker.MatchMethod(
                 new MemberDescriptor(KnownType.System_Security_Cryptography_MD5,  HashDataName),
                 new MemberDescriptor(KnownType.System_Security_Cryptography_MD5,  TryHashDataName),
@@ -100,19 +103,33 @@ public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : TrackerHotspotDi
                 new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, TryHashDataName),
                 new MemberDescriptor(KnownType.System_Security_Cryptography_SHA1, HashDataAsyncName)));
 
-        tracker.Track(input,
+        tracker.Track(
+            input,
             tracker.MatchMethod(
-                new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, HashDataName)),
-            tracker.ArgumentAtIndexIs(3, IsUnsafeAlgorithm));
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, HashDataName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "HmacData"),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, TryHashDataName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, HashDataAsyncName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "TryHmacData"),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "HmacDataAsync"),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, TryHashDataName)),
+            tracker.ArgumentAtIndexIs(0, IsUnsafeAlgorithm));
 
-        tracker.Track(input,
+        tracker.Track(
+            input,
             tracker.MatchMethod(
                 new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, HashDataName)),
             tracker.ArgumentAtIndexIs(1, IsUnsafeAlgorithm));
 
-        tracker.Track(input,
+        tracker.Track(
+            input,
             tracker.MatchMethod(
                 new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, TryHashDataName)),
             tracker.ArgumentAtIndexIs(2, IsUnsafeAlgorithm));
+
+        tracker.Track(
+            input,
+            tracker.MatchMethod(new MemberDescriptor(KnownType.System_Security_Cryptography_DSA, HashDataName)),
+            tracker.ArgumentAtIndexIs(3, IsUnsafeAlgorithm));
     }
 }

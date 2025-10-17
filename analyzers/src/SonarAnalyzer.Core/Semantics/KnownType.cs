@@ -541,6 +541,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_Cryptography_AsymmetricSignatureDeformatter = new("System.Security.Cryptography.AsymmetricSignatureDeformatter");
     public static readonly KnownType System_Security_Cryptography_AsymmetricSignatureFormatter = new("System.Security.Cryptography.AsymmetricSignatureFormatter");
     public static readonly KnownType System_Security_Cryptography_CryptoConfig = new("System.Security.Cryptography.CryptoConfig");
+    public static readonly KnownType System_Security_Cryptography_CryptographicOperations = new("System.Security.Cryptography.CryptographicOperations");
     public static readonly KnownType System_Security_Cryptography_CspParameters = new("System.Security.Cryptography.CspParameters");
     public static readonly KnownType System_Security_Cryptography_DES = new("System.Security.Cryptography.DES");
     public static readonly KnownType System_Security_Cryptography_DeriveBytes = new("System.Security.Cryptography.DeriveBytes");
