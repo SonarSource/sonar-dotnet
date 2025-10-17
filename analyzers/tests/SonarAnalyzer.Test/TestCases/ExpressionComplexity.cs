@@ -124,3 +124,32 @@ namespace Tests.Diagnostics
         public bool c { get; set; }
     }
 }
+
+// https://sonarsource.atlassian.net/browse/USER-1097
+public class Repro_NET2428
+{
+    public string Prop1 { get; }
+    public string Prop2 { get; }
+    public string Prop3 { get; }
+    public string Prop4 { get; }
+    public string Prop5 { get; }
+
+    public Repro_NET2428(string prop1, string prop2, string prop3, string prop4, string prop5)
+    {
+        Prop1 = prop1;
+        Prop2 = prop2;
+        Prop3 = prop3;
+        Prop4 = prop4;
+        Prop5 = prop5;
+    }
+
+    public override bool Equals(object obj)
+    {
+        var other = obj as Repro_NET2428;
+        return this.Prop1.Equals(other.Prop1, StringComparison.OrdinalIgnoreCase)   // Noncompliant, FP we should not raise in Equals method
+               && this.Prop2.Equals(other.Prop2, StringComparison.OrdinalIgnoreCase)
+               && this.Prop3.Equals(other.Prop3, StringComparison.OrdinalIgnoreCase)
+               && this.Prop4.Equals(other.Prop4, StringComparison.OrdinalIgnoreCase)
+               && this.Prop5.Equals(other.Prop5, StringComparison.OrdinalIgnoreCase);
+    }
+}
