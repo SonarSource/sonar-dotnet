@@ -16,13 +16,12 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotUseCollectionInItsOwnMethodCallsTest
 {
-    [TestClass]
-    public class DoNotUseCollectionInItsOwnMethodCallsTest
-    {
-        [TestMethod]
-        public void DoNotUseCollectionInItsOwnMethodCalls() =>
-            new VerifierBuilder<DoNotUseCollectionInItsOwnMethodCalls>().AddPaths("DoNotUseCollectionInItsOwnMethodCalls.cs").Verify();
-    }
+    [TestMethod]
+    public void DoNotUseCollectionInItsOwnMethodCalls() =>
+        new VerifierBuilder<DoNotUseCollectionInItsOwnMethodCalls>().AddPaths("DoNotUseCollectionInItsOwnMethodCalls.cs").Verify();
 }

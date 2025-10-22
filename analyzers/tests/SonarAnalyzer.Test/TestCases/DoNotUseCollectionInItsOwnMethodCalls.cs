@@ -15,13 +15,9 @@ namespace Tests.Diagnostics
             var list = new List<int>();
             var set = new HashSet<int>();
 
-            list.AddRange(list);
-//          ^^^^ Noncompliant {{Change one instance of 'list' to a different value; This operation will probably result in an unexpected behavior.}}
-//                        ^^^^ Secondary@-1
-            list.Concat(list); // Noncompliant
-            // Secondary@-1
-            Enumerable.Concat(list, list); // Noncompliant
-            // Secondary@-1
+            list.AddRange(list);           // Compliant, see: https://sonarsource.atlassian.net/browse/NET-1729
+            list.Concat(list);             // Compliant, see: https://sonarsource.atlassian.net/browse/NET-1729
+            Enumerable.Concat(list, list); // Compliant, see: https://sonarsource.atlassian.net/browse/NET-1729
         }
 
         void AlwaysSameCollection()
