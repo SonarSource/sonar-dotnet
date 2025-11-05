@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Do not use a version of Google.Protobuf that depends on System.Memory due to performance problems: https://github.com/dotnet/roslyn/issues/58863 -->
     <PackageReference Include="Google.Protobuf" Version="3.6.1" />
-    <!-- When changing this reference update ProtocExe property too! -->
-    <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
+    <!-- Grpc.Tools 2.26.0 contains tools/windows_x64/protoc.exe 3.8 which is the latest version compatible with Google.Protobuf 3.6.1 -->
     <PackageReference Include="Grpc.Tools" Version="2.26.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

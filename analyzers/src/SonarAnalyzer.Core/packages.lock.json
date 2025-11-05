@@ -11,12 +11,6 @@
           "NETStandard.Library": "1.6.1"
         }
       },
-      "Google.Protobuf.Tools": {
-        "type": "Direct",
-        "requested": "[3.6.1, )",
-        "resolved": "3.6.1",
-        "contentHash": "mNgfZ1A7UtbZUOIA8+UcKOouKnbd2tu9CKctCvGXFunZGrViWk6QbNwSBc268Sle9Gwl+WQB+u6qQezp5f9y3w=="
-      },
       "Grpc.Tools": {
         "type": "Direct",
         "requested": "[2.26.0, )",
