@@ -85,16 +85,13 @@
       },
       "Google.Protobuf": {
         "type": "Transitive",
-        "resolved": "3.27.3",
-        "contentHash": "ld+oe1+Mc6no643d8otGm6Zylu7KBpGnAiqOW3nOpV8VxUuqhz70vRNKUU5grLaCeuUQVF8t9dm8TgmkTMr1Tg==",
-        "dependencies": {
-          "System.Memory": "4.5.3"
-        }
+        "resolved": "3.6.1",
+        "contentHash": "741fGeDQjixBJaU2j+0CbrmZXsNJkTn/hWbOh4fLVXndHsCclJmWznCPWrJmPoZKvajBvAz3e8ECJOUvRtwjNQ=="
       },
       "Google.Protobuf.Tools": {
         "type": "Transitive",
-        "resolved": "3.27.3",
-        "contentHash": "bKPAFdIgqZIeJ3q5U75SQ5YOpRaaqnkf9+an8BrMeGOaDS/yV4/raHjPUXVWGLeLjfVCCBgiHnmV/VJs2GEqlg=="
+        "resolved": "3.6.1",
+        "contentHash": "mNgfZ1A7UtbZUOIA8+UcKOouKnbd2tu9CKctCvGXFunZGrViWk6QbNwSBc268Sle9Gwl+WQB+u6qQezp5f9y3w=="
       },
       "Humanizer.Core": {
         "type": "Transitive",
@@ -800,8 +797,8 @@
       "sonaranalyzer.core": {
         "type": "Project",
         "dependencies": {
-          "Google.Protobuf": "[3.27.3, )",
-          "Google.Protobuf.Tools": "[3.27.3, )",
+          "Google.Protobuf": "[3.6.1, )",
+          "Google.Protobuf.Tools": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "SonarAnalyzer.CFG": "[10.16.0, )",
@@ -960,13 +957,16 @@
       },
       "Google.Protobuf": {
         "type": "Transitive",
-        "resolved": "3.27.3",
-        "contentHash": "ld+oe1+Mc6no643d8otGm6Zylu7KBpGnAiqOW3nOpV8VxUuqhz70vRNKUU5grLaCeuUQVF8t9dm8TgmkTMr1Tg=="
+        "resolved": "3.6.1",
+        "contentHash": "741fGeDQjixBJaU2j+0CbrmZXsNJkTn/hWbOh4fLVXndHsCclJmWznCPWrJmPoZKvajBvAz3e8ECJOUvRtwjNQ==",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1"
+        }
       },
       "Google.Protobuf.Tools": {
         "type": "Transitive",
-        "resolved": "3.27.3",
-        "contentHash": "bKPAFdIgqZIeJ3q5U75SQ5YOpRaaqnkf9+an8BrMeGOaDS/yV4/raHjPUXVWGLeLjfVCCBgiHnmV/VJs2GEqlg=="
+        "resolved": "3.6.1",
+        "contentHash": "mNgfZ1A7UtbZUOIA8+UcKOouKnbd2tu9CKctCvGXFunZGrViWk6QbNwSBc268Sle9Gwl+WQB+u6qQezp5f9y3w=="
       },
       "Humanizer.Core": {
         "type": "Transitive",
@@ -1537,8 +1537,8 @@
       "sonaranalyzer.core": {
         "type": "Project",
         "dependencies": {
-          "Google.Protobuf": "[3.27.3, )",
-          "Google.Protobuf.Tools": "[3.27.3, )",
+          "Google.Protobuf": "[3.6.1, )",
+          "Google.Protobuf.Tools": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
           "SonarAnalyzer.CFG": "[10.16.0, )",
