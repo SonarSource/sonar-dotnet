@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+    <PackageReference Include="Google.Protobuf" Version="3.27.3" />
     <!-- When changing this reference update ProtocExe property too! -->
-    <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
-    <PackageReference Include="Grpc.Tools" Version="2.26.0">
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.27.3" />
+    <PackageReference Include="Grpc.Tools" Version="2.76.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

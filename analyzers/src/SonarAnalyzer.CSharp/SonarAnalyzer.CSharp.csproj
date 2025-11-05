@@ -63,6 +63,10 @@
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.Core.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
+      <BinariesToCopy Include="$(OutputPath)System.Memory.dll" />
+      <BinariesToCopy Include="$(OutputPath)System.Runtime.CompilerServices.Unsafe.dll" />
+      <BinariesToCopy Include="$(OutputPath)System.Buffers.dll" />
+      <BinariesToCopy Include="$(OutputPath)System.Numerics.Vectors.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>
