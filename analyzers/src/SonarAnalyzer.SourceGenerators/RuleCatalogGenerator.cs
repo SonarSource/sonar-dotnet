@@ -25,56 +25,61 @@ namespace SonarAnalyzer.SourceGenerators;
 
 [Generator]
 [ExcludeFromCodeCoverage]
-public class RuleCatalogGenerator : ISourceGenerator
+public class RuleCatalogGenerator : IIncrementalGenerator
 {
-    private const string SonarWayFileName = "Sonar_way_profile.json";
     private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(100);
 
-    public void Initialize(GeneratorInitializationContext context)
+    public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        // Not needed
+        // IIncrementalGenerator transformers should return types with value equality or use a custom comparer via WithComparer to avoid performance issues.
+        // This implementation doesn't do it because it would make the implementation much more complex and performance is not a concern for this generator.
+        var jsonFiles = RspecFiles(context, "json");
+        var htmlFiles = RspecFiles(context, "html");
+        var qualityProfile = RspecFiles(context, "qualityprofile").Collect().Select((x, ct) => CancelableExecute(() => ParseSonarWay(x.Single().GetText().ToString()), ct));
+        var filePair = jsonFiles.Combine(htmlFiles.Collect())
+            .Select((x, ct) => CancelableExecute(() => (Json: x.Left, Html: x.Right.Single(html => html.Path == Path.ChangeExtension(x.Left.Path, ".html"))), ct));
+        var ruleDescriptorArguments = filePair.Combine(qualityProfile).Select((x, ct) => CancelableExecute(() => RuleDescriptorArguments(x.Left.Json, x.Left.Html, x.Right), ct)).Collect();
+        var rootNamespace = context.AnalyzerConfigOptionsProvider
+            .Select((x, ct) => CancelableExecute(() => x.GlobalOptions.TryGetValue("build_property.rootnamespace", out var rootNamespace) ? rootNamespace : null, ct));
+        var source = ruleDescriptorArguments.Combine(rootNamespace).Select((x, ct) => CancelableExecute(() => GenerateSource(x.Right, x.Left), ct));
+
+        context.RegisterSourceOutput(source, (context, source) => context.AddSource("RuleCatalog.g.cs", source));
     }
 
-    public void Execute(GeneratorExecutionContext context)
+    private static T CancelableExecute<T>(Func<T> func, CancellationToken ct)
     {
-        if (!context.AnalyzerConfigOptions.GlobalOptions.TryGetValue("build_property.projectdir", out var projectDir))
+        if (ct.IsCancellationRequested)
         {
-            throw new NotSupportedException("Cannot find ProjectDir");
+            return default;
         }
-        var project = Path.GetFileName(projectDir.TrimEnd(Path.DirectorySeparatorChar));
-        var directorySuffix = project switch
-        {
-            "SonarAnalyzer.CSharp.Core" => "cs",
-            "SonarAnalyzer.VisualBasic.Core" => "vbnet",
-            _ => throw new ArgumentException($"Unexpected projectDir: {projectDir}")
-        };
-        var rspecDirectory = Path.Combine(projectDir, "..", "..", "rspec", directorySuffix);
-        var sonarWay = ParseSonarWay(File.ReadAllText(Path.Combine(rspecDirectory, SonarWayFileName)));
-        context.AddSource($"RuleCatalog.{directorySuffix}.g.cs", GenerateSource(project, RuleDescriptorArguments(rspecDirectory, sonarWay)));
+        return func();
     }
 
-    private static IEnumerable<string[]> RuleDescriptorArguments(string rspecDirectory, ISet<string> sonarWay)
+    private static IncrementalValuesProvider<AdditionalText> RspecFiles(IncrementalGeneratorInitializationContext context, string fileType) =>
+        context.AdditionalTextsProvider
+            .Combine(context.AnalyzerConfigOptionsProvider)
+            .Where(x => x.Right.GetOptions(x.Left).TryGetValue("build_metadata.AdditionalFiles.RspecFile", out var value) && value == fileType)
+            .Select((x, _) => x.Left);
+
+    private static string[] RuleDescriptorArguments(AdditionalText jsonFile, AdditionalText htmlFile, ImmutableHashSet<string> sonarWay)
     {
-        foreach (var jsonPath in Directory.GetFiles(rspecDirectory, "*.json").Where(x => Path.GetFileName(x) != SonarWayFileName))
-        {
-            var json = JObject.Parse(File.ReadAllText(jsonPath));
-            var id = Path.GetFileNameWithoutExtension(jsonPath);
-            var html = File.ReadAllText(Path.ChangeExtension(jsonPath, ".html"));
-            yield return new[]
-            {
-                Encode(id),
-                Encode(json.Value<string>("title")),
-                Encode(json.Value<string>("type")),
-                Encode(json.Value<string>("defaultSeverity")),
-                Encode(json.Value<string>("status")),
-                $"SourceScope.{json.Value<string>("scope")}",
-                sonarWay.Contains(id).ToString().ToLower(),
-                Encode(FirstParagraphText(id, html))
-            };
-        }
+        var json = JObject.Parse(jsonFile.GetText().ToString());
+        var id = Path.GetFileNameWithoutExtension(jsonFile.Path);
+        var html = htmlFile.GetText().ToString();
+        return
+        [
+            Encode(id),
+            Encode(json.Value<string>("title")),
+            Encode(json.Value<string>("type")),
+            Encode(json.Value<string>("defaultSeverity")),
+            Encode(json.Value<string>("status")),
+            $"SourceScope.{json.Value<string>("scope")}",
+            sonarWay.Contains(id).ToString().ToLower(),
+            Encode(FirstParagraphText(id, html))
+        ];
     }
 
-    private static string GenerateSource(string namespacePrefix, IEnumerable<string[]> rulesArguments)
+    private static string GenerateSource(string namespacePrefix, ImmutableArray<string[]> rulesArguments)
     {
         var sb = new StringBuilder();
         sb.AppendLine($$"""
@@ -118,6 +123,6 @@ public class RuleCatalogGenerator : ISourceGenerator
         }
     }
 
-    private static HashSet<string> ParseSonarWay(string json) =>
-        new(JObject.Parse(json)["ruleKeys"].Values<string>());
+    private static ImmutableHashSet<string> ParseSonarWay(string json) =>
+        JObject.Parse(json)["ruleKeys"].Values<string>().ToImmutableHashSet();
 }

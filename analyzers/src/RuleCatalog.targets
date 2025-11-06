@@ -1,0 +1,10 @@
+<Project>
+  <ItemGroup>
+    <!-- needed for RuleCatalogGenerator -->
+    <AdditionalFiles Include="../../rspec/$(RSpecLanguage)/*.json" Exclude="../../rspec/$(RSpecLanguage)/Sonar_way_profile.json" RspecFile="json" />
+    <AdditionalFiles Include="../../rspec/$(RSpecLanguage)/Sonar_way_profile.json" RspecFile="qualityprofile" />
+    <AdditionalFiles Include="../../rspec/$(RSpecLanguage)/*.html" RspecFile="html" />
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="RspecFile" />
+    <CompilerVisibleProperty Include="RootNamespace" />
+  </ItemGroup>
+</Project>
