@@ -87,3 +87,7 @@ analyzers/packaging/internal/
 # ITs.JsonParser expects to be run from "sonar-dotnet-enterprise/private/analyzers/its".
 # Feel free to configure your local launchSettings.json.
 analyzers/src/ITs.JsonParser/Properties/launchSettings.json
+
+# Claude Code
+.claude
+CLAUDE.md
