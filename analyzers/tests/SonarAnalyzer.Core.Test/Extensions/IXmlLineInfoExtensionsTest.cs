@@ -1,6 +1,6 @@
 ﻿/*
  * SonarAnalyzer for .NET
- * Copyright (C) 2014-2025 SonarSource SA
+ * Copyright (C) 2014-2025 SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
  */
 

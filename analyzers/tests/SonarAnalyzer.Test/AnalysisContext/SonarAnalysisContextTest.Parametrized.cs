@@ -1,10 +1,6 @@
-﻿extern alias common;
-
-using common::SonarAnalyzer.Core.AnalysisContext;
-using Microsoft.CodeAnalysis.CSharp;
-/*
+﻿/*
 * SonarAnalyzer for .NET
-* Copyright (C) 2014-2025 SonarSource SA
+* Copyright (C) 2014-2025 SonarSource Sàrl
 * mailto:info AT sonarsource DOT com
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
@@ -18,6 +14,10 @@ using Microsoft.CodeAnalysis.CSharp;
 * along with this program; if not, see https://sonarsource.com/license/ssal/
 */
 
+extern alias common;
+
+using common::SonarAnalyzer.Core.AnalysisContext;
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
 using CS = SonarAnalyzer.CSharp.Core.Extensions.SonarParametrizedAnalysisContextExtensions;
 using VB = SonarAnalyzer.VisualBasic.Core.Extensions.SonarParametrizedAnalysisContextExtensions;
