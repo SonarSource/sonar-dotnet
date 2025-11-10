@@ -11,13 +11,18 @@ permissions:
   id-token: write
 
 jobs:
+  LogPayload_job:
+    name: Log payload
+    runs-on: github-ubuntu-latest-s
+    steps:
+      - uses: sonarsource/gh-action-lt-backlog/LogPayload@v2
   notify:
     runs-on: github-ubuntu-latest-s # Public GitHub hosted runner required, Self-Hosted runners do not support Docker-in-Docker
     permissions:
       id-token: write
-    if: >-
+    if: >- # https://docs.github.com/en/graphql/reference/enums#checkconclusionstate
       github.event.check_suite.head_branch == 'master'
-      && failure()
+      && !contains(fromJson('["SUCCESS", "NEUTRAL", "SKIPPED"]'), github.event.check_suite.conclusion)
     steps:
       - name: Vault Secrets
         id: secrets
@@ -32,7 +37,7 @@ jobs:
           SLACK_CHANNEL: squad-dotnet # for testing: notification_tester
           SLACK_TITLE: Build failed
           SLACK_MESSAGE: |
-            Pipeline [*${{ github.event.workflow_run.display_title || github.event.workflow_run.name || 'unknown' }}* failed](${{ github.event.workflow_run.html_url || 'https://papertoilet.com/' }}) in `${{ github.repository }}`
+            **TESTING** Pipeline [*${{ github.event.workflow_run.display_title || github.event.workflow_run.name || 'unknown' }}* failed](${{ github.event.workflow_run.html_url || 'https://papertoilet.com/' }}) (${{ github.event.check_suite.conclusion }}) in `${{ github.repository }}`
           SLACK_USERNAME: NotifierBot
           SLACK_COLOR: danger
           MSG_MINIMAL: true
