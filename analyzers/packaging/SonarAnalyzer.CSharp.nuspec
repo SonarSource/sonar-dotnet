@@ -15,7 +15,7 @@
     <description>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarQube for IDE (Visual Studio, Rider, see https://www.sonarsource.com/products/sonarlint), which is a free extension that can be used standalone or with SonarQube (Server, Cloud, see: https://www.sonarsource.com/products/sonarqube/ and https://www.sonarsource.com/products/sonarcloud/).</description>
     <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/$Version$</releaseNotes>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2025 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2025 SonarSource Sàrl</copyright>
     <tags>Roslyn Analyzer Analyzers Refactoring CodeAnalysis CleanCode Clean Code Sonar SonarAnalyzer Dotnet CSharp CodeQuality CodeReview StaticCodeAnalysis SonarQube SonarCloud SonarLint SonarQubeServer SonarQubeCloud SonarQubeIDE</tags>
     <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>

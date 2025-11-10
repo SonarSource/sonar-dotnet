@@ -15,7 +15,7 @@
     <description>This package contains a set of coding style rules to follow in Sonar code base. Coding style changes as well as breaking changes will appear between minor versions without prior notice. We do not provide support for this package.</description>
     <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/$Version$</releaseNotes>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2025 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2025 SonarSource Sàrl</copyright>
     <developmentDependency>true</developmentDependency>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />

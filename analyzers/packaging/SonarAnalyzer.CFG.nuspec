@@ -12,7 +12,7 @@
     <description>SonarSource CFG library</description>
     <releaseNotes>https://github.com/SonarSource/sonar-dotnet/releases/tag/$Version$</releaseNotes>
     <language>en-US</language>
-    <copyright>Copyright © 2015-2025 SonarSource SA</copyright>
+    <copyright>Copyright © 2015-2025 SonarSource Sàrl</copyright>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" targetFramework="" />
     </frameworkAssemblies>

@@ -13,11 +13,11 @@
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <!-- Generation of Assembly Attributes that are visible in the DLL properties -->
-    <Company>SonarSource</Company>
+    <Company>SonarSource Sàrl</Company>
     <Version>$(ShortVersion)</Version>
     <FileVersion>$(FullVersion)</FileVersion>
     <InformationalVersion>Version:$(FullVersion) Branch:$(Branch) Sha1:$(Sha1)</InformationalVersion>
-    <Copyright>Copyright © 2015-2025 SonarSource SA</Copyright>
+    <Copyright>Copyright © 2015-2025 SonarSource Sàrl</Copyright>
     <Product>SonarAnalyzer</Product>
     <Trademark>SonarLint, SonarQube, SonarSource</Trademark>
     <NeutralLanguage>en</NeutralLanguage>
