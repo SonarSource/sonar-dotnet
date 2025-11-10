@@ -660,18 +660,18 @@ namespace CSharp7
 {
     public class ExpressionBodyProperties
     {
-        private int field;
+        private int aField;
 
         private int Property01
         {
-            get => field;
-            set => field = value; // Noncompliant
+            get => aField;
+            set => aField = value; // Noncompliant
         }
 
         private int Property02
         {
-            get => field; // Noncompliant
-            set => field = value;
+            get => aField; // Noncompliant
+            set => aField = value;
         }
 
         public void Method()

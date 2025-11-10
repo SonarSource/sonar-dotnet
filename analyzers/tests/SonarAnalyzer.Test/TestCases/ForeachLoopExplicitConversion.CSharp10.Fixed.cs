@@ -2,6 +2,7 @@
 global using System.Collections.Generic;
 
 namespace Tests.Diagnostics;
+
 using System;
 using System.Linq;
 

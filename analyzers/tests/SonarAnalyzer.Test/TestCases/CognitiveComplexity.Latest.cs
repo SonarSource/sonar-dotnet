@@ -55,7 +55,7 @@ string SwitchExpressionPatterns(object o) =>
 
 record MyRecord
 {
-    string field;
+    string aField;
     string IfInProperty
     {
         init // Noncompliant {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
@@ -63,12 +63,12 @@ record MyRecord
             if (true)
 //          ^^ Secondary {{+1}}
             {
-                field = "";
+                aField = "";
             }
         }
     }
 
-    bool Prop => field == null || field is { Length: 5 }; // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+    bool Prop => aField == null || aField is { Length: 5 }; // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
                                                           //                                                           Secondary@-1 {{+1}}
 }
 
@@ -147,8 +147,8 @@ class TestProgram
 
 record Record
 {
-    Fruit field;
-    bool Prop => field == null || field is { Prop.Count: 5 }; // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+    Fruit aField;
+    bool Prop => aField == null || aField is { Prop.Count: 5 }; // Noncompliant {{Refactor this property to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
     //                                                           Secondary@-1 {{+1}}
 
     public void SomeMethod()

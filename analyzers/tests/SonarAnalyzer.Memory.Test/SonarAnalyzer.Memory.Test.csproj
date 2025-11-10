@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <!-- JetBrains.dotMemoryUnit hangs on net10.0, so Memory.Test uses net9.0 instead. -->
     <TargetFrameworks>net48;net9.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

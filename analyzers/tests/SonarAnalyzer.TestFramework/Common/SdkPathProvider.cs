@@ -20,7 +20,7 @@ namespace SonarAnalyzer.TestFramework.Common;
 
 public static class SdkPathProvider
 {
-    private const int DotnetVersion = 9;
+    private const int DotnetVersion = 10;
 
     private static readonly string RazorSourceGeneratorPath =
         Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");

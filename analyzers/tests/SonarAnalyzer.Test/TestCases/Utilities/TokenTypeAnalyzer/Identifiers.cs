@@ -3,7 +3,7 @@ using AliasName = System.Exception;
 
 public class Sample
 {
-    int field;
+    int aField;
 
     public Sample() { }
 
@@ -25,10 +25,10 @@ public class Sample
 
     public int Property
     {
-        get => field;
+        get => aField;
         set
         {
-            field = value;
+            aField = value;
         }
     }
 }

@@ -32,7 +32,7 @@ record Derived : Base
     public sealed int MyProperty10 { get => base.MyProperty10; init => base.MyProperty10 = value; } // Error [CS0238] 'member' cannot be sealed because it is not an override
     public override int MyProperty11 { get => base.MyProperty11; init => backingField = value; }
     public override int MyProperty12 { get => base.MyProperty5; init => base.MyProperty5 = value; }
-    public override int MyProperty13 { get; init => base.MyProperty13 = value; } // Error [CS8652] The feature 'recursive patterns' is currently in Preview and *unsupported*
+    public override int MyProperty13 { get; init => base.MyProperty13 = value; }
     public override int MyProperty14 { get => base.MyProperty14; init => base.MyProperty14 = value; } // Error [CS0115, CS0117, CS0117] no suitable method found to override, 'Base' does not contain a definition for 'MyProperty14'
 }
 

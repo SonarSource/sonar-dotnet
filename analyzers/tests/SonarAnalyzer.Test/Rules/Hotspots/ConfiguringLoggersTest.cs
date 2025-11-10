@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ConfiguringLoggers_AspNetCoreLatest_CS() =>
             builderCS.AddPaths("ConfiguringLoggers_AspNetCore6.cs")
-                .AddReferences(AspNetCoreLoggingReferences(TestConstants.NuGetLatestVersion))
+                .AddReferences(AspNetCoreLoggingReferences("10.0.0-rc.2.25502.107"))    // Change back to TestConstants.NuGetLatestVersion when .NET 10 is in GA - NET-2572
                 .Verify();
 
         [TestMethod]
@@ -110,12 +110,9 @@ namespace SonarAnalyzer.Test.Rules
             new[]
                 {
                     AspNetCoreMetadataReference.MicrosoftAspNetCore,
-                    AspNetCoreMetadataReference.MicrosoftAspNetCoreDiagnostics,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHosting,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHostingAbstractions,
                     AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                    AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions,
-                    AspNetCoreMetadataReference.MicrosoftExtensionsLoggingAbstractions,
                     AspNetCoreMetadataReference.MicrosoftExtensionsLoggingEventSource
                 }
                 .Concat(NuGetMetadataReference.MicrosoftExtensionsConfigurationAbstractions(version))
