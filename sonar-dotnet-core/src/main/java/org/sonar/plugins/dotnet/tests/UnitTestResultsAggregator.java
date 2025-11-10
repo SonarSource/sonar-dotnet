@@ -1,6 +1,6 @@
 /*
  * SonarSource :: .NET :: Core
- * Copyright (C) 2014-2025 SonarSource SA
+ * Copyright (C) 2014-2025 SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
@@ -21,10 +21,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
-import org.sonar.api.config.Configuration;
-import org.sonar.api.scanner.ScannerSide;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.scanner.ScannerSide;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.sonarsource.dotnet.protobuf.SonarAnalyzer.MethodDeclarationsInfo;
