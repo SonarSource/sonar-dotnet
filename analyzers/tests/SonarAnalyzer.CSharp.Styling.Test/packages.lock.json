@@ -108,8 +108,8 @@
       },
       "Microsoft.Build.Locator": {
         "type": "Transitive",
-        "resolved": "1.10.2",
-        "contentHash": "F+nLS7IpgtslyxNvtD6Jalnf5WU08lu8yfJBNQl3cbEF3AMUphs4t7nPuRYaaU8QZyGrqtVi7i73LhAe/yHx7A=="
+        "resolved": "1.10.12",
+        "contentHash": "L4yL8b1oYyoxmFWWpPHqIVb5uGJSDSCd/RQDV5SsJkBRB3fRxSfUl3KYjNQfMdf9RNvoqCDeXaGGISjaY6f8Pg=="
       },
       "Microsoft.CodeAnalysis.Analyzers": {
         "type": "Transitive",
@@ -577,7 +577,7 @@
           "FluentAssertions.Analyzers": "[0.34.1, )",
           "MSTest.TestAdapter": "[4.0.1, )",
           "MSTest.TestFramework": "[4.0.1, )",
-          "Microsoft.Build.Locator": "[1.10.2, )",
+          "Microsoft.Build.Locator": "[1.10.12, )",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[5.0.0-2.final, )",
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[5.0.0-2.final, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[5.0.0-2.final, )",
