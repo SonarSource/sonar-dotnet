@@ -20,7 +20,8 @@ jobs:
     runs-on: github-ubuntu-latest-s # Public GitHub hosted runner required, Self-Hosted runners do not support Docker-in-Docker
     permissions:
       id-token: write
-    if: >- # https://docs.github.com/en/graphql/reference/enums#checkconclusionstate
+    # https://docs.github.com/en/graphql/reference/enums#checkconclusionstate
+    if: >-
       github.event.check_suite.head_branch == 'master'
       && !contains(fromJson('["SUCCESS", "NEUTRAL", "SKIPPED"]'), github.event.check_suite.conclusion)
     steps:
@@ -29,15 +30,37 @@ jobs:
         uses: SonarSource/vault-action-wrapper@v3
         with:
           secrets: development/kv/data/slack token | SLACK_TOKEN;
+      
+      - name: Check run details
+        id: failedRun
+        env: 
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: pwsh
+        run: |
+          $successConclusions = @("SUCCESS", "NEUTRAL", "SKIPPED")
+          $failed = gh api '${{github.event.check_suite.check_runs_url }}' | ConvertFrom-Json | select -ExpandProperty check_runs | where { $successConclusions -notcontains $_.conclusion } | foreach  { "* [$($_.name)]($($_.details_url))" }
+          
+          $OFS = [Environment]::NewLine # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7.5#ofs
+          $EOF = (New-Guid).Guid        # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#multiline-strings
+          $message=@"
+          message<<$EOF
+          **Testing**
+          ${{github.event.check_suite.app.name || 'Pipeline'}} in [${{github.repository.name }}]($${{github.repository.html_url}}) failed (${{github.event.check_suite.conclusion }}) on ${{github.event.check_suite.head_branch}}: ${{github.event.check_suite.head_commit.message}}
+          $failed
+          $EOF
+          "@
+          $message
+
+          $message >> $env:GITHUB_OUTPUT
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
+        if: always()
         env:
           SLACK_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).SLACK_TOKEN }}
-          SLACK_CHANNEL: squad-dotnet # for testing: notification_tester
+          SLACK_CHANNEL: notification_tester # squad-dotnet for testing: notification_tester
           SLACK_TITLE: Build failed
-          SLACK_MESSAGE: |
-            **TESTING** Pipeline [*${{ github.event.workflow_run.display_title || github.event.workflow_run.name || 'unknown' }}* failed](${{ github.event.workflow_run.html_url || 'https://papertoilet.com/' }}) (${{ github.event.check_suite.conclusion }}) in `${{ github.repository }}`
+          SLACK_MESSAGE: ${{ steps.failedRun.outputs.message }}
           SLACK_USERNAME: NotifierBot
           SLACK_COLOR: danger
           MSG_MINIMAL: true
