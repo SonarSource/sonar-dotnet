@@ -29,16 +29,20 @@ jobs:
         id: secrets
         uses: SonarSource/vault-action-wrapper@v3
         with:
-          secrets: development/kv/data/slack token | SLACK_TOKEN;
+          secrets: |
+            development/kv/data/slack token | SLACK_TOKEN;
+            development/github/token/{REPO_OWNER_NAME_DASH}-ro token | GITHUB_TOKEN;
       
       - name: Check run details
         id: failedRun
         env: 
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).GITHUB_TOKEN }}
         shell: pwsh
         run: |
           $successConclusions = @("SUCCESS", "NEUTRAL", "SKIPPED")
-          $failed = gh api '${{github.event.check_suite.check_runs_url }}' | ConvertFrom-Json | select -ExpandProperty check_runs | where { $successConclusions -notcontains $_.conclusion } | foreach  { "* [$($_.name)]($($_.details_url))" }
+          $request = gh api '${{github.event.check_suite.check_runs_url }}'
+          $request
+          $failed = $request | ConvertFrom-Json | select -ExpandProperty check_runs | where { $successConclusions -notcontains $_.conclusion } | foreach  { "* [$($_.name)]($($_.details_url))" }
           
           $OFS = [Environment]::NewLine # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7.5#ofs
           $EOF = (New-Guid).Guid        # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#multiline-strings
