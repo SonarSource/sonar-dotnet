@@ -4,9 +4,9 @@
     "net10.0": {
       "altcover": {
         "type": "Direct",
-        "requested": "[9.0.1, )",
-        "resolved": "9.0.1",
-        "contentHash": "aadciFNDT5bnylaYUkKal+s5hF7yU/lmZxImQWAlk1438iPqK1Uf79H5ylELpyLIU49HL5ql+tnWBihp3WVLCA=="
+        "requested": "[9.0.102, )",
+        "resolved": "9.0.102",
+        "contentHash": "q3Rf5t0M9kXlcO5qhsaAe6NrFSNd5enrhKmF/Ezgmomqw34PbUTbRSYjSDNhS3YGDyUrPTkyPn14EfLDJWztcA=="
       },
       "Microsoft.CodeAnalysis.PerformanceSensitiveAnalyzers": {
         "type": "Direct",
@@ -569,7 +569,7 @@
           "NSubstitute": "[5.3.0, )",
           "NuGet.Protocol": "[7.0.0, )",
           "SonarAnalyzer.Core": "[10.16.0, )",
-          "altcover": "[9.0.1, )"
+          "altcover": "[9.0.102, )"
         }
       }
     }
