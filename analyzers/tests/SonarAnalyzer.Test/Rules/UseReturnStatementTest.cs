@@ -16,13 +16,12 @@
 
 using SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UseReturnStatementTest
 {
-    [TestClass]
-    public class UseReturnStatementTest
-    {
-        [TestMethod]
-        public void UseReturnStatement() =>
-            new VerifierBuilder<UseReturnStatement>().AddPaths("UseReturnStatement.vb").Verify();
-    }
+    [TestMethod]
+    public void UseReturnStatement() =>
+        new VerifierBuilder<UseReturnStatement>().AddPaths("UseReturnStatement.vb").Verify();
 }

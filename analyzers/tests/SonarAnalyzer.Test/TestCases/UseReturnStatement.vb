@@ -160,12 +160,12 @@ Public Class DoesNotApplyOn
 
 End Class
 
-Public Class Repro_9553 ' https://github.com/SonarSource/sonar-dotnet/issues/9553   
+Public Class Repro_9553 ' https://github.com/SonarSource/sonar-dotnet/issues/9553
     Public Function TestFunc() As String
         Return Invoke(AddressOf TestFunc) 'Noncompliant FP
     End Function
 
-    Private Function Invoke(func As Func(Of string)) As String
+    Private Function Invoke(func As Func(Of String)) As String
         Return func()
     End Function
 
@@ -193,3 +193,25 @@ Public Class CustomAttribute
     Inherits Attribute
 
 End Class
+
+Namespace Repro_2559    'https://sonarsource.atlassian.net/browse/NET-2559
+
+    Public Module Repro
+
+        Public Function FunctionNameAndAlsoTypeName() As Integer
+            Dim G As New Generic(Of FunctionNameAndAlsoTypeName)    ' Noncompliant FP
+            GenericMethod(Of FunctionNameAndAlsoTypeName)()         ' Noncompliant FP
+        End Function
+
+        Public Sub GenericMethod(Of T)()
+        End Sub
+
+    End Module
+
+    Public Class FunctionNameAndAlsoTypeName
+    End Class
+
+    Public Class Generic(Of T)
+    End Class
+
+End Namespace
