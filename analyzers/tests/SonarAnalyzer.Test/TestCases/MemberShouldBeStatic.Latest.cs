@@ -134,3 +134,15 @@ namespace CSharp13
         public partial int Prop { get; }
     }
 }
+
+namespace CSharp14
+{
+    public static class ReproNET2621 // https://sonarsource.atlassian.net/browse/NET-2621
+    {
+        extension(int number)
+        {
+            public bool IsEven => number % 2 == 0; //   Noncompliant FP, number is instance data.
+            public bool IsOdd() => number % 2 != 0; //  Noncompliant FP, number is instance data.
+        }
+    }
+}
