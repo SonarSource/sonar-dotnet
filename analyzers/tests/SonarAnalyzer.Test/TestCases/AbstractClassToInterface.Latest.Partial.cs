@@ -11,3 +11,16 @@ namespace PartialProperties
         public partial string Name { get => "Kirk"; }
     }
 }
+
+namespace CSharp14
+{
+    public abstract partial class PartialConstructor
+    {
+        public partial PartialConstructor() { }
+    }
+
+    public abstract partial class PartialEventTest
+    {
+        public partial event System.EventHandler<System.EventArgs> PartialEvent { add { } remove { } }
+    }
+}

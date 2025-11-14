@@ -31,3 +31,42 @@ namespace Tests.Diagnostics
         private readonly FooProvider _fooProvider = new FooProvider();
     }
 }
+
+namespace CSharp14
+{
+    public class OverriddenCompoundAssignment
+    {
+        void Test()
+        {
+            var a = new C1 { Value = 1 };
+            SomeMethod(a += 1); // Noncompliant
+        }
+
+        void SomeMethod(C1 c) { }
+        class C1
+        {
+            public int Value;
+
+            public void operator +=(int x)
+            {
+                Value += x;
+            }
+        }
+    }
+
+    public class NullConditionalAssignment
+    {
+        void Test()
+        {
+            var a = new C2();
+            if ((bool)a?.Value = false) // Noncompliant
+            {
+
+            }
+        }
+        class C2
+        {
+            public bool Value;
+        }
+    }
+}

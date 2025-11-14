@@ -1,4 +1,15 @@
-﻿namespace Tests.Diagnostics
+﻿using System;
+using System.Collections.Generic;
+
+namespace CSharp12
+{
+    abstract class PrimaryConstructor(int i) // Compliant
+    {
+        public int I { get; set; } = i;
+    }
+}
+
+namespace Records
 {
     abstract record AbstractRecordOne
     {
@@ -28,5 +39,18 @@
         public MyStruct(string s)
         {
         }
+    }
+}
+
+namespace CSharp14
+{
+    public abstract partial class PartialConstructor
+    {
+        public partial PartialConstructor();
+    }
+
+    public abstract partial class NonPartialConstructor
+    {
+        public NonPartialConstructor() { }  // Noncompliant
     }
 }

@@ -123,3 +123,29 @@ namespace PartialProperties
         public partial string Name { get; }
     }
 }
+
+namespace Events
+{
+    public abstract class EventTest
+    {
+        public event System.EventHandler<System.EventArgs> AbstractEvent { add { } remove { } }
+    }
+
+    public abstract class AbstractEventTest
+    {
+        public abstract event System.EventHandler<System.EventArgs> AbstractEvent;
+    }
+}
+
+namespace CSharp14
+{
+    public abstract partial class PartialConstructor
+    {
+        public partial PartialConstructor();
+    }
+
+    public abstract partial class PartialEventTest
+    {
+        public partial event System.EventHandler<System.EventArgs> PartialEvent;
+    }
+}

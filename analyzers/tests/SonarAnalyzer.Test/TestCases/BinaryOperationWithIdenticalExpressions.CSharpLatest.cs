@@ -27,3 +27,31 @@ public record MyClass<T>(T X, T Y) where T : ISubtractionOperators<T, T, T>
             Y = left.Y - right.Y
         };
 }
+
+public class OverriddenCompoundAssignment
+{
+    void Test()
+    {
+        var a = new C1();
+        a -= a;         // Noncompliant
+        // Secondary@-1
+
+        var b = a | a; // Noncompliant
+        // Secondary@-1
+    }
+
+    class C1
+    {
+        public int Value;
+
+        public void operator -=(C1 x)
+        {
+            Value += x.Value;
+        }
+
+        public static C1 operator |(C1 a, C1 b)
+        {
+            return new C1 { Value = a.Value + b.Value };
+        }
+    }
+}

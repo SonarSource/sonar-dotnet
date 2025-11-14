@@ -30,22 +30,17 @@ namespace SonarAnalyzer.Test.Rules
 #if NET
 
         [TestMethod]
-        public void AbstractTypesShouldNotHaveConstructors_Records() =>
-            builder.AddPaths("AbstractTypesShouldNotHaveConstructors.Records.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
             builder.AddPaths("AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs")
                 .WithTopLevelStatements()
                 .Verify();
 
         [TestMethod]
-        public void AbstractTypesShouldNotHaveConstructors_CSharp12() =>
-            builder.AddPaths("AbstractTypesShouldNotHaveConstructors.CSharp12.cs")
-                .WithOptions(LanguageOptions.FromCSharp12)
-                .VerifyNoIssues();
+        public void AbstractTypesShouldNotHaveConstructors_Latest() =>
+            builder.AddPaths("AbstractTypesShouldNotHaveConstructors.Latest.cs")
+                .AddPaths("AbstractTypesShouldNotHaveConstructors.Latest.Partial.cs")
+                .WithOptions(LanguageOptions.CSharpLatest)
+                .Verify();
 
 #endif
 
