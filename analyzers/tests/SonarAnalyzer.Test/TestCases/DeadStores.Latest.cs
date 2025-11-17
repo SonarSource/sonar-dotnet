@@ -334,8 +334,6 @@ record R
     }
 }
 
-
-
 class UnsafeContexts
 {
     //https://sonarsource.atlassian.net/browse/NET-404
@@ -360,3 +358,67 @@ class UnsafeContexts
     }
 }
 
+static class Extensions
+{
+    extension(string s)
+    {
+        void Method()
+        {
+            var x = "unused";   // Noncompliant
+            x = "new value";    // Noncompliant
+        }
+    }
+}
+
+class FieldKeyword
+{
+    string Property
+    {
+        get => field;
+        set
+        {
+            field = "unused";       // Compliant: not a local variable
+            field = "new value";    // Compliant: not a local variable
+        }
+    }
+}
+
+partial class Partial
+{
+    partial event EventHandler Event;
+    partial Partial();
+}
+
+partial class Partial
+{
+    partial event EventHandler Event
+    {
+        add
+        {
+
+            var x = "unused";   // Noncompliant
+            x = "new value";    // Noncompliant
+        }
+        remove
+        {
+            var x = "unused";   // Noncompliant
+            x = "new value";    // Noncompliant
+        }
+    }
+    partial Partial()
+    {
+        var x = "unused";       // Noncompliant
+        x = "new value";        // Noncompliant
+    }
+}
+
+class Sample
+{
+    string Property { get; set; }
+
+    void Method(Sample s)
+    {
+        s?.Property = "unused";     // Compliant: not a local variable
+        s?.Property = "new value";  // Compliant: not a local variable
+    }
+}

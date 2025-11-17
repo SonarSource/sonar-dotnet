@@ -30,3 +30,12 @@ class Foo
     public bool Contains(string arg) => true;
     public bool Put() => true;
 }
+
+class ConditionalAssignment
+{
+    bool boolField;
+    void Method(ConditionalAssignment x)
+    {
+        Debug.Assert((x?.boolField = false) ?? false);  // FN
+    }
+}

@@ -16,26 +16,26 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DebugAssertHasNoSideEffectsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DebugAssertHasNoSideEffects>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DebugAssertHasNoSideEffects() =>
-            builder.AddPaths("DebugAssertHasNoSideEffects.cs").Verify();
+[TestClass]
+public class DebugAssertHasNoSideEffectsTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DebugAssertHasNoSideEffects>();
+
+    [TestMethod]
+    public void DebugAssertHasNoSideEffects() =>
+        builder.AddPaths("DebugAssertHasNoSideEffects.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DebugAssertHasNoSideEffects_CSharp9() =>
-            builder.AddPaths("DebugAssertHasNoSideEffects.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void DebugAssertHasNoSideEffects_Latest() =>
+        builder.AddPaths("DebugAssertHasNoSideEffects.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithTopLevelStatements()
+            .Verify();
 
 #endif
 
-    }
 }

@@ -66,6 +66,9 @@ namespace Tests.Diagnostics
             Debug.Assert(foo.Dispose()); // Noncompliant
 
             Debug.Assert((foo.Me()?.Me().Clear()).Value); // Noncompliant
+
+            var b = true;
+            Debug.Assert(b = false);    // FN NET-2619
         }
     }
 }

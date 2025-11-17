@@ -155,3 +155,18 @@ public class Expressions
     public object Property { get; }
     private string Method() => "";
 }
+
+[DebuggerDisplay("{this.ExtensionMethod()}")]           // Noncompliant FP regular extension methods are compatible with DebuggerDisplay NET-2620
+[DebuggerDisplay("{this.ExtensionBlockMethod()}")]      // Noncompliant: extension block members are not compatible with DebuggerDisplay
+[DebuggerDisplay("{this.ExtensionProperty()}")]         // Noncompliant: extension block members are not compatible with DebuggerDisplay
+class Sample { }
+
+static class Extensions
+{
+    public static string ExtensionMethod(this Sample s) => "Regular Extension Method";
+    extension(Sample s)
+    {
+        public string ExtensionProperty => "Extension Property";
+        public string ExtensionBlockMethod() => "Extension Method in Extension Block";
+    }
+}

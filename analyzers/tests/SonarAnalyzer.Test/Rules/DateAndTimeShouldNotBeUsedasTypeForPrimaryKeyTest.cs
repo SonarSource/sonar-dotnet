@@ -46,11 +46,11 @@ public class DateAndTimeShouldNotBeUsedAsTypeForPrimaryKeyTest
             .VerifyNoIssues();
 
     [TestMethod]
-    public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_CSharp9() =>
+    public void DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey_Latest() =>
         verifierCS
-            .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .VerifyNoIssues();
+            .AddPaths("DateAndTimeShouldNotBeUsedAsTypeForPrimaryKey.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
 #if NET
 
