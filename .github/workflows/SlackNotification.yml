@@ -5,16 +5,7 @@ on:
   check_suite:
     types: [completed]
 
-permissions:
-  contents: read
-  id-token: write
-
 jobs:
-  LogPayload_job:
-    name: Log payload
-    runs-on: github-ubuntu-latest-s
-    steps:
-      - uses: sonarsource/gh-action-lt-backlog/LogPayload@v2
   notify:
     runs-on: github-ubuntu-latest-s # Public GitHub hosted runner required, Self-Hosted runners do not support Docker-in-Docker
     permissions:
@@ -38,29 +29,28 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: pwsh
         run: |
-          $successConclusions = @("SUCCESS", "NEUTRAL", "SKIPPED")
-          $request = gh api '${{github.event.check_suite.check_runs_url }}'
-          $request
-          $failed = $request | ConvertFrom-Json | select -ExpandProperty check_runs | where { $successConclusions -notcontains $_.conclusion } | foreach  { "* [$($_.name)]($($_.details_url))" }
+          $SuccessConclusions = @("SUCCESS", "NEUTRAL", "SKIPPED")
+          $Request = gh api '${{github.event.check_suite.check_runs_url }}'
+          $FailedRuns = $Request | ConvertFrom-Json | select -ExpandProperty check_runs | where { $SuccessConclusions -NotContains $_.conclusion } | foreach  { "* [$($_.name)]($($_.details_url))" }
           
           $OFS = [Environment]::NewLine # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7.5#ofs
           $EOF = (New-Guid).Guid        # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#multiline-strings
-          $message=@"
+          $Message=@"
           message<<$EOF
           ${{github.event.check_suite.app.name || 'Pipeline'}} in [${{github.event.repository.name }}](${{github.event.repository.html_url}}) failed (${{github.event.check_suite.conclusion }}) on ${{github.event.check_suite.head_branch}}: ${{github.event.check_suite.head_commit.message}}
-          $failed
+          $FailedRuns
           $EOF
           "@
-          $message
+          $Message
 
-          $message >> $env:GITHUB_OUTPUT
+          $Message >> $env:GITHUB_OUTPUT
 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@e31e87e03dd19038e411e38ae27cbad084a90661 # v2.3.3
         if: always()
         env:
           SLACK_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).SLACK_TOKEN }}
-          SLACK_CHANNEL: notification_tester # squad-dotnet for testing: notification_tester
+          SLACK_CHANNEL: squad-dotnet # for testing: notification_tester
           SLACK_TITLE: Build failed
           SLACK_MESSAGE: ${{ steps.failedRun.outputs.message }}
           SLACK_USERNAME: NotifierBot
