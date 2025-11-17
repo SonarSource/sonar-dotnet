@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  checks: read
   id-token: write
 
 jobs:
@@ -20,6 +19,7 @@ jobs:
     runs-on: github-ubuntu-latest-s # Public GitHub hosted runner required, Self-Hosted runners do not support Docker-in-Docker
     permissions:
       id-token: write
+      checks: read
     # https://docs.github.com/en/graphql/reference/enums#checkconclusionstate
     if: >-
       github.event.check_suite.head_branch == 'master'
@@ -31,12 +31,11 @@ jobs:
         with:
           secrets: |
             development/kv/data/slack token | SLACK_TOKEN;
-            development/github/token/{REPO_OWNER_NAME_DASH}-ro token | GITHUB_TOKEN;
       
       - name: Check run details
         id: failedRun
         env: 
-          GH_TOKEN: ${{ fromJSON(steps.secrets.outputs.vault).GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: pwsh
         run: |
           $successConclusions = @("SUCCESS", "NEUTRAL", "SKIPPED")
@@ -48,8 +47,7 @@ jobs:
           $EOF = (New-Guid).Guid        # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#multiline-strings
           $message=@"
           message<<$EOF
-          **Testing**
-          ${{github.event.check_suite.app.name || 'Pipeline'}} in [${{github.repository.name }}]($${{github.repository.html_url}}) failed (${{github.event.check_suite.conclusion }}) on ${{github.event.check_suite.head_branch}}: ${{github.event.check_suite.head_commit.message}}
+          ${{github.event.check_suite.app.name || 'Pipeline'}} in [${{github.event.repository.name }}](${{github.event.repository.html_url}}) failed (${{github.event.check_suite.conclusion }}) on ${{github.event.check_suite.head_branch}}: ${{github.event.check_suite.head_commit.message}}
           $failed
           $EOF
           "@
