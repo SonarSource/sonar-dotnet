@@ -923,3 +923,25 @@ namespace Repro_NET675
         }
     }
 }
+
+public static class Extensions // Repro for https://sonarsource.atlassian.net/browse/NET-2644
+{
+    extension(List<string> strings)
+    {
+        public void ExtensionMethods()
+        {
+            PrivateExtensionAsMethod(strings);
+            PrivateStaticExtensionAsMethod();
+
+            strings.PrivateExtensionAsExtension();
+            List<string>.PrivateStaticExtensionAsExtension();
+        }
+
+        private string PrivateExtensionAsMethod() => "a";                 // Noncompliant FP
+        private static string PrivateStaticExtensionAsMethod() => "a";    // Noncompliant FP
+
+        private string PrivateExtensionAsExtension() => "a";
+        private static string PrivateStaticExtensionAsExtension() => "a";
+
+    }
+}
