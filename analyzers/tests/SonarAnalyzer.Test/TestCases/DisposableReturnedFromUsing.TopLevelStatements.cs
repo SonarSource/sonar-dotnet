@@ -50,15 +50,3 @@ FileStream TargetTypedNew2()
         return fs1;
     }
 }
-
-record R
-{
-    public FileStream Method(string path)
-    {
-        using var fs1 = File.Create(path); // Noncompliant {{Remove the 'using' statement; it will cause automatic disposal of 'fs1'.}}
-
-        using var fs2 = File.Create(path);
-
-        return fs1;
-    }
-}

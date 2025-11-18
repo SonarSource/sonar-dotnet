@@ -16,39 +16,38 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DeadStoresTest
 {
-    [TestClass]
-    public class DeadStoresTest
-    {
-        private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
-            .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+    private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
+        .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+        .WithOptions(LanguageOptions.FromCSharp8)
+        .AddReferences(MetadataReferenceFacade.NetStandard21);
+
+    private readonly VerifierBuilder roslynCfg = new VerifierBuilder<DeadStores>()
+        .AddReferences(MetadataReferenceFacade.NetStandard21);
+
+    [TestMethod]
+    public void DeadStores_SonarCfg() =>
+        sonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
+
+    [TestMethod]
+    public void DeadStores_RoslynCfg() =>
+        roslynCfg.AddPaths("DeadStores.RoslynCfg.cs")
             .WithOptions(LanguageOptions.FromCSharp8)
-            .AddReferences(MetadataReferenceFacade.NetStandard21);
-
-        private readonly VerifierBuilder roslynCfg = new VerifierBuilder<DeadStores>()
-            .AddReferences(MetadataReferenceFacade.NetStandard21);
-
-        [TestMethod]
-        public void DeadStores_SonarCfg() =>
-            sonarCfg.AddPaths("DeadStores.SonarCfg.cs").Verify();
-
-        [TestMethod]
-        public void DeadStores_RoslynCfg() =>
-            roslynCfg.AddPaths("DeadStores.RoslynCfg.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DeadStores_CS_Latest() =>
-            roslynCfg.AddPaths("DeadStores.Latest.cs")
-                .WithTopLevelStatements()
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void DeadStores_CS_Latest() =>
+        roslynCfg.AddPaths("DeadStores.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
 #endif
 
-    }
 }

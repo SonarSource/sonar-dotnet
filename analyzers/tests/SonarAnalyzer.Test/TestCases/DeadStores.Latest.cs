@@ -422,3 +422,19 @@ class Sample
         s?.Property = "new value";  // Compliant: not a local variable
     }
 }
+
+class CustomCompoundAssignment
+{
+    public int Value;
+
+    public void operator +=(int x)
+    {
+        Value += x;
+    }
+
+    void Method(CustomCompoundAssignment x)
+    {
+        x += 1;     // Noncompliant
+        x = null;   // Noncompliant
+    }
+}

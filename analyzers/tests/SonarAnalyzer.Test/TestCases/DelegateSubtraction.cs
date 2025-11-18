@@ -33,6 +33,9 @@ public class DelegateSubtraction
         chain23 -= first + fourth; // Noncompliant
         chain23 -= (first); // Compliant
 
+        MyDelegate chain14 = first + fourth;    // creates a new MyDelegate instance which is a list under the covers
+        chain23 = chain1234 - chain14;          // FN: (first + fourth) doesn't exist in chain1234 - NET-2639
+
         unsafe
         {
             GCHandle pinnedArray = GCHandle.Alloc(new object(), GCHandleType.Pinned);

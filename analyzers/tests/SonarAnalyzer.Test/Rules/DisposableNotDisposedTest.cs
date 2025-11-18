@@ -26,7 +26,6 @@ public class DisposableNotDisposedTest
     [TestMethod]
     public void DisposableNotDisposed() =>
         builder.AddPaths("DisposableNotDisposed.cs")
-            .WithOptions(LanguageOptions.FromCSharp7)
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .Verify();
 
@@ -36,26 +35,20 @@ public class DisposableNotDisposedTest
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingPackages(TestConstants.NuGetLatestVersion).ToArray())
             .VerifyNoIssues();
 
+    [TestMethod]
+    public void DisposableNotDisposed_TopLevelStatements() =>
+        builder.AddPaths("DisposableNotDisposed.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
+
 #if NET
 
     [TestMethod]
-    public void DisposableNotDisposed_CSharp8() =>
-        builder.AddPaths("DisposableNotDisposed.CSharp8.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
+    public void DisposableNotDisposed_Latest() =>
+        builder.AddPaths("DisposableNotDisposed.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(NuGetMetadataReference.FluentAssertions(NugetPackageVersions.FluentAssertionsVersions.Ver5))
-            .Verify();
-
-    [TestMethod]
-    public void DisposableNotDisposed_CSharp9() =>
-        builder.AddPaths("DisposableNotDisposed.CSharp9.cs")
-            .WithTopLevelStatements()
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
-            .Verify();
-
-    [TestMethod]
-    public void DisposableNotDisposed_CSharp10() =>
-        builder.AddPaths("DisposableNotDisposed.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
 #endif

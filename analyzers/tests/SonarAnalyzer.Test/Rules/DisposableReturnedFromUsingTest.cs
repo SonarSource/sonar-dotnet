@@ -16,28 +16,32 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class DisposableReturnedFromUsingTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DisposableReturnedFromUsing>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void DisposableReturnedFromUsing_CSharp8() =>
-            builder.AddPaths("DisposableReturnedFromUsing.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+[TestClass]
+public class DisposableReturnedFromUsingTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<DisposableReturnedFromUsing>();
+
+    [TestMethod]
+    public void DisposableReturnedFromUsing() =>
+        builder.AddPaths("DisposableReturnedFromUsing.cs")
+            .Verify();
+
+    [TestMethod]
+    public void DisposableReturnedFromUsing_TopLevelStatements() =>
+        builder.AddPaths("DisposableReturnedFromUsing.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
 #if NET
 
-        [TestMethod]
-        public void DisposableReturnedFromUsing_CSharp9() =>
-            builder.AddPaths("DisposableReturnedFromUsing.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void DisposableReturnedFromUsing_Latest() =>
+        builder.AddPaths("DisposableReturnedFromUsing.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
 #endif
 
-    }
 }
