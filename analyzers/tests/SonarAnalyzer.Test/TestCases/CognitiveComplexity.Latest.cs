@@ -231,12 +231,49 @@ public partial class PartialProperty
 {
     public partial int Property { get; set; }
 }
-public partial class PartialProperty
+
+public static class Extensions
 {
-    public partial int Property 
+    extension(Extensions)
     {
-        get =>            // Noncompliant  {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
-            true ? 0 : 1; // Secondary
-        set { }
+        public static int Prop
+        {
+            get =>              // Noncompliant  {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+                true ? 0 : 1;   // Secondary
+            set { }
+        }
+
+        public static bool Where() { return true ? true : false; } // Noncompliant
+                                                                   // Secondary@-1
     }
+}
+
+public class FieldKeyWord
+{
+    public int Prop
+    {
+        get =>                  // Noncompliant  {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+            field == 1 ? 1 : 0; // Secondary
+    }
+}
+
+public partial class PartialConstructor
+{
+    public partial PartialConstructor();
+}
+
+public class NullConditionalAssignment
+{
+    public class FieldClass
+    {
+        public int value;
+    }
+    public FieldClass Prop
+    {
+        get => new();
+        set =>                                           // Noncompliant  {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+            true ? field?.value = 10 : field?.value = 0; // Secondary
+                                                         // Error@-1 [CS0201]
+    }
+
 }

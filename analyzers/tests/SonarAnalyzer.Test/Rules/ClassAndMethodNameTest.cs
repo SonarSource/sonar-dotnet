@@ -48,11 +48,11 @@ public class ClassAndMethodNameTest
 
     [TestMethod]
     public void ClassAndMethodName_MethodName_CS_Latest() =>
-        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs", "ClassAndMethodName.MethodName.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void ClassAndMethodName_MethodName_InTestProject_CS_Latest() =>
-        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs").AddTestReference().WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs", "ClassAndMethodName.MethodName.Latest.Partial.cs").AddTestReference().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
 #endif
 
@@ -68,7 +68,8 @@ public class ClassAndMethodNameTest
     public void ClassAndMethodName_MethodName(ProjectType projectType) =>
         builderCS.AddPaths("ClassAndMethodName.MethodName.cs", "ClassAndMethodName.MethodName.Partial.cs")
             .AddReferences(TestCompiler.ProjectTypeReference(projectType))
-            .WithOptions(LanguageOptions.FromCSharp8).Verify();
+            .WithOptions(LanguageOptions.FromCSharp8)
+            .Verify();
 
     [TestMethod]
     [DataRow("foo", "foo")]

@@ -171,3 +171,31 @@ namespace CSharp13
         }
     }
 }
+
+namespace CSharp14
+{
+    public static class Extensions
+    {
+        extension(int number)
+
+        {
+            public static bool NonCCCOmpliant() => false;   // Noncompliant
+            public static bool ThisIsCompliant() => true;   // Compliant
+
+            public static bool NonCCCOmpliantProp => false; // Noncompliant
+            public static bool ThisIsCompliantProp => true; // Compliant
+        }
+    }
+
+    public class Events
+    {
+        public event System.EventHandler NonCCCOmpliant;    // Compliant FN
+        public event System.EventHandler ThisIsCompliant;   // Compliant
+    }
+
+    public partial class PartialEvents
+    {
+        public partial event System.EventHandler NonCCCOmpliant;  // Compliant
+        public partial event System.EventHandler ThisIsCompliant; // Compliant
+    }
+}

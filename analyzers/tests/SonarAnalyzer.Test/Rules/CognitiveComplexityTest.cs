@@ -17,48 +17,49 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CognitiveComplexityTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
-        private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CognitiveComplexity_CS() =>
-            builderCS.AddPaths("CognitiveComplexity.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+[TestClass]
+public class CognitiveComplexityTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.CognitiveComplexity { Threshold = 0, PropertyThreshold = 0 });
+
+    [TestMethod]
+    public void CognitiveComplexity_CS() =>
+        builderCS.AddPaths("CognitiveComplexity.cs")
+            .WithOptions(LanguageOptions.FromCSharp8)
+            .Verify();
 
 #if NET
-        [TestMethod]
-        public void CognitiveComplexity_CS_Latest() =>
-            builderCS.AddPaths("CognitiveComplexity.Latest.cs")
-                .WithTopLevelStatements()
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void CognitiveComplexity_CS_Latest() =>
+        builderCS
+            .AddPaths("CognitiveComplexity.Latest.cs")
+            .AddPaths("CognitiveComplexity.Latest.Partial.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 #endif
 
-        [TestMethod]
-        public void CognitiveComplexity_VB() => builderVB.AddPaths("CognitiveComplexity.vb").Verify();
+    [TestMethod]
+    public void CognitiveComplexity_VB() => builderVB.AddPaths("CognitiveComplexity.vb").Verify();
 
-        [TestMethod]
-        public void CognitiveComplexity_StackOverflow_CS()
+    [TestMethod]
+    public void CognitiveComplexity_StackOverflow_CS()
+    {
+        if (!TestEnvironment.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
         {
-            if (!TestEnvironment.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
-            {
-                builderCS.AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").VerifyNoIssues();
-            }
+            builderCS.AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").VerifyNoIssues();
         }
+    }
 
-        [TestMethod]
-        public void CognitiveComplexity_StackOverflow_VB()
+    [TestMethod]
+    public void CognitiveComplexity_StackOverflow_VB()
+    {
+        if (!TestEnvironment.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
         {
-            if (!TestEnvironment.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
-            {
-                builderVB.AddPaths("SyntaxWalker_InsufficientExecutionStackException.vb").VerifyNoIssues();
-            }
+            builderVB.AddPaths("SyntaxWalker_InsufficientExecutionStackException.vb").VerifyNoIssues();
         }
     }
 }

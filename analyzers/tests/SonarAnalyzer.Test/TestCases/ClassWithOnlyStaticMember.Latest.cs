@@ -46,3 +46,44 @@ namespace CSharp13
         public static partial string Prop { get; set; }
     }
 }
+
+namespace CSharp14
+{
+    public static class TestClass
+    {
+        extension(TestClass)
+        {
+            public static string Prop => "42";
+        }
+    }
+
+    public class StaticFieldKeyword // Noncompliant {{Add a 'protected' constructor or the 'static' keyword to the class declaration.}}
+    {
+        public static int Prop { get => field++; set => field++; }
+    }
+
+    public class FieldKeyword
+    {
+        public int Prop { get => field++; set => field++; }
+    }
+
+    public partial class StaticPartialConstructor // Noncompliant {{Add a 'protected' constructor or the 'static' keyword to the class declaration.}}
+    {
+        static partial StaticPartialConstructor();    // Error [CS0267]
+    }
+
+    public partial class PartialConstructor
+    {
+        partial PartialConstructor();
+    }
+
+    public partial class StaticPartialEvent // Noncompliant {{Add a 'protected' constructor or the 'static' keyword to the class declaration.}}
+    {
+        public static partial event System.EventHandler<System.EventArgs> PartialEvent;
+    }
+
+    public partial class InstancePartialEvent
+    {
+        public partial event System.EventHandler<System.EventArgs> PartialEvent;
+    }
+}

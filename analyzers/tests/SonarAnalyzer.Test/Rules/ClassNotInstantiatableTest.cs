@@ -17,35 +17,28 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ClassNotInstantiatableTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassNotInstantiatable>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ClassNotInstantiatable_CS() =>
-            builderCS.AddPaths("ClassNotInstantiatable.cs").Verify();
+[TestClass]
+public class ClassNotInstantiatableTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassNotInstantiatable>();
+
+    [TestMethod]
+    public void ClassNotInstantiatable_CS() =>
+        builderCS.AddPaths("ClassNotInstantiatable.cs").Verify();
 
 #if NET
 
-        [TestMethod]
-        public void ClassNotInstantiatable_CSharp9() =>
-            builderCS.AddPaths("ClassNotInstantiatable.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void ClassNotInstantiatable_CSharp11() =>
-            builderCS.AddPaths("ClassNotInstantiatable.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void ClassNotInstantiatable_CSharpLatest() =>
+        builderCS.AddPaths("ClassNotInstantiatable.Latest.cs", "ClassNotInstantiatable.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
 #endif
 
-        [TestMethod]
-        public void ClassNotInstantiatable_VB() =>
-            new VerifierBuilder<VB.ClassNotInstantiatable>().AddPaths("ClassNotInstantiatable.vb").Verify();
-    }
+    [TestMethod]
+    public void ClassNotInstantiatable_VB() =>
+        new VerifierBuilder<VB.ClassNotInstantiatable>().AddPaths("ClassNotInstantiatable.vb").Verify();
 }
