@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-#if NET
-
 using SonarAnalyzer.CSharp.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
@@ -54,5 +52,3 @@ public class BlazorQueryParameterRoutableComponentTest
                .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
                .Verify();
 }
-
-#endif

@@ -33,8 +33,6 @@ public class LooseFilePermissionsTest
     public void LooseFilePermissions_Windows_VB() =>
         builderVB.AddPaths("LooseFilePermissions.Windows.vb").Verify();
 
-#if NET
-
     [TestMethod]
     public void LooseFilePermissions_Windows_CSharp9() =>
         builderCS.AddPaths("LooseFilePermissions.Windows.CSharp9.cs")
@@ -72,7 +70,4 @@ public class LooseFilePermissionsTest
         builderVB.AddPaths("LooseFilePermissions.Unix.vb")
             .AddReferences(NuGetMetadataReference.MonoPosixNetStandard())
             .Verify();
-
-#endif
-
 }

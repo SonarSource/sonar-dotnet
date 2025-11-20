@@ -38,13 +38,9 @@ namespace SonarAnalyzer.Test.Rules
             .WithErrorBehavior(CompilationErrorBehavior.Ignore)
             .VerifyNoIssues();
 
-#if NET
-
         [TestMethod]
         public void NameOfShouldBeUsed_CSharp11() =>
             builderCS.AddPaths("NameOfShouldBeUsed.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
 
         [TestMethod]
         public void NameOfShouldBeUsed_FromVB14() =>

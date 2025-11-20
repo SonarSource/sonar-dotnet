@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("UseParamsForVariableArguments.cs")
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void UseParamsForVariableArguments_CSharp11() =>
             builder.AddPaths("UseParamsForVariableArguments.CSharp11.cs")
@@ -41,8 +39,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("UseParamsForVariableArguments.CSharp12.cs")
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
-
-#endif
-
     }
 }

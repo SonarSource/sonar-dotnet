@@ -28,8 +28,6 @@ public class PrivateFieldUsedAsLocalVariableTest
         builder.AddPaths("PrivateFieldUsedAsLocalVariable.cs")
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void PrivateFieldUsedAsLocalVariable_CSharp9() =>
         builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp9.cs")
@@ -41,7 +39,4 @@ public class PrivateFieldUsedAsLocalVariableTest
         builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp10.cs")
             .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
-
-#endif
-
 }

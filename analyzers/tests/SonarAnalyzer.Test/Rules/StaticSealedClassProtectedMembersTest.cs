@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void StaticSealedClassProtectedMembers() =>
             builder.AddPaths("StaticSealedClassProtectedMembers.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void StaticSealedClassProtectedMembers_Latest() =>
             builder.AddPaths("StaticSealedClassProtectedMembers.Latest.cs", "StaticSealedClassProtectedMembers.Latest.Partial.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

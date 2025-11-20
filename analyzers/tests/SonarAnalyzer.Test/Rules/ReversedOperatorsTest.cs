@@ -28,15 +28,11 @@ namespace SonarAnalyzer.Test.Rules
         public void ReversedOperators_CS() =>
             builderCS.AddPaths("ReversedOperators.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ReversedOperators_CSharp9() =>
             builderCS.AddPaths("ReversedOperators.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void ReversedOperators_VB() =>

@@ -37,16 +37,12 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.JWT("7.3.1"))
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void JwtSigned_CS_FromCSharp9() =>
             builderCS.AddPaths("JwtSigned.CSharp9.cs")
                 .WithTopLevelStatements()
                 .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void JwtSigned_VB() =>

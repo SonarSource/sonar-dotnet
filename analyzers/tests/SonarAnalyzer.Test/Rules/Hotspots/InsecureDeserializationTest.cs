@@ -27,12 +27,7 @@ public class InsecureDeserializationTest
     public void InsecureDeserialization() =>
         builder.AddPaths("InsecureDeserialization.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void InsecureDeserialization_Latest() =>
         builder.AddPaths("InsecureDeserialization.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
-
 }

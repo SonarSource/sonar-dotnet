@@ -33,8 +33,6 @@ namespace SonarAnalyzer.Test.Rules
         public void CertificateValidationCheck_CS() =>
             builderCS.AddPaths("CertificateValidationCheck.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void CertificateValidationCheck_CSharp8() =>
             builderCS.AddPaths("CertificateValidationCheck.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
@@ -46,8 +44,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void CertificateValidationCheck_CS_TopLevelStatements() =>
             builderCS.AddPaths("CertificateValidationCheck.TopLevelStatements.cs").WithTopLevelStatements().Verify();
-
-#endif
 
         [TestMethod]
         public void CertificateValidationCheck_VB() =>

@@ -29,7 +29,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MethodOverloadsShouldBeGrouped_CS() =>
             builderCS.AddPaths("MethodOverloadsShouldBeGrouped.cs").Verify();
 
-#if NET
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp9() =>
             builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -45,8 +44,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_CS_CSharp12() =>
             builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
 
         [TestMethod]
         public void MethodOverloadsShouldBeGrouped_VB() =>

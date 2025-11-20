@@ -39,14 +39,11 @@ namespace SonarAnalyzer.Test.Rules
         public void BooleanCheckInverted_VB() =>
             new VerifierBuilder<VB.BooleanCheckInverted>().AddPaths("BooleanCheckInverted.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
-#if NET
         [TestMethod]
         public void BooleanCheckInverted_CS_Latest() =>
             builderCS
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .WithConcurrentAnalysis(false)
                 .AddPaths("BooleanCheckInverted.Latest.cs").Verify();
-#endif
-
     }
 }

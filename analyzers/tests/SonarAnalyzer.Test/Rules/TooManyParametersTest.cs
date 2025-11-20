@@ -31,8 +31,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void TooManyParameters_CS_CustomValues_CSharp9() =>
              builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp9.cs")
@@ -51,8 +49,6 @@ namespace SonarAnalyzer.Test.Rules
             builderCSMax3.AddPaths("TooManyParameters_CustomValues.CSharp12.cs")
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void TooManyParameters_VB_CustomValues() =>

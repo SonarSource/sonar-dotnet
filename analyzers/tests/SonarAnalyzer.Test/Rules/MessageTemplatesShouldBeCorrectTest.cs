@@ -144,15 +144,10 @@ public class MessageTemplatesShouldBeCorrectTest
             """)
         .Verify();
 
-#if NET
-
     [TestMethod]
     public void MessageTemplatesShouldBeCorrect_Latest() =>
         Builder.AddPaths("MessageTemplatesShouldBeCorrect.Latest.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

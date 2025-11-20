@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void GenericTypeParameterEmptinessChecking() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CSharp9() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -36,8 +34,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CSharp12() =>
             builder.AddPaths("GenericTypeParameterEmptinessChecking.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
 
         [TestMethod]
         public void GenericTypeParameterEmptinessChecking_CodeFix() =>

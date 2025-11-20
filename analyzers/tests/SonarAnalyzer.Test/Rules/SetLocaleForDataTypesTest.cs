@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("SetLocaleForDataTypes.cs")
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void SetLocaleForDataTypes_CSharp9() =>
             builder.AddPaths("SetLocaleForDataTypes.CSharp9.cs")
@@ -43,8 +41,5 @@ namespace SonarAnalyzer.Test.Rules
                 .WithTopLevelStatements()
                 .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
-
-#endif
-
     }
 }

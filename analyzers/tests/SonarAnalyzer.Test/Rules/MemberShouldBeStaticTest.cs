@@ -47,8 +47,6 @@ public class MemberShouldBeStaticTest
             .AddReferences(MetadataReferenceFacade.PresentationFramework)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void MemberShouldBeStatic_Latest() =>
         builder
@@ -56,9 +54,7 @@ public class MemberShouldBeStaticTest
             .AddPaths("MemberShouldBeStatic.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements().Verify();
-#endif
 
-#if NETFRAMEWORK // HttpApplication is available only on .Net Framework
     [TestMethod]
     public void MemberShouldBeStatic_HttpApplication() =>
         builder.AddSnippet(@"
@@ -68,8 +64,6 @@ public int Foo() => 0;
 
 protected int FooFoo() => 0; // Noncompliant
 }").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
-
-#endif
 
     [TestMethod]
     public void MemberShouldBeStatic_InvalidCode() =>

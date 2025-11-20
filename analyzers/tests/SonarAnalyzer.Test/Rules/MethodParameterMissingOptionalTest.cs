@@ -27,13 +27,9 @@ namespace SonarAnalyzer.Test.Rules
         public void MethodParameterMissingOptional() =>
             builder.AddPaths("MethodParameterMissingOptional.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void MethodParameterMissingOptional_CSharp9() =>
             builder.AddPaths("MethodParameterMissingOptional.CSharp9.cs").WithTopLevelStatements().Verify();
-
-#endif
 
         [TestMethod]
         public void MethodParameterMissingOptional_CodeFix() =>

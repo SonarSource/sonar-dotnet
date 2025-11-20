@@ -28,8 +28,6 @@ public class GenericReadonlyFieldPropertyAssignmentTest
     public void GenericReadonlyFieldPropertyAssignment() =>
         builder.AddPaths("GenericReadonlyFieldPropertyAssignment.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void GenericReadonlyFieldPropertyAssignment_CSharpLatest() =>
         builder.AddPaths("GenericReadonlyFieldPropertyAssignment.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
@@ -41,8 +39,6 @@ public class GenericReadonlyFieldPropertyAssignmentTest
             .WithCodeFixTitle(GenericReadonlyFieldPropertyAssignmentCodeFix.TitleRemove)
             .WithOptions(LanguageOptions.CSharpLatest)
             .VerifyCodeFix();
-
-#endif
 
     [TestMethod]
     public void GenericReadonlyFieldPropertyAssignment_CodeFix_Remove_Statement() =>

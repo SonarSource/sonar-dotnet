@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void TypeNamesShouldNotMatchNamespaces() =>
             builder.AddPaths("TypeNamesShouldNotMatchNamespaces.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp9() =>
             builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -36,8 +34,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void TypeNamesShouldNotMatchNamespaces_CSharp10() =>
             builder.AddPaths("TypeNamesShouldNotMatchNamespaces.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-#endif
-
     }
 }

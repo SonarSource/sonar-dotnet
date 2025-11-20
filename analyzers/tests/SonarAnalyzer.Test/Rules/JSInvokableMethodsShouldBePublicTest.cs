@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-#if NET
-
 using SonarAnalyzer.CSharp.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
@@ -52,5 +50,3 @@ public class JSInvokableMethodsShouldBePublicTest
             .WithOptions(LanguageOptions.FromCSharp9)
             .VerifyNoIssues();
 }
-
-#endif

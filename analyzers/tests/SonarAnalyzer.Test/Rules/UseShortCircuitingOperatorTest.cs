@@ -40,8 +40,6 @@ namespace SonarAnalyzer.Test.Rules
         public void UseShortCircuitingOperators_CSharp() =>
             builderCS.AddPaths("UseShortCircuitingOperator.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp9() =>
             builderCS.AddPaths("UseShortCircuitingOperator.CSharp9.cs")
@@ -55,8 +53,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("UseShortCircuitingOperator.CSharp9.Fixed.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyCodeFix();
-
-#endif
 
         [TestMethod]
         public void UseShortCircuitingOperators_CSharp_CodeFix() =>

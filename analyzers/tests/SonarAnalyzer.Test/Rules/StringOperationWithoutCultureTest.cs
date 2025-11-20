@@ -27,8 +27,6 @@ public class StringOperationWithoutCultureTest
     public void StringOperationWithoutCulture() =>
         builder.AddPaths("StringOperationWithoutCulture.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void StringOperationWithoutCulture_CSharp10() =>
         builder.AddPaths("StringOperationWithoutCulture.CSharp10.cs")
@@ -40,7 +38,4 @@ public class StringOperationWithoutCultureTest
         builder.AddPaths("StringOperationWithoutCulture.CSharp11.cs")
         .WithOptions(LanguageOptions.FromCSharp11)
         .Verify();
-
-#endif
-
 }

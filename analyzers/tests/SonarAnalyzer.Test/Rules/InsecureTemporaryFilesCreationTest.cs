@@ -28,15 +28,11 @@ namespace SonarAnalyzer.Test.Rules
         public void InsecureTemporaryFilesCreation_CS() =>
             builderCS.AddPaths("InsecureTemporaryFilesCreation.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void InsecureTemporaryFilesCreation_CSharp9() =>
             builderCS.AddPaths("InsecureTemporaryFilesCreation.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void InsecureTemporaryFilesCreation_VB() =>

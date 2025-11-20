@@ -33,7 +33,6 @@ public class ForeachLoopExplicitConversionTest
             .AddPaths("ForeachLoopExplicitConversion.cs")
             .WithCodeFixedPaths("ForeachLoopExplicitConversion.Fixed.cs")
             .VerifyCodeFix();
-#if NET
 
     [TestMethod]
     public void ForeachLoopExplicitConversion_CSharpLatest() =>
@@ -49,7 +48,4 @@ public class ForeachLoopExplicitConversionTest
             .WithCodeFixedPaths("ForeachLoopExplicitConversion.Latest.Fixed.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .VerifyCodeFix();
-
-#endif
-
 }

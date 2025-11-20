@@ -27,8 +27,6 @@ public class ClassWithOnlyStaticMemberTest
     public void ClassWithOnlyStaticMember() =>
         builder.AddPaths("ClassWithOnlyStaticMember.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ClassWithOnlyStaticMember_TopLevelStatements() =>
         builder.AddPaths("ClassWithOnlyStaticMember.TopLevelStatements.cs")
@@ -40,7 +38,4 @@ public class ClassWithOnlyStaticMemberTest
         builder.AddPaths("ClassWithOnlyStaticMember.Latest.cs", "ClassWithOnlyStaticMember.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

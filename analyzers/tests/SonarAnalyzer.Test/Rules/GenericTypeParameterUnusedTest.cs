@@ -27,8 +27,6 @@ public class GenericTypeParameterUnusedTest
     public void GenericTypeParameterUnused() =>
         builder.AddPaths("GenericTypeParameterUnused.cs", "GenericTypeParameterUnused.Partial.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void GenericTypeParameterUnused_CSharp9() =>
         builder.AddPaths("GenericTypeParameterUnused.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -44,7 +42,4 @@ public class GenericTypeParameterUnusedTest
     [TestMethod]
     public void GenericTypeParameterUnused_CSharp12() =>
         builder.AddPaths("GenericTypeParameterUnused.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
-
-#endif
-
 }

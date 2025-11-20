@@ -29,13 +29,9 @@ namespace SonarAnalyzer.Test.Rules
         public void FieldShouldNotBePublic_CS() =>
             builderCS.AddPaths("FieldShouldNotBePublic.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void FieldShouldNotBePublic_CS_CSharp9() =>
             builderCS.AddPaths("FieldShouldNotBePublic.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-#endif
 
         [TestMethod]
         public void FieldShouldNotBePublic_VB() =>

@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void EventHandlerDelegateShouldHaveProperArguments() =>
             builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void EventHandlerDelegateShouldHaveProperArguments_CSharp9() =>
             builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs")
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

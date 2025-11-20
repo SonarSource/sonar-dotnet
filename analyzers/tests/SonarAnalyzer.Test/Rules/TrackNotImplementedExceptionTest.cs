@@ -30,15 +30,10 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void TrackNotImplementedException_CSharp11() =>
             builder.AddPaths("TrackNotImplementedException.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

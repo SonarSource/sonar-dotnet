@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantInheritanceList() =>
             rule.AddPaths("RedundantInheritanceList.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void RedundantInheritanceList_CSharp9() =>
             rule.AddPaths("RedundantInheritanceList.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -51,8 +49,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("RedundantInheritanceList.CSharp10.Fixed.cs")
                 .WithOptions(LanguageOptions.FromCSharp10)
                 .VerifyCodeFix();
-
-#endif
 
         [TestMethod]
         public void RedundantInheritanceList_CodeFix() =>

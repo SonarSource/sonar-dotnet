@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ConditionalsWithSameCondition() =>
             builder.AddPaths("ConditionalsWithSameCondition.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ConditionalsWithSameCondition_CSharp9() =>
             builder.AddPaths("ConditionalsWithSameCondition.CSharp9.cs")
@@ -74,8 +72,5 @@ namespace SonarAnalyzer.Test.Rules
                 "SomeRazorFile.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
-
-#endif
-
     }
 }

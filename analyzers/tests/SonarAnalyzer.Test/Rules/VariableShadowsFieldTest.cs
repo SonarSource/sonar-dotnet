@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void VariableShadowsField_TopLevelStatements() =>
             builder.AddPaths("VariableShadowsField.TopLevelStatements.cs")
@@ -43,8 +41,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("VariableShadowsField.Latest.cs", "VariableShadowsField.Latest.Partial.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

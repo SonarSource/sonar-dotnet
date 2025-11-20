@@ -75,11 +75,9 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("MethodsShouldUseBaseTypes.AspControllers.cs")
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(TestConstants.NuGetLatestVersion))
                 .Verify();
-#if NET
         [TestMethod]
         public void MethodsShouldUseBaseTypes_CSharp9() =>
             builder.AddPaths("MethodsShouldUseBaseTypes.CSharp9.cs").WithTopLevelStatements().Verify();
-#endif
 
         [TestMethod]
         public void MethodsShouldUseBaseTypes_InvalidCode() =>

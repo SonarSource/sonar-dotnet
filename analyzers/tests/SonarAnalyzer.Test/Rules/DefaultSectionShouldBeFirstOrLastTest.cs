@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void DefaultSectionShouldBeFirstOrLast() =>
             builder.AddPaths("DefaultSectionShouldBeFirstOrLast.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void DefaultSectionShouldBeFirstOrLast_CSharp9() =>
             builder.AddPaths("DefaultSectionShouldBeFirstOrLast.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
-
     }
 }

@@ -27,13 +27,9 @@ namespace SonarAnalyzer.Test.Rules
         public void MethodOverrideNoParams() =>
             builder.AddPaths("MethodOverrideNoParams.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void MethodOverrideNoParams_CS_Latest() =>
             builder.AddPaths("MethodOverrideNoParams.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
 
         [TestMethod]
         public void MethodOverrideNoParams_CodeFix() =>

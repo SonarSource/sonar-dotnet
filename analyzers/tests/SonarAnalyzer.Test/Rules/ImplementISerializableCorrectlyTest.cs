@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ImplementISerializableCorrectly() =>
             builder.AddPaths("ImplementISerializableCorrectly.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ImplementISerializableCorrectly_FromCSharp9() =>
             builder.AddPaths("ImplementISerializableCorrectly.CSharp9.Part1.cs", "ImplementISerializableCorrectly.CSharp9.Part2.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ImplementISerializableCorrectly_FromCSharp12() =>
             builder.AddPaths("ImplementISerializableCorrectly.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
-
     }
 }

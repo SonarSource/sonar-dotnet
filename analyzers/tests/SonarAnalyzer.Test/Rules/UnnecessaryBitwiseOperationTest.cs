@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
         public void UnnecessaryBitwiseOperation_CS() =>
             builderCS.AddPaths("UnnecessaryBitwiseOperation.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void UnnecessaryBitwiseOperation_CS_TopLevelStatements() =>
             builderCS.AddPaths("UnnecessaryBitwiseOperation.TopLevelStatements.cs")
@@ -42,8 +40,6 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("UnnecessaryBitwiseOperation.Latest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void UnnecessaryBitwiseOperation_CS_CodeFix() =>

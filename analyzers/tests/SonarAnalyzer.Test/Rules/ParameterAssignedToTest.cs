@@ -29,7 +29,6 @@ public class ParameterAssignedToTest
     public void ParameterAssignedTo_CS() =>
         builderCS.AddPaths("ParameterAssignedTo.cs").Verify();
 
-#if NET
     [TestMethod]
     public void ParameterAssignedTo_CS_Latest() =>
         builderCS
@@ -37,7 +36,6 @@ public class ParameterAssignedToTest
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
-#endif
 
     [TestMethod]
     public void ParameterAssignedTo_VB() =>

@@ -27,13 +27,8 @@ namespace SonarAnalyzer.Test.Rules
         public void NestedCodeBlock() =>
             builder.AddPaths("NestedCodeBlock.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void NestedCodeBlock_CSharp9() =>
             builder.AddPaths("NestedCodeBlock.CSharp9.cs").WithTopLevelStatements().Verify();
-
-#endif
-
     }
 }

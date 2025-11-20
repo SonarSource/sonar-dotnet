@@ -28,8 +28,6 @@ public class DeclareTypesInNamespacesTest
     public void DeclareTypesInNamespaces_CS() =>
         builder.AddPaths("DeclareTypesInNamespaces.cs", "DeclareTypesInNamespaces2.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void DeclareTypesInNamespaces_CS_Latest() =>
         builder
@@ -43,8 +41,6 @@ public class DeclareTypesInNamespacesTest
             .AddPaths("DeclareTypesInNamespaces.TopLevelStatements.cs", "DeclareTypesInNamespaces.TopLevelStatements.Partial.cs")
             .WithTopLevelStatements()
             .Verify();
-
-#endif
 
     [TestMethod]
     public void DeclareTypesInNamespaces_VB() =>

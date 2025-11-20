@@ -36,15 +36,11 @@ public class RegexMustHaveValidSyntaxTest
     public void RegexMustHaveValidSyntax_CS() =>
         builderCS.AddPaths("RegexMustHaveValidSyntax.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void RegexMustHaveValidSyntax_CS_Latest() =>
         builderCS.AddPaths("RegexMustHaveValidSyntax.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void RegexMustHaveValidSyntax_VB() =>

@@ -35,8 +35,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("RedundantNullCheck.Fixed.cs", "RedundantNullCheck.Fixed.Batch.cs")
                 .VerifyCodeFix();
 
-#if NET
-
         [TestMethod]
         public void RedundantNullCheck_CSharp9() =>
             builderCS.AddPaths("RedundantNullCheck.CSharp9.cs")
@@ -70,8 +68,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithTopLevelStatements()
                 .WithOptions(LanguageOptions.FromCSharp10)
                 .VerifyCodeFix();
-
-#endif
 
         [TestMethod]
         public void RedundantNullCheck_VB() =>

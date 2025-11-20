@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void InterfaceMethodsShouldBeCallableByChildTypes() =>
             builder.AddPaths("InterfaceMethodsShouldBeCallableByChildTypes.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void InterfaceMethodsShouldBeCallableByChildTypes_CSharp9() =>
             builder.AddPaths("InterfaceMethodsShouldBeCallableByChildTypes.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
-
     }
 }

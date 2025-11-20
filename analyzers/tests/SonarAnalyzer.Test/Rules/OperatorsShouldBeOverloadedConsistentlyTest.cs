@@ -27,8 +27,6 @@ public class OperatorsShouldBeOverloadedConsistentlyTest
     public void OperatorsShouldBeOverloadedConsistently() =>
         builder.AddPaths("OperatorsShouldBeOverloadedConsistently.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void OperatorsShouldBeOverloadedConsistently_CSharp9() =>
         builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
@@ -36,7 +34,4 @@ public class OperatorsShouldBeOverloadedConsistentlyTest
     [TestMethod]
     public void OperatorsShouldBeOverloadedConsistently_CSharp11() =>
         builder.AddPaths("OperatorsShouldBeOverloadedConsistently.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).VerifyNoIssues();
-
-#endif
-
 }

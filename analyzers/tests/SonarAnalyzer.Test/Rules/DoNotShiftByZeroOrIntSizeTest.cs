@@ -29,8 +29,6 @@ public class DoNotShiftByZeroOrIntSizeTest
     public void DoNotShiftByZeroOrIntSize() =>
         builder.AddPaths("DoNotShiftByZeroOrIntSize.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotShiftByZeroOrIntSize_CSharp9() =>
         builder.AddPaths("DoNotShiftByZeroOrIntSize.CSharp9.cs")
@@ -73,7 +71,4 @@ public class DoNotShiftByZeroOrIntSizeTest
             "SomeRazorFile.razor")
         .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
         .Verify();
-
-#endif
-
 }

@@ -27,13 +27,10 @@ public class DontMixIncrementOrDecrementWithOtherOperatorsTest
     public void DontMixIncrementOrDecrementWithOtherOperators() =>
         builder.AddPaths("DontMixIncrementOrDecrementWithOtherOperators.cs").Verify();
 
-#if NET
     [TestMethod]
     public void DontMixIncrementOrDecrementWithOtherOperators_Latest() =>
         builder
             .AddPaths("DontMixIncrementOrDecrementWithOtherOperators.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-#endif
-
 }

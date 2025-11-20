@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void AsyncAwaitIdentifier() =>
             builder.AddPaths("AsyncAwaitIdentifier.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void AsyncAwaitIdentifier_CSharp9() =>
             builder.AddPaths("AsyncAwaitIdentifier.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
-
     }
 }

@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
         public void SecurityPInvokeMethodShouldNotBeCalled_CS() =>
             builderCS.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void SecurityPInvokeMethodShouldNotBeCalled_CSharp11() =>
             builderCS.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
@@ -37,8 +35,6 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void SecurityPInvokeMethodShouldNotBeCalled_CSharp12() =>
             builderCS.AddPaths("SecurityPInvokeMethodShouldNotBeCalled.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
 
         [TestMethod]
         public void SecurityPInvokeMethodShouldNotBeCalled_VB() =>

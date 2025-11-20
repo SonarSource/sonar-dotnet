@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ThreadStaticNonStaticField() =>
             builder.AddPaths("ThreadStaticNonStaticField.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ThreadStaticNonStaticField_CSharp9() =>
             builder.AddPaths("ThreadStaticNonStaticField.CSharp9.cs")
@@ -54,8 +52,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("ThreadStaticNonStaticField.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void ThreadStaticNonStaticField_CodeFix() =>

@@ -32,8 +32,6 @@ public class EmptyMethodTest
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void EmptyMethod_CSharp9() =>
         builderCS.AddPaths("EmptyMethod.CSharp9.cs")
@@ -64,8 +62,6 @@ public class EmptyMethodTest
         builderCS.AddPaths("EmptyMethod.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void EmptyMethod_CodeFix_Throw() =>

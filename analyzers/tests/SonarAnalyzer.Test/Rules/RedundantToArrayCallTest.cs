@@ -35,8 +35,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("RedundantToArrayCall.Fixed.cs")
                 .VerifyCodeFix();
 
-#if NET
-
         [TestMethod]
         public void RedundantToArrayCall_CSharp11() =>
             builder.AddPaths("RedundantToArrayCall.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
@@ -48,8 +46,5 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .WithCodeFixedPaths("RedundantToArrayCall.CSharp11.Fixed.cs")
                 .VerifyCodeFix();
-
-#endif
-
     }
 }

@@ -30,8 +30,6 @@ namespace SonarAnalyzer.Test.Rules
         public void UnaryPrefixOperatorRepeated() =>
             builderCS.AddPaths("UnaryPrefixOperatorRepeated.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void UnaryPrefixOperatorRepeated_CS_TopLevelStatements() =>
             builderCS.AddPaths("UnaryPrefixOperatorRepeated.TopLevelStatements.cs")
@@ -43,8 +41,6 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("UnaryPrefixOperatorRepeated.Latest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void UnaryPrefixOperatorRepeated_CodeFix() =>

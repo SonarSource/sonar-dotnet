@@ -29,11 +29,9 @@ namespace SonarAnalyzer.Test.Rules
         public void OptionalParameterNotPassedToBaseCall_CS() =>
             builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.cs").Verify();
 
-#if NET
         [TestMethod]
         public void OptionalParameterNotPassedToBaseCall_CSharp9() =>
             builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-#endif
 
         [TestMethod]
         public void OptionalParameterNotPassedToBaseCall_VB() =>

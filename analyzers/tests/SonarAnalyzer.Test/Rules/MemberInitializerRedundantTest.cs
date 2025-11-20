@@ -44,8 +44,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("MemberInitializerRedundant.Fixed.cs")
                 .VerifyCodeFix();
 
-#if NET
-
         [TestMethod]
         public void MemberInitializerRedundant_CSharp9() =>
             builder.AddPaths("MemberInitializerRedundant.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -75,8 +73,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MemberInitializerRedundant_CSharp12() =>
             builder.AddPaths("MemberInitializerRedundant.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
-
     }
 }

@@ -162,8 +162,6 @@ public partial class UnusedPrivateMemberTest
     public void UnusedPrivateMember(ProjectType projectType) =>
         builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
-#if NET
-
     [TestMethod]
     public void UnusedPrivateMember_CS_Latest() =>
         builder.AddPaths("UnusedPrivateMember.Latest.cs", "UnusedPrivateMember.Latest.Partial.cs")
@@ -175,6 +173,8 @@ public partial class UnusedPrivateMemberTest
     [TestMethod]
     public void UnusedPrivateMember_TopLevelStatements() =>
         builder.AddPaths("UnusedPrivateMember.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+
+#if NET
 
     [TestMethod]
     public void UnusedPrivateMemeber_EntityFramework_DontRaiseOnUnusedEntityPropertiesPrivateSetters() =>

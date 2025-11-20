@@ -27,7 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void DelegateSubtraction() =>
             builder.AddPaths("DelegateSubtraction.cs").Verify();
 
-#if NET
         [TestMethod]
         public void DelegateSubtraction_CS_Latest() =>
             builder.AddPaths("DelegateSubtraction.Latest.cs")
@@ -39,7 +38,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("DelegateSubtraction.TopLevelStatements.cs")
                 .WithTopLevelStatements()
                 .Verify();
-#endif
-
     }
 }

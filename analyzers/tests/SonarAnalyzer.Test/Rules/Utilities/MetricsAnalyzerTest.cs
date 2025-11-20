@@ -53,8 +53,6 @@ namespace SonarAnalyzer.Test.Rules
                         metrics.StatementCount.Should().Be(5);
                     });
 
-#if NET
-
         [TestMethod]
         public void VerifyMetrics_Razor() =>
             CreateBuilder(false, RazorFileName, "Component.razor")
@@ -122,8 +120,6 @@ namespace SonarAnalyzer.Test.Rules
                     metrics.NonBlankComment.Should().ContainSingle();
                     metrics.StatementCount.Should().Be(3);
                 });
-
-#endif
 
         [TestMethod]
         public void Verify_NotRunForTestProject() =>

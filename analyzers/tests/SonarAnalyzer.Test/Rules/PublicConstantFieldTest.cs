@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
         public void PublicConstantField_CSharp() =>
             builderCS.AddPaths("PublicConstantField.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void PublicConstantField_CSharp9() =>
             builderCS.AddPaths("PublicConstantField.CSharp9.cs")
@@ -41,8 +39,6 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("PublicConstantField.CSharp10.cs")
                 .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void PublicConstantField_VB() =>

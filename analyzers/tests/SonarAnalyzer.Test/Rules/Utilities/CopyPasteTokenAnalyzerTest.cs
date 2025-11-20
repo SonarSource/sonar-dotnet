@@ -40,8 +40,6 @@ public class CopyPasteTokenAnalyzerTest
             x.Count(token => token.TokenValue == "$char").Should().Be(2);
         });
 
-#if NET
-
     [TestMethod]
     public void Verify_Unique_CSharp11() =>
         Verify("Unique.Csharp11.cs", x =>
@@ -61,8 +59,6 @@ public class CopyPasteTokenAnalyzerTest
             x.Count(token => token.TokenValue == "$num").Should().Be(4);
             x.Count(token => token.TokenValue == "$char").Should().Be(4);
         });
-
-#endif
 
     [TestMethod]
     public void Verify_Unique_VB() =>
@@ -124,16 +120,12 @@ public class CopyPasteTokenAnalyzerTest
                     verifyTokenInfo(info.TokenInfo);
                 });
 
-#if NET
-
     [TestMethod]
     [DataRow("Razor.razor")]
     [DataRow("Razor.cshtml")]
     public void Verify_NoMetricsAreComputedForRazorFiles(string fileName) =>
         CreateBuilder(ProjectType.Product, fileName)
             .VerifyUtilityAnalyzer<CopyPasteTokenInfo>(x => x.Select(token => Path.GetFileName(token.FilePath)).Should().BeEmpty());
-
-#endif
 
     private VerifierBuilder CreateBuilder(ProjectType projectType, string fileName)
     {

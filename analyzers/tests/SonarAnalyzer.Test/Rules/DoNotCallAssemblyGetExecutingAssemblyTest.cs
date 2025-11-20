@@ -28,16 +28,11 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("DoNotCallAssemblyGetExecutingAssembly.cs")
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void DoNotCallAssemblyGetExecutingAssembly_CSharp9() =>
             builder.AddPaths("DoNotCallAssemblyGetExecutingAssembly.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
-
     }
 }

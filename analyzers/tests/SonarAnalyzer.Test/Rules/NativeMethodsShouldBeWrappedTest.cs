@@ -28,8 +28,6 @@ public class NativeMethodsShouldBeWrappedTest
     public void NativeMethodsShouldBeWrapped() =>
         builder.AddPaths("NativeMethodsShouldBeWrapped.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void NativeMethodsShouldBeWrapped_CSharp9() =>
         builder.AddPaths("NativeMethodsShouldBeWrapped.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -47,8 +45,6 @@ public class NativeMethodsShouldBeWrappedTest
             .WithOptions(LanguageOptions.FromCSharp11)
             .WithConcurrentAnalysis(false)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void NativeMethodsShouldBeWrapped_InvalidCode() =>

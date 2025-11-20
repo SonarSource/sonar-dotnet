@@ -27,8 +27,6 @@ public class GetTypeWithIsAssignableFromTest
     public void GetTypeWithIsAssignableFrom() =>
         builder.AddPaths("GetTypeWithIsAssignableFrom.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void GetTypeWithIsAssignableFrom_CSharp9() =>
         builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp9.cs")
@@ -64,8 +62,6 @@ public class GetTypeWithIsAssignableFromTest
         builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .VerifyNoIssues();
-
-#endif
 
     [TestMethod]
     public void GetTypeWithIsAssignableFrom_CodeFix() =>

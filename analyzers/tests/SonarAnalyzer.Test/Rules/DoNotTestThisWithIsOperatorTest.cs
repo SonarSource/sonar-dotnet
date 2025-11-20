@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotTestThisWithIsOperator() =>
             builder.AddPaths("DoNotTestThisWithIsOperator.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void DoNotTestThisWithIsOperator_CSharp9() =>
             builder.AddPaths("DoNotTestThisWithIsOperator.CSharp9.cs")
@@ -46,8 +44,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("DoNotTestThisWithIsOperator.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

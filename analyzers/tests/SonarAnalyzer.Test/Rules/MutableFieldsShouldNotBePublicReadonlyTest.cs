@@ -27,15 +27,10 @@ public class MutableFieldsShouldNotBePublicReadonlyTest
     public void PublicMutableFieldsShouldNotBeReadonly() =>
         builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.cs").AddReferences(NuGetMetadataReference.SystemCollectionsImmutable("1.3.0")).Verify();
 
-#if NET
-
     [TestMethod]
     public void PublicMutableFieldsShouldNotBeReadonly_CS_Latest() =>
         builder.AddPaths("MutableFieldsShouldNotBePublicReadonly.Latest.cs")
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

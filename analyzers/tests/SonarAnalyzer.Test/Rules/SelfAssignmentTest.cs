@@ -28,16 +28,12 @@ public class SelfAssignmentTest
     public void SelfAssignment_CSharp8() =>
         builderCS.AddPaths("SelfAssignment.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void SelfAssignment_CS_Latest() =>
         builderCS.AddPaths("SelfAssignment.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void SelfAssignment_VB() =>

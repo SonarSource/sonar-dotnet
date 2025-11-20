@@ -100,7 +100,6 @@ public class NamedPlaceholdersShouldBeUniqueTest
             }
             """).Verify();
 
-#if NET
     [TestMethod]
     [DataRow("Debug")]
     [DataRow("Error")]
@@ -124,7 +123,6 @@ public class NamedPlaceholdersShouldBeUniqueTest
                 }
             }
             """).Verify();
-#endif
 
     [TestMethod]
     [DataRow("Debug")]

@@ -27,10 +27,7 @@ public class MemberShadowsOuterStaticMemberTest
     public void MemberShadowsOuterStaticMember() =>
         builder.AddPaths("MemberShadowsOuterStaticMember.cs").Verify();
 
-#if NET
     [TestMethod]
     public void MemberShadowsOuterStaticMember_Latest() =>
         builder.AddPaths("MemberShadowsOuterStaticMember.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-#endif
-
 }

@@ -27,12 +27,7 @@ public class TypeMemberVisibilityTest
     public void TypeMemberVisibility_CS() =>
         builder.AddPaths("TypeMemberVisibility.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void TypeMemberVisibility_Latest() =>
         builder.AddPaths("TypeMemberVisibility.Latest.cs", "TypeMemberVisibility.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
-
 }

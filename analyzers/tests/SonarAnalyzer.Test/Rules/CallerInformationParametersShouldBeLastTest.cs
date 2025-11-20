@@ -28,13 +28,9 @@ public class CallerInformationParametersShouldBeLastTest
     public void CallerInformationParametersShouldBeLast() =>
         builder.AddPaths("CallerInformationParametersShouldBeLast.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void CallerInformationParametersShouldBeLast_CS_Latest() =>
         builder.AddPaths("CallerInformationParametersShouldBeLast.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
 
     [TestMethod]
     public void CallerInformationParametersShouldBeLastInvalidSyntax() =>

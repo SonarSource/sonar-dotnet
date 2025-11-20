@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void ArrayCovariance() =>
             builder.AddPaths("ArrayCovariance.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ArrayCovariance_CSharp9() =>
             builder.AddPaths("ArrayCovariance.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
-
     }
 }

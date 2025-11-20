@@ -28,8 +28,6 @@ public class CollectionPropertiesShouldBeReadOnlyTest
         builder.AddPaths("CollectionPropertiesShouldBeReadOnly.cs")
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void CollectionPropertiesShouldBeReadOnly_CS_Latest() =>
         builder.AddPaths("CollectionPropertiesShouldBeReadOnly.Latest.cs")
@@ -41,7 +39,4 @@ public class CollectionPropertiesShouldBeReadOnlyTest
     public void CollectionPropertiesShouldBeReadOnly_Razor() =>
         builder.AddPaths("CollectionPropertiesShouldBeReadOnly.razor", "CollectionPropertiesShouldBeReadOnly.razor.cs")
                .Verify();
-
-#endif
-
 }

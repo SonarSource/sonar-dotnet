@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void PropertiesShouldBePreferred() =>
             builder.AddPaths("PropertiesShouldBePreferred.cs").AddReferences(MetadataReferenceFacade.SystemThreadingTasks).Verify();
 
-#if NET
-
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp9() =>
             builder.AddPaths("PropertiesShouldBePreferred.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PropertiesShouldBePreferred_CSharp11() =>
             builder.AddPaths("PropertiesShouldBePreferred.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }

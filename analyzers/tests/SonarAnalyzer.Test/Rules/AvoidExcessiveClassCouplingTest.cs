@@ -366,8 +366,6 @@ public class AvoidExcessiveClassCouplingTest
             }
             """).VerifyNoIssues();
 
-#if NET
-
     [TestMethod]
     public void AvoidExcessiveClassCoupling_InRecord_Enums_Not_Counted() =>
         withThreshold0.AddSnippet("""
@@ -414,7 +412,4 @@ public class AvoidExcessiveClassCouplingTest
         withThreshold1.AddPaths("AvoidExcessiveClassCoupling.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void LossOfFractionInDivision() =>
             builder.AddPaths("LossOfFractionInDivision.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp9() =>
             builder.AddPaths("LossOfFractionInDivision.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void LossOfFractionInDivision_FromCSharp11() =>
             builder.AddPaths("LossOfFractionInDivision.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }

@@ -32,7 +32,6 @@ public class PropertyGetterWithThrowTest
     public void PropertyGetterWithThrow_VB() =>
         new VerifierBuilder<VB.PropertyGetterWithThrow>().AddPaths("PropertyGetterWithThrow.vb").Verify();
 
-#if NET
     [TestMethod]
     public void PropertyGetterWithThrow_CS_Latest() =>
         builderCS
@@ -40,5 +39,4 @@ public class PropertyGetterWithThrowTest
             .AddPaths("PropertyGetterWithThrow.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-#endif
 }

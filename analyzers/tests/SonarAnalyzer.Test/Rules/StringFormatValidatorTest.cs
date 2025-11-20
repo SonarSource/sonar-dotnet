@@ -43,8 +43,6 @@ namespace SonarAnalyzer.Test.Rules
         public void StringFormatValidator_EdgeCases() =>
             builder.AddPaths("StringFormatValidator.EdgeCases.cs").Verify();
 
-#if NET
-
         [TestMethod]
         [DataRow(ProjectType.Product)]
         [DataRow(ProjectType.Test)]
@@ -69,8 +67,5 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(TestCompiler.ProjectTypeReference(ProjectType.Product))
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

@@ -45,15 +45,10 @@ namespace SonarAnalyzer.Test.Rules
                 .AddTestReference()
                 .VerifyNoIssues();
 
-#if NET
-
         [TestMethod]
         public void BinaryOperationWithIdenticalExpressions_CSharpLatest() =>
             builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.CSharpLatest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ParameterValidationInYieldShouldBeWrapped() =>
             builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ParameterValidationInYieldShouldBeWrapped_CSharp10() =>
             builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp10.cs")
@@ -40,17 +38,11 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-#endif
-
-#if NET8_0_OR_GREATER
 
         [TestMethod]
         public void ParameterValidationInYieldShouldBeWrapped_CSharp12() =>
             builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp12.cs")
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
-
-#endif
-
     }
 }

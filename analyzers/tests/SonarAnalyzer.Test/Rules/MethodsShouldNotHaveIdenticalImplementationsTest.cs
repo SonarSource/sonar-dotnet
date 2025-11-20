@@ -247,8 +247,6 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             }
             """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
-#if NET
-
     [TestMethod]
     [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>")]
     [DataRow("where TSelf: IEqualityOperators<TSelf, TSelf, TResult>, TResult")]
@@ -288,8 +286,6 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_CSharp11() =>
         builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp11.cs").WithLanguageVersion(LanguageVersion.CSharp11).Verify();
-
-#endif
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_VB() =>

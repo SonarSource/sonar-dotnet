@@ -52,8 +52,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void TestClassShouldHaveTestMethod_CSharp9() =>
             builder
@@ -80,8 +78,5 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
                 .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                 .Verify();
-
-#endif
-
     }
 }

@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
         public void CollectionsShouldImplementGenericInterface() =>
             builder.AddPaths("CollectionsShouldImplementGenericInterface.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp9() =>
             builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -38,8 +36,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void CollectionsShouldImplementGenericInterface_Csharp10() =>
             builder.AddPaths("CollectionsShouldImplementGenericInterface.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-#endif
-
     }
 }

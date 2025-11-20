@@ -29,13 +29,9 @@ public class LoopsAndLinqTest
             .AddReferences(MetadataReferenceFacade.SystemData)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void LoopsAndLinq_CS_Latest() =>
         builder.AddPaths("LoopsAndLinq.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 }

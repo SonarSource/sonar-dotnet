@@ -36,13 +36,9 @@ namespace SonarAnalyzer.Test.Rules
         public void ShouldImplementExportedInterfaces_Partial() =>
             builderCS.AddPaths("ShouldImplementExportedInterfaces_Part1.cs", "ShouldImplementExportedInterfaces_Part2.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ShouldImplementExportedInterfaces_CSharp9() =>
             builderCS.AddPaths("ShouldImplementExportedInterfaces.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-#endif
 
         [TestMethod]
         public void ShouldImplementExportedInterfaces_VB() =>

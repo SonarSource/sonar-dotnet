@@ -28,15 +28,11 @@ namespace SonarAnalyzer.Test.Rules
         public void ProvideDeserializationMethodsForOptionalFields_CS() =>
             builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_CSharp9() =>
             builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void ProvideDeserializationMethodsForOptionalFields_VB() =>

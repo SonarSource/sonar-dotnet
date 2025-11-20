@@ -29,16 +29,11 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void DoNotCallExitMethods_CSharp9() =>
             builder.AddPaths("DoNotCallExitMethods.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
-
     }
 }

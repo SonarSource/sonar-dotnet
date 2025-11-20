@@ -27,16 +27,11 @@ namespace SonarAnalyzer.Test.Rules
         public void TypeExaminationOnSystemType() =>
             builder.AddPaths("TypeExaminationOnSystemType.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void TypeExaminationOnSystemType_CSharp12() =>
             builder.AddPaths("TypeExaminationOnSystemType.CSharp12.cs")
                 .WithTopLevelStatements()
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
-
-#endif
-
     }
 }

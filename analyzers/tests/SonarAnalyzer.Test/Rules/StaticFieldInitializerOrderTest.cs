@@ -30,12 +30,7 @@ public class StaticFieldInitializerOrderTest
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void StaticFieldInitializerOrder_Latest() =>
         builder.AddPaths("StaticFieldInitializerOrder.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
-
 }

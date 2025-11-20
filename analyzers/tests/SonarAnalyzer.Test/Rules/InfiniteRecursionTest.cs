@@ -41,15 +41,11 @@ public class InfiniteRecursionTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void InfiniteRecursion_RoslynCfg_Latest() =>
         roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     // https://github.com/SonarSource/sonar-dotnet/issues/8977
     [TestMethod]

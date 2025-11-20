@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void PInvokesShouldNotBeVisible() =>
             builder.AddPaths("PInvokesShouldNotBeVisible.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void PInvokesShouldNotBeVisible_CSharp9() =>
             builder.AddPaths("PInvokesShouldNotBeVisible.CSharp9.cs")
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("PInvokesShouldNotBeVisible.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

@@ -28,15 +28,11 @@ namespace SonarAnalyzer.Test.Rules
         public void FunctionNestingDepth_CS() =>
             builderCS.AddPaths("FunctionNestingDepth.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void FunctionNestingDepth_CS_CSharp9() =>
             builderCS.AddPaths("FunctionNestingDepth.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void FunctionNestingDepth_VB() =>

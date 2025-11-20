@@ -27,14 +27,9 @@ public class RequireAttributeUsageAttributeTest
     public void RequireAttributeUsageAttribute() =>
         builder.AddPaths("RequireAttributeUsageAttribute.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void RequireAttributeUsageAttribute_CSharp11() =>
         builder.AddPaths("RequireAttributeUsageAttribute.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
-
-#endif
-
 }

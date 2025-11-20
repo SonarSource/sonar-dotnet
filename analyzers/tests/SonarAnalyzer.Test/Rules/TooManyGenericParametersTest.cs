@@ -34,8 +34,6 @@ namespace SonarAnalyzer.Test.Rules
             .AddPaths("TooManyGenericParameters.CustomValues.cs")
             .Verify();
 
-#if NET
-
         [TestMethod]
         public void TooManyGenericParameters_CSharp9() =>
             builder.AddPaths("TooManyGenericParameters.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -51,8 +49,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void TooManyGenericParameters_CSharp12() =>
             builder.AddPaths("TooManyGenericParameters.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
-
     }
 }

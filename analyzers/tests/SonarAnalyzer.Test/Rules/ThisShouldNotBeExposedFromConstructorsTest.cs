@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ThisShouldNotBeExposedFromConstructors() =>
             builder.AddPaths("ThisShouldNotBeExposedFromConstructors.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ThisShouldNotBeExposedFromConstructors_CSharp9() =>
             builder.AddPaths("ThisShouldNotBeExposedFromConstructors.CSharp9.cs")
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("ThisShouldNotBeExposedFromConstructors.CSharp10.cs")
                 .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
-
-#endif
-
     }
 }

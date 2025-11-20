@@ -35,8 +35,6 @@ public class MemberInitializedToDefaultTest
         .WithCodeFixedPaths("MemberInitializedToDefault.Fixed.cs")
         .VerifyCodeFix();
 
-#if NET
-
     [TestMethod]
     public void MemberInitializedToDefault_CSharp8() =>
         builder.AddPaths("MemberInitializedToDefault.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).VerifyNoIssues();
@@ -61,7 +59,4 @@ public class MemberInitializedToDefaultTest
         .WithCodeFixedPaths("MemberInitializedToDefault.CSharp11.Fixed.cs")
         .WithOptions(LanguageOptions.FromCSharp11)
         .VerifyCodeFix();
-
-#endif
-
 }

@@ -30,15 +30,11 @@ public class TooManyLabelsInSwitchTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void TooManyLabelsInSwitch_CS_Latest() =>
         builderCS.AddPaths("TooManyLabelsInSwitch.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void TooManyLabelsInSwitch_VB() =>

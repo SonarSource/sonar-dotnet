@@ -44,7 +44,6 @@ public class ObsoleteAttributesTest
     public void ObsoleteAttributesNeedExplanation_CS() =>
        explanationNeededCS.AddPaths("ObsoleteAttributesNeedExplanation.cs").Verify();
 
-#if NET
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_CS_Latest() =>
         explanationNeededCS
@@ -57,8 +56,6 @@ public class ObsoleteAttributesTest
     public void ObsoleteAttributesNeedExplanation_VB14() =>
         explanationNeededVB.AddPaths("ObsoleteAttributesNeedExplanation.VB14.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
-#endif
-
     [TestMethod]
     public void ObsoleteAttributesNeedExplanation_VB() =>
         explanationNeededVB.AddPaths("ObsoleteAttributesNeedExplanation.vb").Verify();
@@ -67,14 +64,12 @@ public class ObsoleteAttributesTest
     public void RemoveObsoleteCode_CS() =>
         removeCS.AddPaths("RemoveObsoleteCode.cs").Verify();
 
-#if NET
     [TestMethod]
     public void RemoveObsoleteCode_Latest() =>
         removeCS.AddPaths("RemoveObsoleteCode.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-#endif
 
     [TestMethod]
     public void RemoveObsoleteCode_VB() =>

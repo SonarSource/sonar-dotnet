@@ -33,15 +33,10 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotOverwriteCollectionElements_VB() =>
             builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
-#if NET
-
         [TestMethod]
         public void DoNotOverwriteCollectionElements_CS_Latest() =>
             builderCS.AddPaths("DoNotOverwriteCollectionElements.Latest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

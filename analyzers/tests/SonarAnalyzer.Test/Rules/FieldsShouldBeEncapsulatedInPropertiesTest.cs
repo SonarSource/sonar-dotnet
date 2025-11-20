@@ -34,8 +34,6 @@ public class FieldsShouldBeEncapsulatedInPropertiesTest
             .WithConcurrentAnalysis(false)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void FieldsShouldBeEncapsulatedInProperties_CSharp9() =>
         builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp9.cs")
@@ -47,7 +45,4 @@ public class FieldsShouldBeEncapsulatedInPropertiesTest
         builder.AddPaths("FieldsShouldBeEncapsulatedInProperties.CSharp12.cs")
             .WithOptions(LanguageOptions.FromCSharp12)
             .Verify();
-
-#endif
-
 }

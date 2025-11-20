@@ -43,16 +43,12 @@ public class DoNotHardcodeCredentialsTest
     public void DoNotHardcodeCredentials_VB_SecureString() =>
         builderVB.AddPaths("DoNotHardcodeCredentials.SecureString.vb").Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_Latest() =>
         builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.Latest.cs")
             .AddReferences(AdditionalReferences)
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_CustomValues() =>

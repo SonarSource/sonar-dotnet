@@ -27,8 +27,6 @@ public class UnsafeCodeBlocksTest
     public void UnsafeCodeBlocks() =>
         builder.AddPaths("UnsafeCodeBlocks.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void UnsafeRecord() =>
         builder.AddSnippet("""
@@ -46,6 +44,4 @@ public class UnsafeCodeBlocksTest
             """)
             .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
-
-#endif
 }

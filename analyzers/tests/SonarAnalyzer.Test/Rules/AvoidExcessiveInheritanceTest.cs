@@ -32,8 +32,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void AvoidExcessiveInheritance_DefaultValues_Records() =>
             defaultBuilder.AddPaths(
@@ -49,8 +47,6 @@ namespace SonarAnalyzer.Test.Rules
             defaultBuilder.AddPaths("AvoidExcessiveInheritance_DefaultValues.FileScopedTypes.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesFullyNamedFilteredClass() =>
@@ -68,8 +64,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void AvoidExcessiveInheritance_CustomValuesWildcardFilteredRecord() =>
             new VerifierBuilder()
@@ -78,8 +72,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .WithAutogenerateConcurrentFiles(false)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void FilteredClasses_ByDefault_ShouldBeEmpty() =>

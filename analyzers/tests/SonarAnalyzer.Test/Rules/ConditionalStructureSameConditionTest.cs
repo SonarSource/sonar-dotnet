@@ -30,8 +30,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ConditionalStructureSameCondition_CS() =>
             builderCS.AddPaths("ConditionalStructureSameCondition.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ConditionalStructureSameCondition_CS_CSharp9() =>
             builderCS.AddPaths("ConditionalStructureSameCondition.CSharp9.cs")
@@ -58,12 +56,10 @@ namespace SonarAnalyzer.Test.Rules
                         if (b && condition)
                         //  ^^^^^^^^^^^^^^ Secondary
                         {
-
                         }
                         else if (b && condition) // Noncompliant {{This branch duplicates the one on line 8.}}
                         //       ^^^^^^^^^^^^^^
                         {
-
                         }
                     }
                 }
@@ -71,8 +67,6 @@ namespace SonarAnalyzer.Test.Rules
                 "SomeRazorFile.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
-
-#endif
 
         [TestMethod]
         public void ConditionalStructureSameCondition_VisualBasic() =>

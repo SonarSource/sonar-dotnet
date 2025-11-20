@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void PartialMethodNoImplementation() =>
             builder.AddPaths("PartialMethodNoImplementation.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void PartialMethodNoImplementation_CSharp9() =>
             builder.AddPaths("PartialMethodNoImplementation.CSharp9.Part1.cs", "PartialMethodNoImplementation.CSharp9.Part2.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -36,8 +34,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PartialMethodNoImplementation_CSharp10() =>
             builder.AddPaths("PartialMethodNoImplementation.CSharp10.Part1.cs", "PartialMethodNoImplementation.CSharp10.Part2.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-#endif
-
     }
 }

@@ -27,14 +27,9 @@ public class StaticFieldWrittenFromInstanceConstructorTest
     public void StaticFieldWrittenFromInstanceConstructor() =>
         builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void StaticFieldWrittenFromInstanceConstructor_Latest() =>
         builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

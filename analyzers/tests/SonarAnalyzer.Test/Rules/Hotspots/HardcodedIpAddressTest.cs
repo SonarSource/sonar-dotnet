@@ -29,15 +29,11 @@ public class HardcodedIpAddressTest
     public void HardcodedIpAddress_CS() =>
         builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void HardcodedIpAddress_CS_Latest() =>
         builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void HardcodedIpAddress_VB() =>

@@ -47,8 +47,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(GetAdditionalReferences())
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void RequestsWithExcessiveLength_CSharp_Latest() =>
             builderCS
@@ -84,8 +82,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithConcurrentAnalysis(false)
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void RequestsWithExcessiveLength_VB() =>
@@ -164,15 +160,11 @@ namespace SonarAnalyzer.Test.Rules
 
         private static string GetWebConfigPath(string rootFolder) => Path.Combine(rootFolder, "Web.config");
 
-#if NET
-
         private static IEnumerable<MetadataReference> OpenReadStreamReferences() =>
         [
             ..NuGetMetadataReference.MicrosoftAspNetCoreComponentsWeb(),
             ..MetadataReferenceFacade.SystemThreadingTasks,
             ..MetadataReferenceFacade.SystemCollections
         ];
-
-#endif
     }
 }

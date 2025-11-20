@@ -35,8 +35,6 @@ public class LinkedListPropertiesInsteadOfMethodsTest
             .WithCodeFixedPaths("LinkedListPropertiesInsteadOfMethods.Fixed.cs")
             .VerifyCodeFix();
 
-#if NET
-
     [TestMethod]
     [DataRow("First")]
     [DataRow("Last")]
@@ -57,8 +55,6 @@ public class LinkedListPropertiesInsteadOfMethodsTest
             data?.{{{name}}}().ToString();          // Noncompliant
 
             """).WithTopLevelStatements().Verify();
-
-#endif
 
     [TestMethod]
     public void LinkedListPropertiesInsteadOfMethods_VB() =>

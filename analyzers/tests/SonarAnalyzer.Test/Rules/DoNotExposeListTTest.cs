@@ -29,14 +29,12 @@ public class DoNotExposeListTTest
             .AddReferences(MetadataReferenceFacade.SystemXml)
             .Verify();
 
-#if NET
     [TestMethod]
     public void DoNotExposeListT_Latest() =>
         builder.AddPaths("DoNotExposeListT.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
-#endif
 
     [TestMethod]
     public void DoNotExposeListT_InvalidCode() =>

@@ -29,8 +29,6 @@ public class ImplementSerializationMethodsCorrectlyTest
     public void ImplementSerializationMethodsCorrectly_CS() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CSharp8() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp8.cs")
@@ -55,8 +53,6 @@ public class ImplementSerializationMethodsCorrectlyTest
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>

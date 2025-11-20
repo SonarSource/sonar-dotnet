@@ -45,8 +45,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddTestReference()
                 .VerifyNoIssues();
 
-#if NET
-
         [TestMethod]
         public void FieldShadowsParentField_CSharp9() =>
             builderCS.AddPaths("FieldShadowsParentField.CSharp9.cs")
@@ -58,8 +56,6 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("FieldsShouldNotDifferByCapitalization.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
 
         [TestMethod]
         [DataRow(ProjectType.Product)]

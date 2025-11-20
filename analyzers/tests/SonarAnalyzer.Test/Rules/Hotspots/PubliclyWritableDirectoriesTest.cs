@@ -29,15 +29,11 @@ public class PubliclyWritableDirectoriesTest
     public void PubliclyWritableDirectories_CS() =>
         builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void PubliclyWritableDirectories_CS_Latest() =>
         builderCS.AddPaths(@"Hotspots\PubliclyWritableDirectories.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void PubliclyWritableDirectories_VB() =>

@@ -28,8 +28,6 @@ public class VariableUnusedTest
     public void VariableUnused_CS() =>
         builderCS.AddPaths("VariableUnused.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void VariableUnused_CSharp9() =>
         builderCS.AddPaths("VariableUnused.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -45,8 +43,6 @@ public class VariableUnusedTest
     [TestMethod]
     public void VariableUnused_CSharp12() =>
         builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
-
-#endif
 
     [TestMethod]
     public void VariableUnused_VB() =>

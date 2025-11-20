@@ -27,15 +27,11 @@ namespace SonarAnalyzer.Test.Rules
         public void FinalizerShouldNotBeEmpty() =>
             builder.AddPaths("FinalizerShouldNotBeEmpty.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void FinalizerShouldNotBeEmpty_CSharp9() =>
             builder.AddPaths("FinalizerShouldNotBeEmpty.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void FinalizerShouldNotBeEmpty_InvalidCode() =>

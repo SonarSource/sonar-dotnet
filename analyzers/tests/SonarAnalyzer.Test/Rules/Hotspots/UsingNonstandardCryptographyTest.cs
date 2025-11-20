@@ -29,8 +29,6 @@ public class UsingNonstandardCryptographyTest
     public void UsingNonstandardCryptography_CS() =>
         builderCS.AddPaths("UsingNonstandardCryptography.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void UsingNonstandardCryptography_CSharp9() =>
         builderCS.AddPaths("UsingNonstandardCryptography.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -42,8 +40,6 @@ public class UsingNonstandardCryptographyTest
     [TestMethod]
     public void UsingNonstandardCryptography_CSharp12() =>
         builderCS.AddPaths("UsingNonstandardCryptography.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
 
     [TestMethod]
     public void UsingNonstandardCryptography_VB() =>

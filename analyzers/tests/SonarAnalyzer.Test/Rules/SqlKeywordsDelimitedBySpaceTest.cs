@@ -42,8 +42,6 @@ public class SqlKeywordsDelimitedBySpaceTest
             .AddTestReference()
             .VerifyNoIssues();
 
-#if NET
-
     [TestMethod]
     public void SqlKeywordsDelimitedBySpace_CSharp10_GlobalUsings() =>
         Builder.AddPaths("SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsing.cs", "SqlKeywordsDelimitedBySpace.CSharp10.GlobalUsingConsumer.cs")
@@ -64,8 +62,6 @@ public class SqlKeywordsDelimitedBySpaceTest
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithConcurrentAnalysis(false)
             .Verify();
-
-#endif
 
     [DataRow("System.Data")]
     [DataRow("System.Data.SqlClient")]

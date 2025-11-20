@@ -31,8 +31,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void RedundantArgument_CSharp9() =>
             builder.AddPaths("RedundantArgument.CSharp9.cs")
@@ -44,8 +42,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantArgument.CSharp12.cs")
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void RedundantArgument_CodeFix_No_Named_Arguments() =>

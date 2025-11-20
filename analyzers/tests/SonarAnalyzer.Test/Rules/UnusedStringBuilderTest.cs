@@ -33,8 +33,6 @@ public class UnusedStringBuilderTest
     public void UnusedStringBuilder_VB() =>
         builderVB.AddPaths("UnusedStringBuilder.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
-#if NET
-
     [TestMethod]
     public void UnusedStringBuilder_CSharp9() =>
         builderCS.AddPaths("UnusedStringBuilder.CSharp9.cs")
@@ -76,8 +74,6 @@ public class UnusedStringBuilderTest
         }
     }
 
-#endif
-
     [TestMethod]
     [DataRow("", false)]
     [DataRow("sb.ToString();", true)]
@@ -93,13 +89,9 @@ public class UnusedStringBuilderTest
     [DataRow("var a = sb.MaxCapacity;", false)]
     [DataRow("""var a = $"{sb} is ToStringed here";""", true)]
     [DataRow("var a = sb;", true)]
-
 #if NET
-
     [DataRow("sb.GetChunks();", true)]
-
 #endif
-
     public void UnusedStringBuilder_CSExpressionsTest(string expression, bool compliant)
     {
         var code = $$"""
@@ -143,13 +135,9 @@ public class UnusedStringBuilderTest
     [DataRow("Dim a = sb.TOSTRING()", true)]
     [DataRow("Dim a = sb.LENGTH", true)]
     [DataRow("Dim a = sb", true)]
-
 #if NET
-
     [DataRow("sb.GetChunks()", true)]
-
 #endif
-
     public void UnusedStringBuilder_VBExpressionsTest(string expression, bool compliant)
     {
         var code = $$"""

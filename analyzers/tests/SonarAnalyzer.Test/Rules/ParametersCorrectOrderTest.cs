@@ -29,8 +29,6 @@ public class ParametersCorrectOrderTest
     public void ParametersCorrectOrder_CSharp8() =>
         builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void ParametersCorrectOrder_CSharp11() =>
         builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
@@ -38,8 +36,6 @@ public class ParametersCorrectOrderTest
     [TestMethod]
     public void ParametersCorrectOrder_CSharp12() =>
         builderCS.AddPaths("ParametersCorrectOrder.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
 
     [TestMethod]
     public void ParametersCorrectOrder_InvalidCode_CS() =>

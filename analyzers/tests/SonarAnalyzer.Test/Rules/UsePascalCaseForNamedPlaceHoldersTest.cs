@@ -36,13 +36,9 @@ public class UsePascalCaseForNamedPlaceHoldersTest
     public void UsePascalCaseForNamedPlaceHolders_CS() =>
         Builder.AddPaths("UsePascalCaseForNamedPlaceHolders.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void UsePascalCaseForNamedPlaceHolders_Latest_CS() =>
         Builder.AddPaths("UsePascalCaseForNamedPlaceHolders.Latest.cs").WithLanguageVersion(LanguageVersion.Latest).Verify();
-
-#endif
 
     [TestMethod]
     [DataRow("LogCritical")]

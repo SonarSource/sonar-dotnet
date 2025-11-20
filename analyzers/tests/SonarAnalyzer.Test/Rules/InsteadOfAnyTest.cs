@@ -29,15 +29,12 @@ public class InsteadOfAnyTest
     public void InsteadOfAny_CS() =>
         builderCS.AddPaths("InsteadOfAny.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void InsteadOfAny_TopLevelStatements() =>
         builderCS.AddPaths("InsteadOfAny.CSharp9.cs")
                  .WithTopLevelStatements()
                  .AddReferences(MetadataReferenceFacade.SystemCollections)
                  .Verify();
-#endif
 
     [TestMethod]
     public void InsteadOfAny_EntityFramework() =>
@@ -49,7 +46,7 @@ public class InsteadOfAnyTest
 #if NETFRAMEWORK
 
     [TestMethod]
-    public void InsteadOfAny_EntityFramework_Framework() =>
+    public void InsteadOfAny_EntityFramework_NetFx() =>
         builderCS.AddPaths("InsteadOfAny.EntityFramework.Framework.cs")
                  .AddReferences(GetReferencesEntityFrameworkNetFramework())
                  .VerifyNoIssues();
@@ -75,5 +72,4 @@ public class InsteadOfAnyTest
     private static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetFramework() =>
         Enumerable.Empty<MetadataReference>()
         .Concat(NuGetMetadataReference.EntityFramework());
-
 }

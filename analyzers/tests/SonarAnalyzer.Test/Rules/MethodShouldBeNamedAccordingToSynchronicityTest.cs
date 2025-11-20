@@ -73,14 +73,10 @@ public class MethodShouldBeNamedAccordingToSynchronicityTest
     public void MethodShouldBeNamedAccordingToSynchronicity_CSharp8() =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
 
-#if NET
-
     [TestMethod]
     public void MethodShouldBeNamedAccordingToSynchronicity_CSharp11() =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetSignalRCore())
             .Verify();
-
-#endif
 }

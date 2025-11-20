@@ -28,15 +28,11 @@ public class StringConcatenationInLoopTest
     public void StringConcatenationInLoop_CS() =>
         builderCS.AddPaths("StringConcatenationInLoop.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void StringConcatenationInLoop_CS_Latest() =>
         builderCS.AddPaths("StringConcatenationInLoop.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void StringConcatenationInLoop_VB() =>

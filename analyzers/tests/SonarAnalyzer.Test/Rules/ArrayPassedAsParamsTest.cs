@@ -29,16 +29,12 @@ public class ArrayPassedAsParamsTest
     public void ArrayPassedAsParams_CS() =>
         builderCS.AddPaths("ArrayPassedAsParams.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ArrayPassedAsParams_CS_Latest() =>
         builderCS.AddPaths("ArrayPassedAsParams.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
-
-#endif
 
     [TestMethod]
     public void ArrayPassedAsParams_VB() =>

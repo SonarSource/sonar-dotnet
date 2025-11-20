@@ -28,7 +28,6 @@ public class PropertyWriteOnlyTest
     public void PropertyWriteOnly_CS() =>
         builderCS.AddPaths("PropertyWriteOnly.cs").Verify();
 
-#if NET
     [TestMethod]
     public void PropertyWriteOnly_CS_Latest() =>
         builderCS
@@ -36,7 +35,6 @@ public class PropertyWriteOnlyTest
             .AddPaths("PropertyWriteOnly.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-#endif
 
     [TestMethod]
     public void PropertyWriteOnly_VB() =>

@@ -57,11 +57,7 @@ namespace SonarAnalyzer.Test.Rules
         [DataRow("i", "&")]
         [DataRow("i", ">>")]
 
-#if NET
-
         [DataRow("i", ">>>")]
-
-#endif
 
         [DataRow("i", "<<")]
         [DataRow("i", "+")]
@@ -81,15 +77,9 @@ namespace SonarAnalyzer.Test.Rules
             }
             """)
 
-#if NET
-
             .WithOptions(LanguageOptions.FromCSharp11)
 
-#endif
-
             .Verify();
-
-#if NET
 
         [TestMethod]
         public void ExpressionComplexity_CSharp9() =>
@@ -110,8 +100,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithTopLevelStatements()
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void ExpressionComplexity_VB() =>

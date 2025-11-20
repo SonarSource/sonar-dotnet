@@ -28,7 +28,6 @@ public class NotAssignedPrivateMemberTest
     public void NotAssignedPrivateMember() =>
         builder.AddPaths("NotAssignedPrivateMember.cs").Verify();
 
-#if NET
     [TestMethod]
     public void NotAssignedPrivateMember_Latest() =>
         builder
@@ -40,7 +39,6 @@ public class NotAssignedPrivateMemberTest
     [TestMethod]
     public void NotAssignedPrivateMember_Razor() =>
         builder.AddPaths("NotAssignedPrivateMember.razor", "NotAssignedPrivateMember.razor.cs").VerifyNoIssues();
-#endif
 
     [TestMethod]
     public void NotAssignedPrivateMember_IndexingMovableFixedBuffer() =>

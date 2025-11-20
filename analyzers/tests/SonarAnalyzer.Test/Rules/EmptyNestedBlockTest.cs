@@ -30,15 +30,11 @@ public class EmptyNestedBlockTest
             .WithAutogenerateConcurrentFiles(false)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void EmptyNestedBlock_CS_Latest() =>
         builderCS.AddPaths("EmptyNestedBlock.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void EmptyNestedBlock_VB() =>

@@ -215,8 +215,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("CheckFileLicense_DefaultValues.Fixed.cs")
                 .VerifyCodeFix();
 
-#if NET
-
         [TestMethod]
         public void CheckFileLicenseCodeFix_CSharp9_ShouldBeNoncompliant_CS() =>
             new VerifierBuilder<CS.CheckFileLicense>()
@@ -225,8 +223,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("CheckFileLicense_CSharp9.Fixed.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyCodeFix();
-
-#endif
 
         [TestMethod]
         public void CheckFileLicenseCodeFix_WhenNoLicenseStartingWithUsing_ShouldBeFixedAsExpected_CS() =>

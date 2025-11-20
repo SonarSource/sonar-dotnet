@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void OperatorOverloadsShouldHaveNamedAlternatives() =>
             builder.AddPaths("OperatorOverloadsShouldHaveNamedAlternatives.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void OperatorOverloadsShouldHaveNamedAlternatives_CSharp9() =>
             builder.AddPaths("OperatorOverloadsShouldHaveNamedAlternatives.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -36,8 +34,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void OperatorOverloadsShouldHaveNamedAlternatives_CSharp11() =>
             builder.AddPaths("OperatorOverloadsShouldHaveNamedAlternatives.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }

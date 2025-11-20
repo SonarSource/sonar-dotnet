@@ -31,8 +31,6 @@ namespace SonarAnalyzer.Test.Rules
         public void UnusedReturnValueWithPartialClasses() =>
             builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
         [TestMethod]
         public void UnusedReturnValue_CSharp9() =>
             builder.AddPaths("UnusedReturnValue.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -44,8 +42,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void UnusedReturnValue_CSharp11() =>
             builder.AddPaths("UnusedReturnValue.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }

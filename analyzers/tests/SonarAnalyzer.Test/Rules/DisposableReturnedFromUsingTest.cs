@@ -34,14 +34,9 @@ public class DisposableReturnedFromUsingTest
             .WithTopLevelStatements()
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void DisposableReturnedFromUsing_Latest() =>
         builder.AddPaths("DisposableReturnedFromUsing.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

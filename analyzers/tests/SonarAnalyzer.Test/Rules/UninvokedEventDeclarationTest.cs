@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("UninvokedEventDeclaration.cs")
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void UninvokedEventDeclaration_CSharp9() =>
             builder.AddPaths("UninvokedEventDeclaration.CSharp9.cs")
@@ -41,8 +39,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("UninvokedEventDeclaration.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

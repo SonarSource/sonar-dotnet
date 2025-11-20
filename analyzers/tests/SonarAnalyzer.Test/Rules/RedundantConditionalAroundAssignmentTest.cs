@@ -28,8 +28,6 @@ public class RedundantConditionalAroundAssignmentTest
     public void RedundantConditionalAroundAssignment() =>
         builder.AddPaths("RedundantConditionalAroundAssignment.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void RedundantConditionalAroundAssignment_CSharp9() =>
         builder.AddPaths("RedundantConditionalAroundAssignment.CSharp9.cs")
@@ -63,8 +61,6 @@ public class RedundantConditionalAroundAssignmentTest
          builder.AddPaths("RedundantConditionalAroundAssignment.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .VerifyNoIssues();
-
-#endif
 
     [TestMethod]
     public void RedundantConditionalAroundAssignment_CodeFix() =>

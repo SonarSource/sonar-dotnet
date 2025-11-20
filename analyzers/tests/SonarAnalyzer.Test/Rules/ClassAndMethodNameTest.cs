@@ -36,8 +36,6 @@ public class ClassAndMethodNameTest
     public void ClassAndMethodName_InTestProject_CS() =>
         builderCS.AddPaths("ClassAndMethodName.Tests.cs").AddTestReference().WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
     [TestMethod]
     public void ClassAndMethodName_TopLevelStatement_CS() =>
         builderCS.AddPaths("ClassAndMethodName.TopLevelStatement.cs").WithTopLevelStatements().Verify();
@@ -53,8 +51,6 @@ public class ClassAndMethodNameTest
     [TestMethod]
     public void ClassAndMethodName_MethodName_InTestProject_CS_Latest() =>
         builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs", "ClassAndMethodName.MethodName.Latest.Partial.cs").AddTestReference().WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
 
     [TestMethod]
     [DataRow(ProjectType.Product)]

@@ -32,7 +32,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(MetadataReferenceFacade.NetStandard21)
                 .Verify();
 
-#if NET
         [TestMethod]
         public void ParameterNameMatchesOriginal_CS_Latest() =>
             builderCS
@@ -40,7 +39,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddPaths("ParameterNameMatchesOriginal.Latest.Partial.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-#endif
 
         [TestMethod]
         public void ParameterNameMatchesOriginal_VB() =>

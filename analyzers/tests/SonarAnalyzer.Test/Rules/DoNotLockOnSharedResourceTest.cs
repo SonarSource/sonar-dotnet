@@ -33,15 +33,10 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotLockOnSharedResource_VB() =>
             builderVB.AddPaths("DoNotLockOnSharedResource.vb").Verify();
 
-#if NET
-
         [TestMethod]
         public void DoNotLockOnSharedResource_CS_Latest() =>
             builderCS.AddPaths("DoNotLockOnSharedResource.Latest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

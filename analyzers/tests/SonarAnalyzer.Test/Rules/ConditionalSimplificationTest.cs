@@ -54,8 +54,6 @@ public class ConditionalSimplificationTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .VerifyCodeFix();
 
-#if NET
-
     [TestMethod]
     public void ConditionalSimplification_FromCSharp9() =>
         builder.AddPaths("ConditionalSimplification.FromCSharp9.cs").WithTopLevelStatements().Verify();
@@ -91,6 +89,4 @@ public class ConditionalSimplificationTest
             .AddReferences(MetadataReferenceFacade.SystemXml)
             .AddReferences(MetadataReferenceFacade.SystemXmlLinq)
             .VerifyCodeFix();
-
-#endif
 }

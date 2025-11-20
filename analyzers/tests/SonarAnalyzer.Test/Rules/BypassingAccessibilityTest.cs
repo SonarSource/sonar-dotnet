@@ -29,13 +29,9 @@ namespace SonarAnalyzer.Test.Rules
         public void BypassingAccessibility_CS() =>
             builderCS.AddPaths("BypassingAccessibility.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void BypassingAccessibility_CSharp_Latest() =>
             builderCS.AddPaths("BypassingAccessibility.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
 
         [TestMethod]
         public void BypassingAccessibility_VB() =>

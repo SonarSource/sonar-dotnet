@@ -31,13 +31,9 @@ namespace SonarAnalyzer.Test.Rules
         public void NumberPatternShouldBeRegular_FromCSharp7() =>
             builder.AddPaths("NumberPatternShouldBeRegular.cs").WithOptions(LanguageOptions.FromCSharp7).Verify();
 
-#if NET
-
         [TestMethod]
         public void NumberPatternShouldBeRegular_FromCSharp9() =>
             builder.AddPaths("NumberPatternShouldBeRegular.CSharp9.cs").WithTopLevelStatements().Verify();
-
-#endif
 
         [TestMethod]
         [DataRow("1_1_1", "Group size of 1")]

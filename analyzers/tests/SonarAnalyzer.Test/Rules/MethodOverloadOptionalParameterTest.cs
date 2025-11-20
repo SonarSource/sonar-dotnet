@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MethodOverloadOptionalParameter() =>
             builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NetStandard21).WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
         [TestMethod]
         public void MethodOverloadOptionalParameter_CSharp9() =>
             builder.AddPaths("MethodOverloadOptionalParameter.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -61,8 +59,5 @@ namespace SonarAnalyzer.Test.Rules
                        "SomeRazorFile.razor")
                    .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                    .Verify();
-
-#endif
-
     }
 }

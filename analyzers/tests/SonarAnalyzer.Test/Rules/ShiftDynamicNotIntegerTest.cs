@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ShiftDynamicNotInteger_CS() =>
             builderCS.AddPaths("ShiftDynamicNotInteger.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ShiftDynamicNotInteger_CSharp9() =>
             builderCS.AddPaths("ShiftDynamicNotInteger.CSharp9.cs")
@@ -41,8 +39,6 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("ShiftDynamicNotInteger.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void ShiftDynamicNotInteger_VB() =>

@@ -27,13 +27,9 @@ namespace SonarAnalyzer.Test.Rules
         public void FieldShouldBeReadonly() =>
             builder.AddPaths("FieldShouldBeReadonly.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
         [TestMethod]
         public void FieldShouldBeReadonly_Latest() =>
             builder.AddPaths("FieldShouldBeReadonly.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
 
         [TestMethod]
         public void FieldShouldBeReadonly_CodeFix() =>

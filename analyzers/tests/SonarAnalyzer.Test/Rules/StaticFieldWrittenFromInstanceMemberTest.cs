@@ -60,16 +60,12 @@ public class Bar
         result.Single().GetMessage().Should().StartWith("Make the enclosing instance method 'static' or remove this set on the 'static' field.");
     }
 
-#if NET
-
     [TestMethod]
     public void StaticFieldWrittenFromInstanceMember_Latest() =>
         builder.AddPaths(@"StaticFieldWrittenFromInstanceMember.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     private static CSharpCompilation CreateCompilation(SyntaxTree tree, string name) =>
         CSharpCompilation

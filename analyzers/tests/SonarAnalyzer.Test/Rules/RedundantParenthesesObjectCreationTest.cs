@@ -28,7 +28,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantParenthesesObjectCreation.cs")
                 .Verify();
 
-#if NET
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CSharp9() =>
             builder.AddPaths("RedundantParenthesesObjectCreation.CSharp9.cs")
@@ -47,7 +46,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantParenthesesObjectCreation.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-#endif
 
         [TestMethod]
         public void RedundantParenthesesObjectCreation_CodeFix() =>

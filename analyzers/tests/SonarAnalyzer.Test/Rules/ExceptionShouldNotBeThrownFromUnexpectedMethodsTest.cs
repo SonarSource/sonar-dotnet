@@ -29,8 +29,6 @@ public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
         builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs")
@@ -42,7 +40,4 @@ public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
         builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
-
-#endif
-
 }

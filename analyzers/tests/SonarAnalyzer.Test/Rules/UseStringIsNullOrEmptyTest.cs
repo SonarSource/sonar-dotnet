@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void UseStringNullOrEmpty() =>
             builder.AddPaths("UseStringIsNullOrEmpty.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void UseStringNullOrEmpty_CSharp10() =>
             builder.AddPaths("UseStringIsNullOrEmpty.CSharp10.cs")
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("UseStringIsNullOrEmpty.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

@@ -36,8 +36,6 @@ public class RedundantDeclarationTest
             .WithOptions(LanguageOptions.BeforeCSharp9)
             .VerifyNoIssues();
 
-#if NET
-
     [TestMethod]
     public void RedundantDeclaration_CSharp9() =>
         builder.AddPaths("RedundantDeclaration.CSharp9.cs")
@@ -90,8 +88,6 @@ public class RedundantDeclarationTest
             .WithCodeFixedPaths("RedundantDeclaration.CSharp12.LambdaParameterType.Fixed.cs")
             .WithOptions(LanguageOptions.FromCSharp12)
             .VerifyCodeFix();
-
-#endif
 
     [TestMethod]
     public void RedundantDeclaration_CodeFix_ArraySize() =>

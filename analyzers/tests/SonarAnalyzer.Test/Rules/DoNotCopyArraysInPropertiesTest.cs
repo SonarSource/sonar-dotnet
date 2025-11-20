@@ -27,14 +27,9 @@ public class DoNotCopyArraysInPropertiesTest
     public void DoNotCopyArraysInProperties() =>
         builder.AddPaths("DoNotCopyArraysInProperties.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotCopyArraysInProperties_CS_Latest() =>
         builder.AddPaths("DoNotCopyArraysInProperties.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

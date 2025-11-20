@@ -29,13 +29,9 @@ public class UseTrueForAllTest
     public void UseTrueForAll_CS() =>
         builderCS.AddPaths("UseTrueForAll.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void UseTrueForAll_CS_Immutable() =>
         builderCS.AddPaths("UseTrueForAll.Immutable.cs").AddReferences(MetadataReferenceFacade.SystemCollections).Verify();
-
-#endif
 
     [TestMethod]
     public void UseTrueForAll_VB() =>

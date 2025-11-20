@@ -27,14 +27,9 @@ public class ThreadStaticWithInitializerTest
     public void ThreadStaticWithInitializer() =>
         builder.AddPaths("ThreadStaticWithInitializer.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ThreadStaticWithInitializer_Latest() =>
         builder.AddPaths("ThreadStaticWithInitializer.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

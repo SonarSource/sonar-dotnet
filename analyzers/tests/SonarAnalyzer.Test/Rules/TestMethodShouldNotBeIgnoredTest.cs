@@ -83,8 +83,6 @@ public class TestMethodShouldNotBeIgnoredTest
     public void TestMethodShouldNotBeIgnored_Xunit_v1() =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.v1.cs").AddReferences(NuGetMetadataReference.XunitFrameworkV1).VerifyNoIssues();
 
-#if NET
-
     [TestMethod]
     public void TestMethodShouldNotBeIgnored_CSharp9() =>
         builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp9.cs")
@@ -99,7 +97,4 @@ public class TestMethodShouldNotBeIgnoredTest
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
-
-#endif
-
 }

@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions())
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>
             builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs")
@@ -42,8 +40,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

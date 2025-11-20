@@ -31,8 +31,6 @@ namespace SonarAnalyzer.Test.Rules
         public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
             builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs").WithConcurrentAnalysis(false).Verify();
 
-#if NET
-
         [TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharp10() =>
             builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(LanguageOptions.FromCSharp10).Verify();
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharp11() =>
             builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.CSharp11.cs").WithConcurrentAnalysis(false).WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }

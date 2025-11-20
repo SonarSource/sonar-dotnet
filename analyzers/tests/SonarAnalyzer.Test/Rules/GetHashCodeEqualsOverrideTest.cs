@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void GetHashCodeEqualsOverride() =>
             builder.AddPaths("GetHashCodeEqualsOverride.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void GetHashCodeEqualsOverride_CSharp9() =>
             builder.AddPaths("GetHashCodeEqualsOverride.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .VerifyNoIssues();
-
-#endif
-
     }
 }

@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void StaticFieldVisible() =>
             builder.AddPaths("StaticFieldVisible.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void StaticFieldVisible_CSharp9() =>
             builder.AddPaths("StaticFieldVisible.CSharp9.cs")
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("StaticFieldVisible.CSharp10.cs")
                 .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
-
-#endif
-
     }
 }

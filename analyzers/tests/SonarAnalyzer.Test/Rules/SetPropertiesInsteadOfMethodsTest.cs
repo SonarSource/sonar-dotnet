@@ -28,8 +28,6 @@ public class SetPropertiesInsteadOfMethodsTest
     public void SetPropertiesInsteadOfMethods_CS() =>
         builderCS.AddPaths("SetPropertiesInsteadOfMethods.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void SetPropertiesInsteadOfMethods_CS_Latest() =>
         builderCS.AddPaths("SetPropertiesInsteadOfMethods.Latest.cs")
@@ -37,8 +35,6 @@ public class SetPropertiesInsteadOfMethodsTest
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void SetPropertiesInsteadOfMethods_VB() =>

@@ -29,8 +29,6 @@ public class UseUriInsteadOfStringTest
     public void UseUriInsteadOfString(ProjectType projectType) =>
         builder.AddPaths("UseUriInsteadOfString.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
-#if NET
-
     [TestMethod]
     public void UseUriInsteadOfString_TopLevelStatements() =>
         builder.AddPaths("UseUriInsteadOfString.TopLevelStatements.cs")
@@ -42,8 +40,6 @@ public class UseUriInsteadOfStringTest
         builder.AddPaths("UseUriInsteadOfString.Latest.cs", "UseUriInsteadOfString.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void UseUriInsteadOfString_InvalidCode() =>

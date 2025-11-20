@@ -27,15 +27,11 @@ namespace SonarAnalyzer.Test.Rules
         public void SwitchCaseFallsThroughToDefault() =>
             builder.AddPaths("SwitchCaseFallsThroughToDefault.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault_CSharp9() =>
             builder.AddPaths("SwitchCaseFallsThroughToDefault.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void SwitchCaseFallsThroughToDefault_CodeFix() =>

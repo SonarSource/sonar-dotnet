@@ -30,7 +30,6 @@ public class MethodsShouldNotHaveTooManyLinesTest
     public void MethodsShouldNotHaveTooManyLines_CustomValues_CS() =>
         CreateCSBuilder(2).AddPaths("MethodsShouldNotHaveTooManyLines_CustomValues.cs").Verify();
 
-#if NET
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_LocalFunctions() =>
         CreateCSBuilder(5).AddPaths("MethodsShouldNotHaveTooManyLines.LocalFunctions.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
@@ -75,7 +74,6 @@ i++;
             .WithOptions(LanguageOptions.FromCSharp9)
             .WithOutputKind(OutputKind.ConsoleApplication)
             .VerifyNoIssues();
-#endif
 
     [TestMethod]
     public void MethodsShouldNotHaveTooManyLines_DoesntReportInTest_CS() =>

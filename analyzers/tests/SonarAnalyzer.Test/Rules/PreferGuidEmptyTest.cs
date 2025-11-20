@@ -29,11 +29,9 @@ namespace SonarAnalyzer.Test.Rules
         public void PreferGuidEmpty_CS() =>
             builderCS.AddPaths("PreferGuidEmpty.cs").Verify();
 
-#if NET
         [TestMethod]
         public void PreferGuidEmpty_CSharp9() =>
             builderCS.WithOptions(LanguageOptions.FromCSharp9).AddPaths("PreferGuidEmpty.CSharp9.cs").Verify();
-#endif
 
         [TestMethod]
         public void PreferGuidEmpty_VB() =>

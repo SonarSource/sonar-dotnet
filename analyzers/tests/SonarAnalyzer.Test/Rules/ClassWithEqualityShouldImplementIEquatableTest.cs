@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void ClassWithEqualityShouldImplementIEquatable() =>
             builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ClassWithEqualityShouldImplementIEquatable_CSharp9() =>
             builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
-
     }
 }

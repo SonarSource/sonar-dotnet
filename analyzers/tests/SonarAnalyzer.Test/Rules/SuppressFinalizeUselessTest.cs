@@ -27,15 +27,11 @@ namespace SonarAnalyzer.Test.Rules
         public void SuppressFinalizeUseless() =>
             builder.AddPaths("SuppressFinalizeUseless.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void SuppressFinalizeUseless_CSharp9() =>
             builder.AddPaths("SuppressFinalizeUseless.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void SuppressFinalizeUseless_CodeFix() =>

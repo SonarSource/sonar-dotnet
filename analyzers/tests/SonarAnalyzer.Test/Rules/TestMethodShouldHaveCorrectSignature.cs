@@ -73,8 +73,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void TestMethodShouldHaveCorrectSignature_CSharp9() =>
             builder.AddPaths("TestMethodShouldHaveCorrectSignature.CSharp9.cs")
@@ -91,8 +89,5 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

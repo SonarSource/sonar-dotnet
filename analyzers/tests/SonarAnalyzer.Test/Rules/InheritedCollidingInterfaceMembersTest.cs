@@ -41,12 +41,9 @@ public class InheritedCollidingInterfaceMembersTest
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .Verify();
 
-#if NET
         [TestMethod]
         public void InheritedCollidingInterfaceMembers_CSharp11() =>
             builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
 }

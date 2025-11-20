@@ -34,15 +34,11 @@ public class CommandPathTest
     public void CommandPath_CS() =>
         builderCS.AddPaths("CommandPath.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void CommandPath_CS_Latest() =>
         builderCS.AddPaths("CommandPath.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void CommandPath_VB() =>

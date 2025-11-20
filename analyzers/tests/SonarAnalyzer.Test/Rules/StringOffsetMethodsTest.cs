@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void StringOffsetMethods() =>
             builder.AddPaths("StringOffsetMethods.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void StringOffsetMethods_CSharp11() =>
             builder.AddPaths("StringOffsetMethods.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

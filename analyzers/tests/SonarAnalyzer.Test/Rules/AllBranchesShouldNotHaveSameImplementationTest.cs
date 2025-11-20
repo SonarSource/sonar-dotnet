@@ -30,15 +30,11 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_CSharp9() =>
             builderCS.AddPaths("AllBranchesShouldNotHaveSameImplementation.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void AllBranchesShouldNotHaveSameImplementation_VB() =>

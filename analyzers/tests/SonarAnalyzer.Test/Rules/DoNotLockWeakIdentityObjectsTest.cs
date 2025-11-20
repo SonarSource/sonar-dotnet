@@ -28,15 +28,11 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotLockWeakIdentityObjects_CS() =>
             builder.AddPaths("DoNotLockWeakIdentityObjects.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_Latest() =>
             builder.AddPaths("DoNotLockWeakIdentityObjects.Latest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void DoNotLockWeakIdentityObjects_VB() =>

@@ -30,8 +30,6 @@ namespace SonarAnalyzer.Test.Rules
         public void SingleStatementPerLine_CS() =>
             builderCS.AddPaths("SingleStatementPerLine.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void SingleStatementPerLine_CSharp9() =>
             builderCS.AddPaths("SingleStatementPerLine.CSharp9.cs")
@@ -54,8 +52,6 @@ namespace SonarAnalyzer.Test.Rules
 "SomeRazorFile.razor")
                 .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void SingleStatementPerLine_VB() =>

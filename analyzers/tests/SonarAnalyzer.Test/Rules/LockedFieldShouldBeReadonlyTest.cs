@@ -27,14 +27,10 @@ public class LockedFieldShouldBeReadonlyTest
     public void LockedFieldShouldBeReadonly_CS() =>
         builder.AddPaths("LockedFieldShouldBeReadonly.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void LockedFieldShouldBeReadonly_Latest() =>
         builder
             .AddPaths("LockedFieldShouldBeReadonly.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 }

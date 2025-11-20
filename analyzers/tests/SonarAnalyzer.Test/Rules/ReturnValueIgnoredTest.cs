@@ -27,8 +27,6 @@ public class ReturnValueIgnoredTest
     public void ReturnValueIgnored() =>
         builder.AddPaths("ReturnValueIgnored.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ReturnValueIgnored_Latest() =>
         builder.AddPaths("ReturnValueIgnored.Latest.cs")
@@ -36,7 +34,4 @@ public class ReturnValueIgnoredTest
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithTopLevelStatements()
             .Verify();
-
-#endif
-
 }

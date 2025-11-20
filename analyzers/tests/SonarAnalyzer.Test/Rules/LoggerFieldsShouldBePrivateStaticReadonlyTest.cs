@@ -30,7 +30,6 @@ public class LoggerFieldsShouldBePrivateStaticReadonlyTest
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
 
-#if NET
     [TestMethod]
     public void LoggerFieldsShouldBePrivateStaticReadonly_CSharp8() =>
         Builder
@@ -53,7 +52,6 @@ public class LoggerFieldsShouldBePrivateStaticReadonlyTest
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
-#endif
 
     [TestMethod]
     public void LoggerFieldsShouldBePrivateStaticReadonly_Serilog_CS() =>

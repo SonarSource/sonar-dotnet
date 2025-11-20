@@ -27,15 +27,11 @@ namespace SonarAnalyzer.Test.Rules
         public void UseValueParameter() =>
             builder.AddPaths("UseValueParameter.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void UseValueParameter_CS_Latest() =>
             builder.AddPaths("UseValueParameter.Latest.cs", "UseValueParameter.Latest.Partial.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void UseValueParameter_InvalidCode() =>

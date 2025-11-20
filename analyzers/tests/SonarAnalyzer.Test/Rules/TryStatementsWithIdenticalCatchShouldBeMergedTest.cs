@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
         public void TryStatementsWithIdenticalCatchShouldBeMerged() =>
             builder.AddPaths("TryStatementsWithIdenticalCatchShouldBeMerged.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void TryStatementsWithIdenticalCatchShouldBeMerged_RazorFile_CorrectMessage() =>
             builder.AddSnippet(
@@ -57,6 +55,5 @@ namespace SonarAnalyzer.Test.Rules
                 "SomeRazorFile.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
-#endif
     }
 }

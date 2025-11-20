@@ -39,15 +39,10 @@ public class DeadStoresTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void DeadStores_CS_Latest() =>
         roslynCfg.AddPaths("DeadStores.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

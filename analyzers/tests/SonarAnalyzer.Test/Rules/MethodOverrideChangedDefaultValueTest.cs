@@ -30,8 +30,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CSharp9() =>
             builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp9.cs")
@@ -51,8 +49,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.CSharp11.Fixed.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .VerifyCodeFix();
-
-#endif
 
         [TestMethod]
         public void MethodOverrideChangedDefaultValue_CodeFix_Synchronize() =>

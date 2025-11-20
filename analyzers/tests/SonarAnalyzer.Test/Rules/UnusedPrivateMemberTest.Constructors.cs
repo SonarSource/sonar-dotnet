@@ -158,8 +158,6 @@ public class Some
 }
 """).Verify();
 
-#if NET
-
     [TestMethod]
     public void UnusedPrivateMember_RecordPositionalConstructor() =>
         builder.AddSnippet("""
@@ -184,7 +182,4 @@ public abstract record Foo
 {
     public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0246, CS1729] no suitable method found to override
 }").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-#endif
-
 }

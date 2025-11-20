@@ -29,8 +29,6 @@ public class DoNotHideBaseClassMethodsTest
             .WithAutogenerateConcurrentFiles(false)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotHideBaseClassMethods_CSharp9() =>
         builder.AddPaths("DoNotHideBaseClassMethods.CSharp9.cs")
@@ -43,7 +41,4 @@ public class DoNotHideBaseClassMethodsTest
         builder.AddPaths("DoNotHideBaseClassMethods.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .VerifyNoIssues();
-
-#endif
-
 }

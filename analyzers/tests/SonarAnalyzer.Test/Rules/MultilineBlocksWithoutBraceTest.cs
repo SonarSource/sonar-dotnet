@@ -27,12 +27,10 @@ public class MultilineBlocksWithoutBraceTest
     public void MultilineBlocksWithoutBrace() =>
         Builder.AddPaths("MultilineBlocksWithoutBrace.cs").Verify();
 
-#if NET
     [TestMethod]
     public void MultilineBlocksWithoutBrace_Latest() =>
         Builder
             .AddPaths("MultilineBlocksWithoutBrace.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-#endif
 }

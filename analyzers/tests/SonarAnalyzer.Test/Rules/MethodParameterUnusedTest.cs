@@ -64,16 +64,12 @@ public class Sample
     public void MethodParameterUnused_VB() =>
         new VerifierBuilder<VB.MethodParameterUnused>().AddPaths("MethodParameterUnused.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
-#if NET
-
     [TestMethod]
     public void MethodParameterUnused_CS_RoslynCfg_Latest() =>
         roslynCS
             .AddPaths("MethodParameterUnused.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     // https://github.com/SonarSource/sonar-dotnet/issues/8988

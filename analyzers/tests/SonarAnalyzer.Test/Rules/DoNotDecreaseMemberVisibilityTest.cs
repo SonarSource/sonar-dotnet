@@ -30,14 +30,9 @@ public class DoNotDecreaseMemberVisibilityTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotDecreaseMemberVisibility_CS_Latest() =>
         builder.AddPaths("DoNotDecreaseMemberVisibility.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

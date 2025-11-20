@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void CheckArgumentException() =>
             builder.AddPaths("CheckArgumentException.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void CheckArgumentException_TopLevelStatements() =>
             builder.AddPaths("CheckArgumentException.TopLevelStatements.cs").WithTopLevelStatements().Verify();
@@ -44,8 +42,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void CheckArgumentException_CSharp12() =>
             builder.AddPaths("CheckArgumentException.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-#endif
-
     }
 }

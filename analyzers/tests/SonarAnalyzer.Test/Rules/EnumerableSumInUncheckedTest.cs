@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void EnumerableSumInUnchecked() =>
             builder.AddPaths("EnumerableSumInUnchecked.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void EnumerableSumInUnchecked_CSharp9() =>
             builder.AddPaths("EnumerableSumInUnchecked.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).WithTopLevelStatements().Verify();
@@ -36,8 +34,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void EnumerableSumInUnchecked_CSharp11() =>
             builder.AddPaths("EnumerableSumInUnchecked.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).WithTopLevelStatements().Verify();
-
-#endif
-
     }
 }

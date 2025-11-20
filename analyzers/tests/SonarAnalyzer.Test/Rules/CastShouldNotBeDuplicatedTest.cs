@@ -29,8 +29,6 @@ public class CastShouldNotBeDuplicatedTest
     public void CastShouldNotBeDuplicated() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void CastShouldNotBeDuplicated_CSharp9() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.CSharp9.cs")
@@ -54,6 +52,8 @@ public class CastShouldNotBeDuplicatedTest
         Builder.AddPaths("CastShouldNotBeDuplicated.CSharp12.cs")
             .WithOptions(LanguageOptions.FromCSharp12)
             .Verify();
+
+#if NET
 
     [TestMethod]
     public void CastShouldNotBeDuplicated_MvcView() =>

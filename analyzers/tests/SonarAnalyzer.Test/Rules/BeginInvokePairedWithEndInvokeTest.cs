@@ -29,8 +29,6 @@ namespace SonarAnalyzer.Test.Rules
         public void BeginInvokePairedWithEndInvoke_CS() =>
             builderCS.AddPaths("BeginInvokePairedWithEndInvoke.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_CSharp9() =>
             builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp9.Part1.cs", "BeginInvokePairedWithEndInvoke.CSharp9.Part2.cs")
@@ -48,8 +46,6 @@ namespace SonarAnalyzer.Test.Rules
             builderCS.AddPaths("BeginInvokePairedWithEndInvoke.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void BeginInvokePairedWithEndInvoke_VB() =>

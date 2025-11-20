@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
         public void EmptyStatement() =>
             builder.AddPaths("EmptyStatement.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void EmptyStatement_CS_TopLevelStatements() =>
             builder.AddPaths("EmptyStatement.TopLevelStatements.cs")
@@ -42,15 +40,11 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
 
-#endif
-
         [TestMethod]
         public void EmptyStatement_CodeFix() =>
             codeFix.AddPaths("EmptyStatement.cs")
                 .WithCodeFixedPaths("EmptyStatement.Fixed.cs")
                 .VerifyCodeFix();
-
-#if NET
 
         [TestMethod]
         public void EmptyStatement_CodeFix_CS_TopLevelStatements() =>
@@ -58,8 +52,5 @@ namespace SonarAnalyzer.Test.Rules
                 .WithTopLevelStatements()
                 .WithCodeFixedPaths("EmptyStatement.TopLevelStatements.Fixed.cs")
                 .VerifyCodeFix();
-
-#endif
-
     }
 }

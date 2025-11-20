@@ -38,8 +38,6 @@ public class InvalidCastToInterfaceTest
     public void InvalidCastToInterface_VB() =>
         builderVB.AddPaths("InvalidCastToInterface.vb").Verify();
 
-#if NET
-
     [TestMethod]
     public void InvalidCastToInterface_CSharp9() =>
         builderCS.AddPaths("InvalidCastToInterface.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -47,6 +45,4 @@ public class InvalidCastToInterfaceTest
     [TestMethod]
     public void InvalidCastToInterface_CSharp10() =>
         builderCS.AddPaths("InvalidCastToInterface.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-#endif
 }

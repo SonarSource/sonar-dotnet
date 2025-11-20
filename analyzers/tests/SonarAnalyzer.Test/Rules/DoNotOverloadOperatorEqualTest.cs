@@ -27,8 +27,6 @@ public class DoNotOverloadOperatorEqualTest
     public void DoNotOverloadOperatorEqual() =>
         builder.AddPaths("DoNotOverloadOperatorEqual.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotOverloadOperatorEqual_CSharp9() =>
         builder.AddPaths("DoNotOverloadOperatorEqual.CSharp9.cs")
@@ -40,7 +38,4 @@ public class DoNotOverloadOperatorEqualTest
         builder.AddPaths("DoNotOverloadOperatorEqual.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .VerifyNoIssues();
-
-#endif
-
 }

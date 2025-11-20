@@ -27,15 +27,10 @@ public class DebugAssertHasNoSideEffectsTest
     public void DebugAssertHasNoSideEffects() =>
         builder.AddPaths("DebugAssertHasNoSideEffects.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void DebugAssertHasNoSideEffects_Latest() =>
         builder.AddPaths("DebugAssertHasNoSideEffects.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
-
-#endif
-
 }

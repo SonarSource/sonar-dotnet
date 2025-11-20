@@ -37,8 +37,6 @@ namespace SonarAnalyzer.Test.Rules
         public void DisposeFromDispose_CSharp8() =>
             builder.AddPaths("DisposeFromDispose.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
-
         [TestMethod]
         public void DisposeFromDispose_CSharp9() =>
             builder.AddPaths("DisposeFromDispose.CSharp9.Part1.cs", "DisposeFromDispose.CSharp9.Part2.cs").WithTopLevelStatements().Verify();
@@ -49,8 +47,5 @@ namespace SonarAnalyzer.Test.Rules
                 .WithTopLevelStatements()
                 .WithOptions(LanguageOptions.FromCSharp10)
                 .Verify();
-
-#endif
-
     }
 }

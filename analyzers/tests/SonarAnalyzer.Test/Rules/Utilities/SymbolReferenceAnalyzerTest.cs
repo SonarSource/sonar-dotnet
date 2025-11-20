@@ -288,8 +288,6 @@ public class SymbolReferenceAnalyzerTest
         }
     }
 
-#if NET
-
     [TestMethod]
     public void Verify_Razor() =>
         CreateBuilder(ProjectType.Product, "Razor.razor", "Razor.razor.cs", "RazorComponent.razor", "ToDo.cs", "Razor.cshtml")
@@ -375,8 +373,6 @@ public class SymbolReferenceAnalyzerTest
                     new TextRange { StartLine = 23, EndLine = 23, StartOffset = 27, EndOffset = 28 } // lambda default parameter
                 ]);
         });
-
-#endif
 
     private void Verify(string fileName, ProjectType projectType, int expectedDeclarationCount, int assertedDeclarationLine, params int[] assertedDeclarationLineReferences) =>
         Verify(fileName, projectType, x => VerifyReferences(x, expectedDeclarationCount, assertedDeclarationLine, assertedDeclarationLineReferences));

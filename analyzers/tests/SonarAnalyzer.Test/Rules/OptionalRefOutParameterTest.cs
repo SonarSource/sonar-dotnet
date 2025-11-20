@@ -27,13 +27,9 @@ namespace SonarAnalyzer.Test.Rules
         public void OptionalRefOutParameter() =>
             builder.AddPaths("OptionalRefOutParameter.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void OptionalRefOutParameter_CSharp9() =>
             builder.AddPaths("OptionalRefOutParameter.CSharp9.cs").WithTopLevelStatements().Verify();
-
-#endif
 
         [TestMethod]
         public void OptionalRefOutParameter_CodeFix() =>

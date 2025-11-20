@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ParameterValidationInAsyncShouldBeWrapped() =>
             builder.AddPaths("ParameterValidationInAsyncShouldBeWrapped.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ParameterValidationInAsyncShouldBeWrapped_CSharp10() =>
             builder.AddPaths("ParameterValidationInAsyncShouldBeWrapped.CSharp10.cs")
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("ParameterValidationInAsyncShouldBeWrapped.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

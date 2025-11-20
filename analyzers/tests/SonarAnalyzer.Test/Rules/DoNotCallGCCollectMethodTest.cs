@@ -28,13 +28,10 @@ public class DoNotCallGCCollectMethodTest
         builder.AddPaths("DoNotCallGCCollectMethod.cs")
             .Verify();
 
-#if NET
     [TestMethod]
     public void DoNotCallGCCollectMethod_Latest() =>
         builder.AddPaths("DoNotCallGCCollectMethod.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
-#endif
-
 }

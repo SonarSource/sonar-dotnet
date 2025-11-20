@@ -34,8 +34,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("LiteralSuffixUpperCase.Fixed.cs")
                 .VerifyCodeFix();
 
-#if NET
-
         [TestMethod]
         public void LiteralSuffixUpperCase_CSharp10() =>
             builder.AddPaths("LiteralSuffixUpperCase.CSharp10.cs")
@@ -47,8 +45,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("LiteralSuffixUpperCase.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .VerifyNoIssues();
-
-#endif
-
     }
 }

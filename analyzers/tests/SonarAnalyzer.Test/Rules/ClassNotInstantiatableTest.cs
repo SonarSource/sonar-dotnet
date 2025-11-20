@@ -28,15 +28,11 @@ public class ClassNotInstantiatableTest
     public void ClassNotInstantiatable_CS() =>
         builderCS.AddPaths("ClassNotInstantiatable.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ClassNotInstantiatable_CSharpLatest() =>
         builderCS.AddPaths("ClassNotInstantiatable.Latest.cs", "ClassNotInstantiatable.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void ClassNotInstantiatable_VB() =>

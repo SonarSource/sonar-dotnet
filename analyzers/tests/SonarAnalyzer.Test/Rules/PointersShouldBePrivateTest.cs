@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void PointersShouldBePrivate() =>
             builder.AddPaths("PointersShouldBePrivate.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void PointersShouldBePrivate_CSharp9() =>
             builder.AddPaths("PointersShouldBePrivate.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -36,8 +34,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void PointersShouldBePrivate_CSharp11() =>
             builder.AddPaths("PointersShouldBePrivate.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }

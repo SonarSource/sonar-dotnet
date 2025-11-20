@@ -33,8 +33,6 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundancyInConstructorDestructorDeclaration() =>
             builder.AddPaths("RedundancyInConstructorDestructorDeclaration.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CSharp9() =>
             builder.AddPaths("RedundancyInConstructorDestructorDeclaration.CSharp9.cs")
@@ -79,8 +77,6 @@ namespace SonarAnalyzer.Test.Rules
                 .WithCodeFixedPaths("RedundancyInConstructorDestructorDeclaration.CSharp11.Fixed.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .VerifyCodeFix();
-
-#endif
 
         [TestMethod]
         public void RedundancyInConstructorDestructorDeclaration_CodeFix_BaseCall() =>

@@ -41,8 +41,6 @@ public class DisposableNotDisposedTest
             .WithTopLevelStatements()
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void DisposableNotDisposed_Latest() =>
         builder.AddPaths("DisposableNotDisposed.Latest.cs")
@@ -50,7 +48,4 @@ public class DisposableNotDisposedTest
             .AddReferences(NuGetMetadataReference.FluentAssertions(NugetPackageVersions.FluentAssertionsVersions.Ver5))
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
             .Verify();
-
-#endif
-
 }

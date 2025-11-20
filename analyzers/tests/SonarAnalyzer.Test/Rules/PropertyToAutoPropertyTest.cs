@@ -33,15 +33,10 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp7)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void PropertyToAutoProperty_Latest() =>
             builder.AddPaths("PropertyToAutoProperty.Latest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

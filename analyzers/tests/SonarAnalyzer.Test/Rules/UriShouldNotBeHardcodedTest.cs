@@ -36,15 +36,11 @@ public class UriShouldNotBeHardcodedTest
         .AddReferences(MetadataReferenceFacade.SystemXml)
         .Verify();
 
-#if NET
-
     [TestMethod]
     public void UriShouldNotBeHardcoded_CS_Latest() =>
         builderCS.AddPaths("UriShouldNotBeHardcoded.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
 #if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
 

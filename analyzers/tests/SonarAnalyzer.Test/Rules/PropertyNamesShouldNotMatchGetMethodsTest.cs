@@ -38,7 +38,6 @@ public class PropertyNamesShouldNotMatchGetMethodsTest
             }
             """).VerifyNoIssuesIgnoreErrors();
 
-#if NET
     [TestMethod]
     public void PropertyNamesShouldNotMatchGetMethods_Latest() =>
         builder
@@ -48,6 +47,4 @@ public class PropertyNamesShouldNotMatchGetMethodsTest
                 "PropertyNamesShouldNotMatchGetMethods.Latest.Partial2.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-#endif
-
 }

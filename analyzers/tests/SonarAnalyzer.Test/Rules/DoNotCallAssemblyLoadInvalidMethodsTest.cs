@@ -29,8 +29,6 @@ public class DoNotCallAssemblyLoadInvalidMethodsTest
             .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotCallAssemblyLoadInvalidMethods_CSharp9() =>
         builder.AddPaths("DoNotCallAssemblyLoadInvalidMethods.CSharp9.cs")
@@ -38,8 +36,6 @@ public class DoNotCallAssemblyLoadInvalidMethodsTest
             .WithTopLevelStatements()
             .AddReferences(MetadataReferenceFacade.SystemSecurityPermissions)
             .Verify();
-
-#endif
 
 #if NETFRAMEWORK // The overloads with Evidence are obsolete on .Net Framework 4.8 and not available on .Net Core
 

@@ -116,7 +116,6 @@ public class ConditionalStructureSameImplementationTest
     public void ConditionalStructureSameImplementation_Switch_VisualBasic() =>
         builderVB.AddPaths("ConditionalStructureSameImplementation_Switch.vb").Verify();
 
-#if NET
     [TestMethod]
     public void ConditionalStructureSameImplementation_Switch_CSharp_Latest() =>
         builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
@@ -148,5 +147,4 @@ public class ConditionalStructureSameImplementationTest
             "SomeRazorFile.razor")
         .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
         .Verify();
-#endif
 }

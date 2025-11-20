@@ -31,7 +31,6 @@ public class CognitiveComplexityTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
-#if NET
     [TestMethod]
     public void CognitiveComplexity_CS_Latest() =>
         builderCS
@@ -40,7 +39,6 @@ public class CognitiveComplexityTest
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-#endif
 
     [TestMethod]
     public void CognitiveComplexity_VB() => builderVB.AddPaths("CognitiveComplexity.vb").Verify();

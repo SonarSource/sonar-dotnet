@@ -205,8 +205,6 @@ public class TestMethodShouldContainAssertionTest
             .WithOptions(LanguageOptions.FromCSharp13)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void TestMethodShouldContainAssertion_CSharp9() =>
         builder.AddPaths("TestMethodShouldContainAssertion.CSharp9.cs")
@@ -222,8 +220,6 @@ public class TestMethodShouldContainAssertionTest
             .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
-
-#endif
 
     internal static VerifierBuilder WithTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
                                                        string fluentVersion = Latest,

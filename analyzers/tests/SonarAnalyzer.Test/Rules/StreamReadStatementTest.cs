@@ -27,8 +27,6 @@ public class StreamReadStatementTest
     public void StreamReadStatement() =>
         builder.AddPaths("StreamReadStatement.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void StreamReadStatement_CSharp10() =>
         builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
@@ -36,7 +34,4 @@ public class StreamReadStatementTest
     [TestMethod]
     public void StreamReadStatement_CSharp11() =>
         builder.AddPaths("StreamReadStatement.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
 }

@@ -48,8 +48,6 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
         }
 
-#if NET
-
         [TestMethod]
         public void InvocationResolvesToOverrideWithParams_TopLevelStatements() =>
             builder.AddPaths("InvocationResolvesToOverrideWithParams.TopLevelStatements.cs")
@@ -61,8 +59,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("InvocationResolvesToOverrideWithParams.Latest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

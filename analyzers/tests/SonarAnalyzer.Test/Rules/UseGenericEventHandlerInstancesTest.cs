@@ -28,8 +28,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("UseGenericEventHandlerInstances.cs")
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void UseGenericEventHandlerInstances_CSharp9() =>
             builder.AddPaths("UseGenericEventHandlerInstances.CSharp9.cs")
@@ -41,8 +39,5 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("UseGenericEventHandlerInstances.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
-
     }
 }

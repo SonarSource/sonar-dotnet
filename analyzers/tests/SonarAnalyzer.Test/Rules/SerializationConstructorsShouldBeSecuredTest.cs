@@ -27,13 +27,9 @@ public class SerializationConstructorsShouldBeSecuredTest
     public void SerializationConstructorsShouldBeSecured() =>
         builder.AddPaths("SerializationConstructorsShouldBeSecured.cs").WithConcurrentAnalysis(false).Verify();
 
-#if NET
-
     [TestMethod]
     public void SerializationConstructorsShouldBeSecured_CSharp9() =>
         builder.AddPaths("SerializationConstructorsShouldBeSecured.CSharp9.cs").WithConcurrentAnalysis(false).WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-#endif
 
     [TestMethod]
     public void SerializationConstructorsShouldBeSecured_InvalidCode() =>

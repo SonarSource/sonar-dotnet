@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void AbstractTypesShouldNotHaveConstructors() =>
             builder.AddPaths("AbstractTypesShouldNotHaveConstructors.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void AbstractTypesShouldNotHaveConstructors_TopLevelStatements() =>
             builder.AddPaths("AbstractTypesShouldNotHaveConstructors.TopLevelStatements.cs")
@@ -41,8 +39,5 @@ namespace SonarAnalyzer.Test.Rules
                 .AddPaths("AbstractTypesShouldNotHaveConstructors.Latest.Partial.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

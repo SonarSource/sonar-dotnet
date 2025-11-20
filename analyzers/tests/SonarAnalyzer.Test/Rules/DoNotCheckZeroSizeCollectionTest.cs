@@ -29,16 +29,12 @@ public class DoNotCheckZeroSizeCollectionTest
     public void DoNotCheckZeroSizeCollection_CS() =>
         builderCS.AddPaths("DoNotCheckZeroSizeCollection.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void DoNotCheckZeroSizeCollection_CS_Latest() =>
         builderCS.AddPaths("DoNotCheckZeroSizeCollection.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void DoNotCheckZeroSizeCollection_VB() =>

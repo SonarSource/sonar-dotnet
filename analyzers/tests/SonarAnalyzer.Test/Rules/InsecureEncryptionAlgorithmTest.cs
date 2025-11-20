@@ -38,8 +38,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(GetAdditionalReferences())
                 .VerifyNoIssuesIgnoreErrors();
 
-#if NET
-
         [TestMethod]
         public void InsecureEncryptionAlgorithm_CS_Latest() =>
             builderCS.AddPaths("InsecureEncryptionAlgorithm.Latest.cs")
@@ -47,8 +45,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(GetAdditionalReferences())
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void InsecureEncryptionAlgorithm_VB() =>

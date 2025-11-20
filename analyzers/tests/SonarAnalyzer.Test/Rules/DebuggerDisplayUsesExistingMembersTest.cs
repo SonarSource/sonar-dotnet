@@ -29,15 +29,11 @@ public class DebuggerDisplayUsesExistingMembersTest
     public void DebuggerDisplayUsesExistingMembers_CS() =>
         builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_CSharp_Latest() =>
         builderCS.AddPaths("DebuggerDisplayUsesExistingMembers.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void DebuggerDisplayUsesExistingMembers_VB() =>

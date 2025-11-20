@@ -30,15 +30,10 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp8)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void StringOrIntegralTypesForIndexers_Latest() =>
             builder.AddPaths("StringOrIntegralTypesForIndexers.Latest.cs", "StringOrIntegralTypesForIndexers.Latest.Partial.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
-
-#endif
-
     }
 }

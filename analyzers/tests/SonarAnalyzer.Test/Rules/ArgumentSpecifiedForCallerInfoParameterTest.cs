@@ -27,8 +27,6 @@ public class ArgumentSpecifiedForCallerInfoParameterTest
     public void ArgumentSpecifiedForCallerInfoParameter() =>
         builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ArgumentSpecifiedForCallerInfoParameter_CSharp10() =>
         builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs")
@@ -40,7 +38,4 @@ public class ArgumentSpecifiedForCallerInfoParameterTest
         builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp11.cs")
             .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
-
-#endif
-
 }

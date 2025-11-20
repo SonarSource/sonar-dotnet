@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void LiteralsShouldNotBePassedAsLocalizedParameters() =>
             builder.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp9() =>
             builder.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.CSharp9.cs").WithTopLevelStatements().Verify();
@@ -40,8 +38,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void LiteralsShouldNotBePassedAsLocalizedParameters_CSharp11() =>
             builder.AddPaths("LiteralsShouldNotBePassedAsLocalizedParameters.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }

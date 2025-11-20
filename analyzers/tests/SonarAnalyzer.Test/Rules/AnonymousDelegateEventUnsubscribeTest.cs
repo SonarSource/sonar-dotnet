@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void AnonymousDelegateEventUnsubscribe() =>
             builder.AddPaths("AnonymousDelegateEventUnsubscribe.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void AnonymousDelegateEventUnsubscribe_CSharp9() =>
             builder.AddPaths("AnonymousDelegateEventUnsubscribe.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
-
     }
 }

@@ -36,15 +36,10 @@ namespace SonarAnalyzer.Test.Rules
                 .WithOptions(LanguageOptions.FromCSharp7)
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void UseNumericLiteralSeparator_CSharp9() =>
             builder.AddPaths("UseNumericLiteralSeparator.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
-
     }
 }

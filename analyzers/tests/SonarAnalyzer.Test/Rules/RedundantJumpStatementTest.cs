@@ -28,8 +28,6 @@ public class RedundantJumpStatementTest
         builder.AddPaths("RedundantJumpStatement.cs")
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void RedundantJumpStatement_Latest() =>
         builder.AddPaths("RedundantJumpStatement.Latest.cs")
@@ -41,7 +39,4 @@ public class RedundantJumpStatementTest
         builder.AddPaths("RedundantJumpStatement.TopLevelStatements.cs")
             .WithTopLevelStatements()
             .Verify();
-
-#endif
-
 }

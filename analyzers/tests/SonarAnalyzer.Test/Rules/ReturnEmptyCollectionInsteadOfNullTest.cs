@@ -35,8 +35,6 @@ public class ReturnEmptyCollectionInsteadOfNullTest
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void ReturnEmptyCollectionInsteadOfNull_Latest() =>
         builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.Latest.cs")
@@ -44,7 +42,4 @@ public class ReturnEmptyCollectionInsteadOfNullTest
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
-
-#endif
-
 }

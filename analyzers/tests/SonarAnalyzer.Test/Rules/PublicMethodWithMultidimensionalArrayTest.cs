@@ -30,8 +30,6 @@ public class PublicMethodWithMultidimensionalArrayTest
         builderCS.AddPaths("PublicMethodWithMultidimensionalArray.cs")
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void PublicMethodWithMultidimensionalArray_CSharp11() =>
         builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp11.cs")
@@ -43,8 +41,6 @@ public class PublicMethodWithMultidimensionalArrayTest
         builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp12.cs")
             .WithOptions(LanguageOptions.FromCSharp12)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void PublicMethodWithMultidimensionalArray_VB() =>

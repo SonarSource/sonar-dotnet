@@ -29,16 +29,12 @@ public class PrivateStaticMethodUsedOnlyByNestedClassTest
             .AddPaths("PrivateStaticMethodUsedOnlyByNestedClass.cs")
             .Verify();
 
-#if NET
-
     [TestMethod]
     public void PrivateStaticMethodUsedOnlyByNestedClass_CSharp8() =>
         builder
             .AddPaths("PrivateStaticMethodUsedOnlyByNestedClass.CSharp8.cs")
             .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
-
-#endif
 
     [TestMethod]
     public void PrivateStaticMethodUsedOnlyByNestedClass_CSharp9() =>

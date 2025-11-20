@@ -29,13 +29,9 @@ namespace SonarAnalyzer.Test.Rules
         public void GenericInheritanceShouldNotBeRecursive_CS() =>
             builderCS.AddPaths("GenericInheritanceShouldNotBeRecursive.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void GenericInheritanceShouldNotBeRecursive_CSharp9() =>
             builderCS.AddPaths("GenericInheritanceShouldNotBeRecursive.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-#endif
 
         [TestMethod]
         public void GenericInheritanceShouldNotBeRecursive_VB() =>

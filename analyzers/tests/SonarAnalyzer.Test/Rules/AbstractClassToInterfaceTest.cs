@@ -27,8 +27,6 @@ public class AbstractClassToInterfaceTest
     public void ClassShouldNotBeAbstract() =>
         builder.AddPaths("AbstractClassToInterface.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void ClassShouldNotBeAbstract_CSharpLatest() =>
         builder
@@ -37,7 +35,4 @@ public class AbstractClassToInterfaceTest
             .WithConcurrentAnalysis(false)
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
-
 }

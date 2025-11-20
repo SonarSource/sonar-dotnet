@@ -36,8 +36,6 @@ namespace SonarAnalyzer.Test.Rules
 class Bar { }")
                 .Verify();
 
-#if NET
-
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
             builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs")
@@ -49,8 +47,6 @@ class Bar { }")
             builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp12.cs")
                 .WithOptions(LanguageOptions.FromCSharp12)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>

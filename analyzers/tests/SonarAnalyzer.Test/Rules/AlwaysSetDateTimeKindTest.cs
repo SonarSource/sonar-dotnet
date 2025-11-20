@@ -32,8 +32,6 @@ public class AlwaysSetDateTimeKindTest
     public void AlwaysSetDateTimeKind_VB() =>
         new VerifierBuilder<VB.AlwaysSetDateTimeKind>().AddPaths("AlwaysSetDateTimeKind.vb").Verify();
 
-#if NET
-
     [TestMethod]
     public void AlwaysSetDateTimeKind_CSharp9() =>
         builderCS.AddSnippet(
@@ -46,7 +44,4 @@ public class AlwaysSetDateTimeKindTest
                 """)
             .WithTopLevelStatements()
             .Verify();
-
-#endif
-
 }

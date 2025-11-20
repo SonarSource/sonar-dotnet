@@ -30,7 +30,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("AsyncVoidMethod.cs")
                 .Verify();
 
-#if NET
         [TestMethod]
         public void AsyncVoidMethod_CSharp9() =>
             builder.AddPaths("AsyncVoidMethod.CSharp9.cs")
@@ -61,8 +60,6 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
                 .WithConcurrentAnalysis(false)
                 .Verify();
-
-#endif
 
         [TestMethod]
         [DataRow("1.1.11")]

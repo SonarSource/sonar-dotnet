@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void DoNotCatchNullReferenceException() =>
             builder.AddPaths("DoNotCatchNullReferenceException.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void DoNotCatchNullReferenceException_CSharp9() =>
             builder.AddPaths("DoNotCatchNullReferenceException.CSharp9.cs")
                 .WithTopLevelStatements()
                 .Verify();
-
-#endif
-
     }
 }

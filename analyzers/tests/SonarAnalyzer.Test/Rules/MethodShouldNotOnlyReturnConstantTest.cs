@@ -27,8 +27,6 @@ public class MethodShouldNotOnlyReturnConstantTest
     public void MethodShouldNotOnlyReturnConstant() =>
         builder.AddPaths("MethodShouldNotOnlyReturnConstant.cs").Verify();
 
-#if NET
-
     [TestMethod]
     public void MethodShouldNotOnlyReturnConstant_CSharp8() =>
         builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).VerifyNoIssues();
@@ -36,7 +34,4 @@ public class MethodShouldNotOnlyReturnConstantTest
     [TestMethod]
     public void MethodShouldNotOnlyReturnConstant_CSharp11() =>
         builder.AddPaths("MethodShouldNotOnlyReturnConstant.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
 }

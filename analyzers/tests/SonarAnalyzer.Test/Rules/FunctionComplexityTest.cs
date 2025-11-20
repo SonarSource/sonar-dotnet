@@ -26,12 +26,9 @@ namespace SonarAnalyzer.Test.Rules
         public void FunctionComplexity_CS() =>
             CreateCSBuilder(3).AddPaths("FunctionComplexity.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
-#if NET
         [TestMethod]
         public void FunctionComplexity_CS_Latest() =>
             CreateCSBuilder(3).AddPaths("FunctionComplexity.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-#endif
 
         [TestMethod]
         public void FunctionComplexity_InsufficientExecutionStack_CS()

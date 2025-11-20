@@ -27,15 +27,10 @@ namespace SonarAnalyzer.Test.Rules
         public void EquatableClassShouldBeSealed() =>
             builder.AddPaths("EquatableClassShouldBeSealed.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void EquatableClassShouldBeSealed_CSharp9() =>
             builder.AddPaths("EquatableClassShouldBeSealed.CSharp9.cs")
                 .WithOptions(LanguageOptions.FromCSharp9)
                 .Verify();
-
-#endif
-
     }
 }

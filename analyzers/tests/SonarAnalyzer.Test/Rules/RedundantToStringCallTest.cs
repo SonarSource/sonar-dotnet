@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void RedundantToStringCall() =>
             builder.AddPaths("RedundantToStringCall.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void RedundantToStringCall_CSharp9() =>
             builder.AddPaths("RedundantToStringCall.CSharp9.cs")
@@ -46,8 +44,6 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("RedundantToStringCall.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
-
-#endif
 
         [TestMethod]
         public void RedundantToStringCall_CodeFix() =>

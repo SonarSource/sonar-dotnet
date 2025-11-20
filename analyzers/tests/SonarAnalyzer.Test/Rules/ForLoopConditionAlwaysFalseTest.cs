@@ -27,8 +27,6 @@ namespace SonarAnalyzer.Test.Rules
         public void ForLoopConditionAlwaysFalse() =>
             builder.AddPaths("ForLoopConditionAlwaysFalse.cs").Verify();
 
-#if NET
-
         [TestMethod]
         public void ForLoopConditionAlwaysFalse_CSharp9() =>
             builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
@@ -36,8 +34,5 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ForLoopConditionAlwaysFalse_CSharp11() =>
             builder.AddPaths("ForLoopConditionAlwaysFalse.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-#endif
-
     }
 }
