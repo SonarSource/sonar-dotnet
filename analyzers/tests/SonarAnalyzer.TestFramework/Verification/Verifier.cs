@@ -21,6 +21,8 @@ using Google.Protobuf;
 using Microsoft.CodeAnalysis.CodeFixes;
 using SonarAnalyzer.Core.Rules;
 using SonarAnalyzer.TestFramework.Build;
+using CS = Microsoft.CodeAnalysis.CSharp;
+using VB = Microsoft.CodeAnalysis.VisualBasic;
 
 namespace SonarAnalyzer.TestFramework.Verification;
 
@@ -96,6 +98,7 @@ internal class Verifier
         {
             throw new InvalidOperationException($"Cannot use {nameof(Verify)} with {nameof(builder.CodeFix)} set.");
         }
+        CheckInconclusive();
         var numberOfIssues = Compile(builder.ConcurrentAnalysis)
             .Sum(x => DiagnosticVerifier.Verify(
                 x.Compilation,
@@ -110,6 +113,7 @@ internal class Verifier
 
     public void VerifyNoIssues()    // This should never have any arguments
     {
+        CheckInconclusive();
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
             foreach (var analyzer in analyzers)
@@ -121,6 +125,7 @@ internal class Verifier
 
     public void VerifyNoAD0001()    // This should never have any arguments
     {
+        CheckInconclusive();
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
             foreach (var analyzer in analyzers)
@@ -132,6 +137,7 @@ internal class Verifier
 
     public void VerifyNoIssuesIgnoreErrors()    // This should never have any arguments
     {
+        CheckInconclusive();
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
             foreach (var analyzer in analyzers)
@@ -144,6 +150,7 @@ internal class Verifier
     public void VerifyCodeFix()     // This should never have any arguments
     {
         _ = codeFix ?? throw new InvalidOperationException($"{nameof(builder.CodeFix)} was not set.");
+        CheckInconclusive();
         var document = CreateProject(false).FindDocument(Path.Combine(builder.BasePath ?? string.Empty, Path.GetFileName(builder.Paths.Single())));
         var codeFixVerifier = new CodeFixVerifier(analyzers.Single(), codeFix, document, builder.CodeFixTitle);
         var fixAllProvider = codeFix.GetFixAllProvider();
@@ -159,6 +166,7 @@ internal class Verifier
 
     public void VerifyUtilityAnalyzerProducesEmptyProtobuf()     // This should never have any arguments
     {
+        CheckInconclusive();
         foreach (var compilation in Compile(false))
         {
             DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
@@ -169,6 +177,7 @@ internal class Verifier
     public void VerifyUtilityAnalyzer<TMessage>(Action<IReadOnlyList<TMessage>> verifyProtobuf)
         where TMessage : IMessage<TMessage>, new()
     {
+        CheckInconclusive();
         foreach (var compilation in Compile(false))
         {
             DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
@@ -305,6 +314,33 @@ internal class Verifier
     private static bool IsRazorOrCshtml(string path) =>
         Path.GetExtension(path) is { } extension
         && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
+
+    private void CheckInconclusive()
+    {
+        // Project targeting the latest .NET always runs the test
+#if NETFRAMEWORK
+        if (!builder.ParseOptions.IsEmpty && TooHighVersion() is { } languageVersion)
+        {
+            Assert.Inconclusive($"{languageVersion} can only be tested under the .NET build of this project.");
+        }
+
+        string TooHighVersion() =>
+            language.LanguageName switch
+            {
+                LanguageNames.CSharp =>
+                    builder.ParseOptions.Cast<CS.CSharpParseOptions>().Min(x => x.LanguageVersion) is var minVersionCS
+                    && minVersionCS >= CS.LanguageVersion.CSharp8
+                        ? minVersionCS.ToString()
+                        : null,
+                LanguageNames.VisualBasic =>
+                    builder.ParseOptions.Cast<VB.VisualBasicParseOptions>().Min(x => x.LanguageVersion) is var minVersionVB
+                    && minVersionVB >= VB.LanguageVersion.VisualBasic14
+                        ? minVersionVB.ToString()
+                        : null,
+                _ => throw new UnexpectedLanguageException(language)
+            };
+#endif
+    }
 
     public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
 }
