@@ -6,9 +6,10 @@ namespace Tests.Diagnostics;
 using System;
 using System.Linq;
 
-interface I { }
-class A : I { }
-class B : A { }
+public interface I { }
+public class A : I { }
+public class B : A { }
+
 record Record
 {
     public void M2(IEnumerable<A> enumerable)
@@ -31,5 +32,18 @@ record struct RecordStruct
         { }
         foreach (B i in array.OfType<B>()) // Fixed
         { }
+    }
+}
+
+public class FieldKeyword
+{
+    public A[] Values
+    {
+        get
+        {
+            foreach (B b in field.OfType<B>())  // Fixed
+            { }
+            return [];
+        }
     }
 }

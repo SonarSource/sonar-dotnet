@@ -85,3 +85,33 @@ class Person2
         setter = i => { somefield >>>= i; };
     }
 }
+
+public class FieldReadOnly
+{
+    private int field = 42;  // Noncompliant
+
+    public int Property
+    {
+        get => @field;
+        set => field = value;
+    }
+}
+
+public class FieldWriteOnly
+{
+    private int field = 42;
+
+    public int Property
+    {
+        get => field;
+        set => @field = value;
+    }
+}
+
+public class NullConditionalAssignment
+{
+    private int value;  // Compliant
+
+    public void Assign() =>
+        this?.value = 100;
+}

@@ -21,10 +21,17 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class GenericLoggerInjectionShouldMatchEnclosingTypeTest
 {
+    private readonly VerifierBuilder builder = new VerifierBuilder<GenericLoggerInjectionShouldMatchEnclosingType>().AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions());
+
     [TestMethod]
     public void GenericLoggerInjectionShouldMatchEnclosingTypeTest_CS() =>
-        new VerifierBuilder<GenericLoggerInjectionShouldMatchEnclosingType>()
-            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-            .AddPaths("GenericLoggerInjectionShouldMatchEnclosingType.cs")
-            .Verify();
+        builder.AddPaths("GenericLoggerInjectionShouldMatchEnclosingType.cs").Verify();
+
+#if NET
+
+    [TestMethod]
+    public void GenericLoggerInjectionShouldMatchEnclosingTypeTest_CS_Latest() =>
+        builder.AddPaths("GenericLoggerInjectionShouldMatchEnclosingType.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+#endif
 }

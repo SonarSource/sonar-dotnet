@@ -16,42 +16,40 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ForeachLoopExplicitConversionTest
 {
-    [TestClass]
-    public class ForeachLoopExplicitConversionTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ForeachLoopExplicitConversion>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ForeachLoopExplicitConversion>();
 
-        [TestMethod]
-        public void ForeachLoopExplicitConversion() =>
-            builder.AddPaths("ForeachLoopExplicitConversion.cs").Verify();
+    [TestMethod]
+    public void ForeachLoopExplicitConversion() =>
+        builder.AddPaths("ForeachLoopExplicitConversion.cs").Verify();
 
-        [TestMethod]
-        public void ForeachLoopExplicitConversion_CodeFix() =>
-            builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
-                .AddPaths("ForeachLoopExplicitConversion.cs")
-                .WithCodeFixedPaths("ForeachLoopExplicitConversion.Fixed.cs")
-                .VerifyCodeFix();
+    [TestMethod]
+    public void ForeachLoopExplicitConversion_CodeFix() =>
+        builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
+            .AddPaths("ForeachLoopExplicitConversion.cs")
+            .WithCodeFixedPaths("ForeachLoopExplicitConversion.Fixed.cs")
+            .VerifyCodeFix();
 #if NET
 
-        [TestMethod]
-        public void ForeachLoopExplicitConversion_CSharp10() =>
-            builder.AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
-                .WithAutogenerateConcurrentFiles(false)
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void ForeachLoopExplicitConversion_CSharpLatest() =>
+        builder.AddPaths("ForeachLoopExplicitConversion.Latest.cs")
+            .WithAutogenerateConcurrentFiles(false)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void ForeachLoopExplicitConversion_CSharp10_CodeFix() =>
-            builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
-                .AddPaths("ForeachLoopExplicitConversion.CSharp10.cs")
-                .WithCodeFixedPaths("ForeachLoopExplicitConversion.CSharp10.Fixed.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .WithOutputKind(OutputKind.DynamicallyLinkedLibrary)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void ForeachLoopExplicitConversion_CSharpLatest_CodeFix() =>
+        builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
+            .AddPaths("ForeachLoopExplicitConversion.Latest.cs")
+            .WithCodeFixedPaths("ForeachLoopExplicitConversion.Latest.Fixed.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .VerifyCodeFix();
 
 #endif
 
-    }
 }

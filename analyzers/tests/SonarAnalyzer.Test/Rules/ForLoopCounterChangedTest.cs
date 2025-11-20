@@ -30,16 +30,10 @@ public class ForLoopCounterChangedTest
 #if NET
 
     [TestMethod]
-    public void ForLoopCounterChanged_CSharp10() =>
-        builder.AddPaths("ForLoopCounterChanged.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
+    public void ForLoopCounterChanged_CSharpLatest() =>
+        builder.AddPaths("ForLoopCounterChanged.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-    [TestMethod]
-    public void ForLoopCounterChanged_CSharp11() =>
-        builder.AddPaths("ForLoopCounterChanged.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
-            .VerifyNoIssues();
 
 #endif
 
