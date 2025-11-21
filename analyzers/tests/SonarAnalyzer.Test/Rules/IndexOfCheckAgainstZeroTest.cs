@@ -17,17 +17,22 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class IndexOfCheckAgainstZeroTest
-    {
-        [TestMethod]
-        public void IndexOfCheckAgainstZero_CS() =>
-            new VerifierBuilder<CS.IndexOfCheckAgainstZero>().AddPaths("IndexOfCheckAgainstZero.cs").Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void IndexOfCheckAgainstZero_VB() =>
-            new VerifierBuilder<VB.IndexOfCheckAgainstZero>().AddPaths("IndexOfCheckAgainstZero.vb").Verify();
-    }
+[TestClass]
+public class IndexOfCheckAgainstZeroTest
+{
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.IndexOfCheckAgainstZero>();
+
+    [TestMethod]
+    public void IndexOfCheckAgainstZero_CS() =>
+        builderCS.AddPaths("IndexOfCheckAgainstZero.cs").Verify();
+
+    [TestMethod]
+    public void IndexOfCheckAgainstZero_CS_Latest() =>
+        builderCS.AddPaths("IndexOfCheckAgainstZero.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
+
+    [TestMethod]
+    public void IndexOfCheckAgainstZero_VB() =>
+        new VerifierBuilder<VB.IndexOfCheckAgainstZero>().AddPaths("IndexOfCheckAgainstZero.vb").Verify();
 }

@@ -1,8 +1,56 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 
 [OnSerialized] // Noncompliant {{Serialization attributes on local functions are not considered.}}
 int OnSerialized(StreamingContext context) => 42;
+
+public interface IWithValidSerializationMethods
+{
+    [OnSerializing]
+    protected abstract void OnSerializingMethod(StreamingContext context);
+
+    [OnSerialized]
+    protected abstract void OnSerializedMethod(StreamingContext context);
+
+    [OnDeserializing]
+    protected void OnDeserializingMethod(StreamingContext context) { }
+
+    [OnDeserialized]
+    protected virtual void OnDeserializedMethod(StreamingContext context) { }
+}
+
+public interface IWithInvalidSerializationMethodsModifiers
+{
+    [OnSerializing]
+    public abstract void OnSerializingMethod(StreamingContext context); // Compliant, despite "public", it is in interface
+
+    [OnSerialized]
+    public abstract void OnSerializedMethod(StreamingContext context);
+
+    [OnDeserializing]
+    public void OnDeserializingMethod(StreamingContext context) { }
+
+    [OnDeserialized]
+    public virtual void OnDeserializedMethod(StreamingContext context) { }
+}
+
+public interface IWithInvalidSerializationMethodsParams
+{
+    [OnSerializing]
+    protected abstract void OnSerializingMethod(StreamingContext context, object otherPar); // Compliant, despite wrong params, it is in interface
+
+    [OnSerialized]
+    protected abstract void OnSerializedMethod(object otherPar);
+
+    [OnDeserializing]
+    protected void OnDeserializingMethod(object otherPar, StreamingContext context) { }
+
+    [OnDeserialized]
+    protected virtual void OnDeserializedMethod() { }
+}
+
 
 [Serializable]
 public record Foo
@@ -94,4 +142,42 @@ public partial class Partial
     private partial int OnSerialized(StreamingContext context) => 42;           // Noncompliant
 
     private partial void OnDeserializedMethod(StreamingContext context) { }     // Compliant
+}
+
+internal class TestCases
+{
+    public void Method(IEnumerable<int> collection)
+    {
+        [OnSerializing] int Get() => 1; // Noncompliant {{Serialization attributes on local functions are not considered.}}
+
+        _ = collection.Select([OnSerialized] (x) => x + 1);  // Noncompliant {{Serialization attributes on lambdas are not considered.}}
+
+        Action a = [OnDeserializing] () => { }; // Noncompliant
+
+        Action x = true
+                       ? ([OnDeserialized] () => { }) // Noncompliant
+                       : [OnDeserialized] () => { };  // Noncompliant
+
+        Call([OnDeserialized] (x) => { }); // Noncompliant
+    }
+
+    private void Call(Action<int> action) => action(1);
+}
+
+[Serializable]
+internal class SerializableWithGenericAttribute
+{
+    [OnSerializing, Generic<int>]
+    public void OnSerializing(StreamingContext context) { } // Noncompliant
+}
+
+public class GenericAttribute<T> : Attribute { }
+
+interface IMyInterface
+{
+    [OnSerializing]
+    static virtual void OnSerializingStaticVirtual(StreamingContext context) { } // Compliant, because in an interface
+
+    [OnSerializing]
+    static abstract void OnSerializingStaticAbstract(StreamingContext context); // Compliant, because in an interface
 }

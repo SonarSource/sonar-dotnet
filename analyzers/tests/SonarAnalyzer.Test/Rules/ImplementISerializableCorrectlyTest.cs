@@ -16,27 +16,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ImplementISerializableCorrectlyTest
 {
-    [TestClass]
-    public class ImplementISerializableCorrectlyTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ImplementISerializableCorrectly>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ImplementISerializableCorrectly>();
 
-        [TestMethod]
-        public void ImplementISerializableCorrectly() =>
-            builder.AddPaths("ImplementISerializableCorrectly.cs").Verify();
+    [TestMethod]
+    public void ImplementISerializableCorrectly() =>
+        builder.AddPaths("ImplementISerializableCorrectly.cs").Verify();
 
-        [TestMethod]
-        public void ImplementISerializableCorrectly_FromCSharp9() =>
-            builder.AddPaths("ImplementISerializableCorrectly.CSharp9.Part1.cs", "ImplementISerializableCorrectly.CSharp9.Part2.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void ImplementISerializableCorrectly_FromCSharp10() =>
-            builder.AddPaths("ImplementISerializableCorrectly.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void ImplementISerializableCorrectly_FromCSharp12() =>
-            builder.AddPaths("ImplementISerializableCorrectly.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-    }
+    [TestMethod]
+    public void ImplementISerializableCorrectly_CSharpLatest() =>
+        builder.AddPaths("ImplementISerializableCorrectly.Latest.cs", "ImplementISerializableCorrectly.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

@@ -88,5 +88,3 @@ public class Foo
     [EditorBrowsable(EditorBrowsableState.Never)]
     int OnSerialized3(StreamingContext context) { return 1; }           // Compliant
 }
-
-

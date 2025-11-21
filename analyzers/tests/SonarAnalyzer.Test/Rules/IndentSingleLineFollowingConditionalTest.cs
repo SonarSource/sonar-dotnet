@@ -16,58 +16,51 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class IndentSingleLineFollowingConditionalTest
 {
-    [TestClass]
-    public class IndentSingleLineFollowingConditionalTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<IndentSingleLineFollowingConditional>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<IndentSingleLineFollowingConditional>();
 
-        public TestContext TestContext { get; set; }
+    public TestContext TestContext { get; set; }
 
-        [TestMethod]
-        public void IndentSingleLineFollowingConditional() =>
-            builder.AddPaths("IndentSingleLineFollowingConditional.cs").Verify();
+    [TestMethod]
+    public void IndentSingleLineFollowingConditional() =>
+        builder.AddPaths("IndentSingleLineFollowingConditional.cs").Verify();
 
-        [TestMethod]
-        public void IndentSingleLineFollowingConditional_FromCSharp9() =>
-            builder.AddPaths("IndentSingleLineFollowingConditional.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void IndentSingleLineFollowingConditional_CSharpLatest() =>
+        builder.AddPaths("IndentSingleLineFollowingConditional.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void IndentSingleLineFollowingConditional_FromCSharp11() =>
-            builder.AddPaths("IndentSingleLineFollowingConditional.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void IndentSingleLineFollowingConditional_RazorFile_CorrectMessage() =>
-            builder.AddSnippet(
-                """
-                @code
+    [TestMethod]
+    public void IndentSingleLineFollowingConditional_RazorFile_CorrectMessage() =>
+        builder.AddSnippet("""
+            @code
+            {
+                public int Method(int j)
                 {
-                    public int Method(int j)
-                    {
-                        var total = 0;
-                        for(int i = 0; i < 10; i++) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'for'}}
-                //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                        total = total + i;               // trivia not included in secondary location for single line statements...
-                //      ^^^^^^^^^^^^^^^^^^ Secondary
+                    var total = 0;
+                    for(int i = 0; i < 10; i++) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'for'}}
+            //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    total = total + i;               // trivia not included in secondary location for single line statements...
+            //      ^^^^^^^^^^^^^^^^^^ Secondary
 
-                        if (j > 400)
-                            return 4;
-                        else if (j > 500) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'else if'}}
-                //      ^^^^^^^^^^^^^^^^^
-                    return 5;
-                //  ^^^^^^^^^ Secondary
+                    if (j > 400)
+                        return 4;
+                    else if (j > 500) // Noncompliant {{Use curly braces or indentation to denote the code conditionally executed by this 'else if'}}
+            //      ^^^^^^^^^^^^^^^^^
+                return 5;
+            //  ^^^^^^^^^ Secondary
 
-                        return 1623;
-                    }
+                    return 1623;
                 }
-                """,
-                "SomeRazorFile.razor")
+            }
+            """,
+            "SomeRazorFile.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
-    }
 }

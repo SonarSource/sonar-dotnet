@@ -35,7 +35,7 @@ void TopLevelMethod(bool condition)
 
     Foo();
 
-    // Compliant slution
+    // Compliant
     if (condition)
         DoTheThing();
 
@@ -44,3 +44,17 @@ void TopLevelMethod(bool condition)
 
 void DoTheThing() { }
 void Foo() { }
+
+public interface IStaticInterfaceMethod
+{
+    static virtual string MyStaticVirtualMethod(bool condition)
+    {
+        if (condition)  // Noncompliant
+        return "Noncompliant";   // Secondary
+
+        if (condition) // Compliant
+            return "Compliant";
+
+        return string.Empty;
+    }
+}

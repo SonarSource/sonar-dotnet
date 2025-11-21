@@ -30,41 +30,27 @@ public class ImplementSerializationMethodsCorrectlyTest
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.cs").Verify();
 
     [TestMethod]
-    public void ImplementSerializationMethodsCorrectly_CSharp8() =>
-        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp8.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .VerifyNoIssues();
-
-    [TestMethod]
-    public void ImplementSerializationMethodsCorrectly_CSharp9() =>
-        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp9.cs")
+    public void ImplementSerializationMethodsCorrectly_CSharpLatest() =>
+        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.Latest.cs")
             .WithTopLevelStatements()
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void ImplementSerializationMethodsCorrectly_CSharp10() =>
-        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void ImplementSerializationMethodsCorrectly_CSharp11() =>
-        builderCS.AddPaths("ImplementSerializationMethodsCorrectly.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_CS_InvalidCode() =>
         builderCS.AddSnippet("""
-            [Serializable]
+            [System.Serializable]
             public class Foo
             {
-                [OnDeserializing]
+                [System.OnDeserializing]
+                // Error@+4 [CS1519] Invalid token in a member declaration
+                // Error@+3 [CS1519] Invalid token in a member declaration
+                // Error@+2 [CS0106] The modifier 'new' is not valid for this item
+                // Error@+1 [CS1520] Method must have a return type
                 public int  { throw new NotImplementedException(); }
-            }
+            }   // Error [CS1022] Type or namespace definition, or end-of-file expected
             """)
-            .VerifyNoIssuesIgnoreErrors();
+            .Verify();  // This one is difficult to do in the source file due to concurrent file generation
 
     [TestMethod]
     public void ImplementSerializationMethodsCorrectly_VB() =>

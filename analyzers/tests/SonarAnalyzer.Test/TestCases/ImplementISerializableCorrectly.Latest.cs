@@ -304,3 +304,63 @@ namespace Tests.Diagnostics.PartialMethods
         public override partial void GetObjectData(SerializationInfo info, StreamingContext context); // Secondary [3] {{Invoke 'base.GetObjectData(SerializationInfo, StreamingContext)' in 'GetObjectData'.}}
     }
 }
+
+public class NonSerializedType
+{
+}
+
+public struct SerializableStruct_NoAttribute : ISerializable    // Noncompliant {{Update this implementation of 'ISerializable' to conform to the recommended serialization pattern. Add 'System.SerializableAttribute' attribute on 'SerializableStruct_NoAttribute' because it implements 'ISerializable'. Add a 'private' constructor 'SerializableStruct_NoAttribute(SerializationInfo, StreamingContext)'.}}
+                                                                // Secondary@-1 {{Add 'System.SerializableAttribute' attribute on 'SerializableStruct_NoAttribute' because it implements 'ISerializable'.}}
+                                                                // Secondary@-2 {{Add a 'private' constructor 'SerializableStruct_NoAttribute(SerializationInfo, StreamingContext)'.}}
+{
+    private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
+
+    public SerializableStruct_NoAttribute() { }
+
+    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+}
+
+public record struct SerializableRecordStruct_NoAttribute : ISerializable // Noncompliant
+                                                                          // Secondary@-1
+                                                                          // Secondary@-2
+{
+    private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
+
+    public SerializableRecordStruct_NoAttribute() { }
+
+    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+}
+
+public record struct SerializablePositionalRecordStruct_NoAttribute(string Property) : ISerializable // Noncompliant
+                                                                                                     // Secondary@-1
+                                                                                                     // Secondary@-2
+{
+    private readonly NonSerializedType field = null; // Should be marked with [NonSerialized]
+
+    public SerializablePositionalRecordStruct_NoAttribute() : this("SomeString") { }
+
+    public void GetObjectData(SerializationInfo info, StreamingContext context) { }
+}
+
+[Serializable]
+public class Serializable : ISerializable
+{
+    public Serializable() { }
+    protected Serializable(SerializationInfo info, StreamingContext context) { }
+    public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
+}
+
+[Serializable]
+public class SomeClass(Serializable serializableField) : Serializable
+//           ^^^^^^^^^ Noncompliant
+//     ^^^^^ Secondary@-1 {{Override 'GetObjectData(SerializationInfo, StreamingContext)' and serialize '<serializableField>P'.}}
+{
+    public SomeClass() : this(new Serializable()) { }
+
+    protected SomeClass(SerializationInfo info, StreamingContext context) : this(new Serializable()) { }
+    //        ^^^^^^^^^ Secondary {{Call 'base(SerializationInfo, StreamingContext)' on the serialization constructor.}}
+    private void SomeMethod()
+    {
+        Console.WriteLine(serializableField.ToString());
+    }
+}
