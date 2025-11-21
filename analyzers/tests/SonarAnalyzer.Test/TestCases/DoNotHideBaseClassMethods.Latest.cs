@@ -2,9 +2,11 @@
 
 namespace MyLibrary
 {
-    record Foo
+    public record Base
     {
         public void SomePublicMethod(string s1, string s2) { }
+
+        public void AnotherPublicMethod(string s1, string s2) { }
 
         protected void SomeProtectedMethod(string s1, string s2) { }
 
@@ -17,9 +19,9 @@ namespace MyLibrary
         public void GenericMethod2<T>(IEnumerable<T> s1, string s2) { }
     }
 
-    record Bar : Foo
+    record Bar : Base
     {
-        public void SomePublicMethod(string s1, object s2) { } // Noncompliant {{Remove or rename that method because it hides 'MyLibrary.Foo.SomePublicMethod(string, string)'.}}
+        public void SomePublicMethod(string s1, object s2) { } // Noncompliant {{Remove or rename that method because it hides 'MyLibrary.Base.SomePublicMethod(string, string)'.}}
         protected void SomeProtectedMethod(string s1, object o2) { } // Noncompliant
 
         private void SomePrivateMethod(string s1, object o2) { }
@@ -31,7 +33,7 @@ namespace MyLibrary
         public void GenericMethod2<T>(IEnumerable<T> s1, object s2) { } // Noncompliant
     }
 
-    record Bar2 : Foo
+    record Bar2 : Base
     {
     }
 
@@ -53,14 +55,24 @@ namespace MyLibrary
         public bool Method1(object obj) => true;
     }
 
-    record Base(string X)
+    record PrimaryConstructorBase(string X)
     {
         public void Method(string s1) { }
     }
 
-    record Derived(string X) : Base(X)
+    record Derived(string X) : PrimaryConstructorBase(X)
     {
-        public void Method(object s1) { } // Noncompliant {{Remove or rename that method because it hides 'MyLibrary.Base.Method(string)'.}}
+        public void Method(object s1) { } // Noncompliant {{Remove or rename that method because it hides 'MyLibrary.PrimaryConstructorBase.Method(string)'.}}
+    }
+
+    interface IMyInterface
+    {
+        static virtual string SomeMethod(string s1, string s2) => $"{s1}{s2}";
+    }
+
+    class IMyClass : IMyInterface
+    {
+        static string SomeMethod(string s1, object s2) => "With object"; // Compliant
     }
 }
 
@@ -82,5 +94,15 @@ namespace MyNamespace
     record Class3 : OtherNamespace.Class1
     {
         void SomeMethod(object s) { }
+    }
+}
+
+public static class Extensions
+{
+    public static void SomePublicMethod(MyLibrary.Base sender, string s1, object s2) { } // Compliant, it's an extension method
+
+    extension(MyLibrary.Base sender)
+    {
+        public void AnotherPublicMethod(string s1, string s2) { } // Compliant, it's an extension method
     }
 }

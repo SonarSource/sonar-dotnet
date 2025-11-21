@@ -33,6 +33,10 @@ public class DoNotHardcodeSecretsTest
         builderCS.AddPaths("DoNotHardcodeSecrets.cs").Verify();
 
     [TestMethod]
+    public void DoNotHardcodeSecrets_DefaultValues_CS_Latest() =>
+        builderCS.AddPaths("DoNotHardcodeSecrets.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
     public void DoNotHardcodeSecrets_DefaultValues_VB() =>
         builderVB.AddPaths("DoNotHardcodeSecrets.vb").Verify();
 

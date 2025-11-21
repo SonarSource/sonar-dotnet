@@ -16,21 +16,20 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class GenericTypeParameterInOutTest
 {
-    [TestClass]
-    public class GenericTypeParameterInOutTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<GenericTypeParameterInOut>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<GenericTypeParameterInOut>();
 
-        [TestMethod]
-        public void GenericTypeParameterInOut() =>
-            builder.AddPaths("GenericTypeParameterInOut.cs").Verify();
+    [TestMethod]
+    public void GenericTypeParameterInOut() =>
+        builder.AddPaths("GenericTypeParameterInOut.cs").Verify();
 
-        [TestMethod]
-        public void GenericTypeParameterInOut_CSharp7() =>
-            builder.AddPaths("GenericTypeParameterInOut.CSharp7.cs")
-                .WithOptions(LanguageOptions.FromCSharp7)
-                .Verify();
-    }
+    [TestMethod]
+    public void GenericTypeParameterInOut_CSharpLatest() =>
+        builder.AddPaths("GenericTypeParameterInOut.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

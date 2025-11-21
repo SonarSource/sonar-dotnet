@@ -36,3 +36,35 @@ public record R<T> where T : class
 
     public bool Bar<Q>(List<Q> t) where Q : class => t.Any(x => x == null); // Compliant
 }
+
+public class PrimaryConstructor<T>(T arg)
+{
+    public T Arg => arg;
+
+    public bool Method()
+    {
+        return arg == null; // Noncompliant
+    }
+
+    public T FieldKeyword
+    {
+        get;
+        set
+        {
+            if(field == null)   // Noncompliant
+            {
+            }
+        }
+    }
+}
+
+public static class Extensions
+{
+    extension<T>(PrimaryConstructor<T> generic)
+    {
+        public bool Method()
+        {
+            return generic.Arg == null; // Noncompliant
+        }
+    }
+}

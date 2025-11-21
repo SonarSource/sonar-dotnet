@@ -25,20 +25,14 @@ public class DoNotHideBaseClassMethodsTest
 
     [TestMethod]
     public void DoNotHideBaseClassMethods() =>
-        builder.AddPaths("DoNotHideBaseClassMethods.cs", "DoNotHideBaseClassMethods2.cs")
+        builder.AddPaths("DoNotHideBaseClassMethods.cs", "DoNotHideBaseClassMethods.Concurrent.cs")
             .WithAutogenerateConcurrentFiles(false)
             .Verify();
 
     [TestMethod]
-    public void DoNotHideBaseClassMethods_CSharp9() =>
-        builder.AddPaths("DoNotHideBaseClassMethods.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
+    public void DoNotHideBaseClassMethods_CSharpLatest() =>
+        builder.AddPaths("DoNotHideBaseClassMethods.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .WithConcurrentAnalysis(false)
             .Verify();
-
-    [TestMethod]
-    public void DoNotHideBaseClassMethods_CSharp11() =>
-        builder.AddPaths("DoNotHideBaseClassMethods.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
-            .VerifyNoIssues();
 }
