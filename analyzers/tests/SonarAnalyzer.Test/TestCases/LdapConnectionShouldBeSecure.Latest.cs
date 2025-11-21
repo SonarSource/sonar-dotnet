@@ -73,6 +73,12 @@ record FieldsAndProperties
 
         Property6 = new DirectoryEntry(); // Compliant
     }
+
+    public DirectoryEntry FieldKeyword
+    {
+        get;
+        set => field.AuthenticationType = AuthenticationTypes.None;  // Noncompliant
+    }
 }
 
 public record struct RecordStruct
@@ -110,5 +116,57 @@ public partial class PartialProperty
     private partial DirectoryEntry this[int index]
     {
         get => new DirectoryEntry { AuthenticationType = AuthenticationTypes.None }; // Noncompliant
+    }
+}
+
+public interface IWithDefaultMethod
+{
+    void Method()
+    {
+        new DirectoryEntry("path", "user", "pass", AuthenticationTypes.Secure); // Compliant
+        new DirectoryEntry("path", "user", "pass", AuthenticationTypes.None); // Noncompliant
+
+        var authTypeSecure = AuthenticationTypes.Secure;
+        new DirectoryEntry("path", "user", "pass", authTypeSecure); // Compliant
+
+        var authTypeNone = AuthenticationTypes.None;
+        new DirectoryEntry("path", "user", "pass", authTypeNone); // Noncompliant
+    }
+}
+
+public class AssignmentsAndDeclarators
+{
+    public void WithDefaultLiteralExpression()
+    {
+        AuthenticationTypes authType = default;
+        new DirectoryEntry("", null, null, authType); // Noncompliant
+    }
+
+    public void WithDefaultExpression()
+    {
+        AuthenticationTypes authType = default(AuthenticationTypes);
+        new DirectoryEntry("", null, null, authType); // Noncompliant
+    }
+
+    public void AssignmentWithDefaultLiteralExpression()
+    {
+        var authType = AuthenticationTypes.Secure;
+        authType = default;
+        new DirectoryEntry("", null, null, authType); // Noncompliant
+    }
+
+    public void AssignmentWithDefaultExpression()
+    {
+        var authType = AuthenticationTypes.Secure;
+        authType = default(AuthenticationTypes);
+        new DirectoryEntry("", null, null, authType); // Noncompliant
+    }
+}
+
+public class Sample
+{
+    public void NullConditionalAssignment(DirectoryEntry entry)
+    {
+        entry?.AuthenticationType = AuthenticationTypes.None; // FN
     }
 }

@@ -16,27 +16,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class LossOfFractionInDivisionTest
 {
-    [TestClass]
-    public class LossOfFractionInDivisionTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<LossOfFractionInDivision>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LossOfFractionInDivision>();
 
-        [TestMethod]
-        public void LossOfFractionInDivision() =>
-            builder.AddPaths("LossOfFractionInDivision.cs").Verify();
+    [TestMethod]
+    public void LossOfFractionInDivision() =>
+        builder.AddPaths("LossOfFractionInDivision.cs").Verify();
 
-        [TestMethod]
-        public void LossOfFractionInDivision_FromCSharp9() =>
-            builder.AddPaths("LossOfFractionInDivision.CSharp9.cs").WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void LossOfFractionInDivision_FromCSharp10() =>
-            builder.AddPaths("LossOfFractionInDivision.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void LossOfFractionInDivision_FromCSharp11() =>
-            builder.AddPaths("LossOfFractionInDivision.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-    }
+    [TestMethod]
+    public void LossOfFractionInDivision_CS_Latest() =>
+        builder.AddPaths("LossOfFractionInDivision.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

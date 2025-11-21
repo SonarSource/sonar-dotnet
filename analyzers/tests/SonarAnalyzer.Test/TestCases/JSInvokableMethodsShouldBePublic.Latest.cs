@@ -11,3 +11,14 @@ class Visibilities
     [JSInvokable] private static protected void PrivateProtectedStaticMethod2() { }   // Noncompliant
     //                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
+
+class LocalFunctions
+{
+    void Test()
+    {
+        [JSInvokable] void LocalFunction()
+        { }               // Compliant: not a method
+        [JSInvokable] static void LocalStaticFunction()
+        { }  // Compliant: not a method
+    }
+}

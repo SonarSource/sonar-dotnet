@@ -48,8 +48,8 @@ public class LoggerMembersNamesShouldComplyTest
                 ILogger<string> {{name}} { get; set; }  // Compliant
             }
             """)
-           .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-           .VerifyNoIssues();
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .VerifyNoIssues();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_MicrosoftExtensionsLogging_CS() =>
@@ -70,8 +70,8 @@ public class LoggerMembersNamesShouldComplyTest
                 //                ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
             }
             """)
-       .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-       .Verify();
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_Serilog_CS() =>
@@ -93,8 +93,8 @@ public class LoggerMembersNamesShouldComplyTest
                 //                ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
             }
             """)
-        .AddReferences(NuGetMetadataReference.Serilog())
-        .Verify();
+            .AddReferences(NuGetMetadataReference.Serilog())
+            .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_NLog_CS() =>
@@ -118,8 +118,8 @@ public class LoggerMembersNamesShouldComplyTest
             }
             public class MyLogger : Logger { }
             """)
-        .AddReferences(NuGetMetadataReference.NLog())
-        .Verify();
+            .AddReferences(NuGetMetadataReference.NLog())
+            .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_log4net_CS() =>
@@ -135,8 +135,8 @@ public class LoggerMembersNamesShouldComplyTest
                 ILogger _Logger;                        // Compliant
                 Logger _log;                            // Compliant
 
-                ILogger _log2;                         // Noncompliant {{Rename this field '_log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                ILog my_logger;                  // Noncompliant {{Rename this field 'my_logger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
+                ILogger _log2;                          // Noncompliant {{Rename this field '_log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
+                ILog my_logger;                         // Noncompliant {{Rename this field 'my_logger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
                 Logger mylog { get; set; }              // Noncompliant {{Rename this property 'mylog' to match the regular expression '^_?[Ll]og(ger)?$'.}}
                 //     ^^^^^
 
@@ -149,8 +149,8 @@ public class LoggerMembersNamesShouldComplyTest
                 public MyLogger(string name) : base(name) { }
             }
             """)
-        .AddReferences(NuGetMetadataReference.Log4Net(TestConstants.NuGetLatestVersion, "netstandard2.0"))
-        .Verify();
+            .AddReferences(NuGetMetadataReference.Log4Net(TestConstants.NuGetLatestVersion, "netstandard2.0"))
+            .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_CastleCore_CS() =>
@@ -171,23 +171,23 @@ public class LoggerMembersNamesShouldComplyTest
                 //                ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
             }
             """)
-        .AddReferences(NuGetMetadataReference.CastleCore())
-        .Verify();
+            .AddReferences(NuGetMetadataReference.CastleCore())
+            .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_Parameterized_CS() =>
         new VerifierBuilder()
             .AddAnalyzer(() => new LoggerMembersNamesShouldComply { Format = "^chocolate$" })
             .AddSnippet("""
-                    using System;
-                    using Microsoft.Extensions.Logging;
+                using System;
+                using Microsoft.Extensions.Logging;
 
-                    public class Program
-                    {
-                        ILogger chocolate;                      // Compliant
-                        ILogger running;                        // Noncompliant {{Rename this field 'running' to match the regular expression '^chocolate$'.}}
-                    }
-                    """)
+                public class Program
+                {
+                    ILogger chocolate;                      // Compliant
+                    ILogger running;                        // Noncompliant {{Rename this field 'running' to match the regular expression '^chocolate$'.}}
+                }
+                """)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
 }

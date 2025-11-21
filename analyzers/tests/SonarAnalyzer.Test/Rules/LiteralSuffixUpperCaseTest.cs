@@ -16,34 +16,27 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class LiteralSuffixUpperCaseTest
 {
-    [TestClass]
-    public class LiteralSuffixUpperCaseTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<LiteralSuffixUpperCase>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LiteralSuffixUpperCase>();
 
-        [TestMethod]
-        public void LiteralSuffixUpperCase() =>
-            builder.AddPaths("LiteralSuffixUpperCase.cs").Verify();
+    [TestMethod]
+    public void LiteralSuffixUpperCase() =>
+        builder.AddPaths("LiteralSuffixUpperCase.cs").Verify();
 
-        [TestMethod]
-        public void LiteralSuffixUpperCase_CodeFix() =>
-            builder.AddPaths("LiteralSuffixUpperCase.cs")
-                .WithCodeFix<LiteralSuffixUpperCaseCodeFix>()
-                .WithCodeFixedPaths("LiteralSuffixUpperCase.Fixed.cs")
-                .VerifyCodeFix();
+    [TestMethod]
+    public void LiteralSuffixUpperCase_CodeFix() =>
+        builder.AddPaths("LiteralSuffixUpperCase.cs")
+            .WithCodeFix<LiteralSuffixUpperCaseCodeFix>()
+            .WithCodeFixedPaths("LiteralSuffixUpperCase.Fixed.cs")
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void LiteralSuffixUpperCase_CSharp10() =>
-            builder.AddPaths("LiteralSuffixUpperCase.CSharp10.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void LiteralSuffixUpperCase_CSharp11() =>
-            builder.AddPaths("LiteralSuffixUpperCase.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .VerifyNoIssues();
-    }
+    [TestMethod]
+    public void LiteralSuffixUpperCase_CS_Latest() =>
+        builder.AddPaths("LiteralSuffixUpperCase.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

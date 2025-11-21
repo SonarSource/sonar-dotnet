@@ -16,27 +16,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class LdapConnectionShouldBeSecureTest
 {
-    [TestClass]
-    public class LdapConnectionShouldBeSecureTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<LdapConnectionShouldBeSecure>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LdapConnectionShouldBeSecure>().AddReferences(MetadataReferenceFacade.SystemDirectoryServices);
 
-        [TestMethod]
-        public void LdapConnectionsShouldBeSecure_CSharp8() =>
-            builder.AddPaths("LdapConnectionShouldBeSecure.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .Verify();
+    [TestMethod]
+    public void LdapConnectionsShouldBeSecure() =>
+        builder.AddPaths("LdapConnectionShouldBeSecure.cs").Verify();
 
-        [TestMethod]
-        public void LdapConnectionsShouldBeSecure_CS_Latest() =>
-            builder.AddPaths("LdapConnectionShouldBeSecure.Latest.cs")
-                .WithTopLevelStatements()
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .AddReferences(MetadataReferenceFacade.SystemDirectoryServices)
-                .Verify();
-    }
+    [TestMethod]
+    public void LdapConnectionsShouldBeSecure_CS_Latest() =>
+        builder.AddPaths("LdapConnectionShouldBeSecure.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

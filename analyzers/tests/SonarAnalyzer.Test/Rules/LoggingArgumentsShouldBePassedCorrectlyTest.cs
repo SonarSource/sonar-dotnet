@@ -73,8 +73,8 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .Verify();
 
     [TestMethod]
     public void LoggingArgumentsShouldBePassedCorrectly_MicrosoftExtensionsLogging_Log_CS() =>
@@ -109,8 +109,8 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .Verify();
 
     [TestMethod]
     [DataRow("DebugFormat")]
@@ -142,8 +142,8 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-        .AddReferences(NuGetMetadataReference.CastleCore())
-        .Verify();
+            .AddReferences(NuGetMetadataReference.CastleCore())
+            .Verify();
 
     [TestMethod]
     [DataRow("Log", "LogLevel.Debug,", "")]
@@ -195,8 +195,8 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-        .AddReferences(NuGetMetadataReference.NLog())
-        .Verify();
+            .AddReferences(NuGetMetadataReference.NLog())
+            .Verify();
 
     [TestMethod]
     [DataRow("ConditionalDebug")]
@@ -239,8 +239,8 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-        .AddReferences(NuGetMetadataReference.NLog())
-        .Verify();
+            .AddReferences(NuGetMetadataReference.NLog())
+            .Verify();
 
     [TestMethod]
     [DataRow("Debug")]
@@ -278,8 +278,8 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.Serilog())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.Serilog())
+            .Verify();
 
     [TestMethod]
     public void LoggingArgumentsShouldBePassedCorrectly_Serilog_Write_CS() =>
@@ -310,6 +310,6 @@ public class LoggingArgumentsShouldBePassedCorrectlyTest
             }
         }
         """)
-       .AddReferences(NuGetMetadataReference.Serilog())
-       .Verify();
+        .AddReferences(NuGetMetadataReference.Serilog())
+        .Verify();
 }

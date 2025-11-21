@@ -17,43 +17,43 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class JwtSignedTest
 {
-    [TestClass]
-    public class JwtSignedTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.JwtSigned>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.JwtSigned>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.JwtSigned>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.JwtSigned>();
 
-        [TestMethod]
-        public void JwtSigned_CS() =>
-            builderCS.AddPaths("JwtSigned.cs")
-                .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
-                .Verify();
+    [TestMethod]
+    public void JwtSigned_CS() =>
+        builderCS.AddPaths("JwtSigned.cs")
+            .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
+            .Verify();
 
-        [TestMethod]
-        public void JwtSigned_JWTDecoderExtensions_CS() =>
-            builderCS.AddPaths("JwtSigned.Extensions.cs")
-                .AddReferences(NuGetMetadataReference.JWT("7.3.1"))
-                .Verify();
+    [TestMethod]
+    public void JwtSigned_JWTDecoderExtensions_CS() =>
+        builderCS.AddPaths("JwtSigned.Extensions.cs")
+            .AddReferences(NuGetMetadataReference.JWT("7.3.1"))
+            .Verify();
 
-        [TestMethod]
-        public void JwtSigned_CS_FromCSharp9() =>
-            builderCS.AddPaths("JwtSigned.CSharp9.cs")
-                .WithTopLevelStatements()
-                .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
-                .Verify();
+    [TestMethod]
+    public void JwtSigned_CS_Latest() =>
+        builderCS.AddPaths("JwtSigned.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
+            .Verify();
 
-        [TestMethod]
-        public void JwtSigned_VB() =>
-            builderVB.AddPaths("JwtSigned.vb")
-                .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
-                .Verify();
+    [TestMethod]
+    public void JwtSigned_VB() =>
+        builderVB.AddPaths("JwtSigned.vb")
+            .AddReferences(NuGetMetadataReference.JWT("6.1.0"))
+            .Verify();
 
-        [TestMethod]
-        public void JwtSigned_JWTDecoderExtensions_VB() =>
-            builderVB.AddPaths("JwtSigned.Extensions.vb")
-                .AddReferences(NuGetMetadataReference.JWT("7.3.1"))
-                .Verify();
-    }
+    [TestMethod]
+    public void JwtSigned_JWTDecoderExtensions_VB() =>
+        builderVB.AddPaths("JwtSigned.Extensions.vb")
+            .AddReferences(NuGetMetadataReference.JWT("7.3.1"))
+            .Verify();
 }

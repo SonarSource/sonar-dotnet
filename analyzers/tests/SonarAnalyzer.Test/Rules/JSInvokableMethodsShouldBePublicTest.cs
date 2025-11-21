@@ -21,8 +21,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class JSInvokableMethodsShouldBePublicTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<JSInvokableMethodsShouldBePublic>()
-        .AddReferences(NuGetMetadataReference.MicrosoftJSInterop("7.0.14"));
+    private readonly VerifierBuilder builder = new VerifierBuilder<JSInvokableMethodsShouldBePublic>().AddReferences(NuGetMetadataReference.MicrosoftJSInterop("7.0.14"));
 
     public TestContext TestContext { get; set; }
 
@@ -39,14 +38,8 @@ public class JSInvokableMethodsShouldBePublicTest
             .Verify();
 
     [TestMethod]
-    public void JSInvokableMethodsShouldBePublic_CSharp8() =>
-        builder.AddPaths("JSInvokableMethodsShouldBePublic.CSharp8.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
+    public void JSInvokableMethodsShouldBePublic_CS_Latest() =>
+        builder.AddPaths("JSInvokableMethodsShouldBePublic.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-    [TestMethod]
-    public void JSInvokableMethodsShouldBePublic_CSharp9() =>
-        builder.AddPaths("JSInvokableMethodsShouldBePublic.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .VerifyNoIssues();
 }
