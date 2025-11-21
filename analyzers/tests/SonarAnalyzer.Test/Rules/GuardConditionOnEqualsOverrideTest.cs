@@ -16,13 +16,12 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class GuardConditionOnEqualsOverrideTest
 {
-    [TestClass]
-    public class GuardConditionOnEqualsOverrideTest
-    {
-        [TestMethod]
-        public void GuardConditionOnEqualsOverride() =>
-            new VerifierBuilder<GuardConditionOnEqualsOverride>().AddPaths("GuardConditionOnEqualsOverride.cs").Verify();
-    }
+    [TestMethod]
+    public void GuardConditionOnEqualsOverride() =>
+        new VerifierBuilder<GuardConditionOnEqualsOverride>().AddPaths("GuardConditionOnEqualsOverride.cs").Verify();
 }

@@ -19,10 +19,26 @@ if (apple is { }) { }           // Compliant
 b = apple is ("Sweet", "Red");
 b = apple is { Taste: "Sweet", Color: "Red" };
 
-record Fruit { public int Size { get; } }
+b = f as Apple is Apple { Prop.Length: 42 };   // Compliant
+b = !(f is Apple);         // Fixed
+
+record Fruit
+{
+    public int Size { get; }
+    public int[] Prop { get; }
+}
+
 sealed record Apple : Fruit
 {
     public string Taste;
     public string Color;
     public void Deconstruct(out string x, out string y) => (x, y) = (Taste, Color);
+}
+
+public class SomeClass : System.Collections.ArrayList
+{
+    public bool SomeMethod(SomeClass a)
+    {
+        return a is [SomeClass];
+    }
 }

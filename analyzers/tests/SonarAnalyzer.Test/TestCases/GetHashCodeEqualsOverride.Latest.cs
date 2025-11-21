@@ -16,3 +16,15 @@ public record WithParameters(string X)
 {
     public override int GetHashCode() => X.GetHashCode();
 }
+
+public static class Extensions
+{
+    extension(object sender)
+    {
+        public int GetHashCode() =>
+            sender.GetHashCode();   // Nonsense, but compliant. It's not a GetHashCode override
+
+        public bool Equals(object other) =>
+            sender.Equals(other);   // Nonsense, but compliant. It's not a Equals override
+    }
+}

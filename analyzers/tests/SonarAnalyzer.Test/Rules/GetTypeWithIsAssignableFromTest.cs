@@ -28,40 +28,20 @@ public class GetTypeWithIsAssignableFromTest
         builder.AddPaths("GetTypeWithIsAssignableFrom.cs").Verify();
 
     [TestMethod]
-    public void GetTypeWithIsAssignableFrom_CSharp9() =>
-        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp9.cs")
+    public void GetTypeWithIsAssignableFrom_CSharpLatest() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.Latest.cs")
             .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
-    public void GetTypeWithIsAssignableFrom_CSharp9_CodeFix() =>
-        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp9.cs")
+    public void GetTypeWithIsAssignableFrom_CSharpLatest_CodeFix() =>
+        builder.AddPaths("GetTypeWithIsAssignableFrom.Latest.cs")
             .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
-            .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.CSharp9.Fixed.cs")
+            .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.Latest.Fixed.cs")
             .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.CSharpLatest)
             .VerifyCodeFix();
-
-    [TestMethod]
-    public void GetTypeWithIsAssignableFrom_CSharp10() =>
-        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp10.cs")
-            .WithTopLevelStatements()
-            .WithOptions(LanguageOptions.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void GetTypeWithIsAssignableFrom_CSharp10_CodeFix() =>
-        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp10.cs")
-            .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
-            .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.CSharp10.Fixed.cs")
-            .WithTopLevelStatements()
-            .WithOptions(LanguageOptions.FromCSharp10)
-            .VerifyCodeFix();
-
-    [TestMethod]
-    public void GetTypeWithIsAssignableFrom_CSharp11() =>
-        builder.AddPaths("GetTypeWithIsAssignableFrom.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
-            .VerifyNoIssues();
 
     [TestMethod]
     public void GetTypeWithIsAssignableFrom_CodeFix() =>

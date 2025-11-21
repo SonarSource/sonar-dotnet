@@ -50,3 +50,11 @@ public record struct RecordStruct
     public override int GetHashCode() => Field; // Compliant, this is a value type.
 }
 
+class   // Error [CS1001] Identifier expected
+{
+    int i;
+    public override int GetHashCode()   // Noncompliant
+    {
+        return i;                       // Secondary
+    }
+}

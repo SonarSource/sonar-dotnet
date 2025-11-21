@@ -16,21 +16,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class GetHashCodeEqualsOverrideTest
 {
-    [TestClass]
-    public class GetHashCodeEqualsOverrideTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<GetHashCodeEqualsOverride>().AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives);
+    private readonly VerifierBuilder builder = new VerifierBuilder<GetHashCodeEqualsOverride>().AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives);
 
-        [TestMethod]
-        public void GetHashCodeEqualsOverride() =>
-            builder.AddPaths("GetHashCodeEqualsOverride.cs").Verify();
+    [TestMethod]
+    public void GetHashCodeEqualsOverride() =>
+        builder.AddPaths("GetHashCodeEqualsOverride.cs").Verify();
 
-        [TestMethod]
-        public void GetHashCodeEqualsOverride_CSharp9() =>
-            builder.AddPaths("GetHashCodeEqualsOverride.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .VerifyNoIssues();
-    }
+    [TestMethod]
+    public void GetHashCodeEqualsOverride_CSharpLatest() =>
+        builder.AddPaths("GetHashCodeEqualsOverride.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
 }

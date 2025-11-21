@@ -16,43 +16,27 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class GetHashCodeMutableTest
 {
-    [TestClass]
-    public class GetHashCodeMutableTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<GetHashCodeMutable>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<GetHashCodeMutable>();
 
-        [TestMethod]
-        public void GetHashCodeMutable() =>
-            builder.AddPaths("GetHashCodeMutable.cs").Verify();
+    [TestMethod]
+    public void GetHashCodeMutable() =>
+        builder.AddPaths("GetHashCodeMutable.cs").Verify();
 
-        [TestMethod]
-        public void GetHashCodeMutable_CSharp10() =>
-            builder.AddPaths("GetHashCodeMutable.CSharp10.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void GetHashCodeMutable_CSharpLatest() =>
+        builder.AddPaths("GetHashCodeMutable.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void GetHashCodeMutable_CodeFix() =>
-            builder.WithCodeFix<GetHashCodeMutableCodeFix>()
-                .AddPaths("GetHashCodeMutable.cs")
-                .WithCodeFixedPaths("GetHashCodeMutable.Fixed.cs")
-                .VerifyCodeFix();
-
-        [TestMethod]
-        public void GetHashCodeMutable_InvalidCode() =>
-            builder.AddSnippet("""
-                class
-                {
-                    int i;                              
-                    public override int GetHashCode()   // Noncompliant
-                    {
-                        return i;                       // Secondary
-                    }
-                }
-                """)
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .Verify();
-    }
+    [TestMethod]
+    public void GetHashCodeMutable_CodeFix() =>
+        builder.WithCodeFix<GetHashCodeMutableCodeFix>()
+            .AddPaths("GetHashCodeMutable.cs")
+            .WithCodeFixedPaths("GetHashCodeMutable.Fixed.cs")
+            .VerifyCodeFix();
 }

@@ -17,17 +17,16 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class GotoStatementTest
-    {
-        [TestMethod]
-        public void GotoStatement_CS() =>
-            new VerifierBuilder<CS.GotoStatement>().AddPaths("GotoStatement.cs").Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void GotoStatement_VB() =>
-            new VerifierBuilder<VB.GotoStatement>().AddPaths("GotoStatement.vb").Verify();
-    }
+[TestClass]
+public class GotoStatementTest
+{
+    [TestMethod]
+    public void GotoStatement_CS() =>
+        new VerifierBuilder<CS.GotoStatement>().AddPaths("GotoStatement.cs").Verify();
+
+    [TestMethod]
+    public void GotoStatement_VB() =>
+        new VerifierBuilder<VB.GotoStatement>().AddPaths("GotoStatement.vb").Verify();
 }
