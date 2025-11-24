@@ -16,13 +16,19 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ConditionalsShouldStartOnNewLineTest
 {
-    [TestClass]
-    public class ConditionalsShouldStartOnNewLineTest
-    {
-        [TestMethod]
-        public void ConditionalsShouldStartOnNewLine() =>
-            new VerifierBuilder<ConditionalsShouldStartOnNewLine>().AddPaths("ConditionalsShouldStartOnNewLine.cs").Verify();
-    }
+    [TestMethod]
+    public void ConditionalsShouldStartOnNewLine() =>
+        new VerifierBuilder<ConditionalsShouldStartOnNewLine>().AddPaths("ConditionalsShouldStartOnNewLine.cs").Verify();
+#if NET
+
+    [TestMethod]
+    public void ConditionalsShouldStartOnNewLine_CSharpLatest() =>
+        new VerifierBuilder<ConditionalsShouldStartOnNewLine>().AddPaths("ConditionalsShouldStartOnNewLine.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
+
+#endif
 }

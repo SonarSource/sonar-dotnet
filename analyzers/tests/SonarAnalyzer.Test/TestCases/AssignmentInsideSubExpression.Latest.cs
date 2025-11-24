@@ -63,6 +63,12 @@ namespace CSharp14
             {
 
             }
+
+            a?.Value = true;            // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2391
+            if (a is not null)
+            {
+                a.Value = true;        // Compliant
+            }
         }
         class C2
         {

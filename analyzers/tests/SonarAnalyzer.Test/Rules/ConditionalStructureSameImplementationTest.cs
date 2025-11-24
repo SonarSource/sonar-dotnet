@@ -84,14 +84,14 @@ public class ConditionalStructureSameImplementationTest
     public void ConditionalStructureSameImplementation_SymbolCannotBeResolved_VB(string firstExpression, string secondExpression, bool isCompliant)
     {
         var compliantComment = isCompliant ? "' Compliant" : "' Noncompliant";
-        var builder = builderVB.AddSnippet($$"""
+        var builder = builderVB.AddSnippet($"""
             Public Class NameOfExpressions
                 Public Function Method(first as String, second as String)
                     If first.Length = 42 Then
-                        Dim ret = {{firstExpression}}
+                        Dim ret = {firstExpression}
                         Return ret
                     ElseIf second.Length = 42 Then
-                        Dim ret = {{secondExpression}}  {{compliantComment}}
+                        Dim ret = {secondExpression}  {compliantComment}
                         Return ret
                     End If
                     Return ""
@@ -117,8 +117,12 @@ public class ConditionalStructureSameImplementationTest
         builderVB.AddPaths("ConditionalStructureSameImplementation_Switch.vb").Verify();
 
     [TestMethod]
+    public void ConditionalStructureSameImplementation_If_CSharp_Latest() =>
+    builderCS.AddPaths("ConditionalStructureSameImplementation_If.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
     public void ConditionalStructureSameImplementation_Switch_CSharp_Latest() =>
-        builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
+        builderCS.AddPaths("ConditionalStructureSameImplementation_Switch.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void ConditionalStructureSameImplementation_RazorFile_CorrectMessage() =>

@@ -95,3 +95,24 @@ public class Repro6977_CollectionExpression
         Yellow
     }
 }
+
+public class ImplicitSpanConversion
+{
+    public static void Test(string[] myArray)
+    {
+        DoSomething(new string[] { "s1", "s2" });   // Noncompliant {{Remove this array creation and simply pass the elements.}}
+        //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        DoSomething(new string[] { "s1" });         // Noncompliant
+        DoSomething(new[] { "s1" });                // Noncompliant
+        DoSomething(new string[] { });              // Noncompliant
+        DoSomething("s1");                          // Compliant
+        DoSomething("s1", "s2");                    // Compliant
+        DoSomething(myArray);                       // Compliant
+        DoSomething(new string[12]);                // Compliant
+        DoSomething(["1", "2", "3"]);               // Noncompliant
+        DoSomething(["1", "2", "3"].ToArray());     // Compliant
+                                                    // Error@-1 [CS9176] There is no target type for the collection expression.
+    }
+
+    public static void DoSomething(params Span<string> arr) { }
+}

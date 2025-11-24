@@ -28,9 +28,9 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("CompareNaN.cs").Verify();
 
         [TestMethod]
-        public void CompareNaN_CSharp11() =>
-            builder.AddPaths("CompareNaN.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
+        public void CompareNaN_CSharpLatest() =>
+            builder.AddPaths("CompareNaN.Latest.cs")
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();
     }
 }

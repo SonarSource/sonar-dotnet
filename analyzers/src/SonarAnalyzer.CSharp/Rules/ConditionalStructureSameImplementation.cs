@@ -43,7 +43,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
 
                 if (ifStatement.Else is not null)
                 {
-                    CheckStatement(c, ifStatement.Else.Statement, [..precedingStatements, ifStatement.Statement], c.Model, hasElse, "branch");
+                    CheckStatement(c, ifStatement.Else.Statement, [.. precedingStatements, ifStatement.Statement], c.Model, hasElse, "branch");
                 }
             },
             SyntaxKind.IfStatement);
@@ -73,7 +73,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
 
     private static void CheckStatement(SonarSyntaxNodeReportingContext context, SyntaxNode node, IReadOnlyList<SyntaxNode> precedingBranches, SemanticModel model, bool hasElse, string discriminator)
     {
-        var numberOfStatements = GetStatementsCount(node);
+        var numberOfStatements = StatementsCount(node);
         if (!hasElse && numberOfStatements == 1)
         {
             if (precedingBranches.Any() && precedingBranches.All(x => AreEquivalentStatements(node, x, model)))
@@ -97,7 +97,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             _ => false, // Should not happen
         };
 
-    private static int GetStatementsCount(SyntaxNode node)
+    private static int StatementsCount(SyntaxNode node)
     {
         // Get all child statements from the node, in case of a switch section, we need to handle the case where the statements are wrapped in a block
         var statements = node is SwitchSectionSyntax switchSection

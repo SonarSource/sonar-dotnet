@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 
-List<object> list = null;
-
-list.Select(static (element, col) => element is Int32 and > 21).Any(element => element != null); // Compliant
-list.Select((object _, int _) => 1).Any(element => element != null); // Compliant
-
-list.Select((element, col) => element as object).Any(element => element != null);  //Noncompliant {{Use 'OfType<object>()' here instead.}}
-
-
 // https://github.com/SonarSource/sonar-dotnet/issues/3604
 public class EntityFrameworkReproGH3604
 {
@@ -83,5 +75,68 @@ public class EntityFrameworkReproGH3604
     public bool SomeTest(MyEntity entity)
     {
         return true;
+    }
+}
+
+
+namespace CSharp14
+{
+    public static class Extensions
+    {
+        extension<TSource>(IEnumerable<TSource> source)
+        {
+            public bool NonCompliantProp => !source.ToList().Any(); // Noncompliant
+            public bool CompliantProp => !source.Any();
+
+            public bool NonCompliantMethod() { return source.Select(x => x as object).Any(x => x != null); }    // Noncompliant
+            public bool CompliantMethod() { return source.OfType<object>().Any(x => x != null); }
+        }
+    }
+
+    public class FieldKeyword
+    {
+        public IEnumerable<string> NonCompliantProp
+        {
+            get { return field.ToList().Select(x => x.ToString()); }    // Noncompliant
+            set { }
+        }
+
+        public IEnumerable<string> CompliantProp
+        {
+            get { return field.Select(x => x.ToString()); }
+            set { }
+        }
+    }
+
+    public class NullConditionalAssignment
+    {
+        public void Test(List<string> strings)
+        {
+            var x = new Tester();
+
+            x?.collection = strings.Where(x => x is string).Any();  // Noncompliant
+        }
+        public class Tester
+        {
+            public bool collection;
+        }
+    }
+
+    public class SimpleLambdaParameters
+    {
+        delegate bool OutTest<T>(string text, out T result);
+        delegate bool InTest<T>(in T value);
+
+        public void Test(List<string> source)
+        {
+            OutTest<int> outTest = (text, out result) => int.TryParse(text, out result);
+            InTest<string> inTest = (in value) => value.Length > 42;
+
+            var NoncompliantOut = source.Where(x => outTest(x, out var result)).Any();   // Noncompliant
+            var CompliantOut = source.Any(x => outTest(x, out var result));
+
+            var NoncompliantIn = source.Where(x => inTest(in x)).Any();   // Noncompliant
+            var CompliantIn = source.Any(x => inTest(in x));
+        }
     }
 }

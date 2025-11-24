@@ -16,43 +16,48 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class CollectionQuerySimplificationTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CollectionQuerySimplification>();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void CollectionQuerySimplification() =>
-            builder.AddPaths("CollectionQuerySimplification.cs")
-                .Verify();
+[TestClass]
+public class CollectionQuerySimplificationTest
+{
+    private readonly VerifierBuilder builder = new VerifierBuilder<CollectionQuerySimplification>();
+
+    [TestMethod]
+    public void CollectionQuerySimplification() =>
+        builder.AddPaths("CollectionQuerySimplification.cs")
+            .Verify();
 #if NETFRAMEWORK
 
-        [TestMethod]
-        public void CollectionQuerySimplification_NetFx() =>
-            builder.AddPaths("CollectionQuerySimplification.NetFx.cs")
-                .AddReferences(FrameworkMetadataReference.SystemDataLinq)
-                .Verify();
+    [TestMethod]
+    public void CollectionQuerySimplification_NetFx() =>
+        builder.AddPaths("CollectionQuerySimplification.NetFx.cs")
+            .AddReferences(FrameworkMetadataReference.SystemDataLinq)
+            .Verify();
 
 #endif
 
 #if NET
 
-        [TestMethod]
-        public void CollectionQuerySimplification_CSharp9() =>
-            builder.AddPaths("CollectionQuerySimplification.CSharp9.cs")
-                .AddReferences(GetReferencesEntityFrameworkNet())
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void CollectionQuerySimplification_TopLevelStatements() =>
+        builder.AddPaths("CollectionQuerySimplification.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        private static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNet() =>
-            Enumerable.Empty<MetadataReference>()
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.6"))
-                .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational("2.2.6"))
-                .Concat(NuGetMetadataReference.EntityFramework("6.2.0"))
-                .Concat(NuGetMetadataReference.SystemComponentModelTypeConverter());
+    [TestMethod]
+    public void CollectionQuerySimplification_Latest() =>
+        builder.AddPaths("CollectionQuerySimplification.Latest.cs")
+            .AddReferences(EntityFrameworkNetReferences())
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    private static IEnumerable<MetadataReference> EntityFrameworkNetReferences() =>
+        Enumerable.Empty<MetadataReference>()
+            .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.6"))
+            .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational("2.2.6"))
+            .Concat(NuGetMetadataReference.EntityFramework("6.2.0"))
+            .Concat(NuGetMetadataReference.SystemComponentModelTypeConverter());
 
 #endif
-    }
 }

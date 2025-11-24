@@ -20,3 +20,34 @@ namespace Tests.TestCases
 
     }
 }
+
+namespace CShar14
+{
+    class FieldKeyword
+    {
+        public int Name
+        {
+            get
+            {
+                switch (field)
+                {
+                    case 1:                 // Secondary
+                        field = field + 1;
+                        break;
+                    case 20:                // Noncompliant
+                                            // Secondary@-1
+                        field = field + 1;
+                        break;
+                    case 50:                // Noncompliant
+                        field = field + 1;
+                        break;
+                    case 42:                // Compliant
+                        field = 42;
+                        break;
+                }
+                return field;
+            }
+            set { }
+        }
+    }
+}
