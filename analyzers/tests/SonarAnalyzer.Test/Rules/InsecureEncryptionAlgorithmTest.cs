@@ -17,43 +17,34 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class InsecureEncryptionAlgorithmTest
 {
-    [TestClass]
-    public class InsecureEncryptionAlgorithmTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsecureEncryptionAlgorithm>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InsecureEncryptionAlgorithm>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsecureEncryptionAlgorithm>().AddReferences(AdditionalReferences());
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InsecureEncryptionAlgorithm>().AddReferences(AdditionalReferences());
 
-        [TestMethod]
-        public void InsecureEncryptionAlgorithm_MainProject_CS() =>
-            builderCS.AddPaths("InsecureEncryptionAlgorithm.cs")
-                .AddReferences(GetAdditionalReferences())
-                .Verify();
+    [TestMethod]
+    public void InsecureEncryptionAlgorithm_MainProject_CS() =>
+        builderCS.AddPaths("InsecureEncryptionAlgorithm.cs").Verify();
 
-        [TestMethod]
-        public void InsecureEncryptionAlgorithm_DoesNotRaiseIssuesForTestProject_CS() =>
-            builderCS.AddPaths("InsecureEncryptionAlgorithm.cs")
-                .AddTestReference()
-                .AddReferences(GetAdditionalReferences())
-                .VerifyNoIssuesIgnoreErrors();
+    [TestMethod]
+    public void InsecureEncryptionAlgorithm_DoesNotRaiseIssuesForTestProject_CS() =>
+        builderCS.AddPaths("InsecureEncryptionAlgorithm.cs").AddTestReference().VerifyNoIssuesIgnoreErrors();
 
-        [TestMethod]
-        public void InsecureEncryptionAlgorithm_CS_Latest() =>
-            builderCS.AddPaths("InsecureEncryptionAlgorithm.Latest.cs")
-                .WithTopLevelStatements()
-                .AddReferences(GetAdditionalReferences())
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void InsecureEncryptionAlgorithm_CS_Latest() =>
+        builderCS.AddPaths("InsecureEncryptionAlgorithm.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void InsecureEncryptionAlgorithm_VB() =>
-            builderVB.AddPaths("InsecureEncryptionAlgorithm.vb")
-                .AddReferences(GetAdditionalReferences())
-                .WithOptions(LanguageOptions.FromVisualBasic14)
-                .Verify();
+    [TestMethod]
+    public void InsecureEncryptionAlgorithm_VB() =>
+        builderVB.AddPaths("InsecureEncryptionAlgorithm.vb").Verify();
 
-        private static IEnumerable<MetadataReference> GetAdditionalReferences() =>
-            MetadataReferenceFacade.SystemSecurityCryptography.Concat(NuGetMetadataReference.BouncyCastle());
-    }
+    [TestMethod]
+    public void InsecureEncryptionAlgorithm_VB_Latest() =>
+        builderVB.AddPaths("InsecureEncryptionAlgorithm.Latest.vb").WithOptions(LanguageOptions.VisualBasicLatest).VerifyNoIssues();
+
+    private static IEnumerable<MetadataReference> AdditionalReferences() =>
+        MetadataReferenceFacade.SystemSecurityCryptography.Concat(NuGetMetadataReference.BouncyCastle());
 }

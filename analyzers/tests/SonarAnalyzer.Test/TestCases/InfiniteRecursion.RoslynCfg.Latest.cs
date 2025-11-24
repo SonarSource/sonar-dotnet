@@ -61,6 +61,62 @@ namespace CSharp.Thirteen
 
 namespace Tests.Diagnostics
 {
+    public class CSharp8
+    {
+        int CSharp8_SwitchExpressions_OK(int a)
+        {
+            return a switch
+            {
+                0 => 1,
+                1 => 0,
+                _ => CSharp8_SwitchExpressions_OK(a) % 2
+            };
+        }
+
+        int CSharp8_SwitchExpressions_Bad(int a)    // Noncompliant
+        {
+            return a switch
+            {
+                0 => CSharp8_SwitchExpressions_Bad(a + 1),
+                1 => CSharp8_SwitchExpressions_Bad(a - 1),
+                _ => CSharp8_SwitchExpressions_Bad(a) % 2
+            };
+        }
+
+        int CSharp8_StaticLocalFunctions_OK(int a)
+        {
+            static int Calculate(int a, int b) => a + b + 1;
+
+            return Calculate(a, 1);
+        }
+
+        int CSharp8_StaticLocalFunctions_Bad(int a, int b)
+        {
+            static int Calculate(int a, int b) => Calculate(a, b) + 1;  //Noncompliant
+
+            return Calculate(a, b);
+        }
+
+        int CSharp8_StaticLocalFunctions_FN(int a, int b)
+        {
+            static int Add(int a, int b) => Fix(a, b);  // FN - Two methods calling each other are not recognized
+            static int Fix(int a, int b) => Add(a, b);
+
+            return Add(a, b);
+        }
+    }
+
+    public interface IWithDefaultImplementation
+    {
+        decimal Count { get; set; }
+        decimal Price { get; set; }
+
+        decimal Total() //Noncompliant
+        {
+            return Count * Price + Total();
+        }
+    }
+
     interface InfiniteRecursion
     {
         static virtual int Pow<T>(int num, int exponent) where T : InfiniteRecursion // Noncompliant
@@ -135,5 +191,30 @@ namespace Tests.Diagnostics
         public static BitWise operator |(BitWise left, BitWise right) => left | right; // Noncompliant
 
         public static BitWise operator ^(BitWise left, BitWise right) => left ^ right; // Noncompliant
+    }
+}
+
+public static class Extensions
+{
+    extension(Exception ex)
+    {
+        public void Infinite()  // Noncompliant
+        {
+            ex.Infinite();
+        }
+
+        public void Finite(int count)
+        {
+            if (count > 0)
+            {
+                ex.Finite(count - 1);
+            }
+        }
+
+        public int InstanceInfiniteCount => ex.InstanceInfiniteCount + 1; // FN
+        public int InstanceFiniteCount => ex.Message.Length + 1;
+
+        public static int StaticInfiniteCount => Exception.StaticInfiniteCount + 1; // Noncompliant
+        public static int StaticFiniteCount => 4 + 2;
     }
 }

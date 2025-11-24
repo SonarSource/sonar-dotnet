@@ -38,7 +38,6 @@ public class InfiniteRecursionTest
     [TestMethod]
     public void InfiniteRecursion_RoslynCfg() =>
         roslynCfg.AddPaths("InfiniteRecursion.RoslynCfg.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
             .Verify();
 
     [TestMethod]
@@ -129,14 +128,14 @@ public class InfiniteRecursionTest
         }
         for (var i = 1; i <= rows; i++)
         {
-            code.AppendLine($$"""        sheetData1.Append(row{{i}});""");
+            code.AppendLine($"""        sheetData1.Append(row{i});""");
         }
         code.Append(""""
-                worksheet1.Append(sheetData1);
-                worksheetPart1.Worksheet = worksheet1;
+                    worksheet1.Append(sheetData1);
+                    worksheetPart1.Worksheet = worksheet1;
+                }
             }
-        }
-        """");
+            """");
 
         roslynCfg.AddSnippet(code.ToString())
             .WithOptions(LanguageOptions.FromCSharp8)

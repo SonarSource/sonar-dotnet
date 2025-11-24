@@ -16,48 +16,42 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class InvocationResolvesToOverrideWithParamsTest
 {
-    [TestClass]
-    public class InvocationResolvesToOverrideWithParamsTest
+    private readonly VerifierBuilder builder = new VerifierBuilder<InvocationResolvesToOverrideWithParams>();
+
+    [TestMethod]
+    public void InvocationResolvesToOverrideWithParams()
     {
-        private readonly VerifierBuilder builder = new VerifierBuilder<InvocationResolvesToOverrideWithParams>();
+        var anotherAssembly = TestCompiler.CompileCS("""
+            public class FromAnotherAssembly
+            {
+                protected int ProtectedOverload(object a, string b) => 42;
+                public int ProtectedOverload(string a, params string[] bs) => 42;
 
-        [TestMethod]
-        public void InvocationResolvesToOverrideWithParams()
-        {
-            var anotherAssembly = TestCompiler.CompileCS("""
-                public class FromAnotherAssembly
-                {
-                    protected int ProtectedOverload(object a, string b) => 42;
-                    public int ProtectedOverload(string a, params string[] bs) => 42;
+                private protected int PrivateProtectedOverload(object a, string b) => 42;
+                public int PrivateProtectedOverload(string a, params string[] bs) => 42;
 
-                    private protected int PrivateProtectedOverload(object a, string b) => 42;
-                    public int PrivateProtectedOverload(string a, params string[] bs) => 42;
+                protected internal int ProtectedInternalOverload(object a, string b) => 42;
+                public int ProtectedInternalOverload(string a, params string[] bs) => 42;
 
-                    protected internal int ProtectedInternalOverload(object a, string b) => 42;
-                    public int ProtectedInternalOverload(string a, params string[] bs) => 42;
-
-                    internal int InternalOverload(object a, string b) => 42;
-                    public int InternalOverload(string a, params string[] bs) => 42;
-                }
-                """).Model.Compilation.ToMetadataReference();
-            builder.AddPaths("InvocationResolvesToOverrideWithParams.cs")
-                .AddReferences(new[] { anotherAssembly })
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
-        }
-
-        [TestMethod]
-        public void InvocationResolvesToOverrideWithParams_TopLevelStatements() =>
-            builder.AddPaths("InvocationResolvesToOverrideWithParams.TopLevelStatements.cs")
-                .WithTopLevelStatements()
-                .Verify();
-
-        [TestMethod]
-        public void InvocationResolvesToOverrideWithParams_CS_Latest() =>
-            builder.AddPaths("InvocationResolvesToOverrideWithParams.Latest.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+                internal int InternalOverload(object a, string b) => 42;
+                public int InternalOverload(string a, params string[] bs) => 42;
+            }
+            """).Model.Compilation.ToMetadataReference();
+        builder.AddPaths("InvocationResolvesToOverrideWithParams.cs")
+            .AddReferences([anotherAssembly])
+            .Verify();
     }
+
+    [TestMethod]
+    public void InvocationResolvesToOverrideWithParams_TopLevelStatements() =>
+        builder.AddPaths("InvocationResolvesToOverrideWithParams.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void InvocationResolvesToOverrideWithParams_CS_Latest() =>
+        builder.AddPaths("InvocationResolvesToOverrideWithParams.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

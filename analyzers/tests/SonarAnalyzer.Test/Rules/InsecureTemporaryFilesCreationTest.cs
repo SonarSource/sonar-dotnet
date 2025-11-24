@@ -17,25 +17,22 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class InsecureTemporaryFilesCreationTest
 {
-    [TestClass]
-    public class InsecureTemporaryFilesCreationTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsecureTemporaryFilesCreation>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InsecureTemporaryFilesCreation>();
 
-        [TestMethod]
-        public void InsecureTemporaryFilesCreation_CS() =>
-            builderCS.AddPaths("InsecureTemporaryFilesCreation.cs").Verify();
+    [TestMethod]
+    public void InsecureTemporaryFilesCreation_CS() =>
+        builderCS.AddPaths("InsecureTemporaryFilesCreation.cs").Verify();
 
-        [TestMethod]
-        public void InsecureTemporaryFilesCreation_CSharp9() =>
-            builderCS.AddPaths("InsecureTemporaryFilesCreation.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void InsecureTemporaryFilesCreation_CS_Latest() =>
+        builderCS.AddPaths("InsecureTemporaryFilesCreation.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void InsecureTemporaryFilesCreation_VB() =>
-            new VerifierBuilder<VB.InsecureTemporaryFilesCreation>().AddPaths("InsecureTemporaryFilesCreation.vb").Verify();
-    }
+    [TestMethod]
+    public void InsecureTemporaryFilesCreation_VB() =>
+        new VerifierBuilder<VB.InsecureTemporaryFilesCreation>().AddPaths("InsecureTemporaryFilesCreation.vb").Verify();
 }

@@ -66,14 +66,6 @@ namespace SonarAnalyzer.Test.TestCases
             dictionary["Content-Security-Policy"] = "default-src 'self' '*.example.com';"; // FN
             dictionary["Content-Security-Policy"] = "default-src 'self';"; // Compliant
 
-            var myheaderDictionary = new MyHeaderDictionary();
-            myheaderDictionary.Add("Content-Security-Policy", "script-src 'self';"); // Compliant
-            myheaderDictionary.Add("Content-Security-Policy", "script-src 'self' 'unsafe-inline';"); // Noncompliant
-            myheaderDictionary.Append("Content-Security-Policy", "script-src 'self';"); // Compliant
-            myheaderDictionary.Append("Content-Security-Policy", "script-src 'self' 'unsafe-inline';"); // Compliant
-            myheaderDictionary["Content-Security-Policy"] = "script-src 'self';"; // Compliant
-            myheaderDictionary["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';"; // Compliant
-
             mock.Response.Headers.ContentSecurityPolicy = "script-src 'self' 'unsafe-inline';";            // Compliant
             mock.Response.Headers.Add("Content-Security-Policy", "script-src 'self' 'unsafe-inline';");    // Compliant
             mock.Response.Headers.Append("Content-Security-Policy", "script-src 'self' 'unsafe-inline';"); // Compliant
@@ -105,33 +97,6 @@ namespace SonarAnalyzer.Test.TestCases
                     }
                 }
             }
-        }
-
-        public class MyHeaderDictionary : IHeaderDictionary
-        {
-            public long? ContentLength { get; set; }
-            public ICollection<string> Keys => throw new NotImplementedException();
-            public ICollection<StringValues> Values => throw new NotImplementedException();
-            public int Count => throw new NotImplementedException();
-            public bool IsReadOnly => throw new NotImplementedException();
-            public StringValues this[string key]
-            {
-                get => throw new NotImplementedException();
-                set => throw new NotImplementedException();
-            }
-
-            public void Add(string key, StringValues value) { }
-            public void Append(string key, StringValues value) { }
-            public bool ContainsKey(string key) => throw new NotImplementedException();
-            public bool Remove(string key) => throw new NotImplementedException();
-            public bool TryGetValue(string key, [MaybeNullWhen(false)] out StringValues value) => throw new NotImplementedException();
-            public void Clear() => throw new NotImplementedException();
-            public bool Contains(KeyValuePair<string, StringValues> item) => throw new NotImplementedException();
-            public void CopyTo(KeyValuePair<string, StringValues>[] array, int arrayIndex) => throw new NotImplementedException();
-            public bool Remove(KeyValuePair<string, StringValues> item) => throw new NotImplementedException();
-            public IEnumerator<KeyValuePair<string, StringValues>> GetEnumerator() => throw new NotImplementedException();
-            IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
-            public void Add(KeyValuePair<string, StringValues> item) => throw new NotImplementedException();
         }
     }
 }

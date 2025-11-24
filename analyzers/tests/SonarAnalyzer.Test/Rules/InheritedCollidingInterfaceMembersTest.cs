@@ -29,21 +29,9 @@ public class InheritedCollidingInterfaceMembersTest
 
     [TestMethod]
     public void InheritedCollidingInterfaceMembers_DifferentFileSizes() =>
-        builder.AddPaths(
-                "InheritedCollidingInterfaceMembers.DifferentFile.cs",
-                "InheritedCollidingInterfaceMembers.AnotherFile.cs")
-            .Verify();
+        builder.AddPaths("InheritedCollidingInterfaceMembers.DifferentFile.cs", "InheritedCollidingInterfaceMembers.AnotherFile.cs").Verify();
 
     [TestMethod]
-    public void InheritedCollidingInterfaceMembers_CSharp8() =>
-        builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp8.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .AddReferences(MetadataReferenceFacade.NetStandard21)
-            .Verify();
-
-        [TestMethod]
-        public void InheritedCollidingInterfaceMembers_CSharp11() =>
-            builder.AddPaths("InheritedCollidingInterfaceMembers.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
+    public void InheritedCollidingInterfaceMembers_CSharpLatest() =>
+        builder.AddPaths("InheritedCollidingInterfaceMembers.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

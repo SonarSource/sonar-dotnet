@@ -23,20 +23,19 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class InsecureContentSecurityPolicyTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<InsecureContentSecurityPolicy>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<InsecureContentSecurityPolicy>().AddReferences([
+        AspNetCoreMetadataReference.MicrosoftAspNetCore,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
+        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
+        AspNetCoreMetadataReference.MicrosoftExtensionsPrimitives]);
 
     [TestMethod]
     public void InsecureContentSecurityPolicy_CS() =>
-        builder
-            .AddPaths("InsecureContentSecurityPolicy.cs")
-            .AddReferences([
-                AspNetCoreMetadataReference.MicrosoftAspNetCore,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
-                AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,
-                AspNetCoreMetadataReference.MicrosoftExtensionsPrimitives
-            ])
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .Verify();
+        builder.AddPaths("InsecureContentSecurityPolicy.cs").Verify();
+
+    [TestMethod]
+    public void InsecureContentSecurityPolicy_CS_Latest() =>
+        builder.AddPaths("InsecureContentSecurityPolicy.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }
 
 #endif

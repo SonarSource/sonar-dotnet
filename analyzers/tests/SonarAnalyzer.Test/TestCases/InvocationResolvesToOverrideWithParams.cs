@@ -115,27 +115,6 @@ public class FuncAndActionCases
     public static void M1(Func<Task> f) { }
 }
 
-public class WithLocalFunctions
-{
-    public static void Test(int foo, params object[] p)
-    {
-        Console.WriteLine("test1");
-    }
-
-    public static void Test(double foo, object p1)
-    {
-        Console.WriteLine("test2");
-    }
-
-    public void Method()
-    {
-        static void Call()
-        {
-            Test(42, null); // Noncompliant {{Review this call, which partially matches an overload without 'params'. The partial match is 'void WithLocalFunctions.Test(double foo, object p1)'.}}
-        }
-    }
-}
-
 // https://github.com/SonarSource/sonar-dotnet/issues/5430
 namespace Repro5430
 {
@@ -163,9 +142,6 @@ namespace Repro5430
 
         protected int ProtectedOverload(object a, string b) => 42;
         public int ProtectedOverload(string a, params string[] bs) => 42;
-
-        private protected int PrivateProtectedOverload(object a, string b) => 42;
-        public int PrivateProtectedOverload(string a, params string[] bs) => 42;
 
         protected internal int ProtectedInternalOverload(object a, string b) => 42;
         public int ProtectedInternalOverload(string a, params string[] bs) => 42;
@@ -202,12 +178,6 @@ namespace Repro5430
             ProtectedOverload(null, "s2");                   // Noncompliant
             ProtectedOverload(null, new[] { "s2" });         // Compliant
             ProtectedOverload("42", "s1", "s2");             // Compliant
-
-            PrivateProtectedOverload("s1");                  // Compliant
-            PrivateProtectedOverload("s1", "s2");            // Noncompliant
-            PrivateProtectedOverload(null, "s2");            // Noncompliant
-            PrivateProtectedOverload(null, new[] { "s2" });  // Compliant
-            PrivateProtectedOverload("42", "s1", "s2");      // Compliant
 
             ProtectedInternalOverload("s1");                 // Compliant
             ProtectedInternalOverload("s1", "s2");           // Noncompliant
@@ -312,12 +282,6 @@ namespace Repro5430
             x.ProtectedOverload(null, new[] { "s2" });         // Compliant
             x.ProtectedOverload("42", "s1", "s2");             // Compliant
 
-            x.PrivateProtectedOverload("s1");                  // Compliant
-            x.PrivateProtectedOverload("s1", "s2");            // Compliant
-            x.PrivateProtectedOverload(null, "s2");            // Compliant
-            x.PrivateProtectedOverload(null, new[] { "s2" });  // Compliant
-            x.PrivateProtectedOverload("42", "s1", "s2");      // Compliant
-
             x.ProtectedInternalOverload("s1");                 // Compliant
             x.ProtectedInternalOverload("s1", "s2");           // Noncompliant
             x.ProtectedInternalOverload(null, "s2");           // Noncompliant
@@ -410,22 +374,3 @@ namespace Repro5430
     }
 }
 
-// https://github.com/SonarSource/sonar-dotnet/issues/8522
-class Repro_8522
-{
-    T Get<T>(params string[] key) => default;
-    string Get(string key) => default;
-
-    T GetBothHaveGenerics<T>(params int[] ints) => default;
-    T GetBothHaveGenerics<T>(int anInt) => default;
-
-    T GenericsWhereOneHasObjectParam<T>(params int[] ints) => default;
-    T GenericsWhereOneHasObjectParam<T>(object anInt) => default;
-
-    void Test()
-    {
-        Get<string>("text");                          // Compliant
-        GetBothHaveGenerics<string>(1);               // Compliant, when both methods are generic it seems to resolve correctly to the T GetBothHaveGenerics<T>(int anInt).
-        GenericsWhereOneHasObjectParam<string>(1);    // Noncompliant
-    }
-}

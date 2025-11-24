@@ -45,3 +45,13 @@ namespace Custom
         public static string GetTempFileName() => string.Empty;
     }
 }
+
+public class Sample
+{
+    public string Temp;
+
+    public void NullConditionalAssignment(Sample arg)
+    {
+        arg?.Temp = Path.GetTempFileName(); // Noncompliant
+    }
+}

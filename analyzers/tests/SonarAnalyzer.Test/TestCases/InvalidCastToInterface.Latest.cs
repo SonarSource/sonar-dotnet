@@ -35,6 +35,7 @@ public class ImplementingClass : ISomething { }
 public class Sample
 {
     private string field;
+    private ISomething somethingField;
 
     public void TargetTypedNew()
     {
@@ -87,6 +88,25 @@ public class Sample
             nullable = null;
             i = (int)nullable;  // SE part
         }
+    }
+
+    public void TupleAssignment()
+    {
+        var standalone = new StandaloneClass();
+        StandaloneClass a;
+        (a, var b) = (standalone, (ISomething)standalone); // Noncompliant
+    }
+
+    public void NullConditionalAssignment(Sample arg)
+    {
+        var standalone = new StandaloneClass();
+        arg?.somethingField = (ISomething)standalone; // Noncompliant
+    }
+
+    public ISomething FieldKeyword
+    {
+        get;
+        set => field = ((ISomething)new StandaloneClass()); // Noncompliant
     }
 }
 
