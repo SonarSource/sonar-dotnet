@@ -21,18 +21,15 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class DoNotDecreaseMemberVisibilityTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotDecreaseMemberVisibility>().WithConcurrentAnalysis(false);
+    private readonly VerifierBuilder builder = new VerifierBuilder<DoNotDecreaseMemberVisibility>().WithAutogenerateConcurrentFiles(false);
 
     [TestMethod]
     public void DoNotDecreaseMemberVisibility() =>
-        builder.AddPaths("DoNotDecreaseMemberVisibility.cs", "DoNotDecreaseMemberVisibility2.cs")
-            .AddReferences(MetadataReferenceFacade.NetStandard21)
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .Verify();
+        builder.AddPaths("DoNotDecreaseMemberVisibility.cs", "DoNotDecreaseMemberVisibility.Concurrent.cs").Verify();
 
     [TestMethod]
     public void DoNotDecreaseMemberVisibility_CS_Latest() =>
-        builder.AddPaths("DoNotDecreaseMemberVisibility.Latest.cs")
+        builder.AddPaths("DoNotDecreaseMemberVisibility.Latest.cs", "DoNotDecreaseMemberVisibility.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 }

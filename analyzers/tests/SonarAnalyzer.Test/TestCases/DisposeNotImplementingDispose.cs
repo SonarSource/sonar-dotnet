@@ -140,13 +140,6 @@ namespace Tests.Diagnostics
         void Dispose() { }  // Noncompliant
     }
 
-    public ref struct RefStruct
-    {
-        public void Dispose() // ok
-        {
-        }
-    }
-
     public struct Struct
     {
         public void Dispose() // Noncompliant {{Either implement 'IDisposable.Dispose', or totally rename this method to prevent confusion.}}

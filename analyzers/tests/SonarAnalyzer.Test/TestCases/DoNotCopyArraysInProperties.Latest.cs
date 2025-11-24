@@ -138,3 +138,20 @@ public partial class PartialProperty
     }
 
 }
+
+static class Extensions
+{
+    extension(Extensions)
+    {
+        static List<int> Property => new int[1].ToList();   // Noncompliant
+    }
+}
+
+class FieldKeyword
+{
+    List<int> Property
+    {
+        get => field.ToList();          // Noncompliant
+        set => field = value.ToList();  // Compliant
+    }
+}

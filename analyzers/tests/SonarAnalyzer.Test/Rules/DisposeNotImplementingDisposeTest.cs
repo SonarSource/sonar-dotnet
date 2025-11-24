@@ -16,33 +16,26 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DisposeNotImplementingDisposeTest
 {
-    [TestClass]
-    public class DisposeNotImplementingDisposeTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<DisposeNotImplementingDispose>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<DisposeNotImplementingDispose>();
 
-        [TestMethod]
-        public void DisposeNotImplementingDispose() =>
-            builder.AddPaths("DisposeNotImplementingDispose.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+    [TestMethod]
+    public void DisposeNotImplementingDispose() =>
+        builder.AddPaths("DisposeNotImplementingDispose.cs").Verify();
 
-        [TestMethod]
-        public void DisposeNotImplementingDispose_CSharp9() =>
-            builder.AddPaths("DisposeNotImplementingDispose.CSharp9.Part1.cs", "DisposeNotImplementingDispose.CSharp9.Part2.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void DisposeNotImplementingDispose_TopLevelStatements() =>
+        builder.AddPaths("DisposeNotImplementingDispose.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .VerifyNoIssues();
 
-        [TestMethod]
-        public void DisposeNotImplementingDispose_CSharp10() =>
-            builder.AddPaths("DisposeNotImplementingDispose.CSharp10.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void DisposeNotImplementingDispose_CSharp11() =>
-            builder.AddPaths("DisposeNotImplementingDispose.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-    }
+    [TestMethod]
+    public void DisposeNotImplementingDispose_Latest() =>
+        builder.AddPaths("DisposeNotImplementingDispose.Latest.cs", "DisposeNotImplementingDispose.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

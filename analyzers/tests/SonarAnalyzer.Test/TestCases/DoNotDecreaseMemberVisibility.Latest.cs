@@ -217,7 +217,7 @@ namespace Indexers
     }
 }
 
-namespace PartialProperties
+namespace PartialMembers
 {
     public class BaseClass
     {
@@ -226,22 +226,17 @@ namespace PartialProperties
         {
             get { return index; }
         }
+        public event EventHandler SomeEvent;
     }
 
     public partial class DescendantClass : BaseClass
     {
-        private partial int Property_01 { get; } // Noncompliant
+        private partial int Property_01 { get { return 1; } }               // Noncompliant
         //                  ^^^^^^^^^^^
-        private partial int this[int index] { get; } // Noncompliant
+        private partial int this[int index] { get { return index + 1; } }   // Noncompliant
         //                  ^^^^
-    }
-
-    public partial class DescendantClass : BaseClass
-    {
-        private partial int Property_01 { get { return 1; } } // Noncompliant
-        //                  ^^^^^^^^^^^
-        private partial int this[int index] { get { return index + 1; } } // Noncompliant
-        //                  ^^^^
+        private partial event EventHandler SomeEvent { add { } remove { } } // Noncompliant
+        //                                 ^^^^^^^^^
     }
 
     // https://sonarsource.atlassian.net/browse/NET-368
@@ -250,6 +245,44 @@ namespace PartialProperties
         private int this[int index] // Noncompliant
         {
             get { return index + 1; }
+        }
+    }
+}
+
+namespace DefaultInterfaceMembers
+{
+    public interface IFoo
+    {
+        public void SomeMethod(int count) { }
+    }
+
+    public interface IBar : IFoo
+    {
+        private void SomeMethod(int count) { }
+    }
+
+    public class Consumer
+    {
+        public Consumer(IBar bar)
+        {
+            bar.SomeMethod(1); // Compliant, the method from IFoo is called
+        }
+    }
+}
+
+namespace Extensions
+{
+    class Base
+    {
+        public void SomeMethod(int count) { }
+    }
+    class Derived : Base { }
+
+    static class Extensions
+    {
+        extension(Derived d)
+        {
+            private void SomeMethod(int count) { }  // Compliant
         }
     }
 }

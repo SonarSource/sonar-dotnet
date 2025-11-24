@@ -183,27 +183,6 @@ namespace FalsePositiveOnIndexers
     }
 }
 
-namespace DefaultInterfaceMembers
-{
-    public interface IFoo
-    {
-        public void SomeMethod(int count) { }
-    }
-
-    public interface IBar : IFoo
-    {
-        private void SomeMethod(int count) { }
-    }
-
-    public class Consumer
-    {
-        public Consumer(IBar bar)
-        {
-            bar.SomeMethod(1); // Compliant, the method from IFoo is called
-        }
-    }
-}
-
 // https://github.com/SonarSource/sonar-dotnet/issues/8666
 namespace Repro_8666
 {
@@ -264,5 +243,19 @@ namespace Events
         }
 
         public override event EventHandler SomeEvent2; // Compliant: override base class event
+    }
+}
+
+namespace ExtensionMethods
+{
+    class Base
+    {
+        public void SomeMethod(int count) { }
+    }
+    class Derived : Base { }
+
+    static class Extensions
+    {
+        private static void SomeMethod(this Derived d, int count) { }   // Compliant
     }
 }
