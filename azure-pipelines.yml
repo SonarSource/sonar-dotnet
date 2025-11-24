@@ -63,8 +63,7 @@ stages:
       displayName: "Set Version"
 
     - task: SonarCloudPrepare@3
-      displayName: '.NET Code Analysis - Begin (PR)'
-      condition: eq(variables['Build.Reason'], 'PullRequest')
+      displayName: '.NET Code Analysis - Begin'
       inputs:
         SonarCloud: 'SonarCloud'
         organization: 'sonarsource'
@@ -77,32 +76,6 @@ stages:
           sonar.cs.opencover.reportsPaths="$(CoveragePath)/*.xml"
           sonar.cs.vstest.reportsPaths="$(UnitTestResultsPath)/*.trx"
           sonar.test.exclusions="$(UnitTestExclusionsPattern)"
-          sonar.analysis.buildNumber=$(Build.BuildId)
-          sonar.analysis.pipeline=$(Build.BuildId)
-          sonar.analysis.sha1=$(System.PullRequest.SourceCommitId)
-          sonar.analysis.prNumber=$(System.PullRequest.PullRequestNumber)
-          sonar.analysis.repository=$(Build.Repository.ID)
-          sonar.cpd.exclusions=$(CpdExclusionsPattern)
-
-    - task: SonarCloudPrepare@3
-      displayName: '.NET Code Analysis - Begin (master or branch)'
-      condition: ne(variables['Build.Reason'], 'PullRequest')
-      inputs:
-        SonarCloud: 'SonarCloud'
-        organization: 'sonarsource'
-        scannerMode: dotnet
-        projectKey: 'sonaranalyzer-dotnet'
-        projectName: 'Sonar .NET Analyzer'
-        projectVersion: '$(SHORT_VERSION)'
-        extraProperties: |
-          sonar.verbose=true
-          sonar.cs.opencover.reportsPaths="$(CoveragePath)/*.xml"
-          sonar.cs.vstest.reportsPaths="$(UnitTestResultsPath)/*.trx"
-          sonar.test.exclusions="$(UnitTestExclusionsPattern)"
-          sonar.analysis.buildNumber=$(Build.BuildId)
-          sonar.analysis.pipeline=$(Build.BuildId)
-          sonar.analysis.sha1=$(Build.SourceVersion)
-          sonar.analysis.repository=$(Build.Repository.ID)
           sonar.cpd.exclusions=$(CpdExclusionsPattern)
 
     - powershell: |
