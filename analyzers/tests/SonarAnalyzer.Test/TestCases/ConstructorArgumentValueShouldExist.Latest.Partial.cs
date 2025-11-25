@@ -12,3 +12,18 @@ namespace CSharp13
         }
     }
 }
+
+namespace CSharp14
+{
+    public partial class NonCompliantPartialConstructor : MarkupExtension
+    {
+        public partial NonCompliantPartialConstructor(object value1) { Value1 = value1; }
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
+    }
+
+    public partial class CompliantPartialConstructor : MarkupExtension
+    {
+        public partial CompliantPartialConstructor(object value1) { Value1 = value1; }
+        public override object ProvideValue(IServiceProvider serviceProvider) => null;
+    }
+}

@@ -118,7 +118,7 @@ public class ConditionalStructureSameImplementationTest
 
     [TestMethod]
     public void ConditionalStructureSameImplementation_If_CSharp_Latest() =>
-    builderCS.AddPaths("ConditionalStructureSameImplementation_If.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builderCS.AddPaths("ConditionalStructureSameImplementation_If.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void ConditionalStructureSameImplementation_Switch_CSharp_Latest() =>

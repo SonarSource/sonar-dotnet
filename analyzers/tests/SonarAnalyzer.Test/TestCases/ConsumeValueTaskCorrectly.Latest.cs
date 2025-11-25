@@ -37,3 +37,27 @@ class Test
     static async ValueTask<string> AnotherMethodAsync(ValueTask<string> task) =>
         await task;
 }
+
+
+namespace CSharp14
+{
+    public class NullConditionalAssignment
+    {
+        async Task Method()
+        {
+            var a = new Tester();
+            ValueTask<int> NonCompliant = new ValueTask<int>(42);
+
+            a?.Test = await NonCompliant;   // Noncompliant
+            a?.Test = await NonCompliant;   // Secondary
+
+            ValueTask<int> Compliant = new ValueTask<int>(42);
+            a?.Test = await Compliant;     // Compliant
+        }
+
+        public class Tester
+        {
+            public int Test;
+        }
+    }
+}

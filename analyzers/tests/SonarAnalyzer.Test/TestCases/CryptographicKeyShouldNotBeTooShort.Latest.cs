@@ -103,3 +103,27 @@ record TestRecord
         CngKey cngkey4 = CngKey.Create(CngAlgorithm.Rsa, null, noncompliantParams3);
     }
 }
+
+public class NullConditionalAssignment
+{
+    public void CompliantKeySizeSet()
+    {
+        var dsa1 = new DSACng();
+        dsa1?.KeySize = 3072;
+
+        var dsa2 = new DSAOpenSsl();
+        dsa2?.KeySize = 3072;
+    }
+
+    public void NoncompliantKeySizeSet()
+    {
+        var dsa1 = new DSACng();
+        dsa1?.KeySize = 512; // FN https://sonarsource.atlassian.net/browse/NET-2698
+
+        var dsa2 = new DSACryptoServiceProvider(); // Noncompliant
+        dsa2?.KeySize = 2048; // FN https://sonarsource.atlassian.net/browse/NET-2698
+
+        var dsa3 = new DSAOpenSsl();
+        dsa3?.KeySize = 1024; // FN https://sonarsource.atlassian.net/browse/NET-2698
+    }
+}

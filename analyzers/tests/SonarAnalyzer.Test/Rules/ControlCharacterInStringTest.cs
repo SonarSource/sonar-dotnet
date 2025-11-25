@@ -16,23 +16,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ControlCharacterInStringTest
 {
-    [TestClass]
-    public class ControlCharacterInStringTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ControlCharacterInString>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ControlCharacterInString>();
 
-        [TestMethod]
-        public void ControlCharacterInString_CSharp8() =>
-            builder.AddPaths("ControlCharacterInString.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void ControlCharacterInString_CSharp8() =>
+        builder.AddPaths("ControlCharacterInString.cs").Verify();
 
-        [TestMethod]
-        public void ControlCharacterInString_Latest() =>
-            builder.AddPaths("ControlCharacterInString.Latest.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
-    }
+    [TestMethod]
+    public void ControlCharacterInString_Latest() =>
+        builder.AddPaths("ControlCharacterInString.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

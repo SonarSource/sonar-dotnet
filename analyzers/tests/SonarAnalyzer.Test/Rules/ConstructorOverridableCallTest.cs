@@ -28,9 +28,10 @@ public class ConstructorOverridableCallTest
         builder.AddPaths("ConstructorOverridableCall.cs").Verify();
 
     [TestMethod]
+    public void ConstructorOverridableCall_Latest() =>
+        builder.AddPaths("ConstructorOverridableCall.Latest.cs", "ConstructorOverridableCall.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
     public void ConstructorOverridableCall_Nancy() =>
-        builder
-            .WithConcurrentAnalysis(false)
-            .AddPaths("ConstructorOverridableCall.Nancy.cs")
-            .VerifyNoIssues();
+        builder.AddPaths("ConstructorOverridableCall.Nancy.cs").WithConcurrentAnalysis(false).VerifyNoIssues();
 }

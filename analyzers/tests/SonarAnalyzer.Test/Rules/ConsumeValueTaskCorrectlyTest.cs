@@ -16,26 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ConsumeValueTaskCorrectlyTest
 {
-    [TestClass]
-    public class ConsumeValueTaskCorrectlyTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ConsumeValueTaskCorrectly>()
-            .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
-            .AddReferences(MetadataReferenceFacade.SystemMemory);
+    private readonly VerifierBuilder builder = new VerifierBuilder<ConsumeValueTaskCorrectly>()
+        .AddReferences(MetadataReferenceFacade.SystemThreadingTasks)
+        .AddReferences(MetadataReferenceFacade.SystemMemory);
 
-        [TestMethod]
-        public void ConsumeValueTaskCorrectly() =>
-            builder.AddPaths("ConsumeValueTaskCorrectly.cs").Verify();
+    [TestMethod]
+    public void ConsumeValueTaskCorrectly() =>
+        builder.AddPaths("ConsumeValueTaskCorrectly.cs").Verify();
 
-#if NET
-
-        [TestMethod]
-        public void ConsumeValueTaskCorrectly_NetCore() =>
-            builder.AddPaths("ConsumeValueTaskCorrectly.NetCore.cs").Verify();
-
-#endif
-
-    }
+    [TestMethod]
+    public void ConsumeValueTaskCorrectly_CSharp_Latest() =>
+        builder.AddPaths("ConsumeValueTaskCorrectly.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }
