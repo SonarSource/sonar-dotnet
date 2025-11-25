@@ -30,23 +30,9 @@ public class PrivateStaticMethodUsedOnlyByNestedClassTest
             .Verify();
 
     [TestMethod]
-    public void PrivateStaticMethodUsedOnlyByNestedClass_CSharp8() =>
+    public void PrivateStaticMethodUsedOnlyByNestedClass_CSharpLatest() =>
         builder
-            .AddPaths("PrivateStaticMethodUsedOnlyByNestedClass.CSharp8.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .Verify();
-
-    [TestMethod]
-    public void PrivateStaticMethodUsedOnlyByNestedClass_CSharp9() =>
-        builder
-            .AddPaths("PrivateStaticMethodUsedOnlyByNestedClass.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void PrivateStaticMethodUsedOnlyByNestedClass_CSharp10() =>
-        builder
-            .AddPaths("PrivateStaticMethodUsedOnlyByNestedClass.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
+            .AddPaths("PrivateStaticMethodUsedOnlyByNestedClass.CSharpLatest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 }
