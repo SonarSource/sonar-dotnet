@@ -22,6 +22,19 @@ namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 public static class AspNetCoreMetadataReference
 {
+    public static IEnumerable<MetadataReference> BasicReferences =>
+    [
+        MicrosoftAspNetCore,                    // For WebApplication
+        MicrosoftExtensionsHostingAbstractions, // For IHost
+        MicrosoftAspNetCoreHttpAbstractions,    // For HttpContext, RouteValueDictionary
+        MicrosoftAspNetCoreHttpFeatures,
+        MicrosoftAspNetCoreMvcAbstractions,
+        MicrosoftAspNetCoreMvcCore,
+        MicrosoftAspNetCoreMvcRazorPages,       // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
+        MicrosoftAspNetCoreMvcViewFeatures,
+        MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
+    ];
+
     public static MetadataReference MicrosoftAspNetCore { get; } = CreateReference("Microsoft.AspNetCore.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreCors { get; } = CreateReference("Microsoft.AspNetCore.Cors.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftAspNetCoreDiagnostics { get; } = CreateReference("Microsoft.AspNetCore.Diagnostics.dll", Sdk.AspNetCore);
@@ -46,4 +59,5 @@ public static class AspNetCoreMetadataReference
     public static MetadataReference MicrosoftExtensionsPrimitives { get; } = CreateReference("Microsoft.Extensions.Primitives.dll", Sdk.AspNetCore);
     public static MetadataReference MicrosoftNetHttpHeadersHeaderNames { get; } = CreateReference("Microsoft.Net.Http.Headers.dll", Sdk.AspNetCore);
 }
+
 #endif

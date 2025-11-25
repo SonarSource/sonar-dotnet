@@ -18,68 +18,55 @@ using References = System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis
 
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
+#pragma warning disable T0030 // Move this expression to the previous line
+
 public static class MetadataReferenceFacade
 {
-#if NET
-    public static IEnumerable<MetadataReference> AspNetCoreReferences =>
-    [
-        AspNetCoreMetadataReference.MicrosoftAspNetCore,                    // For WebApplication
-        AspNetCoreMetadataReference.MicrosoftExtensionsHostingAbstractions, // For IHost
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpAbstractions,    // For HttpContext, RouteValueDictionary
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreHttpFeatures,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazorPages,       // For RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcViewFeatures,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreRouting,             // For IEndpointRouteBuilder
-    ];
-#endif
     public static References NetStandard { get; } = MetadataReferenceFactory.Create("netstandard.dll");
 
     public static References MsCorLib =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.Mscorlib;
 #else
-        new[] { CoreMetadataReference.MsCorLib };
+        [CoreMetadataReference.MsCorLib];
 #endif
 
     public static References MicrosoftExtensionsDependencyInjectionAbstractions =>
 #if NETFRAMEWORK
         NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions(TestConstants.DotNetCore220Version);
 #else
-        new[] { AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions };
+        [AspNetCoreMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions];
 #endif
 
     public static References MicrosoftVisualBasic =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.MicrosoftVisualBasic;
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.MicrosoftVisualBasic,
             CoreMetadataReference.MicrosoftVisualBasicCore
-        };
+        ];
 #endif
 
     public static References MicrosoftWin32Registry =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[] { CoreMetadataReference.MicrosoftWin32Registry };
+        [CoreMetadataReference.MicrosoftWin32Registry];
 #endif
 
     public static References MicrosoftWin32Primitives =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[] { CoreMetadataReference.MicrosoftWin32Primitives };
+        [CoreMetadataReference.MicrosoftWin32Primitives];
 #endif
 
     public static References NetStandard21 =>
 #if NETFRAMEWORK
         NuGetMetadataFactory.Create("NETStandard.Library.Ref", "2.1.0", "netstandard2.1");
 #else
-        Enumerable.Empty<MetadataReference>();
+        [];
 #endif
 
     public static References PresentationFramework =>
@@ -107,21 +94,19 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemData;
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemDataCommon
-        };
+        ];
 #endif
 
     public static References SystemDiagnosticsProcess =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemComponentModelPrimitives,   // Type "Process" needs this for it's parent type "Component"
             CoreMetadataReference.SystemDiagnosticsProcess
-        };
+        ];
 #endif
 
     public static References SystemDrawing =>
@@ -143,11 +128,10 @@ public static class MetadataReferenceFacade
         FrameworkMetadataReference.SystemIOCompression
             .Concat(FrameworkMetadataReference.SystemIOCompressionFileSystem);
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemIoCompression,
             CoreMetadataReference.SystemIoCompressionZipFile
-        };
+        ];
 #endif
 
     public static References SystemMemory =>
@@ -169,8 +153,7 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemNetHttp;
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemNetHttp,
             CoreMetadataReference.SystemNetMail,
             CoreMetadataReference.SystemNetRequests,
@@ -179,35 +162,34 @@ public static class MetadataReferenceFacade
             CoreMetadataReference.SystemNetSockets,
             CoreMetadataReference.SystemNetPrimitives,
             CoreMetadataReference.SystemNetWebClient
-        };
+        ];
 #endif
 
     public static References SystemSecurityCryptography =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemSecurityCryptographyAlgorithms;
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemSecurityCryptography,
             CoreMetadataReference.SystemSecurityCryptographyX509Certificates,
             CoreMetadataReference.SystemSecurityCryptographyCsp,
             CoreMetadataReference.SystemSecurityCryptographyCng,
             CoreMetadataReference.SystemSecurityCryptographyPrimitives
-        };
+        ];
 #endif
 
     public static References SystemSecurityPermissions =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
         NuGetMetadataReference.SystemSecurityPermissions();
 #endif
 
     public static References SystemThreading =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[] { CoreMetadataReference.SystemThreading };
+        [CoreMetadataReference.SystemThreading];
 #endif
 
     public static References SystemThreadingTasks =>
@@ -220,7 +202,7 @@ public static class MetadataReferenceFacade
 
     public static References RegularExpressions =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
         [CoreMetadataReference.SystemTextRegularExpressions];
 #endif
@@ -229,58 +211,54 @@ public static class MetadataReferenceFacade
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemRuntimeSerialization;
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemRuntimeSerialization,
             CoreMetadataReference.SystemRuntimeSerializationPrimitives
-        };
+        ];
 #endif
 
     public static References SystemXaml =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemXaml;
 #else
-        new[]
-        {
+        [
             CoreMetadataReference.SystemXmlReaderWriter,
             CoreMetadataReference.SystemPrivateXml
-        };
+        ];
 #endif
 
     public static References SystemXml =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemXml;
 #else
-        new[]
-        {
-            CoreMetadataReference.SystemPrivateXml,
-            CoreMetadataReference.SystemPrivateXmlLinq,
-            CoreMetadataReference.SystemXml,
-            CoreMetadataReference.SystemXmlXDocument,
-            CoreMetadataReference.SystemXmlReaderWriter,
-        }
-        .Union(NuGetMetadataReference.SystemConfigurationConfigurationManager());
+        NuGetMetadataReference.SystemConfigurationConfigurationManager()
+            .Union([
+                CoreMetadataReference.SystemPrivateXml,
+                CoreMetadataReference.SystemPrivateXmlLinq,
+                CoreMetadataReference.SystemXml,
+                CoreMetadataReference.SystemXmlXDocument,
+                CoreMetadataReference.SystemXmlReaderWriter]);
 #endif
 
     public static References SystemXmlLinq =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemXmlLinq;
 #else
-        new[] { CoreMetadataReference.SystemXmlLinq };
+        [CoreMetadataReference.SystemXmlLinq];
 #endif
 
     public static References SystemWeb =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemWeb;
 #else
-        new[] { CoreMetadataReference.SystemWeb };
+        [CoreMetadataReference.SystemWeb];
 #endif
 
     public static References SystemWindowsForms =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.SystemWindowsForms;
 #else
-        new[] { WindowsDesktopMetadataReference.SystemWindowsForms };
+        [WindowsDesktopMetadataReference.SystemWindowsForms];
 #endif
 
     public static References SystemComponentModelComposition =>
@@ -295,36 +273,37 @@ public static class MetadataReferenceFacade
 
     public static References SystemComponentModelPrimitives =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[] { CoreMetadataReference.SystemComponentModelPrimitives };
+        [CoreMetadataReference.SystemComponentModelPrimitives];
 #endif
 
     public static References SystemComponentModelTypeConverter =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[] { CoreMetadataReference.SystemComponentModelTypeConverter };
+        [CoreMetadataReference.SystemComponentModelTypeConverter];
 #endif
 
     public static References SystemNetSockets =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[] { CoreMetadataReference.SystemNetSockets };
+        [CoreMetadataReference.SystemNetSockets];
 #endif
+
     public static References SystemNetPrimitives =>
 #if NETFRAMEWORK
-        Enumerable.Empty<MetadataReference>();
+        [];
 #else
-        new[] { CoreMetadataReference.SystemNetPrimitives };
+        [CoreMetadataReference.SystemNetPrimitives];
 #endif
 
     public static References WindowsBase =>
 #if NETFRAMEWORK
         FrameworkMetadataReference.WindowsBase;
 #else
-        Enumerable.Empty<MetadataReference>();
+        [];
 #endif
 
     public static References ProjectDefaultReferences =>
@@ -335,32 +314,29 @@ public static class MetadataReferenceFacade
             .Concat(FrameworkMetadataReference.SystemRuntime)
             .Concat(FrameworkMetadataReference.SystemGlobalization);
 #else
-        new[]
-            {
-                CoreMetadataReference.MsCorLib,
-                CoreMetadataReference.System,
-                CoreMetadataReference.SystemCollections,
-                CoreMetadataReference.SystemCollectionsSpecialized,
-                CoreMetadataReference.SystemConsole,
-                CoreMetadataReference.SystemCore,
-                CoreMetadataReference.SystemDiagnosticsTools,
-                CoreMetadataReference.SystemDiagnosticsTraceSource,
-                CoreMetadataReference.SystemGlobalization,
-                CoreMetadataReference.SystemIoFileSystem,
-                CoreMetadataReference.SystemIoFileSystemAccessControl,
-                CoreMetadataReference.SystemLinq,
-                CoreMetadataReference.SystemLinqExpressions,
-                CoreMetadataReference.SystemLinqQueryable,
-                CoreMetadataReference.SystemObjectModel,
-                CoreMetadataReference.SystemPrivateCoreLib,
-                CoreMetadataReference.SystemPrivateUri,
-                CoreMetadataReference.SystemRuntime,
-                CoreMetadataReference.SystemRuntimeExtensions,
-                CoreMetadataReference.SystemRuntimeInteropServices,
-                CoreMetadataReference.SystemSecurityAccessControl,
-                CoreMetadataReference.SystemSecurityPrincipalWindows
-            }
-            .Concat(MetadataReferenceFacade.NetStandard);
+        NetStandard.Concat([
+            CoreMetadataReference.MsCorLib,
+            CoreMetadataReference.System,
+            CoreMetadataReference.SystemCollections,
+            CoreMetadataReference.SystemCollectionsSpecialized,
+            CoreMetadataReference.SystemConsole,
+            CoreMetadataReference.SystemCore,
+            CoreMetadataReference.SystemDiagnosticsTools,
+            CoreMetadataReference.SystemDiagnosticsTraceSource,
+            CoreMetadataReference.SystemGlobalization,
+            CoreMetadataReference.SystemIoFileSystem,
+            CoreMetadataReference.SystemIoFileSystemAccessControl,
+            CoreMetadataReference.SystemLinq,
+            CoreMetadataReference.SystemLinqExpressions,
+            CoreMetadataReference.SystemLinqQueryable,
+            CoreMetadataReference.SystemObjectModel,
+            CoreMetadataReference.SystemPrivateCoreLib,
+            CoreMetadataReference.SystemPrivateUri,
+            CoreMetadataReference.SystemRuntime,
+            CoreMetadataReference.SystemRuntimeExtensions,
+            CoreMetadataReference.SystemRuntimeInteropServices,
+            CoreMetadataReference.SystemSecurityAccessControl,
+            CoreMetadataReference.SystemSecurityPrincipalWindows]);
 #endif
 
     public static References SystemThreadingTasksExtensions(string version) =>

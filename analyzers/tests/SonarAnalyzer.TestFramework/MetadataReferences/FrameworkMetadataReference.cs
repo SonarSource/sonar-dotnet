@@ -59,7 +59,7 @@ public static class FrameworkMetadataReference
     public static References SystemXml { get; } = Create("System.Xml.dll");
     public static References SystemXmlLinq { get; } = Create("System.Xml.Linq.dll");
     public static References SystemXmlXDocument { get; } = Create("System.Xml.XDocument.dll");
-    public static References WindowsBase { get; } = new[] { CreateReference("WindowsBase.dll", "WPF") };
+    public static References WindowsBase { get; } = [CreateReference("WindowsBase.dll", "WPF")];
 }
 
 #endif
