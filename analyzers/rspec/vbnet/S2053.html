@@ -49,12 +49,12 @@ End Sub
 Imports System.Security.Cryptography
 
 Public Sub Hash(Password As String)
-    Dim Hashed As New Rfc2898DeriveBytes(Password, 32, 10000, HashAlgorithmName.SHA256)
+    Dim Hashed As New Rfc2898DeriveBytes(Password, 16, 10000, HashAlgorithmName.SHA256)
 End Sub
 </pre>
 <h3>How does this work?</h3>
 <p>This code ensures that each user’s password has a unique salt value associated with it. It generates a salt randomly and with a length that
-provides the required security level. It uses a salt length of at least 32 bytes (256 bits), as recommended by industry standards.</p>
+provides the required security level. It uses a salt length of at least 16 bytes (128 bits), as recommended by industry standards.</p>
 <p>In the case of the code sample, the class automatically takes care of generating a secure salt if none is specified.</p>
 <h2>Resources</h2>
 <h3>Standards</h3>

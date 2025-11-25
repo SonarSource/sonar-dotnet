@@ -12,49 +12,55 @@ several other built-in security accounts.</p>
 <p>The most restrictive possible permissions should be assigned to files and directories.</p>
 <h2>Sensitive Code Example</h2>
 <p>.Net Framework:</p>
-<pre>
-var unsafeAccessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Allow);
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var accessRule = new FileSystemAccessRule(
+    "Everyone",
+    FileSystemRights.FullControl,
+    AccessControlType.Allow);
 
 var fileSecurity = File.GetAccessControl("path");
-fileSecurity.AddAccessRule(unsafeAccessRule); // Sensitive
-fileSecurity.SetAccessRule(unsafeAccessRule); // Sensitive
+fileSecurity.AddAccessRule(accessRule); // Sensitive
 File.SetAccessControl("fileName", fileSecurity);
 </pre>
 <p>.Net / .Net Core</p>
-<pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+var accessRule = new FileSystemAccessRule("Everyone", FileSystemRights.Write, AccessControlType.Allow);
 var fileInfo = new FileInfo("path");
 var fileSecurity = fileInfo.GetAccessControl();
 
-fileSecurity.AddAccessRule(new FileSystemAccessRule("Everyone", FileSystemRights.Write, AccessControlType.Allow)); // Sensitive
+fileSecurity.SetAccessRule(accessRule); // Sensitive
 fileInfo.SetAccessControl(fileSecurity);
 </pre>
 <p>.Net / .Net Core using Mono.Posix.NETStandard</p>
-<pre>
-var fileSystemEntry = UnixFileSystemInfo.GetFileSystemEntry("path");
-fileSystemEntry.FileAccessPermissions = FileAccessPermissions.OtherReadWriteExecute; // Sensitive
+<pre data-diff-id="3" data-diff-type="noncompliant">
+var fsEntry = UnixFileSystemInfo.GetFileSystemEntry("path");
+fsEntry.FileAccessPermissions = FileAccessPermissions.OtherReadWriteExecute; // Sensitive
 </pre>
 <h2>Compliant Solution</h2>
 <p>.Net Framework</p>
-<pre>
-var safeAccessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Deny);
+<pre data-diff-id="1" data-diff-type="compliant">
+var accessRule = new FileSystemAccessRule(
+    "Everyone",
+    FileSystemRights.FullControl,
+    AccessControlType.Deny);
 
 var fileSecurity = File.GetAccessControl("path");
 fileSecurity.AddAccessRule(safeAccessRule);
 File.SetAccessControl("path", fileSecurity);
 </pre>
 <p>.Net / .Net Core</p>
-<pre>
-var safeAccessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Deny);
-
+<pre data-diff-id="2" data-diff-type="compliant">
+var accessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Deny);
 var fileInfo = new FileInfo("path");
 var fileSecurity = fileInfo.GetAccessControl();
-fileSecurity.SetAccessRule(safeAccessRule);
+
+fileSecurity.SetAccessRule(accessRule);
 fileInfo.SetAccessControl(fileSecurity);
 </pre>
 <p>.Net / .Net Core using Mono.Posix.NETStandard</p>
-<pre>
-var fs = UnixFileSystemInfo.GetFileSystemEntry("path");
-fs.FileAccessPermissions = FileAccessPermissions.UserExecute;
+<pre data-diff-id="3" data-diff-type="compliant">
+var fsEntry = UnixFileSystemInfo.GetFileSystemEntry("path");
+fsEntry.FileAccessPermissions = FileAccessPermissions.UserExecute;
 </pre>
 <h2>See</h2>
 <ul>

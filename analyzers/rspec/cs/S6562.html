@@ -9,8 +9,11 @@ allows you to define the <code>Kind</code> property.</p>
 <code>DateTimeKind.Local</code> and calling the method <code>ToLocalTime</code> will assume that it’s <code>DateTimeKind.Utc</code>. As a result, you
 might have mismatched <code>DateTime</code> objects in your application.</p>
 <h2>How to fix it</h2>
-<p>To fix this issue use a constructor overload that allows specifying the <code>DateTimeKind</code> when creating the <code>DateTime</code>
-object.</p>
+<p>To resolve this issue, use a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.-ctor">constructor overload</a> that lets you
+specify the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimekind"><code>DateTimeKind</code></a> when creating the
+<code>DateTime</code> object. From .Net 6 onwards, use the <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly"><code>DateOnly</code></a> type if the time portion of the date is not
+relevant.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -24,16 +27,18 @@ void CreateNewTime()
 void CreateNewTime()
 {
     var birthDate = new DateTime(1994, 7, 5, 16, 23, 42, DateTimeKind.Utc);
+    // or from .Net 6 onwards, use DateOnly:
+    var birthDate = new DateOnly(1994, 7, 5);
 }
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimekind">DateTimeKind documentation</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.-ctor">DateTime documentation</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-round-trip-date-and-time-values">How to round trip date and time
-  values</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading">https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading</a> [Member overloading] </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimekind">DateTimeKind Enum</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.-ctor">DateTime Constructors</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">DateOnly Struct</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-round-trip-date-and-time-values">How to:
+  Round-trip Date and time values</a> </li>
+  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading">Member Overloading</a> </li>
 </ul>
 

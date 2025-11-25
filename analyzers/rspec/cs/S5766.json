@@ -1,5 +1,5 @@
 {
-  "title": "Deserializing objects without performing data validation is security-sensitive",
+  "title": "Creating Serializable objects without data validation checks is security-sensitive",
   "type": "SECURITY_HOTSPOT",
   "code": {
     "impacts": {
