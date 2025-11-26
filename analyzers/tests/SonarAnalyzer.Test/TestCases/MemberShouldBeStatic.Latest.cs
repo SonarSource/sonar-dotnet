@@ -1,9 +1,30 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 int TopLevelLocalfunction() => 0;       // Compliant, local functions are not class members
 
 var localVariable = 42;
 int LocalFunction() => localVariable;   // Compliant
+
+namespace Exceptions
+{
+    [DynamicallyAccessedMembersAttribute(DynamicallyAccessedMemberTypes.All)]
+    public class Foo
+    {
+        public int Value => 1; // Noncompliant FP, accessed via reflection
+    }
+
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.PublicMethods)]
+    public class Bar
+    {
+        public int Value1 => 1; // Noncompliant FP
+        private int Value2 => 2; // Noncompliant TP DynamicallyAccessedMembers doesn't apply to private members
+
+        public int GetValue1() => 1; // Noncompliant FP
+        [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] // Any DynamicallyAccessedMembers applied to the method, a parameter or the return value makes the method compliant
+        private int GetValue2() => 1; // Noncompliant FP
+    }
+}
 
 namespace CSharp8
 {
