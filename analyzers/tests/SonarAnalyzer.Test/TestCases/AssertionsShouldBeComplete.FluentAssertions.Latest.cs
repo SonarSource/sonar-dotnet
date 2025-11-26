@@ -67,4 +67,15 @@ public class Program
             return "Test".Should();
         }
     }
+
+    public void NullConditionalAssignment(Wrapper wrapper)
+    {
+        wrapper?.Result = "test".Should(); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2671
+        wrapper.Result = "test".Should();  // Compliant
+    }
+
+    public class Wrapper
+    {
+        public StringAssertions? Result { get; set; }
+    }
 }

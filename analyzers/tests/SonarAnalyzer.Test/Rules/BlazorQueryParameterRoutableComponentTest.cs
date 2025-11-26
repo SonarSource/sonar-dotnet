@@ -22,6 +22,7 @@ namespace SonarAnalyzer.Test.Rules;
 public class BlazorQueryParameterRoutableComponentTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<BlazorQueryParameterRoutableComponent>();
+
     public TestContext TestContext { get; set; }
 
     [TestMethod]
@@ -32,23 +33,23 @@ public class BlazorQueryParameterRoutableComponentTest
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_BlazorNoRoute() =>
-        builder.AddPaths("BlazorQueryParameterRoutableComponent_NoRoute.razor")
+        builder.AddPaths("BlazorQueryParameterRoutableComponent.NoRoute.razor")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_Partial() =>
         builder.WithOptions(LanguageOptions.CSharpLatest)
-            .AddPaths("BlazorQueryParameterRoutableComponent_Latest_Partial.razor",
-                      "BlazorQueryParameterRoutableComponent_Latest_Partial_1.razor.cs",
-                      "BlazorQueryParameterRoutableComponent_Latest_Partial_2.razor.cs")
+            .AddPaths(
+                "BlazorQueryParameterRoutableComponent.Latest.Partial.razor",
+                "BlazorQueryParameterRoutableComponent.Latest.Partial.1.razor.cs",
+                "BlazorQueryParameterRoutableComponent.Latest.Partial.2.razor.cs")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))
             .Verify();
 
     [TestMethod]
     public void BlazorQueryParameterRoutableComponent_CS() =>
-        builder.AddPaths("BlazorQueryParameterRoutableComponent_Compliant.cs",
-                         "BlazorQueryParameterRoutableComponent_Noncompliant.cs")
-               .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
-               .Verify();
+        builder.AddPaths("BlazorQueryParameterRoutableComponent.Compliant.cs", "BlazorQueryParameterRoutableComponent.Noncompliant.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
+            .Verify();
 }

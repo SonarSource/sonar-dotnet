@@ -16,31 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class CheckArgumentExceptionTest
 {
-    [TestClass]
-    public class CheckArgumentExceptionTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CheckArgumentException>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<CheckArgumentException>();
 
-        [TestMethod]
-        public void CheckArgumentException() =>
-            builder.AddPaths("CheckArgumentException.cs").Verify();
+    [TestMethod]
+    public void CheckArgumentException() =>
+        builder.AddPaths("CheckArgumentException.cs").Verify();
 
-        [TestMethod]
-        public void CheckArgumentException_TopLevelStatements() =>
-            builder.AddPaths("CheckArgumentException.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void CheckArgumentException_TopLevelStatements() =>
+        builder.AddPaths("CheckArgumentException.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void CheckArgumentException_CSharp9() =>
-            builder.AddPaths("CheckArgumentException.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void CheckArgumentException_CSharp10() =>
-            builder.AddPaths("CheckArgumentException.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void CheckArgumentException_CSharp12() =>
-            builder.AddPaths("CheckArgumentException.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-    }
+    [TestMethod]
+    public void CheckArgumentException_CSharpLatest() =>
+        builder.AddPaths("CheckArgumentException.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

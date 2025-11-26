@@ -16,29 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class CallToAsyncMethodShouldNotBeBlockingTest
 {
-    [TestClass]
-    public class CallToAsyncMethodShouldNotBeBlockingTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CallToAsyncMethodShouldNotBeBlocking>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<CallToAsyncMethodShouldNotBeBlocking>();
 
-        [TestMethod]
-        public void CallToAsyncMethodShouldNotBeBlocking() =>
-            builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.cs")
-                .AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions())
-                .Verify();
+    [TestMethod]
+    public void CallToAsyncMethodShouldNotBeBlocking() =>
+        builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.cs").AddReferences(NuGetMetadataReference.MicrosoftNetSdkFunctions()).Verify();
 
-        [TestMethod]
-        public void CallToAsyncMethodShouldNotBeBlocking_CSharp9() =>
-            builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void CallToAsyncMethodShouldNotBeBlocking_TopLevelStatements() =>
+        builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void CallToAsyncMethodShouldNotBeBlocking_CSharp11() =>
-            builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-    }
+    [TestMethod]
+    public void CallToAsyncMethodShouldNotBeBlocking_CSharpLatest() =>
+        builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

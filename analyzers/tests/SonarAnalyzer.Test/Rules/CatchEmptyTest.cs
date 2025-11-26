@@ -16,19 +16,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class CatchEmptyTest
 {
-    [TestClass]
-    public class CatchEmptyTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<CatchEmpty>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<CatchEmpty>();
 
-        [TestMethod]
-        public void CatchEmpty() =>
-            builder.AddPaths("CatchEmpty.cs").Verify();
+    [TestMethod]
+    public void CatchEmpty() =>
+        builder.AddPaths("CatchEmpty.cs").Verify();
 
-        [TestMethod]
-        public void CatchEmpty_InTest() =>
-            builder.AddPaths("CatchEmpty.cs").AddTestReference().VerifyNoIssues();
-    }
+    [TestMethod]
+    public void CatchEmpty_InTest() =>
+        builder.AddPaths("CatchEmpty.cs").AddTestReference().VerifyNoIssues();
 }

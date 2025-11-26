@@ -28,5 +28,18 @@ namespace Tests.Diagnostics
             Changed2 += y;
             Changed2 -= y;
         }
+
+        public void NullConditionalAssignment(WithEvent obj)
+        {
+            obj?.Changed += (_, _) => { };
+            obj?.Changed -= (_, _) => { };                           // Noncompliant
+            obj?.Changed -= (_, _) => Console.WriteLine();           // Noncompliant
+            obj?.Changed -= static (_, _) => Console.WriteLine("x"); // Noncompliant
+        }
+
+        public class WithEvent
+        {
+            public event ChangedEventHandler Changed;
+        }
     }
 }

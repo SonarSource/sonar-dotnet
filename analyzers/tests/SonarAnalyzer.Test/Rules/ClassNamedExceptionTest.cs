@@ -32,17 +32,10 @@ public class ClassNamedExceptionTest
             .Verify();
 
     [TestMethod]
-    public void ClassNamedException_FromCSharp9() =>
+    public void ClassNamedException_CSharpLatest() =>
         builderCS
-            .AddPaths("ClassNamedException.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .VerifyNoIssues();
-
-    [TestMethod]
-    public void ClassNamedException_FromCSharp10() =>
-        builderCS
-            .AddPaths("ClassNamedException.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
+            .AddPaths("ClassNamedException.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .VerifyNoIssues();
 
     [TestMethod]

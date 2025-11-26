@@ -16,21 +16,20 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class AsyncAwaitIdentifierTest
 {
-    [TestClass]
-    public class AsyncAwaitIdentifierTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<AsyncAwaitIdentifier>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<AsyncAwaitIdentifier>();
 
-        [TestMethod]
-        public void AsyncAwaitIdentifier() =>
-            builder.AddPaths("AsyncAwaitIdentifier.cs").Verify();
+    [TestMethod]
+    public void AsyncAwaitIdentifier() =>
+        builder.AddPaths("AsyncAwaitIdentifier.cs").Verify();
 
-        [TestMethod]
-        public void AsyncAwaitIdentifier_CSharp9() =>
-            builder.AddPaths("AsyncAwaitIdentifier.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
-    }
+    [TestMethod]
+    public void AsyncAwaitIdentifier_CSharpLatest() =>
+        builder.AddPaths("AsyncAwaitIdentifier.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }
