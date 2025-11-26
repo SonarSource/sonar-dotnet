@@ -11,18 +11,14 @@ jobs:
     permissions:
       id-token: write
       checks: read
-    # https://docs.github.com/en/graphql/reference/enums#checkconclusionstate
-    if: >-
-      github.event.check_suite.head_branch == 'master'
-      && !contains(fromJson('["SUCCESS", "NEUTRAL", "SKIPPED"]'), github.event.check_suite.conclusion)
+    if: github.event.check_suite.head_branch == 'master' && !contains(fromJson('["SUCCESS", "NEUTRAL", "SKIPPED"]'), github.event.check_suite.conclusion)
     steps:
       - name: Vault Secrets
         id: secrets
         uses: SonarSource/vault-action-wrapper@v3
         with:
-          secrets: |
-            development/kv/data/slack token | SLACK_TOKEN;
-      
+          secrets: development/kv/data/slack token | SLACK_TOKEN;
+
       - name: Check run details
         id: failedRun
         env: 
@@ -30,14 +26,14 @@ jobs:
         shell: pwsh
         run: |
           $SuccessConclusions = @("SUCCESS", "NEUTRAL", "SKIPPED")
-          $Request = gh api '${{github.event.check_suite.check_runs_url }}'
+          $Event = Get-Content -Path $env:GITHUB_EVENT_PATH | ConvertFrom-Json -Depth 100
+          $Request = gh api $Event.check_suite.check_runs_url
           $FailedRuns = $Request | ConvertFrom-Json | select -ExpandProperty check_runs | where { $SuccessConclusions -NotContains $_.conclusion } | foreach  { "* [$($_.name)]($($_.details_url))" }
-          
           $OFS = [Environment]::NewLine # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_preference_variables?view=powershell-7.5#ofs
           $EOF = (New-Guid).Guid        # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#multiline-strings
           $Message=@"
           message<<$EOF
-          ${{github.event.check_suite.app.name || 'Pipeline'}} in [${{github.event.repository.name }}](${{github.event.repository.html_url}}) failed (${{github.event.check_suite.conclusion }}) on ${{github.event.check_suite.head_branch}}: ${{github.event.check_suite.head_commit.message}}
+          $($Event.check_suite.app.name ?? 'Pipeline') in [$($Event.repository.name)]($($Event.repository.html_url)) failed ($($Event.check_suite.conclusion)) on $($Event.check_suite.head_branch): $($Event.check_suite.head_commit.message -replace '[\n\r].*')
           $FailedRuns
           $EOF
           "@
