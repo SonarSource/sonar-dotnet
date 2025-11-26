@@ -15,7 +15,7 @@
   <description>Share code between C# and VB.NET plugins</description>
 
   <properties>
-    <protobuf.version>4.33.0</protobuf.version>
+    <protobuf.version>4.33.1</protobuf.version>
     <protobuf.compiler>${settings.localRepository}/com/google/protobuf/protoc/${protobuf.version}/protoc-${protobuf.version}-${os.detected.classifier}.exe</protobuf.compiler>
     <sonar.exclusions>target/generated-sources/protobuf/**</sonar.exclusions>
   </properties>
