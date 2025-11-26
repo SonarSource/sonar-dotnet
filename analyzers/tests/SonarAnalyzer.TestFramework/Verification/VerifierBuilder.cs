@@ -30,6 +30,14 @@ public enum CompilationErrorBehavior
     Default = FailTest
 }
 
+[Flags]
+public enum TargetFrameworks
+{
+    None = 0,
+    Net = 1,
+    NetFramework = 2,
+}
+
 /// <summary>
 /// Immutable builder that holds all parameters for rule verification.
 /// </summary>
@@ -55,6 +63,7 @@ public record VerifierBuilder
     public ImmutableArray<MetadataReference> References { get; init; } = [];
     public ImmutableArray<Snippet> Snippets { get; init; } = [];
     public string AdditionalFilePath { get; init; }
+    public TargetFrameworks TargetFrameworks { get; init; } = TargetFrameworks.Net | TargetFrameworks.NetFramework;
 
     /// <summary>
     /// This method solves complicated scenarios. Use 'new VerifierBuilder&lt;TAnalyzer&gt;()' for single analyzer cases with no rule parameters.
@@ -130,6 +139,15 @@ public record VerifierBuilder
 
     public VerifierBuilder WithAdditionalFilePath(string additionalFilePath) =>
         this with { AdditionalFilePath = additionalFilePath };
+
+    public VerifierBuilder WithNetOnly() =>
+        WithTargetFrameworks(TargetFrameworks.Net);
+
+    public VerifierBuilder WithNetFrameworkOnly() =>
+        WithTargetFrameworks(TargetFrameworks.NetFramework);
+
+    public VerifierBuilder WithTargetFrameworks(TargetFrameworks targetFrameworks) =>
+        this with { TargetFrameworks = targetFrameworks };
 
     public VerifierBuilder WithTopLevelStatements()
     {

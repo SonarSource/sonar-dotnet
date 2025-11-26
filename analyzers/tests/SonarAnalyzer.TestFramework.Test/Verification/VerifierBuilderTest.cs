@@ -190,8 +190,8 @@ public class VerifierBuilderTest
         var one = Empty.WithOnlyDiagnostics(s1111);
         var two = one.WithOnlyDiagnostics(s2222, s2223);
         Empty.OnlyDiagnostics.Should().BeEmpty();
-        one.OnlyDiagnostics.Should().BeEquivalentTo(new[] { s1111 });
-        two.OnlyDiagnostics.Should().BeEquivalentTo(new[] { s2222, s2223 });
+        one.OnlyDiagnostics.Should().BeEquivalentTo([s1111]);
+        two.OnlyDiagnostics.Should().BeEquivalentTo([s2222, s2223]);
     }
 
     [TestMethod]
@@ -235,6 +235,24 @@ public class VerifierBuilderTest
         two.AdditionalFilePath.Should().Be("Second");
         three.AdditionalFilePath.Should().BeNull();
     }
+
+    [TestMethod]
+    public void WithTargetFramework_Overwrites_IsImmutable()
+    {
+        var one = Empty.WithTargetFrameworks(TargetFrameworks.Net);
+        var two = one.WithTargetFrameworks(TargetFrameworks.NetFramework);
+        Empty.TargetFrameworks.Should().Be(TargetFrameworks.Net | TargetFrameworks.NetFramework);
+        one.TargetFrameworks.Should().Be(TargetFrameworks.Net);
+        two.TargetFrameworks.Should().Be(TargetFrameworks.NetFramework);
+    }
+
+    [TestMethod]
+    public void WithNetOnly() =>
+        Empty.WithNetOnly().TargetFrameworks.Should().Be(TargetFrameworks.Net);
+
+    [TestMethod]
+    public void WithNetFrameworkOnly() =>
+        Empty.WithNetFrameworkOnly().TargetFrameworks.Should().Be(TargetFrameworks.NetFramework);
 
     [TestMethod]
     public void WithTopLevelSupport_Overwrites_IsImmutable()

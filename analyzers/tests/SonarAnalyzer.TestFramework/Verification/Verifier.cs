@@ -47,7 +47,7 @@ internal class Verifier
         {
             throw new ArgumentException($"{nameof(builder.Analyzers)} cannot be empty. Use {nameof(VerifierBuilder)}<TAnalyzer> instead or add at least one analyzer using {nameof(builder)}.{nameof(builder.AddAnalyzer)}().");
         }
-        if (Array.Exists(analyzers, x => x == null))
+        if (Array.Exists(analyzers, x => x is null))
         {
             throw new ArgumentException("Analyzer instance cannot be null.");
         }
@@ -55,6 +55,10 @@ internal class Verifier
         if (allLanguages.Length > 1)
         {
             throw new ArgumentException($"All {nameof(builder.Analyzers)} must declare the same language in their DiagnosticAnalyzerAttribute.");
+        }
+        if (builder.TargetFrameworks == TargetFrameworks.None)
+        {
+            throw new ArgumentException($"{nameof(TargetFrameworks)} cannot be {nameof(TargetFrameworks.None)}.");
         }
         language = AnalyzerLanguage.FromName(allLanguages.Single());
         if (!builder.Paths.Any() && !builder.Snippets.Any())
@@ -82,14 +86,19 @@ internal class Verifier
             .Select(TestCasePath)
             .Where(IsRazorOrCshtml)
             .Concat(builder.Snippets.Where(x => IsRazorOrCshtml(x.FileName)).Select(x =>
-            {
-                var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
-                // Source snippets need to be on disk for DiagnosticVerifier.Verify to work.
-                // If this becomes unnecessary, adding source snippets should be reworked to align it with adding content snippets.
-                File.WriteAllText(tempFilePath, x.Content);
-                return tempFilePath;
-            }))
+                {
+                    var tempFilePath = Path.Combine(Directory.GetCurrentDirectory(), "TestCases", x.FileName);
+                    // Source snippets need to be on disk for DiagnosticVerifier.Verify to work.
+                    // If this becomes unnecessary, adding source snippets should be reworked to align it with adding content snippets.
+                    File.WriteAllText(tempFilePath, x.Content);
+                    return tempFilePath;
+                }))
             .ToArray();
+        // Fail early for TFMs, there's no way these can be fixed before calling VerifyXxx()
+        ProcessTargetFramework();
+#if NETFRAMEWORK
+        ProcessLanguageVersions();
+#endif
     }
 
     public void Verify()    // This should never have any arguments
@@ -98,22 +107,20 @@ internal class Verifier
         {
             throw new InvalidOperationException($"Cannot use {nameof(Verify)} with {nameof(builder.CodeFix)} set.");
         }
-        CheckInconclusive();
         var numberOfIssues = Compile(builder.ConcurrentAnalysis)
             .Sum(x => DiagnosticVerifier.Verify(
-                x.Compilation,
-                analyzers,
-                builder.ErrorBehavior,
-                builder.AdditionalFilePath,
-                onlyDiagnosticIds,
-                razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray(),
-                builder.ConcurrentAnalysis));
+                        x.Compilation,
+                        analyzers,
+                        builder.ErrorBehavior,
+                        builder.AdditionalFilePath,
+                        onlyDiagnosticIds,
+                        razorFilePaths.Concat(x.AdditionalSourceFiles ?? []).ToArray(),
+                        builder.ConcurrentAnalysis));
         numberOfIssues.Should().BeGreaterThan(0, $"otherwise you should use '{nameof(VerifyNoIssues)}' instead");
     }
 
     public void VerifyNoIssues()    // This should never have any arguments
     {
-        CheckInconclusive();
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
             foreach (var analyzer in analyzers)
@@ -125,7 +132,6 @@ internal class Verifier
 
     public void VerifyNoAD0001()    // This should never have any arguments
     {
-        CheckInconclusive();
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
             foreach (var analyzer in analyzers)
@@ -137,7 +143,6 @@ internal class Verifier
 
     public void VerifyNoIssuesIgnoreErrors()    // This should never have any arguments
     {
-        CheckInconclusive();
         foreach (var compilation in Compile(builder.ConcurrentAnalysis))
         {
             foreach (var analyzer in analyzers)
@@ -150,7 +155,6 @@ internal class Verifier
     public void VerifyCodeFix()     // This should never have any arguments
     {
         _ = codeFix ?? throw new InvalidOperationException($"{nameof(builder.CodeFix)} was not set.");
-        CheckInconclusive();
         var document = CreateProject(false).FindDocument(Path.Combine(builder.BasePath ?? string.Empty, Path.GetFileName(builder.Paths.Single())));
         var codeFixVerifier = new CodeFixVerifier(analyzers.Single(), codeFix, document, builder.CodeFixTitle);
         var fixAllProvider = codeFix.GetFixAllProvider();
@@ -166,7 +170,6 @@ internal class Verifier
 
     public void VerifyUtilityAnalyzerProducesEmptyProtobuf()     // This should never have any arguments
     {
-        CheckInconclusive();
         foreach (var compilation in Compile(false))
         {
             DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
@@ -177,7 +180,6 @@ internal class Verifier
     public void VerifyUtilityAnalyzer<TMessage>(Action<IReadOnlyList<TMessage>> verifyProtobuf)
         where TMessage : IMessage<TMessage>, new()
     {
-        CheckInconclusive();
         foreach (var compilation in Compile(false))
         {
             DiagnosticVerifier.Verify(compilation.Compilation, analyzers, CompilationErrorBehavior.Default, builder.AdditionalFilePath, [], []);
@@ -256,7 +258,7 @@ internal class Verifier
     }
 
     private string TestCaseDirectory() =>
-        Path.GetFullPath(builder.BasePath == null ? TestCases : Path.Combine(TestCases, builder.BasePath));
+        Path.GetFullPath(builder.BasePath is null ? TestCases : Path.Combine(TestCases, builder.BasePath));
 
     private string TestCasePath(string fileName) =>
         Path.Combine(TestCaseDirectory(), fileName);
@@ -315,13 +317,38 @@ internal class Verifier
         Path.GetExtension(path) is { } extension
         && (extension.Equals(".razor", StringComparison.OrdinalIgnoreCase) || extension.Equals(".cshtml", StringComparison.OrdinalIgnoreCase));
 
-    private void CheckInconclusive()
+    private void ProcessTargetFramework()
     {
-        // Project targeting the latest .NET always runs the test
+#if NET
+        CheckTargetFramework(TargetFrameworks.Net);
+#else
+        CheckTargetFramework(TargetFrameworks.NetFramework);
+#endif
+
+        void CheckTargetFramework(TargetFrameworks current)
+        {
+            if ((builder.TargetFrameworks & current) == 0)
+            {
+                Assert.Inconclusive($"This test should run only under {builder.TargetFrameworks}. Current framework is {current}.");
+            }
+        }
+    }
+
 #if NETFRAMEWORK
+
+    private void ProcessLanguageVersions()
+    {
+        // Project targeting the latest .NET always runs for latest language versions
         if (!builder.ParseOptions.IsEmpty && TooHighVersion() is { } languageVersion)
         {
-            Assert.Inconclusive($"{languageVersion} can only be tested under the .NET build of this project.");
+            if ((builder.TargetFrameworks & TargetFrameworks.Net) == 0) // The test would never run
+            {
+                Assert.Fail($"{languageVersion} can only be tested under the .NET build of this project, but {nameof(builder.TargetFrameworks)} is only set to {builder.TargetFrameworks}.");
+            }
+            else
+            {
+                Assert.Inconclusive($"{languageVersion} can only be tested under the .NET build of this project.");
+            }
         }
 
         string TooHighVersion() =>
@@ -339,8 +366,9 @@ internal class Verifier
                         : null,
                 _ => throw new UnexpectedLanguageException(language)
             };
-#endif
     }
+
+#endif
 
     public sealed record CompilationData(Compilation Compilation, string[] AdditionalSourceFiles);
 }
