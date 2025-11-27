@@ -78,4 +78,17 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    [SecurityCritical]  // FN
+    public partial class PartialClass { }
+
+    [SecurityCritical]
+    public class Sample { }
+
+    [SecurityCritical]  // Secondary
+    public static class ClassicExtensions
+    {
+        [SecuritySafeCritical] // Noncompliant
+        public static void ExtensionMethod(this Sample sample) { }
+    }
 }

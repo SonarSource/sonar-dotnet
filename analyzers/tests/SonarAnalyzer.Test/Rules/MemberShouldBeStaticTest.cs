@@ -29,41 +29,39 @@ public class MemberShouldBeStaticTest
     public void MemberShouldBeStatic(string aspnetCoreVersion, string aspnetVersion) =>
         builder.AddPaths("MemberShouldBeStatic.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreMvcWebApiCompatShim(aspnetCoreVersion)
-                                    .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
-                                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
-                                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
-                                    .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion)))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspnetVersion))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspnetCoreVersion))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspnetCoreVersion))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspnetCoreVersion)))
             .Verify();
 
     [TestMethod]
     public void MemberShouldBeStatic_WinForms() =>
-        builder.AddPaths("MemberShouldBeStatic.WinForms.cs")
-            .AddReferences(MetadataReferenceFacade.SystemWindowsForms)
-            .Verify();
+        builder.AddPaths("MemberShouldBeStatic.WinForms.cs").AddReferences(MetadataReferenceFacade.SystemWindowsForms).Verify();
 
     [TestMethod]
     public void MemberShouldBeStatic_Xaml() =>
-        builder.AddPaths("MemberShouldBeStatic.Xaml.cs")
-            .AddReferences(MetadataReferenceFacade.PresentationFramework)
-            .Verify();
+        builder.AddPaths("MemberShouldBeStatic.Xaml.cs").AddReferences(MetadataReferenceFacade.PresentationFramework).Verify();
 
     [TestMethod]
     public void MemberShouldBeStatic_Latest() =>
-        builder
-            .AddPaths("MemberShouldBeStatic.Latest.cs")
+        builder.AddPaths("MemberShouldBeStatic.Latest.cs")
             .AddPaths("MemberShouldBeStatic.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
-            .WithTopLevelStatements().Verify();
+            .WithTopLevelStatements()
+            .Verify();
 
     [TestMethod]
     public void MemberShouldBeStatic_HttpApplication() =>
-        builder.AddSnippet(@"
-public class HttpApplication1 : System.Web.HttpApplication
-{
-public int Foo() => 0;
+        builder.AddSnippet("""
 
-protected int FooFoo() => 0; // Noncompliant
-}").WithErrorBehavior(CompilationErrorBehavior.Ignore).Verify();
+            public class HttpApplication1 : System.Web.HttpApplication // Error [CS0234]
+            {
+            public int Foo() => 0;
+
+            protected int FooFoo() => 0; // Noncompliant
+            }
+            """).Verify();
 
     [TestMethod]
     public void MemberShouldBeStatic_InvalidCode() =>
@@ -78,6 +76,6 @@ protected int FooFoo() => 0; // Noncompliant
                                    return result;
                                }
                            }
-                           """)
-                .VerifyNoAD0001();
+            """)
+            .VerifyNoAD0001();
 }

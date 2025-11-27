@@ -16,27 +16,25 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MemberShouldNotHaveConflictingTransparencyAttributesTest
 {
-    [TestClass]
-    public class MemberShouldNotHaveConflictingTransparencyAttributesTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldNotHaveConflictingTransparencyAttributes>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<MemberShouldNotHaveConflictingTransparencyAttributes>();
 
-        [TestMethod]
-        public void MemberShouldNotHaveConflictingTransparencyAttributes() =>
-            builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.cs").Verify();
+    [TestMethod]
+    public void MemberShouldNotHaveConflictingTransparencyAttributes() =>
+        builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.cs", "MemberShouldNotHaveConflictingTransparencyAttributes.Partial.cs").Verify();
 
-        [TestMethod]
-        public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
-            builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel.cs").WithConcurrentAnalysis(false).Verify();
+    [TestMethod]
+    public void MemberShouldNotHaveConflictingTransparencyAttributes_AssemblyLevel() =>
+        builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.AssemblyLevel.cs").WithConcurrentAnalysis(false).Verify();
 
-        [TestMethod]
-        public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharp10() =>
-            builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.CSharp10.cs").WithConcurrentAnalysis(false).WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharp11() =>
-            builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.CSharp11.cs").WithConcurrentAnalysis(false).WithOptions(LanguageOptions.FromCSharp11).Verify();
-    }
+    [TestMethod]
+    public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharpLatest() =>
+        builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.Latest.cs", "MemberShouldNotHaveConflictingTransparencyAttributes.Latest.Partial.cs")
+            .WithConcurrentAnalysis(false)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

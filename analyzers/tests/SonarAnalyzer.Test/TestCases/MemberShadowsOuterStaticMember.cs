@@ -121,4 +121,26 @@ namespace Tests.TestCases
         public static int Value1 = 42;
         public const int Value2 = 43;
     }
+
+    public static class ClassicExtensionShadowsNestedExtendedType
+    {
+        public class InnerSample
+        {
+            public static int Prop { get; set; } // Noncompliant
+            public static void Method(int i) { } // Noncompliant
+        }
+
+        public static int Prop => 42;
+        public static void Method(int j) { }
+    }
+
+    public class Sample
+    {
+        public static void Method(int i) { }
+    }
+
+    public static class ClassicExtensionShadowsExtendedType
+    {
+        public static void Method(this Sample sample, int j) { }
+    }
 }

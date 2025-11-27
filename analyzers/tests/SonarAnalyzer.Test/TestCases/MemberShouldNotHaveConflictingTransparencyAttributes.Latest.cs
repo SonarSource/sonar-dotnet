@@ -11,8 +11,12 @@ namespace Net6Poc.MemberShouldNotHaveConflictingTransparencyAttributes;
 // Secondary@-3 [flow3]
 // Secondary@-4 [flow4]
 // Secondary@-5 [flow5]
+// Secondary@-6 [flow6]
 internal class TestCases
 {
+    [SecuritySafeCritical]  // Noncompliant [flow6]
+    internal TestCases() { }
+
     public void Bar(IEnumerable<int> collection)
     {
         [SecuritySafeCritical] int Get() => 1; // Noncompliant [flow1]
@@ -29,4 +33,37 @@ internal class TestCases
     }
 
     private void Call(Action<int> action) => action(1);
+}
+
+[SecurityCritical]
+// Secondary@-1
+// Secondary@-2
+public interface Foo
+{
+    [SecuritySafeCritical] // Noncompliant
+    public static virtual void Bar()
+    {
+    }
+
+    [SecuritySafeCritical] // Noncompliant
+    public static abstract void Bar2();
+}
+
+[SecurityCritical]  // FN
+public partial class PartialClass
+{
+    public partial PartialClass();
+}
+
+[SecurityCritical]
+public class Sample { }
+
+[SecurityCritical] // Secondary
+public static class Extensions
+{
+    extension(Sample sample)
+    {
+        [SecuritySafeCritical] // Noncompliant
+        public static void ExtensionMethod() { }
+    }
 }

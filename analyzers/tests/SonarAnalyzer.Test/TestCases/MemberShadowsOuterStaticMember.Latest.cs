@@ -204,3 +204,45 @@ namespace CSharp13
         }
     }
 }
+
+public static class ExtensionShadowsSelf
+{
+    public static int Prop { get; set; }
+    public static void Method(int i) { }
+
+    extension(string s)
+    {
+        public int Prop => 42;
+        public void Method(int j) { }
+    }
+}
+
+public class Sample
+{
+    public static int Prop { get; set; }
+    public static void Method(int i) { }
+}
+
+public static class ExtensionShadowsExtendedType
+{
+    extension(Sample s)
+    {
+        public int Prop => 42;
+        public void Method(int j) { }
+    }
+}
+
+public static class ExtensionShadowsNestedExtendedType
+{
+    public class InnerSample
+    {
+        public static int Prop { get; set; }
+        public static void Method(int i) { } // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2740
+    }
+
+    extension(InnerSample s)
+    {
+        public static int Prop => 42;
+        public static void Method(int j) { }
+    }
+}

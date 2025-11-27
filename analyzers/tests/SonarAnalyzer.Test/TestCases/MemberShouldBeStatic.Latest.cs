@@ -162,8 +162,30 @@ namespace CSharp14
     {
         extension(int number)
         {
-            public bool IsEven => number % 2 == 0; //   Noncompliant FP, number is instance data.
+            public bool IsEven => number % 2 == 0;  //  Noncompliant FP, number is instance data.
             public bool IsOdd() => number % 2 != 0; //  Noncompliant FP, number is instance data.
+        }
+    }
+
+    public class FieldKeyword
+    {
+        public int Field1   // Noncompliant FP  https://sonarsource.atlassian.net/browse/NET-2716
+        {
+            get;
+            set => field = value < 0 ? throw new ArgumentException("Value must be greater or equal 0.") : value;
+        }
+    }
+
+    public class NullConditionalAssignment
+    {
+        private int x = 42;
+        private Sample sample = new Sample();
+        public int? RightSideInstanced(Sample a) => a?.Value = x;
+        public int? LeftSideInstanced(int a) => sample?.Value = a;
+
+        public class Sample
+        {
+            public int Value { get; set; }
         }
     }
 }

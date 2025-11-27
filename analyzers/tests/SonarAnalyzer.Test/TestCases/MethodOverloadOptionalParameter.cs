@@ -81,4 +81,19 @@ namespace Tests.Diagnostics
         {
         }
     }
+
+    public class Sample { }
+
+    public class SampleWithMethod
+    {
+        public void Method(string[] messages) { }
+    }
+
+    public static class ClassicExtensions
+    {
+        public static void Method(this Sample sample, string[] messages) { }
+        public static void Method(this Sample sample, string[] messages, string delimiter = "\n") { } // Noncompliant
+
+        public static void Method(this SampleWithMethod sample, string[] messages, string delimiter = "\n") { }
+    }
 }
