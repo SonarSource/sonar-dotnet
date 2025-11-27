@@ -37,49 +37,34 @@ public class ClassShouldNotBeEmptyTest
             .AddPaths("ClassShouldNotBeEmpty.vb")
             .Verify();
 
+    [TestMethod]
+    public void ClassShouldNotBeEmpty_CSharpLatest() =>
+        builderCS
+            .AddPaths("ClassShouldNotBeEmpty.Latest.cs", "ClassShouldNotBeEmpty.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
 #if NET
-
-    private static readonly MetadataReference[] AdditionalReferences =
-    [
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
-        AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazorPages
-    ];
-
-    [TestMethod]
-    public void ClassShouldNotBeEmpty_CSharp9() =>
-        builderCS
-            .AddPaths("ClassShouldNotBeEmpty.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void ClassShouldNotBeEmpty_CSharp10() =>
-        builderCS
-            .AddPaths("ClassShouldNotBeEmpty.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void ClassShouldNotBeEmpty_CSharp12() =>
-        builderCS
-            .AddPaths("ClassShouldNotBeEmpty.CSharp12.cs")
-            .WithOptions(LanguageOptions.FromCSharp12)
-            .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_Inheritance_CS() =>
         builderCS
             .AddPaths("ClassShouldNotBeEmpty.Inheritance.cs")
-            .AddReferences(AdditionalReferences)
+            .AddReferences(AdditionalReferences())
             .Verify();
 
     [TestMethod]
     public void ClassShouldNotBeEmpty_Inheritance_VB() =>
         builderVB
             .AddPaths("ClassShouldNotBeEmpty.Inheritance.vb")
-            .AddReferences(AdditionalReferences)
+            .AddReferences(AdditionalReferences())
             .Verify();
 
+    private static MetadataReference[] AdditionalReferences() =>
+        [
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcAbstractions,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcCore,
+            AspNetCoreMetadataReference.MicrosoftAspNetCoreMvcRazorPages
+        ];
 #endif
 }

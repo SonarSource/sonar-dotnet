@@ -77,3 +77,55 @@ namespace Repro_7709
     record ImplementsMarker : IMarker { }
     record ImplementsEmptyRecordAndMarker : Noncompliant.EmptyRecord, IMarker { }
 }
+
+namespace Compliant
+{
+    record class NotEmptyRecordClass1(int RecordMember);
+    record class NotEmptyRecordClass2()
+    {
+        int RecordMember => 42;
+    };
+}
+namespace NonCompliant
+{
+
+    record class EmptyRecordClass();                           // Noncompliant {{Remove this empty record, write its code or make it an "interface".}}
+    //           ^^^^^^^^^^^^^^^^
+    record class EmptyRecordClassWithEmptyBody() { };          // Noncompliant
+
+    record class EmptyChildWithoutBrackets : EmptyRecordClass; // Noncompliant
+}
+namespace Ignored
+{
+    record struct EmptyRecordStruct();                  // Compliant - this rule only deals with classes
+    record struct EmptyRecordStructWithEmptyBody() { }; // Compliant - this rule only deals with classes
+}
+
+namespace Compliant
+{
+    class ChildClass() : BaseClass(42) { } // Compliant
+
+    class ChildClassWithParameters(int value) : BaseClass(value) { } // Compliant
+
+    class BaseClass(int value) { }
+}
+
+namespace Noncompliant
+{
+    class ChildClass() : BaseClass() { } // Noncompliant
+
+    class BaseClass()
+    {
+        public int Value { get; init; }
+    }
+}
+
+public partial class PartialConstructor
+{
+    public partial PartialConstructor();
+}
+
+public partial class PartialEvent
+{
+    public partial event EventHandler MyEvent;
+}

@@ -54,3 +54,15 @@ namespace Tests.Diagnostics
         public async Task MyTest() { }
     }
 }
+
+namespace Net6Poc.AsyncVoidMethod
+{
+    internal class MsTestCases
+    {
+        [Generic<int>]
+        public static async void M() { } // Noncompliant
+    }
+
+    public class GenericAttribute<T> : TestMethodAttribute { }
+}
+

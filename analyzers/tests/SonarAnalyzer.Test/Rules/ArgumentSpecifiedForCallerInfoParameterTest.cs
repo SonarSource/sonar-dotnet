@@ -28,14 +28,8 @@ public class ArgumentSpecifiedForCallerInfoParameterTest
         builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.cs").Verify();
 
     [TestMethod]
-    public void ArgumentSpecifiedForCallerInfoParameter_CSharp10() =>
-        builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void ArgumentSpecifiedForCallerInfoParameter_CSharp11() =>
-        builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
+    public void ArgumentSpecifiedForCallerInfoParameter_CSharpLatest() =>
+        builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 }

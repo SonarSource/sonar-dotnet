@@ -47,3 +47,24 @@ class PrimaryConstructorClassNoncompliant([CallerFilePath] string callerFilePath
 record PrimaryConstructorRecordNoncompliant([CallerFilePath] string callerFilePath = "", string other = ""); // Noncompliant
 
 record struct PrimaryConstructorRecordStructNoncompliant([CallerFilePath] string callerFilePath = "", string other = ""); // Noncompliant
+
+
+public partial class PartialConstructorCompliantAttributeInImplementation
+{
+    public partial PartialConstructorCompliantAttributeInImplementation(string other, string callerFilePath = "");
+};
+
+public partial class PartialConstructorCompliantAttributeInDefinition
+{
+    public partial PartialConstructorCompliantAttributeInDefinition(string other, string callerFilePath = "");
+};
+
+public partial class PartialConstructorNonCompliantAttributeInImplementation
+{
+    public partial PartialConstructorNonCompliantAttributeInImplementation(string callerFilePath = "", string other = "");
+};
+
+public partial class PartialConstructorNonCompliantAttributeInDefinition
+{
+    public partial PartialConstructorNonCompliantAttributeInDefinition([CallerFilePath] string callerFilePath = "", string other = "");       // FN https://sonarsource.atlassian.net/browse/NET-2705
+};

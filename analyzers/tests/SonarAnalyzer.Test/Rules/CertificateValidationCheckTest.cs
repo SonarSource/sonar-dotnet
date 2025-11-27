@@ -17,52 +17,47 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class CertificateValidationCheckTest
 {
-    [TestClass]
-    public class CertificateValidationCheckTest
+    private static readonly VerifierBuilder WithReferences = new VerifierBuilder()
+        .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
+        .AddReferences(MetadataReferenceFacade.NetStandard);
+    private readonly VerifierBuilder builderCS = WithReferences.AddAnalyzer(() => new CS.CertificateValidationCheck());
+    private readonly VerifierBuilder builderVB = WithReferences.AddAnalyzer(() => new VB.CertificateValidationCheck());
+
+    [TestMethod]
+    public void CertificateValidationCheck_CS() =>
+        builderCS.AddPaths("CertificateValidationCheck.cs").Verify();
+
+    [TestMethod]
+    public void CertificateValidationCheck_CSharpLatest() =>
+        builderCS.AddPaths("CertificateValidationCheck.Latest.cs", "CertificateValidationCheck.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void CertificateValidationCheck_CS_TopLevelStatements() =>
+        builderCS.AddPaths("CertificateValidationCheck.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void CertificateValidationCheck_VB() =>
+        builderVB.AddPaths("CertificateValidationCheck.vb").Verify();
+
+    [TestMethod]
+    public void CreateParameterLookup_CS_ThrowsException()
     {
-        private static readonly VerifierBuilder WithReferences = new VerifierBuilder()
-            .AddReferences(MetadataReferenceFacade.SystemNetHttp)
-            .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-            .AddReferences(MetadataReferenceFacade.NetStandard);
-        private readonly VerifierBuilder builderCS = WithReferences.AddAnalyzer(() => new CS.CertificateValidationCheck());
-        private readonly VerifierBuilder builderVB = WithReferences.AddAnalyzer(() => new VB.CertificateValidationCheck());
+        var analyzer = new CS.CertificateValidationCheck();
+        Action a = () => analyzer.CreateParameterLookup(null, null);
+        a.Should().Throw<ArgumentException>();
+    }
 
-        [TestMethod]
-        public void CertificateValidationCheck_CS() =>
-            builderCS.AddPaths("CertificateValidationCheck.cs").Verify();
-
-        [TestMethod]
-        public void CertificateValidationCheck_CSharp8() =>
-            builderCS.AddPaths("CertificateValidationCheck.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
-
-        [TestMethod]
-        public void CertificateValidationCheck_CS_CSharp9() =>
-            builderCS.AddPaths("CertificateValidationCheck.CSharp9.cs", "CertificateValidationCheck.CSharp9.Partial.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void CertificateValidationCheck_CS_TopLevelStatements() =>
-            builderCS.AddPaths("CertificateValidationCheck.TopLevelStatements.cs").WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void CertificateValidationCheck_VB() =>
-            builderVB.AddPaths("CertificateValidationCheck.vb").Verify();
-
-        [TestMethod]
-        public void CreateParameterLookup_CS_ThrowsException()
-        {
-            var analyzer = new CS.CertificateValidationCheck();
-            Action a = () => analyzer.CreateParameterLookup(null, null);
-            a.Should().Throw<ArgumentException>();
-        }
-
-        [TestMethod]
-        public void CreateParameterLookup_VB_ThrowsException()
-        {
-            var analyzer = new VB.CertificateValidationCheck();
-            Action a = () => analyzer.CreateParameterLookup(null, null);
-            a.Should().Throw<ArgumentException>();
-        }
+    [TestMethod]
+    public void CreateParameterLookup_VB_ThrowsException()
+    {
+        var analyzer = new VB.CertificateValidationCheck();
+        Action a = () => analyzer.CreateParameterLookup(null, null);
+        a.Should().Throw<ArgumentException>();
     }
 }

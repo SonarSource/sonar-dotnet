@@ -16,21 +16,20 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ClassWithEqualityShouldImplementIEquatableTest
 {
-    [TestClass]
-    public class ClassWithEqualityShouldImplementIEquatableTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ClassWithEqualityShouldImplementIEquatable>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ClassWithEqualityShouldImplementIEquatable>();
 
-        [TestMethod]
-        public void ClassWithEqualityShouldImplementIEquatable() =>
-            builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.cs").Verify();
+    [TestMethod]
+    public void ClassWithEqualityShouldImplementIEquatable() =>
+        builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.cs").Verify();
 
-        [TestMethod]
-        public void ClassWithEqualityShouldImplementIEquatable_CSharp9() =>
-            builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
-    }
+    [TestMethod]
+    public void ClassWithEqualityShouldImplementIEquatable_CSharpLatest() =>
+        builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

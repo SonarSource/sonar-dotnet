@@ -30,27 +30,9 @@ public class CastShouldNotBeDuplicatedTest
         Builder.AddPaths("CastShouldNotBeDuplicated.cs").Verify();
 
     [TestMethod]
-    public void CastShouldNotBeDuplicated_CSharp9() =>
-        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void CastShouldNotBeDuplicated_CSharp10() =>
-        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
-            .Verify();
-
-    [TestMethod]
-    public void CastShouldNotBeDuplicated_CSharp11() =>
-        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
-            .Verify();
-
-    [TestMethod]
-    public void CastShouldNotBeDuplicated_CSharp12() =>
-        Builder.AddPaths("CastShouldNotBeDuplicated.CSharp12.cs")
-            .WithOptions(LanguageOptions.FromCSharp12)
+    public void CastShouldNotBeDuplicated_CSharpLatest() =>
+        Builder.AddPaths("CastShouldNotBeDuplicated.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #if NET
