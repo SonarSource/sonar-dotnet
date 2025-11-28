@@ -17,36 +17,23 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MethodOverloadsShouldBeGroupedTest
 {
-    [TestClass]
-    public class MethodOverloadsShouldBeGroupedTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MethodOverloadsShouldBeGrouped>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MethodOverloadsShouldBeGrouped>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.MethodOverloadsShouldBeGrouped>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.MethodOverloadsShouldBeGrouped>();
 
-        [TestMethod]
-        public void MethodOverloadsShouldBeGrouped_CS() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.cs").Verify();
+    [TestMethod]
+    public void MethodOverloadsShouldBeGrouped_CS() =>
+        builderCS.AddPaths("MethodOverloadsShouldBeGrouped.cs").Verify();
 
-        [TestMethod]
-        public void MethodOverloadsShouldBeGrouped_CS_CSharp9() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
+    [TestMethod]
+    public void MethodOverloadsShouldBeGrouped_CS_CSharpLatest() =>
+        builderCS.AddPaths("MethodOverloadsShouldBeGrouped.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void MethodOverloadsShouldBeGrouped_CS_CSharp10() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void MethodOverloadsShouldBeGrouped_CS_CSharp11() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-        [TestMethod]
-        public void MethodOverloadsShouldBeGrouped_CS_CSharp12() =>
-            builderCS.AddPaths("MethodOverloadsShouldBeGrouped.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-
-        [TestMethod]
-        public void MethodOverloadsShouldBeGrouped_VB() =>
-            builderVB.AddPaths("MethodOverloadsShouldBeGrouped.vb").Verify();
-    }
+    [TestMethod]
+    public void MethodOverloadsShouldBeGrouped_VB() =>
+        builderVB.AddPaths("MethodOverloadsShouldBeGrouped.vb").Verify();
 }

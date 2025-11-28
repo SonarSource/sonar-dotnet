@@ -20,3 +20,28 @@ namespace Tests.Diagnostics
         public static void Write(int i, int j, int x = 5) { } // Fixed
     }
 }
+
+public interface IMyInterface
+{
+    void Read(int i, int j = 5);
+    void Write(int i, int j = 5);
+}
+
+public record Base : IMyInterface
+{
+    public void Read(int i, int j = 5) { } // Compliant
+
+    public virtual void Write(int i, int j = 5) { } // Fixed
+}
+
+public partial record Derived : Base
+{
+    public override partial void Write(int i, int j = 5); // Fixed
+}
+
+public partial record Derived
+{
+    public override partial void Write(int i, int j = 5) // Fixed
+    {
+    }
+}

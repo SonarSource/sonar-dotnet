@@ -16,56 +16,47 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MethodOverrideChangedDefaultValueTest
 {
-    [TestClass]
-    public class MethodOverrideChangedDefaultValueTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideChangedDefaultValue>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideChangedDefaultValue>();
 
-        [TestMethod]
-        public void MethodOverrideChangedDefaultValue() =>
-            builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void MethodOverrideChangedDefaultValue() =>
+        builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
+            .AddReferences(MetadataReferenceFacade.NetStandard21)
+            .WithOptions(LanguageOptions.FromCSharp8)
+            .Verify();
 
-        [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CSharp9() =>
-            builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void MethodOverrideChangedDefaultValue_CSharpLatest() =>
+        builder.AddPaths("MethodOverrideChangedDefaultValue.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CSharp11() =>
-            builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
+    [TestMethod]
+    public void MethodOverrideChangedDefaultValue_CSharpLatest_CodeFix() =>
+        builder.AddPaths("MethodOverrideChangedDefaultValue.Latest.cs")
+            .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
+            .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Latest.Fixed.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CSharp11_CodeFix() =>
-            builder.AddPaths("MethodOverrideChangedDefaultValue.CSharp11.cs")
-                .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
-                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.CSharp11.Fixed.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void MethodOverrideChangedDefaultValue_CodeFix_Synchronize() =>
+        builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
+            .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
+            .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Synchronize.Fixed.cs", "MethodOverrideChangedDefaultValue.Synchronize.Fixed.Batch.cs")
+            .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleGeneral)
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CodeFix_Synchronize() =>
-            builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
-                .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
-                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Synchronize.Fixed.cs", "MethodOverrideChangedDefaultValue.Synchronize.Fixed.Batch.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleGeneral)
-                .VerifyCodeFix();
-
-        [TestMethod]
-        public void MethodOverrideChangedDefaultValue_CodeFix_Remove() =>
-            builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
-                .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
-                .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Remove.Fixed.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleExplicitInterface)
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void MethodOverrideChangedDefaultValue_CodeFix_Remove() =>
+        builder.AddPaths("MethodOverrideChangedDefaultValue.cs")
+            .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
+            .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Remove.Fixed.cs")
+            .WithCodeFixTitle(MethodOverrideChangedDefaultValueCodeFix.TitleExplicitInterface)
+            .VerifyCodeFix();
 }

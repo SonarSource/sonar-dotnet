@@ -462,4 +462,13 @@ namespace Tests.Diagnostics
         public void EndGrouping() { }
         void IOverloadInterfaceSample.DoSomething(int overload) { }
     }
+
+    public static class ClassicExtensions
+    {
+        public class Sample { }
+        public static void a(this Sample sample) { }            // Noncompliant
+        public static void a(this Sample sample, int a) { }
+        public static void b() { }
+        public static void a(this Sample sample, string z) { }  // Secondary
+    }
 }

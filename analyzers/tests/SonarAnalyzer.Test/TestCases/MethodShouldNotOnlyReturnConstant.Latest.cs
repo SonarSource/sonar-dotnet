@@ -2,6 +2,9 @@
 
 namespace Tests.Diagnostics
 {
+    interface ISomeInterface {
+        public bool IsCondition() => true; // Compliant, see: https://github.com/SonarSource/sonar-dotnet/issues/5498
+    }
     public interface IFoo
     {
         static abstract int GetValue();
@@ -25,5 +28,14 @@ namespace Tests.Diagnostics
 
         // ref: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/reference-types#utf-8-string-literals
         public ReadOnlySpan<byte> Get_Utf_8() => "hello"u8; // Compliant, utf-8 strings are runtime constants (represented as ReadOnlySpan<byte>)
+    }
+}
+
+public static class  Extensions
+{
+    extension (string s)
+    {
+        public string NewCompliant() => s + "!";
+        public string NewNonCompliant() => "!"; // Noncompliant
     }
 }

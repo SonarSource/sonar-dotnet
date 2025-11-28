@@ -16,26 +16,25 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MethodOverrideNoParamsTest
 {
-    [TestClass]
-    public class MethodOverrideNoParamsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideNoParams>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideNoParams>();
 
-        [TestMethod]
-        public void MethodOverrideNoParams() =>
-            builder.AddPaths("MethodOverrideNoParams.cs").Verify();
+    [TestMethod]
+    public void MethodOverrideNoParams() =>
+        builder.AddPaths("MethodOverrideNoParams.cs").Verify();
 
-        [TestMethod]
-        public void MethodOverrideNoParams_CS_Latest() =>
-            builder.AddPaths("MethodOverrideNoParams.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+    [TestMethod]
+    public void MethodOverrideNoParams_CS_Latest() =>
+        builder.AddPaths("MethodOverrideNoParams.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void MethodOverrideNoParams_CodeFix() =>
-            builder.WithCodeFix<MethodOverrideNoParamsCodeFix>()
-                .AddPaths("MethodOverrideNoParams.cs")
-                .WithCodeFixedPaths("MethodOverrideNoParams.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void MethodOverrideNoParams_CodeFix() =>
+        builder.WithCodeFix<MethodOverrideNoParamsCodeFix>()
+            .AddPaths("MethodOverrideNoParams.cs")
+            .WithCodeFixedPaths("MethodOverrideNoParams.Fixed.cs")
+            .VerifyCodeFix();
 }

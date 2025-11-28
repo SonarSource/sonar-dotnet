@@ -16,27 +16,30 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MethodParameterMissingOptionalTest
 {
-    [TestClass]
-    public class MethodParameterMissingOptionalTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MethodParameterMissingOptional>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<MethodParameterMissingOptional>();
 
-        [TestMethod]
-        public void MethodParameterMissingOptional() =>
-            builder.AddPaths("MethodParameterMissingOptional.cs").Verify();
+    [TestMethod]
+    public void MethodParameterMissingOptional() =>
+        builder.AddPaths("MethodParameterMissingOptional.cs").Verify();
 
-        [TestMethod]
-        public void MethodParameterMissingOptional_CSharp9() =>
-            builder.AddPaths("MethodParameterMissingOptional.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void MethodParameterMissingOptional_TopLevelStatements() =>
+        builder.AddPaths("MethodParameterMissingOptional.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void MethodParameterMissingOptional_CodeFix() =>
-            builder
-                .WithCodeFix<MethodParameterMissingOptionalCodeFix>()
-                .AddPaths("MethodParameterMissingOptional.cs")
-                .WithCodeFixedPaths("MethodParameterMissingOptional.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void MethodParameterMissingOptional_CSharpLatest() =>
+    builder.AddPaths("MethodParameterMissingOptional.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void MethodParameterMissingOptional_CodeFix() =>
+        builder
+            .WithCodeFix<MethodParameterMissingOptionalCodeFix>()
+            .AddPaths("MethodParameterMissingOptional.cs")
+            .WithCodeFixedPaths("MethodParameterMissingOptional.Fixed.cs")
+            .VerifyCodeFix();
 }

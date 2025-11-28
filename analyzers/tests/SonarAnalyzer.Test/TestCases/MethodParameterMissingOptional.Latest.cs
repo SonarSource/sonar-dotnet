@@ -1,8 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 
-void TopLevelMethod([DefaultParameterValue(5)] int j) { } //Noncompliant
-void TopLevelOptional([DefaultParameterValue(5), Optional] int j) { }
-
 public record MethodParameterMissingOptional
 {
     public void MyMethod1([DefaultParameterValue(5)] int j) { } //Noncompliant
@@ -20,5 +17,16 @@ public record MethodParameterMissingOptional
 
         static void StaticLocal([DefaultParameterValue(5)] int j) { } //Noncompliant
         static void StaticLocalOptional([DefaultParameterValue(5), Optional] int j) { }
+    }
+}
+
+public static class Extensions
+{
+    public class Sample { }
+    extension (Sample sample)
+    {
+        public void NonCompliant([DefaultParameterValue(5)] int j) { } //Noncompliant
+        public void Compliant([DefaultParameterValue(5), Optional] int j) { }
+        public void AlsoCompliant([DefaultParameterValue(5)][Optional] int j) { }
     }
 }

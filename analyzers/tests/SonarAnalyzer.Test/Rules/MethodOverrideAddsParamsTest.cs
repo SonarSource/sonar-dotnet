@@ -16,27 +16,26 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class MethodOverrideAddsParamsTest
 {
-    [TestClass]
-    public class MethodOverrideAddsParamsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideAddsParams>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<MethodOverrideAddsParams>();
 
-        [TestMethod]
-        public void MethodOverrideAddsParams() =>
-            builder.AddPaths("MethodOverrideAddsParams.cs").WithOptions(LanguageOptions.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
+    [TestMethod]
+    public void MethodOverrideAddsParams() =>
+        builder.AddPaths("MethodOverrideAddsParams.cs").WithOptions(LanguageOptions.FromCSharp8).AddReferences(MetadataReferenceFacade.NetStandard21).Verify();
 
-        [TestMethod]
-        public void MethodOverrideAddsParams_CS_Latest() =>
-            builder.AddPaths("MethodOverrideAddsParams.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+    [TestMethod]
+    public void MethodOverrideAddsParams_CS_Latest() =>
+        builder.AddPaths("MethodOverrideAddsParams.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void MethodOverrideAddsParams_CodeFix() =>
-            builder
-                .WithCodeFix<MethodOverrideAddsParamsCodeFix>()
-                .AddPaths("MethodOverrideAddsParams.cs")
-                .WithCodeFixedPaths("MethodOverrideAddsParams.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void MethodOverrideAddsParams_CodeFix() =>
+        builder
+            .WithCodeFix<MethodOverrideAddsParamsCodeFix>()
+            .AddPaths("MethodOverrideAddsParams.cs")
+            .WithCodeFixedPaths("MethodOverrideAddsParams.Fixed.cs")
+            .VerifyCodeFix();
 }

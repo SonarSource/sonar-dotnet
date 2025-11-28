@@ -500,3 +500,16 @@ namespace ReproNET2384
         }
     }
 }
+
+public static class Extensions
+{
+    extension(string s)
+    {
+        [Any]
+        public int MyMethod2(int i, int b) => b;              // Compliant, because of the attribute
+        public void MyMethod(int i) { }                       // Compliant - Unused extension owner
+        public int Add(int a, int b) => a + b;                // Compliant
+        public int AddedLength(int a, int b) => s.Length + b; // FN https://sonarsource.atlassian.net/browse/NET-2732
+    }
+    public class AnyAttribute : Attribute { }
+}

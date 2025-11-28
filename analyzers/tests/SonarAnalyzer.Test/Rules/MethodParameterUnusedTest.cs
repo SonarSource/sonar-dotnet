@@ -44,12 +44,13 @@ public class MethodParameterUnusedTest
     public void MethodParameterUnused_DoubleCompilation_CS()
     {
         // https://github.com/SonarSource/sonar-dotnet/issues/5491
-        const string code = @"
-public class Sample
-{
-    private void Method(int arg) =>
-        arg.ToString();
-}";
+        const string code = """
+            public class Sample
+            {
+                private void Method(int arg) =>
+                    arg.ToString();
+            }
+            """;
         var compilation1 = roslynCS.AddSnippet(code).WithLanguageVersion(Microsoft.CodeAnalysis.CSharp.LanguageVersion.CSharp7).Compile().Single();
         var compilation2 = compilation1.WithAssemblyName("Different-Compilation-Reusing-Same-Nodes");
         // Modified compilation should not reuse cached CFG, because symbols from method would not be equal to symbols from the other CFG.

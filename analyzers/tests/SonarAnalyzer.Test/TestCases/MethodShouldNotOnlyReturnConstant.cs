@@ -96,4 +96,10 @@
             return 0.1F;
         }
     }
+
+    public static class Extensions
+    {
+        public static string ClassicCompliant(this string s) => s + "!";
+        public static string ClassicNonCompliant(this string s) => "!";  // FN https://sonarsource.atlassian.net/browse/NET-2733
+    }
 }
