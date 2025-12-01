@@ -6,7 +6,7 @@
     <title>CFG library for SonarAnalyzer</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="file">licenses\LICENSE.txt</license>
+    <license type="file">licenses/LICENSE.txt</license>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SonarSource CFG library</description>
