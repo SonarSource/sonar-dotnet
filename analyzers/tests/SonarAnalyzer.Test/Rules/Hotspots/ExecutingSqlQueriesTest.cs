@@ -50,12 +50,22 @@ public class ExecutingSqlQueriesTest
             .Verify();
 
     [TestMethod]
-    public void ExecutingSqlQueries_OrmLite_CS() =>
+    public void ExecutingSqlQueries_OrmLite_CS_810() =>
         builderCS
             .AddPaths(@"ExecutingSqlQueries.OrmLite.cs")
             .AddReferences(MetadataReferenceFacade.SystemData)
-            .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(TestConstants.NuGetLatestVersion))
+            // after 8.10 netfx breaks
+            .AddReferences(NuGetMetadataReference.ServiceStackOrmLite("8.10"))
             .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_OrmLite_CS() =>
+    builderCS
+        .AddPaths(@"ExecutingSqlQueries.OrmLite.cs")
+        .AddReferences(MetadataReferenceFacade.SystemData)
+        .AddReferences(NuGetMetadataReference.ServiceStackOrmLite(TestConstants.NuGetLatestVersion))
+        .WithNetOnly()
+        .Verify();
 
     [TestMethod]
     public void ExecutingSqlQueries_NHibernate_CS() =>
