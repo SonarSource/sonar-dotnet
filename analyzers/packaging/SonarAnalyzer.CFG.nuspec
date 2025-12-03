@@ -18,8 +18,8 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="binaries\SonarAnalyzer.CFG\*.dll" target="lib\netstandard2.0" />
-    <file src="licenses\THIRD_PARTY_LICENSES\StyleCop.Analyzers-LICENSE.txt" target="licenses\THIRD_PARTY_LICENSES\" />
-    <file src="..\..\LICENSE.txt" target="licenses\" />
+    <file src="binaries/SonarAnalyzer.CFG/*.dll" target="lib/netstandard2.0" />
+    <file src="licenses/THIRD_PARTY_LICENSES/StyleCop.Analyzers-LICENSE.txt" target="licenses/THIRD_PARTY_LICENSES/" />
+    <file src="../../LICENSE.txt" target="licenses/" />
   </files>
 </package>

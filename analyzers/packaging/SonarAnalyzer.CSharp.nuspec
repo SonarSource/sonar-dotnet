@@ -9,7 +9,7 @@
     <license type="file">licenses/LICENSE.txt</license>
     <projectUrl>https://redirect.sonarsource.com/doc/sonar-visualstudio.html</projectUrl>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
-    <icon>images\sonarsource_64.png</icon>
+    <icon>images/sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarQube for IDE (Visual Studio, Rider), which is a free extension that can be used standalone or with SonarQube (Server, Cloud).</summary>
     <description>Roslyn analyzers that spot Bugs, Vulnerabilities and Code Smells in your code. For an even better overall experience, you can use SonarQube for IDE (Visual Studio, Rider, see https://www.sonarsource.com/products/sonarlint), which is a free extension that can be used standalone or with SonarQube (Server, Cloud, see: https://www.sonarsource.com/products/sonarqube/ and https://www.sonarsource.com/products/sonarcloud/).</description>
@@ -23,10 +23,10 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="binaries\SonarAnalyzer.CSharp\*.dll" target="analyzers" />
-    <file src="tools-cs\*.ps1" target="tools\" />
-    <file src="logos\sonarsource_64.png" target="images\" />
-    <file src="licenses\THIRD_PARTY_LICENSES\*" target="licenses\THIRD_PARTY_LICENSES\" />
-    <file src="..\..\LICENSE.txt" target="licenses\" />
+    <file src="binaries/SonarAnalyzer.CSharp/*.dll" target="analyzers" />
+    <file src="tools-cs/*.ps1" target="tools/" />
+    <file src="logos/sonarsource_64.png" target="images/" />
+    <file src="licenses/THIRD_PARTY_LICENSES/*" target="licenses/THIRD_PARTY_LICENSES/" />
+    <file src="../../LICENSE.txt" target="licenses/" />
   </files>
 </package>
