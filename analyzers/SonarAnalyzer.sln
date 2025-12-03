@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp.Stylin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp.Styling.Test", "tests\SonarAnalyzer.CSharp.Styling.Test\SonarAnalyzer.CSharp.Styling.Test.csproj", "{6F4F7666-8A0D-47FE-A312-56010C4CE082}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.ShimLayer", "src\SonarAnalyzer.ShimLayer\SonarAnalyzer.ShimLayer.csproj", "{93AF346B-C43A-4A42-AD5B-72681367180E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.ShimLayer.Lightup", "src\SonarAnalyzer.ShimLayer.Lightup\SonarAnalyzer.ShimLayer.Lightup.csproj", "{93AF346B-C43A-4A42-AD5B-72681367180E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.CSharp.Core", "src\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj", "{6841D9C0-1B5D-4853-87A5-9D846A165948}"
 EndProject

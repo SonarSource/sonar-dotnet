@@ -16,7 +16,7 @@
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
 
-    <ProjectReference Include="..\SonarAnalyzer.ShimLayer\SonarAnalyzer.ShimLayer.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.ShimLayer.Lightup\SonarAnalyzer.ShimLayer.Lightup.csproj" />
   </ItemGroup>
 
   <ItemGroup>
