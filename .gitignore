@@ -79,8 +79,6 @@ analyzers/packaging/internal/
 # Temporary diff folder
 /private/analyzers/its/diff/
 
-/private/analyzers/its/**/packages.lock.json
-
 /its/projects/WebApplication/.scannerwork/report-task.txt
 /its/projects/WebApplication/.scannerwork/.sonar_lock
 
