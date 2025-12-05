@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- The scanner removes all the analyzers that have the "SonarAnalyzer" prefix -->
+    <AssemblyName>Internal.SonarAnalyzer.ShimLayer.Generator</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="System.Reflection" />
+    <Using Include="System.Text" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\SonarAnalyzer.Core\Common\IsExternalInit.cs">
+      <Link>IsExternalInit.cs</Link>
+    </Compile>
+  </ItemGroup>
+
+</Project>

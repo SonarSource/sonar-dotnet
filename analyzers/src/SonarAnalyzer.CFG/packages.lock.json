@@ -906,7 +906,7 @@
           "System.Xml.XPath": "4.0.1"
         }
       },
-      "sonaranalyzer.shimlayer": {
+      "SonarAnalyzer.ShimLayer": {
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
