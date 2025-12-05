@@ -14,6 +14,7 @@
   <ItemGroup>
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="SonarAnalyzer.ShimLayer.Generator.Model" />
     <Using Include="System.Reflection" />
     <Using Include="System.Text" />
   </ItemGroup>

@@ -14,25 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.ShimLayer.Generator;
+namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
-internal static class Factory
-{
-    public static IEnumerable<GeneratedFile> CreateAllFiles()
-    {
-        var latest = TypeLoader.LoadLatest();
-
-        yield return new(
-            "Temporary.g.cs",
-            """
-            namespace SonarAnalyzer.ShimLayer;
-
-            public static partial class Temporary
-            {
-                private const int ValueOfOneFromSourceGeneratedPartialClass = 1;
-            }
-            """);
-    }
-}
-
-internal record GeneratedFile(string Name, string Content);
+public record TypeDescriptor(Type Type, MemberInfo[] Members);
