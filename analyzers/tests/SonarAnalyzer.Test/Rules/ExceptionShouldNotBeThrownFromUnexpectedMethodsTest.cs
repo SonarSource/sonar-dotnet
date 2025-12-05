@@ -30,14 +30,8 @@ public class ExceptionShouldNotBeThrownFromUnexpectedMethodsTest
             .Verify();
 
     [TestMethod]
-    public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp9() =>
-        builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void ExceptionShouldNotBeThrownFromUnexpectedMethods_CSharp11() =>
-        builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
+    public void ExceptionShouldNotBeThrownFromUnexpectedMethods_Latest() =>
+        builder.AddPaths("ExceptionShouldNotBeThrownFromUnexpectedMethods.Latest.cs", "ExceptionShouldNotBeThrownFromUnexpectedMethods.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 }

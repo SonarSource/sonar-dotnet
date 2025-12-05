@@ -1,121 +1,132 @@
 ﻿using System;
 
-namespace Tests.Diagnostics
+class ValidProgram : IDisposable
 {
-    class ValidProgram : IDisposable
+    static ValidProgram()
     {
-        static ValidProgram()
+        throw new NotImplementedException();
+    }
+
+    event EventHandler OnSomething
+    {
+        add
         {
             throw new NotImplementedException();
         }
-
-        event EventHandler OnSomething
-        {
-            add
-            {
-                throw new NotImplementedException();
-            }
-            remove
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        event EventHandler OnSomething1
-        {
-            add
-            {
-                throw new InvalidOperationException(); // Compliant
-            }
-            remove
-            {
-                throw new InvalidOperationException(); // Compliant
-            }
-        }
-
-        event EventHandler OnSomething2
-        {
-            add
-            {
-                throw new NotSupportedException(); // Compliant
-            }
-            remove
-            {
-                throw new NotSupportedException(); // Compliant
-            }
-        }
-
-        event EventHandler OnSomething3
-        {
-            add
-            {
-                throw new ArgumentException(); // Compliant
-            }
-            remove
-            {
-                throw new ArgumentException(); // Compliant
-            }
-        }
-
-        public override bool Equals(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override string ToString()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool operator ==(ValidProgram a, ValidProgram b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool operator !=(ValidProgram a, ValidProgram b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool operator >=(ValidProgram a, ValidProgram b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool operator <=(ValidProgram a, ValidProgram b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool operator >(ValidProgram a, ValidProgram b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool operator <(ValidProgram a, ValidProgram b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator byte(ValidProgram d)
+        remove
         {
             throw new NotImplementedException();
         }
     }
 
-    class ValidRethrowProgram : IDisposable
+    event EventHandler OnSomething1
     {
-        static ValidRethrowProgram()
+        add
+        {
+            throw new InvalidOperationException(); // Compliant
+        }
+        remove
+        {
+            throw new InvalidOperationException(); // Compliant
+        }
+    }
+
+    event EventHandler OnSomething2
+    {
+        add
+        {
+            throw new NotSupportedException(); // Compliant
+        }
+        remove
+        {
+            throw new NotSupportedException(); // Compliant
+        }
+    }
+
+    event EventHandler OnSomething3
+    {
+        add
+        {
+            throw new ArgumentException(); // Compliant
+        }
+        remove
+        {
+            throw new ArgumentException(); // Compliant
+        }
+    }
+
+    public override bool Equals(object obj)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override int GetHashCode()
+    {
+        throw new NotImplementedException();
+    }
+
+    public override string ToString()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+
+    public static bool operator ==(ValidProgram a, ValidProgram b)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static bool operator !=(ValidProgram a, ValidProgram b)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static bool operator >=(ValidProgram a, ValidProgram b)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static bool operator <=(ValidProgram a, ValidProgram b)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static bool operator >(ValidProgram a, ValidProgram b)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static bool operator <(ValidProgram a, ValidProgram b)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static implicit operator byte(ValidProgram d)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ValidRethrowProgram : IDisposable
+{
+    static ValidRethrowProgram()
+    {
+        try
+        {
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    event EventHandler OnSomething
+    {
+        add
         {
             try
             {
@@ -125,32 +136,7 @@ namespace Tests.Diagnostics
                 throw;
             }
         }
-
-        event EventHandler OnSomething
-        {
-            add
-            {
-                try
-                {
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-            remove
-            {
-                try
-                {
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-        }
-
-        public override bool Equals(object obj)
+        remove
         {
             try
             {
@@ -159,196 +145,225 @@ namespace Tests.Diagnostics
             {
                 throw;
             }
-
-            return true;
         }
-
-        public static bool operator ==(ValidRethrowProgram a, ValidRethrowProgram b) // Error [CS0216] - no != operator
-        {
-            try
-            {
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return true;
-        }
-
-        public void Dispose() { }
     }
 
-    class InvalidProgram : IDisposable
+    public override bool Equals(object obj)
     {
-        static InvalidProgram()
+        try
         {
-            throw new Exception(); // Noncompliant {{Remove this 'throw' statement.}}
-//          ^^^^^^^^^^^^^^^^^^^^^^
+        }
+        catch (Exception)
+        {
+            throw;
         }
 
-        event EventHandler OnSomething
+        return true;
+    }
+
+    public static bool operator ==(ValidRethrowProgram a, ValidRethrowProgram b) // Error [CS0216] - no != operator
+    {
+        try
         {
-            add
-            {
-                throw new Exception(); // Noncompliant
-            }
-            remove
-            {
-                throw new Exception(); // Noncompliant
-            }
+        }
+        catch (Exception)
+        {
+            throw;
         }
 
-        public override bool Equals(object obj)
-        {
-            throw new Exception(); // Noncompliant
-        }
+        return true;
+    }
 
-        public override int GetHashCode()
-        {
-            throw new Exception(); // Noncompliant
-        }
+    public void Dispose() { }
+}
 
-        public override string ToString()
-        {
-            throw new Exception(); // Noncompliant
-        }
+class InvalidProgram : IDisposable
+{
+    static InvalidProgram()
+    {
+        throw new Exception(); // Noncompliant {{Remove this 'throw' statement.}}
+//      ^^^^^^^^^^^^^^^^^^^^^^
+    }
 
-        public void Dispose()
-        {
-            throw new Exception(); // Noncompliant
-        }
-
-        public static bool operator ==(InvalidProgram a, InvalidProgram b)
-        {
-            throw new Exception(); // Noncompliant
-        }
-
-        public static bool operator !=(InvalidProgram a, InvalidProgram b)
+    event EventHandler OnSomething
+    {
+        add
         {
             throw new Exception(); // Noncompliant
         }
-
-        public static bool operator >=(InvalidProgram a, InvalidProgram b)
-        {
-            throw new Exception(); // Noncompliant
-        }
-
-        public static bool operator <=(InvalidProgram a, InvalidProgram b)
-        {
-            throw new Exception(); // Noncompliant
-        }
-
-        public static bool operator >(InvalidProgram a, InvalidProgram b)
-        {
-            throw new Exception(); // Noncompliant
-        }
-
-        public static bool operator <(InvalidProgram a, InvalidProgram b)
-        {
-            throw new Exception(); // Noncompliant
-        }
-
-        public static implicit operator byte(InvalidProgram d)
+        remove
         {
             throw new Exception(); // Noncompliant
         }
     }
 
-    ref struct DisposableRefStruct
+    public override bool Equals(object obj)
     {
-        public void Dispose()
-        {
-            throw new Exception(); // Noncompliant
-        }
+        throw new Exception(); // Noncompliant
     }
 
-    class ArrowMethods : IDisposable
+    public override int GetHashCode()
     {
-        static ArrowMethods() => throw new Exception(); // Noncompliant
-        public void Dispose() => throw new Exception(); // Noncompliant
-        public static bool operator ==(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
-        public static bool operator !=(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
-        event EventHandler OnSomething
-        {
-            add => throw new Exception(); // Noncompliant
-            remove => throw new Exception(); // Noncompliant
-        }
-        public static implicit operator byte(ArrowMethods d) => throw new Exception(); // Noncompliant
-
-        private string name;
-        public override string ToString() =>
-            string.IsNullOrEmpty(name)
-                ? name == "x"
-                    ? throw new NotImplementedException()
-                    : "y"
-                : throw new ArgumentException("..."); // Noncompliant
+        throw new Exception(); // Noncompliant
     }
 
-    class CompliantArrowMethods : IDisposable
+    public override string ToString()
     {
-        static CompliantArrowMethods() => throw new NotImplementedException();
-        public void Dispose() => throw new NotImplementedException();
-        public static bool operator ==(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
-        public static bool operator !=(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
-        event EventHandler OnSomething
-        {
-            add => throw new InvalidOperationException();
-            remove => throw new ArgumentException();
-        }
-
-        static void Foo() => throw new Exception();
-
-        private string name;
-        public override string ToString() =>
-            string.IsNullOrEmpty(name)
-                ? name == "x"
-                    ? throw new NotImplementedException()
-                    : "y"
-                : throw new NotImplementedException("...");
+        throw new Exception(); // Noncompliant
     }
 
-    class MultipleExceptions
+    public void Dispose()
     {
-        public override string ToString()
+        throw new Exception(); // Noncompliant
+    }
+
+    public static bool operator ==(InvalidProgram a, InvalidProgram b)
+    {
+        throw new Exception(); // Noncompliant
+    }
+
+    public static bool operator !=(InvalidProgram a, InvalidProgram b)
+    {
+        throw new Exception(); // Noncompliant
+    }
+
+    public static bool operator >=(InvalidProgram a, InvalidProgram b)
+    {
+        throw new Exception(); // Noncompliant
+    }
+
+    public static bool operator <=(InvalidProgram a, InvalidProgram b)
+    {
+        throw new Exception(); // Noncompliant
+    }
+
+    public static bool operator >(InvalidProgram a, InvalidProgram b)
+    {
+        throw new Exception(); // Noncompliant
+    }
+
+    public static bool operator <(InvalidProgram a, InvalidProgram b)
+    {
+        throw new Exception(); // Noncompliant
+    }
+
+    public static implicit operator byte(InvalidProgram d)
+    {
+        throw new Exception(); // Noncompliant
+    }
+}
+
+ref struct DisposableRefStruct
+{
+    public void Dispose()
+    {
+        throw new Exception(); // Noncompliant
+    }
+}
+
+class ArrowMethods : IDisposable
+{
+    static ArrowMethods() => throw new Exception(); // Noncompliant
+    public void Dispose() => throw new Exception(); // Noncompliant
+    public static bool operator ==(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
+    public static bool operator !=(ArrowMethods a, ArrowMethods b) => throw new Exception(); // Noncompliant
+    event EventHandler OnSomething
+    {
+        add => throw new Exception(); // Noncompliant
+        remove => throw new Exception(); // Noncompliant
+    }
+    public static implicit operator byte(ArrowMethods d) => throw new Exception(); // Noncompliant
+
+    private string name;
+    public override string ToString() =>
+        string.IsNullOrEmpty(name)
+            ? name == "x"
+                ? throw new NotImplementedException()
+                : "y"
+            : throw new ArgumentException("..."); // Noncompliant
+}
+
+class CompliantArrowMethods : IDisposable
+{
+    static CompliantArrowMethods() => throw new NotImplementedException();
+    public void Dispose() => throw new NotImplementedException();
+    public static bool operator ==(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
+    public static bool operator !=(CompliantArrowMethods a, CompliantArrowMethods b) => throw new NotImplementedException();
+    event EventHandler OnSomething
+    {
+        add => throw new InvalidOperationException();
+        remove => throw new ArgumentException();
+    }
+
+    static void Foo() => throw new Exception();
+
+    private string name;
+    public override string ToString() =>
+        string.IsNullOrEmpty(name)
+            ? name == "x"
+                ? throw new NotImplementedException()
+                : "y"
+            : throw new NotImplementedException("...");
+}
+
+class MultipleExceptions
+{
+    public override string ToString()
+    {
+        if (Foo())
         {
             if (Foo())
             {
-                if (Foo())
-                {
-                    throw new Exception(); // Noncompliant
-                }
-                throw new Exception(); // FN only the first is reported
+                throw new Exception(); // Noncompliant
             }
-            else
-            {
-                throw new Exception(); // FN only the first is reported
-            }
+            throw new Exception(); // FN only the first is reported
         }
-        bool Foo() => true;
+        else
+        {
+            throw new Exception(); // FN only the first is reported
+        }
     }
+    bool Foo() => true;
+}
 
-    class CodeCoverage : IDisposable
+class CodeCoverage : IDisposable
+{
+    static CodeCoverage() => throw new UnknownException(); // Error [CS0246]
+    public void Dispose()
     {
-        static CodeCoverage() => throw new UnknownException(); // Error [CS0246]
-        public void Dispose()
-        {
-            throw new UnknownException(); // Error [CS0246]
-        }
-        public override bool Equals(object obj)
-        {
-            Dispose();
-            return true;
-        }
-        public override int GetHashCode() => 0;
+        throw new UnknownException(); // Error [CS0246]
     }
-
-    public struct S
+    public override bool Equals(object obj)
     {
-        static S()
-        {
-            throw new Exception(); // Noncompliant
-        }
+        Dispose();
+        return true;
     }
+    public override int GetHashCode() => 0;
+}
 
+public struct S
+{
+    static S()
+    {
+        throw new Exception(); // Noncompliant
+    }
+}
+
+class Equatable : IEquatable<S>
+{
+    public bool Equals(S other) => throw new Exception();   // Noncompliant
+    public bool Equals(string s) => throw new Exception();  // Noncompliant FP NET-2707
+}
+
+namespace Extensions
+{
+    class Sample { }
+
+    static class Extensions
+    {
+        public static bool Equals(this Sample x, object obj) => throw new Exception();  // Compliant
+        public static int GetHashCode(this Sample x) => throw new Exception();          // Compliant
+        public static string ToString(this Sample x) { throw new Exception(); }         // Compliant
+        public static void Dispose(this Sample x) { throw new Exception(); }            // Compliant
+    }
 }

@@ -103,7 +103,7 @@ class ConditionalAssignment
     {
         using (x?.stream = File.Create(""))
         {
-            return x.stream;    // FN
+            return x.stream;    // FN NET-2640
         }
     }
 }

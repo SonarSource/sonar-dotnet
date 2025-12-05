@@ -28,14 +28,8 @@ public class DoNotOverloadOperatorEqualTest
         builder.AddPaths("DoNotOverloadOperatorEqual.cs").Verify();
 
     [TestMethod]
-    public void DoNotOverloadOperatorEqual_CSharp9() =>
-        builder.AddPaths("DoNotOverloadOperatorEqual.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
+    public void DoNotOverloadOperatorEqual_Latest() =>
+        builder.AddPaths("DoNotOverloadOperatorEqual.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-    [TestMethod]
-    public void DoNotOverloadOperatorEqual_CSharp11() =>
-        builder.AddPaths("DoNotOverloadOperatorEqual.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
-            .VerifyNoIssues();
 }

@@ -16,27 +16,20 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class EventHandlerDelegateShouldHaveProperArgumentsTest
 {
-    [TestClass]
-    public class EventHandlerDelegateShouldHaveProperArgumentsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<EventHandlerDelegateShouldHaveProperArguments>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<EventHandlerDelegateShouldHaveProperArguments>();
 
-        [TestMethod]
-        public void EventHandlerDelegateShouldHaveProperArguments() =>
-            builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.cs").Verify();
+    [TestMethod]
+    public void EventHandlerDelegateShouldHaveProperArguments() =>
+        builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.cs").Verify();
 
-        [TestMethod]
-        public void EventHandlerDelegateShouldHaveProperArguments_CSharp9() =>
-            builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void EventHandlerDelegateShouldHaveProperArguments_CSharp11() =>
-            builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-    }
+    [TestMethod]
+    public void EventHandlerDelegateShouldHaveProperArguments_Latest() =>
+        builder.AddPaths("EventHandlerDelegateShouldHaveProperArguments.Latest.cs", "EventHandlerDelegateShouldHaveProperArguments.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

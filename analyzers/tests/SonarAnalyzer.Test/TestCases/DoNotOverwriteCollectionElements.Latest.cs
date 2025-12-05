@@ -45,3 +45,12 @@ class CSharp13
         orderedDictionary["""a"""] = 2; // Noncompliant
     }
 }
+
+class CSharp14
+{
+    void NullConditionalAccess(List<CSharp14> items)
+    {
+        items?[0] = null;
+        items?[0] = new CSharp14(); // FN NET-2710
+    }
+}
