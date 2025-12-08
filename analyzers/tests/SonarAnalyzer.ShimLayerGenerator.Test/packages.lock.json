@@ -516,13 +516,8 @@
           "System.Drawing.Common": "6.0.0"
         }
       },
-      "Internal.SonarAnalyzer.CSharp.Styling": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[4.14.0, )",
-          "SonarAnalyzer.CSharp.Core": "[10.17.0, )",
-          "SonarAnalyzer.Core": "[10.17.0, )"
-        }
+      "Internal.SonarAnalyzer.ShimLayer.Generator": {
+        "type": "Project"
       },
       "sonaranalyzer.cfg": {
         "type": "Project",
@@ -543,21 +538,10 @@
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
-      "sonaranalyzer.csharp.core": {
-        "type": "Project",
-        "dependencies": {
-          "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
-          "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.17.0, )",
-          "SonarAnalyzer.Core": "[10.17.0, )",
-          "System.Collections.Immutable": "[1.1.37, )"
-        }
-      },
       "sonaranalyzer.shimlayer": {
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
-          "Microsoft.Composition": "[1.0.27, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -571,6 +555,7 @@
           "Microsoft.Build.Locator": "[1.10.12, )",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[5.0.0, )",
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[5.0.0, )",
+          "Microsoft.CodeAnalysis.Workspaces.Common": "[5.0.0, )",
           "Microsoft.CodeAnalysis.Workspaces.MSBuild": "[5.0.0, )",
           "Microsoft.NET.Test.Sdk": "[18.0.1, )",
           "NSubstitute": "[5.3.0, )",
