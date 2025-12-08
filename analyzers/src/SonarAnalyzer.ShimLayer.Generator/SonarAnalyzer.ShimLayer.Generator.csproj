@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.0.0" PrivateAssets="all" />
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.0" GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,9 +21,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="$(NuGetPackageRoot)\Microsoft.CodeAnalysis.CSharp\1.3.2\lib\netstandard1.3\Microsoft.CodeAnalysis.CSharp.dll">
+      <LogicalName>Microsoft.CodeAnalysis.CSharp.1.3.2.dll</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(NuGetPackageRoot)\Microsoft.CodeAnalysis.Common\1.3.2\lib\netstandard1.3\Microsoft.CodeAnalysis.dll">
+      <LogicalName>Microsoft.CodeAnalysis.1.3.2.dll</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="..\SonarAnalyzer.Core\Common\IsExternalInit.cs">
       <Link>IsExternalInit.cs</Link>
     </Compile>
   </ItemGroup>
+
+  <PropertyGroup>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+  </PropertyGroup>
+
+  <Target Name="GetDependencyTargetPaths">
+    <!-- This is needed for the analyzer dependencies to work -->
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="$(PKGSystem_Reflection_MetadataLoadContext)\lib\netstandard2.0\System.Reflection.MetadataLoadContext.dll" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
 
 </Project>

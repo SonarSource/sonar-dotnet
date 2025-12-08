@@ -20,6 +20,8 @@ internal static class Factory
 {
     public static IEnumerable<GeneratedFile> CreateAllFiles()
     {
+        using var typeLoader = new TypeLoader();
+        var baseline = typeLoader.LoadBaseline();
         var latest = TypeLoader.LoadLatest();
 
         yield return new(

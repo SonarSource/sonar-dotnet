@@ -14,12 +14,29 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
-public static class TypeLoader
+public sealed class TypeLoader : IDisposable
 {
+    private readonly MetadataLoadContext metadataContext = new(new CustomAssemblyResolver(), Path.GetFileNameWithoutExtension(typeof(object).Assembly.Location));
+
+    public void Dispose() =>
+        metadataContext.Dispose();
+
+    public TypeDescriptor[] LoadBaseline()
+    {
+        var assembly = typeof(TypeLoader).Assembly;
+        using var common = assembly.GetManifestResourceStream("Microsoft.CodeAnalysis.1.3.2.dll");
+        using var csharp = assembly.GetManifestResourceStream("Microsoft.CodeAnalysis.CSharp.1.3.2.dll");
+        return [
+            .. Load(metadataContext.LoadFromStream(common)),
+            .. Load(metadataContext.LoadFromStream(csharp))
+            ];
+    }
+
     public static TypeDescriptor[] LoadLatest() =>
         [
             ..Load(typeof(SyntaxNode).Assembly),        // Microsoft.CodeAnalysis
@@ -43,4 +60,13 @@ public static class TypeLoader
             }
         }
     }
+}
+
+file sealed class CustomAssemblyResolver : PathAssemblyResolver
+{
+    public CustomAssemblyResolver() : base(Directory.GetFiles(Path.GetDirectoryName(typeof(object).Assembly.Location), "*.dll")) { }
+
+    public override Assembly Resolve(MetadataLoadContext context, AssemblyName assemblyName) =>
+        base.Resolve(context, assemblyName)
+        ?? context.GetAssemblies().Single(x => x.GetName().Name == assemblyName.Name);   // Microsoft.CodeAnalysis 1.3.2 is actually 1.3.1 and it does not resolve automatically
 }

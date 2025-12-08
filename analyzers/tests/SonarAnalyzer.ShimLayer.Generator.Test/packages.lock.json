@@ -484,6 +484,11 @@
           "System.Collections.Immutable": "8.0.0"
         }
       },
+      "System.Reflection.MetadataLoadContext": {
+        "type": "Transitive",
+        "resolved": "10.0.0",
+        "contentHash": "aRvr8txoBlDMOvo2e9GqY6cMbYYKeXgq2LabyoGacLUGYQpwI1T13YmvOx135TJl4cY6TGetfnHolNhZEl1Log=="
+      },
       "System.Security.AccessControl": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -517,7 +522,10 @@
         }
       },
       "Internal.SonarAnalyzer.ShimLayer.Generator": {
-        "type": "Project"
+        "type": "Project",
+        "dependencies": {
+          "System.Reflection.MetadataLoadContext": "[10.0.0, )"
+        }
       },
       "sonaranalyzer.cfg": {
         "type": "Project",
