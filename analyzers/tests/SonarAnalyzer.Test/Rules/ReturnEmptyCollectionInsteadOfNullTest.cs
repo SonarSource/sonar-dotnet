@@ -30,16 +30,15 @@ public class ReturnEmptyCollectionInsteadOfNullTest
             .Verify();
 
     [TestMethod]
-    public void ReturnEmptyCollectionInsteadOfNull_CSharp8() =>
-        builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.CSharp8.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .Verify();
-
-    [TestMethod]
     public void ReturnEmptyCollectionInsteadOfNull_Latest() =>
         builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.Latest.cs")
             .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
+    public void ReturnEmptyCollectionInsteadOfNull_TopLevelStatements() =>
+        builder.AddPaths("ReturnEmptyCollectionInsteadOfNull.TopLevelStatements.cs")
             .WithTopLevelStatements()
             .Verify();
 }

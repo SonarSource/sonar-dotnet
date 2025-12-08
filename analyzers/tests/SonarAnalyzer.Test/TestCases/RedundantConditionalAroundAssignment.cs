@@ -1,6 +1,6 @@
 ﻿namespace Tests.Diagnostics
 {
-    public static class RedundantConditionalAroundAssignment
+    public class RedundantConditionalAroundAssignment
     {
         public static void Test()
         {
@@ -130,11 +130,23 @@
             }
             set
             {
-                if (f != null)
+                if (f != null)  // Compliant, don't raise in setter
                 {
                     f = null;
                 }
             }
+        }
+
+        int x;
+
+        void MemberAccess(RedundantConditionalAroundAssignment r, int a)
+        {
+            if (r.x != a)   // Noncompliant
+            {
+                r.x = a;
+            }
+
+            r.x = a;        // Compliant
         }
     }
 }

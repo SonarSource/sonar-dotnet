@@ -32,6 +32,12 @@ public class ReturnValueIgnoredTest
         builder.AddPaths("ReturnValueIgnored.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .Verify();
+
+    [TestMethod]
+    public void ReturnValueIgnored_TopLevelStatements() =>
+        builder.AddPaths("ReturnValueIgnored.TopLevelStatements.cs")
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
             .WithTopLevelStatements()
             .Verify();
 }

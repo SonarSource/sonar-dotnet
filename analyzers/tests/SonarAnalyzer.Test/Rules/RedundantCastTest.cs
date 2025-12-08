@@ -61,12 +61,8 @@ public class RedundantCastTest
         builder.AddPaths("RedundantCast.cs").Verify();
 
     [TestMethod]
-    public void RedundantCast_CSharp8() =>
-        builder.AddPaths("RedundantCast.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
-
-    [TestMethod]
-    public void RedundantCast_CSharp9() =>
-        builder.AddPaths("RedundantCast.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).WithConcurrentAnalysis(false).Verify();
+    public void RedundantCast_Latest() =>
+        builder.AddPaths("RedundantCast.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void RedundantCast_CodeFix() =>

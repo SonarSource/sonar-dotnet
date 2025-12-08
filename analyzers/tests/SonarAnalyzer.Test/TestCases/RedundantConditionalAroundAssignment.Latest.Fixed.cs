@@ -7,25 +7,16 @@ class CSharp9
         int x = 5;
         int y = 6;
 
-        y = y switch
-        {
-            not 5 => 5 // Noncompliant
-        };
+        y = 5;
+
+        y = 5;
+
+        y = 5;
 
         y = y switch
         {
-            5 => 5 // Noncompliant
-        };
-
-        y = y switch
-        {
-            5 when x == 5 => 5 // Noncompliant
-        };
-
-        y = y switch
-        {
-            5 => 5, // Noncompliant
-            6 => 6  // Noncompliant
+            5 => 5, // Fixed
+            6 => 6  // Fixed
         };
 
         y = y switch
@@ -45,14 +36,11 @@ class CSharp9
 
         y = y switch
         {
-            4 => 4,      // Noncompliant
+            4 => 4,      // Fixed
             not 5 => 5,
         };
 
-        y = x switch
-        {
-            _ => 5       // Noncompliant
-        };
+        y = 5;
 
         y = y switch
         {
@@ -60,14 +48,11 @@ class CSharp9
             _ => y
         };
 
-        y = y switch
-        {
-            _ => y       // Noncompliant
-        };
+        y = y;
 
         y = y switch
         {
-            4 => 4,      // Noncompliant
+            4 => 4,      // Fixed
             not x => 5,  // Error [CS9135]
         };
 
@@ -84,10 +69,7 @@ class CSharp9
 
         SomeClass someClass = new SomeClass() { SomeField = 42 };
 
-        if (someClass.SomeField != 42) // Noncompliant
-        {
-            someClass.SomeField = 42;
-        }
+        someClass.SomeField = 42;
 
         if (someClass is { SomeField: not 42 }) // FN (is and is not expression not supported yet)
         {
@@ -168,17 +150,11 @@ class CSharp10
     {
         int y = 6;
 
-        y = y switch
-        {
-            not 5 => 5 // Noncompliant
-        };
+        y = 5;
 
         SomeClass someClass = new SomeClass() { SomeField1 = new SomeOtherClass() { SomeField2 = 42 } };
 
-        if (someClass.SomeField1.SomeField2 != 42) // Noncompliant
-        {
-            someClass.SomeField1.SomeField2 = 42;
-        }
+        someClass.SomeField1.SomeField2 = 42;
 
         if (someClass is { SomeField1: { SomeField2: not 42 } }) // FN (is expression not supported yet)
         {
@@ -251,10 +227,7 @@ class FieldKeyword
     {
         get
         {
-            if (field != 0) // Noncompliant
-            {
-                field = 0;
-            }
+            field = 0;
 
             return field;
         }

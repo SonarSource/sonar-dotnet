@@ -5,10 +5,53 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Numerics;
 
-List<string> LocalFunction() => null; // Noncompliant {{Return an empty collection instead of null.}}
-List<string> LocalFunctionNew() => new(); // Compliant
+// Reproducer for #6491 https://github.com/SonarSource/sonar-dotnet/issues/6491
+namespace Issue_6491
+{
+    class SwitchExpressionClass
+    {
+        List<string> SwitchExpression(string str)
+        {
+            return str switch
+            {
+                "First" => null, // FN
+                "Second" => new List<string> { },
+                _ => null // FN
+            };
+        }
 
-static IEnumerable<string> StaticLocalFunction() => (null); // Noncompliant
+        List<string> SwitchExpression2(string str) =>
+            str switch
+            {
+                "First" => null, // FN
+                "Second" => new List<string> { },
+                _ => null // FN
+            };
+    }
+}
+
+namespace NullableAnotated
+{
+    class MyClass
+    {
+        public byte[]? GetNullableArrayOfNonNullableValueType(string itemId) => null;
+        public byte?[]? GetNullableArrayOfNullableValueType(string itemId) => null;
+        public byte?[] GetNonNullableArrayOfNullableValueType(string itemId) => null; // Noncompliant
+
+        public object[]? GetNullableArrayOfNonNullableReferenceType(string itemId) => null;
+        public object?[]? GetNullableArrayOfNullableReferenceType(string itemId) => null;
+        public object?[] GetNonNullableArrayOfNullableReferenceType(string itemId) => null; // Noncompliant
+        public byte[] GetArray(string itemId) => null; // Noncompliant
+    }
+
+    class MyGenericClass<T> where T : struct
+    {
+        public List<T>? GetNullableListOfNonNullableValueGenericType(string itemId) => null;
+        public List<T?>? GetNullableListOfNullableValueGenericType(string itemId) => null;
+        public List<T?> GetNonNullableListOfNullableValueGenericType(string itemId) => null; // Noncompliant
+        public List<T> GetList(string itemId) => null; // Noncompliant
+    }
+}
 
 record Record
 {
@@ -184,4 +227,13 @@ public class Repro_NET2347
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
+}
+
+// Spans are structs and thus should not trigger
+class SpanConversions
+{
+    Span<char> Method1 => default;              // Compliant
+    Span<char> Method2 => new char[5];          // Compliant
+    ReadOnlySpan<char> Method3 => default;      // Compliant
+    ReadOnlySpan<char> Method4 => "a string";   // Compliant
 }
