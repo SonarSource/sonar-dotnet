@@ -264,7 +264,6 @@ dotnet_naming_style.I_style.capitalization = pascal_case
 
 dotnet_diagnostic.CS7035.severity = none    # CS7035: it expects the build number to fit in 16 bits, our build numbers are bigger https://github.com/dotnet/roslyn/issues/17024#issuecomment-1669503201
 dotnet_diagnostic.CA1822.severity = warning # Increase visibility for Member 'xxx' does not access instance data and can be marked as static
-dotnet_diagnostic.CS8785.severity = error   # Do not hide root cause for: Generator 'xxx' failed to generate source. It will not contribute to the output and compilation errors may occur as a result. Exception was of type 'xxx' with message 'xxx'
 dotnet_diagnostic.RS2008.severity = none    # Enable analyzer release tracking - we don't use the release tracking analyzer
 dotnet_diagnostic.RS1036.severity = none    # A project containing analyzers or source generators should specify the property '<EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>' - we're intentionally violating a lot of those types
 dotnet_diagnostic.JSON002.severity = none   # Probable JSON string detected, noisy in UTs
