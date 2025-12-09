@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace SonarAnalyzer.ShimLayer.Generator.Model.Test;
 
 [TestClass]
@@ -22,24 +24,48 @@ public class ModelBuilderTest
     [TestMethod]
     public void Build_NestedTypes()
     {
-        var nested = typeof(IOperation.OperationList);
-        var model = ModelBuilder.Build([], [new TypeDescriptor(nested, [])]);
-        model.Should().ContainKey(nested).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+        var type = typeof(IOperation.OperationList);
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
     }
 
     [TestMethod]
     public void Build_GenericTypes()
     {
-        var generic = typeof(IEnumerable<int>);
-        var model = ModelBuilder.Build([], [new TypeDescriptor(generic, [])]);
-        model.Should().ContainKey(generic).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+        var type = typeof(IEnumerable<int>);
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
     }
 
     [TestMethod]
     public void Build_Delegates()
     {
-        var @delegate = typeof(SyntaxReceiverCreator);
-        var model = ModelBuilder.Build([], [new TypeDescriptor(@delegate, [])]);
-        model.Should().ContainKey(@delegate).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+        var type = typeof(SyntaxReceiverCreator);
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+    }
+
+    [TestMethod]
+    public void Build_SyntaxNode_Itself()
+    {
+        var type = typeof(SyntaxNode);
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>();
+    }
+
+    [TestMethod]
+    public void Build_SyntaxNode_SwitchArm()
+    {
+        var type = typeof(SwitchExpressionArmSyntax);
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>();
+    }
+
+    [TestMethod]
+    public void Build_StaticClass()
+    {
+        var type = typeof(GeneratorExtensions);
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeNull();  // ToDo: This will change later, likely to StaticClassStrategy
     }
 }

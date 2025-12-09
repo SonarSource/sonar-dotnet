@@ -18,23 +18,32 @@ namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
 public static class ModelBuilder
 {
-    public static Dictionary<Type, Strategy> Build(TypeDescriptor[] baseline, TypeDescriptor[] latest)
+    private static readonly SkipStrategy Skip = new();
+
+    public static Dictionary<Type, Strategy> Build(TypeDescriptor[] latest, TypeDescriptor[] baseline)
     {
-        var ret = new Dictionary<Type, Strategy>();
-        var skip = new SkipStrategy();
-        foreach (var type in latest)
+        var baselineMap = baseline.ToDictionary(x => x.Type.FullName, x => x);
+        return latest.ToDictionary(x => x.Type, x => CreateStrategy(x, baselineMap.TryGetValue(x.Type.FullName, out var baselineType) ? baselineType : null));
+    }
+
+    private static Strategy CreateStrategy(TypeDescriptor latest, TypeDescriptor baseline)
+    {
+        if (IsSkipped(latest.Type))
         {
-            if (IsSkipped(type.Type))
-            {
-                ret.Add(type.Type, skip);
-            }
-            // ToDo: SyntaxNodeStrategy
-            // ToDo: IOperationStrategy
-            // ToDo: StaticClassStrategy when (type.IsSealed && type.IsAbstract)
-            // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
-            // ToDo: EnumStrategy
+            return Skip;
         }
-        return ret;
+        else if (typeof(SyntaxNode).IsAssignableFrom(latest.Type))
+        {
+            return new SyntaxNodeStrategy(latest.Type, []); // ToDo: Resolve members compared to baseline
+        }
+        // ToDo: IOperationStrategy
+        // ToDo: StaticClassStrategy when (type.IsSealed && type.IsAbstract)
+        // ToDo: EnumStrategy
+        // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
+        else
+        {
+            return null;    // ToDo: Throw NotSupportedException, there should be nothing left after explicitly handling all known cases
+        }
     }
 
     private static bool IsSkipped(Type type) =>
