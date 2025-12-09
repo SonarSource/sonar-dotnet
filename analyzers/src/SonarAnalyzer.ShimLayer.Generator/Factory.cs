@@ -21,7 +21,7 @@ internal static class Factory
     public static IEnumerable<GeneratedFile> CreateAllFiles()
     {
         using var typeLoader = new TypeLoader();
-        var model = ModelBuilder.Build(TypeLoader.LoadLatest(), typeLoader.LoadBaseline());
+        var model = ModelBuilder.Build(typeLoader.LoadLatest(), typeLoader.LoadBaseline());
 
         yield return new(
             "Temporary.g.cs",

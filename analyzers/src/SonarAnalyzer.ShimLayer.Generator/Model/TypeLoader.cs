@@ -37,10 +37,10 @@ public sealed class TypeLoader : IDisposable
             ];
     }
 
-    public static TypeDescriptor[] LoadLatest() =>
+    public TypeDescriptor[] LoadLatest() =>
         [
-            ..Load(typeof(SyntaxNode).Assembly),        // Microsoft.CodeAnalysis
-            ..Load(typeof(CSharpSyntaxNode).Assembly)   // Microsoft.CodeAnalysis.CSharp
+            ..Load(metadataContext.LoadFromAssemblyPath(typeof(SyntaxNode).Assembly.Location)),         // Microsoft.CodeAnalysis
+            ..Load(metadataContext.LoadFromAssemblyPath(typeof(CSharpSyntaxNode).Assembly.Location))    // Microsoft.CodeAnalysis.CSharp
         ];
 
     private static TypeDescriptor[] Load(Assembly assembly) =>
@@ -68,5 +68,6 @@ file sealed class CustomAssemblyResolver : PathAssemblyResolver
 
     public override Assembly Resolve(MetadataLoadContext context, AssemblyName assemblyName) =>
         base.Resolve(context, assemblyName)
-        ?? context.GetAssemblies().Single(x => x.GetName().Name == assemblyName.Name);   // Microsoft.CodeAnalysis 1.3.2 is actually 1.3.1 and it does not resolve automatically
+        // Microsoft.CodeAnalysis does not resolve automatically
+        ?? context.GetAssemblies().Single(x => x.GetName().Name == assemblyName.Name && x.GetName().Version.Major == assemblyName.Version.Major);
 }

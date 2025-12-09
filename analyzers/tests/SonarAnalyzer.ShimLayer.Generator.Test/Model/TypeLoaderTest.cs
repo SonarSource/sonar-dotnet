@@ -33,16 +33,21 @@ public class TypeLoaderTest
     }
 
     [TestMethod]
-    public void LoadLatest_AllAssemblies() =>
-        TypeLoader.LoadLatest().Select(x => x.Type).Should()
+    public void LoadLatest_AllAssemblies()
+    {
+        using var typeLoader = new TypeLoader();
+        typeLoader.LoadLatest().Select(x => x.Type).Should()
             .ContainSingle(x => x.FullName == "Microsoft.CodeAnalysis.CSharp.CSharpCompilation")
             .And.ContainSingle(x => x.FullName == "Microsoft.CodeAnalysis.Compilation")
             .And.ContainSingle(x => x.FullName == NewTypeName)
             .And.HaveCountGreaterThan(750);
+    }
 
     [TestMethod]
-    public void Load_AllTypes() =>
-        TypeLoader.LoadLatest().Select(x => x.Type).Should()
+    public void Load_AllTypes()
+    {
+        using var typeLoader = new TypeLoader();
+        typeLoader.LoadLatest().Select(x => x.Type).Should()
             .ContainSingle(x => x.FullName == "Microsoft.CodeAnalysis.Compilation", "it should return classes")
             .And.ContainSingle(x => x.FullName == "Microsoft.CodeAnalysis.SymbolInfo", "it should return structs")
             .And.ContainSingle(x => x.FullName == "Microsoft.CodeAnalysis.SyntaxList`1", "it should return generic types")
@@ -50,28 +55,36 @@ public class TypeLoaderTest
             .And.ContainSingle(x => x.FullName == "Microsoft.CodeAnalysis.OutputKind", "it should return enums")
             .And.ContainSingle(x => x.FullName == "Microsoft.CodeAnalysis.IMethodSymbol", "it should return interfaces")
             .And.NotContain(x => !x.IsEnum && !x.IsGenericType && !x.IsInterface && !x.IsNested && !x.IsClass && !x.IsValueType, "there should be no unexpected types");
+    }
 
     [TestMethod]
-    public void Load_InheritedMembers() =>
-        TypeLoader.LoadLatest().Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.CSharp.CSharpCompilation").Members.Should()
+    public void Load_InheritedMembers()
+    {
+        using var typeLoader = new TypeLoader();
+        typeLoader.LoadLatest().Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.CSharp.CSharpCompilation").Members.Should()
             .ContainSingle(x => x.DeclaringType.Name == "Compilation" && x.ToString() == "Microsoft.CodeAnalysis.Compilation RemoveAllSyntaxTrees()", "it's in the base type")
             .And.ContainSingle(x => x.DeclaringType.Name == "CSharpCompilation" && x.ToString() == "Microsoft.CodeAnalysis.CSharp.CSharpCompilation RemoveAllSyntaxTrees()", "it shadows")
-            .And.ContainSingle(x => x.DeclaringType.Name == "Compilation" && x.ToString() == "Boolean ContainsSyntaxTree(Microsoft.CodeAnalysis.SyntaxTree)", "it's in the base type")
+            .And.ContainSingle(x => x.DeclaringType.Name == "Compilation" && x.ToString() == "System.Boolean ContainsSyntaxTree(Microsoft.CodeAnalysis.SyntaxTree)", "it's in the base type")
             .And.ContainSingle(x => x.DeclaringType.Name == "CSharpCompilation" && x.ToString() == "Microsoft.CodeAnalysis.CSharp.CSharpCompilation RemoveAllSyntaxTrees()", "it overrides")
-            .And.ContainSingle(x => x.DeclaringType.Name == "Object" && x.ToString() == "Int32 GetHashCode()", "it should contain all members down to System.Object");
+            .And.ContainSingle(x => x.DeclaringType.Name == "Object" && x.ToString() == "System.Int32 GetHashCode()", "it should contain all members down to System.Object");
+    }
 
     [TestMethod]
-    public void Load_ContainsInheritedInterfaces() =>
-        TypeLoader.LoadLatest().Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.IMethodSymbol").Members.Should()
-            .ContainSingle(x => x.DeclaringType.Name == "IMethodSymbol" && x.ToString() == "Boolean IsGenericMethod")
+    public void Load_ContainsInheritedInterfaces()
+    {
+        using var typeLoader = new TypeLoader();
+        typeLoader.LoadLatest().Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.IMethodSymbol").Members.Should()
+            .ContainSingle(x => x.DeclaringType.Name == "IMethodSymbol" && x.ToString() == "System.Boolean IsGenericMethod")
             .And.ContainSingle(x => x.DeclaringType.Name == "ISymbol" && x.ToString() == "System.String Name", "it's from the base interface");
+    }
 
     [TestMethod]
     public void Load_ExplicitInterfaces_Ignored()
     {
         const string ImplicitInterface = "IFormattable";
         const string ImplicitInterfaceMember = "System.String ToString(System.String, System.IFormatProvider)";
-        var node = TypeLoader.LoadLatest().Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode");
+        using var typeLoader = new TypeLoader();
+        var node = typeLoader.LoadLatest().Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode");
         // Make sure that the member exists on the type (it's explicit interface implementation)
         node.Type.GetInterface(ImplicitInterface).Should().NotBeNull("CSharpSyntaxNode implements IFormattable")
             .And.Subject.GetMembers().Should().ContainSingle(x => x.ToString() == ImplicitInterfaceMember);

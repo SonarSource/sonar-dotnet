@@ -32,9 +32,9 @@ public static class ModelBuilder
         {
             return Skip;
         }
-        else if (typeof(SyntaxNode).IsAssignableFrom(latest.Type))
+        else if (InheritsSyntaxNode(latest.Type))
         {
-            return new SyntaxNodeStrategy(latest.Type, []); // ToDo: Resolve members compared to baseline
+            return new SyntaxNodeStrategy(latest.Type, CreateMembers(latest, baseline).ToArray());
         }
         // ToDo: IOperationStrategy
         // ToDo: StaticClassStrategy when (type.IsSealed && type.IsAbstract)
@@ -46,8 +46,38 @@ public static class ModelBuilder
         }
     }
 
+    private static bool InheritsSyntaxNode(Type type)   // We can't use typeof(SyntaxNode).IsAssignableFrom(type) because it's loaded into a different metadata context
+    {
+        while (type is not null)
+        {
+            if (type.FullName == "Microsoft.CodeAnalysis.SyntaxNode")
+            {
+                return true;
+            }
+            type = type.BaseType;
+        }
+        return false;
+    }
+
+    private static IEnumerable<MemberDescriptor> CreateMembers(TypeDescriptor latestType, TypeDescriptor baselineType)
+    {
+        var baseline = new HashSet<string>(baselineType?.Members.Select(x => x.ToString()) ?? []);
+        foreach (var latest in latestType.Members.Where(IsValid))
+        {
+            yield return new(latest, baseline.Contains(latest.ToString()));
+        }
+    }
+
     private static bool IsSkipped(Type type) =>
         type.IsNested
         || type.IsGenericType
         || typeof(Delegate).IsAssignableFrom(type);
+
+    private static bool IsValid(MemberInfo member) =>
+        member switch
+        {
+            MethodInfo method => !method.IsSpecialName && !(method.Name is nameof(GetType) or nameof(Equals) or nameof(GetHashCode) or nameof(ToString)),   // Struct methods that would need override
+            PropertyInfo => true,
+            _ => false
+        };
 }

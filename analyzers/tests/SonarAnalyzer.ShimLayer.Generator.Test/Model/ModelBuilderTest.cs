@@ -68,4 +68,118 @@ public class ModelBuilderTest
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
         model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeNull();  // ToDo: This will change later, likely to StaticClassStrategy
     }
+
+    [TestMethod]
+    public void CreateMembers_NoBaseline()
+    {
+        var type = typeof(SyntaxNode);
+        var parent = type.GetMember("Parent").Single();
+        var ancestors = type.GetMember("Ancestors").Single();
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [parent, ancestors])], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>()
+            .Which.Members.Should().BeEquivalentTo([
+                new MemberDescriptor(parent, false),
+                new MemberDescriptor(ancestors, false)]);
+    }
+
+    [TestMethod]
+    public void CreateMembers_WithBaseline()
+    {
+        using var typeLoader = new TypeLoader();
+        var baseline = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(SyntaxNode));
+        var latest = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(SyntaxNode));
+        var model = ModelBuilder.Build([latest], [baseline]);
+        model.Should().ContainKey(latest.Type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>()
+            .Which.Members.Select(x => (x.Member.ToString(), x.IsPassthrough)).Should().BeEquivalentTo([
+                ("System.String ToFullString()", true),
+                ("System.Void WriteTo(System.IO.TextWriter)", true),
+                ("Microsoft.CodeAnalysis.Text.SourceText GetText(System.Text.Encoding, Microsoft.CodeAnalysis.Text.SourceHashAlgorithm)", true),
+                ("System.Boolean IsEquivalentTo(Microsoft.CodeAnalysis.SyntaxNode)", true),
+                ("System.Boolean IsIncrementallyIdenticalTo(Microsoft.CodeAnalysis.SyntaxNode)", false),
+                ("System.Boolean IsPartOfStructuredTrivia()", true),
+                ("System.Boolean ContainsDirective(System.Int32)", false),
+                ("System.Boolean Contains(Microsoft.CodeAnalysis.SyntaxNode)", true),
+                ("Microsoft.CodeAnalysis.Location GetLocation()", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.Diagnostic] GetDiagnostics()", true),
+                ("Microsoft.CodeAnalysis.SyntaxReference GetReference()", true),
+                ("Microsoft.CodeAnalysis.ChildSyntaxList ChildNodesAndTokens()", true),
+                ("Microsoft.CodeAnalysis.SyntaxNodeOrToken ChildThatContainsPosition(System.Int32)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] ChildNodes()", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] Ancestors(System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] AncestorsAndSelf(System.Boolean)", true),
+                ("TNode FirstAncestorOrSelf[TNode](System.Func`2[TNode,System.Boolean], System.Boolean)", true),
+                ("TNode FirstAncestorOrSelf[TNode,TArg](System.Func`3[TNode,TArg,System.Boolean], TArg, System.Boolean)", false),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] DescendantNodes(System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] DescendantNodes(Microsoft.CodeAnalysis.Text.TextSpan, System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] DescendantNodesAndSelf(System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] DescendantNodesAndSelf(Microsoft.CodeAnalysis.Text.TextSpan, System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNodeOrToken] DescendantNodesAndTokens(System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNodeOrToken] DescendantNodesAndTokens(Microsoft.CodeAnalysis.Text.TextSpan, System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNodeOrToken] DescendantNodesAndTokensAndSelf(System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNodeOrToken] DescendantNodesAndTokensAndSelf(Microsoft.CodeAnalysis.Text.TextSpan, System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("Microsoft.CodeAnalysis.SyntaxNode FindNode(Microsoft.CodeAnalysis.Text.TextSpan, System.Boolean, System.Boolean)", true),
+                ("Microsoft.CodeAnalysis.SyntaxToken FindToken(System.Int32, System.Boolean)", true),
+                ("Microsoft.CodeAnalysis.SyntaxToken GetFirstToken(System.Boolean, System.Boolean, System.Boolean, System.Boolean)", true),
+                ("Microsoft.CodeAnalysis.SyntaxToken GetLastToken(System.Boolean, System.Boolean, System.Boolean, System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxToken] ChildTokens()", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxToken] DescendantTokens(System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxToken] DescendantTokens(Microsoft.CodeAnalysis.Text.TextSpan, System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("Microsoft.CodeAnalysis.SyntaxTriviaList GetLeadingTrivia()", true),
+                ("Microsoft.CodeAnalysis.SyntaxTriviaList GetTrailingTrivia()", true),
+                ("Microsoft.CodeAnalysis.SyntaxTrivia FindTrivia(System.Int32, System.Boolean)", true),
+                ("Microsoft.CodeAnalysis.SyntaxTrivia FindTrivia(System.Int32, System.Func`2[Microsoft.CodeAnalysis.SyntaxTrivia,System.Boolean])", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxTrivia] DescendantTrivia(System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxTrivia] DescendantTrivia(Microsoft.CodeAnalysis.Text.TextSpan, System.Func`2[Microsoft.CodeAnalysis.SyntaxNode,System.Boolean], System.Boolean)", true),
+                ("System.Boolean HasAnnotations(System.String)", true),
+                ("System.Boolean HasAnnotations(System.Collections.Generic.IEnumerable`1[System.String])", true),
+                ("System.Boolean HasAnnotation(Microsoft.CodeAnalysis.SyntaxAnnotation)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxAnnotation] GetAnnotations(System.String)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxAnnotation] GetAnnotations(System.Collections.Generic.IEnumerable`1[System.String])", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNodeOrToken] GetAnnotatedNodesAndTokens(System.String)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNodeOrToken] GetAnnotatedNodesAndTokens(System.String[])", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNodeOrToken] GetAnnotatedNodesAndTokens(Microsoft.CodeAnalysis.SyntaxAnnotation)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] GetAnnotatedNodes(Microsoft.CodeAnalysis.SyntaxAnnotation)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxNode] GetAnnotatedNodes(System.String)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxToken] GetAnnotatedTokens(Microsoft.CodeAnalysis.SyntaxAnnotation)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxToken] GetAnnotatedTokens(System.String)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxTrivia] GetAnnotatedTrivia(System.String)", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxTrivia] GetAnnotatedTrivia(System.String[])", true),
+                ("System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.SyntaxTrivia] GetAnnotatedTrivia(Microsoft.CodeAnalysis.SyntaxAnnotation)", true),
+                ("T CopyAnnotationsTo[T](T)", true),
+                ("System.Boolean IsEquivalentTo(Microsoft.CodeAnalysis.SyntaxNode, System.Boolean)", true),
+                ("System.Void SerializeTo(System.IO.Stream, System.Threading.CancellationToken)", true),
+                ("System.Int32 RawKind", true),
+                ("System.String Language", true),
+                ("Microsoft.CodeAnalysis.SyntaxTree SyntaxTree", true),
+                ("Microsoft.CodeAnalysis.Text.TextSpan FullSpan", true),
+                ("Microsoft.CodeAnalysis.Text.TextSpan Span", true),
+                ("System.Int32 SpanStart", true),
+                ("System.Boolean IsMissing", true),
+                ("System.Boolean IsStructuredTrivia", true),
+                ("System.Boolean HasStructuredTrivia", true),
+                ("System.Boolean ContainsSkippedText", true),
+                ("System.Boolean ContainsDiagnostics", true),
+                ("System.Boolean ContainsDirectives", true),
+                ("System.Boolean HasLeadingTrivia", true),
+                ("System.Boolean HasTrailingTrivia", true),
+                ("Microsoft.CodeAnalysis.SyntaxNode Parent", true),
+                ("Microsoft.CodeAnalysis.SyntaxTrivia ParentTrivia", true),
+                ("System.Boolean ContainsAnnotations", true),]);
+    }
+
+    [TestMethod]
+    public void CreateMembers_SkippedMembers()
+    {
+        var type = typeof(SyntaxNode);
+        var membersToSkip = new[]
+        {
+            type.GetMember("get_SyntaxTree").First(),
+            type.GetMember("GetType").First(),
+            type.GetMember("Equals").First(),
+            type.GetMember("GetHashCode").First(),
+            type.GetMember("ToString").First()
+        };
+        var model = ModelBuilder.Build([new(type, membersToSkip)], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>().Which.Members.Should().BeEmpty();
+    }
 }
