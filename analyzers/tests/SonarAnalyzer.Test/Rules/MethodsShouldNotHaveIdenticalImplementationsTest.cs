@@ -28,7 +28,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations() =>
-        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").Verify();
 
     [CombinatorialDataTestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters(
@@ -276,16 +276,12 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
             """).WithOptions(LanguageOptions.FromCSharp9).Verify();
 
     [TestMethod]
-    public void MethodsShouldNotHaveIdenticalImplementations_CSharp9() =>
-        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp9.cs").WithTopLevelStatements().Verify();
+    public void MethodsShouldNotHaveIdenticalImplementations_TopLevelStatements() =>
+        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void MethodsShouldNotHaveIdenticalImplementations_CSharp10() =>
-        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp10.cs").WithLanguageVersion(LanguageVersion.CSharp10).Verify();
-
-    [TestMethod]
-    public void MethodsShouldNotHaveIdenticalImplementations_CSharp11() =>
-        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.CSharp11.cs").WithLanguageVersion(LanguageVersion.CSharp11).Verify();
+    public void MethodsShouldNotHaveIdenticalImplementations_CSharpLatest() =>
+        builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void MethodsShouldNotHaveIdenticalImplementations_VB() =>

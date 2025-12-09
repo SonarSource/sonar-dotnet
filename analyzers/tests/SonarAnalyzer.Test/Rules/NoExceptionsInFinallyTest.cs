@@ -17,17 +17,16 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class NoExceptionsInFinallyTest
-    {
-        [TestMethod]
-        public void NoExceptionsInFinally_CS() =>
-            new VerifierBuilder<CS.NoExceptionsInFinally>().AddPaths("NoExceptionsInFinally.cs").Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void NoExceptionsInFinally_VB() =>
-            new VerifierBuilder<VB.NoExceptionsInFinally>().AddPaths("NoExceptionsInFinally.vb").Verify();
-    }
+[TestClass]
+public class NoExceptionsInFinallyTest
+{
+    [TestMethod]
+    public void NoExceptionsInFinally_CS() =>
+        new VerifierBuilder<CS.NoExceptionsInFinally>().AddPaths("NoExceptionsInFinally.cs").Verify();
+
+    [TestMethod]
+    public void NoExceptionsInFinally_VB() =>
+        new VerifierBuilder<VB.NoExceptionsInFinally>().AddPaths("NoExceptionsInFinally.vb").Verify();
 }

@@ -16,22 +16,21 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class NonFlagsEnumInBitwiseOperationTest
 {
-    [TestClass]
-    public class NonFlagsEnumInBitwiseOperationTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<NonFlagsEnumInBitwiseOperation>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<NonFlagsEnumInBitwiseOperation>();
 
-        [TestMethod]
-        public void NonFlagsEnumInBitwiseOperation() =>
-            builder.AddPaths("NonFlagsEnumInBitwiseOperation.cs").AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives).Verify();
+    [TestMethod]
+    public void NonFlagsEnumInBitwiseOperation() =>
+        builder.AddPaths("NonFlagsEnumInBitwiseOperation.cs").AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives).Verify();
 
-        [TestMethod]
-        public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
-            builder.WithCodeFix<NonFlagsEnumInBitwiseOperationCodeFix>()
-                .AddPaths("NonFlagsEnumInBitwiseOperation.cs")
-                .WithCodeFixedPaths("NonFlagsEnumInBitwiseOperation.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void NonFlagsEnumInBitwiseOperation_CodeFix() =>
+        builder.WithCodeFix<NonFlagsEnumInBitwiseOperationCodeFix>()
+            .AddPaths("NonFlagsEnumInBitwiseOperation.cs")
+            .WithCodeFixedPaths("NonFlagsEnumInBitwiseOperation.Fixed.cs")
+            .VerifyCodeFix();
 }

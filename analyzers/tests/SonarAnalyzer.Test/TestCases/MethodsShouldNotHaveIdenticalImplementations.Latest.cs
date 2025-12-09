@@ -1,45 +1,56 @@
 ﻿using System;
 
-void Method1()// Secondary [0]
-              // Secondary@-1 [1]
+public class StaticLocalFunctions
 {
-    string s = "test";
-    Console.WriteLine("Result: {0}", s);
+
+    public void Method()
+    {
+        static string LocalFunction(int x)
+//                    ^^^^^^^^^^^^^ Secondary
+//                    ^^^^^^^^^^^^^ Secondary@-1
+        {
+            x += 42;
+            return x.ToString();
+        }
+
+        static string LocalFunctionCopy(int x) // Noncompliant
+        {
+            x += 42;
+            return x.ToString();
+        }
+    }
+
+    public string MethodWhichCopiesLocalFunction(int x) // Noncompliant
+    {
+        x += 42;
+        return x.ToString();
+    }
 }
 
-void Method2() // Noncompliant [0] {{Update this method so that its implementation is not identical to 'Method1'.}}
+// https://sonarsource.atlassian.net/browse/NET-348
+class Repro_348
 {
-    string s = "test";
-    Console.WriteLine("Result: {0}", s);
+    T Method1<T>() => default;  // FN
+    T Method2<T>() => default;
 }
 
-void Method3() // Noncompliant [1] {{Update this method so that its implementation is not identical to 'Method1'.}}
+public record struct Sample
 {
-    string s = "test";
-    Console.WriteLine("Result: {0}", s);
-}
-
-void Method4()
-{
-    Console.WriteLine("Result: 0");
-}
-
-public record Sample
-{
-    public void Method1() // Secondary [2]
-                          // Secondary@-1 [3]
+    public void Method1()
+//              ^^^^^^^ Secondary
+//              ^^^^^^^ Secondary@-1
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method2() // Noncompliant [2] {{Update this method so that its implementation is not identical to 'Method1'.}}
+    public void Method2() // Noncompliant
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method3() // Noncompliant [3] {{Update this method so that its implementation is not identical to 'Method1'.}}
+    public void Method3() // Noncompliant
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
@@ -59,15 +70,15 @@ public record Sample
         "foo";
 }
 
-public record SamplePositional(string Value)
+public record struct SamplePositional(string Value)
 {
-    public void Method1() // Secondary [4]
+    public void Method1() // Secondary
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
     }
 
-    public void Method2() // Noncompliant [4] {{Update this method so that its implementation is not identical to 'Method1'.}}
+    public void Method2() // Noncompliant
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);
@@ -259,5 +270,66 @@ public class Repro_9654
     {
         Console.WriteLine("Test");
         return "A";
+    }
+}
+
+namespace Tests.Diagnostics
+{
+    interface IInterface
+    {
+        static virtual void First()
+//                          ^^^^^ Secondary
+        {
+            string s = "test";
+            Console.WriteLine("Result: {0}", s);
+        }
+
+        static virtual void Second() // Noncompliant {{Update this method so that its implementation is not identical to 'First'.}}
+//                          ^^^^^^
+        {
+            string s = "test";
+            Console.WriteLine("Result: {0}", s);
+        }
+
+        static virtual void Different()
+        {
+            string s = "this is a different method";
+            Console.WriteLine("Result: {0}", s);
+        }
+    }
+}
+
+public class ExtensionTest
+{
+    public void MethodInBase()
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Two");
+    }
+}
+
+public static class NewExtensions
+{
+    extension(ExtensionTest sample)
+    {
+        public void IdenticalToBaseMethod() // FN https://sonarsource.atlassian.net/browse/NET-2772
+        {
+            Console.WriteLine("One");
+            Console.WriteLine("Two");
+        }
+
+        public void MethodInExtension() // FN https://sonarsource.atlassian.net/browse/NET-2745
+        {
+            Console.WriteLine("One");
+            Console.WriteLine("Two");
+            Console.WriteLine("Three");
+        }
+
+        public void MethodInExtension2() // FN https://sonarsource.atlassian.net/browse/NET-2745
+        {
+            Console.WriteLine("One");
+            Console.WriteLine("Two");
+            Console.WriteLine("Three");
+        }
     }
 }

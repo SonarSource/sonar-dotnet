@@ -55,3 +55,35 @@ public partial class PartialProperties
 {
     public partial int Prop1 => 42;
 }
+
+public class FieldKeyWord
+{
+    public int Prop1 => field;
+    private int Prop2 => field;                               // FN https://sonarsource.atlassian.net/browse/NET-2771
+    public int Prop3 { get => field; set => field = value; }
+    private int Prop4 { get => field; set => field = value; } // FN https://sonarsource.atlassian.net/browse/NET-2771
+}
+
+public class NullConditionalAssignment
+{
+    private int compliant; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2748
+    public NullConditionalAssignment()
+    {
+        this?.compliant = 42;
+    }
+}
+
+public static class Extensions
+{
+    private static string NonCompliantInProp;   // Noncompliant
+    private static string CompliantInMethod;
+
+    extension(string s)
+    {
+        public int length => NonCompliantInProp.Length;
+        public void SetLength()
+        {
+            CompliantInMethod = "42";
+        }
+    }
+}

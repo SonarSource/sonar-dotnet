@@ -16,19 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class NestedCodeBlockTest
 {
-    [TestClass]
-    public class NestedCodeBlockTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<NestedCodeBlock>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<NestedCodeBlock>();
 
-        [TestMethod]
-        public void NestedCodeBlock() =>
-            builder.AddPaths("NestedCodeBlock.cs").Verify();
+    [TestMethod]
+    public void NestedCodeBlock() =>
+        builder.AddPaths("NestedCodeBlock.cs").Verify();
 
-        [TestMethod]
-        public void NestedCodeBlock_CSharp9() =>
-            builder.AddPaths("NestedCodeBlock.CSharp9.cs").WithTopLevelStatements().Verify();
-    }
+    [TestMethod]
+    public void NestedCodeBlock_TopLevelStatements() =>
+        builder.AddPaths("NestedCodeBlock.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void NestedCodeBlock_CSharpLatest() =>
+        builder.AddPaths("NestedCodeBlock.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

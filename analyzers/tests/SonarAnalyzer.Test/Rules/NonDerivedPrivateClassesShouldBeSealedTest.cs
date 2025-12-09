@@ -15,23 +15,18 @@
  */
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class NonDerivedPrivateClassesShouldBeSealedTest
 {
-    [TestClass]
-    public class NonDerivedPrivateClassesShouldBeSealedTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<NonDerivedPrivateClassesShouldBeSealed>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<NonDerivedPrivateClassesShouldBeSealed>();
 
-        [TestMethod]
-        public void NonDerivedPrivateClassesShouldBeSealed_CS() =>
-            builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.cs", "NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs").Verify();
+    [TestMethod]
+    public void NonDerivedPrivateClassesShouldBeSealed_CS() =>
+        builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.cs", "NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs").Verify();
 
-        [TestMethod]
-        public void NonDerivedPrivateClassesShouldBeSealed_CSharp9() =>
-             builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void NonDerivedPrivateClassesShouldBeSealed_CSharp11() =>
-             builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-    }
+    [TestMethod]
+    public void NonDerivedPrivateClassesShouldBeSealed_CSharpLatest() =>
+         builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

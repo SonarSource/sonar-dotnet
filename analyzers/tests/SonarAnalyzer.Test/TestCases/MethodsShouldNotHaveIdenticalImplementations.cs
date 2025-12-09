@@ -146,29 +146,6 @@ namespace Tests.Diagnostics
             x += 1;
             return x.ToString();
         }
-
-        public void Method()
-        {
-            static string LocalFunction(int x)
-//                        ^^^^^^^^^^^^^ Secondary
-//                        ^^^^^^^^^^^^^ Secondary@-1
-            {
-                x += 42;
-                return x.ToString();
-            }
-
-            static string LocalFunctionCopy(int x) // Noncompliant
-            {
-                x += 42;
-                return x.ToString();
-            }
-        }
-
-        public string MethodWhichCopiesLocalFunction(int x) // Noncompliant
-        {
-            x += 42;
-            return x.ToString();
-        }
     }
 
     struct SomeStruct
@@ -219,11 +196,36 @@ namespace Tests.Diagnostics
             }
         }
     }
+}
 
-    // https://sonarsource.atlassian.net/browse/NET-348
-    class Repro_348
+public class Sample
+{
+    public void MethodInBase()
     {
-        T Method1<T>() => default;  // FN
-        T Method2<T>() => default;
+        Console.WriteLine("One");
+        Console.WriteLine("Two");
+    }
+}
+
+public static class ClassicExtensions
+{
+    public static void IdenticalToBaseMethod(this Sample sample) // FN https://sonarsource.atlassian.net/browse/NET-2772
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Two");
+    }
+
+    public static void MethodInExtension(this Sample sample) // Secondary
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Two");
+        Console.WriteLine("Three");
+    }
+
+    public static void MethodInExtension2(this Sample sample) // Noncompliant
+    {
+        Console.WriteLine("One");
+        Console.WriteLine("Two");
+        Console.WriteLine("Three");
     }
 }
