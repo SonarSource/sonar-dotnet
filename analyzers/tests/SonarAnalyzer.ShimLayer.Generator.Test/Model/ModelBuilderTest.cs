@@ -62,6 +62,28 @@ public class ModelBuilderTest
     }
 
     [TestMethod]
+    public void Build_IOperation()
+    {
+        using var typeLoader = new TypeLoader();
+        var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IOperation));
+        var model = ModelBuilder.Build([type], []);
+        model.Should().ContainKey(type.Type).And.ContainSingle().Which.Value.Should().BeOfType<IOperationStrategy>()
+            .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
+                "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
+                "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",
+                "Microsoft.CodeAnalysis.IOperation Parent",
+                "Microsoft.CodeAnalysis.OperationKind Kind",
+                "Microsoft.CodeAnalysis.SyntaxNode Syntax",
+                "Microsoft.CodeAnalysis.ITypeSymbol Type",
+                "Microsoft.CodeAnalysis.Optional`1[System.Object] ConstantValue",
+                "System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.IOperation] Children",
+                "Microsoft.CodeAnalysis.IOperation+OperationList ChildOperations",
+                "System.String Language",
+                "System.Boolean IsImplicit",
+                "Microsoft.CodeAnalysis.SemanticModel SemanticModel"]);
+    }
+
+    [TestMethod]
     public void Build_StaticClass()
     {
         var type = typeof(GeneratorExtensions);

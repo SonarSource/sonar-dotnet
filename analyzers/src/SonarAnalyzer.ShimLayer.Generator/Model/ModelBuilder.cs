@@ -32,12 +32,14 @@ public static class ModelBuilder
         {
             return Skip;
         }
-        else if (InheritsSyntaxNode(latest.Type))
+        else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.SyntaxNode"))
         {
-            return new SyntaxNodeStrategy(latest.Type, CreateMembers(latest, baseline).ToArray());
+            return new SyntaxNodeStrategy(latest.Type, CreateMembers(latest, baseline));
         }
-        // ToDo: IOperationStrategy
-        // ToDo: StaticClassStrategy when (type.IsSealed && type.IsAbstract)
+        else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
+        {
+            return new IOperationStrategy(latest.Type, CreateMembers(latest, baseline));
+        }
         // ToDo: EnumStrategy
         // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
         else
@@ -46,11 +48,11 @@ public static class ModelBuilder
         }
     }
 
-    private static bool InheritsSyntaxNode(Type type)   // We can't use typeof(SyntaxNode).IsAssignableFrom(type) because it's loaded into a different metadata context
+    private static bool IsAssignableTo(Type type, string fullName)   // We can't use typeof(Xxx).IsAssignableFrom(type) because it's loaded into a different metadata context
     {
         while (type is not null)
         {
-            if (type.FullName == "Microsoft.CodeAnalysis.SyntaxNode")
+            if (type.FullName == fullName)
             {
                 return true;
             }
@@ -59,13 +61,10 @@ public static class ModelBuilder
         return false;
     }
 
-    private static IEnumerable<MemberDescriptor> CreateMembers(TypeDescriptor latestType, TypeDescriptor baselineType)
+    private static MemberDescriptor[] CreateMembers(TypeDescriptor latestType, TypeDescriptor baselineType)
     {
         var baseline = new HashSet<string>(baselineType?.Members.Select(x => x.ToString()) ?? []);
-        foreach (var latest in latestType.Members.Where(IsValid))
-        {
-            yield return new(latest, baseline.Contains(latest.ToString()));
-        }
+        return latestType.Members.Where(IsValid).Select(x => new MemberDescriptor(x, baseline.Contains(x.ToString()))).ToArray();
     }
 
     private static bool IsSkipped(Type type) =>
