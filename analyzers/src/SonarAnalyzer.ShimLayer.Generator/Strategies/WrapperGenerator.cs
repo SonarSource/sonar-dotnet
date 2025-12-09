@@ -16,7 +16,20 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public class SkipStrategy : Strategy
+// TODO: Move this logic to Factory
+internal class WrapperGenerator
 {
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model) => null;
+    public GeneratedFile GenerateWrapper(Type latest, IReadOnlyDictionary<Type, Strategy> model)
+    {
+        if (model.TryGetValue(latest, out var strategy))
+        {
+            return strategy.Generate(model) is { } content
+                ? new($"{latest.Name}Wrapper.g.cs", content)
+                : null;
+        }
+        else
+        {
+            throw new KeyNotFoundException($"No strategy found for type {latest.FullName}.");
+        }
+    }
 }

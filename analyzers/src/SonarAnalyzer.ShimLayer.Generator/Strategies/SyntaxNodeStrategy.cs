@@ -16,10 +16,42 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-// FIXME: REQUEST CHANGES HERE. This should be rebased away
 public class SyntaxNodeStrategy : Strategy
 {
-    public SyntaxNodeStrategy(Type latest, IReadOnlyList<MemberInfo> members)
+    public Type Latest { get; }
+    public IReadOnlyList<MemberDescriptor> Members { get; }
+
+    public SyntaxNodeStrategy(Type latest, IReadOnlyList<MemberDescriptor> members)
     {
+        Latest = latest;
+        Members = members;
+    }
+
+    public override string Generate(IReadOnlyDictionary<Type, Strategy> model) =>
+        $$"""
+        namespace SonarAnalyzer.ShimLayer;
+
+        public readonly struct {{Latest.Name}}Wrapper
+        {
+            private readonly Microsoft.CodeAnalysis.SyntaxNode _node;
+            public {{Latest.Name}}Wrapper(Microsoft.CodeAnalysis.SyntaxNode node)
+            {
+                _node = node;
+            }
+            public Microsoft.CodeAnalysis.SyntaxNode SyntaxNode => _node;
+
+            {{string.Join(Environment.NewLine + "    " + Environment.NewLine, Members.Where(x => !x.IsPassthrough).Select(x => GenerateMemberWrapper(x.Member, model)))}}
+            {{string.Join(Environment.NewLine + "    " + Environment.NewLine, Members.Where(x => x.IsPassthrough).Select(x => GeneratePassThrough(x.Member, model)))}}
+        }
+        """;
+
+    private string GenerateMemberWrapper(MemberInfo member, IReadOnlyDictionary<Type, Strategy> model)
+    {
+        return $$"""public Wrap {{member.Name}} { get; set; }""";
+    }
+
+    private string GeneratePassThrough(MemberInfo member, IReadOnlyDictionary<Type, Strategy> model)
+    {
+        return $$"""public PassThrough {{member.Name}} { get; set; }""";
     }
 }

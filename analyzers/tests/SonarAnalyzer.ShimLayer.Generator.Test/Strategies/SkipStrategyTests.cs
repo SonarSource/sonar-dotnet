@@ -14,9 +14,15 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
+namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 
-public class SkipStrategy : Strategy
+[TestClass]
+public class SkipStrategyTests
 {
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model) => null;
+    [TestMethod]
+    public void SkipStrategy()
+    {
+        var sut = new SkipStrategy();
+        sut.Generate(new Dictionary<Type, Strategy>()).Should().BeNull();
+    }
 }

@@ -16,7 +16,7 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-// FIXME: REQUEST CHANGES HERE. This should be rebased away
 public abstract class Strategy
 {
+    public abstract string Generate(IReadOnlyDictionary<Type, Strategy> model);
 }
