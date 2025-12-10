@@ -16,23 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class OrderByRepeatedTest
 {
-    [TestClass]
-    public class OrderByRepeatedTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<OrderByRepeated>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<OrderByRepeated>();
 
-        [TestMethod]
-        public void OrderByRepeated() =>
-            builder.AddPaths("OrderByRepeated.cs").Verify();
+    [TestMethod]
+    public void OrderByRepeated() =>
+        builder.AddPaths("OrderByRepeated.cs").Verify();
 
-        [TestMethod]
-        public void OrderByRepeated_CodeFix() =>
-            builder
-                .WithCodeFix<OrderByRepeatedCodeFix>()
-                .AddPaths("OrderByRepeated.cs")
-                .WithCodeFixedPaths("OrderByRepeated.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void OrderByRepeated_CodeFix() =>
+        builder
+            .WithCodeFix<OrderByRepeatedCodeFix>()
+            .AddPaths("OrderByRepeated.cs")
+            .WithCodeFixedPaths("OrderByRepeated.Fixed.cs")
+            .VerifyCodeFix();
 }

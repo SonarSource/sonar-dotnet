@@ -17,24 +17,23 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class OptionalParameterNotPassedToBaseCallTest
 {
-    [TestClass]
-    public class OptionalParameterNotPassedToBaseCallTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.OptionalParameterNotPassedToBaseCall>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.OptionalParameterNotPassedToBaseCall>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.OptionalParameterNotPassedToBaseCall>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.OptionalParameterNotPassedToBaseCall>();
 
-        [TestMethod]
-        public void OptionalParameterNotPassedToBaseCall_CS() =>
-            builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.cs").Verify();
+    [TestMethod]
+    public void OptionalParameterNotPassedToBaseCall_CS() =>
+        builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.cs").Verify();
 
-        [TestMethod]
-        public void OptionalParameterNotPassedToBaseCall_CSharp9() =>
-            builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
+    [TestMethod]
+    public void OptionalParameterNotPassedToBaseCall_CSharpLatest() =>
+        builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void OptionalParameterNotPassedToBaseCall_VB() =>
-            builderVB.AddPaths("OptionalParameterNotPassedToBaseCall.vb").Verify();
-    }
+    [TestMethod]
+    public void OptionalParameterNotPassedToBaseCall_VB() =>
+        builderVB.AddPaths("OptionalParameterNotPassedToBaseCall.vb").Verify();
 }

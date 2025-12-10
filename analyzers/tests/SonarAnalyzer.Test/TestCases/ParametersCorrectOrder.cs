@@ -160,19 +160,6 @@ namespace Tests.Diagnostics
 
     class WithLocalFunctions
     {
-        public void M1()
-        {
-            static double divide(int divisor, int dividend) // Secondary
-            {
-                return divisor / dividend;
-            }
-
-            static void doTheThing(int divisor, int dividend)
-            {
-                double result = divide(dividend, divisor);  // Noncompliant
-            }
-        }
-
         public void M2()
         {
             double divide(int divisor, int dividend) // Secondary

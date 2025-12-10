@@ -28,15 +28,10 @@ public class ObjectCreatedDroppedTest
         builder.AddPaths("ObjectCreatedDropped.cs").Verify();
 
     [TestMethod]
-    public void ObjectCreatedDropped_CSharp9() =>
-        builder
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .AddPaths("ObjectCreatedDropped.CSharp9.cs")
-            .Verify();
+    public void ObjectCreatedDropped_CSharpLatest() =>
+        builder.AddPaths("ObjectCreatedDropped.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void ObjectCreatedDropped_InTest() =>
-       builder.AddPaths("ObjectCreatedDropped.cs")
-       .AddTestReference()
-       .VerifyNoIssues();
+       builder.AddPaths("ObjectCreatedDropped.cs").AddTestReference().VerifyNoIssues();
 }

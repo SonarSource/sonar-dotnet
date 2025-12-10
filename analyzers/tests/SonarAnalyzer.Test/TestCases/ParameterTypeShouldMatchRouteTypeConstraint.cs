@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 
@@ -81,12 +81,6 @@ public static class Constants
 [Route((("/route/{ParenthesisParam:bool}")))]
 [Route((("/route/{ParenthesisParam:int}")))] // Secondary [parenthesis-int]
 //               ^^^^^^^^^^^^^^^^^^^^^^
-[Route("""/route/{RawStringLiteralParam:bool}""")]
-[Route("""/route/{RawStringLiteralParam:int}""")] // Secondary [raw-int]
-//               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-[Route($$"""/route/{RawInterpolatedParam:{{Constants.BoolConstraint}}}""")]
-[Route($$"""/route/{RawInterpolatedParam:{{Constants.IntConstraint}}}""")] // Secondary [raw-interpolated-int]
-//     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [Route("/something" + "/{ConcatenationParam:bool}")]
 [Route("/something" + "/{ConcatenationParam:int}")] // Secondary [concatenation-int]
 //                      ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -102,10 +96,6 @@ public class ParameterTypeShouldMatchRouteTypeConstraint_Constant : ComponentBas
     //     ^^^^
     [Parameter]
     public bool ParenthesisParam { get; set; } // Noncompliant [parenthesis-int]
-    [Parameter]
-    public bool RawStringLiteralParam { get; set; } // Noncompliant [raw-int]
-    [Parameter]
-    public bool RawInterpolatedParam { get; set; } // Noncompliant [raw-interpolated-int]
     [Parameter]
     public bool ConcatenationParam { get; set; } // Noncompliant [concatenation-int]
 }

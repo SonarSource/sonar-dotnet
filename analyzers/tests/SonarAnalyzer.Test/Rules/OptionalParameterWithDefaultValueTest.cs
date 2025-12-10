@@ -16,26 +16,25 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class OptionalParameterWithDefaultValueTest
 {
-    [TestClass]
-    public class OptionalParameterWithDefaultValueTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<OptionalParameterWithDefaultValue>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<OptionalParameterWithDefaultValue>();
 
-        [TestMethod]
-        public void OptionalParameterWithDefaultValue() =>
-            builder.AddPaths("OptionalParameterWithDefaultValue.cs").Verify();
+    [TestMethod]
+    public void OptionalParameterWithDefaultValue() =>
+        builder.AddPaths("OptionalParameterWithDefaultValue.cs").Verify();
 
-        [TestMethod]
-        public void OptionalParameterWithDefaultValue_CSharp11() =>
-            builder.AddPaths("OptionalParameterWithDefaultValue.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
+    [TestMethod]
+    public void OptionalParameterWithDefaultValue_CSharpLatest() =>
+        builder.AddPaths("OptionalParameterWithDefaultValue.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void OptionalParameterWithDefaultValue_CodeFix() =>
-            builder.WithCodeFix<OptionalParameterWithDefaultValueCodeFix>()
-                .AddPaths("OptionalParameterWithDefaultValue.cs")
-                .WithCodeFixedPaths("OptionalParameterWithDefaultValue.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void OptionalParameterWithDefaultValue_CodeFix() =>
+        builder.WithCodeFix<OptionalParameterWithDefaultValueCodeFix>()
+            .AddPaths("OptionalParameterWithDefaultValue.cs")
+            .WithCodeFixedPaths("OptionalParameterWithDefaultValue.Fixed.cs")
+            .VerifyCodeFix();
 }

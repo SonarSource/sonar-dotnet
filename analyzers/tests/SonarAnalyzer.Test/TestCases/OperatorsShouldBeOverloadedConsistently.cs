@@ -119,3 +119,15 @@ namespace MyLibrary
         public static Foo13 operator -(Foo13 a) => new Foo13();
     }
 }
+
+public class EqualsOperatorInClassEqualsMethodsInExtensions // Noncompliant
+{
+    public static object operator ==(EqualsOperatorInClassEqualsMethodsInExtensions a, EqualsOperatorInClassEqualsMethodsInExtensions b) => new object();
+    public static object operator !=(EqualsOperatorInClassEqualsMethodsInExtensions a, EqualsOperatorInClassEqualsMethodsInExtensions b) => new object();
+}
+
+public static class ClassicExtensions
+{
+    public static bool Equals(this EqualsOperatorInClassEqualsMethodsInExtensions self, object obj) => false;
+    public static int GetHashCode(this EqualsOperatorInClassEqualsMethodsInExtensions self) => 0;
+}

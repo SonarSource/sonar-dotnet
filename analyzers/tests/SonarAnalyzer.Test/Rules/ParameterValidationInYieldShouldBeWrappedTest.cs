@@ -16,33 +16,20 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ParameterValidationInYieldShouldBeWrappedTest
 {
-    [TestClass]
-    public class ParameterValidationInYieldShouldBeWrappedTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ParameterValidationInYieldShouldBeWrapped>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ParameterValidationInYieldShouldBeWrapped>();
 
-        [TestMethod]
-        public void ParameterValidationInYieldShouldBeWrapped() =>
-            builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.cs").Verify();
+    [TestMethod]
+    public void ParameterValidationInYieldShouldBeWrapped() =>
+        builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.cs").Verify();
 
-        [TestMethod]
-        public void ParameterValidationInYieldShouldBeWrapped_CSharp10() =>
-            builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp10.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
-
-        [TestMethod]
-        public void ParameterValidationInYieldShouldBeWrapped_CSharp11() =>
-            builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void ParameterValidationInYieldShouldBeWrapped_CSharp12() =>
-            builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.CSharp12.cs")
-                .WithOptions(LanguageOptions.FromCSharp12)
-                .Verify();
-    }
+    [TestMethod]
+    public void ParameterValidationInYieldShouldBeWrapped_CSharpLatest() =>
+        builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

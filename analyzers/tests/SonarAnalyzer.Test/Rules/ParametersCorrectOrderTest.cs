@@ -26,16 +26,12 @@ public class ParametersCorrectOrderTest
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ParametersCorrectOrder>();
 
     [TestMethod]
-    public void ParametersCorrectOrder_CSharp8() =>
-        builderCS.AddPaths("ParametersCorrectOrder.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+    public void ParametersCorrectOrder() =>
+        builderCS.AddPaths("ParametersCorrectOrder.cs").Verify();
 
     [TestMethod]
-    public void ParametersCorrectOrder_CSharp11() =>
-        builderCS.AddPaths("ParametersCorrectOrder.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-    [TestMethod]
-    public void ParametersCorrectOrder_CSharp12() =>
-        builderCS.AddPaths("ParametersCorrectOrder.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
+    public void ParametersCorrectOrder_CSharpLatest() =>
+        builderCS.AddPaths("ParametersCorrectOrder.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void ParametersCorrectOrder_InvalidCode_CS() =>

@@ -41,8 +41,14 @@ public class ParameterTypeShouldMatchRouteTypeConstraintTest
     public void ParameterTypeShouldMatchRouteTypeConstraint_CS() =>
         builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
-            .WithOptions(LanguageOptions.FromCSharp11)
             .Verify();
+
+    [TestMethod]
+    public void ParameterTypeShouldMatchRouteTypeConstraint_CSharpLatest() =>
+    builder.AddPaths("ParameterTypeShouldMatchRouteTypeConstraint.cs")
+        .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
+        .WithOptions(LanguageOptions.CSharpLatest)
+        .Verify();
 
     [TestMethod]
     public void ParameterTypeShouldMatchRouteTypeConstraint_Conversion() =>

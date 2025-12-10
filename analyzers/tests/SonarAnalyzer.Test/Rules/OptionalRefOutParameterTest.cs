@@ -16,26 +16,29 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class OptionalRefOutParameterTest
 {
-    [TestClass]
-    public class OptionalRefOutParameterTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<OptionalRefOutParameter>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<OptionalRefOutParameter>();
 
-        [TestMethod]
-        public void OptionalRefOutParameter() =>
-            builder.AddPaths("OptionalRefOutParameter.cs").Verify();
+    [TestMethod]
+    public void OptionalRefOutParameter() =>
+        builder.AddPaths("OptionalRefOutParameter.cs").Verify();
 
-        [TestMethod]
-        public void OptionalRefOutParameter_CSharp9() =>
-            builder.AddPaths("OptionalRefOutParameter.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void OptionalRefOutParameter_TopLevelStatements() =>
+        builder.AddPaths("OptionalRefOutParameter.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void OptionalRefOutParameter_CodeFix() =>
-            builder.WithCodeFix<OptionalRefOutParameterCodeFix>()
-                .AddPaths("OptionalRefOutParameter.cs")
-                .WithCodeFixedPaths("OptionalRefOutParameter.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void OptionalRefOutParameter_CSharpLatest() =>
+        builder.AddPaths("OptionalRefOutParameter.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void OptionalRefOutParameter_CodeFix() =>
+        builder.WithCodeFix<OptionalRefOutParameterCodeFix>()
+            .AddPaths("OptionalRefOutParameter.cs")
+            .WithCodeFixedPaths("OptionalRefOutParameter.Fixed.cs")
+            .VerifyCodeFix();
 }
