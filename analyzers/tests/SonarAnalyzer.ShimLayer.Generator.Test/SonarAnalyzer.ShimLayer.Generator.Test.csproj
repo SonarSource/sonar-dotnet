@@ -16,6 +16,7 @@
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
     <Using Include="SonarAnalyzer.ShimLayer.Generator.Strategies" />
+    <Using Include="System.Reflection" />
   </ItemGroup>
 
 </Project>

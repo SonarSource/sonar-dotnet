@@ -1,0 +1,42 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2014-2025 SonarSource Sàrl
+ * mailto:info AT sonarsource DOT com
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the Sonar Source-Available License for more details.
+ *
+ * You should have received a copy of the Sonar Source-Available License
+ * along with this program; if not, see https://sonarsource.com/license/ssal/
+ */
+
+using SonarAnalyzer.TestFramework.Extensions;
+
+namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
+
+[TestClass]
+public class PartialEnumStrategyTest
+{
+    [TestMethod]
+    public void Generate()
+    {
+        var type = typeof(SymbolKind);
+        var sut = new PartialEnumStrategy(type, type.GetMembers().OfType<FieldInfo>().Where(x => x.Name is nameof(SymbolKind.Discard) or nameof(SymbolKind.RangeVariable)).ToArray());
+        sut.Generate(new Dictionary<Type, Strategy>()).Should().BeIgnoringLineEndings("""
+            using Microsoft.CodeAnalysis;
+
+            namespace SonarAnalyzer.ShimLayer;
+
+            public static class SymbolKindEx
+            {
+                public const SymbolKind RangeVariable = (SymbolKind)16;
+                public const SymbolKind Discard = (SymbolKind)19;
+            }
+
+            """);
+    }
+}
