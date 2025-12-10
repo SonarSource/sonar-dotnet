@@ -14,30 +14,29 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class PureAttributeOnVoidMethod : PureAttributeOnVoidMethodBase<SyntaxKind>
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override void Initialize(SonarAnalysisContext context)
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            base.Initialize(context);
-            context.RegisterNodeAction(
-                c =>
+        base.Initialize(context);
+        context.RegisterNodeAction(
+            c =>
+            {
+                var localFunction = (LocalFunctionStatementSyntaxWrapper)c.Node;
+                if (localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(IsPureAttribute)
+                    && InvalidPureDataAttributeUsage((IMethodSymbol)c.Model.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
                 {
-                    if ((LocalFunctionStatementSyntaxWrapper)c.Node is var localFunction
-                        && localFunction.AttributeLists.SelectMany(x => x.Attributes).Any(IsPureAttribute)
-                        && InvalidPureDataAttributeUsage((IMethodSymbol)c.Model.GetDeclaredSymbol(c.Node)) is { } pureAttribute)
-                    {
-                        c.ReportIssue(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax());
-                    }
-                },
-                SyntaxKindEx.LocalFunctionStatement);
-        }
-
-        private static bool IsPureAttribute(AttributeSyntax attribute) =>
-            attribute.Name.GetIdentifier() is { ValueText: "Pure" or "PureAttribute" };
+                    c.ReportIssue(Rule, pureAttribute.ApplicationSyntaxReference.GetSyntax());
+                }
+            },
+            SyntaxKindEx.LocalFunctionStatement);
     }
+
+    private static bool IsPureAttribute(AttributeSyntax attribute) =>
+        attribute.Name.GetIdentifier() is { ValueText: "Pure" or "PureAttribute" };
 }
