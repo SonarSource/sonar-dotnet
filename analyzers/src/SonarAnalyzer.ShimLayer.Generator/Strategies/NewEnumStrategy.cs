@@ -18,13 +18,32 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class NewEnumStrategy : Strategy
 {
+    private readonly Type latest;
+
     public FieldInfo[] Fields { get; }
 
     public NewEnumStrategy(Type latest, FieldInfo[] fields)
     {
+        this.latest = latest;
         Fields = fields;
     }
 
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model) =>
-        throw new NotImplementedException();
+    public override string Generate(IReadOnlyDictionary<Type, Strategy> model)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("namespace SonarAnalyzer.ShimLayer;");
+        sb.AppendLine();
+        foreach (var attribute in latest.GetCustomAttributesData())
+        {
+            sb.AppendLine($"[{attribute.AttributeType}]");
+        }
+        sb.AppendLine($"public enum {latest.Name} : {Enum.GetUnderlyingType(latest)}");
+        sb.AppendLine("{");
+        foreach (var field in Fields)
+        {
+            sb.AppendLine($"    {field.Name} = {field.GetRawConstantValue()},");
+        }
+        sb.AppendLine("}");
+        return sb.ToString();
+    }
 }
