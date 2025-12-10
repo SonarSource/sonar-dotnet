@@ -28,7 +28,7 @@ public class ClassWithEqualityShouldImplementIEquatableTest
         builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.cs").Verify();
 
     [TestMethod]
-    public void ClassWithEqualityShouldImplementIEquatable_CSharpLatest() =>
+    public void ClassWithEqualityShouldImplementIEquatable_CS_Latest() =>
         builder.AddPaths("ClassWithEqualityShouldImplementIEquatable.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

@@ -28,7 +28,7 @@ public class ObjectCreatedDroppedTest
         builder.AddPaths("ObjectCreatedDropped.cs").Verify();
 
     [TestMethod]
-    public void ObjectCreatedDropped_CSharpLatest() =>
+    public void ObjectCreatedDropped_CS_Latest() =>
         builder.AddPaths("ObjectCreatedDropped.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

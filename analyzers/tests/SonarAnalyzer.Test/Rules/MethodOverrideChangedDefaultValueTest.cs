@@ -31,13 +31,13 @@ public class MethodOverrideChangedDefaultValueTest
             .Verify();
 
     [TestMethod]
-    public void MethodOverrideChangedDefaultValue_CSharpLatest() =>
+    public void MethodOverrideChangedDefaultValue_CS_Latest() =>
         builder.AddPaths("MethodOverrideChangedDefaultValue.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
-    public void MethodOverrideChangedDefaultValue_CSharpLatest_CodeFix() =>
+    public void MethodOverrideChangedDefaultValue_CS_Latest_CodeFix() =>
         builder.AddPaths("MethodOverrideChangedDefaultValue.Latest.cs")
             .WithCodeFix<MethodOverrideChangedDefaultValueCodeFix>()
             .WithCodeFixedPaths("MethodOverrideChangedDefaultValue.Latest.Fixed.cs")

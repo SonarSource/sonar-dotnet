@@ -30,7 +30,7 @@ public class PreferGuidEmptyTest
         builderCS.AddPaths("PreferGuidEmpty.cs").Verify();
 
     [TestMethod]
-    public void PreferGuidEmpty_CSharpLatest() =>
+    public void PreferGuidEmpty_CS_Latest() =>
         builderCS.AddPaths("PreferGuidEmpty.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

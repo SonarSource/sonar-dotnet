@@ -32,6 +32,6 @@ public class InheritedCollidingInterfaceMembersTest
         builder.AddPaths("InheritedCollidingInterfaceMembers.DifferentFile.cs", "InheritedCollidingInterfaceMembers.AnotherFile.cs").Verify();
 
     [TestMethod]
-    public void InheritedCollidingInterfaceMembers_CSharpLatest() =>
+    public void InheritedCollidingInterfaceMembers_CS_Latest() =>
         builder.AddPaths("InheritedCollidingInterfaceMembers.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

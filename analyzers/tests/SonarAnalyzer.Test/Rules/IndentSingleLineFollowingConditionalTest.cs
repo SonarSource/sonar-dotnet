@@ -30,7 +30,7 @@ public class IndentSingleLineFollowingConditionalTest
         builder.AddPaths("IndentSingleLineFollowingConditional.cs").Verify();
 
     [TestMethod]
-    public void IndentSingleLineFollowingConditional_CSharpLatest() =>
+    public void IndentSingleLineFollowingConditional_CS_Latest() =>
         builder.AddPaths("IndentSingleLineFollowingConditional.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)

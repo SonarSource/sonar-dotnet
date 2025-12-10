@@ -30,7 +30,7 @@ public class BeginInvokePairedWithEndInvokeTest
         builderCS.AddPaths("BeginInvokePairedWithEndInvoke.cs").Verify();
 
     [TestMethod]
-    public void BeginInvokePairedWithEndInvoke_CSharpLatest() =>
+    public void BeginInvokePairedWithEndInvoke_CS_Latest() =>
         builderCS.AddPaths("BeginInvokePairedWithEndInvoke.Latest.cs", "BeginInvokePairedWithEndInvoke.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

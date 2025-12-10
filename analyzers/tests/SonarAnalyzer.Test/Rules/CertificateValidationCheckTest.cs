@@ -34,7 +34,7 @@ public class CertificateValidationCheckTest
         builderCS.AddPaths("CertificateValidationCheck.cs").Verify();
 
     [TestMethod]
-    public void CertificateValidationCheck_CSharpLatest() =>
+    public void CertificateValidationCheck_CS_Latest() =>
         builderCS.AddPaths("CertificateValidationCheck.Latest.cs", "CertificateValidationCheck.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

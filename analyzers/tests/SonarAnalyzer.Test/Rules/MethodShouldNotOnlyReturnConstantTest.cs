@@ -28,6 +28,6 @@ public class MethodShouldNotOnlyReturnConstantTest
         builder.AddPaths("MethodShouldNotOnlyReturnConstant.cs").Verify();
 
     [TestMethod]
-    public void MethodShouldNotOnlyReturnConstant_CSharpLatest() =>
+    public void MethodShouldNotOnlyReturnConstant_CS_Latest() =>
         builder.AddPaths("MethodShouldNotOnlyReturnConstant.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

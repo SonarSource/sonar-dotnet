@@ -28,7 +28,7 @@ public class ForLoopCounterChangedTest
         builder.AddPaths("ForLoopCounterChanged.cs").Verify();
 
     [TestMethod]
-    public void ForLoopCounterChanged_CSharpLatest() =>
+    public void ForLoopCounterChanged_CS_Latest() =>
         builder.AddPaths("ForLoopCounterChanged.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

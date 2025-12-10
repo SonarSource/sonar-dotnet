@@ -30,7 +30,7 @@ public class PrivateStaticMethodUsedOnlyByNestedClassTest
             .Verify();
 
     [TestMethod]
-    public void PrivateStaticMethodUsedOnlyByNestedClass_CSharpLatest() =>
+    public void PrivateStaticMethodUsedOnlyByNestedClass_CS_Latest() =>
         builder
             .AddPaths("PrivateStaticMethodUsedOnlyByNestedClass.CSharpLatest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)

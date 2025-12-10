@@ -280,7 +280,7 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
         builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void MethodsShouldNotHaveIdenticalImplementations_CSharpLatest() =>
+    public void MethodsShouldNotHaveIdenticalImplementations_CS_Latest() =>
         builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

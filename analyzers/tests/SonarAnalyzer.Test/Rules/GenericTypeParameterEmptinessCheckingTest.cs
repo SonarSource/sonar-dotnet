@@ -28,7 +28,7 @@ public class GenericTypeParameterEmptinessCheckingTest
         builder.AddPaths("GenericTypeParameterEmptinessChecking.cs").Verify();
 
     [TestMethod]
-    public void GenericTypeParameterEmptinessChecking_CSharpLatest() =>
+    public void GenericTypeParameterEmptinessChecking_CS_Latest() =>
         builder.AddPaths("GenericTypeParameterEmptinessChecking.Latest.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

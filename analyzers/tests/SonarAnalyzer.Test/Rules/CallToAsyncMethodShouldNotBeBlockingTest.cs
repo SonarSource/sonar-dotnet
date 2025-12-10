@@ -32,6 +32,6 @@ public class CallToAsyncMethodShouldNotBeBlockingTest
         builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void CallToAsyncMethodShouldNotBeBlocking_CSharpLatest() =>
+    public void CallToAsyncMethodShouldNotBeBlocking_CS_Latest() =>
         builder.AddPaths("CallToAsyncMethodShouldNotBeBlocking.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

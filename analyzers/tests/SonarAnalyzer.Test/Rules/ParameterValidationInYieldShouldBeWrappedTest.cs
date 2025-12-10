@@ -28,7 +28,7 @@ public class ParameterValidationInYieldShouldBeWrappedTest
         builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.cs").Verify();
 
     [TestMethod]
-    public void ParameterValidationInYieldShouldBeWrapped_CSharpLatest() =>
+    public void ParameterValidationInYieldShouldBeWrapped_CS_Latest() =>
         builder.AddPaths("ParameterValidationInYieldShouldBeWrapped.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

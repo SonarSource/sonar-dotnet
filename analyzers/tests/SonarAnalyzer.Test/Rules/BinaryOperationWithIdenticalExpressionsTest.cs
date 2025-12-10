@@ -46,7 +46,7 @@ namespace SonarAnalyzer.Test.Rules
                 .VerifyNoIssues();
 
         [TestMethod]
-        public void BinaryOperationWithIdenticalExpressions_CSharpLatest() =>
+        public void BinaryOperationWithIdenticalExpressions_CS_Latest() =>
             builderCS.AddPaths("BinaryOperationWithIdenticalExpressions.CSharpLatest.cs")
                 .WithOptions(LanguageOptions.CSharpLatest)
                 .Verify();

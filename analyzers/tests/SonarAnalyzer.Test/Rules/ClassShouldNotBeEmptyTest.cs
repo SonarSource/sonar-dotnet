@@ -38,7 +38,7 @@ public class ClassShouldNotBeEmptyTest
             .Verify();
 
     [TestMethod]
-    public void ClassShouldNotBeEmpty_CSharpLatest() =>
+    public void ClassShouldNotBeEmpty_CS_Latest() =>
         builderCS
             .AddPaths("ClassShouldNotBeEmpty.Latest.cs", "ClassShouldNotBeEmpty.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)

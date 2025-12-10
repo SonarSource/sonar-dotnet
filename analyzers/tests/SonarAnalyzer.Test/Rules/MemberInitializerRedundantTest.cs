@@ -45,11 +45,11 @@ public class MemberInitializerRedundantTest
             .VerifyCodeFix();
 
     [TestMethod]
-    public void MemberInitializerRedundant_CSharpLatest() =>
+    public void MemberInitializerRedundant_CS_Latest() =>
         builder.AddPaths("MemberInitializerRedundant.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
-    public void MemberInitializerRedundant_CSharpLatest_CodeFix() =>
+    public void MemberInitializerRedundant_CS_Latest_CodeFix() =>
         builder
             .WithCodeFix<MemberInitializedToDefaultCodeFix>()
             .AddPaths("MemberInitializerRedundant.Latest.cs")

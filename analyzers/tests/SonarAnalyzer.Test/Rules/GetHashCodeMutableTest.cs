@@ -28,7 +28,7 @@ public class GetHashCodeMutableTest
         builder.AddPaths("GetHashCodeMutable.cs").Verify();
 
     [TestMethod]
-    public void GetHashCodeMutable_CSharpLatest() =>
+    public void GetHashCodeMutable_CS_Latest() =>
         builder.AddPaths("GetHashCodeMutable.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

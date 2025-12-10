@@ -32,7 +32,7 @@ public class MethodParameterMissingOptionalTest
         builder.AddPaths("MethodParameterMissingOptional.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void MethodParameterMissingOptional_CSharpLatest() =>
+    public void MethodParameterMissingOptional_CS_Latest() =>
     builder.AddPaths("MethodParameterMissingOptional.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

@@ -32,6 +32,6 @@ public class CheckArgumentExceptionTest
         builder.AddPaths("CheckArgumentException.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void CheckArgumentException_CSharpLatest() =>
+    public void CheckArgumentException_CS_Latest() =>
         builder.AddPaths("CheckArgumentException.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

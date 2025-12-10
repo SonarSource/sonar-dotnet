@@ -30,7 +30,7 @@ public class ImplementSerializationMethodsCorrectlyTest
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.cs").Verify();
 
     [TestMethod]
-    public void ImplementSerializationMethodsCorrectly_CSharpLatest() =>
+    public void ImplementSerializationMethodsCorrectly_CS_Latest() =>
         builderCS.AddPaths("ImplementSerializationMethodsCorrectly.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)

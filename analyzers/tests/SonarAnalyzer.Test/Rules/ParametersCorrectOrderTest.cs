@@ -30,7 +30,7 @@ public class ParametersCorrectOrderTest
         builderCS.AddPaths("ParametersCorrectOrder.cs").Verify();
 
     [TestMethod]
-    public void ParametersCorrectOrder_CSharpLatest() =>
+    public void ParametersCorrectOrder_CS_Latest() =>
         builderCS.AddPaths("ParametersCorrectOrder.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

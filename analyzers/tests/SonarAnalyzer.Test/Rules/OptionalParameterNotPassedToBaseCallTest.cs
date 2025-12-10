@@ -30,7 +30,7 @@ public class OptionalParameterNotPassedToBaseCallTest
         builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.cs").Verify();
 
     [TestMethod]
-    public void OptionalParameterNotPassedToBaseCall_CSharpLatest() =>
+    public void OptionalParameterNotPassedToBaseCall_CS_Latest() =>
         builderCS.AddPaths("OptionalParameterNotPassedToBaseCall.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

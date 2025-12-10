@@ -28,6 +28,6 @@ public class PartialMethodNoImplementationTest
         builder.AddPaths("PartialMethodNoImplementation.cs").Verify();
 
     [TestMethod]
-    public void PartialMethodNoImplementation_CSharpLatest() =>
+    public void PartialMethodNoImplementation_CS_Latest() =>
         builder.AddPaths("PartialMethodNoImplementation.Latest.cs", "PartialMethodNoImplementation.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

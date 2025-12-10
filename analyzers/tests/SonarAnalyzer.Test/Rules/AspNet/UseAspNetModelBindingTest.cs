@@ -40,7 +40,7 @@ public class UseAspNetModelBindingTest
         new VerifierBuilder<UseAspNetModelBinding>().AddSnippet(string.Empty).VerifyNoIssues();
 
     [TestMethod]
-    public void UseAspNetModelBinding_AspNetCore_CSharpLatest() =>
+    public void UseAspNetModelBinding_AspNetCore_CS_Latest() =>
         builderAspNetCore.AddPaths("UseAspNetModelBinding_AspNetCore_Latest.cs").Verify();
 
     [TestMethod]

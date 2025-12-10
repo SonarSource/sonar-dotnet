@@ -28,6 +28,6 @@ public class ImplementISerializableCorrectlyTest
         builder.AddPaths("ImplementISerializableCorrectly.cs").Verify();
 
     [TestMethod]
-    public void ImplementISerializableCorrectly_CSharpLatest() =>
+    public void ImplementISerializableCorrectly_CS_Latest() =>
         builder.AddPaths("ImplementISerializableCorrectly.Latest.cs", "ImplementISerializableCorrectly.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

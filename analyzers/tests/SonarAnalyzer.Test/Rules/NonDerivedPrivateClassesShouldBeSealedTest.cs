@@ -27,6 +27,6 @@ public class NonDerivedPrivateClassesShouldBeSealedTest
         builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.cs", "NonDerivedPrivateClassesShouldBeSealed_PartialClass.cs").Verify();
 
     [TestMethod]
-    public void NonDerivedPrivateClassesShouldBeSealed_CSharpLatest() =>
+    public void NonDerivedPrivateClassesShouldBeSealed_CS_Latest() =>
          builder.AddPaths("NonDerivedPrivateClassesShouldBeSealed.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

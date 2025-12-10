@@ -28,7 +28,7 @@ public class GenericTypeParameterInOutTest
         builder.AddPaths("GenericTypeParameterInOut.cs").Verify();
 
     [TestMethod]
-    public void GenericTypeParameterInOut_CSharpLatest() =>
+    public void GenericTypeParameterInOut_CS_Latest() =>
         builder.AddPaths("GenericTypeParameterInOut.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

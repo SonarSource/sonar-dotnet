@@ -27,7 +27,7 @@ public class ConditionalsShouldStartOnNewLineTest
 #if NET
 
     [TestMethod]
-    public void ConditionalsShouldStartOnNewLine_CSharpLatest() =>
+    public void ConditionalsShouldStartOnNewLine_CS_Latest() =>
         new VerifierBuilder<ConditionalsShouldStartOnNewLine>().AddPaths("ConditionalsShouldStartOnNewLine.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
 
 #endif

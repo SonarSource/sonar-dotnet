@@ -32,7 +32,7 @@ public class MemberShouldNotHaveConflictingTransparencyAttributesTest
         builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.AssemblyLevel.cs").WithConcurrentAnalysis(false).Verify();
 
     [TestMethod]
-    public void MemberShouldNotHaveConflictingTransparencyAttributes_CSharpLatest() =>
+    public void MemberShouldNotHaveConflictingTransparencyAttributes_CS_Latest() =>
         builder.AddPaths("MemberShouldNotHaveConflictingTransparencyAttributes.Latest.cs", "MemberShouldNotHaveConflictingTransparencyAttributes.Latest.Partial.cs")
             .WithConcurrentAnalysis(false)
             .WithOptions(LanguageOptions.CSharpLatest)

@@ -28,14 +28,14 @@ public class GetTypeWithIsAssignableFromTest
         builder.AddPaths("GetTypeWithIsAssignableFrom.cs").Verify();
 
     [TestMethod]
-    public void GetTypeWithIsAssignableFrom_CSharpLatest() =>
+    public void GetTypeWithIsAssignableFrom_CS_Latest() =>
         builder.AddPaths("GetTypeWithIsAssignableFrom.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
-    public void GetTypeWithIsAssignableFrom_CSharpLatest_CodeFix() =>
+    public void GetTypeWithIsAssignableFrom_CS_Latest_CodeFix() =>
         builder.AddPaths("GetTypeWithIsAssignableFrom.Latest.cs")
             .WithCodeFix<GetTypeWithIsAssignableFromCodeFix>()
             .WithCodeFixedPaths("GetTypeWithIsAssignableFrom.Latest.Fixed.cs")

@@ -70,7 +70,7 @@ public class AssertionsShouldBeCompleteTest
             .Verify();
 
     [TestMethod]
-    public void AssertionsShouldBeComplete_FluentAssertions_CSharpLatest() =>
+    public void AssertionsShouldBeComplete_FluentAssertions_CS_Latest() =>
         fluentAssertions
         .WithOptions(LanguageOptions.CSharpLatest)
         .AddPaths("AssertionsShouldBeComplete.FluentAssertions.Latest.cs")
@@ -85,7 +85,7 @@ public class AssertionsShouldBeCompleteTest
         .Verify();
 
     [TestMethod]
-    public void AssertionsShouldBeComplete_NFluent_CSharpLatest() =>
+    public void AssertionsShouldBeComplete_NFluent_CS_Latest() =>
         nfluent
         .WithOptions(LanguageOptions.CSharpLatest)
         .AddTestReference()

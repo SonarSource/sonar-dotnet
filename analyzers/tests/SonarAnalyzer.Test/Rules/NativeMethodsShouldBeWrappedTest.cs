@@ -38,7 +38,7 @@ public class NativeMethodsShouldBeWrappedTest
     // * Press F12 on any of the partial methods
     // * Copy the result to NativeMethodsShouldBeWrapped.Latest.SourceGenerator.cs
     [TestMethod]
-    public void NativeMethodsShouldBeWrapped_CSharpLatest() =>
+    public void NativeMethodsShouldBeWrapped_CS_Latest() =>
         builder
             .AddPaths("NativeMethodsShouldBeWrapped.Latest.cs")
             .AddPaths("NativeMethodsShouldBeWrapped.Latest.SourceGenerator.cs")

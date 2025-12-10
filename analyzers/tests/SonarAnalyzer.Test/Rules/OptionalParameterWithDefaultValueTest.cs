@@ -28,7 +28,7 @@ public class OptionalParameterWithDefaultValueTest
         builder.AddPaths("OptionalParameterWithDefaultValue.cs").Verify();
 
     [TestMethod]
-    public void OptionalParameterWithDefaultValue_CSharpLatest() =>
+    public void OptionalParameterWithDefaultValue_CS_Latest() =>
         builder.AddPaths("OptionalParameterWithDefaultValue.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

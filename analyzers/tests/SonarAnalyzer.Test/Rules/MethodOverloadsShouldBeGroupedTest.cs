@@ -30,7 +30,7 @@ public class MethodOverloadsShouldBeGroupedTest
         builderCS.AddPaths("MethodOverloadsShouldBeGrouped.cs").Verify();
 
     [TestMethod]
-    public void MethodOverloadsShouldBeGrouped_CS_CSharpLatest() =>
+    public void MethodOverloadsShouldBeGrouped_CS_Latest() =>
         builderCS.AddPaths("MethodOverloadsShouldBeGrouped.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

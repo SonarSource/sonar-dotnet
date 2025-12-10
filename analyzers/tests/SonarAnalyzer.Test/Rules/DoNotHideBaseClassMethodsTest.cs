@@ -30,7 +30,7 @@ public class DoNotHideBaseClassMethodsTest
             .Verify();
 
     [TestMethod]
-    public void DoNotHideBaseClassMethods_CSharpLatest() =>
+    public void DoNotHideBaseClassMethods_CS_Latest() =>
         builder.AddPaths("DoNotHideBaseClassMethods.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithConcurrentAnalysis(false)

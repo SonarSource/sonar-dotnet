@@ -35,14 +35,14 @@ public class ForeachLoopExplicitConversionTest
             .VerifyCodeFix();
 
     [TestMethod]
-    public void ForeachLoopExplicitConversion_CSharpLatest() =>
+    public void ForeachLoopExplicitConversion_CS_Latest() =>
         builder.AddPaths("ForeachLoopExplicitConversion.Latest.cs")
             .WithAutogenerateConcurrentFiles(false)
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     [TestMethod]
-    public void ForeachLoopExplicitConversion_CSharpLatest_CodeFix() =>
+    public void ForeachLoopExplicitConversion_CS_Latest_CodeFix() =>
         builder.WithCodeFix<ForeachLoopExplicitConversionCodeFix>()
             .AddPaths("ForeachLoopExplicitConversion.Latest.cs")
             .WithCodeFixedPaths("ForeachLoopExplicitConversion.Latest.Fixed.cs")

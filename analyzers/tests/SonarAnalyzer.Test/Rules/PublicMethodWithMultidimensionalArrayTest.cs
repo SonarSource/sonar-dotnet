@@ -30,7 +30,7 @@ public class PublicMethodWithMultidimensionalArrayTest
         builderCS.AddPaths("PublicMethodWithMultidimensionalArray.cs").Verify();
 
     [TestMethod]
-    public void PublicMethodWithMultidimensionalArray_CSharpLatest() =>
+    public void PublicMethodWithMultidimensionalArray_CS_Latest() =>
         builderCS.AddPaths("PublicMethodWithMultidimensionalArray.Latest.cs", "PublicMethodWithMultidimensionalArray.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

@@ -28,7 +28,7 @@ public class ImplementIDisposableCorrectlyTest
         builder.AddPaths("ImplementIDisposableCorrectly.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
     [TestMethod]
-    public void ImplementIDisposableCorrectly_CSharpLatest() =>
+    public void ImplementIDisposableCorrectly_CS_Latest() =>
         builder.AddPaths("ImplementIDisposableCorrectly.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

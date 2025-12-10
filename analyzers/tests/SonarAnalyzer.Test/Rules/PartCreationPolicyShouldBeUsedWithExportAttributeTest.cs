@@ -38,7 +38,7 @@ public class PartCreationPolicyShouldBeUsedWithExportAttributeTest
             .Verify();
 
     [TestMethod]
-    public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharpLatest() =>
+    public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS_Latest() =>
         builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

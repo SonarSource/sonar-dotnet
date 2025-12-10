@@ -28,7 +28,7 @@ public class ArgumentSpecifiedForCallerInfoParameterTest
         builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.cs").Verify();
 
     [TestMethod]
-    public void ArgumentSpecifiedForCallerInfoParameter_CSharpLatest() =>
+    public void ArgumentSpecifiedForCallerInfoParameter_CS_Latest() =>
         builder.AddPaths("ArgumentSpecifiedForCallerInfoParameter.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

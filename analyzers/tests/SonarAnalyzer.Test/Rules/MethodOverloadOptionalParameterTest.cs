@@ -30,7 +30,7 @@ public class MethodOverloadOptionalParameterTest
         builder.AddPaths("MethodOverloadOptionalParameter.cs").AddReferences(MetadataReferenceFacade.NetStandard21).WithOptions(LanguageOptions.FromCSharp8).Verify();
 
     [TestMethod]
-    public void MethodOverloadOptionalParameter_CSharpLatest() =>
+    public void MethodOverloadOptionalParameter_CS_Latest() =>
         builder.AddPaths("MethodOverloadOptionalParameter.Latest.cs", "MethodOverloadOptionalParameter.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

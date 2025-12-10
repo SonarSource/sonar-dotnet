@@ -29,7 +29,7 @@ public class ProvideDeserializationMethodsForOptionalFieldsTest
         builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.cs").Verify();
 
     [TestMethod]
-    public void ProvideDeserializationMethodsForOptionalFields_CSharpLatest() =>
+    public void ProvideDeserializationMethodsForOptionalFields_CS_Latest() =>
         builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

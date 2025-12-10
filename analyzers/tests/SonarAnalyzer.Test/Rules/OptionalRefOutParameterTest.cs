@@ -32,7 +32,7 @@ public class OptionalRefOutParameterTest
         builder.AddPaths("OptionalRefOutParameter.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void OptionalRefOutParameter_CSharpLatest() =>
+    public void OptionalRefOutParameter_CS_Latest() =>
         builder.AddPaths("OptionalRefOutParameter.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]

@@ -32,7 +32,7 @@ public class ClassNamedExceptionTest
             .Verify();
 
     [TestMethod]
-    public void ClassNamedException_CSharpLatest() =>
+    public void ClassNamedException_CS_Latest() =>
         builderCS
             .AddPaths("ClassNamedException.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)

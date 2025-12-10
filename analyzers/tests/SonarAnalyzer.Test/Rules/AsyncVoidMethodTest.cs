@@ -31,7 +31,7 @@ public class AsyncVoidMethodTest
             .Verify();
 
     [TestMethod]
-    public void AsyncVoidMethod_CSharpLatest() =>
+    public void AsyncVoidMethod_CS_Latest() =>
         builder.AddPaths("AsyncVoidMethod.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(NuGetMetadataReference.MicrosoftVisualStudioQualityToolsUnitTestFramework)

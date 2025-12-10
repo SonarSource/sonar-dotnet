@@ -28,7 +28,7 @@ public class AsyncAwaitIdentifierTest
         builder.AddPaths("AsyncAwaitIdentifier.cs").Verify();
 
     [TestMethod]
-    public void AsyncAwaitIdentifier_CSharpLatest() =>
+    public void AsyncAwaitIdentifier_CS_Latest() =>
         builder.AddPaths("AsyncAwaitIdentifier.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

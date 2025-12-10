@@ -28,6 +28,6 @@ public class OverrideGetHashCodeOnOverridingEqualsTest
         builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.cs").Verify();
 
     [TestMethod]
-    public void OverrideGetHashCodeOnOverridingEquals_CSharpLatest() =>
+    public void OverrideGetHashCodeOnOverridingEquals_CS_Latest() =>
         builder.AddPaths("OverrideGetHashCodeOnOverridingEquals.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
 }

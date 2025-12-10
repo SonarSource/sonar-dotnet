@@ -30,7 +30,7 @@ public class CastShouldNotBeDuplicatedTest
         Builder.AddPaths("CastShouldNotBeDuplicated.cs").Verify();
 
     [TestMethod]
-    public void CastShouldNotBeDuplicated_CSharpLatest() =>
+    public void CastShouldNotBeDuplicated_CS_Latest() =>
         Builder.AddPaths("CastShouldNotBeDuplicated.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();

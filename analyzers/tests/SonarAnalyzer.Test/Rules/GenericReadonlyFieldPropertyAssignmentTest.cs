@@ -29,11 +29,11 @@ public class GenericReadonlyFieldPropertyAssignmentTest
         builder.AddPaths("GenericReadonlyFieldPropertyAssignment.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
 
     [TestMethod]
-    public void GenericReadonlyFieldPropertyAssignment_CSharpLatest() =>
+    public void GenericReadonlyFieldPropertyAssignment_CS_Latest() =>
         builder.AddPaths("GenericReadonlyFieldPropertyAssignment.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
-    public void GenericReadonlyFieldPropertyAssignment_CSharpLatest_CodeFix_Remove_Statement() =>
+    public void GenericReadonlyFieldPropertyAssignment_CS_Latest_CodeFix_Remove_Statement() =>
         codeFix.AddPaths("GenericReadonlyFieldPropertyAssignment.Latest.cs")
             .WithCodeFixedPaths("GenericReadonlyFieldPropertyAssignment.Latest.Remove.Fixed.cs")
             .WithCodeFixTitle(GenericReadonlyFieldPropertyAssignmentCodeFix.TitleRemove)

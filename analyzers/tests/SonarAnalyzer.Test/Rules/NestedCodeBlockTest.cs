@@ -32,6 +32,6 @@ public class NestedCodeBlockTest
         builder.AddPaths("NestedCodeBlock.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void NestedCodeBlock_CSharpLatest() =>
+    public void NestedCodeBlock_CS_Latest() =>
         builder.AddPaths("NestedCodeBlock.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

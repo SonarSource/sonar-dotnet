@@ -28,7 +28,7 @@ public class AbstractClassToInterfaceTest
         builder.AddPaths("AbstractClassToInterface.cs").Verify();
 
     [TestMethod]
-    public void ClassShouldNotBeAbstract_CSharpLatest() =>
+    public void ClassShouldNotBeAbstract_CS_Latest() =>
         builder
             .AddPaths("AbstractClassToInterface.Latest.cs")
             .AddPaths("AbstractClassToInterface.Latest.Partial.cs")
