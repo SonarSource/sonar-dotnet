@@ -19,39 +19,70 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 public class SyntaxNodeStrategy : Strategy
 {
     public Type Latest { get; }
+    public Type BaseType { get; }
     public IReadOnlyList<MemberDescriptor> Members { get; }
 
-    public SyntaxNodeStrategy(Type latest, IReadOnlyList<MemberDescriptor> members)
+    public SyntaxNodeStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members)
     {
         Latest = latest;
+        BaseType = baseType;
         Members = members;
     }
 
     public override string Generate(IReadOnlyDictionary<Type, Strategy> model) =>
         $$"""
+        using System;
+        using System.Collections.Immutable;
+        using Microsoft.CodeAnalysis;
+        using Microsoft.CodeAnalysis.CSharp;
+        using Microsoft.CodeAnalysis.CSharp.Syntax;
+
         namespace SonarAnalyzer.ShimLayer;
 
-        public readonly struct {{Latest.Name}}Wrapper
+        public readonly partial struct {{Latest.Name}}Wrapper: ISyntaxWrapper<{{BaseType.Name}}>
         {
-            private readonly Microsoft.CodeAnalysis.SyntaxNode _node;
-            public {{Latest.Name}}Wrapper(Microsoft.CodeAnalysis.SyntaxNode node)
-            {
-                _node = node;
-            }
-            public Microsoft.CodeAnalysis.SyntaxNode SyntaxNode => _node;
+            public const string WrappedTypeName = "{{Latest.FullName}}";
+            private static readonly Type WrappedType;
 
-            {{string.Join(Environment.NewLine + "    " + Environment.NewLine, Members.Where(x => !x.IsPassthrough).Select(x => GenerateMemberWrapper(x.Member, model)))}}
-            {{string.Join(Environment.NewLine + "    " + Environment.NewLine, Members.Where(x => x.IsPassthrough).Select(x => GeneratePassThrough(x.Member, model)))}}
+            private readonly {{BaseType.Name}} node;
+
+            static {{Latest.Name}}Wrapper()
+            {
+                WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof({{Latest.Name}}Wrapper));
+        {{string.Join("\n", Members.Where(x => !x.IsPassthrough).Select(x => MemberAccessorInitialization(x.Member, model)))}}
+            }
+
+            private {{Latest.Name}}Wrapper({{BaseType.Name}} node) =>
+                this.node = node;
+
+            [Obsolete]
+            public {{BaseType.Name}} SyntaxNode => this.node;
+
+        {{string.Join("\n", Members.Select(x => MemberDeclaration(x, model)))}}
         }
         """;
 
-    private string GenerateMemberWrapper(MemberInfo member, IReadOnlyDictionary<Type, Strategy> model)
+    private string MemberAccessorInitialization(MemberInfo member, IReadOnlyDictionary<Type, Strategy> model)
     {
-        return $$"""public Wrap {{member.Name}} { get; set; }""";
+        if (member is PropertyInfo pi)
+        {
+            return $"""
+                        {member.Name}Accessor = LightupHelpers.CreateSyntaxPropertyAccessor<{BaseType.Name}, {pi.PropertyType.Name}>(WrappedType, nameof({member.Name}));
+                """;
+        }
+        return null;
     }
 
-    private string GeneratePassThrough(MemberInfo member, IReadOnlyDictionary<Type, Strategy> model)
-    {
-        return $$"""public PassThrough {{member.Name}} { get; set; }""";
-    }
+    private string MemberDeclaration(MemberDescriptor member, IReadOnlyDictionary<Type, Strategy> model) =>
+        member switch
+        {
+            { IsPassthrough: true, Member: PropertyInfo pi } => $"""
+                    public {pi.PropertyType.Name} {member.Member.Name} => this.node.{member.Member.Name};
+                """,
+            { IsPassthrough: false, Member: PropertyInfo pi } => $"""
+                    private static readonly Func<{BaseType.Name}, {pi.PropertyType.Name}> {member.Member.Name}Accessor;
+                    public {pi.PropertyType.Name} {member.Member.Name} => {member.Member.Name}Accessor(this.node);
+                """,
+            _ => null,
+        };
 }

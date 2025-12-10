@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Model.Test;
@@ -85,11 +86,24 @@ public class ModelBuilderTest
     }
 
     [TestMethod]
-    public void Build_SyntaxNode_SwitchArm()
+    public void Build_SyntaxNode_RecordDeclaration()
     {
-        var type = typeof(SwitchExpressionArmSyntax);
+        var type = typeof(RecordDeclarationSyntax);
+        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], [
+            new(typeof(TypeDeclarationSyntax), []),
+            new(typeof(BaseTypeDeclarationSyntax), []),
+            new(typeof(MemberDeclarationSyntax), []),
+            new(typeof(CSharpSyntaxNode), []),
+            new(typeof(SyntaxNode), [])]);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>().Which.BaseType.FullName.Should().Be(typeof(TypeDeclarationSyntax).FullName);
+    }
+
+    [TestMethod]
+    public void Build_SyntaxNode_NoCommonBaseType()
+    {
+        var type = typeof(RecordDeclarationSyntax);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>();
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>().Which.BaseType.Should().BeNull();
     }
 
     [TestMethod]

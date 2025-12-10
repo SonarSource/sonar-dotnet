@@ -19,7 +19,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 
 [TestClass]
-public class WrapperGeneratorTests
+public class WrapperGeneratorTest
 {
     [TestMethod]
     public void SkipStrategy()
@@ -34,9 +34,10 @@ public class WrapperGeneratorTests
         var sut = new WrapperGenerator();
         var syntaxNodeStrategy = new SyntaxNodeStrategy(
             typeof(RecordDeclarationSyntax),
+            typeof(TypeDeclarationSyntax),
             []);
         var result = sut.GenerateWrapper(typeof(RecordDeclarationSyntax), new Dictionary<Type, Strategy> { { typeof(RecordDeclarationSyntax), syntaxNodeStrategy } });
         result.Name.Should().Be("RecordDeclarationSyntaxWrapper.g.cs");
-        result.Content.Should().StartWith("namespace SonarAnalyzer.ShimLayer;");
+        result.Content.Should().StartWith("using System;");
     }
 }

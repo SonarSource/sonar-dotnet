@@ -17,7 +17,7 @@
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 
 [TestClass]
-public class SkipStrategyTests
+public class SkipStrategyTest
 {
     [TestMethod]
     public void SkipStrategy()

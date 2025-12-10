@@ -23,10 +23,10 @@ public static class ModelBuilder
     public static Dictionary<Type, Strategy> Build(TypeDescriptor[] latest, TypeDescriptor[] baseline)
     {
         var baselineMap = baseline.ToDictionary(x => x.Type.FullName, x => x);
-        return latest.ToDictionary(x => x.Type, x => CreateStrategy(x, baselineMap.TryGetValue(x.Type.FullName, out var baselineType) ? baselineType : null));
+        return latest.ToDictionary(x => x.Type, x => CreateStrategy(x, baselineMap.TryGetValue(x.Type.FullName, out var baselineType) ? baselineType : null, baselineMap));
     }
 
-    private static Strategy CreateStrategy(TypeDescriptor latest, TypeDescriptor baseline)
+    private static Strategy CreateStrategy(TypeDescriptor latest, TypeDescriptor baseline, IReadOnlyDictionary<string, TypeDescriptor> baselineMap)
     {
         if (IsSkipped(latest.Type))
         {
@@ -41,7 +41,7 @@ public static class ModelBuilder
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.SyntaxNode"))
         {
-            return new SyntaxNodeStrategy(latest.Type, CreateMembers(latest, baseline));
+            return new SyntaxNodeStrategy(latest.Type, FindCommonBaseType(latest, baselineMap), CreateMembers(latest, baseline));
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
         {
@@ -52,6 +52,20 @@ public static class ModelBuilder
         {
             return null;    // ToDo: Throw NotSupportedException, there should be nothing left after explicitly handling all known cases
         }
+    }
+
+    private static Type FindCommonBaseType(TypeDescriptor latest, IReadOnlyDictionary<string, TypeDescriptor> baselineMap)
+    {
+        var current = latest.Type;
+        while (current is not null)
+        {
+            if (baselineMap.ContainsKey(current.FullName))
+            {
+                return current;
+            }
+            current = current.BaseType;
+        }
+        return null;
     }
 
     private static bool IsAssignableTo(Type type, string fullName)   // We can't use typeof(Xxx).IsAssignableFrom(type) because it's loaded into a different metadata context
