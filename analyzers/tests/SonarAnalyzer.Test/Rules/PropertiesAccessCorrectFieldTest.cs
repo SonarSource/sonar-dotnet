@@ -34,24 +34,17 @@ public class PropertiesAccessCorrectFieldTest
     public void PropertiesAccessCorrectField_CS() =>
         builderCS.AddPaths("PropertiesAccessCorrectField.cs").AddReferences(AdditionalReferences).Verify();
 
-#if NET
     [TestMethod]
     public void PropertiesAccessCorrectField_CS_Latest() =>
-        builderCS
-            .AddPaths("PropertiesAccessCorrectField.Latest.cs", "PropertiesAccessCorrectField.Partial.Latest.cs")
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .Verify();
-#else
+        builderCS.AddPaths("PropertiesAccessCorrectField.Latest.cs", "PropertiesAccessCorrectField.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void PropertiesAccessCorrectField_CS_NetFramework() =>
-        builderCS.AddPaths("PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).VerifyNoIssues();
+        builderCS.AddPaths("PropertiesAccessCorrectField.NetFramework.cs").AddReferences(AdditionalReferences).WithNetFrameworkOnly().VerifyNoIssues();
 
     [TestMethod]
     public void PropertiesAccessCorrectField_VB_NetFramework() =>
-        builderVB.AddPaths("PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).VerifyNoIssues();
-
-#endif
+        builderVB.AddPaths("PropertiesAccessCorrectField.NetFramework.vb").AddReferences(AdditionalReferences).WithNetFrameworkOnly().VerifyNoIssues();
 
     [TestMethod]
     public void PropertiesAccessCorrectField_VB() =>

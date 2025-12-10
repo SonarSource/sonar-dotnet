@@ -34,9 +34,5 @@ public class PropertyGetterWithThrowTest
 
     [TestMethod]
     public void PropertyGetterWithThrow_CS_Latest() =>
-        builderCS
-            .AddPaths("PropertyGetterWithThrow.Latest.cs")
-            .AddPaths("PropertyGetterWithThrow.Latest.Partial.cs")
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .Verify();
+        builderCS.AddPaths("PropertyGetterWithThrow.Latest.cs", "PropertyGetterWithThrow.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

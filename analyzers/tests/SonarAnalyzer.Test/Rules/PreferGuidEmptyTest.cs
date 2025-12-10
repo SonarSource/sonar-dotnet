@@ -17,32 +17,27 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PreferGuidEmptyTest
 {
-    [TestClass]
-    public class PreferGuidEmptyTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PreferGuidEmpty>().WithOptions(LanguageOptions.FromCSharp8);
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PreferGuidEmpty>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PreferGuidEmpty>().WithOptions(LanguageOptions.FromCSharp8);
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.PreferGuidEmpty>();
 
-        [TestMethod]
-        public void PreferGuidEmpty_CS() =>
-            builderCS.AddPaths("PreferGuidEmpty.cs").Verify();
+    [TestMethod]
+    public void PreferGuidEmpty_CS() =>
+        builderCS.AddPaths("PreferGuidEmpty.cs").Verify();
 
-        [TestMethod]
-        public void PreferGuidEmpty_CSharp9() =>
-            builderCS.WithOptions(LanguageOptions.FromCSharp9).AddPaths("PreferGuidEmpty.CSharp9.cs").Verify();
+    [TestMethod]
+    public void PreferGuidEmpty_CSharpLatest() =>
+        builderCS.AddPaths("PreferGuidEmpty.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void PreferGuidEmpty_VB() =>
-            builderVB.AddPaths("PreferGuidEmpty.vb").Verify();
+    [TestMethod]
+    public void PreferGuidEmpty_VB() =>
+        builderVB.AddPaths("PreferGuidEmpty.vb").Verify();
 
-        [TestMethod]
-        public void PreferGuidEmpty_CodeFix_CS() =>
-            builderCS
-            .AddPaths("PreferGuidEmpty.cs")
-            .WithCodeFix<CS.PreferGuidEmptyCodeFix>()
-            .WithCodeFixedPaths("PreferGuidEmpty.Fixed.cs")
-            .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void PreferGuidEmpty_CodeFix_CS() =>
+        builderCS.AddPaths("PreferGuidEmpty.cs").WithCodeFix<CS.PreferGuidEmptyCodeFix>().WithCodeFixedPaths("PreferGuidEmpty.Fixed.cs").VerifyCodeFix();
 }

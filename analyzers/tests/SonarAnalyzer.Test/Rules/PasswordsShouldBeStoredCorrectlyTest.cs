@@ -127,41 +127,41 @@ public class PasswordsShouldBeStoredCorrectlyTest
         Builder
             .AddReferences(NuGetMetadataReference.BouncyCastle())
             .AddSnippet("""
-            using Org.BouncyCastle.Crypto.Generators;
+                using Org.BouncyCastle.Crypto.Generators;
 
-            class Testcases
-            {
-                const int COST = 12;
-
-                void Method(char[] cs, byte[] bs)
+                class Testcases
                 {
-                    OpenBsdBCrypt.Generate(cs, bs, 4);                          // Noncompliant {{Use a cost factor of at least 12 here.}}
-                    OpenBsdBCrypt.Generate(cost: 4, password: cs, salt: bs);    // Noncompliant
-                    OpenBsdBCrypt.Generate("", cs, bs, 4);                      // Noncompliant
-                    //                                 ^
-                    OpenBsdBCrypt.Generate(
-                        cost: 4,                                                // Noncompliant
-                    //  ^^^^^^^
-                        version: "",
-                        password: cs,
-                        salt: bs);
+                    const int COST = 12;
 
-                    OpenBsdBCrypt.Generate(cs, bs, COST);                       // Compliant
-                    OpenBsdBCrypt.Generate(cs, bs, 42);                         // Compliant
-                    OpenBsdBCrypt.Generate("", cs, bs, COST);                   // Compliant
-                    OpenBsdBCrypt.Generate("", cs, bs, 42);                     // Compliant
-                    OpenBsdBCrypt.Generate(
-                        cost: 42,                                                // Compliant
-                        version: "",
-                        password: cs,
-                        salt: bs);
+                    void Method(char[] cs, byte[] bs)
+                    {
+                        OpenBsdBCrypt.Generate(cs, bs, 4);                          // Noncompliant {{Use a cost factor of at least 12 here.}}
+                        OpenBsdBCrypt.Generate(cost: 4, password: cs, salt: bs);    // Noncompliant
+                        OpenBsdBCrypt.Generate("", cs, bs, 4);                      // Noncompliant
+                        //                                 ^
+                        OpenBsdBCrypt.Generate(
+                            cost: 4,                                                // Noncompliant
+                        //  ^^^^^^^
+                            version: "",
+                            password: cs,
+                            salt: bs);
 
-                    BCrypt.Generate(bs, bs, 4);                                  // Noncompliant
-                    //                      ^
-                    BCrypt.Generate(bs, bs, COST);                               // Compliant
+                        OpenBsdBCrypt.Generate(cs, bs, COST);                       // Compliant
+                        OpenBsdBCrypt.Generate(cs, bs, 42);                         // Compliant
+                        OpenBsdBCrypt.Generate("", cs, bs, COST);                   // Compliant
+                        OpenBsdBCrypt.Generate("", cs, bs, 42);                     // Compliant
+                        OpenBsdBCrypt.Generate(
+                            cost: 42,                                                // Compliant
+                            version: "",
+                            password: cs,
+                            salt: bs);
+
+                        BCrypt.Generate(bs, bs, 4);                                  // Noncompliant
+                        //                      ^
+                        BCrypt.Generate(bs, bs, COST);                               // Compliant
+                    }
                 }
-            }
-            """)
+                """)
             .Verify();
 
     [TestMethod]
@@ -169,25 +169,25 @@ public class PasswordsShouldBeStoredCorrectlyTest
         Builder
             .AddReferences(NuGetMetadataReference.BouncyCastle())
             .AddSnippet("""
-            using Org.BouncyCastle.Crypto;
-            using Org.BouncyCastle.Crypto.Generators;
+                using Org.BouncyCastle.Crypto;
+                using Org.BouncyCastle.Crypto.Generators;
 
-            class Testcases
-            {
-                const int ITERATIONS = 100_000;
-
-                void Method(byte[] bs, PbeParametersGenerator baseGen, Pkcs5S2ParametersGenerator gen, int iterations)
+                class Testcases
                 {
-                    baseGen.Init(bs, bs, 42);                                       // Noncompliant {{Use at least 100,000 iterations here.}}
-                //                       ^^
-                    gen.Init(iterationCount: 42, password: bs, salt: bs);           // Noncompliant
-                //           ^^^^^^^^^^^^^^^^^^
+                    const int ITERATIONS = 100_000;
 
-                    baseGen.Init(bs, bs, ITERATIONS);                               // Compliant
-                    gen.Init(iterationCount: iterations, password: bs, salt: bs);   // Compliant
+                    void Method(byte[] bs, PbeParametersGenerator baseGen, Pkcs5S2ParametersGenerator gen, int iterations)
+                    {
+                        baseGen.Init(bs, bs, 42);                                       // Noncompliant {{Use at least 100,000 iterations here.}}
+                    //                       ^^
+                        gen.Init(iterationCount: 42, password: bs, salt: bs);           // Noncompliant
+                    //           ^^^^^^^^^^^^^^^^^^
+
+                        baseGen.Init(bs, bs, ITERATIONS);                               // Compliant
+                        gen.Init(iterationCount: iterations, password: bs, salt: bs);   // Compliant
+                    }
                 }
-            }
-            """)
+                """)
             .Verify();
 
     [TestMethod]
@@ -195,27 +195,27 @@ public class PasswordsShouldBeStoredCorrectlyTest
         Builder
             .AddReferences(NuGetMetadataReference.BouncyCastle())
             .AddSnippet("""
-            using Org.BouncyCastle.Crypto.Generators;
+                using Org.BouncyCastle.Crypto.Generators;
 
-            class Testcases
-            {
-                void Method(byte[] bs, int p)
+                class Testcases
                 {
-                    SCrypt.Generate(bs, bs, 1 << 12, 8, p, 32);         // Compliant
+                    void Method(byte[] bs, int p)
+                    {
+                        SCrypt.Generate(bs, bs, 1 << 12, 8, p, 32);         // Compliant
 
-                    SCrypt.Generate(bs, bs, 1 << 11, 42, p, 42);        // Noncompliant {{Use a cost factor of at least 2 ^ 12 for N here.}}
-                    //                      ^^^^^^^
-                    SCrypt.Generate(bs, bs, 1 << 12, 7, p, 42);         // Noncompliant {{Use a memory factor of at least 8 for r here.}}
-                    //                               ^
-                    SCrypt.Generate(bs, bs, 1 << 12, 42, p, 31);        // Noncompliant {{Use an output length of at least 32 for dkLen here.}}
-                    //                                      ^^
+                        SCrypt.Generate(bs, bs, 1 << 11, 42, p, 42);        // Noncompliant {{Use a cost factor of at least 2 ^ 12 for N here.}}
+                        //                      ^^^^^^^
+                        SCrypt.Generate(bs, bs, 1 << 12, 7, p, 42);         // Noncompliant {{Use a memory factor of at least 8 for r here.}}
+                        //                               ^
+                        SCrypt.Generate(bs, bs, 1 << 12, 42, p, 31);        // Noncompliant {{Use an output length of at least 32 for dkLen here.}}
+                        //                                      ^^
 
-                    SCrypt.Generate(bs, bs, 1 << 11, 7, p, 31);
-                    //                      ^^^^^^^ {{Use a cost factor of at least 2 ^ 12 for N here.}}
-                    //                               ^ @-1 {{Use a memory factor of at least 8 for r here.}}
-                    //                                     ^^ @-2 {{Use an output length of at least 32 for dkLen here.}}
+                        SCrypt.Generate(bs, bs, 1 << 11, 7, p, 31);
+                        //                      ^^^^^^^ {{Use a cost factor of at least 2 ^ 12 for N here.}}
+                        //                               ^ @-1 {{Use a memory factor of at least 8 for r here.}}
+                        //                                     ^^ @-2 {{Use an output length of at least 32 for dkLen here.}}
+                    }
                 }
-            }
-            """)
+                """)
             .Verify();
 }

@@ -17,25 +17,22 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ProvideDeserializationMethodsForOptionalFieldsTest
 {
-    [TestClass]
-    public class ProvideDeserializationMethodsForOptionalFieldsTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ProvideDeserializationMethodsForOptionalFields>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ProvideDeserializationMethodsForOptionalFields>();
 
-        [TestMethod]
-        public void ProvideDeserializationMethodsForOptionalFields_CS() =>
-            builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.cs").Verify();
+    [TestMethod]
+    public void ProvideDeserializationMethodsForOptionalFields_CS() =>
+        builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.cs").Verify();
 
-        [TestMethod]
-        public void ProvideDeserializationMethodsForOptionalFields_CSharp9() =>
-            builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void ProvideDeserializationMethodsForOptionalFields_CSharpLatest() =>
+        builderCS.AddPaths("ProvideDeserializationMethodsForOptionalFields.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void ProvideDeserializationMethodsForOptionalFields_VB() =>
-            new VerifierBuilder<VB.ProvideDeserializationMethodsForOptionalFields>().AddPaths("ProvideDeserializationMethodsForOptionalFields.vb").Verify();
-    }
+    [TestMethod]
+    public void ProvideDeserializationMethodsForOptionalFields_VB() =>
+        new VerifierBuilder<VB.ProvideDeserializationMethodsForOptionalFields>().AddPaths("ProvideDeserializationMethodsForOptionalFields.vb").Verify();
 }

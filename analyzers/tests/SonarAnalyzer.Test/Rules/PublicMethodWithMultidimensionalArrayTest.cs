@@ -27,23 +27,13 @@ public class PublicMethodWithMultidimensionalArrayTest
 
     [TestMethod]
     public void PublicMethodWithMultidimensionalArray_CS() =>
-        builderCS.AddPaths("PublicMethodWithMultidimensionalArray.cs")
-            .Verify();
+        builderCS.AddPaths("PublicMethodWithMultidimensionalArray.cs").Verify();
 
     [TestMethod]
-    public void PublicMethodWithMultidimensionalArray_CSharp11() =>
-        builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp11.cs")
-            .WithOptions(LanguageOptions.FromCSharp11)
-            .Verify();
-
-    [TestMethod]
-    public void PublicMethodWithMultidimensionalArray_CSharp12() =>
-        builderCS.AddPaths("PublicMethodWithMultidimensionalArray.CSharp12.cs")
-            .WithOptions(LanguageOptions.FromCSharp12)
-            .Verify();
+    public void PublicMethodWithMultidimensionalArray_CSharpLatest() =>
+        builderCS.AddPaths("PublicMethodWithMultidimensionalArray.Latest.cs", "PublicMethodWithMultidimensionalArray.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void PublicMethodWithMultidimensionalArray_VB() =>
-        builderVB.AddPaths("PublicMethodWithMultidimensionalArray.vb")
-            .Verify();
+        builderVB.AddPaths("PublicMethodWithMultidimensionalArray.vb").Verify();
 }

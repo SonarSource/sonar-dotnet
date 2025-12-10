@@ -16,23 +16,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PartialMethodNoImplementationTest
 {
-    [TestClass]
-    public class PartialMethodNoImplementationTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<PartialMethodNoImplementation>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<PartialMethodNoImplementation>();
 
-        [TestMethod]
-        public void PartialMethodNoImplementation() =>
-            builder.AddPaths("PartialMethodNoImplementation.cs").Verify();
+    [TestMethod]
+    public void PartialMethodNoImplementation() =>
+        builder.AddPaths("PartialMethodNoImplementation.cs").Verify();
 
-        [TestMethod]
-        public void PartialMethodNoImplementation_CSharp9() =>
-            builder.AddPaths("PartialMethodNoImplementation.CSharp9.Part1.cs", "PartialMethodNoImplementation.CSharp9.Part2.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void PartialMethodNoImplementation_CSharp10() =>
-            builder.AddPaths("PartialMethodNoImplementation.CSharp10.Part1.cs", "PartialMethodNoImplementation.CSharp10.Part2.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-    }
+    [TestMethod]
+    public void PartialMethodNoImplementation_CSharpLatest() =>
+        builder.AddPaths("PartialMethodNoImplementation.Latest.cs", "PartialMethodNoImplementation.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

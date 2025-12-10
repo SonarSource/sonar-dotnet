@@ -107,3 +107,40 @@ namespace CSharp13
         public partial int Y { get; set; }
     }
 }
+
+class FieldKeyword
+{
+    private int y;
+    public int Y => field; // FN https://sonarsource.atlassian.net/browse/NET-2812
+
+    public int Field => field;
+
+    class FieldKeywordEscaped
+    {
+        public int field;
+        public int something;
+        public int Field => @field;
+        public int Something => @field; // FN https://sonarsource.atlassian.net/browse/NET-2812
+        public int Other => @field;
+    }
+}
+
+class NullConditonalAssignment
+{
+    public class Sample
+    {
+        public int Value { get; set; }
+    }
+
+    private Sample correctField;
+    private Sample wrongField;
+
+    public Sample CorrectField
+    {
+        get;    // Noncompliant
+        set     // Noncompliant
+        {
+            wrongField?.Value = value.Value;
+        }
+    }
+}

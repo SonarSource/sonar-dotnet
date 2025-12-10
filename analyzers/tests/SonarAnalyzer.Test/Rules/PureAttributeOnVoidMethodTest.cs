@@ -17,37 +17,26 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PureAttributeOnVoidMethodTest
 {
-    [TestClass]
-    public class PureAttributeOnVoidMethodTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PureAttributeOnVoidMethod>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PureAttributeOnVoidMethod>();
 
-        [TestMethod]
-        public void PureAttributeOnVoidMethod_CS() =>
-            builderCS.AddPaths("PureAttributeOnVoidMethod.cs").Verify();
+    [TestMethod]
+    public void PureAttributeOnVoidMethod_CS() =>
+        builderCS.AddPaths("PureAttributeOnVoidMethod.cs").Verify();
 
-        [TestMethod]
-        public void PureAttributeOnVoidMethod_CSharp8() =>
-            builderCS.AddPaths("PureAttributeOnVoidMethod.CSharp8.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void PureAttributeOnVoidMethod_CSharpLatest() =>
+        builderCS.AddPaths("PureAttributeOnVoidMethod.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void PureAttributeOnVoidMethod_CSharp9() =>
-            builderCS.AddPaths("PureAttributeOnVoidMethod.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void PureAttributeOnVoidMethod_TopLevelStatements() =>
+        builderCS.AddPaths("PureAttributeOnVoidMethod.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void PureAttributeOnVoidMethod_CSharp11() =>
-            builderCS.AddPaths("PureAttributeOnVoidMethod.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void PureAttributeOnVoidMethod_VB() =>
-            new VerifierBuilder<VB.PureAttributeOnVoidMethod>().AddPaths("PureAttributeOnVoidMethod.vb").Verify();
-    }
+    [TestMethod]
+    public void PureAttributeOnVoidMethod_VB() =>
+        new VerifierBuilder<VB.PureAttributeOnVoidMethod>().AddPaths("PureAttributeOnVoidMethod.vb").Verify();
 }

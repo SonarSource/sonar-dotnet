@@ -1,11 +1,30 @@
-﻿using System.Diagnostics.Contracts;
+﻿using System;
+using System.Diagnostics.Contracts;
 
-[Pure]
-int Compliant(int age) => age;
-
-[Pure] // Noncompliant {{Remove the 'Pure' attribute or change the method to return a value.}}
-void Noncompliant()
+namespace Tests.TestCases
 {
+    public class PureAttributes
+    {
+        private int age;
+
+        [Pure] // Noncompliant
+        void WithExplicitInParamater(in int age)
+        {
+            this.age = age;
+        }
+    }
+}
+
+interface IInterface
+{
+    [Pure] // Noncompliant {{Remove the 'Pure' attribute or change the method to return a value.}}
+    public static virtual void DoSomething1(int a) { }
+
+    [Pure] // Noncompliant {{Remove the 'Pure' attribute or change the method to return a value.}}
+    public static abstract void DoSomething2(int a);
+
+    [Pure]
+    public static virtual int DoSomething3(int a) { return 5; }
 }
 
 record Record
@@ -65,5 +84,17 @@ public class Repro_5117
         void LocalFunctionOther()
         {
         }
+    }
+}
+
+public static class Extensions
+{
+    extension (string s)
+    {
+        [Pure] // Noncompliant
+        public void NonCompliant() { }  
+
+        [Pure]
+        public string Compliant() => "42";
     }
 }

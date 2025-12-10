@@ -29,14 +29,8 @@ public class PrivateFieldUsedAsLocalVariableTest
             .Verify();
 
     [TestMethod]
-    public void PrivateFieldUsedAsLocalVariable_CSharp9() =>
-        builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void PrivateFieldUsedAsLocalVariable_CSharp10() =>
-        builder.AddPaths("PrivateFieldUsedAsLocalVariable.CSharp10.cs")
-            .WithOptions(LanguageOptions.FromCSharp10)
+    public void PrivateFieldUsedAsLocalVariable_CSharpLatest() =>
+        builder.AddPaths("PrivateFieldUsedAsLocalVariable.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 }

@@ -1,4 +1,21 @@
-﻿// https://github.com/SonarSource/sonar-dotnet/issues/8083
+﻿namespace Tests.Diagnostics
+{
+    public interface IFace
+    {
+        static virtual void Method1(int[,] a) { } //Noncompliant
+
+        static abstract void Method2(int[,] a); //Noncompliant
+    }
+
+    public class PublicMethodWithMultidimensionalArray : IFace
+    {
+        public static void Method1(int[,] a) { } // Compliant
+
+        public static void Method2(int[,] a) { } // Compliant
+    }
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/8083
 namespace Repro_8083
 {
     using IntMatrix = int[][];
@@ -39,4 +56,20 @@ namespace Repro_8100
     {
         int arrayItem;
     }
+}
+
+public static class Extensions
+{
+    extension(string s)
+    {
+        public void Noncompliant(int[][] matrix) // Noncompliant
+        {
+
+        }
+    }
+}
+
+public partial class PartialConstructor
+{
+    public partial PartialConstructor(int[][] matrix);
 }

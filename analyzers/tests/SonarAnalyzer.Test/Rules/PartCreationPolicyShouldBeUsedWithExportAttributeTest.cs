@@ -17,41 +17,33 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PartCreationPolicyShouldBeUsedWithExportAttributeTest
 {
-    [TestClass]
-    public class PartCreationPolicyShouldBeUsedWithExportAttributeTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PartCreationPolicyShouldBeUsedWithExportAttribute>()
-                .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.PartCreationPolicyShouldBeUsedWithExportAttribute>()
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition);
 
-        [TestMethod]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
-            builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.cs").WithConcurrentAnalysis(false).Verify();
+    [TestMethod]
+    public void PartCreationPolicyShouldBeUsedWithExportAttribute_CS() =>
+        builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.cs").WithConcurrentAnalysis(false).Verify();
 
-        [TestMethod]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
-            builderCS.AddSnippet(@"
-[UnresolvedAttribute] // Error [CS0246, CS0246]
-class Bar { }")
-                .Verify();
+    [TestMethod]
+    public void PartCreationPolicyShouldBeUsedWithExportAttribute_UnresolvedSymbol_CS() =>
+        builderCS.AddSnippet("""
+            [UnresolvedAttribute] // Error [CS0246, CS0246]
+            class Bar { }
+            """)
+            .Verify();
 
-        [TestMethod]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp9() =>
-            builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharpLatest() =>
+        builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute_CSharp12() =>
-            builderCS.AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.CSharp12.cs")
-                .WithOptions(LanguageOptions.FromCSharp12)
-                .Verify();
-
-        [TestMethod]
-        public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
-            new VerifierBuilder<VB.PartCreationPolicyShouldBeUsedWithExportAttribute>().AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.vb")
-                .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
-                .Verify();
-    }
+    [TestMethod]
+    public void PartCreationPolicyShouldBeUsedWithExportAttribute_VB() =>
+        new VerifierBuilder<VB.PartCreationPolicyShouldBeUsedWithExportAttribute>().AddPaths("PartCreationPolicyShouldBeUsedWithExportAttribute.vb")
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .Verify();
 }

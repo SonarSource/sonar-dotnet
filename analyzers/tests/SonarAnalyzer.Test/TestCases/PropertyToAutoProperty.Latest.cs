@@ -106,3 +106,20 @@ namespace CSharp13
         public partial int this[int index] { get; set; }
     }
 }
+
+public class FieldKeyword
+{
+    public string Prop // FN https://sonarsource.atlassian.net/browse/NET-2813
+    {
+        get { return field; }
+        set { field = value; }
+    }
+}
+
+public static class Extensions
+{
+    extension(string s)
+    {
+        public int Length => s.Length;
+    }
+}
