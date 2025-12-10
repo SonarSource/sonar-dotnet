@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -63,6 +64,8 @@ namespace Tests.TestCases
         }
 
         private static void InitColumns() { }
+
+        static event EventHandler Event;    // FN NET-2783
     }
 
     struct StaticFieldInGenericStruct<T, U>

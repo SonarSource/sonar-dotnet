@@ -81,3 +81,23 @@ namespace CSharp13
         public static partial Dictionary<Type, object> Instances2 { get; } // Noncompliant
     }
 }
+
+partial class PartialClass<T>
+{
+    static partial event EventHandler PartialEvent { add { } remove { } }   // FN NET-2783
+}
+
+class ExtensionProperties<T> { }
+
+static class Extensions
+{
+    extension<T>(ExtensionProperties<T>)
+    {
+        static int Property => 0;   // FN NET-2785
+    }
+}
+
+class FieldKeyword<T>
+{
+    static int Property { get => field; set => field = value; } // Noncompliant
+}

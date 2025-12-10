@@ -29,5 +29,5 @@ public class StaticFieldInGenericClassTest
 
     [TestMethod]
     public void StaticFieldInGenericClass_Latest() =>
-        builder.AddPaths("StaticFieldInGenericClass.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("StaticFieldInGenericClass.Latest.cs", "StaticFieldInGenericClass.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

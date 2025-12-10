@@ -17,25 +17,30 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ReversedOperatorsTest
 {
-    [TestClass]
-    public class ReversedOperatorsTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ReversedOperators>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ReversedOperators>();
 
-        [TestMethod]
-        public void ReversedOperators_CS() =>
-            builderCS.AddPaths("ReversedOperators.cs").Verify();
+    [TestMethod]
+    public void ReversedOperators_CS() =>
+        builderCS.AddPaths("ReversedOperators.cs").Verify();
 
-        [TestMethod]
-        public void ReversedOperators_CSharp9() =>
-            builderCS.AddPaths("ReversedOperators.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void ReversedOperators_CS_Latest() =>
+        builderCS.AddPaths("ReversedOperators.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void ReversedOperators_VB() =>
-            new VerifierBuilder<VB.ReversedOperators>().AddPaths("ReversedOperators.vb").Verify();
-    }
+    [TestMethod]
+    public void ReversedOperators_TopLevelStatements() =>
+        builderCS.AddPaths("ReversedOperators.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
+
+    [TestMethod]
+    public void ReversedOperators_VB() =>
+        new VerifierBuilder<VB.ReversedOperators>().AddPaths("ReversedOperators.vb").Verify();
 }

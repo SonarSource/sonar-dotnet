@@ -1,8 +1,13 @@
-﻿int x = 42;
-
-  (x, var y) = (x, 42);
-// ^                    Noncompliant
-//              ^       Secondary@-1
+﻿class CSharp8
+{
+    void CoalescingAssignment()
+    {
+        int? value = null;
+        value ??= value;
+//      ^^^^^           Noncompliant
+//                ^^^^^ Secondary@-1
+    }
+}
 
 class WithPrimaryConstructorParams(int unused, int usedInInlineInitialization, int usedInMethod)
 {
@@ -39,20 +44,45 @@ class WithInlineArrays
 
 partial class PartialProperties
 {
-    public partial bool IsTrue
-    {
-        get => IsTrue;
-        set => IsTrue = value;
-    }
-}
-
-partial class PartialProperties
-{
     public partial bool IsTrue { get; set; }
 
     void MyMethod()
     {
         IsTrue = IsTrue; // Noncompliant
                          // Secondary@-1
+    }
+}
+
+class CSharp14
+{
+    int field;
+
+    void NullConditionalAssignment(CSharp14 sample)
+    {
+        sample?.field = sample.field;   // FN NET-2779
+        this?.field = this.field;       // FN NET-2779
+    }
+
+    void ExtensionProperties(CSharp14 sample)
+    {
+        this.Property = this.Property;      // Noncompliant
+                                            // Secondary@-1
+        sample.Property = sample.Property;  // Noncompliant
+                                            // Secondary@-1
+        sample.Property = this.Property;    // Compliant
+        this.Property = sample.Property;    // Compliant
+    }
+}
+
+static class Extensions
+{
+    extension(CSharp14 sample)
+    {
+        public int Property { get => 0; set { } }
+
+        void ExtensionMethod()
+        {
+            sample.Property = sample.Property;  // Noncompliant
+        }                                       // Secondary@-1
     }
 }

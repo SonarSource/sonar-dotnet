@@ -8,23 +8,12 @@ namespace Tests.TestCases
 {
     class SelfAssignment
     {
-        public SelfAssignment()
-        {
-
-        }
-
-        public SelfAssignment(int Prop1)
-        {
-            int? value = null;
-
-            value ??= value;
-//          ^^^^^           Noncompliant
-//                    ^^^^^ Secondary@-1
-        }
+        public SelfAssignment() { }
+        public SelfAssignment(int Prop1) { }
 
         public int Prop1 { get; set; }
 
-        public void Test()
+        public void Test(SelfAssignment other)
         {
             var Prop1 = 5;
             Prop1 = Prop1;
@@ -46,6 +35,14 @@ namespace Tests.TestCases
             {
                 Prop1 = Prop1
             };
+
+            other.Prop1 = other.Prop1;
+//          ^^^^^^^^^^^                    Noncompliant
+//                        ^^^^^^^^^^^      Secondary@-1
+            other.Prop1 = Prop1;        // Compliant
+            other.Prop1 = this.Prop1;   // Compliant
+            Prop1 = other.Prop1;        // Compliant
+            this.Prop1 = other.Prop1;   // Compliant
         }
     }
 
@@ -57,11 +54,13 @@ namespace Tests.TestCases
 
         public Sample(string first)
         {
-            this.First = first;    // Compliant
-            Second = Second;       // Noncompliant
-                                   // Secondary @-1
-            this.Second = Second;  // False Negative
-            Second = this.Second;  // False Negative
+            this.First = first;         // Compliant
+            Second = Second;            // Noncompliant
+                                        // Secondary@-1
+            this.Second = this.Second;  // Noncompliant
+                                        // Secondary@-1
+            this.Second = Second;       // FN NET-1544
+            Second = this.Second;       // FN NET-1544
         }
     }
 

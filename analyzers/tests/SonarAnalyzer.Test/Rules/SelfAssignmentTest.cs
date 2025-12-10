@@ -25,14 +25,20 @@ public class SelfAssignmentTest
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.SelfAssignment>();
 
     [TestMethod]
-    public void SelfAssignment_CSharp8() =>
-        builderCS.AddPaths("SelfAssignment.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+    public void SelfAssignment_CS() =>
+        builderCS.AddPaths("SelfAssignment.cs").Verify();
 
     [TestMethod]
     public void SelfAssignment_CS_Latest() =>
-        builderCS.AddPaths("SelfAssignment.Latest.cs")
-            .WithTopLevelStatements()
+        builderCS.AddPaths("SelfAssignment.Latest.cs", "SelfAssignment.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
+    public void SelfAssignment_CS_TopLevelStatements() =>
+        builderCS.AddPaths("SelfAssignment.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.FromCSharp10)
             .Verify();
 
     [TestMethod]
