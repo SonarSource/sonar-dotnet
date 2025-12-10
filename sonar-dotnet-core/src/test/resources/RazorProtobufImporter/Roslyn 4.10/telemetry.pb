@@ -1,0 +1,1 @@
+ùRÜC:\source\repos\sonar-dotnet-enterprise\sonar-dotnet-core\src\test\resources\RazorProtobufImporter\WebProject\BlazorWebAssembly.csproj¢net8.0ÚCSharp12
