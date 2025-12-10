@@ -32,6 +32,13 @@ public static class ModelBuilder
         {
             return Skip;
         }
+        else if (latest.Type.IsEnum)
+        {
+            var fields = CreateEnumFields(latest, baseline);
+            return baseline is null
+                ? new NewEnumStrategy(latest.Type, fields)
+                : new PartialEnumStrategy(latest.Type, fields);
+        }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.SyntaxNode"))
         {
             return new SyntaxNodeStrategy(latest.Type, CreateMembers(latest, baseline));
@@ -40,7 +47,6 @@ public static class ModelBuilder
         {
             return new IOperationStrategy(latest.Type, CreateMembers(latest, baseline));
         }
-        // ToDo: EnumStrategy
         // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
         else
         {
@@ -65,6 +71,12 @@ public static class ModelBuilder
     {
         var baseline = new HashSet<string>(baselineType?.Members.Select(x => x.ToString()) ?? []);
         return latestType.Members.Where(IsValid).Select(x => new MemberDescriptor(x, baseline.Contains(x.ToString()))).ToArray();
+    }
+
+    private static FieldInfo[] CreateEnumFields(TypeDescriptor latestType, TypeDescriptor baselineType)
+    {
+        var baseline = new HashSet<string>(baselineType?.Members.OfType<FieldInfo>().Select(x => x.Name) ?? []);
+        return latestType.Members.OfType<FieldInfo>().Where(x => !x.IsSpecialName && !baseline.Contains(x.Name)).ToArray();
     }
 
     private static bool IsSkipped(Type type) =>

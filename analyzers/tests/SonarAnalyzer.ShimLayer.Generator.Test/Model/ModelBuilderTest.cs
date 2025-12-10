@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Model.Test;
@@ -43,6 +44,37 @@ public class ModelBuilderTest
         var type = typeof(SyntaxReceiverCreator);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
         model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+    }
+
+    [TestMethod]
+    public void Build_Enums_NoBaseline()
+    {
+        var type = typeof(NamespaceKind);
+        var members = type.GetMembers();
+        var model = ModelBuilder.Build([new TypeDescriptor(type, members)], []);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<NewEnumStrategy>()
+            .Which.Fields.Select(x => x.Name).Should().BeEquivalentTo([
+                "Assembly",
+                "Compilation",
+                "Module"]);
+        // Make sure we've sent other members that are not in the result
+        members.Should().ContainSingle(x => x is FieldInfo && x.Name == "value__"); // IsSpecialName
+        members.Should().ContainSingle(x => x is MethodInfo && x.Name == "HasFlag"); // IsSpecialName
+    }
+
+    [TestMethod]
+    public void Build_Enums_WithBaseline()
+    {
+        var type = typeof(NamespaceKind);
+        var assembly = type.GetMember("Assembly").Single();
+        var compilation = type.GetMember("Compilation").Single();
+        var module = type.GetMember("Module").Single();
+
+        var model = ModelBuilder.Build([new(type, [assembly, compilation, module])], [new(type, [assembly])]);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<PartialEnumStrategy>()
+            .Which.Fields.Select(x => x.Name).Should().BeEquivalentTo([
+                "Compilation",
+                "Module"]);
     }
 
     [TestMethod]
