@@ -39,4 +39,8 @@ public class PureAttributeOnVoidMethodTest
     [TestMethod]
     public void PureAttributeOnVoidMethod_VB() =>
         new VerifierBuilder<VB.PureAttributeOnVoidMethod>().AddPaths("PureAttributeOnVoidMethod.vb").Verify();
+
+    [TestMethod]
+    public void PureAttributeOnVoidMethod_CSharp7() =>
+        builderCS.AddPaths("PureAttributeOnVoidMethod.CSharp7.cs").WithOptions(LanguageOptions.OnlyCSharp7).Verify();
 }
