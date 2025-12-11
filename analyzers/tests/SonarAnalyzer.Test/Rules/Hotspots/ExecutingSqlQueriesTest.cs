@@ -74,6 +74,31 @@ public class ExecutingSqlQueriesTest
             .AddReferences(NuGetMetadataReference.NHibernate(TestConstants.NuGetLatestVersion))
             .Verify();
 
+    [TestMethod]
+    public void ExecutingSqlQueries_CS_AzureCosmos() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.AzureCosmos.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftAzureCosmos())
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_CS_MicrosoftDataSqlClient() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.MicrosoftDataSqlClient.cs")
+            .AddReferences(MetadataReferenceFacade.SystemData)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
+            .AddReferences(NuGetMetadataReference.MicrosoftDataSqlClient())
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_CS_OracleManagedDataAccess() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.OracleManagedDataAccess.cs")
+            .AddReferences(MetadataReferenceFacade.SystemData)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelPrimitives)
+            .AddReferences(NuGetMetadataReference.OracleManagedDataAccessCore())
+            .Verify();
+
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
 
     [TestMethod]

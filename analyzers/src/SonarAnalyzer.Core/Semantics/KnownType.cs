@@ -123,6 +123,8 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Routing_RouteValueDictionary = new("Microsoft.AspNetCore.Routing.RouteValueDictionary");
     public static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
+    public static readonly KnownType Microsoft_Azure_Cosmos_Container = new("Microsoft.Azure.Cosmos.Container");
+    public static readonly KnownType Microsoft_Azure_Cosmos_QueryDefinition = new("Microsoft.Azure.Cosmos.QueryDefinition");
     public static readonly KnownType Microsoft_Azure_Documents_Client_DocumentClient = new("Microsoft.Azure.Documents.Client.DocumentClient");
     public static readonly KnownType Microsoft_Azure_ServiceBus_Management_ManagementClient = new("Microsoft.Azure.ServiceBus.Management.ManagementClient");
     public static readonly KnownType Microsoft_Azure_ServiceBus_QueueClient = new("Microsoft.Azure.ServiceBus.QueueClient");
@@ -201,8 +203,12 @@ public sealed partial class KnownType
     public static readonly KnownType NFluent_Check = new("NFluent.Check");
     public static readonly KnownType NFluent_FluentCheckException = new("NFluent.FluentCheckException");
     public static readonly KnownType NFluent_Kernel_FluentCheckException = new("NFluent.Kernel.FluentCheckException");
+    public static readonly KnownType NHibernate_Cfg_Loquacious_NamedQueryDefinitionBuilder = new("NHibernate.Cfg.Loquacious.NamedQueryDefinitionBuilder");
+    public static readonly KnownType NHibernate_Engine_NamedQueryDefinition = new("NHibernate.Engine.NamedQueryDefinition");
+    public static readonly KnownType NHibernate_Engine_NamedSQLQueryDefinition = new("NHibernate.Engine.NamedSQLQueryDefinition");
     public static readonly KnownType NHibernate_ISession = new("NHibernate.ISession");
     public static readonly KnownType NHibernate_Impl_AbstractSessionImpl = new("NHibernate.Impl.AbstractSessionImpl");
+    public static readonly KnownType NHibernate_Impl_QueryImpl = new("NHibernate.Impl.QueryImpl");
     public static readonly KnownType NLog_ILogger = new("NLog.ILogger");
     public static readonly KnownType NLog_ILoggerBase = new("NLog.ILoggerBase");
     public static readonly KnownType NLog_ILoggerExtensions = new("NLog.ILoggerExtensions");
@@ -223,6 +229,8 @@ public sealed partial class KnownType
     public static readonly KnownType NUnit_Framework_TestCaseSourceAttribute = new("NUnit.Framework.TestCaseSourceAttribute");
     public static readonly KnownType NUnit_Framework_TestFixtureAttribute = new("NUnit.Framework.TestFixtureAttribute");
     public static readonly KnownType NUnit_Framework_TheoryAttribute = new("NUnit.Framework.TheoryAttribute");
+    public static readonly KnownType Oracle_ManagedDataAccess_Client_OracleCommand = new("Oracle.ManagedDataAccess.Client.OracleCommand");
+    public static readonly KnownType Oracle_ManagedDataAccess_Client_OracleDataAdapter = new("Oracle.ManagedDataAccess.Client.OracleDataAdapter");
     public static readonly KnownType Org_BouncyCastle_Asn1_Nist_NistNamedCurves = new("Org.BouncyCastle.Asn1.Nist.NistNamedCurves");
     public static readonly KnownType Org_BouncyCastle_Asn1_Sec_SecNamedCurves = new("Org.BouncyCastle.Asn1.Sec.SecNamedCurves");
     public static readonly KnownType Org_BouncyCastle_Asn1_TeleTrust_TeleTrusTNamedCurves = new("Org.BouncyCastle.Asn1.TeleTrust.TeleTrusTNamedCurves");
@@ -374,6 +382,8 @@ public sealed partial class KnownType
     public static readonly KnownType System_Data_OracleClient_OracleDataAdapter = new("System.Data.OracleClient.OracleDataAdapter");
     public static readonly KnownType System_Data_SqlClient_SqlCommand = new("System.Data.SqlClient.SqlCommand");
     public static readonly KnownType System_Data_SqlClient_SqlDataAdapter = new("System.Data.SqlClient.SqlDataAdapter");
+    public static readonly KnownType Microsoft_Data_SqlClient_SqlCommand = new("Microsoft.Data.SqlClient.SqlCommand");
+    public static readonly KnownType Microsoft_Data_SqlClient_SqlDataAdapter = new("Microsoft.Data.SqlClient.SqlDataAdapter");
     public static readonly KnownType System_Data_Sqlite_SqliteCommand = new("System.Data.SQLite.SQLiteCommand");
     public static readonly KnownType System_Data_Sqlite_SQLiteDataAdapter = new("System.Data.SQLite.SQLiteDataAdapter");
     public static readonly KnownType System_Data_SqlServerCe_SqlCeCommand = new("System.Data.SqlServerCe.SqlCeCommand");

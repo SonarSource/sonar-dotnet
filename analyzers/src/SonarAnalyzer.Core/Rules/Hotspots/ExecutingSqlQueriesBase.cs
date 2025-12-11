@@ -49,7 +49,15 @@ namespace SonarAnalyzer.Core.Rules
                 KnownType.Mono_Data_Sqlite_SqliteCommand,
                 KnownType.Mono_Data_Sqlite_SqliteDataAdapter,
                 KnownType.Microsoft_EntityFrameworkCore_RawSqlString,
-                KnownType.Dapper_CommandDefinition
+                KnownType.Dapper_CommandDefinition,
+                KnownType.Microsoft_Azure_Cosmos_QueryDefinition,
+                KnownType.Microsoft_Data_SqlClient_SqlCommand,
+                KnownType.Microsoft_Data_SqlClient_SqlDataAdapter,
+                KnownType.NHibernate_Engine_NamedQueryDefinition,
+                KnownType.NHibernate_Engine_NamedSQLQueryDefinition,
+                KnownType.NHibernate_Impl_QueryImpl,
+                KnownType.Oracle_ManagedDataAccess_Client_OracleCommand,
+                KnownType.Oracle_ManagedDataAccess_Client_OracleDataAdapter
             };
 
         private readonly KnownType[] constructorsForSecondArgument =
@@ -133,7 +141,9 @@ namespace SonarAnalyzer.Core.Rules
                 new(KnownType.NHibernate_Impl_AbstractSessionImpl, "CreateQuery"),
                 new(KnownType.NHibernate_Impl_AbstractSessionImpl, "CreateSQLQuery"),
                 new(KnownType.NHibernate_Impl_AbstractSessionImpl, "GetNamedQuery"),
-                new(KnownType.NHibernate_Impl_AbstractSessionImpl, "GetNamedSQLQuery")
+                new(KnownType.NHibernate_Impl_AbstractSessionImpl, "GetNamedSQLQuery"),
+                new(KnownType.Microsoft_Azure_Cosmos_Container, "GetItemQueryIterator"),
+                new(KnownType.Microsoft_Azure_Cosmos_Container, "GetItemQueryStreamIterator")
             };
 
         private readonly MemberDescriptor[] invocationsForSecondArgument =
@@ -156,7 +166,8 @@ namespace SonarAnalyzer.Core.Rules
 
         private readonly MemberDescriptor[] properties =
             {
-                new(KnownType.System_Data_IDbCommand, "CommandText")
+                new(KnownType.System_Data_IDbCommand, "CommandText"), // Also covers SqlCommand and OracleCommand
+                new(KnownType.NHibernate_Cfg_Loquacious_NamedQueryDefinitionBuilder, "Query")
             };
 
         protected abstract TExpressionSyntax GetArgumentAtIndex(InvocationContext context, int index);

@@ -171,6 +171,7 @@ public static class NuGetMetadataReference
     public static References NUnit(string packageVersion) => Create("NUnit", packageVersion);
     public static References NUnitLite(string packageVersion) => Create("NUnitLite", packageVersion);
     public static References OracleEntityFrameworkCore(string packageVersion) => Create("Oracle.EntityFrameworkCore", packageVersion);
+    public static References OracleManagedDataAccessCore(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Oracle.ManagedDataAccess.Core", packageVersion);
     public static References PetaPocoCompiled(string packageVersion = "6.0.353") => Create("PetaPoco.Compiled", packageVersion);
     public static References RhinoMocks(string packageVersion) => Create("RhinoMocks", packageVersion);
     public static References Shouldly(string packageVersion) => Create("Shouldly", packageVersion);

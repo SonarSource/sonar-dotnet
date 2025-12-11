@@ -2,6 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using NHibernate;
+using NHibernate.Cfg.Loquacious;
+using NHibernate.Engine;
+using NHibernate.Engine.Query;
+using NHibernate.Engine.Query.Sql;
 using NHibernate.Impl;
 
 class Program
@@ -70,6 +74,36 @@ class Program
 
         session.GetNamedSQLQuery(query);                                                                // Compliant
         session.GetNamedSQLQuery(query + param);                                                        // Noncompliant
+    }
+
+    public void NamedQueryDefinitionBuilder_Query(NamedQueryDefinitionBuilder builder, string query, string param)
+    {
+        builder.Query = query;                                                                          // Compliant
+        builder.Query = query + param;                                                                  // Noncompliant
+        builder.Query = $"SELECT * FROM table WHERE id = '{param}'";                                    // Noncompliant
+        builder.Query = string.Format("SELECT * FROM table WHERE id = '{0}'", param);                   // Noncompliant
+    }
+
+    public void NamedQueryDefinition_Constructor(string query, string param)
+    {
+        new NamedQueryDefinition(query, false, null, 0, 0, FlushMode.Auto, CacheMode.Normal, false, null, null);              // Compliant
+        new NamedQueryDefinition(query + param, false, null, 0, 0, FlushMode.Auto, CacheMode.Normal, false, null, null);      // Noncompliant
+        new NamedQueryDefinition($"SELECT * FROM table WHERE id = '{param}'", false, null, 0, 0, FlushMode.Auto, CacheMode.Normal, false, null, null);  // Noncompliant
+    }
+
+    public void NamedSQLQueryDefinition_Constructor(string query, string param)
+    {
+        new NamedSQLQueryDefinition(query, (INativeSQLQueryReturn[])null, null, false, null, 0, 0, FlushMode.Auto, CacheMode.Normal, false, null, null, false);              // Compliant
+        new NamedSQLQueryDefinition(query + param, (INativeSQLQueryReturn[])null, null, false, null, 0, 0, FlushMode.Auto, CacheMode.Normal, false, null, null, false);      // Noncompliant
+        new NamedSQLQueryDefinition($"SELECT * FROM table WHERE id = '{param}'", (INativeSQLQueryReturn[])null, null, false, null, 0, 0, FlushMode.Auto, CacheMode.Normal, false, null, null, false);  // Noncompliant
+    }
+
+    public void QueryImpl_Constructor(ISessionImplementor sessionImplementor, ParameterMetadata parameterMetadata, string query, string param)
+    {
+        new QueryImpl(query, FlushMode.Auto, sessionImplementor, parameterMetadata);                    // Compliant
+        new QueryImpl(query + param, FlushMode.Auto, sessionImplementor, parameterMetadata);            // Noncompliant
+        new QueryImpl($"SELECT * FROM table WHERE id = '{param}'", FlushMode.Auto, sessionImplementor, parameterMetadata);  // Noncompliant
+        new QueryImpl(string.Format("SELECT * FROM table WHERE id = '{0}'", param), FlushMode.Auto, sessionImplementor, parameterMetadata);  // Noncompliant
     }
 }
 

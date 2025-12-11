@@ -68,7 +68,7 @@ internal static partial class NuGetMetadataFactory
             {
                 foreach (var dllFile in dllFiles)
                 {
-                    packageReader.ExtractFile(dllFile, $"{packageDir}\\{dllFile}", NullLogger.Instance);
+                    packageReader.ExtractFile(dllFile, Path.Combine(packageDir, dllFile), NullLogger.Instance);
                 }
             }
             else

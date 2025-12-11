@@ -98,13 +98,13 @@ public readonly struct ProjectBuilder
 
     private string GetTestCaseFileRelativePath(string path)
     {
-        const string TestCases = @"TestCases\";
+        var testCases = $"TestCases{Path.DirectorySeparatorChar}";
         _ = path ?? throw new ArgumentNullException(nameof(path));
         var fileInfo = new FileInfo(path);
-        var testCasesIndex = fileInfo.FullName.IndexOf(TestCases, StringComparison.Ordinal);
+        var testCasesIndex = fileInfo.FullName.IndexOf(testCases, StringComparison.Ordinal);
         var relativePathFromTestCases = testCasesIndex < 0
-            ? throw new ArgumentException($"{nameof(path)} must contain '{TestCases}'", nameof(path))
-            : fileInfo.FullName.Substring(testCasesIndex + TestCases.Length);
+            ? throw new ArgumentException($"{nameof(path)} must contain '{testCases}'", nameof(path))
+            : fileInfo.FullName.Substring(testCasesIndex + testCases.Length);
 
         if (!IsExtensionOfSupportedType(fileInfo))
         {
