@@ -60,6 +60,27 @@ public class SyntaxNodeStrategy : Strategy
             public {{BaseType.Name}} SyntaxNode => this.node;
 
         {{string.Join("\n", Members.Select(x => MemberDeclaration(x, model)))}}
+
+            public static explicit operator {{Latest.Name}}Wrapper(SyntaxNode node)
+            {
+                if (node is null)
+                {
+                    return default;
+                }
+
+                if (!IsInstance(node))
+                {
+                    throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                }
+
+                return new {{Latest.Name}}Wrapper(({{BaseType.Name}})node);
+            }
+
+            public static implicit operator {{BaseType.Name}}({{Latest.Name}}Wrapper wrapper) =>
+                wrapper.node;
+
+            public static bool IsInstance(SyntaxNode node) =>
+                node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
         }
         """;
 

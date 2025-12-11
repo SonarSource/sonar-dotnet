@@ -61,6 +61,27 @@ public class SyntaxNodeStrategyTest
                 public TypeDeclarationSyntax SyntaxNode => this.node;
 
 
+
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
+                {
+                    if (node is null)
+                    {
+                        return default;
+                    }
+
+                    if (!IsInstance(node))
+                    {
+                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                    }
+
+                    return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                }
+
+                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static bool IsInstance(SyntaxNode node) =>
+                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
             """);
     }
@@ -109,6 +130,27 @@ public class SyntaxNodeStrategyTest
                 public TextSpan Span => this.node.Span;
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor;
                 public SyntaxToken ClassOrStructKeyword => ClassOrStructKeywordAccessor(this.node);
+
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
+                {
+                    if (node is null)
+                    {
+                        return default;
+                    }
+            
+                    if (!IsInstance(node))
+                    {
+                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                    }
+            
+                    return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                }
+            
+                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
+                    wrapper.node;
+            
+                public static bool IsInstance(SyntaxNode node) =>
+                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
             """);
     }
