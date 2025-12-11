@@ -25,6 +25,10 @@ public class IOperationStrategy : Strategy
         Members = members;
     }
 
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model) =>
+    public override string Generate(StrategyModel model) =>
         throw new NotImplementedException();
+
+    public override string ReturnTypeSnippet() => throw new NotImplementedException();
+
+    public override string ToConversionSnippet(string from) => throw new NotImplementedException();
 }

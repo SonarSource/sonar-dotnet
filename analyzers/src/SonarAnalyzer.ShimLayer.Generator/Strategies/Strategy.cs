@@ -18,5 +18,7 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public abstract class Strategy
 {
-    public abstract string Generate(IReadOnlyDictionary<Type, Strategy> model);
+    public abstract string Generate(StrategyModel model);
+    public abstract string ReturnTypeSnippet();
+    public abstract string ToConversionSnippet(string from);
 }

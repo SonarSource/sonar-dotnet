@@ -25,7 +25,7 @@ public class WrapperGeneratorTest
     public void SkipStrategy()
     {
         var sut = new WrapperGenerator();
-        sut.GenerateWrapper(typeof(ClassDeclarationSyntax), new Dictionary<Type, Strategy> { { typeof(ClassDeclarationSyntax), new SkipStrategy() } }).Should().BeNull();
+        sut.GenerateWrapper(typeof(ClassDeclarationSyntax), new() { { typeof(ClassDeclarationSyntax), new SkipStrategy() } }).Should().BeNull();
     }
 
     [TestMethod]
@@ -36,7 +36,7 @@ public class WrapperGeneratorTest
             typeof(RecordDeclarationSyntax),
             typeof(TypeDeclarationSyntax),
             []);
-        var result = sut.GenerateWrapper(typeof(RecordDeclarationSyntax), new Dictionary<Type, Strategy> { { typeof(RecordDeclarationSyntax), syntaxNodeStrategy } });
+        var result = sut.GenerateWrapper(typeof(RecordDeclarationSyntax), new() { { typeof(RecordDeclarationSyntax), syntaxNodeStrategy } });
         result.Name.Should().Be("RecordDeclarationSyntaxWrapper.g.cs");
         result.Content.Should().StartWith("using System;");
     }

@@ -28,7 +28,7 @@ public class NewEnumStrategy : Strategy
         Fields = fields;
     }
 
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model)
+    public override string Generate(StrategyModel model)
     {
         var sb = new StringBuilder();
         sb.AppendLine("namespace SonarAnalyzer.ShimLayer;");
@@ -46,4 +46,10 @@ public class NewEnumStrategy : Strategy
         sb.AppendLine("}");
         return sb.ToString();
     }
+
+    public override string ReturnTypeSnippet() =>
+        latest.Name;
+
+    public override string ToConversionSnippet(string from) =>
+        $"({latest.Name}){from}";
 }

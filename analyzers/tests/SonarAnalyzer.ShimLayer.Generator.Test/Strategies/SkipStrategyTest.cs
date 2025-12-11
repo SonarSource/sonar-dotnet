@@ -23,6 +23,6 @@ public class SkipStrategyTest
     public void SkipStrategy()
     {
         var sut = new SkipStrategy();
-        sut.Generate(new Dictionary<Type, Strategy>()).Should().BeNull();
+        sut.Generate([]).Should().BeNull();
     }
 }

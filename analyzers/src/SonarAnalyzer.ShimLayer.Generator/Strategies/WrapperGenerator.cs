@@ -19,7 +19,7 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 // TODO: Move this logic to Factory
 internal class WrapperGenerator
 {
-    public GeneratedFile GenerateWrapper(Type latest, IReadOnlyDictionary<Type, Strategy> model)
+    public GeneratedFile GenerateWrapper(Type latest, StrategyModel model)
     {
         if (model.TryGetValue(latest, out var strategy))
         {

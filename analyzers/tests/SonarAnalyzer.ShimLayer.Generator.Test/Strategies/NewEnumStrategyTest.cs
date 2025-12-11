@@ -14,8 +14,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.Reflection;
-using SonarAnalyzer.ShimLayer.Generator.Model;
 using SonarAnalyzer.TestFramework.Extensions;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
@@ -29,7 +27,7 @@ public class NewEnumStrategyTest
         using var typeLoader = new TypeLoader();
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IncrementalGeneratorOutputKind));
         var sut = new NewEnumStrategy(type.Type, type.Members.OfType<FieldInfo>().Where(x => x.Name != "value__").ToArray());
-        sut.Generate(new Dictionary<Type, Strategy>()).Should().BeIgnoringLineEndings("""
+        sut.Generate([]).Should().BeIgnoringLineEndings("""
             namespace SonarAnalyzer.ShimLayer;
 
             [System.FlagsAttribute]

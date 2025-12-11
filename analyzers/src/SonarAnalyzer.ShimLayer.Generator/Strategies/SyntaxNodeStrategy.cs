@@ -29,7 +29,13 @@ public class SyntaxNodeStrategy : Strategy
         Members = members;
     }
 
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model) =>
+    public override string ReturnTypeSnippet() =>
+        $"{Latest.Name}Wrapper";
+
+    public override string ToConversionSnippet(string from) =>
+        $"({Latest.Name}Wrapper){from}";
+
+    public override string Generate(StrategyModel model) =>
         $$"""
         using System;
         using System.Collections.Immutable;
@@ -84,7 +90,7 @@ public class SyntaxNodeStrategy : Strategy
         }
         """;
 
-    private string MemberAccessorInitialization(MemberInfo member, IReadOnlyDictionary<Type, Strategy> model)
+    private string MemberAccessorInitialization(MemberInfo member, StrategyModel model)
     {
         if (member is PropertyInfo pi)
         {
@@ -95,7 +101,7 @@ public class SyntaxNodeStrategy : Strategy
         return null;
     }
 
-    private string MemberDeclaration(MemberDescriptor member, IReadOnlyDictionary<Type, Strategy> model) =>
+    private string MemberDeclaration(MemberDescriptor member, StrategyModel model) =>
         member switch
         {
             { IsPassthrough: true, Member: PropertyInfo pi } => $"""
@@ -103,7 +109,7 @@ public class SyntaxNodeStrategy : Strategy
                 """,
             { IsPassthrough: false, Member: PropertyInfo pi } => $"""
                     private static readonly Func<{BaseType.Name}, {pi.PropertyType.Name}> {member.Member.Name}Accessor;
-                    public {pi.PropertyType.Name} {member.Member.Name} => {member.Member.Name}Accessor(this.node);
+                    public {model.AsReturnTypeSnippet(pi.PropertyType)} {member.Member.Name} => {model.ToConversionSnippet(pi.PropertyType, $"{member.Member.Name}Accessor(this.node)")};
                 """,
             _ => null,
         };

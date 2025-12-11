@@ -23,6 +23,6 @@ public class NoChangeStrategyTest
     public void Generate()
     {
         var sut = new NoChangeStrategy(typeof(NamespaceKind));
-        sut.Generate(new Dictionary<Type, Strategy>()).Should().BeNull();
+        sut.Generate([]).Should().BeNull();
     }
 }

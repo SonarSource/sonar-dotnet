@@ -20,10 +20,10 @@ public static class ModelBuilder
 {
     private static readonly SkipStrategy Skip = new();
 
-    public static Dictionary<Type, Strategy> Build(TypeDescriptor[] latest, TypeDescriptor[] baseline)
+    public static StrategyModel Build(TypeDescriptor[] latest, TypeDescriptor[] baseline)
     {
         var baselineMap = baseline.ToDictionary(x => x.Type.FullName, x => x);
-        return latest.ToDictionary(x => x.Type, x => CreateStrategy(x, baselineMap.TryGetValue(x.Type.FullName, out var baselineType) ? baselineType : null, baselineMap));
+        return new(latest.ToDictionary(x => x.Type, x => CreateStrategy(x, baselineMap.TryGetValue(x.Type.FullName, out var baselineType) ? baselineType : null, baselineMap)));
     }
 
     private static Strategy CreateStrategy(TypeDescriptor latest, TypeDescriptor baseline, IReadOnlyDictionary<string, TypeDescriptor> baselineMap)

@@ -28,7 +28,7 @@ public class PartialEnumStrategy : Strategy
         Fields = fields;
     }
 
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model)
+    public override string Generate(StrategyModel model)
     {
         var sb = new StringBuilder();
         sb.AppendLine($"using {latest.Namespace};");
@@ -44,4 +44,10 @@ public class PartialEnumStrategy : Strategy
         sb.AppendLine("}");
         return sb.ToString();
     }
+
+    public override string ReturnTypeSnippet() =>
+        latest.Name;
+
+    public override string ToConversionSnippet(string from) =>
+        $"({latest.Name}){from}";
 }

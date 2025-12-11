@@ -26,7 +26,7 @@ public class PartialEnumStrategyTest
     {
         var type = typeof(SymbolKind);
         var sut = new PartialEnumStrategy(type, type.GetMembers().OfType<FieldInfo>().Where(x => x.Name is nameof(SymbolKind.Discard) or nameof(SymbolKind.RangeVariable)).ToArray());
-        sut.Generate(new Dictionary<Type, Strategy>()).Should().BeIgnoringLineEndings("""
+        sut.Generate([]).Should().BeIgnoringLineEndings("""
             using Microsoft.CodeAnalysis;
 
             namespace SonarAnalyzer.ShimLayer;

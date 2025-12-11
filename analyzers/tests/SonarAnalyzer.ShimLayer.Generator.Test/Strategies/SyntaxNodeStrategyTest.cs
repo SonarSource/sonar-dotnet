@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.TestFramework.Extensions;
 
@@ -29,7 +30,7 @@ public class SyntaxNodeStrategyTest
             typeof(RecordDeclarationSyntax),
             typeof(TypeDeclarationSyntax),
             []);
-        var result = sut.Generate(new Dictionary<Type, Strategy>());
+        var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
             """
             using System;
@@ -96,7 +97,7 @@ public class SyntaxNodeStrategyTest
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(SyntaxNode.Span))[0], true),
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.ClassOrStructKeyword))[0], false)
             ]);
-        var result = sut.Generate(new Dictionary<Type, Strategy>());
+        var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
             """
             using System;
@@ -129,7 +130,7 @@ public class SyntaxNodeStrategyTest
 
                 public TextSpan Span => this.node.Span;
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor;
-                public SyntaxToken ClassOrStructKeyword => ClassOrStructKeywordAccessor(this.node);
+                public SyntaxToken ClassOrStructKeyword => (Microsoft.CodeAnalysis.SyntaxToken)ClassOrStructKeywordAccessor(this.node);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
                 {
@@ -137,18 +138,87 @@ public class SyntaxNodeStrategyTest
                     {
                         return default;
                     }
-            
+
                     if (!IsInstance(node))
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-            
+
                     return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
                 }
-            
+
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
-            
+
+                public static bool IsInstance(SyntaxNode node) =>
+                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+            }
+            """);
+    }
+
+    [TestMethod]
+    public void Generate_IsPatternSyntax()
+    {
+        var sut = new SyntaxNodeStrategy(
+            typeof(IsPatternExpressionSyntax),
+            typeof(ExpressionSyntax),
+            [
+                new(typeof(IsPatternExpressionSyntax).GetMember(nameof(IsPatternExpressionSyntax.Pattern))[0], false),
+            ]);
+        var patternSyntaxStrategy = new SyntaxNodeStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), []);
+
+        var result = sut.Generate(new() { { typeof(PatternSyntax), patternSyntaxStrategy } });
+        result.Should().BeIgnoringLineEndings(
+            """
+            using System;
+            using System.Collections.Immutable;
+            using Microsoft.CodeAnalysis;
+            using Microsoft.CodeAnalysis.CSharp;
+            using Microsoft.CodeAnalysis.CSharp.Syntax;
+            using Microsoft.CodeAnalysis.Text;
+
+            namespace SonarAnalyzer.ShimLayer;
+
+            public readonly partial struct IsPatternExpressionSyntaxWrapper: ISyntaxWrapper<ExpressionSyntax>
+            {
+                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax";
+                private static readonly Type WrappedType;
+
+                private readonly ExpressionSyntax node;
+
+                static IsPatternExpressionSyntaxWrapper()
+                {
+                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(IsPatternExpressionSyntaxWrapper));
+                    PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, PatternSyntax>(WrappedType, nameof(Pattern));
+                }
+
+                private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node) =>
+                    this.node = node;
+
+                [Obsolete]
+                public ExpressionSyntax SyntaxNode => this.node;
+
+                private static readonly Func<ExpressionSyntax, PatternSyntax> PatternAccessor;
+                public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
+
+                public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node)
+                {
+                    if (node is null)
+                    {
+                        return default;
+                    }
+
+                    if (!IsInstance(node))
+                    {
+                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                    }
+
+                    return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)node);
+                }
+
+                public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }

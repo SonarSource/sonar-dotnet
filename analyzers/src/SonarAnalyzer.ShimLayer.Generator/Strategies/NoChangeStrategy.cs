@@ -23,5 +23,11 @@ public class NoChangeStrategy : Strategy
     public NoChangeStrategy(Type latest) =>
         this.latest = latest;
 
-    public override string Generate(IReadOnlyDictionary<Type, Strategy> model) => null;
+    public override string Generate(StrategyModel model) => null;
+
+    public override string ReturnTypeSnippet() =>
+        latest.Name;
+
+    public override string ToConversionSnippet(string from) =>
+        $"({latest.Name}){from}";
 }
