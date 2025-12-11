@@ -122,7 +122,7 @@ public class OperationExecutionOrderTest
         var list = new List<string>();
         if (reverseOrder)
         {
-            expected = expected.Reverse().ToArray();
+            expected = Enumerable.Reverse(expected).ToArray();
         }
         foreach (var operation in sut)   // Act
         {

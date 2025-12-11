@@ -5,7 +5,7 @@
   <Import Project="$(MSBuildThisFileDirectory)\Version.targets" />
 
   <PropertyGroup>
-    <LangVersion>12</LangVersion>
+    <LangVersion>14</LangVersion>
     <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
     <!-- Store output of Source Generators in obj\debug\net46\generated for easier debugging -->
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
