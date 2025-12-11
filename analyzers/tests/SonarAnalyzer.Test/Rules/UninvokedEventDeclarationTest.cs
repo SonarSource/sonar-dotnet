@@ -16,28 +16,19 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UninvokedEventDeclarationTest
 {
-    [TestClass]
-    public class UninvokedEventDeclarationTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<UninvokedEventDeclaration>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<UninvokedEventDeclaration>();
 
-        [TestMethod]
-        public void UninvokedEventDeclaration() =>
-            builder.AddPaths("UninvokedEventDeclaration.cs")
-                .Verify();
+    [TestMethod]
+    public void UninvokedEventDeclaration() =>
+        builder.AddPaths("UninvokedEventDeclaration.cs")
+            .Verify();
 
-        [TestMethod]
-        public void UninvokedEventDeclaration_CSharp9() =>
-            builder.AddPaths("UninvokedEventDeclaration.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void UninvokedEventDeclaration_CSharp11() =>
-            builder.AddPaths("UninvokedEventDeclaration.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-    }
+    [TestMethod]
+    public void UninvokedEventDeclaration_CSharpLatest() =>
+        builder.AddPaths("UninvokedEventDeclaration.Latest.cs", "UninvokedEventDeclaration.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

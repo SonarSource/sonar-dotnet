@@ -16,19 +16,18 @@
 
 using CS = SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UnnecessaryMathematicalComparisonTest
 {
-    [TestClass]
-    public class UnnecessaryMathematicalComparisonTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryMathematicalComparison>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryMathematicalComparison>();
 
-        [TestMethod]
-        public void UnnecessaryMathematicalComparison_CS() =>
-            builderCS.AddPaths("UnnecessaryMathematicalComparison.cs").Verify();
+    [TestMethod]
+    public void UnnecessaryMathematicalComparison_CS() =>
+        builderCS.AddPaths("UnnecessaryMathematicalComparison.cs").Verify();
 
-        [TestMethod]
-        public void UnnecessaryMathematicalComparison_CSharp9() =>
-            builderCS.AddPaths("UnnecessaryMathematicalComparison.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-    }
+    [TestMethod]
+    public void UnnecessaryMathematicalComparison_CSharpLatest() =>
+        builderCS.AddPaths("UnnecessaryMathematicalComparison.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

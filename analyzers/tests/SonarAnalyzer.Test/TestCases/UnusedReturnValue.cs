@@ -84,15 +84,9 @@ namespace Tests.Diagnostics
             VoidFunction();
             var result1 = GetNumber3();
 
-            GetNumberStatic1();
-            var result2 = GetNumberStatic3();
-
-            GetNumberStaticExpression();
-
             myEnumerable.Select(GetNumber4);
 
             GetNumber5(1);
-            GetNumberStatic4(1);
 
             int GetNumber1() { return 42; } // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
 //          ^^^
@@ -102,13 +96,6 @@ namespace Tests.Diagnostics
             int GetNumber5(int neverUsedVal) { return neverUsedVal; } // Noncompliant
 
             void VoidFunction() { return; }
-
-            static int GetNumberStatic1() { return 42; } // Noncompliant
-            static int GetNumberStatic2() { return 42; } // Compliant -  local functions are outside the scope of this rule
-            static int GetNumberStatic3() { return 42; }
-            static int GetNumberStatic4(int neverUsedVal) { return neverUsedVal; } // Noncompliant
-
-            static int GetNumberStaticExpression() => 42; // Noncompliant
         }
     }
 
@@ -137,4 +124,21 @@ namespace Tests.Diagnostics
             void DoSomething(Func<int, bool> method);
         }
     }
+}
+
+public partial class Partial
+{
+    private int GetValue1()
+    {
+        return 1;
+    }
+
+    private int GetValue2() // Noncompliant
+    {
+        return 1;
+    }
+}
+public class CallbackUser
+{
+    public CallbackUser(Func<int, int> getValue) { }
 }

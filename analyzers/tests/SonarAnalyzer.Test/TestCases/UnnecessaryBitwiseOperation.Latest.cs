@@ -128,3 +128,14 @@ public class CSharp13
         public int[] buffer = new int[10];
     }
 }
+
+public class FieldKeyword
+{
+    private int bitMask = 0x010F;
+
+    public int Property
+    {
+        get { return field | 0; }  // Noncompliant
+        set { field = value | 0; } // Noncompliant
+    }
+}

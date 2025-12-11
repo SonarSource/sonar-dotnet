@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -579,17 +578,6 @@ namespace Tests.Diagnostics
                 }
             }
         }
-
-        public void StaticLocalFunctionInLoop()
-        {
-            while (true)
-            {
-                static void Throw()
-                {
-                    throw new InvalidOperationException("Message");
-                }
-            }
-        }
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/2441
@@ -617,26 +605,6 @@ namespace Tests.Diagnostics
             while (true)
             {
                 return (Func<int>)delegate () { return -1; }; // Noncompliant
-            }
-        }
-    }
-
-    // https://github.com/SonarSource/sonar-dotnet/issues/7987
-    class Repro7987
-    {
-        void Test(List<object> items)
-        {
-            var newItems = new List<object>();
-            foreach (var item in items)
-            {
-                LocalFunction(item);
-                continue;                                   // Noncompliant FP
-
-                void LocalFunction(object item)
-                {
-                    if (items.Count < 10)
-                        newItems.Add(item);
-                }
             }
         }
     }

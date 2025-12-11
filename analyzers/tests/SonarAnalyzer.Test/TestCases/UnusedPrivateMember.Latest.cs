@@ -945,3 +945,38 @@ public static class Extensions // Repro for https://sonarsource.atlassian.net/br
 
     }
 }
+
+public class NullConditionallAssignment
+{
+    public class Sample
+    {
+        public int Value { get; set; } 
+    }
+    public Sample Prop { get; set; }
+    private int CompliantRightSide;     // Compliant
+    private Sample CompliantLeftSide;   // Compliant
+    public void Method()
+    {
+        Prop?.Value = CompliantRightSide;
+        CompliantLeftSide?.Value = 42;
+    }
+}
+
+public class FieldKeyword
+{
+    private int Prop { get { return field; } set { field = value; } } // Noncompliant
+}
+
+public partial class PartialEvents
+{
+    private EventHandler compliant;
+    private partial event EventHandler Compliant; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2825
+    public void Method()
+    {
+        compliant.Invoke(null, null);
+        Compliant += UnusedPrivateMember_MyUsedEvent;
+    }
+
+    private void UnusedPrivateMember_MyUsedEvent(object sender, EventArgs e) { }
+}
+

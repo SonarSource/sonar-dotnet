@@ -23,3 +23,12 @@ namespace SonarAnalyzer.Test.TestCases
         }
     }
 }
+
+public class FieldKeyword
+{
+    public ulong Prop
+    {
+        get { return field > float.MaxValue ? 0 : field; } // Noncompliant
+        set { field = float.MinValue < field ? 1uL : 0; }  // Noncompliant
+    }
+}

@@ -18,39 +18,38 @@ using SonarAnalyzer.CSharp.Rules;
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UnaryPrefixOperatorRepeatedTest
 {
-    [TestClass]
-    public class UnaryPrefixOperatorRepeatedTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnaryPrefixOperatorRepeated>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UnaryPrefixOperatorRepeated>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnaryPrefixOperatorRepeated>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UnaryPrefixOperatorRepeated>();
 
-        [TestMethod]
-        public void UnaryPrefixOperatorRepeated() =>
-            builderCS.AddPaths("UnaryPrefixOperatorRepeated.cs").Verify();
+    [TestMethod]
+    public void UnaryPrefixOperatorRepeated() =>
+        builderCS.AddPaths("UnaryPrefixOperatorRepeated.cs").Verify();
 
-        [TestMethod]
-        public void UnaryPrefixOperatorRepeated_CS_TopLevelStatements() =>
-            builderCS.AddPaths("UnaryPrefixOperatorRepeated.TopLevelStatements.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void UnaryPrefixOperatorRepeated_CS_TopLevelStatements() =>
+        builderCS.AddPaths("UnaryPrefixOperatorRepeated.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void UnaryPrefixOperatorRepeated_CS_Latest() =>
-            builderCS.AddPaths("UnaryPrefixOperatorRepeated.Latest.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void UnaryPrefixOperatorRepeated_CS_Latest() =>
+        builderCS.AddPaths("UnaryPrefixOperatorRepeated.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void UnaryPrefixOperatorRepeated_CodeFix() =>
-            builderCS.WithCodeFix<UnaryPrefixOperatorRepeatedCodeFix>()
-                .AddPaths("UnaryPrefixOperatorRepeated.cs")
-                .WithCodeFixedPaths("UnaryPrefixOperatorRepeated.Fixed.cs")
-                .VerifyCodeFix();
+    [TestMethod]
+    public void UnaryPrefixOperatorRepeated_CodeFix() =>
+        builderCS.WithCodeFix<UnaryPrefixOperatorRepeatedCodeFix>()
+            .AddPaths("UnaryPrefixOperatorRepeated.cs")
+            .WithCodeFixedPaths("UnaryPrefixOperatorRepeated.Fixed.cs")
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void UnaryPrefixOperatorRepeated_VB() =>
-            builderVB.AddPaths("UnaryPrefixOperatorRepeated.vb").Verify();
-    }
+    [TestMethod]
+    public void UnaryPrefixOperatorRepeated_VB() =>
+        builderVB.AddPaths("UnaryPrefixOperatorRepeated.vb").Verify();
 }

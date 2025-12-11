@@ -1,4 +1,6 @@
-﻿namespace CSharp9
+﻿using System;
+
+namespace CSharp9
 {
     public partial class PartialMethods
     {
@@ -13,4 +15,9 @@ namespace CSharp13
     {
         partial int PartialProp { get => 42; } // Noncompliant
     }
+}
+
+public partial class PartialEvents
+{
+    private partial event EventHandler Compliant { add { compliant += value; } remove { compliant -= value; } } // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2825
 }

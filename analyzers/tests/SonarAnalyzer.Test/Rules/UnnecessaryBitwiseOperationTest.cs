@@ -17,46 +17,45 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UnnecessaryBitwiseOperationTest
 {
-    [TestClass]
-    public class UnnecessaryBitwiseOperationTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryBitwiseOperation>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UnnecessaryBitwiseOperation>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryBitwiseOperation>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UnnecessaryBitwiseOperation>();
 
-        [TestMethod]
-        public void UnnecessaryBitwiseOperation_CS() =>
-            builderCS.AddPaths("UnnecessaryBitwiseOperation.cs").Verify();
+    [TestMethod]
+    public void UnnecessaryBitwiseOperation_CS() =>
+        builderCS.AddPaths("UnnecessaryBitwiseOperation.cs").Verify();
 
-        [TestMethod]
-        public void UnnecessaryBitwiseOperation_CS_TopLevelStatements() =>
-            builderCS.AddPaths("UnnecessaryBitwiseOperation.TopLevelStatements.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void UnnecessaryBitwiseOperation_CS_TopLevelStatements() =>
+        builderCS.AddPaths("UnnecessaryBitwiseOperation.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void UnnecessaryBitwiseOperation_CS_Latest() =>
-            builderCS.AddPaths("UnnecessaryBitwiseOperation.Latest.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void UnnecessaryBitwiseOperation_CS_Latest() =>
+        builderCS.AddPaths("UnnecessaryBitwiseOperation.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void UnnecessaryBitwiseOperation_CS_CodeFix() =>
-            builderCS.AddPaths("UnnecessaryBitwiseOperation.cs")
-                .WithCodeFix<CS.UnnecessaryBitwiseOperationCodeFix>()
-                .WithCodeFixedPaths("UnnecessaryBitwiseOperation.Fixed.cs")
-                .VerifyCodeFix();
+    [TestMethod]
+    public void UnnecessaryBitwiseOperation_CS_CodeFix() =>
+        builderCS.AddPaths("UnnecessaryBitwiseOperation.cs")
+            .WithCodeFix<CS.UnnecessaryBitwiseOperationCodeFix>()
+            .WithCodeFixedPaths("UnnecessaryBitwiseOperation.Fixed.cs")
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void UnnecessaryBitwiseOperation_VB() =>
-            builderVB.AddPaths("UnnecessaryBitwiseOperation.vb").Verify();
+    [TestMethod]
+    public void UnnecessaryBitwiseOperation_VB() =>
+        builderVB.AddPaths("UnnecessaryBitwiseOperation.vb").Verify();
 
-        [TestMethod]
-        public void UnnecessaryBitwiseOperation_VB_CodeFix() =>
-            builderVB.AddPaths("UnnecessaryBitwiseOperation.vb")
-                .WithCodeFix<VB.UnnecessaryBitwiseOperationCodeFix>()
-                .WithCodeFixedPaths("UnnecessaryBitwiseOperation.Fixed.vb")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void UnnecessaryBitwiseOperation_VB_CodeFix() =>
+        builderVB.AddPaths("UnnecessaryBitwiseOperation.vb")
+            .WithCodeFix<VB.UnnecessaryBitwiseOperationCodeFix>()
+            .WithCodeFixedPaths("UnnecessaryBitwiseOperation.Fixed.vb")
+            .VerifyCodeFix();
 }

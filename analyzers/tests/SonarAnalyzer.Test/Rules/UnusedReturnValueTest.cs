@@ -16,31 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UnusedReturnValueTest
 {
-    [TestClass]
-    public class UnusedReturnValueTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<UnusedReturnValue>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<UnusedReturnValue>();
 
-        [TestMethod]
-        public void UnusedReturnValue() =>
-            builder.AddPaths("UnusedReturnValue.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+    [TestMethod]
+    public void UnusedReturnValue() =>
+        builder.AddPaths("UnusedReturnValue.cs", "UnusedReturnValue.Partial.cs").Verify();
 
-        [TestMethod]
-        public void UnusedReturnValueWithPartialClasses() =>
-            builder.AddPaths("UnusedReturnValue.part1.cs", "UnusedReturnValue.part2.cs", "UnusedReturnValue.External.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+    [TestMethod]
+    public void UnusedReturnValue_CS_Latest() =>
+        builder.AddPaths("UnusedReturnValue.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void UnusedReturnValue_CSharp9() =>
-            builder.AddPaths("UnusedReturnValue.CSharp9.cs").WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void UnusedReturnValue_CSharp10() =>
-            builder.AddPaths("UnusedReturnValue.CSharp10.cs").WithTopLevelStatements().WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void UnusedReturnValue_CSharp11() =>
-            builder.AddPaths("UnusedReturnValue.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-    }
+    [TestMethod]
+    public void UnusedReturnValue_CS_TopLevelStatements() =>
+        builder.AddPaths("UnusedReturnValue.TopLevelStatements.cs").WithTopLevelStatements().WithOptions(LanguageOptions.FromCSharp10).Verify();
 }
