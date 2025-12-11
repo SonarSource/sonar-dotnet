@@ -137,6 +137,18 @@ public class ModelBuilderTest
     }
 
     [TestMethod]
+    public void Build_NoChangeStrategy()
+    {
+        var type = typeof(NamespaceKind);
+        var members = type.GetMembers();
+
+        var model = ModelBuilder.Build(
+            [new(type, members)],
+            [new(type, members.OrderByDescending(x => x.ToString()).ToArray())]);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<NoChangeStrategy>();
+    }
+
+    [TestMethod]
     public void CreateMembers_NoBaseline()
     {
         var type = typeof(SyntaxNode);

@@ -32,6 +32,10 @@ public static class ModelBuilder
         {
             return Skip;
         }
+        else if (baseline is not null && latest.Members.Select(x => x.ToString()).OrderBy(x => x).SequenceEqual(baseline.Members.Select(x => x.ToString()).OrderBy(x => x)))
+        {
+            return new NoChangeStrategy(latest.Type);
+        }
         else if (latest.Type.IsEnum)
         {
             var fields = CreateEnumFields(latest, baseline);
