@@ -16,27 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ValuesUselesslyIncrementedTest
 {
-    [TestClass]
-    public class ValuesUselesslyIncrementedTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ValuesUselesslyIncremented>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ValuesUselesslyIncremented>();
 
-        [TestMethod]
-        public void ValuesUselesslyIncremented() =>
-            builder.AddPaths("ValuesUselesslyIncremented.cs").Verify();
+    [TestMethod]
+    public void ValuesUselesslyIncremented() =>
+        builder.AddPaths("ValuesUselesslyIncremented.cs").Verify();
 
-        [TestMethod]
-        public void ValuesUselesslyIncremented_CSharp9() =>
-            builder.AddPaths("ValuesUselesslyIncremented.CSharp9.cs").WithTopLevelStatements().Verify();
+    [TestMethod]
+    public void ValuesUselesslyIncremented_TopLevelStatements() =>
+        builder.AddPaths("ValuesUselesslyIncremented.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void ValuesUselesslyIncremented_CSharp10() =>
-            builder.AddPaths("ValuesUselesslyIncremented.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void ValuesUselesslyIncremented_CSharp11() =>
-            builder.AddPaths("ValuesUselesslyIncremented.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).WithTopLevelStatements().Verify();
-    }
+    [TestMethod]
+    public void ValuesUselesslyIncremented_CS_Latest() =>
+        builder.AddPaths("ValuesUselesslyIncremented.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

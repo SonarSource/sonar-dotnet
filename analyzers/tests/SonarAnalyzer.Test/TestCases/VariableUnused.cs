@@ -209,38 +209,6 @@ namespace Tests.Diagnostics
                     return item;
                 });
             }
-
-            static void Bar(List<int> list)
-            {
-                list.Select(item => 1);
-
-                list.Select(item =>
-                {
-                    var value = 1; // Noncompliant
-                    return item;
-                });
-            }
-        }
-    }
-
-    //https://github.com/SonarSource/sonar-dotnet/issues/3137
-    public class Repro_3137
-    {
-        public void GoGoGo(Logger log)
-        {
-            using var scope = log.BeginScope("Abc"); // Compliant, existence of variable represents a state until it's disposed
-            using var _ = log.BeginScope("XXX"); // Underscore is a variable in this case, it's not a discard pattern
-
-            // Locked file represents a state until it's disposed
-            using var stream = File.Create("path");
-        }
-
-        public class Logger
-        {
-            public IDisposable BeginScope(string scope)
-            {
-                return null;
-            }
         }
     }
 
@@ -296,45 +264,6 @@ namespace Tests.Diagnostics
 //                     ^^^^
             ref string refXX = ref x; //Compliant
             refXX += "1";
-
-            var tuple = ("hello", "bye");
-            if (tuple is (string strX, string strY)) // Noncompliant
-//                                            ^^^^
-            {
-                strX += ":)";
-            }
-
-            if (tuple is (string comX, string comY)) // Compliant
-            {
-                comX += comY;
-            }
-
-            if (x is string { Length:5 } rec) //Noncompliant
-//                                       ^^^
-            {
-                x += ":)";
-            }
-            if (x is string { Length: 5 } com) //Compliant
-            {
-                com += ":)";
-            }
-
-            if (tuple is (string str, { } d)) // Noncompliant
-//                                        ^
-            {
-                str += ":)";
-            }
-
-            if (tuple is (string y, { } z)) // Noncompliant
-//                               ^
-            {
-                z += ":)";
-            }
-
-            if (tuple is (string strCom, { } dCom)) // Compliant
-            {
-                strCom += dCom;
-            }
         }
 
         public void SwitchStatements()

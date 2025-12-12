@@ -1,5 +1,42 @@
 ﻿using System;
 
+public class CSharp8LocalFunctions
+{
+    private int field;
+    private int Property { get; set; }
+
+    public void ShadowField()
+    {
+        static void doMore()
+        {
+            int field = 0; // Noncompliant
+        }
+    }
+
+    public void ShadowProperty()
+    {
+        static void doMore()
+        {
+            int Property = 0; // Noncompliant
+        }
+    }
+
+    public void MethodWithLocalVar()
+    {
+        bool isUsed = true;
+
+        void doSomething()
+        {
+            bool isUsed = true; // Compliant - currently the rule only looks at fields and properties
+        }
+
+        static void doMore()
+        {
+            bool isUsed = true; // Compliant
+        }
+    }
+}
+
 class MyParentClass(int parentClassParam)
 {
     class MyClass(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j)
@@ -119,4 +156,47 @@ public record struct S
 public partial class PartialProperty
 {
     public partial int myPartialProperty { get; set; }
+}
+
+public static class Extensions
+{
+    public class Sample
+    {
+        public int Value { get; set; }
+    }
+
+    private static int field;
+    public static int Property => 42;
+
+    extension(Sample s)
+    {
+        public void ShadowContainerClass()
+        {
+            int field = 0;      // FN https://sonarsource.atlassian.net/browse/NET-2846
+            int Property = 0;   // FN https://sonarsource.atlassian.net/browse/NET-2846
+        }
+
+        public void ShadowExtendedClass()
+        {
+            int value = 0;
+        }
+    }
+}
+
+public class FieldKeyword
+{
+    private int field;
+    public int Property { get { return field; } set { value = field; } }
+}
+
+public partial class PartialConstructor
+{
+    private int field;
+    public partial PartialConstructor();
+}
+
+public partial class PartialEvent
+{
+    private int field;
+    public partial event EventHandler myPartialEvent;
 }

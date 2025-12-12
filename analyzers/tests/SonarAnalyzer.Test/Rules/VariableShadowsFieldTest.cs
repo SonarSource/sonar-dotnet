@@ -16,30 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class VariableShadowsFieldTest
 {
-    [TestClass]
-    public class VariableShadowsFieldTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<VariableShadowsField>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<VariableShadowsField>();
 
-        [TestMethod]
-        public void VariableShadowsField() =>
-            builder.AddPaths("VariableShadowsField.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void VariableShadowsField() =>
+        builder.AddPaths("VariableShadowsField.cs").Verify();
 
-        [TestMethod]
-        public void VariableShadowsField_TopLevelStatements() =>
-            builder.AddPaths("VariableShadowsField.TopLevelStatements.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void VariableShadowsField_TopLevelStatements() =>
+        builder.AddPaths("VariableShadowsField.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void VariableShadowsField_CS_Latest() =>
-            builder.AddPaths("VariableShadowsField.Latest.cs", "VariableShadowsField.Latest.Partial.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
-    }
+    [TestMethod]
+    public void VariableShadowsField_CS_Latest() =>
+        builder.AddPaths("VariableShadowsField.Latest.cs", "VariableShadowsField.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

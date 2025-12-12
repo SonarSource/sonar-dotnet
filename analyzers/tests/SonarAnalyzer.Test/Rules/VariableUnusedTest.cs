@@ -26,23 +26,15 @@ public class VariableUnusedTest
 
     [TestMethod]
     public void VariableUnused_CS() =>
-        builderCS.AddPaths("VariableUnused.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+        builderCS.AddPaths("VariableUnused.cs").Verify();
 
     [TestMethod]
-    public void VariableUnused_CSharp9() =>
-        builderCS.AddPaths("VariableUnused.CSharp9.cs").WithTopLevelStatements().Verify();
+    public void VariableUnused_CS_TopLevelStatements() =>
+        builderCS.AddPaths("VariableUnused.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
-    public void VariableUnused_CSharp10() =>
-        builderCS.AddPaths("VariableUnused.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-    [TestMethod]
-    public void VariableUnused_CSharp11() =>
-        builderCS.AddPaths("VariableUnused.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-    [TestMethod]
-    public void VariableUnused_CSharp12() =>
-        builderCS.AddPaths("VariableUnused.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).VerifyNoIssues();
+    public void VariableUnused_CS_Latest() =>
+        builderCS.AddPaths("VariableUnused.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void VariableUnused_VB() =>

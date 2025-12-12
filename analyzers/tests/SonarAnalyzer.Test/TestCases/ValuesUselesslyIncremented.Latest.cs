@@ -1,4 +1,7 @@
-﻿public struct S
+﻿using System;
+using System.Numerics;
+
+public struct S
 {
     public S()
     {
@@ -31,4 +34,41 @@
     public (int, (int, int)) M4(int i, int j, int k) =>
         (i++, M1(j++, k++));    // Noncompliant
     //   ^^^
+}
+
+public class Noncompliant
+{
+    public WeirdOperatorOverload ThisExampleIsNoncompliant(WeirdOperatorOverload woo)
+    {
+        return woo--; // Noncompliant
+    }
+}
+
+public class WeirdOperatorOverload : IDecrementOperators<WeirdOperatorOverload>
+{
+    public static WeirdOperatorOverload operator --(WeirdOperatorOverload value) => throw new NotImplementedException();
+}
+
+
+public class FieldKeyword
+{
+    public int Noncompliant
+    {
+        get { return field++; }     // Compliant, field is incremented
+        set { field = value++; }    // FN https://sonarsource.atlassian.net/browse/NET-2844
+    }
+}
+
+public class NullConditionalAssignment
+{
+    public class Sample
+    {
+        public int Value { get; set; }
+    }
+
+    public void TestMethod(Sample sample)
+    {
+        sample?.Value = sample.Value++; // FN https://sonarsource.atlassian.net/browse/NET-2844
+        return sample?.Value++;         // Error [CS1059] The operand of an increment or decrement operator must be a variable, property or indexer
+    }
 }

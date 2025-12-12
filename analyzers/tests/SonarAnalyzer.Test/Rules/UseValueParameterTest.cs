@@ -16,32 +16,33 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class UseValueParameterTest
 {
-    [TestClass]
-    public class UseValueParameterTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<UseValueParameter>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<UseValueParameter>();
 
-        [TestMethod]
-        public void UseValueParameter() =>
-            builder.AddPaths("UseValueParameter.cs").Verify();
+    [TestMethod]
+    public void UseValueParameter() =>
+        builder.AddPaths("UseValueParameter.cs").Verify();
 
-        [TestMethod]
-        public void UseValueParameter_CS_Latest() =>
-            builder.AddPaths("UseValueParameter.Latest.cs", "UseValueParameter.Latest.Partial.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
+    [TestMethod]
+    public void UseValueParameter_CS_Latest() =>
+        builder.AddPaths("UseValueParameter.Latest.cs", "UseValueParameter.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
-        [TestMethod]
-        public void UseValueParameter_InvalidCode() =>
-            builder.AddSnippet(@"
-public int Foo
-{
-    get => field;
-    set => // Noncompliant
-}")
-                .WithErrorBehavior(CompilationErrorBehavior.Ignore)
-                .Verify();
-    }
+    [TestMethod]
+    public void UseValueParameter_InvalidCode() =>
+        builder.AddSnippet("""
+            public int Foo
+            {
+                get => someField;   // Error [CS0103]
+                set =>              // Noncompliant
+                                    // Error@-1 [CS1002]
+                                    // Error@-2 [CS1525]
+            }
+            """)
+            .Verify();
 }

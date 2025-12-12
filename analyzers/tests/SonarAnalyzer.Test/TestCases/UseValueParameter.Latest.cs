@@ -95,3 +95,17 @@ namespace Tests.Diagnostics
         private partial int this[int index] { set; }
     }
 }
+
+public class FieldKeyword
+{
+    public int Noncompliant { get { return field; } init { field = 3; } }  // Noncompliant
+    public int Compliant { get { return field; } init { field = value; } }
+
+}
+
+public partial class PartialEvent
+{
+    public partial event EventHandler Noncompliant;
+    private EventHandler backingField;
+    public partial event EventHandler Compliant;
+}

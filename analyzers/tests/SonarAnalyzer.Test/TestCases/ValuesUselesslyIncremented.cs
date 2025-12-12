@@ -55,4 +55,20 @@ namespace Tests.Diagnostics
             return i;
         }
     }
+
+    public class Properties
+    {
+        private int backingField;
+        public int Noncompliant
+        {
+            get { return backingField++; }          // Compliant, value is 'usefully' incremented
+            set { backingField = value++; }         // FN https://sonarsource.atlassian.net/browse/NET-2844
+        }
+
+        public int NoncompliantTest(Properties properties)
+        {
+            properties.Noncompliant = properties.Noncompliant++; // FN https://sonarsource.atlassian.net/browse/NET-2844
+            return properties.Noncompliant++;                    // Compliant, Property is incremented
+        }
+    }
 }

@@ -99,11 +99,6 @@ namespace Tests.Diagnostics
             {
                 int field = 0; // Noncompliant
             }
-
-            static void doMore()
-            {
-                int field = 0; // Noncompliant
-            }
         }
 
         public void ShadowProperty()
@@ -111,26 +106,6 @@ namespace Tests.Diagnostics
             void doSomething()
             {
                 int Property = 0; // Noncompliant
-            }
-
-            static void doMore()
-            {
-                int Property = 0; // Noncompliant
-            }
-        }
-
-        public void MethodWithLocalVar()
-        {
-            bool isUsed = true;
-
-            void doSomething()
-            {
-                bool isUsed = true; // Compliant - currently the rule only looks at fields and properties
-            }
-
-            static void doMore()
-            {
-                bool isUsed = true; // Compliant
             }
         }
     }
@@ -212,6 +187,28 @@ namespace Tests.Diagnostics
 
             var protectedStaticField = 2;       // FN
             var protectedStaticProperty = 2;    // FN
+        }
+    }
+
+    public static class ClassicExtensions
+    {
+        private static int field;
+        public static int Property => 42;
+
+        public class Sample
+        {
+            public int Value { get; set; }
+        }
+
+        public static void ShadowContainerClass(this Sample sample)
+        {
+            int field = 0;      // Noncompliant
+            int Property = 0;   // Noncompliant
+        }
+
+        public static void ShadowExtendedClass(this Sample sample)
+        {
+            int value = 0;
         }
     }
 }

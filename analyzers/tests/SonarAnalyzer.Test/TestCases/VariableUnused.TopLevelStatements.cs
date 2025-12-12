@@ -44,11 +44,3 @@ void ParenthesizedDesignation()
 record C(string Foo, string Bar);
 
 record Pair(C A, C B);
-
-record Record
-{
-    void Method()
-    {
-        string unusedString = string.Empty; // Noncompliant
-    }
-}
