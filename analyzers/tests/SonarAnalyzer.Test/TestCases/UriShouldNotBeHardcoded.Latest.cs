@@ -116,3 +116,11 @@ public class CSharp13
         var windowsPathStartingWithVariable = "%AppData%\\Adobe\e";
     }
 }
+
+public static class Extensions
+{
+    extension(string)
+    {
+        public static string FilePath => "c:\\blah\\blah\\blah.txt";    // FN https://sonarsource.atlassian.net/browse/NET-2833
+    }
+}

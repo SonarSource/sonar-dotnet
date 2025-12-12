@@ -125,3 +125,9 @@ class Repro_8169
         (string b, (string uri, string c)) a2 = ("C:/test.txt", ("C:/test.txt", "C:/test.txt")); // FN, second
     }
 }
+
+public class Properties
+{
+    public string FilePath => "c:\\blah\\blah\\blah.txt";               // FN https://sonarsource.atlassian.net/browse/NET-2833
+    public string FilePath2 { get; set; } = "c:\\blah\\blah\\blah.txt"; // FN https://sonarsource.atlassian.net/browse/NET-2833
+}

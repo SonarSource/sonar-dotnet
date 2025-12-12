@@ -34,10 +34,8 @@ public class UnusedStringBuilderTest
         builderVB.AddPaths("UnusedStringBuilder.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
     [TestMethod]
-    public void UnusedStringBuilder_CSharp9() =>
-        builderCS.AddPaths("UnusedStringBuilder.CSharp9.cs")
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
+    public void UnusedStringBuilder_CS_Latest() =>
+        builderCS.AddPaths("UnusedStringBuilder.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     [DataRow("", false)]

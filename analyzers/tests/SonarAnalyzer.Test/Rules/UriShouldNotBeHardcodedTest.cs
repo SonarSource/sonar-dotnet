@@ -26,23 +26,21 @@ public class UriShouldNotBeHardcodedTest
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.UriShouldNotBeHardcoded>();
 
     [TestMethod]
-    public void UriShouldNotBeHardcoded_CS_General() =>
+    public void UriShouldNotBeHardcoded_CS() =>
         builderCS.AddPaths("UriShouldNotBeHardcoded.cs").Verify();
 
     [TestMethod]
     public void UriShouldNotBeHardcoded_CS_Exceptions() =>
         builderCS
-        .AddPaths("UriShouldNotBeHardcoded.Exceptions.cs")
-        .AddReferences(MetadataReferenceFacade.SystemXml)
-        .Verify();
+            .AddPaths("UriShouldNotBeHardcoded.Exceptions.cs")
+            .AddReferences(MetadataReferenceFacade.SystemXml)
+            .Verify();
 
     [TestMethod]
     public void UriShouldNotBeHardcoded_CS_Latest() =>
         builderCS.AddPaths("UriShouldNotBeHardcoded.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#if NETFRAMEWORK // HttpContext is available only when targeting .Net Framework
 
     [TestMethod]
     [DataRow("3.0.20105.1")]
@@ -51,9 +49,8 @@ public class UriShouldNotBeHardcodedTest
         builderCS
             .AddPaths("UriShouldNotBeHardcoded.AspNet.cs")
             .AddReferences(MetadataReferenceFacade.SystemWeb.Concat(NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion)))
+            .WithNetFrameworkOnly()
             .Verify();
-
-#endif
 
     [TestMethod]
     [DataRow("2.0.4", "2.0.3", "2.1.1")]
@@ -70,13 +67,13 @@ public class UriShouldNotBeHardcodedTest
 
     private static IEnumerable<MetadataReference> AdditionalReferences(string aspNetCoreMvcVersion, string aspNetCoreRoutingVersion, string netHttpHeadersVersion) =>
         NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetCoreMvcVersion)
-                // for Controller
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
-                // for IActionResult
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreMvcVersion))
-                // for IRouter and VirtualPathData
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion))
-                // for IRouteBuilder
-                .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRouting(aspNetCoreRoutingVersion))
-                .Concat(NuGetMetadataReference.MicrosoftNetHttpHeaders(netHttpHeadersVersion));
+            // for Controller
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcViewFeatures(aspNetCoreMvcVersion))
+            // for IActionResult
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreMvcAbstractions(aspNetCoreMvcVersion))
+            // for IRouter and VirtualPathData
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRoutingAbstractions(aspNetCoreRoutingVersion))
+            // for IRouteBuilder
+            .Concat(NuGetMetadataReference.MicrosoftAspNetCoreRouting(aspNetCoreRoutingVersion))
+            .Concat(NuGetMetadataReference.MicrosoftNetHttpHeaders(netHttpHeadersVersion));
 }

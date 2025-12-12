@@ -41,3 +41,21 @@ public class C
         }
     }
 }
+
+public class Sample
+{
+    async Task MethodInvocation(Sample sample)
+    {
+        sample.VoidMethod();            // Noncompliant {{Await VoidMethodAsync instead.}}
+        await sample.VoidMethodAsync(); // Compliant
+    }
+}
+
+public static class Extensions
+{
+    extension(Sample s)
+    {
+        public void VoidMethod() { }
+        public Task VoidMethodAsync() => Task.CompletedTask;
+    }
+}
