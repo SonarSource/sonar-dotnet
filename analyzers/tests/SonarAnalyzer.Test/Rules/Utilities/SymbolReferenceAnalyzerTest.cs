@@ -211,10 +211,18 @@ public class SymbolReferenceAnalyzerTest
         Verify(fileName, projectType, 4, 4, 5, 6);
 
     [TestMethod]
+    [DataRow("Property.cs", ProjectType.Product)]
+    [DataRow("Property.cs", ProjectType.Test)]
+    [DataRow("Property.FieldKeyword.cs", ProjectType.Product)]
+    [DataRow("Property.FieldKeyword.cs", ProjectType.Test)]
+    public void Verify_Property_CS(string fileName, ProjectType projectType) =>
+        Verify(fileName, projectType, 5, 3, 9, 10);
+
+    [TestMethod]
     [DataRow(ProjectType.Product)]
     [DataRow(ProjectType.Test)]
-    public void Verify_Property_CS(ProjectType projectType) =>
-        Verify("Property.cs", projectType, 5, 3, 9, 10);
+    public void Verify_ExtensionKeyword_CS(ProjectType projectType) =>
+        Verify("ExtensionKeyword.cs", projectType, 5, 3, 5, 10);
 
     [TestMethod]
     [DataRow(ProjectType.Product)]
@@ -248,6 +256,50 @@ public class SymbolReferenceAnalyzerTest
                 secondReference.Reference.Should().ContainSingle(because: "the property is referenced inside Reference2() once").Subject.StartLine.Should().Be(9, because: "The reference to Property happens here");
             }));
     }
+
+    [TestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void Verify_Constructor_Partial_CS(ProjectType projectType) =>
+        CreateBuilder(projectType, "PartialConstructor.cs", "PartialConstructor.Partial.cs")
+            .VerifyUtilityAnalyzer<SymbolReferenceInfo>(x =>
+                x.OrderBy(x => x.FilePath)
+                    .Should().SatisfyRespectively(
+                    x =>
+                    {
+                        x.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\PartialConstructor.cs");
+                        VerifyReferences(x.Reference, 2, 1);
+                        VerifyReferences(x.Reference, 2, 3);
+                    },
+                    x =>
+                    {
+                        x.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\PartialConstructor.Partial.cs");
+                        VerifyReferences(x.Reference, 3, 1);
+                        VerifyReferences(x.Reference, 3, 8);
+                        VerifyReferences(x.Reference, 3, 10, 11);
+                    }));
+
+    [TestMethod]
+    [DataRow(ProjectType.Product)]
+    [DataRow(ProjectType.Test)]
+    public void Verify_Event_Partial_CS(ProjectType projectType) =>
+    CreateBuilder(projectType, "PartialEvent.cs", "PartialEvent.Partial.cs")
+        .VerifyUtilityAnalyzer<SymbolReferenceInfo>(x =>
+            x.OrderBy(x => x.FilePath)
+                .Should().SatisfyRespectively(
+                x =>
+                {
+                    x.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\PartialEvent.cs");
+                    VerifyReferences(x.Reference, 6, 3);
+                    VerifyReferences(x.Reference, 6, 5);
+                    VerifyReferences(x.Reference, 6, 6);
+                },
+                x =>
+                {
+                    x.FilePath.Should().Be(@"Utilities\SymbolReferenceAnalyzer\PartialEvent.Partial.cs");
+                    VerifyReferences(x.Reference, 2, 3);
+                    VerifyReferences(x.Reference, 2, 7);
+                }));
 
     [TestMethod]
     [DataRow(ProjectType.Product)]

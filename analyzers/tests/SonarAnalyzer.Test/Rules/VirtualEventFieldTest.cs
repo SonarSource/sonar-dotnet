@@ -16,42 +16,26 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class VirtualEventFieldTest
 {
-    [TestClass]
-    public class VirtualEventFieldTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<VirtualEventField>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<VirtualEventField>();
 
-        [TestMethod]
-        public void VirtualEventField() =>
-            builder.AddPaths("VirtualEventField.cs").Verify();
+    [TestMethod]
+    public void VirtualEventField() =>
+        builder.AddPaths("VirtualEventField.cs").Verify();
 
-        [TestMethod]
-        public void VirtualEventField_CSharp9() =>
-            builder.AddPaths("VirtualEventField.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void VirtualEventField_Latest() =>
+        builder.AddPaths("VirtualEventField.Latest.cs", "VirtualEventField.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void VirtualEventField_CSharp9_CodeFix() =>
-            builder.WithCodeFix<VirtualEventFieldCodeFix>()
-                .AddPaths("VirtualEventField.CSharp9.cs")
-                .WithCodeFixedPaths("VirtualEventField.CSharp9.Fixed.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void VirtualEventField_Latest_CodeFix() =>
+        builder.WithCodeFix<VirtualEventFieldCodeFix>().AddPaths("VirtualEventField.Latest.cs").WithCodeFixedPaths("VirtualEventField.Latest.Fixed.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyCodeFix();
 
-        [TestMethod]
-        public void VirtualEventField_CSharp11() =>
-            builder.AddPaths("VirtualEventField.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void VirtualEventField_CodeFix() =>
-            builder.WithCodeFix<VirtualEventFieldCodeFix>()
-                .AddPaths("VirtualEventField.cs")
-                .WithCodeFixedPaths("VirtualEventField.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void VirtualEventField_CodeFix() =>
+        builder.WithCodeFix<VirtualEventFieldCodeFix>().AddPaths("VirtualEventField.cs").WithCodeFixedPaths("VirtualEventField.Fixed.cs").VerifyCodeFix();
 }
