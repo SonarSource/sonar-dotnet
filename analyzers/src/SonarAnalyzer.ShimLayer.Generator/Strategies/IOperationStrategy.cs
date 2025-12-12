@@ -20,7 +20,7 @@ public class IOperationStrategy : Strategy
 {
     public IReadOnlyList<MemberDescriptor> Members { get; }
 
-    public IOperationStrategy(Type latest, IReadOnlyList<MemberDescriptor> members)
+    public IOperationStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest)
     {
         Members = members;
     }

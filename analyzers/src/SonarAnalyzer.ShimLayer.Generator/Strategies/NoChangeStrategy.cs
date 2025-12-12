@@ -18,16 +18,13 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class NoChangeStrategy : Strategy
 {
-    private readonly Type latest;
-
-    public NoChangeStrategy(Type latest) =>
-        this.latest = latest;
+    public NoChangeStrategy(Type latest) : base(latest) { }
 
     public override string Generate(StrategyModel model) => null;
 
     public override string ReturnTypeSnippet() =>
-        latest.Name;
+        Latest.Name;
 
     public override string ToConversionSnippet(string from) =>
-        $"({latest.Name}){from}";
+        $"({Latest.Name}){from}";
 }

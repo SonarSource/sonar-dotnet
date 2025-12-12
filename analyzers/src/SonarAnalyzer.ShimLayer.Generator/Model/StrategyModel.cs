@@ -25,7 +25,22 @@ public class StrategyModel : IReadOnlyDictionary<Type, Strategy>
     public IEnumerable<Type> Keys => strategies.Keys;
     public IEnumerable<Strategy> Values => strategies.Values;
     public int Count => strategies.Count;
-    public Strategy this[Type key] => strategies[key];
+    public Strategy this[Type key]
+    {
+        get
+        {
+            if (TryGetValue(key, out var strategy))
+            {
+                return strategy;
+            }
+            else
+            {
+                var defaultStrategy = new NoChangeStrategy(key);
+                Add(key, defaultStrategy);
+                return defaultStrategy;
+            }
+        }
+    }
 
     public StrategyModel() =>
         strategies = [];

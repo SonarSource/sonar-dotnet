@@ -18,26 +18,21 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class NewEnumStrategy : Strategy
 {
-    private readonly Type latest;
-
     public FieldInfo[] Fields { get; }
 
-    public NewEnumStrategy(Type latest, FieldInfo[] fields)
-    {
-        this.latest = latest;
+    public NewEnumStrategy(Type latest, FieldInfo[] fields) : base(latest) =>
         Fields = fields;
-    }
 
     public override string Generate(StrategyModel model)
     {
         var sb = new StringBuilder();
         sb.AppendLine("namespace SonarAnalyzer.ShimLayer;");
         sb.AppendLine();
-        foreach (var attribute in latest.GetCustomAttributesData())
+        foreach (var attribute in Latest.GetCustomAttributesData())
         {
             sb.AppendLine($"[{attribute.AttributeType}]");
         }
-        sb.AppendLine($"public enum {latest.Name} : {Enum.GetUnderlyingType(latest)}");
+        sb.AppendLine($"public enum {Latest.Name} : {Enum.GetUnderlyingType(Latest)}");
         sb.AppendLine("{");
         foreach (var field in Fields)
         {
@@ -48,8 +43,8 @@ public class NewEnumStrategy : Strategy
     }
 
     public override string ReturnTypeSnippet() =>
-        latest.Name;
+        Latest.Name;
 
     public override string ToConversionSnippet(string from) =>
-        $"({latest.Name}){from}";
+        $"({Latest.Name}){from}";
 }

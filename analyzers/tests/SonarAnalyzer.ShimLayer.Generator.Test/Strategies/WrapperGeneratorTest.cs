@@ -25,7 +25,7 @@ public class WrapperGeneratorTest
     public void SkipStrategy()
     {
         var sut = new WrapperGenerator();
-        sut.GenerateWrapper(typeof(ClassDeclarationSyntax), new() { { typeof(ClassDeclarationSyntax), new SkipStrategy() } }).Should().BeNull();
+        sut.GenerateWrapper(typeof(ClassDeclarationSyntax), new() { { typeof(ClassDeclarationSyntax), new SkipStrategy(typeof(ClassDeclarationSyntax)) } }).Should().BeNull();
     }
 
     [TestMethod]

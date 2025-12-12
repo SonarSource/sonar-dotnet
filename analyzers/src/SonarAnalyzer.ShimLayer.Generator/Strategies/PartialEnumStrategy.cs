@@ -18,36 +18,31 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class PartialEnumStrategy : Strategy
 {
-    private readonly Type latest;
-
     public FieldInfo[] Fields { get; }
 
-    public PartialEnumStrategy(Type latest, FieldInfo[] fields)
-    {
-        this.latest = latest;
+    public PartialEnumStrategy(Type latest, FieldInfo[] fields) : base(latest) =>
         Fields = fields;
-    }
 
     public override string Generate(StrategyModel model)
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"using {latest.Namespace};");
+        sb.AppendLine($"using {Latest.Namespace};");
         sb.AppendLine();
         sb.AppendLine("namespace SonarAnalyzer.ShimLayer;");
         sb.AppendLine();
-        sb.AppendLine($"public static class {latest.Name}Ex");
+        sb.AppendLine($"public static class {Latest.Name}Ex");
         sb.AppendLine("{");
         foreach (var field in Fields)
         {
-            sb.AppendLine($"    public const {latest.Name} {field.Name} = ({latest.Name}){field.GetRawConstantValue()};");
+            sb.AppendLine($"    public const {Latest.Name} {field.Name} = ({Latest.Name}){field.GetRawConstantValue()};");
         }
         sb.AppendLine("}");
         return sb.ToString();
     }
 
     public override string ReturnTypeSnippet() =>
-        latest.Name;
+        Latest.Name;
 
     public override string ToConversionSnippet(string from) =>
-        $"({latest.Name}){from}";
+        $"({Latest.Name}){from}";
 }

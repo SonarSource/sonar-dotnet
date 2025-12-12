@@ -130,7 +130,7 @@ public class SyntaxNodeStrategyTest
 
                 public TextSpan Span => this.node.Span;
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor;
-                public SyntaxToken ClassOrStructKeyword => (Microsoft.CodeAnalysis.SyntaxToken)ClassOrStructKeywordAccessor(this.node);
+                public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(this.node);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
                 {
@@ -189,7 +189,7 @@ public class SyntaxNodeStrategyTest
                 static IsPatternExpressionSyntaxWrapper()
                 {
                     WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(IsPatternExpressionSyntaxWrapper));
-                    PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, PatternSyntax>(WrappedType, nameof(Pattern));
+                    PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, nameof(Pattern));
                 }
 
                 private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node) =>
@@ -198,7 +198,7 @@ public class SyntaxNodeStrategyTest
                 [Obsolete]
                 public ExpressionSyntax SyntaxNode => this.node;
 
-                private static readonly Func<ExpressionSyntax, PatternSyntax> PatternAccessor;
+                private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor;
                 public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
 
                 public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node)

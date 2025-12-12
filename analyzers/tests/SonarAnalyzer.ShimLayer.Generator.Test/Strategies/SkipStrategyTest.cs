@@ -22,7 +22,7 @@ public class SkipStrategyTest
     [TestMethod]
     public void SkipStrategy()
     {
-        var sut = new SkipStrategy();
+        var sut = new SkipStrategy(typeof(SyntaxNode));
         sut.Generate([]).Should().BeNull();
     }
 }

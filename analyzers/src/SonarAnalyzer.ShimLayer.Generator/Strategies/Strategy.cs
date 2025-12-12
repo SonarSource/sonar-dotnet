@@ -21,4 +21,12 @@ public abstract class Strategy
     public abstract string Generate(StrategyModel model);
     public abstract string ReturnTypeSnippet();
     public abstract string ToConversionSnippet(string from);
+
+    public Type Latest { get; }
+
+    protected Strategy(Type latest) =>
+        Latest = latest;
+
+    public virtual string CompiletimeTypeSnippet() =>
+        Latest.Name;
 }

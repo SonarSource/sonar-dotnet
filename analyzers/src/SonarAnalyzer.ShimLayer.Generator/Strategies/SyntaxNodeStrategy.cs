@@ -18,13 +18,11 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class SyntaxNodeStrategy : Strategy
 {
-    public Type Latest { get; }
     public Type BaseType { get; }
     public IReadOnlyList<MemberDescriptor> Members { get; }
 
-    public SyntaxNodeStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members)
+    public SyntaxNodeStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest)
     {
-        Latest = latest;
         BaseType = baseType;
         Members = members;
     }
@@ -34,6 +32,9 @@ public class SyntaxNodeStrategy : Strategy
 
     public override string ToConversionSnippet(string from) =>
         $"({Latest.Name}Wrapper){from}";
+
+    public override string CompiletimeTypeSnippet() =>
+        BaseType.Name;
 
     public override string Generate(StrategyModel model) =>
         $$"""
@@ -46,12 +47,12 @@ public class SyntaxNodeStrategy : Strategy
 
         namespace SonarAnalyzer.ShimLayer;
 
-        public readonly partial struct {{Latest.Name}}Wrapper: ISyntaxWrapper<{{BaseType.Name}}>
+        public readonly partial struct {{Latest.Name}}Wrapper: ISyntaxWrapper<{{CompiletimeTypeSnippet()}}>
         {
             public const string WrappedTypeName = "{{Latest.FullName}}";
             private static readonly Type WrappedType;
 
-            private readonly {{BaseType.Name}} node;
+            private readonly {{CompiletimeTypeSnippet()}} node;
 
             static {{Latest.Name}}Wrapper()
             {
@@ -59,11 +60,11 @@ public class SyntaxNodeStrategy : Strategy
         {{string.Join("\n", Members.Where(x => !x.IsPassthrough).Select(x => MemberAccessorInitialization(x.Member, model)))}}
             }
 
-            private {{Latest.Name}}Wrapper({{BaseType.Name}} node) =>
+            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} node) =>
                 this.node = node;
 
             [Obsolete]
-            public {{BaseType.Name}} SyntaxNode => this.node;
+            public {{CompiletimeTypeSnippet()}} SyntaxNode => this.node;
 
         {{string.Join("\n", Members.Select(x => MemberDeclaration(x, model)))}}
 
@@ -79,10 +80,10 @@ public class SyntaxNodeStrategy : Strategy
                     throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                 }
 
-                return new {{Latest.Name}}Wrapper(({{BaseType.Name}})node);
+                return new {{Latest.Name}}Wrapper(({{CompiletimeTypeSnippet()}})node);
             }
 
-            public static implicit operator {{BaseType.Name}}({{Latest.Name}}Wrapper wrapper) =>
+            public static implicit operator {{CompiletimeTypeSnippet()}}({{Latest.Name}}Wrapper wrapper) =>
                 wrapper.node;
 
             public static bool IsInstance(SyntaxNode node) =>
@@ -95,7 +96,7 @@ public class SyntaxNodeStrategy : Strategy
         if (member is PropertyInfo pi)
         {
             return $"""
-                        {member.Name}Accessor = LightupHelpers.CreateSyntaxPropertyAccessor<{BaseType.Name}, {pi.PropertyType.Name}>(WrappedType, nameof({member.Name}));
+                        {member.Name}Accessor = LightupHelpers.CreateSyntaxPropertyAccessor<{BaseType.Name}, {model[pi.PropertyType].CompiletimeTypeSnippet()}>(WrappedType, nameof({member.Name}));
                 """;
         }
         return null;
@@ -107,9 +108,9 @@ public class SyntaxNodeStrategy : Strategy
             { IsPassthrough: true, Member: PropertyInfo pi } => $"""
                     public {pi.PropertyType.Name} {member.Member.Name} => this.node.{member.Member.Name};
                 """,
-            { IsPassthrough: false, Member: PropertyInfo pi } => $"""
-                    private static readonly Func<{BaseType.Name}, {pi.PropertyType.Name}> {member.Member.Name}Accessor;
-                    public {model.AsReturnTypeSnippet(pi.PropertyType)} {member.Member.Name} => {model.ToConversionSnippet(pi.PropertyType, $"{member.Member.Name}Accessor(this.node)")};
+            { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is var propertyTypeStrategy => $"""
+                    private static readonly Func<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {member.Member.Name}Accessor;
+                    public {propertyTypeStrategy.ReturnTypeSnippet()} {member.Member.Name} => {model.ToConversionSnippet(pi.PropertyType, $"{member.Member.Name}Accessor(this.node)")};
                 """,
             _ => null,
         };

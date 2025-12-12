@@ -18,8 +18,6 @@ namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
 public static class ModelBuilder
 {
-    private static readonly SkipStrategy Skip = new();
-
     public static StrategyModel Build(TypeDescriptor[] latest, TypeDescriptor[] baseline)
     {
         var baselineMap = baseline.ToDictionary(x => x.Type.FullName, x => x);
@@ -30,7 +28,7 @@ public static class ModelBuilder
     {
         if (IsSkipped(latest.Type))
         {
-            return Skip;
+            return new SkipStrategy(latest.Type);
         }
         else if (baseline is not null && latest.Members.Select(x => x.ToString()).OrderBy(x => x).SequenceEqual(baseline.Members.Select(x => x.ToString()).OrderBy(x => x)))
         {

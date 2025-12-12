@@ -18,6 +18,8 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class SkipStrategy : Strategy
 {
+    public SkipStrategy(Type latest) : base(latest) { }
+
     public override string ReturnTypeSnippet() => throw new NotImplementedException();
 
     public override string ToConversionSnippet(string from) => throw new NotImplementedException();
