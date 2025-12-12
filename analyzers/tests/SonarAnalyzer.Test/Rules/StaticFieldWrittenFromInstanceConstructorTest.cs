@@ -25,11 +25,11 @@ public class StaticFieldWrittenFromInstanceConstructorTest
 
     [TestMethod]
     public void StaticFieldWrittenFromInstanceConstructor() =>
-        builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+        builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.cs").Verify();
 
     [TestMethod]
     public void StaticFieldWrittenFromInstanceConstructor_Latest() =>
-        builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.Latest.cs")
+        builder.AddPaths("StaticFieldWrittenFromInstanceConstructor.Latest.cs", "StaticFieldWrittenFromInstanceConstructor.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 }

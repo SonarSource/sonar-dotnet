@@ -1,5 +1,18 @@
 ﻿using System;
 
+namespace CSharp8
+{
+    public class Person
+    {
+        private static string text; // Secondary
+
+        public Person(DateTime birthday)
+        {
+            text ??= "empty"; // Noncompliant
+        }
+    }
+}
+
 namespace CSharp9
 {
     public record Person
@@ -100,5 +113,15 @@ namespace CSharp11
         {
             expectedFingers >>>= 5; // Noncompliant
         }
+    }
+}
+
+namespace CSharp14
+{
+    public partial class Person
+    {
+        private static int expectedFingers; // Secondary
+
+        public partial Person(DateTime birthday);
     }
 }

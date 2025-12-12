@@ -16,27 +16,20 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class StaticFieldVisibleTest
 {
-    [TestClass]
-    public class StaticFieldVisibleTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldVisible>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<StaticFieldVisible>();
 
-        [TestMethod]
-        public void StaticFieldVisible() =>
-            builder.AddPaths("StaticFieldVisible.cs").Verify();
+    [TestMethod]
+    public void StaticFieldVisible() =>
+        builder.AddPaths("StaticFieldVisible.cs").Verify();
 
-        [TestMethod]
-        public void StaticFieldVisible_CSharp9() =>
-            builder.AddPaths("StaticFieldVisible.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
-
-        [TestMethod]
-        public void StaticFieldVisible_CSharp10() =>
-            builder.AddPaths("StaticFieldVisible.CSharp10.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
-    }
+    [TestMethod]
+    public void StaticFieldVisible_Latest() =>
+        builder.AddPaths("StaticFieldVisible.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }

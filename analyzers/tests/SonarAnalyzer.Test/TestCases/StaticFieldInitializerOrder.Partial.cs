@@ -12,4 +12,11 @@ namespace Tests.TestCases
 
         public const int Const2 = 5;
     }
+
+    public partial struct StaticFieldsOrderStruct
+    {
+        public static int W = 2;
+
+        public const int Const2 = 5;
+    }
 }
