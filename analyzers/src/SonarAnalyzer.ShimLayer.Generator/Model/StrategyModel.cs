@@ -18,19 +18,15 @@ using System.Collections;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
-public class StrategyModel : IReadOnlyDictionary<Type, Strategy>
+public class StrategyModel : IEnumerable<Strategy>
 {
     private readonly Dictionary<Type, Strategy> strategies;
-
-    public IEnumerable<Type> Keys => strategies.Keys;
-    public IEnumerable<Strategy> Values => strategies.Values;
-    public int Count => strategies.Count;
 
     public Strategy this[Type key]
     {
         get
         {
-            if (TryGetValue(key, out var strategy))
+            if (strategies.TryGetValue(key, out var strategy))
             {
                 return strategy;
             }
@@ -52,19 +48,8 @@ public class StrategyModel : IReadOnlyDictionary<Type, Strategy>
     public void Add(Type type, Strategy strategy) =>
         strategies.Add(type, strategy);
 
-    public bool ContainsKey(Type key) =>
-        strategies.ContainsKey(key);
-
-    public IEnumerator<KeyValuePair<Type, Strategy>> GetEnumerator() =>
-        strategies.GetEnumerator();
-
-    public bool TryGetValue(Type key, out Strategy value) =>
-        strategies.TryGetValue(key, out value);
-
-    public string AsReturnTypeSnippet(Type returnType) =>
-        TryGetValue(returnType, out var strategy)
-            ? strategy.ReturnTypeSnippet()
-            : returnType.Name;
+    public IEnumerator<Strategy> GetEnumerator() =>
+        strategies.Values.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() =>
         GetEnumerator();

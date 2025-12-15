@@ -27,7 +27,7 @@ public class ModelBuilderTest
     {
         var type = typeof(IOperation.OperationList);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+        model[type].Should().BeOfType<SkipStrategy>();
     }
 
     [TestMethod]
@@ -35,7 +35,7 @@ public class ModelBuilderTest
     {
         var type = typeof(IEnumerable<int>);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+        model[type].Should().BeOfType<SkipStrategy>();
     }
 
     [TestMethod]
@@ -43,7 +43,7 @@ public class ModelBuilderTest
     {
         var type = typeof(SyntaxReceiverCreator);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();
+        model[type].Should().BeOfType<SkipStrategy>();
     }
 
     [TestMethod]
@@ -52,7 +52,7 @@ public class ModelBuilderTest
         var type = typeof(NamespaceKind);
         var members = type.GetMembers();
         var model = ModelBuilder.Build([new TypeDescriptor(type, members)], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<NewEnumStrategy>()
+        model[type].Should().BeOfType<NewEnumStrategy>()
             .Which.Fields.Select(x => x.Name).Should().BeEquivalentTo([
                 "Assembly",
                 "Compilation",
@@ -71,7 +71,7 @@ public class ModelBuilderTest
         var module = type.GetMember("Module").Single();
 
         var model = ModelBuilder.Build([new(type, [assembly, compilation, module])], [new(type, [assembly])]);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<PartialEnumStrategy>()
+        model[type].Should().BeOfType<PartialEnumStrategy>()
             .Which.Fields.Select(x => x.Name).Should().BeEquivalentTo([
                 "Compilation",
                 "Module"]);
@@ -82,7 +82,7 @@ public class ModelBuilderTest
     {
         var type = typeof(SyntaxNode);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>();
+        model[type].Should().BeOfType<SyntaxNodeStrategy>();
     }
 
     [TestMethod]
@@ -95,7 +95,7 @@ public class ModelBuilderTest
             new(typeof(MemberDeclarationSyntax), []),
             new(typeof(CSharpSyntaxNode), []),
             new(typeof(SyntaxNode), [])]);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>().Which.BaseType.FullName.Should().Be(typeof(TypeDeclarationSyntax).FullName);
+        model[type].Should().BeOfType<SyntaxNodeStrategy>().Which.BaseType.FullName.Should().Be(typeof(TypeDeclarationSyntax).FullName);
     }
 
     [TestMethod]
@@ -103,7 +103,7 @@ public class ModelBuilderTest
     {
         var type = typeof(RecordDeclarationSyntax);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>().Which.BaseType.Should().BeNull();
+        model[type].Should().BeOfType<SyntaxNodeStrategy>().Which.BaseType.Should().BeNull();
     }
 
     [TestMethod]
@@ -112,7 +112,7 @@ public class ModelBuilderTest
         using var typeLoader = new TypeLoader();
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IOperation));
         var model = ModelBuilder.Build([type], []);
-        model.Should().ContainKey(type.Type).And.ContainSingle().Which.Value.Should().BeOfType<IOperationStrategy>()
+        model[type.Type].Should().BeOfType<IOperationStrategy>()
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
                 "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",
@@ -133,7 +133,7 @@ public class ModelBuilderTest
     {
         var type = typeof(GeneratorExtensions);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();  // ToDo: This will change later, likely to StaticClassStrategy
+        model[type].Should().BeOfType<SkipStrategy>();  // ToDo: This will change later, likely to StaticClassStrategy
     }
 
     [TestMethod]
@@ -145,7 +145,7 @@ public class ModelBuilderTest
         var model = ModelBuilder.Build(
             [new(type, members)],
             [new(type, members.OrderByDescending(x => x.ToString()).ToArray())]);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<NoChangeStrategy>();
+        model[type].Should().BeOfType<NoChangeStrategy>();
     }
 
     [TestMethod]
@@ -157,7 +157,7 @@ public class ModelBuilderTest
         var model = ModelBuilder.Build(
             [new(type, members)],
             [new(type, [])]);           // Fallback for types that do have a baseline (can be used), but do not have a dedicated strategy
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<NoChangeStrategy>();
+        model[type].Should().BeOfType<NoChangeStrategy>();
     }
 
     [TestMethod]
@@ -167,7 +167,7 @@ public class ModelBuilderTest
         var parent = type.GetMember("Parent").Single();
         var ancestors = type.GetMember("Ancestors").Single();
         var model = ModelBuilder.Build([new TypeDescriptor(type, [parent, ancestors])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>()
+        model[type].Should().BeOfType<SyntaxNodeStrategy>()
             .Which.Members.Should().BeEquivalentTo([
                 new MemberDescriptor(parent, false),
                 new MemberDescriptor(ancestors, false)]);
@@ -180,7 +180,7 @@ public class ModelBuilderTest
         var baseline = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(SyntaxNode));
         var latest = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(SyntaxNode));
         var model = ModelBuilder.Build([latest], [baseline]);
-        model.Should().ContainKey(latest.Type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>()
+        model[latest.Type].Should().BeOfType<SyntaxNodeStrategy>()
             .Which.Members.Select(x => (x.Member.ToString(), x.IsPassthrough)).Should().BeEquivalentTo([
                 ("System.String ToFullString()", true),
                 ("System.Void WriteTo(System.IO.TextWriter)", true),
@@ -271,6 +271,6 @@ public class ModelBuilderTest
             type.GetMember("ToString").First()
         };
         var model = ModelBuilder.Build([new(type, membersToSkip)], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SyntaxNodeStrategy>().Which.Members.Should().BeEmpty();
+        model[type].Should().BeOfType<SyntaxNodeStrategy>().Which.Members.Should().BeEmpty();
     }
 }

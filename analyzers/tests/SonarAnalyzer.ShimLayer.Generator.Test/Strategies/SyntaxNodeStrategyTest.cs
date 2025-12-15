@@ -271,7 +271,9 @@ public class SyntaxNodeStrategyTest
                 private SyntaxNodeWrapper(SyntaxNode node) =>
                     this.node = node;
 
-                [Obsolete]
+                public SyntaxNode Node => this.node;
+
+                [Obsolete("Use Node instead")]
                 public SyntaxNode SyntaxNode => this.node;
 
 
@@ -337,7 +339,9 @@ public class SyntaxNodeStrategyTest
                 private IndexerDeclarationSyntaxWrapper(SyntaxNode node) =>
                     this.node = node;
 
-                [Obsolete]
+                public SyntaxNode Node => this.node;
+
+                [Obsolete("Use Node instead")]
                 public SyntaxNode SyntaxNode => this.node;
 
                 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
