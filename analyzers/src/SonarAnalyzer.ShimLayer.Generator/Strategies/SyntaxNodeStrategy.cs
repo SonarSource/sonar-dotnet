@@ -105,16 +105,19 @@ public class SyntaxNodeStrategy : Strategy
         return null;
     }
 
-    private string MemberDeclaration(MemberDescriptor member, StrategyModel model) =>
-        member switch
+    private string MemberDeclaration(MemberDescriptor member, StrategyModel model)
+    {
+        var attributes = SerializeAttributes(member.Member.GetCustomAttributesData(), 4);
+        return member switch
         {
             { IsPassthrough: true, Member: PropertyInfo pi } => $"""
-                    public {pi.PropertyType.Name} {member.Member.Name} => this.node.{member.Member.Name};
+                    {attributes}public {pi.PropertyType.Name} {member.Member.Name} => this.node.{member.Member.Name};
                 """,
             { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is var propertyTypeStrategy => $"""
                     private static readonly Func<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {member.Member.Name}Accessor;
-                    public {propertyTypeStrategy.ReturnTypeSnippet()} {member.Member.Name} => {model.ToConversionSnippet(pi.PropertyType, $"{member.Member.Name}Accessor(this.node)")};
+                    {attributes}public {propertyTypeStrategy.ReturnTypeSnippet()} {member.Member.Name} => {model.ToConversionSnippet(pi.PropertyType, $"{member.Member.Name}Accessor(this.node)")};
                 """,
             _ => null,
         };
+    }
 }

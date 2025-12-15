@@ -29,4 +29,43 @@ public abstract class Strategy
 
     public virtual string CompiletimeTypeSnippet() =>
         Latest.Name;
+
+    protected static string SerializeAttributes(IEnumerable<CustomAttributeData> attributes, int indentSize)
+    {
+        var sb = new StringBuilder();
+        var indent = new string(' ', indentSize);
+        foreach (var attribute in attributes.Where(x => x.AttributeType.Name is not "ExperimentalAttribute" and not "NullableAttribute"))
+        {
+            sb.Append("[").Append(attribute.AttributeType.FullName);
+            if (attribute.ConstructorArguments.Any())
+            {
+                sb.Append("(");
+                sb.Append(string.Join(", ", attribute.ConstructorArguments.Select(SerializeArgument)));
+                sb.Append(")");
+            }
+            sb.AppendLine("]");
+            sb.Append(indent);
+        }
+        return sb.ToString();
+    }
+
+    private static string SerializeArgument(CustomAttributeTypedArgument arg)
+    {
+        if (arg.ArgumentType.Name == nameof(String))
+        {
+            return $@"""{arg.Value}""";
+        }
+        else if (arg.ArgumentType.Name == nameof(Boolean))
+        {
+            return arg.Value.ToString().ToLower();
+        }
+        else if (arg.ArgumentType.IsEnum)   // If the Enum is not in Roslyn 1.3.2, or netstandard2.0, consider excluding the entire attribute
+        {
+            return $"{arg.ArgumentType.FullName}.{Enum.GetName(arg.ArgumentType, arg.Value)}";
+        }
+        else
+        {
+            return arg.Value?.ToString() ?? "null";
+        }
+    }
 }

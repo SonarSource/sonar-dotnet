@@ -28,11 +28,7 @@ public class NewEnumStrategy : Strategy
         var sb = new StringBuilder();
         sb.AppendLine("namespace SonarAnalyzer.ShimLayer;");
         sb.AppendLine();
-        foreach (var attribute in Latest.GetCustomAttributesData())
-        {
-            sb.AppendLine($"[{attribute.AttributeType}]");
-        }
-        sb.AppendLine($"public enum {Latest.Name} : {Enum.GetUnderlyingType(Latest)}");
+        sb.AppendLine($"{SerializeAttributes(Latest.GetCustomAttributesData(), 0)}public enum {Latest.Name} : {Enum.GetUnderlyingType(Latest)}");
         sb.AppendLine("{");
         foreach (var field in Fields)
         {

@@ -290,4 +290,73 @@ public class SyntaxNodeStrategyTest
             }
             """);
     }
+
+    [TestMethod]
+    public void Generate_PropagateMemberAttributes()
+    {
+        var sut = new SyntaxNodeStrategy(
+            typeof(IndexerDeclarationSyntax),
+            typeof(SyntaxNode),
+            [
+                new(typeof(IndexerDeclarationSyntax).GetMember("Semicolon")[0], true),  // Has ObsoleteAttribute to render
+                new(typeof(AliasQualifiedNameSyntax).GetMember("Parent")[0], true)      // Has NullableAttribute to ignore
+            ]);
+        var result = sut.Generate([]);
+        result.Should().BeIgnoringLineEndings("""
+            using System;
+            using System.Collections.Immutable;
+            using Microsoft.CodeAnalysis;
+            using Microsoft.CodeAnalysis.CSharp;
+            using Microsoft.CodeAnalysis.CSharp.Syntax;
+            using Microsoft.CodeAnalysis.Text;
+
+            namespace SonarAnalyzer.ShimLayer;
+
+            public readonly partial struct IndexerDeclarationSyntaxWrapper: ISyntaxWrapper<SyntaxNode>
+            {
+                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax";
+                private static readonly Type WrappedType;
+
+                private readonly SyntaxNode node;
+
+                static IndexerDeclarationSyntaxWrapper()
+                {
+                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(IndexerDeclarationSyntaxWrapper));
+
+                }
+
+                private IndexerDeclarationSyntaxWrapper(SyntaxNode node) =>
+                    this.node = node;
+
+                [Obsolete]
+                public SyntaxNode SyntaxNode => this.node;
+
+                [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+                [System.ObsoleteAttribute("This member is obsolete.", true)]
+                public SyntaxToken Semicolon => this.node.Semicolon;
+                public SyntaxNode Parent => this.node.Parent;
+
+                public static explicit operator IndexerDeclarationSyntaxWrapper(SyntaxNode node)
+                {
+                    if (node is null)
+                    {
+                        return default;
+                    }
+
+                    if (!IsInstance(node))
+                    {
+                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                    }
+
+                    return new IndexerDeclarationSyntaxWrapper((SyntaxNode)node);
+                }
+
+                public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static bool IsInstance(SyntaxNode node) =>
+                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+            }
+            """);
+    }
 }
