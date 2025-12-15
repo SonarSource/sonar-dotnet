@@ -58,7 +58,9 @@ public class SyntaxNodeStrategyTest
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
                     this.node = node;
 
-                [Obsolete]
+                public TypeDeclarationSyntax Node => this.node;
+
+                [Obsolete("Use Node instead")]
                 public TypeDeclarationSyntax SyntaxNode => this.node;
 
 
@@ -125,7 +127,9 @@ public class SyntaxNodeStrategyTest
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
                     this.node = node;
 
-                [Obsolete]
+                public TypeDeclarationSyntax Node => this.node;
+
+                [Obsolete("Use Node instead")]
                 public TypeDeclarationSyntax SyntaxNode => this.node;
 
                 public TextSpan Span => this.node.Span;
@@ -195,7 +199,9 @@ public class SyntaxNodeStrategyTest
                 private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node) =>
                     this.node = node;
 
-                [Obsolete]
+                public ExpressionSyntax Node => this.node;
+
+                [Obsolete("Use Node instead")]
                 public ExpressionSyntax SyntaxNode => this.node;
 
                 private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor;

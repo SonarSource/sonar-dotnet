@@ -63,7 +63,9 @@ public class SyntaxNodeStrategy : Strategy
             private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} node) =>
                 this.node = node;
 
-            [Obsolete]
+            public {{CompiletimeTypeSnippet()}} Node => this.node;
+
+            [Obsolete("Use Node instead")]
             public {{CompiletimeTypeSnippet()}} SyntaxNode => this.node;
 
         {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
