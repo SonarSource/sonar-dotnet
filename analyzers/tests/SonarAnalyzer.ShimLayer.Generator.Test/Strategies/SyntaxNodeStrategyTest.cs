@@ -224,4 +224,70 @@ public class SyntaxNodeStrategyTest
             }
             """);
     }
+
+    [TestMethod]
+    public void Generate_SkippedMembers_DoNotProduceEmptyLines()
+    {
+        var unsupportedMember = new MemberDescriptor(typeof(SyntaxNode).GetMembers().OfType<MethodInfo>().First(x => x.ReturnType.IsNested), true);
+        var sut = new SyntaxNodeStrategy(
+            typeof(SyntaxNode),
+            typeof(SyntaxNode),
+            Enumerable.Repeat(unsupportedMember, 20).ToList());    // This should not produce 20 empty lines
+
+        var result = sut.Generate(new() { { typeof(PatternSyntax), sut } });
+        result.Should().BeIgnoringLineEndings(
+            """
+            using System;
+            using System.Collections.Immutable;
+            using Microsoft.CodeAnalysis;
+            using Microsoft.CodeAnalysis.CSharp;
+            using Microsoft.CodeAnalysis.CSharp.Syntax;
+            using Microsoft.CodeAnalysis.Text;
+
+            namespace SonarAnalyzer.ShimLayer;
+
+            public readonly partial struct SyntaxNodeWrapper: ISyntaxWrapper<SyntaxNode>
+            {
+                public const string WrappedTypeName = "Microsoft.CodeAnalysis.SyntaxNode";
+                private static readonly Type WrappedType;
+
+                private readonly SyntaxNode node;
+
+                static SyntaxNodeWrapper()
+                {
+                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(SyntaxNodeWrapper));
+
+                }
+
+                private SyntaxNodeWrapper(SyntaxNode node) =>
+                    this.node = node;
+
+                [Obsolete]
+                public SyntaxNode SyntaxNode => this.node;
+
+
+
+                public static explicit operator SyntaxNodeWrapper(SyntaxNode node)
+                {
+                    if (node is null)
+                    {
+                        return default;
+                    }
+
+                    if (!IsInstance(node))
+                    {
+                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                    }
+
+                    return new SyntaxNodeWrapper((SyntaxNode)node);
+                }
+
+                public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
+                    wrapper.node;
+
+                public static bool IsInstance(SyntaxNode node) =>
+                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+            }
+            """);
+    }
 }

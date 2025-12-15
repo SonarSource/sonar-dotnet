@@ -57,7 +57,7 @@ public class SyntaxNodeStrategy : Strategy
             static {{Latest.Name}}Wrapper()
             {
                 WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof({{Latest.Name}}Wrapper));
-        {{string.Join("\n", Members.Where(x => !x.IsPassthrough).Select(x => MemberAccessorInitialization(x.Member, model)))}}
+        {{JoinLines(Members.Where(x => !x.IsPassthrough).Select(x => MemberAccessorInitialization(x.Member, model)))}}
             }
 
             private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} node) =>
@@ -66,7 +66,7 @@ public class SyntaxNodeStrategy : Strategy
             [Obsolete]
             public {{CompiletimeTypeSnippet()}} SyntaxNode => this.node;
 
-        {{string.Join("\n", Members.Select(x => MemberDeclaration(x, model)))}}
+        {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
 
             public static explicit operator {{Latest.Name}}Wrapper(SyntaxNode node)
             {
@@ -90,6 +90,9 @@ public class SyntaxNodeStrategy : Strategy
                 node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
         }
         """;
+
+    private static string JoinLines(IEnumerable<string> lines) =>
+        string.Join("\n", lines.Where(x => x is not null));
 
     private string MemberAccessorInitialization(MemberInfo member, StrategyModel model)
     {
