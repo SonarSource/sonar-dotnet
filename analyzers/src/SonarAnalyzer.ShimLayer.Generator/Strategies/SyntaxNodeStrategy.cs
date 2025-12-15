@@ -96,16 +96,12 @@ public class SyntaxNodeStrategy : Strategy
     private static string JoinLines(IEnumerable<string> lines) =>
         string.Join("\n", lines.Where(x => x is not null));
 
-    private string MemberAccessorInitialization(MemberInfo member, StrategyModel model)
-    {
-        if (member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy)
-        {
-            return $"""
-                        {member.Name}Accessor = LightupHelpers.CreateSyntaxPropertyAccessor<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}>(WrappedType, nameof({member.Name}));
-                """;
-        }
-        return null;
-    }
+    private string MemberAccessorInitialization(MemberInfo member, StrategyModel model) =>
+        member is PropertyInfo property && model[property.PropertyType] is { IsSupported: true } propertyTypeStrategy
+            ? $"""
+                        {member.Name}Accessor = {propertyTypeStrategy.PropertyAccessorInitializerSnippet(CompiletimeTypeSnippet(), member.Name)};
+                """
+            : null;
 
     private string MemberDeclaration(MemberDescriptor member, StrategyModel model)
     {
@@ -113,7 +109,7 @@ public class SyntaxNodeStrategy : Strategy
         return member switch
         {
             { IsPassthrough: true, Member: PropertyInfo pi } => $"""
-                    {attributes}public {pi.PropertyType.Name} {member.Member.Name} => this.node.{member.Member.Name};
+                    {attributes}public {model[pi.PropertyType].CompiletimeTypeSnippet()} {member.Member.Name} => this.node.{member.Member.Name};
                 """,
             { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
                     private static readonly Func<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {member.Member.Name}Accessor;

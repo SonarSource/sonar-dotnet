@@ -30,6 +30,12 @@ public class StrategyModel : IEnumerable<Strategy>
             {
                 return strategy;
             }
+            else if (key.Name is "SyntaxList`1" or "SeparatedSyntaxList`1")
+            {
+                var genericStrategy = new GenericStrategy(key);
+                Add(key, genericStrategy);
+                return genericStrategy;
+            }
             else
             {
                 var defaultStrategy = new NoChangeStrategy(key);
