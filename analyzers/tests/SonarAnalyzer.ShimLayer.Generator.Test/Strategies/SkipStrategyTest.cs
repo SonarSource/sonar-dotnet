@@ -25,4 +25,12 @@ public class SkipStrategyTest
         var sut = new SkipStrategy(typeof(SyntaxNode));
         sut.Generate([]).Should().BeNull();
     }
+
+    [TestMethod]
+    public void ReturnTypeSnippet() =>
+        new SkipStrategy(typeof(SyntaxNode)).Invoking(x => x.ReturnTypeSnippet()).Should().Throw<NotSupportedException>();
+
+    [TestMethod]
+    public void ToConversionSnippet() =>
+        new SkipStrategy(typeof(SyntaxNode)).Invoking(x => x.ToConversionSnippet("Lorem ipsum")).Should().Throw<NotSupportedException>();
 }

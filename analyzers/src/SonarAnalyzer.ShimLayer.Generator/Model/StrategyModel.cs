@@ -25,6 +25,7 @@ public class StrategyModel : IReadOnlyDictionary<Type, Strategy>
     public IEnumerable<Type> Keys => strategies.Keys;
     public IEnumerable<Strategy> Values => strategies.Values;
     public int Count => strategies.Count;
+
     public Strategy this[Type key]
     {
         get
@@ -64,11 +65,6 @@ public class StrategyModel : IReadOnlyDictionary<Type, Strategy>
         TryGetValue(returnType, out var strategy)
             ? strategy.ReturnTypeSnippet()
             : returnType.Name;
-
-    public string ToConversionSnippet(Type convertFrom, string expression) =>
-        TryGetValue(convertFrom, out var strategy)
-            ? strategy.ToConversionSnippet(expression)
-            : $"({convertFrom.FullName}){expression}";
 
     IEnumerator IEnumerable.GetEnumerator() =>
         GetEnumerator();

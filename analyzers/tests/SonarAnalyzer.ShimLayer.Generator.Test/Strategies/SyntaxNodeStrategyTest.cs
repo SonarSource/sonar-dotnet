@@ -92,15 +92,18 @@ public class SyntaxNodeStrategyTest
     [TestMethod]
     public void Generate_RecordDeclarationSyntax()
     {
+        var skippedPropertyTypeMember = (PropertyInfo)typeof(RecordDeclarationSyntax).GetMember("ConstraintClauses")[0];
         var sut = new SyntaxNodeStrategy(
             typeof(RecordDeclarationSyntax),
             typeof(TypeDeclarationSyntax),
             [
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(SyntaxNode.Span))[0], true),
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.ClassOrStructKeyword))[0], false)
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.ClassOrStructKeyword))[0], false),
+                new(skippedPropertyTypeMember, false) // PropertyType is skipped and this should not render anything
             ]);
-        var result = sut.Generate([]);
-        result.Should().BeIgnoringLineEndings(
+        var model = new StrategyModel(new() { { skippedPropertyTypeMember.PropertyType, new SkipStrategy(skippedPropertyTypeMember.PropertyType) } });
+
+        sut.Generate(model).Should().BeIgnoringLineEndings(
             """
             using System;
             using System.Collections.Immutable;

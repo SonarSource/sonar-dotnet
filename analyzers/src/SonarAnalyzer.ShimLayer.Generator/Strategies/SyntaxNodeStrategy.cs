@@ -98,10 +98,10 @@ public class SyntaxNodeStrategy : Strategy
 
     private string MemberAccessorInitialization(MemberInfo member, StrategyModel model)
     {
-        if (member is PropertyInfo pi)
+        if (member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy)
         {
             return $"""
-                        {member.Name}Accessor = LightupHelpers.CreateSyntaxPropertyAccessor<{BaseType.Name}, {model[pi.PropertyType].CompiletimeTypeSnippet()}>(WrappedType, nameof({member.Name}));
+                        {member.Name}Accessor = LightupHelpers.CreateSyntaxPropertyAccessor<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}>(WrappedType, nameof({member.Name}));
                 """;
         }
         return null;
@@ -115,9 +115,9 @@ public class SyntaxNodeStrategy : Strategy
             { IsPassthrough: true, Member: PropertyInfo pi } => $"""
                     {attributes}public {pi.PropertyType.Name} {member.Member.Name} => this.node.{member.Member.Name};
                 """,
-            { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is var propertyTypeStrategy => $"""
+            { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
                     private static readonly Func<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {member.Member.Name}Accessor;
-                    {attributes}public {propertyTypeStrategy.ReturnTypeSnippet()} {member.Member.Name} => {model.ToConversionSnippet(pi.PropertyType, $"{member.Member.Name}Accessor(this.node)")};
+                    {attributes}public {propertyTypeStrategy.ReturnTypeSnippet()} {member.Member.Name} => {propertyTypeStrategy.ToConversionSnippet($"{member.Member.Name}Accessor(this.node)")};
                 """,
             _ => null,
         };
