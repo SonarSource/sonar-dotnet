@@ -1,8 +1,51 @@
 ﻿using System;
 
-Record.count++; // Compliant - static field set from static method
-Structure.count++;                                        // Compliant - static field set from static method
-RecordStructure.count++;                                  // Compliant - static field set from static method
+class StaticFieldWrittenFromInstanceMember
+{
+    private static string text; // Secondary
+
+    public void DoSomething()
+    {
+        text ??= "empty"; // Noncompliant
+    }
+
+    public static void DoSomethingStatic()
+    {
+        text ??= "empty";
+    }
+}
+
+interface IStaticFieldWrittenFromInstanceMember
+{
+    private static int count = 0;
+//                     ^^^^^^^^^ Secondary
+//                     ^^^^^^^^^ Secondary@-1
+
+    public void DoSomething()
+    {
+        count++;  // Noncompliant {{Remove this set, which updates a 'static' field from an instance method.}}
+//      ^^^^^
+        var action = new Action(() =>
+        {
+            count++; // Compliant, already reported on this symbol
+        });
+    }
+
+    public static void DoSomethingStatic()
+    {
+        count++;
+    }
+
+    public int MyProperty
+    {
+        get { return 0; }
+        set
+        {
+            count++; // Noncompliant {{Remove this set, which updates a 'static' field from an instance property.}}
+            count += 42; // Compliant, already reported on this symbol
+        }
+    }
+}
 
 record Record
 {
@@ -139,5 +182,24 @@ class CSharp13
         public partial int MyProperty { get; set; }
         private int myVar;
         private static int count = 0; // Secondary
+    }
+}
+
+static class CSharp14
+{
+    class Sample
+    {
+        public static int count = 0;    // Secondary
+    }
+
+    static int count = 0;               // Secondary
+
+    extension(Sample sample)
+    {
+        void Method()
+        {
+            count++;                    // Noncompliant
+            Sample.count++;             // Noncompliant
+        }
     }
 }

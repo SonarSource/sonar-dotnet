@@ -64,3 +64,33 @@ namespace CSharp13
         }
     }
 }
+
+namespace CSharp14
+{
+    class NullConditionalAssignment
+    {
+        string s;
+        void Method(NullConditionalAssignment sample)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                sample?.s += "A";   // FN NET-2858
+            }
+        }
+    }
+
+    class FieldKeyword
+    {
+        string Property
+        {
+            get
+            {
+                for (int i = 0; i < 50; i++)
+                {
+                    field += "A";   // FN NET-2859
+                }
+                return field;
+            }
+        }
+    }
+}

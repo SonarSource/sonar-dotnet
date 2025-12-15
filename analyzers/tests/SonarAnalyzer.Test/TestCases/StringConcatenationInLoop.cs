@@ -8,7 +8,7 @@ namespace Tests.Diagnostics
         private string field = "";
         private string Property { get; set; }
 
-        public StringConcatenationInLoop(IList<MyObject> objects, string p)
+        public StringConcatenationInLoop(IList<MyObject> objects, string p, StringConcatenationInLoop sample)
         {
             string s = "";
             Dictionary<string, string> dict = new Dictionary<string, string>();
@@ -39,14 +39,16 @@ namespace Tests.Diagnostics
                 sLoop += "a";
 
                 // https://github.com/SonarSource/sonar-dotnet/issues/7722
-                p = p + "a";               // FN parameter
-                p += "a";                  // FN parameter
+                p = p + "a";                        // FN parameter
+                p += "a";                           // FN parameter
 
-                field = field + "a";       // FN field
-                field += "a";              // FN field
+                field = field + "a";                // FN field
+                field += "a";                       // FN field
 
-                Property = Property + "a"; // FN property
-                Property += "a";           // FN property
+                Property = Property + "a";          // FN property
+                Property += "a";                    // FN property
+
+                sample.field = sample.field + "a";  // FN NET-2858
             }
 
             while (true)

@@ -28,10 +28,6 @@ public class StreamReadStatementTest
         builder.AddPaths("StreamReadStatement.cs").Verify();
 
     [TestMethod]
-    public void StreamReadStatement_CSharp10() =>
-        builder.AddPaths("StreamReadStatement.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
-
-    [TestMethod]
-    public void StreamReadStatement_CSharp11() =>
-        builder.AddPaths("StreamReadStatement.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
+    public void StreamReadStatement_Latest() =>
+        builder.AddPaths("StreamReadStatement.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

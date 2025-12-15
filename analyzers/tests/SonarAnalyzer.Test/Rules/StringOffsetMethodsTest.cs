@@ -16,21 +16,20 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class StringOffsetMethodsTest
 {
-    [TestClass]
-    public class StringOffsetMethodsTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<StringOffsetMethods>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<StringOffsetMethods>();
 
-        [TestMethod]
-        public void StringOffsetMethods() =>
-            builder.AddPaths("StringOffsetMethods.cs").Verify();
+    [TestMethod]
+    public void StringOffsetMethods() =>
+        builder.AddPaths("StringOffsetMethods.cs").Verify();
 
-        [TestMethod]
-        public void StringOffsetMethods_CSharp11() =>
-            builder.AddPaths("StringOffsetMethods.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-    }
+    [TestMethod]
+    public void StringOffsetMethods_Latest() =>
+        builder.AddPaths("StringOffsetMethods.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }
