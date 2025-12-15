@@ -16,28 +16,27 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class SwitchCaseFallsThroughToDefaultTest
 {
-    [TestClass]
-    public class SwitchCaseFallsThroughToDefaultTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<SwitchCaseFallsThroughToDefault>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<SwitchCaseFallsThroughToDefault>();
 
-        [TestMethod]
-        public void SwitchCaseFallsThroughToDefault() =>
-            builder.AddPaths("SwitchCaseFallsThroughToDefault.cs").Verify();
+    [TestMethod]
+    public void SwitchCaseFallsThroughToDefault() =>
+        builder.AddPaths("SwitchCaseFallsThroughToDefault.cs").Verify();
 
-        [TestMethod]
-        public void SwitchCaseFallsThroughToDefault_CSharp9() =>
-            builder.AddPaths("SwitchCaseFallsThroughToDefault.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void SwitchCaseFallsThroughToDefault_TopLevelStatements() =>
+        builder.AddPaths("SwitchCaseFallsThroughToDefault.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .Verify();
 
-        [TestMethod]
-        public void SwitchCaseFallsThroughToDefault_CodeFix() =>
-            builder.AddPaths("SwitchCaseFallsThroughToDefault.cs")
-                .WithCodeFix<SwitchCaseFallsThroughToDefaultCodeFix>()
-                .WithCodeFixedPaths("SwitchCaseFallsThroughToDefault.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void SwitchCaseFallsThroughToDefault_CodeFix() =>
+        builder.AddPaths("SwitchCaseFallsThroughToDefault.cs")
+            .WithCodeFix<SwitchCaseFallsThroughToDefaultCodeFix>()
+            .WithCodeFixedPaths("SwitchCaseFallsThroughToDefault.Fixed.cs")
+            .VerifyCodeFix();
 }

@@ -8,10 +8,12 @@
         public void Method()
         {
             [TestMethod]
-            void NestedTest() { }
+            void NestedTest()
+            { }
 
             [DataTestMethod]
-            void NestedDataTest() { }
+            void NestedDataTest()
+            { }
         }
     }
 
@@ -40,6 +42,24 @@
         {
         }
     }
+
+    [DerivedTest<int>]
+    class DerivedTestSuite // Noncompliant {{Add some tests to this class.}}
+    {
+        public void Method()
+        {
+        }
+    }
+
+    public class DerivedTestAttribute<T> : TestClassAttribute
+    {
+    }
+
+    [TestClass]
+    class ClassTest1(int primaryConstructor) // Noncompliant
+    //    ^^^^^^^^^^
+    {
+    }
 }
 
 namespace NUnitTests
@@ -52,10 +72,18 @@ namespace NUnitTests
         public void Method()
         {
             [Test]
-            void NestedTest() { }
+            void NestedTest()
+            { }
 
             [TestCase(42)]
-            void NestedTestCase() { }
+            void NestedTestCase()
+            { }
         }
+    }
+
+    [TestFixture]
+    class ClassTest2(int primaryConstructor) // Noncompliant
+    //    ^^^^^^^^^^
+    {
     }
 }

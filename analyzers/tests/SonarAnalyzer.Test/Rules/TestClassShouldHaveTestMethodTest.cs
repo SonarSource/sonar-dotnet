@@ -53,28 +53,10 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
-        public void TestClassShouldHaveTestMethod_CSharp9() =>
+        public void TestClassShouldHaveTestMethod_Latest() =>
             builder
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .AddPaths("TestClassShouldHaveTestMethod.CSharp9.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
-                .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
-                .Verify();
-
-        [TestMethod]
-        public void TestClassShouldHaveTestMethod_CSharp11() =>
-            builder
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .AddPaths("TestClassShouldHaveTestMethod.CSharp11.cs")
-                .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
-                .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
-                .Verify();
-
-        [TestMethod]
-        public void TestClassShouldHaveTestMethod_CSharp12() =>
-            builder
-                .WithOptions(LanguageOptions.FromCSharp12)
-                .AddPaths("TestClassShouldHaveTestMethod.CSharp12.cs")
+                .AddPaths("TestClassShouldHaveTestMethod.Latest.cs")
+                .WithOptions(LanguageOptions.CSharpLatest)
                 .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
                 .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
                 .Verify();

@@ -206,19 +206,12 @@ public class TestMethodShouldContainAssertionTest
             .Verify();
 
     [TestMethod]
-    public void TestMethodShouldContainAssertion_CSharp9() =>
-        builder.AddPaths("TestMethodShouldContainAssertion.CSharp9.cs")
+    public void TestMethodShouldContainAssertion_Latest() =>
+        builder.AddPaths("TestMethodShouldContainAssertion.Latest.cs")
             .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
             .AddReferences(NuGetMetadataReference.XunitFramework(Latest))
             .AddReferences(NuGetMetadataReference.NUnit(Latest))
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void TestMethodShouldContainAssertion_CSharp11() =>
-        builder.AddPaths("TestMethodShouldContainAssertion.CSharp11.cs")
-            .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV1)
-            .WithOptions(LanguageOptions.FromCSharp11)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
     internal static VerifierBuilder WithTestReferences(IEnumerable<MetadataReference> testFrameworkReference,

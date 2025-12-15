@@ -8,10 +8,12 @@
         public void Method()
         {
             [TestMethod]
-            void NestedTest() { } // Compliant - test methods must be public, this code does not work
+            void NestedTest()
+            { } // Compliant - test methods must be public, this code does not work
 
             [DataTestMethod]
-            void NestedDataTest() { } // Compliant - test methods must be public, this code does not work
+            void NestedDataTest()
+            { } // Compliant - test methods must be public, this code does not work
         }
     }
 
@@ -41,6 +43,21 @@
 
         private void DoTheWork() =>
             Assert.AreEqual(true, true);
+    }
+
+    [TestClass]
+    class DerivedTestSuite
+    {
+        [DerivedTestMethodAttribute<int>]
+        public void TestMethod1() // Noncompliant {{Add at least one assertion to this test case.}}
+//                  ^^^^^^^^^^^
+        {
+            var x = 42;
+        }
+    }
+
+    public class DerivedTestMethodAttribute<T> : TestMethodAttribute
+    {
     }
 }
 

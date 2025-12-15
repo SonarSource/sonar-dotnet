@@ -14,6 +14,25 @@
             void NestedDataTest() { } // Noncompliant
         }
     }
+
+    [DerivedTestClassAttribute<int>]
+    class DerivedTestSuite
+    {
+        public void Method()
+        {
+            [DerivedTestMethodAttribute<int>]
+            void NestedTest() { } // Noncompliant
+
+            [DerivedDataTestMethodAttribute<int>]
+            void NestedDataTest() { } // Noncompliant
+        }
+    }
+
+    public class DerivedTestClassAttribute<T> : TestClassAttribute { }
+
+    public class DerivedTestMethodAttribute<T>: TestMethodAttribute { }
+
+    public class DerivedDataTestMethodAttribute<T> : DataTestMethodAttribute { }
 }
 
 namespace NUnitTests
