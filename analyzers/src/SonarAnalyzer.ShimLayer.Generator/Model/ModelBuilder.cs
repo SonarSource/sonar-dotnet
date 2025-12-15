@@ -52,7 +52,10 @@ public static class ModelBuilder
         // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
         else
         {
-            return null;    // ToDo: Throw NotSupportedException, there should be nothing left after explicitly handling all known cases
+            // ToDo: Throw NotSupportedException instead of skip, there should be nothing left after explicitly handling all known cases
+            return baseline is null
+                ? new SkipStrategy(latest.Type)
+                : new NoChangeStrategy(latest.Type);
         }
     }
 

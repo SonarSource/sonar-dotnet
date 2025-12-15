@@ -133,7 +133,7 @@ public class ModelBuilderTest
     {
         var type = typeof(GeneratorExtensions);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeNull();  // ToDo: This will change later, likely to StaticClassStrategy
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<SkipStrategy>();  // ToDo: This will change later, likely to StaticClassStrategy
     }
 
     [TestMethod]
@@ -145,6 +145,18 @@ public class ModelBuilderTest
         var model = ModelBuilder.Build(
             [new(type, members)],
             [new(type, members.OrderByDescending(x => x.ToString()).ToArray())]);
+        model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<NoChangeStrategy>();
+    }
+
+    [TestMethod]
+    public void Build_NoChangeStrategy_DifferentMembers()
+    {
+        var type = typeof(SyntaxToken);
+        var members = type.GetMembers();
+
+        var model = ModelBuilder.Build(
+            [new(type, members)],
+            [new(type, [])]);           // Fallback for types that do have a baseline (can be used), but do not have a dedicated strategy
         model.Should().ContainKey(type).And.ContainSingle().Which.Value.Should().BeOfType<NoChangeStrategy>();
     }
 
