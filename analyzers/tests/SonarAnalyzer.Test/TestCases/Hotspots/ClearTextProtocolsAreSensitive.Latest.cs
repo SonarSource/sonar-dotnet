@@ -2,39 +2,34 @@
 using System.Net;
 using System.Net.Mail;
 
-const string a = "http://foo.com"; // Noncompliant {{Using http protocol is insecure. Use https instead.}}
-const string b = "https://foo.com";
-
-const string e = @"telnet://anonymous@foo.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
-const string f = @"ssh://anonymous@foo.com";
-
-string i = $"ftp://anonymous@foo.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
-string l = $"ftp://anonymous@127.0.0.1";
-
-const string protocol1 = "http://";
-const string protocol2 = "https://";
-const string address = "foo.com";
-const string noncompliant = $"{protocol1}{address}"; // Noncompliant
-const string compliant = $"{protocol2}{address}";
-
-string nestedNoncompliant = $"{$"{protocol1}somtehing."}{address}"; // Noncompliant
-// Noncompliant@-1
-
-void Method()
+public class Usings
 {
-    var a = "http://foo.com"; // Noncompliant
-    var b = "https://foo.com";
-    var httpProtocolScheme = "http://"; // It's compliant when standalone
-    Telnet c = new(); // Noncompliant
-    Telnet d;
-    d = new();        // Noncompliant
+    public void Method()
+    {
+        using var wc = new WebClient();
+        wc.DownloadData("http://foo.com"); // Noncompliant
+        wc.DownloadData("https://foo.com");
 
-    var uri = new Uri("http://foo.com"); // Noncompliant
-    var uriSafe = new Uri("https://foo.com");
+        using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
+        using var constructorFalse = new SmtpClient("host", 25) { EnableSsl = false }; // Noncompliant
 
-    using var wc = new WebClient();
-    wc.DownloadData("http://foo.com"); // Noncompliant
-    wc.DownloadData("https://foo.com");
+        using var constructor42 = new SmtpClient("host", 25) { EnableSsl = 42 }; // Error [CS0029] Cannot implicitly convert type 'int' to 'bool'
+                                                                                 // Noncompliant@-1 FP
+
+        using var localhosting = new SmtpClient("localhosting", 25); // Noncompliant
+        using var localhost = new SmtpClient("localhost", 25); // Compliant due to well known value
+        using var loopback = new SmtpClient("127.0.0.1", 25); // Compliant due to well known value
+        using var constructorTrue = new SmtpClient("host", 25) { EnableSsl = true };
+
+        using var propertyTrue = new SmtpClient("host", 25); // Compliant, property is set below
+        propertyTrue.EnableSsl = true;
+
+        using var propertyFalse = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
+        propertyFalse.EnableSsl = false;
+
+        using var setReset = new SmtpClient("host", 25) { EnableSsl = true }; // FN - it is later set to false
+        setReset.EnableSsl = false;
+    }
 }
 
 public record Record
@@ -140,5 +135,39 @@ public class CSharp13
         _ = "telnet://anonymous@example.com\u001b"; // FN
         _ = "ftp://anonymous@\e";                   // Noncompliant
         _ = "ftp://anonymous@" + '\e';              // Noncompliant
+    }
+}
+
+public static class Extensions
+{
+    extension (string s)
+    {
+        public string CompliantProp => "https://foo.com";       // Compliant
+        public string NonCompliantProp => "http://foo.com";     // Noncompliant
+
+        public string CompliantMethod() => "https://foo.com";   // Compliant
+        public string NonCompliantMethod() => "http://foo.com";   // Noncompliant
+    }
+}
+
+public class FieldKeyword
+{
+    public string Compliant { get { return "https://foo.com" + field; } set { field = "https://foo.com" + value; } }    // Compliant
+    public string NonCompliant
+    {
+        get { return "http://foo.com" + field; }    // Noncompliant
+        set { field = "http://foo.com" + value; } } // Noncompliant
+}
+
+public class NullConditionalAssignment
+{
+    public class Sample
+    {
+        public string Url { get; set; }
+    }
+    public void SomeMethod(Sample sample)
+    {
+        sample?.Url = "https://foo.com";  // Compliant
+        sample?.Url = "http://foo.com";  // Noncompliant
     }
 }

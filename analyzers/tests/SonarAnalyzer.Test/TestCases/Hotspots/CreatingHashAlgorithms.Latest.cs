@@ -117,15 +117,15 @@ class CSharp13
 {
     void KMAK_Hashing()
     {
-        using var kmac128 = new Kmac128(new byte[] { 0x01, 0x02, 0x03, 0x04 }); // Compliant
-        using var kmac256 = new Kmac256(new byte[] { 0x01, 0x02, 0x03, 0x04 }); // Compliant
+        using var kmac128 = new Kmac128(new byte[] { 0x01, 0x02, 0x03, 0x04 });       // Compliant
+        using var kmac256 = new Kmac256(new byte[] { 0x01, 0x02, 0x03, 0x04 });       // Compliant
         using var kmacXof128 = new KmacXof128(new byte[] { 0x01, 0x02, 0x03, 0x04 }); // Compliant
         using var kmacXof256 = new KmacXof256(new byte[] { 0x01, 0x02, 0x03, 0x04 }); // Compliant
 
         byte[] data = Encoding.UTF8.GetBytes("KMAK");
         byte[] key = new byte[] { 0x01, 0x02, 0x03, 0x04 };
-        byte[] mac128 = Kmac128.HashData(key, data, 200); // Compliant
-        byte[] mac256 = Kmac256.HashData(key, data, 200); // Compliant
+        byte[] mac128 = Kmac128.HashData(key, data, 200);       // Compliant
+        byte[] mac256 = Kmac256.HashData(key, data, 200);       // Compliant
         byte[] macXof128 = KmacXof128.HashData(key, data, 200); // Compliant
         byte[] macXof256 = KmacXof256.HashData(key, data, 200); // Compliant
     }
@@ -158,10 +158,10 @@ class CSharp13
         CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA1, memoryData, stream, cancellationToken);            // Noncompliant
         CryptographicOperations.TryHashData(HashAlgorithmName.SHA1, readOnlyData, hashSpan, out _);                      // Noncompliant
 
-        CryptographicOperations.HashData(HashAlgorithmName.SHA256, data);                                         // Compliant
-        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA3_256, data, stream);                          // Compliant
-        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA3_384, memoryData, stream, cancellationToken); // Compliant
-        CryptographicOperations.TryHashData(HashAlgorithmName.SHA3_512, readOnlyData, hashSpan, out _);           // Compliant
+        CryptographicOperations.HashData(HashAlgorithmName.SHA256, data);                                                // Compliant
+        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA3_256, data, stream);                                 // Compliant
+        CryptographicOperations.HmacDataAsync(HashAlgorithmName.SHA3_384, memoryData, stream, cancellationToken);        // Compliant
+        CryptographicOperations.TryHashData(HashAlgorithmName.SHA3_512, readOnlyData, hashSpan, out _);                  // Compliant
     }
 
     partial class Partial
@@ -172,5 +172,27 @@ class CSharp13
     partial class Partial
     {
         partial HashAlgorithm MyHashAlgorithm => HashAlgorithm.Create("""System.Security.Cryptography.SHA1"""); // Noncompliant
+    }
+}
+
+public class NullConditionalAssignment
+{
+    public class Sample
+    {
+        public HashAlgorithm Property { get; set; }
+    }
+
+    public void Method(Sample sample)
+    {
+        sample?.Property = SHA1.Create();               // Noncompliant
+    }
+}
+
+public static class Extensions
+{
+    extension(string s)
+    {
+        public HashAlgorithm Property => SHA1.Create(); // Noncompliant
+        public HashAlgorithm Method() => SHA1.Create(); // Noncompliant
     }
 }

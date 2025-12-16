@@ -31,39 +31,26 @@ public class CreatingHashAlgorithmsTest
         .AddAnalyzer(() => new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
 
     [TestMethod]
-    public void CreatingHashAlgorithms_CSharp8() =>
-        builderCS.AddPaths("CreatingHashAlgorithms.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .Verify();
+    public void CreatingHashAlgorithms_CS() =>
+        builderCS.AddPaths("CreatingHashAlgorithms.cs").Verify();
+
+    [TestMethod]
+    public void CreatingHashAlgorithms_CS_Latest() =>
+    builderCS.AddPaths("CreatingHashAlgorithms.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void CreatingHashAlgorithms_CS_NetFx() =>
+    builderCS.AddPaths("CreatingHashAlgorithms.NetFramework.cs").WithNetFrameworkOnly().Verify();
 
     [TestMethod]
     public void CreatingHashAlgorithms_VB() =>
         builderVB.AddPaths("CreatingHashAlgorithms.vb").Verify();
 
-#if NETFRAMEWORK // HMACRIPEMD160, MD5Cng, RIPEMD160Managed and RIPEMD160 are available only for .Net Framework
-
     [TestMethod]
-    public void CreatingHashAlgorithms_CS_NetFx() =>
-        builderCS.AddPaths("CreatingHashAlgorithms.NetFramework.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .Verify();
+    public void CreatingHashAlgorithms_VB_NET() =>
+    builderVB.AddPaths("CreatingHashAlgorithms.NET.vb").WithNetOnly().Verify();
 
     [TestMethod]
     public void CreatingHashAlgorithms_VB_NetFx() =>
-        builderVB.AddPaths("CreatingHashAlgorithms.NetFramework.vb").Verify();
-
-#endif
-
-#if NET
-
-    [TestMethod]
-    public void CreatingHashAlgorithms_CS_Latest() =>
-        builderCS.AddPaths("CreatingHashAlgorithms.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-
-    [TestMethod]
-    public void CreatingHashAlgorithms_VB_NET() =>
-    builderVB.AddPaths("CreatingHashAlgorithms.NET.vb").Verify();
-
-#endif
-
+        builderVB.AddPaths("CreatingHashAlgorithms.NetFramework.vb").WithNetFrameworkOnly().Verify();
 }

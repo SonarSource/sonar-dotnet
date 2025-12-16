@@ -2,18 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Nancy.Cookies;
 
-CookieOptions topLevelStatement1 = new();                // Noncompliant
-CookieOptions topLevelStatement2 = new CookieOptions();  // Noncompliant
-NancyCookie topLevelStatement3 = new("name", "secure");  // Noncompliant
-
-(CookieOptions topLevelStatement4, int a) = (new CookieOptions(), 42); // Noncompliant
-(NancyCookie topLevelStatement5, var b) = (new("name", "secure"), "42"); // Noncompliant
-
-var c = new CookieOptions() { HttpOnly = true };
-(c.HttpOnly, var x1) = (false, 0); // Noncompliant
-(c.HttpOnly, var x2) = (true, 0);
-(c.HttpOnly, var x3) = ((false), 0); // Noncompliant
-
 class Tests
 {
     CookieOptions field1 = new CookieOptions(); // Noncompliant
@@ -139,4 +127,25 @@ partial class Partial
 partial class Partial
 {
     partial CookieOptions Property2 => new CookieOptions(); // Noncompliant
+}
+
+public class NullConditionalAssignment
+{
+    public void TestMethod(CookieOptions cookie)
+    {
+        cookie.HttpOnly = false;    // Noncompliant
+        cookie.HttpOnly = true;     // Compliant
+
+        cookie?.HttpOnly = false;   // FN https://sonarsource.atlassian.net/browse/NET-2857
+        cookie?.HttpOnly = true;    // Compliant
+    }
+}
+
+public static class Extension
+{
+    extension(CookieOptions c)
+    {
+        public void SetHttpOnlyTrue() { c.HttpOnly = true; }    // Compliant
+        public void SetHttpOnlyFalse() { c.HttpOnly = false; }  // Noncompliant
+    }
 }

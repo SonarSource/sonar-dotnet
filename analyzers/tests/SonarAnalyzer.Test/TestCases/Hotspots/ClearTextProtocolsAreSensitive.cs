@@ -62,32 +62,6 @@ namespace Tests.Diagnostics
             var uri = new Uri("http://foo.com"); // Noncompliant
             var uriSafe = new Uri("https://foo.com");
 
-            using var wc = new WebClient();
-            wc.DownloadData("http://foo.com"); // Noncompliant
-            wc.DownloadData("https://foo.com");
-        }
-
-        public void Smtp()
-        {
-            using var notSet = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
-            using var constructorFalse = new SmtpClient("host", 25) { EnableSsl = false }; // Noncompliant
-
-            using var constructor42 = new SmtpClient("host", 25) { EnableSsl = 42 }; // Error [CS0029] Cannot implicitly convert type 'int' to 'bool'
-            // Noncompliant@-1 FP
-
-            using var localhosting = new SmtpClient("localhosting", 25); // Noncompliant
-            using var localhost = new SmtpClient("localhost", 25); // Compliant due to well known value
-            using var loopback = new SmtpClient("127.0.0.1", 25); // Compliant due to well known value
-            using var constructorTrue = new SmtpClient("host", 25) { EnableSsl = true };
-
-            using var propertyTrue = new SmtpClient("host", 25); // Compliant, property is set below
-            propertyTrue.EnableSsl = true;
-
-            using var propertyFalse = new SmtpClient("host", 25); // Noncompliant {{EnableSsl should be set to true.}}
-            propertyFalse.EnableSsl = false;
-
-            using var setReset = new SmtpClient("host", 25) { EnableSsl = true }; // FN - it is later set to false
-            setReset.EnableSsl = false;
         }
 
         public void Ftp()

@@ -28,8 +28,7 @@ public class DoNotHardcodeCredentialsTest
 
     public TestContext TestContext { get; set; }
 
-    internal static IEnumerable<MetadataReference> AdditionalReferences =>
-        MetadataReferenceFacade.SystemSecurityCryptography.Concat(MetadataReferenceFacade.SystemNetHttp);
+    internal static IEnumerable<MetadataReference> AdditionalReferences => MetadataReferenceFacade.SystemSecurityCryptography.Concat(MetadataReferenceFacade.SystemNetHttp);
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_DefaultValues() =>
@@ -44,35 +43,28 @@ public class DoNotHardcodeCredentialsTest
         builderVB.AddPaths("DoNotHardcodeCredentials.SecureString.vb").Verify();
 
     [TestMethod]
-    public void DoNotHardcodeCredentials_CS_Latest() =>
-        builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.Latest.cs")
-            .AddReferences(AdditionalReferences)
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .Verify();
+    public void DoNotHardcodeCredentials_CS_DefaultValues_Latest() =>
+        builderCS.AddPaths("DoNotHardcodeCredentials.DefaultValues.Latest.cs").AddReferences(AdditionalReferences).WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_CustomValues() =>
-        CreateVerifierCS(@"kode,facal-faire,*,x\*+?|}{][)(^$.# ")
-            .AddPaths("DoNotHardcodeCredentials.CustomValues.cs")
-            .Verify();
+        CreateVerifierCS(@"kode,facal-faire,*,x\*+?|}{][)(^$.# ").AddPaths("DoNotHardcodeCredentials.CustomValues.cs").Verify();
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_CustomValues_CaseInsensitive() =>
-        CreateVerifierCS(@"KODE ,,,, FaCaL-FaIrE,*,x\*+?|}{][)(^$.# ")
-            .AddPaths("DoNotHardcodeCredentials.CustomValues.cs")
-            .Verify();
+        CreateVerifierCS(@"KODE ,,,, FaCaL-FaIrE,*,x\*+?|}{][)(^$.# ").AddPaths("DoNotHardcodeCredentials.CustomValues.cs").Verify();
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_WebConfig() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
+        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_LaunchSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_AppSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.CSharp, new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_DefaultValues() =>
@@ -80,27 +72,23 @@ public class DoNotHardcodeCredentialsTest
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_CustomValues() =>
-        CreateVerifierVB(@"kode,facal-faire,*,x\*+?|}{][)(^$.# ")
-            .AddPaths("DoNotHardcodeCredentials.CustomValues.vb")
-            .Verify();
+        CreateVerifierVB(@"kode,facal-faire,*,x\*+?|}{][)(^$.# ").AddPaths("DoNotHardcodeCredentials.CustomValues.vb").Verify();
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_CustomValues_CaseInsensitive() =>
-        CreateVerifierVB(@"KODE ,,,, FaCaL-FaIrE,*,x\*+?|}{][)(^$.# ")
-            .AddPaths("DoNotHardcodeCredentials.CustomValues.vb")
-            .Verify();
+        CreateVerifierVB(@"KODE ,,,, FaCaL-FaIrE,*,x\*+?|}{][)(^$.# ").AddPaths("DoNotHardcodeCredentials.CustomValues.vb").Verify();
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_WebConfig() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
+        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_LaunchSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_AppSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage.VisualBasic, new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_ConfiguredCredentialsAreRead()
@@ -126,12 +114,10 @@ public class DoNotHardcodeCredentialsTest
             .WithBasePath("Hotspots")
             .AddReferences(AdditionalReferences);
 
-    private void DoNotHardcodeCredentials_ExternalFiles(AnalyzerLanguage language, DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
+    private void DoNotHardcodeCredentials_ExternalFiles(DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
     {
-        var root = @$"TestCases\{testDirectory}\DoNotHardcodeCredentials";
-        var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
+        var paths = Directory.GetFiles(@$"TestCases\{testDirectory}\DoNotHardcodeCredentials", pattern, SearchOption.AllDirectories);
         paths.Should().NotBeEmpty();
-        var compilation = CreateCompilation(language);
         new VerifierBuilder()
             .AddAnalyzer(() => analyzer)
             .AddSnippet(string.Empty) // Nothing to see here, C# and VB
@@ -139,7 +125,4 @@ public class DoNotHardcodeCredentialsTest
             .AddAdditionalSourceFiles(paths)
             .Verify();
     }
-
-    private static Compilation CreateCompilation(AnalyzerLanguage language) =>
-        SolutionBuilder.Create().AddProject(language).GetCompilation();
 }
