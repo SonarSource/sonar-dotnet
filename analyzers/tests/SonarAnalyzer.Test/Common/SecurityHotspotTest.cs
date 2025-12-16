@@ -109,11 +109,11 @@ public class SecurityHotspotTest
 
 #if NET
             nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
-            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesEntityFrameworkNetCore("7.0.14"),
+            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesEntityFrameworkNetCore("7.0.14"),
             nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
             nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else
-            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.GetReferencesNet46(TestConstants.NuGetLatestVersion),
+            nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesNet46(TestConstants.NuGetLatestVersion),
 #endif
             _ => MetadataReferenceFacade.SystemNetHttp
                                         .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)

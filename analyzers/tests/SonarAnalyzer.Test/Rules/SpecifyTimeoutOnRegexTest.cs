@@ -40,15 +40,11 @@ public class SpecifyTimeoutOnRegexTest
 
     [TestMethod]
     public void SpecifyTimeoutOnRegex_CS_Latest() =>
-        builderCS.AddPaths("SpecifyTimeoutOnRegex.Latest.cs")
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .Verify();
+        builderCS.AddPaths("SpecifyTimeoutOnRegex.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void SpecifyTimeoutOnRegex_DefaultMatchTimeout() =>
-        builderCS.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.cs")
-            .WithTopLevelStatements()
-            .Verify();
+        builderCS.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
     public void SpecifyTimeoutOnRegex_VB() =>

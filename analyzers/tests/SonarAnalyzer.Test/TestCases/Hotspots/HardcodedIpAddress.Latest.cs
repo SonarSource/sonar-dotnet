@@ -92,3 +92,28 @@ namespace CSharp13
         partial string MyProperty2 => "192.";
     }
 }
+
+public static class Extensions
+{
+    extension(string)
+    {
+        public static string NoncompliantProp => "192.168.0.1";     // Noncompliant
+        public static string CompliantProp => "192.";               // Compliant
+        public static string NoncompliantMethod() => "192.168.0.1"; // Noncompliant
+        public static string CompliantMethod() => "192.";           // Compliant
+    }
+}
+
+public class NullConditionalAssignmnet
+{
+    public class Sample
+    {
+        public string IP { get; set; }
+    }
+
+    public void Method(Sample sample)
+    {
+        sample?.IP = "192.168.0.1"; // Noncompliant
+        sample.IP = "192.";         // Compliant
+    }
+}

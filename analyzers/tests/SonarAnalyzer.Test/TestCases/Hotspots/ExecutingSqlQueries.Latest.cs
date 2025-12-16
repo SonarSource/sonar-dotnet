@@ -13,7 +13,7 @@ const string part3 = """SELECT * FROM""";
 const string part4 = """ mytable WHERE mycol=""";
 const string rawConstQuery = $"""{part3}{part4}""";
 
-void Foo(DbContext context, SqliteConnection connection, string myQuery, params object[] parameters)
+void Foo(DbContext context, SqliteConnection connection, string myQuery, int x, Guid guid, params object[] parameters)
 {
     context.Database.ExecuteSqlCommand(ConstQuery); // Compliant, constants are safe
     context.Database.ExecuteSqlCommand(myQuery); // Compliant, not concat or format
@@ -25,6 +25,7 @@ void Foo(DbContext context, SqliteConnection connection, string myQuery, params 
     RelationalQueryableExtensions.FromSql(context.Query<User>(), "" + myQuery, parameters);    // Noncompliant
 
     SqliteCommand command = new($"SELECT * FROM mytable WHERE mycol={myQuery}", connection);  // Noncompliant
+    context.Database.ExecuteSqlCommand(@$"SELECT * FROM mytable WHERE mycol={myQuery}{myQuery}", x, guid); // Noncompliant, RawSqlQuery
 }
 
 void Foo2(DbContext context, SqliteConnection connection, string notConstant, params object[] parameters)
@@ -79,4 +80,31 @@ record User
 {
     string Id { get; set; }
     string Name { get; set; }
+}
+
+public static class  Extensions
+{
+    extension(DbContext db)
+    {
+        public void ExecuteSql(string myQuery, params object[] parameters)
+        {
+            db.Database.ExecuteSqlCommand($"SELECT * FROM mytable WHERE mycol={myQuery} AND mycol2={0}", parameters[0]);    // Noncompliant
+        } 
+    }
+}
+
+public class  NullConditionalAssignment
+{
+    public class Sample
+    {
+        public SqliteCommand Command { get; set; }
+        public string Query { get; set; }
+    }
+
+    public void Method(DbContext context, SqliteConnection connection, Sample sample, string userInput, int x, int guid)
+    {
+        sample?.Command = new SqliteCommand($"SELECT * FROM mytable WHERE mycol={userInput}", connection); // Noncompliant
+        sample?.Query = $"SELECT * FROM mytable WHERE mycol={userInput}";                                  // Compliant
+        context.Database.ExecuteSqlCommand(sample.Query);                                                  // Compliant
+    }
 }

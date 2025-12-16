@@ -17,26 +17,32 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ExpandingArchivesTest
 {
-    [TestClass]
-    public class ExpandingArchivesTest
-    {
-        [TestMethod]
-        public void ExpandingArchives_CS() =>
-            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
-                .AddPaths("ExpandingArchives.cs")
-                .AddReferences(AdditionalReferences)
-                .Verify();
+    internal static IEnumerable<MetadataReference> AdditionalReferences => MetadataReferenceFacade.SystemIoCompression;
 
-        [TestMethod]
-        public void ExpandingArchives_VB() =>
-            new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
-                .AddPaths("ExpandingArchives.vb")
-                .AddReferences(AdditionalReferences)
-                .Verify();
+    [TestMethod]
+    public void ExpandingArchives_CS() =>
+        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+            .AddPaths("ExpandingArchives.cs")
+            .AddReferences(AdditionalReferences)
+            .Verify();
 
-        internal static IEnumerable<MetadataReference> AdditionalReferences =>
-            MetadataReferenceFacade.SystemIoCompression;
-    }
+    [TestMethod]
+    public void ExpandingArchives_CS_Latest() =>
+        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+            .AddPaths("ExpandingArchives.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddReferences(AdditionalReferences)
+            .VerifyNoIssues();
+
+    [TestMethod]
+    public void ExpandingArchives_VB() =>
+        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+            .AddPaths("ExpandingArchives.vb")
+            .AddReferences(AdditionalReferences)
+            .Verify();
 }

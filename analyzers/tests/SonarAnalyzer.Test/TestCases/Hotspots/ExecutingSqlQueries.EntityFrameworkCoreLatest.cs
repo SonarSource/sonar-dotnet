@@ -22,6 +22,7 @@ namespace Tests.Diagnostics
             context.Database.ExecuteSqlRaw($"SELECT * FROM mytable WHERE mycol={query} AND mycol2={0}", parameters[0]); // Noncompliant
             context.Database.ExecuteSqlRaw($"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Noncompliant
             context.Database.ExecuteSqlRaw(@$"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Noncompliant
+                                                                                                           // Error@-1 [CS8401]
             context.Database.ExecuteSqlRaw($@"SELECT * FROM mytable WHERE mycol={query}{query}", x, guid); // Noncompliant
             context.Database.ExecuteSqlRaw($"SELECT * FROM mytable WHERE mycol={query}"); // Noncompliant
 

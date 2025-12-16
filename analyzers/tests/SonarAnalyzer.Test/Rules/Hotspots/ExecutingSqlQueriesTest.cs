@@ -99,13 +99,53 @@ public class ExecutingSqlQueriesTest
             .AddReferences(NuGetMetadataReference.OracleManagedDataAccessCore())
             .Verify();
 
+    [TestMethod]
+    public void ExecutingSqlQueries_CS_EntityFrameworkCore2() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.EntityFrameworkCore2.cs")
+            .AddReferences(ReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
+            .WithNetOnly()
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_CS_EntityFrameworkCore7() =>
+        builderCS
+            .AddPaths("ExecutingSqlQueries.EntityFrameworkCoreLatest.cs")
+            .AddReferences(ReferencesEntityFrameworkNetCore("7.0.14"))
+            .WithNetOnly()
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_CS_Latest() =>
+        builderCS.AddPaths("ExecutingSqlQueries.Latest.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddReferences(ReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
+        builderVB
+            .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.vb")
+            .WithOptions(LanguageOptions.FromVisualBasic15)
+            .AddReferences(ReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version))
+            .Verify();
+
+    [TestMethod]
+    public void ExecutingSqlQueries_VB_EntityFrameworkCore7() =>
+        builderVB
+            .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCoreLatest.vb")
+            .WithOptions(LanguageOptions.FromVisualBasic15)
+            .AddReferences(ReferencesEntityFrameworkNetCore("7.0.14"))
+            .Verify();
+
 #if NETFRAMEWORK // System.Data.OracleClient.dll is not available on .Net Core
 
     [TestMethod]
     public void ExecutingSqlQueries_CS_Net46() =>
         builderCS
             .AddPaths("ExecutingSqlQueries.Net46.cs")
-            .AddReferences(GetReferencesNet46(TestConstants.NuGetLatestVersion))
+            .AddReferences(ReferencesNet46(TestConstants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
@@ -113,7 +153,7 @@ public class ExecutingSqlQueriesTest
         builderVB
             .AddPaths("ExecutingSqlQueries.Net46.vb")
             .WithOptions(LanguageOptions.FromVisualBasic15)
-            .AddReferences(GetReferencesNet46(TestConstants.NuGetLatestVersion))
+            .AddReferences(ReferencesNet46(TestConstants.NuGetLatestVersion))
             .Verify();
 
     [TestMethod]
@@ -133,7 +173,7 @@ public class ExecutingSqlQueriesTest
             .WithOptions(LanguageOptions.FromVisualBasic14)
             .Verify();
 
-    internal static IEnumerable<MetadataReference> GetReferencesNet46(string sqlServerCeVersion) =>
+    internal static IEnumerable<MetadataReference> ReferencesNet46(string sqlServerCeVersion) =>
         MetadataReferenceFacade.NetStandard
             .Concat(FrameworkMetadataReference.SystemData)
             .Concat(FrameworkMetadataReference.SystemDataOracleClient)
@@ -141,53 +181,10 @@ public class ExecutingSqlQueriesTest
             .Concat(NuGetMetadataReference.MySqlData("8.0.22"))
             .Concat(NuGetMetadataReference.MicrosoftDataSqliteCore())
             .Concat(NuGetMetadataReference.SystemDataSQLiteCore());
-
-#else
-
-    [TestMethod]
-    public void ExecutingSqlQueries_CS_EntityFrameworkCore2() =>
-        builderCS
-            .AddPaths("ExecutingSqlQueries.EntityFrameworkCore2.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .AddReferences(GetReferencesEntityFrameworkNetCore("2.2.6").Concat(NuGetMetadataReference.SystemComponentModelTypeConverter()))
-            .Verify();
-
-    [TestMethod]
-    public void ExecutingSqlQueries_CS_EntityFrameworkCore7() =>
-        builderCS
-            .AddPaths("ExecutingSqlQueries.EntityFrameworkCoreLatest.cs")
-            .WithOptions(LanguageOptions.FromCSharp8)
-            .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
-            .Verify();
-
-    [TestMethod]
-    public void ExecutingSqlQueries_CS_Latest() =>
-        builderCS.AddPaths("ExecutingSqlQueries.Latest.cs")
-            .WithTopLevelStatements()
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .AddReferences(GetReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version).Concat(NuGetMetadataReference.MicrosoftDataSqliteCore()))
-            .Verify();
-
-    [TestMethod]
-    public void ExecutingSqlQueries_VB_EntityFrameworkCore2() =>
-        builderVB
-            .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCore2.vb")
-            .WithOptions(LanguageOptions.FromVisualBasic15)
-            .AddReferences(GetReferencesEntityFrameworkNetCore(TestConstants.DotNetCore220Version))
-            .Verify();
-
-    [TestMethod]
-    public void ExecutingSqlQueries_VB_EntityFrameworkCore7() =>
-        builderVB
-            .AddPaths(@"ExecutingSqlQueries.EntityFrameworkCoreLatest.vb")
-            .WithOptions(LanguageOptions.FromVisualBasic15)
-            .AddReferences(GetReferencesEntityFrameworkNetCore("7.0.14"))
-            .Verify();
-
-    internal static IEnumerable<MetadataReference> GetReferencesEntityFrameworkNetCore(string entityFrameworkVersion) =>
-        Enumerable.Empty<MetadataReference>()
-            .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
-            .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
-
 #endif
+
+    internal static IEnumerable<MetadataReference> ReferencesEntityFrameworkNetCore(string entityFrameworkVersion) =>
+    Enumerable.Empty<MetadataReference>()
+        .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCore(entityFrameworkVersion))
+        .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion));
 }

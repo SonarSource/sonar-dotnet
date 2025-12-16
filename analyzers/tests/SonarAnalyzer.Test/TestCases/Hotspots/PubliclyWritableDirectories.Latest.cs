@@ -105,3 +105,16 @@ namespace CSharp13
         }
     }
 }
+
+public class NullConditionalAssignment
+{
+    public class Sample
+    {
+        public string Path { get; set; }
+    }
+
+    public void Method(Sample sample)
+    {
+        sample?.Path = "%USERPROFILE%\\AppData\\Local\\Temp\\f"; // Noncompliant
+    }
+}

@@ -153,3 +153,98 @@ namespace CSharp13
         }
     }
 }
+
+[Serializable]
+public class ClassWithDefaultConstructorWithConditionalsIsSafe
+{
+    public string Name { get; set; }
+
+    public ClassWithDefaultConstructorWithConditionalsIsSafe()
+    {
+        Name ??= string.Empty;
+    }
+}
+
+[Serializable]
+public class CtorParameterInCoalesceAssignmentExpression
+{
+    public CtorParameterInCoalesceAssignmentExpression(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+    {
+        name ??= string.Empty;
+    }
+
+    [Serializable]
+    public class InNestedClass
+    {
+        public InNestedClass(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        {
+            name ??= string.Empty;
+        }
+    }
+}
+
+[Serializable]
+public class CtorParameterInSwitchExpression
+{
+    public string Name { get; set; }
+
+    public CtorParameterInSwitchExpression(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+    {
+        Name = name switch
+        {
+            "1" => "one",
+            _ => "else"
+        };
+    }
+
+    public CtorParameterInSwitchExpression(int tmp)  // Compliant - no checks done on the parameter
+    {
+        Name = DateTime.Now.Kind switch
+        {
+            DateTimeKind.Unspecified => tmp.ToString(),
+            _ => "else"
+        };
+    }
+}
+
+[Serializable]
+public class CtorParameterInSwitchExpressionArm
+{
+    public string Name { get; set; }
+
+    public CtorParameterInSwitchExpressionArm(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+    {
+        Name = "" switch
+        {
+            { } s when s == name => "one",
+            _ => "else"
+        };
+    }
+}
+
+
+[Serializable]
+public class DifferentConditionsInCtor : IDeserializationCallback
+{
+    internal string Name { get; private set; }
+
+    public DifferentConditionsInCtor(string name) // Noncompliant
+    {
+        Name = name ?? string.Empty;
+    }
+
+    public void UnrelatedMethod(object sender) { Name ??= string.Empty; } // Name != OnDeserialization
+
+    public void OnDeserialization() => Name ??= string.Empty; // Wrong number of parameters
+
+    public void OnDeserialization(string a, string b) => Name ??= string.Empty; // wrong number of parameters
+
+    public void OnDeserialization(object sender) { }
+}
+
+[Serializable]
+public partial class PartialConstructor
+{
+    internal string Name { get; private set; }
+    public partial PartialConstructor(string name);
+}

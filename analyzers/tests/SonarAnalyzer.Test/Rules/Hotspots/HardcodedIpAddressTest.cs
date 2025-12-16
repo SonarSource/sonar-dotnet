@@ -31,9 +31,7 @@ public class HardcodedIpAddressTest
 
     [TestMethod]
     public void HardcodedIpAddress_CS_Latest() =>
-        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.Latest.cs")
-            .WithOptions(LanguageOptions.CSharpLatest)
-            .Verify();
+        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void HardcodedIpAddress_VB() =>
