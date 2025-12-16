@@ -84,17 +84,10 @@ public class TestMethodShouldNotBeIgnoredTest
         builder.AddPaths("TestMethodShouldNotBeIgnored.Xunit.v1.cs").AddReferences(NuGetMetadataReference.XunitFrameworkV1).VerifyNoIssues();
 
     [TestMethod]
-    public void TestMethodShouldNotBeIgnored_CSharp9() =>
-        builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp9.cs")
+    public void TestMethodShouldNotBeIgnored_Latest() =>
+        builder.AddPaths("TestMethodShouldNotBeIgnored.Latest.cs")
             .AddReferences(NuGetMetadataReference.XunitFrameworkV1)
             .AddReferences(NuGetMetadataReference.NUnit(TestConstants.NuGetLatestVersion))
-            .WithOptions(LanguageOptions.FromCSharp9)
-            .Verify();
-
-    [TestMethod]
-    public void TestMethodShouldNotBeIgnored_CSharp11() =>
-        builder.AddPaths("TestMethodShouldNotBeIgnored.CSharp11.cs")
-            .AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion))
-            .WithOptions(LanguageOptions.FromCSharp11)
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 }

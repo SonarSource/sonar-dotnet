@@ -17,19 +17,16 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class ThreadResumeOrSuspendShouldNotBeCalledTest
-    {
-        [TestMethod]
-        public void ThreadResumeOrSuspendShouldNotBeCalled() =>
-            new VerifierBuilder<CS.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.cs")
-                .Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void ThreadResumeOrSuspendShouldNotBeCalled_VB() =>
-            new VerifierBuilder<VB.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.vb")
-                .Verify();
-    }
+[TestClass]
+public class ThreadResumeOrSuspendShouldNotBeCalledTest
+{
+    [TestMethod]
+    public void ThreadResumeOrSuspendShouldNotBeCalled_CS() =>
+        new VerifierBuilder<CS.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.cs").Verify();
+
+    [TestMethod]
+    public void ThreadResumeOrSuspendShouldNotBeCalled_VB() =>
+        new VerifierBuilder<VB.ThreadResumeOrSuspendShouldNotBeCalled>().AddPaths("ThreadResumeOrSuspendShouldNotBeCalled.vb").Verify();
 }

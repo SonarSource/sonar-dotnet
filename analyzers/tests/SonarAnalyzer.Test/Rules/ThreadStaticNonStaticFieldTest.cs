@@ -16,48 +16,33 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ThreadStaticNonStaticFieldTest
 {
-    [TestClass]
-    public class ThreadStaticNonStaticFieldTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<ThreadStaticNonStaticField>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<ThreadStaticNonStaticField>();
 
-        [TestMethod]
-        public void ThreadStaticNonStaticField() =>
-            builder.AddPaths("ThreadStaticNonStaticField.cs").Verify();
+    [TestMethod]
+    public void ThreadStaticNonStaticField() =>
+        builder.AddPaths("ThreadStaticNonStaticField.cs").Verify();
 
-        [TestMethod]
-        public void ThreadStaticNonStaticField_CSharp9() =>
-            builder.AddPaths("ThreadStaticNonStaticField.CSharp9.cs")
-                .WithOptions(LanguageOptions.FromCSharp9)
-                .Verify();
+    [TestMethod]
+    public void ThreadStaticNonStaticField_Latest() =>
+        builder.AddPaths("ThreadStaticNonStaticField.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void ThreadStaticNonStaticField_CSharp10() =>
-            builder.AddPaths("ThreadStaticNonStaticField.CSharp10.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void ThreadStaticNonStaticField_CodeFix() =>
+        builder.WithCodeFix<ThreadStaticNonStaticFieldCodeFix>()
+            .AddPaths("ThreadStaticNonStaticField.cs")
+            .WithCodeFixedPaths("ThreadStaticNonStaticField.Fixed.cs")
+            .VerifyCodeFix();
 
-        [TestMethod]
-        public void ThreadStaticNonStaticField_CodeFix_CSharp10() =>
-            builder.WithCodeFix<ThreadStaticNonStaticFieldCodeFix>()
-                .AddPaths("ThreadStaticNonStaticField.CSharp10.cs")
-                .WithCodeFixedPaths("ThreadStaticNonStaticField.CSharp10.Fixed.cs")
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .VerifyCodeFix();
-
-        [TestMethod]
-        public void ThreadStaticNonStaticField_CSharp11() =>
-            builder.AddPaths("ThreadStaticNonStaticField.CSharp11.cs")
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void ThreadStaticNonStaticField_CodeFix() =>
-            builder.WithCodeFix<ThreadStaticNonStaticFieldCodeFix>()
-                .AddPaths("ThreadStaticNonStaticField.cs")
-                .WithCodeFixedPaths("ThreadStaticNonStaticField.Fixed.cs")
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void ThreadStaticNonStaticField_Latest_CodeFix() =>
+        builder.WithCodeFix<ThreadStaticNonStaticFieldCodeFix>()
+            .AddPaths("ThreadStaticNonStaticField.Latest.cs")
+            .WithCodeFixedPaths("ThreadStaticNonStaticField.Latest.Fixed.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .VerifyCodeFix();
 }
