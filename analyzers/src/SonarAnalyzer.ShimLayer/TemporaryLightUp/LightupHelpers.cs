@@ -888,7 +888,7 @@ namespace SonarAnalyzer.ShimLayer
 
         private static bool ValidatePropertyType(Type returnType, Type actualType)
         {
-            var requiredType = SyntaxWrapperHelper.GetWrappedType(returnType) ?? returnType;
+            var requiredType = SyntaxNodeTypes.LatestType(returnType) ?? returnType;
             return requiredType == actualType;
         }
     }

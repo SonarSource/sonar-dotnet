@@ -51,10 +51,10 @@ public class GenericStrategy : Strategy
     public override string CompiletimeTypeSnippet() =>
         ReturnTypeSnippet();
 
-    public override string Generate(StrategyModel model) => null;
-
     public override string PropertyAccessorInitializerSnippet(string compiletimeType, string propertyName) =>
         isWrapped
             ? $"LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<{compiletimeType}, {genericArgumentType}>(WrappedType, nameof({propertyName}))"
             : base.PropertyAccessorInitializerSnippet(compiletimeType, propertyName);
+
+    public override string Generate(StrategyModel model) => null;
 }

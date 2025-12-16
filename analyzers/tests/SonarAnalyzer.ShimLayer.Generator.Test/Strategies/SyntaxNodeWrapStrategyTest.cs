@@ -56,7 +56,7 @@ public class SyntaxNodeWrapStrategyTest
             using Microsoft.CodeAnalysis.Text;
             using System;
             using System.Collections.Immutable;
-            
+
             namespace SonarAnalyzer.ShimLayer;
 
             public readonly partial struct RecordDeclarationSyntaxWrapper: ISyntaxWrapper<TypeDeclarationSyntax>
@@ -68,7 +68,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static RecordDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(RecordDeclarationSyntaxWrapper));
+                    WrappedType = SyntaxNodeTypes.LatestType(typeof(RecordDeclarationSyntaxWrapper));
 
                 }
 
@@ -147,7 +147,7 @@ public class SyntaxNodeWrapStrategyTest
             using Microsoft.CodeAnalysis.Text;
             using System;
             using System.Collections.Immutable;
-            
+
             namespace SonarAnalyzer.ShimLayer;
 
             public readonly partial struct RecordDeclarationSyntaxWrapper: ISyntaxWrapper<TypeDeclarationSyntax>
@@ -159,7 +159,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static RecordDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(RecordDeclarationSyntaxWrapper));
+                    WrappedType = SyntaxNodeTypes.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                     ClassOrStructKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
                 }
 
@@ -238,7 +238,7 @@ public class SyntaxNodeWrapStrategyTest
             using Microsoft.CodeAnalysis.Text;
             using System;
             using System.Collections.Immutable;
-            
+
             namespace SonarAnalyzer.ShimLayer;
 
             public readonly partial struct IsPatternExpressionSyntaxWrapper: ISyntaxWrapper<ExpressionSyntax>
@@ -250,7 +250,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static IsPatternExpressionSyntaxWrapper()
                 {
-                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(IsPatternExpressionSyntaxWrapper));
+                    WrappedType = SyntaxNodeTypes.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
                     PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
                 }
 
@@ -339,7 +339,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static ConstantPatternSyntaxWrapper()
                 {
-                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(ConstantPatternSyntaxWrapper));
+                    WrappedType = SyntaxNodeTypes.LatestType(typeof(ConstantPatternSyntaxWrapper));
 
                 }
 
@@ -413,14 +413,14 @@ public class SyntaxNodeWrapStrategyTest
              * You should have received a copy of the Sonar Source-Available License
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
-            
+
             using Microsoft.CodeAnalysis;
             using Microsoft.CodeAnalysis.CSharp;
             using Microsoft.CodeAnalysis.CSharp.Syntax;
             using Microsoft.CodeAnalysis.Text;
             using System;
             using System.Collections.Immutable;
-            
+
             namespace SonarAnalyzer.ShimLayer;
 
             public readonly partial struct SyntaxNodeWrapper: ISyntaxWrapper<SyntaxNode>
@@ -432,7 +432,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static SyntaxNodeWrapper()
                 {
-                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(SyntaxNodeWrapper));
+                    WrappedType = SyntaxNodeTypes.LatestType(typeof(SyntaxNodeWrapper));
 
                 }
 
@@ -507,7 +507,7 @@ public class SyntaxNodeWrapStrategyTest
             using Microsoft.CodeAnalysis.Text;
             using System;
             using System.Collections.Immutable;
-            
+
             namespace SonarAnalyzer.ShimLayer;
 
             public readonly partial struct IndexerDeclarationSyntaxWrapper: ISyntaxWrapper<SyntaxNode>
@@ -519,7 +519,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static IndexerDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(IndexerDeclarationSyntaxWrapper));
+                    WrappedType = SyntaxNodeTypes.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
 
                 }
 
@@ -594,14 +594,14 @@ public class SyntaxNodeWrapStrategyTest
              * You should have received a copy of the Sonar Source-Available License
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
-            
+
             using Microsoft.CodeAnalysis;
             using Microsoft.CodeAnalysis.CSharp;
             using Microsoft.CodeAnalysis.CSharp.Syntax;
             using Microsoft.CodeAnalysis.Text;
             using System;
             using System.Collections.Immutable;
-            
+
             namespace SonarAnalyzer.ShimLayer;
 
             public readonly partial struct RecordDeclarationSyntaxWrapper: ISyntaxWrapper<TypeDeclarationSyntax>
@@ -613,7 +613,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static RecordDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(RecordDeclarationSyntaxWrapper));
+                    WrappedType = SyntaxNodeTypes.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                     MembersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
                     ArgumentsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
                     ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeDeclarationSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
