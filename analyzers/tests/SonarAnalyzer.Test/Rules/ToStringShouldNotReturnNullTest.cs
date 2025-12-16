@@ -30,19 +30,18 @@ public class ToStringShouldNotReturnNullTest
         builderCS.AddPaths("ToStringShouldNotReturnNull.cs").Verify();
 
     [TestMethod]
-    public void ToStringShouldNotReturnNull_CSharp9() =>
+    public void ToStringShouldNotReturnNull_TopLevelStatements() =>
         builderCS
-            .WithOptions(LanguageOptions.FromCSharp9)
             .WithTopLevelStatements()
-            .AddPaths("ToStringShouldNotReturnNull.CSharp9.cs")
-            .Verify();
+            .AddPaths("ToStringShouldNotReturnNull.TopLevelStatements.cs")
+            .VerifyNoIssues();
 
     [TestMethod]
-    public void ToStringShouldNotReturnNull_CSharp11() =>
+    public void ToStringShouldNotReturnNull_CS_Latest() =>
         builderCS
-            .WithOptions(LanguageOptions.FromCSharp11)
-            .AddPaths("ToStringShouldNotReturnNull.CSharp11.cs")
-            .VerifyNoIssues();
+            .AddPaths("ToStringShouldNotReturnNull.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
     [TestMethod]
     public void ToStringShouldNotReturnNull_VB() =>

@@ -16,38 +16,29 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class TooManyGenericParametersTest
 {
-    [TestClass]
-    public class TooManyGenericParametersTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<TooManyGenericParameters>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<TooManyGenericParameters>();
 
-        [TestMethod]
-        public void TooManyGenericParameters_DefaultValues() =>
-            builder.AddPaths("TooManyGenericParameters.DefaultValues.cs").Verify();
+    [TestMethod]
+    public void TooManyGenericParameters_DefaultValues() =>
+        builder.AddPaths("TooManyGenericParameters.DefaultValues.cs").Verify();
 
-        [TestMethod]
-        public void TooManyGenericParameters_CustomValues() =>
-            new VerifierBuilder()
+    [TestMethod]
+    public void TooManyGenericParameters_Latest() =>
+        builder.AddPaths("TooManyGenericParameters.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void TooManyGenericParameters_TopLevelStatements() =>
+        builder.AddPaths("TooManyGenericParameters.TopLevelStatements.cs").WithTopLevelStatements().Verify();
+
+    [TestMethod]
+    public void TooManyGenericParameters_CustomValues() =>
+        new VerifierBuilder()
             .AddAnalyzer(() => new TooManyGenericParameters { MaxNumberOfGenericParametersInClass = 4, MaxNumberOfGenericParametersInMethod = 4 })
             .AddPaths("TooManyGenericParameters.CustomValues.cs")
             .Verify();
-
-        [TestMethod]
-        public void TooManyGenericParameters_CSharp9() =>
-            builder.AddPaths("TooManyGenericParameters.CSharp9.cs").WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void TooManyGenericParameters_CSharp10() =>
-            builder.AddPaths("TooManyGenericParameters.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void TooManyGenericParameters_CSharp11() =>
-            builder.AddPaths("TooManyGenericParameters.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-
-        [TestMethod]
-        public void TooManyGenericParameters_CSharp12() =>
-            builder.AddPaths("TooManyGenericParameters.CSharp12.cs").WithOptions(LanguageOptions.FromCSharp12).Verify();
-    }
 }

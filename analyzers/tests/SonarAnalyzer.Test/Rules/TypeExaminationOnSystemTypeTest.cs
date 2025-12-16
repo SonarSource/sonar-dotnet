@@ -16,22 +16,21 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class TypeExaminationOnSystemTypeTest
 {
-    [TestClass]
-    public class TypeExaminationOnSystemTypeTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<TypeExaminationOnSystemType>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<TypeExaminationOnSystemType>();
 
-        [TestMethod]
-        public void TypeExaminationOnSystemType() =>
-            builder.AddPaths("TypeExaminationOnSystemType.cs").Verify();
+    [TestMethod]
+    public void TypeExaminationOnSystemType() =>
+        builder.AddPaths("TypeExaminationOnSystemType.cs").Verify();
 
-        [TestMethod]
-        public void TypeExaminationOnSystemType_CSharp12() =>
-            builder.AddPaths("TypeExaminationOnSystemType.CSharp12.cs")
-                .WithTopLevelStatements()
-                .WithOptions(LanguageOptions.FromCSharp12)
-                .Verify();
-    }
+    [TestMethod]
+    public void TypeExaminationOnSystemType_TopLevelStatements() =>
+        builder.AddPaths("TypeExaminationOnSystemType.TopLevelStatements.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.FromCSharp12)
+            .Verify();
 }

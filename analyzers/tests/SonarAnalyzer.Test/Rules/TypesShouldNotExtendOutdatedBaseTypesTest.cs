@@ -16,16 +16,15 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class TypesShouldNotExtendOutdatedBaseTypesTest
 {
-    [TestClass]
-    public class TypesShouldNotExtendOutdatedBaseTypesTest
-    {
-        [TestMethod]
-        public void TypesShouldNotExtendOutdatedBaseTypes() =>
-            new VerifierBuilder<TypesShouldNotExtendOutdatedBaseTypes>()
-                .AddPaths("TypesShouldNotExtendOutdatedBaseTypes.cs")
-                .AddReferences(MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemCollections))
-                .Verify();
-    }
+    [TestMethod]
+    public void TypesShouldNotExtendOutdatedBaseTypes() =>
+        new VerifierBuilder<TypesShouldNotExtendOutdatedBaseTypes>()
+            .AddPaths("TypesShouldNotExtendOutdatedBaseTypes.cs")
+            .AddReferences(MetadataReferenceFacade.SystemXml.Concat(MetadataReferenceFacade.SystemCollections))
+            .Verify();
 }

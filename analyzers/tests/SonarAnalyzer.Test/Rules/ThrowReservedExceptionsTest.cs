@@ -29,8 +29,8 @@ public class ThrowReservedExceptionsTest
         builderCS.AddPaths("ThrowReservedExceptions.cs").Verify();
 
     [TestMethod]
-    public void ThrowReservedExceptions_CSharp8() =>
-        builderCS.AddPaths("ThrowReservedExceptions.CSharp8.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+    public void ThrowReservedExceptions_CS_Latest() =>
+        builderCS.AddPaths("ThrowReservedExceptions.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void ThrowReservedExceptions_VB() =>
