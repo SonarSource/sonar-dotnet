@@ -20,5 +20,5 @@ namespace SonarAnalyzer.ShimLayer;
 public static partial class Temporary
 {
     public static int Inc(int a) =>
-        a + ValueOfOneFromSourceGeneratedPartialClass;
+        a + (int)SyntaxKindEx.IgnoredDirectiveTrivia - (int)SyntaxKindEx.ExtensionBlockDeclaration;
 }

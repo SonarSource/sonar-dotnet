@@ -16,6 +16,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Operations;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Model.Test;
 
@@ -114,6 +115,33 @@ public class ModelBuilderTest
         var model = ModelBuilder.Build([type], []);
         model[type.Type].Should().BeOfType<IOperationStrategy>()
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
+                "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
+                "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",
+                "Microsoft.CodeAnalysis.IOperation Parent",
+                "Microsoft.CodeAnalysis.OperationKind Kind",
+                "Microsoft.CodeAnalysis.SyntaxNode Syntax",
+                "Microsoft.CodeAnalysis.ITypeSymbol Type",
+                "Microsoft.CodeAnalysis.Optional`1[System.Object] ConstantValue",
+                "System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.IOperation] Children",
+                "Microsoft.CodeAnalysis.IOperation+OperationList ChildOperations",
+                "System.String Language",
+                "System.Boolean IsImplicit",
+                "Microsoft.CodeAnalysis.SemanticModel SemanticModel"]);
+    }
+
+    [TestMethod]
+    public void Build_IInvocationOperation()
+    {
+        using var typeLoader = new TypeLoader();
+        var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IInvocationOperation));
+        var model = ModelBuilder.Build([type], []);
+        model[type.Type].Should().BeOfType<IOperationStrategy>()
+            .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
+                "Microsoft.CodeAnalysis.IMethodSymbol TargetMethod",
+                "Microsoft.CodeAnalysis.ITypeSymbol ConstrainedToType",
+                "Microsoft.CodeAnalysis.IOperation Instance",
+                "System.Boolean IsVirtual",
+                "System.Collections.Immutable.ImmutableArray`1[Microsoft.CodeAnalysis.Operations.IArgumentOperation] Arguments",
                 "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
                 "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",
                 "Microsoft.CodeAnalysis.IOperation Parent",

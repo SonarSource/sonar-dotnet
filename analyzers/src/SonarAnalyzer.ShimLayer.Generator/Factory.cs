@@ -16,24 +16,20 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator;
 
-internal static class Factory
+public static class Factory
 {
     public static IEnumerable<GeneratedFile> CreateAllFiles()
     {
         using var typeLoader = new TypeLoader();
         var model = ModelBuilder.Build(typeLoader.LoadLatest(), typeLoader.LoadBaseline());
-
-        yield return new(
-            "Temporary.g.cs",
-            """
-            namespace SonarAnalyzer.ShimLayer;
-
-            public static partial class Temporary
+        foreach (var strategy in model.ToArray())
+        {
+            if (strategy.Generate(model) is { } content)
             {
-                private const int ValueOfOneFromSourceGeneratedPartialClass = 1;
+                yield return new($"{strategy.Latest.Name}.g.cs", content);
             }
-            """);
+        }
     }
 }
 
-internal record GeneratedFile(string Name, string Content);
+public record GeneratedFile(string Name, string Content);

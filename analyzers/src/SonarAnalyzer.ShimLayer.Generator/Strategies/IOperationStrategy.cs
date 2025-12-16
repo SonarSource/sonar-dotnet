@@ -20,15 +20,15 @@ public class IOperationStrategy : Strategy
 {
     public IReadOnlyList<MemberDescriptor> Members { get; }
 
-    public IOperationStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest)
-    {
+    public IOperationStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest) =>
         Members = members;
-    }
 
     public override string Generate(StrategyModel model) =>
+        $"namespace SonarAnalyzer.ShimLayer; // {Latest.Name}";   // NET-2729
+
+    public override string ReturnTypeSnippet() =>
         throw new NotImplementedException();
 
-    public override string ReturnTypeSnippet() => throw new NotImplementedException();
-
-    public override string ToConversionSnippet(string from) => throw new NotImplementedException();
+    public override string ToConversionSnippet(string from) =>
+        throw new NotImplementedException();
 }

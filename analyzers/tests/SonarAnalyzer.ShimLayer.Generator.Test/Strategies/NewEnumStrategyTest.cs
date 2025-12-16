@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Diagnostics.CodeAnalysis;
 using SonarAnalyzer.TestFramework.Extensions;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
@@ -21,6 +22,13 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 [TestClass]
 public class NewEnumStrategyTest
 {
+    [Experimental("RSEXPERIMENTAL001")] // Microsoft.CodeAnalysis.SemanticModelOptions' is for evaluation purposes only and is subject to change or removal in future updates.
+    private enum EnumWithExperimentalAttribute
+    {
+        Lorem,
+        Ipsum,
+    }
+
     [TestMethod]
     public void Generate()
     {
@@ -38,6 +46,24 @@ public class NewEnumStrategyTest
                 PostInit = 2,
                 Implementation = 4,
                 Host = 8,
+            }
+
+            """);
+    }
+
+    [TestMethod]
+    public void Generate_IgnoreExperimentalAttribute()
+    {
+#pragma warning disable RSEXPERIMENTAL001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+        var type = typeof(EnumWithExperimentalAttribute);
+        var sut = new NewEnumStrategy(type, type.GetMembers().OfType<FieldInfo>().Where(x => x.Name != "value__").ToArray());
+        sut.Generate([]).Should().BeIgnoringLineEndings("""
+            namespace SonarAnalyzer.ShimLayer;
+
+            public enum EnumWithExperimentalAttribute : System.Int32
+            {
+                Lorem = 0,
+                Ipsum = 1,
             }
 
             """);

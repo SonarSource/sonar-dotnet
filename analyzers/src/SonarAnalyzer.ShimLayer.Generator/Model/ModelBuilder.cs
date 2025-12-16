@@ -75,6 +75,10 @@ public static class ModelBuilder
 
     private static bool IsAssignableTo(Type type, string fullName)   // We can't use typeof(Xxx).IsAssignableFrom(type) because it's loaded into a different metadata context
     {
+        if (type.GetInterface(fullName) is not null)
+        {
+            return true;
+        }
         while (type is not null)
         {
             if (type.FullName == fullName)
