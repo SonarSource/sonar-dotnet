@@ -16,12 +16,12 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public class SyntaxNodeStrategy : Strategy
+public class SyntaxNodeWrapStrategy : Strategy
 {
     public Type BaseType { get; }
     public IReadOnlyList<MemberDescriptor> Members { get; }
 
-    public SyntaxNodeStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest)
+    public SyntaxNodeWrapStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest)
     {
         BaseType = baseType;
         Members = members;
@@ -38,15 +38,7 @@ public class SyntaxNodeStrategy : Strategy
 
     public override string Generate(StrategyModel model) =>
         $$"""
-        using System;
-        using System.Collections.Immutable;
-        using Microsoft.CodeAnalysis;
-        using Microsoft.CodeAnalysis.CSharp;
-        using Microsoft.CodeAnalysis.CSharp.Syntax;
-        using Microsoft.CodeAnalysis.Text;
-
-        namespace SonarAnalyzer.ShimLayer;
-
+        {{Preamble()}}
         public readonly partial struct {{Latest.Name}}Wrapper: ISyntaxWrapper<{{CompiletimeTypeSnippet()}}>
         {
             public const string WrappedTypeName = "{{Latest.FullName}}";
@@ -99,7 +91,7 @@ public class SyntaxNodeStrategy : Strategy
     {
         StringBuilder sb = null;
         var baseType = Latest.BaseType;
-        while (baseType is not null && model[baseType] is SyntaxNodeStrategy) // BaseType is also wrapped
+        while (baseType is not null && model[baseType] is SyntaxNodeWrapStrategy) // BaseType is also wrapped
         {
             sb ??= new StringBuilder();
             sb.AppendLine($"""
@@ -111,9 +103,6 @@ public class SyntaxNodeStrategy : Strategy
         }
         return sb?.ToString() ?? string.Empty;
     }
-
-    private static string JoinLines(IEnumerable<string> lines) =>
-        string.Join("\n", lines.Where(x => x is not null));
 
     private string MemberAccessorInitialization(MemberInfo member, StrategyModel model) =>
         member is PropertyInfo property && model[property.PropertyType] is { IsSupported: true } propertyTypeStrategy

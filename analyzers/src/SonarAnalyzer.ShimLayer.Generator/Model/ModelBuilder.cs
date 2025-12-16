@@ -43,7 +43,10 @@ public static class ModelBuilder
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.SyntaxNode"))
         {
-            return new SyntaxNodeStrategy(latest.Type, FindCommonBaseType(latest, baselineMap), CreateMembers(latest, baseline));
+            var members = CreateMembers(latest, baseline);
+            return baseline is null
+                ? new SyntaxNodeWrapStrategy(latest.Type, FindCommonBaseType(latest, baselineMap), members)
+                : new SyntaxNodeExtendStrategy(latest.Type, members);
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
         {

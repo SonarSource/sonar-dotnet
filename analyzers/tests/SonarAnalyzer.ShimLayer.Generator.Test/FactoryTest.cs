@@ -24,8 +24,8 @@ public class FactoryTest
         Factory.CreateAllFiles().ToArray().Should().HaveCountGreaterThan(350)
             .And.Contain(x => x.Name == "SyntaxKind.g.cs", $"it's from {nameof(PartialEnumStrategy)}")
             .And.Contain(x => x.Name == "SarifVersion.g.cs", $"it's from {nameof(NewEnumStrategy)}")
-            .And.Contain(x => x.Name == "SyntaxNode.g.cs", $"it's from {nameof(SyntaxNodeStrategy)} as the base type")
-            .And.Contain(x => x.Name == "RecordDeclarationSyntax.g.cs", $"it's from {nameof(SyntaxNodeStrategy)} as inherited type")
+            .And.Contain(x => x.Name == "SyntaxNode.g.cs", $"it's from {nameof(SyntaxNodeExtendStrategy)} as the base type")
+            .And.Contain(x => x.Name == "RecordDeclarationSyntax.g.cs", $"it's from {nameof(SyntaxNodeWrapStrategy)} as inherited type")
             .And.Contain(x => x.Name == "IOperation.g.cs", $"it's from {nameof(IOperationStrategy)} as base interface")
             .And.Contain(x => x.Name == "IInvocationOperation.g.cs", $"it's from {nameof(IOperationStrategy)} as inherited interface")
             .And.AllSatisfy(x => x.Content.Should().Contain("namespace SonarAnalyzer.ShimLayer;"));

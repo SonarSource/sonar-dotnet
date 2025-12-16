@@ -26,8 +26,7 @@ public class NewEnumStrategy : Strategy
     public override string Generate(StrategyModel model)
     {
         var sb = new StringBuilder();
-        sb.AppendLine("namespace SonarAnalyzer.ShimLayer;");
-        sb.AppendLine();
+        sb.AppendLine(Preamble());
         sb.AppendLine($"{SerializeAttributes(Latest.GetCustomAttributesData(), 0)}public enum {Latest.Name} : {Enum.GetUnderlyingType(Latest)}");
         sb.AppendLine("{");
         foreach (var field in Fields)

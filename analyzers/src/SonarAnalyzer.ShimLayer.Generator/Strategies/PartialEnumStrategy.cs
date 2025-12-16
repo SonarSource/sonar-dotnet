@@ -26,9 +26,7 @@ public class PartialEnumStrategy : Strategy
     public override string Generate(StrategyModel model)
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"using {Latest.Namespace};");
-        sb.AppendLine();
-        sb.AppendLine("namespace SonarAnalyzer.ShimLayer;");
+        sb.Append(Preamble($"using {Latest.Namespace};"));
         sb.AppendLine();
         sb.AppendLine($"public static class {Latest.Name}Ex");
         sb.AppendLine("{");
