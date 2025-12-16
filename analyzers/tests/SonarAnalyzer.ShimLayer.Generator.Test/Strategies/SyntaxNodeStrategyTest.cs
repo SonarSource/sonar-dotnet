@@ -83,6 +83,8 @@ public class SyntaxNodeStrategyTest
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
 
+
+
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
@@ -157,6 +159,8 @@ public class SyntaxNodeStrategyTest
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
 
+
+
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
@@ -228,6 +232,85 @@ public class SyntaxNodeStrategyTest
                 public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
                     wrapper.node;
 
+
+
+                public static bool IsInstance(SyntaxNode node) =>
+                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+            }
+            """);
+    }
+
+    [TestMethod]
+    public void Generate_ConstantPatternSyntax()
+    {
+        var sut = new SyntaxNodeStrategy(typeof(ConstantPatternSyntax), typeof(CSharpSyntaxNode), []);
+        var model = new Dictionary<Type, Strategy>()
+        {
+            { typeof(ConstantPatternSyntax), sut },
+            { typeof(PatternSyntax), new SyntaxNodeStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), []) },
+            { typeof(ExpressionOrPatternSyntax), new SyntaxNodeStrategy(typeof(ExpressionOrPatternSyntax), typeof(CSharpSyntaxNode), []) },
+        };
+        var result = sut.Generate(new(model));
+        result.Should().BeIgnoringLineEndings(
+            """
+            using System;
+            using System.Collections.Immutable;
+            using Microsoft.CodeAnalysis;
+            using Microsoft.CodeAnalysis.CSharp;
+            using Microsoft.CodeAnalysis.CSharp.Syntax;
+            using Microsoft.CodeAnalysis.Text;
+
+            namespace SonarAnalyzer.ShimLayer;
+
+            public readonly partial struct ConstantPatternSyntaxWrapper: ISyntaxWrapper<CSharpSyntaxNode>
+            {
+                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax";
+                private static readonly Type WrappedType;
+
+                private readonly CSharpSyntaxNode node;
+
+                static ConstantPatternSyntaxWrapper()
+                {
+                    WrappedType = SyntaxWrapperHelper.GetWrappedType(typeof(ConstantPatternSyntaxWrapper));
+
+                }
+
+                private ConstantPatternSyntaxWrapper(CSharpSyntaxNode node) =>
+                    this.node = node;
+
+                public CSharpSyntaxNode Node => this.node;
+
+                [Obsolete("Use Node instead")]
+                public CSharpSyntaxNode SyntaxNode => this.node;
+
+
+
+                public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node)
+                {
+                    if (node is null)
+                    {
+                        return default;
+                    }
+
+                    if (!IsInstance(node))
+                    {
+                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                    }
+
+                    return new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)node);
+                }
+
+                public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static implicit operator PatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
+                public static explicit operator ConstantPatternSyntaxWrapper(PatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
+
+                public static implicit operator ExpressionOrPatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
+                public static explicit operator ConstantPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
+
+
+
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
@@ -295,6 +378,8 @@ public class SyntaxNodeStrategyTest
 
                 public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
                     wrapper.node;
+
+
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
@@ -366,6 +451,8 @@ public class SyntaxNodeStrategyTest
 
                 public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
+
+
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
@@ -446,6 +533,8 @@ public class SyntaxNodeStrategyTest
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
+
+
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);

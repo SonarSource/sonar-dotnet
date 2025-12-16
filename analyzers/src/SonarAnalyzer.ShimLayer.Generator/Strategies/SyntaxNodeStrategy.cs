@@ -88,10 +88,29 @@ public class SyntaxNodeStrategy : Strategy
             public static implicit operator {{CompiletimeTypeSnippet()}}({{Latest.Name}}Wrapper wrapper) =>
                 wrapper.node;
 
+        {{WrapperToWrapperConversions(model)}}
+
             public static bool IsInstance(SyntaxNode node) =>
                 node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
         }
         """;
+
+    private string WrapperToWrapperConversions(StrategyModel model)
+    {
+        StringBuilder sb = null;
+        var baseType = Latest.BaseType;
+        while (baseType is not null && model[baseType] is SyntaxNodeStrategy) // BaseType is also wrapped
+        {
+            sb ??= new StringBuilder();
+            sb.AppendLine($"""
+                    public static implicit operator {baseType.Name}Wrapper({Latest.Name}Wrapper up) => ({baseType.Name}Wrapper)up.SyntaxNode;
+                    public static explicit operator {Latest.Name}Wrapper({baseType.Name}Wrapper down) => ({Latest.Name}Wrapper)down.SyntaxNode;
+
+                """);
+            baseType = baseType.BaseType;
+        }
+        return sb?.ToString() ?? string.Empty;
+    }
 
     private static string JoinLines(IEnumerable<string> lines) =>
         string.Join("\n", lines.Where(x => x is not null));
