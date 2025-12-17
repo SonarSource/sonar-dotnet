@@ -217,7 +217,7 @@ public static class Extensions
         public void InExtension()
         {
             if (source == null)
-                throw new ArgumentNullException("source");  // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2672
+                throw new ArgumentNullException("source");  // Compliant
         }
     }
 

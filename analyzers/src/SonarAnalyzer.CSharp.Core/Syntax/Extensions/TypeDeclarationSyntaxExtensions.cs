@@ -48,11 +48,15 @@ public static class TypeDeclarationSyntaxExtensions
     }
 
     public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax typeDeclaration) =>
+        // In earlier versions, the ParameterList was only available on the derived RecordDeclarationSyntax (starting from version 3.7)
+        // To work with version 3.7 to version 4.6 we need to special case the record declaration and access
+        // the parameter list from the derived RecordDeclarationSyntax.
         typeDeclaration.Kind() switch
         {
             SyntaxKind.ClassDeclaration => ClassDeclarationSyntaxShimExtensions.get_ParameterList((ClassDeclarationSyntax)typeDeclaration),
             SyntaxKind.StructDeclaration => StructDeclarationSyntaxShimExtensions.get_ParameterList((StructDeclarationSyntax)typeDeclaration),
             SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration => ((RecordDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
-            _ => null,
+            SyntaxKindEx.ExtensionBlockDeclaration => ((ExtensionBlockDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
+            _ => TypeDeclarationSyntaxShimExtensions.get_ParameterList(typeDeclaration),
         };
 }
