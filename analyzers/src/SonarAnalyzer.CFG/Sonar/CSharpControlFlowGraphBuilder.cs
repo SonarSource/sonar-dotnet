@@ -385,7 +385,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 case SyntaxKind.StackAllocArrayCreationExpression:
                     {
                         var parent = (StackAllocArrayCreationExpressionSyntax)expression;
-                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Type, parent.Initializer());
+                        return BuildSimpleNestedExpression(parent, currentBlock, parent.Type, parent.Initializer);
                     }
 
                 case SyntaxKindEx.ImplicitStackAllocArrayCreationExpression:
