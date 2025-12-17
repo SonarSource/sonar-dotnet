@@ -54,6 +54,7 @@
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.Core.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.Lightup.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.VisualBasic.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.VisualBasic.Core.dll" />
     </ItemGroup>

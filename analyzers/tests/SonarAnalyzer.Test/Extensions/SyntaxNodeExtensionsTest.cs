@@ -23,7 +23,6 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Core.Syntax.Extensions;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
-using StyleCop.Analyzers.Lightup;
 using ExtensionsCore = SonarAnalyzer.Core.Syntax.Extensions.SyntaxNodeExtensions;
 using ExtensionsShared = SonarAnalyzer.CSharp.Core.Syntax.Extensions.SyntaxNodeExtensionsShared;
 using MicrosoftExtensionsCS = Microsoft.CodeAnalysis.CSharp.Extensions.SyntaxNodeExtensions;

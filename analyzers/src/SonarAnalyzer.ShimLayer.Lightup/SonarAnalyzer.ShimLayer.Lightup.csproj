@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>SonarAnalyzer.ShimLayer</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +15,7 @@
     </PackageReference>
 
     <ProjectReference Include="..\SonarAnalyzer.ShimLayer.CodeGeneration\SonarAnalyzer.ShimLayer.CodeGeneration.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\SonarAnalyzer.ShimLayer\SonarAnalyzer.ShimLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +27,7 @@
     <Using Include="StyleCop.Analyzers.Lightup" />
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="SonarAnalyzer.ShimLayer" />
   </ItemGroup>
 
 </Project>

@@ -249,7 +249,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         if (originalOperation.IsAnyKind(OperationKindEx.MethodBody, OperationKindEx.Block, OperationKindEx.ConstructorBody))
         {
-            var syntax = originalOperation.Syntax.IsKind(SyntaxKindEx.ArrowExpressionClause) ? originalOperation.Syntax.Parent : originalOperation.Syntax;
+            var syntax = originalOperation.Syntax.IsKind(Microsoft.CodeAnalysis.CSharp.SyntaxKind.ArrowExpressionClause) ? originalOperation.Syntax.Parent : originalOperation.Syntax;
             return originalOperation.ToSonar().SemanticModel.GetDeclaredSymbol(syntax);
         }
         else

@@ -53,7 +53,7 @@ namespace StyleCop.Analyzers.CodeGeneration
             }
 
             this.GenerateOperationWrapperHelper(in context, documentData.Interfaces.Values.ToImmutableArray());
-            this.GenerateOperationKindEx(in context, documentData.Interfaces.Values.ToImmutableArray());
+            // this.GenerateOperationKindEx(in context, documentData.Interfaces.Values.ToImmutableArray());
         }
 
         private void GenerateOperationInterface(in SourceProductionContext context, InterfaceData node)

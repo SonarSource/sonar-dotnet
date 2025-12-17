@@ -28,7 +28,7 @@ public abstract class AllParametersBase : StylingAnalyzer
             SyntaxKind.ParameterList,
             SyntaxKind.BracketedParameterList,
             SyntaxKind.TypeParameterList,
-            SyntaxKindEx.FunctionPointerParameterList);
+            SyntaxKind.FunctionPointerParameterList);
 
     private static IEnumerable<SyntaxNode> Parameters(SyntaxNode node) =>
         node switch

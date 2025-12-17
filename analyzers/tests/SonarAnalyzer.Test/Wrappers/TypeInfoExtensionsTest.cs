@@ -18,8 +18,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using StyleCop.Analyzers.Lightup;
 using NullabilityInfo = StyleCop.Analyzers.Lightup.NullabilityInfo;
-using NullableAnnotation = StyleCop.Analyzers.Lightup.NullableAnnotation;
-using NullableFlowState = StyleCop.Analyzers.Lightup.NullableFlowState;
+using NullableAnnotation = SonarAnalyzer.ShimLayer.NullableAnnotation;
+using NullableFlowState = SonarAnalyzer.ShimLayer.NullableFlowState;
 
 namespace SonarAnalyzer.Test.Wrappers;
 

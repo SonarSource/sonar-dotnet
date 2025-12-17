@@ -50,9 +50,9 @@ public static class TypeDeclarationSyntaxExtensions
     public static ParameterListSyntax ParameterList(this TypeDeclarationSyntax typeDeclaration) =>
         typeDeclaration.Kind() switch
         {
-            SyntaxKind.ClassDeclaration => ((ClassDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
-            SyntaxKind.StructDeclaration => ((StructDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
+            SyntaxKind.ClassDeclaration => ClassDeclarationSyntaxShimExtensions.get_ParameterList((ClassDeclarationSyntax)typeDeclaration),
+            SyntaxKind.StructDeclaration => StructDeclarationSyntaxShimExtensions.get_ParameterList((StructDeclarationSyntax)typeDeclaration),
             SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration => ((RecordDeclarationSyntaxWrapper)typeDeclaration).ParameterList,
-            _ => default,
+            _ => null,
         };
 }

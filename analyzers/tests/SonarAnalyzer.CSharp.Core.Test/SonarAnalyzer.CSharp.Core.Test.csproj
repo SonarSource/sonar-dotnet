@@ -25,6 +25,7 @@
     <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Core.Syntax.Utilities" />
     <Using Include="SonarAnalyzer.CSharp.Core.Wrappers" />
+    <Using Include="SonarAnalyzer.ShimLayer" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
     <Using Include="SonarAnalyzer.TestFramework.Common" />
     <Using Include="SonarAnalyzer.TestFramework.Extensions" />

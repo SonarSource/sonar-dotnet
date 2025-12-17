@@ -101,7 +101,8 @@ public static class ModelBuilder
 
     private static FieldInfo[] CreateEnumFields(TypeDescriptor latestType, TypeDescriptor baselineType)
     {
-        var baseline = new HashSet<string>(baselineType?.Members.OfType<FieldInfo>().Select(x => x.Name) ?? []);
+        // IOperation has changed significantly compared to Roslyn 1.3.2, including changes of values => we need to (re)generate everything
+        var baseline = latestType.Type.Name == nameof(OperationKind) ? [] : new HashSet<string>(baselineType?.Members.OfType<FieldInfo>().Select(x => x.Name) ?? []);
         return latestType.Members.OfType<FieldInfo>().Where(x => !x.IsSpecialName && !baseline.Contains(x.Name)).ToArray();
     }
 

@@ -96,7 +96,7 @@ namespace StyleCop.Analyzers.CodeGeneration
             }
 
             var syntaxData = new SyntaxData(compilationData, XDocument.Parse(syntaxText.ToString()));
-            this.GenerateSyntaxWrappers(in context, syntaxData);
+            //this.GenerateSyntaxWrappers(in context, syntaxData);
             this.GenerateSyntaxWrapperHelper(in context, syntaxData.Nodes);
         }
 
@@ -917,7 +917,13 @@ namespace StyleCop.Analyzers.CodeGeneration
 
             foreach (var node in wrapperTypes.OrderBy(node => node.Name, StringComparer.OrdinalIgnoreCase))
             {
-                if (node.WrapperName is null)
+                if (node.WrapperName is null || node.Name is
+                    nameof(AnonymousFunctionExpressionSyntax)
+                    or nameof(ClassDeclarationSyntax)
+                    or nameof(LambdaExpressionSyntax)
+                    or nameof(ParenthesizedLambdaExpressionSyntax)
+                    or nameof(SimpleLambdaExpressionSyntax)
+                    or nameof(StructDeclarationSyntax))
                 {
                     continue;
                 }

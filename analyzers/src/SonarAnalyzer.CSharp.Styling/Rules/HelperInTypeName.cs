@@ -50,7 +50,7 @@ public sealed class HelperInTypeName : StylingAnalyzer
                     c.ReportIssue(Rule, name);
                 }
             },
-           SyntaxKind.NamespaceDeclaration,
-           SyntaxKindEx.FileScopedNamespaceDeclaration);
+            SyntaxKind.NamespaceDeclaration,
+            SyntaxKind.FileScopedNamespaceDeclaration);
     }
 }

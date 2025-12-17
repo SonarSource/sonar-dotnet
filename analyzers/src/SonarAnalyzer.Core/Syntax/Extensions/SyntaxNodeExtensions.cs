@@ -46,7 +46,7 @@ public static class SyntaxNodeExtensions
 
     public static string GetMappedFilePathFromRoot(this SyntaxNode root)
     {
-        if (root.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)SyntaxKindEx.PragmaChecksumDirectiveTrivia } pragmaChecksum)
+        if (root.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)Microsoft.CodeAnalysis.CSharp.SyntaxKind.PragmaChecksumDirectiveTrivia } pragmaChecksum)
         {
             // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
             // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum

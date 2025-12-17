@@ -26,7 +26,7 @@ public class CSharpAssignmentFinder : AssignmentFinder
     /// <param name="anyAssignmentKind">'true' will find any AssignmentExpressionSyntax like =, +=, -=, &=. 'false' will find only '=' SimpleAssignmentExpression.</param>
     protected override bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression)
     {
-        if (node.IsKind(SyntaxKindEx.GlobalStatement))
+        if (node.IsKind(SyntaxKind.GlobalStatement))
         {
             node = ((GlobalStatementSyntax)node).Statement;
         }
@@ -47,7 +47,7 @@ public class CSharpAssignmentFinder : AssignmentFinder
 
     protected override bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer)
     {
-        if (node.IsKind(SyntaxKindEx.GlobalStatement))
+        if (node.IsKind(SyntaxKind.GlobalStatement))
         {
             node = ((GlobalStatementSyntax)node).Statement;
         }

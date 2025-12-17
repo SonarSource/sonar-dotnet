@@ -324,7 +324,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     { RawKind: (int)SyntaxKindEx.TypePattern } x => ((TypePatternSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } x => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType == name,
                     { RawKind: (int)SyntaxKindEx.DeclarationExpression } x => ((DeclarationExpressionSyntaxWrapper)x).Type == name,
-                    { RawKind: (int)SyntaxKind.ParenthesizedLambdaExpression } x => ((ParenthesizedLambdaExpressionSyntaxWrapper)x).ReturnType == name,
+                    { RawKind: (int)SyntaxKind.ParenthesizedLambdaExpression } x => ((ParenthesizedLambdaExpressionSyntax)x).ReturnType == name,
                     { RawKind: (int)SyntaxKindEx.FileScopedNamespaceDeclaration } x => ((FileScopedNamespaceDeclarationSyntaxWrapper)x).Name == name,
                     { RawKind: (int)SyntaxKindEx.TupleElement } x => ((TupleElementSyntaxWrapper)x).Type == name,
                     { RawKind: (int)SyntaxKindEx.RefType } x => ((RefTypeSyntaxWrapper)x).Type == name,

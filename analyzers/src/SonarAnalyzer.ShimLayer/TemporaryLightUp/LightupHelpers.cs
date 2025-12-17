@@ -15,7 +15,7 @@ namespace SonarAnalyzer.ShimLayer
     using Microsoft.CodeAnalysis.CSharp;
     using Roslyn.Utilities;
 
-    public static class LightupHelpers
+    internal static class LightupHelpers
     {
         private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<Type, bool>> SupportedObjectWrappers
             = new ConcurrentDictionary<Type, ConcurrentDictionary<Type, bool>>();

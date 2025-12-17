@@ -52,6 +52,7 @@
     <Using Include="SonarAnalyzer.CSharp.Core.Wrappers" />
     <Using Include="SonarAnalyzer.CSharp.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Syntax.Utilities" />
+    <Using Include="SonarAnalyzer.ShimLayer" />
     <Using Include="StyleCop.Analyzers.Lightup" />
   </ItemGroup>
 
@@ -62,6 +63,7 @@
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.Core.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.Core.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
+      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.Lightup.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CSharp.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />

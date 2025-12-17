@@ -45,8 +45,8 @@ namespace SonarAnalyzer.CSharp.Rules
 
             context.RegisterNodeAction(c =>
                 {
-                    var wrapper = (ParenthesizedLambdaExpressionSyntaxWrapper)c.Node;
-                    var attributes = GetSerializationAttributes(wrapper.AttributeLists, c.Model);
+                    var lambda = (ParenthesizedLambdaExpressionSyntax)c.Node;
+                    var attributes = GetSerializationAttributes(lambda.AttributeLists, c.Model);
                     ReportOnAttributes(c, attributes, "lambdas");
                 },
                 SyntaxKind.ParenthesizedLambdaExpression);
