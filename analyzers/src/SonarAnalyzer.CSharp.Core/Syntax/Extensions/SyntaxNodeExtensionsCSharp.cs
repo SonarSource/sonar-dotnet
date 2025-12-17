@@ -437,7 +437,7 @@ public static class SyntaxNodeExtensionsCSharp
         node switch
         {
             AccessorDeclarationSyntax accessor => accessor.Modifiers,
-            MemberDeclarationSyntax member => member.Modifiers(),
+            MemberDeclarationSyntax member => member.Modifiers,
             _ => default,
         };
 

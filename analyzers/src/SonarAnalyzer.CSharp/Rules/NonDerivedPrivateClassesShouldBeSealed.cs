@@ -67,7 +67,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool HasVirtualMembers(TypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration.Members
                 .Where(member => member.IsAnyKind(PossiblyVirtualKinds))
-                .Any(member => member.Modifiers().Any(SyntaxKind.VirtualKeyword));
+                .Any(member => member.Modifiers.Any(SyntaxKind.VirtualKeyword));
 
         private static bool IsSealed(TypeDeclarationSyntax typeDeclaration) =>
             typeDeclaration.Modifiers.Any(SyntaxKind.SealedKeyword)

@@ -57,11 +57,11 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 return type.DescendantNodes()
                            .OfType<MemberDeclarationSyntax>()
-                           .Where(x => x.Modifiers().AnyOfKind(SyntaxKind.PublicKeyword)
-                                       && !x.Modifiers().AnyOfKind(SyntaxKind.OverrideKeyword) // Overridden member need to keep the visibility of the base declaration
+                           .Where(x => x.Modifiers.AnyOfKind(SyntaxKind.PublicKeyword)
+                                       && !x.Modifiers.AnyOfKind(SyntaxKind.OverrideKeyword) // Overridden member need to keep the visibility of the base declaration
                                        && !(x.Kind() is SyntaxKind.OperatorDeclaration or SyntaxKind.ConversionOperatorDeclaration) // Operators must be public
                                        && !IsInterfaceImplementation(semanticModel, x))
-                           .Select(x => x.Modifiers().Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).ToSecondaryLocation())
+                           .Select(x => x.Modifiers.Single(modifier => modifier.IsKind(SyntaxKind.PublicKeyword)).ToSecondaryLocation())
                            .ToArray();
             }
 
