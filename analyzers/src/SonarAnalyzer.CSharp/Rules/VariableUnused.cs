@@ -59,7 +59,7 @@ public sealed class VariableUnused : VariableUnusedBase
         protected override IEnumerable<SyntaxNode> GetDeclaredVariables(SyntaxNode variableDeclaration) =>
             variableDeclaration switch
             {
-                LocalDeclarationStatementSyntax localDeclaration when !localDeclaration.UsingKeyword().IsKind(SyntaxKind.UsingKeyword) =>
+                LocalDeclarationStatementSyntax localDeclaration when !localDeclaration.UsingKeyword.IsKind(SyntaxKind.UsingKeyword) =>
                     localDeclaration.Declaration.Variables.Where(x => !IsDiscard(x.Identifier.ValueText)),
                 AssignmentExpressionSyntax assignmentExpression =>
                     assignmentExpression.AssignmentTargets().Where(x => DeclarationExpressionSyntaxWrapper.IsInstance(x) || SingleVariableDesignationSyntaxWrapper.IsInstance(x)),

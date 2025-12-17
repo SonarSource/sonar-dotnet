@@ -64,7 +64,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var localDeclarationStatement = (LocalDeclarationStatementSyntax)c.Node;
-                    var usingKeyword = localDeclarationStatement.UsingKeyword();
+                    var usingKeyword = localDeclarationStatement.UsingKeyword;
                     if (!usingKeyword.IsKind(SyntaxKind.UsingKeyword))
                     {
                         return;

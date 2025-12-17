@@ -115,7 +115,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var descendantNodes = GetDescendantNodes(namedType, typeDeclaration).ToList();
             var localVariableDeclarations = descendantNodes.OfType<LocalDeclarationStatementSyntax>()
-                                                           .Where(x => !x.UsingKeyword().IsKind(SyntaxKind.UsingKeyword))
+                                                           .Where(x => !x.UsingKeyword.IsKind(SyntaxKind.UsingKeyword))
                                                            .Select(x => x.Declaration);
 
             var fieldVariableDeclarations = descendantNodes.OfType<FieldDeclarationSyntax>()
@@ -163,7 +163,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             var isPartOfUsingDeclaration = ancestors
                 .OfType<LocalDeclarationStatementSyntax>()
-                .Any(x => x.UsingKeyword() != default);
+                .Any(x => x.UsingKeyword != default);
 
             return isPartOfUsingStatement || isPartOfUsingDeclaration;
         }
