@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -980,3 +981,27 @@ public partial class PartialEvents
     private void UnusedPrivateMember_MyUsedEvent(object sender, EventArgs e) { }
 }
 
+
+public class NET_2805Repro // https://sonarsource.atlassian.net/browse/NET-2805
+{
+    public int CallingMethod(int value) => new WithDebugger(value)[3];
+    [DebuggerDisplay("{this[0]}, {this[1]}, {this[2]}, {this[3]}, {this[4]}")]
+    private readonly record struct WithDebugger(int Value)
+    {
+        public int this[int pos] => (Value >> (pos << 2)) & 7; // Noncompliant FP: Called by 'new WithDebugger(value)[3]' and DebuggerDisplay,
+    }
+
+    public int AlsoCallingMethod(int value) => new WithoutDebugger(value)[3];
+    readonly record struct WithoutDebugger(int Value)
+    {
+        public int this[int pos] => (Value >> (pos << 2)) & 7; // Compliant
+    }
+
+    public int EverythingIsReferenced() => new IndexerReferencedInternally(0).CallingMethod(0);
+    [DebuggerDisplay("{this[0]}, {this[1]}, {this[2]}, {this[3]}, {this[4]}")]
+    private readonly record struct IndexerReferencedInternally(int Value) // Compliant
+    {
+        public int CallingMethod(int value) => this[3];                   // Compliant
+        private int this[int pos] => (Value >> (pos << 2)) & 7;           // Compliant
+    }
+}
