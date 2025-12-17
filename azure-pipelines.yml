@@ -80,15 +80,16 @@ stages:
 
     - powershell: |
         $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
-        dotnet test $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
-      displayName: '.Net Build and UTs'
+        dotnet build --no-restore analyzers\src\SonarAnalyzer.ShimLayer.Generator\SonarAnalyzer.ShimLayer.Generator.csproj -c $(BuildConfiguration) # Needs a pre-build to prevent file locking issue in SonarAnalyzer.ShimLayer.Generator.Test
+        dotnet test --no-restore $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
+      displayName: '.NET UTs'
       env:
         ARTIFACTORY_USER: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
         ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
 
     - powershell: |
         dotnet build analyzers\src\RuleDescriptorGenerator\RuleDescriptorGenerator.csproj -c $(BuildConfiguration) /p:RunAnalyzers=true # This does not have a test project => we need to build it separately
-      displayName: '.Net RuleDescriptor Build'
+      displayName: '.NET RuleDescriptor Build'
 
     - task: PublishTestResults@2
       condition: always()

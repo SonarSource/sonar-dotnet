@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31912.275
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78-E142-4882-B084-7C83BE472109}"
 EndProject
@@ -41,6 +41,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.CSharp.Core.Test", "tests\SonarAnalyzer.CSharp.Core.Test\SonarAnalyzer.CSharp.Core.Test.csproj", "{04CA2E3F-D46B-4178-B198-EB170C1685AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.VisualBasic.Core.Test", "tests\SonarAnalyzer.VisualBasic.Core.Test\SonarAnalyzer.VisualBasic.Core.Test.csproj", "{5624BF83-AA2B-4D55-97FB-BB8B0158C92A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.ShimLayer.Generator", "src\SonarAnalyzer.ShimLayer.Generator\SonarAnalyzer.ShimLayer.Generator.csproj", "{3DB9C3E6-E845-F032-3E92-9F3D90FBF1A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.ShimLayer", "src\SonarAnalyzer.ShimLayer\SonarAnalyzer.ShimLayer.csproj", "{F38DD14C-BD40-F98B-93CC-635BFD353558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.ShimLayer.Generator.Test", "tests\SonarAnalyzer.ShimLayer.Generator.Test\SonarAnalyzer.ShimLayer.Generator.Test.csproj", "{ECAEE259-90AD-50B6-BA9C-110A0CC40D30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +126,18 @@ Global
 		{5624BF83-AA2B-4D55-97FB-BB8B0158C92A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5624BF83-AA2B-4D55-97FB-BB8B0158C92A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5624BF83-AA2B-4D55-97FB-BB8B0158C92A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DB9C3E6-E845-F032-3E92-9F3D90FBF1A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DB9C3E6-E845-F032-3E92-9F3D90FBF1A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DB9C3E6-E845-F032-3E92-9F3D90FBF1A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DB9C3E6-E845-F032-3E92-9F3D90FBF1A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F38DD14C-BD40-F98B-93CC-635BFD353558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F38DD14C-BD40-F98B-93CC-635BFD353558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F38DD14C-BD40-F98B-93CC-635BFD353558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F38DD14C-BD40-F98B-93CC-635BFD353558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECAEE259-90AD-50B6-BA9C-110A0CC40D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECAEE259-90AD-50B6-BA9C-110A0CC40D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECAEE259-90AD-50B6-BA9C-110A0CC40D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECAEE259-90AD-50B6-BA9C-110A0CC40D30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +150,7 @@ Global
 		{F97BFB85-443A-45D1-98AB-119BE9A1D121} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{04CA2E3F-D46B-4178-B198-EB170C1685AC} = {B7233F78-E142-4882-B084-7C83BE472109}
 		{5624BF83-AA2B-4D55-97FB-BB8B0158C92A} = {B7233F78-E142-4882-B084-7C83BE472109}
+		{ECAEE259-90AD-50B6-BA9C-110A0CC40D30} = {B7233F78-E142-4882-B084-7C83BE472109}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4259CA71-C565-42DD-8D58-F59819A11065}
