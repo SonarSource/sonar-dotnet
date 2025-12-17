@@ -119,7 +119,7 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
     private static bool IsAutoPropertyWithNoInitializer(PropertyDeclarationSyntax declaration) =>
         declaration.Initializer is null
         && declaration.AccessorList is not null
-        && declaration.AccessorList.Accessors.All(acc => acc.Body is null && acc.ExpressionBody() is null);
+        && declaration.AccessorList.Accessors.All(acc => acc.Body is null && acc.ExpressionBody is null);
 
     private static IList<MemberUsage> GetMemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector, HashSet<ISymbol> declaredPrivateSymbols)
     {

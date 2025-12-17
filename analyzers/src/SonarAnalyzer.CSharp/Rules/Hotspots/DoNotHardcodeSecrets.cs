@@ -68,7 +68,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeSecretsBase<SyntaxKind>
             AssignmentExpressionSyntax assignment => assignment.Right,
             VariableDeclaratorSyntax variable => variable.Initializer?.Value,
             PropertyDeclarationSyntax property => property.Initializer?.Value,
-            AccessorDeclarationSyntax accessor => accessor.ExpressionBody()?.Expression,
+            AccessorDeclarationSyntax accessor => accessor.ExpressionBody?.Expression,
             BinaryExpressionSyntax { Left: IdentifierNameSyntax } binary => binary.Right,
             BinaryExpressionSyntax { Right: IdentifierNameSyntax } binary => binary.Left,
             _ => null

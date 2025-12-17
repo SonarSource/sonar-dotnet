@@ -142,7 +142,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
         symbol.DeclaringSyntaxReferences
             .Select(x => x.GetSyntax())
             .OfType<PropertyDeclarationSyntax>()
-            .Any(x => x.AccessorList is not null && x.AccessorList.Accessors.All(a => a.Body is null && a.ExpressionBody() is null));
+            .Any(x => x.AccessorList is not null && x.AccessorList.Accessors.All(a => a.Body is null && a.ExpressionBody is null));
 
     private static bool IsPublicControllerMethod(ISymbol symbol) =>
         symbol is IMethodSymbol methodSymbol

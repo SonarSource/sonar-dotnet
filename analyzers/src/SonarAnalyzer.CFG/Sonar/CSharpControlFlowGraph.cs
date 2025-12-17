@@ -28,7 +28,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 BaseMethodDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
                 PropertyDeclarationSyntax n => n.ExpressionBody?.Expression,
                 IndexerDeclarationSyntax n => n.ExpressionBody?.Expression,
-                AccessorDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody(),
+                AccessorDeclarationSyntax n => (SyntaxNode)n.Body ?? n.ExpressionBody,
                 AnonymousFunctionExpressionSyntax n => n.Body,
                 ArrowExpressionClauseSyntax n => n,
                 _ when node.IsKind(SyntaxKindEx.LocalFunctionStatement) && (LocalFunctionStatementSyntaxWrapper)node is var local => (SyntaxNode)local.Body ?? local.ExpressionBody,

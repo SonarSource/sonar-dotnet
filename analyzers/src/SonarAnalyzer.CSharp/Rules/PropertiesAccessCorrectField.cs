@@ -34,7 +34,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
         // If there're no candidate variables, we'll try to inspect one local method invocation with value as argument
         if (assignments.Count == 0
-            && (setter.ExpressionBody()?.Expression ?? SingleInvocation(setter.Body)) is { } expression
+            && (setter.ExpressionBody?.Expression ?? SingleInvocation(setter.Body)) is { } expression
             && FindInvokedMethod(compilation, property.ContainingType, expression) is MethodDeclarationSyntax invokedMethod)
         {
             FillAssignments(assignments, compilation, invokedMethod, false);
@@ -56,7 +56,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
         // If there're no candidate variables, we'll try inspect one return of local method invocation
         if (reads.Count == 0
-            && (getter.ExpressionBody()?.Expression ?? SingleReturn(getter.Body)) is InvocationExpressionSyntax returnExpression
+            && (getter.ExpressionBody?.Expression ?? SingleReturn(getter.Body)) is InvocationExpressionSyntax returnExpression
             && FindInvokedMethod(compilation, property.ContainingType, returnExpression) is MethodDeclarationSyntax invokedMethod)
         {
             FillReads(invokedMethod, false);
@@ -90,7 +90,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
         if (accessor.Body is null)
         {
             // Expression-bodied syntax
-            return accessor.ExpressionBody() is { } arrowClause && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
+            return accessor.ExpressionBody is { } arrowClause && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
         }
 
         // Statement-bodied syntax

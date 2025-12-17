@@ -87,7 +87,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             var expression = propertySyntax.ExpressionBody?.Expression
-                ?? getAccessor?.ExpressionBody()?.Expression
+                ?? getAccessor?.ExpressionBody?.Expression
                 ?? GetSingleStatementExpression(getAccessor?.Body, isVoid: false);
 
             return expression is MemberAccessExpressionSyntax memberAccess
@@ -107,7 +107,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return true;
             }
 
-            var expression = setAccessor?.ExpressionBody()?.Expression ?? GetSingleStatementExpression(setAccessor?.Body, isVoid: true);
+            var expression = setAccessor?.ExpressionBody?.Expression ?? GetSingleStatementExpression(setAccessor?.Body, isVoid: true);
 
             return expression is AssignmentExpressionSyntax expressionToCheck
                    && expressionToCheck.IsKind(SyntaxKind.SimpleAssignmentExpression)

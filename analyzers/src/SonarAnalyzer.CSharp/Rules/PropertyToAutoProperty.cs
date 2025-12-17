@@ -67,7 +67,7 @@ public sealed class PropertyToAutoProperty : SonarDiagnosticAnalyzer
 
     private static IFieldSymbol FieldFromSetter(AccessorDeclarationSyntax setter, SemanticModel model)
     {
-        var assignment = AssignmentFromBody(setter.Body) ?? AssignmentFromExpressionBody(setter.ExpressionBody());
+        var assignment = AssignmentFromBody(setter.Body) ?? AssignmentFromExpressionBody(setter.ExpressionBody);
 
         return assignment is { RawKind: (int)SyntaxKind.SimpleAssignmentExpression, Right: { } right }
             && model.GetSymbolInfo(right).Symbol is IParameterSymbol { Name: "value", IsImplicitlyDeclared: true }
@@ -106,7 +106,7 @@ public sealed class PropertyToAutoProperty : SonarDiagnosticAnalyzer
 
     private static IFieldSymbol FieldFromGetter(AccessorDeclarationSyntax getter, SemanticModel model)
     {
-        var returnedExpression = GetReturnExpressionFromBody(getter.Body) ?? getter.ExpressionBody()?.Expression;
+        var returnedExpression = GetReturnExpressionFromBody(getter.Body) ?? getter.ExpressionBody?.Expression;
 
         return returnedExpression is null
             ? null

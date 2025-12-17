@@ -21,5 +21,5 @@ public static class PropertyDeclarationSyntaxExtensions
     public static bool IsAutoProperty(this PropertyDeclarationSyntax propertyDeclaration) =>
         propertyDeclaration.AccessorList != null
         && propertyDeclaration.AccessorList.Accessors
-                              .All(accessor => accessor.Body == null && accessor.ExpressionBody() == null);
+                              .All(accessor => accessor.Body == null && accessor.ExpressionBody == null);
 }

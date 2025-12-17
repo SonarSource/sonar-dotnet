@@ -32,7 +32,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     var accessor = (AccessorDeclarationSyntax)c.Node;
 
-                    if ((accessor.Body == null && accessor.ExpressionBody() == null)
+                    if ((accessor.Body == null && accessor.ExpressionBody == null)
                         || OnlyThrows(accessor)
                         || accessor.DescendantNodes().OfType<IdentifierNameSyntax>().Any(x => IsAccessorValue(x, c.Model)))
                     {
@@ -54,7 +54,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool OnlyThrows(AccessorDeclarationSyntax accessor) =>
             (accessor.Body?.Statements.Count == 1 && accessor.Body.Statements[0] is ThrowStatementSyntax)
-            || ThrowExpressionSyntaxWrapper.IsInstance(accessor.ExpressionBody()?.Expression);
+            || ThrowExpressionSyntaxWrapper.IsInstance(accessor.ExpressionBody?.Expression);
 
         private static bool IsAccessorValue(IdentifierNameSyntax identifier, SemanticModel semanticModel)
         {

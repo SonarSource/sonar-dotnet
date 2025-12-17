@@ -156,7 +156,7 @@ public static class SyntaxNodeExtensionsCSharp
             MethodDeclarationSyntax a => a.ExpressionBody,
             ConstructorDeclarationSyntax b => b.ExpressionBody(),
             OperatorDeclarationSyntax c => c.ExpressionBody,
-            AccessorDeclarationSyntax d => d.ExpressionBody(),
+            AccessorDeclarationSyntax d => d.ExpressionBody,
             ConversionOperatorDeclarationSyntax e => e.ExpressionBody,
             IndexerDeclarationSyntax f => f.ExpressionBody,
             PropertyDeclarationSyntax g => g.ExpressionBody,

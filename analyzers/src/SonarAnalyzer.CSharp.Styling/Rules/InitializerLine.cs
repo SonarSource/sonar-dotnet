@@ -51,9 +51,9 @@ public sealed class InitializerLine : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var accessor = (AccessorDeclarationSyntax)c.Node;
-                if (accessor.ExpressionBody() is not null)
+                if (accessor.ExpressionBody is not null)
                 {
-                    Verify(c, accessor.ExpressionBody().Expression, accessor.Keyword.GetLocation().StartLine(), "expression");
+                    Verify(c, accessor.ExpressionBody.Expression, accessor.Keyword.GetLocation().StartLine(), "expression");
                 }
             },
             SyntaxKind.AddAccessorDeclaration,

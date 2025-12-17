@@ -58,7 +58,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 property.AccessorList
                     .Accessors
                     .Where(a => a.IsKind(SyntaxKind.GetAccessorDeclaration))
-                    .Select(a => (SyntaxNode)a.Body ?? a.ExpressionBody())
+                    .Select(a => (SyntaxNode)a.Body ?? a.ExpressionBody)
                     .FirstOrDefault();
         }
 

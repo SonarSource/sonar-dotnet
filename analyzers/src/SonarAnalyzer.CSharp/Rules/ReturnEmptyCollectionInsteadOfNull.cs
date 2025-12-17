@@ -88,7 +88,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         node switch
         {
             BaseMethodDeclarationSyntax method => method.ExpressionBody(),
-            BasePropertyDeclarationSyntax property => property.ArrowExpressionBody() ?? GetAccessor(property)?.ExpressionBody(),
+            BasePropertyDeclarationSyntax property => property.ArrowExpressionBody() ?? GetAccessor(property)?.ExpressionBody,
             _ => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
         };
 
