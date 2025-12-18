@@ -1,45 +1,34 @@
-﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) 2014-2025 SonarSource Sàrl
+ * mailto:info AT sonarsource DOT com
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the Sonar Source-Available License Version 1, as published by SonarSource SA.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the Sonar Source-Available License for more details.
+ *
+ * You should have received a copy of the Sonar Source-Available License
+ * along with this program; if not, see https://sonarsource.com/license/ssal/
+ */
 
-#nullable disable
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace StyleCop.Analyzers.Lightup
+namespace StyleCop.Analyzers.Lightup;
+
+public static class BaseMethodDeclarationSyntaxExtensions
 {
-    using System;
-    using Microsoft.CodeAnalysis.CSharp;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
-
-    public static class BaseMethodDeclarationSyntaxExtensions
-    {
-        private static readonly Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor;
-
-        static BaseMethodDeclarationSyntaxExtensions()
+    public static ArrowExpressionClauseSyntax ExpressionBody(this BaseMethodDeclarationSyntax syntax) =>
+        // Prior to C# 7, the ExpressionBody properties did not have ExpressionBody on BaseMethodDeclarationSyntax but on
+        // some of the derived types only. Therefore we need to special case the derived types here.
+        syntax.Kind() switch
         {
-            ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax>(typeof(BaseMethodDeclarationSyntax), nameof(ExpressionBody));
-        }
-
-        public static ArrowExpressionClauseSyntax ExpressionBody(this BaseMethodDeclarationSyntax syntax)
-        {
-            if (!LightupHelpers.SupportsCSharp7)
-            {
-                // Prior to C# 7, the ExpressionBody properties did not override a base method.
-                switch (syntax.Kind())
-                {
-                    case SyntaxKind.MethodDeclaration:
-                        return ((MethodDeclarationSyntax)syntax).ExpressionBody;
-
-                    case SyntaxKind.OperatorDeclaration:
-                        return ((OperatorDeclarationSyntax)syntax).ExpressionBody;
-
-                    case SyntaxKind.ConversionOperatorDeclaration:
-                        return ((ConversionOperatorDeclarationSyntax)syntax).ExpressionBody;
-
-                    default:
-                        break;
-                }
-            }
-
-            return ExpressionBodyAccessor(syntax);
-        }
-    }
+            SyntaxKind.MethodDeclaration => ((MethodDeclarationSyntax)syntax).ExpressionBody,
+            SyntaxKind.OperatorDeclaration => ((OperatorDeclarationSyntax)syntax).ExpressionBody,
+            SyntaxKind.ConversionOperatorDeclaration => ((ConversionOperatorDeclarationSyntax)syntax).ExpressionBody,
+            _ => BaseMethodDeclarationSyntaxShimExtensions.get_ExpressionBody(syntax),
+        };
 }
