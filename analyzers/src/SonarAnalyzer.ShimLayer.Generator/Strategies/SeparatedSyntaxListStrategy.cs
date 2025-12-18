@@ -16,23 +16,28 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public class NoChangeStrategy : Strategy
+public class SeparatedSyntaxListStrategy : Strategy
 {
     private readonly string type;
+    private readonly Strategy typeArgument;
 
-    public NoChangeStrategy(Type latest) : base(latest) =>
-        type = latest.IsGenericType
-            ? latest.Name.Replace("`1", null) + "<" + string.Join(", ", latest.GetGenericArguments().Select(x => x.Name)) + ">"
-            : latest.Name;
-
-    public override string Generate(StrategyModel model) => null;
+    public SeparatedSyntaxListStrategy(Type latest, Strategy typeArgument) : base(latest)
+    {
+        type = latest.Name.Replace("`1", "Wrapper");
+        this.typeArgument = typeArgument;
+    }
 
     public override string ReturnTypeSnippet() =>
-        type;
-
-    public override string CompiletimeTypeSnippet() =>
-        type;
+        $"{type}<{typeArgument.ReturnTypeSnippet()}>";
 
     public override string ToConversionSnippet(string from) =>
-        $"({type}){from}";
+        from;
+
+    public override string CompiletimeTypeSnippet() =>
+        ReturnTypeSnippet();
+
+    public override string PropertyAccessorInitializerSnippet(string compiletimeType, string propertyName) =>
+        $"LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<{compiletimeType}, {typeArgument.ReturnTypeSnippet()}>(WrappedType, nameof({propertyName}))";
+
+    public override string Generate(StrategyModel model) => null;
 }

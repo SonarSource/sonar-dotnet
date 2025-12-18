@@ -30,17 +30,13 @@ public class StrategyModel : IEnumerable<Strategy>
             {
                 return strategy;
             }
-            else if (key.Name is "SyntaxList`1" or "SeparatedSyntaxList`1")
-            {
-                var genericStrategy = new GenericStrategy(key);
-                Add(key, genericStrategy);
-                return genericStrategy;
-            }
             else
             {
-                var defaultStrategy = new NoChangeStrategy(key);
-                Add(key, defaultStrategy);
-                return defaultStrategy;
+                Strategy newStrategy = key.Name == "SeparatedSyntaxList`1" && this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument
+                    ? new SeparatedSyntaxListStrategy(key, typeArgument)
+                    : new NoChangeStrategy(key);
+                Add(key, newStrategy);
+                return newStrategy;
             }
         }
     }
