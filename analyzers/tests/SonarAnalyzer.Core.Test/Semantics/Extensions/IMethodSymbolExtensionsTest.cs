@@ -417,6 +417,58 @@ public class IMethodSymbolExtensionsTest
         methodSymbol.IsImplementingInterfaceMember(new KnownType(interfaceType, genericParameter), methodName).Should().BeTrue();
     }
 
+    [TestMethod]
+    public void IsExtension_ExtensionMethod_ReturnsTrue_CS() =>
+        new SnippetCompiler("""
+            public static class Extensions
+            {
+                public static void ExtensionMethod(this string s) { }
+                extension(string s)
+                {
+                    public int ExtensionMemberMethod() => 42;
+                }
+                extension(string)
+                {
+                    public static int StaticExtensionMemberMethod() => 42;
+                }
+            }
+            """).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
+
+    [TestMethod]
+    public void IsExtension_RegularMethod_ReturnsFalse_CS() =>
+        new SnippetCompiler("""
+            public class Sample
+            {
+                public void RegularMethod() { }
+                public static void StaticRegularMethod() { }
+            }
+            """).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
+
+    [TestMethod]
+    public void IsExtension_ExtensionMethod_ReturnsTrue_VB() =>
+        new SnippetCompiler("""
+            Module Extensions
+                <Runtime.CompilerServices.Extension>
+                Public Sub ExtensionMethod(s As String)
+                End Sub
+            End Module
+            """,
+            false,
+            AnalyzerLanguage.VisualBasic).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
+
+    [TestMethod]
+    public void IsExtension_RegularMethod_ReturnsFalse_VB() =>
+        new SnippetCompiler("""
+            Public Class Sample
+                Public Sub RegularMethod()
+                End Sub
+                Public Shared Sub SharedRegularMethod()
+                End Sub
+            End Class
+            """,
+            false,
+            AnalyzerLanguage.VisualBasic).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
+
     private IMethodSymbol GetMethodSymbolForIndex(int index)
     {
         var statement = (ExpressionStatementSyntax)statements[index];

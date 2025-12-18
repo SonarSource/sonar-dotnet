@@ -92,18 +92,20 @@ public class SnippetCompiler
         return symbol;
     }
 
-    public ISymbol GetDeclaredSymbol(string name)
+    public IEnumerable<T> GetDeclaredSymbols<T>() where T : ISymbol
     {
         var indentifierKind = IsCSharp() ? (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.IdentifierToken : (int)Microsoft.CodeAnalysis.VisualBasic.SyntaxKind.IdentifierToken;
-        var identfierTokens = SyntaxTree.GetRoot().DescendantTokens().Where(x => x.RawKind == indentifierKind && x.ValueText == name).ToList();
-        identfierTokens.Should().NotBeEmpty($"Test setup error: could not find identifier in code snippet: {name}");
-        var symbol = identfierTokens.Select(x => SemanticModel.GetDeclaredSymbol(x.Parent)).FirstOrDefault(x => x is not null);
-        symbol.Should().NotBeNull($"Test setup error: could not find symbol in code snippet: {name}");
-        return symbol;
+        var identfierTokens = SyntaxTree.GetRoot().DescendantTokens().Where(x => x.RawKind == indentifierKind).ToList();
+        var symbols = identfierTokens.Select(x => SemanticModel.GetDeclaredSymbol(x.Parent)).OfType<T>().ToList();
+        symbols.Should().NotBeEmpty("Test setup error: could not find any symbols of the expected kind in code snippet.");
+        return symbols;
     }
 
+    public ISymbol GetDeclaredSymbol(string name) =>
+        GetDeclaredSymbols<ISymbol>().Should().ContainSingle(x => x.Name == name).Subject;
+
     public T GetDeclaredSymbol<T>(string name) where T : ISymbol =>
-        GetDeclaredSymbol(name).Should().BeAssignableTo<T>($"Test setup error: found symbol is not of the expected symbol kind: {name}").Subject;
+        GetDeclaredSymbols<T>().Should().ContainSingle(x => x.Name == name).Subject;
 
     public IMethodSymbol GetMethodSymbol(string typeDotMethodName)
     {

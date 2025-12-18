@@ -16,8 +16,13 @@
 
 namespace SonarAnalyzer.Core.Semantics.Extensions;
 
-internal static class IPropertySymbolExtensions
+public static class IPropertySymbolExtensions
 {
-    public static bool IsAnyAttributeInOverridingChain(this IPropertySymbol property) =>
-        property.IsAnyAttributeInOverridingChain(x => x.OverriddenProperty);
+    extension(IPropertySymbol property)
+    {
+        public bool IsExtension => property is { GetMethod.IsExtension: true } or { SetMethod.IsExtension: true };
+
+        public bool IsAnyAttributeInOverridingChain() =>
+            property.IsAnyAttributeInOverridingChain(x => x.OverriddenProperty);
+    }
 }

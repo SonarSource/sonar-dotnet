@@ -122,6 +122,11 @@ public static class IMethodSymbolExtensions
     public static KnownType FindFirstTestMethodType(this IMethodSymbol method) =>
         KnownTestMethodAttributes.FirstOrDefault(x => method.GetAttributes().Any(att => att.AttributeClass.DerivesFrom(x)));
 
+    extension(IMethodSymbol method)
+    {
+        public bool IsExtension => method is { IsExtensionMethod: true } or { AssociatedExtensionImplementation: not null };
+    }
+
     private static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
         method.GetAttributes().FirstOrDefault(x => x.AttributeClass.IsAny(KnownType.TestMethodAttributesOfxUnit));
 

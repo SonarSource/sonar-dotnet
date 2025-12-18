@@ -20,6 +20,40 @@ namespace SonarAnalyzer.Core.Test.Semantics.Extensions;
 public class IPropertySymbolExtensionsTest
 {
     [TestMethod]
+    public void IsExtension_ExtensionProperty_ReturnsTrue() =>
+        new SnippetCompiler("""
+            public static class Extensions
+            {
+                extension(string s)
+                {
+                    public int Property { get => 42; set { } }
+                    public int GetterOnly => 42;
+                    public int SetterOnly { set { } }
+                }
+                extension(string)
+                {
+                    public static int StaticProperty { get => 42; set { } }
+                    public static int StaticGetterOnly => 42;
+                    public static int StaticSetterOnly { set { } }
+                }
+            }
+            """).GetDeclaredSymbols<IPropertySymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
+
+    [TestMethod]
+    public void IsExtension_RegularProperty_ReturnsFalse() =>
+        new SnippetCompiler("""
+            public class Sample
+            {
+                public int Property { get; set; }
+                public int GetterOnly => 42;
+                public int SetterOnly { set { } }
+                public static int StaticProperty { get; set; }
+                public static int StaticGetterOnly => 42;
+                public static int StaticSetterOnly { set { } }
+            }
+            """).GetDeclaredSymbols<IPropertySymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
+
+    [TestMethod]
     public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>
         IPropertySymbolExtensions.IsAnyAttributeInOverridingChain(null).Should().BeFalse();
 }

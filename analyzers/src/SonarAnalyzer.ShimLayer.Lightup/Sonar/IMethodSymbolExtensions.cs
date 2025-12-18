@@ -18,13 +18,14 @@ namespace StyleCop.Analyzers.Lightup;
 
 public static class IMethodSymbolExtensions
 {
-    private static readonly Func<IMethodSymbol, bool> IsPartialDefinitionAccessor;
+    private static readonly Func<IMethodSymbol, bool> IsPartialDefinitionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IMethodSymbol, bool>(typeof(IMethodSymbol), "IsPartialDefinition");
 
-    static IMethodSymbolExtensions()
+    private static readonly Func<IMethodSymbol, IMethodSymbol> AssociatedExtensionImplementationAccessor =
+        LightupHelpers.CreateSyntaxPropertyAccessor<IMethodSymbol, IMethodSymbol>(typeof(IMethodSymbol), "AssociatedExtensionImplementation");
+
+    extension(IMethodSymbol symbol)
     {
-        IsPartialDefinitionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IMethodSymbol, bool>(typeof(IMethodSymbol), nameof(IsPartialDefinition));
+        public IMethodSymbol AssociatedExtensionImplementation => AssociatedExtensionImplementationAccessor(symbol);
+        public bool IsPartialDefinition => IsPartialDefinitionAccessor(symbol);
     }
-
-    public static bool IsPartialDefinition(this IMethodSymbol methodSymbol) =>
-        IsPartialDefinitionAccessor(methodSymbol);
 }
