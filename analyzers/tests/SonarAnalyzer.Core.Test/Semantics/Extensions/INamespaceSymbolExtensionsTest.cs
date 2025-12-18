@@ -29,8 +29,8 @@ public class INamespaceSymbolExtensionsTest
     [DataRow("System.Collections.Generic", ".System.Collections.Generic.")]
     public void Is_ValidNameSpaces(string code, string test)
     {
-        var snippet = $$"""
-            using {{code}};
+        var snippet = $"""
+            using {code};
             """;
         var (tree, model) = TestCompiler.CompileCS(snippet);
         var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
@@ -70,8 +70,8 @@ public class INamespaceSymbolExtensionsTest
     [DataRow("System.Collections.Generic", "global.System.Collections.Generic")]
     public void Is_InvalidNameSpaces(string code, string test)
     {
-        var snippet = $$"""
-            using {{code}};
+        var snippet = $"""
+            using {code};
             """;
         var (tree, model) = TestCompiler.CompileCS(snippet);
         var name = tree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>().Single().Name;
@@ -115,16 +115,16 @@ public class INamespaceSymbolExtensionsTest
             public class Base { }
             public class Derived : Base { }
             """);
-        var objectType = snippet.GetTypeByMetadataName("System.Object");
+        var objectType = snippet.TypeByMetadataName("System.Object");
         var baseTypes = objectType.GetSelfAndBaseTypes().ToList();
         baseTypes.Should().ContainSingle();
-        baseTypes.First().Should().Be(objectType);
+        baseTypes.Should().HaveElementAt(0, objectType);
 
-        var derivedType = snippet.GetDeclaredSymbol<INamedTypeSymbol>("Derived");
+        var derivedType = snippet.DeclaredSymbol<INamedTypeSymbol>("Derived");
         baseTypes = derivedType.GetSelfAndBaseTypes().ToList();
         baseTypes.Should().HaveCount(3);
         baseTypes.Should().HaveElementAt(0, derivedType);
-        baseTypes.Should().HaveElementAt(1, snippet.GetDeclaredSymbol("Base").Should().BeAssignableTo<INamedTypeSymbol>().Subject);
+        baseTypes.Should().HaveElementAt(1, snippet.DeclaredSymbol<INamedTypeSymbol>("Base"));
         baseTypes.Should().HaveElementAt(2, objectType);
     }
 
@@ -140,7 +140,7 @@ public class INamespaceSymbolExtensionsTest
                 }
             }
             """);
-        var typeSymbol = snippet.GetDeclaredSymbol<INamedTypeSymbol>("Outer");
+        var typeSymbol = snippet.DeclaredSymbol<INamedTypeSymbol>("Outer");
         typeSymbol.GetAllNamedTypes().Should().HaveCount(3);
     }
 
@@ -161,7 +161,7 @@ public class INamespaceSymbolExtensionsTest
               public interface IInterface { }
             }
             """);
-        var nsSymbol = snippet.GetNamespaceSymbol("NS");
+        var nsSymbol = snippet.NamespaceSymbol("NS");
 
         nsSymbol.GetAllNamedTypes().Should().HaveCount(5);
     }

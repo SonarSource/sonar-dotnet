@@ -76,6 +76,6 @@ public class BuilderPatternDescriptorTest
     {
         const string source = @"class X{void Foo(object x){x.ToString()}};";
         var snippet = new SnippetCompiler(source, true, AnalyzerLanguage.CSharp);
-        return new InvocationContext(snippet.SyntaxTree.Single<InvocationExpressionSyntax>(), "ToString", snippet.SemanticModel);
+        return new InvocationContext(snippet.Tree.Single<InvocationExpressionSyntax>(), "ToString", snippet.Model);
     }
 }

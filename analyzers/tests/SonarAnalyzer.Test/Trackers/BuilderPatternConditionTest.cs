@@ -157,7 +157,7 @@ class Item
     public Item Ddd() { return this;}
 }";
         var snippet = new SnippetCompiler(source, false, AnalyzerLanguage.CSharp);
-        return new InvocationContext(FindMethodInvocation_CS(snippet.SyntaxTree, "Ccc"), "Ccc", snippet.SemanticModel);
+        return new InvocationContext(FindMethodInvocation_CS(snippet.Tree, "Ccc"), "Ccc", snippet.Model);
     }
 
     private static InvocationContext CreateContext_VB()
@@ -198,7 +198,7 @@ Class Item
 
 End Class";
         var snippet = new SnippetCompiler(source, false, AnalyzerLanguage.VisualBasic);
-        return new InvocationContext(FindMethodInvocation_VB(snippet.SyntaxTree, "Ccc"), "Ccc", snippet.SemanticModel);
+        return new InvocationContext(FindMethodInvocation_VB(snippet.Tree, "Ccc"), "Ccc", snippet.Model);
     }
 
     private static SyntaxNode FindMethodInvocation_CS(SyntaxTree tree, string name) =>

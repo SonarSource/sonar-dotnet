@@ -194,7 +194,7 @@ public class Base
     private static ObjectCreationContext CreateContext<TSyntaxNodeType>(string testInput, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
     {
         var testCode = new SnippetCompiler(testInput, true, language);
-        var node = testCode.GetNodes<TSyntaxNodeType>().First();
+        var node = testCode.Nodes<TSyntaxNodeType>().First();
         var context = new ObjectCreationContext(testCode.CreateAnalysisContext(node));
         return context;
     }

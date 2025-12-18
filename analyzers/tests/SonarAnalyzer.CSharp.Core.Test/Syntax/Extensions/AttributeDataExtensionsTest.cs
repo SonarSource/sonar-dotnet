@@ -218,7 +218,7 @@ public class AttributeDataExtensionsTest
     }
 
     private static AttributeData CompileAttribute(string code, bool ignoreErrors = false) =>
-        new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).GetDeclaredSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
+        new SnippetCompiler(code, ignoreErrors, AnalyzerLanguage.CSharp).DeclaredSymbol("Program").GetAttributes().Single(x => x.HasName("MyAttribute"));
 
     private static AttributeDataMock AttributeDataWithName(string attributeClassName)
     {
@@ -248,8 +248,8 @@ public class AttributeDataExtensionsTest
             public class Dummy { }
             """;
         var snippet = new SnippetCompiler(code);
-        var classDeclaration = snippet.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
-        var symbol = snippet.SemanticModel.GetDeclaredSymbol(classDeclaration);
+        var classDeclaration = snippet.Tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().Last();
+        var symbol = snippet.Model.GetDeclaredSymbol(classDeclaration);
         return symbol.GetAttributes().First();
 
         static string TypeName(object value) =>

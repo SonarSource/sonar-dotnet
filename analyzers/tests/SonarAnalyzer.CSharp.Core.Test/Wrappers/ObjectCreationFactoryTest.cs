@@ -36,15 +36,15 @@ public class ObjectCreationFactoryTest
                     }
                 }";
         var snippet = new SnippetCompiler(code);
-        var objectCreation = snippet.SyntaxTree.Single<ObjectCreationExpressionSyntax>();
+        var objectCreation = snippet.Tree.Single<ObjectCreationExpressionSyntax>();
         var wrapper = ObjectCreationFactory.Create(objectCreation);
         wrapper.Expression.Should().BeEquivalentTo(objectCreation);
         wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
         wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
         wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);
-        wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
-        wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
-        wrapper.MethodSymbol(snippet.SemanticModel).Parameters.Length.Should().Be(1);
+        wrapper.TypeAsString(snippet.Model).Should().Be("A");
+        wrapper.TypeSymbol(snippet.Model).Name.Should().Be("A");
+        wrapper.MethodSymbol(snippet.Model).Parameters.Length.Should().Be(1);
     }
 
     [TestMethod]
@@ -64,7 +64,7 @@ public class ObjectCreationFactoryTest
                     }
                 }";
         var snippet = new SnippetCompiler(code);
-        var objectCreation = snippet.SyntaxTree.Single<ObjectCreationExpressionSyntax>();
+        var objectCreation = snippet.Tree.Single<ObjectCreationExpressionSyntax>();
         var wrapper = ObjectCreationFactory.Create(objectCreation);
         wrapper.Initializer.Should().BeNull();
         wrapper.InitializerExpressions.Should().BeNull();
@@ -87,16 +87,16 @@ public class ObjectCreationFactoryTest
                     }
                 }";
         var snippet = new SnippetCompiler(code);
-        var syntaxTree = snippet.SyntaxTree;
+        var syntaxTree = snippet.Tree;
         var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First(node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
         var wrapper = ObjectCreationFactory.Create(objectCreation);
         wrapper.Expression.Should().BeEquivalentTo(objectCreation.SyntaxNode);
         wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
         wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
         wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);
-        wrapper.TypeAsString(snippet.SemanticModel).Should().Be("A");
-        wrapper.TypeSymbol(snippet.SemanticModel).Name.Should().Be("A");
-        wrapper.MethodSymbol(snippet.SemanticModel).Parameters.Length.Should().Be(1);
+        wrapper.TypeAsString(snippet.Model).Should().Be("A");
+        wrapper.TypeSymbol(snippet.Model).Name.Should().Be("A");
+        wrapper.MethodSymbol(snippet.Model).Parameters.Length.Should().Be(1);
     }
 
     [TestMethod]
@@ -116,7 +116,7 @@ public class ObjectCreationFactoryTest
                     }
                 }";
         var snippet = new SnippetCompiler(code);
-        var objectCreation = snippet.SyntaxTree.Single<ImplicitObjectCreationExpressionSyntax>();
+        var objectCreation = snippet.Tree.Single<ImplicitObjectCreationExpressionSyntax>();
         var wrapper = ObjectCreationFactory.Create(objectCreation);
         wrapper.Initializer.Should().BeNull();
         wrapper.InitializerExpressions.Should().BeNull();
@@ -134,10 +134,10 @@ public class ObjectCreationFactoryTest
                     }
                 }";
         var snippet = new SnippetCompiler(code, true, AnalyzerLanguage.CSharp);
-        var syntaxTree = snippet.SyntaxTree;
+        var syntaxTree = snippet.Tree;
         var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First(node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
         var wrapper = ObjectCreationFactory.Create(objectCreation);
-        wrapper.TypeAsString(snippet.SemanticModel).Should().BeEmpty();
+        wrapper.TypeAsString(snippet.Model).Should().BeEmpty();
     }
 
     [TestMethod]
@@ -151,7 +151,7 @@ public class ObjectCreationFactoryTest
     public void GivenNonConstructor_ThrowsException()
     {
         var snippet = new SnippetCompiler("public class A{}");
-        var classDeclaration = snippet.SyntaxTree.Single<ClassDeclarationSyntax>();
+        var classDeclaration = snippet.Tree.Single<ClassDeclarationSyntax>();
         Action action = () => { ObjectCreationFactory.Create(classDeclaration); };
         action.Should().Throw<InvalidOperationException>().WithMessage("Unexpected type: ClassDeclarationSyntax");
     }

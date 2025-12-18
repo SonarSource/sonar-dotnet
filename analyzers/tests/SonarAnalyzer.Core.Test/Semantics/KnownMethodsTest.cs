@@ -133,8 +133,8 @@ public class KnownMethodsTest
                 public void EventHandler(object o, System.EventArgs args){}
             }
             """);
-        snippet.GetMethodSymbol("Sample.Method").IsEventHandler().Should().BeFalse();
-        snippet.GetMethodSymbol("Sample.EventHandler").IsEventHandler().Should().BeTrue();
+        snippet.MethodSymbol("Sample.Method").IsEventHandler().Should().BeFalse();
+        snippet.MethodSymbol("Sample.EventHandler").IsEventHandler().Should().BeTrue();
     }
 
     [TestMethod]
@@ -152,6 +152,6 @@ public class KnownMethodsTest
                 Assembly LoadAnyVersion(object sender, ResolveEventArgs args) => null;
             }
             """);
-        snippet.GetMethodSymbol("AssemblyLoad.LoadAnyVersion").IsEventHandler().Should().BeTrue();
+        snippet.MethodSymbol("AssemblyLoad.LoadAnyVersion").IsEventHandler().Should().BeTrue();
     }
 }

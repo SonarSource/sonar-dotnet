@@ -28,7 +28,7 @@ public class MethodDeclarationFactoryTest
                     public void Bar(int y) { }
                 }";
         var snippet = new SnippetCompiler(code);
-        var method = snippet.SyntaxTree.Single<MethodDeclarationSyntax>();
+        var method = snippet.Tree.Single<MethodDeclarationSyntax>();
         var wrapper = MethodDeclarationFactory.Create(method);
         wrapper.Body.Should().BeEquivalentTo(method.Body);
         wrapper.ExpressionBody.Should().BeEquivalentTo(method.ExpressionBody);
@@ -51,7 +51,7 @@ public class MethodDeclarationFactoryTest
                     }
                 }";
         var snippet = new SnippetCompiler(code);
-        var method = snippet.SyntaxTree.Single<LocalFunctionStatementSyntax>();
+        var method = snippet.Tree.Single<LocalFunctionStatementSyntax>();
         var wrapper = MethodDeclarationFactory.Create(method);
         wrapper.Body.Should().BeEquivalentTo(method.Body);
         wrapper.ExpressionBody.Should().BeEquivalentTo(method.ExpressionBody);
@@ -70,7 +70,7 @@ public class MethodDeclarationFactoryTest
                     partial void Bar(int a);
                 }";
         var snippet = new SnippetCompiler(code);
-        var method = snippet.SyntaxTree.Single<MethodDeclarationSyntax>();
+        var method = snippet.Tree.Single<MethodDeclarationSyntax>();
         var wrapper = MethodDeclarationFactory.Create(method);
         wrapper.HasImplementation.Should().BeFalse();
     }
@@ -90,7 +90,7 @@ public class MethodDeclarationFactoryTest
                 {
                 }";
         var snippet = new SnippetCompiler(code);
-        var method = snippet.SyntaxTree.Single<ClassDeclarationSyntax>();
+        var method = snippet.Tree.Single<ClassDeclarationSyntax>();
         Action a = () => MethodDeclarationFactory.Create(method);
         a.Should().Throw<InvalidOperationException>().WithMessage("Unexpected type: ClassDeclarationSyntax");
     }

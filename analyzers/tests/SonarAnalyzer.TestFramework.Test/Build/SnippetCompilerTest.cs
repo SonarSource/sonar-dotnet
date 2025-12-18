@@ -36,8 +36,8 @@ public class SnippetCompilerTest
             }
             """;
         var sut = new SnippetCompiler(code);
-        sut.SyntaxTree.Should().NotBeNull();
-        sut.SemanticModel.Should().NotBeNull();
+        sut.Tree.Should().NotBeNull();
+        sut.Model.Should().NotBeNull();
     }
 
     [TestMethod]
@@ -51,8 +51,8 @@ public class SnippetCompilerTest
             End Class
             """;
         var sut = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic);
-        sut.SyntaxTree.Should().NotBeNull();
-        sut.SemanticModel.Should().NotBeNull();
+        sut.Tree.Should().NotBeNull();
+        sut.Model.Should().NotBeNull();
     }
 
     [TestMethod]
@@ -66,8 +66,8 @@ public class SnippetCompilerTest
             {
             """;
         var sut = new SnippetCompiler(code, true, AnalyzerLanguage.CSharp);
-        sut.SyntaxTree.Should().NotBeNull();
-        sut.SemanticModel.Should().NotBeNull();
+        sut.Tree.Should().NotBeNull();
+        sut.Model.Should().NotBeNull();
     }
 
     [TestMethod]
@@ -82,8 +82,8 @@ public class SnippetCompilerTest
             }
             """;
         var sut = new SnippetCompiler(code);
-        sut.SyntaxTree.Should().NotBeNull();
-        sut.SemanticModel.Should().NotBeNull();
+        sut.Tree.Should().NotBeNull();
+        sut.Model.Should().NotBeNull();
     }
 
     [TestMethod]
@@ -103,8 +103,8 @@ public class SnippetCompilerTest
             """;
         // Severity=Warning is not an error and should not throw
         var sut = new SnippetCompiler(code);
-        sut.SyntaxTree.Should().NotBeNull();
-        sut.SemanticModel.Should().NotBeNull();
+        sut.Tree.Should().NotBeNull();
+        sut.Model.Should().NotBeNull();
     }
 
     [TestMethod]
@@ -125,7 +125,7 @@ public class SnippetCompilerTest
     }
 
     [TestMethod]
-    public void GetNamespaceSymbol_NamespaceExists_ReturnsSymbol()
+    public void NamespaceSymbol_NamespaceExists_ReturnsSymbol()
     {
         const string code = """
             namespace Test {
@@ -133,12 +133,12 @@ public class SnippetCompilerTest
             }
             """;
         var sut = new SnippetCompiler(code);
-        var namespaceSymbol = sut.GetNamespaceSymbol("Test");
+        var namespaceSymbol = sut.NamespaceSymbol("Test");
         namespaceSymbol.Name.Should().Be("Test");
     }
 
     [TestMethod]
-    public void GetNamespaceSymbol_NestedNamespaces_ReturnsSymbols()
+    public void NamespaceSymbol_NestedNamespaces_ReturnsSymbols()
     {
         const string code = """
             namespace Test {
@@ -148,14 +148,14 @@ public class SnippetCompilerTest
             }
             """;
         var sut = new SnippetCompiler(code);
-        var namespaceSymbol = sut.GetNamespaceSymbol("Test");
+        var namespaceSymbol = sut.NamespaceSymbol("Test");
         namespaceSymbol.Name.Should().Be("Test");
-        var nestedNamespaceSymbol = sut.GetNamespaceSymbol("Nested");
+        var nestedNamespaceSymbol = sut.NamespaceSymbol("Nested");
         nestedNamespaceSymbol.Name.Should().Be("Nested");
     }
 
     [TestMethod]
-    public void GetNamespaceSymbol_NestedNamespacesWithDot_ReturnsSymbols()
+    public void NamespaceSymbol_NestedNamespacesWithDot_ReturnsSymbols()
     {
         const string code = """
             namespace Test.Nested {
@@ -165,12 +165,12 @@ public class SnippetCompilerTest
         var sut = new SnippetCompiler(code);
         // Searching in nested namespaces of the form Namespace.NestedNamespace
         // is not supported by this method. We can get back the symbol of the most nested namespace.
-        var namespaceSymbol = sut.GetNamespaceSymbol("Nested");
+        var namespaceSymbol = sut.NamespaceSymbol("Nested");
         namespaceSymbol.Name.Should().Be("Nested");
     }
 
     [TestMethod]
-    public void GetNamespaceSymbol_FileScopedNamespace_ReturnsSymbol()
+    public void NamespaceSymbol_FileScopedNamespace_ReturnsSymbol()
     {
         const string code = """
             namespace Test;
@@ -178,12 +178,12 @@ public class SnippetCompilerTest
 
             """;
         var sut = new SnippetCompiler(code);
-        var namespaceSymbol = sut.GetNamespaceSymbol("Test");
+        var namespaceSymbol = sut.NamespaceSymbol("Test");
         namespaceSymbol.Name.Should().Be("Test");
     }
 
     [TestMethod]
-    public void GetMethodDeclaration_CS()
+    public void MethodDeclaration_CS()
     {
         var sut = new SnippetCompiler("""
             public class Sample
@@ -192,11 +192,11 @@ public class SnippetCompilerTest
                 public int Method() => 42;
             }
             """);
-        sut.GetMethodDeclaration("Sample.Method").Should().NotBeNull().And.Subject.ToString().Should().Contain("Method()");
+        sut.MethodDeclaration("Sample.Method").Should().NotBeNull().And.Subject.ToString().Should().Contain("Method()");
     }
 
     [TestMethod]
-    public void GetMethodDeclaration_VB()
+    public void MethodDeclaration_VB()
     {
         var sut = new SnippetCompiler("""
             Public Class Sample
@@ -205,24 +205,24 @@ public class SnippetCompilerTest
                 Public Function Method2() : End Function
             End Class
             """, false, AnalyzerLanguage.VisualBasic);
-        sut.GetMethodDeclaration("Sample.Method1").Should().NotBeNull().And.Subject.ToString().Should().Contain("Method1()");
-        sut.GetMethodDeclaration("Sample.Method2").Should().NotBeNull().And.Subject.ToString().Should().Contain("Method2()");
+        sut.MethodDeclaration("Sample.Method1").Should().NotBeNull().And.Subject.ToString().Should().Contain("Method1()");
+        sut.MethodDeclaration("Sample.Method2").Should().NotBeNull().And.Subject.ToString().Should().Contain("Method2()");
     }
 
     [TestMethod]
-    public void GetDeclaredSymbol_CS()
+    public void DeclaredSymbol_CS()
     {
         var sut = new SnippetCompiler("public class Sample { public class Nested { } }");
-        var type = sut.GetDeclaredSymbol("Nested");
+        var type = sut.DeclaredSymbol("Nested");
         type.Should().NotBeNull();
         type.Name.Should().Be("Nested");
     }
 
     [TestMethod]
-    public void GetDeclaredSymbol_VB()
+    public void DeclaredSymbol_VB()
     {
         var sut = new SnippetCompiler("Public Class Sample : Public Class Nested : End Class : End Class", false, AnalyzerLanguage.VisualBasic);
-        var type = sut.GetDeclaredSymbol("Nested");
+        var type = sut.DeclaredSymbol("Nested");
         type.Should().NotBeNull();
         type.Name.Should().Be("Nested");
     }

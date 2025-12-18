@@ -163,8 +163,8 @@ End Class";
     private static MethodDeclarationContext CreateContext(string testInput, AnalyzerLanguage language, string methodName)
     {
         var testCode = new SnippetCompiler(testInput, false, language);
-        var symbol = testCode.GetMethodSymbol("Sample." + methodName);
-        return new MethodDeclarationContext(symbol, testCode.SemanticModel.Compilation);
+        var symbol = testCode.MethodSymbol("Sample." + methodName);
+        return new MethodDeclarationContext(symbol, testCode.Model.Compilation);
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]

@@ -234,8 +234,8 @@ public static class Extensions
         where TSyntaxNodeType : SyntaxNode
     {
         var testCode = new SnippetCompiler(testInput, true, language, references);
-        var invocationSyntaxNode = testCode.GetNodes<TSyntaxNodeType>().Skip(skip).First();
-        var context = new InvocationContext(invocationSyntaxNode, methodName, testCode.SemanticModel);
+        var invocationSyntaxNode = testCode.Nodes<TSyntaxNodeType>().Skip(skip).First();
+        var context = new InvocationContext(invocationSyntaxNode, methodName, testCode.Model);
         return context;
     }
 }

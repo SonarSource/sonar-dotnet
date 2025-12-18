@@ -393,11 +393,11 @@ End Namespace
 
         foreach (var (invocation, methodName) in identifierPairs)
         {
-            var symbol = snippet.GetSymbol<IMethodSymbol>(invocation);
+            var symbol = snippet.Symbol<IMethodSymbol>(invocation);
             if (symbol.Name == nameParts[1] &&
                 symbol.ContainingType.Name == nameParts[0])
             {
-                return new InvocationContext(invocation, methodName, snippet.SemanticModel);
+                return new InvocationContext(invocation, methodName, snippet.Model);
             }
         }
 
@@ -405,11 +405,11 @@ End Namespace
         return null;
 
         IEnumerable<(SyntaxNode Node, string Name)> GetCSharpNodes() =>
-            snippet.GetNodes<SyntaxCS.InvocationExpressionSyntax>()
+            snippet.Nodes<SyntaxCS.InvocationExpressionSyntax>()
                 .Select(x => ((SyntaxNode)x, SyntaxNodeExtensionsCSharp.GetIdentifier(x.Expression)?.ValueText));
 
         IEnumerable<(SyntaxNode Node, string Name)> GetVbNodes() =>
-            snippet.GetNodes<SyntaxVB.InvocationExpressionSyntax>()
+            snippet.Nodes<SyntaxVB.InvocationExpressionSyntax>()
                 .Select(x => ((SyntaxNode)x, SyntaxNodeExtensionsVisualBasic.GetIdentifier(x.Expression)?.ValueText));
     }
 

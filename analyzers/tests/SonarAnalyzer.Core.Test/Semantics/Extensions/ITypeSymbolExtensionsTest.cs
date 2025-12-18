@@ -50,8 +50,8 @@ public class ITypeSymbolExtensionsTest
     public void Compile()
     {
         var snippet = new SnippetCompiler(TestInput);
-        root = snippet.SyntaxTree.GetRoot();
-        model = snippet.SemanticModel;
+        root = snippet.Tree.GetRoot();
+        model = snippet.Model;
         baseClassDeclaration = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Base");
         derivedClassDeclaration1 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived1");
         derivedClassDeclaration2 = root.DescendantNodes().OfType<ClassDeclarationSyntax>().First(x => x.Identifier.ValueText == "Derived2");
@@ -616,8 +616,8 @@ public class ITypeSymbolExtensionsTest
             }
             """;
         var compiler = new SnippetCompiler(code);
-        var objectCreation = compiler.GetNodes<ObjectCreationExpressionSyntax>().Should().ContainSingle().Subject;
-        if (compiler.GetSymbol<IMethodSymbol>(objectCreation) is { MethodKind: MethodKind.Constructor, ReceiverType: { } receiver })
+        var objectCreation = compiler.Nodes<ObjectCreationExpressionSyntax>().Should().ContainSingle().Subject;
+        if (compiler.Symbol<IMethodSymbol>(objectCreation) is { MethodKind: MethodKind.Constructor, ReceiverType: { } receiver })
         {
             var actual = receiver.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
             actual.Should().BeEquivalentTo(expectedAttributes);

@@ -67,7 +67,7 @@ public class FieldAccessTrackerTest
             End Class
             """;
         var compiler = new SnippetCompiler(code, false, AnalyzerLanguage.VisualBasic);
-        var node = compiler.GetNodes<IdentifierNameSyntax>().First(x => x.ToString() == fieldName);
+        var node = compiler.Nodes<IdentifierNameSyntax>().First(x => x.ToString() == fieldName);
         return new FieldAccessContext(compiler.CreateAnalysisContext(node), fieldName);
     }
 }

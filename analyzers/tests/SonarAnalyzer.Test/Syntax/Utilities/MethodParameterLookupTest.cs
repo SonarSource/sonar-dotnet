@@ -340,7 +340,7 @@ public class MethodParameterLookupTest
         public MethodParameterLookupBase<TArgumentSyntax> CreateLookup(int invocationIndex, string expectedMethod)
         {
             var invocation = MainInvocations[invocationIndex];
-            var method = Compiler.SemanticModel.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
+            var method = Compiler.Model.GetSymbolInfo(invocation).Symbol as IMethodSymbol;
             method.Name.Should().Be(expectedMethod);
             return CreateLookup(invocation, method);
         }
@@ -355,7 +355,7 @@ public class MethodParameterLookupTest
         protected void InitSpecial(TInvocationSyntax specialInvocation)
         {
             SpecialArgument = GetArguments(specialInvocation).Single();
-            SpecialParameter = (Compiler.SemanticModel.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
+            SpecialParameter = (Compiler.Model.GetSymbolInfo(specialInvocation).Symbol as IMethodSymbol).Parameters.Single();
         }
 
         private void InspectTryGetSyntax(MethodParameterLookupBase<TArgumentSyntax> lookup, object expectedArguments, IMethodSymbol method)
@@ -418,24 +418,24 @@ public class MethodParameterLookupTest
         }
 
         private object ConstantValue(SyntaxNode node) =>
-            Compiler.SemanticModel.GetConstantValue(node).Value;
+            Compiler.Model.GetConstantValue(node).Value;
     }
 
     private class CSharpInspection : InspectionBase<CSharpSyntax.ArgumentSyntax, CSharpSyntax.InvocationExpressionSyntax>
     {
         public CSharpInspection(string source) : base(source, AnalyzerLanguage.CSharp) =>
-            InitSpecial(Compiler.GetNodes<CSharpSyntax.InvocationExpressionSyntax>()
+            InitSpecial(Compiler.Nodes<CSharpSyntax.InvocationExpressionSyntax>()
                                 .Single(x => x.Expression is CSharpSyntax.IdentifierNameSyntax identifier
                                              && identifier.Identifier.ValueText == "SpecialMethod"));
 
         public override CSharpSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
-            Compiler.GetNodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == name).DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
+            Compiler.Nodes<CSharpSyntax.MethodDeclarationSyntax>().Single(x => x.Identifier.ValueText == name).DescendantNodes().OfType<CSharpSyntax.InvocationExpressionSyntax>().ToArray();
 
         public override CSharpSyntax.ArgumentSyntax[] GetArguments(CSharpSyntax.InvocationExpressionSyntax invocation) =>
             invocation.ArgumentList.Arguments.ToArray();
 
         public override object ExtractArgumentValue(CSharpSyntax.ArgumentSyntax argumentSyntax) =>
-            Compiler.SemanticModel.GetConstantValue(argumentSyntax.Expression).Value;
+            Compiler.Model.GetConstantValue(argumentSyntax.Expression).Value;
 
         public override MethodParameterLookupBase<CSharpSyntax.ArgumentSyntax> CreateLookup(CSharpSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
             new CSharpMethodParameterLookup(invocation.ArgumentList, method);
@@ -444,21 +444,21 @@ public class MethodParameterLookupTest
     private class VisualBasicInspection : InspectionBase<VBSyntax.ArgumentSyntax, VBSyntax.InvocationExpressionSyntax>
     {
         public VisualBasicInspection(string source) : base(source, AnalyzerLanguage.VisualBasic) =>
-            InitSpecial(Compiler.GetNodes<VBSyntax.InvocationExpressionSyntax>()
+            InitSpecial(Compiler.Nodes<VBSyntax.InvocationExpressionSyntax>()
                                 .Single(x => x.Expression is VBSyntax.IdentifierNameSyntax identifier
                                              && identifier.Identifier.ValueText == "SpecialMethod"));
 
         public override VBSyntax.InvocationExpressionSyntax[] FindInvocationsIn(string name) =>
-            Compiler.GetNodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main")
+            Compiler.Nodes<VBSyntax.MethodBlockSyntax>().Single(x => x.SubOrFunctionStatement.Identifier.ValueText == "Main")
                                                            .DescendantNodes().OfType<VBSyntax.InvocationExpressionSyntax>().ToArray();
 
         public override VBSyntax.ArgumentSyntax[] GetArguments(VBSyntax.InvocationExpressionSyntax invocation) =>
             invocation.ArgumentList.Arguments.ToArray();
 
         public override MethodParameterLookupBase<VBSyntax.ArgumentSyntax> CreateLookup(VBSyntax.InvocationExpressionSyntax invocation, IMethodSymbol method) =>
-            new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.SemanticModel);
+            new VisualBasicMethodParameterLookup(invocation.ArgumentList, Compiler.Model);
 
         public override object ExtractArgumentValue(VBSyntax.ArgumentSyntax argumentSyntax) =>
-            Compiler.SemanticModel.GetConstantValue(argumentSyntax.GetExpression()).Value;
+            Compiler.Model.GetConstantValue(argumentSyntax.GetExpression()).Value;
     }
 }

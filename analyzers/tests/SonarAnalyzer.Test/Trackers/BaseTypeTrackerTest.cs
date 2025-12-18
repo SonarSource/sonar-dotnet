@@ -68,7 +68,7 @@ End Class";
         where TSyntaxNodeType : SyntaxNode
     {
         var testCode = new SnippetCompiler(testInput, false, language);
-        var node = testCode.GetNodes<TSyntaxNodeType>().Single();
+        var node = testCode.Nodes<TSyntaxNodeType>().Single();
         return new BaseTypeContext(testCode.CreateAnalysisContext(node), baseTypeNodes(node));
     }
 }

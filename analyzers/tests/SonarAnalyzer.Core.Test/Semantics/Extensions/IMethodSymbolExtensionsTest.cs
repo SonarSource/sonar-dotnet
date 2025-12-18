@@ -50,6 +50,8 @@ public class IMethodSymbolExtensionsTest
     private SemanticModel model;
     private List<StatementSyntax> statements;
 
+    public TestContext TestContext { get; set; }
+
     [TestInitialize]
     public void Compile()
     {
@@ -57,45 +59,42 @@ public class IMethodSymbolExtensionsTest
 
         var tree = compilation.SyntaxTrees.First();
         model = compilation.GetSemanticModel(tree);
-        statements = tree.GetRoot().DescendantNodes()
-            .OfType<MethodDeclarationSyntax>()
-            .First(x => x.Identifier.ValueText == "TestMethod").Body
-            .DescendantNodes()
-            .OfType<StatementSyntax>().ToList();
+        statements = tree.GetRoot(TestContext.CancellationToken).DescendantNodes().OfType<MethodDeclarationSyntax>().First(x => x.Identifier.ValueText == "TestMethod")
+            .Body.DescendantNodes().OfType<StatementSyntax>().ToList();
     }
 
     [TestMethod]
     public void Symbol_IsExtensionOnIEnumerable()
     {
-        GetMethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_IEnumerable)
+        MethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_IEnumerable)
             .Should().BeTrue();
 
-        GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_IEnumerable)
+        MethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_IEnumerable)
             .Should().BeFalse();
-        GetMethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_IEnumerable)
+        MethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_IEnumerable)
             .Should().BeFalse();
     }
 
     [TestMethod]
     public void Symbol_IsExtensionOnGenericIEnumerable()
     {
-        GetMethodSymbolForIndex(0).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+        MethodSymbolForIndex(0).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
             .Should().BeTrue();
-        GetMethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+        MethodSymbolForIndex(1).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
             .Should().BeTrue();
 
-        GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+        MethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
             .Should().BeFalse();
-        GetMethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+        MethodSymbolForIndex(3).IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
             .Should().BeFalse();
     }
 
     [TestMethod]
     public void Symbol_IsExtensionOnInt()
     {
-        GetMethodSymbolForIndex(4).IsExtensionOn(KnownType.System_Int32)
+        MethodSymbolForIndex(4).IsExtensionOn(KnownType.System_Int32)
             .Should().BeTrue();
-        GetMethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Int32)
+        MethodSymbolForIndex(2).IsExtensionOn(KnownType.System_Int32)
             .Should().BeFalse();
     }
 
@@ -225,8 +224,8 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compiler = new SnippetCompiler(code);
-        var invocationExpression = compiler.GetNodes<InvocationExpressionSyntax>().Should().ContainSingle().Subject;
-        var method = compiler.GetSymbol<IMethodSymbol>(invocationExpression);
+        var invocationExpression = compiler.Nodes<InvocationExpressionSyntax>().Should().ContainSingle().Subject;
+        var method = compiler.Symbol<IMethodSymbol>(invocationExpression);
         var actual = method.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
         actual.Should().BeEquivalentTo(expectedAttributes);
 
@@ -266,21 +265,21 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
-        compilation.GetTypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.GetMethodSymbol("Foo.ProtectedFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.InternalFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.PrivateFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.StaticFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.VirtualFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.GetMethodSymbol("Foo.AbstractFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.GetMethodSymbol("Foo.InFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.OutFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.ReadonlyRefFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.RefFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.GenericFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.InnerFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+        compilation.TypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.MethodSymbol("Foo.ProtectedFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.InternalFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PrivateFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.StaticFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.VirtualFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.MethodSymbol("Foo.AbstractFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.MethodSymbol("Foo.InFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.OutFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.ReadonlyRefFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.RefFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.GenericFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.InnerFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
     }
 
     [TestMethod]
@@ -305,10 +304,10 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
-        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.GetMethodSymbol("Controller.PublicBar").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("MyController.PublicDiz").IsControllerActionMethod().Should().BeFalse();
-        compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.MethodSymbol("Controller.PublicBar").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("MyController.PublicDiz").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
     }
 
     [TestMethod]
@@ -326,8 +325,8 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
-        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.GetMethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
+        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
     }
 
     [TestMethod]
@@ -343,7 +342,7 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
-        compilation.GetMethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeFalse();
     }
 
     [TestMethod]
@@ -359,7 +358,7 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
-        compilation.GetTypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
+        compilation.TypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
     }
 
     [TestMethod]
@@ -412,8 +411,8 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code);
-        var invocationSyntax = compilation.SyntaxTree.GetRoot().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>().First();
-        var methodSymbol = compilation.SemanticModel.GetSymbolInfo(invocationSyntax).Symbol as IMethodSymbol;
+        var invocationSyntax = compilation.Tree.GetRoot(TestContext.CancellationToken).DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>().First();
+        var methodSymbol = compilation.Model.GetSymbolInfo(invocationSyntax, TestContext.CancellationToken).Symbol as IMethodSymbol;
         methodSymbol.IsImplementingInterfaceMember(new KnownType(interfaceType, genericParameter), methodName).Should().BeTrue();
     }
 
@@ -432,7 +431,7 @@ public class IMethodSymbolExtensionsTest
                     public static int StaticExtensionMemberMethod() => 42;
                 }
             }
-            """).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
+            """).DeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
 
     [TestMethod]
     public void IsExtension_RegularMethod_ReturnsFalse_CS() =>
@@ -442,7 +441,7 @@ public class IMethodSymbolExtensionsTest
                 public void RegularMethod() { }
                 public static void StaticRegularMethod() { }
             }
-            """).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
+            """).DeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
 
     [TestMethod]
     public void IsExtension_ExtensionMethod_ReturnsTrue_VB() =>
@@ -454,7 +453,7 @@ public class IMethodSymbolExtensionsTest
             End Module
             """,
             false,
-            AnalyzerLanguage.VisualBasic).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
+            AnalyzerLanguage.VisualBasic).DeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
 
     [TestMethod]
     public void IsExtension_RegularMethod_ReturnsFalse_VB() =>
@@ -467,12 +466,12 @@ public class IMethodSymbolExtensionsTest
             End Class
             """,
             false,
-            AnalyzerLanguage.VisualBasic).GetDeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
+            AnalyzerLanguage.VisualBasic).DeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
 
-    private IMethodSymbol GetMethodSymbolForIndex(int index)
+    private IMethodSymbol MethodSymbolForIndex(int index)
     {
         var statement = (ExpressionStatementSyntax)statements[index];
-        var methodSymbol = model.GetSymbolInfo(statement.Expression).Symbol as IMethodSymbol;
+        var methodSymbol = model.GetSymbolInfo(statement.Expression, TestContext.CancellationToken).Symbol as IMethodSymbol;
         return methodSymbol;
     }
 }

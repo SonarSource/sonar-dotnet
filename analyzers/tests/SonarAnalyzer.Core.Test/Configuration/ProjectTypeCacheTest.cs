@@ -94,5 +94,5 @@ public class ProjectTypeCacheTest
         CreateSemanticModel(additionalReferences).Compilation.IsTest();
 
     private static SemanticModel CreateSemanticModel(IEnumerable<MetadataReference> additionalReferences) =>
-        new SnippetCompiler("// Nothing to see here", additionalReferences).SemanticModel;
+        new SnippetCompiler("// Nothing to see here", additionalReferences).Model;
 }

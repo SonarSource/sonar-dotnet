@@ -386,7 +386,7 @@ public partial class SonarAnalysisContextTest
             }
             """);
         var diagnosticDescriptor = new DiagnosticDescriptor("TEST", "Title", "{0}", "Category", DiagnosticSeverity.Warning, true, customTags: [scope]);
-        var location = Location.Create(snippet.SyntaxTree, TextSpan.FromBounds(0, 0));
+        var location = Location.Create(snippet.Tree, TextSpan.FromBounds(0, 0));
         var analyzer = new TestAnalyzerCS(diagnosticDescriptor, analysisContext =>
             analysisContext.RegisterCompilationStartAction(compilationStartContext =>
                 compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>

@@ -26,8 +26,8 @@ namespace SonarAnalyzer.TestFramework.Build;
 public class SnippetCompiler
 {
     public Compilation Compilation { get; }
-    public SyntaxTree SyntaxTree { get; }
-    public SemanticModel SemanticModel { get; }
+    public SyntaxTree Tree { get; }
+    public SemanticModel Model { get; }
 
     public SnippetCompiler(string code, params MetadataReference[] additionalReferences) : this(code, false, AnalyzerLanguage.CSharp, additionalReferences) { }
 
@@ -39,7 +39,7 @@ public class SnippetCompiler
             .Create()
             .AddProject(language, outputKind)
             .AddSnippet(code)
-            .AddReferences(additionalReferences ?? Enumerable.Empty<MetadataReference>())
+            .AddReferences(additionalReferences ?? [])
             .GetCompilation(parseOptions);
 
         if (!ignoreErrors && HasCompilationErrors(Compilation))
@@ -48,98 +48,98 @@ public class SnippetCompiler
             throw new InvalidOperationException("Test setup error: test code snippet did not compile. See output window for details.");
         }
 
-        SyntaxTree = Compilation.SyntaxTrees.First();
-        SemanticModel = Compilation.GetSemanticModel(SyntaxTree);
+        Tree = Compilation.SyntaxTrees.First();
+        Model = Compilation.GetSemanticModel(Tree);
     }
 
     public bool IsCSharp() =>
         Compilation.Language == LanguageNames.CSharp;
 
-    public IEnumerable<TSyntaxNodeType> GetNodes<TSyntaxNodeType>() where TSyntaxNodeType : SyntaxNode =>
-        SyntaxTree.GetRoot().DescendantNodes().OfType<TSyntaxNodeType>();
+    public IEnumerable<TSyntaxNodeType> Nodes<TSyntaxNodeType>() where TSyntaxNodeType : SyntaxNode =>
+        Tree.GetRoot().DescendantNodes().OfType<TSyntaxNodeType>();
 
-    public TSymbolType GetSymbol<TSymbolType>(SyntaxNode node) where TSymbolType : class, ISymbol =>
-        SemanticModel.GetSymbolInfo(node).Symbol as TSymbolType;
+    public TSymbolType Symbol<TSymbolType>(SyntaxNode node) where TSymbolType : class, ISymbol =>
+        Model.GetSymbolInfo(node).Symbol as TSymbolType;
 
-    public SyntaxNode GetMethodDeclaration(string typeDotMethodName)
+    public SyntaxNode MethodDeclaration(string typeDotMethodName)
     {
         var nameParts = typeDotMethodName.Split('.');
         SyntaxNode method = null;
 
         if (IsCSharp())
         {
-            var type = GetNodes<CS.TypeDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-            method = type.DescendantNodes().OfType<CS.MethodDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+            var type = Nodes<CS.TypeDeclarationSyntax>().First(x => x.Identifier.ValueText == nameParts[0]);
+            method = type.DescendantNodes().OfType<CS.MethodDeclarationSyntax>().First(x => x.Identifier.ValueText == nameParts[1]);
         }
         else
         {
-            var type = GetNodes<VB.TypeStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-            method = type.Parent.DescendantNodes().OfType<VB.MethodStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+            var type = Nodes<VB.TypeStatementSyntax>().First(x => x.Identifier.ValueText == nameParts[0]);
+            method = type.Parent.DescendantNodes().OfType<VB.MethodStatementSyntax>().First(x => x.Identifier.ValueText == nameParts[1]);
         }
 
         method.Should().NotBeNull("Test setup error: could not find method declaration in code snippet: Type: {nameParts[0]}, Method: {nameParts[1]}");
         return method;
     }
 
-    public INamespaceSymbol GetNamespaceSymbol(string name)
+    public INamespaceSymbol NamespaceSymbol(string name)
     {
-        var symbol = GetNodes<CS.BaseNamespaceDeclarationSyntax>()
-            .Concat<SyntaxNode>(GetNodes<VB.NamespaceStatementSyntax>())
-            .Select(s => SemanticModel.GetDeclaredSymbol(s))
-            .First(s => s.Name == name) as INamespaceSymbol;
+        var symbol = Nodes<CS.BaseNamespaceDeclarationSyntax>()
+            .Concat<SyntaxNode>(Nodes<VB.NamespaceStatementSyntax>())
+            .Select(x => Model.GetDeclaredSymbol(x))
+            .First(x => x.Name == name) as INamespaceSymbol;
 
         symbol.Should().NotBeNull($"Test setup error: could not find namespace in code snippet: {name}");
         return symbol;
     }
 
-    public IEnumerable<T> GetDeclaredSymbols<T>() where T : ISymbol
+    public IEnumerable<T> DeclaredSymbols<T>() where T : ISymbol
     {
         var indentifierKind = IsCSharp() ? (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.IdentifierToken : (int)Microsoft.CodeAnalysis.VisualBasic.SyntaxKind.IdentifierToken;
-        var identfierTokens = SyntaxTree.GetRoot().DescendantTokens().Where(x => x.RawKind == indentifierKind).ToList();
-        var symbols = identfierTokens.Select(x => SemanticModel.GetDeclaredSymbol(x.Parent)).OfType<T>().ToList();
+        var identfierTokens = Tree.GetRoot().DescendantTokens().Where(x => x.RawKind == indentifierKind).ToList();
+        var symbols = identfierTokens.Select(x => Model.GetDeclaredSymbol(x.Parent)).OfType<T>().ToList();
         symbols.Should().NotBeEmpty("Test setup error: could not find any symbols of the expected kind in code snippet.");
         return symbols;
     }
 
-    public ISymbol GetDeclaredSymbol(string name) =>
-        GetDeclaredSymbols<ISymbol>().Should().ContainSingle(x => x.Name == name).Subject;
+    public ISymbol DeclaredSymbol(string name) =>
+        DeclaredSymbols<ISymbol>().Should().ContainSingle(x => x.Name == name).Subject;
 
-    public T GetDeclaredSymbol<T>(string name) where T : ISymbol =>
-        GetDeclaredSymbols<T>().Should().ContainSingle(x => x.Name == name).Subject;
+    public T DeclaredSymbol<T>(string name) where T : ISymbol =>
+        DeclaredSymbols<T>().Should().ContainSingle(x => x.Name == name).Subject;
 
-    public IMethodSymbol GetMethodSymbol(string typeDotMethodName)
+    public IMethodSymbol MethodSymbol(string typeDotMethodName)
     {
-        var method = GetMethodDeclaration(typeDotMethodName);
-        return SemanticModel.GetDeclaredSymbol(method) as IMethodSymbol;
+        var method = MethodDeclaration(typeDotMethodName);
+        return Model.GetDeclaredSymbol(method) as IMethodSymbol;
     }
 
-    public IPropertySymbol GetPropertySymbol(string typeDotPropertyName)
+    public IPropertySymbol PropertySymbol(string typeDotPropertyName)
     {
         var nameParts = typeDotPropertyName.Split('.');
         SyntaxNode property = null;
 
         if (IsCSharp())
         {
-            var type = SyntaxTree.GetRoot().DescendantNodes().OfType<CS.TypeDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-            property = type.DescendantNodes().OfType<CS.PropertyDeclarationSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+            var type = Tree.GetRoot().DescendantNodes().OfType<CS.TypeDeclarationSyntax>().First(x => x.Identifier.ValueText == nameParts[0]);
+            property = type.DescendantNodes().OfType<CS.PropertyDeclarationSyntax>().First(x => x.Identifier.ValueText == nameParts[1]);
         }
         else
         {
-            var type = SyntaxTree.GetRoot().DescendantNodes().OfType<VB.TypeStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[0]);
-            property = type.DescendantNodes().OfType<VB.PropertyStatementSyntax>().First(m => m.Identifier.ValueText == nameParts[1]);
+            var type = Tree.GetRoot().DescendantNodes().OfType<VB.TypeStatementSyntax>().First(x => x.Identifier.ValueText == nameParts[0]);
+            property = type.DescendantNodes().OfType<VB.PropertyStatementSyntax>().First(x => x.Identifier.ValueText == nameParts[1]);
         }
 
-        var symbol = SemanticModel.GetDeclaredSymbol(property) as IPropertySymbol;
+        var symbol = Model.GetDeclaredSymbol(property) as IPropertySymbol;
         symbol.Should().NotBeNull("Test setup error: could not find property in code snippet: Type: {nameParts[0]}, Method: {nameParts[1]}");
         return symbol;
     }
 
-    public INamedTypeSymbol GetTypeByMetadataName(string metadataName) =>
-        SemanticModel.Compilation.GetTypeByMetadataName(metadataName);
+    public INamedTypeSymbol TypeByMetadataName(string metadataName) =>
+        Model.Compilation.GetTypeByMetadataName(metadataName);
 
     public SonarSyntaxNodeReportingContext CreateAnalysisContext(SyntaxNode node)
     {
-        var nodeContext = new SyntaxNodeAnalysisContext(node, SemanticModel, null, null, null, default);
+        var nodeContext = new SyntaxNodeAnalysisContext(node, Model, null, null, null, default);
         return new(AnalysisScaffolding.CreateSonarAnalysisContext(), nodeContext);
     }
 

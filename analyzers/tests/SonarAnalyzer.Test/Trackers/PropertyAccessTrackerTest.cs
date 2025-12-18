@@ -97,7 +97,7 @@ End Class";
     private static PropertyAccessContext CreateContext<TSyntaxNodeType>(string testInput, string propertyName, AnalyzerLanguage language) where TSyntaxNodeType : SyntaxNode
     {
         var testCode = new SnippetCompiler(testInput, false, language);
-        var node = testCode.GetNodes<TSyntaxNodeType>().First();
+        var node = testCode.Nodes<TSyntaxNodeType>().First();
         return new PropertyAccessContext(testCode.CreateAnalysisContext(node), propertyName);
     }
 }

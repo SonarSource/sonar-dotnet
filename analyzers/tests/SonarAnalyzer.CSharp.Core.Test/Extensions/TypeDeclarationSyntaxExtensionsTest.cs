@@ -40,7 +40,7 @@ public class TypeDeclarationSyntaxExtensionsTest
             }
             """;
         var snippet = new SnippetCompiler(code);
-        var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
+        var typeDeclaration = snippet.Tree.Single<TypeDeclarationSyntax>();
         typeDeclaration.GetMethodDeclarations().Single().Identifier.Text.Should().Be("WriteLine");
     }
 
@@ -69,7 +69,7 @@ public class TypeDeclarationSyntaxExtensionsTest
             }
             """;
         var snippet = new SnippetCompiler(code);
-        var typeDeclaration = snippet.SyntaxTree.Single<TypeDeclarationSyntax>();
+        var typeDeclaration = snippet.Tree.Single<TypeDeclarationSyntax>();
         typeDeclaration
             .GetMethodDeclarations()
             .Select(x => x.Identifier.Text)

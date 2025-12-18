@@ -37,7 +37,7 @@ public class IPropertySymbolExtensionsTest
                     public static int StaticSetterOnly { set { } }
                 }
             }
-            """).GetDeclaredSymbols<IPropertySymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
+            """).DeclaredSymbols<IPropertySymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeTrue());
 
     [TestMethod]
     public void IsExtension_RegularProperty_ReturnsFalse() =>
@@ -51,7 +51,7 @@ public class IPropertySymbolExtensionsTest
                 public static int StaticGetterOnly => 42;
                 public static int StaticSetterOnly { set { } }
             }
-            """).GetDeclaredSymbols<IPropertySymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
+            """).DeclaredSymbols<IPropertySymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
 
     [TestMethod]
     public void IsAnyAttributeInOverridingChain_WhenPropertySymbolIsNull_ReturnsFalse() =>

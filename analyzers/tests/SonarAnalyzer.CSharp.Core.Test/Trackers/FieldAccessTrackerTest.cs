@@ -68,7 +68,7 @@ public class FieldAccessTrackerTest
             }
             """;
         var testCode = new SnippetCompiler(code, false, AnalyzerLanguage.CSharp);
-        var node = testCode.GetNodes<IdentifierNameSyntax>().First(x => x.ToString() == fieldName);
+        var node = testCode.Nodes<IdentifierNameSyntax>().First(x => x.ToString() == fieldName);
         return new FieldAccessContext(testCode.CreateAnalysisContext(node), fieldName);
     }
 }

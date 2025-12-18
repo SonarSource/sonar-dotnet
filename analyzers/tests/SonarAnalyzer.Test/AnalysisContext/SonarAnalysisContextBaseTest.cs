@@ -306,7 +306,7 @@ public partial class SonarAnalysisContextBaseTest
         CreateSut(AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, projectType, isScannerRun)));
 
     private static SonarCompilationReportingContext CreateSut(AnalyzerOptions options) =>
-        CreateSut(new SnippetCompiler("// Nothing to see here").SemanticModel.Compilation, options);
+        CreateSut(new SnippetCompiler("// Nothing to see here").Model.Compilation, options);
 
     private static SonarCompilationReportingContext CreateSut(Compilation compilation, AnalyzerOptions options)
     {

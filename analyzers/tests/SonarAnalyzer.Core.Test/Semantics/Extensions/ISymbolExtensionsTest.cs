@@ -194,57 +194,57 @@ public class ISymbolExtensionsTest
     [TestMethod]
     public void Symbol_IsPublicApi()
     {
-        testSnippet.GetMethodSymbol("Base.Method1").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.GetMethodSymbol("Base.Method2").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.GetPropertySymbol("Base.Property").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.GetPropertySymbol("IInterface.Property2").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.GetPropertySymbol("Derived1.PrivateProperty").IsPubliclyAccessible().Should().BeFalse();
-        testSnippet.GetPropertySymbol("Derived1.PrivateProtectedProperty").IsPubliclyAccessible().Should().BeFalse();
-        testSnippet.GetPropertySymbol("Derived1.ProtectedProperty").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.GetPropertySymbol("Derived1.ProtectedInternalProperty").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.GetPropertySymbol("Derived1.InternalProperty").IsPubliclyAccessible().Should().BeFalse();
+        testSnippet.MethodSymbol("Base.Method1").IsPubliclyAccessible().Should().BeTrue();
+        testSnippet.MethodSymbol("Base.Method2").IsPubliclyAccessible().Should().BeTrue();
+        testSnippet.PropertySymbol("Base.Property").IsPubliclyAccessible().Should().BeTrue();
+        testSnippet.PropertySymbol("IInterface.Property2").IsPubliclyAccessible().Should().BeTrue();
+        testSnippet.PropertySymbol("Derived1.PrivateProperty").IsPubliclyAccessible().Should().BeFalse();
+        testSnippet.PropertySymbol("Derived1.PrivateProtectedProperty").IsPubliclyAccessible().Should().BeFalse();
+        testSnippet.PropertySymbol("Derived1.ProtectedProperty").IsPubliclyAccessible().Should().BeTrue();
+        testSnippet.PropertySymbol("Derived1.ProtectedInternalProperty").IsPubliclyAccessible().Should().BeTrue();
+        testSnippet.PropertySymbol("Derived1.InternalProperty").IsPubliclyAccessible().Should().BeFalse();
     }
 
     [TestMethod]
     public void Symbol_InterfaceMembersOrMemberOverride()
     {
-        testSnippet.GetMethodSymbol("Base.Method1").InterfaceMembers().Should().BeEmpty();
-        testSnippet.GetMethodSymbol("Base.Method1").GetOverriddenMember().Should().BeNull();
-        testSnippet.GetPropertySymbol("Derived2.Property").GetOverriddenMember().Should().NotBeNull();
-        testSnippet.GetPropertySymbol("Derived2.Property2").InterfaceMembers().Should().ContainSingle();
-        testSnippet.GetMethodSymbol("Derived2.Method3").InterfaceMembers().Should().ContainSingle().Which.Should().Be(testSnippet.GetMethodSymbol("IInterface.Method3"));
-        testSnippet.GetMethodSymbol("TwoInterfaces.Method3").InterfaceMembers().Should().BeEquivalentTo([
-            testSnippet.GetMethodSymbol("IInterface.Method3"),
-            testSnippet.GetMethodSymbol("IOtherInterface.Method3")]);
-        testSnippet.GetMethodSymbol("Derived3.Method3").InterfaceMembers().Should().BeEquivalentTo([
-            testSnippet.GetMethodSymbol("IInterface.Method3"),
-            testSnippet.GetMethodSymbol("IOtherInterface.Method3")]);
+        testSnippet.MethodSymbol("Base.Method1").InterfaceMembers().Should().BeEmpty();
+        testSnippet.MethodSymbol("Base.Method1").GetOverriddenMember().Should().BeNull();
+        testSnippet.PropertySymbol("Derived2.Property").GetOverriddenMember().Should().NotBeNull();
+        testSnippet.PropertySymbol("Derived2.Property2").InterfaceMembers().Should().ContainSingle();
+        testSnippet.MethodSymbol("Derived2.Method3").InterfaceMembers().Should().ContainSingle().Which.Should().Be(testSnippet.MethodSymbol("IInterface.Method3"));
+        testSnippet.MethodSymbol("TwoInterfaces.Method3").InterfaceMembers().Should().BeEquivalentTo([
+            testSnippet.MethodSymbol("IInterface.Method3"),
+            testSnippet.MethodSymbol("IOtherInterface.Method3")]);
+        testSnippet.MethodSymbol("Derived3.Method3").InterfaceMembers().Should().BeEquivalentTo([
+            testSnippet.MethodSymbol("IInterface.Method3"),
+            testSnippet.MethodSymbol("IOtherInterface.Method3")]);
     }
 
     [TestMethod]
     public void Symbol_GetOverriddenMember()
     {
-        var actualOverriddenMethod = testSnippet.GetMethodSymbol("Base.Method1").GetOverriddenMember();
+        var actualOverriddenMethod = testSnippet.MethodSymbol("Base.Method1").GetOverriddenMember();
         actualOverriddenMethod.Should().BeNull();
 
-        var expectedOverriddenProperty = testSnippet.GetPropertySymbol("Base.Property");
-        var propertySymbol = testSnippet.GetPropertySymbol("Derived2.Property");
+        var expectedOverriddenProperty = testSnippet.PropertySymbol("Base.Property");
+        var propertySymbol = testSnippet.PropertySymbol("Derived2.Property");
 
         var actualOverriddenProperty = propertySymbol.GetOverriddenMember();
         actualOverriddenProperty.Should().NotBeNull();
         actualOverriddenProperty.Should().Be(expectedOverriddenProperty);
 
-        testSnippet.GetMethodSymbol("Derived3.Method3").GetOverriddenMember().Should().Be(testSnippet.GetMethodSymbol("Derived2.Method3"));
-        testSnippet.GetMethodSymbol("Derived3.Method5").GetOverriddenMember().Should().Be(testSnippet.GetMethodSymbol("Derived2.Method5"));
+        testSnippet.MethodSymbol("Derived3.Method3").GetOverriddenMember().Should().Be(testSnippet.MethodSymbol("Derived2.Method3"));
+        testSnippet.MethodSymbol("Derived3.Method5").GetOverriddenMember().Should().Be(testSnippet.MethodSymbol("Derived2.Method5"));
     }
 
     [TestMethod]
     public void Symbol_IsChangeable()
     {
-        testSnippet.GetMethodSymbol("Base.Method1").IsChangeable().Should().BeFalse();
-        testSnippet.GetMethodSymbol("Base.Method4").IsChangeable().Should().BeTrue();
-        testSnippet.GetMethodSymbol("Derived2.Method5").IsChangeable().Should().BeFalse();
-        testSnippet.GetMethodSymbol("Derived2.Method3").IsChangeable().Should().BeFalse();
+        testSnippet.MethodSymbol("Base.Method1").IsChangeable().Should().BeFalse();
+        testSnippet.MethodSymbol("Base.Method4").IsChangeable().Should().BeTrue();
+        testSnippet.MethodSymbol("Derived2.Method5").IsChangeable().Should().BeFalse();
+        testSnippet.MethodSymbol("Derived2.Method3").IsChangeable().Should().BeFalse();
     }
 
     [TestMethod]

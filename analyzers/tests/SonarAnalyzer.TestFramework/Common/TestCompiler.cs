@@ -49,7 +49,7 @@ public static class TestCompiler
                                                                  ParseOptions parseOptions = null)
     {
         var compiled = new SnippetCompiler(snippet, ignoreErrors, language, additionalReferences, outputKind, parseOptions);
-        return (compiled.SyntaxTree, compiled.SemanticModel);
+        return (compiled.Tree, compiled.Model);
     }
 
     // Get the SyntaxNode between the markers $$ in the snippet

@@ -1309,11 +1309,11 @@ End Class";
                 public void Method<T, V>(List<T> param1, List<int> param2, List<V> param3, IList<int> param4) { }
             }
             """);
-        var method = (MethodDeclarationSyntax)snippet.GetMethodDeclaration("Sample.Method");
-        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[0].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
-        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[1].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
-        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[2].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeTrue();
-        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[3].Type, KnownType.System_Collections_Generic_List_T, snippet.SemanticModel).Should().BeFalse();
+        var method = (MethodDeclarationSyntax)snippet.MethodDeclaration("Sample.Method");
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[0].Type, KnownType.System_Collections_Generic_List_T, snippet.Model).Should().BeTrue();
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[1].Type, KnownType.System_Collections_Generic_List_T, snippet.Model).Should().BeTrue();
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[2].Type, KnownType.System_Collections_Generic_List_T, snippet.Model).Should().BeTrue();
+        ExtensionsCore.IsKnownType(method.ParameterList.Parameters[3].Type, KnownType.System_Collections_Generic_List_T, snippet.Model).Should().BeFalse();
     }
 
     [TestMethod]
