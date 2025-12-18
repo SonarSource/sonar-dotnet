@@ -132,7 +132,7 @@ stages:
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         testRunTitle: '$(Agent.JobName)'
         javaHomeOption: 'JDKVersion'
-        jdkVersionOption: '1.17'
+        jdkVersionOption: '1.21'
         mavenOptions: $(MAVEN_OPTS)
         sonarQubeRunAnalysis: true
         sqMavenPluginVersionChoice: 'latest'
