@@ -104,7 +104,20 @@ public class ModelBuilderTest
     {
         var type = typeof(RecordDeclarationSyntax);
         var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
-        model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.BaseType.Should().BeNull();
+        model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.BaseType.Should().Be<object>();
+    }
+
+    [TestMethod]
+    public void Build_SyntaxNode_ExtensionBlockDeclarationSyntax_EndToEnd()
+    {
+        using var typeLoader = new TypeLoader();
+        var typeDescriptor = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(ExtensionBlockDeclarationSyntax));
+        var model = ModelBuilder.Build([typeDescriptor], typeLoader.LoadBaseline());
+        var strategy = model[typeDescriptor.Type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which;
+        strategy.BaseType.FullName.Should().Be(typeof(TypeDeclarationSyntax).FullName);
+        strategy.Members.Should().HaveCount(150);
+        strategy.Members.Should().ContainEquivalentOf(new MemberDescriptor(typeDescriptor.Type.GetMember(nameof(ExtensionBlockDeclarationSyntax.Modifiers)).Should().ContainSingle().Subject, true));
+        strategy.Members.Should().ContainEquivalentOf(new MemberDescriptor(typeDescriptor.Type.GetMember(nameof(ExtensionBlockDeclarationSyntax.ParameterList)).Should().ContainSingle().Subject, false));
     }
 
     [TestMethod]

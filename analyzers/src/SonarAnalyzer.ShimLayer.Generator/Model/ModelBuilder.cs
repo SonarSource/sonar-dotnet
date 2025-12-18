@@ -18,6 +18,8 @@ namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
 public static class ModelBuilder
 {
+    private static readonly TypeDescriptor ObjectTypeDescriptor = new(typeof(object), typeof(object).GetMembers());
+
     public static StrategyModel Build(TypeDescriptor[] latest, TypeDescriptor[] baseline)
     {
         var baselineMap = baseline.ToDictionary(x => x.Type.FullName, x => x);
@@ -43,10 +45,15 @@ public static class ModelBuilder
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.SyntaxNode"))
         {
-            var members = CreateMembers(latest, baseline);
-            return baseline is null
-                ? new SyntaxNodeWrapStrategy(latest.Type, FindCommonBaseType(latest, baselineMap), members)
-                : new SyntaxNodeExtendStrategy(latest.Type, members);
+            if (baseline is null)
+            {
+                var commonBase = FindCommonBaseType(latest, baselineMap);
+                return new SyntaxNodeWrapStrategy(latest.Type, commonBase.Type, CreateMembers(latest, commonBase));
+            }
+            else
+            {
+                return new SyntaxNodeExtendStrategy(latest.Type, CreateMembers(latest, baseline));
+            }
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
         {
@@ -62,18 +69,18 @@ public static class ModelBuilder
         }
     }
 
-    private static Type FindCommonBaseType(TypeDescriptor latest, IReadOnlyDictionary<string, TypeDescriptor> baselineMap)
+    private static TypeDescriptor FindCommonBaseType(TypeDescriptor latest, IReadOnlyDictionary<string, TypeDescriptor> baselineMap)
     {
         var current = latest.Type;
         while (current is not null)
         {
-            if (baselineMap.ContainsKey(current.FullName))
+            if (baselineMap.TryGetValue(current.FullName, out var baselineType))
             {
-                return current;
+                return baselineType;
             }
             current = current.BaseType;
         }
-        return null;
+        return ObjectTypeDescriptor;
     }
 
     private static bool IsAssignableTo(Type type, string fullName)   // We can't use typeof(Xxx).IsAssignableFrom(type) because it's loaded into a different metadata context
