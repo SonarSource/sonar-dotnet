@@ -89,3 +89,6 @@ analyzers/src/ITs.JsonParser/Properties/launchSettings.json
 # Claude Code
 .claude
 CLAUDE.md
+
+#Verify https://github.com/VerifyTests/Verify/blob/main/docs/wiz/Windows_VisualStudio_Cli_MSTest_AzureDevOps.md#conventions
+*.received.*

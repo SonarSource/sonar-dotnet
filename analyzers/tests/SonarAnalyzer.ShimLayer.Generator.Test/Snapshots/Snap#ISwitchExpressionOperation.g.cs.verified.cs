@@ -1,0 +1,1 @@
+﻿namespace SonarAnalyzer.ShimLayer; // ISwitchExpressionOperation

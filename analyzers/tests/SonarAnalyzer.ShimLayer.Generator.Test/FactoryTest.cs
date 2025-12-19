@@ -14,19 +14,24 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using VerifyMSTest;
+using VerifyTests;
+
 namespace SonarAnalyzer.ShimLayer.Generator.Test;
 
 [TestClass]
-public class FactoryTest
+[UsesVerify]
+public partial class FactoryTest
 {
     [TestMethod]
-    public void CreateAllFiles() =>
-        Factory.CreateAllFiles().ToArray().Should().HaveCountGreaterThan(350)
-            .And.Contain(x => x.Name == "SyntaxKind.g.cs", $"it's from {nameof(PartialEnumStrategy)}")
-            .And.Contain(x => x.Name == "SarifVersion.g.cs", $"it's from {nameof(NewEnumStrategy)}")
-            .And.Contain(x => x.Name == "SyntaxNode.g.cs", $"it's from {nameof(SyntaxNodeExtendStrategy)} as the base type")
-            .And.Contain(x => x.Name == "RecordDeclarationSyntax.g.cs", $"it's from {nameof(SyntaxNodeWrapStrategy)} as inherited type")
-            .And.Contain(x => x.Name == "IOperation.g.cs", $"it's from {nameof(IOperationStrategy)} as base interface")
-            .And.Contain(x => x.Name == "IInvocationOperation.g.cs", $"it's from {nameof(IOperationStrategy)} as inherited interface")
-            .And.AllSatisfy(x => x.Content.Should().Contain("namespace SonarAnalyzer.ShimLayer;"));
+    public async Task SnapshotAsync() =>
+        // If this test fails in CI, execute it locally to update the snapshots and push the changes.
+        await Verifier.Verify(Factory.CreateAllFiles().Select(x => new Target("cs", x.Content, x.Name)))
+            .UseDirectory("Snapshots")
+            .AutoVerify(includeBuildServer: false)
+            .UseFileName("Snap");
+
+    [TestMethod]
+    public async Task Run() =>
+        await VerifyChecks.Run();
 }
