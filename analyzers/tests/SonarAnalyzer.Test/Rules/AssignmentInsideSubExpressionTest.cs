@@ -16,23 +16,22 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class AssignmentInsideSubExpressionTest
 {
-    [TestClass]
-    public class AssignmentInsideSubExpressionTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<AssignmentInsideSubExpression>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<AssignmentInsideSubExpression>();
 
-        [TestMethod]
-        public void AssignmentInsideSubExpression() =>
-            builder.AddPaths("AssignmentInsideSubExpression.cs").WithOptions(LanguageOptions.FromCSharp8).Verify();
+    [TestMethod]
+    public void AssignmentInsideSubExpression() =>
+        builder.AddPaths("AssignmentInsideSubExpression.cs").Verify();
 
-        [TestMethod]
-        public void AssignmentInsideSubExpression_TopLevelStatements() =>
-            builder.AddPaths("AssignmentInsideSubExpression.TopLevelStatements.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
+    [TestMethod]
+    public void AssignmentInsideSubExpression_TopLevelStatements() =>
+        builder.AddPaths("AssignmentInsideSubExpression.TopLevelStatements.cs").WithTopLevelStatements().WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void AssignmentInsideSubExpression_Latest() =>
-            builder.AddPaths("AssignmentInsideSubExpression.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
-    }
+    [TestMethod]
+    public void AssignmentInsideSubExpression_Latest() =>
+        builder.AddPaths("AssignmentInsideSubExpression.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

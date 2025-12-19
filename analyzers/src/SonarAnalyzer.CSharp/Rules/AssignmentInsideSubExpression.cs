@@ -14,142 +14,105 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S1121";
-        private const string MessageFormat = "Extract the assignment of '{0}' from this expression.";
+    private const string DiagnosticId = "S1121";
+    private const string MessageFormat = "Extract the assignment of '{0}' from this expression.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        private static readonly ISet<SyntaxKind> AllowedParentExpressionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.SimpleAssignmentExpression,
-            SyntaxKind.ParenthesizedLambdaExpression,
-            SyntaxKind.SimpleLambdaExpression,
-            SyntaxKind.AnonymousMethodExpression,
-        };
+    private static readonly HashSet<SyntaxKind> AllowedParentExpressionKinds =
+    [
+        SyntaxKind.SimpleAssignmentExpression,
+        SyntaxKind.ParenthesizedLambdaExpression,
+        SyntaxKind.SimpleLambdaExpression,
+        SyntaxKind.AnonymousMethodExpression,
+    ];
 
-        private static readonly ISet<SyntaxKind> RelationalExpressionKinds = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.EqualsExpression,
-            SyntaxKind.NotEqualsExpression,
-            SyntaxKind.LessThanExpression,
-            SyntaxKind.LessThanOrEqualExpression,
-            SyntaxKind.GreaterThanExpression,
-            SyntaxKind.GreaterThanOrEqualExpression,
-            SyntaxKindEx.IsPatternExpression
-        };
+    private static readonly HashSet<SyntaxKind> RelationalExpressionKinds =
+    [
+        SyntaxKind.EqualsExpression,
+        SyntaxKind.NotEqualsExpression,
+        SyntaxKind.LessThanExpression,
+        SyntaxKind.LessThanOrEqualExpression,
+        SyntaxKind.GreaterThanExpression,
+        SyntaxKind.GreaterThanOrEqualExpression,
+        SyntaxKindEx.IsPatternExpression
+    ];
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var assignment = (AssignmentExpressionSyntax)c.Node;
-
-                    var topParenthesizedExpression = assignment.GetSelfOrTopParenthesizedExpression();
-
-                    if (IsNonCompliantSubExpression(assignment, topParenthesizedExpression)
-                        || IsDirectlyInStatementCondition(assignment, topParenthesizedExpression))
-                    {
-                        c.ReportIssue(Rule, assignment.OperatorToken, assignment.Left.ToString());
-                    }
-                },
-                SyntaxKind.SimpleAssignmentExpression,
-                SyntaxKind.AddAssignmentExpression,
-                SyntaxKind.SubtractAssignmentExpression,
-                SyntaxKind.MultiplyAssignmentExpression,
-                SyntaxKind.DivideAssignmentExpression,
-                SyntaxKind.ModuloAssignmentExpression,
-                SyntaxKind.AndAssignmentExpression,
-                SyntaxKind.ExclusiveOrAssignmentExpression,
-                SyntaxKind.OrAssignmentExpression,
-                SyntaxKind.LeftShiftAssignmentExpression,
-                SyntaxKind.RightShiftAssignmentExpression,
-                SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
-
-        private static bool IsNonCompliantSubExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
-            IsInsideExpression(topParenthesizedExpression)
-            && !IsInInitializerExpression(topParenthesizedExpression)
-            && !IsCompliantAssignmentInsideExpression(assignment, topParenthesizedExpression);
-
-        private static bool IsInsideExpression(ExpressionSyntax expression) =>
-            expression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() != null;
-
-        private static bool IsInInitializerExpression(ExpressionSyntax expression) =>
-            expression.Parent?.Kind() is SyntaxKindEx.WithInitializerExpression or SyntaxKind.ObjectInitializerExpression;
-
-        private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
-            topParenthesizedExpression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() is not { } expressionParent
-            || IsCompliantCoalesceExpression(expressionParent, assignment)
-            || (RelationalExpressionKinds.Contains(expressionParent.Kind())
-                && IsInStatementCondition(expressionParent))
-            || (!IsInInitializerExpression(expressionParent)
-                && AllowedParentExpressionKinds.Contains(expressionParent.Kind()));
-
-        private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment) =>
-            assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
-            && TryGetCoalesceExpressionParent(parentExpression, out var coalesceExpression)
-            && CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), coalesceExpression.Left.RemoveParentheses());
-
-        private static bool TryGetCoalesceExpressionParent(ExpressionSyntax parent, out BinaryExpressionSyntax coalesceExpression)
-        {
-            coalesceExpression = null;
-
-            var currentParent = parent;
-            while (currentParent != null
-                   && !TryGetCoalesceExpression(currentParent, out coalesceExpression))
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
             {
-                currentParent = currentParent.Parent as ExpressionSyntax;
-            }
+                var assignment = (AssignmentExpressionSyntax)c.Node;
+                var topParenthesizedExpression = assignment.GetSelfOrTopParenthesizedExpression();
+                if (IsNonCompliantSubExpression(assignment, topParenthesizedExpression) || IsDirectlyInStatementCondition(assignment, topParenthesizedExpression))
+                {
+                    c.ReportIssue(Rule, assignment.OperatorToken, assignment.Left.ToString());
+                }
+            },
+            SyntaxKind.SimpleAssignmentExpression,
+            SyntaxKind.AddAssignmentExpression,
+            SyntaxKind.SubtractAssignmentExpression,
+            SyntaxKind.MultiplyAssignmentExpression,
+            SyntaxKind.DivideAssignmentExpression,
+            SyntaxKind.ModuloAssignmentExpression,
+            SyntaxKind.AndAssignmentExpression,
+            SyntaxKind.ExclusiveOrAssignmentExpression,
+            SyntaxKind.OrAssignmentExpression,
+            SyntaxKind.LeftShiftAssignmentExpression,
+            SyntaxKind.RightShiftAssignmentExpression,
+            SyntaxKindEx.UnsignedRightShiftAssignmentExpression);
 
-            return currentParent != null;
-        }
+    private static bool IsNonCompliantSubExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax topParenthesizedExpression) =>
+        !IsInInitializerExpression(topParenthesizedExpression)
+        && topParenthesizedExpression.Parent.FirstAncestorOrSelf<ExpressionSyntax>() is { } expressionParent
+        && !IsCompliantAssignmentInsideExpression(assignment, expressionParent);
 
-        private static bool TryGetCoalesceExpression(ExpressionSyntax expression, out BinaryExpressionSyntax coalesceExpression)
-        {
-            coalesceExpression = expression as BinaryExpressionSyntax;
-            return coalesceExpression != null && coalesceExpression.IsKind(SyntaxKind.CoalesceExpression);
-        }
+    private static bool IsInInitializerExpression(ExpressionSyntax expression) =>
+        expression.Parent?.Kind() is SyntaxKindEx.WithInitializerExpression or SyntaxKind.ObjectInitializerExpression;
 
-        private static bool IsDirectlyInStatementCondition(ExpressionSyntax expression, ExpressionSyntax topParenthesizedExpression) =>
-            IsDirectlyInStatementCondition<IfStatementSyntax>(topParenthesizedExpression, expression, s => s.Condition)
-            || IsDirectlyInStatementCondition<ForStatementSyntax>(topParenthesizedExpression, expression, s => s.Condition)
-            || IsDirectlyInStatementCondition<WhileStatementSyntax>(topParenthesizedExpression, expression, s => s.Condition)
-            || IsDirectlyInStatementCondition<DoStatementSyntax>(topParenthesizedExpression, expression, s => s.Condition);
+    private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax expressionParent) =>
+        IsCompliantCoalesceExpression(expressionParent, assignment)
+        || (RelationalExpressionKinds.Contains(expressionParent.Kind()) && IsInStatementCondition(expressionParent))
+        || (AllowedParentExpressionKinds.Contains(expressionParent.Kind()) && !IsInInitializerExpression(expressionParent));
 
-        private static bool IsDirectlyInStatementCondition<T>(ExpressionSyntax expressionParent,
-                                                              ExpressionSyntax originalExpression,
-                                                              Func<T, ExpressionSyntax> conditionSelector)
-            where T : SyntaxNode
-        {
-            var statement = expressionParent.Parent.FirstAncestorOrSelf<T>();
-            return statement != null
-                   && conditionSelector(statement).RemoveParentheses() == originalExpression;
-        }
+    private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment) =>
+        assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
+        && CoalesceExpressionParent(parentExpression) is { } coalesceExpression
+        && CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), coalesceExpression.Left.RemoveParentheses());
 
-        private static bool IsInStatementCondition(ExpressionSyntax expression)
-        {
-            var expressionOrParenthesizedParent = expression.GetSelfOrTopParenthesizedExpression();
+    private static BinaryExpressionSyntax CoalesceExpressionParent(ExpressionSyntax parent) =>
+        parent.AncestorsAndSelf()
+            .TakeWhile(x => x is ExpressionSyntax)
+            .OfType<BinaryExpressionSyntax>()
+            .FirstOrDefault(x => x.IsKind(SyntaxKind.CoalesceExpression));
 
-            return IsInStatementCondition<IfStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition)
-                   || IsInStatementCondition<ForStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition)
-                   || IsInStatementCondition<WhileStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition)
-                   || IsInStatementCondition<DoStatementSyntax>(expressionOrParenthesizedParent, expression, s => s?.Condition);
-        }
+    private static bool IsDirectlyInStatementCondition(ExpressionSyntax expression, ExpressionSyntax topParenthesizedExpression)
+    {
+        return IsDirectlyInStatementCondition<IfStatementSyntax>(x => x.Condition)
+            || IsDirectlyInStatementCondition<ForStatementSyntax>(x => x.Condition)
+            || IsDirectlyInStatementCondition<WhileStatementSyntax>(x => x.Condition)
+            || IsDirectlyInStatementCondition<DoStatementSyntax>(x => x.Condition);
 
-        private static bool IsInStatementCondition<T>(ExpressionSyntax expressionParent,
-                                                      ExpressionSyntax originalExpression,
-                                                      Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode
-        {
-            var statement = expressionParent.Parent.FirstAncestorOrSelf<T>();
-            var condition = conditionSelector(statement);
-            return condition != null
-                   && condition.Contains(originalExpression);
-        }
+        bool IsDirectlyInStatementCondition<T>(Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode =>
+            topParenthesizedExpression.Parent.FirstAncestorOrSelf<T>() is { } statement && conditionSelector(statement).RemoveParentheses() == expression;
+    }
+
+    private static bool IsInStatementCondition(ExpressionSyntax expression)
+    {
+        return expression.GetSelfOrTopParenthesizedExpression() is var expressionOrParenthesizedParent
+            && (IsInStatementCondition<IfStatementSyntax>(x => x.Condition)
+                || IsInStatementCondition<ForStatementSyntax>(x => x.Condition)
+                || IsInStatementCondition<WhileStatementSyntax>(x => x.Condition)
+                || IsInStatementCondition<DoStatementSyntax>(x => x.Condition));
+
+        bool IsInStatementCondition<T>(Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode =>
+            expressionOrParenthesizedParent.Parent.FirstAncestorOrSelf<T>() is { } statement && conditionSelector(statement) is { } condition && condition.Contains(expression);
     }
 }

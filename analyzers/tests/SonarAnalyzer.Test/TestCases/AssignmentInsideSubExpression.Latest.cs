@@ -3,6 +3,20 @@ using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
+    public class CoalescingAssignment
+    {
+        public void Test()
+        {
+            int? val = null;
+            SomeMethod(val ??= 1); // Compliant, see e.g. https://stackoverflow.com/a/64666607
+            val ??= 1;
+
+            bool? value = null;
+            if (value ??= true) { } // Compliant, see. e.g. https://stackoverflow.com/a/64666607
+        }
+        void SomeMethod(int val) { }
+    }
+
     public class AssignmentInsideSubExpression
     {
         void foo(int a)
