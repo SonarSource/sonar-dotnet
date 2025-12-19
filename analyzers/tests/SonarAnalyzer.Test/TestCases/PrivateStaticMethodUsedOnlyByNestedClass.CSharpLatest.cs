@@ -112,6 +112,6 @@ namespace CSharp14
                 ThisIsCompliant();
             }
         }
-        private static void ThisIsCompliant() { }    // Noncompliant {{Move this method inside ''.}} FP https://sonarsource.atlassian.net/browse/NET-2668
+        private static void ThisIsCompliant() { } // Compliant
     }
 }

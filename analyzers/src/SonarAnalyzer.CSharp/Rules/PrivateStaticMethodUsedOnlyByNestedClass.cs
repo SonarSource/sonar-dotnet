@@ -22,14 +22,14 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
     private const string DiagnosticId = "S3398";
     private const string MessageFormat = "Move this method inside '{0}'.";
 
-    private static readonly SyntaxKind[] AnalyzedSyntaxKinds = new[]
-    {
+    private static readonly SyntaxKind[] AnalyzedSyntaxKinds =
+    [
         SyntaxKind.ClassDeclaration,
         SyntaxKind.StructDeclaration,
         SyntaxKind.InterfaceDeclaration,
         SyntaxKindEx.RecordDeclaration,
         SyntaxKindEx.RecordStructDeclaration
-    };
+    ];
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -79,29 +79,26 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
             && (IsExplicitlyPrivate() || IsImplicityPrivate());
 
         bool IsExplicitlyPrivate() =>
-            HasAnyModifier(method, SyntaxKind.PrivateKeyword) && !HasAnyModifier(method, SyntaxKind.ProtectedKeyword);
+            method.Modifiers.Any(SyntaxKind.PrivateKeyword) && !method.Modifiers.Any(SyntaxKind.ProtectedKeyword);
 
         // The default accessibility for record class members is private, but for record structs (like all structs) it's internal.
         bool IsImplicityPrivate() =>
-            !HasAnyModifier(method, SyntaxKind.PublicKeyword, SyntaxKind.ProtectedKeyword, SyntaxKind.InternalKeyword)
+            !method.Modifiers.Any(x => x.Kind() is SyntaxKind.PublicKeyword or SyntaxKind.ProtectedKeyword or SyntaxKind.InternalKeyword)
             && IsClassOrRecordClassOrInterfaceDeclaration(containingType);
 
         static bool IsClassOrRecordClassOrInterfaceDeclaration(TypeDeclarationSyntax type) =>
             type is ClassDeclarationSyntax or InterfaceDeclarationSyntax
             || (RecordDeclarationSyntaxWrapper.IsInstance(type) && !((RecordDeclarationSyntaxWrapper)type).ClassOrStructKeyword.IsKind(SyntaxKind.StructKeyword));
-
-        static bool HasAnyModifier(MethodDeclarationSyntax method, params SyntaxKind[] modifiers) =>
-            method.Modifiers.Any(x => x.IsAnyKind(modifiers));
     }
 
     private static TypeDeclarationSyntax LowestCommonAncestorOrSelf(IEnumerable<TypeDeclarationSyntax> declaredTypes)
     {
         var typeHierarchyFromTopToBottom = declaredTypes.Select(PathFromTop);
-        var minPathLength = typeHierarchyFromTopToBottom.Select(x => x.Length).Min();
+        var minPathLength = typeHierarchyFromTopToBottom.Min(x => x.Length);
         var firstPath = typeHierarchyFromTopToBottom.First();
 
         var lastCommonPathIndex = 0;
-        for (int i = 0; i < minPathLength; i++)
+        for (var i = 0; i < minPathLength; i++)
         {
             var isPartOfCommonPath = typeHierarchyFromTopToBottom.All(x => x[i] == firstPath[i]);
             if (isPartOfCommonPath)
@@ -119,6 +116,7 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         static TypeDeclarationSyntax[] PathFromTop(SyntaxNode node) =>
             node.AncestorsAndSelf()
                 .OfType<TypeDeclarationSyntax>()
+                .Where(x => x.Kind() is not SyntaxKindEx.ExtensionBlockDeclaration)
                 .Distinct()
                 .Reverse()
                 .ToArray();
@@ -131,23 +129,23 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         collector.SafeVisit(outerType);
 
         return collector.PotentialMethodReferences
-                .Where(x => !OnlyUsedByOuterType(x))
-                .Select(DeclaredTypesWhichActuallyUseTheMethod)
-                .Where(x => x.Types.Any())
-                .ToArray();
+            .Where(x => !OnlyUsedByOuterType(x))
+            .Select(DeclaredTypesWhichActuallyUseTheMethod)
+            .Where(x => x.Types.Any())
+            .ToArray();
 
         MethodUsedByTypes DeclaredTypesWhichActuallyUseTheMethod(MethodWithPotentialReferences m)
         {
             var methodSymbol = model.GetDeclaredSymbol(m.Method);
 
             var typesWhichUseTheMethod = m.PotentialReferences
-                    .Where(x =>
-                        !IsRecursiveMethodCall(x, m.Method)
-                        && model.GetSymbolOrCandidateSymbol(x) is IMethodSymbol { } methodReference
-                        && (methodReference.Equals(methodSymbol) || methodReference.ConstructedFrom.Equals(methodSymbol)))
-                    .Select(ContainingTypeDeclaration)
-                    .Distinct()
-                    .ToArray();
+                .Where(x =>
+                    !IsRecursiveMethodCall(x, m.Method)
+                    && model.GetSymbolOrCandidateSymbol(x) is IMethodSymbol { } methodReference
+                    && (methodReference.Equals(methodSymbol) || methodReference.ConstructedFrom.Equals(methodSymbol)))
+                .Select(ContainingTypeDeclaration)
+                .Distinct()
+                .ToArray();
 
             return new MethodUsedByTypes(m.Method, typesWhichUseTheMethod);
         }
@@ -180,20 +178,19 @@ public sealed class PrivateStaticMethodUsedOnlyByNestedClass : SonarDiagnosticAn
         private readonly ISet<MethodDeclarationSyntax> methodsToFind;
         private readonly Dictionary<MethodDeclarationSyntax, List<IdentifierNameSyntax>> potentialMethodReferences;
 
-        public IEnumerable<MethodWithPotentialReferences> PotentialMethodReferences =>
-            potentialMethodReferences.Select(x => new MethodWithPotentialReferences(x.Key, x.Value.ToArray()));
+        public IEnumerable<MethodWithPotentialReferences> PotentialMethodReferences => potentialMethodReferences.Select(x => new MethodWithPotentialReferences(x.Key, x.Value.ToArray()));
 
         public PotentialMethodReferenceCollector(IEnumerable<MethodDeclarationSyntax> methodsToFind)
         {
             this.methodsToFind = new HashSet<MethodDeclarationSyntax>(methodsToFind);
-            potentialMethodReferences = new();
+            potentialMethodReferences = [];
         }
 
         public override void VisitIdentifierName(IdentifierNameSyntax node)
         {
             if (methodsToFind.FirstOrDefault(x => x.Identifier.ValueText == node.Identifier.ValueText) is { } method)
             {
-                var referenceList = potentialMethodReferences.GetOrAdd(method, _ => new());
+                var referenceList = potentialMethodReferences.GetOrAdd(method, _ => []);
                 referenceList.Add(node);
             }
         }
