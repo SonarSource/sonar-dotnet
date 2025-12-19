@@ -169,7 +169,7 @@ namespace CSharp14
 
     public class FieldKeyword
     {
-        public int Field1   // Noncompliant FP  https://sonarsource.atlassian.net/browse/NET-2716
+        public int Field1   // Compliant https://sonarsource.atlassian.net/browse/NET-2716
         {
             get;
             set => field = value < 0 ? throw new ArgumentException("Value must be greater or equal 0.") : value;

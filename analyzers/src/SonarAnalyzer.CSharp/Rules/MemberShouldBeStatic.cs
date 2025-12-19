@@ -52,33 +52,32 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
     protected override void Initialize(SonarAnalysisContext context)
     {
         context.RegisterNodeAction(
-            c => CheckIssue<PropertyDeclarationSyntax>(c, GetPropertyDescendants, d => d.Identifier, "property"),
+            c => CheckIssue<PropertyDeclarationSyntax>(c, PropertyDescendants, d => d.Identifier, "property"),
             SyntaxKind.PropertyDeclaration);
 
         context.RegisterNodeAction(
-            c => CheckIssue<MethodDeclarationSyntax>(c, GetMethodDescendants, d => d.Identifier, "method"),
+            c => CheckIssue<MethodDeclarationSyntax>(c, MethodDescendants, d => d.Identifier, "method"),
             SyntaxKind.MethodDeclaration);
     }
 
-    private static IEnumerable<SyntaxNode> GetPropertyDescendants(PropertyDeclarationSyntax propertyDeclaration) =>
+    private static IEnumerable<SyntaxNode> PropertyDescendants(PropertyDeclarationSyntax propertyDeclaration) =>
         propertyDeclaration.ExpressionBody is null
             ? propertyDeclaration.AccessorList.Accessors.SelectMany(x => x.DescendantNodes())
             : propertyDeclaration.ExpressionBody.DescendantNodes();
 
-    private static IEnumerable<SyntaxNode> GetMethodDescendants(MethodDeclarationSyntax methodDeclaration) =>
+    private static IEnumerable<SyntaxNode> MethodDescendants(MethodDeclarationSyntax methodDeclaration) =>
         methodDeclaration.ExpressionBody is null
             ? methodDeclaration.Body?.DescendantNodes()
             : methodDeclaration.ExpressionBody.DescendantNodes();
 
     private static void CheckIssue<TDeclarationSyntax>(SonarSyntaxNodeReportingContext context,
-        Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
-        Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
-        string memberKind)
+                                                       Func<TDeclarationSyntax, IEnumerable<SyntaxNode>> getDescendants,
+                                                       Func<TDeclarationSyntax, SyntaxToken> getIdentifier,
+                                                       string memberKind)
         where TDeclarationSyntax : MemberDeclarationSyntax
     {
         var declaration = (TDeclarationSyntax)context.Node;
-        if (IsEmptyMethod(declaration)
-            || CSharpFacade.Instance.Syntax.ModifierKinds(declaration).Contains(SyntaxKind.PartialKeyword))
+        if (IsEmptyMethod(declaration) || CSharpFacade.Instance.Syntax.ModifierKinds(declaration).Contains(SyntaxKind.PartialKeyword))
         {
             return;
         }
@@ -170,7 +169,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
 
     private static bool IsLeftmostIdentifierName(ExpressionSyntax node)
     {
-        if (node is InstanceExpressionSyntax)
+        if (node is InstanceExpressionSyntax || node.IsKind(SyntaxKindEx.FieldExpression))
         {
             return true;
         }
@@ -190,7 +189,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
 
     private static bool IsInstanceMember(ExpressionSyntax node, SemanticModel model)
     {
-        if (node is InstanceExpressionSyntax)
+        if (node is InstanceExpressionSyntax || node.IsKind(SyntaxKindEx.FieldExpression))
         {
             return true;
         }
