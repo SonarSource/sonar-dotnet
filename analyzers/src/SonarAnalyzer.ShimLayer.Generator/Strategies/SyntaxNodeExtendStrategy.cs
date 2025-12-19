@@ -24,20 +24,22 @@ public sealed class SyntaxNodeExtendStrategy : Strategy
         Members = members.Where(x => !x.IsPassthrough).Select(x => x.Member).ToArray();
 
     public override string Generate(StrategyModel model) =>
-        $$"""
-        {{Preamble($"using {Latest.Namespace};")}}
-        public static partial class {{Latest.Name}}ShimExtensions
-        {
-            private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet()}});
+        Members.Select(x => GenerateMemberAccessor(x, model)).Where(x => x is not null).ToArray() is { Length: > 0 } accessors
+            ? $$"""
+                {{Preamble($"using {Latest.Namespace};")}}
+                public static partial class {{Latest.Name}}ShimExtensions
+                {
+                    private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet()}});
 
-        {{JoinLines(Members.Select(x => GenerateMemberAccessor(x, model)))}}
+                {{JoinLines(accessors)}}
 
-            extension({{CompiletimeTypeSnippet()}} @this)
-            {
-        {{JoinLines(Members.Select(x => GenerateMemberExtension(x, model)))}}
-            }
-        }
-        """;
+                    extension({{CompiletimeTypeSnippet()}} @this)
+                    {
+                {{JoinLines(Members.Select(x => GenerateMemberExtension(x, model)))}}
+                    }
+                }
+                """
+            : null;
 
     public override string ReturnTypeSnippet() =>
         Latest.Name;
