@@ -25,6 +25,7 @@
     <Using Include="SonarAnalyzer.CSharp.Styling.Common.Test" />
     <Using Include="SonarAnalyzer.CSharp.Styling.Rules" />
     <Using Include="SonarAnalyzer.TestFramework.Build" />
+    <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
     <Using Include="SonarAnalyzer.TestFramework.Verification" />
   </ItemGroup>
 
