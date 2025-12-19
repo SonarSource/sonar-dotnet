@@ -199,10 +199,13 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             return false;
         }
         return model.GetSymbolInfo(node).Symbol is { IsStatic: false } symbol
-            && (InstanceSymbolKinds.Contains(symbol.Kind) || IsConstructorParameter(symbol));
+            && (InstanceSymbolKinds.Contains(symbol.Kind) || IsConstructorParameter(symbol) || IsExtensionParameter(symbol));
 
         // Checking for primary constructor parameters
         static bool IsConstructorParameter(ISymbol symbol) =>
             symbol is IParameterSymbol { ContainingSymbol: IMethodSymbol { MethodKind: MethodKind.Constructor } };
+
+        static bool IsExtensionParameter(ISymbol symbol) =>
+            symbol is IParameterSymbol { ContainingSymbol: ITypeSymbol { TypeKind: TypeKindEx.Extension } };
     }
 }

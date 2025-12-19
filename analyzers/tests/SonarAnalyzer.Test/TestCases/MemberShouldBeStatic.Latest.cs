@@ -162,8 +162,8 @@ namespace CSharp14
     {
         extension(int number)
         {
-            public bool IsEven => number % 2 == 0;  //  Noncompliant FP, number is instance data.
-            public bool IsOdd() => number % 2 != 0; //  Noncompliant FP, number is instance data.
+            public bool IsEven => number % 2 == 0;  //  Compliant, number is instance data.
+            public bool IsOdd() => number % 2 != 0; //  Compliant, number is instance data.
         }
     }
 
