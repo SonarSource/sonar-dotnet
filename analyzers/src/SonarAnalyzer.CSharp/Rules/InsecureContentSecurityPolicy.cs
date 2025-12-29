@@ -33,18 +33,21 @@ public sealed class InsecureContentSecurityPolicy : TrackerHotspotDiagnosticAnal
     protected override void Initialize(TrackerInput input)
     {
         var propertyTracker = Language.Tracker.PropertyAccess;
-        propertyTracker.Track(input,
+        propertyTracker.Track(
+            input,
             propertyTracker.MatchProperty(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary, "ContentSecurityPolicy")),
             x => IsInsecureContentSecurityPolicyValue((string)propertyTracker.AssignedValue(x)));
 
         var elementAccessTracker = Language.Tracker.ElementAccess;
-        elementAccessTracker.Track(input,
+        elementAccessTracker.Track(
+            input,
             elementAccessTracker.MatchProperty(new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_HttpResponse, "Headers")),
             elementAccessTracker.ArgumentAtIndexEquals(0, "Content-Security-Policy"),
             x => IsInsecureContentSecurityPolicyValue((string)elementAccessTracker.AssignedValue(x)));
 
         var invocationTracker = Language.Tracker.Invocation;
-        invocationTracker.Track(input,
+        invocationTracker.Track(
+            input,
             invocationTracker.MatchMethod(
                 new MemberDescriptor(KnownType.System_Collections_Generic_IDictionary_TKey_TValue, "Add"),
                 new MemberDescriptor(KnownType.Microsoft_AspNetCore_Http_HeaderDictionaryExtensions, "Append")),

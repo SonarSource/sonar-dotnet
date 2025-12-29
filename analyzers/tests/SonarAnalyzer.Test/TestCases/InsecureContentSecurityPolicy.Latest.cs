@@ -18,12 +18,13 @@ public class InsecureContentSecurityPolicy
         myheaderDictionary["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';";       // Compliant
     }
 
-    public void ConditionalNullAssignment(HttpContext context)
+    public void ConditionalNullAssignment(HttpContext context, IHeaderDictionary[] headers)
     {
+        headers[0]?.ContentSecurityPolicy = "*"; // Noncompliant
+
         context?.Response.Headers.ContentSecurityPolicy = "*";  // Noncompliant
         context.Response?.Headers.ContentSecurityPolicy = "*";  // Noncompliant
         context.Response.Headers?.ContentSecurityPolicy = "*";  // Noncompliant
-                                                                // Noncompliant@-1 FP, reported twice
 
         context?.Response.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';"; // Noncompliant
         context.Response?.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';"; // FN

@@ -44,5 +44,11 @@ public class CSharpPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
         context => AssignedValue(context) != null;
 
     protected override bool IsIdentifierWithinMemberAccess(SyntaxNode expression) =>
-        expression.IsKind(SyntaxKind.IdentifierName) && expression.Parent.IsKind(SyntaxKind.SimpleMemberAccessExpression);
+        expression.IsKind(SyntaxKind.IdentifierName) && IsSimpleMemberWithinMemberAccess(expression.Parent);
+
+    private static bool IsSimpleMemberWithinMemberAccess(SyntaxNode node) =>
+        node.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+        || (node.IsKind(SyntaxKind.MemberBindingExpression)
+            && node.Parent.IsKind(SyntaxKind.SimpleAssignmentExpression)
+            && node.Parent.Parent.IsKind(SyntaxKind.ConditionalAccessExpression));
 }
