@@ -37,8 +37,13 @@ public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
         context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
     public override Condition MatchProperty(MemberDescriptor member) =>
-        context => ((ElementAccessExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess
-                   && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                   && context.Model.GetTypeInfo(memberAccess.Expression) is TypeInfo enclosingClassType
-                   && member.IsMatch(memberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
+        context => ((ElementAccessExpressionSyntax)context.Node).Expression switch
+        {
+            MemberAccessExpressionSyntax memberAccess =>
+                memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                && member.IsMatch(memberAccess.Name.Identifier.ValueText, context.Model.GetTypeInfo(memberAccess.Expression).Type, Language.NameComparison),
+            MemberBindingExpressionSyntax memberBinding =>
+                member.IsMatch(memberBinding.Name.Identifier.ValueText, context.Model.GetSymbolInfo(memberBinding).Symbol?.ContainingType, Language.NameComparison),
+            _ => false
+        };
 }

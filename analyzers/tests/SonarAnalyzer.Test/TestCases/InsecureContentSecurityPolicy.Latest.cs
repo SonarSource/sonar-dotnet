@@ -27,7 +27,7 @@ public class InsecureContentSecurityPolicy
         context.Response.Headers?.ContentSecurityPolicy = "*";  // Noncompliant
 
         context?.Response.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';"; // Noncompliant
-        context.Response?.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';"; // FN
+        context.Response?.Headers["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';"; // Noncompliant
         context.Response.Headers?["Content-Security-Policy"] = "script-src 'self' 'unsafe-inline';"; // FN
     }
 }
