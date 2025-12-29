@@ -37,7 +37,7 @@ public sealed class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
         if (namedType.IsClassOrStruct() && namedType.ContainingType is null)
         {
             var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, context.Compilation);
-            var removableEventFields = removableDeclarationCollector.RemovableFieldLikeDeclarations(EventSyntax, MaxAccessibility).ToArray();
+            var removableEventFields = removableDeclarationCollector.RemovableFieldLikeDeclarations(EventSyntax, MaxAccessibility).Where(x => !IsInPartialEventField(x.Node)).ToArray();
             if (removableEventFields.Any())
             {
                 var usedSymbols = InvokedEventSymbols(removableDeclarationCollector).Concat(PossiblyCopiedSymbols(removableDeclarationCollector)).ToHashSet();
@@ -52,6 +52,9 @@ public sealed class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
             node is VariableDeclaratorSyntax variableDeclarator
                 ? variableDeclarator.Identifier.GetLocation()
                 : ((EventDeclarationSyntax)node).Identifier.GetLocation();
+
+        static bool IsInPartialEventField(SyntaxNode node) =>
+            node.Ancestors().OfType<EventFieldDeclarationSyntax>().FirstOrDefault() is { } eventField && eventField.Modifiers.Any(SyntaxKind.PartialKeyword);
     }
 
     private static IEnumerable<ISymbol> InvokedEventSymbols(CSharpRemovableDeclarationCollector removableDeclarationCollector)

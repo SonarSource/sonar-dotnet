@@ -89,8 +89,8 @@ public partial class PartialEvents
 {
     private EventHandler compliant;
     private EventHandler nonCompliant;
-    public partial event EventHandler Compliant;    // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2821
-    public partial event EventHandler NonCompliant; // Noncompliant
+    public partial event EventHandler Compliant;    // Compliant https://sonarsource.atlassian.net/browse/NET-2821
+    public partial event EventHandler NonCompliant; // FN, this rule doesn't inspect events with add/remove accessors (yet)
 
     public virtual void RaiseEvent()
     {
