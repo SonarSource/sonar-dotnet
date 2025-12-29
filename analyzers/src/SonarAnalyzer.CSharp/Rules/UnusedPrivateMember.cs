@@ -130,7 +130,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                                                              string accessibility,
                                                              BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols) where TContext : ICompilationReport
     {
-        var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
+        var unusedSymbols = UnusedSymbols(usageCollector, removableSymbols);
 
         var propertiesWithUnusedAccessor = removableSymbols
             .Intersect(usageCollector.UsedSymbols)
@@ -163,30 +163,30 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
     private static void ReportUsedButUnreadFields(SonarSymbolReportingContext context, SymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
     {
-        var unusedSymbols = GetUnusedSymbols(usageCollector, removableSymbols);
+        var unusedSymbols = UnusedSymbols(usageCollector, removableSymbols);
 
         var usedButUnreadFields = usageCollector.FieldSymbolUsages.Values
             .Where(x => x.Symbol.DeclaredAccessibility == Accessibility.Private || x.Symbol.ContainingType?.DeclaredAccessibility == Accessibility.Private)
-            .Where(x => x.Symbol.Kind == SymbolKind.Field || x.Symbol.Kind == SymbolKind.Event)
+            .Where(x => x.Symbol.Kind is SymbolKind.Field or SymbolKind.Event)
             .Where(x => !unusedSymbols.Contains(x.Symbol)
-                && !IsMentionedInDebuggerDisplay(x.Symbol, usageCollector)
-                && !IsUsedWithReflection(x.Symbol, usageCollector.TypesUsedWithReflection))
+                        && !IsMentionedInDebuggerDisplay(x.Symbol, usageCollector)
+                        && !IsUsedWithReflection(x.Symbol, usageCollector.TypesUsedWithReflection))
             .Where(x => x.Declaration is not null && !x.Readings.Any());
 
         foreach (var usage in usedButUnreadFields)
         {
-            context.ReportIssue(RuleS4487, usage.Declaration.GetLocation(), GetFieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name);
+            context.ReportIssue(RuleS4487, usage.Declaration.GetLocation(), FieldAccessibilityForMessage(usage.Symbol), usage.Symbol.Name);
         }
     }
 
-    private static HashSet<ISymbol> GetUnusedSymbols(SymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
+    private static HashSet<ISymbol> UnusedSymbols(SymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols) =>
         removableSymbols
             .Except(usageCollector.UsedSymbols)
             .Where(x => !IsMentionedInDebuggerDisplay(x, usageCollector)
-                && !IsAccessorUsed(x, usageCollector)
-                && !IsDeconstructMethod(x)
-                && !usageCollector.PrivateAttributes.Contains(x)
-                && !IsUsedWithReflection(x, usageCollector.TypesUsedWithReflection))
+                        && !IsAccessorUsed(x, usageCollector)
+                        && !IsDeconstructMethod(x)
+                        && !usageCollector.PrivateAttributes.Contains(x)
+                        && !IsUsedWithReflection(x, usageCollector.TypesUsedWithReflection))
             .ToHashSet();
 
     private static bool IsDeconstructMethod(ISymbol symbol) =>
@@ -200,7 +200,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         && ((access.HasFlag(AccessorAccess.Get) && accessor.MethodKind == MethodKind.PropertyGet)
             || (access.HasFlag(AccessorAccess.Set) && accessor.MethodKind == MethodKind.PropertySet));
 
-    private static string GetFieldAccessibilityForMessage(ISymbol symbol) =>
+    private static string FieldAccessibilityForMessage(ISymbol symbol) =>
         symbol.DeclaredAccessibility == Accessibility.Private ? SyntaxConstants.Private : "private class";
 
     private static void ReportDiagnosticsForMembers<TContext>(TContext context,
@@ -215,7 +215,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             var syntaxForLocation = unused.Node;
 
-            var isFieldOrEvent = unused.Symbol.Kind == SymbolKind.Field || unused.Symbol.Kind == SymbolKind.Event;
+            var isFieldOrEvent = unused.Symbol.Kind is SymbolKind.Field or SymbolKind.Event;
             if (isFieldOrEvent && unused.Node.IsKind(SyntaxKind.VariableDeclarator))
             {
                 if (alreadyReportedFieldLikeSymbols.Contains(unused.Symbol))
@@ -237,7 +237,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             }
             else
             {
-                context.ReportIssue(RuleS1144, GetIdentifierLocation(syntaxForLocation), accessibility, unused.Symbol.GetClassification(), GetMemberName(unused.Symbol));
+                context.ReportIssue(RuleS1144, IdentifierLocation(syntaxForLocation), accessibility, unused.Symbol.GetClassification(), MemberName(unused.Symbol));
             }
         }
 
@@ -249,10 +249,13 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 _ => [],
             };
 
-        static Location GetIdentifierLocation(SyntaxNode node) =>
+        static Location IdentifierLocation(SyntaxNode node) =>
             node.GetIdentifier() is { } identifier
                 ? identifier.GetLocation()
                 : node.GetLocation();
+
+        static string MemberName(ISymbol symbol) =>
+            symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
     }
 
     private static void ReportProperty<TContext>(TContext context,
@@ -277,9 +280,6 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         static AccessorDeclarationSyntax GetAccessorSyntax(ISymbol symbol) =>
             symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as AccessorDeclarationSyntax;
     }
-
-    private static string GetMemberName(ISymbol symbol) =>
-        symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
 
     private static bool VisitDeclaringReferences(ISymbol symbol, ISafeSyntaxWalker visitor, SonarSymbolReportingContext context, bool includeGeneratedFile)
     {
@@ -311,12 +311,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         // Keep the removable internal types for when the compilation ends
         internalSymbols.AddRange(removableSymbolCollector.InternalSymbols);
 
-        foreach (var keyValuePair in removableSymbolCollector.FieldLikeSymbols)
+        foreach (var pair in removableSymbolCollector.FieldLikeSymbols.Where(x => !fieldLikeSymbols.ContainsKeyByA(x.Key)))
         {
-            if (!fieldLikeSymbols.ContainsKeyByA(keyValuePair.Key))
-            {
-                fieldLikeSymbols.Add(keyValuePair.Key, keyValuePair.Value);
-            }
+            fieldLikeSymbols.Add(pair.Key, pair.Value);
         }
     }
 
@@ -349,7 +346,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
             if (node.IsKind(SyntaxKindEx.LocalFunctionStatement))
             {
-                ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
+                ConditionalStore((IMethodSymbol)DeclaredSymbol(node), IsRemovableMethod);
             }
 
             base.Visit(node);
@@ -366,7 +363,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             if (!IsEmptyConstructor(node)
                 && IsPrivateOrInPrivateType(node.Modifiers))
             {
-                ConditionalStore((IMethodSymbol)GetDeclaredSymbol(node), IsRemovableMethod);
+                ConditionalStore((IMethodSymbol)DeclaredSymbol(node), IsRemovableMethod);
             }
 
             base.VisitConstructorDeclaration(node);
@@ -376,7 +373,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (IsPrivateOrInPrivateType(node.Modifiers, true))
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                ConditionalStore(DeclaredSymbol(node), IsRemovableType);
             }
 
             base.VisitDelegateDeclaration(node);
@@ -392,7 +389,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (IsPrivateOrInPrivateType(node.Modifiers))
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                ConditionalStore(DeclaredSymbol(node), IsRemovableMember);
             }
 
             base.VisitEventDeclaration(node);
@@ -422,7 +419,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (IsPrivateOrInPrivateType(node.Modifiers))
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                ConditionalStore(DeclaredSymbol(node), IsRemovableMember);
             }
 
             base.VisitIndexerDeclaration(node);
@@ -438,7 +435,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (IsPrivateOrInPrivateType(node.Modifiers))
             {
-                var symbol = (IMethodSymbol)GetDeclaredSymbol(node);
+                var symbol = (IMethodSymbol)DeclaredSymbol(node);
                 ConditionalStore(symbol.PartialDefinitionPart ?? symbol, IsRemovableMethod);
             }
 
@@ -449,7 +446,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (node.Modifiers.Any(SyntaxKind.PrivateKeyword))
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovable);
+                ConditionalStore(DeclaredSymbol(node), IsRemovable);
             }
 
             base.VisitAccessorDeclaration(node);
@@ -459,7 +456,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (IsPrivateOrInPrivateType(node.Modifiers))
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableMember);
+                ConditionalStore(DeclaredSymbol(node), IsRemovableMember);
             }
 
             base.VisitPropertyDeclaration(node);
@@ -487,14 +484,14 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             }
         }
 
-        private ISymbol GetDeclaredSymbol(SyntaxNode node) =>
+        private ISymbol DeclaredSymbol(SyntaxNode node) =>
             getSemanticModel(node).GetDeclaredSymbol(node);
 
         private void StoreRemovableVariableDeclarations(BaseFieldDeclarationSyntax node)
         {
             foreach (var variable in node.Declaration.Variables)
             {
-                var symbol = GetDeclaredSymbol(variable);
+                var symbol = DeclaredSymbol(variable);
                 if (IsRemovableMember(symbol))
                 {
                     PrivateSymbols.Add(symbol);
@@ -526,7 +523,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
         private static bool HasAttributes(ISymbol symbol)
         {
-            IEnumerable<AttributeData> attributes = symbol.GetAttributes();
+            var attributes = symbol.GetAttributes().AsEnumerable();
             if (symbol is IMethodSymbol { MethodKind: MethodKind.PropertyGet or MethodKind.PropertySet, AssociatedSymbol: { } property })
             {
                 attributes = attributes.Union(property.GetAttributes());
@@ -548,14 +545,14 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (IsPrivateOrInPrivateType(((BaseTypeDeclarationSyntax)node).Modifiers, true))
             {
-                ConditionalStore(GetDeclaredSymbol(node), IsRemovableType);
+                ConditionalStore(DeclaredSymbol(node), IsRemovableType);
             }
         }
 
         private bool IsPrivateOrInPrivateType(SyntaxTokenList modifiers, bool checkInternal = false) =>
             containingTypeAccessibility == Accessibility.Private
             || (checkInternal && containingTypeAccessibility == Accessibility.Internal)
-            || !modifiers.Any(x => x.IsAnyKind(SyntaxKind.PrivateKeyword, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword, SyntaxKind.ProtectedKeyword))
+            || !modifiers.Any(x => x.Kind() is SyntaxKind.PrivateKeyword or SyntaxKind.PublicKeyword or SyntaxKind.InternalKeyword or SyntaxKind.ProtectedKeyword)
             || modifiers.Any(SyntaxKind.PrivateKeyword);
     }
 }
