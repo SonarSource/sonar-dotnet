@@ -236,7 +236,7 @@ namespace Tests.Diagnostics
 
     public class EventChainingDirect
     {
-        public event EventHandler Logging; // Noncompliant - FP, see https://github.com/SonarSource/sonar-dotnet/issues/4276
+        public event EventHandler Logging; // Compliant https://github.com/SonarSource/sonar-dotnet/issues/4276
 
         public void RunTest()
         {

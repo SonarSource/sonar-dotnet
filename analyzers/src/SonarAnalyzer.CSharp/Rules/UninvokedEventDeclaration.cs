@@ -88,9 +88,9 @@ public sealed class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
         static SyntaxNode Expression(SyntaxNode node) =>
             node switch
             {
-                ArgumentSyntax arg when arg.IsKind(SyntaxKind.Argument) => arg.Expression,
+                ArgumentSyntax arg => arg.Expression,
                 EqualsValueClauseSyntax equalsClause => equalsClause.Value,
-                AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) => assignment.Right,
+                AssignmentExpressionSyntax assignment => assignment.Right,
                 _ => null
             };
     }
