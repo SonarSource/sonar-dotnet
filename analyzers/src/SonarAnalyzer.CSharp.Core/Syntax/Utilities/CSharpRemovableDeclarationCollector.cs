@@ -20,26 +20,20 @@ public class CSharpRemovableDeclarationCollector : RemovableDeclarationCollector
 {
     public CSharpRemovableDeclarationCollector(INamedTypeSymbol namedType, Compilation compilation) : base(namedType, compilation) { }
 
-    protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<BaseTypeDeclarationSyntax> container, ISet<SyntaxKind> kinds) =>
-        container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(node => kinds.Contains(node.Kind()));
-
-    public override IEnumerable<NodeSymbolAndModel<SyntaxNode, ISymbol>> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
+    public override IEnumerable<NodeSymbolAndModel<SyntaxNode, ISymbol>> RemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
     {
-        var fieldLikeNodes = TypeDeclarations
-            .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
-                .Select(node => new NodeAndModel<BaseFieldDeclarationSyntax>((BaseFieldDeclarationSyntax)node, typeDeclaration.Model)));
-
-        return fieldLikeNodes
-            .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declaration.Variables
-                .Select(variable => SelectNodeTuple(variable, fieldLikeNode.Model))
-                .Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
+        var fieldLikeNodes = TypeDeclarations.SelectMany(x => MatchingDeclarations(x, kinds).Select(node => new NodeAndModel<BaseFieldDeclarationSyntax>((BaseFieldDeclarationSyntax)node, x.Model)));
+        return fieldLikeNodes.SelectMany(x => x.Node.Declaration.Variables.Select(variable => CreateNodeSymbolAndModel(variable, x.Model)).Where(tuple => IsRemovable(tuple.Symbol, maxAccessibility)));
     }
 
-    public override BaseTypeDeclarationSyntax GetOwnerOfSubnodes(BaseTypeDeclarationSyntax node) =>
+    public override BaseTypeDeclarationSyntax OwnerOfSubnodes(BaseTypeDeclarationSyntax node) =>
         node;
 
     public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
         IsNodeStructOrClassOrRecordDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
+
+    protected override IEnumerable<SyntaxNode> MatchingDeclarations(NodeAndModel<BaseTypeDeclarationSyntax> container, ISet<SyntaxKind> kinds) =>
+        container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(x => kinds.Contains(x.Kind()));
 
     private static bool IsNodeStructOrClassOrRecordDeclaration(SyntaxNode node) =>
         node?.Kind() is SyntaxKind.ClassDeclaration or SyntaxKind.StructDeclaration or SyntaxKindEx.RecordDeclaration or SyntaxKindEx.RecordStructDeclaration;

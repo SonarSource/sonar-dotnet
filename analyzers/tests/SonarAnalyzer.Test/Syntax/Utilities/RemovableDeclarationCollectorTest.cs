@@ -25,85 +25,87 @@ namespace SonarAnalyzer.Test.Syntax.Utilities;
 public class RemovableDeclarationCollectorTest
 {
     [TestMethod]
-    public void GetRemovableFieldLikeDeclarations_SearchesInNestedTypes_VB()
+    public void RemovableFieldLikeDeclarations_SearchesInNestedTypes_VB()
     {
-        const string code = @"
-Public Class Sample
+        const string code = """
+            Public Class Sample
 
-    Public CompliantA, CompliantB As Integer
-    Public CompliantC As Integer
+                Public CompliantA, CompliantB As Integer
+                Public CompliantC As Integer
 
-    Private Class NestedClass
+                Private Class NestedClass
 
-        Public FieldInNestedClass As Integer
+                    Public FieldInNestedClass As Integer
 
-    End Class
+                End Class
 
-    Private Structure NestedStruct
+                Private Structure NestedStruct
 
-        Public FieldInNestedStruct As Integer
+                    Public FieldInNestedStruct As Integer
 
-    End Structure
+                End Structure
 
-End Class";
+            End Class
+            """;
         var sut = CreateCollector(code);
-        var ret = sut.GetRemovableFieldLikeDeclarations(new[] { SyntaxKind.FieldDeclaration }.ToHashSet(), CodeAnalysisAccessibility.Public);
+        var ret = sut.RemovableFieldLikeDeclarations(new[] { SyntaxKind.FieldDeclaration }.ToHashSet(), CodeAnalysisAccessibility.Public);
         ret.Should().HaveCount(5);
         ret.Select(x => x.Symbol.Name).Should().BeEquivalentTo("CompliantA", "CompliantB", "CompliantC", "FieldInNestedClass", "FieldInNestedStruct");
     }
 
     [TestMethod]
-    public void GetRemovableDeclarations_VB()
+    public void RemovableDeclarations_VB()
     {
-        const string code = @"
-Public Class Base
+        const string code = """
+            Public Class Base
 
-    Public Overridable Sub OverridableMethod_NotRemovable()
-    End Sub
+                Public Overridable Sub OverridableMethod_NotRemovable()
+                End Sub
 
-End Class
+            End Class
 
-Public Interface IBase
+            Public Interface IBase
 
-    Sub InterfaceMethod_NotRemovable()
+                Sub InterfaceMethod_NotRemovable()
 
-End Interface
+            End Interface
 
-Public Class Sample
-    Inherits Base
-    Implements IBase
+            Public Class Sample
+                Inherits Base
+                Implements IBase
 
-    Public Sub RemovableMethod()
-    End Sub
+                Public Sub RemovableMethod()
+                End Sub
 
-    Public Overrides Sub OverridableMethod_NotRemovable()
-    End Sub
+                Public Overrides Sub OverridableMethod_NotRemovable()
+                End Sub
 
-    Public Sub InterfaceMethod_NotRemovable() Implements IBase.InterfaceMethod_NotRemovable
-    End Sub
+                Public Sub InterfaceMethod_NotRemovable() Implements IBase.InterfaceMethod_NotRemovable
+                End Sub
 
-    <System.ComponentModel.Browsable(False)>
-    Public Sub WithAttributes_NotRemovable()
-    End Sub
+                <System.ComponentModel.Browsable(False)>
+                Public Sub WithAttributes_NotRemovable()
+                End Sub
 
-    Public Overridable Sub Overridable_NotRemovable()
-    End Sub
+                Public Overridable Sub Overridable_NotRemovable()
+                End Sub
 
-    Public Interface INestedInterface
+                Public Interface INestedInterface
 
-        Sub NestedInterfaceMethod_NotRemovable()
+                    Sub NestedInterfaceMethod_NotRemovable()
 
-    End Interface
+                End Interface
 
-    Public MustInherit Class AbstractType
+                Public MustInherit Class AbstractType
 
-        Public MustOverride Sub Abstract_NotRemovable()
+                    Public MustOverride Sub Abstract_NotRemovable()
 
-    End Class
+                End Class
 
-End Class";
+            End Class
+            """;
         var sut = CreateCollector(code);
-        var ret = sut.GetRemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), CodeAnalysisAccessibility.Public);
+        var ret = sut.RemovableDeclarations(new[] { SyntaxKind.SubBlock, SyntaxKind.SubStatement }.ToHashSet(), CodeAnalysisAccessibility.Public);
         ret.Should().ContainSingle();
         ret.Single().Symbol.Name.Should().Be("RemovableMethod");
     }

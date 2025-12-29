@@ -28,21 +28,21 @@ public class VisualBasicRemovableDeclarationCollector : RemovableDeclarationColl
     public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
         IsNodeStructOrClassDeclaration(node) || node.IsKind(SyntaxKind.InterfaceBlock);
 
-    protected override IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
+    protected override IEnumerable<SyntaxNode> MatchingDeclarations(NodeAndModel<TypeBlockSyntax> container, ISet<SyntaxKind> kinds) =>
         container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(node => kinds.Contains(node.Kind()));
 
-    public override IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
+    public override IEnumerable<NodeSymbolAndModel> RemovableFieldLikeDeclarations(ISet<SyntaxKind> kinds, Accessibility maxAccessibility)
     {
         var fieldLikeNodes = TypeDeclarations
-            .SelectMany(typeDeclaration => SelectMatchingDeclarations(typeDeclaration, kinds)
+            .SelectMany(typeDeclaration => MatchingDeclarations(typeDeclaration, kinds)
                 .Select(x => new NodeAndModel<FieldDeclarationSyntax>((FieldDeclarationSyntax)x, typeDeclaration.Model)));
 
         return fieldLikeNodes
             .SelectMany(fieldLikeNode => fieldLikeNode.Node.Declarators.SelectMany(x => x.Names)
-                .Select(name => SelectNodeTuple(name, fieldLikeNode.Model))
+                .Select(name => CreateNodeSymbolAndModel(name, fieldLikeNode.Model))
                 .Where(x => IsRemovable(x.Symbol, maxAccessibility)));
     }
 
-    public override TypeBlockSyntax GetOwnerOfSubnodes(TypeStatementSyntax node) =>
+    public override TypeBlockSyntax OwnerOfSubnodes(TypeStatementSyntax node) =>
         node.Parent as TypeBlockSyntax;
 }

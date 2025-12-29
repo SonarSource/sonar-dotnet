@@ -85,11 +85,11 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
 
     private static List<NodeSymbolAndModel<SyntaxNode, ISymbol>> GetCandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
     {
-        var candidateFields = removableDeclarationCollector.GetRemovableFieldLikeDeclarations(new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
+        var candidateFields = removableDeclarationCollector.RemovableFieldLikeDeclarations(new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
                                                            .Where(x => !IsInitializedOrFixed((VariableDeclaratorSyntax)x.Node)
                                                                && !HasStructLayoutAttribute(x.Symbol.ContainingType));
 
-        var candidateProperties = removableDeclarationCollector.GetRemovableDeclarations(new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
+        var candidateProperties = removableDeclarationCollector.RemovableDeclarations(new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
                                                                .Where(x => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)x.Node)
                                                                    && !HasStructLayoutAttribute(x.Symbol.ContainingType));
 

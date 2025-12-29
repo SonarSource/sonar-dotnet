@@ -27,17 +27,15 @@ public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDecla
     private readonly Compilation compilation;
     private readonly INamedTypeSymbol namedType;
 
-    private IEnumerable<NodeAndModel<TOwnerOfSubnodes>> typeDeclarations;
-
-    public abstract IEnumerable<NodeSymbolAndModel> GetRemovableFieldLikeDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
-    public abstract TOwnerOfSubnodes GetOwnerOfSubnodes(TDeclaration node);
-    protected abstract IEnumerable<SyntaxNode> SelectMatchingDeclarations(NodeAndModel<TOwnerOfSubnodes> container, ISet<TSyntaxKind> kinds);
+    public abstract IEnumerable<NodeSymbolAndModel> RemovableFieldLikeDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility);
+    public abstract TOwnerOfSubnodes OwnerOfSubnodes(TDeclaration node);
+    protected abstract IEnumerable<SyntaxNode> MatchingDeclarations(NodeAndModel<TOwnerOfSubnodes> container, ISet<TSyntaxKind> kinds);
 
     public IEnumerable<NodeAndModel<TOwnerOfSubnodes>> TypeDeclarations =>
-        typeDeclarations ??= namedType.DeclaringSyntaxReferences
+        field ??= namedType.DeclaringSyntaxReferences
             .Select(x => x.GetSyntax())
             .OfType<TDeclaration>()
-            .Select(x => new NodeAndModel<TOwnerOfSubnodes>(GetOwnerOfSubnodes(x), compilation.GetSemanticModel(x.SyntaxTree)))
+            .Select(x => new NodeAndModel<TOwnerOfSubnodes>(OwnerOfSubnodes(x), compilation.GetSemanticModel(x.SyntaxTree)))
             .Where(x => x.Model is not null);
 
     protected RemovableDeclarationCollectorBase(INamedTypeSymbol namedType, Compilation compilation)
@@ -46,9 +44,9 @@ public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDecla
         this.compilation = compilation;
     }
 
-    public IEnumerable<NodeSymbolAndModel> GetRemovableDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility) =>
+    public IEnumerable<NodeSymbolAndModel> RemovableDeclarations(ISet<TSyntaxKind> kinds, Accessibility maxAccessibility) =>
         TypeDeclarations
-            .SelectMany(x => SelectMatchingDeclarations(x, kinds).Select(declaration => SelectNodeTuple(declaration, x.Model)))
+            .SelectMany(x => MatchingDeclarations(x, kinds).Select(declaration => CreateNodeSymbolAndModel(declaration, x.Model)))
             .Where(x => IsRemovable(x.Symbol, maxAccessibility));
 
     public static bool IsRemovable(IMethodSymbol methodSymbol, Accessibility maxAccessibility) =>
@@ -69,6 +67,6 @@ public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDecla
         && symbol.InterfaceMembers().IsEmpty()
         && symbol.GetOverriddenMember() is null;
 
-    protected static NodeSymbolAndModel SelectNodeTuple(SyntaxNode node, SemanticModel model) =>
+    protected static NodeSymbolAndModel CreateNodeSymbolAndModel(SyntaxNode node, SemanticModel model) =>
         new(node, model.GetDeclaredSymbol(node), model);
 }
