@@ -79,8 +79,14 @@ public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
 
     private static bool IsCompliantAssignmentInsideExpression(AssignmentExpressionSyntax assignment, ExpressionSyntax expressionParent) =>
         IsCompliantCoalesceExpression(expressionParent, assignment)
+        || IsCompliantNullConditionalAssignment(assignment)
         || (RelationalExpressionKinds.Contains(expressionParent.Kind()) && IsInStatementCondition(expressionParent))
         || (AllowedParentExpressionKinds.Contains(expressionParent.Kind()) && !IsInInitializerExpression(expressionParent));
+
+    private static bool IsCompliantNullConditionalAssignment(AssignmentExpressionSyntax assignment) =>
+        assignment.AncestorsAndSelf().OfType<ConditionalAccessExpressionSyntax>().LastOrDefault() is { } conditionalAccess
+        && conditionalAccess.Parent.FirstAncestorOrSelf<ExpressionSyntax>() is var outerExpression
+        && (outerExpression is null || AllowedParentExpressionKinds.Contains(outerExpression.Kind()));
 
     private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment) =>
         assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)

@@ -78,7 +78,7 @@ namespace CSharp14
 
             }
 
-            a?.Value = true;            // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2391
+            a?.Value = true;            // Compliant https://sonarsource.atlassian.net/browse/NET-2391
             if (a is not null)
             {
                 a.Value = true;        // Compliant
@@ -88,5 +88,74 @@ namespace CSharp14
         {
             public bool Value;
         }
+
+        public class Nesting
+        {
+            public Nesting Prop { get; set; }
+            public Nesting this[int index] { get { return new Nesting(); } set { } }
+        }
+
+        void CompliantTest()
+        {
+            var prop = new Nesting();
+            prop?.Prop = new Nesting();
+            prop?.Prop?.Prop = new Nesting();
+            prop?.Prop.Prop = new Nesting();
+            prop.Prop?.Prop = new Nesting();
+            prop.Prop?.Prop?.Prop = new Nesting();
+            prop?.Prop.Prop?.Prop = new Nesting();
+            prop?.Prop.Prop.Prop = new Nesting();
+            var indexer = new Nesting();
+            indexer?[0] = new Nesting();
+            indexer?[0]?[0] = new Nesting();
+            indexer?[0]?[0] = new Nesting();
+            indexer?[0]?[0]?[0] = new Nesting();
+            indexer?[0]?[0][0] = new Nesting();
+            indexer?[0][0]?[0] = new Nesting();
+            indexer[0]?[0]?[0] = new Nesting();
+            var mixed = new Nesting();
+            mixed?[0]?.Prop = new Nesting();
+            mixed?.Prop?[0] = new Nesting();
+            mixed?[0]?.Prop?[0] = new Nesting();
+            mixed?.Prop?[0]?.Prop = new Nesting();
+
+            Action dontMindMeIAmHappyLittleInnocentLambda = () =>
+            {
+                var prop = new Nesting();
+                prop?.Prop = new Nesting();  // Compliant
+            };
+        }
+
+        void NonCompliantTest()
+        {
+            var prop = new Nesting();
+            SomeMethod(prop?.Prop = new Nesting());             // Noncompliant
+            SomeMethod(prop?.Prop?.Prop = new Nesting());       // Noncompliant
+            SomeMethod(prop?.Prop.Prop = new Nesting());        // Noncompliant
+            SomeMethod(prop.Prop?.Prop = new Nesting());        // Noncompliant
+            SomeMethod(prop.Prop?.Prop?.Prop = new Nesting());  // Noncompliant
+            SomeMethod(prop?.Prop.Prop?.Prop = new Nesting());  // Noncompliant
+            SomeMethod(prop?.Prop?.Prop.Prop = new Nesting());  // Noncompliant
+            SomeMethod(prop?.Prop.Prop.Prop = new Nesting());   // Noncompliant
+            var indexer = new Nesting();
+            SomeMethod(indexer?[0] = new Nesting());            // Noncompliant
+            SomeMethod(indexer?[0]?[0] = new Nesting());        // Noncompliant
+            SomeMethod(indexer?[0]?[0] = new Nesting());        // Noncompliant
+            SomeMethod(indexer?[0]?[0]?[0] = new Nesting());    // Noncompliant
+            SomeMethod(indexer?[0]?[0][0] = new Nesting());     // Noncompliant
+            SomeMethod(indexer?[0][0]?[0] = new Nesting());     // Noncompliant
+            SomeMethod(indexer[0]?[0]?[0] = new Nesting());     // Noncompliant
+            var mixed = new Nesting();
+            SomeMethod(mixed?[0]?.Prop = new Nesting());        // Noncompliant
+            SomeMethod(mixed?.Prop?[0] = new Nesting());        // Noncompliant
+            SomeMethod(mixed?[0]?.Prop?[0] = new Nesting());    // Noncompliant
+            SomeMethod(mixed?.Prop?[0]?.Prop = new Nesting());  // Noncompliant
+
+            if ((prop?.Prop?.Prop.Prop = new Nesting())) { }    // Noncompliant
+                                                                // Error@-1 [CS0029]
+            if ((indexer?[0]?[0][0] = new Nesting())) { }       // Noncompliant
+                                                                // Error@-1 [CS0029]
+        }
+        void SomeMethod(Nesting nesting) { }
     }
 }
