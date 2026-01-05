@@ -20,14 +20,13 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
         where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S2225";
-
-    protected override string MessageFormat => "Return an empty string instead.";
-
     protected abstract TSyntaxKind MethodKind { get; }
 
     protected abstract bool IsLocalOrLambda(SyntaxNode node);
 
     protected abstract IEnumerable<SyntaxNode> Conditionals(SyntaxNode expression);
+
+    protected override string MessageFormat => "Return an empty string instead.";
 
     protected ToStringShouldNotReturnNullBase() : base(DiagnosticId) { }
 
@@ -53,6 +52,7 @@ public abstract class ToStringShouldNotReturnNullBase<TSyntaxKind> : SonarDiagno
         node.Ancestors()
             .TakeWhile(x => !IsLocalOrLambda(x))
             .Any(x => Language.Syntax.IsKind(x, MethodKind)
-                && nameof(ToString).Equals(Language.Syntax.NodeIdentifier(x)?.ValueText, Language.NameComparison)
-                && !Language.Syntax.IsStatic(x));
+                        && nameof(ToString).Equals(Language.Syntax.NodeIdentifier(x)?.ValueText, Language.NameComparison)
+                        && x.Parent?.RawKind is not (int)SyntaxKindEx.ExtensionBlockDeclaration
+                        && !Language.Syntax.IsStatic(x));
 }

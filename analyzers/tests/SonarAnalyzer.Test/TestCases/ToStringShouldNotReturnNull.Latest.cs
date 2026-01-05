@@ -79,7 +79,7 @@ static class Extensions
 {
     extension(SomeClass s)
     {
-        string ToString() { return null; }  // Noncompliant FP NET-2877
+        string ToString() { return null; }  // Compliant NET-2877
     }
 }
 
