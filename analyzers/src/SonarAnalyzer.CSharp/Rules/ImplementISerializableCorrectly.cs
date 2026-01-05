@@ -157,7 +157,7 @@ namespace SonarAnalyzer.CSharp.Rules
             && typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
 
         private static bool OptsInForSerialization(INamedTypeSymbol typeSymbol) =>
-            typeSymbol.IsSerializable() // [Serializable] is present at the types declaration
+            typeSymbol.IsSerializable // [Serializable] is present at the types declaration
             || typeSymbol.Interfaces.Any(x => x.Is(KnownType.System_Runtime_Serialization_ISerializable)) // ISerializable is listed in the types declaration base type list
             || typeSymbol.Constructors.Any(KnownMethods.IsSerializationConstructor); // A serialization constructor is defined
 

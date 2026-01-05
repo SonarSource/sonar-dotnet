@@ -103,6 +103,6 @@ static class Extensions
 {
     extension(Sample s)
     {
-        void Dispose() { }  // Noncompliant FP NET-2712
+        void Dispose() { }  // Compliant FP NET-2712
     }
 }

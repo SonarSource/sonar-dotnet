@@ -34,7 +34,7 @@ public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
                 var declaredSymbol = (INamedTypeSymbol)c.Symbol;
 
                 // ref structs and static classes cannot inherit from the IDisposable interface
-                if (declaredSymbol.IsRefStruct() || declaredSymbol.IsStatic)
+                if (declaredSymbol.IsRefStruct() || declaredSymbol.IsStatic || declaredSymbol.IsExtension)
                 {
                     return;
                 }
@@ -61,7 +61,8 @@ public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
             },
             SymbolKind.NamedType);
 
-    private static void CollectInvocationsFromDisposeImplementation(IMethodSymbol disposeMethod, Compilation compilation,
+    private static void CollectInvocationsFromDisposeImplementation(IMethodSymbol disposeMethod,
+                                                                    Compilation compilation,
                                                                     HashSet<IMethodSymbol> mightImplementDispose,
                                                                     HashSet<IMethodSymbol> disposeMethodsCalledFromDispose)
     {
@@ -72,7 +73,7 @@ public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
                 .Select(x => new NodeAndModel<MethodDeclarationSyntax>(x.GetSyntax() as MethodDeclarationSyntax, compilation.GetSemanticModel(x.SyntaxTree)))
                 .Where(x => x.Node is not null);
 
-            var methodDeclaration = methodDeclarations.FirstOrDefault(m => m.Node.HasBodyOrExpressionBody());
+            var methodDeclaration = methodDeclarations.FirstOrDefault(x => x.Node.HasBodyOrExpressionBody());
             if (methodDeclaration == default)
             {
                 continue;

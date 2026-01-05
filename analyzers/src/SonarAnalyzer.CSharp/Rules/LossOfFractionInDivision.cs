@@ -153,7 +153,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     if (tupleTypeSymbol.IsTupleType())
                     {
-                        var elements = ((INamedTypeSymbol)tupleTypeSymbol).TupleElements();
+                        var elements = ((INamedTypeSymbol)tupleTypeSymbol).TupleElements;
                         foreach (var element in elements)
                         {
                             CollectTupleTypes(symbolList, element.Type);
