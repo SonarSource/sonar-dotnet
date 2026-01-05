@@ -16,7 +16,7 @@ public class Program
 
     public void NullConditionalAssignment(Wrapper wrapper)
     {
-        wrapper?.Result = Check.That(1); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2671
+        wrapper?.Result = Check.That(1); // Compliant https://sonarsource.atlassian.net/browse/NET-2671
         wrapper.Result = Check.That(1);  // Compliant
     }
 

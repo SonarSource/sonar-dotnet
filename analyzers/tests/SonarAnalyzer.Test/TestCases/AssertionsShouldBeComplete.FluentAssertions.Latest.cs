@@ -70,7 +70,7 @@ public class Program
 
     public void NullConditionalAssignment(Wrapper wrapper)
     {
-        wrapper?.Result = "test".Should(); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2671
+        wrapper?.Result = "test".Should(); // Compliant https://sonarsource.atlassian.net/browse/NET-2671
         wrapper.Result = "test".Should();  // Compliant
     }
 

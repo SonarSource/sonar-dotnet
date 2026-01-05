@@ -37,21 +37,19 @@ public class AssertionsShouldBeCompleteTest
 
     private readonly VerifierBuilder allFrameworks;
 
-    public AssertionsShouldBeCompleteTest()
-    {
+    public AssertionsShouldBeCompleteTest() =>
         allFrameworks = new VerifierBuilder<AssertionsShouldBeComplete>()
             .AddReferences(fluentAssertions.References)
             .AddReferences(nfluent.References)
             .AddReferences(nsubstitute.References);
-    }
 
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_CSharp7() =>
         fluentAssertions
-        // The overload resolution errors for s[0].Should() and collection.Should() are fixed in CSharp 7.3.
-        .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions[] { new(LanguageVersion.CSharp7), new(LanguageVersion.CSharp7_1), new(LanguageVersion.CSharp7_2) }))
-        .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp7.cs")
-        .Verify();
+            // The overload resolution errors for s[0].Should() and collection.Should() are fixed in CSharp 7.3.
+            .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions[] { new(LanguageVersion.CSharp7), new(LanguageVersion.CSharp7_1), new(LanguageVersion.CSharp7_2) }))
+            .AddPaths("AssertionsShouldBeComplete.FluentAssertions.CSharp7.cs")
+            .Verify();
 
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_MissingParen() =>
@@ -72,35 +70,24 @@ public class AssertionsShouldBeCompleteTest
     [TestMethod]
     public void AssertionsShouldBeComplete_FluentAssertions_CS_Latest() =>
         fluentAssertions
-        .WithOptions(LanguageOptions.CSharpLatest)
-        .AddPaths("AssertionsShouldBeComplete.FluentAssertions.Latest.cs")
-        .WithConcurrentAnalysis(false)
-        .Verify();
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddPaths("AssertionsShouldBeComplete.FluentAssertions.Latest.cs")
+            .WithConcurrentAnalysis(false)
+            .Verify();
 
     [TestMethod]
     public void AssertionsShouldBeComplete_NFluent_CSharp() =>
-        nfluent
-        .AddTestReference()
-        .AddPaths("AssertionsShouldBeComplete.NFluent.cs")
-        .Verify();
+        nfluent.AddTestReference().AddPaths("AssertionsShouldBeComplete.NFluent.cs").Verify();
 
     [TestMethod]
     public void AssertionsShouldBeComplete_NFluent_CS_Latest() =>
-        nfluent
-        .WithOptions(LanguageOptions.CSharpLatest)
-        .AddTestReference()
-        .AddPaths("AssertionsShouldBeComplete.NFluent.Latest.cs")
-        .Verify();
+        nfluent.WithOptions(LanguageOptions.CSharpLatest).AddTestReference().AddPaths("AssertionsShouldBeComplete.NFluent.Latest.cs").Verify();
 
     [TestMethod]
     public void AssertionsShouldBeComplete_NSubstitute_CS() =>
-        nsubstitute
-        .AddPaths("AssertionsShouldBeComplete.NSubstitute.cs")
-        .Verify();
+        nsubstitute.AddPaths("AssertionsShouldBeComplete.NSubstitute.cs").Verify();
 
     [TestMethod]
     public void AssertionsShouldBeComplete_AllFrameworks_CS() =>
-        allFrameworks
-        .AddPaths("AssertionsShouldBeComplete.AllFrameworks.cs")
-        .Verify();
+        allFrameworks.AddPaths("AssertionsShouldBeComplete.AllFrameworks.cs").Verify();
 }

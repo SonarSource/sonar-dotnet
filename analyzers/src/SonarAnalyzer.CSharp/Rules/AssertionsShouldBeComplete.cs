@@ -45,7 +45,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                                 && (container.Is(KnownType.FluentAssertions_AssertionExtensions)
                                     // ⬆️ Built in assertions. ⬇️ Custom assertions (the majority at least).
                                     || returnType.DerivesFrom(KnownType.FluentAssertions_Primitives_ReferenceTypeAssertions)))),
-                            SyntaxKind.InvocationExpression);
+                        SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NFluent))
                 {
@@ -62,7 +62,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                                 }
                             }
                             && container.Is(KnownType.NFluent_Check)),
-                            SyntaxKind.InvocationExpression);
+                        SyntaxKind.InvocationExpression);
                 }
                 if (start.Compilation.References(KnownAssembly.NSubstitute))
                 {
@@ -79,7 +79,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
                                 }
                             }
                             && container.Is(KnownType.NSubstitute_SubstituteExtensions)),
-                            SyntaxKind.InvocationExpression);
+                        SyntaxKind.InvocationExpression);
                 }
             });
 
@@ -101,8 +101,8 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
             // Any invocation should end with ")". We are in unknown territory here.
             return true;
         }
-        if (closeParen.GetNextToken() is var nextToken
-            && !nextToken.IsKind(SyntaxKind.SemicolonToken))
+        var nextToken = closeParen.GetNextToken();
+        if (!nextToken.IsKind(SyntaxKind.SemicolonToken))
         {
             // There is something right to the invocation that is not a semicolon.
             return true;
@@ -117,7 +117,7 @@ public sealed class AssertionsShouldBeComplete : SonarDiagnosticAnalyzer
             AccessorDeclarationSyntax { Keyword.RawKind: (int)SyntaxKind.GetKeyword } => true,
             ReturnStatementSyntax => true,
             LocalDeclarationStatementSyntax => true,
-            ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax } => true,
+            ExpressionStatementSyntax { Expression: AssignmentExpressionSyntax or ConditionalAccessExpressionSyntax { WhenNotNull: AssignmentExpressionSyntax } } => true,
             _ => false,
         };
     }
