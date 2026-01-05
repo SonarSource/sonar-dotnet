@@ -66,10 +66,33 @@ public class FieldKeyWord
 
 public class NullConditionalAssignment
 {
-    private int compliant; // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2748
+    private int compliant;                      // Compliant https://sonarsource.atlassian.net/browse/NET-2748
+    private int compliantNonNull;               // Compliant
+    private Nesting NestedCompliant;            // Compliant
+    private Nesting NestedCompliantNonNull;     // Compliant
+    private Nesting DeeperNoncompliant;         // Noncompliant
+    private Nesting DeeperNoncompliantNonNull;  // Noncompliant
+    private Nesting OtherDeeperNoncompliant;    // Noncompliant
+    private Nesting AnotherDeeperNoncompliant;  // Noncompliant
+
     public NullConditionalAssignment()
     {
         this?.compliant = 42;
+        compliantNonNull = 42;
+
+        this?.NestedCompliant = new Nesting();
+        NestedCompliantNonNull = new Nesting();
+
+        DeeperNoncompliantNonNull.Prop = new Nesting();
+        this?.DeeperNoncompliant?.Prop = new Nesting();
+        this?.OtherDeeperNoncompliant.Prop = new Nesting();
+        AnotherDeeperNoncompliant?.Prop = new Nesting();
+    }
+
+    public class Nesting
+    {
+        public Nesting Prop { get; set; }
+        public Nesting this[int index] { get { return new Nesting(); } set { } }
     }
 }
 

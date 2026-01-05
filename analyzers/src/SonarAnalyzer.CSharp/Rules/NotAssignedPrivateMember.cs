@@ -124,32 +124,8 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
 
         foreach (var memberUsage in memberUsages)
         {
-            var node = (ExpressionSyntax)memberUsage.Node;
             var memberSymbol = memberUsage.Symbol;
-
-            // Handle "expr.FieldName"
-            if (node.Parent is MemberAccessExpressionSyntax simpleMemberAccess
-                && simpleMemberAccess.Name == node)
-            {
-                node = simpleMemberAccess;
-            }
-
-            // Handle "((expr.FieldName))"
-            node = node.GetSelfOrTopParenthesizedExpression();
-
-            if (IsValueType(memberSymbol))
-            {
-                // Handle (((exp.FieldName)).Member1).Member2
-                var parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
-                while (IsParentMemberAccess(parentMemberAccess, node))
-                {
-                    node = parentMemberAccess.GetSelfOrTopParenthesizedExpression();
-                    parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
-                }
-
-                node = node.GetSelfOrTopParenthesizedExpression();
-            }
-
+            var node = RelevantNode(memberUsage.Node, memberSymbol);
             var parentNode = node.Parent;
 
             if (PreOrPostfixOpSyntaxKinds.Contains(parentNode.Kind())
@@ -163,6 +139,37 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
         }
 
         return assignedMembers;
+    }
+
+    private static SyntaxNode RelevantNode(ExpressionSyntax node, ISymbol memberSymbol)
+    {
+        // Handle "expr.FieldName"
+        if (node.Parent is MemberAccessExpressionSyntax simpleMemberAccess && simpleMemberAccess.Name == node)
+        {
+            node = simpleMemberAccess;
+        }
+        // Handle "expr?.FieldName"
+        else if (node.Parent is MemberBindingExpressionSyntax memberBinding && memberBinding.Name == node)
+        {
+            node = memberBinding;
+        }
+
+        // Handle "((expr.FieldName))"
+        node = node.GetSelfOrTopParenthesizedExpression();
+
+        if (IsValueType(memberSymbol))
+        {
+            // Handle (((exp.FieldName)).Member1).Member2
+            var parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
+            while (IsParentMemberAccess(parentMemberAccess, node))
+            {
+                node = parentMemberAccess.GetSelfOrTopParenthesizedExpression();
+                parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
+            }
+
+            node = node.GetSelfOrTopParenthesizedExpression();
+        }
+        return node;
     }
 
     private static bool IsParentMemberAccess(MemberAccessExpressionSyntax parent, ExpressionSyntax node) =>
