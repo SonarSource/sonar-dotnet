@@ -884,3 +884,39 @@ public class AClass
         }
     }
 }
+
+class Repro_NET2939 // https://sonarsource.atlassian.net/browse/NET-2939
+{
+    private string _someField;
+    private string wrongLocation;
+    private string correctLocationWithField;
+    private string correctLocationWithoutField;
+    public string WrongLocation
+    {
+        get
+        {
+            string a = string.Empty; // Noncompliant Wrong location, should be on 'get' https://sonarsource.atlassian.net/browse/NET-2939
+//                            ^^^^^
+        return a;
+        }
+    }
+
+    public string CorrectLocationWithField
+    {
+        get 
+        {
+            return _someField;           // Noncompliant
+//                 ^^^^^^^^^^
+        }
+    }
+
+    public string CorrectLocationWithoutField
+    {
+        get                         // Noncompliant
+//      ^^^
+        {
+            string a = "string.Empty";
+            return a;
+        }
+    }
+}
