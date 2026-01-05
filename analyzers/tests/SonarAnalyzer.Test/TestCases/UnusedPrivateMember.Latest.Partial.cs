@@ -19,5 +19,5 @@ namespace CSharp13
 
 public partial class PartialEvents
 {
-    private partial event EventHandler Compliant { add { compliant += value; } remove { compliant -= value; } } // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2825
+    private partial event EventHandler Compliant { add { compliant += value; } remove { compliant -= value; } } // Compliant https://sonarsource.atlassian.net/browse/NET-2825
 }

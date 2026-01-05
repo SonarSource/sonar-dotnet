@@ -389,7 +389,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (IsPrivateOrInPrivateType(node.Modifiers))
             {
-                ConditionalStore(DeclaredSymbol(node), IsRemovableMember);
+                var symbol = (IEventSymbol)DeclaredSymbol(node);
+                ConditionalStore(symbol.PartialDefinitionPart ?? symbol, IsRemovableMember);
             }
 
             base.VisitEventDeclaration(node);
