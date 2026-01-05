@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Tests.Diagnostics
 {
@@ -327,5 +328,14 @@ namespace Tests.Diagnostics
         {
             Console.WriteLine("More");
         }
+    }
+
+    public class Awaitable : INotifyCompletion  // inorder for a type to be awaitable, must implement instanced `IsCompleted` property
+    {
+        public Awaitable GetAwaiter() => this;
+
+        public void GetResult() { }
+        public bool IsCompleted => !true;       // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2937
+        public void OnCompleted(Action continuation) { }
     }
 }
