@@ -30,7 +30,7 @@ public class IndexOfCheckAgainstZeroTest
 
     [TestMethod]
     public void IndexOfCheckAgainstZero_CS_Latest() =>
-        builderCS.AddPaths("IndexOfCheckAgainstZero.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
+        builderCS.AddPaths("IndexOfCheckAgainstZero.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void IndexOfCheckAgainstZero_VB() =>

@@ -466,6 +466,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Linq_IQueryable = new("System.Linq.IQueryable", "T");
     public static readonly KnownType System_Linq_Queryable = new("System.Linq.Queryable");
     public static readonly KnownType System_MarshalByRefObject = new("System.MarshalByRefObject");
+    public static readonly KnownType System_MemoryExtensions = new("System.MemoryExtensions");
     public static readonly KnownType System_MTAThreadAttribute = new("System.MTAThreadAttribute");
     public static readonly KnownType System_Net_FtpWebRequest = new("System.Net.FtpWebRequest");
     public static readonly KnownType System_Net_Http_Headers_HttpHeaders = new("System.Net.Http.Headers.HttpHeaders");

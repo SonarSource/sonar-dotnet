@@ -7,14 +7,18 @@ public class Sample
         var span = new Span<char>("Hello".ToCharArray());
         var readonlySpan = new ReadOnlySpan<char>("Hello".ToCharArray());
 
-        if (span.IndexOf('H') > 0) // FN
+        if (span.IndexOf('H') > 0)                  // Noncompliant
         {
             // ...
         }
 
-        if (readonlySpan.IndexOf('H') > 0) // FN
+        if (readonlySpan.IndexOf('H') > 0)          // Noncompliant
         {
             // ...
+        }
+        if(MemoryExtensions.IndexOf(span, 'H') > 0) // Noncompliant
+        {
+
         }
     }
 }

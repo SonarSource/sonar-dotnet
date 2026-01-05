@@ -14,72 +14,72 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class IndexOfCheckAgainstZeroBase<TSyntaxKind, TBinaryExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
+    where TBinaryExpressionSyntax : SyntaxNode
 {
-    public abstract class IndexOfCheckAgainstZeroBase<TSyntaxKind, TBinaryExpressionSyntax> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
-        where TBinaryExpressionSyntax : SyntaxNode
+    protected const string DiagnosticId = "S2692";
+
+    private static readonly string[] TrackedMethods =
+        [
+            "IndexOf",
+            "IndexOfAny",
+            "LastIndexOf",
+            "LastIndexOfAny"
+        ];
+
+    private static readonly ImmutableArray<KnownType> CheckedTypes =
+        ImmutableArray.Create(
+            KnownType.System_MemoryExtensions,  // Span and ReadOnlySpan TrackedMethods are located here
+            KnownType.System_Array,
+            KnownType.System_Collections_Generic_IList_T,
+            KnownType.System_String,
+            KnownType.System_Collections_IList);
+
+    protected abstract TSyntaxKind LessThanExpression { get; }
+    protected abstract TSyntaxKind GreaterThanExpression { get; }
+
+    protected abstract SyntaxNode Left(TBinaryExpressionSyntax binaryExpression);
+    protected abstract SyntaxNode Right(TBinaryExpressionSyntax binaryExpression);
+    protected abstract SyntaxToken OperatorToken(TBinaryExpressionSyntax binaryExpression);
+
+    protected override string MessageFormat => "0 is a valid index, but this check ignores it.";
+
+    protected IndexOfCheckAgainstZeroBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context)
     {
-        protected const string DiagnosticId = "S2692";
-
-        private static readonly string[] TrackedMethods =
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
             {
-                "IndexOf",
-                "IndexOfAny",
-                "LastIndexOf",
-                "LastIndexOfAny"
-            };
-
-        private static readonly ImmutableArray<KnownType> CheckedTypes =
-            ImmutableArray.Create(
-                KnownType.System_Array,
-                KnownType.System_Collections_Generic_IList_T,
-                KnownType.System_String,
-                KnownType.System_Collections_IList);
-
-        protected abstract TSyntaxKind LessThanExpression { get; }
-        protected abstract TSyntaxKind GreaterThanExpression { get; }
-
-        protected abstract SyntaxNode Left(TBinaryExpressionSyntax binaryExpression);
-        protected abstract SyntaxNode Right(TBinaryExpressionSyntax binaryExpression);
-        protected abstract SyntaxToken OperatorToken(TBinaryExpressionSyntax binaryExpression);
-
-        protected override string MessageFormat => "0 is a valid index, but this check ignores it.";
-
-        protected IndexOfCheckAgainstZeroBase() : base(DiagnosticId) { }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                Language.GeneratedCodeRecognizer,
-                c =>
+                var lessThan = (TBinaryExpressionSyntax)c.Node;
+                if (IsInvalidComparison(Left(lessThan), Right(lessThan), c.Model))
                 {
-                    var lessThan = (TBinaryExpressionSyntax)c.Node;
-                    if (IsInvalidComparison(Left(lessThan), Right(lessThan), c.Model))
-                    {
-                        c.ReportIssue(Rule, Left(lessThan).CreateLocation(OperatorToken(lessThan)));
-                    }
-                },
-                LessThanExpression);
+                    c.ReportIssue(Rule, Left(lessThan).CreateLocation(OperatorToken(lessThan)));
+                }
+            },
+            LessThanExpression);
 
-            context.RegisterNodeAction(
-                Language.GeneratedCodeRecognizer,
-                c =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var greaterThan = (TBinaryExpressionSyntax)c.Node;
+                if (IsInvalidComparison(Right(greaterThan), Left(greaterThan), c.Model))
                 {
-                    var greaterThan = (TBinaryExpressionSyntax)c.Node;
-                    if (IsInvalidComparison(Right(greaterThan), Left(greaterThan), c.Model))
-                    {
-                        c.ReportIssue(Rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan)));
-                    }
-                },
-                GreaterThanExpression);
-        }
-
-        private bool IsInvalidComparison(SyntaxNode constantExpression, SyntaxNode methodInvocationExpression, SemanticModel semanticModel) =>
-            Language.ExpressionNumericConverter.ConstantIntValue(constantExpression) is { } constValue
-            && constValue == 0
-            && semanticModel.GetSymbolInfo(methodInvocationExpression).Symbol is IMethodSymbol indexOfSymbol
-            && TrackedMethods.Any(x => x.Equals(indexOfSymbol.Name, Language.NameComparison))
-            && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
+                    c.ReportIssue(Rule, OperatorToken(greaterThan).CreateLocation(Right(greaterThan)));
+                }
+            },
+            GreaterThanExpression);
     }
+
+    private bool IsInvalidComparison(SyntaxNode constantExpression, SyntaxNode methodInvocationExpression, SemanticModel model) =>
+        Language.ExpressionNumericConverter.ConstantIntValue(constantExpression) is { } constValue
+        && constValue == 0
+        && model.GetSymbolInfo(methodInvocationExpression).Symbol is IMethodSymbol indexOfSymbol
+        && TrackedMethods.Any(x => x.Equals(indexOfSymbol.Name, Language.NameComparison))
+        && indexOfSymbol.ContainingType.DerivesOrImplementsAny(CheckedTypes);
 }
