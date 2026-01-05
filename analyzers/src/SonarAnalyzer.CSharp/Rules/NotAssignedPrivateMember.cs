@@ -30,16 +30,15 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
     private const string MessageFormat = "Remove unassigned {0} '{1}', or set its value.";
     private const Accessibility MaxAccessibility = Accessibility.Private;
 
-    private static readonly DiagnosticDescriptor Rule =
-        DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private static readonly ISet<SyntaxKind> PreOrPostfixOpSyntaxKinds = new HashSet<SyntaxKind>
-    {
+    private static readonly HashSet<SyntaxKind> PreOrPostfixOpSyntaxKinds =
+    [
         SyntaxKind.PostDecrementExpression,
         SyntaxKind.PostIncrementExpression,
         SyntaxKind.PreDecrementExpression,
         SyntaxKind.PreIncrementExpression,
-    };
+    ];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -48,109 +47,84 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
             c =>
             {
                 var namedType = (INamedTypeSymbol)c.Symbol;
-                if (TypeDefinitionShouldBeSkipped(namedType))
+                if (TypeDefinitionShouldBeAnalyzed(namedType))
                 {
-                    return;
-                }
-
-                var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, c.Compilation);
-
-                var allCandidateMembers = GetCandidateDeclarations(removableDeclarationCollector);
-                if (!allCandidateMembers.Any())
-                {
-                    return;
-                }
-
-                var usedMembers = GetMemberUsages(removableDeclarationCollector, new HashSet<ISymbol>(allCandidateMembers.Select(t => t.Symbol)));
-                var usedMemberSymbols = new HashSet<ISymbol>(usedMembers.Select(tuple => tuple.Symbol));
-
-                var assignedMemberSymbols = GetAssignedMemberSymbols(usedMembers);
-                var unassignedUsedMemberSymbols = allCandidateMembers.Where(x => usedMemberSymbols.Contains(x.Symbol) && !assignedMemberSymbols.Contains(x.Symbol));
-
-                foreach (var candidateMember in unassignedUsedMemberSymbols)
-                {
-                    var field = candidateMember.Node as VariableDeclaratorSyntax;
-                    var property = candidateMember.Node as PropertyDeclarationSyntax;
-
-                    var memberType = field is null ? "auto-property" : "field";
-
-                    var location = field is null
-                        ? property.Identifier.GetLocation()
-                        : field.Identifier.GetLocation();
-
-                    c.ReportIssue(Rule, location, memberType, candidateMember.Symbol.Name);
+                    var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, c.Compilation);
+                    var allCandidateMembers = CandidateDeclarations(removableDeclarationCollector);
+                    if (allCandidateMembers.Any())
+                    {
+                        var usedMembers = MemberUsages(removableDeclarationCollector, allCandidateMembers.Select(t => t.Symbol).ToHashSet());
+                        var usedMemberSymbols = usedMembers.Select(x => x.Symbol).ToHashSet();
+                        var unassignedUsedMemberSymbols = allCandidateMembers.Where(x => usedMemberSymbols.Contains(x.Symbol) && !AssignedMemberSymbols(usedMembers).Contains(x.Symbol));
+                        foreach (var candidateMember in unassignedUsedMemberSymbols)
+                        {
+                            c.ReportIssue(
+                                Rule,
+                                candidateMember.Node.GetIdentifier().Value.GetLocation(),
+                                candidateMember.Node is VariableDeclaratorSyntax ? "field" : "auto-property",
+                                candidateMember.Symbol.Name);
+                        }
+                    }
                 }
             },
             SymbolKind.NamedType);
 
-    private static List<NodeSymbolAndModel<SyntaxNode, ISymbol>> GetCandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
+    private static List<NodeSymbolAndModel<SyntaxNode, ISymbol>> CandidateDeclarations(CSharpRemovableDeclarationCollector removableDeclarationCollector)
     {
         var candidateFields = removableDeclarationCollector.RemovableFieldLikeDeclarations(new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
-                                                           .Where(x => !IsInitializedOrFixed((VariableDeclaratorSyntax)x.Node)
-                                                               && !HasStructLayoutAttribute(x.Symbol.ContainingType));
-
+            .Where(x => !IsInitializedOrFixed((VariableDeclaratorSyntax)x.Node)
+                        && !HasStructLayoutAttribute(x.Symbol.ContainingType));
         var candidateProperties = removableDeclarationCollector.RemovableDeclarations(new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
-                                                               .Where(x => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)x.Node)
-                                                                   && !HasStructLayoutAttribute(x.Symbol.ContainingType));
-
+            .Where(x => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)x.Node)
+                        && !HasStructLayoutAttribute(x.Symbol.ContainingType));
         return candidateFields.Concat(candidateProperties).ToList();
     }
 
-    private static bool TypeDefinitionShouldBeSkipped(ITypeSymbol namedType) =>
-        !namedType.IsClassOrStruct()
-        || HasStructLayoutAttribute(namedType)
-        || namedType.ContainingType is not null
-        || namedType.HasAttribute(KnownType.System_SerializableAttribute);
+    private static bool TypeDefinitionShouldBeAnalyzed(ITypeSymbol namedType) =>
+        namedType.IsClassOrStruct()
+        && !HasStructLayoutAttribute(namedType)
+        && namedType.ContainingType is null
+        && !namedType.HasAttribute(KnownType.System_SerializableAttribute);
 
     private static bool HasStructLayoutAttribute(ISymbol namedTypeSymbol) =>
         namedTypeSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
 
-    private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator)
-    {
-        if (declarator.Parent.Parent is BaseFieldDeclarationSyntax fieldDeclaration
-            && fieldDeclaration.Modifiers.Any(SyntaxKind.FixedKeyword))
-        {
-            return true;
-        }
-
-        return declarator.Initializer is not null;
-    }
+    private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator) =>
+        declarator.Initializer is not null
+        || (declarator.Parent.Parent is BaseFieldDeclarationSyntax fieldDeclaration
+            && fieldDeclaration.Modifiers.Any(SyntaxKind.FixedKeyword));
 
     private static bool IsAutoPropertyWithNoInitializer(PropertyDeclarationSyntax declaration) =>
         declaration.Initializer is null
         && declaration.AccessorList is not null
-        && declaration.AccessorList.Accessors.All(acc => acc.Body is null && acc.ExpressionBody is null);
+        && declaration.AccessorList.Accessors.All(x => x.Body is null && x.ExpressionBody is null);
 
-    private static IList<MemberUsage> GetMemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector, HashSet<ISymbol> declaredPrivateSymbols)
+    private static IList<MemberUsage> MemberUsages(CSharpRemovableDeclarationCollector removableDeclarationCollector, HashSet<ISymbol> declaredPrivateSymbols)
     {
-        var symbolNames = declaredPrivateSymbols.Select(s => s.Name).ToHashSet();
+        var symbolNames = declaredPrivateSymbols.Select(x => x.Name).ToHashSet();
+        var usages = removableDeclarationCollector.TypeDeclarations
+            .SelectMany(x => x.Node.DescendantNodes().Select(SimpleName).WhereNotNull()
+                                .Where(x => symbolNames.Contains(x.Identifier.ValueText))
+                                .Select(node => new MemberUsage(node, x.Model.GetSymbolInfo(node).Symbol, x.Model)));
 
-        var identifiers = removableDeclarationCollector.TypeDeclarations
-            .SelectMany(container => container.Node.DescendantNodes()
-                .Where(node => node.IsKind(SyntaxKind.IdentifierName))
-                .Cast<IdentifierNameSyntax>()
-                .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                .Select(x => new MemberUsage(x, container.Model.GetSymbolInfo(x).Symbol, container.Model)));
+        return usages.Where(x => x.Symbol is IFieldSymbol or IPropertySymbol).ToList();
 
-        var generic = removableDeclarationCollector.TypeDeclarations
-            .SelectMany(container => container.Node.DescendantNodes()
-                .Where(node => node.IsKind(SyntaxKind.GenericName))
-                .Cast<GenericNameSyntax>()
-                .Where(x => symbolNames.Contains(x.Identifier.ValueText))
-                .Select(x => new MemberUsage(x, container.Model.GetSymbolInfo(x).Symbol, container.Model)));
-
-        return identifiers.Concat(generic)
-            .Where(x => x.Symbol is IFieldSymbol or IPropertySymbol)
-            .ToList();
+        static SimpleNameSyntax SimpleName(SyntaxNode node) =>
+            node switch
+            {
+                IdentifierNameSyntax identifierName => identifierName,
+                GenericNameSyntax genericName => genericName,
+                _ => null
+            };
     }
 
-    private static ISet<ISymbol> GetAssignedMemberSymbols(IList<MemberUsage> memberUsages)
+    private static ISet<ISymbol> AssignedMemberSymbols(IList<MemberUsage> memberUsages)
     {
         var assignedMembers = new HashSet<ISymbol>();
 
         foreach (var memberUsage in memberUsages)
         {
-            ExpressionSyntax node = memberUsage.Node;
+            var node = (ExpressionSyntax)memberUsage.Node;
             var memberSymbol = memberUsage.Symbol;
 
             // Handle "expr.FieldName"
