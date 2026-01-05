@@ -72,7 +72,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void ConfiguringLoggers_AspNetCoreLatest_CS() =>
             builderCS.AddPaths("ConfiguringLoggers_AspNetCore6.cs")
-                .AddReferences(AspNetCoreLoggingReferences("10.0.0-rc.2.25502.107"))    // Change back to TestConstants.NuGetLatestVersion when .NET 10 is in GA - NET-2572
+                .AddReferences(AspNetCoreLoggingReferences(TestConstants.NuGetLatestVersion))
                 .Verify();
 
         [TestMethod]
