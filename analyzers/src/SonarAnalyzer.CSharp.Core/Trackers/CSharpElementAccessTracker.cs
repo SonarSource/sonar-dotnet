@@ -21,29 +21,39 @@ namespace SonarAnalyzer.CSharp.Core.Trackers;
 public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-    protected override SyntaxKind[] TrackedSyntaxKinds { get; } = new[] { SyntaxKind.ElementAccessExpression };
+    protected override SyntaxKind[] TrackedSyntaxKinds { get; } = [SyntaxKind.ElementAccessExpression, SyntaxKind.ElementBindingExpression];
 
     public override object AssignedValue(ElementAccessContext context) =>
         context.Node.Ancestors().FirstOrDefault(x => x.IsKind(SyntaxKind.SimpleAssignmentExpression)) is AssignmentExpressionSyntax assignment
             ? assignment.Right.FindConstantValue(context.Model)
             : null;
 
-    public override Condition ArgumentAtIndexEquals(int index, string value) =>
-        context => ((ElementAccessExpressionSyntax)context.Node).ArgumentList is { } argumentList
-                   && index < argumentList.Arguments.Count
-                   && argumentList.Arguments[index].Expression.FindStringConstant(context.Model) == value;
+    public override Condition ArgumentAtIndexEquals(int index, string value)
+    {
+        return context => ArgumentList(context.Node) is { } arguments
+                            && index < arguments.Count
+                            && arguments[index].Expression.FindStringConstant(context.Model) == value;
+
+        static SeparatedSyntaxList<ArgumentSyntax>? ArgumentList(SyntaxNode node) => node switch
+        {
+            ElementAccessExpressionSyntax elementAccess => elementAccess.ArgumentList.Arguments,
+            ElementBindingExpressionSyntax elementBinding => elementBinding.ArgumentList.Arguments,
+            _ => null
+        };
+    }
 
     public override Condition MatchSetter() =>
         context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
 
     public override Condition MatchProperty(MemberDescriptor member) =>
-        context => ((ElementAccessExpressionSyntax)context.Node).Expression switch
+        context => context.Node switch
         {
-            MemberAccessExpressionSyntax memberAccess =>
-                memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                && member.IsMatch(memberAccess.Name.Identifier.ValueText, context.Model.GetTypeInfo(memberAccess.Expression).Type, Language.NameComparison),
-            MemberBindingExpressionSyntax memberBinding =>
-                member.IsMatch(memberBinding.Name.Identifier.ValueText, context.Model.GetSymbolInfo(memberBinding).Symbol?.ContainingType, Language.NameComparison),
+            ElementAccessExpressionSyntax { Expression: MemberAccessExpressionSyntax { RawKind: (int)SyntaxKind.SimpleMemberAccessExpression } memberAccessExpression } =>
+                member.IsMatch(memberAccessExpression.Name.Identifier.ValueText, context.Model.GetTypeInfo(memberAccessExpression.Expression).Type, Language.NameComparison),
+            ElementAccessExpressionSyntax { Expression: MemberBindingExpressionSyntax memberBindingExpression } =>
+                member.IsMatch(memberBindingExpression.Name.Identifier.ValueText, context.Model.GetSymbolInfo(memberBindingExpression).Symbol?.ContainingType, Language.NameComparison),
+            ElementBindingExpressionSyntax { Parent.Parent: ConditionalAccessExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccessExpression } } =>
+                member.IsMatch(memberAccessExpression.Name.Identifier.ValueText, context.Model.GetTypeInfo(memberAccessExpression.Expression).Type, Language.NameComparison),
             _ => false
         };
 }
