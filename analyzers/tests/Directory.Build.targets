@@ -2,11 +2,6 @@
 <Project>
   <Import Project="$(MSBuildThisFileDirectory)\..\Common.targets" />
 
-  <PropertyGroup>
-  <!-- Workaround for https://github.com/dotnet/sdk/issues/51265. Can be removed when net10 is in GA. NET-2573 -->
-    <RestoreEnablePackagePruning>false</RestoreEnablePackagePruning>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="altcover" Version="9.0.102" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
