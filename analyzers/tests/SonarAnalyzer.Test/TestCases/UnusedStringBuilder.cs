@@ -174,7 +174,7 @@ public class NullConditionalOperator
 {
     public void Method()
     {
-        StringBuilder compliant = new StringBuilder(); // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2832
+        StringBuilder compliant = new StringBuilder(); // Compliant https://sonarsource.atlassian.net/browse/NET-2832
         StringBuilder AlsoCompliant = new StringBuilder();
         var y = compliant?.ToString();
         var z = AlsoCompliant.ToString();

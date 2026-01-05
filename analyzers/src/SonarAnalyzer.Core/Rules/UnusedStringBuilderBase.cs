@@ -23,46 +23,45 @@ public abstract class UnusedStringBuilderBase<TSyntaxKind, TVariableDeclarator, 
 {
     private const string DiagnosticId = "S3063";
 
-    private readonly string[] stringBuilderAccessInvocations = { "ToString", "CopyTo", "GetChunks" };
-    private readonly string[] stringBuilderAccessExpressions = { "Length" };
+    private readonly string[] stringBuilderAccessInvocations = ["ToString", "CopyTo", "GetChunks"];
+    private readonly string[] stringBuilderAccessExpressions = ["Length"];
+    protected abstract SyntaxNode Scope(TVariableDeclarator declarator);
+    protected abstract ILocalSymbol RetrieveStringBuilderObject(SemanticModel model, TVariableDeclarator declaration);
+    protected abstract SyntaxNode StringBuilderReadExpression(SemanticModel model, SyntaxNode node);
+    protected abstract bool DescendIntoChildren(SyntaxNode node);
 
     protected override string MessageFormat => """Remove this "StringBuilder"; ".ToString()" is never called.""";
 
-    protected abstract SyntaxNode GetScope(TVariableDeclarator declarator);
-    protected abstract ILocalSymbol RetrieveStringBuilderObject(SemanticModel semanticModel, TVariableDeclarator declaration);
-    protected abstract bool IsStringBuilderRead(SemanticModel model, ILocalSymbol symbol, SyntaxNode node);
-    protected abstract bool DescendIntoChildren(SyntaxNode node);
-
     protected UnusedStringBuilderBase() : base(DiagnosticId) { }
-
-    protected sealed override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-        {
-            var variableDeclarator = (TVariableDeclarator)c.Node;
-
-            if (RetrieveStringBuilderObject(c.Model, variableDeclarator) is { } symbol
-                && GetScope(variableDeclarator) is { } scope
-                && !IsStringBuilderAccessed(c.Model, symbol, scope))
-            {
-                c.ReportIssue(Rule, variableDeclarator);
-            }
-        }, Language.SyntaxKind.VariableDeclarator);
-
-    internal bool IsSameReference(SemanticModel semanticModel, ILocalSymbol symbol, SyntaxNode expression) =>
-        expression is not null && GetLocalReferences(expression).Any(x => IsSameVariable(semanticModel, symbol, x));
-
-    private bool IsSameVariable(SemanticModel semanticModel, ILocalSymbol symbol, SyntaxNode identifier) =>
-        Language.GetName(identifier).Equals(symbol.Name, Language.NameComparison) && symbol.Equals(semanticModel.GetSymbolInfo(identifier).Symbol);
-
-    private static IEnumerable<TIdentifierName> GetLocalReferences(SyntaxNode node) =>
-        node.DescendantNodesAndSelf().OfType<TIdentifierName>();
-
-    private bool IsStringBuilderAccessed(SemanticModel model, ILocalSymbol symbol, SyntaxNode scope) =>
-        scope.DescendantNodes(DescendIntoChildren).Any(node => IsStringBuilderRead(model, symbol, node));
 
     internal bool IsAccessInvocation(string invocation) =>
         stringBuilderAccessInvocations.Any(x => x.Equals(invocation, Language.NameComparison));
 
     internal bool IsAccessExpression(string expression) =>
         stringBuilderAccessExpressions.Any(x => x.Equals(expression, Language.NameComparison));
+
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var variableDeclarator = (TVariableDeclarator)c.Node;
+
+                if (RetrieveStringBuilderObject(c.Model, variableDeclarator) is { } symbol
+                    && Scope(variableDeclarator) is { } scope
+                    && !IsStringBuilderAccessed(c.Model, symbol, scope))
+                {
+                    c.ReportIssue(Rule, variableDeclarator);
+                }
+            },
+            Language.SyntaxKind.VariableDeclarator);
+
+    private bool IsSameVariable(SemanticModel model, ILocalSymbol symbol, SyntaxNode identifier) =>
+        Language.GetName(identifier).Equals(symbol.Name, Language.NameComparison) && symbol.Equals(model.GetSymbolInfo(identifier).Symbol);
+
+    private static IEnumerable<TIdentifierName> LocalReferences(SyntaxNode node) =>
+        node.DescendantNodesAndSelf().OfType<TIdentifierName>();
+
+    private bool IsStringBuilderAccessed(SemanticModel model, ILocalSymbol symbol, SyntaxNode scope) =>
+        scope.DescendantNodes(DescendIntoChildren).Any(x => StringBuilderReadExpression(model, x) is { } expression && LocalReferences(expression).Any(x => IsSameVariable(model, symbol, x)));
 }
