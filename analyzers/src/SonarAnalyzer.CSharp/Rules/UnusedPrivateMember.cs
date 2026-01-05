@@ -159,7 +159,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     }
 
     private static bool IsMentionedInDebuggerDisplay(ISymbol symbol, SymbolUsageCollector usageCollector) =>
-            usageCollector.DebuggerDisplayValues.Any(x => x.Contains(symbol.Name));
+            usageCollector.DebuggerDisplayValues.Any(x => x.Contains(symbol.Name) || (symbol is IPropertySymbol { IsIndexer: true } && x.Contains("this[")));
 
     private static void ReportUsedButUnreadFields(SonarSymbolReportingContext context, SymbolUsageCollector usageCollector, IEnumerable<ISymbol> removableSymbols)
     {
@@ -437,7 +437,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             if (IsPrivateOrInPrivateType(node.Modifiers))
             {
                 var symbol = (IMethodSymbol)DeclaredSymbol(node);
-                ConditionalStore(symbol.PartialDefinitionPart ?? symbol, IsRemovableMethod);
+                ConditionalStore(symbol.AssociatedExtensionImplementation ?? symbol.PartialDefinitionPart ?? symbol, IsRemovableMethod);
             }
 
             base.VisitMethodDeclaration(node);

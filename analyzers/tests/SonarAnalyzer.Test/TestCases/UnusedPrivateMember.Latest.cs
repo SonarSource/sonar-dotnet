@@ -938,8 +938,8 @@ public static class Extensions // Repro for https://sonarsource.atlassian.net/br
             List<string>.PrivateStaticExtensionAsExtension();
         }
 
-        private string PrivateExtensionAsMethod() => "a";                 // Noncompliant FP
-        private static string PrivateStaticExtensionAsMethod() => "a";    // Noncompliant FP
+        private string PrivateExtensionAsMethod() => "a";                 // Compliant
+        private static string PrivateStaticExtensionAsMethod() => "a";    // Compliant
 
         private string PrivateExtensionAsExtension() => "a";
         private static string PrivateStaticExtensionAsExtension() => "a";
@@ -988,7 +988,7 @@ public class NET_2805Repro // https://sonarsource.atlassian.net/browse/NET-2805
     [DebuggerDisplay("{this[0]}, {this[1]}, {this[2]}, {this[3]}, {this[4]}")]
     private readonly record struct WithDebugger(int Value)
     {
-        public int this[int pos] => (Value >> (pos << 2)) & 7; // Noncompliant FP: Called by 'new WithDebugger(value)[3]' and DebuggerDisplay,
+        public int this[int pos] => (Value >> (pos << 2)) & 7; // Compliant Called by 'new WithDebugger(value)[3]' and DebuggerDisplay,
     }
 
     public int AlsoCallingMethod(int value) => new WithoutDebugger(value)[3];
