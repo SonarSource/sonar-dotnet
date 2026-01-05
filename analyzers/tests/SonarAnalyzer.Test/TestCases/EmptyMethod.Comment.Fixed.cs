@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 namespace Tests.Diagnostics
 {
@@ -115,5 +116,17 @@ namespace Tests.Diagnostics
     {
         void FirstInterface.Explicit() { } // Compliant
         public void SameMethod() { } // Compliant
+    }
+
+    public class Awaitable : INotifyCompletion
+    {
+        public Awaitable GetAwaiter() => this;
+
+        public void GetResult()
+        {
+            // Method intentionally left empty.
+        }         // Fixed
+        public bool IsCompleted => !true;
+        public void OnCompleted(Action continuation) { }
     }
 }
