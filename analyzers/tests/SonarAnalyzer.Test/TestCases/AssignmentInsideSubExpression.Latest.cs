@@ -157,5 +157,18 @@ namespace CSharp14
                                                                 // Error@-1 [CS0029]
         }
         void SomeMethod(Nesting nesting) { }
+
+        public class ConditionalAccessExpressionOutsideSubExpression
+        {
+            public void Test(Sample sample)
+            {
+                string mappingSpan = null;
+                sample?.Invoke(new Sample(mappingSpan = "7"));  // Noncompliant
+            }
+            public class Sample(string x)
+            {
+                public void Invoke(object b) { }
+            }
+        }
     }
 }

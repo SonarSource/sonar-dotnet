@@ -84,7 +84,7 @@ public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
         || (AllowedParentExpressionKinds.Contains(expressionParent.Kind()) && !IsInInitializerExpression(expressionParent));
 
     private static bool IsCompliantNullConditionalAssignment(AssignmentExpressionSyntax assignment) =>
-        assignment.AncestorsAndSelf().OfType<ConditionalAccessExpressionSyntax>().LastOrDefault() is { } conditionalAccess
+        assignment.AncestorsAndSelf().TakeWhile(x => x is ExpressionSyntax).OfType<ConditionalAccessExpressionSyntax>().LastOrDefault() is { } conditionalAccess
         && conditionalAccess.Parent.FirstAncestorOrSelf<ExpressionSyntax>() is var outerExpression
         && (outerExpression is null || AllowedParentExpressionKinds.Contains(outerExpression.Kind()));
 
