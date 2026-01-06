@@ -109,11 +109,24 @@ namespace CSharp13
 
 public class FieldKeyword
 {
-    public string Prop // FN https://sonarsource.atlassian.net/browse/NET-2813
+    public string BodyProp1                                         // Noncompliant https://sonarsource.atlassian.net/browse/NET-2813
     {
         get { return field; }
         set { field = value; }
     }
+    public string BodyProp3                                         // Compliant
+    {
+        set { field = value; }
+    }
+    public string BodyProp2                                         // Compliant FN https://sonarsource.atlassian.net/browse/NET-2943
+    {
+        get { return field; }
+    }
+    private int ArrowProp1 { get => field; set => field = value; }  // Noncompliant
+    private int ArrowProp2 { set => field = value; }	            // Compliant
+    private int ArrowProp3 { get => field; }                        // Compliant FN https://sonarsource.atlassian.net/browse/NET-2943
+
+    private int ArrowProp => field;                                // Noncompliant
 }
 
 public static class Extensions

@@ -59,9 +59,9 @@ public partial class PartialProperties
 public class FieldKeyWord
 {
     public int Prop1 => field;
-    private int Prop2 => field;                               // FN https://sonarsource.atlassian.net/browse/NET-2771
+    private int Prop2 => field;                               // Compliant handled by S2292
     public int Prop3 { get => field; set => field = value; }
-    private int Prop4 { get => field; set => field = value; } // FN https://sonarsource.atlassian.net/browse/NET-2771
+    private int Prop4 { get => field; set => field = value; } // Compliant handled by S2292
 }
 
 public class NullConditionalAssignment

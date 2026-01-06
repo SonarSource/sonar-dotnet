@@ -33,20 +33,21 @@ public sealed class PropertyToAutoProperty : SonarDiagnosticAnalyzer
             {
                 var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
 
-                if (propertyDeclaration.AccessorList?.Accessors is { Count: AccessorCount } accessors
-                    && !HasDifferentModifiers(accessors)
-                    && !HasAttributes(accessors)
-                    && !propertyDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-                    && accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration)) is { } getter
-                    && accessors.FirstOrDefault(x => x.Kind() is SyntaxKind.SetAccessorDeclaration or SyntaxKindEx.InitAccessorDeclaration) is { } setter
-                    && FieldFromGetter(getter, c.Model) is { } getterField
-                    && FieldFromSetter(setter, c.Model) is { } setterField
-                    && getterField.Equals(setterField)
-                    && !getterField.GetAttributes().Any()
-                    && !getterField.IsVolatile
-                    && c.Model.GetDeclaredSymbol(propertyDeclaration) is { } propertySymbol
-                    && getterField.IsStatic == propertySymbol.IsStatic
-                    && getterField.Type.Equals(propertySymbol.Type))
+                if ((propertyDeclaration.AccessorList?.Accessors is { Count: AccessorCount } accessors
+                        && !HasDifferentModifiers(accessors)
+                        && !HasAttributes(accessors)
+                        && !propertyDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
+                        && accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration)) is { } getter
+                        && accessors.FirstOrDefault(x => x.Kind() is SyntaxKind.SetAccessorDeclaration or SyntaxKindEx.InitAccessorDeclaration) is { } setter
+                        && FieldFromGetter(getter, c.Model) is { } getterField
+                        && FieldFromSetter(setter, c.Model) is { } setterField
+                        && getterField.Equals(setterField)
+                        && !getterField.GetAttributes().Any()
+                        && !getterField.IsVolatile
+                        && c.Model.GetDeclaredSymbol(propertyDeclaration) is { } propertySymbol
+                        && getterField.IsStatic == propertySymbol.IsStatic
+                        && getterField.Type.Equals(propertySymbol.Type))
+                    || (propertyDeclaration.ExpressionBody is ArrowExpressionClauseSyntax expression && expression.Expression.IsKind(SyntaxKindEx.FieldExpression)))
                 {
                     c.ReportIssue(Rule, propertyDeclaration.Identifier);
                 }
@@ -85,34 +86,26 @@ public sealed class PropertyToAutoProperty : SonarDiagnosticAnalyzer
                 : null;
     }
 
-    private static IFieldSymbol FieldSymbol(ExpressionSyntax expression, INamedTypeSymbol declaringType, SemanticModel model)
-    {
-        if (expression is IdentifierNameSyntax)
+    private static IFieldSymbol FieldSymbol(ExpressionSyntax expression, INamedTypeSymbol declaringType, SemanticModel model) =>
+        expression switch
         {
-            return model.GetSymbolInfo(expression).Symbol as IFieldSymbol;
-        }
-        else if (expression is MemberAccessExpressionSyntax memberAccess && memberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression))
-        {
-            return memberAccess.Expression is ThisExpressionSyntax
-                || (memberAccess.Expression is IdentifierNameSyntax identifier && model.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type && type.Equals(declaringType))
-                    ? model.GetSymbolInfo(expression).Symbol as IFieldSymbol
-                    : null;
-        }
-        else
-        {
-            return null;
-        }
-    }
+            IdentifierNameSyntax => model.GetSymbolInfo(expression).Symbol as IFieldSymbol,
+            MemberAccessExpressionSyntax { RawKind: (int)SyntaxKind.SimpleMemberAccessExpression, Expression: ThisExpressionSyntax } => model.GetSymbolInfo(expression).Symbol as IFieldSymbol,
+            MemberAccessExpressionSyntax { RawKind: (int)SyntaxKind.SimpleMemberAccessExpression, Expression: IdentifierNameSyntax identifier }
+                when model.GetSymbolInfo(identifier).Symbol is INamedTypeSymbol type && type.Equals(declaringType) => model.GetSymbolInfo(expression).Symbol as IFieldSymbol,
+            { RawKind: (int)SyntaxKindEx.FieldExpression } => model.GetSymbolInfo(expression).Symbol as IFieldSymbol,
+            _ => null
+        };
 
     private static IFieldSymbol FieldFromGetter(AccessorDeclarationSyntax getter, SemanticModel model)
     {
-        var returnedExpression = GetReturnExpressionFromBody(getter.Body) ?? getter.ExpressionBody?.Expression;
+        var returnedExpression = ReturnExpression(getter.Body) ?? getter.ExpressionBody?.Expression;
 
         return returnedExpression is null
             ? null
             : FieldSymbol(returnedExpression, model.GetDeclaredSymbol(getter).ContainingType, model);
 
-        static ExpressionSyntax GetReturnExpressionFromBody(BlockSyntax body) =>
+        static ExpressionSyntax ReturnExpression(BlockSyntax body) =>
             body is not null && body.Statements.Count == 1 && body.Statements[0] is ReturnStatementSyntax returnStatement
                 ? returnStatement.Expression
                 : null;

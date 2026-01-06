@@ -130,4 +130,29 @@ namespace Tests.Diagnostics
             set => backingField = value;
         }
     }
+
+    public class SingleAccessorAutoProperty
+    {
+        private int backingGet;
+        private int backingGetArrow;
+        private int backingSet;
+        private int backingSetArrow;
+        public int GetterOnlyArrow  // Compliant FN https://sonarsource.atlassian.net/browse/NET-2943
+        {
+            get => backingGetArrow;
+        }
+        public int SetterOnlyArrow  // Compliant - Auto-implemented properties must have get accessors
+        {
+            set => backingSetArrow = value;
+        }
+
+        public int GetterOnlyReturn // Compliant FN https://sonarsource.atlassian.net/browse/NET-2943
+        {
+            get { return backingGet; }
+        }
+        public int SetterOnly       // Compliant - Auto-implemented properties must have get accessors
+        {
+            set { backingSet = value; }
+        }
+    }
 }
