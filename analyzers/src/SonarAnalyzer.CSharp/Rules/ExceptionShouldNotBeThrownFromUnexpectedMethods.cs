@@ -105,7 +105,7 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
         || method.IsObjectGetHashCode()
         || method.IsObjectToString()
         || method.IsIDisposableDispose()
-        || method.IsIEquatableEquals()
+        || method.IsImplementingInterfaceMember(KnownType.System_IEquatable_T, "Equals")
         || IsModuleInitializer(method);
 
     private static bool IsModuleInitializer(IMethodSymbol method) =>
@@ -116,15 +116,15 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
         if (node.ArrowExpressionBody() is { } expressionBody
             && GetLocationToReport(
                 expressionBody.Expression.DescendantNodesAndSelf().Where(ThrowExpressionSyntaxWrapper.IsInstance).Select(x => (ThrowExpressionSyntaxWrapper)x),
-                x => x.SyntaxNode,
+                x => x.Node,
                 x => x.Expression) is { } throwExpressionLocation)
         {
             context.ReportIssue(Rule, throwExpressionLocation, "expression");
         }
         else if (GetLocationToReport(
-            node.DescendantNodes().OfType<ThrowStatementSyntax>().Where(x => x.Expression is not null),
-            x => x,
-            x => x.Expression) is { } throwStatementLocation)
+                    node.DescendantNodes().OfType<ThrowStatementSyntax>().Where(x => x.Expression is not null),
+                    x => x,
+                    x => x.Expression) is { } throwStatementLocation)
         {
             context.ReportIssue(Rule, throwStatementLocation, "statement");
         }

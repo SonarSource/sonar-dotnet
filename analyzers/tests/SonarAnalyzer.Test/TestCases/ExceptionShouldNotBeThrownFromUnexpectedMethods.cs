@@ -352,7 +352,7 @@ public struct S
 class Equatable : IEquatable<S>
 {
     public bool Equals(S other) => throw new Exception();   // Noncompliant
-    public bool Equals(string s) => throw new Exception();  // Noncompliant FP NET-2707
+    public bool Equals(string s) => throw new Exception();  // Compliant
 }
 
 namespace Extensions
@@ -366,4 +366,13 @@ namespace Extensions
         public static string ToString(this Sample x) { throw new Exception(); }         // Compliant
         public static void Dispose(this Sample x) { throw new Exception(); }            // Compliant
     }
+}
+
+class Sample : ICustom<Sample>
+{
+    public bool Equals(Sample s) => throw new Exception(); // Compliant
+}
+interface ICustom<T>
+{
+    bool Equals(T t);
 }

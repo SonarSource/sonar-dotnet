@@ -132,7 +132,7 @@ namespace Extensions
 
         extension(Sample s)
         {
-            public bool Equals(object obj) => throw new Exception();    // Noncompliant FP NET-2707
+            public bool Equals(object obj) => throw new Exception();    // Compliant NET-2707
             public int GetHashCode() => throw new Exception();          // Compliant
             public string ToString() { throw new Exception(); }         // Compliant
             public void Dispose() { throw new Exception(); }            // Compliant

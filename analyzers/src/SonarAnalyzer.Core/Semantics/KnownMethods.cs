@@ -121,15 +121,6 @@ public static class KnownMethods
         && ContainingInterface(methodSymbol) is { } containingInterface
         && containingInterface.Is(KnownType.System_IAsyncDisposable);
 
-    public static bool IsIEquatableEquals(this IMethodSymbol methodSymbol)
-    {
-        const string explicitName = "System.IEquatable.Equals";
-        return methodSymbol is not null
-            && (methodSymbol.Name == nameof(Equals) || methodSymbol.Name == explicitName)
-            && methodSymbol.Parameters.Length == 1
-            && methodSymbol.ReturnType.Is(KnownType.System_Boolean);
-    }
-
     public static bool IsGetObjectData(this IMethodSymbol methodSymbol)
     {
         const string explicitName = "System.Runtime.Serialization.ISerializable.GetObjectData";

@@ -44,10 +44,6 @@ public class KnownMethodsTest
         KnownMethods.IsIAsyncDisposableDisposeAsync(null).Should().BeFalse();
 
     [TestMethod]
-    public void IsIEquatableEquals_Null_ShouldBeFalse() =>
-        KnownMethods.IsIEquatableEquals(null).Should().BeFalse();
-
-    [TestMethod]
     public void IsGetObjectData_Null_ShouldBeFalse() =>
         KnownMethods.IsGetObjectData(null).Should().BeFalse();
 
