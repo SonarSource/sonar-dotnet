@@ -18,11 +18,11 @@ namespace Tests.Diagnostics
             return null;
         }
 
-        private int field;
+        private int backingField;
         public PropertyToAutoProperty Prop //Compliant
         {
-            get { return field; }
-            set { field = value; }
+            get { return backingField; }
+            set { backingField = value; }
         }
 
         [My()]
@@ -104,30 +104,30 @@ namespace Tests.Diagnostics
         // C# 7 should not throw
         public int Property01 //Noncompliant
         {
-            get => field;
-            set => field = value;
+            get => backingField;
+            set => backingField = value;
         }
     }
 
     public class SomePropertyToAutoProperty
     {
-        private int field;
+        private int backingField;
 
         public int Property01 //Noncompliant
         {
-            get => field;
-            set => field = value;
+            get => backingField;
+            set => backingField = value;
         }
     }
 
     public class VolatileField
     {
-        private volatile int field;
+        private volatile int backingField;
 
         public int Property01 // Compliant - cannot have volatile autoproperty
         {
-            get => field;
-            set => field = value;
+            get => backingField;
+            set => backingField = value;
         }
     }
 }
