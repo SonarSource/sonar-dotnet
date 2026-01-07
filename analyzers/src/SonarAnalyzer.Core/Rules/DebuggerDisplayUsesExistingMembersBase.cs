@@ -41,16 +41,17 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
     protected DebuggerDisplayUsesExistingMembersBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
             c =>
             {
                 var attributeArgument = (TAttributeArgumentSyntax)c.Node;
                 var trackingContext = new ArgumentContext(attributeArgument, c.Model);
                 var argumentMatcher = Language.Tracker.Argument;
                 if (argumentMatcher.Or(
-                    argumentMatcher.MatchArgument(ConstructorDescriptor),
-                    argumentMatcher.MatchArgument(NameDescriptor),
-                    argumentMatcher.MatchArgument(TypeDescriptor))(trackingContext)
+                        argumentMatcher.MatchArgument(ConstructorDescriptor),
+                        argumentMatcher.MatchArgument(NameDescriptor),
+                        argumentMatcher.MatchArgument(TypeDescriptor))(trackingContext)
                     && Language.Syntax.NodeExpression(attributeArgument) is { } formatString
                     && Language.FindConstantValue(c.Model, formatString) is string formatStringText
                     && FirstInvalidExpression(c, formatStringText, attributeArgument) is { } firstInvalidMember)
@@ -62,9 +63,9 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
 
     private string FirstInvalidExpression(SonarSyntaxNodeReportingContext context, string formatString, TAttributeArgumentSyntax attributeSyntax)
     {
-        return (AttributeTarget(attributeSyntax) is { } targetSyntax
+        return AttributeTarget(attributeSyntax) is { } targetSyntax
             && context.Model.GetDeclaredSymbol(targetSyntax) is { } targetSymbol
-            && TypeContainingReferencedMembers(targetSymbol) is { } typeSymbol)
+            && TypeContainingReferencedMembers(targetSymbol) is { } typeSymbol
                 ? FirstInvalidMemberName(typeSymbol)
                 : null;
 
@@ -73,14 +74,18 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
             var allMembers = typeSymbol
                 .GetSelfAndBaseTypes()
                 .SelectMany(x => x.GetMembers())
-                .Select(x => x.Name)
+                .Concat(typeSymbol.ContainingNamespace.GetAllNamedTypes()
+                .Where(x => x.IsStatic)
+                .SelectMany(x => x.GetMembers().Prepend(x)))
+                .Select(ResolveName)
+                .WhereNotNull()
                 .ToHashSet(Language.NameComparer);
 
             foreach (Match match in EvaluatedExpressionRegex.SafeMatches(formatString))
             {
-                if (match is { Success: true, Value: var evaluatedExpression }
-                    && ParseExpression(evaluatedExpression) is { } parsedExpression
-                    && CheckParsedExpression(allMembers, parsedExpression, evaluatedExpression) is { } message)
+                if (match is { Success: true }
+                    && ParseExpression(match.Value) is { } parsedExpression
+                    && CheckParsedExpression(allMembers, parsedExpression, match.Value) is { } message)
                 {
                     return message;
                 }
@@ -113,5 +118,30 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
 
         static ITypeSymbol TypeContainingReferencedMembers(ISymbol symbol) =>
             symbol is ITypeSymbol typeSymbol ? typeSymbol : symbol.ContainingType;
+
+        string ResolveName(ISymbol symbol) =>
+            symbol switch
+            {
+                IMethodSymbol { IsStatic: true, IsExtension: true } extension =>
+                    extension.Parameters.FirstOrDefault() is { } targetType && typeSymbol.DerivesOrImplements(targetType.Type) ? symbol.Name : null,
+                IMethodSymbol { IsStatic: true, IsImplicitlyDeclared: true } extensionProp =>
+                    extensionProp.Name.StartsWith("get_") && extensionProp.Parameters.FirstOrDefault() is { } targetType && typeSymbol.DerivesOrImplements(targetType.Type)
+                        ? symbol.Name.Substring(4)
+                        : null,
+                ITypeSymbol { IsStatic: true, ContainingSymbol: INamespaceSymbol } => symbol.Name,
+                ITypeSymbol { IsStatic: true, ContainingSymbol: ITypeSymbol containingSymbol } => containingSymbol.Equals(typeSymbol) ? symbol.Name : OutermostType(symbol).Name,
+                ISymbol { IsStatic: true } => OutermostType(symbol).Name,
+                IMethodSymbol { ReturnsVoid: true } => null,
+                _ => symbol.Name
+            };
+
+        static ISymbol OutermostType(ISymbol symbol)
+        {
+            while (symbol.ContainingSymbol is ITypeSymbol)
+            {
+                symbol = symbol.ContainingSymbol;
+            }
+            return symbol;
+        }
     }
 }

@@ -317,7 +317,7 @@ public class Multiline
 [DebuggerDisplay("{Recurse.Recurse.Recurse}")]
 [DebuggerDisplay("{Recurse.Recurse.Method()}")]
 [DebuggerDisplay("{Recurse.Method().Recurse}")]
-[DebuggerDisplay("{Method().Recurse.Recurse}")]
+[DebuggerDisplay("{Method().Recurse.Recurse}")]         // Compliant
 [DebuggerDisplay("{Nonexistent.Recurse.Recurse}")]      // Noncompliant
 [DebuggerDisplay("{this.Nonexistent.Recurse.Recurse}")] // Noncompliant
 [DebuggerDisplay("{Recurse.Nonexistent.Recurse}")]      // Compliant: Only the most left hand side of a member access is detected
@@ -329,5 +329,52 @@ public class Multiline
 public class Recursion
 {
     public Recursion Recurse { get; }
-    public void Method() { }
+    public Recursion Method() { return Recurse; }
+}
+
+[DebuggerDisplay("{this.VoidMethod()}")]           // Noncompliant
+[DebuggerDisplay("{this.VoidMethod().Value}")]     // Noncompliant
+public class VoidTest
+{
+    public void VoidMethod() { }
+}
+
+[DebuggerDisplay("{StaticClass}")]                                          // Compliant Static types within the same namespace are in scope
+[DebuggerDisplay("{StaticClass.StaticField}")]                              // Compliant
+[DebuggerDisplay("{StaticClass.StaticProp}")]                               // Compliant
+[DebuggerDisplay("{StaticClass.StaticMethod()}")]                           // Compliant
+[DebuggerDisplay("{StaticClass..ctor}")]                                    // FN https://sonarsource.atlassian.net/browse/NET-2942
+[DebuggerDisplay("{NestedStaticClassTest.NestedStaticClass.StaticField}")]  // Compliant
+[DebuggerDisplay("{this.StaticMethod()}")]                                  // Noncompliant
+[DebuggerDisplay("{this.StaticField}")]                                     // Noncompliant
+[DebuggerDisplay("{this.StaticProp}")]                                      // Noncompliant
+public class StaticClassTest { }
+
+public static class StaticClass
+{
+    public static string StaticField = "42";
+    public static string StaticProp => "42";
+    public static string StaticMethod() => "42";
+}
+
+[DebuggerDisplay("{this.NestedStaticClass.StaticField}")]       // Compliant Static types within the same namespace are in scope
+[DebuggerDisplay("{this.NestedStaticClass.StaticField}")]       // Compliant
+[DebuggerDisplay("{this.NestedStaticClass.StaticProp}")]        // Compliant
+[DebuggerDisplay("{this.NestedStaticClass.StaticMethod()}")]    // Compliant
+public class NestedStaticClassTest
+{
+
+    public static class NestedStaticClass
+    {
+        public static string StaticField = "42";
+        public static string StaticProp => "42";
+        public static string StaticMethod() => "42";
+    }
+}
+
+[DebuggerDisplay("{this..ctor")]                  // FN https://sonarsource.atlassian.net/browse/NET-2942
+[DebuggerDisplay("{this.<Name>k__BackingField}")] // Noncompliant {{'{this.<Name>k__BackingField}' is not a valid expression. CS1001: Identifier expected.}}
+public class ImplicitMembers
+{
+    public string Name { get; set; } = "Jack";
 }

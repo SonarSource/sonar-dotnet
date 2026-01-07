@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Somewhere;
 
 class RawStringLiterals
 {
@@ -156,17 +157,79 @@ public class Expressions
     private string Method() => "";
 }
 
-[DebuggerDisplay("{this.ExtensionMethod()}")]           // Noncompliant FP regular extension methods are compatible with DebuggerDisplay NET-2620
-[DebuggerDisplay("{this.ExtensionBlockMethod()}")]      // Noncompliant: extension block members are not compatible with DebuggerDisplay
-[DebuggerDisplay("{this.ExtensionProperty()}")]         // Noncompliant: extension block members are not compatible with DebuggerDisplay
-class Sample { }
+[DebuggerDisplay("{this.ExtensionMethod()}")]                       // Compliant regular extension methods are compatible with DebuggerDisplay NET-2620
+[DebuggerDisplay("{this.ExtensionBlockMethod()}")]                  // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{this.ExtensionProperty}")]                       // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{this.BaseExtensionMethod()}")]                   // Compliant regular extension methods are compatible with DebuggerDisplay NET-2620
+[DebuggerDisplay("{this.BaseExtensionBlockMethod()}")]              // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{this.BaseExtensionProperty}")]                   // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{this.ExtensionPropertyButNotOnSampleType}")]     // Noncompliant
+[DebuggerDisplay("{this.ExtensionMethodButNotOnSampleType()}")]     // Noncompliant
+[DebuggerDisplay("{\"baseType\".StringExtensionProp}")]             // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{\"baseType\".StringExtensionMethod()}")]         // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{\"baseType\".StringExtensionProp}")]             // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{StaticClass.StaticExtensionProp}")]              // Compliant extension block members are compatible with DebuggerDisplay
+[DebuggerDisplay("{StaticClass.StaticExtensionMethod()}")]          // Compliant extension block members are compatible with DebuggerDisplay
+class Sample : Base { }
+
+public class Base { }
 
 static class Extensions
 {
+    public static string BaseExtensionMethod(this Base b) => "Extension is declared on base class";
+    extension(Base b)
+    {
+        public string BaseExtensionProperty => "Extension Property";
+        public string BaseExtensionBlockMethod() => "Extension Method in Extension Block";
+    }
     public static string ExtensionMethod(this Sample s) => "Regular Extension Method";
     extension(Sample s)
     {
         public string ExtensionProperty => "Extension Property";
         public string ExtensionBlockMethod() => "Extension Method in Extension Block";
+    }
+
+    extension(string s)
+    {
+        public string StringExtensionProp => "Extension Property";
+        public string StringExtensionMethod() => "Extension Method";
+    }
+
+    extension(Exception e)
+    {
+        
+        public string ExtensionPropertyButNotOnSampleType => "Extension Property";
+        public string ExtensionMethodButNotOnSampleType() => "Extension Method in Extension Block";
+    }
+
+    extension(StaticClass)
+    {
+        public static string StaticExtensionProp => "42";
+        public static string StaticExtensionMethod() => "42";
+    }
+}
+
+static class StaticClass { }
+
+namespace Somewhere
+{
+    using SomewhereElse;
+    [DebuggerDisplay("{this.ExtensionMethod()}")]           // Noncompliant When a static member is outside of the type's namespace DebuggerDisplay will be: "error CS1061: 'BadSample' does not contain a definition for 'ExtensionMethod'"
+    [DebuggerDisplay("{this.ExtensionBlockMethod()}")]      // Noncompliant When a static member is outside of the type's namespace DebuggerDisplay will be: "error CS1061: 'BadSample' does not contain a definition for 'ExtensionBlockMethod'"
+    [DebuggerDisplay("{this.ExtensionProperty}")]           // Noncompliant When a static member is outside of the type's namespace DebuggerDisplay will be: "error CS1061: 'BadSample' does not contain a definition for 'ExtensionProperty'"
+    class BadSample { }
+
+}
+
+namespace SomewhereElse
+{
+    static class Extensions
+    {
+        public static string ExtensionMethod(this BadSample s) => "Regular Extension Method";
+        extension(BadSample s)
+        {
+            public string ExtensionProperty => "Extension Property";
+            public string ExtensionBlockMethod() => "Extension Method in Extension Block";
+        }
     }
 }
