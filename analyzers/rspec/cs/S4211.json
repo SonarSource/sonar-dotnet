@@ -31,6 +31,9 @@
     ],
     "PCI DSS 4.0": [
       "6.2.4"
+    ],
+    "CWE": [
+      269
     ]
   },
   "quickfix": "unknown"

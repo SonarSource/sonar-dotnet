@@ -17,5 +17,11 @@
   "ruleSpecification": "RSPEC-6640",
   "sqKey": "S6640",
   "scope": "All",
-  "quickfix": "infeasible"
+  "quickfix": "infeasible",
+  "securityStandards": {
+    "CWE": [
+      119,
+      787
+    ]
+  }
 }
