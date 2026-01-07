@@ -35,8 +35,7 @@ public class LanguageOptionsTest
         else
         {
             // This should fail when we add new language version
-            csOptions.Should().BeEquivalentTo(
-            [
+            csOptions.Should().BeEquivalentTo([
                 CS.LanguageVersion.CSharp6,
                 CS.LanguageVersion.CSharp7,
                 CS.LanguageVersion.CSharp7_1,
@@ -47,11 +46,11 @@ public class LanguageOptionsTest
                 CS.LanguageVersion.CSharp10,
                 CS.LanguageVersion.CSharp11,
                 CS.LanguageVersion.CSharp12,
-                CS.LanguageVersion.CSharp13
+                CS.LanguageVersion.CSharp13,
+                CS.LanguageVersion.CSharp14
             ]);
 
-            vbOptions.Should().BeEquivalentTo(
-            [
+            vbOptions.Should().BeEquivalentTo([
                 VB.LanguageVersion.VisualBasic12,
                 VB.LanguageVersion.VisualBasic14,
                 VB.LanguageVersion.VisualBasic15,
