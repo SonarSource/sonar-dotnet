@@ -521,7 +521,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer.Lightup": "[10.17.0, )",
+          "SonarAnalyzer.ShimLayer.Lightup": "[10.19.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -531,7 +531,7 @@
           "Google.Protobuf": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.17.0, )",
+          "SonarAnalyzer.CFG": "[10.19.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -539,8 +539,8 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.CSharp.Core": "[10.17.0, )",
-          "SonarAnalyzer.Core": "[10.17.0, )",
+          "SonarAnalyzer.CSharp.Core": "[10.19.0, )",
+          "SonarAnalyzer.Core": "[10.19.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -549,8 +549,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.17.0, )",
-          "SonarAnalyzer.Core": "[10.17.0, )",
+          "SonarAnalyzer.CFG": "[10.19.0, )",
+          "SonarAnalyzer.Core": "[10.19.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -566,7 +566,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[10.17.0, )",
+          "SonarAnalyzer.ShimLayer": "[10.19.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -584,7 +584,7 @@
           "Microsoft.NET.Test.Sdk": "[18.0.1, )",
           "NSubstitute": "[5.3.0, )",
           "NuGet.Protocol": "[7.0.0, )",
-          "SonarAnalyzer.Core": "[10.17.0, )",
+          "SonarAnalyzer.Core": "[10.19.0, )",
           "altcover": "[9.0.102, )"
         }
       },
@@ -592,8 +592,8 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.Core": "[10.17.0, )",
-          "SonarAnalyzer.VisualBasic.Core": "[10.17.0, )",
+          "SonarAnalyzer.Core": "[10.19.0, )",
+          "SonarAnalyzer.VisualBasic.Core": "[10.19.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -601,8 +601,8 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[1.3.2, )",
-          "SonarAnalyzer.CFG": "[10.17.0, )",
-          "SonarAnalyzer.Core": "[10.17.0, )",
+          "SonarAnalyzer.CFG": "[10.19.0, )",
+          "SonarAnalyzer.Core": "[10.19.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       }
