@@ -48,7 +48,7 @@ stages:
         ARTIFACTORY_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
       inputs:
         targetType: 'inline'
-        script: '"$(MSBUILD_PATH)" /t:restore /p:RestoreLockedMode=true /p:RestoreConfigFile="analyzers\NuGet.Config" $(solution)'
+        script: 'dotnet restore --locked-mode --configfile analyzers\NuGet.Config $(solution)'
 
     - powershell: .\scripts\build\store-azp-variables.ps1
       displayName: "Store AZP Variables"
