@@ -42,19 +42,32 @@ if (! [string]::IsNullOrEmpty($Env:SONAR_USER_HOME))
 
 . ${PSScriptRoot}\CopyTestCasesFromRspec.ps1
 
-$RuleApiError = "Could not find the Rule API Jar locally. Please download the latest rule-api from " + `
-    "'https://repox.jfrog.io/repox/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/' " +`
-    "to a folder and set the %rule_api_path% environment variable with the full path of that folder. For example 'c:\\work\\tools'."
-if (-Not $Env:rule_api_path) {
-    throw $RuleApiError
+# Finds the latest rule-api jar from Artifactory
+$Query = "items.find({
+                    `"repo`":`"sonarsource-private-releases`",
+                    `"path`": { `"`$match`": `"com/sonarsource/rule-api/rule-api*`" },
+                    `"name`":{`"`$match`":`"rule-api-*.jar`" }
+                }).sort({`"`$desc`":[`"created`"]}).limit(1)"
+$Headers = @{ "Authorization" = "Bearer $($env:ARTIFACTORY_PASSWORD)"; "Content-Type" = "text/plain" }
+$Response = Invoke-RestMethod -Uri "https://repox.jfrog.io/artifactory/api/search/aql" -Method Post -Body $Query -Headers $Headers
+
+$FileInfo = $Response.results[0]
+$TargetDir = "$HOME/.sonar/rule-api"
+$RuleApiJar = Join-Path $TargetDir $FileInfo.name
+
+if(Test-Path $RuleApiJar) {
+    Write-Host "Latest rule-api jar found locally at $RuleApiJar" -ForegroundColor Green
 }
-$RuleApiJars = Get-ChildItem "${Env:rule_api_path}\\rule-api-*.jar" | Sort -desc
-if ($RuleApiJars.Length -eq 0) {
-    throw $RuleApiError
-}
-$RuleApiJar = $RuleApiJars[0].FullName
-if (-Not (Test-Path $RuleApiJar)) {
-    throw $RuleApiError
+else {
+    New-Item -Path $TargetDir -ItemType Directory -Force
+    $DownloadUrl = "https://repox.jfrog.io/artifactory/$($FileInfo.repo)/$($FileInfo.path)/$($FileInfo.name)"
+    $RuleApiJarTmp = "$RuleApiJar.tmp"
+    Write-Host "Latest rule-api jar not found locally. Downloading from $DownloadUrl to $RuleApiJar" -ForegroundColor Yellow
+    $ProgressPreference = 'SilentlyContinue'
+    Invoke-WebRequest -Uri $DownloadUrl -OutFile $RuleApiJarTmp -Headers $Headers
+    $ProgressPreference = 'Continue'
+    Rename-Item -Path $RuleApiJarTmp -NewName $RuleApiJar -Force
+    Write-Host "Downloaded latest rule-api jar to $RuleApiJar" -ForegroundColor Green
 }
 
 $AnalyzersPath = "${PSScriptRoot}\\..\\..\\analyzers"

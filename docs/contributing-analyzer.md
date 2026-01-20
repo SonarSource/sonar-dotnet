@@ -38,7 +38,6 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
         - SonarScanner for .NET folder and to the Scanner CLI ([SonarScanner download](https://github.com/SonarSource/sonar-scanner-msbuild/releases))
     -  **Sonar internal only** These two steps require access to SonarSource internal resources and are not possible for external contributors
         - **ORCHESTRATOR_CONFIG_URL** - url to `orchestrator.properties` file (for integration tests) in uri form (i.e. `file:///c:/something/orchestrator.properties`). See also: [Documentation in the orchestrator repository](https://github.com/sonarsource/orchestrator#configuration)
-        - **RULE_API_PATH** - path to folder containing the rule api jar. The rule api jar can be found at [repox.jfrog search](https://repox.jfrog.io/ui/artifactSearchResults?name=rule-api&type=artifacts) or [repox.jfrog private releases](https://repox.jfrog.io/ui/native/sonarsource-private-releases/com/sonarsource/rule-api/rule-api/)
         - **ARTIFACTORY_USER** your repox.jfrog username (see e.g. `orchestrator.properties`)
         - **ARTIFACTORY_PASSWORD** the identity token for repox.jfrog.
 1. Open `analyzers/SonarAnalyzer.sln`
