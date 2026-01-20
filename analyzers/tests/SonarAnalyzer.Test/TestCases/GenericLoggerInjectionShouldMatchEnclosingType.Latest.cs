@@ -14,3 +14,7 @@ public partial class Correct
 }
 
 public class Wrong { }
+
+// Repro NET-2999
+public class PrimaryConstructorCorrect(ILogger<PrimaryConstructorCorrect> logger);  // Compliant
+public class PrimaryConstructorWrong(ILogger<Wrong> logger);                        // FN

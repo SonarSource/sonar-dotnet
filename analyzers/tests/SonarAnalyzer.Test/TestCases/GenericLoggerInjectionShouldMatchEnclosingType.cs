@@ -37,7 +37,8 @@ public class Correct : Base
 
 public class Base
 {
-    public Base(ILogger<Base> logger) { } // Compliant
+    public Base(ILogger<Base> logger) { }   // Compliant
+    public Base(ILogger<Wrong> logger) { }  // Noncompliant
     public Base() { }
 }
 
