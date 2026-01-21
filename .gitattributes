@@ -1,3 +1,4 @@
 *.cs text eol=lf
 *.vb text eol=lf
 *.ps1 text eol=lf
+*.verified.cs text eol=lf working-tree-encoding=UTF-8
