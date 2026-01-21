@@ -721,8 +721,9 @@ namespace Tests.TestCases
     // https://sonarsource.atlassian.net/browse/NET-1168
     public class Repro_1168
     {
-        private void Repro(string s1, string s2)  // Noncompliant FP
-                                                  // Noncompliant@-1 FP
+        private void Repro(string s1, string s2, int val)   // Noncompliant FP
+                                                            // Noncompliant@-1 FP
+                                                            // Noncompliant@-2 FP
         {
             LocalFunction();
 
@@ -730,6 +731,7 @@ namespace Tests.TestCases
             {
                 s1 = s1?.ToString();
                 Console.WriteLine(s2 ?? "Nothing");
+                var x = true ? val : 42;
             }
         }
     }

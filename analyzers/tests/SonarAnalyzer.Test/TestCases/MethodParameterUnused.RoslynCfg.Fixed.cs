@@ -719,8 +719,9 @@ namespace Tests.TestCases
     // https://sonarsource.atlassian.net/browse/NET-1168
     public class Repro_1168
     {
-        private void Repro(string s1, string s2)  // Fixed
-                                                  // Fixed
+        private void Repro(string s1, string s2, int val)   // Fixed
+                                                            // Fixed
+                                                            // Fixed
         {
             LocalFunction();
 
@@ -728,6 +729,7 @@ namespace Tests.TestCases
             {
                 s1 = s1?.ToString();
                 Console.WriteLine(s2 ?? "Nothing");
+                var x = true ? val : 42;
             }
         }
     }
