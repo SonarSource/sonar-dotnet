@@ -27,7 +27,7 @@ Visual Studio 2022 version 17.6+ is required to build the project (due to source
 1. The following environment variables must be set:
     - **JAVA_HOME** (e.g. `C:\Program Files\Java\jdk-11.0.2`)
     - **MSBUILD_PATH** - path to the MSBuild.exe executable (MSBuild 16 e.g. `C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe`)
-    - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-plugin.md#integration-tests)) 
+    - **NUGET_PATH** - path to the nuget.exe executable (related to the [plugin integration tests](./contributing-analyzer.md#java-its) 
     - **PATH** - the **PATH** variable must contain (*system* scope):
         - dotnet core installation folder (`C:\Program Files\dotnet\`)
         - MSBuild bin folder (`C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin`)
