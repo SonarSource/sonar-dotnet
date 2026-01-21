@@ -90,6 +90,12 @@ public class Program
         return $"{builder} is ToStringed here";
     }
 
+    public void Interpolation_InAssignment()
+    {
+        var builder = new StringBuilder(); // Compliant
+        var text = $"{builder} is ToStringed here";
+    }
+
     public void Scoping()
     {
         {
@@ -167,6 +173,21 @@ public class Repro_7324
         string ret;
         ret = "Prefix: " + sb;
         return ret;
+    }
+
+    // Repro for NET-3001
+    public void Concat_InAssignment()
+    {
+        var prefix = "Prefix: ";
+        var sb = new StringBuilder(); // Noncompliant FP
+        var ret = prefix + sb;
+    }
+
+    public void Concat_InInvocation(string value)
+    {
+        var prefix = "Prefix: ";
+        var sb = new StringBuilder(); // Compliant
+        Concat_InInvocation(prefix + sb);
     }
 }
 
