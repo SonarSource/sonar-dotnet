@@ -189,17 +189,18 @@ static class CSharp14
 {
     class Sample
     {
-        public static int count = 0;    // Secondary
+        public static int count = 0;
+        public int countInstance = 0;
     }
 
-    static int count = 0;               // Secondary
-
+    static int count = 0;
     extension(Sample sample)
     {
         void Method()
         {
-            count++;                    // Noncompliant
-            Sample.count++;             // Noncompliant
+            count++;                // Compliant
+            Sample.count++;         // Compliant
+            sample.countInstance++; // Compliant
         }
     }
 }

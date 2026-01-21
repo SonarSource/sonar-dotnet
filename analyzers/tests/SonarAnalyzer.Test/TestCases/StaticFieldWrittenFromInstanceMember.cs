@@ -70,4 +70,20 @@ namespace Tests.Diagnostics
             count++; // Noncompliant
         }
     }
+
+    public static class Extensions
+    {
+        public class Sample
+        {
+            public static int count = 0;
+            public int countInstance = 0;
+        }
+        static int count = 0;
+        public static void Method(this Sample sample)
+        {
+            count++;                // Compliant
+            Sample.count++;         // Compliant
+            sample.countInstance++; // Compliant
+        }
+    }
 }

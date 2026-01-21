@@ -14,39 +14,38 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class StaticFieldWrittenFromInstanceMember : StaticFieldWrittenFrom
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class StaticFieldWrittenFromInstanceMember : StaticFieldWrittenFrom
+    private const string DiagnosticId = "S2696";
+    private const string MessageFormat = "{0}";
+    private const string MessageFormatMultipleOptions = "Make the enclosing instance {0} 'static' or remove this set on the 'static' field.";
+    private const string MessageFormatRemoveSet = "Remove this set, which updates a 'static' field from an instance {0}.";
+
+    protected override DiagnosticDescriptor Rule => DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
+        owningSymbol is { IsStatic: false }
+        && owningSymbol is not IMethodSymbol { IsExtension: true }
+        && node is MethodDeclarationSyntax or AccessorDeclarationSyntax;
+
+    protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field)
     {
-        private const string DiagnosticId = "S2696";
-        private const string MessageFormat = "{0}";
-        private const string MessageFormatMultipleOptions = "Make the enclosing instance {0} 'static' or remove this set on the 'static' field.";
-        private const string MessageFormatRemoveSet = "Remove this set, which updates a 'static' field from an instance {0}.";
+        var messageFormat = owningSymbol.IsChangeable()
+            ? MessageFormatMultipleOptions
+            : MessageFormatRemoveSet;
+        var declarationType = DeclarationType(node);
 
-        protected override DiagnosticDescriptor Rule =>
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        protected override bool IsValidCodeBlockContext(SyntaxNode node, ISymbol owningSymbol) =>
-            owningSymbol is { IsStatic: false }
-            && node is MethodDeclarationSyntax or AccessorDeclarationSyntax;
-
-        protected override string GetDiagnosticMessageArgument(SyntaxNode node, ISymbol owningSymbol, IFieldSymbol field)
-        {
-            var messageFormat = owningSymbol.IsChangeable()
-                               ? MessageFormatMultipleOptions
-                               : MessageFormatRemoveSet;
-            var declarationType = GetDeclarationType(node);
-
-            return string.Format(messageFormat, declarationType);
-        }
-
-        private static string GetDeclarationType(SyntaxNode declaration) =>
-            declaration switch
-            {
-                MethodDeclarationSyntax => "method",
-                AccessorDeclarationSyntax => "property",
-                _ => throw new NotSupportedException($"Not expected syntax kind {declaration.RawKind}.")
-            };
+        return string.Format(messageFormat, declarationType);
     }
+
+    private static string DeclarationType(SyntaxNode declaration) =>
+        declaration switch
+        {
+            MethodDeclarationSyntax => "method",
+            AccessorDeclarationSyntax => "property",
+            _ => throw new NotSupportedException($"Not expected syntax kind {declaration.RawKind}.")
+        };
 }
