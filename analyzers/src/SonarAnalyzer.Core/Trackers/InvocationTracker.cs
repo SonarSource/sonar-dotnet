@@ -27,7 +27,7 @@ public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntax
     protected abstract SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression);
 
     public Condition MatchMethod(params MemberDescriptor[] methods) =>
-       context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, Language.NameComparison, methods);
+        context => MemberDescriptor.MatchesAny(context.MethodName, context.MethodSymbol, true, Language.NameComparison, methods);
 
     public Condition MethodNameIs(string methodName) =>
         context => context.MethodName == methodName;
@@ -40,27 +40,30 @@ public abstract class InvocationTracker<TSyntaxKind> : SyntaxTrackerBase<TSyntax
 
     public Condition MethodHasParameters(int count) =>
         context => context.MethodSymbol.Value is { } method
-            && method.Parameters.Length == count;
+                    && method.Parameters.Length == count;
 
     public Condition IsInvalidBuilderInitialization<TInvocationSyntax>(BuilderPatternCondition<TSyntaxKind, TInvocationSyntax> condition) where TInvocationSyntax : SyntaxNode =>
         condition.IsInvalidBuilderInitialization;
 
     internal Condition MethodReturnTypeIs(KnownType returnType) =>
         context => context.MethodSymbol.Value is { } method
-            && method.ReturnType.DerivesFrom(returnType);
+                    && method.ReturnType.DerivesFrom(returnType);
 
     internal Condition ArgumentIsBoolConstant(string parameterName, bool expectedValue) =>
         context => ConstArgumentForParameter(context, parameterName) is bool boolValue
-            && boolValue == expectedValue;
+                    && boolValue == expectedValue;
 
     internal Condition IsIHeadersDictionary() =>
         context => context.MethodSymbol.Value.ContainingType.TypeArguments is var typeArguments
-            && typeArguments.Length == 2
-            && typeArguments[0].Is(KnownType.System_String)
-            && typeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
+                    && typeArguments.Length == 2
+                    && typeArguments[0].Is(KnownType.System_String)
+                    && typeArguments[1].Is(KnownType.Microsoft_Extensions_Primitives_StringValues);
+
+    protected virtual SyntaxNode NodeExpression(SyntaxNode node) =>
+        Language.Syntax.NodeExpression(node);
 
     protected override InvocationContext CreateContext(SonarSyntaxNodeReportingContext context) =>
-        Language.Syntax.NodeExpression(context.Node) is { } expression && ExpectedExpressionIdentifier(expression) is { } identifier
+        NodeExpression(context.Node) is { } expression && ExpectedExpressionIdentifier(expression) is { } identifier
             ? new InvocationContext(context, identifier.ValueText)
             : null;
 }

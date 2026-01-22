@@ -21,7 +21,7 @@ namespace SonarAnalyzer.VisualBasic.Core.Trackers;
 public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-    protected override SyntaxKind[] TrackedSyntaxKinds { get; } = { SyntaxKind.InvocationExpression };
+    protected override SyntaxKind[] TrackedSyntaxKinds { get; } = [SyntaxKind.InvocationExpression, SyntaxKind.SimpleMemberAccessExpression];
 
     public override Condition ArgumentAtIndexIsStringConstant(int index) =>
         ArgumentAtIndexConformsTo(index, (argument, model) =>
@@ -37,11 +37,11 @@ public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
 
     public override Condition MatchProperty(MemberDescriptor member) =>
         context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax methodMemberAccess
-                   && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                   && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
-                   && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
-                   && context.Model.GetTypeInfo(propertyMemberAccess.Expression) is TypeInfo enclosingClassType
-                   && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
+                    && methodMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                    && methodMemberAccess.Expression is MemberAccessExpressionSyntax propertyMemberAccess
+                    && propertyMemberAccess.IsKind(SyntaxKind.SimpleMemberAccessExpression)
+                    && context.Model.GetTypeInfo(propertyMemberAccess.Expression) is var enclosingClassType
+                    && member.IsMatch(propertyMemberAccess.Name.Identifier.ValueText, enclosingClassType.Type, Language.NameComparison);
 
     public override object ConstArgumentForParameter(InvocationContext context, string parameterName)
     {
@@ -52,12 +52,20 @@ public class VisualBasicInvocationTracker : InvocationTracker<SyntaxKind>
             : null;
     }
 
+    protected override SyntaxNode NodeExpression(SyntaxNode node) =>
+        node switch
+        {
+            MemberAccessExpressionSyntax { Parent: InvocationExpressionSyntax } => null,    // Avoid duplicate handling, this is handled by InvocationExpression
+            MemberAccessExpressionSyntax => node,
+            _ => base.NodeExpression(node)
+        };
+
     protected override SyntaxToken? ExpectedExpressionIdentifier(SyntaxNode expression) =>
         ((ExpressionSyntax)expression).GetIdentifier();
 
     private static Condition ArgumentAtIndexConformsTo(int index, Func<ArgumentSyntax, SemanticModel, bool> predicate) =>
         context => context.Node is InvocationExpressionSyntax { ArgumentList: { } argumentList }
-            && index < argumentList.Arguments.Count
-            && argumentList.Arguments[index] is { } argument
-            && predicate(argument, context.Model);
+                    && index < argumentList.Arguments.Count
+                    && argumentList.Arguments[index] is { } argument
+                    && predicate(argument, context.Model);
 }
