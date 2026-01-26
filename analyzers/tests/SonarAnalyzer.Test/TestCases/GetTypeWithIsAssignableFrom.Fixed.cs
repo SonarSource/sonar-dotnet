@@ -177,4 +177,21 @@ namespace Tests.Diagnostics
                                                         // Error@-2 [CS1026]: ) expected
         }
     }
+
+    // UnityEngine.Object overloads == and !=. When compared with null it checks if the object was “destroyed” by the engine, not whether the actual reference is null.
+    public class Sample
+    {
+        public void Method(ISomething instance)
+        {
+            _ = !(instance is UnityEngine.Object);     // Fixed
+            _ = instance is UnityEngine.Object;     // Fixed
+            _ = !(instance is UnityEngine.Object);     // Fixed
+        }
+    }
+    // Unity3D is not available as a nuget package and we cannot use the original classes
+    namespace UnityEngine
+    {
+        public class Object { }
+    }
+    public interface ISomething { }
 }
