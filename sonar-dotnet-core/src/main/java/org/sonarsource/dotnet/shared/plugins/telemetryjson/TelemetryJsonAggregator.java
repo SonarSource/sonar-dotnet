@@ -22,11 +22,12 @@ import java.util.stream.Stream;
 
 public class TelemetryJsonAggregator {
   private static final String TARGET_FRAMEWORK_MONIKER = "dotnetenterprise.s4net.build.target_framework_moniker";
+  private static final String CNT_SUFFIX = ".cnt";
 
   public Stream<Map.Entry<String, String>> flatMapTelemetry(Stream<Map.Entry<String, String>> telemetry) {
     var partitioned = telemetry.collect(Collectors.partitioningBy(entry ->
-      // "dotnetenterprise.cnt." is an indicator, that the telemetry is supposed to be aggregated by counting the number of occurrences
-      entry.getKey().startsWith("dotnetenterprise.cnt.")
+      // ".cnt" suffix is an indicator, that the telemetry is supposed to be aggregated by counting the number of occurrences
+      entry.getKey().endsWith(CNT_SUFFIX)
         // we can not rename "dotnetenterprise.s4net.build.target_framework_moniker" to follow the convention because it was already released
         || entry.getKey().equals(TARGET_FRAMEWORK_MONIKER)));
 
@@ -34,11 +35,18 @@ public class TelemetryJsonAggregator {
 
     var aggregated = partitioned.get(true).stream()
       .collect(Collectors.groupingBy(
-        entry -> entry.getKey() + "." + TelemetryUtils.sanitizeKey(entry.getValue()),
+        entry -> stripCntSuffix(entry.getKey()) + "." + TelemetryUtils.sanitizeKey(entry.getValue()),
         Collectors.counting()))
       .entrySet().stream()
       .map(entry -> Map.entry(entry.getKey(), Long.toString(entry.getValue())));
 
     return Stream.concat(passThrough, aggregated);
+  }
+
+  private static String stripCntSuffix(String key) {
+    if (key.endsWith(CNT_SUFFIX)) {
+      return key.substring(0, key.length() - CNT_SUFFIX.length());
+    }
+    return key;
   }
 }
