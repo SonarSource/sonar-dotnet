@@ -30,7 +30,6 @@ public static partial class IfStatementSyntaxShimExtensions
 
     private static readonly Func<IfStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<IfStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-
     extension(IfStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

@@ -30,7 +30,6 @@ public static partial class ThrowStatementSyntaxShimExtensions
 
     private static readonly Func<ThrowStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ThrowStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-
     extension(ThrowStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

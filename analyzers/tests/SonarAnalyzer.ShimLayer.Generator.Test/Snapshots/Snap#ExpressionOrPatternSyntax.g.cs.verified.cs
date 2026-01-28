@@ -80,8 +80,6 @@ public readonly partial struct ExpressionOrPatternSyntaxWrapper: ISyntaxWrapper<
     public static implicit operator CSharpSyntaxNode(ExpressionOrPatternSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

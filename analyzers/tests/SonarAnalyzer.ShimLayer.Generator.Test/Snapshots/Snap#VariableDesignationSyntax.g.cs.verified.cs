@@ -80,8 +80,6 @@ public readonly partial struct VariableDesignationSyntaxWrapper: ISyntaxWrapper<
     public static implicit operator CSharpSyntaxNode(VariableDesignationSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

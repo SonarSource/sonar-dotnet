@@ -30,7 +30,6 @@ public static partial class ReturnStatementSyntaxShimExtensions
 
     private static readonly Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-
     extension(ReturnStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

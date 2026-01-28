@@ -88,8 +88,6 @@ public readonly partial struct ConstantPatternSyntaxWrapper: ISyntaxWrapper<CSha
     public static implicit operator ExpressionOrPatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ConstantPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

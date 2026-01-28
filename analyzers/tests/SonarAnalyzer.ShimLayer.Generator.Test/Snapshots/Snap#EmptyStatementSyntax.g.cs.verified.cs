@@ -30,7 +30,6 @@ public static partial class EmptyStatementSyntaxShimExtensions
 
     private static readonly Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-
     extension(EmptyStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

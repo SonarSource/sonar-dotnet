@@ -30,7 +30,6 @@ public static partial class FixedStatementSyntaxShimExtensions
 
     private static readonly Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<FixedStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-
     extension(FixedStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

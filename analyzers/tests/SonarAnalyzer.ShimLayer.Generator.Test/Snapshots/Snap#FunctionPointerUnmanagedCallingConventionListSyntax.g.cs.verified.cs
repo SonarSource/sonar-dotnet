@@ -88,8 +88,6 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionListSynt
     public static implicit operator CSharpSyntaxNode(FunctionPointerUnmanagedCallingConventionListSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

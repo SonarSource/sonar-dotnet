@@ -38,7 +38,6 @@ public static partial class ParenthesizedLambdaExpressionSyntaxShimExtensions
 
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ParenthesizedLambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
-
     extension(ParenthesizedLambdaExpressionSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

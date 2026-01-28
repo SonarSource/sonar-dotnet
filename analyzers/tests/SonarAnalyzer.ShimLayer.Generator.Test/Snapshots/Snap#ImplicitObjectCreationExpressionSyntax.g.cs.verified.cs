@@ -91,8 +91,6 @@ public readonly partial struct ImplicitObjectCreationExpressionSyntaxWrapper: IS
     public static implicit operator BaseObjectCreationExpressionSyntaxWrapper(ImplicitObjectCreationExpressionSyntaxWrapper up) => (BaseObjectCreationExpressionSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ImplicitObjectCreationExpressionSyntaxWrapper(BaseObjectCreationExpressionSyntaxWrapper down) => (ImplicitObjectCreationExpressionSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

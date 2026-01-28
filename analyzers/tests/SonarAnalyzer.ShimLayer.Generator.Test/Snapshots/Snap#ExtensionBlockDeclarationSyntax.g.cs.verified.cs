@@ -94,8 +94,6 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper: ISyntaxWr
     public static implicit operator TypeDeclarationSyntax(ExtensionBlockDeclarationSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

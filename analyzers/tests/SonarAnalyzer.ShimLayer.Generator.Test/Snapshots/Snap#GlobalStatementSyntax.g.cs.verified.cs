@@ -32,7 +32,6 @@ public static partial class GlobalStatementSyntaxShimExtensions
 
     private static readonly Func<GlobalStatementSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<GlobalStatementSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
-
     extension(GlobalStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

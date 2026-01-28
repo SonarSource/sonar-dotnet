@@ -30,7 +30,6 @@ public static partial class EventDeclarationSyntaxShimExtensions
 
     private static readonly Func<EventDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<EventDeclarationSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
 
-
     extension(EventDeclarationSyntax @this)
     {
         public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(@this);

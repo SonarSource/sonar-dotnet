@@ -88,8 +88,6 @@ public readonly partial struct BaseParameterSyntaxWrapper: ISyntaxWrapper<CSharp
     public static implicit operator CSharpSyntaxNode(BaseParameterSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

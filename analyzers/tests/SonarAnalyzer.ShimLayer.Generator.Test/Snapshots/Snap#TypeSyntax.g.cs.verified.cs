@@ -36,7 +36,6 @@ public static partial class TypeSyntaxShimExtensions
 
     private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
 
-
     extension(TypeSyntax @this)
     {
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);

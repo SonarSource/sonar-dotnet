@@ -91,8 +91,6 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper: IS
     public static implicit operator VariableDesignationSyntaxWrapper(ParenthesizedVariableDesignationSyntaxWrapper up) => (VariableDesignationSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ParenthesizedVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => (ParenthesizedVariableDesignationSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

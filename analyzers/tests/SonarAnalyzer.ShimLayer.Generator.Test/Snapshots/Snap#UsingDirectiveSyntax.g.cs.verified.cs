@@ -34,7 +34,6 @@ public static partial class UsingDirectiveSyntaxShimExtensions
 
     private static readonly Func<UsingDirectiveSyntax, TypeSyntax> NamespaceOrTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<UsingDirectiveSyntax, TypeSyntax>(WrappedType, "NamespaceOrType");
 
-
     extension(UsingDirectiveSyntax @this)
     {
         public SyntaxToken GlobalKeyword => (SyntaxToken)GlobalKeywordAccessor(@this);

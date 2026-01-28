@@ -85,8 +85,6 @@ public readonly partial struct DiscardDesignationSyntaxWrapper: ISyntaxWrapper<C
     public static implicit operator VariableDesignationSyntaxWrapper(DiscardDesignationSyntaxWrapper up) => (VariableDesignationSyntaxWrapper)up.SyntaxNode;
     public static explicit operator DiscardDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => (DiscardDesignationSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

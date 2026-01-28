@@ -30,7 +30,6 @@ public static partial class ClassOrStructConstraintSyntaxShimExtensions
 
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxToken> QuestionTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ClassOrStructConstraintSyntax, SyntaxToken>(WrappedType, "QuestionToken");
 
-
     extension(ClassOrStructConstraintSyntax @this)
     {
         public SyntaxToken QuestionToken => (SyntaxToken)QuestionTokenAccessor(@this);

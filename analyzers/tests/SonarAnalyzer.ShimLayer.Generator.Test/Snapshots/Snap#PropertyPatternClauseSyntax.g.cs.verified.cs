@@ -88,8 +88,6 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper: ISyntaxWrappe
     public static implicit operator CSharpSyntaxNode(PropertyPatternClauseSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

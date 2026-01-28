@@ -94,8 +94,6 @@ public readonly partial struct ParenthesizedPatternSyntaxWrapper: ISyntaxWrapper
     public static implicit operator ExpressionOrPatternSyntaxWrapper(ParenthesizedPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ParenthesizedPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ParenthesizedPatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

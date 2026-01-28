@@ -30,7 +30,6 @@ public static partial class NameColonSyntaxShimExtensions
 
     private static readonly Func<NameColonSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NameColonSyntax, ExpressionSyntax>(WrappedType, "Expression");
 
-
     extension(NameColonSyntax @this)
     {
         public ExpressionSyntax Expression => ExpressionAccessor(@this);

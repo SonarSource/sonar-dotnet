@@ -89,8 +89,6 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper: ISyntaxWrapp
     public static implicit operator DirectiveTriviaSyntax(IgnoredDirectiveTriviaSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

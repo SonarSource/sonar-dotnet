@@ -85,8 +85,6 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper: ISyntaxWrapp
     public static implicit operator TypeParameterConstraintSyntax(AllowsConstraintClauseSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

@@ -36,7 +36,6 @@ public static partial class NullableTypeSyntaxShimExtensions
 
     private static readonly Func<NullableTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsNuint");
 
-
     extension(NullableTypeSyntax @this)
     {
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);

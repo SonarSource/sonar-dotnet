@@ -88,8 +88,6 @@ public readonly partial struct DiscardPatternSyntaxWrapper: ISyntaxWrapper<CShar
     public static implicit operator ExpressionOrPatternSyntaxWrapper(DiscardPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator DiscardPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (DiscardPatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

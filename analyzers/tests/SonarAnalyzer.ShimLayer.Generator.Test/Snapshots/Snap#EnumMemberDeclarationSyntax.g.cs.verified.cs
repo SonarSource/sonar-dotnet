@@ -30,7 +30,6 @@ public static partial class EnumMemberDeclarationSyntaxShimExtensions
 
     private static readonly Func<EnumMemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<EnumMemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
-
     extension(EnumMemberDeclarationSyntax @this)
     {
         public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(@this);

@@ -32,7 +32,6 @@ public static partial class ConversionOperatorDeclarationSyntaxShimExtensions
 
     private static readonly Func<ConversionOperatorDeclarationSyntax, SyntaxToken> CheckedKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ConversionOperatorDeclarationSyntax, SyntaxToken>(WrappedType, "CheckedKeyword");
 
-
     extension(ConversionOperatorDeclarationSyntax @this)
     {
         public ExplicitInterfaceSpecifierSyntax ExplicitInterfaceSpecifier => ExplicitInterfaceSpecifierAccessor(@this);

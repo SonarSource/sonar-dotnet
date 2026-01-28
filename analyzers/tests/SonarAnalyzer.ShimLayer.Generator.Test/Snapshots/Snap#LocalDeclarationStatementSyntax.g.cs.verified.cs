@@ -34,7 +34,6 @@ public static partial class LocalDeclarationStatementSyntaxShimExtensions
 
     private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken> UsingKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<LocalDeclarationStatementSyntax, SyntaxToken>(WrappedType, "UsingKeyword");
 
-
     extension(LocalDeclarationStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

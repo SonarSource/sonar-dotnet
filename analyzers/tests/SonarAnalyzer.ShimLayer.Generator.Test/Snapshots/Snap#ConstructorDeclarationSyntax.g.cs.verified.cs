@@ -30,7 +30,6 @@ public static partial class ConstructorDeclarationSyntaxShimExtensions
 
     private static readonly Func<ConstructorDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ConstructorDeclarationSyntax, ArrowExpressionClauseSyntax>(WrappedType, "ExpressionBody");
 
-
     extension(ConstructorDeclarationSyntax @this)
     {
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(@this);

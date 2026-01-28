@@ -104,8 +104,6 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper: ISyntaxWrapper<
     public static implicit operator TypeSyntax(FunctionPointerTypeSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

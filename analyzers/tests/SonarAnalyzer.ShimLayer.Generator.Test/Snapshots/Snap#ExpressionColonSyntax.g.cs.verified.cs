@@ -88,8 +88,6 @@ public readonly partial struct ExpressionColonSyntaxWrapper: ISyntaxWrapper<CSha
     public static implicit operator BaseExpressionColonSyntaxWrapper(ExpressionColonSyntaxWrapper up) => (BaseExpressionColonSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ExpressionColonSyntaxWrapper(BaseExpressionColonSyntaxWrapper down) => (ExpressionColonSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

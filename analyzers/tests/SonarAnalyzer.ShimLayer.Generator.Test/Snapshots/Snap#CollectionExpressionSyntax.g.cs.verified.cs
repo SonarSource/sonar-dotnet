@@ -88,8 +88,6 @@ public readonly partial struct CollectionExpressionSyntaxWrapper: ISyntaxWrapper
     public static implicit operator ExpressionSyntax(CollectionExpressionSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

@@ -36,7 +36,6 @@ public static partial class ArrayTypeSyntaxShimExtensions
 
     private static readonly Func<ArrayTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNuint");
 
-
     extension(ArrayTypeSyntax @this)
     {
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);

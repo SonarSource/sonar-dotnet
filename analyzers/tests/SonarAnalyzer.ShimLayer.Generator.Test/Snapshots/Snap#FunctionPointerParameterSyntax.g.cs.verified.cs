@@ -91,8 +91,6 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper: ISyntaxWra
     public static implicit operator BaseParameterSyntaxWrapper(FunctionPointerParameterSyntaxWrapper up) => (BaseParameterSyntaxWrapper)up.SyntaxNode;
     public static explicit operator FunctionPointerParameterSyntaxWrapper(BaseParameterSyntaxWrapper down) => (FunctionPointerParameterSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

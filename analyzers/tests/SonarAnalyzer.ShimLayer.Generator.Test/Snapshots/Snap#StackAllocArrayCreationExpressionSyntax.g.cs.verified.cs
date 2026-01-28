@@ -30,7 +30,6 @@ public static partial class StackAllocArrayCreationExpressionSyntaxShimExtension
 
     private static readonly Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
 
-
     extension(StackAllocArrayCreationExpressionSyntax @this)
     {
         public InitializerExpressionSyntax Initializer => InitializerAccessor(@this);

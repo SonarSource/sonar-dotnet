@@ -104,8 +104,6 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper: ISyntaxWrap
     public static implicit operator LineOrSpanDirectiveTriviaSyntaxWrapper(LineSpanDirectiveTriviaSyntaxWrapper up) => (LineOrSpanDirectiveTriviaSyntaxWrapper)up.SyntaxNode;
     public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(LineOrSpanDirectiveTriviaSyntaxWrapper down) => (LineSpanDirectiveTriviaSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

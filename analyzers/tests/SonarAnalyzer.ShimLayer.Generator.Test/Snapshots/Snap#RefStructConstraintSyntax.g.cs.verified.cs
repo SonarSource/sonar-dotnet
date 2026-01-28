@@ -88,8 +88,6 @@ public readonly partial struct RefStructConstraintSyntaxWrapper: ISyntaxWrapper<
     public static implicit operator AllowsConstraintSyntaxWrapper(RefStructConstraintSyntaxWrapper up) => (AllowsConstraintSyntaxWrapper)up.SyntaxNode;
     public static explicit operator RefStructConstraintSyntaxWrapper(AllowsConstraintSyntaxWrapper down) => (RefStructConstraintSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

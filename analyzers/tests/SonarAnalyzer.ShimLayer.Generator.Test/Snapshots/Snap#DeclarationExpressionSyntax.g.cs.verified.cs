@@ -85,8 +85,6 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper: ISyntaxWrappe
     public static implicit operator ExpressionSyntax(DeclarationExpressionSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

@@ -94,8 +94,6 @@ public readonly partial struct BinaryPatternSyntaxWrapper: ISyntaxWrapper<CSharp
     public static implicit operator ExpressionOrPatternSyntaxWrapper(BinaryPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator BinaryPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (BinaryPatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

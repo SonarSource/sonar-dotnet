@@ -109,8 +109,6 @@ public readonly partial struct ForEachVariableStatementSyntaxWrapper: ISyntaxWra
     public static implicit operator CommonForEachStatementSyntaxWrapper(ForEachVariableStatementSyntaxWrapper up) => (CommonForEachStatementSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ForEachVariableStatementSyntaxWrapper(CommonForEachStatementSyntaxWrapper down) => (ForEachVariableStatementSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

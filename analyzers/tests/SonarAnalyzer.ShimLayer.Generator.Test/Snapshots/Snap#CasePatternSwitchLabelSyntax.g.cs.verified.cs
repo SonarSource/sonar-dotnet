@@ -87,8 +87,6 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper: ISyntaxWrapp
     public static implicit operator SwitchLabelSyntax(CasePatternSwitchLabelSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

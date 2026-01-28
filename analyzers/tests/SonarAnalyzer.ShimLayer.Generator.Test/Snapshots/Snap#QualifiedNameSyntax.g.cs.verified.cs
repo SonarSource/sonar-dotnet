@@ -36,7 +36,6 @@ public static partial class QualifiedNameSyntaxShimExtensions
 
     private static readonly Func<QualifiedNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<QualifiedNameSyntax, Boolean>(WrappedType, "IsNuint");
 
-
     extension(QualifiedNameSyntax @this)
     {
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);

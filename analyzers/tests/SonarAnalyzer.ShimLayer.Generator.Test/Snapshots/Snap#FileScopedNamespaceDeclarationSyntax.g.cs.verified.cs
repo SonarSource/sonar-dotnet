@@ -106,8 +106,6 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper: ISyn
     public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(FileScopedNamespaceDeclarationSyntaxWrapper up) => (BaseNamespaceDeclarationSyntaxWrapper)up.SyntaxNode;
     public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(BaseNamespaceDeclarationSyntaxWrapper down) => (FileScopedNamespaceDeclarationSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

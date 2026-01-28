@@ -36,7 +36,6 @@ public static partial class GenericNameSyntaxShimExtensions
 
     private static readonly Func<GenericNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<GenericNameSyntax, Boolean>(WrappedType, "IsNuint");
 
-
     extension(GenericNameSyntax @this)
     {
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);

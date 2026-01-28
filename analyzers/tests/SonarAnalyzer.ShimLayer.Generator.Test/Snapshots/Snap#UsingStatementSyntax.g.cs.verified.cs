@@ -32,7 +32,6 @@ public static partial class UsingStatementSyntaxShimExtensions
 
     private static readonly Func<UsingStatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<UsingStatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
 
-
     extension(UsingStatementSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

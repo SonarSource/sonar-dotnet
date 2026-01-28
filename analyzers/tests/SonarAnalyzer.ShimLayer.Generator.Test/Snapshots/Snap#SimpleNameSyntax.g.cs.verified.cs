@@ -36,7 +36,6 @@ public static partial class SimpleNameSyntaxShimExtensions
 
     private static readonly Func<SimpleNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNuint");
 
-
     extension(SimpleNameSyntax @this)
     {
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);

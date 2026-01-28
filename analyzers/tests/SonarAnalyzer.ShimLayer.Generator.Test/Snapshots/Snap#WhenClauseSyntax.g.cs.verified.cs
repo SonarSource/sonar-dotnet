@@ -85,8 +85,6 @@ public readonly partial struct WhenClauseSyntaxWrapper: ISyntaxWrapper<CSharpSyn
     public static implicit operator CSharpSyntaxNode(WhenClauseSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

@@ -80,8 +80,6 @@ public readonly partial struct AllowsConstraintSyntaxWrapper: ISyntaxWrapper<CSh
     public static implicit operator CSharpSyntaxNode(AllowsConstraintSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

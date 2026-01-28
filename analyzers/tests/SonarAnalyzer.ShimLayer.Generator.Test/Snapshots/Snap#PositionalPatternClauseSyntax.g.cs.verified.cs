@@ -88,8 +88,6 @@ public readonly partial struct PositionalPatternClauseSyntaxWrapper: ISyntaxWrap
     public static implicit operator CSharpSyntaxNode(PositionalPatternClauseSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

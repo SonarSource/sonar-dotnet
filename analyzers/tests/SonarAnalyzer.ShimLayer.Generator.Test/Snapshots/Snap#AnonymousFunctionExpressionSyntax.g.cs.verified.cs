@@ -34,7 +34,6 @@ public static partial class AnonymousFunctionExpressionSyntaxShimExtensions
 
     private static readonly Func<AnonymousFunctionExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<AnonymousFunctionExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
-
     extension(AnonymousFunctionExpressionSyntax @this)
     {
         public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(@this);

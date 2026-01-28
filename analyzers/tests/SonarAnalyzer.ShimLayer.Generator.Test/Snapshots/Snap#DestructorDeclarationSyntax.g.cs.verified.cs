@@ -30,7 +30,6 @@ public static partial class DestructorDeclarationSyntaxShimExtensions
 
     private static readonly Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax>(WrappedType, "ExpressionBody");
 
-
     extension(DestructorDeclarationSyntax @this)
     {
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(@this);

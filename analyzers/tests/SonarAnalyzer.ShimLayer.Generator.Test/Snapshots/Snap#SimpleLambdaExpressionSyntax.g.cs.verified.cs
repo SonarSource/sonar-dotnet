@@ -36,7 +36,6 @@ public static partial class SimpleLambdaExpressionSyntaxShimExtensions
 
     private static readonly Func<SimpleLambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleLambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
-
     extension(SimpleLambdaExpressionSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

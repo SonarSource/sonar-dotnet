@@ -32,7 +32,6 @@ public static partial class MemberDeclarationSyntaxShimExtensions
 
     private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
-
     extension(MemberDeclarationSyntax @this)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);

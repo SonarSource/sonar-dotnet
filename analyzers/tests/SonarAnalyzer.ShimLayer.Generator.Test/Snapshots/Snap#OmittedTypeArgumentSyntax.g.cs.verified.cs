@@ -36,7 +36,6 @@ public static partial class OmittedTypeArgumentSyntaxShimExtensions
 
     private static readonly Func<OmittedTypeArgumentSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<OmittedTypeArgumentSyntax, Boolean>(WrappedType, "IsNuint");
 
-
     extension(OmittedTypeArgumentSyntax @this)
     {
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);

@@ -30,7 +30,6 @@ public static partial class ShebangDirectiveTriviaSyntaxShimExtensions
 
     private static readonly Func<ShebangDirectiveTriviaSyntax, SyntaxToken> ContentAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ShebangDirectiveTriviaSyntax, SyntaxToken>(WrappedType, "Content");
 
-
     extension(ShebangDirectiveTriviaSyntax @this)
     {
         public SyntaxToken Content => (SyntaxToken)ContentAccessor(@this);

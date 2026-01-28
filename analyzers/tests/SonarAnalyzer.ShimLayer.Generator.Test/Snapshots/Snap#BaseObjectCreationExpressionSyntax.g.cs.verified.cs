@@ -88,8 +88,6 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper: ISynta
     public static implicit operator ExpressionSyntax(BaseObjectCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

@@ -91,8 +91,6 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
     public static implicit operator ExpressionSyntax(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

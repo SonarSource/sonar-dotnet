@@ -97,8 +97,6 @@ public readonly partial struct RecordDeclarationSyntaxWrapper: ISyntaxWrapper<Ty
     public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

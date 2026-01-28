@@ -97,8 +97,6 @@ public readonly partial struct ListPatternSyntaxWrapper: ISyntaxWrapper<CSharpSy
     public static implicit operator ExpressionOrPatternSyntaxWrapper(ListPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ListPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ListPatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

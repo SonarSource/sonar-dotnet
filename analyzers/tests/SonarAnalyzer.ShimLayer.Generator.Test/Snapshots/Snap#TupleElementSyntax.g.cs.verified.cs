@@ -85,8 +85,6 @@ public readonly partial struct TupleElementSyntaxWrapper: ISyntaxWrapper<CSharpS
     public static implicit operator CSharpSyntaxNode(TupleElementSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

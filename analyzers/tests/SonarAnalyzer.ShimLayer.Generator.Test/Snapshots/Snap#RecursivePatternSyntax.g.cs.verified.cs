@@ -97,8 +97,6 @@ public readonly partial struct RecursivePatternSyntaxWrapper: ISyntaxWrapper<CSh
     public static implicit operator ExpressionOrPatternSyntaxWrapper(RecursivePatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator RecursivePatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (RecursivePatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

@@ -91,8 +91,6 @@ public readonly partial struct SlicePatternSyntaxWrapper: ISyntaxWrapper<CSharpS
     public static implicit operator ExpressionOrPatternSyntaxWrapper(SlicePatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator SlicePatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (SlicePatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

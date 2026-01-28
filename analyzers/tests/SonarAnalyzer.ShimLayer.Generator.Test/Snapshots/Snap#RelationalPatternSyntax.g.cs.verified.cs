@@ -91,8 +91,6 @@ public readonly partial struct RelationalPatternSyntaxWrapper: ISyntaxWrapper<CS
     public static implicit operator ExpressionOrPatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator RelationalPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (RelationalPatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

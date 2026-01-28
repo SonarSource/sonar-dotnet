@@ -100,8 +100,6 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper: ISyntaxWra
     public static implicit operator MemberDeclarationSyntax(BaseNamespaceDeclarationSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

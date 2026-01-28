@@ -94,8 +94,6 @@ public readonly partial struct SwitchExpressionSyntaxWrapper: ISyntaxWrapper<Exp
     public static implicit operator ExpressionSyntax(SwitchExpressionSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

@@ -91,8 +91,6 @@ public readonly partial struct DeclarationPatternSyntaxWrapper: ISyntaxWrapper<C
     public static implicit operator ExpressionOrPatternSyntaxWrapper(DeclarationPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator DeclarationPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (DeclarationPatternSyntaxWrapper)down.SyntaxNode;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

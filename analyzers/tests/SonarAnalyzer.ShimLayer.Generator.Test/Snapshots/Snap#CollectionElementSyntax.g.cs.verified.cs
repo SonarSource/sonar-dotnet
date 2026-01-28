@@ -80,8 +80,6 @@ public readonly partial struct CollectionElementSyntaxWrapper: ISyntaxWrapper<CS
     public static implicit operator CSharpSyntaxNode(CollectionElementSyntaxWrapper wrapper) =>
         wrapper.node;
 
-
-
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }
