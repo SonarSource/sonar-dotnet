@@ -86,20 +86,14 @@ public class TelemetryProcessorTest {
     collector.addTelemetry(
       SonarAnalyzer.Telemetry.newBuilder()
         .setLanguageVersion("CS12")
-        .addTargetFramework("TFM1")
-        .addTargetFramework("TFM2")
         .build());
     collector.addTelemetry(
       SonarAnalyzer.Telemetry.newBuilder()
         .setLanguageVersion("CS12")
-        .addTargetFramework("TFM1")
-        .addTargetFramework("TFM2")
-        .addTargetFramework("TFM3")
         .build());
     collector.addTelemetry(
       SonarAnalyzer.Telemetry.newBuilder()
         .setLanguageVersion("CS10")
-        .addTargetFramework("TFM2")
         .build());
     final var telemetry = new ArrayList<Pair<String, String>>();
     doAnswer((Answer<Void>) invocationOnMock -> {
@@ -110,18 +104,12 @@ public class TelemetryProcessorTest {
     sensor.execute(context);
     assertThat(telemetry).containsExactlyInAnyOrder(
       Pair.of("PLUGIN_KEY.LANG_KEY.language_version.cs10", "1"),
-      Pair.of("PLUGIN_KEY.LANG_KEY.language_version.cs12", "2"),
-      Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm1", "2"),
-      Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm2", "3"),
-      Pair.of("PLUGIN_KEY.LANG_KEY.target_framework.tfm3", "1"));
+      Pair.of("PLUGIN_KEY.LANG_KEY.language_version.cs12", "2"));
     assertThat(logTester.logs()).containsExactly(
       "Found 3 telemetry messages reported by the analyzers.",
-      "Aggregated 5 metrics.",
+      "Aggregated 2 metrics.",
       "Adding metric: PLUGIN_KEY.LANG_KEY.language_version.cs10=1",
       "Adding metric: PLUGIN_KEY.LANG_KEY.language_version.cs12=2",
-      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm2=3",
-      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm1=2",
-      "Adding metric: PLUGIN_KEY.LANG_KEY.target_framework.tfm3=1",
-      "Added 5 metrics.");
+      "Added 2 metrics.");
   }
 }

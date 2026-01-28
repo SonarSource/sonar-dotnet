@@ -131,6 +131,5 @@ message LogInfo {
 
 message Telemetry {
   string projectFullPath = 10;          // From ProjectInfo.xml FullPath
-  repeated string targetFramework = 20; // For multi-targeting. From ProjectInfo.xml TargetFramework
   string languageVersion = 30;          // From CSharpParseOptions.LanguageVersion
 }

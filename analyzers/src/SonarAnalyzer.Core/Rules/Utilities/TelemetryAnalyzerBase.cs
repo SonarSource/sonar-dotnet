@@ -51,19 +51,10 @@ public abstract class TelemetryAnalyzerBase<TSyntaxKind> : UtilityAnalyzerBase
     private Telemetry CreateTelemetry(SonarCompilationReportingContext c)
     {
         var projectConfiguration = c.ProjectConfiguration();
-        var telemetry = new Telemetry
+        return new Telemetry
         {
             ProjectFullPath = projectConfiguration.ProjectPath is { } path ? path : string.Empty,
             LanguageVersion = LanguageVersion(c.Compilation) is { } language ? language : string.Empty,
         };
-        if (!string.IsNullOrEmpty(projectConfiguration.TargetFramework?.Trim()))
-        {
-            var sanitizedFrameworks = projectConfiguration.TargetFramework
-                .Split([';'], StringSplitOptions.RemoveEmptyEntries)
-                .Select(x => x.Trim())
-                .Where(x => !string.IsNullOrEmpty(x));
-            telemetry.TargetFramework.AddRange(sanitizedFrameworks);
-        }
-        return telemetry;
     }
 }

@@ -30,13 +30,10 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class TelemetryAggregator {
   public final String languageVersion;
-  public final String targetFramework;
 
   public TelemetryAggregator(String pluginKey, String language) {
-
     var pluginLanguageKey = pluginKey + "." + language + ".";
     this.languageVersion = pluginLanguageKey + "language_version.%s";
-    this.targetFramework = pluginLanguageKey + "target_framework.%s";
   }
 
   /**
@@ -64,21 +61,7 @@ public class TelemetryAggregator {
       x.getValue()));
   }
 
-  private Stream<Map.Entry<String, String>> targetFrameworks(Stream<Collection<String>> targetFrameworks) {
-    var countBy = targetFrameworks
-      .flatMap(Collection::stream)
-      .filter(x -> !x.isEmpty())
-      .collect(groupingBy(identity(), counting()));
-    return countBy.entrySet().stream().map(x -> kvp(
-      key(targetFramework, x.getKey()),
-      x.getValue()));
-  }
-
   public Collection<Map.Entry<String, String>> aggregate(Collection<SonarAnalyzer.Telemetry> telemetries) {
-    return Stream.of(
-        languageVersion(telemetries.stream().map(SonarAnalyzer.Telemetry::getLanguageVersion)),
-        targetFrameworks(telemetries.stream().map(SonarAnalyzer.Telemetry::getTargetFrameworkList)))
-      .flatMap(identity())
-      .toList();
+    return languageVersion(telemetries.stream().map(SonarAnalyzer.Telemetry::getLanguageVersion)).toList();
   }
 }

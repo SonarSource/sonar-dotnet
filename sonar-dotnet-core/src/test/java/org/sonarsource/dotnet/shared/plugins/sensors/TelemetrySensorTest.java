@@ -77,14 +77,8 @@ public class TelemetrySensorTest {
   public void executeTelemetrySensor() {
     sensor.execute(context);
     assertThat(collector.getTelemetryMessages()).satisfiesExactly(
-      t -> {
-        assertThat(t.getLanguageVersion()).isEqualTo("CS12");
-        assertThat(t.getTargetFrameworkList()).containsExactly("TFM1", "TFM2");
-      },
-      t -> {
-        assertThat(t.getLanguageVersion()).isEqualTo("CS12");
-        assertThat(t.getTargetFrameworkList()).containsExactly("TFM1", "TFM2", "TFM3");
-      });
+      t -> assertThat(t.getLanguageVersion()).isEqualTo("CS12"),
+      t -> assertThat(t.getLanguageVersion()).isEqualTo("CS12"));
     assertThat(logTester.logs()).containsExactly(
       "Start importing metrics.");
   }

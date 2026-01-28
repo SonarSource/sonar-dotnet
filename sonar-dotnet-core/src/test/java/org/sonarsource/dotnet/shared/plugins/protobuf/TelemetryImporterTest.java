@@ -43,17 +43,12 @@ public class TelemetryImporterTest {
       WriteTelemetryToFile(tmp.getFile(),
         SonarAnalyzer.Telemetry.newBuilder()
           .setProjectFullPath("A.csproj")
-          .addTargetFramework("tfm1")
-          .addTargetFramework("tfm2")
           .setLanguageVersion("cs12")
           .build(),
         // Technically we only expect a single entry in "telemetry.pb", but we read it as if there could be multiple
         // Let's have UT where we have multiple entries, just to be sure we do not regress here.
         SonarAnalyzer.Telemetry.newBuilder()
           .setProjectFullPath("B.csproj")
-          .addTargetFramework("tfm1")
-          .addTargetFramework("tfm2")
-          .addTargetFramework("tfm3")
           .setLanguageVersion("cs12")
           .build());
       sut.accept(tmp.getFile());
@@ -62,12 +57,10 @@ public class TelemetryImporterTest {
         t -> {
           assertThat(t.getProjectFullPath()).isEqualTo("A.csproj");
           assertThat(t.getLanguageVersion()).isEqualTo("cs12");
-          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2");
         },
         t -> {
           assertThat(t.getProjectFullPath()).isEqualTo("B.csproj");
           assertThat(t.getLanguageVersion()).isEqualTo("cs12");
-          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2", "tfm3");
         });
     }
   }
@@ -82,16 +75,11 @@ public class TelemetryImporterTest {
       WriteTelemetryToFile(tmp1.getFile(),
         SonarAnalyzer.Telemetry.newBuilder()
           .setProjectFullPath("A.csproj")
-          .addTargetFramework("tfm1")
-          .addTargetFramework("tfm2")
           .setLanguageVersion("cs12")
           .build());
       WriteTelemetryToFile(tmp2.getFile(),
         SonarAnalyzer.Telemetry.newBuilder()
           .setProjectFullPath("B.csproj")
-          .addTargetFramework("tfm1")
-          .addTargetFramework("tfm2")
-          .addTargetFramework("tfm3")
           .setLanguageVersion("cs12")
           .build());
       sut.accept(tmp1.getFile());
@@ -101,12 +89,10 @@ public class TelemetryImporterTest {
         t -> {
           assertThat(t.getProjectFullPath()).isEqualTo("A.csproj");
           assertThat(t.getLanguageVersion()).isEqualTo("cs12");
-          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2");
         },
         t -> {
           assertThat(t.getProjectFullPath()).isEqualTo("B.csproj");
           assertThat(t.getLanguageVersion()).isEqualTo("cs12");
-          assertThat(t.getTargetFrameworkList()).containsExactlyInAnyOrder("tfm1", "tfm2", "tfm3");
         });
     }
   }
