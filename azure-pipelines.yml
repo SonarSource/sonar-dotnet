@@ -125,9 +125,12 @@ stages:
 
     - task: Maven@4
       displayName: 'Maven build'
+      env:
+        ARTIFACTORY_PRIVATE_READER_USERNAME: $(ARTIFACTORY_PRIVATE_READER_USERNAME)
+        ARTIFACTORY_PRIVATE_READER_PASSWORD: $(ARTIFACTORY_PRIVATE_READER_ACCESS_TOKEN)
       inputs:
         goals: 'verify'
-        options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SHORT_VERSION)
+        options: -B --settings $(mavenSettings.secureFilePath) -Pcoverage -Dsonar.projectVersion=$(SHORT_VERSION) -Denable-repo=private
         publishJUnitResults: true
         testResultsFiles: '**/surefire-reports/TEST-*.xml'
         testRunTitle: '$(Agent.JobName)'
