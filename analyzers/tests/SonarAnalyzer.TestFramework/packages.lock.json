@@ -130,6 +130,15 @@
           "Microsoft.CodeCoverage": "18.0.1"
         }
       },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "vUc9Npcs14QsyOD01tnv/m8sQUnGTGOw1BCmKcv77LBJY7OxhJ+zJF7UD/sCL3lYNFuqmQEVlkfS4Quif6FyYg==",
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3"
+        }
+      },
       "MSTest.TestAdapter": {
         "type": "Direct",
         "requested": "[4.0.2, )",
@@ -387,6 +396,11 @@
           "System.Buffers": "4.6.0",
           "System.Memory": "4.6.0"
         }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies.net48": {
+        "type": "Transitive",
+        "resolved": "1.0.3",
+        "contentHash": "zMk4D+9zyiEWByyQ7oPImPN/Jhpj166Ky0Nlla4eXlNL8hI/BtSJsgR8Inldd4NNpIAH3oh8yym0W2DrhXdSLQ=="
       },
       "Microsoft.Testing.Extensions.Telemetry": {
         "type": "Transitive",
@@ -677,7 +691,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer.Lightup": "[10.19.0, )",
+          "SonarAnalyzer.ShimLayer.Lightup": "[10.20.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -687,7 +701,7 @@
           "Google.Protobuf": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.19.0, )",
+          "SonarAnalyzer.CFG": "[10.20.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       },
@@ -703,7 +717,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[10.19.0, )",
+          "SonarAnalyzer.ShimLayer": "[10.20.0, )",
           "System.Collections.Immutable": "[1.1.37, )"
         }
       }
@@ -1206,7 +1220,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer.Lightup": "[10.19.0, )"
+          "SonarAnalyzer.ShimLayer.Lightup": "[10.20.0, )"
         }
       },
       "sonaranalyzer.core": {
@@ -1215,7 +1229,7 @@
           "Google.Protobuf": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.19.0, )"
+          "SonarAnalyzer.CFG": "[10.20.0, )"
         }
       },
       "sonaranalyzer.shimlayer": {
@@ -1229,7 +1243,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[10.19.0, )"
+          "SonarAnalyzer.ShimLayer": "[10.20.0, )"
         }
       }
     },
@@ -1731,7 +1745,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer.Lightup": "[10.19.0, )"
+          "SonarAnalyzer.ShimLayer.Lightup": "[10.20.0, )"
         }
       },
       "sonaranalyzer.core": {
@@ -1740,7 +1754,7 @@
           "Google.Protobuf": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.19.0, )"
+          "SonarAnalyzer.CFG": "[10.20.0, )"
         }
       },
       "sonaranalyzer.shimlayer": {
@@ -1754,7 +1768,7 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[10.19.0, )"
+          "SonarAnalyzer.ShimLayer": "[10.20.0, )"
         }
       }
     }

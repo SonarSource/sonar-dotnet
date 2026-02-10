@@ -8,4 +8,11 @@
     <PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
     <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
   </ItemGroup>
+
+  <!-- Explicit reference to ensure consistent lock files across platforms (Linux/Windows).
+       On Linux, this package is implicitly added for net48 targets, but not on Windows.
+       See: https://github.com/NuGet/Home/issues/9195 -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
+  </ItemGroup>
 </Project>
