@@ -519,7 +519,7 @@
       "Internal.SonarAnalyzer.CSharp.Styling": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[4.14.0, )",
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[5.0.0, )",
           "SonarAnalyzer.CSharp.Core": "[10.20.0, )",
           "SonarAnalyzer.Core": "[10.20.0, )"
         }
