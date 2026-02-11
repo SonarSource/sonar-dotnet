@@ -12,7 +12,7 @@ languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube),
 
 ## Features
 
-* [470+ C# rules](https://rules.sonarsource.com/csharp) and [210+ VB.&#8203;NET rules](https://rules.sonarsource.com/vbnet)
+* 470+ C# rules and 210+ VB.&#8203;NET rules
 * Metrics (cognitive complexity, duplications, number of lines, etc.)
 * Import of [test coverage reports](https://community.sonarsource.com/t/9871) from Visual Studio Code Coverage, dotCover, OpenCover, Coverlet, Altcover.
 * Import of third-party Roslyn Analyzers results
@@ -22,8 +22,6 @@ languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube),
 
 * [Project homepage](https://redirect.sonarsource.com/plugins/csharp.html)
 * [Issue tracking](./docs/issues.md)
-* [C# rules](https://rules.sonarsource.com/csharp)
-* [VB.Net rules](https://rules.sonarsource.com/vbnet)
 
 ### Nuget.org packages
 

@@ -39,7 +39,6 @@
           "shortDescription": "Unused private types or members should be removed",
           "fullDescription": "private or internal types or private members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.",
           "defaultLevel": "note",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1144",
           "properties": {
             "category": "Major Code Smell",
             "isEnabledByDefault": true,

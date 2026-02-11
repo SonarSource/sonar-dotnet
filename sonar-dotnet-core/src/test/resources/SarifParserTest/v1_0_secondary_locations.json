@@ -144,7 +144,6 @@
           "shortDescription": "Cognitive Complexity of methods should not be too high",
           "fullDescription": "Cognitive Complexity is a measure of how hard the control flow of a method is to understand. Methods with high Cognitive Complexity will be difficult to maintain.",
           "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-3776",
           "properties": {
             "category": "Critical Code Smell",
             "isEnabledByDefault": false,

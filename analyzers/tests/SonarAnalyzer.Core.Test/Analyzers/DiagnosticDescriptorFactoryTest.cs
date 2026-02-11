@@ -42,7 +42,7 @@ public class DiagnosticDescriptorFactoryTest
         result.DefaultSeverity.Should().Be(DiagnosticSeverity.Warning);
         result.IsEnabledByDefault.Should().BeTrue();
         result.Description.ToString().Should().Be("Sxxxx Description");
-        result.HelpLinkUri.Should().Be("https://rules.sonarsource.com/csharp/RSPEC-xxxx");
+        result.HelpLinkUri.Should().Be(string.Empty);
         result.CustomTags.Should().BeEquivalentTo(LanguageNames.CSharp, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
     }
 
@@ -58,7 +58,7 @@ public class DiagnosticDescriptorFactoryTest
         result.DefaultSeverity.Should().Be(DiagnosticSeverity.Warning);
         result.IsEnabledByDefault.Should().BeTrue();
         result.Description.ToString().Should().Be("Sxxxx Description");
-        result.HelpLinkUri.Should().Be("https://rules.sonarsource.com/vbnet/RSPEC-xxxx");
+        result.HelpLinkUri.Should().Be(string.Empty);
         result.CustomTags.Should().BeEquivalentTo(LanguageNames.VisualBasic, DiagnosticDescriptorFactory.MainSourceScopeTag, DiagnosticDescriptorFactory.SonarWayTag);
     }
 

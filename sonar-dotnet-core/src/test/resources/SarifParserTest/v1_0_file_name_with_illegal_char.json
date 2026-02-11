@@ -39,7 +39,6 @@
           "shortDescription": "Utility classes should not have public constructors",
           "fullDescription": "Utility classes, which are collections of static members, are not meant to be instantiated. Even abstract utility classes, which can be extended, should not have public constructors.",
           "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1118",
           "properties": {
             "category": "Sonar Code Smell",
             "isEnabledByDefault": true

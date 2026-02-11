@@ -80,7 +80,6 @@
           "shortDescription": "Null pointers should not be dereferenced",
           "fullDescription": "Accessing a null value will always throw a NullReferenceException most likely causing an abrupt program termination.",
           "defaultLevel": "warning",
-          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-2259",
           "properties": {
             "category": "Major Bug",
             "isEnabledByDefault": true,

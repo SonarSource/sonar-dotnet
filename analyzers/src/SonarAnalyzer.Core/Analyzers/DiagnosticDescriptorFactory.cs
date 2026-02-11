@@ -56,7 +56,7 @@ public static class DiagnosticDescriptorFactory
             fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
             rule.IsHotspot || (isEnabledByDefault ?? rule.SonarWay),
             rule.Description,
-            language.HelpLink(rule.Id),
+            null,
             BuildTags(language, rule, fadeOutCode, isCompilationEnd));
 
     private static string[] BuildTags(AnalyzerLanguage language, RuleDescriptor rule, bool fadeOutCode, bool isCompilationEnd)

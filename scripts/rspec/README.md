@@ -4,7 +4,6 @@ The `rspec.ps1` script downloads and calls the rule-api JAR.
 
 The `sonarpedia.json` file is used by:
 - the releasability check
-- rules.sonarsource.com
 
 # How to use
 
