@@ -127,7 +127,10 @@
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
         "resolved": "2.23.0",
-        "contentHash": "nWArUZTdU7iqZLycLKWe0TDms48KKGE6pONH2terYNa8REXiqixrMOkf1sk5DHGMaUTqONU2YkS4SAXBhLStgw=="
+        "contentHash": "nWArUZTdU7iqZLycLKWe0TDms48KKGE6pONH2terYNa8REXiqixrMOkf1sk5DHGMaUTqONU2YkS4SAXBhLStgw==",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
+        }
       },
       "Microsoft.Build.Framework": {
         "type": "Transitive",
@@ -331,7 +334,10 @@
       "Microsoft.TestPlatform.ObjectModel": {
         "type": "Transitive",
         "resolved": "18.0.1",
-        "contentHash": "qT/mwMcLF9BieRkzOBPL2qCopl8hQu6A1P7JWAoj/FMu5i9vds/7cjbJ/LLtaiwWevWLAeD5v5wjQJ/l6jvhWQ=="
+        "contentHash": "qT/mwMcLF9BieRkzOBPL2qCopl8hQu6A1P7JWAoj/FMu5i9vds/7cjbJ/LLtaiwWevWLAeD5v5wjQJ/l6jvhWQ==",
+        "dependencies": {
+          "System.Reflection.Metadata": "8.0.0"
+        }
       },
       "Microsoft.TestPlatform.TestHost": {
         "type": "Transitive",
@@ -426,6 +432,11 @@
         "resolved": "1.2.0.556",
         "contentHash": "zvn9Mqs/ox/83cpYPignI8hJEM2A93s2HkHs8HYMOAQW0PkampyoErAiIyKxgTLqbbad29HX/shv/6LGSjPJNQ=="
       },
+      "System.Collections.Immutable": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "AurL6Y5BA1WotzlEvVaIDpqzpIPvYnnldxru8oXJU2yFxFUy3+pNXjXd1ymO+RA0rq0+590Q8gaz2l3Sr7fmqg=="
+      },
       "System.Composition": {
         "type": "Transitive",
         "resolved": "9.0.0",
@@ -483,6 +494,11 @@
           "System.Security.Permissions": "6.0.0"
         }
       },
+      "System.Diagnostics.DiagnosticSource": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "tCQTzPsGZh/A9LhhA6zrqCRV4hOHsK90/G7q3Khxmn6tnB1PuNU0cRaKANP2AWcF9bn0zsuOoZOSrHuJk6oNBA=="
+      },
       "System.Diagnostics.EventLog": {
         "type": "Transitive",
         "resolved": "6.0.0",
@@ -496,10 +512,23 @@
           "Microsoft.Win32.SystemEvents": "6.0.0"
         }
       },
+      "System.Reflection.Metadata": {
+        "type": "Transitive",
+        "resolved": "8.0.0",
+        "contentHash": "ptvgrFh7PvWI8bcVqG5rsA/weWM09EnthFHR5SCnS6IN+P4mj6rE1lBDC4U8HL9/57htKAqy4KQ3bBj84cfYyQ==",
+        "dependencies": {
+          "System.Collections.Immutable": "8.0.0"
+        }
+      },
       "System.Reflection.MetadataLoadContext": {
         "type": "Transitive",
         "resolved": "10.0.0",
         "contentHash": "aRvr8txoBlDMOvo2e9GqY6cMbYYKeXgq2LabyoGacLUGYQpwI1T13YmvOx135TJl4cY6TGetfnHolNhZEl1Log=="
+      },
+      "System.Security.AccessControl": {
+        "type": "Transitive",
+        "resolved": "6.0.0",
+        "contentHash": "AUADIc0LIEQe7MzC+I0cl0rAT8RrTAKFHl53yHjEUzNVIaUlhFY11vc2ebiVJzVBuOzun6F7FBA+8KAbGTTedQ=="
       },
       "System.Security.Cryptography.Pkcs": {
         "type": "Transitive",
@@ -516,6 +545,7 @@
         "resolved": "6.0.0",
         "contentHash": "T/uuc7AklkDoxmcJ7LGkyX1CcSviZuLCa4jg3PekfJ7SU0niF0IVTXwUiNVP9DSpzou2PpxJ+eNY2IfDM90ZCg==",
         "dependencies": {
+          "System.Security.AccessControl": "6.0.0",
           "System.Windows.Extensions": "6.0.0"
         }
       },
@@ -548,7 +578,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer.Lightup": "[10.20.0, )"
+          "SonarAnalyzer.ShimLayer.Lightup": "[10.20.0, )",
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       },
       "sonaranalyzer.core": {
@@ -557,13 +588,15 @@
           "Google.Protobuf": "[3.6.1, )",
           "Microsoft.CodeAnalysis.Workspaces.Common": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.CFG": "[10.20.0, )"
+          "SonarAnalyzer.CFG": "[10.20.0, )",
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       },
       "sonaranalyzer.shimlayer": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )"
+          "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       },
       "sonaranalyzer.shimlayer.lightup": {
@@ -571,7 +604,8 @@
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "[1.3.2, )",
           "Microsoft.Composition": "[1.0.27, )",
-          "SonarAnalyzer.ShimLayer": "[10.20.0, )"
+          "SonarAnalyzer.ShimLayer": "[10.20.0, )",
+          "System.Collections.Immutable": "[1.1.37, )"
         }
       },
       "sonaranalyzer.testframework": {
