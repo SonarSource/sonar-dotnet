@@ -11,7 +11,32 @@ namespace Tests.Diagnostics
 
             Console.WriteLine();
             while (true)
-                ; // Fixed
+                ; // Compliant - empty statement is the body of a loop, excluded from S1116
+        }
+
+        // loop bodies are excluded
+        public void LoopBodyExclusions()
+        {
+            for (int i = 0; i < 10; i++) ; // Compliant
+            while (true) ; // Compliant
+            do ; while (true); // Compliant
+        }
+
+        public void EmptyStatementInsideBlock()
+        {
+            while (true)
+            {
+
+            }
+        }
+
+        public void EmptyStatementAfterLoop()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(i);
+            }
+
         }
     }
 }

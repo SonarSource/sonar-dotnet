@@ -15,8 +15,32 @@ namespace Tests.Diagnostics
             ; // Noncompliant
             Console.WriteLine();
             while (true)
-                ; // Noncompliant
-//              ^
+                ; // Compliant - empty statement is the body of a loop, excluded from S1116
+        }
+
+        // loop bodies are excluded
+        public void LoopBodyExclusions()
+        {
+            for (int i = 0; i < 10; i++) ; // Compliant
+            while (true) ; // Compliant
+            do ; while (true); // Compliant
+        }
+
+        public void EmptyStatementInsideBlock()
+        {
+            while (true)
+            {
+                ; // Noncompliant - empty statement inside a block, not the direct body
+            }
+        }
+
+        public void EmptyStatementAfterLoop()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(i);
+            }
+            ; // Noncompliant - standalone empty statement, not a loop body
         }
     }
 }

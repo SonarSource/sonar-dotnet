@@ -4,7 +4,7 @@
 ; // Noncompliant
 Console.WriteLine();
 while (true)
-    ; // Noncompliant
+    ; // Compliant: loop bodies are excluded
 
 record R
 {

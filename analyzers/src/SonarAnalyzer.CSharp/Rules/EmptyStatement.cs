@@ -14,19 +14,26 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class EmptyStatement : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class EmptyStatement : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S1116";
-        private const string MessageFormat = "Remove this empty statement.";
+    internal const string DiagnosticId = "S1116";
+    private const string MessageFormat = "Remove this empty statement.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c => c.ReportIssue(Rule, c.Node), SyntaxKind.EmptyStatement);
-    }
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                if (c.Node.Parent is not (WhileStatementSyntax or ForStatementSyntax or DoStatementSyntax)) // loops are excluded to reduce noise
+                {
+                    c.ReportIssue(Rule, c.Node);
+                }
+            },
+            SyntaxKind.EmptyStatement);
 }

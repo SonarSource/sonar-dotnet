@@ -4,7 +4,7 @@
 ; // Fixed
 Console.WriteLine();
 while (true)
-    ; // Fixed
+    ; // Compliant: loop bodies are excluded
 
 record R
 {
