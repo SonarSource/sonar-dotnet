@@ -48,7 +48,8 @@ namespace SonarAnalyzer.CSharp.Rules
             where T : SyntaxNode
         {
             if (context.Model.GetSymbolInfo(context.Node).Symbol is not IMethodSymbol { MethodKind: MethodKind.BuiltinOperator, ReturnType.TypeKind: TypeKind.Enum } operation
-                || operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute))
+                || operation.ReturnType.HasAttribute(KnownType.System_FlagsAttribute)
+                || IsIgnored(operation.ReturnType))
             {
                 return;
             }
@@ -63,5 +64,8 @@ namespace SonarAnalyzer.CSharp.Rules
             var op = operatorSelector((T)context.Node);
             context.ReportIssue(Rule, op, message);
         }
+
+        private static bool IsIgnored(ITypeSymbol enumType) => // https://stackoverflow.com/questions/38689649/why-is-methodimplattributes-not-marked-with-flagsattribute#comment64809864_38689649
+            enumType.Is(KnownType.System_Reflection_MethodImplAttributes);
     }
 }

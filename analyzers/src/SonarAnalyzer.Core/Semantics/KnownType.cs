@@ -502,6 +502,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Reflection_BindingFlags = new("System.Reflection.BindingFlags");
     public static readonly KnownType System_Reflection_MemberInfo = new("System.Reflection.MemberInfo");
     public static readonly KnownType System_Reflection_Module = new("System.Reflection.Module");
+    public static readonly KnownType System_Reflection_MethodImplAttributes = new("System.Reflection.MethodImplAttributes");
     public static readonly KnownType System_Reflection_ParameterInfo = new("System.Reflection.ParameterInfo");
     public static readonly KnownType System_ResolveEventArgs = new("System.ResolveEventArgs");
     public static readonly KnownType System_Resources_NeutralResourcesLanguageAttribute = new("System.Resources.NeutralResourcesLanguageAttribute");

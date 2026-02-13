@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Tests.Diagnostics
 {
@@ -38,6 +39,10 @@ namespace Tests.Diagnostics
 
             var v = System.ComponentModel.DesignerSerializationVisibility.Content
                 | System.ComponentModel.DesignerSerializationVisibility.Hidden; // Fixed
+
+            // MethodImplAttributes lacks [Flags] but is designed for bitwise operations
+            // https://stackoverflow.com/questions/38689649/why-is-methodimplattributes-not-marked-with-flagsattribute
+            var z = MethodImplAttributes.NoInlining | MethodImplAttributes.NoOptimization; // Compliant - BCL enum without [Flags] but designed for bitwise use
         }
     }
 }
