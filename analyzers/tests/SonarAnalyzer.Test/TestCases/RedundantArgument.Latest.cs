@@ -73,3 +73,29 @@ namespace Repro_8096
         }
     }
 }
+
+public interface IInterfaceWithDefaultMethod
+{
+    public void Write(int i, int j = 5) { }
+}
+
+public class Consumer
+{
+    public Consumer(IInterfaceWithDefaultMethod i)
+    {
+        i.Write(1, 5); // Noncompliant {{Remove this default value assigned to parameter 'j'.}}
+    }
+}
+
+public class WithLocalFunctions
+{
+    public void Method()
+    {
+        Foo(1, 5); // Noncompliant {{Remove this default value assigned to parameter 'j'.}}
+        Bar(1, 5); // Noncompliant {{Remove this default value assigned to parameter 'j'.}}
+
+        void Foo(int i, int j = 5) { }
+
+        static void Bar(int i, int j = 5) { }
+    }
+}

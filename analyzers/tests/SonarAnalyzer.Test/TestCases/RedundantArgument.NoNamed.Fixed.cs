@@ -16,7 +16,7 @@ namespace Tests.Diagnostics
         {
             var x = "".ToString();
             M(1); //Fixed
-            M(1, 5, 0); //Fixed
+            M(1, 5, 0); // Compliant - z=0 is non-default positional, blocks y=5 removal
             M(1); //Fixed
             M(1); // Fixed
             M(1);
@@ -34,9 +34,9 @@ namespace Tests.Diagnostics
 
             M3(y: 4);
             M3(y: 4);
-            M3(1,      //Fixed
+            M3(1,      // Compliant - y=4 is non-default positional, blocks x=1 removal
                 4);    //Fixed
-            M3(1,      //Fixed
+            M3(1,      // Compliant - y=4 is non-default positional, blocks x=1 removal
                 4);
         }
     }
@@ -72,35 +72,22 @@ namespace Tests.Diagnostics
         }
     }
 
-    public interface IInterfaceWithDefaultMethod
+    public class PositionalDefaultBeforeNonDefault // https://sonarsource.atlassian.net/browse/NET-3212
     {
-        public void Write(int i, int j = 5)
+        public static void M(int x, int y = 5, int z = 7) { }
+        public static void M3(int x = 1, int y = 5, int z = 7) { }
+        public static void WithOptional(bool a = false, bool b = false) { }
+        public PositionalDefaultBeforeNonDefault(int timeout = 30, int retries = 3, bool verbose = false) { }
+        public void Methods()
         {
+            M(1, 5, 0);                 // Compliant
+            M3(1, 4);                   // Compliant
+            WithOptional(false, true);  // Compliant
         }
-    }
-
-    public class Consumer
-    {
-        public Consumer(IInterfaceWithDefaultMethod i)
+        public void Constructors()
         {
-            i.Write(1); // Fixed
-        }
-    }
-
-    public class WithLocalFunctions
-    {
-        public void Method()
-        {
-            Foo(1); // Fixed
-            Bar(1); // Fixed
-
-            void Foo(int i, int j = 5)
-            {
-            }
-
-            static void Bar(int i, int j = 5)
-            {
-            }
+            var c1 = new PositionalDefaultBeforeNonDefault(30, 5);          // Compliant
+            var c2 = new PositionalDefaultBeforeNonDefault(30, 5, true);    // Compliant
         }
     }
 }

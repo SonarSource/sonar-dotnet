@@ -16,47 +16,31 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class RedundantArgumentTest
 {
-    [TestClass]
-    public class RedundantArgumentTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<RedundantArgument>();
-        private readonly VerifierBuilder codeFixBuilder = new VerifierBuilder<RedundantArgument>().WithCodeFix<RedundantArgumentCodeFix>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<RedundantArgument>();
+    private readonly VerifierBuilder codeFixBuilder = new VerifierBuilder<RedundantArgument>().WithCodeFix<RedundantArgumentCodeFix>();
 
-        [TestMethod]
-        public void RedundantArgument_CSharp8() =>
-            builder.AddPaths("RedundantArgument.cs")
-                .AddReferences(MetadataReferenceFacade.NetStandard21)
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void RedundantArgument() =>
+        builder.AddPaths("RedundantArgument.cs").Verify();
 
-        [TestMethod]
-        public void RedundantArgument_CSharp9() =>
-            builder.AddPaths("RedundantArgument.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void RedundantArgument_TopLevelStatements() =>
+        builder.AddPaths("RedundantArgument.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 
-        [TestMethod]
-        public void RedundantArgument_CSharp12() =>
-            builder.AddPaths("RedundantArgument.CSharp12.cs")
-                .WithOptions(LanguageOptions.FromCSharp12)
-                .Verify();
+    [TestMethod]
+    public void RedundantArgument_Latest() =>
+        builder.AddPaths("RedundantArgument.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
-        [TestMethod]
-        public void RedundantArgument_CodeFix_No_Named_Arguments() =>
-            codeFixBuilder.AddPaths("RedundantArgument.cs")
-                .WithCodeFixedPaths("RedundantArgument.NoNamed.Fixed.cs")
-                .WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemove)
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .VerifyCodeFix();
+    [TestMethod]
+    public void RedundantArgument_CodeFix_No_Named_Arguments() =>
+        codeFixBuilder.AddPaths("RedundantArgument.cs").WithCodeFixedPaths("RedundantArgument.NoNamed.Fixed.cs").WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemove).VerifyCodeFix();
 
-        [TestMethod]
-        public void RedundantArgument_CodeFix_Named_Arguments() =>
-            codeFixBuilder.AddPaths("RedundantArgument.cs")
-                .WithCodeFixedPaths("RedundantArgument.Named.Fixed.cs")
-                .WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemoveWithNameAdditions)
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .VerifyCodeFix();
-    }
+    [TestMethod]
+    public void RedundantArgument_CodeFix_Named_Arguments() =>
+        codeFixBuilder.AddPaths("RedundantArgument.cs").WithCodeFixedPaths("RedundantArgument.Named.Fixed.cs").WithCodeFixTitle(RedundantArgumentCodeFix.TitleRemoveWithNameAdditions).VerifyCodeFix();
 }
