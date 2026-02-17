@@ -2,3 +2,4 @@
 *.vb text eol=lf
 *.ps1 text eol=lf
 *.verified.cs text eol=lf working-tree-encoding=UTF-8
+packages.lock.json text eol=lf
