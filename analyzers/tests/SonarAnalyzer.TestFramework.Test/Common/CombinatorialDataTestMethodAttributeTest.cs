@@ -31,7 +31,6 @@ public class CombinatorialDataAttributeTest_TwoDimensions
         combinations = new();
     }
 
-    [TestMethod]
     [CombinatorialDataTestMethod]
 #pragma warning disable S2699 // Tests should include assertions. Assertion happens in cleanup
     public void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues(-1, -2, -3)] int y)
@@ -68,7 +67,6 @@ public class CombinatorialDataAttributeTest_ThreeDimensions
         combinations = new();
     }
 
-    [TestMethod]
     [CombinatorialDataTestMethod]
 #pragma warning disable S2699 // Tests should include assertions. Assertion happens in cleanup
     public void Combinatorial([DataValues(1, 2, 3)] int x, [DataValues("A", "B")] string y, [DataValues(true, false)] bool z)
