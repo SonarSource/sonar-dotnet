@@ -2,6 +2,15 @@
 <Project>
   <Import Project="$(MSBuildThisFileDirectory)\..\Common.targets" />
 
+  <PropertyGroup>
+    <!-- NuGet.Protocol (used by TestFramework) requires NuGet.Frameworks at runtime,
+         which conflicts with Microsoft.Build.Locator's MSBL001 check.
+         The MSBL001 warning is about potential assembly loading issues when MSBuildLocator
+         registers MSBuild assemblies, but NuGet.Frameworks is not an MSBuild assembly
+         and is safe to include at runtime. -->
+    <DisableMSBuildAssemblyCopyCheck>true</DisableMSBuildAssemblyCopyCheck>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="altcover" Version="9.0.102" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />

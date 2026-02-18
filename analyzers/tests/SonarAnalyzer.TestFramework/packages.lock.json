@@ -25,9 +25,9 @@
       },
       "Microsoft.Build.Locator": {
         "type": "Direct",
-        "requested": "[1.10.12, )",
-        "resolved": "1.10.12",
-        "contentHash": "L4yL8b1oYyoxmFWWpPHqIVb5uGJSDSCd/RQDV5SsJkBRB3fRxSfUl3KYjNQfMdf9RNvoqCDeXaGGISjaY6f8Pg=="
+        "requested": "[1.11.2, )",
+        "resolved": "1.11.2",
+        "contentHash": "tY+/S54G29CGsbL3slVu4vqtpciwVnb3fKOmrhgzEQmu/VziFaWmD/E1e/2KH7cDucuycGSkWsSXndBs5Uawow=="
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
@@ -746,9 +746,9 @@
       },
       "Microsoft.Build.Locator": {
         "type": "Direct",
-        "requested": "[1.10.12, )",
-        "resolved": "1.10.12",
-        "contentHash": "L4yL8b1oYyoxmFWWpPHqIVb5uGJSDSCd/RQDV5SsJkBRB3fRxSfUl3KYjNQfMdf9RNvoqCDeXaGGISjaY6f8Pg=="
+        "requested": "[1.11.2, )",
+        "resolved": "1.11.2",
+        "contentHash": "tY+/S54G29CGsbL3slVu4vqtpciwVnb3fKOmrhgzEQmu/VziFaWmD/E1e/2KH7cDucuycGSkWsSXndBs5Uawow=="
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
@@ -1305,9 +1305,9 @@
       },
       "Microsoft.Build.Locator": {
         "type": "Direct",
-        "requested": "[1.10.12, )",
-        "resolved": "1.10.12",
-        "contentHash": "L4yL8b1oYyoxmFWWpPHqIVb5uGJSDSCd/RQDV5SsJkBRB3fRxSfUl3KYjNQfMdf9RNvoqCDeXaGGISjaY6f8Pg=="
+        "requested": "[1.11.2, )",
+        "resolved": "1.11.2",
+        "contentHash": "tY+/S54G29CGsbL3slVu4vqtpciwVnb3fKOmrhgzEQmu/VziFaWmD/E1e/2KH7cDucuycGSkWsSXndBs5Uawow=="
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces": {
         "type": "Direct",
