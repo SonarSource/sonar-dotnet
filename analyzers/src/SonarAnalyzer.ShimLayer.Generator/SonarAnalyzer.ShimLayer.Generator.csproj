@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.0.0" PrivateAssets="all" />
-    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.0" GeneratePathProperty="true" />
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.3" GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>
