@@ -69,8 +69,8 @@
       },
       "FluentAssertions": {
         "type": "Transitive",
-        "resolved": "7.2.0",
-        "contentHash": "k94gV49Otru4e9nKtj36KpA9UkjuAGKPmhfM0oqyI+rrtxhSrgaeEhILR0AbJ9iNaoagAeQtawPz6njQOC6WQA==",
+        "resolved": "7.2.1",
+        "contentHash": "MilqBF2lZrT0V1azIA6DG6I/snS0rG3A8ohT2Jjkhq6zOFk76nqx4BPnEnzrX6jFVa6xvkDU++z3PebCGZyJ4g==",
         "dependencies": {
           "System.Configuration.ConfigurationManager": "6.0.0"
         }
@@ -564,7 +564,7 @@
       "sonaranalyzer.testframework": {
         "type": "Project",
         "dependencies": {
-          "FluentAssertions": "[7.2.0, )",
+          "FluentAssertions": "[7.2.1, )",
           "FluentAssertions.Analyzers": "[0.34.1, )",
           "MSTest.TestAdapter": "[4.0.2, )",
           "MSTest.TestFramework": "[4.0.2, )",
