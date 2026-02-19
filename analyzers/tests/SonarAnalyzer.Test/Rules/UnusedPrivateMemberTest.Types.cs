@@ -145,4 +145,44 @@ public class PrivateTypes
     public static int PerformCalculation(int x, int y) => x + y;
 }
 ").Verify();
+
+    // Tests that private types implementing InheritedExport interfaces are not flagged as unused
+    // Per MS docs: "an interface can be decorated with an InheritedExport attribute at the interface level,
+    // and that export along with any associated metadata will be inherited by any implementing classes"
+    // Source: https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef
+    [TestMethod]
+    public void UnusedPrivateMember_Types_MefInheritedExportOnInterfaceTypeNotRemovable() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            [InheritedExport(typeof(IPlugin))]
+            public interface IPlugin { }
+
+            public class Outer
+            {
+                private class MyPlugin : IPlugin { } // Compliant - implements InheritedExport interface
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
+
+    // Tests that private types inheriting from InheritedExport base classes are not flagged as unused
+    // Per MS docs: "a part can export itself by using the InheritedExport attribute.
+    // Subclasses of the part will inherit and provide the same export, including contract name and contract type"
+    // Source: https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef
+    [TestMethod]
+    public void UnusedPrivateMember_Types_MefInheritedExportOnBaseClassTypeNotRemovable() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            [InheritedExport(typeof(HandlerBase))]
+            public abstract class HandlerBase { }
+
+            public class Outer
+            {
+                private class MyHandler : HandlerBase { } // Compliant - derives from InheritedExport base class
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
 }

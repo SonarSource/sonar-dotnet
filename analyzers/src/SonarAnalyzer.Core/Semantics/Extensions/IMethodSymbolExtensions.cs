@@ -127,6 +127,14 @@ public static class IMethodSymbolExtensions
         public bool IsExtension => method is { IsExtensionMethod: true } or { AssociatedExtensionImplementation: not null };
     }
 
+    /// <summary>
+    /// Returns whether the method is a constructor in a MEF-exported type.
+    /// MEF (Managed Extensibility Framework) instantiates types via reflection, so these constructors are not unused.
+    /// </summary>
+    public static bool IsMefConstructor(this IMethodSymbol methodSymbol) =>
+        methodSymbol is { MethodKind: MethodKind.Constructor, ContainingType: INamedTypeSymbol containingType }
+        && containingType.IsMefExportedType();
+
     private static AttributeData FindXUnitTestAttribute(this IMethodSymbol method) =>
         method.GetAttributes().FirstOrDefault(x => x.AttributeClass.IsAny(KnownType.TestMethodAttributesOfxUnit));
 

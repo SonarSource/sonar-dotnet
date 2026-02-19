@@ -75,8 +75,8 @@ namespace SonarAnalyzer.Core.Rules
                 Language.SyntaxKind.Attribute);
 
         private static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
-            type.GetSelfAndBaseTypes()
-                .Union(type.AllInterfaces)
+            type is INamedTypeSymbol namedType
+            && namedType.SelfBaseTypesAndInterfaces()
                 .Any(currentType =>
                          exportedType.IsUnboundGenericType
                              ? currentType.OriginalDefinition.Equals(exportedType.ConstructedFrom)

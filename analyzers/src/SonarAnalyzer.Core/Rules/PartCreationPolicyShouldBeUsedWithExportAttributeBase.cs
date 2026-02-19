@@ -40,11 +40,7 @@ namespace SonarAnalyzer.Core.Rules
                 return;
             }
 
-            if (!(c.Model.GetDeclaredSymbol(declaration) is ITypeSymbol symbol)
-                || symbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute)
-                || symbol.GetSelfAndBaseTypes()
-                         .Union(symbol.AllInterfaces)
-                         .Any(s => s.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)))
+            if (!(c.Model.GetDeclaredSymbol(declaration) is INamedTypeSymbol symbol) || symbol.IsMefExportedType())
             {
                 return;
             }

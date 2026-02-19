@@ -511,7 +511,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             && !methodSymbol.IsMainMethod()
             && !methodSymbol.IsEventHandler() // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
             && !methodSymbol.IsSerializationConstructor()
-            && !methodSymbol.IsRecordPrintMembers();
+            && !methodSymbol.IsRecordPrintMembers()
+            && !methodSymbol.IsMefConstructor();
 
         private static bool IsRemovable(ISymbol symbol) =>
             symbol is { IsImplicitlyDeclared: false, IsVirtual: false }
@@ -540,7 +541,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             typeSymbol.GetEffectiveAccessibility() is var accessibility
             && typeSymbol.ContainingType is not null
             && (accessibility is Accessibility.Private or Accessibility.Internal)
-            && IsRemovable(typeSymbol);
+            && IsRemovable(typeSymbol)
+            && !(typeSymbol is INamedTypeSymbol namedType && namedType.IsMefExportedType());
 
         private void VisitBaseTypeDeclaration(SyntaxNode node)
         {

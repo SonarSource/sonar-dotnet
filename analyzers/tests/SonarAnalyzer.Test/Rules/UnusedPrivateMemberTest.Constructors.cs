@@ -182,4 +182,190 @@ public abstract record Foo
 {
     public sealed record Bar(string Value) : RandomRecord(Value); // Error [CS0246, CS1729] no suitable method found to override
 }").WithOptions(LanguageOptions.FromCSharp10).Verify();
+
+    // Tests private nested sealed class with [Export] attribute - a valid MEF pattern used in VS extensions
+    // Production example: https://github.com/NoahRic/EditorItemTemplates/blob/master/ClassifierTemplate.cs
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_MefExportOnType() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            public interface IFormatter
+            {
+                string Format(string input);
+            }
+
+            public class FormatterContainer
+            {
+                [Export(typeof(IFormatter))]
+                private sealed class MefExportedFormatter : IFormatter // Compliant - MEF exported type
+                {
+                    private readonly string _prefix;
+
+                    MefExportedFormatter() => _prefix = "Formatted: "; // Compliant - MEF instantiates via reflection
+
+                    public string Format(string input) => _prefix + input;
+                }
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
+
+    // Tests InheritedExport on interface - implementing classes automatically inherit the export
+    // Per MS docs: "an interface can be decorated with an InheritedExport attribute at the interface level,
+    // and that export along with any associated metadata will be inherited by any implementing classes"
+    // Source: https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_MefInheritedExportOnInterface() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            [InheritedExport(typeof(IClassifier))]
+            public interface IClassifier
+            {
+                string Classify(string input);
+            }
+
+            public class ClassifierContainer
+            {
+                private sealed class SimpleClassifier : IClassifier // Compliant - implements InheritedExport interface
+                {
+                    private readonly string _prefix;
+
+                    SimpleClassifier() => _prefix = "Classified: "; // Compliant - MEF instantiates via reflection
+
+                    public string Classify(string input) => _prefix + input;
+                }
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
+
+    // Tests InheritedExport on base class - subclasses automatically inherit and provide the same export
+    // Per MS docs: "a part can export itself by using the InheritedExport attribute.
+    // Subclasses of the part will inherit and provide the same export, including contract name and contract type"
+    // Source: https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_MefInheritedExportOnBaseClass() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            [InheritedExport(typeof(HandlerBase))]
+            public abstract class HandlerBase
+            {
+                public abstract string Handle(string input);
+            }
+
+            public class HandlerContainer
+            {
+                private sealed class SimpleHandler : HandlerBase // Compliant - derives from InheritedExport base
+                {
+                    private readonly string _tag;
+
+                    SimpleHandler() => _tag = "[handled] "; // Compliant - MEF instantiates via reflection
+
+                    public override string Handle(string input) => _tag + input;
+                }
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
+
+    // Tests MEF2 (System.Composition) Export attribute - same pattern as MEF1 but from the newer lightweight composition API
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_Mef2ExportOnType() =>
+        builder.AddSnippet("""
+            using System.Composition;
+
+            public interface IProcessor
+            {
+                string Process(string input);
+            }
+
+            public class ProcessorContainer
+            {
+                [Export(typeof(IProcessor))]
+                private sealed class SimpleProcessor : IProcessor // Compliant - MEF2 exported type
+                {
+                    private readonly string _suffix;
+
+                    SimpleProcessor() => _suffix = " [processed]"; // Compliant - MEF2 instantiates via reflection
+
+                    public string Process(string input) => input + _suffix;
+                }
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemCompositionAttributedModel)
+            .VerifyNoIssues();
+
+    // Tests custom attribute derived from ExportAttribute - MEF recognizes derived export attributes
+    // Per MS docs: custom attributes inheriting from ExportAttribute can include metadata as properties
+    // Source: https://learn.microsoft.com/en-us/dotnet/framework/mef/attributed-programming-model-overview-mef
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_MefCustomExportAttribute() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            public class MyCustomExportAttribute : ExportAttribute { }
+
+            public class PluginContainer
+            {
+                [MyCustomExport]
+                private sealed class CustomPlugin // Compliant - custom Export-derived attribute
+                {
+                    CustomPlugin() { var x = 1; } // Compliant - MEF instantiates via reflection
+                }
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
+
+    // Tests InheritedExport on generic interface - implementing classes inherit the export
+    // MEF supports generic types: https://www.codeproject.com/Articles/323919/MEF-Generics
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_MefInheritedExportOnGenericInterface() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            [InheritedExport(typeof(IHandler<>))]
+            public interface IHandler<T>
+            {
+                void Handle(T item);
+            }
+
+            public class Container
+            {
+                private sealed class StringHandler : IHandler<string> // Compliant - implements InheritedExport generic interface
+                {
+                    StringHandler() { var x = 1; } // Compliant - MEF instantiates via reflection
+                    public void Handle(string item) { }
+                }
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
+
+    // Tests InheritedExport on generic base class - derived classes inherit the export
+    [TestMethod]
+    public void UnusedPrivateMember_Constructor_MefInheritedExportOnGenericBaseClass() =>
+        builder.AddSnippet("""
+            using System.ComponentModel.Composition;
+
+            [InheritedExport(typeof(ProcessorBase<>))]
+            public abstract class ProcessorBase<T>
+            {
+                public abstract void Process(T item);
+            }
+
+            public class Container
+            {
+                private sealed class IntProcessor : ProcessorBase<int> // Compliant - derives from InheritedExport generic base
+                {
+                    IntProcessor() { var x = 1; } // Compliant - MEF instantiates via reflection
+                    public override void Process(int item) { }
+                }
+            }
+            """)
+            .AddReferences(MetadataReferenceFacade.SystemComponentModelComposition)
+            .VerifyNoIssues();
 }

@@ -73,4 +73,22 @@ public static class INamedTypeSymbolExtensions
     /// </summary>
     public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
         classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
+
+    /// <summary>
+    /// Returns whether the type is exported via MEF (Managed Extensibility Framework).
+    /// Checks for [Export] attributes on the type itself or [InheritedExport] on base types/interfaces.
+    /// Supports both MEF1 (System.ComponentModel.Composition) and MEF2 (System.Composition).
+    /// </summary>
+    public static bool IsMefExportedType(this INamedTypeSymbol typeSymbol) =>
+        typeSymbol is not null
+        && (typeSymbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute)
+            || typeSymbol.AnyAttributeDerivesFrom(KnownType.System_Composition_ExportAttribute)
+            || typeSymbol.SelfBaseTypesAndInterfaces().Any(x => x.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)));
+
+    /// <summary>
+    /// Returns the type itself, all base types, and all implemented interfaces.
+    /// This is useful for checking inherited attributes across the full type hierarchy.
+    /// </summary>
+    public static IEnumerable<INamedTypeSymbol> SelfBaseTypesAndInterfaces(this INamedTypeSymbol typeSymbol) =>
+        typeSymbol?.GetSelfAndBaseTypes().Union(typeSymbol.AllInterfaces) ?? [];
 }
