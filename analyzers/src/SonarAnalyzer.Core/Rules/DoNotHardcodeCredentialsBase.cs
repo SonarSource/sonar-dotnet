@@ -41,7 +41,7 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
     protected override string DiagnosticId => "S2068";
 
-    protected DoNotHardcodeCredentialsBase(IAnalyzerConfiguration configuration) : base(configuration)
+    protected DoNotHardcodeCredentialsBase()
     {
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
         CredentialWords = DefaultCredentialWords;   // Property will initialize multiple state variables
@@ -57,27 +57,35 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
 
     protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
     {
-        var input = new TrackerInput(context, configuration, rule);
+        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, rule);
 
         var oc = Language.Tracker.ObjectCreation;
-        oc.Track(input, [MessageHardcodedPassword],
+        oc.Track(
+            input,
+            [MessageHardcodedPassword],
             oc.MatchConstructor(KnownType.System_Net_NetworkCredential),
             oc.ArgumentAtIndexIs(1, KnownType.System_String),
             oc.ArgumentAtIndexIsConst(1));
 
-        oc.Track(input, [MessageHardcodedPassword],
+        oc.Track(
+            input,
+            [MessageHardcodedPassword],
             oc.MatchConstructor(KnownType.System_Security_Cryptography_PasswordDeriveBytes),
             oc.ArgumentAtIndexIs(0, KnownType.System_String),
             oc.ArgumentAtIndexIsConst(0));
 
         var pa = Language.Tracker.PropertyAccess;
-        pa.Track(input, [MessageHardcodedPassword],
+        pa.Track(
+            input,
+            [MessageHardcodedPassword],
             pa.MatchSetter(),
             pa.AssignedValueIsConstant(),
             pa.MatchProperty(new MemberDescriptor(KnownType.System_Net_NetworkCredential, "Password")));
 
         var inv = Language.Tracker.Invocation;
-        inv.Track(input, [MessageHardcodedPassword],
+        inv.Track(
+            input,
+            [MessageHardcodedPassword],
             inv.MatchMethod(new MemberDescriptor(KnownType.System_Security_SecureString, nameof(SecureString.AppendChar))),
             inv.ArgumentAtIndexIs(0, IsSecureStringAppendCharFromConstant));
 
@@ -159,9 +167,9 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
     {
         private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
-        protected abstract bool ShouldHandle(TSyntaxNode syntaxNode, SemanticModel semanticModel);
+        protected abstract bool ShouldHandle(TSyntaxNode syntaxNode, SemanticModel model);
         protected abstract string GetVariableName(TSyntaxNode syntaxNode);
-        protected abstract string GetAssignedValue(TSyntaxNode syntaxNode, SemanticModel semanticModel);
+        protected abstract string GetAssignedValue(TSyntaxNode syntaxNode, SemanticModel model);
 
         protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer) =>
             this.analyzer = analyzer;

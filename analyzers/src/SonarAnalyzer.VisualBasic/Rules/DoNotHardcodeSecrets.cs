@@ -14,27 +14,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules;
+namespace SonarAnalyzer.VisualBasic.Rules;
 
-[DiagnosticAnalyzer(LanguageNames.CSharp)]
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
 public sealed class DoNotHardcodeSecrets : DoNotHardcodeSecretsBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    public DoNotHardcodeSecrets() : this(AnalyzerConfiguration.Hotspot) { }
-
-    public DoNotHardcodeSecrets(IAnalyzerConfiguration configuration) : base(configuration) { }
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
     protected override void RegisterNodeActions(SonarCompilationStartAnalysisContext context)
     {
         context.RegisterNodeAction(
             ReportIssues,
-            SyntaxKind.AddAssignmentExpression,
-            SyntaxKind.SimpleAssignmentExpression,
+            SyntaxKind.AddAssignmentStatement,
+            SyntaxKind.ConcatenateAssignmentStatement,
+            SyntaxKind.SimpleAssignmentStatement,
             SyntaxKind.VariableDeclarator,
-            SyntaxKind.PropertyDeclaration,
-            SyntaxKind.GetAccessorDeclaration,
-            SyntaxKind.SetAccessorDeclaration,
+            SyntaxKind.PropertyStatement,
             SyntaxKind.EqualsExpression);
 
         context.RegisterNodeAction(c =>
@@ -55,8 +50,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeSecretsBase<SyntaxKind>
     protected override SyntaxNode IdentifierRoot(SyntaxNode node) =>
         node switch
         {
-            AccessorDeclarationSyntax accessor => accessor.Parent.Parent,
-            AssignmentExpressionSyntax assignment => assignment.Left,
+            AssignmentStatementSyntax assignment => assignment.Left,
             BinaryExpressionSyntax { Left: IdentifierNameSyntax left } => left,
             BinaryExpressionSyntax { Right: IdentifierNameSyntax right } => right,
             _ => node
@@ -65,10 +59,9 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeSecretsBase<SyntaxKind>
     protected override SyntaxNode RightHandSide(SyntaxNode node) =>
         node switch
         {
-            AssignmentExpressionSyntax assignment => assignment.Right,
+            AssignmentStatementSyntax assignment => assignment.Right,
             VariableDeclaratorSyntax variable => variable.Initializer?.Value,
-            PropertyDeclarationSyntax property => property.Initializer?.Value,
-            AccessorDeclarationSyntax accessor => accessor.ExpressionBody?.Expression,
+            PropertyStatementSyntax property => property.Initializer?.Value,
             BinaryExpressionSyntax { Left: IdentifierNameSyntax } binary => binary.Right,
             BinaryExpressionSyntax { Right: IdentifierNameSyntax } binary => binary.Left,
             _ => null
@@ -77,8 +70,8 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeSecretsBase<SyntaxKind>
     private static IdentifierValuePair IdentifierAndValue(ExpressionSyntax expression, ArgumentSyntax argument) =>
         expression switch
         {
-            MemberAccessExpressionSyntax or IdentifierNameSyntax or InvocationExpressionSyntax => new(expression.GetIdentifier(), argument.Expression),
-            LiteralExpressionSyntax literal => new(argument.Expression.GetIdentifier(), literal),
+            MemberAccessExpressionSyntax or IdentifierNameSyntax or InvocationExpressionSyntax => new(expression.GetIdentifier(), argument.GetExpression()),
+            LiteralExpressionSyntax literal => new(argument.GetExpression().GetIdentifier(), literal),
             _ => null,
         };
 }

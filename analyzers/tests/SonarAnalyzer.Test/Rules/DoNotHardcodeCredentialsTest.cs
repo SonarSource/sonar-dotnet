@@ -56,15 +56,15 @@ public class DoNotHardcodeCredentialsTest
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_WebConfig() =>
-        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
+        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(), "WebConfig", "*.config");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_LaunchSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(), "LaunchSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_CS_AppSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new CS.DoNotHardcodeCredentials(), "AppSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_DefaultValues() =>
@@ -80,15 +80,15 @@ public class DoNotHardcodeCredentialsTest
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_WebConfig() =>
-        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "WebConfig", "*.config");
+        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(), "WebConfig", "*.config");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_LaunchSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "LaunchSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(), "LaunchSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_VB_AppSettings() =>
-        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled), "AppSettings", "*.json");
+        DoNotHardcodeCredentials_ExternalFiles(new VB.DoNotHardcodeCredentials(), "AppSettings", "*.json");
 
     [TestMethod]
     public void DoNotHardcodeCredentials_ConfiguredCredentialsAreRead()
@@ -102,16 +102,14 @@ public class DoNotHardcodeCredentialsTest
 
     private static VerifierBuilder CreateVerifierCS(string credentialWords = null) =>
         new VerifierBuilder().AddAnalyzer(() => credentialWords is null
-                                                    ? new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled)
-                                                    : new CS.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = credentialWords })
-            .WithBasePath("Hotspots")
+                                                    ? new CS.DoNotHardcodeCredentials()
+                                                    : new CS.DoNotHardcodeCredentials { CredentialWords = credentialWords })
             .AddReferences(AdditionalReferences);
 
     private static VerifierBuilder CreateVerifierVB(string credentialWords = null) =>
         new VerifierBuilder().AddAnalyzer(() => credentialWords is null
-                                                    ? new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled)
-                                                    : new VB.DoNotHardcodeCredentials(AnalyzerConfiguration.AlwaysEnabled) { CredentialWords = credentialWords })
-            .WithBasePath("Hotspots")
+                                                    ? new VB.DoNotHardcodeCredentials()
+                                                    : new VB.DoNotHardcodeCredentials { CredentialWords = credentialWords })
             .AddReferences(AdditionalReferences);
 
     private void DoNotHardcodeCredentials_ExternalFiles(DiagnosticAnalyzer analyzer, string testDirectory, string pattern)

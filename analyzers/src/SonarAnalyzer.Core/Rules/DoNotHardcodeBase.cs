@@ -29,7 +29,6 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
     protected static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
     protected static readonly Regex ValidKeywordPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled, RegexTimeout);
 
-    protected readonly IAnalyzerConfiguration configuration;
     protected string keyWords;
     protected DiagnosticDescriptor rule;
     protected ImmutableList<string> splitKeyWords;
@@ -47,17 +46,6 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
         set => ExtractKeyWords(value);
     }
 
-    protected DoNotHardcodeBase(IAnalyzerConfiguration configuration)
-    {
-        this.configuration = configuration;
-    }
-
-    protected bool IsEnabled(AnalyzerOptions options)
-    {
-        configuration.Initialize(options);
-        return configuration.IsEnabled(DiagnosticId);
-    }
-
     protected static ImmutableList<string> SplitKeyWordsByComma(string keyWords) =>
         keyWords.ToUpperInvariant()
             .Split([','], StringSplitOptions.RemoveEmptyEntries)
@@ -73,11 +61,6 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
 
     protected void CheckWebConfig(SonarCompilationReportingContext context)
     {
-        if (!IsEnabled(context.Options))
-        {
-            return;
-        }
-
         foreach (var path in context.WebConfigFiles())
         {
             if (File.ReadAllText(path).ParseXDocument() is { } doc)
@@ -95,11 +78,6 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
 
     private void CheckJsonSettings(SonarCompilationReportingContext context, IEnumerable<string> jsonFiles)
     {
-        if (!IsEnabled(context.Options))
-        {
-            return;
-        }
-
         foreach (var path in jsonFiles)
         {
             if (JsonNode.FromString(File.ReadAllText(path)) is { } json)

@@ -1,36 +1,31 @@
-<p>Because it is easy to extract strings from an application source code or binary, credentials should not be hard-coded. This is particularly true
-for applications that are distributed or that are open-source.</p>
+<h2>Why is this an issue?</h2>
+<p>Hard-coding credentials in source code or binaries makes it easy for attackers to extract sensitive information, especially in distributed or
+open-source applications. This practice exposes your application to significant security risks.</p>
+<p>This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection
+strings, and for variable names that match any of the patterns from the provided list.</p>
 <p>In the past, it has led to the following vulnerabilities:</p>
 <ul>
   <li> <a href="https://www.cve.org/CVERecord?id=CVE-2019-13466">CVE-2019-13466</a> </li>
   <li> <a href="https://www.cve.org/CVERecord?id=CVE-2018-15389">CVE-2018-15389</a> </li>
 </ul>
-<p>Credentials should be stored outside of the code in a configuration file, a database, or a management service for secrets.</p>
-<p>This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection
-strings, and for variable names that match any of the patterns from the provided list.</p>
-<h2>Ask Yourself Whether</h2>
+<h3>Exceptions</h3>
 <ul>
-  <li> Credentials allow access to a sensitive component like a database, a file storage, an API or a service. </li>
-  <li> Credentials are used in production environments. </li>
-  <li> Application re-distribution is required before updating the credentials. </li>
+  <li> Issue is not raised when URI username and password are the same. </li>
+  <li> Issue is not raised when searched pattern is found in variable name and value. </li>
 </ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<ul>
-  <li> Store the credentials in a configuration file that is not pushed to the code repository. </li>
-  <li> Store the credentials in a database. </li>
-  <li> Use your cloud provider’s service for managing secrets. </li>
-  <li> If a password has been disclosed through the source code: change it. </li>
-</ul>
-<h2>Sensitive Code Example</h2>
-<pre>
+<h2>How to fix it</h2>
+<p>Credentials should be stored in a configuration file that is not committed to the code repository, in a database, or managed by your cloud
+provider’s secrets management service. If a password is exposed in the source code, it must be changed immediately.</p>
+<h3>Code Examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 string username = "admin";
-string password = "Admin123"; // Sensitive
-string usernamePassword  = "user=admin&amp;password=Admin123"; // Sensitive
-string url = "scheme://user:Admin123@domain.com"; // Sensitive
+string password = "Admin123"; // Noncompliant
+string usernamePassword  = "user=admin&amp;password=Admin123"; // Noncompliant
+string url = "scheme://user:Admin123@domain.com"; // Noncompliant
 </pre>
-<h2>Compliant Solution</h2>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 string username = "admin";
 string password = GetEncryptedPassword();
 string usernamePassword = string.Format("user={0}&amp;password={1}", GetEncryptedUsername(), GetEncryptedPassword());
@@ -39,12 +34,7 @@ string url = $"scheme://{username}:{password}@domain.com";
 string url2 = "http://guest:guest@domain.com"; // Compliant
 const string Password_Property = "custom.password"; // Compliant
 </pre>
-<h2>Exceptions</h2>
-<ul>
-  <li> Issue is not raised when URI username and password are the same. </li>
-  <li> Issue is not raised when searched pattern is found in variable name and value. </li>
-</ul>
-<h2>See</h2>
+<h2>Resources</h2>
 <ul>
   <li> OWASP - <a href="https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/">Top 10 2021 Category A7 - Identification and
   Authentication Failures</a> </li>

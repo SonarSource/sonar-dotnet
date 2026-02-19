@@ -48,7 +48,7 @@ public abstract class DoNotHardcodeSecretsBase<TSyntaxKind> : DoNotHardcodeBase<
 
     protected double MaxLanguageScore => (10 - RandomnessSensibility) * LanguageScoreIncrement;
 
-    protected DoNotHardcodeSecretsBase(IAnalyzerConfiguration configuration) : base(configuration)
+    protected DoNotHardcodeSecretsBase()
     {
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat);
         SecretWords = DefaultSecretWords;
@@ -56,14 +56,7 @@ public abstract class DoNotHardcodeSecretsBase<TSyntaxKind> : DoNotHardcodeBase<
 
     protected override void Initialize(SonarParametrizedAnalysisContext context)
     {
-        context.RegisterCompilationStartAction(compilationStartContext =>
-            {
-                if (IsEnabled(compilationStartContext.Options))
-                {
-                    RegisterNodeActions(compilationStartContext);
-                }
-            });
-
+        context.RegisterCompilationStartAction(RegisterNodeActions);
         context.RegisterCompilationAction(CheckWebConfig);
         context.RegisterCompilationAction(CheckAppSettings);
         context.RegisterCompilationAction(CheckLaunchSettings);

@@ -23,8 +23,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class DoNotHardcodeSecretsTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
-    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.DoNotHardcodeSecrets(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.DoNotHardcodeSecrets());
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.DoNotHardcodeSecrets());
 
     public TestContext TestContext { get; set; }
 
