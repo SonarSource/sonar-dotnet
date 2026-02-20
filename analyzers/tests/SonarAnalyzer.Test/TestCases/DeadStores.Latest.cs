@@ -245,6 +245,54 @@ void NativeInts(nuint param)
     Foo(two);
 }
 
+// https://sonarsource.atlassian.net/browse/NET-2976
+void DefaultLiteral()
+{
+    int i = default; // Compliant
+    i = 42;
+    Foo(i);
+
+    string s = default; // Compliant
+    s = "value";
+    Foo(s);
+
+    object o = default; // Compliant
+    o = new object();
+    Foo(o);
+
+    bool b = default; // Compliant
+    b = true;
+    Foo(b);
+
+    IntPtr ptr = default; // Compliant
+    ptr = new IntPtr(42);
+    Foo(ptr);
+
+    UIntPtr uptr = default; // Compliant
+    uptr = new UIntPtr(42);
+    Foo(uptr);
+
+    Guid guid = default; // Compliant
+    guid = Guid.NewGuid();
+    Foo(guid);
+}
+
+// https://sonarsource.atlassian.net/browse/NET-2976
+void TypeSpecificDefaultValues()
+{
+    IntPtr ptr = IntPtr.Zero; // Compliant
+    ptr = new IntPtr(42);
+    Foo(ptr);
+
+    UIntPtr uptr = UIntPtr.Zero; // Compliant
+    uptr = new UIntPtr(42);
+    Foo(uptr);
+
+    Guid id = Guid.Empty; // Compliant
+    id = Guid.NewGuid();
+    Foo(id);
+}
+
 void PatternMatch(object param)
 {
     object a = param;

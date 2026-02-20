@@ -88,9 +88,9 @@ namespace SonarAnalyzer.CSharp.Rules
                 private void ProcessIdentifier(SyntaxNode instruction)
                 {
                     var identifier = (IdentifierNameSyntax)instruction;
-                    var symbol = SemanticModel.GetSymbolInfo(identifier).Symbol;
+                    var symbol = Model.GetSymbolInfo(identifier).Symbol;
                     if (IsSymbolRelevant(symbol)
-                        && !identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(SemanticModel)
+                        && !identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(Model)
                         && IsLocal(symbol))
                     {
                         if (SonarCSharpLiveVariableAnalysis.IsOutArgument(identifier))
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 private void ProcessVariableDeclarator(SyntaxNode instruction)
                 {
                     var declarator = (VariableDeclaratorSyntax)instruction;
-                    if (SemanticModel.GetDeclaredSymbol(declarator) is ILocalSymbol symbol && IsSymbolRelevant(symbol))
+                    if (Model.GetDeclaredSymbol(declarator) is ILocalSymbol symbol && IsSymbolRelevant(symbol))
                     {
                         if (declarator.Initializer != null
                             && !IsAllowedInitializationValue(declarator.Initializer.Value)
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 private bool IsUnusedLocal(ISymbol declaredSymbol) =>
                     node.DescendantNodes()
                         .OfType<IdentifierNameSyntax>()
-                        .SelectMany(x => VariableUnusedBase.GetUsedSymbols(x, SemanticModel))
+                        .SelectMany(x => VariableUnusedBase.GetUsedSymbols(x, Model))
                         .All(x => !x.Equals(declaredSymbol));
 
                 private void ProcessPrefixExpression(SyntaxNode instruction)
@@ -193,7 +193,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 }
 
                 private bool IsMuted(SyntaxNode node) =>
-                    new MutedSyntaxWalker(SemanticModel, node).IsMuted();
+                    new MutedSyntaxWalker(Model, node).IsMuted();
 
                 private static Location GetFirstLineLocationFromToken(SyntaxToken issueStartToken, SyntaxNode wholeIssue)
                 {
@@ -204,7 +204,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 private ISymbol IdentifierRelevantSymbol(SyntaxNode node) =>
                     node.IsKind(SyntaxKind.IdentifierName)
-                    && SemanticModel.GetSymbolInfo(node).Symbol is { } symbol
+                    && Model.GetSymbolInfo(node).Symbol is { } symbol
                     && IsSymbolRelevant(symbol)
                     ? symbol
                     : null;

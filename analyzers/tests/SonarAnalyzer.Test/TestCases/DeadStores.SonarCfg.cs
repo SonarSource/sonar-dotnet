@@ -97,6 +97,22 @@ namespace Tests.Diagnostics
             // Variables should be used in order the rule to trigger
             Console.WriteLine("", s, b, o, i);
         }
+
+        // https://sonarsource.atlassian.net/browse/NET-2976
+        public void TypeSpecificDefaultValues()
+        {
+            IntPtr ptr = IntPtr.Zero; // Compliant
+            ptr = new IntPtr(42);
+            Console.WriteLine(ptr);
+
+            UIntPtr uptr = UIntPtr.Zero; // Compliant
+            uptr = new UIntPtr(42);
+            Console.WriteLine(uptr);
+
+            Guid id = Guid.Empty; // Compliant
+            id = Guid.NewGuid();
+            Console.WriteLine(id);
+        }
     }
 
     public class DeadStores
