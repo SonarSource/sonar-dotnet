@@ -71,8 +71,9 @@ public class DiagnosticDescriptorFactoryTest
         result.CustomTags.Should().Contain(WellKnownDiagnosticTags.Unnecessary);
     }
 
-    [CombinatorialDataTestMethod]
-    public void Create_CompilationEndDiagnostic([DataValues(LanguageNames.CSharp, LanguageNames.VisualBasic)] string language, [DataValues(true, false)] bool isCompilationEnd)
+    [TestMethod]
+    [CombinatorialData]
+    public void Create_CompilationEndDiagnostic([CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)] string language, [CombinatorialValues(true, false)] bool isCompilationEnd)
     {
         var result = DiagnosticDescriptorFactory.Create(AnalyzerLanguage.FromName(language), CreateRuleDescriptor(SourceScope.Main, true), "Sxxxx Message", null, false, isCompilationEnd);
 

@@ -131,17 +131,18 @@ public class UseAspNetModelBindingTest
             }
             """").Verify();
 
-    [CombinatorialDataTestMethod]
+    [TestMethod]
+    [CombinatorialData]
     public void UseAspNetModelBinding_CompliantAccess(
-        [DataValues(
+        [CombinatorialValues(
             "_ = {0}.Keys",
             "_ = {0}.Count",
             "foreach (var kvp in {0}) {{ }}",
             "_ = {0}.Select(x => x);",
             "_ = {0}[key];                    // Compliant: The accessed key is not a compile time constant")] string statementFormat,
-        [DataValues("Request", "this.Request", "ControllerContext.HttpContext.Request", "request")] string request,
-        [DataValues("Form", "Headers", "Query", "RouteValues")] string property,
-        [DataValues("[FromForm]", "[FromQuery]", "[FromRoute]", "[FromHeader]")] string attribute) =>
+        [CombinatorialValues("Request", "this.Request", "ControllerContext.HttpContext.Request", "request")] string request,
+        [CombinatorialValues("Form", "Headers", "Query", "RouteValues")] string property,
+        [CombinatorialValues("[FromForm]", "[FromQuery]", "[FromRoute]", "[FromHeader]")] string attribute) =>
         builderAspNetCore.AddSnippet($$"""
             using Microsoft.AspNetCore.Http;
             using Microsoft.AspNetCore.Mvc;
@@ -288,14 +289,15 @@ public class UseAspNetModelBindingTest
             }
             """").VerifyNoIssues();
 
-    [CombinatorialDataTestMethod]
+    [TestMethod]
+    [CombinatorialData]
     public void UseAspNetModelBinding_InheritanceAccess(
-        [DataValues(
+        [CombinatorialValues(
             ": Controller",
             ": ControllerBase",
             ": MyBaseController",
             ": MyBaseBaseController")]string baseList,
-        [DataValues(
+        [CombinatorialValues(
             """_ = Request.Form["id"]""",
             """_ = Request.Form.TryGetValue("id", out var _)""",
             """_ = Request.Headers["id"]""",

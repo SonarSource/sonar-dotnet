@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <!-- Memory.Test still targets net9.0 because JetBrains.dotMemoryUnit hangs on net10.0. Therefore TestFramework needs to target net9.0 and net10.0. -->
@@ -25,9 +25,10 @@
 
   <ItemGroup>
     <Using Include="FluentAssertions" />
-	  <Using Include="Microsoft.CodeAnalysis" />
-	  <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="Microsoft.VisualStudio.TestTools.UnitTesting" />
+    <Using Include="Combinatorial.MSTest" />
     <Using Include="SonarAnalyzer.Core.Analyzers" />
     <Using Include="SonarAnalyzer.Core.Common" />
     <Using Include="SonarAnalyzer.Core.Extensions" />

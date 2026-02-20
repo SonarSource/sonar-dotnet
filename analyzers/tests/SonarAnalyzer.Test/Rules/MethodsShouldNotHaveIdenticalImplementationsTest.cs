@@ -30,10 +30,11 @@ public class MethodsShouldNotHaveIdenticalImplementationsTest
     public void MethodsShouldNotHaveIdenticalImplementations() =>
         builderCS.AddPaths("MethodsShouldNotHaveIdenticalImplementations.cs").Verify();
 
-    [CombinatorialDataTestMethod]
+    [TestMethod]
+    [CombinatorialData]
     public void MethodsShouldNotHaveIdenticalImplementations_MethodTypeParameters(
-        [DataValues("", "where T: struct", "where T: class", "where T: unmanaged", "where T: new()", "where T: class, new()")] string constraint1,
-        [DataValues("", "where T: struct", "where T: class", "where T: unmanaged", "where T: new()", "where T: class, new()")] string constraint2)
+        [CombinatorialValues("", "where T: struct", "where T: class", "where T: unmanaged", "where T: new()", "where T: class, new()")] string constraint1,
+        [CombinatorialValues("", "where T: struct", "where T: class", "where T: unmanaged", "where T: new()", "where T: class, new()")] string constraint2)
     {
         var nonCompliant = constraint1 == constraint2;
         var builder = builderCS.AddSnippet($$"""
