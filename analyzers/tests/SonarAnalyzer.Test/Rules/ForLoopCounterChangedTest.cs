@@ -33,11 +33,12 @@ public class ForLoopCounterChangedTest
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
-    [CombinatorialDataTestMethod]
+    [TestMethod]
+    [CombinatorialData]
     public void ForLoopCounterChanged_VariableUsage(
-        [DataValues(true, false)] bool inInitializer,
-        [DataValues(true, false)] bool inCondition,
-        [DataValues(true, false)] bool inIncrementor)
+        [CombinatorialValues(true, false)] bool inInitializer,
+        [CombinatorialValues(true, false)] bool inCondition,
+        [CombinatorialValues(true, false)] bool inIncrementor)
     {
         var initializer = inInitializer ? "i = 0" : string.Empty;
         var condition = inCondition ? "i < 10" : string.Empty;
