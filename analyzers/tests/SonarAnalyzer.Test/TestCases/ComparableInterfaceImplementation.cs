@@ -941,3 +941,46 @@ namespace Tests.Diagnostics.BothInterfacesImplementation
         }
     }
 }
+
+// https://sonarsource.atlassian.net/browse/NET-3053
+public class ContainerWithPrivateTypes
+{
+    private class PrivateComparable : IComparable           // Compliant - Nested private types are compliant
+    {
+        public int CompareTo(object obj) => 0;
+    }
+
+    private struct PrivateComparableStruct : IComparable    // Compliant
+    {
+        public int CompareTo(object obj) => 0;
+    }
+
+    private sealed class PrivateGenericComparable : IComparable<PrivateGenericComparable> // Compliant
+    {
+        public int CompareTo(PrivateGenericComparable other) => 0;
+    }
+
+    private class PrivateBothComparable : IComparable, IComparable<PrivateBothComparable> // Compliant
+    {
+        public int CompareTo(object obj) => 0;
+        public int CompareTo(PrivateBothComparable other) => 0;
+    }
+}
+
+internal class InternalComparable : IComparable<InternalComparable> // Noncompliant {{When implementing IComparable<T>, you should also override Equals, ==, !=, <, <=, >, and >=.}}
+{
+    public int CompareTo(InternalComparable other) => 0;
+}
+
+internal struct InternalComparableStruct : IComparable<InternalComparableStruct> // Noncompliant {{When implementing IComparable<T>, you should also override Equals, ==, !=, <, <=, >, and >=.}}
+{
+    public int CompareTo(InternalComparableStruct other) => 0;
+}
+
+internal class InternalContainerWithNestedPrivate
+{
+    private class NestedPrivateComparable : IComparable // Compliant because private
+    {
+        public int CompareTo(object obj) => 0;
+    }
+}

@@ -16,13 +16,16 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ComparableInterfaceImplementationTest
 {
-    [TestClass]
-    public class ComparableInterfaceImplementationTest
-    {
-        [TestMethod]
-        public void IComparableImplementation() =>
-            new VerifierBuilder<ComparableInterfaceImplementation>().AddPaths("ComparableInterfaceImplementation.cs").Verify();
-    }
+    [TestMethod]
+    public void IComparableImplementation() =>
+        new VerifierBuilder<ComparableInterfaceImplementation>().AddPaths("ComparableInterfaceImplementation.cs").Verify();
+
+    [TestMethod]
+    public void IComparableImplementation_Latest() =>
+        new VerifierBuilder<ComparableInterfaceImplementation>().AddPaths("ComparableInterfaceImplementation.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }
