@@ -32,4 +32,40 @@ public class ForLoopCounterChangedTest
         builder.AddPaths("ForLoopCounterChanged.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
+
+    [CombinatorialDataTestMethod]
+    public void ForLoopCounterChanged_VariableUsage(
+        [DataValues(true, false)] bool inInitializer,
+        [DataValues(true, false)] bool inCondition,
+        [DataValues(true, false)] bool inIncrementor)
+    {
+        var initializer = inInitializer ? "i = 0" : string.Empty;
+        var condition = inCondition ? "i < 10" : string.Empty;
+        var incrementor = inIncrementor ? "i++" : string.Empty;
+        var expectedRaise = inCondition && inIncrementor;
+        var noncompliant = expectedRaise ? " // Noncompliant" : string.Empty;
+
+        var declaration = inInitializer ? string.Empty : "int i = 0;";
+        var verifier = builder.AddSnippet($$"""
+            class C
+            {
+                void M()
+                {
+                    {{declaration}}
+                    for ({{(inInitializer ? "int i = 0" : initializer)}}; {{condition}}; {{incrementor}})
+                    {
+                        i = 5;{{noncompliant}}
+                    }
+                }
+            }
+            """);
+        if (expectedRaise)
+        {
+            verifier.Verify();
+        }
+        else
+        {
+            verifier.VerifyNoIssues();
+        }
+    }
 }

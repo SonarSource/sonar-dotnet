@@ -14,91 +14,96 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
+    private const string DiagnosticId = "S127";
+    private const string MessageFormat = "Do not update the stop condition variable '{0}' in the body of the for loop.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly IImmutableList<SideEffectExpression> SideEffectExpressions = ImmutableArray.Create(
+    new SideEffectExpression
     {
-        private const string DiagnosticId = "S127";
-        private const string MessageFormat = "Do not update the loop counter '{0}' within the loop body.";
+        Kinds = ImmutableHashSet.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
+        AffectedExpressions = x => ImmutableArray.Create<SyntaxNode>(((PrefixUnaryExpressionSyntax)x).Operand)
+    },
+    new SideEffectExpression
+    {
+        Kinds = ImmutableHashSet.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
+        AffectedExpressions = x => ImmutableArray.Create<SyntaxNode>(((PostfixUnaryExpressionSyntax)x).Operand)
+    },
+    new SideEffectExpression
+    {
+        Kinds = ImmutableHashSet.Create(
+            SyntaxKind.SimpleAssignmentExpression,
+            SyntaxKind.AddAssignmentExpression,
+            SyntaxKind.SubtractAssignmentExpression,
+            SyntaxKind.MultiplyAssignmentExpression,
+            SyntaxKind.DivideAssignmentExpression,
+            SyntaxKind.ModuloAssignmentExpression,
+            SyntaxKind.AndAssignmentExpression,
+            SyntaxKind.ExclusiveOrAssignmentExpression,
+            SyntaxKind.OrAssignmentExpression,
+            SyntaxKind.LeftShiftAssignmentExpression,
+            SyntaxKind.RightShiftAssignmentExpression),
+        AffectedExpressions = x => ((AssignmentExpressionSyntax)x).AssignmentTargets()
+    });
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-        private sealed class SideEffectExpression
-        {
-            public ImmutableHashSet<SyntaxKind> Kinds { get; set; }
-            public Func<SyntaxNode, ImmutableArray<SyntaxNode>> AffectedExpressions { get; set; }
-        }
-
-        private static readonly IImmutableList<SideEffectExpression> SideEffectExpressions = ImmutableArray.Create(
-            new SideEffectExpression
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
             {
-                Kinds = ImmutableHashSet.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
-                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PrefixUnaryExpressionSyntax)node).Operand)
-            },
-            new SideEffectExpression
-            {
-                Kinds = ImmutableHashSet.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
-                AffectedExpressions = node => ImmutableArray.Create<SyntaxNode>(((PostfixUnaryExpressionSyntax)node).Operand)
-            },
-            new SideEffectExpression
-            {
-                Kinds = ImmutableHashSet.Create(
-                    SyntaxKind.SimpleAssignmentExpression,
-                    SyntaxKind.AddAssignmentExpression,
-                    SyntaxKind.SubtractAssignmentExpression,
-                    SyntaxKind.MultiplyAssignmentExpression,
-                    SyntaxKind.DivideAssignmentExpression,
-                    SyntaxKind.ModuloAssignmentExpression,
-                    SyntaxKind.AndAssignmentExpression,
-                    SyntaxKind.ExclusiveOrAssignmentExpression,
-                    SyntaxKind.OrAssignmentExpression,
-                    SyntaxKind.LeftShiftAssignmentExpression,
-                    SyntaxKind.RightShiftAssignmentExpression),
-                AffectedExpressions = node => ((AssignmentExpressionSyntax)node).AssignmentTargets()
-            });
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
+                var forNode = (ForStatementSyntax)c.Node;
+                var loopCounters = LoopCounters(forNode, c.Model).ToList();
+                foreach (var affectedExpression in ComputeAffectedExpressions(forNode.Statement))
                 {
-                    var forNode = (ForStatementSyntax)c.Node;
-                    var loopCounters = LoopCounters(forNode, c.Model).ToList();
-
-                    foreach (var affectedExpression in ComputeAffectedExpressions(forNode.Statement))
+                    if (c.Model.GetSymbolInfo(affectedExpression).Symbol is { } symbol
+                        && loopCounters.Contains(symbol))
                     {
-                        var symbol = c.Model.GetSymbolInfo(affectedExpression).Symbol;
-
-                        if (symbol != null && loopCounters.Contains(symbol))
-                        {
-                            c.ReportIssue(Rule, affectedExpression, symbol.Name);
-                        }
+                        c.ReportIssue(Rule, affectedExpression, symbol.Name);
                     }
-                },
-                SyntaxKind.ForStatement);
+                }
+            },
+            SyntaxKind.ForStatement);
 
-        private static IEnumerable<ISymbol> LoopCounters(ForStatementSyntax node, SemanticModel semanticModel)
+    private static IEnumerable<ISymbol> LoopCounters(ForStatementSyntax node, SemanticModel model)
+    {
+        if (node.Condition is null || node.Incrementors.Count == 0)
         {
-            var declaredVariables = node.Declaration == null
-                ? Enumerable.Empty<ISymbol>()
-                : node.Declaration.Variables.Select(v => semanticModel.GetDeclaredSymbol(v));
-
-            var initializedVariables = node.Initializers.OfType<AssignmentExpressionSyntax>()
-                .SelectMany(x => x.AssignmentTargets())
-                .Select(x => VariableDesignationSyntaxWrapper.IsInstance(x)
-                    ? semanticModel.GetDeclaredSymbol(x)
-                    : semanticModel.GetSymbolInfo(x).Symbol);
-
-            return declaredVariables.Union(initializedVariables).Where(x => x is { Kind: not SymbolKindEx.Discard });
+            return [];
         }
 
-        private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>
-            (from descendantNode in node.DescendantNodesAndSelf()
-             from sideEffect in SideEffectExpressions
-             where descendantNode.IsAnyKind(sideEffect.Kinds)
-             from expression in sideEffect.AffectedExpressions(descendantNode)
-             select expression).ToArray();
+        var conditionSymbols = node.Condition.DescendantNodesAndSelf()
+            .OfType<IdentifierNameSyntax>()
+            .Select(x => model.GetSymbolInfo(x).Symbol)
+            .Where(x => x is ILocalSymbol or IParameterSymbol)
+            .WhereNotNull()
+            .ToHashSet();
+
+        return node.Incrementors
+            .SelectMany(x => x.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>())
+            .Select(x => model.GetSymbolInfo(x).Symbol)
+            .Where(x => x is ILocalSymbol or IParameterSymbol)
+            .WhereNotNull()
+            .Where(conditionSymbols.Contains)
+            .Distinct();
+    }
+
+    private static SyntaxNode[] ComputeAffectedExpressions(SyntaxNode node) =>
+        (from descendantNode in node.DescendantNodesAndSelf()
+         from sideEffect in SideEffectExpressions
+         where descendantNode.IsAnyKind(sideEffect.Kinds)
+         from expression in sideEffect.AffectedExpressions(descendantNode)
+         select expression).ToArray();
+
+    private readonly struct SideEffectExpression
+    {
+        public ImmutableHashSet<SyntaxKind> Kinds { get; init; }
+        public Func<SyntaxNode, ImmutableArray<SyntaxNode>> AffectedExpressions { get; init; }
     }
 }

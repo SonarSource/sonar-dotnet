@@ -4,16 +4,17 @@
     {
         for (int i = 0; i < 42; i++)
         {
-            (i, var j) = t; // Noncompliant {{Do not update the loop counter 'i' within the loop body.}}
+            (i, var j) = t; // Noncompliant {{Do not update the stop condition variable 'i' in the body of the for loop.}}
 //           ^
-            (_, i) = (1, 2); // Noncompliant {{Do not update the loop counter 'i' within the loop body.}}
-            (_, (_, i, _)) = (1, (2, 3, 4)); // Noncompliant {{Do not update the loop counter 'i' within the loop body.}}
+            (_, i) = (1, 2); // Noncompliant {{Do not update the stop condition variable 'i' in the body of the for loop.}}
+            (_, (_, i, _)) = (1, (2, 3, 4)); // Noncompliant {{Do not update the stop condition variable 'i' in the body of the for loop.}}
             (i, j) = (i, 2); // Noncompliant FP
         }
 
         for (int i = 0, j = 0; i < 42; i++, j++)
         {
-            (i, j) = (1, 2); // Noncompliant [issue1, issue2]
+            (i, j) = (1, 2); // Noncompliant
+//           ^
         }
 
         // loop variable shadowed in local function:
@@ -33,10 +34,12 @@
             _ = (1, 2) is var (i, b);   // Error [CS0128] - FN - we still check for SonarLint as it analyzes also code with compile errors.
         }
 
+        var z = (a: 1, b: 2);
         for (var i = (a: 1, b: 2); i is (a: < 10, _); i = (++i.a, ++i.b))
         {
             i = (1, 1); // Noncompliant
             i.a = 1;    // FN
+            z.a = 1;    // Compliant
         }
 
         for (var (i, j, _) = (0, 0, 0); i < 10; ++i, ++j)
@@ -55,7 +58,7 @@
         for ((k, l) = (0, 0), m = 0; k < 10; ++k, ++l)
         {
             k = 0; // Noncompliant
-            m = 0; // Noncompliant
+            m = 0; // Compliant
         }
 
         for (int i = 0; i < 42; i++)
@@ -70,7 +73,7 @@
         int i, _;
         for ((i, _) = (0, 0); i < 10; ++i)
         {
-            _ = 0; // Noncompliant. Here _ is not a discard but a local reference.
+            _ = 0; // Compliant.  _ is not in the stop condition (i < 10), even though it is a local reference
         }
     }
 }

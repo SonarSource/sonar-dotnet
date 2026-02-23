@@ -12,7 +12,7 @@
         {
             for (int a2 = 0; a2 < 42; a2++)
             {
-                a2 = 0; // Noncompliant {{Do not update the loop counter 'a2' within the loop body.}}
+                a2 = 0; // Noncompliant {{Do not update the stop condition variable 'a2' in the body of the for loop.}}
 //              ^^
             }
 
@@ -26,7 +26,7 @@
             {
                 a++;
                 d = 0; // Noncompliant
-                e = 0;  // Noncompliant
+                e = 0;  // Compliant: e is not a loop counter: neither in the condition, nor in the incrementor
             }
 
             int g;
@@ -91,7 +91,7 @@
 
             for (s1.i = 0; s1.i < 3; s1.i++)
             {
-                s1.i = 1; // Noncompliant
+                s1.i = 1; // FN
                 s1.j[0]++;
             }
 
@@ -113,7 +113,7 @@
                 int i = 0;
                 for (; i > 0; i++)
                 {
-                    i = 1;
+                    i = 1; // Noncompliant
                 }
 
                 for (i = 0; i < 3; i++)
@@ -126,6 +126,17 @@
             {
                 var e = element;
                 e = null;
+            }
+
+            for (int readIndex = 0, writeIndex = 0; readIndex < 10; readIndex++)
+            {
+                writeIndex++; // Compliant
+            }
+
+            var limit = 10;
+            for (var i2 = 0; i2 < limit; i2++)
+            {
+                limit = 5; // Compliant - limit is not a loop counter (not in the incrementor)
             }
         }
     }
