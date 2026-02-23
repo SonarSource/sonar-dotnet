@@ -14,31 +14,35 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class StringConcatenationInLoop : StringConcatenationInLoopBase<SyntaxKind, AssignmentStatementSyntax, BinaryExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class StringConcatenationInLoop : StringConcatenationInLoopBase<SyntaxKind, AssignmentStatementSyntax, BinaryExpressionSyntax>
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override SyntaxKind[] CompoundAssignmentKinds { get; } = [SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement];
+
+    protected override ISet<SyntaxKind> ExpressionConcatenationKinds { get; } = new HashSet<SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        SyntaxKind.AddExpression,
+        SyntaxKind.ConcatenateExpression
+    };
 
-        protected override SyntaxKind[] CompoundAssignmentKinds { get; } = new[] { SyntaxKind.AddAssignmentStatement, SyntaxKind.ConcatenateAssignmentStatement };
+    protected override ISet<SyntaxKind> LoopKinds { get; } = new HashSet<SyntaxKind>
+    {
+        SyntaxKind.WhileBlock,
+        SyntaxKind.SimpleDoLoopBlock,
+        SyntaxKind.ForBlock,
+        SyntaxKind.ForEachBlock,
+        SyntaxKind.DoUntilLoopBlock,
+        SyntaxKind.DoWhileLoopBlock,
+        SyntaxKind.DoLoopUntilBlock,
+        SyntaxKind.DoLoopWhileBlock
+    };
 
-        protected override ISet<SyntaxKind> ExpressionConcatenationKinds { get; } = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.AddExpression,
-            SyntaxKind.ConcatenateExpression
-        };
-
-        protected override ISet<SyntaxKind> LoopKinds { get; } = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.WhileBlock,
-            SyntaxKind.SimpleDoLoopBlock,
-            SyntaxKind.ForBlock,
-            SyntaxKind.ForEachBlock,
-            SyntaxKind.DoUntilLoopBlock,
-            SyntaxKind.DoWhileLoopBlock,
-            SyntaxKind.DoLoopUntilBlock,
-            SyntaxKind.DoLoopWhileBlock
-        };
-    }
+    protected override SyntaxNode LeftMostExpression(SyntaxNode expression) =>
+        expression is InvocationExpressionSyntax
+            ? null
+            : ((ExpressionSyntax)expression).LeftMostInMemberAccess;
 }

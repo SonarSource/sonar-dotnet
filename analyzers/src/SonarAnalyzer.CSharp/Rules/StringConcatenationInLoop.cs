@@ -14,26 +14,30 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class StringConcatenationInLoop : StringConcatenationInLoopBase<SyntaxKind, AssignmentExpressionSyntax, BinaryExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class StringConcatenationInLoop : StringConcatenationInLoopBase<SyntaxKind, AssignmentExpressionSyntax, BinaryExpressionSyntax>
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxKind[] CompoundAssignmentKinds { get; } = [SyntaxKind.AddAssignmentExpression];
+
+    protected override ISet<SyntaxKind> ExpressionConcatenationKinds { get; } = new HashSet<SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+        SyntaxKind.AddExpression
+    };
 
-        protected override SyntaxKind[] CompoundAssignmentKinds { get; } = new[] { SyntaxKind.AddAssignmentExpression };
+    protected override ISet<SyntaxKind> LoopKinds { get; } = new HashSet<SyntaxKind>
+    {
+        SyntaxKind.WhileStatement,
+        SyntaxKind.DoStatement,
+        SyntaxKind.ForStatement,
+        SyntaxKind.ForEachStatement
+    };
 
-        protected override ISet<SyntaxKind> ExpressionConcatenationKinds { get; } = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.AddExpression
-        };
-
-        protected override ISet<SyntaxKind> LoopKinds { get; } = new HashSet<SyntaxKind>
-        {
-            SyntaxKind.WhileStatement,
-            SyntaxKind.DoStatement,
-            SyntaxKind.ForStatement,
-            SyntaxKind.ForEachStatement
-        };
-    }
+    protected override SyntaxNode LeftMostExpression(SyntaxNode expression) =>
+        expression is ElementAccessExpressionSyntax
+            ? null
+            : ((ExpressionSyntax)expression).LeftMostInMemberAccess();
 }

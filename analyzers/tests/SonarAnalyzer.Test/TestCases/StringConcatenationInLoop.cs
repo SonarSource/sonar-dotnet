@@ -27,7 +27,8 @@ namespace Tests.Diagnostics
                 s += i.ToString(); // Noncompliant
                 s += "a" + s; // Noncompliant
                 s += string.Format("{0} world;", "Hello"); // Noncompliant
-                dict["a"] = dict["a"] + "a"; // FN
+                dict["a"] = dict["a"] + "a"; // Compliant: Technically an FN, but its an uncommon use case. It is much more likely to use a loop variable as the index on a dict/array.
+                dict[i.ToString()] = dict[i.ToString()] + "a"; // Compliant
                 s = "a" + (s == null ? "Empty" : s); // FN
 
                 i = i + 1;
@@ -39,16 +40,16 @@ namespace Tests.Diagnostics
                 sLoop += "a";
 
                 // https://github.com/SonarSource/sonar-dotnet/issues/7722
-                p = p + "a";                        // FN parameter
-                p += "a";                           // FN parameter
+                p = p + "a";                        // Noncompliant NET-1259
+                p += "a";                           // Noncompliant
 
-                field = field + "a";                // FN field
-                field += "a";                       // FN field
+                field = field + "a";                // Noncompliant
+                field += "a";                       // Noncompliant
 
-                Property = Property + "a";          // FN property
-                Property += "a";                    // FN property
+                Property = Property + "a";          // Noncompliant
+                Property += "a";                    // Noncompliant
 
-                sample.field = sample.field + "a";  // FN NET-2858
+                sample.field = sample.field + "a";  // Noncompliant
             }
 
             while (true)
@@ -127,5 +128,17 @@ namespace Tests.Diagnostics
     public class MyObject
     {
         public string Name { get; set; }
+    }
+
+    class Sample
+    {
+        public string S { get; set; }
+        void M(List<Sample> others)
+        {
+            foreach (var sample in others)
+            {
+                sample.S = sample.S + "- disabled"; // Compliant
+            }
+        }
     }
 }

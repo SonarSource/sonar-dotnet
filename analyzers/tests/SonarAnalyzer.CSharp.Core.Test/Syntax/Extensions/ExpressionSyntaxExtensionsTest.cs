@@ -85,7 +85,7 @@ public class ExpressionSyntaxExtensionsTest
     public void GetLeftMostInMemberAccess(string expression, string expected)
     {
         var parsed = SyntaxFactory.ParseExpression(expression);
-        var result = parsed.GetLeftMostInMemberAccess();
+        var result = parsed.LeftMostInMemberAccess();
         var asString = result?.ToString() ?? "null";
         asString.Should().BeEquivalentTo(expected);
     }

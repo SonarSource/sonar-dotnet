@@ -20,7 +20,8 @@ Namespace Tests.Diagnostics
                 s += "a" & s ' Noncompliant
                 s += String.Format("{0} world;", "Hello") ' Noncompliant
 
-                dict("a") = dict("a") & "a" ' FN
+                dict("a") = dict("a") & "a" ' Compliant
+                dict(i.ToString()) = dict(i.ToString()) & "a" ' Compliant
                 i = i + 1
                 i += 1
                 t = t + 1

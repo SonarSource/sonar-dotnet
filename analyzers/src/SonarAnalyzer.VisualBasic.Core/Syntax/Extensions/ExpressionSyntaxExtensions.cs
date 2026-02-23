@@ -62,4 +62,29 @@ public static class ExpressionSyntaxExtensions
             ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression.RemoveParentheses().IsKind(onKind),
             _ => false,
         };
+
+    extension(ExpressionSyntax expression)
+    {
+
+        /// <summary>
+        /// On member access like operations, like <c>a.b</c>, c>a.b()</c>, or <c>a[b]</c>, the most left hand
+        /// member (<c>a</c>) is returned. <see langword="Me"/> is skipped, so <c>this.a</c> returns <c>a</c>.
+        /// </summary>
+        public ExpressionSyntax LeftMostInMemberAccess =>
+            expression switch
+            {
+                IdentifierNameSyntax identifier => identifier,                                                                          // Prop
+                MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } => identifier,                             // Prop.Something -> Prop
+                MemberAccessExpressionSyntax { Expression: MeExpressionSyntax, Name: IdentifierNameSyntax identifier } => identifier,   // this.Prop -> Prop
+                MemberAccessExpressionSyntax { Expression: PredefinedTypeSyntax predefinedType } => predefinedType,                     // int.MaxValue -> int
+                MemberAccessExpressionSyntax { Expression: { } left } => left.LeftMostInMemberAccess,                                  // Prop.Something.Something -> Prop
+                InvocationExpressionSyntax { Expression: { } left } => left.LeftMostInMemberAccess,                                    // Method() -> Method, also this.Method() and Method().Something
+                ConditionalAccessExpressionSyntax conditional => conditional.RootConditionalAccessExpression.Expression.LeftMostInMemberAccess, // a?.b -> a
+                ParenthesizedExpressionSyntax { Expression: { } inner } => inner.LeftMostInMemberAccess,                               // (a.b).c -> a
+                _ => null,
+            };
+
+        public ConditionalAccessExpressionSyntax RootConditionalAccessExpression =>
+            expression.AncestorsAndSelf().TakeWhile(x => x is ExpressionSyntax).OfType<ConditionalAccessExpressionSyntax>().LastOrDefault();
+    }
 }

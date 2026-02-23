@@ -203,20 +203,23 @@ public static class ExpressionSyntaxExtensions
     /// On member access like operations, like <c>a.b</c>, c>a.b()</c>, or <c>a[b]</c>, the most left hand
     /// member (<c>a</c>) is returned. <see langword="this"/> is skipped, so <c>this.a</c> returns <c>a</c>.
     /// </summary>
-    public static ExpressionSyntax GetLeftMostInMemberAccess(this ExpressionSyntax expression) => expression switch
-    {
-        IdentifierNameSyntax identifier => identifier, // Prop
-        MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } => identifier, // Prop.Something -> Prop
-        MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax, Name: IdentifierNameSyntax identifier } => identifier, // this.Prop -> Prop
-        MemberAccessExpressionSyntax { Expression: PredefinedTypeSyntax predefinedType } => predefinedType, // int.MaxValue -> int
-        MemberAccessExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // Prop.Something.Something -> Prop
-        InvocationExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // Method() -> Method, also this.Method() and Method().Something
-        ElementAccessExpressionSyntax { Expression: { } left } => GetLeftMostInMemberAccess(left), // a[b] -> a
-        ConditionalAccessExpressionSyntax conditional => GetLeftMostInMemberAccess(conditional.GetRootConditionalAccessExpression().Expression), // a?.b -> a
-        ParenthesizedExpressionSyntax { Expression: { } inner } => GetLeftMostInMemberAccess(inner), // (a.b).c -> a
-        PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } nullSuppression => GetLeftMostInMemberAccess(nullSuppression.Operand), // a! -> a
-        _ => null,
-    };
+    public static ExpressionSyntax LeftMostInMemberAccess(this ExpressionSyntax expression) =>
+        expression switch
+        {
+            IdentifierNameSyntax identifier => identifier, // Prop
+            MemberAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } => identifier, // Prop.Something -> Prop
+            MemberAccessExpressionSyntax { Expression: ThisExpressionSyntax, Name: IdentifierNameSyntax identifier } => identifier, // this.Prop -> Prop
+            MemberAccessExpressionSyntax { Expression: PredefinedTypeSyntax predefinedType } => predefinedType, // int.MaxValue -> int
+            MemberAccessExpressionSyntax { Expression: { } left } => LeftMostInMemberAccess(left), // Prop.Something.Something -> Prop
+            MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetRootConditionalAccessExpression()?.Expression.LeftMostInMemberAccess(), // C#14 a?.b -> a
+            InvocationExpressionSyntax { Expression: { } left } => LeftMostInMemberAccess(left), // Method() -> Method, also this.Method() and Method().Something
+            ElementAccessExpressionSyntax { Expression: { } left } => LeftMostInMemberAccess(left), // a[b] -> a
+            ConditionalAccessExpressionSyntax conditional => LeftMostInMemberAccess(conditional.GetRootConditionalAccessExpression().Expression), // a?.b -> a
+            ParenthesizedExpressionSyntax { Expression: { } inner } => LeftMostInMemberAccess(inner), // (a.b).c -> a
+            PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } nullSuppression => LeftMostInMemberAccess(nullSuppression.Operand), // a! -> a
+            ExpressionSyntax { RawKind: (int)SyntaxKindEx.FieldExpression } fieldExpression => fieldExpression, // C#14 field keyword
+            _ => null,
+        };
 
     /// <summary>
     /// Returns <see langword="true"/> if the expression is a default literal or a null supressed default literal, i.e. <c>default</c> or <c>default!</c>.

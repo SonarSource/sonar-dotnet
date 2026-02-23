@@ -58,8 +58,8 @@ namespace CSharp13
             Partial partial = new Partial();
             for (int i = 0; i < 50; i++)
             {
-                partial.MyString += "A";                   // FN
-                partial.MyString = partial.MyString + "A"; // FN
+                partial.MyString += "A";                   // Noncompliant
+                partial.MyString = partial.MyString + "A"; // Noncompliant
             }
         }
     }
@@ -74,7 +74,7 @@ namespace CSharp14
         {
             for (int i = 0; i < 50; i++)
             {
-                sample?.s += "A";   // FN NET-2858
+                sample?.s += "A";   // Noncompliant NET-2858
             }
         }
     }
@@ -87,7 +87,7 @@ namespace CSharp14
             {
                 for (int i = 0; i < 50; i++)
                 {
-                    field += "A";   // FN NET-2859
+                    field += "A";   // Noncompliant NET-2859
                 }
                 return field;
             }
