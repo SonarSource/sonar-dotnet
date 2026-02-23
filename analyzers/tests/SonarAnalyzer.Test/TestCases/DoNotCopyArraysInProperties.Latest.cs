@@ -29,6 +29,8 @@ record R
 class TestCase
 {
     private string[] stringArray = new string[10];
+    private List<string> stringList = new();
+    private HashSet<int> intSet = new();
 
     public string[] Property1
     {
@@ -39,6 +41,22 @@ class TestCase
     {
         get { return [stringArray]; } // FN
     }
+
+    public List<string> Property3 => new(stringArray);
+//                                   ^^^^^^^^^^^^^^^^ Noncompliant {{Refactor 'Property3' into a method, properties should not copy collections.}}
+
+    public HashSet<int> Property4
+    {
+        get { return new(intSet); } // Noncompliant
+    }
+
+    public List<string> Property5 => new List<string>(stringList);
+//                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Refactor 'Property5' into a method, properties should not copy collections.}}
+
+    public LinkedList<string> Property6 => new(stringArray);
+//                                         ^^^^^^^^^^^^^^^^ Noncompliant {{Refactor 'Property6' into a method, properties should not copy collections.}}
+
+    public List<string> CompliantNewWithCapacity => new(10);
 }
 
 
@@ -154,4 +172,45 @@ class FieldKeyword
         get => field.ToList();          // Noncompliant
         set => field = value.ToList();  // Compliant
     }
+}
+
+class NullCoalesceAssignment
+{
+    private string[] stringArray;
+    private List<string> stringList;
+    private static string[] staticStrings = new string[] { "a", "b", "c" };
+
+    public string[] LazyInitializationWithCoalesceAssignment
+    {
+        get { return stringArray ??= (string[])staticStrings.Clone(); } // Compliant
+    }
+
+    public List<string> LazyInitializationListWithCoalesceAssignment
+    {
+        get { return stringList ??= new List<string>(staticStrings); } // Compliant
+    }
+
+    public string[] LazyInitializationArrow => stringArray ??= (string[])staticStrings.Clone(); // Compliant
+}
+
+class DictionaryTypes
+{
+    private Dictionary<int, string> dict = new();
+    private SortedDictionary<int, string> sortedDict = new();
+    private SortedList<int, string> sortedList = new();
+
+    public Dictionary<int, string> DictProperty => new Dictionary<int, string>(dict);
+//                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Refactor 'DictProperty' into a method, properties should not copy collections.}}
+
+    public SortedDictionary<int, string> SortedDictProperty => new SortedDictionary<int, string>(sortedDict);
+//                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Refactor 'SortedDictProperty' into a method, properties should not copy collections.}}
+
+    public SortedList<int, string> SortedListProperty => new SortedList<int, string>(sortedList);
+//                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant {{Refactor 'SortedListProperty' into a method, properties should not copy collections.}}
+
+    public Dictionary<int, string> DictPropertyWithCapacity => dict;                    // Compliant
+
+    public SortedDictionary<int, string> SortedDictPropertyWithComparer => sortedDict;  // Compliant
+
+    public SortedList<int, string> SortedListPropertyWithCapacity => sortedList;        // Compliant
 }
