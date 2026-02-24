@@ -12,16 +12,16 @@ time complexity of extension methods.</p>
 <code>O(1)</code> that is significantly better than <code>O(n)</code> of extension methods.</p>
 <p><strong>Applies to:</strong></p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.max">SortedSet&lt;T&gt;.Max</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.min">SortedSet&lt;T&gt;.Min</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.max">ImmutableSortedSet&lt;T&gt;.Max</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.min">ImmutableSortedSet&lt;T&gt;.Min</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder.max">ImmutableSortedSet&lt;T&gt;.Builder.Max</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder.min">ImmutableSortedSet&lt;T&gt;.Builder.Min</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.max">SortedSet&lt;T&gt;.Max</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.min">SortedSet&lt;T&gt;.Min</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.max">ImmutableSortedSet&lt;T&gt;.Max</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.min">ImmutableSortedSet&lt;T&gt;.Min</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder.max">ImmutableSortedSet&lt;T&gt;.Builder.Max</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder.min">ImmutableSortedSet&lt;T&gt;.Builder.Min</a></li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>We measured a significant improvement both in execution time and memory allocation. For more details see the <code>Benchmarks</code> section from
@@ -30,9 +30,9 @@ the <code>More info</code> tab.</p>
 <p>The <code>Min</code> and <code>Max</code> properties are defined on the following classes, and the extension method call can be replaced by calling
 the propery instead:</p>
 <ul>
-  <li> <code>SortedSet&lt;T&gt;</code> </li>
-  <li> <code>ImmutableSortedSet&lt;T&gt;</code> </li>
-  <li> <code>ImmutableSortedSet&lt;T&gt;.Builder</code> </li>
+  <li><code>SortedSet&lt;T&gt;</code></li>
+  <li><code>ImmutableSortedSet&lt;T&gt;</code></li>
+  <li><code>ImmutableSortedSet&lt;T&gt;.Builder</code></li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -56,10 +56,10 @@ int GetMin(SortedSet&lt;int&gt; data) =&gt;
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1">ImmutableSortedSet&lt;T&gt;</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder">ImmutableSortedSet&lt;T&gt;.Builder</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1">ImmutableSortedSet&lt;T&gt;</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablesortedset-1.builder">ImmutableSortedSet&lt;T&gt;.Builder</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -81,40 +81,80 @@ int GetMin(SortedSet&lt;int&gt; data) =&gt;
   </thead>
   <tbody>
     <tr>
-      <td><p>MaxMethod</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>68,961.483 us</p></td>
-      <td><p>499.6623 us</p></td>
-      <td><p>248063 B</p></td>
+      <td>
+        <p>MaxMethod</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>68,961.483 us</p>
+      </td>
+      <td>
+        <p>499.6623 us</p>
+      </td>
+      <td>
+        <p>248063 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>MaxProperty</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>4.638 us</p></td>
-      <td><p>0.0634 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>MaxProperty</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>4.638 us</p>
+      </td>
+      <td>
+        <p>0.0634 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>MaxMethod</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>85,827.359 us</p></td>
-      <td><p>1,531.1611 us</p></td>
-      <td><p>281259 B</p></td>
+      <td>
+        <p>MaxMethod</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>85,827.359 us</p>
+      </td>
+      <td>
+        <p>1,531.1611 us</p>
+      </td>
+      <td>
+        <p>281259 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>MaxProperty</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>67.682 us</p></td>
-      <td><p>0.3757 us</p></td>
-      <td><p>312919 B</p></td>
+      <td>
+        <p>MaxProperty</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>67.682 us</p>
+      </td>
+      <td>
+        <p>0.3757 us</p>
+      </td>
+      <td>
+        <p>312919 B</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <h4>Glossary</h4>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a> </li>
+  <li><a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a></li>
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>

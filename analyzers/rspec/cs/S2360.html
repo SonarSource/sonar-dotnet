@@ -1,13 +1,13 @@
 <h2>Why is this an issue?</h2>
 <p>The overloading mechanism should be used in place of optional parameters for several reasons:</p>
 <ul>
-  <li> Optional parameter values are baked into the method call site code, thus, if a default value has been changed, all referencing assemblies need
-  to be rebuilt, otherwise the original values will be used. </li>
-  <li> The Common Language Specification (CLS) allows compilers to ignore default parameter values, and thus require the caller to explicitly specify
+  <li>Optional parameter values are baked into the method call site code, thus, if a default value has been changed, all referencing assemblies need
+  to be rebuilt, otherwise the original values will be used.</li>
+  <li>The Common Language Specification (CLS) allows compilers to ignore default parameter values, and thus require the caller to explicitly specify
   the values. For example, if you want to consume a method with default argument from another .NET compatible language (for instance C++/CLI), you
-  will have to provide all arguments. When using method overloads, you could achieve similar behavior as default arguments. </li>
-  <li> Optional parameters prevent muddying the definition of the function contract. Here is a simple example: if there are two optional parameters,
-  when one is defined, is the second one still optional or mandatory? </li>
+  will have to provide all arguments. When using method overloads, you could achieve similar behavior as default arguments.</li>
+  <li>Optional parameters prevent muddying the definition of the function contract. Here is a simple example: if there are two optional parameters,
+  when one is defined, is the second one still optional or mandatory?</li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>

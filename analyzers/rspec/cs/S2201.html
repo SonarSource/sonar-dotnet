@@ -6,18 +6,17 @@ but instead, they return a new object whose value is the result of this operatio
 use the return value.</p>
 <p>This rule raises an issue when the results of the following methods are ignored:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>Pure</code> methods</a> </li>
-  <li> Any method on <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">build-in types</a>
-  </li>
-  <li> Any method on <a href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections">Immutable
-  collections</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>Pure</code> methods</a></li>
+  <li>Any method on <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">build-in types</a></li>
+  <li>Any method on <a href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections">Immutable
+  collections</a></li>
 </ul>
 <p>Special cases:</p>
 <ul>
-  <li> Although <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern"><code>string.Intern</code></a> has a side effect, ignoring
-  its return value is still suspicious as it is the only reference ensured to point to the intern pool. </li>
-  <li> LINQ methods can have side effects if they are misused. For example: </li>
+  <li>Although <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern"><code>string.Intern</code></a> has a side effect, ignoring
+  its return value is still suspicious as it is the only reference ensured to point to the intern pool.</li>
+  <li>LINQ methods can have side effects if they are misused. For example:</li>
 </ul>
 <pre>
 data.All(x =&gt;
@@ -59,21 +58,20 @@ foreach (var x in data)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>PureAttribute</code>
-  Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier"><code>out</code>
-  parameter modifier</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref"><code>ref</code> keyword</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern"><code>String.Intern(String)</code> Method</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">build-in types</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections">Immutable
-  collections</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.contracts.pureattribute"><code>PureAttribute</code>
+  Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/out-parameter-modifier"><code>out</code>
+  parameter modifier</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/ref"><code>ref</code> keyword</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern"><code>String.Intern(String)</code> Method</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/built-in-types">build-in
+  types</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2017/march/net-framework-immutable-collections">Immutable
+  collections</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://www.daniellittle.dev/dont-ignore-your-functions">Don’t ignore your functions</a> </li>
+  <li><a href="https://www.daniellittle.dev/dont-ignore-your-functions">Don’t ignore your functions</a></li>
 </ul>
 

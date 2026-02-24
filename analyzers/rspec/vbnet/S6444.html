@@ -3,19 +3,19 @@
 excessively long.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the input passed to the regular expression is untrusted. </li>
-  <li> the regular expression contains patterns vulnerable to <a href="https://www.regular-expressions.info/catastrophic.html">catastrophic
-  backtracking</a>. </li>
+  <li>the input passed to the regular expression is untrusted.</li>
+  <li>the regular expression contains patterns vulnerable to <a href="https://www.regular-expressions.info/catastrophic.html">catastrophic
+  backtracking</a>.</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> It is recommended to specify a <a
+  <li>It is recommended to specify a <a
   href="https://learn.microsoft.com/dotnet/standard/base-types/best-practices#use-time-out-values"><code>matchTimeout</code></a> when executing a
-  regular expression. </li>
-  <li> Make sure regular expressions are not vulnerable to Denial-of-Service attacks by reviewing the patterns. </li>
-  <li> Consider using a non-backtracking algorithm by specifying <a
-  href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0"><code>RegexOptions.NonBacktracking</code></a>. </li>
+  regular expression.</li>
+  <li>Make sure regular expressions are not vulnerable to Denial-of-Service attacks by reviewing the patterns.</li>
+  <li>Consider using a non-backtracking algorithm by specifying <a
+  href="https://learn.microsoft.com/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0"><code>RegexOptions.NonBacktracking</code></a>.</li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <pre>
@@ -36,23 +36,23 @@ End Sub
 </pre>
 <h2>See</h2>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection">Top 10 2017 Category A1 - Injection</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/400">CWE-400 - Uncontrolled Resource Consumption</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/1333">CWE-1333 - Inefficient Regular Expression Complexity</a> </li>
-  <li> <a href="https://www.regular-expressions.info/catastrophic.html">regular-expressions.info</a> - Runaway Regular Expressions: Catastrophic
-  Backtracking </li>
-  <li> <a href="https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS">owasp.org</a> - Regular expression Denial of
-  Service - ReDoS </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/1333">CWE-1333 - Inefficient Regular Expression Complexity</a> </li>
-  <li> <a href="https://docs.microsoft.com/dotnet/standard/base-types/best-practices">docs.microsoft.com</a> - Best practices for regular expressions
-  in .NET </li>
-  <li> <a href="https://docs.microsoft.com/dotnet/standard/base-types/backtracking-in-regular-expressions">docs.microsoft.com</a> - Backtracking in
-  Regular Expressions </li>
-  <li> <a
-  href="https://devblogs.microsoft.com/dotnet/regular-expression-improvements-in-dotnet-7/#backtracking-and-regexoptions-nonbacktracking">devblogs.microsoft.com</a> - Regular Expression Improvements in .NET 7: Backtracking (and RegexOptions.NonBacktracking) </li>
-  <li> <a href="https://docs.microsoft.com/dotnet/api/system.text.regularexpressions.regex.matchtimeout">docs.microsoft.com</a> - Regex.MatchTimeout
-  Property </li>
-  <li> <a href="https://docs.microsoft.com/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0">docs.microsoft.com</a> - RegexOptions
-  Enum (NonBacktracking option) </li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A1_2017-Injection">Top 10 2017 Category A1 - Injection</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/400">CWE-400 - Uncontrolled Resource Consumption</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/1333">CWE-1333 - Inefficient Regular Expression Complexity</a></li>
+  <li><a href="https://www.regular-expressions.info/catastrophic.html">regular-expressions.info</a> - Runaway Regular Expressions: Catastrophic
+  Backtracking</li>
+  <li><a href="https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS">owasp.org</a> - Regular expression Denial of
+  Service - ReDoS</li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/1333">CWE-1333 - Inefficient Regular Expression Complexity</a></li>
+  <li><a href="https://docs.microsoft.com/dotnet/standard/base-types/best-practices">docs.microsoft.com</a> - Best practices for regular expressions
+  in .NET</li>
+  <li><a href="https://docs.microsoft.com/dotnet/standard/base-types/backtracking-in-regular-expressions">docs.microsoft.com</a> - Backtracking in
+  Regular Expressions</li>
+  <li><a
+  href="https://devblogs.microsoft.com/dotnet/regular-expression-improvements-in-dotnet-7/#backtracking-and-regexoptions-nonbacktracking">devblogs.microsoft.com</a> - Regular Expression Improvements in .NET 7: Backtracking (and RegexOptions.NonBacktracking)</li>
+  <li><a href="https://docs.microsoft.com/dotnet/api/system.text.regularexpressions.regex.matchtimeout">docs.microsoft.com</a> - Regex.MatchTimeout
+  Property</li>
+  <li><a href="https://docs.microsoft.com/dotnet/api/system.text.regularexpressions.regexoptions?view=net-7.0">docs.microsoft.com</a> - RegexOptions
+  Enum (NonBacktracking option)</li>
 </ul>
 

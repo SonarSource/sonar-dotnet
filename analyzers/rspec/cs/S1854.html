@@ -6,11 +6,11 @@ of computing resources.</p>
 <h3>Exceptions</h3>
 <p>No issue is reported when</p>
 <ul>
-  <li> the analyzed method body contains <code>try</code> blocks </li>
-  <li> a lambda expression captures the local variable </li>
-  <li> the variable is unused (case covered by Rule {rule:csharpsquid:S1481}) </li>
-  <li> it’s an initialization to <code>-1</code>, <code>0</code>, <code>1</code>, <code>null</code>, <code>true</code>, <code>false</code>,
-  <code>""</code> or <code>string.Empty</code> </li>
+  <li>the analyzed method body contains <code>try</code> blocks</li>
+  <li>a lambda expression captures the local variable</li>
+  <li>the variable is unused (case covered by Rule {rule:csharpsquid:S1481})</li>
+  <li>it’s an initialization to <code>-1</code>, <code>0</code>, <code>1</code>, <code>null</code>, <code>true</code>, <code>false</code>,
+  <code>""</code> or <code>string.Empty</code></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Remove the unnecessary assignment, then test the code to make sure that the right-hand side of a given assignment had no side effects (e.g. a
@@ -39,12 +39,12 @@ int Foo(int y)
 <h2>Resources</h2>
 <h3>Standards</h3>
 <ul>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/563">CWE-563 - Assignment to Variable without Use ('Unused Variable')</a> </li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/563">CWE-563 - Assignment to Variable without Use ('Unused Variable')</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:csharpsquid:S2583} - Conditionally executed code should be reachable </li>
-  <li> {rule:csharpsquid:S2589} - Boolean expressions should not be gratuitous </li>
-  <li> {rule:csharpsquid:S3626} - Jump statements should not be redundant </li>
+  <li>{rule:csharpsquid:S2583} - Conditionally executed code should be reachable</li>
+  <li>{rule:csharpsquid:S2589} - Boolean expressions should not be gratuitous</li>
+  <li>{rule:csharpsquid:S3626} - Jump statements should not be redundant</li>
 </ul>
 

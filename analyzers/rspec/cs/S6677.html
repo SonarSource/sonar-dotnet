@@ -4,16 +4,16 @@ store the value of the provided argument under that name, enabling easier log qu
 store the different values uniquely with each name hence not serving its original purpose. There can be different behaviours when using the same named
 placeholder multiple times:</p>
 <ul>
-  <li> <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> saves the different values under the
-  same name </li>
-  <li> <a href="https://www.nuget.org/packages/Serilog">Serilog</a> stores only the latest assigned value </li>
-  <li> <a href="https://www.nuget.org/packages/NLog">Nlog</a> makes the name unique by suffixing it with <code>_index</code> </li>
+  <li><a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> saves the different values under the same
+  name</li>
+  <li><a href="https://www.nuget.org/packages/Serilog">Serilog</a> stores only the latest assigned value</li>
+  <li><a href="https://www.nuget.org/packages/NLog">Nlog</a> makes the name unique by suffixing it with <code>_index</code></li>
 </ul>
 <p>The rule covers the following logging frameworks:</p>
 <ul>
-  <li> <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
-  <li> <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
-  <li> <a href="https://www.nuget.org/packages/NLog">Nlog</a> </li>
+  <li><a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a></li>
+  <li><a href="https://www.nuget.org/packages/Serilog">Serilog</a></li>
+  <li><a href="https://www.nuget.org/packages/NLog">Nlog</a></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Assign unique names to each template placeholder.</p>
@@ -35,14 +35,14 @@ public void Checkout(ILogger logger, User user, Order order)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Message Templates - <a href="https://messagetemplates.org/">Message template specification</a> </li>
-  <li> Microsoft Learn - <a
+  <li>Message Templates - <a href="https://messagetemplates.org/">Message template specification</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-message-template-formatting">Log message template
-  formatting</a> </li>
-  <li> NLog - <a href="https://github.com/NLog/NLog/wiki/How-to-use-structured-logging">How to use structured logging</a> </li>
-  <li> Serilog - <a href="https://github.com/serilog/serilog/wiki/Structured-Data">Structured Data</a> </li>
-  <li> Serilog - <a
+  formatting</a></li>
+  <li>NLog - <a href="https://github.com/NLog/NLog/wiki/How-to-use-structured-logging">How to use structured logging</a></li>
+  <li>Serilog - <a href="https://github.com/serilog/serilog/wiki/Structured-Data">Structured Data</a></li>
+  <li>Serilog - <a
   href="https://github.com/Suchiman/SerilogAnalyzer/blob/master/README.md#serilog005-unique-property-name-verifier"><code>Serilog005</code>: Unique
-  Property Name Verifier</a> </li>
+  Property Name Verifier</a></li>
 </ul>
 

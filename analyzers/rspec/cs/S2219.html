@@ -1,12 +1,12 @@
 <h2>Why is this an issue?</h2>
 <p>To check the type of an object there are several options:</p>
 <ul>
-  <li> <code>expr is SomeType</code> or <code>expr.GetType() == typeof(SomeType)</code> if the type is known at compile time, </li>
-  <li> <code>typeInstance.IsInstanceOfType(expr)</code> if the type is calculated during runtime. </li>
+  <li><code>expr is SomeType</code> or <code>expr.GetType() == typeof(SomeType)</code> if the type is known at compile time,</li>
+  <li><code>typeInstance.IsInstanceOfType(expr)</code> if the type is calculated during runtime.</li>
 </ul>
 <p>If runtime calculated <code>Type</code>s need to be compared:</p>
 <ul>
-  <li> <code>typeInstance1.IsAssignableFrom(typeInstance2)</code>. </li>
+  <li><code>typeInstance1.IsAssignableFrom(typeInstance2)</code>.</li>
 </ul>
 <p>Depending on whether the type is returned by a <code>GetType()</code> or <code>typeof()</code> call, the <code>IsAssignableFrom()</code> and
 <code>IsInstanceOfType()</code> might be simplified. Similarly, if the type is <code>sealed</code>, the type comparison with <code>==</code> can be
@@ -14,8 +14,8 @@ converted to an <code>is</code> call. Simplifying the calls also make <code>null
 <code>IsInstanceOfType</code> performs it already.</p>
 <p>Finally, utilizing the most concise language constructs for type checking makes the code more readable, so</p>
 <ul>
-  <li> <code>expr as T != null</code> checks should be simplified to <code>expr is T</code>, and </li>
-  <li> <code>expr is T</code> should be converted to <code>expr != null</code>, when <code>expr</code> is of type <code>T</code>. </li>
+  <li><code>expr as T != null</code> checks should be simplified to <code>expr is T</code>, and</li>
+  <li><code>expr is T</code> should be converted to <code>expr != null</code>, when <code>expr</code> is of type <code>T</code>.</li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>
@@ -86,7 +86,7 @@ condition = i is int?; // true
 </pre>
 <p>No issue is reported on the following expressions:</p>
 <ul>
-  <li> <code>expr is T</code>&nbsp;when either operand of the <code>is</code> operator is a value type. In that case CS0183 or CS0184 reports </li>
-  <li> <code>expr is object</code>, as this is a common and efficient pattern to do null checks </li>
+  <li><code>expr is T</code>&nbsp;when either operand of the <code>is</code> operator is a value type. In that case CS0183 or CS0184 reports</li>
+  <li><code>expr is object</code>, as this is a common and efficient pattern to do null checks</li>
 </ul>
 

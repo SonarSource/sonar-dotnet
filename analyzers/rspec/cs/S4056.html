@@ -3,19 +3,19 @@
 the overloaded member might not have the effect that you want in all locales.</p>
 <p>You should supply culture-specific information according to the following guidelines:</p>
 <ul>
-  <li> If the value will be displayed to the user, use the current culture. See <code>CultureInfo.CurrentCulture</code>. </li>
-  <li> If the value will be stored and accessed by software (persisted to a file or database), use the invariant culture. See
-  <code>CultureInfo.InvariantCulture</code>. </li>
-  <li> If you do not know the destination of the value, have the data consumer or provider specify the culture. </li>
+  <li>If the value will be displayed to the user, use the current culture. See <code>CultureInfo.CurrentCulture</code>.</li>
+  <li>If the value will be stored and accessed by software (persisted to a file or database), use the invariant culture. See
+  <code>CultureInfo.InvariantCulture</code>.</li>
+  <li>If you do not know the destination of the value, have the data consumer or provider specify the culture.</li>
 </ul>
 <p>This rule raises an issue when a method or constructor calls one or more members that have overloads that accept a
 <code>System.IFormatProvider</code> parameter, and the method or constructor does not call the overload that takes the <code>IFormatProvider</code>
 parameter. This rule ignores calls to .NET Framework methods that are documented as ignoring the <code>IFormatProvider</code> parameter as well as the
 following methods:</p>
 <ul>
-  <li> <code>Activator.CreateInstance</code> </li>
-  <li> <code>ResourceManager.GetObject</code> </li>
-  <li> <code>ResourceManager.GetString</code> </li>
+  <li><code>Activator.CreateInstance</code></li>
+  <li><code>ResourceManager.GetObject</code></li>
+  <li><code>ResourceManager.GetString</code></li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>

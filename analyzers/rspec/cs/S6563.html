@@ -17,14 +17,14 @@ some local times are ambiguous and can be matched to more than one UTC instant (
 <h2>How to fix it</h2>
 <p>Instead of <code>DateTime.Now</code> use any of the following:</p>
 <ul>
-  <li> <code>DateTime.UtcNow</code>, </li>
-  <li> <code>DateTimeOffSet.Now</code> (as it contains offset information) </li>
-  <li> <code>DateTimeOffSet.UtcNow</code> </li>
+  <li><code>DateTime.UtcNow</code>,</li>
+  <li><code>DateTimeOffSet.Now</code> (as it contains offset information)</li>
+  <li><code>DateTimeOffSet.UtcNow</code></li>
 </ul>
 <p>Instead of <code>DateTime.Today</code> use any of the following:</p>
 <ul>
-  <li> <code>DateTime.UtcNow.Date</code>, </li>
-  <li> <code>DateOnly.FromDateTime(DateTime.UtcNow)</code> (.NET 6.0+) </li>
+  <li><code>DateTime.UtcNow.Date</code>,</li>
+  <li><code>DateOnly.FromDateTime(DateTime.UtcNow)</code> (.NET 6.0+)</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -46,18 +46,18 @@ void LogDateTime()
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.now">DateTime.Now Property</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.utcnow">DateTime.UtcNow Property</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.today">DateTime.Today Property</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">DateTimeOffset Struct</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly.fromdatetime">DateOnly.FromDateTime(DateTime)
-  Method</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/resolve-ambiguous-times">How to: Resolve ambiguous
-  times</a> </li>
-  <li> Time and Date - <a href="https://www.timeanddate.com/time/zone/timezone/utc">Time Zone in UTC - What Is UTC?</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.now">DateTime.Now Property</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.utcnow">DateTime.UtcNow Property</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.today">DateTime.Today Property</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">DateTimeOffset Struct</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly.fromdatetime">DateOnly.FromDateTime(DateTime)
+  Method</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/resolve-ambiguous-times">How to: Resolve ambiguous
+  times</a></li>
+  <li>Time and Date - <a href="https://www.timeanddate.com/time/zone/timezone/utc">Time Zone in UTC - What Is UTC?</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> StackOverflow - <a href="https://stackoverflow.com/a/2580518">Ambiguous times by John Skeet</a> </li>
+  <li>StackOverflow - <a href="https://stackoverflow.com/a/2580518">Ambiguous times by John Skeet</a></li>
 </ul>
 

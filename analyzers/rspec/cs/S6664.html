@@ -2,12 +2,12 @@
 <h2>Why is this an issue?</h2>
 <p>Excessive logging within a code block can lead to several problems:</p>
 <ul>
-  <li> <strong>Log file overload</strong>: generating an overwhelming number of log entries can fill up disk space quickly (thus increasing the
-  storage space cost) and make it challenging to identify important log events promptly. </li>
-  <li> <strong>Performance degradation</strong>: writing a large number of log statements can impact the performance of an application, especially
-  when the logs are placed in frequently executed paths. </li>
-  <li> <strong>Code readability and maintainability</strong>: excessive logging can clutter the code and increase the code’s complexity, making it
-  difficult for developers to identify essential logic. </li>
+  <li><strong>Log file overload</strong>: generating an overwhelming number of log entries can fill up disk space quickly (thus increasing the storage
+  space cost) and make it challenging to identify important log events promptly.</li>
+  <li><strong>Performance degradation</strong>: writing a large number of log statements can impact the performance of an application, especially when
+  the logs are placed in frequently executed paths.</li>
+  <li><strong>Code readability and maintainability</strong>: excessive logging can clutter the code and increase the code’s complexity, making it
+  difficult for developers to identify essential logic.</li>
 </ul>
 <p>Only the logging statements that are directly within the <a
 href="https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/program-building-blocks#statements">code block</a> will be counted, and any
@@ -29,22 +29,22 @@ void MyMethod(List&lt;MyObject&gt; items)
 <code>logger.Debug("The operation ended")</code>). Any statements within nested blocks, such as the <code>foreach</code> block will be counted
 separately. The rule considers the log level of the calls, as follows:</p>
 <ul>
-  <li> <strong>Debug</strong>, <strong>Trace</strong> and <strong>Verbose</strong> logging level statements will count together and raise when the
-  <strong><em>Debug threshold</em></strong> parameter is exceeded (default value: <em>4</em>); </li>
-  <li> <strong>Information</strong> logging level statements will raise when the <strong><em>Information threshold</em></strong> parameter is exceeded
-  (default value: <em>2</em>); </li>
-  <li> <strong>Warning</strong> logging level statements will raise when the <strong><em>Warning threshold</em></strong> parameter is exceeded
-  (default value: <em>1</em>); </li>
-  <li> <strong>Error</strong> and <strong>Fatal</strong> logging level statements will count together and raise when the <strong><em>Error
-  threshold</em></strong> parameter is exceeded (default value: <em>1</em>); </li>
+  <li><strong>Debug</strong>, <strong>Trace</strong> and <strong>Verbose</strong> logging level statements will count together and raise when the
+  <strong><em>Debug threshold</em></strong> parameter is exceeded (default value: <em>4</em>);</li>
+  <li><strong>Information</strong> logging level statements will raise when the <strong><em>Information threshold</em></strong> parameter is exceeded
+  (default value: <em>2</em>);</li>
+  <li><strong>Warning</strong> logging level statements will raise when the <strong><em>Warning threshold</em></strong> parameter is exceeded (default
+  value: <em>1</em>);</li>
+  <li><strong>Error</strong> and <strong>Fatal</strong> logging level statements will count together and raise when the <strong><em>Error
+  threshold</em></strong> parameter is exceeded (default value: <em>1</em>);</li>
 </ul>
 <p>The most popular logging frameworks are supported:</p>
 <ul>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/NLog">NLog</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/log4net">log4net</a> </li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/Serilog">Serilog</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/NLog">NLog</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/log4net">log4net</a></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Reduce the number of specific logging level calls within the code block by identifying and selecting essential log statements with relevant
@@ -92,10 +92,10 @@ void MyMethod(List&lt;MyObject&gt; items)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/program-building-blocks#statements">Code blocks</a>
-  </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">Exception-handling statements</a>
-  </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/program-building-blocks#statements">Code
+  blocks</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">Exception-handling
+  statements</a></li>
 </ul>
 

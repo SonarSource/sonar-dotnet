@@ -15,18 +15,17 @@ operations, the support for Views might introduce some overhead from the MVC fra
 href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware">request processing pipeline</a>.</p>
 <p>An issue is raised when:</p>
 <ul>
-  <li> The class is marked with the <a
-  href="https://learn.microsoft.com/en-us/aspnet/core/web-api#apicontroller-attribute"><code>[ApiController]</code></a> attribute. </li>
-  <li> The class inherits <em>directly</em> from <code>Controller</code>. </li>
-  <li> No View-specific functionality is used in the class. </li>
+  <li>The class is marked with the <a
+  href="https://learn.microsoft.com/en-us/aspnet/core/web-api#apicontroller-attribute"><code>[ApiController]</code></a> attribute.</li>
+  <li>The class inherits <em>directly</em> from <code>Controller</code>.</li>
+  <li>No View-specific functionality is used in the class.</li>
 </ul>
 <h3>Exceptions</h3>
 <ul>
-  <li> If a class is marked with the <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.noncontrollerattribute"><code>[NonController]</code></a> attribute.
-  </li>
-  <li> If a class does not have <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/public">public</a> accessibility.
-  </li>
+  <li>If a class is marked with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.noncontrollerattribute"><code>[NonController]</code></a> attribute.</li>
+  <li>If a class does not have <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/public">public</a>
+  accessibility.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Change the base type of the controller from <code>Controller</code> to <code>ControllerBase</code>.</p>
@@ -51,18 +50,17 @@ public class MyController : ControllerBase
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Web_API">Web API</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core">ASP.NET Core</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller">Controller Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase">ControllerBase Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute">ApiControllerAttribute
-  Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.noncontrollerattribute">NonControllerAttribute
-  Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview">Views in ASP.NET Core MVC</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/partial">Partial Views in ASP.NET Core MVC</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-components">View Components in ASP.NET Core MVC</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware">ASP.NET Core Middleware</a> </li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Web_API">Web API</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core">ASP.NET Core</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controller">Controller Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase">ControllerBase Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute">ApiControllerAttribute
+  Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.noncontrollerattribute">NonControllerAttribute
+  Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview">Views in ASP.NET Core MVC</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/partial">Partial Views in ASP.NET Core MVC</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/views/view-components">View Components in ASP.NET Core MVC</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/middleware">ASP.NET Core Middleware</a></li>
 </ul>
 

@@ -8,27 +8,30 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1
 <p>Doing so prevents control over the <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios">asynchronous
 execution</a>, such as:</p>
 <ul>
-  <li> waiting for the execution to complete </li>
-  <li> catching any exception that might occur during execution </li>
-  <li> testing execution behavior </li>
+  <li>waiting for the execution to complete</li>
+  <li>catching any exception that might occur during execution</li>
+  <li>testing execution behavior</li>
 </ul>
 <h3>Exceptions</h3>
 <ul>
-  <li> Methods implementing an interface </li>
-  <li> Methods overriding a base class method </li>
-  <li> Virtual methods </li>
-  <li> Methods with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code></a> delegate signature  Using <code>void</code> for <code>EventHandler</code> is compliant with the TAP model.  <pre>
+  <li>Methods implementing an interface</li>
+  <li>Methods overriding a base class method</li>
+  <li>Virtual methods</li>
+  <li>Methods with the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code></a> delegate signature 
+  Using <code>void</code> for <code>EventHandler</code> is compliant with the TAP model.
+    <pre>
 public async void button1_Click(object sender, EventArgs e)
 {
   await DoSomethingAsync();
 }
-</pre> </li>
-  <li> Methods name matching <code>On[A-Z]\w*</code> pattern  Some frameworks may not use the same <code>EventHandler</code> method signature.  <pre>
+</pre></li>
+  <li>Methods name matching <code>On[A-Z]\w*</code> pattern  Some frameworks may not use the same <code>EventHandler</code> method signature.
+    <pre>
 public async void OnClick(EventContext data)
 {
   await DoSomethingAsync();
 }
-</pre> </li>
+</pre></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Update the return type of the method from <code>void</code> to <code>Task</code>.</p>
@@ -76,15 +79,15 @@ public async Task Method()
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async"><code>async</code> (C#
-  Reference)</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios">Asynchronous
-  programming</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model">Task
-  asynchronous programming model</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task"><code>Task</code> Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1"><code>Task&lt;TResult&gt;</code>
-  Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code> Delegate</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async"><code>async</code> (C#
+  Reference)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/async-scenarios">Asynchronous
+  programming</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/task-asynchronous-programming-model">Task
+  asynchronous programming model</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task"><code>Task</code> Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1"><code>Task&lt;TResult&gt;</code>
+  Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.eventhandler"><code>EventHandler</code> Delegate</a></li>
 </ul>
 

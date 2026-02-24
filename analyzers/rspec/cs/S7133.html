@@ -1,25 +1,23 @@
 <p>This rule raises if you acquire a lock with one of the following methods, and do not release it within the same method.</p>
 <ul>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirereaderlock">ReaderWriterLock.AcquireReaderLock</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirewriterlock">ReaderWriterLock.AcquireWriterLock</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterreadlock">ReaderWriterLockSlim.EnterReadLock</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterupgradeablereadlock">ReaderWriterLockSlim.EnterUpgradeableReadLock</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterreadlock">ReaderWriterLockSlim.TryEnterReadLock</a>
-  </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterupgradeablereadlock">ReaderWriterLockSlim.TryEnterUpgradeableReadLock</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterwritelock">ReaderWriterLockSlim.EnterWriteLock</a>
-  </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterwritelock">ReaderWriterLockSlim.TryEnterWriteLock</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.enter">SpinLock.Enter</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.tryenter">SpinLock.TryEnter</a> </li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirereaderlock">ReaderWriterLock.AcquireReaderLock</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirewriterlock">ReaderWriterLock.AcquireWriterLock</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterreadlock">ReaderWriterLockSlim.EnterReadLock</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterupgradeablereadlock">ReaderWriterLockSlim.EnterUpgradeableReadLock</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterreadlock">ReaderWriterLockSlim.TryEnterReadLock</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterupgradeablereadlock">ReaderWriterLockSlim.TryEnterUpgradeableReadLock</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterwritelock">ReaderWriterLockSlim.EnterWriteLock</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterwritelock">ReaderWriterLockSlim.TryEnterWriteLock</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.enter">SpinLock.Enter</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock.tryenter">SpinLock.TryEnter</a></li>
 </ul>
 <p>This rule will raise an issue when the code uses the <a
 href="https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose">disposable pattern</a>. This pattern makes locking
@@ -70,9 +68,9 @@ public class Example
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock">ReaderWriterLock Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim">ReaderWriterLockSlim Classs</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock">SpinLock Struct</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock">ReaderWriterLock Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim">ReaderWriterLockSlim
+  Classs</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.spinlock">SpinLock Struct</a></li>
 </ul>
 

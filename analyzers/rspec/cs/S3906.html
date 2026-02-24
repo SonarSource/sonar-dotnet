@@ -1,9 +1,9 @@
 <h2>Why is this an issue?</h2>
 <p>Delegate event handlers (i.e. delegates used as type of an event) should have a very specific signature:</p>
 <ul>
-  <li> Return type <code>void</code>. </li>
-  <li> First argument of type <code>System.Object</code> and named 'sender'. </li>
-  <li> Second argument of type <code>System.EventArgs</code> (or any derived type) and is named 'e'. </li>
+  <li>Return type <code>void</code>.</li>
+  <li>First argument of type <code>System.Object</code> and named 'sender'.</li>
+  <li>Second argument of type <code>System.EventArgs</code> (or any derived type) and is named 'e'.</li>
 </ul>
 <p>This rule raises an issue whenever a <code>delegate</code> declaration doesn’t match that signature.</p>
 <h3>Noncompliant code example</h3>

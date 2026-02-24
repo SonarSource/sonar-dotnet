@@ -12,13 +12,13 @@ instance (or <code>object</code> instance, for frameworks before .Net 9) should 
 therefore prevents accidential lock sharing.</p>
 <p>The following objects are considered potentially prone to accidental lock sharing:</p>
 <ul>
-  <li> a reference to <a
+  <li>a reference to <a
   href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/me-my-mybase-and-myclass#me">Me</a>: if the instance
-  is publicly accessible, the lock might be shared </li>
-  <li> a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">Type</a> object: if the type class is publicly accessible, the lock might
-  be shared </li>
-  <li> a <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/string-data-type">String</a> literal or
-  instance: if any other part of the program uses the same string, the lock is shared because of interning </li>
+  is publicly accessible, the lock might be shared</li>
+  <li>a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.type">Type</a> object: if the type class is publicly accessible, the lock might
+  be shared</li>
+  <li>a <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/data-types/string-data-type">String</a> literal or instance:
+  if any other part of the program uses the same string, the lock is shared because of interning</li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -42,14 +42,14 @@ End Sub
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Thread_(computing)">Thread</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Locking</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Deadlock">Deadlock</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">Interning</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern#remarks">String interning by the runtime</a> </li>
-  <li> Microsoft Learn - <a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Managed Threading Best
-  Practices</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/synclock-statement">SyncLock
-  Statement</a> </li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Thread_(computing)">Thread</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Lock_(computer_science)">Locking</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Deadlock">Deadlock</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Interning_(computer_science)">Interning</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern#remarks">String interning by the runtime</a></li>
+  <li>Microsoft Learn - <a href="https://docs.microsoft.com/en-us/dotnet/standard/threading/managed-threading-best-practices">Managed Threading Best
+  Practices</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/statements/synclock-statement">SyncLock
+  Statement</a></li>
 </ul>
 

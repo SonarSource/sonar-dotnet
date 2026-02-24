@@ -1,25 +1,26 @@
 <p>Local variables should be named consistently to communicate intent and improve maintainability. Rename your local variable to follow your project’s
 naming convention to address this issue.</p>
 <h2>Why is this an issue?</h2>
-<p>A naming convention in software development is a set of guidelines for naming code elements like variables, functions, and classes.<br> Local
-variables hold the meaning of the written code. Their names should be meaningful and follow a consistent and easily recognizable pattern.<br> Adhering
-to a consistent naming convention helps to make the code more readable and understandable, which makes it easier to maintain and debug. It also
-ensures consistency in the code, especially when multiple developers are working on the same project.</p>
+<p>A naming convention in software development is a set of guidelines for naming code elements like variables, functions, and classes.
+  <br>
+  Local variables hold the meaning of the written code. Their names should be meaningful and follow a consistent and easily recognizable pattern.
+  <br>
+  Adhering to a consistent naming convention helps to make the code more readable and understandable, which makes it easier to maintain and debug. It
+  also ensures consistency in the code, especially when multiple developers are working on the same project.</p>
 <p>This rule checks that local variable names match a provided regular expression.</p>
 <h3>What is the potential impact?</h3>
 <p>Inconsistent naming of local variables can lead to several issues in your code:</p>
 <ul>
-  <li> <strong>Reduced Readability</strong>: Inconsistent local variable names make the code harder to read and understand; consequently, it is more
-  difficult to identify the purpose of each variable, spot errors, or comprehend the logic. </li>
-  <li> <strong>Difficulty in Identifying Variables</strong>: The local variables that don’t adhere to a standard naming convention are challenging to
-  identify; thus, the coding process slows down, especially when dealing with a large codebase. </li>
-  <li> <strong>Increased Risk of Errors</strong>: Inconsistent or unclear local variable names lead to misunderstandings about what the variable
-  represents. This ambiguity leads to incorrect assumptions and, consequently, bugs in the code. </li>
-  <li> <strong>Collaboration Difficulties</strong>: In a team setting, inconsistent naming conventions lead to confusion and miscommunication among
-  team members. </li>
-  <li> <strong>Difficulty in Code Maintenance</strong>: Inconsistent naming leads to an inconsistent codebase. The code is difficult to understand,
-  and making changes feels like refactoring constantly, as you face different naming methods. Ultimately, it makes the codebase harder to maintain.
-  </li>
+  <li><strong>Reduced Readability</strong>: Inconsistent local variable names make the code harder to read and understand; consequently, it is more
+  difficult to identify the purpose of each variable, spot errors, or comprehend the logic.</li>
+  <li><strong>Difficulty in Identifying Variables</strong>: The local variables that don’t adhere to a standard naming convention are challenging to
+  identify; thus, the coding process slows down, especially when dealing with a large codebase.</li>
+  <li><strong>Increased Risk of Errors</strong>: Inconsistent or unclear local variable names lead to misunderstandings about what the variable
+  represents. This ambiguity leads to incorrect assumptions and, consequently, bugs in the code.</li>
+  <li><strong>Collaboration Difficulties</strong>: In a team setting, inconsistent naming conventions lead to confusion and miscommunication among
+  team members.</li>
+  <li><strong>Difficulty in Code Maintenance</strong>: Inconsistent naming leads to an inconsistent codebase. The code is difficult to understand, and
+  making changes feels like refactoring constantly, as you face different naming methods. Ultimately, it makes the codebase harder to maintain.</li>
 </ul>
 <p>In summary, not adhering to a naming convention for local variables can lead to confusion, errors, and inefficiencies, making the code harder to
 read, understand, and maintain.</p>
@@ -30,9 +31,9 @@ well as all usages of the name. For many IDEs, you can use built-in renaming and
 <h4>Noncompliant code example</h4>
 <p>With the default regular expression <code>^[a-z][a-z0-9]*([A-Z]{1,3}[a-z0-9]+)*([A-Z]{2})?$</code>, bringing the following constraints:</p>
 <ul>
-  <li> Camel casing, starting with a lowercase character, for example backColor </li>
-  <li> Short abbreviations of 2 letters can be capitalized only when not at the beginning, for example id, productID </li>
-  <li> Longer abbreviations need to be lowercased, for example html </li>
+  <li>Camel casing, starting with a lowercase character, for example backColor</li>
+  <li>Short abbreviations of 2 letters can be capitalized only when not at the beginning, for example id, productID</li>
+  <li>Longer abbreviations need to be lowercased, for example html</li>
 </ul>
 <pre data-diff-id="1" data-diff-type="noncompliant">
 Module Module1
@@ -52,28 +53,28 @@ End Module
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/naming-conventions">Visual
-  Basic Naming Conventions</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Naming_convention_(programming)">Naming Convention (programming)</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/program-structure/naming-conventions">Visual
+  Basic Naming Conventions</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Naming_convention_(programming)">Naming Convention (programming)</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:vbnet:S101} - Class names should comply with a naming convention </li>
-  <li> {rule:vbnet:S114} - Interface names should comply with a naming convention </li>
-  <li> {rule:vbnet:S119} - Generic type parameter names should comply with a naming convention </li>
-  <li> {rule:vbnet:S1542} - Functions and procedures should comply with a naming convention </li>
-  <li> {rule:vbnet:S1654} - Method parameters should follow a naming convention </li>
-  <li> {rule:vbnet:S2304} - Namespace names should comply with a naming convention </li>
-  <li> {rule:vbnet:S2342} - Enumeration types should comply with a naming convention </li>
-  <li> {rule:vbnet:S2343} - Enumeration values should comply with a naming convention </li>
-  <li> {rule:vbnet:S2347} - Event handlers should comply with a naming convention </li>
-  <li> {rule:vbnet:S2348} - Events should comply with a naming convention </li>
-  <li> {rule:vbnet:S2362} - Private constants should comply with a naming convention </li>
-  <li> {rule:vbnet:S2363} - "Private Shared ReadOnly" fields should comply with a naming convention </li>
-  <li> {rule:vbnet:S2364} - "Private" fields should comply with a naming convention </li>
-  <li> {rule:vbnet:S2366} - Properties should comply with a naming convention </li>
-  <li> {rule:vbnet:S2367} - Non-private constants should comply with a naming convention </li>
-  <li> {rule:vbnet:S2369} - Non-private fields should comply with a naming convention </li>
-  <li> {rule:vbnet:S2370} - Non-private "Shared ReadOnly" fields should comply with a naming convention </li>
+  <li>{rule:vbnet:S101} - Class names should comply with a naming convention</li>
+  <li>{rule:vbnet:S114} - Interface names should comply with a naming convention</li>
+  <li>{rule:vbnet:S119} - Generic type parameter names should comply with a naming convention</li>
+  <li>{rule:vbnet:S1542} - Functions and procedures should comply with a naming convention</li>
+  <li>{rule:vbnet:S1654} - Method parameters should follow a naming convention</li>
+  <li>{rule:vbnet:S2304} - Namespace names should comply with a naming convention</li>
+  <li>{rule:vbnet:S2342} - Enumeration types should comply with a naming convention</li>
+  <li>{rule:vbnet:S2343} - Enumeration values should comply with a naming convention</li>
+  <li>{rule:vbnet:S2347} - Event handlers should comply with a naming convention</li>
+  <li>{rule:vbnet:S2348} - Events should comply with a naming convention</li>
+  <li>{rule:vbnet:S2362} - Private constants should comply with a naming convention</li>
+  <li>{rule:vbnet:S2363} - "Private Shared ReadOnly" fields should comply with a naming convention</li>
+  <li>{rule:vbnet:S2364} - "Private" fields should comply with a naming convention</li>
+  <li>{rule:vbnet:S2366} - Properties should comply with a naming convention</li>
+  <li>{rule:vbnet:S2367} - Non-private constants should comply with a naming convention</li>
+  <li>{rule:vbnet:S2369} - Non-private fields should comply with a naming convention</li>
+  <li>{rule:vbnet:S2370} - Non-private "Shared ReadOnly" fields should comply with a naming convention</li>
 </ul>
 

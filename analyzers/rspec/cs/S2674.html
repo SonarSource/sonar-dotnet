@@ -6,10 +6,10 @@ to ensure the number of bytes read.</p>
 <p>Neglecting the returned length read can result in a bug that is difficult to reproduce.</p>
 <p>This rule raises an issue when the returned value is ignored for the following methods:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read">Stream.Read</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readasync">Stream.ReadAsync</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleast">Stream.ReadAtLeast</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleastasync">Stream.ReadAtLeastAsync</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read">Stream.Read</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readasync">Stream.ReadAsync</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleast">Stream.ReadAtLeast</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleastasync">Stream.ReadAtLeastAsync</a></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Check the return value of stream reading methods to verify the actual number of bytes read, and use this value when processing the data to avoid
@@ -47,10 +47,10 @@ public byte[] ReadFile(string fileName)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read">Stream.Read Method</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readasync">Stream.ReadAsync Method</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleast">Stream.ReadAtLeast Method</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleastasync">Stream.ReadAtLeastAsync Method</a>
-  </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read">Stream.Read Method</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readasync">Stream.ReadAsync Method</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleast">Stream.ReadAtLeast Method</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.readatleastasync">Stream.ReadAtLeastAsync
+  Method</a></li>
 </ul>
 

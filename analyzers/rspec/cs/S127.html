@@ -1,16 +1,17 @@
 <h2>Why is this an issue?</h2>
-<p>A <code>for</code> loop stop condition should test the loop counter against an invariant value (i.e. one that is true at both the beginning and
-ending of every loop iteration). Ideally, this means that the stop condition is set to a local variable just before the loop begins.</p>
-<p>Stop conditions that are not invariant are slightly less efficient, as well as being difficult to understand and maintain, and likely lead to the
-introduction of errors in the future.</p>
-<p>This rule tracks three types of non-invariant stop conditions:</p>
+<p>A <code>for</code> loop stop condition should test the loop counter against an invariant value, one that is true at both the beginning and ending
+of every loop iteration. Ideally, this means that the stop condition is set to a local variable just before the loop begins.</p>
+<p>This rule tracks when incremented counters used in the stop condition are updated in the body of the <code>for</code> loop.</p>
+<h3>What is the potential impact?</h3>
+<p>Non-invariant stop conditions can lead to unexpected loop behavior, making the code harder to debug and maintain. If the stop condition changes
+unexpectedly during iteration, it may cause:</p>
 <ul>
-  <li> When the loop counters are updated in the body of the <code>for</code> loop </li>
-  <li> When the stop condition depend upon a method call </li>
-  <li> When the stop condition depends on an object property, since such properties could change during the execution of the loop. </li>
+  <li>infinite loops or premature loop termination</li>
+  <li>off-by-one errors that are difficult to trace</li>
+  <li>subtle bugs that only manifest under specific conditions</li>
 </ul>
 <h2>How to fix it</h2>
-<p>It’s generally recommended to only update the loop counter in the loop declaration. If skipping elements or iterating at a different pace based on
+<p>It is generally recommended to only update the loop counter in the loop declaration. If skipping elements or iterating at a different pace based on
 a condition is needed, consider using a while loop or a different structure that better fits the needs.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -40,4 +41,7 @@ while (i &lt;= 5)
     }
 }
 </pre>
+<h3>How does this work?</h3>
+<p>A <code>while</code> loop signals that the iteration logic may be more complex, so readers will naturally look for control flow changes within the
+loop body. This makes the code’s intent clearer and easier to reason about.</p>
 

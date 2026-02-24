@@ -2,19 +2,19 @@
 <p>In software development, logs serve as a record of events within an application, providing crucial insights for debugging. When logging, it is
 essential to ensure that the logs are:</p>
 <ul>
-  <li> easily accessible </li>
-  <li> uniformly formatted for readability </li>
-  <li> properly recorded </li>
-  <li> securely logged when dealing with sensitive data </li>
+  <li>easily accessible</li>
+  <li>uniformly formatted for readability</li>
+  <li>properly recorded</li>
+  <li>securely logged when dealing with sensitive data</li>
 </ul>
 <p>Those requirements are not met if a program directly writes to the standard outputs (e.g., Console). That is why defining and using a dedicated
 logger is highly recommended.</p>
 <h3>Exceptions</h3>
 <p>The rule doesn’t raise an issue for:</p>
 <ul>
-  <li> Console Applications </li>
-  <li> Calls in methods decorated with <code>[Conditional ("DEBUG")]</code> </li>
-  <li> Calls included in DEBUG preprocessor branches (<code>#if DEBUG</code>) </li>
+  <li>Console Applications</li>
+  <li>Calls in methods decorated with <code>[Conditional ("DEBUG")]</code></li>
+  <li>Calls included in DEBUG preprocessor branches (<code>#if DEBUG</code>)</li>
 </ul>
 <h3>Code examples</h3>
 <p>The following noncompliant code:</p>
@@ -47,9 +47,9 @@ public class MyClass
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/">Top 10 2021 Category A9 - Security Logging and
-  Monitoring Failures</a> </li>
-  <li> OWASP - <a href="https://www.owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
-  Exposure</a> </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A09_2021-Security_Logging_and_Monitoring_Failures/">Top 10 2021 Category A9 - Security Logging and
+  Monitoring Failures</a></li>
+  <li>OWASP - <a href="https://www.owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a></li>
 </ul>
 

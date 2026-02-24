@@ -3,9 +3,9 @@
 <code>HttpClient</code>, <code>DocumentClient</code>, <code>QueueClient</code>, <code>ConnectionMultiplexer</code> or Azure Storage clients,
 consider:</p>
 <ul>
-  <li> Creating a single, thread-safe static client that every Azure Function invocation can use. Provide it in a shared class when different Azure
-  Functions need it. </li>
-  <li> Instantiate the client as a thread-safe Singleton or a pool of reusable instances and use it with dependency injection. </li>
+  <li>Creating a single, thread-safe static client that every Azure Function invocation can use. Provide it in a shared class when different Azure
+  Functions need it.</li>
+  <li>Instantiate the client as a thread-safe Singleton or a pool of reusable instances and use it with dependency injection.</li>
 </ul>
 <p>These classes typically manage their own connections to the resource, and thus are intended to be instantiated once and reused throughout the
 lifetime of an application.</p>
@@ -38,10 +38,10 @@ lifetime of an application.</p>
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections?tabs=csharp#static-clients">Manage connections in Azure
-  Functions: Static Clients</a> </li>
-  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection#service-lifetimes">Azure Functions -
-  Dependency Injection: Service Lifetimes</a> </li>
-  <li> <a href="https://docs.microsoft.com/en-us/azure/architecture/antipatterns/improper-instantiation/">Improper Instantiation antipattern</a> </li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/azure-functions/manage-connections?tabs=csharp#static-clients">Manage connections in Azure
+  Functions: Static Clients</a></li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/azure-functions/functions-dotnet-dependency-injection#service-lifetimes">Azure Functions -
+  Dependency Injection: Service Lifetimes</a></li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/architecture/antipatterns/improper-instantiation/">Improper Instantiation antipattern</a></li>
 </ul>
 

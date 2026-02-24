@@ -4,8 +4,8 @@ interface will result in the compiler error <code>CS0229 Ambiguity between 'IBas
 <p>So instead, every caller will be forced to cast instances of the derived interface to one or the other of its base interfaces to resolve the
 ambiguity and be able to access the member. Instead, it is better to resolve the ambiguity in the definition of the derived interface either by:</p>
 <ul>
-  <li> renaming the member in one of the base interfaces to remove the collision </li>
-  <li> also defining that member in the derived interface. Use this only if all copies of the member are meant to hold the same value. </li>
+  <li>renaming the member in one of the base interfaces to remove the collision</li>
+  <li>also defining that member in the derived interface. Use this only if all copies of the member are meant to hold the same value.</li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>

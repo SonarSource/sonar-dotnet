@@ -33,31 +33,31 @@ int Pow(int num, int exponent)
 StackOverflowException.</p>
 <p>Recursion provides some benefits.</p>
 <ul>
-  <li> <strong>Simplified code</strong>: recursion can often lead to more concise and elegant code by breaking down complex problems into smaller,
-  more manageable parts. </li>
-  <li> <strong>Improved code readability</strong>: compared to iterative solutions, recursive solutions can be easier to understand and reason about.
-  </li>
+  <li><strong>Simplified code</strong>: recursion can often lead to more concise and elegant code by breaking down complex problems into smaller, more
+  manageable parts.</li>
+  <li><strong>Improved code readability</strong>: compared to iterative solutions, recursive solutions can be easier to understand and reason
+  about.</li>
 </ul>
 <p>However, it has disadvantages as well.</p>
 <ul>
-  <li> <strong>Stack overflow</strong>: Recursive functions can lead to <a
+  <li><strong>Stack overflow</strong>: Recursive functions can lead to <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.stackoverflowexception">stack overflow</a> if the recursion is too deep, potentially
-  causing the program to crash. </li>
-  <li> <strong>Performance overhead</strong>: Recursive function calls can lead to poor performance due to the need to push and pop <a
+  causing the program to crash.</li>
+  <li><strong>Performance overhead</strong>: Recursive function calls can lead to poor performance due to the need to push and pop <a
   href="https://en.citizendium.org/wiki/Stack_frame#:~:text=In%20computer%20science%2C%20a%20stack,only%20exist%20at%20run%2Dtime">stack frames</a>,
-  making them potentially slower than iterative solutions. </li>
-  <li> <strong>Difficulty in debugging</strong>: Debugging recursive code can be challenging, as multiple recursive calls can make it harder to track
-  the flow of execution and identify logical errors. </li>
-  <li> <strong>Space complexity</strong>: Recursive algorithms may require more memory compared to iterative approaches, as each recursive call adds a
-  new frame to the call stack. </li>
-  <li> <strong>Lack of control</strong>: Recursion can sometimes lead to infinite loops or unexpected behavior if not properly implemented or
-  terminated, making it crucial to have proper base cases and exit conditions. </li>
+  making them potentially slower than iterative solutions.</li>
+  <li><strong>Difficulty in debugging</strong>: Debugging recursive code can be challenging, as multiple recursive calls can make it harder to track
+  the flow of execution and identify logical errors.</li>
+  <li><strong>Space complexity</strong>: Recursive algorithms may require more memory compared to iterative approaches, as each recursive call adds a
+  new frame to the call stack.</li>
+  <li><strong>Lack of control</strong>: Recursion can sometimes lead to infinite loops or unexpected behavior if not properly implemented or
+  terminated, making it crucial to have proper base cases and exit conditions.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>The program’s logic should incorporate a mechanism to break out of the control flow loop. Here are some examples.</p>
 <h3>Code examples</h3>
 <ul>
-  <li> Use a loop condition which eventually evaluates to <code>false</code> </li>
+  <li>Use a loop condition which eventually evaluates to <code>false</code></li>
 </ul>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -88,8 +88,8 @@ public int Sum()
 }
 </pre>
 <ul>
-  <li> As {rule:csharpsquid:S907} generally suggests, avoid using <code>goto</code> statements. Instead, you can use a loop statement or explicit
-  recursion. </li>
+  <li>As {rule:csharpsquid:S907} generally suggests, avoid using <code>goto</code> statements. Instead, you can use a loop statement or explicit
+  recursion.</li>
 </ul>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
@@ -120,7 +120,7 @@ public int Sum()
 }
 </pre>
 <ul>
-  <li> For a recursion make sure there is a base case when the recursive method is not re-called. </li>
+  <li>For a recursion make sure there is a base case when the recursive method is not re-called.</li>
 </ul>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="3" data-diff-type="noncompliant">
@@ -143,22 +143,21 @@ int Pow(int num, int exponent)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">The "for" statement</a>
-  </li>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-for-statement">The "for"
+  statement</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/iteration-statements#the-while-statement">The "while"
-  statement</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement">The "goto" statement</a>
-  </li>
-  <li> Wikipedia <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion - wiki</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.stackoverflowexception?view=net-7.0">StackOverflowException
-  class</a> </li>
-  <li> {rule:csharpsquid:S907} - "goto" statement should not be used </li>
+  statement</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/jump-statements#the-goto-statement">The
+  "goto" statement</a></li>
+  <li>Wikipedia <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">Recursion - wiki</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.stackoverflowexception?view=net-7.0">StackOverflowException
+  class</a></li>
+  <li>{rule:csharpsquid:S907} - "goto" statement should not be used</li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Edsger Dijkstra - <a href="https://www.cs.utexas.edu/users/EWD/transcriptions/EWD02xx/EWD215.html">A Case against the GO TO Statement</a> </li>
+  <li>Edsger Dijkstra - <a href="https://www.cs.utexas.edu/users/EWD/transcriptions/EWD02xx/EWD215.html">A Case against the GO TO Statement</a></li>
 </ul>
 

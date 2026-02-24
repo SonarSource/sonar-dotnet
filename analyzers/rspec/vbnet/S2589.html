@@ -20,7 +20,7 @@ Dim v1 = If(d, "value")
 <h3>Exceptions</h3>
 <p>This rule will not raise an issue in either of these cases:</p>
 <ul>
-  <li> When the condition is a single <code>Const bool</code> </li>
+  <li>When the condition is a single <code>Const bool</code></li>
 </ul>
 <pre>
 Const debug = False
@@ -30,7 +30,7 @@ If debug Then
 End If
 </pre>
 <ul>
-  <li> When the condition is the literal <code>True</code> or <code>False</code>. </li>
+  <li>When the condition is the literal <code>True</code> or <code>False</code>.</li>
 </ul>
 <p>In these cases, it is obvious the code is as intended.</p>
 <h2>How to fix it</h2>
@@ -85,13 +85,13 @@ End Sub
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/571">CWE-571 - Expression is Always True</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/570">CWE-570 - Expression is Always False</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators">Logical and Bitwise Operators in Visual Basic</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">?.
-  and ?() null-conditional operators (Visual Basic)</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">If
-  operator called with two arguments</a> </li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/571">CWE-571 - Expression is Always True</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/570">CWE-570 - Expression is Always False</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/logical-and-bitwise-operators">Logical and Bitwise Operators in Visual Basic</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">?. and
+  ?() null-conditional operators (Visual Basic)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/operators/null-conditional-operators">If
+  operator called with two arguments</a></li>
 </ul>
 

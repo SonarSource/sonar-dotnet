@@ -1,22 +1,22 @@
 <h2>Why is this an issue?</h2>
 <p>Regardless of the logging framework in use (Microsoft.Extension.Logging, Serilog, Log4net, NLog, …​​), logger fields should be:</p>
 <ul>
-  <li> <strong>private</strong>: this restricts access to the logger from outside the enclosing type (class, struct, record…​). Using any other access
-  modifier would allow other types to use the logger to log messages in the type where it’s defined. </li>
-  <li> <strong>static</strong>: making the logger field <code>static</code> will ensure that the lifetime of the object doesn’t depend on the lifetime
-  of the instance of the enclosing type. </li>
-  <li> <strong>readonly</strong>: marking the field as <code>readonly</code> will prevent modifications to the reference of the logger. This ensures
-  that the reference to the logger remains consistent and doesn’t get accidentally reassigned during the lifetime of the enclosing type. </li>
+  <li><strong>private</strong>: this restricts access to the logger from outside the enclosing type (class, struct, record…​). Using any other access
+  modifier would allow other types to use the logger to log messages in the type where it’s defined.</li>
+  <li><strong>static</strong>: making the logger field <code>static</code> will ensure that the lifetime of the object doesn’t depend on the lifetime
+  of the instance of the enclosing type.</li>
+  <li><strong>readonly</strong>: marking the field as <code>readonly</code> will prevent modifications to the reference of the logger. This ensures
+  that the reference to the logger remains consistent and doesn’t get accidentally reassigned during the lifetime of the enclosing type.</li>
 </ul>
 <p>This rule should be activated when <a href="https://en.wikipedia.org/wiki/Service_locator_pattern">Service Locator Design pattern</a> is followed
 in place of <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a> for logging.</p>
 <p>The rule supports the most popular logging frameworks:</p>
 <ul>
-  <li> <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
-  <li> <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
-  <li> <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a> </li>
-  <li> <a href="https://www.nuget.org/packages/NLog">NLog</a> </li>
-  <li> <a href="https://www.nuget.org/packages/log4net">log4net</a> </li>
+  <li><a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a></li>
+  <li><a href="https://www.nuget.org/packages/Serilog">Serilog</a></li>
+  <li><a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a></li>
+  <li><a href="https://www.nuget.org/packages/NLog">NLog</a></li>
+  <li><a href="https://www.nuget.org/packages/log4net">log4net</a></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Make the logging field <code>{private static readonly}</code>.</p>
@@ -31,18 +31,18 @@ private static readonly Logger logger;
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Access
-  modifiers</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members"><code>static</code> class members</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly"><code>readonly</code>
-  keyword</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Service_locator_pattern">Service locator pattern</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency injection</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/access-modifiers">Access
+  modifiers</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members"><code>static</code> class members</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly"><code>readonly</code>
+  keyword</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Service_locator_pattern">Service locator pattern</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency injection</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://stackoverflow.com/questions/968132/c-sharp-private-static-and-readonly">C# <code>private</code>, <code>static</code>, and
-  <code>readonly</code></a> </li>
+  <li><a href="https://stackoverflow.com/questions/968132/c-sharp-private-static-and-readonly">C# <code>private</code>, <code>static</code>, and
+  <code>readonly</code></a></li>
 </ul>
 

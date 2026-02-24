@@ -10,10 +10,10 @@ if (str.SubString(startIndex).IndexOf(char1) == -1) // Noncompliant: a new strin
 href="https://learn.microsoft.com/en-us/dotnet/api/system.string.substring"><code>Substring</code></a> method. When chaining it with any of the
 following methods, it creates a new object for one-time use only:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof"><code>IndexOf</code></a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany"><code>IndexOfAny</code></a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof"><code>LastIndexOf</code></a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany"><code>LastIndexOfAny</code></a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof"><code>IndexOf</code></a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany"><code>IndexOfAny</code></a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof"><code>LastIndexOf</code></a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany"><code>LastIndexOfAny</code></a></li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>Creating a new object consumes significant <a href="https://en.wikipedia.org/wiki/System_resource">system resources</a>, especially CPU and memory.
@@ -30,11 +30,11 @@ if (str.IndexOf(char1, startIndex) == -1)           // Compliant: no new instanc
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.substring"><code>String.Substring</code> Method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof"><code>String.IndexOf</code> Method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany"><code>String.IndexOfAny</code> Method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof"><code>String.LastIndexOf</code> Method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany"><code>String.LastIndexOfAny</code> Method</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.substring"><code>String.Substring</code> Method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof"><code>String.IndexOf</code> Method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexofany"><code>String.IndexOfAny</code> Method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexof"><code>String.LastIndexOf</code> Method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.lastindexofany"><code>String.LastIndexOfAny</code> Method</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -60,112 +60,280 @@ if (str.IndexOf(char1, startIndex) == -1)           // Compliant: no new instanc
   </thead>
   <tbody>
     <tr>
-      <td><p>SubstringThenIndexOf</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>10</p></td>
-      <td><p>11.234 ms</p></td>
-      <td><p>0.1319 ms</p></td>
-      <td><p>1.00</p></td>
-      <td><p>40000008 B</p></td>
+      <td>
+        <p>SubstringThenIndexOf</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>10</p>
+      </td>
+      <td>
+        <p>11.234 ms</p>
+      </td>
+      <td>
+        <p>0.1319 ms</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
+      <td>
+        <p>40000008 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IndexOfOnly</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>10</p></td>
-      <td><p>2.477 ms</p></td>
-      <td><p>0.0473 ms</p></td>
-      <td><p>0.22</p></td>
-      <td><p>2 B</p></td>
+      <td>
+        <p>IndexOfOnly</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>10</p>
+      </td>
+      <td>
+        <p>2.477 ms</p>
+      </td>
+      <td>
+        <p>0.0473 ms</p>
+      </td>
+      <td>
+        <p>0.22</p>
+      </td>
+      <td>
+        <p>2 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SubstringThenIndexOf</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>10</p></td>
-      <td><p>8.634 ms</p></td>
-      <td><p>0.4195 ms</p></td>
-      <td><p>1.00</p></td>
-      <td><p>48141349 B</p></td>
+      <td>
+        <p>SubstringThenIndexOf</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>10</p>
+      </td>
+      <td>
+        <p>8.634 ms</p>
+      </td>
+      <td>
+        <p>0.4195 ms</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
+      <td>
+        <p>48141349 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IndexOfOnly</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>10</p></td>
-      <td><p>1.724 ms</p></td>
-      <td><p>0.0346 ms</p></td>
-      <td><p>0.19</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>IndexOfOnly</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>10</p>
+      </td>
+      <td>
+        <p>1.724 ms</p>
+      </td>
+      <td>
+        <p>0.0346 ms</p>
+      </td>
+      <td>
+        <p>0.19</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SubstringThenIndexOf</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>100</p></td>
-      <td><p>14.651 ms</p></td>
-      <td><p>0.2977 ms</p></td>
-      <td><p>1.00</p></td>
-      <td><p>176000008 B</p></td>
+      <td>
+        <p>SubstringThenIndexOf</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>100</p>
+      </td>
+      <td>
+        <p>14.651 ms</p>
+      </td>
+      <td>
+        <p>0.2977 ms</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
+      <td>
+        <p>176000008 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IndexOfOnly</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>100</p></td>
-      <td><p>2.464 ms</p></td>
-      <td><p>0.0501 ms</p></td>
-      <td><p>0.17</p></td>
-      <td><p>2 B</p></td>
+      <td>
+        <p>IndexOfOnly</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>100</p>
+      </td>
+      <td>
+        <p>2.464 ms</p>
+      </td>
+      <td>
+        <p>0.0501 ms</p>
+      </td>
+      <td>
+        <p>0.17</p>
+      </td>
+      <td>
+        <p>2 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SubstringThenIndexOf</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>100</p></td>
-      <td><p>13.363 ms</p></td>
-      <td><p>0.2044 ms</p></td>
-      <td><p>1.00</p></td>
-      <td><p>176518761 B</p></td>
+      <td>
+        <p>SubstringThenIndexOf</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>100</p>
+      </td>
+      <td>
+        <p>13.363 ms</p>
+      </td>
+      <td>
+        <p>0.2044 ms</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
+      <td>
+        <p>176518761 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IndexOfOnly</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>100</p></td>
-      <td><p>1.689 ms</p></td>
-      <td><p>0.0290 ms</p></td>
-      <td><p>0.13</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>IndexOfOnly</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>100</p>
+      </td>
+      <td>
+        <p>1.689 ms</p>
+      </td>
+      <td>
+        <p>0.0290 ms</p>
+      </td>
+      <td>
+        <p>0.13</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SubstringThenIndexOf</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>1000</p></td>
-      <td><p>78.688 ms</p></td>
-      <td><p>2.4727 ms</p></td>
-      <td><p>1.00</p></td>
-      <td><p>1528000072 B</p></td>
+      <td>
+        <p>SubstringThenIndexOf</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>1000</p>
+      </td>
+      <td>
+        <p>78.688 ms</p>
+      </td>
+      <td>
+        <p>2.4727 ms</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
+      <td>
+        <p>1528000072 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IndexOfOnly</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>1000</p></td>
-      <td><p>2.456 ms</p></td>
-      <td><p>0.0397 ms</p></td>
-      <td><p>0.03</p></td>
-      <td><p>2 B</p></td>
+      <td>
+        <p>IndexOfOnly</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>1000</p>
+      </td>
+      <td>
+        <p>2.456 ms</p>
+      </td>
+      <td>
+        <p>0.0397 ms</p>
+      </td>
+      <td>
+        <p>0.03</p>
+      </td>
+      <td>
+        <p>2 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SubstringThenIndexOf</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>1000</p></td>
-      <td><p>75.994 ms</p></td>
-      <td><p>1.2650 ms</p></td>
-      <td><p>1.00</p></td>
-      <td><p>1532637240 B</p></td>
+      <td>
+        <p>SubstringThenIndexOf</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>1000</p>
+      </td>
+      <td>
+        <p>75.994 ms</p>
+      </td>
+      <td>
+        <p>1.2650 ms</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
+      <td>
+        <p>1532637240 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IndexOfOnly</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>1000</p></td>
-      <td><p>1.699 ms</p></td>
-      <td><p>0.0216 ms</p></td>
-      <td><p>0.02</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>IndexOfOnly</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>1000</p>
+      </td>
+      <td>
+        <p>1.699 ms</p>
+      </td>
+      <td>
+        <p>0.0216 ms</p>
+      </td>
+      <td>
+        <p>0.02</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -3,23 +3,17 @@
 <p>Using a synchronous method instead of its <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/">asynchronous</a>
 counterpart in an <code>async</code> method blocks the execution and is considered bad practice for several reasons:</p>
 <dl>
-  <dt>
-    Resource Utilization
-  </dt>
+  <dt>Resource Utilization</dt>
   <dd>
     <p>Each thread consumes system resources, such as memory. When a thread is blocked, it’s not doing any useful work, but it’s still consuming these
     resources. This can lead to inefficient use of system resources.</p>
   </dd>
-  <dt>
-    Scalability
-  </dt>
+  <dt>Scalability</dt>
   <dd>
     <p>Blocking threads can limit the scalability of your application. In a high-load scenario where many operations are happening concurrently, each
     blocked thread represents a missed opportunity to do useful work. This can prevent your application from effectively handling increased load.</p>
   </dd>
-  <dt>
-    Performance
-  </dt>
+  <dt>Performance</dt>
   <dd>
     <p>Blocking threads can degrade the performance of your application. If all threads in the thread pool become blocked, new tasks can’t start
     executing until an existing task completes and frees up a thread. This can lead to delays and poor responsiveness.</p>
@@ -54,17 +48,17 @@ public async Task Examples(Stream stream, DbSet&lt;Person&gt; dbSet)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async">async (C# Reference)</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/await">await operator - asynchronously
-  await for a task to complete</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/async">async (C# Reference)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/await">await operator - asynchronously
+  await for a task to complete</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/#dont-block-await-instead">Asynchronous
-  programming with async and await - Don’t block, await instead</a> </li>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/#dont-block-await-instead">Asynchronous
+  programming with async and await - Don’t block, await instead</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2013/march/async-await-best-practices-in-asynchronous-programming">Async/Await - Best
-  Practices in Asynchronous Programming</a> </li>
-  <li> Microsoft Developer Blog - <a href="https://devblogs.microsoft.com/pfxteam/asyncawait-faq/">Async/Await FAQ</a> </li>
+  Practices in Asynchronous Programming</a></li>
+  <li>Microsoft Developer Blog - <a href="https://devblogs.microsoft.com/pfxteam/asyncawait-faq/">Async/Await FAQ</a></li>
 </ul>
 

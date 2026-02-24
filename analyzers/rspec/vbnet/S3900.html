@@ -43,13 +43,13 @@ End Class
 </pre>
 <h3>Exceptions</h3>
 <ul>
-  <li> Arguments validated for <code>Nothing</code> via helper methods should be annotated with the <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull"><code>[NotNull</code></a>] attribute. </li>
-  <li> Method parameters marked with the <code>[NotNull]</code> <a
+  <li>Arguments validated for <code>Nothing</code> via helper methods should be annotated with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis#postconditions-maybenull-and-notnull"><code>[NotNull</code></a>] attribute.</li>
+  <li>Method parameters marked with the <code>[NotNull]</code> <a
   href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#ItemNotNullAttribute">Resharper code annotation
-  attribute</a> are supported as well. </li>
-  <li> To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is
-  validated for null in your method declaration with it: </li>
+  attribute</a> are supported as well.</li>
+  <li>To create a custom null validation method declare an attribute with name <code>ValidatedNotNullAttribute</code> and mark the parameter that is
+  validated for null in your method declaration with it:</li>
 </ul>
 <pre>
 Imports System.Runtime.CompilerServices

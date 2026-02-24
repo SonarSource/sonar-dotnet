@@ -2,21 +2,21 @@
 <p>This rule addresses the issue of incomplete assertions that can occur when using certain test frameworks. Incomplete assertions can lead to tests
 that do not effectively verify anything. The rule enforces the use of complete assertions in specific cases, namely:</p>
 <ul>
-  <li> Fluent Assertions: <a href="https://fluentassertions.com/introduction">Should()</a> is not followed by an assertion invocation. </li>
+  <li>Fluent Assertions: <a href="https://fluentassertions.com/introduction">Should()</a> is not followed by an assertion invocation.</li>
 </ul>
 <pre>
 string actual = "Using Fluent Assertions";
 actual.Should(); // Noncompliant
 </pre>
 <ul>
-  <li> NFluent: <a href="https://www.n-fluent.net">Check.That()</a> is not followed by an assertion invocation. </li>
+  <li>NFluent: <a href="https://www.n-fluent.net">Check.That()</a> is not followed by an assertion invocation.</li>
 </ul>
 <pre>
 string actual = "Using NFluent";
 Check.That(actual); // Noncompliant
 </pre>
 <ul>
-  <li> NSubstitute: <a href="https://nsubstitute.github.io/help/received-calls">Received()</a> is not followed by an invocation. </li>
+  <li>NSubstitute: <a href="https://nsubstitute.github.io/help/received-calls">Received()</a> is not followed by an invocation.</li>
 </ul>
 <pre>
 command.Received(); // Noncompliant
@@ -65,8 +65,8 @@ command.Received().Execute();
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://fluentassertions.com/introduction">Fluent assertions: Should()</a> </li>
-  <li> <a href="https://www.n-fluent.net">NFluent: Check.That()</a> </li>
-  <li> <a href="https://nsubstitute.github.io/help/received-calls">NSubstitute: Received()</a> </li>
+  <li><a href="https://fluentassertions.com/introduction">Fluent assertions: Should()</a></li>
+  <li><a href="https://www.n-fluent.net">NFluent: Check.That()</a></li>
+  <li><a href="https://nsubstitute.github.io/help/received-calls">NSubstitute: Received()</a></li>
 </ul>
 

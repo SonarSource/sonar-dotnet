@@ -6,14 +6,13 @@ parameters. But they only work right if their values aren’t provided explicitl
 of the parameter list, the caller is forced to use named arguments if they want to use the method properly.</p>
 <p>This rule raises an issue when the following attributes are used on parameters before the end of the parameter list:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerfilepathattribute">CallerFilePathAttribute</a>
-  </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerlinenumberattribute">CallerLineNumberAttribute</a>
-  </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute">CallerMemberNameAttribute</a>
-  </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute">CallerArgumentExpressionAttribute</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerfilepathattribute">CallerFilePathAttribute</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerlinenumberattribute">CallerLineNumberAttribute</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute">CallerMemberNameAttribute</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute">CallerArgumentExpressionAttribute</a></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Move the decorated parameters to the end of the parameter list.</p>
@@ -41,18 +40,18 @@ void TraceMessage(string message = null,
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/caller-information">Determine caller information using
-  attributes interpreted by the C# compiler</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerfilepathattribute">CallerFilePathAttribute
-  Class</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerlinenumberattribute">CallerLineNumberAttribute
-  Class</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute">CallerMemberNameAttribute
-  Class</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute">CallerArgumentExpressionAttribute Class</a> </li>
-  <li> <a
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/caller-information">Determine caller information using
+  attributes interpreted by the C# compiler</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerfilepathattribute">CallerFilePathAttribute
+  Class</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerlinenumberattribute">CallerLineNumberAttribute
+  Class</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callermembernameattribute">CallerMemberNameAttribute
+  Class</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute">CallerArgumentExpressionAttribute Class</a></li>
+  <li><a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments">Named
-  and Optional Arguments</a> </li>
+  and Optional Arguments</a></li>
 </ul>
 

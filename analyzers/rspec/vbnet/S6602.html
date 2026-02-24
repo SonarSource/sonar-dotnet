@@ -8,9 +8,9 @@ href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/#c
 <code>FirstOrDefault</code> closer to the performance of collection-specific <code>Find</code> methods in most scenarios.</p>
 <p><strong>Applies to</strong></p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find">List</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.find">Array</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.find">ImmutableList</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find">List</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.find">Array</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.find">ImmutableList</a></li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>We measured at least 2x improvement in the execution time. For more details see the <code>Benchmarks</code> section from the <code>More info</code>
@@ -44,12 +44,12 @@ End Function
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find">List&lt;T&gt;.Find(Predicate&lt;T&gt;)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.find">Array.Find&lt;T&gt;(T[], Predicate&lt;T&gt;)</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.find">ImmutableList&lt;T&gt;.Find(Predicate&lt;T&gt;)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstordefault">Enumerable.FirstOrDefault(Predicate&lt;T&gt;)</a>
-  </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.find">List&lt;T&gt;.Find(Predicate&lt;T&gt;)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.find">Array.Find&lt;T&gt;(T[], Predicate&lt;T&gt;)</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.find">ImmutableList&lt;T&gt;.Find(Predicate&lt;T&gt;)</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.firstordefault">Enumerable.FirstOrDefault(Predicate&lt;T&gt;)</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -73,68 +73,44 @@ End Function
   </thead>
   <tbody>
     <tr>
-      <td><p>ArrayFirstOrDefault</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>10.515 μs</p></td>
-      <td><p>0.1410 μs</p></td>
-      <td><p>32 B</p></td>
+      <td>
+        <p>ArrayFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>10.515 μs</p>
+      </td>
+      <td>
+        <p>0.1410 μs</p>
+      </td>
+      <td>
+        <p>32 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ArrayFind</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>4.417 μs</p></td>
-      <td><p>0.0729 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ArrayFirstOrDefault</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>2.262 μs</p></td>
-      <td><p>0.0135 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayFind</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>3.428 μs</p></td>
-      <td><p>0.0206 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ArrayFirstOrDefault</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>45.074 μs</p></td>
-      <td><p>0.7517 μs</p></td>
-      <td><p>32 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayFind</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>13.948 μs</p></td>
-      <td><p>0.1496 μs</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ArrayFind</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>4.417 μs</p>
+      </td>
+      <td>
+        <p>0.0729 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -145,68 +121,44 @@ End Function
       <td></td>
     </tr>
     <tr>
-      <td><p>ImmutableListFirstOrDefault</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>83.796 μs</p></td>
-      <td><p>1.3199 μs</p></td>
-      <td><p>72 B</p></td>
+      <td>
+        <p>ArrayFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>2.262 μs</p>
+      </td>
+      <td>
+        <p>0.0135 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ImmutableListFind</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>59.720 μs</p></td>
-      <td><p>1.0723 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFirstOrDefault</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>81.984 μs</p></td>
-      <td><p>1.0886 μs</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFind</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>58.288 μs</p></td>
-      <td><p>0.8079 μs</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFirstOrDefault</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>446.893 μs</p></td>
-      <td><p>9.8430 μs</p></td>
-      <td><p>76 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListFind</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>427.476 μs</p></td>
-      <td><p>3.3371 μs</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ArrayFind</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>3.428 μs</p>
+      </td>
+      <td>
+        <p>0.0206 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -217,20 +169,44 @@ End Function
       <td></td>
     </tr>
     <tr>
-      <td><p>ListFirstOrDefault</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>14.808 μs</p></td>
-      <td><p>0.1723 μs</p></td>
-      <td><p>40 B</p></td>
+      <td>
+        <p>ArrayFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>45.074 μs</p>
+      </td>
+      <td>
+        <p>0.7517 μs</p>
+      </td>
+      <td>
+        <p>32 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ListFind</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>6.040 μs</p></td>
-      <td><p>0.1104 μs</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ArrayFind</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>13.948 μs</p>
+      </td>
+      <td>
+        <p>0.1496 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -241,20 +217,44 @@ End Function
       <td></td>
     </tr>
     <tr>
-      <td><p>ListFirstOrDefault</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>2.233 μs</p></td>
-      <td><p>0.0154 μs</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ImmutableListFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>83.796 μs</p>
+      </td>
+      <td>
+        <p>1.3199 μs</p>
+      </td>
+      <td>
+        <p>72 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ListFind</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>4.458 μs</p></td>
-      <td><p>0.0745 μs</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ImmutableListFind</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>59.720 μs</p>
+      </td>
+      <td>
+        <p>1.0723 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -265,28 +265,244 @@ End Function
       <td></td>
     </tr>
     <tr>
-      <td><p>ListFirstOrDefault</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>57.290 μs</p></td>
-      <td><p>1.0494 μs</p></td>
-      <td><p>40 B</p></td>
+      <td>
+        <p>ImmutableListFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>81.984 μs</p>
+      </td>
+      <td>
+        <p>1.0886 μs</p>
+      </td>
+      <td>
+        <p>72 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ListFind</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>18.476 μs</p></td>
-      <td><p>0.0504 μs</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ImmutableListFind</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>58.288 μs</p>
+      </td>
+      <td>
+        <p>0.8079 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ImmutableListFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>446.893 μs</p>
+      </td>
+      <td>
+        <p>9.8430 μs</p>
+      </td>
+      <td>
+        <p>76 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ImmutableListFind</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>427.476 μs</p>
+      </td>
+      <td>
+        <p>3.3371 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>14.808 μs</p>
+      </td>
+      <td>
+        <p>0.1723 μs</p>
+      </td>
+      <td>
+        <p>40 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListFind</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>6.040 μs</p>
+      </td>
+      <td>
+        <p>0.1104 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>2.233 μs</p>
+      </td>
+      <td>
+        <p>0.0154 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListFind</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>4.458 μs</p>
+      </td>
+      <td>
+        <p>0.0745 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListFirstOrDefault</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>57.290 μs</p>
+      </td>
+      <td>
+        <p>1.0494 μs</p>
+      </td>
+      <td>
+        <p>40 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListFind</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>18.476 μs</p>
+      </td>
+      <td>
+        <p>0.0504 μs</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <h4>Glossary</h4>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a> </li>
+  <li><a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a></li>
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>

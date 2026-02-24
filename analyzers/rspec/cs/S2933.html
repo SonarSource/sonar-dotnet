@@ -4,10 +4,10 @@ only set in the constructor, it could cause confusion about the field’s intend
 <code>readonly</code> to make their intended use explicit, and to prevent future maintainers from inadvertently changing their use.</p>
 <h3>Exceptions</h3>
 <ul>
-  <li> Fields declared in classes marked with the <code>Serializable</code> attribute. </li>
-  <li> Fields declared in <code>partial</code> classes. </li>
-  <li> Fields with attributes are ignored. </li>
-  <li> Fields of type <code>struct</code> that are not primitive or pointer types are also ignored because of possible unwanted behavior. </li>
+  <li>Fields declared in classes marked with the <code>Serializable</code> attribute.</li>
+  <li>Fields declared in <code>partial</code> classes.</li>
+  <li>Fields with attributes are ignored.</li>
+  <li>Fields of type <code>struct</code> that are not primitive or pointer types are also ignored because of possible unwanted behavior.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Mark the given field with the <code>readonly</code> modifier.</p>
@@ -39,7 +39,7 @@ public class Person
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly">readonly</a> </li>
-  <li> Fabulous adventures in coding - <a href="https://ericlippert.com/2008/05/14/mutating-readonly-structs/">Mutating readonly structs</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/readonly">readonly</a></li>
+  <li>Fabulous adventures in coding - <a href="https://ericlippert.com/2008/05/14/mutating-readonly-structs/">Mutating readonly structs</a></li>
 </ul>
 

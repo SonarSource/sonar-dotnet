@@ -2,10 +2,10 @@
 <p>Shadowing occurs when a local variable has the same name as a variable, field, or property in an outer scope.</p>
 <p>This can lead to three main problems:</p>
 <ul>
-  <li> Confusion: The same name can refer to different variables in different parts of the scope, making the code hard to read and understand. </li>
-  <li> Unintended Behavior: You might accidentally use the wrong variable, leading to hard-to-detect bugs. </li>
-  <li> Maintenance Issues: If the inner variable is removed or renamed, the code’s behavior might change unexpectedly because the outer variable is
-  now being used. </li>
+  <li>Confusion: The same name can refer to different variables in different parts of the scope, making the code hard to read and understand.</li>
+  <li>Unintended Behavior: You might accidentally use the wrong variable, leading to hard-to-detect bugs.</li>
+  <li>Maintenance Issues: If the inner variable is removed or renamed, the code’s behavior might change unexpectedly because the outer variable is now
+  being used.</li>
 </ul>
 <p>To avoid these problems, rename the shadowing, shadowed, or both variables/fields/properties to accurately represent their purpose with unique and
 meaningful names. It improves clarity and allows reasoning locally about the code without considering other software parts.</p>
@@ -27,13 +27,12 @@ class Foo
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields">Fields</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">Properties</a>
-  </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields">Fields</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">Properties</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:csharpsquid:S2387} - Child class fields should not shadow parent class fields </li>
-  <li> {rule:csharpsquid:S3218} - Inner class members should not shadow outer class "static" or type members </li>
+  <li>{rule:csharpsquid:S2387} - Child class fields should not shadow parent class fields</li>
+  <li>{rule:csharpsquid:S3218} - Inner class members should not shadow outer class "static" or type members</li>
 </ul>
 

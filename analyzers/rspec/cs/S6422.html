@@ -44,38 +44,62 @@ class RequestParser
   </thead>
   <tbody>
     <tr>
-      <td><p>Wait for the result of a task</p></td>
-      <td><p><code>Task.Wait</code>, <code>Task.Result</code> or <code>Task.GetAwaiter.GetResult</code></p></td>
-      <td><p><code>await</code></p></td>
+      <td>
+        <p>Wait for the result of a task</p>
+      </td>
+      <td>
+        <p><code>Task.Wait</code>, <code>Task.Result</code> or <code>Task.GetAwaiter.GetResult</code></p>
+      </td>
+      <td>
+        <p><code>await</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p>Wait for any of many task to complete</p></td>
-      <td><p><code>Task.WaitAny</code></p></td>
-      <td><p><code>await Task.WhenAny</code></p></td>
+      <td>
+        <p>Wait for any of many task to complete</p>
+      </td>
+      <td>
+        <p><code>Task.WaitAny</code></p>
+      </td>
+      <td>
+        <p><code>await Task.WhenAny</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p>Wait for all of many tasks to complete</p></td>
-      <td><p><code>Task.WaitAll</code></p></td>
-      <td><p><code>await Task.WhenAll</code></p></td>
+      <td>
+        <p>Wait for all of many tasks to complete</p>
+      </td>
+      <td>
+        <p><code>Task.WaitAll</code></p>
+      </td>
+      <td>
+        <p><code>await Task.WhenAll</code></p>
+      </td>
     </tr>
     <tr>
-      <td><p>Wait a period of time</p></td>
-      <td><p><code>Thread.Sleep</code></p></td>
-      <td><p><code>await Task.Delay</code></p></td>
+      <td>
+        <p>Wait a period of time</p>
+      </td>
+      <td>
+        <p><code>Thread.Sleep</code></p>
+      </td>
+      <td>
+        <p><code>await Task.Delay</code></p>
+      </td>
     </tr>
   </tbody>
 </table>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2013/march/async-await-best-practices-in-asynchronous-programming">Async/Await - Best
-  Practices in Asynchronous Programming</a> </li>
-  <li> Microsoft Learn - <a
+  Practices in Asynchronous Programming</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/azure/azure-functions/performance-reliability#use-async-code-but-avoid-blocking-calls">Improve the
-  performance and reliability of Azure Functions - Scalability best practices</a> </li>
-  <li> Github - <a href="https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md">Async Guidance by David Fowler</a>
-  </li>
-  <li> {rule:csharpsquid:S4462} - Calls to "async" methods should not be blocking (a more general version of this rule) </li>
+  performance and reliability of Azure Functions - Scalability best practices</a></li>
+  <li>Github - <a href="https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md">Async Guidance by David
+  Fowler</a></li>
+  <li>{rule:csharpsquid:S4462} - Calls to "async" methods should not be blocking (a more general version of this rule)</li>
 </ul>
 

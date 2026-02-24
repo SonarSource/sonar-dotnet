@@ -5,12 +5,12 @@ on a single, separate concern</a>. In short, they should have a <em>single reaso
 <p>The rule identifies different responsibilities by looking at groups of actions that use different sets of services defined in the controller.</p>
 <p>Basic services that are typically required by most controllers are not considered:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/"><code>ILogger</code></a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Mediator_pattern"><code>IMediator</code></a> </li>
-  <li> <a href="https://medium.com/@sumit.kharche/how-to-integrate-automapper-in-asp-net-core-web-api-b765b5bed35c"><code>IMapper</code></a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/"><code>IConfiguration</code></a> </li>
-  <li> <a href="https://masstransit.io/documentation/configuration#configuration"><code>IBus</code></a> </li>
-  <li> <a href="https://wolverinefx.io/guide/messaging/message-bus.html"><code>IMessageBus</code></a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/"><code>ILogger</code></a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Mediator_pattern"><code>IMediator</code></a></li>
+  <li><a href="https://medium.com/@sumit.kharche/how-to-integrate-automapper-in-asp-net-core-web-api-b765b5bed35c"><code>IMapper</code></a></li>
+  <li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/"><code>IConfiguration</code></a></li>
+  <li><a href="https://masstransit.io/documentation/configuration#configuration"><code>IBus</code></a></li>
+  <li><a href="https://wolverinefx.io/guide/messaging/message-bus.html"><code>IMessageBus</code></a></li>
 </ul>
 <p>The rule currently applies to ASP.NET Core only, and doesn’t cover <a
 href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/choose-aspnet-framework">ASP.NET MVC 4.x</a>.</p>
@@ -79,20 +79,20 @@ route respectively, so that the route on the action would only contain action-sp
 <p>As the size and the responsibilities of the controller increase, the issues that come with such an increase will have a further impact on the
 code.</p>
 <ul>
-  <li> The increased complexity of reading and understanding the code may require the introduction of <a
+  <li>The increased complexity of reading and understanding the code may require the introduction of <a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#defining-regions">regions</a> or <a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/partial-classes-and-methods">partial classes</a>, to be
-  able to visually separate the actions related to the different concerns. Those are patches, that don’t address the underlying issue. </li>
-  <li> The increased complexity to maintain and modify will not give incentives to keep the architecture clean, leading to a <strong>more tightly
-  coupled and less modular system</strong>. </li>
-  <li> The reduced reusability of the code may bring <strong>code duplication</strong>, which breaks the <a
+  able to visually separate the actions related to the different concerns. Those are patches, that don’t address the underlying issue.</li>
+  <li>The increased complexity to maintain and modify will not give incentives to keep the architecture clean, leading to a <strong>more tightly
+  coupled and less modular system</strong>.</li>
+  <li>The reduced reusability of the code may bring <strong>code duplication</strong>, which breaks the <a
   href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#dont-repeat-yourself-dry">Don’t repeat
-  yourself (DRY)</a> principle and which itself comes with a whole lot of issues, such as <strong>lack of maintainability and consistency</strong>.
-  </li>
-  <li> The performance penalty of conflating multiple responsibilities into a single controller may induce the use of techniques such as lazy service
+  yourself (DRY)</a> principle and which itself comes with a whole lot of issues, such as <strong>lack of maintainability and
+  consistency</strong>.</li>
+  <li>The performance penalty of conflating multiple responsibilities into a single controller may induce the use of techniques such as lazy service
   resolution (you can find an example of this approach <a
   href="https://medium.com/@jayeshtambe/lazy-t-in-dependency-injection-with-c-net-core-c418cc80cd13">here</a>). Those <strong>increase the
-  complexity</strong> of the code and make the <strong>runtime behavior less predictable</strong>. </li>
+  complexity</strong> of the code and make the <strong>runtime behavior less predictable</strong>.</li>
 </ul>
 <h3>Why MVC controllers are not in scope</h3>
 <p>Alongside <a href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2">attribute
@@ -190,48 +190,48 @@ public class PhotoController(
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/#apicontroller-attribute">Create web APIs with ASP.NET Core:
-  <code>ApiController</code> attribute</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/">Web API Routing</a> </li>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/#apicontroller-attribute">Create web APIs with ASP.NET Core:
+  <code>ApiController</code> attribute</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/">Web API Routing</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns">Architectural
-  principles: Separation of concerns</a> </li>
-  <li> Microsoft Learn - <a
+  principles: Separation of concerns</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#single-responsibility">Architectural
-  principles: Single responsibility</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">ASP.NET Core: Handle requests with
-  controllers in ASP.NET Core MVC</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2014/may/csharp-best-practices-dangers-of-violating-solid-principles-in-csharp#the-single-responsibility-principle">C# Best Practices: Dangers of Violating SOLID Principles in C#</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/choose-aspnet-framework">Choose between ASP.NET 4.x and
-  ASP.NET Core</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">Dependency injection in ASP.NET
-  Core</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr">Implement the command process pipeline with a mediator pattern (MediatR)</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.lazy-1">Lazy&lt;T&gt; Class</a> </li>
-  <li> MassTransit - <a href="https://masstransit.io/documentation/concepts">Concepts</a> </li>
-  <li> Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single responsibility principle</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Mediator_pattern">Mediator pattern</a> </li>
-  <li> Wolverine - <a href="https://wolverinefx.io/tutorials/getting-started.html">Getting Started</a> </li>
+  principles: Single responsibility</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions">ASP.NET Core: Handle requests with controllers
+  in ASP.NET Core MVC</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2014/may/csharp-best-practices-dangers-of-violating-solid-principles-in-csharp#the-single-responsibility-principle">C# Best Practices: Dangers of Violating SOLID Principles in C#</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/choose-aspnet-framework">Choose between ASP.NET 4.x and
+  ASP.NET Core</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">Dependency injection in ASP.NET
+  Core</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/microservice-application-layer-implementation-web-api#implement-the-command-process-pipeline-with-a-mediator-pattern-mediatr">Implement the command process pipeline with a mediator pattern (MediatR)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.lazy-1">Lazy&lt;T&gt; Class</a></li>
+  <li>MassTransit - <a href="https://masstransit.io/documentation/concepts">Concepts</a></li>
+  <li>Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single responsibility principle</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Mediator_pattern">Mediator pattern</a></li>
+  <li>Wolverine - <a href="https://wolverinefx.io/tutorials/getting-started.html">Getting Started</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
-  Cognitive Complexity</a> </li>
-  <li> Medium - <a href="https://medium.com/@jayeshtambe/lazy-t-in-dependency-injection-with-c-net-core-c418cc80cd13">Lazy&lt;T&gt; in Dependency
-  Injection with C# .Net Core</a> </li>
-  <li> Medium - <a href="https://medium.com/@sumit.kharche/how-to-integrate-automapper-in-asp-net-core-web-api-b765b5bed35c">How to integrate
-  AutoMapper in ASP.NET Core Web API</a> </li>
+  <li>Sonar Blog - <a href="https://www.sonarsource.com/blog/5-clean-code-tips-for-reducing-cognitive-complexity/">5 Clean Code Tips for Reducing
+  Cognitive Complexity</a></li>
+  <li>Medium - <a href="https://medium.com/@jayeshtambe/lazy-t-in-dependency-injection-with-c-net-core-c418cc80cd13">Lazy&lt;T&gt; in Dependency
+  Injection with C# .Net Core</a></li>
+  <li>Medium - <a href="https://medium.com/@sumit.kharche/how-to-integrate-automapper-in-asp-net-core-web-api-b765b5bed35c">How to integrate
+  AutoMapper in ASP.NET Core Web API</a></li>
 </ul>
 <h3>Conference presentations</h3>
 <ul>
-  <li> Cornell University arxiv.org - <a href="https://arxiv.org/ftp/arxiv/papers/1912/1912.01142.pdf">Changqi Chen: An Empirical Investigation of
-  Correlation between Code Complexity and Bugs</a> </li>
+  <li>Cornell University arxiv.org - <a href="https://arxiv.org/ftp/arxiv/papers/1912/1912.01142.pdf">Changqi Chen: An Empirical Investigation of
+  Correlation between Code Complexity and Bugs</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:csharpsquid:S3776} - Cognitive Complexity of functions should not be too high </li>
+  <li>{rule:csharpsquid:S3776} - Cognitive Complexity of functions should not be too high</li>
 </ul>
 

@@ -1,9 +1,8 @@
 <h2>Why is this an issue?</h2>
 <p>When a method in a derived class has:</p>
 <ul>
-  <li> the same name as a method in the base class </li>
-  <li> but types of parameters that are ancestors (for example <code>string</code> in the base class and <code>object</code> in the derived class)
-  </li>
+  <li>the same name as a method in the base class</li>
+  <li>but types of parameters that are ancestors (for example <code>string</code> in the base class and <code>object</code> in the derived class)</li>
 </ul>
 <p>the result is that the base method becomes hidden.</p>
 <p>As shown in the following code snippet, when an instance of the derived class is used, invoking the method with an argument that matches the less
@@ -58,12 +57,11 @@ class as <code>virtual</code> and overriding it in the <code>DerivedClass</code>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a
+  <li><a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/knowing-when-to-use-override-and-new-keywords">Knowing
-  When to Use Override and New Keywords</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading">Member overloading</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-modifier">'new' modifier</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs0108">CS0108 - Hiding inherited member</a>
-  </li>
+  When to Use Override and New Keywords</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/member-overloading">Member overloading</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/new-modifier">'new' modifier</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs0108">CS0108 - Hiding inherited member</a></li>
 </ul>
 

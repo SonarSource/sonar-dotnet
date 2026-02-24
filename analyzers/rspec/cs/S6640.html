@@ -8,7 +8,7 @@ those bugs can lead to memory corruption vulnerabilities such as stack overflows
 of these security and stability risks.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> There are any pointers or fixed buffers declared within the <code>unsafe</code> code block. </li>
+  <li>There are any pointers or fixed buffers declared within the <code>unsafe</code> code block.</li>
 </ul>
 <p>There is a risk if you answered yes to the question.</p>
 <h2>Recommended Secure Coding Practices</h2>
@@ -17,9 +17,9 @@ href="https://learn.microsoft.com/en-us/dotnet/standard/memory-and-spans/">Span 
 <p>If it is not possible to remove the code block, then it should be kept as short as possible. Doing so reduces risk, as there is less code that can
 potentially introduce new bugs. Within the <code>unsafe</code> code block, make sure that:</p>
 <ul>
-  <li> All type casts are correct. </li>
-  <li> Memory is correctly allocated and then released. </li>
-  <li> Array accesses can never go out of bounds. </li>
+  <li>All type casts are correct.</li>
+  <li>Memory is correctly allocated and then released.</li>
+  <li>Array accesses can never go out of bounds.</li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -52,8 +52,8 @@ public int SubarraySum(int[] array, int start, int end)
 </pre>
 <h2>See</h2>
 <ul>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/787">CWE-787 - Out-of-bounds Write</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code">Microsoft Learn</a> - Unsafe code, pointer types, and
-  function pointers </li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/787">CWE-787 - Out-of-bounds Write</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/unsafe-code">Microsoft Learn</a> - Unsafe code, pointer types, and
+  function pointers</li>
 </ul>
 

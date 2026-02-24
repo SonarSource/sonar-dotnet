@@ -6,37 +6,27 @@ href="https://learn.microsoft.com/en-us/aspnet/overview">Framework</a> - support
 process by automatically aligning data from HTTP requests with action method parameters, providing numerous benefits compared to manually parsing raw
 incoming request data:</p>
 <dl>
-  <dt>
-    Simplicity
-  </dt>
+  <dt>Simplicity</dt>
   <dd>
     <p>Model binding simplifies the code by automatically mapping data from HTTP requests to action method parameters. You don’t need to write any
     code to manually extract values from the request.</p>
   </dd>
-  <dt>
-    Type Safety
-  </dt>
+  <dt>Type Safety</dt>
   <dd>
     <p>Model binding provides type safety by automatically converting the incoming data into the appropriate .NET types. If the conversion fails, the
     model state becomes invalid, which you can easily check using <code>ModelState.IsValid</code>.</p>
   </dd>
-  <dt>
-    Validation
-  </dt>
+  <dt>Validation</dt>
   <dd>
     <p>With model binding, you can easily apply validation rules to your models using data annotations. If the incoming data doesn’t comply with these
     rules, the model state becomes invalid.</p>
   </dd>
-  <dt>
-    Security
-  </dt>
+  <dt>Security</dt>
   <dd>
     <p>Model binding helps protect against over-posting attacks by only including properties in the model that you explicitly bind using the
     <code>[Bind]</code> attribute or by using view models that only contain the properties you want to update.</p>
   </dd>
-  <dt>
-    Maintainability
-  </dt>
+  <dt>Maintainability</dt>
   <dd>
     <p>By using model binding, your code becomes cleaner, easier to read, and maintain. It promotes the use of strongly typed views, which can provide
     compile-time checking of your views.</p>
@@ -50,21 +40,20 @@ href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.htt
 href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.routeValues"><code>Request.RouteValues</code></a> are keyed
 collections that expose data from the incoming HTTP request:</p>
 <ul>
-  <li> <code>Request.Form</code> - <a
-  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#:~:text=%3Cbutton%3E%20elements%3A-,application/x%2Dwww%2Dform%2Durlencoded,-%3A%20the%20keys%20and"><code>application/x-www-form-urlencoded</code></a> form data from the HTTP request body </li>
-  <li> <code>Request.Form.Files</code> - <a
-  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#:~:text=form%2Ddata%20instead)-,multipart/form%2Ddata,-%3A%20each%20value%20is"><code>multipart/form-data</code></a> file data from the HTTP request body </li>
-  <li> <code>Request.Headers</code> - <a href="https://developer.mozilla.org/en-US/docs/Glossary/Request_header">HTTP Header values</a> </li>
-  <li> <code>Request.Query</code> - <a
-  href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#parameters">URL parameter values</a> </li>
-  <li> <code>Request.RouteValues</code> - Values extracted from the <a
-  href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#path_to_resource">path portion of the URL</a>
-  </li>
+  <li><code>Request.Form</code> - <a
+  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#:~:text=%3Cbutton%3E%20elements%3A-,application/x%2Dwww%2Dform%2Durlencoded,-%3A%20the%20keys%20and"><code>application/x-www-form-urlencoded</code></a> form data from the HTTP request body</li>
+  <li><code>Request.Form.Files</code> - <a
+  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#:~:text=form%2Ddata%20instead)-,multipart/form%2Ddata,-%3A%20each%20value%20is"><code>multipart/form-data</code></a> file data from the HTTP request body</li>
+  <li><code>Request.Headers</code> - <a href="https://developer.mozilla.org/en-US/docs/Glossary/Request_header">HTTP Header values</a></li>
+  <li><code>Request.Query</code> - <a
+  href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#parameters">URL parameter values</a></li>
+  <li><code>Request.RouteValues</code> - Values extracted from the <a
+  href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#path_to_resource">path portion of the URL</a></li>
 </ul>
 <p>Model binding can bind these keyed collections to</p>
 <ul>
-  <li> action method parameters by matching the key to the parameter name or </li>
-  <li> the property of a complex type by matching the key to the property name. </li>
+  <li>action method parameters by matching the key to the parameter name or</li>
+  <li>the property of a complex type by matching the key to the property name.</li>
 </ul>
 <p>To replace the keyed collection access, you can:</p>
 <table>
@@ -84,51 +73,77 @@ collections that expose data from the incoming HTTP request:</p>
   </thead>
   <tbody>
     <tr>
-      <td><p><code><a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.form">Request.Form</a>["id"]</code></p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromformattribute"><code>[FromForm]</code></a>
-      attribute on the parameter or a <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.formcollection"><code>FormCollection</code></a> parameter</p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromformattribute"><code>[FromForm]</code></a>
-      attribute on the property</p></td>
+      <td>
+        <p><code><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.form">Request.Form</a>["id"]</code></p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromformattribute"><code>[FromForm]</code></a>
+        attribute on the parameter or a <a
+        href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.formcollection"><code>FormCollection</code></a> parameter</p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromformattribute"><code>[FromForm]</code></a>
+        attribute on the property</p>
+      </td>
       <td></td>
     </tr>
     <tr>
-      <td><p><a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformcollection.files"><code>Request.Form.Files</code></a></p></td>
-      <td><p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfile"><code>IFormFile</code></a>, <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfilecollection"><code>IFormFileCollection</code></a>, or
-      <code>IEnumerable&lt;IFormFile&gt;</code> parameter</p></td>
+      <td>
+        <p><a
+        href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformcollection.files"><code>Request.Form.Files</code></a></p>
+      </td>
+      <td>
+        <p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfile"><code>IFormFile</code></a>, <a
+        href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfilecollection"><code>IFormFileCollection</code></a>, or
+        <code>IEnumerable&lt;IFormFile&gt;</code> parameter</p>
+      </td>
       <td></td>
       <td></td>
     </tr>
     <tr>
-      <td><p><code><a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.headers">Request.Headers</a>["id"]</code></p></td>
-      <td><p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromheaderattribute"><code>[FromHeader]</code></a>
-      attribute on the parameter</p></td>
-      <td><p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromheaderattribute"><code>[FromHeader]</code></a>
-      attribute on the property</p></td>
+      <td>
+        <p><code><a
+        href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.headers">Request.Headers</a>["id"]</code></p>
+      </td>
+      <td>
+        <p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromheaderattribute"><code>[FromHeader]</code></a> attribute
+        on the parameter</p>
+      </td>
+      <td>
+        <p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromheaderattribute"><code>[FromHeader]</code></a> attribute
+        on the property</p>
+      </td>
       <td></td>
     </tr>
     <tr>
-      <td><p><code><a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.query">Request.Query</a>["id"]</code></p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromqueryattribute"><code>[FromQuery]</code></a>
-      attribute on the parameter</p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromqueryattribute"><code>[FromQuery]</code></a>
-      attribute on the property</p></td>
+      <td>
+        <p><code><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.query">Request.Query</a>["id"]</code></p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromqueryattribute"><code>[FromQuery]</code></a>
+        attribute on the parameter</p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromqueryattribute"><code>[FromQuery]</code></a>
+        attribute on the property</p>
+      </td>
       <td></td>
     </tr>
     <tr>
-      <td><p><code><a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.routevalues">Request.RouteValues</a>["id"]</code></p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromrouteattribute"><code>[FromRoute]</code></a>
-      attribute on the parameter</p></td>
+      <td>
+        <p><code><a
+        href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.routevalues">Request.RouteValues</a>["id"]</code></p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromrouteattribute"><code>[FromRoute]</code></a>
+        attribute on the parameter</p>
+      </td>
       <td></td>
-      <td><p>optional <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromrouteattribute"><code>[Route("{id}")]</code></a>attribute on the
-      action method/controller or via conventional routing</p></td>
+      <td>
+        <p>optional <a
+        href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.fromrouteattribute"><code>[Route("{id}")]</code></a>attribute on
+        the action method/controller or via conventional routing</p>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -171,19 +186,19 @@ public IActionResult Post(User user, [FromHeader] string origin, [FromQuery] str
 <p>Model binding in ASP.NET Core MVC and ASP.NET MVC 4.x works by automatically mapping data from HTTP requests to action method parameters. Here’s a
 step-by-step breakdown of how it works:</p>
 <ol>
-  <li> <strong>Request Data</strong> When a user submits a form or sends a request to an ASP.NET application, the request data might include form
-  data, query string parameters, request body, and HTTP headers. </li>
-  <li> <strong>Model Binder</strong> The model binder’s job is to create .NET objects from the request data. It looks at each parameter in the action
-  method and attempts to populate it with the incoming data. </li>
-  <li> <strong>Value Providers</strong> The model binder uses Value Providers to get data from various parts of the request, such as the query string,
-  form data, or route data. Each value provider tells the model binder where to find values in the request. </li>
-  <li> <strong>Binding</strong> The model binder tries to match the keys from the incoming data with the properties of the action method’s parameters.
-  If a match is found, it attempts to convert the incoming data into the appropriate .NET type and assigns it to the parameter. </li>
-  <li> <strong>Validation</strong> If the model binder can’t convert the value or if the converted value doesn’t pass any specified validation rules,
+  <li><strong>Request Data</strong> When a user submits a form or sends a request to an ASP.NET application, the request data might include form data,
+  query string parameters, request body, and HTTP headers.</li>
+  <li><strong>Model Binder</strong> The model binder’s job is to create .NET objects from the request data. It looks at each parameter in the action
+  method and attempts to populate it with the incoming data.</li>
+  <li><strong>Value Providers</strong> The model binder uses Value Providers to get data from various parts of the request, such as the query string,
+  form data, or route data. Each value provider tells the model binder where to find values in the request.</li>
+  <li><strong>Binding</strong> The model binder tries to match the keys from the incoming data with the properties of the action method’s parameters.
+  If a match is found, it attempts to convert the incoming data into the appropriate .NET type and assigns it to the parameter.</li>
+  <li><strong>Validation</strong> If the model binder can’t convert the value or if the converted value doesn’t pass any specified validation rules,
   it adds an error to the <code>ModelState.Errors</code> collection. You can check <code>ModelState.IsValid</code> in your action method to see if any
-  errors occurred during model binding. </li>
-  <li> <strong>Action Method Execution</strong> The action method is executed with the bound parameters. If <code>ModelState.IsValid</code> is
-  <code>false</code>, you can handle the errors in your action method and return an appropriate response. </li>
+  errors occurred during model binding.</li>
+  <li><strong>Action Method Execution</strong> The action method is executed with the bound parameters. If <code>ModelState.IsValid</code> is
+  <code>false</code>, you can handle the errors in your action method and return an appropriate response.</li>
 </ol>
 <p>See the links in the <a href="#_resources">Resources</a> section for more information.</p>
 <h2>How to fix it in ASP.NET MVC 4.x</h2>
@@ -191,15 +206,15 @@ step-by-step breakdown of how it works:</p>
 href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequestbase.querystring"><code>Request.QueryString</code></a> are keyed collections
 that expose data from the incoming HTTP request:</p>
 <ul>
-  <li> <code>Request.Form</code> - <a
-  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#:~:text=%3Cbutton%3E%20elements%3A-,application/x%2Dwww%2Dform%2Durlencoded,-%3A%20the%20keys%20and"><code>application/x-www-form-urlencoded</code></a> form data from the HTTP request body </li>
-  <li> <code>Request.QueryString</code> - <a
-  href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#parameters">URL parameter values</a> </li>
+  <li><code>Request.Form</code> - <a
+  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#:~:text=%3Cbutton%3E%20elements%3A-,application/x%2Dwww%2Dform%2Durlencoded,-%3A%20the%20keys%20and"><code>application/x-www-form-urlencoded</code></a> form data from the HTTP request body</li>
+  <li><code>Request.QueryString</code> - <a
+  href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL#parameters">URL parameter values</a></li>
 </ul>
 <p>Model binding can bind these keyed collections to</p>
 <ul>
-  <li> action method parameters by matching the key to the parameter name or </li>
-  <li> the property of a complex type by matching the key to the property name. </li>
+  <li>action method parameters by matching the key to the parameter name or</li>
+  <li>the property of a complex type by matching the key to the property name.</li>
 </ul>
 <p>To replace the keyed collection access, you can:</p>
 <table>
@@ -217,19 +232,31 @@ that expose data from the incoming HTTP request:</p>
   </thead>
   <tbody>
     <tr>
-      <td><p><code><a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequestbase.form">Request.Form</a>["id"]</code></p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute"><code>[Bind]</code></a> attribute on the
-      parameter or a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.formcollection"><code>FormCollection</code></a>
-      parameter</p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute"><code>[Bind]</code></a> attribute on the
-      parameter or type</p></td>
+      <td>
+        <p><code><a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequestbase.form">Request.Form</a>["id"]</code></p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute"><code>[Bind]</code></a> attribute on the
+        parameter or a <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.formcollection"><code>FormCollection</code></a>
+        parameter</p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute"><code>[Bind]</code></a> attribute on the
+        parameter or type</p>
+      </td>
     </tr>
     <tr>
-      <td><p><code><a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequestbase.querystring">Request.QueryString</a>["id"]</code></p></td>
-      <td><p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute"><code>[Bind]</code></a> attribute on the
-      parameter</p></td>
-      <td><p>property name must match query parameter key</p></td>
+      <td>
+        <p><code><a
+        href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequestbase.querystring">Request.QueryString</a>["id"]</code></p>
+      </td>
+      <td>
+        <p>optional <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute"><code>[Bind]</code></a> attribute on the
+        parameter</p>
+      </td>
+      <td>
+        <p>property name must match query parameter key</p>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -279,68 +306,68 @@ public IActionResult Post()
 <p>Model binding in ASP.NET Core MVC and ASP.NET MVC 4.x works by automatically mapping data from HTTP requests to action method parameters. Here’s a
 step-by-step breakdown of how it works:</p>
 <ol>
-  <li> <strong>Request Data</strong> When a user submits a form or sends a request to an ASP.NET application, the request data might include form
-  data, query string parameters, request body, and HTTP headers. </li>
-  <li> <strong>Model Binder</strong> The model binder’s job is to create .NET objects from the request data. It looks at each parameter in the action
-  method and attempts to populate it with the incoming data. </li>
-  <li> <strong>Value Providers</strong> The model binder uses Value Providers to get data from various parts of the request, such as the query string,
-  form data, or route data. Each value provider tells the model binder where to find values in the request. </li>
-  <li> <strong>Binding</strong> The model binder tries to match the keys from the incoming data with the properties of the action method’s parameters.
-  If a match is found, it attempts to convert the incoming data into the appropriate .NET type and assigns it to the parameter. </li>
-  <li> <strong>Validation</strong> If the model binder can’t convert the value or if the converted value doesn’t pass any specified validation rules,
+  <li><strong>Request Data</strong> When a user submits a form or sends a request to an ASP.NET application, the request data might include form data,
+  query string parameters, request body, and HTTP headers.</li>
+  <li><strong>Model Binder</strong> The model binder’s job is to create .NET objects from the request data. It looks at each parameter in the action
+  method and attempts to populate it with the incoming data.</li>
+  <li><strong>Value Providers</strong> The model binder uses Value Providers to get data from various parts of the request, such as the query string,
+  form data, or route data. Each value provider tells the model binder where to find values in the request.</li>
+  <li><strong>Binding</strong> The model binder tries to match the keys from the incoming data with the properties of the action method’s parameters.
+  If a match is found, it attempts to convert the incoming data into the appropriate .NET type and assigns it to the parameter.</li>
+  <li><strong>Validation</strong> If the model binder can’t convert the value or if the converted value doesn’t pass any specified validation rules,
   it adds an error to the <code>ModelState.Errors</code> collection. You can check <code>ModelState.IsValid</code> in your action method to see if any
-  errors occurred during model binding. </li>
-  <li> <strong>Action Method Execution</strong> The action method is executed with the bound parameters. If <code>ModelState.IsValid</code> is
-  <code>false</code>, you can handle the errors in your action method and return an appropriate response. </li>
+  errors occurred during model binding.</li>
+  <li><strong>Action Method Execution</strong> The action method is executed with the bound parameters. If <code>ModelState.IsValid</code> is
+  <code>false</code>, you can handle the errors in your action method and return an appropriate response.</li>
 </ol>
 <p>See the links in the <a href="#_resources">Resources</a> section for more information.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">Model Binding in ASP.NET
-  Core</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">Model validation in ASP.NET Core
-  MVC and Razor Pages</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/advanced/custom-model-binding">Custom Model Binding
-  in ASP.NET Core</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.form">HttpRequest.Form Property</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformcollection.files">IFormCollection.Files Property</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.headers">HttpRequest.Headers Property</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.query">HttpRequest.Query Property</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.routevalues">HttpRequest.RouteValues Property</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.formcollection">FormCollection
-  Class</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfile">IFormFile
-  Interface</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfilecollection">IFormFileCollection Interface</a> </li>
-  <li> Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.bindattribute">BindAttribute
-  Class</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a
+  <li>Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">Model Binding in ASP.NET
+  Core</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">Model validation in ASP.NET Core
+  MVC and Razor Pages</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/advanced/custom-model-binding">Custom Model Binding
+  in ASP.NET Core</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.form">HttpRequest.Form Property</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformcollection.files">IFormCollection.Files Property</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.headers">HttpRequest.Headers Property</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.query">HttpRequest.Query Property</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.httprequest.routevalues">HttpRequest.RouteValues Property</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.formcollection">FormCollection
+  Class</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfile">IFormFile
+  Interface</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.http.iformfilecollection">IFormFileCollection Interface</a></li>
+  <li>Microsoft Learn - Asp.Net Core - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.bindattribute">BindAttribute
+  Class</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a
   href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api">Parameter Binding in
-  ASP.NET Web API</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a
-  href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-controller">Adding a New Controller</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a
-  href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-model">Adding a New Model</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a
-  href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-validation">Adding Validation</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a
+  ASP.NET Web API</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a
+  href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-controller">Adding a New Controller</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a
+  href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-a-model">Adding a New Model</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a
+  href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/adding-validation">Adding Validation</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a
   href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api">Model Validation in
-  ASP.NET Web API</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequest.form">HttpRequest.Form
-  Property</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequest.querystring">HttpRequest.QueryString Property</a> </li>
-  <li> Microsoft Learn - ASP.NET MVC 4.x - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute">BindAttribute Class</a>
-  </li>
-  <li> MDN - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">HTTP request methods &gt; POST</a> </li>
-  <li> MDN - <a href="https://developer.mozilla.org/en-US/docs/Glossary/Request_header">Request header</a> </li>
-  <li> MDN - <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL">What is a URL?</a> </li>
+  ASP.NET Web API</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequest.form">HttpRequest.Form
+  Property</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httprequest.querystring">HttpRequest.QueryString Property</a></li>
+  <li>Microsoft Learn - ASP.NET MVC 4.x - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.mvc.bindattribute">BindAttribute
+  Class</a></li>
+  <li>MDN - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST">HTTP request methods &gt; POST</a></li>
+  <li>MDN - <a href="https://developer.mozilla.org/en-US/docs/Glossary/Request_header">Request header</a></li>
+  <li>MDN - <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL">What is a URL?</a></li>
 </ul>
 

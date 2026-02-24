@@ -26,23 +26,23 @@ Dim now = DateTimeOffset.Now ' Compliant
 <h3>Pitfalls</h3>
 <p>Common <code>DateTime</code> pitfalls include:</p>
 <ul>
-  <li> when working with <code>DateTime</code> of kind <code>Local</code> consider the time offset of the machine where the program is running. Not
-  storing the offset from UTC separately can result in meaningless data when retrieved from a different location. </li>
-  <li> when working with <code>DateTime</code> of kind <code>Unknown</code>, calling <code>ToUniversalTime()</code> presumes the
+  <li>when working with <code>DateTime</code> of kind <code>Local</code> consider the time offset of the machine where the program is running. Not
+  storing the offset from UTC separately can result in meaningless data when retrieved from a different location.</li>
+  <li>when working with <code>DateTime</code> of kind <code>Unknown</code>, calling <code>ToUniversalTime()</code> presumes the
   <code>DateTime.Kind</code> is local and converts to UTC, if you call the method <code>ToLocalTime()</code>, it assumes the
-  <code>DateTime.Kind</code> is UTC and converts it to local. </li>
-  <li> when comparing <code>DateTimes</code> objects, the user must ensure they are within the same time zone. <code>DateTime</code> doesn’t consider
-  UTC/Local when comparing; it only cares about the number of <code>Ticks</code> on the objects. </li>
+  <code>DateTime.Kind</code> is UTC and converts it to local.</li>
+  <li>when comparing <code>DateTimes</code> objects, the user must ensure they are within the same time zone. <code>DateTime</code> doesn’t consider
+  UTC/Local when comparing; it only cares about the number of <code>Ticks</code> on the objects.</li>
 </ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset?redirectedfrom=MSDN">Converting
-  between DateTime and DateTimeOffset</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/choosing-between-datetime">Choose between DateTime, DateOnly,
-  DateTimeOffset, TimeSpan, TimeOnly, and TimeZoneInfo</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/performing-arithmetic-operations">Performing arithmetic operations with
-  dates and times</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timezoneinfo">TimeZoneInfo documentation</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/converting-between-datetime-and-offset?redirectedfrom=MSDN">Converting
+  between DateTime and DateTimeOffset</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/choosing-between-datetime">Choose between DateTime, DateOnly,
+  DateTimeOffset, TimeSpan, TimeOnly, and TimeZoneInfo</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/datetime/performing-arithmetic-operations">Performing arithmetic operations with
+  dates and times</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timezoneinfo">TimeZoneInfo documentation</a></li>
 </ul>
 

@@ -22,35 +22,35 @@ public class A
 <h3>Exceptions</h3>
 <p>No issue is reported:</p>
 <ul>
-  <li> If the type of the field inherits/implements one (at least) of the following types:
+  <li>If the type of the field inherits/implements one (at least) of the following types:
     <ul>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.readonlycollection-1"><code>System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.readonlydictionary-2"><code>System.Collections.ObjectModel.ReadOnlyDictionary&lt;TKey, TValue&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen.frozendictionary-2"><code>System.Collections.Frozen.FrozenDictionary&lt;TKey, TValue&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen.frozenset-1"><code>System.Collections.Frozen.FrozenSet&lt;T&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray-1"><code>System.Collections.Immutable.ImmutableArray&lt;T&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutabledictionary-2"><code>System.Collections.Immutable.IImmutableDictionary&lt;TKey, TValue&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutablelist-1"><code>System.Collections.Immutable.IImmutableList&lt;T&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutableset-1"><code>System.Collections.Immutable.IImmutableSet&lt;T&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutablestack-1"><code>System.Collections.Immutable.IImmutableStack&lt;T&gt;</code></a> </li>
-      <li> <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutablequeue-1"><code>System.Collections.Immutable.IImmutableQueue&lt;T&gt;</code></a> </li>
-    </ul>  </li>
-  <li> If the field is <code>readonly</code> and is initialized inline with an immutable type (i.e. inherits/implements one of the types in the
-  previous list) or null. </li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.readonlycollection-1"><code>System.Collections.ObjectModel.ReadOnlyCollection&lt;T&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.objectmodel.readonlydictionary-2"><code>System.Collections.ObjectModel.ReadOnlyDictionary&lt;TKey, TValue&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen.frozendictionary-2"><code>System.Collections.Frozen.FrozenDictionary&lt;TKey, TValue&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.frozen.frozenset-1"><code>System.Collections.Frozen.FrozenSet&lt;T&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray-1"><code>System.Collections.Immutable.ImmutableArray&lt;T&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutabledictionary-2"><code>System.Collections.Immutable.IImmutableDictionary&lt;TKey, TValue&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutablelist-1"><code>System.Collections.Immutable.IImmutableList&lt;T&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutableset-1"><code>System.Collections.Immutable.IImmutableSet&lt;T&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutablestack-1"><code>System.Collections.Immutable.IImmutableStack&lt;T&gt;</code></a></li>
+      <li><a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.iimmutablequeue-1"><code>System.Collections.Immutable.IImmutableQueue&lt;T&gt;</code></a></li>
+    </ul></li>
+  <li>If the field is <code>readonly</code> and is initialized inline with an immutable type (i.e. inherits/implements one of the types in the
+  previous list) or null.</li>
 </ul>
 <h2>Resources</h2>
 <ul>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/582">CWE-582 - Array Declared Public, Final, and Static</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/607">CWE-607 - Public Static Final Field References Mutable Object</a> </li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/582">CWE-582 - Array Declared Public, Final, and Static</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/607">CWE-607 - Public Static Final Field References Mutable Object</a></li>
 </ul>
 

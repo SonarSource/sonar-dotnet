@@ -20,15 +20,16 @@ var v1 = d ?? "value";      // Noncompliant
 <h3>Exceptions</h3>
 <p>This rule will not raise an issue in either of these cases:</p>
 <ul>
-  <li> When the condition is a single <code>const bool</code> <pre>
+  <li>When the condition is a single <code>const bool</code>
+    <pre>
 const bool debug = false;
 //...
 if (debug)                  // Compliant
 {
   // Print something
 }
-</pre> </li>
-  <li> When the condition is the literal <code>true</code> or <code>false</code>. </li>
+</pre></li>
+  <li>When the condition is the literal <code>true</code> or <code>false</code>.</li>
 </ul>
 <p>In these cases, it is obvious the code is as intended.</p>
 <h2>How to fix it</h2>
@@ -112,13 +113,13 @@ public void Sample(bool b, bool c, string s)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/571">CWE-571 - Expression is Always True</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/570">CWE-570 - Expression is Always False</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-">Conditional logical AND operator &amp;&amp;</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-or-operator-">Conditional logical OR operator ||</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">Null-coalescing operators ??
-  and ??=</a> </li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/571">CWE-571 - Expression is Always True</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/570">CWE-570 - Expression is Always False</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-">Conditional logical AND operator &amp;&amp;</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-or-operator-">Conditional logical OR operator ||</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator">Null-coalescing operators ?? and
+  ??=</a></li>
 </ul>
 

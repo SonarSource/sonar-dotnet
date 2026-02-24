@@ -39,7 +39,7 @@ switch (i)
 </pre>
 <p>If the same logic is truly needed for both instances, then:</p>
 <ul>
-  <li> in an <code>if</code> chain they should be combined </li>
+  <li>in an <code>if</code> chain they should be combined</li>
 </ul>
 <pre data-diff-id="1" data-diff-type="compliant">
 if ((a &gt;= 0 &amp;&amp; a &lt; 10) || (a &gt;= 20 &amp;&amp; a &lt; 50))
@@ -53,7 +53,7 @@ else if (a &gt;= 10 &amp;&amp; a &lt; 20)
 }
 </pre>
 <ul>
-  <li> for a <code>switch</code>, one should fall through to the other </li>
+  <li>for a <code>switch</code>, one should fall through to the other</li>
 </ul>
 <pre data-diff-id="2" data-diff-type="compliant">
 switch (i)
@@ -102,6 +102,6 @@ else if (a == 2)
 <h2>Resources</h2>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:csharpsquid:S3923} - All branches in a conditional structure should not have exactly the same implementation </li>
+  <li>{rule:csharpsquid:S3923} - All branches in a conditional structure should not have exactly the same implementation</li>
 </ul>
 

@@ -3,10 +3,10 @@
 <p>A log entry should contain all the relevant information about the current execution context. The <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.exception">Exception</a> raised in a catch block not only provides the message but also:</p>
 <ul>
-  <li> the exception type </li>
-  <li> the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception.stacktrace">stack trace</a> </li>
-  <li> any <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception.innerexception">inner exceptions</a> </li>
-  <li> and more about the cause of the error. </li>
+  <li>the exception type</li>
+  <li>the <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception.stacktrace">stack trace</a></li>
+  <li>any <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception.innerexception">inner exceptions</a></li>
+  <li>and more about the cause of the error.</li>
 </ul>
 <p><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.loggerextensions">Logging methods</a> provide overloads that
 accept an <code>Exception</code> as a parameter and <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging-providers">logging
@@ -14,11 +14,11 @@ providers</a> persist the <code>Exception</code> in a structured way to facilita
 should be passed to the logger.</p>
 <p>The rule covers the following logging frameworks:</p>
 <ul>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/Common.Logging.Core">Common.Core</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/log4net">log4net</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/NLog">NLog</a> </li>
-  <li> Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/Common.Logging.Core">Common.Core</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/log4net">log4net</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/NLog">NLog</a></li>
+  <li>Nuget package - <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a></li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -57,16 +57,16 @@ public bool Save()
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-exceptions">Log
-  exceptions</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.loggerextensions">LoggerExtensions
-  Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging-providers">Logging providers</a> </li>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging?tabs=command-line#log-exceptions">Log
+  exceptions</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging.loggerextensions">LoggerExtensions
+  Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/core/extensions/logging-providers">Logging providers</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements#the-try-catch-statement">The
-  <code>try-catch</code> statement</a> </li>
-  <li> Serilog - <a href="https://github.com/serilog/serilog/wiki/Getting-Started#example-application">Example application</a> </li>
-  <li> Serilog Analyzer - <a href="https://github.com/Suchiman/SerilogAnalyzer#serilog001-exception-usage"><code>Serilog001</code>: Exception
-  Usage</a> </li>
+  <code>try-catch</code> statement</a></li>
+  <li>Serilog - <a href="https://github.com/serilog/serilog/wiki/Getting-Started#example-application">Example application</a></li>
+  <li>Serilog Analyzer - <a href="https://github.com/Suchiman/SerilogAnalyzer#serilog001-exception-usage"><code>Serilog001</code>: Exception
+  Usage</a></li>
 </ul>
 

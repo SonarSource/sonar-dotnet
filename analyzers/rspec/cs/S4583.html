@@ -4,9 +4,9 @@ resources are allocated that are only freed up when <code>EndInvoke</code> is ca
 <code>EndInvoke</code> can lead to <a href="https://en.wikipedia.org/wiki/Resource_leak">resource leaks</a> and incomplete asynchronous calls.</p>
 <p>This rule raises an issue in the following scenarios:</p>
 <ul>
-  <li> The <code>BeginInvoke</code> method is called without any callback, and it is not paired with a call to <code>EndInvoke</code> in the same
-  block. </li>
-  <li> A callback with a single parameter of type <code>IAsyncResult</code> does not contain a call to <code>EndInvoke</code> in the same block. </li>
+  <li>The <code>BeginInvoke</code> method is called without any callback, and it is not paired with a call to <code>EndInvoke</code> in the same
+  block.</li>
+  <li>A callback with a single parameter of type <code>IAsyncResult</code> does not contain a call to <code>EndInvoke</code> in the same block.</li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -73,14 +73,13 @@ public static void Main()
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously">Calling
-  Synchronous Methods Asynchronously</a> </li>
-  <li> <a
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/calling-synchronous-methods-asynchronously">Calling
+  Synchronous Methods Asynchronously</a></li>
+  <li><a
   href="https://learn.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/asynchronous-programming-using-delegates">Asynchronous
-  Programming Using Delegates</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.begininvoke">BeginInvoke()</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.endinvoke">EndInvoke()</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.asynccallback">AsyncCallback Delegate</a> </li>
+  Programming Using Delegates</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.begininvoke">BeginInvoke()</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.endinvoke">EndInvoke()</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.asynccallback">AsyncCallback Delegate</a></li>
 </ul>
 

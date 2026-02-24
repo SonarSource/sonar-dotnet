@@ -4,11 +4,11 @@ will always return the same value, and should not be performed.</p>
 <p>Specifically, the following comparisons will return either always <code>true</code> or always <code>false</code> depending on the kind of
 comparison:</p>
 <ul>
-  <li> comparing a <code>char</code> with a numeric constant that is outside of the range of <code>char</code> </li>
-  <li> comparing a <code>float</code> with a numeric constant that is outside of the range of <code>float</code> </li>
-  <li> comparing a <code>long</code> with a numeric constant that is outside of the range of <code>long</code> </li>
-  <li> comparing a <code>ulong</code> with a numeric constant that is outside of the range of <code>ulong</code> </li>
-  <li> etc. </li>
+  <li>comparing a <code>char</code> with a numeric constant that is outside of the range of <code>char</code></li>
+  <li>comparing a <code>float</code> with a numeric constant that is outside of the range of <code>float</code></li>
+  <li>comparing a <code>long</code> with a numeric constant that is outside of the range of <code>long</code></li>
+  <li>comparing a <code>ulong</code> with a numeric constant that is outside of the range of <code>ulong</code></li>
+  <li>etc.</li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>
@@ -19,11 +19,11 @@ if (f &gt; double.MaxValue) { }  // Noncompliant: always false
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators">Comparison
-  operators (C# reference)</a> </li>
-  <li> Microsoft Learn: <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types#characteristics-of-the-integral-types">Ranges for integral numeric types (C# reference)</a> </li>
-  <li> Microsoft Learn: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char">Range for char (C#
-  reference)</a> </li>
+  <li>Microsoft Learn: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators">Comparison
+  operators (C# reference)</a></li>
+  <li>Microsoft Learn: <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types#characteristics-of-the-integral-types">Ranges for integral numeric types (C# reference)</a></li>
+  <li>Microsoft Learn: <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/char">Range for char (C#
+  reference)</a></li>
 </ul>
 

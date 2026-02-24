@@ -5,18 +5,18 @@ href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.rout
 your API supports.</p>
 <h2>Why is this an issue?</h2>
 <ul>
-  <li> <strong>Ambiguity</strong>: Without HttpAttributes, it’s unclear which HTTP methods an action method should respond to. This can lead to
-  confusion and make the code harder to understand and maintain. </li>
-  <li> <strong>Unsupported HTTP Methods</strong>: If an action is not annotated at all or is annotated only with the <a
+  <li><strong>Ambiguity</strong>: Without HttpAttributes, it’s unclear which HTTP methods an action method should respond to. This can lead to
+  confusion and make the code harder to understand and maintain.</li>
+  <li><strong>Unsupported HTTP Methods</strong>: If an action is not annotated at all or is annotated only with the <a
   href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routeattribute">Route attribute</a>, it accepts all HTTP methods even if
-  they are not supported by that action, which leads to further confusion. </li>
-  <li> <strong>Problems with Swagger</strong>: <a
+  they are not supported by that action, which leads to further confusion.</li>
+  <li><strong>Problems with Swagger</strong>: <a
   href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger">Swagger</a> relies on HttpAttributes to generate
-  parts of the API documentation. These attributes are necessary for the generated documentation to be complete. </li>
-  <li> <strong>Route path conflicts</strong>: Without HttpAttributes, it’s possible to accidentally create action methods that respond to the same
-  route and HTTP method. This can lead to unexpected behavior and hard-to-diagnose bugs. </li>
-  <li> <strong>Lack of routing flexibility</strong>: The HTTP attributes allow you to define multiple action methods in the same controller that
-  respond to the same route but different HTTP methods. If you don’t use them, you might have limited flexibility when designing your API. </li>
+  parts of the API documentation. These attributes are necessary for the generated documentation to be complete.</li>
+  <li><strong>Route path conflicts</strong>: Without HttpAttributes, it’s possible to accidentally create action methods that respond to the same
+  route and HTTP method. This can lead to unexpected behavior and hard-to-diagnose bugs.</li>
+  <li><strong>Lack of routing flexibility</strong>: The HTTP attributes allow you to define multiple action methods in the same controller that
+  respond to the same route but different HTTP methods. If you don’t use them, you might have limited flexibility when designing your API.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>You should annotate the controller actions with the available HttpMethod attributes. You can still use them in conjunction with the Route
@@ -63,15 +63,15 @@ public async Task&lt;string&gt; GetCustomers()    // Compliant
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing to controller actions in ASP.NET
-  Core</a> </li>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing">Routing to controller actions in ASP.NET
+  Core</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/routing#attribute-routing-with-http-verb-attributes">Attribute routing with Http
-  verb attributes</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle">Get started with
-  Swashbuckle and ASP.NET Core</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors#exception-handler">ASP.NET Core Exception
-  handler</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routeattribute">RouteAttribute Class</a> </li>
+  verb attributes</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle">Get started with
+  Swashbuckle and ASP.NET Core</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/web-api/handle-errors#exception-handler">ASP.NET Core Exception
+  handler</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routeattribute">RouteAttribute Class</a></li>
 </ul>
 

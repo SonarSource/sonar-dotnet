@@ -4,10 +4,10 @@ type testing operator</a> can be used to check if the run-time type of an object
 <code>is</code> operator performs a cast, and so performing another cast following the check result is redundant.</p>
 <p>This can impact:</p>
 <ul>
-  <li> Performance: Performing the type check and cast separately can lead to minor performance issues. While this might not be noticeable in small
-  applications, it can add up in larger, more complex systems. </li>
-  <li> Readability: The code is less readable and less clean because it requires two lines (and two operations) to achieve something that could be
-  done in one. </li>
+  <li>Performance: Performing the type check and cast separately can lead to minor performance issues. While this might not be noticeable in small
+  applications, it can add up in larger, more complex systems.</li>
+  <li>Readability: The code is less readable and less clean because it requires two lines (and two operations) to achieve something that could be done
+  in one.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Use <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching">pattern macthing</a> to perform the check
@@ -31,12 +31,11 @@ if (x is Fruit fruit)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">Type-testing
-  operators and cast expressions - <code>is</code>, <code>as</code>, <code>typeof</code> and casts</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/is">is operator (C# reference)</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching">Pattern matching
-  overview</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/type-testing-and-cast">Type-testing
+  operators and cast expressions - <code>is</code>, <code>as</code>, <code>typeof</code> and casts</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/is">is operator (C# reference)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/functional/pattern-matching">Pattern matching
+  overview</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -56,52 +55,32 @@ if (x is Fruit fruit)
   </thead>
   <tbody>
     <tr>
-      <td><p>IsPattern_Class</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>176.48 ns</p></td>
-      <td><p>0.765 ns</p></td>
+      <td>
+        <p>IsPattern_Class</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>176.48 ns</p>
+      </td>
+      <td>
+        <p>0.765 ns</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IsWithCast_Class</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>246.12 ns</p></td>
-      <td><p>22.391 ns</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>IsPattern_Class</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>325.11 ns</p></td>
-      <td><p>14.435 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>IsWithCast_Class</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>311.22 ns</p></td>
-      <td><p>11.145 ns</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>IsPattern_Interface</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>26.77 ns</p></td>
-      <td><p>1.123 ns</p></td>
-    </tr>
-    <tr>
-      <td><p>IsWithCast_Interface</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>26.45 ns</p></td>
-      <td><p>2.115 ns</p></td>
+      <td>
+        <p>IsWithCast_Class</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>246.12 ns</p>
+      </td>
+      <td>
+        <p>22.391 ns</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -110,16 +89,32 @@ if (x is Fruit fruit)
       <td></td>
     </tr>
     <tr>
-      <td><p>IsPattern_Interface</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>119.80 ns</p></td>
-      <td><p>5.411 ns</p></td>
+      <td>
+        <p>IsPattern_Class</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>325.11 ns</p>
+      </td>
+      <td>
+        <p>14.435 ns</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IsWithCast_Interface</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>119.33 ns</p></td>
-      <td><p>4.380 ns</p></td>
+      <td>
+        <p>IsWithCast_Class</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>311.22 ns</p>
+      </td>
+      <td>
+        <p>11.145 ns</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -128,16 +123,32 @@ if (x is Fruit fruit)
       <td></td>
     </tr>
     <tr>
-      <td><p>IsPattern_ValueType</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>22.58 ns</p></td>
-      <td><p>1.161 ns</p></td>
+      <td>
+        <p>IsPattern_Interface</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>26.77 ns</p>
+      </td>
+      <td>
+        <p>1.123 ns</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IsWithCast_ValueType</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>19.41 ns</p></td>
-      <td><p>2.675 ns</p></td>
+      <td>
+        <p>IsWithCast_Interface</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>26.45 ns</p>
+      </td>
+      <td>
+        <p>2.115 ns</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -146,23 +157,107 @@ if (x is Fruit fruit)
       <td></td>
     </tr>
     <tr>
-      <td><p>IsPattern_ValueType</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>39.66 ns</p></td>
-      <td><p>0.645 ns</p></td>
+      <td>
+        <p>IsPattern_Interface</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>119.80 ns</p>
+      </td>
+      <td>
+        <p>5.411 ns</p>
+      </td>
     </tr>
     <tr>
-      <td><p>IsWithCast_ValueType</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>41.34 ns</p></td>
-      <td><p>0.462 ns</p></td>
+      <td>
+        <p>IsWithCast_Interface</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>119.33 ns</p>
+      </td>
+      <td>
+        <p>4.380 ns</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>IsPattern_ValueType</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>22.58 ns</p>
+      </td>
+      <td>
+        <p>1.161 ns</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>IsWithCast_ValueType</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>19.41 ns</p>
+      </td>
+      <td>
+        <p>2.675 ns</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>IsPattern_ValueType</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>39.66 ns</p>
+      </td>
+      <td>
+        <p>0.645 ns</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>IsWithCast_ValueType</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>41.34 ns</p>
+      </td>
+      <td>
+        <p>0.462 ns</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <h4>Glossary</h4>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a> </li>
+  <li><a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a></li>
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>

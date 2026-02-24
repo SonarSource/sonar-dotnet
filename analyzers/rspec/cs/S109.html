@@ -7,12 +7,12 @@ away. -1, 0, and 1 are not considered magic numbers.</p>
 <h3>Exceptions</h3>
 <p>This rule doesn’t raise an issue when the magic number is used as part of:</p>
 <ul>
-  <li> the <code>GetHashCode</code> method </li>
-  <li> a variable/field declaration </li>
-  <li> the single argument of an attribute </li>
-  <li> a named argument for a method or attribute </li>
-  <li> a constructor call </li>
-  <li> a default value for a method argument </li>
+  <li>the <code>GetHashCode</code> method</li>
+  <li>a variable/field declaration</li>
+  <li>the single argument of an attribute</li>
+  <li>a named argument for a method or attribute</li>
+  <li>a constructor call</li>
+  <li>a default value for a method argument</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Replacing them with a constant allows us to provide a meaningful name associated with the value. Instead of adding complexity to the code, it

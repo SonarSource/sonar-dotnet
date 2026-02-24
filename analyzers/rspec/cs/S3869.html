@@ -7,13 +7,12 @@ this method altogether.</p>
 <p>The <code>SafeHandle.DangerousGetHandle</code> method is potentially prone to leaks and vulnerabilities due to its nature and usage. Here are a few
 reasons why:</p>
 <ul>
-  <li> <strong>Invalid handles</strong>: the method retrieves the raw handle value without performing any validation or safety checks. This means that
-  the method can return a handle that is no longer valid or has been closed, leading to undefined behavior or errors when attempting to use it. </li>
-  <li> <strong>Resource leaks</strong>: by directly accessing the handle without the proper safeguards and cleanup provided by the
-  <code>SafeHandle</code> class, there is an increased risk of failing to dispose system resources correctly. </li>
-  <li> <strong>Security vulnerabilities</strong>: when the handle is interacting with sensitive resources (e.g. file handles, process handles) using
-  <code>SafeHandle.DangerousGetHandle</code> without proper validation can lead to security vulnerabilities that can be exploited by an attacker.
-  </li>
+  <li><strong>Invalid handles</strong>: the method retrieves the raw handle value without performing any validation or safety checks. This means that
+  the method can return a handle that is no longer valid or has been closed, leading to undefined behavior or errors when attempting to use it.</li>
+  <li><strong>Resource leaks</strong>: by directly accessing the handle without the proper safeguards and cleanup provided by the
+  <code>SafeHandle</code> class, there is an increased risk of failing to dispose system resources correctly.</li>
+  <li><strong>Security vulnerabilities</strong>: when the handle is interacting with sensitive resources (e.g. file handles, process handles) using
+  <code>SafeHandle.DangerousGetHandle</code> without proper validation can lead to security vulnerabilities that can be exploited by an attacker.</li>
 </ul>
 <pre>
 static void Main(string[] args)
@@ -26,14 +25,14 @@ static void Main(string[] args)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a
+  <li><a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle.dangerousgethandle">SafeHandle.DangerousGetHandle
-  Method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">SafeHandle Class</a> </li>
+  Method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">SafeHandle Class</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://stackoverflow.com/questions/8396923/why-is-safehandle-dangerousgethandle-dangerous">Why is SafeHandle.DangerousGetHandle()
-  "Dangerous"? - Stackoverflow</a> </li>
+  <li><a href="https://stackoverflow.com/questions/8396923/why-is-safehandle-dangerousgethandle-dangerous">Why is SafeHandle.DangerousGetHandle()
+  "Dangerous"? - Stackoverflow</a></li>
 </ul>
 

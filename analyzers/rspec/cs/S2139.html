@@ -5,8 +5,8 @@ multi-threaded applications where messages from other threads can be interwoven 
 <h3>Exceptions</h3>
 <p>This rule will not generate issues if, within the catch block, one of the following conditions are met:</p>
 <ul>
-  <li> The logs generated within the catch block do not contain any references to the exception being caught. </li>
-  <li> The exception being thrown from the catch block is not the same exception that is being caught. </li>
+  <li>The logs generated within the catch block do not contain any references to the exception being caught.</li>
+  <li>The exception being thrown from the catch block is not the same exception that is being caught.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>To address this issue, it is recommended to modify the code to log exceptions only when they are handled locally. In all other cases, simply
@@ -42,12 +42,12 @@ catch (Exception ex)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">Exception-handling statements</a>
-  </li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/exception-handling-statements">Exception-handling
+  statements</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://rolf-engelhard.de/2013/04/logging-anti-patterns-part-ii/">Rolf Engelhard - Logging anti-patterns</a> </li>
+  <li><a href="https://rolf-engelhard.de/2013/04/logging-anti-patterns-part-ii/">Rolf Engelhard - Logging anti-patterns</a></li>
 </ul>
 

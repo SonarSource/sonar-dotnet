@@ -1,11 +1,11 @@
 <h2>Why is this an issue?</h2>
 <p>Unnecessary keywords simply clutter the code and should be removed. Specifically:</p>
 <ul>
-  <li> <code>partial</code> on type declarations that are completely defined in one place </li>
-  <li> <code>sealed</code> on members of <code>sealed</code> classes </li>
-  <li> <code>unsafe</code> method or block inside construct already marked with <code>unsafe</code>, or when there are no <code>unsafe</code>
-  constructs in the block </li>
-  <li> <code>checked</code> and <code>unchecked</code> blocks with no integral-type arithmetic operations </li>
+  <li><code>partial</code> on type declarations that are completely defined in one place</li>
+  <li><code>sealed</code> on members of <code>sealed</code> classes</li>
+  <li><code>unsafe</code> method or block inside construct already marked with <code>unsafe</code>, or when there are no <code>unsafe</code>
+  constructs in the block</li>
+  <li><code>checked</code> and <code>unchecked</code> blocks with no integral-type arithmetic operations</li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>

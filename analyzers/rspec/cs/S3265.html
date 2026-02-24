@@ -42,16 +42,20 @@ var x = Permissions.Read | Permissions.Write;  // Compliant: enum is annotated w
 <p>Additionally, adding the <code>FlagsAttribute</code> to the enumeration enable a <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute#examples">better string representation</a> when using the <a
 href="https://learn.microsoft.com/en-us/dotnet/api/system.enum.tostring">Enum.ToString</a> method.</p>
+<h3>Exception</h3>
+<p>This rule will not raise for <a
+href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.methodimplattribute?view=net-10.0">MethodImplAttribute</a> because,
+despite not having the <code>FlagsAttribute</code>, it is often used in a similar fashion.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum">Enumeration in C#</a>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum">Enumeration in C#</a>
     <ul>
-      <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum#enumeration-types-as-bit-flags">Enumeration
-      types as bit flags</a> </li>
-    </ul>  </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute">FlagsAttribute class</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.enum.tostring">Enum.ToString method</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Bit_field">Bit field - Wikipedia</a> </li>
+      <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum#enumeration-types-as-bit-flags">Enumeration
+      types as bit flags</a></li>
+    </ul></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute">FlagsAttribute class</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.enum.tostring">Enum.ToString method</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Bit_field">Bit field - Wikipedia</a></li>
 </ul>
 

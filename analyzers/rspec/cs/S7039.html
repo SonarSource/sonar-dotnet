@@ -43,26 +43,26 @@ be given the minimum levels of access necessary to complete their tasks. In the 
 can be loaded to the minimum necessary.</p>
 <p>Here are some steps to secure your CSP:</p>
 <ul>
-  <li> Avoid 'unsafe-inline' and 'unsafe-eval': These settings allow inline scripts and script evaluation, which can open the door for executing
-  malicious scripts. Instead, use script hashes, nonces, or strict dynamic scripting if scripts must be used. </li>
-  <li> Specify exact sources: Rather than using a wildcard (*) which allows any domain, specify the exact domains from which resources can be loaded.
-  This reduces the risk of loading resources from potentially malicious sources. </li>
-  <li> Use 'self' cautiously: While 'self' is safer than a wildcard, it can still lead to vulnerabilities if your own site has been compromised or
-  hosts user-uploaded content. Be sure to validate and sanitize all user content. </li>
+  <li>Avoid 'unsafe-inline' and 'unsafe-eval': These settings allow inline scripts and script evaluation, which can open the door for executing
+  malicious scripts. Instead, use script hashes, nonces, or strict dynamic scripting if scripts must be used.</li>
+  <li>Specify exact sources: Rather than using a wildcard (*) which allows any domain, specify the exact domains from which resources can be loaded.
+  This reduces the risk of loading resources from potentially malicious sources.</li>
+  <li>Use 'self' cautiously: While 'self' is safer than a wildcard, it can still lead to vulnerabilities if your own site has been compromised or
+  hosts user-uploaded content. Be sure to validate and sanitize all user content.</li>
 </ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> MDN web docs - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a> </li>
-  <li> CSP docs - <a href="https://content-security-policy.com/hash/">Using a hash with CSP</a> </li>
+  <li>MDN web docs - <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a></li>
+  <li>CSP docs - <a href="https://content-security-policy.com/hash/">Using a hash with CSP</a></li>
 </ul>
 <h3>Standards</h3>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">Top 10 2021 Category A5 - Security Misconfiguration</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">Top 10 2017 Category A6 - Security
-  Misconfiguration</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/693">CWE-693 - Protection Mechanism Failure</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222602">Application Security and
-  Development: V-222602</a> - The application must protect from Cross-Site Scripting (XSS) vulnerabilities. </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">Top 10 2021 Category A5 - Security Misconfiguration</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration.html">Top 10 2017 Category A6 - Security
+  Misconfiguration</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/693">CWE-693 - Protection Mechanism Failure</a></li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222602">Application Security and
+  Development: V-222602</a> - The application must protect from Cross-Site Scripting (XSS) vulnerabilities.</li>
 </ul>
 

@@ -6,18 +6,18 @@ bugs.</p>
 href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization">serialization pattern recommended by Microsoft</a>.</p>
 <p>Specifically, this rule checks for these problems:</p>
 <ul>
-  <li> The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute"><code>SerializableAttribute</code></a> attribute is
-  missing. </li>
-  <li> Non-serializable fields are not marked with the <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.nonserializedattribute"><code>NonSerializedAttribute</code></a> attribute. </li>
-  <li> There is no serialization constructor. </li>
-  <li> An unsealed type has a serialization constructor that is not <code>protected</code>. </li>
-  <li> A sealed type has a serialization constructor that is not <code>private</code>. </li>
-  <li> An unsealed type has an <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable.getobjectdata"><code>ISerializable.GetObjectData</code></a> that is not both <code>public</code> and <code>virtual</code>. </li>
-  <li> A derived type has a serialization constructor that does not call the <code>base</code> constructor. </li>
-  <li> A derived type has an <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method. </li>
-  <li> A derived type has serializable fields but the <code>ISerializable.GetObjectData</code> method is not overridden. </li>
+  <li>The <a href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute"><code>SerializableAttribute</code></a> attribute is
+  missing.</li>
+  <li>Non-serializable fields are not marked with the <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.nonserializedattribute"><code>NonSerializedAttribute</code></a> attribute.</li>
+  <li>There is no serialization constructor.</li>
+  <li>An unsealed type has a serialization constructor that is not <code>protected</code>.</li>
+  <li>A sealed type has a serialization constructor that is not <code>private</code>.</li>
+  <li>An unsealed type has an <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable.getobjectdata"><code>ISerializable.GetObjectData</code></a> that is not both <code>public</code> and <code>virtual</code>.</li>
+  <li>A derived type has a serialization constructor that does not call the <code>base</code> constructor.</li>
+  <li>A derived type has an <code>ISerializable.GetObjectData</code> method that does not call the <code>base</code> method.</li>
+  <li>A derived type has serializable fields but the <code>ISerializable.GetObjectData</code> method is not overridden.</li>
 </ul>
 <p>Classes that inherit from <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code></a> are implementing
 <code>ISerializable</code>. Make sure the <code>[Serializable]</code> attribute is used and that <code>ISerializable</code> is correctly implemented.
@@ -36,15 +36,15 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.treenode
 serialization support in classes derived from these types.</p>
 <h3>Exceptions</h3>
 <ul>
-  <li> Classes in test projects are not checked. </li>
-  <li> Classes need to indicate that they are interested in serialization support by either
+  <li>Classes in test projects are not checked.</li>
+  <li>Classes need to indicate that they are interested in serialization support by either
     <ol>
-      <li> Applying the <code>[Serializable]</code> attribute </li>
-      <li> Having <code>ISerializable</code> in their base type list </li>
-      <li> Declaring a <a
+      <li>Applying the <code>[Serializable]</code> attribute</li>
+      <li>Having <code>ISerializable</code> in their base type list</li>
+      <li>Declaring a <a
       href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization#supporting-runtime-serialization">serialization
-      constructor</a> </li>
-    </ol>  </li>
+      constructor</a></li>
+    </ol></li>
 </ul>
 <pre>
 [Serializable]                                                                                 // 1.
@@ -190,15 +190,15 @@ public class UnsealedFoo : Foo
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization">Serialization</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable"><code>ISerializable</code>
-  Interface</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute"><code>SerializableAttribute</code>
-  Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nonserializedattribute"><code>NonSerializedAttribute</code>
-  Class</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable.getobjectdata"><code>ISerializable.GetObjectData</code> Method</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code> Class</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/serialization">Serialization</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable"><code>ISerializable</code>
+  Interface</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.serializableattribute"><code>SerializableAttribute</code>
+  Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nonserializedattribute"><code>NonSerializedAttribute</code>
+  Class</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.iserializable.getobjectdata"><code>ISerializable.GetObjectData</code> Method</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.exception"><code>Exception</code> Class</a></li>
 </ul>
 

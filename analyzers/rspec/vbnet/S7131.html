@@ -4,21 +4,21 @@ you should not release a read lock while holding a write lock and vice versa, ot
 correctly paired so that the shared resource is accessed safely.</p>
 <p>This rule raises if:</p>
 <ul>
-  <li> you call <a
+  <li>you call <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirewriterlock">ReaderWriterLock.AcquireWriterLock</a> or <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.upgradetowriterlock">ReaderWriterLock.UpgradeToWriterLock</a>
   and then use <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.releasereaderlock">ReaderWriterLock.ReleaseReaderLock</a> </li>
-  <li> you call <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.releasereaderlock">ReaderWriterLock.ReleaseReaderLock</a></li>
+  <li>you call <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterwritelock">ReaderWriterLockSlim.EnterWriteLock</a> or
   <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterwritelock">ReaderWriterLockSlim.TryEnterWriteLock</a> and then use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.exitreadlock">ReaderWriterLockSlim.ExitReadLock</a> </li>
-  <li> you call <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterwritelock">ReaderWriterLockSlim.TryEnterWriteLock</a> and then use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.exitreadlock">ReaderWriterLockSlim.ExitReadLock</a></li>
+  <li>you call <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.acquirereaderlock">ReaderWriterLock.AcquireReaderLock</a> or <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.downgradefromwriterlock">ReaderWriterLock.DowngradeFromWriterLock</a> and then use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.releasewriterlock">ReaderWriterLock.ReleaseWriterLock</a> </li>
-  <li> or you call <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.downgradefromwriterlock">ReaderWriterLock.DowngradeFromWriterLock</a> and then use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock.releasewriterlock">ReaderWriterLock.ReleaseWriterLock</a></li>
+  <li>or you call <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterreadlock">ReaderWriterLockSlim.EnterReadLock</a>, <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterreadlock">ReaderWriterLockSlim.TryEnterReadLock</a>, <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterupgradeablereadlock">ReaderWriterLockSlim.EnterUpgradeableReadLock</a> or <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterupgradeablereadlock">ReaderWriterLockSlim.TryEnterUpgradeableReadLock</a> and then use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.exitwritelock">ReaderWriterLockSlim.ExitWriteLock</a> </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterreadlock">ReaderWriterLockSlim.TryEnterReadLock</a>, <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.enterupgradeablereadlock">ReaderWriterLockSlim.EnterUpgradeableReadLock</a> or <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.tryenterupgradeablereadlock">ReaderWriterLockSlim.TryEnterUpgradeableReadLock</a> and then use <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim.exitwritelock">ReaderWriterLockSlim.ExitWriteLock</a></li>
 </ul>
 <h2>Why is this an issue?</h2>
 <p>If you use the <code>ReaderWriterLockSlim</code> class, you will get a <a
@@ -80,7 +80,7 @@ End Class
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock">ReaderWriterLock Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim">ReaderWriterLockSlim</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlock">ReaderWriterLock Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.readerwriterlockslim">ReaderWriterLockSlim</a></li>
 </ul>
 

@@ -16,15 +16,15 @@ public interface IEmpty
 </pre>
 <h3>Exceptions</h3>
 <ul>
-  <li> Partial classes are ignored entirely, as source generators often use them. </li>
-  <li> Classes with names ending in <code>Command</code>, <code>Message</code>, <code>Event</code>, or <code>Query</code> are ignored as messaging
-  libraries often use them. </li>
-  <li> Subclasses of <code>System.Exception</code> are ignored; even an empty Exception class can provide helpful information by its type name alone.
-  </li>
-  <li> Subclasses of <code>System.Attribute</code> and classes annotated with attributes are ignored. </li>
-  <li> Subclasses of generic classes are ignored, as they can be used for type specialization even when empty. </li>
-  <li> Subclasses of certain framework types — like the <code>PageModel</code> class used in ASP.NET Core Razor Pages — are ignored. </li>
-  <li> Subclass of a class with non-public default constructors are ignored, as they widen the constructor accessibility. </li>
+  <li>Partial classes are ignored entirely, as source generators often use them.</li>
+  <li>Classes with names ending in <code>Command</code>, <code>Message</code>, <code>Event</code>, or <code>Query</code> are ignored as messaging
+  libraries often use them.</li>
+  <li>Subclasses of <code>System.Exception</code> are ignored; even an empty Exception class can provide helpful information by its type name
+  alone.</li>
+  <li>Subclasses of <code>System.Attribute</code> and classes annotated with attributes are ignored.</li>
+  <li>Subclasses of generic classes are ignored, as they can be used for type specialization even when empty.</li>
+  <li>Subclasses of certain framework types — like the <code>PageModel</code> class used in ASP.NET Core Razor Pages — are ignored.</li>
+  <li>Subclass of a class with non-public default constructors are ignored, as they widen the constructor accessibility.</li>
 </ul>
 <pre>
 using Microsoft.AspNetCore.Mvc.RazorPages;

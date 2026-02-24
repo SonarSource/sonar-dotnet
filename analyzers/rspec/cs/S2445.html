@@ -3,7 +3,9 @@
 field itself, but on the object assigned to it. Thus, there are some good practices to follow to avoid problems related to <a
 href="https://learn.microsoft.com/en-us/dotnet/standard/threading/threads-and-threading">thread</a> synchronization.</p>
 <ul>
-  <li> Locking on a non-<code>readonly</code> field makes it possible for the field’s value to change while a thread is in the code block, locked on the old value. This allows another thread to lock on the new value and access the same block concurrently. <pre>
+  <li>Locking on a non-<code>readonly</code> field makes it possible for the field’s value to change while a thread is in the code block, locked on
+  the old value. This allows another thread to lock on the new value and access the same block concurrently.
+    <pre>
 private Color color = new Color("red");
 private void DoSomething()
 {
@@ -15,8 +17,10 @@ private void DoSomething()
     // ...
   }
 }
-</pre> </li>
-  <li> Locking on a new instance of an object undermines synchronization because two different threads running the same method in parallel will lock on different instances of the same object, allowing them to access the synchronized block at the same time. <pre>
+</pre></li>
+  <li>Locking on a new instance of an object undermines synchronization because two different threads running the same method in parallel will lock on
+  different instances of the same object, allowing them to access the synchronized block at the same time.
+    <pre>
 private void DoSomething()
 {
   lock (new object()) // Noncompliant: every thread locks on a different new instance
@@ -24,8 +28,10 @@ private void DoSomething()
     // ...
   }
 }
-</pre> </li>
-  <li> Locking on a string literal is also dangerous since, depending on whether the string is interned or not, different threads may or may not synchronize on the same object instance. <pre>
+</pre></li>
+  <li>Locking on a string literal is also dangerous since, depending on whether the string is interned or not, different threads may or may not
+  synchronize on the same object instance.
+    <pre>
 private readonly string colorString = "red";
 private void DoSomething()
 {
@@ -34,7 +40,7 @@ private void DoSomething()
     // ...
   }
 }
-</pre> </li>
+</pre></li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -69,11 +75,11 @@ private void DoSomething()
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock">Lock Statement</a> - lock statement - ensure
-  exclusive access to a shared resource </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern">String.Intern</a> - <code>String.Intern(String)</code> Method </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/412">CWE-412 - Unrestricted Externally Accessible Lock</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/413">CWE-413 - Improper Resource Locking</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/threads-and-threading">Threads and threading</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock">Lock Statement</a> - lock statement - ensure
+  exclusive access to a shared resource</li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.intern">String.Intern</a> - <code>String.Intern(String)</code> Method</li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/412">CWE-412 - Unrestricted Externally Accessible Lock</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/413">CWE-413 - Improper Resource Locking</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/threads-and-threading">Threads and threading</a></li>
 </ul>
 

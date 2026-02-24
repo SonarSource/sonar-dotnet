@@ -4,9 +4,9 @@ be much slower than a simple field access, contrary to the caller’s likely exp
 so that callers are not surprised by the unexpectedly poor performance.</p>
 <p>This rule tracks calls to the following methods inside properties:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.tolist">Enumerable.ToList</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toarray">Enumerable.ToArray</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.clone">Array.Clone</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.tolist">Enumerable.ToList</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toarray">Enumerable.ToArray</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.clone">Array.Clone</a></li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -31,12 +31,12 @@ public IEnumerable&lt;string&gt; GetBar() =&gt; (string[])bar.Clone();
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">Properties (C# Programming
-  Guide)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields">Fields (C# Programming Guide)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections">Collections (C#)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.tolist">Enumerable.ToList</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toarray">Enumerable.ToArray</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.clone">Array.Clone</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties">Properties (C# Programming
+  Guide)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/fields">Fields (C# Programming Guide)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/collections">Collections (C#)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.tolist">Enumerable.ToList</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.toarray">Enumerable.ToArray</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.clone">Array.Clone</a></li>
 </ul>
 

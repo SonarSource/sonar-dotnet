@@ -4,17 +4,17 @@ or indexing mismatch can lead to unexpected behaviors or runtime errors. The pur
 strings used in various string formatting functions to ensure their correct usage. This rule validates the proper behavior of composite formats when
 invoking the following methods:</p>
 <ul>
-  <li> <code>String.Format</code> </li>
-  <li> <code>StringBuilder.AppendFormat</code> </li>
-  <li> <code>Console.Write</code> </li>
-  <li> <code>Console.WriteLine</code> </li>
-  <li> <code>TextWriter.Write</code> </li>
-  <li> <code>TextWriter.WriteLine</code> </li>
-  <li> <code>Debug.WriteLine(String, Object[])</code> </li>
-  <li> <code>Trace.TraceError(String, Object[])</code> </li>
-  <li> <code>Trace.TraceInformation(String, Object[])</code> </li>
-  <li> <code>Trace.TraceWarning(String, Object[])</code> </li>
-  <li> <code>TraceSource.TraceInformation(String, Object[])</code> </li>
+  <li><code>String.Format</code></li>
+  <li><code>StringBuilder.AppendFormat</code></li>
+  <li><code>Console.Write</code></li>
+  <li><code>Console.WriteLine</code></li>
+  <li><code>TextWriter.Write</code></li>
+  <li><code>TextWriter.WriteLine</code></li>
+  <li><code>Debug.WriteLine(String, Object[])</code></li>
+  <li><code>Trace.TraceError(String, Object[])</code></li>
+  <li><code>Trace.TraceInformation(String, Object[])</code></li>
+  <li><code>Trace.TraceWarning(String, Object[])</code></li>
+  <li><code>TraceSource.TraceInformation(String, Object[])</code></li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -37,30 +37,32 @@ s = string.Format("no format"); // Compliant
 <p>The rule does not perform any checks on the format specifier, if present (defined after the <code>:</code>). Moreover, no issues are raised in the
 following cases:</p>
 <ul>
-  <li> the format string is not a <code>const</code>. <pre>
+  <li>the format string is not a <code>const</code>.
+    <pre>
 var pattern = "{0} {1} {2}";
 var res = string.Format(pattern, 1, 2); // Compliant, non-constant string are not recognized
-</pre> </li>
-  <li> the argument is not an inline creation array. <pre>
+</pre></li>
+  <li>the argument is not an inline creation array.
+    <pre>
 var array = new int[] {};
 var res = string.Format("{0} {1}", array); // Compliant the rule does not check the size of the array
-</pre> </li>
+</pre></li>
 </ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting">Composite formatting</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.format">String.Format</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder.appendformat">StringBuilder.AppendFormat</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.write">Console.Write</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.writeline">Console.WriteLine</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.write">TextWriter.Write</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.writeline">TextWriter.WriteLine</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.writeline">Debug.WriteLine</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror">Trace.TraceError</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation">Trace.TraceInformation</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning">Trace.TraceWarning</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracesource.traceinformation">TraceSource.TraceInformation</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/formatting-types">Standard format strings</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/composite-formatting">Composite formatting</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.format">String.Format</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder.appendformat">StringBuilder.AppendFormat</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.write">Console.Write</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.console.writeline">Console.WriteLine</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.write">TextWriter.Write</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.textwriter.writeline">TextWriter.WriteLine</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.debug.writeline">Debug.WriteLine</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceerror">Trace.TraceError</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.traceinformation">Trace.TraceInformation</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.trace.tracewarning">Trace.TraceWarning</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.tracesource.traceinformation">TraceSource.TraceInformation</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/formatting-types">Standard format strings</a></li>
 </ul>
 

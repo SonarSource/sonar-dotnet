@@ -8,9 +8,9 @@ href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/#c
 <code>Any</code> closer to the performance of collection-specific <code>Exists</code> methods in most scenarios.</p>
 <p><strong>Applies to</strong></p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.exists">List</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.exists">Array</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.exists">ImmutableList</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.exists">List</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.exists">Array</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.exists">ImmutableList</a></li>
 </ul>
 <h3>What is the potential impact?</h3>
 <p>We measured at least 3x improvement in execution time. For more details see the <code>Benchmarks</code> section from the <code>More info</code>
@@ -46,16 +46,15 @@ bool ContainsEven(int[] data) =&gt;
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.exists">List&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.exists">Array.Exists&lt;T&gt;(T[], Predicate&lt;T&gt;)</a>
-  </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.exists">ImmutableList&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any(Predicate&lt;T&gt;)</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to
-  Entities</a> </li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.exists">List&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.array.exists">Array.Exists&lt;T&gt;(T[],
+  Predicate&lt;T&gt;)</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablelist-1.exists">ImmutableList&lt;T&gt;.Exists(Predicate&lt;T&gt;)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any(Predicate&lt;T&gt;)</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to
+  Entities</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -79,68 +78,44 @@ bool ContainsEven(int[] data) =&gt;
   </thead>
   <tbody>
     <tr>
-      <td><p>ArrayAny</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>1,174.0 ns</p></td>
-      <td><p>16.44 ns</p></td>
-      <td><p>32 B</p></td>
+      <td>
+        <p>ArrayAny</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>1,174.0 ns</p>
+      </td>
+      <td>
+        <p>16.44 ns</p>
+      </td>
+      <td>
+        <p>32 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ArrayExists</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>570.6 ns</p></td>
-      <td><p>7.12 ns</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ArrayAny</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>358.5 ns</p></td>
-      <td><p>5.57 ns</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayExists</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>Array</p></td>
-      <td><p>581.6 ns</p></td>
-      <td><p>6.17 ns</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ArrayAny</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>4,896.0 ns</p></td>
-      <td><p>102.83 ns</p></td>
-      <td><p>32 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ArrayExists</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>Array</p></td>
-      <td><p>1,649.4 ns</p></td>
-      <td><p>29.81 ns</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ArrayExists</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>570.6 ns</p>
+      </td>
+      <td>
+        <p>7.12 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -151,68 +126,44 @@ bool ContainsEven(int[] data) =&gt;
       <td></td>
     </tr>
     <tr>
-      <td><p>ImmutableListAny</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>7,859.3 ns</p></td>
-      <td><p>91.45 ns</p></td>
-      <td><p>72 B</p></td>
+      <td>
+        <p>ArrayAny</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>358.5 ns</p>
+      </td>
+      <td>
+        <p>5.57 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ImmutableListExists</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>5,898.1 ns</p></td>
-      <td><p>81.69 ns</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListAny</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>7,748.9 ns</p></td>
-      <td><p>119.10 ns</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListExists</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>5,705.0 ns</p></td>
-      <td><p>31.53 ns</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListAny</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>45,118.5 ns</p></td>
-      <td><p>168.72 ns</p></td>
-      <td><p>72 B</p></td>
-    </tr>
-    <tr>
-      <td><p>ImmutableListExists</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>ImmutableList&lt;T&gt;</p></td>
-      <td><p>41,966.0 ns</p></td>
-      <td><p>631.59 ns</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ArrayExists</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>581.6 ns</p>
+      </td>
+      <td>
+        <p>6.17 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -223,20 +174,44 @@ bool ContainsEven(int[] data) =&gt;
       <td></td>
     </tr>
     <tr>
-      <td><p>ListAny</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>1,643.5 ns</p></td>
-      <td><p>13.09 ns</p></td>
-      <td><p>40 B</p></td>
+      <td>
+        <p>ArrayAny</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>4,896.0 ns</p>
+      </td>
+      <td>
+        <p>102.83 ns</p>
+      </td>
+      <td>
+        <p>32 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ListExists</p></td>
-      <td><p>.NET 8.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>726.2 ns</p></td>
-      <td><p>11.99 ns</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ArrayExists</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>Array</p>
+      </td>
+      <td>
+        <p>1,649.4 ns</p>
+      </td>
+      <td>
+        <p>29.81 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -247,20 +222,44 @@ bool ContainsEven(int[] data) =&gt;
       <td></td>
     </tr>
     <tr>
-      <td><p>ListAny</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>398.6 ns</p></td>
-      <td><p>8.20 ns</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ImmutableListAny</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>7,859.3 ns</p>
+      </td>
+      <td>
+        <p>91.45 ns</p>
+      </td>
+      <td>
+        <p>72 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ListExists</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>612.4 ns</p></td>
-      <td><p>18.73 ns</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ImmutableListExists</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>5,898.1 ns</p>
+      </td>
+      <td>
+        <p>81.69 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -271,28 +270,244 @@ bool ContainsEven(int[] data) =&gt;
       <td></td>
     </tr>
     <tr>
-      <td><p>ListAny</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>5,621.5 ns</p></td>
-      <td><p>35.80 ns</p></td>
-      <td><p>40 B</p></td>
+      <td>
+        <p>ImmutableListAny</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>7,748.9 ns</p>
+      </td>
+      <td>
+        <p>119.10 ns</p>
+      </td>
+      <td>
+        <p>72 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>ListExists</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>List&lt;T&gt;</p></td>
-      <td><p>1,748.0 ns</p></td>
-      <td><p>11.76 ns</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>ImmutableListExists</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>5,705.0 ns</p>
+      </td>
+      <td>
+        <p>31.53 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ImmutableListAny</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>45,118.5 ns</p>
+      </td>
+      <td>
+        <p>168.72 ns</p>
+      </td>
+      <td>
+        <p>72 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ImmutableListExists</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>ImmutableList&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>41,966.0 ns</p>
+      </td>
+      <td>
+        <p>631.59 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListAny</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>1,643.5 ns</p>
+      </td>
+      <td>
+        <p>13.09 ns</p>
+      </td>
+      <td>
+        <p>40 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListExists</p>
+      </td>
+      <td>
+        <p>.NET 8.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>726.2 ns</p>
+      </td>
+      <td>
+        <p>11.99 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListAny</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>398.6 ns</p>
+      </td>
+      <td>
+        <p>8.20 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListExists</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>612.4 ns</p>
+      </td>
+      <td>
+        <p>18.73 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListAny</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>5,621.5 ns</p>
+      </td>
+      <td>
+        <p>35.80 ns</p>
+      </td>
+      <td>
+        <p>40 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>ListExists</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>List&lt;T&gt;</p>
+      </td>
+      <td>
+        <p>1,748.0 ns</p>
+      </td>
+      <td>
+        <p>11.76 ns</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <h4>Glossary</h4>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a> </li>
+  <li><a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a></li>
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>

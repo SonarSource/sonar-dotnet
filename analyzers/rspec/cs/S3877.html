@@ -13,35 +13,34 @@ public override string ToString()
 </pre>
 <p>An issue is raised when an exception is thrown from any of the following:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.tostring">ToString</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.equals">Object.Equals</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1.equals">IEquatable.Equals</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gethashcode">GetHashCode</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose">IDisposable.Dispose</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-implement-custom-event-accessors">Event accessors</a>
-  </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors">static constructors</a>
-  </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/module-initializers">Module initializers</a>
-  </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading">https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/user-defined-conversion-operators">implicit cast
-  operators</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.tostring">ToString</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.equals">Object.Equals</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.iequatable-1.equals">IEquatable.Equals</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.object.gethashcode">GetHashCode</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.idisposable.dispose">IDisposable.Dispose</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-implement-custom-event-accessors">Event
+  accessors</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/static-constructors">static constructors</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-9.0/module-initializers">Module
+  initializers</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading">https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/user-defined-conversion-operators">implicit cast
+  operators</a></li>
 </ul>
 <h3>Exceptions</h3>
 <p>Certain exceptions will be ignored in specific contexts, thus not raising the issue:</p>
 <ul>
-  <li> <code>System.NotImplementedException</code> and its derivatives are ignored for all the aforementioned. </li>
-  <li> <code>System.InvalidOperationException</code>, <code>System.NotSupportedException</code>, and <code>System.ArgumentException</code> and their
-  derivatives are ignored in event accessors. </li>
+  <li><code>System.NotImplementedException</code> and its derivatives are ignored for all the aforementioned.</li>
+  <li><code>System.InvalidOperationException</code>, <code>System.NotSupportedException</code>, and <code>System.ArgumentException</code> and their
+  derivatives are ignored in event accessors.</li>
 </ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/">Exceptions and Exception Handling</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions">Best practices for exceptions</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1065">CA1065: Do not raise exceptions in
-  unexpected locations</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/exceptions/">Exceptions and Exception Handling</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/exceptions/best-practices-for-exceptions">Best practices for exceptions</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1065">CA1065: Do not raise exceptions in unexpected
+  locations</a></li>
 </ul>
 

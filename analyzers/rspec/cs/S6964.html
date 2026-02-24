@@ -22,19 +22,18 @@ public class ProductsController : Controller
 <h3>Exceptions</h3>
 <p>This rule does not raise an issue when properties are decorated with the following attributes:</p>
 <ul>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.validation.validateneverattribute">ValidateNever</a> </li>
-  <li> <a href="https://www.newtonsoft.com/json/help/html/JsonPropertyRequired.htm">JsonProperty(Required = Required.Always)</a> </li>
-  <li> <a href="https://www.newtonsoft.com/json/help/html/JsonPropertyRequired.htm">JsonProperty(Required = Required.AllowNull)</a> </li>
-  <li> <a href="https://www.newtonsoft.com/json/help/html/PropertyJsonIgnore.htm">Newtonsoft.Json.JsonIgnore</a> </li>
-  <li> <a href="https://www.newtonsoft.com/json/help/html/t_newtonsoft_json_jsonrequiredattribute.htm">Newtonsoft.Json.JsonRequired</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonrequiredattribute">System.Text.Json.Serialization.JsonRequired</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonignoreattribute">System.Text.Json.Serialization.JsonIgnore</a>
-  </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.rangeattribute">Range</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.bindneverattribute">BindNever</a> </li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.validation.validateneverattribute">ValidateNever</a></li>
+  <li><a href="https://www.newtonsoft.com/json/help/html/JsonPropertyRequired.htm">JsonProperty(Required = Required.Always)</a></li>
+  <li><a href="https://www.newtonsoft.com/json/help/html/JsonPropertyRequired.htm">JsonProperty(Required = Required.AllowNull)</a></li>
+  <li><a href="https://www.newtonsoft.com/json/help/html/PropertyJsonIgnore.htm">Newtonsoft.Json.JsonIgnore</a></li>
+  <li><a href="https://www.newtonsoft.com/json/help/html/t_newtonsoft_json_jsonrequiredattribute.htm">Newtonsoft.Json.JsonRequired</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonrequiredattribute">System.Text.Json.Serialization.JsonRequired</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.text.json.serialization.jsonignoreattribute">System.Text.Json.Serialization.JsonIgnore</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.rangeattribute">Range</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.bindneverattribute">BindNever</a></li>
 </ul>
 <p>Additionally, this rule does not raise for properties in model classes that are not in the same project as the Controller class that references
 them. This is due to a limitation of Roslyn (see <a href="https://github.com/SonarSource/sonar-dotnet/issues/9243">here</a>).</p>
@@ -70,8 +69,8 @@ public class Product
 </pre>
 <p>In this example, the request handler method can</p>
 <ul>
-  <li> manually check whether <code>NumberOfItems</code> was filled out through the <code>HasValue</code> property </li>
-  <li> rely on Model Validation to make sure <code>Price</code> is not missing </li>
+  <li>manually check whether <code>NumberOfItems</code> was filled out through the <code>HasValue</code> property</li>
+  <li>rely on Model Validation to make sure <code>Price</code> is not missing</li>
 </ul>
 <pre>
 public class ProductsController : Controller
@@ -94,33 +93,33 @@ public class ProductsController : Controller
 </pre>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Client-Side Validation: While server-side validation is crucial, implementing client-side validation can provide immediate feedback to the user
-  when certain fields are not filled out, which helps to avoid under-posting. </li>
-  <li> Comprehensive Testing: Include testing scenarios that specifically check for under-posting vulnerabilities to ensure that all required data is
-  correctly validated and processed. </li>
+  <li>Client-Side Validation: While server-side validation is crucial, implementing client-side validation can provide immediate feedback to the user
+  when certain fields are not filled out, which helps to avoid under-posting.</li>
+  <li>Comprehensive Testing: Include testing scenarios that specifically check for under-posting vulnerabilities to ensure that all required data is
+  correctly validated and processed.</li>
 </ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">Overview of ASP.NET Core MVC</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started">Overview of
-  ASP.NET MVC 5</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages">Overview of ASP.NET Razor Pages</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model">Model Classes in ASP.NET MVC</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">Model Binding in ASP.NET Core</a> </li>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/overview">Overview of ASP.NET Core MVC</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/mvc/overview/getting-started/introduction/getting-started">Overview of
+  ASP.NET MVC 5</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/razor-pages">Overview of ASP.NET Razor Pages</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-model">Model Classes in ASP.NET
+  MVC</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/model-binding">Model Binding in ASP.NET Core</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api">Model Validation in
-  ASP.NET Web API</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">Nullable
-  Value Types in .NET</a> </li>
-  <li> Microsoft Learn - <a
+  ASP.NET Web API</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types">Nullable Value
+  Types in .NET</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/aspnet/web-api/overview/formats-and-model-binding/model-validation-in-aspnet-web-api#data-annotations">Data
-  Annotations</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute">RequiredAttribute
-  Class</a> </li>
-  <li> Microsoft Learn - <a
+  Annotations</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.routing.httpmethodattribute">RequiredAttribute
+  Class</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.validation.validateneverattribute">ValidateNeverAttribute
-  Class</a> </li>
+  Class</a></li>
 </ul>
 

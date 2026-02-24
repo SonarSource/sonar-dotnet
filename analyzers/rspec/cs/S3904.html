@@ -4,16 +4,16 @@ specify the version number of an assembly. An assembly is a compiled unit of cod
 to an assembly’s source code file.</p>
 <p>The <code>AssemblyVersion</code> attribute is useful for many reasons:</p>
 <ul>
-  <li> <strong>Versioning</strong>: The attribute allows developers to track and manage different versions of an assembly. By incrementing the version
+  <li><strong>Versioning</strong>: The attribute allows developers to track and manage different versions of an assembly. By incrementing the version
   number for each new release, you can easily identify and differentiate between different versions of the same assembly. This is particularly useful
-  when distributing and deploying software, as it helps manage updates and compatibility between different versions. </li>
-  <li> <strong>Dependency management</strong>: When an assembly references another assembly, it can specify the specific version of the dependency it
+  when distributing and deploying software, as it helps manage updates and compatibility between different versions.</li>
+  <li><strong>Dependency management</strong>: When an assembly references another assembly, it can specify the specific version of the dependency it
   requires. By using the <code>AssemblyVersion</code> attribute, you can ensure that the correct version of the referenced assembly is used. This
-  helps avoid compatibility issues and ensures that the expected behavior and functionality are maintained. </li>
-  <li> <strong>GAC management</strong>: The <a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/gac">GAC</a>, also known as Global
+  helps avoid compatibility issues and ensures that the expected behavior and functionality are maintained.</li>
+  <li><strong>GAC management</strong>: The <a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/gac">GAC</a>, also known as Global
   Assembly Cache, is a central repository for storing shared assemblies on a system. The AssemblyVersion attribute plays a crucial role in managing
-  assemblies in the GAC. Different versions of an assembly can coexist in the GAC, allowing applications to use the specific version they require.
-  </li>
+  assemblies in the GAC. Different versions of an assembly can coexist in the GAC, allowing applications to use the specific version they
+  require.</li>
 </ul>
 <p>If no <code>AssemblyVersion</code> is provided, the same default version will be used for every build. Since the version number is used by .NET
 Framework to uniquely identify an assembly, this can lead to broken dependencies.</p>
@@ -43,7 +43,7 @@ namespace MyLibrary
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning">Assembly Versioning</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/gac">Global Assembly Cache</a> </li>
+  <li><a href="https://docs.microsoft.com/en-us/dotnet/standard/assembly/versioning">Assembly Versioning</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/framework/app-domains/gac">Global Assembly Cache</a></li>
 </ul>
 

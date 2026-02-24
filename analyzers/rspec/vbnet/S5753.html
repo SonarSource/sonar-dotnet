@@ -6,14 +6,14 @@ type="text/javascript" src="https://malicious.domain/payload.js"&gt;</code> to r
 <p>Note: <em>Request Validation</em> feature being only available for ASP.NET, no Security Hotspot is raised on ASP.NET Core applications.</p>
 <h2>Ask Yourself Whether</h2>
 <ul>
-  <li> the developer doesn’t know the impact to deactivate the Request Validation feature </li>
-  <li> the web application accepts user-supplied data </li>
-  <li> all user-supplied data are not validated </li>
+  <li>the developer doesn’t know the impact to deactivate the Request Validation feature</li>
+  <li>the web application accepts user-supplied data</li>
+  <li>all user-supplied data are not validated</li>
 </ul>
 <p>There is a risk if you answered yes to any of those questions.</p>
 <h2>Recommended Secure Coding Practices</h2>
 <ul>
-  <li> Activate the Request Validation feature for all HTTP requests </li>
+  <li>Activate the Request Validation feature for all HTTP requests</li>
 </ul>
 <h2>Sensitive Code Example</h2>
 <p>At Controller level:</p>
@@ -59,15 +59,15 @@ End Function
 </pre>
 <h2>See</h2>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A03_2021-Injection/">Top 10 2021 Category A3 - Injection</a> </li>
-  <li> <a
-  href="https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode?view=netframework-4.8">HttpRuntimeSection.RequestValidationMode Property</a> </li>
-  <li> <a href="https://owasp.org/www-community/ASP-NET_Request_Validation">OWASP ASP.NET Request Validation</a> </li>
-  <li> <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP Cheat Sheet</a> - XSS
-  Prevention Cheat Sheet </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A7_2017-Cross-Site_Scripting_(XSS)">Top 10 2017 Category A7 - Cross-Site Scripting
-  (XSS)</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/79">CWE-79 - Improper Neutralization of Input During Web Page Generation ('Cross-site
-  Scripting')</a> </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A03_2021-Injection/">Top 10 2021 Category A3 - Injection</a></li>
+  <li><a
+  href="https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode?view=netframework-4.8">HttpRuntimeSection.RequestValidationMode Property</a></li>
+  <li><a href="https://owasp.org/www-community/ASP-NET_Request_Validation">OWASP ASP.NET Request Validation</a></li>
+  <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP Cheat Sheet</a> - XSS Prevention
+  Cheat Sheet</li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A7_2017-Cross-Site_Scripting_(XSS)">Top 10 2017 Category A7 - Cross-Site Scripting
+  (XSS)</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/79">CWE-79 - Improper Neutralization of Input During Web Page Generation ('Cross-site
+  Scripting')</a></li>
 </ul>
 

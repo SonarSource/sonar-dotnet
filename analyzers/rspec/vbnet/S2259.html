@@ -42,11 +42,11 @@ End Sub
 the developer to annotate methods with information about the null-state of its arguments. Thus, potential <code>Nothing</code> values validated by one
 of the following attributes will not raise:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullwhenattribute">NotNullWhenAttribute</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute">DoesNotReturnAttribute</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnifattribute">DoesNotReturnIfAttribute</a>
-  </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullwhenattribute">NotNullWhenAttribute</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute">DoesNotReturnAttribute</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnifattribute">DoesNotReturnIfAttribute</a></li>
 </ul>
 <p>It is important to note those attributes are only available starting .NET Core 3. As a workaround, it is possible to define those attributes
 manually in a custom class:</p>
@@ -84,14 +84,16 @@ End Sub
 raise</p>
 <h5>Visual Studio</h5>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.validatednotnullattribute">ValidatedNotNullAttribute</a>  (The attribute is
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.validatednotnullattribute">ValidatedNotNullAttribute</a>  (The attribute is
   interpreted the same as the <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute</a>)  </li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute</a>) </li>
 </ul>
 <h5>JetBrains Rider</h5>
 <ul>
-  <li> <a href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute">NotNullAttribute</a> </li>
-  <li> <a href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute">TerminatesProgramAttribute</a> <pre>
+  <li><a href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute">NotNullAttribute</a></li>
+  <li><a
+  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute">TerminatesProgramAttribute</a>
+    <pre>
 Imports System
 Imports JetBrains.Annotations
 
@@ -107,13 +109,13 @@ Public Class Utils
         MyObject.ToString() ' Compliant: unreachable
     End Sub
 End Class
-</pre> </li>
+</pre></li>
 </ul>
 <h2>How to fix it</h2>
 <p>To fix the issue, the access of the <code>Nothing</code> value needs to be prevented by either:</p>
 <ul>
-  <li> ensuring the variable has a value, or </li>
-  <li> by checking if the value is not <code>Nothing</code> </li>
+  <li>ensuring the variable has a value, or</li>
+  <li>by checking if the value is not <code>Nothing</code></li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -153,30 +155,28 @@ End Sub
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> CVE - <a href="https://cwe.mitre.org/data/definitions/476">CWE-476 - NULL Pointer Dereference</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nullreferenceexception">NullReferenceException Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis">Attributes for
+  <li>CVE - <a href="https://cwe.mitre.org/data/definitions/476">CWE-476 - NULL Pointer Dereference</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.nullreferenceexception">NullReferenceException Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/attributes/nullable-analysis">Attributes for
   null-state static analysis interpreted by the C# compiler</a>
     <ul>
-      <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute
-      Class</a> </li>
-      <li> Microsoft Learn - <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullwhenattribute">NotNullWhenAttribute Class</a> </li>
-      <li> Microsoft Learn - <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute">DoesNotReturnAttribute Class</a>
-      </li>
-      <li> Microsoft Learn - <a
-      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnifattribute">DoesNotReturnIfAttribute Class</a>
-      </li>
-    </ul>  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.validatednotnullattribute">ValidatedNotNullAttribute
-  Class</a> in Visual Studio </li>
-  <li> JetBrains Resharper - <a
-  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute">NotNullAttribute</a> </li>
-  <li> JetBrains Resharper - <a
-  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute">TerminatesProgramAttribute</a>
-  </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/nothing">Nothing keyword (Visual Basic)</a>
-  </li>
+      <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullattribute">NotNullAttribute
+      Class</a></li>
+      <li>Microsoft Learn - <a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.notnullwhenattribute">NotNullWhenAttribute Class</a></li>
+      <li>Microsoft Learn - <a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnattribute">DoesNotReturnAttribute Class</a></li>
+      <li>Microsoft Learn - <a
+      href="https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.codeanalysis.doesnotreturnifattribute">DoesNotReturnIfAttribute
+      Class</a></li>
+    </ul></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.validatednotnullattribute">ValidatedNotNullAttribute Class</a>
+  in Visual Studio</li>
+  <li>JetBrains Resharper - <a
+  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#NotNullAttribute">NotNullAttribute</a></li>
+  <li>JetBrains Resharper - <a
+  href="https://www.jetbrains.com/help/resharper/Reference__Code_Annotation_Attributes.html#TerminatesProgramAttribute">TerminatesProgramAttribute</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/visual-basic/language-reference/nothing">Nothing keyword (Visual
+  Basic)</a></li>
 </ul>
 

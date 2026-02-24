@@ -26,7 +26,8 @@ public class Shape
 to errors and unpredictable behavior.</p>
 <p>This can happen because:</p>
 <ul>
-  <li> Any object can modify these fields and alter the global state. This makes the code more difficult to read, debug and test. <pre>
+  <li>Any object can modify these fields and alter the global state. This makes the code more difficult to read, debug and test.
+    <pre>
 class Counters
 {
     public static int ErrorCounter = 0;
@@ -51,8 +52,10 @@ class Program
         // ...
     }
 }
-</pre> </li>
-  <li> Correctly accessing these fields from different threads needs synchronization with <code>lock</code> or equivalent mechanisms. Improper synchronization may lead to unexpected results. <pre>
+</pre></li>
+  <li>Correctly accessing these fields from different threads needs synchronization with <code>lock</code> or equivalent mechanisms. Improper
+  synchronization may lead to unexpected results.
+    <pre>
 class Counters
 {
     public static volatile int ErrorCounter;
@@ -74,7 +77,7 @@ class Program
         Console.WriteLine(Counters.ErrorCounter); // Always prints 1000
     }
 }
-</pre> </li>
+</pre></li>
 </ul>
 <p>Publicly visible <code>static</code> fields should only be used to store shared data that does not change. To enforce this intent, these fields
 should be marked <code>readonly</code> or converted to <code>const</code>.</p>
@@ -97,16 +100,16 @@ public class Shape
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static">static (C# Reference)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives">Overview of synchronization
-  primitives</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile">volatile (C# Reference)</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static">static (C# Reference)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives">Overview of synchronization
+  primitives</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile">volatile (C# Reference)</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://softwareengineering.stackexchange.com/a/148154">Stack Exchange - Mutable global state is evil and alternatives to it</a> </li>
-  <li> <a href="https://ericlippert.com/2007/11/13/immutability-in-c-part-one-kinds-of-immutability/">Fabulous adventures in coding - Eric Lippert:
-  Immutability in C#</a> </li>
-  <li> <a href="https://stackoverflow.com/a/4628660">Stack Overflow - Eric Lippert: ++ is not "threadsafe"</a> </li>
+  <li><a href="https://softwareengineering.stackexchange.com/a/148154">Stack Exchange - Mutable global state is evil and alternatives to it</a></li>
+  <li><a href="https://ericlippert.com/2007/11/13/immutability-in-c-part-one-kinds-of-immutability/">Fabulous adventures in coding - Eric Lippert:
+  Immutability in C#</a></li>
+  <li><a href="https://stackoverflow.com/a/4628660">Stack Overflow - Eric Lippert: ++ is not "threadsafe"</a></li>
 </ul>
 

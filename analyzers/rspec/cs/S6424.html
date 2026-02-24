@@ -2,11 +2,11 @@
 <p>The recommended way to access Azure Durable Entities is through generated proxy objects with the help of interfaces.</p>
 <p>The following restrictions, during interface design, are enforced:</p>
 <ul>
-  <li> Entity interfaces must be defined in the same assembly as the entity class. This is not detected by the rule. </li>
-  <li> Entity interfaces must only define methods. </li>
-  <li> Entity interfaces must not contain generic parameters. </li>
-  <li> Entity interface methods must not have more than one parameter. </li>
-  <li> Entity interface methods must return void, Task, or Task&lt;T&gt;. </li>
+  <li>Entity interfaces must be defined in the same assembly as the entity class. This is not detected by the rule.</li>
+  <li>Entity interfaces must only define methods.</li>
+  <li>Entity interfaces must not contain generic parameters.</li>
+  <li>Entity interface methods must not have more than one parameter.</li>
+  <li>Entity interface methods must return void, Task, or Task&lt;T&gt;.</li>
 </ul>
 <p>If any of these rules are violated, an <code>InvalidOperationException</code> is thrown at runtime when the interface is used as a type argument to
 <code>IDurableEntityContext.SignalEntity&lt;TEntityInterface&gt;</code>, <code>IDurableEntityClient.SignalEntityAsync&lt;TEntityInterface&gt;</code>
@@ -79,14 +79,14 @@ namespace Bar
 </pre>
 <h2>Resources</h2>
 <ul>
-  <li> <a
-  href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-dotnet-entities#restrictions-on-entity-interfaces">Restrictions on Entity Interfaces</a> </li>
-  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-entities?tabs=csharp">Durable Entities</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentitycontext.signalentity?view=azure-dotnet">IDurableEntityContext.SignalEntity</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentityclient.signalentityasync?view=azure-dotnet">IDurableEntityClient.SignalEntityAsync</a> </li>
-  <li> <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableorchestrationcontext.createentityproxy?view=azure-dotnet">IDurableOrchestrationContext.CreateEntity</a> </li>
+  <li><a
+  href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-dotnet-entities#restrictions-on-entity-interfaces">Restrictions on Entity Interfaces</a></li>
+  <li><a href="https://docs.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-entities?tabs=csharp">Durable Entities</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentitycontext.signalentity?view=azure-dotnet">IDurableEntityContext.SignalEntity</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableentityclient.signalentityasync?view=azure-dotnet">IDurableEntityClient.SignalEntityAsync</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.webjobs.extensions.durabletask.idurableorchestrationcontext.createentityproxy?view=azure-dotnet">IDurableOrchestrationContext.CreateEntity</a></li>
 </ul>
 

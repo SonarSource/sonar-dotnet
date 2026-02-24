@@ -35,10 +35,10 @@ End Sub
 <h3>Exceptions</h3>
 <p>No issue is reported when <code>StringBuilder</code> is:</p>
 <ul>
-  <li> Accessed through <code>sb.CopyTo()</code>, <code>sb.GetChunks()</code>, <code>sb.Length</code>, or <code>sb(index)</code>. </li>
-  <li> Passed as a method argument, on the grounds that it will likely be accessed through a <code>ToString()</code> invocation there. </li>
-  <li> Passed in as a parameter to the current method, on the grounds that the callee will materialize the string. </li>
-  <li> Retrieved by a custom function (<code>Dim sb As StringBuilder = GetStringBuilder()</code>). </li>
-  <li> Returned by the method. </li>
+  <li>Accessed through <code>sb.CopyTo()</code>, <code>sb.GetChunks()</code>, <code>sb.Length</code>, or <code>sb(index)</code>.</li>
+  <li>Passed as a method argument, on the grounds that it will likely be accessed through a <code>ToString()</code> invocation there.</li>
+  <li>Passed in as a parameter to the current method, on the grounds that the callee will materialize the string.</li>
+  <li>Retrieved by a custom function (<code>Dim sb As StringBuilder = GetStringBuilder()</code>).</li>
+  <li>Returned by the method.</li>
 </ul>
 

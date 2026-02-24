@@ -89,40 +89,40 @@ href="https://learn.microsoft.com/en-us/dotnet/api/system.xml.serialization.xmls
 href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datacontractserializer"><code>DataContractSerializer</code></a>.</p>
 <p>If it’s not possible then try to mitigate the risk by restricting the types allowed to be deserialized:</p>
 <ul>
-  <li> by implementing an "allow-list" of types, but keep in mind that novel dangerous types are regularly discovered and this protection could be
-  insufficient over time. </li>
-  <li> or/and implementing a tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC). This way
-  only objects serialized with the correct MAC hash will be deserialized. </li>
+  <li>by implementing an "allow-list" of types, but keep in mind that novel dangerous types are regularly discovered and this protection could be
+  insufficient over time.</li>
+  <li>or/and implementing a tamper protection, such as <a href="https://en.wikipedia.org/wiki/HMAC">message authentication codes</a> (MAC). This way
+  only objects serialized with the correct MAC hash will be deserialized.</li>
 </ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter">BinaryFormatter Class</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer">NetDataContractSerializer Class</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter">SoapFormatter Class</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer">JavaScriptSerializer Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.xml.serialization.xmlserializer">XmlSerializer Class</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datacontractserializer">DataContractSerializer Class</a> </li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.binary.binaryformatter">BinaryFormatter Class</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.netdatacontractserializer">NetDataContractSerializer Class</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.formatters.soap.soapformatter">SoapFormatter Class</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.web.script.serialization.javascriptserializer">JavaScriptSerializer Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.xml.serialization.xmlserializer">XmlSerializer Class</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.serialization.datacontractserializer">DataContractSerializer Class</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://docs.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-security-guide?s=03">Deserialization
-  risks in use of BinaryFormatter and related types</a> </li>
-  <li> OWASP - <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Deserialization_Cheat_Sheet.md">Deserialization Cheat
-  Sheet</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/HMAC">Message Authentication Codes (MAC)</a> </li>
+  <li>Microsoft Learn - <a href="https://docs.microsoft.com/en-us/dotnet/standard/serialization/binaryformatter-security-guide?s=03">Deserialization
+  risks in use of BinaryFormatter and related types</a></li>
+  <li>OWASP - <a href="https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Deserialization_Cheat_Sheet.md">Deserialization Cheat
+  Sheet</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/HMAC">Message Authentication Codes (MAC)</a></li>
 </ul>
 <h3>Standards</h3>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/">Top 10 2021 Category A8 - Software and Data Integrity
-  Failures</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A8_2017-Insecure_Deserialization">Top 10 2017 Category A8 - Insecure
-  Deserialization</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/502">CWE-502 - Deserialization of Untrusted Data</a> </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A08_2021-Software_and_Data_Integrity_Failures/">Top 10 2021 Category A8 - Software and Data Integrity
+  Failures</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A8_2017-Insecure_Deserialization">Top 10 2017 Category A8 - Insecure
+  Deserialization</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/502">CWE-502 - Deserialization of Untrusted Data</a></li>
 </ul>
 

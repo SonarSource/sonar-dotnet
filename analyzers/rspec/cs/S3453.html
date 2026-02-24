@@ -3,12 +3,12 @@
 <a href="https://en.wikipedia.org/wiki/Dead_code">dead code</a> and should be fixed</p>
 <h3>Exceptions</h3>
 <ul>
-  <li> Classes that access their private constructors (<a href="https://en.wikipedia.org/wiki/Singleton_pattern">singletons</a> or <a
+  <li>Classes that access their private constructors (<a href="https://en.wikipedia.org/wiki/Singleton_pattern">singletons</a> or <a
   href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/enumeration-classes-over-enum-types">smart
-  enums</a>) are ignored. </li>
-  <li> Classes with only <code>static</code> members are also ignored because they are covered by Rule {rule:csharpsquid:S1118}. </li>
-  <li> Classes that derive from <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">SafeHandle</a> since
-  they can be instantiate through <a href="https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke">P/Invoke</a>. </li>
+  enums</a>) are ignored.</li>
+  <li>Classes with only <code>static</code> members are also ignored because they are covered by Rule {rule:csharpsquid:S1118}.</li>
+  <li>Classes that derive from <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">SafeHandle</a> since
+  they can be instantiate through <a href="https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke">P/Invoke</a>.</li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -29,18 +29,18 @@ public class MyClass // Compliant: the class contains at least one non-private c
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> {rule:csharpsquid:S1118} - Utility classes should not have public constructors </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">SafeHandle Class</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke">Platform Invoke (P/Invoke)</a> </li>
-  <li> Microsoft Learn - <a
+  <li>{rule:csharpsquid:S1118} - Utility classes should not have public constructors</li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">SafeHandle Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke">Platform Invoke (P/Invoke)</a></li>
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/enumeration-classes-over-enum-types">Use
-  enumeration classes instead of enum types</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Dead_code">Dead code</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Singleton_pattern">Singleton pattern</a> </li>
+  enumeration classes instead of enum types</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Dead_code">Dead code</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Singleton_pattern">Singleton pattern</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> C# in Depth - <a href="https://csharpindepth.com/articles/singleton">Implementing the Singleton Pattern in C#</a> </li>
-  <li> Medium - <a href="https://medium.com/null-exception/making-enums-smarter-in-c-518108cdaa73">Making enums smarter in C#</a> </li>
+  <li>C# in Depth - <a href="https://csharpindepth.com/articles/singleton">Implementing the Singleton Pattern in C#</a></li>
+  <li>Medium - <a href="https://medium.com/null-exception/making-enums-smarter-in-c-518108cdaa73">Making enums smarter in C#</a></li>
 </ul>
 

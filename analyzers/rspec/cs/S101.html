@@ -13,11 +13,11 @@ class SomeName42 {...}
 </pre>
 <h3>Exceptions</h3>
 <ul>
-  <li> The rule ignores types marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>. </li>
-  <li> To reduce noise, two consecutive upper case characters are allowed unless they form the full type name. So, <code>MyXClass</code> is compliant,
-  but <code>XC</code> is not. </li>
-  <li> The rule allows having <code>'_'</code> characters in class names inside test projects: in that case, each word separated by <code>'_'</code>
-  should be PascalCased. </li>
+  <li>The rule ignores types marked with <code>ComImportAttribute</code> or <code>InterfaceTypeAttribute</code>.</li>
+  <li>To reduce noise, two consecutive upper case characters are allowed unless they form the full type name. So, <code>MyXClass</code> is compliant,
+  but <code>XC</code> is not.</li>
+  <li>The rule allows having <code>'_'</code> characters in class names inside test projects: in that case, each word separated by <code>'_'</code>
+  should be PascalCased.</li>
 </ul>
 <pre>
 class Some_Name___42 {...} // Compliant in tests
@@ -27,7 +27,7 @@ class Some_Name_XC {...} // Noncompliant because of XC, should be Some_Name_Xc
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions">Microsoft Capitalization
-  Conventions</a> </li>
+  <li><a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions">Microsoft Capitalization
+  Conventions</a></li>
 </ul>
 

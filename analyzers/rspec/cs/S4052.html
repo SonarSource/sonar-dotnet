@@ -4,15 +4,15 @@
 collections should be used instead of the older, non-generic, ones. Finally when creating an XML view, you should not extend
 <code>System.Xml.XmlDocument</code>. This rule raises an issue when an externally visible type extends one of these types:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.applicationexception">System.ApplicationException</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.xml.xmldocument">System.Xml.XmlDocument</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.collectionbase">System.Collections.CollectionBase</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.dictionarybase">System.Collections.DictionaryBase</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.queue">System.Collections.Queue</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.readonlycollectionbase">System.Collections.ReadOnlyCollectionBase</a>
-  </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.sortedlist">System.Collections.SortedList</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.stack">System.Collections.Stack</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.applicationexception">System.ApplicationException</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.xml.xmldocument">System.Xml.XmlDocument</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.collectionbase">System.Collections.CollectionBase</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.dictionarybase">System.Collections.DictionaryBase</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.queue">System.Collections.Queue</a></li>
+  <li><a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.readonlycollectionbase">System.Collections.ReadOnlyCollectionBase</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.sortedlist">System.Collections.SortedList</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.stack">System.Collections.Stack</a></li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>

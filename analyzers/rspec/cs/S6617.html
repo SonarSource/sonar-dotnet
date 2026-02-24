@@ -3,10 +3,10 @@
 <code>IEnumerable.Any(x ⇒ x == item)</code> can be used. However, <code>Any</code> searches the data structure in a linear manner using a foreach
 loop, whereas <code>Contains</code> is considerably faster in some collection types, because of the underlying implementation. More specifically:</p>
 <ul>
-  <li> <code>HashSet&lt;T&gt;</code> is a hashtable, and therefore has an O(1) lookup </li>
-  <li> <code>SortedSet&lt;T&gt;</code> is a red-black tree, and therefore has a O(logN) lookup </li>
-  <li> <code>List&lt;T&gt;</code> is a linear search, and therefore has an O(N) lookup, but the EqualityComparer is optimized for the <code>T</code>
-  type, which is not the case for <code>Any</code> </li>
+  <li><code>HashSet&lt;T&gt;</code> is a hashtable, and therefore has an O(1) lookup</li>
+  <li><code>SortedSet&lt;T&gt;</code> is a red-black tree, and therefore has a O(logN) lookup</li>
+  <li><code>List&lt;T&gt;</code> is a linear search, and therefore has an O(N) lookup, but the EqualityComparer is optimized for the <code>T</code>
+  type, which is not the case for <code>Any</code></li>
 </ul>
 <p>For small collections, the performance difference may be negligible, but for large collections, it can be noticeable.</p>
 <h3>What is the potential impact?</h3>
@@ -23,9 +23,9 @@ this rule won’t raise when used within LINQ to Entities syntaxes.</p>
 with simple equality checks like <code>Any(x ⇒ x == item)</code> can be replaced by <code>Contains(item)</code>.</p>
 <p>This applies to the following collection types:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1">HashSet&lt;T&gt;</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1">HashSet&lt;T&gt;</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1">SortedSet&lt;T&gt;</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a></li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -49,15 +49,15 @@ bool ValueExists(List&lt;int&gt; data) =&gt;
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1.contains">HashSet&lt;T&gt;.Contains(T)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.contains">SortedSet&lt;T&gt;.Contains(T)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains">List.Contains(T)</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to Entities</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.hashset-1.contains">HashSet&lt;T&gt;.Contains(T)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.sortedset-1.contains">SortedSet&lt;T&gt;.Contains(T)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.contains">List.Contains(T)</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.any">Enumerable.Any</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ef/language-reference/linq-to-entities">LINQ to Entities</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/collections/">Collections and Data Structures</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/collections/">Collections and Data Structures</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -79,68 +79,148 @@ bool ValueExists(List&lt;int&gt; data) =&gt;
   </thead>
   <tbody>
     <tr>
-      <td><p>HashSet_Any</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>35,388.333 us</p></td>
-      <td><p>620.1863 us</p></td>
-      <td><p>40132 B</p></td>
+      <td>
+        <p>HashSet_Any</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>35,388.333 us</p>
+      </td>
+      <td>
+        <p>620.1863 us</p>
+      </td>
+      <td>
+        <p>40132 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>HashSet_Contains</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>3.799 us</p></td>
-      <td><p>0.1489 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>HashSet_Contains</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>3.799 us</p>
+      </td>
+      <td>
+        <p>0.1489 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>List_Any</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>32,851.509 us</p></td>
-      <td><p>667.1658 us</p></td>
-      <td><p>40130 B</p></td>
+      <td>
+        <p>List_Any</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>32,851.509 us</p>
+      </td>
+      <td>
+        <p>667.1658 us</p>
+      </td>
+      <td>
+        <p>40130 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>List_Contains</p></td>
-      <td><p>.NET 7.0</p></td>
-      <td><p>375.132 us</p></td>
-      <td><p>8.0764 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>List_Contains</p>
+      </td>
+      <td>
+        <p>.NET 7.0</p>
+      </td>
+      <td>
+        <p>375.132 us</p>
+      </td>
+      <td>
+        <p>8.0764 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>HashSet_Any</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>28,979.763 us</p></td>
-      <td><p>678.0093 us</p></td>
-      <td><p>40448 B</p></td>
+      <td>
+        <p>HashSet_Any</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>28,979.763 us</p>
+      </td>
+      <td>
+        <p>678.0093 us</p>
+      </td>
+      <td>
+        <p>40448 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>HashSet_Contains</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>5.987 us</p></td>
-      <td><p>0.1090 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>HashSet_Contains</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>5.987 us</p>
+      </td>
+      <td>
+        <p>0.1090 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>List_Any</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>25,830.221 us</p></td>
-      <td><p>487.2470 us</p></td>
-      <td><p>40448 B</p></td>
+      <td>
+        <p>List_Any</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>25,830.221 us</p>
+      </td>
+      <td>
+        <p>487.2470 us</p>
+      </td>
+      <td>
+        <p>40448 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>List_Contains</p></td>
-      <td><p>.NET Framework 4.6.2</p></td>
-      <td><p>5,935.812 us</p></td>
-      <td><p>57.7569 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>List_Contains</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.6.2</p>
+      </td>
+      <td>
+        <p>5,935.812 us</p>
+      </td>
+      <td>
+        <p>57.7569 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <h4>Glossary</h4>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a> </li>
+  <li><a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Memory_management">Allocated</a></li>
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>

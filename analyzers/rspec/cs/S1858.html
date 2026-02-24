@@ -3,9 +3,9 @@
 invoking <code>ToString()</code> when the compiler would do it implicitly is also needless code-bloat.</p>
 <p>This rule raises an issue when <code>ToString()</code> is invoked:</p>
 <ul>
-  <li> on a <code>string</code> </li>
-  <li> on a non-<code>string</code> operand to concatenation </li>
-  <li> on an argument to <code>string.Format</code> </li>
+  <li>on a <code>string</code></li>
+  <li>on a non-<code>string</code> operand to concatenation</li>
+  <li>on an argument to <code>string.Format</code></li>
 </ul>
 <h3>Noncompliant code example</h3>
 <pre>

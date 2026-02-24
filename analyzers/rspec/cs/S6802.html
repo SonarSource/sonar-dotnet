@@ -7,10 +7,10 @@ elements.</p>
 <h2>How to fix it</h2>
 <p>Ensure to not use a delegate in elements rendered in loops, you can try:</p>
 <ul>
-  <li> using a collection of objects containing the delegate as an <a href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>,
-  </li>
-  <li> or extracting the elements into a dedicated component and using an <a
-  href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#eventcallback">EventCallback</a> to call the delegate </li>
+  <li>using a collection of objects containing the delegate as an <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.action">Action</a>,</li>
+  <li>or extracting the elements into a dedicated component and using an <a
+  href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#eventcallback">EventCallback</a> to call the delegate</li>
 </ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -131,13 +131,13 @@ elements.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/aspnet/core/blazor/performance#avoid-recreating-delegates-for-many-repeated-elements-or-components">ASP.NET
-  Core Blazor performance best practices</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#lambda-expressions">ASP.NET Core
-  Blazor event handling - Lambda expressions</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#eventcallback">Event handling -
-  EventCallback Struct</a> </li>
+  Core Blazor performance best practices</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#lambda-expressions">ASP.NET Core
+  Blazor event handling - Lambda expressions</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/components/event-handling#eventcallback">Event handling -
+  EventCallback Struct</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <p>The results were generated with the help of <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a> and <a
@@ -161,46 +161,106 @@ href="https://github.com/egil/Benchmark.Blazor/tree/main">Benchmark.Blazor</a>:<
   </thead>
   <tbody>
     <tr>
-      <td><p>UseDelegate</p></td>
-      <td><p>10</p></td>
-      <td><p>6.603 us</p></td>
-      <td><p>0.0483 us</p></td>
-      <td><p>1.00</p></td>
+      <td>
+        <p>UseDelegate</p>
+      </td>
+      <td>
+        <p>10</p>
+      </td>
+      <td>
+        <p>6.603 us</p>
+      </td>
+      <td>
+        <p>0.0483 us</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
     </tr>
     <tr>
-      <td><p>UseAction</p></td>
-      <td><p>10</p></td>
-      <td><p>1.994 us</p></td>
-      <td><p>0.0592 us</p></td>
-      <td><p>0.29</p></td>
+      <td>
+        <p>UseAction</p>
+      </td>
+      <td>
+        <p>10</p>
+      </td>
+      <td>
+        <p>1.994 us</p>
+      </td>
+      <td>
+        <p>0.0592 us</p>
+      </td>
+      <td>
+        <p>0.29</p>
+      </td>
     </tr>
     <tr>
-      <td><p>UseDelegate</p></td>
-      <td><p>100</p></td>
-      <td><p>50.666 us</p></td>
-      <td><p>0.5449 us</p></td>
-      <td><p>1.00</p></td>
+      <td>
+        <p>UseDelegate</p>
+      </td>
+      <td>
+        <p>100</p>
+      </td>
+      <td>
+        <p>50.666 us</p>
+      </td>
+      <td>
+        <p>0.5449 us</p>
+      </td>
+      <td>
+        <p>1.00</p>
+      </td>
     </tr>
     <tr>
-      <td><p>UseAction</p></td>
-      <td><p>100</p></td>
-      <td><p>2.016 us</p></td>
-      <td><p>0.0346 us</p></td>
-      <td><p>0.04</p></td>
+      <td>
+        <p>UseAction</p>
+      </td>
+      <td>
+        <p>100</p>
+      </td>
+      <td>
+        <p>2.016 us</p>
+      </td>
+      <td>
+        <p>0.0346 us</p>
+      </td>
+      <td>
+        <p>0.04</p>
+      </td>
     </tr>
     <tr>
-      <td><p>UseDelegate</p></td>
-      <td><p>1000</p></td>
-      <td><p>512.513 us</p></td>
-      <td><p>9.7561 us</p></td>
-      <td><p>1.000</p></td>
+      <td>
+        <p>UseDelegate</p>
+      </td>
+      <td>
+        <p>1000</p>
+      </td>
+      <td>
+        <p>512.513 us</p>
+      </td>
+      <td>
+        <p>9.7561 us</p>
+      </td>
+      <td>
+        <p>1.000</p>
+      </td>
     </tr>
     <tr>
-      <td><p>UseAction</p></td>
-      <td><p>1000</p></td>
-      <td><p>2.005 us</p></td>
-      <td><p>0.0243 us</p></td>
-      <td><p>0.004</p></td>
+      <td>
+        <p>UseAction</p>
+      </td>
+      <td>
+        <p>1000</p>
+      </td>
+      <td>
+        <p>2.005 us</p>
+      </td>
+      <td>
+        <p>0.0243 us</p>
+      </td>
+      <td>
+        <p>0.004</p>
+      </td>
     </tr>
   </tbody>
 </table>

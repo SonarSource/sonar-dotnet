@@ -3,23 +3,23 @@
 source code because of a bad manipulation. They are either invisible or difficult to recognize, which can result in bugs when the string is not what
 the developer expects. If you actually need to use a control character use their encoded version:</p>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a>, for example <code>\n</code> and <code>\t</code> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Unicode">Unicode</a>, for example <code>U+000D</code> and <code>U+0009</code> </li>
+  <li><a href="https://en.wikipedia.org/wiki/ASCII">ASCII</a>, for example <code>\n</code> and <code>\t</code></li>
+  <li><a href="https://en.wikipedia.org/wiki/Unicode">Unicode</a>, for example <code>U+000D</code> and <code>U+0009</code></li>
 </ul>
 <p>This rule raises an issue when the following characters are seen in a <a
 href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/">string literal</a>:</p>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/ASCII#Control_characters">ASCII control character</a>. (character index &lt; 32 or = 127) </li>
-  <li> Unicode <a href="https://en.wikipedia.org/wiki/Unicode_character_property#Whitespace">whitespace characters</a>. </li>
-  <li> Unicode <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">C0 control characters</a> </li>
-  <li> Unicode characters <code>U+200B, U+200C, U+200D, U+2060, U+FEFF, U+2028, U+2029</code> </li>
+  <li><a href="https://en.wikipedia.org/wiki/ASCII#Control_characters">ASCII control character</a>. (character index &lt; 32 or = 127)</li>
+  <li>Unicode <a href="https://en.wikipedia.org/wiki/Unicode_character_property#Whitespace">whitespace characters</a>.</li>
+  <li>Unicode <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">C0 control characters</a></li>
+  <li>Unicode characters <code>U+200B, U+200C, U+200D, U+2060, U+FEFF, U+2028, U+2029</code></li>
 </ul>
 <h3>Exceptions</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#verbatim-string-literals">Verbatim string literals</a> and
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#verbatim-string-literals">Verbatim string literals</a> and
   <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/#raw-string-literals">raw string literals</a>, since they have no
-  escape mechanism </li>
-  <li> The simple space character: Unicode <code>U+0020</code>, ASCII 32 </li>
+  escape mechanism</li>
+  <li>The simple space character: Unicode <code>U+0020</code>, ASCII 32</li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
@@ -38,7 +38,7 @@ Console.WriteLine(zeroWidthSpaceInside);        // Prints "foo?bar"
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/">Strings and string literals</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Control_character">Control character</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/">Strings and string literals</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Control_character">Control character</a></li>
 </ul>
 

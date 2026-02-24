@@ -3,10 +3,10 @@
 code.</p>
 <p>Although they don’t affect the runtime behavior of the application after compilation, removing them will:</p>
 <ul>
-  <li> Improve the readability and maintainability of the code. </li>
-  <li> Help avoid potential naming conflicts. </li>
-  <li> Improve the build time, as the compiler has fewer lines to read and fewer types to resolve. </li>
-  <li> Reduce the number of items the code editor will show for auto-completion, thereby showing fewer irrelevant suggestions. </li>
+  <li>Improve the readability and maintainability of the code.</li>
+  <li>Help avoid potential naming conflicts.</li>
+  <li>Improve the build time, as the compiler has fewer lines to read and fewer types to resolve.</li>
+  <li>Reduce the number of items the code editor will show for auto-completion, thereby showing fewer irrelevant suggestions.</li>
 </ul>
 <p>Starting with C# 10, it’s possible to define <a
 href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#global-modifier">global usings</a> for an entire
@@ -20,8 +20,8 @@ global using System.Net.Sockets; // Compliant by exception
 </pre>
 <p>Unnecessary <code>using</code> directives are ignored in ASP.NET Core projects in the following files:</p>
 <ul>
-  <li> <code>_Imports.razor</code> </li>
-  <li> <code>_ViewImports.cshtml</code> </li>
+  <li><code>_Imports.razor</code></li>
+  <li><code>_ViewImports.cshtml</code></li>
 </ul>
 <h2>How to fix it</h2>
 <p>While it’s not difficult to remove these unneeded lines manually, modern code editors support the removal of every unnecessary <code>using</code>
@@ -61,12 +61,12 @@ namespace MyApp.Helpers
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">MSDN - using directives</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/namespace">MSDN - namespaces</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive">MSDN - using directives</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/namespace">MSDN - namespaces</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li> {rule:csharpsquid:S1144} - Unused private types or members should be removed </li>
-  <li> {rule:csharpsquid:S1481} - Unused local variables should be removed </li>
+  <li>{rule:csharpsquid:S1144} - Unused private types or members should be removed</li>
+  <li>{rule:csharpsquid:S1481} - Unused local variables should be removed</li>
 </ul>
 

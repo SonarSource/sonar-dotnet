@@ -8,18 +8,18 @@ validation rules.</p>
 <h3>What is the potential impact?</h3>
 <p>Skipping model validation can lead to:</p>
 <ul>
-  <li> Data Integrity Issues: Without validation, incorrect or inconsistent data can be saved to your database, leading to potential data corruption
-  or loss. </li>
-  <li> Security Vulnerabilities: Skipping validation can expose your application to security risks because incoming user data isn’t properly checked.
+  <li>Data Integrity Issues: Without validation, incorrect or inconsistent data can be saved to your database, leading to potential data corruption or
+  loss.</li>
+  <li>Security Vulnerabilities: Skipping validation can expose your application to security risks because incoming user data isn’t properly checked.
   For example, any <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-9.0#built-in-attributes">validation
   attributes</a>] applied to your model properties, will be ignored. This lack of proper input validation could lead to various injection attacks,
-  like SQL injection, cross-site scripting and others. </li>
-  <li> Application Errors: Invalid data can lead to unexpected application errors or crashes, which can disrupt the user experience and potentially
-  lead to data loss. </li>
-  <li> Poor User Experience: Without validation, users may not receive appropriate feedback about any mistakes in the data they have entered, leading
-  to confusion and frustration. </li>
-  <li> Increased Debugging Time: If invalid data causes issues in your application and was not validatated at the entry point, it can take
-  significantly more time to debug and fix these issues. </li>
+  like SQL injection, cross-site scripting and others.</li>
+  <li>Application Errors: Invalid data can lead to unexpected application errors or crashes, which can disrupt the user experience and potentially
+  lead to data loss.</li>
+  <li>Poor User Experience: Without validation, users may not receive appropriate feedback about any mistakes in the data they have entered, leading
+  to confusion and frustration.</li>
+  <li>Increased Debugging Time: If invalid data causes issues in your application and was not validatated at the entry point, it can take
+  significantly more time to debug and fix these issues.</li>
 </ul>
 <p>Therefore, it’s highly recommended to always validate models in your application to ensure data integrity, application stability, and a good user
 experience.</p>
@@ -29,14 +29,14 @@ being submitted. Therefore, server-side validation is essential to ensure data i
 client-side and server-side validation in your application.</p>
 <h3>Exceptions</h3>
 <ul>
-  <li> Web API controllers don’t have to check <code>ModelState.IsValid</code> if they have the <code>[ApiController]</code> attribute. In that case,
-  an automatic HTTP <code>400</code> response containing error details is returned when model state is invalid. </li>
-  <li> When action filters are used for controller actions, the analyzer will skip the model validation detection to avoid false positives since the
-  model state could be verified by the action filer. </li>
-  <li> <code>TryValidateModel</code> can also be used for model validation. </li>
-  <li> The project references a 3rd-party library for validation, e.g. FluentValidation. </li>
-  <li> The rule will not raise issues if the model, or the model members, are not decorated with validation attributes, or if it does not implement
-  custom validation. </li>
+  <li>Web API controllers don’t have to check <code>ModelState.IsValid</code> if they have the <code>[ApiController]</code> attribute. In that case,
+  an automatic HTTP <code>400</code> response containing error details is returned when model state is invalid.</li>
+  <li>When action filters are used for controller actions, the analyzer will skip the model validation detection to avoid false positives since the
+  model state could be verified by the action filer.</li>
+  <li><code>TryValidateModel</code> can also be used for model validation.</li>
+  <li>The project references a 3rd-party library for validation, e.g. FluentValidation.</li>
+  <li>The rule will not raise issues if the model, or the model members, are not decorated with validation attributes, or if it does not implement
+  custom validation.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>If <code>ModelState.IsValid</code> returns true, it means that the data is valid and the process can continue. If it returns false, it means that
@@ -73,11 +73,11 @@ public async Task&lt;IActionResult&gt; Create(Movie movie)
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">Model Validation</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelstatedictionary.isvalid">IsValid property</a> </li>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.validationattribute">ValidationAttribute</a> </li>
-  <li> Fluent Validation - <a href="https://docs.fluentvalidation.net/en/latest/aspnet.html">ASP.NET Core integration</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation">Model Validation</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.modelstatedictionary.isvalid">IsValid property</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.validationattribute">ValidationAttribute</a></li>
+  <li>Fluent Validation - <a href="https://docs.fluentvalidation.net/en/latest/aspnet.html">ASP.NET Core integration</a></li>
 </ul>
 

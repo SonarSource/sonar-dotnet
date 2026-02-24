@@ -1,8 +1,10 @@
 <p>The improper storage of passwords poses a significant security risk to software applications. This vulnerability arises when passwords are stored
 in plaintext or with a fast hashing algorithm. To exploit this vulnerability, an attacker typically requires access to the stored passwords.</p>
 <h2>Why is this an issue?</h2>
-<p>Attackers who would get access to the stored passwords could reuse them without further attacks or with little additional effort.<br> Obtaining the
-plaintext passwords, they could then gain unauthorized access to user accounts, potentially leading to various malicious activities.</p>
+<p>Attackers who would get access to the stored passwords could reuse them without further attacks or with little additional effort.
+  <br>
+  Obtaining the plaintext passwords, they could then gain unauthorized access to user accounts, potentially leading to various malicious
+  activities.</p>
 <h3>What is the potential impact?</h3>
 <p>Plaintext or weakly hashed password storage poses a significant security risk to software applications.</p>
 <h4>Unauthorized Access</h4>
@@ -92,22 +94,29 @@ string hash = hasher.HashPassword(new User("test"), password);
 </pre>
 <h3>How does this work?</h3>
 <h4>Select the correct PBKDF2 parameters</h4>
-<p>If PBKDF2 must be used, be aware that default values might not be considered secure.<br> Depending on the algorithm used, the number of iterations
-should be adjusted to ensure that the derived key is secure. The following are the recommended number of iterations for PBKDF2:</p>
+<p>If PBKDF2 must be used, be aware that default values might not be considered secure.
+  <br>
+  Depending on the algorithm used, the number of iterations should be adjusted to ensure that the derived key is secure. The following are the
+  recommended number of iterations for PBKDF2:</p>
 <ul>
-  <li> PBKDF2-HMAC-SHA1: 1,300,000 iterations </li>
-  <li> PBKDF2-HMAC-SHA256: 600,000 iterations </li>
-  <li> PBKDF2-HMAC-SHA512: 210,000 iterations </li>
+  <li>PBKDF2-HMAC-SHA1: 1,300,000 iterations</li>
+  <li>PBKDF2-HMAC-SHA256: 600,000 iterations</li>
+  <li>PBKDF2-HMAC-SHA512: 210,000 iterations</li>
 </ul>
-<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.<br> Iterations are also called "rounds" depending on the library used.</p>
+<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.
+  <br>
+  Iterations are also called "rounds" depending on the library used.</p>
 <p>When recommended cost factors are too high in the context of the application or if the performance cost is unacceptable, a cost factor reduction
 might be considered. In that case, it should not be chosen under 100,000.</p>
 <h3>Going the extra mile</h3>
 <h4>Pepper</h4>
 <p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
-is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
-the secret value to generate the correct hash.<br> <a
-href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+is added to a password before it is hashed.
+  <br>
+  This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know the secret value to generate the correct
+  hash.
+  <br>
+  <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
 <h2>How to fix it in ASP.NET</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -140,22 +149,29 @@ string hashed = Convert.ToBase64String(kdf.GetBytes(256 / 8));
 </pre>
 <h3>How does this work?</h3>
 <h4>Select the correct PBKDF2 parameters</h4>
-<p>If PBKDF2 must be used, be aware that default values might not be considered secure.<br> Depending on the algorithm used, the number of iterations
-should be adjusted to ensure that the derived key is secure. The following are the recommended number of iterations for PBKDF2:</p>
+<p>If PBKDF2 must be used, be aware that default values might not be considered secure.
+  <br>
+  Depending on the algorithm used, the number of iterations should be adjusted to ensure that the derived key is secure. The following are the
+  recommended number of iterations for PBKDF2:</p>
 <ul>
-  <li> PBKDF2-HMAC-SHA1: 1,300,000 iterations </li>
-  <li> PBKDF2-HMAC-SHA256: 600,000 iterations </li>
-  <li> PBKDF2-HMAC-SHA512: 210,000 iterations </li>
+  <li>PBKDF2-HMAC-SHA1: 1,300,000 iterations</li>
+  <li>PBKDF2-HMAC-SHA256: 600,000 iterations</li>
+  <li>PBKDF2-HMAC-SHA512: 210,000 iterations</li>
 </ul>
-<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.<br> Iterations are also called "rounds" depending on the library used.</p>
+<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.
+  <br>
+  Iterations are also called "rounds" depending on the library used.</p>
 <p>When recommended cost factors are too high in the context of the application or if the performance cost is unacceptable, a cost factor reduction
 might be considered. In that case, it should not be chosen under 100,000.</p>
 <h3>Going the extra mile</h3>
 <h4>Pepper</h4>
 <p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
-is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
-the secret value to generate the correct hash.<br> <a
-href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+is added to a password before it is hashed.
+  <br>
+  This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know the secret value to generate the correct
+  hash.
+  <br>
+  <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
 <h2>How to fix it in BouncyCastle</h2>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
@@ -229,7 +245,9 @@ string hashed = Convert.ToBase64String(keyParam.GetKey());
 <p>When bcrypt’s hashing function is used, it is important to select a round count that is high enough to make the function slow enough to prevent
 brute force: More than 12 rounds.</p>
 <p>For bcrypt’s key derivation function, the number of rounds should likewise be high enough to make the function slow enough to prevent brute force:
-More than 4096 rounds <code>(2^12)</code>.<br> This number is not the same coefficient as the first one because it uses a different algorithm.</p>
+More than 4096 rounds <code>(2^12)</code>.
+  <br>
+  This number is not the same coefficient as the first one because it uses a different algorithm.</p>
 <h4>Select the correct Scrypt parameters</h4>
 <p>If scrypt must be used, the default values of scrypt are considered secure.</p>
 <p>Like Argon2id, scrypt has three different parameters that can be configured. N is the CPU/memory cost parameter and must be a power of two. r is
@@ -252,66 +270,103 @@ higher resource usage.</p>
   </thead>
   <tbody>
     <tr>
-      <td> <p>2<sup>17</sup> (<code>1 &lt;&lt; 17</code>)</p> </td>
-      <td> <p>1</p> </td>
-      <td> <p>8</p> </td>
+      <td>
+        <p>2<sup>17</sup> (<code>1 &lt;&lt; 17</code>)</p>
+      </td>
+      <td>
+        <p>1</p>
+      </td>
+      <td>
+        <p>8</p>
+      </td>
     </tr>
     <tr>
-      <td> <p>2<sup>16</sup> (<code>1 &lt;&lt; 16</code>)</p> </td>
-      <td> <p>2</p> </td>
-      <td> <p>8</p> </td>
+      <td>
+        <p>2<sup>16</sup> (<code>1 &lt;&lt; 16</code>)</p>
+      </td>
+      <td>
+        <p>2</p>
+      </td>
+      <td>
+        <p>8</p>
+      </td>
     </tr>
     <tr>
-      <td> <p>2<sup>15</sup> (<code>1 &lt;&lt; 15</code>)</p> </td>
-      <td> <p>3</p> </td>
-      <td> <p>8</p> </td>
+      <td>
+        <p>2<sup>15</sup> (<code>1 &lt;&lt; 15</code>)</p>
+      </td>
+      <td>
+        <p>3</p>
+      </td>
+      <td>
+        <p>8</p>
+      </td>
     </tr>
     <tr>
-      <td> <p>2<sup>14</sup> (<code>1 &lt;&lt; 14</code>)</p> </td>
-      <td> <p>5</p> </td>
-      <td> <p>8</p> </td>
+      <td>
+        <p>2<sup>14</sup> (<code>1 &lt;&lt; 14</code>)</p>
+      </td>
+      <td>
+        <p>5</p>
+      </td>
+      <td>
+        <p>8</p>
+      </td>
     </tr>
     <tr>
-      <td> <p>2<sup>13</sup> (<code>1 &lt;&lt; 13</code>)</p> </td>
-      <td> <p>10</p> </td>
-      <td> <p>8</p> </td>
+      <td>
+        <p>2<sup>13</sup> (<code>1 &lt;&lt; 13</code>)</p>
+      </td>
+      <td>
+        <p>10</p>
+      </td>
+      <td>
+        <p>8</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <p>Every row provides the same level of defense. They only differ in the amount of CPU and RAM used: the top row has low CPU usage and high memory
 usage, while the bottom row has high CPU usage and low memory usage.</p>
 <h4>Select the correct PBKDF2 parameters</h4>
-<p>If PBKDF2 must be used, be aware that default values might not be considered secure.<br> Depending on the algorithm used, the number of iterations
-should be adjusted to ensure that the derived key is secure. The following are the recommended number of iterations for PBKDF2:</p>
+<p>If PBKDF2 must be used, be aware that default values might not be considered secure.
+  <br>
+  Depending on the algorithm used, the number of iterations should be adjusted to ensure that the derived key is secure. The following are the
+  recommended number of iterations for PBKDF2:</p>
 <ul>
-  <li> PBKDF2-HMAC-SHA1: 1,300,000 iterations </li>
-  <li> PBKDF2-HMAC-SHA256: 600,000 iterations </li>
-  <li> PBKDF2-HMAC-SHA512: 210,000 iterations </li>
+  <li>PBKDF2-HMAC-SHA1: 1,300,000 iterations</li>
+  <li>PBKDF2-HMAC-SHA256: 600,000 iterations</li>
+  <li>PBKDF2-HMAC-SHA512: 210,000 iterations</li>
 </ul>
-<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.<br> Iterations are also called "rounds" depending on the library used.</p>
+<p>Note that PBKDF2-HMAC-SHA256 is recommended by NIST.
+  <br>
+  Iterations are also called "rounds" depending on the library used.</p>
 <p>When recommended cost factors are too high in the context of the application or if the performance cost is unacceptable, a cost factor reduction
 might be considered. In that case, it should not be chosen under 100,000.</p>
 <h3>Going the extra mile</h3>
 <h4>Pepper</h4>
 <p>In a defense-in-depth security approach, <strong>peppering</strong> can also be used. This is a security technique where an external secret value
-is added to a password before it is hashed.<br> This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know
-the secret value to generate the correct hash.<br> <a
-href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
+is added to a password before it is hashed.
+  <br>
+  This makes it more difficult for an attacker to crack the hashed passwords, as they would need to know the secret value to generate the correct
+  hash.
+  <br>
+  <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#peppering">Learn more here</a>.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> OWASP CheatSheet - <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">Password Storage Cheat Sheet</a>
-  </li>
+  <li>OWASP CheatSheet - <a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">Password Storage Cheat
+  Sheet</a></li>
 </ul>
 <h3>Standards</h3>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a> </li>
-  <li> OWASP - <a href="https://owasp.org/Top10/A04_2021-Insecure_Design/">Top 10 2021 Category A4 - Insecure Design</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
-  Exposure</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/256">CWE-256 - Plaintext Storage of a Password</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/916">CWE-916 - Use of Password Hash With Insufficient Computational Effort</a> </li>
-  <li> STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222542">Application Security and
-  Development: V-222542</a> - The application must only store cryptographic representations of passwords. </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a></li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A04_2021-Insecure_Design/">Top 10 2021 Category A4 - Insecure Design</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data
+  Exposure</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/256">CWE-256 - Plaintext Storage of a Password</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/916">CWE-916 - Use of Password Hash With Insufficient Computational Effort</a></li>
+  <li>STIG Viewer - <a href="https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222542">Application Security and
+  Development: V-222542</a> - The application must only store cryptographic representations of passwords.</li>
 </ul>
 

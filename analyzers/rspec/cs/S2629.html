@@ -8,11 +8,11 @@ performance by reducing unnecessary evaluations and ensures that logging stateme
 <p>Furthermore, using a constant log format enhances observability and facilitates searchability in log aggregation and monitoring software.</p>
 <p>The rule covers the following logging frameworks:</p>
 <ul>
-  <li> <a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a> </li>
-  <li> <a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a> </li>
-  <li> <a href="https://www.nuget.org/packages/log4net">log4net</a> </li>
-  <li> <a href="https://www.nuget.org/packages/Serilog">Serilog</a> </li>
-  <li> <a href="https://www.nuget.org/packages/NLog">Nlog</a> </li>
+  <li><a href="https://www.nuget.org/packages/Microsoft.Extensions.Logging">Microsoft.Extensions.Logging</a></li>
+  <li><a href="https://www.nuget.org/packages/Castle.Core">Castle.Core</a></li>
+  <li><a href="https://www.nuget.org/packages/log4net">log4net</a></li>
+  <li><a href="https://www.nuget.org/packages/Serilog">Serilog</a></li>
+  <li><a href="https://www.nuget.org/packages/NLog">Nlog</a></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Use an overload that takes the log format and the parameters as separate arguments. The log format should be a constant string.</p>
@@ -28,8 +28,8 @@ logger.DebugFormat("The value of the parameter is: {Parameter}.", parameter);
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.interpolatedstringhandlerattribute">InterpolatedStringHandlerArgumentAttribute</a> </li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.interpolatedstringhandlerattribute">InterpolatedStringHandlerArgumentAttribute</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -58,102 +58,72 @@ logger.DebugFormat("The value of the parameter is: {Parameter}.", parameter);
       <td></td>
     </tr>
     <tr>
-      <td><p>CastleCoreLoggingTemplateNotConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>230.306 us</p></td>
-      <td><p>2.7116 us</p></td>
-      <td><p>479200 B</p></td>
+      <td>
+        <p>CastleCoreLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>230.306 us</p>
+      </td>
+      <td>
+        <p>2.7116 us</p>
+      </td>
+      <td>
+        <p>479200 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>CastleCoreLoggingTemplateConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>46.827 us</p></td>
-      <td><p>1.4743 us</p></td>
-      <td><p>560000 B</p></td>
+      <td>
+        <p>CastleCoreLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>46.827 us</p>
+      </td>
+      <td>
+        <p>1.4743 us</p>
+      </td>
+      <td>
+        <p>560000 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>CastleCoreLoggingTemplateNotConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>1,060.413 us</p></td>
-      <td><p>32.3559 us</p></td>
-      <td><p>1115276 B</p></td>
+      <td>
+        <p>CastleCoreLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>1,060.413 us</p>
+      </td>
+      <td>
+        <p>32.3559 us</p>
+      </td>
+      <td>
+        <p>1115276 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>CastleCoreLoggingTemplateConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>93.697 us</p></td>
-      <td><p>1.8201 us</p></td>
-      <td><p>561650 B</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>MSLoggingTemplateNotConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>333.246 us</p></td>
-      <td><p>12.9214 us</p></td>
-      <td><p>479200 B</p></td>
-    </tr>
-    <tr>
-      <td><p>MSLoggingTemplateConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>441.118 us</p></td>
-      <td><p>68.7999 us</p></td>
-      <td><p>560000 B</p></td>
-    </tr>
-    <tr>
-      <td><p>MSLoggingTemplateNotConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>1,542.076 us</p></td>
-      <td><p>99.3423 us</p></td>
-      <td><p>1115276 B</p></td>
-    </tr>
-    <tr>
-      <td><p>MSLoggingTemplateConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>698.071 us</p></td>
-      <td><p>18.6319 us</p></td>
-      <td><p>561653 B</p></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td><p>NLogLoggingTemplateNotConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>178.789 us</p></td>
-      <td><p>9.2528 us</p></td>
-      <td><p>479200 B</p></td>
-    </tr>
-    <tr>
-      <td><p>NLogLoggingTemplateConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>6.009 us</p></td>
-      <td><p>1.3303 us</p></td>
-      <td><p>-</p></td>
-    </tr>
-    <tr>
-      <td><p>NLogLoggingTemplateNotConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>1,086.260 us</p></td>
-      <td><p>44.1670 us</p></td>
-      <td><p>1115276 B</p></td>
-    </tr>
-    <tr>
-      <td><p>NLogLoggingTemplateConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>25.132 us</p></td>
-      <td><p>0.5666 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>CastleCoreLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>93.697 us</p>
+      </td>
+      <td>
+        <p>1.8201 us</p>
+      </td>
+      <td>
+        <p>561650 B</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -163,32 +133,72 @@ logger.DebugFormat("The value of the parameter is: {Parameter}.", parameter);
       <td></td>
     </tr>
     <tr>
-      <td><p>SerilogLoggingTemplateNotConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>234.460 us</p></td>
-      <td><p>7.4831 us</p></td>
-      <td><p>479200 B</p></td>
+      <td>
+        <p>MSLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>333.246 us</p>
+      </td>
+      <td>
+        <p>12.9214 us</p>
+      </td>
+      <td>
+        <p>479200 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SerilogLoggingTemplateConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>49.854 us</p></td>
-      <td><p>1.8232 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>MSLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>441.118 us</p>
+      </td>
+      <td>
+        <p>68.7999 us</p>
+      </td>
+      <td>
+        <p>560000 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SerilogLoggingTemplateNotConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>1,103.939 us</p></td>
-      <td><p>47.0203 us</p></td>
-      <td><p>1115276 B</p></td>
+      <td>
+        <p>MSLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>1,542.076 us</p>
+      </td>
+      <td>
+        <p>99.3423 us</p>
+      </td>
+      <td>
+        <p>1115276 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>SerilogLoggingTemplateConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>35.752 us</p></td>
-      <td><p>0.6022 us</p></td>
-      <td><p>-</p></td>
+      <td>
+        <p>MSLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>698.071 us</p>
+      </td>
+      <td>
+        <p>18.6319 us</p>
+      </td>
+      <td>
+        <p>561653 B</p>
+      </td>
     </tr>
     <tr>
       <td></td>
@@ -198,39 +208,229 @@ logger.DebugFormat("The value of the parameter is: {Parameter}.", parameter);
       <td></td>
     </tr>
     <tr>
-      <td><p>Log4NetLoggingTemplateNotConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>255.754 us</p></td>
-      <td><p>5.6046 us</p></td>
-      <td><p>479200 B</p></td>
+      <td>
+        <p>NLogLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>178.789 us</p>
+      </td>
+      <td>
+        <p>9.2528 us</p>
+      </td>
+      <td>
+        <p>479200 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>Log4NetLoggingTemplateConstant</p></td>
-      <td><p>.NET 9.0</p></td>
-      <td><p>46.425 us</p></td>
-      <td><p>1.7087 us</p></td>
-      <td><p>240000 B</p></td>
+      <td>
+        <p>NLogLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>6.009 us</p>
+      </td>
+      <td>
+        <p>1.3303 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
     </tr>
     <tr>
-      <td><p>Log4NetLoggingTemplateNotConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>1,109.874 us</p></td>
-      <td><p>23.4388 us</p></td>
-      <td><p>1115276 B</p></td>
+      <td>
+        <p>NLogLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>1,086.260 us</p>
+      </td>
+      <td>
+        <p>44.1670 us</p>
+      </td>
+      <td>
+        <p>1115276 B</p>
+      </td>
     </tr>
     <tr>
-      <td><p>Log4NetLoggingTemplateConstant</p></td>
-      <td><p>.NET Framework 4.8.1</p></td>
-      <td><p>92.305 us</p></td>
-      <td><p>2.4161 us</p></td>
-      <td><p>240707 B</p></td>
+      <td>
+        <p>NLogLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>25.132 us</p>
+      </td>
+      <td>
+        <p>0.5666 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>SerilogLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>234.460 us</p>
+      </td>
+      <td>
+        <p>7.4831 us</p>
+      </td>
+      <td>
+        <p>479200 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>SerilogLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>49.854 us</p>
+      </td>
+      <td>
+        <p>1.8232 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>SerilogLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>1,103.939 us</p>
+      </td>
+      <td>
+        <p>47.0203 us</p>
+      </td>
+      <td>
+        <p>1115276 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>SerilogLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>35.752 us</p>
+      </td>
+      <td>
+        <p>0.6022 us</p>
+      </td>
+      <td>
+        <p>-</p>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        <p>Log4NetLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>255.754 us</p>
+      </td>
+      <td>
+        <p>5.6046 us</p>
+      </td>
+      <td>
+        <p>479200 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Log4NetLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET 9.0</p>
+      </td>
+      <td>
+        <p>46.425 us</p>
+      </td>
+      <td>
+        <p>1.7087 us</p>
+      </td>
+      <td>
+        <p>240000 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Log4NetLoggingTemplateNotConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>1,109.874 us</p>
+      </td>
+      <td>
+        <p>23.4388 us</p>
+      </td>
+      <td>
+        <p>1115276 B</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p>Log4NetLoggingTemplateConstant</p>
+      </td>
+      <td>
+        <p>.NET Framework 4.8.1</p>
+      </td>
+      <td>
+        <p>92.305 us</p>
+      </td>
+      <td>
+        <p>2.4161 us</p>
+      </td>
+      <td>
+        <p>240707 B</p>
+      </td>
     </tr>
   </tbody>
 </table>
 <h4>Glossary</h4>
 <ul>
-  <li> <a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a> </li>
-  <li> <a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a> </li>
+  <li><a href="https://en.wikipedia.org/wiki/Arithmetic_mean">Mean</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard Deviation</a></li>
 </ul>
 <p>The results were generated by running the following snippet with <a href="https://github.com/dotnet/BenchmarkDotNet">BenchmarkDotNet</a>:</p>
 <pre>

@@ -29,8 +29,8 @@ second operand. That is, the actual shift count is 0 to 63 bits.</p>
 <h3>Exceptions</h3>
 <p>This rule doesn’t raise an issue when the shift by zero is obviously for cosmetic reasons:</p>
 <ul>
-  <li> When the value shifted is a literal. </li>
-  <li> When there is a similar shift at the same position on line before or after. E.g.: </li>
+  <li>When the value shifted is a literal.</li>
+  <li>When there is a similar shift at the same position on line before or after. E.g.:</li>
 </ul>
 <pre>
 bytes[loc+0] = (byte)(value &gt;&gt; 8);
@@ -67,10 +67,10 @@ var longShift2 = lg &lt;&lt; 1;
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a
+  <li>Microsoft Learn - <a
   href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators#left-shift-operator-">Bitwise and
-  shift operators (C# reference)</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Arithmetic_shift">Arithmetic shift</a> </li>
-  <li> Wikipedia - <a href="https://en.wikipedia.org/wiki/Modulo">Modulo</a> </li>
+  shift operators (C# reference)</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Arithmetic_shift">Arithmetic shift</a></li>
+  <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Modulo">Modulo</a></li>
 </ul>
 

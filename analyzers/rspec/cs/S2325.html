@@ -1,29 +1,29 @@
 <h2>Why is this an issue?</h2>
 <p>Methods and properties that don’t access instance data should be marked as <code>static</code> for the following reasons:</p>
 <ul>
-  <li> Clarity and Intent: Marking a method/property as static makes it clear that the method does not depend on instance data and can be called
-  without creating an instance of the class. This improves the readability of the code by clearly conveying the member’s intended use. </li>
-  <li> Performance: Instance methods/properties in C# require an instance of the class to be called. This means that even if the it doesn’t use any
+  <li>Clarity and Intent: Marking a method/property as static makes it clear that the method does not depend on instance data and can be called
+  without creating an instance of the class. This improves the readability of the code by clearly conveying the member’s intended use.</li>
+  <li>Performance: Instance methods/properties in C# require an instance of the class to be called. This means that even if the it doesn’t use any
   instance data, the runtime still needs to pass a reference to the instance during the call. For static methods and properties, this overhead is
-  avoided, leading to slightly better performance. </li>
-  <li> Memory Usage: Since instance methods implicitly carry a reference to the instance (the caller object), they can potentially prevent the garbage
+  avoided, leading to slightly better performance.</li>
+  <li>Memory Usage: Since instance methods implicitly carry a reference to the instance (the caller object), they can potentially prevent the garbage
   collector from collecting the instance whem it is not otherwise referenced. Static members do not carry this overhead, potentially reducing memory
-  usage. </li>
-  <li> Testing: Static members can be easier to test since they do not require an instance of the class. This can simplify unit testing and reduce the
-  amount of boilerplate code needed to set up tests. </li>
+  usage.</li>
+  <li>Testing: Static members can be easier to test since they do not require an instance of the class. This can simplify unit testing and reduce the
+  amount of boilerplate code needed to set up tests.</li>
 </ul>
 <h3>Exceptions</h3>
 <p>Methods with the following names are excluded because they can’t be made <code>static</code>:</p>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httpapplication.authenticaterequest">Application_AuthenticateRequest</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httpapplication.beginrequest">Application_BeginRequest</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178473(v=vs.100)">Application_End</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httpapplication.endrequest">Application_EndRequest</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/24395wz3(v=vs.100)">Application_Error</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178473(v=vs.100)">Application_Init</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178473(v=vs.100)">Application_Start</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.sessionstate.sessionstatemodule.end">Session_End</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.sessionstate.sessionstatemodule.start">Session_Start</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httpapplication.authenticaterequest">Application_AuthenticateRequest</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httpapplication.beginrequest">Application_BeginRequest</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178473(v=vs.100)">Application_End</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.httpapplication.endrequest">Application_EndRequest</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/24395wz3(v=vs.100)">Application_Error</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178473(v=vs.100)">Application_Init</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/previous-versions/aspnet/ms178473(v=vs.100)">Application_Start</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.sessionstate.sessionstatemodule.end">Session_End</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.web.sessionstate.sessionstatemodule.start">Session_Start</a></li>
 </ul>
 <p>Event handler methods part of a <a href="https://learn.microsoft.com/en-us/dotnet/desktop/winforms">Windows Forms</a> or <a
 href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf">Windows Presentation Foundation</a> class are excluded because they can’t be made
@@ -95,6 +95,6 @@ public class Utilities
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static">The static modifier</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static">The static modifier</a></li>
 </ul>
 

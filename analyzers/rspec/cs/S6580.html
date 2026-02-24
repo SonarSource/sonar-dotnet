@@ -6,18 +6,18 @@ system parsing methods, you should always provide an <code>IFormatProvider</code
 runtime error.</p>
 <p>This rule raises an issue for the following date and time string representation parsing methods:</p>
 <ul>
-  <li> <code>Parse</code> </li>
-  <li> <code>ParseExact</code> </li>
-  <li> <code>TryParse</code> </li>
-  <li> <code>TryParseExact</code> </li>
+  <li><code>Parse</code></li>
+  <li><code>ParseExact</code></li>
+  <li><code>TryParse</code></li>
+  <li><code>TryParseExact</code></li>
 </ul>
 <p>Of the following types:</p>
 <ul>
-  <li> <code>System.DateOnly</code> </li>
-  <li> <code>System.DateTime</code> </li>
-  <li> <code>System.DateTimeOffset</code> </li>
-  <li> <code>System.TimeOnly</code> </li>
-  <li> <code>System.TimeSpan</code> </li>
+  <li><code>System.DateOnly</code></li>
+  <li><code>System.DateTime</code></li>
+  <li><code>System.DateTimeOffset</code></li>
+  <li><code>System.TimeOnly</code></li>
+  <li><code>System.TimeSpan</code></li>
 </ul>
 <h2>How to fix it</h2>
 <p>Alway use an overload of the parse method, where you can provide an <code>IFormatProvider</code> parameter.</p>
@@ -47,17 +47,17 @@ var timeObject = TimeOnly.Parse(timeInSaudiArabia, new CultureInfo("ar-SA"));
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parse">DateTime.Parse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact">DateTime.ParseExact method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparse">DateTime.TryParse method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparseexact">DateTime.TryParseExact method</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">DateOnly type</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime">DateTime type</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">DateTimeOffset type</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly">TimeOnly type</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.timespan">TimeSpan type</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo">Culture Info class documentation</a> </li>
-  <li> <a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard date and time format
-  strings</a> </li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parse">DateTime.Parse method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact">DateTime.ParseExact method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparse">DateTime.TryParse method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime.tryparseexact">DateTime.TryParseExact method</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.dateonly">DateOnly type</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetime">DateTime type</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.datetimeoffset">DateTimeOffset type</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timeonly">TimeOnly type</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.timespan">TimeSpan type</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo">Culture Info class documentation</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/base-types/standard-date-and-time-format-strings">Standard date and time format
+  strings</a></li>
 </ul>
 

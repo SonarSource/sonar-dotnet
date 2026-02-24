@@ -15,10 +15,10 @@ seeding a CSPRNG, we introduce a significant weakness that can be exploited by a
 <p>One of the primary use cases for CSPRNGs is generating cryptographic keys. If an attacker can predict the seed used to initialize the random number
 generator, they may be able to derive the same keys. Depending on the use case, this can lead to multiple severe outcomes, such as:</p>
 <ul>
-  <li> Being able to decrypt sensitive documents, leading to privacy breaches or identity theft. </li>
-  <li> Gaining access to a private key used for signing, allowing an attacker to forge digital signatures and impersonate legitimate entities. </li>
-  <li> Bypassing authentication mechanisms that rely on public-key infrastructure (PKI), which can be abused to gain unauthorized access to systems or
-  networks. </li>
+  <li>Being able to decrypt sensitive documents, leading to privacy breaches or identity theft.</li>
+  <li>Gaining access to a private key used for signing, allowing an attacker to forge digital signatures and impersonate legitimate entities.</li>
+  <li>Bypassing authentication mechanisms that rely on public-key infrastructure (PKI), which can be abused to gain unauthorized access to systems or
+  networks.</li>
 </ul>
 <h4>Session hijacking and man-in-the-middle attack</h4>
 <p>Another scenario where this vulnerability can be exploited is in the generation of session tokens or nonces for secure communication protocols. If
@@ -111,20 +111,19 @@ sr.NextBytes(random);
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Bouncy Castle - <a href="https://downloads.bouncycastle.org/csharp/docs/BC-CSharpDotNet-UserGuide.pdf">The BouncyCastle.NET User Guide</a>
-  </li>
+  <li>Bouncy Castle - <a href="https://downloads.bouncycastle.org/csharp/docs/BC-CSharpDotNet-UserGuide.pdf">The BouncyCastle.NET User Guide</a></li>
 </ul>
 <h3>Standards</h3>
 <ul>
-  <li> OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a> </li>
-  <li> OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
-  Misconfiguration</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/330">CWE-330 - Use of Insufficiently Random Values</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/332">CWE-332 - Insufficient Entropy in PRNG</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/336">CWE-336 - Same Seed in Pseudo-Random Number Generator (PRNG)</a> </li>
-  <li> CWE - <a href="https://cwe.mitre.org/data/definitions/337">CWE-337 - Predictable Seed in Pseudo-Random Number Generator (PRNG)</a> </li>
-  <li> <a href="https://wiki.sei.cmu.edu/confluence/display/java/MSC63-J.+Ensure+that+SecureRandom+is+properly+seeded">CERT, MSC63J.</a> - Ensure that
-  SecureRandom is properly seeded </li>
+  <li>OWASP - <a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/">Top 10 2021 Category A2 - Cryptographic Failures</a></li>
+  <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A6_2017-Security_Misconfiguration">Top 10 2017 Category A6 - Security
+  Misconfiguration</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/330">CWE-330 - Use of Insufficiently Random Values</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/332">CWE-332 - Insufficient Entropy in PRNG</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/336">CWE-336 - Same Seed in Pseudo-Random Number Generator (PRNG)</a></li>
+  <li>CWE - <a href="https://cwe.mitre.org/data/definitions/337">CWE-337 - Predictable Seed in Pseudo-Random Number Generator (PRNG)</a></li>
+  <li><a href="https://wiki.sei.cmu.edu/confluence/display/java/MSC63-J.+Ensure+that+SecureRandom+is+properly+seeded">CERT, MSC63J.</a> - Ensure that
+  SecureRandom is properly seeded</li>
 </ul>
 <h2>Implementation Specification</h2>
 <p>(visible only on this page)</p>
@@ -140,16 +139,16 @@ sr.NextBytes(random);
 <h3>Highlighting</h3>
 <p>When the random number generator’s output <strong>is not</strong> predictable by default:</p>
 <ul>
-  <li> The most recent function call that sets a seed. For example:
+  <li>The most recent function call that sets a seed. For example:
     <ul>
-      <li> The factory method that returns the RNG, where the seed is passed as a parameter. </li>
-      <li> The RNG constructor, where the seed is a parameter. </li>
-      <li> The function call on the RNG that sets the seed. </li>
-    </ul>  </li>
+      <li>The factory method that returns the RNG, where the seed is passed as a parameter.</li>
+      <li>The RNG constructor, where the seed is a parameter.</li>
+      <li>The function call on the RNG that sets the seed.</li>
+    </ul></li>
 </ul>
 <p>When the random number generator’s output <strong>is</strong> predictable by default:</p>
 <ul>
-  <li> The function call on the RNG that returns a random value. </li>
+  <li>The function call on the RNG that returns a random value.</li>
 </ul>
 <p>If the factory method or constructor is not already highlighted, it should become a secondary highlight.</p>
 

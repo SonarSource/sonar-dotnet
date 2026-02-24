@@ -1,7 +1,9 @@
 <h2>Why is this an issue?</h2>
 <p>In Blazor, the <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.jsinterop.jsinvokableattribute">[JSInvokable]</a> attribute is used
 to annotate a method, enabling it to be invoked from JavaScript code. The prerequisite for this functionality is that the method must be declared as
-<code>public</code>.<br> Otherwise, a runtime error will be triggered when an attempt is made to call the method from JavaScript.</p>
+<code>public</code>.
+  <br>
+  Otherwise, a runtime error will be triggered when an attempt is made to call the method from JavaScript.</p>
 <h2>How to fix it</h2>
 <p>To fix the issue, ensure the methods annotated with the <code>[JSInvokable]</code> attribute are <code>public.</code></p>
 <h3>Code examples</h3>
@@ -28,9 +30,9 @@ to annotate a method, enabling it to be invoked from JavaScript code. The prereq
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-dotnet-from-javascript">Call
-  .NET methods from JavaScript functions in ASP.NET Core Blazor</a> </li>
-  <li> Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.jsinterop.jsinvokableattribute">JSInvokableAttribute
-  Class</a> </li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/aspnet/core/blazor/javascript-interoperability/call-dotnet-from-javascript">Call
+  .NET methods from JavaScript functions in ASP.NET Core Blazor</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.jsinterop.jsinvokableattribute">JSInvokableAttribute
+  Class</a></li>
 </ul>
 

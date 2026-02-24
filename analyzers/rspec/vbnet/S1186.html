@@ -3,16 +3,16 @@
 functionality and are misleading to others as they might think the method implementation fulfills a specific and identified requirement.</p>
 <p>There are several reasons for a method not to have a body:</p>
 <ul>
-  <li> It is an unintentional omission, and should be fixed to prevent an unexpected behavior in production. </li>
-  <li> It is not yet, or never will be, supported. In this case an exception should be thrown. </li>
-  <li> The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override. </li>
+  <li>It is an unintentional omission, and should be fixed to prevent an unexpected behavior in production.</li>
+  <li>It is not yet, or never will be, supported. In this case an exception should be thrown.</li>
+  <li>The method is an intentionally-blank override. In this case a nested comment should explain the reason for the blank override.</li>
 </ul>
 <h3>Exceptions</h3>
 <p>The following empty methods are considered compliant:</p>
 <ul>
-  <li> empty <code>Overridable</code> methods, as the implementation might not be required in the base class </li>
-  <li> empty methods that override a <code>MustOverride</code> method as the implementation is mandatory for child class </li>
-  <li> empty overrides in test assemblies for mocking purposes </li>
+  <li>empty <code>Overridable</code> methods, as the implementation might not be required in the base class</li>
+  <li>empty methods that override a <code>MustOverride</code> method as the implementation is mandatory for child class</li>
+  <li>empty overrides in test assemblies for mocking purposes</li>
 </ul>
 <h2>How to fix it</h2>
 <h3>Code examples</h3>
