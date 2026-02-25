@@ -695,6 +695,7 @@ Namespace Tests.Diagnostics
         End Property
     End Class
 
+    ' https://sonarsource.atlassian.net/browse/NET-1678
     Public Class A
         Private _chargeId as Integer
 
@@ -713,11 +714,12 @@ Namespace Tests.Diagnostics
     Public Class B
         Inherits A
 
+        ' Override property that delegates to MyBase.ChargeId should be compliant
         Protected Overrides Property ChargeId As Integer
-            Get ' Noncompliant FP
+            Get ' Compliant
                 Return If(true, MyBase.ChargeId, 1234)
             End Get
-            Set(value As Integer) ' Noncompliant FP
+            Set(value As Integer) ' Compliant
                 MyBase.ChargeId = value
             End Set
         End Property

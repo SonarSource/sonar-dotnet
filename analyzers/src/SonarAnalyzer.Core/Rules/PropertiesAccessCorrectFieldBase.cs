@@ -47,6 +47,11 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
         // for partial classes)
         context.RegisterSymbolAction(CheckType, SymbolKind.NamedType);
 
+    protected static bool AccessesSelfBaseProperty(IMethodSymbol accessorMethod, SyntaxNode accessorBody, Compilation compilation) =>
+        accessorMethod.AssociatedSymbol is IPropertySymbol { OverriddenProperty: { } overriddenProperty }
+        && compilation.GetSemanticModel(accessorBody.SyntaxTree) is { } model
+        && accessorBody.DescendantNodes().Any(x => model.GetSymbolInfo(x).Symbol is IPropertySymbol propertyReference && propertyReference.Equals(overriddenProperty));
+
     protected static SyntaxNode FindInvokedMethod(Compilation compilation, INamedTypeSymbol containingType, SyntaxNode expression) =>
         compilation.GetSemanticModel(expression.SyntaxTree) is { } semanticModel
         && semanticModel.GetSymbolInfo(expression).Symbol is { } invocationSymbol
@@ -98,16 +103,10 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
         }
     }
 
-    private static IEnumerable<IFieldSymbol> SelfAndBaseTypesFieldSymbols(INamedTypeSymbol typeSymbol)
-    {
-        var fieldSymbols = Enumerable.Empty<IFieldSymbol>();
-        var selfAndBaseTypesSymbols = typeSymbol.GetSelfAndBaseTypes();
-        foreach (var symbol in selfAndBaseTypesSymbols)
-        {
-            fieldSymbols = fieldSymbols.Concat(symbol.GetMembers().Where(x => x.Kind.Equals(SymbolKind.Field)).OfType<IFieldSymbol>());
-        }
-        return fieldSymbols;
-    }
+    private static IEnumerable<IFieldSymbol> SelfAndBaseTypesFieldSymbols(INamedTypeSymbol typeSymbol) =>
+        typeSymbol.GetSelfAndBaseTypes()
+            .SelectMany(x => x.GetMembers().OfType<IFieldSymbol>()
+                                .Where(f => x.Equals(typeSymbol) || f.DeclaredAccessibility != Accessibility.Private));
 
     private IEnumerable<IPropertySymbol> ExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
         symbol.GetMembers()
@@ -212,7 +211,7 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
     /// between the field name and the property name.
     /// This class hides the details of matching logic.
     /// </summary>
-    private class PropertyToFieldMatcher
+    private sealed class PropertyToFieldMatcher
     {
         private readonly IDictionary<IFieldSymbol, string> fieldToStandardNameMap;
 
@@ -228,9 +227,9 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
                 .Take(2)
                 .ToList();
 
-            return matchingFields.Count != 1
-                ? null
-                : matchingFields[0];
+            return matchingFields.Count == 1
+                ? matchingFields[0]
+                : null;
         }
 
         private static string CanonicalName(string name) =>

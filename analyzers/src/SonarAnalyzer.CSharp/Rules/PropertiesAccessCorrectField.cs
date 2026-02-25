@@ -81,7 +81,8 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
     {
         if (accessorMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax accessor
-            || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation))
+            || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation)
+            || AccessesSelfBaseProperty(accessorMethod, accessor, compilation))
         {
             return true;
         }

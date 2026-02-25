@@ -296,47 +296,109 @@ public class SubClass : Base
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/8110
+// https://sonarsource.atlassian.net/browse/NET-1678
 class Repro_8110
 {
     class Base
     {
-        bool _isSelected;
+        private bool _isSelected;
+        protected bool _isEnabled;
+        protected bool _otherProtected;
 
         public virtual bool IsSelected
         {
             get => _isSelected;
             set => _isSelected = value;
         }
-    }
 
-    class DerivedOnlyCallingBaseAccessors : Base
-    {
-        public override bool IsSelected
+        public virtual bool IsEnabled
         {
-            get => base.IsSelected;         // Noncompliant: FP, calls base behavior
-            set => base.IsSelected = value; // Noncompliant: FP, calls base behavior
+            get => _isEnabled;
+            set => _isEnabled = value;
         }
     }
 
-    class DerivedCallingBaseAccessorsAndAccessingUnexpectedField : Base
-    {
-        bool _anotherField;
+    class Intermediate : Base { }
 
+    class PrivateField_DerivedCallsOtherFieldInBase : Base
+    {
         public override bool IsSelected
         {
-            get { _ = base.IsSelected; return _anotherField; }      // Noncompliant
-            set { base.IsSelected = value; _anotherField = value; } // Noncompliant
+            get => _isEnabled;         // Compliant: base field _isSelected is private
+            set => _isEnabled = value; // Compliant: base field _isSelected is private
         }
     }
 
-    class DerivedCallingBaseAccessorsAndAccessingExpectedField : Base
+    class PrivateField_DerivedCallsOtherFieldInDerived : Base
     {
-        bool _isSelected; // Different from base._isSelected, which is not accessible
+        private bool _other;
 
         public override bool IsSelected
         {
-            get { _ = base.IsSelected; return _isSelected; }        // Compliant
-            set { base.IsSelected = value; _isSelected = value; }   // Compliant
+            get => _other;         // Compliant: base field _isSelected is private
+            set => _other = value; // Compliant: base field _isSelected is private
+        }
+    }
+
+    class PrivateField_GrandchildCallsOtherFieldInBase : Intermediate
+    {
+        public override bool IsSelected
+        {
+            get => _isEnabled;         // Compliant: base field _isSelected is private
+            set => _isEnabled = value; // Compliant: base field _isSelected is private
+        }
+    }
+
+    class ProtectedField_DerivedCallsOtherFieldInBase : Base
+    {
+        public override bool IsEnabled
+        {
+            get => _otherProtected;         // Noncompliant {{Refactor this getter so that it actually refers to the field '_isEnabled'.}}
+            set => _otherProtected = value; // Noncompliant {{Refactor this setter so that it actually refers to the field '_isEnabled'.}}
+        }
+    }
+
+    class ProtectedField_DerivedCallsOtherFieldInDerived : Base
+    {
+        private bool _other;
+
+        public override bool IsEnabled
+        {
+            get => _other;         // Noncompliant {{Refactor this getter so that it actually refers to the field '_isEnabled'.}}
+            set => _other = value; // Noncompliant {{Refactor this setter so that it actually refers to the field '_isEnabled'.}}
+        }
+    }
+
+    class ProtectedField_DerivedCallsOverriddenBaseAccessor : Base
+    {
+        public override bool IsEnabled
+        {
+            get => base.IsEnabled;         // Compliant: calling own base property accessor
+            set => base.IsEnabled = value; // Compliant: calling own base property accessor
+        }
+    }
+
+    class ProtectedField_DerivedCallsOtherBaseAccessor : Base
+    {
+        public override bool IsEnabled
+        {
+            get // Noncompliant {{Refactor this getter so that it actually refers to the field '_isEnabled'.}}
+            {
+                return base.IsSelected;
+            }
+            set // Noncompliant {{Refactor this setter so that it actually refers to the field '_isEnabled'.}}
+            {
+                base.IsSelected = value;
+            }
+        }
+    }
+
+    class ProtectedField_GrandchildCallsOtherFieldInBase : Intermediate
+    {
+        public override bool IsEnabled
+        {
+            get => _otherProtected;         // Noncompliant {{Refactor this getter so that it actually refers to the field '_isEnabled'.}}
+            set => _otherProtected = value; // Noncompliant {{Refactor this setter so that it actually refers to the field '_isEnabled'.}}
         }
     }
 }
