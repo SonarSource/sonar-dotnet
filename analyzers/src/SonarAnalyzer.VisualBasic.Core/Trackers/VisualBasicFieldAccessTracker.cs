@@ -29,10 +29,10 @@ public class VisualBasicFieldAccessTracker : FieldAccessTracker<SyntaxKind>
         };
 
     public override Condition WhenRead() =>
-        context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment;
 
     public override Condition MatchSet() =>
-        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment;
 
     public override Condition AssignedValueIsConstant() =>
         context =>

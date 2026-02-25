@@ -34,7 +34,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                 c =>
                 {
                     var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!invocation.IsOnBase())
+                    if (!invocation.IsOnBase)
                     {
                         return;
                     }

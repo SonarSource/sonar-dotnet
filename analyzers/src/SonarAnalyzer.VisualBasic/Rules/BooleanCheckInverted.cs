@@ -65,7 +65,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
 
         protected override bool IsLogicalNot(BinaryExpressionSyntax expression, out SyntaxNode logicalNot)
         {
-            var parenthesizedParent = expression.GetSelfOrTopParenthesizedExpression().Parent;
+            var parenthesizedParent = expression.SelfOrTopParenthesizedExpression.Parent;
             var unaryExpression = parenthesizedParent as UnaryExpressionSyntax;
 
             logicalNot = unaryExpression;

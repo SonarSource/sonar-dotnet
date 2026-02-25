@@ -34,10 +34,10 @@ public class VisualBasicPropertyAccessTracker : PropertyAccessTracker<SyntaxKind
             : null;
 
     public override Condition MatchGetter() =>
-        context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment;
 
     public override Condition MatchSetter() =>
-        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment;
 
     public override Condition AssignedValueIsConstant() =>
         context => AssignedValue(context) != null;

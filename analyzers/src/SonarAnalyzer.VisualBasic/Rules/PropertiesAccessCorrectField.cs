@@ -201,8 +201,8 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
     {
         var strippedExpression = expression.RemoveParentheses();
-        return strippedExpression.IsLeftSideOfAssignment()
-            || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for Me.field
+        return strippedExpression.IsLeftSideOfAssignment
+            || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment); // for Me.field
     }
 
     private static bool HasExplicitAccessor(ISymbol symbol) =>

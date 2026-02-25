@@ -34,7 +34,7 @@ public class VisualBasicElementAccessTracker : ElementAccessTracker<SyntaxKind>
                    && argumentList.Arguments[index].GetExpression().FindStringConstant(context.Model) == value;
 
     public override Condition MatchSetter() =>
-        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment;
 
     public override Condition MatchProperty(MemberDescriptor member) =>
         context => ((InvocationExpressionSyntax)context.Node).Expression is MemberAccessExpressionSyntax memberAccess

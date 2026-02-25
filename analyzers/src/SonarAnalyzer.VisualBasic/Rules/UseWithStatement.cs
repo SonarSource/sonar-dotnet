@@ -52,7 +52,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
 
                     var simpleMemberAccess = (MemberAccessExpressionSyntax)c.Node;
 
-                    var parenthesized = simpleMemberAccess.GetSelfOrTopParenthesizedExpression();
+                    var parenthesized = simpleMemberAccess.SelfOrTopParenthesizedExpression;
                     if (parenthesized.Parent is MemberAccessExpressionSyntax)
                     {
                         // Only process top level member access expressions
