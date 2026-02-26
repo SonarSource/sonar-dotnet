@@ -194,4 +194,18 @@ namespace Tests.Diagnostics
             // Did we forget to dispose something here?
         }
     }
+
+    // NET-3282: https://sonarsource.atlassian.net/browse/NET-3282
+    public class Repro_ExplicitIDisposableCast : IDisposable
+    {
+        private readonly CancellationTokenSource source;
+
+        public Repro_ExplicitIDisposableCast() =>
+            source = new CancellationTokenSource(); // Noncompliant - FP: disposed via explicit cast to IDisposable
+
+        public void Dispose()
+        {
+            ((IDisposable)source).Dispose();
+        }
+    }
 }
