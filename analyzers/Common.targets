@@ -11,11 +11,9 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(IntermediateOutputPath)generated</CompilerGeneratedFilesOutputPath>
     <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
-    <!-- Disable package pruning to ensure consistent lock files across platforms.
-         .NET 10 SDK enables package pruning by default, which demotes packages from "Direct" to "Transitive"
-         when they come from imported files (like Directory.Build.targets) rather than directly from the csproj.
-         This causes NU1004 errors when Renovate (Linux) generates lock files that CI (Windows) tries to restore.
-         See: https://github.com/NuGet/Home/issues/14272 -->
+    <!-- Disable package pruning to ensure consistent lock files between Renovate (csproj restore) and CI (sln restore).
+         Pruning is applied during csproj restore but not during sln restore (NuGet bug), causing NU1004 in locked mode.
+         See NET-3274 and https://github.com/NuGet/Home/issues/14272 -->
     <RestoreEnablePackagePruning>false</RestoreEnablePackagePruning>
     <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
     <!-- Generation of Assembly Attributes that are visible in the DLL properties -->
