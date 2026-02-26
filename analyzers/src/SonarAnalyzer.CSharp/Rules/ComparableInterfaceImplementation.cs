@@ -82,19 +82,7 @@ public sealed class ComparableInterfaceImplementation : SonarDiagnosticAnalyzer
 
         foreach (var comparisonKind in ComparisonKinds.Except(overridenOperators))
         {
-            yield return CSharp(comparisonKind);
+            yield return comparisonKind.ToDisplayString(AnalyzerLanguage.CSharp);
         }
     }
-
-    private static string CSharp(ComparisonKind kind) =>
-        kind switch
-        {
-            ComparisonKind.Equals => "==",
-            ComparisonKind.NotEquals => "!=",
-            ComparisonKind.LessThan => "<",
-            ComparisonKind.LessThanOrEqual => "<=",
-            ComparisonKind.GreaterThan => ">",
-            ComparisonKind.GreaterThanOrEqual => ">=",
-            _ => throw new InvalidOperationException(),
-        };
 }

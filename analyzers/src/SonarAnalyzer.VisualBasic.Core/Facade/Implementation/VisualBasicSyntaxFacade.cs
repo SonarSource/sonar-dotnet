@@ -57,16 +57,9 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<CastExpressionSyntax>(cast).Expression;
 
     public override ComparisonKind ComparisonKind(SyntaxNode node) =>
-        node.Kind() switch
-        {
-            SyntaxKind.EqualsExpression => ComparisonKindEnum.Equals,
-            SyntaxKind.NotEqualsExpression => ComparisonKindEnum.NotEquals,
-            SyntaxKind.LessThanExpression => ComparisonKindEnum.LessThan,
-            SyntaxKind.LessThanOrEqualExpression => ComparisonKindEnum.LessThanOrEqual,
-            SyntaxKind.GreaterThanExpression => ComparisonKindEnum.GreaterThan,
-            SyntaxKind.GreaterThanOrEqualExpression => ComparisonKindEnum.GreaterThanOrEqual,
-            _ => ComparisonKindEnum.None,
-        };
+        node is BinaryExpressionSyntax { OperatorToken: var token }
+            ? token.ToComparisonKind()
+            : ComparisonKindEnum.None;
 
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>
         @enum is null ? Enumerable.Empty<SyntaxNode>() : Cast<EnumStatementSyntax>(@enum).Parent.ChildNodes().OfType<EnumMemberDeclarationSyntax>();

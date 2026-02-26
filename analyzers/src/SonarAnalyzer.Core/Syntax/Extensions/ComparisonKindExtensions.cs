@@ -27,4 +27,24 @@ public static class ComparisonKindExtensions
             ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
             _ => comparison,
         };
+
+    public static string ToDisplayString(this ComparisonKind kind, AnalyzerLanguage language)
+    {
+        if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
+        {
+            throw new NotSupportedException($"Language {language} is not supported.");
+        }
+        return kind switch
+        {
+            ComparisonKind.Equals when language == AnalyzerLanguage.CSharp => "==",
+            ComparisonKind.Equals => "=",
+            ComparisonKind.NotEquals when language == AnalyzerLanguage.CSharp => "!=",
+            ComparisonKind.NotEquals => "<>",
+            ComparisonKind.LessThan => "<",
+            ComparisonKind.LessThanOrEqual => "<=",
+            ComparisonKind.GreaterThan => ">",
+            ComparisonKind.GreaterThanOrEqual => ">=",
+            _ => throw new InvalidOperationException(),
+        };
+    }
 }

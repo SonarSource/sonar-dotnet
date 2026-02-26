@@ -14,6 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Syntax.Utilities;
+using static Microsoft.CodeAnalysis.VisualBasic.SyntaxFactory;
+
 namespace SonarAnalyzer.VisualBasic.Core.Facade.Implementation.Test;
 
 [TestClass]
@@ -35,7 +38,7 @@ public class VisualBasicSyntaxFacadeTest
 
     [TestMethod]
     public void InvocationIdentifier_UnexpectedTypeThrows_VB() =>
-        vb.Invoking(x => x.InvocationIdentifier(SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
+        vb.Invoking(x => x.InvocationIdentifier(IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 
     [TestMethod]
     public void ModifierKinds_Null_VB() =>
@@ -47,7 +50,7 @@ public class VisualBasicSyntaxFacadeTest
 
     [TestMethod]
     public void NodeExpression_UnexpectedTypeThrows_VB() =>
-        vb.Invoking(x => x.NodeExpression(SyntaxFactory.IdentifierName("ThisTypeDoesNotHaveExpression"))).Should().Throw<InvalidOperationException>();
+        vb.Invoking(x => x.NodeExpression(IdentifierName("ThisTypeDoesNotHaveExpression"))).Should().Throw<InvalidOperationException>();
 
     [TestMethod]
     public void NodeIdentifier_Null_VB() =>
@@ -55,11 +58,11 @@ public class VisualBasicSyntaxFacadeTest
 
     [TestMethod]
     public void NodeIdentifier_Unexpected_Returns_Null_VB() =>
-        vb.NodeIdentifier(SyntaxFactory.AttributeList()).Should().BeNull();
+        vb.NodeIdentifier(AttributeList()).Should().BeNull();
 
     [TestMethod]
     public void StringValue_UnexpectedType_VB() =>
-        vb.StringValue(SyntaxFactory.ThrowStatement(), null).Should().BeNull();
+        vb.StringValue(ThrowStatement(), null).Should().BeNull();
 
     [TestMethod]
     public void StringValue_NodeIsNull_VB() =>
@@ -68,39 +71,54 @@ public class VisualBasicSyntaxFacadeTest
     [TestMethod]
     public void ArgumentNameColon_VB_SimpleNameWithNameColonEquals()
     {
-        var expression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression, SyntaxFactory.Token(SyntaxKind.TrueKeyword));
-        var argument = SyntaxFactory.SimpleArgument(SyntaxFactory.NameColonEquals(SyntaxFactory.IdentifierName("a")), expression);
+        var expression = LiteralExpression(SyntaxKind.TrueLiteralExpression, Token(SyntaxKind.TrueKeyword));
+        var argument = SimpleArgument(NameColonEquals(IdentifierName("a")), expression);
         vb.ArgumentNameColon(argument).Should().BeOfType<SyntaxToken>().Subject.ValueText.Should().Be("a");
     }
 
     [TestMethod]
     public void ArgumentNameColon_VB_SimpleNameWithoutNameColonEquals()
     {
-        var expression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression, SyntaxFactory.Token(SyntaxKind.TrueKeyword));
-        var argument = SyntaxFactory.SimpleArgument(expression);
+        var expression = LiteralExpression(SyntaxKind.TrueLiteralExpression, Token(SyntaxKind.TrueKeyword));
+        var argument = SimpleArgument(expression);
         vb.ArgumentNameColon(argument).Should().BeNull();
     }
 
     [TestMethod]
     public void ArgumentNameColon_VB_OmittedArgument()
     {
-        var argument = SyntaxFactory.OmittedArgument();
+        var argument = OmittedArgument();
         vb.ArgumentNameColon(argument).Should().BeNull();
     }
 
     [TestMethod]
     public void ArgumentNameColon_VB_RangeArgument()
     {
-        var literal1 = SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(1));
-        var literal2 = literal1.WithToken(SyntaxFactory.Literal(2));
-        var argument = SyntaxFactory.RangeArgument(literal1, literal2);
+        var literal1 = LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(1));
+        var literal2 = literal1.WithToken(Literal(2));
+        var argument = RangeArgument(literal1, literal2);
         vb.ArgumentNameColon(argument).Should().BeNull();
     }
 
     [TestMethod]
     public void ArgumentNameColon_VB_UnsupportedSyntaxKind()
     {
-        var expression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression, SyntaxFactory.Token(SyntaxKind.TrueKeyword));
+        var expression = LiteralExpression(SyntaxKind.TrueLiteralExpression, Token(SyntaxKind.TrueKeyword));
         vb.ArgumentNameColon(expression).Should().BeNull();
     }
+
+    [TestMethod]
+    public void ComparisonKind_BinaryExpression_VB()
+    {
+        var binary = BinaryExpression(SyntaxKind.EqualsExpression, IdentifierName("a"), Token(SyntaxKind.EqualsToken), IdentifierName("b"));
+        vb.ComparisonKind(binary).Should().Be(ComparisonKind.Equals);
+    }
+
+    [TestMethod]
+    public void ComparisonKind_NonBinaryExpression_VB() =>
+        vb.ComparisonKind(IdentifierName("a")).Should().Be(ComparisonKind.None);
+
+    [TestMethod]
+    public void ComparisonKind_Null_VB() =>
+        vb.ComparisonKind(null).Should().Be(ComparisonKind.None);
 }

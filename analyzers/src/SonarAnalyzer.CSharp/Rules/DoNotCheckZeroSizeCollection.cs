@@ -91,22 +91,12 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             if (pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.RelationalPattern)) is { } relationalPatternNode
                 && ((RelationalPatternSyntaxWrapper)relationalPatternNode) is var relationalPattern
-                && ComparisonKind(relationalPattern.OperatorToken) is { } comparison
+                && relationalPattern.OperatorToken.ToComparisonKind() is { } comparison
                 && comparison != Comparison.None
                 && Language.ExpressionNumericConverter.ConstantIntValue(context.Model, relationalPattern.Expression) is { } constant)
             {
                 CheckExpression(context, relationalPattern.SyntaxNode, expression, constant, comparison);
             }
-
-            static ComparisonKind ComparisonKind(SyntaxToken token) =>
-                token.ValueText switch
-                {
-                    "<" => Comparison.LessThan,
-                    "<=" => Comparison.LessThanOrEqual,
-                    ">" => Comparison.GreaterThan,
-                    ">=" => Comparison.GreaterThanOrEqual,
-                    _ => Comparison.None,
-                };
         }
     }
 }

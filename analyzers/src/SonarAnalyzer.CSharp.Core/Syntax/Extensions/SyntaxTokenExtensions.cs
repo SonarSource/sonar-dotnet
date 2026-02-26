@@ -27,4 +27,16 @@ public static class SyntaxTokenExtensions
 
     public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
         tokens.Any(x => x.RawKind == (int)kind);
+
+    public static ComparisonKind ToComparisonKind(this SyntaxToken token) =>
+        token.Kind() switch
+        {
+            SyntaxKind.EqualsEqualsToken => ComparisonKind.Equals,
+            SyntaxKind.ExclamationEqualsToken => ComparisonKind.NotEquals,
+            SyntaxKind.LessThanToken => ComparisonKind.LessThan,
+            SyntaxKind.LessThanEqualsToken => ComparisonKind.LessThanOrEqual,
+            SyntaxKind.GreaterThanToken => ComparisonKind.GreaterThan,
+            SyntaxKind.GreaterThanEqualsToken => ComparisonKind.GreaterThanOrEqual,
+            _ => ComparisonKind.None,
+        };
 }

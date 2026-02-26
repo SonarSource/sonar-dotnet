@@ -20,4 +20,16 @@ public static class SyntaxTokenExtensions
 {
     public static bool IsAnyKind(this SyntaxToken token, ISet<SyntaxKind> collection) =>
         collection.Contains((SyntaxKind)token.RawKind);
+
+    public static ComparisonKind ToComparisonKind(this SyntaxToken token) =>
+        token.Kind() switch
+        {
+            SyntaxKind.EqualsToken => ComparisonKind.Equals,
+            SyntaxKind.LessThanGreaterThanToken => ComparisonKind.NotEquals,
+            SyntaxKind.LessThanToken => ComparisonKind.LessThan,
+            SyntaxKind.LessThanEqualsToken => ComparisonKind.LessThanOrEqual,
+            SyntaxKind.GreaterThanToken => ComparisonKind.GreaterThan,
+            SyntaxKind.GreaterThanEqualsToken => ComparisonKind.GreaterThanOrEqual,
+            _ => ComparisonKind.None,
+        };
 }

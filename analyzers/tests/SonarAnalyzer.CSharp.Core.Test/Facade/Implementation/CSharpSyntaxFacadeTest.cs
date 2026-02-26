@@ -14,6 +14,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Syntax.Utilities;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
+
 namespace SonarAnalyzer.CSharp.Core.Facade.Implementation.Test;
 
 [TestClass]
@@ -35,7 +38,7 @@ public class CSharpSyntaxFacadeTest
 
     [TestMethod]
     public void InvocationIdentifier_UnexpectedTypeThrows_CS() =>
-        cs.Invoking(x => x.InvocationIdentifier(SyntaxFactory.IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
+        cs.Invoking(x => x.InvocationIdentifier(IdentifierName("ThisIsNotInvocation"))).Should().Throw<InvalidCastException>();
 
     [TestMethod]
     public void ModifierKinds_Null_CS() =>
@@ -47,7 +50,7 @@ public class CSharpSyntaxFacadeTest
 
     [TestMethod]
     public void NodeExpression_UnexpectedTypeThrows_CS() =>
-        cs.Invoking(x => x.NodeExpression(SyntaxFactory.IdentifierName("ThisTypeDoesNotHaveExpression"))).Should().Throw<InvalidOperationException>();
+        cs.Invoking(x => x.NodeExpression(IdentifierName("ThisTypeDoesNotHaveExpression"))).Should().Throw<InvalidOperationException>();
 
     [TestMethod]
     public void NodeIdentifier_Null_CS() =>
@@ -55,11 +58,11 @@ public class CSharpSyntaxFacadeTest
 
     [TestMethod]
     public void NodeIdentifier_Unexpected_Returns_Null_CS() =>
-       cs.NodeIdentifier(SyntaxFactory.AttributeList()).Should().BeNull();
+       cs.NodeIdentifier(AttributeList()).Should().BeNull();
 
     [TestMethod]
     public void StringValue_UnexpectedType_CS() =>
-         cs.StringValue(SyntaxFactory.ThrowStatement(), null).Should().BeNull();
+         cs.StringValue(ThrowStatement(), null).Should().BeNull();
 
     [TestMethod]
     public void StringValue_NodeIsNull_CS() =>
@@ -77,28 +80,43 @@ public class CSharpSyntaxFacadeTest
     [DataRow("A.B?.C?.M()", ".M()")]
     [DataRow("A.B?.C?.D", ".D")]
     public void RemoveConditionalAccess_SimpleInvocation_CS(string invocation, string expected) =>
-        cs.RemoveConditionalAccess(SyntaxFactory.ParseExpression(invocation)).ToString().Should().Be(expected);
+        cs.RemoveConditionalAccess(ParseExpression(invocation)).ToString().Should().Be(expected);
 
     [TestMethod]
     public void ArgumentNameColon_CS_WithNameColon()
     {
-        var expression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
-        var argument = SyntaxFactory.Argument(SyntaxFactory.NameColon(SyntaxFactory.IdentifierName("a")), SyntaxFactory.Token(SyntaxKind.None), expression);
+        var expression = LiteralExpression(SyntaxKind.TrueLiteralExpression);
+        var argument = Argument(NameColon(IdentifierName("a")), Token(SyntaxKind.None), expression);
         cs.ArgumentNameColon(argument).Should().BeOfType<SyntaxToken>().Subject.ValueText.Should().Be("a");
     }
 
     [TestMethod]
     public void ArgumentNameColon_CS_WithoutNameColon()
     {
-        var expression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression);
-        var argument = SyntaxFactory.Argument(expression);
+        var expression = LiteralExpression(SyntaxKind.TrueLiteralExpression);
+        var argument = Argument(expression);
         cs.ArgumentNameColon(argument).Should().BeNull();
     }
 
     [TestMethod]
     public void ArgumentNameColon_CS_UnsupportedSyntaxKind()
     {
-        var expression = SyntaxFactory.LiteralExpression(SyntaxKind.TrueLiteralExpression, SyntaxFactory.Token(SyntaxKind.TrueKeyword));
+        var expression = LiteralExpression(SyntaxKind.TrueLiteralExpression, Token(SyntaxKind.TrueKeyword));
         cs.ArgumentNameColon(expression).Should().BeNull();
     }
+
+    [TestMethod]
+    public void ComparisonKind_BinaryExpression_CS()
+    {
+        var binary = BinaryExpression(SyntaxKind.EqualsExpression, IdentifierName("a"), IdentifierName("b"));
+        cs.ComparisonKind(binary).Should().Be(ComparisonKind.Equals);
+    }
+
+    [TestMethod]
+    public void ComparisonKind_NonBinaryExpression_CS() =>
+        cs.ComparisonKind(IdentifierName("a")).Should().Be(ComparisonKind.None);
+
+    [TestMethod]
+    public void ComparisonKind_Null_CS() =>
+        cs.ComparisonKind(null).Should().Be(ComparisonKind.None);
 }
