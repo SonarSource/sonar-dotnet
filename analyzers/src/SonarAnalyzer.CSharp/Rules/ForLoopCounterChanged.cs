@@ -25,32 +25,32 @@ public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     private static readonly IImmutableList<SideEffectExpression> SideEffectExpressions = ImmutableArray.Create(
-    new SideEffectExpression
-    {
-        Kinds = ImmutableHashSet.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
-        AffectedExpressions = x => ImmutableArray.Create<SyntaxNode>(((PrefixUnaryExpressionSyntax)x).Operand)
-    },
-    new SideEffectExpression
-    {
-        Kinds = ImmutableHashSet.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
-        AffectedExpressions = x => ImmutableArray.Create<SyntaxNode>(((PostfixUnaryExpressionSyntax)x).Operand)
-    },
-    new SideEffectExpression
-    {
-        Kinds = ImmutableHashSet.Create(
-            SyntaxKind.SimpleAssignmentExpression,
-            SyntaxKind.AddAssignmentExpression,
-            SyntaxKind.SubtractAssignmentExpression,
-            SyntaxKind.MultiplyAssignmentExpression,
-            SyntaxKind.DivideAssignmentExpression,
-            SyntaxKind.ModuloAssignmentExpression,
-            SyntaxKind.AndAssignmentExpression,
-            SyntaxKind.ExclusiveOrAssignmentExpression,
-            SyntaxKind.OrAssignmentExpression,
-            SyntaxKind.LeftShiftAssignmentExpression,
-            SyntaxKind.RightShiftAssignmentExpression),
-        AffectedExpressions = x => ((AssignmentExpressionSyntax)x).AssignmentTargets()
-    });
+        new SideEffectExpression
+        {
+            Kinds = ImmutableHashSet.Create(SyntaxKind.PreIncrementExpression, SyntaxKind.PreDecrementExpression),
+            AffectedExpressions = x => ImmutableArray.Create<SyntaxNode>(((PrefixUnaryExpressionSyntax)x).Operand)
+        },
+        new SideEffectExpression
+        {
+            Kinds = ImmutableHashSet.Create(SyntaxKind.PostIncrementExpression, SyntaxKind.PostDecrementExpression),
+            AffectedExpressions = x => ImmutableArray.Create<SyntaxNode>(((PostfixUnaryExpressionSyntax)x).Operand)
+        },
+        new SideEffectExpression
+        {
+            Kinds = ImmutableHashSet.Create(
+                SyntaxKind.SimpleAssignmentExpression,
+                SyntaxKind.AddAssignmentExpression,
+                SyntaxKind.SubtractAssignmentExpression,
+                SyntaxKind.MultiplyAssignmentExpression,
+                SyntaxKind.DivideAssignmentExpression,
+                SyntaxKind.ModuloAssignmentExpression,
+                SyntaxKind.AndAssignmentExpression,
+                SyntaxKind.ExclusiveOrAssignmentExpression,
+                SyntaxKind.OrAssignmentExpression,
+                SyntaxKind.LeftShiftAssignmentExpression,
+                SyntaxKind.RightShiftAssignmentExpression),
+            AffectedExpressions = x => ((AssignmentExpressionSyntax)x).AssignmentTargets()
+        });
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -101,9 +101,5 @@ public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
          from expression in sideEffect.AffectedExpressions(descendantNode)
          select expression).ToArray();
 
-    private readonly struct SideEffectExpression
-    {
-        public ImmutableHashSet<SyntaxKind> Kinds { get; init; }
-        public Func<SyntaxNode, ImmutableArray<SyntaxNode>> AffectedExpressions { get; init; }
-    }
+    private readonly record struct SideEffectExpression(ImmutableHashSet<SyntaxKind> Kinds, Func<SyntaxNode, ImmutableArray<SyntaxNode>> AffectedExpressions);
 }

@@ -168,8 +168,8 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
         private readonly DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer;
 
         protected abstract bool ShouldHandle(TSyntaxNode syntaxNode, SemanticModel model);
-        protected abstract string GetVariableName(TSyntaxNode syntaxNode);
-        protected abstract string GetAssignedValue(TSyntaxNode syntaxNode, SemanticModel model);
+        protected abstract string VariableName(TSyntaxNode syntaxNode);
+        protected abstract string AssignedValue(TSyntaxNode syntaxNode, SemanticModel model);
 
         protected CredentialWordsFinderBase(DoNotHardcodeCredentialsBase<TSyntaxKind> analyzer) =>
             this.analyzer = analyzer;
@@ -179,8 +179,8 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
             {
                 var declarator = (TSyntaxNode)context.Node;
                 if (ShouldHandle(declarator, context.Model)
-                    && GetAssignedValue(declarator, context.Model) is { } variableValue
-                    && analyzer.FindIssue(GetVariableName(declarator), variableValue) is { } message)
+                    && AssignedValue(declarator, context.Model) is { } variableValue
+                    && analyzer.FindIssue(VariableName(declarator), variableValue) is { } message)
                 {
                     context.ReportIssue(analyzer.rule, declarator, message);
                 }

@@ -69,10 +69,10 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
     {
         public VariableDeclarationBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-        protected override string GetAssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel model) =>
+        protected override string AssignedValue(VariableDeclaratorSyntax syntaxNode, SemanticModel model) =>
             syntaxNode.Initializer.Value.StringValue(model);
 
-        protected override string GetVariableName(VariableDeclaratorSyntax syntaxNode) =>
+        protected override string VariableName(VariableDeclaratorSyntax syntaxNode) =>
             syntaxNode.Names[0].Identifier.ValueText; // We already tested the count in IsAssignedWithStringLiteral
 
         protected override bool ShouldHandle(VariableDeclaratorSyntax syntaxNode, SemanticModel model) =>
@@ -86,10 +86,10 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
     {
         public AssignmentExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-        protected override string GetAssignedValue(AssignmentStatementSyntax syntaxNode, SemanticModel model) =>
+        protected override string AssignedValue(AssignmentStatementSyntax syntaxNode, SemanticModel model) =>
             syntaxNode.Right.StringValue(model);
 
-        protected override string GetVariableName(AssignmentStatementSyntax syntaxNode) =>
+        protected override string VariableName(AssignmentStatementSyntax syntaxNode) =>
             (syntaxNode.Left as IdentifierNameSyntax)?.Identifier.ValueText;
 
         protected override bool ShouldHandle(AssignmentStatementSyntax syntaxNode, SemanticModel model) =>
@@ -108,13 +108,13 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
     {
         public StringLiteralBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-        protected override string GetAssignedValue(LiteralExpressionSyntax syntaxNode, SemanticModel model) =>
+        protected override string AssignedValue(LiteralExpressionSyntax syntaxNode, SemanticModel model) =>
             syntaxNode.StringValue(model);
 
         // We don't have a variable for cases that this finder should handle.  Cases with variable name are
         // handled by VariableDeclarationBannedWordsFinder and AssignmentExpressionBannedWordsFinder
         // Returning null is safe here, it will not be considered as a value.
-        protected override string GetVariableName(LiteralExpressionSyntax syntaxNode) =>
+        protected override string VariableName(LiteralExpressionSyntax syntaxNode) =>
             null;
 
         protected override bool ShouldHandle(LiteralExpressionSyntax syntaxNode, SemanticModel model) =>
@@ -157,7 +157,7 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
     {
         public AddExpressionBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-        protected override string GetAssignedValue(BinaryExpressionSyntax syntaxNode, SemanticModel model)
+        protected override string AssignedValue(BinaryExpressionSyntax syntaxNode, SemanticModel model)
         {
             var left = syntaxNode.Left is BinaryExpressionSyntax precedingConcat && precedingConcat.Kind() is SyntaxKind.ConcatenateExpression or SyntaxKind.AddExpression
                 ? precedingConcat.Right
@@ -168,7 +168,7 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
                     : null;
         }
 
-        protected override string GetVariableName(BinaryExpressionSyntax syntaxNode) => null;
+        protected override string VariableName(BinaryExpressionSyntax syntaxNode) => null;
 
         protected override bool ShouldHandle(BinaryExpressionSyntax syntaxNode, SemanticModel model) => true;
     }
@@ -177,7 +177,7 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
     {
         public InterpolatedStringBannedWordsFinder(DoNotHardcodeCredentialsBase<SyntaxKind> analyzer) : base(analyzer) { }
 
-        protected override string GetAssignedValue(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel model) =>
+        protected override string AssignedValue(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel model) =>
             syntaxNode.Contents.JoinStr(null, x => x switch
             {
                 InterpolationSyntax interpolation => interpolation.Expression.FindStringConstant(model),
@@ -185,7 +185,7 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
                 _ => null
             } ?? KeywordSeparator.ToString()); // Unknown elements resolved to separator to terminate the keyword-value sequence
 
-        protected override string GetVariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
+        protected override string VariableName(InterpolatedStringExpressionSyntax syntaxNode) => null;
 
         protected override bool ShouldHandle(InterpolatedStringExpressionSyntax syntaxNode, SemanticModel model) => true;
     }
@@ -194,7 +194,7 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
     {
         public InvocationBannedWordsFinder(DoNotHardcodeCredentials analyzer) : base(analyzer) { }
 
-        protected override string GetAssignedValue(InvocationExpressionSyntax syntaxNode, SemanticModel model)
+        protected override string AssignedValue(InvocationExpressionSyntax syntaxNode, SemanticModel model)
         {
             var allArgs = syntaxNode.ArgumentList.Arguments.Select(x => x.GetExpression().FindStringConstant(model) ?? KeywordSeparator.ToString());
             try
@@ -207,7 +207,7 @@ public sealed class DoNotHardcodeCredentials : DoNotHardcodeCredentialsBase<Synt
             }
         }
 
-        protected override string GetVariableName(InvocationExpressionSyntax syntaxNode) => null;
+        protected override string VariableName(InvocationExpressionSyntax syntaxNode) => null;
 
         protected override bool ShouldHandle(InvocationExpressionSyntax syntaxNode, SemanticModel model) =>
             syntaxNode.IsMethodInvocation(KnownType.System_String, "Format", model)
