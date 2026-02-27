@@ -6,10 +6,10 @@
     <title>Internal Sonar styling analyzer for C#</title>
     <authors>SonarSource</authors>
     <owners>SonarSource</owners>
-    <license type="file">licenses\LICENSE.txt</license>
+    <license type="file">licenses/LICENSE.txt</license>
     <projectUrl>https://redirect.sonarsource.com/doc/sonar-visualstudio.html</projectUrl>
     <repository type="git" url="https://github.com/SonarSource/sonar-dotnet" />
-    <icon>images\sonarsource_64.png</icon>
+    <icon>images/sonarsource_64.png</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Internal Sonar styling analyzer for C#</summary>
     <description>This package contains a set of coding style rules to follow in Sonar code base. Coding style changes as well as breaking changes will appear between minor versions without prior notice. We do not provide support for this package.</description>
@@ -22,9 +22,9 @@
     </frameworkAssemblies>
   </metadata>
   <files>
-    <file src="binaries\SonarAnalyzer.CSharp.Styling\Internal.SonarAnalyzer.CSharp.Styling.dll" target="analyzers" />
-    <file src="logos\sonarsource_64.png" target="images\" />
-    <file src="licenses\THIRD_PARTY_LICENSES\*" target="licenses\THIRD_PARTY_LICENSES\" />
-    <file src="..\..\LICENSE.txt" target="licenses\" />
+    <file src="binaries/SonarAnalyzer.CSharp.Styling/Internal.SonarAnalyzer.CSharp.Styling.dll" target="analyzers" />
+    <file src="logos/sonarsource_64.png" target="images/" />
+    <file src="licenses/THIRD_PARTY_LICENSES/*" target="licenses/THIRD_PARTY_LICENSES/" />
+    <file src="../../LICENSE.txt" target="licenses/" />
   </files>
 </package>
