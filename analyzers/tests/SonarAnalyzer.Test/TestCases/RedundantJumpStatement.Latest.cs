@@ -57,3 +57,23 @@ record Record
     }
 }
 
+// NET-3284: https://sonarsource.atlassian.net/browse/NET-3284
+public class RedundantJumpStatement_C9Patterns
+{
+    void AllPatterns_C9Patterns(int[] numbers, int[][] arrays)
+    {
+        foreach (var n in numbers)
+        {
+            if (n is 1 or 2) continue;             // FN - OrPattern
+            else if (n is > 100) continue;         // FN - RelationalPattern
+            else if (n is > 0 and < 100) continue; // FN - AndPattern
+            else if (n is not 100) continue;       // FN - NotPattern
+        }
+        foreach (var arr in arrays)
+        {
+            if (arr is []) continue;               // FN - ListPattern
+        }
+    }
+}
+
+
