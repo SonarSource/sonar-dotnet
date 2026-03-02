@@ -25,7 +25,7 @@ public sealed class MoveMethodToDedicatedExtensionClass : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var method = (IMethodSymbol)c.ContainingSymbol;
-                if (method.IsExtensionMethod && ExpectedContainingType(method) is { } expected)
+                if (method.IsExtension && ExpectedContainingType(method) is { } expected)
                 {
                     c.ReportIssue(Rule, ((MethodDeclarationSyntax)c.Node).Identifier, expected);
                 }
@@ -34,18 +34,26 @@ public sealed class MoveMethodToDedicatedExtensionClass : StylingAnalyzer
 
     private static string ExpectedContainingType(IMethodSymbol method)
     {
-        var expectedPrefixes = method.Parameters[0].Type switch
+        var parameter = method.AssociatedExtensionImplementation is null
+            ? method.Parameters[0].Type
+            : method.ContainingType.ExtensionParameter.Type;
+
+        var expectedPrefixes = parameter switch
         {
             ITypeParameterSymbol typeParameter => typeParameter.ConstraintTypes.Where(x => x.IsType).Select(x => x.Name),
             INamedTypeSymbol namedType => ValidTypeArguments(namedType).Select(x => x.Name),
-            _ => [method.Parameters[0].Type.Name]
+            _ => [parameter.Name]
         };
+
+        var containingType = method.AssociatedExtensionImplementation is null
+            ? method.ContainingType
+            : method.ContainingType.ContainingType;
 
         if (!expectedPrefixes.Any() || expectedPrefixes.All(string.IsNullOrWhiteSpace))
         {
             return "ObjectExtensions";
         }
-        else if (expectedPrefixes.Any(x => method.ContainingType.Name.Equals($"{x}Extensions")))
+        else if (expectedPrefixes.Any(x => containingType.Name.Equals($"{x}Extensions")))
         {
             return null;
         }

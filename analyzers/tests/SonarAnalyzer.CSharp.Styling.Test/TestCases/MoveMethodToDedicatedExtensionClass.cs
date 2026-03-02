@@ -139,3 +139,32 @@ static class GenericIntermediateTypeExtensions
     public static void NestedNonGeneric<T>(this List<GenericIntermediateType<ExplodedNode>> generics) { }       // Compliant
     public class GenericIntermediateType<T> { }
 }
+
+static class NoncompliantCSharp14Extensions
+{
+    extension(IEnumerable<ExplodedNode> nodes)
+    {
+        public void InstanceNoncompliant() { }   // Noncompliant {{Move this extension method to the IEnumerableExtensions or ExplodedNodeExtensions class.}}
+    }
+
+    extension(IEnumerable<ExplodedNode>)
+    {
+        public static void StaticNoncompliant() { } // Noncompliant {{Move this extension method to the IEnumerableExtensions or ExplodedNodeExtensions class.}}
+    }
+}
+
+public class Compliant { }
+
+static class CompliantExtensions
+{
+    extension(IEnumerable<Compliant> nodes)
+    {
+        public void InstanceCompliant() { }   // Compliant
+    }
+
+    extension(IEnumerable<Compliant>)
+    {
+        public static void StaticCompliant() { } // Compliant
+    }
+}
+
