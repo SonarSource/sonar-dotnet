@@ -37,7 +37,7 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
 
     protected sealed override SymbolReferenceInfo CreateMessage(UtilityAnalyzerParameters parameters, SyntaxTree tree, SemanticModel model)
     {
-        var filePath = GetFilePath(tree);
+        var filePath = MapFilePath(tree);
         var symbolReferenceInfo = new SymbolReferenceInfo { FilePath = filePath };
         var references = GetReferences(tree.GetRoot(), model);
         foreach (var symbol in references.Keys)
@@ -114,7 +114,7 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
             return null;
         }
 
-        var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = GetTextRange(declarationSpan.Value) };
+        var symbolReference = new SymbolReferenceInfo.Types.SymbolReference { Declaration = ToTextRange(declarationSpan.Value) };
         for (var i = 0; i < references.Count; i++)
         {
             var reference = references[i];
@@ -124,7 +124,7 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
                 // We need to make sure that we don't count these elements.
                 && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
             {
-                symbolReference.Reference.Add(GetTextRange(mappedLineSpan));
+                symbolReference.Reference.Add(ToTextRange(mappedLineSpan));
             }
         }
         return symbolReference;

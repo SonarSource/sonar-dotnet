@@ -138,7 +138,7 @@ namespace SonarAnalyzer.Core.Rules
                     : new()
                     {
                         TokenType = tokenType,
-                        TextRange = GetTextRange(token.GetLocation().GetLineSpan()),
+                        TextRange = ToTextRange(token.GetLocation().GetLineSpan()),
                     };
 
             protected virtual TokenInfo ClassifyIdentifier(SyntaxToken token)
@@ -188,7 +188,7 @@ namespace SonarAnalyzer.Core.Rules
                 new()
                 {
                     TokenType = tokenType,
-                    TextRange = GetTextRange(Location.Create(tree, span).GetLineSpan())
+                    TextRange = ToTextRange(Location.Create(tree, span).GetLineSpan())
                 };
 
             private TokenInfo ClassifyDocComment(SyntaxTrivia trivia) =>

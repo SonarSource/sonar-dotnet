@@ -45,7 +45,7 @@ namespace SonarAnalyzer.Core.Rules
             {
                 if (GetCpdValue(token) is var value && !string.IsNullOrWhiteSpace(value))
                 {
-                    cpdTokenInfo.TokenInfo.Add(new CopyPasteTokenInfo.Types.TokenInfo { TokenValue = value, TextRange = GetTextRange(Location.Create(tree, token.Span).GetLineSpan()) });
+                    cpdTokenInfo.TokenInfo.Add(new CopyPasteTokenInfo.Types.TokenInfo { TokenValue = value, TextRange = ToTextRange(Location.Create(tree, token.Span).GetLineSpan()) });
                 }
             }
             return cpdTokenInfo;
