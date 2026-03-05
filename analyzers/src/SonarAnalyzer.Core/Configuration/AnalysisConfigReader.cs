@@ -26,22 +26,31 @@ public class AnalysisConfigReader
 {
     private readonly AnalysisConfig analysisConfig;
 
+    public bool IsCloud => analysisConfig.SonarQubeVersion.StartsWith("8.0.0");    // This analyzer will never be backported to Server 8.0, so we don't care about release version
+
     public AnalysisConfigReader(string analysisConfigPath)
     {
-        try
+        if (File.Exists(analysisConfigPath))
         {
-            analysisConfig = new(XDocument.Load(analysisConfigPath));
+            try
+            {
+                analysisConfig = new(XDocument.Load(analysisConfigPath));
+            }
+            catch (Exception e)
+            {
+                throw new InvalidOperationException($"File '{analysisConfigPath}' could not be parsed.", e);
+            }
         }
-        catch (Exception e)
+        else
         {
-            throw new InvalidOperationException($"File '{analysisConfigPath}' could not be parsed.", e);
+            analysisConfig = AnalysisConfig.Empty;
         }
     }
 
     public string[] UnchangedFiles() =>
         ConfigValue("UnchangedFilesPath") is { } unchangedFilesPath
             ? File.ReadAllLines(unchangedFilesPath)
-            : Array.Empty<string>();
+            : [];
 
     private string ConfigValue(string id) =>
         analysisConfig.AdditionalConfig.FirstOrDefault(x => x.Id == id)?.Value;

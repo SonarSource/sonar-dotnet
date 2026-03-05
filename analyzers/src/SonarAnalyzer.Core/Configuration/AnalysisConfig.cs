@@ -27,6 +27,9 @@ namespace SonarAnalyzer.Core.Configuration;
 /// </remarks>
 internal sealed class AnalysisConfig
 {
+    public static readonly AnalysisConfig Empty = new();
+
+    public string SonarQubeVersion { get; }
     public ConfigSetting[] AdditionalConfig { get; }
 
     public AnalysisConfig(XDocument document)
@@ -36,6 +39,13 @@ internal sealed class AnalysisConfig
         {
             throw new InvalidOperationException("Unexpected Root node: " + document.Root.Name);
         }
+        SonarQubeVersion = document.Root.Element(xmlns + "SonarQubeVersion")?.Value ?? string.Empty;
         AdditionalConfig = document.Root.Element(xmlns + "AdditionalConfig")?.Elements(xmlns + "ConfigSetting").Select(x => new ConfigSetting(x)).ToArray() ?? [];
+    }
+
+    private AnalysisConfig()
+    {
+        SonarQubeVersion = string.Empty;
+        AdditionalConfig = [];
     }
 }

@@ -26,10 +26,10 @@ namespace SonarAnalyzer.TestFramework.Common;
 public static class AnalysisScaffolding
 {
     public static SonarAnalysisContext CreateSonarAnalysisContext() =>
-        new(Substitute.For<RoslynAnalysisContext>(), ImmutableArray<DiagnosticDescriptor>.Empty);
+        new(Substitute.For<RoslynAnalysisContext>(), []);
 
     public static AnalyzerOptions CreateOptions() =>
-        new(ImmutableArray<AdditionalText>.Empty);
+        new([]);
 
     public static AnalyzerOptions CreateOptions(string relativePath)
     {
@@ -54,10 +54,11 @@ public static class AnalysisScaffolding
     public static string CreateAnalysisConfig(TestContext context, IEnumerable<string> unchangedFiles) =>
         CreateAnalysisConfig(context, "UnchangedFilesPath", TestFiles.WriteFile(context, "UnchangedFiles.txt", unchangedFiles.JoinStr(Environment.NewLine)));
 
-    public static string CreateAnalysisConfig(TestContext context, string settingsId, string settingValue) =>
+    public static string CreateAnalysisConfig(TestContext context, string settingsId, string settingValue, string sonarQubeVersion = null) =>
         TestFiles.WriteFile(context, "SonarQubeAnalysisConfig.xml", $"""
             <?xml version="1.0" encoding="utf-8"?>
             <AnalysisConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+                <SonarQubeVersion>{sonarQubeVersion}</SonarQubeVersion>
                 <AdditionalConfig>
                     <ConfigSetting Id="{settingsId}" Value="{settingValue}" />
                 </AdditionalConfig>
@@ -121,10 +122,10 @@ public static class AnalysisScaffolding
 
     public static SonarSyntaxNodeReportingContext CreateNodeReportingContext(SyntaxNode node, SemanticModel model, Action<Diagnostic> reportIssue)
     {
-        var options = AnalysisScaffolding.CreateOptions();
+        var options = CreateOptions();
         var containingSymbol = Substitute.For<ISymbol>();
         var context = new SyntaxNodeAnalysisContext(node, containingSymbol, model, options, reportIssue, _ => true, default);
-        return new SonarSyntaxNodeReportingContext(AnalysisScaffolding.CreateSonarAnalysisContext(), context);
+        return new SonarSyntaxNodeReportingContext(CreateSonarAnalysisContext(), context);
     }
 
     private static IEnumerable<XElement> CreateRules(List<SonarLintXmlRule> ruleParameters)
@@ -137,7 +138,7 @@ public static class AnalysisScaffolding
 
     private static XElement CreateRule(SonarLintXmlRule rule)
     {
-        List<XElement> elements = new();
+        var elements = new List<XElement>();
         foreach (var param in rule.Parameters)
         {
             elements.Add(CreateKeyValuePair("Parameter", param.Key, param.Value));
@@ -152,7 +153,7 @@ public static class AnalysisScaffolding
         new(containerName, new XElement("Key", key), new XElement("Value", value));
 
     private static string ConcatenateStringArray(string[] array) =>
-        string.Join(",", array ?? Array.Empty<string>());
+        string.Join(",", array ?? []);
 
     private static string CreateSonarProjectConfig(TestContext context, string element, string value, bool isScannerRun, string analysisConfigPath = null)
     {

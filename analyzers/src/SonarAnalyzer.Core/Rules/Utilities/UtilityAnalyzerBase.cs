@@ -21,10 +21,15 @@ using SonarAnalyzer.Protobuf;
 
 namespace SonarAnalyzer.Core.Rules;
 
-public readonly record struct UtilityAnalyzerParameters(bool IsAnalyzerEnabled, bool IgnoreHeaderComments, bool AnalyzeGeneratedCode, bool AnalyzeTestProjects, string OutPath, bool IsTestProject)
+public readonly record struct UtilityAnalyzerParameters(bool IsAnalyzerEnabled,
+                                                        bool IgnoreHeaderComments,
+                                                        bool AnalyzeGeneratedCode,
+                                                        bool AnalyzeTestProjects,
+                                                        string OutPath,
+                                                        bool IsTestProject,
+                                                        bool IsCloud)
 {
-    public static readonly UtilityAnalyzerParameters Default =
-        new(IsAnalyzerEnabled: false, IgnoreHeaderComments: false, AnalyzeGeneratedCode: false, AnalyzeTestProjects: true, OutPath: null, IsTestProject: false);
+    public static readonly UtilityAnalyzerParameters Default = new(false, false, false, true, null, false, false);
 }
 
 public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
@@ -66,7 +71,8 @@ public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
                 AnalyzeGeneratedCode: sonarLintXml.AnalyzeGeneratedCode(language),
                 AnalyzeTestProjects: true,
                 OutPath: Path.Combine(outPath, language == LanguageNames.CSharp ? "output-cs" : "output-vbnet"),
-                IsTestProject: context.IsTestProject());
+                IsTestProject: context.IsTestProject(),
+                IsCloud: context.ProjectConfiguration().AnalysisConfig.IsCloud);
         }
         return UtilityAnalyzerParameters.Default;
     }

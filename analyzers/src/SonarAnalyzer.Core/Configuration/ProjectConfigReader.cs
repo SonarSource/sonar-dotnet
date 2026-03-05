@@ -46,7 +46,7 @@ public class ProjectConfigReader
         projectConfig = sonarProjectConfig is null ? ProjectConfig.Empty : ReadContent(sonarProjectConfig);
         projectType = new Lazy<ProjectType>(ParseProjectType);
         filesToAnalyze = new Lazy<FilesToAnalyzeProvider>(() => new FilesToAnalyzeProvider(FilesToAnalyzePath));
-        analysisConfig = new(() => sonarProjectConfig is null ? null : new(AnalysisConfigPath));
+        analysisConfig = new(() => new(AnalysisConfigPath));
     }
 
     private static ProjectConfig ReadContent(SourceText sonarProjectConfig)
