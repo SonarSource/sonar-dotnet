@@ -27,7 +27,9 @@ namespace SonarAnalyzer.SourceGenerators;
 [ExcludeFromCodeCoverage]
 public class RuleCatalogGenerator : IIncrementalGenerator
 {
-    private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(100);
+    private static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(200);
+    private static readonly Regex HtmlTagRegex = new("<[^>]*>", RegexOptions.None, RegexTimeout);
+    private static readonly Regex MultipleWhitespaceRegex = new(@"\s{2,}", RegexOptions.None, RegexTimeout);
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -108,13 +110,15 @@ public class RuleCatalogGenerator : IIncrementalGenerator
 
     private static string FirstParagraphText(string id, string html)
     {
-        var match = Regex.Match(html, "<p>(?<Text>.*?)</p>", RegexOptions.Singleline, RegexTimeout);
-        if (match.Success)
+        var startIndex = html.IndexOf("<p>");
+        if (startIndex >= 0)
         {
-            var text = match.Groups["Text"].Value;
-            text = Regex.Replace(text, "<[^>]*>", string.Empty, RegexOptions.None, RegexTimeout);
+            startIndex += 3; // end of <p>
+            var endIndex = html.IndexOf("</p>", startIndex);
+            var text = html.Substring(startIndex, endIndex - startIndex);
+            text = HtmlTagRegex.Replace(text, string.Empty);
             text = text.Replace("\n", " ").Replace("\r", " ");
-            text = Regex.Replace(text, @"\s{2,}", " ", RegexOptions.None, RegexTimeout);
+            text = MultipleWhitespaceRegex.Replace(text, " ");
             return WebUtility.HtmlDecode(text);
         }
         else
