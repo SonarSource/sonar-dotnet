@@ -30,13 +30,14 @@ public class JsonSerializerTest
     [TestMethod]
     public void Serialize_BasicTypes()
     {
-        var dictionary = new Dictionary<string, object>
+        var stringObjectMap = new Dictionary<string, object>
         {
             { "StringKey", "String value"},
             { "BoolKey", true},
             { "IntKey", 42}
         };
-        var value = new TestData("Name", true, false, null, ["a", "b", "c"], StringComparison.CurrentCulture, dictionary.ToArray());
+        var stringStringMap = ImmutableSortedDictionary<string, string>.Empty.Add("Key A", "Value A").Add("Key B", "Value B");
+        var value = new TestData("Name", true, false, null, ["a", "b", "c"], StringComparison.CurrentCulture, stringObjectMap.ToArray(), stringStringMap.ToArray());
 
         var result = JsonSerializer.Serialize(value);
         result.ToUnixLineEndings().Should().Be("""
@@ -47,14 +48,16 @@ public class JsonSerializerTest
               "nullString": null,
               "stringArray": ["a", "b", "c"],
               "enumValue": "CurrentCulture",
-              "dictionary": [
+              "stringObjectMap": [
                 { "key": "StringKey", "value": "String value" },
                 { "key": "BoolKey", "value": true },
                 { "key": "IntKey", "value": 42 }
+              ],
+              "stringStringMap": [
+                { "key": "Key A", "value": "Value A" },
+                { "key": "Key B", "value": "Value B" }
               ]
-
             }
-
             """);
         // And it also deserializes correctly
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, Converters = { new JsonStringEnumConverter(), new PrimitiveObjectConverter() } };
@@ -67,7 +70,6 @@ public class JsonSerializerTest
             {
               "value": "Start \\ \" \n \r \t \b \f End"
             }
-
             """);
 
     [TestMethod]
@@ -77,7 +79,6 @@ public class JsonSerializerTest
               "capacity": 4,
               "count": 2
             }
-
             """);
 
     private sealed record TestData(string StringValue,
@@ -86,9 +87,10 @@ public class JsonSerializerTest
                                    string NullString,
                                    string[] StringArray,
                                    StringComparison EnumValue,
-                                   KeyValuePair<string, object>[] Dictionary)
+                                   KeyValuePair<string, object>[] StringObjectMap,
+                                   KeyValuePair<string, string>[] StringStringMap)
     {
-        public TestData() : this(null, true, false, null, null, StringComparison.Ordinal, null) { }
+        public TestData() : this(null, true, false, null, null, StringComparison.Ordinal, null, null) { }
     }
 
     private sealed class PrimitiveObjectConverter : JsonConverter<object>

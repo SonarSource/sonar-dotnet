@@ -35,7 +35,8 @@ public static class JsonSerializer
             string value => SerializeValue(value),
             Enum => SerializeValue(original.ToString()),
             IEnumerable<string> values => $"[{values.JoinStr(", ", SerializeValue)}]",
-            IEnumerable<KeyValuePair<string, object>> values => SerializeValue(values),
+            IEnumerable<KeyValuePair<string, object>> values => SerializePairs(values, SerializeValue),
+            IEnumerable<KeyValuePair<string, string>> values => SerializePairs(values, SerializeValue),
             _ => throw new NotSupportedException($"Unexpected type: {original.GetType().Name}")
         };
 
@@ -61,15 +62,15 @@ public static class JsonSerializer
         return sb.ToString();
     }
 
-    private static string SerializeValue(IEnumerable<KeyValuePair<string, object>> pairs) =>
-        SerializeLines("[", "  ]", pairs.Select(x => $$"""    { "key": {{SerializeValue(x.Key)}}, "value": {{SerializeValue(x.Value)}} }"""));
+    private static string SerializePairs<TValue>(IEnumerable<KeyValuePair<string, TValue>> pairs, Func<TValue, string> serializeValue) =>
+        SerializeLines("[", "  ]", pairs.Select(x => $$"""    { "key": {{SerializeValue(x.Key)}}, "value": {{serializeValue(x.Value)}} }"""));
 
     private static string SerializeLines(string prefix, string suffix, IEnumerable<string> lines)
     {
         var sb = new StringBuilder();
         sb.AppendLine(prefix);
         sb.AppendLine(lines.JoinStr($",{Environment.NewLine}"));
-        sb.AppendLine(suffix);
+        sb.Append(suffix);
         return sb.ToString();
     }
 }
