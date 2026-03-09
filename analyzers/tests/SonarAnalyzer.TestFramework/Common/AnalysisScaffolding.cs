@@ -163,8 +163,10 @@ public static class AnalysisScaffolding
         var projectConfigContent = $"""
             <SonarProjectConfig xmlns="http://www.sonarsource.com/msbuild/analyzer/2021/1">
                 <AnalysisConfigPath>{analysisConfigPath}</AnalysisConfigPath>
+                <ProjectPath>c:\Project\Fake.proj</ProjectPath>
                 <OutPath>{outPath}</OutPath>
                 <{element}>{value}</{element}>
+                <TargetFramework>netstandard2.0</TargetFramework>
             </SonarProjectConfig>
             """;
         File.WriteAllText(sonarProjectConfigPath, projectConfigContent);
