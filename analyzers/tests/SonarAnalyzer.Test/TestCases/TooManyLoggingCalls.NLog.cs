@@ -8,15 +8,15 @@ public class Program
         logger.Debug("Debug 1");                                    // Noncompliant
         logger.Debug("Debug 2: {Arg}", 42);                         // Secondary
         logger.Debug(new Exception(), "Debug 2");                   // Secondary
-        logger.Trace("Debug 4");                                    // Secondary
-        logger.Trace("Debug 5: {Arg}", 42);                         // Secondary
-        logger.Trace(new Exception(), "Debug 6");                   // Secondary
+        logger.Trace("Debug 4");                                    // Secondary - FP NET-3295
+        logger.Trace("Debug 5: {Arg}", 42);                         // Secondary - FP NET-3295
+        logger.Trace(new Exception(), "Debug 6");                   // Secondary - FP NET-3295
         logger.ConditionalDebug("Debug 7");                         // Secondary
         logger.ConditionalDebug("Debug 8: {Arg}", 42);              // Secondary
         logger.ConditionalDebug(new Exception(), "Debug 9");        // Secondary
-        logger.ConditionalTrace("Debug 10");                        // Secondary
-        logger.ConditionalTrace("Debug 11: {Arg}", 42);             // Secondary
-        logger.ConditionalTrace(new Exception(), "Debug 12");       // Secondary
+        logger.ConditionalTrace("Debug 10");                        // Secondary - FP NET-3295
+        logger.ConditionalTrace("Debug 11: {Arg}", 42);             // Secondary - FP NET-3295
+        logger.ConditionalTrace(new Exception(), "Debug 12");       // Secondary - FP NET-3295
 
         while (true)
         {

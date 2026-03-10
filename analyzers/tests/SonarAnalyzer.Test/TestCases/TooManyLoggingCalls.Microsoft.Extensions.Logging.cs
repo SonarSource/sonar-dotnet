@@ -8,11 +8,11 @@ public class Program
         logger.LogDebug("Debug 1");                                     // Noncompliant
         logger.LogDebug("Debug 2: {Arg}", 42);                          // Secondary
         logger.LogDebug(new Exception(), "Debug 2");                    // Secondary
-        logger.LogTrace("Debug 4");                                     // Secondary
-        logger.LogTrace("Debug 5: {Arg}", 42);                          // Secondary
-        logger.LogTrace(new Exception(), "Debug 6");                    // Secondary
+        logger.LogTrace("Debug 4");                                     // Secondary - FP NET-3295
+        logger.LogTrace("Debug 5: {Arg}", 42);                          // Secondary - FP NET-3295
+        logger.LogTrace(new Exception(), "Debug 6");                    // Secondary - FP NET-3295
         logger.Log(LogLevel.Debug, "Debug 7");                          // Secondary
-        logger.Log(LogLevel.Trace, "Debug 8");                          // Secondary
+        logger.Log(LogLevel.Trace, "Debug 8");                          // Secondary - FP NET-3295
 
         while (true)
         {
