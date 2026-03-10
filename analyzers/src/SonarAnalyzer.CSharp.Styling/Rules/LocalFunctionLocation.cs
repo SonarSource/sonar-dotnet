@@ -25,11 +25,21 @@ public class LocalFunctionLocation : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var function = (LocalFunctionStatementSyntax)c.Node;
-                if (function.Parent is not GlobalStatementSyntax and not BlockSyntax { Parent: MethodDeclarationSyntax }
-                    || function.FollowingStatement() is not null and not LocalFunctionStatementSyntax)
+                if (!IsInTopLevelBlock(function) || !IsLastStatement(function))
                 {
                     c.ReportIssue(Rule, function.Identifier);
                 }
             },
             SyntaxKind.LocalFunctionStatement);
+
+    private static bool IsInTopLevelBlock(LocalFunctionStatementSyntax function) =>
+        function.Parent is GlobalStatementSyntax or BlockSyntax
+        {
+            Parent: BaseMethodDeclarationSyntax
+                    or BasePropertyDeclarationSyntax
+                    or AccessorDeclarationSyntax
+        };
+
+    private static bool IsLastStatement(LocalFunctionStatementSyntax function) =>
+        function.FollowingStatement() is null or LocalFunctionStatementSyntax;
 }
