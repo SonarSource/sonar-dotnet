@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ISymbolExtensionsCommon = SonarAnalyzer.Core.Semantics.Extensions.ISymbolExtensions;
 
@@ -219,6 +220,49 @@ public class ISymbolExtensionsTest
         testSnippet.MethodSymbol("Derived3.Method3").InterfaceMembers().Should().BeEquivalentTo([
             testSnippet.MethodSymbol("IInterface.Method3"),
             testSnippet.MethodSymbol("IOtherInterface.Method3")]);
+    }
+
+    [TestMethod]
+    [CombinatorialData]
+    public void Symbol_InterfaceMembers_CrossAssemblyNullableContext(
+        [CombinatorialValues("disable", "enable")] string nullableExternal,
+        [CombinatorialValues("disable", "enable")] string nullableInternal)
+    {
+        // Tests that InterfaceMembers() correctly identifies implementations regardless of nullable context.
+        // See https://github.com/SonarSource/sonar-dotnet-enterprise/pull/1732 for details.
+        var returnAnnotation = nullableExternal == "enable" ? "?" : string.Empty;
+        var paramAnnotation = nullableInternal == "enable" ? "?" : string.Empty;
+
+        var interfaceCode = $$"""
+            #nullable {{nullableExternal}}
+            public interface IExternalInterface
+            {
+                string{{returnAnnotation}} Execute(string parameter);
+            }
+            """;
+
+        var implementationCode = $$"""
+            #nullable {{nullableInternal}}
+            public class Implementation : IExternalInterface
+            {
+                public string Execute(string{{paramAnnotation}} parameter) => "";
+            }
+            """;
+
+        var parseOptions = new CSharpParseOptions(LanguageVersion.Latest);
+        var interfaceMetadata = new SnippetCompiler(interfaceCode, ignoreErrors: false, AnalyzerLanguage.CSharp, parseOptions: parseOptions).Compilation.ToMetadataReference();
+        var implCompilation = new SnippetCompiler(implementationCode, ignoreErrors: false, AnalyzerLanguage.CSharp, [interfaceMetadata], parseOptions: parseOptions).Compilation;
+
+        var method = implCompilation.GetTypeByMetadataName("Implementation").Should().BeAssignableTo<INamedTypeSymbol>()
+            .Which.GetMembers("Execute").Should().ContainSingle()
+            .Which.Should().BeAssignableTo<IMethodSymbol>()
+            .Subject;
+        var interfaceMethod = implCompilation.GetTypeByMetadataName("IExternalInterface").Should().BeAssignableTo<INamedTypeSymbol>()
+            .Which.GetMembers("Execute").Should().ContainSingle()
+            .Which.Should().BeAssignableTo<IMethodSymbol>()
+            .Subject;
+
+        method.InterfaceMembers().Should().ContainSingle().Which.Should().Be(interfaceMethod);
     }
 
     [TestMethod]
