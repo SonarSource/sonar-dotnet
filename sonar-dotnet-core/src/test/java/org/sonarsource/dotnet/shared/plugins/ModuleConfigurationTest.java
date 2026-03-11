@@ -201,6 +201,18 @@ public class ModuleConfigurationTest {
     assertThat(config.telemetryJsonPaths()).containsExactly(expectedPaths);
   }
 
+  @Test
+  public void contextPaths() {
+    Configuration configuration = createEmptyMockConfiguration();
+    when(configuration.getStringArray("sonar.cs.analyzer.projectOutPaths"))
+      .thenReturn(new String[]{workDir.resolve("report1").toString(), workDir.resolve("report2").toString()});
+    ModuleConfiguration config = createModuleConfiguration(configuration);
+
+    assertThat(config.contextPaths()).containsExactly(
+      workDir.resolve("report1").resolve("output-cs").resolve("Context"),
+      workDir.resolve("report2").resolve("output-cs").resolve("Context"));
+  }
+
   private Path createProtobufOut(String name) throws IOException {
     Path path = workDir.resolve(name);
     Path outputCs = path.resolve("output-cs");

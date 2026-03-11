@@ -114,6 +114,13 @@ public class ModuleConfiguration {
       .toList();
   }
 
+  public List<Path> contextPaths() {
+    return Arrays.stream(configuration.getStringArray(analyzerWorkDirProperty(metadata.languageKey())))
+      .map(Paths::get)
+      .map(x -> x.resolve(getAnalyzerReportDir(metadata.languageKey())).resolve("Context"))
+      .toList();
+  }
+
   private boolean validateOutputDir(Path analyzerOutputDir) {
     String path = analyzerOutputDir.toString();
     try {
