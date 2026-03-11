@@ -226,3 +226,14 @@ record NonrelatedSignatureType
     //Parameters are in order, that we do not inspect
     public Func<NonrelatedSignatureType, X509Chain, X509Certificate2, SslPolicyErrors, Boolean> Callback { get; set; }
 }
+
+// Cross-file static method callback test case
+public class CrossFileStaticMethodTest
+{
+    public void TestCrossFileCallbacks()
+    {
+        using var ms = new System.IO.MemoryStream();
+        using var sslNoncompliant = new SslStream(ms, false, CertValidatorCrossFile.GetNoncompliantCallback()); // Noncompliant [flow-crossfile]
+        using var sslCompliant = new SslStream(ms, false, CertValidatorCrossFile.GetCompliantCallback());
+    }
+}

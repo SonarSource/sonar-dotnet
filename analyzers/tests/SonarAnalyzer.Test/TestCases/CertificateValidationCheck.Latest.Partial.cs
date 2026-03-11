@@ -12,3 +12,27 @@ public partial class PartialClass
         //                                                      ^^^^ Secondary {{This function trusts all certificates.}}
     }
 }
+
+// Cross-file static method callback test case
+public static class CertValidatorCrossFile
+{
+    public static RemoteCertificateValidationCallback GetNoncompliantCallback()
+    {
+        return InvalidValidation;  // Secondary [flow-crossfile] {{This function trusts all certificates.}}
+    }
+
+    public static RemoteCertificateValidationCallback GetCompliantCallback()
+    {
+        return CompliantValidation;
+    }
+
+    private static bool InvalidValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+    {
+        return true;  // Secondary [flow-crossfile] {{This function trusts all certificates.}}
+    }
+
+    private static bool CompliantValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+    {
+        return sslPolicyErrors == SslPolicyErrors.None;
+    }
+}
