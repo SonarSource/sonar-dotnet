@@ -142,6 +142,39 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
         ];
 
     [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_CrossFilePartialClass_DoesNotThrow() =>
+        builderCS
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .AddSnippet("""
+                using System;
+
+                public partial class SomeComponent
+                {
+                    private TimeSpan _elapsedTime = TimeSpan.Zero;
+                }
+                """)
+            .AddSnippet("""
+                using Microsoft.AspNetCore.Mvc;
+                using System;
+
+                public class MyController : Controller
+                {
+                    public IActionResult Index() => View();
+                }
+
+                public partial class SomeComponent
+                {
+                    public void Process()
+                    {
+                        Use(_elapsedTime);
+                    }
+
+                    private void Use(object value) { }
+                }
+                """)
+            .VerifyNoIssues();
+
+    [TestMethod]
     [DynamicData(nameof(AspNetCore2xVersionsUnderTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_CS(string aspNetCoreVersion) =>
         builderCS
