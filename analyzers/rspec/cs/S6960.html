@@ -28,7 +28,7 @@ actions dealing with movies, alongside the ones dealing with photos, all defined
 number of actions.</em></p>
 <h3>Harder to maintain and modify</h3>
 <p>Such complexity makes the controller <strong>harder to maintain and modify</strong>, slowing down new development and <a
-href="https://arxiv.org/ftp/arxiv/papers/1912/1912.01142.pdf">increasing the likelihood of bugs</a>.</p>
+href="https://arxiv.org/abs/1912.01142">increasing the likelihood of bugs</a>.</p>
 <p><em>For example, a change in <code>MediaController</code> made for the movies APIs may inadvertently have an impact on the photos APIs as well.
 Because the change was made in the context of movies, tests on photos may be overlooked, resulting in bugs in production.</em></p>
 <p><em>That would not be likely to happen when two distinct controllers, <code>MovieController</code> and a <code>PhotoController</code>, are
@@ -214,7 +214,7 @@ public class PhotoController(
   <li>Sonar - <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">Cognitive Complexity</a></li>
   <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single responsibility principle</a></li>
   <li>Wikipedia - <a href="https://en.wikipedia.org/wiki/Mediator_pattern">Mediator pattern</a></li>
-  <li>Wolverine - <a href="https://wolverinefx.io/tutorials/getting-started.html">Getting Started</a></li>
+  <li>Wolverine - <a href="https://wolverinefx.io/introduction/getting-started.html">Getting Started</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
@@ -227,8 +227,8 @@ public class PhotoController(
 </ul>
 <h3>Conference presentations</h3>
 <ul>
-  <li>Cornell University arxiv.org - <a href="https://arxiv.org/ftp/arxiv/papers/1912/1912.01142.pdf">Changqi Chen: An Empirical Investigation of
-  Correlation between Code Complexity and Bugs</a></li>
+  <li>Cornell University arxiv.org - <a href="https://arxiv.org/abs/1912.01142">Changqi Chen: An Empirical Investigation of Correlation between Code
+  Complexity and Bugs</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
