@@ -14,112 +14,112 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
+    SyntaxKind,
+    ArgumentSyntax,
+    ExpressionSyntax,
+    IdentifierNameSyntax,
+    AssignmentStatementSyntax,
+    InvocationExpressionSyntax,
+    ParameterSyntax,
+    ModifiedIdentifierSyntax,
+    LambdaExpressionSyntax,
+    MemberAccessExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
-        SyntaxKind,
-        ArgumentSyntax,
-        ExpressionSyntax,
-        IdentifierNameSyntax,
-        AssignmentStatementSyntax,
-        InvocationExpressionSyntax,
-        ParameterSyntax,
-        ModifiedIdentifierSyntax,
-        LambdaExpressionSyntax,
-        MemberAccessExpressionSyntax>
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
+    protected override HashSet<SyntaxKind> MethodDeclarationKinds { get; } = [SyntaxKind.FunctionBlock, SyntaxKind.SubBlock];
+    protected override HashSet<SyntaxKind> TypeDeclarationKinds { get; } = VisualBasicFacade.Instance.SyntaxKind.TypeDeclaration.ToHashSet();
+
+    internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
+        argumentListNode switch
+        {
+            InvocationExpressionSyntax invocation => new VisualBasicMethodParameterLookup(invocation.ArgumentList, method),
+            ObjectCreationExpressionSyntax ctor => new VisualBasicMethodParameterLookup(ctor.ArgumentList, method),
+            _ => throw new ArgumentException("Unexpected type.", nameof(argumentListNode)) // This should be throw only by bad usage of this method, not by input dependency
+        };
+
+    protected override void Initialize(SonarAnalysisContext context)
     {
-        protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
-        protected override HashSet<SyntaxKind> MethodDeclarationKinds { get; } = [ SyntaxKind.FunctionBlock, SyntaxKind.SubBlock ];
+        // C# += equivalent:
+        // AddHandler situation does not exist in VB.NET. Delegate is pointer to one function only and can not have multiple handlers. It's not an event.
+        // Only assignment and object creation are valid cases for VB.NET
 
-        internal override MethodParameterLookupBase<ArgumentSyntax> CreateParameterLookup(SyntaxNode argumentListNode, IMethodSymbol method) =>
-            argumentListNode switch
-            {
-                InvocationExpressionSyntax invocation => new VisualBasicMethodParameterLookup(invocation.ArgumentList, method),
-                ObjectCreationExpressionSyntax ctor => new VisualBasicMethodParameterLookup(ctor.ArgumentList, method),
-                _ => throw new ArgumentException("Unexpected type.", nameof(argumentListNode)) // This should be throw only by bad usage of this method, not by input dependency
-            };
+        // Handling of = syntax
+        context.RegisterNodeAction(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentStatement);
 
-        protected override void Initialize(SonarAnalysisContext context)
+        // Handling of constructor parameter syntax (SslStream)
+        context.RegisterNodeAction(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression);
+    }
+
+    protected override Location ExpressionLocation(SyntaxNode expression) =>
+        // For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
+        ((expression is LambdaExpressionSyntax lambda) ? lambda.SubOrFunctionHeader.ParameterList : expression).GetLocation();
+
+    protected override void SplitAssignment(AssignmentStatementSyntax assignment, out IdentifierNameSyntax leftIdentifier, out ExpressionSyntax right)
+    {
+        leftIdentifier = assignment.Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
+        right = assignment.Right;
+    }
+
+    protected override IEqualityComparer<ExpressionSyntax> CreateNodeEqualityComparer() =>
+        new VisualBasicSyntaxNodeEqualityComparer<ExpressionSyntax>();
+
+    protected override SyntaxNode FindRootTypeDeclaration(SyntaxNode node)
+    {
+        if (node.FirstAncestorOrSelf<ModuleBlockSyntax>() is { } module)
         {
-            // C# += equivalent:
-            // AddHandler situation does not exist in VB.NET. Delegate is pointer to one function only and can not have multiple handlers. It's not an event.
-            // Only assignment and object creation are valid cases for VB.NET
-
-            // Handling of = syntax
-            context.RegisterNodeAction(CheckAssignmentSyntax, SyntaxKind.SimpleAssignmentStatement);
-
-            // Handling of constructor parameter syntax (SslStream)
-            context.RegisterNodeAction(CheckConstructorParameterSyntax, SyntaxKind.ObjectCreationExpression);
+            return module; // Modules can't be nested. If there's one, it's the Root
         }
+        return base.FindRootTypeDeclaration(node);
+    }
 
-        protected override Location ExpressionLocation(SyntaxNode expression) =>
-            // For Lambda expression extract location of the parentheses only to separate them from secondary location of "true"
-            ((expression is LambdaExpressionSyntax lambda) ? lambda.SubOrFunctionHeader.ParameterList : expression).GetLocation();
+    protected override ExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block)
+    {
+        // Return value set by assignment to function variable/value
+        var assignments = block.DescendantNodes()
+            .OfType<AssignmentStatementSyntax>()
+            .Where(x => c.Context.Model.GetSymbolInfo(x.Left).Symbol is ILocalSymbol { IsFunctionValue: true });
+        // And normal Return statements and throws
+        return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
+            // Throw statements #2825. x.Expression can be NULL for standalone Throw and we need that one as well.
+            .Concat(block.DescendantNodes().OfType<ThrowStatementSyntax>().Select(x => x.Expression))
+            .Concat(assignments.Select(x => x.Right))
+            .ToArray();
+    }
 
-        protected override void SplitAssignment(AssignmentStatementSyntax assignment, out IdentifierNameSyntax leftIdentifier, out ExpressionSyntax right)
+    protected override bool IsTrueLiteral(ExpressionSyntax expression) =>
+        expression?.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
+
+    protected override ExpressionSyntax VariableInitializer(ModifiedIdentifierSyntax variable) =>
+        variable.FirstAncestorOrSelf<VariableDeclaratorSyntax>()?.Initializer?.Value;
+
+    protected override ImmutableArray<Location> LambdaLocations(InspectionContext c, LambdaExpressionSyntax lambda) =>
+        lambda switch
         {
-            leftIdentifier = assignment.Left.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().LastOrDefault();
-            right = assignment.Right;
-        }
+            SingleLineLambdaExpressionSyntax single => single.Body is ExpressionSyntax expr && IsTrueLiteral(expr)    // LiteralExpressionSyntax or ParenthesizedExpressionSyntax like (((true)))
+                ? new[] { single.Body.GetLocation() }.ToImmutableArray()
+                : ImmutableArray<Location>.Empty,
+            MultiLineLambdaExpressionSyntax multi => BlockLocations(c, multi),
+            _ => ImmutableArray<Location>.Empty,
+        };
 
-        protected override IEqualityComparer<ExpressionSyntax> CreateNodeEqualityComparer() =>
-            new VisualBasicSyntaxNodeEqualityComparer<ExpressionSyntax>();
+    protected override SyntaxNode LocalVariableScope(ModifiedIdentifierSyntax variable) =>
+        variable.FirstAncestorOrSelf<LocalDeclarationStatementSyntax>()?.Parent;
 
-        protected override SyntaxNode FindRootTypeDeclaration(SyntaxNode node)
-        {
-            if (node.FirstAncestorOrSelf<ModuleBlockSyntax>() is { } module)
-            {
-                return module; // Modules can't be nested. If there's one, it's the Root
-            }
-            return base.FindRootTypeDeclaration(node);
-        }
+    protected override SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression)
+    {
+        expression = expression.RemoveParentheses();
+        return expression is UnaryExpressionSyntax unary && unary.Kind() == SyntaxKind.AddressOfExpression
+            ? unary.Operand   // Parentheses can not wrap AddressOf operand
+            : expression;
+    }
 
-        protected override ExpressionSyntax[] FindReturnAndThrowExpressions(InspectionContext c, SyntaxNode block)
-        {
-            // Return value set by assignment to function variable/value
-            var assignments = block.DescendantNodes()
-                .OfType<AssignmentStatementSyntax>()
-                .Where(x => c.Context.Model.GetSymbolInfo(x.Left).Symbol is ILocalSymbol {IsFunctionValue: true});
-            // And normal Return statements and throws
-            return block.DescendantNodes().OfType<ReturnStatementSyntax>().Select(x => x.Expression)
-                // Throw statements #2825. x.Expression can be NULL for standalone Throw and we need that one as well.
-                .Concat(block.DescendantNodes().OfType<ThrowStatementSyntax>().Select(x => x.Expression))
-                .Concat(assignments.Select(x => x.Right))
-                .ToArray();
-        }
-
-        protected override bool IsTrueLiteral(ExpressionSyntax expression) =>
-            expression?.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
-
-        protected override ExpressionSyntax VariableInitializer(ModifiedIdentifierSyntax variable) =>
-            variable.FirstAncestorOrSelf<VariableDeclaratorSyntax>()?.Initializer?.Value;
-
-        protected override ImmutableArray<Location> LambdaLocations(InspectionContext c, LambdaExpressionSyntax lambda) =>
-            lambda switch
-            {
-                SingleLineLambdaExpressionSyntax single => single.Body is ExpressionSyntax expr && IsTrueLiteral(expr)    // LiteralExpressionSyntax or ParenthesizedExpressionSyntax like (((true)))
-                                                            ? new[] { single.Body.GetLocation() }.ToImmutableArray()
-                                                            : ImmutableArray<Location>.Empty,
-                MultiLineLambdaExpressionSyntax multi => BlockLocations(c, multi),
-                _ => ImmutableArray<Location>.Empty,
-            };
-
-        protected override SyntaxNode LocalVariableScope(ModifiedIdentifierSyntax variable) =>
-            variable.FirstAncestorOrSelf<LocalDeclarationStatementSyntax>()?.Parent;
-
-        protected override SyntaxNode ExtractArgumentExpressionNode(SyntaxNode expression)
-        {
-            expression = expression.RemoveParentheses();
-            return expression is UnaryExpressionSyntax unary && unary.Kind() == SyntaxKind.AddressOfExpression
-                ? unary.Operand   // Parentheses can not wrap AddressOf operand
-                : expression;
-        }
-
-        protected override SyntaxNode SyntaxFromReference(SyntaxReference reference)
-        {
-            var syntax = reference.GetSyntax();
-            return syntax is MethodStatementSyntax ? syntax.Parent : syntax;
-        }
+    protected override SyntaxNode SyntaxFromReference(SyntaxReference reference)
+    {
+        var syntax = reference.GetSyntax();
+        return syntax is MethodStatementSyntax ? syntax.Parent : syntax;
     }
 }
