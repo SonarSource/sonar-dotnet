@@ -37,5 +37,7 @@ public class BeginInvokePairedWithEndInvokeTest
 
     [TestMethod]
     public void BeginInvokePairedWithEndInvoke_VB() =>
-        builderVB.AddPaths("BeginInvokePairedWithEndInvoke.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
+        builderVB.AddPaths("BeginInvokePairedWithEndInvoke.vb", "BeginInvokePairedWithEndInvoke.Partial.vb")
+            .WithOptions(LanguageOptions.FromVisualBasic14)
+            .Verify();
 }

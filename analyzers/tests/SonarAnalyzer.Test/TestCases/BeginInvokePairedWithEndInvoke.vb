@@ -320,3 +320,16 @@ Class ReproEndinvokeDelegate
      End Sub
 
 End Class
+
+Partial Class CrossTreeCallbackFieldVB
+
+    Private Sub TestCrossTreeCallbackFieldNoncompliant()
+        Dim Caller As New AsyncMethodCaller(AddressOf CrossTreeAsyncMethod)
+        Caller.BeginInvoke("delegate", CallbackFieldNoncompliant, Nothing) ' Noncompliant
+    End Sub
+
+    Private Shared Sub CrossTreeAsyncMethod(Msg As String)
+        Console.WriteLine($"AsyncMethod: {Msg}")
+    End Sub
+
+End Class

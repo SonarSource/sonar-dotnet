@@ -14,98 +14,100 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInvokeBase<SyntaxKind, InvocationExpressionSyntax>
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
+    protected override string CallbackParameterName { get; } = "DelegateCallback";
+
+    protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
     {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-        protected override SyntaxKind InvocationExpressionKind { get; } = SyntaxKind.InvocationExpression;
-        protected override string CallbackParameterName { get; } = "DelegateCallback";
-        protected override ISet<SyntaxKind> ParentDeclarationKinds { get; } = new HashSet<SyntaxKind>
+        // Methods
+        SyntaxKind.ConstructorBlock,
+        SyntaxKind.FunctionBlock,
+        SyntaxKind.SubBlock,
+        SyntaxKind.OperatorBlock,
+        // Properties
+        SyntaxKind.AddHandlerAccessorBlock,
+        SyntaxKind.GetAccessorBlock,
+        SyntaxKind.RaiseEventAccessorBlock,
+        SyntaxKind.RemoveHandlerAccessorBlock,
+        SyntaxKind.SetAccessorBlock,
+        // Lambdas
+        SyntaxKind.MultiLineFunctionLambdaExpression,
+        SyntaxKind.MultiLineSubLambdaExpression,
+        SyntaxKind.SingleLineFunctionLambdaExpression,
+        SyntaxKind.SingleLineSubLambdaExpression
+    }.ToImmutableHashSet();
+
+    protected override void VisitInvocation(EndInvokeContext context) =>
+        new InvocationWalker(context).SafeVisit(context.Root);
+
+    protected override bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel) =>
+        FindCallback(callbackArg, semanticModel) is { } callback
+        && callback.EnsureCorrectSemanticModelOrDefault(semanticModel) is { } callbackModel
+        && (Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, callbackModel));
+
+    /// <summary>
+    /// This method is looking for the callback code which can be:
+    /// - in a identifier initializer (like a lambda)
+    /// - passed directly as a lambda argument
+    /// - passed as a new delegate instantiation (and the code can be inside the method declaration)
+    /// - a mix of the above.
+    /// </summary>
+    private static SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel model)
+    {
+        var callback = callbackArg.RemoveParentheses();
+        if (callback is IdentifierNameSyntax identifier)
         {
-            // Methods
-            SyntaxKind.ConstructorBlock,
-            SyntaxKind.FunctionBlock,
-            SyntaxKind.SubBlock,
-            SyntaxKind.OperatorBlock,
-            // Properties
-            SyntaxKind.AddHandlerAccessorBlock,
-            SyntaxKind.GetAccessorBlock,
-            SyntaxKind.RaiseEventAccessorBlock,
-            SyntaxKind.RemoveHandlerAccessorBlock,
-            SyntaxKind.SetAccessorBlock,
-            // Lambdas
-            SyntaxKind.MultiLineFunctionLambdaExpression,
-            SyntaxKind.MultiLineSubLambdaExpression,
-            SyntaxKind.SingleLineFunctionLambdaExpression,
-            SyntaxKind.SingleLineSubLambdaExpression
-        }.ToImmutableHashSet();
-
-        protected override void VisitInvocation(EndInvokeContext context) =>
-            new InvocationWalker(context).SafeVisit(context.Root);
-
-        protected override bool IsInvalidCallback(SyntaxNode callbackArg, SemanticModel semanticModel) =>
-            FindCallback(callbackArg, semanticModel) is { } callback
-            && (Language.Syntax.IsNullLiteral(callback) || !IsParentDeclarationWithEndInvoke(callback, semanticModel));
-
-        /// <summary>
-        /// This method is looking for the callback code which can be:
-        /// - in a identifier initializer (like a lambda)
-        /// - passed directly as a lambda argument
-        /// - passed as a new delegate instantiation (and the code can be inside the method declaration)
-        /// - a mix of the above.
-        /// </summary>
-        private static SyntaxNode FindCallback(SyntaxNode callbackArg, SemanticModel semanticModel)
-        {
-            var callback = callbackArg.RemoveParentheses();
-            if (callback is IdentifierNameSyntax identifier)
-            {
-                callback = LookupIdentifierInitializer(identifier, semanticModel);
-            }
-
-            if (callback is ObjectCreationExpressionSyntax objectCreation)
-            {
-                callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().GetExpression() : null;
-            }
-
-            if (callback is UnaryExpressionSyntax addressOf
-                && callback.IsKind(SyntaxKind.AddressOfExpression)
-                && semanticModel.GetSymbolInfo(addressOf.Operand).Symbol is IMethodSymbol methodSymbol)
-            {
-                callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().Parent;
-            }
-
-            return callback;
+            callback = LookupIdentifierInitializer(identifier, model);
         }
 
-        private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
-            semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ModifiedIdentifierSyntax modifiedIdentifier
-            && modifiedIdentifier.Parent is VariableDeclaratorSyntax variableDeclarator
-                ? variableDeclarator.Initializer?.Value.RemoveParentheses() ?? (variableDeclarator.AsClause as AsNewClauseSyntax)?.NewExpression
-                : null;
-
-        private class InvocationWalker : SafeVisualBasicSyntaxWalker
+        if (callback is ObjectCreationExpressionSyntax objectCreation)
         {
-            private readonly EndInvokeContext context;
+            callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().GetExpression() : null;
+        }
 
-            public InvocationWalker(EndInvokeContext context) =>
-                this.context = context;
+        if (callback is UnaryExpressionSyntax addressOf
+            && callback.IsKind(SyntaxKind.AddressOfExpression)
+            && callback.EnsureCorrectSemanticModelOrDefault(model) is { } addressOfModel
+            && addressOfModel.GetSymbolInfo(addressOf.Operand).Symbol is IMethodSymbol methodSymbol)
+        {
+            callback = methodSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().Parent;
+        }
 
-            public override void Visit(SyntaxNode node)
+        return callback;
+    }
+
+    private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
+        semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ModifiedIdentifierSyntax modifiedIdentifier
+        && modifiedIdentifier.Parent is VariableDeclaratorSyntax variableDeclarator
+            ? variableDeclarator.Initializer?.Value.RemoveParentheses() ?? (variableDeclarator.AsClause as AsNewClauseSyntax)?.NewExpression
+            : null;
+
+    private class InvocationWalker : SafeVisualBasicSyntaxWalker
+    {
+        private readonly EndInvokeContext context;
+
+        public InvocationWalker(EndInvokeContext context) =>
+            this.context = context;
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (context.Visit(node))
             {
-                if (context.Visit(node))
-                {
-                    base.Visit(node);
-                }
+                base.Visit(node);
             }
+        }
 
-            public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+        {
+            if (context.VisitInvocationExpression(node))
             {
-                if (context.VisitInvocationExpression(node))
-                {
-                    base.VisitInvocationExpression(node);
-                }
+                base.VisitInvocationExpression(node);
             }
         }
     }

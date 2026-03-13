@@ -250,3 +250,16 @@ public class SomeOtherClass
         caller.BeginInvoke(null, null); // Noncompliant
     }
 }
+
+public partial class CrossTreeCallbackField
+{
+    private AsyncMethodCaller caller = new AsyncMethodCaller(AsyncMethod);
+
+    private void TestCrossTreeCallbackFieldNoncompliant()
+    {
+        caller.BeginInvoke("delegate", 1, callbackFieldNoncompliant, null); // Noncompliant
+    }
+
+    private static void AsyncMethod(string msg, int i) =>
+        Console.WriteLine($"AsyncMethod: {msg} {i}");
+}
