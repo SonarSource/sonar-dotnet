@@ -40,6 +40,7 @@ internal static partial class NuGetMetadataFactory
         "netstandard1.3",
         "netstandard1.1",
         "netstandard1.0",
+        "net452",
         "net451",
         "net45",
         "net40",
