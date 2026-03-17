@@ -63,7 +63,7 @@ public class ProjectTypeCacheTest
         IsTest(NuGetMetadataReference.XunitFrameworkV3(TestConstants.NuGetLatestVersion)).Should().BeTrue();
 
         // Assertion
-        IsTest(NuGetMetadataReference.FluentAssertions(TestConstants.NuGetLatestVersion)).Should().BeTrue();
+        IsTest(NuGetMetadataReference.FluentAssertions(NugetPackageVersions.FluentAssertionsVersions.Ver7)).Should().BeTrue();
         IsTest(NuGetMetadataReference.Shouldly(TestConstants.NuGetLatestVersion)).Should().BeTrue();
 
         // Mock

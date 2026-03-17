@@ -48,7 +48,10 @@ public static class NuGetMetadataReference
     public static References Dapper(string packageVersion = "1.50.5") => Create("Dapper", packageVersion);
     public static References CommonLoggingCore(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Common.Logging.Core", packageVersion);
     public static References EntityFramework(string packageVersion = "6.2.0") => Create("EntityFramework", packageVersion);
-    public static References FluentAssertions(string packageVersion) => Create("FluentAssertions", packageVersion);
+    public static References FluentAssertions(string packageVersion) =>
+        packageVersion == TestConstants.NuGetLatestVersion
+            ? throw new InvalidOperationException("FluentAssertions v8+ requires a paid commercial license. Use a specific v7.x version instead.")
+            : Create("FluentAssertions", packageVersion);
     public static References FluentValidation(string packageVersion = TestConstants.NuGetLatestVersion) => Create("FluentValidation", packageVersion);
     public static References FakeItEasy(string packageVersion) => Create("FakeItEasy", packageVersion);
     public static References FsCheckXunit(string packageVersion = TestConstants.NuGetLatestVersion) =>

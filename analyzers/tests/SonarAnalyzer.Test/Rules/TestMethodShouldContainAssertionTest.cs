@@ -48,9 +48,9 @@ public class TestMethodShouldContainAssertionTest
             .Verify();
 
     [TestMethod]
-    [DataRow(NUnit.Ver3, Latest, Latest)]
+    [DataRow(NUnit.Ver3, FluentAssertionsVersions.Ver7, Latest)]
     [DataRow(NUnit.Ver3Latest, FluentAssertionsVersions.Ver5, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
-    [DataRow(NUnit.Ver3Latest, Latest, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
+    [DataRow(NUnit.Ver3Latest, FluentAssertionsVersions.Ver7, Latest)] // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
     public void TestMethodShouldContainAssertion_NUnit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
         WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.NUnit.cs").Verify();
 
@@ -96,8 +96,8 @@ public class TestMethodShouldContainAssertionTest
             """).VerifyNoIssues();
 
     [TestMethod]
-    [DataRow(XUnitVersions.Ver2, Latest, Latest)]
-    [DataRow(XUnitVersions.Ver253, Latest, Latest)]
+    [DataRow(XUnitVersions.Ver2, FluentAssertionsVersions.Ver7, Latest)]
+    [DataRow(XUnitVersions.Ver253, FluentAssertionsVersions.Ver7, Latest)]
     public void TestMethodShouldContainAssertion_Xunit(string testFwkVersion, string fluentVersion, string nSubstituteVersion) =>
         WithTestReferences(NuGetMetadataReference.XunitFramework(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.Xunit.cs").Verify();
 
@@ -215,7 +215,7 @@ public class TestMethodShouldContainAssertionTest
             .Verify();
 
     internal static VerifierBuilder WithTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
-                                                       string fluentVersion = Latest,
+                                                       string fluentVersion = FluentAssertionsVersions.Ver7,
                                                        string nSubstituteVersion = Latest,
                                                        string nFluentVersion = Latest,
                                                        string shouldlyVersion = Latest,

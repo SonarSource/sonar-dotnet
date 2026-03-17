@@ -25,6 +25,7 @@ public static class NugetPackageVersions
         public const string Ver1 = "1.6.0";
         public const string Ver4 = "4.19.4";
         public const string Ver5 = "5.9.0";
+        public const string Ver7 = "7.2.2"; // Last Apache 2.0 licensed version. v8+ requires a paid commercial license.
     }
 
     public static class MsTest
