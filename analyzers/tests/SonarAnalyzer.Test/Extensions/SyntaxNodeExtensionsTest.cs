@@ -1074,7 +1074,9 @@ End Class";
     }
 
     [TestMethod]
-    [DataRow("""$$global::System$$.Int32 i;""", "global")]                        // AliasQualifiedNameSyntax
+    [DataRow("""$$global::System$$.Int32 i;""", "System")]                        // AliasQualifiedNameSyntax
+    [DataRow("""$$global::System.Int32$$ i;""", "Int32")]                         // QualifiedNameSyntax (with AliasQualifiedNameSyntax in Left)
+    [DataRow("""$$global::System.Collections.Generic.List<int>$$ l;""", "List")]  // QualifiedNameSyntax.Right -> GenericNameSyntax
     [DataRow("""int i = Math.Abs($$1$$);""", null)]                               // ArgumentSyntax
     [DataRow("""int i = Math.Abs($$value: 1$$);""", "value")]                     // ArgumentSyntax
     [DataRow("""$$int[]$$ i;""", "int")]                                          // ArrayTypeSyntax
@@ -1128,7 +1130,7 @@ End Class";
     [DataRow("""object o = $$new object()!$$;""", "object")]                      // PostfixUnaryExpressionSyntax
     [DataRow("""$$int*$$ i;""", "int")]                                           // PointerTypeSyntax
     [DataRow("""$$System.Collections.ArrayList$$ l;""", "ArrayList")]             // QualifiedNameSyntax
-    [DataRow("""$$List<int>$$ l;""", "List")]                                     // SimpleNameSyntax
+    [DataRow("""$$List<int>$$ l;""", "List")]                                     // GenericNameSyntax
     [DataRow("""bool M() => (0, Name: "a") is (_, $$Name: null$$);""", "Name")]   // SubpatternSyntax
     [DataRow("""bool M() => (0, Name: "a") is ($$_$$, Name: null);""", null)]     // SubpatternSyntax
     [DataRow("""void M<T>() where $$T : class$$ { }""", "T")]                     // TypeParameterConstraintClauseSyntax

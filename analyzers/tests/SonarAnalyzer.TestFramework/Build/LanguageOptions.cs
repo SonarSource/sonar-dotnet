@@ -110,6 +110,18 @@ public static class LanguageOptions
     public static IEnumerable<ParseOptions> Default(string language) =>
         DefaultParseOptions.Where(x => x.Language == language);
 
+    public static ImmutableArray<ParseOptions> Between(CS.LanguageVersion from, CS.LanguageVersion to)
+    {
+        var versions = Between<CS.LanguageVersion>(from, to);
+        return CreateOptions(versions).FilterByEnvironment();
+    }
+
+    public static ImmutableArray<ParseOptions> Between(VB.LanguageVersion from, VB.LanguageVersion to)
+    {
+        var versions = Between<VB.LanguageVersion>(from, to);
+        return CreateOptions(versions).FilterByEnvironment();
+    }
+
     public static ImmutableArray<ParseOptions> Latest(AnalyzerLanguage language) =>
         language.LanguageName switch
         {
@@ -128,4 +140,17 @@ public static class LanguageOptions
 
     private static IEnumerable<ParseOptions> CreateOptions(params VB.LanguageVersion[] options) =>
         options.Select(x => new VB.VisualBasicParseOptions(x));
+
+    private static T[] Between<T>(T from, T to) where T : struct, Enum
+    {
+        var comparer = Comparer<T>.Default;
+
+        // Enum comparison is based on the documented numeric ordering. See:
+        // https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.csharp.languageversion
+        // https://learn.microsoft.com/en-us/dotnet/api/microsoft.codeanalysis.visualbasic.languageversion
+        return Enum.GetValues(typeof(T))
+            .Cast<T>()
+            .Where(x => comparer.Compare(x, from) >= 0 && comparer.Compare(x, to) <= 0)
+            .ToArray();
+    }
 }

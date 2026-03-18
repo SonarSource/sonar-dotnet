@@ -7920,6 +7920,7 @@ public static class RuleTypeMappingCS
         // ["S7997"],
         // ["S7998"],
         // ["S7999"],
-        // ["S8000"]
+        // ["S8000"],
+        ["S8380"] = "CODE_SMELL"
     }.ToImmutableDictionary();
 }

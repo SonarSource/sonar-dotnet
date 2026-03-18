@@ -187,7 +187,7 @@ public static class SyntaxNodeExtensionsCSharp
     public static SyntaxToken? GetIdentifier(this SyntaxNode node) =>
         node switch
         {
-            AliasQualifiedNameSyntax { Alias.Identifier: var identifier } => identifier,
+            AliasQualifiedNameSyntax { Name.Identifier: var identifier } => identifier,
             ArgumentSyntax { NameColon.Name.Identifier: var identifier } => identifier,
             ArrayTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
             AttributeArgumentSyntax { NameColon.Name.Identifier: var identifier } => identifier,

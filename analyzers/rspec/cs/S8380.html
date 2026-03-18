@@ -1,0 +1,54 @@
+<p>This is an issue when <code>partial</code> is used as a return type without the <code>@</code> escape prefix in C# 14 or later.</p>
+<h2>Why is this an issue?</h2>
+<p>Starting with C# 14, the <code>partial</code> keyword becomes a contextual keyword in more places within the language. This expansion means that
+<code>partial</code> can no longer be used directly as a return type identifier without escaping.</p>
+<p>When the compiler encounters <code>partial</code> in a return type position, it now interprets it as a modifier rather than a type name. This
+causes compilation errors in code that previously worked in earlier C# versions.</p>
+<p>The issue specifically affects method declarations where a custom type named <code>partial</code> is used as the return type. Other uses of the
+<code>partial</code> type (such as in variable declarations or constructor calls) are not affected by this change.</p>
+<h3>What is the potential impact?</h3>
+<p>This breaking change will cause compilation failures when upgrading existing codebases to C# 14. The compilation error prevents the application
+from building, requiring immediate attention to fix the syntax.</p>
+<p>While this is not a runtime issue, it can block development and deployment processes until resolved. The fix is straightforward but must be applied
+to all affected method declarations.</p>
+<h2>How to fix it</h2>
+<p>Rename the type, or add the <code>@</code> prefix before <code>partial</code> when used as a return type. This tells the compiler to treat
+<code>partial</code> as an identifier rather than a keyword.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class C
+{
+    partial F() =&gt; new partial(); // Noncompliant
+}
+
+class partial { }
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class C
+{
+    @partial F() =&gt; new partial();
+}
+
+class partial { }
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+class C
+{
+    PartialItem F() =&gt; new PartialItem();
+}
+
+class PartialItem { }
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>C# Breaking Changes in .NET 10 - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010">Official Microsoft
+  documentation about breaking changes in C# 14, including the partial keyword restrictions</a></li>
+  <li>C# Identifiers - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#643-identifiers">C# language
+  specification explaining identifier rules and escaping with the @ prefix</a></li>
+</ul>
+

@@ -487,7 +487,7 @@ public class SyntaxNodeExtensionsTest
                         int? i = null;
                         int* iPtr;
                         System.Exception qualified;
-                        global::System.Exception global;
+                        global::System.Exception globalVar;
                         input.ToString()?.ToString();
                         Func<Action> fun = () => () => {};
                         fun()();
@@ -502,7 +502,7 @@ public class SyntaxNodeExtensionsTest
             """;
 
         var nodes = CSharpSyntaxTree.ParseText(code).GetRoot().DescendantNodes().ToArray();
-        Assert<AliasQualifiedNameSyntax>("global");
+        Assert<AliasQualifiedNameSyntax>("System");
         Assert<ArrayTypeSyntax>("byte");
         Assert<BaseTypeDeclarationSyntax>("Example", "MyEnum", "MyRefStruct");
         Assert<ConstructorDeclarationSyntax>("Example");
@@ -527,7 +527,7 @@ public class SyntaxNodeExtensionsTest
         Assert<TypeParameterConstraintClauseSyntax>("T");
         Assert<TypeParameterSyntax>("T");
         Assert<UsingDirectiveSyntax>(string.Empty, "C");
-        Assert<VariableDeclaratorSyntax>("i", "iPtr", "qualified", "global", "fun", "result");
+        Assert<VariableDeclaratorSyntax>("i", "iPtr", "qualified", "globalVar", "fun", "result");
         Assert<RefTypeSyntax>("byte", "byte");
         Assert<ReturnStatementSyntax>(string.Empty);
 
