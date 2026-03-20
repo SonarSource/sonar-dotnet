@@ -16,19 +16,20 @@
  */
 package org.sonarsource.dotnet.shared.plugins.telemetryjson;
 
-import java.util.Locale;
-import java.util.regex.Pattern;
-
 public class TelemetryUtils {
-  // Replace any non-word-character and non-digit with "_"
-  private static final Pattern sanitizeKeyPattern = Pattern.compile("[^a-zA-Z0-9]");
 
   private TelemetryUtils() {
     // Private constructor to hide the implicit public one
   }
 
+  // See https://github.com/SonarSource/sonar-scanner-msbuild/blob/master/src/SonarScanner.MSBuild.Common/Telemetry/TelemetryUtils.cs
+  // See https://xtranet-sonarsource.atlassian.net/wiki/spaces/DP/pages/3912630334/SonarSource+Telemetry+System+Sending+and+Using+Measures#Naming-conventions
   public static String sanitizeKey(String x) {
-    return sanitizeKeyPattern.matcher(x).replaceAll("_").toLowerCase(Locale.ROOT);
+    var sb = new StringBuilder(x.length());
+    for (char c : x.toCharArray()) {
+      sb.append(c < 128 && Character.isLetterOrDigit(c) ? Character.toLowerCase(c) : '_');
+    }
+    return sb.toString();
   }
 
 }

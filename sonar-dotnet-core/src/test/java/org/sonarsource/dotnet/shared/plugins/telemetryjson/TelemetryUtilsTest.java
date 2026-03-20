@@ -37,8 +37,7 @@ public class TelemetryUtilsTest {
   @Test
   public void sanitizeKey_nullInputThrows() {
     assertThatThrownBy(() -> TelemetryUtils.sanitizeKey(null))
-      .isInstanceOf(NullPointerException.class)
-      .hasMessageContaining("Cannot invoke \"java.lang.CharSequence.length()\" because \"this.text\" is null");
+      .isInstanceOf(NullPointerException.class);
   }
 }
 

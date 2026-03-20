@@ -42,7 +42,7 @@ public class TelemetryAggregatorLanguageVersionTest {
         {"   ", "plugin_key.language_key.language_version.___"},
         {"With Space", "plugin_key.language_key.language_version.with_space"},
         {"Non Word Characters #+!\"§$%&/(){}", "plugin_key.language_key.language_version.non_word_characters______________"},
-        {"Non Ascii Characters äöüß😉", "plugin_key.language_key.language_version.non_ascii_characters______"},
+        {"Non Ascii Characters äöüß😉", "plugin_key.language_key.language_version.non_ascii_characters_______"},
       });
   }
 
