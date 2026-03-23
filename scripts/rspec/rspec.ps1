@@ -173,15 +173,15 @@ function GenerateBaseClassIfSecondLanguage()
 }
 
 function AppendTestCaseVB() {
-    $UsingTokenCS = "using CS = SonarAnalyzer.Rules.CSharp;`n"
-    $UsingTokenVB = "using VB = SonarAnalyzer.Rules.VisualBasic;`n"
+    $UsingTokenCS = "using CS = SonarAnalyzer.CSharp.Rules;`n"
+    $UsingTokenVB = "using VB = SonarAnalyzer.VisualBasic.Rules;`n"
     $NamespaceToken = "namespace SonarAnalyzer.Test.Rules"
     $OldEndToken = "    }" # For files using old namespaces
     $NewEndToken = "}"     # For files using file scoped namespaces
     $MethodVB = Get-Content -Path "${RuleTemplateFolder}\\TestMethod.VB.cs" -Raw
     $Text = Get-Content -Path "${RulesFolderTests}\\${ClassName}Test.cs" -Raw
 
-    $Text = $Text.Replace("using SonarAnalyzer.Rules.CSharp;`n", "")
+    $Text = $Text.Replace("using SonarAnalyzer.CSharp.Rules;`n", "")
     $Text = $Text.Replace($NamespaceToken, "${UsingTokenCS}${UsingTokenVB}`n${NamespaceToken}")
     $Text = $Text.Replace("new ${ClassName}", "new CS.${ClassName}")
     $Text = $Text.Replace("<${ClassName}>", "<CS.${ClassName}>")
@@ -225,6 +225,14 @@ function WriteClasses($FilesMap) {
 
 function ReplacePlaceHolders($Text) {
     return $Text.Replace('$DiagnosticClassName$', $ClassName).Replace('$DiagnosticId$', $RuleKey)
+}
+
+if (-Not $Env:GITHUB_TOKEN) {
+    $GhToken = gh auth token 2>$null
+    if ($GhToken) {
+        $Env:GITHUB_TOKEN = $GhToken
+        Write-Host "GITHUB_TOKEN not set, using token from 'gh auth token'" -ForegroundColor Yellow
+    }
 }
 
 ### SCRIPT START ###

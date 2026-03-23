@@ -14,7 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.Rules.VisualBasic;
+using SonarAnalyzer.VisualBasic.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
 
