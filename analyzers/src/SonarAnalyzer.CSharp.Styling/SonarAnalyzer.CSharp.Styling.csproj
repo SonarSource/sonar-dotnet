@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!--This roslyn should only be updated ~ a year after it is released as updating it too fast will mean that any Sonar CI that is not on the latest roslyn will ignore this dll-->
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="5.0.0" />
     <!-- Fody with ILMerge are buggy. Consult SONARSEC-4584 if you see TypeInitializationException, TypeLoadException, or similar at ITs runtime locally -->
     <PackageReference Include="Fody" Version="6.9.3" PrivateAssets="All" />

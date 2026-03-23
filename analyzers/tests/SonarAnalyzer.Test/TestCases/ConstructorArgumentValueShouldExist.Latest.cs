@@ -89,7 +89,7 @@ namespace CSharp14
 
     public class NonCompliantStaticExtensionProperty : MarkupExtension
     {
-        public NonCompliantStaticExtensionProperty(object value1) { this.Value1 = value1; }   // Error [CS9286] {{'NonCompliantStaticExtensionProperty' does not contain a definition for 'Value1' and no accessible extension member 'Value1' for receiver of type 'NonCompliantStaticExtensionProperty' could be found (are you missing a using directive or an assembly reference?)}}
+        public NonCompliantStaticExtensionProperty(object value1) { this.Value1 = value1; }   // Error [CS0176] {{Member 'NonCompliantExtensions.extension(NonCompliantStaticExtensionProperty).Value1' cannot be accessed with an instance reference; qualify it with a type name instead}}
         public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
 
@@ -102,7 +102,7 @@ namespace CSharp14
 
     public class CompliantStaticExtensionProperty : MarkupExtension
     {
-        public CompliantStaticExtensionProperty(object value1) { this.Value1 = value1; }      // Error [CS9286] {{'CompliantStaticExtensionProperty' does not contain a definition for 'Value1' and no accessible extension member 'Value1' for receiver of type 'CompliantStaticExtensionProperty' could be found (are you missing a using directive or an assembly reference?)}}
+        public CompliantStaticExtensionProperty(object value1) { this.Value1 = value1; }      // Error [CS0176] {{Member 'CompliantExtensions.extension(CompliantStaticExtensionProperty).Value1' cannot be accessed with an instance reference; qualify it with a type name instead}}
         public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
 

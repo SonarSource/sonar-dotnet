@@ -42,12 +42,13 @@ public class ImplementSerializationMethodsCorrectlyTest
             [System.Serializable]
             public class Foo
             {
-                [System.OnDeserializing]
-                // Error@+4 [CS1519] Invalid token in a member declaration
-                // Error@+3 [CS1519] Invalid token in a member declaration
+                [System.OnDeserializing] // Error [CS0234, CS0234] Type or namespace name does not exist in the namespace 'System'
+                // Error@+5 [CS0548] Property or indexer must have at least one accessor
+                // Error@+4 [CS1001] Identifier expected
+                // Error@+3 [CS1014] A get or set accessor expected
                 // Error@+2 [CS0106] The modifier 'new' is not valid for this item
                 // Error@+1 [CS1520] Method must have a return type
-                public int  { throw new NotImplementedException(); }
+                public int  { throw new NotImplementedException(); } // Error [CS1513] {{} expected}}
             }   // Error [CS1022] Type or namespace definition, or end-of-file expected
             """)
             .Verify();  // This one is difficult to do in the source file due to concurrent file generation

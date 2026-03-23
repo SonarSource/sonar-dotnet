@@ -140,7 +140,7 @@ namespace Tests.Diagnostics
         }
         bool Undefined(object model)
         {
-            return model.Count(); // Error[CS1061]
+            return model.Count(); // Error[CS0411]
         }
 
         int Count() { return 42; }

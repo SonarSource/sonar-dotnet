@@ -703,7 +703,7 @@ namespace CSharp7
 
             (a, b, c) = new Ambiguous(); // Error [CS0121]
             (a, b) = new NotUsedDifferentArgumentCount();   // Error [CS1501, CS8129]
-            (a, b) = new NotUsedNotVisible();               // Error [CS1061, CS8129]
+            (a, b) = new NotUsedNotVisible();               // Error [CS0411, CS8129]
         }
 
         internal void InternalMethod(InternalDeconstruct bar)

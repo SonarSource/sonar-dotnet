@@ -84,17 +84,17 @@ public class UnchangedLocalVariablesShouldBeConstTest
     public void UnchangedLocalVariablesShouldBeConst_InvalidCode() =>
         verifier.AddSnippet("""
             // invalid code
-            public void Test_TypeThatCannotBeConst(int arg)
+            public void Test_TypeThatCannotBeConst(int arg) // Error [CS0106, CS8107, CS8805]
             {
-                System.Random random = 1;
+                System.Random random = 1; // Error [CS0029]
             }
 
             // invalid code
-            public void (int arg)
+            public void (int arg) // Error [CS0116, CS0119, CS1525, CS1073, CS1002]
             {
-                int intVar = 1;
+                int intVar = 1; // Noncompliant
             }
-            """).VerifyNoIssuesIgnoreErrors();
+            """).Verify();
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_Fix() =>
