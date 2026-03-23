@@ -54,6 +54,7 @@ public record VerifierBuilder
     public bool AutogenerateConcurrentFiles { get; init; } = !Debugger.IsAttached;
     public CompilationErrorBehavior ErrorBehavior { get; init; } = CompilationErrorBehavior.Default;
     public ImmutableArray<DiagnosticDescriptor> OnlyDiagnostics { get; init; } = [];
+    public ImmutableArray<string> WarningsAsErrors { get; init; } = [];
     public OutputKind OutputKind { get; init; } = OutputKind.DynamicallyLinkedLibrary;
     public Func<CompilationOptions, CompilationOptions> CompilationOptionsCustomization { get; init; }
     public ImmutableArray<string> Paths { get; init; } = [];
@@ -108,6 +109,9 @@ public record VerifierBuilder
 
     public VerifierBuilder WithCodeFixTitle(string codeFixTitle) =>
         this with { CodeFixTitle = codeFixTitle };
+
+    public VerifierBuilder WithWarningsAsErrors(params string[] ids) =>
+        this with { WarningsAsErrors = ids.ToImmutableArray() };
 
     public VerifierBuilder WithCompilationOptionsCustomization(Func<CompilationOptions, CompilationOptions> compilationOptionsCustomization) =>
         this with { CompilationOptionsCustomization = compilationOptionsCustomization };

@@ -30,7 +30,8 @@ public static class DiagnosticVerifier
                              string additionalFilePath,
                              string[] onlyDiagnostics,
                              string[] additionalSourceFiles,
-                             bool? concurrentAnalysis = null)
+                             bool? concurrentAnalysis = null,
+                             string[] warningsAsErrors = null)
     {
         SuppressionHandler.HookSuppression();
         try
@@ -38,7 +39,7 @@ public static class DiagnosticVerifier
             var sources = ExceptRazorGeneratedFiles(compilation.SyntaxTrees)
                 .Select(x => new FileContent(x))
                 .Concat((additionalSourceFiles ?? Array.Empty<string>()).Select(x => new FileContent(x)));
-            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics, concurrentAnalysis).ToArray();
+            var diagnostics = DiagnosticsAndErrors(compilation, analyzers, checkMode, additionalFilePath, onlyDiagnostics, concurrentAnalysis, warningsAsErrors).ToArray();
             var expected = new CompilationIssues(sources);
             VerifyNoExceptionThrown(diagnostics);
             Compare(compilation.LanguageVersionString(), new(diagnostics), expected);
@@ -86,7 +87,8 @@ public static class DiagnosticVerifier
                                                                    CompilationErrorBehavior checkMode, // ToDo: Remove in https://github.com/SonarSource/sonar-dotnet/issues/8588
                                                                    string additionalFilePath,
                                                                    string[] onlyDiagnostics,
-                                                                   bool? concurrentAnalysis = null)
+                                                                   bool? concurrentAnalysis = null,
+                                                                   string[] warningsAsErrors = null)
     {
         using var scope = concurrentAnalysis.HasValue ? new EnvironmentVariableScope { EnableConcurrentAnalysis = concurrentAnalysis.Value } : null;
         onlyDiagnostics ??= [];
@@ -94,6 +96,10 @@ public static class DiagnosticVerifier
             .SelectMany(x => x.SupportedDiagnostics.Select(d => d.Id))
             .ToImmutableDictionary(x => x, Severity)
             .Add(AD0001, ReportDiagnostic.Error);
+        foreach (var id in warningsAsErrors ?? [])
+        {
+            supportedDiagnostics = supportedDiagnostics.SetItem(id, ReportDiagnostic.Error);
+        }
         var compilationOptions = compilation.Options.WithSpecificDiagnosticOptions(supportedDiagnostics);
         var analyzerOptions = string.IsNullOrWhiteSpace(additionalFilePath) ? null : AnalysisScaffolding.CreateOptions(additionalFilePath);
         var diagnostics = compilation

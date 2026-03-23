@@ -573,6 +573,37 @@ public class VerifierTest
     }
 
     [TestMethod]
+    public void Verify_WithWarningsAsErrors() =>
+        DummyCS.WithWarningsAsErrors("CS0219")
+            .AddSnippet("""
+                class Sample
+                {
+                    void M()
+                    {
+                        string unused = "text"; // Error [CS0219] The variable 'unused' is assigned but its value is never used.
+                    }
+                }
+                """)
+            .Invoking(x => x.Verify())
+            .Should().NotThrow();
+
+    [TestMethod]
+    public void Verify_WithWarningsAsErrors_MissingAnnotation_Fails() =>
+        DummyCS.WithWarningsAsErrors("CS0219")
+            .AddSnippet("""
+                class Sample
+                {
+                    void M()
+                    {
+                        string unused = "text";
+                    }
+                }
+                """)
+            .Invoking(x => x.Verify())
+            .Should().Throw<DiagnosticVerifierException>()
+            .WithMessage("*CS0219*");
+
+    [TestMethod]
     public void Verify_BasePath()
     {
         DummyCS.AddPaths("Nonexistent.cs").Invoking(x => x.Verify()).Should().Throw<FileNotFoundException>("This file should not exist in TestCases directory.");

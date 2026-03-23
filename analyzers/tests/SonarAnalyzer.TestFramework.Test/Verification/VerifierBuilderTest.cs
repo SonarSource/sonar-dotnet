@@ -85,6 +85,16 @@ public class VerifierBuilderTest
     }
 
     [TestMethod]
+    public void WithWarningsAsErrors_Overwrites_IsImmutable()
+    {
+        var one = Empty.WithWarningsAsErrors("CS1111");
+        var two = one.WithWarningsAsErrors("CS2222");
+        Empty.WarningsAsErrors.Should().BeEmpty();
+        one.WarningsAsErrors.Should().BeEquivalentTo(["CS1111"]);
+        two.WarningsAsErrors.Should().BeEquivalentTo(["CS2222"]);
+    }
+
+    [TestMethod]
     public void WithAutogenerateConcurrentFiles_Overwrites_IsImmutable()
     {
         var one = Empty.WithAutogenerateConcurrentFiles(false);
