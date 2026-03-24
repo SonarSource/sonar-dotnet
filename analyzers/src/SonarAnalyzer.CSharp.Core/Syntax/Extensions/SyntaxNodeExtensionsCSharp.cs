@@ -194,6 +194,7 @@ public static class SyntaxNodeExtensionsCSharp
             AttributeArgumentSyntax { NameEquals.Name.Identifier: var identifier } => identifier,
             AttributeSyntax { Name: { } name } => GetIdentifier(name),
             BaseTypeDeclarationSyntax { Identifier: var identifier } => identifier,
+            CatchDeclarationSyntax { Identifier: var identifier } => identifier,
             ConditionalAccessExpressionSyntax { WhenNotNull: var rightSide } => GetIdentifier(rightSide),
             ConstructorDeclarationSyntax { Identifier: var identifier } => identifier,
             ConstructorInitializerSyntax { ThisOrBaseKeyword: var keyword } => keyword,
@@ -202,11 +203,16 @@ public static class SyntaxNodeExtensionsCSharp
             DestructorDeclarationSyntax { Identifier: var identifier } => identifier,
             EnumMemberDeclarationSyntax { Identifier: var identifier } => identifier,
             EventDeclarationSyntax { Identifier: var identifier } => identifier,
+            ForEachStatementSyntax { Identifier: var identifier } => identifier,
+            FromClauseSyntax { Identifier: var identifier } => identifier,
             IndexerDeclarationSyntax { ThisKeyword: var thisKeyword } => thisKeyword,
             InvocationExpressionSyntax
             {
                 Expression: not InvocationExpressionSyntax // We don't want to recurse into nested invocations like: fun()()
             } invocation => GetIdentifier(invocation.Expression),
+            JoinClauseSyntax { Identifier: var identifier } => identifier,
+            JoinIntoClauseSyntax { Identifier: var identifier } => identifier,
+            LetClauseSyntax { Identifier: var identifier } => identifier,
             MemberAccessExpressionSyntax { Name.Identifier: var identifier } => identifier,
             MemberBindingExpressionSyntax { Name.Identifier: var identifier } => identifier,
             MethodDeclarationSyntax { Identifier: var identifier } => identifier,
@@ -221,6 +227,7 @@ public static class SyntaxNodeExtensionsCSharp
             PointerTypeSyntax { ElementType: { } elementType } => GetIdentifier(elementType),
             PredefinedTypeSyntax { Keyword: var keyword } => keyword,
             QualifiedNameSyntax { Right.Identifier: var identifier } => identifier,
+            QueryContinuationSyntax { Identifier: var identifier } => identifier,
             SimpleBaseTypeSyntax { Type: { } type } => GetIdentifier(type),
             SimpleNameSyntax { Identifier: var identifier } => identifier,
             TypeParameterConstraintClauseSyntax { Name.Identifier: var identifier } => identifier,
@@ -232,6 +239,7 @@ public static class SyntaxNodeExtensionsCSharp
             { } fileScoped when FileScopedNamespaceDeclarationSyntaxWrapper.IsInstance(fileScoped)
                 && ((FileScopedNamespaceDeclarationSyntaxWrapper)fileScoped).Name is { } name => GetIdentifier(name),
             { } localFunction when LocalFunctionStatementSyntaxWrapper.IsInstance(localFunction) => ((LocalFunctionStatementSyntaxWrapper)localFunction).Identifier,
+            { } singleVar when SingleVariableDesignationSyntaxWrapper.IsInstance(singleVar) => ((SingleVariableDesignationSyntaxWrapper)singleVar).Identifier,
             { } implicitNew when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(implicitNew) => ((ImplicitObjectCreationExpressionSyntaxWrapper)implicitNew).NewKeyword,
             { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
                 && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),

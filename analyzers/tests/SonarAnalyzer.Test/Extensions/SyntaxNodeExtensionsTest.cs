@@ -1092,6 +1092,7 @@ End Class";
     [DataRow("""record class $$T$$ { }""", "T")]                                  // BaseTypeDeclarationSyntax
     [DataRow("""record struct $$T$$ { }""", "T")]                                 // BaseTypeDeclarationSyntax
     [DataRow("""enum $$T$$ { }""", "T")]                                          // BaseTypeDeclarationSyntax
+    [DataRow("""void M() { try { } catch $$(Exception e)$$ { } }""", "e")]       // CatchDeclarationSyntax
     [DataRow("""void M(string s) { var x = $$s?.Length$$; }""", "Length")]                                      // ConditionalAccessExpressionSyntax
     [DataRow("""void M(string s) { $$s?.ToLower()?.ToUpper()$$; }""", "ToUpper")]                               // ConditionalAccessExpressionSyntax
     [DataRow("""void M(string s) { $$s.ToLower()?.ToUpper()$$; }""", "ToUpper")]                                // ConditionalAccessExpressionSyntax + MemberAccessExpressionSyntax
@@ -1112,10 +1113,15 @@ End Class";
     [DataRow("""$$event Action E {add { } remove { } }$$""", "E")]                // EventDeclarationSyntax
     [DataRow("""$$event Action E;$$""", null)]                                    // EventFieldDeclarationSyntax
     [DataRow("""$$event Action E1, E2;$$""", null)]                               // EventFieldDeclarationSyntax
+    [DataRow("""void M() { $$foreach (var x in new int[0]) { }$$ }""", "x")]      // ForEachStatementSyntax
+    [DataRow("""void M() { var q = $$from x in new int[0]$$ select x; }""", "x")] // FromClauseSyntax
     [DataRow("""$$Int32$$ i;""", "Int32")]                                        // IdentifierNameSyntax
     [DataRow("""$$int this[int i] { get => 1; set { } }$$""", "this")]            // IndexerDeclarationSyntax
     [DataRow("""int i = $$Math.Abs(1)$$;""", "Abs")]                              // InvocationExpressionSyntax
     [DataRow("""int i = $$Fun()()$$;""", null)]                                   // InvocationExpressionSyntax
+    [DataRow("""void M() { var q = from _ in new int[0] $$join x in new int[0] on _ equals x$$ select _; }""", "x")]  // JoinClauseSyntax
+    [DataRow("""void M() { var q = from _ in new int[0] join y in new int[0] on _ equals y $$into x$$ select _; }""", "x")] // JoinIntoClauseSyntax
+    [DataRow("""void M() { var q = from _ in new int[0] $$let x = 0$$ select _; }""", "x")]                            // LetClauseSyntax
     [DataRow("""int i = $$int.MaxValue$$;""", "MaxValue")]                        // MemberAccessExpressionSyntax
     [DataRow("""string s = (new object())?$$.ToString$$();""", "ToString")]       // MemberBindingExpressionSyntax
     [DataRow("""string s = (new object())?$$.ToString()$$;""", "ToString")]       // MemberBindingExpressionSyntax
@@ -1130,6 +1136,7 @@ End Class";
     [DataRow("""object o = $$new object()!$$;""", "object")]                      // PostfixUnaryExpressionSyntax
     [DataRow("""$$int*$$ i;""", "int")]                                           // PointerTypeSyntax
     [DataRow("""$$System.Collections.ArrayList$$ l;""", "ArrayList")]             // QualifiedNameSyntax
+    [DataRow("""void M() { var q = from x in new int[0] group x by x $$into y$$ select y; }""", "y")] // QueryContinuationSyntax
     [DataRow("""$$List<int>$$ l;""", "List")]                                     // GenericNameSyntax
     [DataRow("""bool M() => (0, Name: "a") is (_, $$Name: null$$);""", "Name")]   // SubpatternSyntax
     [DataRow("""bool M() => (0, Name: "a") is ($$_$$, Name: null);""", null)]     // SubpatternSyntax
@@ -1138,12 +1145,14 @@ End Class";
     [DataRow("""int $$i$$;""", "i")]                                              // VariableDeclaratorSyntax
     [DataRow("""object o = $$new()$$;""", "new")]                                 // ImplicitObjectCreationExpressionSyntax
     [DataRow("""void M(int p) { $$ref int$$ i = ref p; }""", "int")]              // RefTypeSyntax
+    [DataRow("""void M() { int.TryParse("", out var $$x$$); }""", "x")]            // SingleVariableDesignationSyntaxWrapper
     public void GetIdentifier_Members(string member, string expected)
     {
         var node = TestCompiler.NodeBetweenMarkersCS($$"""
             using System;
             using System.Collections.Generic;
             using System.Diagnostics;
+            using System.Linq;
             unsafe class Test
             {
                 static Func<int> Fun() => default;
