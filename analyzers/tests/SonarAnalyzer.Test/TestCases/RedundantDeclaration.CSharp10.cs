@@ -14,4 +14,17 @@ namespace Tests.Diagnostics
         public abstract void Test(object o, Delegate f);
         public delegate bool BoolDelegate();
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-3456
+    class Repro_NET3456
+    {
+        [AttributeUsage(AttributeTargets.Parameter)]
+        class BindingAttribute : Attribute { }
+
+        void Test()
+        {
+            Action<int> withoutAttribute = (x) => { };           // Noncompliant {{'x' is not used. Use discard parameter instead.}}
+            Action<int> withAttribute    = ([Binding] x) => { }; // Noncompliant - FP: x is annotated; the attribute may be consumed by a framework (e.g. [FromRoute], [JsonProperty])
+        }
+    }
 }
