@@ -44,7 +44,7 @@ namespace AppendedNamespaceForConcurrencyTestTests.Tests.Diagnostics
             b = x == new object();
             b = new Base() == new object();
             b = new MyClass() == new object();
-            b = new MyClass2() == new object(); // CS0253
+            b = new MyClass2() == new object(); // Error [CS0253] - compiler warning "Possible unintended reference comparison; to get a value comparison, cast the right hand side to type 'MyClass2'"
             b = new object() == new object();
 
             // The following is compliant

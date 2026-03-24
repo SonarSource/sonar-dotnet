@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Collections.Concurrent; // Noncompliant {{Remove this unnecessary 'using'.}}
 using System.IO;
-using System.IO; // Warning [CS0105]
+using System.IO; // Error [CS0105] - compiler warning, duplicate using directive
 using static System.Console;
 using static System.DateTime; // FN - System.DateTime is not a namespace symbol
 using MySysAlias = System;
@@ -36,9 +36,9 @@ namespace AppendedNamespaceForConcurrencyTest.MyNamespace2
 namespace AppendedNamespaceForConcurrencyTest.MyNamespace2.Level1
 {
     using MyNamespace0;
-    using MyNamespace0; // Warning [CS0105]
-    using MyNamespace0; // Warning [CS0105]
-    using MyNamespace1; // Warning [CS0105]
+    using MyNamespace0; // Error [CS0105] - compiler warning, duplicate using directive
+    using MyNamespace0; // Error [CS0105] - compiler warning, duplicate using directive
+    using MyNamespace1; // CS0105 does not fire here — duplicates file-level import, not a same-scope duplicate
     using System.Linq; // Noncompliant {{Remove this unnecessary 'using'.}}
     using MyNamespace2.Level1; // Noncompliant {{Remove this unnecessary 'using'.}}
     using MyNamespace2; // Noncompliant {{Remove this unnecessary 'using'.}}
@@ -53,8 +53,8 @@ namespace AppendedNamespaceForConcurrencyTest.MyNamespace2.Level1
 
     namespace Level2
     {
-        using MyNamespace1; // Warning [CS0105]
-        using System.IO; // Warning [CS0105]
+        using MyNamespace1; // CS0105 does not fire here — duplicates file-level import, not a same-scope duplicate
+        using System.IO;    // CS0105 does not fire here — duplicates file-level import, not a same-scope duplicate
 
         class Ns2_2
         {

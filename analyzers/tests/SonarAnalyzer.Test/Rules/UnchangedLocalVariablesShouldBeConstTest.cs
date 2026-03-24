@@ -58,8 +58,9 @@ public class UnchangedLocalVariablesShouldBeConstTest
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_Latest() =>
         verifier.AddPaths("UnchangedLocalVariablesShouldBeConst.Latest.cs")
-        .WithOptions(LanguageOptions.CSharpLatest)
-        .Verify();
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithWarningsAsErrors("CS9193")
+            .Verify();
 
     [TestMethod]
     public void UnchangedLocalVariablesShouldBeConst_CshtmlIdeGenerated() =>

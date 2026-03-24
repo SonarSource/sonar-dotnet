@@ -10,6 +10,7 @@ namespace Tests.TestCases
     {
         public void Test(long ui)
         {
+            // Error @+1 [CS0078] - compiler warning "The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity"
             const long b = 0L;      // Fixed
             const ulong c = 0Ul;
             const ulong d = 0uL;
@@ -22,6 +23,7 @@ namespace Tests.TestCases
             const int k = 0; // Compliant
             const uint l = 0u;
 
+            // Error @+1 [CS0078] - compiler warning "The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity"
             Test(45L); // Fixed
         }
         public void TestOk()

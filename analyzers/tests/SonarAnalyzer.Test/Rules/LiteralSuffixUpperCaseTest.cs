@@ -21,7 +21,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class LiteralSuffixUpperCaseTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder<LiteralSuffixUpperCase>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<LiteralSuffixUpperCase>()
+        .WithWarningsAsErrors("CS0078");
 
     [TestMethod]
     public void LiteralSuffixUpperCase() =>

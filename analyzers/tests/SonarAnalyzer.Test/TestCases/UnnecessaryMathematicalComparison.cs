@@ -93,12 +93,12 @@ namespace SonarAnalyzer.Test.TestCases
             const int veryBig = int.MaxValue;
             const long verySmall = long.MinValue;
 
-            _ = sb < veryBig; // Compliant, raised by CS0652
-            _ = veryBig > sb; // Compliant, raised by CS0652
-            _ = sb > verySmall; // Compliant, raised by CS0652
-            _ = verySmall < sb; // Compliant, raised by CS0652
-            _ = verySmall == sb; // Compliant, raised by CS0652
-            _ = sb == veryBig; // Compliant, raised by CS0652
+            _ = sb < veryBig;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = veryBig > sb;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = sb > verySmall;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall < sb;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall == sb; // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = sb == veryBig;   // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
         }
 
         public void Bytes() // CS0652
@@ -152,12 +152,12 @@ namespace SonarAnalyzer.Test.TestCases
             const int veryBig = int.MaxValue;
             const short verySmall = short.MinValue;
 
-            _ = b < veryBig; // Compliant, raised by CS0652
-            _ = veryBig > b; // Compliant, raised by CS0652
-            _ = b > verySmall; // Compliant, raised by CS0652
-            _ = verySmall < b; // Compliant, raised by CS0652
-            _ = verySmall == b; // Compliant, raised by CS0652
-            _ = b == veryBig; // Compliant, raised by CS0652
+            _ = b < veryBig;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = veryBig > b;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = b > verySmall;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall < b;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall == b; // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = b == veryBig;   // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
         }
 
         public void Shorts() // CS0652
@@ -195,12 +195,12 @@ namespace SonarAnalyzer.Test.TestCases
             const int veryBig = int.MaxValue;
             const long verySmall = long.MinValue;
 
-            _ = s < veryBig; // Compliant, raised by CS0652
-            _ = veryBig > s; // Compliant, raised by CS0652
-            _ = s > verySmall; // Compliant, raised by CS0652
-            _ = verySmall < s; // Compliant, raised by CS0652
-            _ = verySmall == s; // Compliant, raised by CS0652
-            _ = s == veryBig; // Compliant, raised by CS0652
+            _ = s < veryBig;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = veryBig > s;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = s > verySmall;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall < s;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall == s; // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = s == veryBig;   // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
         }
 
         public void UShorts() // CS0652
@@ -246,12 +246,12 @@ namespace SonarAnalyzer.Test.TestCases
             const int veryBig = int.MaxValue;
             const long verySmall = long.MinValue;
 
-            _ = us < veryBig; // Compliant, raised by CS0652
-            _ = veryBig > us; // Compliant, raised by CS0652
-            _ = us > verySmall; // Compliant, raised by CS0652
-            _ = verySmall < us; // Compliant, raised by CS0652
-            _ = verySmall == us; // Compliant, raised by CS0652
-            _ = us == veryBig; // Compliant, raised by CS0652
+            _ = us < veryBig;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = veryBig > us;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = us > verySmall;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall < us;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall == us; // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = us == veryBig;   // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
         }
 
         public void Ints() // CS0652
@@ -287,12 +287,12 @@ namespace SonarAnalyzer.Test.TestCases
             const long veryBig = long.MaxValue;
             const long verySmall = long.MinValue;
 
-            _ = i < veryBig; // Compliant, raised by CS0652
-            _ = veryBig > i; // Compliant, raised by CS0652
-            _ = i > verySmall; // Compliant, raised by CS0652
-            _ = verySmall < i; // Compliant, raised by CS0652
-            _ = verySmall == i; // Compliant, raised by CS0652
-            _ = i == veryBig; // Compliant, raised by CS0652
+            _ = i < veryBig;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = veryBig > i;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = i > verySmall;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall < i;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall == i; // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = i == veryBig;   // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
         }
 
         public void UInts() // CS0652
@@ -330,12 +330,12 @@ namespace SonarAnalyzer.Test.TestCases
             const long veryBig = long.MaxValue;
             const long verySmall = long.MinValue;
 
-            _ = ui < veryBig; // Compliant, raised by CS0652
-            _ = veryBig > ui; // Compliant, raised by CS0652
-            _ = ui > verySmall; // Compliant, raised by CS0652
-            _ = verySmall < ui; // Compliant, raised by CS0652
-            _ = verySmall == ui; // Compliant, raised by CS0652
-            _ = ui == veryBig; // Compliant, raised by CS0652
+            _ = ui < veryBig;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = veryBig > ui;    // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = ui > verySmall;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall < ui;  // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = verySmall == ui; // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
+            _ = ui == veryBig;   // Error [CS0652] - compiler warning "Comparison to integral constant is out of range of the compared type"
         }
 
         public void Longs() // Rule applies

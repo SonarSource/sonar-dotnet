@@ -24,7 +24,8 @@ public class UnnecessaryUsingsTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<UnnecessaryUsings>()
         .AddReferences(MetadataReferenceFacade.MicrosoftWin32Primitives)
-        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
+        .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
+        .WithWarningsAsErrors("CS0105");
 
     public TestContext TestContext { get; set; }
 

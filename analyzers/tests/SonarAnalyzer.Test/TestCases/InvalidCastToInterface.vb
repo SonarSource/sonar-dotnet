@@ -174,7 +174,7 @@ Public Class Other
         o = DirectCast(IBar, IFoo)
         o = DirectCast(Bar, Foo)        ' Compliant causes compiler error ' Error   [BC30311] - invalid cast
         o = DirectCast(IBar, Foo)
-        o = DirectCast(FinalBar, IFoo)  ' Compliant causes compiler error ' Warning [BC42322] - invalid cast
+        o = DirectCast(FinalBar, IFoo)  ' Error [BC42322] - Compliant, causes compiler warning
         o = DirectCast(Generic, Bar)    ' Compliant causes compiler error ' Error   [BC30311] - invalid cast
 
         o = TryCast(Bar, IFoo)

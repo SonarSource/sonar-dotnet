@@ -23,7 +23,9 @@ namespace SonarAnalyzer.Test.Rules;
 public class InvalidCastToInterfaceTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.InvalidCastToInterface>();  // Syntax-based part of the rule, there also exists Sonar SE part
-    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InvalidCastToInterface>();  // Syntax-based part only
+
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.InvalidCastToInterface>()   // Syntax-based part only
+        .WithWarningsAsErrors("BC42322");
 
     [TestMethod]
     [DataRow(ProjectType.Product)]

@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Test.Rules
         public void ReferenceEqualityCheckWhenEqualsExists() =>
             new VerifierBuilder<ReferenceEqualityCheckWhenEqualsExists>()
                 .AddPaths("ReferenceEqualityCheckWhenEqualsExists.cs", "ReferenceEqualityCheckWhenEqualsExists2.cs")
-                .WithAutogenerateConcurrentFiles(false).Verify();
+                .WithAutogenerateConcurrentFiles(false)
+                .WithWarningsAsErrors("CS0253")
+                .Verify();
     }
 }

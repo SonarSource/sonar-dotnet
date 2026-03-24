@@ -54,6 +54,12 @@ namespace Repro_132389
             int value2 = 0; // Noncompliant - TP
             value2.InExtension();
         }
+
+        public void MethodWithCS9193()
+        {
+            const int alreadyConst = 0;
+            alreadyConst.RefReadonlyExtension(); // Error [CS9193] - compiler warning "Argument 0 should be a variable because it is passed to a 'ref readonly' parameter"
+        }
     }
 
     public static class IntExtensions

@@ -21,7 +21,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class UnnecessaryMathematicalComparisonTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryMathematicalComparison>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.UnnecessaryMathematicalComparison>()
+        .WithWarningsAsErrors("CS0652");
 
     [TestMethod]
     public void UnnecessaryMathematicalComparison_CS() =>
