@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public class Sample
@@ -129,12 +130,19 @@ public class Sample
 
     public void Invocations()
     {
+        var value = "Previous is not string";
         Invocation("""
         Too close
         """,                // Noncompliant {{Indent this raw string literal at line position 13.}}
             """
             Good, standalone start line
             """, """
+            Good, sharing start line with comma
+            """, """
+                Too far
+                """);       // Noncompliant
+        Invocation(
+            value, """
             Good, sharing start line with comma
             """, """
                 Too far
@@ -235,6 +243,54 @@ public class Sample
                 Too far
                 """     // Noncompliant {{Indent this raw string literal at line position 13.}}
         ]);
+    }
+
+    public void Constructors()
+    {
+        Invoke(new(
+        """
+        Too close
+        """,            // Noncompliant {{Indent this raw string literal at line position 13.}}
+            """
+            Good
+            """, """
+                Too far
+                """     // Noncompliant {{Indent this raw string literal at line position 13.}}
+            ));
+        Invoke(
+            new(
+            """
+            Too close
+            """,            // Noncompliant {{Indent this raw string literal at line position 17.}}
+                """
+                Good
+                """, """
+                    Too far
+                    """     // Noncompliant {{Indent this raw string literal at line position 17.}}
+            ));
+        Invoke(new WithThreeArguments(
+        """
+        Too close
+        """,            // Noncompliant {{Indent this raw string literal at line position 13.}}
+            """
+            Good
+            """, """
+                Too far
+                """     // Noncompliant {{Indent this raw string literal at line position 13.}}
+            ));
+        Invoke(
+            new WithThreeArguments(
+            """
+            Too close
+            """,            // Noncompliant {{Indent this raw string literal at line position 17.}}
+                """
+                Good
+                """, """
+                    Too far
+                    """     // Noncompliant {{Indent this raw string literal at line position 17.}}
+            ));
+
+        void Invoke(WithThreeArguments ex) { }
     }
 
     public void Lambdas(int[] list)
@@ -424,6 +480,30 @@ public class Sample
                     .ToString());
     }
 
+    public void CollectionInitializer()
+    {
+        var list = new List<string>
+        {
+            """
+            Good
+            """, """
+                Too far
+                """     // Noncompliant
+        };
+        var dict = new Dictionary<string, string> {
+            {
+                "Key", """
+                Good
+                """
+            },
+            {
+                "Key", """
+                    Too far
+                    """ // Noncompliant
+            }
+        };
+    }
+
     public static bool Invocation(params object[] args) => true;
 
     [Obsolete("""
@@ -442,4 +522,9 @@ public class WithProperty
 {
     public string First { get; set; }
     public string Second { get; set; }
+}
+
+public class WithThreeArguments
+{
+    public WithThreeArguments(string a, string b, string c) { }
 }

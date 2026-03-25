@@ -58,21 +58,25 @@ public sealed class IndentRawString : IndentBase
         {
             return current;
         }
-        else if (current is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccessOnRawString } && memberAccessOnRawString.Expression == node)
+        else if (current is MemberAccessExpressionSyntax memberAccessOnRawString && memberAccessOnRawString.Expression == node)
         {
             return null;    // We don't want anything, when the invocation is on the raw string itself
         }
-        else if (current is InvocationExpressionSyntax invocation && invocation.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.OperatorToken.IsFirstTokenOnLine())
+        else if (current is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax invokedMemberAccessOnRawString } && invokedMemberAccessOnRawString.Expression == node)
+        {
+            return null;    // We don't want anything, when the invocation is on the raw string itself
+        }
+        else if (current is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccess } && memberAccess.OperatorToken.IsFirstTokenOnLine())
         {
             return memberAccess.Name;   // Off by one due to the dot
-        }
-        else if (current is InvocationExpressionSyntax or CollectionExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine())
-        {
-            return current;
         }
         else if (current is ArrowExpressionClauseSyntax)
         {
             return current.Parent;
+        }
+        else if (current is not ArgumentSyntax and not ExpressionElementSyntax and not LiteralExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine())
+        {
+            return current;
         }
         else
         {
