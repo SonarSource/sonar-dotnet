@@ -40,6 +40,68 @@ public class Sample
             "Another");
         Invocation(
             "Argument", "Another"); // T0028
+
+        new Builder()
+            .And.Build([
+                "Some",
+                "Argument",
+                "Correct"]);
+
+        // Collection expression in fluent chain - compliant cases
+        new Builder()
+            .Build([
+                "Aligned",
+                "Correctly"]);
+        new Builder()
+            .And
+            .Build([
+                "Multi",
+                "Line",
+                "Chain"]);
+        new Builder().And
+            .Build([
+                "Mixed",
+                "Style"]);
+
+        // Collection expression in fluent chain - noncompliant cases
+        new Builder()
+            .Build([
+            "Too close",        // Noncompliant {{Indent this argument at line position 17.}}
+                    "Too far"]);// Noncompliant {{Indent this argument at line position 17.}}
+        new Builder()
+            .And.Build([
+        "Way too close",        // Noncompliant {{Indent this argument at line position 17.}}
+                        "Way too far"]); // Noncompliant {{Indent this argument at line position 17.}}
+        new Builder()
+            .And
+            .Build([
+            "Too close",        // Noncompliant {{Indent this argument at line position 17.}}
+                    "Too far"]);// Noncompliant {{Indent this argument at line position 17.}}
+
+        // Multiple chained calls with collection expressions - compliant
+        new Builder()
+            .And.Build([
+                "First",
+                "Chain"])
+            .And.Build([
+                "Second",
+                "Chain"]);
+        new Builder()
+            .Build([
+                "One"])
+            .Build([
+                "Two"])
+            .Build([
+                "Three"]);
+
+        // Multiple chained calls with collection expressions - noncompliant
+        new Builder()
+            .And.Build([
+            "Too close",        // Noncompliant {{Indent this argument at line position 17.}}
+                    "Too far"]) // Noncompliant {{Indent this argument at line position 17.}}
+            .And.Build([
+            "Too close",        // Noncompliant {{Indent this argument at line position 17.}}
+                    "Too far"]);// Noncompliant {{Indent this argument at line position 17.}}
     }
 
     public bool ArrowNoncompliant() =>
@@ -76,6 +138,137 @@ public class Sample
             .Build(
                 "Arg",
                     "Too far"); // Noncompliant
+    }
+
+    public Builder FluentChainArguments()
+    {
+        // Arguments in fluent chain where ( is not on its own line
+        return new Builder()
+            .And.Build(
+                "Compliant",
+                "Arguments");
+    }
+
+    public Builder FluentChainArgumentsNoncompliant()
+    {
+        return new Builder()
+            .And.Build(
+            "Too close",            // Noncompliant {{Indent this argument at line position 17.}}
+                    "Too far");     // Noncompliant {{Indent this argument at line position 17.}}
+    }
+
+    public Builder FluentChainArgumentsMultiple()
+    {
+        // Multiple chained calls with arguments
+        return new Builder()
+            .And.Build(
+                "First",
+                "Chain")
+            .And.Build(
+                "Second",
+                "Chain");
+    }
+
+    public void LongFluentChainWithCollectionExpression()
+    {
+        new Builder().Build()
+            .And.AllSatisfy(x => Invocation(x))
+            .And.AllSatisfy(x => Invocation(x))
+            .And.Contain([
+                "First",
+                "Second",
+                "Third"]);
+
+        new Builder().Build()
+            .And.AllSatisfy(x => Invocation(x))
+            .And.AllSatisfy(x => Invocation(x))
+            .And.Contain([
+            "Too close",            // Noncompliant {{Indent this argument at line position 17.}}
+                        "Too far"]);// Noncompliant {{Indent this argument at line position 17.}}
+
+        new Builder().Should().ContainKey("x").And.ContainSingle().Which.Value.Should().BeOfType<Builder>()
+            .Which.Members.Select(x => x).Should().BeEquivalentTo([
+                ("First", true),
+                ("Second", true)]);
+
+        new Builder().Should().ContainKey("x").And.ContainSingle().Which.Value.Should().BeOfType<Builder>()
+            .Which.Members.Select(x => x).Should().BeEquivalentTo([
+            ("Too close", true),        // Noncompliant {{Indent this argument at line position 17.}}
+                    ("Too far", true)]);// Noncompliant {{Indent this argument at line position 17.}}
+
+        new Builder().Build()
+            .And.AllSatisfy(x => Invocation(x))
+            .And.AllSatisfy(x => Invocation(x))
+            .And.Contain(
+                [
+                    "First",
+                    "Second",
+                    "Third"]);
+
+        new Builder().Build()
+            .And.AllSatisfy(x => Invocation(x))
+            .And.AllSatisfy(x => Invocation(x))
+            .And.Contain(
+                [
+                "Too close",            // Noncompliant
+                    "Just right",
+                        "Too far"]);    // Noncompliant
+
+    }
+
+    public void FluentChainWithConstructor()
+    {
+        // Constructor arguments in fluent chain - noncompliant
+        new Builder()
+            .Build(new Builder(
+            "Too close",        // Noncompliant {{Indent this argument at line position 17.}}
+                "Just right",
+                    "Too far"));// Noncompliant {{Indent this argument at line position 17.}}
+        new Builder()
+            .And.Build(new Builder(
+            "Too close",        // Noncompliant {{Indent this argument at line position 17.}}
+                "Just right",
+                    "Too far"));// Noncompliant {{Indent this argument at line position 17.}}
+
+        new Builder()
+            .Build(
+                new Builder(
+                "Too close",        // Noncompliant {{Indent this argument at line position 21.}}
+                    "Just right",
+                        "Too far"));// Noncompliant {{Indent this argument at line position 21.}}
+
+        // Constructor on same line as fluent chain method - compliant
+        new Builder()
+            .And.Build(new Builder(
+                "Compliant",
+                "Args"));
+
+        // Constructor on same line as fluent chain method - noncompliant
+        new Builder()
+            .And.Build(new Builder(
+            "Too close",            // Noncompliant {{Indent this argument at line position 17.}}
+                    "Too far"));    // Noncompliant {{Indent this argument at line position 17.}}
+    }
+
+    public void TargetTypedNewExpression()
+    {
+        PrepareProjectZip(
+            new(
+                "Project.json",
+                "Content"));
+
+        PrepareProjectZip(
+            new(
+            "Too close",            // Noncompliant {{Indent this argument at line position 17.}}
+                    "Too far"));    // Noncompliant {{Indent this argument at line position 17.}}
+
+        PrepareProjectZip(new(
+            "Project.json",
+            "Content"));
+
+        PrepareProjectZip(new(
+        "Too close",                // Noncompliant {{Indent this argument at line position 13.}}
+                "Too far"));        // Noncompliant {{Indent this argument at line position 13.}}
     }
 
     public void Invocations()
@@ -176,6 +369,23 @@ public class Sample
             "Good",
                 "Too far"   // Noncompliant {{Indent this argument at line position 13.}}
             ]);
+    }
+
+    public void InsideTernary()
+    {
+        Builder x = new Builder() is { } builder
+            ? builder.Build()
+            : new(
+            "Too close",        // Noncompliant
+                "Just right",
+                    "Too far"); // Noncompliant
+
+        Builder y = new Builder() is { } other
+            ? other.Build()
+            : new Builder().And.Build(
+            "Too close",        // Noncompliant
+                "Just right",
+                    "Too far"); // Noncompliant
     }
 
     public void Lambdas(int[] list, int[] longer)
@@ -313,6 +523,7 @@ public class Sample
     public static string ReturnString(string arg) => arg;
     public void RegisterNodeAction(Action<object> action, params object[] syntaxKinds) { }
     public void AcceptFunc(Func<object, object> func, params object[] args) { }
+    public static Builder PrepareProjectZip(Builder arg) => new Builder();
 
     [Obsolete(ReturnString("For coverage"))]    // Error [CS0182] An attribute argument must be a constant expression
     public void Coverage() { }
@@ -320,7 +531,20 @@ public class Sample
 
 public class Builder
 {
+    public Builder(params object[] args) { }
+    public Builder And => this;
+    public Builder Which => this;
+    public Builder Members => this;
+    public Builder Value => this;
     public Builder Build(params object[] args) => this;
+    public Builder Should() => this;
+    public Builder AllSatisfy(Func<object, object> predicate) => this;
+    public Builder Contain(params object[] args) => this;
+    public Builder ContainKey(object key) => this;
+    public Builder ContainSingle() => this;
+    public Builder BeEquivalentTo(params object[] args) => this;
+    public Builder BeOfType<T>() => this;
+    public Builder Select(Func<object, object> selector) => this;
 }
 
 public class WithProperty

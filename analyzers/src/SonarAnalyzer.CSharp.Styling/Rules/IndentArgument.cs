@@ -38,19 +38,25 @@ public sealed class IndentArgument : IndentBase
             SyntaxKind.Argument,
             SyntaxKind.ExpressionElement);
 
-    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current)
-    {
-        if (current is ForStatementSyntax)
+    protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current) =>
+        current switch
         {
-            return node.Ancestors().OfType<InvocationExpressionSyntax>().FirstOrDefault();
-        }
-        else if (current is InvocationExpressionSyntax invocation && invocation.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.OperatorToken.IsFirstTokenOnLine())
+            ForStatementSyntax => node.Ancestors().OfType<InvocationExpressionSyntax>().FirstOrDefault(),
+            InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccess } when FirstMemberOnLine(memberAccess) is { } member => member,
+            ObjectCreationExpressionSyntax or BaseObjectCreationExpressionSyntax when current.GetFirstToken().IsFirstTokenOnLine() => current,
+            CollectionExpressionSyntax when node is ExpressionElementSyntax && !current.GetFirstToken().IsFirstTokenOnLine() && FirstMemberOnLine(current) is { } member => member,
+            { Parent: ConditionalExpressionSyntax ternary } when ternary.WhenTrue == current || ternary.WhenFalse == current => current,
+            _ => base.NodeRoot(node, current),
+        };
+
+    private static SyntaxNode FirstMemberOnLine(SyntaxNode node) =>
+        node switch
         {
-            return memberAccess.Name;   // Off by one due to the dot
-        }
-        else
-        {
-            return base.NodeRoot(node, current);
-        }
-    }
+            ArgumentSyntax { Parent.Parent: { } grandParent } => FirstMemberOnLine(grandParent),
+            CollectionExpressionSyntax { Parent: { } parent } => FirstMemberOnLine(parent),
+            InvocationExpressionSyntax { Expression: { } expression } => FirstMemberOnLine(expression),
+            MemberAccessExpressionSyntax { Name: { } name } memberAccess when memberAccess.OperatorToken.IsFirstTokenOnLine() => name,
+            MemberAccessExpressionSyntax { Expression: { } expression } => FirstMemberOnLine(expression),
+            _ => null,
+        };
 }
