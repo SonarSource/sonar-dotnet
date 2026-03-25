@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -80,6 +81,53 @@ public class JsonSerializerTest
               "count": 2
             }
             """);
+
+    [DataRow((sbyte)42)]     // sbyte
+    [DataRow((byte)42)]      // byte
+    [DataRow((short)42)]     // short
+    [DataRow((ushort)42)]    // ushort
+    [DataRow(42)]            // int
+    [DataRow(42U)]           // uint
+    [DataRow(42L)]           // long
+    [DataRow(42UL)]          // ulong
+    [TestMethod]
+    public void Serialize_IntegerTypes(object value) =>
+        JsonSerializer.Serialize(new { Value = value }).ToUnixLineEndings().Should().Be("""
+            {
+              "value": 42
+            }
+            """);
+
+    [DataRow(42.42)]         // double
+    [DataRow(42.42f)]        // float
+    [TestMethod]
+    public void Serialize_FloatingPointTypes(object value)
+    {
+        var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
+        newCulture.NumberFormat.NumberDecimalSeparator = ",";
+        using var scope = new CurrentCultureScope(newCulture);
+        value.ToString().Should().Be("42,42");
+
+        JsonSerializer.Serialize(new { Value = value }).ToUnixLineEndings().Should().Be("""
+            {
+              "value": 42.42
+            }
+            """);
+    }
+
+    [TestMethod]    // decimal cannot be in DataRow
+    public void Serialize_DecimalType()
+    {
+        var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
+        newCulture.NumberFormat.NumberDecimalSeparator = ",";
+        using var scope = new CurrentCultureScope(newCulture);
+        42.42m.ToString().Should().Be("42,42");
+        JsonSerializer.Serialize(new { Value = 42.42m }).ToUnixLineEndings().Should().Be("""
+            {
+              "value": 42.42
+            }
+            """);
+    }
 
     private sealed record TestData(string StringValue,
                                    bool TrueValue,

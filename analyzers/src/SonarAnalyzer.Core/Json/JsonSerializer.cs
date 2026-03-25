@@ -14,6 +14,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Globalization;
 using System.Text;
 
 namespace SonarAnalyzer.Core.Json;
@@ -31,7 +32,17 @@ public static class JsonSerializer
         {
             null => "null",
             bool value => value.ToString().ToLower(),
+            sbyte value => value.ToString(),
+            byte value => value.ToString(),
+            short value => value.ToString(),
+            ushort value => value.ToString(),
             int value => value.ToString(),
+            uint value => value.ToString(),
+            long value => value.ToString(),
+            ulong value => value.ToString(),
+            float value => value.ToString(CultureInfo.InvariantCulture),
+            double value => value.ToString(CultureInfo.InvariantCulture),
+            decimal value => value.ToString(CultureInfo.InvariantCulture),
             string value => SerializeValue(value),
             Enum => SerializeValue(original.ToString()),
             IEnumerable<string> values => $"[{values.JoinStr(", ", SerializeValue)}]",
