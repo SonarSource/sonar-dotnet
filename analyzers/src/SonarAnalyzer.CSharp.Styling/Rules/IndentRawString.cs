@@ -74,6 +74,10 @@ public sealed class IndentRawString : IndentBase
         {
             return current.Parent;
         }
+        else if (current.Parent is ConditionalExpressionSyntax ternary && (ternary.WhenTrue == current || ternary.WhenFalse == current))
+        {
+            return current; // This assumes that the '? """' or ': """' is positioned correctly, and indents from that
+        }
         else if (current is not ArgumentSyntax and not ExpressionElementSyntax and not LiteralExpressionSyntax and not InterpolatedStringExpressionSyntax
             && current.GetFirstToken().IsFirstTokenOnLine())
         {

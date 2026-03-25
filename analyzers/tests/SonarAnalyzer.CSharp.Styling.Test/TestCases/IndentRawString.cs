@@ -514,6 +514,41 @@ public class Sample
         };
     }
 
+    public void Ternary(bool condition)
+    {
+        _ = condition
+            ? """
+                Good
+                """
+            : """
+                Good
+                """;
+        _ = condition
+            ? """
+            Too close
+            """     // Noncompliant
+            : """
+            Too close
+            """;    // Noncompliant
+
+        Invocation(condition
+            ? """
+                Good
+                """
+            : """
+            Too close
+            """); // Noncompliant
+        Invocation(condition
+            ?
+            """
+                Good, although the opening quote is questionable (not in scope of this rule)
+                """
+            :
+            """
+            Too close
+            """); // Noncompliant
+    }
+
     public static bool Invocation(params object[] args) => true;
 
     [Obsolete("""
