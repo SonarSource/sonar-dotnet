@@ -62,8 +62,7 @@ public sealed class UnusedStringBuilder : UnusedStringBuilderBase<SyntaxKind, Va
             VariableDeclaratorSyntax { Initializer.Value: IdentifierNameSyntax identifier } => identifier,
             VariableDeclaratorSyntax { Initializer.Value: ConditionalAccessExpressionSyntax { Expression: IdentifierNameSyntax identifier } } => identifier,
             AssignmentExpressionSyntax { Right: IdentifierNameSyntax identifier } => identifier,
-            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression, Left: IdentifierNameSyntax identifier } => identifier,
-            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression, Right: IdentifierNameSyntax identifier } => identifier,
+            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.AddExpression } => node,
             _ => null,
         };
 

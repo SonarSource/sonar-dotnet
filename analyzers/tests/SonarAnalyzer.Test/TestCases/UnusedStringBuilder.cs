@@ -179,8 +179,17 @@ public class Repro_7324
     public void Concat_InAssignment()
     {
         var prefix = "Prefix: ";
-        var sb = new StringBuilder(); // Noncompliant FP
+        var sb = new StringBuilder(); // Compliant
         var ret = prefix + sb;
+    }
+
+    public void Concat_MultipleIdentifiers_InAssignment()
+    {
+        var a1 = "a1 ";
+        var a2 = "a2 ";
+        var a3 = "a3 ";
+        var sb = new StringBuilder(); // Compliant
+        var ret = a1 + a2 + sb + a3;
     }
 
     public void Concat_InInvocation(string value)
