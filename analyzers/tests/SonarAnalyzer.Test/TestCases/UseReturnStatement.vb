@@ -160,9 +160,15 @@ Public Class DoesNotApplyOn
 
 End Class
 
-Public Class Repro_9553 ' https://github.com/SonarSource/sonar-dotnet/issues/9553
+' https://sonarsource.atlassian.net/browse/NET-1569
+Public Class Repro_1569
     Public Function TestFunc() As String
-        Return Invoke(AddressOf TestFunc) 'Noncompliant FP
+        Return Invoke(AddressOf TestFunc) ' Compliant
+    End Function
+
+    Public Function AddressOfInAssignment() As String
+        Dim d As Func(Of String) = AddressOf AddressOfInAssignment ' Compliant
+        Return d()
     End Function
 
     Private Function Invoke(func As Func(Of String)) As String
