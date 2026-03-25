@@ -14,45 +14,43 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class BooleanCheckInvertedBase<TBinaryExpression> : SonarDiagnosticAnalyzer where TBinaryExpression : SyntaxNode
 {
-    public abstract class BooleanCheckInvertedBase<TBinaryExpression> : SonarDiagnosticAnalyzer
-        where TBinaryExpression : SyntaxNode
-    {
-        internal const string DiagnosticId = "S1940";
-        protected const string MessageFormat = "Use the opposite operator ('{0}') instead.";
+    internal const string DiagnosticId = "S1940";
+    protected const string MessageFormat = "Use the opposite operator ('{0}') instead.";
 
-        protected abstract bool IsLogicalNot(TBinaryExpression expression, out SyntaxNode logicalNot);
+    protected abstract SyntaxNode LogicalNotNode(TBinaryExpression expression);
 
-        protected abstract string GetSuggestedReplacement(TBinaryExpression expression);
+    protected abstract string SuggestedReplacement(TBinaryExpression expression);
 
-        protected abstract bool IsIgnoredNullableOperation(TBinaryExpression expression, SemanticModel semanticModel);
+    protected abstract bool IsUnsafeInversionOperation(TBinaryExpression expression, SemanticModel model);
 
-        protected Action<SonarSyntaxNodeReportingContext> GetAnalysisAction(DiagnosticDescriptor rule)
+    protected Action<SonarSyntaxNodeReportingContext> AnalysisAction(DiagnosticDescriptor rule) =>
+        c =>
         {
-            return c =>
+            var expression = (TBinaryExpression)c.Node;
+
+            if (IsUserDefinedOperator(expression, c.Model) || IsUnsafeInversionOperation(expression, c.Model))
             {
-                var expression = (TBinaryExpression)c.Node;
+                return;
+            }
 
-                if (IsUserDefinedOperator(expression, c.Model) ||
-                    IsIgnoredNullableOperation(expression, c.Model))
-                {
-                    return;
-                }
+            if (LogicalNotNode(expression) is { } logicalNot)
+            {
+                c.ReportIssue(rule, logicalNot, SuggestedReplacement(expression));
+            }
+        };
 
-                if (IsLogicalNot(expression, out var logicalNot))
-                {
-                    c.ReportIssue(rule, logicalNot, GetSuggestedReplacement(expression));
-                }
-            };
-        }
+    protected static bool IsNullable(SyntaxNode expression, SemanticModel model) =>
+        model.GetSymbolInfo(expression).Symbol.GetSymbolType() is INamedTypeSymbol symbolType
+        && symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
 
-        private static bool IsUserDefinedOperator(TBinaryExpression expression, SemanticModel semanticModel) =>
-            semanticModel.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol enclosingSymbol &&
-            enclosingSymbol?.MethodKind == MethodKind.UserDefinedOperator;
+    protected static bool IsFloatingPoint(SyntaxNode expression, SemanticModel model) =>
+        model.GetTypeInfo(expression).Type.IsAny(KnownType.FloatingPointNumbers);
 
-        protected static bool IsNullable(SyntaxNode expression, SemanticModel semanticModel) =>
-            semanticModel.GetSymbolInfo(expression).Symbol.GetSymbolType() is INamedTypeSymbol symbolType &&
-            symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
-    }
+    private static bool IsUserDefinedOperator(TBinaryExpression expression, SemanticModel model) =>
+        model.GetEnclosingSymbol(expression.SpanStart) is IMethodSymbol enclosingSymbol
+        && enclosingSymbol.MethodKind == MethodKind.UserDefinedOperator;
 }

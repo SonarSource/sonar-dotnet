@@ -14,67 +14,61 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class BooleanCheckInverted : BooleanCheckInvertedBase<BinaryExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class BooleanCheckInverted : BooleanCheckInvertedBase<BinaryExpressionSyntax>
-    {
-        private static readonly ISet<SyntaxKind> ignoredNullableOperators =
-            new HashSet<SyntaxKind>
-            {
-                SyntaxKind.GreaterThanToken,
-                SyntaxKind.GreaterThanEqualsToken,
-                SyntaxKind.LessThanToken,
-                SyntaxKind.LessThanEqualsToken,
-            };
-
-        private static readonly Dictionary<SyntaxKind, string> oppositeTokens =
-            new Dictionary<SyntaxKind, string>
-            {
-                { SyntaxKind.GreaterThanToken, "<=" },
-                { SyntaxKind.GreaterThanEqualsToken, "<" },
-                { SyntaxKind.LessThanToken, ">=" },
-                { SyntaxKind.LessThanEqualsToken, ">" },
-                { SyntaxKind.EqualsEqualsToken, "!=" },
-                { SyntaxKind.ExclamationEqualsToken, "==" },
-            };
-
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-            ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                GetAnalysisAction(rule),
-                SyntaxKind.GreaterThanExpression,
-                SyntaxKind.GreaterThanOrEqualExpression,
-                SyntaxKind.LessThanExpression,
-                SyntaxKind.LessThanOrEqualExpression,
-                SyntaxKind.EqualsExpression,
-                SyntaxKind.NotEqualsExpression);
-
-        protected override bool IsIgnoredNullableOperation(BinaryExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression.OperatorToken.IsAnyKind(ignoredNullableOperators) &&
-            (IsNullable(expression.Left, semanticModel) || IsNullable(expression.Right, semanticModel) ||
-            IsConditionalAccessExpression(expression.Left) || IsConditionalAccessExpression(expression.Right));
-
-        private static bool IsConditionalAccessExpression(ExpressionSyntax expression) =>
-            expression.RemoveParentheses().IsKind(SyntaxKind.ConditionalAccessExpression);
-
-        protected override bool IsLogicalNot(BinaryExpressionSyntax expression, out SyntaxNode logicalNot)
+    private static readonly ISet<SyntaxKind> UnsafeInversionOperators = new HashSet<SyntaxKind>
         {
-            var parenthesizedParent = expression.GetSelfOrTopParenthesizedExpression().Parent;
-            var prefixUnaryExpression = parenthesizedParent as PrefixUnaryExpressionSyntax;
+            SyntaxKind.GreaterThanToken,
+            SyntaxKind.GreaterThanEqualsToken,
+            SyntaxKind.LessThanToken,
+            SyntaxKind.LessThanEqualsToken,
+        };
 
-            logicalNot = prefixUnaryExpression;
+    private static readonly Dictionary<SyntaxKind, string> OppositeTokens = new()
+        {
+            { SyntaxKind.GreaterThanToken, "<=" },
+            { SyntaxKind.GreaterThanEqualsToken, "<" },
+            { SyntaxKind.LessThanToken, ">=" },
+            { SyntaxKind.LessThanEqualsToken, ">" },
+            { SyntaxKind.EqualsEqualsToken, "!=" },
+            { SyntaxKind.ExclamationEqualsToken, "==" },
+        };
 
-            return prefixUnaryExpression != null
-                && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
-        }
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        protected override string GetSuggestedReplacement(BinaryExpressionSyntax expression) =>
-            oppositeTokens[expression.OperatorToken.Kind()];
-    }
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            AnalysisAction(Rule),
+            SyntaxKind.GreaterThanExpression,
+            SyntaxKind.GreaterThanOrEqualExpression,
+            SyntaxKind.LessThanExpression,
+            SyntaxKind.LessThanOrEqualExpression,
+            SyntaxKind.EqualsExpression,
+            SyntaxKind.NotEqualsExpression);
+
+    protected override bool IsUnsafeInversionOperation(BinaryExpressionSyntax expression, SemanticModel model) =>
+        expression.OperatorToken.IsAnyKind(UnsafeInversionOperators)
+        && (IsNullable(expression.Left, model)
+            || IsNullable(expression.Right, model)
+            || IsConditionalAccessExpression(expression.Left)
+            || IsConditionalAccessExpression(expression.Right)
+            || IsFloatingPoint(expression.Left, model)
+            || IsFloatingPoint(expression.Right, model));
+
+    protected override SyntaxNode LogicalNotNode(BinaryExpressionSyntax expression) =>
+        expression.GetSelfOrTopParenthesizedExpression().Parent is PrefixUnaryExpressionSyntax prefixUnaryExpression
+        && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken)
+            ? prefixUnaryExpression
+            : null;
+
+    protected override string SuggestedReplacement(BinaryExpressionSyntax expression) =>
+        OppositeTokens[expression.OperatorToken.Kind()];
+
+    private static bool IsConditionalAccessExpression(ExpressionSyntax expression) =>
+        expression.RemoveParentheses().IsKind(SyntaxKind.ConditionalAccessExpression);
 }

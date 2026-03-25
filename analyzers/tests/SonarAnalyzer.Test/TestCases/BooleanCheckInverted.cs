@@ -47,6 +47,19 @@ namespace Tests.Diagnostics
             b = !(a != 5); // Noncompliant
         }
 
+        public void TestNaN(double d, float f)
+        {
+            bool b = !(d < 5);   // Compliant
+            b = !(d <= 5);       // Compliant
+            b = !(d > 5);        // Compliant
+            b = !(d >= 5);       // Compliant
+            b = !(d == 5);       // Noncompliant
+            b = !(d != 5);       // Noncompliant
+
+            b = !(f < 5);        // Compliant
+            b = !(f == 5);       // Noncompliant
+        }
+
         public static void SomeFunc(bool x) { }
 
         public static bool operator ==     (BooleanCheckInverted a, BooleanCheckInverted b)

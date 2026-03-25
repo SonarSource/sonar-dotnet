@@ -41,6 +41,18 @@ Namespace Tests.Diagnostics
             b = Not (a <> 5) 'Noncompliant
         End Sub
 
+        Public Sub TestNaN(d As Double, f As Single)
+            Dim b As Boolean = Not (d < 5) 'Compliant
+            b = Not (d <= 5) 'Compliant
+            b = Not (d > 5) 'Compliant
+            b = Not (d >= 5) 'Compliant
+            b = Not (d = 5) 'Noncompliant
+            b = Not (d <> 5) 'Noncompliant
+
+            b = Not (f < 5) 'Compliant
+            b = Not (f = 5) 'Noncompliant
+        End Sub
+
         Public Shared Sub SomeFunc(ByVal x As Boolean)
         End Sub
 
