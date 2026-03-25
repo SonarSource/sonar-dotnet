@@ -74,7 +74,8 @@ public sealed class IndentRawString : IndentBase
         {
             return current.Parent;
         }
-        else if (current is not ArgumentSyntax and not ExpressionElementSyntax and not LiteralExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine())
+        else if (current is not ArgumentSyntax and not ExpressionElementSyntax and not LiteralExpressionSyntax and not InterpolatedStringExpressionSyntax
+            && current.GetFirstToken().IsFirstTokenOnLine())
         {
             return current;
         }

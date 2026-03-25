@@ -63,6 +63,16 @@ public class Sample
         Good
         """;
 
+    public string ArrowInterpolatedNoncompliant(string value) =>
+    $"""
+    Too close {value}
+    """;                // Noncompliant
+
+    public string ArrowInterpolatedCompliant(string value) =>
+        $"""
+        Good interpolated {value}
+        """;
+
     public object ArrowInInvocationArgument() =>
         Invocation("""
             Good
