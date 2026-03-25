@@ -73,18 +73,17 @@ public class DisablingRequestValidationTest
     [DataRow(@"TestCases\WebConfig\DisablingRequestValidation\EdgeValues", "3.9", "5.6")]
     public void DisablingRequestValidation_CS_WebConfig_SubFolders(string rootDirectory, params string[] subFolders)
     {
-        var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation();
         var newCulture = (CultureInfo)Thread.CurrentThread.CurrentCulture.Clone();
         // decimal.TryParse() from the implementation might not recognize "1.2" under different culture
         newCulture.NumberFormat.NumberDecimalSeparator = ",";
         using var scope = new CurrentCultureScope(newCulture);
+        42.42.ToString().Should().Be("42,42");
         var rootFile = Path.Combine(rootDirectory, WebConfig);
         var filesToAnalyze = new List<string> { rootFile };
         foreach (var subFolder in subFolders)
         {
             filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
         }
-        var analyzer = new CS.DisablingRequestValidation(AnalyzerConfiguration.AlwaysEnabled);
         filesToAnalyze.Add(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray()));
         CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
             .AddSnippet("// Nothing to see here")
