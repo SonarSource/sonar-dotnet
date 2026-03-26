@@ -8301,7 +8301,7 @@ public static class RuleTypeMappingCS
         // ["S8378"],
         // ["S8379"],
         ["S8380"] = "CODE_SMELL",
-        // ["S8381"],
+        ["S8381"] = "CODE_SMELL",
         // ["S8382"],
         // ["S8383"],
         // ["S8384"],

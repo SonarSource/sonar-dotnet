@@ -17,10 +17,10 @@
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class ReturnTypeNamedPartialShouldBeEscaped : SonarDiagnosticAnalyzer
+public sealed class EscapeLambdaParameterTypeNamedScoped : SonarDiagnosticAnalyzer
 {
-    private const string DiagnosticId = "S8380";
-    private const string MessageFormat = "Return types named 'partial' should be escaped with '@'";
+    private const string DiagnosticId = "S8381";
+    private const string MessageFormat = "'scoped' should be escaped when used as a type name in lambda parameters";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -33,23 +33,27 @@ public sealed class ReturnTypeNamedPartialShouldBeEscaped : SonarDiagnosticAnaly
                 {
                     compilationStart.RegisterNodeAction(c =>
                         {
-                            if (!IsGenericMethod(c.Node)
-                                && c.Node.TypeSyntax() is { } returnType
-                                && (returnType.Kind() == SyntaxKindEx.RefType ? ((RefTypeSyntaxWrapper)returnType).Type : returnType) is { } unWrapped
-                                && unWrapped is NameSyntax { Arity: 0 } name
-                                && name.GetIdentifier() is { Text: "partial" } identifier)
+                            foreach (var parameter in ((ParenthesizedLambdaExpressionSyntax)c.Node).ParameterList.Parameters)
                             {
-                                c.ReportIssue(Rule, identifier);
+                                CheckParameter(c, parameter);
                             }
                         },
-                        SyntaxKind.MethodDeclaration,
-                        SyntaxKind.DelegateDeclaration,
-                        SyntaxKindEx.LocalFunctionStatement);
+                        SyntaxKind.ParenthesizedLambdaExpression);
                 }
             });
 
-    private static bool IsGenericMethod(SyntaxNode node) =>
-        node is MethodDeclarationSyntax { Arity: > 0 }
-        || node is DelegateDeclarationSyntax { Arity: > 0 }
-        || (node.IsKind(SyntaxKindEx.LocalFunctionStatement) && (LocalFunctionStatementSyntaxWrapper)node is { TypeParameterList.Parameters.Count: > 0 });
+    private static void CheckParameter(SonarSyntaxNodeReportingContext c, ParameterSyntax parameter)
+    {
+        if (parameter.Type?.Unwrap() is SimpleNameSyntax { Identifier: { } id } && IsScopedToken(id))
+        {
+            c.ReportIssue(Rule, id);
+        }
+        else if (parameter.Type is null && IsScopedToken(parameter.Identifier))
+        {
+            c.ReportIssue(Rule, parameter.Identifier);
+        }
+    }
+
+    private static bool IsScopedToken(SyntaxToken token) =>
+        token.ValueText == "scoped" && !token.Text.StartsWith("@", StringComparison.Ordinal);
 }

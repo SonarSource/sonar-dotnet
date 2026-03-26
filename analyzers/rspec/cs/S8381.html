@@ -1,0 +1,44 @@
+<p>This is an issue when using a type named <code>scoped</code> in lambda parameter lists in C# 14 or later, where the compiler treats both the
+modifier and type name as modifiers, causing compilation errors.</p>
+<h2>Why is this an issue?</h2>
+<p>In C# 14, the language introduced the ability to write lambdas with parameter modifiers without specifying parameter types. As part of this
+enhancement, a breaking change was implemented where <code>scoped</code> is always treated as a modifier in lambda parameter lists.</p>
+<p>When you have a type named <code>scoped</code> and try to use it with the <code>scoped</code> modifier in a lambda parameter, the compiler
+interprets both tokens as modifiers rather than recognizing one as a type name. This creates a syntax error because the compiler expects a type name
+after the modifier.</p>
+<p>This breaking change affects existing code that was valid in earlier C# versions, particularly when upgrading projects to C# 14. The issue is
+specific to lambda expressions and doesn’t affect other contexts where the <code>scoped</code> type name might be used.</p>
+<h3>What is the potential impact?</h3>
+<p>This issue prevents code compilation when upgrading to C# 14. Projects that previously compiled successfully will fail to build, blocking
+development and deployment processes until the code is updated.</p>
+<h2>How to fix it</h2>
+<p>Rename the type, or escape the type name <code>scoped</code> with the <code>@</code> prefix to distinguish it from the <code>scoped</code>
+modifier. This tells the compiler to treat it as an identifier rather than a keyword.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var lambda = (scoped scoped parameter) =&gt; { /* ... */ }; // Noncompliant
+
+ref struct scoped { }
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var lambda = (scoped @scoped parameter) =&gt; { /* ... */ };
+
+ref struct scoped { }
+</pre>
+<pre data-diff-id="1" data-diff-type="compliant">
+var lambda = (scoped ScopedItem parameter) =&gt; { /* ... */ };
+
+ref struct ScopedItem { }
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Breaking changes in Roslyn after .NET 9.0.100 through .NET 10.0.100 - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010">Official Microsoft
+  documentation detailing the breaking change where 'scoped' is always treated as a modifier in lambda parameter lists</a></li>
+  <li>C# Keywords - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/">Documentation about C# keywords and how to
+  use the @ prefix to escape them as identifiers</a></li>
+</ul>
+

@@ -1,0 +1,25 @@
+{
+  "title": "Identifiers should not conflict with the C# 14 \"scoped\" contextual keyword",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "csharp14",
+    "breaking-change",
+    "lambda"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8381",
+  "sqKey": "S8381",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "BLOCKER"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}
