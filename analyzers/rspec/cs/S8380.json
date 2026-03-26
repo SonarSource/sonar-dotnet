@@ -1,5 +1,5 @@
 {
-  "title": "Identifiers should not conflict with the C# 14 \"partial\" contextual keyword",
+  "title": "Return types named \"partial\" should be escaped with \"@\"",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -10,14 +10,14 @@
     "breaking-change",
     "csharp14"
   ],
-  "defaultSeverity": "Blocker",
+  "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-8380",
   "sqKey": "S8380",
-  "scope": "Main",
+  "scope": "All",
   "quickfix": "unknown",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "BLOCKER"
+      "MAINTAINABILITY": "HIGH"
     },
     "attribute": "CONVENTIONAL"
   }

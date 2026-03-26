@@ -1,50 +1,71 @@
-<p>This is an issue when using 'extension' as an identifier (class name, method name, variable name, etc.) in C# 14 or later without the '@' escape
-prefix.</p>
+<p>Identifiers named <code>extension</code> should be renamed or use the <code>@</code> escape prefix to avoid breaking changes in C# 14 or later.</p>
 <h2>Why is this an issue?</h2>
-<p>Starting with C# 14, 'extension' becomes a contextual keyword used for extension containers. When the compiler encounters 'extension' in certain
-contexts, it tries to parse it as this new language feature rather than as a regular identifier.</p>
-<p>This change can cause compilation errors in existing code that uses 'extension' as an identifier. For example, a class named 'extension' will be
-interpreted as an extension container declaration, leading to parsing failures.</p>
-<p>The '@' prefix tells the compiler to treat the word as a regular identifier rather than a keyword, resolving the ambiguity and allowing the code to
-compile correctly.</p>
+<p>Starting with C# 14, <code>extension</code> <a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010#extension-treated-as-a-contextual-keyword">is
+a contextual keyword</a> for declaring extension members and extension containers. This change can cause compilation errors in existing code that uses
+the word <code>extension</code> as an identifier. For example, a class named 'extension' will be interpreted as an extension container declaration,
+leading to parsing failures.</p>
+<p>This rule flags any unescaped <code>extension</code> identifiers used in the following cases:</p>
+<ul>
+  <li>Type declaration names</li>
+  <li>Type parameter names</li>
+  <li>Constructor names</li>
+  <li>Using alias names</li>
+  <li>Return types, property types, and field types (including arrays and pointers)</li>
+</ul>
+<p>Note that method names, parameter names, and local variable names are not affected by this breaking change. For example, <code>void extension() {
+}</code> remains valid in C# 14.</p>
 <h3>What is the potential impact?</h3>
-<p>Code that previously compiled successfully will fail to compile with C# 14 or later. This can break builds and prevent applications from being
-updated to newer language versions.</p>
+<p>Code that currently compiles will fail to compile when the project is upgraded to C# 14.</p>
 <h2>How to fix it</h2>
-<p>Change the identifier name, or add the '@' prefix before 'extension' when using it as a class name, constructor name, or method name.</p>
+<p>Rename the identifier, or add the <code>@</code> prefix to it.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-class extension
+class extension { }
+class MyClass
 {
-    extension(object o) { } // Noncompliant
-    extension M() { } // Noncompliant
+    extension field;
+    extension Property { get; }
 }
 </pre>
 <h4>Compliant solution</h4>
+<p>Escape the identifier with the <code>@</code> verbatim prefix:</p>
 <pre data-diff-id="1" data-diff-type="compliant">
-class @extension
+class @extension { }
+class MyClass
 {
-    @extension(object o) { }
-    @extension M() { }
+    @extension field;
+    @extension Property { get; }
 }
 </pre>
-<p>or</p>
-<pre data-diff-id="1" data-diff-type="compliant">
-class MyExtension
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+class extension { }
+class MyClass
 {
-    MyExtension(object o) { }
-    MyExtension M() { }
+    extension ReturnType() { return default; }
+}
+</pre>
+<h4>Compliant solution</h4>
+<p>Rename the identifier:</p>
+<pre data-diff-id="2" data-diff-type="compliant">
+class MyExtension { }
+class MyClass
+{
+    MyExtension ReturnType() { return default; }
 }
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li>C# Breaking Changes in .NET 10 - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010">Official Microsoft
-  documentation about breaking changes in C# 14, including the 'extension' contextual keyword</a></li>
-  <li>C# Identifiers - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#643-identifiers">C# language
-  specification section on identifiers and the '@' escape mechanism</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010#extension-treated-as-a-contextual-keyword"><code>extension</code> treated as a contextual keyword</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/extension">Extension member
+  declarations</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/tutorials/extension-members">Explore extension members in
+  C# 14</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/verbatim">Verbatim identifiers
+  (<code>@</code> prefix)</a></li>
 </ul>
 

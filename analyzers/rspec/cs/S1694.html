@@ -42,9 +42,9 @@ public abstract class Lamp // Compliant: Glow is abstract, but FlipSwitch is not
 }
 </pre>
 <p>Notice that, since C# 8.0, you can also define <a
-href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/default-interface-methods">default implementations for
-interface methods</a>, which is yet another reason to prefer interfaces over abstract classes when you don’t need to provide any inheritable
-behavior.</p>
+href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interface-implementation/default-interface-methods-versions">default
+implementations for interface methods</a>, which is yet another reason to prefer interfaces over abstract classes when you don’t need to provide any
+inheritable behavior.</p>
 <p>However, interfaces cannot have fields (such as <code>switchLamp</code> in the example above), and that remains true even in C# 8.0 and upwards.
 This can be a valid reason to still prefer an abstract class over an interface.</p>
 <h2>How to fix it</h2>
@@ -74,9 +74,8 @@ public interface Animal
   and Sealed Classes and Class Members (C# Programming Guide)</a></li>
   <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/">Interfaces - define behavior for
   multiple types</a></li>
-  <li>Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/default-interface-methods">Default Interface
-  Methods</a></li>
+  <li>C# Language Design - <a href="https://github.com/dotnet/csharplang/blob/main/proposals/csharp-8.0/default-interface-methods.md">Default
+  Interface Methods</a></li>
   <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/csharp/advanced-topics/interface-implementation/default-interface-methods-versions">Tutorial: Update
   interfaces with default interface methods</a></li>

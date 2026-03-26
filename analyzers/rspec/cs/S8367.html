@@ -1,82 +1,95 @@
 <p>This rule raises an issue when code uses 'field' as an identifier in contexts where it conflicts with the new <code>field</code> contextual keyword
 introduced in C# 14.</p>
 <h2>Why is this an issue?</h2>
-<p>C# 14 introduces the <code>field</code> contextual keyword for field-backed properties. This keyword allows you to access synthesized backing
+<p>C# 14 introduces the <code>field</code> contextual keyword for field-backed properties. This keyword allows access to the synthesized backing
 fields directly within property accessors, simplifying property implementations that need custom logic.</p>
-<p>When your code uses 'field' as an identifier, several problems can occur:</p>
+<p>By using 'field' as an identifier, several problems can occur:</p>
 <ul>
-  <li><strong>Compilation errors</strong>: Local variables or parameters named 'field' within property accessors will cause compiler error CS9272,
-  preventing your code from compiling.</li>
-  <li><strong>Semantic confusion</strong>: Existing class members named 'field' may be overshadowed by the synthesized backing field when referenced
-  within property accessors, leading to unexpected behavior.</li>
-  <li><strong>Upgrade barriers</strong>: Code that compiles in earlier C# versions may break when upgrading to C# 14.</li>
+  <li><strong>Compilation errors</strong>: Local variable declarations or parameters named <code>field</code> within property accessors cause compiler
+  error CS9273. References to existing members named <code>field</code> within property accessors cause compiler error CS9258. See <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/property-declaration-errors">Compiler errors on property
+  declarations</a>.</li>
+  <li><strong>Semantic confusion</strong>: Existing class members named <code>field</code> may be unexpectedly overshadowed by the synthesized backing
+  field when referenced within property accessors, leading to logic errors and unexpected runtime behavior.</li>
+  <li><strong>Upgrade barriers</strong>: Code that compiles successfully in C# 13 and earlier may fail to compile or change behavior when upgrading to
+  C# 14.</li>
 </ul>
-<p>The <code>field</code> keyword specifically refers to compiler-synthesized backing fields for properties. When the compiler encounters 'field'
-within a property accessor, it treats it as this special keyword rather than a regular identifier, which can cause conflicts with your existing
-code.</p>
 <h3>What is the potential impact?</h3>
-<p>Using 'field' as an identifier can prevent successful compilation when upgrading to C# 14. In property accessors, local variables named 'field'
-will cause compilation errors, while class members named 'field' may be unexpectedly overshadowed by synthesized backing fields, leading to logic
-errors and unexpected runtime behavior.</p>
+<p>Using 'field' as an identifier can prevent successful compilation when upgrading to C# 14. In property accessors, local variables or parameters
+named 'field' will cause compilation errors, while class members named 'field' may be unexpectedly overshadowed by synthesized backing fields, leading
+to logic errors and unexpected runtime behavior.</p>
 <h2>How to fix it</h2>
-<p>Rename class members that use 'field' as an identifier to avoid conflicts with the contextual keyword, or escape the field identifier with "@".</p>
+<p>Rename the identifier, escape it by prefixing with <code>@</code>, or qualify member access with <code>this.</code> or <code>base.</code> to avoid
+conflicts with the contextual keyword. This rule applies only inside property <code>get</code>, <code>set</code>, and <code>init</code> accessors;
+indexer and event accessors are not affected.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-public class MyClass
-{
-    private string field; // Noncompliant
-
-    public string Message
-    {
-        get =&gt; field;
-        set =&gt; field = value;
-    }
-}
-
-public class MyClass2
-{
-    private string field; // Noncompliant
-
-    public string Message
-    {
-        get =&gt; field;
-        set =&gt; field = value;
-    }
-}
-</pre>
-<h4>Compliant solution</h4>
-<pre data-diff-id="1" data-diff-type="compliant">
-public class MyClass
-{
-    private string _field;
-
-    public string Message
-    {
-        get =&gt; _field;
-        set =&gt; _field = value;
-    }
-}
-
-public class MyClass2
+public class ClassFieldExample
 {
     private string field;
 
     public string Message
     {
-        get =&gt; @field;
-        set =&gt; @field = value;
+        get =&gt; field; // Noncompliant
+        set =&gt; field = value; // Noncompliant
+    }
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+public class LocalFunctionExample
+{
+    public int Value
+    {
+        get
+        {
+            return LocalFunction(42);
+
+            int LocalFunction(int field) // Noncompliant
+                =&gt; field;
+        }
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class ClassFieldExample
+{
+    private string field;
+
+    public string Message
+    {
+        get =&gt; this.field;          // or @field
+        set =&gt; this.field = value;  // or @field = value;
+    }
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+public class LocalFunctionExample
+{
+    public int Value
+    {
+        get
+        {
+            return LocalFunction(42);
+
+            int LocalFunction(int value) // Compliant - renamed
+                =&gt; value;
+        }
     }
 }
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
-  <li>What’s new in C# 14 - The field keyword - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14#the-field-keyword">Official Microsoft documentation explaining the field
-  keyword feature in C# 14</a></li>
-  <li>Breaking changes in Roslyn - field keyword conflicts - <a
-  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010">Documentation of
-  breaking changes related to the field keyword in C# 14</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/field">The <code>field</code>
+  keyword</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/property-declaration-errors">Compiler errors on property
+  declarations</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010#expression-field-in-a-property-accessor-refers-to-synthesized-backing-field">C# compiler breaking changes since C# 13 - Expression <code>field</code> in a property accessor refers to synthesized backing field</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/breaking-changes/compiler%20breaking%20changes%20-%20dotnet%2010#variable-named-field-disallowed-in-a-property-accessor">C# compiler breaking changes since C# 13 - Variable named <code>field</code> disallowed in a property accessor</a> (documentation incorrectly references CS9272; the actual error code is CS9273)</li>
 </ul>
 

@@ -1,5 +1,5 @@
 {
-  "title": "Identifiers should not conflict with the C# 14 \"scoped\" contextual keyword",
+  "title": "\"scoped\" should be escaped when used as an identifier or type name in parenthesized lambda parameter lists",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
@@ -11,14 +11,14 @@
     "breaking-change",
     "lambda"
   ],
-  "defaultSeverity": "Blocker",
+  "defaultSeverity": "Critical",
   "ruleSpecification": "RSPEC-8381",
   "sqKey": "S8381",
   "scope": "Main",
   "quickfix": "unknown",
   "code": {
     "impacts": {
-      "MAINTAINABILITY": "BLOCKER"
+      "MAINTAINABILITY": "HIGH"
     },
     "attribute": "CONVENTIONAL"
   }

@@ -1,5 +1,5 @@
 {
-  "title": "Setting loose POSIX file permissions is security-sensitive",
+  "title": "File permissions should not be set to world-accessible values",
   "type": "VULNERABILITY",
   "code": {
     "impacts": {
@@ -43,5 +43,6 @@
     "STIG ASD_V5R3": [
       "V-222430"
     ]
-  }
+  },
+  "quickfix": "unknown"
 }
