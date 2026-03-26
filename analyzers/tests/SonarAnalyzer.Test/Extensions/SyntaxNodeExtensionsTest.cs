@@ -1173,6 +1173,92 @@ End Class";
     }
 
     [TestMethod]
+    [DataRow("""$$Object$$ M() { return null; }""", "Object")]                                        // TypeSyntax itself
+    [DataRow("""$$Object M() { return null; }$$""", "Object")]                                        // MethodDeclarationSyntax
+    [DataRow("""$$void M() { }$$""", "void")]                                                         // MethodDeclarationSyntax — void return type
+    [DataRow("""$$public static Object operator +(Test t) => default;$$""", "Object")]                // OperatorDeclarationSyntax
+    [DataRow("""$$public static implicit operator int(Test t) => 0;$$""", "int")]                     // ConversionOperatorDeclarationSyntax
+    [DataRow("""$$delegate Object D();$$""", "Object")]                                               // DelegateDeclarationSyntax
+    [DataRow("""$$Object P { get; }$$""", "Object")]                                                  // PropertyDeclarationSyntax (BasePropertyDeclarationSyntax)
+    [DataRow("""$$event Action E { add { } remove { } }$$""", "Action")]                              // EventDeclarationSyntax (BasePropertyDeclarationSyntax)
+    [DataRow("""$$int this[int i] { get => 1; set { } }$$""", "int")]                                 // IndexerDeclarationSyntax (BasePropertyDeclarationSyntax)
+    [DataRow("""$$Object field;$$""", "Object")]                                                      // FieldDeclarationSyntax (BaseFieldDeclarationSyntax)
+    [DataRow("""$$event Action E;$$""", "Action")]                                                    // EventFieldDeclarationSyntax (BaseFieldDeclarationSyntax)
+    [DataRow("""void M() { $$Object x = null;$$ }""", "Object")]                                      // LocalDeclarationStatementSyntax
+    [DataRow("""void M() { $$using (IDisposable x = null) { }$$ }""", "IDisposable")]                 // UsingStatementSyntax (with declaration)
+    [DataRow("""void M() { $$using (new System.IO.MemoryStream()) { }$$ }""", null)]                  // UsingStatementSyntax (expression form — no declaration)
+    [DataRow("""void M() { $$for (Object x = null; ; ) { }$$ }""", "Object")]                         // ForStatementSyntax (with declaration)
+    [DataRow("""void M() { int[] arr = new int[1]; $$fixed (int* p = arr) { }$$ }""", "int*")]        // FixedStatementSyntax
+    [DataRow("""void M() { foreach ($$Object x$$ in new Object[0]) { } }""", "Object")]               // ForEachStatementSyntax
+    [DataRow("""void M() { try { } catch ($$Exception e$$) { } }""", "Exception")]                    // CatchDeclarationSyntax
+    [DataRow("""void M() { try { } $$catch (Exception e) { }$$ }""", "Exception")]                    // CatchClauseSyntax (with declaration)
+    [DataRow("""void M() { try { } $$catch { }$$ }""", null)]                                         // CatchClauseSyntax (without declaration)
+    [DataRow("""void M($$Object p$$) { }""", "Object")]                                               // ParameterSyntax
+    [DataRow("""void M() { var _ = $$Object () => default$$; }""", "Object")]                         // ParenthesizedLambdaExpressionSyntax
+    [DataRow("""void M() { Func<Object, Object> _ = $$x => x$$; }""", null)]                          // SimpleLambdaExpressionSyntax — no type annotation
+    [DataRow("""void M() { var q = $$from Object x in new Object[0]$$ select x; }""", "Object")]      // FromClauseSyntax
+    [DataRow("""void M() { var q = from Object x in new Object[0] $$join Object y in new Object[0] on x equals y$$ select x; }""", "Object")]  // JoinClauseSyntax
+    [DataRow("""void M() { _ = $$new Object()$$; }""", "Object")]                                     // ObjectCreationExpressionSyntax
+    [DataRow("""void M(object o) { _ = $$(Object)o$$; }""", "Object")]                                // CastExpressionSyntax
+    [DataRow("""void M() { _ = $$typeof(Object)$$; }""", "Object")]                                   // TypeOfExpressionSyntax
+    [DataRow("""void M() { _ = $$default(Object)$$; }""", "Object")]                                  // DefaultExpressionSyntax
+    [DataRow("""void M() { _ = $$sizeof(int)$$; }""", "int")]                                         // SizeOfExpressionSyntax
+    [DataRow("""void M() { int* _ = $$stackalloc int[1]$$; }""", "int[1]")]                           // StackAllocArrayCreationExpressionSyntax
+    [DataRow("""void M() { Object o = null; TypedReference tr = __makeref(o); _ = $$__refvalue(tr, Object)$$; }""", "Object")]  // RefValueExpressionSyntax
+    [DataRow("""void M(object o) { _ = $$o is Object$$; }""", "Object")]                              // BinaryExpressionSyntax IsExpression — type check
+    [DataRow("""void M(object o) { _ = $$o is 1$$; }""", null)]                                       // BinaryExpressionSyntax IsExpression — constant (not TypeSyntax)
+    [DataRow("""void M(object o) { _ = $$o as Object$$; }""", "Object")]                              // BinaryExpressionSyntax AsExpression
+    [DataRow("""class Inner : $$IDisposable$$ { public void Dispose() { } }""", "IDisposable")]       // BaseTypeSyntax (SimpleBaseTypeSyntax)
+    [DataRow("""void M<T>() where T : $$IComparable$$ { }""", "IComparable")]                         // TypeConstraintSyntax
+    [DataRow("""void M() { $$Object Local() => null;$$ }""", "Object")]                               // LocalFunctionStatementSyntax
+    [DataRow("""void M(object o) { if (o is $$Object x$$) { } }""", "Object")]                        // DeclarationPatternSyntax
+    [DataRow("""void M(object o) { _ = o is $$Object { }$$; }""", "Object")]                          // RecursivePatternSyntax
+    [DataRow("""void M(object o) { _ = o switch { $$int$$ => 1, _ => 0 }; }""", "int")]               // TypePatternSyntax
+    [DataRow("""($$Object x$$, int y) M() => default;""", "Object")]                                  // TupleElement
+    [DataRow("""void M(ref Object p) { $$ref Object$$ x = ref p; }""", "Object")]                     // RefTypeSyntax
+    [DataRow("""void M() { _ = int.TryParse("1", out $$int result$$); }""", "int")]                   // DeclarationExpression
+    [DataRow("""unsafe void M() { delegate*<$$Object$$, void> _ = null; }""", "Object")]              // FunctionPointerParameter
+    [DataRow("""void M(ref Object p) { $$scoped ref Object$$ x = ref p; }""", "ref Object")]          // ScopedType
+    [DataRow("""$$Object$$ field;""", "Object")]                                                      // TypeSyntax itself — identity
+    [DataRow("""$$Test() { }$$""", null)]                                                             // ConstructorDeclarationSyntax — no type
+    [DataRow("""$$~Test() { }$$""", null)]                                                            // DestructorDeclarationSyntax — no type
+    public void TypeSyntax_Members(string member, string expected)
+    {
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
+            using System;
+            using System.Collections.Generic;
+            using System.Linq;
+            unsafe class Test
+            {
+                public Test(int i) { }
+                {{member}}
+            }
+            """).Node;
+        var actual = node.TypeSyntax();
+        if (expected is null)
+        {
+            actual.Should().BeNull();
+        }
+        else
+        {
+            actual.Should().NotBeNull();
+            actual.ToString().Should().Be(expected);
+        }
+    }
+
+    [TestMethod]
+    [DataRow("""$$using System.IO;$$""", "System.IO")]                    // regular namespace import
+    [DataRow("""$$using IO = System.IO;$$""", "System.IO")]               // alias
+    public void TypeSyntax_UsingDirective(string snippet, string expected)
+    {
+        var node = TestCompiler.NodeBetweenMarkersCS($$"""
+            {{snippet}}
+            class Test { }
+            """).Node;
+        node.TypeSyntax().ToString().Should().Be(expected);
+    }
+
+    [TestMethod]
     [DataRow("""$$namespace A.B.C { }$$""", "C")]           // NamespaceDeclarationSyntax
     [DataRow("""$$namespace A.B.C;$$""", "C")]              // FileScopedNamespaceDeclarationSyntax
     [DataRow("""$$using A = System.Collections;$$""", "A")] // UsingDirectiveSyntax

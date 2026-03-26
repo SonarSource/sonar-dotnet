@@ -149,6 +149,66 @@ public static class SyntaxNodeExtensionsCSharp
 #endif
         };
 
+    /// <summary>
+    /// Returns the <see cref="TypeSyntax"/> that <paramref name="node"/> directly owns, or that can be reached
+    /// via a single unambiguous property path (e.g. <c>CatchClauseSyntax → Declaration → Type</c>).
+    /// Does not unwrap nullable, array, pointer, or alias layers.
+    /// Returns <see langword="null"/> if the node has no associated type.
+    /// </summary>
+    public static TypeSyntax TypeSyntax(this SyntaxNode node) =>
+        node switch
+        {
+            // Member declarations and function return types
+            BaseFieldDeclarationSyntax { Declaration: { } x } => x.TypeSyntax(),
+            BasePropertyDeclarationSyntax x => x.Type,
+            ConversionOperatorDeclarationSyntax x => x.Type,
+            DelegateDeclarationSyntax x => x.ReturnType,
+            { RawKind: (int)SyntaxKindEx.LocalFunctionStatement } x => ((LocalFunctionStatementSyntaxWrapper)x).ReturnType,
+            MethodDeclarationSyntax x => x.ReturnType,
+            OperatorDeclarationSyntax x => x.ReturnType,
+            ParenthesizedLambdaExpressionSyntax x => x.ReturnType,
+            SimpleLambdaExpressionSyntax x => x.Parameter.TypeSyntax(),
+            // Named typed slots
+            CatchDeclarationSyntax x => x.Type,
+            ParameterSyntax x => x.Type,
+            VariableDeclarationSyntax x => x.Type,
+            // Statements with a typed declaration
+            CatchClauseSyntax { Declaration: { } x } => x.TypeSyntax(),
+            FixedStatementSyntax { Declaration: { } x } => x.TypeSyntax(),
+            ForEachStatementSyntax x => x.Type,
+            ForStatementSyntax { Declaration: { } x } => x.TypeSyntax(),
+            LocalDeclarationStatementSyntax { Declaration: { } x } => x.TypeSyntax(),
+            UsingStatementSyntax { Declaration: { } x } => x.TypeSyntax(),
+            // Expressions with a type operand
+            BinaryExpressionSyntax { RawKind: (int)SyntaxKind.IsExpression or (int)SyntaxKind.AsExpression, Right: TypeSyntax x } => x,
+            CastExpressionSyntax x => x.Type,
+            DefaultExpressionSyntax x => x.Type,
+            ObjectCreationExpressionSyntax x => x.Type,
+            RefValueExpressionSyntax x => x.Type,
+            SizeOfExpressionSyntax x => x.Type,
+            StackAllocArrayCreationExpressionSyntax x => x.Type,
+            TypeOfExpressionSyntax x => x.Type,
+            // Type-referencing constructs
+            BaseTypeSyntax x => x.Type,
+            TypeConstraintSyntax x => x.Type,
+            UsingDirectiveSyntax x => x.NamespaceOrType,
+            // Query clauses
+            FromClauseSyntax x => x.Type,
+            JoinClauseSyntax x => x.Type,
+            // Wrapper types (shim layer — C# 9+ nodes)
+            { RawKind: (int)SyntaxKindEx.DeclarationExpression } x => ((DeclarationExpressionSyntaxWrapper)x).Type,
+            { RawKind: (int)SyntaxKindEx.DeclarationPattern } x => ((DeclarationPatternSyntaxWrapper)x).Type,
+            { RawKind: (int)SyntaxKindEx.FunctionPointerParameter } x => ((FunctionPointerParameterSyntaxWrapper)x).Type,
+            { RawKind: (int)SyntaxKindEx.RecursivePattern } x => ((RecursivePatternSyntaxWrapper)x).Type,
+            { RawKind: (int)SyntaxKindEx.RefType } x => ((RefTypeSyntaxWrapper)x).Type,
+            { RawKind: (int)SyntaxKindEx.ScopedType } x => ((ScopedTypeSyntaxWrapper)x).Type,
+            { RawKind: (int)SyntaxKindEx.TupleElement } x => ((TupleElementSyntaxWrapper)x).Type,
+            { RawKind: (int)SyntaxKindEx.TypePattern } x => ((TypePatternSyntaxWrapper)x).Type,
+            // Identity / fallback
+            TypeSyntax x => x,
+            _ => null
+        };
+
     // Extracts the expression body from an arrow-bodied syntax node.
     public static ArrowExpressionClauseSyntax ArrowExpressionBody(this SyntaxNode node) =>
         node switch
