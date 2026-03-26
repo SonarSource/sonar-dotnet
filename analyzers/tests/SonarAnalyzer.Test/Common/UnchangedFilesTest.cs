@@ -51,11 +51,11 @@ public class UnchangedFilesTest
     }
 
     [TestMethod]
-    [DataRow(@"Hotspots\LooseFilePermissions.Windows.cs", true)]
+    [DataRow(@"LooseFilePermissions.Windows.cs", true)]
     [DataRow("SomeOtherFile.cs", false)]
     public void UnchangedFiles_CompilationStartBasedRule(string unchangedFileName, bool expectEmptyResults)
     {
-        var builder = new VerifierBuilder().AddAnalyzer(() => new LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled)).AddPaths(@"Hotspots\LooseFilePermissions.Windows.cs");
+        var builder = new VerifierBuilder().AddAnalyzer(() => new LooseFilePermissions()).AddPaths(@"LooseFilePermissions.Windows.cs");
         UnchangedFiles_Verify(builder, unchangedFileName, expectEmptyResults);
     }
 

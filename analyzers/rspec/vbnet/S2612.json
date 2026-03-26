@@ -1,6 +1,6 @@
 {
   "title": "Setting loose POSIX file permissions is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"

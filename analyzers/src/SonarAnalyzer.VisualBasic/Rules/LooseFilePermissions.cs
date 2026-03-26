@@ -17,57 +17,38 @@
 namespace SonarAnalyzer.VisualBasic.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
+public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind, MemberAccessExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-    public LooseFilePermissions() : this(AnalyzerConfiguration.Hotspot) { }
-
-    internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration) { }
-
-    protected override void VisitAssignments(SonarSyntaxNodeReportingContext context)
-    {
-        var node = context.Node;
-        if (IsFileAccessPermissions(node, context.Model) && !node.IsPartOfBinaryNegationOrCondition())
-        {
-            context.ReportIssue(Rule, node);
-        }
-    }
 
     protected override void VisitInvocations(SonarSyntaxNodeReportingContext context)
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
         if ((IsSetAccessRule(invocation, context.Model) || IsAddAccessRule(invocation, context.Model))
-            && (GetObjectCreation(invocation, context.Model) is { } objectCreation))
+            && (ObjectCreation(invocation, context.Model) is { } objectCreation))
         {
             var invocationLocation = invocation.GetLocation();
             var secondaryLocation = objectCreation.GetLocation();
-            context.ReportIssue(Rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary(MessageFormat)]);
+            context.ReportIssue(rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary(MessageFormat)]);
         }
     }
 
-    private static bool IsSetAccessRule(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.IsMemberAccessOnKnownType("SetAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, model);
-
-    private static bool IsAddAccessRule(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.IsMemberAccessOnKnownType("AddAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, model);
-
-    private static ObjectCreationExpressionSyntax GetObjectCreation(InvocationExpressionSyntax invocation, SemanticModel model)
+    private static ObjectCreationExpressionSyntax ObjectCreation(InvocationExpressionSyntax invocation, SemanticModel model)
     {
-        var accessRuleSyntaxNode = GetVulnerableFileSystemAccessRule(invocation.DescendantNodes());
+        var accessRuleSyntaxNode = VulnerableFileSystemAccessRule(invocation.DescendantNodes());
         if (accessRuleSyntaxNode is not null)
         {
             return accessRuleSyntaxNode;
         }
 
         var accessRuleSymbol = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, model).FirstOrDefault();
-        return accessRuleSymbol is null || accessRuleSymbol is IMethodSymbol
+        return accessRuleSymbol is null or IMethodSymbol
             ? null
-            : GetVulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
+            : VulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
 
-        ObjectCreationExpressionSyntax GetVulnerableFileSystemAccessRule(IEnumerable<SyntaxNode> nodes) =>
+        ObjectCreationExpressionSyntax VulnerableFileSystemAccessRule(IEnumerable<SyntaxNode> nodes) =>
             nodes.OfType<ObjectCreationExpressionSyntax>()
-                 .FirstOrDefault(x => IsFileSystemAccessRuleForEveryoneWithAllow(x, model));
+                .FirstOrDefault(x => IsFileSystemAccessRuleForEveryoneWithAllow(x, model));
     }
 
     private static bool IsFileSystemAccessRuleForEveryoneWithAllow(ObjectCreationExpressionSyntax objectCreation, SemanticModel model) =>
@@ -85,10 +66,10 @@ public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
     private static bool IsNTAccountWithEveryone(ObjectCreationExpressionSyntax objectCreation, SemanticModel model) =>
         objectCreation.IsKnownType(KnownType.System_Security_Principal_NTAccount, model)
         && objectCreation.ArgumentList is { } argumentList
-        && model.GetConstantValue(argumentList.Arguments.Last().GetExpression()) is { HasValue: true, Value: Everyone};
+        && model.GetConstantValue(argumentList.Arguments.Last().GetExpression()) is { HasValue: true, Value: Everyone };
 
     private static bool IsSecurityIdentifierWithEveryone(ObjectCreationExpressionSyntax objectCreation, SemanticModel model) =>
         objectCreation.IsKnownType(KnownType.System_Security_Principal_SecurityIdentifier, model)
         && objectCreation.ArgumentList is { } argumentList
-        && model.GetConstantValue(argumentList.Arguments.First().GetExpression()) is { HasValue: true, Value: 1};
+        && model.GetConstantValue(argumentList.Arguments.First().GetExpression()) is { HasValue: true, Value: 1 };
 }

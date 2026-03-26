@@ -79,12 +79,10 @@ public class SecurityHotspotTest
             "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
 #if NETFRAMEWORK
             "ExecutingSqlQueries" => "ExecutingSqlQueries.Net46",
-            "LooseFilePermissions" => "LooseFilePermissions.Windows",
             "UsingCookies" => "UsingCookies_Net46",
 #else
             "DisablingCsrfProtection" => "DisablingCsrfProtection.Latest",
             "ExecutingSqlQueries" => "ExecutingSqlQueries.EntityFrameworkCoreLatest",
-            "LooseFilePermissions" => "LooseFilePermissions.Unix",
             "PermissiveCors" => "PermissiveCors.Latest",
             "UsingCookies" => "UsingCookies_NetCore",
 #endif
@@ -110,7 +108,6 @@ public class SecurityHotspotTest
 #if NET
             nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
             nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesEntityFrameworkNetCore("7.0.14"),
-            nameof(LooseFilePermissions) => NuGetMetadataReference.MonoPosixNetStandard(),
             nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else
             nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesNet46(TestConstants.NuGetLatestVersion),

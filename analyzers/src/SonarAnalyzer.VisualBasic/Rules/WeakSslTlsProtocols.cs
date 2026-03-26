@@ -14,14 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
-{
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+namespace SonarAnalyzer.VisualBasic.Rules;
 
-        protected override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node) =>
-            node.IsPartOfBinaryNegationOrCondition();
-    }
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }

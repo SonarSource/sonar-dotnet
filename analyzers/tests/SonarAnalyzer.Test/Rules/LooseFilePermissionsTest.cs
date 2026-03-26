@@ -17,13 +17,13 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules.Hotspots;
+namespace SonarAnalyzer.Test.Rules;
 
 [TestClass]
 public class LooseFilePermissionsTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
-    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.LooseFilePermissions(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.LooseFilePermissions());
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.LooseFilePermissions());
 
     [TestMethod]
     public void LooseFilePermissions_Windows_CS() =>

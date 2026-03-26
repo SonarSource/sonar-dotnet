@@ -46,6 +46,7 @@ public abstract class SyntaxFacade<TSyntaxKind> where TSyntaxKind : struct
     public abstract bool IsKnownAttributeType(SemanticModel model, SyntaxNode attribute, KnownType knownType);
     public abstract bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel model);
     public abstract bool IsNullLiteral(SyntaxNode node);
+    public abstract bool IsPartOfBinaryNegationOrCondition(SyntaxNode node);
     public abstract bool IsStatic(SyntaxNode node);
     public abstract bool IsWrittenTo(SyntaxNode expression, SemanticModel model, CancellationToken cancel);
     public abstract TSyntaxKind Kind(SyntaxNode node);

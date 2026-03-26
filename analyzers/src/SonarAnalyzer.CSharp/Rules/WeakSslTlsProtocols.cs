@@ -14,14 +14,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
-{
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+namespace SonarAnalyzer.CSharp.Rules;
 
-        protected override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node) =>
-            node.IsPartOfBinaryNegationOrCondition();
-    }
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class WeakSslTlsProtocols : WeakSslTlsProtocolsBase<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 }

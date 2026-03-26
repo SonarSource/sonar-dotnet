@@ -95,7 +95,11 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
     public override bool IsMemberAccessOnKnownType(SyntaxNode memberAccess, string name, KnownType knownType, SemanticModel model) =>
         Cast<MemberAccessExpressionSyntax>(memberAccess).IsMemberAccessOnKnownType(name, knownType, model);
 
-    public override bool IsNullLiteral(SyntaxNode node) => node.IsNullLiteral();
+    public override bool IsNullLiteral(SyntaxNode node) =>
+        node.IsNullLiteral();
+
+    public override bool IsPartOfBinaryNegationOrCondition(SyntaxNode node) =>
+        node.IsPartOfBinaryNegationOrCondition();
 
     public override bool IsStatic(SyntaxNode node) =>
         Cast<BaseMethodDeclarationSyntax>(node).IsStatic();

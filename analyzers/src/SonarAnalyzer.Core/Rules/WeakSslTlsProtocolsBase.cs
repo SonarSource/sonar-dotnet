@@ -14,43 +14,40 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class WeakSslTlsProtocolsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class WeakSslTlsProtocolsBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
-    {
-        private const string DiagnosticId = "S4423";
+    private const string DiagnosticId = "S4423";
 
-        private readonly HashSet<string> weakProtocols = new()
-        {
-            "Ssl2",
-            "Ssl3",
-            "Tls",
-            "Tls11",
-            "Default",
-        };
+    private readonly HashSet<string> weakProtocols =
+    [
+        "Ssl2",
+        "Ssl3",
+        "Tls",
+        "Tls11",
+        "Default",
+    ];
 
-        protected abstract bool IsPartOfBinaryNegationOrCondition(SyntaxNode node);
+    protected override string MessageFormat => "Change this code to use a stronger protocol.";
 
-        protected override string MessageFormat => "Change this code to use a stronger protocol.";
+    protected WeakSslTlsProtocolsBase() : base(DiagnosticId) { }
 
-        protected WeakSslTlsProtocolsBase() : base(DiagnosticId) { }
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                Language.GeneratedCodeRecognizer,
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var node = c.Node;
+                if (!Language.Syntax.IsPartOfBinaryNegationOrCondition(node) && IsWeakProtocol(node, c.Model))
                 {
-                    var node = c.Node;
-                    if (!IsPartOfBinaryNegationOrCondition(node) && IsWeakProtocol(node, c.Model))
-                    {
-                        c.ReportIssue(Rule, node);
-                    }
-                },
-                Language.SyntaxKind.IdentifierName);
+                    c.ReportIssue(Rule, node);
+                }
+            },
+            Language.SyntaxKind.IdentifierName);
 
-        private bool IsWeakProtocol(SyntaxNode identifierName, SemanticModel semanticModel) =>
-            weakProtocols.Contains(Language.Syntax.NodeIdentifier(identifierName).Value.ValueText)
-            && semanticModel.GetTypeInfo(identifierName).Type.IsAny(KnownType.System_Net_SecurityProtocolType, KnownType.System_Security_Authentication_SslProtocols);
-    }
+    private bool IsWeakProtocol(SyntaxNode identifierName, SemanticModel model) =>
+        weakProtocols.Contains(Language.Syntax.NodeIdentifier(identifierName).Value.ValueText)
+        && model.GetTypeInfo(identifierName).Type.IsAny(KnownType.System_Net_SecurityProtocolType, KnownType.System_Security_Authentication_SslProtocols);
 }

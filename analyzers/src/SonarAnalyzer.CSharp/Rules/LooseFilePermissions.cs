@@ -17,58 +17,39 @@
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
+public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind, MemberAccessExpressionSyntax>
 {
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-    public LooseFilePermissions() : this(AnalyzerConfiguration.Hotspot) { }
-
-    internal LooseFilePermissions(IAnalyzerConfiguration configuration) : base(configuration) { }
-
-    protected override void VisitAssignments(SonarSyntaxNodeReportingContext context)
-    {
-        var node = context.Node;
-        if (IsFileAccessPermissions(node, context.Model) && !node.IsPartOfBinaryNegationOrCondition())
-        {
-            context.ReportIssue(Rule, node);
-        }
-    }
 
     protected override void VisitInvocations(SonarSyntaxNodeReportingContext context)
     {
         var invocation = (InvocationExpressionSyntax)context.Node;
         if ((IsSetAccessRule(invocation, context.Model) || IsAddAccessRule(invocation, context.Model))
-            && (GetObjectCreation(invocation, context.Model) is { } objectCreation))
+            && (ObjectCreation(invocation, context.Model) is { } objectCreation))
         {
             var invocationLocation = invocation.GetLocation();
             var secondaryLocation = objectCreation.Expression.GetLocation();
-            context.ReportIssue(Rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary(MessageFormat)]);
+            context.ReportIssue(rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary(MessageFormat)]);
         }
     }
 
-    private static bool IsSetAccessRule(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.IsMemberAccessOnKnownType("SetAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, model);
-
-    private static bool IsAddAccessRule(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.IsMemberAccessOnKnownType("AddAccessRule", KnownType.System_Security_AccessControl_FileSystemSecurity, model);
-
-    private static IObjectCreation GetObjectCreation(InvocationExpressionSyntax invocation, SemanticModel model)
+    private static IObjectCreation ObjectCreation(InvocationExpressionSyntax invocation, SemanticModel model)
     {
-        if (GetVulnerableFileSystemAccessRule(invocation.DescendantNodes()) is { } accessRuleSyntaxNode)
+        if (VulnerableFileSystemAccessRule(invocation.DescendantNodes()) is { } accessRuleSyntaxNode)
         {
             return accessRuleSyntaxNode;
         }
         else if (invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, model).FirstOrDefault() is { } accessRuleSymbol
             && accessRuleSymbol is not IMethodSymbol)
         {
-            return GetVulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
+            return VulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
         }
         else
         {
             return null;
         }
 
-        IObjectCreation GetVulnerableFileSystemAccessRule(IEnumerable<SyntaxNode> nodes) =>
+        IObjectCreation VulnerableFileSystemAccessRule(IEnumerable<SyntaxNode> nodes) =>
             FilterObjectCreations(nodes).FirstOrDefault(x => IsFileSystemAccessRuleForEveryoneWithAllow(x, model));
     }
 
@@ -93,6 +74,5 @@ public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind>
         && model.GetConstantValue(argumentList.Arguments.First().Expression) is { HasValue: true, Value: 1 };
 
     private static IEnumerable<IObjectCreation> FilterObjectCreations(IEnumerable<SyntaxNode> nodes) =>
-        nodes.Where(x => x.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression)
-             .Select(ObjectCreationFactory.Create);
+        nodes.Where(x => x.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression).Select(ObjectCreationFactory.Create);
 }
