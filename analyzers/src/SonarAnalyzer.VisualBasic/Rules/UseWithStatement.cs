@@ -84,7 +84,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
             }
 
             // check previous statement if it contains
-            var prevStatement = executableStatement.GetPrecedingStatement() as ExecutableStatementSyntax;
+            var prevStatement = executableStatement.PrecedingStatement as ExecutableStatementSyntax;
             if (IsCandidateStatement(prevStatement, expression))
             {
                 return false;
@@ -93,11 +93,11 @@ namespace SonarAnalyzer.VisualBasic.Rules
             var matchCount = 1;
 
             // check following statements
-            var nextStatement = executableStatement.GetSucceedingStatement() as ExecutableStatementSyntax;
+            var nextStatement = executableStatement.SucceedingStatement as ExecutableStatementSyntax;
             while (IsCandidateStatement(nextStatement, expression))
             {
                 matchCount++;
-                nextStatement = nextStatement.GetSucceedingStatement() as ExecutableStatementSyntax;
+                nextStatement = nextStatement.SucceedingStatement as ExecutableStatementSyntax;
             }
 
             if (matchCount >= MinimumSeriesLength)

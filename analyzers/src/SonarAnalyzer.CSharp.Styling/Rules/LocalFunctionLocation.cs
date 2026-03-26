@@ -41,5 +41,5 @@ public class LocalFunctionLocation : StylingAnalyzer
         };
 
     private static bool IsLastStatement(LocalFunctionStatementSyntax function) =>
-        function.FollowingStatement() is null or LocalFunctionStatementSyntax;
+        function is { FollowingStatement: null or LocalFunctionStatementSyntax };
 }

@@ -18,44 +18,47 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class StatementSyntaxExtensions
 {
-    /// <summary>
-    /// Returns the statement before the statement given as input.
-    /// </summary>
-    public static StatementSyntax PrecedingStatement(this StatementSyntax statement) =>
-        statement.SiblingStatements()
-            .OfType<StatementSyntax>()
-            .TakeWhile(x => x != statement)
-            .LastOrDefault();
-
-    /// <summary>
-    /// Returns the statement after the statement given as input.
-    /// </summary>
-    public static StatementSyntax FollowingStatement(this StatementSyntax statement) =>
-        statement.SiblingStatements()
-            .OfType<StatementSyntax>()
-            .SkipWhile(x => x != statement)
-            .Skip(1)
-            .FirstOrDefault();
-
-    public static StatementSyntax FirstNonBlockStatement(this StatementSyntax statement)
+    extension(StatementSyntax statement)
     {
-        while (statement is not null)
-        {
-            if (statement is not BlockSyntax { Statements: var blockStatements })
-            {
-                return statement;
-            }
-            statement = blockStatements.FirstOrDefault();
-        }
-        return null;
-    }
+        /// <summary>
+        /// Returns the statement before the statement given as input.
+        /// </summary>
+        public StatementSyntax PrecedingStatement =>
+            statement.SiblingStatements()
+                .OfType<StatementSyntax>()
+                .TakeWhile(x => x != statement)
+                .LastOrDefault();
 
-    private static IEnumerable<SyntaxNode> SiblingStatements(this StatementSyntax statement) =>
-        statement.Parent is GlobalStatementSyntax
-            ? statement.SyntaxTree
-                .GetCompilationUnitRoot()
-                .ChildNodes()
-                .OfType<GlobalStatementSyntax>()
-                .Select(x => x.Statement)
-            : statement.Parent.ChildNodes();
+        /// <summary>
+        /// Returns the statement after the statement given as input.
+        /// </summary>
+        public StatementSyntax FollowingStatement =>
+            statement.SiblingStatements()
+                .OfType<StatementSyntax>()
+                .SkipWhile(x => x != statement)
+                .Skip(1)
+                .FirstOrDefault();
+
+        public StatementSyntax FirstNonBlockStatement
+        {
+            get
+            {
+                var current = statement;
+                while (current is BlockSyntax { } block)
+                {
+                    current = block.Statements.FirstOrDefault();
+                }
+                return current;
+            }
+        }
+
+        private IEnumerable<SyntaxNode> SiblingStatements() =>
+            statement.Parent is GlobalStatementSyntax
+                ? statement.SyntaxTree
+                    .GetCompilationUnitRoot()
+                    .ChildNodes()
+                    .OfType<GlobalStatementSyntax>()
+                    .Select(x => x.Statement)
+                : statement.Parent.ChildNodes();
+    }
 }

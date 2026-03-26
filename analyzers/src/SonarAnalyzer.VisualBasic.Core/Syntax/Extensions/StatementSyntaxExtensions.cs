@@ -18,17 +18,17 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class StatementSyntaxExtensions
 {
-    public static StatementSyntax GetPrecedingStatement(this StatementSyntax currentStatement)
+    extension(StatementSyntax currentStatement)
     {
-        var children = currentStatement.Parent.ChildNodes().ToList();
-        var index = children.IndexOf(currentStatement);
-        return index == 0 ? null : children[index - 1] as StatementSyntax;
-    }
+        public StatementSyntax PrecedingStatement =>
+            currentStatement.Parent.ChildNodes()
+                .TakeWhile(x => x != currentStatement)
+                .LastOrDefault() as StatementSyntax;
 
-    public static StatementSyntax GetSucceedingStatement(this StatementSyntax currentStatement)
-    {
-        var children = currentStatement.Parent.ChildNodes().ToList();
-        var index = children.IndexOf(currentStatement);
-        return index == children.Count - 1 ? null : children[index + 1] as StatementSyntax;
+        public StatementSyntax SucceedingStatement =>
+            currentStatement.Parent.ChildNodes()
+                .SkipWhile(x => x != currentStatement)
+                .Skip(1)
+                .FirstOrDefault() as StatementSyntax;
     }
 }

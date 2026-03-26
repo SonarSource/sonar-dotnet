@@ -90,7 +90,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
     private static SyntaxNode SingleReturnOrBreakingAssignment(IfStatementSyntax ifStatementSyntax)
     {
         // Check if the first statement of the block is a return
-        if (ifStatementSyntax.Statement.FirstNonBlockStatement() is ReturnStatementSyntax returnStatement)
+        if (ifStatementSyntax.Statement is { FirstNonBlockStatement: ReturnStatementSyntax returnStatement })
         {
             return returnStatement;
         }
