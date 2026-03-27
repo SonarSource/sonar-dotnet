@@ -89,7 +89,9 @@ namespace Tests.Diagnostics
             { }
             if (!b) // Fixed
             { }
-            if (c is true) // Compliant
+            if (c is true)  // Compliant
+            { }
+            if (c is false) // Compliant
             { }
 
             var d = true ? c : false;
@@ -257,7 +259,13 @@ namespace Tests.Diagnostics
         }
         public void NullableBool(bool? flag)
         {
-            if (flag == true) // Compliant
+            if (flag == true)  // Compliant
+            { }
+            if (flag == false) // Compliant: bool? == false is not equivalent to !flag (null case differs)
+            { }
+            if (flag != true)  // Compliant: bool? != true is not equivalent to !flag (null case differs)
+            { }
+            if (flag != false) // Compliant: bool? != false is not equivalent to (bool)flag (null case differs)
             { }
         }
 

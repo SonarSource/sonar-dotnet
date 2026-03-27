@@ -81,8 +81,11 @@ namespace Tests.Diagnostics
             if (a is not false) // Noncompliant
             //    ^^^^^^^^^^^^
             { }
-            if (b is not true) // Compliant
+            if (b is not true)  // Compliant
             { }
+            if (b is not false) // Compliant
+            { }
+            bool? ternary = b == false ? true : null; // Compliant: bool? == false in ternary condition is not equivalent to !b (null case differs)
             if (a is { } myVar) // Compliant
             { }
 
