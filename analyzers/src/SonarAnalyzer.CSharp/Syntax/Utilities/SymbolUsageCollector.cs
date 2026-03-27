@@ -53,7 +53,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     public SymbolUsageCollector(Compilation compilation, IEnumerable<ISymbol> knownSymbols)
     {
         this.compilation = compilation;
-        knownSymbolNames = knownSymbols.Select(GetName).ToHashSet();
+        knownSymbolNames = knownSymbols.Select(Name).ToHashSet();
     }
 
     public override void Visit(SyntaxNode node)
@@ -64,17 +64,17 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             if (node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression)
                 && knownSymbolNames.Contains(ObjectCreationFactory.Create(node).TypeAsString(model)))
             {
-                UsedSymbols.UnionWith(GetSymbols(node));
+                UsedSymbols.UnionWith(Symbols(node));
             }
             else if (node.IsKind(SyntaxKindEx.LocalFunctionStatement)
-                     && (LocalFunctionStatementSyntaxWrapper)node is { AttributeLists.Count: > 0 }
-                     && model.GetDeclaredSymbol(node) is IMethodSymbol localFunctionSymbol)
+                && (LocalFunctionStatementSyntaxWrapper)node is { AttributeLists.Count: > 0 }
+                && model.GetDeclaredSymbol(node) is IMethodSymbol localFunctionSymbol)
             {
                 UsedSymbols.UnionWith(localFunctionSymbol.GetAttributes().Where(x => knownSymbolNames.Contains(x.AttributeClass.Name)).Select(x => x.AttributeClass));
             }
             else if (node.IsKind(SyntaxKindEx.PrimaryConstructorBaseType) && knownSymbolNames.Contains(((PrimaryConstructorBaseTypeSyntaxWrapper)node).Type.GetName()))
             {
-                UsedSymbols.UnionWith(GetSymbols(node));
+                UsedSymbols.UnionWith(Symbols(node));
             }
             base.Visit(node);
         }
@@ -112,8 +112,8 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
                 result = ((TupleExpressionSyntaxWrapper)assignmentLeft).Arguments.Count;
             }
             else if (DeclarationExpressionSyntaxWrapper.IsInstance(assignmentLeft)
-                     && (DeclarationExpressionSyntaxWrapper)assignmentLeft is { } leftDeclaration
-                     && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDeclaration.Designation))
+                && (DeclarationExpressionSyntaxWrapper)assignmentLeft is { } leftDeclaration
+                && ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(leftDeclaration.Designation))
             {
                 result = ((ParenthesizedVariableDesignationSyntaxWrapper)leftDeclaration.Designation).Variables.Count;
             }
@@ -141,7 +141,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         else if (model.GetSymbolInfo(node).Symbol is IMethodSymbol { MethodKind: MethodKind.Constructor, ContainingType: ITypeSymbol attribute })
         {
             if (attribute.Is(KnownType.System_Diagnostics_DebuggerDisplayAttribute)
-            && node.ArgumentList is not null)
+                && node.ArgumentList is not null)
             {
                 var arguments = node.ArgumentList.Arguments
                     .Where(IsValueNameOrType)
@@ -171,7 +171,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         if (IsKnownIdentifier(node.Identifier))
         {
-            var symbols = GetSymbols(node);
+            var symbols = Symbols(node);
             TryStoreFieldAccess(node, symbols);
             UsedSymbols.UnionWith(symbols);
             TryStorePropertyAccess(node, symbols);
@@ -183,7 +183,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         if (knownSymbolNames.Contains(node.Type.GetName()))
         {
-            UsedSymbols.UnionWith(GetSymbols(node));
+            UsedSymbols.UnionWith(Symbols(node));
         }
         base.VisitObjectCreationExpression(node);
     }
@@ -192,7 +192,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         if (IsKnownIdentifier(node.Identifier))
         {
-            UsedSymbols.UnionWith(GetSymbols(node));
+            UsedSymbols.UnionWith(Symbols(node));
         }
         base.VisitGenericName(node);
     }
@@ -203,7 +203,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             || knownSymbolNames.Contains(node.Expression.GetIdentifier()?.ValueText)
             || knownSymbolNames.Contains(model.GetTypeInfo(node.Expression).Type?.Name))
         {
-            var symbols = GetSymbols(node);
+            var symbols = Symbols(node);
             UsedSymbols.UnionWith(symbols);
             TryStorePropertyAccess(node, symbols);
         }
@@ -214,8 +214,18 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         // In this case (":base()") we cannot check at the syntax level if the constructor name is in the list
         // of known names so we have to check for symbols.
-        UsedSymbols.UnionWith(GetSymbols(node));
+        UsedSymbols.UnionWith(Symbols(node));
         base.VisitConstructorInitializer(node);
+    }
+
+    public override void VisitInitializerExpression(InitializerExpressionSyntax node)
+    {
+        // Collection initializers implicitly call Add() methods that don't appear in the syntax tree.
+        if (node.IsKind(SyntaxKind.CollectionInitializerExpression) && knownSymbolNames.Contains("Add"))
+        {
+            UsedSymbols.UnionWith(node.Expressions.SelectMany(x => ResolveSymbols(model.GetCollectionInitializerSymbolInfo(x))));
+        }
+        base.VisitInitializerExpression(node);
     }
 
     public override void VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
@@ -226,7 +236,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         if (node.Initializer is null && IsKnownIdentifier(node.Identifier))
         {
             var constructor = model.GetDeclaredSymbol(node);
-            var implicitlyCalledConstructor = GetImplicitlyCalledConstructor(constructor);
+            var implicitlyCalledConstructor = ImplicitlyCalledConstructor(constructor);
             if (implicitlyCalledConstructor is not null)
             {
                 UsedSymbols.Add(implicitlyCalledConstructor);
@@ -239,7 +249,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     {
         if (IsKnownIdentifier(node.Identifier))
         {
-            var usage = GetFieldSymbolUsage(model.GetDeclaredSymbol(node));
+            var usage = FieldSymbolUsage(model.GetDeclaredSymbol(node));
             usage.Declaration = node;
             if (node.Initializer is not null)
             {
@@ -266,7 +276,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             // (node)
             ParenthesizedExpressionSyntax parenthesizedExpression => ParentAccessType(parenthesizedExpression),
             // node;
-            ExpressionStatementSyntax _ => SymbolAccess.None,
+            ExpressionStatementSyntax => SymbolAccess.None,
             // node(_) : <unexpected>
             InvocationExpressionSyntax invocation => node == invocation.Expression ? SymbolAccess.Read : SymbolAccess.None,
             // _.node : node._
@@ -307,22 +317,19 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     /// .e.g when the code cannot compile).
     /// </summary>
     /// <returns>List of symbols.</returns>
-    private ImmutableArray<ISymbol> GetSymbols<TSyntaxNode>(TSyntaxNode node)
-        where TSyntaxNode : SyntaxNode
-    {
-        var symbolInfo = model.GetSymbolInfo(node);
+    private ImmutableArray<ISymbol> Symbols<TSyntaxNode>(TSyntaxNode node) where TSyntaxNode : SyntaxNode =>
+        ResolveSymbols(model.GetSymbolInfo(node)).ToImmutableArray();
 
-        return new[] { symbolInfo.Symbol }
+    private static IEnumerable<ISymbol> ResolveSymbols(SymbolInfo symbolInfo) =>
+        new[] { symbolInfo.Symbol }
             .Concat(symbolInfo.CandidateSymbols)
-            .Select(GetOriginalDefinition)
-            .WhereNotNull()
-            .ToImmutableArray();
+            .Select(OriginalDefinition)
+            .WhereNotNull();
 
-        static ISymbol GetOriginalDefinition(ISymbol candidateSymbol) =>
-            candidateSymbol is IMethodSymbol methodSymbol && methodSymbol.MethodKind == MethodKind.ReducedExtension
-                ? methodSymbol.ReducedFrom?.OriginalDefinition
-                : candidateSymbol?.OriginalDefinition;
-    }
+    private static ISymbol OriginalDefinition(ISymbol candidateSymbol) =>
+        candidateSymbol is IMethodSymbol methodSymbol && methodSymbol.MethodKind == MethodKind.ReducedExtension
+            ? methodSymbol.ReducedFrom?.OriginalDefinition
+            : candidateSymbol?.OriginalDefinition;
 
     private void TryStorePropertyAccess(ExpressionSyntax node, IEnumerable<ISymbol> identifierSymbols)
     {
@@ -351,7 +358,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
 
     private AccessorAccess EvaluatePropertyAccesses(ExpressionSyntax node)
     {
-        var topmostSyntax = GetTopmostSyntaxWithTheSameSymbol(node);
+        var topmostSyntax = TopmostSyntaxWithTheSameSymbol(node);
         if (topmostSyntax.Parent is AssignmentExpressionSyntax assignmentExpression)
         {
             if (assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression))
@@ -388,7 +395,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     private void TryStoreFieldAccess(IdentifierNameSyntax node, IEnumerable<ISymbol> symbols)
     {
         var access = ParentAccessType(node);
-        var fieldSymbolUsagesList = GetFieldSymbolUsagesList(symbols);
+        var fieldSymbolUsagesList = FieldSymbolUsagesList(symbols);
         if (HasFlag(access, SymbolAccess.Read))
         {
             foreach (var symbolUsage in fieldSymbolUsagesList)
@@ -408,13 +415,13 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         static bool HasFlag(SymbolAccess symbolAccess, SymbolAccess flag) => (symbolAccess & flag) != 0;
     }
 
-    private List<SymbolUsage> GetFieldSymbolUsagesList(IEnumerable<ISymbol> symbols) =>
-        symbols.Select(GetFieldSymbolUsage).ToList();
+    private List<SymbolUsage> FieldSymbolUsagesList(IEnumerable<ISymbol> symbols) =>
+        symbols.Select(FieldSymbolUsage).ToList();
 
-    private SymbolUsage GetFieldSymbolUsage(ISymbol symbol) =>
+    private SymbolUsage FieldSymbolUsage(ISymbol symbol) =>
         FieldSymbolUsages.GetOrAdd(symbol, x => new SymbolUsage(x));
 
-    private static SyntaxNode GetTopmostSyntaxWithTheSameSymbol(SyntaxNode identifier) =>
+    private static SyntaxNode TopmostSyntaxWithTheSameSymbol(SyntaxNode identifier) =>
         // All of the cases below could be parts of invocation or other expressions
         identifier.Parent switch
         {
@@ -426,22 +433,22 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             _ => identifier.GetSelfOrTopParenthesizedExpression()
         };
 
-    private static IMethodSymbol GetImplicitlyCalledConstructor(IMethodSymbol constructor) =>
+    private static IMethodSymbol ImplicitlyCalledConstructor(IMethodSymbol constructor) =>
         // In case there is no other explicitly called constructor in a constructor declaration
         // the compiler will automatically put a call to the current class' default constructor,
         // or if the declaration is the default constructor or there is no default constructor,
         // the compiler will put a call the base class' default constructor.
         IsDefaultConstructor(constructor)
-            ? GetDefaultConstructor(constructor.ContainingType.BaseType)
-            : GetDefaultConstructor(constructor.ContainingType) ?? GetDefaultConstructor(constructor.ContainingType.BaseType);
+            ? DefaultConstructor(constructor.ContainingType.BaseType)
+            : DefaultConstructor(constructor.ContainingType) ?? DefaultConstructor(constructor.ContainingType.BaseType);
 
-    private static IMethodSymbol GetDefaultConstructor(INamedTypeSymbol namedType) =>
+    private static IMethodSymbol DefaultConstructor(INamedTypeSymbol namedType) =>
         // See https://github.com/SonarSource/sonar-dotnet/issues/3155
         namedType?.InstanceConstructors.FirstOrDefault(IsDefaultConstructor);
 
     private static bool IsDefaultConstructor(IMethodSymbol constructor) =>
         constructor.Parameters.Length == 0;
 
-    private static string GetName(ISymbol symbol) =>
+    private static string Name(ISymbol symbol) =>
         symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
 }

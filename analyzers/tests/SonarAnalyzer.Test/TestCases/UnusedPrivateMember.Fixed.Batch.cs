@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
@@ -462,6 +463,53 @@ namespace Repro_6990
         static void Comsumer_WithChildEvent(object sender, ChildEventArgs e) // Compliant
         {
             // Logic
+        }
+    }
+
+    public class CollectionInitializerUsage
+    {
+        private Compliant items = new Compliant { 1, 2, 3 };
+        private AlsoCompliant also => new AlsoCompliant { 1, 2, 3 };
+        private NonCompliant others = new NonCompliant();
+        private CompliantDictionary dict = new CompliantDictionary { { 1, 1 }, { 2, 2 } };
+        private NonCompliantDictionary otherDict = new NonCompliantDictionary() // This initializer uses the indexer setter and not the Add method.
+        {
+            [1] = 1,
+            [2] = 2
+        };
+
+        private class Compliant : IEnumerable
+        {
+            internal void Add(int item) { } // Compliant, called by collection initializer above
+            public IEnumerator GetEnumerator() => null;
+        }
+
+        private class AlsoCompliant : Compliant
+        {
+            internal void Add(int item) { } // Compliant, called by collection initializer above
+        }
+
+        private class NonCompliant : IEnumerable
+        {
+            public IEnumerator GetEnumerator() => null;
+        }
+
+        private class CompliantDictionary : Dictionary<int, int>
+        {
+            internal void Add(int key, int value) { } // Compliant, called by collection initializer above
+        }
+
+        private class NonCompliantDictionary : Dictionary<int, int>
+        {
+        }
+
+        public void UseFields()
+        {
+            var x = items;
+            var y = also;
+            var z = others;
+            var q = dict;
+            var w = otherDict;
         }
     }
 }
