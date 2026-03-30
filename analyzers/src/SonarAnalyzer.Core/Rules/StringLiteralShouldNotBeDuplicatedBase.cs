@@ -48,7 +48,11 @@ namespace SonarAnalyzer.Core.Rules
             // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
             // locations. The problem is that this scenario is not yet supported on SonarQube side.
             // Hence the decision to do like other languages, at class-level
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, ReportOnViolation, SyntaxKinds);
+            context.RegisterCompilationStartAction(c =>
+                {
+                    var usingDapper = c.Compilation.GetTypeByMetadataName(KnownType.Dapper_DynamicParameters) is not null;
+                    c.RegisterNodeAction(Language.GeneratedCodeRecognizer, nodeContext => ReportOnViolation(nodeContext, usingDapper), SyntaxKinds);
+                });
 
         protected virtual bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeReportingContext context) =>
             IsNamedType(context);
@@ -56,7 +60,7 @@ namespace SonarAnalyzer.Core.Rules
         protected static bool IsNamedType(SonarSyntaxNodeReportingContext context) =>
             context.ContainingSymbol.Kind == SymbolKind.NamedType;
 
-        private void ReportOnViolation(SonarSyntaxNodeReportingContext context)
+        private void ReportOnViolation(SonarSyntaxNodeReportingContext context, bool usingDapper)
         {
             if (!IsNamedTypeOrTopLevelMain(context) || IsInnerInstance(context))
             {
@@ -66,7 +70,9 @@ namespace SonarAnalyzer.Core.Rules
 
             var stringLiterals = FindLiteralExpressions(context.Node);
             var duplicateValuesAndPositions = stringLiterals.Select(x => new { literal = x, literalToken = LiteralToken(x) })
-                .Where(x => x.literalToken.ValueText is { Length: >= MinimumStringLength } && !IsMatchingMethodParameterName(x.literal))
+                .Where(x => x.literalToken.ValueText is { Length: >= MinimumStringLength }
+                            && !IsMatchingMethodParameterName(x.literal)
+                            && !(usingDapper && x.literalToken.ValueText.StartsWith("@")))
                 .GroupBy(x => x.literalToken.ValueText, x => x.literalToken)
                 .Where(x => x.Count() > Threshold);
 

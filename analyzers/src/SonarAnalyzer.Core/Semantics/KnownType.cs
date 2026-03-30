@@ -34,8 +34,9 @@ public sealed partial class KnownType
     public static readonly KnownType Azure_ResourceManager_ArmClient = new("Azure.ResourceManager.ArmClient");
     public static readonly KnownType Castle_Core_Logging_ILogger = new("Castle.Core.Logging.ILogger");
     public static readonly KnownType Common_Logging_ILog = new("Common.Logging.ILog");
-    public static readonly KnownType Dapper_SqlMapper = new("Dapper.SqlMapper");
     public static readonly KnownType Dapper_CommandDefinition = new("Dapper.CommandDefinition");
+    public static readonly KnownType Dapper_DynamicParameters = new("Dapper.DynamicParameters");
+    public static readonly KnownType Dapper_SqlMapper = new("Dapper.SqlMapper");
     public static readonly KnownType FluentAssertions_AssertionExtensions = new("FluentAssertions.AssertionExtensions");
     public static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
     public static readonly KnownType FluentAssertions_Primitives_ReferenceTypeAssertions = new("FluentAssertions.Primitives.ReferenceTypeAssertions", "TSubject", "TAssertions");

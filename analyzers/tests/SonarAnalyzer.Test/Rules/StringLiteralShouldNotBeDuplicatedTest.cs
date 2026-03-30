@@ -50,14 +50,14 @@ public class StringLiteralShouldNotBeDuplicatedTest
     public void StringLiteralShouldNotBeDuplicated_CS_Dapper() =>
         builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.Dapper.cs")
             .AddReferences(DapperReferences)
-            .Verify();
+            .VerifyNoIssues();
 
     [TestMethod]
     public void StringLiteralShouldNotBeDuplicated_VB_Dapper() =>
         new VerifierBuilder<VB.StringLiteralShouldNotBeDuplicated>()
             .AddPaths("StringLiteralShouldNotBeDuplicated.Dapper.vb")
             .AddReferences(DapperReferences)
-            .Verify();
+            .VerifyNoIssues();
 
 #endif
 
