@@ -55,6 +55,10 @@ public class TestMethodShouldContainAssertionTest
         WithTestReferences(NuGetMetadataReference.NUnit(testFwkVersion), fluentVersion, nSubstituteVersion).AddPaths("TestMethodShouldContainAssertion.NUnit.cs").Verify();
 
     [TestMethod]
+    public void TestMethodShouldContainAssertion_NUnit4() =>
+        WithTestReferences(NuGetMetadataReference.NUnit(NUnit.Ver4)).AddPaths("TestMethodShouldContainAssertion.NUnit4.cs").Verify();
+
+    [TestMethod]
     [DataRow(NUnit.Ver25)]
     [DataRow(NUnit.Ver27)]
     public void TestMethodShouldContainAssertion_NUnit_V2Specific(string testFwkVersion) =>
@@ -213,6 +217,31 @@ public class TestMethodShouldContainAssertionTest
             .AddReferences(NuGetMetadataReference.NUnit(Latest))
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
+
+    [TestMethod]
+    public void TestMethodShouldContainAssertion_NUnit4_AliasedNamespace() =>
+        WithTestReferences(NuGetMetadataReference.NUnit(NUnit.Ver4)).AddSnippet("""
+            using NUnit.Framework;
+            namespace Aliased
+            {
+                using Assert = NUnit.Framework.Legacy.ClassicAssert;
+                [TestFixture]
+                class TestAliased
+                {
+                    [Test]
+                    public void Test1() // Noncompliant
+                    {
+                        var x = 42;
+                    }
+                    [Test]
+                    public void Test2()
+                    {
+                        var x = 42;
+                        Assert.AreEqual(x, 42);
+                    }
+                }
+            }
+            """).Verify();
 
     internal static VerifierBuilder WithTestReferences(IEnumerable<MetadataReference> testFrameworkReference,
                                                        string fluentVersion = FluentAssertionsVersions.Ver7,

@@ -37,9 +37,10 @@ public static class NugetPackageVersions
 
     public static class NUnit
     {
-        public const string Ver3 = "3.11.0";
-        public const string Ver3Latest = "3.14.0";
         public const string Ver25 = "2.5.7.10213";
         public const string Ver27 = "2.7.0";
+        public const string Ver3 = "3.11.0";
+        public const string Ver3Latest = "3.14.0";
+        public const string Ver4 = "4.3.2";
     }
 }

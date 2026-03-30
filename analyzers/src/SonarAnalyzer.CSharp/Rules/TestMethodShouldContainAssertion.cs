@@ -40,6 +40,7 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert,
         KnownType.NFluent_Check,
         KnownType.NUnit_Framework_Assert,
+        KnownType.NUnit_Framework_Legacy_ClassicAssert,
         KnownType.Xunit_Assert);
 
     private static readonly ImmutableArray<KnownType> KnownAssertionExceptionTypes = ImmutableArray.Create(

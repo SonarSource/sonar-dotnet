@@ -42,6 +42,12 @@ namespace SonarAnalyzer.CSharp.Rules
                     "IsFalse", "IsTrue", "That", "True"
                 ],
 
+                [KnownType.NUnit_Framework_Legacy_ClassicAssert] =
+                [
+                    "AreEqual", "AreNotEqual", "AreNotSame", "AreSame", "False",
+                    "IsFalse", "IsTrue", "True"
+                ],
+
                 [KnownType.System_Diagnostics_Debug] =
                 [
                     "Assert"

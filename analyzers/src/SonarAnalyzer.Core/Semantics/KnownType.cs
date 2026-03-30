@@ -222,6 +222,7 @@ public sealed partial class KnownType
     public static readonly KnownType Newtonsoft_Json_JsonIgnoreAttribute = new("Newtonsoft.Json.JsonIgnoreAttribute");
     public static readonly KnownType NUnit_Framework_Assert = new("NUnit.Framework.Assert");
     public static readonly KnownType NUnit_Framework_AssertionException = new("NUnit.Framework.AssertionException");
+    public static readonly KnownType NUnit_Framework_Legacy_ClassicAssert = new("NUnit.Framework.Legacy.ClassicAssert");
     public static readonly KnownType NUnit_Framework_ExpectedExceptionAttribute = new("NUnit.Framework.ExpectedExceptionAttribute");
     public static readonly KnownType NUnit_Framework_IgnoreAttribute = new("NUnit.Framework.IgnoreAttribute");
     public static readonly KnownType NUnit_Framework_ITestBuilderInterface = new("NUnit.Framework.Interfaces.ITestBuilder");

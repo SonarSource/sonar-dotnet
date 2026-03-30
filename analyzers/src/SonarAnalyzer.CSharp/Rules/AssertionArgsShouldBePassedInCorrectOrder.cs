@@ -22,7 +22,21 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
     internal const string DiagnosticId = "S3415";
     private const string MessageFormat = "Make sure these 2 arguments are in the correct order: expected value, actual value.";
 
+    private const string Expected = "expected";
+    private const string Actual = "actual";
+    private const string NotExpected = "notExpected";
+    private const string ExpectedSubstring = "expectedSubstring";
+    private const string ActualString = "actualString";
+    private const string ExpectedEndString = "expectedEndString";
+    private const string ExpectedStartString = "expectedStartString";
+
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly KnownAssertParameters[] NUnitParameters =
+    [
+        new(KnownType.NUnit_Framework_Assert, Expected, Actual),
+        new(KnownType.NUnit_Framework_Legacy_ClassicAssert, Expected, Actual)
+    ];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -36,7 +50,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
                             symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
                                 ? knownAssertParameters.Select(knownParameters => FindWrongArguments(c.Model, container, methodSymbol, invocation, knownParameters))
                                 : [])
-                        .FirstOrDefault(x => x is not null) is { Expected: { } wrongExpected, Actual: { } wrongActual })
+                        .FirstOrDefault(x => x is not null) is { ExpectedArgs: { } wrongExpected, ActualArgs: { } wrongActual })
                 {
                     c.ReportIssue(Rule, CreateLocation(wrongExpected, wrongActual));
                 }
@@ -48,39 +62,39 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
         {
             "AreEqual" =>
             [
-                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
-                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, Expected, Actual),
+                ..NUnitParameters
             ],
             "AreNotEqual" =>
             [
-                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
-                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, NotExpected, Actual),
+                ..NUnitParameters
             ],
             "AreSame" =>
             [
-                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "expected", "actual"),
-                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, Expected, Actual),
+                ..NUnitParameters
             ],
             "AreNotSame" =>
             [
-                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, "notExpected", "actual"),
-                new(KnownType.NUnit_Framework_Assert, "expected", "actual")
+                new(KnownType.Microsoft_VisualStudio_TestTools_UnitTesting_Assert, NotExpected, Actual),
+                ..NUnitParameters
             ],
             "Equal" or "NotEqual" or "Same" or "NotSame" or "Equivalent" or "EquivalentWithExclusions" or "StrictEqual" or "NotStrictEqual" =>
             [
-                new(KnownType.Xunit_Assert, "expected", "actual")
+                new(KnownType.Xunit_Assert, Expected, Actual)
             ],
             "Contains" or "DoesNotContain" =>
             [
-                new(KnownType.Xunit_Assert, "expectedSubstring", "actualString"),
+                new(KnownType.Xunit_Assert, ExpectedSubstring, ActualString),
             ],
             "EndsWith" =>
             [
-                new(KnownType.Xunit_Assert, "expectedEndString", "actualString")
+                new(KnownType.Xunit_Assert, ExpectedEndString, ActualString)
             ],
             "StartsWith" =>
             [
-                new(KnownType.Xunit_Assert, "expectedStartString", "actualString")
+                new(KnownType.Xunit_Assert, ExpectedStartString, ActualString)
             ],
             _ => null
         };
@@ -108,5 +122,5 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
 
     private readonly record struct KnownAssertParameters(KnownType AssertClass, string ExpectedParameterName, string ActualParameterName);
 
-    private readonly record struct WrongArguments(SyntaxNode Expected, SyntaxNode Actual);
+    private readonly record struct WrongArguments(SyntaxNode ExpectedArgs, SyntaxNode ActualArgs);
 }

@@ -44,6 +44,12 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
+        public void DoNotUseLiteralBoolInAssertions_NUnit4() =>
+            builder.AddPaths("DoNotUseLiteralBoolInAssertions.NUnit4.cs")
+                .AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4))
+                .Verify();
+
+        [TestMethod]
         [DataRow("2.0.0")]
         [DataRow(XUnitVersions.Ver253)]
         public void DoNotUseLiteralBoolInAssertions_Xunit(string testFwkVersion) =>
@@ -61,5 +67,23 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(MetadataReferenceFacade.NetStandard)
                 .AddReferences(MetadataReferenceFacade.SystemCollections)
                 .Verify();
+
+        [TestMethod]
+        public void DoNotUseLiteralBoolInAssertions_NUnit4_AliasedNamespace() =>
+            builder.AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4)).AddSnippet("""
+                namespace Aliased
+                {
+                    using Assert = NUnit.Framework.Legacy.ClassicAssert;
+                    class Foo
+                    {
+                        public void Test()
+                        {
+                            bool b = true;
+                            Assert.AreEqual(true, b); // Noncompliant
+                            Assert.AreEqual(b, b);    // Compliant
+                        }
+                    }
+                }
+                """).Verify();
     }
 }

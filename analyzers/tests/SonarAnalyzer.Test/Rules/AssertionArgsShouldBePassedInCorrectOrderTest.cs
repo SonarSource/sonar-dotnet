@@ -52,6 +52,12 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
             .Verify();
 
     [TestMethod]
+    public void AssertionArgsShouldBePassedInCorrectOrder_NUnit4() =>
+        builder.AddPaths("AssertionArgsShouldBePassedInCorrectOrder.NUnit4.cs")
+            .AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4))
+            .Verify();
+
+    [TestMethod]
     public void AssertionArgsShouldBePassedInCorrectOrder_NUnit_Static() =>
         // Breaking changes in NUnit 4.0 would fail the test https://github.com/SonarSource/sonar-dotnet/issues/8409
         builder.WithTopLevelStatements().AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver3Latest)).AddSnippet("""
@@ -89,4 +95,24 @@ public class AssertionArgsShouldBePassedInCorrectOrderTest
                            var str = "";
                            Equal(str, ""); // Noncompliant
                            """).Verify();
+
+    [TestMethod]
+    public void AssertionArgsShouldBePassedInCorrectOrder_NUnit4_AliasedNamespace() =>
+        builder.AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver4)).AddSnippet("""
+            using NUnit.Framework;
+            namespace Aliased
+            {
+                using Assert = NUnit.Framework.Legacy.ClassicAssert;
+                [TestFixture]
+                class Program
+                {
+                    [Test]
+                    public void Test(string str)
+                    {
+                        Assert.AreEqual("", str); // Compliant
+                        Assert.AreEqual(str, ""); // Noncompliant
+                    }
+                }
+            }
+            """).Verify();
 }
