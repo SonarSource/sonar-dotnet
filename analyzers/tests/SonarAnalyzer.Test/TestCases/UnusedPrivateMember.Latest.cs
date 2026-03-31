@@ -944,6 +944,9 @@ public static class Extensions // Repro for https://sonarsource.atlassian.net/br
         private string PrivateExtensionAsExtension() => "a";
         private static string PrivateStaticExtensionAsExtension() => "a";
 
+        private string UnusedPrivateMethod() => "a";                      // Compliant FN - https://sonarsource.atlassian.net/browse/NET-3503
+        private static string UnusedPrivateStaticMethod() => "a";         // Compliant FN - https://sonarsource.atlassian.net/browse/NET-3503
+        private string UnusedPrivateProperty => "a";                      // Noncompliant
     }
 }
 
@@ -981,6 +984,17 @@ public partial class PartialEvents
     private void UnusedPrivateMember_MyUsedEvent(object sender, EventArgs e) { }
 }
 
+
+public static class CommunityRepro_ExtensionBlockPublicMembers // Repro for https://community.sonarsource.com/t/180285
+{
+    extension(object instance)
+    {
+        public void PublicMethod() { }                    // Compliant - public extension method, accessible externally
+        public string PublicProperty => "value";          // Compliant - public extension property, accessible externally
+        private void UnusedPrivateMethod() { }            // Compliant FN - private methods in extension blocks are not analyzed (gap)
+        private string UnusedPrivateProperty => "value";  // Noncompliant - private properties in extension blocks are analyzed
+    }
+}
 
 public class NET_2805Repro // https://sonarsource.atlassian.net/browse/NET-2805
 {
