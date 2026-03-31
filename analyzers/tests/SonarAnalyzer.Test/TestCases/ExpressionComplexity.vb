@@ -54,4 +54,45 @@ Namespace NS
         Property IsMale As Boolean
         Property IsFemale As Boolean
     End Class
+
+    ' https://sonarsource.atlassian.net/browse/USER-1097
+    Class VBEqualsTest
+        Property A As String
+        Property B As String
+        Property C As String
+        Property D As String
+
+        Public Overrides Function Equals(obj As Object) As Boolean
+            Dim other = TryCast(obj, VBEqualsTest)
+            Return other IsNot Nothing AndAlso A = other.A AndAlso B = other.B AndAlso C = other.C AndAlso D = other.D ' Compliant
+        End Function
+    End Class
+
+    Class VBEqualsTestTyped
+        Implements System.IEquatable(Of VBEqualsTestTyped)
+
+        Property A As String
+        Property B As String
+        Property C As String
+        Property D As String
+        Property E As String
+
+        Public Function Equals(other As VBEqualsTestTyped) As Boolean Implements System.IEquatable(Of VBEqualsTestTyped).Equals
+            Return other IsNot Nothing AndAlso A = other.A AndAlso B = other.B AndAlso C = other.C AndAlso D = other.D AndAlso E = other.E ' Compliant
+        End Function
+    End Class
+
+    Class VBEqualsTestTypedRenamedMethod
+        Implements System.IEquatable(Of VBEqualsTestTypedRenamedMethod)
+
+        Property A As String
+        Property B As String
+        Property C As String
+        Property D As String
+        Property E As String
+
+        Public Function MyEquals(other As VBEqualsTestTypedRenamedMethod) As Boolean Implements System.IEquatable(Of VBEqualsTestTypedRenamedMethod).Equals
+            Return other IsNot Nothing AndAlso A = other.A AndAlso B = other.B AndAlso C = other.C AndAlso D = other.D AndAlso E = other.E ' Compliant - method name doesn't matter, it still implements IEquatable.Equals
+        End Function
+    End Class
 End Namespace

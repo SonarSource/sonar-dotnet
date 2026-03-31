@@ -14,42 +14,41 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ExpressionComplexity : ExpressionComplexityBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class ExpressionComplexity : ExpressionComplexityBase<SyntaxKind>
-    {
-        protected override ILanguageFacade Language { get; } = VisualBasicFacade.Instance;
+    protected override ILanguageFacade Language { get; } = VisualBasicFacade.Instance;
 
-        protected override HashSet<SyntaxKind> TransparentKinds { get; } =
-            [
-                SyntaxKind.ParenthesizedExpression,
-                SyntaxKind.NotExpression,
-            ];
+    protected override HashSet<SyntaxKind> TransparentKinds { get; } =
+        [
+            SyntaxKind.ParenthesizedExpression,
+            SyntaxKind.NotExpression,
+        ];
 
-        protected override HashSet<SyntaxKind> ComplexityIncreasingKinds { get; } =
-            [
-                SyntaxKind.AndExpression,
-                SyntaxKind.AndAlsoExpression,
-                SyntaxKind.OrExpression,
-                SyntaxKind.OrElseExpression,
-                SyntaxKind.ExclusiveOrExpression
-            ];
+    protected override HashSet<SyntaxKind> ComplexityIncreasingKinds { get; } =
+        [
+            SyntaxKind.AndExpression,
+            SyntaxKind.AndAlsoExpression,
+            SyntaxKind.OrExpression,
+            SyntaxKind.OrElseExpression,
+            SyntaxKind.ExclusiveOrExpression
+        ];
 
-        protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
-            node switch
+    protected override SyntaxNode[] ExpressionChildren(SyntaxNode node) =>
+        node switch
+        {
+            BinaryExpressionSyntax
             {
-                BinaryExpressionSyntax
-                {
-                    RawKind: (int)SyntaxKind.AndExpression
-                    or (int)SyntaxKind.AndAlsoExpression
-                    or (int)SyntaxKind.OrExpression
-                    or (int)SyntaxKind.OrElseExpression
-                    or (int)SyntaxKind.ExclusiveOrExpression
-                } binary => new[] { binary.Left, binary.Right },
-                ParenthesizedExpressionSyntax parenthesized => new[] { parenthesized.Expression },
-                UnaryExpressionSyntax { RawKind: (int)SyntaxKind.NotExpression } unary => new[] { unary.Operand },
-                _ => Array.Empty<SyntaxNode>(),
-            };
-    }
+                RawKind: (int)SyntaxKind.AndExpression
+                or (int)SyntaxKind.AndAlsoExpression
+                or (int)SyntaxKind.OrExpression
+                or (int)SyntaxKind.OrElseExpression
+                or (int)SyntaxKind.ExclusiveOrExpression
+            } binary => new[] { binary.Left, binary.Right },
+            ParenthesizedExpressionSyntax parenthesized => new[] { parenthesized.Expression },
+            UnaryExpressionSyntax { RawKind: (int)SyntaxKind.NotExpression } unary => new[] { unary.Operand },
+            _ => Array.Empty<SyntaxNode>(),
+        };
 }

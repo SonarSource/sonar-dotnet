@@ -14,63 +14,69 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class ExpressionComplexityBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
+    where TSyntaxKind : struct, Enum
 {
-    public abstract class ExpressionComplexityBase<TSyntaxKind> : ParametrizedDiagnosticAnalyzer
-        where TSyntaxKind : struct, Enum
-    {
-        protected const string DiagnosticId = "S1067";
-        private const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
-        private const int DefaultValueMaximum = 3;
+    protected const string DiagnosticId = "S1067";
+    private const string MessageFormat = "Reduce the number of conditional operators ({1}) used in the expression (maximum allowed {0}).";
+    private const int DefaultValueMaximum = 3;
 
-        private readonly DiagnosticDescriptor rule;
+    private readonly DiagnosticDescriptor rule;
 
-        protected abstract ILanguageFacade Language { get; }
-        protected abstract HashSet<TSyntaxKind> ComplexityIncreasingKinds { get; }
-        protected abstract HashSet<TSyntaxKind> TransparentKinds { get; }
-        protected abstract SyntaxNode[] ExpressionChildren(SyntaxNode node);
+    protected abstract ILanguageFacade Language { get; }
+    protected abstract HashSet<TSyntaxKind> ComplexityIncreasingKinds { get; }
+    protected abstract HashSet<TSyntaxKind> TransparentKinds { get; }
+    protected abstract SyntaxNode[] ExpressionChildren(SyntaxNode node);
 
-        [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
-        public int Maximum { get; set; } = DefaultValueMaximum;
+    [RuleParameter("max", PropertyType.Integer, "Maximum number of allowed conditional operators in an expression", DefaultValueMaximum)]
+    public int Maximum { get; set; } = DefaultValueMaximum;
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
-        protected ExpressionComplexityBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
+    protected ExpressionComplexityBase() =>
+        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-        protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-                {
-                    if (IsRoot(c.Node))
-                    {
-                        var complexity = CalculateComplexity(c.Node);
-                        if (complexity > Maximum)
-                        {
-                            c.ReportIssue(rule, c.Node, Maximum.ToString(), complexity.ToString());
-                        }
-                    }
-                }, ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
-
-        private bool IsRoot(SyntaxNode node) =>
-            node?.Parent == null
-            || (node.Parent.Kind<TSyntaxKind>() is var parentKind && !ComplexityIncreasingKinds.Contains(parentKind) && !TransparentKinds.Contains(parentKind));
-
-        private int CalculateComplexity(SyntaxNode node)
-        {
-            var complexity = 0;
-            Stack<SyntaxNode> stack = new();
-
-            stack.Push(node);
-            while (stack.TryPop(out var current))
+    protected sealed override void Initialize(SonarParametrizedAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer, c =>
             {
-                if (ComplexityIncreasingKinds.Contains(current.Kind<TSyntaxKind>()))
+                if (IsRoot(c.Node) && !IsEqualsMethod(c.ContainingSymbol))
                 {
-                    complexity++;
+                    var complexity = CalculateComplexity(c.Node);
+                    if (complexity > Maximum)
+                    {
+                        c.ReportIssue(rule, c.Node, Maximum.ToString(), complexity.ToString());
+                    }
                 }
-                stack.Push(ExpressionChildren(current));
-            }
+            },
+            ComplexityIncreasingKinds.Concat(TransparentKinds).ToArray());
 
-            return complexity;
+    private static bool IsEqualsMethod(ISymbol symbol) =>
+        symbol is IMethodSymbol method
+        && (method.IsObjectEquals()
+            || method.IsImplementingInterfaceMember(KnownType.System_IEquatable_T, nameof(IEquatable<>.Equals)));
+
+    private bool IsRoot(SyntaxNode node) =>
+        node?.Parent is null
+        || (node.Parent.Kind<TSyntaxKind>() is var parentKind && !ComplexityIncreasingKinds.Contains(parentKind) && !TransparentKinds.Contains(parentKind));
+
+    private int CalculateComplexity(SyntaxNode node)
+    {
+        var complexity = 0;
+        var stack = new Stack<SyntaxNode>();
+
+        stack.Push(node);
+        while (stack.TryPop(out var current))
+        {
+            if (ComplexityIncreasingKinds.Contains(current.Kind<TSyntaxKind>()))
+            {
+                complexity++;
+            }
+            stack.Push(ExpressionChildren(current));
         }
+
+        return complexity;
     }
 }

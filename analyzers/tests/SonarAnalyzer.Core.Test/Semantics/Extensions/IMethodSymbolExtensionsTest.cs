@@ -362,6 +362,24 @@ public class IMethodSymbolExtensionsTest
     }
 
     [TestMethod]
+    public void IsImplementingInterfaceMember_VBRenamedExplicitImplementation()
+    {
+        var compilation = new SnippetCompiler("""
+            Public Class Foo
+                Implements System.IEquatable(Of Foo)
+
+                Public Function MyEquals(other As Foo) As Boolean Implements System.IEquatable(Of Foo).Equals
+                    Return True
+                End Function
+            End Class
+            """,
+            false,
+            AnalyzerLanguage.VisualBasic);
+        var methodSymbol = compilation.DeclaredSymbols<IMethodSymbol>().Single(x => x.Name == "MyEquals");
+        methodSymbol.IsImplementingInterfaceMember(KnownType.System_IEquatable_T, nameof(IEquatable<>.Equals)).Should().BeTrue();
+    }
+
+    [TestMethod]
     [DataRow("List<int>", "Clear()", "Clear", "System.Collections.Generic.ICollection", "T")]
     [DataRow("List<int>", "Clear()", "Clear", "System.Collections.IList")]
     [DataRow("List<int>", "RemoveAt(1)", "RemoveAt", "System.Collections.Generic.IList", "T")]

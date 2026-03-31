@@ -17,28 +17,28 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class ExpressionComplexityTest
 {
-    [TestClass]
-    public class ExpressionComplexityTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.ExpressionComplexity { Maximum = 3 });
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.ExpressionComplexity { Maximum = 3 });
 
-        [TestMethod]
-        public void ExpressionComplexity_CSharp8() =>
-            builderCS.AddPaths("ExpressionComplexity.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
+    [TestMethod]
+    public void ExpressionComplexity_CSharp8() =>
+        builderCS.AddPaths("ExpressionComplexity.cs")
+            .WithOptions(LanguageOptions.FromCSharp8)
+            .Verify();
 
-        [TestMethod]
-        [DataRow("==")]
-        [DataRow("!=")]
-        [DataRow("<")]
-        [DataRow("<=")]
-        [DataRow(">")]
-        [DataRow(">=")]
-        public void ExpressionComplexity_TransparentComparissionOperators(string @operator) =>
-            builderCS.AddSnippet($$$"""
+    [TestMethod]
+    [DataRow("==")]
+    [DataRow("!=")]
+    [DataRow("<")]
+    [DataRow("<=")]
+    [DataRow(">")]
+    [DataRow(">=")]
+    public void ExpressionComplexity_TransparentComparissionOperators(string @operator) =>
+        builderCS.AddSnippet($$$"""
             class C
             {
                 public void M()
@@ -48,25 +48,25 @@ namespace SonarAnalyzer.Test.Rules
                 }
             }
             """)
-            .Verify();
+        .Verify();
 
-        [TestMethod]
-        [DataRow("o", "??")]
-        [DataRow("i", "|")]
-        [DataRow("i", "^")]
-        [DataRow("i", "&")]
-        [DataRow("i", ">>")]
+    [TestMethod]
+    [DataRow("o", "??")]
+    [DataRow("i", "|")]
+    [DataRow("i", "^")]
+    [DataRow("i", "&")]
+    [DataRow("i", ">>")]
 
-        [DataRow("i", ">>>")]
+    [DataRow("i", ">>>")]
 
-        [DataRow("i", "<<")]
-        [DataRow("i", "+")]
-        [DataRow("i", "-")]
-        [DataRow("i", "*")]
-        [DataRow("i", "/")]
-        [DataRow("i", "%")]
-        public void ExpressionComplexity_TransparentBinaryOperators(string parameter, string @operator) =>
-            builderCS.AddSnippet($$"""
+    [DataRow("i", "<<")]
+    [DataRow("i", "+")]
+    [DataRow("i", "-")]
+    [DataRow("i", "*")]
+    [DataRow("i", "/")]
+    [DataRow("i", "%")]
+    public void ExpressionComplexity_TransparentBinaryOperators(string parameter, string @operator) =>
+        builderCS.AddSnippet($$"""
             class C
             {
                 public void M(int i, object o)
@@ -77,32 +77,31 @@ namespace SonarAnalyzer.Test.Rules
             }
             """)
 
-            .WithOptions(LanguageOptions.FromCSharp11)
+        .WithOptions(LanguageOptions.FromCSharp11)
 
+        .Verify();
+
+    [TestMethod]
+    public void ExpressionComplexity_CSharp9() =>
+        builderCS.AddPaths("ExpressionComplexity.CSharp9.cs")
+            .WithTopLevelStatements()
             .Verify();
 
-        [TestMethod]
-        public void ExpressionComplexity_CSharp9() =>
-            builderCS.AddPaths("ExpressionComplexity.CSharp9.cs")
-                .WithTopLevelStatements()
-                .Verify();
+    [TestMethod]
+    public void ExpressionComplexity_CSharp10() =>
+        builderCS.AddPaths("ExpressionComplexity.CSharp10.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.FromCSharp10)
+            .Verify();
 
-        [TestMethod]
-        public void ExpressionComplexity_CSharp10() =>
-            builderCS.AddPaths("ExpressionComplexity.CSharp10.cs")
-                .WithTopLevelStatements()
-                .WithOptions(LanguageOptions.FromCSharp10)
-                .Verify();
+    [TestMethod]
+    public void ExpressionComplexity_CSharp11() =>
+        builderCS.AddPaths("ExpressionComplexity.CSharp11.cs")
+            .WithTopLevelStatements()
+            .WithOptions(LanguageOptions.FromCSharp11)
+            .Verify();
 
-        [TestMethod]
-        public void ExpressionComplexity_CSharp11() =>
-            builderCS.AddPaths("ExpressionComplexity.CSharp11.cs")
-                .WithTopLevelStatements()
-                .WithOptions(LanguageOptions.FromCSharp11)
-                .Verify();
-
-        [TestMethod]
-        public void ExpressionComplexity_VB() =>
-            new VerifierBuilder().AddAnalyzer(() => new VB.ExpressionComplexity { Maximum = 3 }).AddPaths("ExpressionComplexity.vb").Verify();
-    }
+    [TestMethod]
+    public void ExpressionComplexity_VB() =>
+        new VerifierBuilder().AddAnalyzer(() => new VB.ExpressionComplexity { Maximum = 3 }).AddPaths("ExpressionComplexity.vb").Verify();
 }
