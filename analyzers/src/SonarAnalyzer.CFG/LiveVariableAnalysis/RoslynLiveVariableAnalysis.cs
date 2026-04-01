@@ -43,7 +43,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             BuildBranches(block);
         }
-        ResolveCaptures();
+        ResolveCaptures(cfg);
         Analyze();
     }
 
@@ -78,34 +78,68 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         return ret;
     }
 
-    private void ResolveCaptures()
-    {
-        foreach (var flowCapture in Cfg.Blocks
-                                    .SelectMany(x => x.OperationsAndBranchValue)
-                                    .ToExecutionOrder()
-                                    .Where(x => x.Instance.Kind == OperationKindEx.FlowCapture)
-                                    .Select(x => x.Instance.ToFlowCapture()))
-        {
-            if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
-                && flowCaptures.TryGetValue(captureReference.Id, out var symbols))
-            {
-                AppendFlowCaptureReference(flowCapture.Id, symbols);
-            }
-            else
-            {
-                AppendFlowCaptureReference(flowCapture.Id, ParameterOrLocalSymbols(flowCapture.Value));
-            }
-        }
+    private void ResolveCaptures(ControlFlowGraph cfg) =>
+        ResolveCaptures(cfg, []);
 
-        void AppendFlowCaptureReference(CaptureId id, IEnumerable<ISymbol> symbols)
+    private void ResolveCaptures(ControlFlowGraph cfg, HashSet<ISymbol> processedLocalFunctions)
+    {
+        foreach (var operation in cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).ToExecutionOrder().Select(x => x.Instance))
         {
-            if (!flowCaptures.TryGetValue(id, out var list))
+            if (operation.AsFlowCapture() is { } flowCapture)
             {
-                list = [];
-                flowCaptures.Add(id, list);
+                ProcessFlowCapture(flowCapture);
             }
-            list.AddRange(symbols);
+            else if (operation.AsFlowAnonymousFunction() is { Symbol.IsStatic: false } flowAnonymousFunction)
+            {
+                ResolveCaptures(cfg.GetAnonymousFunctionControlFlowGraph(flowAnonymousFunction, Cancel), processedLocalFunctions);
+            }
+            else if (operation.AsInvocation() is { } invocation && HandleLocalFunction(processedLocalFunctions, invocation.TargetMethod.ConstructedFrom) is { } invocationLocalFunction)
+            {
+                ResolveCaptures(cfg.FindLocalFunctionCfgInScope(invocationLocalFunction, Cancel), processedLocalFunctions);
+            }
+            else if (operation.AsMethodReference() is { } reference && HandleLocalFunction(processedLocalFunctions, reference.Method.ConstructedFrom) is { } referenceLocalFunction)
+            {
+                ResolveCaptures(cfg.FindLocalFunctionCfgInScope(referenceLocalFunction, Cancel), processedLocalFunctions);
+            }
         }
+    }
+
+    private void ProcessFlowCapture(IFlowCaptureOperationWrapper flowCapture)
+    {
+        if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
+            && flowCaptures.TryGetValue(captureReference.Id, out var symbols))
+        {
+            AppendFlowCaptureReference(flowCapture.Id, symbols);
+        }
+        else
+        {
+            AppendFlowCaptureReference(flowCapture.Id, ParameterOrLocalSymbols(flowCapture.Value));
+        }
+    }
+
+    private static IMethodSymbol HandleLocalFunction(ISet<ISymbol> processed, IMethodSymbol method)
+    {
+        // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
+        if (method.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
+            && !processed.Contains(localFunction))
+        {
+            processed.Add(localFunction);
+            return localFunction;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private void AppendFlowCaptureReference(CaptureId id, IEnumerable<ISymbol> symbols)
+    {
+        if (!flowCaptures.TryGetValue(id, out var list))
+        {
+            list = [];
+            flowCaptures.Add(id, list);
+        }
+        list.AddRange(symbols);
     }
 
     private void BuildBranches(BasicBlock block)
@@ -281,39 +315,43 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
         private void ProcessOperation(ControlFlowGraph cfg, IOperation operation)
         {
-            // Everything that is added to this switch needs to be considered inside ProcessCaptured as well
-            switch (operation.Kind)
+            // Everything that is added here needs to be considered inside ProcessCaptured as well
+            if (operation.AsLocalReference() is { } localReference)
             {
-                case OperationKindEx.LocalReference:
-                    ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation));
-                    break;
-                case OperationKindEx.ParameterReference:
-                    ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation));
-                    break;
-                case OperationKindEx.FlowCaptureReference:
-                    ProcessParameterOrLocalReference(IFlowCaptureReferenceOperationWrapper.FromOperation(operation));
-                    break;
-                case OperationKindEx.SimpleAssignment:
-                    ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation));
-                    break;
-                case OperationKindEx.FlowAnonymousFunction:
-                    ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
-                    break;
-                case OperationKindEx.Invocation:
-                    ProcessLocalFunction(cfg, IInvocationOperationWrapper.FromOperation(operation).TargetMethod);
-                    break;
-                case OperationKindEx.MethodReference:
-                    ProcessLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation).Method);
-                    // For .Select(variable.MethodReference), there's no LocalReferenceOperation in the CFG for variable, so we handle it from the syntax
-                    if (owner.syntaxClassifier.MemberAccessExpression(operation.Syntax) is { } expression)
+                ProcessParameterOrLocalReference(localReference);
+            }
+            else if (operation.AsParameterReference() is { } parameterReference)
+            {
+                ProcessParameterOrLocalReference(parameterReference);
+            }
+            else if (operation.AsFlowCaptureReference() is { } flowCaptureReference)
+            {
+                ProcessParameterOrLocalReference(flowCaptureReference);
+            }
+            else if (operation.AsSimpleAssignment() is { } assignment)
+            {
+                ProcessSimpleAssignment(assignment);
+            }
+            else if (operation.AsFlowAnonymousFunction() is { } flowAnonymousFunction)
+            {
+                ProcessFlowAnonymousFunction(cfg, flowAnonymousFunction);
+            }
+            else if (operation.AsInvocation() is { } invocation)
+            {
+                ProcessLocalFunction(cfg, invocation.TargetMethod);
+            }
+            else if (operation.AsMethodReference() is { } methodReference)
+            {
+                ProcessLocalFunction(cfg, methodReference.Method);
+                // For .Select(variable.MethodReference), there's no LocalReferenceOperation in the CFG for variable, so we handle it from the syntax
+                if (owner.syntaxClassifier.MemberAccessExpression(operation.Syntax) is { } expression)
+                {
+                    var symbol = owner.Cfg.OriginalOperation.ToSonar().SemanticModel.GetSymbolInfo(expression).Symbol;
+                    if (symbol is ILocalSymbol or IParameterSymbol && owner.IsLocal(symbol))
                     {
-                        var symbol = owner.Cfg.OriginalOperation.ToSonar().SemanticModel.GetSymbolInfo(expression).Symbol;
-                        if (symbol is ILocalSymbol or IParameterSymbol && owner.IsLocal(symbol))
-                        {
-                            ProcessParameterOrLocalSymbols([symbol], symbol is IParameterSymbol { RefKind: RefKind.Out }, false);
-                        }
+                        ProcessParameterOrLocalSymbols([symbol], symbol is IParameterSymbol { RefKind: RefKind.Out }, false);
                     }
-                    break;
+                }
             }
         }
 
@@ -360,20 +398,17 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 {
                     Captured.UnionWith(symbols);
                 }
-                else
+                else if (operation.AsFlowAnonymousFunction() is { } flowAnonymousFunction)
                 {
-                    switch (operation.Kind)
-                    {
-                        case OperationKindEx.FlowAnonymousFunction:
-                            ProcessFlowAnonymousFunction(cfg, IFlowAnonymousFunctionOperationWrapper.FromOperation(operation));
-                            break;
-                        case OperationKindEx.Invocation:
-                            ProcessCapturedLocalFunction(cfg, IInvocationOperationWrapper.FromOperation(operation).TargetMethod);
-                            break;
-                        case OperationKindEx.MethodReference:
-                            ProcessCapturedLocalFunction(cfg, IMethodReferenceOperationWrapper.FromOperation(operation).Method);
-                            break;
-                    }
+                    ProcessFlowAnonymousFunction(cfg, flowAnonymousFunction);
+                }
+                else if (operation.AsInvocation() is { } invocation)
+                {
+                    ProcessCapturedLocalFunction(cfg, invocation.TargetMethod);
+                }
+                else if (operation.AsMethodReference() is { } methodReference)
+                {
+                    ProcessCapturedLocalFunction(cfg, methodReference.Method);
                 }
             }
         }
@@ -382,7 +417,6 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             if (HandleLocalFunction(capturedLocalFunctions, method) is { } localFunction)
             {
-                capturedLocalFunctions.Add(localFunction);
                 ProcessCaptured(cfg.FindLocalFunctionCfgInScope(localFunction, owner.Cancel));
             }
         }
@@ -391,27 +425,11 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             if (HandleLocalFunction(ProcessedLocalFunctions, method) is { } localFunction)
             {
-                ProcessedLocalFunctions.Add(localFunction);
                 var localFunctionCfg = cfg.FindLocalFunctionCfgInScope(localFunction, owner.Cancel);
                 foreach (var block in localFunctionCfg.Blocks.Reverse())    // Simplified approach, ignoring branching and try/catch/finally flows
                 {
                     ProcessBlock(localFunctionCfg, block);
                 }
-            }
-        }
-
-        private static IMethodSymbol HandleLocalFunction(ISet<ISymbol> processed, IMethodSymbol method)
-        {
-            // We need ConstructedFrom because TargetMethod of a generic local function invocation is not the correct symbol (has IsDefinition=False and wrong ContainingSymbol)
-            if (method.ConstructedFrom is { MethodKind: MethodKindEx.LocalFunction, IsStatic: false } localFunction
-                && !processed.Contains(localFunction))
-            {
-                processed.Add(localFunction);
-                return localFunction;
-            }
-            else
-            {
-                return null;
             }
         }
     }

@@ -1019,6 +1019,7 @@ public partial class RoslynLiveVariableAnalysisTest
                 private string Method(params string[] args) => null;
                 private bool IsMethod(params bool[] args) => true;
                 private void Capturing(Func<int, int> f) { }
+                private void Capturing(Func<string> f) { }
             }
             """;
         return new Context(code, AnalyzerLanguage.CSharp, localFunctionName);

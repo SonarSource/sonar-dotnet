@@ -129,6 +129,9 @@ public static class IOperationExtensions
     public static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
         operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.FromOperation);
 
+    public static ISimpleAssignmentOperationWrapper? AsSimpleAssignment(this IOperation operation) =>
+        operation.As(OperationKindEx.SimpleAssignment, ISimpleAssignmentOperationWrapper.FromOperation);
+
     public static IArrayCreationOperationWrapper? AsArrayCreation(this IOperation operation) =>
         operation.As(OperationKindEx.ArrayCreation, IArrayCreationOperationWrapper.FromOperation);
 
@@ -143,6 +146,12 @@ public static class IOperationExtensions
 
     public static IDeclarationPatternOperationWrapper? AsDeclarationPattern(this IOperation operation) =>
         operation.As(OperationKindEx.DeclarationPattern, IDeclarationPatternOperationWrapper.FromOperation);
+
+    public static IFlowAnonymousFunctionOperationWrapper? AsFlowAnonymousFunction(this IOperation operation) =>
+        operation.As(OperationKindEx.FlowAnonymousFunction, IFlowAnonymousFunctionOperationWrapper.FromOperation);
+
+    public static IFlowCaptureOperationWrapper? AsFlowCapture(this IOperation operation) =>
+        operation.As(OperationKindEx.FlowCapture, IFlowCaptureOperationWrapper.FromOperation);
 
     public static IFlowCaptureReferenceOperationWrapper? AsFlowCaptureReference(this IOperation operation) =>
         operation.As(OperationKindEx.FlowCaptureReference, IFlowCaptureReferenceOperationWrapper.FromOperation);

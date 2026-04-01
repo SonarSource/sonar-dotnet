@@ -455,7 +455,7 @@ namespace ReproCaptureInLocalFunction
     internal static class Test
     {
         // https://community.sonarsource.com/t/132900
-        private static string CaptureInSwitchExression(string currentUnit) // Noncompliant FP
+        private static string CaptureInSwitchExression(string currentUnit) // Compliant
         {
             return GetLongUnit();
 

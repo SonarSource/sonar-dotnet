@@ -255,8 +255,8 @@ public partial class RoslynLiveVariableAnalysisTest
             """;
         var context = CreateContextCS(code);
         context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
-        context.Validate("boolParameter", LiveIn("boolParameter")); // should be LiveOut("variable") but FlowCaptures inside of local functions are not resolved
-        context.Validate("LocalFunction(10);");                     // should be LiveIn("variable")
+        context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
+        context.Validate("LocalFunction(10);", LiveIn("variable"));
     }
 
     [TestMethod]
@@ -439,5 +439,60 @@ public partial class RoslynLiveVariableAnalysisTest
         var context = CreateContextCS(code, "LocalFunction");
         context.ValidateEntry(LiveIn("arg"), LiveOut("arg"));
         context.Validate("Capturing(LocalFunction);", LiveIn("arg"));
+    }
+
+    [TestMethod]
+    public void LocalFunctionCapture_CapturedLocalFunction_Captured()
+    {
+        // Local function using ?? (FlowCapture in CFG) is called from inside a lambda.
+        // ResolveCaptures must be called for the local function CFG so that FlowCaptureReference resolves to "variable".
+        var code = """
+            var variable = "value";
+            if (boolParameter)
+                return;
+            Capturing(() => LocalFunction());
+
+            string LocalFunction() => variable ?? "default";
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry(Captured("variable"), LiveIn("boolParameter"), LiveOut("boolParameter"));
+        context.Validate("boolParameter", Captured("variable"), LiveIn("boolParameter"));
+        context.Validate("Capturing(() => LocalFunction());", Captured("variable"));
+    }
+
+    [TestMethod]
+    public void LocalFunctionCapture_AnonymousFunction_FlowCapture_Captured()
+    {
+        // Lambda using ?? (FlowCapture in CFG) directly captures a variable.
+        // ResolveCaptures must be called for the anonymous function CFG so that FlowCaptureReference resolves to "variable".
+        var code = """
+            var variable = "value";
+            if (boolParameter)
+                return;
+            Capturing(() => variable ?? "default");
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry(Captured("variable"), LiveIn("boolParameter"), LiveOut("boolParameter"));
+        context.Validate("boolParameter", Captured("variable"), LiveIn("boolParameter"));
+        context.Validate("Capturing(() => variable ?? \"default\");", Captured("variable"));
+    }
+
+    [TestMethod]
+    public void LocalFunctionReference_FlowCapture_LiveIn()
+    {
+        // Local function using ?? (FlowCapture in CFG) is passed as a method reference.
+        // ResolveCaptures must be called for the local function CFG so that FlowCaptureReference resolves to "variable".
+        var code = """
+            var variable = "value";
+            if (boolParameter)
+                return;
+            Capturing(LocalFunction);
+
+            string LocalFunction() => variable ?? "default";
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry(LiveIn("boolParameter"), LiveOut("boolParameter"));
+        context.Validate("boolParameter", LiveIn("boolParameter"), LiveOut("variable"));
+        context.Validate("Capturing(LocalFunction);", LiveIn("variable"));
     }
 }

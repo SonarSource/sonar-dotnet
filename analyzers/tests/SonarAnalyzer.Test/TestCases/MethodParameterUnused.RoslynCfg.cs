@@ -721,9 +721,7 @@ namespace Tests.TestCases
     // https://sonarsource.atlassian.net/browse/NET-1168
     public class Repro_1168
     {
-        private void Repro(string s1, string s2, int val)   // Noncompliant FP
-                                                            // Noncompliant@-1 FP
-                                                            // Noncompliant@-2 FP
+        private void Repro(string s1, string s2, int val)  // Compliant
         {
             LocalFunction();
 
@@ -733,6 +731,66 @@ namespace Tests.TestCases
                 Console.WriteLine(s2 ?? "Nothing");
                 var x = true ? val : 42;
             }
+        }
+
+        private void Nested(string s)  // Compliant
+        {
+            Outer();
+
+            void Outer()
+            {
+                Inner();
+
+                void Inner()
+                {
+                    Console.WriteLine(s ?? "default");
+                }
+            }
+        }
+
+        private void NotInvoked(string s)  // Noncompliant - local function captures s but is never invoked
+        //                      ^^^^^^^^
+        {
+            void LocalFunction()
+            {
+                Console.WriteLine(s ?? "default");
+            }
+        }
+
+        private void WithMethodReference(string s)  // Compliant - s is used in local function passed as method reference
+        {
+            Action a = LocalFunction;
+            a();
+
+            void LocalFunction()
+            {
+                Console.WriteLine(s ?? "default");
+            }
+        }
+
+        private void WithAnonymousFunction(string s)  // Compliant - s is used in anonymous function
+        {
+            Action a = () => Console.WriteLine(s ?? "default");
+            a();
+        }
+
+        private void WithRecursiveLocalFunction(string s)  // Compliant
+        {
+            LocalFunction();
+
+            void LocalFunction()
+            {
+                if (s?.Length > 0)
+                    LocalFunction();
+            }
+        }
+
+        private void WithLambdaCallingLocalFunction(string s)  // Compliant - s is used in local function called from lambda
+        {
+            Action a = () => Console.WriteLine(LocalFunction());
+            a();
+
+            string LocalFunction() => s ?? "default";
         }
     }
 }
