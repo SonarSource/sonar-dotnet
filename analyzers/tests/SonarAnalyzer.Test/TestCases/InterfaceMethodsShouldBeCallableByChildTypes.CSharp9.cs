@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 public interface IFoo
 {
@@ -35,4 +36,17 @@ public record Bar(string Name) : IFoo
     { get; set; }
     event EventHandler IFoo.Event // Noncompliant
     { add { } remove { } }
+}
+
+// Repro https://sonarsource.atlassian.net/browse/NET-3524
+public interface IBaseInterface
+{
+    void Method1(string parameter);
+}
+
+public interface IDerivedInterface : IBaseInterface
+{
+    void Method2(int parameter);
+
+    void IBaseInterface.Method1(string parameter) => this.Method2(Convert.ToInt32(parameter, CultureInfo.InvariantCulture)); // Noncompliant FP
 }
