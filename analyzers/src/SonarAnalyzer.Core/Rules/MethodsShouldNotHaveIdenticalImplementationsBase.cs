@@ -32,8 +32,8 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
     protected MethodsShouldNotHaveIdenticalImplementationsBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
-            c =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer, c =>
             {
                 if (IsExcludedFromBeingExamined(c))
                 {
@@ -78,7 +78,16 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
     protected static bool AreTheSameType(SemanticModel model, SyntaxNode first, SyntaxNode second) =>
         (first is null && second is null)
         || (first is not null && second is not null
-            && model.GetTypeInfo(first).Type?.Equals(model.GetTypeInfo(second).Type) == true);
+            && AreTheSameTypeSymbols(model.GetTypeInfo(first).Type, model.GetTypeInfo(second).Type));
+
+    private static bool AreTheSameTypeSymbols(ITypeSymbol first, ITypeSymbol second) =>
+        first is not null
+        && second is not null
+        && (first.Equals(second)                                                                    // string == System.String, Task<int> == Task<int>
+            || AreSameNamedTypeParameters(first, second)                                            // T == T (type parameter with same name)
+            || TypesAreSameGenericType(first, second)                                               // List<T> == List<T>, (T,V) == (T,V)
+            || (first is IArrayTypeSymbol firstArray && second is IArrayTypeSymbol secondArray      // T[] == T[]
+                && AreTheSameTypeSymbols(firstArray.ElementType, secondArray.ElementType)));
 
     private static bool HaveSameParameterLists<TSyntax>(SeparatedSyntaxList<TSyntax> firstParameters,
                                                         SeparatedSyntaxList<TSyntax> secondParameters) where TSyntax : SyntaxNode =>
@@ -98,7 +107,9 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
         || AreSameNamedTypeParameters(first, second) // M1<T1, T2>() where T1: T2 <-> M2<T1, T2>() where T1: T2
                                                      // T2 of M1 is a different symbol than T2 of M2, but if they have the same name they can be interchanged.
                                                      // T2 equivalency is checked as well by the TypeConstraintsAreSame call in TypeParametersHaveSameNameAndConstraints.
-        || TypesAreSameGenericType(first, second); // M1<T>(T x) where T: IEquatable<T> <-> M2<T>(T x) where T: IEquatable<T>
+        || TypesAreSameGenericType(first, second) // M1<T>(T x) where T: IEquatable<T> <-> M2<T>(T x) where T: IEquatable<T>
+        || (first is IArrayTypeSymbol firstArray && second is IArrayTypeSymbol secondArray // T[] == T[]
+            && TypeConstraintsAreSame(firstArray.ElementType, secondArray.ElementType));
 
     private static bool TypesAreSameGenericType(ITypeSymbol firstParameterType, ITypeSymbol secondParameterType) =>
         firstParameterType is INamedTypeSymbol { IsGenericType: true } namedTypeFirst

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class StaticLocalFunctions
 {
@@ -6,8 +8,8 @@ public class StaticLocalFunctions
     public void Method()
     {
         static string LocalFunction(int x)
-//                    ^^^^^^^^^^^^^ Secondary
-//                    ^^^^^^^^^^^^^ Secondary@-1
+        //            ^^^^^^^^^^^^^ Secondary
+        //            ^^^^^^^^^^^^^ Secondary@-1
         {
             x += 42;
             return x.ToString();
@@ -30,15 +32,24 @@ public class StaticLocalFunctions
 // https://sonarsource.atlassian.net/browse/NET-348
 class Repro_348
 {
-    T Method1<T>() => default;  // FN
-    T Method2<T>() => default;
+    T Method1<T>() // Secondary
+    {
+        var a = 1;
+        return default;
+    }
+
+    T Method2<T>() // Noncompliant
+    {
+        var a = 1;
+        return default;
+    }
 }
 
 public record struct Sample
 {
     public void Method1()
-//              ^^^^^^^ Secondary
-//              ^^^^^^^ Secondary@-1
+    //          ^^^^^^^ Secondary
+    //          ^^^^^^^ Secondary@-1
     {
         string s = "test";
         Console.WriteLine("Result: {0}", s);

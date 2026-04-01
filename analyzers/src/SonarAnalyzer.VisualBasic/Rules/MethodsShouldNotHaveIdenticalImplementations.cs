@@ -14,27 +14,26 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<SyntaxKind, MethodBlockSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShouldNotHaveIdenticalImplementationsBase<SyntaxKind, MethodBlockSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock };
+    protected override SyntaxKind[] SyntaxKinds => [SyntaxKind.ClassBlock, SyntaxKind.StructureBlock];
 
-        protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node) =>
-            ((TypeBlockSyntax)node).Members.OfType<MethodBlockSyntax>();
+    protected override IEnumerable<MethodBlockSyntax> GetMethodDeclarations(SyntaxNode node) =>
+        ((TypeBlockSyntax)node).Members.OfType<MethodBlockSyntax>();
 
-        protected override bool AreDuplicates(SemanticModel model, MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
-            firstMethod.Statements.Count > 1
-            && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
-            && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
-            && HaveSameTypeParameters(model, firstMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters, secondMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters)
-            && AreTheSameType(model, firstMethod.SubOrFunctionStatement.AsClause?.Type, secondMethod.SubOrFunctionStatement.AsClause?.Type)
-            && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
+    protected override bool AreDuplicates(SemanticModel model, MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
+        firstMethod.Statements.Count > 1
+        && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
+        && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
+        && HaveSameTypeParameters(model, firstMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters, secondMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters)
+        && AreTheSameType(model, firstMethod.SubOrFunctionStatement.AsClause?.Type, secondMethod.SubOrFunctionStatement.AsClause?.Type)
+        && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);
 
-        protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
-            method.SubOrFunctionStatement.Identifier;
-    }
+    protected override SyntaxToken GetMethodIdentifier(MethodBlockSyntax method) =>
+        method.SubOrFunctionStatement.Identifier;
 }

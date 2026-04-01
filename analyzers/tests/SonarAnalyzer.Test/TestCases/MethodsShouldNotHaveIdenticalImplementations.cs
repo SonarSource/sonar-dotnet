@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -146,6 +148,18 @@ namespace Tests.Diagnostics
             x += 1;
             return x.ToString();
         }
+
+        static System.String Qualified1() // Secondary
+        {
+            var x = 1;
+            return "";
+        }
+
+        static string Qualified2() // Noncompliant
+        {
+            var x = 1;
+            return "";
+        }
     }
 
     struct SomeStruct
@@ -227,5 +241,140 @@ public static class ClassicExtensions
         Console.WriteLine("One");
         Console.WriteLine("Two");
         Console.WriteLine("Three");
+    }
+}
+
+public class GenericReturnType
+{
+    T Generic<T>() where T : class // Secondary
+    {
+        var a = 1;
+        return default(T);
+    }
+
+    T Generic2<T>() where T : class // Noncompliant
+    {
+        var a = 1;
+        return default(T);
+    }
+
+    T Generic4<T>() where T : GenericReturnType // Compliant, Parameter type constraints don't match
+    {
+        var a = 1;
+        return default(T);
+    }
+
+    T Generic5<T>() where T : struct // Compliant, Parameter type constraints don't match
+    {
+        var a = 1;
+        return default(T);
+    }
+
+    List<T> List<T>() where T : class // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    List<T> List2<T>() where T : class // Noncompliant
+    {
+        var a = 1;
+        return null;
+    }
+
+    Task<int> Task() // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    Task<int> Task2() // Noncompliant
+    {
+        var a = 1;
+        return null;
+    }
+
+    Task<T[]> Task2<T>() // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    Task<T[]> Task3<T>() // Noncompliant
+    {
+        var a = 1;
+        return null;
+    }
+
+    (T, V) Tuple1<T, V>() // Secondary
+    {
+        var a = 1;
+        return default((T, V));
+    }
+
+    (T, V) Tuple2<T, V>() // Noncompliant
+    {
+        var a = 1;
+        return default((T, V));
+    }
+
+    T[] Array<T>() // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    T[] Array2<T>() // Noncompliant
+    {
+        var a = 1;
+        return null;
+    }
+
+    IList<IList<T>> Nested<T>() // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    IList<IList<T>> Nested2<T>() // Noncompliant
+    {
+        var a = 1;
+        return null;
+    }
+
+    IList<IList<T[]>> Nested3<T>() // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    IList<IList<T[]>> Nested4<T>() // Noncompliant
+    {
+        var a = 1;
+        return null;
+    }
+
+    IList<T[]> Nested5<T>() // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    IList<T[]> Nested6<T>() // Noncompliant
+    {
+        var a = 1;
+        return null;
+    }
+
+    Dictionary<TKey, TValue> Dict1<TKey, TValue>() // Secondary
+    {
+        var a = 1;
+        return null;
+    }
+
+    Dictionary<TKey, TValue> Dict2<TKey, TValue>() // Noncompliant
+    {
+        var a = 1;
+        return null;
     }
 }
