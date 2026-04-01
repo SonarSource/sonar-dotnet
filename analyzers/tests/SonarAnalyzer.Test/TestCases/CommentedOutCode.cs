@@ -94,11 +94,78 @@ namespace Tests.Diagnostics
     /// </code>
     public class CommentedOutCode
     {
-        public void M()
+        // https://sonarsource.atlassian.net/browse/NET-3164
+        void SentenceWithSemicolon()
         {
+            _ = "separator";
+            // * read the configuration file;
+
+            _ = "separator";
+            // - validate the input parameters;
+
+            _ = "separator";
+            // -> process the remaining items;
+
+            _ = "separator";
+            // => transform the data accordingly;
+
+            _ = "separator";
+            // => the computed value or null;
+
+            _ = "separator";
+            // 1. process the remaining items;
+
+            _ = "separator"; // Noncompliant@+1
+            // => null;
+
+            _ = "separator";
+            // if the listener fails to start, it gets disposed;
+
+            _ = "separator";
+            // for all intents and purposes, this will be removed;
+
+            _ = "separator";
+            // while the application is running, monitor the logs;
+
+            _ = "separator";
+            // return to the previous state if necessary;
+
+            _ = "separator";
+            // throw an exception if validation fails;
+
+            _ = "separator";
+            //Automatically initialized to false;
+
+            _ = "separator";
+            //Only act upon the failure, if it comes from a currently known child;
+
+            _ = "separator";
+            //todo: bounded priority mailbox;
+
+            _ = "separator";
+            //TODO: return deploy;
+
+            _ = "separator"; // Noncompliant@+1
+            // return result;
+
+            _ = "separator"; // Noncompliant@+1
+            // int x;
+
+            _ = "separator"; // Noncompliant@+1
+            // throw ex;
+
+            _ = "separator"; // Noncompliant@+1
+            // throw new NotImplementedException;
+
+            _ = "separator"; // Noncompliant@+1
+            // using static System;
+
+            _ = "separator"; // Noncompliant@+1
+            // yield return value;
+
             /* foo */
-            M();
-            M(); /* foo */
+            SentenceWithSemicolon();
+            SentenceWithSemicolon(); /* foo */
 
             // Noncompliant: Console.WriteLine("Hello, world!");
             // Console.WriteLine("Hello, world!");
@@ -106,7 +173,7 @@ namespace Tests.Diagnostics
 
             // Console.WriteLine("Hello, world!"); //this is compliant, as there is code above and newline above
 
-            M();
+            SentenceWithSemicolon();
             /// Console.WriteLine("Hello, world!");
             ///
             ///
@@ -115,7 +182,7 @@ namespace Tests.Diagnostics
             /// The C++ access level for a member function, e.g. private
             ///
 
-            M();
+            SentenceWithSemicolon();
             // Noncompliant: Debug.Assert(this.MemberTypeName != null == storage.HasFlag(StorageClass.Member));
             //
             //if (storage.HasFlag(StorageClass.Member))
@@ -125,6 +192,18 @@ namespace Tests.Diagnostics
             // // Not trailing space wanted
             // output = false;
             //}
+
+            // FP: Short phrases with fewer than 3 words are not recognized as natural language sentences and are still flagged.
+            _ = "separator"; // Noncompliant@+1 FP
+            // process items;
+
+            // FP: Natural language that starts with a statement keyword followed by a code keyword is still flagged.
+            _ = "separator"; // Noncompliant@+1 FP
+            // return null if the value is not found;
+
+            // FN: Code where the second word is not in CodeKeywords is treated as a sentence and not detected.
+            _ = "separator";
+            // FN: extern alias MyAlias;
         }
 
 
@@ -190,17 +269,17 @@ class Repro_8819
     {
         // Remark: separators are required to consider comments as independent sentences
 
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with semicolon at the end;
 
         _ = "separator"; // Noncompliant@+1 FP
         // Natural language sentence with open-brace at the end{
 
-        _ = "separator"; // Noncompliant@+2 FP
+        _ = "separator";
         // Natural language sentence preceding sentence with semicolon at the end
         // Natural language sentence with semicolon at the end;
 
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with escaped semicolon at the end;
         // Natural language sentence following sentence with escaped semicolon at the end
 

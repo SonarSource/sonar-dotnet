@@ -14,6 +14,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Text.RegularExpressions;
+
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -23,14 +25,49 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
     internal const string MessageFormat = "Remove this commented out code.";
     private const int CommentMarkLength = 2;
 
-    private static readonly string[] CodeEndings = { ";", "{", ";}", "{}" };
-    private static readonly string[] CodeParts = { "++", "catch(", "switch(", "try{", "else{" };
-    private static readonly string[] CodePartsWithRelationalOperator = { "for(", "if(", "while(" };
-    private static readonly string[] RelationalOperators = { "<", ">", "<=", ">=", "==", "!=" };
+    private static readonly string[] CodeEndings = ["{", ";}", "{}"];
+    private static readonly string[] CodeParts = ["++", "catch(", "switch(", "try{", "else{"];
+    private static readonly string[] CodePartsWithRelationalOperator = ["for(", "if(", "while("];
+    private static readonly string[] RelationalOperators = ["<", ">", "<=", ">=", "==", "!="];
+
+    // Groups 1 and 2 capture the first two words for keyword detection.
+    private static readonly Regex SentencePattern =
+        new(
+            @"^\s*(?:[*\-]|->|=>)?\s*(\w+)[.,?:!']*\s+(\w+)[.,?:!']*\s+(?:\w+[.,?:!']*\s+)*\w+[.,?:!']*$",
+            RegexOptions.None,
+            Constants.DefaultRegexTimeout);
+
+    private static readonly HashSet<string> CodeKeywords =
+    [
+        "abstract", "as", "async", "await", "base", "bool", "break", "byte", "catch", "char",
+        "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double",
+        "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for",
+        "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock",
+        "long", "namespace", "new", "null", "object", "operator", "out", "override", "params",
+        "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
+        "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true",
+        "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "using", "virtual", "void",
+        "volatile", "while", "yield",
+    ];
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    internal static bool IsCode(string line)
+    {
+        var checkedLine = line.Replace(" ", string.Empty).Replace("\t", string.Empty);
+
+        if (checkedLine.Contains("License") || checkedLine.Contains("c++") || checkedLine.Contains("C++"))
+        {
+            return false;
+        }
+
+        return EndsWithCode(checkedLine, line)
+            || ContainsCodeParts(checkedLine)
+            || ContainsMultipleLogicalOperators(checkedLine)
+            || ContainsCodePartsWithRelationalOperator(checkedLine);
+    }
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterTreeAction(c =>
@@ -42,7 +79,7 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
                 }
             });
 
-    private static void CheckTrivia(SonarSyntaxTreeReportingContext context, IEnumerable<SyntaxTrivia> trivia)
+    private static void CheckTrivia(SonarSyntaxTreeReportingContext context, SyntaxTriviaList trivia)
     {
         var shouldReport = true;
         foreach (var trivium in trivia)
@@ -89,21 +126,6 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
         }
     }
 
-    internal static bool IsCode(string line)
-    {
-        var checkedLine = line.Replace(" ", string.Empty).Replace("\t", string.Empty);
-
-        var isPossiblyCode = EndsWithCode(checkedLine)
-            || ContainsCodeParts(checkedLine)
-            || ContainsMultipleLogicalOperators(checkedLine)
-            || ContainsCodePartsWithRelationalOperator(checkedLine);
-
-        return isPossiblyCode
-            && !checkedLine.Contains("License")
-            && !checkedLine.Contains("c++")
-            && !checkedLine.Contains("C++");
-    }
-
     private static bool ContainsMultipleLogicalOperators(string checkedLine)
     {
         const int lengthOfOperator = 2;
@@ -123,10 +145,16 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
         bool ContainsRelationalOperator(string codePart)
         {
             var index = checkedLine.IndexOf(codePart, StringComparison.Ordinal);
-            return index >= 0 && RelationalOperators.Any(op => checkedLine.IndexOf(op, index, StringComparison.Ordinal) >= 0);
+            return index >= 0 && RelationalOperators.Any(x => checkedLine.IndexOf(x, index, StringComparison.Ordinal) >= 0);
         }
     }
 
-    private static bool EndsWithCode(string checkedLine) =>
-        checkedLine == "}" || CodeEndings.Any(ending => checkedLine.EndsWith(ending, StringComparison.Ordinal));
+    private static bool EndsWithCode(string checkedLine, string originalLine) =>
+        checkedLine == "}"
+        || CodeEndings.Any(x => checkedLine.EndsWith(x, StringComparison.Ordinal))
+        || (checkedLine.EndsWith(";", StringComparison.Ordinal) && !LooksLikeSentence(originalLine.Trim().TrimEnd(';')));
+
+    private static bool LooksLikeSentence(string trimmedLine) =>
+        SentencePattern.SafeMatch(trimmedLine) is { Success: true } match
+        && !(CodeKeywords.Contains(match.Groups[1].Value) && CodeKeywords.Contains(match.Groups[2].Value));
 }
