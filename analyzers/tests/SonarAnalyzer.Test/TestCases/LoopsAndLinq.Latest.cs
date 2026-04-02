@@ -259,9 +259,9 @@ namespace CSharpEleven
         // Gap 1: ref struct as invocation argument
         bool IsMatchArgument(IReadOnlyList<string> segments, ReadOnlySpan<char> value, StringComparison comparison)
         {
-            foreach (var segment in segments) // Noncompliant FP: value is ReadOnlySpan<char> and cannot be captured in a lambda
+            foreach (var segment in segments) // Compliant: value is ReadOnlySpan<char> and cannot be captured in a lambda
             {
-                if (segment.Equals(value, comparison)) return true; // Secondary
+                if (segment.Equals(value, comparison)) return true;
             }
             return false;
         }
@@ -269,9 +269,9 @@ namespace CSharpEleven
         // Gap 2: ref struct as invocation receiver
         bool IsMatchReceiver(IReadOnlyList<char> chars, ReadOnlySpan<char> span)
         {
-            foreach (var c in chars) // Noncompliant FP: span is a ref struct receiver and cannot be captured in a lambda
+            foreach (var c in chars) // Compliant: span is a ref struct receiver and cannot be captured in a lambda
             {
-                if (span.Contains(c)) return true; // Secondary
+                if (span.Contains(c)) return true;
             }
             return false;
         }
@@ -279,9 +279,9 @@ namespace CSharpEleven
         // Gap 3: ref struct identifier in binary expression (IdentifierNameSyntax accepted unconditionally)
         bool IsMatchBinary(IReadOnlyList<string> segments, ReadOnlySpan<char> span)
         {
-            foreach (var segment in segments) // Noncompliant FP: span is a ref struct identifier in a binary expression and cannot be captured in a lambda
+            foreach (var segment in segments) // Compliant: span is a ref struct identifier in a binary expression and cannot be captured in a lambda
             {
-                if (segment.AsSpan() == span) return true; // Secondary
+                if (segment.AsSpan() == span) return true;
             }
             return false;
         }
@@ -290,15 +290,41 @@ namespace CSharpEleven
         ReadOnlySpan<char> FindFirst(IReadOnlyList<string> segments, Predicate<string> predicate)
         {
             ReadOnlySpan<char> found = default;
-            foreach (var segment in segments) // Noncompliant FP: segment.AsSpan() is a ref struct assigned in the if body and cannot be captured in a lambda
+            foreach (var segment in segments) // Compliant: found is a ref struct assigned in the if body and cannot be captured in a lambda
             {
-                if (predicate(segment)) // Secondary
+                if (predicate(segment))
                 {
                     found = segment.AsSpan();
                     break;
                 }
             }
             return found;
+        }
+
+        // Transient ref struct created inside the lambda — not captured from outer scope, so LINQ conversion is valid
+        bool IsMatchTransient(IReadOnlyList<string> segments, string value)
+        {
+            foreach (var segment in segments) // Noncompliant
+            {
+                if (segment.AsSpan().Equals(value, StringComparison.Ordinal)) return true; // Secondary
+            }
+            return false;
+        }
+
+        // ref struct field: accessing a ref struct field requires going through the ref struct instance,
+        // which is itself an identifier of ref struct type — detected by ContainsRefStructReference
+        ref struct SegmentWrapper
+        {
+            public ReadOnlySpan<char> Span;
+        }
+
+        bool IsMatchViaRefStructField(IReadOnlyList<char> chars, SegmentWrapper wrapper)
+        {
+            foreach (var c in chars) // Compliant: wrapper is a ref struct and cannot be captured in a lambda
+            {
+                if (wrapper.Span.Contains(c)) return true;
+            }
+            return false;
         }
     }
 }

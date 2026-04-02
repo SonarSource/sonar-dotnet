@@ -58,7 +58,9 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
 
     private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement, SonarSyntaxNodeReportingContext context, out SecondaryLocation ifConditionLocation)
     {
-        if (IfStatement(statement) is { } ifStatementSyntax && CanIfStatementBeMoved(ifStatementSyntax))
+        if (IfStatement(statement) is { } ifStatementSyntax
+            && CanIfStatementBeMoved(ifStatementSyntax)
+            && !ContainsRefStructReference(ifStatementSyntax, context.Model))
         {
             ifConditionLocation = ifStatementSyntax.Condition.ToSecondaryLocation();
             // If the 'if' block contains a single return or assignment with a break,
@@ -71,6 +73,11 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         ifConditionLocation = null;
         return false;
     }
+
+    private static bool ContainsRefStructReference(IfStatementSyntax ifStatement, SemanticModel model) =>
+        ifStatement.DescendantNodes()
+            .OfType<IdentifierNameSyntax>()
+            .Any(x => model.GetTypeInfo(x).Type?.IsRefStruct() == true);
 
     private static bool RequiresNullableConversion(SyntaxNode returnOrAssignment, SonarSyntaxNodeReportingContext context)
     {
