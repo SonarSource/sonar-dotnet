@@ -17,25 +17,12 @@
 namespace SonarAnalyzer.VisualBasic.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-public sealed class VariableUnused : VariableUnusedBase
+public sealed class VariableUnused : VariableUnusedBase<SyntaxKind>
 {
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = VisualBasicFacade.Instance;
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
-
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterCodeBlockStartAction(cbc =>
-        {
-            var collector = new UnusedLocalsCollector();
-
-            cbc.RegisterNodeAction(collector.CollectDeclarations, SyntaxKind.LocalDeclarationStatement);
-            cbc.RegisterNodeAction(collector.CollectUsages, SyntaxKind.IdentifierName);
-            cbc.RegisterCodeBlockEndAction(c => collector.ReportUnusedVariables(c, Rule));
-        });
-
-    private class UnusedLocalsCollector : UnusedLocalsCollectorBase<LocalDeclarationStatementSyntax>
-    {
-        protected override IEnumerable<SyntaxNode> GetDeclaredVariables(LocalDeclarationStatementSyntax localDeclaration) =>
-            localDeclaration.Declarators.SelectMany(x => x.Names);
-    }
+    protected override bool IsExcludedDeclaration(SyntaxNode node) =>
+        node is ModifiedIdentifierSyntax { Parent.Parent: UsingStatementSyntax or ForStatementSyntax or ForEachStatementSyntax }  // Using/For/For Each x ... in VB
+                or ModifiedIdentifierSyntax { Parent: CatchStatementSyntax }                                                      // Catch e As Exception in VB
+                or ModifiedIdentifierSyntax { Parent: CollectionRangeVariableSyntax or VariableNameEqualsSyntax };                // From x In / Select x = / Let x = / Into x = in VB LINQ
 }

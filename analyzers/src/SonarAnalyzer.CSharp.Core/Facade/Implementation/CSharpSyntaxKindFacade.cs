@@ -73,5 +73,18 @@ internal sealed class CSharpSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind>
         SyntaxKindEx.RecordStructDeclaration,
     };
     public SyntaxKind VariableDeclarator => SyntaxKind.VariableDeclarator;
+
+    public SyntaxKind[] LocalDeclarationKinds =>
+    [
+        SyntaxKind.VariableDeclarator,
+        SyntaxKindEx.SingleVariableDesignation, // x is T y, out var x, var (a,b)=..., patterns
+        SyntaxKind.CatchDeclaration,            // catch (Exception e)
+        SyntaxKind.ForEachStatement,            // foreach (var x in ...)
+        SyntaxKind.FromClause,                  // from x in ...
+        SyntaxKind.JoinClause,                  // join x in coll on a equals b
+        SyntaxKind.JoinIntoClause,              // join ... into x
+        SyntaxKind.LetClause,                   // let x = ...
+        SyntaxKind.QueryContinuation,           // ... into x select
+    ];
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
 }

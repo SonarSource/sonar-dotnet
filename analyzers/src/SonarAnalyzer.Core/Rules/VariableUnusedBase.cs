@@ -16,48 +16,63 @@
 
 namespace SonarAnalyzer.Core.Rules;
 
-public abstract class VariableUnusedBase : SonarDiagnosticAnalyzer
+public abstract class VariableUnusedBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    internal const string DiagnosticId = "S1481";
-    protected const string MessageFormat = "Remove the unused local variable '{0}'.";
+    protected abstract bool IsExcludedDeclaration(SyntaxNode node);
 
-    internal static IEnumerable<ISymbol> GetUsedSymbols(SyntaxNode node, SemanticModel model)
+    protected override string MessageFormat => "Remove the unused local variable '{0}'.";
+
+    protected VariableUnusedBase() : base("S1481") { }
+
+    protected sealed override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterCodeBlockStartAction<TSyntaxKind>(Language.GeneratedCodeRecognizer, cbc =>
+            {
+                // Two-pass approach: in pass 1, declaration nodes populate declaredLocalNames and declaredLocals.
+                // All IdentifierName nodes are buffered into pendingIdentifiers. In pass 2 (the end-of-block
+                // action), GetSymbolInfo is called only on buffered identifiers whose text appears in
+                // declaredLocalNames — avoiding the expensive call for every unrelated identifier in the block.
+                //
+                // Three collections are needed rather than two: declaredLocalNames serves as a cheap text-based
+                // pre-filter while declaredLocals holds the resolved symbols for the unused check. Combining them
+                // into a Dictionary<string, ISymbol> would break shadowing — the same name can map to multiple
+                // symbols (e.g. 'x' in two sequential blocks), so the relationship is one-to-many.
+                var declaredLocalNames = new HashSet<string>(Language.NameComparer);
+                var declaredLocals = new HashSet<ISymbol>();
+                var pendingIdentifiers = new List<SyntaxNode>();
+
+                cbc.RegisterNodeAction(c => CollectDeclaration(c, declaredLocalNames, declaredLocals), Language.SyntaxKind.LocalDeclarationKinds);
+                cbc.RegisterNodeAction(c => pendingIdentifiers.Add(c.Node), Language.SyntaxKind.IdentifierName);
+                cbc.RegisterCodeBlockEndAction(c => ReportUnused(c, declaredLocalNames, declaredLocals, pendingIdentifiers));
+            });
+
+    private void CollectDeclaration(SonarSyntaxNodeReportingContext c, HashSet<string> declaredLocalNames, HashSet<ISymbol> declaredLocals)
     {
-        var symbolInfo = model.GetSymbolInfo(node);
-        if (symbolInfo.Symbol is not null)
+        if (!IsExcludedDeclaration(c.Node)
+            && c.Model.GetDeclaredSymbol(c.Node) is (ILocalSymbol or IRangeVariableSymbol) and { Name: not "_" } symbol)
         {
-            yield return symbolInfo.Symbol;
-        }
-
-        foreach (var candidate in symbolInfo.CandidateSymbols)
-        {
-            yield return candidate;
+            declaredLocalNames.Add(symbol.Name);
+            declaredLocals.Add(symbol);
         }
     }
 
-    protected abstract class UnusedLocalsCollectorBase<TLocalDeclaration>
-        where TLocalDeclaration : SyntaxNode
+    private void ReportUnused(SonarCodeBlockReportingContext c, HashSet<string> declaredLocalNames, HashSet<ISymbol> declaredLocals, List<SyntaxNode> pendingIdentifiers)
     {
-        private readonly ISet<ISymbol> declaredLocals = new HashSet<ISymbol>();
-        private readonly ISet<ISymbol> usedLocals = new HashSet<ISymbol>();
-
-        protected abstract IEnumerable<SyntaxNode> GetDeclaredVariables(TLocalDeclaration localDeclaration);
-
-        public void CollectDeclarations(SonarSyntaxNodeReportingContext c) =>
-            declaredLocals.UnionWith(
-                GetDeclaredVariables((TLocalDeclaration)c.Node)
-                    .Select(x => c.Model.GetDeclaredSymbol(x) ?? c.Model.GetSymbolInfo(x).Symbol)
-                    .WhereNotNull());
-
-        public void CollectUsages(SonarSyntaxNodeReportingContext c) =>
-            usedLocals.UnionWith(GetUsedSymbols(c.Node, c.Model));
-
-        public void ReportUnusedVariables(SonarCodeBlockReportingContext c, DiagnosticDescriptor rule)
+        if (declaredLocalNames.Count == 0)
         {
-            foreach (var unused in declaredLocals.Except(usedLocals))
+            return;
+        }
+        var usedLocals = new HashSet<ISymbol>();
+        foreach (var id in pendingIdentifiers)
+        {
+            if (Language.Syntax.NodeIdentifier(id) is { ValueText: var idText } && declaredLocalNames.Contains(idText))
             {
-                c.ReportIssue(rule, unused.Locations.First(), unused.Name);
+                usedLocals.UnionWith(c.Model.GetSymbolInfo(id).AllSymbols());
             }
+        }
+        foreach (var unused in declaredLocals.Except(usedLocals))
+        {
+            c.ReportIssue(Rule, unused.Locations.First(), unused.Name);
         }
     }
 }

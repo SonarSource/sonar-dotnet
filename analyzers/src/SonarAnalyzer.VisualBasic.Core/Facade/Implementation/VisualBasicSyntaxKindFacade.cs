@@ -65,5 +65,6 @@ internal sealed class VisualBasicSyntaxKindFacade : ISyntaxKindFacade<SyntaxKind
     public SyntaxKind SubtractExpression => SyntaxKind.SubtractExpression;
     public SyntaxKind[] TypeDeclaration => new[] { SyntaxKind.ClassBlock, SyntaxKind.StructureBlock, SyntaxKind.InterfaceBlock, SyntaxKind.EnumBlock };
     public SyntaxKind VariableDeclarator => SyntaxKind.VariableDeclarator;
+    public SyntaxKind[] LocalDeclarationKinds => [SyntaxKind.ModifiedIdentifier];
     public SyntaxKind WhitespaceTrivia => SyntaxKind.WhitespaceTrivia;
 }

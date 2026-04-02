@@ -104,6 +104,15 @@ namespace Tests.Diagnostics
                         from z in c //Noncompliant
                         select "1"
                 };
+            // join range variable (JoinClause without 'into') is also tracked
+            _ = from a in byteArray
+                join b in new byte[0] on a equals (byte)0  // Noncompliant {{Remove the unused local variable 'b'.}}
+                select a;
+
+            _ = from a in byteArray
+                join b in new byte[0] on a equals (byte)0  // Compliant
+                select b;
+
             _ = from _ in byteArray // Compliant, don't report on discard like variables
                 select 1;
         }
@@ -314,6 +323,83 @@ namespace Tests.Diagnostics
             { }
             for (var _ = 0; ;) // Compliant
             { }
+        }
+
+        public void ForeachDeconstruction(IEnumerable<(int, int)> pairs)
+        {
+            foreach (var (a, b) in pairs) { }       // Noncompliant [issue1, issue2]
+            foreach (var (c, d) in pairs)           // Noncompliant
+            {
+                Console.WriteLine(c);
+            }
+            foreach (var (_, e) in pairs) { }       // Noncompliant
+            foreach (var (f, g) in pairs)           // Compliant
+            {
+                Console.WriteLine(f + g);
+            }
+        }
+    }
+
+    public class Shadowing
+    {
+        public void SequentialBlocks()
+        {
+            { var x = 1; }                                              // Noncompliant - x in second block must not suppress this
+            { var x = 2; Console.WriteLine(x); }
+        }
+
+        public void TwoLocalFunctions()
+        {
+            // Both local functions are in the same code block, so both x symbols are collected together.
+            // Using x in the second must not suppress the report for x in the first.
+            int Fn1() { var x = 1; return 0; }                         // Noncompliant
+            int Fn2() { var x = 2; return x; }                         // Compliant
+            _ = Fn1() + Fn2();
+        }
+    }
+
+    public class LocalConstants
+    {
+        public void Method()
+        {
+            const int unused = 5;   // Noncompliant
+            const int used = 5;
+            Console.WriteLine(used);
+        }
+    }
+
+    public class MultipleDeclarations
+    {
+        public void Method()
+        {
+            int first = 1, second = 2; // Noncompliant
+            Console.WriteLine(second);
+        }
+    }
+
+    public class AnonymousMethods
+    {
+        public void Method()
+        {
+            Action unused = delegate { };   // Noncompliant
+            Action used = delegate { };
+            used();
+
+            Action<int> outer = delegate (int n)  // Compliant
+            {
+                int inner = 42; // Noncompliant
+                Console.WriteLine(n.ToString());
+            };
+            outer(1);
+        }
+    }
+
+    public class NameofExpression
+    {
+        public void Method()
+        {
+            var x = 1;
+            Console.WriteLine(nameof(x)); // Compliant - nameof resolves the symbol
         }
     }
 }

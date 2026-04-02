@@ -54,4 +54,18 @@ Namespace Tests.Diagnostics
                           End Function)
         End Sub
     End Class
+
+    Public Class LinqRangeVariables
+        Public Sub FromClause(ByVal coll As List(Of String))
+            ' x is the implicit output; no explicit Select means it is never referenced as an identifier — not a FP
+            Dim q1 = From x In coll
+            Console.WriteLine(q1.Count())
+        End Sub
+
+        Public Sub SelectNamedProjection(ByVal coll As List(Of String))
+            ' Name labels the output range variable in the Select clause; it is never referenced as an identifier — not a FP
+            Dim q2 = From x In coll Select Name = x.ToUpper()
+            Console.WriteLine(q2.Count())
+        End Sub
+    End Class
 End Namespace

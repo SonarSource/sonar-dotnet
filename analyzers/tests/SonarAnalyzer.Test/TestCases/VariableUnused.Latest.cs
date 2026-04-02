@@ -171,6 +171,17 @@ public class NullConditionalAssingment
     }
 }
 
+public class Shadowing
+{
+    public void TwoLambdas()
+    {
+        // C# 8+ allows same-name locals in sibling lambdas. Both x symbols land in the same
+        // code block - using x in the second lambda must not suppress the report for x in the first.
+        _ = ((Func<int>)(() => { var x = 1; return 0; }))();   // Noncompliant
+        _ = ((Func<int>)(() => { var x = 2; return x; }))();   // Compliant
+    }
+}
+
 public class FieldKeyword
 {
     public int Value
@@ -186,5 +197,44 @@ public class FieldKeyword
             int compliant;
             compliant = field;          // Compliant
         }
+    }
+}
+
+public class SwitchExpressions
+{
+    public void Method(object o)
+    {
+        var unused = o switch   // Noncompliant
+        {
+            int n => n * 2,
+            _ => 0
+        };
+
+        var result = o switch   // Compliant
+        {
+            int m => 42,        // Noncompliant - m declared but not used in arm
+            _ => 0
+        };
+        Console.WriteLine(result);
+
+        var value = o switch    // Compliant
+        {
+            int k => k * 2,     // Compliant - k used in arm
+            _ => 0
+        };
+        Console.WriteLine(value);
+    }
+}
+
+[AttributeUsage(AttributeTargets.Parameter)]
+public class MaxValueAttribute(int max) : Attribute { }
+
+public class ConstInLambdaParameterAttribute
+{
+    public void Method()
+    {
+        const int limit = 5;
+        Action<int> action = ([MaxValue(limit)] int x) => Console.WriteLine(x); // Compliant - limit referenced in lambda parameter attribute
+        action(1);
     }
 }
