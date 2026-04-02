@@ -14,93 +14,100 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class DoNotNestTypesInArguments : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DoNotNestTypesInArguments : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S4017";
-        private const string MessageFormat = "Refactor this method to remove the nested type argument.";
+    private const string DiagnosticId = "S4017";
+    private const string MessageFormat = "Refactor this method to remove the nested type argument.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                IEnumerable<ParameterSyntax> parameters = c.Node switch
                 {
-                    var argumentTypeSymbols = GetParametersSyntaxNodes(c.Node).Where(p => MaxDepthReached(p, c.Model));
+                    BaseMethodDeclarationSyntax { ParameterList.Parameters.Count: > 0 } method
+                        when !ImplementsAbstractClassOrInterface(c, method) => method.ParameterList.Parameters,
+                    { } node when node.IsKind(SyntaxKindEx.LocalFunctionStatement) => ((LocalFunctionStatementSyntaxWrapper)node).ParameterList.Parameters,
+                    _ => null
+                };
 
-                    foreach (var argument in argumentTypeSymbols)
-                    {
-                        c.ReportIssue(Rule, argument);
-                    }
-                },
-                SyntaxKind.MethodDeclaration,
-                SyntaxKindEx.LocalFunctionStatement);
+                if (parameters is not null)
+                {
+                    CheckArguments(c, parameters);
+                }
+            },
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.ConversionOperatorDeclaration,
+            SyntaxKindEx.LocalFunctionStatement);
 
-        private static bool MaxDepthReached(SyntaxNode parameterSyntax, SemanticModel model)
+    private static bool ImplementsAbstractClassOrInterface(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax method) =>
+        context.Model.GetDeclaredSymbol(method) is { } symbol
+        && (symbol.GetOverriddenMember() is { IsAbstract: true } || symbol.InterfaceMembers().Any());
+
+    private static bool MaxDepthReached(SyntaxNode parameterSyntax, SemanticModel model)
+    {
+        var walker = new GenericWalker(2, model);
+        walker.SafeVisit(parameterSyntax);
+        return walker.IsMaxDepthReached;
+    }
+
+    private static void CheckArguments(SonarSyntaxNodeReportingContext context, IEnumerable<ParameterSyntax> arguments)
+    {
+        foreach (var argument in arguments.Where(x => MaxDepthReached(x, context.Model)))
         {
-            var walker = new GenericWalker(2, model);
-            walker.SafeVisit(parameterSyntax);
-            return walker.IsMaxDepthReached;
+            context.ReportIssue(Rule, argument);
+        }
+    }
+
+    private sealed class GenericWalker : SafeCSharpSyntaxWalker
+    {
+        private static readonly ImmutableArray<KnownType> IgnoredTypes =
+            KnownType.SystemFuncVariants
+                .Union(KnownType.SystemActionVariants)
+                .Union([KnownType.System_Linq_Expressions_Expression_T])
+                .ToImmutableArray();
+
+        private readonly int maxDepth;
+        private readonly SemanticModel model;
+
+        private int depth;
+
+        public bool IsMaxDepthReached { get; private set; }
+
+        public GenericWalker(int maxDepth, SemanticModel model)
+        {
+            this.maxDepth = maxDepth;
+            this.model = model;
         }
 
-        private static IEnumerable<ParameterSyntax> GetParametersSyntaxNodes(SyntaxNode node) =>
-            node switch
-            {
-                MethodDeclarationSyntax methodDeclarationSyntax => methodDeclarationSyntax.ParameterList.Parameters,
-                var wrapper when LocalFunctionStatementSyntaxWrapper.IsInstance(wrapper) => ((LocalFunctionStatementSyntaxWrapper)wrapper).ParameterList.Parameters,
-                _ => Enumerable.Empty<ParameterSyntax>()
-            };
-
-        private sealed class GenericWalker : SafeCSharpSyntaxWalker
+        public override void VisitGenericName(GenericNameSyntax node)
         {
-            private static readonly ImmutableArray<KnownType> IgnoredTypes =
-                KnownType.SystemFuncVariants
-                         .Union(KnownType.SystemActionVariants)
-                         .Union(new[] { KnownType.System_Linq_Expressions_Expression_T })
-                         .ToImmutableArray();
-
-            private readonly int maxDepth;
-            private readonly SemanticModel model;
-
-            private int depth;
-
-            public bool IsMaxDepthReached { get; private set; }
-
-            public GenericWalker(int maxDepth, SemanticModel model)
+            if (model.GetSymbolInfo(node).Symbol is not INamedTypeSymbol symbol)
             {
-                this.maxDepth = maxDepth;
-                this.model = model;
+                return;
             }
 
-            public override void VisitGenericName(GenericNameSyntax node)
+            if (symbol.ConstructedFrom.IsAny(IgnoredTypes))
             {
-                if (model.GetSymbolInfo(node).Symbol is not INamedTypeSymbol namedTypeSymbol)
-                {
-                    return;
-                }
-
-                if (namedTypeSymbol.ConstructedFrom.IsAny(IgnoredTypes))
-                {
-                    base.VisitGenericName(node);
-                }
-                else
-                {
-                    if (depth == maxDepth - 1)
-                    {
-                        IsMaxDepthReached = true;
-                    }
-                    else
-                    {
-                        depth++;
-                        base.VisitGenericName(node);
-                        depth--;
-                    }
-                }
+                base.VisitGenericName(node);
+                return;
             }
+
+            if (depth == maxDepth - 1)
+            {
+                IsMaxDepthReached = true;
+                return;
+            }
+
+            depth++;
+            base.VisitGenericName(node);
+            depth--;
         }
     }
 }

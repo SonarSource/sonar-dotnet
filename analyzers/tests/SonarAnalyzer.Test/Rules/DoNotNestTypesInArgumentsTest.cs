@@ -16,15 +16,21 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotNestTypesInArgumentsTest
 {
-    [TestClass]
-    public class DoNotNestTypesInArgumentsTest
-    {
-        [TestMethod]
-        public void DoNotNestTypesInArguments_CSharp8() =>
-            new VerifierBuilder<DoNotNestTypesInArguments>().AddPaths("DoNotNestTypesInArguments.cs")
-                .WithOptions(LanguageOptions.FromCSharp8)
-                .Verify();
-    }
+    [TestMethod]
+    public void DoNotNestTypesInArguments_CS() =>
+        new VerifierBuilder<DoNotNestTypesInArguments>()
+            .AddPaths("DoNotNestTypesInArguments.cs")
+            .Verify();
+
+    [TestMethod]
+    public void DoNotNestTypesInArguments_CS_Latest() =>
+        new VerifierBuilder<DoNotNestTypesInArguments>()
+            .AddPaths("DoNotNestTypesInArguments.Latest.cs", "DoNotNestTypesInArguments.Latest.partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }
