@@ -92,7 +92,7 @@ namespace CSharp10
         public void BarMethod(Stream s) { } // +1
     }
 
-    public record struct OutterRecordStruct // Noncompliant
+    public record struct OutterRecordStruct // Compliant: nested record struct types are not counted as dependencies of the outer type
     {
         public OutterRecordStruct() { }
 
@@ -178,6 +178,12 @@ namespace CSharp11
         }
     }
 
+    public class ScopedRefParameterUsage // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 1 or less.}}
+    {
+        private Foo _foo;                  // +1 Foo
+        void M(scoped ref MyStruct p) { } // +1 MyStruct
+    }
+
     // file-scoped types
 
     file interface IFooFile { }
@@ -215,5 +221,23 @@ namespace CSharp13
             get => new Foo1();
             set { }
         }
+    }
+}
+
+namespace CSharp14
+{
+    public class Foo1 { }
+
+    public static class Foo1Extensions // Compliant: 1 dep (Foo1)
+    {
+        extension(Foo1)
+        {
+            public static Foo1 Create() => new Foo1(); // +1 Foo1
+        }
+    }
+
+    public class UsesStaticExtension // Compliant: 1 dep (Foo1) — Foo1Extensions (container) is not counted
+    {
+        Foo1 M() => Foo1.Create(); // +1 Foo1
     }
 }

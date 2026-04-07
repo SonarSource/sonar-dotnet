@@ -24,6 +24,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private const int ThresholdDefaultValue = 30;
 
         private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
+
         private static readonly ImmutableArray<KnownType> IgnoredTypes =
             ImmutableArray.Create(
                 KnownType.Void,
@@ -97,26 +98,41 @@ namespace SonarAnalyzer.CSharp.Rules
             namedType.TypeKind != TypeKind.Enum && !namedType.IsAny(IgnoredTypes);
 
         /// <summary>
-        /// Returns all type symbols that are linked to the provided type symbol - generic constraints,
-        /// replaced generic types (bounded types), etc. For example:
-        /// void Foo(Dictionary<string, int>) will return Dictionary<T>, string and int
-        /// void Foo<T>(List<T>) where T : IDisposable will return List<T> and Disposable
-        /// void Foo<T>(Dictionary<string,List<T>>) where T : IEnumerable<int> should return Dictionary, string, List, IEnumerable and int
+        /// Returns all type symbols reachable from the provided named type:
+        /// the original generic definition, all containing types (recursively expanded),
+        /// and all type arguments (recursively expanded) or constraint types for unbound generics.
+        /// For example:
+        /// Dictionary&lt;string, int&gt; returns Dictionary&lt;TKey,TValue&gt;, string, int
+        /// List&lt;T&gt; where T : IDisposable returns List&lt;T&gt;, IDisposable
+        /// Outer&lt;int&gt;.Inner returns Outer&lt;T&gt;.Inner, Outer&lt;T&gt;, int
         /// </summary>
         private static IEnumerable<INamedTypeSymbol> ExpandGenericTypes(INamedTypeSymbol namedType)
         {
-            var originalDefinition = new[] { namedType.OriginalDefinition };
+            yield return namedType.OriginalDefinition;
+            if (namedType.ContainingType is { } containing)
+            {
+                foreach (var expanded in ExpandGenericTypes(containing))
+                {
+                    yield return expanded;
+                }
+            }
+
             if (!namedType.IsGenericType)
             {
-                return originalDefinition;
+                yield break;
             }
-            return namedType.IsUnboundGenericType
-                ? originalDefinition.Union(namedType.TypeParameters.SelectMany(GetConstraintTypes))
-                : originalDefinition.Union(namedType.TypeArguments.OfType<INamedTypeSymbol>().SelectMany(ExpandGenericTypes));
-        }
 
-        private static IEnumerable<INamedTypeSymbol> GetConstraintTypes(ITypeParameterSymbol typeParameter) =>
-            typeParameter.ConstraintTypes.OfType<INamedTypeSymbol>().SelectMany(ExpandGenericTypes);
+            var typeArgs = namedType.IsUnboundGenericType
+                ? namedType.TypeParameters.SelectMany(ConstraintTypes)
+                : namedType.TypeArguments.OfType<INamedTypeSymbol>().SelectMany(ExpandGenericTypes);
+            foreach (var expanded in typeArgs)
+            {
+                yield return expanded;
+            }
+
+            static IEnumerable<INamedTypeSymbol> ConstraintTypes(ITypeParameterSymbol typeParameter) =>
+                typeParameter.ConstraintTypes.OfType<INamedTypeSymbol>().SelectMany(ExpandGenericTypes);
+        }
 
         private sealed class TypeDependencyCollector : SafeCSharpSyntaxWalker
         {
@@ -125,142 +141,112 @@ namespace SonarAnalyzer.CSharp.Rules
 
             public ISet<INamedTypeSymbol> DependentTypes { get; } = new HashSet<INamedTypeSymbol>();
 
-            private void AddDependentType(INamedTypeSymbol type)
-            {
-                if (type != null)
-                {
-                    DependentTypes.Add(type);
-                }
-            }
-
-            private void AddDependentType(TypeSyntax typeSyntax)
-            {
-                if (typeSyntax != null)
-                {
-                    AddDependentType(model.GetSymbolInfo(typeSyntax).Symbol as INamedTypeSymbol);
-                }
-            }
-
-            private void AddDependentType(TypeInfo typeInfo)
-            {
-                AddDependentType(typeInfo.Type as INamedTypeSymbol);
-                AddDependentType(typeInfo.ConvertedType as INamedTypeSymbol);
-            }
-
             public TypeDependencyCollector(SemanticModel model, TypeDeclarationSyntax originalTypeDeclaration)
             {
                 this.model = model;
                 this.originalTypeDeclaration = originalTypeDeclaration;
             }
 
-            // This override is needed because VisitRecordDeclaration is not available due to the Roslyn version.
+            // This override centralises all traversal guards:
+            // - TypeSyntax subtrees are skipped entirely; type dependencies are collected at the parent level
+            //   via node.TypeSyntax() + AddDependentType, avoiding O(n²) GetSymbolInfo calls on every identifier.
+            // - Nested type declarations are not drilled into; each type is analysed independently.
+            //   VisitRecordDeclaration / VisitRecordStructDeclaration are not available in this Roslyn version,
+            //   so all type-declaration kinds are handled here uniformly via the facade's TypeDeclaration array.
             public override void Visit(SyntaxNode node)
             {
-                if (node.IsKind(SyntaxKindEx.RecordDeclaration))
+                if (node is TypeSyntax)
                 {
-                    if (node == originalTypeDeclaration)
-                    {
-                        base.Visit(node);
-                    }
+                    return;
                 }
-                else
-                {
-                    base.Visit(node);
-                }
-            }
 
-            public override void VisitClassDeclaration(ClassDeclarationSyntax node)
-            {
-                // don't drill down in child classes, but walk the original
-                if (node == originalTypeDeclaration)
+                if (node != originalTypeDeclaration && CSharpFacade.Instance.SyntaxKind.TypeDeclaration.Contains(node.Kind()))
                 {
-                    base.VisitClassDeclaration(node);
+                    return;
                 }
-            }
 
-            public override void VisitStructDeclaration(StructDeclarationSyntax node)
-            {
-                // don't drill down in child structs, but walk the original
-                if (node == originalTypeDeclaration)
+                if (node.TypeSyntax() is { } typeSyntax)
                 {
-                    base.VisitStructDeclaration(node);
+                    AddDependentType(typeSyntax);
                 }
-            }
 
-            public override void VisitIndexerDeclaration(IndexerDeclarationSyntax node)
-            {
-                AddDependentType(node.Type);
-                base.VisitIndexerDeclaration(node);
+                base.Visit(node);
             }
 
             public override void VisitVariableDeclarator(VariableDeclaratorSyntax node)
             {
-                if (node.Initializer != null)
+                if (node.Initializer is not null)
                 {
                     AddDependentType(model.GetTypeInfo(node.Initializer.Value));
-                }
-                else
-                {
-                    AddDependentType(node.FirstAncestorOrSelf<VariableDeclarationSyntax>()?.Type);
                 }
                 base.VisitVariableDeclarator(node);
             }
 
-            public override void VisitMethodDeclaration(MethodDeclarationSyntax node)
+            public override void VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
             {
-                AddDependentType(node.ReturnType);
-                base.VisitMethodDeclaration(node);
-            }
+                // Only call GetSymbolInfo if the left-hand chain is a pure name chain (identifiers and member
+                // accesses terminating at a TypeSyntax). Invocation results, conditionals, array elements,
+                // this/base etc. can never be type references, so we skip the semantic lookup entirely.
+                if (!IsSimpleNameChain(node.Expression))
+                {
+                    base.VisitMemberAccessExpression(node);
+                    return;
+                }
 
-            public override void VisitTypeConstraint(TypeConstraintSyntax node)
-            {
-                AddDependentType(node.Type);
-                base.VisitTypeConstraint(node);
-            }
-
-            public override void VisitParameter(ParameterSyntax node)
-            {
-                AddDependentType(node.Type);
-                base.VisitParameter(node);
-            }
-
-            public override void VisitEventDeclaration(EventDeclarationSyntax node)
-            {
-                AddDependentType(node.Type);
-                base.VisitEventDeclaration(node);
-            }
-
-            public override void VisitPropertyDeclaration(PropertyDeclarationSyntax node)
-            {
-                AddDependentType(node.Type);
-                base.VisitPropertyDeclaration(node);
-            }
-
-            public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
-            {
-                AddDependentType(model.GetTypeInfo(node));
-                base.VisitObjectCreationExpression(node);
-            }
-
-            public override void VisitIdentifierName(IdentifierNameSyntax node)
-            {
-                AddDependentType(node);
-                base.VisitIdentifierName(node);
+                if (model.GetSymbolInfo(node.Expression).Symbol is INamedTypeSymbol symbol)
+                {
+                    AddDependentType(symbol);
+                    return;
+                }
+                base.VisitMemberAccessExpression(node);
             }
 
             public override void VisitInvocationExpression(InvocationExpressionSyntax node)
             {
-                // We don't use the helper method CSharpSyntaxHelper.IsNameof because it will do some extra
-                // semantic checks to ensure this is the real `nameof` and not a user made method.
-                // Here we prefer to favor fast results over accuracy (at worst we have FNs not FPs).
-                var isNameof = node.Expression.IsKind(SyntaxKind.IdentifierName)
-                    && ((IdentifierNameSyntax)node.Expression).Identifier.ToString() == SyntaxConstants.NameOfKeywordText;
-
-                if (!isNameof)
+                if (!node.IsNameof(model))
                 {
                     base.VisitInvocationExpression(node);
                 }
             }
+
+            // Returns true if the expression is a chain of MemberAccessExpressionSyntax nodes whose
+            // leftmost element is a TypeSyntax (IdentifierName, QualifiedName, AliasQualifiedName, etc.).
+            // This means the chain could be a qualified type reference like Console, NS.MyClass, Outer.Inner.
+            // Any other terminal node (ThisExpression, BaseExpression, InvocationExpression, conditional, etc.)
+            // cannot be a type, so GetSymbolInfo does not need to be called.
+            private static bool IsSimpleNameChain(ExpressionSyntax expression)
+            {
+                var current = expression;
+                while (current is MemberAccessExpressionSyntax ma)
+                {
+                    current = ma.Expression;
+                }
+                return current is TypeSyntax;
+            }
+
+            private void AddDependentType(TypeSyntax typeSyntax)
+            {
+                if (typeSyntax?.Unwrap() is not PredefinedTypeSyntax and { } unwrapped)
+                {
+                    AddDependentType(model.GetSymbolInfo(unwrapped).Symbol);
+                }
+            }
+
+            private void AddDependentType(TypeInfo typeInfo)
+            {
+                AddDependentType(typeInfo.Type);
+                AddDependentType(typeInfo.ConvertedType);
+            }
+
+            private bool AddDependentType(ISymbol symbol) =>
+                symbol switch
+                {
+                    INamedTypeSymbol named => DependentTypes.Add(named),
+                    IArrayTypeSymbol array => AddDependentType(array.ElementType),
+                    IAliasSymbol alias => AddDependentType(alias.Target),
+                    IPointerTypeSymbol pointer => AddDependentType(pointer.PointedAtType),
+                    _ => false
+                };
         }
     }
 }

@@ -408,6 +408,54 @@ public class AvoidExcessiveClassCouplingTest
             """).WithOptions(LanguageOptions.FromCSharp9).VerifyNoIssues();
 
     [TestMethod]
+    public void AvoidExcessiveClassCoupling_Implicit_Explicit_Operators() =>
+        withThreshold0.AddSnippet("""
+            using System.IO;
+            public class WithConversionOperators // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 3 to the maximum authorized 0 or less.}}
+            {
+                public static implicit operator Stream(WithConversionOperators x) => null;          // +1 Stream (return type); self not counted
+                public static explicit operator MemoryStream(WithConversionOperators x) => null;    // +1 MemoryStream (return type); self not counted
+                public static explicit operator WithConversionOperators(FileStream x) => null;      // self (not counted); +1 FileStream (parameter type)
+            }
+            """).Verify();
+
+    [TestMethod]
+    public void AvoidExcessiveClassCoupling_UserDefined_Delegates() =>
+        withThreshold0.AddSnippet("""
+            using System.IO;
+            public delegate void MyCallback(Stream s);
+            public class WithUserDefinedDelegate // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 0 or less.}}
+            {
+                private MyCallback _cb;  // +1 MyCallback (user-defined delegate)
+                private FileStream _fs;  // +1 FileStream
+            }
+            """).Verify();
+
+    [TestMethod]
+    public void AvoidExcessiveClassCoupling_Extension_Methods() =>
+        withThreshold0.AddSnippet("""
+            using System.IO;
+            public static class StreamExtensions // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 2 to the maximum authorized 0 or less.}}
+            {
+                public static void Foo(this Stream s, FileStream fs) { } // +1 Stream (this-param), +1 FileStream (param)
+            }
+            """).Verify();
+
+    [TestMethod]
+    public void AvoidExcessiveClassCoupling_Extension_Method_Container_Not_Counted_On_Invocation() =>
+        withThreshold1.AddSnippet("""
+            using System.IO;
+            public static class StreamExtensions // Compliant: 1 dep (Stream, from this-param)
+            {
+                public static void Foo(this Stream s) { }
+            }
+            public class InvokesExtensionMethod // Compliant: 1 dep (Stream, from param) — StreamExtensions not counted, otherwise 2
+            {
+                void M(Stream s) { s.Foo(); }
+            }
+            """).VerifyNoIssues();
+
+    [TestMethod]
     public void AvoidExcessiveClassCoupling_Latest() =>
         withThreshold1.AddPaths("AvoidExcessiveClassCoupling.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)

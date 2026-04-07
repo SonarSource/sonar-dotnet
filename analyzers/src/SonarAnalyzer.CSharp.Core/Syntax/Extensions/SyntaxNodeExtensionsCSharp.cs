@@ -189,6 +189,7 @@ public static class SyntaxNodeExtensionsCSharp
             StackAllocArrayCreationExpressionSyntax x => x.Type,
             TypeOfExpressionSyntax x => x.Type,
             // Type-referencing constructs
+            AttributeSyntax x => x.Name,
             BaseTypeSyntax x => x.Type,
             TypeConstraintSyntax x => x.Type,
             UsingDirectiveSyntax x => x.NamespaceOrType,

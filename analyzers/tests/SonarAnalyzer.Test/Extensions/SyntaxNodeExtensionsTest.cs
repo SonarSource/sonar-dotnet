@@ -1263,6 +1263,7 @@ End Class";
     [DataRow("""void M() { _ = int.TryParse("1", out $$int result$$); }""", "int")]                   // DeclarationExpression
     [DataRow("""unsafe void M() { delegate*<$$Object$$, void> _ = null; }""", "Object")]              // FunctionPointerParameter
     [DataRow("""void M(ref Object p) { $$scoped ref Object$$ x = ref p; }""", "ref Object")]          // ScopedType
+    [DataRow("""[$$Obsolete("msg")$$] void M2() { }""", "Obsolete")]                                    // AttributeSyntax
     [DataRow("""$$Object$$ field;""", "Object")]                                                      // TypeSyntax itself — identity
     [DataRow("""$$Test() { }$$""", null)]                                                             // ConstructorDeclarationSyntax — no type
     [DataRow("""$$~Test() { }$$""", null)]                                                            // DestructorDeclarationSyntax — no type
