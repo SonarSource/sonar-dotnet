@@ -200,24 +200,21 @@ Public Class CustomAttribute
 
 End Class
 
-Namespace Repro_2559    'https://sonarsource.atlassian.net/browse/NET-2559
+' https://sonarsource.atlassian.net/browse/NET-2559
+Public Module Repro_2559
 
-    Public Module Repro
+    Public Function FunctionNameAndAlsoTypeName() As UInteger
+        Dim G As New Generic(Of FunctionNameAndAlsoTypeName)    ' Compliant
+        GenericMethod(Of FunctionNameAndAlsoTypeName)()         ' Compliant
+    End Function
 
-        Public Function FunctionNameAndAlsoTypeName() As Integer
-            Dim G As New Generic(Of FunctionNameAndAlsoTypeName)    ' Noncompliant FP
-            GenericMethod(Of FunctionNameAndAlsoTypeName)()         ' Noncompliant FP
-        End Function
+    Public Sub GenericMethod(Of T)()
+    End Sub
 
-        Public Sub GenericMethod(Of T)()
-        End Sub
+End Module
 
-    End Module
+Public Class FunctionNameAndAlsoTypeName
+End Class
 
-    Public Class FunctionNameAndAlsoTypeName
-    End Class
-
-    Public Class Generic(Of T)
-    End Class
-
-End Namespace
+Public Class Generic(Of T)
+End Class

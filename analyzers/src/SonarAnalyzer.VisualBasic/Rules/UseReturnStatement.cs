@@ -72,6 +72,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                     NameOfExpressionSyntax => true,
                     AsClauseSyntax => true,
                     ObjectCreationExpressionSyntax => true,
+                    TypeArgumentListSyntax => true,
                     UnaryExpressionSyntax unary => unary.IsKind(SyntaxKind.AddressOfExpression),
                     NameColonEqualsSyntax nameColon => nameColon.Name == node,
                     _ => false,
