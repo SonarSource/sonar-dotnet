@@ -37,6 +37,8 @@ public class SyntaxNodeExtensionsTest
 {
     private const string DefaultFileName = "Test.cs";
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void GetPreviousStatementsCurrentBlockOfNotAStatement()
     {
@@ -79,6 +81,48 @@ public class SyntaxNodeExtensionsTest
         var aToken = GetFirstTokenOfKind(tree, SyntaxKind.NumericLiteralToken);
         var parent = SyntaxTokenExtensions.GetBindableParent(aToken);
         ExtensionsShared.GetPreviousStatementsCurrentBlock(parent).Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void ContainsGetOrSetOnDependencyProperty_SymbolIsNull_ReturnsFalse()
+    {
+        const string code = """
+            class Repro
+            {
+                public object Field
+                {
+                    get => GetValue(42); // CS0103: GetValue does not exist in this context, Symbol is null
+                    set { }
+                }
+            }
+            """;
+        var (tree, model) = TestCompiler.CompileIgnoreErrorsCS(code);
+        var accessor = tree.GetRoot(TestContext.CancellationToken).DescendantNodes().OfType<AccessorDeclarationSyntax>().First(x => x.IsKind(SyntaxKind.GetAccessorDeclaration));
+        ExtensionsShared.ContainsGetOrSetOnDependencyProperty(accessor, model.Compilation).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void ContainsGetOrSetOnDependencyProperty_NotOnDependencyObject_ReturnsFalse()
+    {
+        // GetValue is a local delegate variable: Symbol resolves to the delegate's Invoke method,
+        // ContainingType is the delegate type (non-null), but does not derive from DependencyObject.
+        const string code = """
+            class Repro
+            {
+                public object Field
+                {
+                    get
+                    {
+                        var GetValue = () => new object();
+                        return GetValue();
+                    }
+                    set { }
+                }
+            }
+            """;
+        var (tree, model) = TestCompiler.CompileCS(code);
+        var accessor = tree.GetRoot(TestContext.CancellationToken).DescendantNodes().OfType<AccessorDeclarationSyntax>().First(x => x.IsKind(SyntaxKind.GetAccessorDeclaration));
+        ExtensionsShared.ContainsGetOrSetOnDependencyProperty(accessor, model.Compilation).Should().BeFalse();
     }
 
     [TestMethod]

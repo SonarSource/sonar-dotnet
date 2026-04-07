@@ -30,7 +30,7 @@ public static class SyntaxNodeExtensionsShared
             .DescendantNodes()
             .OfType<InvocationExpressionSyntax>()
             .Where(x => x.Expression.NameIs("GetValue") || x.Expression.NameIs("SetValue"))
-            .Any(x => model.GetSymbolInfo(x).Symbol.ContainingType.DerivesFrom(KnownType.System_Windows_DependencyObject));
+            .Any(x => model.GetSymbolInfo(x).Symbol?.ContainingType?.DerivesFrom(KnownType.System_Windows_DependencyObject) is true);
     }
 
     public static IEnumerable<StatementSyntax> GetPreviousStatementsCurrentBlock(this SyntaxNode expression)
