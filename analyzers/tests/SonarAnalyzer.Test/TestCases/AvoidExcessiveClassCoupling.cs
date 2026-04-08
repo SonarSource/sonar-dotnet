@@ -187,6 +187,18 @@ namespace Tests.Diagnostics
         }
     }
 
+    public class GenericMethodTypeArgNotCounted // Compliant: unlike EqualityComparer<T>.Default above, generic method type args are not counted (see PR #1847)
+    {
+        void M()
+        {
+            Method<IDisposable>();                           // IDisposable not counted
+            this.Method<ICloneable>();                       // ICloneable not counted
+            var list = new List<int>();
+            list.ConvertAll<IComparable>(x => null);         // IComparable not counted
+        }
+        void Method<T>() { }
+    }
+
     public class NestedTypeAsGenericArgUsage // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 3 to the maximum authorized 1 or less.}}
     {
         private List<OuterForGenericArg.Inner> field; // +1 List<T>, +1 Inner, +1 OuterForGenericArg (ContainingType of Inner)
@@ -218,4 +230,5 @@ namespace Tests.Diagnostics
             FileStream field2 = null; // +1 FileStream
         }
     }
+
 }
