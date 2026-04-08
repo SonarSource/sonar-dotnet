@@ -187,14 +187,15 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class GenericMethodTypeArgNotCounted // Compliant: unlike EqualityComparer<T>.Default above, generic method type args are not counted (see PR #1847)
+    public class GenericMethodTypeArgCounted // Noncompliant {{Split this class into smaller and more specialized ones to reduce its dependencies on other types from 6 to the maximum authorized 1 or less.}}
     {
         void M()
         {
-            Method<IDisposable>();                           // IDisposable not counted
-            this.Method<ICloneable>();                       // ICloneable not counted
-            var list = new List<int>();
-            list.ConvertAll<IComparable>(x => null);         // IComparable not counted
+            Method<IDisposable>();                           // +1 IDisposable
+            this.Method<ICloneable>();                       // +1 ICloneable
+            var list = new List<int>();                      // +1 List<T>
+            list.ConvertAll<IComparable>(x => null);         // +1 IComparable
+            Method<Dictionary<int, IFormattable>>();         // +1 Dictionary<TKey,TValue>, +1 IFormattable via ExpandGenericTypes (int not counted)
         }
         void Method<T>() { }
     }

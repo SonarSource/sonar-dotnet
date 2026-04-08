@@ -205,6 +205,19 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 if (!node.IsNameof(model))
                 {
+                    // GenericNameSyntax is a TypeSyntax, so Visit skips it. We must handle type arguments explicitly.
+                    if (node.Expression switch
+                    {
+                        GenericNameSyntax x => x,
+                        MemberAccessExpressionSyntax { Name: GenericNameSyntax x } => x,
+                        _ => null,
+                    } is { TypeArgumentList.Arguments: { } typeArgs })
+                    {
+                        foreach (var typeArg in typeArgs)
+                        {
+                            AddDependentType(typeArg);
+                        }
+                    }
                     base.VisitInvocationExpression(node);
                 }
             }
