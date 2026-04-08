@@ -24,7 +24,7 @@ public readonly struct SyntaxTreeOptionsProviderWrapper
     private static readonly TryGetValueAccessor<object, SyntaxTree, string, CancellationToken, ReportDiagnostic> TryGetDiagnosticValueAccessor;
     private static readonly TryGetValueAccessor<object, string, CancellationToken, ReportDiagnostic> TryGetGlobalDiagnosticValueAccessor;
 
-    private readonly object node;
+    public object Instance { get; }
 
     static SyntaxTreeOptionsProviderWrapper()
     {
@@ -34,29 +34,29 @@ public readonly struct SyntaxTreeOptionsProviderWrapper
         TryGetGlobalDiagnosticValueAccessor = LightupHelpers.CreateTryGetValueAccessor<object, string, CancellationToken, ReportDiagnostic>(WrappedType, typeof(string), typeof(CancellationToken), nameof(TryGetGlobalDiagnosticValue));
     }
 
-    private SyntaxTreeOptionsProviderWrapper(object node) =>
-        this.node = node;
+    private SyntaxTreeOptionsProviderWrapper(object instance) =>
+        Instance = instance;
 
-    public static SyntaxTreeOptionsProviderWrapper FromObject(object node)
+    public static SyntaxTreeOptionsProviderWrapper FromObject(object instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new SyntaxTreeOptionsProviderWrapper(node);
+            return new SyntaxTreeOptionsProviderWrapper(instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 
     public static bool IsInstance(object obj) =>
         obj is not null && LightupHelpers.CanWrapObject(obj, WrappedType);
 
-    public bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity)
+    public bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken cancel, out ReportDiagnostic severity)
     {
         if (WrappedType is null)
         {
@@ -65,11 +65,11 @@ public readonly struct SyntaxTreeOptionsProviderWrapper
         }
         else
         {
-            return TryGetDiagnosticValueAccessor(node, tree, diagnosticId, cancellationToken, out severity);
+            return TryGetDiagnosticValueAccessor(Instance, tree, diagnosticId, cancel, out severity);
         }
     }
 
-    public bool TryGetGlobalDiagnosticValue(string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity)
+    public bool TryGetGlobalDiagnosticValue(string diagnosticId, CancellationToken cancel, out ReportDiagnostic severity)
     {
         if (WrappedType is null)
         {
@@ -78,7 +78,7 @@ public readonly struct SyntaxTreeOptionsProviderWrapper
         }
         else
         {
-            return TryGetGlobalDiagnosticValueAccessor(node, diagnosticId, cancellationToken, out severity);
+            return TryGetGlobalDiagnosticValueAccessor(Instance, diagnosticId, cancel, out severity);
         }
     }
 }

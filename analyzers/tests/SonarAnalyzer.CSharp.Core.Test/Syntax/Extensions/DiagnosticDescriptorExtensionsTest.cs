@@ -42,4 +42,16 @@ public class DiagnosticDescriptorExtensionsTest
         var descriptor = new DiagnosticDescriptor(ruleId, "title", "message", "category", DiagnosticSeverity.Warning, true);
         descriptor.IsSecurityHotspot().Should().BeFalse();
     }
+
+    // Repro: https://sonarsource.atlassian.net/browse/NET-3543
+    [TestMethod]
+    public void IsEnabled_NullSyntaxTreeOptionsProvider_DoesNotThrow()
+    {
+        var tree = CSharpSyntaxTree.ParseText("class C { void M() {} }", cancellationToken: default);
+        var compilation = CSharpCompilation.Create("test", [tree], options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+        compilation.Options.SyntaxTreeOptionsProvider.Should().BeNull("this is the precondition that triggers the bug");
+        var context = AnalysisScaffolding.CreateNodeReportingContext(tree.GetRoot(default), compilation.GetSemanticModel(tree), _ => { });
+
+        AnalysisScaffolding.CreateDescriptorMain().IsEnabled(context).Should().BeTrue();
+    }
 }
