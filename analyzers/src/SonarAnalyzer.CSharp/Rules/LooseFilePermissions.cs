@@ -42,7 +42,7 @@ public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind, 
         else if (invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, model).FirstOrDefault() is { } accessRuleSymbol
             && accessRuleSymbol is not IMethodSymbol)
         {
-            return VulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
+            return VulnerableFileSystemAccessRule(accessRuleSymbol.LocationNodes(invocation));
         }
         else
         {

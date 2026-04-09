@@ -19,19 +19,18 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 // Don't change the this parameter to (this IAnalysisContext context) because it would cause boxing
 public static class ICompilationReportExtensions
 {
-    public static void ReportIssue<TContext>(this TContext context, DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) where TContext : ICompilationReport =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationSyntax, messageArgs);
+    extension<TContext>(TContext context) where TContext : ICompilationReport
+    {
+        public void ReportIssue(DiagnosticDescriptor rule, SyntaxNode locationSyntax, params string[] messageArgs) =>
+            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationSyntax, messageArgs);
 
-    public static void ReportIssue<TContext>(this TContext context, DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) where TContext : ICompilationReport =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationToken, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule, SyntaxToken locationToken, params string[] messageArgs) =>
+            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, locationToken, messageArgs);
 
-    public static void ReportIssue<TContext>(this TContext context, DiagnosticDescriptor rule, Location location, params string[] messageArgs) where TContext : ICompilationReport =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, location, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule, Location location, params string[] messageArgs) =>
+            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, location, messageArgs);
 
-    public static void ReportIssue<TContext>(this TContext context,
-                                             DiagnosticDescriptor rule,
-                                             Location primaryLocation,
-                                             IEnumerable<SecondaryLocation> secondaryLocations,
-                                             params string[] messageArgs) where TContext : ICompilationReport =>
-        context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, primaryLocation, secondaryLocations, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule, Location primaryLocation, IEnumerable<SecondaryLocation> secondaryLocations, params string[] messageArgs) =>
+            context.ReportIssue(CSharpGeneratedCodeRecognizer.Instance, rule, primaryLocation, secondaryLocations, messageArgs);
+    }
 }

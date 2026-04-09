@@ -26,8 +26,25 @@ public static class ISymbolExtensions
         SyntaxKindEx.RecordStructDeclaration
     };
 
-    public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
-        symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
+    extension(ISymbol symbol)
+    {
+        public SyntaxToken? FirstDeclaringReferenceIdentifier =>
+            symbol.DeclaringReferenceIdentifiers.FirstOrDefault();
+
+        public ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers =>
+            symbol.DeclaringSyntaxReferences
+               .Select(x => x.GetSyntax().GetIdentifier())
+               .WhereNotNull()
+               .ToImmutableArray();
+
+        public bool IsPrimaryConstructor =>
+            symbol.IsConstructor()
+            && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax
+            && DeclarationsTypesWithPrimaryConstructor.Contains(syntax.Kind());
+
+        public IEnumerable<SyntaxNode> LocationNodes(SyntaxNode node) =>
+            symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
+    }
 
     private static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode invocation)
     {
@@ -48,18 +65,4 @@ public static class ISymbolExtensions
 
         return root.DescendantNodes();
     }
-
-    public static SyntaxToken? FirstDeclaringReferenceIdentifier(this ISymbol symbol) =>
-        symbol.DeclaringReferenceIdentifiers().FirstOrDefault();
-
-    public static ImmutableArray<SyntaxToken> DeclaringReferenceIdentifiers(this ISymbol symbol) =>
-        symbol.DeclaringSyntaxReferences
-           .Select(x => x.GetSyntax().GetIdentifier())
-           .WhereNotNull()
-           .ToImmutableArray();
-
-    public static bool IsPrimaryConstructor(this ISymbol symbol) =>
-        symbol.IsConstructor()
-        && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax
-        && DeclarationsTypesWithPrimaryConstructor.Contains(syntax.Kind());
 }

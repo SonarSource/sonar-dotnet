@@ -66,7 +66,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             if (outerMembersOfSameName.Any(x => x is INamedTypeSymbol { TypeKind: TypeKind.Class or TypeKind.Struct or TypeKind.Delegate or TypeKind.Enum or TypeKind.Interface }))
             {
-                foreach (var identifier in namedType.DeclaringReferenceIdentifiers())
+                foreach (var identifier in namedType.DeclaringReferenceIdentifiers)
                 {
                     context.ReportIssue(Rule, identifier, namedType.GetClassification());
                 }
@@ -76,8 +76,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckMember(SonarSymbolReportingContext context, IReadOnlyList<ISymbol> outerMembersOfSameName, ISymbol member)
         {
             if (outerMembersOfSameName.Any(x => (x.IsStatic && !x.IsAbstract && !x.IsVirtual) || x is IFieldSymbol { IsConst: true })
-                && member.FirstDeclaringReferenceIdentifier() is { } identifier
-                && identifier.GetLocation() is { Kind: LocationKind.SourceFile } location)
+                && member.FirstDeclaringReferenceIdentifier?.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
                 context.ReportIssue(Rule, location, member.GetClassification());
             }

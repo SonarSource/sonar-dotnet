@@ -28,7 +28,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             context.RegisterNodeAction(c =>
                 {
-                    if (c.IsTopLevelMain())
+                    if (c.IsTopLevelMain)
                     {
                         CheckComplexity<CompilationUnitSyntax>(
                             c,

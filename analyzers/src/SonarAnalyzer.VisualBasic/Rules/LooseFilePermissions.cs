@@ -44,7 +44,7 @@ public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind, 
         var accessRuleSymbol = invocation.GetArgumentSymbolsOfKnownType(KnownType.System_Security_AccessControl_FileSystemAccessRule, model).FirstOrDefault();
         return accessRuleSymbol is null or IMethodSymbol
             ? null
-            : VulnerableFileSystemAccessRule(accessRuleSymbol.GetLocationNodes(invocation));
+            : VulnerableFileSystemAccessRule(accessRuleSymbol.LocationNodes(invocation));
 
         ObjectCreationExpressionSyntax VulnerableFileSystemAccessRule(IEnumerable<SyntaxNode> nodes) =>
             nodes.OfType<ObjectCreationExpressionSyntax>()

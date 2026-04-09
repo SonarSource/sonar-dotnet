@@ -18,8 +18,11 @@ namespace SonarAnalyzer.VisualBasic.Core.Extensions;
 
 public static class ISymbolExtensions
 {
-    public static IEnumerable<SyntaxNode> GetLocationNodes(this ISymbol symbol, SyntaxNode node) =>
-        symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
+    extension(ISymbol symbol)
+    {
+        public IEnumerable<SyntaxNode> LocationNodes(SyntaxNode node) =>
+            symbol.Locations.SelectMany(location => GetDescendantNodes(location, node));
+    }
 
     public static IEnumerable<SyntaxNode> GetDescendantNodes(Location location, SyntaxNode node) =>
         location.SourceTree?.GetRoot() is { } locationRootNode

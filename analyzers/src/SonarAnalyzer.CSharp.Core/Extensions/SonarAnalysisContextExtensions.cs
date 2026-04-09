@@ -18,15 +18,18 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class SonarAnalysisContextExtensions
 {
-    public static void RegisterNodeAction(this SonarAnalysisContext context, Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
-        context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    extension(SonarAnalysisContext context)
+    {
+        public void RegisterNodeAction(Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-    public static void RegisterTreeAction(this SonarAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
-        context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
+        public void RegisterTreeAction(Action<SonarSyntaxTreeReportingContext> action) =>
+            context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-    public static void RegisterSemanticModelAction(this SonarAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
-        context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
+        public void RegisterSemanticModelAction(Action<SonarSemanticModelReportingContext> action) =>
+            context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-    public static void RegisterCodeBlockStartAction(this SonarAnalysisContext context, Action<SonarCodeBlockStartAnalysisContext<SyntaxKind>> action) =>
-        context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
+        public void RegisterCodeBlockStartAction(Action<SonarCodeBlockStartAnalysisContext<SyntaxKind>> action) =>
+            context.RegisterCodeBlockStartAction(CSharpGeneratedCodeRecognizer.Instance, action);
+    }
 }

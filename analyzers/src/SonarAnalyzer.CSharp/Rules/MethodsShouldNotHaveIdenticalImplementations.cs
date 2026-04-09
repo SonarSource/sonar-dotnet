@@ -49,5 +49,5 @@ public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShould
 
     protected override bool IsExcludedFromBeingExamined(SonarSyntaxNodeReportingContext context) =>
         base.IsExcludedFromBeingExamined(context)
-        && !context.IsTopLevelMain();
+        && !context.IsTopLevelMain;
 }

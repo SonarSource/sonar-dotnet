@@ -18,6 +18,9 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class SonarCompilationStartAnalysisContextExtensions
 {
-    public static void RegisterNodeAction(this SonarCompilationStartAnalysisContext context, Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
-        context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    extension(SonarCompilationStartAnalysisContext context)
+    {
+        public void RegisterNodeAction(Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    }
 }

@@ -154,7 +154,7 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
                     builder.Add(UnspeakableIndexerName, MemberType.Action);
                     break;
                 // Primary constructor parameters may or may not generate fields, and must be considered
-                case IMethodSymbol method when method.IsPrimaryConstructor():
+                case IMethodSymbol { IsPrimaryConstructor: true } method:
                     builder.AddRange(method.Parameters.Where(IsService).Select(x => new KeyValuePair<string, MemberType>(x.Name, MemberType.Service)));
                     break;
                 // Backing fields are excluded for auto-properties, since they are considered part of the property

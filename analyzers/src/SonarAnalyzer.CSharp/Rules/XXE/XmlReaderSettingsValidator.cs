@@ -102,7 +102,7 @@ namespace SonarAnalyzer.CSharp.Rules.XXE
             // First we search for object creations at the syntax level to see if the object is created inline
             // and if not we look for the identifier declaration.
             invocation.DescendantNodes()
-                      .Union(symbol.GetLocationNodes(invocation))
+                      .Union(symbol.LocationNodes(invocation))
                       .Where(x => x?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression)
                       .Select(ObjectCreationFactory.Create)
                       .FirstOrDefault(objectCreation => IsXmlReaderSettingsCreationWithInitializer(objectCreation, semanticModel));

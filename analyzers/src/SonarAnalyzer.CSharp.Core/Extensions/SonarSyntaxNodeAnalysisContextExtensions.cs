@@ -18,11 +18,14 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class SonarSyntaxNodeAnalysisContextExtensions
 {
-    public static bool IsTopLevelMain(this SonarSyntaxNodeReportingContext context) =>
-        context.Node is CompilationUnitSyntax compilationUnitSyntax
-        && compilationUnitSyntax.IsTopLevelMain()
-        && context.ContainingSymbol.IsGlobalNamespace(); // Needed to avoid the duplicate calls from Roslyn 4.0.0
+    extension(SonarSyntaxNodeReportingContext context)
+    {
+        public bool IsTopLevelMain =>
+            context.Node is CompilationUnitSyntax compilationUnitSyntax
+            && compilationUnitSyntax.IsTopLevelMain()
+            && context.ContainingSymbol.IsGlobalNamespace(); // Needed to avoid the duplicate calls from Roslyn 4.0.0
 
-    public static bool IsInExpressionTree(this SonarSyntaxNodeReportingContext context) =>
-        context.Node.IsInExpressionTree(context.Model);
+        public bool IsInExpressionTree() =>
+            context.Node.IsInExpressionTree(context.Model);
+    }
 }

@@ -18,12 +18,15 @@ namespace SonarAnalyzer.VisualBasic.Core.Extensions;
 
 public static class SonarParametrizedAnalysisContextExtensions
 {
-    public static void RegisterNodeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
-        context.RegisterNodeAction(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    extension(SonarParametrizedAnalysisContext context)
+    {
+        public void RegisterNodeAction(Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
+            context.RegisterNodeAction(VisualBasicGeneratedCodeRecognizer.Instance, action, syntaxKinds);
 
-    public static void RegisterTreeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
-        context.RegisterTreeAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
+        public void RegisterTreeAction(Action<SonarSyntaxTreeReportingContext> action) =>
+            context.RegisterTreeAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
 
-    public static void RegisterSemanticModelAction(this SonarParametrizedAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
-        context.RegisterSemanticModelAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
+        public void RegisterSemanticModelAction(Action<SonarSemanticModelReportingContext> action) =>
+            context.RegisterSemanticModelAction(VisualBasicGeneratedCodeRecognizer.Instance, action);
+    }
 }

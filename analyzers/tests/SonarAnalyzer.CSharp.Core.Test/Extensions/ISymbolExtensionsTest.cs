@@ -71,6 +71,6 @@ public class ISymbolExtensionsTest
         var typeSymbol = new SnippetCompiler(code).DeclaredSymbol<INamedTypeSymbol>("SymbolMember");
         var methodSymbols = typeSymbol.GetMembers().OfType<IMethodSymbol>();
 
-        methodSymbols.Count(ISymbolExtensionsCS.IsPrimaryConstructor).Should().Be(hasPrimaryConstructor ? 1 : 0);
+        methodSymbols.Count(x => x.IsPrimaryConstructor).Should().Be(hasPrimaryConstructor ? 1 : 0);
     }
 }

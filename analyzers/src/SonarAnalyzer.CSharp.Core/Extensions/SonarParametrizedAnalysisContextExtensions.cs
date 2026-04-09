@@ -18,12 +18,15 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class SonarParametrizedAnalysisContextExtensions
 {
-    public static void RegisterTreeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxTreeReportingContext> action) =>
-        context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
+    extension(SonarParametrizedAnalysisContext context)
+    {
+        public void RegisterTreeAction(Action<SonarSyntaxTreeReportingContext> action) =>
+            context.RegisterTreeAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-    public static void RegisterSemanticModelAction(this SonarParametrizedAnalysisContext context, Action<SonarSemanticModelReportingContext> action) =>
-        context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
+        public void RegisterSemanticModelAction(Action<SonarSemanticModelReportingContext> action) =>
+            context.RegisterSemanticModelAction(CSharpGeneratedCodeRecognizer.Instance, action);
 
-    public static void RegisterNodeAction(this SonarParametrizedAnalysisContext context, Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
-        context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+        public void RegisterNodeAction(Action<SonarSyntaxNodeReportingContext> action, params SyntaxKind[] syntaxKinds) =>
+            context.RegisterNodeAction(CSharpGeneratedCodeRecognizer.Instance, action, syntaxKinds);
+    }
 }

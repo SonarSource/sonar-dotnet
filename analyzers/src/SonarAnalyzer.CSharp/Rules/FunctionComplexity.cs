@@ -37,7 +37,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             context.RegisterNodeAction(c =>
                 {
-                    if (c.IsTopLevelMain())
+                    if (c.IsTopLevelMain)
                     {
                         CheckComplexity<CompilationUnitSyntax>(c, m => Location.Create(c.Node.SyntaxTree, TextSpan.FromBounds(0, 0)), "top-level file", true);
                     }

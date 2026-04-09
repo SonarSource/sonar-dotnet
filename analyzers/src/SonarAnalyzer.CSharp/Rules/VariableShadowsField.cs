@@ -79,7 +79,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static List<ISymbol> GetContextSymbols(SonarSyntaxNodeReportingContext context)
         {
             var members = context.ContainingSymbol.ContainingType.GetMembers();
-            var primaryConstructorParameters = members.FirstOrDefault(x => x.IsPrimaryConstructor())?.GetParameters();
+            var primaryConstructorParameters = members.OfType<IMethodSymbol>().FirstOrDefault(x => x.IsPrimaryConstructor)?.Parameters;
             var fieldsAndProperties = members.Where(x => x is IPropertySymbol or IFieldSymbol).ToList();
             return primaryConstructorParameters is null ? fieldsAndProperties : fieldsAndProperties.Concat(primaryConstructorParameters).ToList();
         }
