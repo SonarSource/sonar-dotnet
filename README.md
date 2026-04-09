@@ -60,12 +60,11 @@ You can also monitor the activity on this repository (opened issues, opened PRs)
 
 If you want to fix [an issue](https://github.com/SonarSource/sonar-dotnet/issues),
 please read the [Get started](#get-started) pages first and make sure that you follow [our coding style](./docs/coding-style.md).
+We suggest avoiding the implementation of new rules, as a specification process is required first.
 
 Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#running-unit-tests) are passing (all checks must be green).
 
-* We suggest you do not pick issues with the `Area: CFG` label _(they are difficult, can have many side effects and are less likely to be accepted)_.
-* We suggest you do not implement new rules unless they are already specified for C# and/or VB.NET on
-our [rules repository](https://jira.sonarsource.com/projects/RSPEC).
+If you did not sign the Contributor License Agreement in the past, please let us know in the PR your user handle from our [Community Forum](https://community.sonarsource.com/). We will arrange the signing via private message.
 
 Note: Our CI does not get automatically triggered on the PRs from external contributors.
 A member of our team will review the code and trigger the CI on demand by adding a comment on the PR (see [Azure Pipelines Comment triggers docs](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/github?view=azure-devops&tabs=yaml#comment-triggers)):
@@ -86,11 +85,7 @@ your Roslyn analyzer in a SonarQube plugin, if you want to manage your rules fro
 
 ### SonarQube for IDE
 
-The easiest way is to configure a Quality Profile in SonarQube.
-
-Open the rule in SonarQube, scroll down, and (in case the rule has parameters), you can configure the parameters for each Quality Profile the rule is part of.
-
-Use SonarQube for IDE Connected Mode to connect to SonarQube server or cloud.
+The easiest way is to configure a Quality Profile in SonarQube. Use SonarQube for IDE Connected Mode to connect to SonarQube Server or Cloud.
 
 ### Standalone NuGet
 
@@ -129,15 +124,6 @@ Then, update the projects to include this additional file:
   <AdditionalFiles Include="SonarLint.xml" />
 </ItemGroup>
 ```
-
-## Internal resources
-
-### Build configuration
-
-* [VM Images repository](https://github.com/SonarSource/dotnet-ci-images)
-* [Provisioning repository](https://github.com/SonarSource/dotnet-infra/blob/main/cdk.context.json)
-* [Azure Pipelines](https://dev.azure.com/sonarsource/Sonar%20.NET%20Enterprise/_build?definitionId=152&_a=summary)
-* [Peachee configuration](https://github.com/SonarSource/peachee-dotnet/tree/dotnet)
 
 ## Security Issues
 
