@@ -57,7 +57,8 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             SyntaxKind.InterfaceDeclaration,
             SyntaxKind.RecordDeclaration,
             SyntaxKind.RecordStructDeclaration,
-            SyntaxKind.StructDeclaration);
+            SyntaxKind.StructDeclaration,
+            SyntaxKind.ExtensionBlockDeclaration);
 
     private void ValidateMembers(SonarSyntaxNodeReportingContext context)
     {

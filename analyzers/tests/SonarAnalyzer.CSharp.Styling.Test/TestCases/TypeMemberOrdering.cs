@@ -229,3 +229,22 @@ public class AbstractClassWrong
 
     public void Go() { }                // Noncompliant [AbstractClass]
 }
+
+public static class ExtensionBlockCompliant
+{
+    extension(string s)
+    {
+        public int Property => 0;
+
+        public void Method() { }
+    }
+}
+
+public static class ExtensionBlockWrong
+{
+    extension(string s)
+    {
+        public void Method() { }       // Secondary    [ExtBlock]
+        public int Property => 0;      // Noncompliant [ExtBlock] {{Move Properties before Methods.}}
+    }
+}

@@ -187,3 +187,28 @@ public record struct S
     private int shouldBeLast;   // Secondary    [InStruct]
     public int shouldBeFirst;   // Noncompliant [InStruct] {{Move this public Field above the private ones.}}
 }
+
+public static class ExtensionBlockCompliant
+{
+    extension(string s)
+    {
+        public int PublicProp => 0;
+        internal int InternalProp => 0;
+        private int PrivateProp => 0;
+
+        public void PublicMethod() { }
+        private void PrivateMethod() { }
+    }
+}
+
+public static class ExtensionBlockWrong
+{
+    extension(string s)
+    {
+        private int PrivateProp => 0;   // Secondary    [ExtProp]
+        public int PublicProp => 0;     // Noncompliant [ExtProp] {{Move this public Property above the private ones.}}
+
+        private void PrivateMethod() { }  // Secondary    [ExtMethod]
+        public void PublicMethod() { }    // Noncompliant [ExtMethod] {{Move this public Method above the private ones.}}
+    }
+}

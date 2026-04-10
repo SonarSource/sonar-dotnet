@@ -28,7 +28,8 @@ public sealed class MemberVisibilityOrdering : StylingAnalyzer
             SyntaxKind.ClassDeclaration,
             SyntaxKind.RecordDeclaration,
             SyntaxKind.RecordStructDeclaration,
-            SyntaxKind.StructDeclaration);
+            SyntaxKind.StructDeclaration,
+            SyntaxKind.ExtensionBlockDeclaration);
 
     private void ValidateMembers(SonarSyntaxNodeReportingContext context)
     {
