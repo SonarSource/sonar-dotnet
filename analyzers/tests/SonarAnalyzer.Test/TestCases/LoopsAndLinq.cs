@@ -707,4 +707,18 @@ namespace Tests.Diagnostics
             return lambda;
         }
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-3520
+    class ReproAD0001
+    {
+        void Method()
+        {
+            foreach (var name in new List<string>())
+            {
+                // "foo" is undeclared and the semantic model cannot resolve "name" as the loop variable
+                // and GetSymbolInfo(name).Symbol is null
+                _ = foo.name; // Error [CS0103]
+            }
+        }
+    }
 }

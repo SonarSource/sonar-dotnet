@@ -169,7 +169,8 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         {
             if (identifierSyntax.Parent is MemberAccessExpressionSyntax { Parent: not InvocationExpressionSyntax } memberAccessExpressionSyntax
                 && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
-                && c.Model.GetSymbolInfo(identifierSyntax).Symbol.Equals(declaredSymbol.Value)
+                && c.Model.GetSymbolInfo(identifierSyntax).Symbol is { } identifierSymbol
+                && identifierSymbol.Equals(declaredSymbol.Value)
                 && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol
                 && !symbol.GetSymbolType().IsRefStruct())
             {
