@@ -54,9 +54,9 @@
       },
       "SonarAnalyzer.CSharp.Styling": {
         "type": "Direct",
-        "requested": "[10.20.0.135146, )",
-        "resolved": "10.20.0.135146",
-        "contentHash": "OZ+tLa947kNu/HGaMLvBcPgLszED3SSjkj2T0PHQMu1b08jejCtpNtiQAKpy5vY1Tij3s6ExGLCUQ6plM0j4sA=="
+        "requested": "[10.21.0.135717, )",
+        "resolved": "10.21.0.135717",
+        "contentHash": "hl264jF539oB7m2jED5QGM345eFSiDAdoJc8TH0HM6L7ZeqT5TDqZDQeZ8IDP02dVIpH/Fhhn+HsGfEcj8ohyQ=="
       },
       "StyleCop.Analyzers": {
         "type": "Direct",
@@ -69,13 +69,13 @@
       },
       "System.Reflection.MetadataLoadContext": {
         "type": "Direct",
-        "requested": "[10.0.3, )",
-        "resolved": "10.0.3",
-        "contentHash": "rlWB/1Phq2mKv3Sbr33K41pyNpP7L7OGL8zEFrGoj32gLopbPmbCOxfcV2NCh5cCVXFVtdI4w3XK0W2b2jcrOA==",
+        "requested": "[10.0.5, )",
+        "resolved": "10.0.5",
+        "contentHash": "z9yyFZcuCwtZXrxxDc2nBfB5lTHf96gS/rsD38Lcv6Ok25TOYPjNKlqpTZUqu2HTLPAM4w+/WjGL6gi9cIJO6w==",
         "dependencies": {
-          "System.Collections.Immutable": "10.0.3",
+          "System.Collections.Immutable": "10.0.5",
           "System.Memory": "4.6.3",
-          "System.Reflection.Metadata": "10.0.3"
+          "System.Reflection.Metadata": "10.0.5"
         }
       },
       "Microsoft.CodeAnalysis.Analyzers": {
@@ -100,8 +100,8 @@
       },
       "System.Collections.Immutable": {
         "type": "Transitive",
-        "resolved": "10.0.3",
-        "contentHash": "gpKPycgDFS2oAPr0yaqwBmShE1ya4yMMkn3lxBPcXrsCI4KL10xSu0cSUzeajQ7LKjb3EsUAgjhBiPGrGU6vSQ==",
+        "resolved": "10.0.5",
+        "contentHash": "nozrOKfEgfrvvswkCfxaumY68RA/x1F3ZYwtwRvva8ul91NCnUzb6MKpl5/P7u9v/nIagVL4OXXj8d007tucxw==",
         "dependencies": {
           "System.Memory": "4.6.3",
           "System.Runtime.CompilerServices.Unsafe": "6.1.2"
@@ -124,10 +124,10 @@
       },
       "System.Reflection.Metadata": {
         "type": "Transitive",
-        "resolved": "10.0.3",
-        "contentHash": "xtgymSlbWSeg/7JEwDbyX0YWJlyBhKqZwRk0edFZ0axqZYWtGgcP09rwfzQgqYiFnpQekZ/ur9Dr9YFCKkJK0A==",
+        "resolved": "10.0.5",
+        "contentHash": "fEAXJCtauNLYr5ESg3t6HE2Av6urWdJdymxZbuSt/DDqhtNtLtUtXTEpKbp0vkTdyBJwmaha8d2454vSzS/lcQ==",
         "dependencies": {
-          "System.Collections.Immutable": "10.0.3"
+          "System.Collections.Immutable": "10.0.5"
         }
       },
       "System.Runtime.CompilerServices.Unsafe": {
