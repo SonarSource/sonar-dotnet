@@ -20,23 +20,25 @@ namespace SonarAnalyzer.CSharp.Core.Test.Wrappers;
 [TestClass]
 public class ObjectCreationFactoryTest
 {
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void ObjectCreationSyntax()
     {
-        const string code = @"
-                public class A
+        var snippet = new SnippetCompiler("""
+            public class A
+            {
+                public int X;
+                public A(int y) { }
+            }
+            public class B
+            {
+                void Foo()
                 {
-                    public int X;
-                    public A(int y) { }
+                    var bar = new A(1) { X = 2 };
                 }
-                public class B
-                {
-                    void Foo()
-                    {
-                        var bar = new A(1) { X = 2 };
-                    }
-                }";
-        var snippet = new SnippetCompiler(code);
+            }
+            """);
         var objectCreation = snippet.Tree.Single<ObjectCreationExpressionSyntax>();
         var wrapper = ObjectCreationFactory.Create(objectCreation);
         wrapper.Expression.Should().BeEquivalentTo(objectCreation);
@@ -51,22 +53,21 @@ public class ObjectCreationFactoryTest
     [TestMethod]
     public void ObjectCreationEmptyInitializerSyntax()
     {
-        const string code = @"
-                public class A
+        var snippet = new SnippetCompiler("""
+            public class A
+            {
+                public int X;
+                public A(int y) { }
+            }
+            public class B
+            {
+                void Foo()
                 {
-                    public int X;
-                    public A(int y) { }
+                    var bar = new A(1);
                 }
-                public class B
-                {
-                    void Foo()
-                    {
-                        var bar = new A(1);
-                    }
-                }";
-        var snippet = new SnippetCompiler(code);
-        var objectCreation = snippet.Tree.Single<ObjectCreationExpressionSyntax>();
-        var wrapper = ObjectCreationFactory.Create(objectCreation);
+            }
+            """);
+        var wrapper = ObjectCreationFactory.Create(snippet.Tree.Single<ObjectCreationExpressionSyntax>());
         wrapper.Initializer.Should().BeNull();
         wrapper.InitializerExpressions.Should().BeNull();
     }
@@ -74,24 +75,24 @@ public class ObjectCreationFactoryTest
     [TestMethod]
     public void ImplicitObjectCreationSyntax()
     {
-        const string code = @"
-                public class A
+        var snippet = new SnippetCompiler("""
+            public class A
+            {
+                public int X;
+                public A(int y) { }
+            }
+            public class B
+            {
+                void Foo()
                 {
-                    public int X;
-                    public A(int y) { }
+                    A bar =new(1) { X = 2 };
                 }
-                public class B
-                {
-                    void Foo()
-                    {
-                        A bar =new(1) { X = 2 };
-                    }
-                }";
-        var snippet = new SnippetCompiler(code);
-        var syntaxTree = snippet.Tree;
-        var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First(node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
+            }
+            """);
+        var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)snippet.Tree.GetRoot(TestContext.CancellationToken).DescendantNodes()
+            .First(x => x.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
         var wrapper = ObjectCreationFactory.Create(objectCreation);
-        wrapper.Expression.Should().BeEquivalentTo(objectCreation.SyntaxNode);
+        wrapper.Expression.Should().BeEquivalentTo(objectCreation.Node);
         wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
         wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
         wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);
@@ -103,22 +104,21 @@ public class ObjectCreationFactoryTest
     [TestMethod]
     public void ImplicitObjectCreationEmptyInitializerSyntax()
     {
-        const string code = @"
-                public class A
+        var snippet = new SnippetCompiler("""
+            public class A
+            {
+                public int X;
+                public A(int y) { }
+            }
+            public class B
+            {
+                void Foo()
                 {
-                    public int X;
-                    public A(int y) { }
+                    A bar = new (1);
                 }
-                public class B
-                {
-                    void Foo()
-                    {
-                        A bar = new (1);
-                    }
-                }";
-        var snippet = new SnippetCompiler(code);
-        var objectCreation = snippet.Tree.Single<ImplicitObjectCreationExpressionSyntax>();
-        var wrapper = ObjectCreationFactory.Create(objectCreation);
+            }
+            """);
+        var wrapper = ObjectCreationFactory.Create(snippet.Tree.Single<ImplicitObjectCreationExpressionSyntax>());
         wrapper.Initializer.Should().BeNull();
         wrapper.InitializerExpressions.Should().BeNull();
     }
@@ -126,34 +126,48 @@ public class ObjectCreationFactoryTest
     [TestMethod]
     public void GivenImplicitObjectCreationSyntaxWithMissingType_HasEmptyType()
     {
-        const string code = @"
-                public class B
+        var snippet = new SnippetCompiler("""
+            public class B
+            {
+                void Foo()
                 {
-                    void Foo()
-                    {
-                        var bar = new();
-                    }
-                }";
-        var snippet = new SnippetCompiler(code, true, AnalyzerLanguage.CSharp);
-        var syntaxTree = snippet.Tree;
-        var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodes().First(node => node.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
-        var wrapper = ObjectCreationFactory.Create(objectCreation);
-        wrapper.TypeAsString(snippet.Model).Should().BeEmpty();
+                    var bar = new();
+                }
+            }
+            """,
+            true,
+            AnalyzerLanguage.CSharp);
+        ObjectCreationFactory.Create((ImplicitObjectCreationExpressionSyntaxWrapper)snippet.Tree.GetRoot(TestContext.CancellationToken).DescendantNodes()
+            .First(x => x.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression)))
+            .TypeAsString(snippet.Model)
+            .Should().BeEmpty();
     }
 
     [TestMethod]
-    public void GivenNull_ThrowsException()
+    public void ImplicitObjectCreation_UserDefinedNullable_DoesNotCrash()
     {
-        Action action = () => { ObjectCreationFactory.Create(null); };
-        action.Should().Throw<ArgumentNullException>();
+        var snippet = new SnippetCompiler("""
+            public class Repro_3596_AD0001<T> // https://sonarsource.atlassian.net/browse/NET-3596
+            {
+                private readonly Nullable field;
+                public Repro_3596_AD0001() => field = new(this);
+
+                private class Nullable(Repro_3596_AD0001<T> outer) { }
+            }
+            """);
+        ObjectCreationFactory.Create((ImplicitObjectCreationExpressionSyntaxWrapper)snippet.Tree.GetRoot(TestContext.CancellationToken).DescendantNodes()
+            .First(x => x.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression)))
+            .TypeAsString(snippet.Model)
+            .Should().Be("Nullable");
     }
 
     [TestMethod]
-    public void GivenNonConstructor_ThrowsException()
-    {
-        var snippet = new SnippetCompiler("public class A{}");
-        var classDeclaration = snippet.Tree.Single<ClassDeclarationSyntax>();
-        Action action = () => { ObjectCreationFactory.Create(classDeclaration); };
-        action.Should().Throw<InvalidOperationException>().WithMessage("Unexpected type: ClassDeclarationSyntax");
-    }
+    public void GivenNull_ThrowsException() =>
+        FluentActions.Invoking(() => ObjectCreationFactory.Create(null)).Should().Throw<ArgumentNullException>();
+
+    [TestMethod]
+    public void GivenNonConstructor_ThrowsException() =>
+        FluentActions.Invoking(() => ObjectCreationFactory.Create(new SnippetCompiler("public class A{}").Tree.Single<ClassDeclarationSyntax>()))
+            .Should().Throw<InvalidOperationException>()
+            .WithMessage("Unexpected type: ClassDeclarationSyntax");
 }

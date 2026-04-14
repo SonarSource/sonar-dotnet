@@ -1019,3 +1019,11 @@ public class NET_2805Repro // https://sonarsource.atlassian.net/browse/NET-2805
         private int this[int pos] => (Value >> (pos << 2)) & 7;           // Compliant
     }
 }
+
+public class Repro_3596_AD0001<T> // https://sonarsource.atlassian.net/browse/NET-3596
+{
+    private readonly Nullable field;
+    public Repro_3596_AD0001() => field = new(this);
+
+    private class Nullable(Repro_3596_AD0001<T> outer) { }
+}

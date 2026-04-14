@@ -96,7 +96,7 @@ public class ObjectCreationFactory
         public string TypeAsString(SemanticModel semanticModel)
         {
             var typeSymbol = TypeSymbol(semanticModel);
-            return typeSymbol is INamedTypeSymbol namedTypeSymbol && namedTypeSymbol.IsGenericType && namedTypeSymbol.Name == "Nullable"
+            return typeSymbol is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T } namedTypeSymbol
                 ? namedTypeSymbol.TypeArguments[0].Name
                 : typeSymbol?.Name;
         }
