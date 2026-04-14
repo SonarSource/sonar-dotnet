@@ -63,7 +63,7 @@ public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiter
 
     private void ReportOnViolation(SonarSyntaxNodeReportingContext context, bool usingDapper)
     {
-        if (!IsNamedTypeOrTopLevelMain(context) || IsInnerInstance(context) || IsEFMigration(context))
+        if (!IsNamedTypeOrTopLevelMain(context) || IsInnerInstance(context))
         {
             return;
         }
@@ -85,10 +85,6 @@ public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiter
             context.ReportIssue(rule, firstToken, duplicates.Skip(1).ToSecondaryLocations(), ExtractStringContent(firstToken), duplicates.Count.ToString());
         }
     }
-
-    private static bool IsEFMigration(SonarSyntaxNodeReportingContext context) =>
-        context.Model.GetDeclaredSymbol(context.Node) is INamedTypeSymbol typeSymbol
-        && IsEFMigrationType(typeSymbol);
 
     private static bool IsInEFMigration(SyntaxNode node, SemanticModel model) =>
         model.GetEnclosingSymbol(node.SpanStart)?.ContainingType is { } typeSymbol
