@@ -78,18 +78,20 @@
     }
 }
 
-public class SomeClass  // https://sonarsource.atlassian.net/browse/NET-2658
+public class SomeClass
 {
     private int i;
 
+    // https://sonarsource.atlassian.net/browse/NET-2658
     public void CSharp11Compound((int, int) t)
     {
         for (int i = 0; i < 42; i++)
         {
-            i >>>= 1; // FN
+            i >>>= 1; // Noncompliant
         }
     }
 
+    // https://sonarsource.atlassian.net/browse/NET-3600
     public void NullConditionalAssignment(SomeClass arg)
     {
         for (arg?.i = 0; arg.i < 3; arg.i++)

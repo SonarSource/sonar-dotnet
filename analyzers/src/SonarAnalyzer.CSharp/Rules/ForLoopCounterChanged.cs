@@ -49,7 +49,8 @@ public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
                 SyntaxKind.ExclusiveOrAssignmentExpression,
                 SyntaxKind.OrAssignmentExpression,
                 SyntaxKind.LeftShiftAssignmentExpression,
-                SyntaxKind.RightShiftAssignmentExpression),
+                SyntaxKind.RightShiftAssignmentExpression,
+                SyntaxKindEx.UnsignedRightShiftAssignmentExpression),
             AffectedExpressions = x => ((AssignmentExpressionSyntax)x).AssignmentTargets()
         });
 
