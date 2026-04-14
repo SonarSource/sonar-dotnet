@@ -15,81 +15,92 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiteralExpressionSyntax> : ParametrizedDiagnosticAnalyzer
+    where TSyntaxKind : struct
+    where TLiteralExpressionSyntax : SyntaxNode
 {
-    public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiteralExpressionSyntax> : ParametrizedDiagnosticAnalyzer
-        where TSyntaxKind : struct
-        where TLiteralExpressionSyntax : SyntaxNode
+    private const string DiagnosticId = "S1192";
+    private const string MessageFormat = "Define a constant instead of using this literal '{0}' {1} times.";
+    private const int MinimumStringLength = 5;
+    private const int ThresholdDefaultValue = 3;
+
+    private readonly DiagnosticDescriptor rule;
+
+    protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+
+    protected abstract TSyntaxKind[] SyntaxKinds { get; }
+
+    protected abstract bool IsMatchingMethodParameterName(TLiteralExpressionSyntax literalExpression);
+    protected abstract bool IsInnerInstance(SonarSyntaxNodeReportingContext context);
+    protected abstract IEnumerable<TLiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node);
+    protected abstract SyntaxToken LiteralToken(TLiteralExpressionSyntax literal);
+
+    [RuleParameter("threshold", PropertyType.Integer, "Number of times a literal must be duplicated to trigger an issue.", ThresholdDefaultValue)]
+    public int Threshold { get; set; } = ThresholdDefaultValue;
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
+
+    protected StringLiteralShouldNotBeDuplicatedBase() =>
+        rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
+
+    protected override void Initialize(SonarParametrizedAnalysisContext context) =>
+        // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
+        // locations. The problem is that this scenario is not yet supported on SonarQube side.
+        // Hence the decision to do like other languages, at class-level
+        context.RegisterCompilationStartAction(c =>
+            {
+                var usingDapper = c.Compilation.GetTypeByMetadataName(KnownType.Dapper_DynamicParameters) is not null;
+                c.RegisterNodeAction(Language.GeneratedCodeRecognizer, nodeContext => ReportOnViolation(nodeContext, usingDapper), SyntaxKinds);
+            });
+
+    protected virtual bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeReportingContext context) =>
+        IsNamedType(context);
+
+    protected static bool IsNamedType(SonarSyntaxNodeReportingContext context) =>
+        context.ContainingSymbol.Kind == SymbolKind.NamedType;
+
+    private void ReportOnViolation(SonarSyntaxNodeReportingContext context, bool usingDapper)
     {
-        private const string DiagnosticId = "S1192";
-        private const string MessageFormat = "Define a constant instead of using this literal '{0}' {1} times.";
-        private const int MinimumStringLength = 5;
-        private const int ThresholdDefaultValue = 3;
-
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-
-        private readonly DiagnosticDescriptor rule;
-
-        protected abstract TSyntaxKind[] SyntaxKinds { get; }
-
-        protected abstract bool IsMatchingMethodParameterName(TLiteralExpressionSyntax literalExpression);
-        protected abstract bool IsInnerInstance(SonarSyntaxNodeReportingContext context);
-        protected abstract IEnumerable<TLiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node);
-        protected abstract SyntaxToken LiteralToken(TLiteralExpressionSyntax literal);
-
-        [RuleParameter("threshold", PropertyType.Integer, "Number of times a literal must be duplicated to trigger an issue.", ThresholdDefaultValue)]
-        public int Threshold { get; set; } = ThresholdDefaultValue;
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
-
-        protected StringLiteralShouldNotBeDuplicatedBase() =>
-            rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
-
-        protected override void Initialize(SonarParametrizedAnalysisContext context) =>
-            // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
-            // locations. The problem is that this scenario is not yet supported on SonarQube side.
-            // Hence the decision to do like other languages, at class-level
-            context.RegisterCompilationStartAction(c =>
-                {
-                    var usingDapper = c.Compilation.GetTypeByMetadataName(KnownType.Dapper_DynamicParameters) is not null;
-                    c.RegisterNodeAction(Language.GeneratedCodeRecognizer, nodeContext => ReportOnViolation(nodeContext, usingDapper), SyntaxKinds);
-                });
-
-        protected virtual bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeReportingContext context) =>
-            IsNamedType(context);
-
-        protected static bool IsNamedType(SonarSyntaxNodeReportingContext context) =>
-            context.ContainingSymbol.Kind == SymbolKind.NamedType;
-
-        private void ReportOnViolation(SonarSyntaxNodeReportingContext context, bool usingDapper)
+        if (!IsNamedTypeOrTopLevelMain(context) || IsInnerInstance(context) || IsEFMigration(context))
         {
-            if (!IsNamedTypeOrTopLevelMain(context) || IsInnerInstance(context))
-            {
-                // Don't report on inner instances
-                return;
-            }
-
-            var stringLiterals = FindLiteralExpressions(context.Node);
-            var duplicateValuesAndPositions = stringLiterals.Select(x => new { literal = x, literalToken = LiteralToken(x) })
-                .Where(x => x.literalToken.ValueText is { Length: >= MinimumStringLength }
-                            && !IsMatchingMethodParameterName(x.literal)
-                            && !(usingDapper && x.literalToken.ValueText.StartsWith("@")))
-                .GroupBy(x => x.literalToken.ValueText, x => x.literalToken)
-                .Where(x => x.Count() > Threshold);
-
-            // Report duplications
-            foreach (var item in duplicateValuesAndPositions)
-            {
-                var duplicates = item.ToList();
-                var firstToken = duplicates[0];
-                context.ReportIssue(rule, firstToken, duplicates.Skip(1).ToSecondaryLocations(), ExtractStringContent(firstToken), duplicates.Count.ToString());
-            }
+            return;
         }
 
-        private static string ExtractStringContent(SyntaxToken literalToken) =>
-             // Use literalToken.Text to get the text as written by the developer. The unescaped text (literalToken.ValueText)
-             // might contain control characters that may cause trouble when used as error message (e.g. a null-terminator).
-             // The literalToken.Text contains leading and trailing double quotes that we strip of.
-             literalToken.Text.StartsWith("@\"") ? literalToken.Text.Substring(2, literalToken.Text.Length - 3) : literalToken.Text.Substring(1, literalToken.Text.Length - 2);
+        var stringLiterals = FindLiteralExpressions(context.Node);
+        var duplicateValuesAndPositions = stringLiterals.Select(x => new { literal = x, literalToken = LiteralToken(x) })
+            .Where(x => x.literalToken.ValueText is { Length: >= MinimumStringLength }
+                        && !IsMatchingMethodParameterName(x.literal)
+                        && !IsInEFMigration(x.literal, context.Model)
+                        && !(usingDapper && x.literalToken.ValueText.StartsWith("@")))
+            .GroupBy(x => x.literalToken.ValueText, x => x.literalToken)
+            .Where(x => x.Count() > Threshold);
+
+        // Report duplications
+        foreach (var item in duplicateValuesAndPositions)
+        {
+            var duplicates = item.ToList();
+            var firstToken = duplicates[0];
+            context.ReportIssue(rule, firstToken, duplicates.Skip(1).ToSecondaryLocations(), ExtractStringContent(firstToken), duplicates.Count.ToString());
+        }
     }
+
+    private static bool IsEFMigration(SonarSyntaxNodeReportingContext context) =>
+        context.Model.GetDeclaredSymbol(context.Node) is INamedTypeSymbol typeSymbol
+        && IsEFMigrationType(typeSymbol);
+
+    private static bool IsInEFMigration(SyntaxNode node, SemanticModel model) =>
+        model.GetEnclosingSymbol(node.SpanStart)?.ContainingType is { } typeSymbol
+        && IsEFMigrationType(typeSymbol);
+
+    private static bool IsEFMigrationType(INamedTypeSymbol typeSymbol) =>
+        typeSymbol.DerivesFrom(KnownType.Microsoft_EntityFrameworkCore_Migrations_Migration)
+        || typeSymbol.DerivesFrom(KnownType.System_Data_Entity_Migrations_DbMigration);
+
+    private static string ExtractStringContent(SyntaxToken literalToken) =>
+         // Use literalToken.Text to get the text as written by the developer. The unescaped text (literalToken.ValueText)
+         // might contain control characters that may cause trouble when used as error message (e.g. a null-terminator).
+         // The literalToken.Text contains leading and trailing double quotes that we strip of.
+         literalToken.Text.StartsWith("@\"") ? literalToken.Text.Substring(2, literalToken.Text.Length - 3) : literalToken.Text.Substring(1, literalToken.Text.Length - 2);
 }

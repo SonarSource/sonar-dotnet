@@ -380,6 +380,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Data_Entity_DbSet_TEntity = new("System.Data.Entity.DbSet", "TEntity");
     public static readonly KnownType System_Data_Entity_Infrastructure_DbQuery = new("System.Data.Entity.Infrastructure.DbQuery");
     public static readonly KnownType System_Data_Entity_Infrastructure_DbQuery_TResult = new("System.Data.Entity.Infrastructure.DbQuery", "TResult");
+    public static readonly KnownType System_Data_Entity_Migrations_DbMigration = new("System.Data.Entity.Migrations.DbMigration");
     public static readonly KnownType System_Data_IDbCommand = new("System.Data.IDbCommand");
     public static readonly KnownType System_Data_Linq_ITable = new("System.Data.Linq.ITable");
     public static readonly KnownType System_Data_Odbc_OdbcCommand = new("System.Data.Odbc.OdbcCommand");

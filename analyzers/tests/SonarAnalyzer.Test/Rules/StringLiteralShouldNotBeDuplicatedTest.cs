@@ -36,7 +36,9 @@ public class StringLiteralShouldNotBeDuplicatedTest
 
     [TestMethod]
     public void StringLiteralShouldNotBeDuplicated_CS() =>
-        builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.cs").Verify();
+        builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.cs")
+            .AddReferences(NuGetMetadataReference.EntityFramework())
+            .Verify();
 
 #if NET
 
@@ -45,6 +47,8 @@ public class StringLiteralShouldNotBeDuplicatedTest
         builderCS.AddPaths("StringLiteralShouldNotBeDuplicated.Latest.cs")
             .WithTopLevelStatements()
             .WithOptions(LanguageOptions.CSharpLatest)
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational("2.2.6"))
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.6"))
             .Verify();
 
     [TestMethod]

@@ -1,4 +1,26 @@
-﻿namespace Tests.Diagnostics
+﻿using System.Data.Entity.Migrations;
+
+// https://sonarsource.atlassian.net/browse/NET-2276
+public class EfClassicMigration : DbMigration
+{
+    public override void Up()
+    {
+        AddColumn("dbo.Invoices", "Description", c => c.String(maxLength: 500));
+        AddColumn("dbo.Invoices", "CategoryName", c => c.String(maxLength: 100));
+        AddColumn("dbo.Invoices", "SupplierCode", c => c.String(maxLength: 50));
+        AddColumn("dbo.Invoices", "TrackingCode", c => c.String(maxLength: 50));
+    }
+
+    public override void Down()
+    {
+        DropColumn("dbo.Invoices", "TrackingCode");
+        DropColumn("dbo.Invoices", "SupplierCode");
+        DropColumn("dbo.Invoices", "CategoryName");
+        DropColumn("dbo.Invoices", "Description");
+    }
+}
+
+namespace Tests.Diagnostics
 {
     public class Program
     {

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 string compliant = "compliant";
 // equivalent to args argument of the top level file
@@ -220,6 +221,44 @@ namespace CSharp11
 
         public static readonly string NameReadonly = $"{"BarBar"}"; // Secondary
 
+    }
+}
+
+// https://sonarsource.atlassian.net/browse/NET-2276
+public class EfCoreMigration : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropIndex(
+            name: "IX_CustomerOrders_OldStatus",
+            table: "CustomerOrders");
+
+        migrationBuilder.RenameColumn(
+            name: "OldStatus",
+            table: "CustomerOrders",
+            newName: "Status");
+
+        migrationBuilder.CreateIndex(
+            name: "IX_CustomerOrders_Status",
+            table: "CustomerOrders",
+            column: "Status");
+    }
+
+    protected override void Down(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.DropIndex(
+            name: "IX_CustomerOrders_Status",
+            table: "CustomerOrders");
+
+        migrationBuilder.RenameColumn(
+            name: "Status",
+            table: "CustomerOrders",
+            newName: "OldStatus");
+
+        migrationBuilder.CreateIndex(
+            name: "IX_CustomerOrders_OldStatus",
+            table: "CustomerOrders",
+            column: "OldStatus");
     }
 }
 
