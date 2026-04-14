@@ -35,4 +35,11 @@ public class DoNotCallGCCollectMethodTest
             .WithOptions(LanguageOptions.CSharpLatest)
             .WithTopLevelStatements()
             .Verify();
+
+    [TestMethod]
+    public void DoNotCallGCCollectMethod_AD0001() =>
+        builder.AddPaths("DoNotCallGCCollectMethodAD0001.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithConcurrentAnalysis(false)
+            .Verify();
 }

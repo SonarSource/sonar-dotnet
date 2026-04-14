@@ -38,5 +38,7 @@ public sealed class DoNotCallGCCollectMethod : DoNotCallMethodsCSharpBase
         !IsGetTotalMemoryFalse(memberDescriptor, invocation); // Do not report on GC.TotalMemory(false)
 
     private static bool IsGetTotalMemoryFalse(MemberDescriptor memberDescriptor, InvocationExpressionSyntax invocation) =>
-        memberDescriptor.Name is nameof(GC.GetTotalMemory) && invocation.ArgumentList.Arguments.First().Expression.IsKind(SyntaxKind.FalseLiteralExpression);
+        memberDescriptor.Name is nameof(GC.GetTotalMemory)
+        && invocation.ArgumentList.Arguments.FirstOrDefault() is { } argument
+        && argument.Expression.IsKind(SyntaxKind.FalseLiteralExpression);
 }
