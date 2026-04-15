@@ -1,73 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-string compliant = "compliant";
-// equivalent to args argument of the top level file
-string compliant1 = "args";
-string compliant2 = "args";
-string compliant3 = "args";
-
-string noncompliant = "foobar"; // Noncompliant
-
-var x = "foobar";
-//      ^^^^^^^^ Secondary
-
-record Record
-{
-    private string name = "foobar";
-//                        ^^^^^^^^ Secondary
-
-    public static readonly string NameReadonly = "foobar";
-//                                               ^^^^^^^^ Secondary
-
-    string Name { get; } = "foobar";
-//                         ^^^^^^^^ Secondary
-
-    void Method()
-    {
-        var x = "foobar";
-//              ^^^^^^^^ Secondary
-
-        void NestedMethod()
-        {
-            var y = "foobar";
-//                  ^^^^^^^^ Secondary
-        }
-    }
-
-    [DebuggerDisplay("foobar", Name = "foobar", TargetTypeName = "foobar")] // Compliant - in attribute -> ignored
-    record InnerRecord
-    {
-        private string name = "foobar";
-//                            ^^^^^^^^ Secondary
-
-        public static readonly string NameReadonly = "foobar";
-//                                                   ^^^^^^^^ Secondary
-
-        string Name { get; } = "foobar";
-//                             ^^^^^^^^ Secondary
-
-        void Method()
-        {
-            var x = "foobar";
-//                  ^^^^^^^^ Secondary
-
-            [Conditional("DEBUG")] // Compliant - in attribute -> ignored
-            static void NestedMethod()
-            {
-                var y = "foobar";
-//                      ^^^^^^^^ Secondary
-            }
-        }
-    }
-
-    record PositionalRecord(string Name)
-    {
-        private string name = "foobar";
-//                            ^^^^^^^^ Secondary
-    }
-}
-
 namespace CSharp9
 {
     record Record
@@ -274,15 +207,15 @@ namespace CSharp13
 
     partial class PartialClass
     {
-        private string some = "csharp13"; // Noncompliant [0]
-        public partial string Hello => "csharp13"; // Secondary [0] 
+        private string some = "csharp13";           // FN NET-3597
+        public partial string Hello => "csharp13";
         public partial string World { get; }
     }
 
     partial class PartialClass
     {
-        private const string name = "csharp13"; // Secondary [0] 
+        private const string name = "csharp13";
         public partial string Hello { get; }
-        public partial string World => "csharp13"; // Secondary [0] 
+        public partial string World => "csharp13";
     }
 }

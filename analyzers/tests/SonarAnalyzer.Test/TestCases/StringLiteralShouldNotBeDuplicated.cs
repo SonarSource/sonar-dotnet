@@ -150,5 +150,23 @@ namespace Tests.Diagnostics
             + "Say \x0022hello\x0022"                 // Secondary
             + "Say \"hello\"";                        // Secondary
     }
+
+    partial class PartialClassSameFile
+    {
+        private string a = "partialclass";  // FN: NET-3597
+        private string b = "partialclass";
+    }
+
+    partial class PartialClassSameFile
+    {
+        private string c = "partialclass";
+        private string d = "partialclass";
+    }
+
+    partial class PartialClassCrossFileFN
+    {
+        private string a = "crossfile";     // FN: NET-3597
+        private string b = "crossfile";
+    }
 }
 
