@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.CSharp.Core.Extensions;
 
-public static class SonarSyntaxNodeAnalysisContextExtensions
+public static class SonarSyntaxNodeReportingContextExtensions
 {
     extension(SonarSyntaxNodeReportingContext context)
     {
