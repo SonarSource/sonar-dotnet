@@ -53,6 +53,7 @@ public sealed class DoNotHardcodeSecrets : DoNotHardcodeSecretsBase<SyntaxKind>
         node switch
         {
             AccessorDeclarationSyntax accessor => accessor.Parent.Parent,
+            AssignmentExpressionSyntax assignment when assignment.Left.IsKind(SyntaxKindEx.FieldExpression) => assignment.Ancestors().OfType<PropertyDeclarationSyntax>().FirstOrDefault(),
             AssignmentExpressionSyntax assignment => assignment.Left,
             BinaryExpressionSyntax { Left: IdentifierNameSyntax left } => left,
             BinaryExpressionSyntax { Right: IdentifierNameSyntax right } => right,
