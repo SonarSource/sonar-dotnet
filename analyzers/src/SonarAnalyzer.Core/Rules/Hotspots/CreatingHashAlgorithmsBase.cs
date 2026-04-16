@@ -108,12 +108,11 @@ public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : TrackerHotspotDi
             input,
             tracker.MatchMethod(
                 new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, HashDataName),
-                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "HmacData"),
-                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, TryHashDataName),
                 new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, HashDataAsyncName),
-                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "TryHmacData"),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, TryHashDataName),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "HmacData"),
                 new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "HmacDataAsync"),
-                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, TryHashDataName)),
+                new MemberDescriptor(KnownType.System_Security_Cryptography_CryptographicOperations, "TryHmacData")),
             tracker.ArgumentAtIndexIs(0, IsUnsafeAlgorithm));
 
         tracker.Track(
