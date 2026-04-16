@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
+using System;
+using System.Collections.Generic;
 
 namespace Baseline
 {
@@ -296,5 +298,25 @@ namespace Inheritance
 
         [HttpGet]
         public override string BaseAbstractMethod() => "hi";
+    }
+}
+
+namespace CustomHttpAttribute
+{
+    // https://sonarsource.atlassian.net/browse/NET-3606
+    [ApiController]
+    public class CompliantController : ControllerBase
+    {
+        [HttpRouteGet("foo")]
+        public int MyGet(string id) =>         // Noncompliant FP: the attribute implements IActionHttpMethodProvider
+            StatusCodes.Status200OK;
+    }
+
+    public class HttpRouteGetAttribute : Attribute, IActionHttpMethodProvider
+    {
+        public HttpRouteGetAttribute(string template) => Template = template;
+
+        public IEnumerable<string> HttpMethods => new List<string> { "GET" };
+        public string Template { get; }
     }
 }
