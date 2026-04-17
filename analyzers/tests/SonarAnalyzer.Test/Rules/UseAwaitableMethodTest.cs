@@ -71,4 +71,8 @@ public class UseAwaitableMethodTest
     [TestMethod]
     public void UseAwaitableMethod_FluentValidationLatest() =>
         builder.AddPaths("UseAwaitableMethod_FluentValidation.cs").AddReferences(NuGetMetadataReference.FluentValidation()).WithNetOnly().Verify();
+
+    [TestMethod]
+    public void UseAwaitableMethod_DbDataReader() =>
+        builder.AddPaths("UseAwaitableMethod_DbDataReader.cs").AddReferences(MetadataReferenceFacade.SystemData).Verify();
 }
