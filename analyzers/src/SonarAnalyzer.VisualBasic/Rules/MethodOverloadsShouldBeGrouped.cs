@@ -15,49 +15,49 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<SyntaxKind, StatementSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<SyntaxKind, StatementSyntax>
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+
+    protected override SyntaxKind[] SyntaxKinds { get; } =
     {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+        SyntaxKind.ClassBlock,
+        SyntaxKind.InterfaceBlock,
+        SyntaxKind.StructureBlock
+    };
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
+    protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeReportingContext c, StatementSyntax member)
+    {
+        if (member is ConstructorBlockSyntax constructor)
         {
-            SyntaxKind.ClassBlock,
-            SyntaxKind.InterfaceBlock,
-            SyntaxKind.StructureBlock
-        };
-
-        protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeReportingContext c, StatementSyntax member)
-        {
-            if (member is ConstructorBlockSyntax constructor)
-            {
-                return new MemberInfo(c, member, constructor.SubNewStatement.NewKeyword, IsStaticStatement(constructor.SubNewStatement), false, false);
-            }
-            else if (member is MethodBlockSyntax methodBlock)
-            {
-                return new MemberInfo(c,
-                                      member,
-                                      methodBlock.SubOrFunctionStatement.Identifier,
-                                      IsStaticStatement(methodBlock.SubOrFunctionStatement),
-                                      IsAbstractStatement(methodBlock.SubOrFunctionStatement),
-                                      false);
-            }
-            else if (member is MethodStatementSyntax methodStatement)
-            {
-                return new MemberInfo(c, member, methodStatement.Identifier, IsStaticStatement(methodStatement), IsAbstractStatement(methodStatement), false);
-            }
-            return null;
+            return new MemberInfo(c, member, constructor.SubNewStatement.NewKeyword, IsStaticStatement(constructor.SubNewStatement), false, false);
         }
-
-        protected override IEnumerable<StatementSyntax> GetMemberDeclarations(SyntaxNode node) =>
-            ((TypeBlockSyntax)node).Members;
-
-        private static bool IsStaticStatement(MethodBaseSyntax statement) =>
-            statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
-
-        private static bool IsAbstractStatement(MethodBaseSyntax statement) =>
-            statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
+        else if (member is MethodBlockSyntax methodBlock)
+        {
+            return new MemberInfo(
+                c,
+                member,
+                methodBlock.SubOrFunctionStatement.Identifier,
+                IsStaticStatement(methodBlock.SubOrFunctionStatement),
+                IsAbstractStatement(methodBlock.SubOrFunctionStatement),
+                false);
+        }
+        else if (member is MethodStatementSyntax methodStatement)
+        {
+            return new MemberInfo(c, member, methodStatement.Identifier, IsStaticStatement(methodStatement), IsAbstractStatement(methodStatement), false);
+        }
+        return null;
     }
+
+    protected override IEnumerable<StatementSyntax> MemberDeclarations(SyntaxNode node) =>
+        ((TypeBlockSyntax)node).Members;
+
+    private static bool IsStaticStatement(MethodBaseSyntax statement) =>
+        statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.SharedKeyword);
+
+    private static bool IsAbstractStatement(MethodBaseSyntax statement) =>
+        statement.DescendantTokens().Any(x => x.Kind() == SyntaxKind.MustOverrideKeyword);
 }

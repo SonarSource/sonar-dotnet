@@ -15,32 +15,32 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
-{
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<SyntaxKind, MemberDeclarationSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+namespace SonarAnalyzer.CSharp.Rules;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGroupedBase<SyntaxKind, MemberDeclarationSyntax>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override SyntaxKind[] SyntaxKinds { get; } =
+    [
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.InterfaceDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKindEx.RecordDeclaration,
+        SyntaxKindEx.RecordStructDeclaration,
+        SyntaxKindEx.ExtensionBlockDeclaration
+    ];
+
+    protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeReportingContext c, MemberDeclarationSyntax member) =>
+        member switch
         {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.InterfaceDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
+            ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true),
+            MethodDeclarationSyntax { ExplicitInterfaceSpecifier: { } } => null, // Skip explicit interface implementations
+            MethodDeclarationSyntax method => new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true),
+            _ => null,
         };
 
-        protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeReportingContext c, MemberDeclarationSyntax member) =>
-            member switch
-            {
-                ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true),
-                MethodDeclarationSyntax { ExplicitInterfaceSpecifier: { } } => null, // Skip explicit interface implementations
-                MethodDeclarationSyntax method => new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true),
-                _ => null,
-            };
-
-        protected override IEnumerable<MemberDeclarationSyntax> GetMemberDeclarations(SyntaxNode node) =>
-            ((TypeDeclarationSyntax)node).Members;
-    }
+    protected override IEnumerable<MemberDeclarationSyntax> MemberDeclarations(SyntaxNode node) =>
+        ((TypeDeclarationSyntax)node).Members;
 }

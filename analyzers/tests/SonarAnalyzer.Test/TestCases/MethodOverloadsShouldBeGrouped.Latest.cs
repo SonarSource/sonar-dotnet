@@ -199,9 +199,17 @@ public static class Extensions
     public class Sample { }
     extension (Sample sample)
     {
-        void a() { }            // FN - https://sonarsource.atlassian.net/browse/NET-2719
+        void a() { }            // Noncompliant - https://sonarsource.atlassian.net/browse/NET-2719
         void a(int a, char b) { }
         void b() { }
-        void a(string a) { }    // FN - https://sonarsource.atlassian.net/browse/NET-2719
+        void a(string a) { }    // Secondary - https://sonarsource.atlassian.net/browse/NET-2719
+    }
+
+    extension(Sample sample)
+    {
+        void x() { }       // Compliant
+        void x(int a) { }
+        void y() { }       // Compliant
+        void y(int a) { }
     }
 }
