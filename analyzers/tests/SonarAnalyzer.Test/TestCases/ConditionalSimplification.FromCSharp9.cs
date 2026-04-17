@@ -128,3 +128,20 @@ int NestedExpressionWithSwitch(bool condition, int a, int b)
 abstract class Fruit { }
 class Apple : Fruit { }
 class Orange : Fruit { }
+
+// https://sonarsource.atlassian.net/browse/NET-3554
+public class Repro_NET3554
+{
+    class Result<T>
+    {
+        public static implicit operator Result<T>(T value) => new Result<T>();
+        public static implicit operator Result<T>(string error) => new Result<T>();
+        private Result() { }
+    }
+
+    Result<T> Method<T>(T value) where T : class
+    {
+        // Proposed fix is giving "CS0019: Operator '??' cannot be applied to operands of type 'T' and 'string'"
+        return value == null ? "Value is null" : value; // Noncompliant FP - implicit conversion to Result<T> makes the ternary valid, but ?? cannot be applied to 'T' and 'string'
+    }
+}
