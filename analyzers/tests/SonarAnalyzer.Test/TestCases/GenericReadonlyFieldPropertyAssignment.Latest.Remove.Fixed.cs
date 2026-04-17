@@ -49,13 +49,13 @@ partial record PointManager<T> where T : IPoint
 
     public void NullConditionalAssignment()
     {
-        point?.Y = 42; // FN
+        point?.Y = 42; // Fixed
     }
 
     public T FieldKeyword
     {
         get => field;
-        set => field.X = value.X; // FN
+        set => field.X = value.X; // Compliant, 'field' is the backing field of the property and is not readonly
     }
 }
 
