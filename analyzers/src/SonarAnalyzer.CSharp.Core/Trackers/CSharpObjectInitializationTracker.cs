@@ -58,10 +58,10 @@ public class CSharpObjectInitializationTracker
     private readonly int trackedConstructorArgumentIndex;
 
     public CSharpObjectInitializationTracker(Predicate<object> isAllowedConstantValue,
-        ImmutableArray<KnownType> trackedTypes,
-        Predicate<string> isTrackedPropertyName,
-        Func<ISymbol, SyntaxNode, SemanticModel, bool> isAllowedObject = null,
-        int trackedConstructorArgumentIndex = DefaultTrackedConstructorArgumentIndex)
+                                             ImmutableArray<KnownType> trackedTypes,
+                                             Predicate<string> isTrackedPropertyName,
+                                             Func<ISymbol, SyntaxNode, SemanticModel, bool> isAllowedObject = null,
+                                             int trackedConstructorArgumentIndex = DefaultTrackedConstructorArgumentIndex)
     {
         this.isAllowedConstantValue = isAllowedConstantValue;
         this.trackedTypes = trackedTypes;
@@ -70,20 +70,20 @@ public class CSharpObjectInitializationTracker
         this.trackedConstructorArgumentIndex = trackedConstructorArgumentIndex;
     }
 
-    public bool ShouldBeReported(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe) =>
-        IsTrackedType(objectCreation.Expression, semanticModel)
-        && !ObjectCreatedWithAllowedValue(objectCreation, semanticModel, isDefaultConstructorSafe)
-        && !IsLaterAssignedWithAllowedValue(objectCreation, semanticModel);
+    public bool ShouldBeReported(IObjectCreation objectCreation, SemanticModel model, bool isDefaultConstructorSafe) =>
+        IsTrackedType(objectCreation.Expression, model)
+        && !ObjectCreatedWithAllowedValue(objectCreation, model, isDefaultConstructorSafe)
+        && !IsLaterAssignedWithAllowedValue(objectCreation, model);
 
-    public bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel semanticModel)
+    public bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel model)
     {
         var assignmentMap = assignment.MapAssignmentArguments();
 
         // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
-        return assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() == null
-               && assignmentMap.Any(x => IsTrackedPropertyName(x.Left)
-                                         && IsPropertyOnTrackedType(x.Left, semanticModel)
-                                         && !IsAllowedValue(x.Right, semanticModel));
+        return assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() is null
+            && assignmentMap.Any(x => IsTrackedPropertyName(x.Left)
+                                        && IsPropertyOnTrackedType(x.Left, model)
+                                        && !IsAllowedValue(x.Right, model));
     }
 
     /// <summary>
@@ -92,16 +92,16 @@ public class CSharpObjectInitializationTracker
     private bool IsAllowedConstantValue(object constantValue) =>
         isAllowedConstantValue(constantValue);
 
-    private bool IsTrackedType(ExpressionSyntax expression, SemanticModel semanticModel) =>
-        semanticModel.GetTypeInfo(expression).Type.IsAny(trackedTypes);
+    private bool IsTrackedType(ExpressionSyntax expression, SemanticModel model) =>
+        model.GetTypeInfo(expression).Type.IsAny(trackedTypes);
 
     /// <summary>
     /// Tests if the expression is an allowed value. The implementation of checks is provided by the derived class.
     /// </summary>
     /// <returns>True if the expression is an allowed value, otherwise false.</returns>
-    private bool IsAllowedValue(SyntaxNode expression, SemanticModel semanticModel)
+    private bool IsAllowedValue(SyntaxNode expression, SemanticModel model)
     {
-        if (expression == null)
+        if (expression is null)
         {
             return false;
         }
@@ -109,13 +109,13 @@ public class CSharpObjectInitializationTracker
         {
             return true;
         }
-        else if (expression.FindConstantValue(semanticModel) is { } constantValue)
+        else if (expression.FindConstantValue(model) is { } constantValue)
         {
             return IsAllowedConstantValue(constantValue);
         }
-        else if (semanticModel.GetSymbolInfo(expression).Symbol is { } symbol)
+        else if (model.GetSymbolInfo(expression).Symbol is { } symbol)
         {
-            return isAllowedObject(symbol, expression, semanticModel);
+            return isAllowedObject(symbol, expression, model);
         }
         else
         {
@@ -133,22 +133,22 @@ public class CSharpObjectInitializationTracker
     /// <remarks>
     /// Currently we do not handle the situation with default and named arguments.
     /// </remarks>
-    private bool ObjectCreatedWithAllowedValue(IObjectCreation objectCreation, SemanticModel semanticModel, bool isDefaultConstructorSafe)
+    private bool ObjectCreatedWithAllowedValue(IObjectCreation objectCreation, SemanticModel model, bool isDefaultConstructorSafe)
     {
-        var trackedPropertyAssignments = GetInitializerExpressions(objectCreation.Initializer)
+        var trackedPropertyAssignments = InitializerExpressions(objectCreation.Initializer)
             .OfType<AssignmentExpressionSyntax>()
-            .Where(assignment => IsTrackedPropertyName(assignment.Left))
+            .Where(x => IsTrackedPropertyName(x.Left))
             .ToList();
         if (trackedPropertyAssignments.Any())
         {
-            return trackedPropertyAssignments.All(assignment => IsAllowedValue(assignment.Right, semanticModel));
+            return trackedPropertyAssignments.All(x => IsAllowedValue(x.Right, model));
         }
         else if (trackedConstructorArgumentIndex != -1)
         {
             var argumentList = objectCreation.ArgumentList;
-            return argumentList == null
+            return argumentList is null
                 || argumentList.Arguments.Count != trackedConstructorArgumentIndex + 1
-                || IsAllowedValue(argumentList.Arguments[trackedConstructorArgumentIndex].Expression, semanticModel);
+                || IsAllowedValue(argumentList.Arguments[trackedConstructorArgumentIndex].Expression, model);
         }
         else
         {
@@ -168,31 +168,40 @@ public class CSharpObjectInitializationTracker
     /// </summary>
     private bool IsTrackedPropertyName(SyntaxNode expression)
     {
-        var identifier = (expression as MemberAccessExpressionSyntax)?.Name?.Identifier ?? (expression as IdentifierNameSyntax)?.Identifier;
+        var identifier = (expression as MemberAccessExpressionSyntax)?.Name?.Identifier
+            ?? (expression as IdentifierNameSyntax)?.Identifier
+            ?? (expression as MemberBindingExpressionSyntax)?.Name.Identifier;
         return identifier.HasValue && IsTrackedPropertyName(identifier.Value.ValueText);
     }
 
     /// <summary>
     /// Returns true if the provided expression is a member of a tracked type.
     /// </summary>
-    private bool IsPropertyOnTrackedType(SyntaxNode expression, SemanticModel semanticModel) =>
-        expression is MemberAccessExpressionSyntax memberAccess
-        && memberAccess.Expression != null
-        && IsTrackedType(memberAccess.Expression, semanticModel);
+    private bool IsPropertyOnTrackedType(SyntaxNode expression, SemanticModel model)
+    {
+        var targetExpression = expression switch
+        {
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression,
+            ConditionalAccessExpressionSyntax conditionalAccess => conditionalAccess.Expression,
+            MemberBindingExpressionSyntax memberBinding => (memberBinding.Parent.Parent as ConditionalAccessExpressionSyntax)?.Expression,
+            _ => null
+        };
+        return targetExpression is not null && IsTrackedType(targetExpression, model);
+    }
 
-    private bool IsLaterAssignedWithAllowedValue(IObjectCreation objectCreation, SemanticModel semanticModel)
+    private bool IsLaterAssignedWithAllowedValue(IObjectCreation objectCreation, SemanticModel model)
     {
         var statement = objectCreation.Expression.FirstAncestorOrSelf<StatementSyntax>();
-        if (statement == null)
+        if (statement is null)
         {
             return false;
         }
 
-        var variableSymbol = GetAssignedVariableSymbol(objectCreation, semanticModel);
-        var nextStatements = GetNextStatements(statement);
-        var innerStatements = GetInnerStatements(statement);
+        var variableSymbol = AssignedVariableSymbol(objectCreation, model);
+        var nextStatements = NextStatements(statement);
+        var innerStatements = InnerStatements(statement);
 
-        return variableSymbol != null
+        return variableSymbol is not null
             && nextStatements.Union(innerStatements)
                 .OfType<ExpressionStatementSyntax>()
                 .Select(x => x.Expression)
@@ -203,35 +212,35 @@ public class CSharpObjectInitializationTracker
         {
             var assignmentMap = assignment.MapAssignmentArguments();
             return assignmentMap.Any(x => IsTrackedPropertyName(x.Left)
-                                          && variableSymbol.Equals(GetAssignedVariableSymbol(x.Left, semanticModel))
-                                          && IsAllowedValue(x.Right, semanticModel));
+                                            && variableSymbol.Equals(AssignedVariableSymbol(x.Left, model))
+                                            && IsAllowedValue(x.Right, model));
         }
     }
 
-    private static IEnumerable<ExpressionSyntax> GetInitializerExpressions(InitializerExpressionSyntax initializer) =>
+    private static IEnumerable<ExpressionSyntax> InitializerExpressions(InitializerExpressionSyntax initializer) =>
         initializer?.Expressions ?? Enumerable.Empty<ExpressionSyntax>();
 
-    private static ISymbol GetAssignedVariableSymbol(IObjectCreation objectCreation, SemanticModel semanticModel)
+    private static ISymbol AssignedVariableSymbol(IObjectCreation objectCreation, SemanticModel model)
     {
         if (objectCreation.Expression.FirstAncestorOrSelf<AssignmentExpressionSyntax>()?.Left is { } variable)
         {
-            return semanticModel.GetSymbolInfo(variable).Symbol;
+            return model.GetSymbolInfo(variable).Symbol;
         }
 
         return objectCreation.Expression.FirstAncestorOrSelf<VariableDeclaratorSyntax>() is { }  identifier
-            ? semanticModel.GetDeclaredSymbol(identifier)
+            ? model.GetDeclaredSymbol(identifier)
             : null;
     }
 
-    private static ISymbol GetAssignedVariableSymbol(SyntaxNode node, SemanticModel semanticModel)
+    private static ISymbol AssignedVariableSymbol(SyntaxNode node, SemanticModel model)
     {
         var identifier = node is MemberAccessExpressionSyntax memberAccess ? memberAccess.Expression : node as IdentifierNameSyntax;
-        return semanticModel.GetSymbolInfo(identifier).Symbol;
+        return model.GetSymbolInfo(identifier).Symbol;
     }
 
-    private static IEnumerable<StatementSyntax> GetNextStatements(StatementSyntax statement) =>
+    private static IEnumerable<StatementSyntax> NextStatements(StatementSyntax statement) =>
         statement.Parent.ChildNodes().OfType<StatementSyntax>().SkipWhile(x => x != statement).Skip(1);
 
-    private static IEnumerable<StatementSyntax> GetInnerStatements(StatementSyntax statement) =>
+    private static IEnumerable<StatementSyntax> InnerStatements(StatementSyntax statement) =>
         statement.DescendantNodes().OfType<StatementSyntax>();
 }

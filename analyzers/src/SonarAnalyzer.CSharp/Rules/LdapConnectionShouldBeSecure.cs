@@ -17,32 +17,30 @@
 
 using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class LdapConnectionShouldBeSecure : ObjectShouldBeInitializedCorrectlyBase
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class LdapConnectionShouldBeSecure : ObjectShouldBeInitializedCorrectlyBase
-    {
-        private const string DiagnosticId = "S4433";
-        private const string MessageFormat = "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.";
+    private const string DiagnosticId = "S4433";
+    private const string MessageFormat = "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.";
 
-        private const int AuthenticationTypesNone = 0;
-        private const int AuthenticationTypesAnonymous = 16;
+    private const int AuthenticationTypesNone = 0;
+    private const int AuthenticationTypesAnonymous = 16;
 
-        public LdapConnectionShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
+    protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
+        isAllowedConstantValue: x => x is int integerValue && !IsUnsafe(integerValue),
+        trackedTypes: ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry),
+        isTrackedPropertyName: x => x == "AuthenticationType",
+        isAllowedObject: IsAllowedObject,
+        trackedConstructorArgumentIndex: 3);
 
-        protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
-            isAllowedConstantValue: constantValue => constantValue is int integerValue && !IsUnsafe(integerValue),
-            trackedTypes: ImmutableArray.Create(KnownType.System_DirectoryServices_DirectoryEntry),
-            isTrackedPropertyName: propertyName => propertyName == "AuthenticationType",
-            isAllowedObject: IsAllowedObject,
-            trackedConstructorArgumentIndex: 3
-        );
+    public LdapConnectionShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
 
-        private static bool IsAllowedObject(ISymbol authTypeSymbol, SyntaxNode authTypeExpression, SemanticModel semanticModel) =>
-            authTypeSymbol.GetSymbolType().Is(KnownType.System_DirectoryServices_AuthenticationTypes)
-            && !(authTypeExpression.FindConstantValue(semanticModel) is int authType && IsUnsafe(authType));
+    private static bool IsAllowedObject(ISymbol authTypeSymbol, SyntaxNode authTypeExpression, SemanticModel model) =>
+        authTypeSymbol.GetSymbolType().Is(KnownType.System_DirectoryServices_AuthenticationTypes)
+        && !(authTypeExpression.FindConstantValue(model) is int authType && IsUnsafe(authType));
 
-        private static bool IsUnsafe(int authType) =>
-            authType == AuthenticationTypesNone || authType == AuthenticationTypesAnonymous;
-    }
+    private static bool IsUnsafe(int authType) =>
+        authType is AuthenticationTypesNone or AuthenticationTypesAnonymous;
 }

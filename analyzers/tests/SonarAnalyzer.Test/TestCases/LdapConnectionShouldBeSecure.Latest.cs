@@ -167,6 +167,6 @@ public class Sample
 {
     public void NullConditionalAssignment(DirectoryEntry entry)
     {
-        entry?.AuthenticationType = AuthenticationTypes.None; // FN
+        entry?.AuthenticationType = AuthenticationTypes.None; // Noncompliant
     }
 }

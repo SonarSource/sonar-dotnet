@@ -127,7 +127,7 @@ public class NullConditionalAssignment
         cookie.Secure = false;    // Noncompliant
         cookie.Secure = true;     // Compliant
 
-        cookie?.Secure = false;   // FN https://sonarsource.atlassian.net/browse/NET-2875
+        cookie?.Secure = false;   // Noncompliant https://sonarsource.atlassian.net/browse/NET-2875
         cookie?.Secure = true;    // Compliant
     }
 }

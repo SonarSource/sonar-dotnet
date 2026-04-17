@@ -32,7 +32,7 @@ class Tests
         new CookieOptions() { }; // Noncompliant
         new CookieOptions() { Secure = true }; // Noncompliant
     }
- 
+
     void PropertySetsNotAllowedValue()
     {
         var c = new CookieOptions() { HttpOnly = true };
@@ -136,7 +136,7 @@ public class NullConditionalAssignment
         cookie.HttpOnly = false;    // Noncompliant
         cookie.HttpOnly = true;     // Compliant
 
-        cookie?.HttpOnly = false;   // FN https://sonarsource.atlassian.net/browse/NET-2857
+        cookie?.HttpOnly = false;   // Noncompliant https://sonarsource.atlassian.net/browse/NET-2857
         cookie?.HttpOnly = true;    // Compliant
     }
 }
