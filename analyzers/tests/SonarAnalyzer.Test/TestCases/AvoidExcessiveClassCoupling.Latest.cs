@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Collections.Generic;
 
 namespace CSharp9
 {
@@ -239,5 +240,15 @@ namespace CSharp14
     public class UsesStaticExtension // Compliant: 1 dep (Foo1) — Foo1Extensions (container) is not counted
     {
         Foo1 M() => Foo1.Create(); // +1 Foo1
+    }
+}
+
+namespace RuleExceptions
+{
+    // https://sonarsource.atlassian.net/browse/NET-3553
+    public static class CollectionExtensions // Noncompliant FP - static classes containing only extension methods should be exempt
+    {
+        public static bool IsNullOrEmpty(this IList<int> list) => list == null || list.Count == 0;           // +1 IList
+        public static bool IsNullOrEmpty(this ICollection<int> collection) => collection == null || collection.Count == 0; // +1 ICollection
     }
 }
