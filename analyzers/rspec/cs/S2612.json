@@ -1,5 +1,5 @@
 {
-  "title": "Setting loose file permissions is security-sensitive",
+  "title": "File permissions should not be set to world-accessible values",
   "type": "VULNERABILITY",
   "code": {
     "impacts": {
@@ -13,7 +13,8 @@
     "constantCost": "5min"
   },
   "tags": [
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2612",

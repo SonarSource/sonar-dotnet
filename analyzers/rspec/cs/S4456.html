@@ -6,7 +6,7 @@ handle the iteration.</p>
 <p>This rule raises an issue when a method throws any exception derived from <code>ArgumentException</code> and contains the <code>yield</code>
 keyword.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate) // Noncompliant
 {
     if (source == null) { throw new ArgumentNullException(nameof(source)); }
@@ -19,8 +19,22 @@ public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerab
     }
 }
 </pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+public static async IAsyncEnumerable&lt;TSource&gt; TakeWhileAsync(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate) // Noncompliant
+{
+    if (source == null) { throw new ArgumentNullException(nameof(source)); }
+    if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
+
+    foreach (var element in source)
+    {
+        await Task.Delay(10);
+        if (!predicate(element)) { break; }
+        yield return element;
+    }
+}
+</pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 public static IEnumerable&lt;TSource&gt; TakeWhile&lt;TSource&gt;(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)
 {
     if (source == null) { throw new ArgumentNullException(nameof(source)); }
@@ -37,4 +51,28 @@ private static IEnumerable&lt;TSource&gt; TakeWhileIterator&lt;TSource&gt;(IEnum
     }
 }
 </pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+public static IAsyncEnumerable&lt;TSource&gt; TakeWhileAsync(this IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)
+{
+    if (source == null) { throw new ArgumentNullException(nameof(source)); }
+    if (predicate == null) { throw new ArgumentNullException(nameof(predicate)); }
+
+    return TakeWhileAsyncIterator&lt;TSource&gt;(source, predicate);
+}
+
+private static async IAsyncEnumerable&lt;TSource&gt; TakeWhileAsyncIterator&lt;TSource&gt;(IEnumerable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)
+{
+    foreach (TSource element in source)
+    {
+        await Task.Delay(10);
+        if (!predicate(element)) break;
+        yield return element;
+    }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:csharpsquid:S4457} - Parameter validation in <code>async</code>/<code>await</code> methods should be wrapped</li>
+</ul>
 

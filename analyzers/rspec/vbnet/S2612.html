@@ -27,7 +27,7 @@ group. This explicitly denies permissions rather than granting them, ensuring th
 Dim unsafeAccessRule = new FileSystemAccessRule("Everyone", FileSystemRights.FullControl, AccessControlType.Allow)
 
 Dim fileSecurity = File.GetAccessControl("path")
-fileSecurity.AddAccessRule(unsafeAccessRule) ' Sensitive
+fileSecurity.AddAccessRule(unsafeAccessRule) ' Noncompliant
 File.SetAccessControl("fileName", fileSecurity)
 </pre>
 <h4>Compliant solution</h4>
@@ -48,7 +48,7 @@ Dim accessRule   = new FileSystemAccessRule("Everyone", FileSystemRights.Write, 
 Dim fileInfo     = new FileInfo("path")
 Dim fileSecurity = fileInfo.GetAccessControl()
 
-fileSecurity.SetAccessRule(accessRule) ' Sensitive
+fileSecurity.SetAccessRule(accessRule) ' Noncompliant
 fileInfo.SetAccessControl(fileSecurity)
 </pre>
 <h4>Compliant solution</h4>
@@ -67,7 +67,7 @@ specific groups. Use <code>FileAccessPermissions.UserExecute</code> or other res
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="3" data-diff-type="noncompliant">
 Dim fsEntry = UnixFileSystemInfo.GetFileSystemEntry("path")
-fsEntry.FileAccessPermissions = FileAccessPermissions.OtherReadWriteExecute ' Sensitive
+fsEntry.FileAccessPermissions = FileAccessPermissions.OtherReadWriteExecute ' Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="3" data-diff-type="compliant">

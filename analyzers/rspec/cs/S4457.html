@@ -1,12 +1,13 @@
 <h2>Why is this an issue?</h2>
-<p>Because of the way <code>async/await</code> methods are rewritten by the compiler, any exceptions thrown during the parameters check will happen
-only when the task is observed. That could happen far away from the source of the buggy code or never happen for fire-and-forget tasks.</p>
-<p>Therefore it is recommended to split the method into two: an outer method handling the parameter checks (without being <code>async/await</code>)
-and an inner method to handle the iterator block with the <code>async/await</code> pattern.</p>
-<p>This rule raises an issue when an <code>async</code> method throws any exception derived from <code>ArgumentException</code> and contains
+<p>Because of the way <code>async</code>/<code>await</code> methods are rewritten by the compiler, any exceptions thrown during the parameters check
+are captured in the returned <code>Task</code> and will only be observed when the task is awaited. That could happen far away from the source of the
+buggy code or never happen for fire-and-forget tasks.</p>
+<p>Therefore it is recommended to split the method into two: an outer method handling the parameter checks (without being
+<code>async</code>/<code>await</code>) and an inner method to handle the iterator block with the <code>async</code>/<code>await</code> pattern.</p>
+<p>This rule raises an issue when an <code>async</code> method throws any exception derived from <code>ArgumentException</code> and contains the
 <code>await</code> keyword.</p>
 <h3>Noncompliant code example</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip) // Noncompliant
 {
     if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
@@ -18,9 +19,12 @@ public static async Task SkipLinesAsync(this TextReader reader, int linesToSkip)
         if (line == null) { break; }
     }
 }
+
+var task = SkipLinesAsync(null, -1); // No exception - captured in the task
+await task;                          // ArgumentNullException thrown here
 </pre>
 <h3>Compliant solution</h3>
-<pre>
+<pre data-diff-id="1" data-diff-type="compliant">
 public static Task SkipLinesAsync(this TextReader reader, int linesToSkip)
 {
     if (reader == null) { throw new ArgumentNullException(nameof(reader)); }
@@ -37,5 +41,13 @@ private static async Task SkipLinesInternalAsync(this TextReader reader, int lin
         if (line == null) { break; }
     }
 }
+
+var task = SkipLinesAsync(null, -1); // ArgumentNullException thrown here
+await task;
 </pre>
+<h2>Resources</h2>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:csharpsquid:S4456} - Parameter validation in yielding methods should be wrapped</li>
+</ul>
 
