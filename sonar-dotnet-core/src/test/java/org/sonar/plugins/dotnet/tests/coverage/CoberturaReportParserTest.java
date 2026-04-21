@@ -17,6 +17,7 @@
 package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.io.File;
+import java.util.Optional;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,7 +28,10 @@ import org.sonar.plugins.dotnet.tests.FileService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.contains;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class CoberturaReportParserTest {
@@ -36,6 +40,7 @@ public class CoberturaReportParserTest {
   public LogTester logTester = new LogTester();
 
   private FileService alwaysTrue;
+  private FileService alwaysFalseAndEmpty;
 
   @Before
   public void prepare() {
@@ -43,6 +48,9 @@ public class CoberturaReportParserTest {
     alwaysTrue = mock(FileService.class);
     when(alwaysTrue.isSupportedAbsolute(anyString())).thenReturn(true);
     when(alwaysTrue.getAbsolutePath(anyString())).thenThrow(new UnsupportedOperationException("Should not call this"));
+    alwaysFalseAndEmpty = mock(FileService.class);
+    when(alwaysFalseAndEmpty.isSupportedAbsolute(anyString())).thenReturn(false);
+    when(alwaysFalseAndEmpty.getAbsolutePath(anyString())).thenReturn(Optional.empty());
   }
 
   @Test
@@ -67,4 +75,105 @@ public class CoberturaReportParserTest {
     new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/valid_empty.xml"), coverage);
     assertThat(coverage.files()).isEmpty();
   }
+
+  @Test
+  public void absolute_path_no_sources_resolves_file() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/absolute_path_no_sources.xml"), coverage);
+    verify(alwaysTrue).isSupportedAbsolute(contains("Class1.cs"));
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("CoveredFile created") && log.contains("indexed as"));
+  }
+
+  @Test
+  public void absolute_path_with_sources_ignores_sources() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/absolute_path_with_sources.xml"), coverage);
+    verify(alwaysTrue).isSupportedAbsolute(contains("Class1.cs"));
+    assertThat(logTester.logs(Level.DEBUG))
+      .anyMatch(log -> log.contains("found source"))
+      .anyMatch(log -> log.contains("CoveredFile created") && log.contains("indexed as"));
+  }
+
+  @Test
+  public void relative_path_with_sources_uses_first_matching_source() {
+    FileService selectiveService = mock(FileService.class);
+    when(selectiveService.isSupportedAbsolute(anyString())).thenReturn(false);
+    when(selectiveService.isSupportedAbsolute(contains("SecondSource"))).thenReturn(true);
+    when(selectiveService.getAbsolutePath(anyString())).thenReturn(Optional.empty());
+    Coverage coverage = new Coverage();
+    
+    new CoberturaReportParser(selectiveService).accept(new File("src/test/resources/cobertura/relative_path_with_sources.xml"), coverage);
+    // Verify both sources were evaluated: FirstSource was tried and rejected, then SecondSource matched
+    verify(selectiveService, times(2)).isSupportedAbsolute(anyString());
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log ->
+      log.contains("CoveredFile created") && log.contains("SecondSource") && log.contains("indexed as"));
+  }
+
+  @Test
+  public void relative_path_with_sources_no_match_skips_file() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysFalseAndEmpty).accept(new File("src/test/resources/cobertura/relative_path_with_sources.xml"), coverage);
+
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("could not resolve relative filename"));
+  }
+
+  @Test
+  public void relative_path_no_sources_skips_file() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/relative_path_no_sources.xml"), coverage);
+
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("could not resolve relative filename"));
+  }
+
+  @Test
+  public void multiple_classes_same_filename_resolved_once() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/multiple_classes_same_filename.xml"), coverage);
+
+    verify(alwaysTrue, times(1)).isSupportedAbsolute(anyString());
+    long coveredFileLogCount = logTester.logs(Level.DEBUG).stream()
+      .filter(log -> log.contains("CoveredFile created"))
+      .count();
+    assertThat(coveredFileLogCount).isEqualTo(1);
+  }
+
+  @Test
+  public void empty_source_tag_is_ignored() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/empty_source_tag.xml"), coverage);
+
+    assertThat(logTester.logs(Level.DEBUG)).noneMatch(log -> log.contains("found source"));
+    verify(alwaysTrue).isSupportedAbsolute(anyString());
+  }
+
+  @Test
+  public void should_not_fail_with_invalid_path() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/invalid_path.xml"), coverage);
+
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("Skipping the import of Cobertura code coverage for the invalid file path"));
+  }
+
+  @Test
+  public void source_with_nested_elements_does_not_fail() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/source_with_nested_elements.xml"), coverage);
+
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("failed to read <source> element text"));
+    verify(alwaysTrue).isSupportedAbsolute(anyString());
+  }
+
+  @Test
+  public void deterministic_build_path_fallback() {
+    FileService deterministicService = mock(FileService.class);
+    when(deterministicService.isSupportedAbsolute(anyString())).thenReturn(false);
+    when(deterministicService.getAbsolutePath(anyString())).thenReturn(Optional.of("C:\\resolved\\Lib\\Class1.cs"));
+
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(deterministicService).accept(new File("src/test/resources/cobertura/absolute_path_no_sources.xml"), coverage);
+
+    verify(deterministicService).getAbsolutePath(anyString());
+    assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("CoveredFile created") && log.contains("indexed as"));
+  }
+
 }

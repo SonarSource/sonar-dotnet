@@ -18,7 +18,12 @@ package org.sonar.plugins.dotnet.tests.coverage;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Nullable;
+import javax.xml.stream.XMLStreamException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.plugins.dotnet.tests.FileService;
@@ -45,6 +50,8 @@ public final class CoberturaReportParser implements CoverageParser {
   private class Parser {
     private final File file;
     private final Coverage coverage;
+    private final List<String> sources = new ArrayList<>();
+    private final Map<String, CoveredFile> filesByFilename = new HashMap<>();
 
     private Parser(File file, Coverage coverage) {
       this.file = file;
@@ -60,11 +67,88 @@ public final class CoberturaReportParser implements CoverageParser {
       }
     }
 
-    private static void dispatchTags(XmlParserHelper xmlParserHelper) {
+    private void dispatchTags(XmlParserHelper xmlParserHelper) {
       String tagName;
       while ((tagName = xmlParserHelper.nextStartTag()) != null) {
-        // TODO: NET-3613
+        if ("source".equals(tagName)) {
+          handleSourceTag(xmlParserHelper);
+        } else if ("class".equals(tagName)) {
+          handleClassTag(xmlParserHelper);
+        }
+        // TODO: NET-3613 handle "line" tags for hits and branch points
       }
+    }
+
+    private void handleSourceTag(XmlParserHelper xmlParserHelper) {
+      try {
+        String sourceText = xmlParserHelper.stream().getElementText();
+        if (sourceText != null && !sourceText.isBlank()) {
+          sources.add(sourceText);
+          LOG.debug("Cobertura parser: found source '{}'.", sourceText);
+        }
+      } catch (XMLStreamException e) {
+        LOG.debug("Cobertura parser: failed to read <source> element text at line {}.",
+          xmlParserHelper.stream().getLocation().getLineNumber(), e);
+      }
+    }
+
+    private void handleClassTag(XmlParserHelper xmlParserHelper) {
+      String filename = xmlParserHelper.getRequiredAttribute("filename");
+      if (!filesByFilename.containsKey(filename)) {
+        CoveredFile coveredFile = resolveFile(filename);
+        LOG.debug("CoveredFile created: {}.", coveredFile);
+        filesByFilename.put(filename, coveredFile);
+      }
+    }
+
+    private CoveredFile resolveFile(String filename) {
+      var filenameAsFile = new File(filename);
+      if (filenameAsFile.isAbsolute()) {
+        return createCoveredFile(filenameAsFile);
+      }
+      for (String source : sources) {
+        CoveredFile result = createCoveredFile(new File(source, filename));
+
+        // Potential file resolution ambiguity. There is no feasible fix on our end.
+        if (result.isIndexed()) {
+          return result;
+        }
+      }
+      LOG.debug("Cobertura parser: could not resolve relative filename '{}' with any source prefix. Skipping. " + VERIFY_SONARPROJECTPROPERTIES_MESSAGE, filename);
+      return new CoveredFile(filename, null);
+    }
+
+    private CoveredFile createCoveredFile(File fileToResolve) {
+      String path = fileToResolve.getPath();
+      String canonicalPath;
+      try {
+        canonicalPath = fileToResolve.getCanonicalPath();
+      } catch (IOException e) {
+        LOG.debug("Skipping the import of Cobertura code coverage for the invalid file path: {} in report {}. {}",
+          path, file.getPath(), VERIFY_SONARPROJECTPROPERTIES_MESSAGE, e);
+        return new CoveredFile(path, null);
+      }
+
+      if (fileService.isSupportedAbsolute(canonicalPath)) {
+        return new CoveredFile(path, canonicalPath);
+      } else {
+        return fileService.getAbsolutePath(path)
+          .map(resolved -> new CoveredFile(path, resolved))
+          .orElseGet(() -> new CoveredFile(path, null));
+      }
+    }
+  }
+
+  record CoveredFile(String originalFilename, @Nullable String indexedPath) {
+    boolean isIndexed() {
+      return indexedPath != null;
+    }
+
+    @Override
+    public String toString() {
+      return indexedPath == null
+        ? String.format("(path '%s', NO INDEXED PATH)", originalFilename)
+        : String.format("(path '%s', indexed as '%s')", originalFilename, indexedPath);
     }
   }
 }

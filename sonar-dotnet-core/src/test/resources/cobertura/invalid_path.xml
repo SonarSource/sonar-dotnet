@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0" branch-rate="0" version="1.0" timestamp="0">
+  <packages>
+    <package name="Lib" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Lib.Class1" filename="z:\*&quot;?.cs" line-rate="0" branch-rate="0" complexity="0">
+          <lines/>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
