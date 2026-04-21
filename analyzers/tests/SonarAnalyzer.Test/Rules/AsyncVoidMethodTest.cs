@@ -39,9 +39,9 @@ public class AsyncVoidMethodTest
             .Verify();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver1_2)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver12)]
+    [DataRow(MsTest.Ver311)]
     [DataRow(Latest)]
     public void AsyncVoidMethod_MsTestTestFramework(string testFwkVersion) =>
         builder.AddPaths("AsyncVoidMethod.MsTestTestFramework.cs")

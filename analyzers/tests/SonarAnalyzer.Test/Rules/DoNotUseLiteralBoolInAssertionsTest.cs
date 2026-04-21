@@ -28,8 +28,8 @@ namespace SonarAnalyzer.Test.Rules
         private readonly VerifierBuilder builder = new VerifierBuilder<DoNotUseLiteralBoolInAssertions>();
 
         [TestMethod]
-        [DataRow(MsTest.Ver1_1)]
-        [DataRow(MsTest.Ver3)]
+        [DataRow(MsTest.Ver11)]
+        [DataRow(MsTest.Ver311)]
         [DataRow(TestConstants.NuGetLatestVersion)]
         public void DoNotUseLiteralBoolInAssertions_MsTest(string testFwkVersion) =>
             builder.AddPaths("DoNotUseLiteralBoolInAssertions.MsTest.cs")

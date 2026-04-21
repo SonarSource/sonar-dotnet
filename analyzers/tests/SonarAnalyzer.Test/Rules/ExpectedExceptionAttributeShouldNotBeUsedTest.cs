@@ -28,8 +28,8 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
     private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.ExpectedExceptionAttributeShouldNotBeUsed>();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver311)]
     // Removed in V4 https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-mstest-migration-v3-v4#expectedexceptionattribute-api-is-removed
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_CS(string testFwkVersion) =>
         builderCS.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.cs")
@@ -55,8 +55,8 @@ public class ExpectedExceptionAttributeShouldNotBeUsedTest
             .VerifyNoIssues();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver311)]
     public void ExpectedExceptionAttributeShouldNotBeUsed_MsTest_VB(string testFwkVersion) =>
         builderVB.AddPaths("ExpectedExceptionAttributeShouldNotBeUsed.MsTest.vb")
             .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))

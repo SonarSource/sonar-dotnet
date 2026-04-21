@@ -28,17 +28,17 @@
         }
 
         [TestMethod]
-        public void GenericTestMethod<T>()  // Noncompliant {{Make this test method non-generic.}} FP  https://sonarsource.atlassian.net/browse/NET-3623
+        public void GenericTestMethod<T>()  // Noncompliant {{Make this test method non-generic.}}
         {
         }
 
         [TestMethod]
-        private void MultiErrorsMethod1<T>() // Noncompliant {{Make this test method 'public' and non-generic.}} FP
+        private void MultiErrorsMethod1<T>() // Noncompliant {{Make this test method 'public' and non-generic.}}
         {
         }
 
         [TestMethod]
-        private async void MultiErrorsMethod2<T>() // Noncompliant {{Make this test method 'public', non-generic and non-'async' or return 'Task'.}} FP
+        private async void MultiErrorsMethod2<T>() // Noncompliant {{Make this test method 'public', non-generic and non-'async' or return 'Task'.}}
         {
         }
 
@@ -80,17 +80,17 @@ namespace Tests.Diagnostics
         }
 
         [DataTestMethod]
-        public void GenericTestMethod<T>()  // Noncompliant {{Make this test method non-generic.}} FP
+        public void GenericTestMethod<T>()  // Noncompliant {{Make this test method non-generic.}}
         {
         }
 
         [DataTestMethod]
-        private void MultiErrorsMethod1<T>() // Noncompliant {{Make this test method 'public' and non-generic.}} FP
+        private void MultiErrorsMethod1<T>() // Noncompliant {{Make this test method 'public' and non-generic.}}
         {
         }
 
         [DataTestMethod]
-        private async void MultiErrorsMethod2<T>() // Noncompliant {{Make this test method 'public', non-generic and non-'async' or return 'Task'.}} FP
+        private async void MultiErrorsMethod2<T>() // Noncompliant {{Make this test method 'public', non-generic and non-'async' or return 'Task'.}}
         {
         }
 

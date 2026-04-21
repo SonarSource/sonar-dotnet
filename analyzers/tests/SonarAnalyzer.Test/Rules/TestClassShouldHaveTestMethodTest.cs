@@ -51,8 +51,8 @@ public class TestClassShouldHaveTestMethodTest
             .Verify();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver311)]
     [DataRow(Latest)]
     public void TestClassShouldHaveTestMethod_MSTest(string testFwkVersion) =>
         builder

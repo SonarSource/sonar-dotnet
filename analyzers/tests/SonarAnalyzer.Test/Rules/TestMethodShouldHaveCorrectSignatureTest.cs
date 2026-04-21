@@ -26,8 +26,16 @@ public class TestMethodShouldHaveCorrectSignatureTest
     private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldHaveCorrectSignature>();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver37)]
+    public void TestMethodShouldHaveCorrectSignature_MsTest_Legacy(string testFwkVersion) =>
+        builder.AddPaths("TestMethodShouldHaveCorrectSignature.MsTest.Legacy.cs")
+            .AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
+            .Verify();
+
+    [TestMethod]
+    [DataRow(MsTest.Ver38)]
+    [DataRow(MsTest.Ver311)]
     [DataRow(Latest)]
     public void TestMethodShouldHaveCorrectSignature_MsTest(string testFwkVersion) =>
         builder.AddPaths("TestMethodShouldHaveCorrectSignature.MsTest.cs")

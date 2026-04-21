@@ -31,9 +31,11 @@ public static class NugetPackageVersions
 
     public static class MsTest
     {
-        public const string Ver1_1 = "1.1.11";
-        public const string Ver1_2 = "1.2.0";
-        public const string Ver3 = "3.11.0";
+        public const string Ver11 = "1.1.11";
+        public const string Ver12 = "1.2.0";
+        public const string Ver37 = "3.7.3";
+        public const string Ver38 = "3.8.0";
+        public const string Ver311 = "3.11.0";
     }
 
     public static class NUnit

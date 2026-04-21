@@ -52,8 +52,8 @@ public class MethodShouldBeNamedAccordingToSynchronicityTest
             .Verify();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver311)]
     [DataRow(Latest)]
     public void MethodShouldBeNamedAccordingToSynchronicity_MsTest(string testFwkVersion) =>
         builder.AddPaths("MethodShouldBeNamedAccordingToSynchronicity.MsTest.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion)).VerifyNoIssues();

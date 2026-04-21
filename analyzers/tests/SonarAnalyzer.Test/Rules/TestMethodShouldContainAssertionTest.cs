@@ -28,8 +28,8 @@ public class TestMethodShouldContainAssertionTest
     private readonly VerifierBuilder builder = new VerifierBuilder<TestMethodShouldContainAssertion>();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver311)]
     [DataRow(Latest)]
     public void TestMethodShouldContainAssertion_MSTest_Common(string testFwkVersion) =>
         WithTestReferences(NuGetMetadataReference.MSTestTestFramework(testFwkVersion))
@@ -177,8 +177,8 @@ public class TestMethodShouldContainAssertionTest
         WithTestReferences(NuGetMetadataReference.MSTestTestFramework(Latest)).AddPaths("TestMethodShouldContainAssertion.Moq.cs").Verify();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_1)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver11)]
+    [DataRow(MsTest.Ver311)]
     [DataRow(Latest)]
     public void TestMethodShouldContainAssertion_CustomAssertionMethod_Common(string version) =>
         builder.AddPaths("TestMethodShouldContainAssertion.Custom.Common.cs").AddReferences(NuGetMetadataReference.MSTestTestFramework(version)).Verify();

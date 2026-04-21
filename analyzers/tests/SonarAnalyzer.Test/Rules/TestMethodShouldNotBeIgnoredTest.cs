@@ -35,8 +35,8 @@ public class TestMethodShouldNotBeIgnoredTest
             .Verify();
 
     [TestMethod]
-    [DataRow(MsTest.Ver1_2)]
-    [DataRow(MsTest.Ver3)]
+    [DataRow(MsTest.Ver12)]
+    [DataRow(MsTest.Ver311)]
     [DataRow(Latest)]
     public void TestMethodShouldNotBeIgnored_MsTest(string testFwkVersion) =>
         new VerifierBuilder<TestMethodShouldNotBeIgnored>()
