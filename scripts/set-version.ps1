@@ -50,12 +50,25 @@ try {
     $ShortVersion = If ($Version.EndsWith(".0") -and $Version.IndexOf(".") -ne $Version.LastIndexOf(".")) { $Version.Substring(0, $Version.Length - 2) } else { $Version } # x.y   or x.y.z
     $PatchVersion = If ($ShortVersion.IndexOf(".") -eq $ShortVersion.LastIndexOf(".")) { "$ShortVersion.0" } else { $ShortVersion }                                       # x.y.0 or x.y.z
 
+    If ($BuildNumber -eq 0) {
+        Write-Host "Checking out branch version-bump/$ShortVersion"
+        git checkout -b "version-bump/$ShortVersion"
+    }
+
     UpdateDotNet
     UpdateJava
 
     If ($BuildNumber -eq 0) {
         Write-Host "Creating Git commit"
         git commit -a -m "Bump version to $ShortVersion"
+
+        Write-Host "Restoring packages to update lock files"
+        dotnet restore private/analyzers/SonarAnalyzer.sln --force-evaluate
+        git commit -a -m "Update packages.lock.json"
+
+        Write-Host "Pushing branch and creating PR"
+        git push -u origin "version-bump/$ShortVersion"
+        gh pr create --title "Bump version to $ShortVersion" --body "" --web --base master --head "version-bump/$ShortVersion"
     }
 
     exit 0
