@@ -58,43 +58,56 @@ public class CoverageAggregatorTest {
   public void hasCoverageProperty() {
     Configuration configuration = mock(Configuration.class);
 
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio", "cobertura");
 
     when(configuration.hasKey("ncover")).thenReturn(false);
     when(configuration.hasKey("opencover")).thenReturn(false);
     when(configuration.hasKey("dotcover")).thenReturn(false);
     when(configuration.hasKey("visualstudio")).thenReturn(false);
+    when(configuration.hasKey("cobertura")).thenReturn(false);
     assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isFalse();
 
     when(configuration.hasKey("ncover")).thenReturn(false);
     when(configuration.hasKey("opencover")).thenReturn(true);
     when(configuration.hasKey("dotcover")).thenReturn(false);
     when(configuration.hasKey("visualstudio")).thenReturn(false);
+    when(configuration.hasKey("cobertura")).thenReturn(false);
     assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
     when(configuration.hasKey("ncover")).thenReturn(false);
     when(configuration.hasKey("opencover")).thenReturn(false);
     when(configuration.hasKey("dotcover")).thenReturn(true);
     when(configuration.hasKey("visualstudio")).thenReturn(false);
+    when(configuration.hasKey("cobertura")).thenReturn(false);
     assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
     when(configuration.hasKey("ncover")).thenReturn(false);
     when(configuration.hasKey("opencover")).thenReturn(false);
     when(configuration.hasKey("dotcover")).thenReturn(false);
     when(configuration.hasKey("visualstudio")).thenReturn(true);
+    when(configuration.hasKey("cobertura")).thenReturn(false);
+    assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
+
+    when(configuration.hasKey("ncover")).thenReturn(false);
+    when(configuration.hasKey("opencover")).thenReturn(false);
+    when(configuration.hasKey("dotcover")).thenReturn(false);
+    when(configuration.hasKey("visualstudio")).thenReturn(false);
+    when(configuration.hasKey("cobertura")).thenReturn(true);
     assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
     when(configuration.hasKey("ncover")).thenReturn(true);
     when(configuration.hasKey("opencover")).thenReturn(true);
     when(configuration.hasKey("dotcover")).thenReturn(true);
     when(configuration.hasKey("visualstudio")).thenReturn(true);
+    when(configuration.hasKey("cobertura")).thenReturn(true);
     assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isTrue();
 
-    coverageConf = new CoverageConfiguration("", "ncover2", "opencover2", "dotcover2", "visualstudio2");
+    coverageConf = new CoverageConfiguration("", "ncover2", "opencover2", "dotcover2", "visualstudio2", "cobertura2");
     when(configuration.hasKey("ncover")).thenReturn(true);
     when(configuration.hasKey("opencover")).thenReturn(true);
     when(configuration.hasKey("dotcover")).thenReturn(true);
     when(configuration.hasKey("visualstudio")).thenReturn(true);
+    when(configuration.hasKey("cobertura")).thenReturn(true);
     assertThat(getCoverageAggregator(configuration, coverageConf).hasCoverageProperty()).isFalse();
   }
 
@@ -118,7 +131,7 @@ public class CoverageAggregatorTest {
 
     WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
 
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio", "cobertura");
     MapSettings settings = new MapSettings();
 
     settings.setProperty("ncover", "foo.nccov");
@@ -127,9 +140,10 @@ public class CoverageAggregatorTest {
     OpenCoverReportParser openCoverParser = mock(OpenCoverReportParser.class);
     DotCoverReportsAggregator dotCoverParser = mock(DotCoverReportsAggregator.class);
     VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+    CoberturaReportParser coberturaParser = mock(CoberturaReportParser.class);
     Coverage coverage = mock(Coverage.class);
     ArgumentCaptor<Coverage> captor = ArgumentCaptor.forClass(Coverage.class);
-    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser)
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser, coberturaParser)
       .aggregate(wildcardPatternFileProvider, coverage);
     verify(ncoverParser).accept(Mockito.eq(new File("foo.nccov")), captor.capture());
     verify(cache).readCoverageFromCacheOrParse(Mockito.eq(ncoverParser), Mockito.any(File.class));
@@ -137,6 +151,7 @@ public class CoverageAggregatorTest {
     verify(openCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(coberturaParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
     settings.clear();
 
@@ -146,9 +161,10 @@ public class CoverageAggregatorTest {
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
     visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+    coberturaParser = mock(CoberturaReportParser.class);
     coverage = mock(Coverage.class);
     captor = ArgumentCaptor.forClass(Coverage.class);
-    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser)
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser, coberturaParser)
       .aggregate(wildcardPatternFileProvider, coverage);
     verify(ncoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(openCoverParser).accept(Mockito.eq(new File("bar.xml")), captor.capture());
@@ -156,6 +172,7 @@ public class CoverageAggregatorTest {
     verify(coverage).mergeWith(captor.getValue());
     verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(coberturaParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
     settings.clear();
     settings.setProperty("dotcover", "baz.html");
@@ -164,9 +181,10 @@ public class CoverageAggregatorTest {
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
     visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+    coberturaParser = mock(CoberturaReportParser.class);
     coverage = mock(Coverage.class);
     captor = ArgumentCaptor.forClass(Coverage.class);
-    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser)
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser, coberturaParser)
       .aggregate(wildcardPatternFileProvider, coverage);
     verify(ncoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(openCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
@@ -174,6 +192,7 @@ public class CoverageAggregatorTest {
     verify(cache).readCoverageFromCacheOrParse(Mockito.eq(dotCoverParser), Mockito.any(File.class));
     verify(coverage).mergeWith(captor.getValue());
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(coberturaParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
     settings.clear();
     settings.setProperty("visualstudio", "qux.coveragexml");
@@ -182,15 +201,37 @@ public class CoverageAggregatorTest {
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
     visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+    coberturaParser = mock(CoberturaReportParser.class);
     coverage = mock(Coverage.class);
     captor = ArgumentCaptor.forClass(Coverage.class);
-    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser)
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser, coberturaParser)
       .aggregate(wildcardPatternFileProvider, coverage);
     verify(ncoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(openCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(visualStudioCoverageXmlReportParser).accept(Mockito.eq(new File("qux.coveragexml")), captor.capture());
     verify(cache).readCoverageFromCacheOrParse(Mockito.eq(visualStudioCoverageXmlReportParser), Mockito.any(File.class));
+    verify(coverage).mergeWith(captor.getValue());
+    verify(coberturaParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+
+    settings.clear();
+    settings.setProperty("cobertura", "corge.xml");
+    when(wildcardPatternFileProvider.listFiles("corge.xml")).thenReturn(new HashSet<>(Collections.singletonList(new File("corge.xml"))));
+    ncoverParser = mock(NCover3ReportParser.class);
+    openCoverParser = mock(OpenCoverReportParser.class);
+    dotCoverParser = mock(DotCoverReportsAggregator.class);
+    visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+    coberturaParser = mock(CoberturaReportParser.class);
+    coverage = mock(Coverage.class);
+    captor = ArgumentCaptor.forClass(Coverage.class);
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser, coberturaParser)
+      .aggregate(wildcardPatternFileProvider, coverage);
+    verify(ncoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(openCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(coberturaParser).accept(Mockito.eq(new File("corge.xml")), captor.capture());
+    verify(cache).readCoverageFromCacheOrParse(Mockito.eq(coberturaParser), Mockito.any(File.class));
     verify(coverage).mergeWith(captor.getValue());
 
     Mockito.reset(wildcardPatternFileProvider);
@@ -205,14 +246,17 @@ public class CoverageAggregatorTest {
     when(wildcardPatternFileProvider.listFiles("baz.html")).thenReturn(new HashSet<>(asList(new File("baz.html"))));
     settings.setProperty("visualstudio", "qux.coveragexml");
     when(wildcardPatternFileProvider.listFiles("qux.coveragexml")).thenReturn(new HashSet<>(asList(new File("qux.coveragexml"))));
+    settings.setProperty("cobertura", "corge.xml");
+    when(wildcardPatternFileProvider.listFiles("corge.xml")).thenReturn(new HashSet<>(asList(new File("corge.xml"))));
     ncoverParser = mock(NCover3ReportParser.class);
     openCoverParser = mock(OpenCoverReportParser.class);
     dotCoverParser = mock(DotCoverReportsAggregator.class);
     visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+    coberturaParser = mock(CoberturaReportParser.class);
     coverage = mock(Coverage.class);
     captor = ArgumentCaptor.forClass(Coverage.class);
 
-    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser)
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser, coberturaParser)
       .aggregate(wildcardPatternFileProvider, coverage);
 
     verify(wildcardPatternFileProvider).listFiles("*.nccov");
@@ -220,12 +264,14 @@ public class CoverageAggregatorTest {
     verify(wildcardPatternFileProvider).listFiles("bar.xml");
     verify(wildcardPatternFileProvider).listFiles("baz.html");
     verify(wildcardPatternFileProvider).listFiles("qux.coveragexml");
+    verify(wildcardPatternFileProvider).listFiles("corge.xml");
 
     verify(ncoverParser).accept(Mockito.eq(new File("foo.nccov")), captor.capture());
     verify(ncoverParser).accept(Mockito.eq(new File("bar.nccov")), captor.capture());
     verify(openCoverParser).accept(Mockito.eq(new File("bar.xml")), captor.capture());
     verify(dotCoverParser).accept(Mockito.eq(new File("baz.html")), captor.capture());
     verify(visualStudioCoverageXmlReportParser).accept(Mockito.eq(new File("qux.coveragexml")), captor.capture());
+    verify(coberturaParser).accept(Mockito.eq(new File("corge.xml")), captor.capture());
 
     for (Coverage capturedCoverage : captor.getAllValues()) {
       verify(coverage).mergeWith(capturedCoverage);
@@ -236,7 +282,7 @@ public class CoverageAggregatorTest {
   public void aggregate_logs_warning_on_exception() {
     MapSettings settings = new MapSettings();
     settings.setProperty("ncover", "foo.nccov");
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio", "cobertura");
 
     CoverageCache cache = mock(CoverageCache.class);
     when(cache.readCoverageFromCacheOrParse(Mockito.any(CoverageParser.class), Mockito.any(File.class))).thenReturn(new Coverage());
@@ -247,7 +293,7 @@ public class CoverageAggregatorTest {
     Coverage coverage = mock(Coverage.class);
     doThrow(new IllegalStateException("TEST EXCEPTION MESSAGE")).when(coverage).mergeWith(any());
 
-    new CoverageAggregator(coverageConf, settings.asConfig(), cache, null, null, null, null)
+    new CoverageAggregator(coverageConf, settings.asConfig(), cache, null, null, null, null, null)
       .aggregate(wildcardPatternFileProvider, coverage);
 
     assertThat(logTester.logs(Level.WARN)).containsOnly("Could not import coverage report 'foo.nccov' because 'TEST EXCEPTION MESSAGE'. Troubleshooting guide: https://community.sonarsource.com/t/37151");
@@ -273,6 +319,11 @@ public class CoverageAggregatorTest {
     aggregate_report_does_not_exist("visualstudio", ".coveragexml");
   }
 
+  @Test
+  public void aggregate_cobertura_report_does_not_exist() {
+    aggregate_report_does_not_exist("cobertura", ".xml");
+  }
+
   // this method needs to be here as the test needs to be in the same package with CoverageAggregator
   @Test
   public void when_UnitTestCoverageAggregator_is_created_from_CodeCoverageProvider_calls_uses_properties() {
@@ -290,12 +341,13 @@ public class CoverageAggregatorTest {
 
     // verify
     ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
-    verify(mockPredicate, times(4)).test(argument.capture());
+    verify(mockPredicate, times(5)).test(argument.capture());
     assertThat(argument.getAllValues()).containsExactlyInAnyOrder(
       "sonar.KEY.ncover3.reportsPaths",
       "sonar.KEY.opencover.reportsPaths",
       "sonar.KEY.dotcover.reportsPaths",
-      "sonar.KEY.vscoveragexml.reportsPaths"
+      "sonar.KEY.vscoveragexml.reportsPaths",
+      "sonar.KEY.cobertura.reportsPaths"
     );
   }
 
@@ -309,7 +361,7 @@ public class CoverageAggregatorTest {
     // Arrange
     WildcardPatternFileProvider wildcardPatternFileProvider = mock(WildcardPatternFileProvider.class);
 
-    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio");
+    CoverageConfiguration coverageConf = new CoverageConfiguration("", "ncover", "opencover", "dotcover", "visualstudio", "cobertura");
     MapSettings settings = new MapSettings();
 
     String reportFile = "file-that-does-not-exist" + reportFileExtension;
@@ -321,9 +373,10 @@ public class CoverageAggregatorTest {
     OpenCoverReportParser openCoverParser = mock(OpenCoverReportParser.class);
     DotCoverReportsAggregator dotCoverParser = mock(DotCoverReportsAggregator.class);
     VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser = mock(VisualStudioCoverageXmlReportParser.class);
+    CoberturaReportParser coberturaParser = mock(CoberturaReportParser.class);
 
     // Act
-    new CoverageAggregator(coverageConf, settings.asConfig(), mock(CoverageCache.class), ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser)
+    new CoverageAggregator(coverageConf, settings.asConfig(), mock(CoverageCache.class), ncoverParser, openCoverParser, dotCoverParser, visualStudioCoverageXmlReportParser, coberturaParser)
       .aggregate(wildcardPatternFileProvider, mock(Coverage.class));
 
     // Assert
@@ -331,6 +384,7 @@ public class CoverageAggregatorTest {
     verify(openCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(dotCoverParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
     verify(visualStudioCoverageXmlReportParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
+    verify(coberturaParser, Mockito.never()).accept(Mockito.any(File.class), Mockito.any(Coverage.class));
 
     assertThat(logTester.logs(Level.WARN)).containsOnly("Could not find any coverage report file matching the pattern '" + reportFile + "'. Troubleshooting guide: https://community.sonarsource.com/t/37151");
   }

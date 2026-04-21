@@ -42,7 +42,8 @@ public class CodeCoverageProviderTest {
       "sonar.vbnet.ncover3.reportsPaths",
       "sonar.vbnet.opencover.reportsPaths",
       "sonar.vbnet.dotcover.reportsPaths",
-      "sonar.vbnet.vscoveragexml.reportsPaths");
+      "sonar.vbnet.vscoveragexml.reportsPaths",
+      "sonar.vbnet.cobertura.reportsPaths");
   }
 
   @Test
@@ -58,7 +59,8 @@ public class CodeCoverageProviderTest {
       "sonar.cs.ncover3.reportsPaths",
       "sonar.cs.opencover.reportsPaths",
       "sonar.cs.dotcover.reportsPaths",
-      "sonar.cs.vscoveragexml.reportsPaths");
+      "sonar.cs.vscoveragexml.reportsPaths",
+      "sonar.cs.cobertura.reportsPaths");
   }
 
   @Test

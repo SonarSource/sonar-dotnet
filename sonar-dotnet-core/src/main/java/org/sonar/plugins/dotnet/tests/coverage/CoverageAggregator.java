@@ -42,6 +42,7 @@ public class CoverageAggregator {
   private final OpenCoverReportParser openCoverReportParser;
   private final DotCoverReportsAggregator dotCoverReportsAggregator;
   private final VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser;
+  private final CoberturaReportParser coberturaReportParser;
 
   public CoverageAggregator(CoverageConfiguration coverageConf,
                             Configuration configuration,
@@ -54,6 +55,7 @@ public class CoverageAggregator {
     this.openCoverReportParser = new OpenCoverReportParser(fileService);
     this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(fileService));
     this.visualStudioCoverageXmlReportParser = new VisualStudioCoverageXmlReportParser(fileService);
+    this.coberturaReportParser = new CoberturaReportParser(fileService);
   }
 
   // visible for testing
@@ -63,7 +65,8 @@ public class CoverageAggregator {
                      NCover3ReportParser ncover3ReportParser,
                      OpenCoverReportParser openCoverReportParser,
                      DotCoverReportsAggregator dotCoverReportsAggregator,
-                     VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser) {
+                     VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser,
+                     CoberturaReportParser coberturaReportParser) {
 
     this.coverageConf = coverageConf;
     this.configuration = configuration;
@@ -72,6 +75,7 @@ public class CoverageAggregator {
     this.openCoverReportParser = openCoverReportParser;
     this.dotCoverReportsAggregator = dotCoverReportsAggregator;
     this.visualStudioCoverageXmlReportParser = visualStudioCoverageXmlReportParser;
+    this.coberturaReportParser = coberturaReportParser;
   }
 
   boolean hasCoverageProperty() {
@@ -83,7 +87,8 @@ public class CoverageAggregator {
     return hasNCover3ReportPaths(hasKeyPredicate)
       || hasOpenCoverReportPaths(hasKeyPredicate)
       || hasDotCoverReportPaths(hasKeyPredicate)
-      || hasVisualStudioCoverageXmlReportPaths(hasKeyPredicate);
+      || hasVisualStudioCoverageXmlReportPaths(hasKeyPredicate)
+      || hasCoberturaReportPaths(hasKeyPredicate);
   }
 
   private boolean hasNCover3ReportPaths(Predicate<String> hasKeyPredicate) {
@@ -102,6 +107,10 @@ public class CoverageAggregator {
     return hasKeyPredicate.test(coverageConf.visualStudioCoverageXmlPropertyKey());
   }
 
+  private boolean hasCoberturaReportPaths(Predicate<String> hasKeyPredicate) {
+    return hasKeyPredicate.test(coverageConf.coberturaPropertyKey());
+  }
+
   Coverage aggregate(WildcardPatternFileProvider wildcardPatternFileProvider, Coverage coverage) {
     if (hasNCover3ReportPaths(configuration::hasKey)) {
       aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.ncover3PropertyKey()), ncover3ReportParser, coverage);
@@ -117,6 +126,10 @@ public class CoverageAggregator {
 
     if (hasVisualStudioCoverageXmlReportPaths(configuration::hasKey)) {
       aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.visualStudioCoverageXmlPropertyKey()), visualStudioCoverageXmlReportParser, coverage);
+    }
+
+    if (hasCoberturaReportPaths(configuration::hasKey)) {
+      aggregate(wildcardPatternFileProvider, configuration.getStringArray(coverageConf.coberturaPropertyKey()), coberturaReportParser, coverage);
     }
 
     return coverage;

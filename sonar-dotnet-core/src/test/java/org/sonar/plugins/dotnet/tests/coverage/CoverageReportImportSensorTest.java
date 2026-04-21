@@ -55,7 +55,7 @@ public class CoverageReportImportSensorTest {
   @Rule
   public LogTester logTester = new LogTester();
 
-  private CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "");
+  private CoverageConfiguration coverageConf = new CoverageConfiguration("cs", "", "", "", "", "");
   private CoverageAggregator coverageAggregator = mock(CoverageAggregator.class);
   private File baseDir;
   private SensorContextTester context;

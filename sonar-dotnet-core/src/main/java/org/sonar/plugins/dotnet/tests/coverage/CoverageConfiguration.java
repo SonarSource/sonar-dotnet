@@ -20,5 +20,6 @@ public record CoverageConfiguration(String languageKey,
                                     String ncover3PropertyKey,
                                     String openCoverPropertyKey,
                                     String dotCoverPropertyKey,
-                                    String visualStudioCoverageXmlPropertyKey) {
+                                    String visualStudioCoverageXmlPropertyKey,
+                                    String coberturaPropertyKey) {
 }

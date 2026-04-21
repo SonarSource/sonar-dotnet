@@ -48,7 +48,8 @@ public class CodeCoverageProvider {
       SONAR_PROPERTY_PREFIX + languageKey + ".ncover3.reportsPaths",
       SONAR_PROPERTY_PREFIX + languageKey + ".opencover.reportsPaths",
       SONAR_PROPERTY_PREFIX + languageKey + ".dotcover.reportsPaths",
-      SONAR_PROPERTY_PREFIX + languageKey + ".vscoveragexml.reportsPaths");
+      SONAR_PROPERTY_PREFIX + languageKey + ".vscoveragexml.reportsPaths",
+      SONAR_PROPERTY_PREFIX + languageKey + ".cobertura.reportsPaths");
   }
 
   public List<Object> extensions() {
@@ -86,6 +87,14 @@ public class CodeCoverageProvider {
       PropertyDefinition.builder(coverageConf.visualStudioCoverageXmlPropertyKey())
         .name("Visual Studio Unit Tests (XML) Reports Paths")
         .description("Example: \"report.coveragexml\", \"report1.coveragexml,report2.coveragexml\" or \"C:/report.coveragexml\"")
+        .category(category)
+        .subCategory(SUBCATEGORY)
+        .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
+        .multiValues(true)
+        .build(),
+      PropertyDefinition.builder(coverageConf.coberturaPropertyKey())
+        .name("Cobertura Unit Tests Reports Paths")
+        .description("Example: \"coverage.xml\", \"report1.xml,report2.xml\" or \"C:/coverage.xml\"")
         .category(category)
         .subCategory(SUBCATEGORY)
         .onlyOnConfigScopes(List.of(ConfigScope.PROJECT))
