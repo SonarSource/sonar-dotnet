@@ -67,18 +67,18 @@ public class CoverageTest {
   }
 
   @Test
-  public void givenEmptyListOfBranchPoints_getBranchCoverage_returnsEmpty() {
+  public void givenEmptyListOfConditionDatas_getBranchCoverage_returnsEmpty() {
     Coverage sut = new Coverage();
 
     assertThat(sut.getBranchCoverage("fileName")).isEmpty();
   }
 
   @Test
-  public void givenSingleBranchPoint_getBranchCoverage_returnsEmpty() {
+  public void givenSingleConditionData_getBranchCoverage_returnsEmpty() {
     final String filePath = "filePath";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(filePath, 1, 2, 3, 4, 5, "coverageIdentifier"));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(2, 3), 4, 5, "coverageIdentifier"));
 
     // Normally this case should not happen but if we have only one branch point
     // we should not report coverage as line coverage is already covering that.
@@ -86,14 +86,14 @@ public class CoverageTest {
   }
 
   @Test
-  public void givenSingleBranchPointPerFile_getBranchCoverage_returnsEmpty() {
+  public void givenSingleConditionDataPerFile_getBranchCoverage_returnsEmpty() {
     final String firstPath = "firstPath";
     final String secondPath = "secondPath";
     final String coverageIdentifier = "coverageIdentifier";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(firstPath, 1, 2, 3, 4, 5, coverageIdentifier));
-    sut.add(new BranchPoint(secondPath, 1, 6, 7, 8, 9, coverageIdentifier));
+    sut.add(new ConditionData("opencover",firstPath, 1, new ConditionData.Location(2, 3), 4, 5, coverageIdentifier));
+    sut.add(new ConditionData("opencover",secondPath, 1, new ConditionData.Location(6, 7), 8, 9, coverageIdentifier));
 
     // Normally this case should not happen but if we have only one branch point
     // we should not report coverage as line coverage is already covering that.
@@ -102,13 +102,13 @@ public class CoverageTest {
   }
 
   @Test
-  public void givenSingleBranchPointPerLine_getBranchCoverage_returnsEmpty() {
+  public void givenSingleConditionDataPerLine_getBranchCoverage_returnsEmpty() {
     final String filePath = "filePath";
     final String coverageIdentifier = "coverageIdentifier";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(filePath, 1, 2, 3, 4, 5, coverageIdentifier));
-    sut.add(new BranchPoint(filePath, 2, 6, 7, 8, 9, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(2, 3), 4, 5, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(6, 7), 8, 9, coverageIdentifier));
 
     assertThat(sut.getBranchCoverage(filePath)).isEmpty();
   }
@@ -121,24 +121,24 @@ public class CoverageTest {
     Coverage sut = new Coverage();
 
     // Identical branch points are merged
-    sut.add(new BranchPoint(filePath, 1, 1, 2, 0, 1, coverageIdentifier));
-    sut.add(new BranchPoint(filePath, 1, 1, 2, 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(1, 2), 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(1, 2), 0, 1, coverageIdentifier));
 
     // Branch points with different line are not aggregated
-    sut.add(new BranchPoint(filePath, 2, 1, 2, 0, 1, coverageIdentifier));
-    sut.add(new BranchPoint(filePath, 3, 1, 2, 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(1, 2), 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 3, new ConditionData.Location(1, 2), 0, 1, coverageIdentifier));
 
     // Branch points with different offset are correctly aggregated
-    sut.add(new BranchPoint(filePath, 4, 1, 2, 0, 1, coverageIdentifier));
-    sut.add(new BranchPoint(filePath, 4, 2, 2, 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(1, 2), 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(2, 2), 0, 1, coverageIdentifier));
 
     // Branch points with different offsetEnd are correctly aggregated
-    sut.add(new BranchPoint(filePath, 5, 1, 2, 0, 1, coverageIdentifier));
-    sut.add(new BranchPoint(filePath, 5, 1, 3, 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(1, 2), 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(1, 3), 0, 1, coverageIdentifier));
 
     // Branch points with different path are correctly aggregated
-    sut.add(new BranchPoint(filePath, 6, 1, 2, 0, 1, coverageIdentifier));
-    sut.add(new BranchPoint(filePath, 6, 1, 2, 1, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(1, 2), 0, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(1, 2), 1, 1, coverageIdentifier));
 
     assertThat(sut.getBranchCoverage(filePath))
       .containsExactlyInAnyOrder(
@@ -150,42 +150,42 @@ public class CoverageTest {
   }
 
   @Test
-  public void givenMultipleBranchPointsPerLine_getBranchCoverage_returnsBranchCoverage() {
+  public void givenMultipleConditionDatasPerLine_getBranchCoverage_returnsBranchCoverage() {
     final String filePath = "filePath";
     final String coverageIdentifier1 = "coverageIdentifier1";
     final String coverageIdentifier2 = "coverageIdentifier2";
 
     Coverage sut = new Coverage();
     // Both branch points covered
-    sut.add(new BranchPoint(filePath, 1, 1, 3, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 1, 4, 6, 1, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(1, 3), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(4, 6), 1, 1, coverageIdentifier1));
 
     // Only 2 out of 3 branch points covered
-    sut.add(new BranchPoint(filePath, 2, 1, 3, 0, 2, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 2, 4, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 2, 6, 8, 2, 4, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(1, 3), 0, 2, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(4, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(6, 8), 2, 4, coverageIdentifier1));
 
     // No branch points covered
-    sut.add(new BranchPoint(filePath, 3, 1, 3, 0, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 3, 4, 6, 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 3, new ConditionData.Location(1, 3), 0, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 3, new ConditionData.Location(4, 6), 1, 0, coverageIdentifier1));
 
     // Same branch points appear multiple times, none covered (when tests are split in multiple test projects)
-    sut.add(new BranchPoint(filePath, 4, 1, 3, 0, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 4, 4, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 4, 1, 3, 0, 0, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 4, 4, 6, 1, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(1, 3), 0, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(4, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(1, 3), 0, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(4, 6), 1, 0, coverageIdentifier2));
 
     // Same branch points appear multiple times, same coverage (when tests are split in multiple test projects)
-    sut.add(new BranchPoint(filePath, 5, 1, 3, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 5, 4, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 5, 1, 3, 0, 1, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 5, 4, 6, 1, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(1, 3), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(4, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(1, 3), 0, 1, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(4, 6), 1, 0, coverageIdentifier2));
 
     // Same branch points appear multiple times, different coverage (when tests are split in multiple test projects)
-    sut.add(new BranchPoint(filePath, 6, 1, 3, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 6, 4, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 6, 1, 3, 0, 0, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 6, 4, 6, 1, 1, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(1, 3), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(4, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(1, 3), 0, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(4, 6), 1, 1, coverageIdentifier2));
 
     assertThat(sut.getBranchCoverage(filePath))
       .containsExactlyInAnyOrder(
@@ -199,62 +199,62 @@ public class CoverageTest {
   }
 
   @Test
-  public void givenMultipleBranchPointsPerLineInDifferentFiles_getBranchCoverage_returnsBranchCoverage() {
+  public void givenMultipleConditionDatasPerLineInDifferentFiles_getBranchCoverage_returnsBranchCoverage() {
     final String firstPath = "firstPath";
     final String secondPath = "secondPath";
     final String coverageIdentifier = "coverageIdentifier";
 
     Coverage sut = new Coverage();
-    sut.add(new BranchPoint(firstPath, 1, 1, 3, 0, 2, coverageIdentifier));
-    sut.add(new BranchPoint(firstPath, 1, 4, 6, 1, 1, coverageIdentifier));
+    sut.add(new ConditionData("opencover",firstPath, 1, new ConditionData.Location(1, 3), 0, 2, coverageIdentifier));
+    sut.add(new ConditionData("opencover",firstPath, 1, new ConditionData.Location(4, 6), 1, 1, coverageIdentifier));
 
-    sut.add(new BranchPoint(secondPath, 1, 5, 8, 0, 2, coverageIdentifier));
-    sut.add(new BranchPoint(secondPath, 1, 10, 12, 1, 0, coverageIdentifier));
-    sut.add(new BranchPoint(secondPath, 1, 12, 14, 2, 0, coverageIdentifier));
+    sut.add(new ConditionData("opencover",secondPath, 1, new ConditionData.Location(5, 8), 0, 2, coverageIdentifier));
+    sut.add(new ConditionData("opencover",secondPath, 1, new ConditionData.Location(10, 12), 1, 0, coverageIdentifier));
+    sut.add(new ConditionData("opencover",secondPath, 1, new ConditionData.Location(12, 14), 2, 0, coverageIdentifier));
 
     assertThat(sut.getBranchCoverage(firstPath)).containsExactlyInAnyOrder(new BranchCoverage(1, 2, 2));
     assertThat(sut.getBranchCoverage(secondPath)).containsExactlyInAnyOrder(new BranchCoverage(1, 3, 1));
   }
 
   @Test
-  public void givenBranchPointsFromFromDifferentReports_getBranchCoverage_returnsBranchCoverage(){
+  public void givenConditionDatasFromFromDifferentReports_getBranchCoverage_returnsBranchCoverage(){
     final String filePath = "filePath";
     final String coverageIdentifier1 = "coverageIdentifier1";
     final String coverageIdentifier2 = "coverageIdentifier2";
 
     Coverage sut = new Coverage();
 
-    // BranchPoints match exactly, coverage is aggregated correctly
-    sut.add(new BranchPoint(filePath, 1, 0, 5, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 1, 0, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 1, 0, 5, 0, 0, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 1, 0, 6, 1, 1, coverageIdentifier2));
+    // ConditionDatas match exactly, coverage is aggregated correctly
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(0, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(0, 5), 0, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 1, new ConditionData.Location(0, 6), 1, 1, coverageIdentifier2));
 
-    sut.add(new BranchPoint(filePath, 2, 0, 5, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 2, 0, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 2, 0, 5, 0, 1, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 2, 0, 6, 1, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(0, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 2, new ConditionData.Location(0, 6), 1, 0, coverageIdentifier2));
 
-    sut.add(new BranchPoint(filePath, 3, 0, 5, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 3, 0, 6, 1, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 3, 0, 5, 0, 1, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 3, 0, 6, 1, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 3, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 3, new ConditionData.Location(0, 6), 1, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 3, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 3, new ConditionData.Location(0, 6), 1, 0, coverageIdentifier2));
 
-    // BranchPoints differ, coverage is reported forgivingly
-    sut.add(new BranchPoint(filePath, 4, 0, 5, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 4, 0, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 4, 0, 7, 0, 0, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 4, 0, 8, 1, 1, coverageIdentifier2));
+    // ConditionDatas differ, coverage is reported forgivingly
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(0, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(0, 7), 0, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 4, new ConditionData.Location(0, 8), 1, 1, coverageIdentifier2));
 
-    sut.add(new BranchPoint(filePath, 5, 0, 5, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 5, 0, 6, 1, 0, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 5, 0, 7, 0, 1, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 5, 0, 8, 1, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(0, 6), 1, 0, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(0, 7), 0, 1, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 5, new ConditionData.Location(0, 8), 1, 0, coverageIdentifier2));
 
-    sut.add(new BranchPoint(filePath, 6, 0, 5, 0, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 6, 0, 6, 1, 1, coverageIdentifier1));
-    sut.add(new BranchPoint(filePath, 6, 0, 7, 0, 1, coverageIdentifier2));
-    sut.add(new BranchPoint(filePath, 6, 0, 8, 1, 0, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(0, 5), 0, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(0, 6), 1, 1, coverageIdentifier1));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(0, 7), 0, 1, coverageIdentifier2));
+    sut.add(new ConditionData("opencover",filePath, 6, new ConditionData.Location(0, 8), 1, 0, coverageIdentifier2));
 
     assertThat(sut.getBranchCoverage(filePath))
       .containsExactlyInAnyOrder(

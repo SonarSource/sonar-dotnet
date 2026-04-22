@@ -16,9 +16,9 @@
  */
 package org.sonar.plugins.dotnet.tests.coverage;
 
-class BranchPoint {
-  private final int offset;
-  private final int offsetEnd;
+class ConditionData {
+  private final String format;
+  private final Location location;
   private final int startLine;
   private final int hits;
   // identifier for code path
@@ -26,14 +26,18 @@ class BranchPoint {
   private final String filePath;
   private final String coverageIdentifier;
 
-  public BranchPoint(String filePath, int startLine, int offset, int offsetEnd, int path, int hits, String coverageIdentifier) {
+  public ConditionData(String format, String filePath, int startLine, Location location, int path, int hits, String coverageIdentifier) {
+    this.format = format;
     this.filePath = filePath;
     this.startLine = startLine;
-    this.offset = offset;
-    this.offsetEnd = offsetEnd;
+    this.location = location;
     this.path = path;
     this.hits = hits;
     this.coverageIdentifier = coverageIdentifier;
+  }
+
+  public String getFormat() {
+    return format;
   }
 
   public int getStartLine() {
@@ -53,6 +57,9 @@ class BranchPoint {
   }
 
   public String getUniqueKey() {
-    return String.format("%s-%d-%d-%d-%d", filePath, startLine, offset, offsetEnd, path);
+    return String.format("%s-%d-%d-%d-%d", filePath, startLine, location.start, location.end, path);
+  }
+
+  record Location(int start, int end) {
   }
 }

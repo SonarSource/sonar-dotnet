@@ -31,7 +31,7 @@ public class Coverage {
   private static final int GROW_FACTOR = 2;
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
-  private final List<BranchPoint> branchPoints = new ArrayList<>();
+  private final List<ConditionData> conditionData = new ArrayList<>();
 
   void addHits(String file, int line, int hits) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
@@ -59,8 +59,8 @@ public class Coverage {
     oldHitsByLine[i] += hits;
   }
 
-  public void add(BranchPoint branchPoint){
-    branchPoints.add(branchPoint);
+  public void add(ConditionData condition){
+    conditionData.add(condition);
   }
 
   public Set<String> files() {
@@ -84,9 +84,9 @@ public class Coverage {
   }
 
   List<BranchCoverage> getBranchCoverage(String file) {
-    return branchPoints.stream()
+    return conditionData.stream()
       .filter(point -> point.getFilePath().equals(file))
-      .collect(Collectors.groupingBy(BranchPoint::getStartLine)).entrySet().stream()
+      .collect(Collectors.groupingBy(ConditionData::getStartLine)).entrySet().stream()
       .map(x -> getBranchCoverage(x.getKey(), x.getValue()))
       .filter(x -> x.getConditions() > 1)
       .toList();
@@ -94,7 +94,7 @@ public class Coverage {
 
   void mergeWith(Coverage otherCoverage) {
     mergeLineHits(otherCoverage);
-    branchPoints.addAll(otherCoverage.branchPoints);
+    conditionData.addAll(otherCoverage.conditionData);
   }
 
   private void mergeLineHits(Coverage otherCoverage){
@@ -110,20 +110,20 @@ public class Coverage {
     }
   }
 
-  private static BranchCoverage getBranchCoverage(int lineNumber, List<BranchPoint> branchPoints) {
-    // Mapping BranchPoints from different coverage reports is fragile due to potential differences in compilation.
-    // Therefore, we use a forgiving approach: First, count the number of BranchPoints per report and take the maximum. Then, map
-    // BranchPoints and count the ones that are covered. If the mapping did not go well, we might find too many covered BranchPoints.
+  private static BranchCoverage getBranchCoverage(int lineNumber, List<ConditionData> conditions) {
+    // Mapping ConditionData from different coverage reports is fragile due to potential differences in compilation.
+    // Therefore, we use a forgiving approach: First, count the number of conditions per report and take the maximum. Then, map
+    // conditions and count the ones that are covered. If the mapping did not go well, we might find too many covered conditions.
     // In this case, we cap the amount to the previously calculated maximum and assume all branches are covered.
-    int maxBranchPoints = branchPoints.stream()
-      .collect(Collectors.groupingBy(BranchPoint::getCoverageIdentifier)).values().stream()
-      .map(x -> (int)x.stream().map(BranchPoint::getUniqueKey).distinct().count())
+    int maxConditions = conditions.stream()
+      .collect(Collectors.groupingBy(ConditionData::getCoverageIdentifier)).values().stream()
+      .map(x -> (int)x.stream().map(ConditionData::getUniqueKey).distinct().count())
       .max(Comparator.comparingInt(x -> x)).orElse(0);
 
-    int coveredBranchPoints = (int)branchPoints.stream()
+    int coveredConditions = (int)conditions.stream()
       .filter(x -> x.getHits() > 0)
-      .map(BranchPoint::getUniqueKey).distinct().count();
+      .map(ConditionData::getUniqueKey).distinct().count();
 
-    return new BranchCoverage(lineNumber, maxBranchPoints, Math.min(coveredBranchPoints, maxBranchPoints));
+    return new BranchCoverage(lineNumber, maxConditions, Math.min(coveredConditions, maxConditions));
   }
 }
