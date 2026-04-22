@@ -52,6 +52,7 @@ public final class CoberturaReportParser implements CoverageParser {
     private final Coverage coverage;
     private final List<String> sources = new ArrayList<>();
     private final Map<String, CoveredFile> filesByFilename = new HashMap<>();
+    private String currentClassFilename;
 
     private Parser(File file, Coverage coverage) {
       this.file = file;
@@ -74,8 +75,9 @@ public final class CoberturaReportParser implements CoverageParser {
           handleSourceTag(xmlParserHelper);
         } else if ("class".equals(tagName)) {
           handleClassTag(xmlParserHelper);
+        } else if ("line".equals(tagName)) {
+          handleLineTag(xmlParserHelper);
         }
-        // TODO: NET-3613 handle "line" tags for hits and branch points
       }
     }
 
@@ -94,11 +96,25 @@ public final class CoberturaReportParser implements CoverageParser {
 
     private void handleClassTag(XmlParserHelper xmlParserHelper) {
       String filename = xmlParserHelper.getRequiredAttribute("filename");
+      currentClassFilename = filename;
       if (!filesByFilename.containsKey(filename)) {
         CoveredFile coveredFile = resolveFile(filename);
         LOG.debug("CoveredFile created: {}.", coveredFile);
         filesByFilename.put(filename, coveredFile);
       }
+    }
+
+    private void handleLineTag(XmlParserHelper xmlParserHelper) {
+      CoveredFile coveredFile = filesByFilename.get(currentClassFilename);
+      if (coveredFile == null || !coveredFile.isIndexed()) {
+        return;
+      }
+
+      int line = xmlParserHelper.getRequiredIntAttribute("number");
+      int hits = xmlParserHelper.getRequiredIntAttribute("hits");
+      coverage.addHits(coveredFile.indexedPath(), line, hits);
+
+      LOG.trace("Cobertura parser: add hits for file {}, line '{}', hits '{}'.", coveredFile, line, hits);
     }
 
     private CoveredFile resolveFile(String filename) {

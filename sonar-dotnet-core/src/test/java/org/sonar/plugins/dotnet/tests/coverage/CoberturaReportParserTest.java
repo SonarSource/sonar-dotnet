@@ -24,7 +24,6 @@ import org.junit.Test;
 import org.slf4j.event.Level;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.sonar.plugins.dotnet.tests.FileService;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -101,7 +100,7 @@ public class CoberturaReportParserTest {
     when(selectiveService.isSupportedAbsolute(contains("SecondSource"))).thenReturn(true);
     when(selectiveService.getAbsolutePath(anyString())).thenReturn(Optional.empty());
     Coverage coverage = new Coverage();
-    
+
     new CoberturaReportParser(selectiveService).accept(new File("src/test/resources/cobertura/relative_path_with_sources.xml"), coverage);
     // Verify both sources were evaluated: FirstSource was tried and rejected, then SecondSource matched
     verify(selectiveService, times(2)).isSupportedAbsolute(anyString());
@@ -176,4 +175,33 @@ public class CoberturaReportParserTest {
     assertThat(logTester.logs(Level.DEBUG)).anyMatch(log -> log.contains("CoveredFile created") && log.contains("indexed as"));
   }
 
+  @Test
+  public void line_coverage_adds_hits() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/line_coverage.xml"), coverage);
+
+    assertThat(coverage.files()).hasSize(2);
+
+    String file1 = coverage.files().stream().filter(f -> f.contains("Class1")).findFirst().orElseThrow();
+    assertThat(coverage.hits(file1))
+      .hasSize(3)
+      .containsEntry(10, 6)   // hits=3 from method + hits=3 from class = 6
+      .containsEntry(11, 0)   // hits=0 from method only
+      .containsEntry(15, 1);  // hits=1 from class only
+
+    String file2 = coverage.files().stream().filter(f -> f.contains("Class2")).findFirst().orElseThrow();
+    assertThat(coverage.hits(file2))
+      .hasSize(2)
+      .containsEntry(5, 3)    // hits=2 from method + hits=1 from class = 3
+      .containsEntry(20, 4);  // hits=4 from class only
+  }
+
+  @Test
+  public void line_coverage_unresolved_file_skips_lines() {
+    Coverage coverage = new Coverage();
+    new CoberturaReportParser(alwaysTrue).accept(new File("src/test/resources/cobertura/line_coverage_unresolved_file.xml"), coverage);
+
+    // Relative path with no sources — file can't resolve, lines are skipped
+    assertThat(coverage.files()).isEmpty();
+  }
 }
