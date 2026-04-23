@@ -15,65 +15,53 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class MethodShouldNotOnlyReturnConstant : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class MethodShouldNotOnlyReturnConstant : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S3400";
-        private const string MessageFormat = "Remove this method and declare a constant for this value.";
+    private const string DiagnosticId = "S3400";
+    private const string MessageFormat = "Remove this method and declare a constant for this value.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var method = (MethodDeclarationSyntax)c.Node;
+                if (method.ParameterList?.Parameters.Count is 0
+                    && !IsVirtual(method)
+                    && IsConstantExpression(SingleExpressionOrDefault(method), c.Model)
+                    && !ContainsConditionalCompilation(c.Node)
+                    && c.Model.GetDeclaredSymbol(method) is { } methodSymbol
+                    && !methodSymbol.ContainingType.IsInterface()
+                    && methodSymbol.InterfaceMembers().IsEmpty()
+                    && methodSymbol.GetOverriddenMember() is null)
                 {
-                    var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    if (methodDeclaration.ParameterList?.Parameters.Count > 0
-                        || IsVirtual(methodDeclaration))
-                    {
-                        return;
-                    }
+                    c.ReportIssue(Rule, method.Identifier);
+                }
+            },
+            SyntaxKind.MethodDeclaration);
 
-                    var expressionSyntax = GetSingleExpressionOrDefault(methodDeclaration);
-                    if (!IsConstantExpression(expressionSyntax, c.Model))
-                    {
-                        return;
-                    }
+    private static bool IsVirtual(BaseMethodDeclarationSyntax methodDeclaration) =>
+        methodDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.VirtualKeyword));
 
-                    if (c.Model.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
-                        && !methodSymbol.ContainingType.IsInterface()
-                        && methodSymbol.InterfaceMembers().IsEmpty()
-                        && methodSymbol.GetOverriddenMember() == null)
-                    {
-                        c.ReportIssue(Rule, methodDeclaration.Identifier);
-                    }
-                },
-                SyntaxKind.MethodDeclaration);
-
-        private static bool IsVirtual(BaseMethodDeclarationSyntax methodDeclaration) =>
-            methodDeclaration.Modifiers.Any(m => m.IsKind(SyntaxKind.VirtualKeyword));
-
-        private static ExpressionSyntax GetSingleExpressionOrDefault(MethodDeclarationSyntax methodDeclaration)
+    private static ExpressionSyntax SingleExpressionOrDefault(MethodDeclarationSyntax method) =>
+        method switch
         {
-            if (methodDeclaration.ExpressionBody != null)
-            {
-                return methodDeclaration.ExpressionBody.Expression;
-            }
+            { ExpressionBody: { } body } => body.Expression,
+            { Body.Statements: { Count: 1 } statements } when statements.Single() is ReturnStatementSyntax returnStatement => returnStatement.Expression,
+            _ => null
+        };
 
-            if (methodDeclaration.Body is { Statements: { Count: 1 } })
-            {
-                return (methodDeclaration.Body.Statements[0] as ReturnStatementSyntax)?.Expression;
-            }
+    private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel model) =>
+        expression.RemoveParentheses() is LiteralExpressionSyntax literal
+        && !literal.IsNullLiteral()
+        && model.GetConstantValue(literal).HasValue;
 
-            return null;
-        }
-
-        private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel semanticModel) =>
-            expression.RemoveParentheses() is LiteralExpressionSyntax noParenthesesExpression
-            && !noParenthesesExpression.IsNullLiteral()
-            && semanticModel.GetConstantValue(noParenthesesExpression).HasValue;
-    }
+    private static bool ContainsConditionalCompilation(SyntaxNode node) =>
+        node.DescendantNodes(descendIntoTrivia: true).Any(x => x.IsKind(SyntaxKind.IfDirectiveTrivia));
 }
