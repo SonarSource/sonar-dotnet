@@ -17,12 +17,14 @@
 
 namespace SonarAnalyzer.TestFramework.Common;
 
-internal sealed class LogTester : IDisposable
+public sealed class LogTester : IDisposable
 {
     private readonly TextWriter originalOut;
     private readonly TextWriter originalError;
     private readonly StringWriter outWriter = new();
     private readonly StringWriter errorWriter = new();
+
+    public string OutLogs => outWriter.ToString();
 
     public LogTester()
     {
