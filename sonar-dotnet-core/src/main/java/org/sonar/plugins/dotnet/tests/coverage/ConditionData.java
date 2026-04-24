@@ -17,6 +17,10 @@
 package org.sonar.plugins.dotnet.tests.coverage;
 
 class ConditionData {
+  static final String FORMAT_OPENCOVER = "opencover";
+  static final String FORMAT_COBERTURA = "cobertura";
+  static final String FORMAT_UNMERGEABLE = "unmergeable";
+
   private final String format;
   private final Location location;
   private final int startLine;

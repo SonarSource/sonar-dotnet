@@ -37,8 +37,6 @@ public final class CoberturaReportParser implements CoverageParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoberturaReportParser.class);
   private static final Pattern CONDITION_COVERAGE_PATTERN = Pattern.compile("\\d+%\\s*\\((\\d+)/(\\d+)\\)");
-  static final String FORMAT_COBERTURA = "cobertura";
-  static final String FORMAT_UNMERGEABLE = "unmergeable";
   private final FileService fileService;
 
   public CoberturaReportParser(FileService fileService) {
@@ -186,14 +184,14 @@ public final class CoberturaReportParser implements CoverageParser {
 
     private void addUnmergeableConditions(String filePath, int line, int covered, int total, String coverageIdentifier) {
       for (int i = 0; i < total; i++) {
-        coverage.add(new ConditionData(FORMAT_UNMERGEABLE, filePath, line, new ConditionData.Location(i, 0), i, i < covered ? 1 : 0, coverageIdentifier));
+        coverage.add(new ConditionData(ConditionData.FORMAT_UNMERGEABLE, filePath, line, new ConditionData.Location(i, 0), i, i < covered ? 1 : 0, coverageIdentifier));
       }
       LOG.trace("Cobertura parser: add {} unmergeable branch conditions for file '{}', line '{}'.", total, filePath, line);
     }
 
     private void addSwitchConditions(String filePath, int line, int covered, int total, int conditionNumber, String coverageIdentifier) {
       for (int i = 0; i < total; i++) {
-        coverage.add(new ConditionData(FORMAT_COBERTURA, filePath, line, new ConditionData.Location(conditionNumber, 0), i, i < covered ? 1 : 0, coverageIdentifier));
+        coverage.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, line, new ConditionData.Location(conditionNumber, 0), i, i < covered ? 1 : 0, coverageIdentifier));
       }
       LOG.trace("Cobertura parser: add {} switch branch conditions for file '{}', line '{}', condition number '{}'.", total, filePath, line, conditionNumber);
     }
@@ -203,8 +201,8 @@ public final class CoberturaReportParser implements CoverageParser {
       var location = new ConditionData.Location(condition.number, 0);
       int hitPath0 = percentage > 0 ? 1 : 0;
       int hitPath1 = percentage == 100 ? 1 : 0;
-      coverage.add(new ConditionData(FORMAT_COBERTURA, filePath, line, location, 0, hitPath0, coverageIdentifier));
-      coverage.add(new ConditionData(FORMAT_COBERTURA, filePath, line, location, 1, hitPath1, coverageIdentifier));
+      coverage.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, line, location, 0, hitPath0, coverageIdentifier));
+      coverage.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, line, location, 1, hitPath1, coverageIdentifier));
       LOG.trace("Cobertura parser: add jump branch conditions for file '{}', line '{}', condition number '{}', coverage '{}%'.", filePath, line, condition.number, percentage);
       return hitPath0 + hitPath1;
     }

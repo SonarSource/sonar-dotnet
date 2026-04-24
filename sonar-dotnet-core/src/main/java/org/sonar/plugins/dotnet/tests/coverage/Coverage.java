@@ -87,9 +87,6 @@ public class Coverage {
     return result;
   }
 
-  // TODO NET-3619: This method does not yet differentiate ConditionData by format.
-  //  Unmergeable and cross-family conditions are merged uniformly, which can inflate coverage
-  //  when combining multiple reports. Format-aware grouping and per-family max strategy needed.
   List<BranchCoverage> getBranchCoverage(String file) {
     return conditionData.stream()
       .filter(point -> point.getFilePath().equals(file))
@@ -122,15 +119,30 @@ public class Coverage {
     // Therefore, we use a forgiving approach: First, count the number of conditions per report and take the maximum. Then, map
     // conditions and count the ones that are covered. If the mapping did not go well, we might find too many covered conditions.
     // In this case, we cap the amount to the previously calculated maximum and assume all branches are covered.
+    // In case of multiple formats, we take the maximum of the per-format merges.
+    List<ConditionCoverageResult> coverages = conditions.stream()
+      .collect(Collectors.groupingBy(ConditionData::getFormat)).values().stream()
+      .map(Coverage::calculateCoverage)
+      .toList();
+
+    int maxConditions = coverages.stream().mapToInt(ConditionCoverageResult::totalBranches).max().orElse(0);
+    int coveredConditions = coverages.stream().mapToInt(ConditionCoverageResult::coveredBranches).max().orElse(0);
+
+    return new BranchCoverage(lineNumber, maxConditions, Math.min(coveredConditions, maxConditions));
+  }
+
+  private static ConditionCoverageResult calculateCoverage(List<ConditionData> conditions) {
     int maxConditions = conditions.stream()
       .collect(Collectors.groupingBy(ConditionData::getCoverageIdentifier)).values().stream()
       .map(x -> (int)x.stream().map(ConditionData::getUniqueKey).distinct().count())
       .max(Comparator.comparingInt(x -> x)).orElse(0);
 
-    int coveredConditions = (int)conditions.stream()
+    int coveredConditions = (int) conditions.stream()
       .filter(x -> x.getHits() > 0)
       .map(ConditionData::getUniqueKey).distinct().count();
 
-    return new BranchCoverage(lineNumber, maxConditions, Math.min(coveredConditions, maxConditions));
+    return new ConditionCoverageResult(maxConditions, Math.min(coveredConditions, maxConditions));
   }
+
+  private record ConditionCoverageResult(int totalBranches, int coveredBranches) {}
 }
