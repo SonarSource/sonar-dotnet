@@ -44,6 +44,7 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -237,6 +238,50 @@ public class CoverageReportImportSensorTest {
     verify(coverageAggregator).aggregate(Mockito.any(WildcardPatternFileProvider.class), Mockito.eq(coverage));
 
     return context;
+  }
+
+  @Test
+  public void analyze_setsTelemetryFalse_whenNoBranchCoverageUnderreporting() {
+    Coverage coverage = mock(Coverage.class);
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
+    when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
+    when(coverage.hits(fooPath)).thenReturn(Map.of(1, 1));
+    when(coverage.getBranchCoverage(fooPath)).thenReturn(Collections.emptyList());
+    when(coverage.getBranchCoverageUnderreported()).thenReturn(false);
+
+    context.fileSystem().add(new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .initMetadata("a\na\na\na\na\na\na\na\na\na\n")
+      .build());
+
+    var spyContext = spy(context);
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
+      .analyze(spyContext, coverage);
+
+    verify(spyContext).addTelemetryProperty("dotnetenterprise.plugin.cs.coverage.underReported", "false");
+  }
+
+  @Test
+  public void analyze_setsTelemetryTrue_whenBranchCoverageUnderreported() {
+    Coverage coverage = mock(Coverage.class);
+    String fooPath = new File(baseDir, "Foo.cs").getAbsolutePath();
+    when(coverage.files()).thenReturn(new HashSet<>(Collections.singletonList(fooPath)));
+    when(coverage.hits(fooPath)).thenReturn(Map.of(1, 1));
+    when(coverage.getBranchCoverage(fooPath)).thenReturn(Collections.emptyList());
+    when(coverage.getBranchCoverageUnderreported()).thenReturn(true);
+
+    context.fileSystem().add(new TestInputFileBuilder("foo", baseDir, new File(baseDir, "Foo.cs"))
+      .setLanguage("cs")
+      .setType(Type.MAIN)
+      .initMetadata("a\na\na\na\na\na\na\na\na\na\n")
+      .build());
+
+    var spyContext = spy(context);
+    new CoverageReportImportSensor(coverageConf, coverageAggregator, "cs", "C#")
+      .analyze(spyContext, coverage);
+
+    verify(spyContext).addTelemetryProperty("dotnetenterprise.plugin.cs.coverage.underReported", "true");
   }
 
   // This method has been taken from SonarSource/sonar-scanner-msbuild

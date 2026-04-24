@@ -337,4 +337,32 @@ public class CoverageTest {
     assertThat(sut.getBranchCoverage(filePath))
       .containsExactlyInAnyOrder(new BranchCoverage(1, 4, 3));
   }
+
+  @Test
+  public void overlappingCoberturaReports_getBranchCoverageUnderreported_returnsTrue() {
+    final String filePath = "filePath";
+    Coverage sut = new Coverage();
+    // These may or may not cover different branches, Cobertura can't distinguish them.
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 0, 1, "report1"));
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 1, 0, "report1"));
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 0, 1, "report2"));
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 1, 0, "report2"));
+
+    assertThat(sut.getBranchCoverageUnderreported()).isFalse();
+    sut.getBranchCoverage(filePath);
+    assertThat(sut.getBranchCoverageUnderreported()).isTrue();
+  }
+
+  @Test
+  public void nonOverlappingReports_getBranchCoverageUnderreported_returnsFalse() {
+    final String filePath = "filePath";
+    Coverage sut = new Coverage();
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 0, 1, "report1"));
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 1, 0, "report1"));
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 0, 0, "report2"));
+    sut.add(new ConditionData(ConditionData.FORMAT_COBERTURA, filePath, 1, new ConditionData.Location(1, 0), 1, 1, "report2"));
+
+    sut.getBranchCoverage(filePath);
+    assertThat(sut.getBranchCoverageUnderreported()).isFalse();
+  }
 }

@@ -110,6 +110,11 @@ public class CoverageReportImportSensor implements ProjectSensor {
       LOG.info("{}", lazy(fileCountStatistics::toString));
       if (fileCountStatistics.mainWithCoverage == 0) {
         LOG.warn("The Code Coverage report doesn't contain any coverage data for the included files. Troubleshooting guide: https://community.sonarsource.com/t/37151");
+      } else {
+        var telemetryKey = "dotnetenterprise.plugin." + languageKey + ".coverage.underReported";
+        var telemetryValue = String.valueOf(coverage.getBranchCoverageUnderreported());
+        LOG.debug("Adding metric: {}={}", telemetryKey, telemetryValue);
+        context.addTelemetryProperty(telemetryKey, telemetryValue);
       }
     }
   }

@@ -32,6 +32,7 @@ public class Coverage {
   private static final int SPECIAL_HITS_NON_EXECUTABLE = -1;
   private final Map<String, int[]> hitsByLineAndFile = new HashMap<>();
   private final List<ConditionData> conditionData = new ArrayList<>();
+  private boolean branchCoverageUnderreported = false;
 
   void addHits(String file, int line, int hits) {
     int[] oldHitsByLine = hitsByLineAndFile.get(file);
@@ -114,7 +115,11 @@ public class Coverage {
     }
   }
 
-  private static BranchCoverage getBranchCoverage(int lineNumber, List<ConditionData> conditions) {
+  boolean getBranchCoverageUnderreported() {
+    return branchCoverageUnderreported;
+  }
+
+  private BranchCoverage getBranchCoverage(int lineNumber, List<ConditionData> conditions) {
     // Mapping ConditionData from different coverage reports is fragile due to potential differences in compilation.
     // Therefore, we use a forgiving approach: First, count the number of conditions per report and take the maximum. Then, map
     // conditions and count the ones that are covered. If the mapping did not go well, we might find too many covered conditions.
@@ -124,6 +129,10 @@ public class Coverage {
       .collect(Collectors.groupingBy(ConditionData::getFormat)).values().stream()
       .map(Coverage::calculateCoverage)
       .toList();
+
+    if (coverages.stream().anyMatch(ConditionCoverageResult::underreported)) {
+      branchCoverageUnderreported = true;
+    }
 
     int maxConditions = coverages.stream().mapToInt(ConditionCoverageResult::totalBranches).max().orElse(0);
     int coveredConditions = coverages.stream().mapToInt(ConditionCoverageResult::coveredBranches).max().orElse(0);
@@ -141,8 +150,16 @@ public class Coverage {
       .filter(x -> x.getHits() > 0)
       .map(ConditionData::getUniqueKey).distinct().count();
 
-    return new ConditionCoverageResult(maxConditions, Math.min(coveredConditions, maxConditions));
+    // telemetry
+    int sumCoveredPerReport = conditions.stream()
+      .collect(Collectors.groupingBy(ConditionData::getCoverageIdentifier)).values().stream()
+      .mapToInt(group -> (int)group.stream()
+        .filter(x -> x.getHits() > 0)
+        .map(ConditionData::getUniqueKey).distinct().count())
+      .sum();
+
+    return new ConditionCoverageResult(maxConditions, Math.min(coveredConditions, maxConditions), sumCoveredPerReport > coveredConditions);
   }
 
-  private record ConditionCoverageResult(int totalBranches, int coveredBranches) {}
+  private record ConditionCoverageResult(int totalBranches, int coveredBranches, boolean underreported) {}
 }
