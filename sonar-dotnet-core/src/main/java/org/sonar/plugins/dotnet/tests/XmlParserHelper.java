@@ -167,7 +167,7 @@ public class XmlParserHelper implements AutoCloseable {
   }
 
   @Nullable
-  String nextStartOrEndTag() {
+  public String nextStartOrEndTag() {
     try {
       while (stream.hasNext()) {
         int next = stream.next();

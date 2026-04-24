@@ -63,6 +63,10 @@ public class Coverage {
     conditionData.add(condition);
   }
 
+  List<ConditionData> getConditionData() {
+    return Collections.unmodifiableList(conditionData);
+  }
+
   public Set<String> files() {
     return hitsByLineAndFile.keySet();
   }
@@ -83,6 +87,9 @@ public class Coverage {
     return result;
   }
 
+  // TODO NET-3619: This method does not yet differentiate ConditionData by format.
+  //  Unmergeable and cross-family conditions are merged uniformly, which can inflate coverage
+  //  when combining multiple reports. Format-aware grouping and per-family max strategy needed.
   List<BranchCoverage> getBranchCoverage(String file) {
     return conditionData.stream()
       .filter(point -> point.getFilePath().equals(file))

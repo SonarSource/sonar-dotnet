@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.xml.stream.XMLStreamException;
 import org.slf4j.Logger;
@@ -34,6 +36,9 @@ import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 public final class CoberturaReportParser implements CoverageParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoberturaReportParser.class);
+  private static final Pattern CONDITION_COVERAGE_PATTERN = Pattern.compile("\\d+%\\s*\\((\\d+)/(\\d+)\\)");
+  static final String FORMAT_COBERTURA = "cobertura";
+  static final String FORMAT_UNMERGEABLE = "unmergeable";
   private final FileService fileService;
 
   public CoberturaReportParser(FileService fileService) {
@@ -113,8 +118,95 @@ public final class CoberturaReportParser implements CoverageParser {
       int line = xmlParserHelper.getRequiredIntAttribute("number");
       int hits = xmlParserHelper.getRequiredIntAttribute("hits");
       coverage.addHits(coveredFile.indexedPath(), line, hits);
-
       LOG.trace("Cobertura parser: add hits for file {}, line '{}', hits '{}'.", coveredFile, line, hits);
+
+      String branchAttr = xmlParserHelper.getAttribute("branch");
+      String conditionCoverage = xmlParserHelper.getAttribute("condition-coverage");
+      int[] coveredAndTotal = parseConditionCoverage(conditionCoverage);
+      if (!"True".equalsIgnoreCase(branchAttr) || coveredAndTotal == null) {
+        return;
+      }
+
+      String filePath = coveredFile.indexedPath();
+      int covered = coveredAndTotal[0];
+      int total = coveredAndTotal[1];
+      String coverageIdentifier = file.getPath();
+
+      List<ParsedCondition> conditions = handleConditions(xmlParserHelper);
+
+      if (conditions.isEmpty()) {
+        addUnmergeableConditions(filePath, line, covered, total, coverageIdentifier);
+      } else {
+        addMergeableConditions(filePath, line, covered, total, conditions, coverageIdentifier);
+      }
+    }
+
+    private List<ParsedCondition> handleConditions(XmlParserHelper xmlParserHelper) {
+      List<ParsedCondition> conditions = new ArrayList<>();
+      String tag;
+      while ((tag = xmlParserHelper.nextStartOrEndTag()) != null) {
+        if ("</line>".equals(tag)) {
+          break;
+        } else if ("<condition>".equals(tag)) {
+          int number = xmlParserHelper.getRequiredIntAttribute("number");
+          String type = xmlParserHelper.getRequiredAttribute("type");
+          String coverageAttr = xmlParserHelper.getRequiredAttribute("coverage");
+          conditions.add(new ParsedCondition(number, type, coverageAttr));
+        }
+      }
+      return conditions;
+    }
+
+    private void addMergeableConditions(String filePath, int line, int covered, int total,
+      List<ParsedCondition> conditions, String coverageIdentifier) {
+      // Two-pass approach: process jump conditions first, then switches with remaining totals.
+      // The line-level condition-coverage counts all branches (jump + switch combined).
+      // Each jump condition accounts for 2 branches, so we subtract those before processing switches.
+      int remainingTotal = total;
+      int remainingCovered = covered;
+      for (ParsedCondition condition : conditions) {
+        if ("jump".equals(condition.type)) {
+          int jumpCovered = addJumpConditions(filePath, line, condition, coverageIdentifier);
+          remainingTotal -= 2;
+          remainingCovered -= jumpCovered;
+        } else if (!"switch".equals(condition.type)) {
+          LOG.debug("Cobertura parser: unknown condition type '{}' on file '{}', line '{}'. Skipping.", condition.type, filePath, line);
+        }
+      }
+
+      remainingTotal = Math.max(0, remainingTotal);
+      remainingCovered = Math.max(0, remainingCovered);
+
+      for (ParsedCondition condition : conditions) {
+        if ("switch".equals(condition.type)) {
+          addSwitchConditions(filePath, line, remainingCovered, remainingTotal, condition.number, coverageIdentifier);
+        }
+      }
+    }
+
+    private void addUnmergeableConditions(String filePath, int line, int covered, int total, String coverageIdentifier) {
+      for (int i = 0; i < total; i++) {
+        coverage.add(new ConditionData(FORMAT_UNMERGEABLE, filePath, line, new ConditionData.Location(i, 0), i, i < covered ? 1 : 0, coverageIdentifier));
+      }
+      LOG.trace("Cobertura parser: add {} unmergeable branch conditions for file '{}', line '{}'.", total, filePath, line);
+    }
+
+    private void addSwitchConditions(String filePath, int line, int covered, int total, int conditionNumber, String coverageIdentifier) {
+      for (int i = 0; i < total; i++) {
+        coverage.add(new ConditionData(FORMAT_COBERTURA, filePath, line, new ConditionData.Location(conditionNumber, 0), i, i < covered ? 1 : 0, coverageIdentifier));
+      }
+      LOG.trace("Cobertura parser: add {} switch branch conditions for file '{}', line '{}', condition number '{}'.", total, filePath, line, conditionNumber);
+    }
+
+    private int addJumpConditions(String filePath, int line, ParsedCondition condition, String coverageIdentifier) {
+      int percentage = parsePercentage(condition.coverage);
+      var location = new ConditionData.Location(condition.number, 0);
+      int hitPath0 = percentage > 0 ? 1 : 0;
+      int hitPath1 = percentage == 100 ? 1 : 0;
+      coverage.add(new ConditionData(FORMAT_COBERTURA, filePath, line, location, 0, hitPath0, coverageIdentifier));
+      coverage.add(new ConditionData(FORMAT_COBERTURA, filePath, line, location, 1, hitPath1, coverageIdentifier));
+      LOG.trace("Cobertura parser: add jump branch conditions for file '{}', line '{}', condition number '{}', coverage '{}%'.", filePath, line, condition.number, percentage);
+      return hitPath0 + hitPath1;
     }
 
     private CoveredFile resolveFile(String filename) {
@@ -155,6 +247,8 @@ public final class CoberturaReportParser implements CoverageParser {
     }
   }
 
+  record ParsedCondition(int number, String type, String coverage) { }
+
   record CoveredFile(String originalFilename, @Nullable String indexedPath) {
     boolean isIndexed() {
       return indexedPath != null;
@@ -165,6 +259,29 @@ public final class CoberturaReportParser implements CoverageParser {
       return indexedPath == null
         ? String.format("(path '%s', NO INDEXED PATH)", originalFilename)
         : String.format("(path '%s', indexed as '%s')", originalFilename, indexedPath);
+    }
+  }
+
+  @Nullable
+  private static int[] parseConditionCoverage(@Nullable String conditionCoverage) {
+    if (conditionCoverage == null) {
+      return null;
+    }
+    Matcher matcher = CONDITION_COVERAGE_PATTERN.matcher(conditionCoverage);
+    if (!matcher.find()) {
+      LOG.debug("Cobertura parser: could not parse condition-coverage '{}'.", conditionCoverage);
+      return null;
+    }
+    return new int[]{Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2))};
+  }
+
+  private static int parsePercentage(String coverage) {
+    String trimmed = coverage.trim().replace("%", "");
+    try {
+      return Integer.parseInt(trimmed);
+    } catch (NumberFormatException e) {
+      LOG.debug("Cobertura parser: could not parse coverage percentage '{}'.", coverage);
+      return 0;
     }
   }
 }

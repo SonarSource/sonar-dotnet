@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0" branch-rate="0" version="1.0" timestamp="0">
+  <packages>
+    <package name="Lib" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <class name="Lib.Class1" filename="C:\Lib\Class1.cs" line-rate="0" branch-rate="0" complexity="0">
+          <methods>
+            <method name="Method1" signature="void ()" line-rate="0" branch-rate="0" complexity="1">
+              <lines>
+                <line number="42" hits="2" branch="True" condition-coverage="33% (2/6)">
+                  <conditions>
+                    <condition number="48" type="switch" coverage="33%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="42" hits="2" branch="True" condition-coverage="33% (2/6)">
+              <conditions>
+                <condition number="48" type="switch" coverage="33%" />
+              </conditions>
+            </line>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

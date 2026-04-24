@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0" branch-rate="0" version="1.0" timestamp="0">
+  <packages>
+    <package name="Lib" line-rate="0" branch-rate="0" complexity="0">
+      <classes>
+        <!-- Case: 1 jump + 1 switch -->
+        <class name="Lib.Class1" filename="C:\Lib\Class1.cs" line-rate="0" branch-rate="0" complexity="0">
+          <methods />
+          <lines>
+            <line number="10" hits="3" branch="True" condition-coverage="50% (3/6)">
+              <conditions>
+                <condition number="24" type="jump" coverage="100%" />
+                <condition number="48" type="switch" coverage="25%" />
+              </conditions>
+            </line>
+          </lines>
+        </class>
+        <!-- Case: 2 jumps + 1 switch -->
+        <class name="Lib.Class2" filename="C:\Lib\Class2.cs" line-rate="0" branch-rate="0" complexity="0">
+          <methods />
+          <lines>
+            <line number="20" hits="5" branch="True" condition-coverage="50% (5/10)">
+              <conditions>
+                <condition number="0" type="jump" coverage="100%" />
+                <condition number="1" type="jump" coverage="50%" />
+                <condition number="2" type="switch" coverage="33%" />
+              </conditions>
+            </line>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

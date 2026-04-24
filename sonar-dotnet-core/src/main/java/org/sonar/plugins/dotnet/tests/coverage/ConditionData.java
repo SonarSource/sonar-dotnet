@@ -48,6 +48,18 @@ class ConditionData {
     return hits;
   }
 
+  public int getLocationStart() {
+    return location.start;
+  }
+
+  public int getLocationEnd() {
+    return location.end;
+  }
+
+  public int getPath() {
+    return path;
+  }
+
   public String getFilePath() {
     return filePath;
   }
