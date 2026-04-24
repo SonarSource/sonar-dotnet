@@ -192,7 +192,7 @@ public class OpenCoverReportParserTest {
     FileService mockFileService = mock(FileService.class);
     when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
     String testAbsolutePath = "/full/path/to/Foo.cs";
-    when(mockFileService.getAbsolutePath("/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(testAbsolutePath));
+    when(mockFileService.getAbsolutePath("/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(testAbsolutePath));
     new OpenCoverReportParser(mockFileService).accept(new File("src/test/resources/opencover/deterministic_source_paths.xml"), coverage);
 
     assertThat(coverage.files()).hasSize(1);
@@ -214,18 +214,18 @@ public class OpenCoverReportParserTest {
     List<String> debugLogs = logTester.logs(Level.DEBUG);
     assertThat(debugLogs)
       .hasSize(7)
-      .contains("CoveredFile created: (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs').");
+      .contains("CoveredFile created: (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs').");
     assertThat(logTester.logs(Level.TRACE))
       .hasSize(8)
       .containsExactlyInAnyOrder(
-        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '6', visitCount '1'.",
-        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', visitCount '1'.",
-        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '8', visitCount '1'.",
-        "OpenCover parser: add branch hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', offset '3', visitCount '0'.",
-        "OpenCover parser: add branch hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', offset '3', visitCount '1'.",
-        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '11', visitCount '0'.",
-        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '12', visitCount '0'.",
-        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '13', visitCount '0'."
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '6', visitCount '1'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', visitCount '1'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '8', visitCount '1'.",
+        "OpenCover parser: add branch hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', offset '3', visitCount '0'.",
+        "OpenCover parser: add branch hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '7', offset '3', visitCount '1'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '11', visitCount '0'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '12', visitCount '0'.",
+        "OpenCover parser: add hits for file (ID '5', path '/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs', indexed as '/full/path/to/Foo.cs'), line '13', visitCount '0'."
       );
   }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    The `opencover.xml` file from the integration test project CoverageWithDeterministicSourcePaths.
+    The `opencover.xml` file from the integration test project CoverageTest.DeterministicSourcePaths.
 -->
 <CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
   <Summary numSequencePoints="9" visitedSequencePoints="4" numBranchPoints="6" visitedBranchPoints="3" sequenceCoverage="44.44" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="1" visitedClasses="2" numClasses="3" visitedMethods="2" numMethods="4" />
@@ -396,7 +396,7 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="72-CD-4C-29-1F-8A-A2-EE-EE-49-B7-39-D7-D2-59-25-D4-15-8A-47">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CoreUtilities.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CoreUtilities.dll</ModulePath>
       <ModuleTime>2020-02-04T19:55:22Z</ModuleTime>
       <ModuleName>Microsoft.TestPlatform.CoreUtilities</ModuleName>
       <Classes />
@@ -414,7 +414,7 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="03-17-2D-A2-47-E8-DA-D5-28-CB-74-74-E2-56-70-6A-C0-5A-AB-58">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.PlatformAbstractions.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.PlatformAbstractions.dll</ModulePath>
       <ModuleTime>2020-02-04T19:55:22Z</ModuleTime>
       <ModuleName>Microsoft.TestPlatform.PlatformAbstractions</ModuleName>
       <Classes />
@@ -438,31 +438,31 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="C3-FB-C2-9E-95-BB-9F-EC-54-E9-D6-2E-96-6F-43-6E-95-D3-F0-A1">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CrossPlatEngine.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CrossPlatEngine.dll</ModulePath>
       <ModuleTime>2020-02-04T19:55:24Z</ModuleTime>
       <ModuleName>Microsoft.TestPlatform.CrossPlatEngine</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="7E-1F-2A-CD-BD-DB-46-49-18-E0-16-C3-50-2A-47-26-74-E0-FA-63">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CommunicationUtilities.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.TestPlatform.CommunicationUtilities.dll</ModulePath>
       <ModuleTime>2020-02-04T19:55:24Z</ModuleTime>
       <ModuleName>Microsoft.TestPlatform.CommunicationUtilities</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="40-25-A6-0F-A5-B4-71-8F-77-23-6F-C1-FC-B2-A9-94-DA-7B-5F-2E">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll</ModulePath>
       <ModuleTime>2020-02-04T19:55:22Z</ModuleTime>
       <ModuleName>Microsoft.VisualStudio.TestPlatform.ObjectModel</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="C9-48-8A-EF-A0-7E-17-43-0F-BC-D2-F3-4D-26-76-B6-7D-DE-DF-67">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.Common.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.Common.dll</ModulePath>
       <ModuleTime>2020-02-04T19:55:24Z</ModuleTime>
       <ModuleName>Microsoft.VisualStudio.TestPlatform.Common</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="53-D0-A3-B9-10-36-09-21-32-F4-D0-88-75-00-B5-DC-77-89-1D-78">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll</ModulePath>
       <ModuleTime>2016-06-13T21:06:14Z</ModuleTime>
       <ModuleName>Newtonsoft.Json</ModuleName>
       <Classes />
@@ -702,25 +702,25 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="5C-37-15-25-14-5D-AA-CD-FE-A1-58-0B-02-CA-F0-06-3B-F0-75-3E">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll</ModulePath>
       <ModuleTime>2020-02-03T08:45:56Z</ModuleTime>
       <ModuleName>Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="9D-1A-06-D1-57-63-4E-2B-7F-60-AB-7C-A1-0C-67-26-0C-72-0B-31">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.dll</ModulePath>
       <ModuleTime>2020-02-03T08:42:14Z</ModuleTime>
       <ModuleName>Microsoft.VisualStudio.TestPlatform.TestFramework</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="14-23-11-33-8A-3E-C2-95-9C-AF-E0-44-A0-4E-01-93-24-28-69-36">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll</ModulePath>
       <ModuleTime>2020-02-03T08:43:54Z</ModuleTime>
       <ModuleName>Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface</ModuleName>
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="18-52-46-8F-91-31-7C-89-18-7F-98-66-A5-FF-E4-26-5C-68-8E-0A">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll</ModulePath>
       <ModuleTime>2020-02-03T08:52:28Z</ModuleTime>
       <ModuleName>Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices</ModuleName>
       <Classes />
@@ -762,7 +762,7 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="C1-E6-95-46-6B-22-AB-AD-8C-29-08-C6-4F-A8-BC-C8-E3-D9-B3-83">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll</ModulePath>
       <ModuleTime>2019-04-01T16:23:50Z</ModuleTime>
       <ModuleName>NuGet.Frameworks</ModuleName>
       <Classes />
@@ -775,12 +775,12 @@
     </Module>
     <Module hash="8E-94-F6-54-A0-D8-E5-C6-88-A4-50-BD-42-3C-22-0E-0C-86-05-56">
       <Summary numSequencePoints="3" visitedSequencePoints="1" numBranchPoints="2" visitedBranchPoints="1" sequenceCoverage="33.33" branchCoverage="50" maxCyclomaticComplexity="1" minCyclomaticComplexity="1" maxCrapScore="2" minCrapScore="1" visitedClasses="1" numClasses="2" visitedMethods="1" numMethods="2" />
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.Tests.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageTest.DeterministicSourcePaths.Tests.dll</ModulePath>
       <ModuleTime>2021-02-05T11:05:42.2434243Z</ModuleTime>
-      <ModuleName>CoverageWithDeterministicSourcePaths.Tests</ModuleName>
+      <ModuleName>CoverageTest.DeterministicSourcePaths.Tests</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\Andrei\.nuget\packages\microsoft.net.test.sdk\16.5.0\build\netcoreapp2.1\Microsoft.NET.Test.Sdk.Program.cs" />
-        <File uid="2" fullPath="C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\FooTests.cs" />
+        <File uid="2" fullPath="C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\FooTests.cs" />
       </Files>
       <Classes>
         <Class>
@@ -848,7 +848,7 @@
       <Classes />
     </Module>
     <Module skippedDueTo="MissingPdb" hash="48-69-8F-D3-34-45-06-46-29-98-3A-0A-71-C5-1A-6D-78-02-46-35">
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</ModulePath>
       <ModuleTime>2020-02-03T08:43:06Z</ModuleTime>
       <ModuleName>Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions</ModuleName>
       <Classes />
@@ -879,11 +879,11 @@
     </Module>
     <Module hash="00-D6-99-21-1D-6E-4C-84-5B-1D-64-64-E0-2B-BD-77-CE-8C-60-B4">
       <Summary numSequencePoints="6" visitedSequencePoints="3" numBranchPoints="4" visitedBranchPoints="2" sequenceCoverage="50" branchCoverage="50" maxCyclomaticComplexity="3" minCyclomaticComplexity="1" maxCrapScore="3" minCrapScore="2" visitedClasses="1" numClasses="1" visitedMethods="1" numMethods="2" />
-      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageWithDeterministicSourcePaths\CoverageWithDeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageWithDeterministicSourcePaths.dll</ModulePath>
+      <ModulePath>C:\Workspace\sonar-dotnet\its\projects\CoverageTest.DeterministicSourcePaths\CoverageTest.DeterministicSourcePaths.Tests\bin\Debug\netcoreapp3.1\CoverageTest.DeterministicSourcePaths.dll</ModulePath>
       <ModuleTime>2021-02-05T11:05:40.9085403Z</ModuleTime>
-      <ModuleName>CoverageWithDeterministicSourcePaths</ModuleName>
+      <ModuleName>CoverageTest.DeterministicSourcePaths</ModuleName>
       <Files>
-        <File uid="5" fullPath="/_/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs" />
+        <File uid="5" fullPath="/_/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs" />
       </Files>
       <Classes>
         <Class>

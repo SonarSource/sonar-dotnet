@@ -260,8 +260,8 @@ public class VisualStudioCoverageXmlReportParserTest {
     Coverage coverage = new Coverage();
     FileService mockFileService = mock(FileService.class);
     when(mockFileService.isSupportedAbsolute(anyString())).thenReturn(false);
-    String testAbsolutePath = "/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs";
-    when(mockFileService.getAbsolutePath("/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(testAbsolutePath));
+    String testAbsolutePath = "/full/path/to/its/projects/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs";
+    when(mockFileService.getAbsolutePath("/_/its/projects/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs")).thenReturn(Optional.of(testAbsolutePath));
     new VisualStudioCoverageXmlReportParser(mockFileService).accept(new File("src/test/resources/visualstudio_coverage_xml/deterministic_source_paths.coveragexml"), coverage);
 
     assertThat(coverage.files()).hasSize(1);
@@ -278,8 +278,8 @@ public class VisualStudioCoverageXmlReportParserTest {
     assertThat(logTester.logs(Level.DEBUG)).hasSize(2);
     assertThat(logTester.logs(Level.DEBUG).get(0)).startsWith("The current user dir is ");
     assertThat(logTester.logs(Level.DEBUG).get(1)).isEqualTo("Found indexed file " +
-      "'/full/path/to/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'" +
-      " for coverage entry '/_/its/projects/CoverageWithDeterministicSourcePaths/CoverageWithDeterministicSourcePaths/Foo.cs'.");
+      "'/full/path/to/its/projects/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs'" +
+      " for coverage entry '/_/its/projects/CoverageTest.DeterministicSourcePaths/CoverageTest.DeterministicSourcePaths/Foo.cs'.");
   }
 
   @Test
