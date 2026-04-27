@@ -134,4 +134,33 @@ public class Repro_3640
 #else
         24;  // Compliant
 #endif
+
+    public int TruePositive() =>    // Noncompliant
+        42;
+
+#if SOMETHING
+    public void ThisIsUnrelatedLeadingTrivia_BeforeArrow() { }
+#endif
+
+    public int ConditionalLeadingTrivia_Arrow() =>  // Noncompliant
+        42;
+
+#if SOMETHING
+    public void ThisIsUnrelatedLeadingTrivia_BeforeBody() { }
+#endif
+
+    public int ConditionalLeadingTrivia_Body()      // Noncompliant
+    {
+        return 42;
+    }
+
+#if SOMETHING
+    public void ThisIsUnrelatedTrailingTrivia_AfterBody() { }
+#endif
+
+}
+
+public class InvalidCode
+{
+    public int MethodWithoutBody(); // Error [CS0501] 'InvalidCode.MethodWithoutBody()' must declare a body because it is not marked abstract, extern, or partial
 }

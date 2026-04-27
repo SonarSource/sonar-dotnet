@@ -35,7 +35,7 @@ public sealed class MethodShouldNotOnlyReturnConstant : SonarDiagnosticAnalyzer
                 if (method.ParameterList?.Parameters.Count is 0
                     && !IsVirtual(method)
                     && IsConstantExpression(SingleExpressionOrDefault(method), c.Model)
-                    && !ContainsConditionalCompilation(c.Node)
+                    && !ContainsConditionalCompilation((SyntaxNode)method.ExpressionBody ?? method.Body)
                     && c.Model.GetDeclaredSymbol(method) is { } methodSymbol
                     && !methodSymbol.ContainingType.IsInterface()
                     && methodSymbol.InterfaceMembers().IsEmpty()
