@@ -56,7 +56,7 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
 
     // file may be null because it's not within the project base dir
     if (inputFile == null) {
-      LOG.warn("File '{}' referenced by the protobuf '{}' does not exist in the analysis context", filePath,
+      LOG.info("File '{}' referenced by the protobuf '{}' does not exist in the analysis context", filePath,
         message.getClass().getSimpleName());
       return;
     }
