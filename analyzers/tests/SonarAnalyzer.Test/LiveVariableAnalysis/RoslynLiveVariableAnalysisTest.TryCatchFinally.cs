@@ -1812,6 +1812,32 @@ public partial class RoslynLiveVariableAnalysisTest
     }
 
     [TestMethod]
+    public void TryCatchFinally_Rethrow_ValueLivesOut_FinallyHasLocalLifetimeRegion()
+    {
+        const string code = """
+            var value = 0;
+            try
+            {
+            }
+            catch
+            {
+                value = 1;
+                throw;
+            }
+            finally
+            {
+                var local = ""; // This causes LocalLifetimeRegion to be generated
+                Method(value + 1);
+            }
+            """;
+        var context = CreateContextCS(code);
+        context.ValidateEntry();
+        context.Validate("value = 1;", LiveOut("value"));
+        context.Validate("Method(value + 1);", LiveIn("value"));
+        context.ValidateExit();
+    }
+
+    [TestMethod]
     public void TryCatchFinally_RethrowOuterFinally()
     {
         const string code = """

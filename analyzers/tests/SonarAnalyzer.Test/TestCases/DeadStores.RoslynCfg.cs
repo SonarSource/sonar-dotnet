@@ -1568,7 +1568,7 @@ namespace Tests.Diagnostics
             }
             catch (Exception ex)
             {
-                value = 0; // Noncompliant FP NET-2346
+                value = 0; // Compliant
                 throw;
             }
             finally
