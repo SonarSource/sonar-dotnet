@@ -16,6 +16,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
@@ -138,6 +139,24 @@ public class UnnecessaryUsingsTest
             .VerifyCodeFix();
 
     [TestMethod]
+    public void UnnecessaryUsings_DocumentationModeNone() =>
+        builder
+            .AddSnippet("""
+                using System; // Noncompliant FP, used by cref https://sonarsource.atlassian.net/browse/NET-1950
+
+                namespace SonarAnalyzer.Experiments.CSharp
+                {
+                    public enum S1128
+                    {
+                        /// <summary><see cref="DateTime"/></summary>
+                        DateTimeValue,
+                    }
+                }
+                """)
+            .WithOptions(ImmutableArray.Create<ParseOptions>(new CSharpParseOptions(documentationMode: DocumentationMode.None)))
+            .Verify();
+
+    [TestMethod]
     public void EquivalentNameSyntax_Equals_Object()
     {
         var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
@@ -160,5 +179,28 @@ public class UnnecessaryUsingsTest
         main.Equals(same).Should().BeTrue();
         main.Equals(null).Should().BeFalse();
         main.Equals(different).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void NamespaceComparer_MatchesAncestors_WhenDefaultEqualityDoesNot()
+    {
+        var compiler = new SnippetCompiler("""
+            namespace System.IO
+            {
+                class C
+                {
+                    Exception e;
+                }
+            }
+            """);
+        var fromDeclaration = compiler.NamespaceSymbol("IO").ContainingNamespace;
+        var fromType = compiler.Symbol<ISymbol>(compiler.Nodes<IdentifierNameSyntax>().Single(x => x.Identifier.Text == "Exception")).ContainingNamespace;
+
+        // Both represent "System" but Roslyn returns a merged namespace from the declaration chain vs a per-assembly namespace from ContainingNamespace
+        fromDeclaration.GetHashCode().Should().NotBe(fromType.GetHashCode());
+        fromDeclaration.Equals(fromType).Should().BeFalse();
+
+        NamespaceComparer.Instance.GetHashCode(fromDeclaration).Should().Be(NamespaceComparer.Instance.GetHashCode(fromType));
+        NamespaceComparer.Instance.Equals(fromDeclaration, fromType).Should().BeTrue();
     }
 }

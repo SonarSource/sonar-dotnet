@@ -17,226 +17,236 @@
 
 using System.IO;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
+    internal const string DiagnosticId = "S1128";
+    private const string MessageFormat = "Remove this unnecessary 'using'.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly HashSet<string> IgnoredRazorFiles = new(StringComparer.OrdinalIgnoreCase)
     {
-        internal const string DiagnosticId = "S1128";
-        private const string MessageFormat = "Remove this unnecessary 'using'.";
+        "_Imports.razor",
+        "_ViewImports.cshtml"
+    };
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        private static readonly HashSet<string> IgnoredRazorFiles = new(StringComparer.OrdinalIgnoreCase)
-        {
-            "_Imports.razor",
-            "_ViewImports.cshtml"
-        };
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
-
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                // When using top level statements, we are called twice for the same compilation unit. The second call has the containing symbol kind equal to `Method`.
+                if (c.ContainingSymbol.Kind == SymbolKind.Method)
                 {
-                    // When using top level statements, we are called twice for the same compilation unit. The second call has the containing symbol kind equal to `Method`.
-                    if (c.ContainingSymbol.Kind == SymbolKind.Method)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    var compilationUnit = (CompilationUnitSyntax)c.Node;
-                    var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias == null).ToList();
-                    var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
+                var compilationUnit = (CompilationUnitSyntax)c.Node;
+                var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias is null).ToList();
+                var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
 
-                    var visitor = new CSharpRemovableUsingWalker(c, globalUsingDirectives, null);
-                    VisitContent(visitor, compilationUnit.Members, c.Node.DescendantTrivia());
-                    foreach (var attribute in compilationUnit.AttributeLists)
-                    {
-                        visitor.SafeVisit(attribute);
-                    }
+                var visitor = new CSharpRemovableUsingWalker(c, globalUsingDirectives, null);
+                VisitContent(visitor, compilationUnit.Members);
+                foreach (var attribute in compilationUnit.AttributeLists)
+                {
+                    visitor.SafeVisit(attribute);
+                }
 
-                    CheckUnnecessaryUsings(c, simpleNamespaces, visitor.NecessaryNamespaces);
-                },
-                SyntaxKind.CompilationUnit);
+                CheckUnnecessaryUsings(c, simpleNamespaces, visitor.NecessaryNamespaces);
+            },
+            SyntaxKind.CompilationUnit);
 
-        private static void VisitContent(ISafeSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members, IEnumerable<SyntaxTrivia> trivias)
+    private static void VisitContent(ISafeSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members)
+    {
+        foreach (var member in members)
         {
-            var comments = trivias.Where(x => x.Kind() is SyntaxKind.SingleLineDocumentationCommentTrivia or SyntaxKind.MultiLineDocumentationCommentTrivia);
-
-            foreach (var member in members)
-            {
-                visitor.SafeVisit(member);
-            }
-            foreach (var comment in comments.Where(x => x.HasStructure))
-            {
-                visitor.SafeVisit(comment.GetStructure());
-            }
+            visitor.SafeVisit(member);
         }
+    }
 
-        private static void CheckUnnecessaryUsings(SonarSyntaxNodeReportingContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, ISet<INamespaceSymbol> necessaryNamespaces)
+    private static void CheckUnnecessaryUsings(SonarSyntaxNodeReportingContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, ISet<INamespaceSymbol> necessaryNamespaces)
+    {
+        foreach (var usingDirective in usingDirectives)
         {
-            foreach (var usingDirective in usingDirectives)
+            // This will create some FNs but will kill noise from FPs.
+            // For more info see issues:
+            //  - https://github.com/SonarSource/sonar-dotnet/issues/5946
+            //  - https://github.com/SonarSource/sonar-dotnet/issues/7959
+            if (usingDirective.GetFirstToken().IsKind(SyntaxKind.GlobalKeyword)
+                || (GeneratedCodeRecognizer.IsRazorGeneratedFile(usingDirective.SyntaxTree) && IgnoredRazorFiles.Contains(Path.GetFileName(usingDirective.GetLocation().GetMappedLineSpan().Path))))
             {
-                // This will create some FNs but will kill noise from FPs.
-                // For more info see issues:
-                //  - https://github.com/SonarSource/sonar-dotnet/issues/5946
-                //  - https://github.com/SonarSource/sonar-dotnet/issues/7959
-                if (usingDirective.GetFirstToken().IsKind(SyntaxKind.GlobalKeyword)
-                    || (GeneratedCodeRecognizer.IsRazorGeneratedFile(usingDirective.SyntaxTree)
-                        && IgnoredRazorFiles.Contains(Path.GetFileName(usingDirective.GetLocation().GetMappedLineSpan().Path))))
-                {
-                    continue;
-                }
-                if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
-                    && !necessaryNamespaces.Any(usedNamespace => usedNamespace.IsSameNamespace(namespaceSymbol)))
-                {
-                    context.ReportIssue(Rule, usingDirective);
-                }
+                continue;
             }
-        }
-
-        private sealed class CSharpRemovableUsingWalker : SafeCSharpSyntaxWalker
-        {
-            public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new();
-
-            private readonly SonarSyntaxNodeReportingContext context;
-            private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
-            private readonly INamespaceSymbol currentNamespace;
-            private bool linqQueryVisited;
-
-            public CSharpRemovableUsingWalker(SonarSyntaxNodeReportingContext context, IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent, INamespaceSymbol currentNamespace)
+            if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol && !necessaryNamespaces.Contains(namespaceSymbol))
             {
-                this.context = context;
-                this.usingDirectivesFromParent = usingDirectivesFromParent;
-                this.currentNamespace = currentNamespace;
-            }
-
-            public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
-            {
-                VisitNamespace(node, node.Usings, node.Name, node.Members);
-            }
-
-            public override void VisitInitializerExpression(InitializerExpressionSyntax node)
-            {
-                if (node.IsKind(SyntaxKind.CollectionInitializerExpression))
-                {
-                    foreach (var addExpression in node.Expressions)
-                    {
-                        VisitSymbol(context.Model.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
-                    }
-                }
-                base.VisitInitializerExpression(node);
-            }
-
-            public override void VisitIdentifierName(IdentifierNameSyntax node) =>
-                VisitNameNode(node);
-
-            public override void VisitGenericName(GenericNameSyntax node)
-            {
-                VisitNameNode(node);
-                base.VisitGenericName(node);
-            }
-
-            public override void VisitAwaitExpression(AwaitExpressionSyntax node)
-            {
-                VisitSymbol(context.Model.GetAwaitExpressionInfo(node).GetAwaiterMethod);
-                base.VisitAwaitExpression(node);
-            }
-
-            /// <summary>
-            /// LINQ Query Syntax do not use symbols from the 'System.Linq' namespace directly, but the using directive is
-            /// still necessary to use the Query Syntax form.
-            /// </summary>
-            public override void VisitQueryExpression(QueryExpressionSyntax node)
-            {
-                if (!linqQueryVisited && TryGetSystemLinkNamespace(out var systemLinqNamespaceSymbol))
-                {
-                    NecessaryNamespaces.Add(systemLinqNamespaceSymbol);
-                }
-                linqQueryVisited = true;
-                base.VisitQueryExpression(node);
-            }
-
-            public override void Visit(SyntaxNode node)
-            {
-                if (node.IsKind(SyntaxKindEx.FileScopedNamespaceDeclaration))
-                {
-                    var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntaxWrapper)node;
-                    VisitNamespace(node, fileScopedNamespace.Usings, fileScopedNamespace.Name, fileScopedNamespace.Members);
-                }
-                if (node.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation)) // Tuple deconstruction declaration
-                {
-                    NecessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
-                }
-                base.Visit(node);
-            }
-
-            private void VisitNamespace(SyntaxNode node, SyntaxList<UsingDirectiveSyntax> usings, NameSyntax name, SyntaxList<MemberDeclarationSyntax> members)
-            {
-                var simpleNamespaces = usings.Where(usingDirective => usingDirective.Alias == null).ToList();
-                var newUsingDirectives = new HashSet<EquivalentNameSyntax>();
-                newUsingDirectives.UnionWith(usingDirectivesFromParent);
-                newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
-
-                // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
-                var visitingNamespace = context.Model.GetSymbolInfo(name).Symbol as INamespaceSymbol;
-                var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
-
-                VisitContent(visitor, members, node.DescendantTrivia());
-                CheckUnnecessaryUsings(context, simpleNamespaces, visitor.NecessaryNamespaces);
-
-                NecessaryNamespaces.UnionWith(visitor.NecessaryNamespaces);
-            }
-
-            private bool TryGetSystemLinkNamespace(out INamespaceSymbol systemLinqNamespace)
-            {
-                foreach (var usingDirective in usingDirectivesFromParent)
-                {
-                    if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol
-                        && namespaceSymbol.ToDisplayString() == "System.Linq")
-                    {
-                        systemLinqNamespace = namespaceSymbol;
-                        return true;
-                    }
-                }
-                systemLinqNamespace = null;
-                return false;
-            }
-
-            /// <summary>
-            /// We check the symbol of each name node found in the code. If the containing namespace of the symbol is
-            /// neither the current namespace or one of its parent, it is then added to the necessary namespace set, as
-            /// importing that namespace is indeed necessary.
-            /// </summary>
-            private void VisitNameNode(ExpressionSyntax node) =>
-                VisitSymbol(context.Model.GetSymbolInfo(node).Symbol);
-
-            private void VisitSymbol(ISymbol symbol)
-            {
-                if (symbol != null
-                    && symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol
-                    && (currentNamespace == null || !namespaceSymbol.IsSameOrAncestorOf(currentNamespace)))
-                {
-                    NecessaryNamespaces.Add(namespaceSymbol);
-                }
+                context.ReportIssue(Rule, usingDirective);
             }
         }
     }
 
-    internal sealed class EquivalentNameSyntax : IEquatable<EquivalentNameSyntax>
+    private sealed class CSharpRemovableUsingWalker : SafeCSharpSyntaxWalker
     {
-        public NameSyntax Name { get; }
+        public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new(NamespaceComparer.Instance);
 
-        public EquivalentNameSyntax(NameSyntax name) =>
-            Name = name;
+        private readonly SonarSyntaxNodeReportingContext context;
+        private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
+        private readonly HashSet<INamespaceSymbol> currentNamespaceAndAncestors = new(NamespaceComparer.Instance);
+        private bool linqQueryVisited;
 
-        public override int GetHashCode() =>
-            Name.ToString().GetHashCode();
+        public CSharpRemovableUsingWalker(SonarSyntaxNodeReportingContext context, IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent, INamespaceSymbol currentNamespace)
+            : base(SyntaxWalkerDepth.StructuredTrivia)
+        {
+            this.context = context;
+            this.usingDirectivesFromParent = usingDirectivesFromParent;
+            for (var ancestor = currentNamespace; ancestor is not null; ancestor = ancestor.ContainingNamespace)
+            {
+                currentNamespaceAndAncestors.Add(ancestor);
+            }
+        }
 
-        public override bool Equals(object obj) =>
-            obj is EquivalentNameSyntax equivalentName && Equals(equivalentName);
+        public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node) =>
+            VisitNamespace(node.Usings, node.Name, node.Members);
 
-        public bool Equals(EquivalentNameSyntax other) =>
-            other != null && CSharpEquivalenceChecker.AreEquivalent(Name, other.Name);
+        public override void VisitInitializerExpression(InitializerExpressionSyntax node)
+        {
+            if (node.IsKind(SyntaxKind.CollectionInitializerExpression))
+            {
+                foreach (var addExpression in node.Expressions)
+                {
+                    VisitSymbol(context.Model.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
+                }
+            }
+            base.VisitInitializerExpression(node);
+        }
+
+        public override void VisitIdentifierName(IdentifierNameSyntax node)
+        {
+            VisitNameNode(node);
+            base.VisitIdentifierName(node);
+        }
+
+        public override void VisitGenericName(GenericNameSyntax node)
+        {
+            VisitNameNode(node);
+            base.VisitGenericName(node);
+        }
+
+        public override void VisitAwaitExpression(AwaitExpressionSyntax node)
+        {
+            VisitSymbol(context.Model.GetAwaitExpressionInfo(node).GetAwaiterMethod);
+            base.VisitAwaitExpression(node);
+        }
+
+        /// <summary>
+        /// LINQ Query Syntax do not use symbols from the 'System.Linq' namespace directly, but the using directive is
+        /// still necessary to use the Query Syntax form.
+        /// </summary>
+        public override void VisitQueryExpression(QueryExpressionSyntax node)
+        {
+            if (!linqQueryVisited && TryGetSystemLinkNamespace(out var systemLinqNamespaceSymbol))
+            {
+                NecessaryNamespaces.Add(systemLinqNamespaceSymbol);
+            }
+            linqQueryVisited = true;
+            base.VisitQueryExpression(node);
+        }
+
+        public override void Visit(SyntaxNode node)
+        {
+            if (node.IsKind(SyntaxKindEx.FileScopedNamespaceDeclaration))
+            {
+                var fileScopedNamespace = (FileScopedNamespaceDeclarationSyntaxWrapper)node;
+                VisitNamespace(fileScopedNamespace.Usings, fileScopedNamespace.Name, fileScopedNamespace.Members);
+                return; // VisitNamespace processes the members
+            }
+            if (node.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation)) // Tuple deconstruction declaration
+            {
+                NecessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
+            }
+            base.Visit(node);
+        }
+
+        private void VisitNamespace(SyntaxList<UsingDirectiveSyntax> usings, NameSyntax name, SyntaxList<MemberDeclarationSyntax> members)
+        {
+            var simpleNamespaces = usings.Where(x => x.Alias is null).ToList();
+            var newUsingDirectives = new HashSet<EquivalentNameSyntax>();
+            newUsingDirectives.UnionWith(usingDirectivesFromParent);
+            newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
+
+            // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
+            var visitingNamespace = context.Model.GetSymbolInfo(name).Symbol as INamespaceSymbol;
+            var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
+
+            VisitContent(visitor, members);
+            CheckUnnecessaryUsings(context, simpleNamespaces, visitor.NecessaryNamespaces);
+
+            NecessaryNamespaces.UnionWith(visitor.NecessaryNamespaces);
+        }
+
+        private bool TryGetSystemLinkNamespace(out INamespaceSymbol systemLinqNamespace)
+        {
+            foreach (var usingDirective in usingDirectivesFromParent)
+            {
+                if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol && namespaceSymbol.ToDisplayString() == "System.Linq")
+                {
+                    systemLinqNamespace = namespaceSymbol;
+                    return true;
+                }
+            }
+            systemLinqNamespace = null;
+            return false;
+        }
+
+        /// <summary>
+        /// We check the symbol of each name node found in the code. If the containing namespace of the symbol is
+        /// neither the current namespace or one of its parent, it is then added to the necessary namespace set, as
+        /// importing that namespace is indeed necessary.
+        /// </summary>
+        private void VisitNameNode(ExpressionSyntax node) =>
+            VisitSymbol(context.Model.GetSymbolInfo(node).Symbol);
+
+        private void VisitSymbol(ISymbol symbol)
+        {
+            if (symbol is not null
+                && symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol
+                && (currentNamespaceAndAncestors.IsEmpty() || !currentNamespaceAndAncestors.Contains(namespaceSymbol)))
+            {
+                NecessaryNamespaces.Add(namespaceSymbol);
+            }
+        }
     }
+}
+
+internal sealed class EquivalentNameSyntax : IEquatable<EquivalentNameSyntax>
+{
+    public NameSyntax Name { get; }
+
+    public EquivalentNameSyntax(NameSyntax name) =>
+        Name = name;
+
+    public override int GetHashCode() =>
+        Name.ToString().GetHashCode();
+
+    public override bool Equals(object obj) =>
+        obj is EquivalentNameSyntax equivalentName && Equals(equivalentName);
+
+    public bool Equals(EquivalentNameSyntax other) =>
+        other is not null && CSharpEquivalenceChecker.AreEquivalent(Name, other.Name);
+}
+
+internal sealed class NamespaceComparer : IEqualityComparer<INamespaceSymbol>
+{
+    public static readonly NamespaceComparer Instance = new();
+
+    private NamespaceComparer() { }
+
+    public bool Equals(INamespaceSymbol x, INamespaceSymbol y) =>
+        x.IsSameNamespace(y);
+
+    public int GetHashCode(INamespaceSymbol obj) =>
+        obj.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat).GetHashCode();
 }
