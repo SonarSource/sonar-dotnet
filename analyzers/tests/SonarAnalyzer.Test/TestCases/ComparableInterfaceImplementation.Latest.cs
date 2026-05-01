@@ -110,3 +110,35 @@ namespace Tests.Diagnostics.PrivateRecordTests
         public int CompareTo(InternalRecordStructComparable other) => 0;
     }
 }
+
+namespace Tests.Diagnostics.FileScopedTypeTests
+{
+    // https://sonarsource.atlassian.net/browse/NET-3698
+    // file-scoped types are only visible within the declaring file, so comparison operators are unreachable
+
+    file readonly struct FileStruct(int n) : IComparable<FileStruct> // Noncompliant FP - file-scoped type
+    {
+        private readonly int Value = n;
+        public int CompareTo(FileStruct other) => Value.CompareTo(other.Value);
+    }
+
+    file class FileClass : IComparable<FileClass> // Noncompliant FP - file-scoped type
+    {
+        public int CompareTo(FileClass other) => 0;
+    }
+
+    file record struct FileRecordStruct(int Value) : IComparable<FileRecordStruct> // Noncompliant FP - file-scoped type
+    {
+        public int CompareTo(FileRecordStruct other) => Value.CompareTo(other.Value);
+    }
+
+    file record FileRecord(int Value) : IComparable<FileRecord> // Noncompliant FP - file-scoped type
+    {
+        public int CompareTo(FileRecord other) => Value.CompareTo(other.Value);
+    }
+
+    file class FileClassNonGeneric : IComparable // Noncompliant FP - file-scoped type
+    {
+        public int CompareTo(object obj) => 0;
+    }
+}
