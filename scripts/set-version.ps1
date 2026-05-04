@@ -50,15 +50,13 @@ try {
     $ShortVersion = If ($Version.EndsWith(".0") -and $Version.IndexOf(".") -ne $Version.LastIndexOf(".")) { $Version.Substring(0, $Version.Length - 2) } else { $Version } # x.y   or x.y.z
     $PatchVersion = If ($ShortVersion.IndexOf(".") -eq $ShortVersion.LastIndexOf(".")) { "$ShortVersion.0" } else { $ShortVersion }                                       # x.y.0 or x.y.z
 
-    If ($BuildNumber -eq 0) {
-        Write-Host "Checking out branch version-bump/$ShortVersion"
-        git checkout -b "version-bump/$ShortVersion"
-    }
-
     UpdateDotNet
     UpdateJava
 
     If ($BuildNumber -eq 0) {
+        Write-Host "Checking out branch version-bump/$ShortVersion"
+        git checkout -b "version-bump/$ShortVersion"
+
         Write-Host "Creating Git commit"
         git commit -a -m "Bump version to $ShortVersion"
 
