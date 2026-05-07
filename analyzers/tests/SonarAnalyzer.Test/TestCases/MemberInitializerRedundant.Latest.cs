@@ -246,12 +246,40 @@ class CollectionExpression1
 
 class FieldKeyword
 {
-    public int Count { get => field; set => field = value; } = 10; // FN https://sonarsource.atlassian.net/browse/NET-2685
+    public int Count { get => field; set => field = value; } = 10; // Noncompliant https://sonarsource.atlassian.net/browse/NET-2685
 
     public FieldKeyword()
     {
         Count = 20;
     }
+}
+
+class SemiAutoProperty_ExplicitSetter_Noncompliant
+{
+    public int Count { get; set { field = value; } } = 10; // Noncompliant
+
+    public SemiAutoProperty_ExplicitSetter_Noncompliant()
+    {
+        Count = 20;
+    }
+}
+
+class SemiAutoProperty_ExplicitGetter_Noncompliant
+{
+    public int Count { get { return field; } set; } = 10; // Noncompliant
+
+    public SemiAutoProperty_ExplicitGetter_Noncompliant()
+    {
+        Count = 20;
+    }
+}
+
+class SemiAutoProperty_Compliant
+{
+    public int Count { get; set { field = value; } } = 10; // Compliant - not all constructors initialize Count
+
+    public SemiAutoProperty_Compliant() { }
+    public SemiAutoProperty_Compliant(int x) { Count = x; }
 }
 
 class NullConditionalAssignmentTests
@@ -270,14 +298,29 @@ class NullConditionalAssignmentTests
 
 public partial class PartialConstructor
 {
-    int id = 100;   // FN https://sonarsource.atlassian.net/browse/NET-2685
+    int id = 100;   // Noncompliant https://sonarsource.atlassian.net/browse/NET-2685
     public partial PartialConstructor();
 }
 
-public partial class PartialConstructor
+public partial class MixedConstructors
 {
-    public partial PartialConstructor()
+    int id = 100;  // Compliant
+    public partial MixedConstructors(string s)
+    {
+        id = s.Length;
+    }
+    public MixedConstructors()
     {
         id = 1;
     }
+    public MixedConstructors(int x)
+    { }
 }
+
+public partial class MultiplePartialConstructors_Noncompliant
+{
+    int id = 100;   // Noncompliant
+    public partial MultiplePartialConstructors_Noncompliant(int x);
+    public partial MultiplePartialConstructors_Noncompliant(string s);
+}
+

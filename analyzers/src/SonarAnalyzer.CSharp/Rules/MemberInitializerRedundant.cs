@@ -78,19 +78,23 @@ public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
             return;
         }
 
-        var constructorDeclarations = ConstructorDeclarations<ConstructorDeclarationSyntax>(c, constructors);
+        var constructorsWithBody = ConstructorDeclarations<ConstructorDeclarationSyntax>(c, constructors)
+            .Where(x => x.Node.GetBodyOrExpressionBody() is not null)
+            .ToList();
         foreach (var kvp in initializedMembers)
         {
             // the instance member should be initialized in ALL instance constructors
             // otherwise, initializing it inline makes sense and the rule should not report
-            if (constructorDeclarations.TrueForAll(x =>
-                    // Calls another ctor, which is also checked:
-                    x is { Node.Initializer.ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword }
-                    || IsSymbolFirstSetInCfg(kvp.Key, x.Node, x.Model, c.Cancel)))
+            if (constructorsWithBody.TrueForAll(x => MemberIsInitializedInConstructor(kvp.Key, x)))
             {
                 c.ReportIssue(Rule, kvp.Value, InstanceMemberMessage);
             }
         }
+
+        bool MemberIsInitializedInConstructor(ISymbol member, NodeSymbolAndModel<ConstructorDeclarationSyntax, IMethodSymbol> x) =>
+            // Calls another ctor, which is also checked:
+            x is { Node.Initializer.ThisOrBaseKeyword.RawKind: (int)SyntaxKind.ThisKeyword }
+            || IsSymbolFirstSetInCfg(member, x.Node, x.Model, c.Cancel);
     }
 
     private void CheckStaticMembers(SonarSyntaxNodeReportingContext c, TypeDeclarationSyntax declaration, IEnumerable<ISymbol> typeMembers)
@@ -168,24 +172,24 @@ public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
         return allMembers;
     }
 
-    private static List<NodeSymbolAndModel<TSyntax, IMethodSymbol>> ConstructorDeclarations<TSyntax>(SonarSyntaxNodeReportingContext context, List<IMethodSymbol> constructorSymbols)
+    private static IEnumerable<NodeSymbolAndModel<TSyntax, IMethodSymbol>> ConstructorDeclarations<TSyntax>(SonarSyntaxNodeReportingContext context, List<IMethodSymbol> constructorSymbols)
         where TSyntax : SyntaxNode =>
-        constructorSymbols.SelectMany(x =>
-            x.DeclaringSyntaxReferences
-                .Select(x => x.GetSyntax())
-                .OfType<TSyntax>()
-                .Select(declarationNode => new { declarationNode, constructorSymbol = x }))
-            .Select(x => new { x.declarationNode, x.constructorSymbol, model = x.declarationNode.EnsureCorrectSemanticModelOrDefault(context.Model) })
-            .Where(x => x.model is not null)
-            .Select(x => new NodeSymbolAndModel<TSyntax, IMethodSymbol>(x.declarationNode, x.constructorSymbol, x.model))
-            .ToList();
+        constructorSymbols
+            .SelectMany(x => x.AllPartialParts())
+            .OfType<IMethodSymbol>()
+            .SelectMany(x => x.DeclaringSyntaxReferences.Select(r => r.GetSyntax()).OfType<TSyntax>().Select(syntax => AddModel(context, syntax, x)))
+            .Where(x => x.Model is not null);
+
+    private static NodeSymbolAndModel<TSyntax, IMethodSymbol> AddModel<TSyntax>(SonarSyntaxNodeReportingContext context, TSyntax syntax, IMethodSymbol symbol)
+        where TSyntax : SyntaxNode =>
+        new(syntax, symbol, syntax.EnsureCorrectSemanticModelOrDefault(context.Model));
 
     private static IEnumerable<DeclarationTuple<IPropertySymbol>> InitializedPropertyDeclarations(TypeDeclarationSyntax declaration,
                                                                                                   Func<SyntaxTokenList, bool> filterModifiers,
                                                                                                   SemanticModel model) =>
         declaration.Members
             .OfType<PropertyDeclarationSyntax>()
-            .Where(x => filterModifiers(x.Modifiers) && x.Initializer is not null && x.IsAutoProperty())
+            .Where(x => filterModifiers(x.Modifiers) && x.Initializer is not null)
             .Select(x => new DeclarationTuple<IPropertySymbol>(x.Initializer, model.GetDeclaredSymbol(x)))
             .Where(x => x.Symbol is not null && !MemberInitializedToDefault.IsDefaultValueInitializer(x.Initializer, x.Symbol.Type));
 

@@ -47,7 +47,7 @@ public class MemberInitializerRedundantTest
 
     [TestMethod]
     public void MemberInitializerRedundant_CS_Latest() =>
-        builder.AddPaths("MemberInitializerRedundant.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("MemberInitializerRedundant.Latest.cs", "MemberInitializerRedundant.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void MemberInitializerRedundant_CS_Latest_CodeFix() =>
