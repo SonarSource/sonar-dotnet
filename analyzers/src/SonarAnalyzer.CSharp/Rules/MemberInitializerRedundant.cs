@@ -70,6 +70,11 @@ public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
             // empty body and they do not initialize any members. If any of these is present, the rule does not apply.
             return;
         }
+        if (constructors.Exists(x => x.IsPartialDefinition && x.PartialImplementationPart is null))
+        {
+            // Partial constructor implementation is not in scope; can't determine if all constructors set the member.
+            return;
+        }
 
         // only retrieve the member symbols (an expensive call) if there are explicit class initializers
         var initializedMembers = InitializedMembers(c.Model, declaration, IsNotStaticOrConst);

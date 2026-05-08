@@ -19,13 +19,12 @@ public partial class MultiplePartialConstructors_Noncompliant
 
 public partial class MultiplePartialConstructors_Compliant
 {
-    int id = 100;   // Compliant - not all partial constructors set id
-    public partial MultiplePartialConstructors_Compliant(int x);
-    public partial MultiplePartialConstructors_Compliant(string s);
-}
-
-public partial class MultiplePartialConstructors_Compliant
-{
     public partial MultiplePartialConstructors_Compliant(int x) { id = x; }
     public partial MultiplePartialConstructors_Compliant(string s) { }
+}
+
+public partial class PartialConstructors_MixedDeclImpl_Compliant
+{
+    public partial PartialConstructors_MixedDeclImpl_Compliant(int i);
+    public partial PartialConstructors_MixedDeclImpl_Compliant(string s) { }
 }

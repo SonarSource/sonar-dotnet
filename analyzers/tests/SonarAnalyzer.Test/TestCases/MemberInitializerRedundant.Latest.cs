@@ -324,3 +324,17 @@ public partial class MultiplePartialConstructors_Noncompliant
     public partial MultiplePartialConstructors_Noncompliant(string s);
 }
 
+public partial class MultiplePartialConstructors_Compliant
+{
+    int id = 100;   // Compliant - not all partial constructors set id
+    public partial MultiplePartialConstructors_Compliant(int x);
+    public partial MultiplePartialConstructors_Compliant(string s);
+}
+
+public partial class PartialConstructors_MixedDeclImpl_Compliant
+{
+    int id = 100;   // Compliant - not all partial constructors set id
+    public partial PartialConstructors_MixedDeclImpl_Compliant(int i) { id = i; }
+    public partial PartialConstructors_MixedDeclImpl_Compliant(string s);
+}
+
