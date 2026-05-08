@@ -147,6 +147,13 @@ After the debug session, remove the `Debugger.Launch()` line.
 * Run `mvn install clean -DskipTests=true` in the respective directories (pom.xml).
 * Use the IDE to run unit tests in the projects.
 
+## Claude Code Integration (SQAA and CAG)
+
+The repo ships MCP config enabling SonarQube [Context Augmentation (CAG)](https://www.sonarsource.com/resources/library/sonar-context-augmentation-claude-code/) and [Agentic Analysis (SQAA)](https://www.sonarsource.com/resources/library/set-up-the-sonarqube-plugin-for-claude-code/). One-time setup per developer:
+
+1. Ensure Docker is running when starting a Claude Code session.
+2. Set the `SONARQUBE_TOKEN` environment variable to your SonarQube user token.
+
 ## Contributing
 
 Please see the [How to contribute](../README.md#how-to-contribute) section for details on
