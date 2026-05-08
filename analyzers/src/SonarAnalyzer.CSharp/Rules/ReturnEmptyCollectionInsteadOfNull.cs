@@ -45,24 +45,20 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     {
         if (ExpressionBody(context.Node) is { } expressionBody)
         {
-            var nullOrDefaultLiterals = NullOrDefaultExpressions(expressionBody.Expression)
-                .Select(x => x.GetLocation())
-                .ToList();
+            var nullOrDefaultLiterals = NullOrDefaultExpressions(expressionBody.Expression).Select(x => x.GetLocation()).ToList();
 
             ReportIfAny(nullOrDefaultLiterals);
         }
         else if (Body(context.Node) is { } body)
         {
-            var nullOrDefaultLiterals = ReturnNullOrDefaultExpressions(body)
-                .Select(x => x.GetLocation())
-                .ToList();
+            var nullOrDefaultLiterals = ReturnNullOrDefaultExpressions(body).Select(x => x.GetLocation()).ToList();
 
             ReportIfAny(nullOrDefaultLiterals);
         }
 
         void ReportIfAny(List<Location> nullOrDefaultLiterals)
         {
-            if (nullOrDefaultLiterals.Count > 0 && IsReturningCollection(context))
+            if (nullOrDefaultLiterals.Count > 0 && DeclaredType(context) is { } type && !IsExemptedType(type) && IsReturningCollection(type))
             {
                 context.ReportIssue(Rule, nullOrDefaultLiterals[0], nullOrDefaultLiterals.Skip(1).ToSecondary(MessageFormat));
             }
@@ -70,14 +66,15 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
     }
 
     private static BlockSyntax Body(SyntaxNode node) =>
-        node is BasePropertyDeclarationSyntax property ? GetAccessor(property)?.Body : node.GetBody();
+        node is BasePropertyDeclarationSyntax property ? Accessor(property)?.Body : node.GetBody();
 
-    private static bool IsReturningCollection(SonarSyntaxNodeReportingContext context) =>
-        DeclaredType(context) is { } type
-        && !type.Is(KnownType.System_String)
-        && !type.DerivesFrom(KnownType.System_Xml_XmlNode)
-        && type.DerivesOrImplementsAny(CollectionTypes)
-        && type.NullableAnnotation() != NullableAnnotation.Annotated;
+    private static bool IsReturningCollection(ITypeSymbol type) =>
+        type.DerivesOrImplementsAny(CollectionTypes) && type.NullableAnnotation() != NullableAnnotation.Annotated;
+
+    private static bool IsExemptedType(ITypeSymbol type) =>
+        type.Is(KnownType.System_String)
+        || type.DerivesFrom(KnownType.System_Xml_XmlNode)
+        || (type.IsValueType && !type.Is(KnownType.System_Collections_Immutable_ImmutableArray_T));
 
     private static ITypeSymbol DeclaredType(SonarSyntaxNodeReportingContext context)
     {
@@ -89,18 +86,16 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         node switch
         {
             BaseMethodDeclarationSyntax method => method.ExpressionBody(),
-            BasePropertyDeclarationSyntax property => property.ArrowExpressionBody() ?? GetAccessor(property)?.ExpressionBody,
+            BasePropertyDeclarationSyntax property => property.ArrowExpressionBody() ?? Accessor(property)?.ExpressionBody,
             _ => ((LocalFunctionStatementSyntaxWrapper)node).ExpressionBody,
         };
 
-    private static AccessorDeclarationSyntax GetAccessor(BasePropertyDeclarationSyntax property) =>
+    private static AccessorDeclarationSyntax Accessor(BasePropertyDeclarationSyntax property) =>
         property.AccessorList.Accessors.FirstOrDefault(x => x.IsKind(SyntaxKind.GetAccessorDeclaration));
 
     private static IEnumerable<SyntaxNode> ReturnNullOrDefaultExpressions(SyntaxNode methodBlock) =>
         methodBlock.DescendantNodes(x =>
-            !(x.Kind() is SyntaxKindEx.LocalFunctionStatement
-                or SyntaxKind.SimpleLambdaExpression
-                or SyntaxKind.ParenthesizedLambdaExpression))
+            x.Kind() is not (SyntaxKindEx.LocalFunctionStatement or SyntaxKind.SimpleLambdaExpression or SyntaxKind.ParenthesizedLambdaExpression))
             .OfType<ReturnStatementSyntax>()
             .SelectMany(x => NullOrDefaultExpressions(x.Expression));
 

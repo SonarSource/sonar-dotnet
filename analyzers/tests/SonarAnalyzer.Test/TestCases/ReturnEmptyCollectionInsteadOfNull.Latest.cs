@@ -207,18 +207,33 @@ public class CSharp13
 // https://sonarsource.atlassian.net/browse/NET-2347
 public class Repro_NET2347
 {
+    public static ImmutableArray<T> ReturnImmutableArray<T>() => default; // Noncompliant TP, default here is an uninitialized ImmutableArray<T> with the private `T[]` field being `null`.
 
     public static ValueTypeCollection StructCollection(byte b)
     {
         return b == 0
-            ? default // Noncompliant - FP - The returned struct is a valid ValueTypeCollection with the `bits` parameter initialized to 0
+            ? default // Compliant - The returned struct is a valid ValueTypeCollection with the `bits` parameter initialized to 0
             : new ValueTypeCollection(b);
     }
 
-    public static ImmutableArray<T> ReturnImmutableArray<T>() => default; // Noncompliant TP, default here is an uninitialized ImmutableArray<T> with the private `T[]` field being `null`.
-
+    public static MutableValueTypeCollection MutableStructCollection(byte b)
+    {
+        return b == 0
+            ? default // Compliant - The returned struct is a valid ValueTypeCollection with the `bits` parameter initialized to 0
+            : new MutableValueTypeCollection(b);
+    }
 
     public readonly struct ValueTypeCollection(byte bits) : IReadOnlyCollection<int>
+    {
+        public int Count => BitOperations.PopCount(bits);
+
+        public IEnumerator<int> GetEnumerator() =>
+            Enumerable.Range(0, 8).GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
+    public struct MutableValueTypeCollection(byte bits) : IEnumerable<int>
     {
         public int Count => BitOperations.PopCount(bits);
 
