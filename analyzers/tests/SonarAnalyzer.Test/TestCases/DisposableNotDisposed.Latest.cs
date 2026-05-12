@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions.Execution;
+using Microsoft.Win32;
 
 public class DisposableNotDisposedAsync
 {
@@ -246,4 +247,13 @@ class FieldKeyWord
         get => field;
         private set => field = value;
     } = new(@"c:\foo.txt", FileMode.Open);  // Compliant: technically `field` is a private field but this is like an auto-property, which is out of scope
+}
+
+// NET-1265: https://sonarsource.atlassian.net/browse/NET-1265
+class RegistryKeyUsingDeclaration
+{
+    public void OpenSubKeyDisposed()
+    {
+        using var key = Registry.CurrentUser.OpenSubKey("Software"); // Compliant - using declaration
+    }
 }

@@ -28,6 +28,7 @@ public class DisposableNotDisposedTest
     public void DisposableNotDisposed() =>
         builder.AddPaths("DisposableNotDisposed.cs")
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+            .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
             .Verify();
 
     [TestMethod]
@@ -48,5 +49,6 @@ public class DisposableNotDisposedTest
             .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(NuGetMetadataReference.FluentAssertions(NugetPackageVersions.FluentAssertionsVersions.Ver5))
             .AddReferences(MetadataReferenceFacade.SystemNetHttp)
+            .AddReferences(MetadataReferenceFacade.MicrosoftWin32Registry)
             .Verify();
 }

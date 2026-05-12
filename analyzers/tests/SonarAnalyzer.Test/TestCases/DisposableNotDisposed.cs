@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using Microsoft.Win32;
 
 namespace Tests.Diagnostics
 {
@@ -206,6 +207,40 @@ namespace Tests.Diagnostics
         public void Dispose()
         {
             ((IDisposable)source).Dispose();
+        }
+    }
+
+    // NET-1265: https://sonarsource.atlassian.net/browse/NET-1265
+    public class RegistryKeyTests
+    {
+        public void OpenSubKeyNotDisposed()
+        {
+            var key = Registry.CurrentUser.OpenSubKey("Software"); // Noncompliant {{Dispose 'key' when it is no longer needed.}}
+            var key2 = Registry.LocalMachine.CreateSubKey("Software\\MyApp"); // Noncompliant
+            var key3 = RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry32); // Noncompliant
+            var key4 = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, "remoteMachine"); // Noncompliant
+        }
+
+        public void OpenSubKeyDisposed()
+        {
+            var key = Registry.CurrentUser.OpenSubKey("Software"); // Compliant - Dispose is called
+            key?.Dispose();
+
+            var key2 = Registry.CurrentUser.OpenSubKey("Software"); // Compliant - Close is equivalent to Dispose
+            key2?.Close();
+
+            using (var key3 = Registry.CurrentUser.OpenSubKey("Software")) // Compliant - using statement
+            {
+            }
+        }
+
+        public void DeleteSubKeyNoncompliant()
+        {
+            var key = Registry.CurrentUser.OpenSubKey("Software", true); // Noncompliant - DeleteSubKey deletes a child key, not the receiver
+            key.DeleteSubKey("MyApp");
+
+            var key2 = Registry.LocalMachine.OpenSubKey("Software", true); // Noncompliant - DeleteSubKeyTree deletes a child key, not the receiver
+            key2.DeleteSubKeyTree("MyApp");
         }
     }
 }
