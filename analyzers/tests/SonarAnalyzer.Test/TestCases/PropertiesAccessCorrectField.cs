@@ -504,7 +504,7 @@ public class NoFieldUsage
     }
 
     private int foo4;
-    public int Foo4 => 4;
+    public int Foo4 => 4; // Noncompliant {{Refactor this getter so that it actually refers to the field 'foo4'.}}
 
     private int foo5;
     public int Foo5
@@ -979,6 +979,24 @@ class Repro_NET2939 // https://sonarsource.atlassian.net/browse/NET-2939
         {
             string a = "string.Empty";
             return a;
+        }
+    }
+}
+
+class MultipleReturns
+{
+    private bool flag;
+    private decimal field1;
+    private decimal field2;
+
+    public decimal Property
+    {
+        get
+        {
+            if (flag)
+                return field1;
+            else
+                return field2;
         }
     }
 }

@@ -108,23 +108,6 @@ namespace CSharp13
     }
 }
 
-class FieldKeyword
-{
-    private int y;
-    public int Y => field; // FN https://sonarsource.atlassian.net/browse/NET-2812
-
-    public int Field => field;
-
-    class FieldKeywordEscaped
-    {
-        public int field;
-        public int something;
-        public int Field => @field;
-        public int Something => @field; // FN https://sonarsource.atlassian.net/browse/NET-2812
-        public int Other => @field;
-    }
-}
-
 class NullConditonalAssignment
 {
     public class Sample
@@ -142,5 +125,38 @@ class NullConditonalAssignment
         {
             wrongField?.Value = value.Value;
         }
+    }
+}
+
+class ExpressionBodiedProperties
+{
+    private int x;
+    private int y;
+    private int z;
+    private int s;
+
+    public int X => x;                                              // Compliant - field called 'x' exists and is referred to
+    public int Y => x;                                              // Noncompliant {{Refactor this getter so that it actually refers to the field 'y'.}}
+    public int Z => 10*x;                                           // Noncompliant {{Refactor this getter so that it actually refers to the field 'z'.}}
+    public string S => $"{x}";                                      // Compliant - field called 's' exists, but type is different
+    public int A => x + y;                                          // Compliant - field called 'a' does not exist
+    public int E => throw new System.InvalidOperationException();   // Compliant - if it only throws, do not raise an issue
+}
+
+// https://sonarsource.atlassian.net/browse/NET-2812
+class FieldKeyword
+{
+    private int y;
+    public int Y => field; // Noncompliant {{Refactor this getter so that it actually refers to the field 'y'.}}
+
+    public int Field => field;
+
+    class FieldKeywordEscaped
+    {
+        public int field;
+        public int something;
+        public int Field => @field;
+        public int Something => @field; // Noncompliant {{Refactor this getter so that it actually refers to the field 'something'.}} 
+        public int Other => @field;
     }
 }

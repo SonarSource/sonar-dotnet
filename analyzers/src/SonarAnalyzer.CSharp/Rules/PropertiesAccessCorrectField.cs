@@ -47,16 +47,18 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
     {
         // We don't handle properties with multiple returns that return different fields
-        if (property.GetMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax getter)
+        var getterSyntax = property.GetMethod.GetFirstSyntaxRef();
+        if (getterSyntax is not (AccessorDeclarationSyntax or ArrowExpressionClauseSyntax))
         {
             return [];
         }
 
         var reads = new Dictionary<IFieldSymbol, FieldData>();
-        FillReads(getter, true);
+        FillReads(getterSyntax, true);
 
         // If there're no candidate variables, we'll try inspect one return of local method invocation
         if (reads.Count == 0
+            && getterSyntax is AccessorDeclarationSyntax getter
             && (getter.ExpressionBody?.Expression ?? SingleReturn(getter.Body)) is InvocationExpressionSyntax returnExpression
             && FindInvokedMethod(compilation, property.ContainingType, returnExpression) is MethodDeclarationSyntax invokedMethod)
         {
@@ -79,29 +81,23 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
         }
     }
 
-    protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
-    {
-        if (accessorMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax accessor
-            || ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation)
-            || AccessesSelfBaseProperty(accessorMethod, accessor, compilation))
+    protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation) =>
+        accessorMethod.GetFirstSyntaxRef() switch
         {
-            return true;
-        }
-
-        // Special case: ignore the accessor if the only statement/expression is a throw.
-        if (accessor.Body is null)
-        {
-            // Expression-bodied syntax
-            return accessor.ExpressionBody is { } arrowClause && ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression);
-        }
-
-        // Statement-bodied syntax
-        return accessor.Body.DescendantNodes().Count(x => x is StatementSyntax) == 1 && accessor.Body.DescendantNodes().Count(x => x is ThrowStatementSyntax) == 1;
-    }
+            ArrowExpressionClauseSyntax arrowClause => ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression),
+            not AccessorDeclarationSyntax => true,
+            AccessorDeclarationSyntax accessor when ((SyntaxNode)accessor.Body ?? accessor).ContainsGetOrSetOnDependencyProperty(compilation)
+                || AccessesSelfBaseProperty(accessorMethod, accessor, compilation) => true,
+            AccessorDeclarationSyntax { Body: null, ExpressionBody: { } expressionBody } => ThrowExpressionSyntaxWrapper.IsInstance(expressionBody.Expression),
+            AccessorDeclarationSyntax { Body: { } body } => body.DescendantNodes().Count(x => x is StatementSyntax) == 1
+                && body.DescendantNodes().Count(x => x is ThrowStatementSyntax) == 1,
+            _ => false,
+        };
 
     protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
         HasExplicitAccessor(property.SetMethod)
-        || HasExplicitAccessor(property.GetMethod);
+        || HasExplicitAccessor(property.GetMethod)
+        || property.GetMethod.GetFirstSyntaxRef() is ArrowExpressionClauseSyntax; // Only getters can have property-level arrow expression bodies in C#
 
     private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
     {
