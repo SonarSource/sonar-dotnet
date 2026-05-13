@@ -66,7 +66,7 @@ try {
 
         Write-Host "Pushing branch and creating PR"
         git push -u origin "version-bump/$ShortVersion"
-        gh pr create --title "Bump version to $ShortVersion" --web --base master --head "version-bump/$ShortVersion"
+        gh pr create --title "Bump version to $ShortVersion" --base master --head "version-bump/$ShortVersion" --fill
     }
 
     exit 0
