@@ -26,6 +26,8 @@ namespace SonarAnalyzer.ShimLayer
         private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<OperationKind, bool>> SupportedOperationWrappers
             = new ConcurrentDictionary<Type, ConcurrentDictionary<OperationKind, bool>>();
 
+        private const string SyntaxParameterName = "syntax";
+
         public static bool SupportsCSharp7 { get; }
             = Enum.GetNames(typeof(LanguageVersion)).Contains(nameof(LanguageVersionEx.CSharp7));
 
@@ -251,7 +253,7 @@ namespace SonarAnalyzer.ShimLayer
                 throw new InvalidOperationException();
             }
 
-            var syntaxParameter = Expression.Parameter(typeof(TOperation), "syntax");
+            var syntaxParameter = Expression.Parameter(typeof(TOperation), SyntaxParameterName);
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TOperation).GetTypeInfo())
                 ? (Expression)syntaxParameter
@@ -326,7 +328,7 @@ namespace SonarAnalyzer.ShimLayer
             {
                 return FallbackAccessor;
             }
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax"); // Sonar - begin
+            var syntaxParameter = Expression.Parameter(typeof(TSyntax), SyntaxParameterName); // Sonar - begin
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
                 ? (Expression)syntaxParameter
@@ -398,7 +400,7 @@ namespace SonarAnalyzer.ShimLayer
                 throw new InvalidOperationException();
             }
 
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
+            var syntaxParameter = Expression.Parameter(typeof(TSyntax), SyntaxParameterName);
             var argParameter = Expression.Parameter(typeof(TArg), "arg");
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
@@ -475,7 +477,7 @@ namespace SonarAnalyzer.ShimLayer
                 throw new InvalidOperationException();
             }
 
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
+            var syntaxParameter = Expression.Parameter(typeof(TSyntax), SyntaxParameterName);
             var keyParameter = Expression.Parameter(typeof(TKey), "key");
             var valueParameter = Expression.Parameter(typeof(TValue).MakeByRefType(), "value");
             Expression instance =
@@ -691,6 +693,7 @@ namespace SonarAnalyzer.ShimLayer
         }
 
         internal static Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>> CreateSeparatedSyntaxListPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
+            where TSyntax : class
         {
             SeparatedSyntaxListWrapper<TProperty> FallbackAccessor(TSyntax syntax)
             {
@@ -732,7 +735,7 @@ namespace SonarAnalyzer.ShimLayer
                 throw new InvalidOperationException();
             }
 
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
+            var syntaxParameter = Expression.Parameter(typeof(TSyntax), SyntaxParameterName);
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
                 ? (Expression)syntaxParameter
@@ -751,6 +754,7 @@ namespace SonarAnalyzer.ShimLayer
         }
 
         internal static Func<TSyntax, TProperty, TSyntax> CreateSyntaxWithPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
+            where TSyntax : class
         {
             TSyntax FallbackAccessor(TSyntax syntax, TProperty newValue)
             {
@@ -797,7 +801,7 @@ namespace SonarAnalyzer.ShimLayer
                 return FallbackAccessor;
             }
 
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
+            var syntaxParameter = Expression.Parameter(typeof(TSyntax), SyntaxParameterName);
             var valueParameter = Expression.Parameter(typeof(TProperty), methodInfo.GetParameters()[0].Name);
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
@@ -817,6 +821,7 @@ namespace SonarAnalyzer.ShimLayer
         }
 
         internal static Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>, TSyntax> CreateSeparatedSyntaxListWithPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
+            where TSyntax : class
         {
             TSyntax FallbackAccessor(TSyntax syntax, SeparatedSyntaxListWrapper<TProperty> newValue)
             {
@@ -866,7 +871,7 @@ namespace SonarAnalyzer.ShimLayer
             var methodInfo = type.GetTypeInfo().GetDeclaredMethods("With" + propertyName)
                 .Single(m => !m.IsStatic && m.GetParameters().Length == 1 && m.GetParameters()[0].ParameterType.Equals(property.PropertyType));
 
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
+            var syntaxParameter = Expression.Parameter(typeof(TSyntax), SyntaxParameterName);
             var valueParameter = Expression.Parameter(typeof(SeparatedSyntaxListWrapper<TProperty>), methodInfo.GetParameters()[0].Name);
             Expression instance =
                 type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())

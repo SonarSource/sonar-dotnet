@@ -29,81 +29,46 @@ namespace SonarAnalyzer.TestFramework.Build;
 /// </summary>
 public static class LanguageOptions
 {
-    private static readonly ImmutableArray<ParseOptions> DefaultParseOptions;
+    // Intermediate values used by multiple properties below. Declared first to ensure correct initialization order.
+    private static readonly IEnumerable<ParseOptions> Cs13 = CreateOptions(CSharp13);
+    private static readonly IEnumerable<ParseOptions> Cs12 = CreateOptions(CSharp12);
+    private static readonly IEnumerable<ParseOptions> Cs11 = CreateOptions(CSharp11);
+    private static readonly IEnumerable<ParseOptions> Cs10 = CreateOptions(CSharp10);
+    private static readonly IEnumerable<ParseOptions> Cs9 = CreateOptions(CSharp9);
+    private static readonly IEnumerable<ParseOptions> Cs8 = CreateOptions(CSharp8);
+    private static readonly IEnumerable<ParseOptions> Cs7 = CreateOptions(CSharp7, CSharp7_1, CSharp7_2, CSharp7_3);
+    private static readonly IEnumerable<ParseOptions> Vb15 = CreateOptions(VisualBasic15, VisualBasic15_3, VisualBasic15_5);
 
-    public static ImmutableArray<ParseOptions> BeforeCSharp7 { get; }
-    public static ImmutableArray<ParseOptions> BeforeCSharp8 { get; }
-    public static ImmutableArray<ParseOptions> BeforeCSharp9 { get; }
-    public static ImmutableArray<ParseOptions> BeforeCSharp10 { get; }
-    public static ImmutableArray<ParseOptions> BeforeCSharp11 { get; }
-    public static ImmutableArray<ParseOptions> BeforeCSharp12 { get; }
-    public static ImmutableArray<ParseOptions> BeforeCSharp13 { get; }
-    public static ImmutableArray<ParseOptions> BeforeCSharp14 { get; }
+    public static ImmutableArray<ParseOptions> BeforeCSharp7 { get; } = CreateOptions(CSharp5).Concat(CreateOptions(CSharp6)).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> BeforeCSharp8 { get; } = BeforeCSharp7.Concat(Cs7).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> BeforeCSharp9 { get; } = BeforeCSharp8.Concat(Cs8).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> BeforeCSharp10 { get; } = BeforeCSharp9.Concat(Cs9).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> BeforeCSharp11 { get; } = BeforeCSharp10.Concat(Cs10).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> BeforeCSharp12 { get; } = BeforeCSharp11.Concat(Cs11).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> BeforeCSharp13 { get; } = BeforeCSharp12.Concat(Cs12).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> BeforeCSharp14 { get; } = BeforeCSharp13.Concat(Cs13).FilterByEnvironment();
 
-    public static ImmutableArray<ParseOptions> FromCSharp6 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp7 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp8 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp9 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp10 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp11 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp12 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp13 { get; }
-    public static ImmutableArray<ParseOptions> FromCSharp14 { get; }
-    public static ImmutableArray<ParseOptions> CSharpPreview { get; }
+    public static ImmutableArray<ParseOptions> FromCSharp14 { get; } = CreateOptions(CSharp14).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp13 { get; } = Cs13.Concat(FromCSharp14).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp12 { get; } = Cs12.Concat(FromCSharp13).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp11 { get; } = Cs11.Concat(FromCSharp12).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp10 { get; } = Cs10.Concat(FromCSharp11).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp9 { get; } = Cs9.Concat(FromCSharp10).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp8 { get; } = Cs8.Concat(FromCSharp9).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp7 { get; } = Cs7.Concat(FromCSharp8).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromCSharp6 { get; } = CreateOptions(CSharp6).Concat(FromCSharp7).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> CSharpPreview { get; } = CreateOptions(Preview).ToImmutableArray();
 
-    public static ImmutableArray<ParseOptions> CSharpLatest { get; }
-    public static ImmutableArray<ParseOptions> VisualBasicLatest { get; }
+    public static ImmutableArray<ParseOptions> CSharpLatest { get; } = CreateOptions(CS.LanguageVersion.Latest).ToImmutableArray();
+    public static ImmutableArray<ParseOptions> VisualBasicLatest { get; } = CreateOptions(VB.LanguageVersion.Latest).ToImmutableArray();
 
-    public static ImmutableArray<ParseOptions> OnlyCSharp7 { get; }
+    public static ImmutableArray<ParseOptions> OnlyCSharp7 { get; } = Cs7.FilterByEnvironment();
 
-    public static ImmutableArray<ParseOptions> FromVisualBasic12 { get; }
-    public static ImmutableArray<ParseOptions> FromVisualBasic14 { get; }
-    public static ImmutableArray<ParseOptions> FromVisualBasic15 { get; }
+    public static ImmutableArray<ParseOptions> FromVisualBasic15 { get; } = Vb15.Concat(CreateOptions(VisualBasic16)).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromVisualBasic14 { get; } = CreateOptions(VisualBasic14).Concat(FromVisualBasic15).FilterByEnvironment();
+    public static ImmutableArray<ParseOptions> FromVisualBasic12 { get; } = CreateOptions(VisualBasic12).Concat(FromVisualBasic14).FilterByEnvironment();
 
-#pragma warning disable S3963 // The static fields are dependent between them so the values cannot be set inline
-
-    static LanguageOptions()
-    {
-        var cs13 = CreateOptions(CSharp13);
-        var cs12 = CreateOptions(CSharp12);
-        var cs11 = CreateOptions(CSharp11);
-        var cs10 = CreateOptions(CSharp10);
-        var cs9 = CreateOptions(CSharp9);
-        var cs8 = CreateOptions(CSharp8);
-        var cs7 = CreateOptions(CSharp7, CSharp7_1, CSharp7_2, CSharp7_3);
-        var vb15 = CreateOptions(VisualBasic15, VisualBasic15_3, VisualBasic15_5);
-
-        BeforeCSharp7 = CreateOptions(CSharp5).Concat(CreateOptions(CSharp6)).FilterByEnvironment();
-        BeforeCSharp8 = BeforeCSharp7.Concat(cs7).FilterByEnvironment();
-        BeforeCSharp9 = BeforeCSharp8.Concat(cs8).FilterByEnvironment();
-        BeforeCSharp10 = BeforeCSharp9.Concat(cs9).FilterByEnvironment();
-        BeforeCSharp11 = BeforeCSharp10.Concat(cs10).FilterByEnvironment();
-        BeforeCSharp12 = BeforeCSharp11.Concat(cs11).FilterByEnvironment();
-        BeforeCSharp13 = BeforeCSharp12.Concat(cs12).FilterByEnvironment();
-        BeforeCSharp14 = BeforeCSharp13.Concat(cs13).FilterByEnvironment();
-
-        FromCSharp14 = CreateOptions(CSharp14).FilterByEnvironment();
-        FromCSharp13 = cs13.Concat(FromCSharp14).FilterByEnvironment();
-        FromCSharp12 = cs12.Concat(FromCSharp13).FilterByEnvironment();
-        FromCSharp11 = cs11.Concat(FromCSharp12).FilterByEnvironment();
-        FromCSharp10 = cs10.Concat(FromCSharp11).FilterByEnvironment();
-        FromCSharp9 = cs9.Concat(FromCSharp10).FilterByEnvironment();
-        FromCSharp8 = cs8.Concat(FromCSharp9).FilterByEnvironment();
-        FromCSharp7 = cs7.Concat(FromCSharp8).FilterByEnvironment();
-        FromCSharp6 = CreateOptions(CSharp6).Concat(FromCSharp7).FilterByEnvironment();
-
-        OnlyCSharp7 = cs7.FilterByEnvironment();
-
-        FromVisualBasic15 = vb15.Concat(CreateOptions(VisualBasic16)).FilterByEnvironment();
-        FromVisualBasic14 = CreateOptions(VisualBasic14).Concat(FromVisualBasic15).FilterByEnvironment();
-        FromVisualBasic12 = CreateOptions(VisualBasic12).Concat(FromVisualBasic14).FilterByEnvironment();
-
-        DefaultParseOptions = FromCSharp7.Concat(FromVisualBasic12).ToImmutableArray(); // Values depends on the build environment
-        CSharpPreview = CreateOptions(Preview).ToImmutableArray();
-        CSharpLatest = CreateOptions(CS.LanguageVersion.Latest).ToImmutableArray();
-        VisualBasicLatest = CreateOptions(VB.LanguageVersion.Latest).ToImmutableArray();
-    }
-#pragma warning restore S3963
+    private static readonly ImmutableArray<ParseOptions> DefaultParseOptions = FromCSharp7.Concat(FromVisualBasic12).ToImmutableArray(); // Values depends on the build environment
 
     public static IEnumerable<ParseOptions> OrDefault(this IEnumerable<ParseOptions> parseOptions, string language) =>
         parseOptions is not null && parseOptions.Any() ? parseOptions : Default(language);
