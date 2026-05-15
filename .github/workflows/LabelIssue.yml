@@ -7,7 +7,7 @@ on:
 jobs:
   CreateJiraIssue_job:
     name: Create Jira issue
-    runs-on: github-ubuntu-latest-s
+    runs-on: warp-custom-ubuntu-24-04
     permissions:
       id-token: write
       issues: write
