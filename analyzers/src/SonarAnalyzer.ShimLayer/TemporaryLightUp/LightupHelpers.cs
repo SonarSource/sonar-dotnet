@@ -7,6 +7,7 @@ namespace SonarAnalyzer.ShimLayer
 {
     using System;
     using System.Collections.Concurrent;
+    using System.Collections.Generic;
     using System.Collections.Immutable;
     using System.Linq;
     using System.Linq.Expressions;
@@ -143,7 +144,7 @@ namespace SonarAnalyzer.ShimLayer
         {
             TProperty FallbackAccessor(TOperation syntax)
             {
-                if (syntax == null)
+                if (EqualityComparer<TOperation>.Default.Equals(syntax, default))
                 {
                     // Unlike an extension method which would throw ArgumentNullException here, the light-up
                     // behavior needs to match behavior of the underlying property.
@@ -213,7 +214,7 @@ namespace SonarAnalyzer.ShimLayer
         {
             ImmutableArray<IOperation> FallbackAccessor(TOperation syntax)
             {
-                if (syntax == null)
+                if (EqualityComparer<TOperation>.Default.Equals(syntax, default))
                 {
                     // Unlike an extension method which would throw ArgumentNullException here, the light-up
                     // behavior needs to match behavior of the underlying property.
@@ -301,7 +302,7 @@ namespace SonarAnalyzer.ShimLayer
         {
             TProperty FallbackAccessor(TSyntax syntax)
             {
-                if (syntax == null)
+                if (EqualityComparer<TSyntax>.Default.Equals(syntax, default))
                 {
                     // Unlike an extension method which would throw ArgumentNullException here, the light-up
                     // behavior needs to match behavior of the underlying property.
@@ -346,7 +347,7 @@ namespace SonarAnalyzer.ShimLayer
         {
             static TProperty FallbackAccessor(TSyntax syntax, TArg argument)
             {
-                if (syntax == null)
+                if (EqualityComparer<TSyntax>.Default.Equals(syntax, default))
                 {
                     // Unlike an extension method which would throw ArgumentNullException here, the light-up
                     // behavior needs to match behavior of the underlying property.
@@ -421,7 +422,7 @@ namespace SonarAnalyzer.ShimLayer
         {
             static bool FallbackAccessor(TSyntax syntax, TKey key, out TValue value)
             {
-                if (syntax == null)
+                if (EqualityComparer<TSyntax>.Default.Equals(syntax, default))
                 {
                     // Unlike an extension method which would throw ArgumentNullException here, the light-up
                     // behavior needs to match behavior of the underlying property.
