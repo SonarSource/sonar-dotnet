@@ -7,7 +7,7 @@ on:
 
 jobs:
   notify:
-    runs-on: github-ubuntu-latest-s # Public GitHub hosted runner required, Self-Hosted runners do not support Docker-in-Docker
+    runs-on: warp-custom-ubuntu-24-04 # Public GitHub hosted runner required, Self-Hosted runners do not support Docker-in-Docker
     permissions:
       id-token: write
       checks: read
