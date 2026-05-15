@@ -29,25 +29,48 @@ public sealed class GenericLoggerInjectionShouldMatchEnclosingType : SonarDiagno
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
-        {
-            if (cc.Compilation.References(KnownAssembly.MicrosoftExtensionsLoggingAbstractions))
             {
-                cc.RegisterNodeAction(c =>
+                if (cc.Compilation.References(KnownAssembly.MicrosoftExtensionsLoggingAbstractions))
                 {
-                    var constructor = (ConstructorDeclarationSyntax)c.Node;
-                    foreach (var invalidType in InvalidTypeParameters(constructor, c.Model))
-                    {
-                        c.ReportIssue(Rule, invalidType);
-                    }
-                },
-                SyntaxKind.ConstructorDeclaration);
-            }
-        });
+                    cc.RegisterNodeAction(c =>
+                        {
+                            var invalidTypes = c.Node switch
+                            {
+                                ConstructorDeclarationSyntax x => InvalidTypeParameters(x, c.Model),
+                                TypeDeclarationSyntax x => InvalidTypeParameters(x, c.Model),
+                                _ => [],
+                            };
+                            foreach (var invalidType in invalidTypes)
+                            {
+                                c.ReportIssue(Rule, invalidType);
+                            }
+                        },
+                        SyntaxKind.ConstructorDeclaration,
+                        SyntaxKind.ClassDeclaration,
+                        SyntaxKindEx.RecordDeclaration);
+                }
+            });
 
     // Returns T for [Constructor(ILogger<T> logger)] where T is not Constructor
-    private static IEnumerable<TypeSyntax> InvalidTypeParameters(ConstructorDeclarationSyntax constructor, SemanticModel model)
+    private static IEnumerable<TypeSyntax> InvalidTypeParameters(ConstructorDeclarationSyntax constructor, SemanticModel model) =>
+        model.GetDeclaredSymbol(constructor)?.ContainingType is { IsValueType: false } constructorType
+            ? CompareGenericParameters(constructor.ParameterList, constructorType, model)
+            : [];
+
+    // Only applies to primary constructors. ParameterList() returns null for non-primary type declarations.
+    private static IEnumerable<TypeSyntax> InvalidTypeParameters(TypeDeclarationSyntax typeDeclaration, SemanticModel model) =>
+        typeDeclaration.ParameterList() is { } parameterList
+            ? CompareGenericParameters(parameterList, model.GetDeclaredSymbol(typeDeclaration), model)
+            : [];
+
+    private static IEnumerable<TypeSyntax> CompareGenericParameters(ParameterListSyntax parameterList, INamedTypeSymbol constructorType, SemanticModel model)
     {
-        var genericParameters = constructor.ParameterList.Parameters
+        if (constructorType is null)
+        {
+            yield break;
+        }
+
+        var genericParameters = parameterList.Parameters
             .Where(x => x.Type is GenericNameSyntax generic
                         && generic.TypeArgumentList.Arguments.Count == 1)
             .Select(x => (GenericNameSyntax)x.Type)
@@ -58,7 +81,6 @@ public sealed class GenericLoggerInjectionShouldMatchEnclosingType : SonarDiagno
             yield break;
         }
 
-        var constructorType = model.GetDeclaredSymbol(constructor)?.ContainingType;
         foreach (var generic in genericParameters)
         {
             var genericArgument = generic.TypeArgumentList.Arguments[0];
