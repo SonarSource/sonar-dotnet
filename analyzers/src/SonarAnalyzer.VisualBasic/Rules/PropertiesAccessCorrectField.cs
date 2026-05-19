@@ -68,7 +68,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
     protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
     {
-        // We don't handle properties with multiple returns that return different fields
+        // A field is considered accessed if it appears anywhere in the getter body, including across multiple return paths.
         if (property.GetMethod.GetFirstSyntaxRef() is not AccessorStatementSyntax getter)
         {
             return [];
@@ -76,7 +76,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
         var reads = new Dictionary<IFieldSymbol, FieldData>();
         FillReads(getter, true);
-        // If there're no candidate variables, we'll try inspect one return of local method invocation
+        // Indirect access through a helper method is recognized only when the getter has a single return.
         if (reads.Count == 0
             && SingleReturn(getter) is InvocationExpressionSyntax returnExpression
             && FindInvokedMethod(compilation, property.ContainingType, returnExpression) is MethodBaseSyntax invokedMethod)

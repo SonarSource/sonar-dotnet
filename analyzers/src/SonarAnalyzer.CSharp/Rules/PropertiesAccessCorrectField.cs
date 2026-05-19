@@ -46,7 +46,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
     protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
     {
-        // We don't handle properties with multiple returns that return different fields
+        // A field is considered accessed if it appears anywhere in the getter body, including across multiple return paths.
         var getterSyntax = property.GetMethod.GetFirstSyntaxRef();
         if (getterSyntax is not (AccessorDeclarationSyntax or ArrowExpressionClauseSyntax))
         {
@@ -56,10 +56,8 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
         var reads = new Dictionary<IFieldSymbol, FieldData>();
         FillReads(getterSyntax, true);
 
-        // If there're no candidate variables, we'll try inspect one return of local method invocation
-        if (reads.Count == 0
-            && getterSyntax is AccessorDeclarationSyntax getter
-            && (getter.ExpressionBody?.Expression ?? SingleReturn(getter.Body)) is InvocationExpressionSyntax returnExpression
+        // Indirect access through a helper method is recognized only when the getter has a single return.
+        if (reads.Count == 0 && SingleReturnGetter(getterSyntax) is { } returnExpression
             && FindInvokedMethod(compilation, property.ContainingType, returnExpression) is MethodDeclarationSyntax invokedMethod)
         {
             FillReads(invokedMethod, false);
@@ -120,6 +118,14 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
             }
         }
     }
+
+    private static InvocationExpressionSyntax SingleReturnGetter(SyntaxNode getterSyntax) =>
+        getterSyntax switch
+        {
+            ArrowExpressionClauseSyntax arrow => arrow.Expression as InvocationExpressionSyntax,
+            AccessorDeclarationSyntax accessor => (accessor.ExpressionBody?.Expression ?? SingleReturn(accessor.Body)) as InvocationExpressionSyntax,
+            _ => null,
+        };
 
     private static ExpressionSyntax SingleReturn(SyntaxNode body)
     {
