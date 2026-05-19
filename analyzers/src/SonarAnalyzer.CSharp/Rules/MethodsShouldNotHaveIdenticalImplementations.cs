@@ -29,6 +29,7 @@ public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShould
         SyntaxKind.StructDeclaration,
         SyntaxKindEx.RecordStructDeclaration,
         SyntaxKind.InterfaceDeclaration,
+        SyntaxKindEx.ExtensionBlockDeclaration,
         SyntaxKind.CompilationUnit
     ];
 

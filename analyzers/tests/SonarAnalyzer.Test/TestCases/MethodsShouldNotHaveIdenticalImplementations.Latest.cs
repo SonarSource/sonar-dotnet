@@ -319,6 +319,7 @@ public class ExtensionTest
     }
 }
 
+// https://sonarsource.atlassian.net/browse/NET-2745
 public static class NewExtensions
 {
     extension(ExtensionTest sample)
@@ -329,14 +330,14 @@ public static class NewExtensions
             Console.WriteLine("Two");
         }
 
-        public void MethodInExtension() // FN https://sonarsource.atlassian.net/browse/NET-2745
+        public void MethodInExtension() // Secondary
         {
             Console.WriteLine("One");
             Console.WriteLine("Two");
             Console.WriteLine("Three");
         }
 
-        public void MethodInExtension2() // FN https://sonarsource.atlassian.net/browse/NET-2745
+        public void MethodInExtension2() // Noncompliant
         {
             Console.WriteLine("One");
             Console.WriteLine("Two");
