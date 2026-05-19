@@ -31,7 +31,9 @@ public class CSharpRemovableDeclarationCollector : RemovableDeclarationCollector
         node;
 
     public static bool IsNodeContainerTypeDeclaration(SyntaxNode node) =>
-        IsNodeStructOrClassOrRecordDeclaration(node) || node.IsKind(SyntaxKind.InterfaceDeclaration);
+        IsNodeStructOrClassOrRecordDeclaration(node)
+        || node.IsKind(SyntaxKind.InterfaceDeclaration)
+        || node.IsKind(SyntaxKindEx.ExtensionBlockDeclaration);
 
     protected override IEnumerable<SyntaxNode> MatchingDeclarations(NodeAndModel<BaseTypeDeclarationSyntax> container, ISet<SyntaxKind> kinds) =>
         container.Node.DescendantNodes(IsNodeContainerTypeDeclaration).Where(x => kinds.Contains(x.Kind()));

@@ -85,15 +85,24 @@ public static class Extensions
     {
         public void Test()
         {
-            this.NonCompliant();
-            var x = this.Compliant();
+            this.NonCompliant();        // Return value discarded.
+            var x = this.Compliant();   // Return value used.
+
+            Extensions.NonCompliantStatic(this);        // Return value discarded.
+            var y = Extensions.CompliantStatic(this);   // Return value used.
         }
     }
 
     extension(Sample s)
     {
-        private int NonCompliant() => 42; // FN https://sonarsource.atlassian.net/browse/NET-2829
+        private int NonCompliant() => 42;   // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}} https://sonarsource.atlassian.net/browse/NET-2829
+//              ^^^
         private int Compliant() => 42;
+
+        private int NonCompliantStatic() => 42;   // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}} https://sonarsource.atlassian.net/browse/NET-2829
+//              ^^^
+
+        private int CompliantStatic() => 42;
     }
 }
 

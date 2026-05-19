@@ -142,3 +142,26 @@ public class CallbackUser
 {
     public CallbackUser(Func<int, int> getValue) { }
 }
+
+// https://sonarsource.atlassian.net/browse/NET-2829 - private (old-syntax) extension methods
+public static class PrivateStaticAndExtensions
+{
+    public class Sample
+    {
+        public void Test()
+        {
+            this.ExtensionNonCompliant();                             // Return value discarded via extension-call syntax.
+            PrivateStaticAndExtensions.StaticNonCompliant(this);      // Return value discarded via static-call syntax.
+            var x = this.ExtensionCompliant();                        // Return value used via extension-call syntax.
+            var y = PrivateStaticAndExtensions.StaticCompliant(this); // Return value used via static-call syntax.
+        }
+    }
+
+    private static int ExtensionNonCompliant(this Sample sample) => 42; // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
+//                 ^^^
+    private static int ExtensionCompliant(this Sample sample) => 42;
+
+    private static int StaticNonCompliant(Sample sample) => 42; // Noncompliant{{Change return type to 'void'; not a single caller uses the returned value.}}
+//                 ^^^
+    private static int StaticCompliant(Sample sample) => 42;
+}
