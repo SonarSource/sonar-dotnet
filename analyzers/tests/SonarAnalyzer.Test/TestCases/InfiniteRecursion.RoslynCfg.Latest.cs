@@ -211,10 +211,28 @@ public static class Extensions
             }
         }
 
-        public int InstanceInfiniteCount => ex.InstanceInfiniteCount + 1; // FN
+        public int InstanceInfiniteCount => ex.InstanceInfiniteCount + 1; // Noncompliant - https://sonarsource.atlassian.net/browse/NET-2692
         public int InstanceFiniteCount => ex.Message.Length + 1;
 
         public static int StaticInfiniteCount => Exception.StaticInfiniteCount + 1; // Noncompliant
         public static int StaticFiniteCount => 4 + 2;
+
+        public int InfiniteAccessor
+        {
+            get { return ex.InfiniteAccessor; }     // Noncompliant
+            set { ex.InfiniteAccessor = value; }    // Noncompliant
+        }
+
+        public int InfiniteArrowAccessor
+        {
+            get => ex.InfiniteArrowAccessor;         // Noncompliant
+            set => ex.InfiniteArrowAccessor = value; // Noncompliant
+        }
+
+        public int FiniteAccessor
+        {
+            get { return ex.Message.Length; }
+            set { _ = value; }
+        }
     }
 }

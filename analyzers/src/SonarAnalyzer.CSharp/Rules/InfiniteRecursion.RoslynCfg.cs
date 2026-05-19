@@ -25,13 +25,15 @@ public partial class InfiniteRecursion
     private sealed class RoslynChecker : IChecker
     {
         public void CheckForNoExitProperty(SonarSyntaxNodeReportingContext c, PropertyDeclarationSyntax property, IPropertySymbol propertySymbol) =>
-            CheckForNoExit(c,
+            CheckForNoExit(
+                c,
                 propertySymbol,
                 "property's recursion",
                 "property accessor's recursion");
 
         public void CheckForNoExitIndexer(SonarSyntaxNodeReportingContext c, IndexerDeclarationSyntax indexer, IPropertySymbol propertySymbol) =>
-            CheckForNoExit(c,
+            CheckForNoExit(
+                c,
                 propertySymbol,
                 "indexer's recursion",
                 "indexer accessor's recursion");
@@ -61,9 +63,9 @@ public partial class InfiniteRecursion
         }
 
         private static void CheckForNoExit(SonarSyntaxNodeReportingContext c,
-                                   IPropertySymbol propertySymbol,
-                                   string arrowExpressionMessageArg,
-                                   string accessorMessageArg)
+                                           IPropertySymbol propertySymbol,
+                                           string arrowExpressionMessageArg,
+                                           string accessorMessageArg)
         {
             ArrowExpressionClauseSyntax expressionBody = null;
             AccessorListSyntax accessorList = null;
@@ -95,7 +97,7 @@ public partial class InfiniteRecursion
                 {
                     var cfg = ControlFlowGraph.Create(accessor, c.Model, c.Cancel);
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), accessorMessageArg);
-                    var walker = new RecursionSearcher(context, !accessor.Keyword.IsAnyKind(SyntaxKind.SetKeyword, SyntaxKindEx.InitKeyword));
+                    var walker = new RecursionSearcher(context, accessor.Keyword.Kind() is not SyntaxKind.SetKeyword and not SyntaxKindEx.InitKeyword);
                     walker.CheckPaths();
                 }
             }
@@ -123,7 +125,7 @@ public partial class InfiniteRecursion
 
             protected override bool IsValid(BasicBlock block)
             {
-                if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { Instance: { } } operation)
+                if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { Instance: not null } operation)
                 {
                     var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;
                     return isGetAccesor ^ isWrite;
@@ -150,7 +152,13 @@ public partial class InfiniteRecursion
                     };
 
                 static bool InstanceReferencesThis(IOperation instance) =>
-                    instance is null || instance.IsAnyKind(OperationKindEx.FlowCaptureReference, OperationKindEx.InstanceReference);
+                    instance is null
+                    || instance.IsAnyKind(OperationKindEx.FlowCaptureReference, OperationKindEx.InstanceReference)
+                    || IsExtensionParameterReference(instance);
+
+                static bool IsExtensionParameterReference(IOperation instance) =>
+                    instance.Kind == OperationKindEx.ParameterReference
+                    && IParameterReferenceOperationWrapper.FromOperation(instance).Parameter is { ContainingSymbol: ITypeSymbol { TypeKind: TypeKindEx.Extension } };
             }
 
             protected override bool IsInvalid(BasicBlock block) => false;
