@@ -25,6 +25,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
     private const string OnUsingStringInterpolation = "Don't use string interpolation in logging message templates.";
     private const string OnUsingStringFormat = "Don't use String.Format in logging message templates.";
     private const string OnUsingStringConcatenation = "Don't use string concatenation in logging message templates.";
+    private const string IndexedPlaceholdersSuffix = " Use a format method (e.g. 'DebugFormat') with indexed placeholders instead.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -34,6 +35,11 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
         {SyntaxKind.InterpolatedStringExpression, OnUsingStringInterpolation},
         {SyntaxKind.InvocationExpression, OnUsingStringFormat},
     }.ToImmutableDictionary();
+
+    private static readonly ImmutableArray<KnownType> TypesWithIndexedPlaceholder = ImmutableArray.Create(
+        KnownType.Castle_Core_Logging_ILogger,
+        KnownType.log4net_ILog,
+        KnownType.log4net_Util_ILogExtensions);
 
     private static readonly ImmutableArray<KnownType> LoggerTypes = ImmutableArray.Create(
         KnownType.Castle_Core_Logging_ILogger,
@@ -82,20 +88,22 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>
-        {
-            var invocation = (InvocationExpressionSyntax)c.Node;
-            if (LoggerMethodNames.Contains(invocation.GetName())
-                && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
-                && !IsLog4NetExceptionMethod(method)
-                && LoggerTypes.Any(x => x.Matches(method.ContainingType))
-                && method.Parameters.FirstOrDefault(x => LogMessageParameterNames.Contains(x.Name)) is { } messageParameter
-                && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
-                && InvalidSyntaxNode(argumentValue, c.Model) is { } invalidNode)
             {
-                c.ReportIssue(Rule, invalidNode, Messages[invalidNode.Kind()]);
-            }
-        },
-        SyntaxKind.InvocationExpression);
+                var invocation = (InvocationExpressionSyntax)c.Node;
+                if (LoggerMethodNames.Contains(invocation.GetName())
+                    && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method
+                    && !IsLog4NetExceptionMethod(method)
+                    && LoggerTypes.Any(x => x.Matches(method.ContainingType))
+                    && method.Parameters.FirstOrDefault(x => LogMessageParameterNames.Contains(x.Name)) is { } messageParameter
+                    && ArgumentValue(invocation, method, messageParameter) is { } argumentValue
+                    && InvalidSyntaxNode(argumentValue, c.Model) is { } invalidNode)
+                {
+                    var message = Messages[invalidNode.Kind()]
+                        + (TypesWithIndexedPlaceholder.Any(x => x.Matches(method.ContainingType)) ? IndexedPlaceholdersSuffix : string.Empty);
+                    c.ReportIssue(Rule, invalidNode, message);
+                }
+            },
+            SyntaxKind.InvocationExpression);
 
     private static CSharpSyntaxNode ArgumentValue(InvocationExpressionSyntax invocation, IMethodSymbol method, IParameterSymbol parameter)
     {
@@ -111,7 +119,7 @@ public sealed class UseConstantLoggingTemplate : SonarDiagnosticAnalyzer
     }
 
     private static bool IsLog4NetExceptionMethod(IMethodSymbol method) =>
-        method.ContainingType.Is(KnownType.log4net_ILog) && method.Parameters.Any(x => x.Type.Is(KnownType.System_Exception));
+        TypesWithIndexedPlaceholder.Any(x => x.Matches(method.ContainingType)) && method.Parameters.Any(x => x.Type.Is(KnownType.System_Exception));
 
     private static SyntaxNode InvalidSyntaxNode(SyntaxNode messageArgument, SemanticModel model) =>
         messageArgument.DescendantNodesAndSelf().FirstOrDefault(x =>

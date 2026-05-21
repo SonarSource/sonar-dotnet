@@ -16,20 +16,31 @@ performance by reducing unnecessary evaluations and ensures that logging stateme
 </ul>
 <h2>How to fix it</h2>
 <p>Use an overload that takes the log format and the parameters as separate arguments. The log format should be a constant string.</p>
+<p>For log4net and Castle.Core, use a format method (e.g. <code>DebugFormat</code>, <code>InfoFormat</code>) with indexed placeholders
+(<code>{0}</code>, <code>{1}</code>, …​).</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-logger.DebugFormat($"The value of the parameter is: {parameter}.");
+msLogger.LogDebug($"The value of the parameter is: {parameter}.");      // Noncompliant - Microsoft.Extensions.Logging
+log4netLogger.Debug($"The value of the parameter is: {parameter}.");    // Noncompliant - log4net
+nlogLogger.Debug($"The value of the parameter is: {parameter}.");       // Noncompliant - NLog
+castleLogger.Debug($"The value of the parameter is: {parameter}.");     // Noncompliant - Castle.Core
+serilogLogger.Debug($"The value of the parameter is: {parameter}.");    // Noncompliant - Serilog
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-logger.DebugFormat("The value of the parameter is: {Parameter}.", parameter);
+msLogger.LogDebug("The value of the parameter is: {parameter}.", parameter);    // Microsoft.Extensions.Logging
+log4netLogger.DebugFormat("The value of the parameter is: {0}.", parameter);    // log4net
+nlogLogger.Debug("The value of the parameter is: {parameter}.", parameter);     // NLog
+castleLogger.DebugFormat("The value of the parameter is: {0}.", parameter);     // Castle.Core
+serilogLogger.Debug("The value of the parameter is: {@parameter}", parameter);  // Serilog
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li>Microsoft Learn - <a
   href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.interpolatedstringhandlerattribute">InterpolatedStringHandlerArgumentAttribute</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.format">String.Format Method</a></li>
 </ul>
 <h3>Benchmarks</h3>
 <table>
@@ -512,7 +523,7 @@ public void Log4NetLoggingTemplateConstant()
 {
     for (int i = 0; i &lt; Iterations; i++)
     {
-        l4n_logger.InfoFormat("Param: {Parameter}", i);
+        l4n_logger.InfoFormat("Param: {0}", i);
     }
 }
 
