@@ -9,6 +9,7 @@ public static class INamedTypeSymbolExtensions
     private static readonly Func<INamedTypeSymbol, ImmutableArray<IFieldSymbol>> TupleElementsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<INamedTypeSymbol, ImmutableArray<IFieldSymbol>>(typeof(INamedTypeSymbol), "TupleElements");
     private static readonly Func<INamedTypeSymbol, bool> IsSerializableAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<INamedTypeSymbol, bool>(typeof(INamedTypeSymbol), "IsSerializable");
     private static readonly Func<INamedTypeSymbol, bool> IsExtensionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<INamedTypeSymbol, bool>(typeof(INamedTypeSymbol), "IsExtension");
+    private static readonly Func<INamedTypeSymbol, IParameterSymbol> ExtensionParameterAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<INamedTypeSymbol, IParameterSymbol>(typeof(INamedTypeSymbol), "ExtensionParameter");
 
     extension(INamedTypeSymbol symbol)
     {
@@ -16,5 +17,6 @@ public static class INamedTypeSymbolExtensions
         public ImmutableArray<IFieldSymbol> TupleElements => TupleElementsAccessor(symbol);
         public bool IsSerializable => IsSerializableAccessor(symbol);
         public bool IsExtension => IsExtensionAccessor(symbol);
+        public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(symbol);
     }
 }

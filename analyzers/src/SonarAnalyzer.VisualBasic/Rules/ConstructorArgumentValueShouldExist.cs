@@ -22,6 +22,6 @@ public sealed class ConstructorArgumentValueShouldExist : ConstructorArgumentVal
 {
     protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-    protected override SyntaxNode GetFirstAttributeArgument(AttributeSyntax attributeSyntax) =>
+    protected override SyntaxNode FirstAttributeArgument(AttributeSyntax attributeSyntax) =>
         attributeSyntax.ArgumentList?.Arguments.FirstOrDefault();
 }

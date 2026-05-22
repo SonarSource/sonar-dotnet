@@ -76,13 +76,13 @@ namespace CSharp14
     {
         extension(CompliantStaticExtensionProperty ext)
         {
-            [ConstructorArgument("value1")]             // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2696
+            [ConstructorArgument("value1")]             // NET-2696
             public static object Value1 => 42;
         }
 
         extension(CompliantInstanceExtensionProperty ext)
         {
-            [ConstructorArgument("value1")]             // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2696
+            [ConstructorArgument("value1")]             // NET-2696
             public object Value1 => 42;
         }
     }

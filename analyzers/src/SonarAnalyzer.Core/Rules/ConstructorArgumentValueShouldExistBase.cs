@@ -23,27 +23,33 @@ public abstract class ConstructorArgumentValueShouldExistBase<TSyntaxKind, TAttr
 {
     private const string DiagnosticId = "S4260";
 
-    protected abstract SyntaxNode GetFirstAttributeArgument(TAttribute attributeSyntax);
+    protected abstract SyntaxNode FirstAttributeArgument(TAttribute attributeSyntax);
 
     protected override string MessageFormat => "Change this 'ConstructorArgumentAttribute' value to match one of the existing constructors arguments.";
 
     protected ConstructorArgumentValueShouldExistBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
-            c =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer, c =>
             {
                 var attribute = (TAttribute)c.Node;
                 if (Language.Syntax.IsKnownAttributeType(c.Model, c.Node, KnownType.System_Windows_Markup_ConstructorArgumentAttribute)
-                    && GetFirstAttributeArgument(attribute) is { } firstAttribute
+                    && FirstAttributeArgument(attribute) is { } firstAttribute
                     && c.Model.GetConstantValue(Language.Syntax.NodeExpression(firstAttribute)) is { HasValue: true, Value: string constructorParameterName }
                     && c.ContainingSymbol is IPropertySymbol { ContainingType: { } containingType }
-                    && !GetConstructorParameterNames(containingType).Contains(constructorParameterName))
+                    && !ConstructorParameterNames(containingType).Contains(constructorParameterName))
                 {
                     c.ReportIssue(Rule, firstAttribute.GetLocation());
                 }
-            }, Language.SyntaxKind.Attribute);
+            },
+            Language.SyntaxKind.Attribute);
 
-    private static IEnumerable<string> GetConstructorParameterNames(INamedTypeSymbol containingSymbol) =>
-        containingSymbol?.Constructors.SelectMany(x => x.Parameters).Select(x => x.Name) ?? [];
+    private static IEnumerable<string> ConstructorParameterNames(INamedTypeSymbol containingSymbol)
+    {
+        var typeToCheck = containingSymbol?.TypeKind == TypeKindEx.Extension
+            ? containingSymbol.ExtensionParameter?.Type as INamedTypeSymbol
+            : containingSymbol;
+        return typeToCheck?.Constructors.SelectMany(x => x.Parameters).Select(x => x.Name) ?? [];
+    }
 }
