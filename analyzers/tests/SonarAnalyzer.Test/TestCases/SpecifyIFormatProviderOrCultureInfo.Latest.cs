@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Resources;
 using System.Net;
@@ -49,5 +50,52 @@ namespace Tests.Diagnostics
             _ = IPAddress.Parse("");            // Compliant
             _ = IPAddress.TryParse("", out _);  // Compliant
         }
+    }
+
+    // https://sonarsource.atlassian.net/browse/NET-230
+    // C#13 introduced params collections (ReadOnlySpan<T>, List<T>, IEnumerable<T>, etc.) as an alternative to arrays.
+    class Repro_NET230
+    {
+        static string UserMethodList(string format, params List<object> args) => format;
+        static string UserMethodList(IFormatProvider provider, string format, params List<object> args) => format;
+
+        static string UserMethodEnumerable(string format, params IEnumerable<object> args) => format;
+        static string UserMethodEnumerable(IFormatProvider provider, string format, params IEnumerable<object> args) => format;
+
+        static string UserMethodSpan(string format, params Span<object> args) => format;
+        static string UserMethodSpan(IFormatProvider provider, string format, params Span<object> args) => format;
+
+        static string UserMethodReadOnlySpan(string format, params ReadOnlySpan<object> args) => format;
+        static string UserMethodReadOnlySpan(IFormatProvider provider, string format, params ReadOnlySpan<object> args) => format;
+
+        static string UserMethodExtraParam(string format, string extra, params List<int> args) => format;
+        static string UserMethodExtraParam(IFormatProvider provider, string format, params List<int> args) => format;
+
+        static string UserMethodCustomCollection(string format, params MyCollection args) => format;
+        static string UserMethodCustomCollection(IFormatProvider provider, string format, params MyCollection args) => format;
+
+        void M()
+        {
+            string.Format("bla");                                                   // Noncompliant
+            string.Format("%s %s", "foo", "bar", "quix", "hi", "bye");              // Noncompliant
+            UserMethodList("hello");                                                // Noncompliant
+            UserMethodList(CultureInfo.InvariantCulture, "hello");                  // Compliant
+            UserMethodEnumerable("hello");                                          // Noncompliant
+            UserMethodEnumerable(CultureInfo.InvariantCulture, "hello");            // Compliant
+            UserMethodSpan("hello");                                                // Noncompliant
+            UserMethodSpan(CultureInfo.InvariantCulture, "hello");                  // Compliant
+            UserMethodReadOnlySpan("hello");                                        // Noncompliant
+            UserMethodReadOnlySpan(CultureInfo.InvariantCulture, "hello");          // Compliant
+            UserMethodExtraParam("hello", "extra");                                 // Compliant - 'string' is not compatible with List<int> element type, so no IFormatProvider overload matches
+            UserMethodCustomCollection("hello");                                    // Noncompliant
+            UserMethodCustomCollection(CultureInfo.InvariantCulture, "hello");      // Compliant
+        }
+    }
+
+    class MyCollection : IEnumerable<object>
+    {
+        public void Add(object item) { }
+        public IEnumerator<object> GetEnumerator() => throw new NotImplementedException();
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => throw new NotImplementedException();
     }
 }

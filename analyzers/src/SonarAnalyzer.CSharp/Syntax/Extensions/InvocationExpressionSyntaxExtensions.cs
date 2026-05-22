@@ -79,22 +79,23 @@ internal static class InvocationExpressionSyntaxExtensions
      */
     private static bool VerifyCompatibility(IParameterSymbol[] invocationParameters, IParameterSymbol[] overloadCandidateParameters, IParameterSymbol paramsParameter)
     {
-        if (paramsParameter.Type is not IArrayTypeSymbol)
-        {
-            return false;
-        }
-        var i = 0;
+        var nextIndex = 0;
         // check parameters before the last parameter
-        for (; i < overloadCandidateParameters.Length - 1; i++)
+        for (var i = 0; i < overloadCandidateParameters.Length - 1; i++)
         {
             if (!invocationParameters[i].Type.DerivesOrImplements(overloadCandidateParameters[i].Type))
             {
                 return false;
             }
+            nextIndex = i + 1;
         }
         // make sure the rest of the invocation parameters match with the 'params' type
         var paramsType = ParamsElementType(paramsParameter.Type);
-        for (; i < invocationParameters.Length - 1; i++)
+        if (paramsType is null)
+        {
+            return false;
+        }
+        for (var i = nextIndex; i < invocationParameters.Length - 1; i++)
         {
             if (!invocationParameters[i].Type.DerivesOrImplements(paramsType))
             {
@@ -103,11 +104,16 @@ internal static class InvocationExpressionSyntaxExtensions
         }
 
         var lastInvocationParameter = invocationParameters[invocationParameters.Length - 1];
-        return lastInvocationParameter.IsParams
-            ? ParamsElementType(lastInvocationParameter.Type).DerivesOrImplements(paramsType)
+        return lastInvocationParameter.IsParams && ParamsElementType(lastInvocationParameter.Type) is { } type
+            ? type.DerivesOrImplements(paramsType)
             : lastInvocationParameter.Type.DerivesOrImplements(paramsType);
 
-        static ITypeSymbol ParamsElementType(ITypeSymbol type) =>
-            type is IArrayTypeSymbol symbol ? symbol.ElementType : null;
+        static ITypeSymbol ParamsElementType(ITypeSymbol type) => type switch
+        {
+            IArrayTypeSymbol array => array.ElementType,
+            INamedTypeSymbol named when named.IsAny(KnownType.System_ReadOnlySpan_T, KnownType.System_Span_T, KnownType.System_Collections_Generic_IEnumerable_T) => named.TypeArguments[0],
+            INamedTypeSymbol named => named.AllInterfaces.FirstOrDefault(x => x.Is(KnownType.System_Collections_Generic_IEnumerable_T))?.TypeArguments[0],
+            _ => null
+        };
     }
 }

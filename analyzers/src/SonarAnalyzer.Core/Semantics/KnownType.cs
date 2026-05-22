@@ -608,6 +608,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_ServiceModel_OperationContractAttribute = new("System.ServiceModel.OperationContractAttribute");
     public static readonly KnownType System_ServiceModel_ServiceContractAttribute = new("System.ServiceModel.ServiceContractAttribute");
     public static readonly KnownType System_Single = new("System.Single");
+    public static readonly KnownType System_Span_T = new("System.Span", "T");
     public static readonly KnownType System_StackOverflowException = new("System.StackOverflowException");
     public static readonly KnownType System_STAThreadAttribute = new("System.STAThreadAttribute");
     public static readonly KnownType System_String = new("System.String");
