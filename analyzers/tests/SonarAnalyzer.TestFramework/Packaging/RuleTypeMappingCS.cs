@@ -4963,7 +4963,7 @@ public static class RuleTypeMappingCS
         // ["S5039"],
         // ["S5040"],
         // ["S5041"],
-        ["S5042"] = "SECURITY_HOTSPOT",
+        ["S5042"] = "CODE_SMELL",
         // ["S5043"],
         // ["S5044"],
         // ["S5045"],

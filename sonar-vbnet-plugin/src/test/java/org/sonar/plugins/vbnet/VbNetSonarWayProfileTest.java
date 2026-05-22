@@ -54,7 +54,6 @@ class VbNetSonarWayProfileTest {
   @Test
   void hotspots_in_sonar_way() {
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S4507"))).isNotNull();
-    assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S5042"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2077"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2068"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S1313"))).isNotNull();

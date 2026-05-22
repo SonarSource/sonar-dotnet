@@ -15,15 +15,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class ExpandingArchives : ExpandingArchivesBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ExpandingArchives : ExpandingArchivesBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        public ExpandingArchives() : this(AnalyzerConfiguration.Hotspot) { }
-
-        internal /*for testing*/ ExpandingArchives(IAnalyzerConfiguration configuration) : base(configuration) { }
-    }
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }

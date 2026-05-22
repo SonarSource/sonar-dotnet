@@ -27,14 +27,14 @@ public class ExpandingArchivesTest
 
     [TestMethod]
     public void ExpandingArchives_CS() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+        new VerifierBuilder().AddAnalyzer(() => new CS.ExpandingArchives())
             .AddPaths("ExpandingArchives.cs")
             .AddReferences(AdditionalReferences)
             .Verify();
 
     [TestMethod]
     public void ExpandingArchives_CS_Latest() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+        new VerifierBuilder().AddAnalyzer(() => new CS.ExpandingArchives())
             .AddPaths("ExpandingArchives.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(AdditionalReferences)
@@ -42,7 +42,7 @@ public class ExpandingArchivesTest
 
     [TestMethod]
     public void ExpandingArchives_VB() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.ExpandingArchives(AnalyzerConfiguration.AlwaysEnabled))
+        new VerifierBuilder().AddAnalyzer(() => new VB.ExpandingArchives())
             .AddPaths("ExpandingArchives.vb")
             .AddReferences(AdditionalReferences)
             .Verify();

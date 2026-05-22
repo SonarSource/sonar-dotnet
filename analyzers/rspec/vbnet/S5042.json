@@ -1,21 +1,23 @@
 {
-  "title": "Expanding archive files without controlling resource consumption is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Expanding archive files should not be done without controlling resource consumption",
+  "type": "CODE_SMELL",
+  "quickfix": "unknown",
   "code": {
     "impacts": {
-      "SECURITY": "HIGH"
+      "RELIABILITY": "MEDIUM"
     },
     "attribute": "COMPLETE"
   },
-  "status": "ready",
+  "status": "deprecated",
   "remediation": {
     "func": "Constant\/Issue",
     "constantCost": "10min"
   },
   "tags": [
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
-  "defaultSeverity": "Critical",
+  "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-5042",
   "sqKey": "S5042",
   "scope": "Main",
