@@ -56,7 +56,7 @@ public partial class PartialConstructorCompliantAttributeInImplementation
 
 public partial class PartialConstructorCompliantAttributeInDefinition
 {
-    public partial PartialConstructorCompliantAttributeInDefinition(string other, string callerFilePath = "");
+    public partial PartialConstructorCompliantAttributeInDefinition(string other, [CallerFilePath] string callerFilePath = "");
 };
 
 public partial class PartialConstructorNonCompliantAttributeInImplementation
@@ -66,5 +66,6 @@ public partial class PartialConstructorNonCompliantAttributeInImplementation
 
 public partial class PartialConstructorNonCompliantAttributeInDefinition
 {
-    public partial PartialConstructorNonCompliantAttributeInDefinition([CallerFilePath] string callerFilePath = "", string other = "");       // FN https://sonarsource.atlassian.net/browse/NET-2705
+    // https://sonarsource.atlassian.net/browse/NET-2705
+    public partial PartialConstructorNonCompliantAttributeInDefinition([CallerFilePath] string callerFilePath = "", string other = ""); // Noncompliant
 };

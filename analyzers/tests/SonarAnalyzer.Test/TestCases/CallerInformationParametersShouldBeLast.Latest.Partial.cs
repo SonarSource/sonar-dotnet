@@ -8,7 +8,7 @@ public partial class PartialConstructorCompliantAttributeInImplementation
 
 public partial class PartialConstructorCompliantAttributeInDefinition
 {
-    public partial PartialConstructorCompliantAttributeInDefinition(string other, [CallerFilePath] string callerFilePath = "") { }
+    public partial PartialConstructorCompliantAttributeInDefinition(string other, string callerFilePath = "") { }
 };
 
 public partial class PartialConstructorNonCompliantAttributeInImplementation
