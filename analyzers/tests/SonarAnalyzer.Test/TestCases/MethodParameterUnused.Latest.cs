@@ -501,15 +501,27 @@ namespace ReproNET2384
     }
 }
 
-public static class Extensions
+public static class Extensions // https://sonarsource.atlassian.net/browse/NET-2732
 {
     extension(string s)
     {
         [Any]
-        public int MyMethod2(int i, int b) => b;              // Compliant, because of the attribute
-        public void MyMethod(int i) { }                       // Compliant - Unused extension owner
-        public int Add(int a, int b) => a + b;                // Compliant
-        public int AddedLength(int a, int b) => s.Length + b; // FN https://sonarsource.atlassian.net/browse/NET-2732
+        private int MyMethod2(int i, int b) => b;              // Compliant, because of the attribute
+        private void MyMethod(int i) { }                       // Compliant, empty body
+        private int Add(int a, int b) => a + b;                // Compliant
+        private int AddedLength(int a, int b) => s.Length + b; // Noncompliant {{Remove this unused method parameter 'a'.}}
+        //                      ^^^^^
+        private int Unused(int a) => 42;                       // Noncompliant
+        //                 ^^^^^
+        private int UnusedReceiver(int a) => a;                // Compliant, unused receiver
+        private int Length() => s.Length;                      // Compliant, no formal parameters (must not crash)
+        private int Dead(int a, int b)                         // Noncompliant {{Remove this parameter 'a', whose value is ignored in the method.}}
+        //               ^^^^^
+        {
+            a = 5;
+            return a + b;
+        }
+        public int PublicUnused(int a) => 42;                  // Compliant, public methods are not raised to avoid breaking external contract
     }
     public class AnyAttribute : Attribute { }
 }

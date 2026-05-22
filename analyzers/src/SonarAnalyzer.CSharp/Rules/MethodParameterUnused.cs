@@ -48,7 +48,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
                     || declaration.Body?.Statements.Count == 0  // Don't report on empty methods
                     || declaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword)
                     || declaration.Symbol is null
-                    || !declaration.Symbol.ContainingType.IsClassOrStruct()
+                    || (!declaration.Symbol.ContainingType.IsClassOrStruct() && !declaration.Symbol.ContainingType.IsExtensionBlock())
                     || declaration.Symbol.IsMainMethod()
                     || OnlyThrowsNotImplementedException(declaration))
                 {
@@ -85,16 +85,13 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
         }
 
         var throwExpressions = Enumerable.Empty<ExpressionSyntax>();
-        if (declaration.ExpressionBody is not null)
-        {
-            if (ThrowExpressionSyntaxWrapper.IsInstance(declaration.ExpressionBody.Expression))
-            {
-                throwExpressions = [((ThrowExpressionSyntaxWrapper)declaration.ExpressionBody.Expression).Expression];
-            }
-        }
-        else
+        if (declaration.ExpressionBody is null)
         {
             throwExpressions = declaration.Body.Statements.OfType<ThrowStatementSyntax>().Select(x => x.Expression);
+        }
+        else if (ThrowExpressionSyntaxWrapper.IsInstance(declaration.ExpressionBody.Expression))
+        {
+            throwExpressions = [((ThrowExpressionSyntaxWrapper)declaration.ExpressionBody.Expression).Expression];
         }
 
         return throwExpressions
@@ -111,7 +108,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
             return;
         }
 
-        var unusedParameters = GetUnusedParameters(declaration);
+        var unusedParameters = UnusedParameters(declaration);
         if (unusedParameters.Any()
             && !IsUsedAsEventHandlerFunctionOrAction(declaration)
             && !IsCandidateSerializableConstructor(unusedParameters, declaration.Symbol))
@@ -130,7 +127,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
         }
 
         var excludedParameters = noReportOnParameters;
-        if (declaration.Symbol.IsExtensionMethod)
+        if (declaration.Symbol.IsExtension && !declaration.Symbol.ContainingType.IsExtensionBlock())
         {
             excludedParameters = excludedParameters.Add(declaration.Symbol.Parameters.First());
         }
@@ -186,7 +183,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
         && methodSymbol.IsChangeable()
         && !methodSymbol.IsEventHandler();
 
-    private static IImmutableList<IParameterSymbol> GetUnusedParameters(MethodContext declaration)
+    private static IImmutableList<IParameterSymbol> UnusedParameters(MethodContext declaration)
     {
         var usedParameters = new HashSet<IParameterSymbol>();
         var bodies = declaration.Context.Node.IsKind(SyntaxKind.ConstructorDeclaration)
@@ -195,11 +192,11 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
 
         foreach (var body in bodies.WhereNotNull())
         {
-            usedParameters.UnionWith(GetUsedParameters(declaration.Symbol.Parameters, body, declaration.Context.Model));
+            usedParameters.UnionWith(UsedParameters(declaration.Symbol.Parameters, body, declaration.Context.Model));
         }
 
         var unusedParameter = declaration.Symbol.Parameters.Except(usedParameters);
-        if (declaration.Symbol.IsExtensionMethod)
+        if (declaration.Symbol.IsExtension && !declaration.Symbol.ContainingType.IsExtensionBlock())
         {
             unusedParameter = unusedParameter.Except([declaration.Symbol.Parameters.First()]);
         }
@@ -207,7 +204,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
         return unusedParameter.Except(usedParameters).ToImmutableArray();
     }
 
-    private static ISet<IParameterSymbol> GetUsedParameters(ImmutableArray<IParameterSymbol> parameters, SyntaxNode body, SemanticModel model) =>
+    private static ISet<IParameterSymbol> UsedParameters(ImmutableArray<IParameterSymbol> parameters, SyntaxNode body, SemanticModel model) =>
         body.DescendantNodes()
             .Where(x => x.IsKind(SyntaxKind.IdentifierName))
             .Select(x => model.GetSymbolInfo(x).Symbol as IParameterSymbol)

@@ -40,6 +40,9 @@ public static class ITypeSymbolExtensions
     public static bool IsClassOrStruct(this ITypeSymbol self) =>
         self.IsStruct() || self.IsClass();
 
+    public static bool IsExtensionBlock(this ITypeSymbol self) =>
+        self is { TypeKind: TypeKindEx.Extension };
+
     public static bool IsNullableValueType(this ITypeSymbol self) =>
         self.IsStruct() && self is { SpecialType: SpecialType.System_Nullable_T } or { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T };
 
