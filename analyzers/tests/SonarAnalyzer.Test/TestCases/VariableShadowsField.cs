@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Tests.Diagnostics
 {
@@ -53,6 +54,33 @@ namespace Tests.Diagnostics
             {
 
             }
+        }
+
+        public void CatchDeclarations() // https://sonarsource.atlassian.net/browse/NET-3541
+        {
+            try { } catch (Exception myField) { } // Noncompliant
+            //                       ^^^^^^^
+            try { } catch (Exception local) { }   // Compliant
+            try { } catch { }                     // Compliant (no declaration)
+        }
+
+        public void LinqQueries(IEnumerable<int> items)
+        {
+            var q1 = from myField in items select myField;                          // Noncompliant
+            //            ^^^^^^^
+            var q2 = from x in items let myField = x select myField;                // Noncompliant
+            //                           ^^^^^^^
+            var q3 = from myField in items                                          // Noncompliant
+            //            ^^^^^^^
+                     join other in items on myField equals other
+                     select myField;
+            var q4 = from x in items                                                // Compliant
+                     join y in items on x equals y into myField                     // Noncompliant
+            //                                          ^^^^^^^
+                     select myField;
+            var q5 = from x in items group x by x into myField select myField;      // Noncompliant
+            //                                         ^^^^^^^
+            var q6 = from x in items select x;                                      // Compliant
         }
 
         class X
