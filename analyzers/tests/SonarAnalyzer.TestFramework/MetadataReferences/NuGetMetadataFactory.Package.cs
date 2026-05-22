@@ -81,22 +81,12 @@ internal static partial class NuGetMetadataFactory
         private static async Task<FindPackageByIdResource> NuGetRepository()
         {
             // We don't read and verify trustedSigners. These packages are stored in dedicated directories that are not used by regular NuGet restore.
-            var source = SettingsFileName() is { } fileName
+            const string fileName = "NuGet.Config";
+            var source = File.Exists(Path.Combine(Paths.AnalyzersRoot, fileName))
                 ? PackageSourceProvider.LoadPackageSources(Settings.LoadSpecificSettings(Paths.AnalyzersRoot, fileName)).Single()   // CI, or Sonar local machine
-                : new PackageSource("https://api.nuget.org/v3/index.json");                                                         // External contributor local machine
-            return await Repository.Factory.GetCoreV3(source).GetResourceAsync<FindPackageByIdResource>().ConfigureAwait(false);
+                : new PackageSource("https://api.nuget.org/v3/index.json");                                                         // External contributor local machine, or public CI.
 
-            static string SettingsFileName()
-            {
-                if (File.Exists(Path.Combine(Paths.ProjectRoot, "CI.NuGet.Config")))
-                {
-                    return TestEnvironment.IsAzureDevOpsContext ? "CI.NuGet.Config" : null;
-                }
-                else
-                {
-                    return "NuGet.Config";
-                }
-            }
+            return await Repository.Factory.GetCoreV3(source).GetResourceAsync<FindPackageByIdResource>().ConfigureAwait(false);
         }
 
         private async Task<string> LatestVersion()
