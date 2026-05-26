@@ -45,10 +45,15 @@ public sealed class VariableShadowsField : SonarDiagnosticAnalyzer
 
     private static List<ISymbol> ContextSymbols(SonarSyntaxNodeReportingContext context)
     {
-        var members = context.ContainingSymbol.ContainingType.GetMembers();
+        var containingType = context.ContainingSymbol.ContainingType;
+        if (containingType is { IsExtension: true } && containingType.ContainingType is { } type)
+        {
+            containingType = type;
+        }
+        var members = containingType.GetMembers();
         var primaryConstructorParameters = members.OfType<IMethodSymbol>().FirstOrDefault(x => x.IsPrimaryConstructor)?.Parameters;
-        var fieldsAndProperties = members.Where(x => x is IPropertySymbol or IFieldSymbol).ToList();
-        return primaryConstructorParameters is null ? fieldsAndProperties : fieldsAndProperties.Concat(primaryConstructorParameters).ToList();
+        var shadowableMembers = members.Where(x => x is IPropertySymbol or IFieldSymbol or IEventSymbol).ToList();
+        return primaryConstructorParameters is null ? shadowableMembers : shadowableMembers.Concat(primaryConstructorParameters).ToList();
     }
 
     private static void ReportOnVariableMatchingField(SonarSyntaxNodeReportingContext context, IEnumerable<ISymbol> members, SyntaxToken identifier)
@@ -65,6 +70,7 @@ public sealed class VariableShadowsField : SonarDiagnosticAnalyzer
         {
             IFieldSymbol => "field",
             IPropertySymbol => "property",
+            IEventSymbol => "event",
             IParameterSymbol => "primary constructor parameter",
             _ => string.Empty
         };

@@ -168,17 +168,31 @@ public static class Extensions
     private static int field;
     public static int Property => 42;
 
+    // https://sonarsource.atlassian.net/browse/NET-2846
     extension(Sample s)
     {
         public void ShadowContainerClass()
         {
-            int field = 0;      // FN https://sonarsource.atlassian.net/browse/NET-2846
-            int Property = 0;   // FN https://sonarsource.atlassian.net/browse/NET-2846
+            int field = 0;      // Noncompliant
+            int Property = 0;   // Noncompliant
         }
 
         public void ShadowExtendedClass()
         {
             int value = 0;
+            int Value = 0;      // Compliant - Value is a member of the extended type Sample, not of Extensions
+        }
+    }
+}
+
+namespace MalformedExtension
+{
+    // Cover null-guard on ContainingType
+    extension(string s) // Error [CS9283]
+    {
+        public void Foo()
+        {
+            int x = 0; // Compliant - no containing class, no members to shadow
         }
     }
 }

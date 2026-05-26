@@ -49,6 +49,6 @@ public partial class PartialEvent
     }
     public void Shadow()
     {
-        int myPartialEvent = 0;     // FN https://sonarsource.atlassian.net/browse/NET-2846
+        int myPartialEvent = 0;     // Noncompliant
     }
 }

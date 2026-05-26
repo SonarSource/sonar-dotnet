@@ -239,4 +239,41 @@ namespace Tests.Diagnostics
             int value = 0;
         }
     }
+
+    public class WithEvents
+    {
+        public event EventHandler MyEvent;
+        public static event EventHandler MyStaticEvent;
+        public event EventHandler MyCustomEvent
+        {
+            add { }
+            remove { }
+        }
+
+        public void ShadowFieldLikeEvent()
+        {
+            int MyEvent = 0;    // Noncompliant {{Rename 'MyEvent' which hides the event with the same name.}}
+            //  ^^^^^^^
+        }
+
+        public void ShadowCustomEvent()
+        {
+            int MyCustomEvent = 0;  // Noncompliant
+        }
+
+        public static void ShadowStaticEvent()
+        {
+            int MyStaticEvent = 0;  // Noncompliant
+        }
+
+        public void InstanceMethodHidesStaticEvent()
+        {
+            int MyStaticEvent = 0;  // Noncompliant
+        }
+
+        public static void StaticMethodDoesNotSeeInstanceEvent()
+        {
+            int MyEvent = 0;    // Compliant - instance event not accessible from static context
+        }
+    }
 }
