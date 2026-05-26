@@ -32,6 +32,21 @@ stages:
       clean: all
 
     steps:
+    - powershell: |
+    # Pin the .NET SDK to 10.0.204 because tests fail with the latest SDK.
+    # Revert once https://sonarsource.atlassian.net/browse/NET-3786 is implemented.
+    # Must run before "dotnet restore" so the lock file is produced with the same SDK that later builds/tests use.
+    @"
+    {
+      "sdk": {
+        "version": "10.0.204",
+        "rollForward": "disable"
+      }
+    }
+    "@ | Out-File -FilePath global.json -Encoding utf8
+    dotnet --version
+  displayName: "Pin .NET SDK version"
+      
     - task: CmdLine@2
       displayName: "NuGet Restore"
       inputs:
@@ -67,14 +82,6 @@ stages:
           sonar.cpd.exclusions=$(CpdExclusionsPattern)
 
     - powershell: |
-        @"
-        {
-          "sdk": {
-            "version": "10.0.204",
-            "rollForward": "disable"
-          }
-        }
-        "@ | Out-File -FilePath global.json -Encoding utf8
         $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
         dotnet build --no-restore analyzers\src\SonarAnalyzer.ShimLayer.Generator\SonarAnalyzer.ShimLayer.Generator.csproj -c $(BuildConfiguration) # Needs a pre-build to prevent file locking issue in SonarAnalyzer.ShimLayer.Generator.Test
         dotnet test --no-restore $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) --filter "FullyQualifiedName!~CreateCfg_Performance_UsesCache" /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
