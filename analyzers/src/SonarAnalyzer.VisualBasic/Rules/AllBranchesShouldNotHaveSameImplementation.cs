@@ -45,7 +45,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                 SyntaxKind.SingleLineElseClause);
         }
 
-        private class IfStatementAnalyzer : IfStatementAnalyzerBase<ElseBlockSyntax, MultiLineIfBlockSyntax>
+        private sealed class IfStatementAnalyzer : IfStatementAnalyzerBase<ElseBlockSyntax, MultiLineIfBlockSyntax>
         {
             protected override bool IsLastElseInChain(ElseBlockSyntax elseSyntax) => true;
 
@@ -65,7 +65,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                 => topLevelIf.IfStatement.IfKeyword.GetLocation();
         }
 
-        private class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<TernaryConditionalExpressionSyntax>
+        private sealed class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<TernaryConditionalExpressionSyntax>
         {
             protected override SyntaxNode GetWhenFalse(TernaryConditionalExpressionSyntax ternaryStatement) =>
                 ternaryStatement.WhenFalse.RemoveParentheses();
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                 ternaryStatement.IfKeyword.GetLocation();
         }
 
-        private class SingleLineIfStatementAnalyzer : IfStatementAnalyzerBase<SingleLineElseClauseSyntax, SingleLineIfStatementSyntax>
+        private sealed class SingleLineIfStatementAnalyzer : IfStatementAnalyzerBase<SingleLineElseClauseSyntax, SingleLineIfStatementSyntax>
         {
             protected override IEnumerable<IEnumerable<SyntaxNode>> GetIfBlocksStatements(SingleLineElseClauseSyntax elseSyntax,
                 out SingleLineIfStatementSyntax topLevelIf)
@@ -95,7 +95,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                 topLevelIf.IfKeyword.GetLocation();
         }
 
-        private class SelectCaseStatementAnalyzer : SwitchStatementAnalyzerBase<SelectBlockSyntax, CaseBlockSyntax>
+        private sealed class SelectCaseStatementAnalyzer : SwitchStatementAnalyzerBase<SelectBlockSyntax, CaseBlockSyntax>
         {
             protected override bool AreEquivalent(CaseBlockSyntax section1, CaseBlockSyntax section2) =>
                 SyntaxFactory.AreEquivalent(section1.Statements, section2.Statements);

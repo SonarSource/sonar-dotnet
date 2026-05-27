@@ -37,7 +37,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
             SyntaxKind.AddHandlerAccessorBlock,
             SyntaxKind.RemoveHandlerAccessorBlock);
 
-        private class NestingDepthWalker : SafeVisualBasicSyntaxWalker
+        private sealed class NestingDepthWalker : SafeVisualBasicSyntaxWalker
         {
             private readonly NestingDepthCounter counter;
 
