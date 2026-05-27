@@ -60,7 +60,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
         }
 
-        private class IfStatementAnalyzer : IfStatementAnalyzerBase<ElseClauseSyntax, IfStatementSyntax>
+        private sealed class IfStatementAnalyzer : IfStatementAnalyzerBase<ElseClauseSyntax, IfStatementSyntax>
         {
             protected override bool IsLastElseInChain(ElseClauseSyntax elseSyntax) =>
                 !(elseSyntax.Statement is IfStatementSyntax);
@@ -90,7 +90,7 @@ namespace SonarAnalyzer.CSharp.Rules
             protected override Location GetLocation(IfStatementSyntax topLevelIf) => topLevelIf.IfKeyword.GetLocation();
         }
 
-        private class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<ConditionalExpressionSyntax>
+        private sealed class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<ConditionalExpressionSyntax>
         {
             protected override SyntaxNode GetWhenFalse(ConditionalExpressionSyntax ternaryStatement) =>
                 ternaryStatement.WhenFalse.RemoveParentheses();
@@ -102,7 +102,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 ternaryStatement.Condition.CreateLocation(ternaryStatement.QuestionToken);
         }
 
-        private class SwitchStatementAnalyzer : SwitchStatementAnalyzerBase<SwitchStatementSyntax, SwitchSectionSyntax>
+        private sealed class SwitchStatementAnalyzer : SwitchStatementAnalyzerBase<SwitchStatementSyntax, SwitchSectionSyntax>
         {
             protected override bool AreEquivalent(SwitchSectionSyntax section1, SwitchSectionSyntax section2) =>
                 SyntaxFactory.AreEquivalent(section1.Statements, section2.Statements);

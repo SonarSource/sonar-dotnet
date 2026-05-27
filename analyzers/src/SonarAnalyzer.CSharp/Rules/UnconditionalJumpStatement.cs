@@ -33,7 +33,7 @@ namespace SonarAnalyzer.CSharp.Rules
         protected override LoopWalkerBase<StatementSyntax, SyntaxKind> GetWalker(SonarSyntaxNodeReportingContext context)
             => new LoopWalker(context, LoopStatements);
 
-        private class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
+        private sealed class LoopWalker : LoopWalkerBase<StatementSyntax, SyntaxKind>
         {
             protected override ISet<SyntaxKind> StatementsThatCanThrow { get; } = new HashSet<SyntaxKind>
             {

@@ -84,7 +84,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     ?? false;
         }
 
-        private class AttributeComparer : IEqualityComparer<AttributeData>
+        private sealed class AttributeComparer : IEqualityComparer<AttributeData>
         {
             public bool Equals(AttributeData x, AttributeData y)
             {
