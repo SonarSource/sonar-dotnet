@@ -60,7 +60,7 @@
     <doclint>none</doclint>
     
     <sonar.analyzer.commons.version>2.22.0.4796</sonar.analyzer.commons.version>
-    <sonar.plugin.api.version>13.6.0.4371</sonar.plugin.api.version>
+    <sonar.plugin.api.version>13.7.0.4381</sonar.plugin.api.version>
     <sonar.api.impl.version>26.5.0.122743</sonar.api.impl.version>
     <jdk.min.version>17</jdk.min.version>
     <maven.compiler.release>${jdk.min.version}</maven.compiler.release>
@@ -68,7 +68,7 @@
     <plugin.api.min.version>9.14.0.375</plugin.api.min.version>
 
     <!-- Test dependencies -->
-    <junit.version>6.0.3</junit.version>
+    <junit.version>6.1.0</junit.version>
 
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <sonarAnalyzer.workDirectory>${project.build.directory}/analyzer</sonarAnalyzer.workDirectory>

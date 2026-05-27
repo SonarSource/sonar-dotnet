@@ -35,7 +35,7 @@ public class AbstractPropertyDefinitionsTest {
   @Test
   public void hidden_properties() {
     List<PropertyDefinition> properties = createProperties().stream()
-      .filter(x -> !x.global() && x.configScopes().isEmpty()) // Hidden is non-global without scopes
+      .filter(PropertyDefinition::hidden)
       .toList();
     assertThat(properties)
       .extracting(PropertyDefinition::key, PropertyDefinition::defaultValue)
@@ -63,7 +63,7 @@ public class AbstractPropertyDefinitionsTest {
   @Test
   public void global_properties() {
     List<PropertyDefinition> properties = createProperties().stream()
-      .filter(x -> x.global())
+      .filter(x -> x.global() && !x.hidden())
       .toList();
     assertThat(properties)
       .extracting(PropertyDefinition::type, PropertyDefinition::key, PropertyDefinition::category, PropertyDefinition::subCategory, PropertyDefinition::defaultValue)
