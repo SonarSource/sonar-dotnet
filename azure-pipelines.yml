@@ -43,7 +43,7 @@ stages:
             "rollForward": "disable"
           }
         }
-        "@ | Out-File -FilePath global.json -Encoding utf8
+        "@ | Out-File -FilePath $(solution)/global.json -Encoding utf8
         dotnet --version
       displayName: "Pin .NET SDK version"
 
