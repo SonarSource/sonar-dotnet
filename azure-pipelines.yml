@@ -44,6 +44,7 @@ stages:
           }
         }
         "@ | Out-File -FilePath analyzers//global.json -Encoding utf8
+        cd analyzers
         dotnet --version
       displayName: "Pin .NET SDK version"
 
