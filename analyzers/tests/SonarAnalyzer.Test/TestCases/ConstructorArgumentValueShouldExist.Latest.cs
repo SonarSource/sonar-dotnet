@@ -56,59 +56,15 @@ namespace CSharp14
         public object Value1 { get; set; }
     }
 
-    public static class NonCompliantExtensions
+    public static class Extensions
     {
-
-        extension(NonCompliantStaticExtensionProperty ext)
+        extension(object ext)
         {
-            [ConstructorArgument("value2")]             // Noncompliant
+            [ConstructorArgument("value1")]             // Compliant, ConstructorArgumentAttribute does not have any effect on extension properties
             public static object Value1 => 42;
+
+            [ConstructorArgument("nonExisting")]        // Compliant
+            public static object Value2 => 42;
         }
-
-        extension(NonCompliantInstanceExtensionProperty ext)
-        {
-            [ConstructorArgument("value2")]             // Noncompliant
-            public object Value1 => 42;
-        }
-    }
-
-    public static class CompliantExtensions
-    {
-        extension(CompliantStaticExtensionProperty ext)
-        {
-            [ConstructorArgument("value1")]             // NET-2696
-            public static object Value1 => 42;
-        }
-
-        extension(CompliantInstanceExtensionProperty ext)
-        {
-            [ConstructorArgument("value1")]             // NET-2696
-            public object Value1 => 42;
-        }
-    }
-
-    public class NonCompliantStaticExtensionProperty : MarkupExtension
-    {
-        public NonCompliantStaticExtensionProperty(object value1) { this.Value1 = value1; }   // Error [CS0176] {{Member 'NonCompliantExtensions.extension(NonCompliantStaticExtensionProperty).Value1' cannot be accessed with an instance reference; qualify it with a type name instead}}
-        public override object ProvideValue(IServiceProvider serviceProvider) => null;
-    }
-
-    public class NonCompliantInstanceExtensionProperty : MarkupExtension
-    {
-        public NonCompliantInstanceExtensionProperty(object value1) { this.Value1 = value1; } // Error [CS0200] {{Property or indexer 'NonCompliantExtensions.extension(NonCompliantInstanceExtensionProperty).Value1' cannot be assigned to -- it is read only}}
-        public override object ProvideValue(IServiceProvider serviceProvider) => null;
-    }
-
-
-    public class CompliantStaticExtensionProperty : MarkupExtension
-    {
-        public CompliantStaticExtensionProperty(object value1) { this.Value1 = value1; }      // Error [CS0176] {{Member 'CompliantExtensions.extension(CompliantStaticExtensionProperty).Value1' cannot be accessed with an instance reference; qualify it with a type name instead}}
-        public override object ProvideValue(IServiceProvider serviceProvider) => null;
-    }
-
-    public class CompliantInstanceExtensionProperty : MarkupExtension
-    {
-        public CompliantInstanceExtensionProperty(object value1) { this.Value1 = value1; }    // Error [CS0200] {{Property or indexer 'CompliantExtensions.extension(CompliantInstanceExtensionProperty).Value1' cannot be assigned to -- it is read only}}
-        public override object ProvideValue(IServiceProvider serviceProvider) => null;
     }
 }

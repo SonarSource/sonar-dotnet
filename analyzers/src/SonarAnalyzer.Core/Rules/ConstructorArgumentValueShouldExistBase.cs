@@ -37,7 +37,7 @@ public abstract class ConstructorArgumentValueShouldExistBase<TSyntaxKind, TAttr
                 if (Language.Syntax.IsKnownAttributeType(c.Model, c.Node, KnownType.System_Windows_Markup_ConstructorArgumentAttribute)
                     && FirstAttributeArgument(attribute) is { } firstAttribute
                     && c.Model.GetConstantValue(Language.Syntax.NodeExpression(firstAttribute)) is { HasValue: true, Value: string constructorParameterName }
-                    && c.ContainingSymbol is IPropertySymbol { ContainingType: { } containingType }
+                    && c.ContainingSymbol is IPropertySymbol { ContainingType: { TypeKind: not TypeKindEx.Extension } containingType }
                     && !ConstructorParameterNames(containingType).Contains(constructorParameterName))
                 {
                     c.ReportIssue(Rule, firstAttribute.GetLocation());
@@ -45,11 +45,6 @@ public abstract class ConstructorArgumentValueShouldExistBase<TSyntaxKind, TAttr
             },
             Language.SyntaxKind.Attribute);
 
-    private static IEnumerable<string> ConstructorParameterNames(INamedTypeSymbol containingSymbol)
-    {
-        var typeToCheck = containingSymbol?.TypeKind == TypeKindEx.Extension
-            ? containingSymbol.ExtensionParameter?.Type as INamedTypeSymbol
-            : containingSymbol;
-        return typeToCheck?.Constructors.SelectMany(x => x.Parameters).Select(x => x.Name) ?? [];
-    }
+    private static IEnumerable<string> ConstructorParameterNames(INamedTypeSymbol containingSymbol) =>
+        containingSymbol?.Constructors.SelectMany(x => x.Parameters).Select(x => x.Name) ?? [];
 }
