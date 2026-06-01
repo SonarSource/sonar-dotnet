@@ -89,7 +89,7 @@ public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInv
             ? variableDeclarator.Initializer?.Value.RemoveParentheses() ?? (variableDeclarator.AsClause as AsNewClauseSyntax)?.NewExpression
             : null;
 
-    private class InvocationWalker : SafeVisualBasicSyntaxWalker
+    private sealed class InvocationWalker : SafeVisualBasicSyntaxWalker
     {
         private readonly EndInvokeContext context;
 

@@ -36,7 +36,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
             },
             SyntaxKind.FunctionBlock);
 
-        private class IdentifierWalker : SafeVisualBasicSyntaxWalker
+        private sealed class IdentifierWalker : SafeVisualBasicSyntaxWalker
         {
             private readonly SonarSyntaxNodeReportingContext context;
             private readonly string name;

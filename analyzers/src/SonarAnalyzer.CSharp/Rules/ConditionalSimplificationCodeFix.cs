@@ -249,7 +249,7 @@ namespace SonarAnalyzer.CSharp.Rules
             return newArgumentList;
         }
 
-        private class ComparedContext
+        private sealed class ComparedContext
         {
             public readonly ExpressionSyntax Compared;
             public readonly SemanticModel SemanticModel;
