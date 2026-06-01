@@ -117,13 +117,15 @@ public class ProtobufDataImporterTest {
     }
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
-    assertThat(logTester.logs(Level.DEBUG)).containsOnly("File 'Program.cs' was already processed. Skip it");
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly(
+      "File 'Program.cs' was already processed. Skip it",
+      "Importing results from 1 proto file in '" + workDir + "'");
   }
 
   @Test
   public void do_not_warn_about_unique_files() {
     dataImporter.importResults(tester, Collections.singletonList(workDir), String::toString);
 
-    assertThat(logTester.logs(Level.DEBUG)).isEmpty();
+    assertThat(logTester.logs(Level.DEBUG)).containsOnly("Importing results from 1 proto file in '" + workDir + "'");
   }
 }

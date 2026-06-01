@@ -71,7 +71,7 @@ public class ProtobufDataImporter {
 
     for (Path protobufReportsDir : protobufReportsDirectories) {
       long protoFiles = countProtoFiles(protobufReportsDir);
-      LOG.info("Importing results from {} proto {} in '{}'",
+      LOG.debug("Importing results from {} proto {} in '{}'",
         protoFiles,
         lazy(() -> StringUtils.pluralize("file", protoFiles)),
         protobufReportsDir);
