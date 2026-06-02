@@ -119,7 +119,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 }
             }
 
-            private class RecursionSearcherForMethod : RecursionSearcher
+            private sealed class RecursionSearcherForMethod : RecursionSearcher
             {
                 public RecursionSearcherForMethod(RecursionContext<IControlFlowGraph> context)
                     : base(context)
@@ -132,7 +132,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         && IsInstructionOnThisAndMatchesDeclaringSymbol(invocation.Expression, context.AnalyzedSymbol, context.Model));
             }
 
-            private class RecursionSearcherForProperty : RecursionSearcher
+            private sealed class RecursionSearcherForProperty : RecursionSearcher
             {
                 private readonly bool isSet;
 

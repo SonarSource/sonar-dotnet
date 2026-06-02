@@ -88,7 +88,7 @@ public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInv
             ? equalsValueClause.Value.RemoveParentheses()
             : null;
 
-    private class InvocationWalker : SafeCSharpSyntaxWalker
+    private sealed class InvocationWalker : SafeCSharpSyntaxWalker
     {
         private readonly EndInvokeContext context;
 

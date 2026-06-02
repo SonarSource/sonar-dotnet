@@ -22,7 +22,7 @@ namespace SonarAnalyzer.CSharp.Rules
 {
     public partial class DeadStores : SonarDiagnosticAnalyzer
     {
-        private class RoslynChecker : CheckerBase<ControlFlowGraph, BasicBlock>
+        private sealed class RoslynChecker : CheckerBase<ControlFlowGraph, BasicBlock>
         {
             private readonly RoslynLiveVariableAnalysis lva;
 
@@ -32,7 +32,7 @@ namespace SonarAnalyzer.CSharp.Rules
             protected override State CreateState(BasicBlock block) =>
                 new RoslynState(this, block);
 
-            private class RoslynState : State
+            private sealed class RoslynState : State
             {
                 private readonly RoslynChecker owner;
 
