@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Tests.Diagnostics
 {
@@ -107,5 +108,58 @@ namespace AzureFunction
             try { }
             catch { }               // Compliant.
         }
+    }
+}
+
+class AsyncVoid
+{
+    public async void AsyncVoidMethod()
+    {
+        try { await Task.Yield(); } catch (Exception e) { } // Compliant. Exceptions thrown out of async void cannot be observed by the caller.
+
+        try { await Task.Yield(); } catch (Exception) { }   // Compliant.
+
+        try { await Task.Yield(); } catch { }               // Compliant.
+    }
+
+    public async void AsyncVoidWithLocalFunctions()
+    {
+        async void LocalAsyncVoid()
+        {
+            try { await Task.Yield(); } catch (Exception e) { } // Compliant
+        }
+        void LocalSync()
+        {
+            try { } catch (Exception e) { } // Noncompliant
+        }
+    }
+
+    public void Lambdas()
+    {
+        Action asyncVoidLambda = async () =>
+        {
+            try { await Task.Yield(); } catch (Exception e) { } // Compliant
+        };
+
+        Action asyncVoidAnonymous = async delegate
+        {
+            try { await Task.Yield(); } catch (Exception e) { }
+        };
+    }
+
+    public async Task AsyncTaskMethod()
+    {
+        try { await Task.Yield(); } catch (Exception e) { }     // Noncompliant
+
+        async void LocalAsyncVoid()
+        {
+            try
+            { await Task.Yield(); } catch (Exception e) { } // Compliant
+        }
+    }
+
+    public void SyncVoidMethod()
+    {
+        try { } catch (Exception e) { }     // Noncompliant
     }
 }

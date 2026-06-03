@@ -15,54 +15,51 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class DoNotCatchSystemException : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DoNotCatchSystemException : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S2221";
-        private const string MessageFormat = "Catch a list of specific exception subtype or use exception filters instead.";
+    private const string DiagnosticId = "S2221";
+    private const string MessageFormat = "Catch a list of specific exception subtype or use exception filters instead.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                var catchClause = (CatchClauseSyntax)c.Node;
+
+                if (!c.IsAzureFunction()
+                    && IsCatchClauseEmptyOrNotPattern(catchClause)
+                    && !IsAsyncVoidFunction(catchClause, c.Model)
+                    && IsSystemException(catchClause.Declaration, c.Model)
+                    && !IsThrowTheLastStatementInTheBlock(catchClause.Block))
                 {
-                    var catchClause = (CatchClauseSyntax)c.Node;
+                    c.ReportIssue(Rule, Location(catchClause));
+                }
+            },
+            SyntaxKind.CatchClause);
 
-                    if (c.AzureFunctionMethod() is null
-                        && IsCatchClauseEmptyOrNotPattern(catchClause)
-                        && IsSystemException(catchClause.Declaration, c.Model)
-                        && !IsThrowTheLastStatementInTheBlock(catchClause.Block))
-                    {
-                        c.ReportIssue(Rule, GetLocation(catchClause));
-                    }
-                },
-                SyntaxKind.CatchClause);
+    private static bool IsCatchClauseEmptyOrNotPattern(CatchClauseSyntax catchClause) =>
+        catchClause.Filter?.FilterExpression is null
+        || (catchClause.Filter.FilterExpression.IsKind(SyntaxKindEx.IsPatternExpression)
+            && (IsPatternExpressionSyntaxWrapper)catchClause.Filter.FilterExpression is var patternExpression
+            && patternExpression.Node.DescendantNodes().AnyOfKind(SyntaxKindEx.NotPattern));
 
-        private static bool IsCatchClauseEmptyOrNotPattern(CatchClauseSyntax catchClause) =>
-            catchClause.Filter?.FilterExpression == null
-             || (catchClause.Filter.FilterExpression.IsKind(SyntaxKindEx.IsPatternExpression)
-                 && (IsPatternExpressionSyntaxWrapper)catchClause.Filter.FilterExpression is var patternExpression
-                 && patternExpression.SyntaxNode.DescendantNodes().AnyOfKind(SyntaxKindEx.NotPattern));
+    private static bool IsSystemException(CatchDeclarationSyntax catchDeclaration, SemanticModel model) =>
+        catchDeclaration?.Type is null || model.GetTypeInfo(catchDeclaration.Type).Type.Is(KnownType.System_Exception);
 
-        private static bool IsSystemException(CatchDeclarationSyntax catchDeclaration, SemanticModel semanticModel)
-        {
-            var caughtTypeSyntax = catchDeclaration?.Type;
-            return caughtTypeSyntax == null || semanticModel.GetTypeInfo(caughtTypeSyntax).Type.Is(KnownType.System_Exception);
-        }
+    private static bool IsThrowTheLastStatementInTheBlock(BlockSyntax block) =>
+        block?.DescendantNodes()?.LastOrDefault() is { } lastStatement && lastStatement.AncestorsAndSelf().TakeWhile(x => !Equals(x, block)).Any(x => x is ThrowStatementSyntax);
 
-        private static bool IsThrowTheLastStatementInTheBlock(BlockSyntax block)
-        {
-            var lastStatement = block?.DescendantNodes()?.LastOrDefault();
-            return lastStatement != null && lastStatement.AncestorsAndSelf().TakeWhile(x => !Equals(x, block)).Any(x => x is ThrowStatementSyntax);
-        }
+    private static bool IsAsyncVoidFunction(CatchClauseSyntax catchClause, SemanticModel model) =>
+        model.GetEnclosingSymbol(catchClause.SpanStart) is IMethodSymbol { IsAsync: true, ReturnsVoid: true };
 
-        private static Location GetLocation(CatchClauseSyntax catchClause) =>
-            catchClause.Declaration?.Type != null
-                ? catchClause.Declaration.Type.GetLocation()
-                : catchClause.CatchKeyword.GetLocation();
-    }
+    private static Location Location(CatchClauseSyntax catchClause) =>
+        catchClause.Declaration?.Type is null
+            ? catchClause.CatchKeyword.GetLocation()
+            : catchClause.Declaration.Type.GetLocation();
 }
