@@ -23,7 +23,7 @@ namespace SonarAnalyzer.CSharp.Rules
 {
     public partial class DeadStores : SonarDiagnosticAnalyzer
     {
-        private class SonarChecker : CheckerBase<IControlFlowGraph, Block>
+        private sealed class SonarChecker : CheckerBase<IControlFlowGraph, Block>
         {
             private readonly SyntaxNode node;
 
@@ -33,7 +33,7 @@ namespace SonarAnalyzer.CSharp.Rules
             protected override State CreateState(Block block) =>
                 new SonarState(this, block, node);
 
-            private class SonarState : State
+            private sealed class SonarState : State
             {
                 private readonly ISet<SyntaxNode> assignmentLhs = new HashSet<SyntaxNode>();
                 private readonly SyntaxNode node;

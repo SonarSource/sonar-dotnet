@@ -308,7 +308,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 Message = message;
         }
 
-        private class ValidationFailureWithAdditionalData
+        private sealed class ValidationFailureWithAdditionalData
         {
             public ValidationFailure Failure { get; }
             private IEnumerable<string> AdditionalData { get; }

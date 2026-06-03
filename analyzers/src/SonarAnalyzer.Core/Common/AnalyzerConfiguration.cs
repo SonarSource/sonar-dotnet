@@ -33,7 +33,7 @@ public class AnalyzerConfiguration
 
     public static IAnalyzerConfiguration AlwaysEnabledWithSonarCfg { get; } = new AlwaysEnabledConfiguration(true);
 
-    private class AlwaysEnabledConfiguration : IAnalyzerConfiguration
+    private sealed class AlwaysEnabledConfiguration : IAnalyzerConfiguration
     {
         public bool ForceSonarCfg { get; }
 

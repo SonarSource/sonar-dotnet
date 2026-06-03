@@ -91,7 +91,7 @@ public static class CSharpEquivalenceChecker
         }
     }
 
-    private class NullCheck
+    private sealed class NullCheck
     {
         public readonly SyntaxNode Expression;
         public readonly bool IsPositive;
