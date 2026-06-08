@@ -17,10 +17,10 @@
 package org.sonar.plugins.dotnet.tests;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +51,7 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
   private static class Parser extends XmlTestReportParser {
     private final Map<String, UnitTestResults> testIdTestResultMap;
     // Date Format: // https://github.com/microsoft/vstest/blob/7d34b30433259fb914aaaf276fde663a47b6ef2f/src/Microsoft.TestPlatform.Extensions.TrxLogger/XML/XmlPersistence.cs#L557-L572
-    private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
     private final Pattern millisecondsPattern = Pattern.compile("(\\.(\\d{0,3}))\\d*+");
 
     Parser(File file,  Map<String, UnitTestResults> unitTestResults, Map<String, String> methodFileMap, List<String> rootTags) {
@@ -64,7 +64,7 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
       var outcome = xmlParserHelper.getRequiredAttribute("outcome");
       var start = getRequiredDateAttribute(xmlParserHelper, "startTime");
       var finish = getRequiredDateAttribute(xmlParserHelper, "endTime");
-      var duration = finish.getTime() - start.getTime();
+      var duration = ChronoUnit.MILLIS.between(start, finish);
       var testResult = new VisualStudioTestResults(outcome, duration);
       if (testIdTestResultMap.containsKey(testId)) {
         testIdTestResultMap.get(testId).add(testResult);
@@ -96,12 +96,12 @@ public class VisualStudioTestResultParser implements UnitTestResultParser {
       addTestResultToFile(fullyQualifiedName, testIdTestResult);
     }
 
-    private Date getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {
+    private OffsetDateTime getRequiredDateAttribute(XmlParserHelper xmlParserHelper, String name) {
       var value = xmlParserHelper.getRequiredAttribute(name);
       try {
         value = keepOnlyMilliseconds(value);
-        return dateFormat.parse(value);
-      } catch (ParseException e) {
+        return OffsetDateTime.parse(value, dateFormatter);
+      } catch (DateTimeParseException e) {
         throw xmlParserHelper.parseError("Expected a valid date and time instead of \"" + value + "\" for the attribute \"" + name + "\". " + e.getMessage());
       }
     }

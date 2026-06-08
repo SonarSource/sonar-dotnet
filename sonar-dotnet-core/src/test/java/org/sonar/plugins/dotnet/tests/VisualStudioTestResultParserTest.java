@@ -140,7 +140,7 @@ public class VisualStudioTestResultParserTest {
     var file = new File("src/test/resources/visualstudio_test_results/invalid_dates.trx");
 
     var exception = assertThrows(ParseErrorException.class, () -> sut.parse(file, results, new HashMap<>()));
-    assertThat(exception.getMessage()).startsWith("Expected a valid date and time instead of \"2016-xx-14T17:04:31.100+01:00\" for the attribute \"startTime\". Unparseable date: \"2016-xx-14T17:04:31.100+01:00\" in ");
+    assertThat(exception.getMessage()).startsWith("Expected a valid date and time instead of \"2016-xx-14T17:04:31.100+01:00\" for the attribute \"startTime\". Text '2016-xx-14T17:04:31.100+01:00' could not be parsed");
   }
 
   @Test
