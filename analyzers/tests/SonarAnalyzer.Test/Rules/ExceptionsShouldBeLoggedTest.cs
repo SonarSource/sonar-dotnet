@@ -317,4 +317,36 @@ public class ExceptionsShouldBeLoggedTest
             """)
            .AddReferences(NuGetMetadataReference.NLog())
            .Verify();
+
+    // Smoke test: every framework listed in SupportedLoggingFrameworks must be detected (the rule subscribes
+    // and reports on a plain Noncompliant invocation, and does not report when the exception is passed).
+    // Guards against future omissions like the Serilog miss in #9806.
+    public static IEnumerable<object[]> FrameworkDetectionData() =>
+    [
+        ["Microsoft.Extensions.Logging.ILogger", "Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(logger, message)", "Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(logger, e, message)", NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()],
+        ["Castle.Core.Logging.ILogger", "logger.Warn(message)", "logger.Warn(message, e)", NuGetMetadataReference.CastleCore()],
+        ["Common.Logging.ILog", "logger.Warn(message)", "logger.Warn(message, e)", NuGetMetadataReference.CommonLoggingCore()],
+        ["log4net.ILog", "logger.Warn(message)", "logger.Warn(message, e)", NuGetMetadataReference.Log4Net("3.0.1", "netstandard2.0")],
+        ["NLog.ILogger", "logger.Warn(message)", "logger.Warn(e, message)", NuGetMetadataReference.NLog()],
+        ["Serilog.ILogger", "logger.Warning(message)", "logger.Warning(e, message)", NuGetMetadataReference.Serilog()],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(FrameworkDetectionData))]
+    public void ExceptionsShouldBeLogged_FrameworkDetection_CS(string loggerType, string noncompliantCall, string compliantCall, IEnumerable<MetadataReference> references) =>
+        builder
+            .AddSnippet($$"""
+                using System;
+
+                public class Program
+                {
+                    public void Method({{loggerType}} logger, string message)
+                    {
+                        try { } catch (Exception e) { {{noncompliantCall}}; } // Noncompliant
+                        try { } catch (Exception e) { {{compliantCall}}; }    // Compliant
+                    }
+                }
+                """)
+            .AddReferences(references)
+            .Verify();
 }

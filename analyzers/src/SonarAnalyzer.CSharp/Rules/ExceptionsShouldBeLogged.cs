@@ -32,7 +32,8 @@ public sealed class ExceptionsShouldBeLogged : SonarDiagnosticAnalyzer
         KnownAssembly.CastleCore,
         KnownAssembly.CommonLoggingCore,
         KnownAssembly.Log4Net,
-        KnownAssembly.NLog
+        KnownAssembly.NLog,
+        KnownAssembly.Serilog
     ];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
