@@ -24,6 +24,7 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     private const string MessageFormat = "Do not check floating point {0} with exact values, use {1} instead.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
     private static readonly Dictionary<string, string> SpecialMembers = new()
     {
         { nameof(double.NaN), nameof(double.IsNaN) },
@@ -70,7 +71,9 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
         var equals = (BinaryExpressionSyntax)context.Node;
         if (context.Model.GetSymbolInfo(equals).Symbol is IMethodSymbol { ContainingType: { } container } method
             && IsFloatingPointType(container)
-            && (method.IsOperatorEquals() || method.IsOperatorNotEquals()))
+            && (method.IsOperatorEquals() || method.IsOperatorNotEquals())
+            && !IsConstantZero(context.Model, equals.Left)
+            && !IsConstantZero(context.Model, equals.Right))
         {
             var messageEqualityPart = MessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
             var proposed = ProposedMessageForMemberAccess(context, equals.Right)
@@ -81,6 +84,22 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
             context.ReportIssue(Rule, equals.OperatorToken, messageEqualityPart, proposed);
         }
     }
+
+    // Zero is exactly representable in IEEE 754 and is the default value of floating-point types,
+    // so comparing against it is a legitimate way to check for the default value or to guard against divide-by-zero.
+    // Integer literal types (int, long, uint, ulong) are included because the literal `0` in `f == 0` has type int,
+    // `f == 0L` has type long, etc.
+    private static bool IsConstantZero(SemanticModel model, ExpressionSyntax expression) =>
+        model.GetConstantValue(expression).Value switch
+        {
+            0 => true,
+            0d => true,
+            0f => true,
+            0L => true,
+            0U => true,
+            0UL => true,
+            _ => false
+        };
 
     private static string ProposedMessageForMemberAccess(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
         expression is MemberAccessExpressionSyntax memberAccess
@@ -113,21 +132,21 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
     private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
         expression.RemoveParentheses() as BinaryExpressionSyntax;
 
-    private static bool IsIndirectInequality(SemanticModel semanticModel, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
+    private static bool IsIndirectInequality(SemanticModel model, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
         binaryExpression.IsKind(SyntaxKind.LogicalOrExpression)
         && IsOperatorPair(left, right, SyntaxKind.GreaterThanToken, SyntaxKind.LessThanToken)
-        && HasFloatingType(semanticModel, right);
+        && HasFloatingType(model, right);
 
-    private static bool IsIndirectEquality(SemanticModel semanticModel, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
+    private static bool IsIndirectEquality(SemanticModel model, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
         binaryExpression.IsKind(SyntaxKind.LogicalAndExpression)
         && IsOperatorPair(left, right, SyntaxKind.GreaterThanEqualsToken, SyntaxKind.LessThanEqualsToken)
-        && HasFloatingType(semanticModel, right);
+        && HasFloatingType(model, right);
 
-    private static bool HasFloatingType(SemanticModel semanticModel, BinaryExpressionSyntax binary) =>
-        IsExpressionFloatingType(semanticModel, binary.Right) || IsExpressionFloatingType(semanticModel, binary.Left);
+    private static bool HasFloatingType(SemanticModel model, BinaryExpressionSyntax binary) =>
+        IsExpressionFloatingType(model, binary.Right) || IsExpressionFloatingType(model, binary.Left);
 
-    private static bool IsExpressionFloatingType(SemanticModel semanticModel, ExpressionSyntax expression) =>
-        IsFloatingPointType(semanticModel.GetTypeInfo(expression).Type);
+    private static bool IsExpressionFloatingType(SemanticModel model, ExpressionSyntax expression) =>
+        IsFloatingPointType(model.GetTypeInfo(expression).Type);
 
     private static bool IsOperatorPair(BinaryExpressionSyntax left, BinaryExpressionSyntax right, SyntaxKind first, SyntaxKind second) =>
         (left.OperatorToken.IsKind(first) && right.OperatorToken.IsKind(second))

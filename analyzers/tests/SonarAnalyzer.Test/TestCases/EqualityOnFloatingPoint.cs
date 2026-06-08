@@ -36,6 +36,33 @@ public class EqualityOnFloatingPoint
         float f1 = 0.0F;
         if ((System.Math.Sign(f1) == 0)) { }      // Compliant
     }
+
+    void ZeroComparisons(float f, double d)
+    {
+        if (f == 0) { }               // Compliant zero is exactly representable
+        if (f != 0) { }
+        if (0 == f) { }
+        if (0 != f) { }
+        if (d == 0.0) { }
+        if (d != 0.0) { }
+        if (f == 0f) { }
+        if (d == 0L) { }
+        if (d == 0U) { }
+        if (d == 0UL) { }
+        if (d == -0.0) { }            // Compliant negative zero equals zero
+        if (f == default(float)) { }  // Compliant
+        if (d == default(double)) { } // Compliant
+
+        const double Zero = 0.0;
+        const double ZeroExpr = 0.0 + 0.0;
+        if (d == Zero) { }
+        if (d == ZeroExpr) { }
+
+        double localZero = 0.0;
+        const double NotZero = 0.1;
+        if (d == localZero) { }       // Noncompliant
+        if (d == NotZero) { }         // Noncompliant
+    }
 }
 
 public class ReportSpecificMessage_NaN

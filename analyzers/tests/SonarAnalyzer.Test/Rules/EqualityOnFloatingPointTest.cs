@@ -31,10 +31,10 @@ public class EqualityOnFloatingPointTest
 #if NET
 
     [TestMethod]
-    public void EqualityOnFloatingPoint_CSharp11() =>
-        builder.AddPaths("EqualityOnFloatingPoint.CSharp11.cs")
-            .AddReferences(new[] { CoreMetadataReference.SystemRuntime })
-            .WithOptions(LanguageOptions.FromCSharp11)
+    public void EqualityOnFloatingPoint_Latest() =>
+        builder.AddPaths("EqualityOnFloatingPoint.Latest.cs")
+            .AddReferences([CoreMetadataReference.SystemRuntime])
+            .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
 
 #endif
