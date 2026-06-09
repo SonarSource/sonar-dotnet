@@ -4713,7 +4713,7 @@ public static class RuleTypeMappingVB
         // ["S4789"],
         ["S4790"] = "SECURITY_HOTSPOT",
         // ["S4791"],
-        ["S4792"] = "SECURITY_HOTSPOT",
+        // ["S4792"],
         // ["S4793"],
         // ["S4794"],
         // ["S4795"],

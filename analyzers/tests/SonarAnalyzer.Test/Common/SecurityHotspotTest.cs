@@ -73,7 +73,6 @@ public class SecurityHotspotTest
     private static string TestCaseFileName(string analyzerName) =>
         analyzerName switch
         {
-            "ConfiguringLoggers" => "ConfiguringLoggers_Log4Net",
             "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
             "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
             "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
@@ -96,7 +95,6 @@ public class SecurityHotspotTest
             nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
             nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
             nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
-            nameof(ConfiguringLoggers) => ConfiguringLoggersTest.Log4NetReferences,
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
             nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion),
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
