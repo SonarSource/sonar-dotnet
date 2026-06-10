@@ -44,7 +44,6 @@ languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube),
 * [Building, testing and debugging the .NET analyzer](./docs/contributing-analyzer.md)
 * [Building, testing and debugging the Java plugin](./docs/contributing-plugin.md)
 * [How to re-generate NuGet lock files](./docs/regenerate-lock-files.md)
-* [Using the rspec.ps1 script](./scripts/rspec/README.md)
 
 ## How to contribute
 
@@ -60,7 +59,7 @@ You can also monitor the activity on this repository (opened issues, opened PRs)
 
 If you want to fix [an issue](https://github.com/SonarSource/sonar-dotnet/issues),
 please read the [Get started](#get-started) pages first and make sure that you follow [our coding style](./docs/coding-style.md).
-We suggest avoiding the implementation of new rules, as a specification process is required first.
+We suggest avoiding the implementation of new rules, as a specification process is required first.
 
 Before submitting the PR, make sure [all tests](./docs/contributing-analyzer.md#running-unit-tests) are passing (all checks must be green).
 
