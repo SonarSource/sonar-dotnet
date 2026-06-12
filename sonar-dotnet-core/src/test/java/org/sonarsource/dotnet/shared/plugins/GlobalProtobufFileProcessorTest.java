@@ -42,8 +42,8 @@ import org.sonar.api.testfixtures.log.LogTester;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer.FileMetadataInfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.entry;
-import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -204,11 +204,7 @@ public class GlobalProtobufFileProcessorTest {
     Path analyzerPath = reportPath.toPath().resolve("output-foo");
     Files.createDirectories(analyzerPath);
     try (OutputStream fos = Files.newOutputStream(analyzerPath.resolve("file-metadata.pb"), StandardOpenOption.CREATE)) {
-      try {
-        FileMetadataInfo.newBuilder().setFilePath(path).setIsGenerated(true).build().writeDelimitedTo(fos);
-      } catch (IOException e) {
-        fail(e.getMessage(), e);
-      }
+      assertThatCode(() -> FileMetadataInfo.newBuilder().setFilePath(path).setIsGenerated(true).build().writeDelimitedTo(fos)).doesNotThrowAnyException();
     }
     return reportPath.toString();
   }
@@ -218,15 +214,13 @@ public class GlobalProtobufFileProcessorTest {
     Path analyzerPath = reportPath.toPath().resolve("output-foo");
     Files.createDirectories(analyzerPath);
     try (OutputStream fos = Files.newOutputStream(analyzerPath.resolve("file-metadata.pb"), StandardOpenOption.CREATE)) {
-      try {
+      assertThatCode(() -> {
         FileMetadataInfo.Builder builder = FileMetadataInfo.newBuilder().setFilePath(path);
         if (encoding != null) {
           builder.setEncoding(encoding);
         }
         builder.build().writeDelimitedTo(fos);
-      } catch (IOException e) {
-        fail(e.getMessage(), e);
-      }
+      }).doesNotThrowAnyException();
     }
     return reportPath.toString();
   }
