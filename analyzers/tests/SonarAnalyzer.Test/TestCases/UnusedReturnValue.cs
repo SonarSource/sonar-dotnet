@@ -154,6 +154,8 @@ public static class PrivateStaticAndExtensions
             PrivateStaticAndExtensions.StaticNonCompliant(this);      // Return value discarded via static-call syntax.
             var x = this.ExtensionCompliant();                        // Return value used via extension-call syntax.
             var y = PrivateStaticAndExtensions.StaticCompliant(this); // Return value used via static-call syntax.
+            this.FluentExtension();                                   // Fluent extension, return value discarded.
+            this.NonFluentExtension();                                // Non-fluent extension, return value discarded.
         }
     }
 
@@ -164,4 +166,9 @@ public static class PrivateStaticAndExtensions
     private static int StaticNonCompliant(Sample sample) => 42; // Noncompliant{{Change return type to 'void'; not a single caller uses the returned value.}}
 //                 ^^^
     private static int StaticCompliant(Sample sample) => 42;
+
+    private static Sample FluentExtension(this Sample sample) => sample; // Compliant, fluent pattern (returns this type)
+
+    private static int NonFluentExtension(this Sample sample) => 42; // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
+//                 ^^^
 }
