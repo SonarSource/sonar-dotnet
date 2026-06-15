@@ -15,28 +15,28 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class DoNotNestTernaryOperators : DoNotNestTernaryOperatorsBase
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DoNotNestTernaryOperators : DoNotNestTernaryOperatorsBase
-    {
-        private const string MessageFormat = "Extract this nested ternary operation into an independent statement.";
+    private const string MessageFormat = "Extract this nested ternary operation into an independent statement.";
 
-        private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
-                {
-                    if (c.Node.Ancestors()
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                if (c.Node.Ancestors()
                         .TakeWhile(x => !(x?.Kind() is SyntaxKind.ParenthesizedLambdaExpression or SyntaxKind.SimpleLambdaExpression))
                         .OfType<ConditionalExpressionSyntax>()
-                        .Any())
-                    {
-                        c.ReportIssue(Rule, c.Node);
-                    }
-                },
-                SyntaxKind.ConditionalExpression);
-    }
+                        .Any()
+                    && !c.IsInExpressionTree())
+                {
+                    c.ReportIssue(Rule, c.Node);
+                }
+            },
+            SyntaxKind.ConditionalExpression);
 }
