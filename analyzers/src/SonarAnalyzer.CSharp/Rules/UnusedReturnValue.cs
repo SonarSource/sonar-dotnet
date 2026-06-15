@@ -60,7 +60,8 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
                 .ToList();
 
             // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
-            if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
+            // Extension methods that return their this parameter type (fluent pattern) are excluded.
+            if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed) && !IsFluentExtensionMethod(declaredPrivateMethodWithReturn.Symbol))
             {
                 context.ReportIssue(Rule, declaredPrivateMethodWithReturn.Node.ReturnType);
             }
@@ -134,4 +135,14 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
     private static bool MatchesDeclaration(IMethodSymbol invocation, IMethodSymbol declaration) =>
         invocation.OriginalDefinition.Equals(declaration)
         || (declaration.AssociatedExtensionImplementation is { } implementation && invocation.OriginalDefinition.Equals(implementation));
+
+    // Extension methods that return their own this parameter type follow the fluent builder pattern and should not be flagged.
+    private static bool IsFluentExtensionMethod(IMethodSymbol method)
+    {
+        // Extension block members do not have IsExtensionMethod set; they are identified via AssociatedExtensionImplementation.
+        var actualMethod = method.AssociatedExtensionImplementation ?? method;
+        return actualMethod.IsExtensionMethod
+            && actualMethod.Parameters.Length > 0
+            && method.ReturnType.Equals(actualMethod.Parameters[0].Type);
+    }
 }
