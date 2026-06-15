@@ -139,9 +139,8 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
     // Extension methods that return their own this parameter type follow the fluent builder pattern and should not be flagged.
     private static bool IsFluentExtensionMethod(IMethodSymbol method)
     {
-        // Extension block members do not have IsExtensionMethod set; they are identified via AssociatedExtensionImplementation.
         var actualMethod = method.AssociatedExtensionImplementation ?? method;
-        return actualMethod.IsExtensionMethod
+        return method.IsExtension
             && actualMethod.Parameters.Length > 0
             && method.ReturnType.Equals(actualMethod.Parameters[0].Type);
     }
