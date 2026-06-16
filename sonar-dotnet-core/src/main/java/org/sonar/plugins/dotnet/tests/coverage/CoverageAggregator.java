@@ -34,10 +34,12 @@ import org.sonar.plugins.dotnet.tests.WildcardPatternFileProvider;
 public class CoverageAggregator {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoverageAggregator.class);
+  private static final String TROUBLESHOOTING_GUIDE = "Troubleshooting guide: https://community.sonarsource.com/t/37151";
 
   private final CoverageConfiguration coverageConf;
   private final Configuration configuration;
   private final CoverageCache coverageCache;
+  private final AnalysisWarnings analysisWarnings;
   private final NCover3ReportParser ncover3ReportParser;
   private final OpenCoverReportParser openCoverReportParser;
   private final DotCoverReportsAggregator dotCoverReportsAggregator;
@@ -51,6 +53,7 @@ public class CoverageAggregator {
     this.coverageConf = coverageConf;
     this.configuration = configuration;
     this.coverageCache = new CoverageCache();
+    this.analysisWarnings = analysisWarnings;
     this.ncover3ReportParser = new NCover3ReportParser(fileService, analysisWarnings);
     this.openCoverReportParser = new OpenCoverReportParser(fileService);
     this.dotCoverReportsAggregator = new DotCoverReportsAggregator(new DotCoverReportParser(fileService));
@@ -66,11 +69,13 @@ public class CoverageAggregator {
                      OpenCoverReportParser openCoverReportParser,
                      DotCoverReportsAggregator dotCoverReportsAggregator,
                      VisualStudioCoverageXmlReportParser visualStudioCoverageXmlReportParser,
-                     CoberturaReportParser coberturaReportParser) {
+                     CoberturaReportParser coberturaReportParser,
+                     AnalysisWarnings analysisWarnings) {
 
     this.coverageConf = coverageConf;
     this.configuration = configuration;
     this.coverageCache = coverageCache;
+    this.analysisWarnings = analysisWarnings;
     this.ncover3ReportParser = ncover3ReportParser;
     this.openCoverReportParser = openCoverReportParser;
     this.dotCoverReportsAggregator = dotCoverReportsAggregator;
@@ -140,7 +145,9 @@ public class CoverageAggregator {
       if (!reportPathPattern.isEmpty()) {
         Set<File> filesMatchingPattern = wildcardPatternFileProvider.listFiles(reportPathPattern);
         if (filesMatchingPattern.isEmpty()) {
-          LOG.warn("Could not find any coverage report file matching the pattern '{}'. Troubleshooting guide: https://community.sonarsource.com/t/37151", reportPathPattern);
+          String warning = "Could not find any coverage report file matching the pattern '" + reportPathPattern + "'. " + TROUBLESHOOTING_GUIDE;
+          LOG.warn(warning);
+          analysisWarnings.addUnique(warning);
         } else {
           mergeParsedCoverageWithAggregatedCoverage(aggregatedCoverage, parser, filesMatchingPattern);
         }
@@ -153,7 +160,9 @@ public class CoverageAggregator {
       try {
         aggregatedCoverage.mergeWith(coverageCache.readCoverageFromCacheOrParse(parser, reportFile));
       } catch (Exception e) {
-        LOG.warn("Could not import coverage report '{}' because '{}'. Troubleshooting guide: https://community.sonarsource.com/t/37151", reportFile, e.getMessage());
+        String warning = "Could not import coverage report '" + reportFile + "' because '" + e.getMessage() + "'. " + TROUBLESHOOTING_GUIDE;
+        LOG.warn(warning);
+        analysisWarnings.addUnique(warning);
       }
     }
   }
