@@ -15,7 +15,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Collections.Immutable;
 using System.IO;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
+using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 using SonarAnalyzer.Core.Configuration;
 
@@ -24,6 +29,7 @@ namespace SonarAnalyzer.Core.Extensions;
 public static class AnalyzerOptionsExtensions
 {
     private static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProvider = new(x => new SonarLintXmlReader(x));
+    private static readonly SourceTextValueProvider<ImmutableHashSet<string>> CustomDictionaryAcronymsProvider = new(ParseCustomDictionaryAcronyms);
 
     public static SonarLintXmlReader SonarLintXml(this AnalyzerOptions options, SonarAnalysisContext context)
     {
@@ -48,6 +54,34 @@ public static class AnalyzerOptionsExtensions
 
     public static AdditionalText ProjectOutFolderPath(this AnalyzerOptions options) =>
         options.AdditionalFile("ProjectOutFolderPath.txt");
+
+    public static AdditionalText CustomDictionary(this AnalyzerOptions options) =>
+        options.AdditionalFile("CustomDictionary.xml");
+
+    // See https://learn.microsoft.com/en-us/visualstudio/code-quality/how-to-customize-the-code-analysis-dictionary for the expected XML format.
+    public static ImmutableHashSet<string> CustomDictionaryAcronyms(this AnalyzerOptions options, SonarCompilationStartAnalysisContext context) =>
+        options.CustomDictionary()?.GetText() is { } text
+        && context.TryGetValue(text, CustomDictionaryAcronymsProvider, out var acronyms)
+            ? acronyms
+            : ImmutableHashSet<string>.Empty;
+
+    internal static ImmutableHashSet<string> ParseCustomDictionaryAcronyms(SourceText text)
+    {
+        try
+        {
+            var acronyms = XDocument.Parse(text.ToString()).Root is { Name.LocalName: "Dictionary" } root
+                ? root.Element("Acronyms")?.Element("CasingExceptions")?.Elements("Acronym")
+                : null;
+            return (acronyms ?? [])
+                .Select(x => x.Value.Trim().ToUpperInvariant())
+                .Where(x => x.Length > 0)
+                .ToImmutableHashSet();
+        }
+        catch (XmlException)
+        {
+            return ImmutableHashSet<string>.Empty;
+        }
+    }
 
     [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7440", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
     private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName)

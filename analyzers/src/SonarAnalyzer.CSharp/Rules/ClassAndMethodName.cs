@@ -44,38 +44,9 @@ namespace SonarAnalyzer.CSharp.Rules
             var currentWord = new StringBuilder(name.Length);
             foreach (var c in name)
             {
-                if (char.IsUpper(c))
+                foreach (var part in ProcessChar(c, currentWord))
                 {
-                    if (currentWord.Length > 0 && !char.IsUpper(currentWord[currentWord.Length - 1]))
-                    {
-                        yield return currentWord.ToString();
-                        currentWord.Clear();
-                    }
-
-                    currentWord.Append(c);
-                }
-                else if (char.IsLower(c))
-                {
-                    if (currentWord.Length > 1 && char.IsUpper(currentWord[currentWord.Length - 1]))
-                    {
-                        var lastChar = currentWord[currentWord.Length - 1];
-                        currentWord.Length--;
-                        yield return currentWord.ToString();
-                        currentWord.Clear();
-                        currentWord.Append(lastChar);
-                    }
-
-                    currentWord.Append(c);
-                }
-                else
-                {
-                    if (currentWord.Length > 0)
-                    {
-                        yield return currentWord.ToString();
-                        currentWord.Clear();
-                    }
-
-                    yield return c.ToString();
+                    yield return part;
                 }
             }
 
@@ -85,33 +56,73 @@ namespace SonarAnalyzer.CSharp.Rules
             }
         }
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(c =>
+        protected override void Initialize(SonarAnalysisContext context) =>
+            context.RegisterCompilationStartAction(startContext =>
                 {
-                    if (c.IsRedundantPositionalRecordContext())
-                    {
-                        return;
-                    }
-                    CheckTypeName(c);
-                },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordDeclaration,
-                SyntaxKindEx.RecordStructDeclaration);
+                    var allowedAcronyms = startContext.Options.CustomDictionaryAcronyms(startContext);
 
-            context.RegisterNodeAction(c =>
+                    startContext.RegisterNodeAction(c =>
+                        {
+                            if (c.IsRedundantPositionalRecordContext())
+                            {
+                                return;
+                            }
+                            CheckTypeName(c, allowedAcronyms);
+                        },
+                        SyntaxKind.ClassDeclaration,
+                        SyntaxKind.InterfaceDeclaration,
+                        SyntaxKind.StructDeclaration,
+                        SyntaxKindEx.RecordDeclaration,
+                        SyntaxKindEx.RecordStructDeclaration);
+
+                    startContext.RegisterNodeAction(c =>
+                        {
+                            var identifier = GetDeclarationIdentifier(c.Node);
+                            CheckMemberName(c, identifier, allowedAcronyms);
+                        },
+                        SyntaxKind.MethodDeclaration,
+                        SyntaxKind.PropertyDeclaration,
+                        SyntaxKindEx.LocalFunctionStatement);
+                });
+
+        private static IEnumerable<string> ProcessChar(char c, StringBuilder currentWord)
+        {
+            if (char.IsUpper(c))
+            {
+                if (currentWord.Length > 0 && !char.IsUpper(currentWord[currentWord.Length - 1]))
                 {
-                    var identifier = GetDeclarationIdentifier(c.Node);
-                    CheckMemberName(c, identifier);
-                },
-                SyntaxKind.MethodDeclaration,
-                SyntaxKind.PropertyDeclaration,
-                SyntaxKindEx.LocalFunctionStatement);
+                    yield return currentWord.ToString();
+                    currentWord.Clear();
+                }
+                currentWord.Append(c);
+            }
+            else if (char.IsLower(c))
+            {
+                if (currentWord.Length > 1 && char.IsUpper(currentWord[currentWord.Length - 1]))
+                {
+                    var lastChar = currentWord[currentWord.Length - 1];
+                    currentWord.Length--;
+                    yield return currentWord.ToString();
+                    currentWord.Clear();
+                    currentWord.Append(lastChar);
+                }
+                currentWord.Append(c);
+            }
+            else
+            {
+                if (currentWord.Length > 0)
+                {
+                    yield return currentWord.ToString();
+                    currentWord.Clear();
+                }
+                yield return c.ToString();
+            }
         }
 
-        private static void CheckTypeName(SonarSyntaxNodeReportingContext context)
+        private static bool IsAllowedAcronym(string part, ImmutableHashSet<string> allowedAcronyms) =>
+            part.All(char.IsUpper) && allowedAcronyms.Contains(part);
+
+        private static void CheckTypeName(SonarSyntaxNodeReportingContext context, ImmutableHashSet<string> allowedAcronyms)
         {
             var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
             var identifier = typeDeclaration.Identifier;
@@ -140,11 +151,13 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            var isNameValid = IsTypeNameValid(identifier.ValueText,
-                                              requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
-                                              allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
-                                              areUnderscoresAllowed: context.IsTestProject(),
-                                              suggestion: out var suggestion);
+            var isNameValid = IsTypeNameValid(
+                identifier.ValueText,
+                requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
+                allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
+                areUnderscoresAllowed: context.IsTestProject(),
+                allowedAcronyms: allowedAcronyms,
+                suggestion: out var suggestion);
 
             if (!isNameValid)
             {
@@ -153,7 +166,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
         }
 
-        private static void CheckMemberName(SonarSyntaxNodeReportingContext context, SyntaxToken identifier)
+        private static void CheckMemberName(SonarSyntaxNodeReportingContext context, SyntaxToken identifier, ImmutableHashSet<string> allowedAcronyms)
         {
             var symbol = context.Model.GetDeclaredSymbol(context.Node);
             if (symbol == null)
@@ -182,14 +195,14 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            if (!IsMemberNameValid(identifier.ValueText, out var suggestion))
+            if (!IsMemberNameValid(identifier.ValueText, allowedAcronyms, out var suggestion))
             {
                 var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
                 context.ReportIssue(MethodNameRule, identifier, context.Node.GetDeclarationTypeName(), identifier.ValueText, messageEnding);
             }
         }
 
-        private static bool IsMemberNameValid(string identifierName, out string suggestion)
+        private static bool IsMemberNameValid(string identifierName, ImmutableHashSet<string> allowedAcronyms, out string suggestion)
         {
             if (identifierName.Length == 1)
             {
@@ -202,8 +215,8 @@ namespace SonarAnalyzer.CSharp.Rules
 
             foreach (var part in SplitToParts(identifierName))
             {
-                idealNameVariant.Append(SuggestFixedCaseName(part, 1));
-                acceptableNameVariant.Append(SuggestFixedCaseName(part, 2));
+                idealNameVariant.Append(SuggestFixedCaseName(part, 1, allowedAcronyms));
+                acceptableNameVariant.Append(SuggestFixedCaseName(part, 2, allowedAcronyms));
             }
 
             idealNameVariant[0] = char.ToUpperInvariant(idealNameVariant[0]);
@@ -216,7 +229,13 @@ namespace SonarAnalyzer.CSharp.Rules
                    || suggestion == identifierName;
         }
 
-        private static bool IsTypeNameValid(string identifierName, bool requireInitialI, bool allowInitialI, bool areUnderscoresAllowed, out string suggestion)
+        private static bool IsTypeNameValid(
+            string identifierName,
+            bool requireInitialI,
+            bool allowInitialI,
+            bool areUnderscoresAllowed,
+            ImmutableHashSet<string> allowedAcronyms,
+            out string suggestion)
         {
             if (identifierName.Length == 1)
             {
@@ -236,16 +255,13 @@ namespace SonarAnalyzer.CSharp.Rules
                     continue;
                 }
 
-                var ideal = i == 0
-                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 1)
-                    : SuggestFixedCaseName(part, 1);
+                idealNameVariant.Append(i == 0
+                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 1, allowedAcronyms)
+                    : SuggestFixedCaseName(part, 1, allowedAcronyms));
 
-                var acceptable = i == 0
-                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 2)
-                    : SuggestFixedCaseName(part, 2);
-
-                idealNameVariant.Append(ideal);
-                acceptableNameVariant.Append(acceptable);
+                acceptableNameVariant.Append(i == 0
+                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 2, allowedAcronyms)
+                    : SuggestFixedCaseName(part, 2, allowedAcronyms));
             }
 
             suggestion = SuggestCapitalLetterAfterNonLetter(idealNameVariant);
@@ -255,21 +271,29 @@ namespace SonarAnalyzer.CSharp.Rules
                    || suggestion == identifierName;
         }
 
-        private static string HandleFirstPartOfTypeName(string input, bool requireInitialI, bool allowInitialI, int maxUppercase)
+        private static string HandleFirstPartOfTypeName(string input, bool requireInitialI, bool allowInitialI, int maxUppercase, ImmutableHashSet<string> allowedAcronyms)
         {
             var startsWithI = input[0] == 'I';
 
             if (requireInitialI)
             {
+                if (startsWithI && input.Length > 1 && IsAllowedAcronym(input.Substring(1), allowedAcronyms))
+                {
+                    return input;
+                }
+                if (IsAllowedAcronym(input, allowedAcronyms))
+                {
+                    return "I" + input;
+                }
                 var prefix = startsWithI ? string.Empty : "I";
-                return prefix + SuggestFixedCaseName(FirstCharToUpper(input), maxUppercase + 1);
+                return prefix + SuggestFixedCaseName(FirstCharToUpper(input), maxUppercase + 1, allowedAcronyms);
             }
 
             var suggestionToProcess = ShouldExcludeFirstLetter()
                 ? FirstCharToUpper(input.Substring(1))
                 : FirstCharToUpper(input);
 
-            return SuggestFixedCaseName(suggestionToProcess, maxUppercase);
+            return SuggestFixedCaseName(suggestionToProcess, maxUppercase, allowedAcronyms);
 
             bool ShouldExcludeFirstLetter() =>
                 input.Length == 1
@@ -292,8 +316,12 @@ namespace SonarAnalyzer.CSharp.Rules
             return suggestion.ToString();
         }
 
-        private static string SuggestFixedCaseName(string input, int maxUppercaseCount)
+        private static string SuggestFixedCaseName(string input, int maxUppercaseCount, ImmutableHashSet<string> allowedAcronyms)
         {
+            if (IsAllowedAcronym(input, allowedAcronyms))
+            {
+                return input;
+            }
             var upper = input.Take(maxUppercaseCount);
             var lower = input.Skip(maxUppercaseCount).Select(char.ToLowerInvariant);
 

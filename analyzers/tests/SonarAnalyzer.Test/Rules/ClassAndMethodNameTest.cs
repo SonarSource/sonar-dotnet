@@ -25,12 +25,31 @@ public class ClassAndMethodNameTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.ClassAndMethodName>();
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void ClassAndMethodName_CS() =>
         builderCS.AddPaths("ClassAndMethodName.cs", "ClassAndMethodName.Partial.cs")
             .AddReferences(MetadataReferenceFacade.NetStandard21)
             .WithConcurrentAnalysis(false)
             .WithOptions(LanguageOptions.FromCSharp8)
+            .WithAdditionalFilePath(TestFiles.WriteFile(TestContext, "CustomDictionary.xml", """
+                <Dictionary>
+                    <Acronyms>
+                        <CasingExceptions>
+                            <Acronym>IAC</Acronym>
+                            <Acronym>NSA</Acronym>
+                        </CasingExceptions>
+                    </Acronyms>
+                </Dictionary>
+                """))
+            .Verify();
+
+    [TestMethod]
+    public void ClassAndMethodName_MalformedCustomDictionary_CS() =>
+        builderCS
+            .AddSnippet("class NSAInformer { } // Noncompliant {{Rename class 'NSAInformer' to match pascal case naming rules, consider using 'NsaInformer'.}}")
+            .WithAdditionalFilePath(TestFiles.WriteFile(TestContext, "CustomDictionary.xml", "not valid xml"))
             .Verify();
 
     [TestMethod]

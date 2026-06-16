@@ -200,3 +200,29 @@ namespace FPRepros
     public class L10nService // Noncompliant FP
     { }
 }
+
+// CustomDictionary.xml configured with acronyms IAC and NSA.
+namespace AllowedAcronyms
+{
+    class NSAInformer { }   // Compliant
+    class FSMRunner { }     // Noncompliant {{Rename class 'FSMRunner' to match pascal case naming rules, consider using 'FsmRunner'.}}
+    class TokenIAC { }      // Compliant
+
+    interface INSAProvider { }   // Compliant: I (interface prefix) + NSA (allowed acronym)
+    interface IIACProvider { }   // Compliant: I (interface prefix) + IAC (allowed acronym)
+    interface NSAProvider { }    // Noncompliant {{Rename interface 'NSAProvider' to match pascal case naming rules, consider using 'INSAProvider'.}}
+    interface IACProvider { }    // Noncompliant {{Rename interface 'IACProvider' to match pascal case naming rules, consider using 'IIACProvider'.}}
+
+    struct IACToken { }          // Compliant
+
+    class MyAllowedAcronymsClass
+    {
+        public void GetNSAData() { }            // Compliant
+        public void GetFSMState() { }           // Noncompliant {{Rename method 'GetFSMState' to match pascal case naming rules, consider using 'GetFsmState'.}}
+        public void GetIACToken() { }           // Compliant
+
+        public int NSAProperty { get; set; }    // Compliant
+        public int FSMProperty { get; set; }    // Noncompliant {{Rename property 'FSMProperty' to match pascal case naming rules, consider using 'FsmProperty'.}}
+        public int IACProperty { get; set; }    // Compliant
+    }
+}
