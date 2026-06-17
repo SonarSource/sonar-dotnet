@@ -103,6 +103,15 @@ public class TestClass
         // assERT
     }
 
+    public void Repro_3914_NoWords()    // NET-3914, comment with no words
+    {
+        /*   $$$   */
+
+        /*         */
+
+        /* !@#$%&*() */
+    }
+
     private void AreEqual(object expected, object actual) { }
 }
 

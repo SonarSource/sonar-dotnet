@@ -32,7 +32,7 @@ public sealed class AvoidArrangeActAssertComment : StylingAnalyzer
             {
                 var comments = c.Node
                     .DescendantTrivia()
-                    .Where(x => x.IsComment() && !ExtractWords(x).Except(ForbiddenComments, StringComparer.OrdinalIgnoreCase).Any());
+                    .Where(x => x.IsComment() && ContainsOnlyInvalid(x));
 
                 foreach (var comment in comments)
                 {
@@ -40,6 +40,12 @@ public sealed class AvoidArrangeActAssertComment : StylingAnalyzer
                 }
             },
             SyntaxKind.MethodDeclaration);
+
+    private static bool ContainsOnlyInvalid(SyntaxTrivia comment)
+    {
+        var words = ExtractWords(comment);
+        return words.Any() && words.Except(ForbiddenComments, StringComparer.OrdinalIgnoreCase).IsEmpty();
+    }
 
     private static string[] ExtractWords(SyntaxTrivia comment) =>
         WordRegex.SafeMatches(comment.ToString())
