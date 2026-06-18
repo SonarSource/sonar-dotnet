@@ -102,11 +102,11 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static SyntaxNode RemoveParentheses(SyntaxNode node) =>
-            node is ExpressionSyntax expression ? expression.RemoveParentheses() : node;
+            node is ExpressionSyntax { WithoutEnclosingParentheses: { } withoutParentheses } ? withoutParentheses : node;
 
         private static void ReportIfOperatorExpressionsMatch(SonarSyntaxNodeReportingContext context, ExpressionSyntax left, ExpressionSyntax right, SyntaxToken operatorToken)
         {
-            if (CSharpEquivalenceChecker.AreEquivalent(left.RemoveParentheses(), right.RemoveParentheses()))
+            if (CSharpEquivalenceChecker.AreEquivalent(left.WithoutEnclosingParentheses, right.WithoutEnclosingParentheses))
             {
                 var message = string.Format(OperatorMessageFormat, operatorToken);
                 context.ReportIssue(Rule, right, [left.ToSecondaryLocation()], message);

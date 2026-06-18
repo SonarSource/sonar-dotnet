@@ -86,7 +86,7 @@ public class ExpressionSyntaxExtensionsTest
     public void GetLeftMostInMemberAccess(string expression, string expected)
     {
         var parsed = SyntaxFactory.ParseExpression(expression);
-        var result = parsed.LeftMostInMemberAccess();
+        var result = parsed.LeftMostInMemberAccess;
         var asString = result?.ToString() ?? "null";
         asString.Should().BeEquivalentTo(expected);
     }
@@ -106,13 +106,13 @@ public class ExpressionSyntaxExtensionsTest
     public void IsDefaultLiteral(string expression, bool expected)
     {
         var parsed = SyntaxFactory.ParseExpression(expression);
-        var result = parsed.IsDefaultLiteral();
+        var result = parsed.IsDefaultLiteral;
         result.Should().Be(expected);
     }
 
     [TestMethod]
     public void IsDefaultLiteral_Null() =>
-        ((ExpressionSyntax)null).IsDefaultLiteral().Should().BeFalse();
+        ((ExpressionSyntax)null).IsDefaultLiteral.Should().BeFalse();
 
     private static (ExpressionSyntax Expression, SemanticModel Model) Compile(string code)
     {

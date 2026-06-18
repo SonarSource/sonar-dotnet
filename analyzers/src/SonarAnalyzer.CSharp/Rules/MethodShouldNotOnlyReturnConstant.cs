@@ -58,7 +58,7 @@ public sealed class MethodShouldNotOnlyReturnConstant : SonarDiagnosticAnalyzer
         };
 
     private static bool IsConstantExpression(ExpressionSyntax expression, SemanticModel model) =>
-        expression.RemoveParentheses() is LiteralExpressionSyntax literal
+        expression.WithoutEnclosingParentheses is LiteralExpressionSyntax literal
         && !literal.IsNullLiteral()
         && model.GetConstantValue(literal).HasValue;
 

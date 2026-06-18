@@ -93,10 +93,10 @@ namespace SonarAnalyzer.CSharp.Rules
         private sealed class TernaryStatementAnalyzer : TernaryStatementAnalyzerBase<ConditionalExpressionSyntax>
         {
             protected override SyntaxNode GetWhenFalse(ConditionalExpressionSyntax ternaryStatement) =>
-                ternaryStatement.WhenFalse.RemoveParentheses();
+                ternaryStatement.WhenFalse.WithoutEnclosingParentheses;
 
             protected override SyntaxNode GetWhenTrue(ConditionalExpressionSyntax ternaryStatement) =>
-                ternaryStatement.WhenTrue.RemoveParentheses();
+                ternaryStatement.WhenTrue.WithoutEnclosingParentheses;
 
             protected override Location GetLocation(ConditionalExpressionSyntax ternaryStatement) =>
                 ternaryStatement.Condition.CreateLocation(ternaryStatement.QuestionToken);

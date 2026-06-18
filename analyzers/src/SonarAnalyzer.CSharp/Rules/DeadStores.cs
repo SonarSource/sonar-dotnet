@@ -151,7 +151,7 @@ public sealed partial class DeadStores : SonarDiagnosticAnalyzer
                 (constantValue.HasValue && IsAllowedInitializationConstant(constantValue.Value, value.IsKind(SyntaxKind.IdentifierName)))
                 || value?.Kind() is SyntaxKind.DefaultExpression or SyntaxKind.TrueLiteralExpression or SyntaxKind.FalseLiteralExpression
                 || value.IsNullLiteral()
-                || value.IsDefaultLiteral()
+                || value.IsDefaultLiteral
                 || IsAllowedNumericInitialization(value)
                 || IsAllowedUnaryNumericInitialization(value)
                 || IsAllowedStringInitialization(value)

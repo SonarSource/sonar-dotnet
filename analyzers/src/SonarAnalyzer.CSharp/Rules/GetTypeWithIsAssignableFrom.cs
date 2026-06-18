@@ -92,7 +92,7 @@ public sealed class GetTypeWithIsAssignableFrom : SonarDiagnosticAnalyzer
 
     private static void CheckAsOperatorComparedToNull(SonarSyntaxNodeReportingContext context, ExpressionSyntax sideA, ExpressionSyntax sideB)
     {
-        if (sideA.RemoveParentheses().IsKind(SyntaxKind.AsExpression) && sideB.RemoveParentheses().IsKind(SyntaxKind.NullLiteralExpression))
+        if (sideA.WithoutEnclosingParentheses.IsKind(SyntaxKind.AsExpression) && sideB.WithoutEnclosingParentheses.IsKind(SyntaxKind.NullLiteralExpression))
         {
             ReportDiagnostic(context, MessageIsOperator);
         }

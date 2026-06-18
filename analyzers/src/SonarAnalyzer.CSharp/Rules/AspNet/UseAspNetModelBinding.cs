@@ -223,7 +223,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
     // Check that the "Headers" expression in the Headers.TryGetValue("id", out _) invocation is of type IHeaderDictionary
     private static bool IsAccessedViaHeaderDictionary(SemanticModel model, ILanguageFacade language, SyntaxNode invocation) =>
         invocation is InvocationExpressionSyntax { Expression: { } expression }
-            && expression.GetLeftOfDot() is { } left
+            && expression.LeftOfDot is { } left
             && model.GetTypeInfo(left) is { Type: { } typeSymbol }
             && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 

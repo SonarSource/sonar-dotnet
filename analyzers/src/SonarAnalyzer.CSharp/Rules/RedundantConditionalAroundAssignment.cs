@@ -46,10 +46,10 @@ public sealed class RedundantConditionalAroundAssignment : SonarDiagnosticAnalyz
             return;
         }
 
-        var expression1Condition = condition.Left?.RemoveParentheses();
-        var expression2Condition = condition.Right?.RemoveParentheses();
-        var expression1Assignment = assignment.Left?.RemoveParentheses();
-        var expression2Assignment = assignment.Right?.RemoveParentheses();
+        var expression1Condition = condition.Left?.WithoutEnclosingParentheses;
+        var expression2Condition = condition.Right?.WithoutEnclosingParentheses;
+        var expression1Assignment = assignment.Left?.WithoutEnclosingParentheses;
+        var expression2Assignment = assignment.Right?.WithoutEnclosingParentheses;
 
         if (!AreMatchingExpressions(expression1Condition, expression2Condition, expression2Assignment, expression1Assignment)
             && !AreMatchingExpressions(expression1Condition, expression2Condition, expression1Assignment, expression2Assignment))
@@ -90,7 +90,7 @@ public sealed class RedundantConditionalAroundAssignment : SonarDiagnosticAnalyz
 
     private static bool TryGetNotEqualsCondition(IfStatementSyntax ifStatement, out BinaryExpressionSyntax condition)
     {
-        condition = ifStatement.Condition?.RemoveParentheses() as BinaryExpressionSyntax;
+        condition = ifStatement.Condition?.WithoutEnclosingParentheses as BinaryExpressionSyntax;
         return condition is not null && condition.IsKind(SyntaxKind.NotEqualsExpression);
     }
 

@@ -31,6 +31,6 @@ namespace SonarAnalyzer.CSharp.Rules
             new CSharpBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
                 invocation =>
                     invocation.ArgumentList?.Arguments.Count != 1
-                    || !invocation.ArgumentList.Arguments.Single().Expression.RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
+                    || !invocation.ArgumentList.Arguments.Single().Expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.FalseLiteralExpression)));
     }
 }

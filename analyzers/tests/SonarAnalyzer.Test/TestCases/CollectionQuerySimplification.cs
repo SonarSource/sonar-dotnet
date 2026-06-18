@@ -21,6 +21,14 @@ namespace Tests.Diagnostics
 //                       ^^^^^
             y = coll.Where(element => element is object).Select(element => element as object[]);
             y = coll.Where(element => element is object).Select(element => (object)element); // Noncompliant use OfType
+
+            // Verbatim identifier on the reference side (@element) vs the plain parameter (element): the operand's
+            // ValueText ("element") matches the lambda parameter, while the old ToString() ("@element") comparison
+            // would miss it. Each case isolates one of the migrated matching spots (previously a false negative).
+            x = coll.Select(element => element as object).Any(element => @element != null);    // Noncompliant {{Use 'OfType<object>()' here instead.}}
+            y = coll.Where(element => element is object).Select(element => @element as object); // Noncompliant use OfType
+            y = coll.Where(element => element is object).Select(element => (object)@element);   // Noncompliant use OfType
+
             x = coll.Where(element => element == null).Any();  // Noncompliant use Any([expression])
 //                   ^^^^^
             var z = coll.Where(element => element == null).Count();  // Noncompliant {{Drop 'Where' and move the condition into the 'Count'.}}

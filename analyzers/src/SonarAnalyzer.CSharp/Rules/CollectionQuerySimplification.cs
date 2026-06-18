@@ -298,7 +298,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
             var expression = arguments[0].Expression;
 
-            var binaryExpression = GetExpressionFromLambda(expression).RemoveParentheses() as BinaryExpressionSyntax;
+            var binaryExpression = GetExpressionFromLambda(expression).WithoutEnclosingParentheses as BinaryExpressionSyntax;
             var lambdaParameter = GetLambdaParameter(expression);
 
             while (binaryExpression != null)
@@ -308,21 +308,23 @@ namespace SonarAnalyzer.CSharp.Rules
                     return binaryExpression.IsKind(SyntaxKind.NotEqualsExpression)
                            && IsNullChecking(binaryExpression, lambdaParameter);
                 }
-                binaryExpression = binaryExpression.Left.RemoveParentheses() as BinaryExpressionSyntax;
+                binaryExpression = binaryExpression.Left.WithoutEnclosingParentheses as BinaryExpressionSyntax;
             }
             return false;
         }
 
         private static bool IsNullChecking(BinaryExpressionSyntax binaryExpression, string lambdaParameter)
         {
-            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Left.RemoveParentheses())
-                && binaryExpression.Right.RemoveParentheses().ToString() == lambdaParameter)
+            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Left.WithoutEnclosingParentheses)
+                && binaryExpression.Right.WithoutEnclosingParentheses is IdentifierNameSyntax { Identifier.ValueText: var right }
+                && right == lambdaParameter)
             {
                 return true;
             }
 
-            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Right.RemoveParentheses())
-                && binaryExpression.Left.RemoveParentheses().ToString() == lambdaParameter)
+            if (CSharpEquivalenceChecker.AreEquivalent(SyntaxConstants.NullLiteralExpression, binaryExpression.Right.WithoutEnclosingParentheses)
+                && binaryExpression.Left.WithoutEnclosingParentheses is IdentifierNameSyntax { Identifier.ValueText: var left }
+                && left == lambdaParameter)
             {
                 return true;
             }
@@ -372,15 +374,15 @@ namespace SonarAnalyzer.CSharp.Rules
 
             var expression = arguments[0].Expression;
             var lambdaParameter = GetLambdaParameter(expression);
-            if (GetExpressionFromLambda(expression).RemoveParentheses() is not BinaryExpressionSyntax lambdaBody
+            if (GetExpressionFromLambda(expression).WithoutEnclosingParentheses is not BinaryExpressionSyntax lambdaBody
                 || lambdaParameter == null
                 || !lambdaBody.IsKind(asOrIs))
             {
                 return false;
             }
 
-            var castedExpression = lambdaBody.Left.RemoveParentheses();
-            if (lambdaParameter != castedExpression.ToString())
+            if (lambdaBody.Left.WithoutEnclosingParentheses is not IdentifierNameSyntax { Identifier.ValueText: var castedParameter }
+                || castedParameter != lambdaParameter)
             {
                 return false;
             }
@@ -400,14 +402,14 @@ namespace SonarAnalyzer.CSharp.Rules
 
             var expression = arguments[0].Expression;
             var lambdaParameter = GetLambdaParameter(expression);
-            if (GetExpressionFromLambda(expression).RemoveParentheses() is not CastExpressionSyntax castExpression
+            if (GetExpressionFromLambda(expression).WithoutEnclosingParentheses is not CastExpressionSyntax castExpression
                 || lambdaParameter == null)
             {
                 return false;
             }
 
-            var castedExpression = castExpression.Expression.RemoveParentheses();
-            if (lambdaParameter != castedExpression.ToString())
+            if (castExpression.Expression.WithoutEnclosingParentheses is not IdentifierNameSyntax { Identifier.ValueText: var castedParameter }
+                || castedParameter != lambdaParameter)
             {
                 return false;
             }

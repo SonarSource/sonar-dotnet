@@ -36,9 +36,9 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(CheckOrPattern, SyntaxKindEx.OrPattern);
         }
 
-        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.RemoveParentheses();
+        protected override SyntaxNode GetLeftNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Left.WithoutEnclosingParentheses;
 
-        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.RemoveParentheses();
+        protected override SyntaxNode GetRightNode(BinaryExpressionSyntax binaryExpression) => binaryExpression.Right.WithoutEnclosingParentheses;
 
         protected override SyntaxNode GetNullCheckVariable(SyntaxNode node) => GetNullCheckVariable(node, true);
 
@@ -56,7 +56,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
                 if (IsAffirmativePatternMatch(isPatternExpression))
                 {
-                    return isPatternExpression.Expression.RemoveParentheses();
+                    return isPatternExpression.Expression.WithoutEnclosingParentheses;
                 }
             }
             return null;
@@ -78,7 +78,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)innerExpression.RemoveParentheses();
                 if (IsNegativePatternMatch(isPatternExpression))
                 {
-                    return isPatternExpression.Expression.RemoveParentheses();
+                    return isPatternExpression.Expression.WithoutEnclosingParentheses;
                 }
             }
             return null;

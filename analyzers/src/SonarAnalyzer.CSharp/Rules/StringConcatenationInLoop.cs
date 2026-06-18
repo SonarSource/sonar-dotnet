@@ -40,5 +40,5 @@ public sealed class StringConcatenationInLoop : StringConcatenationInLoopBase<Sy
     protected override SyntaxNode LeftMostExpression(SyntaxNode expression) =>
         expression is ElementAccessExpressionSyntax
             ? null
-            : ((ExpressionSyntax)expression).LeftMostInMemberAccess();
+            : ((ExpressionSyntax)expression).LeftMostInMemberAccess;
 }

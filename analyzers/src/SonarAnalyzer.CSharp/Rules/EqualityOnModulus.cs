@@ -54,7 +54,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static int? CheckExpression(SyntaxNode node, ExpressionSyntax expression, SemanticModel model) =>
             ExpressionNumericConverter.ConstantIntValue(node) is { } constantValue
             && constantValue != 0
-            && expression.RemoveParentheses() is BinaryExpressionSyntax binary
+            && expression.WithoutEnclosingParentheses is BinaryExpressionSyntax binary
             && binary.IsKind(SyntaxKind.ModuloExpression)
             && !ExpressionIsAlwaysPositive(binary, model)
                 ? constantValue

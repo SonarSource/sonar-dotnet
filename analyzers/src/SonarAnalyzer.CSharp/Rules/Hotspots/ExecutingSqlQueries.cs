@@ -37,8 +37,8 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
         ObjectCreationFactory.Create(context.Node).ArgumentList.Get(index);
 
     protected override ExpressionSyntax GetSetValue(PropertyAccessContext context) =>
-        context.Node is MemberAccessExpressionSyntax setter && setter.IsLeftSideOfAssignment()
-            ? ((AssignmentExpressionSyntax)setter.GetSelfOrTopParenthesizedExpression().Parent).Right.RemoveParentheses()
+        context.Node is MemberAccessExpressionSyntax { IsLeftSideOfAssignment: true, SelfOrTopParenthesizedExpression.Parent: AssignmentExpressionSyntax assignment }
+            ? assignment.Right.WithoutEnclosingParentheses
             : null;
 
     protected override bool IsTracked(ExpressionSyntax expression, SyntaxBaseContext context) =>

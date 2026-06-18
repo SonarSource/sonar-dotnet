@@ -124,7 +124,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool TryGetConstantValue(ExpressionSyntax expression, out int value)
         {
             value = 0;
-            return expression.RemoveParentheses() is LiteralExpressionSyntax literalExpression
+            return expression.WithoutEnclosingParentheses is LiteralExpressionSyntax literalExpression
                 && int.TryParse(literalExpression.Token.ValueText, out value);
         }
 

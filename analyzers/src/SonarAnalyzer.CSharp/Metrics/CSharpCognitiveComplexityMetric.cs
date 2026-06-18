@@ -68,14 +68,12 @@ public static class CSharpCognitiveComplexityMetric
                 if ((nodeKind == SyntaxKindEx.AndPattern || nodeKind == SyntaxKindEx.OrPattern)
                     && !State.LogicalOperationsToIgnore.Contains(binaryPatternNode))
                 {
-                    var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
-                    if (!left.IsKind(nodeKind))
+                    if (!binaryPatternNode.Left.SyntaxNode.RemoveParentheses().IsKind(nodeKind))
                     {
                         State.IncreaseComplexityByOne(binaryPatternNode.OperatorToken);
                     }
 
-                    var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
-                    if (right.IsKind(nodeKind))
+                    if (binaryPatternNode.Right.SyntaxNode.RemoveParentheses() is { } right && right.IsKind(nodeKind))
                     {
                         State.LogicalOperationsToIgnore.Add(right);
                     }
@@ -194,14 +192,12 @@ public static class CSharpCognitiveComplexityMetric
             if ((nodeKind == SyntaxKind.LogicalAndExpression || nodeKind == SyntaxKind.LogicalOrExpression)
                 && !State.LogicalOperationsToIgnore.Contains(node))
             {
-                var left = node.Left.RemoveParentheses();
-                if (!left.IsKind(nodeKind))
+                if (!node.Left.WithoutEnclosingParentheses.IsKind(nodeKind))
                 {
                     State.IncreaseComplexityByOne(node.OperatorToken);
                 }
 
-                var right = node.Right.RemoveParentheses();
-                if (right.IsKind(nodeKind))
+                if (node.Right.WithoutEnclosingParentheses is { } right && right.IsKind(nodeKind))
                 {
                     State.LogicalOperationsToIgnore.Add(right);
                 }

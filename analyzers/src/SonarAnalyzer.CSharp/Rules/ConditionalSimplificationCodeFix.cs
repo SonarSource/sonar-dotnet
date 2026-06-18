@@ -59,9 +59,9 @@ namespace SonarAnalyzer.CSharp.Rules
             switch (oldNode)
             {
                 case ConditionalExpressionSyntax conditional:
-                    var condition = conditional.Condition.RemoveParentheses();
-                    var whenTrue = conditional.WhenTrue.RemoveParentheses();
-                    var whenFalse = conditional.WhenFalse.RemoveParentheses();
+                    var condition = conditional.Condition.WithoutEnclosingParentheses;
+                    var whenTrue = conditional.WhenTrue.WithoutEnclosingParentheses;
+                    var whenFalse = conditional.WhenFalse.WithoutEnclosingParentheses;
                     condition.TryGetExpressionComparedToNull(out compared, out _);
                     return SimplifyCoalesceExpression(new ComparedContext(diagnostic, semanticModel, compared), whenTrue, whenFalse);
 
@@ -69,11 +69,11 @@ namespace SonarAnalyzer.CSharp.Rules
                     var ifPart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Statement);
                     var elsePart = ConditionalSimplification.ExtractSingleStatement(ifStatement.Else?.Statement);
                     ifStatement.Condition.TryGetExpressionComparedToNull(out compared, out var _);
-                    return SimplifyIfStatement(new ComparedContext(diagnostic, semanticModel, compared), ifPart, elsePart, ifStatement.Condition.RemoveParentheses());
+                    return SimplifyIfStatement(new ComparedContext(diagnostic, semanticModel, compared), ifPart, elsePart, ifStatement.Condition.WithoutEnclosingParentheses);
 
                 case AssignmentExpressionSyntax assignment:
                     var context = new ComparedContext(diagnostic, semanticModel, null);
-                    var right = assignment.Right.RemoveParentheses();
+                    var right = assignment.Right.WithoutEnclosingParentheses;
                     if (right is BinaryExpressionSyntax binaryExpression && binaryExpression.Kind() == SyntaxKind.CoalesceExpression)
                     {
                         return CoalesceAssignmentExpression(context, assignment.Left, binaryExpression.Right);
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         {
                             return CoalesceAssignmentExpression(context,
                                                                 ((AssignmentExpressionSyntax)conditional.GetFirstNonParenthesizedParent()).Left,
-                                                                (comparedIsNullInTrue ? conditional.WhenTrue : conditional.WhenFalse).RemoveParentheses());
+                                                                (comparedIsNullInTrue ? conditional.WhenTrue : conditional.WhenFalse).WithoutEnclosingParentheses);
                         }
                     }
                     break;
@@ -117,8 +117,8 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             if (statement1 is ReturnStatementSyntax return1 && statement2 is ReturnStatementSyntax return2)
             {
-                var retExpr1 = return1.Expression.RemoveParentheses();
-                var retExpr2 = return2.Expression.RemoveParentheses();
+                var retExpr1 = return1.Expression.WithoutEnclosingParentheses;
+                var retExpr2 = return2.Expression.WithoutEnclosingParentheses;
                 var createdExpression = context.SimplifiedOperator switch
                 {
                     "?:" => ConditionalExpression(condition, retExpr1, retExpr2),
@@ -134,7 +134,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static ExpressionSyntax SimplifyIfExpression(ComparedContext context, ExpressionStatementSyntax statement1, ExpressionStatementSyntax statement2, ExpressionSyntax condition)
         {
             bool isCoalescing;
-            var expression1 = statement1.Expression.RemoveParentheses();
+            var expression1 = statement1.Expression.WithoutEnclosingParentheses;
             switch (context.SimplifiedOperator)
             {
                 case "?:":
@@ -152,7 +152,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 default:
                     throw new System.InvalidOperationException("Unexpected simplifiedOperator: " + context.SimplifiedOperator);
             }
-            var expression2 = statement2.Expression.RemoveParentheses();
+            var expression2 = statement2.Expression.WithoutEnclosingParentheses;
             return SimplifyAssignmentExpression(context, expression1, expression2, condition, isCoalescing)
                 ?? SimplifyInvocationExpression(context, expression1, expression2, condition, isCoalescing);
         }
@@ -225,8 +225,8 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 var arg1 = methodCall1.ArgumentList.Arguments[i];
                 var arg2 = methodCall2.ArgumentList.Arguments[i];
-                var expr1 = arg1.Expression.RemoveParentheses();
-                var expr2 = arg2.Expression.RemoveParentheses();
+                var expr1 = arg1.Expression.WithoutEnclosingParentheses;
+                var expr2 = arg2.Expression.WithoutEnclosingParentheses;
                 if (CSharpEquivalenceChecker.AreEquivalent(expr1, expr2))
                 {
                     newArgumentList = newArgumentList.AddArguments(arg1.WithExpression(expr1));

@@ -54,12 +54,12 @@ namespace SonarAnalyzer.CSharp.Rules
         private bool IsAlwaysFalseCondition(ExpressionSyntax condition) =>
             condition.IsKind(SyntaxKind.FalseLiteralExpression)
             || (IsLogicalNot(condition, out var logicalNode)
-                && IsAlwaysTrueCondition(logicalNode.Operand.RemoveParentheses()));
+                && IsAlwaysTrueCondition(logicalNode.Operand.WithoutEnclosingParentheses));
 
         private bool IsAlwaysTrueCondition(ExpressionSyntax condition) =>
             condition.IsKind(SyntaxKind.TrueLiteralExpression)
             || (IsLogicalNot(condition, out var logicalNode)
-                && IsAlwaysFalseCondition(logicalNode.Operand.RemoveParentheses()));
+                && IsAlwaysFalseCondition(logicalNode.Operand.WithoutEnclosingParentheses));
 
         private static bool IsConditionFalseAtInitialization(ForStatementSyntax forNode)
         {
@@ -99,7 +99,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool IsLogicalNot(ExpressionSyntax expression, out PrefixUnaryExpressionSyntax logicalNot)
         {
-            var prefixUnaryExpression = expression.RemoveParentheses() as PrefixUnaryExpressionSyntax;
+            var prefixUnaryExpression = expression.WithoutEnclosingParentheses as PrefixUnaryExpressionSyntax;
             logicalNot = prefixUnaryExpression;
             return prefixUnaryExpression is not null && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken);
         }

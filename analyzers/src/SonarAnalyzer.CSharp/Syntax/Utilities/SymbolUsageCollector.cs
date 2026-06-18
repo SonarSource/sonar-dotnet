@@ -414,7 +414,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         identifier.Parent switch
         {
             // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
-            MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier => memberAccess.GetSelfOrTopParenthesizedExpression(),
+            MemberAccessExpressionSyntax memberAccess when memberAccess.Name == identifier => memberAccess.SelfOrTopParenthesizedExpression,
             // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
             MemberBindingExpressionSyntax memberBinding when memberBinding.Name == identifier => memberBinding.Parent.GetSelfOrTopParenthesizedExpression(),
             // identifier or ((identifier))

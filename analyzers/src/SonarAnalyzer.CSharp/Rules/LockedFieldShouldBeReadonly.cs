@@ -34,7 +34,7 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
 
     private static void CheckLockStatement(SonarSyntaxNodeReportingContext context)
     {
-        var expression = ((LockStatementSyntax)context.Node).Expression?.RemoveParentheses();
+        var expression = ((LockStatementSyntax)context.Node).Expression?.WithoutEnclosingParentheses;
         if (IsCreation(expression))
         {
             context.ReportIssue(LockedFieldRule, expression, "a new instance because is a no-op");

@@ -145,7 +145,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             return null;
         }
 
-        return routeNode.ArgumentList.Arguments[0].Expression.RemoveParentheses() switch
+        return routeNode.ArgumentList.Arguments[0].Expression.WithoutEnclosingParentheses switch
         {
             var expression when expression.ToString() is var route && route.IndexOf(routeParam, StringComparison.InvariantCulture) is >= 0 and var index =>
                 CreateLocationFromRoute(expression.GetLocation(), index, routeParam.Length),

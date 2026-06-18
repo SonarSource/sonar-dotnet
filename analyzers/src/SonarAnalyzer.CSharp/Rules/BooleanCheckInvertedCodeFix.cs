@@ -45,7 +45,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 Title,
                 c =>
                 {
-                    var expression = syntaxNode.Operand.RemoveParentheses();
+                    var expression = syntaxNode.Operand.WithoutEnclosingParentheses;
                     var newBinary = ChangeOperator((BinaryExpressionSyntax)expression);
 
                     if (syntaxNode.Parent is ExpressionSyntax &&

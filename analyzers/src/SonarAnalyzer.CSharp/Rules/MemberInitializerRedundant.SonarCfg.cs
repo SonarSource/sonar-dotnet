@@ -48,7 +48,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         case SyntaxKind.SimpleAssignmentExpression:
                             {
                                 var assignment = (AssignmentExpressionSyntax)instruction;
-                                if (redundancyChecker.IsMatchingMember(assignment.Left.RemoveParentheses()))
+                                if (redundancyChecker.IsMatchingMember(assignment.Left.WithoutEnclosingParentheses))
                                 {
                                     return true;
                                 }
@@ -171,7 +171,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     isRead = false;
 
-                    var parenthesized = expression.GetSelfOrTopParenthesizedExpression();
+                    var parenthesized = expression.SelfOrTopParenthesizedExpression;
 
                     if (!IsMatchingMember(expression))
                     {

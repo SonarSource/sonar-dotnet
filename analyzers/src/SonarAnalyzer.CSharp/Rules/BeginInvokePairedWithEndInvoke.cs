@@ -84,8 +84,8 @@ public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInv
 
     private static SyntaxNode LookupIdentifierInitializer(IdentifierNameSyntax identifier, SemanticModel semantic) =>
         semantic.GetSymbolInfo(identifier).Symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is VariableDeclaratorSyntax variableDeclarator
-        && variableDeclarator.Initializer is EqualsValueClauseSyntax equalsValueClause
-            ? equalsValueClause.Value.RemoveParentheses()
+        && variableDeclarator.Initializer is EqualsValueClauseSyntax { Value.WithoutEnclosingParentheses: { } value }
+            ? value
             : null;
 
     private sealed class InvocationWalker : SafeCSharpSyntaxWalker

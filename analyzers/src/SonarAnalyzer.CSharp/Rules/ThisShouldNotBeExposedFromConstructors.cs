@@ -64,7 +64,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                            var right = assignment.Right.RemoveParentheses();
+                            var right = assignment.Right.WithoutEnclosingParentheses;
 
                             if (IsThisExpression(right) &&
                                 !IsClassMember(assignment.Left) &&
@@ -83,7 +83,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool IsThisExpression(ExpressionSyntax expression) =>
             expression != null &&
-            expression.RemoveParentheses().IsKind(SyntaxKind.ThisExpression);
+            expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.ThisExpression);
 
         private static bool IsInstanceConstructor(SyntaxNode node)
         {

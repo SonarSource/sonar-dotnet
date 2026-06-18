@@ -231,7 +231,7 @@ public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
         {
             // If the field is not static and is not from the current instance we
             // consider the reference as read.
-            if (!fieldReference.Symbol.IsStatic && !(fieldReference.Node as ExpressionSyntax).RemoveParentheses().IsOnThis())
+            if (fieldReference is { Symbol.IsStatic: false, Node: ExpressionSyntax { WithoutEnclosingParentheses.IsOnThis: false } })
             {
                 return false;
             }
@@ -255,7 +255,7 @@ public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
             {
                 // this.identifier or a.identifier or ((a)).identifier, but not identifier.other
                 MemberAccessExpressionSyntax memberAccess when memberAccess.Name == node =>
-                    new NodeAndSymbol(memberAccess.GetSelfOrTopParenthesizedExpression(), model.GetSymbolInfo(memberAccess).Symbol),
+                    new NodeAndSymbol(memberAccess.SelfOrTopParenthesizedExpression, model.GetSymbolInfo(memberAccess).Symbol),
                 // this?.identifier or a?.identifier or ((a))?.identifier, but not identifier?.other
                 MemberBindingExpressionSyntax memberBinding when memberBinding.Name == node =>
                     new NodeAndSymbol(memberBinding.Parent.GetSelfOrTopParenthesizedExpression(), model.GetSymbolInfo(memberBinding).Symbol),

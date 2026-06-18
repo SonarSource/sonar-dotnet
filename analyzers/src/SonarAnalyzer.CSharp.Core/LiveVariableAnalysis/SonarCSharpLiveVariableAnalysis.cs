@@ -151,7 +151,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         private void ProcessSimpleAssignment(AssignmentExpressionSyntax assignment)
         {
-            var left = assignment.Left.RemoveParentheses();
+            var left = assignment.Left.WithoutEnclosingParentheses;
             if (left.IsKind(SyntaxKind.IdentifierName)
                 && model.GetSymbolInfo(left).Symbol is { } symbol
                 && owner.IsLocal(symbol))
@@ -164,7 +164,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         private void ProcessIdentifier(IdentifierNameSyntax identifier)
         {
-            if (!identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(model)
+            if (!identifier.SelfOrTopParenthesizedExpression.IsInNameOfArgument(model)
                 && model.GetSymbolInfo(identifier).Symbol is { } symbol)
             {
                 if (owner.IsLocal(symbol))
@@ -189,7 +189,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
 
         private void ProcessGenericName(GenericNameSyntax genericName)
         {
-            if (!genericName.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(model)
+            if (!genericName.SelfOrTopParenthesizedExpression.IsInNameOfArgument(model)
                 && model.GetSymbolInfo(genericName).Symbol is IMethodSymbol { MethodKind: MethodKindEx.LocalFunction } method)
             {
                 ProcessLocalFunction(method);

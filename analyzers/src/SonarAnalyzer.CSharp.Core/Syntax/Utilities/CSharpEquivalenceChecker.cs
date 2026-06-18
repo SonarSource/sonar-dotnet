@@ -37,7 +37,7 @@ public static class CSharpEquivalenceChecker
     {
         if (node is PrefixUnaryExpressionSyntax unary && unary.IsKind(SyntaxKind.LogicalNotExpression))
         {
-            return NullCheckState(unary.Operand.RemoveParentheses(), !isPositive);
+            return NullCheckState(unary.Operand.WithoutEnclosingParentheses, !isPositive);
         }
         else if (node is BinaryExpressionSyntax binary && binary.Kind() is SyntaxKind.EqualsExpression or SyntaxKind.NotEqualsExpression)
         {

@@ -23,7 +23,7 @@ public static class ArgumentListSyntaxExtensions
     {
         public ExpressionSyntax Get(int index) =>
             argumentList != null && argumentList.Arguments.Count > index
-                ? argumentList.Arguments[index].Expression.RemoveParentheses()
+                ? argumentList.Arguments[index].Expression.WithoutEnclosingParentheses
                 : null;
 
         /// <summary>

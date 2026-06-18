@@ -121,7 +121,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             && !exclusions.Any(x => x(methodSymbol)))
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.
-            var invokedType = invocationExpression.Expression.GetLeftOfDot() is { } expression && model.GetTypeInfo(expression) is { Type: { } type }
+            var invokedType = invocationExpression.Expression.LeftOfDot is { } expression && model.GetTypeInfo(expression) is { Type: { } type }
                 ? type // A dotted expression: Lookup the type, left of the dot (this may be different from methodSymbol.ContainingType)
                 : containingSymbol.ContainingType; // If not dotted, than the scope is the current type. Local function support is missing here.
             var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);

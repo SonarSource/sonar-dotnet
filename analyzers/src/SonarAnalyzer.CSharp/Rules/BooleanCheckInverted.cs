@@ -62,8 +62,7 @@ public sealed class BooleanCheckInverted : BooleanCheckInvertedBase<BinaryExpres
             || IsFloatingPoint(expression.Right, model));
 
     protected override SyntaxNode LogicalNotNode(BinaryExpressionSyntax expression) =>
-        expression.GetSelfOrTopParenthesizedExpression().Parent is PrefixUnaryExpressionSyntax prefixUnaryExpression
-        && prefixUnaryExpression.OperatorToken.IsKind(SyntaxKind.ExclamationToken)
+        expression.SelfOrTopParenthesizedExpression.Parent is PrefixUnaryExpressionSyntax { OperatorToken.RawKind: (int)SyntaxKind.ExclamationToken } prefixUnaryExpression
             ? prefixUnaryExpression
             : null;
 
@@ -71,5 +70,5 @@ public sealed class BooleanCheckInverted : BooleanCheckInvertedBase<BinaryExpres
         OppositeTokens[expression.OperatorToken.Kind()];
 
     private static bool IsConditionalAccessExpression(ExpressionSyntax expression) =>
-        expression.RemoveParentheses().IsKind(SyntaxKind.ConditionalAccessExpression);
+        expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.ConditionalAccessExpression);
 }

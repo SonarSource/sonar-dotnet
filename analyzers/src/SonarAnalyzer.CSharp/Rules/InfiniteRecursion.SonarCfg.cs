@@ -150,7 +150,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 private bool MatchesAccessor(SyntaxNode node)
                 {
-                    var propertyAccess = ((ExpressionSyntax)node).GetSelfOrTopParenthesizedExpression();
+                    var propertyAccess = ((ExpressionSyntax)node).SelfOrTopParenthesizedExpression;
                     var isNodeASet = propertyAccess.Parent is AssignmentExpressionSyntax assignment && assignment.Left == propertyAccess;
                     return isNodeASet == isSet;
                 }

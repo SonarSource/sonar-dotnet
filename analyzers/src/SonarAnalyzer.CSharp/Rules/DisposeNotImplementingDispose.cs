@@ -92,7 +92,7 @@ public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
                                                                SemanticModel model,
                                                                HashSet<IMethodSymbol> disposeMethodsCalledFromDispose)
     {
-        if (!invocationExpression.IsOnThis())
+        if (!invocationExpression.IsOnThis)
         {
             return;
         }

@@ -71,7 +71,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var forLoop = (ForStatementSyntax)context.Node;
 
             if (forLoop.Condition != null
-                && CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.RemoveParentheses(), SyntaxConstants.TrueLiteralExpression))
+                && CSharpEquivalenceChecker.AreEquivalent(forLoop.Condition.WithoutEnclosingParentheses, SyntaxConstants.TrueLiteralExpression))
             {
                 context.ReportIssue(Rule, forLoop.Condition);
             }
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private void CheckLogicalNot(SonarSyntaxNodeReportingContext context)
         {
             var logicalNot = (PrefixUnaryExpressionSyntax)context.Node;
-            var logicalNotOperand = logicalNot.Operand.RemoveParentheses();
+            var logicalNotOperand = logicalNot.Operand.WithoutEnclosingParentheses;
             if (IsTrue(logicalNotOperand) || IsFalse(logicalNotOperand))
             {
                 context.ReportIssue(Rule, logicalNot.Operand);

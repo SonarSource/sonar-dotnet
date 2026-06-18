@@ -224,7 +224,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     (equalsValueClause.Parent is VariableDeclaratorSyntax variableDeclarator && TokenContainsNamespace(variableDeclarator.Identifier))
                     || (equalsValueClause.Parent is ParameterSyntax parameter && TokenContainsNamespace(parameter.Identifier)),
                 AssignmentExpressionSyntax assignmentExpression =>
-                    assignmentExpression.Left.RemoveParentheses() is IdentifierNameSyntax identifierName && TokenContainsNamespace(identifierName.Identifier),
+                    assignmentExpression.Left.WithoutEnclosingParentheses is IdentifierNameSyntax { Identifier: var identifier } && TokenContainsNamespace(identifier),
                 ArgumentSyntax { Parent: ArgumentListSyntax { Parent: { } invocationOrCreation } } argument =>
                     CSharpFacade.Instance.MethodParameterLookup(invocationOrCreation, model).TryGetSymbol(argument, out var symbol)
                         && symbol switch

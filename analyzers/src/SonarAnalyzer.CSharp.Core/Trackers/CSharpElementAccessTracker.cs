@@ -44,7 +44,7 @@ public class CSharpElementAccessTracker : ElementAccessTracker<SyntaxKind>
     }
 
     public override Condition MatchSetter() =>
-        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => context.Node is ExpressionSyntax { IsLeftSideOfAssignment: true };
 
     public override Condition MatchProperty(MemberDescriptor member) =>
         context => context.Node switch

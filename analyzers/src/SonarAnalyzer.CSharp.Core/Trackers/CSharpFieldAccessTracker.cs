@@ -31,10 +31,10 @@ public class CSharpFieldAccessTracker : FieldAccessTracker<SyntaxKind>
         };
 
     public override Condition WhenRead() =>
-        context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => context.Node is not ExpressionSyntax { IsLeftSideOfAssignment: true };
 
     public override Condition MatchSet() =>
-        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => context.Node is ExpressionSyntax { IsLeftSideOfAssignment: true };
 
     public override Condition AssignedValueIsConstant() =>
         context =>

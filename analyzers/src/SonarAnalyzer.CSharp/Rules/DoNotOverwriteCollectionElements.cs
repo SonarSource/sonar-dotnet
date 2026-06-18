@@ -51,7 +51,7 @@ public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionE
             case SyntaxKind.SimpleAssignmentExpression:
                 var assignment = (AssignmentExpressionSyntax)assignmentOrInvocation;
                 var elementAccess = assignment.Left as ElementAccessExpressionSyntax;
-                return GetIdentifier(elementAccess?.Expression.RemoveParentheses())
+                return GetIdentifier(elementAccess?.Expression.WithoutEnclosingParentheses)
                     .RemoveParentheses();
 
             default:
@@ -60,7 +60,7 @@ public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionE
     }
 
     protected override SyntaxNode GetIndexOrKey(ExpressionStatementSyntax statement) =>
-        GetIndexOrKeyArgument(statement)?.Expression.RemoveParentheses();
+        GetIndexOrKeyArgument(statement)?.Expression.WithoutEnclosingParentheses;
 
     protected override bool IsIdentifierOrLiteral(SyntaxNode node) =>
         node.IsAnyKind(IdentifierOrLiteral);
@@ -102,7 +102,7 @@ public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionE
 
     private static SyntaxNode GetInvokedMethodContainer(InvocationExpressionSyntax invocation)
     {
-        var expression = invocation.Expression.RemoveParentheses();
+        var expression = invocation.Expression.WithoutEnclosingParentheses;
         switch (expression.Kind())
         {
             case SyntaxKind.SimpleMemberAccessExpression:

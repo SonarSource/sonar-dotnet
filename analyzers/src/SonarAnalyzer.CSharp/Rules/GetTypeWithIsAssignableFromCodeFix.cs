@@ -98,7 +98,7 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static BinaryExpressionSyntax NullCheck(BinaryExpressionSyntax binary) =>
-            SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, binary.Left.RemoveParentheses(), SyntaxConstants.NullLiteralExpression);
+            SyntaxFactory.BinaryExpression(SyntaxKind.NotEqualsExpression, binary.Left.WithoutEnclosingParentheses, SyntaxConstants.NullLiteralExpression);
 
         private static ExpressionSyntax RefactoredExpression(BinaryExpressionSyntax binary)
         {
@@ -141,10 +141,10 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static BinaryExpressionSyntax AsOperatorComparisonToNull(BinaryExpressionSyntax binary)
         {
-            var left = binary.Left.RemoveParentheses();
+            var left = binary.Left.WithoutEnclosingParentheses;
             return left.IsKind(SyntaxKind.AsExpression)
                 ? left as BinaryExpressionSyntax
-                : binary.Right.RemoveParentheses() as BinaryExpressionSyntax;
+                : binary.Right.WithoutEnclosingParentheses as BinaryExpressionSyntax;
         }
 
         private static bool TryGetTypeOfComparison(BinaryExpressionSyntax binary, out TypeOfExpressionSyntax typeofExpression, out ExpressionSyntax getTypeSide)

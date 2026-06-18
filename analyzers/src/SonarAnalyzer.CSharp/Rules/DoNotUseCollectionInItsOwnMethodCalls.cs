@@ -121,8 +121,8 @@ public sealed class DoNotUseCollectionInItsOwnMethodCalls : SonarDiagnosticAnaly
 
         public OperandsToCheck(ExpressionSyntax left, ExpressionSyntax right, string errorMessage)
         {
-            Left = left.RemoveParentheses();
-            Right = right.RemoveParentheses();
+            Left = left.WithoutEnclosingParentheses;
+            Right = right.WithoutEnclosingParentheses;
             ErrorMessage = errorMessage;
         }
     }

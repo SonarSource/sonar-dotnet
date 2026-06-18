@@ -79,5 +79,5 @@ public sealed class DelegateSubtraction : SonarDiagnosticAnalyzer
         && subtractMethod.ReceiverType.Is(TypeKind.Delegate);
 
     private static bool ExpressionIsSimple(ExpressionSyntax expression) =>
-        expression.RemoveParentheses() is IdentifierNameSyntax or MemberAccessExpressionSyntax;
+        expression.WithoutEnclosingParentheses is IdentifierNameSyntax or MemberAccessExpressionSyntax;
 }

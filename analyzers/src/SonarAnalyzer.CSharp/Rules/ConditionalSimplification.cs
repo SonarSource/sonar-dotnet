@@ -81,8 +81,8 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
             && !assignment.Parent.IsKind(SyntaxKind.ObjectInitializerExpression)
             && context.Compilation.IsCoalesceAssignmentSupported())
         {
-            var left = ((BinaryExpressionSyntax)context.Node).Left.RemoveParentheses();
-            if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), left))
+            var left = ((BinaryExpressionSyntax)context.Node).Left.WithoutEnclosingParentheses;
+            if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.WithoutEnclosingParentheses, left))
             {
                 context.ReportIssue(Rule, assignment.GetLocation(), BuildCodeFixProperties(context), CoalesceAssignmentOp);
             }
@@ -119,9 +119,9 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
     private static void CheckConditionalExpression(SonarSyntaxNodeReportingContext context)
     {
         var conditional = (ConditionalExpressionSyntax)context.Node;
-        var condition = conditional.Condition.RemoveParentheses();
-        var whenTrue = conditional.WhenTrue.RemoveParentheses();
-        var whenFalse = conditional.WhenFalse.RemoveParentheses();
+        var condition = conditional.Condition.WithoutEnclosingParentheses;
+        var whenTrue = conditional.WhenTrue.WithoutEnclosingParentheses;
+        var whenFalse = conditional.WhenFalse.WithoutEnclosingParentheses;
 
         if (CSharpEquivalenceChecker.AreEquivalent(whenTrue, whenFalse))
         {
@@ -192,8 +192,8 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
 
         if (statement1 is ReturnStatementSyntax return1 && statement2 is ReturnStatementSyntax return2)
         {
-            var retExpr1 = return1.Expression.RemoveParentheses();
-            var retExpr2 = return2.Expression.RemoveParentheses();
+            var retExpr1 = return1.Expression.WithoutEnclosingParentheses;
+            var retExpr2 = return2.Expression.WithoutEnclosingParentheses;
 
             if (IsConditionalStructure(retExpr1)
                 || IsConditionalStructure(retExpr2)
@@ -214,7 +214,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
             return false;
         }
 
-        var expression1 = ((ExpressionStatementSyntax)statement1).Expression.RemoveParentheses();
+        var expression1 = ((ExpressionStatementSyntax)statement1).Expression.WithoutEnclosingParentheses;
         if (statement2 is null)
         {
             simplifiedOperator = context.Compilation.IsCoalesceAssignmentSupported() ? CoalesceAssignmentOp : CoalesceOp;
@@ -229,7 +229,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
             return false;
         }
 
-        var expression2 = expressionStatement2.Expression.RemoveParentheses();
+        var expression2 = expressionStatement2.Expression.WithoutEnclosingParentheses;
         if (AreCandidateAssignments(expression1, expression2, comparedToNull, model, comparedIsNullInTrue, out simplifiedOperator))
         {
             return true;
@@ -294,8 +294,8 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
         var numberOfComparisonsToCondition = 0;
         for (var i = 0; i < firstInvocation.ArgumentList.Arguments.Count; i++)
         {
-            var arg1 = firstInvocation.ArgumentList.Arguments[i].Expression.RemoveParentheses();
-            var arg2 = secondInvocation.ArgumentList.Arguments[i].Expression.RemoveParentheses();
+            var arg1 = firstInvocation.ArgumentList.Arguments[i].Expression.WithoutEnclosingParentheses;
+            var arg2 = secondInvocation.ArgumentList.Arguments[i].Expression.WithoutEnclosingParentheses;
             if (!CSharpEquivalenceChecker.AreEquivalent(arg1, arg2))
             {
                 numberOfDifferences++;

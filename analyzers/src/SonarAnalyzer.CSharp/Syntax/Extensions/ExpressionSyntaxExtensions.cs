@@ -35,7 +35,7 @@ internal static class ExpressionSyntaxExtensions
 
     private static void FillPatternMap(Dictionary<ExpressionSyntax, SyntaxNode> map, ExpressionSyntax expression, SyntaxNode pattern)
     {
-        expression = expression.RemoveParentheses();
+        expression = expression.WithoutEnclosingParentheses;
         pattern = pattern.RemoveParentheses();
 
         if (TupleExpressionSyntaxWrapper.IsInstance(expression)

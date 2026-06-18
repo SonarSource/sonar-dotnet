@@ -36,10 +36,10 @@ public class CSharpPropertyAccessTracker : PropertyAccessTracker<SyntaxKind>
             : null;
 
     public override Condition MatchGetter() =>
-        context => !((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => context.Node is not ExpressionSyntax { IsLeftSideOfAssignment: true };
 
     public override Condition MatchSetter() =>
-        context => ((ExpressionSyntax)context.Node).IsLeftSideOfAssignment();
+        context => context.Node is ExpressionSyntax { IsLeftSideOfAssignment: true };
 
     public override Condition AssignedValueIsConstant() =>
         context => AssignedValue(context) != null;

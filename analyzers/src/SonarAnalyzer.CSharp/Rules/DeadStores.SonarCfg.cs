@@ -91,7 +91,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var identifier = (IdentifierNameSyntax)instruction;
                     var symbol = Model.GetSymbolInfo(identifier).Symbol;
                     if (IsSymbolRelevant(symbol)
-                        && !identifier.GetSelfOrTopParenthesizedExpression().IsInNameOfArgument(Model)
+                        && !identifier.SelfOrTopParenthesizedExpression.IsInNameOfArgument(Model)
                         && IsLocal(symbol))
                     {
                         if (SonarCSharpLiveVariableAnalysis.IsOutArgument(identifier))
@@ -108,7 +108,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 private void ProcessOpAssignment(SyntaxNode instruction)
                 {
                     var assignment = (AssignmentExpressionSyntax)instruction;
-                    var left = assignment.Left.RemoveParentheses();
+                    var left = assignment.Left.WithoutEnclosingParentheses;
                     if (IdentifierRelevantSymbol(left) is { } symbol)
                     {
                         ReportOnAssignment(assignment, left, symbol);
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 private void ProcessSimpleAssignment(SyntaxNode instruction)
                 {
                     var assignment = (AssignmentExpressionSyntax)instruction;
-                    var left = assignment.Left.RemoveParentheses();
+                    var left = assignment.Left.WithoutEnclosingParentheses;
                     if (IdentifierRelevantSymbol(left) is { } symbol)
                     {
                         ReportOnAssignment(assignment, left, symbol);
@@ -155,8 +155,8 @@ namespace SonarAnalyzer.CSharp.Rules
                 private void ProcessPrefixExpression(SyntaxNode instruction)
                 {
                     var prefixExpression = (PrefixUnaryExpressionSyntax)instruction;
-                    var parent = prefixExpression.GetSelfOrTopParenthesizedExpression();
-                    var operand = prefixExpression.Operand.RemoveParentheses();
+                    var parent = prefixExpression.SelfOrTopParenthesizedExpression;
+                    var operand = prefixExpression.Operand.WithoutEnclosingParentheses;
                     if (parent.Parent is ExpressionStatementSyntax
                         && IdentifierRelevantSymbol(operand) is { } symbol
                         && IsLocal(symbol)
@@ -170,7 +170,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 private void ProcessPostfixExpression(SyntaxNode instruction)
                 {
                     var postfixExpression = (PostfixUnaryExpressionSyntax)instruction;
-                    var operand = postfixExpression.Operand.RemoveParentheses();
+                    var operand = postfixExpression.Operand.WithoutEnclosingParentheses;
                     if (IdentifierRelevantSymbol(operand) is { } symbol
                         && IsLocal(symbol)
                         && !liveOut.Contains(symbol)

@@ -37,7 +37,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             var parent = syntaxNode.Parent;
-            syntaxNode = syntaxNode.RemoveParentheses();
+            syntaxNode = syntaxNode.WithoutEnclosingParentheses;
 
             if (syntaxNode is BinaryExpressionSyntax binary)
             {
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static void RegisterBinaryExpressionRemoval(SonarCodeFixContext context, SyntaxNode root, LiteralExpressionSyntax literal, BinaryExpressionSyntax binaryParent)
         {
-            var otherNode = binaryParent.Left.RemoveParentheses().Equals(literal)
+            var otherNode = binaryParent.Left.WithoutEnclosingParentheses.Equals(literal)
                 ? binaryParent.Right
                 : binaryParent.Left;
 
@@ -285,7 +285,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static Document RewriteConditional(Document document, SyntaxNode root, SyntaxNode syntaxNode, ConditionalExpressionSyntax conditional)
         {
-            var whenTrue = conditional.WhenTrue.RemoveParentheses();
+            var whenTrue = conditional.WhenTrue.WithoutEnclosingParentheses;
             if (whenTrue.Equals(syntaxNode) && syntaxNode.IsTrue())
             {
                 var newRoot = ReplaceExpressionWithBinary(
@@ -310,7 +310,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return document.WithSyntaxRoot(newRoot);
             }
 
-            var whenFalse = conditional.WhenFalse.RemoveParentheses();
+            var whenFalse = conditional.WhenFalse.WithoutEnclosingParentheses;
 
             if (whenFalse.Equals(syntaxNode) && syntaxNode.IsTrue())
             {

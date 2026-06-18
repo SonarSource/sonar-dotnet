@@ -165,7 +165,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
             return null;
         }
 
-        var strippedExpression = expression.RemoveParentheses();
+        var strippedExpression = expression.WithoutEnclosingParentheses;
 
         // Check for direct field access: "foo"
         if (strippedExpression is IdentifierNameSyntax
@@ -190,9 +190,9 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
     private static bool IsLeftSideOfAssignment(ExpressionSyntax expression)
     {
-        var strippedExpression = expression.RemoveParentheses();
-        return strippedExpression.IsLeftSideOfAssignment()
-            || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment()); // for this.field
+        var strippedExpression = expression.WithoutEnclosingParentheses;
+        return strippedExpression.IsLeftSideOfAssignment
+            || (strippedExpression.Parent is ExpressionSyntax parent && parent.IsLeftSideOfAssignment); // for this.field
     }
 
     private static bool HasExplicitAccessor(ISymbol symbol) =>

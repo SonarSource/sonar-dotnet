@@ -77,7 +77,7 @@ public sealed class CertificateValidationCheck : CertificateValidationCheckBase<
             .ToArray();
 
     protected override bool IsTrueLiteral(ExpressionSyntax expression) =>
-        expression?.RemoveParentheses().Kind() == SyntaxKind.TrueLiteralExpression;
+        expression?.WithoutEnclosingParentheses.Kind() == SyntaxKind.TrueLiteralExpression;
 
     protected override ExpressionSyntax VariableInitializer(VariableDeclaratorSyntax variable) =>
         variable.Initializer?.Value;

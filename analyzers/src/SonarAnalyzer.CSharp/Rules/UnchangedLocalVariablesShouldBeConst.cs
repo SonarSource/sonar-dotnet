@@ -147,7 +147,7 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
 
     private static bool IsUsedAsLambdaExpression(SemanticModel model, IdentifierNameSyntax identifier)
     {
-        if (identifier.FirstAncestorOrSelf<LambdaExpressionSyntax>().GetSelfOrTopParenthesizedExpression() is { } lambda)
+        if (identifier.FirstAncestorOrSelf<LambdaExpressionSyntax>().SelfOrTopParenthesizedExpression is { } lambda)
         {
             if (lambda.Parent is ArgumentSyntax argument
                 && argument.FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } invocation)

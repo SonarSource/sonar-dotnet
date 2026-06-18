@@ -51,7 +51,7 @@ public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
             c =>
             {
                 var assignment = (AssignmentExpressionSyntax)c.Node;
-                var topParenthesizedExpression = assignment.GetSelfOrTopParenthesizedExpression();
+                var topParenthesizedExpression = assignment.SelfOrTopParenthesizedExpression;
                 if (IsNonCompliantSubExpression(assignment, topParenthesizedExpression) || IsDirectlyInStatementCondition(assignment, topParenthesizedExpression))
                 {
                     c.ReportIssue(Rule, assignment.OperatorToken, assignment.Left.ToString());
@@ -92,7 +92,7 @@ public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
     private static bool IsCompliantCoalesceExpression(ExpressionSyntax parentExpression, AssignmentExpressionSyntax assignment) =>
         assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
         && CoalesceExpressionParent(parentExpression) is { } coalesceExpression
-        && CSharpEquivalenceChecker.AreEquivalent(assignment.Left.RemoveParentheses(), coalesceExpression.Left.RemoveParentheses());
+        && CSharpEquivalenceChecker.AreEquivalent(assignment.Left.WithoutEnclosingParentheses, coalesceExpression.Left.WithoutEnclosingParentheses);
 
     private static BinaryExpressionSyntax CoalesceExpressionParent(ExpressionSyntax parent) =>
         parent.AncestorsAndSelf()
@@ -108,12 +108,12 @@ public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
             || IsDirectlyInStatementCondition<DoStatementSyntax>(x => x.Condition);
 
         bool IsDirectlyInStatementCondition<T>(Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode =>
-            topParenthesizedExpression.Parent.FirstAncestorOrSelf<T>() is { } statement && conditionSelector(statement).RemoveParentheses() == expression;
+            topParenthesizedExpression.Parent.FirstAncestorOrSelf<T>() is { } statement && conditionSelector(statement).WithoutEnclosingParentheses == expression;
     }
 
     private static bool IsInStatementCondition(ExpressionSyntax expression)
     {
-        return expression.GetSelfOrTopParenthesizedExpression() is var expressionOrParenthesizedParent
+        return expression.SelfOrTopParenthesizedExpression is var expressionOrParenthesizedParent
             && (IsInStatementCondition<IfStatementSyntax>(x => x.Condition)
                 || IsInStatementCondition<ForStatementSyntax>(x => x.Condition)
                 || IsInStatementCondition<WhileStatementSyntax>(x => x.Condition)

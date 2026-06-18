@@ -58,7 +58,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool HasIsNullReferenceExceptionFilter(CatchFilterClauseSyntax catchFilterClause,
             SemanticModel semanticModel, out Location location)
         {
-            var whenExpression = catchFilterClause?.FilterExpression.RemoveParentheses();
+            var whenExpression = catchFilterClause?.FilterExpression.WithoutEnclosingParentheses;
 
             var rightSideOfIsExpression = whenExpression != null && whenExpression.IsKind(SyntaxKind.IsExpression)
                 ? ((BinaryExpressionSyntax)whenExpression).Right

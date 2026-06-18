@@ -156,7 +156,7 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
         }
 
         // Handle "((expr.FieldName))"
-        node = node.GetSelfOrTopParenthesizedExpression();
+        node = node.SelfOrTopParenthesizedExpression;
 
         if (IsValueType(memberSymbol))
         {
@@ -164,11 +164,11 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
             var parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
             while (IsParentMemberAccess(parentMemberAccess, node))
             {
-                node = parentMemberAccess.GetSelfOrTopParenthesizedExpression();
+                node = parentMemberAccess.SelfOrTopParenthesizedExpression;
                 parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
             }
 
-            node = node.GetSelfOrTopParenthesizedExpression();
+            node = node.SelfOrTopParenthesizedExpression;
         }
         return node;
     }

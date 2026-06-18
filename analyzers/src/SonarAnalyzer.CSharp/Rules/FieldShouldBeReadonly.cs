@@ -266,7 +266,7 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
             private static ExpressionSyntax GetTopMemberAccessIfNested(ExpressionSyntax expression, bool isNestedMemberAccess = false)
             {
                 // If expression is (this.a.b).c, we need to return this.a
-                var noParens = expression.RemoveParentheses();
+                var noParens = expression.WithoutEnclosingParentheses;
 
                 if (noParens is NameSyntax)
                 {
@@ -278,7 +278,7 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                     return null;
                 }
 
-                if (memberAccess.Expression.RemoveParentheses().IsKind(SyntaxKind.ThisExpression))
+                if (memberAccess.Expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.ThisExpression))
                 {
                     return isNestedMemberAccess ? memberAccess : null;
                 }
@@ -299,7 +299,7 @@ public sealed class FieldShouldBeReadonly : SonarDiagnosticAnalyzer
                     return;
                 }
 
-                if (!expression.RemoveParentheses().IsOnThis())
+                if (!expression.WithoutEnclosingParentheses.IsOnThis)
                 {
                     readonlyFieldCollector.excludedFields.Add(fieldSymbol);
                     return;

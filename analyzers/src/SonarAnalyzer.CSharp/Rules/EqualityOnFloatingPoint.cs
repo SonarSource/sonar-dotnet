@@ -130,7 +130,7 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
             && constraintTypes.Any(x => x.DerivesOrImplements(KnownType.System_Numerics_IFloatingPointIeee754_TSelf)));
 
     private static BinaryExpressionSyntax TryGetBinaryExpression(ExpressionSyntax expression) =>
-        expression.RemoveParentheses() as BinaryExpressionSyntax;
+        expression.WithoutEnclosingParentheses as BinaryExpressionSyntax;
 
     private static bool IsIndirectInequality(SemanticModel model, BinaryExpressionSyntax binaryExpression, BinaryExpressionSyntax left, BinaryExpressionSyntax right) =>
         binaryExpression.IsKind(SyntaxKind.LogicalOrExpression)

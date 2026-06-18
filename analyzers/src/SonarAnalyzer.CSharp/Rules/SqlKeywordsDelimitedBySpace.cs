@@ -192,7 +192,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 }
                 // if this is a nested binary, we skip it so that we can raise when we visit it.
                 // Otherwise, FindConstantValue will merge it into one value.
-                else if (expression.RemoveParentheses() is not BinaryExpressionSyntax
+                else if (expression.WithoutEnclosingParentheses is not BinaryExpressionSyntax
                     && expression.FindConstantValue(context.Model) is string constantValue)
                 {
                     stringWrapper = new StringWrapper(expression, constantValue);
