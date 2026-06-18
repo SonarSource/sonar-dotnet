@@ -115,6 +115,7 @@ namespace Tests.Diagnostics
             var array = new byte[10];
             stream.Read(array, 0, "");                                                     // Compliant
             stream.Read(array, 0, 10);                                                     // Noncompliant
+            stream.@Read(array, 0, 10);                                                    // Noncompliant - verbatim escaped identifier matches via ValueText, not the raw source Text
             stream.ReadAsync(array, 0, (int)stream.Length);                                // Noncompliant {{Check the return value of the 'ReadAsync' call to see how many bytes were read.}}
             await stream.ReadAsync(array, 0, (int)stream.Length);                          // Noncompliant
             await stream.ReadAsync(array, 0, (int)stream.Length).ConfigureAwait(false);    // Noncompliant

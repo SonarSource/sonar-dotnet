@@ -39,7 +39,7 @@ public class InvocationExpressionSyntaxExtensionsTest
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as InvocationExpressionSyntax;
 
-        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
+        var (left, right) = node.Operands;
 
         left.Should().NotBeNull();
         left.ToString().Should().Be(expectedLeft);
@@ -62,7 +62,7 @@ public class InvocationExpressionSyntaxExtensionsTest
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.VisualBasic) as InvocationExpressionSyntax;
 
-        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
+        var (left, right) = node.Operands;
 
         left.Should().BeNull();
         right.Should().BeNull();
@@ -73,8 +73,8 @@ public class InvocationExpressionSyntaxExtensionsTest
         InvocationExpressionSyntaxExtensions.HasExactlyNArguments(null, 42).Should().BeFalse();
 
     [TestMethod]
-    public void GetMethodCallIdentifier_Null_VB() =>
-        InvocationExpressionSyntaxExtensions.GetMethodCallIdentifier(null).Should().BeNull();
+    public void MethodCallIdentifier_Null_VB() =>
+        ((InvocationExpressionSyntax)null).MethodCallIdentifier.Should().BeNull();
 
     [TestMethod]
     public void IsMemberAccessOnKnownType_NotMemberAccessExpression_ReturnsFalse()

@@ -72,7 +72,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<InvocationExpressionSyntax>(invocation).HasExactlyNArguments(count);
 
     public override SyntaxToken? InvocationIdentifier(SyntaxNode invocation) =>
-        invocation is null ? null : Cast<InvocationExpressionSyntax>(invocation).GetMethodCallIdentifier();
+        invocation is null ? null : Cast<InvocationExpressionSyntax>(invocation).MethodCallIdentifier;
 
     public override bool IsAnyKind(SyntaxNode node, ISet<SyntaxKind> syntaxKinds) => node.IsAnyKind(syntaxKinds);
 
@@ -144,7 +144,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         node.GetIdentifier();
 
     public override SyntaxToken? ObjectCreationTypeIdentifier(SyntaxNode objectCreation) =>
-        objectCreation is null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).GetObjectCreationTypeIdentifier();
+        objectCreation is null ? null : Cast<ObjectCreationExpressionSyntax>(objectCreation).TypeIdentifier;
 
     public override SyntaxNode RemoveConditionalAccess(SyntaxNode node) =>
         node is ExpressionSyntax expression
@@ -161,7 +161,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<InterpolatedStringExpressionSyntax>(node).InterpolatedTextValue(model);
 
     public override Pair<SyntaxNode, SyntaxNode> Operands(SyntaxNode invocation) =>
-        Cast<InvocationExpressionSyntax>(invocation).Operands();
+        Cast<InvocationExpressionSyntax>(invocation).Operands;
 
     public override SyntaxNode ParseExpression(string expression) =>
         SyntaxFactory.ParseExpression(expression);

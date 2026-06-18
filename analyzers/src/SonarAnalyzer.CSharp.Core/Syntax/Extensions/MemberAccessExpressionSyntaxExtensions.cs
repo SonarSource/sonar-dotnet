@@ -19,13 +19,16 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class MemberAccessExpressionSyntaxExtensions
 {
-    public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
-        memberAccess.NameIs(name)
-        && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
-        && symbol.ContainingType.DerivesFrom(knownType);
+    extension(MemberAccessExpressionSyntax memberAccess)
+    {
+        public bool IsMemberAccessOnKnownType(string name, KnownType knownType, SemanticModel semanticModel) =>
+            memberAccess.NameIs(name)
+            && semanticModel.GetSymbolInfo(memberAccess).Symbol is {} symbol
+            && symbol.ContainingType.DerivesFrom(knownType);
 
-    public static bool IsPropertyInvocation(this MemberAccessExpressionSyntax expression, ImmutableArray<KnownType> types, string propertyName, SemanticModel semanticModel) =>
-        expression.NameIs(propertyName) &&
-        semanticModel.GetSymbolInfo(expression).Symbol is IPropertySymbol propertySymbol &&
-        propertySymbol.IsInType(types);
+        public bool IsPropertyInvocation(ImmutableArray<KnownType> types, string propertyName, SemanticModel semanticModel) =>
+            memberAccess.NameIs(propertyName) &&
+            semanticModel.GetSymbolInfo(memberAccess).Symbol is IPropertySymbol propertySymbol &&
+            propertySymbol.IsInType(types);
+    }
 }

@@ -35,8 +35,8 @@ public class ObjectCreationExpressionSyntaxExtensionsTest
     }
 
     [TestMethod]
-    public void GetObjectCreationTypeIdentifier_Null_CS() =>
-        ObjectCreationExpressionSyntaxExtensions.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+    public void TypeIdentifier_Null_CS() =>
+        ((ObjectCreationExpressionSyntax)null).TypeIdentifier.Should().BeNull();
 
     private static CSharpCompilation CreateCompilation(string code) =>
         CSharpCompilation.Create("TempAssembly.dll")

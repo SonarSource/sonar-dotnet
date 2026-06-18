@@ -19,29 +19,32 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class InvocationExpressionSyntaxExtensions
 {
-    public static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel semanticModel) =>
-        invocation.Expression is MemberAccessExpressionSyntax memberAccess
-        && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
+    extension(InvocationExpressionSyntax invocation)
+    {
+        public bool IsMemberAccessOnKnownType(string identifierName, KnownType knownType, SemanticModel semanticModel) =>
+            invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, semanticModel);
 
-    public static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel semanticModel) =>
-        invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
+        public IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, semanticModel);
 
-    public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
-        invocation?.ArgumentList is null
-            ? count == 0
-            : invocation.ArgumentList.Arguments.Count == count;
+        public bool HasExactlyNArguments(int count) =>
+            invocation?.ArgumentList is null
+                ? count == 0
+                : invocation.ArgumentList.Arguments.Count == count;
 
-    public static Pair<SyntaxNode, SyntaxNode> Operands(this InvocationExpressionSyntax invocation) =>
-        invocation is { Expression: MemberAccessExpressionSyntax access }
-            ? new(access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression, access.Name)
-            : default;
+        public Pair<SyntaxNode, SyntaxNode> Operands =>
+            invocation is { Expression: MemberAccessExpressionSyntax access }
+                ? new(access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression, access.Name)
+                : default;
 
-    public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
-        invocation?.Expression.GetIdentifier();
+        public SyntaxToken? MethodCallIdentifier =>
+            invocation?.Expression.GetIdentifier();
 
-    public static bool IsMethodInvocation(this InvocationExpressionSyntax expression, KnownType type, string methodName, SemanticModel semanticModel) =>
-        semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
-        methodSymbol.IsInType(type) &&
-        // vbnet is case insensitive
-        methodName.Equals(methodSymbol.Name, StringComparison.InvariantCultureIgnoreCase);
+        public bool IsMethodInvocation(KnownType type, string methodName, SemanticModel semanticModel) =>
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsInType(type) &&
+            // vbnet is case insensitive
+            methodName.Equals(methodSymbol.Name, StringComparison.InvariantCultureIgnoreCase);
+    }
 }

@@ -19,6 +19,9 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 internal static class ObjectCreationExpressionSyntaxExtensions
 {
-    public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
-        objectCreation?.Type.GetIdentifier();
+    extension(ObjectCreationExpressionSyntax objectCreation)
+    {
+        public SyntaxToken? TypeIdentifier =>
+            objectCreation?.Type.GetIdentifier();
+    }
 }

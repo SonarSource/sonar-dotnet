@@ -19,56 +19,59 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class InvocationExpressionSyntaxExtensions
 {
-    public static bool IsMemberAccessOnKnownType(this InvocationExpressionSyntax invocation, string identifierName, KnownType knownType, SemanticModel model) =>
-        invocation.Expression is MemberAccessExpressionSyntax memberAccess
-        && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, model);
+    extension(InvocationExpressionSyntax invocation)
+    {
+        public bool IsMemberAccessOnKnownType(string identifierName, KnownType knownType, SemanticModel model) =>
+            invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            && memberAccess.IsMemberAccessOnKnownType(identifierName, knownType, model);
 
-    public static IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(this InvocationExpressionSyntax invocation, KnownType knownType, SemanticModel model) =>
-        invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, model);
+        public IEnumerable<ISymbol> GetArgumentSymbolsOfKnownType(KnownType knownType, SemanticModel model) =>
+            invocation.ArgumentList.Arguments.GetSymbolsOfKnownType(knownType, model);
 
-    public static bool HasExactlyNArguments(this InvocationExpressionSyntax invocation, int count) =>
-        invocation is not null && invocation.ArgumentList.Arguments.Count == count;
+        public bool HasExactlyNArguments(int count) =>
+            invocation is not null && invocation.ArgumentList.Arguments.Count == count;
 
-    public static bool IsGetTypeCall(this InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation is not null
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && methodSymbol.IsGetTypeCall();
+        public bool IsGetTypeCall(SemanticModel model) =>
+            invocation is not null
+            && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && methodSymbol.IsGetTypeCall();
 
-    public static bool IsOnBase(this InvocationExpressionSyntax invocation) =>
-        (invocation.Expression as MemberAccessExpressionSyntax)?.Expression is BaseExpressionSyntax;
+        public bool IsOnBase =>
+            (invocation.Expression as MemberAccessExpressionSyntax)?.Expression is BaseExpressionSyntax;
 
-    public static bool IsEqualTo(this InvocationExpressionSyntax first, InvocationExpressionSyntax second, SemanticModel model) =>
-        Pair.From(model.GetSymbolInfo(first).Symbol, model.GetSymbolInfo(second).Symbol) switch
-        {
-            // the nameof(someVariable) is considered an Invocation Expression, but it is not a method call, and GetSymbolInfo returns null for it.
-            (null, null) when first.GetName() == "nameof" && second.GetName() == "nameof" => model.GetConstantValue(first).Equals(model.GetConstantValue(second)),
-            ({ } firstSymbol, { } secondSymbol) => firstSymbol.Equals(secondSymbol),
-            _ => false
-        };
+        public bool IsEqualTo(InvocationExpressionSyntax second, SemanticModel model) =>
+            Pair.From(model.GetSymbolInfo(invocation).Symbol, model.GetSymbolInfo(second).Symbol) switch
+            {
+                // the nameof(someVariable) is considered an Invocation Expression, but it is not a method call, and GetSymbolInfo returns null for it.
+                (null, null) when invocation.GetName() == "nameof" && second.GetName() == "nameof" => model.GetConstantValue(invocation).Equals(model.GetConstantValue(second)),
+                ({ } firstSymbol, { } secondSymbol) => firstSymbol.Equals(secondSymbol),
+                _ => false
+            };
 
-    public static Pair<SyntaxNode, SyntaxNode> Operands(this InvocationExpressionSyntax invocation) =>
-        invocation switch
-        {
-            { Expression: MemberAccessExpressionSyntax access } => new Pair<SyntaxNode, SyntaxNode>(access.Expression, access.Name),
-            { Expression: MemberBindingExpressionSyntax binding } => new(invocation.GetParentConditionalAccessExpression()?.Expression, binding.Name),
-            _ => default
-        };
+        public Pair<SyntaxNode, SyntaxNode> Operands =>
+            invocation switch
+            {
+                { Expression: MemberAccessExpressionSyntax access } => new Pair<SyntaxNode, SyntaxNode>(access.Expression, access.Name),
+                { Expression: MemberBindingExpressionSyntax binding } => new(invocation.GetParentConditionalAccessExpression()?.Expression, binding.Name),
+                _ => default
+            };
 
-    public static SyntaxToken? GetMethodCallIdentifier(this InvocationExpressionSyntax invocation) =>
-        invocation?.Expression.GetIdentifier();
+        public SyntaxToken? MethodCallIdentifier =>
+            invocation?.Expression.GetIdentifier();
 
-    public static bool IsNameof(this InvocationExpressionSyntax expression, SemanticModel semanticModel) =>
-        expression is not null &&
-        expression.Expression is IdentifierNameSyntax identifierNameSyntax &&
-        identifierNameSyntax.Identifier.ValueText == Common.SyntaxConstants.NameOfKeywordText &&
-        semanticModel.GetSymbolInfo(expression).Symbol?.Kind != SymbolKind.Method;
+        public bool IsNameof(SemanticModel semanticModel) =>
+            invocation is not null &&
+            invocation.Expression is IdentifierNameSyntax identifierNameSyntax &&
+            identifierNameSyntax.Identifier.ValueText == Common.SyntaxConstants.NameOfKeywordText &&
+            semanticModel.GetSymbolInfo(invocation).Symbol?.Kind != SymbolKind.Method;
 
-    public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, KnownType type, string methodName, SemanticModel semanticModel) =>
-        invocation.Expression.NameIs(methodName) &&
-        semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-        methodSymbol.IsInType(type);
+        public bool IsMethodInvocation(KnownType type, string methodName, SemanticModel semanticModel) =>
+            invocation.Expression.NameIs(methodName) &&
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsInType(type);
 
-    public static bool IsMethodInvocation(this InvocationExpressionSyntax invocation, ImmutableArray<KnownType> types, string methodName, SemanticModel semanticModel) =>
-        invocation.Expression.NameIs(methodName) &&
-        semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-        methodSymbol.IsInType(types);
+        public bool IsMethodInvocation(ImmutableArray<KnownType> types, string methodName, SemanticModel semanticModel) =>
+            invocation.Expression.NameIs(methodName) &&
+            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
+            methodSymbol.IsInType(types);
+    }
 }

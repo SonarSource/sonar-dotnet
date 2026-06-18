@@ -19,10 +19,13 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class ObjectCreationExpressionSyntaxExtensions
 {
-    public static bool IsKnownType(this ObjectCreationExpressionSyntax objectCreation, KnownType knownType, SemanticModel semanticModel) =>
-        objectCreation.Type.GetName().EndsWith(knownType.TypeName)
-        && ((SyntaxNode)objectCreation).IsKnownType(knownType, semanticModel);
+    extension(ObjectCreationExpressionSyntax objectCreation)
+    {
+        public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            objectCreation.Type.GetName().EndsWith(knownType.TypeName)
+            && ((SyntaxNode)objectCreation).IsKnownType(knownType, semanticModel);
 
-    public static SyntaxToken? GetObjectCreationTypeIdentifier(this ObjectCreationExpressionSyntax objectCreation) =>
-        objectCreation?.Type.GetIdentifier();
+        public SyntaxToken? TypeIdentifier =>
+            objectCreation?.Type.GetIdentifier();
+    }
 }

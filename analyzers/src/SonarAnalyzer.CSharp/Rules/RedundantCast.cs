@@ -130,8 +130,8 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
     /// If the invocation one of the <see cref="CastIEnumerableMethods"/> extensions, returns the method symbol.
     private static IMethodSymbol GetEnumerableExtensionSymbol(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-        invocation.GetMethodCallIdentifier() is { } methodName
-        && CastIEnumerableMethods.Contains(methodName.ValueText)
+        invocation.MethodCallIdentifier is { ValueText: { } methodName }
+        && CastIEnumerableMethods.Contains(methodName)
         && semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
         && methodSymbol.IsExtensionOn(KnownType.System_Collections_IEnumerable)
             ? methodSymbol

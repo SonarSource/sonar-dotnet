@@ -40,7 +40,7 @@ public class InvocationExpressionSyntaxExtensionsTest
             }
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as InvocationExpressionSyntax;
-        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
+        var (left, right) = node.Operands;
 
         left.Should().NotBeNull();
         left.ToString().Should().Be(expectedLeft);
@@ -66,7 +66,7 @@ public class InvocationExpressionSyntaxExtensionsTest
             """;
         var node = NodeBetweenMarkers(code, LanguageNames.CSharp) as InvocationExpressionSyntax;
 
-        var (left, right) = InvocationExpressionSyntaxExtensions.Operands(node);
+        var (left, right) = node.Operands;
 
         left.Should().BeNull();
         right.Should().BeNull();
@@ -77,8 +77,8 @@ public class InvocationExpressionSyntaxExtensionsTest
         InvocationExpressionSyntaxExtensions.HasExactlyNArguments(null, 42).Should().BeFalse();
 
     [TestMethod]
-    public void GetMethodCallIdentifier_Null_CS() =>
-        InvocationExpressionSyntaxExtensions.GetMethodCallIdentifier(null).Should().BeNull();
+    public void MethodCallIdentifier_Null_CS() =>
+        ((InvocationExpressionSyntax)null).MethodCallIdentifier.Should().BeNull();
 
     private static SyntaxNode NodeBetweenMarkers(string code, string language)
     {

@@ -191,8 +191,8 @@ public sealed class PrivateFieldUsedAsLocalVariable : SonarDiagnosticAnalyzer
 
         public override void VisitInvocationExpression(InvocationExpressionSyntax node)
         {
-            if (node.GetMethodCallIdentifier() is { } methodCallIdentifier
-                && methodNames.Contains(methodCallIdentifier.ValueText)
+            if (node.MethodCallIdentifier is { ValueText: { } valueText }
+                && methodNames.Contains(valueText)
                 && GetTopmostSyntaxWithTheSameSymbol(node) is var memberReference
                 && memberReference.Symbol is IMethodSymbol
                 && GetParentPseudoStatement(memberReference) is { } pseudoStatement)

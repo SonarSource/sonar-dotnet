@@ -21,6 +21,6 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions.Test;
 public class ObjectCreationExpressionSyntaxExtensionsTest
 {
     [TestMethod]
-    public void GetObjectCreationTypeIdentifier_Null_VB() =>
-        ObjectCreationExpressionSyntaxExtensions.GetObjectCreationTypeIdentifier(null).Should().BeNull();
+    public void TypeIdentifier_Null_VB() =>
+        ((ObjectCreationExpressionSyntax)null).TypeIdentifier.Should().BeNull();
 }

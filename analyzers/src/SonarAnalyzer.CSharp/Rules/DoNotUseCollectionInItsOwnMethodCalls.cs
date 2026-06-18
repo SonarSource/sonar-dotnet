@@ -54,8 +54,8 @@ public sealed class DoNotUseCollectionInItsOwnMethodCalls : SonarDiagnosticAnaly
             c =>
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
-                if (invocation.GetMethodCallIdentifier() is { } identifier
-                    && TrackedMethodNames.Any(x => identifier.ValueText.EndsWith(x, StringComparison.Ordinal))
+                if (invocation.MethodCallIdentifier is { ValueText: { } identifierText }
+                    && TrackedMethodNames.Any(x => identifierText.EndsWith(x, StringComparison.Ordinal))
                     && OperandsToCheckIfTrackedMethod(invocation, c.Model) is { } operands
                     && CSharpEquivalenceChecker.AreEquivalent(operands.Left, operands.Right))
                 {

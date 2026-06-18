@@ -38,7 +38,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         protected override bool ShouldReportOnMethodCall(InvocationExpressionSyntax invocation, SemanticModel semanticModel, MemberDescriptor memberDescriptor)
         {
-            var identifier = invocation.GetMethodCallIdentifier().Value.ValueText; // never null when we get here
+            var identifier = invocation.MethodCallIdentifier.Value.ValueText; // never null when we get here
             if (identifier == "ToLowerInvariant")
             {
                 return true;

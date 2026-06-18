@@ -87,9 +87,9 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             location = null;
             var invocation = (InvocationExpressionSyntax)context.Node;
-            if (!(context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol invokedMethod)
-                || invokedMethod.Name != symbol.Name
-                || !invocation.IsOnBase())
+            if (!invocation.IsOnBase
+                || context.Model.GetSymbolInfo(invocation).Symbol is not IMethodSymbol invokedMethod
+                || invokedMethod.Name != symbol.Name)
             {
                 return false;
             }

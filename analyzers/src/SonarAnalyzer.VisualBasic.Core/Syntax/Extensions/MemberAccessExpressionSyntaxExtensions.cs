@@ -19,8 +19,11 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class MemberAccessExpressionSyntaxExtensions
 {
-    public static bool IsMemberAccessOnKnownType(this MemberAccessExpressionSyntax memberAccess, string name, KnownType knownType, SemanticModel semanticModel) =>
-        memberAccess.NameIs(name)
-        && semanticModel.GetSymbolInfo(memberAccess).Symbol is { } symbol
-        && symbol.ContainingType.DerivesFrom(knownType);
+    extension(MemberAccessExpressionSyntax memberAccess)
+    {
+        public bool IsMemberAccessOnKnownType(string name, KnownType knownType, SemanticModel semanticModel) =>
+            memberAccess.NameIs(name)
+            && semanticModel.GetSymbolInfo(memberAccess).Symbol is { } symbol
+            && symbol.ContainingType.DerivesFrom(knownType);
+    }
 }

@@ -30,20 +30,15 @@ namespace SonarAnalyzer.CSharp.Rules
         protected override int GetArgumentCount(InvocationExpressionSyntax invocation) =>
             invocation.ArgumentList == null ? 0 : invocation.ArgumentList.Arguments.Count;
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
+        protected override void Initialize(SonarAnalysisContext context) =>
             context.RegisterNodeAction(
                 c =>
                 {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    if (!invocation.IsOnBase())
+                    if (c.Node is InvocationExpressionSyntax { IsOnBase: true } invocation)
                     {
-                        return;
+                        ReportOptionalParameterNotPassedToBase(c, invocation);
                     }
-
-                    ReportOptionalParameterNotPassedToBase(c, invocation);
                 },
                 SyntaxKind.InvocationExpression);
-        }
     }
 }

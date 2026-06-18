@@ -159,15 +159,16 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
     private static IMethodSymbol SpeculativeBindCandidate(SemanticModel model, string candidateName, SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression)
     {
-        var invocationIdentifierName = invocationExpression.GetMethodCallIdentifier()?.Parent;
-        if (invocationIdentifierName is null)
+        if (invocationExpression.MethodCallIdentifier?.Parent is { } invocationIdentifierName)
+        {
+            var invocationReplaced = ReplaceInvocation(awaitableRoot, invocationExpression, invocationIdentifierName, candidateName);
+            var speculativeSymbolInfo = model.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
+            return speculativeSymbolInfo.Symbol as IMethodSymbol;
+        }
+        else
         {
             return null;
         }
-        var invocationReplaced = ReplaceInvocation(awaitableRoot, invocationExpression, invocationIdentifierName, candidateName);
-        var speculativeSymbolInfo = model.GetSpeculativeSymbolInfo(invocationReplaced.SpanStart, invocationReplaced, SpeculativeBindingOption.BindAsExpression);
-        var speculativeSymbol = speculativeSymbolInfo.Symbol as IMethodSymbol;
-        return speculativeSymbol;
     }
 
     private static SyntaxNode ReplaceInvocation(SyntaxNode awaitableRoot, InvocationExpressionSyntax invocationExpression, SyntaxNode invocationIdentifierName, string candidateName)

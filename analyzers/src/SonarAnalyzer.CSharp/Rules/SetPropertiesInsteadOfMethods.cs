@@ -27,7 +27,7 @@ public sealed class SetPropertiesInsteadOfMethods : SetPropertiesInsteadOfMethod
 
     protected override bool TryGetOperands(InvocationExpressionSyntax invocation, out SyntaxNode typeNode, out SyntaxNode methodNode)
     {
-        if (invocation.Operands() is { Left: { } left, Right: { } right })
+        if (invocation.Operands is { Left: { } left, Right: { } right })
         {
             typeNode = left;
             methodNode = right;
