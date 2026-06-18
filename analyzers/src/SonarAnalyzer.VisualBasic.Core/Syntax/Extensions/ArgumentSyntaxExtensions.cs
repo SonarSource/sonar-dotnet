@@ -19,13 +19,19 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class ArgumentSyntaxExtensions
 {
-    internal static int? GetArgumentIndex(this ArgumentSyntax argument) =>
-        (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
+    extension(ArgumentSyntax argument)
+    {
+        internal int? ArgumentIndex =>
+            (argument.Parent as ArgumentListSyntax)?.Arguments.IndexOf(argument);
+    }
 
-    internal static IEnumerable<ISymbol> GetSymbolsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-        syntaxList.GetArgumentsOfKnownType(knownType, semanticModel)
-                  .Select(argument => semanticModel.GetSymbolInfo(argument.GetExpression()).Symbol);
+    extension(SeparatedSyntaxList<ArgumentSyntax> syntaxList)
+    {
+        internal IEnumerable<ISymbol> GetSymbolsOfKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            syntaxList.GetArgumentsOfKnownType(knownType, semanticModel)
+                      .Select(argument => semanticModel.GetSymbolInfo(argument.GetExpression()).Symbol);
 
-    private static IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(this SeparatedSyntaxList<ArgumentSyntax> syntaxList, KnownType knownType, SemanticModel semanticModel) =>
-        syntaxList.Where(argument => semanticModel.GetTypeInfo(argument.GetExpression()).Type.Is(knownType));
+        private IEnumerable<ArgumentSyntax> GetArgumentsOfKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            syntaxList.Where(argument => semanticModel.GetTypeInfo(argument.GetExpression()).Type.Is(knownType));
+    }
 }

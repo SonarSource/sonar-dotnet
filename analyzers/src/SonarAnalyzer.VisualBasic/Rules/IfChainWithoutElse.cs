@@ -37,6 +37,6 @@ namespace SonarAnalyzer.VisualBasic.Rules
             || multiLineIfBlock.EndIfStatement.GetLeadingTrivia().Any(IsCommentOrDisabledText));
 
         private static bool IsCommentOrDisabledText(SyntaxTrivia trivia) =>
-            trivia.IsComment() || trivia.IsKind(SyntaxKind.DisabledTextTrivia);
+            trivia.IsComment || trivia.IsKind(SyntaxKind.DisabledTextTrivia);
     }
 }

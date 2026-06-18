@@ -78,7 +78,7 @@ public sealed class LoggingArgumentsShouldBePassedCorrectly : SonarDiagnosticAna
 
         var paramsIndex = invocationSymbol.Parameters.IndexOf(paramsParameter);
         var invalidArguments = invocation.ArgumentList.Arguments
-            .Where(x => x.GetArgumentIndex() >= paramsIndex && IsInvalidArgument(x, c.Model, knownTypes))
+            .Where(x => x.ArgumentIndex >= paramsIndex && IsInvalidArgument(x, c.Model, knownTypes))
             .ToSecondaryLocations()
             .ToArray();
         if (invalidArguments.Length > 0)

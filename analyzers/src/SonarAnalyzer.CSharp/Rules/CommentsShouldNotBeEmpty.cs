@@ -25,7 +25,7 @@ public sealed class CommentsShouldNotBeEmpty : CommentsShouldNotBeEmptyBase<Synt
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override bool IsValidTriviaType(SyntaxTrivia trivia) =>
-        trivia.IsComment();
+        trivia.IsComment;
 
     protected override string GetCommentText(SyntaxTrivia trivia) =>
         trivia.Kind() switch

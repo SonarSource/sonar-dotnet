@@ -60,7 +60,7 @@ public class CSharpMetrics : MetricsBase
     }
 
     protected override bool IsCommentTrivia(SyntaxTrivia trivia) =>
-        trivia.IsComment();
+        trivia.IsComment;
 
     protected override bool IsEndOfFile(SyntaxToken token) =>
         token.IsKind(SyntaxKind.EndOfFileToken);

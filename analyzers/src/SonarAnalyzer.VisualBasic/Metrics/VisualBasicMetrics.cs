@@ -87,7 +87,7 @@ public sealed class VisualBasicMetrics : MetricsBase
         }
     }
 
-    protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment();
+    protected override bool IsCommentTrivia(SyntaxTrivia trivia) => trivia.IsComment;
 
     protected override bool IsEndOfFile(SyntaxToken token) =>
         token.IsKind(SyntaxKind.EndOfFileToken);

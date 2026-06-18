@@ -41,7 +41,7 @@ public class ArgumentSyntaxExtensionsTest
             }
             """;
         var argument = GetTupleArgumentAtMarker(ref code);
-        argument.IsInTupleAssignmentTarget().Should().BeTrue();
+        argument.IsInTupleAssignmentTarget.Should().BeTrue();
     }
 
     [TestMethod]
@@ -68,7 +68,7 @@ public class ArgumentSyntaxExtensionsTest
         arguments.Should().HaveCount(12);
         foreach (var argument in arguments)
         {
-            argument.IsInTupleAssignmentTarget().Should().BeFalse();
+            argument.IsInTupleAssignmentTarget.Should().BeFalse();
         }
     }
 
@@ -105,7 +105,7 @@ public class ArgumentSyntaxExtensionsTest
             }
             """;
         var argument = GetTupleArgumentAtMarker(ref code);
-        var outerMostTuple = argument.OutermostTuple();
+        var outerMostTuple = argument.OutermostTuple;
         if (expectedOuterTuple is null)
         {
             outerMostTuple.Should().BeNull();

@@ -82,7 +82,7 @@ public class MutedSyntaxWalker : CSharpSyntaxWalker
         base.VisitIdentifierName(node);
 
         bool IsInTupleAssignmentTarget() =>
-            node.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget();
+            node.Parent is ArgumentSyntax { IsInTupleAssignmentTarget: true };
 
         bool IsUsedInLocalFunction(ISymbol symbol) =>
             // We don't mute it if it's declared and used in local function

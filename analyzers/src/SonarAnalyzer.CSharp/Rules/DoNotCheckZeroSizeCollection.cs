@@ -92,8 +92,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             if (pattern.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.RelationalPattern)) is { } relationalPatternNode
                 && ((RelationalPatternSyntaxWrapper)relationalPatternNode) is var relationalPattern
-                && relationalPattern.OperatorToken.ToComparisonKind() is { } comparison
-                && comparison != Comparison.None
+                && relationalPattern.OperatorToken.ComparisonOperatorKind is not Comparison.None and var comparison
                 && Language.ExpressionNumericConverter.ConstantIntValue(context.Model, relationalPattern.Expression) is { } constant)
             {
                 CheckExpression(context, relationalPattern.SyntaxNode, expression, constant, comparison);

@@ -282,6 +282,6 @@ namespace SonarAnalyzer.VisualBasic.Rules
         }
 
         private static bool NoCommentsOrConditionalCompilationBefore(SyntaxNode node) =>
-            !node.GetLeadingTrivia().Any(t => t.IsComment() || t.IsKind(SyntaxKind.DisabledTextTrivia));
+            !node.GetLeadingTrivia().Any(t => t.IsComment || t.IsKind(SyntaxKind.DisabledTextTrivia));
     }
 }

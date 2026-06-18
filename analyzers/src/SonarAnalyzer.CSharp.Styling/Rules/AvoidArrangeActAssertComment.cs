@@ -32,7 +32,7 @@ public sealed class AvoidArrangeActAssertComment : StylingAnalyzer
             {
                 var comments = c.Node
                     .DescendantTrivia()
-                    .Where(x => x.IsComment() && ContainsOnlyInvalid(x));
+                    .Where(x => x.IsComment && ContainsOnlyInvalid(x));
 
                 foreach (var comment in comments)
                 {

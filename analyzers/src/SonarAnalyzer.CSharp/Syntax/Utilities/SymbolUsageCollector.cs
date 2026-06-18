@@ -360,34 +360,21 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
     private AccessorAccess EvaluatePropertyAccesses(ExpressionSyntax node)
     {
         var topmostSyntax = TopmostSyntaxWithTheSameSymbol(node);
-        if (topmostSyntax.Parent is AssignmentExpressionSyntax assignmentExpression)
+        return topmostSyntax.Parent switch
         {
-            if (assignmentExpression.IsKind(SyntaxKind.SimpleAssignmentExpression))
-            {
-                // Prop = value --> set
-                // value = Prop --> get
-                return assignmentExpression.Left == topmostSyntax ? AccessorAccess.Set : AccessorAccess.Get;
-            }
-            else
-            {
-                // Prop += value --> get/set
-                return AccessorAccess.Both;
-            }
-        }
-        else if (topmostSyntax.Parent is ArgumentSyntax argument && argument.IsInTupleAssignmentTarget())
-        {
-            return AccessorAccess.Set;
-        }
-        else if (node.IsInNameOfArgument(model))
-        {
+            // Prop = value --> set; value = Prop --> get
+            AssignmentExpressionSyntax assignment when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression) =>
+                assignment.Left == topmostSyntax ? AccessorAccess.Set : AccessorAccess.Get,
+            // Prop += value --> get/set
+            AssignmentExpressionSyntax => AccessorAccess.Both,
+            ArgumentSyntax { IsInTupleAssignmentTarget: true } => AccessorAccess.Set,
             // nameof(Prop) --> get/set
-            return AccessorAccess.Both;
-        }
-        else
-        {
+            _ when node.IsInNameOfArgument(model) => AccessorAccess.Both,
             // Prop++ --> get/set
-            return topmostSyntax.Parent.IsAnyKind(IncrementKinds) ? AccessorAccess.Both : AccessorAccess.Get;
-        }
+            _ when topmostSyntax.Parent.IsAnyKind(IncrementKinds) => AccessorAccess.Both,
+            // any other usage (e.g. Method(Prop), Prop.Foo()) --> get
+            _ => AccessorAccess.Get,
+        };
     }
 
     private bool IsKnownIdentifier(SyntaxToken identifier) =>

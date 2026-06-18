@@ -31,6 +31,6 @@ public class SyntaxTokenExtensionsTest
     [DataRow(SyntaxKind.GreaterThanToken, ComparisonKind.GreaterThan)]
     [DataRow(SyntaxKind.GreaterThanEqualsToken, ComparisonKind.GreaterThanOrEqual)]
     [DataRow(SyntaxKind.PlusToken, ComparisonKind.None)]
-    public void ToComparisonKind(SyntaxKind tokenKind, ComparisonKind expected) =>
-        Token(tokenKind).ToComparisonKind().Should().Be(expected);
+    public void ComparisonOperatorKind(SyntaxKind tokenKind, ComparisonKind expected) =>
+        Token(tokenKind).ComparisonOperatorKind.Should().Be(expected);
 }

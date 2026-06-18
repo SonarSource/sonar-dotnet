@@ -26,9 +26,12 @@ public static class SyntaxTriviaExtensions
             SyntaxKind.DocumentationCommentTrivia
         ];
 
-    public static bool IsAnyKind(this SyntaxTrivia trivia, ISet<SyntaxKind> syntaxKinds) =>
-        syntaxKinds.Contains((SyntaxKind)trivia.RawKind);
+    extension(SyntaxTrivia trivia)
+    {
+        public bool IsAnyKind(ISet<SyntaxKind> syntaxKinds) =>
+            syntaxKinds.Contains((SyntaxKind)trivia.RawKind);
 
-    public static bool IsComment(this SyntaxTrivia trivia) =>
-        trivia.IsAnyKind(CommentKinds);
+        public bool IsComment =>
+            trivia.IsAnyKind(CommentKinds);
+    }
 }

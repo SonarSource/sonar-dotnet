@@ -19,25 +19,31 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class SyntaxTokenExtensions
 {
-    [Obsolete("Either use '.Kind() is A or B' or the overload with the ISet instead.")]
-    public static bool IsAnyKind(this SyntaxToken token, params SyntaxKind[] syntaxKinds) =>
-        syntaxKinds.Contains((SyntaxKind)token.RawKind);
+    extension(SyntaxToken token)
+    {
+        [Obsolete("Either use '.Kind() is A or B' or the overload with the ISet instead.")]
+        public bool IsAnyKind(params SyntaxKind[] syntaxKinds) =>
+            syntaxKinds.Contains((SyntaxKind)token.RawKind);
 
-    public static bool IsAnyKind(this SyntaxToken token, ISet<SyntaxKind> syntaxKinds) =>
-        syntaxKinds.Contains((SyntaxKind)token.RawKind);
+        public bool IsAnyKind(ISet<SyntaxKind> syntaxKinds) =>
+            syntaxKinds.Contains((SyntaxKind)token.RawKind);
 
-    public static bool AnyOfKind(this IEnumerable<SyntaxToken> tokens, SyntaxKind kind) =>
-        tokens.Any(x => x.RawKind == (int)kind);
+        public ComparisonKind ComparisonOperatorKind =>
+            token.Kind() switch
+            {
+                SyntaxKind.EqualsEqualsToken => ComparisonKind.Equals,
+                SyntaxKind.ExclamationEqualsToken => ComparisonKind.NotEquals,
+                SyntaxKind.LessThanToken => ComparisonKind.LessThan,
+                SyntaxKind.LessThanEqualsToken => ComparisonKind.LessThanOrEqual,
+                SyntaxKind.GreaterThanToken => ComparisonKind.GreaterThan,
+                SyntaxKind.GreaterThanEqualsToken => ComparisonKind.GreaterThanOrEqual,
+                _ => ComparisonKind.None,
+            };
+    }
 
-    public static ComparisonKind ToComparisonKind(this SyntaxToken token) =>
-        token.Kind() switch
-        {
-            SyntaxKind.EqualsEqualsToken => ComparisonKind.Equals,
-            SyntaxKind.ExclamationEqualsToken => ComparisonKind.NotEquals,
-            SyntaxKind.LessThanToken => ComparisonKind.LessThan,
-            SyntaxKind.LessThanEqualsToken => ComparisonKind.LessThanOrEqual,
-            SyntaxKind.GreaterThanToken => ComparisonKind.GreaterThan,
-            SyntaxKind.GreaterThanEqualsToken => ComparisonKind.GreaterThanOrEqual,
-            _ => ComparisonKind.None,
-        };
+    extension(IEnumerable<SyntaxToken> tokens)
+    {
+        public bool AnyOfKind(SyntaxKind kind) =>
+            tokens.Any(x => x.RawKind == (int)kind);
+    }
 }

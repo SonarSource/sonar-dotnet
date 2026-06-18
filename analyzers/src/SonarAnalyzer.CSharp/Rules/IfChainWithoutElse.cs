@@ -38,7 +38,7 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static bool IsEmptyBlock(ElseClauseSyntax elseClause) =>
-            elseClause.Statement is BlockSyntax blockSyntax
-            && !(blockSyntax.Statements.Count > 0 || blockSyntax.DescendantTrivia().Any(x => x.IsComment() || x.IsKind(SyntaxKind.DisabledTextTrivia)));
+            elseClause.Statement is BlockSyntax { Statements.Count: 0 } blockSyntax
+            && !blockSyntax.DescendantTrivia().Any(x => x.IsComment || x.IsKind(SyntaxKind.DisabledTextTrivia));
     }
 }

@@ -31,7 +31,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         node.ArgumentList()?.Arguments;
 
     public override int? ArgumentIndex(SyntaxNode argument) =>
-        Cast<ArgumentSyntax>(argument).GetArgumentIndex();
+        Cast<ArgumentSyntax>(argument).ArgumentIndex;
 
     public override SyntaxToken? ArgumentNameColon(SyntaxNode argument) =>
         (argument as ArgumentSyntax)?.NameColon?.Name.Identifier;
@@ -59,7 +59,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
 
     public override ComparisonKind ComparisonKind(SyntaxNode node) =>
         node is BinaryExpressionSyntax { OperatorToken: var token }
-            ? token.ToComparisonKind()
+            ? token.ComparisonOperatorKind
             : ComparisonKindEnum.None;
 
     public override IEnumerable<SyntaxNode> EnumMembers(SyntaxNode @enum) =>

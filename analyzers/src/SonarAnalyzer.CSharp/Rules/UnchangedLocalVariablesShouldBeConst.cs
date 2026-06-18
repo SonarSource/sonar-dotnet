@@ -138,7 +138,7 @@ public sealed class UnchangedLocalVariablesShouldBeConst : SonarDiagnosticAnalyz
         identifier.Parent switch
         {
             AssignmentExpressionSyntax { Left: { } left } => identifier.Equals(left),
-            ArgumentSyntax argumentSyntax => argumentSyntax.IsInTupleAssignmentTarget() || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
+            ArgumentSyntax argumentSyntax => argumentSyntax.IsInTupleAssignmentTarget || !argumentSyntax.RefOrOutKeyword.IsKind(SyntaxKind.None),
             PostfixUnaryExpressionSyntax => true,
             PrefixUnaryExpressionSyntax => true,
             { } refExpression when RefExpressionSyntaxWrapper.IsInstance(refExpression) => !IsAssignedToRefReadonly(identifier),

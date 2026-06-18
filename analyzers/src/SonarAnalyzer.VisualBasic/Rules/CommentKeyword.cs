@@ -22,6 +22,6 @@ namespace SonarAnalyzer.VisualBasic.Rules
     {
         protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 
-        protected override bool IsComment(SyntaxTrivia trivia) => trivia.IsComment();
+        protected override bool IsComment(SyntaxTrivia trivia) => trivia.IsComment;
     }
 }

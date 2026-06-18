@@ -21,21 +21,24 @@ internal static class AttributeSyntaxExtensions
 {
     private const int AttributeLength = 9;
 
-    public static bool IsKnownType(this AttributeSyntax attribute, ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel)
+    extension(AttributeSyntax attribute)
     {
-        for (var i = 0; i < attributeKnownTypes.Length; i++)
+        public bool IsKnownType(ImmutableArray<KnownType> attributeKnownTypes, SemanticModel semanticModel)
         {
-            if (IsKnownType(attribute, attributeKnownTypes[i], semanticModel))
+            for (var i = 0; i < attributeKnownTypes.Length; i++)
             {
-                return true;
+                if (attribute.IsKnownType(attributeKnownTypes[i], semanticModel))
+                {
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
-    }
 
-    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-        && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
+        public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
+            && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
+    }
 
     private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
         knownType.TypeName == nameof(Attribute)

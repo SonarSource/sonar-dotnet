@@ -21,9 +21,12 @@ internal static class AttributeSyntaxExtensions
 {
     private const int AttributeLength = 9;
 
-    public static bool IsKnownType(this AttributeSyntax attribute, KnownType knownType, SemanticModel semanticModel) =>
-        attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
-        && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
+    extension(AttributeSyntax attribute)
+    {
+        public bool IsKnownType(KnownType knownType, SemanticModel semanticModel) =>
+            attribute.Name.GetName().Contains(GetShortNameWithoutAttributeSuffix(knownType))
+            && ((SyntaxNode)attribute).IsKnownType(knownType, semanticModel);
+    }
 
     private static string GetShortNameWithoutAttributeSuffix(KnownType knownType) =>
         knownType.TypeName == nameof(Attribute) || !knownType.TypeName.EndsWith(nameof(Attribute))

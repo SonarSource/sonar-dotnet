@@ -54,7 +54,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     when argumentInAssignment.FindAssignmentComplement() is { } assignmentTarget
                          && CSharpEquivalenceChecker.AreEquivalent(assignmentTarget, increment.Operand):
                 case ArgumentSyntax argumentInReturn
-                    when argumentInReturn.OutermostTuple() is { SyntaxNode.Parent: ReturnStatementSyntax or ArrowExpressionClauseSyntax }:
+                    when argumentInReturn.OutermostTuple is { SyntaxNode.Parent: ReturnStatementSyntax or ArrowExpressionClauseSyntax }:
                 case AssignmentExpressionSyntax assignment
                     when assignment.IsKind(SyntaxKind.SimpleAssignmentExpression)
                          && assignment.Right == increment
