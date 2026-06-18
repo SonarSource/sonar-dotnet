@@ -19,31 +19,37 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class VariableDesignationSyntaxWrapperExtensions
 {
-    /// <summary>
-    /// Returns all <see cref="SingleVariableDesignationSyntaxWrapper"/> of the designation. Nested designations are flattened and
-    /// only identifiers are included in the result (discards are skipped). For a designation like <c>(a, (_, b))</c>
-    /// the method returns <c>[a, b]</c>.
-    /// </summary>
-    public static ImmutableArray<SingleVariableDesignationSyntaxWrapper> AllVariables(this VariableDesignationSyntaxWrapper variableDesignation)
+    extension(VariableDesignationSyntaxWrapper variableDesignation)
     {
-        var builder = ImmutableArray.CreateBuilder<SingleVariableDesignationSyntaxWrapper>();
-        CollectVariables(variableDesignation);
-        return builder.ToImmutableArray();
-
-        void CollectVariables(VariableDesignationSyntaxWrapper variableDesignation)
+        /// <summary>
+        /// Returns all <see cref="SingleVariableDesignationSyntaxWrapper"/> of the designation. Nested designations are flattened and
+        /// only identifiers are included in the result (discards are skipped). For a designation like <c>(a, (_, b))</c>
+        /// the method returns <c>[a, b]</c>.
+        /// </summary>
+        public ImmutableArray<SingleVariableDesignationSyntaxWrapper> AllVariables
         {
-            if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
+            get
             {
-                foreach (var variable in ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation).Variables)
+                var builder = ImmutableArray.CreateBuilder<SingleVariableDesignationSyntaxWrapper>();
+                CollectVariables(variableDesignation);
+                return builder.ToImmutableArray();
+
+                void CollectVariables(VariableDesignationSyntaxWrapper variableDesignation)
                 {
-                    CollectVariables(variable);
+                    if (ParenthesizedVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
+                    {
+                        foreach (var variable in ((ParenthesizedVariableDesignationSyntaxWrapper)variableDesignation).Variables)
+                        {
+                            CollectVariables(variable);
+                        }
+                    }
+                    else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
+                    {
+                        builder.Add((SingleVariableDesignationSyntaxWrapper)variableDesignation);
+                    }
+                    // DiscardDesignationSyntaxWrapper is skipped
                 }
             }
-            else if (SingleVariableDesignationSyntaxWrapper.IsInstance(variableDesignation))
-            {
-                builder.Add((SingleVariableDesignationSyntaxWrapper)variableDesignation);
-            }
-            // DiscardDesignationSyntaxWrapper is skipped
         }
     }
 }

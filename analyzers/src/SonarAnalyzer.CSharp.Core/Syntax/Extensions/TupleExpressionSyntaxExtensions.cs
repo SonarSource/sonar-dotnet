@@ -19,23 +19,29 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class TupleExpressionSyntaxExtensions
 {
-    public static ImmutableArray<ArgumentSyntax> AllArguments(this TupleExpressionSyntaxWrapper tupleExpression)
+    extension(TupleExpressionSyntaxWrapper tupleExpression)
     {
-        var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(tupleExpression.Arguments.Count);
-        CollectTupleElements(tupleExpression.Arguments);
-        return builder.ToImmutableArray();
-
-        void CollectTupleElements(SeparatedSyntaxList<ArgumentSyntax> arguments)
+        public ImmutableArray<ArgumentSyntax> AllArguments
         {
-            foreach (var argument in arguments)
+            get
             {
-                if (TupleExpressionSyntaxWrapper.IsInstance(argument.Expression))
+                var builder = ImmutableArray.CreateBuilder<ArgumentSyntax>(tupleExpression.Arguments.Count);
+                CollectTupleElements(tupleExpression.Arguments);
+                return builder.ToImmutableArray();
+
+                void CollectTupleElements(SeparatedSyntaxList<ArgumentSyntax> arguments)
                 {
-                    CollectTupleElements(((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
-                }
-                else
-                {
-                    builder.Add(argument);
+                    foreach (var argument in arguments)
+                    {
+                        if (TupleExpressionSyntaxWrapper.IsInstance(argument.Expression))
+                        {
+                            CollectTupleElements(((TupleExpressionSyntaxWrapper)argument.Expression).Arguments);
+                        }
+                        else
+                        {
+                            builder.Add(argument);
+                        }
+                    }
                 }
             }
         }

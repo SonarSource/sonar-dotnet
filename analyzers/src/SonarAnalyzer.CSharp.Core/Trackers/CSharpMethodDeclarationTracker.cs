@@ -55,7 +55,7 @@ public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKin
                                      .OfType<CompilationUnitSyntax>()
                                      .First();
 
-            return new MethodInfo(context.GetSemanticModel(declaration), declaration.GetTopLevelMainBody().SelectMany(x => x.DescendantNodes()));
+            return new MethodInfo(context.GetSemanticModel(declaration), declaration.TopLevelMainBody.SelectMany(x => x.DescendantNodes()));
         }
         else
         {

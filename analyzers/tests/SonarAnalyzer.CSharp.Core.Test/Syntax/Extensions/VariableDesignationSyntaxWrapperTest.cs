@@ -30,7 +30,7 @@ public class VariableDesignationSyntaxWrapperTest
     {
         var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(designation));
         var variableDesignation = (VariableDesignationSyntaxWrapper)syntaxTree.GetRoot().DescendantNodesAndSelf().First(VariableDesignationSyntaxWrapper.IsInstance);
-        var allVariables = variableDesignation.AllVariables();
+        var allVariables = variableDesignation.AllVariables;
         var allVariablesAsString = string.Join(",", allVariables.Select(x => x.SyntaxNode.ToString()));
         allVariablesAsString.Should().Be(expectedVariables);
     }

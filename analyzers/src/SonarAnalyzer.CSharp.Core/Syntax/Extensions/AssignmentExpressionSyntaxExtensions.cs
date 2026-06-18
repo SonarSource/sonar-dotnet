@@ -81,16 +81,16 @@ public static class AssignmentExpressionSyntaxExtensions
         if (TupleExpressionSyntaxWrapper.IsInstance(left))
         {
             var tuple = (TupleExpressionSyntaxWrapper)left;
-            var argumentExpressions = tuple.AllArguments().Select(x => (SyntaxNode)x.Expression);
+            var argumentExpressions = tuple.AllArguments.Select(x => (SyntaxNode)x.Expression);
             var designationsExpanded = argumentExpressions.SelectMany(x => x.IsKind(SyntaxKindEx.DeclarationExpression)
-                    ? ((DeclarationExpressionSyntaxWrapper)x).Designation.AllVariables().Select(x => (SyntaxNode)x)
+                    ? ((DeclarationExpressionSyntaxWrapper)x).Designation.AllVariables.Select(x => (SyntaxNode)x)
                     : new[] { x });
             return designationsExpanded.ToImmutableArray();
         }
         else if (DeclarationExpressionSyntaxWrapper.IsInstance(left))
         {
             var declaration = (DeclarationExpressionSyntaxWrapper)left;
-            return declaration.Designation.AllVariables().Select(x => (SyntaxNode)x).ToImmutableArray();
+            return declaration.Designation.AllVariables.Select(x => (SyntaxNode)x).ToImmutableArray();
         }
         else
         {

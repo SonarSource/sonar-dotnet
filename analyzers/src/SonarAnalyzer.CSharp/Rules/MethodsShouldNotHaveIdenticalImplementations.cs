@@ -35,7 +35,7 @@ public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShould
 
     protected override IEnumerable<IMethodDeclaration> GetMethodDeclarations(SyntaxNode node) =>
         node.IsKind(SyntaxKind.CompilationUnit)
-            ? ((CompilationUnitSyntax)node).GetMethodDeclarations()
+            ? ((CompilationUnitSyntax)node).MethodDeclarations
             : ((TypeDeclarationSyntax)node).GetMethodDeclarations();
 
     protected override bool AreDuplicates(SemanticModel model, IMethodDeclaration firstMethod, IMethodDeclaration secondMethod) =>

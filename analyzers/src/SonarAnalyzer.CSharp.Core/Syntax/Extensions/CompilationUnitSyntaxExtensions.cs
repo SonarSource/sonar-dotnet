@@ -19,17 +19,20 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class CompilationUnitSyntaxExtensions
 {
-    public static IEnumerable<SyntaxNode> GetTopLevelMainBody(this CompilationUnitSyntax compilationUnit) =>
-        compilationUnit.ChildNodes()
-                       .SkipWhile(x => x.Kind() is SyntaxKind.UsingDirective or SyntaxKind.NamespaceDeclaration)
-                       .TakeWhile(x => x.IsKind(SyntaxKind.GlobalStatement));
+    extension(CompilationUnitSyntax compilationUnit)
+    {
+        public IEnumerable<SyntaxNode> TopLevelMainBody =>
+            compilationUnit.ChildNodes()
+                           .SkipWhile(x => x.Kind() is SyntaxKind.UsingDirective or SyntaxKind.NamespaceDeclaration)
+                           .TakeWhile(x => x.IsKind(SyntaxKind.GlobalStatement));
 
-    public static IEnumerable<IMethodDeclaration> GetMethodDeclarations(this CompilationUnitSyntax compilationUnitSyntax) =>
-        compilationUnitSyntax.GetTopLevelMainBody()
-                             .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
-                             .Where(x => x != null)
-                             .Select(x => MethodDeclarationFactory.Create(x));
+        public IEnumerable<IMethodDeclaration> MethodDeclarations =>
+            compilationUnit.TopLevelMainBody
+                                 .Select(x => x.ChildNodes().FirstOrDefault(y => y.IsKind(SyntaxKindEx.LocalFunctionStatement)))
+                                 .Where(x => x != null)
+                                 .Select(x => MethodDeclarationFactory.Create(x));
 
-    public static bool IsTopLevelMain(this CompilationUnitSyntax compilationUnit) =>
-        compilationUnit.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement));
+        public bool IsTopLevelMain =>
+            compilationUnit.Members.Any(x => x.IsKind(SyntaxKind.GlobalStatement));
+    }
 }

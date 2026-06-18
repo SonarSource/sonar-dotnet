@@ -123,7 +123,7 @@ namespace SonarAnalyzer.CSharp.Rules
             // var (a, b) = (1, 1 / 3)
             else if (outerTuple is { Parent: EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax variableDeclaration } } })
             {
-                var tupleArguments = ((TupleExpressionSyntaxWrapper)outerTuple).AllArguments();
+                var tupleArguments = ((TupleExpressionSyntaxWrapper)outerTuple).AllArguments;
                 var declarationType = semanticModel.GetTypeInfo(variableDeclaration.Type).Type;
                 var flattenTupleTypes = AllTupleElements(declarationType);
                 var divisionArgumentIndex = DivisionArgumentIndex(tupleArguments, division);

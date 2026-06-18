@@ -19,7 +19,10 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class SyntaxTokenListExtensions
 {
-    public static SyntaxToken? Find(this SyntaxTokenList tokenList, SyntaxKind kind) =>
-        tokenList.IndexOf(kind) is var index and >= 0
-        ? tokenList[index] : null;
+    extension(SyntaxTokenList tokenList)
+    {
+        public SyntaxToken? Find(SyntaxKind kind) =>
+            tokenList.IndexOf(kind) is var index and >= 0
+            ? tokenList[index] : null;
+    }
 }

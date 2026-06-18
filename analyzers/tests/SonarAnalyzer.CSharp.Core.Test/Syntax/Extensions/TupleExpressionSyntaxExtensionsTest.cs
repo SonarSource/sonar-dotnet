@@ -30,7 +30,7 @@ public class TupleExpressionSyntaxExtensionsTest
     {
         var syntaxTree = CSharpSyntaxTree.ParseText(WrapInMethod(tuple));
         var tupleExpression = (TupleExpressionSyntaxWrapper)syntaxTree.GetRoot().DescendantNodesAndSelf().First(x => TupleExpressionSyntaxWrapper.IsInstance(x));
-        var allArguments = tupleExpression.AllArguments();
+        var allArguments = tupleExpression.AllArguments;
         var allArgumentsAsString = string.Join(",", allArguments.Select(x => x.ToString()));
         allArgumentsAsString.Should().Be(expectedArguments);
     }

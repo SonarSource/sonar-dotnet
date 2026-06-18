@@ -55,7 +55,6 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsTopLevelStatementPartialProgramClass(SyntaxNode declaration) =>
             declaration is ClassDeclarationSyntax { Identifier.Text: "Program" } classDeclaration
             && classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-            && declaration.Parent is CompilationUnitSyntax compilationUnit
-            && compilationUnit.IsTopLevelMain();
+            && declaration.Parent is CompilationUnitSyntax { IsTopLevelMain: true };
     }
 }
