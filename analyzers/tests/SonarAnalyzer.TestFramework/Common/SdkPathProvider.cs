@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
@@ -23,8 +23,7 @@ public static class SdkPathProvider
 {
     private const int DotnetVersion = 10;
 
-    private static readonly string RazorSourceGeneratorPath =
-        Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
+    private static readonly string RazorSourceGeneratorPath = Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
 
     public static AnalyzerFileReference[] SourceGenerators { get; } =
     [
@@ -32,7 +31,7 @@ public static class SdkPathProvider
     ];
 
     public static string LatestSdkFolder() =>
-        LatestFolder(TestConstants.SdkPath, "dotnet.dll");
+        LatestFolder(TestConstants.SdkPath, "dotnet.dll", "204");
 
     public static string LatestAspNetCoreSdkFolder() =>
         LatestFolder(TestConstants.AspNetCorePath, "Microsoft.AspNetCore.dll");
@@ -40,7 +39,7 @@ public static class SdkPathProvider
     public static string LatestWindowsDesktopSdkFolder() =>
         LatestFolder(TestConstants.WindowsDesktopPath, "PresentationCore.dll");
 
-    public static string LatestFolder(string path, string assemblyName)
+    public static string LatestFolder(string path, string assemblyName, string dotnetVersionMinor = null) // FixMe: Remove dotnetVersionMinor paramemeter once https://sonarsource.atlassian.net/browse/NET-3786 is fixed
     {
         if (!Directory.Exists(path))
         {
@@ -50,7 +49,7 @@ public static class SdkPathProvider
 
         // Due to the preview versions naming convention, we cannot use the folder names as version numbers so we need to look at the file versions of the assemblies from the folder.
         // When reading the dll versions, the File version (e.g. 9.1.24.40712) is considered instead of the Product version (e.g. 9.1.100-preview.7.24407.12+hash).
-        return Directory.GetDirectories(path, $"{DotnetVersion}.*")
+        return Directory.GetDirectories(path, $"{DotnetVersion}.{dotnetVersionMinor ?? "*"}")
             .OrderBy(x => FromFolderName(x, assemblyName))
             .Last();
 
