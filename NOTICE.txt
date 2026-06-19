@@ -1,11 +1,11 @@
-﻿Copyright (C) SonarSource Sàrl
+Copyright (C) SonarSource Sàrl
 mailto:info AT sonarsource DOT com
 
 This product includes software developed at
 SonarSource (https://sonarsource.com/).
 
-See LICENSE.txt file for details of the 
+See LICENSE.txt file for details of the
 applicable license.
 
-For further legal information, see 
+For further legal information, see
 https://sonarsource.com/legal/
