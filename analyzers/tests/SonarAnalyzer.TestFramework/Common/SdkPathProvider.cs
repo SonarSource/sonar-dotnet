@@ -23,8 +23,10 @@ public static class SdkPathProvider
 {
     // Due to the preview versions naming convention, we cannot use the folder names as version numbers so we need to look at the file versions of the assemblies from the folder.
     // When reading the dll versions, the File version (e.g. 9.1.24.40712) is considered instead of the Product version (e.g. 9.1.100-preview.7.24407.12+hash).
-    // FixMe: Pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed
-    private const string DotnetVersion = "10.0.204";
+    // FixMe: SDK pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed.
+    // Runtime folders (AspNetCore, WindowsDesktop) use a different version (e.g. 10.0.4) so they keep the wildcard pattern.
+    private const string SdkVersion = "10.0.204";
+    private const string RuntimeVersionPattern = "10.*";
 
     private static readonly string RazorSourceGeneratorPath = Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
 
@@ -34,22 +36,22 @@ public static class SdkPathProvider
     ];
 
     public static string LatestSdkFolder() =>
-        LatestFolder(TestConstants.SdkPath, "dotnet.dll");
+        LatestFolder(TestConstants.SdkPath, "dotnet.dll", SdkVersion);
 
     public static string LatestAspNetCoreSdkFolder() =>
-        LatestFolder(TestConstants.AspNetCorePath, "Microsoft.AspNetCore.dll");
+        LatestFolder(TestConstants.AspNetCorePath, "Microsoft.AspNetCore.dll", RuntimeVersionPattern);
 
     public static string LatestWindowsDesktopSdkFolder() =>
-        LatestFolder(TestConstants.WindowsDesktopPath, "PresentationCore.dll");
+        LatestFolder(TestConstants.WindowsDesktopPath, "PresentationCore.dll", RuntimeVersionPattern);
 
-    public static string LatestFolder(string path, string assemblyName)
+    public static string LatestFolder(string path, string assemblyName, string versionPattern)
     {
         if (!Directory.Exists(path))
         {
             throw new NotSupportedException(
                 $"The directory '{path}' does not exist. This may be because you are not using .NET Core. Please note that Razor analysis is only supported when using .NET Core.");
         }
-        return Directory.GetDirectories(path, DotnetVersion).OrderBy(x => FromFolderName(x, assemblyName)).Last();
+        return Directory.GetDirectories(path, versionPattern).OrderBy(x => FromFolderName(x, assemblyName)).Last();
 
         static Version FromFolderName(string folderName, string assemblyName)
         {
