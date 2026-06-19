@@ -227,6 +227,13 @@ Namespace Tests.Diagnostics
             Dim query8 As String = "password=:password;user=:user;"
             Dim query9 As String = "password=?;user=?;"
             Dim query10 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;"
+            Dim query11 As String = "password=@password"        ' Compliant, SQL Server named parameter
+            Dim query12 As String = "password=@pwd"             ' Compliant, SQL Server named parameter
+            Dim query13 As String = "UPDATE table SET password = @password"     ' Compliant, SQL Server named parameter
+            Dim query14 As String = "Server=myServerName\myInstanceName;Database=myDataBase;Password=@myPassword;User Id=@username;" ' Compliant, SQL Server named parameter
+            Dim query15 As String = "password=$password"        ' Compliant, SQLite named parameter
+            Dim query16 As String = "password=$pwd"             ' Compliant, SQLite named parameter
+            Dim query17 As String = "UPDATE table SET password = $password"     ' Compliant, SQLite named parameter
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = ?")
             End Using
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = :password")
@@ -234,6 +241,8 @@ Namespace Tests.Diagnostics
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = {0}")
             End Using
             Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = ")
+            End Using
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = @password") ' Compliant, SQL Server named parameter
             End Using
         End Sub
 

@@ -260,10 +260,18 @@ namespace Tests.Diagnostics
             string query7 = "password=:password;user=:user;";
             string query8 = "password=?;user=?;";
             string query9 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=:myPassword;User Id=:username;";
+            string query10 = "password=@password";        // Compliant, SQL Server named parameter
+            string query11 = "password=@pwd";             // Compliant, SQL Server named parameter
+            string query12 = "UPDATE table SET password = @password";     // Compliant, SQL Server named parameter
+            string query13 = @"Server=myServerName\myInstanceName;Database=myDataBase;Password=@myPassword;User Id=@username;"; // Compliant, SQL Server named parameter
+            string query14 = "password=$password";        // Compliant, SQLite named parameter
+            string query15 = "password=$pwd";             // Compliant, SQLite named parameter
+            string query16 = "UPDATE table SET password = $password";     // Compliant, SQLite named parameter
             using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = ?")) { }
             using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = :password")) { }
             using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = {0}")) { }
             using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = ")) { }
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = @password")) { } // Compliant, SQL Server named parameter
         }
 
         public void WordInVariableNameAndValue()

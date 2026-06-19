@@ -28,7 +28,7 @@ public abstract class DoNotHardcodeBase<TSyntaxKind> : ParametrizedDiagnosticAna
     protected const char KeywordSeparator = ';';
 
     protected static readonly TimeSpan RegexTimeout = TimeSpan.FromMilliseconds(250);
-    protected static readonly Regex ValidKeywordPattern = new(@"^(\?|:\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled, RegexTimeout);
+    protected static readonly Regex ValidKeywordPattern = new(@"^(\?|:\w+|[@$]\w+|\{\d+[^}]*\}|""|')$", RegexOptions.IgnoreCase | RegexOptions.Compiled, RegexTimeout);
 
     protected string keyWords;
     protected DiagnosticDescriptor rule;
