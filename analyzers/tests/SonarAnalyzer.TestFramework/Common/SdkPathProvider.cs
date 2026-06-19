@@ -24,7 +24,7 @@ public static class SdkPathProvider
     // Due to the preview versions naming convention, we cannot use the folder names as version numbers so we need to look at the file versions of the assemblies from the folder.
     // When reading the dll versions, the File version (e.g. 9.1.24.40712) is considered instead of the Product version (e.g. 9.1.100-preview.7.24407.12+hash).
     // FixMe: Pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed
-    private const string DotnetVersion = "10.0.204*";
+    private const string DotnetVersion = "10.0.204";
 
     private static readonly string RazorSourceGeneratorPath = Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
 
@@ -63,6 +63,6 @@ public static class SdkPathProvider
         public void AddDependencyLocation(string fullPath) { }
 
         public Assembly LoadFromPath(string fullPath) =>
-            Assembly.Load(fullPath);
+            Assembly.LoadFrom(fullPath);
     }
 }
