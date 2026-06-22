@@ -28,11 +28,14 @@ public class UseTrueForAllTest
 
     [TestMethod]
     public void UseTrueForAll_CS() =>
-        builderCS.AddPaths("UseTrueForAll.cs").Verify();
+        builderCS.AddPaths("UseTrueForAll.cs").AddReferences(MetadataReferenceFacade.SystemCollections).Verify();
 
     [TestMethod]
-    public void UseTrueForAll_CS_Immutable() =>
-        builderCS.AddPaths("UseTrueForAll.Immutable.cs").AddReferences(MetadataReferenceFacade.SystemCollections).Verify();
+    public void UseTrueForAll_CS_EntityFramework() =>
+        builderCS.AddPaths("UseTrueForAll.EntityFramework.cs")
+            .AddReferences(MetadataReferenceFacade.SystemCollections)
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(NugetPackageVersions.Latest))
+            .VerifyNoIssues();
 
     [TestMethod]
     public void UseTrueForAll_VB() =>

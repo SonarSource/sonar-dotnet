@@ -21,27 +21,30 @@ public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<T
 {
     private const string DiagnosticId = "S6603";
 
-    protected override string MessageFormat => "The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension";
-
     private static readonly ImmutableArray<KnownType> TargetTypes = ImmutableArray.Create(
         KnownType.System_Array,
         KnownType.System_Collections_Generic_List_T,
         KnownType.System_Collections_Immutable_ImmutableList_T);
 
+    protected override string MessageFormat => "The collection-specific \"TrueForAll\" method should be used instead of the \"All\" extension";
+
     protected UseTrueForAllBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-        {
-            if (Language.GetName(c.Node).Equals(nameof(Enumerable.All), Language.NameComparison)
-                && Language.Syntax.Operands(c.Node) is { Left: { } left, Right: { } right }
-                && IsCorrectType(left, c.Model)
-                && IsCorrectCall(right, c.Model))
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
             {
-                c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(c.Node)?.GetLocation());
-            }
-        },
-        Language.SyntaxKind.InvocationExpression);
+                if (Language.GetName(c.Node).Equals(nameof(Enumerable.All), Language.NameComparison)
+                    && Language.Syntax.Operands(c.Node) is { Left: { } left, Right: { } right }
+                    && IsCorrectType(left, c.Model)
+                    && IsCorrectCall(right, c.Model)
+                    && !IsInEntityFrameworkExpressionTree(c))
+                {
+                    c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(c.Node)?.GetLocation());
+                }
+            },
+            Language.SyntaxKind.InvocationExpression);
 
     protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
         model.GetTypeInfo(left).Type.DerivesFromAny(TargetTypes);
@@ -49,4 +52,7 @@ public abstract class UseTrueForAllBase<TSyntaxKind> : SonarDiagnosticAnalyzer<T
     protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+    private bool IsInEntityFrameworkExpressionTree(SonarSyntaxNodeReportingContext context) =>
+        context.Compilation.ReferencesAny(KnownAssembly.MicrosoftEntityFrameworkCore, KnownAssembly.MicrosoftEntityFramework) && Language.Syntax.IsInExpressionTree(context.Model, context.Node);
 }
