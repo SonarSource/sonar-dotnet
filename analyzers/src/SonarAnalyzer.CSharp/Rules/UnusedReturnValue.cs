@@ -136,7 +136,6 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
         invocation.OriginalDefinition.Equals(declaration)
         || (declaration.AssociatedExtensionImplementation is { } implementation && invocation.OriginalDefinition.Equals(implementation));
 
-    // Extension-block members have two equivalent symbols; use the implementation to find the hidden this parameter.
     private static bool IsFluentExtensionMethod(IMethodSymbol method, MethodDeclarationSyntax syntax, SemanticModel model)
     {
         if (!method.IsExtension)
@@ -148,8 +147,13 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
         {
             return false;
         }
-        return method.AssociatedExtensionImplementation is not null
-            || ReturnsThisParameter(syntax, model, actualMethod.Parameters[0]);
+        // Extension-block members need to use the containing type's ExtensionParameter
+        // as the comparison symbol, since the implementation's hidden parameter has a
+        // different identity than what the body references.
+        var thisParameter = method.AssociatedExtensionImplementation is not null
+            ? (method.ContainingType.ExtensionParameter ?? actualMethod.Parameters[0])
+            : actualMethod.Parameters[0];
+        return ReturnsThisParameter(syntax, model, thisParameter);
     }
 
     private static bool ReturnsThisParameter(MethodDeclarationSyntax syntax, SemanticModel model, IParameterSymbol thisParameter)
@@ -160,7 +164,11 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
         }
         if (syntax.Body is { } body)
         {
-            var returnStatements = body.DescendantNodes().OfType<ReturnStatementSyntax>();
+            var returnStatements = body.DescendantNodes(n =>
+                !n.IsKind(SyntaxKind.SimpleLambdaExpression)
+                && !n.IsKind(SyntaxKind.ParenthesizedLambdaExpression)
+                && !n.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                .OfType<ReturnStatementSyntax>();
             return returnStatements.Any() && returnStatements.All(r => r.Expression is not null && ReturnsSymbol(r.Expression, model, thisParameter));
         }
         return false;
