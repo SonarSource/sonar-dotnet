@@ -15,55 +15,52 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class OrderByRepeated : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class OrderByRepeated : SonarDiagnosticAnalyzer
-    {
-        internal const string DiagnosticId = "S3169";
-        private const string MessageFormat = "Use 'ThenBy' instead.";
+    internal const string DiagnosticId = "S3169";
+    private const string MessageFormat = "Use 'ThenBy' instead.";
 
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            context.RegisterNodeAction(
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var outerInvocation = (InvocationExpressionSyntax)c.Node;
+                if (outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess
+                    && memberAccess.Expression is InvocationExpressionSyntax innerInvocation
+                    && IsMethodOrderByExtension(outerInvocation, c.Model)
+                    && IsOrderByOrThenBy(innerInvocation, c.Model))
                 {
-                    var outerInvocation = (InvocationExpressionSyntax)c.Node;
-                    if (outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess &&
-                        memberAccess.Expression is InvocationExpressionSyntax innerInvocation &&
-                        IsMethodOrderByExtension(outerInvocation, c.Model) &&
-                        IsOrderByOrThenBy(innerInvocation, c.Model))
-                    {
-                        c.ReportIssue(rule, memberAccess.Name);
-                    }
+                    c.ReportIssue(Rule, memberAccess.Name);
+                }
 
-                    static bool IsOrderByOrThenBy(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-                        IsMethodOrderByExtension(invocation, semanticModel) || IsMethodThenByExtension(invocation, semanticModel);
-                },
-                SyntaxKind.InvocationExpression);
-        }
-        private static bool IsMethodOrderByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.Expression.ToStringContains("OrderBy") &&
-            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-               methodSymbol.Name == "OrderBy" &&
-               methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-               methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+                static bool IsOrderByOrThenBy(InvocationExpressionSyntax invocation, SemanticModel model) =>
+                    IsMethodOrderByExtension(invocation, model) || IsMethodThenByExtension(invocation, model);
+            },
+            SyntaxKind.InvocationExpression);
 
-        private static bool IsMethodThenByExtension(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
-            invocation.Expression.ToStringContains("ThenBy") &&
-            semanticModel.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-               methodSymbol.Name == "ThenBy" &&
-               methodSymbol.MethodKind == MethodKind.ReducedExtension &&
-               MethodIsOnIOrderedEnumerable(methodSymbol);
+    private static bool IsMethodOrderByExtension(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        invocation.Expression.ToStringContains("OrderBy")
+        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+        && methodSymbol.Name == "OrderBy"
+        && methodSymbol.MethodKind == MethodKind.ReducedExtension
+        && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
-        private static bool MethodIsOnIOrderedEnumerable(IMethodSymbol methodSymbol) =>
-            methodSymbol.ReceiverType is INamedTypeSymbol receiverType &&
-               receiverType.ConstructedFrom.ContainingNamespace.ToString() == "System.Linq" &&
-               receiverType.ConstructedFrom.MetadataName == "IOrderedEnumerable`1";
-    }
+    private static bool IsMethodThenByExtension(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        invocation.Expression.ToStringContains("ThenBy")
+        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+        && methodSymbol.Name == "ThenBy"
+        && methodSymbol.MethodKind == MethodKind.ReducedExtension
+        && MethodIsOnIOrderedEnumerable(methodSymbol);
+
+    private static bool MethodIsOnIOrderedEnumerable(IMethodSymbol methodSymbol) =>
+        methodSymbol.ReceiverType is INamedTypeSymbol receiverType
+        && receiverType.ConstructedFrom.ContainingNamespace.ToString() == "System.Linq"
+        && receiverType.ConstructedFrom.MetadataName == "IOrderedEnumerable`1";
 }
