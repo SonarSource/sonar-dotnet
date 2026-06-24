@@ -21,12 +21,15 @@ namespace SonarAnalyzer.Core.Extensions;
 
 public static class XElementExtensions
 {
-    public static XAttribute GetAttributeIfBoolValueIs(this XElement element, string attributeName, bool value) =>
-        element.Attribute(attributeName) is { } attribute
-            && attribute.Value.Equals(value.ToString(), StringComparison.OrdinalIgnoreCase)
-            ? attribute
-            : null;
+    extension(XElement element)
+    {
+        public XAttribute GetAttributeIfBoolValueIs(string attributeName, bool value) =>
+            element.Attribute(attributeName) is { } attribute
+                && attribute.Value.Equals(value.ToString(), StringComparison.OrdinalIgnoreCase)
+                ? attribute
+                : null;
 
-    public static Location CreateLocation(this XElement element, string path) =>
-        element.CreateLocation(path, element.Name, element);
+        public Location CreateLocation(string path) =>
+            element.CreateLocation(path, element.Name, element);
+    }
 }

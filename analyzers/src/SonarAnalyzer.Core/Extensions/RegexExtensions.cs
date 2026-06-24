@@ -23,72 +23,75 @@ public static class RegexExtensions
 {
     private static readonly MatchCollection EmptyMatchCollection = Regex.Matches(string.Empty, "a", RegexOptions.None, Constants.DefaultRegexTimeout);
 
-    /// <summary>
-    /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
-    /// </summary>
-    public static Match SafeMatch(this Regex regex, string input)
+    extension(Regex regex)
     {
-        try
+        /// <summary>
+        /// Matches the input to the regex. Returns <see cref="Match.Empty" /> in case of an <see cref="RegexMatchTimeoutException" />.
+        /// </summary>
+        public Match SafeMatch(string input)
         {
-            return regex.Match(input);
+            try
+            {
+                return regex.Match(input);
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return Match.Empty;
+            }
         }
-        catch (RegexMatchTimeoutException)
-        {
-            return Match.Empty;
-        }
-    }
 
-    /// <summary>
-    /// Matches the input to the regex. Returns <see langword="false" /> in case of an <see cref="RegexMatchTimeoutException" />.
-    /// </summary>
-    public static bool SafeIsMatch(this Regex regex, string input) =>
-        regex.SafeIsMatch(input, false);
+        /// <summary>
+        /// Matches the input to the regex. Returns <see langword="false" /> in case of an <see cref="RegexMatchTimeoutException" />.
+        /// </summary>
+        public bool SafeIsMatch(string input) =>
+            regex.SafeIsMatch(input, false);
 
-    /// <summary>
-    /// Matches the input to the regex. Returns <paramref name="timeoutFallback"/> in case of an <see cref="RegexMatchTimeoutException" />.
-    /// </summary>
-    public static bool SafeIsMatch(this Regex regex, string input, bool timeoutFallback)
-    {
-        try
+        /// <summary>
+        /// Matches the input to the regex. Returns <paramref name="timeoutFallback"/> in case of an <see cref="RegexMatchTimeoutException" />.
+        /// </summary>
+        public bool SafeIsMatch(string input, bool timeoutFallback)
         {
-            return regex.IsMatch(input);
+            try
+            {
+                return regex.IsMatch(input);
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return timeoutFallback;
+            }
         }
-        catch (RegexMatchTimeoutException)
-        {
-            return timeoutFallback;
-        }
-    }
 
-    /// <summary>
-    /// Matches the input to the regex. Returns an empty <see cref="MatchCollection" /> in case of an <see cref="RegexMatchTimeoutException" />.
-    /// </summary>
-    public static MatchCollection SafeMatches(this Regex regex, string input)
-    {
-        try
+        /// <summary>
+        /// Matches the input to the regex. Returns an empty <see cref="MatchCollection" /> in case of an <see cref="RegexMatchTimeoutException" />.
+        /// </summary>
+        public MatchCollection SafeMatches(string input)
         {
-            var res = regex.Matches(input);
-            _ = res.Count; // MatchCollection is lazy. Accessing "Count" executes the regex and caches the result
-            return res;
+            try
+            {
+                var res = regex.Matches(input);
+                _ = res.Count; // MatchCollection is lazy. Accessing "Count" executes the regex and caches the result
+                return res;
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return EmptyMatchCollection;
+            }
         }
-        catch (RegexMatchTimeoutException)
-        {
-            return EmptyMatchCollection;
-        }
-    }
 
-    /// <summary>
-    /// Replaces <paramref name="input"/> with <paramref name="replacement"/> in <paramref name="regex"/>.
-    /// Returns the original <paramref name="input"/> in case of an <see cref="RegexMatchTimeoutException" />.
-    /// </summary>
-    public static string SafeReplace(this Regex regex, string input, string replacement)
-    {
-        try
+        /// <summary>
+        /// Replaces <paramref name="input"/> with <paramref name="replacement"/> in <paramref name="regex"/>.
+        /// Returns the original <paramref name="input"/> in case of an <see cref="RegexMatchTimeoutException" />.
+        /// </summary>
+        public string SafeReplace(string input, string replacement)
         {
-            return regex.Replace(input, replacement);
-        }
-        catch (RegexMatchTimeoutException)
-        {
-            return input;
+            try
+            {
+                return regex.Replace(input, replacement);
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return input;
+            }
         }
     }
 }

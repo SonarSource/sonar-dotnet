@@ -23,27 +23,30 @@ namespace SonarAnalyzer.Core.Extensions;
 
 internal static class IXmlLineInfoExtensions
 {
-    public static Location CreateLocation(this IXmlLineInfo startPos, string path, XName name, XElement closestElement)
+    extension(IXmlLineInfo startPos)
     {
-        // IXmlLineInfo is 1-based, whereas Roslyn is zero-based
-        if (startPos.HasLineInfo())
+        public Location CreateLocation(string path, XName name, XElement closestElement)
         {
-            var prefix = closestElement.GetPrefixOfNamespace(name.Namespace);
-            var length = name.LocalName.Length;
-            if (prefix is not null)
+            // IXmlLineInfo is 1-based, whereas Roslyn is zero-based
+            if (startPos.HasLineInfo())
             {
-                length += prefix.Length + 1; // prefix:LocalName - +1 for ':'
+                var prefix = closestElement.GetPrefixOfNamespace(name.Namespace);
+                var length = name.LocalName.Length;
+                if (prefix is not null)
+                {
+                    length += prefix.Length + 1; // prefix:LocalName - +1 for ':'
+                }
+                var start = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1);
+                var end = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1 + length);
+                // We cannot properly compute the TextSpan as we only have the line information.
+                // It should not break the analysis nor the reporting as we still have the LinePositionSpan.
+                // Manual test has shown that the Sarif contains the correct information with only the LinePositionSpan.
+                return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
             }
-            var start = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1);
-            var end = new LinePosition(startPos.LineNumber - 1, startPos.LinePosition - 1 + length);
-            // We cannot properly compute the TextSpan as we only have the line information.
-            // It should not break the analysis nor the reporting as we still have the LinePositionSpan.
-            // Manual test has shown that the Sarif contains the correct information with only the LinePositionSpan.
-            return Location.Create(path, new TextSpan(start.Line, length), new LinePositionSpan(start, end));
-        }
-        else
-        {
-            return null;
+            else
+            {
+                return null;
+            }
         }
     }
 }
