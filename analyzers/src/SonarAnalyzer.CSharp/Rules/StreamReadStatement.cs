@@ -43,7 +43,7 @@ public sealed class StreamReadStatement : SonarDiagnosticAnalyzer
                 var statement = (ExpressionStatementSyntax)c.Node;
                 var expression = statement.Expression switch
                 {
-                    AwaitExpressionSyntax awaitExpression => awaitExpression.AwaitedExpressionWithoutConfigureAwait(),
+                    AwaitExpressionSyntax awaitExpression => awaitExpression.ExpressionWithoutConfigureAwait,
                     var x => x,
                 };
                 expression = expression.RemoveConditionalAccess();

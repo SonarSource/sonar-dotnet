@@ -51,7 +51,7 @@ public class AwaitExpressionSyntaxExtensionsTest
         code = code.Replace("|]", string.Empty);
         var root = CSharpSyntaxTree.ParseText(code).GetRoot();
         var node = root.FindNode(TextSpan.FromBounds(start, end)) as AwaitExpressionSyntax;
-        var actual = node.AwaitedExpressionWithoutConfigureAwait();
+        var actual = node.ExpressionWithoutConfigureAwait;
         actual.ToString().Should().Be(expected);
     }
 }

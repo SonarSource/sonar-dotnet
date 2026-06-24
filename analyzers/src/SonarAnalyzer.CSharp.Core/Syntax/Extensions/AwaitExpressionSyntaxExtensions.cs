@@ -19,17 +19,20 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class AwaitExpressionSyntaxExtensions
 {
-    public static ExpressionSyntax AwaitedExpressionWithoutConfigureAwait(this AwaitExpressionSyntax awaitExpression) =>
-        awaitExpression.Expression?.WithoutEnclosingParentheses switch
-        {
-            InvocationExpressionSyntax
+    extension(AwaitExpressionSyntax awaitExpression)
+    {
+        public ExpressionSyntax ExpressionWithoutConfigureAwait =>
+            awaitExpression.Expression?.WithoutEnclosingParentheses switch
             {
-                Expression: MemberAccessExpressionSyntax
+                InvocationExpressionSyntax
                 {
-                    Name.Identifier.Text: nameof(Task.ConfigureAwait),
-                    Expression: { } configuredExpression
-                }
-            } => configuredExpression,
-            var x => x,
-        };
+                    Expression: MemberAccessExpressionSyntax
+                    {
+                        Name.Identifier.Text: nameof(Task.ConfigureAwait),
+                        Expression: { } configuredExpression
+                    }
+                } => configuredExpression,
+                var x => x,
+            };
+    }
 }

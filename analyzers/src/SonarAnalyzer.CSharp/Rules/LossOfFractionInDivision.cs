@@ -110,8 +110,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool DivisionIsInTupleTypeIsNonIntegral(SyntaxNode division, SemanticModel semanticModel, out ITypeSymbol divisionResultType)
         {
             var outerTuple = GetMostOuterTuple(division);
-            if (outerTuple is { Parent: AssignmentExpressionSyntax assignmentSyntax }
-                && assignmentSyntax.MapAssignmentArguments() is { } assignmentMappings)
+            if (outerTuple is { Parent: AssignmentExpressionSyntax { FlattenedTupleAssignments: { } assignmentMappings } })
             {
                 var divisionResult = assignmentMappings.FirstOrDefault(x => x.Right.Equals(division)).Left;
                 if (divisionResult is { })

@@ -71,7 +71,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void ProcessSimpleAssignments(SonarSyntaxNodeReportingContext c, ISet<ISymbol> symbolsWhereLocaleIsSet)
         {
             var assignmentExpression = (AssignmentExpressionSyntax)c.Node;
-            var variableSymbols = assignmentExpression.AssignmentTargets()
+            var variableSymbols = assignmentExpression.AssignmentTargets
                 .Where(x => c.Model.GetSymbolInfo(x).Symbol is IPropertySymbol propertySymbol
                             && propertySymbol.Name == "Locale"
                             && propertySymbol.ContainingType.IsAny(CheckedTypes))

@@ -19,6 +19,8 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class LocalFunctionStatementSyntaxWrapperExtensions
 {
-    public static bool IsTopLevel(this LocalFunctionStatementSyntaxWrapper localFunction) =>
-        localFunction is { SyntaxNode.Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax } };
+    extension(LocalFunctionStatementSyntaxWrapper localFunction)
+    {
+        public bool IsTopLevel => localFunction is { Node.Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax } };
+    }
 }

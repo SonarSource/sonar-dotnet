@@ -70,7 +70,7 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
     private static void AnalyzeLocalFunctionStatements(SonarSyntaxNodeReportingContext context)
     {
         var localFunctionSyntax = (LocalFunctionStatementSyntaxWrapper)context.Node;
-        var topMostContainingMethod = localFunctionSyntax.IsTopLevel()
+        var topMostContainingMethod = localFunctionSyntax.IsTopLevel
             ? context.Node.Parent.Parent // .Parent.Parent is the CompilationUnit
             : context.Node.GetTopMostContainingMethod();
 

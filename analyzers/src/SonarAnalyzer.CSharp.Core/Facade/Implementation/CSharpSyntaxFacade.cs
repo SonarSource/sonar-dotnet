@@ -43,7 +43,7 @@ internal sealed class CSharpSyntaxFacade : SyntaxFacade<SyntaxKind>
         Cast<AssignmentExpressionSyntax>(assignment).Right;
 
     public override ImmutableArray<SyntaxNode> AssignmentTargets(SyntaxNode assignment) =>
-        Cast<AssignmentExpressionSyntax>(assignment).AssignmentTargets();
+        Cast<AssignmentExpressionSyntax>(assignment).AssignmentTargets;
 
     public override SyntaxNode BinaryExpressionLeft(SyntaxNode binary) =>
         Cast<BinaryExpressionSyntax>(binary).Left;

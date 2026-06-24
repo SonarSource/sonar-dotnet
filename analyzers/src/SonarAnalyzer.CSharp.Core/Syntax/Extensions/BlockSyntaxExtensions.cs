@@ -19,20 +19,23 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class BlockSyntaxExtensions
 {
-    public static bool IsEmpty(this BlockSyntax block, bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true)
+    extension(BlockSyntax block)
     {
-        _ = block ?? throw new ArgumentNullException(nameof(block));
-        return !IsNotEmpty();
+        public bool IsEmpty(bool treatCommentsAsContent = true, bool treatConditionalCompilationAsContent = true)
+        {
+            _ = block ?? throw new ArgumentNullException(nameof(block));
+            return !IsNotEmpty();
 
-        bool IsNotEmpty() =>
-            block.Statements.Any()
-            || ((treatCommentsAsContent || treatConditionalCompilationAsContent)
-                && (TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
-                    || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia)));
+            bool IsNotEmpty() =>
+                block.Statements.Any()
+                || ((treatCommentsAsContent || treatConditionalCompilationAsContent)
+                    && (TriviaContainsCommentOrConditionalCompilation(block.OpenBraceToken.TrailingTrivia)
+                        || TriviaContainsCommentOrConditionalCompilation(block.CloseBraceToken.LeadingTrivia)));
 
-        bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList triviaList) =>
-            triviaList.Any(x =>
-                (treatCommentsAsContent && x.Kind() is SyntaxKind.SingleLineCommentTrivia or SyntaxKind.MultiLineCommentTrivia)
-                 || (treatConditionalCompilationAsContent && x.IsKind(SyntaxKind.DisabledTextTrivia)));
+            bool TriviaContainsCommentOrConditionalCompilation(SyntaxTriviaList triviaList) =>
+                triviaList.Any(x =>
+                    (treatCommentsAsContent && x.Kind() is SyntaxKind.SingleLineCommentTrivia or SyntaxKind.MultiLineCommentTrivia)
+                     || (treatConditionalCompilationAsContent && x.IsKind(SyntaxKind.DisabledTextTrivia)));
+        }
     }
 }

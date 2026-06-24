@@ -33,7 +33,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var switchSyntax = (SwitchStatementSyntax)c.Node;
-                    var defaultLabelSectionIndex = switchSyntax.GetDefaultLabelSectionIndex();
+                    var defaultLabelSectionIndex = switchSyntax.DefaultLabelSectionIndex;
 
                     if (defaultLabelSectionIndex > 0 &&                                 // default is not first...
                         defaultLabelSectionIndex != (switchSyntax.Sections.Count -1))   // nor last

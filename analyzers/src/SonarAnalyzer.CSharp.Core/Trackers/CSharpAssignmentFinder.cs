@@ -76,7 +76,7 @@ public class CSharpAssignmentFinder : AssignmentFinder
         mutation switch
         {
             AssignmentExpressionSyntax assignment
-                when assignment.MapAssignmentArguments().FirstOrDefault(x => x.Left.NameIs(identifierName)) is { Right: { } right } => right,
+                when assignment.FlattenedTupleAssignments.FirstOrDefault(x => x.Left.NameIs(identifierName)) is { Right: { } right } => right,
             PostfixUnaryExpressionSyntax
             {
                 RawKind: (int)SyntaxKind.PostIncrementExpression or (int)SyntaxKind.PostDecrementExpression,

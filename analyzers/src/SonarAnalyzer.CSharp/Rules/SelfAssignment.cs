@@ -32,7 +32,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         return;
                     }
 
-                    foreach (var assigment in expression.MapAssignmentArguments().Where(x => CSharpEquivalenceChecker.AreEquivalent(x.Left, x.Right)))
+                    foreach (var assigment in expression.FlattenedTupleAssignments.Where(x => CSharpEquivalenceChecker.AreEquivalent(x.Left, x.Right)))
                     {
                         c.ReportIssue(Rule, assigment.Left, [assigment.Right.ToSecondaryLocation()]);
                     }

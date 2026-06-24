@@ -77,7 +77,7 @@ public class CSharpObjectInitializationTracker
 
     public bool ShouldBeReported(AssignmentExpressionSyntax assignment, SemanticModel model)
     {
-        var assignmentMap = assignment.MapAssignmentArguments();
+        var assignmentMap = assignment.FlattenedTupleAssignments;
 
         // Ignore assignments within object initializers, they are reported in the ObjectCreationExpression handler
         return assignment.FirstAncestorOrSelf<InitializerExpressionSyntax>() is null
@@ -210,7 +210,7 @@ public class CSharpObjectInitializationTracker
 
         bool TrackedPropertySetWithAllowedValue(AssignmentExpressionSyntax assignment)
         {
-            var assignmentMap = assignment.MapAssignmentArguments();
+            var assignmentMap = assignment.FlattenedTupleAssignments;
             return assignmentMap.Any(x => IsTrackedPropertyName(x.Left)
                                             && variableSymbol.Equals(AssignedVariableSymbol(x.Left, model))
                                             && IsAllowedValue(x.Right, model));

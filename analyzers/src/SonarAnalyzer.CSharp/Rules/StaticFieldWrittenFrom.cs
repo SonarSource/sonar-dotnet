@@ -40,7 +40,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         {
                             var assignment = (AssignmentExpressionSyntax)c.Node;
 
-                            foreach (var target in assignment.AssignmentTargets())
+                            foreach (var target in assignment.AssignmentTargets)
                             {
                                 if (GetStaticFieldSymbol(c.Model, target) is { } fieldSymbol)
                                 {

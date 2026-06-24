@@ -51,7 +51,7 @@ public sealed class ForLoopCounterChanged : SonarDiagnosticAnalyzer
                 SyntaxKind.LeftShiftAssignmentExpression,
                 SyntaxKind.RightShiftAssignmentExpression,
                 SyntaxKindEx.UnsignedRightShiftAssignmentExpression),
-            AffectedExpressions = x => ((AssignmentExpressionSyntax)x).AssignmentTargets()
+            AffectedExpressions = x => ((AssignmentExpressionSyntax)x).AssignmentTargets
         });
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);

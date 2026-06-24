@@ -19,9 +19,10 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class SwitchStatementSyntaxExtensions
 {
-    public static bool HasDefaultLabel(this SwitchStatementSyntax node) =>
-        GetDefaultLabelSectionIndex(node) >= 0;
+    extension(SwitchStatementSyntax node)
+    {
+        public bool HasDefaultLabel => node.DefaultLabelSectionIndex >= 0;
 
-    public static int GetDefaultLabelSectionIndex(this SwitchStatementSyntax node) =>
-        node.Sections.IndexOf(x => x.Labels.AnyOfKind(SyntaxKind.DefaultSwitchLabel));
+        public int DefaultLabelSectionIndex => node.Sections.IndexOf(x => x.Labels.AnyOfKind(SyntaxKind.DefaultSwitchLabel));
+    }
 }

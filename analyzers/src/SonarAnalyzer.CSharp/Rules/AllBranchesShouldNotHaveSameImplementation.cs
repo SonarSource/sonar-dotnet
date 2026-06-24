@@ -53,7 +53,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
             var firstArm = arms[0];
-            if (switchExpression.HasDiscardPattern() &&
+            if (switchExpression.HasDiscardPattern &&
                 arms.Skip(1).All(arm => SyntaxFactory.AreEquivalent(arm.Expression, firstArm.Expression)))
             {
                 context.ReportIssue(rule, switchExpression.SwitchKeyword, StatementsMessage);
@@ -111,7 +111,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 switchStatement.Sections;
 
             protected override bool HasDefaultLabel(SwitchStatementSyntax switchStatement) =>
-                switchStatement.HasDefaultLabel();
+                switchStatement.HasDefaultLabel;
 
             protected override Location GetLocation(SwitchStatementSyntax switchStatement) =>
                 switchStatement.SwitchKeyword.GetLocation();

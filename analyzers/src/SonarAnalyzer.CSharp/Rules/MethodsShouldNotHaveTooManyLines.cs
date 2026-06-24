@@ -45,7 +45,7 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(c =>
                 {
                     var localFunctionStatement = (LocalFunctionStatementSyntaxWrapper)c.Node;
-                    if (localFunctionStatement.IsTopLevel()
+                    if (localFunctionStatement.IsTopLevel
                         || localFunctionStatement.Modifiers.Any(SyntaxKind.StaticKeyword))
                     {
                         var wrapper = (LocalFunctionStatementSyntaxWrapper)c.Node;

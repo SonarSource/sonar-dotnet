@@ -84,7 +84,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return;
             }
 
-            var assignmentMappings = assignmentSyntax.MapAssignmentArguments();
+            var assignmentMappings = assignmentSyntax.FlattenedTupleAssignments;
             foreach (var assignmentMapping in assignmentMappings)
             {
                 if (context.Model.GetSymbolInfo(assignmentMapping.Left).Symbol is IPropertySymbol propertySymbol

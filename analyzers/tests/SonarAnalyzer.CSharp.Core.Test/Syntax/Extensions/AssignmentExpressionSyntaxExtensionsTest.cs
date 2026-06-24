@@ -357,7 +357,7 @@ public class AssignmentExpressionSyntaxExtensionsTest
     [DataRow("(var a, (var b, var (c, d))) = (0, (1, (2, 3)));", "var a | 0", "var b | 1", "c | 2", "d | 3")]
     public void MapAssignmentArguments_DataTest(string code, params string[] pairs)
     {
-        var actualMapping = ParseAssignmentExpression(code).MapAssignmentArguments();
+        var actualMapping = ParseAssignmentExpression(code).FlattenedTupleAssignments;
         var actualMappingPairs = actualMapping.Select(x => $"{x.Left} | {x.Right}");
         actualMappingPairs.Should().BeEquivalentTo(pairs);
     }
@@ -384,14 +384,14 @@ public class AssignmentExpressionSyntaxExtensionsTest
     [DataRow("(var a, var (b, c), var d, (int, int) e) = (1, (2, 3), (4, 5), (6, 7));", "a", "b", "c", "d", "e")]
     public void AssignmentTargets_DeconstructTargets(string assignment, params string[] expectedTargets)
     {
-        var allTargets = ParseAssignmentExpression(assignment).AssignmentTargets();
+        var allTargets = ParseAssignmentExpression(assignment).AssignmentTargets;
         var allTargetsAsString = allTargets.Select(x => x.ToString());
         allTargetsAsString.Should().BeEquivalentTo(expectedTargets);
     }
 
     private static void AssertMapAssignmentArguments<T>(string code, T[] expectation)
     {
-        var mapping = ParseAssignmentExpression(code).MapAssignmentArguments();
+        var mapping = ParseAssignmentExpression(code).FlattenedTupleAssignments;
         mapping.Should().BeEquivalentTo(expectation);
     }
 
