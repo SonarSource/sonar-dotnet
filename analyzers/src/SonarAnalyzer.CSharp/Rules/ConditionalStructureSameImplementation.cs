@@ -53,7 +53,7 @@ public sealed class ConditionalStructureSameImplementation : ConditionalStructur
             c =>
             {
                 var switchSection = (SwitchSectionSyntax)c.Node;
-                var precedingSections = switchSection.PrecedingSections().ToList();
+                var precedingSections = switchSection.PrecedingSections.ToList();
 
                 CheckStatement(c, switchSection, precedingSections, c.Model, HasDefaultClause((SwitchStatementSyntax)switchSection.Parent), "case");
             },

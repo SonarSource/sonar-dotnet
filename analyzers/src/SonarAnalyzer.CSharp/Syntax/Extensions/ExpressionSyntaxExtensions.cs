@@ -19,18 +19,21 @@ namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
 internal static class ExpressionSyntaxExtensions
 {
-    /// <summary>
-    /// Maps the tuple arguments of <paramref name="expression"/> to the positional sub-pattern of <paramref name="pattern"/>.
-    /// For a pattern like: <code>(x, y) is (1, 2)</code>x is mapped to numeric literal 1 and y is mapped to 2.
-    /// </summary>
-    /// <param name="expression">A tuple expression.</param>
-    /// <param name="pattern">A pattern that can be matched to the tuple <paramref name="expression"/>.</param>
-    /// <param name="objectToPatternMap">The mapping between the tuple arguments and the positional sub-patterns.</param>
-    public static Dictionary<ExpressionSyntax, SyntaxNode> MapToPattern(this ExpressionSyntax expression, SyntaxNode pattern)
+    extension(ExpressionSyntax expression)
     {
-        var map = new Dictionary<ExpressionSyntax, SyntaxNode>();
-        FillPatternMap(map, expression, pattern);
-        return map;
+        /// <summary>
+        /// Maps the tuple arguments of <paramref name="expression"/> to the positional sub-pattern of <paramref name="pattern"/>.
+        /// For a pattern like: <code>(x, y) is (1, 2)</code>x is mapped to numeric literal 1 and y is mapped to 2.
+        /// </summary>
+        /// <param name="expression">A tuple expression.</param>
+        /// <param name="pattern">A pattern that can be matched to the tuple <paramref name="expression"/>.</param>
+        /// <param name="objectToPatternMap">The mapping between the tuple arguments and the positional sub-patterns.</param>
+        public Dictionary<ExpressionSyntax, SyntaxNode> MapToPattern(SyntaxNode pattern)
+        {
+            var map = new Dictionary<ExpressionSyntax, SyntaxNode>();
+            FillPatternMap(map, expression, pattern);
+            return map;
+        }
     }
 
     private static void FillPatternMap(Dictionary<ExpressionSyntax, SyntaxNode> map, ExpressionSyntax expression, SyntaxNode pattern)

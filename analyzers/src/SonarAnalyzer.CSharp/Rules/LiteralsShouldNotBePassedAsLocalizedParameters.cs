@@ -50,7 +50,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             // Calling to/from debug-only code
             if (methodSymbol.IsDiagnosticDebugMethod()
-                || methodSymbol.IsConditionalDebugMethod()
+                || methodSymbol.IsConditionalDebugMethod
                 || invocationSyntax.IsInConditionalDebug(context.Model))
             {
                 return;

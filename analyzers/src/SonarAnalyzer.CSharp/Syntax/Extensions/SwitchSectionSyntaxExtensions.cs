@@ -19,17 +19,23 @@ namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
 internal static class SwitchSectionSyntaxExtensions
 {
-    public static IEnumerable<SwitchSectionSyntax> PrecedingSections(this SwitchSectionSyntax caseStatement)
+    extension(SwitchSectionSyntax caseStatement)
     {
-        if (caseStatement is null)
+        public IEnumerable<SwitchSectionSyntax> PrecedingSections
         {
-            return [];
-        }
-        else
-        {
-            var switchStatement = (SwitchStatementSyntax)caseStatement.Parent;
-            var currentSectionIndex = switchStatement.Sections.IndexOf(caseStatement);
-            return switchStatement.Sections.Take(currentSectionIndex);
+            get
+            {
+                if (caseStatement is null)
+                {
+                    return [];
+                }
+                else
+                {
+                    var switchStatement = (SwitchStatementSyntax)caseStatement.Parent;
+                    var currentSectionIndex = switchStatement.Sections.IndexOf(caseStatement);
+                    return switchStatement.Sections.Take(currentSectionIndex);
+                }
+            }
         }
     }
 }

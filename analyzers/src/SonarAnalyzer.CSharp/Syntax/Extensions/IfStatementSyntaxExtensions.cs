@@ -19,29 +19,32 @@ namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
 internal static class IfStatementSyntaxExtensions
 {
-    public static IList<IfStatementSyntax> PrecedingIfsInConditionChain(this IfStatementSyntax ifStatement)
+    extension(IfStatementSyntax ifStatement)
     {
-        var ifStatements = new List<IfStatementSyntax>();
-        while (PrecedingIf(ifStatement) is { } precedingIf)
+        public IList<IfStatementSyntax> PrecedingIfsInConditionChain()
         {
-            ifStatements.Add(precedingIf);
-            ifStatement = precedingIf;
-        }
-        ifStatements.Reverse();
-        return ifStatements;
-
-        static IfStatementSyntax PrecedingIf(IfStatementSyntax ifStatement) =>
-            ifStatement.Parent switch
+            var ifStatements = new List<IfStatementSyntax>();
+            while (PrecedingIf(ifStatement) is { } precedingIf)
             {
-                ElseClauseSyntax { Parent: IfStatementSyntax parentIf } => parentIf,
-                BlockSyntax { Parent: ElseClauseSyntax { Parent: IfStatementSyntax parentIf } } block when block.Statements[0] == ifStatement => parentIf,
-                _ => null,
-            };
+                ifStatements.Add(precedingIf);
+                ifStatement = precedingIf;
+            }
+            ifStatements.Reverse();
+            return ifStatements;
+
+            static IfStatementSyntax PrecedingIf(IfStatementSyntax ifStatement) =>
+                ifStatement.Parent switch
+                {
+                    ElseClauseSyntax { Parent: IfStatementSyntax parentIf } => parentIf,
+                    BlockSyntax { Parent: ElseClauseSyntax { Parent: IfStatementSyntax parentIf } } block when block.Statements[0] == ifStatement => parentIf,
+                    _ => null,
+                };
+        }
+
+        public IEnumerable<StatementSyntax> PrecedingStatementsInConditionChain() =>
+            ifStatement.PrecedingIfsInConditionChain().Select(x => x.Statement);
+
+        public IEnumerable<ExpressionSyntax> PrecedingConditionsInConditionChain() =>
+            ifStatement.PrecedingIfsInConditionChain().Select(x => x.Condition);
     }
-
-    public static IEnumerable<StatementSyntax> PrecedingStatementsInConditionChain(this IfStatementSyntax ifStatement) =>
-        ifStatement.PrecedingIfsInConditionChain().Select(x => x.Statement);
-
-    public static IEnumerable<ExpressionSyntax> PrecedingConditionsInConditionChain(this IfStatementSyntax ifStatement) =>
-        ifStatement.PrecedingIfsInConditionChain().Select(x => x.Condition);
 }

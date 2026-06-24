@@ -59,8 +59,8 @@ public class SwitchSectionSyntaxExtensionsTest
     {
         var sections = switchMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
-        sections.Last().PrecedingSections().Should().HaveCount(2);
-        sections.First().PrecedingSections().Should().BeEmpty();
-        sections.Last().PrecedingSections().First().Should().BeEquivalentTo(sections.First());
+        sections.Last().PrecedingSections.Should().HaveCount(2);
+        sections.First().PrecedingSections.Should().BeEmpty();
+        sections.Last().PrecedingSections.First().Should().BeEquivalentTo(sections.First());
     }
 }

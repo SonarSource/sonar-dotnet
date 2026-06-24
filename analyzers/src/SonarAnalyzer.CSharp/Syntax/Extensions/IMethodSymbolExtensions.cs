@@ -19,17 +19,23 @@ namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
 internal static class IMethodSymbolExtensions
 {
-    public static bool IsConditionalDebugMethod(this IMethodSymbol method)
+    extension(IMethodSymbol method)
     {
-        if (method is null)
+        public bool IsConditionalDebugMethod
         {
-            return false;
-        }
+            get
+            {
+                if (method is null)
+                {
+                    return false;
+                }
 
-        // Conditional attribute can be applied to a class, but it does nothing unless
-        // the class is an attribute class. So we only need to worry about whether the
-        // conditional attribute is on the method.
-        return method.GetAttributes(KnownType.System_Diagnostics_ConditionalAttribute)
-            .Any(x => x.ConstructorArguments.Any(constructorArg => constructorArg.Type.Is(KnownType.System_String) && (string)constructorArg.Value == "DEBUG"));
+                // Conditional attribute can be applied to a class, but it does nothing unless
+                // the class is an attribute class. So we only need to worry about whether the
+                // conditional attribute is on the method.
+                return method.GetAttributes(KnownType.System_Diagnostics_ConditionalAttribute)
+                    .Any(x => x.ConstructorArguments.Any(constructorArg => constructorArg.Type.Is(KnownType.System_String) && (string)constructorArg.Value == "DEBUG"));
+            }
+        }
     }
 }

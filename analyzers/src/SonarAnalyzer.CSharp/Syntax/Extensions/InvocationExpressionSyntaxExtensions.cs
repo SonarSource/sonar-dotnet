@@ -19,12 +19,15 @@ namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
 internal static class InvocationExpressionSyntaxExtensions
 {
-    public static bool HasOverloadWithType(this InvocationExpressionSyntax invocation, SemanticModel model, ImmutableArray<KnownType> types) =>
-        model.GetMemberGroup(invocation.Expression)
-            .OfType<IMethodSymbol>()
-            .Where(x => !x.HasAttribute(KnownType.System_ObsoleteAttribute))
-            .Where(x => IsCompatibleOverload(invocation, x))
-            .Any(x => SameParametersExceptWantedType(x, InvocationParameters(invocation, model), types));
+    extension(InvocationExpressionSyntax invocation)
+    {
+        public bool HasOverloadWithType(SemanticModel model, ImmutableArray<KnownType> types) =>
+            model.GetMemberGroup(invocation.Expression)
+                .OfType<IMethodSymbol>()
+                .Where(x => !x.HasAttribute(KnownType.System_ObsoleteAttribute))
+                .Where(x => IsCompatibleOverload(invocation, x))
+                .Any(x => SameParametersExceptWantedType(x, InvocationParameters(invocation, model), types));
+    }
 
     // must have same number of arguments + 1 (the argument that should be added) OR is params argument
     private static bool IsCompatibleOverload(InvocationExpressionSyntax invocation, IMethodSymbol m)

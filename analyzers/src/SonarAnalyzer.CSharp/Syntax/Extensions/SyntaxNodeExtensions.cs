@@ -19,59 +19,62 @@ namespace SonarAnalyzer.CSharp.Syntax.Extensions;
 
 internal static class SyntaxNodeExtensions
 {
-    public static bool IsInDebugBlock(this SyntaxNode node) =>
-        node.ActiveConditionalCompilationSections().Contains("DEBUG");
-
-    public static bool IsInConditionalDebug(this SyntaxNode node, SemanticModel model)
+    extension(SyntaxNode node)
     {
-        var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
-            ? model.GetDeclaredSymbol(containingMethod)
-            : null;
-        return method.IsConditionalDebugMethod();
-    }
+        public bool IsInDebugBlock() =>
+            node.ActiveConditionalCompilationSections().Contains("DEBUG");
 
-    /// <summary>
-    /// Returns a list of the names of #if [NAME] sections that the specified
-    /// node is contained in.
-    /// </summary>
-    /// <remarks>
-    /// Note: currently we only handle directives with simple identifiers e.g. #if FOO, #elif FOO
-    /// We don't handle logical operators e.g. #if !DEBUG, and we don't handle cases like
-    /// #if !DEBUG ... #else... :DEBUG must be true in the else case.
-    /// </remarks>
-    public static IEnumerable<string> ActiveConditionalCompilationSections(this SyntaxNode node)
-    {
-        var directives = CollectPrecedingDirectiveSyntax(node);
-        if (directives.Count == 0)
+        public bool IsInConditionalDebug(SemanticModel model)
         {
-            return [];
+            var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
+                ? model.GetDeclaredSymbol(containingMethod)
+                : null;
+            return method.IsConditionalDebugMethod;
         }
 
-        var activeDirectives = new Stack<BranchingDirectiveTriviaSyntax>();
-        foreach (var directive in directives)
+        /// <summary>
+        /// Returns a list of the names of #if [NAME] sections that the specified
+        /// node is contained in.
+        /// </summary>
+        /// <remarks>
+        /// Note: currently we only handle directives with simple identifiers e.g. #if FOO, #elif FOO
+        /// We don't handle logical operators e.g. #if !DEBUG, and we don't handle cases like
+        /// #if !DEBUG ... #else... :DEBUG must be true in the else case.
+        /// </remarks>
+        public IEnumerable<string> ActiveConditionalCompilationSections()
         {
-            switch (directive.RawKind)
+            var directives = CollectPrecedingDirectiveSyntax(node);
+            if (directives.Count == 0)
             {
-                case (int)SyntaxKind.IfDirectiveTrivia:
-                    activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
-                    break;
-                case (int)SyntaxKind.ElseDirectiveTrivia:
-                case (int)SyntaxKind.ElifDirectiveTrivia:
-                    // If we hit an if or elif then that effective acts as an "end" for the previous if/elif block -> pop it
-                    SafePop(activeDirectives);
-                    activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
-                    break;
-                case (int)SyntaxKind.EndIfDirectiveTrivia:
-                    SafePop(activeDirectives);
-                    break;
-                default:
-                    Debug.Fail($"Unexpected token type: {directive.Kind()}");
-                    break;
+                return [];
             }
+
+            var activeDirectives = new Stack<BranchingDirectiveTriviaSyntax>();
+            foreach (var directive in directives)
+            {
+                switch (directive.RawKind)
+                {
+                    case (int)SyntaxKind.IfDirectiveTrivia:
+                        activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
+                        break;
+                    case (int)SyntaxKind.ElseDirectiveTrivia:
+                    case (int)SyntaxKind.ElifDirectiveTrivia:
+                        // If we hit an if or elif then that effective acts as an "end" for the previous if/elif block -> pop it
+                        SafePop(activeDirectives);
+                        activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
+                        break;
+                    case (int)SyntaxKind.EndIfDirectiveTrivia:
+                        SafePop(activeDirectives);
+                        break;
+                    default:
+                        Debug.Fail($"Unexpected token type: {directive.Kind()}");
+                        break;
+                }
+            }
+            Debug.Assert(activeDirectives.All(x => x.IsActive), "Not all of the collected directives were active");
+            Debug.Assert(activeDirectives.All(x => x.BranchTaken), "Not all of the collected directives were for the branch that was taken");
+            return activeDirectives.Select(FindDirectiveName).WhereNotNull().ToHashSet();
         }
-        Debug.Assert(activeDirectives.All(x => x.IsActive), "Not all of the collected directives were active");
-        Debug.Assert(activeDirectives.All(x => x.BranchTaken), "Not all of the collected directives were for the branch that was taken");
-        return activeDirectives.Select(FindDirectiveName).WhereNotNull().ToHashSet();
     }
 
     private static string FindDirectiveName(BranchingDirectiveTriviaSyntax directiveTriviaSyntax) =>

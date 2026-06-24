@@ -121,7 +121,7 @@ public class IfStatementSyntaxExtensions
     {
         var sections = ifMethod.DescendantNodes().OfType<SwitchSectionSyntax>().ToList();
 
-        sections.FirstOrDefault().PrecedingSections().Should().BeEmpty();
+        sections.FirstOrDefault().PrecedingSections.Should().BeEmpty();
     }
 
     [TestMethod]
