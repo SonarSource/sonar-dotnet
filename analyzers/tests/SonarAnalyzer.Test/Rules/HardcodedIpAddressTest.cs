@@ -23,18 +23,18 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class HardcodedIpAddressTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
-    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.HardcodedIpAddress(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.HardcodedIpAddress());
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.HardcodedIpAddress());
 
     [TestMethod]
     public void HardcodedIpAddress_CS() =>
-        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.cs").Verify();
+        builderCS.AddPaths(@"HardcodedIpAddress.cs").Verify();
 
     [TestMethod]
     public void HardcodedIpAddress_CS_Latest() =>
-        builderCS.AddPaths(@"Hotspots\HardcodedIpAddress.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builderCS.AddPaths(@"HardcodedIpAddress.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 
     [TestMethod]
     public void HardcodedIpAddress_VB() =>
-        builderVB.AddPaths(@"Hotspots\HardcodedIpAddress.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
+        builderVB.AddPaths(@"HardcodedIpAddress.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 }

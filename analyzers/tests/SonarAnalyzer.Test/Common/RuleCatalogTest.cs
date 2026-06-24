@@ -35,7 +35,6 @@ public class RuleCatalogTest
     [TestMethod]
     [DataRow("S103", "CODE_SMELL")]
     [DataRow("S1048", "BUG")]
-    [DataRow("S1313", "SECURITY_HOTSPOT")]
     public void Type_IsGenerated(string id, string expected)
     {
         RuleCatalogCS.Rules[id].Type.Should().Be(expected);
@@ -57,8 +56,8 @@ public class RuleCatalogTest
         ValidateDescription(
             "S105",
             "<p>That is why using spaces is preferable.</p>",    // Asserting existence of the second paragraph that should not be part of the description
-            "The tab width can differ from one development environment to another." +
-            " Using tabs may require other developers to configure their environment (text editor, preferences, etc.) to read source code.");
+            "The tab width can differ from one development environment to another."
+            + " Using tabs may require other developers to configure their environment (text editor, preferences, etc.) to read source code.");
 
     [TestMethod]
     public void Description_TagsAreRemoved() =>

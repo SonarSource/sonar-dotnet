@@ -43,6 +43,7 @@ class CSharpSonarWayProfileTest {
   @Test
   void expected_rules_in_sonar_way() {
     // SonarWay rules
+    assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S1313"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2198"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2223"))).isNotNull();
 
@@ -53,7 +54,6 @@ class CSharpSonarWayProfileTest {
 
   @Test
   void hotspots_in_sonar_way() {
-    assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S1313"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2068"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2092"))).isNotNull();
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2245"))).isNotNull();

@@ -1234,7 +1234,7 @@ public static class RuleTypeMappingVB
         // ["S1310"],
         // ["S1311"],
         // ["S1312"],
-        ["S1313"] = "SECURITY_HOTSPOT",
+        ["S1313"] = "CODE_SMELL",
         // ["S1314"],
         // ["S1315"],
         // ["S1316"],

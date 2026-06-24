@@ -1,6 +1,6 @@
 {
-  "title": "Using hardcoded IP addresses is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "IP addresses should not be hardcoded",
+  "type": "CODE_SMELL",
   "code": {
     "impacts": {
       "SECURITY": "LOW"
@@ -12,8 +12,11 @@
     "func": "Constant\/Issue",
     "constantCost": "30min"
   },
-  "tags": [],
+  "tags": [
+    "former-hotspot"
+  ],
   "defaultSeverity": "Minor",
+  "quickfix": "unknown",
   "ruleSpecification": "RSPEC-1313",
   "sqKey": "S1313",
   "scope": "Main",
