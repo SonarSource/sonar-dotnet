@@ -69,7 +69,7 @@ stages:
     - powershell: |
         $ProjectNameToken = '$(ProjectName)'  # Workaround for escaping difficulties: Azure DevOps doesn't have ProjectName, so it will not replace it. We need to pass it like that into AltCover via powershell.
         dotnet build --no-restore analyzers\src\SonarAnalyzer.ShimLayer.Generator\SonarAnalyzer.ShimLayer.Generator.csproj -c $(BuildConfiguration) # Needs a pre-build to prevent file locking issue in SonarAnalyzer.ShimLayer.Generator.Test
-        dotnet test --no-restore $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) --filter "FullyQualifiedName!~CreateCfg_Performance_UsesCache" /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
+        dotnet test -v diag --no-restore $(Solution) -c $(BuildConfiguration) -l trx --results-directory $(UnitTestResultsPath) --filter "FullyQualifiedName!~CreateCfg_Performance_UsesCache" /p:RunAnalyzers=true /p:AltCover=true,AltCoverForce=true,AltCoverVisibleBranches=true,AltCoverAssemblyFilter="testhost|Moq|Humanizer|AltCover|Microsoft|\.Test^",AltCoverPathFilter="SonarAnalyzer\.CFG\\ShimLayer|SonarAnalyzer\.ShimLayer\.CodeGeneration",AltCoverAttributeFilter="ExcludeFromCodeCoverage",AltCoverReport="$(CoveragePath)/coverage.$ProjectNameToken.xml"
       displayName: '.NET UTs'
 
     - powershell: |
