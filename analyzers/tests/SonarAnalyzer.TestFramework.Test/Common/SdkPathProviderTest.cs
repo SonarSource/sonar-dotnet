@@ -49,7 +49,8 @@ public class SdkPathProviderTest
     [TestMethod]
     public void LatestSdkVersion_PathDoesNotExists() =>
         ((Func<string>)(() => SdkPathProvider.LatestFolder("C:\\NonExistingPath", "dotnet.dll", ""))).Should().Throw<NotSupportedException>();
-
+   
+    [Ignore("FixMe: SDK pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed. Until then this test has to be skipped.")]
     [TestMethod]
     public void LatestSdkFolder_ReturnLatest()
     {
