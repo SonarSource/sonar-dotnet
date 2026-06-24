@@ -48,7 +48,7 @@ public class SdkPathProviderTest
 
     [TestMethod]
     public void LatestSdkVersion_PathDoesNotExists() =>
-        ((Func<string>)(() => SdkPathProvider.LatestFolder("C:\\NonExistingPath", "dotnet.dll"))).Should().Throw<NotSupportedException>();
+        ((Func<string>)(() => SdkPathProvider.LatestFolder("C:\\NonExistingPath", "dotnet.dll", ""))).Should().Throw<NotSupportedException>();
 
     [TestMethod]
     public void LatestSdkFolder_ReturnLatest()
