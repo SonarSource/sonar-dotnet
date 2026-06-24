@@ -92,8 +92,15 @@ internal static class SyntaxNodeExtensions
 
     private static IList<DirectiveTriviaSyntax> CollectPrecedingDirectiveSyntax(SyntaxNode node)
     {
+        var root = node.SyntaxTree.GetRoot();
+        if (!root.ContainsDirectives)
+        {
+            // Fast path: a tree with no directives at all cannot have any preceding the node.
+            return [];
+        }
+
         var walker = new BranchingDirectiveCollector(node);
-        return walker.SafeVisit(node.SyntaxTree.GetRoot()) ? walker.CollectedDirectives : [];
+        return walker.SafeVisit(root) ? walker.CollectedDirectives : [];
     }
 
     /// <summary>
@@ -114,6 +121,13 @@ internal static class SyntaxNodeExtensions
         {
             // Stop traversing once we've walked down to the terminating node
             if (found)
+            {
+                return;
+            }
+
+            // Skip subtrees that contain no directives and do not contain the terminating node:
+            // they can neither contribute a directive nor lead us to the node, so descending into them is wasted work.
+            if (!node.ContainsDirectives && !node.FullSpan.Contains(terminatingNode.FullSpan))
             {
                 return;
             }
