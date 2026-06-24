@@ -25,7 +25,7 @@ public static class SdkPathProvider
     // When reading the dll versions, the File version (e.g. 9.1.24.40712) is considered instead of the Product version (e.g. 9.1.100-preview.7.24407.12+hash).
     // FixMe: SDK pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed.
     // Runtime folders (AspNetCore, WindowsDesktop) use a different version (e.g. 10.0.4) so they keep the wildcard pattern.
-    private const string SdkVersion = "10.0.20*";
+    private const string SdkVersion = "10.0.204";
     private const string RuntimeVersionPattern = "10.*";
 
     private static readonly string RazorSourceGeneratorPath = Path.Combine(LatestSdkFolder(), "Sdks", "Microsoft.NET.Sdk.Razor", "source-generators", "Microsoft.CodeAnalysis.Razor.Compiler.dll");
