@@ -94,7 +94,7 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
         && !IsConcatenationOfConstants(concatenation, model);
 
     private static bool AllConstants(List<ArgumentSyntax> arguments, SemanticModel model) =>
-        arguments.TrueForAll(x => x.GetExpression().HasConstantValue(model));
+        arguments.TrueForAll(x => x.GetExpression().HasConstantValue(model, strict: true));
 
     private static bool IsConcatenationOperator(SyntaxNode node) =>
         node.IsKind(SyntaxKind.ConcatenateExpression)
@@ -102,14 +102,14 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
 
     private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel model)
     {
-        if ((model.GetTypeInfo(binaryExpression).Type is ITypeSymbol) && binaryExpression.Right.HasConstantValue(model))
+        if (model.GetTypeInfo(binaryExpression).Type is not null && binaryExpression.Right.HasConstantValue(model, strict: true))
         {
             var nestedLeft = binaryExpression.Left;
             var nestedBinary = nestedLeft as BinaryExpressionSyntax;
             while (nestedBinary is not null)
             {
-                if (nestedBinary.Right.HasConstantValue(model)
-                    && (IsConcatenationOperator(nestedBinary) || nestedBinary.HasConstantValue(model)))
+                if (nestedBinary.Right.HasConstantValue(model, strict: true)
+                    && (IsConcatenationOperator(nestedBinary) || nestedBinary.HasConstantValue(model, strict: true)))
                 {
                     nestedLeft = nestedBinary.Left;
                     nestedBinary = nestedLeft as BinaryExpressionSyntax;
@@ -119,7 +119,7 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
                     return false;
                 }
             }
-            return nestedLeft.HasConstantValue(model);
+            return nestedLeft.HasConstantValue(model, strict: true);
         }
         return false;
     }

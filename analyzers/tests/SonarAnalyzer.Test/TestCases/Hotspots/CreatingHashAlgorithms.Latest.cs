@@ -103,13 +103,14 @@ public class Repro_FN_8758
     }
 }
 
+// NET-1673
 class PrimaryConstructor(string ctorParam = "MD5")
 {
     void Method(string methodParam = "MD5")
     {
-        var md5Ctor = (HashAlgorithm)CryptoConfig.CreateFromName(ctorParam); // FN
-        var md5Method = (HashAlgorithm)CryptoConfig.CreateFromName(methodParam); // FN
-        var lambda = (string lambdaParam = "MD5") => (HashAlgorithm)CryptoConfig.CreateFromName(lambdaParam); // FN
+        var md5Ctor = (HashAlgorithm)CryptoConfig.CreateFromName(ctorParam); // Noncompliant 
+        var md5Method = (HashAlgorithm)CryptoConfig.CreateFromName(methodParam); // Noncompliant
+        var lambda = (string lambdaParam = "MD5") => (HashAlgorithm)CryptoConfig.CreateFromName(lambdaParam); // Noncompliant
     }
 }
 

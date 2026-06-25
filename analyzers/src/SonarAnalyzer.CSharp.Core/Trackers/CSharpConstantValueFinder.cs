@@ -21,7 +21,8 @@ namespace SonarAnalyzer.CSharp.Core.Trackers;
 
 public class CSharpConstantValueFinder : ConstantValueFinder<IdentifierNameSyntax, VariableDeclaratorSyntax>
 {
-    public CSharpConstantValueFinder(SemanticModel semanticModel) : base(semanticModel, new CSharpAssignmentFinder(), (int)SyntaxKind.NullLiteralExpression) { }
+    public CSharpConstantValueFinder(SemanticModel model, bool strict)
+        : base(model, new CSharpAssignmentFinder(), (int)SyntaxKind.NullLiteralExpression, strict) { }
 
     protected override string IdentifierName(IdentifierNameSyntax node) =>
         node.Identifier.ValueText;
@@ -34,5 +35,5 @@ public class CSharpConstantValueFinder : ConstantValueFinder<IdentifierNameSynta
 
     protected override bool IsPtrZero(SyntaxNode node) =>
         node is MemberAccessExpressionSyntax memberAccess
-        && memberAccess.IsPtrZero(Model);
+        && memberAccess.IsPtrZero(model);
 }

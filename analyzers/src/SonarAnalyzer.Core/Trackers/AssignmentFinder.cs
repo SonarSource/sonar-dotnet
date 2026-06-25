@@ -25,36 +25,57 @@ public abstract class AssignmentFinder
     protected abstract bool IsLoop(SyntaxNode node);
     protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
 
-    public SyntaxNode FindLinearPrecedingAssignmentExpression(string identifierName, SyntaxNode current, Func<SyntaxNode> defaultValue = null)
+    public PrecedingAssignment FindLinearPrecedingAssignment(string identifierName, SyntaxNode current)
     {
         var method = GetTopMostContainingMethod(current);
         while (current != method && current?.Parent is not null)
         {
             if (IsLoop(current) && ContainsNestedAssignmentToIdentifier(current))
             {
-                return null; // There's assignment inside this loop, value can be altered by each iteration
+                return PrecedingAssignment.Uncertain.Instance; // There's assignment inside this loop, value can be altered by each iteration
             }
 
             foreach (var statement in current.Parent.ChildNodes().TakeWhile(x => x != current).Reverse())
             {
                 if (IsAssignmentToIdentifier(statement, identifierName, false, out var right))
                 {
-                    return right;
+                    return new PrecedingAssignment.Found(right);
                 }
                 else if (IsIdentifierDeclaration(statement, identifierName, out var initializer))
                 {
-                    return initializer;
+                    return new PrecedingAssignment.Found(initializer);
                 }
                 else if (ContainsNestedAssignmentToIdentifier(statement))
                 {
-                    return null; // Assignment inside nested statement (if, try, for, ...)
+                    return PrecedingAssignment.Uncertain.Instance; // Assignment inside nested statement (if, try, for, ...)
                 }
             }
             current = current.Parent;
         }
-        return defaultValue?.Invoke();
+        return PrecedingAssignment.None.Instance;
 
         bool ContainsNestedAssignmentToIdentifier(SyntaxNode node) =>
             node.DescendantNodes().Any(x => IsAssignmentToIdentifier(x, identifierName, true, out _));
+    }
+}
+
+public abstract record PrecedingAssignment
+{
+    private PrecedingAssignment() { }
+
+    public sealed record Found(SyntaxNode Assignment) : PrecedingAssignment;
+
+    public sealed record None : PrecedingAssignment
+    {
+        public static readonly None Instance = new();
+
+        private None() { }
+    }
+
+    public sealed record Uncertain : PrecedingAssignment
+    {
+        public static readonly Uncertain Instance = new();
+
+        private Uncertain() { }
     }
 }

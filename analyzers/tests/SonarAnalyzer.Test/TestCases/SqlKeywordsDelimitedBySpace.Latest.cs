@@ -215,7 +215,7 @@ namespace CSharp12
         void Test()
         {
             var f1 = (string s = "SELECT x" + "FROM y") => s;                   // Noncompliant
-            var f2 = (string s1 = "SELECT x", string s2 = "FROM y") => s1 + s2; // Compliant, different strings
+            var f2 = (string s1 = "SELECT x", string s2 = "FROM y") => s1 + s2; // Noncompliant - s1 + s2 resolves to "SELECT xFROM y" (missing space)
         }
     }
 

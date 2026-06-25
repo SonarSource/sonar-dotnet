@@ -213,7 +213,7 @@ namespace SonarAnalyzer.Core.Rules
             while (node is TIdentifierNameSyntax identifierNameSyntax)
             {
                 var identifierName = Language.Syntax.NodeIdentifier(identifierNameSyntax).Value.ValueText;
-                node = Language.AssignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, node) as TExpressionSyntax;
+                node = (Language.AssignmentFinder.FindLinearPrecedingAssignment(identifierName, node) as PrecedingAssignment.Found)?.Assignment as TExpressionSyntax;
 
                 var location = SecondaryLocationForExpression(node, identifierName, out var foundName);
                 if (IsSensitiveExpression(node, context.Model))

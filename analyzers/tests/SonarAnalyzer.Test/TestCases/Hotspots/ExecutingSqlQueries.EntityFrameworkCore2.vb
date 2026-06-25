@@ -124,4 +124,24 @@ Namespace Tests.Diagnostics
         Private Property Id As String
         Private Property Name As String
     End Class
+
+    ' A parameter's default value is not the value the caller passes, so a query built from the parameter is not constant.
+    Class OptionalParameterDefaults
+        Public Sub Concatenation(context As DbContext, Optional table As String = "mytable")
+            context.Database.ExecuteSqlCommand("SELECT * FROM " & table) ' Noncompliant
+        End Sub
+
+        Public Sub Format(context As DbContext, Optional table As String = "mytable")
+            context.Database.ExecuteSqlCommand(String.Format("SELECT * FROM {0}", table)) ' Noncompliant
+        End Sub
+    End Class
+
+    ' A non-const field is not guaranteed to hold its initializer value at the query site, so the query is not constant.
+    Class FieldInitializer
+        Private table As String = "mytable"
+
+        Public Sub Concatenation(context As DbContext)
+            context.Database.ExecuteSqlCommand("SELECT * FROM " & table) ' Noncompliant
+        End Sub
+    End Class
 End Namespace

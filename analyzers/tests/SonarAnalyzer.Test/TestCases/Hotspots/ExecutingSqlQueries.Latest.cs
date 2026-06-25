@@ -108,3 +108,22 @@ public class  NullConditionalAssignment
         context.Database.ExecuteSqlCommand(sample.Query);                                                  // Compliant
     }
 }
+
+// A parameter's default value is not the value the caller passes, so a query built from the parameter is not constant.
+public class OptionalParameterDefaults
+{
+    public void Concatenation(DbContext context, string table = "mytable") =>
+        context.Database.ExecuteSqlCommand("SELECT * FROM " + table);                   // Noncompliant
+
+    public void Format(DbContext context, string table = "mytable") =>
+        context.Database.ExecuteSqlCommand(string.Format("SELECT * FROM {0}", table));  // Noncompliant
+}
+
+// A non-const field is not guaranteed to hold its initializer value at the query site, so the query is not constant.
+public class FieldInitializer
+{
+    private string table = "mytable";
+
+    public void Concatenation(DbContext context) =>
+        context.Database.ExecuteSqlCommand("SELECT * FROM " + table);                   // Noncompliant
+}

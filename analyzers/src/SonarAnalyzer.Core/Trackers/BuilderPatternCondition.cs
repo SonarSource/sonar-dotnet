@@ -71,7 +71,7 @@ public abstract class BuilderPatternCondition<TSyntaxKind, TInvocationSyntax>
                 }
                 // When tracking reaches the local variable in invocation chain 'variable.MethodA().MethodB()'
                 // we'll try to find preceding assignment to that variable to continue inspection of initialization chain.
-                current = assignmentFinder.FindLinearPrecedingAssignmentExpression(identifierName, current);
+                current = (assignmentFinder.FindLinearPrecedingAssignment(identifierName, current) as PrecedingAssignment.Found)?.Assignment;
             }
             else
             {

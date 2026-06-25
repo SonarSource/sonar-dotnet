@@ -77,19 +77,19 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
         && !IsConcatenationOfConstants(concatenation, model);
 
     private static bool AllConstants(IEnumerable<ArgumentSyntax> arguments, SemanticModel model) =>
-        arguments.All(x => x.Expression.HasConstantValue(model));
+        arguments.All(x => x.Expression.HasConstantValue(model, strict: true));
 
     private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel model)
     {
         System.Diagnostics.Debug.Assert(binaryExpression.IsKind(SyntaxKind.AddExpression), "Binary expression should be of syntax kind add expression.");
-        if ((model.GetTypeInfo(binaryExpression).Type is not null) && binaryExpression.Right.HasConstantValue(model))
+        if ((model.GetTypeInfo(binaryExpression).Type is not null) && binaryExpression.Right.HasConstantValue(model, strict: true))
         {
             var nestedLeft = binaryExpression.Left;
             var nestedBinary = nestedLeft as BinaryExpressionSyntax;
             while (nestedBinary is not null)
             {
-                if (nestedBinary.Right.HasConstantValue(model)
-                    && (nestedBinary.IsKind(SyntaxKind.AddExpression) || nestedBinary.HasConstantValue(model)))
+                if (nestedBinary.Right.HasConstantValue(model, strict: true)
+                    && (nestedBinary.IsKind(SyntaxKind.AddExpression) || nestedBinary.HasConstantValue(model, strict: true)))
                 {
                     nestedLeft = nestedBinary.Left;
                     nestedBinary = nestedLeft as BinaryExpressionSyntax;
@@ -99,7 +99,7 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
                     return false;
                 }
             }
-            return nestedLeft.HasConstantValue(model);
+            return nestedLeft.HasConstantValue(model, strict: true);
         }
         return false;
     }

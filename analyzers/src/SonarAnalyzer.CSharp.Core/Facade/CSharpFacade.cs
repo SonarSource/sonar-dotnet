@@ -46,8 +46,8 @@ public sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
     public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
         DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
 
-    public object FindConstantValue(SemanticModel model, SyntaxNode node) =>
-        node.FindConstantValue(model);
+    public object FindConstantValue(SemanticModel model, SyntaxNode node, bool strict = false) =>
+        node.FindConstantValue(model, strict);
 
     public IMethodParameterLookup MethodParameterLookup(SyntaxNode invocation, IMethodSymbol methodSymbol) =>
         invocation switch

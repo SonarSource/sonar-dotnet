@@ -57,7 +57,7 @@ namespace SonarAnalyzer.Core.Rules
             semanticModel.GetSymbolInfo(node).Symbol is var symbol
             && !IsFieldOrPropertyOutsideSystemNamespace(symbol)
             && !symbol.GetSymbolType().IsEnum()
-            && Language.FindConstantValue(semanticModel, node) is { } value
+            && Language.FindConstantValue(semanticModel, node, strict: true) is { } value
                 ? Conversions.ToInt(value)
                 : null;
 

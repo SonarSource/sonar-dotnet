@@ -107,4 +107,12 @@ Namespace Tests.Diagnostics
     End Class
 
 
+    Public Class OptionalParameters
+
+        Public Sub Method(Optional methodParam As String = "MD5")
+            CryptoConfig.CreateFromName(methodParam) ' Noncompliant NET-1673
+        End Sub
+
+    End Class
+
 End Namespace

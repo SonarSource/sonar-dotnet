@@ -232,4 +232,17 @@ public class Repro_4399
             int Method() => 42;
         }
     }
+
+    public class ParameterDefaultValues
+    {
+        public int And(int value, int mask = -1) => value & mask; // Compliant
+        public int Or(int value, int mask = 0) => value | mask;   // Compliant
+        public int Xor(int value, int mask = 0) => value ^ mask;  // Compliant
+
+        public int AndAssignment(int value, int mask = -1)
+        {
+            value &= mask; // Compliant
+            return value;
+        }
+    }
 }

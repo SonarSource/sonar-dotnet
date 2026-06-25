@@ -18,6 +18,8 @@
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.VisualBasic.Core.Trackers;
 
+#pragma warning disable T0046 // Move Extensions to dedicated class
+
 namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class SyntaxNodeExtensionsVisualBasic
@@ -48,11 +50,12 @@ public static class SyntaxNodeExtensionsVisualBasic
         };
     }
 
-    public static object FindConstantValue(this SyntaxNode node, SemanticModel semanticModel) =>
-        new VisualBasicConstantValueFinder(semanticModel).FindConstant(node);
+    /// <param name="strict">If true, result derived from field initializers and parameter default values will be omitted. Use it when you need certainty about the value.</param>
+    public static object FindConstantValue(this SyntaxNode node, SemanticModel model, bool strict = false) =>
+        new VisualBasicConstantValueFinder(model, strict).FindConstant(node);
 
-    public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
-        FindConstantValue(node, semanticModel) as string;
+    public static string FindStringConstant(this SyntaxNode node, SemanticModel model) =>
+        FindConstantValue(node, model) as string;
 
     // This is a refactored version of internal Roslyn SyntaxNodeExtensions.IsInExpressionTree
     public static bool IsInExpressionTree(this SyntaxNode node, SemanticModel model)

@@ -21,21 +21,24 @@ public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclar
     where TIdentifierNameSyntax : SyntaxNode
     where TVariableDeclaratorSyntax : SyntaxNode
 {
-    protected readonly SemanticModel Model;
+    protected readonly SemanticModel model;
 
     private readonly AssignmentFinder assignmentFinder;
     private readonly int nullLiteralExpressionSyntaxKind;
+    private readonly bool strict;
 
     protected abstract string IdentifierName(TIdentifierNameSyntax node);
     protected abstract SyntaxNode InitializerValue(TVariableDeclaratorSyntax node);
     protected abstract TVariableDeclaratorSyntax VariableDeclarator(SyntaxNode node);
     protected abstract bool IsPtrZero(SyntaxNode node);
 
-    protected ConstantValueFinder(SemanticModel model, AssignmentFinder assignmentFinder, int nullLiteralExpressionSyntaxKind)
+    /// <param name="strict">If true, result derived from field initializers and parameter default values will be omitted. Use it when you need certainty about the value.</param>
+    protected ConstantValueFinder(SemanticModel model, AssignmentFinder assignmentFinder, int nullLiteralExpressionSyntaxKind, bool strict)
     {
-        Model = model;
+        this.model = model;
         this.assignmentFinder = assignmentFinder;
         this.nullLiteralExpressionSyntaxKind = nullLiteralExpressionSyntaxKind;
+        this.strict = strict;
     }
 
     public object FindConstant(SyntaxNode node) =>
@@ -53,31 +56,52 @@ public abstract class ConstantValueFinder<TIdentifierNameSyntax, TVariableDeclar
             return 0;
         }
 
-        return node.EnsureCorrectSemanticModelOrDefault(Model) is { } nodeModel
+        return node.EnsureCorrectSemanticModelOrDefault(model) is { } nodeModel
             ? nodeModel.GetConstantValue(node).Value ?? FindAssignedConstant(node, nodeModel, visitedVariables)
             : null;
     }
 
     private object FindAssignedConstant(SyntaxNode node, SemanticModel model, HashSet<SyntaxNode> visitedVariables)
     {
-        return node is TIdentifierNameSyntax identifier
-            ? FindConstant(assignmentFinder.FindLinearPrecedingAssignmentExpression(IdentifierName(identifier), node, FindFieldInitializer), visitedVariables)
-            : null;
-
-        SyntaxNode FindFieldInitializer()
+        if (node is TIdentifierNameSyntax identifier)
         {
-            if (model.GetSymbolInfo(identifier).Symbol is IFieldSymbol fieldSymbol
-                && VariableDeclarator(fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()) is { } variable
-                && (visitedVariables is null || !visitedVariables.Contains(variable)))
+            return assignmentFinder.FindLinearPrecedingAssignment(IdentifierName(identifier), node) switch
             {
-                visitedVariables ??= new();
-                visitedVariables.Add(variable);
-                return InitializerValue(variable);
-            }
-            else
-            {
-                return null;
-            }
+                PrecedingAssignment.Found found => FindConstant(found.Assignment, visitedVariables),
+                PrecedingAssignment.None when !strict => FindDefaultValue(model, visitedVariables, identifier),
+                _ => null, // None in strict mode, or Uncertain
+            };
         }
+        else
+        {
+            return null;
+        }
+    }
+
+    private object FindDefaultValue(SemanticModel model, HashSet<SyntaxNode> visitedVariables, TIdentifierNameSyntax identifier)
+    {
+        var symbol = model.GetSymbolInfo(identifier).Symbol;
+        if (symbol is IFieldSymbol fieldSymbol
+            && VariableDeclarator(fieldSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()) is { } variable
+            && (visitedVariables is null || !visitedVariables.Contains(variable)))
+        {
+            visitedVariables ??= [];
+            visitedVariables.Add(variable);
+            return FindConstant(InitializerValue(variable), visitedVariables);
+        }
+        else if (symbol is IParameterSymbol parameter)
+        {
+            return ParameterDefaultValue(parameter);
+        }
+        return null;
+    }
+
+    private static object ParameterDefaultValue(IParameterSymbol parameter)
+    {
+        // For a partial method the defining declaration's default is authoritative; a default on the implementing declaration is ignored by the compiler (CS1066).
+        var authoritative = parameter.ContainingSymbol is IMethodSymbol { PartialDefinitionPart: { } definition }
+            ? definition.Parameters[parameter.Ordinal]
+            : parameter;
+        return authoritative.HasExplicitDefaultValue ? authoritative.ExplicitDefaultValue : null;
     }
 }

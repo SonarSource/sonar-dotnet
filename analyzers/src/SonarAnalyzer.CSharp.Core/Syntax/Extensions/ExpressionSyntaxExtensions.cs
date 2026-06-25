@@ -148,8 +148,9 @@ public static class ExpressionSyntaxExtensions
                    nameSymbolInfo.Symbol.Name == nameof(string.Empty);
         }
 
-        public bool HasConstantValue(SemanticModel semanticModel) =>
-            expression.WithoutEnclosingParentheses.IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(semanticModel) is not null;
+        /// <param name="strict">If true, result derived from field initializers and parameter default values will be omitted. Use it when you need certainty about the value.</param>
+        public bool HasConstantValue(SemanticModel model, bool strict = false) =>
+            expression.WithoutEnclosingParentheses.IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(model, strict) is not null;
 
         public bool IsLeftSideOfAssignment
         {

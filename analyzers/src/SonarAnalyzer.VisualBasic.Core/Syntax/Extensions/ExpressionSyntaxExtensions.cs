@@ -73,8 +73,9 @@ public static class ExpressionSyntaxExtensions
         public bool NameIs(string name) =>
             expression.GetName().Equals(name, StringComparison.InvariantCultureIgnoreCase);
 
-        public bool HasConstantValue(SemanticModel model) =>
-            expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(model) is not null;
+        /// <param name="strict">If true, result derived from field initializers and parameter default values will be omitted. Use it when you need certainty about the value.</param>
+        public bool HasConstantValue(SemanticModel model, bool strict = false) =>
+            expression.RemoveParentheses().IsAnyKind(LiteralSyntaxKinds) || expression.FindConstantValue(model, strict) is not null;
 
         private bool IsOn(SyntaxKind onKind) =>
             expression switch

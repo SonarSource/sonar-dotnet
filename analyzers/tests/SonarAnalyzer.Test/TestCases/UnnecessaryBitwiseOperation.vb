@@ -221,3 +221,19 @@ Public Class LocalFields
     End Function
 
 End Class
+
+Public Class ParameterDefaultValues
+
+    Public Function BitAnd(Value As Integer, Optional Mask As Integer = -1) As Integer
+        Return Value And Mask ' Compliant
+    End Function
+
+    Public Function BitOr(Value As Integer, Optional Mask As Integer = 0) As Integer
+        Return Value Or Mask ' Compliant
+    End Function
+
+    Public Function BitXor(Value As Integer, Optional Mask As Integer = 0) As Integer
+        Return Value Xor Mask ' Compliant
+    End Function
+
+End Class

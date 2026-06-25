@@ -89,11 +89,12 @@ public static class SyntaxNodeExtensionsCSharp
                 or SyntaxKindEx.SwitchExpression
                 or SyntaxKindEx.CoalesceAssignmentExpression);
 
-    public static object FindConstantValue(this SyntaxNode node, SemanticModel semanticModel) =>
-        new CSharpConstantValueFinder(semanticModel).FindConstant(node);
+    /// <param name="strict">If true, result derived from field initializers and parameter default values will be omitted. Use it when you need certainty about the value.</param>
+    public static object FindConstantValue(this SyntaxNode node, SemanticModel model, bool strict = false) =>
+        new CSharpConstantValueFinder(model, strict).FindConstant(node);
 
-    public static string FindStringConstant(this SyntaxNode node, SemanticModel semanticModel) =>
-        FindConstantValue(node, semanticModel) as string;
+    public static string FindStringConstant(this SyntaxNode node, SemanticModel model) =>
+        FindConstantValue(node, model) as string;
 
     public static bool IsPartOfBinaryNegationOrCondition(this SyntaxNode node)
     {
