@@ -29,7 +29,7 @@ public sealed class AvoidUnusedInterpolation : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var interpolated = (InterpolatedStringExpressionSyntax)c.Node;
-                if (interpolated.Contents.OfType<InterpolationSyntax>().IsEmpty())
+                if (interpolated.Contents.OfType<InterpolationSyntax>().IsEmpty)
                 {
                     c.ReportIssue(Rule, interpolated.StringStartToken, RemoveMessage);
                 }

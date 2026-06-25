@@ -19,11 +19,14 @@ namespace SonarAnalyzer.Core.Extensions;
 
 public static class HashSetExtensions
 {
-    public static void AddRange<T>(this HashSet<T> hashset, IEnumerable<T> values)
+    extension<T>(HashSet<T> hashset)
     {
-        foreach (var value in values)
+        public void AddRange(IEnumerable<T> values)
         {
-            hashset.Add(value);
+            foreach (var value in values)
+            {
+                hashset.Add(value);
+            }
         }
     }
 }

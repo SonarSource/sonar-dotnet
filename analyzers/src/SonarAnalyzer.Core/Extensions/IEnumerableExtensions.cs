@@ -21,173 +21,200 @@ namespace SonarAnalyzer.Core.Extensions;
 
 public static class IEnumerableExtensions
 {
-    public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> equalityComparer = null)
+    extension<T>(IEnumerable<T> enumerable)
     {
-        enumerable ??= [];
-        return equalityComparer is null
-            ? new(enumerable)
-            : new(enumerable, equalityComparer);
+        public HashSet<T> ToHashSet(IEqualityComparer<T> equalityComparer = null)
+        {
+            enumerable ??= [];
+            return equalityComparer is null
+                ? new(enumerable)
+                : new(enumerable, equalityComparer);
+        }
+
+        public bool IsEmpty => !enumerable.Any();
     }
 
     /// <summary>
     /// Compares each element between two collections. The elements needs in the same order to be considered equal.
     /// </summary>
-    public static bool Equals<T, V>(this IEnumerable<T> first, IEnumerable<V> second, Func<T, V, bool> predicate)
+    extension<T>(IEnumerable<T> first)
     {
-        var enum1 = first.GetEnumerator();
-        var enum2 = second.GetEnumerator();
-        var enum1HasNext = enum1.MoveNext();
-        var enum2HasNext = enum2.MoveNext();
-
-        while (enum1HasNext && enum2HasNext)
+        public bool Equals<V>(IEnumerable<V> second, Func<T, V, bool> predicate)
         {
-            if (!predicate(enum1.Current, enum2.Current))
+            var enum1 = first.GetEnumerator();
+            var enum2 = second.GetEnumerator();
+            var enum1HasNext = enum1.MoveNext();
+            var enum2HasNext = enum2.MoveNext();
+
+            while (enum1HasNext && enum2HasNext)
             {
-                return false;
+                if (!predicate(enum1.Current, enum2.Current))
+                {
+                    return false;
+                }
+
+                enum1HasNext = enum1.MoveNext();
+                enum2HasNext = enum2.MoveNext();
             }
 
-            enum1HasNext = enum1.MoveNext();
-            enum2HasNext = enum2.MoveNext();
+            return enum1HasNext == enum2HasNext;
         }
 
-        return enum1HasNext == enum2HasNext;
+        /// <summary>
+        /// Applies a specified function to the corresponding elements of two sequences,
+        /// producing a sequence of the results. If the collections have different length
+        /// default(T) will be passed in the operation function for the corresponding items that
+        /// do not exist.
+        /// </summary>
+        /// <typeparam name="TSecond">The type of the elements of the second input sequence.</typeparam>
+        /// <typeparam name="TResult">The type of the elements of the result sequence.</typeparam>
+        /// <param name="second">The second sequence to merge.</param>
+        /// <param name="operation">A function that specifies how to merge the elements from the two sequences.</param>
+        /// <returns>An System.Collections.Generic.IEnumerable`1 that contains merged elements of
+        /// two input sequences.</returns>
+        public IEnumerable<TResult> Merge<TSecond, TResult>(IEnumerable<TSecond> second, Func<T, TSecond, TResult> operation)
+        {
+            using var iter1 = first.GetEnumerator();
+            using var iter2 = second.GetEnumerator();
+            while (iter1.MoveNext())
+            {
+                yield return operation(iter1.Current, iter2.MoveNext() ? iter2.Current : default);
+            }
+
+            while (iter2.MoveNext())
+            {
+                yield return operation(default, iter2.Current);
+            }
+        }
     }
 
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T> enumerable) where T : class =>
-        enumerable.Where(x => x is not null);
-
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable) where T : struct =>
-        enumerable.Where(x => x.HasValue).Select(x => x.Value);
-
-    public static bool IsEmpty<T>(this IEnumerable<T> enumerable) =>
-        !enumerable.Any();
-
-    /// <summary>
-    /// Applies a specified function to the corresponding elements of two sequences,
-    /// producing a sequence of the results. If the collections have different length
-    /// default(T) will be passed in the operation function for the corresponding items that
-    /// do not exist.
-    /// </summary>
-    /// <typeparam name="TFirst">The type of the elements of the first input sequence.</typeparam>
-    /// <typeparam name="TSecond">The type of the elements of the second input sequence.</typeparam>
-    /// <typeparam name="TResult">The type of the elements of the result sequence.</typeparam>
-    /// <param name="first">The first sequence to merge.</param>
-    /// <param name="second">The second sequence to merge.</param>
-    /// <param name="operation">A function that specifies how to merge the elements from the two sequences.</param>
-    /// <returns>An System.Collections.Generic.IEnumerable`1 that contains merged elements of
-    /// two input sequences.</returns>
-    public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> operation)
+    extension<T>(IEnumerable<T> enumerable) where T : class
     {
-        using var iter1 = first.GetEnumerator();
-        using var iter2 = second.GetEnumerator();
-        while (iter1.MoveNext())
-        {
-            yield return operation(iter1.Current, iter2.MoveNext() ? iter2.Current : default);
-        }
-
-        while (iter2.MoveNext())
-        {
-            yield return operation(default, iter2.Current);
-        }
+        public IEnumerable<T> WhereNotNull() =>
+            enumerable.Where(x => x is not null);
     }
 
-    public static int IndexOf<T>(this IEnumerable<T> enumerable, Func<T, bool> predicate) =>
-        enumerable.Select((item, index) => new { item, index }).FirstOrDefault(x => predicate(x.item))?.index ?? -1;
-
-    /// <summary>
-    /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
-    /// <paramref name="selector"/> is used to convert <typeparamref name="T"/> to <see cref="string"/> for concatenation.
-    /// </summary>
-    public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, string> selector) =>
-        string.Join(separator, enumerable.Select(x => selector(x)));
-
-    /// <summary>
-    /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
-    /// <paramref name="selector"/> is used to convert <typeparamref name="T"/> to <see cref="int"/> for concatenation.
-    /// </summary>
-    public static string JoinStr<T>(this IEnumerable<T> enumerable, string separator, Func<T, int> selector) =>
-        string.Join(separator, enumerable.Select(x => selector(x)));
-
-    /// <summary>
-    /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
-    /// </summary>
-    public static string JoinStr(this IEnumerable<string> enumerable, string separator) =>
-        JoinStr(enumerable, separator, x => x);
-
-    /// <summary>
-    /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
-    /// </summary>
-    public static string JoinStr(this IEnumerable<int> enumerable, string separator) =>
-        JoinStr(enumerable, separator, x => x);
-
-    /// <summary>
-    /// Concatenates the members of a <see cref="string"/> collection using the specified <paramref name="separator"/> between each member.
-    /// Any whitespace or null member of the collection will be ignored.
-    /// </summary>
-    public static string JoinNonEmpty(this IEnumerable<string> enumerable, string separator) =>
-        string.Join(separator, enumerable.Where(x => !string.IsNullOrWhiteSpace(x)));
-
-    /// <summary>
-    /// Concatenates the members of <paramref name="values"/> using "and" as the last separator and using a
-    /// <see href="https://en.wikipedia.org/wiki/Serial_comma">serial comma</see>.
-    /// <list type="table">
-    /// <item><c>[a, b, c] => "a, b, and c"</c></item>
-    /// <item><c>[a, b] => "a and b"</c></item>
-    /// <item><c>[a] => "a"</c></item>
-    /// <item><c>[] or null => ""</c></item>
-    /// </list>
-    /// </summary>
-    public static string JoinAnd<T>(this IEnumerable<T> values) =>
-        values.JoinWith("and");
-
-    /// <summary>
-    /// Concatenates the members of <paramref name="values"/> using "or" as the last separator and using a
-    /// <see href="https://en.wikipedia.org/wiki/Serial_comma">serial comma</see>.
-    /// <list type="table">
-    /// <item><c>[a, b, c] => "a, b, or c"</c></item>
-    /// <item><c>[a, b] => "a or b"</c></item>
-    /// <item><c>[a] => "a"</c></item>
-    /// <item><c>[] or null => ""</c></item>
-    /// </list>
-    /// </summary>
-    public static string JoinOr<T>(this IEnumerable<T> values) =>
-        values.JoinWith("or");
-
-    public static IEnumerable<SecondaryLocation> ToSecondary(this IEnumerable<Location> locations, string message = null, params string[] messageArgs) =>
-        locations.Select(x => x.ToSecondary(message, messageArgs));
-
-    public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxNode> nodes, string message = null, params string[] messageArgs) =>
-        nodes.Select(x => x.ToSecondaryLocation(message, messageArgs));
-
-    public static IEnumerable<SecondaryLocation> ToSecondaryLocations(this IEnumerable<SyntaxToken> nodes, string message = null, params string[] messageArgs) =>
-        nodes.Select(x => x.ToSecondaryLocation(message, messageArgs));
-
-    public static string ToSentence(this IEnumerable<string> words, bool quoteWords = false)
+    extension<T>(IEnumerable<T?> enumerable) where T : struct
     {
-        var wordCollection = words as ICollection<string> ?? words.ToList();
-        var singleQuoteOrBlank = quoteWords ? "'" : string.Empty;
-
-        return wordCollection.Count switch
-        {
-            0 => null,
-            1 => string.Concat(singleQuoteOrBlank, wordCollection.First(), singleQuoteOrBlank),
-            _ => new StringBuilder(singleQuoteOrBlank)
-                    .Append(string.Join($"{singleQuoteOrBlank}, {singleQuoteOrBlank}", wordCollection.Take(wordCollection.Count - 1)))
-                    .Append(singleQuoteOrBlank)
-                    .Append(" and ")
-                    .Append(singleQuoteOrBlank)
-                    .Append(wordCollection.Last())
-                    .Append(singleQuoteOrBlank)
-                    .ToString(),
-        };
+        public IEnumerable<T> WhereNotNull() =>
+            enumerable.Where(x => x.HasValue).Select(x => x.Value);
     }
 
-    private static string JoinWith<T>(this IEnumerable<T> values, string with) =>
-        values?.Select(x => x?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToList() switch
+    extension<T>(IEnumerable<T> enumerable)
+    {
+        public int IndexOf(Func<T, bool> predicate) =>
+            enumerable.Select((item, index) => new { item, index }).FirstOrDefault(x => predicate(x.item))?.index ?? -1;
+
+        /// <summary>
+        /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
+        /// <paramref name="selector"/> is used to convert <typeparamref name="T"/> to <see cref="string"/> for concatenation.
+        /// </summary>
+        public string JoinStr(string separator, Func<T, string> selector) =>
+            string.Join(separator, enumerable.Select(x => selector(x)));
+
+        /// <summary>
+        /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
+        /// <paramref name="selector"/> is used to convert <typeparamref name="T"/> to <see cref="int"/> for concatenation.
+        /// </summary>
+        public string JoinStr(string separator, Func<T, int> selector) =>
+            string.Join(separator, enumerable.Select(x => selector(x)));
+
+        /// <summary>
+        /// Concatenates the members of <paramref name="values"/> using "and" as the last separator and using a
+        /// <see href="https://en.wikipedia.org/wiki/Serial_comma">serial comma</see>.
+        /// <list type="table">
+        /// <item><c>[a, b, c] => "a, b, and c"</c></item>
+        /// <item><c>[a, b] => "a and b"</c></item>
+        /// <item><c>[a] => "a"</c></item>
+        /// <item><c>[] or null => ""</c></item>
+        /// </list>
+        /// </summary>
+        public string JoinAnd() =>
+            enumerable.JoinWith("and");
+
+        /// <summary>
+        /// Concatenates the members of <paramref name="values"/> using "or" as the last separator and using a
+        /// <see href="https://en.wikipedia.org/wiki/Serial_comma">serial comma</see>.
+        /// <list type="table">
+        /// <item><c>[a, b, c] => "a, b, or c"</c></item>
+        /// <item><c>[a, b] => "a or b"</c></item>
+        /// <item><c>[a] => "a"</c></item>
+        /// <item><c>[] or null => ""</c></item>
+        /// </list>
+        /// </summary>
+        public string JoinOr() =>
+            enumerable.JoinWith("or");
+
+        private string JoinWith(string with) =>
+            enumerable?.Select(x => x?.ToString()).Where(x => !string.IsNullOrWhiteSpace(x)).ToList() switch
+            {
+                { Count: > 2 } serial => $"{serial.Take(serial.Count - 1).JoinStr(", ")}, {with} {serial[serial.Count - 1]}",
+                { Count: 2 } pair => $"{pair[0]} {with} {pair[1]}",
+                { Count: 1 } single => single[0],
+                _ => string.Empty,
+            };
+    }
+
+    extension(IEnumerable<string> enumerable)
+    {
+        /// <summary>
+        /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
+        /// </summary>
+        public string JoinStr(string separator) =>
+            JoinStr(enumerable, separator, x => x);
+
+        /// <summary>
+        /// Concatenates the members of a <see cref="string"/> collection using the specified <paramref name="separator"/> between each member.
+        /// Any whitespace or null member of the collection will be ignored.
+        /// </summary>
+        public string JoinNonEmpty(string separator) =>
+            string.Join(separator, enumerable.Where(x => !string.IsNullOrWhiteSpace(x)));
+
+        public string ToSentence(bool quoteWords = false)
         {
-            { Count: > 2 } serial => $"{serial.Take(serial.Count - 1).JoinStr(", ")}, {with} {serial[serial.Count - 1]}",
-            { Count: 2 } pair => $"{pair[0]} {with} {pair[1]}",
-            { Count: 1 } single => single[0],
-            _ => string.Empty,
-        };
+            var wordCollection = enumerable as ICollection<string> ?? enumerable.ToList();
+            var singleQuoteOrBlank = quoteWords ? "'" : string.Empty;
+
+            return wordCollection.Count switch
+            {
+                0 => null,
+                1 => string.Concat(singleQuoteOrBlank, wordCollection.First(), singleQuoteOrBlank),
+                _ => new StringBuilder(singleQuoteOrBlank)
+                        .Append(string.Join($"{singleQuoteOrBlank}, {singleQuoteOrBlank}", wordCollection.Take(wordCollection.Count - 1)))
+                        .Append(singleQuoteOrBlank)
+                        .Append(" and ")
+                        .Append(singleQuoteOrBlank)
+                        .Append(wordCollection.Last())
+                        .Append(singleQuoteOrBlank)
+                        .ToString(),
+            };
+        }
+    }
+
+    extension(IEnumerable<int> enumerable)
+    {
+        /// <summary>
+        /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
+        /// </summary>
+        public string JoinStr(string separator) =>
+            JoinStr(enumerable, separator, x => x);
+    }
+
+    extension(IEnumerable<Location> locations)
+    {
+        public IEnumerable<SecondaryLocation> ToSecondary(string message = null, params string[] messageArgs) =>
+            locations.Select(x => x.ToSecondary(message, messageArgs));
+    }
+
+    extension(IEnumerable<SyntaxNode> nodes)
+    {
+        public IEnumerable<SecondaryLocation> ToSecondaryLocations(string message = null, params string[] messageArgs) =>
+            nodes.Select(x => x.ToSecondaryLocation(message, messageArgs));
+    }
+
+    extension(IEnumerable<SyntaxToken> nodes)
+    {
+        public IEnumerable<SecondaryLocation> ToSecondaryLocations(string message = null, params string[] messageArgs) =>
+            nodes.Select(x => x.ToSecondaryLocation(message, messageArgs));
+    }
 }

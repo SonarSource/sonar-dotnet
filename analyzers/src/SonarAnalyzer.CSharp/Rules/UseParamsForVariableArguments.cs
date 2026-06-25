@@ -39,7 +39,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         && MethodSymbol(c.Node, c.Model) is { } methodSymbol
                         && !methodSymbol.IsOverride
                         && methodSymbol.IsPubliclyAccessible()
-                        && methodSymbol.InterfaceMembers().IsEmpty())
+                        && methodSymbol.InterfaceMembers().IsEmpty)
                     {
                         c.ReportIssue(Rule, identifier);
                     }

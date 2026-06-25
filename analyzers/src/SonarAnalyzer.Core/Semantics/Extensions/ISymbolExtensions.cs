@@ -120,7 +120,7 @@ public static class ISymbolExtensions
     public static bool IsChangeable(this ISymbol symbol) =>
         !symbol.IsAbstract
         && !symbol.IsVirtual
-        && symbol.InterfaceMembers().IsEmpty()
+        && symbol.InterfaceMembers().IsEmpty
         && symbol.GetOverriddenMember() is null;
 
     public static IEnumerable<IParameterSymbol> GetParameters(this ISymbol symbol) =>

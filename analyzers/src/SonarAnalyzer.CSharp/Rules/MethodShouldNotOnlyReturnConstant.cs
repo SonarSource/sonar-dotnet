@@ -38,7 +38,7 @@ public sealed class MethodShouldNotOnlyReturnConstant : SonarDiagnosticAnalyzer
                     && !ContainsConditionalCompilation((SyntaxNode)method.ExpressionBody ?? method.Body)
                     && c.Model.GetDeclaredSymbol(method) is { } methodSymbol
                     && !methodSymbol.ContainingType.IsInterface()
-                    && methodSymbol.InterfaceMembers().IsEmpty()
+                    && methodSymbol.InterfaceMembers().IsEmpty
                     && methodSymbol.GetOverriddenMember() is null)
                 {
                     c.ReportIssue(Rule, method.Identifier);

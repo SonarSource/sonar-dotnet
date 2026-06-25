@@ -34,7 +34,7 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
             c =>
             {
                 if (MethodSymbolOfNode(c.Model, c.Node) is { } methodSymbol
-                    && methodSymbol.InterfaceMembers().IsEmpty()
+                    && methodSymbol.InterfaceMembers().IsEmpty
                     && !methodSymbol.IsOverride
                     && methodSymbol.IsPubliclyAccessible()
                     && MethodHasMultidimensionalArrayParameters(methodSymbol))

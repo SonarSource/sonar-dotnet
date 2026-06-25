@@ -213,7 +213,7 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
         {
             if (symbol is not null
                 && symbol.ContainingNamespace is INamespaceSymbol namespaceSymbol
-                && (currentNamespaceAndAncestors.IsEmpty() || !currentNamespaceAndAncestors.Contains(namespaceSymbol)))
+                && (currentNamespaceAndAncestors.IsEmpty || !currentNamespaceAndAncestors.Contains(namespaceSymbol)))
             {
                 NecessaryNamespaces.Add(namespaceSymbol);
             }

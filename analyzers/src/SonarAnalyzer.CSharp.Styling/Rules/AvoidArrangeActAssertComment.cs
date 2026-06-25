@@ -44,7 +44,7 @@ public sealed class AvoidArrangeActAssertComment : StylingAnalyzer
     private static bool ContainsOnlyInvalid(SyntaxTrivia comment)
     {
         var words = ExtractWords(comment);
-        return words.Any() && words.Except(ForbiddenComments, StringComparer.OrdinalIgnoreCase).IsEmpty();
+        return words.Any() && words.Except(ForbiddenComments, StringComparer.OrdinalIgnoreCase).IsEmpty;
     }
 
     private static string[] ExtractWords(SyntaxTrivia comment) =>

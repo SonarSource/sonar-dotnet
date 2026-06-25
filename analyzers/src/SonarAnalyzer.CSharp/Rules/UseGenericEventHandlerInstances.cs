@@ -61,7 +61,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             if (analysisContext.Model.GetDeclaredSymbol(eventNode) is IEventSymbol eventSymbol &&
                 !eventSymbol.IsOverride &&
-                eventSymbol.InterfaceMembers().IsEmpty() &&
+                eventSymbol.InterfaceMembers().IsEmpty &&
                 (eventSymbol.Type as INamedTypeSymbol)?.ConstructedFrom.IsAny(allowedTypes) == false)
             {
                 analysisContext.ReportIssue(rule, getLocationToReportOn());

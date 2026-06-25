@@ -21,15 +21,18 @@ namespace SonarAnalyzer.Core.Extensions;
 
 public static class StringExtensions
 {
-    public static XDocument ParseXDocument(this string text)
+    extension(string text)
     {
-        try
+        public XDocument ParseXDocument()
         {
-            return XDocument.Parse(text, LoadOptions.SetLineInfo);
-        }
-        catch
-        {
-            return null;
+            try
+            {
+                return XDocument.Parse(text, LoadOptions.SetLineInfo);
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

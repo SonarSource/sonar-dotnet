@@ -19,22 +19,25 @@ namespace SonarAnalyzer.Core.Extensions;
 
 public static class StackExtensions
 {
-    public static bool TryPop<T>(this Stack<T> stack, out T result)
+    extension<T>(Stack<T> stack)
     {
-        if (stack.Count > 0)
+        public bool TryPop(out T result)
         {
-            result = stack.Pop();
-            return true;
+            if (stack.Count > 0)
+            {
+                result = stack.Pop();
+                return true;
+            }
+            result = default;
+            return false;
         }
-        result = default;
-        return false;
-    }
 
-    public static void Push<T>(this Stack<T> stack, IEnumerable<T> items)
-    {
-        foreach (var item in items)
+        public void Push(IEnumerable<T> items)
         {
-            stack.Push(item);
+            foreach (var item in items)
+            {
+                stack.Push(item);
+            }
         }
     }
 }
