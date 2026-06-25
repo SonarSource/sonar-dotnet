@@ -23,8 +23,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class UsingNonstandardCryptographyTest
 {
-    private readonly VerifierBuilder builderCS = CreateBuilder().AddAnalyzer(() => new CS.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
-    private readonly VerifierBuilder builderVB = CreateBuilder().AddAnalyzer(() => new VB.UsingNonstandardCryptography(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderCS = CreateBuilder().AddAnalyzer(() => new CS.UsingNonstandardCryptography());
+    private readonly VerifierBuilder builderVB = CreateBuilder().AddAnalyzer(() => new VB.UsingNonstandardCryptography());
 
     [TestMethod]
     public void UsingNonstandardCryptography_CS() =>
@@ -47,5 +47,5 @@ public class UsingNonstandardCryptographyTest
         builderVB.AddPaths("UsingNonstandardCryptography.vb").Verify();
 
     private static VerifierBuilder CreateBuilder() =>
-        new VerifierBuilder().AddReferences(MetadataReferenceFacade.SystemSecurityCryptography).WithBasePath("Hotspots");
+        new VerifierBuilder().AddReferences(MetadataReferenceFacade.SystemSecurityCryptography);
 }
