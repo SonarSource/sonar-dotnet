@@ -209,6 +209,27 @@ public class CoberturaReportParserTest {
   }
 
   @Test
+  public void branch_decimal_condition_coverage_parses_correctly() {
+    Coverage coverage = parseCoverage("branch_decimal_condition_coverage.xml");
+    String filePath = getFilePath(coverage, "Class1");
+    List<ConditionData> conditions = getConditions(coverage, filePath);
+    assertThat(conditions)
+      .hasSize(12)
+      .allMatch(c -> "cobertura".equals(c.getFormat()));
+    // condition 24: 100% -> both paths hit
+    List<ConditionData> cond24 = conditions.stream().filter(c -> c.getLocationStart() == 24).toList();
+    assertThat(cond24).hasSize(4).allMatch(c -> c.getHits() == 1);
+    // condition 36: 50% -> path 0 hit, path 1 not
+    List<ConditionData> cond36 = conditions.stream().filter(c -> c.getLocationStart() == 36).toList();
+    assertThat(cond36).hasSize(4);
+    assertThat(cond36.stream().filter(c -> c.getPath() == 0).allMatch(c -> c.getHits() == 1)).isTrue();
+    assertThat(cond36.stream().filter(c -> c.getPath() == 1).allMatch(c -> c.getHits() == 0)).isTrue();
+    // condition 48: 0% -> neither path hit
+    List<ConditionData> cond48 = conditions.stream().filter(c -> c.getLocationStart() == 48).toList();
+    assertThat(cond48).hasSize(4).allMatch(c -> c.getHits() == 0);
+  }
+
+  @Test
   public void branch_switch_condition_creates_n_condition_data() {
     Coverage coverage = parseCoverage("branch_switch_condition.xml");
     String filePath = getFilePath(coverage, "Class1");

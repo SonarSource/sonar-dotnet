@@ -36,7 +36,7 @@ import static org.sonarsource.dotnet.shared.CallableUtils.lazy;
 public final class CoberturaReportParser implements CoverageParser {
 
   private static final Logger LOG = LoggerFactory.getLogger(CoberturaReportParser.class);
-  private static final Pattern CONDITION_COVERAGE_PATTERN = Pattern.compile("\\d++%\\s*+\\((\\d++)/(\\d++)\\)");
+  private static final Pattern CONDITION_COVERAGE_PATTERN = Pattern.compile("^\\d++(?:\\.\\d++)?%\\s*+\\((\\d++)/(\\d++)\\)");
   private final FileService fileService;
 
   public CoberturaReportParser(FileService fileService) {
