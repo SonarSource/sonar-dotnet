@@ -23,13 +23,13 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class CommandPathTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
+    private readonly VerifierBuilder builderCS = new VerifierBuilder()
         .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
-        .AddAnalyzer(() => new CS.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+        .AddAnalyzer(() => new CS.CommandPath());
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
+    private readonly VerifierBuilder builderVB = new VerifierBuilder()
         .AddReferences(MetadataReferenceFacade.SystemDiagnosticsProcess)
-        .AddAnalyzer(() => new VB.CommandPath(AnalyzerConfiguration.AlwaysEnabled));
+        .AddAnalyzer(() => new VB.CommandPath());
 
     [TestMethod]
     public void CommandPath_CS() =>

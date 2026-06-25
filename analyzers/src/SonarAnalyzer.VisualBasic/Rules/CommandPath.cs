@@ -17,18 +17,13 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class CommandPath : CommandPathBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class CommandPath : CommandPathBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public CommandPath() : this(AnalyzerConfiguration.Hotspot) { }
-
-        internal /*for testing*/ CommandPath(IAnalyzerConfiguration configuration) : base(configuration) { }
-
-        protected override string FirstArgument(InvocationContext context) =>
-            ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.Model);
-    }
+    protected override string FirstArgument(InvocationContext context) =>
+        ((InvocationExpressionSyntax)context.Node).ArgumentList.Get(0).FindStringConstant(context.Model);
 }
