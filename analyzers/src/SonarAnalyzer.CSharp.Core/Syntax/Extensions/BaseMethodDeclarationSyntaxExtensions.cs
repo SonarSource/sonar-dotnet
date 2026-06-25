@@ -19,50 +19,48 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class BaseMethodDeclarationSyntaxExtensions
 {
-    public static IEnumerable<SyntaxNode> GetBodyDescendantNodes(this BaseMethodDeclarationSyntax method) =>
-        (method ?? throw new ArgumentNullException(nameof(method))).Body == null
-            ? method.ExpressionBody().DescendantNodes()
-            : method.Body.DescendantNodes();
-
-    public static bool IsStatic(this BaseMethodDeclarationSyntax methodDeclaration) =>
-        methodDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword);
-
-    public static bool IsExtern(this BaseMethodDeclarationSyntax methodDeclaration) =>
-        methodDeclaration.Modifiers.Any(SyntaxKind.ExternKeyword);
-
-    public static bool HasBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
-        node.GetBodyOrExpressionBody() is not null;
-
-    public static SyntaxNode GetBodyOrExpressionBody(this BaseMethodDeclarationSyntax node) =>
-        (node?.Body as SyntaxNode) ?? node?.ExpressionBody()?.Expression;
-
-    public static bool ContainsMethodInvocation(this BaseMethodDeclarationSyntax methodDeclarationBase, SemanticModel semanticModel, Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
+    extension(BaseMethodDeclarationSyntax method)
     {
-        var childNodes = methodDeclarationBase?.Body?.DescendantNodes()
-            ?? methodDeclarationBase?.ExpressionBody()?.DescendantNodes()
-            ?? Enumerable.Empty<SyntaxNode>();
+        public IEnumerable<SyntaxNode> BodyDescendantNodes =>
+            (method ?? throw new ArgumentNullException(nameof(method))).Body == null
+                ? method.ExpressionBody().DescendantNodes()
+                : method.Body.DescendantNodes();
 
-        // See issue: https://github.com/SonarSource/sonar-dotnet/issues/416
-        // Where clause excludes nodes that are not defined on the same SyntaxTree as the SemanticModel
-        // (because of partial definition).
-        // More details: https://github.com/dotnet/roslyn/issues/18730
-        return childNodes
-            .OfType<InvocationExpressionSyntax>()
-            .Where(syntaxPredicate)
-            .Select(x => x.Expression.SyntaxTree.SemanticModelOrDefault(semanticModel)?.GetSymbolInfo(x.Expression).Symbol)
-            .OfType<IMethodSymbol>()
-            .Any(symbolPredicate);
-    }
+        public bool IsStatic => method.Modifiers.Any(SyntaxKind.StaticKeyword);
 
-    public static SyntaxToken? GetIdentifierOrDefault(this BaseMethodDeclarationSyntax methodDeclaration) =>
-        methodDeclaration switch
+        public bool IsExtern => method.Modifiers.Any(SyntaxKind.ExternKeyword);
+
+        public bool HasBodyOrExpressionBody => method.BodyOrExpressionBody is not null;
+
+        public SyntaxNode BodyOrExpressionBody => (method?.Body as SyntaxNode) ?? method?.ExpressionBody()?.Expression;
+
+        public bool ContainsMethodInvocation(SemanticModel semanticModel, Func<InvocationExpressionSyntax, bool> syntaxPredicate, Func<IMethodSymbol, bool> symbolPredicate)
         {
-            ConstructorDeclarationSyntax constructor => (SyntaxToken?)constructor.Identifier,
-            DestructorDeclarationSyntax destructor => (SyntaxToken?)destructor.Identifier,
-            MethodDeclarationSyntax method => (SyntaxToken?)method.Identifier,
-            _ => null,
-        };
+            var childNodes = method?.Body?.DescendantNodes()
+                ?? method?.ExpressionBody()?.DescendantNodes()
+                ?? Enumerable.Empty<SyntaxNode>();
 
-    public static Location FindIdentifierLocation(this BaseMethodDeclarationSyntax methodDeclaration) =>
-        GetIdentifierOrDefault(methodDeclaration)?.GetLocation();
+            // See issue: https://github.com/SonarSource/sonar-dotnet/issues/416
+            // Where clause excludes nodes that are not defined on the same SyntaxTree as the SemanticModel
+            // (because of partial definition).
+            // More details: https://github.com/dotnet/roslyn/issues/18730
+            return childNodes
+                .OfType<InvocationExpressionSyntax>()
+                .Where(syntaxPredicate)
+                .Select(x => x.Expression.SyntaxTree.SemanticModelOrDefault(semanticModel)?.GetSymbolInfo(x.Expression).Symbol)
+                .OfType<IMethodSymbol>()
+                .Any(symbolPredicate);
+        }
+
+        public SyntaxToken? IdentifierOrDefault =>
+            method switch
+            {
+                ConstructorDeclarationSyntax constructor => (SyntaxToken?)constructor.Identifier,
+                DestructorDeclarationSyntax destructor => (SyntaxToken?)destructor.Identifier,
+                MethodDeclarationSyntax methodDeclaration => (SyntaxToken?)methodDeclaration.Identifier,
+                _ => null,
+            };
+
+        public Location IdentifierLocation => method.IdentifierOrDefault?.GetLocation();
+    }
 }

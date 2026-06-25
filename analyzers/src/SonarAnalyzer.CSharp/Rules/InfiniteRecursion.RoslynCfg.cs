@@ -42,7 +42,7 @@ public partial class InfiniteRecursion
         {
             if (eventDeclaration.AccessorList is not null)
             {
-                foreach (var accessor in eventDeclaration.AccessorList.Accessors.Where(x => x.HasBodyOrExpressionBody()))
+                foreach (var accessor in eventDeclaration.AccessorList.Accessors.Where(x => x.HasBodyOrExpressionBody))
                 {
                     var cfg = ControlFlowGraph.Create(accessor, c.Model, c.Cancel);
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, eventSymbol, accessor.Keyword.GetLocation(), "event accessor's recursion");
@@ -93,7 +93,7 @@ public partial class InfiniteRecursion
             }
             else if (accessorList is not null)
             {
-                foreach (var accessor in accessorList.Accessors.Where(x => x.HasBodyOrExpressionBody()))
+                foreach (var accessor in accessorList.Accessors.Where(x => x.HasBodyOrExpressionBody))
                 {
                     var cfg = ControlFlowGraph.Create(accessor, c.Model, c.Cancel);
                     var context = new RecursionContext<ControlFlowGraph>(c, cfg, propertySymbol, accessor.Keyword.GetLocation(), accessorMessageArg);

@@ -42,7 +42,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
             baseMethodDeclaration.Statements.SelectMany(s => s.DescendantTokens());
 
         protected override SyntaxToken? GetMethodIdentifierToken(MethodBlockBaseSyntax baseMethodDeclaration) =>
-            baseMethodDeclaration.GetIdentifierOrDefault();
+            baseMethodDeclaration.IdentifierOrDefault;
 
         protected override string GetMethodKindAndName(SyntaxToken identifierToken)
         {

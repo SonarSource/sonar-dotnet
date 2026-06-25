@@ -28,7 +28,7 @@ public class PropertyDeclarationSyntaxExtensionsTest
     public int Property { get { return 0; } }
 }
 ";
-        GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
+        GetPropertyDeclaration(code).IsAutoProperty.Should().BeFalse();
     }
 
     [TestMethod]
@@ -42,7 +42,7 @@ public class PropertyDeclarationSyntaxExtensionsTest
     }
 }
 ";
-        GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
+        GetPropertyDeclaration(code).IsAutoProperty.Should().BeFalse();
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ public class PropertyDeclarationSyntaxExtensionsTest
     public int Property => 0;
 }
 ";
-        GetPropertyDeclaration(code).IsAutoProperty().Should().BeFalse();
+        GetPropertyDeclaration(code).IsAutoProperty.Should().BeFalse();
     }
 
     [TestMethod]
@@ -64,7 +64,7 @@ public class PropertyDeclarationSyntaxExtensionsTest
     public int Property { get; set; }
 }
 ";
-        GetPropertyDeclaration(code).IsAutoProperty().Should().BeTrue();
+        GetPropertyDeclaration(code).IsAutoProperty.Should().BeTrue();
     }
 
     private static PropertyDeclarationSyntax GetPropertyDeclaration(string code) =>

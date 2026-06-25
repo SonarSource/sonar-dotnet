@@ -40,7 +40,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var partialKeyword = declaration.Modifiers.FirstOrDefault(m => m.IsKind(SyntaxKind.PartialKeyword));
 
             if (partialKeyword != default
-                && !declaration.HasBodyOrExpressionBody()
+                && !declaration.HasBodyOrExpressionBody
                 && !declaration.Modifiers.Any(HasAccessModifier)
                 && context.Model.GetDeclaredSymbol(declaration) is { } methodSymbol
                 && methodSymbol.PartialImplementationPart == null)

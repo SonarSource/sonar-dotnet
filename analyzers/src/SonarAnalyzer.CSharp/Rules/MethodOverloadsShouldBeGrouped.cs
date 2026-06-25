@@ -35,9 +35,9 @@ public sealed class MethodOverloadsShouldBeGrouped : MethodOverloadsShouldBeGrou
     protected override MemberInfo CreateMemberInfo(SonarSyntaxNodeReportingContext c, MemberDeclarationSyntax member) =>
         member switch
         {
-            ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic(), false, true),
+            ConstructorDeclarationSyntax constructor => new MemberInfo(c, member, constructor.Identifier, constructor.IsStatic, false, true),
             MethodDeclarationSyntax { ExplicitInterfaceSpecifier: { } } => null, // Skip explicit interface implementations
-            MethodDeclarationSyntax method => new MemberInfo(c, member, method.Identifier, method.IsStatic(), method.Modifiers.Any(SyntaxKind.AbstractKeyword), true),
+            MethodDeclarationSyntax method => new MemberInfo(c, member, method.Identifier, method.IsStatic, method.Modifiers.Any(SyntaxKind.AbstractKeyword), true),
             _ => null,
         };
 

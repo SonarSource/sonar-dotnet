@@ -19,11 +19,13 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class ParameterSyntaxExtensions
 {
-    /// <summary>
-    /// Returns true if the parameter is of type string. For performance reasons the check is done at the syntax level.
-    /// </summary>
-    public static bool IsString(this ParameterSyntax parameterSyntax) =>
-        IsString(parameterSyntax.Type.ToString());
+    extension(ParameterSyntax parameterSyntax)
+    {
+        /// <summary>
+        /// Returns true if the parameter is of type string. For performance reasons the check is done at the syntax level.
+        /// </summary>
+        public bool IsString => IsString(parameterSyntax.Type.ToString());
+    }
 
     private static bool IsString(string parameterTypeName) =>
         parameterTypeName == "string" ||

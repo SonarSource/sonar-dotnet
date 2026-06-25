@@ -19,6 +19,8 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class AccessorDeclarationSyntaxExtensions
 {
-    public static bool HasBodyOrExpressionBody(this AccessorDeclarationSyntax node) =>
-        node.Body is not null || node.ExpressionBody is not null;
+    extension(AccessorDeclarationSyntax node)
+    {
+        public bool HasBodyOrExpressionBody => node is { Body: not null } or { ExpressionBody: not null };
+    }
 }

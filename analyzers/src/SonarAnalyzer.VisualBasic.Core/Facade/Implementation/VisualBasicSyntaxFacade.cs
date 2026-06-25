@@ -103,7 +103,7 @@ internal sealed class VisualBasicSyntaxFacade : SyntaxFacade<SyntaxKind>
         node.IsPartOfBinaryNegationOrCondition();
 
     public override bool IsStatic(SyntaxNode node) =>
-        Cast<MethodBlockSyntax>(node).IsShared();
+        Cast<MethodBlockSyntax>(node).IsShared;
 
     /// <inheritdoc cref="ExpressionSyntaxExtensions.IsWrittenTo(ExpressionSyntax, SemanticModel, CancellationToken)"/>
     public override bool IsWrittenTo(SyntaxNode expression, SemanticModel model, CancellationToken cancel) =>

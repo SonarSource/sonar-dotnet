@@ -74,7 +74,7 @@ public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
                 .Select(x => new NodeAndModel<MethodDeclarationSyntax>(x.GetSyntax() as MethodDeclarationSyntax, compilation.GetSemanticModel(x.SyntaxTree)))
                 .Where(x => x.Node is not null);
 
-            var methodDeclaration = methodDeclarations.FirstOrDefault(x => x.Node.HasBodyOrExpressionBody());
+            var methodDeclaration = methodDeclarations.FirstOrDefault(x => x.Node.HasBodyOrExpressionBody);
             if (methodDeclaration == default)
             {
                 continue;

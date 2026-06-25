@@ -84,7 +84,7 @@ public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
         }
 
         var constructorsWithBody = ConstructorDeclarations<ConstructorDeclarationSyntax>(c, constructors)
-            .Where(x => x.Node.GetBodyOrExpressionBody() is not null)
+            .Where(x => x.Node.BodyOrExpressionBody is not null)
             .ToList();
         foreach (var kvp in initializedMembers)
         {

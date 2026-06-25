@@ -63,7 +63,7 @@ public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKin
                                      .DeclaringSyntaxReferences
                                      .Select(r => r.GetSyntax())
                                      .OfType<BaseMethodDeclarationSyntax>()
-                                     .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody());
+                                     .FirstOrDefault(declaration => declaration.HasBodyOrExpressionBody);
             if (declaration == null)
             {
                 return null;

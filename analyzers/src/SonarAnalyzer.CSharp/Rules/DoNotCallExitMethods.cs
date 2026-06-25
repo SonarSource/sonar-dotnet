@@ -42,7 +42,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         or SyntaxKind.ParenthesizedLambdaExpression
                         or SyntaxKind.SimpleLambdaExpression
                         or SyntaxKind.AnonymousMethodExpression)
-                : !invocationSyntax.Ancestors().OfType<BaseMethodDeclarationSyntax>().Where(x => x.GetIdentifierOrDefault()?.ValueText == "Main")
+                : !invocationSyntax.Ancestors().OfType<BaseMethodDeclarationSyntax>().Where(x => x.IdentifierOrDefault?.ValueText == "Main")
                       .Select(m => semanticModel.GetDeclaredSymbol(m))
                       .Select(s => s.IsMainMethod())
                       .FirstOrDefault();

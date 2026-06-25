@@ -272,8 +272,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         }
         else if (access == AccessorAccess.Set
             && property.GetMethod is not null
-            && GetAccessorSyntax(property.GetMethod) is { } getter
-            && getter.HasBodyOrExpressionBody())
+            && GetAccessorSyntax(property.GetMethod) is { HasBodyOrExpressionBody: true } getter)
         {
             context.ReportIssue(RuleS1144, getter.Keyword.GetLocation(), SyntaxConstants.Private, "get accessor in property", property.Name);
         }
@@ -503,7 +502,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         }
 
         private static bool IsEmptyConstructor(BaseMethodDeclarationSyntax constructorDeclaration) =>
-            !constructorDeclaration.HasBodyOrExpressionBody()
+            !constructorDeclaration.HasBodyOrExpressionBody
             || constructorDeclaration.Body is { Statements.Count: 0 };
 
         private static bool IsRemovableMethod(IMethodSymbol methodSymbol) =>

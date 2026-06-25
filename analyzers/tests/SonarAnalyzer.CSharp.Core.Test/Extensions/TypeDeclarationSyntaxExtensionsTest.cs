@@ -99,7 +99,7 @@ public class TypeDeclarationSyntaxExtensionsTest
     {
         var tree = TestCompiler.CompileCS($$"""{{type}} Test(int i) { }""").Tree;
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-        var parameterList = typeDeclaration.ParameterList();
+        var parameterList = typeDeclaration.ParameterList;
         parameterList.Should().NotBeNull();
         var entry = parameterList.Parameters.Should().ContainSingle().Which;
         entry.Type.Should().BeOfType<PredefinedTypeSyntax>();
@@ -111,7 +111,7 @@ public class TypeDeclarationSyntaxExtensionsTest
     {
         var tree = TestCompiler.CompileCS("interface Test { }").Tree;
         var typeDeclaration = tree.GetCompilationUnitRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Single();
-        var parameterList = typeDeclaration.ParameterList();
+        var parameterList = typeDeclaration.ParameterList;
         parameterList.Should().BeNull();
     }
 

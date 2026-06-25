@@ -89,7 +89,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsMethodCandidate(MethodDeclarationSyntax methodDeclaration, SemanticModel semanticModel) =>
             !methodDeclaration.Modifiers.Any(x => MethodModifiersToSkip.Contains(x.Kind()))
             && methodDeclaration.ExplicitInterfaceSpecifier is null
-            && methodDeclaration.HasBodyOrExpressionBody()
+            && methodDeclaration.HasBodyOrExpressionBody
             && semanticModel.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
             && methodSymbol.IsChangeable();
 

@@ -29,8 +29,8 @@ public sealed class MethodsShouldNotHaveIdenticalImplementations : MethodsShould
 
     protected override bool AreDuplicates(SemanticModel model, MethodBlockSyntax firstMethod, MethodBlockSyntax secondMethod) =>
         firstMethod.Statements.Count > 1
-        && firstMethod.GetIdentifierText() != secondMethod.GetIdentifierText()
-        && HaveSameParameters(firstMethod.GetParameters(), secondMethod.GetParameters())
+        && firstMethod.IdentifierText != secondMethod.IdentifierText
+        && HaveSameParameters(firstMethod.Parameters, secondMethod.Parameters)
         && HaveSameTypeParameters(model, firstMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters, secondMethod.SubOrFunctionStatement?.TypeParameterList?.Parameters)
         && AreTheSameType(model, firstMethod.SubOrFunctionStatement.AsClause?.Type, secondMethod.SubOrFunctionStatement.AsClause?.Type)
         && VisualBasicEquivalenceChecker.AreEquivalent(firstMethod.Statements, secondMethod.Statements);

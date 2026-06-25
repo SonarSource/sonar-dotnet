@@ -42,7 +42,7 @@ namespace SonarAnalyzer.CSharp.Rules
             var propertyDeclaration = (PropertyDeclarationSyntax)context.Node;
 
             if (propertyDeclaration.Initializer == null
-                || !propertyDeclaration.IsAutoProperty())
+                || !propertyDeclaration.IsAutoProperty)
             {
                 return;
             }

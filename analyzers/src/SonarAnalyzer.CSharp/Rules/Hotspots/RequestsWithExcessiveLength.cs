@@ -32,7 +32,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
-                    var body = methodDeclaration.GetBodyOrExpressionBody();
+                    var body = methodDeclaration.BodyOrExpressionBody;
 
                     if (body is not null
                         && body.DescendantNodes()

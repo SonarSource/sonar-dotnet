@@ -84,13 +84,12 @@ namespace SonarAnalyzer.CSharp.Rules
         private static IEnumerable<IFieldSymbol> GetAssignmentsToFieldsIn(ISymbol m, Compilation compilation)
         {
             if (m.DeclaringSyntaxReferences.Length != 1
-                || !(m.DeclaringSyntaxReferences[0].GetSyntax() is BaseMethodDeclarationSyntax method)
-                || !method.HasBodyOrExpressionBody())
+                || !(m.DeclaringSyntaxReferences[0].GetSyntax() is BaseMethodDeclarationSyntax { HasBodyOrExpressionBody: true } method))
             {
                 return Enumerable.Empty<IFieldSymbol>();
             }
 
-            return method.GetBodyDescendantNodes()
+            return method.BodyDescendantNodes
                          .OfType<AssignmentExpressionSyntax>()
                          .Where(n => n.IsKind(SyntaxKind.SimpleAssignmentExpression) && n.Right is ObjectCreationExpressionSyntax)
                          .Select(n => compilation.GetSemanticModel(method.SyntaxTree).GetSymbolInfo(n.Left).Symbol)

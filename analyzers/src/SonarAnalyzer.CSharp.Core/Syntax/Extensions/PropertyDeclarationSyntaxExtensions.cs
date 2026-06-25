@@ -19,8 +19,11 @@ namespace SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 
 public static class PropertyDeclarationSyntaxExtensions
 {
-    public static bool IsAutoProperty(this PropertyDeclarationSyntax propertyDeclaration) =>
-        propertyDeclaration.AccessorList != null
-        && propertyDeclaration.AccessorList.Accessors
-                              .All(accessor => accessor.Body == null && accessor.ExpressionBody == null);
+    extension(PropertyDeclarationSyntax propertyDeclaration)
+    {
+        public bool IsAutoProperty =>
+            propertyDeclaration.AccessorList != null
+            && propertyDeclaration.AccessorList.Accessors
+                                  .All(accessor => accessor.Body == null && accessor.ExpressionBody == null);
+    }
 }

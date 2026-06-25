@@ -27,6 +27,6 @@ namespace SonarAnalyzer.CSharp.Rules
         };
 
         protected override Location GetLocation(MethodDeclarationSyntax method) =>
-            method.FindIdentifierLocation();
+            method.IdentifierLocation;
     }
 }

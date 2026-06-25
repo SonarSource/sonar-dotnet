@@ -80,7 +80,7 @@ public sealed class UseUriInsteadOfString : SonarDiagnosticAnalyzer
             if (!methodDeclaration.IsKind(SyntaxKind.ConstructorDeclaration)
                 && !methodDeclaration.ContainsMethodInvocation(context.Model, x => true, x => methodOverloads.Contains(x)))
             {
-                context.ReportIssue(RuleS3997, methodDeclaration.FindIdentifierLocation());
+                context.ReportIssue(RuleS3997, methodDeclaration.IdentifierLocation);
             }
         }
         else

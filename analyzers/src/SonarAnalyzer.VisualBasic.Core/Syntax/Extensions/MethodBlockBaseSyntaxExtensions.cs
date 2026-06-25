@@ -19,14 +19,16 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class MethodBlockBaseSyntaxExtensions
 {
-    public static Location FindIdentifierLocation(this MethodBlockBaseSyntax methodBlockBase) =>
-        GetIdentifierOrDefault(methodBlockBase)?.GetLocation();
+    extension(MethodBlockBaseSyntax methodBlockBase)
+    {
+        public Location IdentifierLocation => methodBlockBase.IdentifierOrDefault?.GetLocation();
 
-    public static SyntaxToken? GetIdentifierOrDefault(this MethodBlockBaseSyntax methodBlockBase) =>
-        methodBlockBase?.BlockStatement switch
-        {
-            SubNewStatementSyntax subNewStatement => subNewStatement.NewKeyword,
-            MethodStatementSyntax methodStatement => methodStatement.Identifier,
-            _ => null,
-        };
+        public SyntaxToken? IdentifierOrDefault =>
+            methodBlockBase?.BlockStatement switch
+            {
+                SubNewStatementSyntax subNewStatement => subNewStatement.NewKeyword,
+                MethodStatementSyntax methodStatement => methodStatement.Identifier,
+                _ => null,
+            };
+    }
 }

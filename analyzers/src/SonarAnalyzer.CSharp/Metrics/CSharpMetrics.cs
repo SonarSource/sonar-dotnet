@@ -79,10 +79,10 @@ public class CSharpMetrics : MetricsBase
             case SyntaxKind.ConversionOperatorDeclaration:
             case SyntaxKind.DestructorDeclaration:
             case SyntaxKind.OperatorDeclaration:
-                return ((BaseMethodDeclarationSyntax)node).HasBodyOrExpressionBody(); // Non-abstract, non-interface methods
+                return ((BaseMethodDeclarationSyntax)node).HasBodyOrExpressionBody; // Non-abstract, non-interface methods
             case SyntaxKind.MethodDeclaration:
                 var methodDeclaration = (BaseMethodDeclarationSyntax)node;
-                return methodDeclaration.HasBodyOrExpressionBody() // Non-abstract, non-interface methods
+                return methodDeclaration.HasBodyOrExpressionBody // Non-abstract, non-interface methods
                     && IsInSameFile(methodDeclaration.GetLocation().GetMappedLineSpan()); // Excluding razor functions that are not mapped
             case SyntaxKind.AddAccessorDeclaration:
             case SyntaxKind.GetAccessorDeclaration:
@@ -90,7 +90,7 @@ public class CSharpMetrics : MetricsBase
             case SyntaxKind.SetAccessorDeclaration:
             case SyntaxKindEx.InitAccessorDeclaration:
                 var accessor = (AccessorDeclarationSyntax)node;
-                if (accessor.HasBodyOrExpressionBody())
+                if (accessor.HasBodyOrExpressionBody)
                 {
                     return true;
                 }

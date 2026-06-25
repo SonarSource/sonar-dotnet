@@ -34,7 +34,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     {
                         var method = (MethodDeclarationSyntax)c.Node;
                         var walker = new Walker(c.Model);
-                        if (walker.SafeVisit(method.GetBodyOrExpressionBody()) && walker.HasInvocationOutsideTryCatch)
+                        if (walker.SafeVisit(method.BodyOrExpressionBody) && walker.HasInvocationOutsideTryCatch)
                         {
                             c.ReportIssue(Rule, method.Identifier);
                         }

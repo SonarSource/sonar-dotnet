@@ -133,7 +133,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             private void VerifyDestructor(DestructorDeclarationSyntax destructorSyntax)
             {
-                if (!destructorSyntax.HasBodyOrExpressionBody())
+                if (!destructorSyntax.HasBodyOrExpressionBody)
                 {
                     return;
                 }
@@ -148,7 +148,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             private void VerifyDisposeOverrideCallsBase(MethodDeclarationSyntax disposeMethod)
             {
-                if (!disposeMethod.HasBodyOrExpressionBody())
+                if (!disposeMethod.HasBodyOrExpressionBody)
                 {
                     return;
                 }
@@ -168,7 +168,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     return;
                 }
 
-                if (disposeMethod.HasBodyOrExpressionBody() && !isSealedClass)
+                if (disposeMethod.HasBodyOrExpressionBody && !isSealedClass)
                 {
                     var missingVirtualDispose = !CallsVirtualDispose(disposeMethod, argumentValue: a => IsLiteralArgument(a, SyntaxKind.TrueKeyword));
                     var missingSuppressFinalize = !CallsSuppressFinalize(disposeMethod);
@@ -258,7 +258,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     .OfType<BaseMethodDeclarationSyntax>()
                     // We want to skip the partial method declarations when reporting secondary issues since the messages are relevant only for implementation part.
                     // We do want to include abstract methods though since the implementation is in another type which could be defined in a different assembly than the one analyzed.
-                    .Where(x => typeDeclarationSyntax.Contains(x) && (x.HasBodyOrExpressionBody() || x.Modifiers.AnyOfKind(SyntaxKind.AbstractKeyword)));
+                    .Where(x => typeDeclarationSyntax.Contains(x) && (x.HasBodyOrExpressionBody || x.Modifiers.AnyOfKind(SyntaxKind.AbstractKeyword)));
 
             private static bool HasVirtualDisposeBool(ITypeSymbol typeSymbol) =>
                 typeSymbol.GetSelfAndBaseTypes()

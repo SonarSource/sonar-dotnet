@@ -250,10 +250,10 @@ public class EquivalenceCheckerTest
         public VisualBasicMethods(string source)
         {
             var methods = Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<VB.MethodBlockSyntax>().ToArray();
-            Method1 = methods.Single(x => x.GetIdentifierText() == "Method1").Statements;
-            Method2 = methods.Single(x => x.GetIdentifierText() == "Method2").Statements;
-            Method3 = methods.Single(x => x.GetIdentifierText() == "Method3").Statements;
-            Method4 = methods.Single(x => x.GetIdentifierText() == "Method4").Statements;
+            Method1 = methods.Single(x => x.IdentifierText == "Method1").Statements;
+            Method2 = methods.Single(x => x.IdentifierText == "Method2").Statements;
+            Method3 = methods.Single(x => x.IdentifierText == "Method3").Statements;
+            Method4 = methods.Single(x => x.IdentifierText == "Method4").Statements;
         }
     }
 }

@@ -36,7 +36,7 @@ public sealed class ParameterValidationInAsyncShouldBeWrapped : SonarDiagnosticA
             {
                 var method = (MethodDeclarationSyntax)c.Node;
                 if (!method.Modifiers.Any(SyntaxKind.AsyncKeyword)
-                    || method.HasReturnTypeVoid()
+                    || method.HasReturnTypeVoid
                     || (method.Identifier.ValueText == "Main" && c.Model.GetDeclaredSymbol(method).IsMainMethod()))
                 {
                     return;

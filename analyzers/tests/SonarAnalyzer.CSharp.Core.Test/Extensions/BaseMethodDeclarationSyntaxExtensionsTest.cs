@@ -23,7 +23,7 @@ namespace SonarAnalyzer.CSharp.Core.Test.Extensions;
 public class BaseMethodDeclarationSyntaxExtensionsTest
 {
     [TestMethod]
-    public void GivenNullMethodDeclaration_GetBodyDescendantNodes_ThrowsArgumentNullException()
+    public void GivenNullMethodDeclaration_BodyDescendantNodes_ThrowsArgumentNullException()
     {
 #if NETFRAMEWORK
         var messageFormat = "Value cannot be null." + Environment.NewLine + "Parameter name: {0}";
@@ -33,7 +33,7 @@ public class BaseMethodDeclarationSyntaxExtensionsTest
 
         BaseMethodDeclarationSyntax sut = null;
 
-        var exception = Assert.Throws<ArgumentNullException>(sut.GetBodyDescendantNodes);
+        var exception = Assert.Throws<ArgumentNullException>(() => _ = sut.BodyDescendantNodes);
 
         exception.Message.Should().Be(string.Format(messageFormat, "method"));
     }
@@ -42,7 +42,7 @@ public class BaseMethodDeclarationSyntaxExtensionsTest
     [DynamicData(nameof(GetMethodDeclarationsAndExpectedBody))]
     public void HasBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody)
     {
-        var hasBody = methodDeclaration.HasBodyOrExpressionBody();
+        var hasBody = methodDeclaration.HasBodyOrExpressionBody;
         if (expectedBody is null)
         {
             hasBody.Should().BeFalse();
@@ -56,7 +56,7 @@ public class BaseMethodDeclarationSyntaxExtensionsTest
     [TestMethod]
     [DynamicData(nameof(GetMethodDeclarationsAndExpectedBody), DynamicDataSourceType.Method)]
     public void GetBodyOrExpressionBody(BaseMethodDeclarationSyntax methodDeclaration, SyntaxNode expectedBody) =>
-        methodDeclaration.GetBodyOrExpressionBody().Should().Be(expectedBody);
+        methodDeclaration.BodyOrExpressionBody.Should().Be(expectedBody);
 
     private static IEnumerable<object[]> GetMethodDeclarationsAndExpectedBody()
     {

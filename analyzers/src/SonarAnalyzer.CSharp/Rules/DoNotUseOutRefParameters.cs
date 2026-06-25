@@ -34,7 +34,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var parameter = (ParameterSyntax)c.Node;
 
                     if (!parameter.Modifiers.Any(IsRefOrOut)
-                        || (parameter is { Parent: ParameterListSyntax { Parent: MethodDeclarationSyntax method } } && method.IsDeconstructor()))
+                        || parameter is { Parent: ParameterListSyntax { Parent: MethodDeclarationSyntax { IsDeconstructor: true } } })
                     {
                         return;
                     }
