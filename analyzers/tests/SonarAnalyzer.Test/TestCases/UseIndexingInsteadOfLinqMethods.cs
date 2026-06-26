@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 
 static class Program
@@ -42,6 +43,19 @@ static class Program
         //                               ^^^^^^^^^
 
         Func<List<int>, int> func = l => l.First(); // Noncompliant
+
+        // Expression trees without EF - rule still fires for all target interface types
+        Expression<Func<List<int>, int>> exprFirst = l => l.First(); // Noncompliant
+        Expression<Func<List<int>, int>> exprLast = l => l.Last(); // Noncompliant
+        Expression<Func<List<int>, int>> exprElementAt = l => l.ElementAt(1); // Noncompliant
+
+        Expression<Func<IList<int>, int>> ilistExprFirst = l => l.First(); // Noncompliant
+        Expression<Func<IList<int>, int>> ilistExprLast = l => l.Last(); // Noncompliant
+        Expression<Func<IList<int>, int>> ilistExprElementAt = l => l.ElementAt(1); // Noncompliant
+
+        Expression<Func<IReadOnlyList<int>, int>> readonlyExprFirst = l => l.First(); // Noncompliant
+        Expression<Func<IReadOnlyList<int>, int>> readonlyExprLast = l => l.Last(); // Noncompliant
+        Expression<Func<IReadOnlyList<int>, int>> readonlyExprElementAt = l => l.ElementAt(1); // Noncompliant
 
         List<int> DoWork() => null;
 

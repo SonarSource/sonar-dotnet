@@ -41,7 +41,8 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
             if (HasValidSignature(invocation, out var methodName, out var indexDescriptor)
                 && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
                 && IsCorrectType(left, c.Model)
-                && IsCorrectCall(right, c.Model))
+                && IsCorrectCall(right, c.Model)
+                && !IsInEntityFrameworkExpressionTree(c))
             {
                 c.ReportIssue(
                     Rule,
@@ -82,4 +83,8 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
         model.GetSymbolInfo(right).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+    private bool IsInEntityFrameworkExpressionTree(SonarSyntaxNodeReportingContext context) =>
+        context.Compilation.ReferencesAny(KnownAssembly.MicrosoftEntityFrameworkCore, KnownAssembly.MicrosoftEntityFramework)
+        && Language.Syntax.IsInExpressionTree(context.Model, context.Node);
 }

@@ -31,6 +31,12 @@ public class UseIndexingInsteadOfLinqMethodsTest
         builderCS.AddPaths("UseIndexingInsteadOfLinqMethods.cs").Verify();
 
     [TestMethod]
+    public void UseIndexingInsteadOfLinqMethods_CS_EntityFramework() =>
+        builderCS.AddPaths("UseIndexingInsteadOfLinqMethods.EntityFramework.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(NugetPackageVersions.Latest))
+            .VerifyNoIssues();
+
+    [TestMethod]
     public void UseIndexingInsteadOfLinqMethods_VB() =>
         builderVB.AddPaths("UseIndexingInsteadOfLinqMethods.vb").Verify();
 }
