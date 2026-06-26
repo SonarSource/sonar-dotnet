@@ -17,6 +17,7 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Core.Trackers;
+using SonarAnalyzer.VisualBasic.Core.Trackers;
 
 namespace SonarAnalyzer.Test.Trackers;
 
@@ -26,8 +27,8 @@ public class ConstantValueFinderTest
     [TestMethod]
     [DataRow(false, "value")]
     [DataRow(true, "value")]
-    public void CompileTimeConstant(bool strict, string expected) =>
-        FindReturnedConstant("""
+    public void CompileTimeConstant_CS(bool strict, string expected) =>
+        FindReturnedConstant_CS("""
             public class Sample
             {
                 public object Method()
@@ -42,8 +43,22 @@ public class ConstantValueFinderTest
     [TestMethod]
     [DataRow(false, "value")]
     [DataRow(true, "value")]
-    public void LocalAssignment(bool strict, string expected) =>
-        FindReturnedConstant("""
+    public void CompileTimeConstant_VB(bool strict, string expected) =>
+        FindInspectedConstant_VB("""
+            Public Class Sample
+                Public Sub Method()
+                    Const Local As String = "value"
+                    Dim Inspected = Local
+                End Sub
+            End Class
+            """,
+            strict).Should().Be(expected);
+
+    [TestMethod]
+    [DataRow(false, "value")]
+    [DataRow(true, "value")]
+    public void LocalAssignment_CS(bool strict, string expected) =>
+        FindReturnedConstant_CS("""
             public class Sample
             {
                 public object Method()
@@ -57,9 +72,23 @@ public class ConstantValueFinderTest
 
     [TestMethod]
     [DataRow(false, "value")]
+    [DataRow(true, "value")]
+    public void LocalAssignment_VB(bool strict, string expected) =>
+        FindInspectedConstant_VB("""
+            Public Class Sample
+                Public Sub Method()
+                    Dim Local = "value"
+                    Dim Inspected = Local
+                End Sub
+            End Class
+            """,
+            strict).Should().Be(expected);
+
+    [TestMethod]
+    [DataRow(false, "value")]
     [DataRow(true, null)]
-    public void FieldInitializer_OnlyResolvedInNonStrictMode(bool strict, string expected) =>
-        FindReturnedConstant("""
+    public void FieldInitializer_OnlyResolvedInNonStrictMode_CS(bool strict, string expected) =>
+        FindReturnedConstant_CS("""
             public class Sample
             {
                 private string field = "value";
@@ -68,6 +97,21 @@ public class ConstantValueFinderTest
                     return field;
                 }
             }
+            """,
+            strict).Should().Be(expected);
+
+    [TestMethod]
+    [DataRow(false, "value")]
+    [DataRow(true, null)]
+    public void FieldInitializer_OnlyResolvedInNonStrictMode_VB(bool strict, string expected) =>
+        FindInspectedConstant_VB("""
+            Public Class Sample
+                Private Field As String = "value"
+
+                Public Sub Method()
+                    Dim Inspected = Field
+                End Sub
+            End Class
             """,
             strict).Should().Be(expected);
 
@@ -125,8 +169,8 @@ public class Bar
     [TestMethod]
     [DataRow(false, "value")]
     [DataRow(true, null)]
-    public void ParameterDefaultValue_OnlyResolvedInNonStrictMode(bool strict, string expected) =>
-        FindReturnedConstant("""
+    public void ParameterDefaultValue_OnlyResolvedInNonStrictMode_CS(bool strict, string expected) =>
+        FindReturnedConstant_CS("""
             public class Sample
             {
                 public object Method(string parameter = "value")
@@ -138,8 +182,21 @@ public class Bar
             strict).Should().Be(expected);
 
     [TestMethod]
-    public void ParameterDefaultValue_NotResolvedWhenConditionallyReassigned() =>
-        FindReturnedConstant("""
+    [DataRow(false, "value")]
+    [DataRow(true, null)]
+    public void ParameterDefaultValue_OnlyResolvedInNonStrictMode_VB(bool strict, string expected) =>
+        FindInspectedConstant_VB("""
+            Public Class Sample
+                Public Sub Method(Optional Parameter As String = "value")
+                    Dim Inspected = Parameter
+                End Sub
+            End Class
+            """,
+            strict).Should().Be(expected);
+
+    [TestMethod]
+    public void ParameterDefaultValue_NotResolvedWhenConditionallyReassigned_CS() =>
+        FindReturnedConstant_CS("""
             public class Sample
             {
                 public object Method(bool condition, string parameter = "value")
@@ -155,10 +212,24 @@ public class Bar
             false).Should().BeNull();
 
     [TestMethod]
+    public void ParameterDefaultValue_NotResolvedWhenConditionallyReassigned_VB() =>
+        FindInspectedConstant_VB("""
+            Public Class Sample
+                Public Sub Method(condition As Boolean, Optional parameter As String = "value")
+                    If condition Then
+                        Parameter = "other"
+                    End If
+                    Dim Inspected = Parameter
+                End Sub
+            End Class
+            """,
+            false).Should().BeNull();
+
+    [TestMethod]
     [DataRow(false, "value")]
     [DataRow(true, null)]
-    public void ParameterDefaultValue_PartialMethod_ResolvedFromAuthoritativeDeclaration(bool strict, string expected) =>
-        FindReturnedConstant("""
+    public void ParameterDefaultValue_PartialMethod_ResolvedFromAuthoritativeDeclaration_CS(bool strict, string expected) =>
+        FindReturnedConstant_CS("""
             public partial class Sample
             {
                 public partial object Method(string parameter = "value");
@@ -173,9 +244,26 @@ public class Bar
     [TestMethod]
     [DataRow(false, "value")]
     [DataRow(true, null)]
-    public void ParameterDefaultValue_PartialMethod_ConflictingDefaults_ResolvedFromDefiningDeclaration(bool strict, string expected) =>
+    public void ParameterDefaultValue_PartialMethod_ResolvedFromAuthoritativeDeclaration_VB(bool strict, string expected) =>
+        FindInspectedConstant_VB("""
+            Partial Public Class Sample
+                Partial Private Sub Method(Optional parameter As String = "value")
+                End Sub
+
+                Private Sub Method(Optional parameter As String = "value")
+                    Dim Inspected = Parameter
+                End Sub
+            End Class
+            """,
+            strict).Should().Be(expected);
+
+    // This test has no VB counterpart because VB does not allow partial methods to have conflicting default values.
+    [TestMethod]
+    [DataRow(false, "value")]
+    [DataRow(true, null)]
+    public void ParameterDefaultValue_PartialMethod_ConflictingDefaults_ResolvedFromDefiningDeclaration_CS(bool strict, string expected) =>
         // The default on the defining declaration is authoritative; the implementing declaration's is ignored (CS1066).
-        FindReturnedConstant("""
+        FindReturnedConstant_CS("""
             public partial class Sample
             {
                 public partial object Method(string parameter = "value");
@@ -187,10 +275,11 @@ public class Bar
             """,
             strict).Should().Be(expected);
 
+    // This test has no VB counterpart because VB does not allow partial methods to have conflicting default values.
     [TestMethod]
-    public void ParameterDefaultValue_PartialMethod_DefaultOnlyOnImplementation_NotResolved() =>
+    public void ParameterDefaultValue_PartialMethod_DefaultOnlyOnImplementation_NotResolved_CS() =>
         // The defining declaration has no default, so the parameter is required and the implementation's default has no effect (CS1066). There is no usable default value.
-        FindReturnedConstant("""
+        FindReturnedConstant_CS("""
             public partial class Sample
             {
                 public partial object Method(string parameter);
@@ -202,10 +291,24 @@ public class Bar
             """,
             false).Should().BeNull();
 
-    private static object FindReturnedConstant(string code, bool strict)
+    private static object FindReturnedConstant_CS(string code, bool strict)
     {
         var (tree, model) = TestCompiler.CompileCS(code);
-        var returnExpression = tree.Single<ReturnStatementSyntax>().Expression;
+        var returnExpression = tree.Single<Microsoft.CodeAnalysis.CSharp.Syntax.ReturnStatementSyntax>().Expression;
         return new CSharpConstantValueFinder(model, strict).FindConstant(returnExpression);
+    }
+
+    // VB partial methods must be 'Sub' (BC31437) and therefore cannot return a value, so - unlike the C# helper - we
+    // cannot anchor on a return statement. Instead the expression under test is assigned to a local named 'inspected'.
+    private static object FindInspectedConstant_VB(string code, bool strict)
+    {
+        var (tree, model) = TestCompiler.CompileVB(code);
+        var inspectedValue = tree.GetRoot()
+            .DescendantNodes()
+            .OfType<Microsoft.CodeAnalysis.VisualBasic.Syntax.VariableDeclaratorSyntax>()
+            .Single(x => x.Names.Any(name => name.Identifier.ValueText == "Inspected"))
+            .Initializer
+            .Value;
+        return new VisualBasicConstantValueFinder(model, strict).FindConstant(inspectedValue);
     }
 }
