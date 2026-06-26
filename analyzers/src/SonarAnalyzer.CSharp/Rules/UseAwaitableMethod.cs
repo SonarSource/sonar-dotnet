@@ -26,6 +26,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
     private const string DiagnosticId = "S6966";
     private const string MessageFormat = "Await {0} instead.";
     private static readonly string[] ExcludedMethodNames = ["Add", "AddRange"];
+    private static readonly string[] DbDataReaderExcludedMethodNames = ["IsDBNull", "GetFieldValue", "GetValue", "GetBytes", "GetChars", "GetStream", "GetTextReader"];
     private static readonly ImmutableArray<KnownType> ExcludedTypes = ImmutableArray.Create(KnownType.System_Xml_XmlWriter, KnownType.System_Xml_XmlReader);
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
@@ -104,6 +105,11 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         if (compilation.GetTypeByMetadataName(KnownType.MongoDB_Driver_IMongoCollectionExtensions) is not null)
         {
             exclusions.Add(x => x.Is(KnownType.MongoDB_Driver_IMongoCollectionExtensions, "Find")); // https://github.com/SonarSource/sonar-dotnet/issues/9265
+        }
+        if (compilation.GetTypeByMetadataName(KnownType.System_Data_Common_DbDataReader) is not null)
+        {
+            // https://sonarsource.atlassian.net/browse/NET-3564
+            exclusions.Add(x => DbDataReaderExcludedMethodNames.Contains(x.Name) && x.ContainingType.DerivesFrom(KnownType.System_Data_Common_DbDataReader));
         }
         return exclusions.ToImmutableArray();
     }

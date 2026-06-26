@@ -372,6 +372,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Configuration_ConfigurationManager = new("System.Configuration.ConfigurationManager");
     public static readonly KnownType System_Console = new("System.Console");
     public static readonly KnownType System_Data_Common_CommandTrees_DbExpression = new("System.Data.Common.CommandTrees.DbExpression");
+    public static readonly KnownType System_Data_Common_DbDataReader = new("System.Data.Common.DbDataReader");
     public static readonly KnownType System_Data_DataSet = new("System.Data.DataSet");
     public static readonly KnownType System_Data_DataTable = new("System.Data.DataTable");
     public static readonly KnownType System_Data_Entity_Core_Objects_ObjectQuery = new("System.Data.Entity.Core.Objects.ObjectQuery");
