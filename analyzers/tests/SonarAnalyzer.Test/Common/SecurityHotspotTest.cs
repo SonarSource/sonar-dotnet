@@ -94,7 +94,6 @@ public class SecurityHotspotTest
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
             nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion),
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
-            nameof(DoNotUseRandom) => MetadataReferenceFacade.SystemSecurityCryptography,
             nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
             nameof(RequestsWithExcessiveLength) => RequestsWithExcessiveLengthTest.GetAdditionalReferences(),
             nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions

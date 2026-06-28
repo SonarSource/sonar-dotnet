@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
     {
         public void Main()
         {
-            new Random(); // Noncompliant {{Make sure that using this pseudorandom number generator is safe here.}}
+            new Random(); // Noncompliant {{Use a cryptographically strong random number generator.}}
 //          ^^^^^^^^^^^^
             new Random(1); // Noncompliant
 

@@ -24,7 +24,7 @@ public class DoNotUseRandomTest
 {
     [TestMethod]
     public void DoNotUseRandom() =>
-        new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new DoNotUseRandom(AnalyzerConfiguration.AlwaysEnabled))
+        new VerifierBuilder().AddAnalyzer(() => new DoNotUseRandom())
             .AddPaths("DoNotUseRandom.cs")
             .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
             .Verify();

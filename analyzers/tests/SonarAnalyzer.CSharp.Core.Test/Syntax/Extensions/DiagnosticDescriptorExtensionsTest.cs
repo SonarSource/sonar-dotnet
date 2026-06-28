@@ -21,13 +21,6 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 public class DiagnosticDescriptorExtensionsTest
 {
     [TestMethod]
-    public void IsSecurityHotspot_IsHotspot()
-    {
-        var descriptor = new DiagnosticDescriptor("S2245", "title", "message", "category", DiagnosticSeverity.Warning, true);
-        descriptor.IsSecurityHotspot().Should().BeTrue();
-    }
-
-    [TestMethod]
     public void IsSecurityHotspot_NonexistentId()
     {
         var descriptor = new DiagnosticDescriptor("Sxxxx", "title", "message", "category", DiagnosticSeverity.Warning, true);
