@@ -1998,7 +1998,7 @@ public static class RuleTypeMappingCS
         // ["S2074"],
         // ["S2075"],
         // ["S2076"],
-        ["S2077"] = "SECURITY_HOTSPOT",
+        ["S2077"] = "VULNERABILITY",
         // ["S2078"],
         // ["S2079"],
         // ["S2080"],

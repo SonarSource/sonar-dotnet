@@ -1,0 +1,102 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) SonarSource Sàrl
+ * mailto:info AT sonarsource DOT com
+ *
+ * You can redistribute and/or modify this program under the terms of
+ * the Sonar Source-Available License Version 1, as published by SonarSource Sàrl.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the Sonar Source-Available License for more details.
+ *
+ * You should have received a copy of the Sonar Source-Available License
+ * along with this program; if not, see https://sonarsource.com/license/ssal/
+ */
+
+using SonarAnalyzer.Core.Trackers;
+
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, ExpressionSyntax, IdentifierNameSyntax>
+{
+    protected override ILanguageFacade<SyntaxKind> Language { get; } = CSharpFacade.Instance;
+
+    protected override ExpressionSyntax ArgumentAtIndex(InvocationContext context, int index) =>
+        context.Node is InvocationExpressionSyntax invocation
+            ? invocation.ArgumentList.Get(index)
+            : null;
+
+    protected override ExpressionSyntax ArgumentAtIndex(ObjectCreationContext context, int index) =>
+        ObjectCreationFactory.Create(context.Node).ArgumentList.Get(index);
+
+    protected override ExpressionSyntax AssignedValue(PropertyAccessContext context) =>
+        context.Node is MemberAccessExpressionSyntax { IsLeftSideOfAssignment: true, SelfOrTopParenthesizedExpression.Parent: AssignmentExpressionSyntax assignment }
+            ? assignment.Right.WithoutEnclosingParentheses
+            : null;
+
+    protected override bool IsTracked(ExpressionSyntax expression, SyntaxBaseContext context) =>
+        IsSensitiveExpression(expression, context.Model) || IsTrackedVariableDeclaration(expression, context);
+
+    protected override bool IsSensitiveExpression(ExpressionSyntax expression, SemanticModel model) =>
+        expression is not null
+        && (IsConcatenation(expression, model)
+            || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
+            || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, model)));
+
+    protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
+    {
+        identifierNameFound = identifierNameToFind;
+
+        if (node is null)
+        {
+            return Location.None;
+        }
+
+        if (node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax declarationSyntax })
+        {
+            return declarationSyntax.Identifier.GetLocation();
+        }
+
+        return node.Parent is AssignmentExpressionSyntax assignment ? assignment.Left.GetLocation() : Location.None;
+    }
+
+    private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        (invocation.IsMethodInvocation(KnownType.System_String, "Format", model) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", model))
+        && !AllConstants(invocation.ArgumentList.Arguments.ToList(), model);
+
+    private static bool IsConcatenation(ExpressionSyntax expression, SemanticModel model) =>
+        expression.IsKind(SyntaxKind.AddExpression)
+        && expression is BinaryExpressionSyntax concatenation
+        && !IsConcatenationOfConstants(concatenation, model);
+
+    private static bool AllConstants(IEnumerable<ArgumentSyntax> arguments, SemanticModel model) =>
+        arguments.All(x => x.Expression.HasConstantValue(model, strict: true));
+
+    private static bool IsConcatenationOfConstants(BinaryExpressionSyntax binaryExpression, SemanticModel model)
+    {
+        Debug.Assert(binaryExpression.IsKind(SyntaxKind.AddExpression), "Binary expression should be of syntax kind add expression.");
+        if ((model.GetTypeInfo(binaryExpression).Type is not null) && binaryExpression.Right.HasConstantValue(model, strict: true))
+        {
+            var nestedLeft = binaryExpression.Left;
+            var nestedBinary = nestedLeft as BinaryExpressionSyntax;
+            while (nestedBinary is not null)
+            {
+                if (nestedBinary.Right.HasConstantValue(model, strict: true)
+                    && (nestedBinary.IsKind(SyntaxKind.AddExpression) || nestedBinary.HasConstantValue(model, strict: true)))
+                {
+                    nestedLeft = nestedBinary.Left;
+                    nestedBinary = nestedLeft as BinaryExpressionSyntax;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return nestedLeft.HasConstantValue(model, strict: true);
+        }
+        return false;
+    }
+}
