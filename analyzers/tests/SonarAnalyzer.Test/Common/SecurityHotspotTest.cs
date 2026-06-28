@@ -41,7 +41,7 @@ public class SecurityHotspotTest
 
 #if NETFRAMEWORK
 
-            if (analyzerName is nameof(DisablingCsrfProtection) or nameof(PermissiveCors))
+            if (analyzerName is nameof(PermissiveCors))
             {
                 continue;
             }
@@ -79,7 +79,6 @@ public class SecurityHotspotTest
             "ExecutingSqlQueries" => "ExecutingSqlQueries.Net46",
             "UsingCookies" => "UsingCookies_Net46",
 #else
-            "DisablingCsrfProtection" => "DisablingCsrfProtection.Latest",
             "ExecutingSqlQueries" => "ExecutingSqlQueries.EntityFrameworkCoreLatest",
             "PermissiveCors" => "PermissiveCors.Latest",
             "UsingCookies" => "UsingCookies_NetCore",
@@ -100,7 +99,6 @@ public class SecurityHotspotTest
                 .Concat(NuGetMetadataReference.SystemComponentModelAnnotations()),
 
 #if NET
-            nameof(DisablingCsrfProtection) => DisablingCsrfProtectionTest.AdditionalReferences(),
             nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesEntityFrameworkNetCore("7.0.14"),
             nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else

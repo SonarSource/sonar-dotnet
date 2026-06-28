@@ -24,8 +24,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class DisablingCsrfProtectionTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots")
-                                                                    .AddAnalyzer(() => new DisablingCsrfProtection(AnalyzerConfiguration.AlwaysEnabled))
+    private readonly VerifierBuilder builder = new VerifierBuilder()
+                                                                    .AddAnalyzer(() => new DisablingCsrfProtection())
                                                                     .AddReferences(AdditionalReferences());
 
     [TestMethod]

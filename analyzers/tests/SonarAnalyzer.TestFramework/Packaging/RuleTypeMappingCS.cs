@@ -4423,7 +4423,7 @@ public static class RuleTypeMappingCS
         // ["S4499"],
         // ["S4500"],
         // ["S4501"],
-        ["S4502"] = "SECURITY_HOTSPOT",
+        ["S4502"] = "VULNERABILITY",
         // ["S4503"],
         // ["S4504"],
         // ["S4505"],
