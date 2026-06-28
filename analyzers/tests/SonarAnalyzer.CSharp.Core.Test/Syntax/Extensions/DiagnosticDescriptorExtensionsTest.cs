@@ -23,7 +23,7 @@ public class DiagnosticDescriptorExtensionsTest
     [TestMethod]
     public void IsSecurityHotspot_IsHotspot()
     {
-        var descriptor = new DiagnosticDescriptor("S2092", "title", "message", "category", DiagnosticSeverity.Warning, true);
+        var descriptor = new DiagnosticDescriptor("S2245", "title", "message", "category", DiagnosticSeverity.Warning, true);
         descriptor.IsSecurityHotspot().Should().BeTrue();
     }
 

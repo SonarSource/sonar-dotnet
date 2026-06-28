@@ -17,7 +17,7 @@ class Tests
 
     void CtorSetsNotAllowedValue()
     {
-        new CookieOptions(); // Noncompliant {{Make sure creating this cookie without the "HttpOnly" flag is safe.}}
+        new CookieOptions(); // Noncompliant {{Set the 'HttpOnly' flag on this cookie.}}
     }
 
     void InitializerSetsAllowedValue()

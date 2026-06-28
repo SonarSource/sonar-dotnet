@@ -17,7 +17,7 @@ class MyClass
 
     void CtorSetsNotAllowedValue()
     {
-        new CookieOptions(); // Noncompliant {{Make sure creating this cookie without setting the 'Secure' property is safe here.}}
+        new CookieOptions(); // Noncompliant {{Set the 'Secure' flag on this cookie.}}
     }
 
     void InitializerSetsAllowedValue()

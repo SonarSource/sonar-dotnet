@@ -23,7 +23,7 @@ namespace Tests.Diagnostics
 
         void CtorSetsNotAllowedValue()
         {
-            new HttpCookie("c"); // Noncompliant {{Make sure creating this cookie without the "HttpOnly" flag is safe.}}
+            new HttpCookie("c"); // Noncompliant {{Set the 'HttpOnly' flag on this cookie.}}
         }
 
         void InitializerSetsAllowedValue()
@@ -98,7 +98,7 @@ namespace Tests.Diagnostics
 
         void RaiseTwice()
         {
-            var x = new HttpCookie("c"); // Noncompliant {{Make sure creating this cookie without the "HttpOnly" flag is safe.}}
+            var x = new HttpCookie("c"); // Noncompliant {{Set the 'HttpOnly' flag on this cookie.}}
             x.HttpOnly = false; // Noncompliant
         }
     }

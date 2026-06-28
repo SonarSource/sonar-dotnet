@@ -25,7 +25,7 @@ public class CookieShouldBeHttpOnlyTest
 {
     private const string WebConfig = "Web.config";
 
-    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeHttpOnly(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new CookieShouldBeHttpOnly());
 
     public TestContext TestContext { get; set; }
 

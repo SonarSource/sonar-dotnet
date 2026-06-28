@@ -25,7 +25,7 @@ public class CookieShouldBeSecureTest
 {
     private const string WebConfig = "Web.config";
 
-    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CookieShouldBeSecure(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new CookieShouldBeSecure());
 
     public TestContext TestContext { get; set; }
 

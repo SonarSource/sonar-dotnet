@@ -1,6 +1,7 @@
 {
-  "title": "Creating cookies without the \"secure\" flag is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Cookies should have the \"secure\" flag",
+  "type": "VULNERABILITY",
+  "quickfix": "unknown",
   "code": {
     "impacts": {
       "SECURITY": "LOW"
@@ -14,6 +15,7 @@
   },
   "tags": [
     "cwe",
+    "former-hotspot",
     "privacy"
   ],
   "defaultSeverity": "Minor",

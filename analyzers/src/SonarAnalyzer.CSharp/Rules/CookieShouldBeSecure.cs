@@ -1,0 +1,53 @@
+﻿/*
+ * SonarAnalyzer for .NET
+ * Copyright (C) SonarSource Sàrl
+ * mailto:info AT sonarsource DOT com
+ *
+ * You can redistribute and/or modify this program under the terms of
+ * the Sonar Source-Available License Version 1, as published by SonarSource Sàrl.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the Sonar Source-Available License for more details.
+ *
+ * You should have received a copy of the Sonar Source-Available License
+ * along with this program; if not, see https://sonarsource.com/license/ssal/
+ */
+
+using SonarAnalyzer.Core.Trackers;
+using SonarAnalyzer.CSharp.Core.Trackers;
+
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class CookieShouldBeSecure : ObjectShouldBeInitializedCorrectlyBase
+{
+    private const string DiagnosticId = "S2092";
+
+    private static readonly ImmutableArray<KnownType> TrackedTypes =
+        ImmutableArray.Create(
+            KnownType.System_Web_HttpCookie,
+            KnownType.Microsoft_AspNetCore_Http_CookieOptions);
+
+    protected override string MessageFormat => "Set the 'Secure' flag on this cookie.";
+
+    protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new(
+        isAllowedConstantValue: x => x is true,
+        trackedTypes: TrackedTypes,
+        isTrackedPropertyName: x => x == "Secure");
+
+    public CookieShouldBeSecure() : base(DiagnosticId) { }
+
+    protected override bool IsDefaultConstructorSafe(SonarCompilationStartAnalysisContext context) =>
+        IsWebConfigCookieSet(context, "requireSSL");
+
+    protected override void Initialize(TrackerInput input)
+    {
+        var t = CSharpFacade.Instance.Tracker.ObjectCreation;
+        t.Track(
+            input,
+            t.MatchConstructor(KnownType.Nancy_Cookies_NancyCookie),
+            t.ExceptWhen(t.ArgumentIsBoolConstant("secure", true)));
+    }
+}

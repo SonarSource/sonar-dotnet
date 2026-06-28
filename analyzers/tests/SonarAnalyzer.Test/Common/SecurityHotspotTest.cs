@@ -41,7 +41,7 @@ public class SecurityHotspotTest
 
 #if NETFRAMEWORK
 
-            if (analyzerName is nameof(DisablingCsrfProtection) || analyzerName is nameof(PermissiveCors))
+            if (analyzerName is nameof(DisablingCsrfProtection) or nameof(PermissiveCors))
             {
                 continue;
             }
@@ -73,8 +73,6 @@ public class SecurityHotspotTest
     private static string TestCaseFileName(string analyzerName) =>
         analyzerName switch
         {
-            "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
-            "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
             "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
             "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
 #if NETFRAMEWORK
@@ -93,8 +91,6 @@ public class SecurityHotspotTest
         analyzerName switch
         {
             nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
-            nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
-            nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
             nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion),
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
@@ -112,7 +108,7 @@ public class SecurityHotspotTest
             nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesNet46(TestConstants.NuGetLatestVersion),
 #endif
             _ => MetadataReferenceFacade.SystemNetHttp
-                                        .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)
-                                        .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
+                .Concat(MetadataReferenceFacade.SystemDiagnosticsProcess)
+                .Concat(MetadataReferenceFacade.SystemSecurityCryptography)
         };
 }

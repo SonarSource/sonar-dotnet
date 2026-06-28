@@ -20,74 +20,68 @@ using System.Xml.XPath;
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+public abstract class ObjectShouldBeInitializedCorrectlyBase : SonarDiagnosticAnalyzer<SyntaxKind>
 {
-    public abstract class ObjectShouldBeInitializedCorrectlyBase : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
+    protected abstract CSharpObjectInitializationTracker ObjectInitializationTracker { get; }
+
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected ObjectShouldBeInitializedCorrectlyBase(string diagnosticId) : base(diagnosticId) { }
+
+    protected virtual bool IsDefaultConstructorSafe(SonarCompilationStartAnalysisContext context) => false;
+
+    protected virtual void Initialize(TrackerInput input)
     {
-        protected abstract CSharpObjectInitializationTracker ObjectInitializationTracker { get; }
+        // This should be overriden by inheriting class that uses trackers
+    }
 
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected ObjectShouldBeInitializedCorrectlyBase(IAnalyzerConfiguration configuration, string diagnosticId, string messageFormat)
-            : base(configuration, diagnosticId, messageFormat) { }
-
-        protected virtual bool IsDefaultConstructorSafe(SonarCompilationStartAnalysisContext context) => false;
-
-        protected override void Initialize(TrackerInput input)
-        {
-            // This should be overriden by inheriting class that uses trackers
-        }
-
-        protected override void Initialize(SonarAnalysisContext context)
-        {
-            base.Initialize(context);
-            context.RegisterCompilationStartAction(
-                compilationStartContext =>
-                {
-                    if (!IsEnabled(compilationStartContext.Options))
-                    {
-                        return;
-                    }
-
-                    var isDefaultConstructorSafe = IsDefaultConstructorSafe(compilationStartContext);
-
-                    compilationStartContext.RegisterNodeAction(
-                        c =>
-                        {
-                            var objectCreation = ObjectCreationFactory.Create(c.Node);
-                            if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.Model, isDefaultConstructorSafe ))
-                            {
-                                c.ReportIssue(SupportedDiagnostics[0], objectCreation.Expression);
-                            }
-                        },
-                        SyntaxKind.ObjectCreationExpression, SyntaxKindEx.ImplicitObjectCreationExpression);
-
-                    compilationStartContext.RegisterNodeAction(
-                        c =>
-                        {
-                            var assignment = (AssignmentExpressionSyntax)c.Node;
-                            if (ObjectInitializationTracker.ShouldBeReported(assignment, c.Model))
-                            {
-                                c.ReportIssue(SupportedDiagnostics[0], assignment);
-                            }
-                        },
-                        SyntaxKind.SimpleAssignmentExpression);
-                });
-        }
-
-        protected static bool IsWebConfigCookieSet(SonarCompilationStartAnalysisContext context, string attribute)
-        {
-            foreach (var fullPath in context.ProjectConfiguration().FilesToAnalyze.FindFiles("web.config"))
+    protected override void Initialize(SonarAnalysisContext context)
+    {
+        Initialize(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
+        context.RegisterCompilationStartAction(
+            compilationStartContext =>
             {
-                var webConfig = File.ReadAllText(fullPath);
-                if (webConfig.Contains("<system.web>") && webConfig.ParseXDocument() is { } doc
-                    && doc.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs(attribute, true) != null))
-                {
-                    return true;
-                }
-            }
+                var isDefaultConstructorSafe = IsDefaultConstructorSafe(compilationStartContext);
 
-            return false;
+                compilationStartContext.RegisterNodeAction(
+                    c =>
+                    {
+                        var objectCreation = ObjectCreationFactory.Create(c.Node);
+                        if (ObjectInitializationTracker.ShouldBeReported(objectCreation, c.Model, isDefaultConstructorSafe))
+                        {
+                            c.ReportIssue(SupportedDiagnostics[0], objectCreation.Expression);
+                        }
+                    },
+                    SyntaxKind.ObjectCreationExpression,
+                    SyntaxKindEx.ImplicitObjectCreationExpression);
+
+                compilationStartContext.RegisterNodeAction(
+                    c =>
+                    {
+                        var assignment = (AssignmentExpressionSyntax)c.Node;
+                        if (ObjectInitializationTracker.ShouldBeReported(assignment, c.Model))
+                        {
+                            c.ReportIssue(SupportedDiagnostics[0], assignment);
+                        }
+                    },
+                    SyntaxKind.SimpleAssignmentExpression);
+            });
+    }
+
+    protected static bool IsWebConfigCookieSet(SonarCompilationStartAnalysisContext context, string attribute)
+    {
+        foreach (var fullPath in context.ProjectConfiguration().FilesToAnalyze.FindFiles("web.config"))
+        {
+            var webConfig = File.ReadAllText(fullPath);
+            if (webConfig.Contains("<system.web>") && webConfig.ParseXDocument() is { } doc
+                && doc.XPathSelectElements("configuration/system.web/httpCookies").Any(x => x.GetAttributeIfBoolValueIs(attribute, true) is not null))
+            {
+                return true;
+            }
         }
+
+        return false;
     }
 }

@@ -23,10 +23,11 @@ namespace SonarAnalyzer.CSharp.Rules;
 public sealed class LdapConnectionShouldBeSecure : ObjectShouldBeInitializedCorrectlyBase
 {
     private const string DiagnosticId = "S4433";
-    private const string MessageFormat = "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.";
 
     private const int AuthenticationTypesNone = 0;
     private const int AuthenticationTypesAnonymous = 16;
+
+    protected override string MessageFormat => "Set the 'AuthenticationType' property of this DirectoryEntry to 'AuthenticationTypes.Secure'.";
 
     protected override CSharpObjectInitializationTracker ObjectInitializationTracker { get; } = new CSharpObjectInitializationTracker(
         isAllowedConstantValue: x => x is int integerValue && !IsUnsafe(integerValue),
@@ -35,7 +36,7 @@ public sealed class LdapConnectionShouldBeSecure : ObjectShouldBeInitializedCorr
         isAllowedObject: IsAllowedObject,
         trackedConstructorArgumentIndex: 3);
 
-    public LdapConnectionShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
+    public LdapConnectionShouldBeSecure() : base(DiagnosticId) { }
 
     private static bool IsAllowedObject(ISymbol authTypeSymbol, SyntaxNode authTypeExpression, SemanticModel model) =>
         authTypeSymbol.GetSymbolType().Is(KnownType.System_DirectoryServices_AuthenticationTypes)
