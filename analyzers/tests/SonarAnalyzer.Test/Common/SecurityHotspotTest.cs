@@ -82,7 +82,6 @@ public class SecurityHotspotTest
             "UsingCookies" => "UsingCookies_Net46",
 #else
             "ExecutingSqlQueries" => "ExecutingSqlQueries.EntityFrameworkCoreLatest",
-            "PermissiveCors" => "PermissiveCors.Latest",
             "UsingCookies" => "UsingCookies_NetCore",
 #endif
             _ => analyzerName
@@ -104,7 +103,6 @@ public class SecurityHotspotTest
 
 #if NET
             nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesEntityFrameworkNetCore("7.0.14"),
-            nameof(PermissiveCors) => PermissiveCorsTest.AdditionalReferences,
 #else
             nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesNet46(TestConstants.NuGetLatestVersion),
 #endif

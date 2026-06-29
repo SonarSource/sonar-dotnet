@@ -23,8 +23,7 @@ namespace SonarAnalyzer.Test.Rules;
 public class PermissiveCorsTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder()
-        .AddAnalyzer(() => new PermissiveCors(AnalyzerConfiguration.AlwaysEnabled))
-        .WithBasePath(@"Hotspots\")
+        .AddAnalyzer(() => new PermissiveCors())
         .AddReferences(AdditionalReferences);
 
 #if NET
@@ -53,11 +52,11 @@ public class PermissiveCorsTest
 
     private static IEnumerable<MetadataReference> AdditionalReferences =>
         NuGetMetadataReference.MicrosoftNetHttpHeaders("2.1.14")
-                              .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion))
-                              .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(TestConstants.NuGetLatestVersion))
-                              .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(TestConstants.NuGetLatestVersion))
-                              .Concat(FrameworkMetadataReference.SystemWeb)
-                              .Concat(FrameworkMetadataReference.SystemNetHttp);
+            .Concat(NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion))
+            .Concat(NuGetMetadataReference.MicrosoftAspNetWebApiCors(TestConstants.NuGetLatestVersion))
+            .Concat(NuGetMetadataReference.MicrosoftNetWebApiCore(TestConstants.NuGetLatestVersion))
+            .Concat(FrameworkMetadataReference.SystemWeb)
+            .Concat(FrameworkMetadataReference.SystemNetHttp);
 
     [TestMethod]
     public void PermissiveCors_AspNet_WebApi() =>
