@@ -15,19 +15,15 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules;
+namespace SonarAnalyzer.CSharp.Rules;
 
-[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class CreatingHashAlgorithms : CreatingHashAlgorithmsBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-    public CreatingHashAlgorithms() : this(AnalyzerConfiguration.Hotspot) { }
-
-    internal /*for testing*/ CreatingHashAlgorithms(IAnalyzerConfiguration configuration) : base(configuration) { }
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
     protected override bool IsUnsafeAlgorithm(SyntaxNode argumentNode, SemanticModel model) =>
-        argumentNode as SimpleArgumentSyntax is { } argument
+        argumentNode as ArgumentSyntax is { } argument
         && argument.Expression as MemberAccessExpressionSyntax is { } memberAccess
         && memberAccess.Name.ToString() is "SHA1" or "MD5"
         && model.GetSymbolInfo(memberAccess.Expression).Symbol.GetSymbolType().Is(KnownType.System_Security_Cryptography_HashAlgorithmName);

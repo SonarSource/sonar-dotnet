@@ -23,13 +23,13 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class CreatingHashAlgorithmsTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots")
+    private readonly VerifierBuilder builderCS = new VerifierBuilder()
         .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-        .AddAnalyzer(() => new CS.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
+        .AddAnalyzer(() => new CS.CreatingHashAlgorithms());
 
-    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots")
+    private readonly VerifierBuilder builderVB = new VerifierBuilder()
         .AddReferences(MetadataReferenceFacade.SystemSecurityCryptography)
-        .AddAnalyzer(() => new VB.CreatingHashAlgorithms(AnalyzerConfiguration.AlwaysEnabled));
+        .AddAnalyzer(() => new VB.CreatingHashAlgorithms());
 
     [TestMethod]
     public void CreatingHashAlgorithms_CS() =>

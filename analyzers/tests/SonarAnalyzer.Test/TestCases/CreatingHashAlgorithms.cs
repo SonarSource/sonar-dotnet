@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     {
         public void Hash(byte[] temp)
         {
-            var DSACng = new DSACng(10); // Noncompliant {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+            var DSACng = new DSACng(10); // Noncompliant {{Use a stronger hashing algorithm.}}
 //                       ^^^^^^^^^^^^^^
             var DSACryptoServiceProvider = new DSACryptoServiceProvider(); // Noncompliant
             var DSACreate = DSA.Create(); // Noncompliant

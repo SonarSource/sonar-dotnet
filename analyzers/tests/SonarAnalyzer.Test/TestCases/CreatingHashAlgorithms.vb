@@ -7,7 +7,7 @@ Namespace Tests.Diagnostics
 
         Public Sub Hash(temp As Byte())
             Dim DSACng = New DSACng(10)
-'                        ^^^^^^^^^^^^^^ {{Make sure this weak hash algorithm is not used in a sensitive context here.}}
+'                        ^^^^^^^^^^^^^^ {{Use a stronger hashing algorithm.}}
             Dim DSACryptoServiceProvider = New DSACryptoServiceProvider() ' Noncompliant
             Dim DSACreate = DSA.Create() ' Noncompliant
             Dim DSACreateWithParam = DSA.Create("DSA") ' Noncompliant
