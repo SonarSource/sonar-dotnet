@@ -1,46 +1,48 @@
-<p>Development tools and frameworks usually have options to make debugging easier for developers. Although these features are useful during
-development, they should never be enabled for applications deployed in production. Debug instructions or error messages can leak detailed information
-about the system, like the application’s path or file names.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>The code or configuration enabling the application debug features is deployed on production servers or distributed to end users.</li>
-  <li>The application runs by default with debug features activated.</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<p>Do not enable debugging features on production servers.</p>
-<p>The .Net Core framework offers multiple features which help during debug.
+<p>Development tools and frameworks usually have options to make debugging easier for developers, but these features should never be enabled for
+applications deployed in production.</p>
+<h2>Why is this an issue?</h2>
+<p>Debug instructions or error messages can leak detailed information about the system, such as the application’s path, file names, or stack traces.
+The rule flags configurations and API calls that enable debug features, including stack trace printing, verbose logging, debug mode flags, and remote
+debugging endpoints.</p>
+<h3>What is the potential impact?</h3>
+<h4>Information disclosure</h4>
+<p>Attackers can exploit debug output to learn internal application details, file paths, stack traces, and configuration data that can be leveraged to
+craft further attacks.</p>
+<h4>Increased attack surface</h4>
+<p>Debug features may expose remote debugging endpoints, profiling APIs, or detailed error pages that significantly increase the attack surface of the
+application.</p>
+<h2>How to fix it</h2>
+<p>The .NET Core framework offers multiple features which help during debugging.
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code> and
 <code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code> are two of them. Make sure that those features are disabled in
 production.</p>
 <p>Use <code>If env.IsDevelopment()</code> to disable debug code.</p>
-<h2>Sensitive Code Example</h2>
-<p>This rule raises issues when the following .Net Core methods are called:
-<code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDeveloperExceptionPage</code>,
-<code>Microsoft.AspNetCore.Builder.IApplicationBuilder.UseDatabaseErrorPage</code>.</p>
-<pre>
+<h3>Code examples</h3>
+<p>Debug features should be disabled or guarded by environment checks before deploying to production.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 Imports Microsoft.AspNetCore.Builder
 Imports Microsoft.AspNetCore.Hosting
 
 Namespace MyMvcApp
     Public Class Startup
         Public Sub Configure(ByVal app As IApplicationBuilder, ByVal env As IHostingEnvironment)
-            ' Those calls are Sensitive because it seems that they will run in production
-            app.UseDeveloperExceptionPage() 'Sensitive
-            app.UseDatabaseErrorPage() 'Sensitive
+            ' Those calls are Noncompliant because it seems that they will run in production
+            app.UseDeveloperExceptionPage() 'Noncompliant
+            app.UseDatabaseErrorPage() 'Noncompliant
         End Sub
     End Class
 End Namespace
 </pre>
-<h2>Compliant Solution</h2>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 Imports Microsoft.AspNetCore.Builder
 Imports Microsoft.AspNetCore.Hosting
 
 Namespace MyMvcApp
     Public Class Startup
         Public Sub Configure(ByVal app As IApplicationBuilder, ByVal env As IHostingEnvironment)
-            If env.IsDevelopment() Then ' Compliant
+            If env.IsDevelopment() Then
                 ' The following calls are ok because they are disabled in production
                 app.UseDeveloperExceptionPage()
                 app.UseDatabaseErrorPage()
@@ -49,7 +51,8 @@ Namespace MyMvcApp
     End Class
 End Namespace
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Standards</h3>
 <ul>
   <li>OWASP - <a href="https://owasp.org/Top10/A05_2021-Security_Misconfiguration/">Top 10 2021 Category A5 - Security Misconfiguration</a></li>
   <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure">Top 10 2017 Category A3 - Sensitive Data

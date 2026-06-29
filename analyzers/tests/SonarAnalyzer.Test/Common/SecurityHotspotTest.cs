@@ -73,6 +73,8 @@ public class SecurityHotspotTest
     private static string TestCaseFileName(string analyzerName) =>
         analyzerName switch
         {
+            "CookieShouldBeHttpOnly" => "CookieShouldBeHttpOnly_Nancy",
+            "CookieShouldBeSecure" => "CookieShouldBeSecure_Nancy",
             "DeliveringDebugFeaturesInProduction" => "DeliveringDebugFeaturesInProduction.NetCore2",
             "DoNotHardcodeCredentials" => "DoNotHardcodeCredentials.DefaultValues",
 #if NETFRAMEWORK
@@ -90,6 +92,8 @@ public class SecurityHotspotTest
         analyzerName switch
         {
             nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
+            nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
+            nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
             nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion),
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,

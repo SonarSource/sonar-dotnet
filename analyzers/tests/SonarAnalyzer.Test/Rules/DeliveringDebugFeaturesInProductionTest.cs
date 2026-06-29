@@ -23,8 +23,8 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class DeliveringDebugFeaturesInProductionTest
 {
-    private readonly VerifierBuilder builderCS = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new CS.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
-    private readonly VerifierBuilder builderVB = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new VB.DeliveringDebugFeaturesInProduction(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builderCS = new VerifierBuilder().AddAnalyzer(() => new CS.DeliveringDebugFeaturesInProduction());
+    private readonly VerifierBuilder builderVB = new VerifierBuilder().AddAnalyzer(() => new VB.DeliveringDebugFeaturesInProduction());
 
     [TestMethod]
     public void DeliveringDebugFeaturesInProduction_NetCore2_CS() =>
