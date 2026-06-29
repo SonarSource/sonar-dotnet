@@ -47,38 +47,14 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
         || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
         || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, model));
 
-    protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
-    {
-        identifierNameFound = string.Empty;
-        if (node is null)
+    protected override SyntaxToken SecondaryIdentifier(ExpressionSyntax node, string identifierNameToFind) =>
+        node?.Parent switch
         {
-            return Location.None;
-        }
-
-        if (node.Parent is EqualsValueSyntax equalsValue
-            && equalsValue.Parent is VariableDeclaratorSyntax declarationSyntax)
-        {
-            var identifier = declarationSyntax.Names.FirstOrDefault(x => x.Identifier.ValueText.Equals(identifierNameToFind, StringComparison.OrdinalIgnoreCase));
-
-            if (identifier is null)
-            {
-                return Location.None;
-            }
-            else
-            {
-                identifierNameFound = identifier.Identifier.ValueText;
-                return identifier.GetLocation();
-            }
-        }
-
-        if (node.Parent is AssignmentStatementSyntax assignment)
-        {
-            identifierNameFound = assignment.Left.GetName();
-            return assignment.Left.GetLocation();
-        }
-
-        return Location.None;
-    }
+            EqualsValueSyntax { Parent: VariableDeclaratorSyntax declarationSyntax } =>
+                declarationSyntax.Names.FirstOrDefault(x => x.Identifier.ValueText.Equals(identifierNameToFind, StringComparison.OrdinalIgnoreCase))?.Identifier ?? default,
+            AssignmentStatementSyntax assignment => assignment.Left.GetIdentifier() ?? default,
+            _ => default,
+        };
 
     private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel model) =>
         (invocation.IsMethodInvocation(KnownType.System_String, "Format", model) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", model))

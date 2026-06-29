@@ -46,22 +46,13 @@ public sealed class ExecutingSqlQueries : ExecutingSqlQueriesBase<SyntaxKind, Ex
             || expression.IsKind(SyntaxKind.InterpolatedStringExpression)
             || (expression is InvocationExpressionSyntax invocation && IsInvocationOfInterest(invocation, model)));
 
-    protected override Location SecondaryLocationForExpression(ExpressionSyntax node, string identifierNameToFind, out string identifierNameFound)
-    {
-        identifierNameFound = identifierNameToFind;
-
-        if (node is null)
+    protected override SyntaxToken SecondaryIdentifier(ExpressionSyntax node, string identifierNameToFind) =>
+        node?.Parent switch
         {
-            return Location.None;
-        }
-
-        if (node.Parent is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax declarationSyntax })
-        {
-            return declarationSyntax.Identifier.GetLocation();
-        }
-
-        return node.Parent is AssignmentExpressionSyntax assignment ? assignment.Left.GetLocation() : Location.None;
-    }
+            EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax declarationSyntax } => declarationSyntax.Identifier,
+            AssignmentExpressionSyntax assignment => assignment.Left.GetIdentifier() ?? default,
+            _ => default,
+        };
 
     private static bool IsInvocationOfInterest(InvocationExpressionSyntax invocation, SemanticModel model) =>
         (invocation.IsMethodInvocation(KnownType.System_String, "Format", model) || invocation.IsMethodInvocation(KnownType.System_String, "Concat", model))

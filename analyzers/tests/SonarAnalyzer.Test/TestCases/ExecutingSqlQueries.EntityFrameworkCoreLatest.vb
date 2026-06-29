@@ -95,6 +95,12 @@ Namespace Tests.Diagnostics
             context.Set(Of User)().FromSqlRaw(interpolated) ' Noncompliant [9]
         End Sub
 
+        Public Sub AssignmentStatement(ByVal context As DbContext, ByVal query As String, ParamArray parameters As Object())
+            Dim localQuery As String
+            localQuery = String.Format("INSERT INTO Users (name) VALUES (""{0}"")", parameters) ' Secondary {{SQL Query is dynamically formatted and assigned to localQuery.}}
+            context.Database.ExecuteSqlRaw(localQuery)                                          ' Noncompliant
+        End Sub
+
     End Class
 
     ' https://github.com/SonarSource/sonar-dotnet/issues/9602

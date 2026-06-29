@@ -56,6 +56,13 @@ namespace Tests.Diagnostics
             new SqlCommand(constQuery);
             command.CommandText = constQuery;
         }
+
+        public void MicrosoftDataSqlClient_AssignmentStatement(SqlConnection connection, string userInput)
+        {
+            string localQuery;
+            localQuery = $"SELECT * FROM table WHERE id = '{userInput}'"; // Secondary {{SQL Query is dynamically formatted and assigned to localQuery.}}
+            new SqlCommand(localQuery); // Noncompliant
+        }
     }
 }
 

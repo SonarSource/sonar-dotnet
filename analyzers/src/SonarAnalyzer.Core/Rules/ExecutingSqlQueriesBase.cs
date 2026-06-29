@@ -175,7 +175,7 @@ public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TI
     protected abstract TExpressionSyntax AssignedValue(PropertyAccessContext context);
     protected abstract bool IsTracked(TExpressionSyntax expression, SyntaxBaseContext context);
     protected abstract bool IsSensitiveExpression(TExpressionSyntax expression, SemanticModel model);
-    protected abstract Location SecondaryLocationForExpression(TExpressionSyntax node, string identifierNameToFind, out string identifierNameFound);
+    protected abstract SyntaxToken SecondaryIdentifier(TExpressionSyntax node, string identifierNameToFind);
 
     protected override string MessageFormat => "Make sure using a dynamically formatted SQL query is safe here.";
 
@@ -220,16 +220,14 @@ public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TI
             var identifierName = Language.Syntax.NodeIdentifier(identifierNameSyntax).Value.ValueText;
             node = (Language.AssignmentFinder.FindLinearPrecedingAssignment(identifierName, node) as PrecedingAssignment.Found)?.Assignment as TExpressionSyntax;
 
-            var location = SecondaryLocationForExpression(node, identifierName, out var foundName);
+            var identifier = SecondaryIdentifier(node, identifierName);
             if (IsSensitiveExpression(node, context.Model))
             {
-                context.AddSecondaryLocation(location, AssignmentWithFormattingMessage, foundName);
+                context.AddSecondaryLocation(identifier.GetLocation(), AssignmentWithFormattingMessage, identifier.ValueText);
                 return true;
             }
-            else
-            {
-                context.AddSecondaryLocation(location, AssignmentMessage, foundName);
-            }
+
+            context.AddSecondaryLocation(identifier.GetLocation(), AssignmentMessage, identifier.ValueText);
         }
         return false;
     }
