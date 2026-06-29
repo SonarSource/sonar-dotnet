@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.Core.Extensions;
 
-internal static class CompilationExtensions
+public static class CompilationExtensions
 {
     public static INamedTypeSymbol GetTypeByMetadataName(this Compilation compilation, KnownType knownType) =>
         compilation.GetTypeByMetadataName(knownType.MetadataName);

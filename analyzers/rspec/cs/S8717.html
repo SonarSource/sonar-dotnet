@@ -1,0 +1,72 @@
+<p>This rule raises an issue when an entity class declares more than one property annotated with the <code>Key</code> attribute in an attempt to
+define a composite primary key.</p>
+<h2>Why is this an issue?</h2>
+<p>Entity Framework Core does not interpret multiple <code>Key</code> attributes as a composite primary key. When an entity has two or more
+<code>Key</code>-decorated properties, EF Core throws an <code>InvalidOperationException</code> while building the model, the first time the
+<code>DbContext</code> is used.</p>
+<h3>What is the potential impact?</h3>
+<p>Because the model cannot be built, the application crashes the first time the <code>DbContext</code> is instantiated. This is not limited to the
+affected entity: nothing that depends on the context can run until the key is configured correctly.</p>
+<h2>How to fix it</h2>
+<p>Declare the composite key in a single place. Either apply the <code>PrimaryKey</code> attribute to the entity class, or configure the key with the
+Fluent API by overriding <code>OnModelCreating</code> and calling <code>HasKey</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class Student
+{
+    [Key]
+    public string LastName { get; set; }   // Noncompliant
+    [Key]
+    public string FirstName { get; set; }
+    public DateTime EnrollmentDate { get; set; }
+}
+</pre>
+<h4>Compliant solution</h4>
+<p>Apply the <code>PrimaryKey</code> attribute to the entity class:</p>
+<pre data-diff-id="1" data-diff-type="compliant">
+[PrimaryKey(nameof(LastName), nameof(FirstName))]
+public class Student
+{
+    public string LastName { get; set; }
+    public string FirstName { get; set; }
+    public DateTime EnrollmentDate { get; set; }
+}
+</pre>
+<p>Alternatively, configure the key with the Fluent API in <code>OnModelCreating</code>:</p>
+<pre>
+public class Student
+{
+    public string LastName { get; set; }
+    public string FirstName { get; set; }
+    public DateTime EnrollmentDate { get; set; }
+}
+
+public class SchoolContext : DbContext
+{
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity&lt;Student&gt;()
+            .HasKey(s =&gt; new { s.LastName, s.FirstName });
+    }
+}
+</pre>
+<h3>Going the extra mile</h3>
+<p>In larger projects, move each entity’s Fluent API configuration out of <code>OnModelCreating</code> into a dedicated class that implements EF
+Core’s <code>IEntityTypeConfiguration&lt;TEntity&gt;</code>. Its <code>Configure(EntityTypeBuilder&lt;TEntity&gt; builder)</code> method receives the
+same builder you would use inline, so the composite key is still declared with <code>builder.HasKey(…​)</code>; you then register the class with
+<code>modelBuilder.ApplyConfiguration(…​)</code> in <code>OnModelCreating</code>. This keeps the entity free of mapping concerns and gathers its
+configuration in one focused place.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/modeling/keys">Entity Framework Core - Keys</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/modeling">Entity Framework Core - Modeling</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/modeling/#grouping-configuration">Entity Framework Core - Grouping
+  configuration (IEntityTypeConfiguration)</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.componentmodel.dataannotations.keyattribute?view=net-10.0">KeyAttribute</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.primarykeyattribute">PrimaryKeyAttribute</a></li>
+</ul>
+

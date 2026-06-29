@@ -1,0 +1,26 @@
+{
+  "title": "Multiple \"[Key]\" attributes should not be used to define a composite key",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
+  "tags": [
+    "entity-framework-core",
+    "entity-framework",
+    "orm",
+    "database"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8717",
+  "sqKey": "S8717",
+  "scope": "Main",
+  "quickfix": "covered",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "BLOCKER"
+    },
+    "attribute": "LOGICAL"
+  }
+}

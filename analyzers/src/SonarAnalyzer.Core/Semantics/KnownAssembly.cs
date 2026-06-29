@@ -21,6 +21,8 @@ namespace SonarAnalyzer.Core.Semantics;
 
 public sealed partial class KnownAssembly
 {
+    private const string MicrosoftPublicKeyToken = "adb9793829ddae60";
+
     private readonly Func<IEnumerable<AssemblyIdentity>, bool> predicate;
 
     public static KnownAssembly XUnit_Assert { get; } = new(And(
@@ -42,16 +44,17 @@ public sealed partial class KnownAssembly
     public static KnownAssembly FluentAssertions { get; } = new(NameAndPublicKeyIs("FluentAssertions", "33f2691a05b67b6a"));
     public static KnownAssembly NSubstitute { get; } = new(NameAndPublicKeyIs("NSubstitute", "92dd2e9066daa5ca"));
     // Logging assemblies
-    public static KnownAssembly MicrosoftExtensionsLoggingAbstractions { get; } = new(NameAndPublicKeyIs("Microsoft.Extensions.Logging.Abstractions", "adb9793829ddae60"));
+    public static KnownAssembly MicrosoftExtensionsLoggingAbstractions { get; } = new(NameAndPublicKeyIs("Microsoft.Extensions.Logging.Abstractions", MicrosoftPublicKeyToken));
     public static KnownAssembly Serilog { get; } = new(NameAndPublicKeyIs("Serilog", "24c2f752a8e58a10"));
-    public static KnownAssembly MicrosoftAspNetCoreMvcCore { get; } = new(NameAndPublicKeyIs("Microsoft.AspNetCore.Mvc.Core", "adb9793829ddae60"));
-    public static KnownAssembly MicrosoftEntityFrameworkCore { get; } = new(NameAndPublicKeyIs("Microsoft.EntityFrameworkCore", "adb9793829ddae60"));
+    public static KnownAssembly MicrosoftAspNetCoreMvcCore { get; } = new(NameAndPublicKeyIs("Microsoft.AspNetCore.Mvc.Core", MicrosoftPublicKeyToken));
+    public static KnownAssembly MicrosoftEntityFrameworkCore { get; } = new(NameAndPublicKeyIs("Microsoft.EntityFrameworkCore", MicrosoftPublicKeyToken));
     public static KnownAssembly MicrosoftEntityFramework { get; } = new(NameAndPublicKeyIs("EntityFramework", "b77a5c561934e089"));
     public static KnownAssembly SwashbuckleAspNetCoreSwagger { get; } = new(NameAndPublicKeyIs("Swashbuckle.AspNetCore.Swagger", "62657d7474907593"));
     public static KnownAssembly NLog { get; } = new(NameAndPublicKeyIs("NLog", "5120e14c03d0593c"));
     public static KnownAssembly Log4Net { get; } = new(NameIs("log4net").And(PublicKeyTokenIsAny("669e0ddf0bb1aa2a", "1b44e1d426115821")));
     public static KnownAssembly CommonLoggingCore { get; } = new(NameAndPublicKeyIs("Common.Logging.Core", "af08829b84f0328e"));
     public static KnownAssembly CastleCore { get; } = new(NameAndPublicKeyIs("Castle.Core", "407dd0808d44fbdc"));
+    public static KnownAssembly MicrosoftEntityFrameworkCoreAbstractions { get; } = new(NameAndPublicKeyIs("Microsoft.EntityFrameworkCore.Abstractions", MicrosoftPublicKeyToken));
 
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || Array.Exists(or, x => x is null)
