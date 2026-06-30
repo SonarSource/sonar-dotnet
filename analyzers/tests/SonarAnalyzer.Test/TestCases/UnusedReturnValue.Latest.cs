@@ -90,6 +90,9 @@ public static class Extensions
 
             Extensions.NonCompliantStatic(this);        // Return value discarded.
             var y = Extensions.CompliantStatic(this);   // Return value used.
+
+            this.FluentExtension();     // Fluent extension, return value discarded.
+            this.NonFluentExtension();  // Non-fluent extension, return value discarded.
         }
     }
 
@@ -103,6 +106,11 @@ public static class Extensions
 //              ^^^
 
         private int CompliantStatic() => 42;
+
+        private Sample FluentExtension() => s; // Compliant, fluent pattern (returns this type)
+
+        private int NonFluentExtension() => 42; // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
+//              ^^^
     }
 }
 
