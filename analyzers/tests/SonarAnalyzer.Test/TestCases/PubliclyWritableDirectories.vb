@@ -23,7 +23,7 @@ Namespace Tests.TestCases
             ' Environment
             Dim Tmp As String = Path.GetTempPath()                      ' Noncompliant
             Tmp = Path.GetTempPath()                                    ' Noncompliant
-            Tmp = Environment.GetEnvironmentVariable("TMPDIR")          ' Noncompliant {{Make sure publicly writable directories are used safely here.}}
+            Tmp = Environment.GetEnvironmentVariable("TMPDIR")          ' Noncompliant {{Use a directory that is not publicly writable.}}
             '     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             Tmp = Environment.GetEnvironmentVariable("TMP")             ' Noncompliant
             Tmp = Environment.GetEnvironmentVariable("TEMP")            ' Noncompliant

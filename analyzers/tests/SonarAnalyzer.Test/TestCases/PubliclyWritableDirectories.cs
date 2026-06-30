@@ -31,7 +31,7 @@ namespace Tests.Diagnostics
             var tmp = Path.GetTempPath();   // Noncompliant
             tmp = Path.GetTempPath();       // Noncompliant
             InnerClass inner = new InnerClass() { StringProp = Path.GetTempPath() }; // Noncompliant
-            tmp = Environment.GetEnvironmentVariable("TMPDIR");                      // Noncompliant {{Make sure publicly writable directories are used safely here.}}
+            tmp = Environment.GetEnvironmentVariable("TMPDIR");                      // Noncompliant {{Use a directory that is not publicly writable.}}
 //                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             tmp = Environment.GetEnvironmentVariable("TMP");            // Noncompliant
             tmp = Environment.GetEnvironmentVariable("TEMP");           // Noncompliant
