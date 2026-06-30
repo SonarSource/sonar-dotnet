@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Tests.Diagnostics
 {
-    public class CustomHashAlgorithm : HashAlgorithm  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomHashAlgorithm : HashAlgorithm  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^
     {
         public override void Initialize() => throw new NotImplementedException();
@@ -13,7 +13,7 @@ namespace Tests.Diagnostics
         protected override byte[] HashFinal() => throw new NotImplementedException();
     }
 
-    public class CustomCryptoTransform : ICryptoTransform  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomCryptoTransform : ICryptoTransform  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^
     {
         public int InputBlockSize => throw new NotImplementedException();
@@ -31,12 +31,12 @@ namespace Tests.Diagnostics
         public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount) => throw new NotImplementedException();
     }
 
-    public interface ICustomCryptoTransform : ICryptoTransform  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public interface ICustomCryptoTransform : ICryptoTransform  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //                   ^^^^^^^^^^^^^^^^^^^^^^
     {
     }
 
-    public class CustomCryptoTransformWithInterface : ICustomCryptoTransform  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomCryptoTransformWithInterface : ICustomCryptoTransform  // Noncompliant {{Use a standard cryptographic algorithm.}}
     //           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     {
         public int InputBlockSize => throw new NotImplementedException();
@@ -54,14 +54,14 @@ namespace Tests.Diagnostics
         public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount) => throw new NotImplementedException();
     }
 
-    internal class CustomDerivebytes : DeriveBytes  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    internal class CustomDerivebytes : DeriveBytes  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //                 ^^^^^^^^^^^^^^^^^
     {
         public override byte[] GetBytes(int cb) => throw new NotImplementedException();
 
         public override void Reset() => throw new NotImplementedException();
 
-        private class CustomSymmetricAlgorithm : SymmetricAlgorithm  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+        private class CustomSymmetricAlgorithm : SymmetricAlgorithm  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //                    ^^^^^^^^^^^^^^^^^^^^^^^^
         {
             public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) => throw new NotImplementedException();
@@ -74,17 +74,17 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class CustomAsymmetricAlgorithm : AsymmetricAlgorithm  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomAsymmetricAlgorithm : AsymmetricAlgorithm  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^
     {
     }
 
-    public class DerivedClassFromCustomAsymmetricAlgorithm : CustomAsymmetricAlgorithm  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class DerivedClassFromCustomAsymmetricAlgorithm : CustomAsymmetricAlgorithm  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     {
     }
 
-    public class CustomAsymmetricKeyExchangeDeformatter : AsymmetricKeyExchangeDeformatter  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomAsymmetricKeyExchangeDeformatter : AsymmetricKeyExchangeDeformatter  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     {
         public override string Parameters { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -94,7 +94,7 @@ namespace Tests.Diagnostics
         public override void SetKey(AsymmetricAlgorithm key) => throw new NotImplementedException();
     }
 
-    public class CustomAsymmetricKeyExchangeFormatter : AsymmetricKeyExchangeFormatter  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomAsymmetricKeyExchangeFormatter : AsymmetricKeyExchangeFormatter  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     {
         public override string Parameters => throw new NotImplementedException();
@@ -106,7 +106,7 @@ namespace Tests.Diagnostics
         public override void SetKey(AsymmetricAlgorithm key) => throw new NotImplementedException();
     }
 
-    public class CustomAsymmetricSignatureDeformatter : AsymmetricSignatureDeformatter  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomAsymmetricSignatureDeformatter : AsymmetricSignatureDeformatter  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     {
         public override void SetHashAlgorithm(string strName) => throw new NotImplementedException();
@@ -116,7 +116,7 @@ namespace Tests.Diagnostics
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) => throw new NotImplementedException();
     }
 
-    public class CustomAsymmetricSignatureFormatter : AsymmetricSignatureFormatter  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomAsymmetricSignatureFormatter : AsymmetricSignatureFormatter  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     {
         public override byte[] CreateSignature(byte[] rgbHash) => throw new NotImplementedException();
@@ -126,7 +126,7 @@ namespace Tests.Diagnostics
         public override void SetKey(AsymmetricAlgorithm key) => throw new NotImplementedException();
     }
 
-    public class CustomKeyedHashAlgorithm : KeyedHashAlgorithm  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public class CustomKeyedHashAlgorithm : KeyedHashAlgorithm  // Noncompliant {{Use a standard cryptographic algorithm.}}
 //               ^^^^^^^^^^^^^^^^^^^^^^^^
     {
         public override void Initialize() => throw new NotImplementedException();

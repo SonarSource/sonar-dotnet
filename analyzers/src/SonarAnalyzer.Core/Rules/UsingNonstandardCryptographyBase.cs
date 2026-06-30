@@ -22,7 +22,7 @@ public abstract class UsingNonstandardCryptographyBase<TSyntaxKind, TTypeDeclara
     where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S2257";
-    private const string MessageFormat = "Make sure using a non-standard cryptographic algorithm is safe here.";
+    private const string MessageFormat = "Use a standard cryptographic algorithm.";
 
     private readonly ImmutableArray<KnownType> nonInheritableClassesAndInterfaces = ImmutableArray.Create(
         KnownType.System_Security_Cryptography_AsymmetricAlgorithm,

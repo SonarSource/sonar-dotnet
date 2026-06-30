@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
         public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount) => throw new NotImplementedException();
     }
 
-    public interface ICustomCryptoTransform : ICryptoTransform  // Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+    public interface ICustomCryptoTransform : ICryptoTransform  // Noncompliant {{Use a standard cryptographic algorithm.}}
     {
     }
 

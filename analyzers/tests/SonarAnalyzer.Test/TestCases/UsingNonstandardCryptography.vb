@@ -4,7 +4,7 @@ Imports System.Linq
 Imports System.Text
 Imports System.Security.Cryptography
 
-Public Class CustomHash  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public Class CustomHash  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^
     Inherits HashAlgorithm
 
@@ -22,7 +22,7 @@ Public Class CustomHash  ' Noncompliant {{Make sure using a non-standard cryptog
 
 End Class
 
-Public class CustomCryptoTransform  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomCryptoTransform  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^
     Implements ICryptoTransform
 
@@ -64,13 +64,13 @@ Public class CustomCryptoTransform  ' Noncompliant {{Make sure using a non-stand
 
 End Class
 
-Public Interface ICustomCryptoTransform  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public Interface ICustomCryptoTransform  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '                ^^^^^^^^^^^^^^^^^^^^^^
     Inherits ICryptoTransform
 
 End Interface
 
-Public class CustomCryptoTransformWithInterface  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomCryptoTransformWithInterface  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     Implements ICustomCryptoTransform
 
@@ -112,7 +112,7 @@ Public class CustomCryptoTransformWithInterface  ' Noncompliant {{Make sure usin
 
 End Class
 
-Public class CustomDerivebytes  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomDerivebytes  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^
     Inherits DeriveBytes
 
@@ -126,7 +126,7 @@ Public class CustomDerivebytes  ' Noncompliant {{Make sure using a non-standard 
 
 End Class
 
-Public class CustomSymmetricAlgorithm  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomSymmetricAlgorithm  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits SymmetricAlgorithm
 
@@ -148,19 +148,19 @@ Public class CustomSymmetricAlgorithm  ' Noncompliant {{Make sure using a non-st
 
 End Class
 
-Public class CustomAsymmetricAlgorithm  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomAsymmetricAlgorithm  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits AsymmetricAlgorithm
 
 End Class
 
-Public class DerivedClassFromCustomAsymmetricAlgorithm  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class DerivedClassFromCustomAsymmetricAlgorithm  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits CustomAsymmetricAlgorithm
 
 End Class
 
-Public class CustomAsymmetricKeyExchangeDeformatter  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomAsymmetricKeyExchangeDeformatter  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits AsymmetricKeyExchangeDeformatter
     Public Overrides Property Parameters As String
@@ -182,7 +182,7 @@ Public class CustomAsymmetricKeyExchangeDeformatter  ' Noncompliant {{Make sure 
 
 End Class
 
-Public Class CustomAsymmetricKeyExchangeFormatter  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public Class CustomAsymmetricKeyExchangeFormatter  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits AsymmetricKeyExchangeFormatter
 
@@ -206,7 +206,7 @@ Public Class CustomAsymmetricKeyExchangeFormatter  ' Noncompliant {{Make sure us
 
 End Class
 
-Public class CustomAsymmetricSignatureDeformatter  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomAsymmetricSignatureDeformatter  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits AsymmetricSignatureDeformatter
 
@@ -224,7 +224,7 @@ Public class CustomAsymmetricSignatureDeformatter  ' Noncompliant {{Make sure us
 
 End Class
 
-Public class CustomAsymmetricSignatureFormatter  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomAsymmetricSignatureFormatter  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits AsymmetricSignatureFormatter
 
@@ -241,7 +241,7 @@ Public class CustomAsymmetricSignatureFormatter  ' Noncompliant {{Make sure usin
     End Function
 End Class
 
-Public class CustomKeyedHashAlgorithm  ' Noncompliant {{Make sure using a non-standard cryptographic algorithm is safe here.}}
+Public class CustomKeyedHashAlgorithm  ' Noncompliant {{Use a standard cryptographic algorithm.}}
 '            ^^^^^^^^^^^^^^^^^^^^^^^^
     Inherits KeyedHashAlgorithm
 
