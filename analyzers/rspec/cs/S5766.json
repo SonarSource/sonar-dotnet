@@ -1,6 +1,6 @@
 {
-  "title": "Creating Serializable objects without data validation checks is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Serializable objects should validate data during deserialization",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -8,13 +8,19 @@
     "attribute": "COMPLETE"
   },
   "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5min"
+  },
   "tags": [
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-5766",
   "sqKey": "S5766",
   "scope": "All",
+  "quickfix": "unknown",
   "securityStandards": {
     "CWE": [
       502

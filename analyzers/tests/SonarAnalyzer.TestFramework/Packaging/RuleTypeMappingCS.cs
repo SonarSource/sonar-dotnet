@@ -5687,7 +5687,7 @@ public static class RuleTypeMappingCS
         // ["S5763"],
         // ["S5764"],
         // ["S5765"],
-        ["S5766"] = "SECURITY_HOTSPOT",
+        ["S5766"] = "VULNERABILITY",
         // ["S5767"],
         // ["S5768"],
         // ["S5769"],

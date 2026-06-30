@@ -36,7 +36,7 @@ namespace CSharp9
     [Serializable]
     public record CtorParameterInCoalesceAssignmentExpression
     {
-        public CtorParameterInCoalesceAssignmentExpression(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public CtorParameterInCoalesceAssignmentExpression(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             name ??= string.Empty;
         }
@@ -44,7 +44,7 @@ namespace CSharp9
         [Serializable]
         public record Nested
         {
-            public Nested(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+            public Nested(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
             {
                 name ??= string.Empty;
             }
@@ -67,7 +67,7 @@ namespace CSharp10
     {
         public string Name { get; set; } = "";
 
-        public CtorParameterInIfStatement(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public CtorParameterInIfStatement(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         //     ^^^^^^^^^^^^^^^^^^^^^^^^^^
         {
             if (string.IsNullOrEmpty(name))
@@ -168,7 +168,7 @@ public class ClassWithDefaultConstructorWithConditionalsIsSafe
 [Serializable]
 public class CtorParameterInCoalesceAssignmentExpression
 {
-    public CtorParameterInCoalesceAssignmentExpression(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+    public CtorParameterInCoalesceAssignmentExpression(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
     {
         name ??= string.Empty;
     }
@@ -176,7 +176,7 @@ public class CtorParameterInCoalesceAssignmentExpression
     [Serializable]
     public class InNestedClass
     {
-        public InNestedClass(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public InNestedClass(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             name ??= string.Empty;
         }
@@ -188,7 +188,7 @@ public class CtorParameterInSwitchExpression
 {
     public string Name { get; set; }
 
-    public CtorParameterInSwitchExpression(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+    public CtorParameterInSwitchExpression(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
     {
         Name = name switch
         {
@@ -212,7 +212,7 @@ public class CtorParameterInSwitchExpressionArm
 {
     public string Name { get; set; }
 
-    public CtorParameterInSwitchExpressionArm(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+    public CtorParameterInSwitchExpressionArm(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
     {
         Name = "" switch
         {

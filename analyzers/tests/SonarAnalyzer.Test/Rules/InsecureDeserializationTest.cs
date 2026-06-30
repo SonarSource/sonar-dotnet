@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class InsecureDeserializationTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new InsecureDeserialization(AnalyzerConfiguration.AlwaysEnabled)).WithBasePath("Hotspots");
+    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new InsecureDeserialization());
 
     [TestMethod]
     public void InsecureDeserialization() =>

@@ -36,7 +36,7 @@ namespace Tests.Diagnostics
     {
         public string Name { get; set; }
 
-        public CtorParameterInIfStatement(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public CtorParameterInIfStatement(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
 //             ^^^^^^^^^^^^^^^^^^^^^^^^^^
         {
             if (string.IsNullOrEmpty(name))
@@ -49,7 +49,7 @@ namespace Tests.Diagnostics
     {
         public string Name { get; set; }
 
-        public CtorParameterInTernaryOperator(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public CtorParameterInTernaryOperator(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             Name = string.IsNullOrEmpty(name) ? "default" : name;
         }
@@ -60,7 +60,7 @@ namespace Tests.Diagnostics
     {
         public string Name { get; set; }
 
-        public CtorParameterInCoalesceExpression(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public CtorParameterInCoalesceExpression(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             Name = name ?? string.Empty;
         }
@@ -71,7 +71,7 @@ namespace Tests.Diagnostics
     {
         public string Name { get; private set; }
 
-        public CtorParameterInSwitchStatement(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public CtorParameterInSwitchStatement(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             switch (name)
             {
@@ -106,7 +106,7 @@ namespace Tests.Diagnostics
         {
         }
 
-        public MultipleConstructorsOneUnsafe(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public MultipleConstructorsOneUnsafe(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             Name = name ?? string.Empty;
         }
@@ -126,12 +126,12 @@ namespace Tests.Diagnostics
         {
         }
 
-        public MultipleConstructorsMoreUnsafe(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public MultipleConstructorsMoreUnsafe(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             Name = name ?? string.Empty;
         }
 
-        public MultipleConstructorsMoreUnsafe(string firstName, string lastName) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public MultipleConstructorsMoreUnsafe(string firstName, string lastName) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             Name = firstName ?? lastName;
         }
@@ -142,7 +142,7 @@ namespace Tests.Diagnostics
     {
         public string Name { get; set; }
 
-        public ParameterPartOfNestedConditional(string name) // Noncompliant {{Make sure not performing data validation after deserialization is safe here.}}
+        public ParameterPartOfNestedConditional(string name) // Noncompliant {{Validate data in this deserialization constructor.}}
         {
             if (true)
             {
