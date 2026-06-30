@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.Core.Extensions;
 
-public static class DictionaryExtensions
+public static class IDictionaryExtensions
 {
     extension<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
     {

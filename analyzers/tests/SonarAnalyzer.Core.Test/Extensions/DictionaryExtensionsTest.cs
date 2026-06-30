@@ -28,8 +28,8 @@ public class DictionaryExtensionsTest
         var differentKeys = new Dictionary<string, string> { { "a", "a" }, { "c", "c" } };
         var differentValues = new Dictionary<string, string> { { "a", "a" }, { "b", "xxxx" } };
 
-        DictionaryExtensions.DictionaryEquals(null, empty).Should().BeFalse();
-        DictionaryExtensions.DictionaryEquals(empty, null).Should().BeFalse();
+        IDictionaryExtensions.DictionaryEquals(null, empty).Should().BeFalse();
+        IDictionaryExtensions.DictionaryEquals(empty, null).Should().BeFalse();
         original.DictionaryEquals(empty).Should().BeFalse();
         original.DictionaryEquals(differentKeys).Should().BeFalse();
         original.DictionaryEquals(differentValues).Should().BeFalse();
