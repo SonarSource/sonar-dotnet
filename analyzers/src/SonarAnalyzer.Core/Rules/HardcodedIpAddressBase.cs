@@ -25,7 +25,7 @@ public abstract class HardcodedIpAddressBase<TSyntaxKind, TLiteralExpression> : 
     where TLiteralExpression : SyntaxNode
 {
     private const string DiagnosticId = "S1313";
-    private const string MessageFormat = "Make sure using this hardcoded IP address '{0}' is safe here.";
+    private const string MessageFormat = "Do not hardcode IP address '{0}'.";
     private const int IPv4AddressParts = 4;
     private const string IPv4Broadcast = "255.255.255.255";
     private const string OIDPrefix = "2.5.";

@@ -27,7 +27,7 @@ namespace Tests.Diagnostics
         [SomeAttribute("127.0.0.1")] // this is mainly for assembly versions
         public HardcodedIpAddress()
         {
-            string ip = "192.168.0.1"; // Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
+            string ip = "192.168.0.1"; // Noncompliant {{Do not hardcode IP address '192.168.0.1'.}}
 //                      ^^^^^^^^^^^^^
             ip = "300.0.0.0";                               // Compliant, not a valid IP
             ip = "127.0.0.1";                               // Compliant, this is an exception in the rule (see: https://github.com/SonarSource/sonar-dotnet/issues/1540)

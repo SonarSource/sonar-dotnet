@@ -12,7 +12,7 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub Foo()
-            Dim ip As String = "192.168.0.1"                ' Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
+            Dim ip As String = "192.168.0.1"                ' Noncompliant {{Do not hardcode IP address '192.168.0.1'.}}
             '                  ^^^^^^^^^^^^^
             ip = "300.0.0.0"                                ' Compliant, invalid IP
             ip = "127.0.0.1"                                ' Compliant, exception from the rule

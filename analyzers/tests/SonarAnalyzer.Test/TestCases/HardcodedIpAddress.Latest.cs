@@ -32,7 +32,7 @@ namespace CSharp11
     {
         public void RawStringLiterals(string unknownPart, string knownPart)
         {
-            string ip1 = """192.168.0.1"""; // Noncompliant {{Make sure using this hardcoded IP address '192.168.0.1' is safe here.}}
+            string ip1 = """192.168.0.1"""; // Noncompliant {{Do not hardcode IP address '192.168.0.1'.}}
             var ip2 = "192.168.0.1"u8; // Noncompliant
             var ip3 = "\x31\x39\x32\x2E\x31\x36\x38\x2E\x30\x2E\x31"u8; // Noncompliant - this is 192.168.0.1 in utf-8
             var ip4 = """192.168.0.1"""u8; // Noncompliant
