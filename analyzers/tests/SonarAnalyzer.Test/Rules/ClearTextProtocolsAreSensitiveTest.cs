@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class ClearTextProtocolsAreSensitiveTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new ClearTextProtocolsAreSensitive(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new ClearTextProtocolsAreSensitive());
 
     internal static IEnumerable<MetadataReference> AdditionalReferences =>
         MetadataReferenceFacade.SystemNetHttp

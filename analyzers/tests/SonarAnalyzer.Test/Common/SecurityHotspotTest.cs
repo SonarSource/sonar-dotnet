@@ -90,7 +90,6 @@ public class SecurityHotspotTest
     private static IEnumerable<MetadataReference> AdditionalReferences(string analyzerName) =>
         analyzerName switch
         {
-            nameof(ClearTextProtocolsAreSensitive) => ClearTextProtocolsAreSensitiveTest.AdditionalReferences,
             nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
             nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,

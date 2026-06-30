@@ -24,18 +24,19 @@ namespace Tests.Diagnostics
         private const string f = "http://foo.com/path/?query=localhost"; // Noncompliant
         private const string g = "http://127.0.0.1";
         private const string h = "http://::1";
+        private const string i = "http://169.254.169.254";
 
-        private const string i = @"telnet://anonymous@foo.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
-        private const string j = @"ssh://anonymous@foo.com";
-        private const string k = @"telnet://anonymous@localhost";
-        private const string l = "telnet://anonymous@127.0.0.1";
-        private const string m = "telnet://anonymous@::1";
+        private const string j = @"telnet://anonymous@foo.com"; // Noncompliant {{Using telnet protocol is insecure. Use ssh instead.}}
+        private const string k = @"ssh://anonymous@foo.com";
+        private const string l = @"telnet://anonymous@localhost";
+        private const string m = "telnet://anonymous@127.0.0.1";
+        private const string n = "telnet://anonymous@::1";
 
-        private readonly string n = $"ftp://anonymous@foo.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
-        private readonly string o = $"sftp://anonymous@foo.com";
-        private readonly string p = $"ftp://anonymous@localhost";
-        private readonly string q = $"ftp://anonymous@127.0.0.1";
-        private readonly string r = $"ftp://anonymous@::1";
+        private readonly string o = $"ftp://anonymous@foo.com"; // Noncompliant {{Using ftp protocol is insecure. Use sftp, scp or ftps instead.}}
+        private readonly string p = $"sftp://anonymous@foo.com";
+        private readonly string q = $"ftp://anonymous@localhost";
+        private readonly string r = $"ftp://anonymous@127.0.0.1";
+        private readonly string s = $"ftp://anonymous@::1";
 
         public void Method(string part, string user, string domain, string ftp)
         {
@@ -160,6 +161,7 @@ namespace Tests.Diagnostics
             "http://docbook.org",
             "http://graphml.graphdrawing.org",
             "http://json-schema.org",
+            "http://schema.org/Person",
             "http://www.sitemaps.org/schemas/sitemap/0.9",
             "http://exslt.org/common",
             "http://collations.microsoft.com",
@@ -193,15 +195,18 @@ namespace Tests.Diagnostics
             "http://subdomain.docbook.org",                // Noncompliant
             "http://subdomain.graphml.graphdrawing.org",   // Noncompliant
             "http://subdomain.json-schema.org",            // Noncompliant
+            "http://subdomain.schema.org",                 // Noncompliant
         };
 
         private readonly List<string> commonlyUsedExampleDomains = new List<string>
         {
             "http://example.com",
             "http://example.org",
+            "http://example.net",
             "http://test.com",
             "http://subdomain.example.com",
             "http://subdomain.example.org",
+            "http://subdomain.example.net",
             "http://subdomain.test.com",
             "http://email:password@subdomain.example.com",
             "http://domain.com/example.com",               // Noncompliant
