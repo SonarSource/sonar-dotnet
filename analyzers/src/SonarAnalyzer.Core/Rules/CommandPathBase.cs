@@ -29,7 +29,7 @@ public abstract class CommandPathBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSy
 
     protected abstract string FirstArgument(InvocationContext context);
 
-    protected override string MessageFormat => """Make sure the "PATH" variable only contains fixed, unwriteable directories.""";
+    protected override string MessageFormat => "Use an absolute path for this command.";
 
     protected CommandPathBase() : base(DiagnosticId) { }
 

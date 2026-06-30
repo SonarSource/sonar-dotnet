@@ -15,7 +15,7 @@ Public Class Program
         Dim CompliantVariable As String = "C:\file.exe"
         Dim NoncompliantVariable As String = "file.exe"
         Dim NothingVariable As String = Nothing
-        Dim StartInfo As New ProcessStartInfo("bad.exe")    ' Noncompliant {{Make sure the "PATH" variable only contains fixed, unwriteable directories.}}
+        Dim StartInfo As New ProcessStartInfo("bad.exe")    ' Noncompliant {{Use an absolute path for this command.}}
         '                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
         ' Compliant
