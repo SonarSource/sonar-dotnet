@@ -21,6 +21,6 @@ public static class SwitchExpressionSyntaxWrapperExtensions
 {
     extension(SwitchExpressionSyntaxWrapper switchExpression)
     {
-        public bool HasDiscardPattern => switchExpression.Arms.Any(arm => DiscardPatternSyntaxWrapper.IsInstance(arm.Pattern.Node));
+        public bool HasDiscardPattern => switchExpression.Arms.Any(x => DiscardPatternSyntaxWrapper.IsInstance(x.Pattern.Node));
     }
 }
