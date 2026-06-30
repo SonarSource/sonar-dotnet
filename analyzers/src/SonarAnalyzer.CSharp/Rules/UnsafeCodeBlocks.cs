@@ -18,16 +18,12 @@
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
+public sealed class UnsafeCodeBlocks : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S6640";
-    private const string MessageFormat = """Make sure that using "unsafe" is safe here.""";
+    private const string MessageFormat = "Avoid using this unsafe code block.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-    public UnsafeCodeBlocks() : this(AnalyzerConfiguration.Hotspot) { }
-
-    public UnsafeCodeBlocks(IAnalyzerConfiguration configuration) : base(configuration) { }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -38,25 +34,34 @@ public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
             SyntaxKind.UnsafeStatement);
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((BaseTypeDeclarationSyntax)c.Node).Modifiers),
-            SyntaxKind.ClassDeclaration, SyntaxKind.InterfaceDeclaration, SyntaxKind.StructDeclaration, SyntaxKindEx.RecordDeclaration, SyntaxKindEx.RecordStructDeclaration);
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordDeclaration,
+            SyntaxKindEx.RecordStructDeclaration);
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((BaseMethodDeclarationSyntax)c.Node).Modifiers),
-            SyntaxKind.MethodDeclaration, SyntaxKind.ConstructorDeclaration, SyntaxKind.DestructorDeclaration, SyntaxKind.OperatorDeclaration);
+            SyntaxKind.MethodDeclaration,
+            SyntaxKind.ConstructorDeclaration,
+            SyntaxKind.DestructorDeclaration,
+            SyntaxKind.OperatorDeclaration);
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((LocalFunctionStatementSyntaxWrapper)c.Node).Modifiers),
             SyntaxKindEx.LocalFunctionStatement);
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((BaseFieldDeclarationSyntax)c.Node).Modifiers),
-            SyntaxKind.FieldDeclaration, SyntaxKind.EventFieldDeclaration);
+            SyntaxKind.FieldDeclaration,
+            SyntaxKind.EventFieldDeclaration);
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((BasePropertyDeclarationSyntax)c.Node).Modifiers),
-            SyntaxKind.PropertyDeclaration, SyntaxKind.IndexerDeclaration);
+            SyntaxKind.PropertyDeclaration,
+            SyntaxKind.IndexerDeclaration);
         context.RegisterNodeAction(
             c => ReportIfUnsafe(c, ((DelegateDeclarationSyntax)c.Node).Modifiers),
             SyntaxKind.DelegateDeclaration);
     }
 
-    private void ReportIfUnsafe(SonarSyntaxNodeReportingContext context, SyntaxTokenList modifiers)
+    private static void ReportIfUnsafe(SonarSyntaxNodeReportingContext context, SyntaxTokenList modifiers)
     {
         if (modifiers.Find(SyntaxKind.UnsafeKeyword) is { } unsafeModifier)
         {
@@ -64,11 +69,6 @@ public sealed class UnsafeCodeBlocks : HotspotDiagnosticAnalyzer
         }
     }
 
-    private void Report(SonarSyntaxNodeReportingContext context, SyntaxToken token)
-    {
-        if (IsEnabled(context.Options))
-        {
-            context.ReportIssue(Rule, token);
-        }
-    }
+    private static void Report(SonarSyntaxNodeReportingContext context, SyntaxToken token) =>
+        context.ReportIssue(Rule, token);
 }

@@ -1,6 +1,6 @@
 {
-  "title": "Using unsafe code blocks is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "Unsafe code blocks should not be used",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -12,7 +12,9 @@
     "func": "Constant\/Issue",
     "constantCost": "60min"
   },
-  "tags": [],
+  "tags": [
+    "former-hotspot"
+  ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-6640",
   "sqKey": "S6640",

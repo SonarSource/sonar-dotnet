@@ -2,7 +2,7 @@
 
 public class Sample
 {
-    unsafe void MethodScope(byte* pointer) { }                      // Noncompliant {{Make sure that using "unsafe" is safe here.}}
+    unsafe void MethodScope(byte* pointer) { }                      // Noncompliant {{Avoid using this unsafe code block.}}
 //  ^^^^^^
 
     void BlockScope()

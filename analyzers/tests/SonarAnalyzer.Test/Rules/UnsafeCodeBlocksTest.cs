@@ -22,7 +22,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class UnsafeCodeBlocksTest
 {
-    private readonly VerifierBuilder builder = new VerifierBuilder().WithBasePath("Hotspots").AddAnalyzer(() => new UnsafeCodeBlocks(AnalyzerConfiguration.AlwaysEnabled));
+    private readonly VerifierBuilder builder = new VerifierBuilder().AddAnalyzer(() => new UnsafeCodeBlocks());
 
     [TestMethod]
     public void UnsafeCodeBlocks() =>
