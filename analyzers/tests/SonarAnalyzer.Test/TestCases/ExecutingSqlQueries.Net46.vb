@@ -37,7 +37,7 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub NonCompliant_Concat_SqlCommands(ByVal connection As SqlConnection, ByVal transaction As SqlTransaction, ByVal query As String, ByVal param As String)
-            Dim command = New SqlCommand(String.Concat(query, param)) ' Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
+            Dim command = New SqlCommand(String.Concat(query, param)) ' Noncompliant {{Use a parameterized query instead of string formatting.}}
             '             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
             command = New SqlCommand(query & param, connection) ' Noncompliant
             command = New SqlCommand(query + param, connection) ' Noncompliant

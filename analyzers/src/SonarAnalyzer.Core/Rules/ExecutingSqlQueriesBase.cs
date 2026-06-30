@@ -177,7 +177,7 @@ public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TI
     protected abstract bool IsSensitiveExpression(TExpressionSyntax expression, SemanticModel model);
     protected abstract SyntaxToken SecondaryIdentifier(TExpressionSyntax node, string identifierNameToFind);
 
-    protected override string MessageFormat => "Make sure using a dynamically formatted SQL query is safe here.";
+    protected override string MessageFormat => "Use a parameterized query instead of string formatting.";
 
     protected ExecutingSqlQueriesBase() : base(DiagnosticId) { }
 

@@ -8,7 +8,7 @@ class Program
     public async Task DatabaseMethods(Database database, string query, int x)
     {
         database.SqlQuery<Program>(query);     // Compliant
-        database.SqlQuery<Program>(query + x); // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
+        database.SqlQuery<Program>(query + x); // Noncompliant {{Use a parameterized query instead of string formatting.}}
         database.SqlQuery(typeof(Program), query + x);                                             // Noncompliant
         database.SqlQuery<Program>($"{query} {x}");                                                // Noncompliant
         database.SqlQuery<Program>(string.Format("Select * from Program Where Id={1}", x));        // Noncompliant
@@ -24,7 +24,7 @@ class Program
     public void DbSetMethods(DbSet set, string query, int x, int param)
     {
         set.SqlQuery(query);            // Compliant
-        set.SqlQuery(query + x);        // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
+        set.SqlQuery(query + x);        // Noncompliant {{Use a parameterized query instead of string formatting.}}
         set.SqlQuery(query, param);     // Compliant
         set.SqlQuery(query + x, param); // Noncompliant
     }
@@ -32,7 +32,7 @@ class Program
     public void DbSetMethods(DbSet<Program> set, string query, int x, int param)
     {
         set.SqlQuery(query);            // Compliant
-        set.SqlQuery(query + x);        // Noncompliant {{Make sure using a dynamically formatted SQL query is safe here.}}
+        set.SqlQuery(query + x);        // Noncompliant {{Use a parameterized query instead of string formatting.}}
         set.SqlQuery(query, param);     // Compliant
         set.SqlQuery(query + x, param); // Noncompliant
     }
