@@ -6,7 +6,7 @@ namespace Tests.Diagnostics
     public class MyController : Controller
     {
         [HttpPost]
-        [DisableRequestSizeLimit] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [DisableRequestSizeLimit] // Noncompliant {{Limit the content length of HTTP requests.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult PostRequestWithNoLimit()
         {
@@ -20,7 +20,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimit(8_388_609)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestSizeLimit(8_388_609)] // Noncompliant {{Limit the content length of HTTP requests.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult PostRequestAboveLimit()
         {
@@ -49,7 +49,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609, MultipartHeadersLengthLimit = 42)] // Noncompliant {{Limit the content length of HTTP requests.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         public ActionResult MultipartFormRequestAboveLimit()
         {
@@ -77,14 +77,14 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestFormLimits(MultipartHeadersLengthLimit = 42, MultipartBodyLengthLimit = 8_388_609)] // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestFormLimits(MultipartHeadersLengthLimit = 42, MultipartBodyLengthLimit = 8_388_609)] // Noncompliant {{Limit the content length of HTTP requests.}}
         public ActionResult RequestFormLimitsWithVariousParamsV1()
         {
             return null;
         }
 
         [HttpPost]
-        [RequestFormLimits(BufferBody = true, MultipartBodyLengthLimit = 8_388_609)]  // Noncompliant {{Make sure the content length limit is safe here.}}
+        [RequestFormLimits(BufferBody = true, MultipartBodyLengthLimit = 8_388_609)]  // Noncompliant {{Limit the content length of HTTP requests.}}
         public ActionResult RequestFormLimitsWithVariousParamsV2()
         {
             return null;
@@ -154,7 +154,7 @@ namespace Tests.Diagnostics
         }
 
         [HttpPost]
-        [RequestSizeLimit(1000000000)] // Secondary [1] {{Make sure the content length limit is safe here.}}
+        [RequestSizeLimit(1000000000)] // Secondary [1] {{Limit the content length of HTTP requests.}}
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         [RequestFormLimits(MultipartBodyLengthLimit = 1000000000)] // Noncompliant [1]
 //       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

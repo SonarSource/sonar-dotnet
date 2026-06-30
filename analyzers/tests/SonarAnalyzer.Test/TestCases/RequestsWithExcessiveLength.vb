@@ -9,7 +9,7 @@ Namespace Tests.TestCases
         <HttpPost>
         <DisableRequestSizeLimit()>
         Public Function PostRequestWithNoLimit() As ActionResult
-        '^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-1 {{Make sure the content length limit is safe here.}}
+        '^^^^^^^^^^^^^^^^^^^^^^^^^  Noncompliant@-1 {{Limit the content length of HTTP requests.}}
             Return Nothing
         End Function
 
@@ -22,7 +22,7 @@ Namespace Tests.TestCases
         <HttpPost>
         <RequestSizeLimit(8_388_609)>
         Public Function PostRequestAboveLimit() As ActionResult
-        '^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Make sure the content length limit is safe here.}}
+        '^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Limit the content length of HTTP requests.}}
             Return Nothing
         End Function
 
@@ -47,7 +47,7 @@ Namespace Tests.TestCases
         <HttpPost>
         <RequestFormLimits(MultipartBodyLengthLimit:=8_388_609, MultipartHeadersLengthLimit:=42)>
         Public Function MultipartFormRequestAboveLimit() As ActionResult
-        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Make sure the content length limit is safe here.}}
+        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Limit the content length of HTTP requests.}}
             Return Nothing
         End Function
 
@@ -137,7 +137,7 @@ Namespace Tests.TestCases
 
         <HttpPost>
         <RequestFormLimits(MultipartBodyLengthLimit:=1000000000)> ' Noncompliant [1]
-        <RequestSizeLimit(1000000000)> ' Secondary [1] {{Make sure the content length limit is safe here.}}
+        <RequestSizeLimit(1000000000)> ' Secondary [1] {{Limit the content length of HTTP requests.}}
         Public Function RequestSizeLimitAndFormLimits() As ActionResult
             Return Nothing
         End Function

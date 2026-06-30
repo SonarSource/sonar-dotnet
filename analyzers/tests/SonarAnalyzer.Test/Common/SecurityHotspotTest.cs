@@ -97,7 +97,6 @@ public class SecurityHotspotTest
             nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion),
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
             nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
-            nameof(RequestsWithExcessiveLength) => RequestsWithExcessiveLengthTest.GetAdditionalReferences(),
             nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions
                 .Concat(NuGetMetadataReference.SystemComponentModelAnnotations()),
 

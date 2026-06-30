@@ -9,14 +9,14 @@ Namespace Tests.TestCases
         <HttpPost>
         <RequestSizeLimit(43)>
         Public Function PostRequestAboveLimit() As ActionResult
-        '^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Make sure the content length limit is safe here.}}
+        '^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Limit the content length of HTTP requests.}}
             Return Nothing
         End Function
 
         <HttpPost>
         <RequestFormLimits(MultipartBodyLengthLimit:=43)>
         Public Function MultipartFormRequestAboveLimit() As ActionResult
-        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Make sure the content length limit is safe here.}}
+        '^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Noncompliant@-1 {{Limit the content length of HTTP requests.}}
             Return Nothing
         End Function
 

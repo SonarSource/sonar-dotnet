@@ -11,7 +11,7 @@ namespace Net6Poc.RequestsWithExcessiveLength.GenericAttributes;
 public class MyController : Controller
 {
     [HttpPost]
-    [DisableRequestSizeLimit] // Noncompliant {{Make sure the content length limit is safe here.}}
+    [DisableRequestSizeLimit] // Noncompliant {{Limit the content length of HTTP requests.}}
     public ActionResult PostRequestWithNoLimit()
     {
         return null;
@@ -43,7 +43,7 @@ public class MyController : Controller
     [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] // Noncompliant
     public ActionResult RequestFormLimitsAboveLimit()
     {
-        [RequestSizeLimit(8_388_609)] // Secondary [1] {{Make sure the content length limit is safe here.}}
+        [RequestSizeLimit(8_388_609)] // Secondary [1] {{Limit the content length of HTTP requests.}}
         [RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] // Noncompliant [1]
         ActionResult LocalFunction()
         {
@@ -85,7 +85,7 @@ internal class TestCases
             ? ([RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] () => { })
             : [RequestFormLimits(MultipartBodyLengthLimit = 7_000_001)] () => { };
 
-        Call([RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] (x) => { }); // Noncompliant [flow3] {{Make sure the content length limit is safe here.}} - FP
+        Call([RequestFormLimits(MultipartBodyLengthLimit = 8_388_609)] (x) => { }); // Noncompliant [flow3] {{Limit the content length of HTTP requests.}} - FP
     }
 
     private void Call(Action<int> action) => action(1);
@@ -109,7 +109,7 @@ public class StreamsDerived : StreamsBase
 
     public static void OpenReadStream(IBrowserFile file, long unknownSize)
     {
-        file.OpenReadStream(1024 * 1024 * 20); // Noncompliant {{Make sure the content length limit is safe here.}}
+        file.OpenReadStream(1024 * 1024 * 20); // Noncompliant {{Limit the content length of HTTP requests.}}
 //      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
         file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 20); // Noncompliant
         const long maxFileSizeNonCompliant = 1024 * 1024 * 20;

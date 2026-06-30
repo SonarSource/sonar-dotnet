@@ -47,9 +47,9 @@ public partial class SonarAnalysisContextTest
             // CompilationAnalysisContext
             // S3244 - MAIN and TEST
             new TestSetup(
-                @"Hotspots\RequestsWithExcessiveLength.cs",
-                new RequestsWithExcessiveLength(AnalyzerConfiguration.AlwaysEnabled),
-                RequestsWithExcessiveLengthTest.GetAdditionalReferences()),
+                @"RequestsWithExcessiveLength.cs",
+                new RequestsWithExcessiveLength(),
+                RequestsWithExcessiveLengthTest.AdditionalReferences()),
 
             // CodeBlockAnalysisContext
             // S5693 - MAIN and TEST
