@@ -15,103 +15,77 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class EnumerableSumInUnchecked : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class EnumerableSumInUnchecked : SonarDiagnosticAnalyzer
+    internal const string DiagnosticId = "S2291";
+    private const string MessageFormat = "Refactor this code to handle 'OverflowException'.";
+
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly ImmutableArray<KnownType> DisallowedTypes =
+    ImmutableArray.Create(
+        KnownType.System_Int64,
+        KnownType.System_Int32,
+        KnownType.System_Decimal);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                var invocation = (InvocationExpressionSyntax)c.Node;
+                if (invocation.Expression is MemberAccessExpressionSyntax memberAccess
+                    && memberAccess.Name.Identifier.ValueText == "Sum"
+                    && IsSumInsideUnchecked(invocation)
+                    && c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
+                    && IsSumOnInteger(methodSymbol))
+                {
+                    c.ReportIssue(Rule, memberAccess.Name);
+                }
+            },
+            SyntaxKind.InvocationExpression);
+
+    private static bool IsSumInsideUnchecked(InvocationExpressionSyntax invocation)
     {
-        internal const string DiagnosticId = "S2291";
-        private const string MessageFormat = "Refactor this code to handle 'OverflowException'.";
-
-        private static readonly DiagnosticDescriptor rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(rule);
-
-        protected override void Initialize(SonarAnalysisContext context)
+        var current = invocation as SyntaxNode;
+        while (current.Parent is { } parent)
         {
-            context.RegisterNodeAction(
-                c =>
-                {
-                    var invocation = (InvocationExpressionSyntax)c.Node;
-                    var expression = invocation.Expression;
-                    if (expression is MemberAccessExpressionSyntax memberAccess &&
-                        memberAccess.Name.Identifier.ValueText == "Sum" &&
-                        IsSumInsideUnchecked(invocation) &&
-                        c.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol &&
-                        IsSumOnInteger(methodSymbol))
-                    {
-                        c.ReportIssue(rule, memberAccess.Name);
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-        }
-
-        private static bool IsSumInsideUnchecked(InvocationExpressionSyntax invocation)
-        {
-            SyntaxNode current = invocation;
-            var parent = current.Parent;
-            while (parent != null)
+            if (parent is TryStatementSyntax tryStatement && tryStatement.Block == current)
             {
-                if (parent is TryStatementSyntax tryStatement &&
-                    tryStatement.Block == current)
-                {
-                    return false;
-                }
-
-                if (IsUncheckedExpression(parent) ||
-                    IsUncheckedStatement(parent))
-                {
-                    return true;
-                }
-
-                current = parent;
-                parent = parent.Parent;
+                return false;
             }
-            return false;
-        }
-
-        private static bool IsUncheckedExpression(SyntaxNode node)
-        {
-            return node is CheckedExpressionSyntax uncheckedExpression &&
-                uncheckedExpression.IsKind(SyntaxKind.UncheckedExpression);
-        }
-
-        private static bool IsUncheckedStatement(SyntaxNode node)
-        {
-            return node is CheckedStatementSyntax uncheckedExpression &&
-                uncheckedExpression.IsKind(SyntaxKind.UncheckedStatement);
-        }
-
-        private static bool IsSumOnInteger(IMethodSymbol methodSymbol)
-        {
-            return methodSymbol != null &&
-                methodSymbol.Name == "Sum" &&
-                methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) &&
-                IsReturnTypeCandidate(methodSymbol);
-        }
-
-        private static bool IsReturnTypeCandidate(IMethodSymbol methodSymbol)
-        {
-            var returnType = methodSymbol.ReturnType;
-            if (returnType.OriginalDefinition.Is(KnownType.System_Nullable_T))
+            if (IsUncheckedExpression(parent) || IsUncheckedStatement(parent))
             {
-                var nullableType = (INamedTypeSymbol)returnType;
-                if (nullableType.TypeArguments.Length != 1)
-                {
-                    return false;
-                }
-                returnType = nullableType.TypeArguments[0];
+                return true;
             }
-
-            return returnType.IsAny(DisallowedTypes);
+            current = parent;
         }
+        return false;
+    }
 
-        private static readonly ImmutableArray<KnownType> DisallowedTypes =
-            ImmutableArray.Create(
-                KnownType.System_Int64,
-                KnownType.System_Int32,
-                KnownType.System_Decimal
-            );
+    private static bool IsUncheckedExpression(SyntaxNode node) =>
+        node is CheckedExpressionSyntax uncheckedExpression && uncheckedExpression.IsKind(SyntaxKind.UncheckedExpression);
+
+    private static bool IsUncheckedStatement(SyntaxNode node) =>
+        node is CheckedStatementSyntax uncheckedExpression && uncheckedExpression.IsKind(SyntaxKind.UncheckedStatement);
+
+    private static bool IsSumOnInteger(IMethodSymbol methodSymbol) =>
+        methodSymbol is not null
+        && methodSymbol.Name == "Sum"
+        && (methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) || methodSymbol.IsExtensionOn(KnownType.System_Linq_IQueryable))
+        && IsReturnTypeCandidate(methodSymbol);
+
+    private static bool IsReturnTypeCandidate(IMethodSymbol methodSymbol)
+    {
+        var returnType = methodSymbol.ReturnType;
+        if (returnType.OriginalDefinition.Is(KnownType.System_Nullable_T) && returnType is INamedTypeSymbol { TypeArguments.Length: 1 } namedType)
+        {
+            returnType = namedType.TypeArguments[0];
+        }
+        return returnType.IsAny(DisallowedTypes);
     }
 }

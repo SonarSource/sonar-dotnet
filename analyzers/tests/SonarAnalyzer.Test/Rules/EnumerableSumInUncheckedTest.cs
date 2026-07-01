@@ -17,23 +17,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class EnumerableSumInUncheckedTest
 {
-    [TestClass]
-    public class EnumerableSumInUncheckedTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<EnumerableSumInUnchecked>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<EnumerableSumInUnchecked>();
 
-        [TestMethod]
-        public void EnumerableSumInUnchecked() =>
-            builder.AddPaths("EnumerableSumInUnchecked.cs").Verify();
+    [TestMethod]
+    public void EnumerableSumInUnchecked() =>
+        builder.AddPaths("EnumerableSumInUnchecked.cs").Verify();
 
-        [TestMethod]
-        public void EnumerableSumInUnchecked_CSharp9() =>
-            builder.AddPaths("EnumerableSumInUnchecked.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).WithTopLevelStatements().Verify();
-
-        [TestMethod]
-        public void EnumerableSumInUnchecked_CSharp11() =>
-            builder.AddPaths("EnumerableSumInUnchecked.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).WithTopLevelStatements().Verify();
-    }
+    [TestMethod]
+    public void EnumerableSumInUnchecked_TopLevelStatements() =>
+        builder.AddPaths("EnumerableSumInUnchecked.TopLevelStatements.cs").WithTopLevelStatements().Verify();
 }

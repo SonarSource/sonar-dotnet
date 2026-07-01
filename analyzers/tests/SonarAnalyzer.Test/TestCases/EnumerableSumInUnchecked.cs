@@ -64,4 +64,65 @@ namespace Tests.Diagnostics
 
         void MySum() { }
     }
+
+    public class QueryableSumInUnchecked
+    {
+        public void Test(IQueryable<int> queryable, IQueryable<float> queryable2)
+        {
+            int a = queryable.Sum();  // Compliant
+
+            int d = unchecked(queryable.Sum());  // Noncompliant {{Refactor this code to handle 'OverflowException'.}}
+//                                      ^^^
+
+            unchecked
+            {
+                int e = queryable.Sum();  // Noncompliant
+//                                ^^^
+
+                e = Enumerable.Sum(queryable); // Noncompliant
+//                             ^^^
+
+                float floatSum = queryable2.Sum(); // Compliant
+            }
+
+            checked
+            {
+                int e = queryable.Sum();  // Compliant
+            }
+
+            unchecked
+            {
+                try
+                {
+                    int e = queryable.Sum();
+                }
+                catch (System.OverflowException e)
+                {
+                    // exception handling...
+                }
+            }
+
+            var l = new List<double>().AsQueryable();
+            unchecked
+            {
+                var x = l.Sum();  // Compliant, it's on double
+            }
+
+            var l2 = new List<Nullable<long>>().AsQueryable();
+            unchecked
+            {
+                var y = l2.Sum(ll => ll);  // Noncompliant
+            }
+
+            // coverage
+            queryable.Count();
+            MySum();
+            unchecked
+            {
+                MySum();
+            }
+        }
+
+        void MySum() { }
+    }
 }
