@@ -24,10 +24,31 @@ class Some_Name___42 {...} // Compliant in tests
 class Some_name___42 {...} // Noncompliant
 class Some_Name_XC {...} // Noncompliant because of XC, should be Some_Name_Xc
 </pre>
+<h4>Allowing custom acronyms</h4>
+<p>You can configure the rule to ignore certain acronyms by adding a <a
+href="https://learn.microsoft.com/en-us/visualstudio/code-quality/how-to-customize-the-code-analysis-dictionary">Microsoft Code Analysis
+Dictionary</a> as an <code>AdditionalFiles</code> item in your project:</p>
+<pre>
+&lt;Dictionary&gt;
+    &lt;Acronyms&gt;
+        &lt;CasingExceptions&gt;
+            &lt;Acronym&gt;SEO&lt;/Acronym&gt;
+            &lt;Acronym&gt;IAC&lt;/Acronym&gt;
+        &lt;/CasingExceptions&gt;
+    &lt;/Acronyms&gt;
+&lt;/Dictionary&gt;
+</pre>
+<pre>
+&lt;ItemGroup&gt;
+    &lt;AdditionalFiles Include="CustomDictionary.xml" /&gt;
+&lt;/ItemGroup&gt;
+</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li><a href="https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/capitalization-conventions">Microsoft Capitalization
   Conventions</a></li>
+  <li><a href="https://learn.microsoft.com/en-us/visualstudio/code-quality/how-to-customize-the-code-analysis-dictionary">Microsoft Learn - Customize
+  the Code Analysis Dictionary</a></li>
 </ul>
 

@@ -15,11 +15,33 @@ might not be aware of the intended changes, leading to conflicts or redundant ef
 between work in progress and completed code. This bloat can make it challenging to maintain an organized and efficient codebase.</p>
 <p>Addressing this code smell is essential to ensure a maintainable, readable, reliable codebase and promote effective collaboration among
 developers.</p>
-<h3>Noncompliant code example</h3>
-<pre>
+<h2>How to fix it</h2>
+<p>Address the <code>TODO</code> rather than leaving it in the code: implement the missing work. If the work genuinely cannot be done now, capture it
+in your issue tracker and remove the tag, so the codebase reflects only completed work and the outstanding task is tracked where it will not be
+forgotten.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
 private void DoSomething()
 {
   // TODO
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+private void DoSomething()
+{
+  LoadConfiguration();
+  Initialize();
+}
+</pre>
+<p>Alternatively, when the work cannot be done now, track it in your issue tracker and replace the <code>TODO</code> tag with a reference to that
+ticket:</p>
+<pre>
+private void DoSomething()
+{
+  LoadConfiguration();
+  // Caching of the configuration is tracked in PROJ-1234
 }
 </pre>
 <h2>Resources</h2>

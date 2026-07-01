@@ -45,6 +45,27 @@ public async Task Examples(Stream stream, DbSet&lt;Person&gt; dbSet)
     await dbSet.FirstOrDefaultAsync(x =&gt; x.Age &gt;= 18);
 }
 </pre>
+<h2>Exceptions</h2>
+<p>The following <code>DbDataReader</code> methods (and their overrides in subtypes) are excluded from this rule:</p>
+<p><code>IsDBNull</code>, <code>GetFieldValue&lt;T&gt;</code>, <code>GetValue</code>, <code>GetBytes</code>, <code>GetChars</code>,
+<code>GetStream</code>, <code>GetTextReader</code></p>
+<p>When <a href="https://learn.microsoft.com/en-us/dotnet/api/system.data.commandbehavior"><code>CommandBehavior.SequentialAccess</code></a> is not
+specified (the default), <code>ReadAsync</code> buffers the entire row into memory before returning. All subsequent column reads are pure in-memory
+operations — no I/O occurs — so using their async counterparts adds <code>Task</code> allocation overhead without any benefit.</p>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/api/system.data.common.dbdatareader">Microsoft explicitly recommends</a> this pattern:</p>
+<blockquote>
+  <p>Always call NextResultAsync, ReadAsync, and either call GetFieldValue for default command behavior or GetFieldValueAsync for sequential
+  access.</p>
+</blockquote>
+ — Microsoft Learn — DbDataReader
+<pre>
+while (await reader.ReadAsync())            // Compliant: ReadAsync is still preferred
+{
+    if (!reader.IsDBNull(ordinal))          // Compliant exception: synchronous column read is preferred in default mode
+        return reader.GetFieldValue&lt;string&gt;(ordinal); // Compliant exception
+}
+</pre>
+<p>Note: <code>Read</code> is not exempt — <code>ReadAsync</code> should still be used when iterating rows.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>

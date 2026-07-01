@@ -14,7 +14,8 @@
   },
   "quickfix": "infeasible",
   "tags": [
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
   "defaultSeverity": "Blocker",
   "ruleSpecification": "RSPEC-6418",

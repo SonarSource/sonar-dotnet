@@ -1,11 +1,15 @@
 <h2>Why is this an issue?</h2>
 <p>This rule is meant to be used as a way to track code which is marked as being deprecated. Deprecated code should eventually be removed.</p>
-<h3>Noncompliant code example</h3>
+<p>The <code>[System.Obsolete]</code> attribute marks a type or member that should no longer be used. Code is deprecated for different reasons: it may
+have been superseded by a better alternative, become outdated, expose a security weakness, or perform poorly.</p>
 <pre>
-[Obsolete] // Noncompliant
-void Method()
+[Obsolete("Use Bar() instead.")]
+public void Foo() // Noncompliant: this deprecated method should be removed
 {
-    // ..
 }
 </pre>
+<h3>What is the potential impact?</h3>
+<p>Whatever the reason, every remaining usage carries that drawback into the codebase, and deprecated code usually stops receiving bug fixes and
+improvements. It is expected to be removed eventually, and when it is, every call site that still references it stops compiling — so the longer the
+references linger, the more expensive that change becomes.</p>
 

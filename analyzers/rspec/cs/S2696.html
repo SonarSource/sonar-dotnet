@@ -1,29 +1,63 @@
 <p>This rule raises an issue each time a <code>static</code> field is updated from a non-static method or property.</p>
 <h2>Why is this an issue?</h2>
-<p>Updating a <code>static</code> field from a non-<code>static</code> method introduces significant challenges and potential bugs. Multiple class
-instances and threads can access and modify the <code>static</code> field concurrently, leading to unintended consequences for other instances or
-threads (unexpected behavior, <a href="https://www.c-sharpcorner.com/UploadFile/1d42da/race-conditions-in-threading-C-Sharp/">race conditions</a> and
-synchronization problems).</p>
+<p>A <code>static</code> field is shared by every instance of the type, so when an instance method or property writes to it, multiple objects — and
+multiple threads — can read and modify the same field concurrently. This leads to unintended consequences for other instances or threads: unexpected
+values, <a href="https://www.c-sharpcorner.com/UploadFile/1d42da/race-conditions-in-threading-C-Sharp/">race conditions</a> and synchronization
+problems that are hard to reproduce and debug.</p>
+<h3>Exceptions</h3>
+<p>This rule targets unsynchronized writes to shared <code>static</code> state. A reported write can be intentional when the access is properly
+synchronized (for example, guarded by a <code>lock</code> or performed through <code>System.Threading.Interlocked</code>), or when the type is only
+ever used from a single thread. Review such cases before changing them rather than applying a blind fix.</p>
+<p>The rule still raises on the write even when it is guarded, because the check is syntactic. In the following example the access is deliberately
+synchronized, so the reported issue can be left as-is:</p>
 <pre>
-class MyClass
+class IdGenerator
 {
-  private static int count = 0;
+  private static readonly object syncRoot = new();
+  private static int lastId;
 
-  public void DoSomething()
+  public int Next()
   {
-    //...
-    count++;  // Noncompliant: make the enclosing instance property 'static' or remove this set on the 'static' field.
+    lock (syncRoot)
+    {
+      return ++lastId; // Noncompliant: reported, but acceptable here because the write is properly synchronized
+    }
   }
 }
-
-interface MyInterface
+</pre>
+<h2>How to fix it</h2>
+<p>Decide what the field is really for, then choose one of the following:</p>
+<ul>
+  <li>If the value is meant to be shared by all instances, make the enclosing method or property <code>static</code> as well, so it is clear the
+  member operates on class-level state.</li>
+  <li>If the write does not need to be shared between instances, replace the <code>static</code> field with an instance field.</li>
+  <li>If the field must stay <code>static</code> and be written from instance members, guard every access so concurrent updates are safe, for example
+  with a <code>lock</code> or <code>Interlocked</code>.</li>
+</ul>
+<p>Making a member <code>static</code> or moving state to an instance field changes which object the data belongs to, so make sure the new scope
+preserves the behavior the callers expect.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+class Counter
 {
   private static int count = 0;
 
-  public void DoSomething()
+  public void Increment()
   {
-    //...
-    count++;  // Noncompliant: remove this set, which updates a 'static' field from an instance method.
+    count++;  // Noncompliant: an instance method writes to the 'static' field 'count'
+  }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+class Counter
+{
+  private int count = 0; // Each Counter now tracks its own value
+
+  public void Increment()
+  {
+    count++;
   }
 }
 </pre>
