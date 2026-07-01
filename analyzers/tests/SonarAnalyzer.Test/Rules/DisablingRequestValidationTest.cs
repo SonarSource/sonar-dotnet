@@ -32,19 +32,13 @@ public class DisablingRequestValidationTest
 
     [TestMethod]
     public void DisablingRequestValidation_CS() =>
-        CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+        CreateBuilderCS()
             .AddPaths("DisablingRequestValidation.cs")
             .Verify();
 
     [TestMethod]
-    public void DisablingRequestValidation_CS_Disabled() =>
-         CreateBuilderCS(AnalyzerConfiguration.Hotspot)
-            .AddPaths("DisablingRequestValidation.cs")
-            .VerifyNoIssuesIgnoreErrors();
-
-    [TestMethod]
     public void DisablingRequestValidation_CS_NoIssuesInTestCode() =>
-         CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+         CreateBuilderCS()
             .AddPaths("DisablingRequestValidation.cs")
             .AddTestReference()
             .VerifyNoIssuesIgnoreErrors();
@@ -86,7 +80,7 @@ public class DisablingRequestValidationTest
             filesToAnalyze.Add(Path.Combine(rootDirectory, subFolder, WebConfig));
         }
         filesToAnalyze.Add(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray()));
-        CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+        CreateBuilderCS()
             .AddSnippet("// Nothing to see here")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, filesToAnalyze.ToArray()))
             .AddAdditionalSourceFiles(filesToAnalyze.ToArray())
@@ -110,44 +104,36 @@ public class DisablingRequestValidationTest
 
     [TestMethod]
     public void DisablingRequestValidation_VB() =>
-        CreateBuilderVB(AnalyzerConfiguration.AlwaysEnabled)
+        CreateBuilderVB()
             .AddPaths("DisablingRequestValidation.vb")
             .WithOptions(LanguageOptions.FromVisualBasic14)
             .Verify();
-
-    [TestMethod]
-    public void DisablingRequestValidation_VB_Disabled() =>
-        CreateBuilderVB(AnalyzerConfiguration.Hotspot)
-            .AddPaths("DisablingRequestValidation.vb")
-            .VerifyNoIssuesIgnoreErrors();
 
     [TestMethod]
     public void DisablingRequestValidation_VB_WebConfig()
     {
         var root = @"TestCases\WebConfig\DisablingRequestValidation\Values";
         var webConfigPath = Path.Combine(root, WebConfig);
-        CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+        CreateBuilderCS()
             .AddSnippet("// Nothing to see here")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, webConfigPath))
             .AddAdditionalSourceFiles(webConfigPath)
             .Verify();
     }
 
-    private static VerifierBuilder CreateBuilderCS(IAnalyzerConfiguration configuration) =>
+    private static VerifierBuilder CreateBuilderCS() =>
         new VerifierBuilder()
-            .WithBasePath("Hotspots")
-            .AddAnalyzer(() => new CS.DisablingRequestValidation(configuration))
+            .AddAnalyzer(() => new CS.DisablingRequestValidation())
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
-    private static VerifierBuilder CreateBuilderVB(IAnalyzerConfiguration configuration) =>
+    private static VerifierBuilder CreateBuilderVB() =>
         new VerifierBuilder()
-            .WithBasePath("Hotspots")
-            .AddAnalyzer(() => new VB.DisablingRequestValidation(configuration))
+            .AddAnalyzer(() => new VB.DisablingRequestValidation())
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetMvc(AspNetMvcVersion));
 
     private void VerifyAdditionalFiles(bool expectIssues, string additionalSourceFile, params string[] additionalFilesToAnalyze)
     {
-        var withAdditionalSourceFiles = CreateBuilderCS(AnalyzerConfiguration.AlwaysEnabled)
+        var withAdditionalSourceFiles = CreateBuilderCS()
             .AddSnippet("// Nothing to see here")
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, additionalFilesToAnalyze.Append(additionalSourceFile).ToArray()))
             .AddAdditionalSourceFiles(additionalSourceFile);

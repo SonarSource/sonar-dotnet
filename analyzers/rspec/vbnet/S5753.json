@@ -1,6 +1,6 @@
 {
-  "title": "Disabling ASP.NET \"Request Validation\" feature is security-sensitive",
-  "type": "SECURITY_HOTSPOT",
+  "title": "ASP.NET Request Validation should not be disabled",
+  "type": "VULNERABILITY",
   "code": {
     "impacts": {
       "SECURITY": "MEDIUM"
@@ -9,8 +9,13 @@
   },
   "status": "ready",
   "tags": [
-    "cwe"
+    "cwe",
+    "former-hotspot"
   ],
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-5753",
   "sqKey": "S5753",
@@ -34,5 +39,6 @@
     "ASVS 4.0": [
       "5.3.3"
     ]
-  }
+  },
+  "quickfix": "unknown"
 }

@@ -2,13 +2,13 @@
 Imports System.Web.Mvc
 
 Namespace Tests.Diagnostics
-    <ValidateInput(False)> ' Noncompliant {{Make sure disabling ASP.NET Request Validation feature is safe here.}}
+    <ValidateInput(False)> ' Noncompliant {{Ensure ASP.NET Request Validation is not disabled.}}
     Public Class NonCompliantClass
     End Class
 
     Public Class NonCompliantMethods ' we don't care if it derives from controller
 
-        <ValidateInput(False)> Public Function Foo(ByVal input As String) As ActionResult ' Noncompliant {{Make sure disabling ASP.NET Request Validation feature is safe here.}}
+        <ValidateInput(False)> Public Function Foo(ByVal input As String) As ActionResult ' Noncompliant {{Ensure ASP.NET Request Validation is not disabled.}}
 '        ^^^^^^^^^^^^^^^^^^^^
             Return Nothing
         End Function

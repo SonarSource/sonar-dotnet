@@ -3,14 +3,14 @@ using System.Web.Mvc;
 
 namespace Tests.Diagnostics
 {
-    [ValidateInput(false)] // Noncompliant {{Make sure disabling ASP.NET Request Validation feature is safe here.}}
+    [ValidateInput(false)] // Noncompliant {{Ensure ASP.NET Request Validation is not disabled.}}
     public class NonCompliantClass
     {
     }
 
     public class NonCompliantMethods // we don't care if it derives from controller
     {
-        [ValidateInput(false)] // Noncompliant {{Make sure disabling ASP.NET Request Validation feature is safe here.}}
+        [ValidateInput(false)] // Noncompliant {{Ensure ASP.NET Request Validation is not disabled.}}
 //       ^^^^^^^^^^^^^^^^^^^^
         public ActionResult Foo(string input)
         {

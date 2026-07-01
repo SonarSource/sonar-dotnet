@@ -1,54 +1,55 @@
-<p>ASP.NET 1.1+ comes with a feature called <em>Request Validation</em>, preventing the server to accept content containing un-encoded HTML. This
-feature comes as a first protection layer against Cross-Site Scripting (XSS) attacks and act as a simple Web Application Firewall (WAF) rejecting
-requests potentially containing malicious content.</p>
-<p>While this feature is not a silver bullet to prevent all XSS attacks, it helps to catch basic ones. It will for example prevent <code>&lt;script
-type="text/javascript" src="https://malicious.domain/payload.js"&gt;</code> to reach your Controller.</p>
-<p>Note: <em>Request Validation</em> feature being only available for ASP.NET, no Security Hotspot is raised on ASP.NET Core applications.</p>
-<h2>Ask Yourself Whether</h2>
-<ul>
-  <li>the developer doesn’t know the impact to deactivate the Request Validation feature</li>
-  <li>the web application accepts user-supplied data</li>
-  <li>all user-supplied data are not validated</li>
-</ul>
-<p>There is a risk if you answered yes to any of those questions.</p>
-<h2>Recommended Secure Coding Practices</h2>
-<ul>
-  <li>Activate the Request Validation feature for all HTTP requests</li>
-</ul>
-<h2>Sensitive Code Example</h2>
+<p>ASP.NET 1.1+ comes with a <em>Request Validation</em> feature that rejects requests containing un-encoded HTML, acting as a first layer of
+protection against Cross-Site Scripting (XSS) attacks.</p>
+<p>While this feature is not a silver bullet against all XSS attacks, it catches basic injection attempts and should not be disabled. Output encoding
+of user-supplied content remains necessary as a defense in depth.</p>
+<table>
+  <tbody>
+    <tr>
+      <td>Note</td>
+      <td><em>Request Validation</em> is only available for ASP.NET. This rule does not raise issues on ASP.NET Core applications, which do not have
+      this feature.</td>
+    </tr>
+  </tbody>
+</table>
+<h2>Why is this an issue?</h2>
+<p>Request Validation intercepts requests that contain potentially malicious HTML before they reach the application’s controller or handlers. When
+disabled — either via the <code>ValidateInput</code> attribute on a controller action or via <code>validateRequest="false"</code> /
+<code>requestValidationMode="0.0"</code> in the <code>Web.config</code> file — user-supplied content is no longer screened, removing this protection
+layer. This rule flags any configuration that explicitly turns off Request Validation.</p>
+<h3>What is the potential impact?</h3>
+<p>Without Request Validation, an attacker can submit requests containing raw HTML or JavaScript that the application then reflects back to other
+users without encoding. This enables Cross-Site Scripting (XSS) attacks that can steal session cookies, redirect users to malicious sites, or perform
+actions on behalf of the victim.</p>
+<h2>How to fix it</h2>
+<h3>Code examples</h3>
 <p>At Controller level:</p>
-<pre>
-&lt;ValidateInput(False)&gt;
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+&lt;ValidateInput(False)&gt; ' Noncompliant
 Public Function Welcome(Name As String) As ActionResult
   ...
 End Function
 </pre>
-<p>At application level, configured in the Web.config file:</p>
-<pre>
-&lt;configuration&gt;
-   &lt;system.web&gt;
-      &lt;pages validateRequest="false" /&gt;
-      ...
-      &lt;httpRuntime requestValidationMode="0.0" /&gt;
-   &lt;/system.web&gt;
-&lt;/configuration&gt;
-</pre>
-<h2>Compliant Solution</h2>
-<p>At Controller level:</p>
-<pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
 &lt;ValidateInput(True)&gt;
 Public Function Welcome(Name As String) As ActionResult
   ...
 End Function
 </pre>
-<p>or</p>
-<pre>
-Public Function Welcome(Name As String) As ActionResult
-  ...
-End Function
-</pre>
 <p>At application level, configured in the Web.config file:</p>
-<pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+&lt;configuration&gt;
+   &lt;system.web&gt;
+      &lt;pages validateRequest="false" /&gt; &lt;!-- Noncompliant --&gt;
+      ...
+      &lt;httpRuntime requestValidationMode="0.0" /&gt; &lt;!-- Noncompliant --&gt;
+   &lt;/system.web&gt;
+&lt;/configuration&gt;
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
 &lt;configuration&gt;
    &lt;system.web&gt;
       &lt;pages validateRequest="true" /&gt;
@@ -57,14 +58,21 @@ End Function
    &lt;/system.web&gt;
 &lt;/configuration&gt;
 </pre>
-<h2>See</h2>
+<h2>Resources</h2>
+<h3>Documentation</h3>
 <ul>
-  <li>OWASP - <a href="https://owasp.org/Top10/A03_2021-Injection/">Top 10 2021 Category A3 - Injection</a></li>
   <li><a
-  href="https://docs.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode?view=netframework-4.8">HttpRuntimeSection.RequestValidationMode Property</a></li>
-  <li><a href="https://owasp.org/www-community/ASP-NET_Request_Validation">OWASP ASP.NET Request Validation</a></li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.web.configuration.httpruntimesection.requestvalidationmode?view=netframework-4.8">Microsoft Learn</a> - HttpRuntimeSection.RequestValidationMode Property</li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li><a href="https://owasp.org/www-community/ASP-NET_Request_Validation">OWASP Community</a> - ASP.NET Request Validation</li>
   <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP Cheat Sheet</a> - XSS Prevention
   Cheat Sheet</li>
+</ul>
+<h3>Standards</h3>
+<ul>
+  <li>OWASP - <a href="https://owasp.org/Top10/A03_2021-Injection/">Top 10 2021 Category A3 - Injection</a></li>
   <li>OWASP - <a href="https://owasp.org/www-project-top-ten/2017/A7_2017-Cross-Site_Scripting_(XSS)">Top 10 2017 Category A7 - Cross-Site Scripting
   (XSS)</a></li>
   <li>CWE - <a href="https://cwe.mitre.org/data/definitions/79">CWE-79 - Improper Neutralization of Input During Web Page Generation ('Cross-site

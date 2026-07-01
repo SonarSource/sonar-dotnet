@@ -93,7 +93,6 @@ public class SecurityHotspotTest
             nameof(CookieShouldBeHttpOnly) => CookieShouldBeHttpOnlyTest.AdditionalReferences,
             nameof(CookieShouldBeSecure) => CookieShouldBeSecureTest.AdditionalReferences,
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
-            nameof(DisablingRequestValidation) => NuGetMetadataReference.MicrosoftAspNetMvc(TestConstants.NuGetLatestVersion),
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
             nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
             nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions

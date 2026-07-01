@@ -15,15 +15,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class DisablingRequestValidation : DisablingRequestValidationBase
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class DisablingRequestValidation : DisablingRequestValidationBase
-    {
-        protected override ILanguageFacade Language => VisualBasicFacade.Instance;
-
-        public DisablingRequestValidation() : this(AnalyzerConfiguration.Hotspot) { }
-
-        public DisablingRequestValidation(IAnalyzerConfiguration analyzerConfiguration) : base(analyzerConfiguration) { }
-    }
+    protected override ILanguageFacade Language => VisualBasicFacade.Instance;
 }
