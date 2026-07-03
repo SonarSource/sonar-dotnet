@@ -46,14 +46,10 @@ public class CollectionEmptinessCheckingTest
             .WithCodeFixedPaths("CollectionEmptinessChecking.Fixed.cs")
             .VerifyCodeFix();
 
-#if NET
-
     [TestMethod]
     public void CollectionEmptinessChecking_CS_Latest() =>
         builderCS
             .AddPaths("CollectionEmptinessChecking.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .Verify();
-
-#endif
 }

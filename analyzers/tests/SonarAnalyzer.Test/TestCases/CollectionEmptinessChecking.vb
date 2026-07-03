@@ -108,4 +108,64 @@ Namespace Tests.Diagnostics
 
     End Class
 
+    Public Class CollectionEmptinessCheckingIQueryable
+
+        Private Function HasContent1(l As IQueryable(Of String)) As Boolean
+            Return l.Count() > 0 ' Noncompliant {{Use '.Any()' to test whether this 'IQueryable(Of String)' is empty or not.}}
+            '        ^^^^^
+        End Function
+
+        Private Function HasContent1b(l As IQueryable(Of String)) As Boolean
+            Return 0 < l.Count() ' Noncompliant
+        End Function
+
+        Private Function HasContent2(l As IQueryable(Of String)) As Boolean
+            Return Enumerable.Count(l) >= &HE1 ' FN. Hexadecimals are not picked up.
+        End Function
+
+        Private Function HasContent2b(l As IQueryable(Of String)) As Boolean
+            Return 1UL <= Enumerable.Count(l) ' Noncompliant
+        End Function
+
+        Private Function IsNotEmpty1(l As IQueryable(Of String)) As Boolean
+            Return l.Count() <> 0 ' Noncompliant
+        End Function
+
+        Private Function IsNotEmpty2(l As IQueryable(Of String)) As Boolean
+            Return 0 <> l.Count() ' Noncompliant
+        End Function
+
+        Private Function IsEmpty1(l As IQueryable(Of String)) As Boolean
+            Return l.Count() = 0 ' Noncompliant
+        End Function
+
+        Private Function IsEmpty2(l As IQueryable(Of String)) As Boolean
+            Return l.Count() <= 0 ' Noncompliant
+        End Function
+
+        Private Function IsEmpty2b(l As IQueryable(Of String)) As Boolean
+            Return 0 >= l.Count() ' Noncompliant
+        End Function
+
+        Private Function IsEmpty4(l As IQueryable(Of String)) As Boolean
+            Return l.Count() < 1 ' Noncompliant
+        End Function
+
+        Private Function IsEmpty4b(l As IQueryable(Of String)) As Boolean
+            Return 1 > l.Count() ' Noncompliant
+        End Function
+
+        Private Function HasContentWithCondition(numbers As IQueryable(Of Integer)) As Boolean
+            Return numbers.Count(AddressOf IsNegative) > 0 ' Noncompliant
+        End Function
+
+        Private Function IsEmptyWithCondition(numbers As IQueryable(Of Integer)) As Boolean
+            Return numbers.Count(AddressOf IsNegative) = 0 ' Noncompliant
+        End Function
+
+        Private Shared Function IsNegative(n As Integer) As Boolean
+            Return n < 0
+        End Function
+    End Class
+
 End Namespace

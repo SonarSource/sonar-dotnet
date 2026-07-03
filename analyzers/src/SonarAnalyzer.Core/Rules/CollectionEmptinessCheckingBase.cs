@@ -15,62 +15,51 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class CollectionEmptinessCheckingBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class CollectionEmptinessCheckingBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
-    {
-        internal const string DiagnosticId = "S1155";
+    internal const string DiagnosticId = "S1155";
 
-        protected CollectionEmptinessCheckingBase() : base(DiagnosticId) { }
+    protected CollectionEmptinessCheckingBase() : base(DiagnosticId) { }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var binaryLeft = Language.Syntax.BinaryExpressionLeft(c.Node);
+                var binaryRight = Language.Syntax.BinaryExpressionRight(c.Node);
+
+                if (Language.ExpressionNumericConverter.ConstantIntValue(binaryLeft) is { } left)
                 {
-                    var binaryLeft = Language.Syntax.BinaryExpressionLeft(c.Node);
-                    var binaryRight = Language.Syntax.BinaryExpressionRight(c.Node);
+                    CheckExpression(c, binaryRight, left, Language.Syntax.ComparisonKind(c.Node).Mirror());
+                }
+                else if (Language.ExpressionNumericConverter.ConstantIntValue(binaryRight) is { } right)
+                {
+                    CheckExpression(c, binaryLeft, right, Language.Syntax.ComparisonKind(c.Node));
+                }
+            },
+            Language.SyntaxKind.ComparisonKinds);
 
-                    if (Language.ExpressionNumericConverter.ConstantIntValue(binaryLeft) is { } left)
-                    {
-                        CheckExpression(c, binaryRight, left, Language.Syntax.ComparisonKind(c.Node).Mirror());
-                    }
-                    else if (Language.ExpressionNumericConverter.ConstantIntValue(binaryRight) is { } right)
-                    {
-                        CheckExpression(c, binaryLeft, right, Language.Syntax.ComparisonKind(c.Node));
-                    }
-                },
-                Language.SyntaxKind.ComparisonKinds);
-
-        private void CheckExpression(SonarSyntaxNodeReportingContext context, SyntaxNode expression, int constant, ComparisonKind comparison)
+    private void CheckExpression(SonarSyntaxNodeReportingContext context, SyntaxNode expression, int constant, ComparisonKind comparison)
+    {
+        if (comparison.Compare(constant).IsEmptyOrNotEmpty()
+            && Language.Syntax.NodeIdentifier(expression) is { } identifier
+            && CountSymbol(identifier, context.Model) is { ReceiverType: INamedTypeSymbol receiverType } methodSymbol)
         {
-            if (comparison.Compare(constant).IsEmptyOrNotEmpty()
-                && TryGetCountCall(expression, context.Model, out var location, out var typeArgument))
-            {
-                context.ReportIssue(Rule, location, typeArgument);
-            }
-        }
-
-        private bool TryGetCountCall(SyntaxNode expression, SemanticModel model, out Location countLocation, out string typeArgument)
-        {
-            if (Language.Syntax.NodeIdentifier(expression) is { } identifier
-                && identifier.ValueText == nameof(Enumerable.Count)
-                && model.GetSymbolInfo(identifier.Parent.Parent).Symbol is IMethodSymbol methodSymbol
-                && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
-                && methodSymbol.ReceiverType is INamedTypeSymbol receiverType)
-            {
-                countLocation = identifier.Parent.GetLocation();
-                typeArgument = (methodSymbol.TypeArguments.Any()
-                    ? methodSymbol.TypeArguments
-                    : receiverType.TypeArguments).Single().ToDisplayString();
-                return true;
-            }
-            else
-            {
-                countLocation = null;
-                typeArgument = null;
-                return false;
-            }
+            var typeArgument = (methodSymbol.TypeArguments.Any() ? methodSymbol.TypeArguments : receiverType.TypeArguments).Single().ToDisplayString();
+            var collectionType = methodSymbol.IsExtensionOn(KnownType.System_Linq_IQueryable) ? "IQueryable" : "IEnumerable";
+            context.ReportIssue(Rule, identifier.Parent.GetLocation(), collectionType, typeArgument);
         }
     }
+
+    private static IMethodSymbol CountSymbol(SyntaxToken identifier, SemanticModel model) =>
+        identifier.ValueText == nameof(Enumerable.Count)
+        && model.GetSymbolInfo(identifier.Parent.Parent).Symbol is IMethodSymbol methodSymbol
+        && (methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+            || methodSymbol.IsExtensionOn(KnownType.System_Linq_IQueryable))
+            ? methodSymbol
+            : null;
 }

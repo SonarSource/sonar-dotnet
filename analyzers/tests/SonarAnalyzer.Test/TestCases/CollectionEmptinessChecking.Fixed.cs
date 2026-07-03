@@ -138,4 +138,69 @@ namespace Tests.Diagnostics
 
         int Count() { return 42; }
     }
+
+    public class CollectionEmptinessCheckingIQueryable
+    {
+        private static bool HasContent1(IQueryable<string> l)
+        {
+            return l.Any();
+        }
+        private static bool HasContent1b(IQueryable<string> l)
+        {
+            return l.Any(); // Fixed
+        }
+        private static bool HasContent2(IQueryable<string> l)
+        {
+            return l.Any(); // Fixed
+        }
+        private static bool HasContent2b(IQueryable<string> l)
+        {
+            return l.Any();    // Fixed
+                               // Error@-1 [CS0034]
+        }
+        private static bool IsNotEmpty1(IQueryable<string> l)
+        {
+            return l.Any(); // Fixed
+        }
+        private static bool IsNotEmpty2(IQueryable<string> l)
+        {
+            return l.Any(); // Fixed
+        }
+        private static bool IsEmpty1(IQueryable<string> l)
+        {
+            return !l.Any(); // Fixed
+        }
+        private static bool IsEmpty2(IQueryable<string> l)
+        {
+            return !l.Any(); // Fixed
+        }
+        private static bool IsEmpty2b(IQueryable<string> l)
+        {
+            return !l.Any(); // Fixed
+        }
+        private static bool IsEmpty4(IQueryable<string> l)
+        {
+            return !l.Any(); // Fixed
+        }
+        private static bool IsEmpty4b(IQueryable<string> l)
+        {
+            return !l.Any(); // Fixed
+        }
+        private static bool HasContentWithCondition(IQueryable<int> numbers)
+        {
+            return numbers.Any(n => n % 2 == 0); // Fixed
+        }
+        private static bool IsEmptyWithCondition(IQueryable<int> numbers)
+        {
+            return !numbers.Any(n => n % 2 == 0); // Fixed
+        }
+        public static bool WithReferencedCondition(IQueryable<int> n)
+        {
+            return !n.Any(Include); // Fixed
+        }
+        static bool Include(int n)
+        {
+            return n == 17;
+        }
+    }
 }

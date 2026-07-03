@@ -15,12 +15,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class CollectionEmptinessChecking : CollectionEmptinessCheckingBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class CollectionEmptinessChecking : CollectionEmptinessCheckingBase<SyntaxKind>
-    {
-        protected override string MessageFormat => "Use '.Any()' to test whether this 'IEnumerable(Of {0})' is empty or not.";
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-    }
+    protected override string MessageFormat => "Use '.Any()' to test whether this '{0}(Of {1})' is empty or not.";
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }
