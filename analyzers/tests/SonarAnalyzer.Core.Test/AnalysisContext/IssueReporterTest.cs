@@ -16,6 +16,7 @@
  */
 
 using System.Reflection;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Core.AnalysisContext.Test;
@@ -100,6 +101,22 @@ public class IssueReporterTest
                 _ => new Version(roslynVersion.Major - 1, 99, 99),
             };
         }
+    }
+
+    [TestMethod]
+    public void ReportIssueCore_NullSecondaryLocation_IsSkipped()
+    {
+        var compilation = CSharpCompilation.Create("test");
+        var rule = new DiagnosticDescriptor("TEST001", "title", "message", "category", DiagnosticSeverity.Warning, true);
+        var act = () =>
+            IssueReporter.ReportIssueCore(
+                compilation,
+                _ => true,
+                x => new DummyReportingContext(reporter, x, null),
+                rule,
+                Location.None,
+                [null]);
+        act.Should().NotThrow();
     }
 
     [TestMethod]
