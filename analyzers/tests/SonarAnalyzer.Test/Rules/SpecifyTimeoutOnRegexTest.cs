@@ -45,9 +45,21 @@ public class SpecifyTimeoutOnRegexTest
 
     [TestMethod]
     public void SpecifyTimeoutOnRegex_DefaultMatchTimeout() =>
-        builderCS.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.cs").WithTopLevelStatements().Verify();
+        builderCS.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.cs").WithTopLevelStatements().VerifyNoIssues();
+
+    [TestMethod]
+    public void SpecifyTimeoutOnRegex_DefaultMatchTimeout_Invalid() =>
+        builderCS.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.Invalid.cs").WithTopLevelStatements().Verify();
 
     [TestMethod]
     public void SpecifyTimeoutOnRegex_VB() =>
         builderVB.AddPaths("SpecifyTimeoutOnRegex.vb").Verify();
+
+    [TestMethod]
+    public void SpecifyTimeoutOnRegex_DefaultMatchTimeout_VB() =>
+        builderVB.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.vb").VerifyNoIssues();
+
+    [TestMethod]
+    public void SpecifyTimeoutOnRegex_DefaultMatchTimeout_Invalid_VB() =>
+        builderVB.AddPaths("SpecifyTimeoutOnRegex.DefaultMatchTimeout.Invalid.vb").Verify();
 }

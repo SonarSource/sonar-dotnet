@@ -43,8 +43,8 @@ public sealed class CSharpFacade : ILanguageFacade<SyntaxKind>
 
     private CSharpFacade() { }
 
-    public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false) =>
-        DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode);
+    public DiagnosticDescriptor CreateDescriptor(string id, string messageFormat, bool? isEnabledByDefault = null, bool fadeOutCode = false, bool isCompilationEnd = false) =>
+        DescriptorFactory.Create(id, messageFormat, isEnabledByDefault, fadeOutCode, isCompilationEnd);
 
     public object FindConstantValue(SemanticModel model, SyntaxNode node, bool strict = false) =>
         node.FindConstantValue(model, strict);
