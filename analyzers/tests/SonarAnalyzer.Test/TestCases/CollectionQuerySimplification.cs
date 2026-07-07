@@ -14,6 +14,10 @@ namespace Tests.Diagnostics
             var x4 = coll.Select(element => element as object).Any(element => element == null);
             var x2 = coll.Select(element => element as object).Any(element => null != element);  // Noncompliant {{Use 'OfType<object>()' here instead.}}
             //            ^^^^^^
+
+            _ = coll?.Select(element => element as object).Any(element => null != element);  // Noncompliant
+            _ = coll.Select(element => element as object)?.Any(element => null != element);  // Noncompliant
+
             var x3 = coll.Select(element => element as IList<int>).Any(element => element.Count != 0); // Compliant
             x = coll.Select((element) => ((element as object))).Any(element => (element != null) && CheckCondition(element) && true);  // Noncompliant use OfType
             x = coll.Select(element => ((element as object))).Any(element => (element != null) && CheckCondition(element) && true);  // Noncompliant use OfType

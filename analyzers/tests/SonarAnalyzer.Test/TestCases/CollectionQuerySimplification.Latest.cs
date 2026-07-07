@@ -90,6 +90,20 @@ namespace CSharp14
 
             public bool NonCompliantMethod() { return source.Select(x => x as object).Any(x => x != null); }    // Noncompliant
             public bool CompliantMethod() { return source.OfType<object>().Any(x => x != null); }
+            public bool Overlaps(List<int> other) => true;
+        }
+
+        public class Sample { }
+        extension(Sample sample)
+        {
+            public bool Any(IEnumerable<int> items) => items.Any();
+        }
+        public static void CustomAnyWithCollectionArgument(Sample sample, IEnumerable<int> xs)
+        {
+            _ = sample.Any(xs.ToList());     // Compliant
+            _ = sample.Any(xs.ToArray());    // Compliant
+            _ = xs!.Overlaps(xs.ToList());   // Compliant
+            _ = xs?.Overlaps(xs.ToList());   // Compliant
         }
     }
 
