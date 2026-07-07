@@ -33,7 +33,7 @@ class VbNetTest {
   private VbNetCorePluginMetadata.VbNet vbnet;
 
   @BeforeEach
-  public void init() {
+  void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
       new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE).create());
     settings = new MapSettings(defs);

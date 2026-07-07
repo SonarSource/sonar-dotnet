@@ -47,7 +47,7 @@ class CSharpSonarWayProfileTest {
   };
 
   @BeforeAll
-  public static void beforeAll() {
+  static void beforeAll() {
     roslynRules = mock(RoslynRules.class);
     when(roslynRules.rules()).thenReturn(new ArrayList<>());
   }

@@ -22,12 +22,12 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.Mockito;
 import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class DotCoverReportsAggregatorTest {
@@ -81,7 +81,7 @@ public class DotCoverReportsAggregatorTest {
 
     verify(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/1.html"), coverage);
     verify(parser).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/2.html"), coverage);
-    verify(parser, Mockito.never()).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/nosource.html"), coverage);
+    verify(parser, never()).accept(new File("src/test/resources/dotcover_aggregator/foo.bar/src/nosource.html"), coverage);
 
     assertThat(logTester.logs(Level.INFO).get(0)).startsWith("Aggregating the HTML reports from ");
     List<String> debugLogs = logTester.logs(Level.DEBUG);

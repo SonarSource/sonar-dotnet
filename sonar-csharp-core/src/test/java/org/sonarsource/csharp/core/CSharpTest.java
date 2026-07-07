@@ -32,7 +32,7 @@ class CSharpTest {
   private CSharpCorePluginMetadata.CSharp csharp;
 
   @BeforeEach
-  public void init() {
+  void init() {
     PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
       new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE).create());
     settings = new MapSettings(defs);

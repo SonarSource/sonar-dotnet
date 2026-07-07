@@ -23,7 +23,6 @@ import java.util.HashSet;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.mockito.Mockito;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
@@ -34,6 +33,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.sonarsource.dotnet.protobuf.SonarAnalyzer.MethodDeclarationsInfo;
@@ -91,8 +91,8 @@ public class UnitTestResultsAggregatorTest {
     context.run();
 
     verify(context.visualStudio).parse(eq(new File("foo.trx")), notNull(), any());
-    verify(context.nunit, Mockito.never()).parse(any(), any(), any());
-    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
+    verify(context.nunit, never()).parse(any(), any(), any());
+    verify(context.xunit, never()).parse(any(), any(), any());
   }
 
   @Test
@@ -100,9 +100,9 @@ public class UnitTestResultsAggregatorTest {
     AggregateTestContext context = new AggregateTestContext("nunitTestResultsFile", "foo.xml");
     context.run();
 
-    verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
+    verify(context.visualStudio, never()).parse(any(), any(), any());
     verify(context.nunit).parse(eq(new File("foo.xml")), any(), any());
-    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
+    verify(context.xunit, never()).parse(any(), any(), any());
   }
 
   @Test
@@ -110,8 +110,8 @@ public class UnitTestResultsAggregatorTest {
     AggregateTestContext context = new AggregateTestContext("xunitTestResultsFile", "foo.xml");
     context.run();
 
-    verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
-    verify(context.nunit, Mockito.never()).parse(any(), any(), any());
+    verify(context.visualStudio, never()).parse(any(), any(), any());
+    verify(context.nunit, never()).parse(any(), any(), any());
     verify(context.xunit).parse(eq(new File("foo.xml")), notNull(), any());
   }
 
@@ -133,9 +133,9 @@ public class UnitTestResultsAggregatorTest {
     AggregateTestContext context = new AggregateTestContext();
     context.run();
 
-    verify(context.visualStudio, Mockito.never()).parse(any(), any(), any());
-    verify(context.nunit, Mockito.never()).parse(any(), any(), any());
-    verify(context.xunit, Mockito.never()).parse(any(), any(), any());
+    verify(context.visualStudio, never()).parse(any(), any(), any());
+    verify(context.nunit, never()).parse(any(), any(), any());
+    verify(context.xunit, never()).parse(any(), any(), any());
   }
 
   @Test
