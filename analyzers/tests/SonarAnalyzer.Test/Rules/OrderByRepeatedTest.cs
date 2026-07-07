@@ -29,6 +29,14 @@ public class OrderByRepeatedTest
         builder.AddPaths("OrderByRepeated.cs").Verify();
 
     [TestMethod]
+    public void OrderByRepeated_Latest() =>
+        builder.AddPaths("OrderByRepeated.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
+    public void OrderByRepeated_EntityFramework() =>
+        builder.AddPaths("OrderByRepeated.EntityFramework.cs").WithOptions(LanguageOptions.CSharpLatest).AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(TestConstants.NuGetLatestVersion).Concat(MetadataReferenceFacade.SystemComponentModelTypeConverter)).Verify();
+
+    [TestMethod]
     public void OrderByRepeated_CodeFix() =>
         builder
             .WithCodeFix<OrderByRepeatedCodeFix>()

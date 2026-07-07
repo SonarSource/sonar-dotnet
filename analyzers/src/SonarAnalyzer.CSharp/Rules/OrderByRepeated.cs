@@ -22,45 +22,51 @@ public sealed class OrderByRepeated : SonarDiagnosticAnalyzer
 {
     internal const string DiagnosticId = "S3169";
     private const string MessageFormat = "Use 'ThenBy' instead.";
-
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+
+    private static readonly HashSet<string> OrderMethodNames =
+    [
+        nameof(Enumerable.OrderBy),
+        nameof(Enumerable.OrderByDescending),
+        "Order",            // https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.order
+        "OrderDescending"   // https://learn.microsoft.com/en-us/dotnet/api/system.linq.enumerable.orderdescending
+    ];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context) =>
+    protected override void Initialize(SonarAnalysisContext context)
+    {
         context.RegisterNodeAction(
             c =>
             {
-                var outerInvocation = (InvocationExpressionSyntax)c.Node;
-                if (outerInvocation.Expression is MemberAccessExpressionSyntax memberAccess
-                    && memberAccess.Expression is InvocationExpressionSyntax innerInvocation
-                    && IsMethodOrderByExtension(outerInvocation, c.Model)
-                    && IsOrderByOrThenBy(innerInvocation, c.Model))
+                var invocation = (InvocationExpressionSyntax)c.Node;
+                if (invocation.Expression.LeftOfDot is { } receiver
+                    && IsOrderingOnAlreadyOrderedSequence(invocation, receiver, c.Model)
+                    && invocation.GetIdentifier() is { } identifier)
                 {
-                    c.ReportIssue(Rule, memberAccess.Name);
+                    c.ReportIssue(Rule, identifier.GetLocation());
                 }
-
-                static bool IsOrderByOrThenBy(InvocationExpressionSyntax invocation, SemanticModel model) =>
-                    IsMethodOrderByExtension(invocation, model) || IsMethodThenByExtension(invocation, model);
             },
             SyntaxKind.InvocationExpression);
 
-    private static bool IsMethodOrderByExtension(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.Expression.ToStringContains("OrderBy")
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-        && methodSymbol.Name == "OrderBy"
-        && methodSymbol.MethodKind == MethodKind.ReducedExtension
-        && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+        context.RegisterNodeAction(
+            c =>
+            {
+                var clauses = ((QueryBodySyntax)c.Node).Clauses;
+                for (var i = 1; i < clauses.Count; i++)
+                {
+                    if (clauses[i] is OrderByClauseSyntax orderBy && clauses[i - 1] is OrderByClauseSyntax)
+                    {
+                        c.ReportIssue(Rule, orderBy.OrderByKeyword.GetLocation());
+                    }
+                }
+            },
+            SyntaxKind.QueryBody);
+    }
 
-    private static bool IsMethodThenByExtension(InvocationExpressionSyntax invocation, SemanticModel model) =>
-        invocation.Expression.ToStringContains("ThenBy")
-        && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol
-        && methodSymbol.Name == "ThenBy"
-        && methodSymbol.MethodKind == MethodKind.ReducedExtension
-        && MethodIsOnIOrderedEnumerable(methodSymbol);
-
-    private static bool MethodIsOnIOrderedEnumerable(IMethodSymbol methodSymbol) =>
-        methodSymbol.ReceiverType is INamedTypeSymbol receiverType
-        && receiverType.ConstructedFrom.ContainingNamespace.ToString() == "System.Linq"
-        && receiverType.ConstructedFrom.MetadataName == "IOrderedEnumerable`1";
+    private static bool IsOrderingOnAlreadyOrderedSequence(InvocationExpressionSyntax invocation, ExpressionSyntax receiver, SemanticModel model) =>
+        model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { MethodKind: MethodKind.ReducedExtension } method
+        && OrderMethodNames.Contains(method.Name)
+        && model.GetTypeInfo(receiver).Type is { } receiverType
+        && (receiverType.Is(KnownType.System_Linq_IOrderedEnumerable_T) || receiverType.Is(KnownType.System_Linq_IOrderedQueryable_T));
 }

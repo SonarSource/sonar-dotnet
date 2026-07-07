@@ -15,34 +15,34 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public sealed class OrderByRepeatedCodeFix : SonarCodeFix
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public sealed class OrderByRepeatedCodeFix : SonarCodeFix
+    internal const string Title = "Change 'OrderBy' to 'ThenBy'";
+
+    public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(OrderByRepeated.DiagnosticId);
+
+    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
-        internal const string Title = "Change 'OrderBy' to 'ThenBy'";
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(OrderByRepeated.DiagnosticId);
+        var diagnostic = context.Diagnostics.First();
+        var diagnosticSpan = diagnostic.Location.SourceSpan;
 
-        protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+        // Only 'OrderBy'/'OrderByDescending' take a key selector that 'ThenBy' also accepts, so the fix is safe
+        // for those alone. 'Order'/'OrderDescending' and query comprehension diagnostics are left without a fix.
+        if (root.FindNode(diagnosticSpan) is IdentifierNameSyntax { Identifier.ValueText: nameof(Enumerable.OrderBy) or nameof(Enumerable.OrderByDescending) } syntaxNode)
         {
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-            var syntaxNode = root.FindNode(diagnosticSpan);
-
-            context.RegisterCodeFix(
-                Title,
-                c => ChangeToThenByAsync(context.Document, syntaxNode, c),
-                context.Diagnostics);
-
-            return Task.CompletedTask;
+            context.RegisterCodeFix(Title, x => ChangeToThenByAsync(context.Document, syntaxNode, x), context.Diagnostics);
         }
 
-        private static async Task<Document> ChangeToThenByAsync(Document document, SyntaxNode syntaxNode, CancellationToken cancel)
-        {
-            var root = await document.GetSyntaxRootAsync(cancel).ConfigureAwait(false);
-            var newRoot = root.ReplaceNode(syntaxNode,
-                SyntaxFactory.IdentifierName("ThenBy"));
-            return document.WithSyntaxRoot(newRoot);
-        }
+        return Task.CompletedTask;
+    }
+
+    private static async Task<Document> ChangeToThenByAsync(Document document, SyntaxNode node, CancellationToken cancel)
+    {
+        var root = await document.GetSyntaxRootAsync(cancel).ConfigureAwait(false);
+        var newRoot = root.ReplaceNode(node, SyntaxFactory.IdentifierName(nameof(Enumerable.ThenBy)));
+        return document.WithSyntaxRoot(newRoot);
     }
 }

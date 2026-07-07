@@ -19,6 +19,7 @@ namespace Tests.Diagnostics
                 .OrderBy(i => i, StringComparer.CurrentCultureIgnoreCase)
                 .ThenBy(i => i, StringComparer.CurrentCultureIgnoreCase)
                 .OrderBy(i => i); //Noncompliant
+            new int[] { 1, 2, 3 }.OrderBy(i => i)?.OrderBy(i => i); //Noncompliant
         }
 
         public void Coverage()
