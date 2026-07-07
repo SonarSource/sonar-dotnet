@@ -21,7 +21,7 @@ using System.Text.RegularExpressions;
 
 namespace SonarAnalyzer.Core.Rules;
 
-public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnosticAnalyzer
+public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAnalyzer
         where TSyntaxKind : struct
 {
     private const string DiagnosticId = "S6444";
@@ -53,16 +53,9 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : HotspotDiagnostic
     // Reporting is deferred to a compilation end action, so the descriptor must carry the CompilationEnd tag.
     private DiagnosticDescriptor Rule => Language.CreateDescriptor(DiagnosticId, MessageFormat, isCompilationEnd: true);
 
-    protected SpecifyTimeoutOnRegexBase(IAnalyzerConfiguration config) : base(config) { }
-
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(start =>
             {
-                if (!IsEnabled(start.Options))
-                {
-                    return;
-                }
-
                 var candidates = new ConcurrentBag<SyntaxNode>();
 
                 // StrongBox<bool> instead of a plain bool: this flag is captured by several node-action lambdas and

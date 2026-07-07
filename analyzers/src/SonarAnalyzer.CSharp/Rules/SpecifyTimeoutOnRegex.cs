@@ -15,14 +15,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules;
+namespace SonarAnalyzer.CSharp.Rules;
 
-[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class SpecifyTimeoutOnRegex : SpecifyTimeoutOnRegexBase<SyntaxKind>
 {
-    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
-
-    public SpecifyTimeoutOnRegex() : this(AnalyzerConfiguration.Hotspot) { }
-
-    internal /*for testing*/ SpecifyTimeoutOnRegex(IAnalyzerConfiguration config) : base(config) { }
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 }

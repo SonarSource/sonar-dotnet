@@ -95,8 +95,6 @@ public class SecurityHotspotTest
             nameof(DeliveringDebugFeaturesInProduction) => DeliveringDebugFeaturesInProductionTest.AdditionalReferencesForAspNetCore2,
             nameof(DoNotHardcodeCredentials) => DoNotHardcodeCredentialsTest.AdditionalReferences,
             nameof(ExpandingArchives) => ExpandingArchivesTest.AdditionalReferences,
-            nameof(SpecifyTimeoutOnRegex) => MetadataReferenceFacade.RegularExpressions
-                .Concat(NuGetMetadataReference.SystemComponentModelAnnotations()),
 
 #if NET
             nameof(ExecutingSqlQueries) => ExecutingSqlQueriesTest.ReferencesEntityFrameworkNetCore("7.0.14"),

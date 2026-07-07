@@ -24,14 +24,12 @@ namespace SonarAnalyzer.Test.Rules;
 public class SpecifyTimeoutOnRegexTest
 {
     private readonly VerifierBuilder builderCS = new VerifierBuilder()
-        .AddAnalyzer(() => new CS.SpecifyTimeoutOnRegex(AnalyzerConfiguration.AlwaysEnabled))
-        .WithBasePath("Hotspots")
+        .AddAnalyzer(() => new CS.SpecifyTimeoutOnRegex())
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
 
     private readonly VerifierBuilder builderVB = new VerifierBuilder()
-        .AddAnalyzer(() => new VB.SpecifyTimeoutOnRegex(AnalyzerConfiguration.AlwaysEnabled))
-        .WithBasePath("Hotspots")
+        .AddAnalyzer(() => new VB.SpecifyTimeoutOnRegex())
         .AddReferences(MetadataReferenceFacade.RegularExpressions)
         .AddReferences(NuGetMetadataReference.SystemComponentModelAnnotations());
 

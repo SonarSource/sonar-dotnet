@@ -6365,7 +6365,7 @@ public static class RuleTypeMappingVB
         // ["S6441"],
         // ["S6442"],
         // ["S6443"],
-        ["S6444"] = "SECURITY_HOTSPOT",
+        ["S6444"] = "VULNERABILITY",
         // ["S6445"],
         // ["S6446"],
         // ["S6447"],
