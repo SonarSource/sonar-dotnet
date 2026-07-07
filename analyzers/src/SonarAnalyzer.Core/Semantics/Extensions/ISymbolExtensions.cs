@@ -42,6 +42,10 @@ public static class ISymbolExtensions
     public static bool IsInSameAssembly(this ISymbol symbol, ISymbol anotherSymbol) =>
         symbol.ContainingAssembly.Equals(anotherSymbol.ContainingAssembly);
 
+    // C# 8 "countable": an accessible instance getter named Count/Length returning int.
+    public static bool IsCountable(this ISymbol symbol) =>
+        symbol is ITypeSymbol type && type.GetMembers().OfType<IPropertySymbol>().Any(IsCountableProperty);
+
     public static bool HasNotNullAttribute(this ISymbol parameter) =>
         parameter.GetAttributes() is { Length: > 0 } attributes && attributes.Any(IsNotNullAttribute);
 
@@ -333,6 +337,9 @@ public static class ISymbolExtensions
                 break;
         }
     }
+
+    private static bool IsCountableProperty(IPropertySymbol property) =>
+        property.Name is "Count" or "Length" && property.Type is INamedTypeSymbol { SpecialType: SpecialType.System_Int32 } && !property.IsStatic && property.GetMethod is not null;
 
     private static bool CanBeInterfaceMember(ISymbol symbol) =>
         symbol.Kind == SymbolKind.Method

@@ -95,7 +95,7 @@ namespace Tests.Diagnostics
         public void TestCountProperty()
         {
             var someCollection = new List<string>();
-            bool result = someCollection.Count >= 0; // Noncompliant {{The 'Count' of 'ICollection' always evaluates as 'True' regardless the size.}}
+            bool result = someCollection.Count >= 0; // Noncompliant {{The 'Count' of 'List<T>' always evaluates as 'True' regardless the size.}}
             //            ^^^^^^^^^^^^^^^^^^^^^^^^^
 
             var nonCollection = new FooProperty();
@@ -107,15 +107,14 @@ namespace Tests.Diagnostics
             var someArray = new string[0];
             bool result;
 
-            result = someArray.Length >= 0; // Noncompliant {{The 'Length' of 'Array' always evaluates as 'True' regardless the size.}}
+            result = someArray.Length >= 0;     // Noncompliant {{The 'Length' of 'Array' always evaluates as 'True' regardless the size.}}
             //       ^^^^^^^^^^^^^^^^^^^^^
 
-            result = someArray.LongLength >= 0; // Noncompliant {{The 'LongLength' of 'Array' always evaluates as 'True' regardless the size.}}
-            //       ^^^^^^^^^^^^^^^^^^^^^^^^^
+            result = someArray.LongLength >= 0; // Noncompliant
 
             var nonArray = new FooProperty();
-            result = nonArray.Length >= 0;
-            result = nonArray.LongLength >= 0;
+            result = nonArray.Length >= 0;      // Compliant
+            result = nonArray.LongLength >= 0;  // Compliant - 'LongLength' is not a "countable" member name
         }
 
         private void TestInterfacesAndReadonlyCollections(IList<int> list, ICollection<int> collection, IReadOnlyCollection<int> readonlyCollection, IReadOnlyList<int> readonlyList)
@@ -124,15 +123,15 @@ namespace Tests.Diagnostics
 
             bool result;
 
-            result = list.Count >= 0; // Noncompliant
+            result = list.Count >= 0; // Noncompliant {{The 'Count' of 'ICollection<T>' always evaluates as 'True' regardless the size.}} - 'Count' is declared on ICollection<T>
 
-            result = collection.Count >= 0; // Noncompliant
+            result = collection.Count >= 0; // Noncompliant {{The 'Count' of 'ICollection<T>' always evaluates as 'True' regardless the size.}}
 
-            result = readonlyCollection.Count >= 0; // Noncompliant
+            result = readonlyCollection.Count >= 0; // Noncompliant {{The 'Count' of 'IReadOnlyCollection<T>' always evaluates as 'True' regardless the size.}}
 
-            result = readonlyList.Count >= 0; // Noncompliant
+            result = readonlyList.Count >= 0; // Noncompliant {{The 'Count' of 'IReadOnlyCollection<T>' always evaluates as 'True' regardless the size.}} - 'Count' is declared on IReadOnlyCollection<T>
 
-            result = sortedSet.Count >= 0; // Noncompliant
+            result = sortedSet.Count >= 0; // Noncompliant {{The 'Count' of 'SortedSet<T>' always evaluates as 'True' regardless the size.}}
         }
     }
 
@@ -141,6 +140,54 @@ namespace Tests.Diagnostics
         static bool LengthWithoutMeaning(string str)
         {
             return str.Length < -3; // Noncompliant {{The 'Length' of 'String' always evaluates as 'False' regardless the size.}}
+        }
+    }
+
+    class Queryable
+    {
+        const double ConstField_Double_Zero = 0;
+        const int ConstField_Zero = 0;
+        const int ConstField_NonZero = 1;
+
+        public void TestCountMethod(IQueryable<string> someQueryable)
+        {
+            const int localConst_Zero = 0;
+            const int localConst_NonZero = 1;
+            int localVariable = 0;
+            bool result;
+
+            result = someQueryable.Count() >= 0; // Noncompliant {{The 'Count' of 'IQueryable<T>' always evaluates as 'True' regardless the size.}}
+            //       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+            result = someQueryable.Count(foo => true) >= 0; // Noncompliant
+            result = someQueryable?.Count() >= 0; // Noncompliant
+
+            result = someQueryable.Count() >= 1;
+            result = someQueryable.Count() >= localVariable;
+            result = someQueryable.Count() >= -1; // Noncompliant {{The 'Count' of 'IQueryable<T>' always evaluates as 'True' regardless the size.}}
+            result = someQueryable.Count() <= 0;
+            result = someQueryable.Count() < 0; // Noncompliant {{The 'Count' of 'IQueryable<T>' always evaluates as 'False' regardless the size.}}
+            result = 0 >= someQueryable.Count();
+
+            result = someQueryable.Count() >= localConst_Zero; // Noncompliant
+            result = someQueryable.Count() >= ConstField_NonZero;
+            result = someQueryable.Count() >= ConstField_Zero; // Noncompliant
+            result = someQueryable.Count() >= localConst_NonZero;
+            result = someQueryable.Count() >= ConstField_Double_Zero; // Compliant, double is ignored, arguably FN
+
+            result = (someQueryable.Count()) >= (0); // Noncompliant
+            result = ((((someQueryable).Count())) >= ((0))); // Noncompliant
+            //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            result = 0 <= someQueryable.Count(); // Noncompliant
+            //       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+            result = result.ToString() == "Not integer";
+            result = (localVariable = 42) != -1;
+
+            if ((localVariable = 42) != -1)
+            { }
+
+            var nonEnumerable = new FooMethod();
+            result = nonEnumerable.Count() >= 0;
         }
     }
 }

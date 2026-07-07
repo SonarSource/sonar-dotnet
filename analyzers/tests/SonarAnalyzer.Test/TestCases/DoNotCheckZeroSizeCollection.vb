@@ -97,10 +97,10 @@ Namespace Tests.Diagnostics
 
         Public Sub TestCountProperty()
             Dim SomeCollection = New List(Of String)()
-            Dim Result As Boolean = SomeCollection.Count >= 0 ' Noncompliant {{The 'Count' of 'ICollection' always evaluates as 'True' regardless the size.}}
+            Dim Result As Boolean = SomeCollection.Count >= 0 ' Noncompliant {{The 'Count' of 'List(Of T)' always evaluates as 'True' regardless the size.}}
             '                       ^^^^^^^^^^^^^^^^^^^^^^^^^
             Dim NonCollection = New FooProperty()
-            Result = NonCollection.Count >= 0
+            Result = NonCollection.Count >= 0 ' Compliant
         End Sub
 
         Public Sub TestLengthProperty()
@@ -109,26 +109,25 @@ Namespace Tests.Diagnostics
 
             Result = SomeArray.Length >= 0 ' Noncompliant {{The 'Length' of 'Array' always evaluates as 'True' regardless the size.}}
             '        ^^^^^^^^^^^^^^^^^^^^^
-            Result = SomeArray.LongLength >= 0 ' Noncompliant {{The 'LongLength' of 'Array' always evaluates as 'True' regardless the size.}}
-            '        ^^^^^^^^^^^^^^^^^^^^^^^^^
+            Result = SomeArray.LongLength >= 0 ' Noncompliant
             Dim NonArray = New FooProperty()
-            Result = NonArray.Length >= 0
-            Result = NonArray.LongLength >= 0
+            Result = NonArray.Length >= 0 ' Compliant
+            Result = NonArray.LongLength >= 0 ' Compliant
         End Sub
 
         Public Sub TestInterfacesAndReadonlyCollections(List As IList(Of Integer), Collection As ICollection(Of Integer), ReadonlyCollection As IReadOnlyCollection(Of Integer), ReadonlyList As IReadOnlyList(Of Integer))
             Dim Result As Boolean
             Dim SortedSet As New SortedSet(Of Double)
 
-            Result = List.Count >= 0 ' Noncompliant
+            Result = List.Count >= 0 ' Noncompliant {{The 'Count' of 'ICollection(Of T)' always evaluates as 'True' regardless the size.}} - 'Count' is declared on ICollection(Of T)
 
-            Result = Collection.Count >= 0 ' Noncompliant
+            Result = Collection.Count >= 0 ' Noncompliant {{The 'Count' of 'ICollection(Of T)' always evaluates as 'True' regardless the size.}}
 
-            Result = ReadonlyCollection.Count >= 0 ' Noncompliant
+            Result = ReadonlyCollection.Count >= 0 ' Noncompliant {{The 'Count' of 'IReadOnlyCollection(Of T)' always evaluates as 'True' regardless the size.}}
 
-            Result = ReadonlyList.Count >= 0 ' Noncompliant
+            Result = ReadonlyList.Count >= 0 ' Noncompliant {{The 'Count' of 'IReadOnlyCollection(Of T)' always evaluates as 'True' regardless the size.}} - 'Count' is declared on IReadOnlyCollection(Of T)
 
-            Result = SortedSet.Count >= 0 ' Noncompliant
+            Result = SortedSet.Count >= 0 ' Noncompliant {{The 'Count' of 'SortedSet(Of T)' always evaluates as 'True' regardless the size.}}
         End Sub
 
     End Class
@@ -137,6 +136,43 @@ Namespace Tests.Diagnostics
         Shared Function LengthWithoutMeaning(str As String) As Boolean
             Return str.Length < -3 ' Noncompliant {{The 'Length' of 'String' always evaluates as 'False' regardless the size.}}
         End Function
+    End Class
+
+    Class Queryables
+        Const ConstField_Zero As Integer = 0
+        Const ConstField_NonZero As Integer = 1
+
+        Public Sub TestCountMethod(someQueryable As IQueryable(Of String))
+            Const LocalConst_Zero As Integer = 0
+            Const LocalConst_NonZero As Integer = 1
+            Dim LocalVariable As Integer = 0
+            Dim Result As Boolean
+
+            Result = Queryable.Count(someQueryable) >= 0 ' Noncompliant {{The 'Count' of 'IQueryable(Of T)' always evaluates as 'True' regardless the size.}}
+            '        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Result = someQueryable.Count(Function(foo) True) >= 0 ' Noncompliant {{The 'Count' of 'IQueryable(Of T)' always evaluates as 'True' regardless the size.}}
+            Result = someQueryable?.Count() >= 0 ' Noncompliant
+            Result = someQueryable.Count() >= 1
+            Result = someQueryable.Count() >= LocalVariable
+            Result = someQueryable.Count() >= -1 ' Noncompliant {{The 'Count' of 'IQueryable(Of T)' always evaluates as 'True' regardless the size.}}
+            Result = someQueryable.Count() <= 0
+            Result = someQueryable.Count() < 0 ' Noncompliant {{The 'Count' of 'IQueryable(Of T)' always evaluates as 'False' regardless the size.}}
+            Result = 0 >= someQueryable.Count()
+
+            Result = someQueryable.Count() >= LocalConst_Zero ' Noncompliant
+            Result = someQueryable.Count() >= ConstField_NonZero
+            Result = someQueryable.Count() >= ConstField_Zero ' Noncompliant
+            Result = someQueryable.Count() >= LocalConst_NonZero
+
+            Result = (someQueryable.Count()) >= (0) ' Noncompliant
+            Result = ((((someQueryable).Count())) >= ((0))) ' Noncompliant
+            '         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Result = 0 <= someQueryable.Count() ' Noncompliant
+            '        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+            Dim NonEnumerable = New FooMethod()
+            Result = NonEnumerable.Count() >= 0
+        End Sub
+
     End Class
 
 End Namespace

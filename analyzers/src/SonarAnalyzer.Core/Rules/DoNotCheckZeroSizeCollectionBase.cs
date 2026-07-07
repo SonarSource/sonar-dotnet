@@ -15,112 +15,79 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
-    {
-        protected const string DiagnosticId = "S3981";
-        private const string CountName = nameof(Enumerable.Count);
-        private const string LengthName = nameof(Array.Length);
-        private const string LongLengthName = nameof(Array.LongLength);
+    protected const string DiagnosticId = "S3981";
 
-        protected abstract string IEnumerableTString { get; }
+    private static readonly HashSet<string> CandidateNames = [nameof(Enumerable.Count), nameof(Array.Length), nameof(Array.LongLength)];
+    private static readonly SymbolDisplayFormat TypeNameFormat = new(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters);
 
-        protected override string MessageFormat => "The '{0}' of '{1}' always evaluates as '{2}' regardless the size.";
+    protected override string MessageFormat => "The '{0}' of '{1}' always evaluates as '{2}' regardless the size.";
 
-        protected DoNotCheckZeroSizeCollectionBase() : base(DiagnosticId) { }
+    protected DoNotCheckZeroSizeCollectionBase() : base(DiagnosticId) { }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
-                c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
+            {
+                var binary = c.Node;
+                var binaryLeft = Language.Syntax.BinaryExpressionLeft(binary);
+                var binaryRight = Language.Syntax.BinaryExpressionRight(binary);
+
+                if (Language.ExpressionNumericConverter.ConstantIntValue(c.Model, binaryLeft) is { } left)
                 {
-                    var binary = c.Node;
-                    var binaryLeft = Language.Syntax.BinaryExpressionLeft(binary);
-                    var binaryRight = Language.Syntax.BinaryExpressionRight(binary);
+                    CheckExpression(c, binary, binaryRight, left, Language.Syntax.ComparisonKind(binary).Mirror());
+                }
+                else if (Language.ExpressionNumericConverter.ConstantIntValue(c.Model, binaryRight) is { } right)
+                {
+                    CheckExpression(c, binary, binaryLeft, right, Language.Syntax.ComparisonKind(binary));
+                }
+            },
+            Language.SyntaxKind.ComparisonKinds);
 
-                    if (Language.ExpressionNumericConverter.ConstantIntValue(c.Model, binaryLeft) is { } left)
-                    {
-                        CheckExpression(c, binary, binaryRight, left, Language.Syntax.ComparisonKind(binary).Mirror());
-                    }
-                    else if (Language.ExpressionNumericConverter.ConstantIntValue(c.Model, binaryRight) is { } right)
-                    {
-                        CheckExpression(c, binary, binaryLeft, right, Language.Syntax.ComparisonKind(binary));
-                    }
-                },
-                Language.SyntaxKind.ComparisonKinds);
-
-        protected void CheckExpression(SonarSyntaxNodeReportingContext context, SyntaxNode issue, SyntaxNode expression, int constant, ComparisonKind comparison)
+    protected void CheckExpression(SonarSyntaxNodeReportingContext context, SyntaxNode issue, SyntaxNode expression, int constant, ComparisonKind comparison)
+    {
+        expression = Language.Syntax.RemoveConditionalAccess(expression);
+        var result = comparison.Compare(constant);
+        if (result.IsInvalid()
+            && CandidateNames.Contains(Language.Syntax.NodeIdentifier(expression)?.ValueText)
+            && context.Model.GetSymbolInfo(expression).Symbol is { } symbol
+            && CollectionSizeTypeName(symbol) is { } symbolType)
         {
-            expression = Language.Syntax.RemoveConditionalAccess(expression);
-            var result = comparison.Compare(constant);
-            if (result.IsInvalid()
-                && HasCandidateName(Language.Syntax.NodeIdentifier(expression)?.ValueText)
-                && context.Model.GetSymbolInfo(expression).Symbol is ISymbol symbol
-                && CollecionSizeTypeName(symbol) is { } symbolType)
-            {
-                context.ReportIssue(Rule, issue, symbol.Name, symbolType, (result == CountComparisonResult.AlwaysTrue).ToString());
-            }
-        }
-
-        private bool HasCandidateName(string name) =>
-            CountName.Equals(name, Language.NameComparison)
-            || LengthName.Equals(name, Language.NameComparison)
-            || LongLengthName.Equals(name, Language.NameComparison);
-
-        private bool IsEnumerableCountMethod(ISymbol symbol) =>
-            CountName.Equals(symbol.Name, Language.NameComparison)
-            && symbol is IMethodSymbol methodSymbol
-            && methodSymbol.IsExtensionMethod
-            && methodSymbol.ReceiverType is not null
-            && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
-
-        private bool IsArrayLengthProperty(ISymbol symbol) =>
-            (LengthName.Equals(symbol.Name, Language.NameComparison) || LongLengthName.Equals(symbol.Name, Language.NameComparison))
-            && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.Is(KnownType.System_Array);
-
-        private bool IsStringLengthProperty(ISymbol symbol) =>
-            LengthName.Equals(symbol.Name, Language.NameComparison)
-            && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.Is(KnownType.System_String);
-
-        private bool IsCollectionCountProperty(ISymbol symbol) =>
-            CountName.Equals(symbol.Name, Language.NameComparison)
-            && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_ICollection_T);
-
-        private bool IsReadonlyCollectionCountProperty(ISymbol symbol) =>
-            CountName.Equals(symbol.Name, Language.NameComparison)
-            && symbol is IPropertySymbol propertySymbol
-            && propertySymbol.ContainingType.DerivesOrImplements(KnownType.System_Collections_Generic_IReadOnlyCollection_T);
-
-        private string CollecionSizeTypeName(ISymbol symbol)
-        {
-            if (IsArrayLengthProperty(symbol))
-            {
-                return nameof(Array);
-            }
-            else if (IsStringLengthProperty(symbol))
-            {
-                return nameof(String);
-            }
-            else if (IsEnumerableCountMethod(symbol))
-            {
-                return IEnumerableTString;
-            }
-            else if (IsCollectionCountProperty(symbol))
-            {
-                return nameof(ICollection<object>);
-            }
-            else if (IsReadonlyCollectionCountProperty(symbol))
-            {
-                return nameof(IReadOnlyCollection<object>);
-            }
-            else
-            {
-                return null;
-            }
+            context.ReportIssue(Rule, issue, symbol.Name, symbolType, (result == CountComparisonResult.AlwaysTrue).ToString());
         }
     }
+
+    private string CollectionSizeTypeName(ISymbol symbol)
+    {
+        if (symbol.ContainingType.IsCountable() && IsCollectionLike(symbol.ContainingType))
+        {
+            return TypeName(symbol.ContainingType);
+        }
+        else if (symbol is IMethodSymbol method && IsSequenceCountMethod(method))
+        {
+            return TypeName(SequenceType(method));
+        }
+        return null;
+    }
+
+    private bool IsSequenceCountMethod(IMethodSymbol method) =>
+        nameof(Enumerable.Count).Equals(method.Name, Language.NameComparison)
+        && method.IsExtension
+        && method.ReceiverType is not null
+        && (method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) || method.IsExtensionOn(KnownType.System_Linq_IQueryable));
+
+    private static bool IsCollectionLike(ITypeSymbol type) =>
+        type.IsAny(KnownType.System_Collections_IEnumerable, KnownType.System_Span_T, KnownType.System_ReadOnlySpan_T)
+        || type.Implements(KnownType.System_Collections_IEnumerable);
+
+    private static ITypeSymbol SequenceType(IMethodSymbol method) =>
+        (method.ReducedFrom ?? method).Parameters[0].Type;
+
+    private static string TypeName(ITypeSymbol type) =>
+        type.OriginalDefinition.ToDisplayString(TypeNameFormat);
 }

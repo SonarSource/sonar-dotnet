@@ -137,6 +137,10 @@ public static class ITypeSymbolExtensions
         typeSymbol is not null
         && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
 
+    public static bool ImplementsAny(this ITypeSymbol typeSymbol, params KnownType[] types) =>
+        typeSymbol is not null
+        && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
+
     public static bool DerivesFrom(this ITypeSymbol typeSymbol, KnownType type)
     {
         var currentType = typeSymbol;

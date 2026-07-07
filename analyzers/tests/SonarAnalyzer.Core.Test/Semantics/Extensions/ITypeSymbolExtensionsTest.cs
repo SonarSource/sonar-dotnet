@@ -64,7 +64,7 @@ public class ITypeSymbolExtensionsTest
 
     [TestMethod]
     public void ImplementsAny_Null() =>
-        ((ITypeSymbol)null).ImplementsAny([KnownType.System_Boolean]).Should().BeFalse();
+        ((ITypeSymbol)null).ImplementsAny(KnownType.System_Boolean).Should().BeFalse();
 
     [TestMethod]
     public void Type_DerivesOrImplementsAny()

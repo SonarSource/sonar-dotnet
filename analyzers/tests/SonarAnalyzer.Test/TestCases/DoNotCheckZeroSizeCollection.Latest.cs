@@ -158,7 +158,7 @@ record R
             if (value.Count < -1) { }  // Noncompliant
             if (0 > value.Count) { }   // Noncompliant
             if (-42 > value.Count) { } // Noncompliant
-            if (value.Count >= 0) { }  // Noncompliant {{The 'Count' of 'ICollection' always evaluates as 'True' regardless the size.}}
+            if (value.Count >= 0) { }  // Noncompliant {{The 'Count' of 'List<T>' always evaluates as 'True' regardless the size.}}
             if (value.Count == 0) { }
             if (value.Count == 1) { }
         }
@@ -171,5 +171,40 @@ class CSharp13
     {
         _ = orderedDictionary.Count >= 0; // Noncompliant
         _ = readonlySet.Count >= 0;       // Noncompliant
+    }
+}
+
+class DuckTypedCountables // NET-3922: duck-typed C# 8 "countable" covers any accessible int Count/Length
+{
+    void Spans()
+    {
+        Span<int> span = stackalloc int[4];
+        _ = span.Length >= 0; // Noncompliant {{The 'Length' of 'Span<T>' always evaluates as 'True' regardless the size.}}
+        ReadOnlySpan<int> readOnlySpan = span;
+        _ = readOnlySpan.Length >= 0; // Noncompliant {{The 'Length' of 'ReadOnlySpan<T>' always evaluates as 'True' regardless the size.}}
+    }
+
+    void CustomTypes(Custom custom, LongSized longSized)
+    {
+        _ = custom.Count >= 0;      // Compliant
+        _ = custom.Length >= 0;     // Compliant
+        _ = custom.LongLength >= 0; // Compliant
+        _ = custom.Size >= 0;       // Compliant
+        _ = longSized.Count >= 0;   // Compliant
+        _ = longSized.Length >= 0;  // Compliant
+    }
+
+    class Custom
+    {
+        public int Count => 0;
+        public int Length => 0;
+        public long LongLength => 0;
+        public int Size => 0;
+    }
+
+    class LongSized
+    {
+        public long Count => 0;
+        public long Length => 0;
     }
 }

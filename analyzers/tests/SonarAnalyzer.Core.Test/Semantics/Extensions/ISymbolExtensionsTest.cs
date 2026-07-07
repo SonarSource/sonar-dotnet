@@ -489,6 +489,35 @@ public class ISymbolExtensionsTest
         result.Should().ContainSingle();
     }
 
+    [TestMethod]
+    [DataRow("public int Count { get; }", true)]
+    [DataRow("public int Length { get; }", true)]
+    [DataRow("public int Count { get; set; }", true)]
+    [DataRow("public static int Count { get; }", false)]  // static
+    [DataRow("public int Count { set { } }", false)]      // write-only: no getter to read the size from
+    [DataRow("public long Count { get; }", false)]        // wrong type
+    [DataRow("public string Length { get; }", false)]     // wrong type
+    [DataRow("public int Size { get; }", false)]          // wrong name
+    [DataRow("public void Count() { }", false)]           // method, not a property
+    public void IsCountable_TypeMembers(string member, bool expected)
+    {
+        var type = new SnippetCompiler($$"""
+            public class Sample
+            {
+                {{member}}
+            }
+            """).TypeByMetadataName("Sample");
+        type.IsCountable().Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void IsCountable_NonTypeSymbol_ReturnsFalse() =>
+        testSnippet.MethodSymbol("Base.Method1").IsCountable().Should().BeFalse();
+
+    [TestMethod]
+    public void IsCountable_Null_ReturnsFalse() =>
+        ((ISymbol)null).IsCountable().Should().BeFalse();
+
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {
         var (tree, semanticModel) = TestCompiler.Compile(snippet, false, language, parseOptions: parseOptions);
