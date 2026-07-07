@@ -34,7 +34,7 @@ public class CollectionQuerySimplificationTest
     public void CollectionQuerySimplification_NetFx() =>
         builder.AddPaths("CollectionQuerySimplification.NetFx.cs")
             .AddReferences(FrameworkMetadataReference.SystemDataLinq)
-            .Verify();
+            .VerifyNoIssues();
 
 #endif
 

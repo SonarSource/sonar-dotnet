@@ -23,7 +23,7 @@ public sealed class CollectionQuerySimplification : SonarDiagnosticAnalyzer
     internal const string DiagnosticId = "S2971";
     internal const string MessageUseInstead = "Use {0} here instead.";
     internal const string MessageDropAndChange = "Drop '{0}' and move the condition into the '{1}'.";
-    internal const string MessageDropFromMiddle = "Drop this useless call to '{0}' or replace it by 'AsEnumerable' if you are using LINQ to Entities.";
+    internal const string MessageDropFromMiddle = "Drop this useless call to '{0}'.";
     private const string MessageFormat = "{0}";
     private const string WhereMethodName = "Where";
     private const int WherePredicateTypeArgumentNumber = 2;
@@ -86,6 +86,7 @@ public sealed class CollectionQuerySimplification : SonarDiagnosticAnalyzer
                 }
             }
             && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { Name: CountName } methodSymbol
+            // Only IEnumerable<T>: a custom IQueryable provider may expose a '.Count' property so 'Count()' on an IQueryable must not be flagged.
             && methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
             && HasCountProperty(memberAccessExpression, context.Model))
         {
@@ -103,9 +104,10 @@ public sealed class CollectionQuerySimplification : SonarDiagnosticAnalyzer
             && MethodExistsOnIEnumerable(outerMethodSymbol, context.Model)
             && InnerInvocation(outerInvocation, outerMethodSymbol) is { } innerInvocation
             && context.Model.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
-            && IsToCollectionCall(innerMethodSymbol))
+            && IsToCollectionCall(innerMethodSymbol)
+            && !IsQueryableSource(innerInvocation, context.Model))
         {
-            context.ReportIssue(Rule, ReportLocation(innerInvocation), ToCollectionCallsMessage(context, innerInvocation, innerMethodSymbol));
+            context.ReportIssue(Rule, ReportLocation(innerInvocation), string.Format(MessageDropFromMiddle, innerMethodSymbol.Name));
         }
     }
 
@@ -138,42 +140,22 @@ public sealed class CollectionQuerySimplification : SonarDiagnosticAnalyzer
 
     private static bool IsToCollectionCall(IMethodSymbol methodSymbol) =>
         MethodNamesToCollection.Contains(methodSymbol.Name)
-        && (methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) || methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
+        && (methodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+            || methodSymbol.ContainingType.ConstructedFrom.Is(KnownType.System_Collections_Generic_List_T));
 
-    private static string ToCollectionCallsMessage(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
-        IsLinqDatabaseQuery(invocation, context.Model)
-            ? string.Format(MessageUseInstead, "'AsEnumerable'")
-            : string.Format(MessageDropFromMiddle, methodSymbol.Name);
-
-    private static bool IsLinqDatabaseQuery(InvocationExpressionSyntax node, SemanticModel model)
-    {
-        while (node is { Operands.Left: { } left })
-        {
-            if (NodeTypeSymbol(left, model).DerivesOrImplementsAny(KnownType.DatabaseBaseQueryTypes))
-            {
-                return true;
-            }
-
-            node = left as InvocationExpressionSyntax;
-        }
-
-        return false;
-    }
-
-    private static ITypeSymbol NodeTypeSymbol(SyntaxNode node, SemanticModel model) =>
-        node.RemoveParentheses() switch
-        {
-            QueryExpressionSyntax { FromClause: { } fromClause } => NodeTypeSymbol(fromClause.Expression, model),
-            { } n => model.GetTypeInfo(n).Type
-        };
+    private static bool IsQueryableSource(InvocationExpressionSyntax invocation, SemanticModel model) =>
+        invocation.Operands.Left is { } source
+        && model.GetTypeInfo(source).Type is { } sourceType
+        && sourceType.DerivesOrImplements(KnownType.System_Linq_IQueryable);
 
     private static void CheckExtensionMethodsOnIEnumerable(SonarSyntaxNodeReportingContext context)
     {
         var outerInvocation = (InvocationExpressionSyntax)context.Node;
-        if (context.Model.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol && outerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T)
+        if (context.Model.GetSymbolInfo(outerInvocation).Symbol is IMethodSymbol outerMethodSymbol
+            && (outerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) || outerMethodSymbol.IsExtensionOn(KnownType.System_Linq_IQueryable))
             && InnerInvocation(outerInvocation, outerMethodSymbol) is { } innerInvocation
             && context.Model.GetSymbolInfo(innerInvocation).Symbol is IMethodSymbol innerMethodSymbol
-            && innerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T))
+            && (innerMethodSymbol.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T) || innerMethodSymbol.IsExtensionOn(KnownType.System_Linq_IQueryable)))
         {
             if (IsSimplifiable(outerMethodSymbol, outerInvocation, innerMethodSymbol))
             {
@@ -298,7 +280,11 @@ public sealed class CollectionQuerySimplification : SonarDiagnosticAnalyzer
                                        IMethodSymbol innerMethodSymbol) =>
         MethodIsNotUsingPredicate(outerMethodSymbol, outerInvocation)
         && innerMethodSymbol.Name == WhereMethodName
-        && innerMethodSymbol.Parameters.Any(x => x.Type is INamedTypeSymbol { TypeArguments.Length: WherePredicateTypeArgumentNumber });
+        && (innerMethodSymbol.Parameters.Any(x =>
+            x.Type is INamedTypeSymbol { TypeArguments.Length: WherePredicateTypeArgumentNumber })
+            || innerMethodSymbol.Parameters.Any(x =>
+            x.Type is INamedTypeSymbol predicate // For IQueryables 'Where' is an Expression<Func<,>> with the inner predicate having two type arguments
+            && predicate.TypeArguments.OfType<INamedTypeSymbol>().Any(t => t.TypeArguments.Length == WherePredicateTypeArgumentNumber)));
 
     private static bool MethodIsNotUsingPredicate(IMethodSymbol methodSymbol, InvocationExpressionSyntax invocation) =>
         ReducedArguments(methodSymbol, invocation) is { Count: 0 } && MethodNamesWithPredicate.Contains(methodSymbol.Name);
