@@ -4,7 +4,7 @@
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "5min"
+    "constantCost": "1min"
   },
   "tags": [
     "async",
@@ -15,7 +15,7 @@
   "ruleSpecification": "RSPEC-8949",
   "sqKey": "S8949",
   "scope": "All",
-  "quickfix": "unknown",
+  "quickfix": "targeted",
   "code": {
     "impacts": {
       "RELIABILITY": "HIGH"

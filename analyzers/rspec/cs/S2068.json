@@ -15,7 +15,8 @@
   "quickfix": "infeasible",
   "tags": [
     "cwe",
-    "former-hotspot"
+    "former-hotspot",
+    "secret"
   ],
   "defaultSeverity": "Major",
   "ruleSpecification": "RSPEC-2068",

@@ -9,14 +9,19 @@ silently ignored.</p>
 </ul>
 <p>The rule detects any accessible token source:</p>
 <ul>
-  <li>A <code>CancellationToken</code> parameter at any position</li>
-  <li>A <code>CancellationToken</code> field or property</li>
-  <li>A <code>CancellationToken</code> obtained via a property of an accessible object, e.g. <code>_cts.Token</code>,
+  <li>a <code>CancellationToken</code> parameter at any position</li>
+  <li>a <code>CancellationToken</code> field or property</li>
+  <li>a <code>CancellationToken?</code> parameter, field, or property; forwarded as <code>.GetValueOrDefault()</code></li>
+  <li>an <code>AsyncLocal&lt;CancellationToken&gt;</code> or <code>ThreadLocal&lt;CancellationToken&gt;</code> parameter, field, or property;
+  forwarded as <code>.Value</code></li>
+  <li>a <code>CancellationToken</code> obtained via a property of an accessible object, e.g. <code>_cts.Token</code>,
   <code>HttpContext.RequestAborted</code></li>
 </ul>
 <h3>Exceptions</h3>
 <p>The rule does not flag calls where <code>CancellationToken.None</code> is explicitly passed as an argument. Pass
-<code>CancellationToken.None</code> to suppress the rule when cancellation must not apply, such as during disposal or post-cancellation cleanup:</p>
+<code>CancellationToken.None</code> to suppress the rule when cancellation must not apply, such as during disposal or post-cancellation cleanup.</p>
+<p>This follows the "point of no cancellation" pattern: once a method has started work it cannot safely revert, cancellation should no longer be
+honored, and any further token should be forwarded as <code>CancellationToken.None</code> instead of the original token:</p>
 <pre>
 public async ValueTask DisposeAsync()
 {
@@ -30,7 +35,7 @@ public async ValueTask DisposeAsync()
 <pre data-diff-id="1" data-diff-type="noncompliant">
 public async Task SaveAsync(string path, string content, CancellationToken token = default)
 {
-    await File.WriteAllTextAsync(path, content, Encoding.UTF8); // Noncompliant
+    await File.WriteAllTextAsync(path, content, Encoding.UTF8); // Noncompliant - pass 'token' to allow cancellation
 }
 </pre>
 <h4>Compliant solution</h4>
@@ -94,6 +99,27 @@ public async Task ProcessAsync(CancellationToken token = default)
     }
 }
 </pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+public void Acquire(CancellationToken? ct = null)
+{
+    if (ct.HasValue)
+        _semaphore.Wait(ct.Value);
+    else
+        _semaphore.Wait(); // Noncompliant - pass 'ct.GetValueOrDefault()' to allow cancellation
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="4" data-diff-type="compliant">
+private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+public void Acquire(CancellationToken? ct = null)
+{
+    _semaphore.Wait(ct.GetValueOrDefault());
+}
+</pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
@@ -101,5 +127,7 @@ public async Task ProcessAsync(CancellationToken token = default)
   CancellationToken parameter to methods that take one</a></li>
   <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads">Cancellation in managed
   threads</a></li>
+  <li>Microsoft Learn - <a href="https://devblogs.microsoft.com/premier-developer/recommended-patterns-for-cancellationtoken/">Recommended patterns
+  for CancellationToken</a></li>
 </ul>
 

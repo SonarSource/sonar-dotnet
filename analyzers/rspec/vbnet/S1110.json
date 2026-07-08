@@ -7,7 +7,6 @@
     "constantCost": "2 min"
   },
   "tags": [
-    "clippy",
     "redundant",
     "readability"
   ],
