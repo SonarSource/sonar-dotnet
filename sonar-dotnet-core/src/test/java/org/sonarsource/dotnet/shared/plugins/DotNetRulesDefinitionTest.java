@@ -43,7 +43,6 @@ public class DotNetRulesDefinitionTest {
   private static final String MINIMAL_RULE_KEY = "S100";
   private static final String SINGLE_PARAM_RULE_KEY = "S1113";
   private static final String MULTI_PARAM_RULE_KEY = "S1112";
-  private static final String SECURITY_HOTSPOT_RULE_KEY = "S4502";
   private static final String VULNERABILITY_RULE_KEY = "S2115";
   private static final PluginMetadata METADATA = mockMetadata();
   private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER,
@@ -144,28 +143,6 @@ public class DotNetRulesDefinitionTest {
     assertThat(rule.params()).hasSize(2);
     assertParam(rule.params().get(0), "random", RuleParamType.INTEGER, "4", "chosen by fair dice roll. guaranteed to be random.");
     assertParam(rule.params().get(1), "Tr0ub4dor&3", RuleParamType.STRING, "correct horse battery staple", "ELI5 entropy please!");
-  }
-
-  @Test
-  public void securityHotspot_isActivatedByDefault() {
-    RulesDefinition.Rule hardcodedCredentialsRule = ruleRepo.rule(SECURITY_HOTSPOT_RULE_KEY);
-    assertThat(hardcodedCredentialsRule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(hardcodedCredentialsRule.activatedByDefault()).isTrue();
-  }
-
-  @Test
-  public void securityHotspot_hasSecurityStandards() {
-    RulesDefinition.Rule rule = ruleRepo.rule(SECURITY_HOTSPOT_RULE_KEY);
-    assertThat(rule.type()).isEqualTo(RuleType.SECURITY_HOTSPOT);
-    assertThat(rule.securityStandards()).containsExactlyInAnyOrder(
-      "cwe:352",
-      "owaspTop10:a6",
-      "owaspTop10-2021:a1",
-      "pciDss-3.2:6.5.9",
-      "pciDss-4.0:6.2.4",
-      "owaspAsvs-4.0:13.2.3",
-      "owaspAsvs-4.0:4.2.2",
-      "stig-ASD_V5R3:V-222603");
   }
 
   @Test

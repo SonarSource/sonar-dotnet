@@ -17,27 +17,24 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public EncryptionAlgorithmsShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled) { }
+    protected override TrackerBase<SyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
+        x => x.Node.FirstAncestorOrSelf<InitializerExpressionSyntax>() is not null;
 
-        protected override TrackerBase<SyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
-            context => context.Node.FirstAncestorOrSelf<InitializerExpressionSyntax>() != null;
-
-        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument() =>
-            context =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
-                var values = argumentList.ArgumentValuesForParameter(context.Model, "padding");
-                return values.Length == 1
-                    && values[0] is ExpressionSyntax valueSyntax
-                    && context.Model.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
-                    && symbol.Name == "Pkcs1";
-            };
-    }
+    protected override TrackerBase<SyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument() =>
+        x =>
+        {
+            var argumentList = ((InvocationExpressionSyntax)x.Node).ArgumentList;
+            var values = argumentList.ArgumentValuesForParameter(x.Model, "padding");
+            return values.Length == 1
+                && values[0] is ExpressionSyntax valueSyntax
+                && x.Model.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
+                && symbol.Name == "Pkcs1";
+        };
 }

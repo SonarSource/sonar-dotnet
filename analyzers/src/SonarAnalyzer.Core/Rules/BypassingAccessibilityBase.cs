@@ -17,23 +17,26 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class BypassingAccessibilityBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class BypassingAccessibilityBase<TSyntaxKind> : TrackerHotspotDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
+    protected const string DiagnosticId = "S3011";
+
+    protected override string MessageFormat => "Make sure that this accessibility bypass is safe here.";
+
+    protected BypassingAccessibilityBase() : base(DiagnosticId) { }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        Initialize(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
+
+    private void Initialize(TrackerInput input)
     {
-        protected const string DiagnosticId = "S3011";
-        protected const string MessageFormat = "Make sure that this accessibility bypass is safe here.";
-
-        protected BypassingAccessibilityBase(IAnalyzerConfiguration configuration)
-            : base(configuration, DiagnosticId, MessageFormat) { }
-
-        protected override void Initialize(TrackerInput input)
-        {
-            var t = Language.Tracker.FieldAccess;
-            t.Track(input,
-                t.WhenRead(),
-                t.MatchField(new MemberDescriptor(KnownType.System_Reflection_BindingFlags, "NonPublic")));
-        }
+        var t = Language.Tracker.FieldAccess;
+        t.Track(
+            input,
+            t.WhenRead(),
+            t.MatchField(new MemberDescriptor(KnownType.System_Reflection_BindingFlags, "NonPublic")));
     }
 }

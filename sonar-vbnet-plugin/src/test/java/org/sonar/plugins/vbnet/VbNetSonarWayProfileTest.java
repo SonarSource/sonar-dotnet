@@ -56,7 +56,8 @@ class VbNetSonarWayProfileTest {
   }
 
   @Test
-  void hotspots_in_sonar_way() {
+  void formerHotspot_isInSonarWay() {
+    // S2068 was a Security Hotspot, now a Vulnerability, and must remain in Sonar way.
     assertThat(profile.rule(RuleKey.of(REPOSITORY_KEY, "S2068"))).isNotNull();
   }
 

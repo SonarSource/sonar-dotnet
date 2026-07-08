@@ -19,8 +19,7 @@ namespace SonarAnalyzer.Core.Common;
 
 public record RuleDescriptor(string Id, string Title, string Type, string DefaultSeverity, string Status, SourceScope Scope, bool SonarWay, string Description)
 {
-    public string Category =>
-        $"{DefaultSeverity} {ReadableType}";
+    public string Category => $"{DefaultSeverity} {ReadableType}";
 
     private string ReadableType =>
         Type switch
@@ -28,9 +27,6 @@ public record RuleDescriptor(string Id, string Title, string Type, string Defaul
             "BUG" => "Bug",
             "CODE_SMELL" => "Code Smell",
             "VULNERABILITY" => "Vulnerability",
-            "SECURITY_HOTSPOT" => "Security Hotspot",
             _ => throw new UnexpectedValueException(nameof(Type), Type)
         };
-
-    public bool IsHotspot => Type == "SECURITY_HOTSPOT";
 }

@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.AnalysisContext;
 using SonarAnalyzer.Core.Facade;
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Facade;
@@ -28,11 +29,12 @@ namespace SonarAnalyzer.Test.Trackers;
 [TestClass]
 public class MethodDeclarationTrackerTest
 {
-    private const string TestInputCS = @"
-public class Sample
-{
-    public void NoArgs() {}
-}";
+    private const string TestInputCS = """
+        public class Sample
+        {
+            public void NoArgs() {}
+        }
+        """;
 
     [TestMethod]
     public void MatchMethodName()
@@ -48,51 +50,52 @@ public class Sample
     [TestMethod]
     public void Track_VerifyMethodIdentifierLocations_CS()
     {
-        const string code = @"
-abstract record AbstractRecordHasMethodSymbol(string Y); //For Coverage
+        const string code = """
+            abstract record AbstractRecordHasMethodSymbol(string Y); //For Coverage
 
-public class Sample
-{
-    public Sample() {}
-//         ^^^^^^
-    public void Method()
-//              ^^^^^^
-    {
-        void LocalFunction() { } // Tracking of local functions is not supported
-    }
-    ~Sample() {}
-//   ^^^^^^
-    public int Property
-//             ^^^^^^^^
-//             ^^^^^^^^ @-1
-    {
-        get => 42;
-        set { }
-    }
-    public int InitProperty
-//             ^^^^^^^^^^^^
-//             ^^^^^^^^^^^^ @-1
-    {
-        get => 42;
-        init { }
-    }
-    public int this[int index]
-//             ^^^^
-//             ^^^^ @-1
-    {
-        get => 42;
-        set { }
-    }
-    public event System.EventHandler Event
-//                                   ^^^^^
-//                                   ^^^^^ @-1
-    {
-        add {}
-        remove {}
-    }
-    public static int operator +(Sample a, Sample b) => 42;
-//                             ^
-}";
+            public class Sample
+            {
+                public Sample() {}
+            //         ^^^^^^
+                public void Method()
+            //              ^^^^^^
+                {
+                    void LocalFunction() { } // Tracking of local functions is not supported
+                }
+                ~Sample() {}
+            //   ^^^^^^
+                public int Property
+            //             ^^^^^^^^
+            //             ^^^^^^^^ @-1
+                {
+                    get => 42;
+                    set { }
+                }
+                public int InitProperty
+            //             ^^^^^^^^^^^^
+            //             ^^^^^^^^^^^^ @-1
+                {
+                    get => 42;
+                    init { }
+                }
+                public int this[int index]
+            //             ^^^^
+            //             ^^^^ @-1
+                {
+                    get => 42;
+                    set { }
+                }
+                public event System.EventHandler Event
+            //                                   ^^^^^
+            //                                   ^^^^^ @-1
+                {
+                    add {}
+                    remove {}
+                }
+                public static int operator +(Sample a, Sample b) => 42;
+            //                             ^
+            }
+            """;
         new VerifierBuilder<TestRule_CS>().AddSnippet(code).WithOptions(LanguageOptions.FromCSharp9).Verify();
     }
 
@@ -101,63 +104,64 @@ public class Sample
     [TestMethod]
     public void Track_VerifyMethodIdentifierLocations_VB()
     {
-        const string code = @"
-Public Class Sample
+        const string code = """
+            Public Class Sample
 
-    Public Sub New()
-        '      ^^^
-    End Sub
+                Public Sub New()
+                    '      ^^^
+                End Sub
 
-    Public Sub Procedure()
-        '      ^^^^^^^^^
-    End Sub
+                Public Sub Procedure()
+                    '      ^^^^^^^^^
+                End Sub
 
-    Public Function SomeFunction() As Integer
-        '           ^^^^^^^^^^^^
-    End Function
+                Public Function SomeFunction() As Integer
+                    '           ^^^^^^^^^^^^
+                End Function
 
-    Protected Overrides Sub Finalize()
-        '                   ^^^^^^^^
-        MyBase.Finalize()
-    End Sub
+                Protected Overrides Sub Finalize()
+                    '                   ^^^^^^^^
+                    MyBase.Finalize()
+                End Sub
 
-    Public Property Prop As Integer
-        '           ^^^^
-        '           ^^^^ @-1
-        Get
-        End Get
-        Set(value As Integer)
-        End Set
-    End Property
+                Public Property Prop As Integer
+                    '           ^^^^
+                    '           ^^^^ @-1
+                    Get
+                    End Get
+                    Set(value As Integer)
+                    End Set
+                End Property
 
-    Default Public Property Indexer(x As Integer, y As Integer) As Integer
-        '                   ^^^^^^^
-        '                   ^^^^^^^ @-1
-        Get
-        End Get
-        Set(value As Integer)
-        End Set
-    End Property
+                Default Public Property Indexer(x As Integer, y As Integer) As Integer
+                    '                   ^^^^^^^
+                    '                   ^^^^^^^ @-1
+                    Get
+                    End Get
+                    Set(value As Integer)
+                    End Set
+                End Property
 
-    Public Custom Event Changed As EventHandler
-        '               ^^^^^^^
-        '               ^^^^^^^ @-1
-        '               ^^^^^^^ @-2
-        AddHandler(value As EventHandler)
-        End AddHandler
-        RemoveHandler(value As EventHandler)
-        End RemoveHandler
-        RaiseEvent(sender As Object, e As EventArgs)
-        End RaiseEvent
-    End Event
+                Public Custom Event Changed As EventHandler
+                    '               ^^^^^^^
+                    '               ^^^^^^^ @-1
+                    '               ^^^^^^^ @-2
+                    AddHandler(value As EventHandler)
+                    End AddHandler
+                    RemoveHandler(value As EventHandler)
+                    End RemoveHandler
+                    RaiseEvent(sender As Object, e As EventArgs)
+                    End RaiseEvent
+                End Event
 
-    Public Shared Operator +(A As Sample, B As Sample) As Integer
-        '                  ^
-    End Operator
+                Public Shared Operator +(A As Sample, B As Sample) As Integer
+                    '                  ^
+                End Operator
 
-    Declare Function ExternalMethod Lib ""foo.dll"" (lpBuffer As String) As Integer
+                Declare Function ExternalMethod Lib "foo.dll" (lpBuffer As String) As Integer
 
-End Class";
+            End Class
+            """;
         new VerifierBuilder<TestRule_VB>().AddSnippet(code).Verify();
     }
 
@@ -169,24 +173,26 @@ End Class";
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    private class TestRule_CS : TrackerHotspotDiagnosticAnalyzer<CS.SyntaxKind>
+    private class TestRule_CS : SonarDiagnosticAnalyzer<CS.SyntaxKind>
     {
+        protected override string MessageFormat => "Message";
         protected override ILanguageFacade<CS.SyntaxKind> Language => CSharpFacade.Instance;
 
-        public TestRule_CS() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
+        public TestRule_CS() : base("S104") { } // Any existing rule ID
 
-        protected override void Initialize(TrackerInput input) =>
-            Language.Tracker.MethodDeclaration.Track(input);
+        protected override void Initialize(SonarAnalysisContext context) =>
+            Language.Tracker.MethodDeclaration.Track(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
     }
 
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    private class TestRule_VB : TrackerHotspotDiagnosticAnalyzer<VB.SyntaxKind>
+    private class TestRule_VB : SonarDiagnosticAnalyzer<VB.SyntaxKind>
     {
+        protected override string MessageFormat => "Message";
         protected override ILanguageFacade<VB.SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public TestRule_VB() : base(AnalyzerConfiguration.AlwaysEnabled, "S104", "Message") { } // Any existing rule ID
+        public TestRule_VB() : base("S104") { } // Any existing rule ID
 
-        protected override void Initialize(TrackerInput input) =>
-            Language.Tracker.MethodDeclaration.Track(input);
+        protected override void Initialize(SonarAnalysisContext context) =>
+            Language.Tracker.MethodDeclaration.Track(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
     }
 }

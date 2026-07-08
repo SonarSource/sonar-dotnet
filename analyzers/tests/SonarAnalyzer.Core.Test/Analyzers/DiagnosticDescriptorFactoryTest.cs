@@ -122,7 +122,6 @@ public class DiagnosticDescriptorFactoryTest
     [DataRow("Major", "BUG", "Major Bug")]
     [DataRow("Major", "CODE_SMELL", "Major Code Smell")]
     [DataRow("Major", "VULNERABILITY", "Major Vulnerability")]
-    [DataRow("Major", "SECURITY_HOTSPOT", "Major Security Hotspot")]
     [DataRow("Critical", "BUG", "Critical Bug")]
     [DataRow("Blocker", "BUG", "Blocker Bug")]
     [DataRow("Whatever Xxx", "BUG", "Whatever Xxx Bug")]

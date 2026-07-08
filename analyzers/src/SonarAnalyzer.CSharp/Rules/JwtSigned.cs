@@ -18,19 +18,14 @@
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.CSharp.Core.Trackers;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class JwtSigned : JwtSignedBase<SyntaxKind, InvocationExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class JwtSigned : JwtSignedBase<SyntaxKind, InvocationExpressionSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        public JwtSigned() : base(AnalyzerConfiguration.AlwaysEnabled) { }
-
-        protected override BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
-            new CSharpBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
-                invocation =>
-                    invocation.ArgumentList?.Arguments.Count != 1
-                    || !invocation.ArgumentList.Arguments.Single().Expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.FalseLiteralExpression)));
-    }
+    protected override BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
+        new CSharpBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
+            x => x.ArgumentList?.Arguments.Count != 1 || !x.ArgumentList.Arguments.Single().Expression.WithoutEnclosingParentheses.IsKind(SyntaxKind.FalseLiteralExpression)));
 }

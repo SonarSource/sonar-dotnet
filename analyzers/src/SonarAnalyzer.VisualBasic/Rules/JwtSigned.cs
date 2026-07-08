@@ -18,19 +18,14 @@
 using SonarAnalyzer.Core.Trackers;
 using SonarAnalyzer.VisualBasic.Core.Trackers;
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class JwtSigned : JwtSignedBase<SyntaxKind, InvocationExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class JwtSigned : JwtSignedBase<SyntaxKind, InvocationExpressionSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public JwtSigned() : base(AnalyzerConfiguration.AlwaysEnabled) { }
-
-        protected override BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
-            new VisualBasicBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
-                invocation =>
-                    invocation.ArgumentList?.Arguments.Count != 1
-                    || !invocation.ArgumentList.Arguments.Single().GetExpression().RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
-    }
+    protected override BuilderPatternCondition<SyntaxKind, InvocationExpressionSyntax> CreateBuilderPatternCondition() =>
+        new VisualBasicBuilderPatternCondition(JwtBuilderConstructorIsSafe, JwtBuilderDescriptors(
+            x => x.ArgumentList?.Arguments.Count != 1 || !x.ArgumentList.Arguments.Single().GetExpression().RemoveParentheses().IsKind(SyntaxKind.FalseLiteralExpression)));
 }

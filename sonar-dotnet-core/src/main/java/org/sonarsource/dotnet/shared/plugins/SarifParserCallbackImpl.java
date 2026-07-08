@@ -331,7 +331,6 @@ public class SarifParserCallbackImpl implements SarifParserCallback {
       case CODE_SMELL -> SoftwareQuality.MAINTAINABILITY;
       case BUG -> SoftwareQuality.RELIABILITY;
       case VULNERABILITY -> SoftwareQuality.SECURITY;
-      case SECURITY_HOTSPOT -> throw new IllegalStateException("Can not map Security Hotspot to Software Quality");
       default -> throw new IllegalStateException("Unknown rule type");
     };
   }

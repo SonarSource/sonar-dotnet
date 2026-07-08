@@ -20,19 +20,19 @@ using SonarAnalyzer.Core.Trackers;
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class InsecureContentSecurityPolicy : TrackerHotspotDiagnosticAnalyzer<SyntaxKind>
+public sealed class InsecureContentSecurityPolicy : SonarDiagnosticAnalyzer<SyntaxKind>
 {
     private const string DiagnosticId = "S7039";
-    private const string MessageFormat = "Content Security Policies should be restrictive to mitigate the risk of content injection attacks.";
+
+    protected override string MessageFormat => "Content Security Policies should be restrictive to mitigate the risk of content injection attacks.";
 
     protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-    public InsecureContentSecurityPolicy() : base(AnalyzerConfiguration.AlwaysEnabled, DiagnosticId, MessageFormat) { }
+    public InsecureContentSecurityPolicy() : base(DiagnosticId) { }
 
-    public InsecureContentSecurityPolicy(IAnalyzerConfiguration configuration) : base(configuration, DiagnosticId, MessageFormat) { }
-
-    protected override void Initialize(TrackerInput input)
+    protected override void Initialize(SonarAnalysisContext context)
     {
+        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule);
         var propertyTracker = Language.Tracker.PropertyAccess;
         propertyTracker.Track(
             input,

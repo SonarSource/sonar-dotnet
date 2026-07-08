@@ -52,7 +52,6 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
-import static org.junit.Assert.assertThrows;
 
 public class SarifParserCallbackImplTest {
   @Rule
@@ -553,7 +552,6 @@ public class SarifParserCallbackImplTest {
     assertThat(SarifParserCallbackImpl.mapSoftwareQuality(RuleType.CODE_SMELL)).isEqualTo(SoftwareQuality.MAINTAINABILITY);
     assertThat(SarifParserCallbackImpl.mapSoftwareQuality(RuleType.BUG)).isEqualTo(SoftwareQuality.RELIABILITY);
     assertThat(SarifParserCallbackImpl.mapSoftwareQuality(RuleType.VULNERABILITY)).isEqualTo(SoftwareQuality.SECURITY);
-    assertThrows(IllegalStateException.class, () -> SarifParserCallbackImpl.mapSoftwareQuality(RuleType.SECURITY_HOTSPOT));
   }
 
   private void assertIssueReportedOnLine(String fileName) {

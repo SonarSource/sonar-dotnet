@@ -41,7 +41,8 @@ public static class DiagnosticDescriptorFactory
     public static readonly string CompilationEnd = nameof(CompilationEnd);
 
     public static DiagnosticDescriptor CreateUtility(string diagnosticId, string title) =>
-        new(diagnosticId,
+        new(
+            diagnosticId,
             title,
             string.Empty,
             string.Empty,
@@ -50,12 +51,13 @@ public static class DiagnosticDescriptorFactory
             customTags: BuildUtilityTags());
 
     public static DiagnosticDescriptor Create(AnalyzerLanguage language, RuleDescriptor rule, string messageFormat, bool? isEnabledByDefault, bool fadeOutCode, bool isCompilationEnd) =>
-        new(rule.Id,
+        new(
+            rule.Id,
             rule.Title,
             messageFormat,
             rule.Category,
             fadeOutCode ? DiagnosticSeverity.Info : DiagnosticSeverity.Warning,
-            rule.IsHotspot || (isEnabledByDefault ?? rule.SonarWay),
+            isEnabledByDefault ?? rule.SonarWay,
             rule.Description,
             null,
             BuildTags(language, rule, fadeOutCode, isCompilationEnd));
@@ -81,14 +83,14 @@ public static class DiagnosticDescriptorFactory
     private static IEnumerable<string> ToTags(this SourceScope sourceScope) =>
         sourceScope switch
         {
-            SourceScope.Main => new[] { MainSourceScopeTag },
-            SourceScope.Tests => new[] { TestSourceScopeTag },
+            SourceScope.Main => [MainSourceScopeTag],
+            SourceScope.Tests => [TestSourceScopeTag],
             SourceScope.All => new[] { MainSourceScopeTag, TestSourceScopeTag },
             _ => throw new NotSupportedException($"{sourceScope} is not supported 'SourceScope' value."),
         };
 
     private static string[] BuildUtilityTags() =>
-        SourceScope.All.ToTags().Concat(new[] { UtilityTag })
+        SourceScope.All.ToTags().Concat([UtilityTag])
 #if !DEBUG
             // Allow to configure the analyzers in debug mode only. This allows to run test selectively (for example to test only one rule)
             .Union(new[] { WellKnownDiagnosticTags.NotConfigurable })

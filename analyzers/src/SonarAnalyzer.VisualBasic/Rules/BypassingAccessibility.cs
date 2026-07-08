@@ -15,13 +15,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
-{
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class BypassingAccessibility : BypassingAccessibilityBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+namespace SonarAnalyzer.VisualBasic.Rules;
 
-        public BypassingAccessibility() : base(AnalyzerConfiguration.AlwaysEnabled) { }
-    }
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class BypassingAccessibility : BypassingAccessibilityBase<SyntaxKind>
+{
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 }

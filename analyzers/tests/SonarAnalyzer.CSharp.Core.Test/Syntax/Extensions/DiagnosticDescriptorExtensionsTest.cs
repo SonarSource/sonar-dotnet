@@ -20,23 +20,6 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class DiagnosticDescriptorExtensionsTest
 {
-    [TestMethod]
-    public void IsSecurityHotspot_NonexistentId()
-    {
-        var descriptor = new DiagnosticDescriptor("Sxxxx", "title", "message", "category", DiagnosticSeverity.Warning, true);
-        descriptor.IsSecurityHotspot().Should().BeFalse();
-    }
-
-    [TestMethod]
-    [DataRow("S101")] // Both C# and VB rules
-    [DataRow("S100")] // C# rule
-    [DataRow("S117")] // VB rule
-    public void IsSecurityHotspot_NotHotspot(string ruleId)
-    {
-        var descriptor = new DiagnosticDescriptor(ruleId, "title", "message", "category", DiagnosticSeverity.Warning, true);
-        descriptor.IsSecurityHotspot().Should().BeFalse();
-    }
-
     // Repro: https://sonarsource.atlassian.net/browse/NET-3543
     [TestMethod]
     public void IsEnabled_NullSyntaxTreeOptionsProvider_DoesNotThrow()

@@ -17,27 +17,24 @@
 
 using SonarAnalyzer.Core.Trackers;
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsShouldBeSecureBase<SyntaxKind>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        public EncryptionAlgorithmsShouldBeSecure() : base(AnalyzerConfiguration.AlwaysEnabled) { }
+    protected override TrackerBase<SyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
+        x => x.Node.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() is not null;
 
-        protected override TrackerBase<SyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer() =>
-            context => context.Node.FirstAncestorOrSelf<ObjectMemberInitializerSyntax>() != null;
-
-        protected override TrackerBase<SyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument() =>
-            (context) =>
-            {
-                var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
-                var values = argumentList.ArgumentValuesForParameter(context.Model, "padding");
-                return values.Length == 1
-                    && values[0] is ExpressionSyntax valueSyntax
-                    && context.Model.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
-                    && symbol.Name == "Pkcs1";
-            };
-    }
+    protected override TrackerBase<SyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument() =>
+        (context) =>
+        {
+            var argumentList = ((InvocationExpressionSyntax)context.Node).ArgumentList;
+            var values = argumentList.ArgumentValuesForParameter(context.Model, "padding");
+            return values.Length == 1
+                && values[0] is ExpressionSyntax valueSyntax
+                && context.Model.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
+                && symbol.Name == "Pkcs1";
+        };
 }
