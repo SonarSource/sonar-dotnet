@@ -55,7 +55,7 @@ public static class IssueReporter
         _ = rule ?? throw new ArgumentNullException(nameof(rule));
         secondaryLocations ??= [];
         properties ??= ImmutableDictionary<string, string>.Empty;
-        secondaryLocations = secondaryLocations.Where(x => x?.Location.IsValid(compilation) == true).ToArray();
+        secondaryLocations = secondaryLocations.Where(x => x.Location.IsValid(compilation)).ToArray();
         properties = properties.AddRange(secondaryLocations.Select((x, index) => new KeyValuePair<string, string>(index.ToString(), x.Message)));
         var diagnostic = Diagnostic.Create(rule, primaryLocation, secondaryLocations.Select(x => x.Location), properties, messageArgs);
         ReportIssueCore(hasMatchingScope, createReportingContext, diagnostic);

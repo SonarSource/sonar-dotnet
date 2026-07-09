@@ -625,7 +625,6 @@ public sealed partial class KnownType
     public static readonly KnownType System_Text_RegularExpressions_Regex = new("System.Text.RegularExpressions.Regex");
     public static readonly KnownType System_Text_RegularExpressions_RegexOptions = new("System.Text.RegularExpressions.RegexOptions");
     public static readonly KnownType System_Text_StringBuilder = new("System.Text.StringBuilder");
-    public static readonly KnownType System_Threading_AsyncLocal_T = new("System.Threading.AsyncLocal", "T");
     public static readonly KnownType System_Threading_CancellationToken = new("System.Threading.CancellationToken");
     public static readonly KnownType System_Threading_CancellationTokenSource = new("System.Threading.CancellationTokenSource");
     public static readonly KnownType System_Threading_Lock = new("System.Threading.Lock");
@@ -643,7 +642,6 @@ public sealed partial class KnownType
     public static readonly KnownType System_Threading_Tasks_ValueTask = new("System.Threading.Tasks.ValueTask");
     public static readonly KnownType System_Threading_Tasks_ValueTask_TResult = new("System.Threading.Tasks.ValueTask", "TResult");
     public static readonly KnownType System_Threading_Thread = new("System.Threading.Thread");
-    public static readonly KnownType System_Threading_ThreadLocal_T = new("System.Threading.ThreadLocal", "T");
     public static readonly KnownType System_Threading_WaitHandle = new("System.Threading.WaitHandle");
     public static readonly KnownType System_ThreadStaticAttribute = new("System.ThreadStaticAttribute");
     public static readonly KnownType System_TimeOnly = new("System.TimeOnly");

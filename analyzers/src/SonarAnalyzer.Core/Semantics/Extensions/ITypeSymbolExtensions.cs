@@ -113,22 +113,6 @@ public static class ITypeSymbolExtensions
     public static bool IsNullableBoolean(this ITypeSymbol type) =>
         type.IsNullableOf(KnownType.System_Boolean);
 
-    /// <summary>
-    /// Returns the underlying value type <c>T</c> of <see cref="Nullable{T}"/>, or <see langword="null"/> if
-    /// <paramref name="type"/> is not a nullable value type. Does not affect nullable reference types (NRT annotations).
-    /// </summary>
-    public static ITypeSymbol NullableUnderlyingType(this ITypeSymbol type) =>
-        type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T, TypeArguments.Length: 1 } nullable
-            ? nullable.TypeArguments[0]
-            : null;
-
-    /// <summary>
-    /// Returns the underlying value type <c>T</c> of <see cref="Nullable{T}"/>, or <paramref name="type"/> unchanged
-    /// if it is not a nullable value type. Does not affect nullable reference types (NRT annotations).
-    /// </summary>
-    public static ITypeSymbol NullableUnderlyingTypeOrSelf(this ITypeSymbol type) =>
-        NullableUnderlyingType(type) ?? type;
-
     public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
         typeSymbol is not null
         && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.Is(type));
