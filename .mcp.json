@@ -1,17 +1,13 @@
 {
   "mcpServers": {
     "sonarqube": {
-      "command": "bash",
+      "command": "sonar",
       "args": [
-        "-c",
-        "docker run --init -i --rm --pull=always -e SONARQUBE_URL -e SONARQUBE_TOKEN -e SONARQUBE_ORG -e SONARQUBE_PROJECT_KEY -e SONARQUBE_TOOLSETS -v \"$(git rev-parse --show-toplevel):/app/mcp-workspace:ro\" mcp/sonarqube"
-      ],
-      "env": {
-        "SONARQUBE_URL": "https://sonarcloud.io",
-        "SONARQUBE_ORG": "sonarsource",
-        "SONARQUBE_PROJECT_KEY": "SonarSource_sonar-dotnet-enterprise",
-        "SONARQUBE_TOOLSETS": "cag,analysis,coverage,dependency-risks,duplications,issues,languages,measures,quality-gates,rules,security-hotspots,sources"
-      }
+        "run",
+        "mcp",
+        "--project",
+        "com.sonarsource.dotnet:sonar-dotnet-enterprise"
+      ]
     }
   }
 }
