@@ -25,4 +25,8 @@ public class UseDifferentMemberTest
     [TestMethod]
     public void UseIsExtension() =>
         builder.AddPaths("UseDifferentMember.cs").Verify();
+
+    [TestMethod]
+    public void UseParameterList() =>
+        builder.AddPaths("UseDifferentMember.ParameterList.cs").Verify();
 }

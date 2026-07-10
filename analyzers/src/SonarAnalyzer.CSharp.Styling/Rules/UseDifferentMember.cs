@@ -32,6 +32,23 @@ public class UseDifferentMember : StylingAnalyzer
                 {
                     c.ReportIssue(Rule, c.Node, "IsExtension", nameof(IMethodSymbol.IsExtensionMethod), " It also covers extension methods defined in extension blocks.");
                 }
+                else if (identifier.Identifier.Text is nameof(TypeDeclarationSyntaxExtensions.ParameterList)
+                    && c.Model.GetSymbolInfo(identifier) is { Symbol: IPropertySymbol { ContainingType: { } extensionBlock } }
+                    && extensionBlock.IsExtensionBlock()
+                    && IsTypeDeclarationSyntaxShimExtensions(extensionBlock.ContainingType))
+                {
+                    c.ReportIssue(
+                        Rule,
+                        c.Node,
+                        $"{nameof(TypeDeclarationSyntaxExtensions.ParameterList)}()",
+                        identifier.Identifier.Text,
+                        " It resolves the parameter list correctly across all supported Roslyn versions.");
+                }
             },
             SyntaxKind.IdentifierName);
+
+    // Properties declared inside an "extension(TypeDeclarationSyntax @this) { ... }" block have ContainingType set to a
+    // compiler-synthesized extension marker type; ContainingType.ContainingType is the class that declares the block.
+    private static bool IsTypeDeclarationSyntaxShimExtensions(INamedTypeSymbol type) =>
+        type is { Name: "TypeDeclarationSyntaxShimExtensions", ContainingNamespace: { Name: nameof(ShimLayer), ContainingNamespace.Name: nameof(SonarAnalyzer) } };
 }
