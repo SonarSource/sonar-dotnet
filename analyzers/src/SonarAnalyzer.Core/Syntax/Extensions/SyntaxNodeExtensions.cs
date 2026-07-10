@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Linq.Expressions;
 using Microsoft.CodeAnalysis.Text;
 
 namespace SonarAnalyzer.Core.Syntax.Extensions;
@@ -62,7 +63,7 @@ public static class SyntaxNodeExtensions
     }
 
     public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum =>
-        node is null ? default : (TSyntaxKind)Enum.ToObject(typeof(TSyntaxKind), node.RawKind);
+        node is null ? default : EnumConverter<TSyntaxKind>.FromInt32(node.RawKind);
 
     public static SecondaryLocation ToSecondaryLocation(this SyntaxNode node, string message = null, params string[] messageArgs) =>
         message is not null && messageArgs?.Length > 0
@@ -80,4 +81,20 @@ public static class SyntaxNodeExtensions
 
     public static Location CreateLocation(this SyntaxNode from, SyntaxToken to) =>
         Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+
+    // Converts a SyntaxNode.RawKind (int) to the strongly-typed C#/VB SyntaxKind enum without boxing.
+    // Enum.ToObject(...) boxes the result on every call; here a direct int -> TSyntaxKind conversion is
+    // compiled once per enum type. System.Runtime.CompilerServices.Unsafe is not part of the netstandard2.0 /
+    // Roslyn 1.3 surface we must support, so a compiled expression is used instead.
+    private static class EnumConverter<TSyntaxKind>
+        where TSyntaxKind : struct, Enum
+    {
+        public static readonly Func<int, TSyntaxKind> FromInt32 = Build();
+
+        private static Func<int, TSyntaxKind> Build()
+        {
+            var rawKind = Expression.Parameter(typeof(int), "rawKind");
+            return Expression.Lambda<Func<int, TSyntaxKind>>(Expression.Convert(rawKind, typeof(TSyntaxKind)), rawKind).Compile();
+        }
+    }
 }
