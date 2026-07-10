@@ -232,19 +232,29 @@ public class AbstractClassWrong
 
 public static class ExtensionBlockCompliant
 {
+    public static int Property => 42;
+
     extension(string s)
     {
         public int Property => 0;
 
         public void Method() { }
     }
+
+    public static void Method() { }
 }
 
 public static class ExtensionBlockWrong
 {
-    extension(string s)
+    public static void Method() { }     // Secondary    [ExtBlock]
+
+                                        // Secondary@+1 [ExtBlockProperty]
+    extension(string s)                 // Noncompliant [ExtBlock] {{Move Extension Blocks after Properties, before Methods.}}
+//  ^^^^^^^^^
     {
-        public void Method() { }       // Secondary    [ExtBlock]
-        public int Property => 0;      // Noncompliant [ExtBlock] {{Move Properties before Methods.}}
+        public void Method() { }        // Secondary    [ExtBlockMethod]
+        public int Property => 0;       // Noncompliant [ExtBlockMethod] {{Move Properties before Methods.}}
     }
+
+    public static int Property => 42;   // Noncompliant [ExtBlockProperty] {{Move Properties before Extension Blocks.}}
 }

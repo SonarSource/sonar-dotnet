@@ -22,6 +22,7 @@ Ordering of class members should be the following:
 1. Abstract members
 1. Properties
 1. Constructors
+1. Extension blocks
 1. Methods 
 1. Nested types
 

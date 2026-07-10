@@ -38,10 +38,11 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
             {SyntaxKind.IndexerDeclaration, new(23, "Indexers") },
             {SyntaxKind.ConstructorDeclaration, new(24, "Constructors") },
             {SyntaxKind.DestructorDeclaration, new(25, "Destructor") },
+            {SyntaxKind.ExtensionBlockDeclaration, new(26, "Extension Blocks") },
             {SyntaxKind.MethodDeclaration, new(30, "Methods") },
             {SyntaxKind.ConversionOperatorDeclaration, new(31, "Operators") },
             {SyntaxKind.OperatorDeclaration, new(31, "Operators") },
-            // Order 40: Abstract types are handled separtely in the code
+            // Order 40: Abstract types are handled separately in the code
             {SyntaxKind.ClassDeclaration, new(40, NestedTypes) },
             {SyntaxKind.InterfaceDeclaration, new(40, NestedTypes) },
             {SyntaxKind.RecordDeclaration, new(40, NestedTypes) },
@@ -114,6 +115,7 @@ public sealed class TypeMemberOrdering : StylingAnalyzer
         {
             EventFieldDeclarationSyntax eventField => eventField.Declaration.GetLocation(),
             FieldDeclarationSyntax field => field.Declaration.GetLocation(),
+            ExtensionBlockDeclarationSyntax extensionBlock => extensionBlock.Keyword.GetLocation(),
             _ => node.GetIdentifier()?.GetLocation()
         };
 
