@@ -94,8 +94,9 @@ public class HighlightImporter extends ProtobufImporter<SonarAnalyzer.TokenTypeI
             : r1.start().line() < r2.start().line() || (r1.start().line() == r2.start().line() && r1.start().lineOffset() < r2.start().lineOffset())
             ? -1 : 1)
         .collect(StringBuilder::new, (sb, r) -> sb.append(r).append(" "), StringBuilder::append);
-      var message = String.format("The highlighting in the file %s failed with error %s. The highlight ranges found are %s", filename, ex, rangesText);
-      throw new IllegalStateException(message, ex);
+      var messageTemplate = "The highlighting in the file %s failed with error %s. The highlight ranges found are %s%n" +
+        "Please ensure that the current file content is identical to, or has the same line lengths as, the content during the build.";
+      throw new IllegalStateException(String.format(messageTemplate, filename, ex, rangesText), ex);
     }
   }
 

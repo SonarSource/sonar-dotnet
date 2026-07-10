@@ -118,7 +118,9 @@ public class HighlightImporterTest {
         "Range[from [line=1, lineOffset=5] to [line=1, lineOffset=10]] as it overlaps at least one existing rule. The highlight ranges found are " +
         "Range[from [line=1, lineOffset=1] to [line=1, lineOffset=8]] " +
         "Range[from [line=1, lineOffset=5] to [line=1, lineOffset=10]] " +
-        "Range[from [line=2, lineOffset=2] to [line=2, lineOffset=11]] ");
+        "Range[from [line=2, lineOffset=2] to [line=2, lineOffset=11]] " +
+        System.lineSeparator() +
+        "Please ensure that the current file content is identical to, or has the same line lengths as, the content during the build.");
     assertThat(logs.logs(Level.ERROR)).isEmpty();
   }
 
