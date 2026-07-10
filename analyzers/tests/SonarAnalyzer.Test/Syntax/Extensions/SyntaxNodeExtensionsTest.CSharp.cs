@@ -35,7 +35,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEmpty();
@@ -75,7 +75,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().ContainSingle();
@@ -115,7 +115,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().HaveCount(3);
@@ -154,7 +154,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK2", "BLOCK3");
@@ -187,7 +187,7 @@ public class SyntaxNodeExtensionsTest
             #endif
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK2");
@@ -209,7 +209,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEmpty();
@@ -233,7 +233,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEmpty();
@@ -258,7 +258,7 @@ public class SyntaxNodeExtensionsTest
             #endif
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK1");
@@ -283,7 +283,7 @@ public class SyntaxNodeExtensionsTest
             #endif
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEmpty();
@@ -311,7 +311,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK1");
@@ -338,7 +338,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK2");
@@ -364,7 +364,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK1");
@@ -389,7 +389,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK2");
@@ -430,7 +430,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK3", "BLOCK4");
@@ -460,7 +460,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
         var node = GetMainNode(source);
-        var activeSections = node.ActiveConditionalCompilationSections();
+        var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK2");

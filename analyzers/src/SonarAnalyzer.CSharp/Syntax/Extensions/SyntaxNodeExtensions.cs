@@ -21,8 +21,7 @@ internal static class SyntaxNodeExtensions
 {
     extension(SyntaxNode node)
     {
-        public bool IsInDebugBlock() =>
-            node.ActiveConditionalCompilationSections().Contains("DEBUG");
+        public bool IsInDebugBlock => node.ActiveConditionalCompilationSections.Contains("DEBUG");
 
         public bool IsInConditionalDebug(SemanticModel model)
         {
@@ -41,39 +40,42 @@ internal static class SyntaxNodeExtensions
         /// We don't handle logical operators e.g. #if !DEBUG, and we don't handle cases like
         /// #if !DEBUG ... #else... :DEBUG must be true in the else case.
         /// </remarks>
-        public IEnumerable<string> ActiveConditionalCompilationSections()
+        public IReadOnlyCollection<string> ActiveConditionalCompilationSections
         {
-            var directives = CollectPrecedingDirectiveSyntax(node);
-            if (directives.Count == 0)
+            get
             {
-                return [];
-            }
-
-            var activeDirectives = new Stack<BranchingDirectiveTriviaSyntax>();
-            foreach (var directive in directives)
-            {
-                switch (directive.RawKind)
+                var directives = CollectPrecedingDirectiveSyntax(node);
+                if (directives.Count == 0)
                 {
-                    case (int)SyntaxKind.IfDirectiveTrivia:
-                        activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
-                        break;
-                    case (int)SyntaxKind.ElseDirectiveTrivia:
-                    case (int)SyntaxKind.ElifDirectiveTrivia:
-                        // If we hit an if or elif then that effective acts as an "end" for the previous if/elif block -> pop it
-                        SafePop(activeDirectives);
-                        activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
-                        break;
-                    case (int)SyntaxKind.EndIfDirectiveTrivia:
-                        SafePop(activeDirectives);
-                        break;
-                    default:
-                        Debug.Fail($"Unexpected token type: {directive.Kind()}");
-                        break;
+                    return [];
                 }
+
+                var activeDirectives = new Stack<BranchingDirectiveTriviaSyntax>();
+                foreach (var directive in directives)
+                {
+                    switch (directive.RawKind)
+                    {
+                        case (int)SyntaxKind.IfDirectiveTrivia:
+                            activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
+                            break;
+                        case (int)SyntaxKind.ElseDirectiveTrivia:
+                        case (int)SyntaxKind.ElifDirectiveTrivia:
+                            // If we hit an if or elif then that effective acts as an "end" for the previous if/elif block -> pop it
+                            SafePop(activeDirectives);
+                            activeDirectives.Push((BranchingDirectiveTriviaSyntax)directive);
+                            break;
+                        case (int)SyntaxKind.EndIfDirectiveTrivia:
+                            SafePop(activeDirectives);
+                            break;
+                        default:
+                            Debug.Fail($"Unexpected token type: {directive.Kind()}");
+                            break;
+                    }
+                }
+                Debug.Assert(activeDirectives.All(x => x.IsActive), "Not all of the collected directives were active");
+                Debug.Assert(activeDirectives.All(x => x.BranchTaken), "Not all of the collected directives were for the branch that was taken");
+                return activeDirectives.Select(FindDirectiveName).WhereNotNull().ToHashSet();
             }
-            Debug.Assert(activeDirectives.All(x => x.IsActive), "Not all of the collected directives were active");
-            Debug.Assert(activeDirectives.All(x => x.BranchTaken), "Not all of the collected directives were for the branch that was taken");
-            return activeDirectives.Select(FindDirectiveName).WhereNotNull().ToHashSet();
         }
     }
 
