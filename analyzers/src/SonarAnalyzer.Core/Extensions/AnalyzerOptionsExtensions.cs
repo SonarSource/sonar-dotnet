@@ -31,39 +31,66 @@ public static class AnalyzerOptionsExtensions
     private static readonly SourceTextValueProvider<SonarLintXmlReader> SonarLintXmlProvider = new(x => new SonarLintXmlReader(x));
     private static readonly SourceTextValueProvider<ImmutableHashSet<string>> CustomDictionaryAcronymsProvider = new(ParseCustomDictionaryAcronyms);
 
-    public static SonarLintXmlReader SonarLintXml(this AnalyzerOptions options, SonarAnalysisContext context)
+    extension(AnalyzerOptions options)
     {
-        if (options.SonarLintXml() is { } sonarLintXml)
+        public SonarLintXmlReader SonarLintXml(SonarAnalysisContext context)
         {
-            return sonarLintXml.GetText() is { } sourceText
-                && context.TryGetValue(sourceText, SonarLintXmlProvider, out var sonarLintXmlReader)
-                ? sonarLintXmlReader
-                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+            if (options.SonarLintXml() is { } sonarLintXml)
+            {
+                return sonarLintXml.GetText() is { } sourceText
+                    && context.TryGetValue(sourceText, SonarLintXmlProvider, out var sonarLintXmlReader)
+                    ? sonarLintXmlReader
+                    : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+            }
+            else
+            {
+                return SonarLintXmlReader.Empty;
+            }
         }
-        else
+
+        public AdditionalText SonarLintXml() =>
+            options.AdditionalFile("SonarLint.xml");
+
+        public AdditionalText SonarProjectConfig() =>
+            options.AdditionalFile("SonarProjectConfig.xml");
+
+        public AdditionalText ProjectOutFolderPath() =>
+            options.AdditionalFile("ProjectOutFolderPath.txt");
+
+        public AdditionalText CustomDictionary() =>
+            options.AdditionalFile("CustomDictionary.xml");
+
+        // See https://learn.microsoft.com/en-us/visualstudio/code-quality/how-to-customize-the-code-analysis-dictionary for the expected XML format.
+        public ImmutableHashSet<string> CustomDictionaryAcronyms(SonarCompilationStartAnalysisContext context) =>
+            options.CustomDictionary()?.GetText() is { } text
+            && context.TryGetValue(text, CustomDictionaryAcronymsProvider, out var acronyms)
+                ? acronyms
+                : ImmutableHashSet<string>.Empty;
+
+        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7440", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+        private AdditionalText AdditionalFile(string fileName)
         {
-            return SonarLintXmlReader.Empty;
+            // HotPath: This code path needs to be allocation free. Don't use Linq.
+            foreach (var additionalText in options.AdditionalFiles) // Uses the struct enumerator of ImmutableArray
+            {
+                // Don't use Path.GetFilename. It allocates a string.
+                if (additionalText.Path is { } path
+                    && path.EndsWith(fileName, StringComparison.OrdinalIgnoreCase))
+                {
+                    // The character before the filename (if there is a character) must be a directory separator
+                    var separatorPosition = path.Length - fileName.Length - 1;
+                    if (separatorPosition < 0 || IsDirectorySeparator(path[separatorPosition]))
+                    {
+                        return additionalText;
+                    }
+                }
+            }
+            return null;
+
+            static bool IsDirectorySeparator(char c) =>
+                c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
         }
     }
-
-    public static AdditionalText SonarLintXml(this AnalyzerOptions options) =>
-        options.AdditionalFile("SonarLint.xml");
-
-    public static AdditionalText SonarProjectConfig(this AnalyzerOptions options) =>
-        options.AdditionalFile("SonarProjectConfig.xml");
-
-    public static AdditionalText ProjectOutFolderPath(this AnalyzerOptions options) =>
-        options.AdditionalFile("ProjectOutFolderPath.txt");
-
-    public static AdditionalText CustomDictionary(this AnalyzerOptions options) =>
-        options.AdditionalFile("CustomDictionary.xml");
-
-    // See https://learn.microsoft.com/en-us/visualstudio/code-quality/how-to-customize-the-code-analysis-dictionary for the expected XML format.
-    public static ImmutableHashSet<string> CustomDictionaryAcronyms(this AnalyzerOptions options, SonarCompilationStartAnalysisContext context) =>
-        options.CustomDictionary()?.GetText() is { } text
-        && context.TryGetValue(text, CustomDictionaryAcronymsProvider, out var acronyms)
-            ? acronyms
-            : ImmutableHashSet<string>.Empty;
 
     internal static ImmutableHashSet<string> ParseCustomDictionaryAcronyms(SourceText text)
     {
@@ -81,29 +108,5 @@ public static class AnalyzerOptionsExtensions
         {
             return ImmutableHashSet<string>.Empty;
         }
-    }
-
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7440", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    private static AdditionalText AdditionalFile(this AnalyzerOptions options, string fileName)
-    {
-        // HotPath: This code path needs to be allocation free. Don't use Linq.
-        foreach (var additionalText in options.AdditionalFiles) // Uses the struct enumerator of ImmutableArray
-        {
-            // Don't use Path.GetFilename. It allocates a string.
-            if (additionalText.Path is { } path
-                && path.EndsWith(fileName, StringComparison.OrdinalIgnoreCase))
-            {
-                // The character before the filename (if there is a character) must be a directory separator
-                var separatorPosition = path.Length - fileName.Length - 1;
-                if (separatorPosition < 0 || IsDirectorySeparator(path[separatorPosition]))
-                {
-                    return additionalText;
-                }
-            }
-        }
-        return null;
-
-        static bool IsDirectorySeparator(char c) =>
-            c == Path.DirectorySeparatorChar || c == Path.AltDirectorySeparatorChar;
     }
 }

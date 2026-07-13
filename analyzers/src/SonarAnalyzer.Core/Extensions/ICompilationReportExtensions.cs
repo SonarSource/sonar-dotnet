@@ -20,21 +20,24 @@ namespace SonarAnalyzer.Core.AnalysisContext;
 // Don't change the this parameter to (this IAnalysisContext context) because it would cause boxing
 public static class ICompilationReportExtensions
 {
-    public static void ReportIssue<T>(this T context, GeneratedCodeRecognizer generatedCodeRecognizer,
-                            DiagnosticDescriptor rule,
-                            SyntaxNode locationSyntax,
-                            params string[] messageArgs) where T : ICompilationReport =>
-        context.ReportIssue(generatedCodeRecognizer, rule, locationSyntax.GetLocation(), messageArgs);
+    extension<T>(T context) where T : ICompilationReport
+    {
+        public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
+                                DiagnosticDescriptor rule,
+                                SyntaxNode locationSyntax,
+                                params string[] messageArgs) =>
+            context.ReportIssue(generatedCodeRecognizer, rule, locationSyntax.GetLocation(), messageArgs);
 
-    public static void ReportIssue<T>(this T context, GeneratedCodeRecognizer generatedCodeRecognizer,
-                            DiagnosticDescriptor rule,
-                            SyntaxToken locationToken,
-                            params string[] messageArgs) where T : ICompilationReport =>
-        context.ReportIssue(generatedCodeRecognizer, rule, locationToken.GetLocation(), messageArgs);
+        public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
+                                DiagnosticDescriptor rule,
+                                SyntaxToken locationToken,
+                                params string[] messageArgs) =>
+            context.ReportIssue(generatedCodeRecognizer, rule, locationToken.GetLocation(), messageArgs);
 
-    public static void ReportIssue<T>(this T context, GeneratedCodeRecognizer generatedCodeRecognizer,
-                            DiagnosticDescriptor rule,
-                            Location location,
-                            params string[] messageArgs) where T : ICompilationReport =>
-        context.ReportIssue(generatedCodeRecognizer, rule, location, [], messageArgs);
+        public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
+                                DiagnosticDescriptor rule,
+                                Location location,
+                                params string[] messageArgs) =>
+            context.ReportIssue(generatedCodeRecognizer, rule, location, [], messageArgs);
+    }
 }

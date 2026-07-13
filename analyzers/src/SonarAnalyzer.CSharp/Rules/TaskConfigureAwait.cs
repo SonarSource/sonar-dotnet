@@ -31,14 +31,8 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(
                 c =>
                 {
-                    if (c.Compilation.Options.OutputKind != OutputKind.DynamicallyLinkedLibrary
-                        || !c.Compilation.IsNetFrameworkTarget())
-                    {
-                        // This rule only makes sense in libraries under .NET Framework
-                        return;
-                    }
-
-                    if (((AwaitExpressionSyntax)c.Node).Expression is { } expression
+                    if (c.Compilation is { Options.OutputKind: OutputKind.DynamicallyLinkedLibrary, IsNetFrameworkTarget: true }
+                        && c.Node is AwaitExpressionSyntax { Expression: { } expression }
                         && c.Model.GetTypeInfo(expression).Type is { } type
                         && type.DerivesFrom(KnownType.System_Threading_Tasks_Task))
                     {

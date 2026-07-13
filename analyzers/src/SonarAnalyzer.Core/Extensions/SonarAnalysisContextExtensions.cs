@@ -24,22 +24,25 @@ public static class SonarAnalysisContextExtensions
 {
     private static readonly SourceTextValueProvider<ProjectConfigReader> ProjectConfigProvider = new(x => new ProjectConfigReader(x));
 
-    public static ProjectConfigReader ProjectConfiguration(this SonarAnalysisContext context, AnalyzerOptions options)
+    extension(SonarAnalysisContext context)
     {
-        if (options.SonarProjectConfig() is { } sonarProjectConfig)
+        public ProjectConfigReader ProjectConfiguration(AnalyzerOptions options)
         {
-            return sonarProjectConfig.GetText() is { } sourceText
-                // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when exception is thrown
-                && context.TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
-                ? cachedProjectConfigReader
-                : throw new InvalidOperationException($"File '{Path.GetFileName(sonarProjectConfig.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+            if (options.SonarProjectConfig() is { } sonarProjectConfig)
+            {
+                return sonarProjectConfig.GetText() is { } sourceText
+                    // TryGetValue catches all exceptions from SourceTextValueProvider and returns false when exception is thrown
+                    && context.TryGetValue(sourceText, ProjectConfigProvider, out var cachedProjectConfigReader)
+                    ? cachedProjectConfigReader
+                    : throw new InvalidOperationException($"File '{Path.GetFileName(sonarProjectConfig.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+            }
+            else
+            {
+                return ProjectConfigReader.Empty;
+            }
         }
-        else
-        {
-            return ProjectConfigReader.Empty;
-        }
-    }
 
-    public static bool IsRazorAnalysisEnabled(this SonarAnalysisContext context, AnalyzerOptions options, Compilation compilation) =>
-        options.SonarLintXml(context).AnalyzeRazorCode(compilation.Language);
+        public bool IsRazorAnalysisEnabled(AnalyzerOptions options, Compilation compilation) =>
+            options.SonarLintXml(context).AnalyzeRazorCode(compilation.Language);
+    }
 }

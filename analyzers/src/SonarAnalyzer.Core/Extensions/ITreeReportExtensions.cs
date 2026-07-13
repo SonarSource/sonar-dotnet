@@ -20,63 +20,57 @@ namespace SonarAnalyzer.Core.Extensions;
 // Don't change the this parameter to (this IAnalysisContext context) because it would cause boxing
 public static class ITreeReportExtensions
 {
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      SyntaxNode locationSyntax,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, locationSyntax.GetLocation(), messageArgs);
+    extension<T>(T context) where T : ITreeReport
+    {
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                SyntaxNode locationSyntax,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, locationSyntax.GetLocation(), messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      SyntaxNode locationSyntax,
-                                      ImmutableDictionary<string, string> properties,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, locationSyntax.GetLocation(), properties, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                SyntaxNode locationSyntax,
+                                ImmutableDictionary<string, string> properties,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, locationSyntax.GetLocation(), properties, messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      SyntaxNode primaryLocationSyntax,
-                                      IEnumerable<SecondaryLocation> secondaryLocations,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, primaryLocationSyntax.GetLocation(), secondaryLocations, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                SyntaxNode primaryLocationSyntax,
+                                IEnumerable<SecondaryLocation> secondaryLocations,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, primaryLocationSyntax.GetLocation(), secondaryLocations, messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      SyntaxToken locationToken,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, locationToken.GetLocation(), messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                SyntaxToken locationToken,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, locationToken.GetLocation(), messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      SyntaxToken locationToken,
-                                      ImmutableDictionary<string, string> properties,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, locationToken.GetLocation(), properties, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                SyntaxToken locationToken,
+                                ImmutableDictionary<string, string> properties,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, locationToken.GetLocation(), properties, messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      SyntaxToken primaryLocationToken,
-                                      IEnumerable<SecondaryLocation> secondaryLocations,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, primaryLocationToken.GetLocation(), secondaryLocations, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                SyntaxToken primaryLocationToken,
+                                IEnumerable<SecondaryLocation> secondaryLocations,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, primaryLocationToken.GetLocation(), secondaryLocations, messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      Location location,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, location, [], ImmutableDictionary<string, string>.Empty, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                Location location,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, location, [], ImmutableDictionary<string, string>.Empty, messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      Location location,
-                                      ImmutableDictionary<string, string> properties,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, location, [], properties, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                Location location,
+                                ImmutableDictionary<string, string> properties,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, location, [], properties, messageArgs);
 
-    public static void ReportIssue<T>(this T context,
-                                      DiagnosticDescriptor rule,
-                                      Location primaryLocation,
-                                      IEnumerable<SecondaryLocation> secondaryLocations,
-                                      params string[] messageArgs) where T : ITreeReport =>
-        context.ReportIssue(rule, primaryLocation, secondaryLocations, ImmutableDictionary<string, string>.Empty, messageArgs);
+        public void ReportIssue(DiagnosticDescriptor rule,
+                                Location primaryLocation,
+                                IEnumerable<SecondaryLocation> secondaryLocations,
+                                params string[] messageArgs) =>
+            context.ReportIssue(rule, primaryLocation, secondaryLocations, ImmutableDictionary<string, string>.Empty, messageArgs);
+    }
 }
