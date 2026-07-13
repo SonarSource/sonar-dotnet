@@ -69,13 +69,13 @@
       },
       "System.Reflection.MetadataLoadContext": {
         "type": "Direct",
-        "requested": "[10.0.5, )",
-        "resolved": "10.0.5",
-        "contentHash": "z9yyFZcuCwtZXrxxDc2nBfB5lTHf96gS/rsD38Lcv6Ok25TOYPjNKlqpTZUqu2HTLPAM4w+/WjGL6gi9cIJO6w==",
+        "requested": "[10.0.9, )",
+        "resolved": "10.0.9",
+        "contentHash": "R/Zuc7ZM2rKeBM/b1Y9oS+WaRGgqw64maJiULAx4JlGL4eYZEXti3CxGq+dlthfGRx4UP1ie8T7T9n8MD3hKQw==",
         "dependencies": {
-          "System.Collections.Immutable": "10.0.5",
+          "System.Collections.Immutable": "10.0.9",
           "System.Memory": "4.6.3",
-          "System.Reflection.Metadata": "10.0.5"
+          "System.Reflection.Metadata": "10.0.9"
         }
       },
       "Microsoft.CodeAnalysis.Analyzers": {
@@ -100,8 +100,8 @@
       },
       "System.Collections.Immutable": {
         "type": "Transitive",
-        "resolved": "10.0.5",
-        "contentHash": "nozrOKfEgfrvvswkCfxaumY68RA/x1F3ZYwtwRvva8ul91NCnUzb6MKpl5/P7u9v/nIagVL4OXXj8d007tucxw==",
+        "resolved": "10.0.9",
+        "contentHash": "ci6tokGOzXpemLiZeMrSlA8xKdU43cIO0spbHH+vLaoFMA+fI8CHI3Np3D78jC7EZZrC9jiHDj0VlVK962hzsw==",
         "dependencies": {
           "System.Memory": "4.6.3",
           "System.Runtime.CompilerServices.Unsafe": "6.1.2"
@@ -124,10 +124,10 @@
       },
       "System.Reflection.Metadata": {
         "type": "Transitive",
-        "resolved": "10.0.5",
-        "contentHash": "fEAXJCtauNLYr5ESg3t6HE2Av6urWdJdymxZbuSt/DDqhtNtLtUtXTEpKbp0vkTdyBJwmaha8d2454vSzS/lcQ==",
+        "resolved": "10.0.9",
+        "contentHash": "RDMS79w3l00LkkvmOxmeF8rrISmPNCR2Xs/0gun8IAyuEP+ktS9D/jue1dpVHDaqIVXpC/QQFEvE8PpmkhOrEQ==",
         "dependencies": {
-          "System.Collections.Immutable": "10.0.5"
+          "System.Collections.Immutable": "10.0.9"
         }
       },
       "System.Runtime.CompilerServices.Unsafe": {
