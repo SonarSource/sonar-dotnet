@@ -25,49 +25,4 @@ public static class CountComparisonResultExtensions
 
         public bool IsInvalid => comparison is CountComparisonResult.AlwaysFalse or CountComparisonResult.AlwaysTrue;
     }
-
-    extension(ComparisonKind comparison)
-    {
-        public CountComparisonResult Compare(int count) =>
-            comparison switch
-            {
-                ComparisonKind.Equals => Equals(count),
-                ComparisonKind.NotEquals => NotEquals(count),
-                ComparisonKind.GreaterThanOrEqual => GreaterThanOrEqual(count),
-                ComparisonKind.GreaterThan => GreaterThan(count),
-                ComparisonKind.LessThan => LessThan(count),
-                ComparisonKind.LessThanOrEqual => LessThanOrEqual(count),
-                _ => CountComparisonResult.None,
-            };
-    }
-
-    private static CountComparisonResult Equals(int count) =>
-        Check(count, 0, CountComparisonResult.AlwaysFalse, CountComparisonResult.Empty);
-
-    private static CountComparisonResult NotEquals(int count) =>
-        Check(count, 0, CountComparisonResult.AlwaysTrue, CountComparisonResult.NotEmpty);
-
-    private static CountComparisonResult GreaterThan(int count) =>
-        Check(count, 0, CountComparisonResult.AlwaysTrue, CountComparisonResult.NotEmpty);
-
-    private static CountComparisonResult GreaterThanOrEqual(int count) =>
-        Check(count, 1, CountComparisonResult.AlwaysTrue, CountComparisonResult.NotEmpty);
-
-    private static CountComparisonResult LessThan(int count) =>
-        Check(count, 1, CountComparisonResult.AlwaysFalse, CountComparisonResult.Empty);
-
-    private static CountComparisonResult LessThanOrEqual(int count) =>
-        Check(count, 0, CountComparisonResult.AlwaysFalse, CountComparisonResult.Empty);
-
-    private static CountComparisonResult Check(int count, int threshold, CountComparisonResult belowThreshold, CountComparisonResult onThreshold)
-    {
-        if (count == threshold)
-        {
-            return onThreshold;
-        }
-        else
-        {
-            return count < threshold ? belowThreshold : CountComparisonResult.SizeDepedendent;
-        }
-    }
 }
