@@ -1,0 +1,66 @@
+<p>The null-forgiving operator <code>!</code> tells the compiler "trust me, this expression is not null", suppressing any nullable warning that would
+otherwise be raised at this position.</p>
+<p>When the compiler’s own nullable flow analysis has already narrowed the operand to non-null before the <code>!</code> is reached (e.g. through a
+prior <code>!= null</code> check, a <code>switch</code>/<code>is</code> pattern, a loop-exit condition, or a <code>[NotNullWhen]</code>-driven
+<code>out</code> parameter), the operator suppresses nothing. It becomes dead code that only adds noise and can mislead readers into thinking the
+nullability of the expression is still in doubt at this point.</p>
+<h2>Why is this an issue?</h2>
+<p>Every null-forgiving operator is a claim: "I know more about nullability here than the compiler does." When the flow state already proves the
+operand non-null, that claim is false, and the operator no longer does anything. Once a codebase accumulates operators like this, readers can no
+longer tell which <code>!</code> occurrences are load-bearing (suppressing a real, justified warning) and which are leftovers from an earlier version
+of the code, a refactor, or a copy-paste. This erodes the value of nullable reference types as a tool for reasoning about the code: developers start
+distrusting every <code>!</code>, including the ones that matter.</p>
+<pre>
+#nullable enable
+
+void M(string? a)
+{
+    if (a != null)
+    {
+        _ = a!; // Noncompliant: "a" is already proven non-null here
+    }
+}
+</pre>
+<h2>How to fix it</h2>
+<p>Remove the redundant <code>!</code>; the compiler already treats the expression as non-null without it.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+#nullable enable
+
+void M(string? a)
+{
+    if (a != null)
+    {
+        _ = a!; // Noncompliant
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+#nullable enable
+
+void M(string? a)
+{
+    if (a != null)
+    {
+        _ = a;
+    }
+}
+</pre>
+<h3>Pitfalls</h3>
+<p>This rule only removes operators that are provably redundant according to the compiler’s own nullable flow analysis at the exact point of the
+<code>!</code>. It does not flag:</p>
+<ul>
+  <li>Null-forgiving operators used where the nullable annotation context is disabled altogether. In that case the compiler is not tracking
+  nullability at all, so this rule cannot tell whether the operator is needed; a separate, narrower rule covers that case.</li>
+  <li>Suppressions on unconstrained generic type parameters or other expressions the compiler still considers possibly null.</li>
+</ul>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving">! (null-forgiving)
+  operator</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references">Nullable reference types</a></li>
+</ul>
+

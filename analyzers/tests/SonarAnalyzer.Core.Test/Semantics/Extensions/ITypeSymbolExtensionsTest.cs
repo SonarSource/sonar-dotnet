@@ -632,6 +632,67 @@ public class ITypeSymbolExtensionsTest
         type.GetCustomAttributes(inherit: true).Select(x => x.GetType().Name).Should().BeEquivalentTo(expectedAttributes);
     }
 
+    [TestMethod]
+    [DataRow("int?", "int")]
+    [DataRow("System.Nullable<int>", "int")]
+    public void NullableUnderlyingType_Nullable_ReturnsInnerType(string fieldType, string expectedType)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            class Test { {{fieldType}} field; }
+            """);
+        fieldSymbol.Type.NullableUnderlyingType().ToDisplayString().Should().Be(expectedType);
+    }
+
+    [TestMethod]
+    [DataRow("int")]
+    [DataRow("object")]
+    [DataRow("string")]
+    [DataRow("object?")]  // NRT annotation is NOT Nullable<T>
+    [DataRow("string?")]
+    public void NullableUnderlyingType_NonNullable_ReturnsNull(string fieldType)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            #nullable enable
+            class Test { {{fieldType}} field; }
+            """);
+        fieldSymbol.Type.NullableUnderlyingType().Should().BeNull();
+    }
+
+    [TestMethod]
+    public void NullableUnderlyingType_Null_ReturnsNull() =>
+        ((ITypeSymbol)null).NullableUnderlyingType().Should().BeNull();
+
+    [TestMethod]
+    [DataRow("int?", "int")]
+    [DataRow("System.Nullable<int>", "int")]
+    public void NullableUnderlyingTypeOrSelf_Nullable_ReturnsInnerType(string fieldType, string expectedType)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            class Test { {{fieldType}} field; }
+            """);
+        fieldSymbol.Type.NullableUnderlyingTypeOrSelf().ToDisplayString().Should().Be(expectedType);
+    }
+
+    [TestMethod]
+    [DataRow("int")]
+    [DataRow("object")]
+    [DataRow("string")]
+    [DataRow("object?")]  // NRT annotation is NOT Nullable<T>
+    [DataRow("string?")]
+    public void NullableUnderlyingTypeOrSelf_NonNullable_ReturnsSelf(string fieldType)
+    {
+        var fieldSymbol = FirstFieldSymbolFromCode($$"""
+            #nullable enable
+            class Test { {{fieldType}} field; }
+            """);
+        var type = fieldSymbol.Type;
+        type.NullableUnderlyingTypeOrSelf().Should().BeSameAs(type);
+    }
+
+    [TestMethod]
+    public void NullableUnderlyingTypeOrSelf_Null_ReturnsNull() =>
+        ((ITypeSymbol)null).NullableUnderlyingTypeOrSelf().Should().BeNull();
+
     private static IFieldSymbol FirstFieldSymbolFromCode(string code)
     {
         var (tree, model) = TestCompiler.CompileCS(code);

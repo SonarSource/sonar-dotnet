@@ -1,0 +1,133 @@
+<h2>Why is this an issue?</h2>
+<p>When a <code>CancellationToken</code> is available but not forwarded to a method that has an overload accepting one, the cancellation request is
+silently ignored.</p>
+<p>The caller’s intent to cancel long-running operations is not propagated, which means cooperative cancellation is broken:</p>
+<ul>
+  <li>The operation continues running even after cancellation is requested, wasting resources.</li>
+  <li>Timeouts and deadlines set by callers are not respected.</li>
+  <li>The application becomes less responsive and harder to shut down gracefully.</li>
+</ul>
+<p>The rule detects any accessible token source:</p>
+<ul>
+  <li>a <code>CancellationToken</code> parameter at any position</li>
+  <li>a <code>CancellationToken</code> field or property</li>
+  <li>a <code>CancellationToken?</code> parameter, field, or property; forwarded as <code>.GetValueOrDefault()</code></li>
+  <li>an <code>AsyncLocal&lt;CancellationToken&gt;</code> or <code>ThreadLocal&lt;CancellationToken&gt;</code> parameter, field, or property;
+  forwarded as <code>.Value</code></li>
+  <li>a <code>CancellationToken</code> obtained via a property of an accessible object, e.g. <code>_cts.Token</code>,
+  <code>HttpContext.RequestAborted</code></li>
+</ul>
+<h3>Exceptions</h3>
+<p>The rule does not flag calls where <code>CancellationToken.None</code> is explicitly passed as an argument. Pass
+<code>CancellationToken.None</code> to suppress the rule when cancellation must not apply, such as during disposal or post-cancellation cleanup.</p>
+<p>This follows the "point of no cancellation" pattern: once a method has started work it cannot safely revert, cancellation should no longer be
+honored, and any further token should be forwarded as <code>CancellationToken.None</code> instead of the original token:</p>
+<pre>
+public async ValueTask DisposeAsync()
+{
+    await _stream.FlushAsync(CancellationToken.None); // Compliant: disposal must complete regardless of cancellation
+}
+</pre>
+<h2>How to fix it</h2>
+<p>Forward the accessible <code>CancellationToken</code> to the overload that accepts it.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public async Task SaveAsync(string path, string content, CancellationToken token = default)
+{
+    await File.WriteAllTextAsync(path, content, Encoding.UTF8); // Noncompliant - pass 'token' to allow cancellation
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public async Task SaveAsync(string path, string content, CancellationToken token = default)
+{
+    await File.WriteAllTextAsync(path, content, Encoding.UTF8, token);
+}
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+[TestClass]
+public class MyTests
+{
+    public TestContext TestContext { get; set; }
+
+    [TestMethod]
+    public async Task MyTest()
+    {
+        await httpClient.GetStringAsync(url); // Noncompliant
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+[TestClass]
+public class MyTests
+{
+    public TestContext TestContext { get; set; }
+
+    [TestMethod]
+    public async Task MyTest()
+    {
+        await httpClient.GetStringAsync(url, TestContext.CancellationToken);
+    }
+}
+</pre>
+<p>When the noncompliant call is inside a <code>static</code> local function or <code>static</code> lambda, the token cannot be captured from the
+enclosing scope. Instead, extend the parameter list to accept a <code>CancellationToken</code> and pass it from the call site.</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+public async Task ProcessAsync(CancellationToken token = default)
+{
+    await ProcessItemAsync("item");
+
+    static async Task ProcessItemAsync(string item)
+    {
+        await File.WriteAllTextAsync("log.txt", item, Encoding.UTF8); // Noncompliant
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+public async Task ProcessAsync(CancellationToken token = default)
+{
+    await ProcessItemAsync("item", token);
+
+    static async Task ProcessItemAsync(string item, CancellationToken token)
+    {
+        await File.WriteAllTextAsync("log.txt", item, Encoding.UTF8, token);
+    }
+}
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+public void Acquire(CancellationToken? ct = null)
+{
+    if (ct.HasValue)
+        _semaphore.Wait(ct.Value);
+    else
+        _semaphore.Wait(); // Noncompliant - pass 'ct.GetValueOrDefault()' to allow cancellation
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="4" data-diff-type="compliant">
+private readonly SemaphoreSlim _semaphore = new(1, 1);
+
+public void Acquire(CancellationToken? ct = null)
+{
+    _semaphore.Wait(ct.GetValueOrDefault());
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2016">CA2016: Forward the
+  CancellationToken parameter to methods that take one</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/cancellation-in-managed-threads">Cancellation in managed
+  threads</a></li>
+  <li>Microsoft Learn - <a href="https://devblogs.microsoft.com/premier-developer/recommended-patterns-for-cancellationtoken/">Recommended patterns
+  for CancellationToken</a></li>
+</ul>
+
