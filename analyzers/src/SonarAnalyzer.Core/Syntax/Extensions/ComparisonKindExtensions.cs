@@ -19,33 +19,36 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class ComparisonKindExtensions
 {
-    public static ComparisonKind Mirror(this ComparisonKind comparison) =>
-        comparison switch
-        {
-            ComparisonKind.GreaterThan => ComparisonKind.LessThan,
-            ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
-            ComparisonKind.LessThan => ComparisonKind.GreaterThan,
-            ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
-            _ => comparison,
-        };
-
-    public static string ToDisplayString(this ComparisonKind kind, AnalyzerLanguage language)
+    extension(ComparisonKind comparison)
     {
-        if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
+        public ComparisonKind Mirror() =>
+            comparison switch
+            {
+                ComparisonKind.GreaterThan => ComparisonKind.LessThan,
+                ComparisonKind.GreaterThanOrEqual => ComparisonKind.LessThanOrEqual,
+                ComparisonKind.LessThan => ComparisonKind.GreaterThan,
+                ComparisonKind.LessThanOrEqual => ComparisonKind.GreaterThanOrEqual,
+                _ => comparison,
+            };
+
+        public string ToDisplayString(AnalyzerLanguage language)
         {
-            throw new NotSupportedException($"Language {language} is not supported.");
+            if (language != AnalyzerLanguage.CSharp && language != AnalyzerLanguage.VisualBasic)
+            {
+                throw new NotSupportedException($"Language {language} is not supported.");
+            }
+            return comparison switch
+            {
+                ComparisonKind.Equals when language == AnalyzerLanguage.CSharp => "==",
+                ComparisonKind.Equals => "=",
+                ComparisonKind.NotEquals when language == AnalyzerLanguage.CSharp => "!=",
+                ComparisonKind.NotEquals => "<>",
+                ComparisonKind.LessThan => "<",
+                ComparisonKind.LessThanOrEqual => "<=",
+                ComparisonKind.GreaterThan => ">",
+                ComparisonKind.GreaterThanOrEqual => ">=",
+                _ => throw new InvalidOperationException(),
+            };
         }
-        return kind switch
-        {
-            ComparisonKind.Equals when language == AnalyzerLanguage.CSharp => "==",
-            ComparisonKind.Equals => "=",
-            ComparisonKind.NotEquals when language == AnalyzerLanguage.CSharp => "!=",
-            ComparisonKind.NotEquals => "<>",
-            ComparisonKind.LessThan => "<",
-            ComparisonKind.LessThanOrEqual => "<=",
-            ComparisonKind.GreaterThan => ">",
-            ComparisonKind.GreaterThanOrEqual => ">=",
-            _ => throw new InvalidOperationException(),
-        };
     }
 }

@@ -122,7 +122,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         }
 
         static ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
-            deconstructors.FirstOrDefault(x => x.GetParameters().Count() == numberOfArguments && x.DeclaredAccessibility.IsAccessibleOutsideTheType());
+            deconstructors.FirstOrDefault(x => x.GetParameters().Count() == numberOfArguments && x.DeclaredAccessibility.IsAccessibleOutsideTheType);
     }
 
     public override void VisitAttribute(AttributeSyntax node)

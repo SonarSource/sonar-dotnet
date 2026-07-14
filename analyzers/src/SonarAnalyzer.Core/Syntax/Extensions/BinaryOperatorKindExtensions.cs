@@ -19,15 +19,14 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class BinaryOperatorKindExtensions
 {
-    public static bool IsAnyEquality(this BinaryOperatorKind kind) =>
-        kind.IsEquals() || kind.IsNotEquals();
+    extension(BinaryOperatorKind kind)
+    {
+        public bool IsAnyEquality => kind is { IsEquals: true } or { IsNotEquals: true };
 
-    public static bool IsEquals(this BinaryOperatorKind kind) =>
-        kind is BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals;
+        public bool IsEquals => kind is BinaryOperatorKind.Equals or BinaryOperatorKind.ObjectValueEquals;
 
-    public static bool IsNotEquals(this BinaryOperatorKind kind) =>
-        kind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals;
+        public bool IsNotEquals => kind is BinaryOperatorKind.NotEquals or BinaryOperatorKind.ObjectValueNotEquals;
 
-    public static bool IsAnyRelational(this BinaryOperatorKind kind) =>
-        kind is BinaryOperatorKind.GreaterThan or BinaryOperatorKind.GreaterThanOrEqual or BinaryOperatorKind.LessThan or BinaryOperatorKind.LessThanOrEqual;
+        public bool IsAnyRelational => kind is BinaryOperatorKind.GreaterThan or BinaryOperatorKind.GreaterThanOrEqual or BinaryOperatorKind.LessThan or BinaryOperatorKind.LessThanOrEqual;
+    }
 }

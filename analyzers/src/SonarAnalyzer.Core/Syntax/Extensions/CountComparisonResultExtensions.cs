@@ -19,23 +19,27 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class CountComparisonResultExtensions
 {
-    public static bool IsEmptyOrNotEmpty(this CountComparisonResult comparison) =>
-        comparison == CountComparisonResult.Empty || comparison == CountComparisonResult.NotEmpty;
+    extension(CountComparisonResult comparison)
+    {
+        public bool IsEmptyOrNotEmpty => comparison is CountComparisonResult.Empty or CountComparisonResult.NotEmpty;
 
-    public static bool IsInvalid(this CountComparisonResult comparison) =>
-        comparison == CountComparisonResult.AlwaysFalse || comparison == CountComparisonResult.AlwaysTrue;
+        public bool IsInvalid => comparison is CountComparisonResult.AlwaysFalse or CountComparisonResult.AlwaysTrue;
+    }
 
-    public static CountComparisonResult Compare(this ComparisonKind comparison, int count) =>
-        comparison switch
-        {
-            ComparisonKind.Equals => Equals(count),
-            ComparisonKind.NotEquals => NotEquals(count),
-            ComparisonKind.GreaterThanOrEqual => GreaterThanOrEqual(count),
-            ComparisonKind.GreaterThan => GreaterThan(count),
-            ComparisonKind.LessThan => LessThan(count),
-            ComparisonKind.LessThanOrEqual => LessThanOrEqual(count),
-            _ => CountComparisonResult.None,
-        };
+    extension(ComparisonKind comparison)
+    {
+        public CountComparisonResult Compare(int count) =>
+            comparison switch
+            {
+                ComparisonKind.Equals => Equals(count),
+                ComparisonKind.NotEquals => NotEquals(count),
+                ComparisonKind.GreaterThanOrEqual => GreaterThanOrEqual(count),
+                ComparisonKind.GreaterThan => GreaterThan(count),
+                ComparisonKind.LessThan => LessThan(count),
+                ComparisonKind.LessThanOrEqual => LessThanOrEqual(count),
+                _ => CountComparisonResult.None,
+            };
+    }
 
     private static CountComparisonResult Equals(int count) =>
         Check(count, 0, CountComparisonResult.AlwaysFalse, CountComparisonResult.Empty);

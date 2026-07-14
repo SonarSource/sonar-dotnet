@@ -45,7 +45,7 @@ public abstract class CollectionEmptinessCheckingBase<TSyntaxKind> : SonarDiagno
 
     private void CheckExpression(SonarSyntaxNodeReportingContext context, SyntaxNode expression, int constant, ComparisonKind comparison)
     {
-        if (comparison.Compare(constant).IsEmptyOrNotEmpty()
+        if (comparison.Compare(constant).IsEmptyOrNotEmpty
             && Language.Syntax.NodeIdentifier(expression) is { } identifier
             && CountSymbol(identifier, context.Model) is { ReceiverType: INamedTypeSymbol receiverType } methodSymbol)
         {

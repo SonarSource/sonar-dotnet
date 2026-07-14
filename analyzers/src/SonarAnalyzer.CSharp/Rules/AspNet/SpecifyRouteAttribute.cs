@@ -49,7 +49,7 @@ public sealed class SpecifyRouteAttribute() : SonarDiagnosticAnalyzer<SyntaxKind
                     if (nodeContext.Model.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is { } method
                         && !method.ContainingType.IsAbstract
                         && method.IsControllerActionMethod()
-                        && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.GetAttributeRouteTemplate())))
+                        && method.GetAttributesWithInherited().Any(x => !CanBeIgnored(x.AttributeRouteTemplate)))
                     {
                         secondaryLocations.Push(methodDeclaration.Identifier.ToSecondaryLocation(SecondaryLocationMessage));
                     }

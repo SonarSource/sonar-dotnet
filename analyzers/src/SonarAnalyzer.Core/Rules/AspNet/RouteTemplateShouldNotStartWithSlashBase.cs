@@ -90,7 +90,7 @@ public abstract class RouteTemplateShouldNotStartWithSlashBase<TSyntaxKind>() : 
         var templates = new Dictionary<Location, string>();
         foreach (var attribute in attributes)
         {
-            if (attribute.GetAttributeRouteTemplate() is { } templateParameter)
+            if (attribute.AttributeRouteTemplate is { } templateParameter)
             {
                 templates.Add(attribute.ApplicationSyntaxReference.GetSyntax().GetLocation(), templateParameter);
             }

@@ -150,7 +150,7 @@ public class AttributeDataExtensionsTest
             [My]
             public class Program { }
             """;
-        CompileAttribute(code).HasAttributeUsageInherited().Should().Be(inherited);
+        CompileAttribute(code).HasAttributeUsageInherited.Should().Be(inherited);
     }
 
     [TestMethod]
@@ -165,7 +165,7 @@ public class AttributeDataExtensionsTest
             [My]
             public class Program { }
             """;
-        CompileAttribute(code).HasAttributeUsageInherited().Should().Be(true); // The default for Inherited = true
+        CompileAttribute(code).HasAttributeUsageInherited.Should().Be(true); // The default for Inherited = true
     }
 
     [TestMethod]
@@ -179,7 +179,7 @@ public class AttributeDataExtensionsTest
             [My]
             public class Program { }
             """;
-        CompileAttribute(code).HasAttributeUsageInherited().Should().Be(true); // The default for Inherited = true
+        CompileAttribute(code).HasAttributeUsageInherited.Should().Be(true); // The default for Inherited = true
     }
 
     [TestMethod]
@@ -199,7 +199,7 @@ public class AttributeDataExtensionsTest
             [My]
             public class Program { }
             """;
-        CompileAttribute(code).HasAttributeUsageInherited().Should().Be(expected);
+        CompileAttribute(code).HasAttributeUsageInherited.Should().Be(expected);
     }
 
     [TestMethod]
@@ -215,7 +215,7 @@ public class AttributeDataExtensionsTest
             [My]
             public class Program { }
             """;
-        CompileAttribute(code, ignoreErrors: true).HasAttributeUsageInherited().Should().BeTrue();
+        CompileAttribute(code, ignoreErrors: true).HasAttributeUsageInherited.Should().BeTrue();
     }
 
     private static AttributeData CompileAttribute(string code, bool ignoreErrors = false) =>

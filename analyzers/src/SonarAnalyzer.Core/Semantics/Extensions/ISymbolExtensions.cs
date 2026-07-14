@@ -189,7 +189,7 @@ public static class ISymbolExtensions
         var baseSymbol = BaseSymbol(symbol);
         while (baseSymbol is not null)
         {
-            foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.HasAttributeUsageInherited()))
+            foreach (var attribute in baseSymbol.GetAttributes().Where(x => x.HasAttributeUsageInherited))
             {
                 yield return attribute;
             }

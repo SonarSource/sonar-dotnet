@@ -53,7 +53,7 @@ public abstract class DoNotCheckZeroSizeCollectionBase<TSyntaxKind> : SonarDiagn
     {
         expression = Language.Syntax.RemoveConditionalAccess(expression);
         var result = comparison.Compare(constant);
-        if (result.IsInvalid()
+        if (result.IsInvalid
             && CandidateNames.Contains(Language.Syntax.NodeIdentifier(expression)?.ValueText)
             && context.Model.GetSymbolInfo(expression).Symbol is { } symbol
             && CollectionSizeTypeName(symbol) is { } symbolType)
