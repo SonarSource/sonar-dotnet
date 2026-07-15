@@ -1,0 +1,27 @@
+{
+  "title": "Migrations should not narrow column types without converting existing data",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "entity-framework-core",
+    "entity-framework",
+    "orm",
+    "database",
+    "migration"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-8747",
+  "sqKey": "S8747",
+  "scope": "Main",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}

@@ -1,0 +1,85 @@
+<p>This rule raises an issue when a database migration alters an existing column to a type that can hold a narrower range of values.</p>
+<h2>Why is this an issue?</h2>
+<p>Entity Framework Core migrations evolve the database schema over time, and the <code>AlterColumn</code> method changes the definition of an
+existing column. A migration narrows a column when it reduces the range of values the column can hold: a shorter maximum length for text, a smaller
+numeric type, or a lower precision or scale.</p>
+<p>A schema change says nothing about the data already stored in the column. When existing values do not fit the new type, the database engine cannot
+keep them intact. Reducing a text column from <code>nvarchar(max)</code> to <code>nvarchar(50)</code> leaves no room for values longer than 50
+characters, and converting a <code>long</code> column to <code>int</code> cannot represent values outside the <code>int</code> range.</p>
+<p>Depending on the database engine, configuration, and type of narrowing, the migration either aborts with an error or silently truncates the
+affected values. For SQL Server, string length and integer range reductions abort (errors 2628 / 8115), while decimal precision and scale reductions
+can silently truncate. The migration only completes without converting the data first when every existing value already fits the narrower type, and
+relying on that is fragile: data that fits today may not fit tomorrow or in another environment.</p>
+<h3>What is the potential impact?</h3>
+<p>When the engine truncates, data that no longer fits is lost permanently and cannot be recovered. When the engine rejects the change instead, the
+migration aborts and halts the deployment, requiring manual intervention. On databases without transactional DDL (e.g. MySQL) or when transactions
+have been suppressed, the schema can additionally be left partially migrated.</p>
+<h3>Exceptions</h3>
+<p>This rule does not raise an issue when the migration explicitly converts the existing data to fit the new type before narrowing the column, for
+example with a <code>migrationBuilder.Sql</code> statement that updates the affected column.</p>
+<h2>How to fix it in Entity Framework Core</h2>
+<p>Before narrowing the column, convert the existing data so that every value fits the new type. Run an <code>UPDATE</code> statement through
+<code>migrationBuilder.Sql</code> to truncate, round, or otherwise transform the values, then call <code>AlterColumn</code>. Performing the conversion
+explicitly is what lets the migration succeed where it would otherwise abort, and it makes the data transformation visible and reviewable instead of
+leaving it to the database engine. This conversion is irreversible, so confirm that the transformed values are acceptable. When the narrowing is not
+actually required, keep the wider type instead.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public partial class ShortenStudentName : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        migrationBuilder.AlterColumn&lt;string&gt;(
+            name: "Name",
+            table: "Students",
+            type: "nvarchar(50)", // Noncompliant: narrowing "Name" from "nvarchar(max)" truncates longer values
+            maxLength: 50,
+            nullable: false,
+            oldClrType: typeof(string),
+            oldType: "nvarchar(max)",
+            oldNullable: true);
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public partial class ShortenStudentName : Migration
+{
+    protected override void Up(MigrationBuilder migrationBuilder)
+    {
+        // Convert the existing data so that every value fits the narrower column
+        migrationBuilder.Sql("UPDATE Students SET Name = LEFT(Name, 50) WHERE LEN(Name) &gt; 50;");
+
+        migrationBuilder.AlterColumn&lt;string&gt;(
+            name: "Name",
+            table: "Students",
+            type: "nvarchar(50)",
+            maxLength: 50,
+            nullable: false,
+            oldClrType: typeof(string),
+            oldType: "nvarchar(max)",
+            oldNullable: true);
+    }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/sql/t-sql/statements/alter-table-transact-sql"><code>ALTER TABLE</code>
+  (Transact-SQL)</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/known-issues-and-errors-change-data-capture">Known Issues and Errors
+  with Change Data Capture</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations">Migrations Overview</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/managing">Managing Migrations</a></li>
+</ul>
+<h3>Articles &amp; blog posts</h3>
+<ul>
+  <li>Makolyte - <a href="https://makolyte.com/ef-core-database-schema-changes/">EF Core — Database schema changes</a></li>
+  <li>The Reformed Programmer - <a
+  href="https://www.thereformedprogrammer.net/handling-entity-framework-core-database-migrations-in-production-part-1/">Handling Entity Framework Core
+  database migrations in production</a></li>
+  <li>Devart - <a href="https://www.devart.com/dbforge/sql/studio/sql-alter-column.html">SQL <code>ALTER COLUMN</code> Guide</a></li>
+</ul>
+
