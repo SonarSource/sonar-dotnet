@@ -25,17 +25,25 @@ public static class AttributeDataExtensions
 
     extension(AttributeData attribute)
     {
-        public bool HasName(string name) =>
-            attribute is { AttributeClass.Name: { } attributeClassName } && attributeClassName == name;
-
-        public bool HasAnyName(params string[] names) =>
-            names.Any(x => attribute.HasName(x));
-
         public string AttributeRouteTemplate =>
             attribute.AttributeClass.DerivesOrImplementsAny(RouteTemplateProviders)
             && attribute.TryGetAttributeValue<string>("template", out var template)
                 ? template
                 : null;
+
+        public bool HasAttributeUsageInherited =>
+            attribute.AttributeClass.GetAttributes()
+                .Where(x => x.AttributeClass.Is(KnownType.System_AttributeUsageAttribute))
+                .SelectMany(x => x.NamedArguments.Where(x => x.Key == nameof(AttributeUsageAttribute.Inherited)))
+                .Where(x => x.Value is { Kind: TypedConstantKind.Primitive, Type.SpecialType: SpecialType.System_Boolean })
+                .Select(x => (bool?)x.Value.Value)
+                .FirstOrDefault() ?? true; // Default value of Inherited is true
+
+        public bool HasName(string name) =>
+            attribute is { AttributeClass.Name: { } attributeClassName } && attributeClassName == name;
+
+        public bool HasAnyName(params string[] names) =>
+            names.Any(attribute.HasName);
 
         public bool TryGetAttributeValue<T>(string valueName, out T value)
         {
@@ -54,14 +62,6 @@ public static class AttributeDataExtensions
                 return false;
             }
         }
-
-        public bool HasAttributeUsageInherited =>
-            attribute.AttributeClass.GetAttributes()
-                .Where(x => x.AttributeClass.Is(KnownType.System_AttributeUsageAttribute))
-                .SelectMany(x => x.NamedArguments.Where(x => x.Key == nameof(AttributeUsageAttribute.Inherited)))
-                .Where(x => x.Value is { Kind: TypedConstantKind.Primitive, Type.SpecialType: SpecialType.System_Boolean })
-                .Select(x => (bool?)x.Value.Value)
-                .FirstOrDefault() ?? true; // Default value of Inherited is true
     }
 
     private static bool TryConvertConstant<T>(TypedConstant constant, out T value)

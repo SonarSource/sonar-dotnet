@@ -21,15 +21,15 @@ public static class CompilationExtensions
 {
     extension(Compilation compilation)
     {
+        // There's no direct way of checking compilation target framework yet (09/2020).
+        // See https://github.com/dotnet/roslyn/issues/3798
+        public bool IsNetFrameworkTarget => compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
+
         public INamedTypeSymbol GetTypeByMetadataName(KnownType knownType) =>
             compilation.GetTypeByMetadataName(knownType.MetadataName);
 
         public IMethodSymbol SpecialTypeMethod(SpecialType type, string methodName) =>
             (IMethodSymbol)compilation.GetSpecialType(type).GetMembers(methodName).SingleOrDefault();
-
-        // There's no direct way of checking compilation target framework yet (09/2020).
-        // See https://github.com/dotnet/roslyn/issues/3798
-        public bool IsNetFrameworkTarget => compilation.ObjectType.ContainingAssembly.Name == "mscorlib";
 
         public bool ReferencesAny(params KnownAssembly[] assemblies) =>
             assemblies.Any()

@@ -23,14 +23,6 @@ internal static class SyntaxNodeExtensions
     {
         public bool IsInDebugBlock => node.ActiveConditionalCompilationSections.Contains("DEBUG");
 
-        public bool IsInConditionalDebug(SemanticModel model)
-        {
-            var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
-                ? model.GetDeclaredSymbol(containingMethod)
-                : null;
-            return method.IsConditionalDebugMethod;
-        }
-
         /// <summary>
         /// Returns a list of the names of #if [NAME] sections that the specified
         /// node is contained in.
@@ -76,6 +68,14 @@ internal static class SyntaxNodeExtensions
                 Debug.Assert(activeDirectives.All(x => x.BranchTaken), "Not all of the collected directives were for the branch that was taken");
                 return activeDirectives.Select(FindDirectiveName).WhereNotNull().ToHashSet();
             }
+        }
+
+        public bool IsInConditionalDebug(SemanticModel model)
+        {
+            var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
+                ? model.GetDeclaredSymbol(containingMethod)
+                : null;
+            return method.IsConditionalDebugMethod;
         }
     }
 
