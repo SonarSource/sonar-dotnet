@@ -75,7 +75,8 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
 
-                    if (fieldDeclaration.Declaration?.Variables.FirstOrDefault() is not { } variableDeclaration)
+                    var variableDeclaration = fieldDeclaration.Declaration?.Variables.FirstOrDefault();
+                    if (variableDeclaration is null)
                     {
                         return;
                     }

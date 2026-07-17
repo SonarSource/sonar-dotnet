@@ -25,6 +25,8 @@ public static class SyntaxTokenExtensions
     {
         public int Line => token.GetLocation().StartLine;
 
+        public bool IsFirstTokenOnLine => token.Line != token.GetPreviousToken().Line;
+
         public SecondaryLocation ToSecondaryLocation(string message = null, params string[] messageArgs) =>
             message is not null && messageArgs?.Length > 0
                 ? new(token.GetLocation(), string.Format(message, messageArgs))
@@ -32,8 +34,6 @@ public static class SyntaxTokenExtensions
 
         public IEnumerable<int> LineNumbers(bool isZeroBasedCount = true) =>
             token.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
-
-        public bool IsFirstTokenOnLine => token.Line != token.GetPreviousToken().Line;
     }
 
     extension(SyntaxToken from)

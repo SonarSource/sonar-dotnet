@@ -26,6 +26,12 @@ internal static class SyntaxTreeExtensions
 
     extension(SyntaxTree tree)
     {
+        public string OriginalFilePath =>
+            // Currently we support only C# based generated files.
+            tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum
+                ? pragmaChecksum.File.ValueText
+                : tree.FilePath;
+
         [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
         public bool IsGenerated(GeneratedCodeRecognizer generatedCodeRecognizer)
         {
@@ -45,12 +51,6 @@ internal static class SyntaxTreeExtensions
             isRazorAnalysisEnabled
                 ? tree.IsGenerated(generatedCodeRecognizer) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
                 : tree.IsGenerated(generatedCodeRecognizer);
-
-        public string OriginalFilePath =>
-            // Currently we support only C# based generated files.
-            tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum
-                ? pragmaChecksum.File.ValueText
-                : tree.FilePath;
 
         public bool EndsWith(string suffix) =>
             tree.FilePath.EndsWith(suffix, StringComparison.OrdinalIgnoreCase);

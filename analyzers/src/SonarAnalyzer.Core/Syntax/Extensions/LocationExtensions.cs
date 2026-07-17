@@ -26,6 +26,14 @@ public static class LocationExtensions
                 ? location.GetMappedLineSpan()
                 : location.GetLineSpan();
 
+        public int StartLine => location.GetLineSpan().StartLinePosition.Line;
+
+        public int StartColumn => location.GetLineSpan().StartLinePosition.Character;
+
+        public int EndLine => location.GetLineSpan().EndLinePosition.Line;
+
+        public int LineNumberToReport => location.GetMappedLineSpan().StartLinePosition.LineNumberToReport;
+
         public Location EnsureMappedLocation()
         {
             if (location is null || !GeneratedCodeRecognizer.IsRazorGeneratedFile(location.SourceTree))
@@ -38,12 +46,6 @@ public static class LocationExtensions
             return Location.Create(lineSpan.Path, location.SourceSpan, lineSpan.Span);
         }
 
-        public int StartLine => location.GetLineSpan().StartLinePosition.Line;
-
-        public int StartColumn => location.GetLineSpan().StartLinePosition.Character;
-
-        public int EndLine => location.GetLineSpan().EndLinePosition.Line;
-
         public bool IsValid(Compilation compilation) =>
             location.Kind != LocationKind.SourceFile || compilation.ContainsSyntaxTree(location.SourceTree);
 
@@ -51,7 +53,5 @@ public static class LocationExtensions
             message is not null && messageArgs?.Length > 0
                 ? new(location, string.Format(message, messageArgs))
                 : new(location, message);
-
-        public int LineNumberToReport => location.GetMappedLineSpan().StartLinePosition.LineNumberToReport;
     }
 }

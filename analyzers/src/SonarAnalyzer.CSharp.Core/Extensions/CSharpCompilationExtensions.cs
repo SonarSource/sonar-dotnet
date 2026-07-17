@@ -27,9 +27,9 @@ public static class CSharpCompilationExtensions
 
         public bool IsLambdaDiscardParameterSupported => compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
 
+        public LanguageVersion LanguageVersion => ((CSharpCompilation)compilation).LanguageVersion;
+
         public bool IsAtLeastLanguageVersion(LanguageVersion languageVersion) =>
             compilation.LanguageVersion.IsAtLeast(languageVersion);
-
-        public LanguageVersion LanguageVersion => ((CSharpCompilation)compilation).LanguageVersion;
     }
 }

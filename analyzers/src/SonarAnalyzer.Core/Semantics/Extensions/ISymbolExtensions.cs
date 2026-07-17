@@ -23,12 +23,6 @@ public static class ISymbolExtensions
 {
     extension(ISymbol symbol)
     {
-        public bool HasAnyAttribute(ImmutableArray<KnownType> types) =>
-            symbol.GetAttributes(types).Any();
-
-        public bool HasAttribute(KnownType type) =>
-            symbol.GetAttributes(type).Any();
-
         public SyntaxNode FirstSyntaxRef => symbol?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
 
         public bool IsAutoProperty => symbol.Kind == SymbolKind.Property && symbol.ContainingType.GetMembers().OfType<IFieldSymbol>().Any(x => symbol.Equals(x.AssociatedSymbol));
@@ -37,59 +31,7 @@ public static class ISymbolExtensions
 
         public bool IsGlobalNamespace => symbol is INamespaceSymbol { Name: "" };
 
-        public bool IsInSameAssembly(ISymbol anotherSymbol) =>
-            symbol.ContainingAssembly.Equals(anotherSymbol.ContainingAssembly);
-
-        // "Countable" per the C# 8 ranges/indices proposal: a property named Count or Length with an accessible int getter.
-        // https://github.com/dotnet/csharplang/blob/e145230405eabef04a460003a20825fecce7f4d5/proposals/csharp-8.0/ranges.md#implicit-index-support
-        public bool IsCountable()
-        {
-            return symbol is ITypeSymbol type && (HasCountableMember(type, "Count") || HasCountableMember(type, "Length"));
-
-            // GetMembers(name) is a dictionary lookup on the type's cached members-by-name map, unlike GetMembers()
-            // which forces scanning every member of the type just to find the one or two we care about.
-            static bool HasCountableMember(ITypeSymbol type, string name) =>
-                type.GetMembers(name).OfType<IPropertySymbol>()
-                    .Any(x => x is { Type: INamedTypeSymbol { SpecialType: SpecialType.System_Int32 }, IsStatic: false, GetMethod: not null });
-        }
-
         public bool HasNotNullAttribute => symbol.GetAttributes() is { Length: > 0 } attributes && attributes.Any(IsNotNullAttribute);
-
-        // https://github.com/dotnet/roslyn/blob/2a594fa2157a734a988f7b5dbac99484781599bd/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs#L93
-        [ExcludeFromCodeCoverage]
-        public ImmutableArray<ISymbol> ExplicitOrImplicitInterfaceImplementations()
-        {
-            if (symbol.Kind is not SymbolKind.Method and not SymbolKind.Property and not SymbolKind.Event)
-            {
-                return ImmutableArray<ISymbol>.Empty;
-            }
-
-            var containingType = symbol.ContainingType;
-            var query = from iface in containingType.AllInterfaces
-                        from interfaceMember in iface.GetMembers()
-                        let impl = containingType.FindImplementationForInterfaceMember(interfaceMember)
-                        where symbol.Equals(impl)
-                        select interfaceMember;
-            return query.ToImmutableArray();
-        }
-
-        public bool HasContainingType(KnownType containingType, bool checkDerivedTypes) =>
-            checkDerivedTypes
-                ? symbol.ContainingType.DerivesOrImplements(containingType)
-                : symbol.ContainingType.Is(containingType);
-
-        public bool IsInType(KnownType type) =>
-            symbol is not null && symbol.ContainingType.Is(type);
-
-        public bool IsInType(ITypeSymbol type) =>
-            symbol?.ContainingType is not null && symbol.ContainingType.Equals(type);
-
-        public bool IsInType(ImmutableArray<KnownType> types) =>
-            symbol is not null && symbol.ContainingType.IsAny(types);
-
-        public bool IsChangeable() =>
-            symbol is { IsAbstract: false, IsVirtual: false, OverriddenMember: null }
-            && symbol.InterfaceMembers().IsEmpty;
 
         public IEnumerable<IParameterSymbol> Parameters =>
             symbol.Kind switch
@@ -134,12 +76,6 @@ public static class ISymbolExtensions
 
         public bool IsConstructor => symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
 
-        public IEnumerable<AttributeData> GetAttributes(KnownType attributeType) =>
-            symbol?.GetAttributes().Where(x => x.AttributeClass.Is(attributeType)) ?? [];
-
-        public IEnumerable<AttributeData> GetAttributes(ImmutableArray<KnownType> attributeTypes) =>
-            symbol?.GetAttributes().Where(x => x.AttributeClass.IsAny(attributeTypes)) ?? [];
-
         /// <summary>
         /// Returns attributes for the symbol by also respecting <see cref="AttributeUsageAttribute.Inherited"/>.
         /// The returned <see cref="AttributeData"/> is consistent with the results from <see cref="MemberInfo.GetCustomAttributes(bool)"/>.
@@ -176,15 +112,6 @@ public static class ISymbolExtensions
                     };
             }
         }
-
-        public bool AnyAttributeDerivesFrom(KnownType attributeType) =>
-            symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(attributeType)) ?? false;
-
-        public bool AnyAttributeDerivesFromAny(ImmutableArray<KnownType> attributeTypes) =>
-            symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesFromAny(attributeTypes)) ?? false;
-
-        public bool AnyAttributeDerivesFromOrImplementsAny(ImmutableArray<KnownType> attributeTypesOrInterfaces) =>
-            symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesOrImplementsAny(attributeTypesOrInterfaces)) ?? false;
 
         public string Classification =>
             symbol switch
@@ -289,28 +216,83 @@ public static class ISymbolExtensions
                 }
             }
         }
+
+        public bool HasAnyAttribute(ImmutableArray<KnownType> types) =>
+            symbol.GetAttributes(types).Any();
+
+        public bool HasAttribute(KnownType type) =>
+            symbol.GetAttributes(type).Any();
+
+        public bool IsInSameAssembly(ISymbol anotherSymbol) =>
+            symbol.ContainingAssembly.Equals(anotherSymbol.ContainingAssembly);
+
+        // "Countable" per the C# 8 ranges/indices proposal: a property named Count or Length with an accessible int getter.
+        // https://github.com/dotnet/csharplang/blob/e145230405eabef04a460003a20825fecce7f4d5/proposals/csharp-8.0/ranges.md#implicit-index-support
+        public bool IsCountable()
+        {
+            return symbol is ITypeSymbol type && (HasCountableMember(type, "Count") || HasCountableMember(type, "Length"));
+
+            // GetMembers(name) is a dictionary lookup on the type's cached members-by-name map, unlike GetMembers()
+            // which forces scanning every member of the type just to find the one or two we care about.
+            static bool HasCountableMember(ITypeSymbol type, string name) =>
+                type.GetMembers(name).OfType<IPropertySymbol>()
+                    .Any(x => x is { Type: INamedTypeSymbol { SpecialType: SpecialType.System_Int32 }, IsStatic: false, GetMethod: not null });
+        }
+
+        // https://github.com/dotnet/roslyn/blob/2a594fa2157a734a988f7b5dbac99484781599bd/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs#L93
+        [ExcludeFromCodeCoverage]
+        public ImmutableArray<ISymbol> ExplicitOrImplicitInterfaceImplementations()
+        {
+            if (symbol.Kind is not SymbolKind.Method and not SymbolKind.Property and not SymbolKind.Event)
+            {
+                return ImmutableArray<ISymbol>.Empty;
+            }
+
+            var containingType = symbol.ContainingType;
+            var query = from iface in containingType.AllInterfaces
+                        from interfaceMember in iface.GetMembers()
+                        let impl = containingType.FindImplementationForInterfaceMember(interfaceMember)
+                        where symbol.Equals(impl)
+                        select interfaceMember;
+            return query.ToImmutableArray();
+        }
+
+        public bool HasContainingType(KnownType containingType, bool checkDerivedTypes) =>
+            checkDerivedTypes
+                ? symbol.ContainingType.DerivesOrImplements(containingType)
+                : symbol.ContainingType.Is(containingType);
+
+        public bool IsInType(KnownType type) =>
+            symbol is not null && symbol.ContainingType.Is(type);
+
+        public bool IsInType(ITypeSymbol type) =>
+            symbol?.ContainingType is not null && symbol.ContainingType.Equals(type);
+
+        public bool IsInType(ImmutableArray<KnownType> types) =>
+            symbol is not null && symbol.ContainingType.IsAny(types);
+
+        public bool IsChangeable() =>
+            symbol is { IsAbstract: false, IsVirtual: false, OverriddenMember: null }
+            && symbol.InterfaceMembers().IsEmpty;
+
+        public IEnumerable<AttributeData> GetAttributes(KnownType attributeType) =>
+            symbol?.GetAttributes().Where(x => x.AttributeClass.Is(attributeType)) ?? [];
+
+        public IEnumerable<AttributeData> GetAttributes(ImmutableArray<KnownType> attributeTypes) =>
+            symbol?.GetAttributes().Where(x => x.AttributeClass.IsAny(attributeTypes)) ?? [];
+
+        public bool AnyAttributeDerivesFrom(KnownType attributeType) =>
+            symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesFrom(attributeType)) ?? false;
+
+        public bool AnyAttributeDerivesFromAny(ImmutableArray<KnownType> attributeTypes) =>
+            symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesFromAny(attributeTypes)) ?? false;
+
+        public bool AnyAttributeDerivesFromOrImplementsAny(ImmutableArray<KnownType> attributeTypesOrInterfaces) =>
+            symbol?.GetAttributes().Any(x => x.AttributeClass.DerivesOrImplementsAny(attributeTypesOrInterfaces)) ?? false;
     }
 
     extension<T>(T symbol) where T : class, ISymbol
     {
-        /// <summary>
-        /// Returns all interface members this member implements.
-        /// A single member can implement members from multiple interface.
-        /// </summary>
-        public IEnumerable<T> InterfaceMembers() =>
-            symbol switch
-            {
-                null => [],
-                { } when !CanBeInterfaceMember(symbol) => [],
-                _ => symbol.ContainingType
-                    .AllInterfaces
-                    .SelectMany(x => x.GetMembers())
-                    .OfType<T>()
-                    .Where(x =>
-                        symbol.OverriddenMembersAndSelf.Any(m =>
-                            m.Equals(m.ContainingType.FindImplementationForInterfaceMember(x)))),
-            };
-
         public T OverriddenMember =>
             symbol is { IsOverride: true }
                 ? symbol.Kind switch
@@ -356,6 +338,24 @@ public static class ISymbolExtensions
                 return false;
             }
         }
+
+        /// <summary>
+        /// Returns all interface members this member implements.
+        /// A single member can implement members from multiple interface.
+        /// </summary>
+        public IEnumerable<T> InterfaceMembers() =>
+            symbol switch
+            {
+                null => [],
+                { } when !CanBeInterfaceMember(symbol) => [],
+                _ => symbol.ContainingType
+                    .AllInterfaces
+                    .SelectMany(x => x.GetMembers())
+                    .OfType<T>()
+                    .Where(x =>
+                        symbol.OverriddenMembersAndSelf.Any(m =>
+                            m.Equals(m.ContainingType.FindImplementationForInterfaceMember(x)))),
+            };
     }
 
     private static bool CanBeInterfaceMember(ISymbol symbol) =>

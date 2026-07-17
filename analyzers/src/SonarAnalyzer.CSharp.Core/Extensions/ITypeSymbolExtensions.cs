@@ -21,14 +21,14 @@ public static class ITypeSymbolExtensions
 {
     extension(ITypeSymbol symbol)
     {
-        public bool IsDisposableRefStruct(LanguageVersion languageVersion) =>
-            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
-            && symbol.IsRefStruct
-            && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
-
         public bool IsRefStruct =>
             symbol is not null
             && symbol.IsStruct()
             && symbol.IsRefLikeType();
+
+        public bool IsDisposableRefStruct(LanguageVersion languageVersion) =>
+            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
+            && symbol.IsRefStruct
+            && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
     }
 }

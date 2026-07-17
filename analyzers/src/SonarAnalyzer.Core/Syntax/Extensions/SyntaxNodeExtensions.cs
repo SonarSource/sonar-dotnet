@@ -24,6 +24,27 @@ public static class SyntaxNodeExtensions
 {
     extension(SyntaxNode node)
     {
+        public string MappedFilePathFromRoot
+        {
+            get
+            {
+                if (node.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)Microsoft.CodeAnalysis.CSharp.SyntaxKind.PragmaChecksumDirectiveTrivia } pragmaChecksum)
+                {
+                    // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
+                    // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum
+                    var content = pragmaChecksum.ToString();
+                    var firstIndex = content.IndexOf('"');
+                    var start = firstIndex + 1;
+                    var secondIndex = content.IndexOf('"', start);
+                    return content.Substring(start, secondIndex - start);
+                }
+
+                return node.SyntaxTree.FilePath;
+            }
+        }
+
+        public int LineNumberToReport => node.GetLocation().LineNumberToReport;
+
         public bool IsKnownType(KnownType knownType, SemanticModel model)
         {
             var type = model.GetSymbolInfo(node).Symbol.GetSymbolType();
@@ -48,25 +69,6 @@ public static class SyntaxNodeExtensions
             return toString.Contains(a) || toString.Contains(b);
         }
 
-        public string MappedFilePathFromRoot
-        {
-            get
-            {
-                if (node.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)Microsoft.CodeAnalysis.CSharp.SyntaxKind.PragmaChecksumDirectiveTrivia } pragmaChecksum)
-                {
-                    // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
-                    // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum
-                    var content = pragmaChecksum.ToString();
-                    var firstIndex = content.IndexOf('"');
-                    var start = firstIndex + 1;
-                    var secondIndex = content.IndexOf('"', start);
-                    return content.Substring(start, secondIndex - start);
-                }
-
-                return node.SyntaxTree.FilePath;
-            }
-        }
-
         public TSyntaxKind Kind<TSyntaxKind>() where TSyntaxKind : struct, Enum =>
             node is null ? default : EnumConverter<TSyntaxKind>.FromInt32(node.RawKind);
 
@@ -74,8 +76,6 @@ public static class SyntaxNodeExtensions
             message is not null && messageArgs?.Length > 0
                 ? new(node.GetLocation(), string.Format(message, messageArgs))
                 : new(node.GetLocation(), message);
-
-        public int LineNumberToReport => node.GetLocation().LineNumberToReport;
 
         public bool HasFlagsAttribute(SemanticModel model) =>
             model.GetDeclaredSymbol(node).HasAttribute(KnownType.System_FlagsAttribute);
