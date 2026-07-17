@@ -132,5 +132,5 @@ public sealed class TestMethodShouldContainAssertion : SonarDiagnosticAnalyzer
         || methodSymbol.ContainingType.DerivesFromAny(KnownAssertionTypes);
 
     private static bool IsCustomAssertion(ISymbol methodSymbol) =>
-        methodSymbol.GetAttributesWithInherited().Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
+        methodSymbol.AttributesWithInherited.Any(x => x.AttributeClass.Name == CustomAssertionAttributeName);
 }

@@ -180,7 +180,7 @@ public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
     private static IEnumerable<NodeSymbolAndModel<TSyntax, IMethodSymbol>> ConstructorDeclarations<TSyntax>(SonarSyntaxNodeReportingContext context, List<IMethodSymbol> constructorSymbols)
         where TSyntax : SyntaxNode =>
         constructorSymbols
-            .SelectMany(x => x.AllPartialParts())
+            .SelectMany(x => x.AllPartialParts)
             .OfType<IMethodSymbol>()
             .SelectMany(x => x.DeclaringSyntaxReferences.Select(r => r.GetSyntax()).OfType<TSyntax>().Select(syntax => AddModel(context, syntax, x)))
             .Where(x => x.Model is not null);

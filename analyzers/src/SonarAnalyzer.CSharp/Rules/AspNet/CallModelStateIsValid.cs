@@ -101,10 +101,10 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
         && (parameter.Type.TypeKind == TypeKind.Dynamic || parameter.Type.IsAny(IgnoredArgumentTypes));
 
     private static bool HasApiControllerAttribute(ITypeSymbol type) =>
-        type.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute));
+        type.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute));
 
     private static bool HasActionFilterAttribute(ISymbol symbol) =>
-        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
+        symbol.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute));
 
     private static bool IsCheckingValidityProperty(SyntaxNode node, SemanticModel model) =>
         node.GetIdentifier() is { ValueText: "IsValid" or "ValidationState" } nodeIdentifier

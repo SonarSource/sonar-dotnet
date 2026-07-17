@@ -45,8 +45,8 @@ public sealed class ComparableInterfaceImplementation : SonarDiagnosticAnalyzer
             {
                 var classDeclaration = (TypeDeclarationSyntax)c.Node;
                 if (c.Model.GetDeclaredSymbol(classDeclaration) is { } classSymbol
+                    and not { ContainingType: not null, EffectiveAccessibility: Accessibility.Private or Accessibility.ProtectedAndInternal }
                     && !classSymbol.BaseType.GetSelfAndBaseTypes().Any(t => t.ImplementsAny(ComparableInterfaces))
-                    && !(classSymbol.ContainingType is not null && classSymbol.GetEffectiveAccessibility() is Accessibility.Private or Accessibility.ProtectedAndInternal)
                     && ImplementedComparableInterfaces(classSymbol) is var implementedComparableInterfaces
                     && implementedComparableInterfaces.Any()
                     && MembersToOverride(classSymbol.GetMembers().OfType<IMethodSymbol>()).ToList() is { } membersToOverride

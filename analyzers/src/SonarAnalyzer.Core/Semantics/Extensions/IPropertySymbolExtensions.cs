@@ -22,8 +22,5 @@ public static class IPropertySymbolExtensions
     extension(IPropertySymbol property)
     {
         public bool IsExtension => property is { GetMethod.IsExtension: true } or { SetMethod.IsExtension: true };
-
-        public bool IsAnyAttributeInOverridingChain() =>
-            property.IsAnyAttributeInOverridingChain(x => x.OverriddenProperty);
     }
 }

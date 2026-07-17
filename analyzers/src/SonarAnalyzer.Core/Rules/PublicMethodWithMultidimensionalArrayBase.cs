@@ -33,10 +33,8 @@ public abstract class PublicMethodWithMultidimensionalArrayBase<TSyntaxKind> : S
         context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (MethodSymbolOfNode(c.Model, c.Node) is { } methodSymbol
+                if (MethodSymbolOfNode(c.Model, c.Node) is { IsOverride: false, IsPubliclyAccessible: true } methodSymbol
                     && methodSymbol.InterfaceMembers().IsEmpty
-                    && !methodSymbol.IsOverride
-                    && methodSymbol.IsPubliclyAccessible()
                     && MethodHasMultidimensionalArrayParameters(methodSymbol))
                 {
                     c.ReportIssue(SupportedDiagnostics[0], GetIssueLocation(c.Node), GetType(c.Node));

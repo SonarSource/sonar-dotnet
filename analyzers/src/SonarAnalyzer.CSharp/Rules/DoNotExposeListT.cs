@@ -34,15 +34,13 @@ namespace SonarAnalyzer.CSharp.Rules
                     var baseMethodDeclaration = (BaseMethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.Model.GetDeclaredSymbol(baseMethodDeclaration);
 
-                    if (methodSymbol == null
-                        || !methodSymbol.IsPubliclyAccessible()
-                        || methodSymbol.IsOverride
+                    if (methodSymbol is not { IsPubliclyAccessible: true, IsOverride: false }
                         || !IsOrdinaryMethodOrConstructor(methodSymbol))
                     {
                         return;
                     }
 
-                    var methodType = methodSymbol.IsConstructor() ? "constructor" : "method";
+                    var methodType = methodSymbol.IsConstructor ? "constructor" : "method";
 
                     if (baseMethodDeclaration is MethodDeclarationSyntax methodDeclaration)
                     {
@@ -64,9 +62,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
                     var propertySymbol = c.Model.GetDeclaredSymbol(propertyDeclaration);
 
-                    if (propertySymbol != null
-                        && propertySymbol.IsPubliclyAccessible()
-                        && !propertySymbol.IsOverride
+                    if (propertySymbol is { IsPubliclyAccessible: true, IsOverride: false }
                         && !HasXmlElementAttribute(propertySymbol))
                     {
                         ReportIfListT(c, propertyDeclaration.Type, "property");
@@ -79,16 +75,14 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
 
-                    var variableDeclaration = fieldDeclaration.Declaration?.Variables.FirstOrDefault();
-                    if (variableDeclaration == null)
+                    if (fieldDeclaration.Declaration?.Variables.FirstOrDefault() is not { } variableDeclaration)
                     {
                         return;
                     }
 
                     var fieldSymbol = c.Model.GetDeclaredSymbol(variableDeclaration);
 
-                    if (fieldSymbol != null
-                        && fieldSymbol.IsPubliclyAccessible()
+                    if (fieldSymbol is { IsPubliclyAccessible: true }
                         && !HasXmlElementAttribute(fieldSymbol))
                     {
                         ReportIfListT(c, fieldDeclaration.Declaration.Type, "field");

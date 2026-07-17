@@ -24,7 +24,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
     protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
     {
-        if (property.SetMethod.GetFirstSyntaxRef() is not AccessorDeclarationSyntax setter)
+        if (property.SetMethod.FirstSyntaxRef is not AccessorDeclarationSyntax setter)
         {
             return [];
         }
@@ -47,7 +47,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
     {
         // A field is considered accessed if it appears anywhere in the getter body, including across multiple return paths.
-        var getterSyntax = property.GetMethod.GetFirstSyntaxRef();
+        var getterSyntax = property.GetMethod.FirstSyntaxRef;
         if (getterSyntax is not (AccessorDeclarationSyntax or ArrowExpressionClauseSyntax))
         {
             return [];
@@ -80,7 +80,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     }
 
     protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation) =>
-        accessorMethod.GetFirstSyntaxRef() switch
+        accessorMethod.FirstSyntaxRef switch
         {
             ArrowExpressionClauseSyntax arrowClause => ThrowExpressionSyntaxWrapper.IsInstance(arrowClause.Expression),
             not AccessorDeclarationSyntax => true,
@@ -95,7 +95,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     protected override bool ImplementsExplicitGetterOrSetter(IPropertySymbol property) =>
         HasExplicitAccessor(property.SetMethod)
         || HasExplicitAccessor(property.GetMethod)
-        || property.GetMethod.GetFirstSyntaxRef() is ArrowExpressionClauseSyntax; // Only getters can have property-level arrow expression bodies in C#
+        || property.GetMethod.FirstSyntaxRef is ArrowExpressionClauseSyntax; // Only getters can have property-level arrow expression bodies in C#
 
     private static void FillAssignments(IDictionary<IFieldSymbol, FieldData> assignments, Compilation compilation, SyntaxNode root, bool useFieldLocation)
     {
@@ -196,6 +196,6 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     }
 
     private static bool HasExplicitAccessor(ISymbol symbol) =>
-        symbol.GetFirstSyntaxRef() is AccessorDeclarationSyntax accessor
+        symbol.FirstSyntaxRef is AccessorDeclarationSyntax accessor
         && accessor.DescendantNodes().Any();
 }

@@ -153,8 +153,7 @@ namespace SonarAnalyzer.CSharp.Rules
             constructorSymbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ConstructorDeclarationSyntax { Initializer: { ThisOrBaseKeyword: { RawKind: (int)SyntaxKind.BaseKeyword } } };
 
         private static bool ImplementsISerializable(ITypeSymbol typeSymbol) =>
-            typeSymbol != null
-            && typeSymbol.IsPubliclyAccessible()
+            typeSymbol is { IsPubliclyAccessible: true }
             && typeSymbol.Implements(KnownType.System_Runtime_Serialization_ISerializable);
 
         private static bool OptsInForSerialization(INamedTypeSymbol typeSymbol) =>

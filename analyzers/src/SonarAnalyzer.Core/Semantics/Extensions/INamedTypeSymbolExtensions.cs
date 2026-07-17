@@ -65,7 +65,7 @@ public static class INamedTypeSymbolExtensions
     /// </summary>
     public static bool IsCoreApiController(this INamedTypeSymbol namedType) =>
         namedType.IsControllerType()
-        && (namedType.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
+        && (namedType.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
             || (namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
 
     /// <summary>

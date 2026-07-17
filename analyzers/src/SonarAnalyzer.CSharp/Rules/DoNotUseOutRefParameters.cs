@@ -32,27 +32,16 @@ namespace SonarAnalyzer.CSharp.Rules
                 c =>
                 {
                     var parameter = (ParameterSyntax)c.Node;
+                    var modifier = parameter.Modifiers.FirstOrDefault(IsRefOrOut);
 
-                    if (!parameter.Modifiers.Any(IsRefOrOut)
-                        || parameter is { Parent: ParameterListSyntax { Parent: MethodDeclarationSyntax { IsDeconstructor: true } } })
+                    if (!modifier.IsKind(SyntaxKind.None)
+                        && parameter is not { Parent: ParameterListSyntax { Parent: MethodDeclarationSyntax { IsDeconstructor: true } } }
+                        && c.Model.GetDeclaredSymbol(parameter)?.ContainingSymbol is IMethodSymbol { IsOverride: false, IsPubliclyAccessible: true } containingMethod
+                        && !IsTryPattern(containingMethod, modifier)
+                        && containingMethod.InterfaceMembers().IsEmpty)
                     {
-                        return;
+                        c.ReportIssue(Rule, modifier, modifier.ValueText);
                     }
-
-                    var modifier = parameter.Modifiers.First(IsRefOrOut);
-
-                    var parameterSymbol = c.Model.GetDeclaredSymbol(parameter);
-
-                    if (parameterSymbol?.ContainingSymbol is not IMethodSymbol containingMethod
-                        || containingMethod.IsOverride
-                        || !containingMethod.IsPubliclyAccessible()
-                        || IsTryPattern(containingMethod, modifier)
-                        || containingMethod.InterfaceMembers().Any())
-                    {
-                        return;
-                    }
-
-                    c.ReportIssue(Rule, modifier, modifier.ValueText);
                 },
                 SyntaxKind.Parameter);
 

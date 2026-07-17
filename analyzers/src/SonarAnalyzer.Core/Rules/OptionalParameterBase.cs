@@ -39,10 +39,8 @@ namespace SonarAnalyzer.Core.Rules
                     var method = (TMethodSyntax)c.Node;
                     var symbol = c.Model.GetDeclaredSymbol(method);
 
-                    if (symbol == null ||
-                        !symbol.IsPubliclyAccessible() ||
-                        symbol.InterfaceMembers().Any() ||
-                        symbol.GetOverriddenMember() != null)
+                    if (symbol is null or { IsPubliclyAccessible: false } or { OverriddenMember: not null }
+                        || symbol.InterfaceMembers().Any())
                     {
                         return;
                     }

@@ -39,7 +39,7 @@ public static class ISymbolExtensions
                .ToImmutableArray();
 
         public bool IsPrimaryConstructor =>
-            symbol.IsConstructor()
+            symbol.IsConstructor
             && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is { } syntax
             && DeclarationsTypesWithPrimaryConstructor.Contains(syntax.Kind());
 

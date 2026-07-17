@@ -44,7 +44,7 @@ public abstract class MethodDeclarationTracker<TSyntaxKind> : TrackerBase<TSynta
 
             foreach (var declaration in c.Symbol.DeclaringSyntaxReferences)
             {
-                if (c.Symbol.IsTopLevelMain())
+                if (c.Symbol.IsTopLevelMain)
                 {
                     c.ReportIssue(Language.GeneratedCodeRecognizer, input.Rule, Location.Create(declaration.SyntaxTree, TextSpan.FromBounds(0, 0)));
                 }
@@ -74,7 +74,7 @@ public abstract class MethodDeclarationTracker<TSyntaxKind> : TrackerBase<TSynta
 
     public Condition IsMainMethod() =>
         context => context.MethodSymbol.IsMainMethod()
-                   || context.MethodSymbol.IsTopLevelMain();
+                   || context.MethodSymbol.IsTopLevelMain;
 
     internal Condition AnyParameterIsOfType(params KnownType[] types)
     {

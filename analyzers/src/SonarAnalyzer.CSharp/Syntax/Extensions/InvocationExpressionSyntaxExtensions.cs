@@ -32,7 +32,7 @@ internal static class InvocationExpressionSyntaxExtensions
     // must have same number of arguments + 1 (the argument that should be added) OR is params argument
     private static bool IsCompatibleOverload(InvocationExpressionSyntax invocation, IMethodSymbol m)
     {
-        var parameters = m.GetParameters().ToArray();
+        var parameters = m.Parameters.ToArray();
         return parameters.Length - invocation.ArgumentList.Arguments.Count == 1
             || (parameters.Length != 0 && parameters[parameters.Length - 1].IsParams);
     }
@@ -46,9 +46,9 @@ internal static class InvocationExpressionSyntaxExtensions
             // attempt to create the possibleOverload method symbol with same type arguments as the invocation method
             ? ConstructTypedPossibleOverload(possibleOverload, invocationMethodSymbol)
             : possibleOverload;
-        var invocationParameters = invocationMethodSymbol.GetParameters().ToArray();
-        var parametersWithoutWantedType = withTypeParam.GetParameters().Where(x => !x.Type.IsAny(types)).ToArray();
-        if (parametersWithoutWantedType.Length == possibleOverload.GetParameters().Count())
+        var invocationParameters = invocationMethodSymbol.Parameters.ToArray();
+        var parametersWithoutWantedType = withTypeParam.Parameters.Where(x => !x.Type.IsAny(types)).ToArray();
+        if (parametersWithoutWantedType.Length == possibleOverload.Parameters.Count())
         {
             return false;
         }

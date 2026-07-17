@@ -57,7 +57,7 @@ namespace SonarAnalyzer.CSharp.Rules
             else
             {
                 var index = methodSymbol.Parameters.IndexOf(parameterSymbol);
-                var overriddenMember = methodSymbol.GetOverriddenMember() ?? methodSymbol.InterfaceMembers().FirstOrDefault();
+                var overriddenMember = methodSymbol.OverriddenMember ?? methodSymbol.InterfaceMembers().FirstOrDefault();
                 if (index == -1 ||
                     overriddenMember == null)
                 {

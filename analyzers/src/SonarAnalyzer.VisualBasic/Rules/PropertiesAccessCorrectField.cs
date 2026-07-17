@@ -24,7 +24,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
     protected override IEnumerable<FieldData> FindFieldAssignments(IPropertySymbol property, Compilation compilation)
     {
-        if (property.SetMethod.GetFirstSyntaxRef() is not AccessorStatementSyntax setter)
+        if (property.SetMethod.FirstSyntaxRef is not AccessorStatementSyntax setter)
         {
             return [];
         }
@@ -69,7 +69,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     protected override IEnumerable<FieldData> FindFieldReads(IPropertySymbol property, Compilation compilation)
     {
         // A field is considered accessed if it appears anywhere in the getter body, including across multiple return paths.
-        if (property.GetMethod.GetFirstSyntaxRef() is not AccessorStatementSyntax getter)
+        if (property.GetMethod.FirstSyntaxRef is not AccessorStatementSyntax getter)
         {
             return [];
         }
@@ -103,7 +103,7 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
 
     protected override bool ShouldIgnoreAccessor(IMethodSymbol accessorMethod, Compilation compilation)
     {
-        if (accessorMethod.GetFirstSyntaxRef() is not AccessorStatementSyntax accessor
+        if (accessorMethod.FirstSyntaxRef is not AccessorStatementSyntax accessor
             || accessor.Parent.ContainsGetOrSetOnDependencyProperty(compilation)
             || AccessesSelfBaseProperty(accessorMethod, accessor.Parent, compilation))
         {
@@ -208,6 +208,6 @@ public sealed class PropertiesAccessCorrectField : PropertiesAccessCorrectFieldB
     }
 
     private static bool HasExplicitAccessor(ISymbol symbol) =>
-        symbol.GetFirstSyntaxRef() is AccessorStatementSyntax accessor
+        symbol.FirstSyntaxRef is AccessorStatementSyntax accessor
         && accessor.Parent.DescendantNodes().Any();
 }

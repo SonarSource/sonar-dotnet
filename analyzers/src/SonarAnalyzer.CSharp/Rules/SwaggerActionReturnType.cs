@@ -83,7 +83,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                || nodeContext.Model.GetDeclaredSymbol(methodDeclaration, nodeContext.Cancel) is not { } method
                || !method.IsControllerActionMethod()
                || !method.ReturnType.DerivesOrImplementsAny(ControllerActionReturnTypes)
-               || method.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
+               || method.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionMethodAttribute)
                                                                || HasApiExplorerSettingsWithIgnoreApiTrue(x)
                                                                || HasProducesAttributesWithReturnType(x))
                    ? null
@@ -101,7 +101,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                             && x.ArgumentList.Arguments.Count > 0
                             && model.GetSymbolInfo(x.Expression).Symbol is { } symbol
                             && symbol.IsInType(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase)
-                            && symbol.GetParameters().Any(parameter => parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute)));
+                            && symbol.Parameters.Any(parameter => parameter.HasAttribute(KnownType.Microsoft_AspNetCore_Mvc_Infrastructure_ActionResultObjectValueAttribute)));
 
         IEnumerable<SyntaxNode> ObjectCreationInvocations() =>
             node.DescendantNodes()
@@ -121,7 +121,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     private static bool IsControllerCandidate(ISymbol symbol)
     {
         var hasApiControllerAttribute = false;
-        foreach (var attribute in symbol.GetAttributesWithInherited())
+        foreach (var attribute in symbol.AttributesWithInherited)
         {
             if (attribute.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiConventionTypeAttribute)
                 || HasProducesAttributesWithReturnType(attribute)
@@ -135,7 +135,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
     }
 
     private static string GetMessage(ISymbol symbol) =>
-        symbol.GetAttributesWithInherited().Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute))
+        symbol.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ProducesResponseTypeAttribute))
             ? NoTypeMessageFormat
             : NoAttributeMessageFormat;
 

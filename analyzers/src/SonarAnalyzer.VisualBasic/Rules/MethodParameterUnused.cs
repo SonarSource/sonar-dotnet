@@ -55,7 +55,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
                     if (methodSymbol == null
                         || methodSymbol.IsMainMethod()
                         || methodSymbol.IsEventHandler()
-                        || methodSymbol.GetEffectiveAccessibility() != Accessibility.Private)
+                        || methodSymbol.EffectiveAccessibility != Accessibility.Private)
                     {
                         return;
                     }

@@ -62,8 +62,7 @@ public abstract class MutableFieldsShouldNotBe : SonarDiagnosticAnalyzer
             {
                 if (HasAllInvalidModifiers(fieldDeclaration)
                     && fieldDeclaration.Declaration.Variables.Count > 0
-                    && c.Model.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol { Type: not null } fieldSymbol
-                    && fieldSymbol.GetEffectiveAccessibility() == Accessibility.Public
+                    && c.Model.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]) is IFieldSymbol { Type: not null, EffectiveAccessibility: Accessibility.Public } fieldSymbol
                     && !IsImmutableOrValidMutableType(fieldSymbol.Type)
                     // The field seems to be violating the rule but we should exclude the cases where the field is read-only
                     // and all initializations to this field are immutable

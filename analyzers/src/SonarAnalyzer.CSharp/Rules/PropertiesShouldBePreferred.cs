@@ -55,11 +55,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 SyntaxKindEx.RecordStructDeclaration);
 
         private static bool HasCandidateSignature(IMethodSymbol method) =>
-            method.IsPubliclyAccessible()
-            && method.Parameters.Length == 0
-            && !method.IsConstructor()
-            && !method.IsOverride
-            && method.MethodKind != MethodKind.PropertyGet
+            method is { IsPubliclyAccessible: true, Parameters.Length: 0, IsConstructor: false, IsOverride: false, MethodKind: not MethodKind.PropertyGet }
             && method.InterfaceMembers().IsEmpty;
 
         private static bool HasCandidateReturnType(IMethodSymbol method) =>

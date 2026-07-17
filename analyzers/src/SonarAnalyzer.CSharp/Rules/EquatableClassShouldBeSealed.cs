@@ -35,10 +35,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var classDeclaration = (ClassDeclarationSyntax)c.Node;
                     var classSymbol = c.Model.GetDeclaredSymbol(classDeclaration);
 
-                    if (classSymbol != null
-                        && !classSymbol.IsSealed
-                        && !classSymbol.IsStatic
-                        && classSymbol.IsPubliclyAccessible()
+                    if (classSymbol is { IsSealed: false, IsStatic: false, IsPubliclyAccessible: true }
                         && !classDeclaration.Identifier.IsMissing
                         && HasAnyInvalidIEquatableEqualsMethod(classSymbol))
                     {
@@ -79,7 +76,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsIEquatableEqualsMethodCandidate(IMethodSymbol methodSymbol) =>
             methodSymbol.MethodKind == MethodKind.Ordinary
             && methodSymbol.Name == EqualsMethodName
-            && methodSymbol.IsPubliclyAccessible()
+            && methodSymbol.IsPubliclyAccessible
             && !methodSymbol.IsOverride
             && methodSymbol.ReturnType.Is(KnownType.System_Boolean)
             && methodSymbol.Parameters.Length == 1;

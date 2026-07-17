@@ -69,7 +69,7 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 foreach (var identifier in namedType.DeclaringReferenceIdentifiers)
                 {
-                    context.ReportIssue(Rule, identifier, namedType.GetClassification());
+                    context.ReportIssue(Rule, identifier, namedType.Classification);
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace SonarAnalyzer.CSharp.Rules
             if (outerMembersOfSameName.Any(x => (x.IsStatic && !x.IsAbstract && !x.IsVirtual) || x is IFieldSymbol { IsConst: true })
                 && member.FirstDeclaringReferenceIdentifier?.GetLocation() is { Kind: LocationKind.SourceFile } location)
             {
-                context.ReportIssue(Rule, location, member.GetClassification());
+                context.ReportIssue(Rule, location, member.Classification);
             }
         }
 

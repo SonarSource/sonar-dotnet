@@ -90,7 +90,7 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
                 && !knownNodes.Contains(parent)
                 && GetReferenceSymbol(parent, model) is { } symbol)
             {
-                foreach (var part in symbol.AllPartialParts().Where(references.ContainsKey))
+                foreach (var part in symbol.AllPartialParts.Where(references.ContainsKey))
                 {
                     references[part].Add(new(parent, token, part, false));
                 }

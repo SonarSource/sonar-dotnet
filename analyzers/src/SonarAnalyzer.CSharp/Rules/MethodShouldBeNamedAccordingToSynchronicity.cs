@@ -53,7 +53,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     if (methodSymbol == null
                         || methodSymbol.IsMainMethod()
                         || methodSymbol.InterfaceMembers().Any()
-                        || methodSymbol.GetOverriddenMember() != null
+                        || methodSymbol.OverriddenMember is not null
                         || methodSymbol.IsTestMethod()
                         || methodSymbol.IsControllerActionMethod()
                         || IsSignalRHubMethod(methodSymbol))
@@ -91,7 +91,7 @@ namespace SonarAnalyzer.CSharp.Rules
             methodDeclaration.Identifier.ValueText.EndsWith("async", StringComparison.OrdinalIgnoreCase);
 
         private static bool IsSignalRHubMethod(ISymbol methodSymbol) =>
-            methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
+            methodSymbol.EffectiveAccessibility == Accessibility.Public
             && IsSignalRHubMethod(methodSymbol.ContainingType);
 
         private static bool IsSignalRHubMethod(ITypeSymbol typeSymbol) =>

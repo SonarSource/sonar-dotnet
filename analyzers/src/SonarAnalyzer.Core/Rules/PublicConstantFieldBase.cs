@@ -40,22 +40,12 @@ namespace SonarAnalyzer.Core.Rules
                     var field = (TFieldDeclarationSyntax)c.Node;
                     var variables = GetVariables(field).ToList();
 
-                    if (!variables.Any())
+                    if (variables.Count > 0 && c.Model.GetDeclaredSymbol(variables[0]) is IFieldSymbol { IsConst: true, EffectiveAccessibility: Accessibility.Public })
                     {
-                        return;
-                    }
-
-                    var anyVariable = variables.First();
-                    if (!(c.Model.GetDeclaredSymbol(anyVariable) is IFieldSymbol symbol) ||
-                        !symbol.IsConst ||
-                        symbol.GetEffectiveAccessibility() != Accessibility.Public)
-                    {
-                        return;
-                    }
-
-                    foreach (var variable in variables)
-                    {
-                        c.ReportIssue(SupportedDiagnostics[0], GetReportLocation(variable), MessageArgument);
+                        foreach (var variable in variables)
+                        {
+                            c.ReportIssue(SupportedDiagnostics[0], GetReportLocation(variable), MessageArgument);
+                        }
                     }
                 },
                 FieldDeclarationKind);

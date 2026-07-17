@@ -21,9 +21,8 @@ public static class SonarSyntaxNodeReportingContextExtensions
 {
     extension(SonarSyntaxNodeReportingContext context)
     {
-        public bool IsTopLevelMain =>
-            context.Node is CompilationUnitSyntax { IsTopLevelMain: true }
-            && context.ContainingSymbol.IsGlobalNamespace(); // Needed to avoid the duplicate calls from Roslyn 4.0.0
+        // ContainingSymbol.IsGlobalNamespace is needed to avoid the duplicate calls from Roslyn 4.0.0
+        public bool IsTopLevelMain => context is { Node: CompilationUnitSyntax { IsTopLevelMain: true }, ContainingSymbol.IsGlobalNamespace: true };
 
         public bool IsInExpressionTree() =>
             context.Node.IsInExpressionTree(context.Model);

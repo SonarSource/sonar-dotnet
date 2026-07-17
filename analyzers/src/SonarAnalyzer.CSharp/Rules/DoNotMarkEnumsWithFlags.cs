@@ -56,7 +56,7 @@ public sealed class DoNotMarkEnumsWithFlags : SonarDiagnosticAnalyzer
                     .ToList();
 
                 var invalidMembers = membersWithValues.Where(tuple => !IsValidFlagValue(tuple.Value, allValues))
-                    .Select(tuple => tuple.Member.GetFirstSyntaxRef()?.ToSecondaryLocation(SecondaryMessage))
+                    .Select(tuple => tuple.Member.FirstSyntaxRef?.ToSecondaryLocation(SecondaryMessage))
                     .WhereNotNull()
                     .ToList();
 

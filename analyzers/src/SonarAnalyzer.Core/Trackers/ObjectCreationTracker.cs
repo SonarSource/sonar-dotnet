@@ -34,26 +34,22 @@ public abstract class ObjectCreationTracker<TSyntaxKind> : SyntaxTrackerBase<TSy
             && constructor.Parameters[index].Type.Is(type);
 
     internal Condition WhenDerivesOrImplementsAny(params KnownType[] types) =>
-        context => context.InvokedConstructorSymbol.Value is { } constructor
-            && constructor.IsConstructor()
+        context => context.InvokedConstructorSymbol.Value is { IsConstructor: true } constructor
             && constructor.ContainingType.DerivesOrImplementsAny(types.ToImmutableArray());
 
     internal Condition MatchConstructor(params KnownType[] types) =>
         // We cannot do a syntax check first because a type name can be aliased with
         // a using Alias = Fully.Qualified.Name and we will generate false negative
         // for new Alias()
-        context => context.InvokedConstructorSymbol.Value is { } constructor
-            && constructor.IsConstructor()
+        context => context.InvokedConstructorSymbol.Value is { IsConstructor: true } constructor
             && constructor.ContainingType.IsAny(types);
 
     internal Condition WhenDerivesFrom(KnownType baseType) =>
-        context => context.InvokedConstructorSymbol.Value is { } constructor
-            && constructor.IsConstructor()
+        context => context.InvokedConstructorSymbol.Value is { IsConstructor: true } constructor
             && constructor.ContainingType.DerivesFrom(baseType);
 
     internal Condition WhenImplements(KnownType baseType) =>
-        context => context.InvokedConstructorSymbol.Value is { } constructor
-            && constructor.IsConstructor()
+        context => context.InvokedConstructorSymbol.Value is { IsConstructor: true } constructor
             && constructor.ContainingType.Implements(baseType);
 
     protected override ObjectCreationContext CreateContext(SonarSyntaxNodeReportingContext context) =>

@@ -178,7 +178,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
     }
 
     private static bool MethodCanBeSafelyChanged(IMethodSymbol methodSymbol) =>
-        methodSymbol.GetEffectiveAccessibility() == Accessibility.Private
+        methodSymbol.EffectiveAccessibility == Accessibility.Private
         && !methodSymbol.GetAttributes().Any()
         && methodSymbol.IsChangeable()
         && !methodSymbol.IsEventHandler();

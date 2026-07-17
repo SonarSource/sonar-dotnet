@@ -80,8 +80,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var symbol = semanticModel.GetDeclaredSymbol(declaration);
 
-            return symbol is { IsSealed: false }
-                   && symbol.IsPubliclyAccessible();
+            return symbol is { IsSealed: false, IsPubliclyAccessible: true };
         }
 
         private static bool AreMethodsEquivalent(MethodDeclarationSyntax currentMethod, MethodDeclarationSyntax targetedMethod) =>

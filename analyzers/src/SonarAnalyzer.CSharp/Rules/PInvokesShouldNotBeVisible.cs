@@ -35,11 +35,8 @@ namespace SonarAnalyzer.CSharp.Rules
                     var methodDeclaration = (MethodDeclarationSyntax)c.Node;
                     var methodSymbol = c.Model.GetDeclaredSymbol(methodDeclaration);
 
-                    if (methodSymbol != null &&
-                        methodSymbol.IsExtern &&
-                        methodSymbol.IsStatic &&
-                        methodSymbol.IsPubliclyAccessible() &&
-                        methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
+                    if (methodSymbol is { IsExtern: true, IsStatic: true, IsPubliclyAccessible: true }
+                        && methodSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_DllImportAttribute))
                     {
                         c.ReportIssue(rule, methodDeclaration.Identifier);
                     }

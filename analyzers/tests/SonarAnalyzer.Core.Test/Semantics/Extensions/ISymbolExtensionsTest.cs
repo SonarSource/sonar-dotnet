@@ -111,7 +111,7 @@ public class ISymbolExtensionsTest
                 public string SymbolMember {{getterSetter}}
             }
             """;
-        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty().Should().BeTrue();
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty.Should().BeTrue();
     }
 
     [TestMethod]
@@ -124,7 +124,7 @@ public class ISymbolExtensionsTest
 
             End Class
             """;
-        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty().Should().BeTrue();
+        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty.Should().BeTrue();
     }
 
     [TestMethod]
@@ -142,7 +142,7 @@ public class ISymbolExtensionsTest
                 }
             }
             """;
-        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty().Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty.Should().BeFalse();
     }
 
     [TestMethod]
@@ -164,7 +164,7 @@ public class ISymbolExtensionsTest
 
             End Class
             """;
-        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty().Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty.Should().BeFalse();
     }
 
     [TestMethod]
@@ -176,7 +176,7 @@ public class ISymbolExtensionsTest
                 public void SymbolMember() { }
             }
             """;
-        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty().Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsAutoProperty.Should().BeFalse();
     }
 
     [TestMethod]
@@ -190,29 +190,29 @@ public class ISymbolExtensionsTest
 
             End Class
             """;
-        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty().Should().BeFalse();
+        CreateSymbol(code, AnalyzerLanguage.VisualBasic).IsAutoProperty.Should().BeFalse();
     }
 
     [TestMethod]
     public void Symbol_IsPublicApi()
     {
-        testSnippet.MethodSymbol("Base.Method1").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.MethodSymbol("Base.Method2").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.PropertySymbol("Base.Property").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.PropertySymbol("IInterface.Property2").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.PropertySymbol("Derived1.PrivateProperty").IsPubliclyAccessible().Should().BeFalse();
-        testSnippet.PropertySymbol("Derived1.PrivateProtectedProperty").IsPubliclyAccessible().Should().BeFalse();
-        testSnippet.PropertySymbol("Derived1.ProtectedProperty").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.PropertySymbol("Derived1.ProtectedInternalProperty").IsPubliclyAccessible().Should().BeTrue();
-        testSnippet.PropertySymbol("Derived1.InternalProperty").IsPubliclyAccessible().Should().BeFalse();
+        testSnippet.MethodSymbol("Base.Method1").IsPubliclyAccessible.Should().BeTrue();
+        testSnippet.MethodSymbol("Base.Method2").IsPubliclyAccessible.Should().BeTrue();
+        testSnippet.PropertySymbol("Base.Property").IsPubliclyAccessible.Should().BeTrue();
+        testSnippet.PropertySymbol("IInterface.Property2").IsPubliclyAccessible.Should().BeTrue();
+        testSnippet.PropertySymbol("Derived1.PrivateProperty").IsPubliclyAccessible.Should().BeFalse();
+        testSnippet.PropertySymbol("Derived1.PrivateProtectedProperty").IsPubliclyAccessible.Should().BeFalse();
+        testSnippet.PropertySymbol("Derived1.ProtectedProperty").IsPubliclyAccessible.Should().BeTrue();
+        testSnippet.PropertySymbol("Derived1.ProtectedInternalProperty").IsPubliclyAccessible.Should().BeTrue();
+        testSnippet.PropertySymbol("Derived1.InternalProperty").IsPubliclyAccessible.Should().BeFalse();
     }
 
     [TestMethod]
     public void Symbol_InterfaceMembersOrMemberOverride()
     {
         testSnippet.MethodSymbol("Base.Method1").InterfaceMembers().Should().BeEmpty();
-        testSnippet.MethodSymbol("Base.Method1").GetOverriddenMember().Should().BeNull();
-        testSnippet.PropertySymbol("Derived2.Property").GetOverriddenMember().Should().NotBeNull();
+        testSnippet.MethodSymbol("Base.Method1").OverriddenMember.Should().BeNull();
+        testSnippet.PropertySymbol("Derived2.Property").OverriddenMember.Should().NotBeNull();
         testSnippet.PropertySymbol("Derived2.Property2").InterfaceMembers().Should().ContainSingle();
         testSnippet.MethodSymbol("Derived2.Method3").InterfaceMembers().Should().ContainSingle().Which.Should().Be(testSnippet.MethodSymbol("IInterface.Method3"));
         testSnippet.MethodSymbol("TwoInterfaces.Method3").InterfaceMembers().Should().BeEquivalentTo([
@@ -269,18 +269,18 @@ public class ISymbolExtensionsTest
     [TestMethod]
     public void Symbol_GetOverriddenMember()
     {
-        var actualOverriddenMethod = testSnippet.MethodSymbol("Base.Method1").GetOverriddenMember();
+        var actualOverriddenMethod = testSnippet.MethodSymbol("Base.Method1").OverriddenMember;
         actualOverriddenMethod.Should().BeNull();
 
         var expectedOverriddenProperty = testSnippet.PropertySymbol("Base.Property");
         var propertySymbol = testSnippet.PropertySymbol("Derived2.Property");
 
-        var actualOverriddenProperty = propertySymbol.GetOverriddenMember();
+        var actualOverriddenProperty = propertySymbol.OverriddenMember;
         actualOverriddenProperty.Should().NotBeNull();
         actualOverriddenProperty.Should().Be(expectedOverriddenProperty);
 
-        testSnippet.MethodSymbol("Derived3.Method3").GetOverriddenMember().Should().Be(testSnippet.MethodSymbol("Derived2.Method3"));
-        testSnippet.MethodSymbol("Derived3.Method5").GetOverriddenMember().Should().Be(testSnippet.MethodSymbol("Derived2.Method5"));
+        testSnippet.MethodSymbol("Derived3.Method3").OverriddenMember.Should().Be(testSnippet.MethodSymbol("Derived2.Method3"));
+        testSnippet.MethodSymbol("Derived3.Method5").OverriddenMember.Should().Be(testSnippet.MethodSymbol("Derived2.Method5"));
     }
 
     [TestMethod]
@@ -313,7 +313,7 @@ public class ISymbolExtensionsTest
     {
         var symbol = Substitute.For<ISymbol>();
         symbol.Kind.Returns(SymbolKind.Alias);
-        symbol.GetParameters().Should().BeEmpty();
+        symbol.Parameters.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -322,11 +322,11 @@ public class ISymbolExtensionsTest
 
     [TestMethod]
     public void GetOverriddenMember_WhenSymbolIsNull_ReturnsNull() =>
-        ((ISymbol)null).GetOverriddenMember().Should().BeNull();
+        ((ISymbol)null).OverriddenMember.Should().BeNull();
 
     [TestMethod]
     public void GetEffectiveAccessibility_WhenSymbolIsNull_ReturnsNotApplicable() =>
-        ISymbolExtensionsCommon.GetEffectiveAccessibility(null).Should().Be(Accessibility.NotApplicable);
+        ((ISymbol)null).EffectiveAccessibility.Should().Be(Accessibility.NotApplicable);
 
     [TestMethod]
     [DataRow(SymbolKind.Alias, "alias")]
@@ -352,7 +352,7 @@ public class ISymbolExtensionsTest
     {
         var symbol = Substitute.For<ISymbol>();
         symbol.Kind.Returns(symbolKind);
-        symbol.GetClassification().Should().Be(expected);
+        symbol.Classification.Should().Be(expected);
     }
 
     [TestMethod]
@@ -361,9 +361,9 @@ public class ISymbolExtensionsTest
         var symbol = Substitute.For<ISymbol>();
         symbol.Kind.Returns((SymbolKind)999);
 #if DEBUG
-        new Action(() => symbol.GetClassification()).Should().Throw<NotSupportedException>();
+        new Action(() => _ = symbol.Classification).Should().Throw<NotSupportedException>();
 #else
-        ISymbolExtensionsCommon.GetClassification(symbol).Should().Be("symbol");
+        symbol.Classification.Should().Be("symbol");
 #endif
     }
 
@@ -379,7 +379,7 @@ public class ISymbolExtensionsTest
         var symbol = CreateSymbol(code, AnalyzerLanguage.CSharp);
         var methodSymbol = symbol as IMethodSymbol;
 
-        var result = symbol.AllPartialParts().ToList();
+        var result = symbol.AllPartialParts.ToList();
 
         result.Should().ContainSingle().And.Subject.Should().Contain(methodSymbol);
     }
@@ -397,11 +397,11 @@ public class ISymbolExtensionsTest
         var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is MethodDeclarationSyntax);
 
         var declarationSymbol = symbols[0] as IMethodSymbol;
-        var declarationResult = declarationSymbol.AllPartialParts().ToList();
+        var declarationResult = declarationSymbol.AllPartialParts.ToList();
         declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
 
         var implementationSymbol = symbols[1] as IMethodSymbol;
-        var implementationResult = implementationSymbol.AllPartialParts().ToList();
+        var implementationResult = implementationSymbol.AllPartialParts.ToList();
         implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
     }
 
@@ -421,11 +421,11 @@ public class ISymbolExtensionsTest
         var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is MethodDeclarationSyntax);
 
         var declarationSymbol = symbols[0] as IMethodSymbol;
-        var declarationResult = declarationSymbol.AllPartialParts().ToList();
+        var declarationResult = declarationSymbol.AllPartialParts.ToList();
         declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
 
         var implementationSymbol = symbols[1] as IMethodSymbol;
-        var implementationResult = implementationSymbol.AllPartialParts().ToList();
+        var implementationResult = implementationSymbol.AllPartialParts.ToList();
         implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
     }
 
@@ -446,11 +446,11 @@ public class ISymbolExtensionsTest
         var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is PropertyDeclarationSyntax);
 
         var declarationSymbol = symbols[0] as IPropertySymbol;
-        var declarationResult = declarationSymbol.AllPartialParts().ToList();
+        var declarationResult = declarationSymbol.AllPartialParts.ToList();
         declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
 
         var implementationSymbol = symbols[1] as IPropertySymbol;
-        var implementationResult = implementationSymbol.AllPartialParts().ToList();
+        var implementationResult = implementationSymbol.AllPartialParts.ToList();
         implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
     }
 
@@ -474,18 +474,18 @@ public class ISymbolExtensionsTest
         var symbols = CreateSymbols(code, AnalyzerLanguage.CSharp, x => x is PropertyDeclarationSyntax);
 
         var declarationSymbol = symbols[0] as IPropertySymbol;
-        var declarationResult = declarationSymbol.AllPartialParts().ToList();
+        var declarationResult = declarationSymbol.AllPartialParts.ToList();
         declarationResult.Should().HaveCount(2).And.Contain([declarationSymbol, declarationSymbol.PartialImplementationPart]);
 
         var implementationSymbol = symbols[1] as IPropertySymbol;
-        var implementationResult = implementationSymbol.AllPartialParts().ToList();
+        var implementationResult = implementationSymbol.AllPartialParts.ToList();
         implementationResult.Should().HaveCount(2).And.Contain([implementationSymbol, implementationSymbol.PartialDefinitionPart]);
     }
 
     [TestMethod]
     public void AllPartialParts_OtherSymbol()
     {
-        var result = Substitute.For<ISymbol>().AllPartialParts().ToList();
+        var result = Substitute.For<ISymbol>().AllPartialParts.ToList();
         result.Should().ContainSingle();
     }
 

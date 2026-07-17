@@ -49,7 +49,7 @@ public sealed class DoNotNestTypesInArguments : SonarDiagnosticAnalyzer
 
     private static bool ImplementsAbstractClassOrInterface(SonarSyntaxNodeReportingContext context, BaseMethodDeclarationSyntax method) =>
         context.Model.GetDeclaredSymbol(method) is { } symbol
-        && (symbol.GetOverriddenMember() is { IsAbstract: true } || symbol.InterfaceMembers().Any());
+        && (symbol.OverriddenMember is { IsAbstract: true } || symbol.InterfaceMembers().Any());
 
     private static bool MaxDepthReached(SyntaxNode parameterSyntax, SemanticModel model)
     {

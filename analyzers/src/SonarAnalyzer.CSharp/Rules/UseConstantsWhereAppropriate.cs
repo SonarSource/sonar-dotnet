@@ -77,13 +77,8 @@ namespace SonarAnalyzer.CSharp.Rules
                 SyntaxKind.FieldDeclaration);
         }
 
-        private static bool IsFieldRelevant(IFieldSymbol fieldSymbol)
-        {
-            return fieldSymbol != null &&
-                   fieldSymbol.IsStatic &&
-                   fieldSymbol.IsReadOnly &&
-                   !fieldSymbol.IsPubliclyAccessible() &&
-                   fieldSymbol.Type.IsAny(RelevantTypes);
-        }
+        private static bool IsFieldRelevant(IFieldSymbol fieldSymbol) =>
+            fieldSymbol is { IsStatic: true, IsReadOnly: true, IsPubliclyAccessible: false }
+            && fieldSymbol.Type.IsAny(RelevantTypes);
     }
 }

@@ -40,11 +40,8 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 foreach (var variable in fieldDeclaration.Declaration.Variables)
                 {
-                    if (SymbolIfPointerType(fieldDeclaration.Declaration, variable, c.Model) is { } variableSymbol
-                        && variableSymbol.GetEffectiveAccessibility() is var accessibility
-                        && accessibility != Accessibility.Private
-                        && accessibility != Accessibility.Internal
-                        && !variableSymbol.IsReadOnly)
+                    if (SymbolIfPointerType(fieldDeclaration.Declaration, variable, c.Model)
+                        is { EffectiveAccessibility: not (Accessibility.Private or Accessibility.Internal), IsReadOnly: false } variableSymbol)
                     {
                         c.ReportIssue(Rule, variable, variableSymbol.Name);
                     }

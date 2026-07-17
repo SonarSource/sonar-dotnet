@@ -232,13 +232,13 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 }
             }
 
-            if (unused.Symbol.IsConstructor() && !syntaxForLocation.GetModifiers().Any(SyntaxKind.PrivateKeyword))
+            if (unused.Symbol.IsConstructor && !syntaxForLocation.GetModifiers().Any(SyntaxKind.PrivateKeyword))
             {
                 context.ReportIssue(RuleS1144ForPublicCtor, syntaxForLocation, accessibility, unused.Symbol.ContainingType.Name);
             }
             else
             {
-                context.ReportIssue(RuleS1144, IdentifierLocation(syntaxForLocation), accessibility, unused.Symbol.GetClassification(), MemberName(unused.Symbol));
+                context.ReportIssue(RuleS1144, IdentifierLocation(syntaxForLocation), accessibility, unused.Symbol.Classification, MemberName(unused.Symbol));
             }
         }
 
@@ -256,7 +256,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                 : node.GetLocation();
 
         static string MemberName(ISymbol symbol) =>
-            symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
+            symbol.IsConstructor ? symbol.ContainingType.Name : symbol.Name;
     }
 
     private static void ReportProperty<TContext>(TContext context,
@@ -474,7 +474,7 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         {
             if (condition(symbol))
             {
-                if (symbol.GetEffectiveAccessibility() == Accessibility.Private)
+                if (symbol.EffectiveAccessibility == Accessibility.Private)
                 {
                     PrivateSymbols.Add(symbol);
                 }
@@ -515,13 +515,11 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             && !methodSymbol.IsMefConstructor();
 
         private static bool IsRemovable(ISymbol symbol) =>
-            symbol is { IsImplicitlyDeclared: false, IsVirtual: false }
+            symbol is { IsImplicitlyDeclared: false, IsVirtual: false, OverriddenMember: null, IsSerializableMember: false }
             && !HasAttributes(symbol)
-            && !symbol.IsSerializableMember()
             && !symbol.ContainingType.IsInterface()
             && !(symbol.Kind is SymbolKind.Field && symbol.ContainingType.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
-            && symbol.InterfaceMembers().IsEmpty
-            && symbol.GetOverriddenMember() is null;
+            && symbol.InterfaceMembers().IsEmpty;
 
         private static bool HasAttributes(ISymbol symbol)
         {
@@ -534,11 +532,11 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
         }
 
         private static bool IsRemovableMember(ISymbol symbol) =>
-            symbol.GetEffectiveAccessibility() == Accessibility.Private
+            symbol.EffectiveAccessibility == Accessibility.Private
             && IsRemovable(symbol);
 
         private static bool IsRemovableType(ISymbol typeSymbol) =>
-            typeSymbol.GetEffectiveAccessibility() is var accessibility
+            typeSymbol.EffectiveAccessibility is var accessibility
             && typeSymbol.ContainingType is not null
             && (accessibility is Accessibility.Private or Accessibility.Internal)
             && IsRemovable(typeSymbol)

@@ -620,7 +620,7 @@ public class ITypeSymbolExtensionsTest
         var objectCreation = compiler.Nodes<ObjectCreationExpressionSyntax>().Should().ContainSingle().Subject;
         if (compiler.Symbol<IMethodSymbol>(objectCreation) is { MethodKind: MethodKind.Constructor, ReceiverType: { } receiver })
         {
-            var actual = receiver.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
+            var actual = receiver.AttributesWithInherited.Select(x => x.AttributeClass.Name).ToList();
             actual.Should().BeEquivalentTo(expectedAttributes);
         }
         else

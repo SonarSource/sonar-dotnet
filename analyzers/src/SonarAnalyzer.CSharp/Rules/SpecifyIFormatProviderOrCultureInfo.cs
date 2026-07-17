@@ -68,7 +68,7 @@ public sealed class SpecifyIFormatProviderOrCultureInfo : SonarDiagnosticAnalyze
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
     public static bool HasAnyFormatOrCultureParameter(ISymbol method) =>
-        method.GetParameters().Any(x => x.Type.IsAny(FormatAndCultureType));
+        method.Parameters.Any(x => x.Type.IsAny(FormatAndCultureType));
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(
@@ -97,7 +97,7 @@ public sealed class SpecifyIFormatProviderOrCultureInfo : SonarDiagnosticAnalyze
 
     private static bool ReturnsOrAcceptsFormattableType(IMethodSymbol methodSymbol) =>
         methodSymbol.ReturnType.IsAny(FormattableTypes)
-        || methodSymbol.GetParameters().Any(x => x.Type.IsAny(FormattableTypes));
+        || methodSymbol.Parameters.Any(x => x.Type.IsAny(FormattableTypes));
 
     private static bool Matches(MemberDescriptor memberDescriptor, IMethodSymbol methodSymbol) =>
         methodSymbol is not null

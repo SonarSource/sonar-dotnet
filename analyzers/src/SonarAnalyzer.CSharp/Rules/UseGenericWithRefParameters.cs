@@ -41,7 +41,7 @@ public sealed class UseGenericWithRefParameters : SonarDiagnosticAnalyzer
                 }
 
                 var refObjectParameters = methodSymbol
-                    .GetParameters()
+                    .Parameters
                     .Where(IsRefObject)
                     .ToList();
 

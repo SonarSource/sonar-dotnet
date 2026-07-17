@@ -30,13 +30,9 @@ public sealed class PropertyNamesShouldNotMatchGetMethods : SonarDiagnosticAnaly
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterSymbolAction(c => // Invoked twice for partial properties: once for the property declaration and one for the implementation
         {
-            var propertySymbol = (IPropertySymbol)c.Symbol;
-            if (!propertySymbol.IsPubliclyAccessible() || propertySymbol.IsOverride)
-            {
-                return;
-            }
-            var methods =  propertySymbol.ContainingType.GetMembers().OfType<IMethodSymbol>().Where(x => x.IsPubliclyAccessible()).ToArray();
-            if (Array.Find(methods, x => AreCollidingNames(propertySymbol.Name, x.Name)) is { } collidingMethod)
+            if ((IPropertySymbol)c.Symbol is { IsPubliclyAccessible: true, IsOverride: false } propertySymbol
+                && propertySymbol.ContainingType.GetMembers().OfType<IMethodSymbol>()
+                    .FirstOrDefault(x => x.IsPubliclyAccessible && AreCollidingNames(propertySymbol.Name, x.Name)) is { } collidingMethod)
             {
                 // When dealing with partial properties, IsPartialDefinition is true only for the declaration, we use this to avoid reporting the secondary location twice
                 List<SecondaryLocation> secondaryLocation = propertySymbol.IsPartialDefinition() ? [] : [new(collidingMethod.Locations.First(), string.Empty)];

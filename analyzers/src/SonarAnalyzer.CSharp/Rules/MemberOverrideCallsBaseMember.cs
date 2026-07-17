@@ -55,28 +55,14 @@ namespace SonarAnalyzer.CSharp.Rules
                 SyntaxKind.PropertyDeclaration);
         }
 
-        private static bool IsPropertyCandidate(PropertyDeclarationSyntax propertySyntax, SemanticModel semanticModel)
-        {
-            if (HasDocumentationComment(propertySyntax))
-            {
-                return false;
-            }
-
-            var propertySymbol = semanticModel.GetDeclaredSymbol(propertySyntax);
-            if (propertySymbol == null
-                || !propertySymbol.IsOverride
-                || propertySymbol.IsSealed
-                || propertySymbol.OverriddenProperty == null
-                || (propertySymbol.GetMethod != null && propertySymbol.OverriddenProperty.GetMethod == null)
-                || (propertySymbol.SetMethod != null && propertySymbol.OverriddenProperty.SetMethod == null)
-                || propertySymbol.IsAnyAttributeInOverridingChain())
-            {
-                return false;
-            }
-
-            return CheckGetAccessorIfAny(propertySyntax, propertySymbol, semanticModel)
-                   && CheckSetAccessorIfAny(propertySyntax, propertySymbol, semanticModel);
-        }
+        private static bool IsPropertyCandidate(PropertyDeclarationSyntax propertySyntax, SemanticModel semanticModel) =>
+            !HasDocumentationComment(propertySyntax)
+            && semanticModel.GetDeclaredSymbol(propertySyntax) is { IsOverride: true, IsSealed: false, OverriddenProperty: not null, IsAnyAttributeInOverridingChain: false } propertySymbol
+            // Reject only if the override adds a getter the base property doesn't have - that's new behavior, not a pure forwarding call.
+            && propertySymbol is not { GetMethod: not null, OverriddenProperty.GetMethod: null }
+            && propertySymbol is not { SetMethod: not null, OverriddenProperty.SetMethod: null }
+            && CheckGetAccessorIfAny(propertySyntax, propertySymbol, semanticModel)
+            && CheckSetAccessorIfAny(propertySyntax, propertySymbol, semanticModel);
 
         private static bool CheckGetAccessorIfAny(PropertyDeclarationSyntax propertySyntax, IPropertySymbol propertySymbol, SemanticModel semanticModel)
         {
@@ -143,14 +129,10 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static bool IsMethodSymbolExcluded(IMethodSymbol methodSymbol) =>
-            methodSymbol == null
-            || !methodSymbol.IsOverride
-            || methodSymbol.IsSealed
-            || methodSymbol.OverriddenMethod == null
+            methodSymbol is not { IsOverride: true, IsSealed: false, OverriddenMethod: not null, IsAnyAttributeInOverridingChain: false }
             || IgnoredMethodNames.Contains(methodSymbol.Name)
             || methodSymbol.Parameters.Any(p => p.HasExplicitDefaultValue)
             || methodSymbol.OverriddenMethod.Parameters.Any(p => p.HasExplicitDefaultValue)
-            || methodSymbol.IsAnyAttributeInOverridingChain()
             || IsRecordCompilerGenerated(methodSymbol);
 
         private static bool IsRecordCompilerGenerated(IMethodSymbol methodSymbol) =>

@@ -122,7 +122,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         }
 
         static ISymbol FindDeconstructor(IEnumerable<ISymbol> deconstructors, int numberOfArguments) =>
-            deconstructors.FirstOrDefault(x => x.GetParameters().Count() == numberOfArguments && x.DeclaredAccessibility.IsAccessibleOutsideTheType);
+            deconstructors.FirstOrDefault(x => x.Parameters.Count() == numberOfArguments && x.DeclaredAccessibility.IsAccessibleOutsideTheType);
     }
 
     public override void VisitAttribute(AttributeSyntax node)
@@ -153,7 +153,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
 
                 DebuggerDisplayValues.UnionWith(arguments);
             }
-            else if (attribute.GetEffectiveAccessibility() == Accessibility.Private)
+            else if (attribute.EffectiveAccessibility == Accessibility.Private)
             {
                 PrivateAttributes.Add(attribute);
             }
@@ -438,5 +438,5 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         constructor.Parameters.Length == 0;
 
     private static string Name(ISymbol symbol) =>
-        symbol.IsConstructor() ? symbol.ContainingType.Name : symbol.Name;
+        symbol.IsConstructor ? symbol.ContainingType.Name : symbol.Name;
 }

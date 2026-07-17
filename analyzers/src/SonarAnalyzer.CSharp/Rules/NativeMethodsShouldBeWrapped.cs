@@ -38,7 +38,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var methodSymbol = (IMethodSymbol)c.Symbol;
             if (IsExternMethod(methodSymbol)
-                && methodSymbol.IsPubliclyAccessible())
+                && methodSymbol.IsPubliclyAccessible)
             {
                 foreach (var methodDeclaration in methodSymbol.DeclaringSyntaxReferences
                     .Where(x => !x.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, c.IsRazorAnalysisEnabled()))

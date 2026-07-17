@@ -44,7 +44,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return Enumerable.Empty<Diagnostic>().ToList();
             }
 
-            var methodAccessibility = methodSymbol.GetEffectiveAccessibility();
+            var methodAccessibility = methodSymbol.EffectiveAccessibility;
             // The GroupBy is useless in most of the cases but safe-guard in case of 2+ parameters with same name (invalid code).
             // In this case we analyze only the first parameter (a new analysis will be triggered after fixing the names).
             var parametersToCheck = methodSymbol.Parameters
@@ -175,7 +175,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return originatingInterface;
             }
 
-            var originatingType = accessedMember.GetOverriddenMember()?.ContainingType;
+            var originatingType = accessedMember.OverriddenMember?.ContainingType;
             return originatingType != null && IsNotInternalOrSameAssembly(originatingType)
                 ? originatingType
                 : accessedMember.ContainingType;
@@ -188,7 +188,7 @@ namespace SonarAnalyzer.CSharp.Rules
             // generate some False Negatives.
             bool IsNotInternalOrSameAssembly(ISymbol namedTypeSymbol) =>
                 namedTypeSymbol.ContainingAssembly.Equals(usageSite)
-                || namedTypeSymbol.GetEffectiveAccessibility() != Accessibility.Internal;
+                || namedTypeSymbol.EffectiveAccessibility != Accessibility.Internal;
         }
 
         private sealed class ParameterData
@@ -297,7 +297,7 @@ namespace SonarAnalyzer.CSharp.Rules
             private bool DerivesOrImplementsAll(ITypeSymbol type)
             {
                 return usedAs.Keys.All(type.DerivesOrImplements)
-                       && IsConsistentAccessibility(type.GetEffectiveAccessibility());
+                       && IsConsistentAccessibility(type.EffectiveAccessibility);
 
                 bool IsConsistentAccessibility(Accessibility baseTypeAccessibility) =>
                     methodAccessibility switch

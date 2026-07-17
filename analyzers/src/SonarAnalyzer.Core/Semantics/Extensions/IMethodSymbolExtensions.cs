@@ -58,9 +58,6 @@ public static class IMethodSymbolExtensions
     public static bool IsDestructor(this IMethodSymbol method) =>
         method.MethodKind == MethodKind.Destructor;
 
-    public static bool IsAnyAttributeInOverridingChain(this IMethodSymbol method) =>
-        method.IsAnyAttributeInOverridingChain(x => x.OverriddenMethod);
-
     public static bool Is(this IMethodSymbol methodSymbol, KnownType knownType, string name) =>
         methodSymbol.ContainingType.Is(knownType) && methodSymbol.Name == name;
 
@@ -76,12 +73,10 @@ public static class IMethodSymbolExtensions
     /// controller method.
     /// </summary>
     public static bool IsControllerActionMethod(this IMethodSymbol methodSymbol) =>
-        methodSymbol is { MethodKind: MethodKind.Ordinary, IsStatic: false }
+        methodSymbol is { MethodKind: MethodKind.Ordinary, IsStatic: false, EffectiveAccessibility: Accessibility.Public, TypeParameters.Length: 0 }
         && (methodSymbol.OverriddenMethod is null
             || !methodSymbol.OverriddenMethod.ContainingType.IsAny(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase, KnownType.Microsoft_AspNetCore_Mvc_Controller))
-        && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
         && !methodSymbol.GetAttributes().Any(x => x.AttributeClass.IsAny(NonActionTypes))
-        && methodSymbol.TypeParameters.Length == 0
         && methodSymbol.Parameters.All(x => x.RefKind == RefKind.None)
         && methodSymbol.ContainingType.IsControllerType();
 

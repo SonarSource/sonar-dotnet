@@ -93,8 +93,7 @@ public abstract class StringConcatenationInLoopBase<TSyntaxKind, TAssignmentExpr
 
     private bool AreNotDefinedInTheSameLoop(SyntaxNode expression, SyntaxNode assignment, SemanticModel model) =>
         NearestLoop(assignment) is { } nearestLoopForConcatenation
-        && !(model.GetSymbolInfo(expression).Symbol is { } symbol
-                && symbol.GetFirstSyntaxRef() is { } declaration
+        && !(model.GetSymbolInfo(expression).Symbol is { FirstSyntaxRef: { } declaration }
                 && NearestLoop(declaration) is { } nearestLoop
                 && Language.Syntax.AreEquivalent(nearestLoop, nearestLoopForConcatenation));
 }

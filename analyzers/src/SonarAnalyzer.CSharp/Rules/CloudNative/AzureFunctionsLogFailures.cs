@@ -67,7 +67,7 @@ namespace SonarAnalyzer.CSharp.Rules
             foreach (var type in typeSymbol.GetSelfAndBaseTypes())
             {
                 if (type.GetMembers().Any(x => x.Kind is SymbolKind.Field or SymbolKind.Property
-                                               && (isOriginalType || x.GetEffectiveAccessibility() != Accessibility.Private)
+                                               && (isOriginalType || x.EffectiveAccessibility != Accessibility.Private)
                                                && x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true))
                 {
                     return true;

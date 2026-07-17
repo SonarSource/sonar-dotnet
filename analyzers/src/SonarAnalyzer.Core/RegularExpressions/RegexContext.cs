@@ -77,10 +77,9 @@ internal sealed class RegexContext
     }
 
     public static RegexContext FromCtor<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct =>
-        model.GetSymbolInfo(node).Symbol is IMethodSymbol method
-        && method.IsConstructor()
-        && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
-            ? FromMethod(language, model, node, method)
+        model.GetSymbolInfo(node).Symbol is IMethodSymbol { IsConstructor: true } ctor
+        && ctor.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
+            ? FromMethod(language, model, node, ctor)
             : null;
 
     public static RegexContext FromMethod<TSyntaxKind>(ILanguageFacade<TSyntaxKind> language, SemanticModel model, SyntaxNode node) where TSyntaxKind : struct =>

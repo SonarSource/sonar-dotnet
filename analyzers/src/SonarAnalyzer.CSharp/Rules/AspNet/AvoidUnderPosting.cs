@@ -85,7 +85,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         GetAllDeclaredProperties(parameterType, examinedTypes, declaredProperties);
         var invalidProperties = declaredProperties
             .Where(x => !IsExcluded(x))
-            .Select(x => x.GetFirstSyntaxRef())
+            .Select(x => x.FirstSyntaxRef)
             .Where(x => !IsInitialized(x));
         foreach (var property in invalidProperties)
         {
@@ -131,7 +131,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
         {
             var properties = namedType.GetMembers()
                 .OfType<IPropertySymbol>()
-                .Where(x => x.GetEffectiveAccessibility() == Accessibility.Public
+                .Where(x => x.EffectiveAccessibility == Accessibility.Public
                             && x.SetMethod?.DeclaredAccessibility is Accessibility.Public
                             && !HasValidateNeverAttribute(x)
                             && x.DeclaringSyntaxReferences.Length > 0

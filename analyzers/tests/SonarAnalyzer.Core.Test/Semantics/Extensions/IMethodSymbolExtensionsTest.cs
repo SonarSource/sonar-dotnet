@@ -101,7 +101,7 @@ public class IMethodSymbolExtensionsTest
 
     [TestMethod]
     public void IsAnyAttributeInOverridingChain_WhenMethodSymbolIsNull_ReturnsFalse() =>
-        ((IMethodSymbol)null).IsAnyAttributeInOverridingChain().Should().BeFalse();
+        ((IMethodSymbol)null).IsAnyAttributeInOverridingChain.Should().BeFalse();
 
     [TestMethod]
     [DataRow(MethodKind.AnonymousFunction, "method")]
@@ -131,7 +131,7 @@ public class IMethodSymbolExtensionsTest
         symbol.Kind.Returns(SymbolKind.Method);
         symbol.MethodKind.Returns(methodKind);
 
-        symbol.GetClassification().Should().Be(expected);
+        symbol.Classification.Should().Be(expected);
     }
 
     [TestMethod]
@@ -227,7 +227,7 @@ public class IMethodSymbolExtensionsTest
         var compiler = new SnippetCompiler(code);
         var invocationExpression = compiler.Nodes<InvocationExpressionSyntax>().Should().ContainSingle().Subject;
         var method = compiler.Symbol<IMethodSymbol>(invocationExpression);
-        var actual = method.GetAttributesWithInherited().Select(x => x.AttributeClass.Name).ToList();
+        var actual = method.AttributesWithInherited.Select(x => x.AttributeClass.Name).ToList();
         actual.Should().BeEquivalentTo(expectedAttributes);
 
         // GetAttributesWithInherited should behave like MemberInfo.GetCustomAttributes from runtime reflection:

@@ -176,9 +176,8 @@ namespace SonarAnalyzer.CSharp.Rules
 
             if (string.IsNullOrWhiteSpace(identifier.ValueText)
                 || symbol.ContainingType.GetAttributes(ComRelatedTypes).Any()
-                || symbol.InterfaceMembers().Any()
-                || symbol.GetOverriddenMember() != null
-                || symbol.IsExtern)
+                || symbol is { OverriddenMember: not null } or { IsExtern: true }
+                || symbol.InterfaceMembers().Any())
             {
                 return;
             }

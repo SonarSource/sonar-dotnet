@@ -35,7 +35,7 @@ public sealed class OperatorsShouldBeOverloadedConsistently : SonarDiagnosticAna
                 var classSymbol = (INamedTypeSymbol)c.ContainingSymbol;
 
                 if (classDeclaration.Identifier.IsMissing
-                    || !classSymbol.IsPubliclyAccessible())
+                    || !classSymbol.IsPubliclyAccessible)
                 {
                     return;
                 }
@@ -83,7 +83,7 @@ public sealed class OperatorsShouldBeOverloadedConsistently : SonarDiagnosticAna
 
     private static IEnumerable<string> GetImplementedMethods(INamedTypeSymbol classSymbol)
     {
-        foreach (var member in classSymbol.GetMembers().OfType<IMethodSymbol>().Where(x => !x.IsConstructor()))
+        foreach (var member in classSymbol.GetMembers().OfType<IMethodSymbol>().Where(x => !x.IsConstructor))
         {
             if (ImplementedOperator(member) is { } name)
             {

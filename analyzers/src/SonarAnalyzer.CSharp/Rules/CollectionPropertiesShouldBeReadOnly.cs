@@ -72,7 +72,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool HasPublicSetter(IPropertySymbol propertySymbol) =>
             propertySymbol.SetMethod != null
-            && !PrivateOrInternalAccessibility.Contains(propertySymbol.GetEffectiveAccessibility())
+            && !PrivateOrInternalAccessibility.Contains(propertySymbol.EffectiveAccessibility)
             && !PrivateOrInternalAccessibility.Contains(propertySymbol.SetMethod.DeclaredAccessibility);
 
         private static bool IsInterfaceImplementation(IPropertySymbol propertySymbol)

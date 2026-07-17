@@ -152,9 +152,8 @@ public abstract class SpecifyTimeoutOnRegexBase<TSyntaxKind> : SonarDiagnosticAn
     }
 
     private bool RegexMethodLacksTimeout(SyntaxNode node, SemanticModel model) =>
-        model.GetSymbolInfo(node).Symbol is IMethodSymbol method
+        model.GetSymbolInfo(node).Symbol is IMethodSymbol method and ({ IsStatic: true } or { IsConstructor: true })
         && method.ContainingType.Is(KnownType.System_Text_RegularExpressions_Regex)
-        && (method.IsStatic || method.IsConstructor())
         && !ContainsMatchTimeout(method)
         && !NoBacktracking(method, node, model);
 

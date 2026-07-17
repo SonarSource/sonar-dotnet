@@ -51,13 +51,13 @@ namespace SonarAnalyzer.CSharp.Rules
 
             return semanticModel.GetSymbolInfo(expression).Symbol is IMethodSymbol methodSymbol &&
                 !HasAnyStringComparisonParameter(methodSymbol) &&
-                methodSymbol.GetParameters().Any(parameter => parameter.Type.Is(KnownType.System_String)) &&
+                methodSymbol.Parameters.Any(parameter => parameter.Type.Is(KnownType.System_String)) &&
                 !SpecifyIFormatProviderOrCultureInfo.HasAnyFormatOrCultureParameter(methodSymbol);
         }
 
         public static bool HasAnyStringComparisonParameter(IMethodSymbol method)
         {
-            return method.GetParameters()
+            return method.Parameters
                 .Any(parameter => parameter.Type.Is(KnownType.System_StringComparison));
         }
     }

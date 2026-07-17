@@ -112,7 +112,7 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
     private IEnumerable<IPropertySymbol> ExplicitlyDeclaredProperties(INamedTypeSymbol symbol) =>
         symbol.GetMembers()
             .Where(x => x.Kind.Equals(SymbolKind.Property))
-            .SelectMany(x => x.AllPartialParts())
+            .SelectMany(x => x.AllPartialParts)
             .OfType<IPropertySymbol>()
             .Where(ImplementsExplicitGetterOrSetter);
 

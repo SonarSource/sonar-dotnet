@@ -36,8 +36,7 @@ public abstract class ExceptionsShouldBePublicBase<TSyntaxKind> : SonarDiagnosti
             Language.GeneratedCodeRecognizer,
             c =>
             {
-                if (c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol classSymbol
-                    && classSymbol.GetEffectiveAccessibility() != Accessibility.Public
+                if (c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol { EffectiveAccessibility: not Accessibility.Public } classSymbol
                     && classSymbol.BaseType.IsAny(BaseTypes))
                 {
                     c.ReportIssue(Rule, Language.Syntax.NodeIdentifier(c.Node).Value);

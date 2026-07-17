@@ -82,7 +82,7 @@ namespace SonarAnalyzer.Core.Rules
                 }
             }
 
-            return declaredSymbol.GetOverriddenMember() is null && declaredSymbol.InterfaceMembers().IsEmpty;
+            return declaredSymbol.OverriddenMember is null && declaredSymbol.InterfaceMembers().IsEmpty;
         }
     }
 }

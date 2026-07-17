@@ -47,7 +47,7 @@ public class CSharpMethodDeclarationTracker : MethodDeclarationTracker<SyntaxKin
 
     private static MethodInfo GetMethodInfo(MethodDeclarationContext context)
     {
-        if (context.MethodSymbol.IsTopLevelMain())
+        if (context.MethodSymbol.IsTopLevelMain)
         {
             var declaration = context.MethodSymbol
                                      .DeclaringSyntaxReferences

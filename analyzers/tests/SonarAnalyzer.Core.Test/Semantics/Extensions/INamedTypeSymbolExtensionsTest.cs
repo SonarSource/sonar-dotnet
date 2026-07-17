@@ -47,7 +47,7 @@ public class INamedTypeSymbolExtensionsTest
         symbol.TypeKind.Returns(typeKind);
         symbol.IsRecord.Returns(false);
 
-        symbol.GetClassification().Should().Be(expected);
+        symbol.Classification.Should().Be(expected);
     }
 
     [TestMethod]
@@ -57,9 +57,9 @@ public class INamedTypeSymbolExtensionsTest
         symbol.Kind.Returns(SymbolKind.NamedType);
         symbol.TypeKind.Returns((TypeKind)255);
 #if DEBUG
-        new Action(() => symbol.GetClassification()).Should().Throw<NotSupportedException>();
+        new Action(() => _ = symbol.Classification).Should().Throw<NotSupportedException>();
 #else
-        symbol.GetClassification().Should().Be("type");
+        symbol.Classification.Should().Be("type");
 #endif
     }
 
@@ -73,6 +73,6 @@ public class INamedTypeSymbolExtensionsTest
         symbol.TypeKind.Returns(typeKind);
         symbol.IsRecord.Returns(true);
 
-        symbol.GetClassification().Should().Be(expected);
+        symbol.Classification.Should().Be(expected);
     }
 }

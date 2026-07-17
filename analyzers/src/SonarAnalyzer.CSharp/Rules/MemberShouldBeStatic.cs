@@ -115,7 +115,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
         bool IsExcludedByEnclosingType() =>
             methodOrPropertySymbol.ContainingType.IsInterface()
             // Any generic type in nesting chain with member accessible from outside (through the whole nesting chain) is excluded.
-            || (methodOrPropertySymbol.ContainingType.IsGenericType && methodOrPropertySymbol.GetEffectiveAccessibility().IsAccessibleOutsideTheType)
+            || (methodOrPropertySymbol.ContainingType.IsGenericType && methodOrPropertySymbol.EffectiveAccessibility.IsAccessibleOutsideTheType)
             // Any nested private generic type with member accessible from outside that type (not the whole nesting chain) is also excluded.
             || (methodOrPropertySymbol.ContainingType.TypeArguments.Any() && methodOrPropertySymbol.DeclaredAccessibility.IsAccessibleOutsideTheType);
     }
@@ -146,7 +146,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
 
     private static bool IsPublicControllerMethod(ISymbol symbol) =>
         symbol is IMethodSymbol methodSymbol
-        && methodSymbol.GetEffectiveAccessibility() == Accessibility.Public
+        && methodSymbol.EffectiveAccessibility == Accessibility.Public
         && methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
 
     private static bool IsWindowsDesktopEventHandler(ISymbol symbol) =>

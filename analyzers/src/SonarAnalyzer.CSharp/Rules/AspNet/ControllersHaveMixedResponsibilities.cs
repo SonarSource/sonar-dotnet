@@ -147,7 +147,7 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
             {
                 // Constructors are not considered because they have to be split anyway
                 // Accessors are not considered because they are part of properties, that are considered as a whole
-                case IMethodSymbol method when !method.IsConstructor() && method.MethodKind != MethodKind.StaticConstructor && method.AssociatedSymbol is not IPropertySymbol:
+                case IMethodSymbol { IsConstructor: false, MethodKind: not MethodKind.StaticConstructor, AssociatedSymbol: not IPropertySymbol } method:
                     builder.Add(method.Name, MemberType.Action);
                     break;
                 // Indexers are treated as methods with an unspeakable name

@@ -228,7 +228,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             && typeSymbol.Is(KnownType.Microsoft_AspNetCore_Http_IHeaderDictionary);
 
     private static bool IsOverridingFilterMethods(ISymbol owningSymbol) =>
-        (owningSymbol.GetOverriddenMember() ?? owningSymbol).ExplicitOrImplicitInterfaceImplementations().Any(x =>
+        (owningSymbol.OverriddenMember ?? owningSymbol).ExplicitOrImplicitInterfaceImplementations().Any(x =>
             x is IMethodSymbol { ContainingType: { } container }
             && container.IsAny(ActionFilterTypes));
 
