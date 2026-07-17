@@ -44,7 +44,7 @@ public sealed partial class DeadStores : SonarDiagnosticAnalyzer
     public DeadStores() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
     internal /* for testing */ DeadStores(IAnalyzerConfiguration configuration) =>
-        useSonarCfg = configuration.UseSonarCfg();
+        useSonarCfg = configuration.UseSonarCfg;
 
     protected override void Initialize(SonarAnalysisContext context)
     {

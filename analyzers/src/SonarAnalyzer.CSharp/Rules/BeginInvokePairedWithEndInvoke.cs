@@ -75,7 +75,7 @@ public sealed class BeginInvokePairedWithEndInvoke : BeginInvokePairedWithEndInv
             callback = objectCreation.ArgumentList.Arguments.Count == 1 ? objectCreation.ArgumentList.Arguments.Single().Expression : null;
             if (callback is not null && callback.EnsureCorrectSemanticModelOrDefault(model) is { } safeModel && safeModel.GetSymbolInfo(callback).Symbol is IMethodSymbol methodSymbol)
             {
-                callback = methodSymbol.ImplementationSyntax();
+                callback = methodSymbol.ImplementationSyntax;
             }
         }
 

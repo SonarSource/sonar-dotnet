@@ -79,7 +79,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
     {
         if (context.Node.GetFirstNonParenthesizedParent() is AssignmentExpressionSyntax assignment
             && !assignment.Parent.IsKind(SyntaxKind.ObjectInitializerExpression)
-            && context.Compilation.IsCoalesceAssignmentSupported())
+            && context.Compilation.IsCoalesceAssignmentSupported)
         {
             var left = ((BinaryExpressionSyntax)context.Node).Left.WithoutEnclosingParentheses;
             if (CSharpEquivalenceChecker.AreEquivalent(assignment.Left.WithoutEnclosingParentheses, left))
@@ -133,7 +133,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
             && comparedToNull.CanBeNull(context.Model)
             && CanExpressionBeCoalescing(whenTrue, whenFalse, comparedToNull, context.Model, comparedIsNullInTrue))
         {
-            if (context.Compilation.IsCoalesceAssignmentSupported() && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
+            if (context.Compilation.IsCoalesceAssignmentSupported && IsCoalesceAssignmentCandidate(conditional, comparedToNull))
             {
                 context.ReportIssue(Rule, conditional.GetFirstNonParenthesizedParent(), BuildCodeFixProperties(context), CoalesceAssignmentOp);
             }
@@ -169,7 +169,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
             return true;
         }
 
-        if (targetType is not null && model.Compilation.IsTargetTypeConditionalSupported())
+        if (targetType is not null && model.Compilation.IsTargetTypeConditionalSupported)
         {
             return firstType.DerivesFrom(targetType) && secondType.DerivesFrom(targetType);
         }
@@ -217,7 +217,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
         var expression1 = ((ExpressionStatementSyntax)statement1).Expression.WithoutEnclosingParentheses;
         if (statement2 is null)
         {
-            simplifiedOperator = context.Compilation.IsCoalesceAssignmentSupported() ? CoalesceAssignmentOp : CoalesceOp;
+            simplifiedOperator = context.Compilation.IsCoalesceAssignmentSupported ? CoalesceAssignmentOp : CoalesceOp;
             return expression1 is AssignmentExpressionSyntax assignment
                 && comparedIsNullInTrue
                 && comparedToNull is not null
@@ -346,7 +346,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
 
     private static ImmutableDictionary<string, string> BuildCodeFixProperties(SonarSyntaxNodeReportingContext c, string simplifiedOperator = null)
     {
-        var ret = new Dictionary<string, string> { { IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported().ToString() } };
+        var ret = new Dictionary<string, string> { { IsCoalesceAssignmentSupportedKey, c.Compilation.IsCoalesceAssignmentSupported.ToString() } };
         if (simplifiedOperator is not null)
         {
             ret.Add(SimplifiedOperatorKey, simplifiedOperator);

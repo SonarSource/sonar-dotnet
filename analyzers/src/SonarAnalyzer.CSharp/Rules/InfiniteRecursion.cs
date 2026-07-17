@@ -31,7 +31,7 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
     public InfiniteRecursion() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
     internal /* for testing */ InfiniteRecursion(IAnalyzerConfiguration configuration) =>
-        checker = configuration.UseSonarCfg() ? new SonarChecker() : new RoslynChecker();
+        checker = configuration.UseSonarCfg ? new SonarChecker() : new RoslynChecker();
 
     protected override void Initialize(SonarAnalysisContext context)
     {

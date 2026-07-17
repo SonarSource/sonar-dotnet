@@ -268,8 +268,7 @@ public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
 
     private static bool IsDisposableRefStructCreation(ExpressionSyntax expression, SemanticModel model) =>
         expression?.Kind() is SyntaxKind.ObjectCreationExpression or SyntaxKindEx.ImplicitObjectCreationExpression
-        && model.GetTypeInfo(expression).Type is var type
-        && type.IsRefStruct()
+        && model.GetTypeInfo(expression).Type is { IsRefStruct: true } type
         && type.GetMembers().OfType<IMethodSymbol>().Any(x => x.Name == "Dispose");
 
     private static bool IsFactoryMethodInvocation(ExpressionSyntax expression, SemanticModel model) =>

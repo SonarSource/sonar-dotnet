@@ -19,8 +19,12 @@ namespace SonarAnalyzer.VisualBasic.Core.Syntax.Extensions;
 
 public static class VisualBasicCompilationExtensions
 {
-    public static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-        compilation.VB()?.LanguageVersion.CompareTo(languageVersion) >= 0;
+    extension(Compilation compilation)
+    {
+        public bool IsAtLeastLanguageVersion(LanguageVersion languageVersion) =>
+            compilation.VB()?.LanguageVersion.CompareTo(languageVersion) >= 0;
 
-    public static VisualBasicCompilation VB(this Compilation compilation) => compilation as VisualBasicCompilation;
+        public VisualBasicCompilation VB() =>
+            compilation as VisualBasicCompilation;
+    }
 }

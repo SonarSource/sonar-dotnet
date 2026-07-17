@@ -38,7 +38,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
     public MethodParameterUnused() : this(AnalyzerConfiguration.AlwaysEnabled) { }
 
     internal /* for testing */ MethodParameterUnused(IAnalyzerConfiguration configuration) =>
-        useSonarCfg = configuration.UseSonarCfg();
+        useSonarCfg = configuration.UseSonarCfg;
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterNodeAction(c =>

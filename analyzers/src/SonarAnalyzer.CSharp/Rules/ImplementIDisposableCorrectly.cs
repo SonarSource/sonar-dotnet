@@ -249,7 +249,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 || (methodDeclaration.ExpressionBody() != null && expectedStatementsCount == 1); // Expression body has only one statement
 
             private static IEnumerable<SyntaxNode> FindMethodDeclarations(INamedTypeSymbol typeSymbol, Func<IMethodSymbol, bool> predicate) =>
-                typeSymbol.GetMembers().OfType<IMethodSymbol>().Where(predicate).Select(x => x.ImplementationSyntax());
+                typeSymbol.GetMembers().OfType<IMethodSymbol>().Where(predicate).Select(x => x.ImplementationSyntax);
 
             private static IEnumerable<SyntaxNode> FindMethodImplementationOrAbstractDeclaration(INamedTypeSymbol typeSymbol,
                                                                                                  Func<IMethodSymbol, bool> predicate,

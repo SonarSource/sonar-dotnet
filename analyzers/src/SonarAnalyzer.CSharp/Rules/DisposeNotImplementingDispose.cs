@@ -35,7 +35,7 @@ public sealed class DisposeNotImplementingDispose : SonarDiagnosticAnalyzer
                 var declaredSymbol = (INamedTypeSymbol)c.Symbol;
 
                 // ref structs and static classes cannot inherit from the IDisposable interface
-                if (declaredSymbol.IsRefStruct() || declaredSymbol.IsStatic || declaredSymbol.IsExtension)
+                if (declaredSymbol is { IsRefStruct: true } or { IsStatic: true } or { IsExtension: true })
                 {
                     return;
                 }

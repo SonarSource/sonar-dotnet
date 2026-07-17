@@ -60,7 +60,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var disposableFields = namedType.GetMembers()
                                             .OfType<IFieldSymbol>()
-                                            .Where(fs => fs.IsNonStaticNonPublicDisposableField(context.Compilation.GetLanguageVersion()))
+                                            .Where(fs => fs.IsNonStaticNonPublicDisposableField(context.Compilation.LanguageVersion))
                                             .ToHashSet();
 
             if (disposableFields.Count == 0)

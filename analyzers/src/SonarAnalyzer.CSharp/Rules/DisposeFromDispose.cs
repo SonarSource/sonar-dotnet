@@ -34,7 +34,7 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(c =>
             {
                 var invocation = (InvocationExpressionSyntax)c.Node;
-                var languageVersion = c.Compilation.GetLanguageVersion();
+                var languageVersion = c.Compilation.LanguageVersion;
                 if (InvocationTargetAndName(invocation, out var fieldCandidate, out var name)
                     && c.Model.GetSymbolInfo(fieldCandidate).Symbol is IFieldSymbol invocationTarget
                     && invocationTarget.IsNonStaticNonPublicDisposableField(languageVersion)

@@ -19,18 +19,17 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class CSharpCompilationExtensions
 {
-    public static bool IsCoalesceAssignmentSupported(this Compilation compilation) =>
-        compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8);
+    extension(Compilation compilation)
+    {
+        public bool IsCoalesceAssignmentSupported => compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp8);
 
-    public static bool IsTargetTypeConditionalSupported(this Compilation compilation) =>
-        compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
+        public bool IsTargetTypeConditionalSupported => compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
 
-    public static bool IsLambdaDiscardParameterSupported(this Compilation compilation) =>
-        compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
+        public bool IsLambdaDiscardParameterSupported => compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp9);
 
-    public static bool IsAtLeastLanguageVersion(this Compilation compilation, LanguageVersion languageVersion) =>
-        compilation.GetLanguageVersion().IsAtLeast(languageVersion);
+        public bool IsAtLeastLanguageVersion(LanguageVersion languageVersion) =>
+            compilation.LanguageVersion.IsAtLeast(languageVersion);
 
-    public static LanguageVersion GetLanguageVersion(this Compilation compilation) =>
-        ((CSharpCompilation)compilation).LanguageVersion;
+        public LanguageVersion LanguageVersion => ((CSharpCompilation)compilation).LanguageVersion;
+    }
 }

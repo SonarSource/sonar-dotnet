@@ -21,6 +21,8 @@ public static class ILocalSymbolExtensions
 {
     private static readonly Func<ILocalSymbol, RefKind> RefKindAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ILocalSymbol, RefKind>(typeof(ILocalSymbol), nameof(RefKind));
 
-    public static RefKind RefKind(this ILocalSymbol symbol) =>
-        RefKindAccessor(symbol);
+    extension(ILocalSymbol symbol)
+    {
+        public RefKind RefKind => RefKindAccessor(symbol);
+    }
 }

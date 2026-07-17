@@ -78,7 +78,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
     private static bool ContainsRefStructReference(IfStatementSyntax ifStatement, SemanticModel model) =>
         ifStatement.DescendantNodes()
             .OfType<IdentifierNameSyntax>()
-            .Any(x => model.GetTypeInfo(x).Type?.IsRefStruct() == true);
+            .Any(x => model.GetTypeInfo(x).Type is { IsRefStruct: true });
 
     private static bool RequiresNullableConversion(SyntaxNode returnOrAssignment, SonarSyntaxNodeReportingContext context)
     {
@@ -172,7 +172,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
                 && c.Model.GetSymbolInfo(identifierSyntax).Symbol is { } identifierSymbol
                 && identifierSymbol.Equals(declaredSymbol.Value)
                 && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol
-                && !symbol.GetSymbolType().IsRefStruct())
+                && !symbol.GetSymbolType().IsRefStruct)
             {
                 var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 

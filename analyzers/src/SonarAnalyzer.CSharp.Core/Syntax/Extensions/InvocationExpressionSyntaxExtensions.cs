@@ -33,7 +33,7 @@ public static class InvocationExpressionSyntaxExtensions
 
         public bool IsGetTypeCall(SemanticModel model) =>
             invocation is not null
-            && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol methodSymbol && methodSymbol.IsGetTypeCall();
+            && model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { IsGetTypeCall: true };
 
         public bool IsOnBase =>
             (invocation.Expression as MemberAccessExpressionSyntax)?.Expression is BaseExpressionSyntax;

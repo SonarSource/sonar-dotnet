@@ -97,7 +97,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     if (ITupleOperationWrapper.IsInstance(deconstructionAssignment.Target))
                     {
-                        foreach (var tupleElement in ITupleOperationWrapper.FromOperation(deconstructionAssignment.Target).AllElements())
+                        foreach (var tupleElement in ITupleOperationWrapper.FromOperation(deconstructionAssignment.Target).AllElements)
                         {
                             var targets = ProcessAssignment(deconstructionAssignment, tupleElement);
                             liveOut.ExceptWith(targets);
@@ -128,7 +128,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                     static RefKind TargetRefKind(ISymbol localTarget) =>
                         // Only ILocalSymbol and IParameterSymbol can be returned by ParameterOrLocalSymbol
-                        localTarget is ILocalSymbol local ? local.RefKind() : ((IParameterSymbol)localTarget).RefKind;
+                        localTarget is ILocalSymbol local ? local.RefKind : ((IParameterSymbol)localTarget).RefKind;
 
                     bool IsAllowedInitialization(ISymbol localTarget) =>
                         operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator

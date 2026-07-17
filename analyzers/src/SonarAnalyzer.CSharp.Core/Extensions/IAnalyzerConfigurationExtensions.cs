@@ -19,6 +19,8 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class IAnalyzerConfigurationExtensions
 {
-    public static bool UseSonarCfg(this IAnalyzerConfiguration configuration) =>
-        configuration.ForceSonarCfg || !CFG.Roslyn.ControlFlowGraph.IsAvailable;
+    extension(IAnalyzerConfiguration configuration)
+    {
+        public bool UseSonarCfg => configuration.ForceSonarCfg || !CFG.Roslyn.ControlFlowGraph.IsAvailable;
+    }
 }

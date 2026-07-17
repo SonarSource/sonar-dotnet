@@ -19,6 +19,9 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 internal static class LanguageVersionExtensions
 {
-    internal static bool IsAtLeast(this LanguageVersion left, LanguageVersion right) =>
-        left.CompareTo(right) >= 0;
+    extension(LanguageVersion left)
+    {
+        internal bool IsAtLeast(LanguageVersion right) =>
+            left.CompareTo(right) >= 0;
+    }
 }

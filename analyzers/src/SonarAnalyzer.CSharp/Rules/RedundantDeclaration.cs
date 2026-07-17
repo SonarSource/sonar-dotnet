@@ -108,7 +108,7 @@ public sealed class RedundantDeclaration : SonarDiagnosticAnalyzer
 
     private static void CheckUnusedParameters(SonarSyntaxNodeReportingContext context, ParenthesizedLambdaExpressionSyntax lambda)
     {
-        if (context.Compilation.IsLambdaDiscardParameterSupported())
+        if (context.Compilation.IsLambdaDiscardParameterSupported)
         {
             var usedIdentifiers = UsedIdentifiers(lambda).ToList();
             foreach (var parameter in lambda.ParameterList.Parameters)

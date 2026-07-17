@@ -19,13 +19,16 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class ITypeSymbolExtensions
 {
-    public static bool IsDisposableRefStruct(this ITypeSymbol symbol, LanguageVersion languageVersion) =>
-        languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
-        && IsRefStruct(symbol)
-        && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
+    extension(ITypeSymbol symbol)
+    {
+        public bool IsDisposableRefStruct(LanguageVersion languageVersion) =>
+            languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)
+            && symbol.IsRefStruct
+            && symbol.GetMembers(nameof(IDisposable.Dispose)).Any(x => x.DeclaredAccessibility == Accessibility.Public && KnownMethods.IsIDisposableDispose(x as IMethodSymbol));
 
-    public static bool IsRefStruct(this ITypeSymbol symbol) =>
-        symbol is not null
-        && symbol.IsStruct()
-        && symbol.IsRefLikeType();
+        public bool IsRefStruct =>
+            symbol is not null
+            && symbol.IsStruct()
+            && symbol.IsRefLikeType();
+    }
 }

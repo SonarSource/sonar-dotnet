@@ -40,8 +40,7 @@ public sealed class SonarCSharpLiveVariableAnalysis : LiveVariableAnalysisBase<I
             && symbol.ContainingSymbol.Equals(originalDeclaration);
 
         bool IsLocalOrParameterSymbol() =>
-            (symbol is ILocalSymbol local && local.RefKind() == RefKind.None)
-            || (symbol is IParameterSymbol parameter && parameter.RefKind == RefKind.None);
+            symbol is ILocalSymbol { RefKind: RefKind.None } or IParameterSymbol { RefKind: RefKind.None };
     }
 
     public static bool IsOutArgument(IdentifierNameSyntax identifier) =>

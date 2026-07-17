@@ -19,17 +19,18 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class IMethodSymbolExtensions
 {
-    public static bool IsModuleInitializer(this IMethodSymbol methodSymbol) =>
-        methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
+    extension(IMethodSymbol methodSymbol)
+    {
+        public bool IsModuleInitializer => methodSymbol.AnyAttributeDerivesFrom(KnownType.System_Runtime_CompilerServices_ModuleInitializerAttribute);
 
-    public static bool IsGetTypeCall(this IMethodSymbol invokedMethod) =>
-        invokedMethod.Name == nameof(Type.GetType)
-        && !invokedMethod.IsStatic
-        && invokedMethod.ContainingType is not null
-        && IsObjectOrType(invokedMethod.ContainingType);
+        public bool IsGetTypeCall =>
+            methodSymbol.Name == nameof(Type.GetType)
+            && !methodSymbol.IsStatic
+            && methodSymbol.ContainingType is not null
+            && IsObjectOrType(methodSymbol.ContainingType);
 
-    public static SyntaxNode ImplementationSyntax(this IMethodSymbol method) =>
-        (method.PartialImplementationPart ?? method).DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+        public SyntaxNode ImplementationSyntax => (methodSymbol.PartialImplementationPart ?? methodSymbol).DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+    }
 
     private static bool IsObjectOrType(ITypeSymbol namedType) =>
         namedType.SpecialType == SpecialType.System_Object

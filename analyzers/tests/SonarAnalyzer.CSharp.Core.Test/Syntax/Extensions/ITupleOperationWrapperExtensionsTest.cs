@@ -42,8 +42,7 @@ public class ITupleOperationWrapperExtensionsTest
     public void AllElements_ElementsOfFirstFoundTupleAreExtracted(string tuple, params string[] expectedElements)
     {
         var tupleOperation = CompileFirstTupleOperation(tuple);
-        var allElements = tupleOperation.AllElements();
-        allElements.Select(x => x.Syntax.ToString()).Should().BeEquivalentTo(expectedElements);
+        tupleOperation.AllElements.Select(x => x.Syntax.ToString()).Should().BeEquivalentTo(expectedElements);
     }
 
 #if NET
@@ -93,7 +92,7 @@ public class ITupleOperationWrapperExtensionsTest
     private static void AssertAllElementsExecutionTimeBeLessThan(string tuple, TimeSpan maxDuration)
     {
         var tupleOperation = CompileFirstTupleOperation($"_ = {tuple};");
-        Action allElements = () => tupleOperation.AllElements();
+        Action allElements = () => _ = tupleOperation.AllElements;
         // Warm-up (make sure method is jitted)
         allElements();
 

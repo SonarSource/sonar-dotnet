@@ -134,7 +134,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         if (declarator.Initializer != null
                             && !IsAllowedInitializationValue(declarator.Initializer.Value)
                             && !symbol.IsConst
-                            && symbol.RefKind() == RefKind.None
+                            && symbol.RefKind == RefKind.None
                             && !liveOut.Contains(symbol)
                             && !IsUnusedLocal(symbol)
                             && !IsMuted(declarator, symbol))

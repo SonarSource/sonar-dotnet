@@ -19,23 +19,29 @@ namespace SonarAnalyzer.CSharp.Core.Extensions;
 
 public static class ITupleOperationWrapperExtensions
 {
-    public static ImmutableArray<IOperation> AllElements(this ITupleOperationWrapper tuple)
+    extension(ITupleOperationWrapper tuple)
     {
-        var arrayBuilder = ImmutableArray.CreateBuilder<IOperation>();
-        CollectTupleElements(tuple);
-        return arrayBuilder.ToImmutableArray();
-
-        void CollectTupleElements(ITupleOperationWrapper tuple)
+        public ImmutableArray<IOperation> AllElements
         {
-            foreach (var element in tuple.Elements)
+            get
             {
-                if (ITupleOperationWrapper.IsInstance(element))
+                var arrayBuilder = ImmutableArray.CreateBuilder<IOperation>(tuple.Elements.Length);
+                CollectTupleElements(tuple);
+                return arrayBuilder.ToImmutableArray();
+
+                void CollectTupleElements(ITupleOperationWrapper tuple)
                 {
-                    CollectTupleElements(ITupleOperationWrapper.FromOperation(element));
-                }
-                else
-                {
-                    arrayBuilder.Add(element);
+                    foreach (var element in tuple.Elements)
+                    {
+                        if (ITupleOperationWrapper.IsInstance(element))
+                        {
+                            CollectTupleElements(ITupleOperationWrapper.FromOperation(element));
+                        }
+                        else
+                        {
+                            arrayBuilder.Add(element);
+                        }
+                    }
                 }
             }
         }
