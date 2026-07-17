@@ -208,12 +208,12 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
         };
 
     private static ExpressionSyntax SingleInitializer(IFieldSymbol field) =>
-        field.GetFirstSyntaxRef() is VariableDeclaratorSyntax { Initializer: { } initializer }
+        field.FirstSyntaxRef is VariableDeclaratorSyntax { Initializer: { } initializer }
             ? initializer.Value
             : null;
 
     private static ExpressionSyntax SingleInitializer(IPropertySymbol property) =>
-        property.GetFirstSyntaxRef() is PropertyDeclarationSyntax declaration
+        property.FirstSyntaxRef is PropertyDeclarationSyntax declaration
             ? declaration.Initializer?.Value ?? declaration.ExpressionBody?.Expression
             : null;
 
