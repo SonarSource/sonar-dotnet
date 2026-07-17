@@ -18,13 +18,11 @@ package org.sonarsource.csharp.core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sonar.api.config.PropertyDefinitions;
-import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.resources.AbstractLanguage;
-import org.sonar.api.utils.System2;
+import org.sonar.scanner.extension.PropertyDefinitions;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 class CSharpTest {
 
@@ -33,8 +31,7 @@ class CSharpTest {
 
   @BeforeEach
   void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
-      new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE).create());
+    PropertyDefinitions defs = new PropertyDefinitions(new CSharpPropertyDefinitions(TestCSharpMetadata.INSTANCE).create());
     settings = new MapSettings(defs);
     csharp = TestCSharpMetadata.INSTANCE.new CSharp(settings.asConfig());
   }

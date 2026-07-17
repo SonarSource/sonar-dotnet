@@ -23,10 +23,10 @@ import java.util.HashSet;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.sonar.api.config.Configuration;
-import org.sonar.api.config.internal.MapSettings;
-import org.sonar.api.testfixtures.log.LogTester;
 import org.slf4j.event.Level;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -36,8 +36,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.sonarsource.dotnet.protobuf.SonarAnalyzer.MethodDeclarationsInfo;
 import static org.sonarsource.dotnet.protobuf.SonarAnalyzer.MethodDeclarationInfo;
+import static org.sonarsource.dotnet.protobuf.SonarAnalyzer.MethodDeclarationsInfo;
 
 public class UnitTestResultsAggregatorTest {
 

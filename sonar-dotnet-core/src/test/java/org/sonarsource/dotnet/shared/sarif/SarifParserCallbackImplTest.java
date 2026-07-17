@@ -16,34 +16,34 @@
  */
 package org.sonarsource.dotnet.shared.sarif;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestInputFileBuilder;
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.HashSet;
-import java.util.AbstractMap.SimpleEntry;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.event.Level;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.TextRange;
-import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.rule.Severity;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.issue.ExternalIssue;
-import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.Issue.Flow;
+import org.sonar.api.batch.sensor.issue.Issue;
 import org.sonar.api.batch.sensor.issue.IssueLocation;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.rule.AdHocRule;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.issue.impact.SoftwareQuality;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.slf4j.event.Level;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.SarifParserCallbackImpl;
 
@@ -69,6 +69,7 @@ public class SarifParserCallbackImplTest {
   public void setUp() {
     logTester.setLevel(Level.DEBUG);
     ctx = SensorContextTester.create(temp.getRoot().toPath());
+    ctx.setRuntime(TestSonarRuntime.forSonarQube(Version.create(10, 1), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY));
     repositoryKeyByRoslynRuleKey.put("rule1", "rule1");
     repositoryKeyByRoslynRuleKey.put("rule2", "rule2");
     repositoryKeyByRoslynRuleKey.put("rule42", "csharpsquid");
@@ -299,7 +300,7 @@ public class SarifParserCallbackImplTest {
   @Test
   public void should_create_external_issues_without_impact_cloud() {
     SensorContextTester ctxCloud = SensorContextTester.create(temp.getRoot().toPath());
-    ctxCloud.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(10, 1), SonarQubeSide.SCANNER, SonarEdition.SONARCLOUD));
+    ctxCloud.setRuntime(TestSonarRuntime.forSonarQube(Version.create(10, 1), SonarQubeSide.SCANNER, SonarEdition.SONARCLOUD));
     ctxCloud.fileSystem().add(TestInputFileBuilder.create("module1", "file1")
       .setContents("My file\ncontents\nwith some\n lines")
       .build());

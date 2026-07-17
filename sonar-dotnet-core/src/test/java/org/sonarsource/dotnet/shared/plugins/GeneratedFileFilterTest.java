@@ -22,10 +22,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.config.PropertyDefinitions;
-import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
-import org.sonar.api.utils.System2;
+import org.sonar.scanner.extension.PropertyDefinitions;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
 import org.sonarsource.dotnet.shared.plugins.filters.GeneratedFileFilter;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,7 +48,7 @@ public class GeneratedFileFilterTest {
     when(metadata.fileSuffixesDefaultValue()).thenReturn(".cs");
     AbstractPropertyDefinitions definitions = new AbstractPropertyDefinitions(metadata) {
     };
-    MapSettings settings = new MapSettings(new PropertyDefinitions(mock(System2.class), definitions.create()));
+    MapSettings settings = new MapSettings(new PropertyDefinitions(definitions.create()));
     defaultConfiguration = new AbstractLanguageConfiguration(settings.asConfig(), metadata) {
     };
   }

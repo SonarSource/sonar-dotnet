@@ -16,12 +16,12 @@
  */
 package org.sonarsource.vbnet.core;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.Plugin;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.CodeCoverageProvider;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
@@ -58,7 +58,7 @@ import static org.sonarsource.dotnet.shared.PropertyUtils.nonProperties;
 class VbNetCoreExtensionsTest {
   @Test
   void register() {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    SonarRuntime sonarRuntime = TestSonarRuntime.forSonarQube(Version.create(9, 9), SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     Plugin.Context context = new Plugin.Context(sonarRuntime);
     VbNetCoreExtensions.register(context, TestVbNetMetadata.INSTANCE);
     var extensions = context.getExtensions();

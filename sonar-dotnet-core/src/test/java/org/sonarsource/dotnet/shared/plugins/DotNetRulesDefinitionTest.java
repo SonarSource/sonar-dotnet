@@ -16,6 +16,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import java.io.InputStream;
 import java.util.Set;
 import org.junit.BeforeClass;
@@ -23,7 +24,6 @@ import org.junit.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.rule.RuleStatus;
 import org.sonar.api.rules.RuleType;
 import org.sonar.api.server.debt.DebtRemediationFunction;
@@ -45,7 +45,7 @@ public class DotNetRulesDefinitionTest {
   private static final String MULTI_PARAM_RULE_KEY = "S1112";
   private static final String VULNERABILITY_RULE_KEY = "S2115";
   private static final PluginMetadata METADATA = mockMetadata();
-  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER,
+  private static final SonarRuntime SONAR_RUNTIME = TestSonarRuntime.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER,
     SonarEdition.COMMUNITY);
   private static final RoslynRules ROSLYN_RULES = new TestRoslynRules();
   private static final RulesDefinition.Context CONTEXT = new RulesDefinition.Context();
@@ -169,7 +169,7 @@ public class DotNetRulesDefinitionTest {
   }
 
   private static Set<String> getSecurityStandards(Version version, String ruleId) {
-    SonarRuntime sonarRuntime = SonarRuntimeImpl.forSonarQube(version, SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
+    SonarRuntime sonarRuntime = TestSonarRuntime.forSonarQube(version, SonarQubeSide.SCANNER, SonarEdition.COMMUNITY);
     DotNetRulesDefinition sut = new DotNetRulesDefinition(METADATA, sonarRuntime, ROSLYN_RULES);
     var securityContext = new RulesDefinition.Context();
     sut.define(securityContext);

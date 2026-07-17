@@ -16,12 +16,12 @@
  */
 package org.sonar.plugins.csharp;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.TestSonarRuntime;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.sonar.api.SonarEdition;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.SonarRuntime;
-import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.utils.Version;
 import org.sonarsource.dotnet.shared.plugins.DotNetRulesDefinition;
@@ -31,7 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CSharpRulesDefinitionTest {
   private static final RulesDefinition.Context CONTEXT = new RulesDefinition.Context();
-  private static final SonarRuntime SONAR_RUNTIME = SonarRuntimeImpl.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER,
+  private static final SonarRuntime SONAR_RUNTIME = TestSonarRuntime.forSonarQube(Version.create(10, 10), SonarQubeSide.SCANNER,
     SonarEdition.COMMUNITY);
   private static final RoslynRules ROSLYN_RULES = new RoslynRules(CSharpPlugin.METADATA);
 

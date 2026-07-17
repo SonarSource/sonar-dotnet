@@ -18,14 +18,12 @@ package org.sonarsource.vbnet.core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.sonar.api.config.PropertyDefinitions;
-import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.resources.AbstractLanguage;
-import org.sonar.api.utils.System2;
+import org.sonar.scanner.extension.PropertyDefinitions;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
 import org.sonarsource.vbnet.core.VbNetCorePluginMetadata.VbNet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 class VbNetTest {
 
@@ -34,8 +32,7 @@ class VbNetTest {
 
   @BeforeEach
   void init() {
-    PropertyDefinitions defs = new PropertyDefinitions(mock(System2.class),
-      new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE).create());
+    PropertyDefinitions defs = new PropertyDefinitions(new VbNetPropertyDefinitions(TestVbNetMetadata.INSTANCE).create());
     settings = new MapSettings(defs);
     vbnet = TestVbNetMetadata.INSTANCE.new VbNet(settings.asConfig());
   }
