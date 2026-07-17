@@ -36,6 +36,8 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
     private static readonly ImmutableArray<string> ExcludedHostLifetimeTokens = ImmutableArray.Create("ApplicationStarted", "ApplicationStopped");
+    // Reused across calls: each call's ReplaceNode produces its own private tree, so there's no cross-call collision to guard against.
+    private static readonly SyntaxAnnotation SpeculativeInvocationAnnotation = new();
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -274,14 +276,14 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
             SyntaxFactory.NameColon(ctParamName.EscapedIdentifierName),
             default,
             ctSource);
-        var modifiedInvocation = invocation.WithArgumentList(invocation.ArgumentList.AddArguments(ctArg));
-        // Roslyn binding resolves symbols without running the diagnostics pass (where static-capture
-        // violations such as CS8422 are enforced). So this succeeds even inside a static local function
-        // whose caller cannot name ctSource directly — the user still has to add a CT parameter there.
-        // GetSpeculativeSymbolInfo resolves by argument-type matching only; it does not check whether
-        // the resolved method's return type is compatible with how the result is used at the call site.
-        // Check return type on the resolved symbol to avoid false positives (e.g. Task<int> vs Task<string> overloads).
-        return model.GetSpeculativeSymbolInfo(invocation.SpanStart, modifiedInvocation, SpeculativeBindingOption.BindAsExpression).Symbol
+        var modifiedInvocation = invocation.WithArgumentList(invocation.ArgumentList.AddArguments(ctArg)).WithAdditionalAnnotations(SpeculativeInvocationAnnotation);
+        // A detached WithArgumentList() copy has Parent == null, which NREs Roslyn's binder on conditional-access
+        // chains like x?.y.M() (https://github.com/dotnet/roslyn/issues/25262). ReplaceNode on the tree root keeps the parent chain intact.
+        var speculatedNode = (ExpressionSyntax)invocation.SyntaxTree.GetRoot().ReplaceNode(invocation, modifiedInvocation).GetAnnotatedNodes(SpeculativeInvocationAnnotation).First();
+        // Binding skips the diagnostics pass (e.g. static-capture check CS8422), so this also succeeds inside a
+        // static local function even though the user still has to add a CT parameter there themselves.
+        // GetSpeculativeSymbolInfo matches by argument type only, so check the return type too to avoid FPs (e.g. Task<int> vs Task<string> overloads).
+        return model.GetSpeculativeSymbolInfo(invocation.SpanStart, speculatedNode, SpeculativeBindingOption.BindAsExpression).Symbol
             is IMethodSymbol resolved
             && model.Compilation.ClassifyConversion(resolved.ReturnType, calledMethod.ReturnType).IsImplicit;
     }

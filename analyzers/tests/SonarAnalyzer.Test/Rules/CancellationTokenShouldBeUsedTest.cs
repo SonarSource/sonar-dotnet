@@ -23,12 +23,15 @@ namespace SonarAnalyzer.Test.Rules;
 public class CancellationTokenShouldBeUsedTest
 {
     // Minimal dependency type included in every snippet to keep tests self-contained.
+    // Next/indexer enable building '.'/'?.'/'[x]'/'?[x]' chains for NET-4157's conditional-access coverage.
     private const string SnippetPreamble = """
         using System.Threading;
         public class Dep
         {
             public void M() { }
             public void M(CancellationToken ct) { }
+            public Dep Next => this;
+            public Dep this[int i] => this;
         }
         """;
 
@@ -458,4 +461,33 @@ public class CancellationTokenShouldBeUsedTest
                 }
                 """)
             .VerifyNoIssues();
+
+    // ─── NET-4157: conditional-access call site used to crash CanSpeculativelyPassCt (AD0001, see roslyn#25262) ──
+    // Covers the call sitting anywhere on a '.'/'?.'/'[x]'/'?[x]' chain's conditional-access spine.
+    [TestMethod]
+    [DataRow("_dep?.M()")]
+    [DataRow("_dep?.Next.M()")]
+    [DataRow("_dep?.Next?.M()")]
+    [DataRow("_dep.Next?.M()")]
+    [DataRow("_dep?[0].M()")]
+    [DataRow("_dep?[0]?.M()")]
+    [DataRow("_dep[0]?.M()")]
+    [DataRow("_dep?.Next[0]?.M()")]
+    [DataRow("_dep?.Next?.Next.M()")]
+    [DataRow("_dep?.Next.Next?.M()")]
+    [DataRow("_dep?[0]?.Next?.M()")]
+    public void CancellationTokenShouldBeUsed_ConditionalAccessInvocation(string call) =>
+        builderLatest
+            .AddSnippet($$$"""
+                {{{SnippetPreamble}}}
+                public class C
+                {
+                    Dep _dep = new Dep();
+                    public void M(CancellationToken token) // Secondary
+                    {
+                        {{{call}}}; // Noncompliant {{Pass the 'token' to this method to allow cancellation of the operation, or use 'CancellationToken.None' to opt out explicitly.}}
+                    }
+                }
+                """)
+            .Verify();
 }
