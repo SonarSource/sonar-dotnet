@@ -48,7 +48,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 if (CSharpEquivalenceChecker.AreEquivalent(currentExpression, previousExpression)
                     && !ContainsPossibleUpdate(previousStatement, currentExpression, context.Model))
                 {
-                    context.ReportIssue(Rule, currentExpression, previousExpression.LineNumberToReport().ToString());
+                    context.ReportIssue(Rule, currentExpression, previousExpression.LineNumberToReport.ToString());
                 }
             }
         }

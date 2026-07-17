@@ -44,8 +44,8 @@ public sealed class IndentArgument : IndentBase
         {
             ForStatementSyntax => node.Ancestors().OfType<InvocationExpressionSyntax>().FirstOrDefault(),
             InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccess } when FirstMemberOnLine(memberAccess) is { } member => member,
-            ObjectCreationExpressionSyntax or BaseObjectCreationExpressionSyntax when current.GetFirstToken().IsFirstTokenOnLine() => current,
-            CollectionExpressionSyntax when node is ExpressionElementSyntax && !current.GetFirstToken().IsFirstTokenOnLine() && FirstMemberOnLine(current) is { } member => member,
+            ObjectCreationExpressionSyntax or BaseObjectCreationExpressionSyntax when current.GetFirstToken().IsFirstTokenOnLine => current,
+            CollectionExpressionSyntax when node is ExpressionElementSyntax && !current.GetFirstToken().IsFirstTokenOnLine && FirstMemberOnLine(current) is { } member => member,
             { Parent: ConditionalExpressionSyntax ternary } when ternary.WhenTrue == current || ternary.WhenFalse == current => current,
             _ => base.NodeRoot(node, current),
         };
@@ -56,7 +56,7 @@ public sealed class IndentArgument : IndentBase
             ArgumentSyntax { Parent.Parent: { } grandParent } => FirstMemberOnLine(grandParent),
             CollectionExpressionSyntax { Parent: { } parent } => FirstMemberOnLine(parent),
             InvocationExpressionSyntax { Expression: { } expression } => FirstMemberOnLine(expression),
-            MemberAccessExpressionSyntax { Name: { } name } memberAccess when memberAccess.OperatorToken.IsFirstTokenOnLine() => name,
+            MemberAccessExpressionSyntax { Name: { } name, OperatorToken.IsFirstTokenOnLine: true } => name,
             MemberAccessExpressionSyntax { Expression: { } expression } => FirstMemberOnLine(expression),
             _ => null,
         };

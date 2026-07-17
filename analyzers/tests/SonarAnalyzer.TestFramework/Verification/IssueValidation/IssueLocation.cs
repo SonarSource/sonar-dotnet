@@ -63,7 +63,7 @@ internal sealed class IssueLocation
     }
 
     private IssueLocation(IssueType type, string ruleId, string message, Location location, FileLinePositionSpan span)
-        : this(type, span.Path ?? string.Empty, location.LineNumberToReport(), message ?? string.Empty, null, span.StartLinePosition.Character, location.SourceSpan.Length, ruleId) { }
+        : this(type, span.Path ?? string.Empty, location.LineNumberToReport, message ?? string.Empty, null, span.StartLinePosition.Character, location.SourceSpan.Length, ruleId) { }
 
     public void UpdatePrimaryIssueIdFrom(IssueLocation expected)
     {

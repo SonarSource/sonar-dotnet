@@ -108,7 +108,7 @@ public sealed class IndentOperator : IndentBase
             return current;
         }
         else if (current is StatementSyntax or AssignmentExpressionSyntax or SwitchExpressionArmSyntax
-            || (current is InvocationExpressionSyntax or CollectionExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
+            || (current is InvocationExpressionSyntax or CollectionExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine))
         {
             return current;
         }

@@ -199,7 +199,7 @@ namespace SonarAnalyzer.CSharp.Rules
             public int Line { get; }
 
             public ShiftInstance(SyntaxNode node) =>
-                Line = node.LineNumberToReport();
+                Line = node.LineNumberToReport;
 
             public ShiftInstance(string description, bool isLiteralZero, SyntaxNode node)
                 : this(node)

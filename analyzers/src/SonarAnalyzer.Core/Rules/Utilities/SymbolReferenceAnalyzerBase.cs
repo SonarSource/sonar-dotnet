@@ -120,7 +120,7 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
         {
             var reference = references[i];
             if (!reference.IsDeclaration
-                && reference.Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
+                && reference.Identifier.GetLocation().MappedLineSpanIfAvailable is var mappedLineSpan
                 // Syntax tree can contain elements from external files (e.g. razor imports files)
                 // We need to make sure that we don't count these elements.
                 && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
@@ -136,7 +136,7 @@ public abstract class SymbolReferenceAnalyzerBase<TSyntaxKind> : UtilityAnalyzer
         for (var i = 0; i < references.Count; i++)
         {
             if (references[i].IsDeclaration
-                && references[i].Identifier.GetLocation().GetMappedLineSpanIfAvailable() is var mappedLineSpan
+                && references[i].Identifier.GetLocation().MappedLineSpanIfAvailable is var mappedLineSpan
                 && string.Equals(mappedLineSpan.Path, filePath, StringComparison.OrdinalIgnoreCase))
             {
                 return mappedLineSpan;

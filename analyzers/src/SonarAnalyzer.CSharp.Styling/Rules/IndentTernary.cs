@@ -35,17 +35,17 @@ public sealed class IndentTernary : IndentBase
             SyntaxKind.ConditionalExpression);
 
     protected override SyntaxNode NodeRoot(SyntaxNode node, SyntaxNode current) =>
-        current == node && current.GetFirstToken().IsFirstTokenOnLine()
+        current == node && current.GetFirstToken().IsFirstTokenOnLine
             ? current
             : base.NodeRoot(node, current);
 
     private int? ExpectedPosition(ConditionalExpressionSyntax ternary)
     {
-        if (ternary.Condition is BinaryExpressionSyntax binary && binary.OperatorToken.IsFirstTokenOnLine())
+        if (ternary.Condition is BinaryExpressionSyntax { OperatorToken: { IsFirstTokenOnLine: true } operatorToken })
         {
-            return ExpectedPosition(binary.OperatorToken.GetLocation().GetLineSpan().StartLinePosition.Character, 4);
+            return ExpectedPosition(operatorToken.GetLocation().GetLineSpan().StartLinePosition.Character, 4);
         }
-        else if (ternary.Condition.GetLocation() is var location && location.StartLine() != location.EndLine())
+        else if (ternary.Condition.GetLocation() is var location && location.StartLine != location.EndLine)
         {
             return null;    // Unexpected multiline condition => not known, not supported to avoid FPs
         }

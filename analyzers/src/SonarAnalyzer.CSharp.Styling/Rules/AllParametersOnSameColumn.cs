@@ -34,5 +34,5 @@ public class AllParametersOnSameColumn : AllParametersBase
     }
 
     private static bool IsSameColumn(SyntaxNode first, SyntaxNode second) =>
-        first.GetLocation().StartColumn() == second.GetLocation().StartColumn();
+        first.GetLocation().StartColumn == second.GetLocation().StartColumn;
 }

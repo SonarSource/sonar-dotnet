@@ -54,7 +54,7 @@ public sealed class IndentInvocation : IndentBase
         {
             return current;
         }
-        else if (current is BinaryExpressionSyntax binary && binary.OperatorToken.IsFirstTokenOnLine())
+        else if (current is BinaryExpressionSyntax { OperatorToken.IsFirstTokenOnLine: true } binary)
         {
             return binary;
         }

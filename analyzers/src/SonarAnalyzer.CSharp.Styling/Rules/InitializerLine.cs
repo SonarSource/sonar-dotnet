@@ -32,7 +32,7 @@ public sealed class InitializerLine : StylingAnalyzer
             {
                 foreach (var declarator in ((FieldDeclarationSyntax)c.Node).Declaration.Variables.Where(x => x.Initializer is not null))
                 {
-                    Verify(c, declarator.Initializer.Value, declarator.GetLocation().StartLine(), "initializer");
+                    Verify(c, declarator.Initializer.Value, declarator.GetLocation().StartLine, "initializer");
                 }
             },
             SyntaxKind.FieldDeclaration);
@@ -41,11 +41,11 @@ public sealed class InitializerLine : StylingAnalyzer
                 var property = (PropertyDeclarationSyntax)c.Node;
                 if (property.Initializer is not null)
                 {
-                    Verify(c, property.Initializer.Value, property.Identifier.GetLocation().StartLine(), "initializer");
+                    Verify(c, property.Initializer.Value, property.Identifier.GetLocation().StartLine, "initializer");
                 }
                 if (property.ExpressionBody is not null)
                 {
-                    Verify(c, property.ExpressionBody.Expression, property.Identifier.GetLocation().StartLine(), "expression");
+                    Verify(c, property.ExpressionBody.Expression, property.Identifier.GetLocation().StartLine, "expression");
                 }
             },
             SyntaxKind.PropertyDeclaration);
@@ -54,7 +54,7 @@ public sealed class InitializerLine : StylingAnalyzer
                 var accessor = (AccessorDeclarationSyntax)c.Node;
                 if (accessor.ExpressionBody is not null)
                 {
-                    Verify(c, accessor.ExpressionBody.Expression, accessor.Keyword.GetLocation().StartLine(), "expression");
+                    Verify(c, accessor.ExpressionBody.Expression, accessor.Keyword.GetLocation().StartLine, "expression");
                 }
             },
             SyntaxKind.AddAccessorDeclaration,
@@ -76,7 +76,7 @@ public sealed class InitializerLine : StylingAnalyzer
     private static Location MissplacedLocation(ExpressionSyntax value, int expectedLine)
     {
         var valueLocation = value.GetLocation();
-        if (valueLocation.StartLine() == expectedLine)
+        if (valueLocation.StartLine == expectedLine)
         {
             return null;
         }
@@ -88,7 +88,7 @@ public sealed class InitializerLine : StylingAnalyzer
         {
             return Location.Create(value.SyntaxTree, TextSpan.FromBounds(implicitObjectCreation.NewKeyword.SpanStart, implicitObjectCreation.ArgumentList.Span.End));
         }
-        else if (valueLocation.StartLine() != valueLocation.EndLine())
+        else if (valueLocation.StartLine != valueLocation.EndLine)
         {
             return null;
         }

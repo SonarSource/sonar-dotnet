@@ -39,7 +39,7 @@ public static class CSharpExecutableLinesMetric
 
         protected virtual bool AddExecutableLineNumbers(Location location)
         {
-            ExecutableLineNumbers.Add(location.LineNumberToReport());
+            ExecutableLineNumbers.Add(location.LineNumberToReport);
             return true;
         }
 
@@ -151,7 +151,7 @@ public static class CSharpExecutableLinesMetric
             var mappedLocation = location.GetMappedLineSpan();
             if (mappedLocation.HasMappedPath)
             {
-                ExecutableLineNumbers.Add(mappedLocation.StartLinePosition.LineNumberToReport());
+                ExecutableLineNumbers.Add(mappedLocation.StartLinePosition.LineNumberToReport);
             }
             return true;
         }

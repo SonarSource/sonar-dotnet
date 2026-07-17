@@ -29,7 +29,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var currentCondition = ifStatement.Condition;
                     if (ifStatement.PrecedingConditionsInConditionChain().FirstOrDefault(x => CSharpEquivalenceChecker.AreEquivalent(currentCondition, x)) is { } precedingCondition)
                     {
-                        c.ReportIssue(rule, currentCondition, [precedingCondition.ToSecondaryLocation()], precedingCondition.LineNumberToReport().ToString());
+                        c.ReportIssue(rule, currentCondition, [precedingCondition.ToSecondaryLocation()], precedingCondition.LineNumberToReport.ToString());
                     }
                 },
                 SyntaxKind.IfStatement);

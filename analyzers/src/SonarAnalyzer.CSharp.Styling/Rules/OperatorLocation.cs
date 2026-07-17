@@ -71,7 +71,7 @@ public class OperatorLocation : StylingAnalyzer
 
     private void Validate(SonarSyntaxNodeReportingContext context, SyntaxToken token)
     {
-        if (token.GetLocation().StartLine() != token.GetNextToken().GetLocation().StartLine())
+        if (token.GetLocation().StartLine != token.GetNextToken().GetLocation().StartLine)
         {
             context.ReportIssue(Rule, token, token.ToString());
         }

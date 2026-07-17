@@ -172,7 +172,7 @@ public static class IssueReporter
         }
 
         var text = diagnostic.Location.SourceTree.GetText();
-        var lineNumber = diagnostic.Location.LineNumberToReport();
+        var lineNumber = diagnostic.Location.LineNumberToReport;
 
         return IsTextMatchingVbcErrorPattern(text.Lines[lineNumber - 1].ToString());
     }

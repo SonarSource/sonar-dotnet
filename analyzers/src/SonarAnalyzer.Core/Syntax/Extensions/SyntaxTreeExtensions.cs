@@ -24,34 +24,37 @@ internal static class SyntaxTreeExtensions
 {
     private static readonly ConditionalWeakTable<SyntaxTree, object> GeneratedCodeCache = new();
 
-    [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
-    public static bool IsGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer)
+    extension(SyntaxTree tree)
     {
-        if (tree is null)
+        [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
+        public bool IsGenerated(GeneratedCodeRecognizer generatedCodeRecognizer)
         {
-            return false;
+            if (tree is null)
+            {
+                return false;
+            }
+            else
+            {
+                return GeneratedCodeCache.TryGetValue(tree, out var result)
+                    ? (bool)result
+                    : IsGeneratedGetOrAdd(tree, generatedCodeRecognizer);
+            }
         }
-        else
-        {
-            return GeneratedCodeCache.TryGetValue(tree, out var result)
-                ? (bool)result
-                : IsGeneratedGetOrAdd(tree, generatedCodeRecognizer);
-        }
+
+        public bool IsConsideredGenerated(GeneratedCodeRecognizer generatedCodeRecognizer, bool isRazorAnalysisEnabled) =>
+            isRazorAnalysisEnabled
+                ? tree.IsGenerated(generatedCodeRecognizer) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
+                : tree.IsGenerated(generatedCodeRecognizer);
+
+        public string OriginalFilePath =>
+            // Currently we support only C# based generated files.
+            tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum
+                ? pragmaChecksum.File.ValueText
+                : tree.FilePath;
+
+        public bool EndsWith(string suffix) =>
+            tree.FilePath.EndsWith(suffix, StringComparison.OrdinalIgnoreCase);
     }
-
-    public static bool IsConsideredGenerated(this SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer, bool isRazorAnalysisEnabled) =>
-        isRazorAnalysisEnabled
-            ? tree.IsGenerated(generatedCodeRecognizer) && !GeneratedCodeRecognizer.IsRazorGeneratedFile(tree)
-            : tree.IsGenerated(generatedCodeRecognizer);
-
-    public static string GetOriginalFilePath(this SyntaxTree tree) =>
-        // Currently we support only C# based generated files.
-        tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum
-            ? pragmaChecksum.File.ValueText
-            : tree.FilePath;
-
-    public static bool EndsWith(this SyntaxTree tree, string suffix) =>
-        tree.FilePath.EndsWith(suffix, StringComparison.OrdinalIgnoreCase);
 
     private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         (bool)GeneratedCodeCache.GetValue(tree, x => generatedCodeRecognizer.IsGenerated(x));

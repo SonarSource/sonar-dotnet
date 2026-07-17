@@ -27,7 +27,7 @@ public sealed class MethodExpressionBodyLine : StylingAnalyzer
             {
                 var method = (BaseMethodDeclarationSyntax)c.Node;
                 if (method.ExpressionBody?.Expression is { } expression
-                    && method.GetLocation().StartLine() == expression.GetLocation().StartLine()
+                    && method.GetLocation().StartLine == expression.GetLocation().StartLine
                     && expression.DescendantTokens().Skip(1).Any()
                     && !IsStubThrow((IMethodSymbol)c.ContainingSymbol, expression))
                 {

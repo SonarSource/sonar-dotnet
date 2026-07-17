@@ -21,6 +21,8 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class LinePositionExtensions
 {
-    public static int LineNumberToReport(this LinePosition position) =>
-        position.Line + 1;
+    extension(LinePosition position)
+    {
+        public int LineNumberToReport => position.Line + 1;
+    }
 }

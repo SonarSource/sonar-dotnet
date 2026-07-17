@@ -30,7 +30,7 @@ public sealed class LooseFilePermissions : LooseFilePermissionsBase<SyntaxKind, 
         {
             var invocationLocation = invocation.GetLocation();
             var secondaryLocation = objectCreation.Expression.GetLocation();
-            context.ReportIssue(rule, invocationLocation, invocationLocation.StartLine() == secondaryLocation.StartLine() ? [] : [secondaryLocation.ToSecondary(MessageFormat)]);
+            context.ReportIssue(rule, invocationLocation, invocationLocation.StartLine == secondaryLocation.StartLine ? [] : [secondaryLocation.ToSecondary(MessageFormat)]);
         }
     }
 

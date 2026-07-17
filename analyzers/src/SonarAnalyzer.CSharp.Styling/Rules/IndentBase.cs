@@ -25,7 +25,7 @@ public abstract class IndentBase : StylingAnalyzer
 
     protected void Verify(SonarSyntaxNodeReportingContext context, int expected, SyntaxToken token, SyntaxNode reportingLocationExpression = null)
     {
-        if (token.IsFirstTokenOnLine() // Raise only when the line starts with this token to avoid collisions with T0024, T0027, etc.
+        if (token.IsFirstTokenOnLine // Raise only when the line starts with this token to avoid collisions with T0024, T0027, etc.
             && token.GetLocation().GetLineSpan().StartLinePosition.Character != expected)
         {
             context.ReportIssue(Rule, Location.Create(token.SyntaxTree, TextSpan.FromBounds(token.SpanStart, (reportingLocationExpression?.Span ?? token.Span).End)), (expected + 1).ToString());
@@ -52,7 +52,7 @@ public abstract class IndentBase : StylingAnalyzer
         else if (current is StatementSyntax or AssignmentExpressionSyntax or SwitchExpressionArmSyntax
             || current is ExpressionSyntax { Parent: IfStatementSyntax or WhileStatementSyntax }
             || current.Parent is ArrowExpressionClauseSyntax or LambdaExpressionSyntax
-            || (current is InvocationExpressionSyntax or CollectionExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine()))
+            || (current is InvocationExpressionSyntax or CollectionExpressionSyntax && current.GetFirstToken().IsFirstTokenOnLine))
         {
             return current;
         }

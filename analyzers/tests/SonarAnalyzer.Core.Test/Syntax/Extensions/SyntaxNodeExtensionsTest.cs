@@ -33,7 +33,7 @@ public class SyntaxNodeExtensionsTest
          }
          """;
         var method = CSharpSyntaxTree.ParseText(code).Single<ClassDeclarationSyntax>();
-        method.LineNumberToReport().Should().Be(3);
-        method.GetLocation().GetLineSpan().StartLinePosition.LineNumberToReport().Should().Be(3);
+        method.LineNumberToReport.Should().Be(3);
+        method.GetLocation().GetLineSpan().StartLinePosition.LineNumberToReport.Should().Be(3);
     }
 }

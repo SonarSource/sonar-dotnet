@@ -27,7 +27,7 @@ public sealed class UseRawString : StylingAnalyzer
         context.RegisterNodeAction(c =>
             {
                 var location = c.Node.GetLocation();
-                if (location.StartLine() != location.EndLine()
+                if (location.StartLine != location.EndLine
                     && c.Node.GetFirstToken().Kind() is not SyntaxKind.MultiLineRawStringLiteralToken and not SyntaxKind.InterpolatedMultiLineRawStringStartToken)
                 {
                     c.ReportIssue(Rule, c.Node);

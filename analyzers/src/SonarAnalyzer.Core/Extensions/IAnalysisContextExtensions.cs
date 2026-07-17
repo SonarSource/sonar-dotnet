@@ -130,6 +130,6 @@ public static class IAnalysisContextExtensions
         //
         // This should be updated for .cshtml files as well once https://github.com/SonarSource/sonar-dotnet/issues/8032 is done.
         tree.FilePath.EndsWith(RazorGeneratedFileSuffix, StringComparison.OrdinalIgnoreCase)
-            ? tree.GetOriginalFilePath()
+            ? tree.OriginalFilePath
             : tree.FilePath;
 }

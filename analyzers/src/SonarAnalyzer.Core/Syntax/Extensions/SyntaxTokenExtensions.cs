@@ -21,23 +21,27 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class SyntaxTokenExtensions
 {
-    public static int Line(this SyntaxToken token) =>
-        token.GetLocation().StartLine();
+    extension(SyntaxToken token)
+    {
+        public int Line => token.GetLocation().StartLine;
 
-    public static SecondaryLocation ToSecondaryLocation(this SyntaxToken token, string message = null, params string[] messageArgs) =>
-        message is not null && messageArgs?.Length > 0
-            ? new(token.GetLocation(), string.Format(message, messageArgs))
-            : new(token.GetLocation(), message);
+        public SecondaryLocation ToSecondaryLocation(string message = null, params string[] messageArgs) =>
+            message is not null && messageArgs?.Length > 0
+                ? new(token.GetLocation(), string.Format(message, messageArgs))
+                : new(token.GetLocation(), message);
 
-    public static Location CreateLocation(this SyntaxToken from, SyntaxToken to) =>
-        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+        public IEnumerable<int> LineNumbers(bool isZeroBasedCount = true) =>
+            token.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
 
-    public static Location CreateLocation(this SyntaxToken from, SyntaxNode to) =>
-        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+        public bool IsFirstTokenOnLine => token.Line != token.GetPreviousToken().Line;
+    }
 
-    public static IEnumerable<int> LineNumbers(this SyntaxToken token, bool isZeroBasedCount = true) =>
-        token.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
+    extension(SyntaxToken from)
+    {
+        public Location CreateLocation(SyntaxToken to) =>
+            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
 
-    public static bool IsFirstTokenOnLine(this SyntaxToken token) =>
-        token.Line() != token.GetPreviousToken().Line();
+        public Location CreateLocation(SyntaxNode to) =>
+            Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
+    }
 }

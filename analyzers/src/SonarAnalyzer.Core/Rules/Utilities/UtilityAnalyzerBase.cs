@@ -48,8 +48,8 @@ public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     internal static TextRange ToTextRange(FileLinePositionSpan lineSpan) =>
         new()
         {
-            StartLine = lineSpan.StartLinePosition.LineNumberToReport(),
-            EndLine = lineSpan.EndLinePosition.LineNumberToReport(),
+            StartLine = lineSpan.StartLinePosition.LineNumberToReport,
+            EndLine = lineSpan.EndLinePosition.LineNumberToReport,
             StartOffset = lineSpan.StartLinePosition.Character,
             EndOffset = lineSpan.EndLinePosition.Character
         };
@@ -135,7 +135,7 @@ public abstract class UtilityAnalyzerBase<TSyntaxKind, TMessage> : UtilityAnalyz
     protected static string MapFilePath(SyntaxTree tree) =>
         // If the syntax tree is constructed for a razor generated file, we need to provide the original file path.
         GeneratedCodeRecognizer.IsRazorGeneratedFile(tree) && tree.GetRoot() is var root && root.ContainsDirectives
-            ? root.GetMappedFilePathFromRoot()
+            ? root.MappedFilePathFromRoot
             : tree.FilePath;
 
     private bool ShouldGenerateMetrics(UtilityAnalyzerParameters parameters, SonarSemanticModelReportingContext context) =>

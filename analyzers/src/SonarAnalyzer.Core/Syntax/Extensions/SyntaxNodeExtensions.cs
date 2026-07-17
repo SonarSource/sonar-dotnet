@@ -22,65 +22,70 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class SyntaxNodeExtensions
 {
-    public static bool IsKnownType(this SyntaxNode node, KnownType knownType, SemanticModel model)
+    extension(SyntaxNode node)
     {
-        var type = model.GetSymbolInfo(node).Symbol.GetSymbolType();
-        return type.Is(knownType) || type?.OriginalDefinition?.Is(knownType) == true;
-    }
-
-    public static bool IsDeclarationKnownType(this SyntaxNode node, KnownType knownType, SemanticModel model) =>
-        model.GetDeclaredSymbol(node)?.GetSymbolType().Is(knownType) ?? false;
-
-    public static SemanticModel EnsureCorrectSemanticModelOrDefault(this SyntaxNode node, SemanticModel model) =>
-        node.SyntaxTree.SemanticModelOrDefault(model);
-
-    public static bool ToStringContains(this SyntaxNode node, string s) =>
-        node.ToString().Contains(s);
-
-    public static bool ToStringContains(this SyntaxNode node, string s, StringComparison comparison) =>
-        node.ToString().IndexOf(s, comparison) != -1;
-
-    public static bool ToStringContainsEitherOr(this SyntaxNode node, string a, string b)
-    {
-        var toString = node.ToString();
-        return toString.Contains(a) || toString.Contains(b);
-    }
-
-    public static string GetMappedFilePathFromRoot(this SyntaxNode root)
-    {
-        if (root.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)Microsoft.CodeAnalysis.CSharp.SyntaxKind.PragmaChecksumDirectiveTrivia } pragmaChecksum)
+        public bool IsKnownType(KnownType knownType, SemanticModel model)
         {
-            // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
-            // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum
-            var content = pragmaChecksum.ToString();
-            var firstIndex = content.IndexOf('"');
-            var start = firstIndex + 1;
-            var secondIndex = content.IndexOf('"', start);
-            return content.Substring(start, secondIndex - start);
+            var type = model.GetSymbolInfo(node).Symbol.GetSymbolType();
+            return type.Is(knownType) || type?.OriginalDefinition?.Is(knownType) == true;
         }
 
-        return root.SyntaxTree.FilePath;
+        public bool IsDeclarationKnownType(KnownType knownType, SemanticModel model) =>
+            model.GetDeclaredSymbol(node)?.GetSymbolType().Is(knownType) ?? false;
+
+        public SemanticModel EnsureCorrectSemanticModelOrDefault(SemanticModel model) =>
+            node.SyntaxTree.SemanticModelOrDefault(model);
+
+        public bool ToStringContains(string s) =>
+            node.ToString().Contains(s);
+
+        public bool ToStringContains(string s, StringComparison comparison) =>
+            node.ToString().IndexOf(s, comparison) != -1;
+
+        public bool ToStringContainsEitherOr(string a, string b)
+        {
+            var toString = node.ToString();
+            return toString.Contains(a) || toString.Contains(b);
+        }
+
+        public string MappedFilePathFromRoot
+        {
+            get
+            {
+                if (node.DescendantTrivia().FirstOrDefault() is { RawKind: (ushort)Microsoft.CodeAnalysis.CSharp.SyntaxKind.PragmaChecksumDirectiveTrivia } pragmaChecksum)
+                {
+                    // The format is: #pragma checksum "filename" "{guid}" "checksum bytes"
+                    // See https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/preprocessor-directives#pragma-checksum
+                    var content = pragmaChecksum.ToString();
+                    var firstIndex = content.IndexOf('"');
+                    var start = firstIndex + 1;
+                    var secondIndex = content.IndexOf('"', start);
+                    return content.Substring(start, secondIndex - start);
+                }
+
+                return node.SyntaxTree.FilePath;
+            }
+        }
+
+        public TSyntaxKind Kind<TSyntaxKind>() where TSyntaxKind : struct, Enum =>
+            node is null ? default : EnumConverter<TSyntaxKind>.FromInt32(node.RawKind);
+
+        public SecondaryLocation ToSecondaryLocation(string message = null, params string[] messageArgs) =>
+            message is not null && messageArgs?.Length > 0
+                ? new(node.GetLocation(), string.Format(message, messageArgs))
+                : new(node.GetLocation(), message);
+
+        public int LineNumberToReport => node.GetLocation().LineNumberToReport;
+
+        public bool HasFlagsAttribute(SemanticModel model) =>
+            model.GetDeclaredSymbol(node).HasAttribute(KnownType.System_FlagsAttribute);
+
+        public Location CreateLocation(SyntaxNode to) =>
+            Location.Create(node.SyntaxTree, TextSpan.FromBounds(node.SpanStart, to.Span.End));
+
+        public Location CreateLocation(SyntaxToken to) =>
+            Location.Create(node.SyntaxTree, TextSpan.FromBounds(node.SpanStart, to.Span.End));
     }
-
-    public static TSyntaxKind Kind<TSyntaxKind>(this SyntaxNode node) where TSyntaxKind : struct, Enum =>
-        node is null ? default : EnumConverter<TSyntaxKind>.FromInt32(node.RawKind);
-
-    public static SecondaryLocation ToSecondaryLocation(this SyntaxNode node, string message = null, params string[] messageArgs) =>
-        message is not null && messageArgs?.Length > 0
-            ? new(node.GetLocation(), string.Format(message, messageArgs))
-            : new(node.GetLocation(), message);
-
-    public static int LineNumberToReport(this SyntaxNode node) =>
-        node.GetLocation().LineNumberToReport();
-
-    public static bool HasFlagsAttribute(this SyntaxNode node, SemanticModel model) =>
-        model.GetDeclaredSymbol(node).HasAttribute(KnownType.System_FlagsAttribute);
-
-    public static Location CreateLocation(this SyntaxNode from, SyntaxNode to) =>
-        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
-
-    public static Location CreateLocation(this SyntaxNode from, SyntaxToken to) =>
-        Location.Create(from.SyntaxTree, TextSpan.FromBounds(from.SpanStart, to.Span.End));
 
     // Converts a SyntaxNode.RawKind (int) to the strongly-typed C#/VB SyntaxKind enum without boxing.
     // Enum.ToObject(...) boxes the result on every call; here a direct int -> TSyntaxKind conversion is

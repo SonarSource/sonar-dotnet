@@ -40,7 +40,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 if (mergeableTry != null)
                 {
-                    c.ReportIssue(rule, tryStatement, messageArgs: mergeableTry.LineNumberToReport().ToString());
+                    c.ReportIssue(rule, tryStatement, messageArgs: mergeableTry.LineNumberToReport.ToString());
                 }
 
                 bool SameCatches(IReadOnlyCollection<CatchClauseSyntax> other) =>

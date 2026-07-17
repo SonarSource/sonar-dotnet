@@ -92,7 +92,7 @@ namespace SonarAnalyzer.CSharp.Rules
             SyntaxToken startToken;
             string conditionLabelText;
             if (ifStatement.Parent is ElseClauseSyntax elseClause
-                && ifStatement.LineNumberToReport() == elseClause.LineNumberToReport())
+                && ifStatement.LineNumberToReport == elseClause.LineNumberToReport)
             {
                 controlNode = elseClause;
                 startToken = elseClause.ElseKeyword;
@@ -131,7 +131,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static Location GetFirstLineOfNode(SyntaxNode node)
         {
-            var lineNumber = node.GetLocation().StartLine();
+            var lineNumber = node.GetLocation().StartLine;
             var wholeLineSpan = node.SyntaxTree.GetText().Lines[lineNumber].Span;
             var secondaryLocationSpan = wholeLineSpan.Intersection(node.GetLocation().SourceSpan);
 

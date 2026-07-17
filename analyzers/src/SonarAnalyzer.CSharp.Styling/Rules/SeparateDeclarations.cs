@@ -50,7 +50,7 @@ public sealed class SeparateDeclarations : StylingAnalyzer
     private void ValidatePossibleSingleLineMember(SonarSyntaxNodeReportingContext context)
     {
         var firstToken = context.Node.GetFirstToken();
-        if (firstToken.Line() != context.Node.GetLastToken().Line()
+        if (firstToken.Line != context.Node.GetLastToken().Line
             || IsStandaloneCloseBrace(firstToken.GetPreviousToken())
             || PreviousDeclarationKind() != context.Node.Kind())
         {
@@ -63,7 +63,7 @@ public sealed class SeparateDeclarations : StylingAnalyzer
                 : SyntaxKind.None;
 
         static bool IsStandaloneCloseBrace(SyntaxToken token) =>
-            token.IsKind(SyntaxKind.CloseBraceToken) && token.Line() != token.GetPreviousToken().Line();
+            token.IsKind(SyntaxKind.CloseBraceToken) && token.Line != token.GetPreviousToken().Line;
     }
 
     private void ValidateSeparatedMember(SonarSyntaxNodeReportingContext context)
@@ -86,14 +86,14 @@ public sealed class SeparateDeclarations : StylingAnalyzer
         {
             if (trivium.IsKind(SyntaxKind.EndOfLineTrivia))
             {
-                if (previousLine != trivium.GetLocation().StartLine())
+                if (previousLine != trivium.GetLocation().StartLine)
                 {
                     return true;
                 }
             }
             else
             {
-                previousLine = trivium.GetLocation().EndLine();
+                previousLine = trivium.GetLocation().EndLine;
             }
         }
         return false;

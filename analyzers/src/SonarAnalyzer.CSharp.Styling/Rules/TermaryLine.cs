@@ -29,7 +29,7 @@ public sealed class TernaryLine : StylingAnalyzer
             {
                 var ternary = (ConditionalExpressionSyntax)c.Node;
                 var location = ternary.GetLocation();
-                if (location.StartLine() != location.EndLine())
+                if (location.StartLine != location.EndLine)
                 {
                     Verify(c, ternary.QuestionToken, ternary.WhenTrue);
                     Verify(c, ternary.ColonToken, ternary.WhenFalse);
@@ -39,7 +39,7 @@ public sealed class TernaryLine : StylingAnalyzer
 
     private void Verify(SonarSyntaxNodeReportingContext context, SyntaxToken token, ExpressionSyntax expression)
     {
-        if (!token.IsFirstTokenOnLine())
+        if (!token.IsFirstTokenOnLine)
         {
             context.ReportIssue(Rule, Location.Create(expression.SyntaxTree, TextSpan.FromBounds(token.SpanStart, expression.Span.End)));
         }

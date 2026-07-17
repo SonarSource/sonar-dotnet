@@ -19,6 +19,9 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class SyntaxTriviaExtensions
 {
-    public static IEnumerable<int> LineNumbers(this SyntaxTrivia trivia, bool isZeroBasedCount = true) =>
-        trivia.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
+    extension(SyntaxTrivia trivia)
+    {
+        public IEnumerable<int> LineNumbers(bool isZeroBasedCount = true) =>
+            trivia.GetLocation().GetLineSpan().LineNumbers(isZeroBasedCount);
+    }
 }

@@ -29,7 +29,7 @@ public sealed class MemberAccessLine : StylingAnalyzer
             {
                 var memberAccess = (MemberAccessExpressionSyntax)c.Node;
                 if (!memberAccess.HasSameStartLineAs(memberAccess.Name)
-                    && memberAccess.OperatorToken.GetPreviousToken().GetLocation().EndLine() == memberAccess.Name.GetLocation().StartLine()
+                    && memberAccess.OperatorToken.GetPreviousToken().GetLocation().EndLine == memberAccess.Name.GetLocation().StartLine
                     && FindStartLineMemberAccess(memberAccess) is { } startLineMemberAccess
                     && !IsIgnored(startLineMemberAccess, memberAccess))
                 {
@@ -41,7 +41,7 @@ public sealed class MemberAccessLine : StylingAnalyzer
     private static MemberAccessExpressionSyntax FindStartLineMemberAccess(SyntaxNode node) =>
         node switch
         {
-            MemberAccessExpressionSyntax memberAccess when memberAccess.OperatorToken.Line() != memberAccess.OperatorToken.GetPreviousToken().Line() => memberAccess,
+            MemberAccessExpressionSyntax memberAccess when memberAccess.OperatorToken.Line != memberAccess.OperatorToken.GetPreviousToken().Line => memberAccess,
             MemberAccessExpressionSyntax memberAccess => FindStartLineMemberAccess(memberAccess.Expression),
             InvocationExpressionSyntax invocation => FindStartLineMemberAccess(invocation.Expression),
             ElementAccessExpressionSyntax elementAccess => FindStartLineMemberAccess(elementAccess.Expression),
@@ -49,6 +49,6 @@ public sealed class MemberAccessLine : StylingAnalyzer
         };
 
     private static bool IsIgnored(MemberAccessExpressionSyntax startLine, MemberAccessExpressionSyntax current) =>
-        (startLine.Name is IdentifierNameSyntax { Identifier.ValueText: "And" or "Which" or "Subject" } && startLine.OperatorToken.IsFirstTokenOnLine())
+        (startLine.Name is IdentifierNameSyntax { Identifier.ValueText: "And" or "Which" or "Subject" } && startLine.OperatorToken.IsFirstTokenOnLine)
         || (current.Expression is InvocationExpressionSyntax invocation && invocation.NameIs("Should"));
 }

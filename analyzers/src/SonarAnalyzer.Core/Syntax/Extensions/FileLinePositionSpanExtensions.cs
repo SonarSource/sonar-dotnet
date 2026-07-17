@@ -19,11 +19,14 @@ namespace SonarAnalyzer.Core.Syntax.Extensions;
 
 public static class FileLinePositionSpanExtensions
 {
-    public static IEnumerable<int> LineNumbers(this FileLinePositionSpan lineSpan, bool isZeroBasedCount = true)
+    extension(FileLinePositionSpan lineSpan)
     {
-        var offset = isZeroBasedCount ? 0 : 1;
-        var start = lineSpan.StartLinePosition.Line + offset;
-        var end = lineSpan.EndLinePosition.Line + offset;
-        return Enumerable.Range(start, end - start + 1);
+        public IEnumerable<int> LineNumbers(bool isZeroBasedCount = true)
+        {
+            var offset = isZeroBasedCount ? 0 : 1;
+            var start = lineSpan.StartLinePosition.Line + offset;
+            var end = lineSpan.EndLinePosition.Line + offset;
+            return Enumerable.Range(start, end - start + 1);
+        }
     }
 }

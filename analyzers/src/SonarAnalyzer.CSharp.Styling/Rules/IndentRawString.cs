@@ -30,7 +30,7 @@ public sealed class IndentRawString : IndentBase
                 var token = c.Node.GetLastToken();
                 if (token.Kind() is SyntaxKind.MultiLineRawStringLiteralToken or SyntaxKind.InterpolatedRawStringEndToken or SyntaxKind.Utf8MultiLineRawStringLiteralToken
                     && c.Node.GetLocation() is var location
-                    && location.StartLine() != location.EndLine()
+                    && location.StartLine != location.EndLine
                     && ExpectedPosition(c.Node) is { } expected)
                 {
                     var line = c.Node.SyntaxTree.GetText().Lines[token.GetLocation().GetLineSpan().EndLinePosition.Line];
@@ -67,7 +67,7 @@ public sealed class IndentRawString : IndentBase
         {
             return null;    // We don't want anything, when the invocation is on the raw string itself
         }
-        else if (current is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccess } && memberAccess.OperatorToken.IsFirstTokenOnLine())
+        else if (current is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax { OperatorToken.IsFirstTokenOnLine: true } memberAccess })
         {
             return memberAccess.Name;   // Off by one due to the dot
         }
@@ -80,7 +80,7 @@ public sealed class IndentRawString : IndentBase
             return current; // This assumes that the '? """' or ': """' is positioned correctly, and indents from that
         }
         else if (current is not ArgumentSyntax and not ExpressionElementSyntax and not LiteralExpressionSyntax and not InterpolatedStringExpressionSyntax
-            && current.GetFirstToken().IsFirstTokenOnLine())
+            && current.GetFirstToken().IsFirstTokenOnLine)
         {
             return current;
         }

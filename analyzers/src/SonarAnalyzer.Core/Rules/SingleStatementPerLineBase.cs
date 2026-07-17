@@ -67,14 +67,14 @@ namespace SonarAnalyzer.Core.Rules
 
         private void AddStatementToLineCache(TStatementSyntax statement, MultiValueDictionary<int, TStatementSyntax> statementsByLines)
         {
-            var startLine = statement.GetLocation().StartLine();
+            var startLine = statement.GetLocation().StartLine;
             statementsByLines.AddWithKey(startLine, statement);
 
             var lastToken = statement.GetLastToken();
             var tokenBelonsTo = GetContainingStatement(lastToken);
             if (tokenBelonsTo == statement)
             {
-                var endLine = statement.GetLocation().EndLine();
+                var endLine = statement.GetLocation().EndLine;
                 statementsByLines.AddWithKey(endLine, statement);
             }
         }

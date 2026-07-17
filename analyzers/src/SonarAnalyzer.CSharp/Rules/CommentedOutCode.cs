@@ -110,7 +110,7 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
         {
             if (IsCode(triviaLines[triviaLineNumber]))
             {
-                var triviaStartingLineNumber = trivia.GetLocation().StartLine();
+                var triviaStartingLineNumber = trivia.GetLocation().StartLine;
                 var lineNumber = triviaStartingLineNumber + triviaLineNumber;
                 var lineSpan = context.Tree.GetText().Lines[lineNumber].Span;
                 var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);

@@ -20,5 +20,5 @@ namespace SonarAnalyzer.CSharp.Styling.Extensions;
 internal static class SyntaxNodeExtensions
 {
     public static bool HasSameStartLineAs(this SyntaxNode first, SyntaxNode second) =>
-        first.GetLocation().StartLine() == second.GetLocation().StartLine();
+        first.GetLocation().StartLine == second.GetLocation().StartLine;
 }

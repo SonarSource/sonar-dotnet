@@ -814,7 +814,7 @@ End Class";
     public void GetMappedFilePath(string code, string expectedFileName = DefaultFileName)
     {
         var tree = GetSyntaxTree(code, DefaultFileName);
-        tree.GetRoot().GetMappedFilePathFromRoot().Should().Be(expectedFileName);
+        tree.GetRoot().MappedFilePathFromRoot.Should().Be(expectedFileName);
     }
 
     [TestMethod]

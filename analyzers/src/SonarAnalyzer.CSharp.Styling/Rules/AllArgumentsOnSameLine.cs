@@ -37,7 +37,7 @@ public sealed class AllArgumentsOnSameLine : StylingAnalyzer
         {
             return;
         }
-        var multiline = args[0].GetLocation().StartLine() != args.Last().GetLocation().StartLine();
+        var multiline = args[0].GetLocation().StartLine != args.Last().GetLocation().StartLine;
         foreach (var arg in args)
         {
             if (IsOnNewLine(arg) != multiline && arg.ChildNodes().All(x => !IsIgnored(context.Model, x)))
@@ -48,13 +48,13 @@ public sealed class AllArgumentsOnSameLine : StylingAnalyzer
     }
 
     private static bool IsOnNewLine(SyntaxNode node) =>
-        node.GetLocation().StartLine() != node.GetFirstToken().GetPreviousToken().GetLocation().StartLine();
+        node.GetLocation().StartLine != node.GetFirstToken().GetPreviousToken().GetLocation().StartLine;
 
     private static bool IsIgnored(SemanticModel model, SyntaxNode node) =>
         node switch
         {
             LambdaExpressionSyntax lambda => lambda.IsAnalysisContextAction(model),
-            InterpolatedStringExpressionSyntax interpolated => interpolated.StringStartToken.Line() != interpolated.StringEndToken.Line()
+            InterpolatedStringExpressionSyntax interpolated => interpolated.StringStartToken.Line != interpolated.StringEndToken.Line
                                                                 && interpolated.StringEndToken.IsKind(SyntaxKind.InterpolatedRawStringEndToken),
             LiteralExpressionSyntax literal => literal.GetFirstToken().IsKind(SyntaxKind.MultiLineRawStringLiteralToken),
             _ => false
