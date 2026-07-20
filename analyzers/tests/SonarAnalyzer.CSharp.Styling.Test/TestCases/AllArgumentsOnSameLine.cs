@@ -255,6 +255,18 @@ class ArgumentsOnSameLine
     }
 }
 
+class OpenGenericTypeArguments
+{
+    // Omitted type arguments in an unbound/open generic type reference are placeholders, not real arguments - they must never be flagged.
+    void UnboundGenericType()
+    {
+        _ = typeof(Func<,>); // Compliant
+        _ = typeof(Dictionary<,>); // Compliant
+        _ = typeof(Func<,,>); // Compliant
+        _ = nameof(Func<,>); // Compliant
+    }
+}
+
 public class RuleRegistration
 {
     public void Initialize()

@@ -48,7 +48,7 @@ public sealed class AllArgumentsOnSameLine : StylingAnalyzer
     }
 
     private static bool IsOnNewLine(SyntaxNode node) =>
-        node.GetLocation().StartLine != node.GetFirstToken().GetPreviousToken().GetLocation().StartLine;
+        node.GetLocation().StartLine != node.GetFirstToken(includeZeroWidth: true).GetPreviousToken().GetLocation().StartLine;
 
     private static bool IsIgnored(SemanticModel model, SyntaxNode node) =>
         node switch
