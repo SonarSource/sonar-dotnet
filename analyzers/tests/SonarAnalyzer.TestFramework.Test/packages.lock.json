@@ -341,8 +341,8 @@
       },
       "NSubstitute": {
         "type": "Transitive",
-        "resolved": "5.3.0",
-        "contentHash": "lJ47Cps5Qzr86N99lcwd+OUvQma7+fBgr8+Mn+aOC0WrlqMNkdivaYD9IvnZ5Mqo6Ky3LS7ZI+tUq1/s9ERd0Q==",
+        "resolved": "6.0.0",
+        "contentHash": "0gvKMbiJ+/WrfbcfBfqRZZrvfLJcd3rqkqVMjjlY5dtmLRVzMY+o/K/rJUStofQ2haSr9Vd04YDfvZtVVGS3/A==",
         "dependencies": {
           "Castle.Core": "5.1.1"
         }
@@ -585,7 +585,7 @@
           "Microsoft.CodeAnalysis.VisualBasic.Workspaces": "[5.3.0, )",
           "Microsoft.CodeAnalysis.Workspaces.MSBuild": "[5.3.0, )",
           "Microsoft.NET.Test.Sdk": "[18.7.0, )",
-          "NSubstitute": "[5.3.0, )",
+          "NSubstitute": "[6.0.0, )",
           "NuGet.Protocol": "[7.6.0, )",
           "SonarAnalyzer.Core": "[10.30.0, )",
           "altcover": "[9.0.102, )"
