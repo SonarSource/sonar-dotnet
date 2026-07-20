@@ -105,6 +105,19 @@ public class FieldSuppression
     }
 }
 
+public class FieldNarrowedByNullCheck
+{
+    private string? field;
+
+    public void Method()
+    {
+        if (field != null)
+        {
+            _ = field!; // Noncompliant
+        }
+    }
+}
+
 public class ValueTypes
 {
     public void Method(int a)

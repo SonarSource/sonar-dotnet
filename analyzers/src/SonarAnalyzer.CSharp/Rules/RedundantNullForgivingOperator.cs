@@ -48,6 +48,20 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
 
     // GetTypeInfo always reports NotNull because of the "!" operator.
     // We speculatively check the operand without the "!" to see if it was not null anyway and therefore redundant.
-    private static bool IsRedundant(SemanticModel model, PostfixUnaryExpressionSyntax suppression) =>
-        model.GetSpeculativeTypeInfo(suppression.Operand.SpanStart, suppression.Operand, SpeculativeBindingOption.BindAsExpression).Nullability().FlowState == NullableFlowState.NotNull;
+    private static bool IsRedundant(SemanticModel model, PostfixUnaryExpressionSyntax suppression)
+    {
+        var typeInfo = model.GetSpeculativeTypeInfo(suppression.Operand.SpanStart, suppression.Operand, SpeculativeBindingOption.BindAsExpression);
+        return typeInfo.Nullability().FlowState == NullableFlowState.NotNull && !HasNestedNullableAnnotation(typeInfo.Type);
+    }
+
+    // NotNull FlowState only guarantees the top-level reference isn't null, not nested generic or array annotations. We keep "!" to prevent CS8619/CS8620.
+    private static bool HasNestedNullableAnnotation(ITypeSymbol type) =>
+        type switch
+        {
+            IArrayTypeSymbol array => array.ElementNullableAnnotation() == NullableAnnotation.Annotated || HasNestedNullableAnnotation(array.ElementType),
+            INamedTypeSymbol { IsGenericType: true } named => named.TypeArguments.Zip(
+                named.TypeArgumentNullableAnnotations(),
+                (arg, ann) => ann == NullableAnnotation.Annotated || HasNestedNullableAnnotation(arg)).Contains(true),
+            _ => false,
+        };
 }

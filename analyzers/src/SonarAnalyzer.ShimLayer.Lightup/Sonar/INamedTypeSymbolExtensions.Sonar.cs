@@ -33,49 +33,33 @@ public static class INamedTypeSymbolExtensionsSonar
 
     private static Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>> CreateTypeArgumentNullableAnnotationsAccessor()
     {
-        // INamedTypeSymbol.TypeArgumentNullableAnnotations is ImmutableArray<Roslyn.NullableAnnotation>
-        // The generated code is symbol => ImmutableArray.CreateRange(symbol.TypeArgumentNullableAnnotations, x => (Sonar.NullableAnnotationType)x);
-
-        // Callers may rely on the fact that symbol.TypeArgumentNullableAnnotations is supposed to have the same length as symbol.TypeArguments
-        var fallback = static (INamedTypeSymbol x) => Enumerable.Repeat(NullableAnnotation.None, x.TypeArguments.Length).ToImmutableArray();
-        if (OriginalNullableAnnotationType() is not { } originalNullableAnnotationType)
+        // Builds symbol => ImmutableArray.CreateRange(symbol.TypeArgumentNullableAnnotations, x => (Sonar.NullableAnnotation)x)
+        // INamedTypeSymbol.TypeArgumentNullableAnnotations was added after NullableAnnotation itself, so a host can have one without the other.
+        if (Type.GetType("Microsoft.CodeAnalysis.NullableAnnotation, Microsoft.CodeAnalysis") is { } originalNullableAnnotationType
+            && typeof(INamedTypeSymbol).GetProperty(nameof(TypeArgumentNullableAnnotations)) is { } typeArgumentNullableAnnotationsProperty
+            && typeof(ImmutableArray).GetMember(nameof(ImmutableArray.CreateRange), MemberTypes.Method, BindingFlags.Public | BindingFlags.Static)
+                .OfType<MethodInfo>()
+                .FirstOrDefault(x =>
+                    x.GetParameters() is { Length: 2 } parameters // CreateRange<TSource,TResult>(ImmutableArray<TSource> items, Func<TSource,TResult> selector)
+                    && parameters[0].Name == "items"              // see also https://stackoverflow.com/a/4036187
+                    && parameters[1].Name == "selector"
+                    && x.GetGenericArguments() is { Length: 2 } typeArguments
+                    && typeArguments[0].Name == "TSource"
+                    && typeArguments[1].Name == "TResult") is { } createRange)
         {
-            return fallback;
-        }
+            var sonarNullableAnnotationType = typeof(NullableAnnotation);
+            var createRangeT = createRange.MakeGenericMethod(originalNullableAnnotationType, sonarNullableAnnotationType); // CreateRange<Roslyn.NullableAnnotation, Sonar.NullableAnnotation>
+            var delegateType = typeof(Func<,>).MakeGenericType(originalNullableAnnotationType, sonarNullableAnnotationType); // Func<Roslyn.NullableAnnotation, Sonar.NullableAnnotation>
 
-        if (typeof(ImmutableArray).GetMethods(BindingFlags.Public | BindingFlags.Static).FirstOrDefault(x =>
-            x.Name == nameof(ImmutableArray.CreateRange)     // https://learn.microsoft.com/en-us/dotnet/api/system.collections.immutable.immutablearray.createrange
-            && x.GetParameters() is { Length: 2 } parameters // CreateRange<TSource,TResult>(ImmutableArray<TSource> items, Func<TSource,TResult> selector)
-            && parameters[0].Name == "items"                 // see also https://stackoverflow.com/a/4036187
-            && parameters[1].Name == "selector"
-            && x.GetGenericArguments() is { Length: 2 } typeArguments
-            && typeArguments[0].Name == "TSource"
-            && typeArguments[1].Name == "TResult") is not { } createRange)
-        {
-            return fallback;
-        }
-        var sonarNullableAnnotationType = typeof(NullableAnnotation);
-        var createRangeT = createRange.MakeGenericMethod(originalNullableAnnotationType, sonarNullableAnnotationType);
-        var delegateType = typeof(Func<,>).MakeGenericType(originalNullableAnnotationType, sonarNullableAnnotationType);
+            var originalNullableAnnotationParameter = Parameter(originalNullableAnnotationType, "x");
+            var conversion = Lambda(delegateType, Convert(originalNullableAnnotationParameter, sonarNullableAnnotationType), originalNullableAnnotationParameter); // (originalNullableAnnotationType x) => (sonarNullableAnnotationType)x;
 
-        var originalNullableAnnotationParameter = Parameter(originalNullableAnnotationType, "x");
-        var conversion = Lambda(delegateType, Convert(originalNullableAnnotationParameter, sonarNullableAnnotationType), originalNullableAnnotationParameter); // (originalNullableAnnotationType x) => (sonarNullableAnnotationType)x;
-
-        var symbolParameter = Parameter(typeof(INamedTypeSymbol), "symbol");
-        return Lambda<Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>>>(
-            Call(createRangeT, Property(symbolParameter, nameof(TypeArgumentNullableAnnotations)), conversion), // ImmutableArray.CreateRange(symbol.TypeArgumentNullableAnnotations, conversion)
-            symbolParameter).Compile();
-    }
-
-    private static Type OriginalNullableAnnotationType()
-    {
-        try
-        {
-            return Type.GetType("Microsoft.CodeAnalysis.NullableAnnotation, Microsoft.CodeAnalysis");
+            var symbolParameter = Parameter(typeof(INamedTypeSymbol), "symbol");
+            return Lambda<Func<INamedTypeSymbol, ImmutableArray<NullableAnnotation>>>(
+                Call(createRangeT, Property(symbolParameter, typeArgumentNullableAnnotationsProperty), conversion), // ImmutableArray.CreateRange(symbol.TypeArgumentNullableAnnotations, conversion)
+                symbolParameter).Compile();
         }
-        catch
-        {
-            return null;
-        }
+        // Callers may rely on the fact that TypeArgumentNullableAnnotations() has the same length as TypeArguments.
+        return static x => Enumerable.Repeat(NullableAnnotation.None, x.TypeArguments.Length).ToImmutableArray();
     }
 }
