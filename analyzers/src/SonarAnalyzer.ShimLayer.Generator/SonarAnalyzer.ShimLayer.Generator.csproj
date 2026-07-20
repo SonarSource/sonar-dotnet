@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.3.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.3.0" PrivateAssets="all" />
-    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.9" GeneratePathProperty="true" />
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.10" GeneratePathProperty="true" />
     <!-- Downloaded (not referenced) so the DLLs below are guaranteed present in $(NuGetPackageRoot) regardless of what other projects in the solution restore. -->
     <PackageDownload Include="Microsoft.CodeAnalysis.CSharp" Version="[1.3.2]" />
     <PackageDownload Include="Microsoft.CodeAnalysis.Common" Version="[1.3.2]" />
