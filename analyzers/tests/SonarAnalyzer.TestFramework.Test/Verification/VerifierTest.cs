@@ -147,7 +147,7 @@ public class VerifierTest
             .WithNetFrameworkOnly() // Will not run under this SonarAnalyzer.TestFramework.Test .NET-only TFM
             .Invoking(x => x.Build())
             .Should().Throw<AssertInconclusiveException>()
-            .WithMessage("Assert.Inconclusive failed. This test should run only under NetFramework. Current framework is Net.");
+            .WithMessage("Assert.Inconclusive. This test should run only under NetFramework. Current framework is Net.");
 
 #if NET
 
