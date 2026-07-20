@@ -31,27 +31,20 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(
                 c =>
                 {
-                    var baseMethodDeclaration = (BaseMethodDeclarationSyntax)c.Node;
-                    var methodSymbol = c.Model.GetDeclaredSymbol(baseMethodDeclaration);
-
-                    if (methodSymbol is not { IsPubliclyAccessible: true, IsOverride: false }
-                        || !IsOrdinaryMethodOrConstructor(methodSymbol))
+                    if (c.Node is BaseMethodDeclarationSyntax baseMethodDeclaration
+                        && c.ContainingSymbol is IMethodSymbol { IsPubliclyAccessible: true, IsOverride: false, MethodKind: MethodKind.Ordinary or MethodKind.Constructor } methodSymbol)
                     {
-                        return;
+                        var methodType = methodSymbol.IsConstructor ? "constructor" : "method";
+                        if (baseMethodDeclaration is MethodDeclarationSyntax methodDeclaration)
+                        {
+                            ReportIfListT(c, methodSymbol.ReturnType, methodDeclaration.ReturnType, methodType);
+                        }
+                        var parameterSyntaxes = baseMethodDeclaration.ParameterList?.Parameters ?? default;
+                        for (var i = 0; i < Math.Min(methodSymbol.Parameters.Length, parameterSyntaxes.Count); i++)
+                        {
+                            ReportIfListT(c, methodSymbol.Parameters[i].Type, parameterSyntaxes[i].Type, methodType);
+                        }
                     }
-
-                    var methodType = methodSymbol.IsConstructor ? "constructor" : "method";
-
-                    if (baseMethodDeclaration is MethodDeclarationSyntax methodDeclaration)
-                    {
-                        ReportIfListT(c, methodDeclaration.ReturnType, methodType);
-                    }
-
-                    baseMethodDeclaration
-                        .ParameterList?
-                        .Parameters
-                        .ToList()
-                        .ForEach(p => ReportIfListT(c, p.Type, methodType));
                 },
                 SyntaxKind.MethodDeclaration,
                 SyntaxKind.ConstructorDeclaration);
@@ -59,13 +52,11 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(
                 c =>
                 {
-                    var propertyDeclaration = (PropertyDeclarationSyntax)c.Node;
-                    var propertySymbol = c.Model.GetDeclaredSymbol(propertyDeclaration);
-
-                    if (propertySymbol is { IsPubliclyAccessible: true, IsOverride: false }
+                    if (c.Node is PropertyDeclarationSyntax propertyDeclaration
+                        && c.ContainingSymbol is IPropertySymbol { IsPubliclyAccessible: true, IsOverride: false } propertySymbol
                         && !HasXmlElementAttribute(propertySymbol))
                     {
-                        ReportIfListT(c, propertyDeclaration.Type, "property");
+                        ReportIfListT(c, propertySymbol.Type, propertyDeclaration.Type, "property");
                     }
                 },
                 SyntaxKind.PropertyDeclaration);
@@ -73,35 +64,24 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterNodeAction(
                 c =>
                 {
-                    var fieldDeclaration = (FieldDeclarationSyntax)c.Node;
-
-                    var variableDeclaration = fieldDeclaration.Declaration?.Variables.FirstOrDefault();
-                    if (variableDeclaration is null)
-                    {
-                        return;
-                    }
-
-                    var fieldSymbol = c.Model.GetDeclaredSymbol(variableDeclaration);
-
-                    if (fieldSymbol is { IsPubliclyAccessible: true }
+                    if (c.Node is VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: FieldDeclarationSyntax fieldDeclaration } declaration }
+                        && declaration.Variables[0] == c.Node
+                        && c.ContainingSymbol is IFieldSymbol { IsPubliclyAccessible: true } fieldSymbol
                         && !HasXmlElementAttribute(fieldSymbol))
                     {
-                        ReportIfListT(c, fieldDeclaration.Declaration.Type, "field");
+                        ReportIfListT(c, fieldSymbol.Type, fieldDeclaration.Declaration.Type, "field");
                     }
                 },
-                SyntaxKind.FieldDeclaration);
+                SyntaxKind.VariableDeclarator);
         }
 
-        private static void ReportIfListT(SonarSyntaxNodeReportingContext context, TypeSyntax typeSyntax, string memberType)
+        private static void ReportIfListT(SonarSyntaxNodeReportingContext context, ITypeSymbol typeSymbol, TypeSyntax typeSyntax, string memberType)
         {
-            if (typeSyntax != null && typeSyntax.IsKnownType(KnownType.System_Collections_Generic_List_T, context.Model))
+            if (typeSyntax is not null && typeSymbol.Is(KnownType.System_Collections_Generic_List_T))
             {
                 context.ReportIssue(Rule, typeSyntax, memberType);
             }
         }
-
-        private static bool IsOrdinaryMethodOrConstructor(IMethodSymbol method) =>
-            method.MethodKind == MethodKind.Ordinary || method.MethodKind == MethodKind.Constructor;
 
         private static bool HasXmlElementAttribute(ISymbol symbol) =>
             symbol.GetAttributes(KnownType.System_Xml_Serialization_XmlElementAttribute).Any();

@@ -57,4 +57,11 @@ namespace Tests.Diagnostics
         [XmlIgnore]
         public List<string> _DoNotUse_Names_Ignore => null;     // Noncompliant, if you don't need to serialize it, don't expose it.
     }
+
+    public class VarArgs
+    {
+        public void Method(List<int> someParam, __arglist) // Noncompliant
+        {
+        }
+    }
 }

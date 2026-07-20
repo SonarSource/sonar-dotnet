@@ -66,3 +66,13 @@ public partial class PartialProperties
 {
     public partial List<int> Result { get => null; set { } } // Noncompliant
 }
+
+public static class ListExtensions
+{
+    extension(List<int> source) // Compliant, this is the extended type, not a method parameter
+    {
+        public List<int> Intersect(List<int> other) => null;
+//             ^^^^^^^^^ Noncompliant
+//                                 ^^^^^^^^^ Noncompliant@-1
+    }
+}
