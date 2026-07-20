@@ -154,6 +154,8 @@ public static class PrivateStaticAndExtensions
             PrivateStaticAndExtensions.StaticNonCompliant(this);      // Return value discarded via static-call syntax.
             var x = this.ExtensionCompliant();                        // Return value used via extension-call syntax.
             var y = PrivateStaticAndExtensions.StaticCompliant(this); // Return value used via static-call syntax.
+            this.FluentExtension();                                   // Fluent extension, return value discarded.
+            this.NonFluentExtension();                                // Non-fluent extension, return value discarded.
         }
     }
 
@@ -164,4 +166,39 @@ public static class PrivateStaticAndExtensions
     private static int StaticNonCompliant(Sample sample) => 42; // Noncompliant{{Change return type to 'void'; not a single caller uses the returned value.}}
 //                 ^^^
     private static int StaticCompliant(Sample sample) => 42;
+
+    private static Sample FluentExtension(this Sample sample) => sample; // Compliant, fluent pattern (returns this type)
+
+    private static int NonFluentExtension(this Sample sample) => 42; // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
+//                 ^^^
+}
+
+// https://github.com/SonarSource/sonar-dotnet/issues/9813 - fluent extension chains where only the last method is flagged
+public static class FluentChain
+{
+    public class Container
+    {
+        public void Test()
+        {
+            var builder = new List<int>();
+            builder
+                .AddFoo()
+                .AddBar();               // Last in chain, return value discarded.
+            Use(builder);                // Original variable still used after the chain.
+            NonFluent(builder);          // Non-fluent, return value discarded.
+        }
+
+        private static void Use(List<int> list) { }
+    }
+
+    private static List<int> AddFoo(this List<int> list)  // Compliant, return value used by AddBar
+    {
+        list.Add(1);
+        return list;
+    }
+
+    private static List<int> AddBar(this List<int> list) => list; // Compliant, fluent pattern (returns this type)
+
+    private static int NonFluent(this List<int> list) => 42; // Noncompliant {{Change return type to 'void'; not a single caller uses the returned value.}}
+//                 ^^^
 }
