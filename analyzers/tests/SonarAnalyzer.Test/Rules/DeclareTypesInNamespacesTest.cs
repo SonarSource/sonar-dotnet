@@ -44,6 +44,10 @@ public class DeclareTypesInNamespacesTest
             .Verify();
 
     [TestMethod]
+    public void DeclareTypesInNamespaces_CS_PartialProgram_NoTopLevelStatements() =>
+        builder.AddPaths("DeclareTypesInNamespaces.PartialProgram.cs").Verify();
+
+    [TestMethod]
     public void DeclareTypesInNamespaces_VB() =>
         new VerifierBuilder<VB.DeclareTypesInNamespaces>()
             .AddPaths("DeclareTypesInNamespaces.vb", "DeclareTypesInNamespaces2.vb")

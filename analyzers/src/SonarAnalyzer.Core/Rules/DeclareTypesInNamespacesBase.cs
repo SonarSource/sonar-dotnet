@@ -15,35 +15,35 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.Core.Rules
+namespace SonarAnalyzer.Core.Rules;
+
+public abstract class DeclareTypesInNamespacesBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
+    where TSyntaxKind : struct
 {
-    public abstract class DeclareTypesInNamespacesBase<TSyntaxKind> : SonarDiagnosticAnalyzer<TSyntaxKind>
-        where TSyntaxKind : struct
-    {
-        private const string DiagnosticId = "S3903";
+    private const string DiagnosticId = "S3903";
 
-        protected abstract TSyntaxKind[] SyntaxKinds { get; }
-        protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel);
-        protected abstract SyntaxToken GetTypeIdentifier(SyntaxNode declaration);
-        protected abstract bool IsException(SyntaxNode node);
+    protected abstract TSyntaxKind[] SyntaxKinds { get; }
+    protected abstract bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel model);
+    protected abstract SyntaxToken ResolveTypeIdentifier(SyntaxNode declaration);
+    protected abstract bool IsException(SyntaxNode node, SemanticModel model);
 
-        protected override string MessageFormat => "Move '{0}' into a named namespace.";
+    protected override string MessageFormat => "Move '{0}' into a named namespace.";
 
-        protected DeclareTypesInNamespacesBase() : base(DiagnosticId) { }
+    protected DeclareTypesInNamespacesBase() : base(DiagnosticId) { }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-          context.RegisterNodeAction(Language.GeneratedCodeRecognizer,
-              c =>
-              {
-                  var declaration = c.Node;
-                  if (c.IsRedundantPositionalRecordContext() || IsInnerTypeOrWithinNamespace(declaration, c.Model) || IsException(c.Node))
-                  {
-                      return;
-                  }
+    protected override void Initialize(SonarAnalysisContext context) =>
+      context.RegisterNodeAction(
+        Language.GeneratedCodeRecognizer,
+        c =>
+        {
+            var declaration = c.Node;
+            if (c.IsRedundantPositionalRecordContext() || IsInnerTypeOrWithinNamespace(declaration, c.Model) || IsException(c.Node, c.Model))
+            {
+                return;
+            }
 
-                  var identifier = GetTypeIdentifier(declaration);
-                  c.ReportIssue(Rule, identifier.GetLocation(), identifier.ValueText);
-              },
-              SyntaxKinds);
-    }
+            var identifier = ResolveTypeIdentifier(declaration);
+            c.ReportIssue(Rule, identifier.GetLocation(), identifier.ValueText);
+        },
+        SyntaxKinds);
 }

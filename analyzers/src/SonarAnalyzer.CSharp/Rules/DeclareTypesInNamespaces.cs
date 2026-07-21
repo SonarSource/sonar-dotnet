@@ -15,46 +15,46 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase<SyntaxKind>
-    {
-        private static readonly HashSet<SyntaxKind> InnerTypeKinds =
-            [
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKind.NamespaceDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKindEx.RecordDeclaration,
-                SyntaxKindEx.RecordStructDeclaration,
-                SyntaxKindEx.FileScopedNamespaceDeclaration
-            ];
-
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-        {
+    private static readonly HashSet<SyntaxKind> InnerTypeKinds =
+        [
             SyntaxKind.ClassDeclaration,
             SyntaxKind.StructDeclaration,
-            SyntaxKind.EnumDeclaration,
+            SyntaxKind.NamespaceDeclaration,
             SyntaxKind.InterfaceDeclaration,
             SyntaxKindEx.RecordDeclaration,
             SyntaxKindEx.RecordStructDeclaration,
-        };
+            SyntaxKindEx.FileScopedNamespaceDeclaration
+        ];
 
-        protected override SyntaxToken GetTypeIdentifier(SyntaxNode declaration) =>
-            ((BaseTypeDeclarationSyntax)declaration).Identifier;
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel semanticModel) =>
-            declaration.Parent.IsAnyKind(InnerTypeKinds);
+    protected override SyntaxKind[] SyntaxKinds { get; } =
+    [
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKind.EnumDeclaration,
+        SyntaxKind.InterfaceDeclaration,
+        SyntaxKindEx.RecordDeclaration,
+        SyntaxKindEx.RecordStructDeclaration,
+    ];
 
-        protected override bool IsException(SyntaxNode node) =>
-            IsTopLevelStatementPartialProgramClass(node);
+    protected override SyntaxToken ResolveTypeIdentifier(SyntaxNode declaration) =>
+        ((BaseTypeDeclarationSyntax)declaration).Identifier;
 
-        private static bool IsTopLevelStatementPartialProgramClass(SyntaxNode declaration) =>
-            declaration is ClassDeclarationSyntax { Identifier.Text: "Program" } classDeclaration
-            && classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
-            && declaration.Parent is CompilationUnitSyntax { IsTopLevelMain: true };
-    }
+    protected override bool IsInnerTypeOrWithinNamespace(SyntaxNode declaration, SemanticModel model) =>
+        declaration.Parent.IsAnyKind(InnerTypeKinds);
+
+    protected override bool IsException(SyntaxNode node, SemanticModel model) =>
+        IsTopLevelStatementPartialProgramClass(node, model);
+
+    private static bool IsTopLevelStatementPartialProgramClass(SyntaxNode declaration, SemanticModel model) =>
+        declaration is ClassDeclarationSyntax { Identifier.Text: "Program" } classDeclaration
+        && classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
+        && model.GetDeclaredSymbol(classDeclaration) is INamedTypeSymbol symbol
+        && symbol.IsTopLevelProgram();
 }
