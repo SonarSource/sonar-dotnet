@@ -39,7 +39,7 @@ public class CallModelStateIsValidTest
 
     [TestMethod]
     public void CallModelStateIsValid_CS_Latest() =>
-        builder.AddPaths("CallModelStateIsValid.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+        builder.AddPaths("CallModelStateIsValid.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
 
     [TestMethod]
     public void CallModelStateIsValid_AssemblyLevelControllerAttribute_CS() =>
