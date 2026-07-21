@@ -63,6 +63,49 @@ public class EqualityOnFloatingPoint
         if (d == localZero) { }       // Noncompliant
         if (d == NotZero) { }         // Noncompliant
     }
+
+    // https://sonarsource.atlassian.net/browse/NET-3819
+    void EqualsMethod(float f, double d1, double d2, decimal dec, int i, object o, string s)
+    {
+        if (d1.Equals(d2)) { }              // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+        //     ^^^^^^
+        if (f.Equals(3.14F)) { }            // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+        _ = d1.Equals(1.2);                 // Noncompliant
+        _ = ((double)i).Equals(d2);         // Noncompliant
+
+        _ = d1.Equals(0.0);                 // Compliant zero is exactly representable
+        _ = d1.Equals(0);                   // Compliant
+        _ = d1.Equals(default(double));     // Compliant
+        _ = d1.Equals(o);                   // Compliant Equals(object) overload, not a floating point comparison
+        _ = d1.Equals(s);                   // Compliant Equals(object) overload
+        _ = d1.Equals("x");                 // Compliant Equals(object) overload
+        _ = i.Equals(3);                    // Compliant integer receiver
+        _ = s.Equals("x");                  // Compliant string receiver
+        _ = dec.Equals(1.2m);               // Compliant decimal is excluded
+        _ = object.Equals(d1, d2);          // Compliant static object.Equals is out of scope
+    }
+
+    void EqualsMethod_Nullable(double? nd, float? nf, double d)
+    {
+        _ = nd?.Equals(d);              // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+        //      ^^^^^^
+        _ = nf?.Equals(3.14F);          // Noncompliant
+        _ = nd?.Equals(d).ToString();   // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+        _ = nd?.Equals(double.NaN);     // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = nd?.Equals(0.0);            // Compliant zero is exactly representable
+        _ = nd.Value.Equals(d);         // Noncompliant - .Value is a double
+        _ = nd.Equals(d);               // Compliant (FN): Nullable<double>.Equals(object) is not a floating point Equals overload
+    }
+
+    void EqualsMethod_SpecialMembers(double d, float f)
+    {
+        _ = d.Equals(double.NaN);               // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = double.NaN.Equals(d);               // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = d.Equals(double.PositiveInfinity);  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsPositiveInfinity()' instead.}}
+        _ = d.Equals(double.NegativeInfinity);  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNegativeInfinity()' instead.}}
+        _ = f.Equals(float.NaN);                // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f.Equals(float.PositiveInfinity);   // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsPositiveInfinity()' instead.}}
+    }
 }
 
 public class ReportSpecificMessage_NaN

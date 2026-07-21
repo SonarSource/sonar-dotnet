@@ -25,6 +25,20 @@ public class EqualityOnFloatingPoint
 
     bool Equal<T>(T first, T second) where T : IBinaryFloatingPointIeee754<T> =>
         first == second; // Noncompliant
+
+    // https://sonarsource.atlassian.net/browse/NET-3819
+    bool HalfEqualsMethod(Half first, Half second) =>
+        first.Equals(second);   // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+
+    bool NFloatEqualsMethod(NFloat first, NFloat second) =>
+        first.Equals(second);   // Noncompliant
+
+    bool HalfEqualsNaN(Half h) =>
+        h.Equals(Half.NaN);     // Noncompliant {{Do not check floating point equality with exact values, use 'Half.IsNaN()' instead.}}
+
+    // Generic .Equals resolves to IEquatable<T>.Equals, whose containing type is the interface (not a floating point type), so it is not detected.
+    bool GenericEqualsMethod<T>(T first, T second) where T : IFloatingPointIeee754<T> =>
+        first.Equals(second);   // Compliant (FN, generic .Equals is out of scope)
 }
 
 public class ReportSpecificMessage_NaN

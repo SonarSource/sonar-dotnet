@@ -45,7 +45,42 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
             CheckLogicalExpression,
             SyntaxKind.LogicalAndExpression,
             SyntaxKind.LogicalOrExpression);
+
+        context.RegisterNodeAction(
+            CheckEqualsMethod,
+            SyntaxKind.InvocationExpression);
     }
+
+    private static void CheckEqualsMethod(SonarSyntaxNodeReportingContext context)
+    {
+        var invocation = (InvocationExpressionSyntax)context.Node;
+        if (EqualsMethodName(invocation) is { } name
+            && name.GetName() == nameof(object.Equals)
+            && invocation.ArgumentList.Arguments.Count == 1
+            && invocation.ArgumentList.Arguments[0].Expression is { } argument
+            && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { ContainingType: { } container, Parameters: { Length: 1 } parameters }
+            && IsFloatingPointType(container)               // The Equals method is defined on a floating point type (double/float/Half/nfloat)
+            && IsFloatingPointType(parameters[0].Type)      // Excludes the Equals(object) overload, avoiding FPs like d.Equals("x")
+            && ExactValueComparisonMessage(context, EqualsReceiver(invocation) ?? argument, argument) is { } proposed)
+        {
+            context.ReportIssue(Rule, name, MessageEqualityPart(true), proposed);
+        }
+    }
+
+    // The 'Equals' name node for both `x.Equals(y)` (member access) and `x?.Equals(y)` (member binding under a conditional access).
+    private static SimpleNameSyntax EqualsMethodName(InvocationExpressionSyntax invocation) =>
+        invocation.Expression switch
+        {
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
+            MemberBindingExpressionSyntax memberBinding => memberBinding.Name,
+            _ => null,
+        };
+
+    // The receiver being compared: `x` in `x.Equals(y)`, or the conditional-access target in `x?.Equals(y)` (including chains like `x?.Equals(y).ToString()`).
+    private static ExpressionSyntax EqualsReceiver(InvocationExpressionSyntax invocation) =>
+        invocation.Expression is MemberAccessExpressionSyntax memberAccess
+            ? memberAccess.Expression
+            : invocation.GetParentConditionalAccessExpression()?.Expression;
 
     private static void CheckLogicalExpression(SonarSyntaxNodeReportingContext context)
     {
@@ -72,18 +107,22 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
         if (context.Model.GetSymbolInfo(equals).Symbol is IMethodSymbol { ContainingType: { } container } method
             && IsFloatingPointType(container)
             && (method.IsOperatorEquals() || method.IsOperatorNotEquals())
-            && !IsConstantZero(context.Model, equals.Left)
-            && !IsConstantZero(context.Model, equals.Right))
+            && ExactValueComparisonMessage(context, equals.Left, equals.Right) is { } proposed)
         {
-            var messageEqualityPart = MessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression));
-            var proposed = ProposedMessageForMemberAccess(context, equals.Right)
-                ?? ProposedMessageForMemberAccess(context, equals.Left)
-                ?? ProposedMessageForIdentifier(context, equals.Right)
-                ?? ProposedMessageForIdentifier(context, equals.Left)
-                ?? "a range";
-            context.ReportIssue(Rule, equals.OperatorToken, messageEqualityPart, proposed);
+            context.ReportIssue(Rule, equals.OperatorToken, MessageEqualityPart(equals.IsKind(SyntaxKind.EqualsExpression)), proposed);
         }
     }
+
+    // Returns the proposed "use ... instead" message part for an exact floating point comparison of first and second,
+    // or null when the comparison is compliant because either side is a constant zero (exactly representable).
+    private static string ExactValueComparisonMessage(SonarSyntaxNodeReportingContext context, ExpressionSyntax first, ExpressionSyntax second) =>
+        IsConstantZero(context.Model, first) || IsConstantZero(context.Model, second)
+            ? null
+            : ProposedMessageForMemberAccess(context, second)
+                ?? ProposedMessageForMemberAccess(context, first)
+                ?? ProposedMessageForIdentifier(context, second)
+                ?? ProposedMessageForIdentifier(context, first)
+                ?? "a range";
 
     // Zero is exactly representable in IEEE 754 and is the default value of floating-point types,
     // so comparing against it is a legitimate way to check for the default value or to guard against divide-by-zero.
