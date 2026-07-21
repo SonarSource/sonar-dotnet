@@ -16,6 +16,7 @@
  */
 package org.sonarsource.dotnet.shared.plugins.protobuf;
 
+import com.sonarsource.scanner.engine.sensor.test.fixtures.SensorContextTester;
 import java.io.File;
 import java.util.function.UnaryOperator;
 import org.junit.Assume;
@@ -24,9 +25,8 @@ import org.junit.Test;
 import org.slf4j.event.Level;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.batch.sensor.internal.SensorContextTester;
-import org.sonar.api.config.internal.MapSettings;
 import org.sonar.api.testfixtures.log.LogTester;
+import org.sonar.scanner.plugin.api.impl.config.MapSettings;
 import org.sonarsource.dotnet.protobuf.SonarAnalyzer;
 
 import static org.assertj.core.api.Assertions.assertThat;
