@@ -147,7 +147,7 @@ public class ObliviousType
     public void Method()
     {
         var a = Legacy.GetValue();
-        _ = a!; // Noncompliant, the oblivious source never triggers a nullable warning
+        _ = a!; // Compliant, the oblivious source never triggers a nullable warning https://sonarsource.atlassian.net/browse/NET-4190
     }
 }
 

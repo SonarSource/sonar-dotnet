@@ -51,8 +51,22 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
     private static bool IsRedundant(SemanticModel model, PostfixUnaryExpressionSyntax suppression)
     {
         var typeInfo = model.GetSpeculativeTypeInfo(suppression.Operand.SpanStart, suppression.Operand, SpeculativeBindingOption.BindAsExpression);
-        return typeInfo.Nullability().FlowState == NullableFlowState.NotNull && !HasNestedNullableAnnotation(typeInfo.Type);
+        return typeInfo.Nullability().FlowState == NullableFlowState.NotNull && !IsOblivious(model, suppression.Operand) && !HasNestedNullableAnnotation(typeInfo.Type);
     }
+
+    // Oblivious members (no nullable annotation, e.g. "#nullable disable" or an unannotated TFM) default to NotNull
+    // without the compiler ever proving it, so we check the member's own declared annotation instead of trusting that.
+    private static bool IsOblivious(SemanticModel model, ExpressionSyntax operand) =>
+        model.GetSymbolInfo(operand).Symbol switch
+        {
+            IPropertySymbol property => property.NullableAnnotation() == NullableAnnotation.None,
+            IFieldSymbol field => field.NullableAnnotation() == NullableAnnotation.None,
+            IMethodSymbol method => method.ReturnNullableAnnotation() == NullableAnnotation.None,
+            // A "var" local has no annotation of its own, so we recurse into its initializer instead; explicitly-typed
+            // locals are left alone. Chains can't cycle: an initializer can only reference symbols declared earlier.
+            ILocalSymbol { FirstSyntaxRef: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Type.IsVar: true }, Initializer.Value: { } initializer } } => IsOblivious(model, initializer),
+            _ => false,
+        };
 
     // NotNull FlowState only guarantees the top-level reference isn't null, not nested generic or array annotations. We keep "!" to prevent CS8619/CS8620.
     private static bool HasNestedNullableAnnotation(ITypeSymbol type) =>

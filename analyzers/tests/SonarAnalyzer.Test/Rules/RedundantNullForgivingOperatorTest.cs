@@ -188,6 +188,97 @@ public class RedundantNullForgivingOperatorTest
         builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet(code).Verify();
     }
 
+    // Simulates a <TargetFrameworks>net10.0;net48</TargetFrameworks>-style project: a library member whose nullable
+    // annotation depends on the target framework, consumed from a separate file that always has nullable enabled.
+    [TestMethod]
+    [DataRow(true, "!", "")]                                    // When an annotated TFM is targeted, the "!" is needed, because
+    [DataRow(true, "", "// Error [CS8603]")]                    // removing it causes a nullable warning.
+    [DataRow(false, "", "")]                                    // Removing it when targeting a non-annotated TFM would be fine,
+    [DataRow(false, "!", "")]                                   // but we don't raise because we assume multi-targeting.
+    public void RedundantNullForgivingOperator_ObliviousMember(bool annotated, string forgiving, string assertion)
+    {
+        var consumer = $$"""
+            #nullable enable
+            public class Sample
+            {
+                public object Method() => Library.GetValue(){{forgiving}}; {{assertion}}
+            }
+            """;
+        VerifyLibraryConsumer(annotated, consumer, string.IsNullOrEmpty(assertion));
+    }
+
+    // Same matrix as RedundantNullForgivingOperator_ObliviousMember, but the value flows through a chain of three "var"
+    // locals, exercising IsOblivious()'s recursive walk-back through multiple hops of indirection.
+    [TestMethod]
+    [DataRow(true, "!", "")]                                    // When an annotated TFM is targeted, the "!" is needed, because
+    [DataRow(true, "", "// Error [CS8602]")]                    // removing it causes a nullable warning.
+    [DataRow(false, "", "")]                                    // Removing it when targeting a non-annotated TFM would be fine,
+    [DataRow(false, "!", "")]                                   // but we don't raise because we assume multi-targeting.
+    public void RedundantNullForgivingOperator_ObliviousMember_ViaLocals(bool annotated, string forgiving, string assertion)
+    {
+        var consumer = $$"""
+            #nullable enable
+            public class Sample
+            {
+                public void Method()
+                {
+                    var a = Library.GetValue();
+                    var b = a;
+                    var c = b;
+                    a{{forgiving}}.ToString(); {{assertion}}
+                    b{{forgiving}}.ToString(); {{assertion}}
+                    c{{forgiving}}.ToString(); {{assertion}}
+                }
+            }
+            """;
+        VerifyLibraryConsumer(annotated, consumer, string.IsNullOrEmpty(assertion));
+    }
+
+    // IsOblivious()'s walk-back only looks at the local's initializer, not any narrowing that happens afterwards.
+    // This is the price we pay for avoiding FPs in multi-targeted projects.
+    [TestMethod]
+    public void RedundantNullForgivingOperator_ObliviousMember_NarrowedAfterAssignment_FN()
+    {
+        var consumer = """
+            #nullable enable
+            public class Sample
+            {
+                public object Method()
+                {
+                    var value = Library.GetValue();
+                    if (value != null)
+                    {
+                        return value!; // FN, "value" was narrowed by the null check, so the "!" is actually redundant
+                    }
+                    return new object();
+                }
+            }
+            """;
+        VerifyLibraryConsumer(annotated: false, consumer, noIssues: true);
+    }
+
+    private static string LibrarySnippet(bool annotated) =>
+        $$"""
+        {{(annotated ? "#nullable enable" : "#nullable disable")}}
+        public static class Library
+        {
+            public static object{{(annotated ? "?" : string.Empty)}} GetValue() => null;
+        }
+        """;
+
+    private void VerifyLibraryConsumer(bool annotated, string consumer, bool noIssues)
+    {
+        var verifier = builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet(LibrarySnippet(annotated), "Library.cs").AddSnippet(consumer, "Sample.cs");
+        if (noIssues)
+        {
+            verifier.VerifyNoIssues();
+        }
+        else
+        {
+            verifier.Verify();
+        }
+    }
+
     private static DiagnosticDescriptor ExpectedRule(bool redundant) =>
         redundant ? RedundantNullForgivingOperator.RuleS8969 : RedundantNullForgivingOperator.RuleS8970;
 }
