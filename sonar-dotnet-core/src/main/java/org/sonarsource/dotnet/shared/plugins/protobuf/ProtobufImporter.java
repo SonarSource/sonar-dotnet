@@ -18,12 +18,15 @@ package org.sonarsource.dotnet.shared.plugins.protobuf;
 
 import com.google.protobuf.Parser;
 import java.net.URI;
+import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.utils.WildcardPattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
@@ -37,14 +40,30 @@ import org.sonarsource.dotnet.shared.plugins.SensorContextUtils;
 public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
   private static final Logger LOG = LoggerFactory.getLogger(ProtobufImporter.class);
 
+  private static final String[] EXCLUSION_KEYS = {
+    "sonar.exclusions",
+    "sonar.test.exclusions",
+    "sonar.global.exclusions",
+    "sonar.global.test.exclusions",
+    "sonar.tests.exclusions", // Alias for sonar.test.exclusions, see PLUGINAPI-34
+  };
+
   private final Function<T, String> toFilePath;
   private final UnaryOperator<String> toRealPath;
   private final SensorContext context;
+  private final Path baseDir;
+  private final WildcardPattern[] exclusionPatterns;
   private final Set<URI> filesProcessed = new HashSet<>();
 
   ProtobufImporter(Parser<T> parser, SensorContext context, Function<T, String> toFilePath, UnaryOperator<String> toRealPath) {
     super(parser);
     this.context = context;
+    this.baseDir = context.fileSystem().baseDir().toPath().toAbsolutePath();
+    this.exclusionPatterns = Arrays.stream(EXCLUSION_KEYS)
+      .flatMap(key -> Arrays.stream(context.config().getStringArray(key)))
+      .filter(pattern -> pattern != null && !pattern.trim().isEmpty())
+      .map(WildcardPattern::create)
+      .toArray(WildcardPattern[]::new);
     this.toFilePath = toFilePath;
     this.toRealPath = toRealPath;
   }
@@ -53,20 +72,20 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
   final void consume(T message) {
     String filePath = toRealPath.apply(toFilePath.apply(message));
     InputFile inputFile = SensorContextUtils.toInputFile(context.fileSystem(), filePath);
-
-    // file may be null because it's not within the project base dir
+    // file may be null because it's not within the project base dir, or because the user excluded it via sonar.exclusions
     if (inputFile == null) {
-      LOG.warn("File '{}' referenced by the protobuf '{}' does not exist in the analysis context", filePath,
-        message.getClass().getSimpleName());
+      if (isExcluded(filePath)) {
+        LOG.debug("File '{}' referenced by the protobuf '{}' is excluded from the analysis", filePath, message.getClass().getSimpleName());
+      } else {
+        LOG.warn("File '{}' referenced by the protobuf '{}' does not exist in the analysis context", filePath, message.getClass().getSimpleName());
+      }
       return;
     }
-
     // process each protobuf file only once but allow overriding
     if (isProcessed(inputFile)) {
       LOG.debug("File '{}' was already processed. Skip it", inputFile);
       return;
     }
-
     consumeFor(inputFile, message);
   }
 
@@ -74,5 +93,18 @@ public abstract class ProtobufImporter<T> extends RawProtobufImporter<T> {
 
   boolean isProcessed(InputFile inputFile) {
     return !filesProcessed.add(inputFile.uri());
+  }
+
+  private boolean isExcluded(String filePath) {
+    String relativePath;
+    try {
+      Path target = Path.of(filePath);
+      Path relative = target.isAbsolute() ? baseDir.relativize(target) : target;
+      relativePath = relative.toString().replace('\\', '/');
+      return Arrays.stream(exclusionPatterns).anyMatch(x -> x.match(relativePath));
+    } catch (IllegalArgumentException e) {
+      // Path cannot be relativized (e.g. different drive on Windows) — treat as not excluded
+      return false;
+    }
   }
 }
