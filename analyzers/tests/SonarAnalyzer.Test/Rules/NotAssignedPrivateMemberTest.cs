@@ -38,6 +38,13 @@ public class NotAssignedPrivateMemberTest
             .Verify();
 
     [TestMethod]
+    public void NotAssignedPrivateMember_AutoConstructor() =>
+        builder
+            .AddPaths("NotAssignedPrivateMember.AutoConstructor.cs")
+            .WithConcurrentAnalysis(false)
+            .Verify();
+
+    [TestMethod]
     public void NotAssignedPrivateMember_Razor() =>
         builder.AddPaths("NotAssignedPrivateMember.razor", "NotAssignedPrivateMember.razor.cs").VerifyNoIssues();
 

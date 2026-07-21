@@ -26,6 +26,7 @@ public sealed partial class KnownType
 #pragma warning disable SA1304  // Non-private readonly fields should begin with upper-case letter
 #pragma warning disable T0016   // Empty lines between multiline declarations
 
+    public static readonly KnownType AutoConstructorAttribute = new("AutoConstructorAttribute");
     public static readonly KnownType Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient = new("Azure.Messaging.ServiceBus.Administration.ServiceBusAdministrationClient");
     public static readonly KnownType Azure_Messaging_ServiceBus_ServiceBusClient = new("Azure.Messaging.ServiceBus.ServiceBusClient");
     public static readonly KnownType Azure_Storage_Blobs_BlobServiceClient = new("Azure.Storage.Blobs.BlobServiceClient");

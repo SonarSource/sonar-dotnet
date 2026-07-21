@@ -33,13 +33,10 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    private static readonly HashSet<SyntaxKind> PreOrPostfixOpSyntaxKinds =
-    [
-        SyntaxKind.PostDecrementExpression,
-        SyntaxKind.PostIncrementExpression,
-        SyntaxKind.PreDecrementExpression,
-        SyntaxKind.PreIncrementExpression,
-    ];
+    private static readonly ImmutableArray<KnownType> ExcludedAttributes = ImmutableArray.Create(
+        KnownType.System_Runtime_InteropServices_StructLayoutAttribute,
+        KnownType.System_SerializableAttribute,
+        KnownType.AutoConstructorAttribute);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
@@ -56,7 +53,8 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
                     {
                         var usedMembers = MemberUsages(removableDeclarationCollector, allCandidateMembers.Select(t => t.Symbol).ToHashSet());
                         var usedMemberSymbols = usedMembers.Select(x => x.Symbol).ToHashSet();
-                        var unassignedUsedMemberSymbols = allCandidateMembers.Where(x => usedMemberSymbols.Contains(x.Symbol) && !AssignedMemberSymbols(usedMembers).Contains(x.Symbol));
+                        var assignedMemberSymbols = AssignmentDetection.AssignedMemberSymbols(usedMembers);
+                        var unassignedUsedMemberSymbols = allCandidateMembers.Where(x => usedMemberSymbols.Contains(x.Symbol) && !assignedMemberSymbols.Contains(x.Symbol));
                         foreach (var candidateMember in unassignedUsedMemberSymbols)
                         {
                             c.ReportIssue(
@@ -74,21 +72,17 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
     {
         var candidateFields = removableDeclarationCollector.RemovableFieldLikeDeclarations(new HashSet<SyntaxKind> { SyntaxKind.FieldDeclaration }, MaxAccessibility)
             .Where(x => !IsInitializedOrFixed((VariableDeclaratorSyntax)x.Node)
-                        && !HasStructLayoutAttribute(x.Symbol.ContainingType));
+                        && !x.Symbol.ContainingType.HasAnyAttribute(ExcludedAttributes));
         var candidateProperties = removableDeclarationCollector.RemovableDeclarations(new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
             .Where(x => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)x.Node)
-                        && !HasStructLayoutAttribute(x.Symbol.ContainingType));
+                        && !x.Symbol.ContainingType.HasAnyAttribute(ExcludedAttributes));
         return candidateFields.Concat(candidateProperties).ToList();
     }
 
     private static bool TypeDefinitionShouldBeAnalyzed(ITypeSymbol namedType) =>
         namedType.IsClassOrStruct()
-        && !HasStructLayoutAttribute(namedType)
         && namedType.ContainingType is null
-        && !namedType.HasAttribute(KnownType.System_SerializableAttribute);
-
-    private static bool HasStructLayoutAttribute(ISymbol namedTypeSymbol) =>
-        namedTypeSymbol.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute);
+        && !namedType.HasAnyAttribute(ExcludedAttributes);
 
     private static bool IsInitializedOrFixed(VariableDeclaratorSyntax declarator) =>
         declarator.Initializer is not null
@@ -119,68 +113,76 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
             };
     }
 
-    private static ISet<ISymbol> AssignedMemberSymbols(IList<MemberUsage> memberUsages)
+    private static class AssignmentDetection
     {
-        var assignedMembers = new HashSet<ISymbol>();
+        private static readonly HashSet<SyntaxKind> PreOrPostfixOpSyntaxKinds =
+        [
+            SyntaxKind.PostDecrementExpression,
+            SyntaxKind.PostIncrementExpression,
+            SyntaxKind.PreDecrementExpression,
+            SyntaxKind.PreIncrementExpression,
+        ];
 
-        foreach (var memberUsage in memberUsages)
+        public static ISet<ISymbol> AssignedMemberSymbols(IList<MemberUsage> memberUsages)
         {
-            var memberSymbol = memberUsage.Symbol;
-            var node = RelevantNode(memberUsage.Node, memberSymbol);
-            var parentNode = node.Parent;
+            var assignedMembers = new HashSet<ISymbol>();
 
-            if (PreOrPostfixOpSyntaxKinds.Contains(parentNode.Kind())
-                || (parentNode is AssignmentExpressionSyntax assignment && assignment.Left == node)
-                || (parentNode is ArgumentSyntax argument && (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)))
-                || RefExpressionSyntaxWrapper.IsInstance(parentNode))
+            foreach (var memberUsage in memberUsages)
             {
-                assignedMembers.Add(memberSymbol);
-                assignedMembers.Add(memberSymbol.OriginalDefinition);
-            }
-        }
+                var memberSymbol = memberUsage.Symbol;
+                var node = RelevantNode(memberUsage.Node, memberSymbol);
+                var parentNode = node.Parent;
 
-        return assignedMembers;
-    }
-
-    private static SyntaxNode RelevantNode(ExpressionSyntax node, ISymbol memberSymbol)
-    {
-        // Handle "expr.FieldName"
-        if (node.Parent is MemberAccessExpressionSyntax simpleMemberAccess && simpleMemberAccess.Name == node)
-        {
-            node = simpleMemberAccess;
-        }
-        // Handle "expr?.FieldName"
-        else if (node.Parent is MemberBindingExpressionSyntax memberBinding && memberBinding.Name == node)
-        {
-            node = memberBinding;
-        }
-
-        // Handle "((expr.FieldName))"
-        node = node.SelfOrTopParenthesizedExpression;
-
-        if (IsValueType(memberSymbol))
-        {
-            // Handle (((exp.FieldName)).Member1).Member2
-            var parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
-            while (IsParentMemberAccess(parentMemberAccess, node))
-            {
-                node = parentMemberAccess.SelfOrTopParenthesizedExpression;
-                parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
+                if (PreOrPostfixOpSyntaxKinds.Contains(parentNode.Kind())
+                    || (parentNode is AssignmentExpressionSyntax assignment && assignment.Left == node)
+                    || (parentNode is ArgumentSyntax argument && (!argument.RefOrOutKeyword.IsKind(SyntaxKind.None) || TupleExpressionSyntaxWrapper.IsInstance(argument.Parent)))
+                    || RefExpressionSyntaxWrapper.IsInstance(parentNode))
+                {
+                    assignedMembers.Add(memberSymbol);
+                    assignedMembers.Add(memberSymbol.OriginalDefinition);
+                }
             }
 
+            return assignedMembers;
+        }
+
+        private static SyntaxNode RelevantNode(ExpressionSyntax node, ISymbol memberSymbol)
+        {
+            // Handle "expr.FieldName"
+            if (node.Parent is MemberAccessExpressionSyntax simpleMemberAccess && simpleMemberAccess.Name == node)
+            {
+                node = simpleMemberAccess;
+            }
+            // Handle "expr?.FieldName"
+            else if (node.Parent is MemberBindingExpressionSyntax memberBinding && memberBinding.Name == node)
+            {
+                node = memberBinding;
+            }
+
+            // Handle "((expr.FieldName))"
             node = node.SelfOrTopParenthesizedExpression;
+
+            if (IsValueType(memberSymbol))
+            {
+                // Handle (((exp.FieldName)).Member1).Member2
+                var parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
+                while (parentMemberAccess?.Expression == node)
+                {
+                    node = parentMemberAccess.SelfOrTopParenthesizedExpression;
+                    parentMemberAccess = node.Parent as MemberAccessExpressionSyntax;
+                }
+
+                node = node.SelfOrTopParenthesizedExpression;
+            }
+            return node;
         }
-        return node;
+
+        private static bool IsValueType(ISymbol symbol) =>
+            symbol switch
+            {
+                IFieldSymbol field => field.Type.IsValueType,
+                IPropertySymbol property => property.Type.IsValueType,
+                _ => false
+            };
     }
-
-    private static bool IsParentMemberAccess(MemberAccessExpressionSyntax parent, ExpressionSyntax node) =>
-        parent?.Expression == node;
-
-    private static bool IsValueType(ISymbol symbol) =>
-        symbol switch
-        {
-            IFieldSymbol field => field.Type.IsValueType,
-            IPropertySymbol property => property.Type.IsValueType,
-            _ => false
-        };
 }
