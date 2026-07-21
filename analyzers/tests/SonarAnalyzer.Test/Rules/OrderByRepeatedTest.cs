@@ -34,7 +34,33 @@ public class OrderByRepeatedTest
 
     [TestMethod]
     public void OrderByRepeated_EntityFramework() =>
-        builder.AddPaths("OrderByRepeated.EntityFramework.cs").WithOptions(LanguageOptions.CSharpLatest).AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(TestConstants.NuGetLatestVersion).Concat(MetadataReferenceFacade.SystemComponentModelTypeConverter)).Verify();
+        builder.AddPaths("OrderByRepeated.EntityFramework.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore(TestConstants.NuGetLatestVersion).Concat(MetadataReferenceFacade.SystemComponentModelTypeConverter))
+            .Verify();
+
+    [TestMethod]
+    [DynamicData(nameof(AzureCosmosSdks))]
+    public void OrderByRepeated_AzureCosmosSdks(IEnumerable<MetadataReference> references, string sdkNamespace, string parameter, string orderedQueryableSource) =>
+        builder
+            .AddSnippet($$"""
+                using System.Linq;
+                using {{sdkNamespace}};
+
+                public class Sample
+                {
+                    public int Id { get; set; }
+
+                    public void Method({{parameter}})
+                    {
+                        {{orderedQueryableSource}}.OrderBy(x => x.Id);      // Compliant - returns IOrderedQueryable but does not actually order the sequence
+                        new[] { 1, 2, 3 }.OrderBy(x => x).OrderBy(x => x);  // FN
+                    }
+                }
+                """)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddReferences(references)
+            .VerifyNoIssues();
 
     [TestMethod]
     public void OrderByRepeated_CodeFix() =>
@@ -43,4 +69,11 @@ public class OrderByRepeatedTest
             .AddPaths("OrderByRepeated.cs")
             .WithCodeFixedPaths("OrderByRepeated.Fixed.cs")
             .VerifyCodeFix();
+
+    // These SDKs return IOrderedQueryables without actually ordering, so the rule is disabled for the whole compilation when the SDK is referenced.
+    private static IEnumerable<(IEnumerable<MetadataReference> References, string SdkNamespace, string Parameter, string OrderedQueryableSource)> AzureCosmosSdks() =>
+    [
+        (NuGetMetadataReference.MicrosoftAzureCosmos(), "Microsoft.Azure.Cosmos", "Container container", "container.GetItemLinqQueryable<Sample>()"),
+        (NuGetMetadataReference.MicrosoftAzureDocumentDB(), "Microsoft.Azure.Documents.Client", "DocumentClient client", "client.CreateDocumentQuery<Sample>(\"collectionLink\")"),
+    ];
 }

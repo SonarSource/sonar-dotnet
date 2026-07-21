@@ -34,35 +34,41 @@ public sealed class OrderByRepeated : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context)
-    {
-        context.RegisterNodeAction(
-            c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterCompilationStartAction(cc =>
             {
-                var invocation = (InvocationExpressionSyntax)c.Node;
-                if (invocation.Expression.LeftOfDot is { } receiver
-                    && IsOrderingOnAlreadyOrderedSequence(invocation, receiver, c.Model)
-                    && invocation.GetIdentifier() is { } identifier)
+                // These Azure APIs return IOrderedQueryable, despite not ordering the sequence so we exclude them
+                if (cc.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_Cosmos_Container) is null
+                    && cc.Compilation.GetTypeByMetadataName(KnownType.Microsoft_Azure_Documents_Client_DocumentClient) is null)
                 {
-                    c.ReportIssue(Rule, identifier.GetLocation());
-                }
-            },
-            SyntaxKind.InvocationExpression);
+                    cc.RegisterNodeAction(
+                        c =>
+                        {
+                            var invocation = (InvocationExpressionSyntax)c.Node;
+                            if (invocation.Expression.LeftOfDot is { } receiver
+                                && IsOrderingOnAlreadyOrderedSequence(invocation, receiver, c.Model)
+                                && invocation.GetIdentifier() is { } identifier)
+                            {
+                                c.ReportIssue(Rule, identifier.GetLocation());
+                            }
+                        },
+                        SyntaxKind.InvocationExpression);
 
-        context.RegisterNodeAction(
-            c =>
-            {
-                var clauses = ((QueryBodySyntax)c.Node).Clauses;
-                for (var i = 1; i < clauses.Count; i++)
-                {
-                    if (clauses[i] is OrderByClauseSyntax orderBy && clauses[i - 1] is OrderByClauseSyntax)
-                    {
-                        c.ReportIssue(Rule, orderBy.OrderByKeyword.GetLocation());
-                    }
+                    cc.RegisterNodeAction(
+                        c =>
+                        {
+                            var clauses = ((QueryBodySyntax)c.Node).Clauses;
+                            for (var i = 1; i < clauses.Count; i++)
+                            {
+                                if (clauses[i] is OrderByClauseSyntax orderBy && clauses[i - 1] is OrderByClauseSyntax)
+                                {
+                                    c.ReportIssue(Rule, orderBy.OrderByKeyword.GetLocation());
+                                }
+                            }
+                        },
+                        SyntaxKind.QueryBody);
                 }
-            },
-            SyntaxKind.QueryBody);
-    }
+            });
 
     private static bool IsOrderingOnAlreadyOrderedSequence(InvocationExpressionSyntax invocation, ExpressionSyntax receiver, SemanticModel model) =>
         model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { MethodKind: MethodKind.ReducedExtension } method
