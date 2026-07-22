@@ -48,19 +48,15 @@ void M(string? a)
     }
 }
 </pre>
-<h3>Pitfalls</h3>
-<p>This rule only removes operators that are provably redundant according to the compiler’s own nullable flow analysis at the exact point of the
-<code>!</code>. It does not flag:</p>
-<ul>
-  <li>Null-forgiving operators used where the nullable annotation context is disabled altogether. In that case the compiler is not tracking
-  nullability at all, so this rule cannot tell whether the operator is needed; a separate, narrower rule covers that case.</li>
-  <li>Suppressions on unconstrained generic type parameters or other expressions the compiler still considers possibly null.</li>
-</ul>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving">! (null-forgiving)
   operator</a></li>
   <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references">Nullable reference types</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:csharpsquid:S8970} - Null-forgiving operators should not be used when nullable warnings are disabled</li>
 </ul>
 

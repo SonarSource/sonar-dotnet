@@ -1,5 +1,5 @@
 {
-  "title": "The null-forgiving operator should not be used when nullable warnings are disabled",
+  "title": "Null-forgiving operators should not be used when nullable warnings are disabled",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {

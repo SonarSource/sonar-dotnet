@@ -1,12 +1,14 @@
 {
-  "title": "Redundant null-forgiving operators should be removed",
+  "title": "Null-forgiving operators should not be redundant",
   "type": "CODE_SMELL",
   "status": "ready",
   "remediation": {
     "func": "Constant\/Issue",
-    "constantCost": "2min"
+    "constantCost": "1min"
   },
-  "tags": [],
+  "tags": [
+    "redundant"
+  ],
   "defaultSeverity": "Minor",
   "ruleSpecification": "RSPEC-8969",
   "sqKey": "S8969",
