@@ -298,6 +298,58 @@ class Repro_8819
         // The empty set is indicated either with ∅ or with {}
     }
 
+    // Natural-language comments that are misclassified as code. https://sonarsource.atlassian.net/browse/NET-3964
+    // Remark: separators are required to consider comments as independent sentences.
+    void NaturalLanguageMisclassifiedAsCode()
+    {
+        // A line ending in a semicolon is treated as code unless it is recognized as a natural-language
+        // sentence. The recognizer only accepts words made of word-characters separated by single spaces,
+        // with a small set of trailing punctuation. A single foreign character anywhere on the line breaks
+        // the match, so the whole prose sentence is flagged as commented-out code.
+
+        // The hyphen inside a compound word stops it from being recognized as natural language.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with a hyphenated-word ending in semicolon;
+
+        // The em dash stops the line from being recognized as natural language.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with an interruption — an aside — ending in semicolon;
+
+        // The possessive apostrophe stops the line from being recognized as natural language.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with the module's possessive noun ending in semicolon;
+
+        // The dotted member-access token stops the line from being recognized as natural language.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with a Namespace.Member dotted token ending in semicolon;
+
+        // The inner period of an abbreviation stops the line from being recognized as natural language.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with an abbreviation e.g. this one ending in semicolon;
+
+        // The parentheses stop the line from being recognized as natural language.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence with a (parenthetical aside) ending in semicolon;
+
+        // The following do not even end in a semicolon: any fragment that resembles a code token is flagged.
+
+        // Prose that mentions the increment operator is treated as code.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence mentioning the ++ operator in passing
+
+        // Prose that describes an exception-handler clause is treated as code.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence describing a catch (Exception) clause
+
+        // Prose that describes a code block is treated as code.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence describing a try { } block
+
+        // Prose that quotes a guarded comparison is treated as code.
+        _ = "separator"; // Noncompliant@+1 FP
+        // Natural language sentence quoting an if (value != null) guard
+    }
+
     void CommentedOutCommentsSeparatedByEmptyLine()
     {
         // Noncompliant: var x = 42;
