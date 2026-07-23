@@ -115,7 +115,8 @@ public class DoNotHardcodeCredentialsTest
 
     private void DoNotHardcodeCredentials_ExternalFiles(DiagnosticAnalyzer analyzer, string testDirectory, string pattern)
     {
-        var paths = Directory.GetFiles(@$"TestCases\{testDirectory}\DoNotHardcodeCredentials", pattern, SearchOption.AllDirectories);
+        var root = Path.Combine("TestCases", testDirectory, "DoNotHardcodeCredentials");
+        var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
         paths.Should().NotBeEmpty();
         new VerifierBuilder()
             .AddAnalyzer(() => analyzer)

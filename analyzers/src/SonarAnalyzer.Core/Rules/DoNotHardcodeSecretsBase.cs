@@ -22,17 +22,18 @@ namespace SonarAnalyzer.Core.Rules;
 public abstract class DoNotHardcodeSecretsBase<TSyntaxKind> : DoNotHardcodeBase<TSyntaxKind>
     where TSyntaxKind : struct
 {
-    protected const string MessageFormat = @"""{0}"" detected here, make sure this is not a hard-coded secret.";
-    protected const string DefaultSecretWords = @"api[_\-]?key, auth, credential, secret, token";
-    protected const double DefaultRandomnessSensibility = 3;
-    protected const double LanguageScoreIncrement = 0.3;
     protected const string EqualsName = nameof(string.Equals);
 
-    // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
-    protected static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, Constants.DefaultRegexTimeout);
-    protected static readonly Regex BanList = new(@"public[_.-]?key|document_?key|client[_.-]?id|localhost|127\.0\.0\.1|test|xsrf|csrf", RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
+    private const string MessageFormat = @"""{0}"" detected here, make sure this is not a hard-coded secret.";
+    private const string DefaultSecretWords = @"api[_\-]?key, auth, credential, secret, token";
+    private const double DefaultRandomnessSensibility = 3;
+    private const double LanguageScoreIncrement = 0.3;
 
-    protected Regex keyWordInVariablePattern;
+    // https://docs.gitguardian.com/secrets-detection/secrets-detection-engine/detectors/generics/generic_high_entropy_secret#:~:text=Follow%20this%20regular%20expression
+    private static readonly Regex ValidationPattern = new(@"^[a-zA-Z0-9_.+/~$-]([a-zA-Z0-9_.+\/=~$-]|\\(?![ntr""])){14,1022}[a-zA-Z0-9_.+/=~$-]$", RegexOptions.None, Constants.DefaultRegexTimeout);
+    private static readonly Regex BanList = new(@"public[_.-]?key|document_?key|client[_.-]?id|localhost|127\.0\.0\.1|test|xsrf|csrf", RegexOptions.IgnoreCase, Constants.DefaultRegexTimeout);
+
+    private Regex keyWordInVariablePattern;
 
     protected abstract void RegisterNodeActions(SonarCompilationStartAnalysisContext context);
     protected abstract SyntaxNode IdentifierRoot(SyntaxNode node);
@@ -134,6 +135,7 @@ public abstract class DoNotHardcodeSecretsBase<TSyntaxKind> : DoNotHardcodeBase<
     private bool ShouldRaiseBinary(string left, string right) =>
         !string.IsNullOrEmpty(left)
         && keyWordPattern.SafeMatch(left) is { Success: true } keyWord
+        && !SecretExclusionPatterns.IsKnownNonSecret(right)
         && !BanList.SafeIsMatch(left)
         && right.IndexOf(keyWord.Value, StringComparison.InvariantCultureIgnoreCase) < 0
         && IsToken(right);

@@ -24,7 +24,7 @@ Public Class NamesAndValues
     Private AuthenticationServiceName As String = "marketplacecommerceanalytics"
     Private XAmzSecurityToken As String = "X-Amz-Security-Token"
     Private ProductPublicKeyToken As String = "31bf3856ad364e35"                            ' Compliant, in Banlist
-    Private Shared OfficialDesktopPublicKeyToken As String = "b03f5f7f11d50a3a"             ' Compliant, In Banlist
+    Private Shared OfficialDesktopPublicKeyToken As String = "b03f5f7f11d50a3a"             ' Compliant, in Banlist
     Private VisualBasicAssemblyPublicKeyToken_Ampersant As String = "PublicKeyToken=" & OfficialDesktopPublicKeyToken   ' Compliant as it has 'Token' in name AND in value
     Private VisualBasicAssemblyPublicKeyToken_Plus As String = "PublicKeyToken=" + OfficialDesktopPublicKeyToken        ' Compliant as it has 'Token' in name AND in value
 

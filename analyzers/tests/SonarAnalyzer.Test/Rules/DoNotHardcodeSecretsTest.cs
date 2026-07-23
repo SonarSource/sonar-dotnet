@@ -67,7 +67,7 @@ public class DoNotHardcodeSecretsTest
 
     private void DoNotHardcodeCredentials_ExternalFiles(VerifierBuilder builder, string testDirectory, string pattern)
     {
-        var root = @$"TestCases\{testDirectory}\DoNotHardcodeSecrets";
+        var root = Path.Combine("TestCases", testDirectory, "DoNotHardcodeSecrets");
         var paths = Directory.GetFiles(root, pattern, SearchOption.AllDirectories);
         paths.Should().NotBeEmpty();
         builder

@@ -7,7 +7,7 @@ namespace Tests.Diagnostics
 {
     class Program
     {
-        public const string DBConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";    // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+        public const string DBConnectionString = "Server=localhost; Database=Test; User=SA; Password=aabbCC123xxYY";    // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
         public const string EditPasswordPageUrlToken = "{Account.EditPassword.PageUrl}"; // Compliant
 
         private const string secretConst = "constantValue";
@@ -30,11 +30,11 @@ namespace Tests.Diagnostics
 
             string pwdPassword = "a"; // Noncompliant {{"pwd and password" detected here, make sure this is not a hard-coded credential.}}
 
-            string foo2 = @"Password=123"; // Noncompliant
+            string foo2 = @"Password=$uper$trongPa$$word123@#"; // Noncompliant
             string multiline = // Noncompliant
                 @"Server=A;
                 User=B;
-                Password=123";
+                Password=ToBe|~2Be123";
 
             string multiline_OK =
                 @"Password detected here,
@@ -42,8 +42,7 @@ namespace Tests.Diagnostics
                 a hard-coded credential.";
 
             string bar;
-            bar = "Password=p"; // Noncompliant
-//          ^^^^^^^^^^^^^^^^^^
+            bar = "Password=aabbCC123xyZZ"; // Noncompliant
 
             object obj;
             obj = "Password=p"; // Compliant, only assignment to string is inspected
@@ -51,50 +50,50 @@ namespace Tests.Diagnostics
             foo = "password";
             foo = "password=";
             foo = "passwordpassword";
-            foo = "foo=1;password=1";   // Noncompliant
-            foo = "foo=1password=1";    // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
-            foo = "";                   // Compliant
-            foo = "userpassword=1";     // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
-            foo = "passwordfield=1";    // Compliant
-            foo = "user_password=1";    // Noncompliant
-            foo = "user-password=1";    // Noncompliant
-            foo = "user/password=1";    // Noncompliant
-            foo = "password:1";         // Compliant
+            foo = "foo=1;password=S3crEt@123";  // Noncompliant
+            foo = "foo=1password=S3crEt@123";   // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+            foo = "";                           // Compliant
+            foo = "userpassword=S3crEt@123";    // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+            foo = "passwordfield=1";            // Compliant
+            foo = "user_password=S3crEt@123";   // Noncompliant
+            foo = "user-password=S3crEt@123";   // Noncompliant
+            foo = "user/password=S3crEt@123";   // Noncompliant
+            foo = "password:1";                 // Compliant
 
             var something1 = (foo = "foo") + (bar = "bar");
-            var something2 = (foo = "foo") + (bar = "password=123"); // Noncompliant
+            var something2 = (foo = "foo") + (bar = "password=S3crEt@123!"); // Noncompliant
             var something3 = (foo = "foo") + (bar = "password");
             var something4 = (foo = "foo") + (bar = "123=password");
 
             string myPassword1 = null;
             string myPassword2 = "";
             string myPassword3 = "        ";
-            string myPassword4 = @"foo"; // Noncompliant
-            string query2 = "password=hardcoded;user='" + user + "'"; // Noncompliant
+            string myPassword4 = @"foo";                                // Noncompliant
+            string query2 = "password=hardcoded;user='" + user + "'";   // Noncompliant
         }
 
         public void DefaultKeywords()
         {
-            string password = "a";       // Noncompliant
-            string x1 = "password=a";    // Noncompliant
+            string password = "a";                  // Noncompliant
+            string x1 = "password=S3crEt@123";      // Noncompliant
 
-            string passwd = "a";         // Noncompliant
-            string x2 = "passwd=a";      // Noncompliant
+            string passwd = "a";                    // Noncompliant
+            string x2 = "passwd=S3crEt@123";        // Noncompliant
 
-            string pwd = "a";            // Noncompliant
-            string x3 = "pwd=a";         // Noncompliant
+            string pwd = "a";                       // Noncompliant
+            string x3 = "pwd=S3crEt@123";           // Noncompliant
 
-            string passphrase = "a";     // Noncompliant
-            string x4 = "passphrase=a";  // Noncompliant
+            string passphrase = "a";                // Noncompliant
+            string x4 = "passphrase=S3crEt@123";    // Noncompliant
         }
 
         public void Constants()
         {
-            const string ConnectionString = "Server=localhost; Database=Test; User=SA; Password=Secret123";                     // Noncompliant
-            const string ConnectionStringWithSpaces = "Server=localhost; Database=Test; User=SA; Password   =   Secret123";     // Noncompliant
-            const string inTheMiddle = "Server=localhost; Database=Test; User=SA; Password=Secret123; Application Name=Sonar";  // Noncompliant
-            const string withSemicolon = @"Server=localhost; Database=Test; User=SA; Password=""Secret;'123""";                 // Noncompliant
-            const string withApostroph = @"Server=localhost; Database=Test; User=SA; Password='Secret""123";                    // Noncompliant
+            const string ConnectionString = "Server=localhost; Database=Test; User=SA; Password=S3crEt@123";                     // Noncompliant
+            const string ConnectionStringWithSpaces = "Server=localhost; Database=Test; User=SA; Password   =   S3crEt@123";     // Noncompliant
+            const string inTheMiddle = "Server=localhost; Database=Test; User=SA; Password=S3crEt@123; Application Name=Sonar";  // Noncompliant
+            const string withSemicolon = @"Server=localhost; Database=Test; User=SA; Password=""S3crEt;'123""";                  // Noncompliant
+            const string withApostroph = @"Server=localhost; Database=Test; User=SA; Password='S3crEt""123";                     // Noncompliant
             const string Password = "Secret123";  // Noncompliant
 
             const string LoginName = "Admin";
@@ -318,7 +317,7 @@ namespace Tests.Diagnostics
             string e4 = "scheme://user:;@domain.com";           // Compliant exception for implementation purposes
 
             string html1 = // Noncompliant
-@"This is article http://login:secret@www.example.com
+@"This is article http://login:azerty123@www.example.com
 Email: info@example.com
 Phone: +0000000";
 
@@ -329,14 +328,14 @@ Phone: +0000000";
 
             string html3 = "This is article http://www.example.com Email: info@example.com Phone: +0000000";
             string html4 = "This is article http://www.example.com<br>Email:info@example.com<br>Phone:+0000000";
-            string html5 = "This is article http://user:secret@www.example.com<br>Email:info@example.com<br>Phone:+0000000"; // Noncompliant
+            string html5 = "This is article http://user:S3cRet123@www.example.com<br>Email:info@example.com<br>Phone:+0000000"; // Noncompliant
         }
 
         public void LiteralAsArgument(string pwd, string server)
         {
-            using (var conn = new SqlConnection("Server = localhost; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
-            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
-            using (var conn = OpenConn("Server = " + server + "; Database = Test; User = SA; Password = Secret123")) { } // Noncompliant
+            using (var conn = new SqlConnection("Server = localhost; Database = Test; User = SA; Password = S3cRet123")) { } // Noncompliant
+            using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = S3cRet123")) { }          // Noncompliant
+            using (var conn = OpenConn("Server = " + server + "; Database = Test; User = SA; Password = S3cRet123")) { }     // Noncompliant
 
             using (var conn = OpenConn("password")) { }
             using (var conn = OpenConn("Server = localhost; Database = Test; User = SA; Password = " + pwd)) { }
@@ -353,7 +352,7 @@ Phone: +0000000";
         {
             get
             {
-                return "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+                return "Server = localhost; Database = Test; User = SA; Password = S3CrEt123"; // Noncompliant
             }
         }
 
@@ -365,15 +364,15 @@ Phone: +0000000";
             }
         }
 
-        public string SecretConnectionStringProperty2 => "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringProperty2 => "Server = localhost; Database = Test; User = SA; Password = S3CrEt123"; // Noncompliant
         public string SecretConnectionStringProperty2_OK => "Nothing to see here";
 
-        public string SecretConnectionStringProperty3 { get; } = "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringProperty3 { get; } = "Server = localhost; Database = Test; User = SA; Password = S3CreT123"; // Noncompliant
         public string SecretConnectionStringProperty3_OK { get; } = "Nothing to see here";
 
         public string SecretConnectionStringFunction()
         {
-            return "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+            return "Server = localhost; Database = Test; User = SA; Password = S3cRet456"; // Noncompliant
         }
 
         public string SecretConnectionStringFunction_OK()
@@ -381,10 +380,10 @@ Phone: +0000000";
             return "Nothing to see here";
         }
 
-        public string SecretConnectionStringFunction2() => "Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringFunction2() => "Server = localhost; Database = Test; User = SA; Password = Seeree123"; // Noncompliant
         public string SecretConnectionStringFunction2_OK() => "Nothing to see here";
 
-        public string SecretConnectionStringFunction3() => @"Server = localhost; Database = Test; User = SA; Password = Secret123"; // Noncompliant
+        public string SecretConnectionStringFunction3() => @"Server = localhost; Database = Test; User = SA; Password = Sssree123"; // Noncompliant
         public string SecretConnectionStringFunction3_OK() => @"Nothing to see here";
     }
 
@@ -404,7 +403,7 @@ Phone: +0000000";
             this.password = "foo"; // False Negative
             Configuration.Password = "foo"; // False Negative
             this.password = Configuration.Password = "foo"; // False Negative
-            string query1 = "password=':crazy;secret';user=xxx"; // Noncompliant
+            string query1 = "password=':cr_zy1;s3cret2';user=xxx"; // Noncompliant
         }
 
         class Configuration

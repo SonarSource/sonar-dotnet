@@ -7,7 +7,7 @@ Namespace Tests.Diagnostics
 
     Class Program
 
-        Public Const DBConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=Secret123"    ' Noncompliant
+        Public Const DBConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=aaBBcc123xyz"    ' Noncompliant
         Public Const EditPasswordPageUrlToken As String = "{Account.EditPassword.PageUrl}" ' Compliant
 
         Private Const SecretConst As String = "constantValue"
@@ -27,9 +27,9 @@ Namespace Tests.Diagnostics
             Dim foo As String, passwd As String = "a" 'Noncompliant {{"passwd" detected here, make sure this is not a hard-coded credential.}}
             '                  ^^^^^^^^^^^^^^^^^^^^^^
             Dim pwdPassword As String = "a"     'Noncompliant {{"pwd and password" detected here, make sure this is not a hard-coded credential.}}
-            Dim foo2 As String = "Password=123" 'Noncompliant
+            Dim foo2 As String = "Password=ppaassww00rrEE" ' Noncompliant
             Dim bar As String
-            bar = "Password=p" 'Noncompliant ^13#18
+            bar = "Password=ppaassww00rrDD" ' Noncompliant^13#31
 
             Dim obj As Object
             obj = "Password=p" ' Compliant, only assignment To String Is inspected
@@ -37,10 +37,10 @@ Namespace Tests.Diagnostics
             foo = "password"
             foo = "password="
             foo = "passwordpassword"
-            foo = "foo=1;password=1"    'Noncompliant
-            foo = "foo=1password=1"     'Noncompliant
-            foo = "userpassword=1"      'Noncompliant
-            foo = "passwordfield=1"     'Compliant
+            foo = "foo=1;password=SeeCr33t123"  ' Noncompliant
+            foo = "foo=1password=SeeCr33t123"   ' Noncompliant
+            foo = "userpassword=SeeCr33t123"    ' Noncompliant
+            foo = "passwordfield=1"             'Compliant
 
             Dim myPassword1 As String = Nothing
             Dim myPassword2 As String = ""
@@ -50,22 +50,22 @@ Namespace Tests.Diagnostics
         End Sub
 
         Public Sub DefaultKeywords()
-            Dim password As String = "a"       ' Noncompliant
-            Dim x1 As String = "password=a"    ' Noncompliant
+            Dim password As String = "a"                ' Noncompliant
+            Dim x1 As String = "password=SeeCr33t123"   ' Noncompliant
 
-            Dim passwd As String = "a"         ' Noncompliant
-            Dim x2 As String = "passwd=a"      ' Noncompliant
+            Dim passwd As String = "a"                  ' Noncompliant
+            Dim x2 As String = "passwd=SeeCr33t123"     ' Noncompliant
 
-            Dim pwd As String = "a"            ' Noncompliant
-            Dim x3 As String = "pwd=a"         ' Noncompliant
+            Dim pwd As String = "a"                     ' Noncompliant
+            Dim x3 As String = "pwd=SeeCr33t123"        ' Noncompliant
 
-            Dim passphrase As String = "a"     ' Noncompliant
-            Dim x4 As String = "passphrase=a"  ' Noncompliant
+            Dim passphrase As String = "a"              ' Noncompliant
+            Dim x4 As String = "passphrase=SeeCr33t123" ' Noncompliant
         End Sub
 
         Public Sub Constants()
-            Const ConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=Secret123"    ' Noncompliant
-            Const ConnectionStringWithSpaces As String = "Server=localhost; Database=Test; User=SA; Password   =   Secret123"    ' Noncompliant
+            Const ConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=SeeCr33t123"                    ' Noncompliant
+            Const ConnectionStringWithSpaces As String = "Server=localhost; Database=Test; User=SA; Password   =   SeeCr33t123"    ' Noncompliant
             Const Password As String = "Secret123"  ' Noncompliant
 
             Const LoginName As String = "Admin"
@@ -291,7 +291,7 @@ Namespace Tests.Diagnostics
             Dim e4 As String = "scheme://user:;@domain.com"         ' Compliant exception for implementation purposes
 
             Dim html1 As String = ' Noncompliant
-"This is article http://login:secret@www.example.com
+"This is article http://login:s33cr33t@www.example.com
 Email: info@example.com
 Phone: +0000000"
 
@@ -302,17 +302,17 @@ Phone: +0000000"
 
             Dim html3 As String = "This is article http://www.example.com Email: info@example.com Phone: +0000000"
             Dim html4 As String = "This is article http://www.example.com<br>Email:info@example.com<br>Phone:+0000000"
-            Dim html5 As String = "This is article http://user:secret@www.example.com<br>Email:info@example.com<br>Phone:+0000000" ' Noncompliant
+            Dim html5 As String = "This is article http://user:s1e2c3r4e5t6@www.example.com<br>Email:info@example.com<br>Phone:+0000000" ' Noncompliant
         End Sub
 
         Public Sub LiteralAsArgument(pwd As String, server As String)
-            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = Secret123")  ' Noncompliant
+            Using Conn As New SqlConnection("Server = localhost; Database = Test; User = SA; Password = S3Cr3t123AbC")  ' Noncompliant
             End Using
-            Using Conn As SqlConnection = OpenConn("Server = localhost; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            Using Conn As SqlConnection = OpenConn("Server = localhost; Database = Test; User = SA; Password = S3Cr3t123AbC") ' Noncompliant
             End Using
-            Using Conn As New SqlConnection("Server = " + server + "; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            Using Conn As New SqlConnection("Server = " + server + "; Database = Test; User = SA; Password = S3Cr3t123AbC") ' Noncompliant
             End Using
-            Using Conn As New SqlConnection("Server = " & server & "; Database = Test; User = SA; Password = Secret123") ' Noncompliant
+            Using Conn As New SqlConnection("Server = " & server & "; Database = Test; User = SA; Password = S3Cr3t123AbC") ' Noncompliant
             End Using
 
             Using OpenConn("password")
@@ -331,7 +331,7 @@ Phone: +0000000"
 
         Public ReadOnly Property ConnectionStringProperty As String
             Get
-                Return "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+                Return "Server = localhost; Database = Test; User = SA; Password = S3Cr3t123AbC" ' Noncompliant
             End Get
         End Property
 
@@ -341,11 +341,11 @@ Phone: +0000000"
             End Get
         End Property
 
-        Public ReadOnly Property ConnectionStringProperty2 As String = "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+        Public ReadOnly Property ConnectionStringProperty2 As String = "Server = localhost; Database = Test; User = SA; Password = S3Cr3t123AbC" ' Noncompliant
         Public ReadOnly Property ConnectionStringProperty2_OK As String = "Nothing to see here"
 
         Public Function ConnectionStringFunction() As String
-            Return "Server = localhost; Database = Test; User = SA; Password = Secret123" ' Noncompliant
+            Return "Server = localhost; Database = Test; User = SA; Password = S3Cr3t123AbC" ' Noncompliant
         End Function
 
         Public Function ConnectionStringFunction_OK() As String
@@ -375,7 +375,7 @@ Phone: +0000000"
             Me.password = "foo" ' False Negative
             Configuration.Password = "foo" ' False Negative
             Me.password = Configuration.Password = "foo" ' False Negative
-            Dim query1 As String = "password=':crazy;secret';user=xxx" ' Noncompliant
+            Dim query1 As String = "password=':crAzy;Secr3t123';user=xxx" ' Noncompliant
         End Sub
 
         Class Configuration

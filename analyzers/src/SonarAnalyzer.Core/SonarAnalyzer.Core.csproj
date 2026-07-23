@@ -21,11 +21,23 @@
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
+    <PackageReference Include="SonarAnalyzer.CommonsConfigurations" Version="2.29.0.5138" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- We need to update NuGet and JAR packaging after changing references -->
     <ProjectReference Include="..\SonarAnalyzer.CFG\SonarAnalyzer.CFG.csproj" />
+    <!-- Runs SecretExclusionPatternsGenerator over the shared secret-patterns.json fed as an AdditionalFile below. -->
+    <ProjectReference Include="..\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Feeds the shared content/secret-patterns.json from SonarAnalyzer.CommonsConfigurations to SecretExclusionPatternsGenerator. The JSON is surfaced as an AdditionalFile the generator picks up via the SecretPatternsFile metadata.
+      To refresh the shared regexes, bump the SonarAnalyzer.CommonsConfigurations package version.
+    -->
+    <AdditionalFiles Include="$(PKGSonarAnalyzer_CommonsConfigurations)\content\secret-patterns.json" SecretPatternsFile="true" />
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SecretPatternsFile" />
   </ItemGroup>
 
   <ItemGroup>

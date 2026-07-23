@@ -129,7 +129,10 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
             return null;
         }
 
-        if (keyWordPattern.SafeMatch(variableValue) is { Success: true } match && !IsValidKeyword(match.Groups["suffix"].Value))
+        if (keyWordPattern.SafeMatch(variableValue) is { Success: true } match
+            && !IsValidKeyword(match.Groups["suffix"].Value)
+            // Redirect the "this suffix is not a real credential" filtering to the shared secret-exclusion classifier from sonar-analyzer-commons. Ignore placeholders, fake values, etc.
+            && !SecretExclusionPatterns.IsKnownNonSecret(match.Groups["suffix"].Value))
         {
             credentialWordsFound.Add(match.Groups["credential"].Value);
         }
@@ -160,7 +163,8 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
             && match.Groups["Password"].Value is { } password
             && !string.Equals(match.Groups["Login"].Value, password, StringComparison.OrdinalIgnoreCase)
             && password != KeywordSeparator.ToString()
-            && !ValidKeywordPattern.SafeIsMatch(password);
+            && !ValidKeywordPattern.SafeIsMatch(password)
+            && !SecretExclusionPatterns.IsKnownNonSecret(password);
     }
 
     protected abstract class CredentialWordsFinderBase<TSyntaxNode>

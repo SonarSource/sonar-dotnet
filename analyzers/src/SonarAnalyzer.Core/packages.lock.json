@@ -48,6 +48,12 @@
           "Microsoft.NETCore.Platforms": "1.1.0"
         }
       },
+      "SonarAnalyzer.CommonsConfigurations": {
+        "type": "Direct",
+        "requested": "[2.29.0.5138, )",
+        "resolved": "2.29.0.5138",
+        "contentHash": "Op1A9Y4cdK7arEhFapJDH9uE/abKqTNL3kG+lGx2lWPLWhj2FyR3s+Bq1Psadb2r9jTNFVsvxSavlElICKrWtw=="
+      },
       "SonarAnalyzer.CSharp.Styling": {
         "type": "Direct",
         "requested": "[10.29.0.143774, )",
