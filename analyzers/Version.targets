@@ -2,7 +2,7 @@
 <Project>
   <PropertyGroup>
     <!-- These 4 values are set via set-version.ps1 -->
-    <ShortVersion>10.30</ShortVersion>
+    <ShortVersion>10.31</ShortVersion>
     <BuildNumber>0</BuildNumber>
     <Branch>
     </Branch>
