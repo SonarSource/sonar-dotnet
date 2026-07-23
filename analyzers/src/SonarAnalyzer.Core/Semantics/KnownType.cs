@@ -23,7 +23,6 @@ public sealed partial class KnownType
 #pragma warning disable SA1310  // FieldNamesMustNotContainUnderscore
 #pragma warning disable SA1311  // Static readonly fields should begin with upper-case letter
 #pragma warning disable SA1307  // Field 'log4net_Config_XmlConfigurator' should begin with upper-case letter
-#pragma warning disable SA1304  // Non-private readonly fields should begin with upper-case letter
 #pragma warning disable T0016   // Empty lines between multiline declarations
 
     public static readonly KnownType AutoConstructorAttribute = new("AutoConstructorAttribute");
@@ -160,6 +159,9 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions");
     public static readonly KnownType Microsoft_Extensions_Configuration_IConfiguration = new("Microsoft.Extensions.Configuration.IConfiguration");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions = new("Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions");
+    public static readonly KnownType Microsoft_Extensions_DependencyInjection_ServiceCollectionServiceExtensions = new("Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions");
+    public static readonly KnownType Microsoft_Extensions_DependencyInjection_Extensions_ServiceCollectionDescriptorExtensions = new("Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions");
+    public static readonly KnownType Microsoft_Extensions_DependencyInjection_ServiceDescriptor = new("Microsoft.Extensions.DependencyInjection.ServiceDescriptor");
     public static readonly KnownType Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions = new("Microsoft.Extensions.Hosting.HostEnvironmentEnvExtensions");
     public static readonly KnownType Microsoft_Extensions_Hosting_IHostApplicationLifetime = new("Microsoft.Extensions.Hosting.IHostApplicationLifetime");
     public static readonly KnownType Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions");

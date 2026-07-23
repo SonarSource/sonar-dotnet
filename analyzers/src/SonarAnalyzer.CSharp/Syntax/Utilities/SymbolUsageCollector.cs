@@ -23,6 +23,8 @@ namespace SonarAnalyzer.CSharp.Syntax.Utilities;
 /// </summary>
 internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
 {
+    private const string ServiceDescriptorTypeName = "ServiceDescriptor";
+
     [Flags]
     private enum SymbolAccess
     {
@@ -38,6 +40,34 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         SyntaxKind.PreIncrementExpression,
         SyntaxKind.PostDecrementExpression,
         SyntaxKind.PreDecrementExpression
+    };
+
+    // Microsoft.Extensions.DependencyInjection registration/descriptor methods that carry the implementation type
+    // (as their last type or typeof argument) and whose implementation is reflectively instantiated by the container.
+    // ServiceCollection extension methods (AddXxx/TryAddXxx) and ServiceDescriptor factory methods (Singleton/Describe/...)
+    // share the same shape; TryAddEnumerable / Add(ServiceDescriptor) are covered indirectly via the nested factory call.
+    private static readonly ISet<string> ServiceRegistrationMethodNames = new HashSet<string>
+    {
+        "AddSingleton",
+        "AddScoped",
+        "AddTransient",
+        "AddKeyedSingleton",
+        "AddKeyedScoped",
+        "AddKeyedTransient",
+        "TryAddSingleton",
+        "TryAddScoped",
+        "TryAddTransient",
+        "TryAddKeyedSingleton",
+        "TryAddKeyedScoped",
+        "TryAddKeyedTransient",
+        "Singleton",
+        "Scoped",
+        "Transient",
+        "Describe",
+        "KeyedSingleton",
+        "KeyedScoped",
+        "KeyedTransient",
+        "DescribeKeyed",
     };
 
     private readonly Compilation compilation;
@@ -182,9 +212,18 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
 
     public override void VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
     {
-        if (knownSymbolNames.Contains(node.Type.GetName()))
+        var typeName = node.Type.GetName();
+        if (knownSymbolNames.Contains(typeName))
         {
             UsedSymbols.UnionWith(Symbols(node));
+        }
+        // Descriptor-constructor form: services.Add(new ServiceDescriptor(typeof(TService), typeof(TImplementation), lifetime)).
+        // The factory-method form (ServiceDescriptor.Singleton<...>()) is handled by VisitInvocationExpression instead.
+        else if (typeName == ServiceDescriptorTypeName
+            && model.GetSymbolInfo(node).Symbol is IMethodSymbol { ContainingType: { } containingType } descriptorConstructor
+            && containingType.Is(KnownType.Microsoft_Extensions_DependencyInjection_ServiceDescriptor))
+        {
+            MarkRegisteredImplementationConstructorsAsUsed(node.ArgumentList, descriptorConstructor);
         }
         base.VisitObjectCreationExpression(node);
     }
@@ -196,6 +235,37 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             UsedSymbols.UnionWith(Symbols(node));
         }
         base.VisitGenericName(node);
+    }
+
+    public override void VisitInvocationExpression(InvocationExpressionSyntax node)
+    {
+        // When a type is registered with Microsoft.Extensions.DependencyInjection, the container reflectively invokes
+        // its constructor. Only the constructor is used this way, so we mark just the constructors (not the whole type):
+        // other unused private members of the registered type must still be reported.
+        // The cheap syntactic name check comes first to avoid resolving the symbol on every invocation.
+        if (ServiceRegistrationMethodNames.Contains(node.GetName())
+            && model.GetSymbolInfo(node).Symbol is IMethodSymbol method
+            && method.ContainingType.IsAny(
+                KnownType.Microsoft_Extensions_DependencyInjection_ServiceCollectionServiceExtensions,
+                KnownType.Microsoft_Extensions_DependencyInjection_Extensions_ServiceCollectionDescriptorExtensions,
+                KnownType.Microsoft_Extensions_DependencyInjection_ServiceDescriptor))
+        {
+            // Generic overloads: AddSingleton<TService, TImplementation>() / AddSingleton<TImplementation>().
+            // The implementation is always the last type argument. The (optional) first one is the service type, which
+            // may be an abstract base or interface and is intentionally ignored: its constructor is invoked through the
+            // implementation types that derive from it.
+            if (method.TypeArguments.Length > 0)
+            {
+                MarkConstructorsAsUsed(method.TypeArguments[method.TypeArguments.Length - 1]);
+            }
+            // typeof-based overloads: AddSingleton(typeof(TService), typeof(TImplementation)) / AddSingleton(typeof(TImplementation)).
+            // Factory overloads AddSingleton<TService>(sp => new TImplementation()) need no handling: the explicit "new" is already a recorded use.
+            else
+            {
+                MarkRegisteredImplementationConstructorsAsUsed(node.ArgumentList, method);
+            }
+        }
+        base.VisitInvocationExpression(node);
     }
 
     public override void VisitElementAccessExpression(ElementAccessExpressionSyntax node)
@@ -269,6 +339,42 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
             StorePropertyAccess(symbol, AccessorAccess.Set);
         }
         base.VisitPropertyDeclaration(node);
+    }
+
+    // Resolves the implementation type from a DI registration and marks its constructors as used.
+    // The implementation is bound to the "implementationType" parameter, or to "serviceType" when the service
+    // registers itself (single-Type overloads). Resolving by parameter name (rather than taking the last typeof
+    // argument) keeps working when the arguments are passed by name in a different order, e.g.
+    // AddSingleton(implementationType: typeof(Impl), serviceType: typeof(IService)).
+    // Known limitation: an indirect typeof (var t = typeof(Impl); AddSingleton(t)) is not resolved.
+    // See https://sonarsource.atlassian.net/browse/NET-4203
+    private void MarkRegisteredImplementationConstructorsAsUsed(ArgumentListSyntax argumentList, IMethodSymbol method)
+    {
+        if (argumentList is null)
+        {
+            return;
+        }
+        var parameterLookup = new CSharpMethodParameterLookup(argumentList, method);
+        if ((TypeOfArgument("implementationType") ?? TypeOfArgument("serviceType")) is { } typeOf
+            && model.GetTypeInfo(typeOf.Type).Type is { } implementationType)
+        {
+            MarkConstructorsAsUsed(implementationType);
+        }
+
+        TypeOfExpressionSyntax TypeOfArgument(string parameterName) =>
+            parameterLookup.TryGetSyntax(parameterName, out var expressions)
+                ? expressions.OfType<TypeOfExpressionSyntax>().FirstOrDefault()
+                : null;
+    }
+
+    private void MarkConstructorsAsUsed(ITypeSymbol type)
+    {
+        // All instance constructors are marked regardless of accessibility: we cannot know which one the container
+        // selects, and while MS DI requires a public constructor, other containers accept non-public ones too.
+        if (type.OriginalDefinition is INamedTypeSymbol namedType)
+        {
+            UsedSymbols.UnionWith(namedType.InstanceConstructors.Select(x => x.OriginalDefinition));
+        }
     }
 
     private SymbolAccess ParentAccessType(SyntaxNode node) =>

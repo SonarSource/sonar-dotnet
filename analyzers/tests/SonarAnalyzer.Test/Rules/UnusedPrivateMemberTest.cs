@@ -154,8 +154,8 @@ public partial class UnusedPrivateMemberTest
                 }
             }
             """)
-        .AddReferences(EntityFrameworkCoreReferences("7.0.14"))
-        .VerifyNoIssues();
+            .AddReferences(EntityFrameworkCoreReferences("7.0.14"))
+            .VerifyNoIssues();
 
     [TestMethod]
     [DataRow(ProjectType.Product)]
@@ -164,12 +164,19 @@ public partial class UnusedPrivateMemberTest
         builder.AddPaths("UnusedPrivateMember.cs").AddReferences(TestCompiler.ProjectTypeReference(projectType)).Verify();
 
     [TestMethod]
-    public void UnusedPrivateMember_CS_Latest() =>
-        builder.AddPaths("UnusedPrivateMember.Latest.cs", "UnusedPrivateMember.Latest.Partial.cs")
+    public void UnusedPrivateMember_CS_Latest()
+    {
+        var latestBuilder = builder.AddPaths("UnusedPrivateMember.Latest.cs", "UnusedPrivateMember.Latest.Partial.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
             .AddReferences(MetadataReferenceFacade.NetStandard21)
-            .AddReferences(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions)
-            .Verify();
+            .AddReferences(MetadataReferenceFacade.MicrosoftExtensionsDependencyInjectionAbstractions);
+#if NET
+        // The typeof-based and single-type-argument DI registration overloads make the compiler bind against
+        // factory overloads whose signature references IServiceProvider, which lives in System.ComponentModel.
+        latestBuilder = latestBuilder.AddReferences([CoreMetadataReference.SystemComponentModel]);
+#endif
+        latestBuilder.Verify();
+    }
 
     [TestMethod]
     public void UnusedPrivateMember_TopLevelStatements() =>
@@ -199,8 +206,8 @@ public partial class UnusedPrivateMemberTest
                 public string Name { get; private set; }
             }
             """)
-        .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("8.0.6"))
-        .Verify();
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("8.0.6"))
+            .Verify();
 #endif
 
     [TestMethod]
@@ -222,7 +229,8 @@ public partial class UnusedPrivateMemberTest
         builder.AddPaths("UnusedPrivateMember.Performance.cs")
             .AddReferences(EntityFrameworkCoreReferences("5.0.12"))   // The latest before 6.0.0 for .NET 6 that has Linq versioning collision issue
             .Invoking(x => x.VerifyNoIssues())
-            .ExecutionTime().Should().BeLessOrEqualTo(30.Seconds());
+            .ExecutionTime()
+            .Should().BeLessOrEqualTo(30.Seconds());
 
     private static ImmutableArray<MetadataReference> EntityFrameworkCoreReferences(string entityFrameworkVersion) =>
         MetadataReferenceFacade.NetStandard

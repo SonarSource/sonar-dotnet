@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CSharp13
 {
@@ -553,6 +554,7 @@ namespace CSharp8
 }
 
 // https://github.com/SonarSource/sonar-dotnet/issues/4102
+// https://sonarsource.atlassian.net/browse/NET-1922
 namespace Repro1144
 {
 
@@ -566,29 +568,160 @@ namespace Repro1144
             services.AddSingleton<IMyService, MyServiceSingleton>();
             services.AddScoped<IMyService, MyServiceScoped>();
             services.AddTransient<IMyService, MyServiceTransient>();
+            services.AddSingleton<MyServiceSelf>();                                              // Single generic type argument: the service is its own implementation
+            services.AddSingleton(typeof(IMyService), typeof(MyServiceByType));                  // typeof-based overload
+            services.AddSingleton(typeof(MyServiceByTypeSelf));                                  // typeof-based overload, service is its own implementation
+            services.TryAddScoped<IMyService, MyServiceTryAdd>();                                // TryAdd registration
+            services.AddSingleton<ConcreteService, ConcreteServiceImpl>();                       // Concrete service type + implementation
+            services.AddKeyedSingleton<IMyService, MyServiceKeyed>("myKey");                     // Keyed registration (.NET 8+)
+            services.TryAddKeyedScoped<IMyService, MyServiceTryAddKeyed>("myKey");               // Keyed TryAdd registration (.NET 8+)
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyService, MyServiceDescriptor>()); // ServiceDescriptor factory nested in TryAddEnumerable
+            services.Add(new ServiceDescriptor(typeof(IMyService), typeof(MyServiceCtorDescriptor), ServiceLifetime.Singleton)); // ServiceDescriptor constructor form
+            services.AddSingleton<IMyService, MyServiceChainedA>().AddScoped<IMyService, MyServiceChainedB>().AddTransient<IMyService, MyServiceChainedC>(); // Chained registrations
+            services.AddSingleton(implementationType: typeof(MyServiceNamedArg), serviceType: typeof(IMyService)); // typeof-based overload with named arguments in reverse order
+            services.AddKeyedSingleton(typeof(IMyService), "myKey", typeof(MyServiceKeyedByType));      // Keyed typeof-based overload: the key sits between the service and implementation types
+
+            var indirectType = typeof(MyServiceIndirect);
+            services.AddSingleton(indirectType); // Known limitation: the implementation Type is passed indirectly (via a variable), which is not resolved
 
             return services;
         }
 
         private class MyServiceSingleton : IMyService
         {
-            private readonly ISomeExternalDependency dependency;
+            public MyServiceSingleton(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
 
-            public MyServiceSingleton(ISomeExternalDependency dependency) => this.dependency = dependency; // Noncompliant FP
+            // Only the constructor is invoked by the container; other genuinely unused private members are still reported.
+            private int unusedField;                        // Noncompliant {{Remove the unused private field 'unusedField'.}}
+            private void UnusedMethod() { }                 // Noncompliant {{Remove the unused private method 'UnusedMethod'.}}
+            private class UnusedNested { }                  // Noncompliant {{Remove the unused private class 'UnusedNested'.}}
+            private int UnusedProp { get; set; }            // Noncompliant {{Remove the unused private property 'UnusedProp'.}}
         }
 
         private class MyServiceScoped : IMyService
         {
-            private readonly ISomeExternalDependency dependency;
-
-            public MyServiceScoped(ISomeExternalDependency dependency) => this.dependency = dependency; // Noncompliant FP
+            public MyServiceScoped(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
         }
 
         private class MyServiceTransient : IMyService
         {
-            private readonly ISomeExternalDependency dependency;
+            public MyServiceTransient(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
 
-            public MyServiceTransient(ISomeExternalDependency dependency) => this.dependency = dependency; // Noncompliant FP
+        private class MyServiceSelf
+        {
+            public MyServiceSelf(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceByType : IMyService
+        {
+            public MyServiceByType(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceByTypeSelf
+        {
+            public MyServiceByTypeSelf(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceTryAdd : IMyService
+        {
+            public MyServiceTryAdd(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceKeyed : IMyService
+        {
+            public MyServiceKeyed(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceTryAddKeyed : IMyService
+        {
+            public MyServiceTryAddKeyed(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceDescriptor : IMyService
+        {
+            public MyServiceDescriptor(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceCtorDescriptor : IMyService
+        {
+            public MyServiceCtorDescriptor(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        // Only the constructor of the implementation type is invoked by the container, not the (concrete) service type,
+        // so genuinely unused private members of the service type are still reported.
+        private class ConcreteService
+        {
+            private void UnusedHelper() { } // Noncompliant {{Remove the unused private method 'UnusedHelper'.}}
+        }
+
+        private class ConcreteServiceImpl : ConcreteService
+        {
+            public ConcreteServiceImpl(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        // The type is used (so it is not reported), but the constructor is never invoked and the type is not
+        // registered in DI, so the unused constructor is still reported.
+        public static Type NotRegisteredType() => typeof(NotRegistered);
+
+        private class NotRegistered : IMyService
+        {
+            public NotRegistered(ISomeExternalDependency dependency) => _ = dependency; // Noncompliant {{Remove unused constructor of private type 'NotRegistered'.}}
+        }
+
+        private class MyServiceChainedA : IMyService
+        {
+            public MyServiceChainedA(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceChainedB : IMyService
+        {
+            public MyServiceChainedB(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceChainedC : IMyService
+        {
+            public MyServiceChainedC(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        private class MyServiceNamedArg : IMyService
+        {
+            public MyServiceNamedArg(ISomeExternalDependency dependency) => _ = dependency; // Compliant: resolved from the named 'implementationType' argument
+        }
+
+        private class MyServiceKeyedByType : IMyService
+        {
+            public MyServiceKeyedByType(ISomeExternalDependency dependency) => _ = dependency; // Compliant: constructor invoked by the DI container
+        }
+
+        // Known limitation: the type is used via typeof, but the DI registration passes the Type indirectly (through a
+        // variable), so the constructor is not recognized as used and is still reported.
+        // https://sonarsource.atlassian.net/browse/NET-4203
+        private class MyServiceIndirect : IMyService
+        {
+            public MyServiceIndirect(ISomeExternalDependency dependency) => _ = dependency; // Noncompliant {{Remove unused constructor of private type 'MyServiceIndirect'.}} - FP: implementation Type passed indirectly is not resolved
+        }
+    }
+
+    // A method sharing a registration name (e.g. AddSingleton) but not declared on a Microsoft.Extensions.DependencyInjection
+    // type must not be treated as a DI registration.
+    public class MyBuilder { }
+
+    public static class MyExtensions
+    {
+        public static void AddSingleton<T>(this MyBuilder builder) { }
+    }
+
+    public static class NotDIRegistration
+    {
+        public static void Register(MyBuilder builder)
+        {
+            builder.AddSingleton<MyType>(); // Not a DI registration
+        }
+
+        private class MyType
+        {
+            public MyType(ISomeExternalDependency dependency) => _ = dependency; // Noncompliant {{Remove unused constructor of private type 'MyType'.}}
         }
     }
 }
