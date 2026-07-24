@@ -37,16 +37,24 @@ public readonly record struct SonarCompilationReportingContext(SonarAnalysisCont
     {
         return this.ProjectConfiguration().FilesToAnalyze.FindFiles(WebConfigRegex).Where(ShouldProcess);
 
-        static bool ShouldProcess(string path) =>
-            !Path.GetFileName(path).Equals("web.debug.config", StringComparison.OrdinalIgnoreCase);
+        static bool ShouldProcess(string path)
+        {
+            var name = Path.GetFileName(path);
+            return !name.Equals("web.debug.config", StringComparison.OrdinalIgnoreCase)
+                && name.IndexOf(".Test", StringComparison.OrdinalIgnoreCase) < 0;
+        }
     }
 
     public IEnumerable<string> AppSettingsFiles()
     {
         return this.ProjectConfiguration().FilesToAnalyze.FindFiles(AppSettingsRegex).Where(ShouldProcess);
 
-        static bool ShouldProcess(string path) =>
-            !Path.GetFileName(path).Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase);
+        static bool ShouldProcess(string path)
+        {
+            var name = Path.GetFileName(path);
+            return !name.Equals("appsettings.development.json", StringComparison.OrdinalIgnoreCase)
+                && name.IndexOf(".Test", StringComparison.OrdinalIgnoreCase) < 0;
+        }
     }
 
     public IEnumerable<string> LaunchSettingsFiles() =>
@@ -56,10 +64,10 @@ public readonly record struct SonarCompilationReportingContext(SonarAnalysisCont
         new(this, diagnostic);
 
     public void ReportIssue(GeneratedCodeRecognizer generatedCodeRecognizer,
-                        DiagnosticDescriptor rule,
-                        Location primaryLocation,
-                        IEnumerable<SecondaryLocation> secondaryLocations = null,
-                        params string[] messageArgs)
+                            DiagnosticDescriptor rule,
+                            Location primaryLocation,
+                            IEnumerable<SecondaryLocation> secondaryLocations = null,
+                            params string[] messageArgs)
     {
         if (this.ShouldAnalyzeTree(primaryLocation?.SourceTree, generatedCodeRecognizer))
         {
