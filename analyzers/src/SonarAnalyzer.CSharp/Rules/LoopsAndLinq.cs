@@ -36,6 +36,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
             {
                 var forEachStatementSyntax = (ForEachStatementSyntax)c.Node;
                 if (!IsOrImplementsIEnumerable(c.Model, forEachStatementSyntax)
+                    || IsOrImplementsIQueryable(c.Model, forEachStatementSyntax)
                     || IsInPerformanceSensitiveContext(forEachStatementSyntax, c.Model))
                 {
                     return;
@@ -208,6 +209,14 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
             || expressionType.Implements(KnownType.System_Collections_Generic_IEnumerable_T)
             || expressionType.Is(KnownType.System_Collections_Generic_IAsyncEnumerable_T)
             || expressionType.Implements(KnownType.System_Collections_Generic_IAsyncEnumerable_T));
+
+    // For IQueryable the "Where"/"Select" rewrite is translated by the query provider (e.g. EF Core -> SQL) and executed
+    // server-side, unlike the in-memory foreach+if. The rewrite is therefore not equivalent and can throw at runtime for a
+    // predicate the provider cannot translate, so the rule should not raise on IQueryable sources.
+    private static bool IsOrImplementsIQueryable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
+        model.GetTypeInfo(forEachStatementSyntax.Expression).Type is { } expressionType
+        && (expressionType.Is(KnownType.System_Linq_IQueryable)
+            || expressionType.Implements(KnownType.System_Linq_IQueryable));
 
     private sealed class UsageStats
     {

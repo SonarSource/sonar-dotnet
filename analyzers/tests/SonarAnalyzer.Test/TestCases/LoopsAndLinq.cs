@@ -708,6 +708,59 @@ namespace Tests.Diagnostics
         }
     }
 
+    // https://sonarsource.atlassian.net/browse/NET-3928
+    class Repro_Queryable
+    {
+        // Mimics an EF Core DbSet<T> without an EF reference: it implements IQueryable<T>.
+        public interface IEntitySet<T> : IQueryable<T> { }
+
+        public void ForEach_Queryable(IQueryable<string> queryable, Predicate<string> condition)
+        {
+            var result = new List<string>();
+            // For IQueryable the "Where" rewrite is translated by the query provider (e.g. EF Core -> SQL),
+            // so a predicate that cannot be translated (like a local method) would throw at runtime.
+            foreach (var element in queryable) // Compliant
+            {
+                if (condition(element))
+                {
+                    result.Add(element);
+                }
+            }
+        }
+
+        public void ForEach_ImplementsQueryable(IEntitySet<string> entities, Predicate<string> condition)
+        {
+            var result = new List<string>();
+            foreach (var element in entities) // Compliant: a type implementing IQueryable is still provider-translated on rewrite.
+            {
+                if (condition(element))
+                {
+                    result.Add(element);
+                }
+            }
+        }
+
+        public void ForEach_Queryable_Select(IQueryable<string> queryable)
+        {
+            foreach (var element in queryable) // Compliant: the Select rewrite is likewise provider-translated for IQueryable.
+            {
+                var length = element.Length;
+            }
+        }
+
+        public void ForEach_InMemory_StillNoncompliant(List<string> list, Predicate<string> condition)
+        {
+            var result = new List<string>();
+            foreach (var element in list) // Noncompliant: an in-memory collection can safely be simplified with Where.
+            {
+                if (condition(element)) // Secondary
+                {
+                    result.Add(element);
+                }
+            }
+        }
+    }
+
     // https://sonarsource.atlassian.net/browse/NET-3520
     class ReproAD0001
     {
