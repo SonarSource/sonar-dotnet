@@ -165,6 +165,28 @@ public class IEnumerableExtensionsTest
     }
 
     [TestMethod]
+    public void MinByOrDefault_ReturnsElementWithSmallestKey() =>
+        new[] { "ccc", "a", "bb" }.MinByOrDefault(x => x.Length).Should().Be("a");
+
+    [TestMethod]
+    public void MinByOrDefault_TiesReturnFirstEncountered()
+    {
+        var lst = new[] { Tuple.Create(1, "first"), Tuple.Create(1, "second"), Tuple.Create(2, "third") };
+        lst.MinByOrDefault(x => x.Item1).Should().Be(lst[0]);
+    }
+
+    [TestMethod]
+    public void MinByOrDefault_EmptySequence_ReturnsDefault()
+    {
+        Array.Empty<string>().MinByOrDefault(x => x.Length).Should().BeNull();
+        Array.Empty<int>().MinByOrDefault(x => x).Should().Be(0);
+    }
+
+    [TestMethod]
+    public void MinByOrDefault_CustomComparer_ReversesOrdering() =>
+        new[] { 1, 3, 2 }.MinByOrDefault(x => x, Comparer<int>.Create((a, b) => b.CompareTo(a))).Should().Be(3);
+
+    [TestMethod]
     public void JoinAndNull() =>
         ((object[])null).JoinAnd().Should().Be(string.Empty);
 

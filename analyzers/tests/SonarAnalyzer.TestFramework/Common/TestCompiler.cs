@@ -54,18 +54,30 @@ public static class TestCompiler
     }
 
     // Get the SyntaxNode between the markers $$ in the snippet
-    public static NodeAndModel<T> NodeBetweenMarkersCS<T>(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode =>
-        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, outputKind);
+    public static NodeAndModel<T> NodeBetweenMarkersCS<T>(string snippet,
+                                                          bool getInnermostNodeForTie = false,
+                                                          MetadataReference[] additionalReferences = null,
+                                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode =>
+        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, additionalReferences, outputKind);
 
-    public static NodeAndModel<CS.CSharpSyntaxNode> NodeBetweenMarkersCS(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
-        NodeBetweenMarkers<CS.CSharpSyntaxNode>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, outputKind);
+    public static NodeAndModel<CS.CSharpSyntaxNode> NodeBetweenMarkersCS(string snippet,
+                                                                         bool getInnermostNodeForTie = false,
+                                                                         MetadataReference[] additionalReferences = null,
+                                                                         OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+        NodeBetweenMarkers<CS.CSharpSyntaxNode>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, additionalReferences, outputKind);
 
     // Get the SyntaxNode between the markers $$ in the snippet
-    public static NodeAndModel<T> NodeBetweenMarkersVB<T>(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode =>
-        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, outputKind);
+    public static NodeAndModel<T> NodeBetweenMarkersVB<T>(string snippet,
+                                                          bool getInnermostNodeForTie = false,
+                                                          MetadataReference[] additionalReferences = null,
+                                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode =>
+        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, additionalReferences, outputKind);
 
-    public static NodeAndModel<VB.VisualBasicSyntaxNode> NodeBetweenMarkersVB(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
-        NodeBetweenMarkers<VB.VisualBasicSyntaxNode>(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, outputKind);
+    public static NodeAndModel<VB.VisualBasicSyntaxNode> NodeBetweenMarkersVB(string snippet,
+                                                                              bool getInnermostNodeForTie = false,
+                                                                              MetadataReference[] additionalReferences = null,
+                                                                              OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
+        NodeBetweenMarkers<VB.VisualBasicSyntaxNode>(snippet, AnalyzerLanguage.VisualBasic, getInnermostNodeForTie, additionalReferences, outputKind);
 
     // Get the SyntaxToken between the markers $$ in the snippet
     public static TokenAndModel TokenBetweenMarkersCS(string snippet, bool getInnermostNodeForTie = false, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) =>
@@ -156,13 +168,14 @@ public static class TestCompiler
     private static NodeAndModel<T> NodeBetweenMarkers<T>(string snippet,
                                                          AnalyzerLanguage language,
                                                          bool getInnermostNodeForTie = false,
+                                                         MetadataReference[] additionalReferences = null,
                                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode
     {
         var position = snippet.IndexOf("$$");
         var lastPosition = snippet.LastIndexOf("$$");
         var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
         snippet = snippet.Replace("$$", string.Empty);
-        var (tree, model) = Compile(snippet, ignoreErrors: false, language, outputKind: outputKind);
+        var (tree, model) = Compile(snippet, ignoreErrors: false, language, additionalReferences, outputKind: outputKind);
         var node = (T)tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
         return new(node, model);
     }

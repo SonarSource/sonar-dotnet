@@ -106,6 +106,34 @@ public static class IEnumerableExtensions
             enumerable.Select((item, index) => new { item, index }).FirstOrDefault(x => predicate(x.item))?.index ?? -1;
 
         /// <summary>
+        /// Returns the element with the minimum key, as determined by <paramref name="keySelector"/>. If several elements
+        /// share the minimum key, the first one encountered is returned. Returns <c>default(T)</c> if the sequence is empty.
+        /// </summary>
+        /// <remarks>
+        /// Named distinctly from <see cref="System.Linq.Enumerable.MinBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey})"/>
+        /// (not available on netstandard2.0) to avoid an ambiguous call wherever both are in scope, and because this overload
+        /// never throws on an empty sequence.
+        /// </remarks>
+        public T MinByOrDefault<TKey>(Func<T, TKey> keySelector, IComparer<TKey> comparer = null)
+        {
+            comparer ??= Comparer<TKey>.Default;
+            var hasResult = false;
+            T minItem = default;
+            TKey minKey = default;
+            foreach (var item in enumerable)
+            {
+                var key = keySelector(item);
+                if (!hasResult || comparer.Compare(key, minKey) < 0)
+                {
+                    hasResult = true;
+                    minItem = item;
+                    minKey = key;
+                }
+            }
+            return minItem;
+        }
+
+        /// <summary>
         /// This is <see cref="string.Join"/> as extension. It concatenates the members of the collection using the specified <paramref name="separator"/> between each member.
         /// <paramref name="selector"/> is used to convert <typeparamref name="T"/> to <see cref="string"/> for concatenation.
         /// </summary>

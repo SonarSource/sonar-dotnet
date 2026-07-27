@@ -1,0 +1,59 @@
+<p>Loading multiple sibling collection navigations in a single Entity Framework Core query causes the database to return the Cartesian product of
+those collections, duplicating the root entity’s data across many rows and inflating the query result.</p>
+<h2>Why is this an issue?</h2>
+<p>When a query includes two collection navigations on the same root entity, Entity Framework Core joins them in a single SQL statement. The database
+returns the Cartesian product of the two collections, and each returned row repeats the root entity’s columns.</p>
+<p>A <code>Student</code> with 10 <code>Enrollments</code> and 10 <code>Grades</code> produces 100 rows. Each additional sibling collection multiplies
+the row count again, so a query that should return a few hundred rows can return hundreds of thousands.</p>
+<p>Entity Framework Core also flags this situation at runtime through <code>MultipleCollectionIncludeWarning</code>.</p>
+<h3>Exceptions</h3>
+<p>The rule does not apply when:</p>
+<ul>
+  <li>a single collection navigation, regardless of how many reference navigations the chain contains</li>
+  <li>a collection reached through <code>ThenInclude</code> when a collection earlier in the same <code>Include</code>/<code>ThenInclude</code> branch
+  was already counted - each row then represents a single descendant, not a sibling cross product. A <code>ThenInclude</code> that is the
+  <strong>first</strong> collection reached in its branch is not exempt: it collides with sibling branches exactly like a top-level
+  <code>Include</code> would</li>
+  <li>a query that opts into split queries through <code>AsSplitQuery</code></li>
+  <li>a query that explicitly accepts the trade-off through <code>AsSingleQuery</code></li>
+</ul>
+<h2>How to fix it</h2>
+<p>Call <code>AsSplitQuery</code> on the query so that Entity Framework Core loads each collection in its own SQL statement.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var students = await ctx.Students
+    .Include(s =&gt; s.Enrollments)
+    .Include(s =&gt; s.Grades)       // Noncompliant: second sibling collection causes a Cartesian explosion
+    .ToListAsync();
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var students = await ctx.Students
+    .Include(s =&gt; s.Enrollments)
+    .Include(s =&gt; s.Grades)
+    .AsSplitQuery()
+    .ToListAsync();
+</pre>
+<h3>How does this work?</h3>
+<p><code>AsSplitQuery</code> tells Entity Framework Core to run one SQL statement per collection navigation. Each statement returns only the rows of
+its own table, so the Cartesian product disappears and the number of rows transferred drops from a product to a sum.</p>
+<h3>Pitfalls</h3>
+<p>Split queries run as separate database round trips. If the data changes between them, the returned object graph may be inconsistent. When the
+application requires a consistent view, wrap the query in a serializable or snapshot transaction.</p>
+<p>Combining <code>Skip</code> or <code>Take</code> with <code>AsSplitQuery</code> on Entity Framework Core versions prior to 10 requires an ordering
+that uniquely identifies each row. Otherwise the split queries may materialize different pages and return mismatched results.</p>
+<h3>How to opt out</h3>
+<p>Call <code>AsSingleQuery</code> instead to keep the single join and explicitly accept the Cartesian explosion. Unlike <code>AsSplitQuery</code>, it
+does not change how the query runs - it only signals, in a way that both this rule and Entity Framework Core’s own runtime warning recognize, that the
+trade-off was reviewed and accepted rather than overlooked.</p>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/querying/single-split-queries">Single vs. Split Queries</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.diagnostics.relationaleventid.multiplecollectionincludewarning"><code>RelationalEventId.MultipleCollectionIncludeWarning</code> Field</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.relationalqueryableextensions.assplitquery"><code>RelationalQueryableExtensions.AsSplitQuery</code> Method</a></li>
+</ul>
+
