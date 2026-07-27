@@ -10,8 +10,9 @@ double d = 0.10000000000000001; // 0.1
 <p>This issue is further compounded by the <a href="https://en.wikipedia.org/wiki/Associative_property">non-associative</a> nature of floating point
 arithmetic. The order in which operations are performed can affect the outcome due to the rounding that occurs at each step. Consequently, the outcome
 of a series of mathematical operations can vary based on the order of operations.</p>
-<p>As a result, using the equality (<code>==</code>) or inequality (<code>!=</code>) operators with <code>float</code> or <code>double</code> values
-is typically a mistake, as it can lead to unexpected behavior.</p>
+<p>As a result, comparing <code>float</code> or <code>double</code> values for exact equality is typically a mistake, as it can lead to unexpected
+behavior. This applies whether the comparison uses the equality (<code>==</code>) or inequality (<code>!=</code>) operators or the <code>Equals</code>
+method.</p>
 <h2>How to fix it</h2>
 <p>Consider using a small tolerance value to check if the numbers are "close enough" to be considered equal. This tolerance value, often called
 <code>epsilon</code>, should be chosen based on the specifics of your program.</p>
@@ -41,6 +42,26 @@ if (Math.Abs(myNumber - 3.146f) &lt; epsilon)
 }
 
 if (myNumber &lt;= 4 - epsilon || myNumber &gt;= 4 + epsilon)
+{
+  // ...
+}
+</pre>
+<p>The <code>Equals</code> method has the same problem and should be handled the same way:</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+float myNumber = 3.146f;
+
+if (myNumber.Equals(3.146f)) // Noncompliant: due to floating point imprecision, this will likely be false
+{
+  // ...
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+float myNumber = 3.146f;
+float epsilon = 0.0001f; // or some other small value
+
+if (Math.Abs(myNumber - 3.146f) &lt; epsilon)
 {
   // ...
 }

@@ -1,18 +1,187 @@
-<p>Using runtime-evaluated expressions (e.g., <code>DateTime.UtcNow</code>) as default values for date/time properties causes the value to be
-hardcoded as a static timestamp in the database schema. This affects <code>HasDefaultValue()</code> in Fluent API configurations and
-<code>defaultValue</code> in migration files.</p>
+<p>Using runtime-evaluated expressions (e.g., <code>DateTime.UtcNow</code>, <code>Guid.NewGuid()</code>) as default values for a property causes the
+value to be hardcoded as a static value in the database schema, rather than computed per row. This affects <code>HasDefaultValue()</code> in Fluent
+API configurations and <code>defaultValue</code> in migration files.</p>
 <h2>Why is this an issue?</h2>
 <ul>
   <li>The Cause: These C# expressions evaluate once when the model builds or the migration runs, rather than dynamically by the database.</li>
-  <li>The Result: Every new record receives that exact same static timestamp instead of the actual time it was inserted.</li>
+  <li>The Result: Every new record receives that exact same static value — the same timestamp, or the same GUID — instead of a value computed at
+  insertion time.</li>
 </ul>
 <p>Starting with EF Core 9, this also throws an <code>InvalidOperationException</code> for the <code>PendingModelChangesWarning</code> warning when
-applying migrations, because the default value expression evaluates to a new timestamp on each model build, making migrations non-deterministic.</p>
+applying migrations, because the default value expression evaluates to a new value on each model build, making migrations non-deterministic.</p>
 <h2>How to fix it</h2>
 <p>Replace <code>HasDefaultValue()</code> with <code>HasDefaultValueSql()</code> in Fluent API configurations, and replace <code>defaultValue</code>
-with <code>defaultValueSql</code> in migration files. Use the appropriate database function for your specific database provider (e.g.,
-<code>GETDATE()</code> or <code>SYSUTCDATETIME()</code> for SQL Server). This instructs EF Core to let the database engine generate the exact time of
-insertion.</p>
+with <code>defaultValueSql</code> in migration files. This instructs EF Core to let the database engine generate the value at insertion time, using
+the equivalent function for your database provider:</p>
+<table>
+  <colgroup>
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.6666%;">
+    <col style="width: 16.667%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Client-evaluated expression</th>
+      <th>SQL Server</th>
+      <th>PostgreSQL</th>
+      <th>MySQL / MariaDB</th>
+      <th>SQLite</th>
+      <th>Oracle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <p><code>DateTime.Now</code></p>
+      </td>
+      <td>
+        <p><code>GETDATE()</code></p>
+      </td>
+      <td>
+        <p><code>now()</code></p>
+      </td>
+      <td>
+        <p><code>NOW()</code></p>
+      </td>
+      <td>
+        <p><code>datetime('now','localtime')</code></p>
+      </td>
+      <td>
+        <p><code>SYSDATE</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>DateTime.UtcNow</code></p>
+      </td>
+      <td>
+        <p><code>GETUTCDATE()</code></p>
+      </td>
+      <td>
+        <p><code>now() AT TIME ZONE 'utc'</code></p>
+      </td>
+      <td>
+        <p><code>UTC_TIMESTAMP()</code></p>
+      </td>
+      <td>
+        <p><code>CURRENT_TIMESTAMP</code></p>
+      </td>
+      <td>
+        <p><code>SYS_EXTRACT_UTC(SYSTIMESTAMP)</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>DateTime.Today</code></p>
+      </td>
+      <td>
+        <p><code>CAST(GETDATE() AS DATE)</code></p>
+      </td>
+      <td>
+        <p><code>CURRENT_DATE</code></p>
+      </td>
+      <td>
+        <p><code>CURDATE()</code></p>
+      </td>
+      <td>
+        <p><code>date('now','localtime')</code></p>
+      </td>
+      <td>
+        <p><code>TRUNC(SYSDATE)</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>DateTimeOffset.Now</code></p>
+      </td>
+      <td>
+        <p><code>SYSDATETIMEOFFSET()</code></p>
+      </td>
+      <td>
+        <p><code>now()</code></p>
+      </td>
+      <td>
+        <p><em>(no offset-aware type; closest is <code>CURRENT_TIMESTAMP</code>)</em></p>
+      </td>
+      <td>
+        <p><em>(no offset-aware type)</em></p>
+      </td>
+      <td>
+        <p><code>SYSTIMESTAMP</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>DateTimeOffset.UtcNow</code></p>
+      </td>
+      <td>
+        <p><code>SYSUTCDATETIME()</code></p>
+      </td>
+      <td>
+        <p><code>now() AT TIME ZONE 'utc'</code></p>
+      </td>
+      <td>
+        <p><code>UTC_TIMESTAMP()</code></p>
+      </td>
+      <td>
+        <p><code>CURRENT_TIMESTAMP</code></p>
+      </td>
+      <td>
+        <p><code>SYS_EXTRACT_UTC(SYSTIMESTAMP)</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>Guid.NewGuid()</code></p>
+      </td>
+      <td>
+        <p><code>NEWID()</code></p>
+      </td>
+      <td>
+        <p><code>gen_random_uuid()</code></p>
+      </td>
+      <td>
+        <p><code>UUID()</code></p>
+      </td>
+      <td>
+        <p><em>(no native function)</em></p>
+      </td>
+      <td>
+        <p><code>SYS_GUID()</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><code>Guid.CreateVersion7()</code></p>
+      </td>
+      <td>
+        <p><em>(no native function)</em></p>
+      </td>
+      <td>
+        <p><code>uuidv7()</code> (PostgreSQL 18+)</p>
+      </td>
+      <td>
+        <p><code>UUID_v7()</code> (MariaDB 11.7+ only)</p>
+      </td>
+      <td>
+        <p><em>(no native function)</em></p>
+      </td>
+      <td>
+        <p><em>(no native function)</em></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>Some provider-specific quirks to be aware of when picking a replacement:</p>
+<ul>
+  <li>MySQL’s <code>UUID()</code> returns a version 1 UUID, not version 4; MariaDB additionally provides a dedicated <code>UUID_v4()</code>.</li>
+  <li>Oracle’s <code>SYS_GUID()</code> returns a raw 16-byte value, not formatted as a standard hyphenated UUID string.</li>
+  <li>SQLite has no native UUID generation function of any version; generate the value in application code instead.</li>
+  <li>SQLite and Oracle have no time-zone-aware temporal type, so <code>DateTimeOffset</code> values don’t map cleanly to a single database type.</li>
+</ul>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
@@ -31,7 +200,7 @@ public void Configure(EntityTypeBuilder&lt;User&gt; builder)
     builder.HasKey(x =&gt; x.UserId);
     builder.Property(x =&gt; x.CreatedOn)
         .IsRequired(true)
-        .HasDefaultValueSql("GETDATE()");
+        .HasDefaultValueSql("GETDATE()"); // SQL Server example — see the table above for other providers
 }
 </pre>
 <h4>Noncompliant code example</h4>
@@ -48,7 +217,25 @@ migrationBuilder.AddColumn&lt;DateTime&gt;(
     name: "OrderDate",
     table: "Orders",
     nullable: false,
-    defaultValueSql: "GETUTCDATE()");
+    defaultValueSql: "GETUTCDATE()"); // SQL Server example — see the table above for other providers
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+{
+    builder.HasKey(x =&gt; x.UserId);
+    builder.Property(x =&gt; x.ExternalId)
+        .HasDefaultValue(Guid.NewGuid()); // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+{
+    builder.HasKey(x =&gt; x.UserId);
+    builder.Property(x =&gt; x.ExternalId)
+        .HasDefaultValueSql("NEWID()"); // SQL Server example — see the table above for other providers
+}
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

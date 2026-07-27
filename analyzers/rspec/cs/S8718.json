@@ -1,5 +1,5 @@
 {
-  "title": "Date\/time default values should use database functions",
+  "title": "Client-evaluated default values should use database functions",
   "type": "BUG",
   "status": "ready",
   "remediation": {
