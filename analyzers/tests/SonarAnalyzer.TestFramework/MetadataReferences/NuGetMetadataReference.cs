@@ -125,6 +125,11 @@ public static class NuGetMetadataReference
     public static References MicrosoftEntityFrameworkCoreSqliteCore(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Sqlite.Core", packageVersion);
     public static References MicrosoftEntityFrameworkCoreSqlServer(string packageVersion) => Create("Microsoft.EntityFrameworkCore.SqlServer", packageVersion);
     public static References MicrosoftEntityFrameworkCoreRelational(string packageVersion) => Create("Microsoft.EntityFrameworkCore.Relational", packageVersion);
+    public static References MicrosoftEntityFrameworkCorePackages(string packageVersion) =>
+        MicrosoftEntityFrameworkCore(packageVersion)
+            .Concat(MicrosoftEntityFrameworkCoreAbstractions(packageVersion))
+            .Concat(MicrosoftEntityFrameworkCoreRelational(packageVersion))
+            .Concat(MetadataReferenceFacade.SystemComponentModelTypeConverter);
     public static References MicrosoftExtensionsConfigurationAbstractions(string packageVersion) => Create("Microsoft.Extensions.Configuration.Abstractions", packageVersion);
     public static References MicrosoftExtensionsDependencyInjectionAbstractions(string packageVersion) => Create("Microsoft.Extensions.DependencyInjection.Abstractions", packageVersion);
     public static References MicrosoftExtensionsHttp(string packageVersion = TestConstants.NuGetLatestVersion) => Create("Microsoft.Extensions.Http", packageVersion);

@@ -8639,7 +8639,7 @@ public static class RuleTypeMappingCS
         // ["S8715"],
         // ["S8716"],
         ["S8717"] = "BUG",
-        // ["S8718"],
+        ["S8718"] = "BUG",
         // ["S8719"],
         // ["S8720"],
         // ["S8721"],

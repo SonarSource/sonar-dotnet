@@ -147,6 +147,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_EntityFrameworkCore_IDbContextFactory_TContext = new("Microsoft.EntityFrameworkCore.IDbContextFactory", "TContext");
     public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Migration = new("Microsoft.EntityFrameworkCore.Migrations.Migration");
     public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder = new("Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder");
+    public static readonly KnownType Microsoft_EntityFrameworkCore_Migrations_Operations_Builders_ColumnsBuilder = new("Microsoft.EntityFrameworkCore.Migrations.Operations.Builders.ColumnsBuilder");
     public static readonly KnownType Microsoft_EntityFrameworkCore_MySQLDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.MySQLDbContextOptionsExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsBuilderExtensions");
@@ -154,6 +155,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_EntityFrameworkCore_PrimaryKeyAttribute = new("Microsoft.EntityFrameworkCore.PrimaryKeyAttribute");
     public static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new("Microsoft.EntityFrameworkCore.RawSqlString");
     public static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
+    public static readonly KnownType Microsoft_EntityFrameworkCore_RelationalPropertyBuilderExtensions = new("Microsoft.EntityFrameworkCore.RelationalPropertyBuilderExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_RelationalQueryableExtensions = new("Microsoft.EntityFrameworkCore.RelationalQueryableExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions = new("Microsoft.EntityFrameworkCore.SqliteDbContextOptionsBuilderExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions");

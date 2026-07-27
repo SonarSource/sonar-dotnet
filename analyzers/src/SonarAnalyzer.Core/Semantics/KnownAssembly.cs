@@ -55,6 +55,7 @@ public sealed partial class KnownAssembly
     public static KnownAssembly CommonLoggingCore { get; } = new(NameAndPublicKeyIs("Common.Logging.Core", "af08829b84f0328e"));
     public static KnownAssembly CastleCore { get; } = new(NameAndPublicKeyIs("Castle.Core", "407dd0808d44fbdc"));
     public static KnownAssembly MicrosoftEntityFrameworkCoreAbstractions { get; } = new(NameAndPublicKeyIs("Microsoft.EntityFrameworkCore.Abstractions", MicrosoftPublicKeyToken));
+    public static KnownAssembly MicrosoftEntityFrameworkCoreRelational { get; } = new(NameAndPublicKeyIs("Microsoft.EntityFrameworkCore.Relational", MicrosoftPublicKeyToken));
 
     internal KnownAssembly(Func<AssemblyIdentity, bool> predicate, params Func<AssemblyIdentity, bool>[] or)
         : this(predicate is null || Array.Exists(or, x => x is null)

@@ -1,0 +1,65 @@
+<p>Using runtime-evaluated expressions (e.g., <code>DateTime.UtcNow</code>) as default values for date/time properties causes the value to be
+hardcoded as a static timestamp in the database schema. This affects <code>HasDefaultValue()</code> in Fluent API configurations and
+<code>defaultValue</code> in migration files.</p>
+<h2>Why is this an issue?</h2>
+<ul>
+  <li>The Cause: These C# expressions evaluate once when the model builds or the migration runs, rather than dynamically by the database.</li>
+  <li>The Result: Every new record receives that exact same static timestamp instead of the actual time it was inserted.</li>
+</ul>
+<p>Starting with EF Core 9, this also throws an <code>InvalidOperationException</code> for the <code>PendingModelChangesWarning</code> warning when
+applying migrations, because the default value expression evaluates to a new timestamp on each model build, making migrations non-deterministic.</p>
+<h2>How to fix it</h2>
+<p>Replace <code>HasDefaultValue()</code> with <code>HasDefaultValueSql()</code> in Fluent API configurations, and replace <code>defaultValue</code>
+with <code>defaultValueSql</code> in migration files. Use the appropriate database function for your specific database provider (e.g.,
+<code>GETDATE()</code> or <code>SYSUTCDATETIME()</code> for SQL Server). This instructs EF Core to let the database engine generate the exact time of
+insertion.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+{
+    builder.HasKey(x =&gt; x.UserId);
+    builder.Property(x =&gt; x.CreatedOn)
+        .IsRequired(true)
+        .HasDefaultValue(DateTime.Now); // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+{
+    builder.HasKey(x =&gt; x.UserId);
+    builder.Property(x =&gt; x.CreatedOn)
+        .IsRequired(true)
+        .HasDefaultValueSql("GETDATE()");
+}
+</pre>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+migrationBuilder.AddColumn&lt;DateTime&gt;(
+    name: "OrderDate",
+    table: "Orders",
+    nullable: false,
+    defaultValue: DateTime.UtcNow); // Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+migrationBuilder.AddColumn&lt;DateTime&gt;(
+    name: "OrderDate",
+    table: "Orders",
+    nullable: false,
+    defaultValueSql: "GETUTCDATE()");
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/modeling/generated-properties#default-values">Entity Framework Core -
+  Default Values</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/ef/core/modeling/generated-properties?tabs=data-annotations#datetime-value-generation">Date/time value
+  generation</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/sql/t-sql/functions/getdate-transact-sql">SQL Server GETDATE() Function</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/what-is-new/ef-core-9.0/breaking-changes#pending-model-changes">EF Core 9 -
+  Pending model changes</a></li>
+</ul>
+

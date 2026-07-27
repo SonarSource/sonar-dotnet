@@ -1,0 +1,27 @@
+{
+  "title": "Date\/time default values should use database functions",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "entity-framework-core",
+    "entity-framework",
+    "database",
+    "orm"
+  ],
+  "defaultSeverity": "Blocker",
+  "ruleSpecification": "RSPEC-8718",
+  "sqKey": "S8718",
+  "scope": "Main",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH",
+      "MAINTAINABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}
