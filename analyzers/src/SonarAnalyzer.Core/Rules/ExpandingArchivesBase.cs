@@ -31,7 +31,7 @@ public abstract class ExpandingArchivesBase<TSyntaxKind> : SonarDiagnosticAnalyz
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule);
+        var input = new TrackerInput(context, Rule);
         var t = Language.Tracker.Invocation;
         t.Track(
             input,

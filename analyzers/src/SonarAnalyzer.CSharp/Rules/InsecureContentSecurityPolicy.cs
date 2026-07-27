@@ -32,7 +32,7 @@ public sealed class InsecureContentSecurityPolicy : SonarDiagnosticAnalyzer<Synt
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule);
+        var input = new TrackerInput(context, Rule);
         var propertyTracker = Language.Tracker.PropertyAccess;
         propertyTracker.Track(
             input,

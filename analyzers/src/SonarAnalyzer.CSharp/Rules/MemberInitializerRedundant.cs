@@ -34,9 +34,9 @@ public sealed partial class MemberInitializerRedundant : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    public MemberInitializerRedundant() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+    public MemberInitializerRedundant() : this(AnalyzerConfiguration.Default) { }
 
-    internal MemberInitializerRedundant(IAnalyzerConfiguration configuration) =>
+    internal MemberInitializerRedundant(AnalyzerConfiguration configuration) =>
         useSonarCfg = configuration.UseSonarCfg;
 
     protected override void Initialize(SonarAnalysisContext context) =>

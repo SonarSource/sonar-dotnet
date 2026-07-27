@@ -23,30 +23,9 @@ namespace SonarAnalyzer.Core.Test.Common;
 public class AnalyzerConfigurationTest
 {
     [TestMethod]
-    public void AlwaysEnabled_WhenNotInitialized_ReturnsTrue() =>
-        AlwaysEnabled.IsEnabled("S101").Should().BeTrue();
-
-    [TestMethod]
-    public void AlwaysEnabled_AnyValue_ReturnsTrue()
-    {
-        AlwaysEnabled.IsEnabled(null).Should().BeTrue();
-        AlwaysEnabled.IsEnabled(string.Empty).Should().BeTrue();
-        AlwaysEnabled.IsEnabled("foo").Should().BeTrue();
-    }
-
-    [TestMethod]
     public void ForceSonarCfg_DisabledByDefault()
     {
-        AlwaysEnabled.ForceSonarCfg.Should().BeFalse();
-        AlwaysEnabledWithSonarCfg.ForceSonarCfg.Should().BeTrue();
-    }
-
-    [TestMethod]
-    public void AlwaysEnabled_IgnoresInitialize()
-    {
-        var sut = AlwaysEnabled;
-
-        sut.Initialize(null);
-        sut.IsEnabled("S0000").Should().BeTrue();
+        Default.ForceSonarCfg.Should().BeFalse();
+        WithSonarCfg.ForceSonarCfg.Should().BeTrue();
     }
 }

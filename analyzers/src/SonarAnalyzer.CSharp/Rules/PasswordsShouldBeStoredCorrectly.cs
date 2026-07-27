@@ -165,5 +165,5 @@ public sealed class PasswordsShouldBeStoredCorrectly : SonarDiagnosticAnalyzer
                                         SonarAnalysisContext context,
                                         string message,
                                         params SyntaxTrackerBase<SyntaxKind, TContext>.Condition[] conditions) where TContext : SyntaxBaseContext =>
-        tracker.Track(new(context, AnalyzerConfiguration.AlwaysEnabled, Rule), [message], conditions);
+        tracker.Track(new(context, Rule), [message], conditions);
 }

@@ -183,7 +183,7 @@ public abstract class ExecutingSqlQueriesBase<TSyntaxKind, TExpressionSyntax, TI
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule);
+        var input = new TrackerInput(context, Rule);
         var inv = Language.Tracker.Invocation;
         inv.Track(
             input,

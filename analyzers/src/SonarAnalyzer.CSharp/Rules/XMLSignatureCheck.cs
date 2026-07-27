@@ -33,7 +33,7 @@ public sealed class XmlSignatureCheck : SonarDiagnosticAnalyzer
     {
         var tracker = CSharpFacade.Instance.Tracker.Invocation;
         tracker.Track(
-            new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule),
+            new TrackerInput(context, Rule),
             tracker.Or(
                 tracker.And(
                     tracker.MethodHasParameters(0),

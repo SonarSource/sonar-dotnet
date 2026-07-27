@@ -34,7 +34,7 @@ public abstract class JwtSignedBase<TSyntaxKind, TInvocationSyntax> : SonarDiagn
     protected JwtSignedBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        Initialize(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
+        Initialize(new TrackerInput(context, Rule));
 
     protected BuilderPatternDescriptor<TSyntaxKind, TInvocationSyntax>[] JwtBuilderDescriptors(Func<TInvocationSyntax, bool> singleArgumentIsNotFalseLiteral) =>
         [

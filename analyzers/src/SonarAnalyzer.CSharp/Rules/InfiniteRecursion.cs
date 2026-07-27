@@ -28,9 +28,9 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
     private static DiagnosticDescriptor Rule => DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
-    public InfiniteRecursion() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+    public InfiniteRecursion() : this(AnalyzerConfiguration.Default) { }
 
-    internal /* for testing */ InfiniteRecursion(IAnalyzerConfiguration configuration) =>
+    internal /* for testing */ InfiniteRecursion(AnalyzerConfiguration configuration) =>
         checker = configuration.UseSonarCfg ? new SonarChecker() : new RoslynChecker();
 
     protected override void Initialize(SonarAnalysisContext context)

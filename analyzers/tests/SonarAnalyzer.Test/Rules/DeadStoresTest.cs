@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules;
 public class DeadStoresTest
 {
     private readonly VerifierBuilder sonarCfg = new VerifierBuilder()
-        .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg))
+        .AddAnalyzer(() => new DeadStores(AnalyzerConfiguration.WithSonarCfg))
         .WithOptions(LanguageOptions.FromCSharp8)
         .AddReferences(MetadataReferenceFacade.NetStandard21);
 

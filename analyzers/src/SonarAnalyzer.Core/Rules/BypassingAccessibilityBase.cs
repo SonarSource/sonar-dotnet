@@ -29,7 +29,7 @@ public abstract class BypassingAccessibilityBase<TSyntaxKind> : SonarDiagnosticA
     protected BypassingAccessibilityBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        Initialize(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
+        Initialize(new TrackerInput(context, Rule));
 
     private void Initialize(TrackerInput input)
     {

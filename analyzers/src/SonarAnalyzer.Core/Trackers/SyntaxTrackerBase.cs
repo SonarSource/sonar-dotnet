@@ -29,13 +29,7 @@ public abstract class SyntaxTrackerBase<TSyntaxKind, TContext> : TrackerBase<TSy
 
     public void Track(TrackerInput input, string[] diagnosticMessageArgs, params Condition[] conditions)
     {
-        input.Context.RegisterCompilationStartAction(c =>
-          {
-              if (input.IsEnabled(c.Options))
-              {
-                  c.RegisterNodeAction(Language.GeneratedCodeRecognizer, TrackAndReportIfNecessary, TrackedSyntaxKinds);
-              }
-          });
+        input.Context.RegisterNodeAction(Language.GeneratedCodeRecognizer, TrackAndReportIfNecessary, TrackedSyntaxKinds);
 
         void TrackAndReportIfNecessary(SonarSyntaxNodeReportingContext c)
         {

@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class MethodParameterUnusedTest
 {
-    private readonly VerifierBuilder sonarCS = new VerifierBuilder().AddAnalyzer(() => new CS.MethodParameterUnused(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
+    private readonly VerifierBuilder sonarCS = new VerifierBuilder().AddAnalyzer(() => new CS.MethodParameterUnused(AnalyzerConfiguration.WithSonarCfg));
     private readonly VerifierBuilder roslynCS = new VerifierBuilder<CS.MethodParameterUnused>();   // Default constructor uses Roslyn CFG
 
     [TestMethod]

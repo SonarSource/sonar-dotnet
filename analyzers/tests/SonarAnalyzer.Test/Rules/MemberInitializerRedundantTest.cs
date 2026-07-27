@@ -23,7 +23,7 @@ namespace SonarAnalyzer.Test.Rules;
 public class MemberInitializerRedundantTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<MemberInitializerRedundant>();
-    private readonly VerifierBuilder builderSonarCfg = new VerifierBuilder().AddAnalyzer(() => new MemberInitializerRedundant(AnalyzerConfiguration.AlwaysEnabledWithSonarCfg));
+    private readonly VerifierBuilder builderSonarCfg = new VerifierBuilder().AddAnalyzer(() => new MemberInitializerRedundant(AnalyzerConfiguration.WithSonarCfg));
 
     [TestMethod]
     public void MemberInitializerRedundant_RoslynCfg() =>

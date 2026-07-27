@@ -36,7 +36,7 @@ public sealed class PermissiveCors : SonarDiagnosticAnalyzer<SyntaxKind>
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule);
+        var input = new TrackerInput(context, Rule);
         SetupInvocationTracker(Language.Tracker.Invocation, input);
         SetupObjectCreationTracker(Language.Tracker.ObjectCreation, input);
 

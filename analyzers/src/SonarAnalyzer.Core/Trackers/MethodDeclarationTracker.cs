@@ -27,13 +27,7 @@ public abstract class MethodDeclarationTracker<TSyntaxKind> : TrackerBase<TSynta
 
     public void Track(TrackerInput input, params Condition[] conditions)
     {
-        input.Context.RegisterCompilationStartAction(c =>
-            {
-                if (input.IsEnabled(c.Options))
-                {
-                    c.RegisterSymbolAction(TrackMethodDeclaration, SymbolKind.Method);
-                }
-            });
+        input.Context.RegisterSymbolAction(TrackMethodDeclaration, SymbolKind.Method);
 
         void TrackMethodDeclaration(SonarSymbolReportingContext c)
         {

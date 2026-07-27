@@ -39,7 +39,7 @@ public abstract class ObjectShouldBeInitializedCorrectlyBase : SonarDiagnosticAn
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        Initialize(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
+        Initialize(new TrackerInput(context, Rule));
         context.RegisterCompilationStartAction(
             compilationStartContext =>
             {

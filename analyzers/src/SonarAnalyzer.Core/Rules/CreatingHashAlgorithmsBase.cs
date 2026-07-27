@@ -66,7 +66,7 @@ public abstract class CreatingHashAlgorithmsBase<TSyntaxKind> : SonarDiagnosticA
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule);
+        var input = new TrackerInput(context, Rule);
         var oc = Language.Tracker.ObjectCreation;
         oc.Track(input, oc.WhenDerivesOrImplementsAny(algorithmTypes));
 

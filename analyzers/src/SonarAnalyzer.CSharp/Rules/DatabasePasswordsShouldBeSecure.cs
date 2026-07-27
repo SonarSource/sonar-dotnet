@@ -59,7 +59,7 @@ public sealed class DatabasePasswordsShouldBeSecure : SonarDiagnosticAnalyzer<Sy
 
     protected override void Initialize(SonarAnalysisContext context)
     {
-        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule);
+        var input = new TrackerInput(context, Rule);
         var inv = Language.Tracker.Invocation;
         inv.Track(input, inv.MatchMethod(TrackedInvocations), HasEmptyPasswordArgument());
         context.RegisterCompilationAction(CheckWebConfig);

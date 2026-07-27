@@ -35,9 +35,9 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    public MethodParameterUnused() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+    public MethodParameterUnused() : this(AnalyzerConfiguration.Default) { }
 
-    internal /* for testing */ MethodParameterUnused(IAnalyzerConfiguration configuration) =>
+    internal /* for testing */ MethodParameterUnused(AnalyzerConfiguration configuration) =>
         useSonarCfg = configuration.UseSonarCfg;
 
     protected override void Initialize(SonarAnalysisContext context) =>

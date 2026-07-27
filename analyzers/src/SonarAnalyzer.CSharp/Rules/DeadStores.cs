@@ -41,9 +41,9 @@ public sealed partial class DeadStores : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-    public DeadStores() : this(AnalyzerConfiguration.AlwaysEnabled) { }
+    public DeadStores() : this(AnalyzerConfiguration.Default) { }
 
-    internal /* for testing */ DeadStores(IAnalyzerConfiguration configuration) =>
+    internal /* for testing */ DeadStores(AnalyzerConfiguration configuration) =>
         useSonarCfg = configuration.UseSonarCfg;
 
     protected override void Initialize(SonarAnalysisContext context)

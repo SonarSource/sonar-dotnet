@@ -19,22 +19,12 @@ namespace SonarAnalyzer.Core.Common;
 
 public class AnalyzerConfiguration
 {
-    public static IAnalyzerConfiguration AlwaysEnabled { get; } = new AlwaysEnabledConfiguration(false);
+    public static readonly AnalyzerConfiguration Default = new(false);
+    public static readonly AnalyzerConfiguration WithSonarCfg = new(true);
 
-    public static IAnalyzerConfiguration AlwaysEnabledWithSonarCfg { get; } = new AlwaysEnabledConfiguration(true);
+    // Force the use of Sonar Cfg in rules that support both Roslyn and Sonar CFGs
+    public bool ForceSonarCfg { get; }
 
-    private sealed class AlwaysEnabledConfiguration : IAnalyzerConfiguration
-    {
-        public bool ForceSonarCfg { get; }
-
-        public AlwaysEnabledConfiguration(bool forceSonarCfg) =>
-            ForceSonarCfg = forceSonarCfg;
-
-        public void Initialize(AnalyzerOptions options)
-        {
-            // Ignore options because we always return true for IsEnabled
-        }
-
-        public bool IsEnabled(string ruleKey) => true;
-    }
+    private AnalyzerConfiguration(bool forceSonarCfg) =>
+        ForceSonarCfg = forceSonarCfg;
 }

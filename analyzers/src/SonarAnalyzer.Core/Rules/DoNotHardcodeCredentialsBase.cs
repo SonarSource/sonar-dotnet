@@ -58,7 +58,7 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
 
     protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
     {
-        var input = new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, rule);
+        var input = new TrackerInput(context, rule);
 
         var oc = Language.Tracker.ObjectCreation;
         oc.Track(

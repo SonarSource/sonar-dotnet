@@ -19,21 +19,12 @@ namespace SonarAnalyzer.Core.Trackers;
 
 public class TrackerInput
 {
-    private readonly IAnalyzerConfiguration configuration;
-
     public DiagnosticDescriptor Rule { get; }
     public SonarAnalysisContext Context { get; }
 
-    public TrackerInput(SonarAnalysisContext context, IAnalyzerConfiguration configuration, DiagnosticDescriptor rule)
+    public TrackerInput(SonarAnalysisContext context, DiagnosticDescriptor rule)
     {
         Context = context;
-        this.configuration = configuration;
         Rule = rule;
-    }
-
-    public bool IsEnabled(AnalyzerOptions options)
-    {
-        configuration.Initialize(options);
-        return configuration.IsEnabled(Rule.Id);
     }
 }

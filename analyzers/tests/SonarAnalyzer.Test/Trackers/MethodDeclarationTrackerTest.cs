@@ -181,7 +181,7 @@ public class MethodDeclarationTrackerTest
         public TestRule_CS() : base("S104") { } // Any existing rule ID
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            Language.Tracker.MethodDeclaration.Track(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
+            Language.Tracker.MethodDeclaration.Track(new TrackerInput(context, Rule));
     }
 
     [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
@@ -193,6 +193,6 @@ public class MethodDeclarationTrackerTest
         public TestRule_VB() : base("S104") { } // Any existing rule ID
 
         protected override void Initialize(SonarAnalysisContext context) =>
-            Language.Tracker.MethodDeclaration.Track(new TrackerInput(context, AnalyzerConfiguration.AlwaysEnabled, Rule));
+            Language.Tracker.MethodDeclaration.Track(new TrackerInput(context, Rule));
     }
 }
