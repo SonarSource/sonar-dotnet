@@ -1,20 +1,103 @@
 <h2>Why is this an issue?</h2>
-<p>Nested ternaries are hard to read and can make the order of operations complex to understand.</p>
+<p>Nested ternary operators are hard to read because the mapping between each condition and its result is not immediately obvious, and the order in
+which the conditions are evaluated is easy to misjudge. Each extra level of nesting increases the effort required to understand which branch produces
+which value.</p>
 <pre>
-public string GetReadableStatus(Job j)
+public string GetAttendanceStatus(Student student)
 {
-  return j.IsRunning ? "Running" : j.HasErrors ? "Failed" : "Succeeded";  // Noncompliant
+    return student.IsPresent ? "Present" : student.HasExcuse ? "Excused" : "Absent";  // Noncompliant
 }
 </pre>
-<p>Instead, use another line to express the nested operation in a separate statement.</p>
+<h3>Exceptions</h3>
+<p>The rule does not flag nested ternary operations inside a lambda expression that is converted to an expression tree
+(<code>Expression&lt;TDelegate&gt;</code>), such as the lambdas passed to <code>IQueryable&lt;T&gt;</code> methods (<code>Select</code>,
+<code>Where</code>, <code>OrderBy</code>, and similar) when using Entity Framework Core, LINQ to SQL, or another query provider.</p>
+<p>None of the usual fixes are available there: a lambda converted to an expression tree cannot have a statement body, so the ternary operation cannot
+be rewritten into an <code>if</code> statement (compiler error CS0834). A <code>switch</code> expression is not an option either, because expression
+trees cannot contain one at all (compiler error CS8514). Extracting the logic into a separate method compiles, but most query providers cannot
+translate a call to a user-defined method, so the query fails at runtime instead. The nested ternary operation is therefore usually the only construct
+that both compiles and translates reliably, typically into a SQL <code>CASE WHEN</code>.</p>
 <pre>
-public string GetReadableStatus(Job j)
+IQueryable&lt;string&gt; query = context.Students
+    .Select(s =&gt; s.IsGraduated ? "Graduated" : s.IsEnrolled ? "Enrolled" : "Withdrawn"); // Compliant: expression tree, translated to a SQL CASE WHEN
+</pre>
+<p>A <code>switch</code> expression or an extracted method can still be used here, but only after the query has been materialized, for example after
+<code>AsEnumerable()</code> or <code>ToList()</code>.</p>
+<h2>How to fix it</h2>
+<p>Extract the nested ternary operation into a separate statement or expression, so that each condition and its result can be read on their own.
+Depending on the situation, this can be achieved by:</p>
+<ul>
+  <li>extracting the outer condition into an <code>if</code> statement</li>
+  <li>replacing the chain of conditions with a <code>switch</code> expression</li>
+  <li>extracting the whole expression into a dedicated, well-named method</li>
+</ul>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public string GetAttendanceStatus(Student student)
 {
-  if (j.IsRunning)
-  {
-    return "Running";
-  }
-  return j.HasErrors ? "Failed" : "Succeeded";
+    return student.IsPresent ? "Present" : student.HasExcuse ? "Excused" : "Absent";  // Noncompliant
 }
 </pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public string GetAttendanceStatus(Student student)
+{
+    if (student.IsPresent)
+    {
+        return "Present";
+    }
+    return student.HasExcuse ? "Excused" : "Absent";
+}
+</pre>
+<p>A <code>switch</code> expression is a good substitute when all conditions test the same expression:</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+public string GetGradeLabel(Student student) =&gt;
+    student.Score &gt;= 90 ? "Excellent" : student.Score &gt;= 70 ? "Good" : "NeedsImprovement"; // Noncompliant
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="2" data-diff-type="compliant">
+public string GetGradeLabel(Student student) =&gt;
+    student.Score switch
+    {
+        &gt;= 90 =&gt; "Excellent",
+        &gt;= 70 =&gt; "Good",
+        _ =&gt; "Needs improvement",
+    };
+</pre>
+<p>When the nested ternary is just one part of a larger statement, extracting it into a well-named method keeps the surrounding code readable:</p>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+public void PrintEnrollmentStatus(Student student)
+{
+    Console.WriteLine($"Status: {(student.IsGraduated ? "Graduated" : student.IsEnrolled ? "Enrolled" : "Withdrawn")}"); // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="3" data-diff-type="compliant">
+public void PrintEnrollmentStatus(Student student)
+{
+    Console.WriteLine($"Status: {GetEnrollmentStatus(student)}");
+}
+
+private static string GetEnrollmentStatus(Student student)
+{
+    if (student.IsGraduated)
+    {
+        return "Graduated";
+    }
+    return student.IsEnrolled ? "Enrolled" : "Withdrawn";
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/switch-expression">switch
+  expression</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/expression-tree-restrictions">Expression tree
+  restrictions</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/querying/client-eval">Client vs. Server Evaluation</a></li>
+</ul>
 
