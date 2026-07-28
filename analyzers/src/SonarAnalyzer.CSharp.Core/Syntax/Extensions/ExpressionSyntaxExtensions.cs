@@ -42,6 +42,19 @@ public static class ExpressionSyntaxExtensions
         public ExpressionSyntax WithoutEnclosingParentheses =>
             (ExpressionSyntax)expression.RemoveParentheses();
 
+        public ExpressionSyntax WithoutNullForgiving
+        {
+            get
+            {
+                var current = expression;
+                while (current is PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression, Operand: { } operand })
+                {
+                    current = operand;
+                }
+                return current;
+            }
+        }
+
         public bool CanBeNull(SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expression).Type is { } expressionType
             && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));
