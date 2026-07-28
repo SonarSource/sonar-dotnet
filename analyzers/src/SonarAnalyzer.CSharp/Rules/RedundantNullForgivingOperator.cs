@@ -50,6 +50,12 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
     // We speculatively check the operand without the "!" to see if it was not null anyway and therefore redundant.
     private static bool IsRedundant(SemanticModel model, PostfixUnaryExpressionSyntax suppression)
     {
+        // An "out" argument is a write, not a read. We cannot tell if the "!" is required.
+        if (suppression.GetFirstNonParenthesizedParent() is ArgumentSyntax { RefOrOutKeyword.RawKind: (int)SyntaxKind.OutKeyword })
+        {
+            return false;
+        }
+
         var typeInfo = model.GetSpeculativeTypeInfo(suppression.Operand.SpanStart, suppression.Operand, SpeculativeBindingOption.BindAsExpression);
         return typeInfo.Nullability().FlowState == NullableFlowState.NotNull && !IsOblivious(model, suppression.Operand) && !HasNestedNullableAnnotation(typeInfo.Type);
     }

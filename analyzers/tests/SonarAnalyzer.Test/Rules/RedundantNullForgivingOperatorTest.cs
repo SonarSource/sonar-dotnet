@@ -257,6 +257,35 @@ public class RedundantNullForgivingOperatorTest
         VerifyLibraryConsumer(annotated: false, consumer, noIssues: true);
     }
 
+    [TestMethod]
+    [DataRow("value!", "", "")]                                       // The "!" is needed: TryGetValue writes into "value", but speculative rebind can only
+    [DataRow("value", "", "// Error [CS8601]")]                       // tell us what a read of it would see — blind to that write, so "!" is never analyzed.
+    [DataRow("value!", "[NotNullWhen(true)] ", "")]                   // Same story with the attribute present: it only governs what callers may
+    [DataRow("value", "[NotNullWhen(true)] ", "// Error [CS8601]")]   // assume after a "true" return, not the write happening inside TryGet.
+    [DataRow("(value!)", "", "")]                                     // Parentheses around the operand must not defeat the check above.
+    public void RedundantNullForgivingOperator_OutArgumentForwarding(string outArgument, string attribute, string assertion)
+    {
+        var code = $$"""
+            #nullable enable
+            using System.Collections.Generic;
+            using System.Diagnostics.CodeAnalysis;
+            public class Sample
+            {
+                private readonly Dictionary<string, object> entries = new();
+                public bool TryGet(string key, {{attribute}}out object value) => entries.TryGetValue(key, out {{outArgument}}); {{assertion}}
+            }
+            """;
+        var verifier = builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet(code);
+        if (string.IsNullOrEmpty(assertion))
+        {
+            verifier.VerifyNoIssues();
+        }
+        else
+        {
+            verifier.Verify();
+        }
+    }
+
     private static string LibrarySnippet(bool annotated) =>
         $$"""
         {{(annotated ? "#nullable enable" : "#nullable disable")}}
