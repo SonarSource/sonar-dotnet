@@ -36,7 +36,7 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
         context.RegisterCompilationStartAction(
             compilationStartContext =>
             {
-                var interfaceImplementers = BuildTypeMap(compilationStartContext.Compilation.GlobalNamespace.GetAllNamedTypes());
+                var interfaceImplementers = BuildTypeMap(compilationStartContext.Compilation.GlobalNamespace.AllNamedTypes);
                 compilationStartContext.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
                     {
                         var type = Language.Syntax.CastType(c.Node);

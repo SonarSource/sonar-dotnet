@@ -75,7 +75,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
             var allMembers = typeSymbol
                 .GetSelfAndBaseTypes()
                 .SelectMany(x => x.GetMembers())
-                .Concat(typeSymbol.ContainingNamespace.GetAllNamedTypes()
+                .Concat(typeSymbol.ContainingNamespace.AllNamedTypes
                 .Where(x => x.IsStatic)
                 .SelectMany(x => x.GetMembers().Prepend(x)))
                 .Select(ResolveName)

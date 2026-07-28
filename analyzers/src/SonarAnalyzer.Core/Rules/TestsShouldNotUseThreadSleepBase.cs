@@ -44,6 +44,5 @@ public abstract class TestsShouldNotUseThreadSleepBase<TMethodSyntax, TSyntaxKin
 
     private bool IsInTestMethod(SyntaxNode node, SemanticModel model) =>
         node.Ancestors().OfType<TMethodSyntax>().FirstOrDefault() is { } method
-        && model.GetDeclaredSymbol(MethodDeclaration(method)) is IMethodSymbol symbol
-        && symbol.IsTestMethod();
+        && model.GetDeclaredSymbol(MethodDeclaration(method)) is IMethodSymbol { IsTestMethod: true };
 }

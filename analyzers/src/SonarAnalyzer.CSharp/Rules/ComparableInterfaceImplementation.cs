@@ -79,7 +79,7 @@ public sealed class ComparableInterfaceImplementation : SonarDiagnosticAnalyzer
 
         var overridenOperators = methods
             .Where(x => x.MethodKind == MethodKind.UserDefinedOperator)
-            .Select(x => x.ComparisonKind());
+            .Select(x => x.ComparisonKind);
 
         foreach (var comparisonKind in ComparisonKinds.Except(overridenOperators))
         {

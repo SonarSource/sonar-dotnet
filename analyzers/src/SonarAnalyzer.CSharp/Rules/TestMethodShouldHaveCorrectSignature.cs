@@ -113,7 +113,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static SignatureValidator GetValidator(IMethodSymbol method) =>
             // Find the first matching attribute type in the table
-            method.FindFirstTestMethodType() is { } attributeKnownType
+            method.FirstTestMethodType is { } attributeKnownType
                 ? AttributeToConstraintsMap.GetValueOrDefault(attributeKnownType)
                 : NullValidator;
 

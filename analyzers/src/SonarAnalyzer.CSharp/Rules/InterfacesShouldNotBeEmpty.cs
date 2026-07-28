@@ -55,7 +55,7 @@ namespace SonarAnalyzer.CSharp.Rules
             IsImplementingInterface(interfaceSymbol) && (IsBoundGeneric(interfaceSymbol) || IsConstraintGeneric(interfaceSymbol));
 
         private static bool IsConstraintGeneric(INamedTypeSymbol interfaceSymbol) =>
-            interfaceSymbol.TypeParameters.Any(x => x.HasAnyConstraint());
+            interfaceSymbol.TypeParameters.Any(x => x.HasAnyConstraint);
 
         private static bool IsBoundGeneric(INamedTypeSymbol interfaceSymbol) =>
             interfaceSymbol.Interfaces.Any(i => i.TypeArguments.Any(a => a is INamedTypeSymbol { IsUnboundGenericType: false }));

@@ -419,7 +419,7 @@ public sealed class RedundantDeclaration : SonarDiagnosticAnalyzer
         // The speculative binding is sometimes unable to do proper overload resolution and returns candidate overloads.
         // This is good enough for us as long as the original method is part of that list. Note: Any attempts with ChangeSyntaxElement and
         // TryGetSpeculativeSemanticModel failed to produce better results.
-        return overloadResolution.AllSymbols().Any(x => x.Equals(methodSymbol));
+        return overloadResolution.AllSymbols.Any(x => x.Equals(methodSymbol));
     }
 
     private static void ReportIssueOnRedundantObjectCreation(SonarSyntaxNodeReportingContext context, SyntaxNode node, string message, RedundancyType redundancyType)

@@ -46,7 +46,7 @@ public sealed class AssertionArgsShouldBePassedInCorrectOrder : SonarDiagnosticA
             {
                 if (c.Node is InvocationExpressionSyntax { ArgumentList.Arguments.Count: >= 2 } invocation
                     && Parameters(invocation.GetName()) is { } knownAssertParameters
-                    && c.Model.GetSymbolInfo(invocation).AllSymbols()
+                    && c.Model.GetSymbolInfo(invocation).AllSymbols
                         .SelectMany(symbol =>
                             symbol is IMethodSymbol { IsStatic: true, ContainingSymbol: INamedTypeSymbol container } methodSymbol
                                 ? knownAssertParameters.Select(knownParameters => FindWrongArguments(c.Model, container, methodSymbol, invocation, knownParameters))

@@ -62,9 +62,8 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     private static void ProcessCodeBlock(SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockContext)
     {
         if (codeBlockContext.CodeBlock is MethodDeclarationSyntax methodDeclaration
-            && codeBlockContext.OwningSymbol is IMethodSymbol methodSymbol
+            && codeBlockContext.OwningSymbol is IMethodSymbol { IsControllerActionMethod: true } methodSymbol
             && methodSymbol.Parameters.Any(RequiresValidation)
-            && methodSymbol.IsControllerActionMethod()
             && !HasActionFilterAttribute(methodSymbol))
         {
             var isModelValidated = false;

@@ -507,12 +507,11 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
         private static bool IsRemovableMethod(IMethodSymbol methodSymbol) =>
             IsRemovableMember(methodSymbol)
-            && (methodSymbol.MethodKind is MethodKind.Ordinary or MethodKind.Constructor or MethodKindEx.LocalFunction)
+            && methodSymbol is { MethodKind: MethodKind.Ordinary or MethodKind.Constructor or MethodKindEx.LocalFunction, IsMefConstructor: false }
             && !methodSymbol.IsMainMethod()
             && !methodSymbol.IsEventHandler() // Event handlers could be added in XAML and no method reference will be generated in the .g.cs file.
             && !methodSymbol.IsSerializationConstructor()
-            && !methodSymbol.IsRecordPrintMembers()
-            && !methodSymbol.IsMefConstructor();
+            && !methodSymbol.IsRecordPrintMembers();
 
         private static bool IsRemovable(ISymbol symbol) =>
             symbol is { IsImplicitlyDeclared: false, IsVirtual: false, OverriddenMember: null, IsSerializableMember: false }

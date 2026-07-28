@@ -112,7 +112,7 @@ namespace SonarAnalyzer.CSharp.Rules
                                              + $"'{typeSymbol.Name}' or mark the type as 'sealed'.");
                     }
 
-                    var destructor = FindMethodImplementationOrAbstractDeclaration(typeSymbol, x => x.IsDestructor(), typeDeclarationSyntax)
+                    var destructor = FindMethodImplementationOrAbstractDeclaration(typeSymbol, x => x.IsDestructor, typeDeclarationSyntax)
                         .OfType<DestructorDeclarationSyntax>()
                         .FirstOrDefault();
 

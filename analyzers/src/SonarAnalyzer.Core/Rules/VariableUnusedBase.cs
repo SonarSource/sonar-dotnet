@@ -68,7 +68,7 @@ public abstract class VariableUnusedBase<TSyntaxKind> : SonarDiagnosticAnalyzer<
         {
             if (Language.Syntax.NodeIdentifier(id) is { ValueText: var idText } && declaredLocalNames.Contains(idText))
             {
-                usedLocals.UnionWith(c.Model.GetSymbolInfo(id).AllSymbols());
+                usedLocals.UnionWith(c.Model.GetSymbolInfo(id).AllSymbols);
             }
         }
         foreach (var unused in declaredLocals.Except(usedLocals))

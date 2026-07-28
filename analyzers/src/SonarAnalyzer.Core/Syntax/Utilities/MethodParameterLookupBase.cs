@@ -40,7 +40,7 @@ public abstract class MethodParameterLookupBase<TArgumentSyntax> : IMethodParame
     private ImmutableArray<IMethodSymbol> MethodSymbolOrCandidates { get; }
 
     protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, SymbolInfo? methodSymbolInfo)
-        : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol, methodSymbolInfo?.AllSymbols().OfType<IMethodSymbol>()) { }
+        : this(argumentList, methodSymbolInfo?.Symbol as IMethodSymbol, methodSymbolInfo?.AllSymbols.OfType<IMethodSymbol>()) { }
 
     protected MethodParameterLookupBase(SeparatedSyntaxList<TArgumentSyntax> argumentList, IMethodSymbol methodSymbol)
         : this(argumentList, methodSymbol, [methodSymbol]) { }

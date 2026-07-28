@@ -125,7 +125,7 @@ public class ITypeSymbolExtensionsTest
                 IEnumerator<string> IEnumerable<string>.GetEnumerator() => null;
             }
             """).Model.Compilation;
-        var allTypes = compilation.GlobalNamespace.GetAllNamedTypes().ToList();
+        var allTypes = compilation.GlobalNamespace.AllNamedTypes.ToList();
         var intList = allTypes.Single(x => x.Name == "IntList");
         allTypes.Add(intList.BaseType);
         allTypes.AddRange(intList.AllInterfaces);

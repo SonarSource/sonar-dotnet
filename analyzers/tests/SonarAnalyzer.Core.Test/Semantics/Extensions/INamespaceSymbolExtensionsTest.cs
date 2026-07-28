@@ -107,7 +107,7 @@ public class INamespaceSymbolExtensionsTest
 
     [TestMethod]
     public void GetAllNamedTypesForNamespace_WhenSymbolIsNull_ReturnsEmpty() =>
-        ((INamespaceSymbol)null).GetAllNamedTypes().Should().BeEmpty();
+        ((INamespaceSymbol)null).AllNamedTypes.Should().BeEmpty();
 
     [TestMethod]
     public void Symbol_GetSelfAndBaseTypes()
@@ -164,6 +164,6 @@ public class INamespaceSymbolExtensionsTest
             """);
         var nsSymbol = snippet.NamespaceSymbol("NS");
 
-        nsSymbol.GetAllNamedTypes().Should().HaveCount(5);
+        nsSymbol.AllNamedTypes.Should().HaveCount(5);
     }
 }

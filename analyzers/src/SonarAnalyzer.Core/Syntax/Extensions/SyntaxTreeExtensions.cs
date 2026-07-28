@@ -20,12 +20,25 @@ using Roslyn.Utilities;
 
 namespace SonarAnalyzer.Core.Syntax.Extensions;
 
-internal static class SyntaxTreeExtensions
+public static class SyntaxTreeExtensions
 {
     private static readonly ConditionalWeakTable<SyntaxTree, object> GeneratedCodeCache = new();
 
     extension(SyntaxTree tree)
     {
+        public SemanticModel SemanticModelOrDefault(SemanticModel model)
+        {
+            // See https://github.com/dotnet/roslyn/issues/18730
+            if (tree == model.SyntaxTree)
+            {
+                return model;
+            }
+
+            return model.Compilation.ContainsSyntaxTree(tree)
+                ? model.Compilation.GetSemanticModel(tree)
+                : null;
+        }
+
         public string OriginalFilePath =>
             // Currently we support only C# based generated files.
             tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum

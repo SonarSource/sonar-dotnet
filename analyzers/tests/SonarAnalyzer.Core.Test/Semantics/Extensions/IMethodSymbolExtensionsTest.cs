@@ -266,21 +266,21 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
-        compilation.TypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.MethodSymbol("Foo.ProtectedFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.InternalFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.PrivateFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.StaticFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.VirtualFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.MethodSymbol("Foo.AbstractFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.MethodSymbol("Foo.InFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.OutFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.ReadonlyRefFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.RefFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.GenericFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.InnerFoo").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+        compilation.TypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod.Should().BeTrue();
+        compilation.MethodSymbol("Foo.ProtectedFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.InternalFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.PrivateFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.StaticFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.VirtualFoo").IsControllerActionMethod.Should().BeTrue();
+        compilation.MethodSymbol("Foo.AbstractFoo").IsControllerActionMethod.Should().BeTrue();
+        compilation.MethodSymbol("Foo.InFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.OutFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.ReadonlyRefFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.RefFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.GenericFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.InnerFoo").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod.Should().BeFalse();
     }
 
     [TestMethod]
@@ -305,10 +305,10 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, NuGetMetadataReference.MicrosoftAspNetMvc(aspNetMvcVersion));
-        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.MethodSymbol("Controller.PublicBar").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("MyController.PublicDiz").IsControllerActionMethod().Should().BeFalse();
-        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod.Should().BeTrue();
+        compilation.MethodSymbol("Controller.PublicBar").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("MyController.PublicDiz").IsControllerActionMethod.Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod.Should().BeFalse();
     }
 
     [TestMethod]
@@ -326,8 +326,8 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
-        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeTrue();
-        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod.Should().BeTrue();
+        compilation.MethodSymbol("Foo.PublicNonAction").IsControllerActionMethod.Should().BeFalse();
     }
 
     [TestMethod]
@@ -343,7 +343,7 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
-        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod().Should().BeFalse();
+        compilation.MethodSymbol("Foo.PublicFoo").IsControllerActionMethod.Should().BeFalse();
     }
 
     [TestMethod]
@@ -359,7 +359,7 @@ public class IMethodSymbolExtensionsTest
             }
             """;
         var compilation = new SnippetCompiler(code, MetadataReferenceFacade.NetStandard.Union(NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(aspNetMvcVersion)));
-        compilation.TypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod().Should().BeFalse();
+        compilation.TypeByMetadataName("Foo").Constructors[0].IsControllerActionMethod.Should().BeFalse();
     }
 
     [TestMethod]

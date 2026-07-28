@@ -19,19 +19,9 @@ namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 public static class SemanticModelExtensions
 {
-    public static bool IsExtensionMethod(this SemanticModel model, SyntaxNode expression) =>
-        model.GetSymbolInfo(expression).Symbol is IMethodSymbol memberSymbol && memberSymbol.IsExtensionMethod;
-
-    public static SemanticModel SemanticModelOrDefault(this SyntaxTree tree, SemanticModel model)
+    extension(SemanticModel model)
     {
-        // See https://github.com/dotnet/roslyn/issues/18730
-        if (tree == model.SyntaxTree)
-        {
-            return model;
-        }
-
-        return model.Compilation.ContainsSyntaxTree(tree)
-            ? model.Compilation.GetSemanticModel(tree)
-            : null;
+        public bool IsExtensionMethod(SyntaxNode expression) =>
+            model.GetSymbolInfo(expression).Symbol is IMethodSymbol { IsExtensionMethod: true };
     }
 }

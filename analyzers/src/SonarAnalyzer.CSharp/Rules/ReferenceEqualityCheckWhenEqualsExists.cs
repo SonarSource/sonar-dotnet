@@ -47,7 +47,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     var allInterfacesWithImplementationsOverriddenEquals =
                         compilationStartContext.Compilation.GlobalNamespace
-                            .GetAllNamedTypes()
+                            .AllNamedTypes
                             .Where(t => t.AllInterfaces.Any() && HasEqualsOverride(t))
                             .SelectMany(t => t.AllInterfaces)
                             .ToHashSet();

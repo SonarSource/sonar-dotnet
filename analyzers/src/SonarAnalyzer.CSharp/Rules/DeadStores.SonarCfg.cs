@@ -149,7 +149,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 private bool IsUnusedLocal(ISymbol declaredSymbol) =>
                     node.DescendantNodes()
                         .OfType<IdentifierNameSyntax>()
-                        .SelectMany(x => Model.GetSymbolInfo(x).AllSymbols())
+                        .SelectMany(x => Model.GetSymbolInfo(x).AllSymbols)
                         .All(x => !x.Equals(declaredSymbol));
 
                 private void ProcessPrefixExpression(SyntaxNode instruction)
