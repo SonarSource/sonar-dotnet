@@ -530,6 +530,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new("System.Runtime.CompilerServices.CallerMemberNameAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_InternalsVisibleToAttribute = new("System.Runtime.CompilerServices.InternalsVisibleToAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_ModuleInitializerAttribute = new("System.Runtime.CompilerServices.ModuleInitializerAttribute");
+    public static readonly KnownType System_Runtime_CompilerServices_INotifyCompletion = new("System.Runtime.CompilerServices.INotifyCompletion");
     public static readonly KnownType System_Runtime_CompilerServices_ValueTaskAwaiter = new("System.Runtime.CompilerServices.ValueTaskAwaiter");
     public static readonly KnownType System_Runtime_CompilerServices_ValueTaskAwaiter_TResult = new("System.Runtime.CompilerServices.ValueTaskAwaiter", "TResult");
     public static readonly KnownType System_Runtime_CompilerServices_TaskAwaiter = new("System.Runtime.CompilerServices.TaskAwaiter");

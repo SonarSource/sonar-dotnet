@@ -126,11 +126,51 @@ namespace Tests.Diagnostics
     {
         public Awaitable GetAwaiter() => this;
 
+        public void GetResult() { }         // Compliant - awaiter members are duck-typed and treated like interface implementations. https://sonarsource.atlassian.net/browse/NET-2935
+        public bool IsCompleted => !true;
+        public void OnCompleted(Action continuation) { }
+    }
+
+    // Community-reported shape: readonly struct awaiter using ICriticalNotifyCompletion.
+    public readonly struct CriticalAwaiter : ICriticalNotifyCompletion
+    {
+        public CriticalAwaiter GetAwaiter() => this;
+        public void GetResult() { }         // Compliant - awaiter member
+        public bool IsCompleted => true;
+        public void OnCompleted(Action continuation) { }
+        public void UnsafeOnCompleted(Action continuation) { }
+    }
+
+    // A class that is not an awaiter (no IsCompleted / OnCompleted) is still flagged for an empty GetResult.
+    public class NotAnAwaiter
+    {
         public void GetResult()
         {
             throw new NotSupportedException();
-        }         // Fixed
-        public bool IsCompleted => !true;
+        } // Fixed
+    }
+
+    // A static GetResult is not the duck-typed instance awaiter member, so it is still flagged.
+    public class AwaiterWithStaticGetResult : INotifyCompletion
+    {
+        public AwaiterWithStaticGetResult GetAwaiter() => this;
+        public static void GetResult()
+        {
+            throw new NotSupportedException();
+        } // Fixed
+        public bool IsCompleted => true;
         public void OnCompleted(Action continuation) { }
+    }
+
+    // Looks like an awaiter by shape but does not implement INotifyCompletion, so it is not a usable
+    // awaiter (CS4027) and the empty GetResult is still flagged.
+    public class AwaiterShapeWithoutInterface
+    {
+        public bool IsCompleted => true;
+        public void GetResult()
+        {
+            throw new NotSupportedException();
+        } // Fixed
+        public void OnCompleted(Action continuation) => throw new NotImplementedException();
     }
 }

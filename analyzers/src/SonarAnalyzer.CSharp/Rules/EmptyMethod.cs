@@ -15,48 +15,56 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
+    internal static readonly HashSet<SyntaxKind> SupportedSyntaxKinds =
+    [
+        SyntaxKind.MethodDeclaration,
+        SyntaxKindEx.LocalFunctionStatement,
+        SyntaxKind.SetAccessorDeclaration,
+        SyntaxKindEx.InitAccessorDeclaration
+    ];
+
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+
+    protected override HashSet<SyntaxKind> SyntaxKinds => SupportedSyntaxKinds;
+
+    protected override void CheckMethod(SonarSyntaxNodeReportingContext context)
     {
-        internal static readonly HashSet<SyntaxKind> SupportedSyntaxKinds =
-        [
-            SyntaxKind.MethodDeclaration,
-            SyntaxKindEx.LocalFunctionStatement,
-            SyntaxKind.SetAccessorDeclaration,
-            SyntaxKindEx.InitAccessorDeclaration
-        ];
-
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
-
-        protected override HashSet<SyntaxKind> SyntaxKinds => SupportedSyntaxKinds;
-
-        protected override void CheckMethod(SonarSyntaxNodeReportingContext context)
+        // No need to check for ExpressionBody as arrowed methods can't be empty
+        if (context.Node.GetBody() is { } body
+            && body.IsEmpty()
+            && !ShouldBeExcluded(context, context.Node, context.Node.GetModifiers()))
         {
-            // No need to check for ExpressionBody as arrowed methods can't be empty
-            if (context.Node.GetBody() is { } body
-                && body.IsEmpty()
-                && !ShouldBeExcluded(context, context.Node, context.Node.GetModifiers()))
-            {
-                context.ReportIssue(Rule, ReportingToken(context.Node));
-            }
+            context.ReportIssue(Rule, ReportingToken(context.Node));
         }
-
-        private static bool ShouldBeExcluded(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxTokenList modifiers) =>
-            modifiers.Any(SyntaxKind.VirtualKeyword) // This quick check only works for methods, for accessors we need to check the symbol
-            || (context.Model.GetDeclaredSymbol(node) is IMethodSymbol symbol
-                && (symbol is { IsVirtual: true }
-                    || symbol is { IsOverride: true, OverriddenMethod.IsAbstract: true }
-                    || !symbol.ExplicitOrImplicitInterfaceImplementations().IsEmpty))
-            || (modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());
-
-        private static SyntaxToken ReportingToken(SyntaxNode node) =>
-            node switch
-            {
-                MethodDeclarationSyntax method => method.Identifier,
-                AccessorDeclarationSyntax accessor => accessor.Keyword,
-                _ => ((LocalFunctionStatementSyntaxWrapper)node).Identifier
-            };
     }
+
+    private static bool ShouldBeExcluded(SonarSyntaxNodeReportingContext context, SyntaxNode node, SyntaxTokenList modifiers) =>
+        modifiers.Any(SyntaxKind.VirtualKeyword) // This quick check only works for methods, for accessors we need to check the symbol
+        || (context.Model.GetDeclaredSymbol(node) is IMethodSymbol symbol
+            && (symbol is { IsVirtual: true }
+                || symbol is { IsOverride: true, OverriddenMethod.IsAbstract: true }
+                || !symbol.ExplicitOrImplicitInterfaceImplementations().IsEmpty
+                || IsAwaiterGetResult(symbol)))
+        || (modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());
+
+    // An awaitable type must have a GetAwaiter() method that returns a type that has an IsCompleted property, a GetResult() method, and implements INotifyCompletion.
+    // GetResult() is required for this implementation and should not raise.
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12992-awaitable-expressions
+    private static bool IsAwaiterGetResult(IMethodSymbol symbol) =>
+        symbol is { IsStatic: false, Parameters.IsEmpty: true, Arity: 0 }
+        && symbol.Name == WellKnownMemberNames.GetResult
+        && symbol.ContainingType.Implements(KnownType.System_Runtime_CompilerServices_INotifyCompletion);
+
+    private static SyntaxToken ReportingToken(SyntaxNode node) =>
+        node switch
+        {
+            MethodDeclarationSyntax method => method.Identifier,
+            AccessorDeclarationSyntax accessor => accessor.Keyword,
+            _ => ((LocalFunctionStatementSyntaxWrapper)node).Identifier
+        };
 }
