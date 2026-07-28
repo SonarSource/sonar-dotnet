@@ -91,19 +91,21 @@ public class EqualityOnFloatingPoint
         //      ^^^^^^
         _ = nf?.Equals(3.14F);          // Noncompliant
         _ = nd?.Equals(d).ToString();   // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
-        _ = nd?.Equals(double.NaN);     // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = nd?.Equals(double.NaN);     // Compliant NaN check via Equals correctly detects NaN, unlike ==
         _ = nd?.Equals(0.0);            // Compliant zero is exactly representable
         _ = nd.Value.Equals(d);         // Noncompliant - .Value is a double
         _ = nd.Equals(d);               // Compliant (FN): Nullable<double>.Equals(object) is not a floating point Equals overload
     }
 
+    // https://sonarsource.atlassian.net/browse/NET-4205
     void EqualsMethod_SpecialMembers(double d, float f)
     {
-        _ = d.Equals(double.NaN);               // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
-        _ = double.NaN.Equals(d);               // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+        _ = d.Equals(double.NaN);               // Compliant NaN check via Equals correctly detects NaN, unlike ==
+        _ = double.NaN.Equals(d);               // Compliant reversed operands
+        // Infinities are still reported: unlike NaN, Equals and == behave identically for them (infinity is exactly representable), so this stays a readability nudge.
         _ = d.Equals(double.PositiveInfinity);  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsPositiveInfinity()' instead.}}
         _ = d.Equals(double.NegativeInfinity);  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNegativeInfinity()' instead.}}
-        _ = f.Equals(float.NaN);                // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsNaN()' instead.}}
+        _ = f.Equals(float.NaN);                // Compliant float equivalent
         _ = f.Equals(float.PositiveInfinity);   // Noncompliant {{Do not check floating point equality with exact values, use 'float.IsPositiveInfinity()' instead.}}
     }
 }
@@ -229,12 +231,21 @@ namespace TestWithUsingStatic
             _ = NaN == NaN;        // Noncompliant {{Do not check floating point equality with exact values, use 'IsNaN()' instead.}}
             _ = NaN == float.NaN;  // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
             _ = double.NaN == NaN; // Noncompliant {{Do not check floating point equality with exact values, use 'double.IsNaN()' instead.}}
+            _ = d.Equals(NaN);     // Compliant bare NaN identifier via using static, still a valid Equals-based NaN check
+            _ = NaN.Equals(d);     // Compliant reversed operands
         }
 
         public void WithLocalVar(double d)
         {
             var NaN = 5;
-            _ = d == NaN;   // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+            _ = d == NaN;        // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}}
+            _ = d.Equals(NaN);   // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}} - NaN here is an int local, not the constant
+        }
+
+        public void WithLocalVarSameType(double d)
+        {
+            double NaN = 5.0;
+            _ = d.Equals(NaN);   // Noncompliant {{Do not check floating point equality with exact values, use a range instead.}} - NaN here is a double local, not the constant
         }
     }
 }

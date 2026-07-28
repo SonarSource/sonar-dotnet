@@ -58,10 +58,10 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
             && name.GetName() == nameof(object.Equals)
             && invocation.ArgumentList.Arguments.Count == 1
             && invocation.ArgumentList.Arguments[0].Expression is { } argument
-            && context.Model.GetSymbolInfo(invocation).Symbol is IMethodSymbol { ContainingType: { } container, Parameters: { Length: 1 } parameters }
-            && IsFloatingPointType(container)               // The Equals method is defined on a floating point type (double/float/Half/nfloat)
-            && IsFloatingPointType(parameters[0].Type)      // Excludes the Equals(object) overload, avoiding FPs like d.Equals("x")
-            && ExactValueComparisonMessage(context, EqualsReceiver(invocation) ?? argument, argument) is { } proposed)
+            && IsFloatingPointEqualsOverload(context, invocation)
+            && (EqualsReceiver(invocation) ?? argument) is { } first
+            && !IsEitherNaNConstant(context, first, argument)
+            && ExactValueComparisonMessage(context, first, argument) is { } proposed)
         {
             context.ReportIssue(Rule, name, MessageEqualityPart(true), proposed);
         }
@@ -81,6 +81,20 @@ public sealed class EqualityOnFloatingPoint : SonarDiagnosticAnalyzer
         invocation.Expression is MemberAccessExpressionSyntax memberAccess
             ? memberAccess.Expression
             : invocation.GetParentConditionalAccessExpression()?.Expression;
+
+    // Excludes the Equals(object) overload, avoiding FPs like d.Equals("x").
+    private static bool IsFloatingPointEqualsOverload(SonarSyntaxNodeReportingContext context, InvocationExpressionSyntax invocation) =>
+        context.Model.GetSymbolInfo(invocation, context.Cancel).Symbol is IMethodSymbol { ContainingType: { } container, Parameters: { Length: 1 } parameters }
+        && IsFloatingPointType(container)
+        && IsFloatingPointType(parameters[0].Type);
+
+    private static bool IsEitherNaNConstant(SonarSyntaxNodeReportingContext context, ExpressionSyntax first, ExpressionSyntax second) =>
+        IsNaNConstant(context, first) || IsNaNConstant(context, second);
+
+    private static bool IsNaNConstant(SonarSyntaxNodeReportingContext context, ExpressionSyntax expression) =>
+        expression.GetName() == nameof(double.NaN)
+        && context.Model.GetSymbolInfo(expression, context.Cancel).Symbol is { ContainingType: { } type }
+        && IsFloatingPointType(type);
 
     private static void CheckLogicalExpression(SonarSyntaxNodeReportingContext context)
     {

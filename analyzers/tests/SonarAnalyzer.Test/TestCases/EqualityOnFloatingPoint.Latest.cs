@@ -33,8 +33,12 @@ public class EqualityOnFloatingPoint
     bool NFloatEqualsMethod(NFloat first, NFloat second) =>
         first.Equals(second);   // Noncompliant
 
+    // https://sonarsource.atlassian.net/browse/NET-4205
     bool HalfEqualsNaN(Half h) =>
-        h.Equals(Half.NaN);     // Noncompliant {{Do not check floating point equality with exact values, use 'Half.IsNaN()' instead.}}
+        h.Equals(Half.NaN);     // Compliant NaN check via Equals correctly detects NaN, unlike ==
+
+    bool NFloatEqualsNaN(NFloat nf) =>
+        nf.Equals(NFloat.NaN);  // Compliant NaN check via Equals correctly detects NaN, unlike ==
 
     // Generic .Equals resolves to IEquatable<T>.Equals, whose containing type is the interface (not a floating point type), so it is not detected.
     bool GenericEqualsMethod<T>(T first, T second) where T : IFloatingPointIeee754<T> =>
