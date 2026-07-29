@@ -124,13 +124,14 @@ public static class ExpressionSyntaxExtensions
         /// <summary>
         /// Returns the expression, representing the left side of the dot. This is useful for finding the expression of an invoked expression. <br/>
         /// For the expression of the invocation <c>M()</c> in the expression <c>this.A.B.M()</c> the member access <c>this.A.B</c> is returned and <br/>
-        /// for <c>this.A?.B?.M()</c> the member binding <c>.B</c> is returned.
+        /// for <c>this.A?.B?.M()</c> the member binding <c>.B</c> is returned. <br/>
+        /// A null-forgiving operator is stripped, both from the input and from the result.
         /// </summary>
         public ExpressionSyntax LeftOfDot =>
-            expression switch
+            expression.WithoutNullForgiving switch
             {
-                MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Expression,
-                MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetParentConditionalAccessExpression()?.Expression,
+                MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Expression.WithoutNullForgiving,
+                MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.GetParentConditionalAccessExpression()?.Expression.WithoutNullForgiving,
                 _ => null,
             };
 

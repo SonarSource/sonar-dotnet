@@ -57,8 +57,9 @@ public static class TestCompiler
     public static NodeAndModel<T> NodeBetweenMarkersCS<T>(string snippet,
                                                           bool getInnermostNodeForTie = false,
                                                           MetadataReference[] additionalReferences = null,
-                                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode =>
-        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, additionalReferences, outputKind);
+                                                          OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                          bool ignoreErrors = false) where T : SyntaxNode =>
+        NodeBetweenMarkers<T>(snippet, AnalyzerLanguage.CSharp, getInnermostNodeForTie, additionalReferences, outputKind, ignoreErrors);
 
     public static NodeAndModel<CS.CSharpSyntaxNode> NodeBetweenMarkersCS(string snippet,
                                                                          bool getInnermostNodeForTie = false,
@@ -169,13 +170,14 @@ public static class TestCompiler
                                                          AnalyzerLanguage language,
                                                          bool getInnermostNodeForTie = false,
                                                          MetadataReference[] additionalReferences = null,
-                                                         OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary) where T : SyntaxNode
+                                                         OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+                                                         bool ignoreErrors = false) where T : SyntaxNode
     {
         var position = snippet.IndexOf("$$");
         var lastPosition = snippet.LastIndexOf("$$");
         var length = lastPosition == position ? 0 : lastPosition - position - "$$".Length;
         snippet = snippet.Replace("$$", string.Empty);
-        var (tree, model) = Compile(snippet, ignoreErrors: false, language, additionalReferences, outputKind: outputKind);
+        var (tree, model) = Compile(snippet, ignoreErrors, language, additionalReferences, outputKind: outputKind);
         var node = (T)tree.GetRoot().FindNode(new TextSpan(position, length), getInnermostNodeForTie: getInnermostNodeForTie);
         return new(node, model);
     }

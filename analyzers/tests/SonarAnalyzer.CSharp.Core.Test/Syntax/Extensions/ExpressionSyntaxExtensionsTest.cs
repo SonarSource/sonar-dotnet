@@ -114,6 +114,26 @@ public class ExpressionSyntaxExtensionsTest
     public void IsDefaultLiteral_Null() =>
         ((ExpressionSyntax)null).IsDefaultLiteral.Should().BeFalse();
 
+    [TestMethod]
+    [DataRow("$$a.b.c$$();", "a.b")]
+    [DataRow("$$a.b$$();", "a")]
+    [DataRow("$$a.b().c$$();", "a.b()")]
+    [DataRow("$$a$$();", null)]
+    [DataRow("a?$$.b$$();", "a")]
+    [DataRow("a?.b?$$.c$$();", ".b")]
+    [DataRow("$$a!.b$$();", "a")]
+    [DataRow("$$a!!.b$$();", "a")]
+    [DataRow("$$a.b()!.c$$();", "a.b()")]
+    [DataRow("a?$$.b!.c$$();", ".b")]
+    [DataRow("a!?$$.b$$();", "a")]
+    [DataRow("$$a!$$();", null)]
+    [DataRow("$$a.b!$$();", "a")]
+    public void LeftOfDot(string expression, string expected)
+    {
+        var node = TestCompiler.NodeBetweenMarkersCS<ExpressionSyntax>(expression, ignoreErrors: true).Node;
+        (node.LeftOfDot?.ToString()).Should().Be(expected);
+    }
+
     private static (ExpressionSyntax Expression, SemanticModel Model) Compile(string code)
     {
         var tree = CSharpSyntaxTree.ParseText(code);
