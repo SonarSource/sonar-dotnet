@@ -268,7 +268,7 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/8995
         public void  Dynamic(dynamic bag) // The behavior of a dynamic object can be anything with respect to all kinds of accesses. See ViewBag below for a non-throwing implementation of an DynamicObject
         {
-            if (bag.Flag == true) // Noncompliant FP: At runtime bag.Flag will return null if a "ViewBag" is passed.
+            if (bag.Flag == true) // Compliant: At runtime bag.Flag will return null if a "ViewBag" is passed.
                                   // if (null == true) can be evaluated at runtime, but
                                   // if (null) not
             { }
@@ -288,7 +288,13 @@ namespace Tests.Diagnostics
         // https://github.com/SonarSource/sonar-dotnet/issues/8995
         public void NullableStruct(YesNo? yesNo)
         {
-            if (yesNo == true) // Noncompliant FP: if (yesNo) does not compile CS0266: Cannot implicitly convert type 'YesNo?' to 'bool'.
+            if (yesNo == true) // Compliant: if (yesNo) does not compile CS0266: Cannot implicitly convert type 'YesNo?' to 'bool'.
+            { }
+        }
+
+        public void NonNullableStruct(YesNo yesNo)
+        {
+            if (yesNo == true) // Noncompliant: if (yesNo) compiles fine, the comparison is redundant
             { }
         }
 
