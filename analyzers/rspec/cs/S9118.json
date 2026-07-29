@@ -1,0 +1,26 @@
+{
+  "title": "Default values should be compatible with their entity property type",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "entity-framework-core",
+    "entity-framework",
+    "database",
+    "orm"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-9118",
+  "sqKey": "S9118",
+  "scope": "Main",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "MEDIUM"
+    },
+    "attribute": "LOGICAL"
+  }
+}
