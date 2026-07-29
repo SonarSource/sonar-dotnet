@@ -172,8 +172,7 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
                 && IsNotLeftSideOfAssignment(memberAccessExpressionSyntax)
                 && c.Model.GetSymbolInfo(identifierSyntax).Symbol is { } identifierSymbol
                 && identifierSymbol.Equals(declaredSymbol.Value)
-                && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { } symbol
-                && !symbol.GetSymbolType().IsRefStruct)
+                && c.Model.GetSymbolInfo(memberAccessExpressionSyntax.Name).Symbol is { SymbolType.IsRefStruct: false } symbol)
             {
                 var usageStats = accessedProperties.GetOrAdd(symbol, _ => new UsageStats());
 

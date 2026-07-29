@@ -232,7 +232,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 var mostGeneralType = FindMostGeneralType();
 
-                return Equals(mostGeneralType, parameterSymbol.Type) || IsIgnoredBaseType(mostGeneralType.GetSymbolType())
+                return Equals(mostGeneralType, parameterSymbol.Type) || IsIgnoredBaseType(mostGeneralType.SymbolType)
                     ? null
                     : Diagnostic.Create(Rule, parameterSymbol.Locations.First(), mostGeneralType.ToDisplayString(), parameterSymbol.Type.ToDisplayString());
             }

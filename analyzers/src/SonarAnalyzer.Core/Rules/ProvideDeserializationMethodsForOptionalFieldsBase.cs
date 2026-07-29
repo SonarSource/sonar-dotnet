@@ -43,7 +43,7 @@ namespace SonarAnalyzer.Core.Rules
                 c =>
                 {
                     var symbol = (INamedTypeSymbol)c.Symbol;
-                    if (!symbol.IsClassOrStruct())
+                    if (!symbol.IsClassOrStruct)
                     {
                         return;
                     }

@@ -44,7 +44,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var expressionToTypeCheck = leftIsNull ? equalsExpression.Right : equalsExpression.Left;
                     if (c.Model.GetTypeInfo(expressionToTypeCheck).Type is ITypeParameterSymbol { HasReferenceTypeConstraint: false } typeInfo
                         && !typeInfo.ConstraintTypes.OfType<IErrorTypeSymbol>().Any()
-                        && !typeInfo.ConstraintTypes.Any(typeSymbol => typeSymbol.IsReferenceType && typeSymbol.IsClass()))
+                        && !typeInfo.ConstraintTypes.Any(typeSymbol => typeSymbol is { IsReferenceType: true, IsClass: true }))
                     {
                         var expressionToReportOn = leftIsNull ? equalsExpression.Left : equalsExpression.Right;
 

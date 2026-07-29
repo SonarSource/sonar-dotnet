@@ -91,7 +91,7 @@ namespace SonarAnalyzer.CSharp.Rules
             type is null || type.IsAny(AllowedTypes) || HasAllowedBaseType(type);
 
         private static bool HasAllowedBaseType(ITypeSymbol type) =>
-            type.GetSelfAndBaseTypes().Any(t => t.IsAny(AllowedTypesWithAllDerived));
+            type.SelfAndBaseTypes.Any(t => t.IsAny(AllowedTypesWithAllDerived));
 
         private static bool IsBinaryCandidateForReporting(BinaryExpressionSyntax binary, SemanticModel semanticModel) =>
             semanticModel.GetSymbolInfo(binary).Symbol is IMethodSymbol equalitySymbol
@@ -105,7 +105,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             var candidateEqualsMethods = new HashSet<IMethodSymbol>();
 
-            foreach (var currentType in type.GetSelfAndBaseTypes().TakeWhile(tp => !tp.Is(KnownType.System_Object)))
+            foreach (var currentType in type.SelfAndBaseTypes.TakeWhile(tp => !tp.Is(KnownType.System_Object)))
             {
                 candidateEqualsMethods.UnionWith(currentType
                     .GetMembers(EqualsName)

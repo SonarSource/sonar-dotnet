@@ -261,7 +261,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     .Where(x => typeDeclarationSyntax.Contains(x) && (x.HasBodyOrExpressionBody || x.Modifiers.AnyOfKind(SyntaxKind.AbstractKeyword)));
 
             private static bool HasVirtualDisposeBool(ITypeSymbol typeSymbol) =>
-                typeSymbol.GetSelfAndBaseTypes()
+                typeSymbol.SelfAndBaseTypes
                           .SelectMany(type => type.GetMembers())
                           .OfType<IMethodSymbol>()
                           .Where(IsDisposeBool)

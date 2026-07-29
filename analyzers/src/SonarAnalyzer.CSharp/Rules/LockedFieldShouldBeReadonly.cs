@@ -67,7 +67,7 @@ public sealed class LockedFieldShouldBeReadonly : SonarDiagnosticAnalyzer
 
     private static bool IsOfTypeString(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
         expression?.Kind() is SyntaxKind.StringLiteralExpression or SyntaxKind.InterpolatedStringExpression
-        || lazySymbol.Value.GetSymbolType().Is(KnownType.System_String);
+        || lazySymbol.Value.SymbolType.Is(KnownType.System_String);
 
     private static IFieldSymbol FieldWritable(ExpressionSyntax expression, Lazy<ISymbol> lazySymbol) =>
         expression?.Kind() is SyntaxKind.IdentifierName or SyntaxKind.SimpleMemberAccessExpression

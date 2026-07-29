@@ -76,7 +76,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             private static List<IMethodSymbol> GetAllBaseMethods(ITypeSymbol typeSymbol) =>
                 typeSymbol.BaseType
-                    .GetSelfAndBaseTypes()
+                    .SelfAndBaseTypes
                     .SelectMany(t => t.GetMembers())
                     .OfType<IMethodSymbol>()
                     .Where(m => IsSymbolVisibleFromNamespace(m, typeSymbol.ContainingNamespace))

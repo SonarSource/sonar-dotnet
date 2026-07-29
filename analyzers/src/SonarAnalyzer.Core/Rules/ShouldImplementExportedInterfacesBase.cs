@@ -62,7 +62,7 @@ namespace SonarAnalyzer.Core.Rules
                         return;
                     }
 
-                    var action = exportedType.IsInterface()
+                    var action = exportedType.IsInterface
                                      ? ActionForInterface
                                      : ActionForClass;
 
@@ -77,7 +77,7 @@ namespace SonarAnalyzer.Core.Rules
 
         private static bool IsOfExportType(ITypeSymbol type, INamedTypeSymbol exportedType) =>
             type is INamedTypeSymbol namedType
-            && namedType.SelfBaseTypesAndInterfaces()
+            && namedType.SelfBaseTypesAndInterfaces
                 .Any(currentType =>
                          exportedType.IsUnboundGenericType
                              ? currentType.OriginalDefinition.Equals(exportedType.ConstructedFrom)

@@ -96,7 +96,7 @@ namespace SonarAnalyzer.CSharp.Rules
         }
 
         private static bool IsValidType(INamedTypeSymbol symbol)
-            => symbol.IsClassOrStruct() || symbol.IsInterface();
+            => symbol is { IsClassOrStruct: true } or { IsInterface: true };
 
         private static bool IsStaticAndVirtualOrAbstract(ISymbol symbol)
             => symbol.IsStatic && (symbol.IsVirtual || symbol.IsAbstract);

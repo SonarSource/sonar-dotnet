@@ -38,7 +38,7 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
     private static void AnalyzeNamedTypes(SonarSymbolReportingContext context)
     {
         var namedType = (INamedTypeSymbol)context.Symbol;
-        if (!namedType.IsClassOrStruct() || namedType.ContainingType is not null)
+        if (namedType is not { IsClassOrStruct: true, ContainingType: null })
         {
             return;
         }

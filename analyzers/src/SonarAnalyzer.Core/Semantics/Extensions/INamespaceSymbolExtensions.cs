@@ -52,7 +52,7 @@ internal static class INamespaceSymbolExtensions
                 {
                     yield break;
                 }
-                foreach (var typeMember in symbol.GetTypeMembers().SelectMany(x => x.GetAllNamedTypes()))
+                foreach (var typeMember in symbol.GetTypeMembers().SelectMany(x => x.AllNamedTypes))
                 {
                     yield return typeMember;
                 }

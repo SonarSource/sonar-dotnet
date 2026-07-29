@@ -22,8 +22,7 @@ public static class ITypeSymbolExtensions
     extension(ITypeSymbol symbol)
     {
         public bool IsRefStruct =>
-            symbol is not null
-            && symbol.IsStruct()
+            symbol is { IsStruct: true }
             && symbol.IsRefLikeType();
 
         public bool IsDisposableRefStruct(LanguageVersion languageVersion) =>

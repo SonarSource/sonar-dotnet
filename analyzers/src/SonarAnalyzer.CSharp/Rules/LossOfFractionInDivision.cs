@@ -161,7 +161,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     }
                     else
                     {
-                        symbolList.Add(tupleTypeSymbol.GetSymbolType());
+                        symbolList.Add(tupleTypeSymbol.SymbolType);
                     }
                 }
             }

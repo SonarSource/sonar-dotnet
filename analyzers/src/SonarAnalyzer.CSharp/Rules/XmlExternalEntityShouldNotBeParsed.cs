@@ -188,11 +188,11 @@ namespace SonarAnalyzer.CSharp.Rules
 
             private static bool IsUnsafeXmlResolverConstructor(ISymbol symbol) =>
                 symbol.Kind == SymbolKind.Method
-                && symbol.ContainingType.GetSymbolType().IsAny(UnsafeXmlResolvers);
+                && symbol.ContainingType.SymbolType.IsAny(UnsafeXmlResolvers);
 
             private static bool IsAllowedObject(ISymbol symbol) =>
                 !IsUnsafeXmlResolverConstructor(symbol)
-                && !symbol.GetSymbolType().IsAny(UnsafeXmlResolvers)
+                && !symbol.SymbolType.IsAny(UnsafeXmlResolvers)
                 && !IsUnsafeXmlResolverReturnType(symbol);
 
             private static bool IsUnsafeXmlResolverReturnType(ISymbol symbol) =>

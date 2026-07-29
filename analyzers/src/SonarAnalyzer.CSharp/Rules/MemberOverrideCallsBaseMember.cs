@@ -137,8 +137,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static bool IsRecordCompilerGenerated(IMethodSymbol methodSymbol) =>
             IgnoredRecordMethodNames.Contains(methodSymbol.Name)
-            && methodSymbol.ContainingSymbol is ITypeSymbol type
-            && type.IsRecord();
+            && methodSymbol.ContainingSymbol is ITypeSymbol { IsRecord: true };
 
         private static bool HasDocumentationComment(SyntaxNode node) =>
             node.GetLeadingTrivia()

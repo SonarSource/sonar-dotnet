@@ -35,7 +35,7 @@ public sealed class UninvokedEventDeclaration : SonarDiagnosticAnalyzer
     private static void RaiseOnUninvokedEventDeclaration(SonarSymbolReportingContext context)
     {
         var namedType = (INamedTypeSymbol)context.Symbol;
-        if (namedType.IsClassOrStruct() && namedType.ContainingType is null)
+        if (namedType is { IsClassOrStruct: true, ContainingType: null })
         {
             var removableDeclarationCollector = new CSharpRemovableDeclarationCollector(namedType, context.Compilation);
             var removableEventFields = removableDeclarationCollector.RemovableFieldLikeDeclarations(EventSyntax, MaxAccessibility).Where(x => !IsInPartialEventField(x.Node)).ToArray();

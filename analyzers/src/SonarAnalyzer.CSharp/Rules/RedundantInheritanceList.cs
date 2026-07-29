@@ -86,8 +86,7 @@ namespace SonarAnalyzer.CSharp.Rules
             for (var i = 0; i < baseList.Types.Count; i++)
             {
                 var baseType = baseList.Types[i];
-                if (context.Model.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol interfaceType
-                    && interfaceType.IsInterface()
+                if (context.Model.GetSymbolInfo(baseType.Type).Symbol is INamedTypeSymbol { IsInterface: true } interfaceType
                     && CollidingDeclaration(declaredType, interfaceType, interfaceTypesWithAllInterfaces) is { } collidingDeclaration)
                 {
                     var location = GetLocationWithToken(baseType.Type, baseList.Types);
@@ -109,13 +108,13 @@ namespace SonarAnalyzer.CSharp.Rules
 
         private static INamedTypeSymbol CollidingDeclaration(INamedTypeSymbol declaredType, INamedTypeSymbol interfaceType, MultiValueDictionary<INamedTypeSymbol, INamedTypeSymbol> interfaceMappings)
         {
-            var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface() && x.Value.Contains(interfaceType));
+            var collisionMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsInterface && x.Value.Contains(interfaceType));
             if (collisionMapping.Key is not null)
             {
                 return collisionMapping.Key;
             }
 
-            var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass());
+            var baseClassMapping = interfaceMappings.FirstOrDefault(x => x.Key.IsClass);
             if (baseClassMapping.Key is null)
             {
                 return null;

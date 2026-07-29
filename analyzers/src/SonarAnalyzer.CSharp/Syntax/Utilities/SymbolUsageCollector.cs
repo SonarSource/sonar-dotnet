@@ -119,7 +119,7 @@ internal class SymbolUsageCollector : SafeCSharpSyntaxWalker
         if (leftTupleCount != 0)
         {
             var assignmentRight = node.Right;
-            var namedTypeSymbol = model.GetSymbolInfo(assignmentRight).Symbol?.GetSymbolType();
+            var namedTypeSymbol = model.GetSymbolInfo(assignmentRight).Symbol?.SymbolType;
             if (namedTypeSymbol is not null)
             {
                 var deconstructors = namedTypeSymbol.GetMembers("Deconstruct");

@@ -56,7 +56,7 @@ public sealed class AvoidLambdaExpressionInLoopsInBlazor : SonarDiagnosticAnalyz
         node.AncestorsAndSelf().Any(x => x is InvocationExpressionSyntax invocation
                                          && AddAttributeMethods.Contains(invocation.GetName())
                                          && semanticModel.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol symbol
-                                         && symbol.ContainingType.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder));
+                                         && symbol.ContainingType.SymbolType.Is(KnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder));
 
     private static bool IsWithinLoopBody(SyntaxNode node) =>
         node.AncestorsAndSelf().Any(x => x is BlockSyntax && x.Parent is ForStatementSyntax or ForEachStatementSyntax or WhileStatementSyntax or DoStatementSyntax);

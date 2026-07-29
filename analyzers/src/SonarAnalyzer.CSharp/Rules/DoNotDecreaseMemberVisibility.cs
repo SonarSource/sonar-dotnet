@@ -59,7 +59,7 @@ public sealed class DoNotDecreaseMemberVisibility : SonarDiagnosticAnalyzer
         {
             this.context = context;
             var allBaseClassMembers = classSymbol.BaseType
-                    .GetSelfAndBaseTypes()
+                    .SelfAndBaseTypes
                     .SelectMany(x => x.GetMembers())
                     .Where(x => IsSymbolVisibleFromNamespace(x, classSymbol.ContainingNamespace))
                     .ToList();

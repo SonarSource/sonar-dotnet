@@ -51,7 +51,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return true;
             }
 
-            var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.GetSymbolType();
+            var symbolType = semanticModel.GetSymbolInfo(syntaxNode).Symbol.SymbolType;
             return symbolType.IsAny(KnownType.System_Int32, KnownType.System_UInt32, KnownType.System_Int64, KnownType.System_UInt64);
         }
     }

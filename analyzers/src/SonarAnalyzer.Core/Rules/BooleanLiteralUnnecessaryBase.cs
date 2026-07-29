@@ -215,7 +215,7 @@ namespace SonarAnalyzer.Core.Rules
         private bool TypeShouldBeIgnored(SyntaxNode node, SemanticModel model)
         {
             var type = model.GetTypeInfo(node).Type;
-            return type.IsNullableBoolean()
+            return type.IsNullableBoolean
                 || type is ITypeParameterSymbol
                 || type.Is(KnownType.System_Object)
                 || systemBooleanInterfaces.Any(x => x.Equals(type));

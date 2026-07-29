@@ -47,8 +47,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
                 if ((declaration.Body is null && declaration.ExpressionBody is null)
                     || declaration.Body?.Statements.Count == 0  // Don't report on empty methods
                     || declaration.Modifiers.AnyOfKind(SyntaxKind.PartialKeyword)
-                    || declaration.Symbol is null
-                    || (!declaration.Symbol.ContainingType.IsClassOrStruct() && !declaration.Symbol.ContainingType.IsExtensionBlock())
+                    || declaration.Symbol is not { ContainingType: { IsClassOrStruct: true } or { IsExtensionBlock: true } }
                     || declaration.Symbol.IsMainMethod()
                     || OnlyThrowsNotImplementedException(declaration))
                 {
@@ -127,7 +126,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
         }
 
         var excludedParameters = noReportOnParameters;
-        if (declaration.Symbol.IsExtension && !declaration.Symbol.ContainingType.IsExtensionBlock())
+        if (declaration.Symbol.IsExtension && !declaration.Symbol.ContainingType.IsExtensionBlock)
         {
             excludedParameters = excludedParameters.Add(declaration.Symbol.Parameters.First());
         }
@@ -196,7 +195,7 @@ public sealed class MethodParameterUnused : MethodParameterUnusedBase
         }
 
         var unusedParameter = declaration.Symbol.Parameters.Except(usedParameters);
-        if (declaration.Symbol.IsExtension && !declaration.Symbol.ContainingType.IsExtensionBlock())
+        if (declaration.Symbol.IsExtension && !declaration.Symbol.ContainingType.IsExtensionBlock)
         {
             unusedParameter = unusedParameter.Except([declaration.Symbol.Parameters.First()]);
         }

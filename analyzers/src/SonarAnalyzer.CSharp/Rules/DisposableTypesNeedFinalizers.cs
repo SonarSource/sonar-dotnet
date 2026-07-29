@@ -49,7 +49,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool HasNativeHandleFields(TypeDeclarationSyntax classDeclaration, SemanticModel semanticModel) =>
             classDeclaration.Members
                 .OfType<FieldDeclarationSyntax>()
-                .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.GetSymbolType())
+                .Select(m => semanticModel.GetDeclaredSymbol(m.Declaration.Variables.FirstOrDefault())?.SymbolType)
                 .Any(si => si.IsAny(NativeHandles));
 
         private static bool HasFinalizer(TypeDeclarationSyntax classDeclaration) =>

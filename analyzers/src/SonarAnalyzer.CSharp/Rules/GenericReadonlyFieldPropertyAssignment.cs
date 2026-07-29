@@ -115,6 +115,6 @@ public sealed class GenericReadonlyFieldPropertyAssignment : SonarDiagnosticAnal
         && constraintTypes.All(MightBeValueType);
 
     private static bool MightBeValueType(ITypeSymbol type) =>
-        type.IsInterface()
+        type.IsInterface
         || GenericParameterMightBeValueType(type as ITypeParameterSymbol);
 }

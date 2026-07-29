@@ -97,7 +97,7 @@ public sealed class ConsumeValueTaskCorrectly : SonarDiagnosticAnalyzer
         {
             if (node.Expression is IdentifierNameSyntax identifierName &&
                 model.GetSymbolInfo(identifierName).Symbol is ISymbol symbol &&
-                symbol.GetSymbolType().OriginalDefinition.IsAny(ValueTaskTypes))
+                symbol.SymbolType.OriginalDefinition.IsAny(ValueTaskTypes))
             {
                 AddToSymbolUsages(symbol, identifierName);
             }

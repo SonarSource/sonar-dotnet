@@ -148,7 +148,8 @@ public static class ISymbolExtensions
                 INamedTypeSymbol namedTypeSymbol => namedTypeSymbol switch
                 {
                     { TypeKind: TypeKind.Array } => "array",
-                    { TypeKind: TypeKind.Class } namedType => namedType.IsRecord() ? "record" : "class",
+                    { TypeKind: TypeKind.Class, IsRecord: true } => "record",
+                    { TypeKind: TypeKind.Class } => "class",
                     { TypeKind: TypeKind.Dynamic } => "dynamic",
                     { TypeKind: TypeKind.Delegate } => "delegate",
                     { TypeKind: TypeKind.Enum } => "enum",
@@ -157,7 +158,8 @@ public static class ISymbolExtensions
                     { TypeKind: TypeKind.Interface } => "interface",
                     { TypeKind: TypeKind.Module } => "module",
                     { TypeKind: TypeKind.Pointer } => "pointer",
-                    { TypeKind: TypeKind.Struct or TypeKind.Structure } namedType => namedType.IsRecord() ? "record struct" : "struct",
+                    { TypeKind: TypeKind.Struct, IsRecord: true } => "record struct",
+                    { TypeKind: TypeKind.Struct } => "struct",
                     { TypeKind: TypeKind.Submission } => "submission",
                     { TypeKind: TypeKind.TypeParameter } => "type parameter",
                     { TypeKind: TypeKind.Unknown } => "unknown",

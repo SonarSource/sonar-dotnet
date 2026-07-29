@@ -143,7 +143,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
 
     private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
         ITypeSymbol invokedType, ITypeSymbol methodContainer) =>
-        ((ITypeSymbol[])[.. invokedType.GetSelfAndBaseTypes(), .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, methodContainer), methodContainer])
+        ((ITypeSymbol[])[.. invokedType.SelfAndBaseTypes, .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, methodContainer), methodContainer])
             .Distinct()
             .SelectMany(x => x.GetMembers(methodName))
             .OfType<IMethodSymbol>()

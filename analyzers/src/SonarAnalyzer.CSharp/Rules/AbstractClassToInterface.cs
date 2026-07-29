@@ -32,8 +32,7 @@ public sealed class AbstractClassToInterface : SonarDiagnosticAnalyzer<SyntaxKin
             c =>
             {
                 var symbol = (INamedTypeSymbol)c.Symbol;
-                if (symbol.IsClass()
-                    && symbol.IsAbstract
+                if (symbol is { IsClass: true, IsAbstract: true }
                     && symbol.BaseType.Is(KnownType.System_Object)
                     && !IsRecordWithParameters(symbol)
                     && AllMethodsAreAbstract(symbol)

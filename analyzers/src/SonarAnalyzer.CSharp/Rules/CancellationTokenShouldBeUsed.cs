@@ -98,7 +98,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
                 var memberExpr = member.IsStatic
                     ? (ExpressionSyntax)fieldOrProp.Name.EscapedIdentifierName
                     : SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, SyntaxFactory.ThisExpression(), fieldOrProp.Name.EscapedIdentifierName);
-                if (fieldOrProp.GetSymbolType() is { } memberType
+                if (fieldOrProp.SymbolType is { } memberType
                     && (memberType.Is(KnownType.System_Threading_CancellationToken)
                         ? memberExpr
                         : FindOneLevelDeepCtSource(ctTypeCache, memberExpr, memberType)) is { } source)
@@ -173,7 +173,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
         {
             if (member is { IsStatic: false, DeclaredAccessibility.IsAccessibleOutsideTheType: true }
                 && AsFieldOrProperty(member) is { } fieldOrProp
-                && fieldOrProp.GetSymbolType().Is(KnownType.System_Threading_CancellationToken)
+                && fieldOrProp.SymbolType.Is(KnownType.System_Threading_CancellationToken)
                 && !IsExcluded(member))
             {
                 return fieldOrProp.Name.EscapedIdentifierName;

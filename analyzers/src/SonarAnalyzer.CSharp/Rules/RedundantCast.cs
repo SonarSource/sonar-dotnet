@@ -71,7 +71,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
     {
         // The Nullability() annotation of the castType symbol is always "None". We need to look at the syntax to determine the nullability.
         var castingToNullable = castTypeExpression.IsKind(SyntaxKind.NullableType)
-            || castType.IsNullableValueType(); // Nullable<int> is considered the same as int? checked via SyntaxKind.NullableType above.
+            || castType.IsNullableValueType; // Nullable<int> is considered the same as int? checked via SyntaxKind.NullableType above.
         var outerNullability = expressionTypeInfo.Nullability().FlowState switch
         {
             NullableFlowState.None => true,

@@ -34,10 +34,9 @@ namespace SonarAnalyzer.CSharp.Rules
 
                     if (methodDeclaration.IsExtensionMethod
                         && c.Model.GetDeclaredSymbol(methodDeclaration) is { IsExtensionMethod: true, Parameters: { Length: > 0 } } methodSymbol
-                        && methodSymbol.Parameters[0].Type.Kind != SymbolKind.ErrorType
-                        && methodSymbol.Parameters[0].Type.IsClass()
-                        && methodSymbol.ContainingNamespace.Equals(methodSymbol.Parameters[0].Type.ContainingNamespace)
-                        && !methodSymbol.Parameters[0].Type.HasAttribute(KnownType.System_CodeDom_Compiler_GeneratedCodeAttribute))
+                        && methodSymbol.Parameters[0] is { Type: { Kind: not SymbolKind.ErrorType, IsClass: true } parameterType }
+                        && methodSymbol.ContainingNamespace.Equals(parameterType.ContainingNamespace)
+                        && !parameterType.HasAttribute(KnownType.System_CodeDom_Compiler_GeneratedCodeAttribute))
                     {
                         c.ReportIssue(Rule, methodDeclaration.Identifier);
                     }

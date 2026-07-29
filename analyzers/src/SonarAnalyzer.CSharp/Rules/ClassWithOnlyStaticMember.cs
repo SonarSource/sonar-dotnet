@@ -39,14 +39,11 @@ namespace SonarAnalyzer.CSharp.Rules
             context.RegisterSymbolAction(
                 c =>
                 {
-                    var namedType = c.Symbol as INamedTypeSymbol;
-                    if (!namedType.IsClass())
+                    if (c.Symbol is INamedTypeSymbol { IsClass: true } namedType)
                     {
-                        return;
+                        CheckClasses(c, namedType);
+                        CheckConstructors(c, namedType);
                     }
-
-                    CheckClasses(c, namedType);
-                    CheckConstructors(c, namedType);
                 },
                 SymbolKind.NamedType);
 

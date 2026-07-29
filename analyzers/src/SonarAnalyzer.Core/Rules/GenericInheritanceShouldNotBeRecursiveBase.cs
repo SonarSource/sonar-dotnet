@@ -50,8 +50,8 @@ namespace SonarAnalyzer.Core.Rules
         private static IEnumerable<INamedTypeSymbol> GetBaseTypes(INamedTypeSymbol typeSymbol)
         {
             var interfaces = typeSymbol.Interfaces.Where(IsGenericType);
-            return typeSymbol.IsClass()
-                ? interfaces.Concat(new[] { typeSymbol.BaseType })
+            return typeSymbol.IsClass
+                ? interfaces.Append(typeSymbol.BaseType)
                 : interfaces;
         }
 

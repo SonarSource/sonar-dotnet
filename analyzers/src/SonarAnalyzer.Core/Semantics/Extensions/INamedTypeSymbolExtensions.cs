@@ -29,67 +29,70 @@ public static class INamedTypeSymbolExtensions
 
     private static readonly ImmutableArray<KnownType> NonControllerAttributeTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute);
 
-    public static bool IsTopLevelProgram(this INamedTypeSymbol symbol) =>
-        TopLevelStatements.ProgramClassImplicitName.Contains(symbol.Name)
-        && symbol.ContainingNamespace.IsGlobalNamespace
-        && symbol.GetMembers(TopLevelStatements.MainMethodImplicitName).Any();
-
-    public static IEnumerable<INamedTypeSymbol> GetAllNamedTypes(this INamedTypeSymbol type)
+    extension(INamedTypeSymbol symbol)
     {
-        if (type is null)
+        public bool IsTopLevelProgram =>
+            TopLevelStatements.ProgramClassImplicitName.Contains(symbol.Name)
+            && symbol.ContainingNamespace.IsGlobalNamespace
+            && symbol.GetMembers(TopLevelStatements.MainMethodImplicitName).Any();
+
+        public IEnumerable<INamedTypeSymbol> AllNamedTypes
         {
-            yield break;
+            get
+            {
+                if (symbol is null)
+                {
+                    yield break;
+                }
+
+                yield return symbol;
+
+                foreach (var nestedType in symbol.GetTypeMembers().SelectMany(x => x.AllNamedTypes))
+                {
+                    yield return nestedType;
+                }
+            }
         }
 
-        yield return type;
+        /// <summary>
+        /// Whether the provided type symbol is a ASP.NET MVC controller.
+        /// </summary>
+        public bool IsControllerType =>
+            symbol is { ContainingSymbol: not INamedTypeSymbol }
+            && (symbol.DerivesFromAny(ControllerTypes)
+                || symbol.GetAttributes(ControllerAttributeTypes).Any())
+            && !symbol.GetAttributes(NonControllerAttributeTypes).Any();
 
-        foreach (var nestedType in type.GetTypeMembers().SelectMany(GetAllNamedTypes))
-        {
-            yield return nestedType;
-        }
+        /// <summary>
+        /// Whether the provided type symbol is an ASP.NET Core API controller.
+        /// Considers as API controllers also controllers deriving from ControllerBase but not Controller.
+        /// </summary>
+        public bool IsCoreApiController =>
+            symbol.IsControllerType
+            && (symbol.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
+                || (symbol.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !symbol.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
+
+        /// <summary>
+        /// Returns whether the class has an attribute that marks the class
+        /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
+        /// </summary>
+        public bool IsTestClass => symbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
+
+        /// <summary>
+        /// Returns whether the type is exported via MEF (Managed Extensibility Framework).
+        /// Checks for [Export] attributes on the type itself or [InheritedExport] on base types/interfaces.
+        /// Supports both MEF1 (System.ComponentModel.Composition) and MEF2 (System.Composition).
+        /// </summary>
+        public bool IsMefExportedType =>
+            symbol is not null
+            && (symbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute)
+                || symbol.AnyAttributeDerivesFrom(KnownType.System_Composition_ExportAttribute)
+                || symbol.SelfBaseTypesAndInterfaces.Any(x => x.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)));
+
+        /// <summary>
+        /// Returns the type itself, all base types, and all implemented interfaces.
+        /// This is useful for checking inherited attributes across the full type hierarchy.
+        /// </summary>
+        public IEnumerable<INamedTypeSymbol> SelfBaseTypesAndInterfaces => symbol?.SelfAndBaseTypes.Union(symbol.AllInterfaces) ?? [];
     }
-
-    /// <summary>
-    /// Whether the provided type symbol is a ASP.NET MVC controller.
-    /// </summary>
-    public static bool IsControllerType(this INamedTypeSymbol namedType) =>
-        namedType is not null
-        && namedType.ContainingSymbol is not INamedTypeSymbol
-        && (namedType.DerivesFromAny(ControllerTypes)
-            || namedType.GetAttributes(ControllerAttributeTypes).Any())
-        && !namedType.GetAttributes(NonControllerAttributeTypes).Any();
-
-    /// <summary>
-    /// Whether the provided type symbol is an ASP.NET Core API controller.
-    /// Considers as API controllers also controllers deriving from ControllerBase but not Controller.
-    /// </summary>
-    public static bool IsCoreApiController(this INamedTypeSymbol namedType) =>
-        namedType.IsControllerType()
-        && (namedType.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
-            || (namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !namedType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
-
-    /// <summary>
-    /// Returns whether the class has an attribute that marks the class
-    /// as an MSTest or NUnit test class (xUnit doesn't have any such attributes).
-    /// </summary>
-    public static bool IsTestClass(this INamedTypeSymbol classSymbol) =>
-        classSymbol.AnyAttributeDerivesFromAny(KnownTestClassAttributes);
-
-    /// <summary>
-    /// Returns whether the type is exported via MEF (Managed Extensibility Framework).
-    /// Checks for [Export] attributes on the type itself or [InheritedExport] on base types/interfaces.
-    /// Supports both MEF1 (System.ComponentModel.Composition) and MEF2 (System.Composition).
-    /// </summary>
-    public static bool IsMefExportedType(this INamedTypeSymbol typeSymbol) =>
-        typeSymbol is not null
-        && (typeSymbol.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_ExportAttribute)
-            || typeSymbol.AnyAttributeDerivesFrom(KnownType.System_Composition_ExportAttribute)
-            || typeSymbol.SelfBaseTypesAndInterfaces().Any(x => x.AnyAttributeDerivesFrom(KnownType.System_ComponentModel_Composition_InheritedExportAttribute)));
-
-    /// <summary>
-    /// Returns the type itself, all base types, and all implemented interfaces.
-    /// This is useful for checking inherited attributes across the full type hierarchy.
-    /// </summary>
-    public static IEnumerable<INamedTypeSymbol> SelfBaseTypesAndInterfaces(this INamedTypeSymbol typeSymbol) =>
-        typeSymbol?.GetSelfAndBaseTypes().Union(typeSymbol.AllInterfaces) ?? [];
 }

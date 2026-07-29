@@ -47,7 +47,7 @@ public sealed class RequireAttributeUsageAttribute : SonarDiagnosticAnalyzer
         SyntaxKind.ClassDeclaration);
 
     private static bool InheritsAttributeUsage(INamedTypeSymbol classSymbol) =>
-        classSymbol.GetSelfAndBaseTypes()
+        classSymbol.SelfAndBaseTypes
             // System.Attribute already has AttributeUsage, we don't want to report it
             .TakeWhile(x => !x.Is(KnownType.System_Attribute))
             .Any(x => x.HasAttribute(KnownType.System_AttributeUsageAttribute));

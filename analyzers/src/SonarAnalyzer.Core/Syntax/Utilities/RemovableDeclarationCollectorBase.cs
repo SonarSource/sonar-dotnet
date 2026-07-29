@@ -58,10 +58,9 @@ public abstract class RemovableDeclarationCollectorBase<TOwnerOfSubnodes, TDecla
         && !methodSymbol.IsSerializationConstructor();
 
     protected static bool IsRemovable(ISymbol symbol, Accessibility maxAccessibility) =>
-        symbol is { IsImplicitlyDeclared: false, IsAbstract: false, IsVirtual: false, OverriddenMember: null }
+        symbol is { IsImplicitlyDeclared: false, IsAbstract: false, IsVirtual: false, OverriddenMember: null, ContainingType.IsInterface: false }
         && symbol.EffectiveAccessibility <= maxAccessibility
         && symbol.GetAttributes().IsEmpty
-        && !symbol.ContainingType.IsInterface()
         && symbol.InterfaceMembers().IsEmpty;
 
     protected static NodeSymbolAndModel CreateNodeSymbolAndModel(SyntaxNode node, SemanticModel model) =>

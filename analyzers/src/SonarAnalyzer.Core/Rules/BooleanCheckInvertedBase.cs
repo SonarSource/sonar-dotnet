@@ -45,7 +45,7 @@ public abstract class BooleanCheckInvertedBase<TBinaryExpression> : SonarDiagnos
         };
 
     protected static bool IsNullable(SyntaxNode expression, SemanticModel model) =>
-        model.GetSymbolInfo(expression).Symbol.GetSymbolType() is INamedTypeSymbol symbolType
+        model.GetSymbolInfo(expression).Symbol.SymbolType is INamedTypeSymbol symbolType
         && symbolType.ConstructedFrom.Is(KnownType.System_Nullable_T);
 
     protected static bool IsFloatingPoint(SyntaxNode expression, SemanticModel model) =>

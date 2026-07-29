@@ -45,7 +45,7 @@ public abstract class FieldShadowsParentFieldBase<TSyntaxKind, TVariableDeclarat
         if (model.GetDeclaredSymbol(variableDeclarator) is IFieldSymbol fieldSymbol)
         {
             var fieldName = fieldSymbol.Name;
-            foreach (var baseType in fieldSymbol.ContainingType.BaseType.GetSelfAndBaseTypes())
+            foreach (var baseType in fieldSymbol.ContainingType.BaseType.SelfAndBaseTypes)
             {
                 var similarFields = baseType.GetMembers().OfType<IFieldSymbol>().Where(IsMatch).ToList();
                 if (similarFields.Any(x => x.Name == fieldName))

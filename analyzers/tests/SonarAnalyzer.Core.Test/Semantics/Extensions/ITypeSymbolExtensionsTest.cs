@@ -99,7 +99,7 @@ public class ITypeSymbolExtensionsTest
     {
         var aliasUsing = root.DescendantNodesAndSelf().OfType<UsingDirectiveSyntax>().FirstOrDefault(x => x.Alias is not null);
         var symbol = model.GetDeclaredSymbol(aliasUsing);
-        var type = symbol.GetSymbolType();
+        var type = symbol.SymbolType;
         symbol.ToString().Should().Be("PropertyBag");
         type.ToString().Should().Be("System.Collections.Generic.Dictionary<string, object>");
     }
@@ -182,7 +182,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsStruct().Should().BeTrue();
+        fieldSymbol.Type.IsStruct.Should().BeTrue();
     }
 
     [TestMethod]
@@ -196,7 +196,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsStruct().Should().BeFalse();
+        fieldSymbol.Type.IsStruct.Should().BeFalse();
     }
 
     [TestMethod]
@@ -211,7 +211,7 @@ public class ITypeSymbolExtensionsTest
                 T field;
             }
             """);
-        fieldSymbol.Type.IsStruct().Should().BeTrue();
+        fieldSymbol.Type.IsStruct.Should().BeTrue();
     }
 
     [TestMethod]
@@ -227,7 +227,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsStruct().Should().BeTrue();
+        fieldSymbol.Type.IsStruct.Should().BeTrue();
     }
 
     [TestMethod]
@@ -250,7 +250,7 @@ public class ITypeSymbolExtensionsTest
                 T field;
             }
             """);
-        fieldSymbol.Type.IsStruct().Should().BeFalse();
+        fieldSymbol.Type.IsStruct.Should().BeFalse();
     }
 
     [TestMethod]
@@ -276,7 +276,7 @@ public class ITypeSymbolExtensionsTest
                 T? field;
             }
             """);
-        fieldSymbol.Type.IsStruct().Should().BeFalse();
+        fieldSymbol.Type.IsStruct.Should().BeFalse();
     }
 
     [TestMethod]
@@ -289,7 +289,7 @@ public class ITypeSymbolExtensionsTest
                 U field;
             }
             """);
-        fieldSymbol.Type.IsStruct().Should().BeFalse();
+        fieldSymbol.Type.IsStruct.Should().BeFalse();
     }
 
     [TestMethod]
@@ -308,7 +308,7 @@ public class ITypeSymbolExtensionsTest
             """);
         var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
         var parameterSymbol = (IParameterSymbol)model.GetDeclaredSymbol(parameter);
-        parameterSymbol.Type.IsStruct().Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
+        parameterSymbol.Type.IsStruct.Should().BeFalse(); // parameter must be a struct, but even the compiler doesn't recognizes this
     }
 
     [TestMethod]
@@ -329,7 +329,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
+        fieldSymbol.Type.IsNonNullableValueType.Should().BeTrue();
     }
 
     [TestMethod]
@@ -345,7 +345,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+        fieldSymbol.Type.IsNonNullableValueType.Should().BeFalse();
     }
 
     [TestMethod]
@@ -360,7 +360,7 @@ public class ITypeSymbolExtensionsTest
                 T field;
             }
             """);
-        fieldSymbol.Type.IsNonNullableValueType().Should().BeTrue();
+        fieldSymbol.Type.IsNonNullableValueType.Should().BeTrue();
     }
 
     [TestMethod]
@@ -375,7 +375,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+        fieldSymbol.Type.IsNonNullableValueType.Should().BeFalse();
     }
 
     [TestMethod]
@@ -406,7 +406,7 @@ public class ITypeSymbolExtensionsTest
                 T? field;
             }
             """);
-        fieldSymbol.Type.IsNonNullableValueType().Should().BeFalse();
+        fieldSymbol.Type.IsNonNullableValueType.Should().BeFalse();
     }
 
     [TestMethod]
@@ -420,7 +420,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
+        fieldSymbol.Type.IsNullableValueType.Should().BeTrue();
     }
 
     [TestMethod]
@@ -443,7 +443,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
+        fieldSymbol.Type.IsNullableValueType.Should().BeFalse();
     }
 
     [TestMethod]
@@ -462,7 +462,7 @@ public class ITypeSymbolExtensionsTest
                 {{type}} field;
             }
             """);
-        fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
+        fieldSymbol.Type.IsNullableValueType.Should().BeTrue();
     }
 
     [TestMethod]
@@ -479,7 +479,7 @@ public class ITypeSymbolExtensionsTest
                 T? field;
             }
             """);
-        fieldSymbol.Type.IsNullableValueType().Should().BeTrue();
+        fieldSymbol.Type.IsNullableValueType.Should().BeTrue();
     }
 
     [TestMethod]
@@ -494,7 +494,7 @@ public class ITypeSymbolExtensionsTest
                 T field;
             }
             """);
-        fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
+        fieldSymbol.Type.IsNullableValueType.Should().BeFalse();
     }
 
     [TestMethod]
@@ -521,7 +521,7 @@ public class ITypeSymbolExtensionsTest
                 T? field;
             }
             """);
-        fieldSymbol.Type.IsNullableValueType().Should().BeFalse();
+        fieldSymbol.Type.IsNullableValueType.Should().BeFalse();
     }
 
     [TestMethod]
@@ -539,7 +539,7 @@ public class ITypeSymbolExtensionsTest
                 {{fieldType}} field;
             }
             """);
-        fieldSymbol.Type.IsEnum().Should().BeTrue();
+        fieldSymbol.Type.IsEnum.Should().BeTrue();
     }
 
     [TestMethod]
@@ -558,12 +558,12 @@ public class ITypeSymbolExtensionsTest
                 {{fieldType}} field;
             }
             """);
-        fieldSymbol.Type.IsEnum().Should().BeFalse();
+        fieldSymbol.Type.IsEnum.Should().BeFalse();
     }
 
     [TestMethod]
     public void GetSelfAndBaseTypes_WhenSymbolIsNull_ReturnsEmpty() =>
-        ((ITypeSymbol)null).GetSelfAndBaseTypes().Should().BeEmpty();
+        ((ITypeSymbol)null).SelfAndBaseTypes.Should().BeEmpty();
 
     [TestMethod]
     [DataRow("BaseClass<int>         ", "InheritedAttribute", "DerivedInheritedAttribute", "DerivedNotInheritedAttribute", "UnannotatedAttribute", "NotInheritedAttribute")]

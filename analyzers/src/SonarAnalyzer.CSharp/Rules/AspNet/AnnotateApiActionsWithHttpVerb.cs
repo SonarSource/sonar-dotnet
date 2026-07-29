@@ -43,7 +43,7 @@ public sealed class AnnotateApiActionsWithHttpVerb : SonarDiagnosticAnalyzer
                 var controllerSymbol = (INamedTypeSymbol)symbolStartContext.Symbol;
                 var controllerAttributes = controllerSymbol.AttributesWithInherited;
 
-                if (controllerSymbol.IsControllerType()
+                if (controllerSymbol.IsControllerType
                     && controllerAttributes.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
                     && !IgnoresApiExplorer(controllerAttributes))
                 {

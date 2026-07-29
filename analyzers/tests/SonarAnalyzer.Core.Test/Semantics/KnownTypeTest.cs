@@ -125,7 +125,7 @@ public class KnownTypeTest
             }
             """);
         var expression = tree.Single<CS.VariableDeclaratorSyntax>();
-        return model.GetDeclaredSymbol(expression).GetSymbolType();
+        return model.GetDeclaredSymbol(expression).SymbolType;
     }
 
     private static ITypeSymbol GetSymbol_VB(string type)
@@ -144,6 +144,6 @@ public class KnownTypeTest
             End Namespace
             """);
         var expression = tree.Single<VB.ModifiedIdentifierSyntax>();
-        return model.GetDeclaredSymbol(expression).GetSymbolType();
+        return model.GetDeclaredSymbol(expression).SymbolType;
     }
 }

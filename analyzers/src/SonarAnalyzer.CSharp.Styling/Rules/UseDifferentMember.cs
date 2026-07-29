@@ -33,8 +33,7 @@ public class UseDifferentMember : StylingAnalyzer
                     c.ReportIssue(Rule, c.Node, "IsExtension", nameof(IMethodSymbol.IsExtensionMethod), " It also covers extension methods defined in extension blocks.");
                 }
                 else if (identifier.Identifier.Text is nameof(TypeDeclarationSyntaxExtensions.ParameterList)
-                    && c.Model.GetSymbolInfo(identifier) is { Symbol: IPropertySymbol { ContainingType: { } extensionBlock } }
-                    && extensionBlock.IsExtensionBlock()
+                    && c.Model.GetSymbolInfo(identifier) is { Symbol: IPropertySymbol { ContainingType: { IsExtensionBlock: true } extensionBlock } }
                     && IsTypeDeclarationSyntaxShimExtensions(extensionBlock.ContainingType))
                 {
                     c.ReportIssue(

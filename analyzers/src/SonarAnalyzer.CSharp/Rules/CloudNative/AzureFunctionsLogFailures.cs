@@ -64,11 +64,11 @@ namespace SonarAnalyzer.CSharp.Rules
         internal static bool HasLoggerMember(ITypeSymbol typeSymbol)
         {
             var isOriginalType = true;
-            foreach (var type in typeSymbol.GetSelfAndBaseTypes())
+            foreach (var type in typeSymbol.SelfAndBaseTypes)
             {
                 if (type.GetMembers().Any(x => x.Kind is SymbolKind.Field or SymbolKind.Property
                                                && (isOriginalType || x.EffectiveAccessibility != Accessibility.Private)
-                                               && x.GetSymbolType()?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true))
+                                               && x.SymbolType?.DerivesOrImplements(KnownType.Microsoft_Extensions_Logging_ILogger) is true))
                 {
                     return true;
                 }

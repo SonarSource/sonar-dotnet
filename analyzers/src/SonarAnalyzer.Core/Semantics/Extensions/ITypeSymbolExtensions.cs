@@ -23,216 +23,210 @@ public static class ITypeSymbolExtensions
 {
     private static readonly PropertyInfo ITypeSymbolIsRecord = typeof(ITypeSymbol).GetProperty("IsRecord");
 
-    public static bool IsInterface(this ITypeSymbol self) =>
-        self is { TypeKind: TypeKind.Interface };
-
-    public static bool IsClass(this ITypeSymbol self) =>
-        self is { TypeKind: TypeKind.Class };
-
-    public static bool IsStruct(this ITypeSymbol self) =>
-        self switch
-        {
-            { TypeKind: TypeKind.Struct } => true,
-            ITypeParameterSymbol { IsValueType: true } => true,
-            _ => false,
-        };
-
-    public static bool IsClassOrStruct(this ITypeSymbol self) =>
-        self.IsStruct() || self.IsClass();
-
-    public static bool IsExtensionBlock(this ITypeSymbol self) =>
-        self is { TypeKind: TypeKindEx.Extension };
-
-    public static bool IsNullableValueType(this ITypeSymbol self) =>
-        self.IsStruct() && self is { SpecialType: SpecialType.System_Nullable_T } or { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T };
-
-    public static bool IsNonNullableValueType(this ITypeSymbol self) =>
-        self.IsStruct() && !self.IsNullableValueType();
-
-    public static bool IsEnum(this ITypeSymbol self) =>
-        self switch
-        {
-            { TypeKind: TypeKind.Enum } => true,
-            ITypeParameterSymbol { HasReferenceTypeConstraint: false, ConstraintTypes: { IsEmpty: false } constraintTypes } => constraintTypes.Any(x => x.SpecialType == SpecialType.System_Enum),
-            _ => false,
-        };
-
-    public static bool CanBeNull(this ITypeSymbol self) =>
-        self is { IsReferenceType: true } || self.IsNullableValueType();
-
-    public static bool Is(this ITypeSymbol self, TypeKind typeKind) =>
-        self?.TypeKind == typeKind;
-
-    public static bool Is(this ITypeSymbol typeSymbol, KnownType type) =>
-        typeSymbol is not null && type.Matches(typeSymbol);
-
-    public static bool IsAny(this ITypeSymbol typeSymbol, params KnownType[] types)
+    extension(ITypeSymbol symbol)
     {
-        if (typeSymbol is null)
+        public bool IsInterface => symbol is { TypeKind: TypeKind.Interface };
+
+        public bool IsClass => symbol is { TypeKind: TypeKind.Class };
+
+        public bool IsStruct => symbol is { TypeKind: TypeKind.Struct } or ITypeParameterSymbol { IsValueType: true };
+
+        public bool IsClassOrStruct => symbol is { IsStruct: true } or { IsClass: true };
+
+        public bool IsExtensionBlock => symbol is { TypeKind: TypeKindEx.Extension };
+
+        public bool IsNullableValueType => symbol is { IsStruct: true } and ({ SpecialType: SpecialType.System_Nullable_T } or { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T });
+
+        public bool IsNonNullableValueType => symbol is { IsStruct: true, IsNullableValueType: false };
+
+        public bool IsEnum =>
+            symbol switch
+            {
+                { TypeKind: TypeKind.Enum } => true,
+                ITypeParameterSymbol { HasReferenceTypeConstraint: false, ConstraintTypes: { IsEmpty: false } constraintTypes } => constraintTypes.Any(x => x.SpecialType == SpecialType.System_Enum),
+                _ => false,
+            };
+
+        public bool CanBeNull => symbol is { IsReferenceType: true } or { IsNullableValueType: true };
+
+        public bool IsNullableBoolean => symbol.IsNullableOf(KnownType.System_Boolean);
+
+        public IEnumerable<INamedTypeSymbol> SelfAndBaseTypes
         {
+            get
+            {
+                if (symbol is null)
+                {
+                    yield break;
+                }
+
+                var currentType = symbol;
+                while (currentType?.Kind == SymbolKind.NamedType)
+                {
+                    yield return (INamedTypeSymbol)currentType;
+                    currentType = currentType.BaseType;
+                }
+            }
+        }
+
+        public bool IsRecord => ITypeSymbolIsRecord?.GetValue(symbol) is true;
+
+        public bool Is(TypeKind typeKind) =>
+            symbol?.TypeKind == typeKind;
+
+        public bool Is(KnownType type) =>
+            symbol is not null && type.Matches(symbol);
+
+        public bool IsAny(params KnownType[] types)
+        {
+            if (symbol is null)
+            {
+                return false;
+            }
+
+            // For is twice as fast as foreach on ImmutableArray so don't use Linq here
+            for (var i = 0; i < types.Length; i++)
+            {
+                if (types[i].Matches(symbol))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
-        // For is twice as fast as foreach on ImmutableArray so don't use Linq here
-        for (var i = 0; i < types.Length; i++)
+        public bool IsAny(ImmutableArray<KnownType> types)
         {
-            if (types[i].Matches(typeSymbol))
+            if (symbol is null)
             {
-                return true;
+                return false;
             }
-        }
 
-        return false;
-    }
+            // For is twice as fast as foreach on ImmutableArray so don't use Linq here
+            for (var i = 0; i < types.Length; i++)
+            {
+                if (types[i].Matches(symbol))
+                {
+                    return true;
+                }
+            }
 
-    public static bool IsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types)
-    {
-        if (typeSymbol is null)
-        {
             return false;
         }
 
-        // For is twice as fast as foreach on ImmutableArray so don't use Linq here
-        for (var i = 0; i < types.Length; i++)
+        public bool IsNullableOfAny(ImmutableArray<KnownType> argumentTypes) =>
+            NullableTypeArgument(symbol).IsAny(argumentTypes);
+
+        public bool IsNullableOf(KnownType typeArgument) =>
+            NullableTypeArgument(symbol).Is(typeArgument);
+
+        public bool Implements(KnownType type) =>
+            symbol is not null
+            && symbol.AllInterfaces.Any(x => x.ConstructedFrom.Is(type));
+
+        public bool ImplementsAny(ImmutableArray<KnownType> types) =>
+            symbol is not null
+            && symbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
+
+        public bool ImplementsAny(params KnownType[] types) =>
+            symbol is not null
+            && symbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
+
+        public bool DerivesFrom(KnownType type)
         {
-            if (types[i].Matches(typeSymbol))
+            var currentType = symbol;
+            while (currentType is not null)
             {
-                return true;
+                if (currentType.Is(type))
+                {
+                    return true;
+                }
+                currentType = currentType.BaseType?.ConstructedFrom;
             }
+
+            return false;
         }
 
-        return false;
-    }
-
-    public static bool IsNullableOfAny(this ITypeSymbol type, ImmutableArray<KnownType> argumentTypes) =>
-        NullableTypeArgument(type).IsAny(argumentTypes);
-
-    public static bool IsNullableOf(this ITypeSymbol type, KnownType typeArgument) =>
-        NullableTypeArgument(type).Is(typeArgument);
-
-    public static bool IsNullableBoolean(this ITypeSymbol type) =>
-        type.IsNullableOf(KnownType.System_Boolean);
-
-    /// <summary>
-    /// Returns the underlying value type <c>T</c> of <see cref="Nullable{T}"/>, or <see langword="null"/> if
-    /// <paramref name="type"/> is not a nullable value type. Does not affect nullable reference types (NRT annotations).
-    /// </summary>
-    public static ITypeSymbol NullableUnderlyingType(this ITypeSymbol type) =>
-        type is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T, TypeArguments.Length: 1 } nullable
-            ? nullable.TypeArguments[0]
-            : null;
-
-    /// <summary>
-    /// Returns the underlying value type <c>T</c> of <see cref="Nullable{T}"/>, or <paramref name="type"/> unchanged
-    /// if it is not a nullable value type. Does not affect nullable reference types (NRT annotations).
-    /// </summary>
-    public static ITypeSymbol NullableUnderlyingTypeOrSelf(this ITypeSymbol type) =>
-        NullableUnderlyingType(type) ?? type;
-
-    public static bool Implements(this ITypeSymbol typeSymbol, KnownType type) =>
-        typeSymbol is not null
-        && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.Is(type));
-
-    public static bool ImplementsAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> types) =>
-        typeSymbol is not null
-        && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
-
-    public static bool ImplementsAny(this ITypeSymbol typeSymbol, params KnownType[] types) =>
-        typeSymbol is not null
-        && typeSymbol.AllInterfaces.Any(x => x.ConstructedFrom.IsAny(types));
-
-    public static bool DerivesFrom(this ITypeSymbol typeSymbol, KnownType type)
-    {
-        var currentType = typeSymbol;
-        while (currentType is not null)
+        public bool DerivesFrom(ITypeSymbol type)
         {
-            if (currentType.Is(type))
+            var currentType = symbol;
+            while (currentType is not null)
             {
-                return true;
+                if (currentType.Equals(type) || (currentType is INamedTypeSymbol { ConstructedFrom: { } constructedFrom } && constructedFrom.Equals(type)))
+                {
+                    return true;
+                }
+                currentType = currentType.BaseType?.ConstructedFrom;
             }
-            currentType = currentType.BaseType?.ConstructedFrom;
+
+            return false;
         }
 
-        return false;
-    }
-
-    public static bool DerivesFrom(this ITypeSymbol typeSymbol, ITypeSymbol type)
-    {
-        var currentType = typeSymbol;
-        while (currentType is not null)
+        public bool DerivesFromAny(ImmutableArray<KnownType> baseTypes)
         {
-            if (currentType.Equals(type) || (currentType is INamedTypeSymbol { ConstructedFrom: { } constructedFrom } && constructedFrom.Equals(type)))
+            var currentType = symbol;
+            while (currentType is not null)
             {
-                return true;
+                if (currentType.IsAny(baseTypes))
+                {
+                    return true;
+                }
+                currentType = currentType.BaseType?.ConstructedFrom;
             }
-            currentType = currentType.BaseType?.ConstructedFrom;
+
+            return false;
         }
 
-        return false;
+        /// <summary>
+        /// Returns the underlying value type <c>T</c> of <see cref="Nullable{T}"/>, or <see langword="null"/> if
+        /// <paramref name="symbol"/> is not a nullable value type. Does not affect nullable reference types (NRT annotations).
+        /// </summary>
+        public ITypeSymbol NullableUnderlyingType() =>
+            symbol is INamedTypeSymbol { OriginalDefinition.SpecialType: SpecialType.System_Nullable_T, TypeArguments.Length: 1 } nullable
+                ? nullable.TypeArguments[0]
+                : null;
+
+        /// <summary>
+        /// Returns the underlying value type <c>T</c> of <see cref="Nullable{T}"/>, or <paramref name="symbol"/> unchanged
+        /// if it is not a nullable value type. Does not affect nullable reference types (NRT annotations).
+        /// </summary>
+        public ITypeSymbol NullableUnderlyingTypeOrSelf() =>
+            symbol.NullableUnderlyingType() ?? symbol;
+
+        public bool DerivesOrImplements(KnownType baseType) =>
+            symbol.Implements(baseType) || symbol.DerivesFrom(baseType);
+
+        public bool DerivesOrImplements(ITypeSymbol baseType) =>
+            symbol.Implements(baseType) || symbol.DerivesFrom(baseType);
+
+        public bool DerivesOrImplementsAny(ImmutableArray<KnownType> baseTypes) =>
+            symbol.ImplementsAny(baseTypes) || symbol.DerivesFromAny(baseTypes);
+
+        private bool Implements(ISymbol type) =>
+            symbol is not null
+            && symbol.AllInterfaces.Any(x => type.IsDefinition ? x.OriginalDefinition.Equals(type) : x.Equals(type));
     }
 
-    public static bool DerivesFromAny(this ITypeSymbol typeSymbol, ImmutableArray<KnownType> baseTypes)
+    extension(ISymbol symbol)
     {
-        var currentType = typeSymbol;
-        while (currentType is not null)
-        {
-            if (currentType.IsAny(baseTypes))
+        public ITypeSymbol SymbolType =>
+            symbol switch
             {
-                return true;
-            }
-            currentType = currentType.BaseType?.ConstructedFrom;
-        }
-
-        return false;
+                ILocalSymbol x => x.Type,
+                IFieldSymbol x => x.Type,
+                IPropertySymbol x => x.Type,
+                IParameterSymbol x => x.Type,
+                IAliasSymbol x => x.Target as ITypeSymbol,
+                IMethodSymbol { MethodKind: MethodKind.Constructor } x => x.ContainingType,
+                IMethodSymbol x => x.ReturnType,
+                ITypeSymbol x => x,
+                _ => null,
+            };
     }
-
-    public static bool DerivesOrImplements(this ITypeSymbol type, KnownType baseType) =>
-        type.Implements(baseType) || type.DerivesFrom(baseType);
-
-    public static bool DerivesOrImplements(this ITypeSymbol type, ITypeSymbol baseType) =>
-        type.Implements(baseType) || type.DerivesFrom(baseType);
-
-    public static bool DerivesOrImplementsAny(this ITypeSymbol type, ImmutableArray<KnownType> baseTypes) =>
-        type.ImplementsAny(baseTypes) || type.DerivesFromAny(baseTypes);
-
-    public static ITypeSymbol GetSymbolType(this ISymbol symbol) =>
-        symbol switch
-        {
-            ILocalSymbol x => x.Type,
-            IFieldSymbol x => x.Type,
-            IPropertySymbol x => x.Type,
-            IParameterSymbol x => x.Type,
-            IAliasSymbol x => x.Target as ITypeSymbol,
-            IMethodSymbol { MethodKind: MethodKind.Constructor } x => x.ContainingType,
-            IMethodSymbol x => x.ReturnType,
-            ITypeSymbol x => x,
-            _ => null,
-        };
-
-    public static IEnumerable<INamedTypeSymbol> GetSelfAndBaseTypes(this ITypeSymbol type)
-    {
-        if (type is null)
-        {
-            yield break;
-        }
-
-        var currentType = type;
-        while (currentType?.Kind == SymbolKind.NamedType)
-        {
-            yield return (INamedTypeSymbol)currentType;
-            currentType = currentType.BaseType;
-        }
-    }
-
-    public static bool IsRecord(this ITypeSymbol typeSymbol) =>
-        ITypeSymbolIsRecord?.GetValue(typeSymbol) is true;
 
     private static ITypeSymbol NullableTypeArgument(ITypeSymbol type) =>
         type is INamedTypeSymbol namedType && namedType.OriginalDefinition.Is(KnownType.System_Nullable_T)
             ? namedType.TypeArguments[0]
             : null;
-
-    private static bool Implements(this ITypeSymbol typeSymbol, ISymbol type) =>
-        typeSymbol is not null
-        && typeSymbol.AllInterfaces.Any(x => type.IsDefinition ? x.OriginalDefinition.Equals(type) : x.Equals(type));
 }

@@ -113,7 +113,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
         type.TypeKind is not TypeKind.Dynamic
         && visited.Add(type)
         && (type.Implements(KnownType.System_ComponentModel_DataAnnotations_IValidatableObject)
-            || type.GetSelfAndBaseTypes().Any(HasValidationSurface)
+            || type.SelfAndBaseTypes.Any(HasValidationSurface)
             || ElementTypesToValidate(type).Any(x => RequiresValidation(x, visited))
             || (type.DeclaringSyntaxReferences.Length > 0 && MemberTypes(type).Any(x => RequiresValidation(x, visited))));
 
@@ -136,7 +136,7 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
     // The types of the instance members (properties and fields) declared on the type or its base types.
     // ASP.NET validation recurses into these nested complex members.
     private static IEnumerable<ITypeSymbol> MemberTypes(ITypeSymbol type) =>
-        type.GetSelfAndBaseTypes()
+        type.SelfAndBaseTypes
             .SelectMany(x => x.GetMembers())
             .Select(x => x switch
             {

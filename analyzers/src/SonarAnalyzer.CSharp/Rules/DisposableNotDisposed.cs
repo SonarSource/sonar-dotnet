@@ -62,7 +62,7 @@ public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
             c =>
             {
                 var namedType = (INamedTypeSymbol)c.Symbol;
-                if (namedType.ContainingType is not null || !namedType.IsClassOrStruct())
+                if (namedType is not { IsClassOrStruct: true, ContainingType: null })
                 {
                     return;
                 }
@@ -170,7 +170,7 @@ public sealed class DisposableNotDisposed : SonarDiagnosticAnalyzer
     }
 
     private static IEnumerable<SyntaxNode> DescendantNodes(INamedTypeSymbol namedType, SyntaxNode typeDeclaration) =>
-        namedType.IsTopLevelProgram()
+        namedType.IsTopLevelProgram
             ? typeDeclaration.ChildNodes().OfType<GlobalStatementSyntax>().Select(x => x.ChildNodes().First())
             : typeDeclaration.DescendantNodes();
 

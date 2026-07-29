@@ -55,12 +55,12 @@ public sealed class TestClassShouldHaveTestMethod : SonarDiagnosticAnalyzer
         symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod);
 
     private static bool IsViolatingRule(INamedTypeSymbol symbol) =>
-        symbol.IsTestClass()
+        symbol.IsTestClass
         && !HasAnyTestMethod(symbol);
 
     private static bool IsExceptionToTheRule(ITypeSymbol symbol) =>
         symbol.IsAbstract
-        || symbol.GetSelfAndBaseTypes().Any(HasAnyTestMethod)
+        || symbol.SelfAndBaseTypes.Any(HasAnyTestMethod)
         || HasSetupOrCleanupAttributes(symbol);
 
     private static bool HasSetupOrCleanupAttributes(INamespaceOrTypeSymbol symbol) =>

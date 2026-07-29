@@ -83,7 +83,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
             .GetMembers()
             .Where(IsPropertyWithParameterAttributeInRoute)
             .SelectMany(property => routeParams[property.Name].Select(routeParam => new { RouteParam = routeParam, Property = property }))
-            .Where(x => !IsTypeMatchRouteConstraint(x.Property.GetSymbolType(), x.RouteParam.Constraint, compilation))
+            .Where(x => !IsTypeMatchRouteConstraint(x.Property.SymbolType, x.RouteParam.Constraint, compilation))
             .SelectMany(x => x.Property.DeclaringSyntaxReferences
                 .Where(r => r.GetSyntax() is PropertyDeclarationSyntax)
                 .Select(r => new PropertyTypeMismatch(((PropertyDeclarationSyntax)r.GetSyntax()).Type, x.RouteParam.Constraint, x.RouteParam.FromRoute, x.RouteParam.RouteParamLocation)))
@@ -95,7 +95,7 @@ public sealed class ParameterTypeShouldMatchRouteTypeConstraint : SonarDiagnosti
 
     private static bool IsTypeMatchRouteConstraint(ITypeSymbol type, string routeConstraintType, Compilation compilation)
     {
-        if (type.IsNullableValueType())
+        if (type.IsNullableValueType)
         {
             type = ((INamedTypeSymbol)type).TypeArguments[0];
         }

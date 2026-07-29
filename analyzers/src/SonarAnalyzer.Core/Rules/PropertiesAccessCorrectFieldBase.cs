@@ -105,7 +105,7 @@ public abstract class PropertiesAccessCorrectFieldBase<TSyntaxKind> : SonarDiagn
     }
 
     private static IEnumerable<IFieldSymbol> SelfAndBaseTypesFieldSymbols(INamedTypeSymbol typeSymbol) =>
-        typeSymbol.GetSelfAndBaseTypes()
+        typeSymbol.SelfAndBaseTypes
             .SelectMany(x => x.GetMembers().OfType<IFieldSymbol>()
                                 .Where(f => x.Equals(typeSymbol) || f.DeclaredAccessibility != Accessibility.Private));
 

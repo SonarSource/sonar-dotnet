@@ -94,9 +94,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                                       BidirectionalDictionary<ISymbol, SyntaxNode> fieldLikeSymbols,
                                       SonarSymbolReportingContext context)
     {
-        if (namedType.ContainingType is not null
-            // We skip top level statements since they cannot have fields. Other declared types are analyzed separately.
-            || namedType.IsTopLevelProgram()
+        // We skip top level statements since they cannot have fields. Other declared types are analyzed separately.
+        if (namedType is { ContainingType: not null } or { IsTopLevelProgram: true }
             || namedType.DerivesFromAny(IgnoredTypes)
             // Collect symbols of private members that could potentially be removed
             || RetrieveRemovableSymbols(namedType, compilation, context) is not { } removableSymbolsCollector)
@@ -514,9 +513,8 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
             && !methodSymbol.IsRecordPrintMembers();
 
         private static bool IsRemovable(ISymbol symbol) =>
-            symbol is { IsImplicitlyDeclared: false, IsVirtual: false, OverriddenMember: null, IsSerializableMember: false }
+            symbol is { IsImplicitlyDeclared: false, IsVirtual: false, OverriddenMember: null, IsSerializableMember: false, ContainingType.IsInterface: false }
             && !HasAttributes(symbol)
-            && !symbol.ContainingType.IsInterface()
             && !(symbol.Kind is SymbolKind.Field && symbol.ContainingType.HasAttribute(KnownType.System_Runtime_InteropServices_StructLayoutAttribute))
             && symbol.InterfaceMembers().IsEmpty;
 
@@ -536,10 +534,9 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
 
         private static bool IsRemovableType(ISymbol typeSymbol) =>
             typeSymbol.EffectiveAccessibility is var accessibility
-            && typeSymbol.ContainingType is not null
+            && typeSymbol is { ContainingType: not null } and not INamedTypeSymbol { IsMefExportedType: true }
             && (accessibility is Accessibility.Private or Accessibility.Internal)
-            && IsRemovable(typeSymbol)
-            && !(typeSymbol is INamedTypeSymbol namedType && namedType.IsMefExportedType());
+            && IsRemovable(typeSymbol);
 
         private void VisitBaseTypeDeclaration(SyntaxNode node)
         {

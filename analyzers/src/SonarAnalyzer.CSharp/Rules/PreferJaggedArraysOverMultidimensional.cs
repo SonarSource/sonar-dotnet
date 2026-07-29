@@ -31,7 +31,7 @@ namespace SonarAnalyzer.CSharp.Rules
         {
             context.RegisterNodeAction(
                 c => AnalyzeNode<VariableDeclarationSyntax>(c,
-                    (semanticModel, variable) => semanticModel.GetDeclaredSymbol(variable.Variables[0]).GetSymbolType(),
+                    (semanticModel, variable) => semanticModel.GetDeclaredSymbol(variable.Variables[0]).SymbolType,
                     variable => variable.Variables[0].Identifier.GetLocation()),
                 SyntaxKind.VariableDeclaration);
 

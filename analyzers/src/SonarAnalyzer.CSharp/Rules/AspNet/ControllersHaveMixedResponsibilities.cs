@@ -57,10 +57,8 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
 
             compilationStartContext.RegisterSymbolStartAction(symbolStartContext =>
             {
-                var symbol = (INamedTypeSymbol)symbolStartContext.Symbol;
-                if (symbol.IsCoreApiController()
-                    && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase)
-                    && !symbol.IsAbstract)
+                if (symbolStartContext.Symbol is INamedTypeSymbol { IsCoreApiController: true, IsAbstract: false } symbol
+                    && symbol.BaseType.Is(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
                 {
                     var relevantMembers = RelevantMembers(symbol);
 
@@ -172,7 +170,7 @@ public sealed class ControllersHaveMixedResponsibilities : SonarDiagnosticAnalyz
     }
 
     private static bool IsService(ISymbol symbol) =>
-        !ExcludedWellKnownServices.Contains(symbol.GetSymbolType().Name);
+        !ExcludedWellKnownServices.Contains(symbol.SymbolType.Name);
 
     private static IEnumerable<SecondaryLocation> SecondaryLocations(INamedTypeSymbol controllerSymbol, List<List<string>> sets)
     {

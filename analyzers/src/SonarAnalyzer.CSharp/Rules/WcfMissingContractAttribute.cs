@@ -67,7 +67,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         attributeToAdd = "ServiceContract";
                     }
 
-                    var classOrInterface = namedType.IsClass() ? "class" : "interface";
+                    var classOrInterface = namedType.IsClass ? "class" : "interface";
                     message = string.Format(message, classOrInterface);
 
                     c.ReportIssue(Rule, declarationSyntax.Identifier, attributeToAdd, message);

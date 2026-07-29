@@ -113,7 +113,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             || IsNewProperty(methodOrPropertySymbol);
 
         bool IsExcludedByEnclosingType() =>
-            methodOrPropertySymbol.ContainingType.IsInterface()
+            methodOrPropertySymbol.ContainingType.IsInterface
             // Any generic type in nesting chain with member accessible from outside (through the whole nesting chain) is excluded.
             || (methodOrPropertySymbol.ContainingType.IsGenericType && methodOrPropertySymbol.EffectiveAccessibility.IsAccessibleOutsideTheType)
             // Any nested private generic type with member accessible from outside that type (not the whole nesting chain) is also excluded.

@@ -164,7 +164,7 @@ public abstract class CertificateValidationCheckBase<
             // We're actually looking for Func<Any Sender, X509Certificate2, X509Chain, SslPolicyErrors, bool>
             var parameters = namedSymbol.DelegateInvokeMethod.Parameters;
             return parameters.Length == 4   // And it should! T1, T2, T3, T4
-                && parameters[0].Type.IsClassOrStruct() // We don't care about common (Object) nor specific (HttpRequestMessage) type of Sender
+                && parameters[0].Type.IsClassOrStruct // We don't care about common (Object) nor specific (HttpRequestMessage) type of Sender
                 && parameters[1].Type.Is(KnownType.System_Security_Cryptography_X509Certificates_X509Certificate2)
                 && parameters[2].Type.Is(KnownType.System_Security_Cryptography_X509Certificates_X509Chain)
                 && parameters[3].Type.Is(KnownType.System_Net_Security_SslPolicyErrors)

@@ -87,7 +87,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 modifierDescription = "Private";
                 scopeDescription = "assembly";
                 var symbol = model.Value.GetDeclaredSymbol(declaration);
-                return symbol.ContainingType.GetAllNamedTypes().Any(other =>
+                return symbol.ContainingType.AllNamedTypes.Any(other =>
                     !other.MetadataName.Equals(symbol.MetadataName)
                     && other.DerivesFrom(symbol));
             }

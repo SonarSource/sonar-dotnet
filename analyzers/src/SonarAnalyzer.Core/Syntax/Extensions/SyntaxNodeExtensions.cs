@@ -47,12 +47,12 @@ public static class SyntaxNodeExtensions
 
         public bool IsKnownType(KnownType knownType, SemanticModel model)
         {
-            var type = model.GetSymbolInfo(node).Symbol.GetSymbolType();
+            var type = model.GetSymbolInfo(node).Symbol.SymbolType;
             return type.Is(knownType) || type?.OriginalDefinition?.Is(knownType) == true;
         }
 
         public bool IsDeclarationKnownType(KnownType knownType, SemanticModel model) =>
-            model.GetDeclaredSymbol(node)?.GetSymbolType().Is(knownType) ?? false;
+            model.GetDeclaredSymbol(node)?.SymbolType.Is(knownType) ?? false;
 
         public SemanticModel EnsureCorrectSemanticModelOrDefault(SemanticModel model) =>
             node.SyntaxTree.SemanticModelOrDefault(model);

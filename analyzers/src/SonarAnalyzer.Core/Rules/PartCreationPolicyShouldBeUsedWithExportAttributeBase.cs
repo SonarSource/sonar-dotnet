@@ -41,7 +41,7 @@ namespace SonarAnalyzer.Core.Rules
                 return;
             }
 
-            if (!(c.Model.GetDeclaredSymbol(declaration) is INamedTypeSymbol symbol) || symbol.IsMefExportedType())
+            if (!(c.Model.GetDeclaredSymbol(declaration) is INamedTypeSymbol symbol) || symbol.IsMefExportedType)
             {
                 return;
             }

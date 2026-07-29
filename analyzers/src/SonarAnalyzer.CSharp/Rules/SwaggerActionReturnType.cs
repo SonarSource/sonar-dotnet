@@ -107,7 +107,7 @@ public sealed class SwaggerActionReturnType : SonarDiagnosticAnalyzer
                 .OfType<ObjectCreationExpressionSyntax>()
                 .Where(x => x.GetName() == "ObjectResult"
                             && x.ArgumentList?.Arguments.Count > 0
-                            && model.GetSymbolInfo(x.Type).Symbol.GetSymbolType().Is(KnownType.Microsoft_AspNetCore_Mvc_ObjectResult));
+                            && model.GetSymbolInfo(x.Type).Symbol.SymbolType.Is(KnownType.Microsoft_AspNetCore_Mvc_ObjectResult));
 
         IEnumerable<SyntaxNode> ResultMethodsInvocations() =>
             node.DescendantNodes()

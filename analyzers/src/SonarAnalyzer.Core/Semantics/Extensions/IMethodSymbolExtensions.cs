@@ -74,12 +74,11 @@ public static class IMethodSymbolExtensions
         /// controller method.
         /// </summary>
         public bool IsControllerActionMethod =>
-            method is { MethodKind: MethodKind.Ordinary, IsStatic: false, EffectiveAccessibility: Accessibility.Public, TypeParameters.Length: 0 }
+            method is { MethodKind: MethodKind.Ordinary, IsStatic: false, EffectiveAccessibility: Accessibility.Public, TypeParameters.Length: 0, ContainingType.IsControllerType: true }
             && (method.OverriddenMethod is null
                 || !method.OverriddenMethod.ContainingType.IsAny(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase, KnownType.Microsoft_AspNetCore_Mvc_Controller))
             && !method.GetAttributes().Any(x => x.AttributeClass.IsAny(NonActionTypes))
-            && method.Parameters.All(x => x.RefKind == RefKind.None)
-            && method.ContainingType.IsControllerType();
+            && method.Parameters.All(x => x.RefKind == RefKind.None);
 
         public Comparison ComparisonKind =>
             method?.MethodKind == MethodKind.UserDefinedOperator
@@ -123,9 +122,7 @@ public static class IMethodSymbolExtensions
         /// Returns whether the method is a constructor in a MEF-exported type.
         /// MEF (Managed Extensibility Framework) instantiates types via reflection, so these constructors are not unused.
         /// </summary>
-        public bool IsMefConstructor =>
-            method is { MethodKind: MethodKind.Constructor, ContainingType: INamedTypeSymbol containingType }
-            && containingType.IsMefExportedType();
+        public bool IsMefConstructor => method is { MethodKind: MethodKind.Constructor, ContainingType: INamedTypeSymbol { IsMefExportedType: true } };
 
         private AttributeData FindXUnitTestAttribute() =>
             method.GetAttributes().FirstOrDefault(x => x.AttributeClass.IsAny(KnownType.TestMethodAttributesOfxUnit));

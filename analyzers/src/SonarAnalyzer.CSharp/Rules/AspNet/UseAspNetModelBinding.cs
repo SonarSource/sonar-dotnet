@@ -54,7 +54,7 @@ public sealed class UseAspNetModelBinding : SonarDiagnosticAnalyzer<SyntaxKind>
             // See the OverridesController.Undecidable test cases for details.
             var hasActionFiltersOverrides = false;
             var candidates = new ConcurrentStack<ReportCandidate>(); // In SymbolEnd, we filter the candidates based on the overriding we learn on the go.
-            if (((INamedTypeSymbol)symbolStart.Symbol).IsControllerType())
+            if (symbolStart.Symbol is INamedTypeSymbol { IsControllerType: true })
             {
                 symbolStart.RegisterCodeBlockStartAction<SyntaxKind>(codeBlockStart =>
                 {

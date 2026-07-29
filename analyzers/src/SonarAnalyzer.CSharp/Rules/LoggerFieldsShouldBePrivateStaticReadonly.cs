@@ -85,8 +85,7 @@ public sealed class LoggerFieldsShouldBePrivateStaticReadonly : SonarDiagnosticA
         }
 
         bool ShouldRaise(VariableDeclaratorSyntax variable) =>
-            model.GetDeclaredSymbol(variable) is { } symbol
-            && !symbol.ContainingType.IsInterface() // exclude default interface implementation fields
-            && symbol.GetSymbolType().DerivesOrImplementsAny(Loggers);
+            model.GetDeclaredSymbol(variable) is { ContainingType.IsInterface: false } symbol // exclude default interface implementation fields
+            && symbol.SymbolType.DerivesOrImplementsAny(Loggers);
     }
 }

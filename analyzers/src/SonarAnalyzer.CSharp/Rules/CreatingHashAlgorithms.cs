@@ -26,5 +26,5 @@ public sealed class CreatingHashAlgorithms : CreatingHashAlgorithmsBase<SyntaxKi
         argumentNode as ArgumentSyntax is { } argument
         && argument.Expression as MemberAccessExpressionSyntax is { } memberAccess
         && memberAccess.Name.ToString() is "SHA1" or "MD5"
-        && model.GetSymbolInfo(memberAccess.Expression).Symbol.GetSymbolType().Is(KnownType.System_Security_Cryptography_HashAlgorithmName);
+        && model.GetSymbolInfo(memberAccess.Expression).Symbol.SymbolType.Is(KnownType.System_Security_Cryptography_HashAlgorithmName);
 }

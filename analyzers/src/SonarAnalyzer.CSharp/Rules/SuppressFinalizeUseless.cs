@@ -46,13 +46,12 @@ namespace SonarAnalyzer.CSharp.Rules
                     var argument = invocation.ArgumentList.Arguments.First();
                     var argumentType = c.Model.GetTypeInfo(argument.Expression).Type as INamedTypeSymbol;
 
-                    if (!argumentType.IsClass() ||
-                        !argumentType.IsSealed)
+                    if (argumentType is not { IsClass: true, IsSealed: true })
                     {
                         return;
                     }
 
-                    var hasFinalizer = argumentType.GetSelfAndBaseTypes()
+                    var hasFinalizer = argumentType.SelfAndBaseTypes
                         .Where(type => !type.Is(KnownType.System_Object))
                         .SelectMany(type => type.GetMembers())
                         .OfType<IMethodSymbol>()

@@ -47,7 +47,7 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
                             var location = type.GetLocation();
                             var interfaceTypeName = interfaceType.ToMinimalDisplayString(c.Model, location.SourceSpan.Start);
                             var expressionTypeName = expressionType.ToMinimalDisplayString(c.Model, location.SourceSpan.Start);
-                            var message = expressionType.IsInterface() ? MessageInterface : MessageClass;
+                            var message = expressionType.IsInterface ? MessageInterface : MessageClass;
                             c.ReportIssue(Rule, location, string.Format(message, expressionTypeName, interfaceTypeName));
                         }
                     },
@@ -59,7 +59,7 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
         var ret = new TypeMap();
         foreach (var type in allTypes)
         {
-            if (type.IsInterface())
+            if (type.IsInterface)
             {
                 Add(type, type);
             }
@@ -83,7 +83,7 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
 
     private static bool IsImpossibleCast(TypeMap interfaceImplementers, INamedTypeSymbol interfaceType, INamedTypeSymbol expressionType)
     {
-        return interfaceType.IsInterface()
+        return interfaceType.IsInterface
             && ConcreteImplementationExists(interfaceType)
             && ExpressionTypeIsRelevant()
             && !expressionType.DerivesOrImplements(interfaceType)
@@ -94,9 +94,9 @@ public abstract class InvalidCastToInterfaceBase<TSyntaxKind> : SonarDiagnosticA
             expressionType is not null
             && !expressionType.IsSealed
             && !expressionType.Is(KnownType.System_Object)
-            && (!expressionType.IsInterface() || ConcreteImplementationExists(expressionType));
+            && (!expressionType.IsInterface || ConcreteImplementationExists(expressionType));
 
         bool ConcreteImplementationExists(INamedTypeSymbol type) =>
-            interfaceImplementers.TryGetValue(type, out var implementers) && implementers.Any(x => x.IsClassOrStruct());
+            interfaceImplementers.TryGetValue(type, out var implementers) && implementers.Any(x => x.IsClassOrStruct);
     }
 }

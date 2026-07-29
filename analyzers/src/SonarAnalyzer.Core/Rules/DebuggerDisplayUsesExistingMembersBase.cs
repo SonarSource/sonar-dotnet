@@ -73,7 +73,7 @@ public abstract class DebuggerDisplayUsesExistingMembersBase<TAttributeArgumentS
         string FirstInvalidMemberName(ITypeSymbol typeSymbol)
         {
             var allMembers = typeSymbol
-                .GetSelfAndBaseTypes()
+                .SelfAndBaseTypes
                 .SelectMany(x => x.GetMembers())
                 .Concat(typeSymbol.ContainingNamespace.AllNamedTypes
                 .Where(x => x.IsStatic)

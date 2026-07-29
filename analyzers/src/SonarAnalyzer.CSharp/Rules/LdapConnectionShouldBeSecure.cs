@@ -39,7 +39,7 @@ public sealed class LdapConnectionShouldBeSecure : ObjectShouldBeInitializedCorr
     public LdapConnectionShouldBeSecure() : base(DiagnosticId) { }
 
     private static bool IsAllowedObject(ISymbol authTypeSymbol, SyntaxNode authTypeExpression, SemanticModel model) =>
-        authTypeSymbol.GetSymbolType().Is(KnownType.System_DirectoryServices_AuthenticationTypes)
+        authTypeSymbol.SymbolType.Is(KnownType.System_DirectoryServices_AuthenticationTypes)
         && !(authTypeExpression.FindConstantValue(model) is int authType && IsUnsafe(authType));
 
     private static bool IsUnsafe(int authType) =>

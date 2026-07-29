@@ -154,9 +154,9 @@ public static class KnownMethods
             Name: "PrintMembers",
             ReturnType.SpecialType: SpecialType.System_Boolean,
             Parameters.Length: 1,
+            ContainingType.IsRecord: true,
         }
-        && methodSymbol.Parameters[0].Type.Is(KnownType.System_Text_StringBuilder)
-        && methodSymbol.ContainingType.IsRecord();
+        && methodSymbol.Parameters[0].Type.Is(KnownType.System_Text_StringBuilder);
 
     public static bool IsGcSuppressFinalize(this IMethodSymbol methodSymbol) =>
         methodSymbol is not null
@@ -262,7 +262,7 @@ public static class KnownMethods
         {
             return interfaceMember.ContainingType;
         }
-        else if (symbol.ContainingType.IsInterface())
+        else if (symbol.ContainingType.IsInterface)
         {
             return symbol.ContainingType;
         }

@@ -56,5 +56,5 @@ public sealed class DeclareTypesInNamespaces : DeclareTypesInNamespacesBase<Synt
         declaration is ClassDeclarationSyntax { Identifier.Text: "Program" } classDeclaration
         && classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword)
         && model.GetDeclaredSymbol(classDeclaration) is INamedTypeSymbol symbol
-        && symbol.IsTopLevelProgram();
+        && symbol.IsTopLevelProgram;
 }
