@@ -34,7 +34,7 @@ namespace SonarAnalyzer.Test.Rules
         [TestMethod]
         public void FunctionComplexity_InsufficientExecutionStack_CS()
         {
-            if (!TestEnvironment.IsAzureDevOpsContext) // ToDo: Test doesn't work on Azure DevOps
+            if (!TestEnvironment.IsCiContext) // ToDo: Test doesn't work in CI
             {
                 CreateCSBuilder(3).AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").VerifyNoIssues();
             }

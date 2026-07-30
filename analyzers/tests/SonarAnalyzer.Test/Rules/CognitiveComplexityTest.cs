@@ -47,7 +47,7 @@ public class CognitiveComplexityTest
     [TestMethod]
     public void CognitiveComplexity_StackOverflow_CS()
     {
-        if (!TestEnvironment.IsAzureDevOpsContext) // ToDo: Test throws OOM on Azure DevOps
+        if (!TestEnvironment.IsCiContext) // FixMe: NET-4160 Test throws OutOfMemory in AZure check if this is the case still in GHA
         {
             builderCS.AddPaths("SyntaxWalker_InsufficientExecutionStackException.cs").VerifyNoIssues();
         }
@@ -56,7 +56,7 @@ public class CognitiveComplexityTest
     [TestMethod]
     public void CognitiveComplexity_StackOverflow_VB()
     {
-        if (!TestEnvironment.IsAzureDevOpsContext) // ToDO: Test throws OOM on Azure DevOps
+        if (!TestEnvironment.IsCiContext) // FixMe: NET-4160 Test throws OutOfMemory in AZure check if this is the case still in GHA
         {
             builderVB.AddPaths("SyntaxWalker_InsufficientExecutionStackException.vb").VerifyNoIssues();
         }

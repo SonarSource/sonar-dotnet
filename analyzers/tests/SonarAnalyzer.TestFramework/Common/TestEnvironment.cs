@@ -19,12 +19,15 @@ namespace SonarAnalyzer.TestFramework.Common;
 
 public static class TestEnvironment
 {
-    public static bool IsAzureDevOpsContext =>
-        BuildReason() is not null;
+    public static bool IsCiContext =>
+        BuildReason() is not null                                            // Azure DevOps FixMe: NET-4160 Delete when Azure Pipeline is deleted
+        || Environment.GetEnvironmentVariable("GITHUB_ACTIONS") == "true";   // GitHub Actions
 
     public static bool IsPullRequestBuild =>
-         BuildReason() == "PullRequest";
+        BuildReason() == "PullRequest"                                       // Azure DevOps FixMe: NET-4160 Delete when Azure Pipeline is deleted
+        || Environment.GetEnvironmentVariable("GITHUB_EVENT_NAME") == "pull_request";   // GitHub Actions
 
+    // Azure DevOps FixMe: NET-4160 Delete when Azure Pipeline is deleted
     public static string BuildReason() =>
         Environment.GetEnvironmentVariable("BUILD_REASON");
 }

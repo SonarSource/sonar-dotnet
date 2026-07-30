@@ -28,7 +28,7 @@ public class LanguageOptionsTest
     {
         var vbOptions = LanguageOptions.FromVisualBasic12.Cast<VB.VisualBasicParseOptions>().Select(x => x.LanguageVersion);
         var csOptions = LanguageOptions.FromCSharp6.Cast<CS.CSharpParseOptions>().Select(x => x.LanguageVersion);
-        if (!TestEnvironment.IsAzureDevOpsContext || TestEnvironment.IsPullRequestBuild)
+        if (!TestEnvironment.IsCiContext || TestEnvironment.IsPullRequestBuild)
         {
             csOptions.Should().BeEquivalentTo([CS.LanguageVersion.CSharp6]);
             vbOptions.Should().BeEquivalentTo([VB.LanguageVersion.VisualBasic12]);
