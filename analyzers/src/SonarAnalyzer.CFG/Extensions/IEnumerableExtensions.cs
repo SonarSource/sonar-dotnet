@@ -19,11 +19,14 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 internal static class IEnumerableExtensions
 {
-    public static HashSet<T> ToHashSet<T>(this IEnumerable<T> enumerable, IEqualityComparer<T> equalityComparer = null)
+    extension<T>(IEnumerable<T> enumerable)
     {
-        enumerable ??= [];
-        return equalityComparer is null
-            ? new(enumerable)
-            : new(enumerable, equalityComparer);
+        public HashSet<T> ToHashSet(IEqualityComparer<T> equalityComparer = null)
+        {
+            enumerable ??= [];
+            return equalityComparer is null
+                ? new(enumerable)
+                : new(enumerable, equalityComparer);
+        }
     }
 }

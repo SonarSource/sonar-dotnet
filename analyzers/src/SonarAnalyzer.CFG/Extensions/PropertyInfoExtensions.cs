@@ -22,24 +22,27 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 internal static class PropertyInfoExtensions
 {
-    public static T ReadCached<T>(this PropertyInfo property, object instance, ref T cache) where T : class =>
-        cache ??= (T)property.GetValue(instance);
-
-    public static T ReadCached<T>(this PropertyInfo property, object instance, ref T? cache) where T : struct =>
-        cache ??= (T)property.GetValue(instance);
-
-    public static T ReadCached<T>(this PropertyInfo property, object instance, Func<object, T> createInstance, ref T cache) where T : class =>
-        cache ??= createInstance(property.GetValue(instance));
-
-    public static ImmutableArray<T> ReadCached<T>(this PropertyInfo property, object instance, ref ImmutableArray<T> cache) =>
-        ReadCached(property, instance, x => (T)x, ref cache);
-
-    public static ImmutableArray<T> ReadCached<T>(this PropertyInfo property, object instance, Func<object, T> createInstance, ref ImmutableArray<T> cache)
+    extension(PropertyInfo property)
     {
-        if (cache.IsDefault)
+        public T ReadCached<T>(object instance, ref T cache) where T : class =>
+            cache ??= (T)property.GetValue(instance);
+
+        public T ReadCached<T>(object instance, ref T? cache) where T : struct =>
+            cache ??= (T)property.GetValue(instance);
+
+        public T ReadCached<T>(object instance, Func<object, T> createInstance, ref T cache) where T : class =>
+            cache ??= createInstance(property.GetValue(instance));
+
+        public ImmutableArray<T> ReadCached<T>(object instance, ref ImmutableArray<T> cache) =>
+            property.ReadCached(instance, x => (T)x, ref cache);
+
+        public ImmutableArray<T> ReadCached<T>(object instance, Func<object, T> createInstance, ref ImmutableArray<T> cache)
         {
-            cache = ((IEnumerable)property.GetValue(instance)).Cast<object>().Select(createInstance).ToImmutableArray();
+            if (cache.IsDefault)
+            {
+                cache = ((IEnumerable)property.GetValue(instance)).Cast<object>().Select(createInstance).ToImmutableArray();
+            }
+            return cache;
         }
-        return cache;
     }
 }

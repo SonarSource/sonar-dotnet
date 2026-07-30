@@ -17,15 +17,18 @@
 
 namespace SonarAnalyzer.CFG.Extensions;
 
-internal static class DictionaryExtensions
+internal static class IDictionaryExtensions
 {
-    public static TValue GetOrAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TValue> factory)
+    extension<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
     {
-        if (!dictionary.TryGetValue(key, out var value))
+        public TValue GetOrAdd(TKey key, Func<TKey, TValue> factory)
         {
-            value = factory(key);
-            dictionary.Add(key, value);
+            if (!dictionary.TryGetValue(key, out var value))
+            {
+                value = factory(key);
+                dictionary.Add(key, value);
+            }
+            return value;
         }
-        return value;
     }
 }

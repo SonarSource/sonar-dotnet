@@ -119,7 +119,7 @@ public class RoslynControlFlowGraphTest
             }
             """;
         var cfg = TestCompiler.CompileCfgCS(code);
-        var anonymousFunctionOperations = ControlFlowGraphExtensions.FlowAnonymousFunctionOperations(cfg).ToList();
+        var anonymousFunctionOperations = cfg.FlowAnonymousFunctionOperations().ToList();
         anonymousFunctionOperations.Should().HaveCount(2);
         cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[0], default).Should().NotBeNull();
         cfg.GetAnonymousFunctionControlFlowGraph(anonymousFunctionOperations[1], default).Should().NotBeNull();

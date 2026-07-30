@@ -161,7 +161,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 AddBranch(block, Cfg.Blocks[catchOrFilterRegion.FirstBlockOrdinal]);
             }
         }
-        if (block.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Try } tryRegion)
+        if (block.EnclosingNonLocalLifetimeRegion is { Kind: ControlFlowRegionKind.Try } tryRegion)
         {
             var catchesAll = false;
             if (tryRegion.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } tryAndCatchRegion)
@@ -183,9 +183,9 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             BuildBranchesCatch(block);
         }
-        if (block.EnclosingNonLocalLifetimeRegion() is { Kind: ControlFlowRegionKind.Finally })
+        if (block.EnclosingNonLocalLifetimeRegion is { Kind: ControlFlowRegionKind.Finally } nonLocalFinally)
         {
-            BuildBranchesToOuterCatch(block, block.EnclosingNonLocalLifetimeRegion().EnclosingRegion);
+            BuildBranchesToOuterCatch(block, nonLocalFinally.EnclosingRegion);
         }
 
         void AddPredecessorsOutsideRegion(BasicBlock destination)
@@ -237,7 +237,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     private void BuildBranchesRethrow(BasicBlock block)
     {
         var currentTryCatchRegion = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch);
-        var reachableHandlerRegions = currentTryCatchRegion.NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers();
+        var reachableHandlerRegions = currentTryCatchRegion.NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers;
         var reachableCatchAndFinallyBlocks = reachableHandlerRegions.Where(x => x.FirstBlockOrdinal > currentTryCatchRegion.LastBlockOrdinal).SelectMany(x => x.Blocks(Cfg));
         // On the use of `EnclosingRegion` below: Other than a finally region, a `Catch` region also acts as a `LocalLifetime` region.
         // Therefore blocks in a `catch` always have the `Catch` region as their direct parent and thus checking `EnclosingRegion` instead of `IsEnclosedIn` is sufficient.

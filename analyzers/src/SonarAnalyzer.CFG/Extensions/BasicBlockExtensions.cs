@@ -21,15 +21,17 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 public static class BasicBlockExtensions
 {
-    public static bool IsEnclosedIn(this BasicBlock block, ControlFlowRegionKind kind)
+    extension(BasicBlock block)
     {
-        var enclosing = kind == ControlFlowRegionKind.LocalLifetime ? block.EnclosingRegion : block.EnclosingNonLocalLifetimeRegion();
-        return enclosing.Kind == kind;
+        public bool IsEnclosedIn(ControlFlowRegionKind kind)
+        {
+            var enclosing = kind == ControlFlowRegionKind.LocalLifetime ? block.EnclosingRegion : block.EnclosingNonLocalLifetimeRegion;
+            return enclosing.Kind == kind;
+        }
+
+        public ControlFlowRegion EnclosingNonLocalLifetimeRegion => block.EnclosingRegion.EnclosingNonLocalLifetimeRegion;
+
+        public ControlFlowRegion EnclosingRegion(ControlFlowRegionKind kind) =>
+            block.EnclosingRegion.EnclosingRegionOrSelf(kind);
     }
-
-    public static ControlFlowRegion EnclosingNonLocalLifetimeRegion(this BasicBlock block) =>
-        block.EnclosingRegion.EnclosingNonLocalLifetimeRegion();
-
-    public static ControlFlowRegion EnclosingRegion(this BasicBlock block, ControlFlowRegionKind kind) =>
-        block.EnclosingRegion.EnclosingRegionOrSelf(kind);
 }
