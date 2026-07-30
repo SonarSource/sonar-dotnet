@@ -63,7 +63,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             // Verifies the given pattern is like "foo is Bar" - where Bar can be various Patterns, except 'null'.
             static bool IsAffirmativePatternMatch(IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-                !isPatternWrapper.IsNull() && !isPatternWrapper.IsNot();
+                isPatternWrapper is { IsNull: false, IsNot: false };
         }
 
         protected override SyntaxNode GetInvertedIsOperatorCheckVariable(SyntaxNode node)
@@ -85,7 +85,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             // Verifies the pattern is like "foo is not Bar" - where Bar can be various Patterns, except 'null'.
             static bool IsNegativePatternMatch(IsPatternExpressionSyntaxWrapper patternSyntaxWrapper) =>
-                patternSyntaxWrapper.IsNot() && !patternSyntaxWrapper.IsNotNull();
+                patternSyntaxWrapper is { IsNot: true, IsNotNull: false };
         }
 
         protected override bool AreEquivalent(SyntaxNode node1, SyntaxNode node2) => CSharpEquivalenceChecker.AreEquivalent(node1, node2);
@@ -107,16 +107,13 @@ namespace SonarAnalyzer.CSharp.Rules
 
             static bool IsNotNullPattern(SyntaxNode node) =>
                 UnaryPatternSyntaxWrapper.IsInstance(node)
-                && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
-                && unaryPatternSyntaxWrapper.IsNotNull();
+                && (UnaryPatternSyntaxWrapper)node is { IsNotNull: true };
 
             // Verifies the given pattern is an affirmative pattern - constant pattern (except 'null'), Declaration pattern, Recursive pattern.
             // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
             static bool IsAffirmativePatternMatch(SyntaxNode node) =>
                 PatternSyntaxWrapper.IsInstance(node)
-                && ((PatternSyntaxWrapper)node) is var isPatternWrapper
-                && !isPatternWrapper.IsNot()
-                && !isPatternWrapper.IsNull();
+                && (PatternSyntaxWrapper)node is { IsNot: false, IsNull: false };
         }
 
         private static void CheckOrPattern(SonarSyntaxNodeReportingContext context)
@@ -128,11 +125,11 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 var leftPattern = (PatternSyntaxWrapper)left;
                 var rightPattern = (PatternSyntaxWrapper)right;
-                if (leftPattern.IsNull() && IsNegativePatternMatch(rightPattern))
+                if (leftPattern.IsNull && IsNegativePatternMatch(rightPattern))
                 {
                     context.ReportIssue(RuleForPatternSyntax, left);
                 }
-                else if (rightPattern.IsNull() && IsNegativePatternMatch(leftPattern))
+                else if (rightPattern.IsNull && IsNegativePatternMatch(leftPattern))
                 {
                     context.ReportIssue(RuleForPatternSyntax, right);
                 }
@@ -141,9 +138,8 @@ namespace SonarAnalyzer.CSharp.Rules
             // Verifies that it's like a negative pattern except 'not null' e.g. 'not Apple', 'not (5 or 6)'.
             // The PatternSyntax appears e.g. in switch arms and is different from IsPatternSyntax.
             static bool IsNegativePatternMatch(PatternSyntaxWrapper node) =>
-                node.IsNot()
-                && ((UnaryPatternSyntaxWrapper)node) is var unaryPatternSyntaxWrapper
-                && !unaryPatternSyntaxWrapper.Pattern.IsNull();
+                node.IsNot
+                && (UnaryPatternSyntaxWrapper)node is { Pattern.IsNull: false };
         }
 
         /// <summary>

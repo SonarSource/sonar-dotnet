@@ -21,9 +21,10 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 public static class UnaryPatternSyntaxWrapperExtensions
 {
-    public static bool IsNot(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-        unaryPatternSyntaxWrapper.SyntaxNode.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
+    extension(UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper)
+    {
+        public bool IsNot => unaryPatternSyntaxWrapper.Node.WithoutEnclosingParentheses.Kind() == SyntaxKindEx.NotPattern;
 
-    public static bool IsNotNull(this UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper) =>
-        unaryPatternSyntaxWrapper.IsNot() && unaryPatternSyntaxWrapper.Pattern.IsNull();
+        public bool IsNotNull => unaryPatternSyntaxWrapper is { IsNot: true, Pattern.IsNull: true };
+    }
 }

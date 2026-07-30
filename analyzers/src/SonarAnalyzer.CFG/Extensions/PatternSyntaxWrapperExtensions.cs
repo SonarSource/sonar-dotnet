@@ -21,15 +21,16 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 public static class PatternSyntaxWrapperExtensions
 {
-    public static bool IsNull(this PatternSyntaxWrapper patternSyntaxWrapper) =>
-        patternSyntaxWrapper.RemoveParentheses() is var syntaxNode
-        && ConstantPatternSyntaxWrapper.IsInstance(syntaxNode)
-        && (ConstantPatternSyntaxWrapper)syntaxNode is var constantPattern
-        && constantPattern.Expression.Kind() == SyntaxKind.NullLiteralExpression;
+    extension(PatternSyntaxWrapper patternSyntaxWrapper)
+    {
+        public bool IsNull =>
+            patternSyntaxWrapper.WithoutEnclosingParentheses is var syntaxNode
+            && ConstantPatternSyntaxWrapper.IsInstance(syntaxNode)
+            && (ConstantPatternSyntaxWrapper)syntaxNode is var constantPattern
+            && constantPattern.Expression.Kind() == SyntaxKind.NullLiteralExpression;
 
-    public static bool IsNot(this PatternSyntaxWrapper patternSyntaxWrapper) =>
-        patternSyntaxWrapper.RemoveParentheses().Kind() == SyntaxKindEx.NotPattern;
+        public bool IsNot => patternSyntaxWrapper.WithoutEnclosingParentheses.Kind() == SyntaxKindEx.NotPattern;
 
-    public static SyntaxNode RemoveParentheses(this PatternSyntaxWrapper patternSyntaxWrapper) =>
-        patternSyntaxWrapper.SyntaxNode.RemoveParentheses();
+        public SyntaxNode WithoutEnclosingParentheses => patternSyntaxWrapper.Node.WithoutEnclosingParentheses;
+    }
 }

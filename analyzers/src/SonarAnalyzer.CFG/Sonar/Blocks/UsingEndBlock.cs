@@ -43,7 +43,7 @@ namespace SonarAnalyzer.CFG.Sonar
 
         private static IEnumerable<SyntaxToken> GetIdentifiers(ExpressionSyntax expression)
         {
-            return expression.RemoveParentheses() is IdentifierNameSyntax identifier ? ImmutableArray.Create(identifier.Identifier)
+            return expression.WithoutEnclosingParentheses is IdentifierNameSyntax identifier ? ImmutableArray.Create(identifier.Identifier)
                 : expression.DescendantNodesAndSelf()
                     .OfType<AssignmentExpressionSyntax>()
                     .Select(a => a.Left)

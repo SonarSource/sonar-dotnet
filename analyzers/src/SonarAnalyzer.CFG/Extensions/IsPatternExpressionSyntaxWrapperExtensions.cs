@@ -19,18 +19,20 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 public static class IsPatternExpressionSyntaxWrapperExtensions
 {
-    public static bool IsNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-        isPatternWrapper.Pattern.IsNull();
+    extension(IsPatternExpressionSyntaxWrapper isPatternWrapper)
+    {
+        public bool IsNull => isPatternWrapper.Pattern.IsNull;
 
-    public static bool IsNot(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-        isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
-        && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
-        && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
-        && unaryPatternSyntaxWrapper.IsNot();
+        public bool IsNot =>
+            isPatternWrapper.Pattern.WithoutEnclosingParentheses is var syntaxNode
+            && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
+            && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
+            && unaryPatternSyntaxWrapper.IsNot;
 
-    public static bool IsNotNull(this IsPatternExpressionSyntaxWrapper isPatternWrapper) =>
-        isPatternWrapper.Pattern.RemoveParentheses() is var syntaxNode
-        && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
-        && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
-        && unaryPatternSyntaxWrapper.IsNotNull();
+        public bool IsNotNull =>
+            isPatternWrapper.Pattern.WithoutEnclosingParentheses is var syntaxNode
+            && UnaryPatternSyntaxWrapper.IsInstance(syntaxNode)
+            && ((UnaryPatternSyntaxWrapper)syntaxNode) is var unaryPatternSyntaxWrapper
+            && unaryPatternSyntaxWrapper.IsNotNull;
+    }
 }

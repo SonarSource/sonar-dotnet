@@ -21,6 +21,8 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 internal static class ExpressionSyntaxExtensions
 {
-    public static ExpressionSyntax RemoveParentheses(this ExpressionSyntax expression) =>
-        (ExpressionSyntax)SyntaxNodeExtensions.RemoveParentheses(expression);
+    extension(ExpressionSyntax expression)
+    {
+        public ExpressionSyntax WithoutEnclosingParentheses => (ExpressionSyntax)((SyntaxNode)expression).WithoutEnclosingParentheses;
+    }
 }

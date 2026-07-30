@@ -24,20 +24,26 @@ internal static class SyntaxNodeExtensions
 {
     private static readonly ISet<SyntaxKind> ParenthesizedExpressionKinds = new HashSet<SyntaxKind> { SyntaxKind.ParenthesizedExpression, SyntaxKindEx.ParenthesizedPattern };
 
-    public static SyntaxNode RemoveParentheses(this SyntaxNode expression)
+    extension(SyntaxNode expression)
     {
-        var currentExpression = expression;
-        while (currentExpression is not null && ParenthesizedExpressionKinds.Contains(currentExpression.Kind()))
+        public SyntaxNode WithoutEnclosingParentheses
         {
-            if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
+            get
             {
-                currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
-            }
-            else
-            {
-                currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
+                var currentExpression = expression;
+                while (currentExpression is not null && ParenthesizedExpressionKinds.Contains(currentExpression.Kind()))
+                {
+                    if (currentExpression.IsKind(SyntaxKind.ParenthesizedExpression))
+                    {
+                        currentExpression = ((ParenthesizedExpressionSyntax)currentExpression).Expression;
+                    }
+                    else
+                    {
+                        currentExpression = ((ParenthesizedPatternSyntaxWrapper)currentExpression).Pattern;
+                    }
+                }
+                return currentExpression;
             }
         }
-        return currentExpression;
     }
 }

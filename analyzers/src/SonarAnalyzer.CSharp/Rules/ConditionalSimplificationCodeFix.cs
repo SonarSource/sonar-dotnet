@@ -105,7 +105,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
 
             var parent = (UnaryPatternSyntaxWrapper)node;
-            if (parent.IsNot() && parent.Pattern.IsNot())
+            if (parent is { IsNot: true, Pattern.IsNot: true })
             {
                 return ReduceDoubleNegation(((UnaryPatternSyntaxWrapper)parent.Pattern).Pattern);
             }

@@ -1249,7 +1249,7 @@ namespace SonarAnalyzer.CFG.Sonar
 
         public static bool IsAssignmentWithSimpleLeftSide(AssignmentExpressionSyntax assignment)
         {
-            return assignment.Left.RemoveParentheses() is IdentifierNameSyntax;
+            return assignment.Left.WithoutEnclosingParentheses is IdentifierNameSyntax;
         }
 
         private Block BuildArrayType(ArrayTypeSyntax arrayType, Block currentBlock)
@@ -1358,7 +1358,7 @@ namespace SonarAnalyzer.CFG.Sonar
         /// </summary>
         private Block BuildCondition(ExpressionSyntax expression, Block trueSuccessor, Block falseSuccessor)
         {
-            expression = expression.RemoveParentheses();
+            expression = expression.WithoutEnclosingParentheses;
 
             if (expression is BinaryExpressionSyntax binaryExpression)
             {

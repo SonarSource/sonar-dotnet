@@ -104,13 +104,13 @@ public static class ExpressionSyntaxExtensions
             if (IsPatternExpressionSyntaxWrapper.IsInstance(expression.WithoutEnclosingParentheses))
             {
                 var isPatternWrapper = (IsPatternExpressionSyntaxWrapper)expression.WithoutEnclosingParentheses;
-                if (isPatternWrapper.IsNotNull())
+                if (isPatternWrapper.IsNotNull)
                 {
                     isAffirmative = false;
                     compared = isPatternWrapper.Expression;
                     return true;
                 }
-                else if (isPatternWrapper.IsNull())
+                else if (isPatternWrapper.IsNull)
                 {
                     isAffirmative = true;
                     compared = isPatternWrapper.Expression;

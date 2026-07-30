@@ -57,8 +57,7 @@ public sealed class ConditionalSimplification : SonarDiagnosticAnalyzer
 
     private static void CheckNotPattern(SonarSyntaxNodeReportingContext context)
     {
-        var wrapper = (UnaryPatternSyntaxWrapper)context.Node;
-        if (wrapper.Pattern.IsNot()
+        if (((UnaryPatternSyntaxWrapper)context.Node).Pattern.IsNot
             && GetNegationRoot(context.Node) is var negationRoot
             && negationRoot == context.Node)
         {
