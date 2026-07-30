@@ -1,0 +1,51 @@
+<p>An <code>Include</code> or <code>ThenInclude</code> call can be entirely inert: Entity Framework Core generates the exact same SQL with or without
+it.</p>
+<h2>Why is this an issue?</h2>
+<p>Entity Framework Core resolves the navigation path of every <code>Include</code>/<code>ThenInclude</code> call and merges calls that resolve to the
+same path into a single join. Repeating <code>Include</code> for a navigation that is already included, without adding a new <code>ThenInclude</code>
+afterwards, generates identical SQL to removing the repeated call — it adds nothing but noise and can mislead a reader into thinking it changes what
+is loaded.</p>
+<h3>Exceptions</h3>
+<p>The rule does not apply when:</p>
+<ul>
+  <li>the repeated <code>Include</code> call re-anchors the chain before a different <code>ThenInclude</code>. Entity Framework Core has no syntax for
+  attaching two different <code>ThenInclude</code> continuations to one <code>Include</code>, so repeating it is the idiomatic way to load two
+  independent nested navigations or collections.</li>
+  <li>one of the calls applies a filter (through <code>Where</code>, <code>Skip</code>, <code>Take</code>, or similar) that the other does not carry,
+  regardless of which one is written first — removing the filtered call would change which rows are loaded.</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Remove the <code>Include</code> (or <code>ThenInclude</code>) call that has no effect.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var students = await context.Students
+    .Include(s =&gt; s.Enrollments) // Noncompliant: "Enrollments" is already included below
+    .Include(s =&gt; s.Enrollments)
+    .ToListAsync();
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var students = await context.Students
+    .Include(s =&gt; s.Enrollments)
+    .ToListAsync();
+</pre>
+<p>This repeated <code>Include</code> is not redundant — it branches into two different <code>ThenInclude</code> calls:</p>
+<pre>
+var students = await context.Students
+    .Include(s =&gt; s.Enrollments).ThenInclude(e =&gt; e.Course)
+    .Include(s =&gt; s.Enrollments).ThenInclude(e =&gt; e.Student) // Compliant: re-anchors before a different ThenInclude
+    .ToListAsync();
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager">Loading related data - Eager loading</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:csharpsquid:S8733} - covers loading multiple sibling collections in a single query; this rule instead covers <code>Include</code> calls
+  that add nothing to the query at all.</li>
+  <li>{rule:csharpsquid:S9023} - covers <code>Include</code> calls that silently drop real data, not just harmless no-ops.</li>
+</ul>
+

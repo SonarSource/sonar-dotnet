@@ -1,0 +1,26 @@
+{
+  "title": "Redundant \"Include\" calls should be removed",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "entity-framework-core",
+    "entity-framework",
+    "orm",
+    "database"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-9022",
+  "sqKey": "S9022",
+  "scope": "Main",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CLEAR"
+  }
+}
