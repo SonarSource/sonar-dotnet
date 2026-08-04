@@ -33,9 +33,9 @@ public sealed class UseUnixEpoch : UseUnixEpochBase<SyntaxKind, LiteralExpressio
         {
             MemberAccessExpressionSyntax memberAccess => memberAccess.NameIs("Zero") && memberAccess.Expression.NameIs("TimeSpan"),
             ObjectCreationExpressionSyntax objectCreation => objectCreation.Type.NameIs("TimeSpan")
-                                                             && objectCreation?.ArgumentList != null && objectCreation.ArgumentList.Arguments.Count is 1
-                                                             && objectCreation.ArgumentList.Arguments[0].GetExpression() is LiteralExpressionSyntax literal
-                                                             && IsValueEqualTo(literal, 0),
+                && objectCreation.ArgumentList is { Arguments.Count: 1 }
+                && objectCreation.ArgumentList.Arguments[0].GetExpression() is LiteralExpressionSyntax literal
+                && IsValueEqualTo(literal, 0),
             _ => false
         };
 }
