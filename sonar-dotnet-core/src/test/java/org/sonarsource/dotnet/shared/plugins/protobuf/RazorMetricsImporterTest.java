@@ -119,7 +119,8 @@ public class RazorMetricsImporterTest extends RazorImporterTestBase {
   public void roslyn_metrics_out_of_range_with_4_10_debug_enabled() throws FileNotFoundException {
     addTestFileToContext("_Imports.razor");
     var fileLinesContextFactory = mock(FileLinesContextFactory.class);
-    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(mock(FileLinesContext.class));
+    var fileLinesContext = mock(FileLinesContext.class);
+    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
 
     new MetricsImporter(sensorContext, fileLinesContextFactory, mock(NoSonarFilter.class), RazorImporterTestBase::fileName).accept(PROTOBUF_4_10_FILE.toPath());
 

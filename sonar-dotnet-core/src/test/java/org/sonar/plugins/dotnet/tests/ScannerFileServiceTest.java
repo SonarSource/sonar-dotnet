@@ -224,8 +224,9 @@ public class ScannerFileServiceTest {
 
   private FileSystem createFileSystemForHasFiles(boolean result) {
     FileSystem fs = mock(FileSystem.class);
+    FilePredicates filePredicates = mock(FilePredicates.class);
     when(fs.hasFiles(any())).thenReturn(result);
-    when(fs.predicates()).thenReturn(mock(FilePredicates.class));
+    when(fs.predicates()).thenReturn(filePredicates);
     return fs;
   }
 
