@@ -131,7 +131,8 @@ public class RazorMetricsImporterTest extends RazorImporterTestBase {
     logTester.setLevel(Level.INFO);
     addTestFileToContext("_Imports.razor");
     var fileLinesContextFactory = mock(FileLinesContextFactory.class);
-    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(mock(FileLinesContext.class));
+    var fileLinesContext = mock(FileLinesContext.class);
+    when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
 
     new MetricsImporter(sensorContext, fileLinesContextFactory, mock(NoSonarFilter.class), RazorImporterTestBase::fileName).accept(PROTOBUF_4_10_FILE.toPath());
 

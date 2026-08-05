@@ -54,10 +54,11 @@ public class ScannerFileServiceTest {
   public void isSupportedAbsolute_passes_correct_argument() {
     // arrange
     FileSystem fs = mock(FileSystem.class);
+    FilePredicate filePredicate = mock(FilePredicate.class);
     FilePredicates filePredicates = mock(FilePredicates.class);
 
     ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
-    when(filePredicates.hasAbsolutePath(argumentCaptor.capture())).thenReturn(mock(FilePredicate.class));
+    when(filePredicates.hasAbsolutePath(argumentCaptor.capture())).thenReturn(filePredicate);
     when(fs.predicates()).thenReturn(filePredicates);
     when(fs.hasFiles(any())).thenReturn(true);
 
@@ -215,7 +216,8 @@ public class ScannerFileServiceTest {
 
   private FileSystem createFileSystemReturningAllFiles(Iterable<InputFile> inputFilesResult) {
     FileSystem fs = mock(FileSystem.class);
-    when(fs.predicates()).thenReturn(mock(FilePredicates.class));
+    FilePredicates filePredicates = mock(FilePredicates.class);
+    when(fs.predicates()).thenReturn(filePredicates);
     when(fs.inputFiles(any())).thenReturn(inputFilesResult);
     return fs;
   }
