@@ -142,8 +142,12 @@ namespace CSharp10
     public class Repro_NET1322
     {
         const string tableName = "MyTableName";
-        const string strQuery = $"SELECT * FROM [{tableName}] "; // Noncompliant {{Add a space before 'MyTableName'.}} FP
-                                                                 // Noncompliant@-1 {{Add a space before ']'.}} FP
+        const string strQuery = $"SELECT * FROM [{tableName}] "; // Compliant - brackets delimit a SQL identifier, no space needed around it
+
+        const string tableNameWithSpace = "My Table Name";
+        const string strQueryWithSpaceInName = $"SELECT * FROM [{tableNameWithSpace}] "; // Compliant - same as above, identifier itself may contain spaces
+
+        const string strQueryConcatenated = "SELECT * FROM [" + tableName + "]"; // Compliant - same bracket-escaping rule applies via string concatenation
     }
 }
 
@@ -185,8 +189,7 @@ namespace CSharp11
 		        [Artifact].[Id] AS [{nameof(ArtifactDto.Id)}],
 		        [Artifact].[TagIdentifier] AS [{nameof(ArtifactDto.TagIdentifier)}]
 	        FROM
-		        [Artifacts] AS [Artifact]"; // Noncompliant@-3 [Id, bracket_Id] FPs
-                                            // Noncompliant@-3 [TagIdentifier, bracket_TagIdentifier] FPs
+		        [Artifacts] AS [Artifact]"; // Compliant - brackets delimit SQL identifiers, no space needed around them
 
         string sqlQuery2 = $"""
             SELECT
@@ -194,8 +197,7 @@ namespace CSharp11
                 [Artifact].[TagIdentifier] AS [{nameof(ArtifactDto.TagIdentifier)}]
             FROM
                 [Artifacts] AS [Artifact]
-            """; // Noncompliant@-4 [Id2, bracket_Id2] FPs
-                 // Noncompliant@-4 [TagIdentifier2, bracket_TagIdentifier2] FPs
+            """; // Compliant - brackets delimit SQL identifiers, no space needed around them
     }
 }
 
