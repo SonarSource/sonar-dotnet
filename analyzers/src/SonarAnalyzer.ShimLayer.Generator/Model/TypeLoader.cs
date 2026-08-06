@@ -49,15 +49,23 @@ public sealed class TypeLoader : IDisposable
 
     private static IEnumerable<MemberInfo> FindMembers(Type type)
     {
+        var visitedProperties = new HashSet<string>();
         foreach (var member in type.GetMembers())
         {
+            if (member is PropertyInfo)
+            {
+                visitedProperties.Add(member.Name);
+            }
             yield return member;
         }
         if (type.IsInterface)   // Members from inherited interfaces are not present in type.GetMembers()
         {
             foreach (var member in type.GetInterfaces().SelectMany(x => x.GetMembers()))
             {
-                yield return member;
+                if (member is not PropertyInfo || visitedProperties.Add(member.Name))
+                {
+                    yield return member;
+                }
             }
         }
     }

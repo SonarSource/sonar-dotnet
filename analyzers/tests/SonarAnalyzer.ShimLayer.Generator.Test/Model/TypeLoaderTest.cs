@@ -80,6 +80,15 @@ public class TypeLoaderTest
     }
 
     [TestMethod]
+    public void Load_SkipShadowedMembers()
+    {
+        using var typeLoader = new TypeLoader();
+        // Base ICaseClauseOperation        contains ILabelSymbol? Label
+        // Type IPatternCaseClauseOperation contains ILabelSymbol  Label
+        typeLoader.LoadLatest().Single(x => x.Type.FullName == "Microsoft.CodeAnalysis.Operations.IPatternCaseClauseOperation").Members.Should().ContainSingle(x => x.Name == "Label");
+    }
+
+    [TestMethod]
     public void Load_ExplicitInterfaces_Ignored()
     {
         const string ImplicitInterface = "IFormattable";
