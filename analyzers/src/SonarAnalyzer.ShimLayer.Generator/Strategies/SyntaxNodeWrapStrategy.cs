@@ -102,7 +102,7 @@ public class SyntaxNodeWrapStrategy : Strategy
                 """);
             baseType = baseType.BaseType;
         }
-        return sb?.ToString() ?? string.Empty;
+        return sb?.ToString();
     }
 
     private string MemberAccessorInitialization(MemberInfo member, StrategyModel model) =>

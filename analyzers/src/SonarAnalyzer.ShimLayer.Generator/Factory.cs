@@ -32,7 +32,7 @@ public static class Factory
         {
             if (strategy.Generate(model) is { } content)
             {
-                var shortened = ExcessiveNewLines.Replace(content, "\n\n");
+                var shortened = ExcessiveNewLines.Replace(content.Replace("\r", null), "\n\n");
                 yield return new($"{strategy.Latest.Name}.g.cs", shortened);
             }
         }
