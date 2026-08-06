@@ -35,7 +35,7 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionSyntaxWr
     static FunctionPointerUnmanagedCallingConventionSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(FunctionPointerUnmanagedCallingConventionSyntaxWrapper));
-        NameAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Name");
+        NameAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Name");
     }
 
     private FunctionPointerUnmanagedCallingConventionSyntaxWrapper(CSharpSyntaxNode node) =>

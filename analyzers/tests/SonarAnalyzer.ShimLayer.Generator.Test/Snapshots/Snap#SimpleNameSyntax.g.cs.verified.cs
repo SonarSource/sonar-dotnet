@@ -29,13 +29,13 @@ public static partial class SimpleNameSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(SimpleNameSyntax);
 
-    private static readonly Func<SimpleNameSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsUnmanaged");
+    private static readonly Func<SimpleNameSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsUnmanaged");
 
-    private static readonly Func<SimpleNameSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNotNull");
+    private static readonly Func<SimpleNameSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNotNull");
 
-    private static readonly Func<SimpleNameSyntax, Boolean> IsNintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNint");
+    private static readonly Func<SimpleNameSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNint");
 
-    private static readonly Func<SimpleNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNuint");
+    private static readonly Func<SimpleNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNuint");
 
     extension(SimpleNameSyntax @this)
     {

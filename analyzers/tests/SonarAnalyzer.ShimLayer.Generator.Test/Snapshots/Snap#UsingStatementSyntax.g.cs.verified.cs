@@ -29,9 +29,9 @@ public static partial class UsingStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(UsingStatementSyntax);
 
-    private static readonly Func<UsingStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<UsingStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<UsingStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<UsingStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-    private static readonly Func<UsingStatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<UsingStatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
+    private static readonly Func<UsingStatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<UsingStatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
 
     extension(UsingStatementSyntax @this)
     {

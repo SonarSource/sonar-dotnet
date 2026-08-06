@@ -29,7 +29,7 @@ public static partial class EmptyStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(EmptyStatementSyntax);
 
-    private static readonly Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
     extension(EmptyStatementSyntax @this)
     {

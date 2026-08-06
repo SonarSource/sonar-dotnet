@@ -29,11 +29,11 @@ public static partial class UsingDirectiveSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(UsingDirectiveSyntax);
 
-    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> GlobalKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<UsingDirectiveSyntax, SyntaxToken>(WrappedType, "GlobalKeyword");
+    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> GlobalKeywordAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, SyntaxToken>(WrappedType, "GlobalKeyword");
 
-    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> UnsafeKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<UsingDirectiveSyntax, SyntaxToken>(WrappedType, "UnsafeKeyword");
+    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> UnsafeKeywordAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, SyntaxToken>(WrappedType, "UnsafeKeyword");
 
-    private static readonly Func<UsingDirectiveSyntax, TypeSyntax> NamespaceOrTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<UsingDirectiveSyntax, TypeSyntax>(WrappedType, "NamespaceOrType");
+    private static readonly Func<UsingDirectiveSyntax, TypeSyntax> NamespaceOrTypeAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, TypeSyntax>(WrappedType, "NamespaceOrType");
 
     extension(UsingDirectiveSyntax @this)
     {

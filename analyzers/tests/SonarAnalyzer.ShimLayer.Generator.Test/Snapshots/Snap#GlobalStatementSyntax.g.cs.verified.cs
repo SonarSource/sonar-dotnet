@@ -29,9 +29,9 @@ public static partial class GlobalStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(GlobalStatementSyntax);
 
-    private static readonly Func<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-    private static readonly Func<GlobalStatementSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<GlobalStatementSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<GlobalStatementSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<GlobalStatementSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
     extension(GlobalStatementSyntax @this)
     {

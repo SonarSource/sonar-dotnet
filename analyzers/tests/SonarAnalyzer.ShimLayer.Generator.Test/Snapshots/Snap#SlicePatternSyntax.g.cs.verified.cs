@@ -35,8 +35,8 @@ public readonly partial struct SlicePatternSyntaxWrapper: ISyntaxWrapper<CSharpS
     static SlicePatternSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(SlicePatternSyntaxWrapper));
-        DotDotTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "DotDotToken");
-        PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
+        DotDotTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "DotDotToken");
+        PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
     }
 
     private SlicePatternSyntaxWrapper(CSharpSyntaxNode node) =>

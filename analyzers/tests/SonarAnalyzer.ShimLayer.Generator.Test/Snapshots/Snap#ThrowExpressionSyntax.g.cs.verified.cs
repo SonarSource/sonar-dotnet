@@ -35,8 +35,8 @@ public readonly partial struct ThrowExpressionSyntaxWrapper: ISyntaxWrapper<Expr
     static ThrowExpressionSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(ThrowExpressionSyntaxWrapper));
-        ThrowKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "ThrowKeyword");
-        ExpressionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
+        ThrowKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "ThrowKeyword");
+        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
     }
 
     private ThrowExpressionSyntaxWrapper(ExpressionSyntax node) =>

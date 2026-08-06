@@ -29,7 +29,7 @@ public static partial class YieldStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(YieldStatementSyntax);
 
-    private static readonly Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<YieldStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<YieldStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
     extension(YieldStatementSyntax @this)
     {

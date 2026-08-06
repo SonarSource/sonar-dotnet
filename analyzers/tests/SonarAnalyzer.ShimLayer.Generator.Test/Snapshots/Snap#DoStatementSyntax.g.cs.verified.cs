@@ -29,7 +29,7 @@ public static partial class DoStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(DoStatementSyntax);
 
-    private static readonly Func<DoStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<DoStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<DoStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<DoStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
     extension(DoStatementSyntax @this)
     {

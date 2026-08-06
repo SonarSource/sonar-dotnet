@@ -35,9 +35,9 @@ public readonly partial struct BinaryPatternSyntaxWrapper: ISyntaxWrapper<CSharp
     static BinaryPatternSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(BinaryPatternSyntaxWrapper));
-        LeftAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Left");
-        OperatorTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
-        RightAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Right");
+        LeftAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Left");
+        OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
+        RightAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Right");
     }
 
     private BinaryPatternSyntaxWrapper(CSharpSyntaxNode node) =>

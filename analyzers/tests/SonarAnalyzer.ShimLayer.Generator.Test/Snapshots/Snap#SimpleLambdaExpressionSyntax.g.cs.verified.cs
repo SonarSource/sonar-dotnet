@@ -29,13 +29,13 @@ public static partial class SimpleLambdaExpressionSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(SimpleLambdaExpressionSyntax);
 
-    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleLambdaExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<SimpleLambdaExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
-    private static readonly Func<SimpleLambdaExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleLambdaExpressionSyntax, BlockSyntax>(WrappedType, "Block");
+    private static readonly Func<SimpleLambdaExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<SimpleLambdaExpressionSyntax, BlockSyntax>(WrappedType, "Block");
 
-    private static readonly Func<SimpleLambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<SimpleLambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<SimpleLambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<SimpleLambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
     extension(SimpleLambdaExpressionSyntax @this)
     {

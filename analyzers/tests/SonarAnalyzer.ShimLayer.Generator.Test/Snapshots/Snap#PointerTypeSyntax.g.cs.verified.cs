@@ -29,13 +29,13 @@ public static partial class PointerTypeSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(PointerTypeSyntax);
 
-    private static readonly Func<PointerTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
+    private static readonly Func<PointerTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
 
-    private static readonly Func<PointerTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNotNull");
+    private static readonly Func<PointerTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNotNull");
 
-    private static readonly Func<PointerTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNint");
+    private static readonly Func<PointerTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNint");
 
-    private static readonly Func<PointerTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNuint");
+    private static readonly Func<PointerTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNuint");
 
     extension(PointerTypeSyntax @this)
     {

@@ -29,7 +29,7 @@ public static partial class LockStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(LockStatementSyntax);
 
-    private static readonly Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<LockStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<LockStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
     extension(LockStatementSyntax @this)
     {

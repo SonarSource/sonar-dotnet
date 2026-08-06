@@ -29,11 +29,11 @@ public static partial class AnonymousFunctionExpressionSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(AnonymousFunctionExpressionSyntax);
 
-    private static readonly Func<AnonymousFunctionExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<AnonymousFunctionExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<AnonymousFunctionExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
-    private static readonly Func<AnonymousFunctionExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<AnonymousFunctionExpressionSyntax, BlockSyntax>(WrappedType, "Block");
+    private static readonly Func<AnonymousFunctionExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, BlockSyntax>(WrappedType, "Block");
 
-    private static readonly Func<AnonymousFunctionExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<AnonymousFunctionExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<AnonymousFunctionExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
     extension(AnonymousFunctionExpressionSyntax @this)
     {

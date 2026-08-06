@@ -29,7 +29,7 @@ public static partial class TryStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(TryStatementSyntax);
 
-    private static readonly Func<TryStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TryStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<TryStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<TryStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
     extension(TryStatementSyntax @this)
     {

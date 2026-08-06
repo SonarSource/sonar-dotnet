@@ -35,8 +35,8 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper: IS
     static FunctionPointerCallingConventionSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(FunctionPointerCallingConventionSyntaxWrapper));
-        ManagedOrUnmanagedKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "ManagedOrUnmanagedKeyword");
-        UnmanagedCallingConventionListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "UnmanagedCallingConventionList");
+        ManagedOrUnmanagedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "ManagedOrUnmanagedKeyword");
+        UnmanagedCallingConventionListAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "UnmanagedCallingConventionList");
     }
 
     private FunctionPointerCallingConventionSyntaxWrapper(CSharpSyntaxNode node) =>

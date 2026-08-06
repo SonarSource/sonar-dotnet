@@ -29,7 +29,7 @@ public static partial class GotoStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(GotoStatementSyntax);
 
-    private static readonly Func<GotoStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<GotoStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<GotoStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<GotoStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
     extension(GotoStatementSyntax @this)
     {

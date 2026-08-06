@@ -29,9 +29,9 @@ public static partial class ConversionOperatorDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ConversionOperatorDeclarationSyntax);
 
-    private static readonly Func<ConversionOperatorDeclarationSyntax, ExplicitInterfaceSpecifierSyntax> ExplicitInterfaceSpecifierAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ConversionOperatorDeclarationSyntax, ExplicitInterfaceSpecifierSyntax>(WrappedType, "ExplicitInterfaceSpecifier");
+    private static readonly Func<ConversionOperatorDeclarationSyntax, ExplicitInterfaceSpecifierSyntax> ExplicitInterfaceSpecifierAccessor = LightupHelpers.CreatePropertyAccessor<ConversionOperatorDeclarationSyntax, ExplicitInterfaceSpecifierSyntax>(WrappedType, "ExplicitInterfaceSpecifier");
 
-    private static readonly Func<ConversionOperatorDeclarationSyntax, SyntaxToken> CheckedKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ConversionOperatorDeclarationSyntax, SyntaxToken>(WrappedType, "CheckedKeyword");
+    private static readonly Func<ConversionOperatorDeclarationSyntax, SyntaxToken> CheckedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ConversionOperatorDeclarationSyntax, SyntaxToken>(WrappedType, "CheckedKeyword");
 
     extension(ConversionOperatorDeclarationSyntax @this)
     {

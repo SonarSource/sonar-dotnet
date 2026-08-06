@@ -35,8 +35,8 @@ public readonly partial struct SpreadElementSyntaxWrapper: ISyntaxWrapper<CSharp
     static SpreadElementSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(SpreadElementSyntaxWrapper));
-        OperatorTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
-        ExpressionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
+        OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
+        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
     }
 
     private SpreadElementSyntaxWrapper(CSharpSyntaxNode node) =>

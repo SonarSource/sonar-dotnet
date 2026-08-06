@@ -29,13 +29,13 @@ public static partial class NullableTypeSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(NullableTypeSyntax);
 
-    private static readonly Func<NullableTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
+    private static readonly Func<NullableTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
 
-    private static readonly Func<NullableTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsNotNull");
+    private static readonly Func<NullableTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsNotNull");
 
-    private static readonly Func<NullableTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsNint");
+    private static readonly Func<NullableTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsNint");
 
-    private static readonly Func<NullableTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsNuint");
+    private static readonly Func<NullableTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<NullableTypeSyntax, Boolean>(WrappedType, "IsNuint");
 
     extension(NullableTypeSyntax @this)
     {

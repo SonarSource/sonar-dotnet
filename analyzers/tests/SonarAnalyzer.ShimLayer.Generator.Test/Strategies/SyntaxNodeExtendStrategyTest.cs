@@ -72,9 +72,9 @@ public class SyntaxNodeExtendStrategyTest
             {
                 private static readonly Type WrappedType = typeof(ClassDeclarationSyntax);
 
-                private static readonly Func<ClassDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ClassDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
+                private static readonly Func<ClassDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<ClassDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
 
-                private static readonly Func<ClassDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ClassDeclarationSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
+                private static readonly Func<ClassDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<ClassDeclarationSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
 
 
                 extension(ClassDeclarationSyntax @this)
@@ -128,7 +128,7 @@ public class SyntaxNodeExtendStrategyTest
             {
                 private static readonly Type WrappedType = typeof(ProcessStartInfo);
 
-                private static readonly Func<ProcessStartInfo, String> FileNameAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ProcessStartInfo, String>(WrappedType, "FileName");
+                private static readonly Func<ProcessStartInfo, String> FileNameAccessor = LightupHelpers.CreatePropertyAccessor<ProcessStartInfo, String>(WrappedType, "FileName");
 
 
                 extension(ProcessStartInfo @this)

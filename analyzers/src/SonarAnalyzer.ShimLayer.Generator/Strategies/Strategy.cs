@@ -70,7 +70,7 @@ public abstract class Strategy
        """;
 
     public virtual string PropertyAccessorInitializerSnippet(string compiletimeType, string propertyName) =>
-        $"""LightupHelpers.CreateSyntaxPropertyAccessor<{compiletimeType}, {CompiletimeTypeSnippet()}>(WrappedType, "{propertyName}")""";
+        $"""LightupHelpers.CreatePropertyAccessor<{compiletimeType}, {CompiletimeTypeSnippet()}>(WrappedType, "{propertyName}")""";
 
     protected static string SerializeAttributes(IEnumerable<CustomAttributeData> attributes, int indentSize)
     {

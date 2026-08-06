@@ -29,13 +29,13 @@ public static partial class NameSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(NameSyntax);
 
-    private static readonly Func<NameSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsUnmanaged");
+    private static readonly Func<NameSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsUnmanaged");
 
-    private static readonly Func<NameSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsNotNull");
+    private static readonly Func<NameSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsNotNull");
 
-    private static readonly Func<NameSyntax, Boolean> IsNintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsNint");
+    private static readonly Func<NameSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsNint");
 
-    private static readonly Func<NameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsNuint");
+    private static readonly Func<NameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<NameSyntax, Boolean>(WrappedType, "IsNuint");
 
     extension(NameSyntax @this)
     {

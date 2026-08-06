@@ -35,14 +35,14 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper: ISyntaxWrapper<
     static FunctionPointerTypeSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(FunctionPointerTypeSyntaxWrapper));
-        DelegateKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "DelegateKeyword");
-        AsteriskTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "AsteriskToken");
-        CallingConventionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "CallingConvention");
-        ParameterListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "ParameterList");
-        IsUnmanagedAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-        IsNotNullAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-        IsNintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-        IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
+        DelegateKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "DelegateKeyword");
+        AsteriskTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "AsteriskToken");
+        CallingConventionAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "CallingConvention");
+        ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "ParameterList");
+        IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
+        IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
+        IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
+        IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
     }
 
     private FunctionPointerTypeSyntaxWrapper(TypeSyntax node) =>

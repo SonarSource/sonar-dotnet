@@ -163,7 +163,7 @@ public class SyntaxNodeWrapStrategyTest
                 static RecordDeclarationSyntaxWrapper()
                 {
                     WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-                    ClassOrStructKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
+                    ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
                 }
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
@@ -255,7 +255,7 @@ public class SyntaxNodeWrapStrategyTest
                 static IsPatternExpressionSyntaxWrapper()
                 {
                     WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
-                    PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
+                    PatternAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
                 }
 
                 private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node) =>
@@ -622,8 +622,8 @@ public class SyntaxNodeWrapStrategyTest
                 static RecordDeclarationSyntaxWrapper()
                 {
                     WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-                    MembersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
-                    ArgumentsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
+                    MembersAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
+                    ArgumentsAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
                     ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeDeclarationSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
                 }
 

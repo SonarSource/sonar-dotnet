@@ -35,11 +35,11 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper: ISyntaxWrapper<
     static ExtensionMemberCrefSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
-        ExtensionKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
-        TypeArgumentListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
-        ParametersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");
-        DotTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "DotToken");
-        MemberAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
+        ExtensionKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
+        TypeArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
+        ParametersAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");
+        DotTokenAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "DotToken");
+        MemberAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
     }
 
     private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax node) =>

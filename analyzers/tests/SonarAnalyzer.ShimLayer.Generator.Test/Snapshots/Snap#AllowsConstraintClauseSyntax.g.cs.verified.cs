@@ -35,7 +35,7 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper: ISyntaxWrapp
     static AllowsConstraintClauseSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintClauseSyntaxWrapper));
-        AllowsKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "AllowsKeyword");
+        AllowsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "AllowsKeyword");
         ConstraintsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper>(WrappedType, nameof(Constraints));
     }
 

@@ -35,7 +35,7 @@ public readonly partial struct TypePatternSyntaxWrapper: ISyntaxWrapper<CSharpSy
     static TypePatternSyntaxWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(TypePatternSyntaxWrapper));
-        TypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
+        TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
     }
 
     private TypePatternSyntaxWrapper(CSharpSyntaxNode node) =>

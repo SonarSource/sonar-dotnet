@@ -29,13 +29,13 @@ public static partial class ArrayTypeSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ArrayTypeSyntax);
 
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
 
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNotNull");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNotNull");
 
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNint");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNint");
 
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNuint");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNuint");
 
     extension(ArrayTypeSyntax @this)
     {
