@@ -34,7 +34,7 @@ public readonly partial struct ConstantPatternSyntaxWrapper: ISyntaxWrapper<CSha
 
     static ConstantPatternSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ConstantPatternSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ConstantPatternSyntaxWrapper));
         ExpressionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
     }
 

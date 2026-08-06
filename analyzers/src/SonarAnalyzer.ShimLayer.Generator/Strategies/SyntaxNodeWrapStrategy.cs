@@ -49,7 +49,7 @@ public class SyntaxNodeWrapStrategy : Strategy
 
             static {{Latest.Name}}Wrapper()
             {
-                WrappedType = SyntaxNodeTypes.LatestType(typeof({{Latest.Name}}Wrapper));
+                WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
         {{JoinLines(Members.Where(x => !x.IsPassthrough).Select(x => MemberAccessorInitialization(x.Member, model)))}}
             }
 

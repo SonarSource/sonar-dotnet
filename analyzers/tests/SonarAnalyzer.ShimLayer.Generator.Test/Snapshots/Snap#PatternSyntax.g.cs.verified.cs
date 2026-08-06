@@ -34,7 +34,7 @@ public readonly partial struct PatternSyntaxWrapper: ISyntaxWrapper<CSharpSyntax
 
     static PatternSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(PatternSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(PatternSyntaxWrapper));
 
     }
 

@@ -34,7 +34,7 @@ public readonly partial struct SwitchExpressionSyntaxWrapper: ISyntaxWrapper<Exp
 
     static SwitchExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(SwitchExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionSyntaxWrapper));
         GoverningExpressionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "GoverningExpression");
         SwitchKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "SwitchKeyword");
         OpenBraceTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBraceToken");

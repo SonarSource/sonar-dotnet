@@ -70,7 +70,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static RecordDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxNodeTypes.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                    WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
 
                 }
 
@@ -162,7 +162,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static RecordDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxNodeTypes.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                    WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                     ClassOrStructKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
                 }
 
@@ -254,7 +254,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static IsPatternExpressionSyntaxWrapper()
                 {
-                    WrappedType = SyntaxNodeTypes.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
+                    WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
                     PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
                 }
 
@@ -344,7 +344,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static ConstantPatternSyntaxWrapper()
                 {
-                    WrappedType = SyntaxNodeTypes.LatestType(typeof(ConstantPatternSyntaxWrapper));
+                    WrappedType = TypeRegister.LatestType(typeof(ConstantPatternSyntaxWrapper));
 
                 }
 
@@ -438,7 +438,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static SyntaxNodeWrapper()
                 {
-                    WrappedType = SyntaxNodeTypes.LatestType(typeof(SyntaxNodeWrapper));
+                    WrappedType = TypeRegister.LatestType(typeof(SyntaxNodeWrapper));
 
                 }
 
@@ -526,7 +526,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static IndexerDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxNodeTypes.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
+                    WrappedType = TypeRegister.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
 
                 }
 
@@ -621,7 +621,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 static RecordDeclarationSyntaxWrapper()
                 {
-                    WrappedType = SyntaxNodeTypes.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                    WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                     MembersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
                     ArgumentsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
                     ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeDeclarationSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));

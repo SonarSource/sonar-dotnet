@@ -34,7 +34,7 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper: ISyntaxWrap
 
     static NullableDirectiveTriviaSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(NullableDirectiveTriviaSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(NullableDirectiveTriviaSyntaxWrapper));
         NullableKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "NullableKeyword");
         SettingTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "SettingToken");
         TargetTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "TargetToken");

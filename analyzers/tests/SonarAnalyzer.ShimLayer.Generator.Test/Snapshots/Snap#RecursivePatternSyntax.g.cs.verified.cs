@@ -34,7 +34,7 @@ public readonly partial struct RecursivePatternSyntaxWrapper: ISyntaxWrapper<CSh
 
     static RecursivePatternSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(RecursivePatternSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(RecursivePatternSyntaxWrapper));
         TypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
         PositionalPatternClauseAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PositionalPatternClause");
         PropertyPatternClauseAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PropertyPatternClause");

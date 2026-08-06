@@ -34,7 +34,7 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper: ISyntaxWrapper<
 
     static IsPatternExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
         ExpressionAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
         IsKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "IsKeyword");
         PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");

@@ -34,7 +34,7 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
 
     static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper));
         StackAllocKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "StackAllocKeyword");
         OpenBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBracketToken");
         CloseBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBracketToken");

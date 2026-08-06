@@ -16,19 +16,23 @@
  */
 
 using System.Reflection;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer;
 
-internal static class SyntaxNodeTypes
+internal static class TypeRegister
 {
+    // This may need to be extended to other assemblies if needed. See TypeLoader.LoadBaseline and .LoadLatest
+    private static readonly Assembly[] Assemblies = [typeof(SyntaxNode).Assembly, typeof(CSharpSyntaxNode).Assembly];
+
     public static Type LatestType(Type wrapper)
     {
         return Load(wrapper, nameof(BaseNamespaceDeclarationSyntaxWrapper.WrappedTypeName)) ?? Load(wrapper, nameof(BaseNamespaceDeclarationSyntaxWrapper.FallbackWrappedTypeName));
 
         static Type Load(Type wrapper, string fieldName) =>
             wrapper.GetField(fieldName, BindingFlags.Static | BindingFlags.Public) is { } field && field.GetValue(null) is string name
-                ? typeof(CSharpSyntaxNode).Assembly.GetType(name) // This may need to be extended to other assemblies if needed. See TypeLoader.LoadBaseline and .LoadLatest
+                ? Assemblies.Select(x => x.GetType(name)).FirstOrDefault(x => x is not null)
                 : null;
     }
 }

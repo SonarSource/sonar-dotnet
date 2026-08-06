@@ -34,7 +34,7 @@ public readonly partial struct UnaryPatternSyntaxWrapper: ISyntaxWrapper<CSharpS
 
     static UnaryPatternSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(UnaryPatternSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(UnaryPatternSyntaxWrapper));
         OperatorTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
         PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
     }

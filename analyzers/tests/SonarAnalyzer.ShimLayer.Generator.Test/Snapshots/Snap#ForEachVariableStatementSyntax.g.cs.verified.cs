@@ -34,7 +34,7 @@ public readonly partial struct ForEachVariableStatementSyntaxWrapper: ISyntaxWra
 
     static ForEachVariableStatementSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ForEachVariableStatementSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ForEachVariableStatementSyntaxWrapper));
         AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
         AwaitKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
         ForEachKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "ForEachKeyword");

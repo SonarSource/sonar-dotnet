@@ -34,7 +34,7 @@ public readonly partial struct SwitchExpressionArmSyntaxWrapper: ISyntaxWrapper<
 
     static SwitchExpressionArmSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(SwitchExpressionArmSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionArmSyntaxWrapper));
         PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
         WhenClauseAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "WhenClause");
         EqualsGreaterThanTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "EqualsGreaterThanToken");

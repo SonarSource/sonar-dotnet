@@ -34,7 +34,7 @@ public readonly partial struct CollectionElementSyntaxWrapper: ISyntaxWrapper<CS
 
     static CollectionElementSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(CollectionElementSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(CollectionElementSyntaxWrapper));
 
     }
 

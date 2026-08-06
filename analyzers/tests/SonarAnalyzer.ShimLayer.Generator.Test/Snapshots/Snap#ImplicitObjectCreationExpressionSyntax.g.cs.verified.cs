@@ -34,7 +34,7 @@ public readonly partial struct ImplicitObjectCreationExpressionSyntaxWrapper: IS
 
     static ImplicitObjectCreationExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ImplicitObjectCreationExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ImplicitObjectCreationExpressionSyntaxWrapper));
         NewKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "NewKeyword");
         ArgumentListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
         InitializerAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");

@@ -34,7 +34,7 @@ public readonly partial struct DefaultConstraintSyntaxWrapper: ISyntaxWrapper<Ty
 
     static DefaultConstraintSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(DefaultConstraintSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(DefaultConstraintSyntaxWrapper));
         DefaultKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "DefaultKeyword");
     }
 

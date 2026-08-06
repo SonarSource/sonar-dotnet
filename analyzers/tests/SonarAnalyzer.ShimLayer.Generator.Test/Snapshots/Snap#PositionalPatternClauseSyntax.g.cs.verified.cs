@@ -34,7 +34,7 @@ public readonly partial struct PositionalPatternClauseSyntaxWrapper: ISyntaxWrap
 
     static PositionalPatternClauseSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(PositionalPatternClauseSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(PositionalPatternClauseSyntaxWrapper));
         OpenParenTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
         SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
         CloseParenTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");

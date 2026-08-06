@@ -34,7 +34,7 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper: ISyntaxWra
 
     static BaseNamespaceDeclarationSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(BaseNamespaceDeclarationSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(BaseNamespaceDeclarationSyntaxWrapper));
         NamespaceKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberDeclarationSyntax, SyntaxToken>(WrappedType, "NamespaceKeyword");
         NameAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberDeclarationSyntax, NameSyntax>(WrappedType, "Name");
         ExternsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>>(WrappedType, "Externs");

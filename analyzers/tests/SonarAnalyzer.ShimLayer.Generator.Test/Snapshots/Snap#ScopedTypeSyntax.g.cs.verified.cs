@@ -34,7 +34,7 @@ public readonly partial struct ScopedTypeSyntaxWrapper: ISyntaxWrapper<TypeSynta
 
     static ScopedTypeSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ScopedTypeSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ScopedTypeSyntaxWrapper));
         ScopedKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "ScopedKeyword");
         TypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, TypeSyntax>(WrappedType, "Type");
         IsUnmanagedAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");

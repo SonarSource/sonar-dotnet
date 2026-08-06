@@ -34,7 +34,7 @@ public readonly partial struct SubpatternSyntaxWrapper: ISyntaxWrapper<CSharpSyn
 
     static SubpatternSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(SubpatternSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(SubpatternSyntaxWrapper));
         NameColonAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, NameColonSyntax>(WrappedType, "NameColon");
         ExpressionColonAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "ExpressionColon");
         PatternAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");

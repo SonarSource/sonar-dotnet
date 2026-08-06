@@ -34,7 +34,7 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper: ISyntaxWrapp
 
     static LocalFunctionStatementSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(LocalFunctionStatementSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(LocalFunctionStatementSyntaxWrapper));
         AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
         ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
         ReturnTypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, TypeSyntax>(WrappedType, "ReturnType");

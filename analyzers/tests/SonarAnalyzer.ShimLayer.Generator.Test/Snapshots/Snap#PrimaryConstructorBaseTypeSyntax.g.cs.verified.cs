@@ -34,7 +34,7 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper: ISyntaxW
 
     static PrimaryConstructorBaseTypeSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(PrimaryConstructorBaseTypeSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(PrimaryConstructorBaseTypeSyntaxWrapper));
         ArgumentListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<BaseTypeSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
     }
 

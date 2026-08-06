@@ -34,7 +34,7 @@ public readonly partial struct FunctionPointerParameterListSyntaxWrapper: ISynta
 
     static FunctionPointerParameterListSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(FunctionPointerParameterListSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(FunctionPointerParameterListSyntaxWrapper));
         LessThanTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "LessThanToken");
         ParametersAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, FunctionPointerParameterSyntaxWrapper>(WrappedType, nameof(Parameters));
         GreaterThanTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "GreaterThanToken");

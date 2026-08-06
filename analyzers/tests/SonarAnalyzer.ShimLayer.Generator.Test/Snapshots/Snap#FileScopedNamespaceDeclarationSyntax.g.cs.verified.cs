@@ -34,7 +34,7 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper: ISyn
 
     static FileScopedNamespaceDeclarationSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(FileScopedNamespaceDeclarationSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(FileScopedNamespaceDeclarationSyntaxWrapper));
         AttributeListsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
         ModifiersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
         NamespaceKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberDeclarationSyntax, SyntaxToken>(WrappedType, "NamespaceKeyword");

@@ -34,7 +34,7 @@ public readonly partial struct RefTypeSyntaxWrapper: ISyntaxWrapper<TypeSyntax>
 
     static RefTypeSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(RefTypeSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(RefTypeSyntaxWrapper));
         RefKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "RefKeyword");
         ReadOnlyKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "ReadOnlyKeyword");
         TypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeSyntax, TypeSyntax>(WrappedType, "Type");

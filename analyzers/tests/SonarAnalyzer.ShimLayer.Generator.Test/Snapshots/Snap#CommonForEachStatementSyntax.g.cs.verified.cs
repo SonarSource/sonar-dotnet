@@ -34,7 +34,7 @@ public readonly partial struct CommonForEachStatementSyntaxWrapper: ISyntaxWrapp
 
     static CommonForEachStatementSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(CommonForEachStatementSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(CommonForEachStatementSyntaxWrapper));
         AwaitKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
         ForEachKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "ForEachKeyword");
         OpenParenTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "OpenParenToken");

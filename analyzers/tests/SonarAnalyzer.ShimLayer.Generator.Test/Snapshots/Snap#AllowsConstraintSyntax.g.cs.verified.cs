@@ -34,7 +34,7 @@ public readonly partial struct AllowsConstraintSyntaxWrapper: ISyntaxWrapper<CSh
 
     static AllowsConstraintSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(AllowsConstraintSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintSyntaxWrapper));
 
     }
 

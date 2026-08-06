@@ -34,7 +34,7 @@ public readonly partial struct VariableDesignationSyntaxWrapper: ISyntaxWrapper<
 
     static VariableDesignationSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(VariableDesignationSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(VariableDesignationSyntaxWrapper));
 
     }
 

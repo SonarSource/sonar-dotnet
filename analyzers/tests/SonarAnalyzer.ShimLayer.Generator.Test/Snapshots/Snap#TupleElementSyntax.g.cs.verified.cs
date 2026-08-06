@@ -34,7 +34,7 @@ public readonly partial struct TupleElementSyntaxWrapper: ISyntaxWrapper<CSharpS
 
     static TupleElementSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(TupleElementSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(TupleElementSyntaxWrapper));
         TypeAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
         IdentifierAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Identifier");
     }

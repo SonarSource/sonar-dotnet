@@ -34,7 +34,7 @@ public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper: ISyntaxWr
 
     static LineOrSpanDirectiveTriviaSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(LineOrSpanDirectiveTriviaSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(LineOrSpanDirectiveTriviaSyntaxWrapper));
         LineKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
         FileAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
     }

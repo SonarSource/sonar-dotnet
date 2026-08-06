@@ -34,7 +34,7 @@ public readonly partial struct ListPatternSyntaxWrapper: ISyntaxWrapper<CSharpSy
 
     static ListPatternSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ListPatternSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ListPatternSyntaxWrapper));
         OpenBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenBracketToken");
         PatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, PatternSyntaxWrapper>(WrappedType, nameof(Patterns));
         CloseBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseBracketToken");

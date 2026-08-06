@@ -34,7 +34,7 @@ public readonly partial struct ExpressionOrPatternSyntaxWrapper: ISyntaxWrapper<
 
     static ExpressionOrPatternSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ExpressionOrPatternSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ExpressionOrPatternSyntaxWrapper));
 
     }
 

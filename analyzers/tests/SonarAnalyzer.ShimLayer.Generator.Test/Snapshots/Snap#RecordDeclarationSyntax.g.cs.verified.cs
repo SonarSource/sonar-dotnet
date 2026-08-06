@@ -34,7 +34,7 @@ public readonly partial struct RecordDeclarationSyntaxWrapper: ISyntaxWrapper<Ty
 
     static RecordDeclarationSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
         ClassOrStructKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
         ParameterListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
     }

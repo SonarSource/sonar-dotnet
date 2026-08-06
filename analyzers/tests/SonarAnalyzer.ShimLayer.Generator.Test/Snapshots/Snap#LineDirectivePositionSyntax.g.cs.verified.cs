@@ -34,7 +34,7 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper: ISyntaxWrappe
 
     static LineDirectivePositionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(LineDirectivePositionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(LineDirectivePositionSyntaxWrapper));
         OpenParenTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
         LineAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Line");
         CommaTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CommaToken");

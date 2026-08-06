@@ -34,7 +34,7 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper: ISyntaxWrapper<
 
     static ExtensionMemberCrefSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
         ExtensionKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
         TypeArgumentListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
         ParametersAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");

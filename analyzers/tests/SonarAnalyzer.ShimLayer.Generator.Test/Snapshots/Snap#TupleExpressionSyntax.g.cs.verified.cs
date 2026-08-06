@@ -34,7 +34,7 @@ public readonly partial struct TupleExpressionSyntaxWrapper: ISyntaxWrapper<Expr
 
     static TupleExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(TupleExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(TupleExpressionSyntaxWrapper));
         OpenParenTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
         ArgumentsAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
         CloseParenTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseParenToken");

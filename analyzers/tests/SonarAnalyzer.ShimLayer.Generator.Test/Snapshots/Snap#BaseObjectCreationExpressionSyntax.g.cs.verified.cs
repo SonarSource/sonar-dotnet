@@ -34,7 +34,7 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper: ISynta
 
     static BaseObjectCreationExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(BaseObjectCreationExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(BaseObjectCreationExpressionSyntaxWrapper));
         NewKeywordAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "NewKeyword");
         ArgumentListAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
         InitializerAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");

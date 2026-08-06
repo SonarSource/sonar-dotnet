@@ -34,7 +34,7 @@ public readonly partial struct CollectionExpressionSyntaxWrapper: ISyntaxWrapper
 
     static CollectionExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(CollectionExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(CollectionExpressionSyntaxWrapper));
         OpenBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBracketToken");
         ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, CollectionElementSyntaxWrapper>(WrappedType, nameof(Elements));
         CloseBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBracketToken");

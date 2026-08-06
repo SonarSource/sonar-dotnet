@@ -34,7 +34,7 @@ public readonly partial struct FieldExpressionSyntaxWrapper: ISyntaxWrapper<Expr
 
     static FieldExpressionSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(FieldExpressionSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(FieldExpressionSyntaxWrapper));
         TokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "Token");
     }
 

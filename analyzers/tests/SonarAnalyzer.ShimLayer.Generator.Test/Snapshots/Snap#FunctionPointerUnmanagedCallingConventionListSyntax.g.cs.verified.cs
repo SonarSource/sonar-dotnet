@@ -34,7 +34,7 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionListSynt
 
     static FunctionPointerUnmanagedCallingConventionListSyntaxWrapper()
     {
-        WrappedType = SyntaxNodeTypes.LatestType(typeof(FunctionPointerUnmanagedCallingConventionListSyntaxWrapper));
+        WrappedType = TypeRegister.LatestType(typeof(FunctionPointerUnmanagedCallingConventionListSyntaxWrapper));
         OpenBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenBracketToken");
         CallingConventionsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, FunctionPointerUnmanagedCallingConventionSyntaxWrapper>(WrappedType, nameof(CallingConventions));
         CloseBracketTokenAccessor = LightupHelpers.CreateSyntaxPropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseBracketToken");
