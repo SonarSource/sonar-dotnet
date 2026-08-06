@@ -35,31 +35,38 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(compilationStart =>
-        {
-            // Not every async method is defined in the same class/interface as its non-async counterpart.
-            // For example the EntityFrameworkQueryableExtensions.AnyAsync() method provides an async version of the Enumerable.Any() method for IQueryable types.
-            // WellKnownExtensionMethodContainer stores where to look for the async versions of certain methods from a type, e.g. async versions of methods from
-            // System.Linq.Enumerable can be found in Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.
-            var wellKnownExtensionMethodContainer = BuildWellKnownExtensionMethodContainers(compilationStart.Compilation);
-            var exclusions = BuildExclusions(compilationStart.Compilation);
-            compilationStart.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
             {
-                if (IsAsyncCodeBlock(codeBlockStart.CodeBlock))
-                {
-                    codeBlockStart.RegisterNodeAction(nodeContext =>
+                // Not every async method is defined in the same class/interface as its non-async counterpart.
+                // For example the EntityFrameworkQueryableExtensions.AnyAsync() method provides an async version of the Enumerable.Any() method for IQueryable types.
+                // WellKnownExtensionMethodContainer stores where to look for the async versions of certain methods from a type, e.g. async versions of methods from
+                // System.Linq.Enumerable can be found in Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.
+                var wellKnownExtensionMethodContainer = BuildWellKnownExtensionMethodContainers(compilationStart.Compilation);
+                var exclusions = BuildExclusions(compilationStart.Compilation);
+                compilationStart.RegisterCodeBlockStartAction<SyntaxKind>(CSharpGeneratedCodeRecognizer.Instance, codeBlockStart =>
                     {
-                        var invocationExpression = (InvocationExpressionSyntax)nodeContext.Node;
-
-                        var awaitableAlternatives = FindAwaitableAlternatives(wellKnownExtensionMethodContainer, exclusions, invocationExpression,
-                            nodeContext.Model, nodeContext.ContainingSymbol, nodeContext.Cancel);
-                        if (awaitableAlternatives.FirstOrDefault() is { Name: { } alternative })
+                        if (IsAsyncCodeBlock(codeBlockStart.CodeBlock))
                         {
-                            nodeContext.ReportIssue(Rule, invocationExpression, alternative);
+                            codeBlockStart.RegisterNodeAction(nodeContext =>
+                                {
+                                    var invocationExpression = (InvocationExpressionSyntax)nodeContext.Node;
+
+                                    var awaitableAlternatives = FindAwaitableAlternatives(
+                                        wellKnownExtensionMethodContainer,
+                                        exclusions,
+                                        invocationExpression,
+                                        nodeContext.Model,
+                                        nodeContext.ContainingSymbol,
+                                        nodeContext.Cancel);
+
+                                    if (awaitableAlternatives.FirstOrDefault() is { Name: { } alternative })
+                                    {
+                                        nodeContext.ReportIssue(Rule, invocationExpression, alternative);
+                                    }
+                                },
+                                SyntaxKind.InvocationExpression);
                         }
-                    }, SyntaxKind.InvocationExpression);
-                }
+                    });
             });
-        });
 
     private static WellKnownExtensionMethodContainer BuildWellKnownExtensionMethodContainers(Compilation compilation)
     {
@@ -114,23 +121,29 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         return exclusions.ToImmutableArray();
     }
 
-    private static ImmutableArray<ISymbol> FindAwaitableAlternatives(WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer, ImmutableArray<Func<IMethodSymbol, bool>> exclusions,
-        InvocationExpressionSyntax invocationExpression, SemanticModel model, ISymbol containingSymbol, CancellationToken cancel)
+    private static ImmutableArray<ISymbol> FindAwaitableAlternatives(
+        WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
+        ImmutableArray<Func<IMethodSymbol, bool>> exclusions,
+        InvocationExpressionSyntax invocationExpression,
+        SemanticModel model,
+        ISymbol containingSymbol,
+        CancellationToken cancel)
     {
-        var awaitableRoot = GetAwaitableRootOfInvocation(invocationExpression);
+        var awaitableRoot = FetchAwaitableRootOfInvocation(invocationExpression);
         if (awaitableRoot is not { Parent: AwaitExpressionSyntax } // Invocation result is already awaited.
             && invocationExpression.EnclosingScope() is { } scope
             && IsAsyncCodeBlock(scope)
+            && invocationExpression.Ancestors().TakeWhile(x => x != scope).All(x => x is not LockStatementSyntax) // Awaiting inside a lock produces CS1996.
             && model.GetSymbolInfo(invocationExpression, cancel).Symbol is IMethodSymbol { MethodKind: not MethodKind.DelegateInvoke } methodSymbol
             && !(methodSymbol.IsAwaitableNonDynamic()  // The invoked method returns something awaitable (but it isn't awaited).
-                || methodSymbol.ContainingType.DerivesFromAny(ExcludedTypes))
+                    || methodSymbol.ContainingType.DerivesFromAny(ExcludedTypes))
             && !exclusions.Any(x => x(methodSymbol)))
         {
             // Perf: Before doing (expensive) speculative re-binding in SpeculativeBindCandidates, we check if there is an "..Async()" alternative in scope.
             var invokedType = invocationExpression.Expression.LeftOfDot is { } expression && model.GetTypeInfo(expression) is { Type: { } type }
                 ? type // A dotted expression: Lookup the type, left of the dot (this may be different from methodSymbol.ContainingType)
                 : containingSymbol.ContainingType; // If not dotted, than the scope is the current type. Local function support is missing here.
-            var members = GetMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
+            var members = FetchMethodSymbolsInScope($"{methodSymbol.Name}Async", wellKnownExtensionMethodContainer, invokedType, methodSymbol.ContainingType);
             var awaitableCandidates = members.Where(x => x.IsAwaitableNonDynamic());
             // Get the method alternatives and exclude candidates that would resolve to the containing method (endless loop)
             var awaitableAlternatives = SpeculativeBindCandidates(model, awaitableRoot, invocationExpression, awaitableCandidates)
@@ -141,8 +154,11 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         return ImmutableArray<ISymbol>.Empty;
     }
 
-    private static IEnumerable<IMethodSymbol> GetMethodSymbolsInScope(string methodName, WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
-        ITypeSymbol invokedType, ITypeSymbol methodContainer) =>
+    private static IEnumerable<IMethodSymbol> FetchMethodSymbolsInScope(
+        string methodName,
+        WellKnownExtensionMethodContainer wellKnownExtensionMethodContainer,
+        ITypeSymbol invokedType,
+        ITypeSymbol methodContainer) =>
         ((ITypeSymbol[])[.. invokedType.SelfAndBaseTypes, .. WellKnownExtensionMethodContainer(wellKnownExtensionMethodContainer, methodContainer), methodContainer])
             .Distinct()
             .SelectMany(x => x.GetMembers(methodName))
@@ -154,15 +170,21 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
             ? extensionMethodContainer
             : [];
 
-    private static IEnumerable<ISymbol> SpeculativeBindCandidates(SemanticModel model, SyntaxNode awaitableRoot,
-        InvocationExpressionSyntax invocationExpression, IEnumerable<IMethodSymbol> awaitableCandidates) =>
+    private static IEnumerable<ISymbol> SpeculativeBindCandidates(
+        SemanticModel model,
+        SyntaxNode awaitableRoot,
+        InvocationExpressionSyntax invocationExpression,
+        IEnumerable<IMethodSymbol> awaitableCandidates) =>
         awaitableCandidates
             .Select(x => x.Name)
             .Distinct()
             .Select(x => SpeculativeBindCandidate(model, x, awaitableRoot, invocationExpression))
             .WhereNotNull();
 
-    private static IMethodSymbol SpeculativeBindCandidate(SemanticModel model, string candidateName, SyntaxNode awaitableRoot,
+    private static IMethodSymbol SpeculativeBindCandidate(
+        SemanticModel model,
+        string candidateName,
+        SyntaxNode awaitableRoot,
         InvocationExpressionSyntax invocationExpression)
     {
         if (invocationExpression.MethodCallIdentifier?.Parent is { } invocationIdentifierName)
@@ -182,40 +204,40 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         var root = invocationExpression.SyntaxTree.GetRoot();
         var invocationAnnotation = new SyntaxAnnotation();
         var replace = root.ReplaceNodes([awaitableRoot, invocationIdentifierName, invocationExpression], (original, newNode) =>
-        {
-            var result = newNode;
-            if (original == invocationIdentifierName)
             {
-                var newIdentifierToken = SyntaxFactory.Identifier(candidateName);
-                var simpleName = invocationIdentifierName switch
+                var result = newNode;
+                if (original == invocationIdentifierName)
                 {
-                    IdentifierNameSyntax => (SimpleNameSyntax)SyntaxFactory.IdentifierName(newIdentifierToken),
-                    GenericNameSyntax { TypeArgumentList: { } typeArguments } => SyntaxFactory.GenericName(newIdentifierToken, typeArguments),
-                    _ => null,
-                };
-                result = simpleName is null ? newNode : simpleName.WithTriviaFrom(invocationIdentifierName);
-            }
-            if (original == invocationExpression)
-            {
-                result = result.WithAdditionalAnnotations(invocationAnnotation);
-            }
-            if (original == awaitableRoot && result is ExpressionSyntax resultExpression)
-            {
-                result = SyntaxFactory.ParenthesizedExpression(
-                    SyntaxFactory.AwaitExpression(resultExpression.WithoutTrivia().WithLeadingTrivia(SyntaxFactory.ElasticSpace))).WithTriviaFrom(resultExpression);
-            }
-            return result;
-        });
+                    var newIdentifierToken = SyntaxFactory.Identifier(candidateName);
+                    var simpleName = invocationIdentifierName switch
+                    {
+                        IdentifierNameSyntax => (SimpleNameSyntax)SyntaxFactory.IdentifierName(newIdentifierToken),
+                        GenericNameSyntax { TypeArgumentList: { } typeArguments } => SyntaxFactory.GenericName(newIdentifierToken, typeArguments),
+                        _ => null,
+                    };
+                    result = simpleName is null ? newNode : simpleName.WithTriviaFrom(invocationIdentifierName);
+                }
+                if (original == invocationExpression)
+                {
+                    result = result.WithAdditionalAnnotations(invocationAnnotation);
+                }
+                if (original == awaitableRoot && result is ExpressionSyntax resultExpression)
+                {
+                    result = SyntaxFactory.ParenthesizedExpression(
+                        SyntaxFactory.AwaitExpression(resultExpression.WithoutTrivia().WithLeadingTrivia(SyntaxFactory.ElasticSpace))).WithTriviaFrom(resultExpression);
+                }
+                return result;
+            });
         return replace.GetAnnotatedNodes(invocationAnnotation).First();
     }
 
-    private static ExpressionSyntax GetAwaitableRootOfInvocation(ExpressionSyntax expression) =>
+    private static ExpressionSyntax FetchAwaitableRootOfInvocation(ExpressionSyntax expression) =>
         expression switch
         {
             { Parent: ConditionalAccessExpressionSyntax conditional } => conditional.GetRootConditionalAccessExpression(),
-            { Parent: MemberAccessExpressionSyntax memberAccess } => memberAccess.GetRootConditionalAccessExpression() ?? GetAwaitableRootOfInvocation(memberAccess),
-            { Parent: PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } parent } => GetAwaitableRootOfInvocation(parent),
-            { Parent: ParenthesizedExpressionSyntax parent } => GetAwaitableRootOfInvocation(parent),
+            { Parent: MemberAccessExpressionSyntax memberAccess } => memberAccess.GetRootConditionalAccessExpression() ?? FetchAwaitableRootOfInvocation(memberAccess),
+            { Parent: PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } parent } => FetchAwaitableRootOfInvocation(parent),
+            { Parent: ParenthesizedExpressionSyntax parent } => FetchAwaitableRootOfInvocation(parent),
             { } self => self,
         };
 

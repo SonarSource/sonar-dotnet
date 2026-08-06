@@ -302,11 +302,46 @@ public class TestLockClass
 {
     private readonly object locktarget;
     private readonly SemaphoreSlim sm;
+
     public async Task DoWorkAsync(CancellationToken cancellationToken)
     {
         lock (locktarget)
         {
-            sm.Wait(); // Noncompliant FP
+            sm.Wait(); // Compliant, awaiting inside a lock would produce CS1996
+        }
+
+        if (true)
+        {
+            lock (locktarget)
+            {
+                sm.Wait(); // Compliant, awaiting inside a lock would produce CS1996
+            }
+        }
+
+        lock (locktarget)
+        {
+            if (true)
+            {
+                sm.Wait(); // Compliant, awaiting inside a lock would produce CS1996
+            }
+        }
+
+        lock (locktarget) sm.Wait(); // Compliant, awaiting inside a lock would produce CS1996
+
+        lock (locktarget)
+        {
+            lock (sm)
+            {
+                sm.Wait(); // Compliant, awaiting inside a lock would produce CS1996
+            }
+        }
+
+        lock (locktarget)
+        {
+            Func<Task> f = async () =>
+            {
+                sm.Wait(); // Noncompliant, the lambda has its own async scope, awaiting here does not produce CS1996
+            };
         }
     }
 }
