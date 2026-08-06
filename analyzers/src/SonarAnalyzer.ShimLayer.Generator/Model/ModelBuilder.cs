@@ -61,6 +61,10 @@ public static class ModelBuilder
             return new IOperationStrategy(latest.Type, CreateMembers(latest, baseline));
         }
         // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
+        else if (latest.Type.Name == nameof(Microsoft.CodeAnalysis.FlowAnalysis.CaptureId)) // ToDo: Remove once StructStrategy exists
+        {
+            return new NoChangeStrategy(latest.Type);
+        }
         else
         {
             // ToDo: Throw NotSupportedException instead of skip, there should be nothing left after explicitly handling all known cases

@@ -15,11 +15,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace StyleCop.Analyzers.Lightup;
+namespace SonarAnalyzer.ShimLayer;
 
 public readonly struct CaptureId : IEquatable<CaptureId>
 {
-    private readonly object instance;   // Underlaying struct holds only internal int Value as the identificator.
+    private readonly object instance;   // Underlying struct holds only internal int Value as the identification.
 
     public CaptureId(object instance) =>
         this.instance = instance ?? throw new ArgumentNullException(nameof(instance));

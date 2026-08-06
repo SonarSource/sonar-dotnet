@@ -331,14 +331,24 @@ namespace SonarAnalyzer.ShimLayer
                 ? (Expression)instanceParameter
                 : Expression.Convert(instanceParameter, type);
 
-            Expression body = Expression.Call(instance, property.GetMethod);
 
-            if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
+            if (property.PropertyType.FullName == "Microsoft.CodeAnalysis.FlowAnalysis.CaptureId") // Sonar - begin
             {
-                body = Expression.Convert(body, typeof(TProperty));
+                var constructor = typeof(CaptureId).GetConstructors().Single();
+                var expression = Expression.Lambda<Func<T, TProperty>>(
+                    Expression.New(constructor, Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(object))),
+                    instanceParameter);
+                return expression.Compile();
+            } // Sonar - end
+            else
+            {
+                Expression body = Expression.Call(instance, property.GetMethod);
+                if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
+                {
+                    body = Expression.Convert(body, typeof(TProperty));
+                }
+                return Expression.Lambda<Func<T, TProperty>>(body, instanceParameter).Compile();
             }
-
-            return Expression.Lambda<Func<T, TProperty>>(body, instanceParameter).Compile(); // Sonar - end
 
             PropertyInfo FindProperty()
             {
