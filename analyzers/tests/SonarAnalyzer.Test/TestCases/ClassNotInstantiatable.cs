@@ -29,6 +29,32 @@ namespace Tests.Diagnostics
         public static void M() { }
     }
 
+    public class ClassWithPrivateNestedType // Noncompliant FP - Classes with static members, a non-static constructor, and non-static nested types should be ignored.
+    {
+        private ClassWithPrivateNestedType() { }
+
+        public static int Compute() => new Nested().GetValue();
+
+        private sealed class Nested
+        {
+            public int GetValue() => GetHashCode();
+        }
+    }
+
+    public class ClassWithPrivateNestedType2 // Noncompliant
+    {
+        private ClassWithPrivateNestedType2() { }
+
+        public static int Compute() => new Nested().GetValue();
+
+        public int InstanceCompute() => new Nested().GetValue();
+
+        private sealed class Nested
+        {
+            public int GetValue() => GetHashCode();
+        }
+    }
+
     public sealed class Class3 // Compliant
     {
         private Class3() { }
