@@ -3,23 +3,24 @@ those collections, duplicating the root entity’s data across many rows and inf
 <h2>Why is this an issue?</h2>
 <p>When a query includes two collection navigations on the same root entity, Entity Framework Core joins them in a single SQL statement. The database
 returns the Cartesian product of the two collections, and each returned row repeats the root entity’s columns.</p>
-<p>Consider a <code>Blog</code> with two <code>Posts</code> and two <code>Subscribers</code>:</p>
+<p>Consider a <code>Course</code> with two <code>Enrollments</code> and two <code>Announcements</code>:</p>
 <pre>
-var blogs = await ctx.Blogs
-    .Include(b =&gt; b.Posts)
-    .Include(b =&gt; b.Subscribers)
+var courses = await ctx.Courses
+    .Include(c =&gt; c.Enrollments)
+    .Include(c =&gt; c.Announcements)
     .ToListAsync();
 </pre>
 <p>Entity Framework Core joins both collections onto the root entity in a single SQL statement:</p>
 <pre>
-SELECT b.Id, b.Name, p.Id, p.Title, s.Id, s.Email
-FROM Blogs AS b
-LEFT JOIN Posts AS p ON b.Id = p.BlogId
-LEFT JOIN Subscribers AS s ON b.Id = s.BlogId
-ORDER BY b.Id
+SELECT c.CourseId, c.Title, e.EnrollmentId, e.Grade, a.AnnouncementId, a.Message
+FROM Courses AS c
+LEFT JOIN Enrollments AS e ON c.CourseId = e.CourseId
+LEFT JOIN Announcements AS a ON c.CourseId = a.CourseId
+ORDER BY c.CourseId
 </pre>
-<p>Because the two joins are unrelated to each other, the database returns every <code>Post</code>/<code>Subscriber</code> combination for each blog -
-the Cartesian product of the two collections, with the blog’s columns (<code>Id</code>, <code>Name</code>) repeated on every row:</p>
+<p>Because the two joins are unrelated to each other, the database returns every <code>Enrollment</code>/<code>Announcement</code> combination for
+each course - the Cartesian product of the two collections, with the course’s columns (<code>CourseId</code>, <code>Title</code>) repeated on every
+row:</p>
 <table>
   <colgroup>
     <col style="width: 16.6666%;">
@@ -31,99 +32,99 @@ the Cartesian product of the two collections, with the blog’s columns (<code>I
   </colgroup>
   <thead>
     <tr>
-      <th>b.Id</th>
-      <th>b.Name</th>
-      <th>p.Id</th>
-      <th>p.Title</th>
-      <th>s.Id</th>
-      <th>s.Email</th>
+      <th>c.CourseId</th>
+      <th>c.Title</th>
+      <th>e.EnrollmentId</th>
+      <th>e.Grade</th>
+      <th>a.AnnouncementId</th>
+      <th>a.Message</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <p>1</p>
+        <p>1050</p>
       </td>
       <td>
-        <p>Tech Blog</p>
-      </td>
-      <td>
-        <p>1</p>
-      </td>
-      <td>
-        <p>Intro to EF Core</p>
+        <p>Chemistry</p>
       </td>
       <td>
         <p>1</p>
       </td>
       <td>
-        <p><a href="mailto:alice@example.com">alice@example.com</a></p>
+        <p>A</p>
+      </td>
+      <td>
+        <p>1</p>
+      </td>
+      <td>
+        <p>Midterm moved to Friday</p>
       </td>
     </tr>
     <tr>
       <td>
+        <p>1050</p>
+      </td>
+      <td>
+        <p>Chemistry</p>
+      </td>
+      <td>
         <p>1</p>
       </td>
       <td>
-        <p>Tech Blog</p>
-      </td>
-      <td>
-        <p>1</p>
-      </td>
-      <td>
-        <p>Intro to EF Core</p>
+        <p>A</p>
       </td>
       <td>
         <p>2</p>
       </td>
       <td>
-        <p><a href="mailto:bob@example.com">bob@example.com</a></p>
+        <p>Lab session canceled</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p>1</p>
+        <p>1050</p>
       </td>
       <td>
-        <p>Tech Blog</p>
+        <p>Chemistry</p>
       </td>
       <td>
         <p>2</p>
       </td>
       <td>
-        <p>Advanced LINQ</p>
+        <p>B</p>
       </td>
       <td>
         <p>1</p>
       </td>
       <td>
-        <p><a href="mailto:alice@example.com">alice@example.com</a></p>
+        <p>Midterm moved to Friday</p>
       </td>
     </tr>
     <tr>
       <td>
-        <p>1</p>
+        <p>1050</p>
       </td>
       <td>
-        <p>Tech Blog</p>
-      </td>
-      <td>
-        <p>2</p>
-      </td>
-      <td>
-        <p>Advanced LINQ</p>
+        <p>Chemistry</p>
       </td>
       <td>
         <p>2</p>
       </td>
       <td>
-        <p><a href="mailto:bob@example.com">bob@example.com</a></p>
+        <p>B</p>
+      </td>
+      <td>
+        <p>2</p>
+      </td>
+      <td>
+        <p>Lab session canceled</p>
       </td>
     </tr>
   </tbody>
 </table>
-<p>Two <code>Posts</code> and two <code>Subscribers</code> produce four rows instead of two. With 10 of each, the same query returns 100 rows, and
-each additional sibling collection multiplies the row count again - so a query that should return a few hundred rows can return hundreds of
+<p>Two <code>Enrollments</code> and two <code>Announcements</code> produce four rows instead of two. With 10 of each, the same query returns 100 rows,
+and each additional sibling collection multiplies the row count again - so a query that should return a few hundred rows can return hundreds of
 thousands.</p>
 <p>Entity Framework Core also flags this situation at runtime through <code>MultipleCollectionIncludeWarning</code>.</p>
 <h3>Exceptions</h3>
@@ -142,16 +143,16 @@ thousands.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-var blogs = await ctx.Blogs
-    .Include(b =&gt; b.Posts)
-    .Include(b =&gt; b.Subscribers)       // Noncompliant: second sibling collection causes a Cartesian explosion
+var courses = await ctx.Courses
+    .Include(c =&gt; c.Enrollments)
+    .Include(c =&gt; c.Announcements)       // Noncompliant: second sibling collection causes a Cartesian explosion
     .ToListAsync();
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-var blogs = await ctx.Blogs
-    .Include(b =&gt; b.Posts)
-    .Include(b =&gt; b.Subscribers)
+var courses = await ctx.Courses
+    .Include(c =&gt; c.Enrollments)
+    .Include(c =&gt; c.Announcements)
     .AsSplitQuery()
     .ToListAsync();
 </pre>

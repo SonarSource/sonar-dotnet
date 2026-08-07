@@ -1,51 +1,52 @@
 <p>Passing a value of an incompatible type as a default value for an entity property or migration column can silently produce a broken schema, or fail
-inconsistently depending on the database provider, because EF Core’s default-value APIs accept the value as <code>object?</code> and give no
-compile-time type safety.</p>
+inconsistently depending on the database provider, because Entity Framework Core’s default-value APIs accept the value as <code>object?</code> and
+give no compile-time type safety.</p>
 <h2>Why is this an issue?</h2>
-<p>EF Core’s default-value APIs — <code>PropertyBuilder(&lt;T&gt;).HasDefaultValue()</code>, <code>MigrationBuilder.AddColumn()</code>,
+<p>Entity Framework Core’s default-value APIs — <code>PropertyBuilder&lt;T&gt;.HasDefaultValue()</code>, <code>MigrationBuilder.AddColumn()</code>,
 <code>MigrationBuilder.AlterColumn()</code>, and <code>ColumnsBuilder.Column()</code> — all type their <code>defaultValue</code>/<code>value</code>
-parameter as <code>object?</code>, never as the property’s or column’s actual CLR type. The C# compiler therefore gives no static safety here: any
-value can be passed, and there is no compile-time signal when it does not match the target type.</p>
-<p>EF Core’s own runtime handling of a type-incompatible default value is neither complete nor consistent:</p>
+parameter as <code>object?</code>, never as the property’s or column’s actual .NET type, so the C# compiler cannot catch a mismatch: any value can be
+passed, whether or not it matches the target type.</p>
+<p>Entity Framework Core’s own runtime handling of a type-incompatible default value is neither complete nor consistent:</p>
 <ul>
   <li>Some mismatches, such as a <code>string</code> passed for a <code>Guid</code> property, are caught immediately with a clear
   <code>InvalidOperationException</code> the first time the model is built.</li>
   <li>Other mismatches, such as an <code>int</code> passed for a <code>string</code> property, pass model validation silently.</li>
-  <li>At the stage where the default value is turned into a SQL literal, behavior is provider-dependent: the same mismatch throws on one provider and
-  produces a bogus literal on another. For example, an <code>int</code> default for a <code>Guid</code> column throws
-  <code>InvalidCastException</code> on SQLite but silently succeeds on SQL Server.</li>
+  <li>At the stage where the default value is turned into a SQL literal, behavior is provider-dependent: the same mismatch can pass on one provider
+  and fail on another. For example, adding an <code>int</code> default for a <code>Guid</code> column through a migration silently produces a schema
+  with a bogus non-GUID literal default on SQLite, but fails outright when applied to SQL Server ("Operand type clash: int is incompatible with
+  uniqueidentifier").</li>
 </ul>
-<p>That same loosely typed default value is round-tripped through EF Core’s type-mapping machinery twice: once when the schema or migration is
-generated, and again when the database’s default is materialized back into the CLR property while reading a row. Passing a mismatched type is
-inherently fragile — whether it happens to work today depends on the current provider and EF Core version, and it can silently stop working after a
-provider change, an EF Core upgrade, or a schema or migration regeneration.</p>
+<p>That same loosely typed default value is round-tripped through Entity Framework Core’s type-mapping machinery twice: once when the schema or
+migration is generated, and again when the database’s default is materialized back into the property while reading a row. Passing a mismatched type is
+inherently fragile: whether it happens to work today depends on the current database provider and Entity Framework Core version, and it can silently
+stop working after either changes, or after a schema or migration is regenerated.</p>
 <h3>What is the potential impact?</h3>
-<p>A type mismatch that is not caught by EF Core can produce a database column whose default value does not match its declared type. For example, an
-<code>int</code> default value of <code>42</code> supplied for a <code>string</code> column can silently create the following schema, with no error
-raised anywhere in the process:</p>
+<p>A type mismatch that is not caught by Entity Framework Core can produce a database column whose default value does not match its declared type. For
+example, an <code>int</code> default value of <code>42</code> supplied for a <code>string</code> column can silently create the following schema, with
+no error raised anywhere in the process:</p>
 <pre>
 "Label" TEXT NOT NULL DEFAULT '42'
 </pre>
 <p>Whether a given mismatch fails at write time, fails at read time, or does not fail at all, is provider-dependent and cannot be reliably predicted
 from the code alone.</p>
 <h2>How to fix it</h2>
-<p>Make sure the value passed as a default matches the CLR type of the target property or column. When in doubt, verify the resulting schema
-explicitly, for example by inspecting a generated migration or reviewing <code>context.Model</code>, instead of relying on EF Core to flag an
-incompatibility.</p>
+<p>Make sure the value passed as a default matches the .NET type of the target property or column. When in doubt, verify the resulting schema
+explicitly, for example by inspecting a generated migration or reviewing <code>context.Model</code>, instead of relying on Entity Framework Core to
+flag an incompatibility.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-public void Configure(EntityTypeBuilder&lt;Widget&gt; builder)
+public void Configure(EntityTypeBuilder&lt;Student&gt; builder)
 {
-    builder.Property(x =&gt; x.Label) // Label is a string property
+    builder.Property(x =&gt; x.LastName) // LastName is a string property
         .HasDefaultValue(42); // Noncompliant: int passed as default value for a string property
 }
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-public void Configure(EntityTypeBuilder&lt;Widget&gt; builder)
+public void Configure(EntityTypeBuilder&lt;Student&gt; builder)
 {
-    builder.Property(x =&gt; x.Label) // Label is a string property
+    builder.Property(x =&gt; x.LastName) // LastName is a string property
         .HasDefaultValue("42");
 }
 </pre>
@@ -55,11 +56,11 @@ public void Configure(EntityTypeBuilder&lt;Widget&gt; builder)
   <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/modeling/generated-properties#default-values">Entity Framework Core -
   Default Values</a></li>
   <li>Microsoft Learn - <a
-  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.metadata.builders.propertybuilder-1.hasdefaultvalue">PropertyBuilder\&lt;TProperty&gt;.HasDefaultValue Method</a></li>
+  href="https://learn.microsoft.com/en-us/dotnet/api/microsoft.entityframeworkcore.relationalpropertybuilderextensions.hasdefaultvalue">RelationalPropertyBuilderExtensions.HasDefaultValue Method</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li>{rule:csharpsquid:S8718} flags client-evaluated default values, such as <code>DateTime.Now</code>, that should use database functions
+  <li>{rule:csharpsquid:S8718} - flags client-evaluated default values, such as <code>DateTime.Now</code>, that should use database functions
   instead.</li>
 </ul>
 

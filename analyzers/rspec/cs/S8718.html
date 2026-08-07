@@ -185,20 +185,20 @@ the equivalent function for your database provider:</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+public void Configure(EntityTypeBuilder&lt;Student&gt; builder)
 {
-    builder.HasKey(x =&gt; x.UserId);
-    builder.Property(x =&gt; x.CreatedOn)
+    builder.HasKey(x =&gt; x.StudentId);
+    builder.Property(x =&gt; x.EnrollmentDate)
         .IsRequired(true)
         .HasDefaultValue(DateTime.Now); // Noncompliant
 }
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+public void Configure(EntityTypeBuilder&lt;Student&gt; builder)
 {
-    builder.HasKey(x =&gt; x.UserId);
-    builder.Property(x =&gt; x.CreatedOn)
+    builder.HasKey(x =&gt; x.StudentId);
+    builder.Property(x =&gt; x.EnrollmentDate)
         .IsRequired(true)
         .HasDefaultValueSql("GETDATE()"); // SQL Server example — see the table above for other providers
 }
@@ -206,34 +206,34 @@ public void Configure(EntityTypeBuilder&lt;User&gt; builder)
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="2" data-diff-type="noncompliant">
 migrationBuilder.AddColumn&lt;DateTime&gt;(
-    name: "OrderDate",
-    table: "Orders",
+    name: "EnrollmentDate",
+    table: "Students",
     nullable: false,
     defaultValue: DateTime.UtcNow); // Noncompliant
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="2" data-diff-type="compliant">
 migrationBuilder.AddColumn&lt;DateTime&gt;(
-    name: "OrderDate",
-    table: "Orders",
+    name: "EnrollmentDate",
+    table: "Students",
     nullable: false,
     defaultValueSql: "GETUTCDATE()"); // SQL Server example — see the table above for other providers
 </pre>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="3" data-diff-type="noncompliant">
-public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+public void Configure(EntityTypeBuilder&lt;Student&gt; builder)
 {
-    builder.HasKey(x =&gt; x.UserId);
-    builder.Property(x =&gt; x.ExternalId)
+    builder.HasKey(x =&gt; x.StudentId);
+    builder.Property(x =&gt; x.TranscriptId)
         .HasDefaultValue(Guid.NewGuid()); // Noncompliant
 }
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="3" data-diff-type="compliant">
-public void Configure(EntityTypeBuilder&lt;User&gt; builder)
+public void Configure(EntityTypeBuilder&lt;Student&gt; builder)
 {
-    builder.HasKey(x =&gt; x.UserId);
-    builder.Property(x =&gt; x.ExternalId)
+    builder.HasKey(x =&gt; x.StudentId);
+    builder.Property(x =&gt; x.TranscriptId)
         .HasDefaultValueSql("NEWID()"); // SQL Server example — see the table above for other providers
 }
 </pre>
