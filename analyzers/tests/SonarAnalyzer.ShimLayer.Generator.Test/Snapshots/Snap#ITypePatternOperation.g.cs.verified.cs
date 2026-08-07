@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ITypePatternOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ITypePatternOperation

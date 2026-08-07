@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IReDimClauseOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IReDimClauseOperation

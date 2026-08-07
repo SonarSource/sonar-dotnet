@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IImplicitIndexerReferenceOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IImplicitIndexerReferenceOperation

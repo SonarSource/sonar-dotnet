@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IForToLoopOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IForToLoopOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IFlowCaptureReferenceOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IFlowCaptureReferenceOperation

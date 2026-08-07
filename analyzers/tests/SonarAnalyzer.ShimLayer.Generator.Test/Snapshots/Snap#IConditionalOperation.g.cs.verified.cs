@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IConditionalOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IConditionalOperation

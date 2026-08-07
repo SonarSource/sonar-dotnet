@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ISwitchCaseOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ISwitchCaseOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IDiscardOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IDiscardOperation

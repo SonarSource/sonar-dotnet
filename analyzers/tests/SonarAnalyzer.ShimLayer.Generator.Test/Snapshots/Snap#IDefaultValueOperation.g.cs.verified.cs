@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IDefaultValueOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IDefaultValueOperation

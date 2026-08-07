@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IFunctionPointerInvocationOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IFunctionPointerInvocationOperation

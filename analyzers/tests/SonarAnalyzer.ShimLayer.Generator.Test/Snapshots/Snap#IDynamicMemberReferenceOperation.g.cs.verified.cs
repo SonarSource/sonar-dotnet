@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IDynamicMemberReferenceOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IDynamicMemberReferenceOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IParameterReferenceOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IParameterReferenceOperation

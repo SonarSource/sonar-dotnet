@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IInterpolatedStringOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IInterpolatedStringOperation

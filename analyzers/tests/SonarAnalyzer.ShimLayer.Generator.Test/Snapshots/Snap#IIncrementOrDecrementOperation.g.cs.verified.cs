@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IIncrementOrDecrementOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IIncrementOrDecrementOperation

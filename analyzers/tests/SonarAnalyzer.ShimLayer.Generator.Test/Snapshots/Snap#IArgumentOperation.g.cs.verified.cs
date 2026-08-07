@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IArgumentOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IArgumentOperation

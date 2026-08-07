@@ -127,7 +127,7 @@ public class ModelBuilderTest
         using var typeLoader = new TypeLoader();
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IOperation));
         var model = ModelBuilder.Build([type], []);
-        model[type.Type].Should().BeOfType<IOperationStrategy>()
+        model[type.Type].Should().BeOfType<OperationWrapStrategy>()
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
                 "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",
@@ -149,7 +149,7 @@ public class ModelBuilderTest
         using var typeLoader = new TypeLoader();
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IInvocationOperation));
         var model = ModelBuilder.Build([type], []);
-        model[type.Type].Should().BeOfType<IOperationStrategy>()
+        model[type.Type].Should().BeOfType<OperationWrapStrategy>()
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "Microsoft.CodeAnalysis.IMethodSymbol TargetMethod",
                 "Microsoft.CodeAnalysis.ITypeSymbol ConstrainedToType",

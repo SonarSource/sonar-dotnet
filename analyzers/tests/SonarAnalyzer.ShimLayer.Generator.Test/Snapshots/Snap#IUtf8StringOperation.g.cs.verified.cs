@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IUtf8StringOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IUtf8StringOperation

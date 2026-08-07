@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ICatchClauseOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ICatchClauseOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ICoalesceAssignmentOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ICoalesceAssignmentOperation

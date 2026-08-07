@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ITypeParameterObjectCreationOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ITypeParameterObjectCreationOperation

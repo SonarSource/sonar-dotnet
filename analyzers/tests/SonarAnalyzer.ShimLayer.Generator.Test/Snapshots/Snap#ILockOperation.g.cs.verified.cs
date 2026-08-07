@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ILockOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ILockOperation

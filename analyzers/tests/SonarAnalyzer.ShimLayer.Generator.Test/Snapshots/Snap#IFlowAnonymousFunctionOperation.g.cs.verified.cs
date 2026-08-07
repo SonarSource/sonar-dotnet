@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IFlowAnonymousFunctionOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IFlowAnonymousFunctionOperation

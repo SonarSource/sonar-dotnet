@@ -58,7 +58,9 @@ public static class ModelBuilder
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
         {
-            return new IOperationStrategy(latest.Type, CreateMembers(latest, baseline));
+            return baseline is null
+                ? new OperationWrapStrategy(latest.Type, CreateMembers(latest, baseline))
+                : new OperationExtendStrategy(latest.Type, CreateMembers(latest, baseline));
         }
         // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
         else if (latest.Type.Name == nameof(Microsoft.CodeAnalysis.FlowAnalysis.CaptureId)) // ToDo: Remove once StructStrategy exists

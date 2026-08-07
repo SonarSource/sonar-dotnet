@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IArrayInitializerOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IArrayInitializerOperation

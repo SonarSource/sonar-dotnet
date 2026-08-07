@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IInstanceReferenceOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IInstanceReferenceOperation

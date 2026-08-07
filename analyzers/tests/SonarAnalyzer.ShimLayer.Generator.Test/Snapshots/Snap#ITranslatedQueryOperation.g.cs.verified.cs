@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ITranslatedQueryOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ITranslatedQueryOperation

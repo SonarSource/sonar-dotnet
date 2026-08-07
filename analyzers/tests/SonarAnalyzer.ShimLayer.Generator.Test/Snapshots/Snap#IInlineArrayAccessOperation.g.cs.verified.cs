@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IInlineArrayAccessOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IInlineArrayAccessOperation

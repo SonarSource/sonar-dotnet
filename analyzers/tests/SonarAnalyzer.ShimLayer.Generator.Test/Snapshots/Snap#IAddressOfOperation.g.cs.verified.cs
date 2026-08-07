@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IAddressOfOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IAddressOfOperation

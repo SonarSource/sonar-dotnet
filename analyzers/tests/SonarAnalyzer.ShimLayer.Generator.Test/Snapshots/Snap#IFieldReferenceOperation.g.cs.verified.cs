@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IFieldReferenceOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IFieldReferenceOperation

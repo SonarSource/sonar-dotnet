@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ISizeOfOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ISizeOfOperation

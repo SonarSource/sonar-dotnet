@@ -36,7 +36,7 @@ public class StrategyModel : IEnumerable<Strategy>
                 Strategy newStrategy = key.Name switch
                 {
                     "SeparatedSyntaxList`1" when this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument => new SeparatedSyntaxListStrategy(key, typeArgument),
-                    "ImmutableArray`1" when this[key.GenericTypeArguments.Single()] is IOperationStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
+                    "ImmutableArray`1" when this[key.GenericTypeArguments.Single()] is OperationWrapStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
                     _ => new NoChangeStrategy(key)
                 };
                 Add(key, newStrategy);

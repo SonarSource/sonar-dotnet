@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IAwaitOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IAwaitOperation

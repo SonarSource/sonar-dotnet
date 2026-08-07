@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IBinaryOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IBinaryOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ICaughtExceptionOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ICaughtExceptionOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IPatternCaseClauseOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IPatternCaseClauseOperation

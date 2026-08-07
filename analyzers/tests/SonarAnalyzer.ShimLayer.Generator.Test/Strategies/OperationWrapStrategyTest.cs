@@ -15,21 +15,22 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
+using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.TestFramework.Extensions;
 
-public class IOperationStrategy : Strategy
+namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
+
+[TestClass]
+public class OperationWrapStrategyTest
 {
-    public IReadOnlyList<MemberDescriptor> Members { get; }
-
-    public IOperationStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest) =>
-        Members = members;
-
-    public override string Generate(StrategyModel model) =>
-        $"namespace SonarAnalyzer.ShimLayer; // {Latest.Name}";   // NET-2729
-
-    public override string ReturnTypeSnippet() =>
-        throw new NotImplementedException();
-
-    public override string ToConversionSnippet(string from) =>
-        throw new NotImplementedException();
+    [TestMethod]
+    public void Generate_IFieldInitializerOperation()
+    {
+        var sut = new OperationWrapStrategy(typeof(IFieldInitializerOperation), []);
+        var result = sut.Generate([]);
+        result.Should().BeIgnoringLineEndings(
+            """
+            namespace SonarAnalyzer.ShimLayer; // Wrap IFieldInitializerOperation
+            """);
+    }
 }

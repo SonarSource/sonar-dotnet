@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IConstructorBodyOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IConstructorBodyOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IAssignmentOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IAssignmentOperation

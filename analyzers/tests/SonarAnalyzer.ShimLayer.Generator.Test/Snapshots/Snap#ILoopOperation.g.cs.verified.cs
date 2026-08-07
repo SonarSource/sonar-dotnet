@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ILoopOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ILoopOperation

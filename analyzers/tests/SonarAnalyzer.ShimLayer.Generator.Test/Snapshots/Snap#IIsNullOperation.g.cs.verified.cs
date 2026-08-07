@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IIsNullOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IIsNullOperation

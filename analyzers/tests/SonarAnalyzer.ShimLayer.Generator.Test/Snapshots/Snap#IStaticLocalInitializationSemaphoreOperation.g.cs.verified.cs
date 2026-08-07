@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IStaticLocalInitializationSemaphoreOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IStaticLocalInitializationSemaphoreOperation

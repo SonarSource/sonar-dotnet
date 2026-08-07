@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IParenthesizedOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IParenthesizedOperation

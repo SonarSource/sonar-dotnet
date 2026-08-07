@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ICompoundAssignmentOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ICompoundAssignmentOperation

@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IConversionOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IConversionOperation

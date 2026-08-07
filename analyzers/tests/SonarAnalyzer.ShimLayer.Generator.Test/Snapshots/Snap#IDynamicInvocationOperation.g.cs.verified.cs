@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IDynamicInvocationOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IDynamicInvocationOperation

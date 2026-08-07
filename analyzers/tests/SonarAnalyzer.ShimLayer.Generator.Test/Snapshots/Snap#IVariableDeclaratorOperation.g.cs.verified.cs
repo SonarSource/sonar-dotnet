@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IVariableDeclaratorOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IVariableDeclaratorOperation

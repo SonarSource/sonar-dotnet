@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // IRangeCaseClauseOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap IRangeCaseClauseOperation

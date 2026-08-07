@@ -1,1 +1,1 @@
-﻿namespace SonarAnalyzer.ShimLayer; // ICollectionExpressionOperation
+﻿namespace SonarAnalyzer.ShimLayer; // Wrap ICollectionExpressionOperation
