@@ -24,12 +24,35 @@ public class OperationWrapStrategy : Strategy
     public OperationWrapStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest) =>
         Members = members;
 
+    public override string CompiletimeTypeSnippet() =>
+        "IOperation";
+
+    // ToDo: Remove FIXME class name suffix
     public override string Generate(StrategyModel model) =>
-        $"namespace SonarAnalyzer.ShimLayer; // Wrap {Latest.Name}";   // NET-2729
+        $$"""
+        {{Preamble()}}
+        public readonly partial struct {{Latest.Name}}WrapperFIXME
+        {
+            public const string WrappedTypeName = "{{Latest.FullName}}";
+            private static readonly Type WrappedType;
+
+            private readonly {{CompiletimeTypeSnippet()}} operation;
+
+            static {{Latest.Name}}WrapperFIXME()
+            {
+                WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}WrapperFIXME));
+            }
+
+            private {{Latest.Name}}WrapperFIXME({{CompiletimeTypeSnippet()}} operation) =>
+                this.operation = operation;
+
+            public {{CompiletimeTypeSnippet()}} WrappedOperation => this.operation;
+        }
+        """;
 
     public override string ReturnTypeSnippet() =>
-        throw new NotImplementedException();
+        $"{Latest.Name}Wrapper";
 
     public override string ToConversionSnippet(string from) =>
-        throw new NotImplementedException();
+        $"{Latest.Name}Wrapper.FromOperation({from})";
 }
