@@ -33,9 +33,12 @@ public class StrategyModel : IEnumerable<Strategy>
             }
             else
             {
-                Strategy newStrategy = key.Name == "SeparatedSyntaxList`1" && this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument
-                    ? new SeparatedSyntaxListStrategy(key, typeArgument)
-                    : new NoChangeStrategy(key);
+                Strategy newStrategy = key.Name switch
+                {
+                    "SeparatedSyntaxList`1" when this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument => new SeparatedSyntaxListStrategy(key, typeArgument),
+                    "ImmutableArray`1" when this[key.GenericTypeArguments.Single()] is IOperationStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
+                    _ => new NoChangeStrategy(key)
+                };
                 Add(key, newStrategy);
                 return newStrategy;
             }
