@@ -59,7 +59,7 @@ public static class ModelBuilder
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
         {
             return baseline is null
-                ? new OperationWrapStrategy(latest.Type, CreateMembers(latest, baseline))
+                ? new OperationWrapStrategy(latest.Type, CreateMembers(latest, baselineMap[typeof(IOperation).FullName]))
                 : new OperationExtendStrategy(latest.Type, CreateMembers(latest, baseline));
         }
         // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?

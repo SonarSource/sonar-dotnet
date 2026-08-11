@@ -38,10 +38,6 @@ internal readonly partial struct IInlineArrayAccessOperationWrapper : IOperation
         InstanceAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Instance");
         ArgumentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Argument");
         ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-        KindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, OperationKind>(WrappedType, "Kind");
-        SyntaxAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SyntaxNode>(WrappedType, "Syntax");
-        TypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "Type");
-        ConstantValueAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Optional<Object>>(WrappedType, "ConstantValue");
         ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
         LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
         IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
@@ -62,14 +58,10 @@ internal readonly partial struct IInlineArrayAccessOperationWrapper : IOperation
     public IOperation Argument => ArgumentAccessor(this.instance);
     private static readonly Func<IOperation, IOperation> ParentAccessor;
     public IOperation Parent => ParentAccessor(this.instance);
-    private static readonly Func<IOperation, OperationKind> KindAccessor;
-    public OperationKind Kind => (OperationKind)KindAccessor(this.instance);
-    private static readonly Func<IOperation, SyntaxNode> SyntaxAccessor;
-    public SyntaxNode Syntax => SyntaxAccessor(this.instance);
-    private static readonly Func<IOperation, ITypeSymbol> TypeAccessor;
-    public ITypeSymbol Type => (ITypeSymbol)TypeAccessor(this.instance);
-    private static readonly Func<IOperation, Optional<Object>> ConstantValueAccessor;
-    public Optional<Object> ConstantValue => (Optional<Object>)ConstantValueAccessor(this.instance);
+    public OperationKind Kind => this.instance.Kind;
+    public SyntaxNode Syntax => this.instance.Syntax;
+    public ITypeSymbol Type => this.instance.Type;
+    public Optional<Object> ConstantValue => this.instance.ConstantValue;
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor;
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(this.instance);
