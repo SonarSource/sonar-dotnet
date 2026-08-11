@@ -30,11 +30,8 @@ public static partial class TypeSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(TypeSyntax);
 
     private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-
     private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-
     private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-
     private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
 
     extension(TypeSyntax @this)

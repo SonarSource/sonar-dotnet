@@ -53,14 +53,14 @@ public static class ModelBuilder
             }
             else
             {
-                return new SyntaxNodeExtendStrategy(latest.Type, CreateMembers(latest, baseline));
+                return new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
             }
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.IOperation"))
         {
             return baseline is null
                 ? new OperationWrapStrategy(latest.Type, CreateMembers(latest, baselineMap[typeof(IOperation).FullName]))
-                : new OperationExtendStrategy(latest.Type, CreateMembers(latest, baseline));
+                : new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
         }
         // ToDo: TypeStrategy, or ClassStrategy / StructStrategy / InterfaceStrategy?
         else if (latest.Type.Name == nameof(Microsoft.CodeAnalysis.FlowAnalysis.CaptureId)) // ToDo: Remove once StructStrategy exists

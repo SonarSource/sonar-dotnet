@@ -17,11 +17,11 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public sealed class SyntaxNodeExtendStrategy : Strategy
+public sealed class ExtendStrategy : Strategy
 {
     public IReadOnlyList<MemberInfo> Members { get; }
 
-    public SyntaxNodeExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest) =>
+    public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest) =>
         Members = members.Where(x => !x.IsPassthrough).Select(x => x.Member).ToArray();
 
     public override string ReturnTypeSnippet() =>
@@ -51,9 +51,8 @@ public sealed class SyntaxNodeExtendStrategy : Strategy
     private string GenerateMemberAccessor(MemberInfo member, StrategyModel model) =>
         member switch
         {
-            PropertyInfo prop when model[prop.PropertyType] is var propertyTypeStrategy => $"""
+            PropertyInfo prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
                     private static readonly Func<{CompiletimeTypeSnippet()}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {prop.Name}Accessor = {propertyTypeStrategy.PropertyAccessorInitializerSnippet(CompiletimeTypeSnippet(), prop.Name)};
-
                 """,
             _ => null,
         };
@@ -61,7 +60,7 @@ public sealed class SyntaxNodeExtendStrategy : Strategy
     private static string GenerateMemberExtension(MemberInfo member, StrategyModel model) =>
         member switch
         {
-            PropertyInfo { GetMethod: not null } prop when model[prop.PropertyType] is var propertyTypeStrategy => $"""
+            PropertyInfo { GetMethod: not null } prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
                         public {propertyTypeStrategy.ReturnTypeSnippet()} {prop.Name} => {propertyTypeStrategy.ToConversionSnippet($"{prop.Name}Accessor(@this)")};
                 """,
             _ => null,

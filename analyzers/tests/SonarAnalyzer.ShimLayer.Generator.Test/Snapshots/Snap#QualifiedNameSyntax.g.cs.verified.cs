@@ -30,11 +30,8 @@ public static partial class QualifiedNameSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(QualifiedNameSyntax);
 
     private static readonly Func<QualifiedNameSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<QualifiedNameSyntax, Boolean>(WrappedType, "IsUnmanaged");
-
     private static readonly Func<QualifiedNameSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<QualifiedNameSyntax, Boolean>(WrappedType, "IsNotNull");
-
     private static readonly Func<QualifiedNameSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<QualifiedNameSyntax, Boolean>(WrappedType, "IsNint");
-
     private static readonly Func<QualifiedNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<QualifiedNameSyntax, Boolean>(WrappedType, "IsNuint");
 
     extension(QualifiedNameSyntax @this)

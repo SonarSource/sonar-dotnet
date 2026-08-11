@@ -128,15 +128,11 @@ public class ModelBuilderTest
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IOperation));
         var iOperation = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(IOperation));
         var model = ModelBuilder.Build([type], [iOperation]);
-        model[type.Type].Should().BeOfType<OperationExtendStrategy>()
-            .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
+        model[type.Type].Should().BeOfType<ExtendStrategy>()
+            .Which.Members.Select(x => x.ToString()).Should().BeEquivalentTo([
                 "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
                 "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",
                 "Microsoft.CodeAnalysis.IOperation Parent",
-                "Microsoft.CodeAnalysis.OperationKind Kind",
-                "Microsoft.CodeAnalysis.SyntaxNode Syntax",
-                "Microsoft.CodeAnalysis.ITypeSymbol Type",
-                "Microsoft.CodeAnalysis.Optional`1[System.Object] ConstantValue",
                 "System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.IOperation] Children",
                 "Microsoft.CodeAnalysis.IOperation+OperationList ChildOperations",
                 "System.String Language",
@@ -224,7 +220,7 @@ public class ModelBuilderTest
         var baseline = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(SyntaxNode));
         var latest = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(SyntaxNode));
         var model = ModelBuilder.Build([latest], [baseline]);
-        model[latest.Type].Should().BeOfType<SyntaxNodeExtendStrategy>()
+        model[latest.Type].Should().BeOfType<ExtendStrategy>()
             .Which.Members.Select(x => x.ToString()).Should().BeEquivalentTo([
                 "System.Boolean IsIncrementallyIdenticalTo(Microsoft.CodeAnalysis.SyntaxNode)",
                 "System.Boolean ContainsDirective(System.Int32)",

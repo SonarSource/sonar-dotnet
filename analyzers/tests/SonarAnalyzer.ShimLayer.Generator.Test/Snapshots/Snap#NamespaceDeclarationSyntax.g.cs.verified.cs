@@ -30,7 +30,6 @@ public static partial class NamespaceDeclarationSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(NamespaceDeclarationSyntax);
 
     private static readonly Func<NamespaceDeclarationSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<NamespaceDeclarationSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-
     private static readonly Func<NamespaceDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<NamespaceDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
     extension(NamespaceDeclarationSyntax @this)

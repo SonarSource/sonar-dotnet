@@ -30,7 +30,6 @@ public static partial class ForEachStatementSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(ForEachStatementSyntax);
 
     private static readonly Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-
     private static readonly Func<ForEachStatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ForEachStatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
 
     extension(ForEachStatementSyntax @this)

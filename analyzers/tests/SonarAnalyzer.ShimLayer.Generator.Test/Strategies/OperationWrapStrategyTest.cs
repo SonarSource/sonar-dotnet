@@ -114,7 +114,7 @@ public class OperationWrapStrategyTest
         {
             { typeof(IFieldReferenceOperation), sut },
             { typeof(IMemberReferenceOperation), new OperationWrapStrategy(typeof(IMemberReferenceOperation), []) },
-            { typeof(IOperation), new OperationExtendStrategy(typeof(IOperation), []) },
+            { typeof(IOperation), new ExtendStrategy(typeof(IOperation), []) },
         };
         var result = sut.Generate(new(model));
         result.Should().BeIgnoringLineEndings(
