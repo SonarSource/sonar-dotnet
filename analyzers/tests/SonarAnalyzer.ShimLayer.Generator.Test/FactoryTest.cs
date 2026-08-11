@@ -25,7 +25,7 @@ namespace SonarAnalyzer.ShimLayer.Generator.Test;
 public partial class FactoryTest
 {
     [TestMethod]
-    public async Task SnapshotAsync() =>
+    public async Task RegenerateOrVerifySnapshots() =>
         // If this test fails in CI, execute it locally to update the snapshots and push the changes.
         await Verifier.Verify(Factory.CreateAllFiles().Select(x => new Target("cs", x.Content, x.Name)))
             .UseDirectory("Snapshots")

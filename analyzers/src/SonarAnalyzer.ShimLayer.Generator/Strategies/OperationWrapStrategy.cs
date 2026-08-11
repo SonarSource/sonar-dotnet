@@ -21,11 +21,10 @@ public class OperationWrapStrategy : WrapStrategy
 {
     public OperationWrapStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest, typeof(IOperation), members) { }
 
-    // ToDo: Change internal to public
     protected override string GenerateCore(StrategyModel model) =>
         $$"""
         {{Preamble()}}
-        internal readonly partial struct {{Latest.Name}}Wrapper : IOperationWrapper
+        public readonly partial struct {{Latest.Name}}Wrapper : IOperationWrapper
         {
             public const string WrappedTypeName = "{{Latest.FullName}}";
             private static readonly Type WrappedType;

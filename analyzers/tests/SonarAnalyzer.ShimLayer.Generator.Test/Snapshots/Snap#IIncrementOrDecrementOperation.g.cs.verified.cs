@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-internal readonly partial struct IIncrementOrDecrementOperationWrapper : IOperationWrapper
+public readonly partial struct IIncrementOrDecrementOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IIncrementOrDecrementOperation";
     private static readonly Type WrappedType;

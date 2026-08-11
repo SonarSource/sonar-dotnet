@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-internal readonly partial struct ICaughtExceptionOperationWrapper : IOperationWrapper
+public readonly partial struct ICaughtExceptionOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.FlowAnalysis.ICaughtExceptionOperation";
     private static readonly Type WrappedType;

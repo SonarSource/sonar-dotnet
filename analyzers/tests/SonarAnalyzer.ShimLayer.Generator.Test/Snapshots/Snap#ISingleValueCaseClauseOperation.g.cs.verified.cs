@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-internal readonly partial struct ISingleValueCaseClauseOperationWrapper : IOperationWrapper
+public readonly partial struct ISingleValueCaseClauseOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ISingleValueCaseClauseOperation";
     private static readonly Type WrappedType;

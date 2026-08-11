@@ -58,7 +58,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            internal readonly partial struct IFieldInitializerOperationWrapper : IOperationWrapper
+            public readonly partial struct IFieldInitializerOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
                 private static readonly Type WrappedType;
@@ -146,7 +146,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            internal readonly partial struct IFieldReferenceOperationWrapper : IOperationWrapper
+            public readonly partial struct IFieldReferenceOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation";
                 private static readonly Type WrappedType;
@@ -237,7 +237,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            internal readonly partial struct ITupleOperationWrapper : IOperationWrapper
+            public readonly partial struct ITupleOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITupleOperation";
                 private static readonly Type WrappedType;
