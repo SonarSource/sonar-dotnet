@@ -46,10 +46,13 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     private LineSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public DirectiveTriviaSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public DirectiveTriviaSyntax SyntaxNode => this.node;
+
+    public DirectiveTriviaSyntax WrappedInstance => this.node;
 
     public SyntaxToken HashToken => this.node.HashToken;
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor;
@@ -84,27 +87,32 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public SyntaxNode Parent => this.node.Parent;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(SyntaxNode node)
+    public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator DirectiveTriviaSyntax(LineSpanDirectiveTriviaSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static LineSpanDirectiveTriviaSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new LineSpanDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new LineSpanDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)node);
     }
 
-    public static implicit operator DirectiveTriviaSyntax(LineSpanDirectiveTriviaSyntaxWrapper wrapper) =>
-        wrapper.node;
+    public static bool IsInstance(SyntaxNode node) =>
+        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
     public static implicit operator LineOrSpanDirectiveTriviaSyntaxWrapper(LineSpanDirectiveTriviaSyntaxWrapper up) => (LineOrSpanDirectiveTriviaSyntaxWrapper)up.SyntaxNode;
     public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(LineOrSpanDirectiveTriviaSyntaxWrapper down) => (LineSpanDirectiveTriviaSyntaxWrapper)down.SyntaxNode;
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

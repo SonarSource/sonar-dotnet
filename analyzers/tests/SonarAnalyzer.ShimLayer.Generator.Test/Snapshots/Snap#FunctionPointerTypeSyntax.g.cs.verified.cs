@@ -48,10 +48,13 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     private FunctionPointerTypeSyntaxWrapper(TypeSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public TypeSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public TypeSyntax SyntaxNode => this.node;
+
+    public TypeSyntax WrappedInstance => this.node;
 
     private static readonly Func<TypeSyntax, SyntaxToken> DelegateKeywordAccessor;
     public SyntaxToken DelegateKeyword => (SyntaxToken)DelegateKeywordAccessor(this.node);
@@ -87,24 +90,29 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator FunctionPointerTypeSyntaxWrapper(SyntaxNode node)
+    public static explicit operator FunctionPointerTypeSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator TypeSyntax(FunctionPointerTypeSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static FunctionPointerTypeSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new FunctionPointerTypeSyntaxWrapper((TypeSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new FunctionPointerTypeSyntaxWrapper((TypeSyntax)node);
     }
-
-    public static implicit operator TypeSyntax(FunctionPointerTypeSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

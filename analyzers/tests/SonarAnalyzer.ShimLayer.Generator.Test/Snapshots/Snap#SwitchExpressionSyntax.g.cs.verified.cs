@@ -45,10 +45,13 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     private SwitchExpressionSyntaxWrapper(ExpressionSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax SyntaxNode => this.node;
+
+    public ExpressionSyntax WrappedInstance => this.node;
 
     private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor;
     public ExpressionSyntax GoverningExpression => GoverningExpressionAccessor(this.node);
@@ -77,24 +80,29 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator SwitchExpressionSyntaxWrapper(SyntaxNode node)
+    public static explicit operator SwitchExpressionSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator ExpressionSyntax(SwitchExpressionSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static SwitchExpressionSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new SwitchExpressionSyntaxWrapper((ExpressionSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new SwitchExpressionSyntaxWrapper((ExpressionSyntax)node);
     }
-
-    public static implicit operator ExpressionSyntax(SwitchExpressionSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

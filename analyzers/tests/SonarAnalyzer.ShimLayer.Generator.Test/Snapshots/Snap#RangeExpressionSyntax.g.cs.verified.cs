@@ -43,10 +43,13 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     private RangeExpressionSyntaxWrapper(ExpressionSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax SyntaxNode => this.node;
+
+    public ExpressionSyntax WrappedInstance => this.node;
 
     private static readonly Func<ExpressionSyntax, ExpressionSyntax> LeftOperandAccessor;
     public ExpressionSyntax LeftOperand => LeftOperandAccessor(this.node);
@@ -71,24 +74,29 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator RangeExpressionSyntaxWrapper(SyntaxNode node)
+    public static explicit operator RangeExpressionSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator ExpressionSyntax(RangeExpressionSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static RangeExpressionSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new RangeExpressionSyntaxWrapper((ExpressionSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new RangeExpressionSyntaxWrapper((ExpressionSyntax)node);
     }
-
-    public static implicit operator ExpressionSyntax(RangeExpressionSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

@@ -48,10 +48,13 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper : ISy
     private FileScopedNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public MemberDeclarationSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public MemberDeclarationSyntax SyntaxNode => this.node;
+
+    public MemberDeclarationSyntax WrappedInstance => this.node;
 
     private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor;
     public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.node);
@@ -86,27 +89,32 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper : ISy
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(SyntaxNode node)
+    public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator MemberDeclarationSyntax(FileScopedNamespaceDeclarationSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static FileScopedNamespaceDeclarationSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new FileScopedNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new FileScopedNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)node);
     }
 
-    public static implicit operator MemberDeclarationSyntax(FileScopedNamespaceDeclarationSyntaxWrapper wrapper) =>
-        wrapper.node;
+    public static bool IsInstance(SyntaxNode node) =>
+        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
     public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(FileScopedNamespaceDeclarationSyntaxWrapper up) => (BaseNamespaceDeclarationSyntaxWrapper)up.SyntaxNode;
     public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(BaseNamespaceDeclarationSyntaxWrapper down) => (FileScopedNamespaceDeclarationSyntaxWrapper)down.SyntaxNode;
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

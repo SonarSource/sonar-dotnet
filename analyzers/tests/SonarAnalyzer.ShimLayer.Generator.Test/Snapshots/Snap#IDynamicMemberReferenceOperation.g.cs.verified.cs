@@ -40,9 +40,16 @@ public readonly partial struct IDynamicMemberReferenceOperationWrapperFIXME : IO
     private IDynamicMemberReferenceOperationWrapperFIXME(IOperation operation) =>
         this.operation = operation;
 
+    [Obsolete("Use WrappedInstance instead")]
     public IOperation WrappedOperation => this.operation;
 
-    public static IDynamicMemberReferenceOperationWrapperFIXME FromOperation(IOperation operation)
+    public IOperation WrappedInstance => this.operation;
+
+    [Obsolete("Use From instead")]
+    public static IDynamicMemberReferenceOperationWrapperFIXME FromOperation(IOperation operation) =>
+        From(operation);
+
+    public static IDynamicMemberReferenceOperationWrapperFIXME From(IOperation operation)
     {
         if (operation is null)
         {

@@ -40,9 +40,16 @@ public readonly partial struct IInlineArrayAccessOperationWrapperFIXME : IOperat
     private IInlineArrayAccessOperationWrapperFIXME(IOperation operation) =>
         this.operation = operation;
 
+    [Obsolete("Use WrappedInstance instead")]
     public IOperation WrappedOperation => this.operation;
 
-    public static IInlineArrayAccessOperationWrapperFIXME FromOperation(IOperation operation)
+    public IOperation WrappedInstance => this.operation;
+
+    [Obsolete("Use From instead")]
+    public static IInlineArrayAccessOperationWrapperFIXME FromOperation(IOperation operation) =>
+        From(operation);
+
+    public static IInlineArrayAccessOperationWrapperFIXME From(IOperation operation)
     {
         if (operation is null)
         {

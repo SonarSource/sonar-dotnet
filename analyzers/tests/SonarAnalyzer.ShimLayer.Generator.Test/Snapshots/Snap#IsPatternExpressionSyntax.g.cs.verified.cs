@@ -43,10 +43,13 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax SyntaxNode => this.node;
+
+    public ExpressionSyntax WrappedInstance => this.node;
 
     private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor;
     public ExpressionSyntax Expression => ExpressionAccessor(this.node);
@@ -71,24 +74,29 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node)
+    public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static IsPatternExpressionSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)node);
     }
-
-    public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

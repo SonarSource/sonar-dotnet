@@ -56,35 +56,42 @@ public class SyntaxNodeWrapStrategy : Strategy
             private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} node) =>
                 this.node = node;
 
+            [Obsolete("Use WrappedInstance instead")]
             public {{CompiletimeTypeSnippet()}} Node => this.node;
 
-            [Obsolete("Use Node instead")]
+            [Obsolete("Use WrappedInstance instead")]
             public {{CompiletimeTypeSnippet()}} SyntaxNode => this.node;
+
+            public {{CompiletimeTypeSnippet()}} WrappedInstance => this.node;
 
         {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
 
-            public static explicit operator {{Latest.Name}}Wrapper(SyntaxNode node)
+            public static explicit operator {{Latest.Name}}Wrapper(SyntaxNode node) =>
+                From(node);
+
+            public static implicit operator {{CompiletimeTypeSnippet()}}({{Latest.Name}}Wrapper wrapper) =>
+                wrapper.node;
+
+            public static {{Latest.Name}}Wrapper From(SyntaxNode node)
             {
                 if (node is null)
                 {
                     return default;
                 }
-
-                if (!IsInstance(node))
+                else if (IsInstance(node))
+                {
+                    return new {{Latest.Name}}Wrapper(({{CompiletimeTypeSnippet()}})node);
+                }
+                else
                 {
                     throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                 }
-
-                return new {{Latest.Name}}Wrapper(({{CompiletimeTypeSnippet()}})node);
             }
-
-            public static implicit operator {{CompiletimeTypeSnippet()}}({{Latest.Name}}Wrapper wrapper) =>
-                wrapper.node;
-
-        {{WrapperToWrapperConversions(model)}}
 
             public static bool IsInstance(SyntaxNode node) =>
                 node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
+        {{WrapperToWrapperConversions(model)}}
         }
         """;
 

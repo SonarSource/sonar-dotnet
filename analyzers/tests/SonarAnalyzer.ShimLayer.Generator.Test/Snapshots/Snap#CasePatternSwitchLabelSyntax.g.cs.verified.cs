@@ -42,10 +42,13 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public SwitchLabelSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public SwitchLabelSyntax SyntaxNode => this.node;
+
+    public SwitchLabelSyntax WrappedInstance => this.node;
 
     public SyntaxToken Keyword => this.node.Keyword;
     private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor;
@@ -70,24 +73,29 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator CasePatternSwitchLabelSyntaxWrapper(SyntaxNode node)
+    public static explicit operator CasePatternSwitchLabelSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator SwitchLabelSyntax(CasePatternSwitchLabelSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static CasePatternSwitchLabelSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new CasePatternSwitchLabelSyntaxWrapper((SwitchLabelSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new CasePatternSwitchLabelSyntaxWrapper((SwitchLabelSyntax)node);
     }
-
-    public static implicit operator SwitchLabelSyntax(CasePatternSwitchLabelSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

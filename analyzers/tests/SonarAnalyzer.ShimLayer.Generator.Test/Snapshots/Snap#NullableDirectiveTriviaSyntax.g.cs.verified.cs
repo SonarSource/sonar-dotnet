@@ -43,10 +43,13 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     private NullableDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public DirectiveTriviaSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public DirectiveTriviaSyntax SyntaxNode => this.node;
+
+    public DirectiveTriviaSyntax WrappedInstance => this.node;
 
     public SyntaxToken HashToken => this.node.HashToken;
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> NullableKeywordAccessor;
@@ -75,24 +78,29 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public SyntaxNode Parent => this.node.Parent;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator NullableDirectiveTriviaSyntaxWrapper(SyntaxNode node)
+    public static explicit operator NullableDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator DirectiveTriviaSyntax(NullableDirectiveTriviaSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static NullableDirectiveTriviaSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new NullableDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new NullableDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)node);
     }
-
-    public static implicit operator DirectiveTriviaSyntax(NullableDirectiveTriviaSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

@@ -40,9 +40,16 @@ public readonly partial struct IRecursivePatternOperationWrapperFIXME : IOperati
     private IRecursivePatternOperationWrapperFIXME(IOperation operation) =>
         this.operation = operation;
 
+    [Obsolete("Use WrappedInstance instead")]
     public IOperation WrappedOperation => this.operation;
 
-    public static IRecursivePatternOperationWrapperFIXME FromOperation(IOperation operation)
+    public IOperation WrappedInstance => this.operation;
+
+    [Obsolete("Use From instead")]
+    public static IRecursivePatternOperationWrapperFIXME FromOperation(IOperation operation) =>
+        From(operation);
+
+    public static IRecursivePatternOperationWrapperFIXME From(IOperation operation)
     {
         if (operation is null)
         {

@@ -43,10 +43,13 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionListSynt
     private FunctionPointerUnmanagedCallingConventionListSyntaxWrapper(CSharpSyntaxNode node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode SyntaxNode => this.node;
+
+    public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBracketTokenAccessor;
     public SyntaxToken OpenBracketToken => (SyntaxToken)OpenBracketTokenAccessor(this.node);
@@ -71,24 +74,29 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionListSynt
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator FunctionPointerUnmanagedCallingConventionListSyntaxWrapper(SyntaxNode node)
+    public static explicit operator FunctionPointerUnmanagedCallingConventionListSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator CSharpSyntaxNode(FunctionPointerUnmanagedCallingConventionListSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static FunctionPointerUnmanagedCallingConventionListSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new FunctionPointerUnmanagedCallingConventionListSyntaxWrapper((CSharpSyntaxNode)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new FunctionPointerUnmanagedCallingConventionListSyntaxWrapper((CSharpSyntaxNode)node);
     }
-
-    public static implicit operator CSharpSyntaxNode(FunctionPointerUnmanagedCallingConventionListSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

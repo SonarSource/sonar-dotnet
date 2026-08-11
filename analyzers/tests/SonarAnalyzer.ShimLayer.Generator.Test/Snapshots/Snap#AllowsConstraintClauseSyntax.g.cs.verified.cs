@@ -42,10 +42,13 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     private AllowsConstraintClauseSyntaxWrapper(TypeParameterConstraintSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public TypeParameterConstraintSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public TypeParameterConstraintSyntax SyntaxNode => this.node;
+
+    public TypeParameterConstraintSyntax WrappedInstance => this.node;
 
     private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor;
     public SyntaxToken AllowsKeyword => (SyntaxToken)AllowsKeywordAccessor(this.node);
@@ -68,24 +71,29 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator AllowsConstraintClauseSyntaxWrapper(SyntaxNode node)
+    public static explicit operator AllowsConstraintClauseSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator TypeParameterConstraintSyntax(AllowsConstraintClauseSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static AllowsConstraintClauseSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new AllowsConstraintClauseSyntaxWrapper((TypeParameterConstraintSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new AllowsConstraintClauseSyntaxWrapper((TypeParameterConstraintSyntax)node);
     }
-
-    public static implicit operator TypeParameterConstraintSyntax(AllowsConstraintClauseSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

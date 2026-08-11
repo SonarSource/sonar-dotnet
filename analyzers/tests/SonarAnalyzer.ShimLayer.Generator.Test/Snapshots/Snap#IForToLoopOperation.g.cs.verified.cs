@@ -40,9 +40,16 @@ public readonly partial struct IForToLoopOperationWrapperFIXME : IOperationWrapp
     private IForToLoopOperationWrapperFIXME(IOperation operation) =>
         this.operation = operation;
 
+    [Obsolete("Use WrappedInstance instead")]
     public IOperation WrappedOperation => this.operation;
 
-    public static IForToLoopOperationWrapperFIXME FromOperation(IOperation operation)
+    public IOperation WrappedInstance => this.operation;
+
+    [Obsolete("Use From instead")]
+    public static IForToLoopOperationWrapperFIXME FromOperation(IOperation operation) =>
+        From(operation);
+
+    public static IForToLoopOperationWrapperFIXME From(IOperation operation)
     {
         if (operation is null)
         {

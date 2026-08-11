@@ -41,10 +41,13 @@ public readonly partial struct VariableDesignationSyntaxWrapper : ISyntaxWrapper
     private VariableDesignationSyntaxWrapper(CSharpSyntaxNode node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode SyntaxNode => this.node;
+
+    public CSharpSyntaxNode WrappedInstance => this.node;
 
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;
@@ -63,24 +66,29 @@ public readonly partial struct VariableDesignationSyntaxWrapper : ISyntaxWrapper
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator VariableDesignationSyntaxWrapper(SyntaxNode node)
+    public static explicit operator VariableDesignationSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator CSharpSyntaxNode(VariableDesignationSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static VariableDesignationSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new VariableDesignationSyntaxWrapper((CSharpSyntaxNode)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new VariableDesignationSyntaxWrapper((CSharpSyntaxNode)node);
     }
-
-    public static implicit operator CSharpSyntaxNode(VariableDesignationSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

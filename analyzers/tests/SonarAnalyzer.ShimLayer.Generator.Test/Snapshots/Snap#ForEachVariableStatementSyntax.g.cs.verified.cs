@@ -49,10 +49,13 @@ public readonly partial struct ForEachVariableStatementSyntaxWrapper : ISyntaxWr
     private ForEachVariableStatementSyntaxWrapper(StatementSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public StatementSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public StatementSyntax SyntaxNode => this.node;
+
+    public StatementSyntax WrappedInstance => this.node;
 
     private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor;
     public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.node);
@@ -89,27 +92,32 @@ public readonly partial struct ForEachVariableStatementSyntaxWrapper : ISyntaxWr
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator ForEachVariableStatementSyntaxWrapper(SyntaxNode node)
+    public static explicit operator ForEachVariableStatementSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator StatementSyntax(ForEachVariableStatementSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static ForEachVariableStatementSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new ForEachVariableStatementSyntaxWrapper((StatementSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new ForEachVariableStatementSyntaxWrapper((StatementSyntax)node);
     }
 
-    public static implicit operator StatementSyntax(ForEachVariableStatementSyntaxWrapper wrapper) =>
-        wrapper.node;
+    public static bool IsInstance(SyntaxNode node) =>
+        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
     public static implicit operator CommonForEachStatementSyntaxWrapper(ForEachVariableStatementSyntaxWrapper up) => (CommonForEachStatementSyntaxWrapper)up.SyntaxNode;
     public static explicit operator ForEachVariableStatementSyntaxWrapper(CommonForEachStatementSyntaxWrapper down) => (ForEachVariableStatementSyntaxWrapper)down.SyntaxNode;
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

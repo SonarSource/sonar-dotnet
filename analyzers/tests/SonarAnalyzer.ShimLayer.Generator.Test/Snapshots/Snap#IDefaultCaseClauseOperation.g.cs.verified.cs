@@ -40,9 +40,16 @@ public readonly partial struct IDefaultCaseClauseOperationWrapperFIXME : IOperat
     private IDefaultCaseClauseOperationWrapperFIXME(IOperation operation) =>
         this.operation = operation;
 
+    [Obsolete("Use WrappedInstance instead")]
     public IOperation WrappedOperation => this.operation;
 
-    public static IDefaultCaseClauseOperationWrapperFIXME FromOperation(IOperation operation)
+    public IOperation WrappedInstance => this.operation;
+
+    [Obsolete("Use From instead")]
+    public static IDefaultCaseClauseOperationWrapperFIXME FromOperation(IOperation operation) =>
+        From(operation);
+
+    public static IDefaultCaseClauseOperationWrapperFIXME From(IOperation operation)
     {
         if (operation is null)
         {

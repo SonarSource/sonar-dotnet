@@ -42,10 +42,13 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public TypeDeclarationSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public TypeDeclarationSyntax SyntaxNode => this.node;
+
+    public TypeDeclarationSyntax WrappedInstance => this.node;
 
     public SyntaxList<AttributeListSyntax> AttributeLists => this.node.AttributeLists;
     public SyntaxTokenList Modifiers => this.node.Modifiers;
@@ -80,24 +83,29 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
+    public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
     }
-
-    public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

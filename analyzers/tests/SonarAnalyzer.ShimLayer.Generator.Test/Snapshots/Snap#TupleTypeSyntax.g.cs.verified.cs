@@ -47,10 +47,13 @@ public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSynta
     private TupleTypeSyntaxWrapper(TypeSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public TypeSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public TypeSyntax SyntaxNode => this.node;
+
+    public TypeSyntax WrappedInstance => this.node;
 
     private static readonly Func<TypeSyntax, SyntaxToken> OpenParenTokenAccessor;
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.node);
@@ -84,24 +87,29 @@ public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSynta
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator TupleTypeSyntaxWrapper(SyntaxNode node)
+    public static explicit operator TupleTypeSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator TypeSyntax(TupleTypeSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static TupleTypeSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new TupleTypeSyntaxWrapper((TypeSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new TupleTypeSyntaxWrapper((TypeSyntax)node);
     }
-
-    public static implicit operator TypeSyntax(TupleTypeSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

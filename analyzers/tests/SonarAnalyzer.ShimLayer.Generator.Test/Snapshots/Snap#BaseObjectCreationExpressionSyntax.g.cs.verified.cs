@@ -43,10 +43,13 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     private BaseObjectCreationExpressionSyntaxWrapper(ExpressionSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax SyntaxNode => this.node;
+
+    public ExpressionSyntax WrappedInstance => this.node;
 
     private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor;
     public SyntaxToken NewKeyword => (SyntaxToken)NewKeywordAccessor(this.node);
@@ -71,24 +74,29 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator BaseObjectCreationExpressionSyntaxWrapper(SyntaxNode node)
+    public static explicit operator BaseObjectCreationExpressionSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator ExpressionSyntax(BaseObjectCreationExpressionSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static BaseObjectCreationExpressionSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new BaseObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new BaseObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)node);
     }
-
-    public static implicit operator ExpressionSyntax(BaseObjectCreationExpressionSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

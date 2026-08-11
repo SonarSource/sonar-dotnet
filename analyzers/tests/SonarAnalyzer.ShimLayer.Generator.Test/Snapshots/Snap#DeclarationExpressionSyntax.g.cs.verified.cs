@@ -42,10 +42,13 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     private DeclarationExpressionSyntaxWrapper(ExpressionSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public ExpressionSyntax SyntaxNode => this.node;
+
+    public ExpressionSyntax WrappedInstance => this.node;
 
     private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor;
     public TypeSyntax Type => TypeAccessor(this.node);
@@ -68,24 +71,29 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator DeclarationExpressionSyntaxWrapper(SyntaxNode node)
+    public static explicit operator DeclarationExpressionSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator ExpressionSyntax(DeclarationExpressionSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static DeclarationExpressionSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new DeclarationExpressionSyntaxWrapper((ExpressionSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new DeclarationExpressionSyntaxWrapper((ExpressionSyntax)node);
     }
-
-    public static implicit operator ExpressionSyntax(DeclarationExpressionSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

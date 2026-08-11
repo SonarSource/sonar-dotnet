@@ -46,10 +46,13 @@ public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSynt
     private ScopedTypeSyntaxWrapper(TypeSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public TypeSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public TypeSyntax SyntaxNode => this.node;
+
+    public TypeSyntax WrappedInstance => this.node;
 
     private static readonly Func<TypeSyntax, SyntaxToken> ScopedKeywordAccessor;
     public SyntaxToken ScopedKeyword => (SyntaxToken)ScopedKeywordAccessor(this.node);
@@ -81,24 +84,29 @@ public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSynt
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator ScopedTypeSyntaxWrapper(SyntaxNode node)
+    public static explicit operator ScopedTypeSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator TypeSyntax(ScopedTypeSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static ScopedTypeSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new ScopedTypeSyntaxWrapper((TypeSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new ScopedTypeSyntaxWrapper((TypeSyntax)node);
     }
-
-    public static implicit operator TypeSyntax(ScopedTypeSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

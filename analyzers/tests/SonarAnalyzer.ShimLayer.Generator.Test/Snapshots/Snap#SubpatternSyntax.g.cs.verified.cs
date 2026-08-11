@@ -43,10 +43,13 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private SubpatternSyntaxWrapper(CSharpSyntaxNode node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode SyntaxNode => this.node;
+
+    public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor;
     public NameColonSyntax NameColon => NameColonAccessor(this.node);
@@ -71,24 +74,29 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator SubpatternSyntaxWrapper(SyntaxNode node)
+    public static explicit operator SubpatternSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator CSharpSyntaxNode(SubpatternSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static SubpatternSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new SubpatternSyntaxWrapper((CSharpSyntaxNode)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new SubpatternSyntaxWrapper((CSharpSyntaxNode)node);
     }
-
-    public static implicit operator CSharpSyntaxNode(SubpatternSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

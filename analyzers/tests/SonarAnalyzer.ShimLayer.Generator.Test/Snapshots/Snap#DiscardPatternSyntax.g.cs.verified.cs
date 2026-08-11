@@ -41,10 +41,13 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
     private DiscardPatternSyntaxWrapper(CSharpSyntaxNode node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode SyntaxNode => this.node;
+
+    public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor;
     public SyntaxToken UnderscoreToken => (SyntaxToken)UnderscoreTokenAccessor(this.node);
@@ -65,23 +68,30 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator DiscardPatternSyntaxWrapper(SyntaxNode node)
+    public static explicit operator DiscardPatternSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator CSharpSyntaxNode(DiscardPatternSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static DiscardPatternSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new DiscardPatternSyntaxWrapper((CSharpSyntaxNode)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new DiscardPatternSyntaxWrapper((CSharpSyntaxNode)node);
     }
 
-    public static implicit operator CSharpSyntaxNode(DiscardPatternSyntaxWrapper wrapper) =>
-        wrapper.node;
+    public static bool IsInstance(SyntaxNode node) =>
+        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
     public static implicit operator PatternSyntaxWrapper(DiscardPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator DiscardPatternSyntaxWrapper(PatternSyntaxWrapper down) => (DiscardPatternSyntaxWrapper)down.SyntaxNode;
@@ -89,6 +99,4 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
     public static implicit operator ExpressionOrPatternSyntaxWrapper(DiscardPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator DiscardPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (DiscardPatternSyntaxWrapper)down.SyntaxNode;
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

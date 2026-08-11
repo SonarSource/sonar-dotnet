@@ -40,9 +40,16 @@ public readonly partial struct IPatternCaseClauseOperationWrapperFIXME : IOperat
     private IPatternCaseClauseOperationWrapperFIXME(IOperation operation) =>
         this.operation = operation;
 
+    [Obsolete("Use WrappedInstance instead")]
     public IOperation WrappedOperation => this.operation;
 
-    public static IPatternCaseClauseOperationWrapperFIXME FromOperation(IOperation operation)
+    public IOperation WrappedInstance => this.operation;
+
+    [Obsolete("Use From instead")]
+    public static IPatternCaseClauseOperationWrapperFIXME FromOperation(IOperation operation) =>
+        From(operation);
+
+    public static IPatternCaseClauseOperationWrapperFIXME From(IOperation operation)
     {
         if (operation is null)
         {

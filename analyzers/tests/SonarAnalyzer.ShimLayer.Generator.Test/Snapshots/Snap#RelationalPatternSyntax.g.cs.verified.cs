@@ -42,10 +42,13 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     private RelationalPatternSyntaxWrapper(CSharpSyntaxNode node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode SyntaxNode => this.node;
+
+    public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor;
     public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(this.node);
@@ -68,23 +71,30 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator RelationalPatternSyntaxWrapper(SyntaxNode node)
+    public static explicit operator RelationalPatternSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator CSharpSyntaxNode(RelationalPatternSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static RelationalPatternSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new RelationalPatternSyntaxWrapper((CSharpSyntaxNode)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new RelationalPatternSyntaxWrapper((CSharpSyntaxNode)node);
     }
 
-    public static implicit operator CSharpSyntaxNode(RelationalPatternSyntaxWrapper wrapper) =>
-        wrapper.node;
+    public static bool IsInstance(SyntaxNode node) =>
+        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
     public static implicit operator PatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator RelationalPatternSyntaxWrapper(PatternSyntaxWrapper down) => (RelationalPatternSyntaxWrapper)down.SyntaxNode;
@@ -92,6 +102,4 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     public static implicit operator ExpressionOrPatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
     public static explicit operator RelationalPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (RelationalPatternSyntaxWrapper)down.SyntaxNode;
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

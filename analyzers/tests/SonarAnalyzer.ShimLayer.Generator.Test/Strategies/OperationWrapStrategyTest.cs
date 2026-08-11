@@ -72,9 +72,16 @@ public class OperationWrapStrategyTest
                 private IFieldInitializerOperationWrapperFIXME(IOperation operation) =>
                     this.operation = operation;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public IOperation WrappedOperation => this.operation;
 
-                public static IFieldInitializerOperationWrapperFIXME FromOperation(IOperation operation)
+                public IOperation WrappedInstance => this.operation;
+
+                [Obsolete("Use From instead")]
+                public static IFieldInitializerOperationWrapperFIXME FromOperation(IOperation operation) =>
+                    From(operation);
+
+                public static IFieldInitializerOperationWrapperFIXME From(IOperation operation)
                 {
                     if (operation is null)
                     {

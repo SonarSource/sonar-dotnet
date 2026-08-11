@@ -41,10 +41,13 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
     private DiscardDesignationSyntaxWrapper(CSharpSyntaxNode node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode SyntaxNode => this.node;
+
+    public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor;
     public SyntaxToken UnderscoreToken => (SyntaxToken)UnderscoreTokenAccessor(this.node);
@@ -65,27 +68,32 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator DiscardDesignationSyntaxWrapper(SyntaxNode node)
+    public static explicit operator DiscardDesignationSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator CSharpSyntaxNode(DiscardDesignationSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static DiscardDesignationSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new DiscardDesignationSyntaxWrapper((CSharpSyntaxNode)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new DiscardDesignationSyntaxWrapper((CSharpSyntaxNode)node);
     }
 
-    public static implicit operator CSharpSyntaxNode(DiscardDesignationSyntaxWrapper wrapper) =>
-        wrapper.node;
+    public static bool IsInstance(SyntaxNode node) =>
+        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
     public static implicit operator VariableDesignationSyntaxWrapper(DiscardDesignationSyntaxWrapper up) => (VariableDesignationSyntaxWrapper)up.SyntaxNode;
     public static explicit operator DiscardDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => (DiscardDesignationSyntaxWrapper)down.SyntaxNode;
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 }

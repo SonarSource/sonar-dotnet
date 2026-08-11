@@ -42,10 +42,13 @@ public readonly partial struct BaseExpressionColonSyntaxWrapper : ISyntaxWrapper
     private BaseExpressionColonSyntaxWrapper(CSharpSyntaxNode node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public CSharpSyntaxNode SyntaxNode => this.node;
+
+    public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor;
     public ExpressionSyntax Expression => ExpressionAccessor(this.node);
@@ -68,24 +71,29 @@ public readonly partial struct BaseExpressionColonSyntaxWrapper : ISyntaxWrapper
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator BaseExpressionColonSyntaxWrapper(SyntaxNode node)
+    public static explicit operator BaseExpressionColonSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator CSharpSyntaxNode(BaseExpressionColonSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static BaseExpressionColonSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new BaseExpressionColonSyntaxWrapper((CSharpSyntaxNode)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new BaseExpressionColonSyntaxWrapper((CSharpSyntaxNode)node);
     }
-
-    public static implicit operator CSharpSyntaxNode(BaseExpressionColonSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

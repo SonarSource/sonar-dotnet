@@ -40,9 +40,16 @@ public readonly partial struct ISymbolInitializerOperationWrapperFIXME : IOperat
     private ISymbolInitializerOperationWrapperFIXME(IOperation operation) =>
         this.operation = operation;
 
+    [Obsolete("Use WrappedInstance instead")]
     public IOperation WrappedOperation => this.operation;
 
-    public static ISymbolInitializerOperationWrapperFIXME FromOperation(IOperation operation)
+    public IOperation WrappedInstance => this.operation;
+
+    [Obsolete("Use From instead")]
+    public static ISymbolInitializerOperationWrapperFIXME FromOperation(IOperation operation) =>
+        From(operation);
+
+    public static ISymbolInitializerOperationWrapperFIXME From(IOperation operation)
     {
         if (operation is null)
         {

@@ -52,9 +52,16 @@ public class OperationWrapStrategy : Strategy
             private {{Latest.Name}}WrapperFIXME({{CompiletimeTypeSnippet()}} operation) =>
                 this.operation = operation;
 
+            [Obsolete("Use WrappedInstance instead")]
             public {{CompiletimeTypeSnippet()}} WrappedOperation => this.operation;
 
-            public static {{Latest.Name}}WrapperFIXME FromOperation(IOperation operation)
+            public {{CompiletimeTypeSnippet()}} WrappedInstance => this.operation;
+
+            [Obsolete("Use From instead")]
+            public static {{Latest.Name}}WrapperFIXME FromOperation(IOperation operation) =>
+                From(operation);
+
+            public static {{Latest.Name}}WrapperFIXME From(IOperation operation)
             {
                 if (operation is null)
                 {

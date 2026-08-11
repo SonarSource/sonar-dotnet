@@ -41,10 +41,13 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     private ExtensionBlockDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public TypeDeclarationSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public TypeDeclarationSyntax SyntaxNode => this.node;
+
+    public TypeDeclarationSyntax WrappedInstance => this.node;
 
     public SyntaxToken Identifier => this.node.Identifier;
     public BaseListSyntax BaseList => this.node.BaseList;
@@ -77,24 +80,29 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator ExtensionBlockDeclarationSyntaxWrapper(SyntaxNode node)
+    public static explicit operator ExtensionBlockDeclarationSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator TypeDeclarationSyntax(ExtensionBlockDeclarationSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static ExtensionBlockDeclarationSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new ExtensionBlockDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new ExtensionBlockDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
     }
-
-    public static implicit operator TypeDeclarationSyntax(ExtensionBlockDeclarationSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

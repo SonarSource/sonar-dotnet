@@ -47,10 +47,13 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
     private BaseNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public MemberDeclarationSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public MemberDeclarationSyntax SyntaxNode => this.node;
+
+    public MemberDeclarationSyntax WrappedInstance => this.node;
 
     private static readonly Func<MemberDeclarationSyntax, SyntaxToken> NamespaceKeywordAccessor;
     public SyntaxToken NamespaceKeyword => (SyntaxToken)NamespaceKeywordAccessor(this.node);
@@ -83,24 +86,29 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator BaseNamespaceDeclarationSyntaxWrapper(SyntaxNode node)
+    public static explicit operator BaseNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator MemberDeclarationSyntax(BaseNamespaceDeclarationSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static BaseNamespaceDeclarationSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new BaseNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new BaseNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)node);
     }
-
-    public static implicit operator MemberDeclarationSyntax(BaseNamespaceDeclarationSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

@@ -77,31 +77,39 @@ public class SyntaxNodeWrapStrategyTest
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
                     this.node = node;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public TypeDeclarationSyntax Node => this.node;
 
-                [Obsolete("Use Node instead")]
+                [Obsolete("Use WrappedInstance instead")]
                 public TypeDeclarationSyntax SyntaxNode => this.node;
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
+                public TypeDeclarationSyntax WrappedInstance => this.node;
+
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
+                    From(node);
+
+                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
                 {
                     if (node is null)
                     {
                         return default;
                     }
-
-                    if (!IsInstance(node))
+                    else if (IsInstance(node))
+                    {
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                    }
+                    else
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-
-                    return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
                 }
-
-                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.node;
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
             }
             """);
     }
@@ -165,35 +173,43 @@ public class SyntaxNodeWrapStrategyTest
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
                     this.node = node;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public TypeDeclarationSyntax Node => this.node;
 
-                [Obsolete("Use Node instead")]
+                [Obsolete("Use WrappedInstance instead")]
                 public TypeDeclarationSyntax SyntaxNode => this.node;
+
+                public TypeDeclarationSyntax WrappedInstance => this.node;
 
                 public TextSpan Span => this.node.Span;
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor;
                 public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(this.node);
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
+                    From(node);
+
+                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
                 {
                     if (node is null)
                     {
                         return default;
                     }
-
-                    if (!IsInstance(node))
+                    else if (IsInstance(node))
+                    {
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                    }
+                    else
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-
-                    return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
                 }
-
-                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.node;
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
             }
             """);
     }
@@ -255,34 +271,42 @@ public class SyntaxNodeWrapStrategyTest
                 private IsPatternExpressionSyntaxWrapper(ExpressionSyntax node) =>
                     this.node = node;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public ExpressionSyntax Node => this.node;
 
-                [Obsolete("Use Node instead")]
+                [Obsolete("Use WrappedInstance instead")]
                 public ExpressionSyntax SyntaxNode => this.node;
+
+                public ExpressionSyntax WrappedInstance => this.node;
 
                 private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor;
                 public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
 
-                public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node)
+                public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
+                    From(node);
+
+                public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static IsPatternExpressionSyntaxWrapper From(SyntaxNode node)
                 {
                     if (node is null)
                     {
                         return default;
                     }
-
-                    if (!IsInstance(node))
+                    else if (IsInstance(node))
+                    {
+                        return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)node);
+                    }
+                    else
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-
-                    return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)node);
                 }
-
-                public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
-                    wrapper.node;
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
             }
             """);
     }
@@ -343,28 +367,38 @@ public class SyntaxNodeWrapStrategyTest
                 private ConstantPatternSyntaxWrapper(CSharpSyntaxNode node) =>
                     this.node = node;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public CSharpSyntaxNode Node => this.node;
 
-                [Obsolete("Use Node instead")]
+                [Obsolete("Use WrappedInstance instead")]
                 public CSharpSyntaxNode SyntaxNode => this.node;
 
-                public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node)
+                public CSharpSyntaxNode WrappedInstance => this.node;
+
+                public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node) =>
+                    From(node);
+
+                public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static ConstantPatternSyntaxWrapper From(SyntaxNode node)
                 {
                     if (node is null)
                     {
                         return default;
                     }
-
-                    if (!IsInstance(node))
+                    else if (IsInstance(node))
+                    {
+                        return new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)node);
+                    }
+                    else
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-
-                    return new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)node);
                 }
 
-                public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
-                    wrapper.node;
+                public static bool IsInstance(SyntaxNode node) =>
+                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
                 public static implicit operator PatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
                 public static explicit operator ConstantPatternSyntaxWrapper(PatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
@@ -372,8 +406,6 @@ public class SyntaxNodeWrapStrategyTest
                 public static implicit operator ExpressionOrPatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
                 public static explicit operator ConstantPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
             """);
     }
@@ -433,31 +465,39 @@ public class SyntaxNodeWrapStrategyTest
                 private SyntaxNodeWrapper(SyntaxNode node) =>
                     this.node = node;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public SyntaxNode Node => this.node;
 
-                [Obsolete("Use Node instead")]
+                [Obsolete("Use WrappedInstance instead")]
                 public SyntaxNode SyntaxNode => this.node;
 
-                public static explicit operator SyntaxNodeWrapper(SyntaxNode node)
+                public SyntaxNode WrappedInstance => this.node;
+
+                public static explicit operator SyntaxNodeWrapper(SyntaxNode node) =>
+                    From(node);
+
+                public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
+                    wrapper.node;
+
+                public static SyntaxNodeWrapper From(SyntaxNode node)
                 {
                     if (node is null)
                     {
                         return default;
                     }
-
-                    if (!IsInstance(node))
+                    else if (IsInstance(node))
+                    {
+                        return new SyntaxNodeWrapper((SyntaxNode)node);
+                    }
+                    else
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-
-                    return new SyntaxNodeWrapper((SyntaxNode)node);
                 }
-
-                public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
-                    wrapper.node;
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
             }
             """);
     }
@@ -517,36 +557,44 @@ public class SyntaxNodeWrapStrategyTest
                 private IndexerDeclarationSyntaxWrapper(SyntaxNode node) =>
                     this.node = node;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public SyntaxNode Node => this.node;
 
-                [Obsolete("Use Node instead")]
+                [Obsolete("Use WrappedInstance instead")]
                 public SyntaxNode SyntaxNode => this.node;
+
+                public SyntaxNode WrappedInstance => this.node;
 
                 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
                 [System.ObsoleteAttribute("This member is obsolete.", true)]
                 public SyntaxToken Semicolon => this.node.Semicolon;
                 public SyntaxNode Parent => this.node.Parent;
 
-                public static explicit operator IndexerDeclarationSyntaxWrapper(SyntaxNode node)
+                public static explicit operator IndexerDeclarationSyntaxWrapper(SyntaxNode node) =>
+                    From(node);
+
+                public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static IndexerDeclarationSyntaxWrapper From(SyntaxNode node)
                 {
                     if (node is null)
                     {
                         return default;
                     }
-
-                    if (!IsInstance(node))
+                    else if (IsInstance(node))
+                    {
+                        return new IndexerDeclarationSyntaxWrapper((SyntaxNode)node);
+                    }
+                    else
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-
-                    return new IndexerDeclarationSyntaxWrapper((SyntaxNode)node);
                 }
-
-                public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.node;
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
             }
             """);
     }
@@ -612,10 +660,13 @@ public class SyntaxNodeWrapStrategyTest
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
                     this.node = node;
 
+                [Obsolete("Use WrappedInstance instead")]
                 public TypeDeclarationSyntax Node => this.node;
 
-                [Obsolete("Use Node instead")]
+                [Obsolete("Use WrappedInstance instead")]
                 public TypeDeclarationSyntax SyntaxNode => this.node;
+
+                public TypeDeclarationSyntax WrappedInstance => this.node;
 
                 private static readonly Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor;
                 public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(this.node);
@@ -625,26 +676,31 @@ public class SyntaxNodeWrapStrategyTest
                 private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor;
                 public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(this.node);
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
+                    From(node);
+
+                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
+                    wrapper.node;
+
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
                 {
                     if (node is null)
                     {
                         return default;
                     }
-
-                    if (!IsInstance(node))
+                    else if (IsInstance(node))
+                    {
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                    }
+                    else
                     {
                         throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
                     }
-
-                    return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
                 }
-
-                public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.node;
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
             }
             """);
     }

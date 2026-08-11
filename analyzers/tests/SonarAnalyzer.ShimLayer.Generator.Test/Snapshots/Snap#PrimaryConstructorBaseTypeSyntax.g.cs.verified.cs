@@ -41,10 +41,13 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public BaseTypeSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public BaseTypeSyntax SyntaxNode => this.node;
+
+    public BaseTypeSyntax WrappedInstance => this.node;
 
     public TypeSyntax Type => this.node.Type;
     private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor;
@@ -66,24 +69,29 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator PrimaryConstructorBaseTypeSyntaxWrapper(SyntaxNode node)
+    public static explicit operator PrimaryConstructorBaseTypeSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator BaseTypeSyntax(PrimaryConstructorBaseTypeSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static PrimaryConstructorBaseTypeSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new PrimaryConstructorBaseTypeSyntaxWrapper((BaseTypeSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new PrimaryConstructorBaseTypeSyntaxWrapper((BaseTypeSyntax)node);
     }
-
-    public static implicit operator BaseTypeSyntax(PrimaryConstructorBaseTypeSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }

@@ -45,10 +45,13 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax node) =>
         this.node = node;
 
+    [Obsolete("Use WrappedInstance instead")]
     public MemberCrefSyntax Node => this.node;
 
-    [Obsolete("Use Node instead")]
+    [Obsolete("Use WrappedInstance instead")]
     public MemberCrefSyntax SyntaxNode => this.node;
+
+    public MemberCrefSyntax WrappedInstance => this.node;
 
     private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor;
     public SyntaxToken ExtensionKeyword => (SyntaxToken)ExtensionKeywordAccessor(this.node);
@@ -77,24 +80,29 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
     public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
 
-    public static explicit operator ExtensionMemberCrefSyntaxWrapper(SyntaxNode node)
+    public static explicit operator ExtensionMemberCrefSyntaxWrapper(SyntaxNode node) =>
+        From(node);
+
+    public static implicit operator MemberCrefSyntax(ExtensionMemberCrefSyntaxWrapper wrapper) =>
+        wrapper.node;
+
+    public static ExtensionMemberCrefSyntaxWrapper From(SyntaxNode node)
     {
         if (node is null)
         {
             return default;
         }
-
-        if (!IsInstance(node))
+        else if (IsInstance(node))
+        {
+            return new ExtensionMemberCrefSyntaxWrapper((MemberCrefSyntax)node);
+        }
+        else
         {
             throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
         }
-
-        return new ExtensionMemberCrefSyntaxWrapper((MemberCrefSyntax)node);
     }
-
-    public static implicit operator MemberCrefSyntax(ExtensionMemberCrefSyntaxWrapper wrapper) =>
-        wrapper.node;
 
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+
 }
