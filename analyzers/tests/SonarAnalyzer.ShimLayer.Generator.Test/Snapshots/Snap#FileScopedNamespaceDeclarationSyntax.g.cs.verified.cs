@@ -30,7 +30,7 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper : ISy
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FileScopedNamespaceDeclarationSyntax";
     private static readonly Type WrappedType;
 
-    private readonly MemberDeclarationSyntax node;
+    private readonly MemberDeclarationSyntax instance;
 
     static FileScopedNamespaceDeclarationSyntaxWrapper()
     {
@@ -45,55 +45,55 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper : ISy
         MembersAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
     }
 
-    private FileScopedNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax node) =>
-        this.node = node;
+    private FileScopedNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public MemberDeclarationSyntax Node => this.node;
+    public MemberDeclarationSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public MemberDeclarationSyntax SyntaxNode => this.node;
+    public MemberDeclarationSyntax SyntaxNode => this.instance;
 
-    public MemberDeclarationSyntax WrappedInstance => this.node;
+    public MemberDeclarationSyntax WrappedInstance => this.instance;
 
     private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor;
-    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.node);
+    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.instance);
     private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor;
-    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(this.node);
+    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(this.instance);
     private static readonly Func<MemberDeclarationSyntax, SyntaxToken> NamespaceKeywordAccessor;
-    public SyntaxToken NamespaceKeyword => (SyntaxToken)NamespaceKeywordAccessor(this.node);
+    public SyntaxToken NamespaceKeyword => (SyntaxToken)NamespaceKeywordAccessor(this.instance);
     private static readonly Func<MemberDeclarationSyntax, NameSyntax> NameAccessor;
-    public NameSyntax Name => NameAccessor(this.node);
+    public NameSyntax Name => NameAccessor(this.instance);
     private static readonly Func<MemberDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor;
-    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(this.node);
+    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(this.instance);
     private static readonly Func<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>> ExternsAccessor;
-    public SyntaxList<ExternAliasDirectiveSyntax> Externs => (SyntaxList<ExternAliasDirectiveSyntax>)ExternsAccessor(this.node);
+    public SyntaxList<ExternAliasDirectiveSyntax> Externs => (SyntaxList<ExternAliasDirectiveSyntax>)ExternsAccessor(this.instance);
     private static readonly Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>> UsingsAccessor;
-    public SyntaxList<UsingDirectiveSyntax> Usings => (SyntaxList<UsingDirectiveSyntax>)UsingsAccessor(this.node);
+    public SyntaxList<UsingDirectiveSyntax> Usings => (SyntaxList<UsingDirectiveSyntax>)UsingsAccessor(this.instance);
     private static readonly Func<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor;
-    public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(this.node);
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(this.instance);
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator MemberDeclarationSyntax(FileScopedNamespaceDeclarationSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static FileScopedNamespaceDeclarationSyntaxWrapper From(SyntaxNode node)
     {

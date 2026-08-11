@@ -30,7 +30,7 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleExpressionSyntax";
     private static readonly Type WrappedType;
 
-    private readonly ExpressionSyntax node;
+    private readonly ExpressionSyntax instance;
 
     static TupleExpressionSyntaxWrapper()
     {
@@ -40,45 +40,45 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
         CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
     }
 
-    private TupleExpressionSyntaxWrapper(ExpressionSyntax node) =>
-        this.node = node;
+    private TupleExpressionSyntaxWrapper(ExpressionSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax Node => this.node;
+    public ExpressionSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax SyntaxNode => this.node;
+    public ExpressionSyntax SyntaxNode => this.instance;
 
-    public ExpressionSyntax WrappedInstance => this.node;
+    public ExpressionSyntax WrappedInstance => this.instance;
 
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenParenTokenAccessor;
-    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.node);
+    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
     private static readonly Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor;
-    public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(this.node);
+    public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(this.instance);
     private static readonly Func<ExpressionSyntax, SyntaxToken> CloseParenTokenAccessor;
-    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.node);
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator TupleExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator ExpressionSyntax(TupleExpressionSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static TupleExpressionSyntaxWrapper From(SyntaxNode node)
     {

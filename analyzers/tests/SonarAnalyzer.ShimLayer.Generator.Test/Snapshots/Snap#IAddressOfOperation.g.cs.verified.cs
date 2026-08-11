@@ -30,20 +30,52 @@ internal readonly partial struct IAddressOfOperationWrapper : IOperationWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IAddressOfOperation";
     private static readonly Type WrappedType;
 
-    private readonly IOperation operation;
+    private readonly IOperation instance;
 
     static IAddressOfOperationWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(IAddressOfOperationWrapper));
+        ReferenceAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Reference");
+        ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
+        KindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, OperationKind>(WrappedType, "Kind");
+        SyntaxAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SyntaxNode>(WrappedType, "Syntax");
+        TypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "Type");
+        ConstantValueAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Optional<Object>>(WrappedType, "ConstantValue");
+        ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+        LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
+        IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
+        SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
     }
 
-    private IAddressOfOperationWrapper(IOperation operation) =>
-        this.operation = operation;
+    private IAddressOfOperationWrapper(IOperation instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => this.operation;
+    public IOperation WrappedOperation => this.instance;
 
-    public IOperation WrappedInstance => this.operation;
+    public IOperation WrappedInstance => this.instance;
+
+    private static readonly Func<IOperation, IOperation> ReferenceAccessor;
+    public IOperation Reference => ReferenceAccessor(this.instance);
+    private static readonly Func<IOperation, IOperation> ParentAccessor;
+    public IOperation Parent => ParentAccessor(this.instance);
+    private static readonly Func<IOperation, OperationKind> KindAccessor;
+    public OperationKind Kind => (OperationKind)KindAccessor(this.instance);
+    private static readonly Func<IOperation, SyntaxNode> SyntaxAccessor;
+    public SyntaxNode Syntax => SyntaxAccessor(this.instance);
+    private static readonly Func<IOperation, ITypeSymbol> TypeAccessor;
+    public ITypeSymbol Type => (ITypeSymbol)TypeAccessor(this.instance);
+    private static readonly Func<IOperation, Optional<Object>> ConstantValueAccessor;
+    public Optional<Object> ConstantValue => (Optional<Object>)ConstantValueAccessor(this.instance);
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor;
+    [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
+    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(this.instance);
+    private static readonly Func<IOperation, String> LanguageAccessor;
+    public String Language => (String)LanguageAccessor(this.instance);
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor;
+    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(this.instance);
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor;
+    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(this.instance);
 
     [Obsolete("Use From instead")]
     public static IAddressOfOperationWrapper FromOperation(IOperation operation) =>

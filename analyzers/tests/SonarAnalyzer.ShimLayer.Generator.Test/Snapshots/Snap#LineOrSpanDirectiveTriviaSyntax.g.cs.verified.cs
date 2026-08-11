@@ -30,7 +30,7 @@ public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper : ISyntaxW
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineOrSpanDirectiveTriviaSyntax";
     private static readonly Type WrappedType;
 
-    private readonly DirectiveTriviaSyntax node;
+    private readonly DirectiveTriviaSyntax instance;
 
     static LineOrSpanDirectiveTriviaSyntaxWrapper()
     {
@@ -39,47 +39,47 @@ public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper : ISyntaxW
         FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
     }
 
-    private LineOrSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax node) =>
-        this.node = node;
+    private LineOrSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public DirectiveTriviaSyntax Node => this.node;
+    public DirectiveTriviaSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public DirectiveTriviaSyntax SyntaxNode => this.node;
+    public DirectiveTriviaSyntax SyntaxNode => this.instance;
 
-    public DirectiveTriviaSyntax WrappedInstance => this.node;
+    public DirectiveTriviaSyntax WrappedInstance => this.instance;
 
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor;
-    public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(this.node);
+    public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(this.instance);
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor;
-    public SyntaxToken File => (SyntaxToken)FileAccessor(this.node);
-    public SyntaxToken DirectiveNameToken => this.node.DirectiveNameToken;
-    public SyntaxToken HashToken => this.node.HashToken;
-    public SyntaxToken EndOfDirectiveToken => this.node.EndOfDirectiveToken;
-    public Boolean IsActive => this.node.IsActive;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public SyntaxToken File => (SyntaxToken)FileAccessor(this.instance);
+    public SyntaxToken DirectiveNameToken => this.instance.DirectiveNameToken;
+    public SyntaxToken HashToken => this.instance.HashToken;
+    public SyntaxToken EndOfDirectiveToken => this.instance.EndOfDirectiveToken;
+    public Boolean IsActive => this.instance.IsActive;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator LineOrSpanDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator DirectiveTriviaSyntax(LineOrSpanDirectiveTriviaSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static LineOrSpanDirectiveTriviaSyntaxWrapper From(SyntaxNode node)
     {

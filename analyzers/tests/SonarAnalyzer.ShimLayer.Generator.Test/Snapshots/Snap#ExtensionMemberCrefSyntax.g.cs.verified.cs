@@ -30,7 +30,7 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ExtensionMemberCrefSyntax";
     private static readonly Type WrappedType;
 
-    private readonly MemberCrefSyntax node;
+    private readonly MemberCrefSyntax instance;
 
     static ExtensionMemberCrefSyntaxWrapper()
     {
@@ -42,49 +42,49 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
         MemberAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
     }
 
-    private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax node) =>
-        this.node = node;
+    private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public MemberCrefSyntax Node => this.node;
+    public MemberCrefSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public MemberCrefSyntax SyntaxNode => this.node;
+    public MemberCrefSyntax SyntaxNode => this.instance;
 
-    public MemberCrefSyntax WrappedInstance => this.node;
+    public MemberCrefSyntax WrappedInstance => this.instance;
 
     private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor;
-    public SyntaxToken ExtensionKeyword => (SyntaxToken)ExtensionKeywordAccessor(this.node);
+    public SyntaxToken ExtensionKeyword => (SyntaxToken)ExtensionKeywordAccessor(this.instance);
     private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor;
-    public TypeArgumentListSyntax TypeArgumentList => TypeArgumentListAccessor(this.node);
+    public TypeArgumentListSyntax TypeArgumentList => TypeArgumentListAccessor(this.instance);
     private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor;
-    public CrefParameterListSyntax Parameters => ParametersAccessor(this.node);
+    public CrefParameterListSyntax Parameters => ParametersAccessor(this.instance);
     private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor;
-    public SyntaxToken DotToken => (SyntaxToken)DotTokenAccessor(this.node);
+    public SyntaxToken DotToken => (SyntaxToken)DotTokenAccessor(this.instance);
     private static readonly Func<MemberCrefSyntax, MemberCrefSyntax> MemberAccessor;
-    public MemberCrefSyntax Member => MemberAccessor(this.node);
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public MemberCrefSyntax Member => MemberAccessor(this.instance);
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator ExtensionMemberCrefSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator MemberCrefSyntax(ExtensionMemberCrefSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static ExtensionMemberCrefSyntaxWrapper From(SyntaxNode node)
     {

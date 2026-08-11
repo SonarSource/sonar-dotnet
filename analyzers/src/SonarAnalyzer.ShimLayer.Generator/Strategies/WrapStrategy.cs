@@ -51,4 +51,27 @@ public abstract class WrapStrategy : Strategy
         }
         return sb?.ToString();
     }
+
+    protected string MemberAccessorInitialization(MemberInfo member, StrategyModel model) =>
+        member is PropertyInfo property && model[property.PropertyType] is { IsSupported: true } propertyTypeStrategy
+            ? $"""
+                        {member.Name}Accessor = {propertyTypeStrategy.PropertyAccessorInitializerSnippet(CompiletimeTypeSnippet(), member.Name)};
+                """
+            : null;
+
+    protected string MemberDeclaration(MemberDescriptor member, StrategyModel model)
+    {
+        var attributes = SerializeAttributes(member.Member.GetCustomAttributesData(), 4);
+        return member switch
+        {
+            { IsPassthrough: true, Member: PropertyInfo pi } => $"""
+                    {attributes}public {model[pi.PropertyType].CompiletimeTypeSnippet()} {member.Member.Name} => this.instance.{member.Member.Name};
+                """,
+            { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
+                    private static readonly Func<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {member.Member.Name}Accessor;
+                    {attributes}public {propertyTypeStrategy.ReturnTypeSnippet()} {member.Member.Name} => {propertyTypeStrategy.ToConversionSnippet($"{member.Member.Name}Accessor(this.instance)")};
+                """,
+            _ => null,
+        };
+    }
 }

@@ -30,7 +30,7 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ImplicitStackAllocArrayCreationExpressionSyntax";
     private static readonly Type WrappedType;
 
-    private readonly ExpressionSyntax node;
+    private readonly ExpressionSyntax instance;
 
     static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper()
     {
@@ -41,47 +41,47 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
         InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
     }
 
-    private ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(ExpressionSyntax node) =>
-        this.node = node;
+    private ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(ExpressionSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax Node => this.node;
+    public ExpressionSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax SyntaxNode => this.node;
+    public ExpressionSyntax SyntaxNode => this.instance;
 
-    public ExpressionSyntax WrappedInstance => this.node;
+    public ExpressionSyntax WrappedInstance => this.instance;
 
     private static readonly Func<ExpressionSyntax, SyntaxToken> StackAllocKeywordAccessor;
-    public SyntaxToken StackAllocKeyword => (SyntaxToken)StackAllocKeywordAccessor(this.node);
+    public SyntaxToken StackAllocKeyword => (SyntaxToken)StackAllocKeywordAccessor(this.instance);
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor;
-    public SyntaxToken OpenBracketToken => (SyntaxToken)OpenBracketTokenAccessor(this.node);
+    public SyntaxToken OpenBracketToken => (SyntaxToken)OpenBracketTokenAccessor(this.instance);
     private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBracketTokenAccessor;
-    public SyntaxToken CloseBracketToken => (SyntaxToken)CloseBracketTokenAccessor(this.node);
+    public SyntaxToken CloseBracketToken => (SyntaxToken)CloseBracketTokenAccessor(this.instance);
     private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor;
-    public InitializerExpressionSyntax Initializer => InitializerAccessor(this.node);
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public InitializerExpressionSyntax Initializer => InitializerAccessor(this.instance);
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator ExpressionSyntax(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper From(SyntaxNode node)
     {

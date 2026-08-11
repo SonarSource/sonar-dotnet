@@ -30,7 +30,7 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper : ISyntaxWrap
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LocalFunctionStatementSyntax";
     private static readonly Type WrappedType;
 
-    private readonly StatementSyntax node;
+    private readonly StatementSyntax instance;
 
     static LocalFunctionStatementSyntaxWrapper()
     {
@@ -47,59 +47,59 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper : ISyntaxWrap
         SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
     }
 
-    private LocalFunctionStatementSyntaxWrapper(StatementSyntax node) =>
-        this.node = node;
+    private LocalFunctionStatementSyntaxWrapper(StatementSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax Node => this.node;
+    public StatementSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax SyntaxNode => this.node;
+    public StatementSyntax SyntaxNode => this.instance;
 
-    public StatementSyntax WrappedInstance => this.node;
+    public StatementSyntax WrappedInstance => this.instance;
 
     private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor;
-    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.node);
+    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.instance);
     private static readonly Func<StatementSyntax, SyntaxTokenList> ModifiersAccessor;
-    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(this.node);
+    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(this.instance);
     private static readonly Func<StatementSyntax, TypeSyntax> ReturnTypeAccessor;
-    public TypeSyntax ReturnType => ReturnTypeAccessor(this.node);
+    public TypeSyntax ReturnType => ReturnTypeAccessor(this.instance);
     private static readonly Func<StatementSyntax, SyntaxToken> IdentifierAccessor;
-    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(this.node);
+    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(this.instance);
     private static readonly Func<StatementSyntax, TypeParameterListSyntax> TypeParameterListAccessor;
-    public TypeParameterListSyntax TypeParameterList => TypeParameterListAccessor(this.node);
+    public TypeParameterListSyntax TypeParameterList => TypeParameterListAccessor(this.instance);
     private static readonly Func<StatementSyntax, ParameterListSyntax> ParameterListAccessor;
-    public ParameterListSyntax ParameterList => ParameterListAccessor(this.node);
+    public ParameterListSyntax ParameterList => ParameterListAccessor(this.instance);
     private static readonly Func<StatementSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>> ConstraintClausesAccessor;
-    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => (SyntaxList<TypeParameterConstraintClauseSyntax>)ConstraintClausesAccessor(this.node);
+    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => (SyntaxList<TypeParameterConstraintClauseSyntax>)ConstraintClausesAccessor(this.instance);
     private static readonly Func<StatementSyntax, BlockSyntax> BodyAccessor;
-    public BlockSyntax Body => BodyAccessor(this.node);
+    public BlockSyntax Body => BodyAccessor(this.instance);
     private static readonly Func<StatementSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor;
-    public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(this.node);
+    public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(this.instance);
     private static readonly Func<StatementSyntax, SyntaxToken> SemicolonTokenAccessor;
-    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(this.node);
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(this.instance);
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator LocalFunctionStatementSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator StatementSyntax(LocalFunctionStatementSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static LocalFunctionStatementSyntaxWrapper From(SyntaxNode node)
     {

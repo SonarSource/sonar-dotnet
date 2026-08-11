@@ -30,7 +30,7 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
     private static readonly Type WrappedType;
 
-    private readonly TypeDeclarationSyntax node;
+    private readonly TypeDeclarationSyntax instance;
 
     static RecordDeclarationSyntaxWrapper()
     {
@@ -39,55 +39,55 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
         ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
     }
 
-    private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax node) =>
-        this.node = node;
+    private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public TypeDeclarationSyntax Node => this.node;
+    public TypeDeclarationSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public TypeDeclarationSyntax SyntaxNode => this.node;
+    public TypeDeclarationSyntax SyntaxNode => this.instance;
 
-    public TypeDeclarationSyntax WrappedInstance => this.node;
+    public TypeDeclarationSyntax WrappedInstance => this.instance;
 
-    public SyntaxList<AttributeListSyntax> AttributeLists => this.node.AttributeLists;
-    public SyntaxTokenList Modifiers => this.node.Modifiers;
-    public SyntaxToken Keyword => this.node.Keyword;
+    public SyntaxList<AttributeListSyntax> AttributeLists => this.instance.AttributeLists;
+    public SyntaxTokenList Modifiers => this.instance.Modifiers;
+    public SyntaxToken Keyword => this.instance.Keyword;
     private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor;
-    public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(this.node);
-    public SyntaxToken Identifier => this.node.Identifier;
-    public TypeParameterListSyntax TypeParameterList => this.node.TypeParameterList;
+    public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(this.instance);
+    public SyntaxToken Identifier => this.instance.Identifier;
+    public TypeParameterListSyntax TypeParameterList => this.instance.TypeParameterList;
     private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor;
-    public ParameterListSyntax ParameterList => ParameterListAccessor(this.node);
-    public BaseListSyntax BaseList => this.node.BaseList;
-    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => this.node.ConstraintClauses;
-    public SyntaxToken OpenBraceToken => this.node.OpenBraceToken;
-    public SyntaxList<MemberDeclarationSyntax> Members => this.node.Members;
-    public SyntaxToken CloseBraceToken => this.node.CloseBraceToken;
-    public SyntaxToken SemicolonToken => this.node.SemicolonToken;
-    public Int32 Arity => this.node.Arity;
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public ParameterListSyntax ParameterList => ParameterListAccessor(this.instance);
+    public BaseListSyntax BaseList => this.instance.BaseList;
+    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => this.instance.ConstraintClauses;
+    public SyntaxToken OpenBraceToken => this.instance.OpenBraceToken;
+    public SyntaxList<MemberDeclarationSyntax> Members => this.instance.Members;
+    public SyntaxToken CloseBraceToken => this.instance.CloseBraceToken;
+    public SyntaxToken SemicolonToken => this.instance.SemicolonToken;
+    public Int32 Arity => this.instance.Arity;
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
     {

@@ -30,20 +30,23 @@ public class OperationWrapStrategy : WrapStrategy
             public const string WrappedTypeName = "{{Latest.FullName}}";
             private static readonly Type WrappedType;
 
-            private readonly {{CompiletimeTypeSnippet()}} operation;
+            private readonly {{CompiletimeTypeSnippet()}} instance;
 
             static {{Latest.Name}}Wrapper()
             {
                 WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
+        {{JoinLines(Members.Where(x => !x.IsPassthrough).Select(x => MemberAccessorInitialization(x.Member, model)))}}
             }
 
-            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} operation) =>
-                this.operation = operation;
+            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} instance) =>
+                this.instance = instance;
 
             [Obsolete("Use WrappedInstance instead")]
-            public {{CompiletimeTypeSnippet()}} WrappedOperation => this.operation;
+            public {{CompiletimeTypeSnippet()}} WrappedOperation => this.instance;
 
-            public {{CompiletimeTypeSnippet()}} WrappedInstance => this.operation;
+            public {{CompiletimeTypeSnippet()}} WrappedInstance => this.instance;
+
+        {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
 
             [Obsolete("Use From instead")]
             public static {{Latest.Name}}Wrapper FromOperation(IOperation operation) =>

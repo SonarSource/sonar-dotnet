@@ -30,7 +30,7 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FunctionPointerTypeSyntax";
     private static readonly Type WrappedType;
 
-    private readonly TypeSyntax node;
+    private readonly TypeSyntax instance;
 
     static FunctionPointerTypeSyntaxWrapper()
     {
@@ -45,56 +45,56 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
         IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
     }
 
-    private FunctionPointerTypeSyntaxWrapper(TypeSyntax node) =>
-        this.node = node;
+    private FunctionPointerTypeSyntaxWrapper(TypeSyntax instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax Node => this.node;
+    public TypeSyntax Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax SyntaxNode => this.node;
+    public TypeSyntax SyntaxNode => this.instance;
 
-    public TypeSyntax WrappedInstance => this.node;
+    public TypeSyntax WrappedInstance => this.instance;
 
     private static readonly Func<TypeSyntax, SyntaxToken> DelegateKeywordAccessor;
-    public SyntaxToken DelegateKeyword => (SyntaxToken)DelegateKeywordAccessor(this.node);
+    public SyntaxToken DelegateKeyword => (SyntaxToken)DelegateKeywordAccessor(this.instance);
     private static readonly Func<TypeSyntax, SyntaxToken> AsteriskTokenAccessor;
-    public SyntaxToken AsteriskToken => (SyntaxToken)AsteriskTokenAccessor(this.node);
+    public SyntaxToken AsteriskToken => (SyntaxToken)AsteriskTokenAccessor(this.instance);
     private static readonly Func<TypeSyntax, CSharpSyntaxNode> CallingConventionAccessor;
-    public FunctionPointerCallingConventionSyntaxWrapper CallingConvention => FunctionPointerCallingConventionSyntaxWrapper.From(CallingConventionAccessor(this.node));
+    public FunctionPointerCallingConventionSyntaxWrapper CallingConvention => FunctionPointerCallingConventionSyntaxWrapper.From(CallingConventionAccessor(this.instance));
     private static readonly Func<TypeSyntax, CSharpSyntaxNode> ParameterListAccessor;
-    public FunctionPointerParameterListSyntaxWrapper ParameterList => FunctionPointerParameterListSyntaxWrapper.From(ParameterListAccessor(this.node));
-    public Boolean IsVar => this.node.IsVar;
+    public FunctionPointerParameterListSyntaxWrapper ParameterList => FunctionPointerParameterListSyntaxWrapper.From(ParameterListAccessor(this.instance));
+    public Boolean IsVar => this.instance.IsVar;
     private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor;
-    public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.node);
+    public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.instance);
     private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor;
-    public Boolean IsNotNull => (Boolean)IsNotNullAccessor(this.node);
+    public Boolean IsNotNull => (Boolean)IsNotNullAccessor(this.instance);
     private static readonly Func<TypeSyntax, Boolean> IsNintAccessor;
-    public Boolean IsNint => (Boolean)IsNintAccessor(this.node);
+    public Boolean IsNint => (Boolean)IsNintAccessor(this.instance);
     private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor;
-    public Boolean IsNuint => (Boolean)IsNuintAccessor(this.node);
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public Boolean IsNuint => (Boolean)IsNuintAccessor(this.instance);
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator FunctionPointerTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator TypeSyntax(FunctionPointerTypeSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static FunctionPointerTypeSyntaxWrapper From(SyntaxNode node)
     {

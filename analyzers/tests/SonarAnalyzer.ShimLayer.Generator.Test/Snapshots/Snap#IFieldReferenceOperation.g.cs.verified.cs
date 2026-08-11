@@ -30,20 +30,64 @@ internal readonly partial struct IFieldReferenceOperationWrapper : IOperationWra
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation";
     private static readonly Type WrappedType;
 
-    private readonly IOperation operation;
+    private readonly IOperation instance;
 
     static IFieldReferenceOperationWrapper()
     {
         WrappedType = TypeRegister.LatestType(typeof(IFieldReferenceOperationWrapper));
+        FieldAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IFieldSymbol>(WrappedType, "Field");
+        IsDeclarationAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsDeclaration");
+        InstanceAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Instance");
+        MemberAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ISymbol>(WrappedType, "Member");
+        ConstrainedToTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "ConstrainedToType");
+        ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
+        KindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, OperationKind>(WrappedType, "Kind");
+        SyntaxAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SyntaxNode>(WrappedType, "Syntax");
+        TypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "Type");
+        ConstantValueAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Optional<Object>>(WrappedType, "ConstantValue");
+        ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+        LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
+        IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
+        SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
     }
 
-    private IFieldReferenceOperationWrapper(IOperation operation) =>
-        this.operation = operation;
+    private IFieldReferenceOperationWrapper(IOperation instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => this.operation;
+    public IOperation WrappedOperation => this.instance;
 
-    public IOperation WrappedInstance => this.operation;
+    public IOperation WrappedInstance => this.instance;
+
+    private static readonly Func<IOperation, IFieldSymbol> FieldAccessor;
+    public IFieldSymbol Field => (IFieldSymbol)FieldAccessor(this.instance);
+    private static readonly Func<IOperation, Boolean> IsDeclarationAccessor;
+    public Boolean IsDeclaration => (Boolean)IsDeclarationAccessor(this.instance);
+    private static readonly Func<IOperation, IOperation> InstanceAccessor;
+    public IOperation Instance => InstanceAccessor(this.instance);
+    private static readonly Func<IOperation, ISymbol> MemberAccessor;
+    public ISymbol Member => (ISymbol)MemberAccessor(this.instance);
+    private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor;
+    public ITypeSymbol ConstrainedToType => (ITypeSymbol)ConstrainedToTypeAccessor(this.instance);
+    private static readonly Func<IOperation, IOperation> ParentAccessor;
+    public IOperation Parent => ParentAccessor(this.instance);
+    private static readonly Func<IOperation, OperationKind> KindAccessor;
+    public OperationKind Kind => (OperationKind)KindAccessor(this.instance);
+    private static readonly Func<IOperation, SyntaxNode> SyntaxAccessor;
+    public SyntaxNode Syntax => SyntaxAccessor(this.instance);
+    private static readonly Func<IOperation, ITypeSymbol> TypeAccessor;
+    public ITypeSymbol Type => (ITypeSymbol)TypeAccessor(this.instance);
+    private static readonly Func<IOperation, Optional<Object>> ConstantValueAccessor;
+    public Optional<Object> ConstantValue => (Optional<Object>)ConstantValueAccessor(this.instance);
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor;
+    [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
+    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(this.instance);
+    private static readonly Func<IOperation, String> LanguageAccessor;
+    public String Language => (String)LanguageAccessor(this.instance);
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor;
+    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(this.instance);
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor;
+    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(this.instance);
 
     [Obsolete("Use From instead")]
     public static IFieldReferenceOperationWrapper FromOperation(IOperation operation) =>

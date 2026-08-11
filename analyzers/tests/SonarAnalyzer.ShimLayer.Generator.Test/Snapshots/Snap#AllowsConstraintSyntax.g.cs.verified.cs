@@ -30,7 +30,7 @@ public readonly partial struct AllowsConstraintSyntaxWrapper : ISyntaxWrapper<CS
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.AllowsConstraintSyntax";
     private static readonly Type WrappedType;
 
-    private readonly CSharpSyntaxNode node;
+    private readonly CSharpSyntaxNode instance;
 
     static AllowsConstraintSyntaxWrapper()
     {
@@ -38,39 +38,39 @@ public readonly partial struct AllowsConstraintSyntaxWrapper : ISyntaxWrapper<CS
 
     }
 
-    private AllowsConstraintSyntaxWrapper(CSharpSyntaxNode node) =>
-        this.node = node;
+    private AllowsConstraintSyntaxWrapper(CSharpSyntaxNode instance) =>
+        this.instance = instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public CSharpSyntaxNode Node => this.node;
+    public CSharpSyntaxNode Node => this.instance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public CSharpSyntaxNode SyntaxNode => this.node;
+    public CSharpSyntaxNode SyntaxNode => this.instance;
 
-    public CSharpSyntaxNode WrappedInstance => this.node;
+    public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    public String Language => this.node.Language;
-    public Int32 RawKind => this.node.RawKind;
-    public TextSpan FullSpan => this.node.FullSpan;
-    public TextSpan Span => this.node.Span;
-    public Int32 SpanStart => this.node.SpanStart;
-    public Boolean IsMissing => this.node.IsMissing;
-    public Boolean IsStructuredTrivia => this.node.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.node.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.node.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.node.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.node.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.node.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.node.HasTrailingTrivia;
-    public SyntaxNode Parent => this.node.Parent;
-    public SyntaxTrivia ParentTrivia => this.node.ParentTrivia;
-    public Boolean ContainsAnnotations => this.node.ContainsAnnotations;
+    public String Language => this.instance.Language;
+    public Int32 RawKind => this.instance.RawKind;
+    public TextSpan FullSpan => this.instance.FullSpan;
+    public TextSpan Span => this.instance.Span;
+    public Int32 SpanStart => this.instance.SpanStart;
+    public Boolean IsMissing => this.instance.IsMissing;
+    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
+    public SyntaxNode Parent => this.instance.Parent;
+    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
+    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
 
     public static explicit operator AllowsConstraintSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator CSharpSyntaxNode(AllowsConstraintSyntaxWrapper wrapper) =>
-        wrapper.node;
+        wrapper.instance;
 
     public static AllowsConstraintSyntaxWrapper From(SyntaxNode node)
     {
