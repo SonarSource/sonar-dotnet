@@ -40,7 +40,7 @@ public class SyntaxNodeWrapStrategy : Strategy
     public override string Generate(StrategyModel model) =>
         $$"""
         {{Preamble()}}
-        public readonly partial struct {{Latest.Name}}Wrapper: ISyntaxWrapper<{{CompiletimeTypeSnippet()}}>
+        public readonly partial struct {{Latest.Name}}Wrapper : ISyntaxWrapper<{{CompiletimeTypeSnippet()}}>
         {
             public const string WrappedTypeName = "{{Latest.FullName}}";
             private static readonly Type WrappedType;

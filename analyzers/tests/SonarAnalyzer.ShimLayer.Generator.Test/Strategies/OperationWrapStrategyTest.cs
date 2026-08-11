@@ -57,7 +57,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct IFieldInitializerOperationWrapperFIXME
+            public readonly partial struct IFieldInitializerOperationWrapperFIXME : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
                 private static readonly Type WrappedType;

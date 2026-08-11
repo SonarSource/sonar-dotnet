@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct FieldExpressionSyntaxWrapper: ISyntaxWrapper<ExpressionSyntax>
+public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FieldExpressionSyntax";
     private static readonly Type WrappedType;

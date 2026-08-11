@@ -31,7 +31,7 @@ public class OperationWrapStrategy : Strategy
     public override string Generate(StrategyModel model) =>
         $$"""
         {{Preamble()}}
-        public readonly partial struct {{Latest.Name}}WrapperFIXME
+        public readonly partial struct {{Latest.Name}}WrapperFIXME : IOperationWrapper
         {
             public const string WrappedTypeName = "{{Latest.FullName}}";
             private static readonly Type WrappedType;

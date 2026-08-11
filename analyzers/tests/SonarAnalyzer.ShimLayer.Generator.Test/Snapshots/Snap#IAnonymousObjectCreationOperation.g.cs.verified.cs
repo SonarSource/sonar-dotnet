@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IAnonymousObjectCreationOperationWrapperFIXME
+public readonly partial struct IAnonymousObjectCreationOperationWrapperFIXME : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IAnonymousObjectCreationOperation";
     private static readonly Type WrappedType;

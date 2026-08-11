@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct AllowsConstraintClauseSyntaxWrapper: ISyntaxWrapper<TypeParameterConstraintSyntax>
+public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrapper<TypeParameterConstraintSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.AllowsConstraintClauseSyntax";
     private static readonly Type WrappedType;

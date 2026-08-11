@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ICoalesceAssignmentOperationWrapperFIXME
+public readonly partial struct ICoalesceAssignmentOperationWrapperFIXME : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ICoalesceAssignmentOperation";
     private static readonly Type WrappedType;

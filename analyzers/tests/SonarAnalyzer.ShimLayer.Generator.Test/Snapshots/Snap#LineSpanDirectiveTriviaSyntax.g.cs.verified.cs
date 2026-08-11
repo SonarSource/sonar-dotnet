@@ -25,7 +25,7 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper: ISyntaxWrapper<DirectiveTriviaSyntax>
+public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWrapper<DirectiveTriviaSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineSpanDirectiveTriviaSyntax";
     private static readonly Type WrappedType;
