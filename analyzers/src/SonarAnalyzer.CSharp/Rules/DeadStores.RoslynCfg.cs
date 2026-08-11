@@ -41,7 +41,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 public override void AnalyzeBlock()
                 {
-                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder().Select(x => x.Instance))
+                    foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
                     {
                         switch (operation.Kind)
                         {
@@ -141,10 +141,10 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     return !owner.lva.Cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).ToExecutionOrder().Any(IsUsed);
 
-                    bool IsUsed(IOperationWrapperSonar wrapper) =>
-                        wrapper.Instance != exceptTarget
-                        && wrapper.Instance.Kind == OperationKindEx.LocalReference
-                        && ILocalReferenceOperationWrapper.FromOperation(wrapper.Instance).Local.Equals(symbol);
+                    bool IsUsed(IOperation operation) =>
+                        operation != exceptTarget
+                        && operation.Kind == OperationKindEx.LocalReference
+                        && ILocalReferenceOperationWrapper.From(operation).Local.Equals(symbol);
                 }
             }
         }

@@ -19,7 +19,7 @@ using System.Collections;
 
 namespace SonarAnalyzer.CFG.Operations.Utilities;
 
-public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
+public class OperationExecutionOrder : IEnumerable<IOperation>
 {
     private readonly IEnumerable<IOperation> operations;
     private readonly bool reverseOrder;
@@ -30,18 +30,18 @@ public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
         this.reverseOrder = reverseOrder;
     }
 
-    public IEnumerator<IOperationWrapperSonar> GetEnumerator() =>
+    public IEnumerator<IOperation> GetEnumerator() =>
         new Enumerator(this);
 
     IEnumerator IEnumerable.GetEnumerator() =>
         GetEnumerator();
 
-    private sealed class Enumerator : IEnumerator<IOperationWrapperSonar>
+    private sealed class Enumerator : IEnumerator<IOperation>
     {
         private readonly OperationExecutionOrder owner;
         private readonly Stack<StackItem> stack = new Stack<StackItem>();
 
-        public IOperationWrapperSonar Current { get; private set; }
+        public IOperation Current { get; private set; }
         object IEnumerator.Current => Current;
 
         public Enumerator(OperationExecutionOrder owner)
@@ -104,19 +104,19 @@ public class OperationExecutionOrder : IEnumerable<IOperationWrapperSonar>
 
     private sealed class StackItem : IDisposable
     {
-        private readonly IOperationWrapperSonar operation;
+        private readonly IOperation operation;
         private readonly IEnumerator<IOperation> children;
 
         public StackItem(IOperation operation)
         {
-            this.operation = operation.ToSonar();
+            this.operation = operation;
             children = this.operation.Children.GetEnumerator();
         }
 
         public IOperation NextChild() =>
             children.MoveNext() ? children.Current : null;
 
-        public IOperationWrapperSonar DisposeEnumeratorAndReturnOperation()
+        public IOperation DisposeEnumeratorAndReturnOperation()
         {
             Dispose();
             return operation;

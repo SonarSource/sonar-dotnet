@@ -22,4 +22,14 @@ namespace SonarAnalyzer.ShimLayer;
 public interface IOperationWrapper
 {
     IOperation WrappedOperation { get; }
+    IOperation Parent { get; }
+    OperationKind Kind { get; }
+    SyntaxNode Syntax { get; }
+    ITypeSymbol Type { get; }
+    Optional<object> ConstantValue { get; }
+    [Obsolete("This API has performance penalties, please use ChildOperations instead.", false)]
+    IEnumerable<IOperation> Children { get; }
+    string Language { get; }
+    bool IsImplicit { get; }
+    SemanticModel SemanticModel { get; }
 }

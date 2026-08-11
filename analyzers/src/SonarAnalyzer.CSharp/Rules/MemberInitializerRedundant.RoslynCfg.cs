@@ -63,7 +63,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 return false;
             }
 
-            private bool IsReadOrWrite(IOperationWrapperSonar child, bool checkReadBeforeWrite)
+            private bool IsReadOrWrite(IOperation child, bool checkReadBeforeWrite)
             {
                 if (child.Instance.IsOutArgumentReference())
                 {

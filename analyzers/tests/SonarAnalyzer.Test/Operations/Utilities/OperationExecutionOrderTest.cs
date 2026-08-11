@@ -96,17 +96,14 @@ public class OperationExecutionOrderTest
         var enumerator = Compile("Method(0);", false).GetEnumerator();
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().NotBeNull();
-        enumerator.Current.Instance.Should().NotBeNull();
 
         enumerator.Reset();
         enumerator.MoveNext().Should().BeTrue();
         enumerator.Current.Should().NotBeNull();
-        enumerator.Current.Instance.Should().NotBeNull();
 
         enumerator.Dispose();
         enumerator.MoveNext().Should().BeFalse();
-        enumerator.Current.Should().NotBeNull();
-        enumerator.Current.Instance.Should().BeNull();
+        enumerator.Current.Should().BeNull();
     }
 
     [TestMethod]
@@ -129,7 +126,7 @@ public class OperationExecutionOrderTest
         {
             if (!operation.IsImplicit)
             {
-                list.Add(operation.Instance.Kind + ": " + operation.Instance.Syntax);
+                list.Add(operation.Kind + ": " + operation.Syntax);
             }
         }
         list.Should().Equal(expected);
@@ -151,7 +148,7 @@ public class OperationExecutionOrderTest
             """;
         var (tree, semanticModel) = TestCompiler.CompileCS(code);
         var body = tree.First<BlockSyntax>();
-        var rootOperation = new IOperationWrapperSonar(semanticModel.GetOperation(body));
+        var rootOperation = semanticModel.GetOperation(body);
         return new OperationExecutionOrder(rootOperation.Children, reverseOrder);
     }
 }

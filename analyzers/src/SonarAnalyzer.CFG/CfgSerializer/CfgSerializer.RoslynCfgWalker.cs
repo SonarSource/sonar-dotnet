@@ -133,7 +133,7 @@ public static partial class CfgSerializer
                 .Where(x => x.Key is not null)
                 .ToDictionary(x => x.Key, x => string.Join(", ", x));
             var ret = new List<string> { $"{level}#: {prefix}{operation.Serialize()}" };
-            foreach (var child in operation.ToSonar().Children)
+            foreach (var child in operation.Children)
             {
                 ret.AddRange(SerializeOperation(level + 1, prefixes.TryGetValue(child, out var childPrefix) ? $"{level}#.{childPrefix}: " : null, child));
             }

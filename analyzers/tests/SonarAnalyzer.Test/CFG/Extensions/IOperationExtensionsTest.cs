@@ -28,7 +28,7 @@ public class IOperationExtensionsTest
         IOperationExtensions.DescendantsAndSelf(null).Should().BeEmpty();
 
     [TestMethod]
-    public void OperationWrapperSonarPropertyShortcuts()
+    public void OperationWrapper_PropertyShortcuts()
     {
         var operation = Operation<VariableDeclarationSyntax>("""
             public class Sample
@@ -39,13 +39,13 @@ public class IOperationExtensionsTest
                 }
             }
             """).ToVariableDeclaration();
-        operation.Parent().Should().NotBeNull();
-        operation.Parent().Kind.Should().Be(OperationKind.VariableDeclarationGroup);
-        operation.Children().Should().HaveCount(1);
-        operation.Children().Single().Kind.Should().Be(OperationKind.VariableDeclarator);
-        operation.Language().Should().Be("C#");
-        operation.IsImplicit().Should().Be(false);
-        operation.SemanticModel().Should().Be(operation.SemanticModel());
+        operation.Parent.Should().NotBeNull();
+        operation.Parent.Kind.Should().Be(OperationKind.VariableDeclarationGroup);
+        operation.Children.Should().HaveCount(1);
+        operation.Children.Single().Kind.Should().Be(OperationKind.VariableDeclarator);
+        operation.Language.Should().Be("C#");
+        operation.IsImplicit.Should().Be(false);
+        operation.SemanticModel.Should().Be(operation.SemanticModel);
     }
 
     [TestMethod]

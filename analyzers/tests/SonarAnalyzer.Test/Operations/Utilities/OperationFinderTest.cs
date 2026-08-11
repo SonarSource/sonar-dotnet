@@ -49,11 +49,11 @@ public class Sample
 
     private class FirstNumericLiteralFinder : OperationFinder<int>
     {
-        protected override bool TryFindOperation(IOperationWrapperSonar operation, out int result)
+        protected override bool TryFindOperation(IOperation operation, out int result)
         {
-            if (operation.Instance is ILiteralOperation)
+            if (operation is ILiteralOperation)
             {
-                result = (int)operation.Instance.ConstantValue.Value;
+                result = (int)operation.ConstantValue.Value;
                 return true;
             }
             result = default;

@@ -160,10 +160,10 @@ public static class TestCompiler
             ? NuGetMetadataReference.MSTestTestFrameworkV1  // Any reference to detect a test project
             : Enumerable.Empty<MetadataReference>();
 
-    public static string Serialize(IOperationWrapperSonar operation)
+    public static string Serialize(IOperation operation)
     {
-        _ = operation.Instance ?? throw new ArgumentNullException(nameof(operation));
-        return operation.Instance.Kind + ": " + operation.Instance.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
+        _ = operation ?? throw new ArgumentNullException(nameof(operation));
+        return operation.Kind + ": " + operation.Syntax + (operation.IsImplicit ? " (Implicit)" : null);
     }
 
     private static NodeAndModel<T> NodeBetweenMarkers<T>(string snippet,

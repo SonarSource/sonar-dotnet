@@ -21,7 +21,7 @@ namespace SonarAnalyzer.CFG.Operations.Utilities;
 
 public abstract class OperationFinder<TResult>
 {
-    protected abstract bool TryFindOperation(IOperationWrapperSonar operation, out TResult result);
+    protected abstract bool TryFindOperation(IOperation operation, out TResult result);
 
     public bool TryFind(BasicBlock block, out TResult result) =>
         TryFind(block.OperationsAndBranchValue, out result);
@@ -34,13 +34,13 @@ public abstract class OperationFinder<TResult>
             queue.Enqueue(operation);
             while (queue.Any())
             {
-                var wrapper = queue.Dequeue().ToSonar();
-                if (TryFindOperation(wrapper, out result))
+                var candidate = queue.Dequeue();
+                if (TryFindOperation(candidate, out result))
                 {
                     return true;
                 }
 
-                foreach (var child in wrapper.Children)
+                foreach (var child in candidate.Children)
                 {
                     queue.Enqueue(child);
                 }
