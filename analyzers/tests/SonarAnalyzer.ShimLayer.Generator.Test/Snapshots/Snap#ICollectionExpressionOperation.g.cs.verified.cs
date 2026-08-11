@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ICollectionExpressionOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ICollectionExpressionOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ICollectionExpressionOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ICollectionExpressionOperationWrapperFIXME()
+    static ICollectionExpressionOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ICollectionExpressionOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ICollectionExpressionOperationWrapper));
     }
 
-    private ICollectionExpressionOperationWrapperFIXME(IOperation operation) =>
+    private ICollectionExpressionOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ICollectionExpressionOperationWrapperFIXME : IOpe
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ICollectionExpressionOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ICollectionExpressionOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ICollectionExpressionOperationWrapperFIXME From(IOperation operation)
+    public static ICollectionExpressionOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ICollectionExpressionOperationWrapperFIXME : IOpe
         }
         else if (IsInstance(operation))
         {
-            return new ICollectionExpressionOperationWrapperFIXME(operation);
+            return new ICollectionExpressionOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct ICollectionExpressionOperationWrapperFIXME : IOpe
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

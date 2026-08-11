@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IPatternCaseClauseOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IPatternCaseClauseOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IPatternCaseClauseOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IPatternCaseClauseOperationWrapperFIXME()
+    static IPatternCaseClauseOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IPatternCaseClauseOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IPatternCaseClauseOperationWrapper));
     }
 
-    private IPatternCaseClauseOperationWrapperFIXME(IOperation operation) =>
+    private IPatternCaseClauseOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IPatternCaseClauseOperationWrapperFIXME : IOperat
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IPatternCaseClauseOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IPatternCaseClauseOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IPatternCaseClauseOperationWrapperFIXME From(IOperation operation)
+    public static IPatternCaseClauseOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IPatternCaseClauseOperationWrapperFIXME : IOperat
         }
         else if (IsInstance(operation))
         {
-            return new IPatternCaseClauseOperationWrapperFIXME(operation);
+            return new IPatternCaseClauseOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IPatternCaseClauseOperationWrapperFIXME : IOperat
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator ICaseClauseOperationWrapper(IPatternCaseClauseOperationWrapper up) => ICaseClauseOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IPatternCaseClauseOperationWrapper(ICaseClauseOperationWrapper down) => IPatternCaseClauseOperationWrapper.From(down.WrappedInstance);
+
 }

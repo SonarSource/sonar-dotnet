@@ -91,7 +91,7 @@ public readonly partial struct PatternSyntaxWrapper : ISyntaxWrapper<CSharpSynta
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator ExpressionOrPatternSyntaxWrapper(PatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator PatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (PatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator ExpressionOrPatternSyntaxWrapper(PatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator PatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => PatternSyntaxWrapper.From(down.WrappedInstance);
 
 }

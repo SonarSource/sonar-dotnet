@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IConditionalAccessOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IConditionalAccessOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IConditionalAccessOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IConditionalAccessOperationWrapperFIXME()
+    static IConditionalAccessOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IConditionalAccessOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IConditionalAccessOperationWrapper));
     }
 
-    private IConditionalAccessOperationWrapperFIXME(IOperation operation) =>
+    private IConditionalAccessOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IConditionalAccessOperationWrapperFIXME : IOperat
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IConditionalAccessOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IConditionalAccessOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IConditionalAccessOperationWrapperFIXME From(IOperation operation)
+    public static IConditionalAccessOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IConditionalAccessOperationWrapperFIXME : IOperat
         }
         else if (IsInstance(operation))
         {
-            return new IConditionalAccessOperationWrapperFIXME(operation);
+            return new IConditionalAccessOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IConditionalAccessOperationWrapperFIXME : IOperat
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

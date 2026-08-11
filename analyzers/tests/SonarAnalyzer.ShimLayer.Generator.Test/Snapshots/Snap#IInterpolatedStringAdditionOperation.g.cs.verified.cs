@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IInterpolatedStringAdditionOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IInterpolatedStringAdditionOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolatedStringAdditionOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IInterpolatedStringAdditionOperationWrapperFIXME()
+    static IInterpolatedStringAdditionOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringAdditionOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringAdditionOperationWrapper));
     }
 
-    private IInterpolatedStringAdditionOperationWrapperFIXME(IOperation operation) =>
+    private IInterpolatedStringAdditionOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IInterpolatedStringAdditionOperationWrapperFIXME 
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IInterpolatedStringAdditionOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IInterpolatedStringAdditionOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IInterpolatedStringAdditionOperationWrapperFIXME From(IOperation operation)
+    public static IInterpolatedStringAdditionOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IInterpolatedStringAdditionOperationWrapperFIXME 
         }
         else if (IsInstance(operation))
         {
-            return new IInterpolatedStringAdditionOperationWrapperFIXME(operation);
+            return new IInterpolatedStringAdditionOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IInterpolatedStringAdditionOperationWrapperFIXME 
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

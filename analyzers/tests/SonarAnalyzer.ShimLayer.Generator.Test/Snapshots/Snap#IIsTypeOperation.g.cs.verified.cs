@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IIsTypeOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IIsTypeOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IIsTypeOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IIsTypeOperationWrapperFIXME()
+    static IIsTypeOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IIsTypeOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IIsTypeOperationWrapper));
     }
 
-    private IIsTypeOperationWrapperFIXME(IOperation operation) =>
+    private IIsTypeOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IIsTypeOperationWrapperFIXME : IOperationWrapper
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IIsTypeOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IIsTypeOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IIsTypeOperationWrapperFIXME From(IOperation operation)
+    public static IIsTypeOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IIsTypeOperationWrapperFIXME : IOperationWrapper
         }
         else if (IsInstance(operation))
         {
-            return new IIsTypeOperationWrapperFIXME(operation);
+            return new IIsTypeOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IIsTypeOperationWrapperFIXME : IOperationWrapper
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

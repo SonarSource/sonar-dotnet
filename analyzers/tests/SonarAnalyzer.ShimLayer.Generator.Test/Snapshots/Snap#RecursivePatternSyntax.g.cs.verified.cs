@@ -102,10 +102,10 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator PatternSyntaxWrapper(RecursivePatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator RecursivePatternSyntaxWrapper(PatternSyntaxWrapper down) => (RecursivePatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator PatternSyntaxWrapper(RecursivePatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator RecursivePatternSyntaxWrapper(PatternSyntaxWrapper down) => RecursivePatternSyntaxWrapper.From(down.WrappedInstance);
 
-    public static implicit operator ExpressionOrPatternSyntaxWrapper(RecursivePatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator RecursivePatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (RecursivePatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator ExpressionOrPatternSyntaxWrapper(RecursivePatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator RecursivePatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => RecursivePatternSyntaxWrapper.From(down.WrappedInstance);
 
 }

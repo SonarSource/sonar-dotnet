@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ISwitchExpressionOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ISwitchExpressionOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ISwitchExpressionOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ISwitchExpressionOperationWrapperFIXME()
+    static ISwitchExpressionOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ISwitchExpressionOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ISwitchExpressionOperationWrapper));
     }
 
-    private ISwitchExpressionOperationWrapperFIXME(IOperation operation) =>
+    private ISwitchExpressionOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ISwitchExpressionOperationWrapperFIXME : IOperati
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ISwitchExpressionOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ISwitchExpressionOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ISwitchExpressionOperationWrapperFIXME From(IOperation operation)
+    public static ISwitchExpressionOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ISwitchExpressionOperationWrapperFIXME : IOperati
         }
         else if (IsInstance(operation))
         {
-            return new ISwitchExpressionOperationWrapperFIXME(operation);
+            return new ISwitchExpressionOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct ISwitchExpressionOperationWrapperFIXME : IOperati
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IRecursivePatternOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IRecursivePatternOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IRecursivePatternOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IRecursivePatternOperationWrapperFIXME()
+    static IRecursivePatternOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IRecursivePatternOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IRecursivePatternOperationWrapper));
     }
 
-    private IRecursivePatternOperationWrapperFIXME(IOperation operation) =>
+    private IRecursivePatternOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IRecursivePatternOperationWrapperFIXME : IOperati
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IRecursivePatternOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IRecursivePatternOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IRecursivePatternOperationWrapperFIXME From(IOperation operation)
+    public static IRecursivePatternOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IRecursivePatternOperationWrapperFIXME : IOperati
         }
         else if (IsInstance(operation))
         {
-            return new IRecursivePatternOperationWrapperFIXME(operation);
+            return new IRecursivePatternOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IRecursivePatternOperationWrapperFIXME : IOperati
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator IPatternOperationWrapper(IRecursivePatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IRecursivePatternOperationWrapper(IPatternOperationWrapper down) => IRecursivePatternOperationWrapper.From(down.WrappedInstance);
+
 }

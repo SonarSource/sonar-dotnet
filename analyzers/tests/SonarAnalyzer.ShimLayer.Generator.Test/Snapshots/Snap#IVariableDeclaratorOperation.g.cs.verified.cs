@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IVariableDeclaratorOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IVariableDeclaratorOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IVariableDeclaratorOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IVariableDeclaratorOperationWrapperFIXME()
+    static IVariableDeclaratorOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IVariableDeclaratorOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IVariableDeclaratorOperationWrapper));
     }
 
-    private IVariableDeclaratorOperationWrapperFIXME(IOperation operation) =>
+    private IVariableDeclaratorOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IVariableDeclaratorOperationWrapperFIXME : IOpera
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IVariableDeclaratorOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IVariableDeclaratorOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IVariableDeclaratorOperationWrapperFIXME From(IOperation operation)
+    public static IVariableDeclaratorOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IVariableDeclaratorOperationWrapperFIXME : IOpera
         }
         else if (IsInstance(operation))
         {
-            return new IVariableDeclaratorOperationWrapperFIXME(operation);
+            return new IVariableDeclaratorOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IVariableDeclaratorOperationWrapperFIXME : IOpera
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IInterpolationOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IInterpolationOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolationOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IInterpolationOperationWrapperFIXME()
+    static IInterpolationOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IInterpolationOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IInterpolationOperationWrapper));
     }
 
-    private IInterpolationOperationWrapperFIXME(IOperation operation) =>
+    private IInterpolationOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IInterpolationOperationWrapperFIXME : IOperationW
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IInterpolationOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IInterpolationOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IInterpolationOperationWrapperFIXME From(IOperation operation)
+    public static IInterpolationOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IInterpolationOperationWrapperFIXME : IOperationW
         }
         else if (IsInstance(operation))
         {
-            return new IInterpolationOperationWrapperFIXME(operation);
+            return new IInterpolationOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IInterpolationOperationWrapperFIXME : IOperationW
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator IInterpolatedStringContentOperationWrapper(IInterpolationOperationWrapper up) => IInterpolatedStringContentOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IInterpolationOperationWrapper(IInterpolatedStringContentOperationWrapper down) => IInterpolationOperationWrapper.From(down.WrappedInstance);
+
 }

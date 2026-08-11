@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ISimpleAssignmentOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ISimpleAssignmentOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ISimpleAssignmentOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ISimpleAssignmentOperationWrapperFIXME()
+    static ISimpleAssignmentOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ISimpleAssignmentOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ISimpleAssignmentOperationWrapper));
     }
 
-    private ISimpleAssignmentOperationWrapperFIXME(IOperation operation) =>
+    private ISimpleAssignmentOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ISimpleAssignmentOperationWrapperFIXME : IOperati
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ISimpleAssignmentOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ISimpleAssignmentOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ISimpleAssignmentOperationWrapperFIXME From(IOperation operation)
+    public static ISimpleAssignmentOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ISimpleAssignmentOperationWrapperFIXME : IOperati
         }
         else if (IsInstance(operation))
         {
-            return new ISimpleAssignmentOperationWrapperFIXME(operation);
+            return new ISimpleAssignmentOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct ISimpleAssignmentOperationWrapperFIXME : IOperati
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator IAssignmentOperationWrapper(ISimpleAssignmentOperationWrapper up) => IAssignmentOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator ISimpleAssignmentOperationWrapper(IAssignmentOperationWrapper down) => ISimpleAssignmentOperationWrapper.From(down.WrappedInstance);
+
 }

@@ -99,10 +99,10 @@ public readonly partial struct ParenthesizedPatternSyntaxWrapper : ISyntaxWrappe
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator PatternSyntaxWrapper(ParenthesizedPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator ParenthesizedPatternSyntaxWrapper(PatternSyntaxWrapper down) => (ParenthesizedPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator PatternSyntaxWrapper(ParenthesizedPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator ParenthesizedPatternSyntaxWrapper(PatternSyntaxWrapper down) => ParenthesizedPatternSyntaxWrapper.From(down.WrappedInstance);
 
-    public static implicit operator ExpressionOrPatternSyntaxWrapper(ParenthesizedPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator ParenthesizedPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ParenthesizedPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator ExpressionOrPatternSyntaxWrapper(ParenthesizedPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator ParenthesizedPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => ParenthesizedPatternSyntaxWrapper.From(down.WrappedInstance);
 
 }

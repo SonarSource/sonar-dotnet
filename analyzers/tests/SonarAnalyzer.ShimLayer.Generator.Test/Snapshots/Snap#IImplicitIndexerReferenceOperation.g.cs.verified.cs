@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IImplicitIndexerReferenceOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IImplicitIndexerReferenceOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IImplicitIndexerReferenceOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IImplicitIndexerReferenceOperationWrapperFIXME()
+    static IImplicitIndexerReferenceOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IImplicitIndexerReferenceOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IImplicitIndexerReferenceOperationWrapper));
     }
 
-    private IImplicitIndexerReferenceOperationWrapperFIXME(IOperation operation) =>
+    private IImplicitIndexerReferenceOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IImplicitIndexerReferenceOperationWrapperFIXME : 
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IImplicitIndexerReferenceOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IImplicitIndexerReferenceOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IImplicitIndexerReferenceOperationWrapperFIXME From(IOperation operation)
+    public static IImplicitIndexerReferenceOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IImplicitIndexerReferenceOperationWrapperFIXME : 
         }
         else if (IsInstance(operation))
         {
-            return new IImplicitIndexerReferenceOperationWrapperFIXME(operation);
+            return new IImplicitIndexerReferenceOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IImplicitIndexerReferenceOperationWrapperFIXME : 
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

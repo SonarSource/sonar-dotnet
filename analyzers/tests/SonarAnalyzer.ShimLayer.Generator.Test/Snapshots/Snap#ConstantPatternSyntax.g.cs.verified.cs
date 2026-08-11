@@ -93,10 +93,10 @@ public readonly partial struct ConstantPatternSyntaxWrapper : ISyntaxWrapper<CSh
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator PatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator ConstantPatternSyntaxWrapper(PatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator PatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator ConstantPatternSyntaxWrapper(PatternSyntaxWrapper down) => ConstantPatternSyntaxWrapper.From(down.WrappedInstance);
 
-    public static implicit operator ExpressionOrPatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator ConstantPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator ExpressionOrPatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator ConstantPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => ConstantPatternSyntaxWrapper.From(down.WrappedInstance);
 
 }

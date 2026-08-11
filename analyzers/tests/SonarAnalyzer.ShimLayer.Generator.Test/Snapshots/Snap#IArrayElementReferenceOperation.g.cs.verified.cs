@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IArrayElementReferenceOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IArrayElementReferenceOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IArrayElementReferenceOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IArrayElementReferenceOperationWrapperFIXME()
+    static IArrayElementReferenceOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IArrayElementReferenceOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IArrayElementReferenceOperationWrapper));
     }
 
-    private IArrayElementReferenceOperationWrapperFIXME(IOperation operation) =>
+    private IArrayElementReferenceOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IArrayElementReferenceOperationWrapperFIXME : IOp
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IArrayElementReferenceOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IArrayElementReferenceOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IArrayElementReferenceOperationWrapperFIXME From(IOperation operation)
+    public static IArrayElementReferenceOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IArrayElementReferenceOperationWrapperFIXME : IOp
         }
         else if (IsInstance(operation))
         {
-            return new IArrayElementReferenceOperationWrapperFIXME(operation);
+            return new IArrayElementReferenceOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IArrayElementReferenceOperationWrapperFIXME : IOp
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

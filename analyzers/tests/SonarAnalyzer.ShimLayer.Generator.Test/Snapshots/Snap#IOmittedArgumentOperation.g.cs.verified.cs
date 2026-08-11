@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IOmittedArgumentOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IOmittedArgumentOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IOmittedArgumentOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IOmittedArgumentOperationWrapperFIXME()
+    static IOmittedArgumentOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IOmittedArgumentOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IOmittedArgumentOperationWrapper));
     }
 
-    private IOmittedArgumentOperationWrapperFIXME(IOperation operation) =>
+    private IOmittedArgumentOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IOmittedArgumentOperationWrapperFIXME : IOperatio
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IOmittedArgumentOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IOmittedArgumentOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IOmittedArgumentOperationWrapperFIXME From(IOperation operation)
+    public static IOmittedArgumentOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IOmittedArgumentOperationWrapperFIXME : IOperatio
         }
         else if (IsInstance(operation))
         {
-            return new IOmittedArgumentOperationWrapperFIXME(operation);
+            return new IOmittedArgumentOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IOmittedArgumentOperationWrapperFIXME : IOperatio
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IInlineArrayAccessOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IInlineArrayAccessOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInlineArrayAccessOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IInlineArrayAccessOperationWrapperFIXME()
+    static IInlineArrayAccessOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IInlineArrayAccessOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IInlineArrayAccessOperationWrapper));
     }
 
-    private IInlineArrayAccessOperationWrapperFIXME(IOperation operation) =>
+    private IInlineArrayAccessOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IInlineArrayAccessOperationWrapperFIXME : IOperat
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IInlineArrayAccessOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IInlineArrayAccessOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IInlineArrayAccessOperationWrapperFIXME From(IOperation operation)
+    public static IInlineArrayAccessOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IInlineArrayAccessOperationWrapperFIXME : IOperat
         }
         else if (IsInstance(operation))
         {
-            return new IInlineArrayAccessOperationWrapperFIXME(operation);
+            return new IInlineArrayAccessOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IInlineArrayAccessOperationWrapperFIXME : IOperat
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IFlowCaptureReferenceOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IFlowCaptureReferenceOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.FlowAnalysis.IFlowCaptureReferenceOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IFlowCaptureReferenceOperationWrapperFIXME()
+    static IFlowCaptureReferenceOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IFlowCaptureReferenceOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IFlowCaptureReferenceOperationWrapper));
     }
 
-    private IFlowCaptureReferenceOperationWrapperFIXME(IOperation operation) =>
+    private IFlowCaptureReferenceOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IFlowCaptureReferenceOperationWrapperFIXME : IOpe
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IFlowCaptureReferenceOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IFlowCaptureReferenceOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IFlowCaptureReferenceOperationWrapperFIXME From(IOperation operation)
+    public static IFlowCaptureReferenceOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IFlowCaptureReferenceOperationWrapperFIXME : IOpe
         }
         else if (IsInstance(operation))
         {
-            return new IFlowCaptureReferenceOperationWrapperFIXME(operation);
+            return new IFlowCaptureReferenceOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IFlowCaptureReferenceOperationWrapperFIXME : IOpe
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

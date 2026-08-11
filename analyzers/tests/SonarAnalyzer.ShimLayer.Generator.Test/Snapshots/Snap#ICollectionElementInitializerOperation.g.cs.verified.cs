@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ICollectionElementInitializerOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ICollectionElementInitializerOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ICollectionElementInitializerOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ICollectionElementInitializerOperationWrapperFIXME()
+    static ICollectionElementInitializerOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ICollectionElementInitializerOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ICollectionElementInitializerOperationWrapper));
     }
 
-    private ICollectionElementInitializerOperationWrapperFIXME(IOperation operation) =>
+    private ICollectionElementInitializerOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ICollectionElementInitializerOperationWrapperFIXM
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ICollectionElementInitializerOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ICollectionElementInitializerOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ICollectionElementInitializerOperationWrapperFIXME From(IOperation operation)
+    public static ICollectionElementInitializerOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ICollectionElementInitializerOperationWrapperFIXM
         }
         else if (IsInstance(operation))
         {
-            return new ICollectionElementInitializerOperationWrapperFIXME(operation);
+            return new ICollectionElementInitializerOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct ICollectionElementInitializerOperationWrapperFIXM
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

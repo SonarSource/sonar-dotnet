@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IAnonymousFunctionOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IAnonymousFunctionOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IAnonymousFunctionOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IAnonymousFunctionOperationWrapperFIXME()
+    static IAnonymousFunctionOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IAnonymousFunctionOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IAnonymousFunctionOperationWrapper));
     }
 
-    private IAnonymousFunctionOperationWrapperFIXME(IOperation operation) =>
+    private IAnonymousFunctionOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IAnonymousFunctionOperationWrapperFIXME : IOperat
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IAnonymousFunctionOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IAnonymousFunctionOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IAnonymousFunctionOperationWrapperFIXME From(IOperation operation)
+    public static IAnonymousFunctionOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IAnonymousFunctionOperationWrapperFIXME : IOperat
         }
         else if (IsInstance(operation))
         {
-            return new IAnonymousFunctionOperationWrapperFIXME(operation);
+            return new IAnonymousFunctionOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IAnonymousFunctionOperationWrapperFIXME : IOperat
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

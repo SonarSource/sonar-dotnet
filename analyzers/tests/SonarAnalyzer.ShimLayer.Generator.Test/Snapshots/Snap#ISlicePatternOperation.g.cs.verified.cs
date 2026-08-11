@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ISlicePatternOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ISlicePatternOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ISlicePatternOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ISlicePatternOperationWrapperFIXME()
+    static ISlicePatternOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ISlicePatternOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ISlicePatternOperationWrapper));
     }
 
-    private ISlicePatternOperationWrapperFIXME(IOperation operation) =>
+    private ISlicePatternOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ISlicePatternOperationWrapperFIXME : IOperationWr
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ISlicePatternOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ISlicePatternOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ISlicePatternOperationWrapperFIXME From(IOperation operation)
+    public static ISlicePatternOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ISlicePatternOperationWrapperFIXME : IOperationWr
         }
         else if (IsInstance(operation))
         {
-            return new ISlicePatternOperationWrapperFIXME(operation);
+            return new ISlicePatternOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct ISlicePatternOperationWrapperFIXME : IOperationWr
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator IPatternOperationWrapper(ISlicePatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator ISlicePatternOperationWrapper(IPatternOperationWrapper down) => ISlicePatternOperationWrapper.From(down.WrappedInstance);
+
 }

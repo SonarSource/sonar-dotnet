@@ -33,23 +33,23 @@ public class OperationWrapStrategy : Strategy
     public override string ToConversionSnippet(string from) =>
         $"{Latest.Name}Wrapper.FromOperation({from})";
 
-    // ToDo: Remove FIXME class name suffix
+    // ToDo: Change internal to public
     protected override string GenerateCore(StrategyModel model) =>
         $$"""
         {{Preamble()}}
-        public readonly partial struct {{Latest.Name}}WrapperFIXME : IOperationWrapper
+        internal readonly partial struct {{Latest.Name}}Wrapper : IOperationWrapper
         {
             public const string WrappedTypeName = "{{Latest.FullName}}";
             private static readonly Type WrappedType;
 
             private readonly {{CompiletimeTypeSnippet()}} operation;
 
-            static {{Latest.Name}}WrapperFIXME()
+            static {{Latest.Name}}Wrapper()
             {
-                WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}WrapperFIXME));
+                WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
             }
 
-            private {{Latest.Name}}WrapperFIXME({{CompiletimeTypeSnippet()}} operation) =>
+            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} operation) =>
                 this.operation = operation;
 
             [Obsolete("Use WrappedInstance instead")]
@@ -58,10 +58,10 @@ public class OperationWrapStrategy : Strategy
             public {{CompiletimeTypeSnippet()}} WrappedInstance => this.operation;
 
             [Obsolete("Use From instead")]
-            public static {{Latest.Name}}WrapperFIXME FromOperation(IOperation operation) =>
+            public static {{Latest.Name}}Wrapper FromOperation(IOperation operation) =>
                 From(operation);
 
-            public static {{Latest.Name}}WrapperFIXME From(IOperation operation)
+            public static {{Latest.Name}}Wrapper From(IOperation operation)
             {
                 if (operation is null)
                 {
@@ -69,7 +69,7 @@ public class OperationWrapStrategy : Strategy
                 }
                 else if (IsInstance(operation))
                 {
-                    return new {{Latest.Name}}WrapperFIXME(operation);
+                    return new {{Latest.Name}}Wrapper(operation);
                 }
                 else
                 {
@@ -79,6 +79,11 @@ public class OperationWrapStrategy : Strategy
 
             public static bool IsInstance(IOperation operation) =>
                 operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+        {{WrapperToWrapperConversions(model)}}
         }
         """;
+
+    private string WrapperToWrapperConversions(StrategyModel model) =>
+        WrapperToWrapperConversions(Latest.GetInterfaces().Where(x => model[x] is OperationWrapStrategy));
 }

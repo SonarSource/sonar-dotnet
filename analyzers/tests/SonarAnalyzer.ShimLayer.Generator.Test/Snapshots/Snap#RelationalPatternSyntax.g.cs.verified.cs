@@ -96,10 +96,10 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator PatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator RelationalPatternSyntaxWrapper(PatternSyntaxWrapper down) => (RelationalPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator PatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator RelationalPatternSyntaxWrapper(PatternSyntaxWrapper down) => RelationalPatternSyntaxWrapper.From(down.WrappedInstance);
 
-    public static implicit operator ExpressionOrPatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator RelationalPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (RelationalPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator ExpressionOrPatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator RelationalPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => RelationalPatternSyntaxWrapper.From(down.WrappedInstance);
 
 }

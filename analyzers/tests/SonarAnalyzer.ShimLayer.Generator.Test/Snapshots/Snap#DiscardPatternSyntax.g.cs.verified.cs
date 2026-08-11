@@ -93,10 +93,10 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator PatternSyntaxWrapper(DiscardPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator DiscardPatternSyntaxWrapper(PatternSyntaxWrapper down) => (DiscardPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator PatternSyntaxWrapper(DiscardPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator DiscardPatternSyntaxWrapper(PatternSyntaxWrapper down) => DiscardPatternSyntaxWrapper.From(down.WrappedInstance);
 
-    public static implicit operator ExpressionOrPatternSyntaxWrapper(DiscardPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator DiscardPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (DiscardPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator ExpressionOrPatternSyntaxWrapper(DiscardPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator DiscardPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => DiscardPatternSyntaxWrapper.From(down.WrappedInstance);
 
 }

@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolatedStringHandlerArgumentPlaceholderOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapperFIXME()
+    static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringHandlerArgumentPlaceholderOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper));
     }
 
-    private IInterpolatedStringHandlerArgumentPlaceholderOperationWrapperFIXME(IOperation operation) =>
+    private IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapperFIXME From(IOperation operation)
+    public static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
         }
         else if (IsInstance(operation))
         {
-            return new IInterpolatedStringHandlerArgumentPlaceholderOperationWrapperFIXME(operation);
+            return new IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

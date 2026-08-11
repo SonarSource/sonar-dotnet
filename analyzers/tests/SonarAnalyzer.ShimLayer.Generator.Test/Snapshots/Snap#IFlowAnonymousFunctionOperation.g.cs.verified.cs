@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IFlowAnonymousFunctionOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IFlowAnonymousFunctionOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.FlowAnalysis.IFlowAnonymousFunctionOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IFlowAnonymousFunctionOperationWrapperFIXME()
+    static IFlowAnonymousFunctionOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IFlowAnonymousFunctionOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IFlowAnonymousFunctionOperationWrapper));
     }
 
-    private IFlowAnonymousFunctionOperationWrapperFIXME(IOperation operation) =>
+    private IFlowAnonymousFunctionOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IFlowAnonymousFunctionOperationWrapperFIXME : IOp
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IFlowAnonymousFunctionOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IFlowAnonymousFunctionOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IFlowAnonymousFunctionOperationWrapperFIXME From(IOperation operation)
+    public static IFlowAnonymousFunctionOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IFlowAnonymousFunctionOperationWrapperFIXME : IOp
         }
         else if (IsInstance(operation))
         {
-            return new IFlowAnonymousFunctionOperationWrapperFIXME(operation);
+            return new IFlowAnonymousFunctionOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IFlowAnonymousFunctionOperationWrapperFIXME : IOp
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

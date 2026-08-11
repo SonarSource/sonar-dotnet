@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IReDimOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IReDimOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IReDimOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IReDimOperationWrapperFIXME()
+    static IReDimOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IReDimOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IReDimOperationWrapper));
     }
 
-    private IReDimOperationWrapperFIXME(IOperation operation) =>
+    private IReDimOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IReDimOperationWrapperFIXME : IOperationWrapper
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IReDimOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IReDimOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IReDimOperationWrapperFIXME From(IOperation operation)
+    public static IReDimOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IReDimOperationWrapperFIXME : IOperationWrapper
         }
         else if (IsInstance(operation))
         {
-            return new IReDimOperationWrapperFIXME(operation);
+            return new IReDimOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IReDimOperationWrapperFIXME : IOperationWrapper
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

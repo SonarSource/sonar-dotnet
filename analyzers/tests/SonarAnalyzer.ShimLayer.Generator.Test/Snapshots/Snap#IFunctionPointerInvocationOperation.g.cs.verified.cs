@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IFunctionPointerInvocationOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IFunctionPointerInvocationOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFunctionPointerInvocationOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IFunctionPointerInvocationOperationWrapperFIXME()
+    static IFunctionPointerInvocationOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IFunctionPointerInvocationOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IFunctionPointerInvocationOperationWrapper));
     }
 
-    private IFunctionPointerInvocationOperationWrapperFIXME(IOperation operation) =>
+    private IFunctionPointerInvocationOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IFunctionPointerInvocationOperationWrapperFIXME :
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IFunctionPointerInvocationOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IFunctionPointerInvocationOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IFunctionPointerInvocationOperationWrapperFIXME From(IOperation operation)
+    public static IFunctionPointerInvocationOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IFunctionPointerInvocationOperationWrapperFIXME :
         }
         else if (IsInstance(operation))
         {
-            return new IFunctionPointerInvocationOperationWrapperFIXME(operation);
+            return new IFunctionPointerInvocationOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IFunctionPointerInvocationOperationWrapperFIXME :
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

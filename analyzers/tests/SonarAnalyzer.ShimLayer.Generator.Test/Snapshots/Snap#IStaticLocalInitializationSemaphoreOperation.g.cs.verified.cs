@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IStaticLocalInitializationSemaphoreOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IStaticLocalInitializationSemaphoreOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.FlowAnalysis.IStaticLocalInitializationSemaphoreOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IStaticLocalInitializationSemaphoreOperationWrapperFIXME()
+    static IStaticLocalInitializationSemaphoreOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IStaticLocalInitializationSemaphoreOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IStaticLocalInitializationSemaphoreOperationWrapper));
     }
 
-    private IStaticLocalInitializationSemaphoreOperationWrapperFIXME(IOperation operation) =>
+    private IStaticLocalInitializationSemaphoreOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IStaticLocalInitializationSemaphoreOperationWrapp
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IStaticLocalInitializationSemaphoreOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IStaticLocalInitializationSemaphoreOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IStaticLocalInitializationSemaphoreOperationWrapperFIXME From(IOperation operation)
+    public static IStaticLocalInitializationSemaphoreOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IStaticLocalInitializationSemaphoreOperationWrapp
         }
         else if (IsInstance(operation))
         {
-            return new IStaticLocalInitializationSemaphoreOperationWrapperFIXME(operation);
+            return new IStaticLocalInitializationSemaphoreOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IStaticLocalInitializationSemaphoreOperationWrapp
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

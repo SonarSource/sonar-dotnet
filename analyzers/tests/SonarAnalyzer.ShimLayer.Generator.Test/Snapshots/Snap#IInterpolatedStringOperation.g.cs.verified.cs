@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IInterpolatedStringOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IInterpolatedStringOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolatedStringOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IInterpolatedStringOperationWrapperFIXME()
+    static IInterpolatedStringOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringOperationWrapper));
     }
 
-    private IInterpolatedStringOperationWrapperFIXME(IOperation operation) =>
+    private IInterpolatedStringOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IInterpolatedStringOperationWrapperFIXME : IOpera
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IInterpolatedStringOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IInterpolatedStringOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IInterpolatedStringOperationWrapperFIXME From(IOperation operation)
+    public static IInterpolatedStringOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IInterpolatedStringOperationWrapperFIXME : IOpera
         }
         else if (IsInstance(operation))
         {
-            return new IInterpolatedStringOperationWrapperFIXME(operation);
+            return new IInterpolatedStringOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IInterpolatedStringOperationWrapperFIXME : IOpera
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

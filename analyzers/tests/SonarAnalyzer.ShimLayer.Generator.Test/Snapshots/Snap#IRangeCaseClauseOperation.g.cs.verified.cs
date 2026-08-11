@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IRangeCaseClauseOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IRangeCaseClauseOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IRangeCaseClauseOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IRangeCaseClauseOperationWrapperFIXME()
+    static IRangeCaseClauseOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IRangeCaseClauseOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IRangeCaseClauseOperationWrapper));
     }
 
-    private IRangeCaseClauseOperationWrapperFIXME(IOperation operation) =>
+    private IRangeCaseClauseOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IRangeCaseClauseOperationWrapperFIXME : IOperatio
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IRangeCaseClauseOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IRangeCaseClauseOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IRangeCaseClauseOperationWrapperFIXME From(IOperation operation)
+    public static IRangeCaseClauseOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IRangeCaseClauseOperationWrapperFIXME : IOperatio
         }
         else if (IsInstance(operation))
         {
-            return new IRangeCaseClauseOperationWrapperFIXME(operation);
+            return new IRangeCaseClauseOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IRangeCaseClauseOperationWrapperFIXME : IOperatio
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator ICaseClauseOperationWrapper(IRangeCaseClauseOperationWrapper up) => ICaseClauseOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IRangeCaseClauseOperationWrapper(ICaseClauseOperationWrapper down) => IRangeCaseClauseOperationWrapper.From(down.WrappedInstance);
+
 }

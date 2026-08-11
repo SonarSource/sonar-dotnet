@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IDynamicObjectCreationOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IDynamicObjectCreationOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IDynamicObjectCreationOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IDynamicObjectCreationOperationWrapperFIXME()
+    static IDynamicObjectCreationOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IDynamicObjectCreationOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IDynamicObjectCreationOperationWrapper));
     }
 
-    private IDynamicObjectCreationOperationWrapperFIXME(IOperation operation) =>
+    private IDynamicObjectCreationOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IDynamicObjectCreationOperationWrapperFIXME : IOp
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IDynamicObjectCreationOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IDynamicObjectCreationOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IDynamicObjectCreationOperationWrapperFIXME From(IOperation operation)
+    public static IDynamicObjectCreationOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IDynamicObjectCreationOperationWrapperFIXME : IOp
         }
         else if (IsInstance(operation))
         {
-            return new IDynamicObjectCreationOperationWrapperFIXME(operation);
+            return new IDynamicObjectCreationOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IDynamicObjectCreationOperationWrapperFIXME : IOp
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

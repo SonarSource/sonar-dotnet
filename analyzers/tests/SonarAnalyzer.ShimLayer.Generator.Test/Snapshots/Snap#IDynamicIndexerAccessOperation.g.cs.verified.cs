@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IDynamicIndexerAccessOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IDynamicIndexerAccessOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IDynamicIndexerAccessOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IDynamicIndexerAccessOperationWrapperFIXME()
+    static IDynamicIndexerAccessOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IDynamicIndexerAccessOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IDynamicIndexerAccessOperationWrapper));
     }
 
-    private IDynamicIndexerAccessOperationWrapperFIXME(IOperation operation) =>
+    private IDynamicIndexerAccessOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IDynamicIndexerAccessOperationWrapperFIXME : IOpe
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IDynamicIndexerAccessOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IDynamicIndexerAccessOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IDynamicIndexerAccessOperationWrapperFIXME From(IOperation operation)
+    public static IDynamicIndexerAccessOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IDynamicIndexerAccessOperationWrapperFIXME : IOpe
         }
         else if (IsInstance(operation))
         {
-            return new IDynamicIndexerAccessOperationWrapperFIXME(operation);
+            return new IDynamicIndexerAccessOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IDynamicIndexerAccessOperationWrapperFIXME : IOpe
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

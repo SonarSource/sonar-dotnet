@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ISingleValueCaseClauseOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ISingleValueCaseClauseOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ISingleValueCaseClauseOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ISingleValueCaseClauseOperationWrapperFIXME()
+    static ISingleValueCaseClauseOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ISingleValueCaseClauseOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ISingleValueCaseClauseOperationWrapper));
     }
 
-    private ISingleValueCaseClauseOperationWrapperFIXME(IOperation operation) =>
+    private ISingleValueCaseClauseOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ISingleValueCaseClauseOperationWrapperFIXME : IOp
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ISingleValueCaseClauseOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ISingleValueCaseClauseOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ISingleValueCaseClauseOperationWrapperFIXME From(IOperation operation)
+    public static ISingleValueCaseClauseOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ISingleValueCaseClauseOperationWrapperFIXME : IOp
         }
         else if (IsInstance(operation))
         {
-            return new ISingleValueCaseClauseOperationWrapperFIXME(operation);
+            return new ISingleValueCaseClauseOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct ISingleValueCaseClauseOperationWrapperFIXME : IOp
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator ICaseClauseOperationWrapper(ISingleValueCaseClauseOperationWrapper up) => ICaseClauseOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator ISingleValueCaseClauseOperationWrapper(ICaseClauseOperationWrapper down) => ISingleValueCaseClauseOperationWrapper.From(down.WrappedInstance);
+
 }

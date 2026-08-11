@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IWhileLoopOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IWhileLoopOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IWhileLoopOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IWhileLoopOperationWrapperFIXME()
+    static IWhileLoopOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IWhileLoopOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IWhileLoopOperationWrapper));
     }
 
-    private IWhileLoopOperationWrapperFIXME(IOperation operation) =>
+    private IWhileLoopOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IWhileLoopOperationWrapperFIXME : IOperationWrapp
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IWhileLoopOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IWhileLoopOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IWhileLoopOperationWrapperFIXME From(IOperation operation)
+    public static IWhileLoopOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IWhileLoopOperationWrapperFIXME : IOperationWrapp
         }
         else if (IsInstance(operation))
         {
-            return new IWhileLoopOperationWrapperFIXME(operation);
+            return new IWhileLoopOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IWhileLoopOperationWrapperFIXME : IOperationWrapp
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator ILoopOperationWrapper(IWhileLoopOperationWrapper up) => ILoopOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IWhileLoopOperationWrapper(ILoopOperationWrapper down) => IWhileLoopOperationWrapper.From(down.WrappedInstance);
+
 }

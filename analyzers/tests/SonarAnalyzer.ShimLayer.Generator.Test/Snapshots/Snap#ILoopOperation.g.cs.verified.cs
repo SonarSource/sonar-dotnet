@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ILoopOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ILoopOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ILoopOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ILoopOperationWrapperFIXME()
+    static ILoopOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ILoopOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ILoopOperationWrapper));
     }
 
-    private ILoopOperationWrapperFIXME(IOperation operation) =>
+    private ILoopOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ILoopOperationWrapperFIXME : IOperationWrapper
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ILoopOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ILoopOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ILoopOperationWrapperFIXME From(IOperation operation)
+    public static ILoopOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ILoopOperationWrapperFIXME : IOperationWrapper
         }
         else if (IsInstance(operation))
         {
-            return new ILoopOperationWrapperFIXME(operation);
+            return new ILoopOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct ILoopOperationWrapperFIXME : IOperationWrapper
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

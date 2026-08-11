@@ -96,10 +96,10 @@ public readonly partial struct DeclarationPatternSyntaxWrapper : ISyntaxWrapper<
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator PatternSyntaxWrapper(DeclarationPatternSyntaxWrapper up) => (PatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator DeclarationPatternSyntaxWrapper(PatternSyntaxWrapper down) => (DeclarationPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator PatternSyntaxWrapper(DeclarationPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator DeclarationPatternSyntaxWrapper(PatternSyntaxWrapper down) => DeclarationPatternSyntaxWrapper.From(down.WrappedInstance);
 
-    public static implicit operator ExpressionOrPatternSyntaxWrapper(DeclarationPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator DeclarationPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (DeclarationPatternSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator ExpressionOrPatternSyntaxWrapper(DeclarationPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator DeclarationPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => DeclarationPatternSyntaxWrapper.From(down.WrappedInstance);
 
 }

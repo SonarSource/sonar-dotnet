@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IParameterInitializerOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IParameterInitializerOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IParameterInitializerOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IParameterInitializerOperationWrapperFIXME()
+    static IParameterInitializerOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IParameterInitializerOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IParameterInitializerOperationWrapper));
     }
 
-    private IParameterInitializerOperationWrapperFIXME(IOperation operation) =>
+    private IParameterInitializerOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IParameterInitializerOperationWrapperFIXME : IOpe
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IParameterInitializerOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IParameterInitializerOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IParameterInitializerOperationWrapperFIXME From(IOperation operation)
+    public static IParameterInitializerOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IParameterInitializerOperationWrapperFIXME : IOpe
         }
         else if (IsInstance(operation))
         {
-            return new IParameterInitializerOperationWrapperFIXME(operation);
+            return new IParameterInitializerOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IParameterInitializerOperationWrapperFIXME : IOpe
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator ISymbolInitializerOperationWrapper(IParameterInitializerOperationWrapper up) => ISymbolInitializerOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IParameterInitializerOperationWrapper(ISymbolInitializerOperationWrapper down) => IParameterInitializerOperationWrapper.From(down.WrappedInstance);
+
 }

@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IIncrementOrDecrementOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IIncrementOrDecrementOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IIncrementOrDecrementOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IIncrementOrDecrementOperationWrapperFIXME()
+    static IIncrementOrDecrementOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IIncrementOrDecrementOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IIncrementOrDecrementOperationWrapper));
     }
 
-    private IIncrementOrDecrementOperationWrapperFIXME(IOperation operation) =>
+    private IIncrementOrDecrementOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IIncrementOrDecrementOperationWrapperFIXME : IOpe
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IIncrementOrDecrementOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IIncrementOrDecrementOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IIncrementOrDecrementOperationWrapperFIXME From(IOperation operation)
+    public static IIncrementOrDecrementOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IIncrementOrDecrementOperationWrapperFIXME : IOpe
         }
         else if (IsInstance(operation))
         {
-            return new IIncrementOrDecrementOperationWrapperFIXME(operation);
+            return new IIncrementOrDecrementOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IIncrementOrDecrementOperationWrapperFIXME : IOpe
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

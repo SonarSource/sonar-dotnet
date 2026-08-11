@@ -99,7 +99,7 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper : I
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator VariableDesignationSyntaxWrapper(ParenthesizedVariableDesignationSyntaxWrapper up) => (VariableDesignationSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator ParenthesizedVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => (ParenthesizedVariableDesignationSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator VariableDesignationSyntaxWrapper(ParenthesizedVariableDesignationSyntaxWrapper up) => VariableDesignationSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator ParenthesizedVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => ParenthesizedVariableDesignationSyntaxWrapper.From(down.WrappedInstance);
 
 }

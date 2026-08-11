@@ -96,7 +96,7 @@ public readonly partial struct SpreadElementSyntaxWrapper : ISyntaxWrapper<CShar
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator CollectionElementSyntaxWrapper(SpreadElementSyntaxWrapper up) => (CollectionElementSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator SpreadElementSyntaxWrapper(CollectionElementSyntaxWrapper down) => (SpreadElementSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator CollectionElementSyntaxWrapper(SpreadElementSyntaxWrapper up) => CollectionElementSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator SpreadElementSyntaxWrapper(CollectionElementSyntaxWrapper down) => SpreadElementSyntaxWrapper.From(down.WrappedInstance);
 
 }

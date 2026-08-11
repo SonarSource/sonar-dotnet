@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IEndOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IEndOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IEndOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IEndOperationWrapperFIXME()
+    static IEndOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IEndOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IEndOperationWrapper));
     }
 
-    private IEndOperationWrapperFIXME(IOperation operation) =>
+    private IEndOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IEndOperationWrapperFIXME : IOperationWrapper
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IEndOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IEndOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IEndOperationWrapperFIXME From(IOperation operation)
+    public static IEndOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IEndOperationWrapperFIXME : IOperationWrapper
         }
         else if (IsInstance(operation))
         {
-            return new IEndOperationWrapperFIXME(operation);
+            return new IEndOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IEndOperationWrapperFIXME : IOperationWrapper
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

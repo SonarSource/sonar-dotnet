@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ICompoundAssignmentOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ICompoundAssignmentOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ICompoundAssignmentOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ICompoundAssignmentOperationWrapperFIXME()
+    static ICompoundAssignmentOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ICompoundAssignmentOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ICompoundAssignmentOperationWrapper));
     }
 
-    private ICompoundAssignmentOperationWrapperFIXME(IOperation operation) =>
+    private ICompoundAssignmentOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ICompoundAssignmentOperationWrapperFIXME : IOpera
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ICompoundAssignmentOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ICompoundAssignmentOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ICompoundAssignmentOperationWrapperFIXME From(IOperation operation)
+    public static ICompoundAssignmentOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ICompoundAssignmentOperationWrapperFIXME : IOpera
         }
         else if (IsInstance(operation))
         {
-            return new ICompoundAssignmentOperationWrapperFIXME(operation);
+            return new ICompoundAssignmentOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct ICompoundAssignmentOperationWrapperFIXME : IOpera
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator IAssignmentOperationWrapper(ICompoundAssignmentOperationWrapper up) => IAssignmentOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator ICompoundAssignmentOperationWrapper(IAssignmentOperationWrapper down) => ICompoundAssignmentOperationWrapper.From(down.WrappedInstance);
+
 }

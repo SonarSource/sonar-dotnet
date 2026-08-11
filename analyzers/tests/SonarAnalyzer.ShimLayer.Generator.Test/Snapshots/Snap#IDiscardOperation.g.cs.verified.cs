@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IDiscardOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IDiscardOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IDiscardOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IDiscardOperationWrapperFIXME()
+    static IDiscardOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IDiscardOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IDiscardOperationWrapper));
     }
 
-    private IDiscardOperationWrapperFIXME(IOperation operation) =>
+    private IDiscardOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IDiscardOperationWrapperFIXME : IOperationWrapper
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IDiscardOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IDiscardOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IDiscardOperationWrapperFIXME From(IOperation operation)
+    public static IDiscardOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IDiscardOperationWrapperFIXME : IOperationWrapper
         }
         else if (IsInstance(operation))
         {
-            return new IDiscardOperationWrapperFIXME(operation);
+            return new IDiscardOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IDiscardOperationWrapperFIXME : IOperationWrapper
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

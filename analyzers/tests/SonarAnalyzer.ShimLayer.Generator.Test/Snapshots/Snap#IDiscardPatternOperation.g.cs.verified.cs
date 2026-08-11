@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IDiscardPatternOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IDiscardPatternOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IDiscardPatternOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IDiscardPatternOperationWrapperFIXME()
+    static IDiscardPatternOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IDiscardPatternOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IDiscardPatternOperationWrapper));
     }
 
-    private IDiscardPatternOperationWrapperFIXME(IOperation operation) =>
+    private IDiscardPatternOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IDiscardPatternOperationWrapperFIXME : IOperation
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IDiscardPatternOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IDiscardPatternOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IDiscardPatternOperationWrapperFIXME From(IOperation operation)
+    public static IDiscardPatternOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IDiscardPatternOperationWrapperFIXME : IOperation
         }
         else if (IsInstance(operation))
         {
-            return new IDiscardPatternOperationWrapperFIXME(operation);
+            return new IDiscardPatternOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IDiscardPatternOperationWrapperFIXME : IOperation
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator IPatternOperationWrapper(IDiscardPatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IDiscardPatternOperationWrapper(IPatternOperationWrapper down) => IDiscardPatternOperationWrapper.From(down.WrappedInstance);
+
 }

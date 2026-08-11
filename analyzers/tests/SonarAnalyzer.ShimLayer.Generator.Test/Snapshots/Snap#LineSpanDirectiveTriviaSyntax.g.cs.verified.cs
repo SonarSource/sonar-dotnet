@@ -112,7 +112,7 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator LineOrSpanDirectiveTriviaSyntaxWrapper(LineSpanDirectiveTriviaSyntaxWrapper up) => (LineOrSpanDirectiveTriviaSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(LineOrSpanDirectiveTriviaSyntaxWrapper down) => (LineSpanDirectiveTriviaSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator LineOrSpanDirectiveTriviaSyntaxWrapper(LineSpanDirectiveTriviaSyntaxWrapper up) => LineOrSpanDirectiveTriviaSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(LineOrSpanDirectiveTriviaSyntaxWrapper down) => LineSpanDirectiveTriviaSyntaxWrapper.From(down.WrappedInstance);
 
 }

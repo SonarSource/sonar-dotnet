@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IPropertySubpatternOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IPropertySubpatternOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IPropertySubpatternOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IPropertySubpatternOperationWrapperFIXME()
+    static IPropertySubpatternOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IPropertySubpatternOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IPropertySubpatternOperationWrapper));
     }
 
-    private IPropertySubpatternOperationWrapperFIXME(IOperation operation) =>
+    private IPropertySubpatternOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IPropertySubpatternOperationWrapperFIXME : IOpera
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IPropertySubpatternOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IPropertySubpatternOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IPropertySubpatternOperationWrapperFIXME From(IOperation operation)
+    public static IPropertySubpatternOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IPropertySubpatternOperationWrapperFIXME : IOpera
         }
         else if (IsInstance(operation))
         {
-            return new IPropertySubpatternOperationWrapperFIXME(operation);
+            return new IPropertySubpatternOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IPropertySubpatternOperationWrapperFIXME : IOpera
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

@@ -93,7 +93,7 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator VariableDesignationSyntaxWrapper(SingleVariableDesignationSyntaxWrapper up) => (VariableDesignationSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator SingleVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => (SingleVariableDesignationSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator VariableDesignationSyntaxWrapper(SingleVariableDesignationSyntaxWrapper up) => VariableDesignationSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator SingleVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => SingleVariableDesignationSyntaxWrapper.From(down.WrappedInstance);
 
 }

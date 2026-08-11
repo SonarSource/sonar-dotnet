@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ITupleBinaryOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ITupleBinaryOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITupleBinaryOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ITupleBinaryOperationWrapperFIXME()
+    static ITupleBinaryOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ITupleBinaryOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ITupleBinaryOperationWrapper));
     }
 
-    private ITupleBinaryOperationWrapperFIXME(IOperation operation) =>
+    private ITupleBinaryOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ITupleBinaryOperationWrapperFIXME : IOperationWra
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ITupleBinaryOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ITupleBinaryOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ITupleBinaryOperationWrapperFIXME From(IOperation operation)
+    public static ITupleBinaryOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ITupleBinaryOperationWrapperFIXME : IOperationWra
         }
         else if (IsInstance(operation))
         {
-            return new ITupleBinaryOperationWrapperFIXME(operation);
+            return new ITupleBinaryOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct ITupleBinaryOperationWrapperFIXME : IOperationWra
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

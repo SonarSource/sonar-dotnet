@@ -97,19 +97,17 @@ public class SyntaxNodeWrapStrategy : Strategy
 
     private string WrapperToWrapperConversions(StrategyModel model)
     {
-        StringBuilder sb = null;
-        var baseType = Latest.BaseType;
-        while (baseType is not null && model[baseType] is SyntaxNodeWrapStrategy) // BaseType is also wrapped
-        {
-            sb ??= new StringBuilder();
-            sb.AppendLine($"""
-                    public static implicit operator {baseType.Name}Wrapper({Latest.Name}Wrapper up) => ({baseType.Name}Wrapper)up.SyntaxNode;
-                    public static explicit operator {Latest.Name}Wrapper({baseType.Name}Wrapper down) => ({Latest.Name}Wrapper)down.SyntaxNode;
+        return WrapperToWrapperConversions(WrappedBaseTypes());
 
-                """);
-            baseType = baseType.BaseType;
+        IEnumerable<Type> WrappedBaseTypes()
+        {
+            var baseType = Latest.BaseType;
+            while (baseType is not null && model[baseType] is SyntaxNodeWrapStrategy) // BaseType is also wrapped
+            {
+                yield return baseType;
+                baseType = baseType.BaseType;
+            }
         }
-        return sb?.ToString();
     }
 
     private string MemberAccessorInitialization(MemberInfo member, StrategyModel model) =>

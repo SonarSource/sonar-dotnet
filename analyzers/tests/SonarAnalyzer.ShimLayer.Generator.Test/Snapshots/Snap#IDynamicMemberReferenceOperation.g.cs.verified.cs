@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IDynamicMemberReferenceOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IDynamicMemberReferenceOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IDynamicMemberReferenceOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IDynamicMemberReferenceOperationWrapperFIXME()
+    static IDynamicMemberReferenceOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IDynamicMemberReferenceOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IDynamicMemberReferenceOperationWrapper));
     }
 
-    private IDynamicMemberReferenceOperationWrapperFIXME(IOperation operation) =>
+    private IDynamicMemberReferenceOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IDynamicMemberReferenceOperationWrapperFIXME : IO
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IDynamicMemberReferenceOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IDynamicMemberReferenceOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IDynamicMemberReferenceOperationWrapperFIXME From(IOperation operation)
+    public static IDynamicMemberReferenceOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IDynamicMemberReferenceOperationWrapperFIXME : IO
         }
         else if (IsInstance(operation))
         {
-            return new IDynamicMemberReferenceOperationWrapperFIXME(operation);
+            return new IDynamicMemberReferenceOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IDynamicMemberReferenceOperationWrapperFIXME : IO
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

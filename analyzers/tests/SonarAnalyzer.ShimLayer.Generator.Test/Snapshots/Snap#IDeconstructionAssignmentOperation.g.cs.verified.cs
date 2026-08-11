@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IDeconstructionAssignmentOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IDeconstructionAssignmentOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IDeconstructionAssignmentOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IDeconstructionAssignmentOperationWrapperFIXME()
+    static IDeconstructionAssignmentOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IDeconstructionAssignmentOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IDeconstructionAssignmentOperationWrapper));
     }
 
-    private IDeconstructionAssignmentOperationWrapperFIXME(IOperation operation) =>
+    private IDeconstructionAssignmentOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IDeconstructionAssignmentOperationWrapperFIXME : 
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IDeconstructionAssignmentOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IDeconstructionAssignmentOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IDeconstructionAssignmentOperationWrapperFIXME From(IOperation operation)
+    public static IDeconstructionAssignmentOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IDeconstructionAssignmentOperationWrapperFIXME : 
         }
         else if (IsInstance(operation))
         {
-            return new IDeconstructionAssignmentOperationWrapperFIXME(operation);
+            return new IDeconstructionAssignmentOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,8 @@ public readonly partial struct IDeconstructionAssignmentOperationWrapperFIXME : 
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
+    public static implicit operator IAssignmentOperationWrapper(IDeconstructionAssignmentOperationWrapper up) => IAssignmentOperationWrapper.From(up.WrappedInstance);
+    public static explicit operator IDeconstructionAssignmentOperationWrapper(IAssignmentOperationWrapper down) => IDeconstructionAssignmentOperationWrapper.From(down.WrappedInstance);
+
 }

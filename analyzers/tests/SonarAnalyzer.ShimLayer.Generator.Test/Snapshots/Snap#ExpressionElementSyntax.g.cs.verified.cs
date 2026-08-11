@@ -93,7 +93,7 @@ public readonly partial struct ExpressionElementSyntaxWrapper : ISyntaxWrapper<C
     public static bool IsInstance(SyntaxNode node) =>
         node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
 
-    public static implicit operator CollectionElementSyntaxWrapper(ExpressionElementSyntaxWrapper up) => (CollectionElementSyntaxWrapper)up.SyntaxNode;
-    public static explicit operator ExpressionElementSyntaxWrapper(CollectionElementSyntaxWrapper down) => (ExpressionElementSyntaxWrapper)down.SyntaxNode;
+    public static implicit operator CollectionElementSyntaxWrapper(ExpressionElementSyntaxWrapper up) => CollectionElementSyntaxWrapper.From(up.WrappedInstance);
+    public static explicit operator ExpressionElementSyntaxWrapper(CollectionElementSyntaxWrapper down) => ExpressionElementSyntaxWrapper.From(down.WrappedInstance);
 
 }

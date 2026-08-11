@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ITypeParameterObjectCreationOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct ITypeParameterObjectCreationOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITypeParameterObjectCreationOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static ITypeParameterObjectCreationOperationWrapperFIXME()
+    static ITypeParameterObjectCreationOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(ITypeParameterObjectCreationOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(ITypeParameterObjectCreationOperationWrapper));
     }
 
-    private ITypeParameterObjectCreationOperationWrapperFIXME(IOperation operation) =>
+    private ITypeParameterObjectCreationOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct ITypeParameterObjectCreationOperationWrapperFIXME
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static ITypeParameterObjectCreationOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static ITypeParameterObjectCreationOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static ITypeParameterObjectCreationOperationWrapperFIXME From(IOperation operation)
+    public static ITypeParameterObjectCreationOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct ITypeParameterObjectCreationOperationWrapperFIXME
         }
         else if (IsInstance(operation))
         {
-            return new ITypeParameterObjectCreationOperationWrapperFIXME(operation);
+            return new ITypeParameterObjectCreationOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct ITypeParameterObjectCreationOperationWrapperFIXME
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }

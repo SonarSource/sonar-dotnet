@@ -25,19 +25,19 @@ using System.Collections.Immutable;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct IObjectOrCollectionInitializerOperationWrapperFIXME : IOperationWrapper
+internal readonly partial struct IObjectOrCollectionInitializerOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IObjectOrCollectionInitializerOperation";
     private static readonly Type WrappedType;
 
     private readonly IOperation operation;
 
-    static IObjectOrCollectionInitializerOperationWrapperFIXME()
+    static IObjectOrCollectionInitializerOperationWrapper()
     {
-        WrappedType = TypeRegister.LatestType(typeof(IObjectOrCollectionInitializerOperationWrapperFIXME));
+        WrappedType = TypeRegister.LatestType(typeof(IObjectOrCollectionInitializerOperationWrapper));
     }
 
-    private IObjectOrCollectionInitializerOperationWrapperFIXME(IOperation operation) =>
+    private IObjectOrCollectionInitializerOperationWrapper(IOperation operation) =>
         this.operation = operation;
 
     [Obsolete("Use WrappedInstance instead")]
@@ -46,10 +46,10 @@ public readonly partial struct IObjectOrCollectionInitializerOperationWrapperFIX
     public IOperation WrappedInstance => this.operation;
 
     [Obsolete("Use From instead")]
-    public static IObjectOrCollectionInitializerOperationWrapperFIXME FromOperation(IOperation operation) =>
+    public static IObjectOrCollectionInitializerOperationWrapper FromOperation(IOperation operation) =>
         From(operation);
 
-    public static IObjectOrCollectionInitializerOperationWrapperFIXME From(IOperation operation)
+    public static IObjectOrCollectionInitializerOperationWrapper From(IOperation operation)
     {
         if (operation is null)
         {
@@ -57,7 +57,7 @@ public readonly partial struct IObjectOrCollectionInitializerOperationWrapperFIX
         }
         else if (IsInstance(operation))
         {
-            return new IObjectOrCollectionInitializerOperationWrapperFIXME(operation);
+            return new IObjectOrCollectionInitializerOperationWrapper(operation);
         }
         else
         {
@@ -67,4 +67,5 @@ public readonly partial struct IObjectOrCollectionInitializerOperationWrapperFIX
 
     public static bool IsInstance(IOperation operation) =>
         operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+
 }
