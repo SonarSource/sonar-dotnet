@@ -41,4 +41,23 @@ public readonly partial struct IWithOperationWrapperFIXME
         this.operation = operation;
 
     public IOperation WrappedOperation => this.operation;
+
+    public static IWithOperationWrapperFIXME FromOperation(IOperation operation)
+    {
+        if (operation is null)
+        {
+            return default;
+        }
+        else if (IsInstance(operation))
+        {
+            return new IWithOperationWrapperFIXME(operation);
+        }
+        else
+        {
+            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+        }
+    }
+
+    public static bool IsInstance(IOperation operation) =>
+        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
 }

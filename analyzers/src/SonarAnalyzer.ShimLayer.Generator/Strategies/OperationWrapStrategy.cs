@@ -47,6 +47,25 @@ public class OperationWrapStrategy : Strategy
                 this.operation = operation;
 
             public {{CompiletimeTypeSnippet()}} WrappedOperation => this.operation;
+
+            public static {{Latest.Name}}WrapperFIXME FromOperation(IOperation operation)
+            {
+                if (operation is null)
+                {
+                    return default;
+                }
+                else if (IsInstance(operation))
+                {
+                    return new {{Latest.Name}}WrapperFIXME(operation);
+                }
+                else
+                {
+                    throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+                }
+            }
+
+            public static bool IsInstance(IOperation operation) =>
+                operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
         }
         """;
 
