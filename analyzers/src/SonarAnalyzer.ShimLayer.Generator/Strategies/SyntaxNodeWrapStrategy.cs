@@ -37,7 +37,7 @@ public class SyntaxNodeWrapStrategy : Strategy
     public override string CompiletimeTypeSnippet() =>
         BaseType.Name;
 
-    public override string Generate(StrategyModel model) =>
+    protected override string GenerateCore(StrategyModel model) =>
         $$"""
         {{Preamble()}}
         public readonly partial struct {{Latest.Name}}Wrapper : ISyntaxWrapper<{{CompiletimeTypeSnippet()}}>

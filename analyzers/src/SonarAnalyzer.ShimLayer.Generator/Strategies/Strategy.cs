@@ -15,13 +15,18 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Text.RegularExpressions;
+
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public abstract class Strategy
 {
-    public abstract string Generate(StrategyModel model);
+    // Match 3 or more consecutive newlines (with optional whitespace-only lines between them) and replace with exactly 2 newlines.
+    private static readonly Regex ExcessiveNewLines = new(@"\n(\s*\n){2,}", RegexOptions.ExplicitCapture, TimeSpan.FromMilliseconds(100));
+
     public abstract string ReturnTypeSnippet();
     public abstract string ToConversionSnippet(string from);
+    protected abstract string GenerateCore(StrategyModel model);
 
     public virtual bool IsSupported => true;
 
@@ -32,6 +37,11 @@ public abstract class Strategy
 
     public virtual string CompiletimeTypeSnippet() =>
         Latest.Name;
+
+    public string Generate(StrategyModel model) =>
+        GenerateCore(model) is { } content
+            ? ExcessiveNewLines.Replace(content.Replace("\r", null), "\n\n")
+            : null;
 
     protected static string JoinLines(IEnumerable<string> lines) =>
        string.Join("\n", lines.Where(x => x is not null));

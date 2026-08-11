@@ -27,12 +27,12 @@ public class OperationExtendStrategy : Strategy
     public override string CompiletimeTypeSnippet() =>
         Latest.Name;
 
-    public override string Generate(StrategyModel model) =>
-        $"namespace SonarAnalyzer.ShimLayer; // Extend {Latest.Name}";   // NET-2729
-
     public override string ReturnTypeSnippet() =>
         Latest.Name;
 
     public override string ToConversionSnippet(string from) =>
         from;
+
+    protected override string GenerateCore(StrategyModel model) =>
+        $"namespace SonarAnalyzer.ShimLayer; // Extend {Latest.Name}";   // NET-2729
 }

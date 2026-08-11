@@ -40,5 +40,5 @@ public class ImmutableArrayStrategy : Strategy
     public override string PropertyAccessorInitializerSnippet(string compiletimeType, string propertyName) =>
         $"LightupHelpers.CreateOperationListPropertyAccessor<{compiletimeType}>(WrappedType, nameof({propertyName}))";
 
-    public override string Generate(StrategyModel model) => null;
+    protected override string GenerateCore(StrategyModel model) => null;
 }

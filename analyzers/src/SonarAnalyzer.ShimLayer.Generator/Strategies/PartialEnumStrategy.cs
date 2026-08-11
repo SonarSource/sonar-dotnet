@@ -24,7 +24,13 @@ public class PartialEnumStrategy : Strategy
     public PartialEnumStrategy(Type latest, FieldInfo[] fields) : base(latest) =>
         Fields = fields;
 
-    public override string Generate(StrategyModel model)
+    public override string ReturnTypeSnippet() =>
+        Latest.Name;
+
+    public override string ToConversionSnippet(string from) =>
+        $"({Latest.Name}){from}";
+
+    protected override string GenerateCore(StrategyModel model)
     {
         var sb = new StringBuilder();
         sb.Append(Preamble($"using {Latest.Namespace};"));
@@ -38,10 +44,4 @@ public class PartialEnumStrategy : Strategy
         sb.AppendLine("}");
         return sb.ToString();
     }
-
-    public override string ReturnTypeSnippet() =>
-        Latest.Name;
-
-    public override string ToConversionSnippet(string from) =>
-        $"({Latest.Name}){from}";
 }

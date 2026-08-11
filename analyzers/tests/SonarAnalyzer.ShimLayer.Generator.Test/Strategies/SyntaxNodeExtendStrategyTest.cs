@@ -76,7 +76,6 @@ public class SyntaxNodeExtendStrategyTest
 
                 private static readonly Func<ClassDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<ClassDeclarationSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
 
-
                 extension(ClassDeclarationSyntax @this)
                 {
                     public ParameterListSyntax ParameterList => (ParameterListSyntax)ParameterListAccessor(@this);
@@ -129,7 +128,6 @@ public class SyntaxNodeExtendStrategyTest
                 private static readonly Type WrappedType = typeof(ProcessStartInfo);
 
                 private static readonly Func<ProcessStartInfo, String> FileNameAccessor = LightupHelpers.CreatePropertyAccessor<ProcessStartInfo, String>(WrappedType, "FileName");
-
 
                 extension(ProcessStartInfo @this)
                 {

@@ -82,8 +82,6 @@ public class SyntaxNodeWrapStrategyTest
                 [Obsolete("Use Node instead")]
                 public TypeDeclarationSyntax SyntaxNode => this.node;
 
-
-
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node)
                 {
                     if (node is null)
@@ -101,8 +99,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
-
-
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
@@ -196,8 +192,6 @@ public class SyntaxNodeWrapStrategyTest
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
 
-
-
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
@@ -287,8 +281,6 @@ public class SyntaxNodeWrapStrategyTest
                 public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
                     wrapper.node;
 
-
-
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
             }
@@ -356,8 +348,6 @@ public class SyntaxNodeWrapStrategyTest
                 [Obsolete("Use Node instead")]
                 public CSharpSyntaxNode SyntaxNode => this.node;
 
-
-
                 public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node)
                 {
                     if (node is null)
@@ -381,8 +371,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator ExpressionOrPatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => (ExpressionOrPatternSyntaxWrapper)up.SyntaxNode;
                 public static explicit operator ConstantPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => (ConstantPatternSyntaxWrapper)down.SyntaxNode;
-
-
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
@@ -450,8 +438,6 @@ public class SyntaxNodeWrapStrategyTest
                 [Obsolete("Use Node instead")]
                 public SyntaxNode SyntaxNode => this.node;
 
-
-
                 public static explicit operator SyntaxNodeWrapper(SyntaxNode node)
                 {
                     if (node is null)
@@ -469,8 +455,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
                     wrapper.node;
-
-
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
@@ -560,8 +544,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
-
-
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
@@ -660,8 +642,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.node;
-
-
 
                 public static bool IsInstance(SyntaxNode node) =>
                     node is not null && LightupHelpers.CanWrapNode(node, WrappedType);

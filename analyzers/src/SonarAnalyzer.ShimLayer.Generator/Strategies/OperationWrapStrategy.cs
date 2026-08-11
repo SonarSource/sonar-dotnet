@@ -27,8 +27,14 @@ public class OperationWrapStrategy : Strategy
     public override string CompiletimeTypeSnippet() =>
         "IOperation";
 
+    public override string ReturnTypeSnippet() =>
+        $"{Latest.Name}Wrapper";
+
+    public override string ToConversionSnippet(string from) =>
+        $"{Latest.Name}Wrapper.FromOperation({from})";
+
     // ToDo: Remove FIXME class name suffix
-    public override string Generate(StrategyModel model) =>
+    protected override string GenerateCore(StrategyModel model) =>
         $$"""
         {{Preamble()}}
         public readonly partial struct {{Latest.Name}}WrapperFIXME : IOperationWrapper
@@ -68,10 +74,4 @@ public class OperationWrapStrategy : Strategy
                 operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
         }
         """;
-
-    public override string ReturnTypeSnippet() =>
-        $"{Latest.Name}Wrapper";
-
-    public override string ToConversionSnippet(string from) =>
-        $"{Latest.Name}Wrapper.FromOperation({from})";
 }

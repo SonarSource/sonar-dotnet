@@ -26,8 +26,6 @@ public class NoChangeStrategy : Strategy
             ? latest.Name.Replace("`1", null) + "<" + string.Join(", ", latest.GetGenericArguments().Select(x => x.Name)) + ">"
             : latest.Name;
 
-    public override string Generate(StrategyModel model) => null;
-
     public override string ReturnTypeSnippet() =>
         type;
 
@@ -36,4 +34,6 @@ public class NoChangeStrategy : Strategy
 
     public override string ToConversionSnippet(string from) =>
         $"({type}){from}";
+
+    protected override string GenerateCore(StrategyModel model) => null;
 }

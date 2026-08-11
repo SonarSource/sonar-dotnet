@@ -24,7 +24,13 @@ public sealed class SyntaxNodeExtendStrategy : Strategy
     public SyntaxNodeExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest) =>
         Members = members.Where(x => !x.IsPassthrough).Select(x => x.Member).ToArray();
 
-    public override string Generate(StrategyModel model) =>
+    public override string ReturnTypeSnippet() =>
+        Latest.Name;
+
+    public override string ToConversionSnippet(string from) =>
+        from;
+
+    protected override string GenerateCore(StrategyModel model) =>
         Members.Select(x => GenerateMemberAccessor(x, model)).Where(x => x is not null).ToArray() is { Length: > 0 } accessors
             ? $$"""
                 {{Preamble($"using {Latest.Namespace};")}}
@@ -41,11 +47,6 @@ public sealed class SyntaxNodeExtendStrategy : Strategy
                 }
                 """
             : null;
-
-    public override string ReturnTypeSnippet() =>
-        Latest.Name;
-
-    public override string ToConversionSnippet(string from) => from;
 
     private string GenerateMemberAccessor(MemberInfo member, StrategyModel model) =>
         member switch
