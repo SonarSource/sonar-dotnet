@@ -17,21 +17,9 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public class OperationWrapStrategy : Strategy
+public class OperationWrapStrategy : WrapStrategy
 {
-    public IReadOnlyList<MemberDescriptor> Members { get; }
-
-    public OperationWrapStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest) =>
-        Members = members;
-
-    public override string CompiletimeTypeSnippet() =>
-        "IOperation";
-
-    public override string ReturnTypeSnippet() =>
-        $"{Latest.Name}Wrapper";
-
-    public override string ToConversionSnippet(string from) =>
-        $"{Latest.Name}Wrapper.FromOperation({from})";
+    public OperationWrapStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest, typeof(IOperation), members) { }
 
     // ToDo: Change internal to public
     protected override string GenerateCore(StrategyModel model) =>

@@ -53,7 +53,7 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor;
     public TypeSyntax Type => TypeAccessor(this.node);
     private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor;
-    public VariableDesignationSyntaxWrapper Designation => (VariableDesignationSyntaxWrapper)DesignationAccessor(this.node);
+    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(this.node));
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;
     public TextSpan FullSpan => this.node.FullSpan;

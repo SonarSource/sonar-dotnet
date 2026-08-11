@@ -54,9 +54,9 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor;
     public NameColonSyntax NameColon => NameColonAccessor(this.node);
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> ExpressionColonAccessor;
-    public BaseExpressionColonSyntaxWrapper ExpressionColon => (BaseExpressionColonSyntaxWrapper)ExpressionColonAccessor(this.node);
+    public BaseExpressionColonSyntaxWrapper ExpressionColon => BaseExpressionColonSyntaxWrapper.From(ExpressionColonAccessor(this.node));
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor;
-    public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.node));
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;
     public TextSpan FullSpan => this.node.FullSpan;

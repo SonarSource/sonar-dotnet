@@ -280,7 +280,7 @@ public class SyntaxNodeWrapStrategyTest
                 public ExpressionSyntax WrappedInstance => this.node;
 
                 private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor;
-                public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
+                public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.node));
 
                 public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
                     From(node);

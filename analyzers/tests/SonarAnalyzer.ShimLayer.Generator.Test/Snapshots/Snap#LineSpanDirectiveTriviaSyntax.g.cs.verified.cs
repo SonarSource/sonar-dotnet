@@ -58,11 +58,11 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor;
     public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(this.node);
     private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> StartAccessor;
-    public LineDirectivePositionSyntaxWrapper Start => (LineDirectivePositionSyntaxWrapper)StartAccessor(this.node);
+    public LineDirectivePositionSyntaxWrapper Start => LineDirectivePositionSyntaxWrapper.From(StartAccessor(this.node));
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> MinusTokenAccessor;
     public SyntaxToken MinusToken => (SyntaxToken)MinusTokenAccessor(this.node);
     private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> EndAccessor;
-    public LineDirectivePositionSyntaxWrapper End => (LineDirectivePositionSyntaxWrapper)EndAccessor(this.node);
+    public LineDirectivePositionSyntaxWrapper End => LineDirectivePositionSyntaxWrapper.From(EndAccessor(this.node));
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> CharacterOffsetAccessor;
     public SyntaxToken CharacterOffset => (SyntaxToken)CharacterOffsetAccessor(this.node);
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor;

@@ -54,7 +54,7 @@ public readonly partial struct ParenthesizedPatternSyntaxWrapper : ISyntaxWrappe
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor;
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.node);
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor;
-    public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.node));
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor;
     public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.node);
     public String Language => this.node.Language;

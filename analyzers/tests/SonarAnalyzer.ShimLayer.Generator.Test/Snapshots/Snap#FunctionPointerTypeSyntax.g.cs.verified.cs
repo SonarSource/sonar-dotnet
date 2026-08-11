@@ -61,9 +61,9 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     private static readonly Func<TypeSyntax, SyntaxToken> AsteriskTokenAccessor;
     public SyntaxToken AsteriskToken => (SyntaxToken)AsteriskTokenAccessor(this.node);
     private static readonly Func<TypeSyntax, CSharpSyntaxNode> CallingConventionAccessor;
-    public FunctionPointerCallingConventionSyntaxWrapper CallingConvention => (FunctionPointerCallingConventionSyntaxWrapper)CallingConventionAccessor(this.node);
+    public FunctionPointerCallingConventionSyntaxWrapper CallingConvention => FunctionPointerCallingConventionSyntaxWrapper.From(CallingConventionAccessor(this.node));
     private static readonly Func<TypeSyntax, CSharpSyntaxNode> ParameterListAccessor;
-    public FunctionPointerParameterListSyntaxWrapper ParameterList => (FunctionPointerParameterListSyntaxWrapper)ParameterListAccessor(this.node);
+    public FunctionPointerParameterListSyntaxWrapper ParameterList => FunctionPointerParameterListSyntaxWrapper.From(ParameterListAccessor(this.node));
     public Boolean IsVar => this.node.IsVar;
     private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor;
     public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.node);

@@ -56,7 +56,7 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     private static readonly Func<ExpressionSyntax, SyntaxToken> IsKeywordAccessor;
     public SyntaxToken IsKeyword => (SyntaxToken)IsKeywordAccessor(this.node);
     private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor;
-    public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.node));
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;
     public TextSpan FullSpan => this.node.FullSpan;

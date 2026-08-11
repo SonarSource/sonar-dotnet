@@ -53,9 +53,9 @@ public readonly partial struct SwitchExpressionArmSyntaxWrapper : ISyntaxWrapper
     public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor;
-    public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.node));
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> WhenClauseAccessor;
-    public WhenClauseSyntaxWrapper WhenClause => (WhenClauseSyntaxWrapper)WhenClauseAccessor(this.node);
+    public WhenClauseSyntaxWrapper WhenClause => WhenClauseSyntaxWrapper.From(WhenClauseAccessor(this.node));
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> EqualsGreaterThanTokenAccessor;
     public SyntaxToken EqualsGreaterThanToken => (SyntaxToken)EqualsGreaterThanTokenAccessor(this.node);
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor;

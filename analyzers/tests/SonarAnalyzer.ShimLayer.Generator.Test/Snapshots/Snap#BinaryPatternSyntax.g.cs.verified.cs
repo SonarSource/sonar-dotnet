@@ -52,11 +52,11 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
     public CSharpSyntaxNode WrappedInstance => this.node;
 
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> LeftAccessor;
-    public PatternSyntaxWrapper Left => (PatternSyntaxWrapper)LeftAccessor(this.node);
+    public PatternSyntaxWrapper Left => PatternSyntaxWrapper.From(LeftAccessor(this.node));
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor;
     public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(this.node);
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> RightAccessor;
-    public PatternSyntaxWrapper Right => (PatternSyntaxWrapper)RightAccessor(this.node);
+    public PatternSyntaxWrapper Right => PatternSyntaxWrapper.From(RightAccessor(this.node));
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;
     public TextSpan FullSpan => this.node.FullSpan;

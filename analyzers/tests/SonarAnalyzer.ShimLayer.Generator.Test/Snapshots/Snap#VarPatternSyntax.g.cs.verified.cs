@@ -53,7 +53,7 @@ public readonly partial struct VarPatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> VarKeywordAccessor;
     public SyntaxToken VarKeyword => (SyntaxToken)VarKeywordAccessor(this.node);
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor;
-    public VariableDesignationSyntaxWrapper Designation => (VariableDesignationSyntaxWrapper)DesignationAccessor(this.node);
+    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(this.node));
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;
     public TextSpan FullSpan => this.node.FullSpan;

@@ -82,21 +82,6 @@ public abstract class Strategy
 
         """;
 
-    protected string WrapperToWrapperConversions(IEnumerable<Type> baseTypes)
-    {
-        StringBuilder sb = null;
-        foreach (var baseType in baseTypes.Select(x => x.Name))
-        {
-            sb ??= new StringBuilder();
-            sb.AppendLine($"""
-                    public static implicit operator {baseType}Wrapper({Latest.Name}Wrapper up) => {baseType}Wrapper.From(up.WrappedInstance);
-                    public static explicit operator {Latest.Name}Wrapper({baseType}Wrapper down) => {Latest.Name}Wrapper.From(down.WrappedInstance);
-
-                """);
-        }
-        return sb?.ToString();
-    }
-
     protected static string SerializeAttributes(IEnumerable<CustomAttributeData> attributes, int indentSize)
     {
         var sb = new StringBuilder();

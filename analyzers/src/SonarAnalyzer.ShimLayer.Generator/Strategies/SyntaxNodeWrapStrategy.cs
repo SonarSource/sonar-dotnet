@@ -17,25 +17,9 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public class SyntaxNodeWrapStrategy : Strategy
+public class SyntaxNodeWrapStrategy : WrapStrategy
 {
-    public Type BaseType { get; }
-    public IReadOnlyList<MemberDescriptor> Members { get; }
-
-    public SyntaxNodeWrapStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest)
-    {
-        BaseType = baseType;
-        Members = members;
-    }
-
-    public override string ReturnTypeSnippet() =>
-        $"{Latest.Name}Wrapper";
-
-    public override string ToConversionSnippet(string from) =>
-        $"({Latest.Name}Wrapper){from}";
-
-    public override string CompiletimeTypeSnippet() =>
-        BaseType.Name;
+    public SyntaxNodeWrapStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest, baseType, members) { }
 
     protected override string GenerateCore(StrategyModel model) =>
         $$"""

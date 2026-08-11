@@ -52,9 +52,9 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
 
     public SyntaxToken Keyword => this.node.Keyword;
     private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor;
-    public PatternSyntaxWrapper Pattern => (PatternSyntaxWrapper)PatternAccessor(this.node);
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.node));
     private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> WhenClauseAccessor;
-    public WhenClauseSyntaxWrapper WhenClause => (WhenClauseSyntaxWrapper)WhenClauseAccessor(this.node);
+    public WhenClauseSyntaxWrapper WhenClause => WhenClauseSyntaxWrapper.From(WhenClauseAccessor(this.node));
     public SyntaxToken ColonToken => this.node.ColonToken;
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;

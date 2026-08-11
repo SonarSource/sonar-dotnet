@@ -53,7 +53,7 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> ManagedOrUnmanagedKeywordAccessor;
     public SyntaxToken ManagedOrUnmanagedKeyword => (SyntaxToken)ManagedOrUnmanagedKeywordAccessor(this.node);
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> UnmanagedCallingConventionListAccessor;
-    public FunctionPointerUnmanagedCallingConventionListSyntaxWrapper UnmanagedCallingConventionList => (FunctionPointerUnmanagedCallingConventionListSyntaxWrapper)UnmanagedCallingConventionListAccessor(this.node);
+    public FunctionPointerUnmanagedCallingConventionListSyntaxWrapper UnmanagedCallingConventionList => FunctionPointerUnmanagedCallingConventionListSyntaxWrapper.From(UnmanagedCallingConventionListAccessor(this.node));
     public String Language => this.node.Language;
     public Int32 RawKind => this.node.RawKind;
     public TextSpan FullSpan => this.node.FullSpan;
