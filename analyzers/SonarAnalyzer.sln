@@ -18,8 +18,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CFG", "src\So
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SonarAnalyzer.Shared", "src\SonarAnalyzer.Shared\SonarAnalyzer.Shared.shproj", "{892CF3FA-3BE2-42E8-A7E6-76AE72864DEC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.ShimLayer.CodeGeneration", "src\SonarAnalyzer.ShimLayer.CodeGeneration\SonarAnalyzer.ShimLayer.CodeGeneration.csproj", "{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.SourceGenerators", "src\SonarAnalyzer.SourceGenerators\SonarAnalyzer.SourceGenerators.csproj", "{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.TestFramework.Test", "tests\SonarAnalyzer.TestFramework.Test\SonarAnalyzer.TestFramework.Test.csproj", "{ADBE6CFE-980F-4D4F-8E25-E391581D291E}"
@@ -78,10 +76,6 @@ Global
 		{F766F556-CB91-408A-9149-EB963DE1B817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F766F556-CB91-408A-9149-EB963DE1B817}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F766F556-CB91-408A-9149-EB963DE1B817}.Release|Any CPU.Build.0 = Release|Any CPU
-		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{684F0AD7-BBC9-40C8-9E54-D9C2B57560D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76D6EBB8-D2B0-41C1-8880-027EC78CB7FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
