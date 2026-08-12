@@ -25,9 +25,6 @@ public static class IOperationExtensions
     {
         [Obsolete("Just delete this, it's a leftover from IOperationWrapperSonar removal")]
         public IOperation Instance => operation;
-
-        [Obsolete("Just delete this, it's a leftover from IOperationWrapperSonar removal")]
-        public IOperation ToSonar() => operation;
     }
 
     public static bool IsOutArgumentReference(this IOperation operation) =>
