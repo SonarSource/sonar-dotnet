@@ -46,16 +46,16 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 foreach (var operation in block.OperationsAndBranchValue.Reverse().ToReversedExecutionOrder())
                 {
-                    if (checkReadBeforeWrite && operation.Instance.Kind == OperationKindEx.FlowAnonymousFunction)
+                    if (checkReadBeforeWrite && operation.Kind == OperationKindEx.FlowAnonymousFunction)
                     {
-                        var anonymousFunction = IFlowAnonymousFunctionOperationWrapper.FromOperation(operation.Instance);
+                        var anonymousFunction = IFlowAnonymousFunctionOperationWrapper.FromOperation(operation);
                         var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancel);
                         if (anonymousFunctionCfg.Blocks.Any(x => ProcessBlock(x, anonymousFunctionCfg, checkReadBeforeWrite)))
                         {
                             return true;
                         }
                     }
-                    else if (memberToCheck.Equals(MemberSymbol(operation.Instance)))
+                    else if (memberToCheck.Equals(MemberSymbol(operation)))
                     {
                         return IsReadOrWrite(operation, checkReadBeforeWrite);
                     }
@@ -65,13 +65,13 @@ namespace SonarAnalyzer.CSharp.Rules
 
             private bool IsReadOrWrite(IOperation child, bool checkReadBeforeWrite)
             {
-                if (child.Instance.IsOutArgumentReference())
+                if (child.IsOutArgumentReference())
                 {
                     // it is out argument - that means that this is write
                     return !checkReadBeforeWrite;
                 }
 
-                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child.Instance;
+                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child;
                 return checkReadBeforeWrite ^ isWrite;
             }
 

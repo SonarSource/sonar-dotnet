@@ -125,9 +125,9 @@ public partial class InfiniteRecursion
 
             protected override bool IsValid(BasicBlock block)
             {
-                if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x.Instance))) is { Instance: not null } operation)
+                if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x))) is { } operation)
                 {
-                    var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation.Instance;
+                    var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation;
                     return isGetAccesor ^ isWrite;
                 }
 
