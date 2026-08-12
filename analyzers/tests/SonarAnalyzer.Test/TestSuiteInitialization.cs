@@ -29,7 +29,7 @@ public class TestSuiteInitialization
         ConfigureFluentValidation();
 
         Console.WriteLine(@"Running tests initialization...");
-        Console.WriteLine(@$"Build reason: {TestEnvironment.BuildReason() ?? "Not set / Local build"}");
+        Console.WriteLine(@$"GitHub event: {Environment.GetEnvironmentVariable("GITHUB_EVENT_NAME") ?? "Not set / Local build"}");
 
         var csVersions = LanguageOptions.Default(LanguageNames.CSharp).Cast<CSharpParseOptions>().Select(x => x.LanguageVersion.ToDisplayString());
         Console.WriteLine(@"C# versions used for analysis: " + string.Join(", ", csVersions));
