@@ -32,19 +32,49 @@ public class TelemetryJsonAggregatorTest {
   @Test
   public void flatMapTelemetry_PassesThroughUnknownTelemetry()
   {
-    var sut = new TelemetryJsonAggregator();
-    var result = sut.flatMapTelemetry(Stream.of(
+    var result = TelemetryJsonAggregator.flatMapTelemetry(Stream.of(
+      Map.entry("someKey", "someValue"),
+      Map.entry("anotherKey", "someValue")));
+    assertThat(result).containsExactly(
+      Map.entry("someKey", "someValue"),
+      Map.entry("anotherKey", "someValue"));
+  }
+
+  @Test
+  public void flatMapTelemetry_DuplicateKeys_DeduplicatesUnknownTelemetryWithSameValue()
+  {
+    var result = TelemetryJsonAggregator.flatMapTelemetry(Stream.of(
       Map.entry("someKey", "someValue"),
       Map.entry("someKey", "someValue")));
     assertThat(result).containsExactly(
-      Map.entry("someKey", "someValue"),
       Map.entry("someKey", "someValue"));
   }
 
   @Test
+  public void flatMapTelemetry_DuplicateKeys_KeepsGreatestValue()
+  {
+    var result = TelemetryJsonAggregator.flatMapTelemetry(Stream.of(
+      Map.entry("someKey", "aValue"),
+      Map.entry("someKey", "zValue"),
+      Map.entry("someKey", "mValue")));
+    assertThat(result).containsExactly(
+      Map.entry("someKey", "zValue"));
+  }
+
+  @Test
+  public void flatMapTelemetry_DuplicateKeys_ConflictResolutionIsOrderIndependent()
+  {
+    var result = TelemetryJsonAggregator.flatMapTelemetry(Stream.of(
+      Map.entry("someKey", "mValue"),
+      Map.entry("someKey", "zValue"),
+      Map.entry("someKey", "aValue")));
+    assertThat(result).containsExactly(
+      Map.entry("someKey", "zValue"));
+  }
+
+  @Test
   public void flatMapTelemetry_AllSpecialKeysGetCounted() {
-    var sut = new TelemetryJsonAggregator();
-    var result = sut.flatMapTelemetry(Stream.of(
+    var result = TelemetryJsonAggregator.flatMapTelemetry(Stream.of(
       Map.entry(TARGET_FRAMEWORK_MONIKER, ".NETCoreApp,Version=v9.0"),
       Map.entry(USING_MICROSOFT_NET_SDK + ".cnt", "true"),
       Map.entry(DETERMINISTIC + ".cnt", "false"),
@@ -59,8 +89,7 @@ public class TelemetryJsonAggregatorTest {
   @Test
   public void flatMapTelemetry_MixedAggregatedAndPassThroughKeys()
   {
-    var sut = new TelemetryJsonAggregator();
-    var result = sut.flatMapTelemetry(Stream.of(
+    var result = TelemetryJsonAggregator.flatMapTelemetry(Stream.of(
       Map.entry(TARGET_FRAMEWORK_MONIKER, ".NETCoreApp,Version=v9.0"),
       Map.entry(TARGET_FRAMEWORK_MONIKER, ".NETStandard,Version=v1.6"),
       Map.entry("key1", "value1"),

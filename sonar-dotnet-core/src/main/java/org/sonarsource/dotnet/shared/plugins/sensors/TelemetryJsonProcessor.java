@@ -71,12 +71,22 @@ public class TelemetryJsonProcessor implements ProjectSensor {
     }
     final var messages = collector.getTelemetry();
     LOG.debug("Found {} telemetry messages.", messages.size());
-    final var aggregated = new TelemetryJsonAggregator().flatMapTelemetry(messages.stream());
+    final var aggregated = TelemetryJsonAggregator.flatMapTelemetry(messages.stream());
     final var count = new AtomicInteger();
     aggregated.forEach(telemetry -> {
       LOG.debug("Adding metric: {}={}", telemetry.getKey(), telemetry.getValue());
-      sensorContext.addTelemetryProperty(telemetry.getKey(), telemetry.getValue());
-      count.getAndIncrement();
+      try {
+        sensorContext.addTelemetryProperty(telemetry.getKey(), telemetry.getValue());
+        count.getAndIncrement();
+      } catch (IllegalStateException e) {
+        // NET-4184: C# and VB.NET projects report telemetry via their respective <guid>.sonar.<cs|vbnet>.scanner.telemetry properties, seen only by their own plugins.
+        // This can't be deduplicated in advance.
+        if (e.getMessage() != null && e.getMessage().startsWith("Duplicate telemetry key")) {
+          LOG.debug("Metric {} was already reported by the C# or the VB.NET plugin already. Skipping.", telemetry.getKey());
+        } else {
+          throw e;
+        }
+      }
     });
     LOG.debug("Added {} metrics.", count);
   }

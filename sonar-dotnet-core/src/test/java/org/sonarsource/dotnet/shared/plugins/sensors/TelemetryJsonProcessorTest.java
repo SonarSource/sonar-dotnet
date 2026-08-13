@@ -32,6 +32,7 @@ import org.sonarsource.dotnet.shared.plugins.PluginMetadata;
 import org.sonarsource.dotnet.shared.plugins.telemetryjson.TelemetryJsonCollector;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -133,5 +134,47 @@ public class TelemetryJsonProcessorTest {
       "Adding metric: projectKey1=value1",
       "Adding metric: projectKey2=value2",
       "Added 4 metrics.");
+  }
+
+  @Test
+  public void executeTelemetryProcessor_duplicateKeyIsSkipped() {
+    // NET-4184: the C# and VB.NET plugins can independently compute the same solution-wide telemetry key in a mixed solution.
+    collector.addTelemetry("key1", "value1");
+    collector.addTelemetry("key2", "value2");
+    final var telemetry = new ArrayList<Map.Entry<String, String>>();
+    doAnswer((Answer<Void>) invocationOnMock -> {
+      String key = invocationOnMock.getArgument(0);
+      if (key.equals("key2")) {
+        throw new IllegalStateException("Duplicate telemetry key 'key2' was stored. Each telemetry key must be unique.");
+      }
+      telemetry.add(Map.entry(key, invocationOnMock.getArgument(1)));
+      return null;
+    }).when(context).addTelemetryProperty(anyString(), anyString());
+    sensor.execute(context);
+    assertThat(telemetry).containsExactly(Map.entry("key1", "value1"));
+    assertThat(logTester.logs()).containsExactly(
+      "Found 2 telemetry messages.",
+      "Adding metric: key1=value1",
+      "Adding metric: key2=value2",
+      "Metric key2 was already reported by the C# or the VB.NET plugin already. Skipping.",
+      "Added 1 metrics.");
+  }
+
+  @Test
+  public void executeTelemetryProcessor_unrelatedIllegalStateExceptionIsRethrown() {
+    collector.addTelemetry("key1", "value1");
+    doAnswer((Answer<Void>) invocationOnMock -> {
+      throw new IllegalStateException("This method can not be used by plugins not developed by SonarSource S.A.");
+    }).when(context).addTelemetryProperty(anyString(), anyString());
+    assertThatThrownBy(() -> sensor.execute(context)).isInstanceOf(IllegalStateException.class);
+  }
+
+  @Test
+  public void executeTelemetryProcessor_illegalStateExceptionWithUnrelatedMessageIsRethrown() {
+    collector.addTelemetry("key1", "value1");
+    doAnswer((Answer<Void>) invocationOnMock -> {
+      throw new IllegalStateException();
+    }).when(context).addTelemetryProperty(anyString(), anyString());
+    assertThatThrownBy(() -> sensor.execute(context)).isInstanceOf(IllegalStateException.class);
   }
 }
