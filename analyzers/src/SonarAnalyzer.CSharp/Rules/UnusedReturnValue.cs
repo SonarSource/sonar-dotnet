@@ -60,7 +60,8 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
                 .ToList();
 
             // Method invocation is noncompliant when there is at least 1 invocation of the method, and no invocation is using the return value. The case of 0 invocation is handled by S1144.
-            if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed))
+            // Extension methods that return their this parameter type (fluent pattern) are excluded.
+            if (matchingInvocations.Any() && !matchingInvocations.Any(IsReturnValueUsed) && !IsFluentExtensionMethod(declaredPrivateMethodWithReturn.Symbol, declaredPrivateMethodWithReturn.Node, declaredPrivateMethodWithReturn.Model))
             {
                 context.ReportIssue(Rule, declaredPrivateMethodWithReturn.Node.ReturnType);
             }
@@ -134,4 +135,61 @@ public sealed class UnusedReturnValue : SonarDiagnosticAnalyzer
     private static bool MatchesDeclaration(IMethodSymbol invocation, IMethodSymbol declaration) =>
         invocation.OriginalDefinition.Equals(declaration)
         || (declaration.AssociatedExtensionImplementation is { } implementation && invocation.OriginalDefinition.Equals(implementation));
+
+    private static bool IsFluentExtensionMethod(IMethodSymbol method, MethodDeclarationSyntax syntax, SemanticModel model)
+    {
+        if (!method.IsExtension)
+        {
+            return false;
+        }
+        var actualMethod = method.AssociatedExtensionImplementation ?? method;
+        if (actualMethod.Parameters.Length == 0 || !method.ReturnType.Equals(actualMethod.Parameters[0].Type))
+        {
+            return false;
+        }
+        // Extension-block members need to use the containing type's ExtensionParameter
+        // as the comparison symbol, since the implementation's hidden parameter has a
+        // different identity than what the body references.
+        var thisParameter = method.AssociatedExtensionImplementation is not null
+            ? (method.ContainingType.ExtensionParameter ?? actualMethod.Parameters[0])
+            : actualMethod.Parameters[0];
+        return ReturnsThisParameter(syntax, model, thisParameter);
+    }
+
+    private static bool ReturnsThisParameter(MethodDeclarationSyntax syntax, SemanticModel model, IParameterSymbol thisParameter)
+    {
+        if (syntax.ExpressionBody is { } expressionBody)
+        {
+            return ReturnsSymbol(expressionBody.Expression, model, thisParameter);
+        }
+        if (syntax.Body is { } body)
+        {
+            var returnStatements = body.DescendantNodes(n =>
+                !n.IsKind(SyntaxKind.SimpleLambdaExpression)
+                && !n.IsKind(SyntaxKind.ParenthesizedLambdaExpression)
+                && !n.IsKind(SyntaxKindEx.LocalFunctionStatement))
+                .OfType<ReturnStatementSyntax>();
+            return returnStatements.Any() && returnStatements.All(r => r.Expression is not null && ReturnsSymbol(r.Expression, model, thisParameter));
+        }
+        return false;
+    }
+
+    private static bool ReturnsSymbol(ExpressionSyntax expression, SemanticModel model, IParameterSymbol thisParameter)
+    {
+        var symbol = model.GetSymbolInfo(expression).Symbol;
+        if (symbol is not null && symbol.Equals(thisParameter))
+        {
+            return true;
+        }
+        if (expression is InvocationExpressionSyntax invocation
+            && invocation.Expression is MemberAccessExpressionSyntax memberAccess)
+        {
+            var target = model.GetSymbolInfo(memberAccess.Expression).Symbol;
+            if (target is not null && target.Equals(thisParameter))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
