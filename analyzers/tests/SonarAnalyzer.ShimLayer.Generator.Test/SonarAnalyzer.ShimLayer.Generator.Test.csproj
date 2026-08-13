@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Verify.MSTest" Version="31.24.3" />
+    <PackageReference Include="Verify.MSTest" Version="31.28.0" />
   </ItemGroup>
 
   <ItemGroup>
