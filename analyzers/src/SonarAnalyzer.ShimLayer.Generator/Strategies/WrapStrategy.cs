@@ -52,19 +52,16 @@ public abstract class WrapStrategy : Strategy
         return sb?.ToString();
     }
 
-    protected string MemberDeclaration(MemberDescriptor member, StrategyModel model)
-    {
-        var attributes = SerializeAttributes(member.Member.GetCustomAttributesData(), 4);
-        return member switch
+    protected string MemberDeclaration(MemberDescriptor member, StrategyModel model) =>
+        member switch
         {
-            { IsPassthrough: true, Member: PropertyInfo pi } => $"""
-                    {attributes}public {model[pi.PropertyType].CompiletimeTypeSnippet()} {member.Member.Name} => wrappedInstance.{member.Member.Name};
+            { IsPassthrough: true, Member: PropertyInfo pi } when new PropertyPassthroughSnippet(this, pi, model[pi.PropertyType]) is var snippet => $"""
+                {snippet.MemberDeclaration(4)}
                 """,
-            { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
-                    private static readonly Func<{BaseType.Name}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {member.Member.Name}Accessor = {propertyTypeStrategy.PropertyAccessorInitializerSnippet(CompiletimeTypeSnippet(), member.Member.Name)};
-                    {attributes}public {propertyTypeStrategy.ReturnTypeSnippet()} {member.Member.Name} => {propertyTypeStrategy.ToConversionSnippet($"{member.Member.Name}Accessor(wrappedInstance)")};
+            { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy && new PropertyWrapSnippet(this, pi, propertyTypeStrategy) is var snippet => $"""
+                {snippet.AccessorDeclaration()}
+                {snippet.MemberDeclaration(4)}
                 """,
             _ => null,
         };
-    }
 }

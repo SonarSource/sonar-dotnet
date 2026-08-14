@@ -38,6 +38,7 @@ public static partial class IOperationShimExtensions
     extension(IOperation wrappedInstance)
     {
         public IOperation Parent => ParentAccessor(wrappedInstance);
+        [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
         public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
         public String Language => (String)LanguageAccessor(wrappedInstance);
         public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);

@@ -19,6 +19,7 @@
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="SonarAnalyzer.ShimLayer.Generator.Model" />
+    <Using Include="SonarAnalyzer.ShimLayer.Generator.Snippets" />
     <Using Include="SonarAnalyzer.ShimLayer.Generator.Strategies" />
     <Using Include="System.Reflection" />
     <Using Include="System.Text" />

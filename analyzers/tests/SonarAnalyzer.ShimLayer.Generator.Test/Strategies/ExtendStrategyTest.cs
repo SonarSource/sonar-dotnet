@@ -130,6 +130,7 @@ public class ExtendStrategyTest
 
                 extension(ProcessStartInfo wrappedInstance)
                 {
+                    [System.ComponentModel.EditorAttribute("System.Diagnostics.Design.StartFileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
                     public String FileName => (String)FileNameAccessor(wrappedInstance);
                 }
             }
@@ -186,6 +187,7 @@ public class ExtendStrategyTest
                 extension(IOperation wrappedInstance)
                 {
                     public IOperation Parent => (IOperation)ParentAccessor(wrappedInstance);
+                    [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
                     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
                 }
             }

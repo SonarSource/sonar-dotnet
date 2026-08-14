@@ -34,7 +34,7 @@ public class NewEnumStrategy : Strategy
     {
         var sb = new StringBuilder();
         sb.AppendLine(Preamble());
-        sb.AppendLine($"{SerializeAttributes(Latest.GetCustomAttributesData(), 0)}public enum {Latest.Name} : {Enum.GetUnderlyingType(Latest)}");
+        sb.AppendLine($"{Snippet.SerializeAttributes(Latest.GetCustomAttributesData(), 0)}public enum {Latest.Name} : {Enum.GetUnderlyingType(Latest)}");
         sb.AppendLine("{");
         foreach (var field in Fields)
         {

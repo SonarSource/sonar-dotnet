@@ -51,17 +51,17 @@ public sealed class ExtendStrategy : Strategy
     private string GenerateMemberAccessor(MemberInfo member, StrategyModel model) =>
         member switch
         {
-            PropertyInfo prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
-                    private static readonly Func<{CompiletimeTypeSnippet()}, {propertyTypeStrategy.CompiletimeTypeSnippet()}> {prop.Name}Accessor = {propertyTypeStrategy.PropertyAccessorInitializerSnippet(CompiletimeTypeSnippet(), prop.Name)};
+            PropertyInfo prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy && new PropertyWrapSnippet(this, prop, propertyTypeStrategy) is var snippet => $"""
+                {snippet.AccessorDeclaration()}
                 """,
             _ => null,
         };
 
-    private static string GenerateMemberExtension(MemberInfo member, StrategyModel model) =>
+    private string GenerateMemberExtension(MemberInfo member, StrategyModel model) =>
         member switch
         {
-            PropertyInfo { GetMethod: not null } prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
-                        public {propertyTypeStrategy.ReturnTypeSnippet()} {prop.Name} => {propertyTypeStrategy.ToConversionSnippet($"{prop.Name}Accessor(wrappedInstance)")};
+            PropertyInfo { GetMethod: not null } prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy && new PropertyWrapSnippet(this, prop, propertyTypeStrategy) is var snippet => $"""
+                {snippet.MemberDeclaration(8)}
                 """,
             _ => null,
         };
