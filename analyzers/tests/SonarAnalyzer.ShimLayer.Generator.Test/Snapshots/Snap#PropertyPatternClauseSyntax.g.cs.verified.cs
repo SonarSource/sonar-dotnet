@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.PropertyPatternClauseSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PropertyPatternClauseSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static PropertyPatternClauseSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(PropertyPatternClauseSyntaxWrapper));
-        OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenBraceToken");
-        SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
-        CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseBraceToken");
-    }
 
     private PropertyPatternClauseSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBraceTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenBraceToken");
     public SyntaxToken OpenBraceToken => (SyntaxToken)OpenBraceTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor;
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
     public SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> Subpatterns => SubpatternsAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBraceTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseBraceToken");
     public SyntaxToken CloseBraceToken => (SyntaxToken)CloseBraceTokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

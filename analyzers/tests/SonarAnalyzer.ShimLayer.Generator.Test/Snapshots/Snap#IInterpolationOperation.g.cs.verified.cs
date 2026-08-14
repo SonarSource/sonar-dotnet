@@ -28,22 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct IInterpolationOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolationOperation";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IInterpolationOperationWrapper));
     private readonly IOperation instance;
-
-    static IInterpolationOperationWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(IInterpolationOperationWrapper));
-        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Expression");
-        AlignmentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Alignment");
-        FormatStringAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "FormatString");
-        ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-        ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-        LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-        IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-        SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
-    }
 
     private IInterpolationOperationWrapper(IOperation instance) =>
         this.instance = instance;
@@ -53,26 +40,26 @@ public readonly partial struct IInterpolationOperationWrapper : IOperationWrappe
 
     public IOperation WrappedInstance => this.instance;
 
-    private static readonly Func<IOperation, IOperation> ExpressionAccessor;
+    private static readonly Func<IOperation, IOperation> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Expression");
     public IOperation Expression => ExpressionAccessor(this.instance);
-    private static readonly Func<IOperation, IOperation> AlignmentAccessor;
+    private static readonly Func<IOperation, IOperation> AlignmentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Alignment");
     public IOperation Alignment => AlignmentAccessor(this.instance);
-    private static readonly Func<IOperation, IOperation> FormatStringAccessor;
+    private static readonly Func<IOperation, IOperation> FormatStringAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "FormatString");
     public IOperation FormatString => FormatStringAccessor(this.instance);
-    private static readonly Func<IOperation, IOperation> ParentAccessor;
+    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
     public IOperation Parent => ParentAccessor(this.instance);
     public OperationKind Kind => this.instance.Kind;
     public SyntaxNode Syntax => this.instance.Syntax;
     public ITypeSymbol Type => this.instance.Type;
     public Optional<Object> ConstantValue => this.instance.ConstantValue;
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor;
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(this.instance);
-    private static readonly Func<IOperation, String> LanguageAccessor;
+    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
     public String Language => (String)LanguageAccessor(this.instance);
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor;
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
     public Boolean IsImplicit => (Boolean)IsImplicitAccessor(this.instance);
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor;
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(this.instance);
 
     [Obsolete("Use From instead")]

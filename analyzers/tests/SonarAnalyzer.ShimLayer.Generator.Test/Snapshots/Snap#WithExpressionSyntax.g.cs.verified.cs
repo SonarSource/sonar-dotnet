@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct WithExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.WithExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(WithExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static WithExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(WithExpressionSyntaxWrapper));
-        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
-        WithKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "WithKeyword");
-        InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
-    }
 
     private WithExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct WithExpressionSyntaxWrapper : ISyntaxWrapper<Expr
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor;
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
     public ExpressionSyntax Expression => ExpressionAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> WithKeywordAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> WithKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "WithKeyword");
     public SyntaxToken WithKeyword => (SyntaxToken)WithKeywordAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor;
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
     public InitializerExpressionSyntax Initializer => InitializerAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

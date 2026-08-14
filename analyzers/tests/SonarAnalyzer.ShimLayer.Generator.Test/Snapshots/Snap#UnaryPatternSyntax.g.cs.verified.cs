@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct UnaryPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.UnaryPatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(UnaryPatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static UnaryPatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(UnaryPatternSyntaxWrapper));
-        OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
-        PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
-    }
 
     private UnaryPatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct UnaryPatternSyntaxWrapper : ISyntaxWrapper<CSharp
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
     public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.instance));
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.WhenClauseSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(WhenClauseSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static WhenClauseSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(WhenClauseSyntaxWrapper));
-        WhenKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "WhenKeyword");
-        ConditionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Condition");
-    }
 
     private WhenClauseSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> WhenKeywordAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> WhenKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "WhenKeyword");
     public SyntaxToken WhenKeyword => (SyntaxToken)WhenKeywordAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ConditionAccessor;
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ConditionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Condition");
     public ExpressionSyntax Condition => ConditionAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

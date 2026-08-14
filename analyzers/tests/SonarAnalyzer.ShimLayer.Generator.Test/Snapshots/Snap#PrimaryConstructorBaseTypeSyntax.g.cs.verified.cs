@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntaxWrapper<BaseTypeSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.PrimaryConstructorBaseTypeSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PrimaryConstructorBaseTypeSyntaxWrapper));
     private readonly BaseTypeSyntax instance;
-
-    static PrimaryConstructorBaseTypeSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(PrimaryConstructorBaseTypeSyntaxWrapper));
-        ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<BaseTypeSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
-    }
 
     private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax instance) =>
         this.instance = instance;
@@ -50,7 +44,7 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     public BaseTypeSyntax WrappedInstance => this.instance;
 
     public TypeSyntax Type => this.instance.Type;
-    private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor;
+    private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<BaseTypeSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
     public ArgumentListSyntax ArgumentList => ArgumentListAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

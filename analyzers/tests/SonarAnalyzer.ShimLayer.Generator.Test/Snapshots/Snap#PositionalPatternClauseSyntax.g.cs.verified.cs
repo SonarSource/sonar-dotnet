@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct PositionalPatternClauseSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.PositionalPatternClauseSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PositionalPatternClauseSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static PositionalPatternClauseSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(PositionalPatternClauseSyntaxWrapper));
-        OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
-        SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
-        CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
-    }
 
     private PositionalPatternClauseSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct PositionalPatternClauseSyntaxWrapper : ISyntaxWra
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor;
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
     public SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> Subpatterns => SubpatternsAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
     public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

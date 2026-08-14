@@ -28,25 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct IListPatternOperationWrapper : IOperationWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IListPatternOperation";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IListPatternOperationWrapper));
     private readonly IOperation instance;
-
-    static IListPatternOperationWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(IListPatternOperationWrapper));
-        LengthSymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ISymbol>(WrappedType, "LengthSymbol");
-        IndexerSymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ISymbol>(WrappedType, "IndexerSymbol");
-        PatternsAccessor = LightupHelpers.CreateOperationListPropertyAccessor<IOperation>(WrappedType, nameof(Patterns));
-        DeclaredSymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ISymbol>(WrappedType, "DeclaredSymbol");
-        InputTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "InputType");
-        NarrowedTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NarrowedType");
-        ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-        ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-        LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-        IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-        SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
-    }
 
     private IListPatternOperationWrapper(IOperation instance) =>
         this.instance = instance;
@@ -56,32 +40,32 @@ public readonly partial struct IListPatternOperationWrapper : IOperationWrapper
 
     public IOperation WrappedInstance => this.instance;
 
-    private static readonly Func<IOperation, ISymbol> LengthSymbolAccessor;
+    private static readonly Func<IOperation, ISymbol> LengthSymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ISymbol>(WrappedType, "LengthSymbol");
     public ISymbol LengthSymbol => (ISymbol)LengthSymbolAccessor(this.instance);
-    private static readonly Func<IOperation, ISymbol> IndexerSymbolAccessor;
+    private static readonly Func<IOperation, ISymbol> IndexerSymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ISymbol>(WrappedType, "IndexerSymbol");
     public ISymbol IndexerSymbol => (ISymbol)IndexerSymbolAccessor(this.instance);
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> PatternsAccessor;
+    private static readonly Func<IOperation, ImmutableArray<IOperation>> PatternsAccessor = LightupHelpers.CreateOperationListPropertyAccessor<IOperation>(WrappedType, nameof(Patterns));
     public ImmutableArray<IOperation> Patterns => PatternsAccessor(this.instance);
-    private static readonly Func<IOperation, ISymbol> DeclaredSymbolAccessor;
+    private static readonly Func<IOperation, ISymbol> DeclaredSymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ISymbol>(WrappedType, "DeclaredSymbol");
     public ISymbol DeclaredSymbol => (ISymbol)DeclaredSymbolAccessor(this.instance);
-    private static readonly Func<IOperation, ITypeSymbol> InputTypeAccessor;
+    private static readonly Func<IOperation, ITypeSymbol> InputTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "InputType");
     public ITypeSymbol InputType => (ITypeSymbol)InputTypeAccessor(this.instance);
-    private static readonly Func<IOperation, ITypeSymbol> NarrowedTypeAccessor;
+    private static readonly Func<IOperation, ITypeSymbol> NarrowedTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NarrowedType");
     public ITypeSymbol NarrowedType => (ITypeSymbol)NarrowedTypeAccessor(this.instance);
-    private static readonly Func<IOperation, IOperation> ParentAccessor;
+    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
     public IOperation Parent => ParentAccessor(this.instance);
     public OperationKind Kind => this.instance.Kind;
     public SyntaxNode Syntax => this.instance.Syntax;
     public ITypeSymbol Type => this.instance.Type;
     public Optional<Object> ConstantValue => this.instance.ConstantValue;
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor;
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(this.instance);
-    private static readonly Func<IOperation, String> LanguageAccessor;
+    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
     public String Language => (String)LanguageAccessor(this.instance);
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor;
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
     public Boolean IsImplicit => (Boolean)IsImplicitAccessor(this.instance);
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor;
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(this.instance);
 
     [Obsolete("Use From instead")]

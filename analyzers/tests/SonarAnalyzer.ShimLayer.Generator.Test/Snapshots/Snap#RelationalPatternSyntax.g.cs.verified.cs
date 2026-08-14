@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RelationalPatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RelationalPatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static RelationalPatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(RelationalPatternSyntaxWrapper));
-        OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
-        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
-    }
 
     private RelationalPatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
     public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor;
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
     public ExpressionSyntax Expression => ExpressionAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

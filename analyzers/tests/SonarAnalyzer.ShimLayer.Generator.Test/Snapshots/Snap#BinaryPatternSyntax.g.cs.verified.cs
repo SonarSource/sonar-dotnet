@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BinaryPatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BinaryPatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static BinaryPatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(BinaryPatternSyntaxWrapper));
-        LeftAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Left");
-        OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
-        RightAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Right");
-    }
 
     private BinaryPatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> LeftAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> LeftAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Left");
     public PatternSyntaxWrapper Left => PatternSyntaxWrapper.From(LeftAccessor(this.instance));
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
     public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> RightAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> RightAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Right");
     public PatternSyntaxWrapper Right => PatternSyntaxWrapper.From(RightAccessor(this.instance));
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

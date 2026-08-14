@@ -28,18 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecursivePatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecursivePatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static RecursivePatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(RecursivePatternSyntaxWrapper));
-        TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-        PositionalPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PositionalPatternClause");
-        PropertyPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PropertyPatternClause");
-        DesignationAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Designation");
-    }
 
     private RecursivePatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -52,13 +43,13 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor;
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
     public TypeSyntax Type => TypeAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PositionalPatternClauseAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PositionalPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PositionalPatternClause");
     public PositionalPatternClauseSyntaxWrapper PositionalPatternClause => PositionalPatternClauseSyntaxWrapper.From(PositionalPatternClauseAccessor(this.instance));
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PropertyPatternClauseAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PropertyPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PropertyPatternClause");
     public PropertyPatternClauseSyntaxWrapper PropertyPatternClause => PropertyPatternClauseSyntaxWrapper.From(PropertyPatternClauseAccessor(this.instance));
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Designation");
     public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(this.instance));
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

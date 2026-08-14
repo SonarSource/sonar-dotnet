@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper : ISyntaxWrapper<DirectiveTriviaSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineOrSpanDirectiveTriviaSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineOrSpanDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax instance;
-
-    static LineOrSpanDirectiveTriviaSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(LineOrSpanDirectiveTriviaSyntaxWrapper));
-        LineKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
-        FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
-    }
 
     private LineOrSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper : ISyntaxW
 
     public DirectiveTriviaSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
     public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(this.instance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
     public SyntaxToken File => (SyntaxToken)FileAccessor(this.instance);
     public SyntaxToken DirectiveNameToken => this.instance.DirectiveNameToken;
     public SyntaxToken HashToken => this.instance.HashToken;

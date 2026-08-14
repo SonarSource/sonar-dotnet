@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
     private readonly TypeDeclarationSyntax instance;
-
-    static RecordDeclarationSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-        ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
-        ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
-    }
 
     private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
         this.instance = instance;
@@ -53,11 +46,11 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     public SyntaxList<AttributeListSyntax> AttributeLists => this.instance.AttributeLists;
     public SyntaxTokenList Modifiers => this.instance.Modifiers;
     public SyntaxToken Keyword => this.instance.Keyword;
-    private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor;
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
     public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(this.instance);
     public SyntaxToken Identifier => this.instance.Identifier;
     public TypeParameterListSyntax TypeParameterList => this.instance.TypeParameterList;
-    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor;
+    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
     public ParameterListSyntax ParameterList => ParameterListAccessor(this.instance);
     public BaseListSyntax BaseList => this.instance.BaseList;
     public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => this.instance.ConstraintClauses;

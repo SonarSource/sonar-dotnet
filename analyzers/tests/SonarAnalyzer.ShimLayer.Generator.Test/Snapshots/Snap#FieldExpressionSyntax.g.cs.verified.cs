@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FieldExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FieldExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static FieldExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(FieldExpressionSyntaxWrapper));
-        TokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "Token");
-    }
 
     private FieldExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -49,7 +43,7 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> TokenAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> TokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "Token");
     public SyntaxToken Token => (SyntaxToken)TokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

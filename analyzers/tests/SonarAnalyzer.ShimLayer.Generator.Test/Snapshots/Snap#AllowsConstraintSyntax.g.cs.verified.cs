@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct AllowsConstraintSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.AllowsConstraintSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static AllowsConstraintSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintSyntaxWrapper));
-
-    }
 
     private AllowsConstraintSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;

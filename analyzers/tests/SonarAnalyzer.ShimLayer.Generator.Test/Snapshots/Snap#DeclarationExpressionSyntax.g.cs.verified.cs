@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.DeclarationExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DeclarationExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static DeclarationExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(DeclarationExpressionSyntaxWrapper));
-        TypeAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, TypeSyntax>(WrappedType, "Type");
-        DesignationAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Designation");
-    }
 
     private DeclarationExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor;
+    private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, TypeSyntax>(WrappedType, "Type");
     public TypeSyntax Type => TypeAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor;
+    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Designation");
     public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(this.instance));
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

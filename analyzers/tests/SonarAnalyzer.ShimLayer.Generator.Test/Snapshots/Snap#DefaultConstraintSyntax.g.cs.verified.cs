@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<TypeParameterConstraintSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.DefaultConstraintSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DefaultConstraintSyntaxWrapper));
     private readonly TypeParameterConstraintSyntax instance;
-
-    static DefaultConstraintSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(DefaultConstraintSyntaxWrapper));
-        DefaultKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "DefaultKeyword");
-    }
 
     private DefaultConstraintSyntaxWrapper(TypeParameterConstraintSyntax instance) =>
         this.instance = instance;
@@ -49,7 +43,7 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
 
     public TypeParameterConstraintSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor;
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "DefaultKeyword");
     public SyntaxToken DefaultKeyword => (SyntaxToken)DefaultKeywordAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

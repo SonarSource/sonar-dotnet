@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct VariableDesignationSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.VariableDesignationSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(VariableDesignationSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static VariableDesignationSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(VariableDesignationSyntaxWrapper));
-
-    }
 
     private VariableDesignationSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;

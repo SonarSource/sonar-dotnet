@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWrapper<DirectiveTriviaSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.NullableDirectiveTriviaSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(NullableDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax instance;
-
-    static NullableDirectiveTriviaSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(NullableDirectiveTriviaSyntaxWrapper));
-        NullableKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "NullableKeyword");
-        SettingTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "SettingToken");
-        TargetTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "TargetToken");
-    }
 
     private NullableDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax instance) =>
         this.instance = instance;
@@ -52,11 +44,11 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public DirectiveTriviaSyntax WrappedInstance => this.instance;
 
     public SyntaxToken HashToken => this.instance.HashToken;
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> NullableKeywordAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> NullableKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "NullableKeyword");
     public SyntaxToken NullableKeyword => (SyntaxToken)NullableKeywordAccessor(this.instance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> SettingTokenAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> SettingTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "SettingToken");
     public SyntaxToken SettingToken => (SyntaxToken)SettingTokenAccessor(this.instance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> TargetTokenAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> TargetTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "TargetToken");
     public SyntaxToken TargetToken => (SyntaxToken)TargetTokenAccessor(this.instance);
     public SyntaxToken EndOfDirectiveToken => this.instance.EndOfDirectiveToken;
     public Boolean IsActive => this.instance.IsActive;

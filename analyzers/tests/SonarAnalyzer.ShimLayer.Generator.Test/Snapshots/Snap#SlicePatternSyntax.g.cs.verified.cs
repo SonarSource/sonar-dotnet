@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.SlicePatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SlicePatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static SlicePatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(SlicePatternSyntaxWrapper));
-        DotDotTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "DotDotToken");
-        PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
-    }
 
     private SlicePatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharp
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> DotDotTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> DotDotTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "DotDotToken");
     public SyntaxToken DotDotToken => (SyntaxToken)DotDotTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.instance));
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TupleExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static TupleExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(TupleExpressionSyntaxWrapper));
-        OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
-        ArgumentsAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
-        CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
-    }
 
     private TupleExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenParenTokenAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor;
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
     public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseParenTokenAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
     public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

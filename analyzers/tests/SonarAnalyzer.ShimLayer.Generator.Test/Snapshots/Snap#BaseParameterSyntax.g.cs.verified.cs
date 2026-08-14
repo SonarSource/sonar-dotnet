@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct BaseParameterSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BaseParameterSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BaseParameterSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static BaseParameterSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(BaseParameterSyntaxWrapper));
-        AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-        ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxTokenList>(WrappedType, "Modifiers");
-        TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-    }
 
     private BaseParameterSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct BaseParameterSyntaxWrapper : ISyntaxWrapper<CShar
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
     public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxTokenList>(WrappedType, "Modifiers");
     public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor;
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
     public TypeSyntax Type => TypeAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

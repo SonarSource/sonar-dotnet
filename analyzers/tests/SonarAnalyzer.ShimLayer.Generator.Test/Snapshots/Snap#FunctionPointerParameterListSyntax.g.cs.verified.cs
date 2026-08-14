@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct FunctionPointerParameterListSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FunctionPointerParameterListSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerParameterListSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static FunctionPointerParameterListSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(FunctionPointerParameterListSyntaxWrapper));
-        LessThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "LessThanToken");
-        ParametersAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, FunctionPointerParameterSyntaxWrapper>(WrappedType, nameof(Parameters));
-        GreaterThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "GreaterThanToken");
-    }
 
     private FunctionPointerParameterListSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct FunctionPointerParameterListSyntaxWrapper : ISynt
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LessThanTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LessThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "LessThanToken");
     public SyntaxToken LessThanToken => (SyntaxToken)LessThanTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>> ParametersAccessor;
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>> ParametersAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, FunctionPointerParameterSyntaxWrapper>(WrappedType, nameof(Parameters));
     public SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper> Parameters => ParametersAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> GreaterThanTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> GreaterThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "GreaterThanToken");
     public SyntaxToken GreaterThanToken => (SyntaxToken)GreaterThanTokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

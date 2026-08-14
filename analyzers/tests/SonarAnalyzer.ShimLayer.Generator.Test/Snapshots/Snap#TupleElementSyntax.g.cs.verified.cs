@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct TupleElementSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleElementSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TupleElementSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static TupleElementSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(TupleElementSyntaxWrapper));
-        TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-        IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Identifier");
-    }
 
     private TupleElementSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct TupleElementSyntaxWrapper : ISyntaxWrapper<CSharp
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor;
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
     public TypeSyntax Type => TypeAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Identifier");
     public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

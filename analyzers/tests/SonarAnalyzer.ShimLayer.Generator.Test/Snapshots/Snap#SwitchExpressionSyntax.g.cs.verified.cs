@@ -28,19 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.SwitchExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static SwitchExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionSyntaxWrapper));
-        GoverningExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "GoverningExpression");
-        SwitchKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "SwitchKeyword");
-        OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBraceToken");
-        ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
-        CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBraceToken");
-    }
 
     private SwitchExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -53,15 +43,15 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor;
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "GoverningExpression");
     public ExpressionSyntax GoverningExpression => GoverningExpressionAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "SwitchKeyword");
     public SyntaxToken SwitchKeyword => (SyntaxToken)SwitchKeywordAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBraceToken");
     public SyntaxToken OpenBraceToken => (SyntaxToken)OpenBraceTokenAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor;
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
     public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBraceTokenAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBraceToken");
     public SyntaxToken CloseBraceToken => (SyntaxToken)CloseBraceTokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

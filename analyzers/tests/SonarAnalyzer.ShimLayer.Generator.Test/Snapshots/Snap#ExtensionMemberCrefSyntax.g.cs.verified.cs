@@ -28,19 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper<MemberCrefSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ExtensionMemberCrefSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
     private readonly MemberCrefSyntax instance;
-
-    static ExtensionMemberCrefSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
-        ExtensionKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
-        TypeArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
-        ParametersAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");
-        DotTokenAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "DotToken");
-        MemberAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
-    }
 
     private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax instance) =>
         this.instance = instance;
@@ -53,15 +43,15 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
 
     public MemberCrefSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor;
+    private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
     public SyntaxToken ExtensionKeyword => (SyntaxToken)ExtensionKeywordAccessor(this.instance);
-    private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor;
+    private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
     public TypeArgumentListSyntax TypeArgumentList => TypeArgumentListAccessor(this.instance);
-    private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor;
+    private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");
     public CrefParameterListSyntax Parameters => ParametersAccessor(this.instance);
-    private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor;
+    private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "DotToken");
     public SyntaxToken DotToken => (SyntaxToken)DotTokenAccessor(this.instance);
-    private static readonly Func<MemberCrefSyntax, MemberCrefSyntax> MemberAccessor;
+    private static readonly Func<MemberCrefSyntax, MemberCrefSyntax> MemberAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
     public MemberCrefSyntax Member => MemberAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

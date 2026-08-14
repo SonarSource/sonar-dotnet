@@ -28,18 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct SwitchExpressionArmSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.SwitchExpressionArmSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionArmSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static SwitchExpressionArmSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionArmSyntaxWrapper));
-        PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
-        WhenClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "WhenClause");
-        EqualsGreaterThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "EqualsGreaterThanToken");
-        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
-    }
 
     private SwitchExpressionArmSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -52,13 +43,13 @@ public readonly partial struct SwitchExpressionArmSyntaxWrapper : ISyntaxWrapper
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.instance));
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> WhenClauseAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> WhenClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "WhenClause");
     public WhenClauseSyntaxWrapper WhenClause => WhenClauseSyntaxWrapper.From(WhenClauseAccessor(this.instance));
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> EqualsGreaterThanTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> EqualsGreaterThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "EqualsGreaterThanToken");
     public SyntaxToken EqualsGreaterThanToken => (SyntaxToken)EqualsGreaterThanTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor;
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
     public ExpressionSyntax Expression => ExpressionAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

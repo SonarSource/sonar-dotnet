@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct RefExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RefExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static RefExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(RefExpressionSyntaxWrapper));
-        RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "RefKeyword");
-        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    }
 
     private RefExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct RefExpressionSyntaxWrapper : ISyntaxWrapper<Expre
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> RefKeywordAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "RefKeyword");
     public SyntaxToken RefKeyword => (SyntaxToken)RefKeywordAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor;
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
     public ExpressionSyntax Expression => ExpressionAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

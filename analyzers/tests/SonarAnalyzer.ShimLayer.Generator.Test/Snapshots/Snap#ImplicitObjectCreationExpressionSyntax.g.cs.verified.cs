@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct ImplicitObjectCreationExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ImplicitObjectCreationExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ImplicitObjectCreationExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static ImplicitObjectCreationExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(ImplicitObjectCreationExpressionSyntaxWrapper));
-        NewKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "NewKeyword");
-        ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
-        InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
-    }
 
     private ImplicitObjectCreationExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct ImplicitObjectCreationExpressionSyntaxWrapper : I
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "NewKeyword");
     public SyntaxToken NewKeyword => (SyntaxToken)NewKeywordAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, ArgumentListSyntax> ArgumentListAccessor;
+    private static readonly Func<ExpressionSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
     public ArgumentListSyntax ArgumentList => ArgumentListAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor;
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
     public InitializerExpressionSyntax Initializer => InitializerAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

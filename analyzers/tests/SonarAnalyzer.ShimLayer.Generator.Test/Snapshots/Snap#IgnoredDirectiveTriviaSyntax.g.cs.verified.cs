@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrapper<DirectiveTriviaSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IgnoredDirectiveTriviaSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IgnoredDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax instance;
-
-    static IgnoredDirectiveTriviaSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(IgnoredDirectiveTriviaSyntaxWrapper));
-        ColonTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "ColonToken");
-        ContentAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "Content");
-    }
 
     private IgnoredDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax instance) =>
         this.instance = instance;
@@ -51,9 +44,9 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     public DirectiveTriviaSyntax WrappedInstance => this.instance;
 
     public SyntaxToken HashToken => this.instance.HashToken;
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ColonTokenAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ColonTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "ColonToken");
     public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(this.instance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ContentAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ContentAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "Content");
     public SyntaxToken Content => (SyntaxToken)ContentAccessor(this.instance);
     public SyntaxToken EndOfDirectiveToken => this.instance.EndOfDirectiveToken;
     public Boolean IsActive => this.instance.IsActive;

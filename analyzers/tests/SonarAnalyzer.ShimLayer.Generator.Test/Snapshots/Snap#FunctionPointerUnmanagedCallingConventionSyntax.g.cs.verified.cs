@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct FunctionPointerUnmanagedCallingConventionSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FunctionPointerUnmanagedCallingConventionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerUnmanagedCallingConventionSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static FunctionPointerUnmanagedCallingConventionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(FunctionPointerUnmanagedCallingConventionSyntaxWrapper));
-        NameAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Name");
-    }
 
     private FunctionPointerUnmanagedCallingConventionSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -49,7 +43,7 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionSyntaxWr
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> NameAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> NameAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Name");
     public SyntaxToken Name => (SyntaxToken)NameAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

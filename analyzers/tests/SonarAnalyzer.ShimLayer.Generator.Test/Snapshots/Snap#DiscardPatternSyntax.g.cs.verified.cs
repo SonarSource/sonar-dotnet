@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.DiscardPatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DiscardPatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static DiscardPatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(DiscardPatternSyntaxWrapper));
-        UnderscoreTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "UnderscoreToken");
-    }
 
     private DiscardPatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -49,7 +43,7 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "UnderscoreToken");
     public SyntaxToken UnderscoreToken => (SyntaxToken)UnderscoreTokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

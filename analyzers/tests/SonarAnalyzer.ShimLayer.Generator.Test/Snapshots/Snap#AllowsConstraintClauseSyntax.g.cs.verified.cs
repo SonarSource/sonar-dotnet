@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrapper<TypeParameterConstraintSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.AllowsConstraintClauseSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintClauseSyntaxWrapper));
     private readonly TypeParameterConstraintSyntax instance;
-
-    static AllowsConstraintClauseSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintClauseSyntaxWrapper));
-        AllowsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "AllowsKeyword");
-        ConstraintsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper>(WrappedType, nameof(Constraints));
-    }
 
     private AllowsConstraintClauseSyntaxWrapper(TypeParameterConstraintSyntax instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
 
     public TypeParameterConstraintSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor;
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "AllowsKeyword");
     public SyntaxToken AllowsKeyword => (SyntaxToken)AllowsKeywordAccessor(this.instance);
-    private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>> ConstraintsAccessor;
+    private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>> ConstraintsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper>(WrappedType, nameof(Constraints));
     public SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> Constraints => ConstraintsAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

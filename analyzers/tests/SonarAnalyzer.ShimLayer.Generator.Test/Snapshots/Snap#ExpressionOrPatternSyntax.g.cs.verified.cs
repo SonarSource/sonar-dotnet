@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct ExpressionOrPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ExpressionOrPatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExpressionOrPatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static ExpressionOrPatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(ExpressionOrPatternSyntaxWrapper));
-
-    }
 
     private ExpressionOrPatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;

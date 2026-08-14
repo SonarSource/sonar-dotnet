@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TypePatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TypePatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static TypePatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(TypePatternSyntaxWrapper));
-        TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-    }
 
     private TypePatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -49,7 +43,7 @@ public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpS
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor;
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
     public TypeSyntax Type => TypeAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

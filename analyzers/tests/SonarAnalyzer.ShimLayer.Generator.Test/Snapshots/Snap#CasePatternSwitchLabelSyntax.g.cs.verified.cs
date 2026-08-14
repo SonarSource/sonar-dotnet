@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrapper<SwitchLabelSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.CasePatternSwitchLabelSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CasePatternSwitchLabelSyntaxWrapper));
     private readonly SwitchLabelSyntax instance;
-
-    static CasePatternSwitchLabelSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(CasePatternSwitchLabelSyntaxWrapper));
-        PatternAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
-        WhenClauseAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "WhenClause");
-    }
 
     private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax instance) =>
         this.instance = instance;
@@ -51,9 +44,9 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     public SwitchLabelSyntax WrappedInstance => this.instance;
 
     public SyntaxToken Keyword => this.instance.Keyword;
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor;
+    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.instance));
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> WhenClauseAccessor;
+    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> WhenClauseAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "WhenClause");
     public WhenClauseSyntaxWrapper WhenClause => WhenClauseSyntaxWrapper.From(WhenClauseAccessor(this.instance));
     public SyntaxToken ColonToken => this.instance.ColonToken;
     public String Language => this.instance.Language;

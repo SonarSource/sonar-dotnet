@@ -28,15 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ExtensionBlockDeclarationSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExtensionBlockDeclarationSyntaxWrapper));
     private readonly TypeDeclarationSyntax instance;
-
-    static ExtensionBlockDeclarationSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(ExtensionBlockDeclarationSyntaxWrapper));
-        ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
-    }
 
     private ExtensionBlockDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
         this.instance = instance;
@@ -55,7 +49,7 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     public SyntaxTokenList Modifiers => this.instance.Modifiers;
     public SyntaxToken Keyword => this.instance.Keyword;
     public TypeParameterListSyntax TypeParameterList => this.instance.TypeParameterList;
-    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor;
+    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
     public ParameterListSyntax ParameterList => ParameterListAccessor(this.instance);
     public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => this.instance.ConstraintClauses;
     public SyntaxToken OpenBraceToken => this.instance.OpenBraceToken;

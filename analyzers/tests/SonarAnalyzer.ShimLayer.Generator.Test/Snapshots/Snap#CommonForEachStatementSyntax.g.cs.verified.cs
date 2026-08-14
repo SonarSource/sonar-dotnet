@@ -28,22 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct CommonForEachStatementSyntaxWrapper : ISyntaxWrapper<StatementSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.CommonForEachStatementSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CommonForEachStatementSyntaxWrapper));
     private readonly StatementSyntax instance;
-
-    static CommonForEachStatementSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(CommonForEachStatementSyntaxWrapper));
-        AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
-        ForEachKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "ForEachKeyword");
-        OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
-        InKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "InKeyword");
-        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ExpressionSyntax>(WrappedType, "Expression");
-        CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
-        StatementAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, StatementSyntax>(WrappedType, "Statement");
-        AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    }
 
     private CommonForEachStatementSyntaxWrapper(StatementSyntax instance) =>
         this.instance = instance;
@@ -56,21 +43,21 @@ public readonly partial struct CommonForEachStatementSyntaxWrapper : ISyntaxWrap
 
     public StatementSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<StatementSyntax, SyntaxToken> AwaitKeywordAccessor;
+    private static readonly Func<StatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
     public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(this.instance);
-    private static readonly Func<StatementSyntax, SyntaxToken> ForEachKeywordAccessor;
+    private static readonly Func<StatementSyntax, SyntaxToken> ForEachKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "ForEachKeyword");
     public SyntaxToken ForEachKeyword => (SyntaxToken)ForEachKeywordAccessor(this.instance);
-    private static readonly Func<StatementSyntax, SyntaxToken> OpenParenTokenAccessor;
+    private static readonly Func<StatementSyntax, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
-    private static readonly Func<StatementSyntax, SyntaxToken> InKeywordAccessor;
+    private static readonly Func<StatementSyntax, SyntaxToken> InKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "InKeyword");
     public SyntaxToken InKeyword => (SyntaxToken)InKeywordAccessor(this.instance);
-    private static readonly Func<StatementSyntax, ExpressionSyntax> ExpressionAccessor;
+    private static readonly Func<StatementSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ExpressionSyntax>(WrappedType, "Expression");
     public ExpressionSyntax Expression => ExpressionAccessor(this.instance);
-    private static readonly Func<StatementSyntax, SyntaxToken> CloseParenTokenAccessor;
+    private static readonly Func<StatementSyntax, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
     public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
-    private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor;
+    private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, StatementSyntax>(WrappedType, "Statement");
     public StatementSyntax Statement => StatementAccessor(this.instance);
-    private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor;
+    private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
     public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

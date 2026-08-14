@@ -28,17 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.SubpatternSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SubpatternSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static SubpatternSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(SubpatternSyntaxWrapper));
-        NameColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, NameColonSyntax>(WrappedType, "NameColon");
-        ExpressionColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "ExpressionColon");
-        PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
-    }
 
     private SubpatternSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -51,11 +43,11 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor;
+    private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, NameColonSyntax>(WrappedType, "NameColon");
     public NameColonSyntax NameColon => NameColonAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> ExpressionColonAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> ExpressionColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "ExpressionColon");
     public BaseExpressionColonSyntaxWrapper ExpressionColon => BaseExpressionColonSyntaxWrapper.From(ExpressionColonAccessor(this.instance));
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor;
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.instance));
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

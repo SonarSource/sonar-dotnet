@@ -28,21 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleTypeSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TupleTypeSyntaxWrapper));
     private readonly TypeSyntax instance;
-
-    static TupleTypeSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(TupleTypeSyntaxWrapper));
-        OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
-        ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeSyntax, TupleElementSyntaxWrapper>(WrappedType, nameof(Elements));
-        CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
-        IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-        IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-        IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-        IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
-    }
 
     private TupleTypeSyntaxWrapper(TypeSyntax instance) =>
         this.instance = instance;
@@ -55,20 +43,20 @@ public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSynta
 
     public TypeSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<TypeSyntax, SyntaxToken> OpenParenTokenAccessor;
+    private static readonly Func<TypeSyntax, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
-    private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>> ElementsAccessor;
+    private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>> ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeSyntax, TupleElementSyntaxWrapper>(WrappedType, nameof(Elements));
     public SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> Elements => ElementsAccessor(this.instance);
-    private static readonly Func<TypeSyntax, SyntaxToken> CloseParenTokenAccessor;
+    private static readonly Func<TypeSyntax, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
     public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
     public Boolean IsVar => this.instance.IsVar;
-    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
     public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
     public Boolean IsNotNull => (Boolean)IsNotNullAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
     public Boolean IsNint => (Boolean)IsNintAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
     public Boolean IsNuint => (Boolean)IsNuintAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

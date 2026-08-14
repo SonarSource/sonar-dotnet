@@ -28,22 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FunctionPointerTypeSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerTypeSyntaxWrapper));
     private readonly TypeSyntax instance;
-
-    static FunctionPointerTypeSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(FunctionPointerTypeSyntaxWrapper));
-        DelegateKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "DelegateKeyword");
-        AsteriskTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "AsteriskToken");
-        CallingConventionAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "CallingConvention");
-        ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "ParameterList");
-        IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-        IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-        IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-        IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
-    }
 
     private FunctionPointerTypeSyntaxWrapper(TypeSyntax instance) =>
         this.instance = instance;
@@ -56,22 +43,22 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
 
     public TypeSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<TypeSyntax, SyntaxToken> DelegateKeywordAccessor;
+    private static readonly Func<TypeSyntax, SyntaxToken> DelegateKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "DelegateKeyword");
     public SyntaxToken DelegateKeyword => (SyntaxToken)DelegateKeywordAccessor(this.instance);
-    private static readonly Func<TypeSyntax, SyntaxToken> AsteriskTokenAccessor;
+    private static readonly Func<TypeSyntax, SyntaxToken> AsteriskTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "AsteriskToken");
     public SyntaxToken AsteriskToken => (SyntaxToken)AsteriskTokenAccessor(this.instance);
-    private static readonly Func<TypeSyntax, CSharpSyntaxNode> CallingConventionAccessor;
+    private static readonly Func<TypeSyntax, CSharpSyntaxNode> CallingConventionAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "CallingConvention");
     public FunctionPointerCallingConventionSyntaxWrapper CallingConvention => FunctionPointerCallingConventionSyntaxWrapper.From(CallingConventionAccessor(this.instance));
-    private static readonly Func<TypeSyntax, CSharpSyntaxNode> ParameterListAccessor;
+    private static readonly Func<TypeSyntax, CSharpSyntaxNode> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "ParameterList");
     public FunctionPointerParameterListSyntaxWrapper ParameterList => FunctionPointerParameterListSyntaxWrapper.From(ParameterListAccessor(this.instance));
     public Boolean IsVar => this.instance.IsVar;
-    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
     public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
     public Boolean IsNotNull => (Boolean)IsNotNullAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
     public Boolean IsNint => (Boolean)IsNintAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
     public Boolean IsNuint => (Boolean)IsNuintAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

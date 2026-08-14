@@ -28,20 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ScopedTypeSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ScopedTypeSyntaxWrapper));
     private readonly TypeSyntax instance;
-
-    static ScopedTypeSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(ScopedTypeSyntaxWrapper));
-        ScopedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "ScopedKeyword");
-        TypeAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, TypeSyntax>(WrappedType, "Type");
-        IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-        IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-        IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-        IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
-    }
 
     private ScopedTypeSyntaxWrapper(TypeSyntax instance) =>
         this.instance = instance;
@@ -54,18 +43,18 @@ public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSynt
 
     public TypeSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<TypeSyntax, SyntaxToken> ScopedKeywordAccessor;
+    private static readonly Func<TypeSyntax, SyntaxToken> ScopedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "ScopedKeyword");
     public SyntaxToken ScopedKeyword => (SyntaxToken)ScopedKeywordAccessor(this.instance);
-    private static readonly Func<TypeSyntax, TypeSyntax> TypeAccessor;
+    private static readonly Func<TypeSyntax, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, TypeSyntax>(WrappedType, "Type");
     public TypeSyntax Type => TypeAccessor(this.instance);
     public Boolean IsVar => this.instance.IsVar;
-    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
     public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
     public Boolean IsNotNull => (Boolean)IsNotNullAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
     public Boolean IsNint => (Boolean)IsNintAccessor(this.instance);
-    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor;
+    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
     public Boolean IsNuint => (Boolean)IsNuintAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

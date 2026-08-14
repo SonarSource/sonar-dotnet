@@ -15,7 +15,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.TestFramework.Extensions;
 
@@ -61,15 +60,9 @@ public class OperationWrapStrategyTest
             public readonly partial struct IFieldInitializerOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldInitializerOperationWrapper));
                 private readonly IOperation instance;
-
-                static IFieldInitializerOperationWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(IFieldInitializerOperationWrapper));
-
-                }
 
                 private IFieldInitializerOperationWrapper(IOperation instance) =>
                     this.instance = instance;
@@ -149,15 +142,9 @@ public class OperationWrapStrategyTest
             public readonly partial struct IFieldReferenceOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldReferenceOperationWrapper));
                 private readonly IOperation instance;
-
-                static IFieldReferenceOperationWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(IFieldReferenceOperationWrapper));
-
-                }
 
                 private IFieldReferenceOperationWrapper(IOperation instance) =>
                     this.instance = instance;
@@ -240,16 +227,9 @@ public class OperationWrapStrategyTest
             public readonly partial struct ITupleOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITupleOperation";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ITupleOperationWrapper));
                 private readonly IOperation instance;
-
-                static ITupleOperationWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(ITupleOperationWrapper));
-                    ElementsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<IOperation>>(WrappedType, "Elements");
-                    NaturalTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NaturalType");
-                }
 
                 private ITupleOperationWrapper(IOperation instance) =>
                     this.instance = instance;
@@ -259,9 +239,9 @@ public class OperationWrapStrategyTest
 
                 public IOperation WrappedInstance => this.instance;
 
-                private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor;
+                private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<IOperation>>(WrappedType, "Elements");
                 public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(this.instance);
-                private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor;
+                private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NaturalType");
                 public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(this.instance);
                 public ITypeSymbol Type => this.instance.Type;
 

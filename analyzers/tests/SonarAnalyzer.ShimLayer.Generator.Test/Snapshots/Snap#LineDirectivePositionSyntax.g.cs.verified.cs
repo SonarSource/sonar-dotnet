@@ -28,19 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineDirectivePositionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineDirectivePositionSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static LineDirectivePositionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(LineDirectivePositionSyntaxWrapper));
-        OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
-        LineAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Line");
-        CommaTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CommaToken");
-        CharacterAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Character");
-        CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
-    }
 
     private LineDirectivePositionSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -53,15 +43,15 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapp
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LineAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LineAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Line");
     public SyntaxToken Line => (SyntaxToken)LineAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CommaTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CommaTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CommaToken");
     public SyntaxToken CommaToken => (SyntaxToken)CommaTokenAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CharacterAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CharacterAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Character");
     public SyntaxToken Character => (SyntaxToken)CharacterAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
     public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

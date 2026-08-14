@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct ThrowExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ThrowExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ThrowExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static ThrowExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(ThrowExpressionSyntaxWrapper));
-        ThrowKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "ThrowKeyword");
-        ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    }
 
     private ThrowExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct ThrowExpressionSyntaxWrapper : ISyntaxWrapper<Exp
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> ThrowKeywordAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> ThrowKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "ThrowKeyword");
     public SyntaxToken ThrowKeyword => (SyntaxToken)ThrowKeywordAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor;
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
     public ExpressionSyntax Expression => ExpressionAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

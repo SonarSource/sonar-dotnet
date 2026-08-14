@@ -28,20 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWrapper<DirectiveTriviaSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineSpanDirectiveTriviaSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineSpanDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax instance;
-
-    static LineSpanDirectiveTriviaSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(LineSpanDirectiveTriviaSyntaxWrapper));
-        LineKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
-        StartAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "Start");
-        MinusTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "MinusToken");
-        EndAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "End");
-        CharacterOffsetAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "CharacterOffset");
-        FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
-    }
 
     private LineSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax instance) =>
         this.instance = instance;
@@ -55,17 +44,17 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public DirectiveTriviaSyntax WrappedInstance => this.instance;
 
     public SyntaxToken HashToken => this.instance.HashToken;
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
     public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(this.instance);
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> StartAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> StartAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "Start");
     public LineDirectivePositionSyntaxWrapper Start => LineDirectivePositionSyntaxWrapper.From(StartAccessor(this.instance));
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> MinusTokenAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> MinusTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "MinusToken");
     public SyntaxToken MinusToken => (SyntaxToken)MinusTokenAccessor(this.instance);
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> EndAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> EndAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "End");
     public LineDirectivePositionSyntaxWrapper End => LineDirectivePositionSyntaxWrapper.From(EndAccessor(this.instance));
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> CharacterOffsetAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> CharacterOffsetAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "CharacterOffset");
     public SyntaxToken CharacterOffset => (SyntaxToken)CharacterOffsetAccessor(this.instance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor;
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
     public SyntaxToken File => (SyntaxToken)FileAccessor(this.instance);
     public SyntaxToken EndOfDirectiveToken => this.instance.EndOfDirectiveToken;
     public Boolean IsActive => this.instance.IsActive;

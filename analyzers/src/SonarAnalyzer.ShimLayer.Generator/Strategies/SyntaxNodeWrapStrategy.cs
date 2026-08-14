@@ -27,15 +27,9 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
         public readonly partial struct {{Latest.Name}}Wrapper : ISyntaxWrapper<{{CompiletimeTypeSnippet()}}>
         {
             public const string WrappedTypeName = "{{Latest.FullName}}";
-            private static readonly Type WrappedType;
 
+            private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
             private readonly {{CompiletimeTypeSnippet()}} instance;
-
-            static {{Latest.Name}}Wrapper()
-            {
-                WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
-        {{JoinLines(Members.Where(x => !x.IsPassthrough).Select(x => MemberAccessorInitialization(x.Member, model)))}}
-            }
 
             private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} instance) =>
                 this.instance = instance;

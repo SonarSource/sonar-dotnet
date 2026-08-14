@@ -28,18 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ImplicitStackAllocArrayCreationExpressionSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper));
     private readonly ExpressionSyntax instance;
-
-    static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper));
-        StackAllocKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "StackAllocKeyword");
-        OpenBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBracketToken");
-        CloseBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBracketToken");
-        InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
-    }
 
     private ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(ExpressionSyntax instance) =>
         this.instance = instance;
@@ -52,13 +43,13 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
 
     public ExpressionSyntax WrappedInstance => this.instance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> StackAllocKeywordAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> StackAllocKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "StackAllocKeyword");
     public SyntaxToken StackAllocKeyword => (SyntaxToken)StackAllocKeywordAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBracketToken");
     public SyntaxToken OpenBracketToken => (SyntaxToken)OpenBracketTokenAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBracketTokenAccessor;
+    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBracketToken");
     public SyntaxToken CloseBracketToken => (SyntaxToken)CloseBracketTokenAccessor(this.instance);
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor;
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
     public InitializerExpressionSyntax Initializer => InitializerAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;

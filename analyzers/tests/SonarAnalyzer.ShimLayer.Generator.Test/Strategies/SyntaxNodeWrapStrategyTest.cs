@@ -64,15 +64,9 @@ public class SyntaxNodeWrapStrategyTest
             public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                 private readonly TypeDeclarationSyntax instance;
-
-                static RecordDeclarationSyntaxWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-
-                }
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
                     this.instance = instance;
@@ -160,15 +154,9 @@ public class SyntaxNodeWrapStrategyTest
             public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                 private readonly TypeDeclarationSyntax instance;
-
-                static RecordDeclarationSyntaxWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-                    ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
-                }
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
                     this.instance = instance;
@@ -182,7 +170,7 @@ public class SyntaxNodeWrapStrategyTest
                 public TypeDeclarationSyntax WrappedInstance => this.instance;
 
                 public TextSpan Span => this.instance.Span;
-                private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor;
+                private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
                 public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(this.instance);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
@@ -258,15 +246,9 @@ public class SyntaxNodeWrapStrategyTest
             public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
                 private readonly ExpressionSyntax instance;
-
-                static IsPatternExpressionSyntaxWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
-                    PatternAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
-                }
 
                 private IsPatternExpressionSyntaxWrapper(ExpressionSyntax instance) =>
                     this.instance = instance;
@@ -279,7 +261,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 public ExpressionSyntax WrappedInstance => this.instance;
 
-                private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor;
+                private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
                 public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.instance));
 
                 public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
@@ -354,15 +336,9 @@ public class SyntaxNodeWrapStrategyTest
             public readonly partial struct ConstantPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ConstantPatternSyntaxWrapper));
                 private readonly CSharpSyntaxNode instance;
-
-                static ConstantPatternSyntaxWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(ConstantPatternSyntaxWrapper));
-
-                }
 
                 private ConstantPatternSyntaxWrapper(CSharpSyntaxNode instance) =>
                     this.instance = instance;
@@ -452,15 +428,9 @@ public class SyntaxNodeWrapStrategyTest
             public readonly partial struct SyntaxNodeWrapper : ISyntaxWrapper<SyntaxNode>
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.SyntaxNode";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SyntaxNodeWrapper));
                 private readonly SyntaxNode instance;
-
-                static SyntaxNodeWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(SyntaxNodeWrapper));
-
-                }
 
                 private SyntaxNodeWrapper(SyntaxNode instance) =>
                     this.instance = instance;
@@ -544,15 +514,9 @@ public class SyntaxNodeWrapStrategyTest
             public readonly partial struct IndexerDeclarationSyntaxWrapper : ISyntaxWrapper<SyntaxNode>
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
                 private readonly SyntaxNode instance;
-
-                static IndexerDeclarationSyntaxWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
-
-                }
 
                 private IndexerDeclarationSyntaxWrapper(SyntaxNode instance) =>
                     this.instance = instance;
@@ -645,17 +609,9 @@ public class SyntaxNodeWrapStrategyTest
             public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
-                private static readonly Type WrappedType;
 
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                 private readonly TypeDeclarationSyntax instance;
-
-                static RecordDeclarationSyntaxWrapper()
-                {
-                    WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-                    MembersAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
-                    ArgumentsAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
-                    ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeDeclarationSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
-                }
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
                     this.instance = instance;
@@ -668,12 +624,12 @@ public class SyntaxNodeWrapStrategyTest
 
                 public TypeDeclarationSyntax WrappedInstance => this.instance;
 
-                private static readonly Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor;
+                private static readonly Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
                 public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(this.instance);
                 public SyntaxList<AttributeListSyntax> AttributeLists => this.instance.AttributeLists;
-                private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor;
+                private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
                 public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(this.instance);
-                private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor;
+                private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeDeclarationSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
                 public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(this.instance);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>

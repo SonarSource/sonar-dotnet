@@ -28,16 +28,9 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RefStructConstraintSyntax";
-    private static readonly Type WrappedType;
 
+    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefStructConstraintSyntaxWrapper));
     private readonly CSharpSyntaxNode instance;
-
-    static RefStructConstraintSyntaxWrapper()
-    {
-        WrappedType = TypeRegister.LatestType(typeof(RefStructConstraintSyntaxWrapper));
-        RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "RefKeyword");
-        StructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "StructKeyword");
-    }
 
     private RefStructConstraintSyntaxWrapper(CSharpSyntaxNode instance) =>
         this.instance = instance;
@@ -50,9 +43,9 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
 
     public CSharpSyntaxNode WrappedInstance => this.instance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "RefKeyword");
     public SyntaxToken RefKeyword => (SyntaxToken)RefKeywordAccessor(this.instance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> StructKeywordAccessor;
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> StructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "StructKeyword");
     public SyntaxToken StructKeyword => (SyntaxToken)StructKeywordAccessor(this.instance);
     public String Language => this.instance.Language;
     public Int32 RawKind => this.instance.RawKind;
