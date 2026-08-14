@@ -26,6 +26,14 @@ namespace SonarAnalyzer.Core.Rules
         private const int DefaultValueMaximum = 7;
 
         protected static readonly ImmutableArray<KnownType> DependencyInjectionAttributes = ImmutableArray.Create(
+            KnownType.HotChocolate_EventMessageAttribute,
+            KnownType.HotChocolate_GlobalStateAttribute,
+            KnownType.HotChocolate_LocalStateAttribute,
+            KnownType.HotChocolate_ParentAttribute,
+            KnownType.HotChocolate_SchemaServiceAttribute,
+            KnownType.HotChocolate_ScopedServiceAttribute,  // Obsolete since Hot Chocolate 13 and removed in 14
+            KnownType.HotChocolate_ScopedStateAttribute,
+            KnownType.HotChocolate_ServiceAttribute,
             KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute,
             KnownType.Microsoft_Extensions_DependencyInjection_FromKeyedServicesAttribute);
 

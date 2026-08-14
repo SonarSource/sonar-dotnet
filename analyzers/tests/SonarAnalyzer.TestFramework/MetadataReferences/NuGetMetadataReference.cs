@@ -67,6 +67,7 @@ public static class NuGetMetadataReference
             .. Create("FsCheck.NUnit", packageVersion),
             .. NUnit(TestConstants.NuGetLatestVersion),
         ];
+    public static References HotChocolateAbstractions(string packageVersion = TestConstants.NuGetLatestVersion) => Create("HotChocolate.Abstractions", packageVersion);
     public static References JetBrainsDotMemoryUnit(string packageVersion) => Create("JetBrains.DotMemoryUnit", packageVersion);
     public static References JustMock(string packageVersion) => Create("JustMock", packageVersion);
     public static References JWT(string packageVersion) => Create("JWT", packageVersion);

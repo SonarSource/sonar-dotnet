@@ -64,6 +64,12 @@ public class TooManyParametersTest
             .Verify();
 
     [TestMethod]
+    public void TooManyParameters_CS_HotChocolate() =>
+        builderCSMax3.AddPaths("TooManyParameters_HotChocolate.cs")
+            .AddReferences(NuGetMetadataReference.HotChocolateAbstractions("13.9.14"))   // Pinned to 13.x, the last major version declaring ScopedServiceAttribute
+            .Verify();
+
+    [TestMethod]
     public void TooManyParameters_VB_CustomValues() =>
         builderVBMax3.AddPaths("TooManyParameters_CustomValues.vb").Verify();
 

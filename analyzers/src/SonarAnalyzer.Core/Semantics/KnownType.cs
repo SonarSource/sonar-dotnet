@@ -45,6 +45,14 @@ public sealed partial class KnownType
     public static readonly KnownType FluentValidation_IValidator_T = new("FluentValidation.IValidator", "T");
     public static readonly KnownType FsCheck_NUnit_PropertyAttribute = new("FsCheck.NUnit.PropertyAttribute");
     public static readonly KnownType FsCheck_Xunit_PropertyAttribute = new("FsCheck.Xunit.PropertyAttribute");
+    public static readonly KnownType HotChocolate_EventMessageAttribute = new("HotChocolate.EventMessageAttribute");
+    public static readonly KnownType HotChocolate_GlobalStateAttribute = new("HotChocolate.GlobalStateAttribute");
+    public static readonly KnownType HotChocolate_LocalStateAttribute = new("HotChocolate.LocalStateAttribute");
+    public static readonly KnownType HotChocolate_ParentAttribute = new("HotChocolate.ParentAttribute");
+    public static readonly KnownType HotChocolate_SchemaServiceAttribute = new("HotChocolate.SchemaServiceAttribute");
+    public static readonly KnownType HotChocolate_ScopedServiceAttribute = new("HotChocolate.ScopedServiceAttribute");
+    public static readonly KnownType HotChocolate_ScopedStateAttribute = new("HotChocolate.ScopedStateAttribute");
+    public static readonly KnownType HotChocolate_ServiceAttribute = new("HotChocolate.ServiceAttribute");
     public static readonly KnownType JWT_Builder_JwtBuilder = new("JWT.Builder.JwtBuilder");
     public static readonly KnownType JWT_IJwtDecoder = new("JWT.IJwtDecoder");
     public static readonly KnownType JWT_JwtDecoderExtensions = new("JWT.JwtDecoderExtensions");
