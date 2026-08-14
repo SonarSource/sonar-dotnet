@@ -32,6 +32,10 @@ public readonly partial struct WithExpressionSyntaxWrapper : ISyntaxWrapper<Expr
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(WithExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> WithKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "WithKeyword");
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
+
     private WithExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct WithExpressionSyntaxWrapper : ISyntaxWrapper<Expr
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> WithKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "WithKeyword");
-    public SyntaxToken WithKeyword => (SyntaxToken)WithKeywordAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
-    public InitializerExpressionSyntax Initializer => InitializerAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct WithExpressionSyntaxWrapper : ISyntaxWrapper<Expr
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
+    public SyntaxToken WithKeyword => (SyntaxToken)WithKeywordAccessor(wrappedInstance);
+    public InitializerExpressionSyntax Initializer => InitializerAccessor(wrappedInstance);
 
     public static explicit operator WithExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

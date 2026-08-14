@@ -32,6 +32,10 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PropertyPatternClauseSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenBraceToken");
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseBraceToken");
+
     private PropertyPatternClauseSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenBraceToken");
-    public SyntaxToken OpenBraceToken => (SyntaxToken)OpenBraceTokenAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
-    public SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> Subpatterns => SubpatternsAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseBraceToken");
-    public SyntaxToken CloseBraceToken => (SyntaxToken)CloseBraceTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken OpenBraceToken => (SyntaxToken)OpenBraceTokenAccessor(wrappedInstance);
+    public SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> Subpatterns => SubpatternsAccessor(wrappedInstance);
+    public SyntaxToken CloseBraceToken => (SyntaxToken)CloseBraceTokenAccessor(wrappedInstance);
 
     public static explicit operator PropertyPatternClauseSyntaxWrapper(SyntaxNode node) =>
         From(node);

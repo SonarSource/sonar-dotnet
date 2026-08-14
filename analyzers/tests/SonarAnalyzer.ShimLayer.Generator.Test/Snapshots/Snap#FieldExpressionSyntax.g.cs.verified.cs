@@ -32,6 +32,8 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FieldExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, SyntaxToken> TokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "Token");
+
     private FieldExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> TokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "Token");
-    public SyntaxToken Token => (SyntaxToken)TokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken Token => (SyntaxToken)TokenAccessor(wrappedInstance);
 
     public static explicit operator FieldExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

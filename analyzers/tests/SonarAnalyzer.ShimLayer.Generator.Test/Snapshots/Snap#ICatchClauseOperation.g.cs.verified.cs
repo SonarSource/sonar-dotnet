@@ -32,6 +32,17 @@ public readonly partial struct ICatchClauseOperationWrapper : IOperationWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ICatchClauseOperationWrapper));
     private readonly IOperation wrappedInstance;
 
+    private static readonly Func<IOperation, IOperation> ExceptionDeclarationOrExpressionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "ExceptionDeclarationOrExpression");
+    private static readonly Func<IOperation, ITypeSymbol> ExceptionTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "ExceptionType");
+    private static readonly Func<IOperation, ImmutableArray<ILocalSymbol>> LocalsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<ILocalSymbol>>(WrappedType, "Locals");
+    private static readonly Func<IOperation, IOperation> FilterAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Filter");
+    private static readonly Func<IOperation, IOperation> HandlerAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Handler");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
+
     private ICatchClauseOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -40,30 +51,21 @@ public readonly partial struct ICatchClauseOperationWrapper : IOperationWrapper
 
     public IOperation WrappedInstance => wrappedInstance;
 
-    private static readonly Func<IOperation, IOperation> ExceptionDeclarationOrExpressionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "ExceptionDeclarationOrExpression");
-    public IOperation ExceptionDeclarationOrExpression => ExceptionDeclarationOrExpressionAccessor(wrappedInstance);
-    private static readonly Func<IOperation, ITypeSymbol> ExceptionTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "ExceptionType");
-    public ITypeSymbol ExceptionType => (ITypeSymbol)ExceptionTypeAccessor(wrappedInstance);
-    private static readonly Func<IOperation, ImmutableArray<ILocalSymbol>> LocalsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<ILocalSymbol>>(WrappedType, "Locals");
-    public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(wrappedInstance);
-    private static readonly Func<IOperation, IOperation> FilterAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Filter");
-    public IOperation Filter => FilterAccessor(wrappedInstance);
-    private static readonly Func<IOperation, IOperation> HandlerAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Handler");
-    public IBlockOperationWrapper Handler => IBlockOperationWrapper.From(HandlerAccessor(wrappedInstance));
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    public IOperation Parent => ParentAccessor(wrappedInstance);
     public OperationKind Kind => wrappedInstance.Kind;
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
     public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+
+    public IOperation ExceptionDeclarationOrExpression => ExceptionDeclarationOrExpressionAccessor(wrappedInstance);
+    public ITypeSymbol ExceptionType => (ITypeSymbol)ExceptionTypeAccessor(wrappedInstance);
+    public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(wrappedInstance);
+    public IOperation Filter => FilterAccessor(wrappedInstance);
+    public IBlockOperationWrapper Handler => IBlockOperationWrapper.From(HandlerAccessor(wrappedInstance));
+    public IOperation Parent => ParentAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
     public String Language => (String)LanguageAccessor(wrappedInstance);
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
     public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]

@@ -32,6 +32,10 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper : I
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ParenthesizedVariableDesignationSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper>> VariablesAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, VariableDesignationSyntaxWrapper>(WrappedType, nameof(Variables));
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
+
     private ParenthesizedVariableDesignationSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper : I
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
-    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper>> VariablesAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, VariableDesignationSyntaxWrapper>(WrappedType, nameof(Variables));
-    public SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper> Variables => VariablesAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
-    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper : I
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
+    public SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper> Variables => VariablesAccessor(wrappedInstance);
+    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(wrappedInstance);
 
     public static explicit operator ParenthesizedVariableDesignationSyntaxWrapper(SyntaxNode node) =>
         From(node);

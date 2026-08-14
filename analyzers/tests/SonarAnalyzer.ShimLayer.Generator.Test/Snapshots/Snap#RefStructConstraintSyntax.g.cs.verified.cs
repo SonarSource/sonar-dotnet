@@ -32,6 +32,9 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefStructConstraintSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "RefKeyword");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> StructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "StructKeyword");
+
     private RefStructConstraintSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "RefKeyword");
-    public SyntaxToken RefKeyword => (SyntaxToken)RefKeywordAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> StructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "StructKeyword");
-    public SyntaxToken StructKeyword => (SyntaxToken)StructKeywordAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken RefKeyword => (SyntaxToken)RefKeywordAccessor(wrappedInstance);
+    public SyntaxToken StructKeyword => (SyntaxToken)StructKeywordAccessor(wrappedInstance);
 
     public static explicit operator RefStructConstraintSyntaxWrapper(SyntaxNode node) =>
         From(node);

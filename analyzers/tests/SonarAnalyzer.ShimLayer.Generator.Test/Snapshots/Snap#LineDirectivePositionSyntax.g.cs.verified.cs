@@ -32,6 +32,12 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineDirectivePositionSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LineAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Line");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CommaTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CommaToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CharacterAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Character");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
+
     private LineDirectivePositionSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,16 +49,6 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapp
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenParenToken");
-    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LineAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Line");
-    public SyntaxToken Line => (SyntaxToken)LineAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CommaTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CommaToken");
-    public SyntaxToken CommaToken => (SyntaxToken)CommaTokenAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CharacterAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Character");
-    public SyntaxToken Character => (SyntaxToken)CharacterAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseParenToken");
-    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -69,6 +65,12 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapp
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
+    public SyntaxToken Line => (SyntaxToken)LineAccessor(wrappedInstance);
+    public SyntaxToken CommaToken => (SyntaxToken)CommaTokenAccessor(wrappedInstance);
+    public SyntaxToken Character => (SyntaxToken)CharacterAccessor(wrappedInstance);
+    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(wrappedInstance);
 
     public static explicit operator LineDirectivePositionSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -45,6 +45,15 @@ public abstract class WrapStrategy : Strategy
 
     protected override string GenerateCore(StrategyModel model)
     {
+        var passthroughProperties = Members
+            .Select(x => x.IsPassthrough && x.Member is PropertyInfo pi ? new PropertyPassthroughSnippet(this, pi, model[pi.PropertyType]) : null)
+            .Where(x => x is not null)
+            .ToArray();
+        var wrapProperties = Members
+            .Select(x => !x.IsPassthrough && x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, pi, returnType) : null)
+            .Where(x => x is not null)
+            .ToArray();
+
         return $$"""
             {{Preamble()}}
             public readonly partial struct {{Latest.Name}}Wrapper : {{BaseTypeSnippet}}
@@ -54,6 +63,8 @@ public abstract class WrapStrategy : Strategy
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
                 private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
 
+            {{JoinLines(wrapProperties.Select(x => x.AccessorDeclaration()))}}
+
                 private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
@@ -61,7 +72,9 @@ public abstract class WrapStrategy : Strategy
 
                 public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
 
-            {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
+            {{JoinLines(passthroughProperties.Select(x => x.MemberDeclaration(4)))}}
+
+            {{JoinLines(wrapProperties.Select(x => x.MemberDeclaration(4)))}}
 
             {{ConversionSnippet}}
 
@@ -84,17 +97,4 @@ public abstract class WrapStrategy : Strategy
         }
         return sb?.ToString();
     }
-
-    protected string MemberDeclaration(MemberDescriptor member, StrategyModel model) =>
-        member switch
-        {
-            { IsPassthrough: true, Member: PropertyInfo pi } when new PropertyPassthroughSnippet(this, pi, model[pi.PropertyType]) is var snippet => $"""
-                {snippet.MemberDeclaration(4)}
-                """,
-            { IsPassthrough: false, Member: PropertyInfo pi } when model[pi.PropertyType] is { IsSupported: true } propertyTypeStrategy && new PropertyWrapSnippet(this, pi, propertyTypeStrategy) is var snippet => $"""
-                {snippet.AccessorDeclaration()}
-                {snippet.MemberDeclaration(4)}
-                """,
-            _ => null,
-        };
 }

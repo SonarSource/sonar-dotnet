@@ -32,6 +32,9 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
     private readonly TypeDeclarationSyntax wrappedInstance;
 
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
+    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
+
     private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -46,12 +49,8 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;
     public SyntaxTokenList Modifiers => wrappedInstance.Modifiers;
     public SyntaxToken Keyword => wrappedInstance.Keyword;
-    private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
-    public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(wrappedInstance);
     public SyntaxToken Identifier => wrappedInstance.Identifier;
     public TypeParameterListSyntax TypeParameterList => wrappedInstance.TypeParameterList;
-    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
-    public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
     public BaseListSyntax BaseList => wrappedInstance.BaseList;
     public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => wrappedInstance.ConstraintClauses;
     public SyntaxToken OpenBraceToken => wrappedInstance.OpenBraceToken;
@@ -75,6 +74,9 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(wrappedInstance);
+    public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
 
     public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -32,6 +32,13 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineSpanDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax wrappedInstance;
 
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
+    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> StartAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "Start");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> MinusTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "MinusToken");
+    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> EndAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "End");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> CharacterOffsetAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "CharacterOffset");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
+
     private LineSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -44,18 +51,6 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public DirectiveTriviaSyntax WrappedInstance => wrappedInstance;
 
     public SyntaxToken HashToken => wrappedInstance.HashToken;
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
-    public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(wrappedInstance);
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> StartAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "Start");
-    public LineDirectivePositionSyntaxWrapper Start => LineDirectivePositionSyntaxWrapper.From(StartAccessor(wrappedInstance));
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> MinusTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "MinusToken");
-    public SyntaxToken MinusToken => (SyntaxToken)MinusTokenAccessor(wrappedInstance);
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> EndAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "End");
-    public LineDirectivePositionSyntaxWrapper End => LineDirectivePositionSyntaxWrapper.From(EndAccessor(wrappedInstance));
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> CharacterOffsetAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "CharacterOffset");
-    public SyntaxToken CharacterOffset => (SyntaxToken)CharacterOffsetAccessor(wrappedInstance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
-    public SyntaxToken File => (SyntaxToken)FileAccessor(wrappedInstance);
     public SyntaxToken EndOfDirectiveToken => wrappedInstance.EndOfDirectiveToken;
     public Boolean IsActive => wrappedInstance.IsActive;
     public SyntaxToken DirectiveNameToken => wrappedInstance.DirectiveNameToken;
@@ -75,6 +70,13 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
     public SyntaxNode Parent => wrappedInstance.Parent;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(wrappedInstance);
+    public LineDirectivePositionSyntaxWrapper Start => LineDirectivePositionSyntaxWrapper.From(StartAccessor(wrappedInstance));
+    public SyntaxToken MinusToken => (SyntaxToken)MinusTokenAccessor(wrappedInstance);
+    public LineDirectivePositionSyntaxWrapper End => LineDirectivePositionSyntaxWrapper.From(EndAccessor(wrappedInstance));
+    public SyntaxToken CharacterOffset => (SyntaxToken)CharacterOffsetAccessor(wrappedInstance);
+    public SyntaxToken File => (SyntaxToken)FileAccessor(wrappedInstance);
 
     public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
         From(node);

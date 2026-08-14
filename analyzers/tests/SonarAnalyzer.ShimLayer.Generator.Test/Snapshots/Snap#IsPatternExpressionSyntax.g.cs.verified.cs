@@ -32,6 +32,10 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> IsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "IsKeyword");
+    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
+
     private IsPatternExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> IsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "IsKeyword");
-    public SyntaxToken IsKeyword => (SyntaxToken)IsKeywordAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
-    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
+    public SyntaxToken IsKeyword => (SyntaxToken)IsKeywordAccessor(wrappedInstance);
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
 
     public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

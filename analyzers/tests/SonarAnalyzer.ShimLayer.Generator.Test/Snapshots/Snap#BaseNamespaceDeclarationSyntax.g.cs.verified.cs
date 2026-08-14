@@ -32,6 +32,14 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BaseNamespaceDeclarationSyntaxWrapper));
     private readonly MemberDeclarationSyntax wrappedInstance;
 
+    private static readonly Func<MemberDeclarationSyntax, SyntaxToken> NamespaceKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxToken>(WrappedType, "NamespaceKeyword");
+    private static readonly Func<MemberDeclarationSyntax, NameSyntax> NameAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, NameSyntax>(WrappedType, "Name");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>> ExternsAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>>(WrappedType, "Externs");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>> UsingsAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>>(WrappedType, "Usings");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+
     private BaseNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,20 +51,6 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
 
     public MemberDeclarationSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<MemberDeclarationSyntax, SyntaxToken> NamespaceKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxToken>(WrappedType, "NamespaceKeyword");
-    public SyntaxToken NamespaceKeyword => (SyntaxToken)NamespaceKeywordAccessor(wrappedInstance);
-    private static readonly Func<MemberDeclarationSyntax, NameSyntax> NameAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, NameSyntax>(WrappedType, "Name");
-    public NameSyntax Name => NameAccessor(wrappedInstance);
-    private static readonly Func<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>> ExternsAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>>(WrappedType, "Externs");
-    public SyntaxList<ExternAliasDirectiveSyntax> Externs => (SyntaxList<ExternAliasDirectiveSyntax>)ExternsAccessor(wrappedInstance);
-    private static readonly Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>> UsingsAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>>(WrappedType, "Usings");
-    public SyntaxList<UsingDirectiveSyntax> Usings => (SyntaxList<UsingDirectiveSyntax>)UsingsAccessor(wrappedInstance);
-    private static readonly Func<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
-    public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(wrappedInstance);
-    private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
-    private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
-    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -73,6 +67,14 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken NamespaceKeyword => (SyntaxToken)NamespaceKeywordAccessor(wrappedInstance);
+    public NameSyntax Name => NameAccessor(wrappedInstance);
+    public SyntaxList<ExternAliasDirectiveSyntax> Externs => (SyntaxList<ExternAliasDirectiveSyntax>)ExternsAccessor(wrappedInstance);
+    public SyntaxList<UsingDirectiveSyntax> Usings => (SyntaxList<UsingDirectiveSyntax>)UsingsAccessor(wrappedInstance);
+    public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(wrappedInstance);
+    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
 
     public static explicit operator BaseNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
         From(node);

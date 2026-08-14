@@ -32,6 +32,9 @@ public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SlicePatternSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> DotDotTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "DotDotToken");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
+
     private SlicePatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharp
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> DotDotTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "DotDotToken");
-    public SyntaxToken DotDotToken => (SyntaxToken)DotDotTokenAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
-    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharp
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken DotDotToken => (SyntaxToken)DotDotTokenAccessor(wrappedInstance);
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
 
     public static explicit operator SlicePatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

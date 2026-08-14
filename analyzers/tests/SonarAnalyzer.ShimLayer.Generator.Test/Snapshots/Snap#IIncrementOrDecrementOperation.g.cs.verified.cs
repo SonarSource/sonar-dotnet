@@ -32,6 +32,18 @@ public readonly partial struct IIncrementOrDecrementOperationWrapper : IOperatio
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IIncrementOrDecrementOperationWrapper));
     private readonly IOperation wrappedInstance;
 
+    private static readonly Func<IOperation, Boolean> IsPostfixAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsPostfix");
+    private static readonly Func<IOperation, Boolean> IsLiftedAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsLifted");
+    private static readonly Func<IOperation, Boolean> IsCheckedAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsChecked");
+    private static readonly Func<IOperation, IOperation> TargetAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Target");
+    private static readonly Func<IOperation, IMethodSymbol> OperatorMethodAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IMethodSymbol>(WrappedType, "OperatorMethod");
+    private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "ConstrainedToType");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
+
     private IIncrementOrDecrementOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -40,32 +52,22 @@ public readonly partial struct IIncrementOrDecrementOperationWrapper : IOperatio
 
     public IOperation WrappedInstance => wrappedInstance;
 
-    private static readonly Func<IOperation, Boolean> IsPostfixAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsPostfix");
-    public Boolean IsPostfix => (Boolean)IsPostfixAccessor(wrappedInstance);
-    private static readonly Func<IOperation, Boolean> IsLiftedAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsLifted");
-    public Boolean IsLifted => (Boolean)IsLiftedAccessor(wrappedInstance);
-    private static readonly Func<IOperation, Boolean> IsCheckedAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsChecked");
-    public Boolean IsChecked => (Boolean)IsCheckedAccessor(wrappedInstance);
-    private static readonly Func<IOperation, IOperation> TargetAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Target");
-    public IOperation Target => TargetAccessor(wrappedInstance);
-    private static readonly Func<IOperation, IMethodSymbol> OperatorMethodAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IMethodSymbol>(WrappedType, "OperatorMethod");
-    public IMethodSymbol OperatorMethod => (IMethodSymbol)OperatorMethodAccessor(wrappedInstance);
-    private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "ConstrainedToType");
-    public ITypeSymbol ConstrainedToType => (ITypeSymbol)ConstrainedToTypeAccessor(wrappedInstance);
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    public IOperation Parent => ParentAccessor(wrappedInstance);
     public OperationKind Kind => wrappedInstance.Kind;
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
     public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+
+    public Boolean IsPostfix => (Boolean)IsPostfixAccessor(wrappedInstance);
+    public Boolean IsLifted => (Boolean)IsLiftedAccessor(wrappedInstance);
+    public Boolean IsChecked => (Boolean)IsCheckedAccessor(wrappedInstance);
+    public IOperation Target => TargetAccessor(wrappedInstance);
+    public IMethodSymbol OperatorMethod => (IMethodSymbol)OperatorMethodAccessor(wrappedInstance);
+    public ITypeSymbol ConstrainedToType => (ITypeSymbol)ConstrainedToTypeAccessor(wrappedInstance);
+    public IOperation Parent => ParentAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
     public String Language => (String)LanguageAccessor(wrappedInstance);
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
     public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]

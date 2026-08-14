@@ -32,6 +32,8 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DefaultConstraintSyntaxWrapper));
     private readonly TypeParameterConstraintSyntax wrappedInstance;
 
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "DefaultKeyword");
+
     private DefaultConstraintSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
 
     public TypeParameterConstraintSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "DefaultKeyword");
-    public SyntaxToken DefaultKeyword => (SyntaxToken)DefaultKeywordAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken DefaultKeyword => (SyntaxToken)DefaultKeywordAccessor(wrappedInstance);
 
     public static explicit operator DefaultConstraintSyntaxWrapper(SyntaxNode node) =>
         From(node);

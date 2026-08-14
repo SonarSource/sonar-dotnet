@@ -32,6 +32,12 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "GoverningExpression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "SwitchKeyword");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBraceToken");
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
+    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBraceToken");
+
     private SwitchExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,16 +49,6 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "GoverningExpression");
-    public ExpressionSyntax GoverningExpression => GoverningExpressionAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "SwitchKeyword");
-    public SyntaxToken SwitchKeyword => (SyntaxToken)SwitchKeywordAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBraceToken");
-    public SyntaxToken OpenBraceToken => (SyntaxToken)OpenBraceTokenAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
-    public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBraceToken");
-    public SyntaxToken CloseBraceToken => (SyntaxToken)CloseBraceTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -69,6 +65,12 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ExpressionSyntax GoverningExpression => GoverningExpressionAccessor(wrappedInstance);
+    public SyntaxToken SwitchKeyword => (SyntaxToken)SwitchKeywordAccessor(wrappedInstance);
+    public SyntaxToken OpenBraceToken => (SyntaxToken)OpenBraceTokenAccessor(wrappedInstance);
+    public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(wrappedInstance);
+    public SyntaxToken CloseBraceToken => (SyntaxToken)CloseBraceTokenAccessor(wrappedInstance);
 
     public static explicit operator SwitchExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

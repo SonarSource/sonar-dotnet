@@ -32,6 +32,10 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RangeExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> LeftOperandAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "LeftOperand");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OperatorToken");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> RightOperandAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "RightOperand");
+
     private RangeExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> LeftOperandAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "LeftOperand");
-    public ExpressionSyntax LeftOperand => LeftOperandAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OperatorToken");
-    public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> RightOperandAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "RightOperand");
-    public ExpressionSyntax RightOperand => RightOperandAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ExpressionSyntax LeftOperand => LeftOperandAccessor(wrappedInstance);
+    public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(wrappedInstance);
+    public ExpressionSyntax RightOperand => RightOperandAccessor(wrappedInstance);
 
     public static explicit operator RangeExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

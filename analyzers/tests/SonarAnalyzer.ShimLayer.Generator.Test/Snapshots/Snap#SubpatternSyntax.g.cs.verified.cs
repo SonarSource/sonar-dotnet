@@ -32,6 +32,10 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SubpatternSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, NameColonSyntax>(WrappedType, "NameColon");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> ExpressionColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "ExpressionColon");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
+
     private SubpatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, NameColonSyntax>(WrappedType, "NameColon");
-    public NameColonSyntax NameColon => NameColonAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> ExpressionColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "ExpressionColon");
-    public BaseExpressionColonSyntaxWrapper ExpressionColon => BaseExpressionColonSyntaxWrapper.From(ExpressionColonAccessor(wrappedInstance));
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
-    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public NameColonSyntax NameColon => NameColonAccessor(wrappedInstance);
+    public BaseExpressionColonSyntaxWrapper ExpressionColon => BaseExpressionColonSyntaxWrapper.From(ExpressionColonAccessor(wrappedInstance));
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
 
     public static explicit operator SubpatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

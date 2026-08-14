@@ -32,6 +32,12 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
     private readonly MemberCrefSyntax wrappedInstance;
 
+    private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
+    private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
+    private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");
+    private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "DotToken");
+    private static readonly Func<MemberCrefSyntax, MemberCrefSyntax> MemberAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
+
     private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,16 +49,6 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
 
     public MemberCrefSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
-    public SyntaxToken ExtensionKeyword => (SyntaxToken)ExtensionKeywordAccessor(wrappedInstance);
-    private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
-    public TypeArgumentListSyntax TypeArgumentList => TypeArgumentListAccessor(wrappedInstance);
-    private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");
-    public CrefParameterListSyntax Parameters => ParametersAccessor(wrappedInstance);
-    private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "DotToken");
-    public SyntaxToken DotToken => (SyntaxToken)DotTokenAccessor(wrappedInstance);
-    private static readonly Func<MemberCrefSyntax, MemberCrefSyntax> MemberAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
-    public MemberCrefSyntax Member => MemberAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -69,6 +65,12 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken ExtensionKeyword => (SyntaxToken)ExtensionKeywordAccessor(wrappedInstance);
+    public TypeArgumentListSyntax TypeArgumentList => TypeArgumentListAccessor(wrappedInstance);
+    public CrefParameterListSyntax Parameters => ParametersAccessor(wrappedInstance);
+    public SyntaxToken DotToken => (SyntaxToken)DotTokenAccessor(wrappedInstance);
+    public MemberCrefSyntax Member => MemberAccessor(wrappedInstance);
 
     public static explicit operator ExtensionMemberCrefSyntaxWrapper(SyntaxNode node) =>
         From(node);

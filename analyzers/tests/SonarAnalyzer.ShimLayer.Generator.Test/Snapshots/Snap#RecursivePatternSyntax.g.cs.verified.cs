@@ -32,6 +32,11 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecursivePatternSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PositionalPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PositionalPatternClause");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PropertyPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PropertyPatternClause");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Designation");
+
     private RecursivePatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,14 +48,6 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-    public TypeSyntax Type => TypeAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PositionalPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PositionalPatternClause");
-    public PositionalPatternClauseSyntaxWrapper PositionalPatternClause => PositionalPatternClauseSyntaxWrapper.From(PositionalPatternClauseAccessor(wrappedInstance));
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PropertyPatternClauseAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "PropertyPatternClause");
-    public PropertyPatternClauseSyntaxWrapper PropertyPatternClause => PropertyPatternClauseSyntaxWrapper.From(PropertyPatternClauseAccessor(wrappedInstance));
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Designation");
-    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(wrappedInstance));
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -67,6 +64,11 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public TypeSyntax Type => TypeAccessor(wrappedInstance);
+    public PositionalPatternClauseSyntaxWrapper PositionalPatternClause => PositionalPatternClauseSyntaxWrapper.From(PositionalPatternClauseAccessor(wrappedInstance));
+    public PropertyPatternClauseSyntaxWrapper PropertyPatternClause => PropertyPatternClauseSyntaxWrapper.From(PropertyPatternClauseAccessor(wrappedInstance));
+    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(wrappedInstance));
 
     public static explicit operator RecursivePatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

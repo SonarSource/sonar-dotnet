@@ -32,6 +32,8 @@ public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TypePatternSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
+
     private TypePatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpS
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-    public TypeSyntax Type => TypeAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public TypeSyntax Type => TypeAccessor(wrappedInstance);
 
     public static explicit operator TypePatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

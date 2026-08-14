@@ -32,6 +32,10 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(NullableDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax wrappedInstance;
 
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> NullableKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "NullableKeyword");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> SettingTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "SettingToken");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> TargetTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "TargetToken");
+
     private NullableDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -44,12 +48,6 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public DirectiveTriviaSyntax WrappedInstance => wrappedInstance;
 
     public SyntaxToken HashToken => wrappedInstance.HashToken;
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> NullableKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "NullableKeyword");
-    public SyntaxToken NullableKeyword => (SyntaxToken)NullableKeywordAccessor(wrappedInstance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> SettingTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "SettingToken");
-    public SyntaxToken SettingToken => (SyntaxToken)SettingTokenAccessor(wrappedInstance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> TargetTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "TargetToken");
-    public SyntaxToken TargetToken => (SyntaxToken)TargetTokenAccessor(wrappedInstance);
     public SyntaxToken EndOfDirectiveToken => wrappedInstance.EndOfDirectiveToken;
     public Boolean IsActive => wrappedInstance.IsActive;
     public SyntaxToken DirectiveNameToken => wrappedInstance.DirectiveNameToken;
@@ -69,6 +67,10 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
     public SyntaxNode Parent => wrappedInstance.Parent;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken NullableKeyword => (SyntaxToken)NullableKeywordAccessor(wrappedInstance);
+    public SyntaxToken SettingToken => (SyntaxToken)SettingTokenAccessor(wrappedInstance);
+    public SyntaxToken TargetToken => (SyntaxToken)TargetTokenAccessor(wrappedInstance);
 
     public static explicit operator NullableDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
         From(node);

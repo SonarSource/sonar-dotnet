@@ -32,6 +32,9 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintClauseSyntaxWrapper));
     private readonly TypeParameterConstraintSyntax wrappedInstance;
 
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "AllowsKeyword");
+    private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>> ConstraintsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper>(WrappedType, nameof(Constraints));
+
     private AllowsConstraintClauseSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
 
     public TypeParameterConstraintSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "AllowsKeyword");
-    public SyntaxToken AllowsKeyword => (SyntaxToken)AllowsKeywordAccessor(wrappedInstance);
-    private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>> ConstraintsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper>(WrappedType, nameof(Constraints));
-    public SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> Constraints => ConstraintsAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken AllowsKeyword => (SyntaxToken)AllowsKeywordAccessor(wrappedInstance);
+    public SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> Constraints => ConstraintsAccessor(wrappedInstance);
 
     public static explicit operator AllowsConstraintClauseSyntaxWrapper(SyntaxNode node) =>
         From(node);

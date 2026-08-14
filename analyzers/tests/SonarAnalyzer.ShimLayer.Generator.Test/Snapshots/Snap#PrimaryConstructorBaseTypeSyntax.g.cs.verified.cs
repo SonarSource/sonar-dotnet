@@ -32,6 +32,8 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PrimaryConstructorBaseTypeSyntaxWrapper));
     private readonly BaseTypeSyntax wrappedInstance;
 
+    private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<BaseTypeSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
+
     private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -44,8 +46,6 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     public BaseTypeSyntax WrappedInstance => wrappedInstance;
 
     public TypeSyntax Type => wrappedInstance.Type;
-    private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<BaseTypeSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
-    public ArgumentListSyntax ArgumentList => ArgumentListAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -62,6 +62,8 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ArgumentListSyntax ArgumentList => ArgumentListAccessor(wrappedInstance);
 
     public static explicit operator PrimaryConstructorBaseTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);

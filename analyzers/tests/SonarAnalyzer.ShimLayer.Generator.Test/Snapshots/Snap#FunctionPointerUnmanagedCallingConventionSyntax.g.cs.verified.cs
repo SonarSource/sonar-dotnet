@@ -32,6 +32,8 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionSyntaxWr
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerUnmanagedCallingConventionSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> NameAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Name");
+
     private FunctionPointerUnmanagedCallingConventionSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionSyntaxWr
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> NameAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Name");
-    public SyntaxToken Name => (SyntaxToken)NameAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionSyntaxWr
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken Name => (SyntaxToken)NameAccessor(wrappedInstance);
 
     public static explicit operator FunctionPointerUnmanagedCallingConventionSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -32,6 +32,8 @@ public readonly partial struct ExpressionElementSyntaxWrapper : ISyntaxWrapper<C
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExpressionElementSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
+
     private ExpressionElementSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct ExpressionElementSyntaxWrapper : ISyntaxWrapper<C
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
-    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct ExpressionElementSyntaxWrapper : ISyntaxWrapper<C
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
 
     public static explicit operator ExpressionElementSyntaxWrapper(SyntaxNode node) =>
         From(node);

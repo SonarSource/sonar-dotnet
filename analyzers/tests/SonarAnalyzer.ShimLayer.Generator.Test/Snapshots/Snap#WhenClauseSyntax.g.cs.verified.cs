@@ -32,6 +32,9 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(WhenClauseSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> WhenKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "WhenKeyword");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ConditionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Condition");
+
     private WhenClauseSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> WhenKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "WhenKeyword");
-    public SyntaxToken WhenKeyword => (SyntaxToken)WhenKeywordAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ConditionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Condition");
-    public ExpressionSyntax Condition => ConditionAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken WhenKeyword => (SyntaxToken)WhenKeywordAccessor(wrappedInstance);
+    public ExpressionSyntax Condition => ConditionAccessor(wrappedInstance);
 
     public static explicit operator WhenClauseSyntaxWrapper(SyntaxNode node) =>
         From(node);

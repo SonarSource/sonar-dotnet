@@ -32,6 +32,10 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BinaryPatternSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> LeftAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Left");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> RightAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Right");
+
     private BinaryPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> LeftAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Left");
-    public PatternSyntaxWrapper Left => PatternSyntaxWrapper.From(LeftAccessor(wrappedInstance));
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OperatorToken");
-    public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> RightAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Right");
-    public PatternSyntaxWrapper Right => PatternSyntaxWrapper.From(RightAccessor(wrappedInstance));
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public PatternSyntaxWrapper Left => PatternSyntaxWrapper.From(LeftAccessor(wrappedInstance));
+    public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(wrappedInstance);
+    public PatternSyntaxWrapper Right => PatternSyntaxWrapper.From(RightAccessor(wrappedInstance));
 
     public static explicit operator BinaryPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

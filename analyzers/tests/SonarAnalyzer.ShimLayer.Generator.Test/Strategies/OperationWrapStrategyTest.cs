@@ -231,6 +231,9 @@ public class OperationWrapStrategyTest
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ITupleOperationWrapper));
                 private readonly IOperation wrappedInstance;
 
+                private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<IOperation>>(WrappedType, "Elements");
+                private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NaturalType");
+
                 private ITupleOperationWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
@@ -239,11 +242,10 @@ public class OperationWrapStrategyTest
 
                 public IOperation WrappedInstance => wrappedInstance;
 
-                private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<IOperation>>(WrappedType, "Elements");
-                public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(wrappedInstance);
-                private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NaturalType");
-                public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(wrappedInstance);
                 public ITypeSymbol Type => wrappedInstance.Type;
+
+                public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(wrappedInstance);
+                public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(wrappedInstance);
 
                 [Obsolete("Use From instead")]
                 public static ITupleOperationWrapper FromOperation(IOperation operation) =>

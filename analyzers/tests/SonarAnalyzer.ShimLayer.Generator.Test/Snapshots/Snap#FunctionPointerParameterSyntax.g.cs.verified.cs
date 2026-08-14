@@ -32,6 +32,10 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerParameterSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
+
     private FunctionPointerParameterSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxTokenList>(WrappedType, "Modifiers");
-    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-    public TypeSyntax Type => TypeAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+    public TypeSyntax Type => TypeAccessor(wrappedInstance);
 
     public static explicit operator FunctionPointerParameterSyntaxWrapper(SyntaxNode node) =>
         From(node);

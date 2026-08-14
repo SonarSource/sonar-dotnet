@@ -32,6 +32,9 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CasePatternSwitchLabelSyntaxWrapper));
     private readonly SwitchLabelSyntax wrappedInstance;
 
+    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
+    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> WhenClauseAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "WhenClause");
+
     private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -44,10 +47,6 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     public SwitchLabelSyntax WrappedInstance => wrappedInstance;
 
     public SyntaxToken Keyword => wrappedInstance.Keyword;
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
-    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> WhenClauseAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "WhenClause");
-    public WhenClauseSyntaxWrapper WhenClause => WhenClauseSyntaxWrapper.From(WhenClauseAccessor(wrappedInstance));
     public SyntaxToken ColonToken => wrappedInstance.ColonToken;
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
@@ -65,6 +64,9 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
+    public WhenClauseSyntaxWrapper WhenClause => WhenClauseSyntaxWrapper.From(WhenClauseAccessor(wrappedInstance));
 
     public static explicit operator CasePatternSwitchLabelSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -32,6 +32,8 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DiscardPatternSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "UnderscoreToken");
+
     private DiscardPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "UnderscoreToken");
-    public SyntaxToken UnderscoreToken => (SyntaxToken)UnderscoreTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken UnderscoreToken => (SyntaxToken)UnderscoreTokenAccessor(wrappedInstance);
 
     public static explicit operator DiscardPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -32,6 +32,10 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CollectionExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBracketToken");
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>> ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, CollectionElementSyntaxWrapper>(WrappedType, nameof(Elements));
+    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBracketToken");
+
     private CollectionExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBracketToken");
-    public SyntaxToken OpenBracketToken => (SyntaxToken)OpenBracketTokenAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>> ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, CollectionElementSyntaxWrapper>(WrappedType, nameof(Elements));
-    public SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper> Elements => ElementsAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBracketTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBracketToken");
-    public SyntaxToken CloseBracketToken => (SyntaxToken)CloseBracketTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken OpenBracketToken => (SyntaxToken)OpenBracketTokenAccessor(wrappedInstance);
+    public SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper> Elements => ElementsAccessor(wrappedInstance);
+    public SyntaxToken CloseBracketToken => (SyntaxToken)CloseBracketTokenAccessor(wrappedInstance);
 
     public static explicit operator CollectionExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -32,6 +32,8 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExtensionBlockDeclarationSyntaxWrapper));
     private readonly TypeDeclarationSyntax wrappedInstance;
 
+    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
+
     private ExtensionBlockDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -49,8 +51,6 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     public SyntaxTokenList Modifiers => wrappedInstance.Modifiers;
     public SyntaxToken Keyword => wrappedInstance.Keyword;
     public TypeParameterListSyntax TypeParameterList => wrappedInstance.TypeParameterList;
-    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
-    public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
     public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => wrappedInstance.ConstraintClauses;
     public SyntaxToken OpenBraceToken => wrappedInstance.OpenBraceToken;
     public SyntaxList<MemberDeclarationSyntax> Members => wrappedInstance.Members;
@@ -73,6 +73,8 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
 
     public static explicit operator ExtensionBlockDeclarationSyntaxWrapper(SyntaxNode node) =>
         From(node);

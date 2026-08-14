@@ -32,6 +32,10 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BaseObjectCreationExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "NewKeyword");
+    private static readonly Func<ExpressionSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
+
     private BaseObjectCreationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,12 +47,6 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "NewKeyword");
-    public SyntaxToken NewKeyword => (SyntaxToken)NewKeywordAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
-    public ArgumentListSyntax ArgumentList => ArgumentListAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
-    public InitializerExpressionSyntax Initializer => InitializerAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -65,6 +63,10 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken NewKeyword => (SyntaxToken)NewKeywordAccessor(wrappedInstance);
+    public ArgumentListSyntax ArgumentList => ArgumentListAccessor(wrappedInstance);
+    public InitializerExpressionSyntax Initializer => InitializerAccessor(wrappedInstance);
 
     public static explicit operator BaseObjectCreationExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -32,6 +32,9 @@ public readonly partial struct ThrowExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ThrowExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
+    private static readonly Func<ExpressionSyntax, SyntaxToken> ThrowKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "ThrowKeyword");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
+
     private ThrowExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct ThrowExpressionSyntaxWrapper : ISyntaxWrapper<Exp
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, SyntaxToken> ThrowKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "ThrowKeyword");
-    public SyntaxToken ThrowKeyword => (SyntaxToken)ThrowKeywordAccessor(wrappedInstance);
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct ThrowExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken ThrowKeyword => (SyntaxToken)ThrowKeywordAccessor(wrappedInstance);
+    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
 
     public static explicit operator ThrowExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

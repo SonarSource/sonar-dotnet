@@ -32,6 +32,15 @@ public readonly partial struct IEventAssignmentOperationWrapper : IOperationWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IEventAssignmentOperationWrapper));
     private readonly IOperation wrappedInstance;
 
+    private static readonly Func<IOperation, IOperation> EventReferenceAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "EventReference");
+    private static readonly Func<IOperation, IOperation> HandlerValueAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "HandlerValue");
+    private static readonly Func<IOperation, Boolean> AddsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "Adds");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
+
     private IEventAssignmentOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -40,26 +49,19 @@ public readonly partial struct IEventAssignmentOperationWrapper : IOperationWrap
 
     public IOperation WrappedInstance => wrappedInstance;
 
-    private static readonly Func<IOperation, IOperation> EventReferenceAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "EventReference");
-    public IOperation EventReference => EventReferenceAccessor(wrappedInstance);
-    private static readonly Func<IOperation, IOperation> HandlerValueAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "HandlerValue");
-    public IOperation HandlerValue => HandlerValueAccessor(wrappedInstance);
-    private static readonly Func<IOperation, Boolean> AddsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "Adds");
-    public Boolean Adds => (Boolean)AddsAccessor(wrappedInstance);
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    public IOperation Parent => ParentAccessor(wrappedInstance);
     public OperationKind Kind => wrappedInstance.Kind;
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
     public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+
+    public IOperation EventReference => EventReferenceAccessor(wrappedInstance);
+    public IOperation HandlerValue => HandlerValueAccessor(wrappedInstance);
+    public Boolean Adds => (Boolean)AddsAccessor(wrappedInstance);
+    public IOperation Parent => ParentAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
     public String Language => (String)LanguageAccessor(wrappedInstance);
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
     public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]

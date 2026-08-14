@@ -32,6 +32,8 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DiscardDesignationSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "UnderscoreToken");
+
     private DiscardDesignationSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "UnderscoreToken");
-    public SyntaxToken UnderscoreToken => (SyntaxToken)UnderscoreTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken UnderscoreToken => (SyntaxToken)UnderscoreTokenAccessor(wrappedInstance);
 
     public static explicit operator DiscardDesignationSyntaxWrapper(SyntaxNode node) =>
         From(node);

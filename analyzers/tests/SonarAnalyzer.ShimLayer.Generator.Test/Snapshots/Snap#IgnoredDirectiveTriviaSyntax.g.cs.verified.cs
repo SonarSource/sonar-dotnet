@@ -32,6 +32,9 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IgnoredDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax wrappedInstance;
 
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ColonTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "ColonToken");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ContentAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "Content");
+
     private IgnoredDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -44,10 +47,6 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     public DirectiveTriviaSyntax WrappedInstance => wrappedInstance;
 
     public SyntaxToken HashToken => wrappedInstance.HashToken;
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ColonTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "ColonToken");
-    public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(wrappedInstance);
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ContentAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "Content");
-    public SyntaxToken Content => (SyntaxToken)ContentAccessor(wrappedInstance);
     public SyntaxToken EndOfDirectiveToken => wrappedInstance.EndOfDirectiveToken;
     public Boolean IsActive => wrappedInstance.IsActive;
     public SyntaxToken DirectiveNameToken => wrappedInstance.DirectiveNameToken;
@@ -67,6 +66,9 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
     public SyntaxNode Parent => wrappedInstance.Parent;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(wrappedInstance);
+    public SyntaxToken Content => (SyntaxToken)ContentAccessor(wrappedInstance);
 
     public static explicit operator IgnoredDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
         From(node);

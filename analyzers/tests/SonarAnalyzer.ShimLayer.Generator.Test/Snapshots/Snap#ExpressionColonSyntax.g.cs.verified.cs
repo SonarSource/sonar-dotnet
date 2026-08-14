@@ -32,6 +32,9 @@ public readonly partial struct ExpressionColonSyntaxWrapper : ISyntaxWrapper<CSh
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExpressionColonSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> ColonTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "ColonToken");
+
     private ExpressionColonSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct ExpressionColonSyntaxWrapper : ISyntaxWrapper<CSh
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Expression");
-    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> ColonTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "ColonToken");
-    public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct ExpressionColonSyntaxWrapper : ISyntaxWrapper<CSh
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
+    public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(wrappedInstance);
 
     public static explicit operator ExpressionColonSyntaxWrapper(SyntaxNode node) =>
         From(node);

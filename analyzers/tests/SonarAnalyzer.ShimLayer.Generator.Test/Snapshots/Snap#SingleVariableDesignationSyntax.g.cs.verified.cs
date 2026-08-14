@@ -32,6 +32,8 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SingleVariableDesignationSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Identifier");
+
     private SingleVariableDesignationSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,8 +45,6 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Identifier");
-    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -61,6 +61,8 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(wrappedInstance);
 
     public static explicit operator SingleVariableDesignationSyntaxWrapper(SyntaxNode node) =>
         From(node);

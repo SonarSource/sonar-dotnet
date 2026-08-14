@@ -30,39 +30,27 @@ public sealed class ExtendStrategy : Strategy
     public override string ToConversionSnippet(string from) =>
         from;
 
-    protected override string GenerateCore(StrategyModel model) =>
-        Members.Select(x => GenerateMemberAccessor(x, model)).Where(x => x is not null).ToArray() is { Length: > 0 } accessors
+    protected override string GenerateCore(StrategyModel model)
+    {
+        var properties = Members.OfType<PropertyInfo>()
+            .Select(x => model[x.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
+            .Where(x => x is not null)
+            .ToArray();
+        return properties.Any()
             ? $$"""
                 {{Preamble($"using {Latest.Namespace};")}}
                 public static partial class {{Latest.Name}}ShimExtensions
                 {
                     private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet()}});
 
-                {{JoinLines(accessors)}}
+                {{JoinLines(properties.Select(x => x.AccessorDeclaration()))}}
 
                     extension({{CompiletimeTypeSnippet()}} wrappedInstance)
                     {
-                {{JoinLines(Members.Select(x => GenerateMemberExtension(x, model)))}}
+                {{JoinLines(properties.Select(x => x.MemberDeclaration(8)))}}
                     }
                 }
                 """
             : null;
-
-    private string GenerateMemberAccessor(MemberInfo member, StrategyModel model) =>
-        member switch
-        {
-            PropertyInfo prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy && new PropertyWrapSnippet(this, prop, propertyTypeStrategy) is var snippet => $"""
-                {snippet.AccessorDeclaration()}
-                """,
-            _ => null,
-        };
-
-    private string GenerateMemberExtension(MemberInfo member, StrategyModel model) =>
-        member switch
-        {
-            PropertyInfo { GetMethod: not null } prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy && new PropertyWrapSnippet(this, prop, propertyTypeStrategy) is var snippet => $"""
-                {snippet.MemberDeclaration(8)}
-                """,
-            _ => null,
-        };
+    }
 }

@@ -32,6 +32,9 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerCallingConventionSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> ManagedOrUnmanagedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "ManagedOrUnmanagedKeyword");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> UnmanagedCallingConventionListAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "UnmanagedCallingConventionList");
+
     private FunctionPointerCallingConventionSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> ManagedOrUnmanagedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "ManagedOrUnmanagedKeyword");
-    public SyntaxToken ManagedOrUnmanagedKeyword => (SyntaxToken)ManagedOrUnmanagedKeywordAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> UnmanagedCallingConventionListAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "UnmanagedCallingConventionList");
-    public FunctionPointerUnmanagedCallingConventionListSyntaxWrapper UnmanagedCallingConventionList => FunctionPointerUnmanagedCallingConventionListSyntaxWrapper.From(UnmanagedCallingConventionListAccessor(wrappedInstance));
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public SyntaxToken ManagedOrUnmanagedKeyword => (SyntaxToken)ManagedOrUnmanagedKeywordAccessor(wrappedInstance);
+    public FunctionPointerUnmanagedCallingConventionListSyntaxWrapper UnmanagedCallingConventionList => FunctionPointerUnmanagedCallingConventionListSyntaxWrapper.From(UnmanagedCallingConventionListAccessor(wrappedInstance));
 
     public static explicit operator FunctionPointerCallingConventionSyntaxWrapper(SyntaxNode node) =>
         From(node);

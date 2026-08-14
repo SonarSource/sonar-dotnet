@@ -32,6 +32,9 @@ public readonly partial struct TupleElementSyntaxWrapper : ISyntaxWrapper<CSharp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TupleElementSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Identifier");
+
     private TupleElementSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -43,10 +46,6 @@ public readonly partial struct TupleElementSyntaxWrapper : ISyntaxWrapper<CSharp
 
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
-    public TypeSyntax Type => TypeAccessor(wrappedInstance);
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "Identifier");
-    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(wrappedInstance);
     public String Language => wrappedInstance.Language;
     public Int32 RawKind => wrappedInstance.RawKind;
     public TextSpan FullSpan => wrappedInstance.FullSpan;
@@ -63,6 +62,9 @@ public readonly partial struct TupleElementSyntaxWrapper : ISyntaxWrapper<CSharp
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
     public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+
+    public TypeSyntax Type => TypeAccessor(wrappedInstance);
+    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(wrappedInstance);
 
     public static explicit operator TupleElementSyntaxWrapper(SyntaxNode node) =>
         From(node);
