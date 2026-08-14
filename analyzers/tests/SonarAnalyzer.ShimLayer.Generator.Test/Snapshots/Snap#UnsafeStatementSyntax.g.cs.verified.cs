@@ -31,8 +31,8 @@ public static partial class UnsafeStatementSyntaxShimExtensions
 
     private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-    extension(UnsafeStatementSyntax @this)
+    extension(UnsafeStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
     }
 }

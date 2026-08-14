@@ -31,8 +31,8 @@ public static partial class EnumMemberDeclarationSyntaxShimExtensions
 
     private static readonly Func<EnumMemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<EnumMemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
-    extension(EnumMemberDeclarationSyntax @this)
+    extension(EnumMemberDeclarationSyntax wrappedInstance)
     {
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(@this);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
     }
 }

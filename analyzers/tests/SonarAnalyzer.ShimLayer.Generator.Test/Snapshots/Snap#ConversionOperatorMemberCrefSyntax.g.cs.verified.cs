@@ -31,8 +31,8 @@ public static partial class ConversionOperatorMemberCrefSyntaxShimExtensions
 
     private static readonly Func<ConversionOperatorMemberCrefSyntax, SyntaxToken> CheckedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ConversionOperatorMemberCrefSyntax, SyntaxToken>(WrappedType, "CheckedKeyword");
 
-    extension(ConversionOperatorMemberCrefSyntax @this)
+    extension(ConversionOperatorMemberCrefSyntax wrappedInstance)
     {
-        public SyntaxToken CheckedKeyword => (SyntaxToken)CheckedKeywordAccessor(@this);
+        public SyntaxToken CheckedKeyword => (SyntaxToken)CheckedKeywordAccessor(wrappedInstance);
     }
 }

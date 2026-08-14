@@ -33,10 +33,10 @@ public static partial class AnonymousFunctionExpressionSyntaxShimExtensions
     private static readonly Func<AnonymousFunctionExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, BlockSyntax>(WrappedType, "Block");
     private static readonly Func<AnonymousFunctionExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
-    extension(AnonymousFunctionExpressionSyntax @this)
+    extension(AnonymousFunctionExpressionSyntax wrappedInstance)
     {
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(@this);
-        public BlockSyntax Block => BlockAccessor(@this);
-        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(@this);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+        public BlockSyntax Block => BlockAccessor(wrappedInstance);
+        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
     }
 }

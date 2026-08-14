@@ -30,59 +30,59 @@ public readonly partial struct ForEachVariableStatementSyntaxWrapper : ISyntaxWr
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ForEachVariableStatementSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ForEachVariableStatementSyntaxWrapper));
-    private readonly StatementSyntax instance;
+    private readonly StatementSyntax wrappedInstance;
 
-    private ForEachVariableStatementSyntaxWrapper(StatementSyntax instance) =>
-        this.instance = instance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax Node => this.instance;
+    private ForEachVariableStatementSyntaxWrapper(StatementSyntax wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax SyntaxNode => this.instance;
+    public StatementSyntax Node => wrappedInstance;
 
-    public StatementSyntax WrappedInstance => this.instance;
+    [Obsolete("Use WrappedInstance instead")]
+    public StatementSyntax SyntaxNode => wrappedInstance;
+
+    public StatementSyntax WrappedInstance => wrappedInstance;
 
     private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.instance);
+    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
-    public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(this.instance);
+    public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxToken> ForEachKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "ForEachKeyword");
-    public SyntaxToken ForEachKeyword => (SyntaxToken)ForEachKeywordAccessor(this.instance);
+    public SyntaxToken ForEachKeyword => (SyntaxToken)ForEachKeywordAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
-    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
+    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, ExpressionSyntax> VariableAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ExpressionSyntax>(WrappedType, "Variable");
-    public ExpressionSyntax Variable => VariableAccessor(this.instance);
+    public ExpressionSyntax Variable => VariableAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxToken> InKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "InKeyword");
-    public SyntaxToken InKeyword => (SyntaxToken)InKeywordAccessor(this.instance);
+    public SyntaxToken InKeyword => (SyntaxToken)InKeywordAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    public ExpressionSyntax Expression => ExpressionAccessor(this.instance);
+    public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
-    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
+    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, StatementSyntax>(WrappedType, "Statement");
-    public StatementSyntax Statement => StatementAccessor(this.instance);
-    public String Language => this.instance.Language;
-    public Int32 RawKind => this.instance.RawKind;
-    public TextSpan FullSpan => this.instance.FullSpan;
-    public TextSpan Span => this.instance.Span;
-    public Int32 SpanStart => this.instance.SpanStart;
-    public Boolean IsMissing => this.instance.IsMissing;
-    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
-    public SyntaxNode Parent => this.instance.Parent;
-    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
-    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
+    public StatementSyntax Statement => StatementAccessor(wrappedInstance);
+    public String Language => wrappedInstance.Language;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxNode Parent => wrappedInstance.Parent;
+    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
 
     public static explicit operator ForEachVariableStatementSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator StatementSyntax(ForEachVariableStatementSyntaxWrapper wrapper) =>
-        wrapper.instance;
+        wrapper.wrappedInstance;
 
     public static ForEachVariableStatementSyntaxWrapper From(SyntaxNode node)
     {

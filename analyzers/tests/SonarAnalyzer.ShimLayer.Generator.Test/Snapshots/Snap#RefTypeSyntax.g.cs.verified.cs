@@ -30,56 +30,56 @@ public readonly partial struct RefTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RefTypeSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefTypeSyntaxWrapper));
-    private readonly TypeSyntax instance;
+    private readonly TypeSyntax wrappedInstance;
 
-    private RefTypeSyntaxWrapper(TypeSyntax instance) =>
-        this.instance = instance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax Node => this.instance;
+    private RefTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax SyntaxNode => this.instance;
+    public TypeSyntax Node => wrappedInstance;
 
-    public TypeSyntax WrappedInstance => this.instance;
+    [Obsolete("Use WrappedInstance instead")]
+    public TypeSyntax SyntaxNode => wrappedInstance;
+
+    public TypeSyntax WrappedInstance => wrappedInstance;
 
     private static readonly Func<TypeSyntax, SyntaxToken> RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "RefKeyword");
-    public SyntaxToken RefKeyword => (SyntaxToken)RefKeywordAccessor(this.instance);
+    public SyntaxToken RefKeyword => (SyntaxToken)RefKeywordAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, SyntaxToken> ReadOnlyKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "ReadOnlyKeyword");
-    public SyntaxToken ReadOnlyKeyword => (SyntaxToken)ReadOnlyKeywordAccessor(this.instance);
+    public SyntaxToken ReadOnlyKeyword => (SyntaxToken)ReadOnlyKeywordAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, TypeSyntax>(WrappedType, "Type");
-    public TypeSyntax Type => TypeAccessor(this.instance);
-    public Boolean IsVar => this.instance.IsVar;
+    public TypeSyntax Type => TypeAccessor(wrappedInstance);
+    public Boolean IsVar => wrappedInstance.IsVar;
     private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-    public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.instance);
+    public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-    public Boolean IsNotNull => (Boolean)IsNotNullAccessor(this.instance);
+    public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-    public Boolean IsNint => (Boolean)IsNintAccessor(this.instance);
+    public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
-    public Boolean IsNuint => (Boolean)IsNuintAccessor(this.instance);
-    public String Language => this.instance.Language;
-    public Int32 RawKind => this.instance.RawKind;
-    public TextSpan FullSpan => this.instance.FullSpan;
-    public TextSpan Span => this.instance.Span;
-    public Int32 SpanStart => this.instance.SpanStart;
-    public Boolean IsMissing => this.instance.IsMissing;
-    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
-    public SyntaxNode Parent => this.instance.Parent;
-    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
-    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
+    public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
+    public String Language => wrappedInstance.Language;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxNode Parent => wrappedInstance.Parent;
+    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
 
     public static explicit operator RefTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator TypeSyntax(RefTypeSyntaxWrapper wrapper) =>
-        wrapper.instance;
+        wrapper.wrappedInstance;
 
     public static RefTypeSyntaxWrapper From(SyntaxNode node)
     {

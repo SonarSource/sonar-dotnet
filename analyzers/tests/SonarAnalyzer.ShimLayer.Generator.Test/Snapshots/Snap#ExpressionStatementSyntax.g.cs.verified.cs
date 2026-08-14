@@ -31,8 +31,8 @@ public static partial class ExpressionStatementSyntaxShimExtensions
 
     private static readonly Func<ExpressionStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-    extension(ExpressionStatementSyntax @this)
+    extension(ExpressionStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
     }
 }

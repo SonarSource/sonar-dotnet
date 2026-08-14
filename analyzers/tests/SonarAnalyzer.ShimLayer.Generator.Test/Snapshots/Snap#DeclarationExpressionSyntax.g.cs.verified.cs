@@ -30,45 +30,45 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.DeclarationExpressionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DeclarationExpressionSyntaxWrapper));
-    private readonly ExpressionSyntax instance;
+    private readonly ExpressionSyntax wrappedInstance;
 
-    private DeclarationExpressionSyntaxWrapper(ExpressionSyntax instance) =>
-        this.instance = instance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax Node => this.instance;
+    private DeclarationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax SyntaxNode => this.instance;
+    public ExpressionSyntax Node => wrappedInstance;
 
-    public ExpressionSyntax WrappedInstance => this.instance;
+    [Obsolete("Use WrappedInstance instead")]
+    public ExpressionSyntax SyntaxNode => wrappedInstance;
+
+    public ExpressionSyntax WrappedInstance => wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, TypeSyntax>(WrappedType, "Type");
-    public TypeSyntax Type => TypeAccessor(this.instance);
+    public TypeSyntax Type => TypeAccessor(wrappedInstance);
     private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Designation");
-    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(this.instance));
-    public String Language => this.instance.Language;
-    public Int32 RawKind => this.instance.RawKind;
-    public TextSpan FullSpan => this.instance.FullSpan;
-    public TextSpan Span => this.instance.Span;
-    public Int32 SpanStart => this.instance.SpanStart;
-    public Boolean IsMissing => this.instance.IsMissing;
-    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
-    public SyntaxNode Parent => this.instance.Parent;
-    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
-    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
+    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(wrappedInstance));
+    public String Language => wrappedInstance.Language;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxNode Parent => wrappedInstance.Parent;
+    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
 
     public static explicit operator DeclarationExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator ExpressionSyntax(DeclarationExpressionSyntaxWrapper wrapper) =>
-        wrapper.instance;
+        wrapper.wrappedInstance;
 
     public static DeclarationExpressionSyntaxWrapper From(SyntaxNode node)
     {

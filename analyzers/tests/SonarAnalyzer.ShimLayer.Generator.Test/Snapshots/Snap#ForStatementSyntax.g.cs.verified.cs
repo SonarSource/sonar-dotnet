@@ -31,8 +31,8 @@ public static partial class ForStatementSyntaxShimExtensions
 
     private static readonly Func<ForStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<ForStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-    extension(ForStatementSyntax @this)
+    extension(ForStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
     }
 }

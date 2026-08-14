@@ -31,8 +31,8 @@ public static partial class WhileStatementSyntaxShimExtensions
 
     private static readonly Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<WhileStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
 
-    extension(WhileStatementSyntax @this)
+    extension(WhileStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
     }
 }

@@ -32,9 +32,9 @@ public static partial class ForEachStatementSyntaxShimExtensions
     private static readonly Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
     private static readonly Func<ForEachStatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ForEachStatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
 
-    extension(ForEachStatementSyntax @this)
+    extension(ForEachStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
-        public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(wrappedInstance);
     }
 }

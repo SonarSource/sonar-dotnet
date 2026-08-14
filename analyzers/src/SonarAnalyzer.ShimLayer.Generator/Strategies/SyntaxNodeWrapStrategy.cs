@@ -29,18 +29,18 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
             public const string WrappedTypeName = "{{Latest.FullName}}";
 
             private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
-            private readonly {{CompiletimeTypeSnippet()}} instance;
+            private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
 
-            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} instance) =>
-                this.instance = instance;
-
-            [Obsolete("Use WrappedInstance instead")]
-            public {{CompiletimeTypeSnippet()}} Node => this.instance;
+            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
+                this.wrappedInstance = wrappedInstance;
 
             [Obsolete("Use WrappedInstance instead")]
-            public {{CompiletimeTypeSnippet()}} SyntaxNode => this.instance;
+            public {{CompiletimeTypeSnippet()}} Node => wrappedInstance;
 
-            public {{CompiletimeTypeSnippet()}} WrappedInstance => this.instance;
+            [Obsolete("Use WrappedInstance instead")]
+            public {{CompiletimeTypeSnippet()}} SyntaxNode => wrappedInstance;
+
+            public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
 
         {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
 
@@ -48,7 +48,7 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
                 From(node);
 
             public static implicit operator {{CompiletimeTypeSnippet()}}({{Latest.Name}}Wrapper wrapper) =>
-                wrapper.instance;
+                wrapper.wrappedInstance;
 
             public static {{Latest.Name}}Wrapper From(SyntaxNode node)
             {

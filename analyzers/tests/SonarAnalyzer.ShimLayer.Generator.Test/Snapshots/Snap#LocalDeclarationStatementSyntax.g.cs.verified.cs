@@ -33,10 +33,10 @@ public static partial class LocalDeclarationStatementSyntaxShimExtensions
     private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<LocalDeclarationStatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
     private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken> UsingKeywordAccessor = LightupHelpers.CreatePropertyAccessor<LocalDeclarationStatementSyntax, SyntaxToken>(WrappedType, "UsingKeyword");
 
-    extension(LocalDeclarationStatementSyntax @this)
+    extension(LocalDeclarationStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
-        public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(@this);
-        public SyntaxToken UsingKeyword => (SyntaxToken)UsingKeywordAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(wrappedInstance);
+        public SyntaxToken UsingKeyword => (SyntaxToken)UsingKeywordAccessor(wrappedInstance);
     }
 }

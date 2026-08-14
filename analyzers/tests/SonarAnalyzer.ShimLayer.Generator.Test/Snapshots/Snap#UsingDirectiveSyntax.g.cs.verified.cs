@@ -33,10 +33,10 @@ public static partial class UsingDirectiveSyntaxShimExtensions
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken> UnsafeKeywordAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, SyntaxToken>(WrappedType, "UnsafeKeyword");
     private static readonly Func<UsingDirectiveSyntax, TypeSyntax> NamespaceOrTypeAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, TypeSyntax>(WrappedType, "NamespaceOrType");
 
-    extension(UsingDirectiveSyntax @this)
+    extension(UsingDirectiveSyntax wrappedInstance)
     {
-        public SyntaxToken GlobalKeyword => (SyntaxToken)GlobalKeywordAccessor(@this);
-        public SyntaxToken UnsafeKeyword => (SyntaxToken)UnsafeKeywordAccessor(@this);
-        public TypeSyntax NamespaceOrType => NamespaceOrTypeAccessor(@this);
+        public SyntaxToken GlobalKeyword => (SyntaxToken)GlobalKeywordAccessor(wrappedInstance);
+        public SyntaxToken UnsafeKeyword => (SyntaxToken)UnsafeKeywordAccessor(wrappedInstance);
+        public TypeSyntax NamespaceOrType => NamespaceOrTypeAccessor(wrappedInstance);
     }
 }

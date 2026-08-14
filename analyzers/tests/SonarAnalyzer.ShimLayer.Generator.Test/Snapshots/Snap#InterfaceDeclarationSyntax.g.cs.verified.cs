@@ -31,8 +31,8 @@ public static partial class InterfaceDeclarationSyntaxShimExtensions
 
     private static readonly Func<InterfaceDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<InterfaceDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
 
-    extension(InterfaceDeclarationSyntax @this)
+    extension(InterfaceDeclarationSyntax wrappedInstance)
     {
-        public ParameterListSyntax ParameterList => ParameterListAccessor(@this);
+        public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
     }
 }

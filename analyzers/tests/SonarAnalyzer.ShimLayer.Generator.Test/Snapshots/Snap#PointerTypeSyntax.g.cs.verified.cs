@@ -34,11 +34,11 @@ public static partial class PointerTypeSyntaxShimExtensions
     private static readonly Func<PointerTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNint");
     private static readonly Func<PointerTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<PointerTypeSyntax, Boolean>(WrappedType, "IsNuint");
 
-    extension(PointerTypeSyntax @this)
+    extension(PointerTypeSyntax wrappedInstance)
     {
-        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);
-        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(@this);
-        public Boolean IsNint => (Boolean)IsNintAccessor(@this);
-        public Boolean IsNuint => (Boolean)IsNuintAccessor(@this);
+        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
+        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
+        public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
+        public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
     }
 }

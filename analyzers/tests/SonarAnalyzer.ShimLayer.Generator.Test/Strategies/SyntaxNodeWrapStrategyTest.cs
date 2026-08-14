@@ -66,24 +66,24 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-                private readonly TypeDeclarationSyntax instance;
+                private readonly TypeDeclarationSyntax wrappedInstance;
 
-                private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
-                    this.instance = instance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax Node => this.instance;
+                private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax SyntaxNode => this.instance;
+                public TypeDeclarationSyntax Node => wrappedInstance;
 
-                public TypeDeclarationSyntax WrappedInstance => this.instance;
+                [Obsolete("Use WrappedInstance instead")]
+                public TypeDeclarationSyntax SyntaxNode => wrappedInstance;
+
+                public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
                     From(node);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.instance;
+                    wrapper.wrappedInstance;
 
                 public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
                 {
@@ -156,28 +156,28 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-                private readonly TypeDeclarationSyntax instance;
+                private readonly TypeDeclarationSyntax wrappedInstance;
 
-                private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
-                    this.instance = instance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax Node => this.instance;
+                private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax SyntaxNode => this.instance;
+                public TypeDeclarationSyntax Node => wrappedInstance;
 
-                public TypeDeclarationSyntax WrappedInstance => this.instance;
+                [Obsolete("Use WrappedInstance instead")]
+                public TypeDeclarationSyntax SyntaxNode => wrappedInstance;
 
-                public TextSpan Span => this.instance.Span;
+                public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
+
+                public TextSpan Span => wrappedInstance.Span;
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
-                public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(this.instance);
+                public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(wrappedInstance);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
                     From(node);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.instance;
+                    wrapper.wrappedInstance;
 
                 public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
                 {
@@ -248,27 +248,27 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
-                private readonly ExpressionSyntax instance;
+                private readonly ExpressionSyntax wrappedInstance;
 
-                private IsPatternExpressionSyntaxWrapper(ExpressionSyntax instance) =>
-                    this.instance = instance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public ExpressionSyntax Node => this.instance;
+                private IsPatternExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public ExpressionSyntax SyntaxNode => this.instance;
+                public ExpressionSyntax Node => wrappedInstance;
 
-                public ExpressionSyntax WrappedInstance => this.instance;
+                [Obsolete("Use WrappedInstance instead")]
+                public ExpressionSyntax SyntaxNode => wrappedInstance;
+
+                public ExpressionSyntax WrappedInstance => wrappedInstance;
 
                 private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
-                public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(this.instance));
+                public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
 
                 public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
                     From(node);
 
                 public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
-                    wrapper.instance;
+                    wrapper.wrappedInstance;
 
                 public static IsPatternExpressionSyntaxWrapper From(SyntaxNode node)
                 {
@@ -338,24 +338,24 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ConstantPatternSyntaxWrapper));
-                private readonly CSharpSyntaxNode instance;
+                private readonly CSharpSyntaxNode wrappedInstance;
 
-                private ConstantPatternSyntaxWrapper(CSharpSyntaxNode instance) =>
-                    this.instance = instance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public CSharpSyntaxNode Node => this.instance;
+                private ConstantPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public CSharpSyntaxNode SyntaxNode => this.instance;
+                public CSharpSyntaxNode Node => wrappedInstance;
 
-                public CSharpSyntaxNode WrappedInstance => this.instance;
+                [Obsolete("Use WrappedInstance instead")]
+                public CSharpSyntaxNode SyntaxNode => wrappedInstance;
+
+                public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
                 public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node) =>
                     From(node);
 
                 public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
-                    wrapper.instance;
+                    wrapper.wrappedInstance;
 
                 public static ConstantPatternSyntaxWrapper From(SyntaxNode node)
                 {
@@ -430,24 +430,24 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.SyntaxNode";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SyntaxNodeWrapper));
-                private readonly SyntaxNode instance;
+                private readonly SyntaxNode wrappedInstance;
 
-                private SyntaxNodeWrapper(SyntaxNode instance) =>
-                    this.instance = instance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode Node => this.instance;
+                private SyntaxNodeWrapper(SyntaxNode wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode SyntaxNode => this.instance;
+                public SyntaxNode Node => wrappedInstance;
 
-                public SyntaxNode WrappedInstance => this.instance;
+                [Obsolete("Use WrappedInstance instead")]
+                public SyntaxNode SyntaxNode => wrappedInstance;
+
+                public SyntaxNode WrappedInstance => wrappedInstance;
 
                 public static explicit operator SyntaxNodeWrapper(SyntaxNode node) =>
                     From(node);
 
                 public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
-                    wrapper.instance;
+                    wrapper.wrappedInstance;
 
                 public static SyntaxNodeWrapper From(SyntaxNode node)
                 {
@@ -516,29 +516,29 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
-                private readonly SyntaxNode instance;
+                private readonly SyntaxNode wrappedInstance;
 
-                private IndexerDeclarationSyntaxWrapper(SyntaxNode instance) =>
-                    this.instance = instance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode Node => this.instance;
+                private IndexerDeclarationSyntaxWrapper(SyntaxNode wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode SyntaxNode => this.instance;
+                public SyntaxNode Node => wrappedInstance;
 
-                public SyntaxNode WrappedInstance => this.instance;
+                [Obsolete("Use WrappedInstance instead")]
+                public SyntaxNode SyntaxNode => wrappedInstance;
+
+                public SyntaxNode WrappedInstance => wrappedInstance;
 
                 [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
                 [System.ObsoleteAttribute("This member is obsolete.", true)]
-                public SyntaxToken Semicolon => this.instance.Semicolon;
-                public SyntaxNode Parent => this.instance.Parent;
+                public SyntaxToken Semicolon => wrappedInstance.Semicolon;
+                public SyntaxNode Parent => wrappedInstance.Parent;
 
                 public static explicit operator IndexerDeclarationSyntaxWrapper(SyntaxNode node) =>
                     From(node);
 
                 public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.instance;
+                    wrapper.wrappedInstance;
 
                 public static IndexerDeclarationSyntaxWrapper From(SyntaxNode node)
                 {
@@ -611,32 +611,32 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
-                private readonly TypeDeclarationSyntax instance;
+                private readonly TypeDeclarationSyntax wrappedInstance;
 
-                private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax instance) =>
-                    this.instance = instance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax Node => this.instance;
+                private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax SyntaxNode => this.instance;
+                public TypeDeclarationSyntax Node => wrappedInstance;
 
-                public TypeDeclarationSyntax WrappedInstance => this.instance;
+                [Obsolete("Use WrappedInstance instead")]
+                public TypeDeclarationSyntax SyntaxNode => wrappedInstance;
+
+                public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
                 private static readonly Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>(WrappedType, "Members");
-                public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(this.instance);
-                public SyntaxList<AttributeListSyntax> AttributeLists => this.instance.AttributeLists;
+                public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(wrappedInstance);
+                public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;
                 private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>(WrappedType, "Arguments");
-                public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(this.instance);
+                public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(wrappedInstance);
                 private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeDeclarationSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
-                public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(this.instance);
+                public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(wrappedInstance);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
                     From(node);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
-                    wrapper.instance;
+                    wrapper.wrappedInstance;
 
                 public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
                 {

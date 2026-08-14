@@ -30,44 +30,44 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.PrimaryConstructorBaseTypeSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PrimaryConstructorBaseTypeSyntaxWrapper));
-    private readonly BaseTypeSyntax instance;
+    private readonly BaseTypeSyntax wrappedInstance;
 
-    private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax instance) =>
-        this.instance = instance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public BaseTypeSyntax Node => this.instance;
+    private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public BaseTypeSyntax SyntaxNode => this.instance;
+    public BaseTypeSyntax Node => wrappedInstance;
 
-    public BaseTypeSyntax WrappedInstance => this.instance;
+    [Obsolete("Use WrappedInstance instead")]
+    public BaseTypeSyntax SyntaxNode => wrappedInstance;
 
-    public TypeSyntax Type => this.instance.Type;
+    public BaseTypeSyntax WrappedInstance => wrappedInstance;
+
+    public TypeSyntax Type => wrappedInstance.Type;
     private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<BaseTypeSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
-    public ArgumentListSyntax ArgumentList => ArgumentListAccessor(this.instance);
-    public String Language => this.instance.Language;
-    public Int32 RawKind => this.instance.RawKind;
-    public TextSpan FullSpan => this.instance.FullSpan;
-    public TextSpan Span => this.instance.Span;
-    public Int32 SpanStart => this.instance.SpanStart;
-    public Boolean IsMissing => this.instance.IsMissing;
-    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
-    public SyntaxNode Parent => this.instance.Parent;
-    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
-    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
+    public ArgumentListSyntax ArgumentList => ArgumentListAccessor(wrappedInstance);
+    public String Language => wrappedInstance.Language;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxNode Parent => wrappedInstance.Parent;
+    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
 
     public static explicit operator PrimaryConstructorBaseTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator BaseTypeSyntax(PrimaryConstructorBaseTypeSyntaxWrapper wrapper) =>
-        wrapper.instance;
+        wrapper.wrappedInstance;
 
     public static PrimaryConstructorBaseTypeSyntaxWrapper From(SyntaxNode node)
     {

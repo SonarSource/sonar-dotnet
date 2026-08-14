@@ -40,7 +40,7 @@ public sealed class ExtendStrategy : Strategy
 
                 {{JoinLines(accessors)}}
 
-                    extension({{CompiletimeTypeSnippet()}} @this)
+                    extension({{CompiletimeTypeSnippet()}} wrappedInstance)
                     {
                 {{JoinLines(Members.Select(x => GenerateMemberExtension(x, model)))}}
                     }
@@ -61,7 +61,7 @@ public sealed class ExtendStrategy : Strategy
         member switch
         {
             PropertyInfo { GetMethod: not null } prop when model[prop.PropertyType] is { IsSupported: true } propertyTypeStrategy => $"""
-                        public {propertyTypeStrategy.ReturnTypeSnippet()} {prop.Name} => {propertyTypeStrategy.ToConversionSnippet($"{prop.Name}Accessor(@this)")};
+                        public {propertyTypeStrategy.ReturnTypeSnippet()} {prop.Name} => {propertyTypeStrategy.ToConversionSnippet($"{prop.Name}Accessor(wrappedInstance)")};
                 """,
             _ => null,
         };

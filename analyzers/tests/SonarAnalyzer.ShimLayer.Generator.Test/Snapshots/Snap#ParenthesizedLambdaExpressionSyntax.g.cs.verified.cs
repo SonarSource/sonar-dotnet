@@ -35,12 +35,12 @@ public static partial class ParenthesizedLambdaExpressionSyntaxShimExtensions
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, BlockSyntax>(WrappedType, "Block");
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
-    extension(ParenthesizedLambdaExpressionSyntax @this)
+    extension(ParenthesizedLambdaExpressionSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(@this);
-        public TypeSyntax ReturnType => ReturnTypeAccessor(@this);
-        public BlockSyntax Block => BlockAccessor(@this);
-        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+        public TypeSyntax ReturnType => ReturnTypeAccessor(wrappedInstance);
+        public BlockSyntax Block => BlockAccessor(wrappedInstance);
+        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
     }
 }

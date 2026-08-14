@@ -32,9 +32,9 @@ public static partial class ConversionOperatorDeclarationSyntaxShimExtensions
     private static readonly Func<ConversionOperatorDeclarationSyntax, ExplicitInterfaceSpecifierSyntax> ExplicitInterfaceSpecifierAccessor = LightupHelpers.CreatePropertyAccessor<ConversionOperatorDeclarationSyntax, ExplicitInterfaceSpecifierSyntax>(WrappedType, "ExplicitInterfaceSpecifier");
     private static readonly Func<ConversionOperatorDeclarationSyntax, SyntaxToken> CheckedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ConversionOperatorDeclarationSyntax, SyntaxToken>(WrappedType, "CheckedKeyword");
 
-    extension(ConversionOperatorDeclarationSyntax @this)
+    extension(ConversionOperatorDeclarationSyntax wrappedInstance)
     {
-        public ExplicitInterfaceSpecifierSyntax ExplicitInterfaceSpecifier => ExplicitInterfaceSpecifierAccessor(@this);
-        public SyntaxToken CheckedKeyword => (SyntaxToken)CheckedKeywordAccessor(@this);
+        public ExplicitInterfaceSpecifierSyntax ExplicitInterfaceSpecifier => ExplicitInterfaceSpecifierAccessor(wrappedInstance);
+        public SyntaxToken CheckedKeyword => (SyntaxToken)CheckedKeywordAccessor(wrappedInstance);
     }
 }

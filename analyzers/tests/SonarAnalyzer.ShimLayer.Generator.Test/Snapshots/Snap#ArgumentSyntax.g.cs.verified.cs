@@ -31,8 +31,8 @@ public static partial class ArgumentSyntaxShimExtensions
 
     private static readonly Func<ArgumentSyntax, SyntaxToken> RefKindKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ArgumentSyntax, SyntaxToken>(WrappedType, "RefKindKeyword");
 
-    extension(ArgumentSyntax @this)
+    extension(ArgumentSyntax wrappedInstance)
     {
-        public SyntaxToken RefKindKeyword => (SyntaxToken)RefKindKeywordAccessor(@this);
+        public SyntaxToken RefKindKeyword => (SyntaxToken)RefKindKeywordAccessor(wrappedInstance);
     }
 }

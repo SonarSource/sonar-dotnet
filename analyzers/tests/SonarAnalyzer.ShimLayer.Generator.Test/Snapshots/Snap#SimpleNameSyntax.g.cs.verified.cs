@@ -34,11 +34,11 @@ public static partial class SimpleNameSyntaxShimExtensions
     private static readonly Func<SimpleNameSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNint");
     private static readonly Func<SimpleNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<SimpleNameSyntax, Boolean>(WrappedType, "IsNuint");
 
-    extension(SimpleNameSyntax @this)
+    extension(SimpleNameSyntax wrappedInstance)
     {
-        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);
-        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(@this);
-        public Boolean IsNint => (Boolean)IsNintAccessor(@this);
-        public Boolean IsNuint => (Boolean)IsNuintAccessor(@this);
+        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
+        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
+        public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
+        public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
     }
 }

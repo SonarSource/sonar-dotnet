@@ -30,35 +30,35 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolatedStringHandlerArgumentPlaceholderOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper));
-    private readonly IOperation instance;
+    private readonly IOperation wrappedInstance;
 
-    private IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper(IOperation instance) =>
-        this.instance = instance;
+    private IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper(IOperation wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => this.instance;
+    public IOperation WrappedOperation => wrappedInstance;
 
-    public IOperation WrappedInstance => this.instance;
+    public IOperation WrappedInstance => wrappedInstance;
 
     private static readonly Func<IOperation, Int32> ArgumentIndexAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Int32>(WrappedType, "ArgumentIndex");
-    public Int32 ArgumentIndex => (Int32)ArgumentIndexAccessor(this.instance);
+    public Int32 ArgumentIndex => (Int32)ArgumentIndexAccessor(wrappedInstance);
     private static readonly Func<IOperation, InterpolatedStringArgumentPlaceholderKind> PlaceholderKindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, InterpolatedStringArgumentPlaceholderKind>(WrappedType, "PlaceholderKind");
-    public InterpolatedStringArgumentPlaceholderKind PlaceholderKind => (InterpolatedStringArgumentPlaceholderKind)PlaceholderKindAccessor(this.instance);
+    public InterpolatedStringArgumentPlaceholderKind PlaceholderKind => (InterpolatedStringArgumentPlaceholderKind)PlaceholderKindAccessor(wrappedInstance);
     private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    public IOperation Parent => ParentAccessor(this.instance);
-    public OperationKind Kind => this.instance.Kind;
-    public SyntaxNode Syntax => this.instance.Syntax;
-    public ITypeSymbol Type => this.instance.Type;
-    public Optional<Object> ConstantValue => this.instance.ConstantValue;
+    public IOperation Parent => ParentAccessor(wrappedInstance);
+    public OperationKind Kind => wrappedInstance.Kind;
+    public SyntaxNode Syntax => wrappedInstance.Syntax;
+    public ITypeSymbol Type => wrappedInstance.Type;
+    public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(this.instance);
+    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-    public String Language => (String)LanguageAccessor(this.instance);
+    public String Language => (String)LanguageAccessor(wrappedInstance);
     private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(this.instance);
+    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(this.instance);
+    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
     public static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper FromOperation(IOperation operation) =>

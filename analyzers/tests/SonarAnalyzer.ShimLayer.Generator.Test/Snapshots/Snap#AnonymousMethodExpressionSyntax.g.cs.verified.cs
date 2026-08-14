@@ -32,9 +32,9 @@ public static partial class AnonymousMethodExpressionSyntaxShimExtensions
     private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousMethodExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
     private static readonly Func<AnonymousMethodExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousMethodExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
-    extension(AnonymousMethodExpressionSyntax @this)
+    extension(AnonymousMethodExpressionSyntax wrappedInstance)
     {
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(@this);
-        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(@this);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
     }
 }

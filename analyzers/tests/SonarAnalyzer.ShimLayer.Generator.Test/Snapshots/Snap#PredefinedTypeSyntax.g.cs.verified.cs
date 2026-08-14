@@ -34,11 +34,11 @@ public static partial class PredefinedTypeSyntaxShimExtensions
     private static readonly Func<PredefinedTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<PredefinedTypeSyntax, Boolean>(WrappedType, "IsNint");
     private static readonly Func<PredefinedTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<PredefinedTypeSyntax, Boolean>(WrappedType, "IsNuint");
 
-    extension(PredefinedTypeSyntax @this)
+    extension(PredefinedTypeSyntax wrappedInstance)
     {
-        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(@this);
-        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(@this);
-        public Boolean IsNint => (Boolean)IsNintAccessor(@this);
-        public Boolean IsNuint => (Boolean)IsNuintAccessor(@this);
+        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
+        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
+        public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
+        public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
     }
 }

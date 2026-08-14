@@ -31,8 +31,8 @@ public static partial class NameColonSyntaxShimExtensions
 
     private static readonly Func<NameColonSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<NameColonSyntax, ExpressionSyntax>(WrappedType, "Expression");
 
-    extension(NameColonSyntax @this)
+    extension(NameColonSyntax wrappedInstance)
     {
-        public ExpressionSyntax Expression => ExpressionAccessor(@this);
+        public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
     }
 }

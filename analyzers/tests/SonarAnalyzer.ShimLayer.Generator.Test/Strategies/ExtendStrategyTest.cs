@@ -75,10 +75,10 @@ public class ExtendStrategyTest
                 private static readonly Func<ClassDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<ClassDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
                 private static readonly Func<ClassDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<ClassDeclarationSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
 
-                extension(ClassDeclarationSyntax @this)
+                extension(ClassDeclarationSyntax wrappedInstance)
                 {
-                    public ParameterListSyntax ParameterList => (ParameterListSyntax)ParameterListAccessor(@this);
-                    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(@this);
+                    public ParameterListSyntax ParameterList => (ParameterListSyntax)ParameterListAccessor(wrappedInstance);
+                    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(wrappedInstance);
                 }
             }
             """);
@@ -128,9 +128,9 @@ public class ExtendStrategyTest
 
                 private static readonly Func<ProcessStartInfo, String> FileNameAccessor = LightupHelpers.CreatePropertyAccessor<ProcessStartInfo, String>(WrappedType, "FileName");
 
-                extension(ProcessStartInfo @this)
+                extension(ProcessStartInfo wrappedInstance)
                 {
-                    public String FileName => (String)FileNameAccessor(@this);
+                    public String FileName => (String)FileNameAccessor(wrappedInstance);
                 }
             }
             """);
@@ -183,10 +183,10 @@ public class ExtendStrategyTest
                 private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
                 private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
 
-                extension(IOperation @this)
+                extension(IOperation wrappedInstance)
                 {
-                    public IOperation Parent => (IOperation)ParentAccessor(@this);
-                    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(@this);
+                    public IOperation Parent => (IOperation)ParentAccessor(wrappedInstance);
+                    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
                 }
             }
             """);

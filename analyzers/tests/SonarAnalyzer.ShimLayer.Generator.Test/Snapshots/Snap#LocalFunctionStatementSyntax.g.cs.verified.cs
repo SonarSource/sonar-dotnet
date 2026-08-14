@@ -30,61 +30,61 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper : ISyntaxWrap
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LocalFunctionStatementSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LocalFunctionStatementSyntaxWrapper));
-    private readonly StatementSyntax instance;
+    private readonly StatementSyntax wrappedInstance;
 
-    private LocalFunctionStatementSyntaxWrapper(StatementSyntax instance) =>
-        this.instance = instance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax Node => this.instance;
+    private LocalFunctionStatementSyntaxWrapper(StatementSyntax wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax SyntaxNode => this.instance;
+    public StatementSyntax Node => wrappedInstance;
 
-    public StatementSyntax WrappedInstance => this.instance;
+    [Obsolete("Use WrappedInstance instead")]
+    public StatementSyntax SyntaxNode => wrappedInstance;
+
+    public StatementSyntax WrappedInstance => wrappedInstance;
 
     private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(this.instance);
+    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
-    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(this.instance);
+    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, TypeSyntax> ReturnTypeAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, TypeSyntax>(WrappedType, "ReturnType");
-    public TypeSyntax ReturnType => ReturnTypeAccessor(this.instance);
+    public TypeSyntax ReturnType => ReturnTypeAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxToken> IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "Identifier");
-    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(this.instance);
+    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, TypeParameterListSyntax> TypeParameterListAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, TypeParameterListSyntax>(WrappedType, "TypeParameterList");
-    public TypeParameterListSyntax TypeParameterList => TypeParameterListAccessor(this.instance);
+    public TypeParameterListSyntax TypeParameterList => TypeParameterListAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
-    public ParameterListSyntax ParameterList => ParameterListAccessor(this.instance);
+    public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>> ConstraintClausesAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>>(WrappedType, "ConstraintClauses");
-    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => (SyntaxList<TypeParameterConstraintClauseSyntax>)ConstraintClausesAccessor(this.instance);
+    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => (SyntaxList<TypeParameterConstraintClauseSyntax>)ConstraintClausesAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, BlockSyntax> BodyAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, BlockSyntax>(WrappedType, "Body");
-    public BlockSyntax Body => BodyAccessor(this.instance);
+    public BlockSyntax Body => BodyAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ArrowExpressionClauseSyntax>(WrappedType, "ExpressionBody");
-    public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(this.instance);
+    public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
     private static readonly Func<StatementSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
-    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(this.instance);
-    public String Language => this.instance.Language;
-    public Int32 RawKind => this.instance.RawKind;
-    public TextSpan FullSpan => this.instance.FullSpan;
-    public TextSpan Span => this.instance.Span;
-    public Int32 SpanStart => this.instance.SpanStart;
-    public Boolean IsMissing => this.instance.IsMissing;
-    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
-    public SyntaxNode Parent => this.instance.Parent;
-    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
-    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
+    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(wrappedInstance);
+    public String Language => wrappedInstance.Language;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxNode Parent => wrappedInstance.Parent;
+    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
 
     public static explicit operator LocalFunctionStatementSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator StatementSyntax(LocalFunctionStatementSyntaxWrapper wrapper) =>
-        wrapper.instance;
+        wrapper.wrappedInstance;
 
     public static LocalFunctionStatementSyntaxWrapper From(SyntaxNode node)
     {

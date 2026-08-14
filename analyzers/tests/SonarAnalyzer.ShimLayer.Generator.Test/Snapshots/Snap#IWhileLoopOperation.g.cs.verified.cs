@@ -30,49 +30,49 @@ public readonly partial struct IWhileLoopOperationWrapper : IOperationWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IWhileLoopOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IWhileLoopOperationWrapper));
-    private readonly IOperation instance;
+    private readonly IOperation wrappedInstance;
 
-    private IWhileLoopOperationWrapper(IOperation instance) =>
-        this.instance = instance;
+    private IWhileLoopOperationWrapper(IOperation wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => this.instance;
+    public IOperation WrappedOperation => wrappedInstance;
 
-    public IOperation WrappedInstance => this.instance;
+    public IOperation WrappedInstance => wrappedInstance;
 
     private static readonly Func<IOperation, IOperation> ConditionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Condition");
-    public IOperation Condition => ConditionAccessor(this.instance);
+    public IOperation Condition => ConditionAccessor(wrappedInstance);
     private static readonly Func<IOperation, Boolean> ConditionIsTopAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "ConditionIsTop");
-    public Boolean ConditionIsTop => (Boolean)ConditionIsTopAccessor(this.instance);
+    public Boolean ConditionIsTop => (Boolean)ConditionIsTopAccessor(wrappedInstance);
     private static readonly Func<IOperation, Boolean> ConditionIsUntilAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "ConditionIsUntil");
-    public Boolean ConditionIsUntil => (Boolean)ConditionIsUntilAccessor(this.instance);
+    public Boolean ConditionIsUntil => (Boolean)ConditionIsUntilAccessor(wrappedInstance);
     private static readonly Func<IOperation, IOperation> IgnoredConditionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "IgnoredCondition");
-    public IOperation IgnoredCondition => IgnoredConditionAccessor(this.instance);
+    public IOperation IgnoredCondition => IgnoredConditionAccessor(wrappedInstance);
     private static readonly Func<IOperation, LoopKind> LoopKindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, LoopKind>(WrappedType, "LoopKind");
-    public LoopKind LoopKind => (LoopKind)LoopKindAccessor(this.instance);
+    public LoopKind LoopKind => (LoopKind)LoopKindAccessor(wrappedInstance);
     private static readonly Func<IOperation, IOperation> BodyAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Body");
-    public IOperation Body => BodyAccessor(this.instance);
+    public IOperation Body => BodyAccessor(wrappedInstance);
     private static readonly Func<IOperation, ImmutableArray<ILocalSymbol>> LocalsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<ILocalSymbol>>(WrappedType, "Locals");
-    public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(this.instance);
+    public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(wrappedInstance);
     private static readonly Func<IOperation, ILabelSymbol> ContinueLabelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ILabelSymbol>(WrappedType, "ContinueLabel");
-    public ILabelSymbol ContinueLabel => (ILabelSymbol)ContinueLabelAccessor(this.instance);
+    public ILabelSymbol ContinueLabel => (ILabelSymbol)ContinueLabelAccessor(wrappedInstance);
     private static readonly Func<IOperation, ILabelSymbol> ExitLabelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ILabelSymbol>(WrappedType, "ExitLabel");
-    public ILabelSymbol ExitLabel => (ILabelSymbol)ExitLabelAccessor(this.instance);
+    public ILabelSymbol ExitLabel => (ILabelSymbol)ExitLabelAccessor(wrappedInstance);
     private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    public IOperation Parent => ParentAccessor(this.instance);
-    public OperationKind Kind => this.instance.Kind;
-    public SyntaxNode Syntax => this.instance.Syntax;
-    public ITypeSymbol Type => this.instance.Type;
-    public Optional<Object> ConstantValue => this.instance.ConstantValue;
+    public IOperation Parent => ParentAccessor(wrappedInstance);
+    public OperationKind Kind => wrappedInstance.Kind;
+    public SyntaxNode Syntax => wrappedInstance.Syntax;
+    public ITypeSymbol Type => wrappedInstance.Type;
+    public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(this.instance);
+    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-    public String Language => (String)LanguageAccessor(this.instance);
+    public String Language => (String)LanguageAccessor(wrappedInstance);
     private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(this.instance);
+    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(this.instance);
+    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
     public static IWhileLoopOperationWrapper FromOperation(IOperation operation) =>

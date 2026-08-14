@@ -31,8 +31,8 @@ public static partial class StructDeclarationSyntaxShimExtensions
 
     private static readonly Func<StructDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<StructDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
 
-    extension(StructDeclarationSyntax @this)
+    extension(StructDeclarationSyntax wrappedInstance)
     {
-        public ParameterListSyntax ParameterList => ParameterListAccessor(@this);
+        public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
     }
 }

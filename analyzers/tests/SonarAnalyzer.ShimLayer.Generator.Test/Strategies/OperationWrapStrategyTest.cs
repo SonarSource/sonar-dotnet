@@ -62,15 +62,15 @@ public class OperationWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldInitializerOperationWrapper));
-                private readonly IOperation instance;
+                private readonly IOperation wrappedInstance;
 
-                private IFieldInitializerOperationWrapper(IOperation instance) =>
-                    this.instance = instance;
+                private IFieldInitializerOperationWrapper(IOperation wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public IOperation WrappedOperation => this.instance;
+                public IOperation WrappedOperation => wrappedInstance;
 
-                public IOperation WrappedInstance => this.instance;
+                public IOperation WrappedInstance => wrappedInstance;
 
                 [Obsolete("Use From instead")]
                 public static IFieldInitializerOperationWrapper FromOperation(IOperation operation) =>
@@ -144,15 +144,15 @@ public class OperationWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldReferenceOperationWrapper));
-                private readonly IOperation instance;
+                private readonly IOperation wrappedInstance;
 
-                private IFieldReferenceOperationWrapper(IOperation instance) =>
-                    this.instance = instance;
+                private IFieldReferenceOperationWrapper(IOperation wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public IOperation WrappedOperation => this.instance;
+                public IOperation WrappedOperation => wrappedInstance;
 
-                public IOperation WrappedInstance => this.instance;
+                public IOperation WrappedInstance => wrappedInstance;
 
                 [Obsolete("Use From instead")]
                 public static IFieldReferenceOperationWrapper FromOperation(IOperation operation) =>
@@ -229,21 +229,21 @@ public class OperationWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITupleOperation";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ITupleOperationWrapper));
-                private readonly IOperation instance;
+                private readonly IOperation wrappedInstance;
 
-                private ITupleOperationWrapper(IOperation instance) =>
-                    this.instance = instance;
+                private ITupleOperationWrapper(IOperation wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
 
                 [Obsolete("Use WrappedInstance instead")]
-                public IOperation WrappedOperation => this.instance;
+                public IOperation WrappedOperation => wrappedInstance;
 
-                public IOperation WrappedInstance => this.instance;
+                public IOperation WrappedInstance => wrappedInstance;
 
                 private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<IOperation>>(WrappedType, "Elements");
-                public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(this.instance);
+                public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(wrappedInstance);
                 private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NaturalType");
-                public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(this.instance);
-                public ITypeSymbol Type => this.instance.Type;
+                public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(wrappedInstance);
+                public ITypeSymbol Type => wrappedInstance.Type;
 
                 [Obsolete("Use From instead")]
                 public static ITupleOperationWrapper FromOperation(IOperation operation) =>

@@ -30,56 +30,56 @@ public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSynta
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleTypeSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TupleTypeSyntaxWrapper));
-    private readonly TypeSyntax instance;
+    private readonly TypeSyntax wrappedInstance;
 
-    private TupleTypeSyntaxWrapper(TypeSyntax instance) =>
-        this.instance = instance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax Node => this.instance;
+    private TupleTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
+        this.wrappedInstance = wrappedInstance;
 
     [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax SyntaxNode => this.instance;
+    public TypeSyntax Node => wrappedInstance;
 
-    public TypeSyntax WrappedInstance => this.instance;
+    [Obsolete("Use WrappedInstance instead")]
+    public TypeSyntax SyntaxNode => wrappedInstance;
+
+    public TypeSyntax WrappedInstance => wrappedInstance;
 
     private static readonly Func<TypeSyntax, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
-    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(this.instance);
+    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>> ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeSyntax, TupleElementSyntaxWrapper>(WrappedType, nameof(Elements));
-    public SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> Elements => ElementsAccessor(this.instance);
+    public SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> Elements => ElementsAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
-    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(this.instance);
-    public Boolean IsVar => this.instance.IsVar;
+    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(wrappedInstance);
+    public Boolean IsVar => wrappedInstance.IsVar;
     private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-    public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(this.instance);
+    public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-    public Boolean IsNotNull => (Boolean)IsNotNullAccessor(this.instance);
+    public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-    public Boolean IsNint => (Boolean)IsNintAccessor(this.instance);
+    public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
     private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
-    public Boolean IsNuint => (Boolean)IsNuintAccessor(this.instance);
-    public String Language => this.instance.Language;
-    public Int32 RawKind => this.instance.RawKind;
-    public TextSpan FullSpan => this.instance.FullSpan;
-    public TextSpan Span => this.instance.Span;
-    public Int32 SpanStart => this.instance.SpanStart;
-    public Boolean IsMissing => this.instance.IsMissing;
-    public Boolean IsStructuredTrivia => this.instance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => this.instance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => this.instance.ContainsSkippedText;
-    public Boolean ContainsDiagnostics => this.instance.ContainsDiagnostics;
-    public Boolean ContainsDirectives => this.instance.ContainsDirectives;
-    public Boolean HasLeadingTrivia => this.instance.HasLeadingTrivia;
-    public Boolean HasTrailingTrivia => this.instance.HasTrailingTrivia;
-    public SyntaxNode Parent => this.instance.Parent;
-    public SyntaxTrivia ParentTrivia => this.instance.ParentTrivia;
-    public Boolean ContainsAnnotations => this.instance.ContainsAnnotations;
+    public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
+    public String Language => wrappedInstance.Language;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
+    public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxNode Parent => wrappedInstance.Parent;
+    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
 
     public static explicit operator TupleTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);
 
     public static implicit operator TypeSyntax(TupleTypeSyntaxWrapper wrapper) =>
-        wrapper.instance;
+        wrapper.wrappedInstance;
 
     public static TupleTypeSyntaxWrapper From(SyntaxNode node)
     {

@@ -34,11 +34,11 @@ public static partial class LambdaExpressionSyntaxShimExtensions
     private static readonly Func<LambdaExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<LambdaExpressionSyntax, BlockSyntax>(WrappedType, "Block");
     private static readonly Func<LambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<LambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
 
-    extension(LambdaExpressionSyntax @this)
+    extension(LambdaExpressionSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(@this);
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(@this);
-        public BlockSyntax Block => BlockAccessor(@this);
-        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(@this);
+        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+        public BlockSyntax Block => BlockAccessor(wrappedInstance);
+        public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
     }
 }

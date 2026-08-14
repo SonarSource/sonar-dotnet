@@ -29,15 +29,15 @@ public class OperationWrapStrategy : WrapStrategy
             public const string WrappedTypeName = "{{Latest.FullName}}";
 
             private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
-            private readonly {{CompiletimeTypeSnippet()}} instance;
+            private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
 
-            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} instance) =>
-                this.instance = instance;
+            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
+                this.wrappedInstance = wrappedInstance;
 
             [Obsolete("Use WrappedInstance instead")]
-            public {{CompiletimeTypeSnippet()}} WrappedOperation => this.instance;
+            public {{CompiletimeTypeSnippet()}} WrappedOperation => wrappedInstance;
 
-            public {{CompiletimeTypeSnippet()}} WrappedInstance => this.instance;
+            public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
 
         {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
 

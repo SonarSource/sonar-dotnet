@@ -32,9 +32,9 @@ public static partial class CrefParameterSyntaxShimExtensions
     private static readonly Func<CrefParameterSyntax, SyntaxToken> RefKindKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CrefParameterSyntax, SyntaxToken>(WrappedType, "RefKindKeyword");
     private static readonly Func<CrefParameterSyntax, SyntaxToken> ReadOnlyKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CrefParameterSyntax, SyntaxToken>(WrappedType, "ReadOnlyKeyword");
 
-    extension(CrefParameterSyntax @this)
+    extension(CrefParameterSyntax wrappedInstance)
     {
-        public SyntaxToken RefKindKeyword => (SyntaxToken)RefKindKeywordAccessor(@this);
-        public SyntaxToken ReadOnlyKeyword => (SyntaxToken)ReadOnlyKeywordAccessor(@this);
+        public SyntaxToken RefKindKeyword => (SyntaxToken)RefKindKeywordAccessor(wrappedInstance);
+        public SyntaxToken ReadOnlyKeyword => (SyntaxToken)ReadOnlyKeywordAccessor(wrappedInstance);
     }
 }

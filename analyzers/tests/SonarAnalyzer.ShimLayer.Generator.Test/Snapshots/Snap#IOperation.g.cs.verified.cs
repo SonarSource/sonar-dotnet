@@ -35,12 +35,12 @@ public static partial class IOperationShimExtensions
     private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
 
-    extension(IOperation @this)
+    extension(IOperation wrappedInstance)
     {
-        public IOperation Parent => ParentAccessor(@this);
-        public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(@this);
-        public String Language => (String)LanguageAccessor(@this);
-        public Boolean IsImplicit => (Boolean)IsImplicitAccessor(@this);
-        public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(@this);
+        public IOperation Parent => ParentAccessor(wrappedInstance);
+        public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+        public String Language => (String)LanguageAccessor(wrappedInstance);
+        public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
+        public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     }
 }
