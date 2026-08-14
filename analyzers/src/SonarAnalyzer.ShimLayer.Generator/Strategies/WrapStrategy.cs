@@ -19,6 +19,12 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public abstract class WrapStrategy : Strategy
 {
+    protected abstract string BaseTypeSnippet { get; }
+    [Obsolete("This should be removed once we remove the obsolete usages from the generated code")]
+    protected abstract string ObsoletePropertiesSnippet { get; }
+    protected abstract string ConversionSnippet { get; }
+    protected abstract string WrapperToWrapperConversions(StrategyModel model);
+
     public Type BaseType { get; }
     public IReadOnlyList<MemberDescriptor> Members { get; }
 
@@ -36,6 +42,33 @@ public abstract class WrapStrategy : Strategy
 
     public override string CompiletimeTypeSnippet() =>
         BaseType.Name;
+
+    protected override string GenerateCore(StrategyModel model)
+    {
+        return $$"""
+            {{Preamble()}}
+            public readonly partial struct {{Latest.Name}}Wrapper : {{BaseTypeSnippet}}
+            {
+                public const string WrappedTypeName = "{{Latest.FullName}}";
+
+                private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
+                private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
+
+                private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
+                    this.wrappedInstance = wrappedInstance;
+
+            {{ObsoletePropertiesSnippet}}
+
+                public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
+
+            {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
+
+            {{ConversionSnippet}}
+
+            {{WrapperToWrapperConversions(model)}}
+            }
+            """;
+    }
 
     protected string WrapperToWrapperConversions(IEnumerable<Type> baseTypes)
     {

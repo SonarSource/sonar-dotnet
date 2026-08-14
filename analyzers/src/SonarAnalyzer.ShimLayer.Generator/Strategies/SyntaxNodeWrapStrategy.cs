@@ -19,31 +19,17 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class SyntaxNodeWrapStrategy : WrapStrategy
 {
-    public SyntaxNodeWrapStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest, baseType, members) { }
+    protected override string BaseTypeSnippet => $"ISyntaxWrapper<{CompiletimeTypeSnippet()}>";
 
-    protected override string GenerateCore(StrategyModel model) =>
-        $$"""
-        {{Preamble()}}
-        public readonly partial struct {{Latest.Name}}Wrapper : ISyntaxWrapper<{{CompiletimeTypeSnippet()}}>
-        {
-            public const string WrappedTypeName = "{{Latest.FullName}}";
-
-            private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
-            private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
-
-            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
-                this.wrappedInstance = wrappedInstance;
+    protected override string ObsoletePropertiesSnippet => $"""
+            [Obsolete("Use WrappedInstance instead")]
+            public {CompiletimeTypeSnippet()} Node => wrappedInstance;
 
             [Obsolete("Use WrappedInstance instead")]
-            public {{CompiletimeTypeSnippet()}} Node => wrappedInstance;
+            public {CompiletimeTypeSnippet()} SyntaxNode => wrappedInstance;
+        """;
 
-            [Obsolete("Use WrappedInstance instead")]
-            public {{CompiletimeTypeSnippet()}} SyntaxNode => wrappedInstance;
-
-            public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
-
-        {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
-
+    protected override string ConversionSnippet => $$"""
             public static explicit operator {{Latest.Name}}Wrapper(SyntaxNode node) =>
                 From(node);
 
@@ -68,12 +54,11 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
 
             public static bool IsInstance(SyntaxNode node) =>
                 node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
-
-        {{WrapperToWrapperConversions(model)}}
-        }
         """;
 
-    private string WrapperToWrapperConversions(StrategyModel model)
+    public SyntaxNodeWrapStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest, baseType, members) { }
+
+    protected override string WrapperToWrapperConversions(StrategyModel model)
     {
         return WrapperToWrapperConversions(WrappedBaseTypes());
 

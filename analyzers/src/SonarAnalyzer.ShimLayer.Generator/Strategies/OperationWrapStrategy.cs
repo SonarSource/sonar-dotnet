@@ -19,28 +19,14 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class OperationWrapStrategy : WrapStrategy
 {
-    public OperationWrapStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest, typeof(IOperation), members) { }
+    protected override string BaseTypeSnippet => "IOperationWrapper";
 
-    protected override string GenerateCore(StrategyModel model) =>
-        $$"""
-        {{Preamble()}}
-        public readonly partial struct {{Latest.Name}}Wrapper : IOperationWrapper
-        {
-            public const string WrappedTypeName = "{{Latest.FullName}}";
-
-            private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
-            private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
-
-            private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
-                this.wrappedInstance = wrappedInstance;
-
+    protected override string ObsoletePropertiesSnippet => $"""
             [Obsolete("Use WrappedInstance instead")]
-            public {{CompiletimeTypeSnippet()}} WrappedOperation => wrappedInstance;
+            public {CompiletimeTypeSnippet()} WrappedOperation => wrappedInstance;
+        """;
 
-            public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
-
-        {{JoinLines(Members.Select(x => MemberDeclaration(x, model)))}}
-
+    protected override string ConversionSnippet => $$"""
             [Obsolete("Use From instead")]
             public static {{Latest.Name}}Wrapper FromOperation(IOperation operation) =>
                 From(operation);
@@ -63,11 +49,10 @@ public class OperationWrapStrategy : WrapStrategy
 
             public static bool IsInstance(IOperation operation) =>
                 operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
-
-        {{WrapperToWrapperConversions(model)}}
-        }
         """;
 
-    private string WrapperToWrapperConversions(StrategyModel model) =>
+    public OperationWrapStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest, typeof(IOperation), members) { }
+
+    protected override string WrapperToWrapperConversions(StrategyModel model) =>
         WrapperToWrapperConversions(Latest.GetInterfaces().Where(x => model[x] is OperationWrapStrategy));
 }
