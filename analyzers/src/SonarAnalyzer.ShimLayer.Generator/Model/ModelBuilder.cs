@@ -110,7 +110,16 @@ public static class ModelBuilder
     private static MemberDescriptor[] CreateMembers(TypeDescriptor latestType, TypeDescriptor baselineType)
     {
         var baseline = new HashSet<string>(baselineType?.Members.Select(x => x.ToString()) ?? []);
-        return latestType.Members.Where(IsValid).Select(x => new MemberDescriptor(x, baseline.Contains(x.ToString()))).ToArray();
+        var nonShadowedMembers = latestType.Members.GroupBy(MemberKey).Select(x => x.OrderByDescending(x => InheritanceDepth(x.DeclaringType)).First());
+        return nonShadowedMembers.Where(IsValid).Select(x => new MemberDescriptor(x, baseline.Contains(x.ToString()))).ToArray();
+
+        static string MemberKey(MemberInfo member) =>
+            member is MethodInfo method
+                ? member.Name + ": " + method.GetParameters().JoinStr(", ", x => x.ParameterType.FullName)
+                : member.Name;
+
+        static int InheritanceDepth(Type type) =>
+            type is null ? 0 : 1 + InheritanceDepth(type.BaseType);
     }
 
     private static FieldInfo[] CreateEnumFields(TypeDescriptor latestType, TypeDescriptor baselineType)

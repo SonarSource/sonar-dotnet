@@ -116,7 +116,7 @@ public class ModelBuilderTest
         var model = ModelBuilder.Build([typeDescriptor], typeLoader.LoadBaseline());
         var strategy = model[typeDescriptor.Type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which;
         strategy.BaseType.FullName.Should().Be(typeof(TypeDeclarationSyntax).FullName);
-        strategy.Members.Should().HaveCount(150);
+        strategy.Members.Should().HaveCount(111);
         strategy.Members.Should().ContainEquivalentOf(new MemberDescriptor(typeDescriptor.Type.GetMember(nameof(ExtensionBlockDeclarationSyntax.Modifiers)).Should().ContainSingle().Subject, true));
         strategy.Members.Should().ContainEquivalentOf(new MemberDescriptor(typeDescriptor.Type.GetMember(nameof(ExtensionBlockDeclarationSyntax.ParameterList)).Should().ContainSingle().Subject, false));
     }
@@ -265,5 +265,16 @@ public class ModelBuilderTest
         };
         var model = ModelBuilder.Build([new(type, membersToSkip)], []);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.Members.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void CreateMembers_SkipShadowedMembers()
+    {
+        var type = typeof(ClassDeclarationSyntax);
+        var members = typeof(ClassDeclarationSyntax).GetMember("WithModifiers");
+        var memberFromTopType = members.Single(x => x.DeclaringType == typeof(ClassDeclarationSyntax)); // Returns ClassDeclarationSyntax, shadows the base type method
+        var memberFromBaseType = members.Single(x => x.DeclaringType == typeof(TypeDeclarationSyntax)); // Returns TypeDeclarationSyntax
+        var model = ModelBuilder.Build([new(type, [memberFromBaseType, memberFromTopType])], []);
+        model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.Members.Should().ContainSingle().Which.Member.Should().Be(memberFromTopType);
     }
 }
