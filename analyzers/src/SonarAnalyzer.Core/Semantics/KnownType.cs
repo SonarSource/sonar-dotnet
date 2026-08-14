@@ -103,6 +103,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_IActionFilter = new("Microsoft.AspNetCore.Mvc.Filters.IActionFilter");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter = new("Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
+    public static readonly KnownType Microsoft_AspNetCore_Mvc_FromStateAttribute = new("Microsoft.AspNetCore.Mvc.FromStateAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpGetAttribute = new("Microsoft.AspNetCore.Mvc.HttpGetAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpHeadAttribute = new("Microsoft.AspNetCore.Mvc.HttpHeadAttribute");
@@ -141,6 +142,8 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_Azure_ServiceBus_SessionClient = new("Microsoft.Azure.ServiceBus.SessionClient");
     public static readonly KnownType Microsoft_Azure_ServiceBus_SubscriptionClient = new("Microsoft.Azure.ServiceBus.SubscriptionClient");
     public static readonly KnownType Microsoft_Azure_ServiceBus_TopicClient = new("Microsoft.Azure.ServiceBus.TopicClient");
+    public static readonly KnownType Microsoft_Azure_WebJobs_BlobAttribute = new("Microsoft.Azure.WebJobs.BlobAttribute");
+    public static readonly KnownType Microsoft_Azure_WebJobs_CosmosDBAttribute = new("Microsoft.Azure.WebJobs.CosmosDBAttribute");
     public static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityClient = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityClient");
     public static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableEntityContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableEntityContext");
     public static readonly KnownType Microsoft_Azure_WebJobs_Extensions_DurableTask_IDurableOrchestrationContext = new("Microsoft.Azure.WebJobs.Extensions.DurableTask.IDurableOrchestrationContext");
@@ -269,6 +272,7 @@ public sealed partial class KnownType
     public static readonly KnownType Org_BouncyCastle_Crypto_Prng_IRandomGenerator = new("Org.BouncyCastle.Crypto.Prng.IRandomGenerator");
     public static readonly KnownType Org_BouncyCastle_Crypto_Prng_VmpcRandomGenerator = new("Org.BouncyCastle.Crypto.Prng.VmpcRandomGenerator");
     public static readonly KnownType Org_BouncyCastle_Security_SecureRandom = new("Org.BouncyCastle.Security.SecureRandom");
+    public static readonly KnownType Orleans_Runtime_PersistentStateAttribute = new("Orleans.Runtime.PersistentStateAttribute");
     public static readonly KnownType Serilog_Events_LogEventLevel = new("Serilog.Events.LogEventLevel");
     public static readonly KnownType Serilog_ILogger = new("Serilog.ILogger");
     public static readonly KnownType Serilog_LoggerConfiguration = new("Serilog.LoggerConfiguration");
@@ -842,4 +846,5 @@ public sealed partial class KnownType
             // Note: XUnit doesn't have a separate "Ignore" attribute. It has a "Skip" parameter on the test attribute
             Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
             NUnit_Framework_IgnoreAttribute);
+
 }

@@ -29,6 +29,12 @@ public class TooManyParametersTest
             ..NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions("8.0.1")            // For FromKeyedServicesAttribute
         ];
 
+    private static readonly MetadataReference[] AzureFunctionsReferences =
+        [
+            ..NuGetMetadataReference.Package("Microsoft.Azure.WebJobs.Extensions.Storage.Blobs", TestConstants.NuGetLatestVersion), // For BlobAttribute and BlobTriggerAttribute
+            ..NuGetMetadataReference.Package("Microsoft.Azure.WebJobs.Extensions.CosmosDB", TestConstants.NuGetLatestVersion)       // For CosmosDBAttribute
+        ];
+
     private readonly VerifierBuilder builderCSMax3 = new VerifierBuilder().AddAnalyzer(() => new CS.TooManyParameters { Maximum = 3 });
     private readonly VerifierBuilder builderVBMax3 = new VerifierBuilder().AddAnalyzer(() => new VB.TooManyParameters { Maximum = 3 });
 
@@ -67,6 +73,24 @@ public class TooManyParametersTest
     public void TooManyParameters_CS_HotChocolate() =>
         builderCSMax3.AddPaths("TooManyParameters_HotChocolate.cs")
             .AddReferences(NuGetMetadataReference.HotChocolateAbstractions("13.9.14"))   // Pinned to 13.x, the last major version declaring ScopedServiceAttribute
+            .Verify();
+
+    [TestMethod]
+    public void TooManyParameters_CS_Orleans() =>
+        builderCSMax3.AddPaths("TooManyParameters_Orleans.cs")
+            .AddReferences(NuGetMetadataReference.Package("Microsoft.Orleans.Runtime", TestConstants.NuGetLatestVersion))  // For PersistentStateAttribute
+            .Verify();
+
+    [TestMethod]
+    public void TooManyParameters_CS_Dapr() =>
+        builderCSMax3.AddPaths("TooManyParameters_Dapr.cs")
+            .AddReferences(NuGetMetadataReference.Package("Dapr.AspNetCore", TestConstants.NuGetLatestVersion)) // For FromStateAttribute
+            .Verify();
+
+    [TestMethod]
+    public void TooManyParameters_CS_AzureFunctions() =>
+        builderCSMax3.AddPaths("TooManyParameters_AzureFunctions.cs")
+            .AddReferences(AzureFunctionsReferences)
             .Verify();
 
     [TestMethod]

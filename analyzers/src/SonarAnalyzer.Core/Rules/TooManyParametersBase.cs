@@ -25,6 +25,7 @@ namespace SonarAnalyzer.Core.Rules
         protected const string MessageFormat = "{0} has {1} parameters, which is greater than the {2} authorized.";
         private const int DefaultValueMaximum = 7;
 
+        // These attributes identify parameters supplied by a framework, DI container, or runtime binding rather than by the caller.
         protected static readonly ImmutableArray<KnownType> DependencyInjectionAttributes = ImmutableArray.Create(
             KnownType.HotChocolate_EventMessageAttribute,
             KnownType.HotChocolate_GlobalStateAttribute,
@@ -35,7 +36,11 @@ namespace SonarAnalyzer.Core.Rules
             KnownType.HotChocolate_ScopedStateAttribute,
             KnownType.HotChocolate_ServiceAttribute,
             KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute,
-            KnownType.Microsoft_Extensions_DependencyInjection_FromKeyedServicesAttribute);
+            KnownType.Microsoft_AspNetCore_Mvc_FromStateAttribute,
+            KnownType.Microsoft_Azure_WebJobs_BlobAttribute,
+            KnownType.Microsoft_Azure_WebJobs_CosmosDBAttribute,
+            KnownType.Microsoft_Extensions_DependencyInjection_FromKeyedServicesAttribute,
+            KnownType.Orleans_Runtime_PersistentStateAttribute);
 
         private readonly DiagnosticDescriptor rule;
 
