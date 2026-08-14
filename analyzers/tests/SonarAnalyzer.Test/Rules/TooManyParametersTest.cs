@@ -23,6 +23,12 @@ namespace SonarAnalyzer.Test.Rules;
 [TestClass]
 public class TooManyParametersTest
 {
+    private static readonly MetadataReference[] DependencyInjectionReferences =
+        [
+            ..NuGetMetadataReference.MicrosoftAspNetCoreMvcCore(TestConstants.DotNetCore220Version),        // For FromServicesAttribute
+            ..NuGetMetadataReference.MicrosoftExtensionsDependencyInjectionAbstractions("8.0.1")            // For FromKeyedServicesAttribute
+        ];
+
     private readonly VerifierBuilder builderCSMax3 = new VerifierBuilder().AddAnalyzer(() => new CS.TooManyParameters { Maximum = 3 });
     private readonly VerifierBuilder builderVBMax3 = new VerifierBuilder().AddAnalyzer(() => new VB.TooManyParameters { Maximum = 3 });
 
@@ -45,8 +51,27 @@ public class TooManyParametersTest
             .Verify();
 
     [TestMethod]
+    public void TooManyParameters_CS_FromServices() =>
+        builderCSMax3.AddPaths("TooManyParameters_FromServices.cs")
+            .AddReferences(DependencyInjectionReferences)
+            .Verify();
+
+    [TestMethod]
+    public void TooManyParameters_CS_FromServices_Latest() =>
+        builderCSMax3.AddPaths("TooManyParameters_FromServices.Latest.cs")
+            .AddReferences(DependencyInjectionReferences)
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
     public void TooManyParameters_VB_CustomValues() =>
         builderVBMax3.AddPaths("TooManyParameters_CustomValues.vb").Verify();
+
+    [TestMethod]
+    public void TooManyParameters_VB_FromServices() =>
+        builderVBMax3.AddPaths("TooManyParameters_FromServices.vb")
+            .AddReferences(DependencyInjectionReferences)
+            .Verify();
 
     [TestMethod]
     public void TooManyParameters_CS_DefaultValues() =>

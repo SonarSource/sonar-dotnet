@@ -25,17 +25,23 @@ namespace SonarAnalyzer.Core.Rules
         protected const string MessageFormat = "{0} has {1} parameters, which is greater than the {2} authorized.";
         private const int DefaultValueMaximum = 7;
 
+        protected static readonly ImmutableArray<KnownType> DependencyInjectionAttributes = ImmutableArray.Create(
+            KnownType.Microsoft_AspNetCore_Mvc_FromServicesAttribute,
+            KnownType.Microsoft_Extensions_DependencyInjection_FromKeyedServicesAttribute);
+
         private readonly DiagnosticDescriptor rule;
+
+        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
+        protected abstract string UserFriendlyNameForNode(SyntaxNode node);
+        protected abstract bool TryGetParameterCountAboveMaximum(TParameterListSyntax parameterList, SemanticModel model, out int parameterCount);
+        protected abstract int BaseParameterCount(SyntaxNode node, SemanticModel model);
+        protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel model);
+
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(rule);
 
         [RuleParameter("max", PropertyType.Integer, "Maximum authorized number of parameters", DefaultValueMaximum)]
         public int Maximum { get; set; } = DefaultValueMaximum;
 
-        protected abstract ILanguageFacade<TSyntaxKind> Language { get; }
-        protected abstract string UserFriendlyNameForNode(SyntaxNode node);
-        protected abstract int CountParameters(TParameterListSyntax parameterList);
-        protected abstract int BaseParameterCount(SyntaxNode node);
-        protected abstract bool CanBeChanged(SyntaxNode node, SemanticModel semanticModel);
         protected virtual bool IsExtern(SyntaxNode node) => false;
 
         protected TooManyParametersBase() =>
@@ -46,15 +52,16 @@ namespace SonarAnalyzer.Core.Rules
                 Language.GeneratedCodeRecognizer,
                 c =>
                 {
-                    var parametersCount = CountParameters((TParameterListSyntax)c.Node);
-                    var baseCount = BaseParameterCount(c.Node.Parent);
-                    if (parametersCount - baseCount > Maximum
+                    if (TryGetParameterCountAboveMaximum((TParameterListSyntax)c.Node, c.Model, out var parametersCount)
                         && c.Node.Parent is { } parent
-                        && !IsExtern(parent)
-                        && CanBeChanged(parent, c.Model))
+                        && !IsExtern(parent))
                     {
-                        var valueText = baseCount == 0 ? parametersCount.ToString() : $"{parametersCount - baseCount} new";
-                        c.ReportIssue(SupportedDiagnostics[0], c.Node, UserFriendlyNameForNode(c.Node.Parent), valueText, Maximum.ToString());
+                        var baseCount = BaseParameterCount(parent, c.Model);
+                        if (parametersCount - baseCount > Maximum && CanBeChanged(parent, c.Model))
+                        {
+                            var valueText = baseCount == 0 ? parametersCount.ToString() : $"{parametersCount - baseCount} new";
+                            c.ReportIssue(SupportedDiagnostics[0], c.Node, UserFriendlyNameForNode(parent), valueText, Maximum.ToString());
+                        }
                     }
                 },
                 Language.SyntaxKind.ParameterList);
@@ -84,5 +91,8 @@ namespace SonarAnalyzer.Core.Rules
 
             return declaredSymbol.OverriddenMember is null && declaredSymbol.InterfaceMembers().IsEmpty;
         }
+
+        protected static bool IsDependencyInjected(IParameterSymbol parameter) =>
+            parameter.AnyAttributeDerivesFromAny(DependencyInjectionAttributes);
     }
 }

@@ -163,6 +163,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions = new("Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_ServiceCollectionServiceExtensions = new("Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_Extensions_ServiceCollectionDescriptorExtensions = new("Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions");
+    public static readonly KnownType Microsoft_Extensions_DependencyInjection_FromKeyedServicesAttribute = new("Microsoft.Extensions.DependencyInjection.FromKeyedServicesAttribute");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_ServiceDescriptor = new("Microsoft.Extensions.DependencyInjection.ServiceDescriptor");
     public static readonly KnownType Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions = new("Microsoft.Extensions.Hosting.HostEnvironmentEnvExtensions");
     public static readonly KnownType Microsoft_Extensions_Hosting_IHostApplicationLifetime = new("Microsoft.Extensions.Hosting.IHostApplicationLifetime");
