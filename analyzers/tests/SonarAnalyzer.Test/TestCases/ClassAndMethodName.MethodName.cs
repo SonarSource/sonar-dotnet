@@ -91,6 +91,14 @@
         public void MyEOFile() { }
     }
 
+    // See https://github.com/SonarSource/sonar-dotnet/issues/7238
+    public class AllowLowerCaseLetterAfterDigit
+    {
+        public void ToB2bFormat() { }   // Compliant, a lower case letter after a digit is allowed even when a new capitalized word follows
+        public void ToSomething2a() { } // Compliant, numeronyms allow both a lower and an upper case letter after a digit
+        public void ToSomething2A() { } // Compliant
+    }
+
     public class WithLocalFunctions
     {
         public void Method()

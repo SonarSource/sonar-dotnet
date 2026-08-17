@@ -113,7 +113,7 @@ namespace t4
     class TTTestClassTTT { }// Noncompliant {{Rename class 'TTTestClassTTT' to match pascal case naming rules, consider using 'TtTestClassTtt'.}}
     class TTT44 { }// Noncompliant
     class ABCDEFGHIJK { }// Noncompliant
-    class Abcd4a { }// Noncompliant
+    class Abcd4a { }// Compliant, numeronyms allow both a lower and an upper case letter after a digit
 
     class A_B_C { } // Noncompliant
 
@@ -191,13 +191,31 @@ namespace FPRepros
     }
 
     // https://github.com/SonarSource/sonar-dotnet/issues/7238
-    public class B2b // Noncompliant {{Rename class 'B2b' to match pascal case naming rules, consider using 'B2B'.}}
+    public class B2b // Compliant, numeronyms allow both a lower and an upper case letter after a digit
     { }
 
-    public class B2bSomethingCalculator // Noncompliant FP
+    public class B2B // Compliant
     { }
 
-    public class L10nService // Noncompliant FP
+    public class L10n // Compliant
+    { }
+
+    public class L10N // Compliant
+    { }
+
+    public class I18n // Compliant, the leading 'I' is the first letter of a numeronym, not an interface prefix
+    { }
+
+    public class I18N // Compliant
+    { }
+
+    public interface I18nProvider // Compliant
+    { }
+
+    public class B2bSomethingCalculator // Compliant, a lower case letter after a digit is allowed even when a new capitalized word follows
+    { }
+
+    public class L10nService // Compliant
     { }
 }
 

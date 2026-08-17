@@ -17,338 +17,343 @@
 
 using System.Text;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class ClassAndMethodName : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class ClassAndMethodName : SonarDiagnosticAnalyzer
+    private const string MethodNameDiagnosticId = "S100";
+    private const string TypeNameDiagnosticId = "S101";
+
+    private const string MessageFormat = "Rename {0} '{1}' to match pascal case naming rules, {2}.";
+    private const string MessageFormatNonUnderscore = "consider using '{0}'";
+    private const string MessageFormatUnderscore = "trim underscores from the name";
+
+    private static readonly DiagnosticDescriptor MethodNameRule = DescriptorFactory.Create(MethodNameDiagnosticId, MessageFormat);
+    private static readonly DiagnosticDescriptor TypeNameRule = DescriptorFactory.Create(TypeNameDiagnosticId, MessageFormat);
+
+    private static readonly ImmutableArray<KnownType> ComRelatedTypes =
+        ImmutableArray.Create(
+            KnownType.System_Runtime_InteropServices_ComImportAttribute,
+            KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute);
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(MethodNameRule, TypeNameRule);
+
+    internal static IEnumerable<string> SplitToParts(string name)
     {
-        private const string MethodNameDiagnosticId = "S100";
-        private const string TypeNameDiagnosticId = "S101";
-
-        private const string MessageFormat = "Rename {0} '{1}' to match pascal case naming rules, {2}.";
-        private const string MessageFormatNonUnderscore = "consider using '{0}'";
-        private const string MessageFormatUnderscore = "trim underscores from the name";
-
-        private static readonly DiagnosticDescriptor MethodNameRule = DescriptorFactory.Create(MethodNameDiagnosticId, MessageFormat);
-        private static readonly DiagnosticDescriptor TypeNameRule = DescriptorFactory.Create(TypeNameDiagnosticId, MessageFormat);
-
-        private static readonly ImmutableArray<KnownType> ComRelatedTypes =
-            ImmutableArray.Create(
-                KnownType.System_Runtime_InteropServices_ComImportAttribute,
-                KnownType.System_Runtime_InteropServices_InterfaceTypeAttribute);
-
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(MethodNameRule, TypeNameRule);
-
-        internal static IEnumerable<string> SplitToParts(string name)
+        var currentWord = new StringBuilder(name.Length);
+        foreach (var c in name)
         {
-            var currentWord = new StringBuilder(name.Length);
-            foreach (var c in name)
+            foreach (var part in ProcessChar(c, currentWord))
             {
-                foreach (var part in ProcessChar(c, currentWord))
-                {
-                    yield return part;
-                }
+                yield return part;
             }
+        }
 
+        if (currentWord.Length > 0)
+        {
+            yield return currentWord.ToString();
+        }
+    }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterCompilationStartAction(startContext =>
+            {
+                var allowedAcronyms = startContext.Options.CustomDictionaryAcronyms(startContext);
+
+                startContext.RegisterNodeAction(c =>
+                    {
+                        if (c.IsRedundantPositionalRecordContext())
+                        {
+                            return;
+                        }
+                        CheckTypeName(c, allowedAcronyms);
+                    },
+                    SyntaxKind.ClassDeclaration,
+                    SyntaxKind.InterfaceDeclaration,
+                    SyntaxKind.StructDeclaration,
+                    SyntaxKindEx.RecordDeclaration,
+                    SyntaxKindEx.RecordStructDeclaration);
+
+                startContext.RegisterNodeAction(c =>
+                    {
+                        var identifier = DeclarationIdentifier(c.Node);
+                        CheckMemberName(c, identifier, allowedAcronyms);
+                    },
+                    SyntaxKind.MethodDeclaration,
+                    SyntaxKind.PropertyDeclaration,
+                    SyntaxKindEx.LocalFunctionStatement);
+            });
+
+    private static IEnumerable<string> ProcessChar(char c, StringBuilder currentWord)
+    {
+        if (char.IsUpper(c))
+        {
+            if (currentWord.Length > 0 && !char.IsUpper(currentWord[currentWord.Length - 1]))
+            {
+                yield return currentWord.ToString();
+                currentWord.Clear();
+            }
+            currentWord.Append(c);
+        }
+        else if (char.IsLower(c))
+        {
+            if (currentWord.Length > 1 && char.IsUpper(currentWord[currentWord.Length - 1]))
+            {
+                var lastChar = currentWord[currentWord.Length - 1];
+                currentWord.Length--;
+                yield return currentWord.ToString();
+                currentWord.Clear();
+                currentWord.Append(lastChar);
+            }
+            currentWord.Append(c);
+        }
+        else
+        {
             if (currentWord.Length > 0)
             {
                 yield return currentWord.ToString();
+                currentWord.Clear();
             }
+            yield return c.ToString();
+        }
+    }
+
+    private static bool IsAllowedAcronym(string part, ImmutableHashSet<string> allowedAcronyms) =>
+        part.All(char.IsUpper) && allowedAcronyms.Contains(part);
+
+    private static void CheckTypeName(SonarSyntaxNodeReportingContext context, ImmutableHashSet<string> allowedAcronyms)
+    {
+        var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
+        var identifier = typeDeclaration.Identifier;
+        var symbol = context.Model.GetDeclaredSymbol(typeDeclaration);
+
+        if (symbol.GetAttributes(ComRelatedTypes).Any())
+        {
+            return;
         }
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterCompilationStartAction(startContext =>
-                {
-                    var allowedAcronyms = startContext.Options.CustomDictionaryAcronyms(startContext);
-
-                    startContext.RegisterNodeAction(c =>
-                        {
-                            if (c.IsRedundantPositionalRecordContext())
-                            {
-                                return;
-                            }
-                            CheckTypeName(c, allowedAcronyms);
-                        },
-                        SyntaxKind.ClassDeclaration,
-                        SyntaxKind.InterfaceDeclaration,
-                        SyntaxKind.StructDeclaration,
-                        SyntaxKindEx.RecordDeclaration,
-                        SyntaxKindEx.RecordStructDeclaration);
-
-                    startContext.RegisterNodeAction(c =>
-                        {
-                            var identifier = GetDeclarationIdentifier(c.Node);
-                            CheckMemberName(c, identifier, allowedAcronyms);
-                        },
-                        SyntaxKind.MethodDeclaration,
-                        SyntaxKind.PropertyDeclaration,
-                        SyntaxKindEx.LocalFunctionStatement);
-                });
-
-        private static IEnumerable<string> ProcessChar(char c, StringBuilder currentWord)
+        if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
+            || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
         {
-            if (char.IsUpper(c))
-            {
-                if (currentWord.Length > 0 && !char.IsUpper(currentWord[currentWord.Length - 1]))
-                {
-                    yield return currentWord.ToString();
-                    currentWord.Clear();
-                }
-                currentWord.Append(c);
-            }
-            else if (char.IsLower(c))
-            {
-                if (currentWord.Length > 1 && char.IsUpper(currentWord[currentWord.Length - 1]))
-                {
-                    var lastChar = currentWord[currentWord.Length - 1];
-                    currentWord.Length--;
-                    yield return currentWord.ToString();
-                    currentWord.Clear();
-                    currentWord.Append(lastChar);
-                }
-                currentWord.Append(c);
-            }
-            else
-            {
-                if (currentWord.Length > 0)
-                {
-                    yield return currentWord.ToString();
-                    currentWord.Clear();
-                }
-                yield return c.ToString();
-            }
+            context.ReportIssue(TypeNameRule, identifier, typeDeclaration.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore);
+            return;
         }
 
-        private static bool IsAllowedAcronym(string part, ImmutableHashSet<string> allowedAcronyms) =>
-            part.All(char.IsUpper) && allowedAcronyms.Contains(part);
-
-        private static void CheckTypeName(SonarSyntaxNodeReportingContext context, ImmutableHashSet<string> allowedAcronyms)
+        if (typeDeclaration is ClassDeclarationSyntax && IsTestClassName(typeDeclaration.Identifier.ValueText))
         {
-            var typeDeclaration = (BaseTypeDeclarationSyntax)context.Node;
-            var identifier = typeDeclaration.Identifier;
-            var symbol = context.Model.GetDeclaredSymbol(typeDeclaration);
-
-            if (symbol.GetAttributes(ComRelatedTypes).Any())
-            {
-                return;
-            }
-
-            if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
-                || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
-            {
-                context.ReportIssue(TypeNameRule, identifier, typeDeclaration.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore);
-                return;
-            }
-
-            if (typeDeclaration is ClassDeclarationSyntax && IsTestClassName(typeDeclaration.Identifier.ValueText))
-            {
-                return;
-            }
-
-            if (symbol.DeclaringSyntaxReferences.Length > 1
-                && symbol.DeclaringSyntaxReferences.Any(syntax => syntax.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, context.IsRazorAnalysisEnabled())))
-            {
-                return;
-            }
-
-            var isNameValid = IsTypeNameValid(
-                identifier.ValueText,
-                requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
-                allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
-                areUnderscoresAllowed: context.IsTestProject(),
-                allowedAcronyms: allowedAcronyms,
-                suggestion: out var suggestion);
-
-            if (!isNameValid)
-            {
-                var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportIssue(TypeNameRule, identifier, typeDeclaration.GetDeclarationTypeName(), identifier.ValueText, messageEnding);
-            }
+            return;
         }
 
-        private static void CheckMemberName(SonarSyntaxNodeReportingContext context, SyntaxToken identifier, ImmutableHashSet<string> allowedAcronyms)
+        if (symbol.DeclaringSyntaxReferences.Length > 1
+            && symbol.DeclaringSyntaxReferences.Any(x => x.SyntaxTree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, context.IsRazorAnalysisEnabled())))
         {
-            var symbol = context.Model.GetDeclaredSymbol(context.Node);
-            if (symbol == null)
-            {
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(identifier.ValueText)
-                || symbol.ContainingType.GetAttributes(ComRelatedTypes).Any()
-                || symbol is { OverriddenMember: not null } or { IsExtern: true }
-                || symbol.InterfaceMembers().Any())
-            {
-                return;
-            }
-
-            if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
-                || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
-            {
-                context.ReportIssue(MethodNameRule, identifier, context.Node.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore);
-                return;
-            }
-
-            if (identifier.ValueText.Contains("_"))
-            {
-                return;
-            }
-
-            if (!IsMemberNameValid(identifier.ValueText, allowedAcronyms, out var suggestion))
-            {
-                var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
-                context.ReportIssue(MethodNameRule, identifier, context.Node.GetDeclarationTypeName(), identifier.ValueText, messageEnding);
-            }
+            return;
         }
 
-        private static bool IsMemberNameValid(string identifierName, ImmutableHashSet<string> allowedAcronyms, out string suggestion)
+        var isNameValid = IsTypeNameValid(
+            identifier.ValueText,
+            requireInitialI: typeDeclaration is InterfaceDeclarationSyntax,
+            allowInitialI: typeDeclaration.Modifiers.Any(SyntaxKind.StaticKeyword),
+            areUnderscoresAllowed: context.IsTestProject(),
+            allowedAcronyms: allowedAcronyms,
+            suggestion: out var suggestion);
+
+        if (!isNameValid)
         {
-            if (identifierName.Length == 1)
-            {
-                suggestion = identifierName.ToUpperInvariant();
-                return suggestion == identifierName;
-            }
+            var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
+            context.ReportIssue(TypeNameRule, identifier, typeDeclaration.GetDeclarationTypeName(), identifier.ValueText, messageEnding);
+        }
+    }
 
-            var idealNameVariant = new StringBuilder(identifierName.Length);
-            var acceptableNameVariant = new StringBuilder(identifierName.Length);
-
-            foreach (var part in SplitToParts(identifierName))
-            {
-                idealNameVariant.Append(SuggestFixedCaseName(part, 1, allowedAcronyms));
-                acceptableNameVariant.Append(SuggestFixedCaseName(part, 2, allowedAcronyms));
-            }
-
-            idealNameVariant[0] = char.ToUpperInvariant(idealNameVariant[0]);
-            suggestion = SuggestCapitalLetterAfterNonLetter(idealNameVariant);
-
-            acceptableNameVariant[0] = char.ToUpperInvariant(acceptableNameVariant[0]);
-            var acceptableSuggestion = SuggestCapitalLetterAfterNonLetter(acceptableNameVariant);
-
-            return acceptableSuggestion == identifierName
-                   || suggestion == identifierName;
+    private static void CheckMemberName(SonarSyntaxNodeReportingContext context, SyntaxToken identifier, ImmutableHashSet<string> allowedAcronyms)
+    {
+        var symbol = context.Model.GetDeclaredSymbol(context.Node);
+        if (symbol is null)
+        {
+            return;
         }
 
-        private static bool IsTypeNameValid(
-            string identifierName,
-            bool requireInitialI,
-            bool allowInitialI,
-            bool areUnderscoresAllowed,
-            ImmutableHashSet<string> allowedAcronyms,
-            out string suggestion)
+        if (string.IsNullOrWhiteSpace(identifier.ValueText)
+            || symbol.ContainingType.GetAttributes(ComRelatedTypes).Any()
+            || symbol is { OverriddenMember: not null } or { IsExtern: true }
+            || symbol.InterfaceMembers().Any())
         {
-            if (identifierName.Length == 1)
-            {
-                suggestion = identifierName.ToUpperInvariant();
-                return suggestion == identifierName;
-            }
-
-            var idealNameVariant = new StringBuilder(identifierName.Length);
-            var acceptableNameVariant = new StringBuilder(identifierName.Length);
-
-            var parts = SplitToParts(identifierName).ToList();
-            for (var i = 0; i < parts.Count; i++)
-            {
-                var part = parts[i];
-                if (part.Length == 1 && part[0] == '_' && !areUnderscoresAllowed)
-                {
-                    continue;
-                }
-
-                idealNameVariant.Append(i == 0
-                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 1, allowedAcronyms)
-                    : SuggestFixedCaseName(part, 1, allowedAcronyms));
-
-                acceptableNameVariant.Append(i == 0
-                    ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 2, allowedAcronyms)
-                    : SuggestFixedCaseName(part, 2, allowedAcronyms));
-            }
-
-            suggestion = SuggestCapitalLetterAfterNonLetter(idealNameVariant);
-            var acceptableSuggestion = SuggestCapitalLetterAfterNonLetter(acceptableNameVariant);
-
-            return acceptableSuggestion == identifierName
-                   || suggestion == identifierName;
+            return;
         }
 
-        private static string HandleFirstPartOfTypeName(string input, bool requireInitialI, bool allowInitialI, int maxUppercase, ImmutableHashSet<string> allowedAcronyms)
+        if (identifier.ValueText.StartsWith("_", StringComparison.Ordinal)
+            || identifier.ValueText.EndsWith("_", StringComparison.Ordinal))
         {
-            var startsWithI = input[0] == 'I';
-
-            if (requireInitialI)
-            {
-                if (startsWithI && input.Length > 1 && IsAllowedAcronym(input.Substring(1), allowedAcronyms))
-                {
-                    return input;
-                }
-                if (IsAllowedAcronym(input, allowedAcronyms))
-                {
-                    return "I" + input;
-                }
-                var prefix = startsWithI ? string.Empty : "I";
-                return prefix + SuggestFixedCaseName(FirstCharToUpper(input), maxUppercase + 1, allowedAcronyms);
-            }
-
-            var suggestionToProcess = ShouldExcludeFirstLetter()
-                ? FirstCharToUpper(input.Substring(1))
-                : FirstCharToUpper(input);
-
-            return SuggestFixedCaseName(suggestionToProcess, maxUppercase, allowedAcronyms);
-
-            bool ShouldExcludeFirstLetter() =>
-                input.Length == 1
-                && !allowInitialI
-                && startsWithI
-                && IsCharUpper(input, 0);
+            context.ReportIssue(MethodNameRule, identifier, context.Node.GetDeclarationTypeName(), identifier.ValueText, MessageFormatUnderscore);
+            return;
         }
 
-        private static string SuggestCapitalLetterAfterNonLetter(StringBuilder suggestion)
+        if (identifier.ValueText.Contains("_"))
         {
-            for (var i = 1; i < suggestion.Length; i++)
-            {
-                if (!char.IsLetter(suggestion[i - 1])
-                    && char.IsLower(suggestion[i]))
-                {
-                    suggestion[i] = char.ToUpperInvariant(suggestion[i]);
-                }
-            }
-
-            return suggestion.ToString();
+            return;
         }
 
-        private static string SuggestFixedCaseName(string input, int maxUppercaseCount, ImmutableHashSet<string> allowedAcronyms)
+        if (!IsMemberNameValid(identifier.ValueText, allowedAcronyms, out var suggestion))
         {
-            if (IsAllowedAcronym(input, allowedAcronyms))
+            var messageEnding = string.Format(MessageFormatNonUnderscore, suggestion);
+            context.ReportIssue(MethodNameRule, identifier, context.Node.GetDeclarationTypeName(), identifier.ValueText, messageEnding);
+        }
+    }
+
+    private static bool IsMemberNameValid(string identifierName, ImmutableHashSet<string> allowedAcronyms, out string suggestion)
+    {
+        if (identifierName.Length == 1)
+        {
+            suggestion = identifierName.ToUpperInvariant();
+            return suggestion == identifierName;
+        }
+
+        var idealNameVariant = new StringBuilder(identifierName.Length);
+        var acceptableNameVariant = new StringBuilder(identifierName.Length);
+
+        foreach (var part in SplitToParts(identifierName))
+        {
+            idealNameVariant.Append(SuggestFixedCaseName(part, 1, allowedAcronyms));
+            acceptableNameVariant.Append(SuggestFixedCaseName(part, 2, allowedAcronyms));
+        }
+
+        idealNameVariant[0] = char.ToUpperInvariant(idealNameVariant[0]);
+        suggestion = SuggestCapitalLetterAfterNonLetter(idealNameVariant);
+
+        acceptableNameVariant[0] = char.ToUpperInvariant(acceptableNameVariant[0]);
+        var acceptableSuggestion = SuggestCapitalLetterAfterNonLetter(acceptableNameVariant);
+
+        return acceptableSuggestion == identifierName || suggestion == identifierName;
+    }
+
+    private static bool IsTypeNameValid(
+        string identifierName,
+        bool requireInitialI,
+        bool allowInitialI,
+        bool areUnderscoresAllowed,
+        ImmutableHashSet<string> allowedAcronyms,
+        out string suggestion)
+    {
+        if (identifierName.Length == 1)
+        {
+            suggestion = identifierName.ToUpperInvariant();
+            return suggestion == identifierName;
+        }
+
+        var idealNameVariant = new StringBuilder(identifierName.Length);
+        var acceptableNameVariant = new StringBuilder(identifierName.Length);
+
+        var parts = SplitToParts(identifierName).ToList();
+        // A leading "I" is only an interface-style prefix when a new word (an upper case letter) follows it. When it is
+        // followed by a digit the "I" is the first letter of a numeronym (e.g. I18n), so it must not be stripped.
+        var firstPartIsNumeronymStart = parts.Count > 1 && parts[1].Length > 0 && char.IsDigit(parts[1][0]);
+        for (var i = 0; i < parts.Count; i++)
+        {
+            var part = parts[i];
+            if (part.Length == 1 && part[0] == '_' && !areUnderscoresAllowed)
+            {
+                continue;
+            }
+
+            idealNameVariant.Append(i == 0
+                ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 1, allowedAcronyms, firstPartIsNumeronymStart)
+                : SuggestFixedCaseName(part, 1, allowedAcronyms));
+
+            acceptableNameVariant.Append(i == 0
+                ? HandleFirstPartOfTypeName(part, requireInitialI, allowInitialI, 2, allowedAcronyms, firstPartIsNumeronymStart)
+                : SuggestFixedCaseName(part, 2, allowedAcronyms));
+        }
+
+        suggestion = SuggestCapitalLetterAfterNonLetter(idealNameVariant);
+        var acceptableSuggestion = SuggestCapitalLetterAfterNonLetter(acceptableNameVariant);
+
+        return acceptableSuggestion == identifierName || suggestion == identifierName;
+    }
+
+    private static string HandleFirstPartOfTypeName(string input, bool requireInitialI, bool allowInitialI, int maxUppercase, ImmutableHashSet<string> allowedAcronyms, bool isNumeronymStart)
+    {
+        var startsWithI = input[0] == 'I';
+
+        if (requireInitialI)
+        {
+            if (startsWithI && input.Length > 1 && IsAllowedAcronym(input.Substring(1), allowedAcronyms))
             {
                 return input;
             }
-            var upper = input.Take(maxUppercaseCount);
-            var lower = input.Skip(maxUppercaseCount).Select(char.ToLowerInvariant);
-
-            return new string(upper.Concat(lower).ToArray());
+            if (IsAllowedAcronym(input, allowedAcronyms))
+            {
+                return "I" + input;
+            }
+            var prefix = startsWithI ? string.Empty : "I";
+            return prefix + SuggestFixedCaseName(FirstCharToUpper(input), maxUppercase + 1, allowedAcronyms);
         }
 
-        private static string FirstCharToUpper(string input) =>
-            input.Length > 0
-                ? char.ToUpperInvariant(input[0]) + input.Substring(1)
-                : input;
+        var suggestionToProcess = ShouldExcludeFirstLetter()
+            ? FirstCharToUpper(input.Substring(1))
+            : FirstCharToUpper(input);
 
-        private static bool IsCharUpper(string input, int idx) =>
-            idx >= 0
-            && idx < input.Length
-            && char.IsUpper(input[idx]);
+        return SuggestFixedCaseName(suggestionToProcess, maxUppercase, allowedAcronyms);
 
-        private static SyntaxToken GetDeclarationIdentifier(SyntaxNode declaration) =>
-            declaration.Kind() switch
-            {
-                SyntaxKind.MethodDeclaration => ((MethodDeclarationSyntax)declaration).Identifier,
-                SyntaxKind.PropertyDeclaration => ((PropertyDeclarationSyntax)declaration).Identifier,
-                SyntaxKindEx.LocalFunctionStatement => ((LocalFunctionStatementSyntaxWrapper)declaration).Identifier,
-                _ => throw new InvalidOperationException("Method can only be called on known registered syntax kinds")
-            };
-
-        private static bool IsTestClassName(string className) =>
-            className != "ITest"
-            && className != "ITests"
-            && (className.EndsWith("Test") || className.EndsWith("Tests"));
+        bool ShouldExcludeFirstLetter() =>
+            input.Length == 1
+            && !allowInitialI
+            && startsWithI
+            && !isNumeronymStart
+            && IsCharUpper(input, 0);
     }
+
+    private static string SuggestCapitalLetterAfterNonLetter(StringBuilder suggestion)
+    {
+        for (var i = 1; i < suggestion.Length; i++)
+        {
+            // A lower case letter following a digit is not forced to upper case: numeronyms (e.g. B2b, L10n, I18n) allow
+            // both a lower and an upper case letter after the number. Capitalization is still enforced after other non-letters.
+            if (!char.IsLetter(suggestion[i - 1])
+                && !char.IsDigit(suggestion[i - 1])
+                && char.IsLower(suggestion[i])
+                && (i + 1 == suggestion.Length || !char.IsUpper(suggestion[i + 1])))
+            {
+                suggestion[i] = char.ToUpperInvariant(suggestion[i]);
+            }
+        }
+
+        return suggestion.ToString();
+    }
+
+    private static string SuggestFixedCaseName(string input, int maxUppercaseCount, ImmutableHashSet<string> allowedAcronyms)
+    {
+        if (IsAllowedAcronym(input, allowedAcronyms))
+        {
+            return input;
+        }
+        var upper = input.Take(maxUppercaseCount);
+        var lower = input.Skip(maxUppercaseCount).Select(char.ToLowerInvariant);
+
+        return new string(upper.Concat(lower).ToArray());
+    }
+
+    private static string FirstCharToUpper(string input) =>
+        input.Length > 0
+            ? char.ToUpperInvariant(input[0]) + input.Substring(1)
+            : input;
+
+    private static bool IsCharUpper(string input, int idx) =>
+        idx >= 0
+        && idx < input.Length
+        && char.IsUpper(input[idx]);
+
+    private static SyntaxToken DeclarationIdentifier(SyntaxNode declaration) =>
+        declaration.Kind() switch
+        {
+            SyntaxKind.MethodDeclaration => ((MethodDeclarationSyntax)declaration).Identifier,
+            SyntaxKind.PropertyDeclaration => ((PropertyDeclarationSyntax)declaration).Identifier,
+            SyntaxKindEx.LocalFunctionStatement => ((LocalFunctionStatementSyntaxWrapper)declaration).Identifier,
+            _ => throw new InvalidOperationException("Method can only be called on known registered syntax kinds")
+        };
+
+    private static bool IsTestClassName(string className) =>
+        className != "ITest"
+        && className != "ITests"
+        && (className.EndsWith("Test") || className.EndsWith("Tests"));
 }
