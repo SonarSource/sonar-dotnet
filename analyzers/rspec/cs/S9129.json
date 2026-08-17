@@ -1,0 +1,26 @@
+{
+  "title": "\"Include\" and \"ThenInclude\" chains of reference navigations should be merged into a single \"Include\" call",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "entity-framework-core",
+    "entity-framework",
+    "orm",
+    "database"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-9129",
+  "sqKey": "S9129",
+  "scope": "Main",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "FOCUSED"
+  }
+}

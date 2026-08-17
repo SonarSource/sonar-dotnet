@@ -1,0 +1,76 @@
+<p>An <code>Include</code> call followed by one or more <code>ThenInclude</code> calls can often be written as a single <code>Include</code> call with
+a dotted navigation path, when every navigation before the last step of the chain is a reference (single-valued) navigation.</p>
+<h2>Why is this an issue?</h2>
+<p>A <code>ThenInclude</code> call continues the navigation path of the <code>Include</code>/<code>ThenInclude</code> call it is chained onto. When
+every navigation before the last step of that path is a reference, the whole chain can be written as a single <code>Include</code> call with a dotted
+lambda body instead — Entity Framework Core generates the same SQL either way, but the dotted form is one call instead of several, and reads as a
+single access path instead of a multi-step chain.</p>
+<p>A navigation earlier in the chain must keep using <code>ThenInclude</code> when it is itself a to-many (collection) navigation: Entity Framework
+Core’s dotted <code>Include</code> syntax only supports reference navigations for every step but the last.</p>
+<p>This is a purely syntactic simplification: once the pattern matches, merging the chain is always safe and never changes what the query loads or how
+it behaves.</p>
+<h2>How to fix it</h2>
+<p>Replace the <code>Include</code>/<code>ThenInclude</code> chain with a single <code>Include</code> call whose lambda body is the equivalent dotted
+navigation path.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var students = await context.Students
+    .Include(s =&gt; s.School).ThenInclude(sc =&gt; sc.District) // Noncompliant: "School" is a reference navigation, this chain can be a single "Include" call
+    .ToListAsync();
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var students = await context.Students
+    .Include(s =&gt; s.School.District)
+    .ToListAsync();
+</pre>
+<p>A trailing collection navigation can still be folded into the dotted path, as long as every navigation before it is a reference:</p>
+<pre>
+var students = await context.Students
+    .Include(s =&gt; s.School.Classes) // "School" is a reference; "Classes" is a collection but it is the last step, so the dotted form is still valid
+    .ToListAsync();
+</pre>
+<h3>Exceptions</h3>
+<p>The rule does not apply to merging across a collection (to-many) navigation — Entity Framework Core has no dotted syntax that crosses a collection
+navigation partway through the path:</p>
+<pre>
+var students = await context.Students
+    .Include(s =&gt; s.Enrollments).ThenInclude(e =&gt; e.Grades) // Compliant: "Enrollments" is a collection navigation before the last step, "ThenInclude" cannot be replaced by a dotted "Include"
+    .ToListAsync();
+</pre>
+<p>Multiple <code>ThenInclude</code> calls after the collection can still be merged with each other:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+var students = await context.Students
+    .Include(s =&gt; s.Enrollments)
+    .ThenInclude(e =&gt; e.Teacher) // Noncompliant: "Teacher" and "Department" are references, this part of the chain can become "ThenInclude(e =&gt; e.Teacher.Department)"
+    .ThenInclude(t =&gt; t.Department)
+    .ToListAsync();
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+var students = await context.Students
+    .Include(s =&gt; s.Enrollments)
+    .ThenInclude(e =&gt; e.Teacher.Department)
+    .ToListAsync();
+</pre>
+<p>Each <code>Include</code>/<code>ThenInclude</code> run is evaluated on its own. Repeating <code>Include</code> to branch into two different
+<code>ThenInclude</code> continuations does not prevent either branch from being simplified independently:</p>
+<pre>
+var students = await context.Students
+    .Include(s =&gt; s.School).ThenInclude(sc =&gt; sc.Principal) // Noncompliant: can become "Include(s =&gt; s.School.Principal)"
+    .Include(s =&gt; s.School).ThenInclude(sc =&gt; sc.VicePrincipal) // Noncompliant: can become "Include(s =&gt; s.School.VicePrincipal)", independently of the branch above
+    .ToListAsync();
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager">Loading related data - Eager loading</a>,
+  "Including multiple levels" section</li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:csharpsquid:S8733} - covers loading multiple sibling collections in a single query.</li>
+  <li>{rule:csharpsquid:S9022} - covers <code>Include</code>/<code>ThenInclude</code> calls that add nothing to the query at all.</li>
+  <li>{rule:csharpsquid:S9023} - covers <code>Include</code> calls that silently drop real data.</li>
+</ul>
+
