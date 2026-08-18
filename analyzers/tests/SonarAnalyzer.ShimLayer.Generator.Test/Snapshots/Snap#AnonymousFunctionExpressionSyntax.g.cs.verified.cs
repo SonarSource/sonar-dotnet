@@ -29,14 +29,14 @@ public static partial class AnonymousFunctionExpressionSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(AnonymousFunctionExpressionSyntax);
 
-    private static readonly Func<AnonymousFunctionExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
     private static readonly Func<AnonymousFunctionExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, BlockSyntax>(WrappedType, "Block");
     private static readonly Func<AnonymousFunctionExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<AnonymousFunctionExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousFunctionExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
     extension(AnonymousFunctionExpressionSyntax wrappedInstance)
     {
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
         public BlockSyntax Block => BlockAccessor(wrappedInstance);
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
     }
 }

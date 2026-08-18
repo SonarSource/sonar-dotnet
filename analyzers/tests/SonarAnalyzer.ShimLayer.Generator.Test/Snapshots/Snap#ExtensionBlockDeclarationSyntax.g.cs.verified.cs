@@ -45,34 +45,34 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
 
     public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
-    public SyntaxToken Identifier => wrappedInstance.Identifier;
-    public BaseListSyntax BaseList => wrappedInstance.BaseList;
-    public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;
-    public SyntaxTokenList Modifiers => wrappedInstance.Modifiers;
-    public SyntaxToken Keyword => wrappedInstance.Keyword;
-    public TypeParameterListSyntax TypeParameterList => wrappedInstance.TypeParameterList;
-    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => wrappedInstance.ConstraintClauses;
-    public SyntaxToken OpenBraceToken => wrappedInstance.OpenBraceToken;
-    public SyntaxList<MemberDeclarationSyntax> Members => wrappedInstance.Members;
-    public SyntaxToken CloseBraceToken => wrappedInstance.CloseBraceToken;
-    public SyntaxToken SemicolonToken => wrappedInstance.SemicolonToken;
     public Int32 Arity => wrappedInstance.Arity;
-    public String Language => wrappedInstance.Language;
-    public Int32 RawKind => wrappedInstance.RawKind;
-    public TextSpan FullSpan => wrappedInstance.FullSpan;
-    public TextSpan Span => wrappedInstance.Span;
-    public Int32 SpanStart => wrappedInstance.SpanStart;
-    public Boolean IsMissing => wrappedInstance.IsMissing;
-    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;
+    public BaseListSyntax BaseList => wrappedInstance.BaseList;
+    public SyntaxToken CloseBraceToken => wrappedInstance.CloseBraceToken;
+    public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => wrappedInstance.ConstraintClauses;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
     public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
     public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
     public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
     public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxToken Identifier => wrappedInstance.Identifier;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public SyntaxToken Keyword => wrappedInstance.Keyword;
+    public String Language => wrappedInstance.Language;
+    public SyntaxList<MemberDeclarationSyntax> Members => wrappedInstance.Members;
+    public SyntaxTokenList Modifiers => wrappedInstance.Modifiers;
+    public SyntaxToken OpenBraceToken => wrappedInstance.OpenBraceToken;
     public SyntaxNode Parent => wrappedInstance.Parent;
     public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
-    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public SyntaxToken SemicolonToken => wrappedInstance.SemicolonToken;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
+    public TypeParameterListSyntax TypeParameterList => wrappedInstance.TypeParameterList;
 
     public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
 

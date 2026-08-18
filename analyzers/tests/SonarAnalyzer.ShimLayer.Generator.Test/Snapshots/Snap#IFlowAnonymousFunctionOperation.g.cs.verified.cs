@@ -32,12 +32,12 @@ public readonly partial struct IFlowAnonymousFunctionOperationWrapper : IOperati
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFlowAnonymousFunctionOperationWrapper));
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, IMethodSymbol> SymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IMethodSymbol>(WrappedType, "Symbol");
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
     private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
+    private static readonly Func<IOperation, IMethodSymbol> SymbolAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IMethodSymbol>(WrappedType, "Symbol");
 
     private IFlowAnonymousFunctionOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -47,18 +47,18 @@ public readonly partial struct IFlowAnonymousFunctionOperationWrapper : IOperati
 
     public IOperation WrappedInstance => wrappedInstance;
 
+    public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
-    public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
 
-    public IMethodSymbol Symbol => (IMethodSymbol)SymbolAccessor(wrappedInstance);
-    public IOperation Parent => ParentAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public String Language => (String)LanguageAccessor(wrappedInstance);
     public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
+    public String Language => (String)LanguageAccessor(wrappedInstance);
+    public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public IMethodSymbol Symbol => (IMethodSymbol)SymbolAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
     public static IFlowAnonymousFunctionOperationWrapper FromOperation(IOperation operation) =>

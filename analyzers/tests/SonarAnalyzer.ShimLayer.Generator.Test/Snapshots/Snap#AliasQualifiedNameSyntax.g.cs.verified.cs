@@ -29,16 +29,16 @@ public static partial class AliasQualifiedNameSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(AliasQualifiedNameSyntax);
 
-    private static readonly Func<AliasQualifiedNameSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<AliasQualifiedNameSyntax, Boolean>(WrappedType, "IsUnmanaged");
-    private static readonly Func<AliasQualifiedNameSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<AliasQualifiedNameSyntax, Boolean>(WrappedType, "IsNotNull");
     private static readonly Func<AliasQualifiedNameSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<AliasQualifiedNameSyntax, Boolean>(WrappedType, "IsNint");
+    private static readonly Func<AliasQualifiedNameSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<AliasQualifiedNameSyntax, Boolean>(WrappedType, "IsNotNull");
     private static readonly Func<AliasQualifiedNameSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<AliasQualifiedNameSyntax, Boolean>(WrappedType, "IsNuint");
+    private static readonly Func<AliasQualifiedNameSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<AliasQualifiedNameSyntax, Boolean>(WrappedType, "IsUnmanaged");
 
     extension(AliasQualifiedNameSyntax wrappedInstance)
     {
-        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
-        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
         public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
+        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
         public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
+        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
     }
 }

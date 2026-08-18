@@ -113,7 +113,7 @@ public static class ModelBuilder
         var nonShadowedMembers = latestType.Members.GroupBy(MemberKey).Select(x => x.OrderByDescending(x => InheritanceDepth(x.DeclaringType)).First());
         var names = new Dictionary<string, int>();
         var result = new List<MemberDescriptor>();
-        foreach (var member in nonShadowedMembers.Where(IsValid)) // ToDo: Make it deterministic .OrderBy(x => x.Name).ThenBy(x => x.ToString()))
+        foreach (var member in nonShadowedMembers.Where(IsValid).OrderBy(x => x.Name, StringComparer.Ordinal).ThenBy(x => x.ToString(), StringComparer.Ordinal))
         {
             var nameCount = names.TryGetValue(member.Name, out var oldCount) ? oldCount + 1 : 1;
             names[member.Name] = nameCount;

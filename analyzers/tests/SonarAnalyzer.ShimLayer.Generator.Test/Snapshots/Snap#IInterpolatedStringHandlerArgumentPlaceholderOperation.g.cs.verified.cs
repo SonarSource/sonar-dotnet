@@ -33,11 +33,11 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, Int32> ArgumentIndexAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Int32>(WrappedType, "ArgumentIndex");
-    private static readonly Func<IOperation, InterpolatedStringArgumentPlaceholderKind> PlaceholderKindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, InterpolatedStringArgumentPlaceholderKind>(WrappedType, "PlaceholderKind");
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
     private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
+    private static readonly Func<IOperation, InterpolatedStringArgumentPlaceholderKind> PlaceholderKindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, InterpolatedStringArgumentPlaceholderKind>(WrappedType, "PlaceholderKind");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
 
     private IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper(IOperation wrappedInstance) =>
@@ -48,18 +48,18 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
 
     public IOperation WrappedInstance => wrappedInstance;
 
+    public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
-    public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;
 
     public Int32 ArgumentIndex => (Int32)ArgumentIndexAccessor(wrappedInstance);
-    public InterpolatedStringArgumentPlaceholderKind PlaceholderKind => (InterpolatedStringArgumentPlaceholderKind)PlaceholderKindAccessor(wrappedInstance);
-    public IOperation Parent => ParentAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public String Language => (String)LanguageAccessor(wrappedInstance);
     public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
+    public String Language => (String)LanguageAccessor(wrappedInstance);
+    public IOperation Parent => ParentAccessor(wrappedInstance);
+    public InterpolatedStringArgumentPlaceholderKind PlaceholderKind => (InterpolatedStringArgumentPlaceholderKind)PlaceholderKindAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]

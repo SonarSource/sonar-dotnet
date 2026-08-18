@@ -30,17 +30,17 @@ public static partial class ParenthesizedLambdaExpressionSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(ParenthesizedLambdaExpressionSyntax);
 
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    private static readonly Func<ParenthesizedLambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
-    private static readonly Func<ParenthesizedLambdaExpressionSyntax, TypeSyntax> ReturnTypeAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, TypeSyntax>(WrappedType, "ReturnType");
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, BlockSyntax>(WrappedType, "Block");
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<ParenthesizedLambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<ParenthesizedLambdaExpressionSyntax, TypeSyntax> ReturnTypeAccessor = LightupHelpers.CreatePropertyAccessor<ParenthesizedLambdaExpressionSyntax, TypeSyntax>(WrappedType, "ReturnType");
 
     extension(ParenthesizedLambdaExpressionSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
-        public TypeSyntax ReturnType => ReturnTypeAccessor(wrappedInstance);
         public BlockSyntax Block => BlockAccessor(wrappedInstance);
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+        public TypeSyntax ReturnType => ReturnTypeAccessor(wrappedInstance);
     }
 }

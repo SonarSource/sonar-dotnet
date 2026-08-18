@@ -30,15 +30,15 @@ public static partial class LambdaExpressionSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(LambdaExpressionSyntax);
 
     private static readonly Func<LambdaExpressionSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<LambdaExpressionSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    private static readonly Func<LambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<LambdaExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
     private static readonly Func<LambdaExpressionSyntax, BlockSyntax> BlockAccessor = LightupHelpers.CreatePropertyAccessor<LambdaExpressionSyntax, BlockSyntax>(WrappedType, "Block");
     private static readonly Func<LambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<LambdaExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<LambdaExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
 
     extension(LambdaExpressionSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
         public BlockSyntax Block => BlockAccessor(wrappedInstance);
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
+        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
     }
 }

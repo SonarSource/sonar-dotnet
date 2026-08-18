@@ -46,26 +46,26 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
 
     public DirectiveTriviaSyntax WrappedInstance => wrappedInstance;
 
-    public SyntaxToken HashToken => wrappedInstance.HashToken;
-    public SyntaxToken EndOfDirectiveToken => wrappedInstance.EndOfDirectiveToken;
-    public Boolean IsActive => wrappedInstance.IsActive;
-    public SyntaxToken DirectiveNameToken => wrappedInstance.DirectiveNameToken;
-    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
-    public String Language => wrappedInstance.Language;
-    public Int32 RawKind => wrappedInstance.RawKind;
-    public TextSpan FullSpan => wrappedInstance.FullSpan;
-    public TextSpan Span => wrappedInstance.Span;
-    public Int32 SpanStart => wrappedInstance.SpanStart;
-    public Boolean IsMissing => wrappedInstance.IsMissing;
-    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
-    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
-    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
     public Boolean ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;
     public Boolean ContainsDirectives => wrappedInstance.ContainsDirectives;
+    public Boolean ContainsSkippedText => wrappedInstance.ContainsSkippedText;
+    public SyntaxToken DirectiveNameToken => wrappedInstance.DirectiveNameToken;
+    public SyntaxToken EndOfDirectiveToken => wrappedInstance.EndOfDirectiveToken;
+    public TextSpan FullSpan => wrappedInstance.FullSpan;
     public Boolean HasLeadingTrivia => wrappedInstance.HasLeadingTrivia;
+    public Boolean HasStructuredTrivia => wrappedInstance.HasStructuredTrivia;
     public Boolean HasTrailingTrivia => wrappedInstance.HasTrailingTrivia;
+    public SyntaxToken HashToken => wrappedInstance.HashToken;
+    public Boolean IsActive => wrappedInstance.IsActive;
+    public Boolean IsMissing => wrappedInstance.IsMissing;
+    public Boolean IsStructuredTrivia => wrappedInstance.IsStructuredTrivia;
+    public String Language => wrappedInstance.Language;
     public SyntaxNode Parent => wrappedInstance.Parent;
-    public Boolean ContainsAnnotations => wrappedInstance.ContainsAnnotations;
+    public SyntaxTrivia ParentTrivia => wrappedInstance.ParentTrivia;
+    public Int32 RawKind => wrappedInstance.RawKind;
+    public TextSpan Span => wrappedInstance.Span;
+    public Int32 SpanStart => wrappedInstance.SpanStart;
 
     public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(wrappedInstance);
     public SyntaxToken Content => (SyntaxToken)ContentAccessor(wrappedInstance);

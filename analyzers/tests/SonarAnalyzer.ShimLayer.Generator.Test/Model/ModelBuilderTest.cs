@@ -15,9 +15,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Globalization;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.TestFramework.Common;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Model.Test;
 
@@ -282,12 +284,27 @@ public class ModelBuilderTest
     public void CreateMembers_AccessorNamesForOverloads()
     {
         var type = typeof(SimpleLambdaExpressionSyntax);
-        var members = type.GetMember("Update"); // ToDo: Make it deterministic .OrderBy(x => x.ToString()).ToArray();
+        var members = type.GetMember("Update").OrderBy(x => x.ToString()).ToArray();
         var model = ModelBuilder.Build([new(type, members)], []);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.Members.Should().BeEquivalentTo([
             new MemberDescriptor(members[0], false, "UpdateAccessor"),
             new MemberDescriptor(members[1], false, "UpdateAccessor_Overload2"),
             new MemberDescriptor(members[2], false, "UpdateAccessor_Overload3"),
             new MemberDescriptor(members[3], false, "UpdateAccessor_Overload4")]);
+    }
+
+    [TestMethod]
+    public void CreateMembers_AccessorsAreSorted()
+    {
+        var type = typeof(IRecursivePatternOperation);
+        var children = typeof(IOperation).GetMember("Children").Single();
+        var deconstructSymbol = type.GetMember("DeconstructSymbol").Single();
+        var deconstructionSubpatterns = type.GetMember("DeconstructionSubpatterns").Single();
+        using var scope = new CurrentCultureScope(new CultureInfo("cs-cz"));
+        var model = ModelBuilder.Build([new(type, [children, deconstructSymbol, deconstructionSubpatterns])], [new(typeof(IOperation), [])]);
+        model[type].Should().BeOfType<OperationWrapStrategy>().Which.Members.Select(x => x.Member.Name).Should().ContainInOrder(
+            "Children",                     // Culture-invariant, otherwise "Ch" is after "H" under cs-cz culture
+            "DeconstructSymbol",
+            "DeconstructionSubpatterns");   // Respects case sensitivity
     }
 }
