@@ -29,8 +29,8 @@ public static partial class MemberDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(MemberDeclarationSyntax);
 
-    private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<MemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<MemberDeclarationSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
 
     extension(MemberDeclarationSyntax wrappedInstance)
     {

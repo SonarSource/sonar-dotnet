@@ -32,7 +32,7 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(AllowsConstraintClauseSyntaxWrapper));
     private readonly TypeParameterConstraintSyntax wrappedInstance;
 
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "AllowsKeyword");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SyntaxToken>>(WrappedType, "AllowsKeyword");
     private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>> ConstraintsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper>(WrappedType, nameof(Constraints));
 
     private AllowsConstraintClauseSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>

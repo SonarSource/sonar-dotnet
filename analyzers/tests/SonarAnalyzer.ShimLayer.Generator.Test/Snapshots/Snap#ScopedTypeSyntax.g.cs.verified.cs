@@ -32,12 +32,12 @@ public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSynt
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ScopedTypeSyntaxWrapper));
     private readonly TypeSyntax wrappedInstance;
 
-    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
-    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-    private static readonly Func<TypeSyntax, SyntaxToken> ScopedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "ScopedKeyword");
-    private static readonly Func<TypeSyntax, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, TypeSyntax>(WrappedType, "Type");
+    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNint");
+    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNotNull");
+    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNuint");
+    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsUnmanaged");
+    private static readonly Func<TypeSyntax, SyntaxToken> ScopedKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "ScopedKeyword");
+    private static readonly Func<TypeSyntax, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, TypeSyntax>>(WrappedType, "Type");
 
     private ScopedTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

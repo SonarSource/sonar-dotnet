@@ -32,9 +32,9 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BaseObjectCreationExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
-    private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "NewKeyword");
+    private static readonly Func<ExpressionSyntax, ArgumentListSyntax> ArgumentListAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ArgumentListSyntax>>(WrappedType, "ArgumentList");
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, InitializerExpressionSyntax>>(WrappedType, "Initializer");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "NewKeyword");
 
     private BaseObjectCreationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

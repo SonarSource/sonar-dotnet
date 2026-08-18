@@ -32,8 +32,8 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IgnoredDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax wrappedInstance;
 
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ColonTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "ColonToken");
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ContentAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "Content");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ColonTokenAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "ColonToken");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ContentAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "Content");
 
     private IgnoredDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

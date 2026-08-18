@@ -29,7 +29,7 @@ public static partial class FixedStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(FixedStatementSyntax);
 
-    private static readonly Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<FixedStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     extension(FixedStatementSyntax wrappedInstance)
     {

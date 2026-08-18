@@ -32,19 +32,19 @@ public readonly partial struct IBinaryOperationWrapper : IOperationWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IBinaryOperationWrapper));
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-    private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "ConstrainedToType");
-    private static readonly Func<IOperation, Boolean> IsCheckedAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsChecked");
-    private static readonly Func<IOperation, Boolean> IsCompareTextAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsCompareText");
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-    private static readonly Func<IOperation, Boolean> IsLiftedAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsLifted");
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-    private static readonly Func<IOperation, IOperation> LeftOperandAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "LeftOperand");
-    private static readonly Func<IOperation, BinaryOperatorKind> OperatorKindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, BinaryOperatorKind>(WrappedType, "OperatorKind");
-    private static readonly Func<IOperation, IMethodSymbol> OperatorMethodAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IMethodSymbol>(WrappedType, "OperatorMethod");
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    private static readonly Func<IOperation, IOperation> RightOperandAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "RightOperand");
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
+    private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "ConstrainedToType");
+    private static readonly Func<IOperation, Boolean> IsCheckedAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsChecked");
+    private static readonly Func<IOperation, Boolean> IsCompareTextAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsCompareText");
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, Boolean> IsLiftedAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsLifted");
+    private static readonly Func<IOperation, String> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, String>>(WrappedType, "Language");
+    private static readonly Func<IOperation, IOperation> LeftOperandAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "LeftOperand");
+    private static readonly Func<IOperation, BinaryOperatorKind> OperatorKindAccessor = AccessorFactory.CreateProperty<Func<IOperation, BinaryOperatorKind>>(WrappedType, "OperatorKind");
+    private static readonly Func<IOperation, IMethodSymbol> OperatorMethodAccessor = AccessorFactory.CreateProperty<Func<IOperation, IMethodSymbol>>(WrappedType, "OperatorMethod");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
+    private static readonly Func<IOperation, IOperation> RightOperandAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "RightOperand");
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
     private IBinaryOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

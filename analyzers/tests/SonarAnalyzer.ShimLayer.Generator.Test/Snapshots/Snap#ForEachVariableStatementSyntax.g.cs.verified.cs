@@ -32,15 +32,15 @@ public readonly partial struct ForEachVariableStatementSyntaxWrapper : ISyntaxWr
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ForEachVariableStatementSyntaxWrapper));
     private readonly StatementSyntax wrappedInstance;
 
-    private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    private static readonly Func<StatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
-    private static readonly Func<StatementSyntax, SyntaxToken> CloseParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "CloseParenToken");
-    private static readonly Func<StatementSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    private static readonly Func<StatementSyntax, SyntaxToken> ForEachKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "ForEachKeyword");
-    private static readonly Func<StatementSyntax, SyntaxToken> InKeywordAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "InKeyword");
-    private static readonly Func<StatementSyntax, SyntaxToken> OpenParenTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "OpenParenToken");
-    private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, StatementSyntax>(WrappedType, "Statement");
-    private static readonly Func<StatementSyntax, ExpressionSyntax> VariableAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ExpressionSyntax>(WrappedType, "Variable");
+    private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
+    private static readonly Func<StatementSyntax, SyntaxToken> AwaitKeywordAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "AwaitKeyword");
+    private static readonly Func<StatementSyntax, SyntaxToken> CloseParenTokenAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "CloseParenToken");
+    private static readonly Func<StatementSyntax, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, ExpressionSyntax>>(WrappedType, "Expression");
+    private static readonly Func<StatementSyntax, SyntaxToken> ForEachKeywordAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "ForEachKeyword");
+    private static readonly Func<StatementSyntax, SyntaxToken> InKeywordAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "InKeyword");
+    private static readonly Func<StatementSyntax, SyntaxToken> OpenParenTokenAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "OpenParenToken");
+    private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, StatementSyntax>>(WrappedType, "Statement");
+    private static readonly Func<StatementSyntax, ExpressionSyntax> VariableAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, ExpressionSyntax>>(WrappedType, "Variable");
 
     private ForEachVariableStatementSyntaxWrapper(StatementSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

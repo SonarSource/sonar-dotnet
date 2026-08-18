@@ -32,8 +32,8 @@ public readonly partial struct FunctionPointerParameterListSyntaxWrapper : ISynt
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerParameterListSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> GreaterThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "GreaterThanToken");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LessThanTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "LessThanToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> GreaterThanTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "GreaterThanToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> LessThanTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "LessThanToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>> ParametersAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, FunctionPointerParameterSyntaxWrapper>(WrappedType, nameof(Parameters));
 
     private FunctionPointerParameterListSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>

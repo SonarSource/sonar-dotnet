@@ -32,8 +32,8 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PropertyPatternClauseSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "CloseBraceToken");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "OpenBraceToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBraceTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "CloseBraceToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBraceTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenBraceToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, SubpatternSyntaxWrapper>(WrappedType, nameof(Subpatterns));
 
     private PropertyPatternClauseSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>

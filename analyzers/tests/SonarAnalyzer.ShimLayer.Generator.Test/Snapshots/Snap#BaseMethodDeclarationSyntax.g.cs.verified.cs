@@ -29,7 +29,7 @@ public static partial class BaseMethodDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(BaseMethodDeclarationSyntax);
 
-    private static readonly Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax>>(WrappedType, "ExpressionBody");
 
     extension(BaseMethodDeclarationSyntax wrappedInstance)
     {

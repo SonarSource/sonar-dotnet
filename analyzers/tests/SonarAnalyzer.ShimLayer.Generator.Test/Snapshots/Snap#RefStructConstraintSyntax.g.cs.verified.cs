@@ -32,8 +32,8 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefStructConstraintSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "RefKeyword");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> StructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "StructKeyword");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "RefKeyword");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> StructKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "StructKeyword");
 
     private RefStructConstraintSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

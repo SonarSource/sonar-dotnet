@@ -29,7 +29,7 @@ public static partial class ConstructorDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ConstructorDeclarationSyntax);
 
-    private static readonly Func<ConstructorDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<ConstructorDeclarationSyntax, ArrowExpressionClauseSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<ConstructorDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<ConstructorDeclarationSyntax, ArrowExpressionClauseSyntax>>(WrappedType, "ExpressionBody");
 
     extension(ConstructorDeclarationSyntax wrappedInstance)
     {

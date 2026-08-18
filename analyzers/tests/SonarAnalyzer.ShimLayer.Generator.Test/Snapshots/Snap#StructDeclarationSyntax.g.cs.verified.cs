@@ -29,7 +29,7 @@ public static partial class StructDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(StructDeclarationSyntax);
 
-    private static readonly Func<StructDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<StructDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
+    private static readonly Func<StructDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<StructDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
 
     extension(StructDeclarationSyntax wrappedInstance)
     {

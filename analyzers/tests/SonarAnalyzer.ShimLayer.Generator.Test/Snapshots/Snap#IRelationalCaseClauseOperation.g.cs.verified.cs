@@ -32,15 +32,15 @@ public readonly partial struct IRelationalCaseClauseOperationWrapper : IOperatio
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IRelationalCaseClauseOperationWrapper));
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, CaseKind> CaseKindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, CaseKind>(WrappedType, "CaseKind");
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-    private static readonly Func<IOperation, ILabelSymbol> LabelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ILabelSymbol>(WrappedType, "Label");
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    private static readonly Func<IOperation, BinaryOperatorKind> RelationAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, BinaryOperatorKind>(WrappedType, "Relation");
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
-    private static readonly Func<IOperation, IOperation> ValueAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Value");
+    private static readonly Func<IOperation, CaseKind> CaseKindAccessor = AccessorFactory.CreateProperty<Func<IOperation, CaseKind>>(WrappedType, "CaseKind");
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, ILabelSymbol> LabelAccessor = AccessorFactory.CreateProperty<Func<IOperation, ILabelSymbol>>(WrappedType, "Label");
+    private static readonly Func<IOperation, String> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, String>>(WrappedType, "Language");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
+    private static readonly Func<IOperation, BinaryOperatorKind> RelationAccessor = AccessorFactory.CreateProperty<Func<IOperation, BinaryOperatorKind>>(WrappedType, "Relation");
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
+    private static readonly Func<IOperation, IOperation> ValueAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Value");
 
     private IRelationalCaseClauseOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

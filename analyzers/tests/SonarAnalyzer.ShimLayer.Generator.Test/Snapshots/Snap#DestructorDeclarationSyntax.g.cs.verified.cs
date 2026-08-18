@@ -29,7 +29,7 @@ public static partial class DestructorDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(DestructorDeclarationSyntax);
 
-    private static readonly Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax>(WrappedType, "ExpressionBody");
+    private static readonly Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax>>(WrappedType, "ExpressionBody");
 
     extension(DestructorDeclarationSyntax wrappedInstance)
     {

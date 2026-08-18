@@ -32,15 +32,15 @@ public readonly partial struct IConditionalOperationWrapper : IOperationWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IConditionalOperationWrapper));
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-    private static readonly Func<IOperation, IOperation> ConditionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Condition");
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-    private static readonly Func<IOperation, Boolean> IsRefAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsRef");
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
-    private static readonly Func<IOperation, IOperation> WhenFalseAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "WhenFalse");
-    private static readonly Func<IOperation, IOperation> WhenTrueAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "WhenTrue");
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
+    private static readonly Func<IOperation, IOperation> ConditionAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Condition");
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, Boolean> IsRefAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsRef");
+    private static readonly Func<IOperation, String> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, String>>(WrappedType, "Language");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
+    private static readonly Func<IOperation, IOperation> WhenFalseAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "WhenFalse");
+    private static readonly Func<IOperation, IOperation> WhenTrueAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "WhenTrue");
 
     private IConditionalOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

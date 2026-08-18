@@ -32,8 +32,8 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(WhenClauseSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ConditionAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, ExpressionSyntax>(WrappedType, "Condition");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> WhenKeywordAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "WhenKeyword");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ConditionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Condition");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> WhenKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "WhenKeyword");
 
     private WhenClauseSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

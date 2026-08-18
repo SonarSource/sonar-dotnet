@@ -32,7 +32,7 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExtensionBlockDeclarationSyntaxWrapper));
     private readonly TypeDeclarationSyntax wrappedInstance;
 
-    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
+    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
 
     private ExtensionBlockDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

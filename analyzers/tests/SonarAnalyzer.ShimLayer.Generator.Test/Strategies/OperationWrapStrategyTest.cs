@@ -231,8 +231,8 @@ public class OperationWrapStrategyTest
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ITupleOperationWrapper));
                 private readonly IOperation wrappedInstance;
 
-                private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<IOperation>>(WrappedType, "Elements");
-                private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ITypeSymbol>(WrappedType, "NaturalType");
+                private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Elements");
+                private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "NaturalType");
 
                 private ITupleOperationWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;

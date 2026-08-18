@@ -44,7 +44,7 @@ public abstract class Strategy
             : null;
 
     public virtual string PropertyAccessorInitializerSnippet(string compiletimeType, string propertyName) =>
-        $"""LightupHelpers.CreatePropertyAccessor<{compiletimeType}, {CompiletimeTypeSnippet()}>(WrappedType, "{propertyName}")""";
+        $"""AccessorFactory.CreateProperty<Func<{compiletimeType}, {CompiletimeTypeSnippet()}>>(WrappedType, "{propertyName}")""";
 
     protected static string JoinLines(IEnumerable<string> lines) =>
        string.Join("\n", lines.Where(x => x is not null));

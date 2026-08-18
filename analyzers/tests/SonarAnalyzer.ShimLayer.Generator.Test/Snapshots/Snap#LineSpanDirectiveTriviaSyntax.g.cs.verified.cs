@@ -32,12 +32,12 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineSpanDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax wrappedInstance;
 
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> CharacterOffsetAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "CharacterOffset");
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> EndAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "End");
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "File");
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "LineKeyword");
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> MinusTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "MinusToken");
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> StartAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, CSharpSyntaxNode>(WrappedType, "Start");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> CharacterOffsetAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "CharacterOffset");
+    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> EndAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, CSharpSyntaxNode>>(WrappedType, "End");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> FileAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "File");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> LineKeywordAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "LineKeyword");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> MinusTokenAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "MinusToken");
+    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode> StartAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, CSharpSyntaxNode>>(WrappedType, "Start");
 
     private LineSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

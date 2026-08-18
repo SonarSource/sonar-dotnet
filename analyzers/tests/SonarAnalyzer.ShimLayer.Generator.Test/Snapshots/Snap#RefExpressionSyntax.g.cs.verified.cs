@@ -32,8 +32,8 @@ public readonly partial struct RefExpressionSyntaxWrapper : ISyntaxWrapper<Expre
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "Expression");
-    private static readonly Func<ExpressionSyntax, SyntaxToken> RefKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "RefKeyword");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ExpressionSyntax>>(WrappedType, "Expression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> RefKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "RefKeyword");
 
     private RefExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

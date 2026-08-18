@@ -32,8 +32,8 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DeclarationExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, CSharpSyntaxNode>(WrappedType, "Designation");
-    private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, TypeSyntax>(WrappedType, "Type");
+    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Designation");
+    private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, TypeSyntax>>(WrappedType, "Type");
 
     private DeclarationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

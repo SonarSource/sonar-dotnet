@@ -32,8 +32,8 @@ public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<T
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
     private readonly TypeDeclarationSyntax wrappedInstance;
 
-    private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, SyntaxToken>(WrappedType, "ClassOrStructKeyword");
-    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SyntaxToken>>(WrappedType, "ClassOrStructKeyword");
+    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
 
     private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

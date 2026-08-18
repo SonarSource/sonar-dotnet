@@ -32,7 +32,7 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PrimaryConstructorBaseTypeSyntaxWrapper));
     private readonly BaseTypeSyntax wrappedInstance;
 
-    private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<BaseTypeSyntax, ArgumentListSyntax>(WrappedType, "ArgumentList");
+    private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor = AccessorFactory.CreateProperty<Func<BaseTypeSyntax, ArgumentListSyntax>>(WrappedType, "ArgumentList");
 
     private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

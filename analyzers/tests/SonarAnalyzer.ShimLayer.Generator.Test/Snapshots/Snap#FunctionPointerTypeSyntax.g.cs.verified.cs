@@ -32,14 +32,14 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerTypeSyntaxWrapper));
     private readonly TypeSyntax wrappedInstance;
 
-    private static readonly Func<TypeSyntax, SyntaxToken> AsteriskTokenAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "AsteriskToken");
-    private static readonly Func<TypeSyntax, CSharpSyntaxNode> CallingConventionAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "CallingConvention");
-    private static readonly Func<TypeSyntax, SyntaxToken> DelegateKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, SyntaxToken>(WrappedType, "DelegateKeyword");
-    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNint");
-    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNotNull");
-    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsNuint");
-    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
-    private static readonly Func<TypeSyntax, CSharpSyntaxNode> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<TypeSyntax, CSharpSyntaxNode>(WrappedType, "ParameterList");
+    private static readonly Func<TypeSyntax, SyntaxToken> AsteriskTokenAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "AsteriskToken");
+    private static readonly Func<TypeSyntax, CSharpSyntaxNode> CallingConventionAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, CSharpSyntaxNode>>(WrappedType, "CallingConvention");
+    private static readonly Func<TypeSyntax, SyntaxToken> DelegateKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "DelegateKeyword");
+    private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNint");
+    private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNotNull");
+    private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNuint");
+    private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsUnmanaged");
+    private static readonly Func<TypeSyntax, CSharpSyntaxNode> ParameterListAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, CSharpSyntaxNode>>(WrappedType, "ParameterList");
 
     private FunctionPointerTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

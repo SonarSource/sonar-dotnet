@@ -29,7 +29,7 @@ public static partial class ShebangDirectiveTriviaSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ShebangDirectiveTriviaSyntax);
 
-    private static readonly Func<ShebangDirectiveTriviaSyntax, SyntaxToken> ContentAccessor = LightupHelpers.CreatePropertyAccessor<ShebangDirectiveTriviaSyntax, SyntaxToken>(WrappedType, "Content");
+    private static readonly Func<ShebangDirectiveTriviaSyntax, SyntaxToken> ContentAccessor = AccessorFactory.CreateProperty<Func<ShebangDirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "Content");
 
     extension(ShebangDirectiveTriviaSyntax wrappedInstance)
     {

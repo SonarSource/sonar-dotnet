@@ -29,9 +29,9 @@ public static partial class LocalDeclarationStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(LocalDeclarationStatementSyntax);
 
-    private static readonly Func<LocalDeclarationStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<LocalDeclarationStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken> AwaitKeywordAccessor = LightupHelpers.CreatePropertyAccessor<LocalDeclarationStatementSyntax, SyntaxToken>(WrappedType, "AwaitKeyword");
-    private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken> UsingKeywordAccessor = LightupHelpers.CreatePropertyAccessor<LocalDeclarationStatementSyntax, SyntaxToken>(WrappedType, "UsingKeyword");
+    private static readonly Func<LocalDeclarationStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<LocalDeclarationStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
+    private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken> AwaitKeywordAccessor = AccessorFactory.CreateProperty<Func<LocalDeclarationStatementSyntax, SyntaxToken>>(WrappedType, "AwaitKeyword");
+    private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken> UsingKeywordAccessor = AccessorFactory.CreateProperty<Func<LocalDeclarationStatementSyntax, SyntaxToken>>(WrappedType, "UsingKeyword");
 
     extension(LocalDeclarationStatementSyntax wrappedInstance)
     {

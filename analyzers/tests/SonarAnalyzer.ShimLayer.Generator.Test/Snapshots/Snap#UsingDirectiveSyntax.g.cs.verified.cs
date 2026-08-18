@@ -29,9 +29,9 @@ public static partial class UsingDirectiveSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(UsingDirectiveSyntax);
 
-    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> GlobalKeywordAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, SyntaxToken>(WrappedType, "GlobalKeyword");
-    private static readonly Func<UsingDirectiveSyntax, TypeSyntax> NamespaceOrTypeAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, TypeSyntax>(WrappedType, "NamespaceOrType");
-    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> UnsafeKeywordAccessor = LightupHelpers.CreatePropertyAccessor<UsingDirectiveSyntax, SyntaxToken>(WrappedType, "UnsafeKeyword");
+    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> GlobalKeywordAccessor = AccessorFactory.CreateProperty<Func<UsingDirectiveSyntax, SyntaxToken>>(WrappedType, "GlobalKeyword");
+    private static readonly Func<UsingDirectiveSyntax, TypeSyntax> NamespaceOrTypeAccessor = AccessorFactory.CreateProperty<Func<UsingDirectiveSyntax, TypeSyntax>>(WrappedType, "NamespaceOrType");
+    private static readonly Func<UsingDirectiveSyntax, SyntaxToken> UnsafeKeywordAccessor = AccessorFactory.CreateProperty<Func<UsingDirectiveSyntax, SyntaxToken>>(WrappedType, "UnsafeKeyword");
 
     extension(UsingDirectiveSyntax wrappedInstance)
     {

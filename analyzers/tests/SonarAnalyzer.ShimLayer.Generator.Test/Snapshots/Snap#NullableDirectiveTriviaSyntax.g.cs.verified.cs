@@ -32,9 +32,9 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(NullableDirectiveTriviaSyntaxWrapper));
     private readonly DirectiveTriviaSyntax wrappedInstance;
 
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> NullableKeywordAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "NullableKeyword");
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> SettingTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "SettingToken");
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> TargetTokenAccessor = LightupHelpers.CreatePropertyAccessor<DirectiveTriviaSyntax, SyntaxToken>(WrappedType, "TargetToken");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> NullableKeywordAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "NullableKeyword");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> SettingTokenAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "SettingToken");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> TargetTokenAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "TargetToken");
 
     private NullableDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

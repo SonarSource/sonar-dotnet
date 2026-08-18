@@ -33,10 +33,10 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     private readonly ExpressionSyntax wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
-    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "CloseBraceToken");
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "GoverningExpression");
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OpenBraceToken");
-    private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "SwitchKeyword");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBraceTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "CloseBraceToken");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ExpressionSyntax>>(WrappedType, "GoverningExpression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBraceToken");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "SwitchKeyword");
 
     private SwitchExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

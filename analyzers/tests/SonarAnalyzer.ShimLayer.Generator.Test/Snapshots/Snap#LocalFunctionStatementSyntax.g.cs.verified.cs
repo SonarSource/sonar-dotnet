@@ -32,16 +32,16 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper : ISyntaxWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LocalFunctionStatementSyntaxWrapper));
     private readonly StatementSyntax wrappedInstance;
 
-    private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    private static readonly Func<StatementSyntax, BlockSyntax> BodyAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, BlockSyntax>(WrappedType, "Body");
-    private static readonly Func<StatementSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>> ConstraintClausesAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>>(WrappedType, "ConstraintClauses");
-    private static readonly Func<StatementSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ArrowExpressionClauseSyntax>(WrappedType, "ExpressionBody");
-    private static readonly Func<StatementSyntax, SyntaxToken> IdentifierAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "Identifier");
-    private static readonly Func<StatementSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
-    private static readonly Func<StatementSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
-    private static readonly Func<StatementSyntax, TypeSyntax> ReturnTypeAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, TypeSyntax>(WrappedType, "ReturnType");
-    private static readonly Func<StatementSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
-    private static readonly Func<StatementSyntax, TypeParameterListSyntax> TypeParameterListAccessor = LightupHelpers.CreatePropertyAccessor<StatementSyntax, TypeParameterListSyntax>(WrappedType, "TypeParameterList");
+    private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
+    private static readonly Func<StatementSyntax, BlockSyntax> BodyAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, BlockSyntax>>(WrappedType, "Body");
+    private static readonly Func<StatementSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>> ConstraintClausesAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>>>(WrappedType, "ConstraintClauses");
+    private static readonly Func<StatementSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, ArrowExpressionClauseSyntax>>(WrappedType, "ExpressionBody");
+    private static readonly Func<StatementSyntax, SyntaxToken> IdentifierAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "Identifier");
+    private static readonly Func<StatementSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
+    private static readonly Func<StatementSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
+    private static readonly Func<StatementSyntax, TypeSyntax> ReturnTypeAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, TypeSyntax>>(WrappedType, "ReturnType");
+    private static readonly Func<StatementSyntax, SyntaxToken> SemicolonTokenAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "SemicolonToken");
+    private static readonly Func<StatementSyntax, TypeParameterListSyntax> TypeParameterListAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, TypeParameterListSyntax>>(WrappedType, "TypeParameterList");
 
     private LocalFunctionStatementSyntaxWrapper(StatementSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

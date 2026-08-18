@@ -32,8 +32,8 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CasePatternSwitchLabelSyntaxWrapper));
     private readonly SwitchLabelSyntax wrappedInstance;
 
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "Pattern");
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> WhenClauseAccessor = LightupHelpers.CreatePropertyAccessor<SwitchLabelSyntax, CSharpSyntaxNode>(WrappedType, "WhenClause");
+    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor = AccessorFactory.CreateProperty<Func<SwitchLabelSyntax, CSharpSyntaxNode>>(WrappedType, "Pattern");
+    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> WhenClauseAccessor = AccessorFactory.CreateProperty<Func<SwitchLabelSyntax, CSharpSyntaxNode>>(WrappedType, "WhenClause");
 
     private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

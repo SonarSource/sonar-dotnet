@@ -29,8 +29,8 @@ public static partial class AnonymousMethodExpressionSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(AnonymousMethodExpressionSyntax);
 
-    private static readonly Func<AnonymousMethodExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousMethodExpressionSyntax, ExpressionSyntax>(WrappedType, "ExpressionBody");
-    private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<AnonymousMethodExpressionSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<AnonymousMethodExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<AnonymousMethodExpressionSyntax, ExpressionSyntax>>(WrappedType, "ExpressionBody");
+    private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<AnonymousMethodExpressionSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
 
     extension(AnonymousMethodExpressionSyntax wrappedInstance)
     {

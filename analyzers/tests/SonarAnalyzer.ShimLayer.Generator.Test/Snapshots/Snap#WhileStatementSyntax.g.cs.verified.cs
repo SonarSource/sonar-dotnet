@@ -29,7 +29,7 @@ public static partial class WhileStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(WhileStatementSyntax);
 
-    private static readonly Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<WhileStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     extension(WhileStatementSyntax wrappedInstance)
     {

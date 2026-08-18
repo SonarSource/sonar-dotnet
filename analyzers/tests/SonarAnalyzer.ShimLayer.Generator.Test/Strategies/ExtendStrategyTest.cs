@@ -72,8 +72,8 @@ public class ExtendStrategyTest
             {
                 private static readonly Type WrappedType = typeof(ClassDeclarationSyntax);
 
-                private static readonly Func<ClassDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = LightupHelpers.CreatePropertyAccessor<ClassDeclarationSyntax, ParameterListSyntax>(WrappedType, "ParameterList");
-                private static readonly Func<ClassDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<ClassDeclarationSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
+                private static readonly Func<ClassDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
+                private static readonly Func<ClassDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, SyntaxToken>>(WrappedType, "SemicolonToken");
 
                 extension(ClassDeclarationSyntax wrappedInstance)
                 {
@@ -126,7 +126,7 @@ public class ExtendStrategyTest
             {
                 private static readonly Type WrappedType = typeof(ProcessStartInfo);
 
-                private static readonly Func<ProcessStartInfo, String> FileNameAccessor = LightupHelpers.CreatePropertyAccessor<ProcessStartInfo, String>(WrappedType, "FileName");
+                private static readonly Func<ProcessStartInfo, String> FileNameAccessor = AccessorFactory.CreateProperty<Func<ProcessStartInfo, String>>(WrappedType, "FileName");
 
                 extension(ProcessStartInfo wrappedInstance)
                 {
@@ -181,8 +181,8 @@ public class ExtendStrategyTest
             {
                 private static readonly Type WrappedType = typeof(IOperation);
 
-                private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-                private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
+                private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
+                private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
 
                 extension(IOperation wrappedInstance)
                 {

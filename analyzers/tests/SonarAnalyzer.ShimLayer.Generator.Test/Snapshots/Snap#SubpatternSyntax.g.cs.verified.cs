@@ -32,9 +32,9 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SubpatternSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> ExpressionColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "ExpressionColon");
-    private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, NameColonSyntax>(WrappedType, "NameColon");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, CSharpSyntaxNode>(WrappedType, "Pattern");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> ExpressionColonAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "ExpressionColon");
+    private static readonly Func<CSharpSyntaxNode, NameColonSyntax> NameColonAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, NameColonSyntax>>(WrappedType, "NameColon");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Pattern");
 
     private SubpatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

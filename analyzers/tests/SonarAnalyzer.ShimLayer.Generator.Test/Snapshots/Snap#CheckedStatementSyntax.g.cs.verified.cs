@@ -29,7 +29,7 @@ public static partial class CheckedStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(CheckedStatementSyntax);
 
-    private static readonly Func<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     extension(CheckedStatementSyntax wrappedInstance)
     {

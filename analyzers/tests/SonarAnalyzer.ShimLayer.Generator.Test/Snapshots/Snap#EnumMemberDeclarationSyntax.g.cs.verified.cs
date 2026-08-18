@@ -29,7 +29,7 @@ public static partial class EnumMemberDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(EnumMemberDeclarationSyntax);
 
-    private static readonly Func<EnumMemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<EnumMemberDeclarationSyntax, SyntaxTokenList>(WrappedType, "Modifiers");
+    private static readonly Func<EnumMemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<EnumMemberDeclarationSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
 
     extension(EnumMemberDeclarationSyntax wrappedInstance)
     {

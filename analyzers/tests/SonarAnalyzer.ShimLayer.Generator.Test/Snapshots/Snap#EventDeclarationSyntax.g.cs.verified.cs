@@ -29,7 +29,7 @@ public static partial class EventDeclarationSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(EventDeclarationSyntax);
 
-    private static readonly Func<EventDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = LightupHelpers.CreatePropertyAccessor<EventDeclarationSyntax, SyntaxToken>(WrappedType, "SemicolonToken");
+    private static readonly Func<EventDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = AccessorFactory.CreateProperty<Func<EventDeclarationSyntax, SyntaxToken>>(WrappedType, "SemicolonToken");
 
     extension(EventDeclarationSyntax wrappedInstance)
     {

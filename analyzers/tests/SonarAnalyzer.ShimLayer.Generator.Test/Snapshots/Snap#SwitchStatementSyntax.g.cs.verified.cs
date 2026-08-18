@@ -29,7 +29,7 @@ public static partial class SwitchStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(SwitchStatementSyntax);
 
-    private static readonly Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     extension(SwitchStatementSyntax wrappedInstance)
     {

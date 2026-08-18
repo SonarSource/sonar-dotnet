@@ -32,20 +32,20 @@ public readonly partial struct IWhileLoopOperationWrapper : IOperationWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IWhileLoopOperationWrapper));
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, IOperation> BodyAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Body");
-    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IEnumerable<IOperation>>(WrappedType, "Children");
-    private static readonly Func<IOperation, IOperation> ConditionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Condition");
-    private static readonly Func<IOperation, Boolean> ConditionIsTopAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "ConditionIsTop");
-    private static readonly Func<IOperation, Boolean> ConditionIsUntilAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "ConditionIsUntil");
-    private static readonly Func<IOperation, ILabelSymbol> ContinueLabelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ILabelSymbol>(WrappedType, "ContinueLabel");
-    private static readonly Func<IOperation, ILabelSymbol> ExitLabelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ILabelSymbol>(WrappedType, "ExitLabel");
-    private static readonly Func<IOperation, IOperation> IgnoredConditionAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "IgnoredCondition");
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, Boolean>(WrappedType, "IsImplicit");
-    private static readonly Func<IOperation, String> LanguageAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, String>(WrappedType, "Language");
-    private static readonly Func<IOperation, ImmutableArray<ILocalSymbol>> LocalsAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, ImmutableArray<ILocalSymbol>>(WrappedType, "Locals");
-    private static readonly Func<IOperation, LoopKind> LoopKindAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, LoopKind>(WrappedType, "LoopKind");
-    private static readonly Func<IOperation, IOperation> ParentAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, IOperation>(WrappedType, "Parent");
-    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = LightupHelpers.CreatePropertyAccessor<IOperation, SemanticModel>(WrappedType, "SemanticModel");
+    private static readonly Func<IOperation, IOperation> BodyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Body");
+    private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
+    private static readonly Func<IOperation, IOperation> ConditionAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Condition");
+    private static readonly Func<IOperation, Boolean> ConditionIsTopAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "ConditionIsTop");
+    private static readonly Func<IOperation, Boolean> ConditionIsUntilAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "ConditionIsUntil");
+    private static readonly Func<IOperation, ILabelSymbol> ContinueLabelAccessor = AccessorFactory.CreateProperty<Func<IOperation, ILabelSymbol>>(WrappedType, "ContinueLabel");
+    private static readonly Func<IOperation, ILabelSymbol> ExitLabelAccessor = AccessorFactory.CreateProperty<Func<IOperation, ILabelSymbol>>(WrappedType, "ExitLabel");
+    private static readonly Func<IOperation, IOperation> IgnoredConditionAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "IgnoredCondition");
+    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, String> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, String>>(WrappedType, "Language");
+    private static readonly Func<IOperation, ImmutableArray<ILocalSymbol>> LocalsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ILocalSymbol>>>(WrappedType, "Locals");
+    private static readonly Func<IOperation, LoopKind> LoopKindAccessor = AccessorFactory.CreateProperty<Func<IOperation, LoopKind>>(WrappedType, "LoopKind");
+    private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
+    private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
     private IWhileLoopOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

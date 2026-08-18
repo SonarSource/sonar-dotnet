@@ -32,9 +32,9 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RangeExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> LeftOperandAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "LeftOperand");
-    private static readonly Func<ExpressionSyntax, SyntaxToken> OperatorTokenAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, SyntaxToken>(WrappedType, "OperatorToken");
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax> RightOperandAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionSyntax, ExpressionSyntax>(WrappedType, "RightOperand");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> LeftOperandAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ExpressionSyntax>>(WrappedType, "LeftOperand");
+    private static readonly Func<ExpressionSyntax, SyntaxToken> OperatorTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OperatorToken");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax> RightOperandAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ExpressionSyntax>>(WrappedType, "RightOperand");
 
     private RangeExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

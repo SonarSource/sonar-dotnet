@@ -32,11 +32,11 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
     private readonly MemberCrefSyntax wrappedInstance;
 
-    private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "DotToken");
-    private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, SyntaxToken>(WrappedType, "ExtensionKeyword");
-    private static readonly Func<MemberCrefSyntax, MemberCrefSyntax> MemberAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, MemberCrefSyntax>(WrappedType, "Member");
-    private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, CrefParameterListSyntax>(WrappedType, "Parameters");
-    private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor = LightupHelpers.CreatePropertyAccessor<MemberCrefSyntax, TypeArgumentListSyntax>(WrappedType, "TypeArgumentList");
+    private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, SyntaxToken>>(WrappedType, "DotToken");
+    private static readonly Func<MemberCrefSyntax, SyntaxToken> ExtensionKeywordAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, SyntaxToken>>(WrappedType, "ExtensionKeyword");
+    private static readonly Func<MemberCrefSyntax, MemberCrefSyntax> MemberAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, MemberCrefSyntax>>(WrappedType, "Member");
+    private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, CrefParameterListSyntax>>(WrappedType, "Parameters");
+    private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, TypeArgumentListSyntax>>(WrappedType, "TypeArgumentList");
 
     private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

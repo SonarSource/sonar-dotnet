@@ -29,7 +29,7 @@ public static partial class OperatorMemberCrefSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(OperatorMemberCrefSyntax);
 
-    private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken> CheckedKeywordAccessor = LightupHelpers.CreatePropertyAccessor<OperatorMemberCrefSyntax, SyntaxToken>(WrappedType, "CheckedKeyword");
+    private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken> CheckedKeywordAccessor = AccessorFactory.CreateProperty<Func<OperatorMemberCrefSyntax, SyntaxToken>>(WrappedType, "CheckedKeyword");
 
     extension(OperatorMemberCrefSyntax wrappedInstance)
     {

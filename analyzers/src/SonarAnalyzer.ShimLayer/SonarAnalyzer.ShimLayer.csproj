@@ -13,4 +13,8 @@
     <ProjectReference Include="..\SonarAnalyzer.ShimLayer.Generator\SonarAnalyzer.ShimLayer.Generator.csproj" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Using Include="SonarAnalyzer.ShimLayer.Common" />
+  </ItemGroup>
+
 </Project>

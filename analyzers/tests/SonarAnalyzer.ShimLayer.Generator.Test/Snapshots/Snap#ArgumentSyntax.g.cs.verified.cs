@@ -29,7 +29,7 @@ public static partial class ArgumentSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ArgumentSyntax);
 
-    private static readonly Func<ArgumentSyntax, SyntaxToken> RefKindKeywordAccessor = LightupHelpers.CreatePropertyAccessor<ArgumentSyntax, SyntaxToken>(WrappedType, "RefKindKeyword");
+    private static readonly Func<ArgumentSyntax, SyntaxToken> RefKindKeywordAccessor = AccessorFactory.CreateProperty<Func<ArgumentSyntax, SyntaxToken>>(WrappedType, "RefKindKeyword");
 
     extension(ArgumentSyntax wrappedInstance)
     {

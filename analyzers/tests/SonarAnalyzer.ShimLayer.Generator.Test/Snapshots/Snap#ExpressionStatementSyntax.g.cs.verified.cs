@@ -29,7 +29,7 @@ public static partial class ExpressionStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ExpressionStatementSyntax);
 
-    private static readonly Func<ExpressionStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<ExpressionStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<ExpressionStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<ExpressionStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     extension(ExpressionStatementSyntax wrappedInstance)
     {

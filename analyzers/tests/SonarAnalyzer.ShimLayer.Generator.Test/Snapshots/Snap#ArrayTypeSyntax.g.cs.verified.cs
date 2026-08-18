@@ -29,10 +29,10 @@ public static partial class ArrayTypeSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ArrayTypeSyntax);
 
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNint");
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNotNull");
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsNuint");
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<ArrayTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsNintAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsNint");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsNotNull");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsNuint");
+    private static readonly Func<ArrayTypeSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsUnmanaged");
 
     extension(ArrayTypeSyntax wrappedInstance)
     {

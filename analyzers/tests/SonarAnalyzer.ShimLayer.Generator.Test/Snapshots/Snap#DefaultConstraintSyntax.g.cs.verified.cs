@@ -32,7 +32,7 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DefaultConstraintSyntaxWrapper));
     private readonly TypeParameterConstraintSyntax wrappedInstance;
 
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor = LightupHelpers.CreatePropertyAccessor<TypeParameterConstraintSyntax, SyntaxToken>(WrappedType, "DefaultKeyword");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SyntaxToken>>(WrappedType, "DefaultKeyword");
 
     private DefaultConstraintSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

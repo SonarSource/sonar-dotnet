@@ -32,7 +32,7 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DiscardDesignationSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxToken>(WrappedType, "UnderscoreToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "UnderscoreToken");
 
     private DiscardDesignationSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

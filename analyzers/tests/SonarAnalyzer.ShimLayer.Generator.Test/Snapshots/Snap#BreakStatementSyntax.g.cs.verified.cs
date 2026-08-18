@@ -29,7 +29,7 @@ public static partial class BreakStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(BreakStatementSyntax);
 
-    private static readonly Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<BreakStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     extension(BreakStatementSyntax wrappedInstance)
     {

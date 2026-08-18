@@ -32,9 +32,9 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerParameterSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
-    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, SyntaxTokenList>(WrappedType, "Modifiers");
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = LightupHelpers.CreatePropertyAccessor<CSharpSyntaxNode, TypeSyntax>(WrappedType, "Type");
+    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
+    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxTokenList>>(WrappedType, "Modifiers");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, TypeSyntax>>(WrappedType, "Type");
 
     private FunctionPointerParameterSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

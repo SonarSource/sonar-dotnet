@@ -29,7 +29,7 @@ public static partial class UnsafeStatementSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(UnsafeStatementSyntax);
 
-    private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = LightupHelpers.CreatePropertyAccessor<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>>(WrappedType, "AttributeLists");
+    private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     extension(UnsafeStatementSyntax wrappedInstance)
     {

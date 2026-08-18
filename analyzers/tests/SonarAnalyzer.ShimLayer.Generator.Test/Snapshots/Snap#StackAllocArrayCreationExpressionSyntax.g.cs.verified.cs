@@ -29,7 +29,7 @@ public static partial class StackAllocArrayCreationExpressionSyntaxShimExtension
 {
     private static readonly Type WrappedType = typeof(StackAllocArrayCreationExpressionSyntax);
 
-    private static readonly Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = LightupHelpers.CreatePropertyAccessor<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax>(WrappedType, "Initializer");
+    private static readonly Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = AccessorFactory.CreateProperty<Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax>>(WrappedType, "Initializer");
 
     extension(StackAllocArrayCreationExpressionSyntax wrappedInstance)
     {

@@ -29,10 +29,10 @@ public static partial class PredefinedTypeSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(PredefinedTypeSyntax);
 
-    private static readonly Func<PredefinedTypeSyntax, Boolean> IsNintAccessor = LightupHelpers.CreatePropertyAccessor<PredefinedTypeSyntax, Boolean>(WrappedType, "IsNint");
-    private static readonly Func<PredefinedTypeSyntax, Boolean> IsNotNullAccessor = LightupHelpers.CreatePropertyAccessor<PredefinedTypeSyntax, Boolean>(WrappedType, "IsNotNull");
-    private static readonly Func<PredefinedTypeSyntax, Boolean> IsNuintAccessor = LightupHelpers.CreatePropertyAccessor<PredefinedTypeSyntax, Boolean>(WrappedType, "IsNuint");
-    private static readonly Func<PredefinedTypeSyntax, Boolean> IsUnmanagedAccessor = LightupHelpers.CreatePropertyAccessor<PredefinedTypeSyntax, Boolean>(WrappedType, "IsUnmanaged");
+    private static readonly Func<PredefinedTypeSyntax, Boolean> IsNintAccessor = AccessorFactory.CreateProperty<Func<PredefinedTypeSyntax, Boolean>>(WrappedType, "IsNint");
+    private static readonly Func<PredefinedTypeSyntax, Boolean> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<PredefinedTypeSyntax, Boolean>>(WrappedType, "IsNotNull");
+    private static readonly Func<PredefinedTypeSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<PredefinedTypeSyntax, Boolean>>(WrappedType, "IsNuint");
+    private static readonly Func<PredefinedTypeSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<PredefinedTypeSyntax, Boolean>>(WrappedType, "IsUnmanaged");
 
     extension(PredefinedTypeSyntax wrappedInstance)
     {
