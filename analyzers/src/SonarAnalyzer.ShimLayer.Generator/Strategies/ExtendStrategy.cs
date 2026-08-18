@@ -19,10 +19,10 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public sealed class ExtendStrategy : Strategy
 {
-    public IReadOnlyList<MemberInfo> Members { get; }
+    public IReadOnlyList<MemberDescriptor> Members { get; }
 
     public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest) =>
-        Members = members.Where(x => !x.IsPassthrough).Select(x => x.Member).ToArray();
+        Members = members.Where(x => !x.IsPassthrough).ToArray();
 
     public override string ReturnTypeSnippet() =>
         Latest.Name;
@@ -32,8 +32,8 @@ public sealed class ExtendStrategy : Strategy
 
     protected override string GenerateCore(StrategyModel model)
     {
-        var properties = Members.OfType<PropertyInfo>()
-            .Select(x => model[x.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
+        var properties = Members
+            .Select(x => x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
             .Where(x => x is not null)
             .ToArray();
         return properties.Any()

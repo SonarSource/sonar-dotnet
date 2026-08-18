@@ -46,11 +46,11 @@ public abstract class WrapStrategy : Strategy
     protected override string GenerateCore(StrategyModel model)
     {
         var passthroughProperties = Members
-            .Select(x => x.IsPassthrough && x.Member is PropertyInfo pi ? new PropertyPassthroughSnippet(this, pi, model[pi.PropertyType]) : null)
+            .Select(x => x.IsPassthrough && x.Member is PropertyInfo pi ? new PropertyPassthroughSnippet(this, x, model[pi.PropertyType]) : null)
             .Where(x => x is not null)
             .ToArray();
         var wrapProperties = Members
-            .Select(x => !x.IsPassthrough && x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, pi, returnType) : null)
+            .Select(x => !x.IsPassthrough && x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
             .Where(x => x is not null)
             .ToArray();
 

@@ -116,9 +116,9 @@ public class SyntaxNodeWrapStrategyTest
             typeof(RecordDeclarationSyntax),
             typeof(TypeDeclarationSyntax),
             [
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Span))[0], true),
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.ClassOrStructKeyword))[0], false),
-                new(skippedPropertyTypeMember, false) // PropertyType is skipped and this should not render anything
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Span))[0], true, "SpanAccessor"),
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.ClassOrStructKeyword))[0], false, "ClassOrStructKeywordAccessor"),
+                new(skippedPropertyTypeMember, false, "ConstraintClausesAccessor") // PropertyType is skipped and this should not render anything
             ]);
         var model = new StrategyModel(new() { { skippedPropertyTypeMember.PropertyType, new SkipStrategy(skippedPropertyTypeMember.PropertyType) } });
 
@@ -211,7 +211,7 @@ public class SyntaxNodeWrapStrategyTest
             typeof(IsPatternExpressionSyntax),
             typeof(ExpressionSyntax),
             [
-                new(typeof(IsPatternExpressionSyntax).GetMember(nameof(IsPatternExpressionSyntax.Pattern))[0], false),
+                new(typeof(IsPatternExpressionSyntax).GetMember(nameof(IsPatternExpressionSyntax.Pattern))[0], false, "PatternAccessor"),
             ]);
         var patternSyntaxStrategy = new SyntaxNodeWrapStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), []);
 
@@ -392,7 +392,7 @@ public class SyntaxNodeWrapStrategyTest
     [TestMethod]
     public void Generate_SkippedMembers_DoNotProduceEmptyLines()
     {
-        var unsupportedMember = new MemberDescriptor(typeof(SyntaxNode).GetMembers().OfType<MethodInfo>().First(x => x.ReturnType.IsNested), true);
+        var unsupportedMember = new MemberDescriptor(typeof(SyntaxNode).GetMembers().OfType<MethodInfo>().First(x => x.ReturnType.IsNested), true, "ConstraintClausesAccessor");
         var sut = new SyntaxNodeWrapStrategy(
             typeof(SyntaxNode),
             typeof(SyntaxNode),
@@ -482,8 +482,8 @@ public class SyntaxNodeWrapStrategyTest
             typeof(IndexerDeclarationSyntax),
             typeof(SyntaxNode),
             [
-                new(typeof(IndexerDeclarationSyntax).GetMember("Semicolon")[0], true),  // Has ObsoleteAttribute to render
-                new(typeof(AliasQualifiedNameSyntax).GetMember("Parent")[0], true)      // Has NullableAttribute to ignore
+                new(typeof(IndexerDeclarationSyntax).GetMember("Semicolon")[0], true, "SemicolonAccessor"), // Has ObsoleteAttribute to render
+                new(typeof(AliasQualifiedNameSyntax).GetMember("Parent")[0], true, "ParentAccessor")        // Has NullableAttribute to ignore
             ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings("""
@@ -574,10 +574,10 @@ public class SyntaxNodeWrapStrategyTest
             typeof(TypeDeclarationSyntax),
             [
                 // This class is not authentic. There's a mix of different types to demonstrate what will be rendered
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Members))[0], false),          // SyntaxList with accessor
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.AttributeLists))[0], true),    // SyntaxList passthrough
-                new(typeof(TupleExpressionSyntax).GetMember(nameof(TupleExpressionSyntax.Arguments))[0], false),            // SeparatedSyntaxList
-                new(typeof(SwitchExpressionSyntax).GetMember(nameof(SwitchExpressionSyntax.Arms))[0], false)                // SeparatedSyntaxListWrapper
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Members))[0], false, "MembersAccessor"),               // SyntaxList with accessor
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.AttributeLists))[0], true, "AttributeListsAccessor"),  // SyntaxList passthrough
+                new(typeof(TupleExpressionSyntax).GetMember(nameof(TupleExpressionSyntax.Arguments))[0], false, "ArgumentsAccessor"),               // SeparatedSyntaxList
+                new(typeof(SwitchExpressionSyntax).GetMember(nameof(SwitchExpressionSyntax.Arms))[0], false, "ArmsAccessor")                        // SeparatedSyntaxListWrapper
             ]);
         var result = sut.Generate(new() { { typeof(SwitchExpressionArmSyntax), new SyntaxNodeWrapStrategy(typeof(SwitchExpressionArmSyntax), typeof(CSharpSyntaxNode), []) } });
         result.Should().BeIgnoringLineEndings(

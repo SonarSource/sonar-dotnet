@@ -19,15 +19,15 @@ namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
 
 public sealed class PropertyWrapSnippet : Snippet<PropertyInfo>
 {
-    public PropertyWrapSnippet(Strategy strategy, PropertyInfo member, Strategy returnType) : base(strategy, member, returnType) { }
+    public PropertyWrapSnippet(Strategy strategy, MemberDescriptor member, Strategy returnType) : base(strategy, member, returnType) { }
 
     public override string AccessorDeclaration() =>
         $"""
-            private static readonly Func<{strategy.CompiletimeTypeSnippet()}, {returnType.CompiletimeTypeSnippet()}> {member.Name}Accessor = {returnType.PropertyAccessorInitializerSnippet(strategy.CompiletimeTypeSnippet(), member.Name)};
+            private static readonly Func<{strategy.CompiletimeTypeSnippet()}, {returnType.CompiletimeTypeSnippet()}> {accessorName} = {returnType.PropertyAccessorInitializerSnippet(strategy.CompiletimeTypeSnippet(), member.Name)};
         """;
 
     public override string MemberDeclaration(int indentSize) =>
         $"""
-        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet()} {member.Name} => {returnType.ToConversionSnippet($"{member.Name}Accessor(wrappedInstance)")};
+        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet()} {member.Name} => {returnType.ToConversionSnippet($"{accessorName}(wrappedInstance)")};
         """;
 }

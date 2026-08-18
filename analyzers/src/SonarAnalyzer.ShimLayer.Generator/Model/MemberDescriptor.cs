@@ -17,4 +17,4 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
-public record MemberDescriptor(MemberInfo Member, bool IsPassthrough);
+public record MemberDescriptor(MemberInfo Member, bool IsPassthrough, string AccessorName);

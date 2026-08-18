@@ -111,7 +111,16 @@ public static class ModelBuilder
     {
         var baseline = new HashSet<string>(baselineType?.Members.Select(x => x.ToString()) ?? []);
         var nonShadowedMembers = latestType.Members.GroupBy(MemberKey).Select(x => x.OrderByDescending(x => InheritanceDepth(x.DeclaringType)).First());
-        return nonShadowedMembers.Where(IsValid).Select(x => new MemberDescriptor(x, baseline.Contains(x.ToString()))).ToArray();
+        var names = new Dictionary<string, int>();
+        var result = new List<MemberDescriptor>();
+        foreach (var member in nonShadowedMembers.Where(IsValid)) // ToDo: Make it deterministic .OrderBy(x => x.Name).ThenBy(x => x.ToString()))
+        {
+            var nameCount = names.TryGetValue(member.Name, out var oldCount) ? oldCount + 1 : 1;
+            names[member.Name] = nameCount;
+            var accessorSuffix = nameCount == 1 ? null : $"_Overload{nameCount}";
+            result.Add(new MemberDescriptor(member, baseline.Contains(member.ToString()), $"{member.Name}Accessor{accessorSuffix}"));
+        }
+        return result.ToArray();
 
         static string MemberKey(MemberInfo member) =>
             member is MethodInfo method

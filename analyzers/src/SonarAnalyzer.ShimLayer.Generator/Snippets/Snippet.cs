@@ -66,15 +66,17 @@ public abstract class Snippet<TMember> : Snippet where TMember : MemberInfo
 {
     protected readonly Strategy strategy;
     protected readonly TMember member;
+    protected readonly string accessorName;
     protected readonly Strategy returnType;
 
     public abstract string AccessorDeclaration();
     public abstract string MemberDeclaration(int indentSize);
 
-    protected Snippet(Strategy strategy, TMember member, Strategy returnType)
+    protected Snippet(Strategy strategy, MemberDescriptor member, Strategy returnType)
     {
         this.strategy = strategy;
-        this.member = member;
+        this.member = (TMember)member.Member;
+        this.accessorName = member.AccessorName;
         this.returnType = returnType;
     }
 }

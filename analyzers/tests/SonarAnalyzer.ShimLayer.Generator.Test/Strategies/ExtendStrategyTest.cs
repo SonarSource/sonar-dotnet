@@ -34,9 +34,9 @@ public class ExtendStrategyTest
     public void Generate_ClassDeclarationSyntax_ParameterList()
     {
         var sut = new ExtendStrategy(typeof(ClassDeclarationSyntax), [
-            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.ParameterList))[0], false),
-            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.SemicolonToken))[0], false),
-            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.Span))[0], true), // exisiting member, should be ignored
+            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.ParameterList))[0], false, "ParameterListAccessor"),
+            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.SemicolonToken))[0], false, "SemicolonTokenAccessor"),
+            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.Span))[0], true, "SpanAccessor"), // exisiting member, should be ignored
         ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
@@ -89,7 +89,7 @@ public class ExtendStrategyTest
     {
         var sut = new ExtendStrategy(typeof(ProcessStartInfo), [
             // FileName has a getter and a setter. We do not generate setters, because there are no SyntaxNode properties with setters.
-            new(typeof(ProcessStartInfo).GetMember(nameof(ProcessStartInfo.FileName))[0], false),
+            new(typeof(ProcessStartInfo).GetMember(nameof(ProcessStartInfo.FileName))[0], false, "FileNameAccessor"),
         ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
@@ -143,9 +143,9 @@ public class ExtendStrategyTest
         var sut = new ExtendStrategy(
             typeof(IOperation),
             [
-                new(typeof(IOperation).GetMember(nameof(IOperation.Parent))[0], false),
-                new(typeof(IOperation).GetMember(nameof(IOperation.Children))[0], false),
-                new(typeof(IOperation).GetMember(nameof(IOperation.Syntax))[0], true),  // Existing member, should be ignored
+                new(typeof(IOperation).GetMember(nameof(IOperation.Parent))[0], false, "ParentAccessor"),
+                new(typeof(IOperation).GetMember(nameof(IOperation.Children))[0], false, "ChildrenAccessor"),
+                new(typeof(IOperation).GetMember(nameof(IOperation.Syntax))[0], true, "SyntaxAccessor"),  // Existing member, should be ignored
             ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(

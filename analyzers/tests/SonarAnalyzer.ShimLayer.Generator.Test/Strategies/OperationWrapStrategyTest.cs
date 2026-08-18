@@ -190,9 +190,9 @@ public class OperationWrapStrategyTest
         var sut = new OperationWrapStrategy(
             typeof(ITupleOperation),
             [
-                new(typeof(ITupleOperation).GetMember(nameof(ITupleOperation.Elements))[0], false),
-                new(typeof(ITupleOperation).GetMember(nameof(ITupleOperation.NaturalType))[0], false),
-                new(typeof(IOperation).GetMember(nameof(IOperation.Type))[0], true)
+                new(typeof(ITupleOperation).GetMember(nameof(ITupleOperation.Elements))[0], false, "ElementsAccessor"),
+                new(typeof(ITupleOperation).GetMember(nameof(ITupleOperation.NaturalType))[0], false, "NaturalTypeAccessor"),
+                new(typeof(IOperation).GetMember(nameof(IOperation.Type))[0], true, "TypeAccessor")
             ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(

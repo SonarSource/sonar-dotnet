@@ -19,7 +19,7 @@ namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
 
 public sealed class PropertyPassthroughSnippet : Snippet<PropertyInfo>
 {
-    public PropertyPassthroughSnippet(Strategy strategy, PropertyInfo member, Strategy returnType) : base(strategy, member, returnType) { }
+    public PropertyPassthroughSnippet(Strategy strategy, MemberDescriptor member, Strategy returnType) : base(strategy, member, returnType) { }
 
     public override string AccessorDeclaration() =>
         null;
