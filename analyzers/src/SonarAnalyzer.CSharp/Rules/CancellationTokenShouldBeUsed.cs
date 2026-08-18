@@ -73,7 +73,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
                                             {
                                                 if (initializerSpan?.Contains(nodeContext.Node.Span) != true)
                                                 {
-                                                    Analyze(nodeContext, (InvocationExpressionSyntax)nodeContext.Node, ctSource, candidateCache);
+                                                    Analyze(nodeContext, (InvocationExpressionSyntax)nodeContext.Node, ctSource, owningMethod, candidateCache);
                                                 }
                                             },
                                             SyntaxKind.InvocationExpression);
@@ -225,6 +225,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
         SonarSyntaxNodeReportingContext nodeContext,
         InvocationExpressionSyntax invocation,
         MemberCtSource ctSource,
+        IMethodSymbol owningMethod,
         ConcurrentDictionary<MethodGroupKey, ImmutableArray<string>> candidateCache)
     {
         if (nodeContext.Model.GetSymbolInfo(invocation).Symbol is not IMethodSymbol method)
@@ -259,7 +260,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
                 .Distinct()
                 .ToImmutableArray());
 
-        if (!ctParamNames.IsDefaultOrEmpty && ctParamNames.Any(x => CanSpeculativelyPassCt(nodeContext.Model, invocation, method, x, ctSource.Expression)))
+        if (!ctParamNames.IsDefaultOrEmpty && ctParamNames.Any(x => CanSpeculativelyPassCt(nodeContext.Model, invocation, method, x, ctSource.Expression, owningMethod)))
         {
             nodeContext.ReportIssue(Rule, invocation.Expression, [ctSource.DeclarationToken?.ToSecondaryLocation()], string.Format(MessageFormat, ctSource.Expression));
         }
@@ -270,7 +271,8 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
         InvocationExpressionSyntax invocation,
         IMethodSymbol calledMethod,
         string ctParamName,
-        ExpressionSyntax ctSource)
+        ExpressionSyntax ctSource,
+        IMethodSymbol owningMethod)
     {
         var ctArg = SyntaxFactory.Argument(
             SyntaxFactory.NameColon(ctParamName.EscapedIdentifierName),
@@ -285,6 +287,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
         // GetSpeculativeSymbolInfo matches by argument type only, so check the return type too to avoid FPs (e.g. Task<int> vs Task<string> overloads).
         return model.GetSpeculativeSymbolInfo(invocation.SpanStart, speculatedNode, SpeculativeBindingOption.BindAsExpression).Symbol
             is IMethodSymbol resolved
-            && model.Compilation.ClassifyConversion(resolved.ReturnType, calledMethod.ReturnType).IsImplicit;
+            && model.Compilation.ClassifyConversion(resolved.ReturnType, calledMethod.ReturnType).IsImplicit
+            && !(resolved.ReducedFrom ?? resolved).OriginalDefinition.Equals(owningMethod.OriginalDefinition);
     }
 }

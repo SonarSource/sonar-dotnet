@@ -466,3 +466,26 @@ public class CrossMethodFNCases
         _dep.Do(); // FN — 'ct' is available in Caller() but not visible here
     }
 }
+
+public class SelfCallCases
+{
+    public void M() { }
+    public void M(CancellationToken token) => M(); // Compliant - recursing into this very method
+
+    public void Retry(int n, CancellationToken token = default(CancellationToken))
+    {
+        if (n > 0)
+        {
+            Retry(n - 1); // FN — see NET-4351, guarded recursion would be a safe fix
+        }
+    }
+
+    public void M<T>(T value) { }
+    public void M<T>(T value, CancellationToken token) => M<int>(0); // Compliant - recursing into this very method
+}
+
+public static class SelfCallExtensionCases
+{
+    public static void M(this Dependency dep) { }
+    public static void M(this Dependency dep, CancellationToken token) => dep.M(); // Compliant - recursing into this very method
+}
