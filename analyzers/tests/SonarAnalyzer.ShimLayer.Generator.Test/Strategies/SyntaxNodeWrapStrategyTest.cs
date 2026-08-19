@@ -618,7 +618,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 private static readonly Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>>(WrappedType, "Members");
                 private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SeparatedSyntaxList<ArgumentSyntax>>>(WrappedType, "Arguments");
-                private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeDeclarationSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
+                private static readonly Func<TypeDeclarationSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>>>(WrappedType, "Arms");
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;

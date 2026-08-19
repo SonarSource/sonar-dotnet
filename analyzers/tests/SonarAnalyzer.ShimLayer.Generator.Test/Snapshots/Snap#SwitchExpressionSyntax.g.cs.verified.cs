@@ -32,7 +32,7 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionSyntaxWrapper));
     private readonly ExpressionSyntax wrappedInstance;
 
-    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper>(WrappedType, nameof(Arms));
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>> ArmsAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>>>(WrappedType, "Arms");
     private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBraceTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "CloseBraceToken");
     private static readonly Func<ExpressionSyntax, ExpressionSyntax> GoverningExpressionAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ExpressionSyntax>>(WrappedType, "GoverningExpression");
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBraceToken");

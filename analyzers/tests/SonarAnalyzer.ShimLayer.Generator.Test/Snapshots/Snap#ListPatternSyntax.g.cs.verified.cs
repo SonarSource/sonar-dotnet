@@ -35,7 +35,7 @@ public readonly partial struct ListPatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "CloseBracketToken");
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Designation");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenBracketToken");
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>> PatternsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, PatternSyntaxWrapper>(WrappedType, nameof(Patterns));
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>> PatternsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>>>(WrappedType, "Patterns");
 
     private ListPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;

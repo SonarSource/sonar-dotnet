@@ -37,8 +37,5 @@ public class SeparatedSyntaxListStrategy : Strategy
     public override string CompiletimeTypeSnippet() =>
         ReturnTypeSnippet();
 
-    public override string PropertyAccessorInitializerSnippet(string compiletimeType, string propertyName) =>
-        $"LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<{compiletimeType}, {typeArgument.ReturnTypeSnippet()}>(WrappedType, nameof({propertyName}))";
-
     protected override string GenerateCore(StrategyModel model) => null;
 }

@@ -33,7 +33,7 @@ public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSynta
     private readonly TypeSyntax wrappedInstance;
 
     private static readonly Func<TypeSyntax, SyntaxToken> CloseParenTokenAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "CloseParenToken");
-    private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>> ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<TypeSyntax, TupleElementSyntaxWrapper>(WrappedType, nameof(Elements));
+    private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>> ElementsAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>>>(WrappedType, "Elements");
     private static readonly Func<TypeSyntax, Boolean> IsNintAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNint");
     private static readonly Func<TypeSyntax, Boolean> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNotNull");
     private static readonly Func<TypeSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsNuint");

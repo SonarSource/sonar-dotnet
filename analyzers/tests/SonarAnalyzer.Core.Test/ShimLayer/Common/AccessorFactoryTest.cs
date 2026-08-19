@@ -28,7 +28,7 @@ public class AccessorFactoryTest
     [TestMethod]
     public void NullInstance_Throws()
     {
-        var accessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(typeof(ClassDeclarationSyntax), "ParameterList");
+        var accessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(typeof(ClassDeclarationSyntax), nameof(ClassDeclarationSyntax.ParameterList));
         FluentActions.Invoking(() => accessor(null)).Should().Throw<NullReferenceException>()
             .WithMessage("Object reference not set to an instance of an object. This ShimLayer accessor for ParameterList was called with 'null' sender.");
     }
@@ -36,7 +36,7 @@ public class AccessorFactoryTest
     [TestMethod]
     public void ReturnType_CompileTimeType_Shimmed()
     {
-        var accessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(typeof(ClassDeclarationSyntax), "ParameterList");
+        var accessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(typeof(ClassDeclarationSyntax), nameof(ClassDeclarationSyntax.ParameterList));
         var declaration = CreateClassDeclaration();
         accessor(declaration).Should().Be(declaration.ParameterList);
     }
@@ -44,21 +44,21 @@ public class AccessorFactoryTest
     [TestMethod]
     public void ReturnType_CompileTimeType_Fallback()
     {
-        var accessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(null, "ParameterList");
+        var accessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(null, nameof(ClassDeclarationSyntax.ParameterList));
         accessor(CreateClassDeclaration()).Should().BeNull();
     }
 
     [TestMethod]
     public void ReturnType_ImmutableArrayOfIOperation_Shimmed()
     {
-        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(typeof(IInvocationOperation), "Arguments");
+        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(typeof(IInvocationOperation), nameof(IInvocationOperation.Arguments));
         accessor(CreateInvocationOperation()).Should().NotBeNull().And.HaveCount(1);
     }
 
     [TestMethod]
     public void ReturnType_ImmutableArrayOfIOperation_Fallback()
     {
-        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(null, "Arguments");
+        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(null, nameof(IInvocationOperation.Arguments));
         accessor(CreateInvocationOperation()).Should().NotBeNull().And.BeEmpty();
     }
 
@@ -74,6 +74,42 @@ public class AccessorFactoryTest
     {
         var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ILocalSymbol>>>(null, "Locals");
         accessor(CreateForEachOperation()).Should().NotBeNull().And.BeEmpty();
+    }
+
+    [TestMethod]
+    public void ReturnType_SeparatedSyntaxListOfWrappedType_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<CollectionExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>>>(typeof(CollectionExpressionSyntax), nameof(CollectionExpressionSyntax.Elements));
+        var collectionExpression = CreateCollectionExpression();
+        var result = accessor(collectionExpression);
+
+        result.Should().NotBeNull().And.HaveCount(2);
+        result[0].WrappedInstance.Should().Be(collectionExpression.Elements[0]);
+        result[1].WrappedInstance.Should().Be(collectionExpression.Elements[1]);
+
+        result.SeparatorCount.Should().Be(1);
+        result.Separator(0).IsKind(SyntaxKind.CommaToken);
+    }
+
+    [TestMethod]
+    public void ReturnType_SeparatedSyntaxListOfWrappedType_Fallback()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<CollectionExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>>>(null, nameof(CollectionExpressionSyntax.Elements));
+        accessor(CreateCollectionExpression()).Should().NotBeNull().And.BeEmpty();
+    }
+
+    [TestMethod]
+    public void ReturnType_SeparatedSyntaxListOfCompiletimeType_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<TupleExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>>>(typeof(TupleExpressionSyntax), nameof(TupleExpressionSyntax.Arguments));
+        accessor(CreateTupleExpressionSyntax()).Should().NotBeNull().And.HaveCount(1);
+    }
+
+    [TestMethod]
+    public void ReturnType_SeparatedSyntaxListOfCompiletimeType_Fallback()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<TupleExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>>>(null, nameof(TupleExpressionSyntax.Arguments));
+        accessor(CreateTupleExpressionSyntax()).Should().NotBeNull().And.BeEmpty();
     }
 
     private static IInvocationOperation CreateInvocationOperation()
@@ -104,4 +140,11 @@ public class AccessorFactoryTest
     private static ClassDeclarationSyntax CreateClassDeclaration() =>
         SyntaxFactory.ClassDeclaration("Sample")
             .AddParameterListParameters(SyntaxFactory.Parameter(SyntaxFactory.Identifier("First")).WithType(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword))));
+
+    private static CollectionExpressionSyntax CreateCollectionExpression() =>
+        SyntaxFactory.CollectionExpression()
+            .AddElements(SyntaxFactory.ExpressionElement(SyntaxFactory.IdentifierName("first")), SyntaxFactory.ExpressionElement(SyntaxFactory.IdentifierName("second")));
+
+    private static TupleExpressionSyntax CreateTupleExpressionSyntax() =>
+        SyntaxFactory.TupleExpression().AddArguments(SyntaxFactory.Argument(SyntaxFactory.IdentifierName("first")));
 }

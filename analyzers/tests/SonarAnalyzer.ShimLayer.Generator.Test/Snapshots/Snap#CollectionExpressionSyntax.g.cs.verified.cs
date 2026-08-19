@@ -33,7 +33,7 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     private readonly ExpressionSyntax wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBracketTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "CloseBracketToken");
-    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>> ElementsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<ExpressionSyntax, CollectionElementSyntaxWrapper>(WrappedType, nameof(Elements));
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>> ElementsAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>>>(WrappedType, "Elements");
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBracketToken");
 
     private CollectionExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>

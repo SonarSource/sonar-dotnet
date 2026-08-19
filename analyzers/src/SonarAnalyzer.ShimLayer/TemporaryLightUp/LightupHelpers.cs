@@ -108,66 +108,6 @@ namespace SonarAnalyzer.ShimLayer
             return canCast;
         }
 
-        internal static Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>> CreateSeparatedSyntaxListPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
-        {
-            SeparatedSyntaxListWrapper<TProperty> FallbackAccessor(TSyntax syntax)
-            {
-                if (syntax == null)
-                {
-                    // Unlike an extension method which would throw ArgumentNullException here, the light-up
-                    // behavior needs to match behavior of the underlying property.
-                    throw new NullReferenceException();
-                }
-
-                return SeparatedSyntaxListWrapper<TProperty>.UnsupportedEmpty;
-            }
-
-            if (type == null)
-            {
-                return FallbackAccessor;
-            }
-
-            if (!typeof(TSyntax).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var property = type.GetTypeInfo().GetDeclaredProperty(propertyName);
-            if (property == null)
-            {
-                return FallbackAccessor;
-            }
-
-            if (property.PropertyType.GetGenericTypeDefinition() != typeof(SeparatedSyntaxList<>))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var propertySyntaxType = property.PropertyType.GenericTypeArguments[0];
-
-            if (!ValidatePropertyType(typeof(TProperty), propertySyntaxType))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
-            Expression instance =
-                type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
-                ? (Expression)syntaxParameter
-                : Expression.Convert(syntaxParameter, type);
-            Expression propertyAccess = Expression.Call(instance, property.GetMethod);
-
-            var unboundWrapperType = typeof(SeparatedSyntaxListWrapper<>.AutoWrapSeparatedSyntaxList<>);
-            var boundWrapperType = unboundWrapperType.MakeGenericType(typeof(TProperty), propertySyntaxType);
-            var constructorInfo = boundWrapperType.GetTypeInfo().DeclaredConstructors.Single(constructor => constructor.GetParameters().Length == 1);
-
-            Expression<Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>>> expression =
-                Expression.Lambda<Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>>>(
-                    Expression.New(constructorInfo, propertyAccess),
-                    syntaxParameter);
-            return expression.Compile();
-        }
-
         internal static Func<TSyntax, TProperty, TSyntax> CreateSyntaxWithPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
         {
             TSyntax FallbackAccessor(TSyntax syntax, TProperty newValue)
@@ -232,12 +172,6 @@ namespace SonarAnalyzer.ShimLayer
                     syntaxParameter,
                     valueParameter);
             return expression.Compile();
-        }
-
-        private static bool ValidatePropertyType(Type returnType, Type actualType)
-        {
-            var requiredType = TypeRegister.LatestType(returnType) ?? returnType;
-            return requiredType == actualType;
         }
     }
 }

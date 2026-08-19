@@ -32,7 +32,7 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionListSynt
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerUnmanagedCallingConventionListSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerUnmanagedCallingConventionSyntaxWrapper>> CallingConventionsAccessor = LightupHelpers.CreateSeparatedSyntaxListPropertyAccessor<CSharpSyntaxNode, FunctionPointerUnmanagedCallingConventionSyntaxWrapper>(WrappedType, nameof(CallingConventions));
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerUnmanagedCallingConventionSyntaxWrapper>> CallingConventionsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerUnmanagedCallingConventionSyntaxWrapper>>>(WrappedType, "CallingConventions");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "CloseBracketToken");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenBracketToken");
 
