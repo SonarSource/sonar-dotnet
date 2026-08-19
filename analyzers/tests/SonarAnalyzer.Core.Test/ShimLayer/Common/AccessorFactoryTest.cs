@@ -137,6 +137,14 @@ public class AccessorFactoryTest
         result.Should().BeNull();
     }
 
+    [TestMethod]
+    public void CreateMethod_FromFallbackWrappedTypeName()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax>>(typeof(BaseNamespaceDeclarationSyntax), "WithUsings");
+        var syntax = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.IdentifierName("NS"));
+        accessor(syntax, []).Should().NotBeNull();
+    }
+
     private static IInvocationOperation CreateInvocationOperation()
     {
         var compiler = new SnippetCompiler("""

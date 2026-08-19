@@ -32,9 +32,9 @@ internal static class AccessorFactory
 
         bool IsMethodMatch(MethodInfo method) =>
             method.Name == methodName
-            && method.ReturnType.Equals(types.ResultType)
+            && types.ResultType.IsAssignableFrom(method.ReturnType)
             && method.GetParameters() is var parameters
-            && parameters.Length == types.AllTypes.Length - 2     // Except the first TSender and last TResult
+            && parameters.Length == types.AllTypes.Length - 2       // Except the first TSender and last TResult
             && parameters.Select((x, i) => x.ParameterType.Equals(types.AllTypes[i + 1])).All(x => x);
     }
 

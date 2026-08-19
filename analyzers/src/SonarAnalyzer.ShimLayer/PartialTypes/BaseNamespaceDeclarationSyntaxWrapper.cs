@@ -28,7 +28,7 @@ public partial struct BaseNamespaceDeclarationSyntaxWrapper
 
     public BaseNamespaceDeclarationSyntaxWrapper WithUsings(SyntaxList<UsingDirectiveSyntax> usings)    // This should be removed once we Shim methods
     {
-        withUsingsAccessor ??= LightupHelpers.CreateSyntaxWithPropertyAccessor<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>>(WrappedType, nameof(Usings));
+        withUsingsAccessor ??= AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithUsings");
         return new BaseNamespaceDeclarationSyntaxWrapper(withUsingsAccessor(Node, usings));
     }
 

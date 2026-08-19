@@ -1,30 +1,20 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-#nullable disable
+using System.Collections.Concurrent;
+using System.Reflection;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Roslyn.Utilities;
 
 namespace SonarAnalyzer.ShimLayer
 {
-    using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Immutable;
-    using System.Linq;
-    using System.Linq.Expressions;
-    using System.Reflection;
-    using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.CSharp;
-    using Roslyn.Utilities;
 
     internal static class LightupHelpers
     {
-        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<Type, bool>> SupportedObjectWrappers
-            = new ConcurrentDictionary<Type, ConcurrentDictionary<Type, bool>>();
-
-        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<SyntaxKind, bool>> SupportedSyntaxWrappers
-            = new ConcurrentDictionary<Type, ConcurrentDictionary<SyntaxKind, bool>>();
-
-        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<OperationKind, bool>> SupportedOperationWrappers
-            = new ConcurrentDictionary<Type, ConcurrentDictionary<OperationKind, bool>>();
+        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<Type, bool>> SupportedObjectWrappers = new();
+        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<SyntaxKind, bool>> SupportedSyntaxWrappers = new();
+        private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<OperationKind, bool>> SupportedOperationWrappers = new();
 
         [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/8106", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)] // Sonar
         internal static bool CanWrapObject(object obj, Type underlyingType)
@@ -106,72 +96,6 @@ namespace SonarAnalyzer.ShimLayer
             }
 
             return canCast;
-        }
-
-        internal static Func<TSyntax, TProperty, TSyntax> CreateSyntaxWithPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
-        {
-            TSyntax FallbackAccessor(TSyntax syntax, TProperty newValue)
-            {
-                if (syntax == null)
-                {
-                    // Unlike an extension method which would throw ArgumentNullException here, the light-up
-                    // behavior needs to match behavior of the underlying property.
-                    throw new NullReferenceException();
-                }
-
-                if (Equals(newValue, default(TProperty)))
-                {
-                    return syntax;
-                }
-
-                throw new NotSupportedException();
-            }
-
-            if (type == null)
-            {
-                return FallbackAccessor;
-            }
-
-            if (!typeof(TSyntax).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var property = type.GetTypeInfo().GetDeclaredProperty(propertyName);
-            if (property == null)
-            {
-                return FallbackAccessor;
-            }
-
-            if (!typeof(TProperty).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var methodInfo = type.GetTypeInfo().GetDeclaredMethods("With" + propertyName)
-                .SingleOrDefault(m => !m.IsStatic && m.GetParameters().Length == 1 && m.GetParameters()[0].ParameterType.Equals(property.PropertyType));
-            if (methodInfo is null)
-            {
-                return FallbackAccessor;
-            }
-
-            var syntaxParameter = Expression.Parameter(typeof(TSyntax), "syntax");
-            var valueParameter = Expression.Parameter(typeof(TProperty), methodInfo.GetParameters()[0].Name);
-            Expression instance =
-                type.GetTypeInfo().IsAssignableFrom(typeof(TSyntax).GetTypeInfo())
-                ? (Expression)syntaxParameter
-                : Expression.Convert(syntaxParameter, type);
-            Expression value =
-                property.PropertyType.GetTypeInfo().IsAssignableFrom(typeof(TProperty).GetTypeInfo())
-                ? (Expression)valueParameter
-                : Expression.Convert(valueParameter, property.PropertyType);
-
-            Expression<Func<TSyntax, TProperty, TSyntax>> expression =
-                Expression.Lambda<Func<TSyntax, TProperty, TSyntax>>(
-                    Expression.Call(instance, methodInfo, value),
-                    syntaxParameter,
-                    valueParameter);
-            return expression.Compile();
         }
     }
 }
