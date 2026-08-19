@@ -32,7 +32,7 @@ public readonly partial struct IRaiseEventOperationWrapper : IOperationWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IRaiseEventOperationWrapper));
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> ArgumentsAccessor = LightupHelpers.CreateOperationListPropertyAccessor<IOperation>(WrappedType, nameof(Arguments));
+    private static readonly Func<IOperation, ImmutableArray<IOperation>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Arguments");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, IOperation> EventReferenceAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "EventReference");
     private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");

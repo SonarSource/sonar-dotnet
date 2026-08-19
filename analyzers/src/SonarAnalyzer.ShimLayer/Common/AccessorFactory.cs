@@ -17,6 +17,7 @@
 
 using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ShimLayer.Common;
 
@@ -52,7 +53,7 @@ internal static class AccessorFactory
         var lambdaParameters = types.AllTypes.Take(types.AllTypes.Length - 1).Select((x, i) => Expression.Parameter(x, i == 0 ? "sender" : "p" + i)).ToArray();
         var senderLambdaParameter = lambdaParameters.First();
         var lambdaReturnValue = runtimeSenderType is null || method is null
-            ? Expression.Default(types.ResultType)                  // Fallback: return default;
+            ? CreateFallback()                                      // Fallback: return default;
             : WrapConvert(CreateWrappedCall(), types.ResultType);   // Actual shim for given method call
         var body = senderLambdaParameter.Type.IsValueType
             ? lambdaReturnValue
@@ -68,11 +69,28 @@ internal static class AccessorFactory
             return Expression.Block(types.ResultType, coalesceThrow, lambdaReturnValue);
         }
 
+        Expression CreateFallback()
+        {
+            if (types.ResultType.IsGenericType && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>))
+            {
+                return Expression.Field(null, types.ResultType, nameof(ImmutableArray<>.Empty));
+            }
+            else
+            {
+                return Expression.Default(types.ResultType);
+            }
+        }
+
         Expression CreateWrappedCall()
         {
             var sender = WrapConvert(senderLambdaParameter, runtimeSenderType);
             var result = Expression.Call(sender, method);
-            if (types.ResultType.FullName == typeof(CaptureId).FullName)    // ToDo: This should be removed once we shim structs
+            if (types.ResultType.IsGenericType && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>) && method.ReturnType.GenericTypeArguments.Single() is var runtimeTypeArgument && typeof(IOperation).IsAssignableFrom(runtimeTypeArgument))
+            {
+                var castUp = typeof(ImmutableArray<IOperation>).GetMethod(nameof(ImmutableArray<>.CastUp)).MakeGenericMethod(runtimeTypeArgument);
+                return Expression.Call(castUp, result);
+            }
+            else if (types.ResultType.FullName == typeof(CaptureId).FullName)    // ToDo: This should be removed once we shim structs
             {
                 return Expression.New(typeof(CaptureId).GetConstructors().Single(), Expression.Convert(result, typeof(object)));
             }

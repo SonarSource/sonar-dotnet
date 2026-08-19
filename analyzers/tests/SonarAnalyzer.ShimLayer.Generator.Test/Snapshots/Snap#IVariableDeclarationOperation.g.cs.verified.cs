@@ -33,7 +33,7 @@ public readonly partial struct IVariableDeclarationOperationWrapper : IOperation
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> DeclaratorsAccessor = LightupHelpers.CreateOperationListPropertyAccessor<IOperation>(WrappedType, nameof(Declarators));
+    private static readonly Func<IOperation, ImmutableArray<IOperation>> DeclaratorsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Declarators");
     private static readonly Func<IOperation, ImmutableArray<IOperation>> IgnoredDimensionsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "IgnoredDimensions");
     private static readonly Func<IOperation, IOperation> InitializerAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Initializer");
     private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");

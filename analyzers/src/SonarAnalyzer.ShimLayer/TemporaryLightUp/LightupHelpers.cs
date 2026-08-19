@@ -108,65 +108,6 @@ namespace SonarAnalyzer.ShimLayer
             return canCast;
         }
 
-        internal static Func<TOperation, ImmutableArray<IOperation>> CreateOperationListPropertyAccessor<TOperation>(Type type, string propertyName)
-        {
-            ImmutableArray<IOperation> FallbackAccessor(TOperation syntax)
-            {
-                if (syntax == null)
-                {
-                    // Unlike an extension method which would throw ArgumentNullException here, the light-up
-                    // behavior needs to match behavior of the underlying property.
-                    throw new NullReferenceException();
-                }
-
-                return ImmutableArray<IOperation>.Empty;
-            }
-
-            if (type == null)
-            {
-                return FallbackAccessor;
-            }
-
-            if (!typeof(TOperation).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var property = type.GetTypeInfo().GetDeclaredProperty(propertyName);
-            if (property == null)
-            {
-                return FallbackAccessor;
-            }
-
-            if (property.PropertyType.GetGenericTypeDefinition() != typeof(ImmutableArray<>))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var propertyOperationType = property.PropertyType.GenericTypeArguments[0];
-
-            if (!typeof(IOperation).GetTypeInfo().IsAssignableFrom(propertyOperationType.GetTypeInfo()))
-            {
-                throw new InvalidOperationException();
-            }
-
-            var syntaxParameter = Expression.Parameter(typeof(TOperation), "syntax");
-            Expression instance =
-                type.GetTypeInfo().IsAssignableFrom(typeof(TOperation).GetTypeInfo())
-                ? (Expression)syntaxParameter
-                : Expression.Convert(syntaxParameter, type);
-            Expression propertyAccess = Expression.Call(instance, property.GetMethod);
-
-            var unboundCastUpMethod = typeof(ImmutableArray<IOperation>).GetTypeInfo().GetDeclaredMethod(nameof(ImmutableArray<IOperation>.CastUp));
-            var boundCastUpMethod = unboundCastUpMethod.MakeGenericMethod(propertyOperationType);
-
-            Expression<Func<TOperation, ImmutableArray<IOperation>>> expression =
-                Expression.Lambda<Func<TOperation, ImmutableArray<IOperation>>>(
-                    Expression.Call(boundCastUpMethod, propertyAccess),
-                    syntaxParameter);
-            return expression.Compile();
-        }
-
         internal static Func<TSyntax, SeparatedSyntaxListWrapper<TProperty>> CreateSeparatedSyntaxListPropertyAccessor<TSyntax, TProperty>(Type type, string propertyName)
         {
             SeparatedSyntaxListWrapper<TProperty> FallbackAccessor(TSyntax syntax)

@@ -41,7 +41,7 @@ public readonly partial struct IListPatternOperationWrapper : IOperationWrapper
     private static readonly Func<IOperation, ISymbol> LengthSymbolAccessor = AccessorFactory.CreateProperty<Func<IOperation, ISymbol>>(WrappedType, "LengthSymbol");
     private static readonly Func<IOperation, ITypeSymbol> NarrowedTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "NarrowedType");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> PatternsAccessor = LightupHelpers.CreateOperationListPropertyAccessor<IOperation>(WrappedType, nameof(Patterns));
+    private static readonly Func<IOperation, ImmutableArray<IOperation>> PatternsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Patterns");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
     private IListPatternOperationWrapper(IOperation wrappedInstance) =>

@@ -32,7 +32,7 @@ public readonly partial struct IInvocationOperationWrapper : IOperationWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IInvocationOperationWrapper));
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> ArgumentsAccessor = LightupHelpers.CreateOperationListPropertyAccessor<IOperation>(WrappedType, nameof(Arguments));
+    private static readonly Func<IOperation, ImmutableArray<IOperation>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Arguments");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "ConstrainedToType");
     private static readonly Func<IOperation, IOperation> InstanceAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Instance");

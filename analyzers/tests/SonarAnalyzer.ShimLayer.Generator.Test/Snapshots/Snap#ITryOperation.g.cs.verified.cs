@@ -33,7 +33,7 @@ public readonly partial struct ITryOperationWrapper : IOperationWrapper
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IOperation> BodyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Body");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> CatchesAccessor = LightupHelpers.CreateOperationListPropertyAccessor<IOperation>(WrappedType, nameof(Catches));
+    private static readonly Func<IOperation, ImmutableArray<IOperation>> CatchesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Catches");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ILabelSymbol> ExitLabelAccessor = AccessorFactory.CreateProperty<Func<IOperation, ILabelSymbol>>(WrappedType, "ExitLabel");
     private static readonly Func<IOperation, IOperation> FinallyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Finally");
