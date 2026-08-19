@@ -31,8 +31,20 @@ public static partial class SwitchStatementSyntaxShimExtensions
 
     private static readonly Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
+    private static readonly Func<SwitchStatementSyntax, AttributeListSyntax[], SwitchStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<SwitchStatementSyntax, AttributeListSyntax[], SwitchStatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<SwitchStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SwitchStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<SwitchStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SwitchStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, SyntaxToken, SyntaxList<SwitchSectionSyntax>, SyntaxToken, SwitchStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, SyntaxToken, SyntaxList<SwitchSectionSyntax>, SyntaxToken, SwitchStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>, SwitchStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<SwitchStatementSyntax, SyntaxList<AttributeListSyntax>, SwitchStatementSyntax>>(WrappedType, "WithAttributeLists");
+
     extension(SwitchStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+
+        public SwitchStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public SwitchStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken switchKeyword, SyntaxToken openParenToken, ExpressionSyntax expression, SyntaxToken closeParenToken, SyntaxToken openBraceToken, SyntaxList<SwitchSectionSyntax> sections, SyntaxToken closeBraceToken) => UpdateAccessor(wrappedInstance, attributeLists, switchKeyword, openParenToken, expression, closeParenToken, openBraceToken, sections, closeBraceToken);
+        public SwitchStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
 }

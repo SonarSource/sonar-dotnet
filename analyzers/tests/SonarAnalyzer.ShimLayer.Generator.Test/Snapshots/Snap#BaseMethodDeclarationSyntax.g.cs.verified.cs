@@ -31,8 +31,36 @@ public static partial class BaseMethodDeclarationSyntaxShimExtensions
 
     private static readonly Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax>>(WrappedType, "ExpressionBody");
 
+    private static readonly Func<BaseMethodDeclarationSyntax, AttributeListSyntax[], BaseMethodDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, AttributeListSyntax[], BaseMethodDeclarationSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<BaseMethodDeclarationSyntax, AttributeListSyntax[], BaseMethodDeclarationSyntax> AddBodyAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, AttributeListSyntax[], BaseMethodDeclarationSyntax>>(WrappedType, "AddBodyAttributeLists");
+    private static readonly Func<BaseMethodDeclarationSyntax, StatementSyntax[], BaseMethodDeclarationSyntax> AddBodyStatementsAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, StatementSyntax[], BaseMethodDeclarationSyntax>>(WrappedType, "AddBodyStatements");
+    private static readonly Func<BaseMethodDeclarationSyntax, SyntaxToken[], BaseMethodDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxToken[], BaseMethodDeclarationSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<BaseMethodDeclarationSyntax, ParameterSyntax[], BaseMethodDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, ParameterSyntax[], BaseMethodDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
+    private static readonly Func<BaseMethodDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseMethodDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseMethodDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseMethodDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseMethodDeclarationSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<BaseMethodDeclarationSyntax, BlockSyntax, BaseMethodDeclarationSyntax> WithBodyAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, BlockSyntax, BaseMethodDeclarationSyntax>>(WrappedType, "WithBody");
+    private static readonly Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax, BaseMethodDeclarationSyntax> WithExpressionBodyAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax, BaseMethodDeclarationSyntax>>(WrappedType, "WithExpressionBody");
+    private static readonly Func<BaseMethodDeclarationSyntax, SyntaxTokenList, BaseMethodDeclarationSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxTokenList, BaseMethodDeclarationSyntax>>(WrappedType, "WithModifiers");
+    private static readonly Func<BaseMethodDeclarationSyntax, ParameterListSyntax, BaseMethodDeclarationSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, ParameterListSyntax, BaseMethodDeclarationSyntax>>(WrappedType, "WithParameterList");
+    private static readonly Func<BaseMethodDeclarationSyntax, SyntaxToken, BaseMethodDeclarationSyntax> WithSemicolonTokenAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxToken, BaseMethodDeclarationSyntax>>(WrappedType, "WithSemicolonToken");
+
     extension(BaseMethodDeclarationSyntax wrappedInstance)
     {
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
+
+        public BaseMethodDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddBodyStatements(StatementSyntax[] items) => AddBodyStatementsAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public BaseMethodDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
+        public BaseMethodDeclarationSyntax WithBody(BlockSyntax body) => WithBodyAccessor(wrappedInstance, body);
+        public BaseMethodDeclarationSyntax WithExpressionBody(ArrowExpressionClauseSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
+        public BaseMethodDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
+        public BaseMethodDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => WithParameterListAccessor(wrappedInstance, parameterList);
+        public BaseMethodDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
     }
 }

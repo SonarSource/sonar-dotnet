@@ -31,8 +31,20 @@ public static partial class BlockSyntaxShimExtensions
 
     private static readonly Func<BlockSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<BlockSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
+    private static readonly Func<BlockSyntax, AttributeListSyntax[], BlockSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BlockSyntax, AttributeListSyntax[], BlockSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<BlockSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BlockSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BlockSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BlockSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BlockSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxList<StatementSyntax>, SyntaxToken, BlockSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<BlockSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxList<StatementSyntax>, SyntaxToken, BlockSyntax>>(WrappedType, "Update");
+    private static readonly Func<BlockSyntax, SyntaxList<AttributeListSyntax>, BlockSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BlockSyntax, SyntaxList<AttributeListSyntax>, BlockSyntax>>(WrappedType, "WithAttributeLists");
+
     extension(BlockSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+
+        public BlockSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public BlockSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken openBraceToken, SyntaxList<StatementSyntax> statements, SyntaxToken closeBraceToken) => UpdateAccessor(wrappedInstance, attributeLists, openBraceToken, statements, closeBraceToken);
+        public BlockSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
 }

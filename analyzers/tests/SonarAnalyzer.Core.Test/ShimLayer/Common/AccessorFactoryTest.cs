@@ -112,6 +112,31 @@ public class AccessorFactoryTest
         accessor(CreateTupleExpressionSyntax()).Should().NotBeNull().And.BeEmpty();
     }
 
+    [TestMethod]
+    public void CreateMethod_NullInstance_Throws()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, ParameterSyntax[], ClassDeclarationSyntax>>(typeof(ClassDeclarationSyntax), "AddParameterListParameters");
+        FluentActions.Invoking(() => accessor(null, [])).Should().Throw<NullReferenceException>()
+            .WithMessage("Object reference not set to an instance of an object. This ShimLayer accessor for AddParameterListParameters was called with 'null' sender.");
+    }
+
+    [TestMethod]
+    public void CreateMethod_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, ParameterSyntax[], ClassDeclarationSyntax>>(typeof(ClassDeclarationSyntax), "AddParameterListParameters");
+        var result = accessor(CreateClassDeclaration(), [CreateParameter()]);
+        result.Should().NotBeNull();
+        result.ParameterList.Parameters.Should().HaveCount(2);
+    }
+
+    [TestMethod]
+    public void CreateMethod_Fallback()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, ParameterSyntax[], ClassDeclarationSyntax>>(null, "AddParameterListParameters");
+        var result = accessor(CreateClassDeclaration(), [CreateParameter()]);
+        result.Should().BeNull();
+    }
+
     private static IInvocationOperation CreateInvocationOperation()
     {
         var compiler = new SnippetCompiler("""
@@ -147,4 +172,7 @@ public class AccessorFactoryTest
 
     private static TupleExpressionSyntax CreateTupleExpressionSyntax() =>
         SyntaxFactory.TupleExpression().AddArguments(SyntaxFactory.Argument(SyntaxFactory.IdentifierName("first")));
+
+    private static ParameterSyntax CreateParameter() =>
+        SyntaxFactory.Parameter(SyntaxFactory.Identifier("Name")).WithType(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword)));
 }

@@ -31,8 +31,18 @@ public static partial class OperatorMemberCrefSyntaxShimExtensions
 
     private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken> CheckedKeywordAccessor = AccessorFactory.CreateProperty<Func<OperatorMemberCrefSyntax, SyntaxToken>>(WrappedType, "CheckedKeyword");
 
+    private static readonly Func<OperatorMemberCrefSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<OperatorMemberCrefSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken, SyntaxToken, SyntaxToken, CrefParameterListSyntax, OperatorMemberCrefSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, SyntaxToken, SyntaxToken, SyntaxToken, CrefParameterListSyntax, OperatorMemberCrefSyntax>>(WrappedType, "Update");
+    private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken, OperatorMemberCrefSyntax> WithCheckedKeywordAccessor = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, SyntaxToken, OperatorMemberCrefSyntax>>(WrappedType, "WithCheckedKeyword");
+
     extension(OperatorMemberCrefSyntax wrappedInstance)
     {
         public SyntaxToken CheckedKeyword => (SyntaxToken)CheckedKeywordAccessor(wrappedInstance);
+
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public OperatorMemberCrefSyntax Update(SyntaxToken operatorKeyword, SyntaxToken checkedKeyword, SyntaxToken operatorToken, CrefParameterListSyntax parameters) => UpdateAccessor_Overload2(wrappedInstance, operatorKeyword, checkedKeyword, operatorToken, parameters);
+        public OperatorMemberCrefSyntax WithCheckedKeyword(SyntaxToken checkedKeyword) => WithCheckedKeywordAccessor(wrappedInstance, checkedKeyword);
     }
 }

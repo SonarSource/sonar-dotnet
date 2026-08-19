@@ -31,8 +31,20 @@ public static partial class WhileStatementSyntaxShimExtensions
 
     private static readonly Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
+    private static readonly Func<WhileStatementSyntax, AttributeListSyntax[], WhileStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<WhileStatementSyntax, AttributeListSyntax[], WhileStatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<WhileStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<WhileStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<WhileStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<WhileStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, WhileStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, WhileStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>, WhileStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<WhileStatementSyntax, SyntaxList<AttributeListSyntax>, WhileStatementSyntax>>(WrappedType, "WithAttributeLists");
+
     extension(WhileStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+
+        public WhileStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public WhileStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken whileKeyword, SyntaxToken openParenToken, ExpressionSyntax condition, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, whileKeyword, openParenToken, condition, closeParenToken, statement);
+        public WhileStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
 }

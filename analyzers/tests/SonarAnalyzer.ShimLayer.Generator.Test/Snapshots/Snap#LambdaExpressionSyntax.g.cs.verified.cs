@@ -34,11 +34,39 @@ public static partial class LambdaExpressionSyntaxShimExtensions
     private static readonly Func<LambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<LambdaExpressionSyntax, ExpressionSyntax>>(WrappedType, "ExpressionBody");
     private static readonly Func<LambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<LambdaExpressionSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
 
+    private static readonly Func<LambdaExpressionSyntax, AttributeListSyntax[], LambdaExpressionSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, AttributeListSyntax[], LambdaExpressionSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<LambdaExpressionSyntax, AttributeListSyntax[], AnonymousFunctionExpressionSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, AttributeListSyntax[], AnonymousFunctionExpressionSyntax>>(WrappedType, "AddBlockAttributeLists");
+    private static readonly Func<LambdaExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax> AddBlockStatementsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax>>(WrappedType, "AddBlockStatements");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxToken[], LambdaExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken[], LambdaExpressionSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<LambdaExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax> WithArrowTokenAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax>>(WrappedType, "WithArrowToken");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax> WithAsyncKeywordAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax>>(WrappedType, "WithAsyncKeyword");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, LambdaExpressionSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, LambdaExpressionSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<LambdaExpressionSyntax, BlockSyntax, LambdaExpressionSyntax> WithBlockAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, BlockSyntax, LambdaExpressionSyntax>>(WrappedType, "WithBlock");
+    private static readonly Func<LambdaExpressionSyntax, CSharpSyntaxNode, LambdaExpressionSyntax> WithBodyAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, CSharpSyntaxNode, LambdaExpressionSyntax>>(WrappedType, "WithBody");
+    private static readonly Func<LambdaExpressionSyntax, ExpressionSyntax, LambdaExpressionSyntax> WithExpressionBodyAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, ExpressionSyntax, LambdaExpressionSyntax>>(WrappedType, "WithExpressionBody");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxTokenList, LambdaExpressionSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxTokenList, LambdaExpressionSyntax>>(WrappedType, "WithModifiers");
+
     extension(LambdaExpressionSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
         public BlockSyntax Block => BlockAccessor(wrappedInstance);
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+
+        public LambdaExpressionSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public AnonymousFunctionExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public AnonymousFunctionExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
+        public LambdaExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public LambdaExpressionSyntax WithArrowToken(SyntaxToken arrowToken) => WithArrowTokenAccessor(wrappedInstance, arrowToken);
+        public LambdaExpressionSyntax WithAsyncKeyword(SyntaxToken asyncKeyword) => WithAsyncKeywordAccessor(wrappedInstance, asyncKeyword);
+        public LambdaExpressionSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
+        public LambdaExpressionSyntax WithBlock(BlockSyntax block) => WithBlockAccessor(wrappedInstance, block);
+        public LambdaExpressionSyntax WithBody(CSharpSyntaxNode body) => WithBodyAccessor(wrappedInstance, body);
+        public LambdaExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
+        public LambdaExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
     }
 }

@@ -31,8 +31,20 @@ public static partial class StructDeclarationSyntaxShimExtensions
 
     private static readonly Func<StructDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<StructDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
 
+    private static readonly Func<StructDeclarationSyntax, ParameterSyntax[], StructDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<StructDeclarationSyntax, ParameterSyntax[], StructDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
+    private static readonly Func<StructDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<StructDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<StructDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<StructDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<StructDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, StructDeclarationSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<StructDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, StructDeclarationSyntax>>(WrappedType, "Update");
+    private static readonly Func<StructDeclarationSyntax, ParameterListSyntax, StructDeclarationSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<StructDeclarationSyntax, ParameterListSyntax, StructDeclarationSyntax>>(WrappedType, "WithParameterList");
+
     extension(StructDeclarationSyntax wrappedInstance)
     {
         public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
+
+        public StructDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public StructDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, BaseListSyntax baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, SyntaxToken openBraceToken, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, keyword, identifier, typeParameterList, parameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+        public StructDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => WithParameterListAccessor(wrappedInstance, parameterList);
     }
 }

@@ -31,8 +31,20 @@ public static partial class EmptyStatementSyntaxShimExtensions
 
     private static readonly Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
+    private static readonly Func<EmptyStatementSyntax, AttributeListSyntax[], EmptyStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<EmptyStatementSyntax, AttributeListSyntax[], EmptyStatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<EmptyStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<EmptyStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<EmptyStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<EmptyStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, EmptyStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, EmptyStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>, EmptyStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<EmptyStatementSyntax, SyntaxList<AttributeListSyntax>, EmptyStatementSyntax>>(WrappedType, "WithAttributeLists");
+
     extension(EmptyStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+
+        public EmptyStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public EmptyStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, semicolonToken);
+        public EmptyStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
 }

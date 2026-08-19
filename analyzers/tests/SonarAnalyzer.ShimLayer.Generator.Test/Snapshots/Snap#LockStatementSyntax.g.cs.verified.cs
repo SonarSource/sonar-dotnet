@@ -31,8 +31,20 @@ public static partial class LockStatementSyntaxShimExtensions
 
     private static readonly Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
+    private static readonly Func<LockStatementSyntax, AttributeListSyntax[], LockStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LockStatementSyntax, AttributeListSyntax[], LockStatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<LockStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LockStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<LockStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LockStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, LockStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, LockStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>, LockStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LockStatementSyntax, SyntaxList<AttributeListSyntax>, LockStatementSyntax>>(WrappedType, "WithAttributeLists");
+
     extension(LockStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+
+        public LockStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public LockStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken lockKeyword, SyntaxToken openParenToken, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, lockKeyword, openParenToken, expression, closeParenToken, statement);
+        public LockStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
 }

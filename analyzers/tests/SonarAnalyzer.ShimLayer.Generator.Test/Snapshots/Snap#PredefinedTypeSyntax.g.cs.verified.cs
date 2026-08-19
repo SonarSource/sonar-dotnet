@@ -34,11 +34,17 @@ public static partial class PredefinedTypeSyntaxShimExtensions
     private static readonly Func<PredefinedTypeSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<PredefinedTypeSyntax, Boolean>>(WrappedType, "IsNuint");
     private static readonly Func<PredefinedTypeSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<PredefinedTypeSyntax, Boolean>>(WrappedType, "IsUnmanaged");
 
+    private static readonly Func<PredefinedTypeSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<PredefinedTypeSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<PredefinedTypeSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<PredefinedTypeSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+
     extension(PredefinedTypeSyntax wrappedInstance)
     {
         public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
         public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
         public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
+
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

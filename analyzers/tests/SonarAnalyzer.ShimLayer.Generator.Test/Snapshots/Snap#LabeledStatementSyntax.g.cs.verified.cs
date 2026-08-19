@@ -31,8 +31,20 @@ public static partial class LabeledStatementSyntaxShimExtensions
 
     private static readonly Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
+    private static readonly Func<LabeledStatementSyntax, AttributeListSyntax[], LabeledStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, AttributeListSyntax[], LabeledStatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<LabeledStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<LabeledStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, StatementSyntax, LabeledStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, StatementSyntax, LabeledStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, LabeledStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, LabeledStatementSyntax>>(WrappedType, "WithAttributeLists");
+
     extension(LabeledStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+
+        public LabeledStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public LabeledStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken identifier, SyntaxToken colonToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, identifier, colonToken, statement);
+        public LabeledStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
 }

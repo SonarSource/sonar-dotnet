@@ -36,7 +36,12 @@ public sealed class ExtendStrategy : Strategy
             .Select(x => x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
             .Where(x => x is not null)
             .ToArray();
-        return properties.Any()
+        var methods = Members
+            .Select(x => x.Member is MethodInfo { ContainsGenericParameters: false } mi && model[mi.ReturnType] is { IsSupported: true } returnTypeStrategy && mi.GetParameters().All(x => model[x.ParameterType].IsSupported) ? new MethodWrapSnippet(this, x, returnTypeStrategy, model) : null)
+            .Where(x => x is not null)
+            .ToArray();
+
+        return properties.Any() || methods.Any()
             ? $$"""
                 {{Preamble($"using {Latest.Namespace};")}}
                 public static partial class {{Latest.Name}}ShimExtensions
@@ -45,9 +50,13 @@ public sealed class ExtendStrategy : Strategy
 
                 {{JoinLines(properties.Select(x => x.AccessorDeclaration()))}}
 
+                {{JoinLines(methods.Select(x => x.AccessorDeclaration()))}}
+
                     extension({{CompiletimeTypeSnippet()}} wrappedInstance)
                     {
                 {{JoinLines(properties.Select(x => x.MemberDeclaration(8)))}}
+
+                {{JoinLines(methods.Select(x => x.MemberDeclaration(8)))}}
                     }
                 }
                 """

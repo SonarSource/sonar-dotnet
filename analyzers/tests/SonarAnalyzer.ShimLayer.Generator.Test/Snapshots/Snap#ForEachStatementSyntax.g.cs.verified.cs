@@ -32,9 +32,25 @@ public static partial class ForEachStatementSyntaxShimExtensions
     private static readonly Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
     private static readonly Func<ForEachStatementSyntax, SyntaxToken> AwaitKeywordAccessor = AccessorFactory.CreateProperty<Func<ForEachStatementSyntax, SyntaxToken>>(WrappedType, "AwaitKeyword");
 
+    private static readonly Func<ForEachStatementSyntax, AttributeListSyntax[], ForEachStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, AttributeListSyntax[], ForEachStatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<ForEachStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ForEachStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<ForEachStatementSyntax, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>, ForEachStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>, ForEachStatementSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<ForEachStatementSyntax, SyntaxToken, ForEachStatementSyntax> WithAwaitKeywordAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxToken, ForEachStatementSyntax>>(WrappedType, "WithAwaitKeyword");
+
     extension(ForEachStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
         public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(wrappedInstance);
+
+        public ForEachStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public ForEachStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken awaitKeyword, SyntaxToken forEachKeyword, SyntaxToken openParenToken, TypeSyntax type, SyntaxToken identifier, SyntaxToken inKeyword, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, awaitKeyword, forEachKeyword, openParenToken, type, identifier, inKeyword, expression, closeParenToken, statement);
+        public ForEachStatementSyntax Update(SyntaxToken awaitKeyword, SyntaxToken forEachKeyword, SyntaxToken openParenToken, TypeSyntax type, SyntaxToken identifier, SyntaxToken inKeyword, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor_Overload3(wrappedInstance, awaitKeyword, forEachKeyword, openParenToken, type, identifier, inKeyword, expression, closeParenToken, statement);
+        public ForEachStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
+        public ForEachStatementSyntax WithAwaitKeyword(SyntaxToken awaitKeyword) => WithAwaitKeywordAccessor(wrappedInstance, awaitKeyword);
     }
 }

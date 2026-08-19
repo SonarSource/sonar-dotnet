@@ -31,8 +31,22 @@ public static partial class UnsafeStatementSyntaxShimExtensions
 
     private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
+    private static readonly Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax>>(WrappedType, "AddBlockAttributeLists");
+    private static readonly Func<UnsafeStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<UnsafeStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, UnsafeStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, UnsafeStatementSyntax>>(WrappedType, "Update");
+    private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, UnsafeStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, UnsafeStatementSyntax>>(WrappedType, "WithAttributeLists");
+
     extension(UnsafeStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+
+        public UnsafeStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public UnsafeStatementSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public UnsafeStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken unsafeKeyword, BlockSyntax block) => UpdateAccessor(wrappedInstance, attributeLists, unsafeKeyword, block);
+        public UnsafeStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
 }

@@ -31,8 +31,52 @@ public static partial class TypeDeclarationSyntaxShimExtensions
 
     private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
 
+    private static readonly Func<TypeDeclarationSyntax, AttributeListSyntax[], TypeDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, AttributeListSyntax[], TypeDeclarationSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<TypeDeclarationSyntax, BaseTypeSyntax[], BaseTypeDeclarationSyntax> AddBaseListTypesAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, BaseTypeSyntax[], BaseTypeDeclarationSyntax>>(WrappedType, "AddBaseListTypes");
+    private static readonly Func<TypeDeclarationSyntax, TypeParameterConstraintClauseSyntax[], TypeDeclarationSyntax> AddConstraintClausesAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, TypeParameterConstraintClauseSyntax[], TypeDeclarationSyntax>>(WrappedType, "AddConstraintClauses");
+    private static readonly Func<TypeDeclarationSyntax, MemberDeclarationSyntax[], TypeDeclarationSyntax> AddMembersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, MemberDeclarationSyntax[], TypeDeclarationSyntax>>(WrappedType, "AddMembers");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken[], TypeDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken[], TypeDeclarationSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<TypeDeclarationSyntax, ParameterSyntax[], TypeDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, ParameterSyntax[], TypeDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
+    private static readonly Func<TypeDeclarationSyntax, TypeParameterSyntax[], TypeDeclarationSyntax> AddTypeParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, TypeParameterSyntax[], TypeDeclarationSyntax>>(WrappedType, "AddTypeParameterListParameters");
+    private static readonly Func<TypeDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, TypeDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, TypeDeclarationSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<TypeDeclarationSyntax, BaseListSyntax, TypeDeclarationSyntax> WithBaseListAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, BaseListSyntax, TypeDeclarationSyntax>>(WrappedType, "WithBaseList");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax> WithCloseBraceTokenAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax>>(WrappedType, "WithCloseBraceToken");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, TypeDeclarationSyntax> WithConstraintClausesAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, TypeDeclarationSyntax>>(WrappedType, "WithConstraintClauses");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax> WithIdentifierAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax>>(WrappedType, "WithIdentifier");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax> WithKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax>>(WrappedType, "WithKeyword");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>, TypeDeclarationSyntax> WithMembersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>, TypeDeclarationSyntax>>(WrappedType, "WithMembers");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxTokenList, TypeDeclarationSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxTokenList, TypeDeclarationSyntax>>(WrappedType, "WithModifiers");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax> WithOpenBraceTokenAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax>>(WrappedType, "WithOpenBraceToken");
+    private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax, TypeDeclarationSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, ParameterListSyntax, TypeDeclarationSyntax>>(WrappedType, "WithParameterList");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax> WithSemicolonTokenAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax>>(WrappedType, "WithSemicolonToken");
+    private static readonly Func<TypeDeclarationSyntax, TypeParameterListSyntax, TypeDeclarationSyntax> WithTypeParameterListAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, TypeParameterListSyntax, TypeDeclarationSyntax>>(WrappedType, "WithTypeParameterList");
+
     extension(TypeDeclarationSyntax wrappedInstance)
     {
         public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
+
+        public TypeDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public BaseTypeDeclarationSyntax AddBaseListTypes(BaseTypeSyntax[] items) => AddBaseListTypesAccessor(wrappedInstance, items);
+        public TypeDeclarationSyntax AddConstraintClauses(TypeParameterConstraintClauseSyntax[] items) => AddConstraintClausesAccessor(wrappedInstance, items);
+        public TypeDeclarationSyntax AddMembers(MemberDeclarationSyntax[] items) => AddMembersAccessor(wrappedInstance, items);
+        public TypeDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public TypeDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+        public TypeDeclarationSyntax AddTypeParameterListParameters(TypeParameterSyntax[] items) => AddTypeParameterListParametersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public TypeDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
+        public TypeDeclarationSyntax WithBaseList(BaseListSyntax baseList) => WithBaseListAccessor(wrappedInstance, baseList);
+        public TypeDeclarationSyntax WithCloseBraceToken(SyntaxToken closeBraceToken) => WithCloseBraceTokenAccessor(wrappedInstance, closeBraceToken);
+        public TypeDeclarationSyntax WithConstraintClauses(SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses) => WithConstraintClausesAccessor(wrappedInstance, constraintClauses);
+        public TypeDeclarationSyntax WithIdentifier(SyntaxToken identifier) => WithIdentifierAccessor(wrappedInstance, identifier);
+        public TypeDeclarationSyntax WithKeyword(SyntaxToken keyword) => WithKeywordAccessor(wrappedInstance, keyword);
+        public TypeDeclarationSyntax WithMembers(SyntaxList<MemberDeclarationSyntax> members) => WithMembersAccessor(wrappedInstance, members);
+        public TypeDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
+        public TypeDeclarationSyntax WithOpenBraceToken(SyntaxToken openBraceToken) => WithOpenBraceTokenAccessor(wrappedInstance, openBraceToken);
+        public TypeDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => WithParameterListAccessor(wrappedInstance, parameterList);
+        public TypeDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
+        public TypeDeclarationSyntax WithTypeParameterList(TypeParameterListSyntax typeParameterList) => WithTypeParameterListAccessor(wrappedInstance, typeParameterList);
     }
 }

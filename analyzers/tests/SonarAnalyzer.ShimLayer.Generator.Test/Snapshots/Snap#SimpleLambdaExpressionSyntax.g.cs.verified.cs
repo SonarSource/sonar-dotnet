@@ -34,11 +34,39 @@ public static partial class SimpleLambdaExpressionSyntaxShimExtensions
     private static readonly Func<SimpleLambdaExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<SimpleLambdaExpressionSyntax, ExpressionSyntax>>(WrappedType, "ExpressionBody");
     private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<SimpleLambdaExpressionSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
 
+    private static readonly Func<SimpleLambdaExpressionSyntax, AttributeListSyntax[], SimpleLambdaExpressionSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, AttributeListSyntax[], SimpleLambdaExpressionSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<SimpleLambdaExpressionSyntax, AttributeListSyntax[], SimpleLambdaExpressionSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, AttributeListSyntax[], SimpleLambdaExpressionSyntax>>(WrappedType, "AddBlockAttributeLists");
+    private static readonly Func<SimpleLambdaExpressionSyntax, StatementSyntax[], SimpleLambdaExpressionSyntax> AddBlockStatementsAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, StatementSyntax[], SimpleLambdaExpressionSyntax>>(WrappedType, "AddBlockStatements");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxToken[], SimpleLambdaExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxToken[], SimpleLambdaExpressionSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<SimpleLambdaExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxToken, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxToken, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxTokenList, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax> UpdateAccessor_Overload4 = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxTokenList, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SimpleLambdaExpressionSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SimpleLambdaExpressionSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<SimpleLambdaExpressionSyntax, BlockSyntax, SimpleLambdaExpressionSyntax> WithBlockAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, BlockSyntax, SimpleLambdaExpressionSyntax>>(WrappedType, "WithBlock");
+    private static readonly Func<SimpleLambdaExpressionSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax> WithExpressionBodyAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax>>(WrappedType, "WithExpressionBody");
+    private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxTokenList, SimpleLambdaExpressionSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxTokenList, SimpleLambdaExpressionSyntax>>(WrappedType, "WithModifiers");
+
     extension(SimpleLambdaExpressionSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
         public BlockSyntax Block => BlockAccessor(wrappedInstance);
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+
+        public SimpleLambdaExpressionSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public SimpleLambdaExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public SimpleLambdaExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
+        public SimpleLambdaExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public SimpleLambdaExpressionSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, parameter, arrowToken, block, expressionBody);
+        public SimpleLambdaExpressionSyntax Update(SyntaxToken asyncKeyword, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload3(wrappedInstance, asyncKeyword, parameter, arrowToken, block, expressionBody);
+        public SimpleLambdaExpressionSyntax Update(SyntaxTokenList modifiers, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload4(wrappedInstance, modifiers, parameter, arrowToken, block, expressionBody);
+        public SimpleLambdaExpressionSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
+        public SimpleLambdaExpressionSyntax WithBlock(BlockSyntax block) => WithBlockAccessor(wrappedInstance, block);
+        public SimpleLambdaExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
+        public SimpleLambdaExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
     }
 }

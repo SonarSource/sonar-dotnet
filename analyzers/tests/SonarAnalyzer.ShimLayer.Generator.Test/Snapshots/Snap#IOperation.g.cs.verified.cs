@@ -43,5 +43,6 @@ public static partial class IOperationShimExtensions
         public String Language => (String)LanguageAccessor(wrappedInstance);
         public IOperation Parent => ParentAccessor(wrappedInstance);
         public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+
     }
 }

@@ -31,8 +31,20 @@ public static partial class ClassDeclarationSyntaxShimExtensions
 
     private static readonly Func<ClassDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<ClassDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
 
+    private static readonly Func<ClassDeclarationSyntax, ParameterSyntax[], ClassDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, ParameterSyntax[], ClassDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
+    private static readonly Func<ClassDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ClassDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ClassDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, ClassDeclarationSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, ClassDeclarationSyntax>>(WrappedType, "Update");
+    private static readonly Func<ClassDeclarationSyntax, ParameterListSyntax, ClassDeclarationSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, ParameterListSyntax, ClassDeclarationSyntax>>(WrappedType, "WithParameterList");
+
     extension(ClassDeclarationSyntax wrappedInstance)
     {
         public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
+
+        public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public ClassDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, BaseListSyntax baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, SyntaxToken openBraceToken, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, keyword, identifier, typeParameterList, parameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+        public ClassDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => WithParameterListAccessor(wrappedInstance, parameterList);
     }
 }

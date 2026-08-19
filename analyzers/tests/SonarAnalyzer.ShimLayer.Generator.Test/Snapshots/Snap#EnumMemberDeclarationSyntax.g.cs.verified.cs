@@ -31,8 +31,20 @@ public static partial class EnumMemberDeclarationSyntaxShimExtensions
 
     private static readonly Func<EnumMemberDeclarationSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<EnumMemberDeclarationSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
 
+    private static readonly Func<EnumMemberDeclarationSyntax, SyntaxToken[], EnumMemberDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxToken[], EnumMemberDeclarationSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<EnumMemberDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<EnumMemberDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<EnumMemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, EqualsValueClauseSyntax, EnumMemberDeclarationSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, EqualsValueClauseSyntax, EnumMemberDeclarationSyntax>>(WrappedType, "Update");
+    private static readonly Func<EnumMemberDeclarationSyntax, SyntaxTokenList, EnumMemberDeclarationSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxTokenList, EnumMemberDeclarationSyntax>>(WrappedType, "WithModifiers");
+
     extension(EnumMemberDeclarationSyntax wrappedInstance)
     {
         public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+
+        public EnumMemberDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public EnumMemberDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken identifier, EqualsValueClauseSyntax equalsValue) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, identifier, equalsValue);
+        public EnumMemberDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
     }
 }

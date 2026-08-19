@@ -25,6 +25,19 @@ internal static class AccessorFactory
 {
     private static readonly MethodInfo UnboundEnumerableSelectMethod = typeof(Enumerable).GetMethods().Single(IsEnumerableSelect);
 
+    public static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName) where TFunc : Delegate
+    {
+        var types = new AccessorTypes(typeof(TFunc));
+        return CreateAccessor<TFunc>(types, runtimeSenderType, methodName, runtimeSenderType?.GetMethods().FirstOrDefault(IsMethodMatch));
+
+        bool IsMethodMatch(MethodInfo method) =>
+            method.Name == methodName
+            && method.ReturnType.Equals(types.ResultType)
+            && method.GetParameters() is var parameters
+            && parameters.Length == types.AllTypes.Length - 2     // Except the first TSender and last TResult
+            && parameters.Select((x, i) => x.ParameterType.Equals(types.AllTypes[i + 1])).All(x => x);
+    }
+
     public static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate
     {
         return CreateAccessor<TFunc>(new(typeof(TFunc)), runtimeSenderType, propertyName, FindProperty()?.GetMethod);
@@ -90,7 +103,8 @@ internal static class AccessorFactory
         Expression CreateWrappedCall()
         {
             var sender = WrapConvert(senderLambdaParameter, runtimeSenderType);
-            var result = Expression.Call(sender, method);
+            var methodParameters = method.GetParameters();
+            var result = Expression.Call(sender, method, lambdaParameters.Skip(1).Select((x, i) => WrapConvert(x, methodParameters[i].ParameterType)));
             if (types.ResultType.IsGenericType && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>) && method.ReturnType.GenericTypeArguments.Single() is var runtimeTypeArgument && typeof(IOperation).IsAssignableFrom(runtimeTypeArgument))
             {
                 var castUp = typeof(ImmutableArray<IOperation>).GetMethod(nameof(ImmutableArray<>.CastUp)).MakeGenericMethod(runtimeTypeArgument);

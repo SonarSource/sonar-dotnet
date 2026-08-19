@@ -31,8 +31,20 @@ public static partial class InterfaceDeclarationSyntaxShimExtensions
 
     private static readonly Func<InterfaceDeclarationSyntax, ParameterListSyntax> ParameterListAccessor = AccessorFactory.CreateProperty<Func<InterfaceDeclarationSyntax, ParameterListSyntax>>(WrappedType, "ParameterList");
 
+    private static readonly Func<InterfaceDeclarationSyntax, ParameterSyntax[], InterfaceDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<InterfaceDeclarationSyntax, ParameterSyntax[], InterfaceDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
+    private static readonly Func<InterfaceDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<InterfaceDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<InterfaceDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<InterfaceDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<InterfaceDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, InterfaceDeclarationSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<InterfaceDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, InterfaceDeclarationSyntax>>(WrappedType, "Update");
+    private static readonly Func<InterfaceDeclarationSyntax, ParameterListSyntax, InterfaceDeclarationSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<InterfaceDeclarationSyntax, ParameterListSyntax, InterfaceDeclarationSyntax>>(WrappedType, "WithParameterList");
+
     extension(InterfaceDeclarationSyntax wrappedInstance)
     {
         public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
+
+        public InterfaceDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public InterfaceDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, BaseListSyntax baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, SyntaxToken openBraceToken, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, keyword, identifier, typeParameterList, parameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
+        public InterfaceDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => WithParameterListAccessor(wrappedInstance, parameterList);
     }
 }

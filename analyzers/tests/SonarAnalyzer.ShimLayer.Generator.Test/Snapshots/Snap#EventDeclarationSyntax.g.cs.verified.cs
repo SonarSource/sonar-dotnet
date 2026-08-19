@@ -31,8 +31,20 @@ public static partial class EventDeclarationSyntaxShimExtensions
 
     private static readonly Func<EventDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = AccessorFactory.CreateProperty<Func<EventDeclarationSyntax, SyntaxToken>>(WrappedType, "SemicolonToken");
 
+    private static readonly Func<EventDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<EventDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<EventDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<EventDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<EventDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, TypeSyntax, ExplicitInterfaceSpecifierSyntax, SyntaxToken, AccessorListSyntax, SyntaxToken, EventDeclarationSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<EventDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, TypeSyntax, ExplicitInterfaceSpecifierSyntax, SyntaxToken, AccessorListSyntax, SyntaxToken, EventDeclarationSyntax>>(WrappedType, "Update");
+    private static readonly Func<EventDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, TypeSyntax, ExplicitInterfaceSpecifierSyntax, SyntaxToken, SyntaxToken, EventDeclarationSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<EventDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, TypeSyntax, ExplicitInterfaceSpecifierSyntax, SyntaxToken, SyntaxToken, EventDeclarationSyntax>>(WrappedType, "Update");
+    private static readonly Func<EventDeclarationSyntax, SyntaxToken, EventDeclarationSyntax> WithSemicolonTokenAccessor = AccessorFactory.CreateMethod<Func<EventDeclarationSyntax, SyntaxToken, EventDeclarationSyntax>>(WrappedType, "WithSemicolonToken");
+
     extension(EventDeclarationSyntax wrappedInstance)
     {
         public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(wrappedInstance);
+
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public EventDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken eventKeyword, TypeSyntax type, ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier, SyntaxToken identifier, AccessorListSyntax accessorList, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, eventKeyword, type, explicitInterfaceSpecifier, identifier, accessorList, semicolonToken);
+        public EventDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken eventKeyword, TypeSyntax type, ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier, SyntaxToken identifier, SyntaxToken semicolonToken) => UpdateAccessor_Overload3(wrappedInstance, attributeLists, modifiers, eventKeyword, type, explicitInterfaceSpecifier, identifier, semicolonToken);
+        public EventDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
     }
 }

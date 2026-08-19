@@ -34,11 +34,17 @@ public static partial class QualifiedNameSyntaxShimExtensions
     private static readonly Func<QualifiedNameSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<QualifiedNameSyntax, Boolean>>(WrappedType, "IsNuint");
     private static readonly Func<QualifiedNameSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<QualifiedNameSyntax, Boolean>>(WrappedType, "IsUnmanaged");
 
+    private static readonly Func<QualifiedNameSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<QualifiedNameSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<QualifiedNameSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<QualifiedNameSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+
     extension(QualifiedNameSyntax wrappedInstance)
     {
         public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
         public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
         public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
         public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
+
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

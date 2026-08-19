@@ -32,9 +32,27 @@ public static partial class AnonymousMethodExpressionSyntaxShimExtensions
     private static readonly Func<AnonymousMethodExpressionSyntax, ExpressionSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<AnonymousMethodExpressionSyntax, ExpressionSyntax>>(WrappedType, "ExpressionBody");
     private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<AnonymousMethodExpressionSyntax, SyntaxTokenList>>(WrappedType, "Modifiers");
 
+    private static readonly Func<AnonymousMethodExpressionSyntax, AttributeListSyntax[], AnonymousMethodExpressionSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, AttributeListSyntax[], AnonymousMethodExpressionSyntax>>(WrappedType, "AddBlockAttributeLists");
+    private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxToken[], AnonymousMethodExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxToken[], AnonymousMethodExpressionSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<AnonymousMethodExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxToken, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxToken, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxTokenList, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxTokenList, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<AnonymousMethodExpressionSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax> WithExpressionBodyAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax>>(WrappedType, "WithExpressionBody");
+    private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxTokenList, AnonymousMethodExpressionSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxTokenList, AnonymousMethodExpressionSyntax>>(WrappedType, "WithModifiers");
+
     extension(AnonymousMethodExpressionSyntax wrappedInstance)
     {
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+
+        public AnonymousMethodExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public AnonymousMethodExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public AnonymousMethodExpressionSyntax Update(SyntaxToken asyncKeyword, SyntaxToken delegateKeyword, ParameterListSyntax parameterList, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload2(wrappedInstance, asyncKeyword, delegateKeyword, parameterList, block, expressionBody);
+        public AnonymousMethodExpressionSyntax Update(SyntaxTokenList modifiers, SyntaxToken delegateKeyword, ParameterListSyntax parameterList, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload3(wrappedInstance, modifiers, delegateKeyword, parameterList, block, expressionBody);
+        public AnonymousMethodExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
+        public AnonymousMethodExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
     }
 }
