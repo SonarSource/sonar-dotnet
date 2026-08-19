@@ -56,7 +56,7 @@ public abstract class WrapStrategy : Strategy
 
         return $$"""
             {{Preamble()}}
-            public readonly partial struct {{Latest.Name}}Wrapper : {{BaseTypeSnippet}}
+            public readonly partial struct {{Latest.Name}}Wrapper{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
             {
                 public const string WrappedTypeName = "{{Latest.FullName}}";
 
