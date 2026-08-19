@@ -23,7 +23,7 @@ public sealed class PropertyWrapSnippet : Snippet<PropertyInfo>
 
     public override string AccessorDeclaration() =>
         $"""
-            private static readonly Func<{strategy.CompiletimeTypeSnippet()}, {returnType.CompiletimeTypeSnippet()}> {accessorName} = {returnType.PropertyAccessorInitializerSnippet(strategy.CompiletimeTypeSnippet(), member.Name)};
+            private static readonly Func<{strategy.CompiletimeTypeSnippet()}, {returnType.CompiletimeTypeSnippet()}> {accessorName} = AccessorFactory.CreateProperty<Func<{strategy.CompiletimeTypeSnippet()}, {returnType.CompiletimeTypeSnippet()}>>(WrappedType, "{member.Name}");
         """;
 
     public override string MemberDeclaration(int indentSize) =>

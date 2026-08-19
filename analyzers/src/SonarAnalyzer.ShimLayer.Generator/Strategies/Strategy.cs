@@ -43,9 +43,6 @@ public abstract class Strategy
             ? ExcessiveNewLines.Replace(content.Replace("\r", null), "\n\n")
             : null;
 
-    public virtual string PropertyAccessorInitializerSnippet(string compiletimeType, string propertyName) =>
-        $"""AccessorFactory.CreateProperty<Func<{compiletimeType}, {CompiletimeTypeSnippet()}>>(WrappedType, "{propertyName}")""";
-
     protected static string JoinLines(IEnumerable<string> lines) =>
        string.Join("\n", lines.Where(x => x is not null));
 
