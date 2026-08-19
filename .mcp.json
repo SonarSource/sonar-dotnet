@@ -6,7 +6,7 @@
         "run",
         "mcp",
         "--project",
-        "com.sonarsource.dotnet:sonar-dotnet-enterprise"
+        "SonarSource_sonar-dotnet-enterprise"
       ]
     }
   }
