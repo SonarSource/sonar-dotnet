@@ -51,14 +51,22 @@ internal static class AccessorFactory
         }
         var lambdaParameters = types.AllTypes.Take(types.AllTypes.Length - 1).Select((x, i) => Expression.Parameter(x, i == 0 ? "sender" : "p" + i)).ToArray();
         var senderLambdaParameter = lambdaParameters.First();
-        // Generate expression: _ = sender ?? throw new NullReferenceException("Object reference ... ");     // The discard is implicit
-        var message = $"Object reference not set to an instance of an object. This ShimLayer accessor for {memberName} was called with 'null' sender.";
-        var coalesceThrow = Expression.Coalesce(senderLambdaParameter, Expression.Throw(Expression.New(typeof(NullReferenceException).GetConstructor([typeof(string)]), Expression.Constant(message)), types.SenderType));
         var lambdaReturnValue = runtimeSenderType is null || method is null
             ? Expression.Default(types.ResultType)                  // Fallback: return default;
             : WrapConvert(CreateWrappedCall(), types.ResultType);   // Actual shim for given method call
-        var lambda = Expression.Lambda<TFunc>(Expression.Block(types.ResultType, coalesceThrow, lambdaReturnValue), "ShimLayer_RuntimeLambdaExpressionFor_" + memberName, lambdaParameters);
+        var body = senderLambdaParameter.Type.IsValueType
+            ? lambdaReturnValue
+            : CreateCoalesceThrow();
+        var lambda = Expression.Lambda<TFunc>(body, "ShimLayer_RuntimeLambdaExpressionFor_" + memberName, lambdaParameters);
         return lambda.Compile();
+
+        Expression CreateCoalesceThrow()
+        {
+            // Generate expression: _ = sender ?? throw new NullReferenceException("Object reference ... ");     // The discard is implicit
+            var message = $"Object reference not set to an instance of an object. This ShimLayer accessor for {memberName} was called with 'null' sender.";
+            var coalesceThrow = Expression.Coalesce(senderLambdaParameter, Expression.Throw(Expression.New(typeof(NullReferenceException).GetConstructor([typeof(string)]), Expression.Constant(message)), types.SenderType));
+            return Expression.Block(types.ResultType, coalesceThrow, lambdaReturnValue);
+        }
 
         Expression CreateWrappedCall()
         {

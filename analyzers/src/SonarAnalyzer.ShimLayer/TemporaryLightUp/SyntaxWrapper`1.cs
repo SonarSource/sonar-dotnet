@@ -50,7 +50,7 @@ namespace SonarAnalyzer.ShimLayer
 
             public ConversionSyntaxWrapper()
             {
-                this.unwrapAccessor = LightupHelpers.CreatePropertyAccessor<TNode, SyntaxNode>(typeof(TNode), nameof(ISyntaxWrapper<SyntaxNode>.SyntaxNode));
+                this.unwrapAccessor = AccessorFactory.CreateProperty<Func<TNode, SyntaxNode>>(typeof(TNode), nameof(ISyntaxWrapper<>.SyntaxNode));
 
                 var explicitOperator = typeof(TNode).GetTypeInfo().GetDeclaredMethods("op_Explicit")
                     .Single(m => m.ReturnType == typeof(TNode) && m.GetParameters()[0].ParameterType == typeof(SyntaxNode));
