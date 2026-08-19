@@ -41,6 +41,14 @@ public readonly partial struct RefTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
     private static readonly Func<TypeSyntax, SyntaxToken> RefKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "RefKeyword");
     private static readonly Func<TypeSyntax, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, TypeSyntax>>(WrappedType, "Type");
 
+    private static readonly Func<TypeSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TypeSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax, TypeSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax, TypeSyntax>>(WrappedType, "Update");
+    private static readonly Func<TypeSyntax, SyntaxToken, SyntaxToken, TypeSyntax, TypeSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, SyntaxToken, TypeSyntax, TypeSyntax>>(WrappedType, "Update");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithReadOnlyKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithReadOnlyKeyword");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithRefKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithRefKeyword");
+    private static readonly Func<TypeSyntax, TypeSyntax, TypeSyntax> WithTypeAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TypeSyntax, TypeSyntax>>(WrappedType, "WithType");
+
     private RefTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -131,6 +139,14 @@ public readonly partial struct RefTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public RefTypeSyntaxWrapper Update(SyntaxToken refKeyword, TypeSyntax type) => RefTypeSyntaxWrapper.From(UpdateAccessor(wrappedInstance, refKeyword, type));
+    public RefTypeSyntaxWrapper Update(SyntaxToken refKeyword, SyntaxToken readOnlyKeyword, TypeSyntax type) => RefTypeSyntaxWrapper.From(UpdateAccessor_Overload2(wrappedInstance, refKeyword, readOnlyKeyword, type));
+    public RefTypeSyntaxWrapper WithReadOnlyKeyword(SyntaxToken readOnlyKeyword) => RefTypeSyntaxWrapper.From(WithReadOnlyKeywordAccessor(wrappedInstance, readOnlyKeyword));
+    public RefTypeSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword) => RefTypeSyntaxWrapper.From(WithRefKeywordAccessor(wrappedInstance, refKeyword));
+    public RefTypeSyntaxWrapper WithType(TypeSyntax type) => RefTypeSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator RefTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);

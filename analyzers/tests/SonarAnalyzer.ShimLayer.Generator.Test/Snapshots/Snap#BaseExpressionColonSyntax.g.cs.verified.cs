@@ -36,6 +36,11 @@ public readonly partial struct BaseExpressionColonSyntaxWrapper : ISyntaxWrapper
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> ColonTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "ColonToken");
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Expression");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithColonTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithColonToken");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithExpression");
+
     private BaseExpressionColonSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +125,11 @@ public readonly partial struct BaseExpressionColonSyntaxWrapper : ISyntaxWrapper
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public BaseExpressionColonSyntaxWrapper WithColonToken(SyntaxToken colonToken) => BaseExpressionColonSyntaxWrapper.From(WithColonTokenAccessor(wrappedInstance, colonToken));
+    public BaseExpressionColonSyntaxWrapper WithExpression(ExpressionSyntax expression) => BaseExpressionColonSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
 
     public static explicit operator BaseExpressionColonSyntaxWrapper(SyntaxNode node) =>
         From(node);

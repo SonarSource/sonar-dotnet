@@ -40,6 +40,12 @@ public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSynt
     private static readonly Func<TypeSyntax, SyntaxToken> ScopedKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "ScopedKeyword");
     private static readonly Func<TypeSyntax, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, TypeSyntax>>(WrappedType, "Type");
 
+    private static readonly Func<TypeSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TypeSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax, TypeSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax, TypeSyntax>>(WrappedType, "Update");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithScopedKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithScopedKeyword");
+    private static readonly Func<TypeSyntax, TypeSyntax, TypeSyntax> WithTypeAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TypeSyntax, TypeSyntax>>(WrappedType, "WithType");
+
     private ScopedTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -129,6 +135,12 @@ public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSynt
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ScopedTypeSyntaxWrapper Update(SyntaxToken scopedKeyword, TypeSyntax type) => ScopedTypeSyntaxWrapper.From(UpdateAccessor(wrappedInstance, scopedKeyword, type));
+    public ScopedTypeSyntaxWrapper WithScopedKeyword(SyntaxToken scopedKeyword) => ScopedTypeSyntaxWrapper.From(WithScopedKeywordAccessor(wrappedInstance, scopedKeyword));
+    public ScopedTypeSyntaxWrapper WithType(TypeSyntax type) => ScopedTypeSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator ScopedTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -36,6 +36,12 @@ public readonly partial struct SpreadElementSyntaxWrapper : ISyntaxWrapper<CShar
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Expression");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OperatorToken");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithExpression");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOperatorTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOperatorToken");
+
     private SpreadElementSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct SpreadElementSyntaxWrapper : ISyntaxWrapper<CShar
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public SpreadElementSyntaxWrapper Update(SyntaxToken operatorToken, ExpressionSyntax expression) => SpreadElementSyntaxWrapper.From(UpdateAccessor(wrappedInstance, operatorToken, expression));
+    public SpreadElementSyntaxWrapper WithExpression(ExpressionSyntax expression) => SpreadElementSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
+    public SpreadElementSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => SpreadElementSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
 
     public static explicit operator SpreadElementSyntaxWrapper(SyntaxNode node) =>
         From(node);

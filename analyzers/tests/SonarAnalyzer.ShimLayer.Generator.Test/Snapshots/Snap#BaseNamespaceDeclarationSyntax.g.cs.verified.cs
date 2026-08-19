@@ -41,6 +41,21 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
     private static readonly Func<MemberDeclarationSyntax, SyntaxToken> NamespaceKeywordAccessor = AccessorFactory.CreateProperty<Func<MemberDeclarationSyntax, SyntaxToken>>(WrappedType, "NamespaceKeyword");
     private static readonly Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>> UsingsAccessor = AccessorFactory.CreateProperty<Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>>>(WrappedType, "Usings");
 
+    private static readonly Func<MemberDeclarationSyntax, AttributeListSyntax[], MemberDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, AttributeListSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<MemberDeclarationSyntax, ExternAliasDirectiveSyntax[], MemberDeclarationSyntax> AddExternsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, ExternAliasDirectiveSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddExterns");
+    private static readonly Func<MemberDeclarationSyntax, MemberDeclarationSyntax[], MemberDeclarationSyntax> AddMembersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, MemberDeclarationSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddMembers");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxToken[], MemberDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxToken[], MemberDeclarationSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<MemberDeclarationSyntax, UsingDirectiveSyntax[], MemberDeclarationSyntax> AddUsingsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, UsingDirectiveSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddUsings");
+    private static readonly Func<MemberDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, MemberDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>, MemberDeclarationSyntax> WithExternsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithExterns");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>, MemberDeclarationSyntax> WithMembersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithMembers");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList, MemberDeclarationSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxTokenList, MemberDeclarationSyntax>>(WrappedType, "WithModifiers");
+    private static readonly Func<MemberDeclarationSyntax, NameSyntax, MemberDeclarationSyntax> WithNameAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, NameSyntax, MemberDeclarationSyntax>>(WrappedType, "WithName");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxToken, MemberDeclarationSyntax> WithNamespaceKeywordAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxToken, MemberDeclarationSyntax>>(WrappedType, "WithNamespaceKeyword");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax> WithUsingsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithUsings");
+
     private BaseNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -130,6 +145,21 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public BaseNamespaceDeclarationSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => BaseNamespaceDeclarationSyntaxWrapper.From(AddAttributeListsAccessor(wrappedInstance, items));
+    public BaseNamespaceDeclarationSyntaxWrapper AddExterns(ExternAliasDirectiveSyntax[] items) => BaseNamespaceDeclarationSyntaxWrapper.From(AddExternsAccessor(wrappedInstance, items));
+    public BaseNamespaceDeclarationSyntaxWrapper AddMembers(MemberDeclarationSyntax[] items) => BaseNamespaceDeclarationSyntaxWrapper.From(AddMembersAccessor(wrappedInstance, items));
+    public BaseNamespaceDeclarationSyntaxWrapper AddModifiers(SyntaxToken[] items) => BaseNamespaceDeclarationSyntaxWrapper.From(AddModifiersAccessor(wrappedInstance, items));
+    public BaseNamespaceDeclarationSyntaxWrapper AddUsings(UsingDirectiveSyntax[] items) => BaseNamespaceDeclarationSyntaxWrapper.From(AddUsingsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public BaseNamespaceDeclarationSyntaxWrapper WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => BaseNamespaceDeclarationSyntaxWrapper.From(WithAttributeListsAccessor(wrappedInstance, attributeLists));
+    public BaseNamespaceDeclarationSyntaxWrapper WithExterns(SyntaxList<ExternAliasDirectiveSyntax> externs) => BaseNamespaceDeclarationSyntaxWrapper.From(WithExternsAccessor(wrappedInstance, externs));
+    public BaseNamespaceDeclarationSyntaxWrapper WithMembers(SyntaxList<MemberDeclarationSyntax> members) => BaseNamespaceDeclarationSyntaxWrapper.From(WithMembersAccessor(wrappedInstance, members));
+    public BaseNamespaceDeclarationSyntaxWrapper WithModifiers(SyntaxTokenList modifiers) => BaseNamespaceDeclarationSyntaxWrapper.From(WithModifiersAccessor(wrappedInstance, modifiers));
+    public BaseNamespaceDeclarationSyntaxWrapper WithName(NameSyntax name) => BaseNamespaceDeclarationSyntaxWrapper.From(WithNameAccessor(wrappedInstance, name));
+    public BaseNamespaceDeclarationSyntaxWrapper WithNamespaceKeyword(SyntaxToken namespaceKeyword) => BaseNamespaceDeclarationSyntaxWrapper.From(WithNamespaceKeywordAccessor(wrappedInstance, namespaceKeyword));
+    public BaseNamespaceDeclarationSyntaxWrapper WithUsings(SyntaxList<UsingDirectiveSyntax> usings) => BaseNamespaceDeclarationSyntaxWrapper.From(WithUsingsAccessor(wrappedInstance, usings));
 
     public static explicit operator BaseNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
         From(node);

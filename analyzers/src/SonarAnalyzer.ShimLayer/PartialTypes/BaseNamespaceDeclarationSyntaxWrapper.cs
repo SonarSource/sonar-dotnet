@@ -15,7 +15,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace SonarAnalyzer.ShimLayer;
@@ -23,14 +22,6 @@ namespace SonarAnalyzer.ShimLayer;
 public partial struct BaseNamespaceDeclarationSyntaxWrapper
 {
     public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.NamespaceDeclarationSyntax";
-
-    private static Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax> withUsingsAccessor;
-
-    public BaseNamespaceDeclarationSyntaxWrapper WithUsings(SyntaxList<UsingDirectiveSyntax> usings)    // This should be removed once we Shim methods
-    {
-        withUsingsAccessor ??= AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithUsings");
-        return new BaseNamespaceDeclarationSyntaxWrapper(withUsingsAccessor(Node, usings));
-    }
 
     public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(NamespaceDeclarationSyntax node) =>
         new(node);

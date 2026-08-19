@@ -37,6 +37,13 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, InitializerExpressionSyntax>>(WrappedType, "Initializer");
     private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "NewKeyword");
 
+    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax> AddArgumentListArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax>>(WrappedType, "AddArgumentListArguments");
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, ArgumentListSyntax, ExpressionSyntax> WithArgumentListAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentListSyntax, ExpressionSyntax>>(WrappedType, "WithArgumentList");
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax> WithInitializerAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithInitializer");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithNewKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithNewKeyword");
+
     private BaseObjectCreationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +129,13 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public BaseObjectCreationExpressionSyntaxWrapper AddArgumentListArguments(ArgumentSyntax[] items) => BaseObjectCreationExpressionSyntaxWrapper.From(AddArgumentListArgumentsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public BaseObjectCreationExpressionSyntaxWrapper WithArgumentList(ArgumentListSyntax argumentList) => BaseObjectCreationExpressionSyntaxWrapper.From(WithArgumentListAccessor(wrappedInstance, argumentList));
+    public BaseObjectCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => BaseObjectCreationExpressionSyntaxWrapper.From(WithInitializerAccessor(wrappedInstance, initializer));
+    public BaseObjectCreationExpressionSyntaxWrapper WithNewKeyword(SyntaxToken newKeyword) => BaseObjectCreationExpressionSyntaxWrapper.From(WithNewKeywordAccessor(wrappedInstance, newKeyword));
 
     public static explicit operator BaseObjectCreationExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

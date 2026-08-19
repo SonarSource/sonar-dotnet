@@ -42,6 +42,18 @@ public readonly partial struct CommonForEachStatementSyntaxWrapper : ISyntaxWrap
     private static readonly Func<StatementSyntax, SyntaxToken> OpenParenTokenAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxToken>>(WrappedType, "OpenParenToken");
     private static readonly Func<StatementSyntax, StatementSyntax> StatementAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, StatementSyntax>>(WrappedType, "Statement");
 
+    private static readonly Func<StatementSyntax, AttributeListSyntax[], StatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, AttributeListSyntax[], StatementSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<StatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<StatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>, StatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, SyntaxList<AttributeListSyntax>, StatementSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<StatementSyntax, SyntaxToken, StatementSyntax> WithAwaitKeywordAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, SyntaxToken, StatementSyntax>>(WrappedType, "WithAwaitKeyword");
+    private static readonly Func<StatementSyntax, SyntaxToken, StatementSyntax> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, SyntaxToken, StatementSyntax>>(WrappedType, "WithCloseParenToken");
+    private static readonly Func<StatementSyntax, ExpressionSyntax, StatementSyntax> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, ExpressionSyntax, StatementSyntax>>(WrappedType, "WithExpression");
+    private static readonly Func<StatementSyntax, SyntaxToken, StatementSyntax> WithForEachKeywordAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, SyntaxToken, StatementSyntax>>(WrappedType, "WithForEachKeyword");
+    private static readonly Func<StatementSyntax, SyntaxToken, StatementSyntax> WithInKeywordAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, SyntaxToken, StatementSyntax>>(WrappedType, "WithInKeyword");
+    private static readonly Func<StatementSyntax, SyntaxToken, StatementSyntax> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, SyntaxToken, StatementSyntax>>(WrappedType, "WithOpenParenToken");
+    private static readonly Func<StatementSyntax, StatementSyntax, StatementSyntax> WithStatementAccessor = AccessorFactory.CreateMethod<Func<StatementSyntax, StatementSyntax, StatementSyntax>>(WrappedType, "WithStatement");
+
     private CommonForEachStatementSyntaxWrapper(StatementSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -132,6 +144,18 @@ public readonly partial struct CommonForEachStatementSyntaxWrapper : ISyntaxWrap
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public CommonForEachStatementSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => CommonForEachStatementSyntaxWrapper.From(AddAttributeListsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public CommonForEachStatementSyntaxWrapper WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => CommonForEachStatementSyntaxWrapper.From(WithAttributeListsAccessor(wrappedInstance, attributeLists));
+    public CommonForEachStatementSyntaxWrapper WithAwaitKeyword(SyntaxToken awaitKeyword) => CommonForEachStatementSyntaxWrapper.From(WithAwaitKeywordAccessor(wrappedInstance, awaitKeyword));
+    public CommonForEachStatementSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => CommonForEachStatementSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
+    public CommonForEachStatementSyntaxWrapper WithExpression(ExpressionSyntax expression) => CommonForEachStatementSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
+    public CommonForEachStatementSyntaxWrapper WithForEachKeyword(SyntaxToken forEachKeyword) => CommonForEachStatementSyntaxWrapper.From(WithForEachKeywordAccessor(wrappedInstance, forEachKeyword));
+    public CommonForEachStatementSyntaxWrapper WithInKeyword(SyntaxToken inKeyword) => CommonForEachStatementSyntaxWrapper.From(WithInKeywordAccessor(wrappedInstance, inKeyword));
+    public CommonForEachStatementSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => CommonForEachStatementSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
+    public CommonForEachStatementSyntaxWrapper WithStatement(StatementSyntax statement) => CommonForEachStatementSyntaxWrapper.From(WithStatementAccessor(wrappedInstance, statement));
 
     public static explicit operator CommonForEachStatementSyntaxWrapper(SyntaxNode node) =>
         From(node);

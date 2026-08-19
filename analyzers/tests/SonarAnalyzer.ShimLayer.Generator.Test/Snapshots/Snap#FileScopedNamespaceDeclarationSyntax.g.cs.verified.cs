@@ -42,6 +42,23 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper : ISy
     private static readonly Func<MemberDeclarationSyntax, SyntaxToken> SemicolonTokenAccessor = AccessorFactory.CreateProperty<Func<MemberDeclarationSyntax, SyntaxToken>>(WrappedType, "SemicolonToken");
     private static readonly Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>> UsingsAccessor = AccessorFactory.CreateProperty<Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>>>(WrappedType, "Usings");
 
+    private static readonly Func<MemberDeclarationSyntax, AttributeListSyntax[], MemberDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, AttributeListSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<MemberDeclarationSyntax, ExternAliasDirectiveSyntax[], MemberDeclarationSyntax> AddExternsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, ExternAliasDirectiveSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddExterns");
+    private static readonly Func<MemberDeclarationSyntax, MemberDeclarationSyntax[], MemberDeclarationSyntax> AddMembersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, MemberDeclarationSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddMembers");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxToken[], MemberDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxToken[], MemberDeclarationSyntax>>(WrappedType, "AddModifiers");
+    private static readonly Func<MemberDeclarationSyntax, UsingDirectiveSyntax[], MemberDeclarationSyntax> AddUsingsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, UsingDirectiveSyntax[], MemberDeclarationSyntax>>(WrappedType, "AddUsings");
+    private static readonly Func<MemberDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, NameSyntax, SyntaxToken, SyntaxList<ExternAliasDirectiveSyntax>, SyntaxList<UsingDirectiveSyntax>, SyntaxList<MemberDeclarationSyntax>, MemberDeclarationSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, NameSyntax, SyntaxToken, SyntaxList<ExternAliasDirectiveSyntax>, SyntaxList<UsingDirectiveSyntax>, SyntaxList<MemberDeclarationSyntax>, MemberDeclarationSyntax>>(WrappedType, "Update");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, MemberDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>, MemberDeclarationSyntax> WithExternsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<ExternAliasDirectiveSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithExterns");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>, MemberDeclarationSyntax> WithMembersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithMembers");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxTokenList, MemberDeclarationSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxTokenList, MemberDeclarationSyntax>>(WrappedType, "WithModifiers");
+    private static readonly Func<MemberDeclarationSyntax, NameSyntax, MemberDeclarationSyntax> WithNameAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, NameSyntax, MemberDeclarationSyntax>>(WrappedType, "WithName");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxToken, MemberDeclarationSyntax> WithNamespaceKeywordAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxToken, MemberDeclarationSyntax>>(WrappedType, "WithNamespaceKeyword");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxToken, MemberDeclarationSyntax> WithSemicolonTokenAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxToken, MemberDeclarationSyntax>>(WrappedType, "WithSemicolonToken");
+    private static readonly Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax> WithUsingsAccessor = AccessorFactory.CreateMethod<Func<MemberDeclarationSyntax, SyntaxList<UsingDirectiveSyntax>, MemberDeclarationSyntax>>(WrappedType, "WithUsings");
+
     private FileScopedNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -132,6 +149,23 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper : ISy
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public FileScopedNamespaceDeclarationSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => FileScopedNamespaceDeclarationSyntaxWrapper.From(AddAttributeListsAccessor(wrappedInstance, items));
+    public FileScopedNamespaceDeclarationSyntaxWrapper AddExterns(ExternAliasDirectiveSyntax[] items) => FileScopedNamespaceDeclarationSyntaxWrapper.From(AddExternsAccessor(wrappedInstance, items));
+    public FileScopedNamespaceDeclarationSyntaxWrapper AddMembers(MemberDeclarationSyntax[] items) => FileScopedNamespaceDeclarationSyntaxWrapper.From(AddMembersAccessor(wrappedInstance, items));
+    public FileScopedNamespaceDeclarationSyntaxWrapper AddModifiers(SyntaxToken[] items) => FileScopedNamespaceDeclarationSyntaxWrapper.From(AddModifiersAccessor(wrappedInstance, items));
+    public FileScopedNamespaceDeclarationSyntaxWrapper AddUsings(UsingDirectiveSyntax[] items) => FileScopedNamespaceDeclarationSyntaxWrapper.From(AddUsingsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FileScopedNamespaceDeclarationSyntaxWrapper Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken namespaceKeyword, NameSyntax name, SyntaxToken semicolonToken, SyntaxList<ExternAliasDirectiveSyntax> externs, SyntaxList<UsingDirectiveSyntax> usings, SyntaxList<MemberDeclarationSyntax> members) => FileScopedNamespaceDeclarationSyntaxWrapper.From(UpdateAccessor(wrappedInstance, attributeLists, modifiers, namespaceKeyword, name, semicolonToken, externs, usings, members));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithAttributeListsAccessor(wrappedInstance, attributeLists));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithExterns(SyntaxList<ExternAliasDirectiveSyntax> externs) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithExternsAccessor(wrappedInstance, externs));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithMembers(SyntaxList<MemberDeclarationSyntax> members) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithMembersAccessor(wrappedInstance, members));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithModifiers(SyntaxTokenList modifiers) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithModifiersAccessor(wrappedInstance, modifiers));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithName(NameSyntax name) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithNameAccessor(wrappedInstance, name));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithNamespaceKeyword(SyntaxToken namespaceKeyword) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithNamespaceKeywordAccessor(wrappedInstance, namespaceKeyword));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithSemicolonToken(SyntaxToken semicolonToken) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithSemicolonTokenAccessor(wrappedInstance, semicolonToken));
+    public FileScopedNamespaceDeclarationSyntaxWrapper WithUsings(SyntaxList<UsingDirectiveSyntax> usings) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithUsingsAccessor(wrappedInstance, usings));
 
     public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
         From(node);

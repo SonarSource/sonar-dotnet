@@ -37,6 +37,14 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     private static readonly Func<ExpressionSyntax, SyntaxToken> CloseParenTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "CloseParenToken");
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenParenTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenParenToken");
 
+    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax> AddArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax>>(WrappedType, "AddArguments");
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ArgumentSyntax>, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ArgumentSyntax>, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>, ExpressionSyntax> WithArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>, ExpressionSyntax>>(WrappedType, "WithArguments");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithCloseParenToken");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithOpenParenToken");
+
     private TupleExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +130,14 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public TupleExpressionSyntaxWrapper AddArguments(ArgumentSyntax[] items) => TupleExpressionSyntaxWrapper.From(AddArgumentsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public TupleExpressionSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxToken closeParenToken) => TupleExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, arguments, closeParenToken));
+    public TupleExpressionSyntaxWrapper WithArguments(SeparatedSyntaxList<ArgumentSyntax> arguments) => TupleExpressionSyntaxWrapper.From(WithArgumentsAccessor(wrappedInstance, arguments));
+    public TupleExpressionSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => TupleExpressionSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
+    public TupleExpressionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => TupleExpressionSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
 
     public static explicit operator TupleExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

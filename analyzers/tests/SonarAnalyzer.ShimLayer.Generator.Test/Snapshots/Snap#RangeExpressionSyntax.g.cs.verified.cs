@@ -37,6 +37,13 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     private static readonly Func<ExpressionSyntax, SyntaxToken> OperatorTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OperatorToken");
     private static readonly Func<ExpressionSyntax, ExpressionSyntax> RightOperandAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ExpressionSyntax>>(WrappedType, "RightOperand");
 
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, ExpressionSyntax, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, ExpressionSyntax, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithLeftOperandAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithLeftOperand");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithOperatorTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithOperatorToken");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithRightOperandAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithRightOperand");
+
     private RangeExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +129,13 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public RangeExpressionSyntaxWrapper Update(ExpressionSyntax leftOperand, SyntaxToken operatorToken, ExpressionSyntax rightOperand) => RangeExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, leftOperand, operatorToken, rightOperand));
+    public RangeExpressionSyntaxWrapper WithLeftOperand(ExpressionSyntax leftOperand) => RangeExpressionSyntaxWrapper.From(WithLeftOperandAccessor(wrappedInstance, leftOperand));
+    public RangeExpressionSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => RangeExpressionSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
+    public RangeExpressionSyntaxWrapper WithRightOperand(ExpressionSyntax rightOperand) => RangeExpressionSyntaxWrapper.From(WithRightOperandAccessor(wrappedInstance, rightOperand));
 
     public static explicit operator RangeExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

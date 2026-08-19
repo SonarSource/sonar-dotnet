@@ -35,6 +35,11 @@ public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpS
 
     private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, TypeSyntax>>(WrappedType, "Type");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "WithType");
+
     private TypePatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -118,6 +123,11 @@ public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public TypePatternSyntaxWrapper Update(TypeSyntax type) => TypePatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type));
+    public TypePatternSyntaxWrapper WithType(TypeSyntax type) => TypePatternSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator TypePatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

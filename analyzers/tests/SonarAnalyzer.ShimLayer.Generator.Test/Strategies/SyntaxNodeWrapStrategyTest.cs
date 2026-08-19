@@ -123,6 +123,7 @@ public class SyntaxNodeWrapStrategyTest
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Accept))[0], true, "AcceptAccessor"), // ToDo: NET-4372 Add support for Void
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.FindTrivia))[0], true, "AcceptAccessor"),              // Passtrough method - with Func<..> parameter
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.FindTrivia))[1], true, "AcceptAccessor_Overload2"),    // Passtrough method - normal
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.WithParameterList))[0], false, "WithParameterListAccessor"),   // Wrapped method
             ]);
         var model = new StrategyModel(new() { { skippedPropertyTypeMember.PropertyType, new SkipStrategy(skippedPropertyTypeMember.PropertyType) } });
 
@@ -165,6 +166,8 @@ public class SyntaxNodeWrapStrategyTest
 
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SyntaxToken>>(WrappedType, "ClassOrStructKeyword");
 
+                private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax, RecordDeclarationSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, ParameterListSyntax, RecordDeclarationSyntax>>(WrappedType, "WithParameterList");
+
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
@@ -182,6 +185,8 @@ public class SyntaxNodeWrapStrategyTest
 
                 public SyntaxTrivia FindTrivia(Int32 position, Func<SyntaxTrivia, Boolean> stepInto) => wrappedInstance.FindTrivia(position, stepInto);
                 public SyntaxTrivia FindTrivia(Int32 position, Boolean findInsideTrivia) => wrappedInstance.FindTrivia(position, findInsideTrivia);
+
+                public RecordDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => (RecordDeclarationSyntax)WithParameterListAccessor(wrappedInstance, parameterList);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
                     From(node);

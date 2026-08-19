@@ -36,6 +36,12 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Expression");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OperatorToken");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithExpression");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOperatorTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOperatorToken");
+
     private RelationalPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public RelationalPatternSyntaxWrapper Update(SyntaxToken operatorToken, ExpressionSyntax expression) => RelationalPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, operatorToken, expression));
+    public RelationalPatternSyntaxWrapper WithExpression(ExpressionSyntax expression) => RelationalPatternSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
+    public RelationalPatternSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => RelationalPatternSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
 
     public static explicit operator RelationalPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

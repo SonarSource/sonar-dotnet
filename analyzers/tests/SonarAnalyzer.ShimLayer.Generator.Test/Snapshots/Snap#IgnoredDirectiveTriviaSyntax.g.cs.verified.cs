@@ -36,6 +36,15 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ColonTokenAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "ColonToken");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken> ContentAccessor = AccessorFactory.CreateProperty<Func<DirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "Content");
 
+    private static readonly Func<DirectiveTriviaSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, Boolean, DirectiveTriviaSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, Boolean, DirectiveTriviaSyntax>>(WrappedType, "Update");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithColonTokenAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithColonToken");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithContentAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithContent");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithEndOfDirectiveTokenAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithEndOfDirectiveToken");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithHashTokenAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithHashToken");
+    private static readonly Func<DirectiveTriviaSyntax, Boolean, DirectiveTriviaSyntax> WithIsActiveAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, Boolean, DirectiveTriviaSyntax>>(WrappedType, "WithIsActive");
+
     private IgnoredDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -127,6 +136,15 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public IgnoredDirectiveTriviaSyntaxWrapper Update(SyntaxToken hashToken, SyntaxToken colonToken, SyntaxToken content, SyntaxToken endOfDirectiveToken, Boolean isActive) => IgnoredDirectiveTriviaSyntaxWrapper.From(UpdateAccessor(wrappedInstance, hashToken, colonToken, content, endOfDirectiveToken, isActive));
+    public IgnoredDirectiveTriviaSyntaxWrapper WithColonToken(SyntaxToken colonToken) => IgnoredDirectiveTriviaSyntaxWrapper.From(WithColonTokenAccessor(wrappedInstance, colonToken));
+    public IgnoredDirectiveTriviaSyntaxWrapper WithContent(SyntaxToken content) => IgnoredDirectiveTriviaSyntaxWrapper.From(WithContentAccessor(wrappedInstance, content));
+    public IgnoredDirectiveTriviaSyntaxWrapper WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => IgnoredDirectiveTriviaSyntaxWrapper.From(WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken));
+    public IgnoredDirectiveTriviaSyntaxWrapper WithHashToken(SyntaxToken hashToken) => IgnoredDirectiveTriviaSyntaxWrapper.From(WithHashTokenAccessor(wrappedInstance, hashToken));
+    public IgnoredDirectiveTriviaSyntaxWrapper WithIsActive(Boolean isActive) => IgnoredDirectiveTriviaSyntaxWrapper.From(WithIsActiveAccessor(wrappedInstance, isActive));
 
     public static explicit operator IgnoredDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
         From(node);

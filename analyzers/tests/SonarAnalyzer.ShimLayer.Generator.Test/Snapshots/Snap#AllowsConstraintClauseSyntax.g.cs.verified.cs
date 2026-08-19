@@ -36,6 +36,12 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SyntaxToken>>(WrappedType, "AllowsKeyword");
     private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>> ConstraintsAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>>>(WrappedType, "Constraints");
 
+    private static readonly Func<TypeParameterConstraintSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax>>(WrappedType, "Update");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax> WithAllowsKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax>>(WrappedType, "WithAllowsKeyword");
+    private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax> WithConstraintsAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax>>(WrappedType, "WithConstraints");
+
     private AllowsConstraintClauseSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public AllowsConstraintClauseSyntaxWrapper Update(SyntaxToken allowsKeyword, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> constraints) => AllowsConstraintClauseSyntaxWrapper.From(UpdateAccessor(wrappedInstance, allowsKeyword, constraints));
+    public AllowsConstraintClauseSyntaxWrapper WithAllowsKeyword(SyntaxToken allowsKeyword) => AllowsConstraintClauseSyntaxWrapper.From(WithAllowsKeywordAccessor(wrappedInstance, allowsKeyword));
+    public AllowsConstraintClauseSyntaxWrapper WithConstraints(SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> constraints) => AllowsConstraintClauseSyntaxWrapper.From(WithConstraintsAccessor(wrappedInstance, constraints));
 
     public static explicit operator AllowsConstraintClauseSyntaxWrapper(SyntaxNode node) =>
         From(node);

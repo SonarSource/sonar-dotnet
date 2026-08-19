@@ -38,6 +38,15 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBracketToken");
     private static readonly Func<ExpressionSyntax, SyntaxToken> StackAllocKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "StackAllocKeyword");
 
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax[], ExpressionSyntax> AddInitializerExpressionsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax[], ExpressionSyntax>>(WrappedType, "AddInitializerExpressions");
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, SyntaxToken, SyntaxToken, InitializerExpressionSyntax, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, SyntaxToken, SyntaxToken, InitializerExpressionSyntax, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithCloseBracketTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithCloseBracketToken");
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax> WithInitializerAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithInitializer");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithOpenBracketTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithOpenBracketToken");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithStackAllocKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithStackAllocKeyword");
+
     private ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -124,6 +133,15 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper AddInitializerExpressions(ExpressionSyntax[] items) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(AddInitializerExpressionsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper Update(SyntaxToken stackAllocKeyword, SyntaxToken openBracketToken, SyntaxToken closeBracketToken, InitializerExpressionSyntax initializer) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, stackAllocKeyword, openBracketToken, closeBracketToken, initializer));
+    public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper WithCloseBracketToken(SyntaxToken closeBracketToken) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(WithCloseBracketTokenAccessor(wrappedInstance, closeBracketToken));
+    public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(WithInitializerAccessor(wrappedInstance, initializer));
+    public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken));
+    public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper WithStackAllocKeyword(SyntaxToken stackAllocKeyword) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(WithStackAllocKeywordAccessor(wrappedInstance, stackAllocKeyword));
 
     public static explicit operator ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

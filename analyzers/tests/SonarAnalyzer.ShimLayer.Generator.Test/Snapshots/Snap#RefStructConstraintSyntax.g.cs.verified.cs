@@ -36,6 +36,12 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "RefKeyword");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> StructKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "StructKeyword");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithRefKeywordAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithRefKeyword");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithStructKeywordAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithStructKeyword");
+
     private RefStructConstraintSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public RefStructConstraintSyntaxWrapper Update(SyntaxToken refKeyword, SyntaxToken structKeyword) => RefStructConstraintSyntaxWrapper.From(UpdateAccessor(wrappedInstance, refKeyword, structKeyword));
+    public RefStructConstraintSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword) => RefStructConstraintSyntaxWrapper.From(WithRefKeywordAccessor(wrappedInstance, refKeyword));
+    public RefStructConstraintSyntaxWrapper WithStructKeyword(SyntaxToken structKeyword) => RefStructConstraintSyntaxWrapper.From(WithStructKeywordAccessor(wrappedInstance, structKeyword));
 
     public static explicit operator RefStructConstraintSyntaxWrapper(SyntaxNode node) =>
         From(node);

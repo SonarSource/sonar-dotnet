@@ -38,6 +38,14 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PropertyPatternClauseAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "PropertyPatternClause");
     private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, TypeSyntax>>(WrappedType, "Type");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithDesignation");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithPositionalPatternClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithPositionalPatternClause");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithPropertyPatternClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithPropertyPatternClause");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "WithType");
+
     private RecursivePatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -124,6 +132,14 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public RecursivePatternSyntaxWrapper Update(TypeSyntax type, CSharpSyntaxNode positionalPatternClause, CSharpSyntaxNode propertyPatternClause, CSharpSyntaxNode designation) => RecursivePatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type, positionalPatternClause, propertyPatternClause, designation));
+    public RecursivePatternSyntaxWrapper WithDesignation(CSharpSyntaxNode designation) => RecursivePatternSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
+    public RecursivePatternSyntaxWrapper WithPositionalPatternClause(CSharpSyntaxNode positionalPatternClause) => RecursivePatternSyntaxWrapper.From(WithPositionalPatternClauseAccessor(wrappedInstance, positionalPatternClause));
+    public RecursivePatternSyntaxWrapper WithPropertyPatternClause(CSharpSyntaxNode propertyPatternClause) => RecursivePatternSyntaxWrapper.From(WithPropertyPatternClauseAccessor(wrappedInstance, propertyPatternClause));
+    public RecursivePatternSyntaxWrapper WithType(TypeSyntax type) => RecursivePatternSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator RecursivePatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

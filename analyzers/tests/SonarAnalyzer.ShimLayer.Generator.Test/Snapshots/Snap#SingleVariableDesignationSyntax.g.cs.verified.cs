@@ -35,6 +35,11 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "Identifier");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithIdentifierAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithIdentifier");
+
     private SingleVariableDesignationSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -118,6 +123,11 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public SingleVariableDesignationSyntaxWrapper Update(SyntaxToken identifier) => SingleVariableDesignationSyntaxWrapper.From(UpdateAccessor(wrappedInstance, identifier));
+    public SingleVariableDesignationSyntaxWrapper WithIdentifier(SyntaxToken identifier) => SingleVariableDesignationSyntaxWrapper.From(WithIdentifierAccessor(wrappedInstance, identifier));
 
     public static explicit operator SingleVariableDesignationSyntaxWrapper(SyntaxNode node) =>
         From(node);

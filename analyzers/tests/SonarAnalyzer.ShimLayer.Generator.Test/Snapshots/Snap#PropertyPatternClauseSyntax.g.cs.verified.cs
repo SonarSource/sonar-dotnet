@@ -37,6 +37,13 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBraceTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenBraceToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>>>(WrappedType, "Subpatterns");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCloseBraceTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCloseBraceToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOpenBraceTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOpenBraceToken");
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, CSharpSyntaxNode> WithSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, CSharpSyntaxNode>>(WrappedType, "WithSubpatterns");
+
     private PropertyPatternClauseSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +129,13 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public PropertyPatternClauseSyntaxWrapper Update(SyntaxToken openBraceToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns, SyntaxToken closeBraceToken) => PropertyPatternClauseSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openBraceToken, subpatterns, closeBraceToken));
+    public PropertyPatternClauseSyntaxWrapper WithCloseBraceToken(SyntaxToken closeBraceToken) => PropertyPatternClauseSyntaxWrapper.From(WithCloseBraceTokenAccessor(wrappedInstance, closeBraceToken));
+    public PropertyPatternClauseSyntaxWrapper WithOpenBraceToken(SyntaxToken openBraceToken) => PropertyPatternClauseSyntaxWrapper.From(WithOpenBraceTokenAccessor(wrappedInstance, openBraceToken));
+    public PropertyPatternClauseSyntaxWrapper WithSubpatterns(SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns) => PropertyPatternClauseSyntaxWrapper.From(WithSubpatternsAccessor(wrappedInstance, subpatterns));
 
     public static explicit operator PropertyPatternClauseSyntaxWrapper(SyntaxNode node) =>
         From(node);

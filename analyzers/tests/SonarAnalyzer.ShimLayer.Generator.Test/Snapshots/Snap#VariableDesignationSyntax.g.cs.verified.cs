@@ -33,6 +33,9 @@ public readonly partial struct VariableDesignationSyntaxWrapper : ISyntaxWrapper
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(VariableDesignationSyntaxWrapper));
     private readonly CSharpSyntaxNode wrappedInstance;
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+
     private VariableDesignationSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -114,6 +117,9 @@ public readonly partial struct VariableDesignationSyntaxWrapper : ISyntaxWrapper
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
 
     public static explicit operator VariableDesignationSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -36,6 +36,12 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Designation");
     private static readonly Func<ExpressionSyntax, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, TypeSyntax>>(WrappedType, "Type");
 
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, TypeSyntax, CSharpSyntaxNode, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, TypeSyntax, CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "WithDesignation");
+    private static readonly Func<ExpressionSyntax, TypeSyntax, ExpressionSyntax> WithTypeAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, TypeSyntax, ExpressionSyntax>>(WrappedType, "WithType");
+
     private DeclarationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public DeclarationExpressionSyntaxWrapper Update(TypeSyntax type, CSharpSyntaxNode designation) => DeclarationExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type, designation));
+    public DeclarationExpressionSyntaxWrapper WithDesignation(CSharpSyntaxNode designation) => DeclarationExpressionSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
+    public DeclarationExpressionSyntaxWrapper WithType(TypeSyntax type) => DeclarationExpressionSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator DeclarationExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

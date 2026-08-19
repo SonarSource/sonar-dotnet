@@ -36,6 +36,12 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> ManagedOrUnmanagedKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "ManagedOrUnmanagedKeyword");
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> UnmanagedCallingConventionListAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "UnmanagedCallingConventionList");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithManagedOrUnmanagedKeywordAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithManagedOrUnmanagedKeyword");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithUnmanagedCallingConventionListAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithUnmanagedCallingConventionList");
+
     private FunctionPointerCallingConventionSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FunctionPointerCallingConventionSyntaxWrapper Update(SyntaxToken managedOrUnmanagedKeyword, CSharpSyntaxNode unmanagedCallingConventionList) => FunctionPointerCallingConventionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, managedOrUnmanagedKeyword, unmanagedCallingConventionList));
+    public FunctionPointerCallingConventionSyntaxWrapper WithManagedOrUnmanagedKeyword(SyntaxToken managedOrUnmanagedKeyword) => FunctionPointerCallingConventionSyntaxWrapper.From(WithManagedOrUnmanagedKeywordAccessor(wrappedInstance, managedOrUnmanagedKeyword));
+    public FunctionPointerCallingConventionSyntaxWrapper WithUnmanagedCallingConventionList(CSharpSyntaxNode unmanagedCallingConventionList) => FunctionPointerCallingConventionSyntaxWrapper.From(WithUnmanagedCallingConventionListAccessor(wrappedInstance, unmanagedCallingConventionList));
 
     public static explicit operator FunctionPointerCallingConventionSyntaxWrapper(SyntaxNode node) =>
         From(node);

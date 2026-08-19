@@ -35,6 +35,11 @@ public readonly partial struct ConstantPatternSyntaxWrapper : ISyntaxWrapper<CSh
 
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Expression");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithExpression");
+
     private ConstantPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -118,6 +123,11 @@ public readonly partial struct ConstantPatternSyntaxWrapper : ISyntaxWrapper<CSh
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ConstantPatternSyntaxWrapper Update(ExpressionSyntax expression) => ConstantPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, expression));
+    public ConstantPatternSyntaxWrapper WithExpression(ExpressionSyntax expression) => ConstantPatternSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
 
     public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

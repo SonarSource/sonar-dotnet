@@ -35,6 +35,11 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "UnderscoreToken");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithUnderscoreTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithUnderscoreToken");
+
     private DiscardPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -118,6 +123,11 @@ public readonly partial struct DiscardPatternSyntaxWrapper : ISyntaxWrapper<CSha
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public DiscardPatternSyntaxWrapper Update(SyntaxToken underscoreToken) => DiscardPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, underscoreToken));
+    public DiscardPatternSyntaxWrapper WithUnderscoreToken(SyntaxToken underscoreToken) => DiscardPatternSyntaxWrapper.From(WithUnderscoreTokenAccessor(wrappedInstance, underscoreToken));
 
     public static explicit operator DiscardPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

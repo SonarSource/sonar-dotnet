@@ -37,6 +37,13 @@ public readonly partial struct FunctionPointerParameterListSyntaxWrapper : ISynt
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> LessThanTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "LessThanToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>> ParametersAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>>>(WrappedType, "Parameters");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithGreaterThanTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithGreaterThanToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithLessThanTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithLessThanToken");
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>, CSharpSyntaxNode> WithParametersAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper>, CSharpSyntaxNode>>(WrappedType, "WithParameters");
+
     private FunctionPointerParameterListSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +129,13 @@ public readonly partial struct FunctionPointerParameterListSyntaxWrapper : ISynt
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FunctionPointerParameterListSyntaxWrapper Update(SyntaxToken lessThanToken, SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper> parameters, SyntaxToken greaterThanToken) => FunctionPointerParameterListSyntaxWrapper.From(UpdateAccessor(wrappedInstance, lessThanToken, parameters, greaterThanToken));
+    public FunctionPointerParameterListSyntaxWrapper WithGreaterThanToken(SyntaxToken greaterThanToken) => FunctionPointerParameterListSyntaxWrapper.From(WithGreaterThanTokenAccessor(wrappedInstance, greaterThanToken));
+    public FunctionPointerParameterListSyntaxWrapper WithLessThanToken(SyntaxToken lessThanToken) => FunctionPointerParameterListSyntaxWrapper.From(WithLessThanTokenAccessor(wrappedInstance, lessThanToken));
+    public FunctionPointerParameterListSyntaxWrapper WithParameters(SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper> parameters) => FunctionPointerParameterListSyntaxWrapper.From(WithParametersAccessor(wrappedInstance, parameters));
 
     public static explicit operator FunctionPointerParameterListSyntaxWrapper(SyntaxNode node) =>
         From(node);

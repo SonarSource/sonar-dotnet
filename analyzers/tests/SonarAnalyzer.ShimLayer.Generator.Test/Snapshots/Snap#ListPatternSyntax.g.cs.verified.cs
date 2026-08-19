@@ -38,6 +38,14 @@ public readonly partial struct ListPatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenBracketToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>> PatternsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>>>(WrappedType, "Patterns");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCloseBracketTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCloseBracketToken");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithDesignation");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOpenBracketTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOpenBracketToken");
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, CSharpSyntaxNode> WithPatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, CSharpSyntaxNode>>(WrappedType, "WithPatterns");
+
     private ListPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -124,6 +132,14 @@ public readonly partial struct ListPatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ListPatternSyntaxWrapper Update(SyntaxToken openBracketToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns, SyntaxToken closeBracketToken, CSharpSyntaxNode designation) => ListPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openBracketToken, patterns, closeBracketToken, designation));
+    public ListPatternSyntaxWrapper WithCloseBracketToken(SyntaxToken closeBracketToken) => ListPatternSyntaxWrapper.From(WithCloseBracketTokenAccessor(wrappedInstance, closeBracketToken));
+    public ListPatternSyntaxWrapper WithDesignation(CSharpSyntaxNode designation) => ListPatternSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
+    public ListPatternSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => ListPatternSyntaxWrapper.From(WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken));
+    public ListPatternSyntaxWrapper WithPatterns(SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns) => ListPatternSyntaxWrapper.From(WithPatternsAccessor(wrappedInstance, patterns));
 
     public static explicit operator ListPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

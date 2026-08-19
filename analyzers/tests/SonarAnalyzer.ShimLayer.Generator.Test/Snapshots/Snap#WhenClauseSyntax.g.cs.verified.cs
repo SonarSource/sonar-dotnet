@@ -36,6 +36,12 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ConditionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Condition");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> WhenKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "WhenKeyword");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithConditionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithCondition");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithWhenKeywordAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithWhenKeyword");
+
     private WhenClauseSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public WhenClauseSyntaxWrapper Update(SyntaxToken whenKeyword, ExpressionSyntax condition) => WhenClauseSyntaxWrapper.From(UpdateAccessor(wrappedInstance, whenKeyword, condition));
+    public WhenClauseSyntaxWrapper WithCondition(ExpressionSyntax condition) => WhenClauseSyntaxWrapper.From(WithConditionAccessor(wrappedInstance, condition));
+    public WhenClauseSyntaxWrapper WithWhenKeyword(SyntaxToken whenKeyword) => WhenClauseSyntaxWrapper.From(WithWhenKeywordAccessor(wrappedInstance, whenKeyword));
 
     public static explicit operator WhenClauseSyntaxWrapper(SyntaxNode node) =>
         From(node);

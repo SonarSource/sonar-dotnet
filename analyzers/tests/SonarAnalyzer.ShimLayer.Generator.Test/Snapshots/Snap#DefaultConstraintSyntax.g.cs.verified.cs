@@ -35,6 +35,11 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
 
     private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SyntaxToken>>(WrappedType, "DefaultKeyword");
 
+    private static readonly Func<TypeParameterConstraintSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax>>(WrappedType, "Update");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax> WithDefaultKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax>>(WrappedType, "WithDefaultKeyword");
+
     private DefaultConstraintSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -118,6 +123,11 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public DefaultConstraintSyntaxWrapper Update(SyntaxToken defaultKeyword) => DefaultConstraintSyntaxWrapper.From(UpdateAccessor(wrappedInstance, defaultKeyword));
+    public DefaultConstraintSyntaxWrapper WithDefaultKeyword(SyntaxToken defaultKeyword) => DefaultConstraintSyntaxWrapper.From(WithDefaultKeywordAccessor(wrappedInstance, defaultKeyword));
 
     public static explicit operator DefaultConstraintSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -42,6 +42,14 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     private static readonly Func<TypeSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, Boolean>>(WrappedType, "IsUnmanaged");
     private static readonly Func<TypeSyntax, CSharpSyntaxNode> ParameterListAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, CSharpSyntaxNode>>(WrappedType, "ParameterList");
 
+    private static readonly Func<TypeSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TypeSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TypeSyntax, SyntaxToken, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode, TypeSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode, TypeSyntax>>(WrappedType, "Update");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithAsteriskTokenAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithAsteriskToken");
+    private static readonly Func<TypeSyntax, CSharpSyntaxNode, TypeSyntax> WithCallingConventionAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, CSharpSyntaxNode, TypeSyntax>>(WrappedType, "WithCallingConvention");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithDelegateKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithDelegateKeyword");
+    private static readonly Func<TypeSyntax, CSharpSyntaxNode, TypeSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, CSharpSyntaxNode, TypeSyntax>>(WrappedType, "WithParameterList");
+
     private FunctionPointerTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -133,6 +141,14 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FunctionPointerTypeSyntaxWrapper Update(SyntaxToken delegateKeyword, SyntaxToken asteriskToken, CSharpSyntaxNode callingConvention, CSharpSyntaxNode parameterList) => FunctionPointerTypeSyntaxWrapper.From(UpdateAccessor(wrappedInstance, delegateKeyword, asteriskToken, callingConvention, parameterList));
+    public FunctionPointerTypeSyntaxWrapper WithAsteriskToken(SyntaxToken asteriskToken) => FunctionPointerTypeSyntaxWrapper.From(WithAsteriskTokenAccessor(wrappedInstance, asteriskToken));
+    public FunctionPointerTypeSyntaxWrapper WithCallingConvention(CSharpSyntaxNode callingConvention) => FunctionPointerTypeSyntaxWrapper.From(WithCallingConventionAccessor(wrappedInstance, callingConvention));
+    public FunctionPointerTypeSyntaxWrapper WithDelegateKeyword(SyntaxToken delegateKeyword) => FunctionPointerTypeSyntaxWrapper.From(WithDelegateKeywordAccessor(wrappedInstance, delegateKeyword));
+    public FunctionPointerTypeSyntaxWrapper WithParameterList(CSharpSyntaxNode parameterList) => FunctionPointerTypeSyntaxWrapper.From(WithParameterListAccessor(wrappedInstance, parameterList));
 
     public static explicit operator FunctionPointerTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -35,6 +35,13 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
 
     private static readonly Func<BaseTypeSyntax, ArgumentListSyntax> ArgumentListAccessor = AccessorFactory.CreateProperty<Func<BaseTypeSyntax, ArgumentListSyntax>>(WrappedType, "ArgumentList");
 
+    private static readonly Func<BaseTypeSyntax, ArgumentSyntax[], BaseTypeSyntax> AddArgumentListArgumentsAccessor = AccessorFactory.CreateMethod<Func<BaseTypeSyntax, ArgumentSyntax[], BaseTypeSyntax>>(WrappedType, "AddArgumentListArguments");
+    private static readonly Func<BaseTypeSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseTypeSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseTypeSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseTypeSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseTypeSyntax, TypeSyntax, ArgumentListSyntax, BaseTypeSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<BaseTypeSyntax, TypeSyntax, ArgumentListSyntax, BaseTypeSyntax>>(WrappedType, "Update");
+    private static readonly Func<BaseTypeSyntax, ArgumentListSyntax, BaseTypeSyntax> WithArgumentListAccessor = AccessorFactory.CreateMethod<Func<BaseTypeSyntax, ArgumentListSyntax, BaseTypeSyntax>>(WrappedType, "WithArgumentList");
+    private static readonly Func<BaseTypeSyntax, TypeSyntax, BaseTypeSyntax> WithTypeAccessor = AccessorFactory.CreateMethod<Func<BaseTypeSyntax, TypeSyntax, BaseTypeSyntax>>(WrappedType, "WithType");
+
     private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -119,6 +126,13 @@ public readonly partial struct PrimaryConstructorBaseTypeSyntaxWrapper : ISyntax
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public PrimaryConstructorBaseTypeSyntaxWrapper AddArgumentListArguments(ArgumentSyntax[] items) => PrimaryConstructorBaseTypeSyntaxWrapper.From(AddArgumentListArgumentsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public PrimaryConstructorBaseTypeSyntaxWrapper Update(TypeSyntax type, ArgumentListSyntax argumentList) => PrimaryConstructorBaseTypeSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type, argumentList));
+    public PrimaryConstructorBaseTypeSyntaxWrapper WithArgumentList(ArgumentListSyntax argumentList) => PrimaryConstructorBaseTypeSyntaxWrapper.From(WithArgumentListAccessor(wrappedInstance, argumentList));
+    public PrimaryConstructorBaseTypeSyntaxWrapper WithType(TypeSyntax type) => PrimaryConstructorBaseTypeSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator PrimaryConstructorBaseTypeSyntaxWrapper(SyntaxNode node) =>
         From(node);

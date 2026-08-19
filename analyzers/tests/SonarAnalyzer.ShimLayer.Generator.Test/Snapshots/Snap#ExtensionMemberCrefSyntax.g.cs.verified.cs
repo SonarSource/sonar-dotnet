@@ -39,6 +39,17 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax> ParametersAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, CrefParameterListSyntax>>(WrappedType, "Parameters");
     private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax> TypeArgumentListAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, TypeArgumentListSyntax>>(WrappedType, "TypeArgumentList");
 
+    private static readonly Func<MemberCrefSyntax, CrefParameterSyntax[], MemberCrefSyntax> AddParametersParametersAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, CrefParameterSyntax[], MemberCrefSyntax>>(WrappedType, "AddParametersParameters");
+    private static readonly Func<MemberCrefSyntax, TypeSyntax[], MemberCrefSyntax> AddTypeArgumentListArgumentsAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, TypeSyntax[], MemberCrefSyntax>>(WrappedType, "AddTypeArgumentListArguments");
+    private static readonly Func<MemberCrefSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<MemberCrefSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<MemberCrefSyntax, SyntaxToken, TypeArgumentListSyntax, CrefParameterListSyntax, SyntaxToken, MemberCrefSyntax, MemberCrefSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, SyntaxToken, TypeArgumentListSyntax, CrefParameterListSyntax, SyntaxToken, MemberCrefSyntax, MemberCrefSyntax>>(WrappedType, "Update");
+    private static readonly Func<MemberCrefSyntax, SyntaxToken, MemberCrefSyntax> WithDotTokenAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, SyntaxToken, MemberCrefSyntax>>(WrappedType, "WithDotToken");
+    private static readonly Func<MemberCrefSyntax, SyntaxToken, MemberCrefSyntax> WithExtensionKeywordAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, SyntaxToken, MemberCrefSyntax>>(WrappedType, "WithExtensionKeyword");
+    private static readonly Func<MemberCrefSyntax, MemberCrefSyntax, MemberCrefSyntax> WithMemberAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, MemberCrefSyntax, MemberCrefSyntax>>(WrappedType, "WithMember");
+    private static readonly Func<MemberCrefSyntax, CrefParameterListSyntax, MemberCrefSyntax> WithParametersAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, CrefParameterListSyntax, MemberCrefSyntax>>(WrappedType, "WithParameters");
+    private static readonly Func<MemberCrefSyntax, TypeArgumentListSyntax, MemberCrefSyntax> WithTypeArgumentListAccessor = AccessorFactory.CreateMethod<Func<MemberCrefSyntax, TypeArgumentListSyntax, MemberCrefSyntax>>(WrappedType, "WithTypeArgumentList");
+
     private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -126,6 +137,17 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public ExtensionMemberCrefSyntaxWrapper AddParametersParameters(CrefParameterSyntax[] items) => ExtensionMemberCrefSyntaxWrapper.From(AddParametersParametersAccessor(wrappedInstance, items));
+    public ExtensionMemberCrefSyntaxWrapper AddTypeArgumentListArguments(TypeSyntax[] items) => ExtensionMemberCrefSyntaxWrapper.From(AddTypeArgumentListArgumentsAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ExtensionMemberCrefSyntaxWrapper Update(SyntaxToken extensionKeyword, TypeArgumentListSyntax typeArgumentList, CrefParameterListSyntax parameters, SyntaxToken dotToken, MemberCrefSyntax member) => ExtensionMemberCrefSyntaxWrapper.From(UpdateAccessor(wrappedInstance, extensionKeyword, typeArgumentList, parameters, dotToken, member));
+    public ExtensionMemberCrefSyntaxWrapper WithDotToken(SyntaxToken dotToken) => ExtensionMemberCrefSyntaxWrapper.From(WithDotTokenAccessor(wrappedInstance, dotToken));
+    public ExtensionMemberCrefSyntaxWrapper WithExtensionKeyword(SyntaxToken extensionKeyword) => ExtensionMemberCrefSyntaxWrapper.From(WithExtensionKeywordAccessor(wrappedInstance, extensionKeyword));
+    public ExtensionMemberCrefSyntaxWrapper WithMember(MemberCrefSyntax member) => ExtensionMemberCrefSyntaxWrapper.From(WithMemberAccessor(wrappedInstance, member));
+    public ExtensionMemberCrefSyntaxWrapper WithParameters(CrefParameterListSyntax parameters) => ExtensionMemberCrefSyntaxWrapper.From(WithParametersAccessor(wrappedInstance, parameters));
+    public ExtensionMemberCrefSyntaxWrapper WithTypeArgumentList(TypeArgumentListSyntax typeArgumentList) => ExtensionMemberCrefSyntaxWrapper.From(WithTypeArgumentListAccessor(wrappedInstance, typeArgumentList));
 
     public static explicit operator ExtensionMemberCrefSyntaxWrapper(SyntaxNode node) =>
         From(node);

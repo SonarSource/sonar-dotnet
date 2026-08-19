@@ -36,6 +36,12 @@ public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharp
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> DotDotTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "DotDotToken");
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PatternAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Pattern");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithDotDotTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithDotDotToken");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithPattern");
+
     private SlicePatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -120,6 +126,12 @@ public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharp
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public SlicePatternSyntaxWrapper Update(SyntaxToken dotDotToken, CSharpSyntaxNode pattern) => SlicePatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, dotDotToken, pattern));
+    public SlicePatternSyntaxWrapper WithDotDotToken(SyntaxToken dotDotToken) => SlicePatternSyntaxWrapper.From(WithDotDotTokenAccessor(wrappedInstance, dotDotToken));
+    public SlicePatternSyntaxWrapper WithPattern(CSharpSyntaxNode pattern) => SlicePatternSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
 
     public static explicit operator SlicePatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

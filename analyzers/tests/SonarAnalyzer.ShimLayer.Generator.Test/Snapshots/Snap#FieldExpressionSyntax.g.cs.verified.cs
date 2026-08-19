@@ -35,6 +35,11 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
 
     private static readonly Func<ExpressionSyntax, SyntaxToken> TokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "Token");
 
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithToken");
+
     private FieldExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -118,6 +123,11 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FieldExpressionSyntaxWrapper Update(SyntaxToken token) => FieldExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, token));
+    public FieldExpressionSyntaxWrapper WithToken(SyntaxToken token) => FieldExpressionSyntaxWrapper.From(WithTokenAccessor(wrappedInstance, token));
 
     public static explicit operator FieldExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

@@ -39,6 +39,15 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBraceToken");
     private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "SwitchKeyword");
 
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, SyntaxToken, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, SyntaxToken, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>, ExpressionSyntax> WithArmsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>, ExpressionSyntax>>(WrappedType, "WithArms");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithCloseBraceTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithCloseBraceToken");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithGoverningExpressionAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithGoverningExpression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithOpenBraceTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithOpenBraceToken");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithSwitchKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithSwitchKeyword");
+
     private SwitchExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -126,6 +135,15 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public SwitchExpressionSyntaxWrapper Update(ExpressionSyntax governingExpression, SyntaxToken switchKeyword, SyntaxToken openBraceToken, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> arms, SyntaxToken closeBraceToken) => SwitchExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, governingExpression, switchKeyword, openBraceToken, arms, closeBraceToken));
+    public SwitchExpressionSyntaxWrapper WithArms(SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> arms) => SwitchExpressionSyntaxWrapper.From(WithArmsAccessor(wrappedInstance, arms));
+    public SwitchExpressionSyntaxWrapper WithCloseBraceToken(SyntaxToken closeBraceToken) => SwitchExpressionSyntaxWrapper.From(WithCloseBraceTokenAccessor(wrappedInstance, closeBraceToken));
+    public SwitchExpressionSyntaxWrapper WithGoverningExpression(ExpressionSyntax governingExpression) => SwitchExpressionSyntaxWrapper.From(WithGoverningExpressionAccessor(wrappedInstance, governingExpression));
+    public SwitchExpressionSyntaxWrapper WithOpenBraceToken(SyntaxToken openBraceToken) => SwitchExpressionSyntaxWrapper.From(WithOpenBraceTokenAccessor(wrappedInstance, openBraceToken));
+    public SwitchExpressionSyntaxWrapper WithSwitchKeyword(SyntaxToken switchKeyword) => SwitchExpressionSyntaxWrapper.From(WithSwitchKeywordAccessor(wrappedInstance, switchKeyword));
 
     public static explicit operator SwitchExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

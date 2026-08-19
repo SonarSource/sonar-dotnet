@@ -37,6 +37,13 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     private static readonly Func<ExpressionSyntax, SyntaxToken> IsKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "IsKeyword");
     private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Pattern");
 
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, CSharpSyntaxNode, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithExpression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithIsKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithIsKeyword");
+    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax> WithPatternAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "WithPattern");
+
     private IsPatternExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +129,13 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public IsPatternExpressionSyntaxWrapper Update(ExpressionSyntax expression, SyntaxToken isKeyword, CSharpSyntaxNode pattern) => IsPatternExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, expression, isKeyword, pattern));
+    public IsPatternExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression) => IsPatternExpressionSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
+    public IsPatternExpressionSyntaxWrapper WithIsKeyword(SyntaxToken isKeyword) => IsPatternExpressionSyntaxWrapper.From(WithIsKeywordAccessor(wrappedInstance, isKeyword));
+    public IsPatternExpressionSyntaxWrapper WithPattern(CSharpSyntaxNode pattern) => IsPatternExpressionSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
 
     public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

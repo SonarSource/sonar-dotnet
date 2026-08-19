@@ -37,6 +37,13 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>> ElementsAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>>>(WrappedType, "Elements");
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBracketToken");
 
+    private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithCloseBracketTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithCloseBracketToken");
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>, ExpressionSyntax> WithElementsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>, ExpressionSyntax>>(WrappedType, "WithElements");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithOpenBracketTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithOpenBracketToken");
+
     private CollectionExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +129,13 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public CollectionExpressionSyntaxWrapper Update(SyntaxToken openBracketToken, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper> elements, SyntaxToken closeBracketToken) => CollectionExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openBracketToken, elements, closeBracketToken));
+    public CollectionExpressionSyntaxWrapper WithCloseBracketToken(SyntaxToken closeBracketToken) => CollectionExpressionSyntaxWrapper.From(WithCloseBracketTokenAccessor(wrappedInstance, closeBracketToken));
+    public CollectionExpressionSyntaxWrapper WithElements(SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper> elements) => CollectionExpressionSyntaxWrapper.From(WithElementsAccessor(wrappedInstance, elements));
+    public CollectionExpressionSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => CollectionExpressionSyntaxWrapper.From(WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken));
 
     public static explicit operator CollectionExpressionSyntaxWrapper(SyntaxNode node) =>
         From(node);

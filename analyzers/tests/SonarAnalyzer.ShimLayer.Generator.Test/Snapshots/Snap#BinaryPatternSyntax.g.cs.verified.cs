@@ -37,6 +37,13 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OperatorTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OperatorToken");
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> RightAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Right");
 
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithLeftAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithLeft");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOperatorTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOperatorToken");
+    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithRightAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithRight");
+
     private BinaryPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +129,13 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public BinaryPatternSyntaxWrapper Update(CSharpSyntaxNode left, SyntaxToken operatorToken, CSharpSyntaxNode right) => BinaryPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, left, operatorToken, right));
+    public BinaryPatternSyntaxWrapper WithLeft(CSharpSyntaxNode left) => BinaryPatternSyntaxWrapper.From(WithLeftAccessor(wrappedInstance, left));
+    public BinaryPatternSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => BinaryPatternSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
+    public BinaryPatternSyntaxWrapper WithRight(CSharpSyntaxNode right) => BinaryPatternSyntaxWrapper.From(WithRightAccessor(wrappedInstance, right));
 
     public static explicit operator BinaryPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

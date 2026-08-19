@@ -37,6 +37,15 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
     private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxTokenList>>(WrappedType, "Modifiers");
     private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, TypeSyntax>>(WrappedType, "Type");
 
+    private static readonly Func<CSharpSyntaxNode, AttributeListSyntax[], CSharpSyntaxNode> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, AttributeListSyntax[], CSharpSyntaxNode>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken[], CSharpSyntaxNode> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken[], CSharpSyntaxNode>>(WrappedType, "AddModifiers");
+    private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, CSharpSyntaxNode> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, CSharpSyntaxNode>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList, CSharpSyntaxNode> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxTokenList, CSharpSyntaxNode>>(WrappedType, "WithModifiers");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "WithType");
+
     private FunctionPointerParameterSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -122,6 +131,15 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
     public Boolean IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
+
+    public FunctionPointerParameterSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => FunctionPointerParameterSyntaxWrapper.From(AddAttributeListsAccessor(wrappedInstance, items));
+    public FunctionPointerParameterSyntaxWrapper AddModifiers(SyntaxToken[] items) => FunctionPointerParameterSyntaxWrapper.From(AddModifiersAccessor(wrappedInstance, items));
+    public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FunctionPointerParameterSyntaxWrapper Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, TypeSyntax type) => FunctionPointerParameterSyntaxWrapper.From(UpdateAccessor(wrappedInstance, attributeLists, modifiers, type));
+    public FunctionPointerParameterSyntaxWrapper WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => FunctionPointerParameterSyntaxWrapper.From(WithAttributeListsAccessor(wrappedInstance, attributeLists));
+    public FunctionPointerParameterSyntaxWrapper WithModifiers(SyntaxTokenList modifiers) => FunctionPointerParameterSyntaxWrapper.From(WithModifiersAccessor(wrappedInstance, modifiers));
+    public FunctionPointerParameterSyntaxWrapper WithType(TypeSyntax type) => FunctionPointerParameterSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator FunctionPointerParameterSyntaxWrapper(SyntaxNode node) =>
         From(node);
