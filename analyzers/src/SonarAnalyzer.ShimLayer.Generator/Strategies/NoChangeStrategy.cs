@@ -23,7 +23,7 @@ public class NoChangeStrategy : Strategy
 
     public NoChangeStrategy(Type latest) : base(latest) =>
         type = latest.IsGenericType
-            ? latest.Name.Replace("`1", null) + "<" + string.Join(", ", latest.GetGenericArguments().Select(x => x.Name)) + ">"
+            ? latest.Name.Replace("`1", null).Replace("`2", null) + "<" + string.Join(", ", latest.GetGenericArguments().Select(x => x.Name)) + ">"
             : latest.Name;
 
     public override string ReturnTypeSnippet() =>

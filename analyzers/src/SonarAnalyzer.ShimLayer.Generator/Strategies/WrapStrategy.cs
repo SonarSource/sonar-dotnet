@@ -53,6 +53,10 @@ public abstract class WrapStrategy : Strategy
             .Select(x => !x.IsPassthrough && x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
             .Where(x => x is not null)
             .ToArray();
+        var passthroughMethods = Members
+            .Select(x => x.IsPassthrough && x.Member is MethodInfo { ContainsGenericParameters: false } mi && model[mi.ReturnType] is { IsSupported: true } returnTypeStrategy && mi.GetParameters().All(x => model[x.ParameterType].IsSupported) ? new MethodPassthroughSnippet(this, x, returnTypeStrategy, model) : null)
+            .Where(x => x is not null)
+            .ToArray();
 
         return $$"""
             {{Preamble()}}
@@ -75,6 +79,8 @@ public abstract class WrapStrategy : Strategy
             {{JoinLines(passthroughProperties.Select(x => x.MemberDeclaration(4)))}}
 
             {{JoinLines(wrapProperties.Select(x => x.MemberDeclaration(4)))}}
+
+            {{JoinLines(passthroughMethods.Select(x => x.MemberDeclaration(4)))}}
 
             {{ConversionSnippet}}
 

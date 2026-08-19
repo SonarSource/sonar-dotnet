@@ -15,20 +15,11 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-
 namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
 
-public sealed class MethodWrapSnippet : Snippet<MethodInfo>
+public sealed class MethodWrapSnippet : MethodSnippet
 {
-    private readonly StrategyModel model;
-    private readonly ParameterInfo[] parameters;
-
-    public MethodWrapSnippet(Strategy strategy, MemberDescriptor member, Strategy returnType, StrategyModel model) : base(strategy, member, returnType)
-    {
-        this.model = model;
-        parameters = this.member.GetParameters();
-    }
+    public MethodWrapSnippet(Strategy strategy, MemberDescriptor member, Strategy returnType, StrategyModel model) : base(strategy, member, returnType, model) { }
 
     public override string AccessorDeclaration()
     {
@@ -36,14 +27,8 @@ public sealed class MethodWrapSnippet : Snippet<MethodInfo>
         return $"""    private static readonly Func<{types}> {accessorName} = AccessorFactory.CreateMethod<Func<{types}>>(WrappedType, "{member.Name}");""";
     }
 
-    public override string MemberDeclaration(int indentSize) =>
+    protected override string InvocationSnippet() =>
         $"""
-        {Indent(indentSize)}public {returnType.ReturnTypeSnippet()} {member.Name}({parameters.JoinStr(", ", SerializeParameter)}) => {returnType.ToConversionSnippet($"{accessorName}({ parameters.Select(SerializeParameterName).Prepend("wrappedInstance").JoinStr(", ")})")};
+        {returnType.ToConversionSnippet($"{accessorName}({parameters.Select(SerializeParameterName).Prepend("wrappedInstance").JoinStr(", ")})")}
         """;
-
-    private string SerializeParameter(ParameterInfo parameter) =>
-        $"{model[parameter.ParameterType].CompiletimeTypeSnippet()} {SerializeParameterName(parameter)}";
-
-    private static string SerializeParameterName(ParameterInfo parameter) =>
-        SyntaxFacts.GetKeywordKind(parameter.Name) == SyntaxKind.None ? parameter.Name : $"@{parameter.Name}";
 }

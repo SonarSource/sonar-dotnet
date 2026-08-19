@@ -23,7 +23,10 @@ public abstract class Snippet
     {
         var sb = new StringBuilder();
         var indent = Indent(indentSize);
-        foreach (var attribute in attributes.Where(x => x.AttributeType.Name is not "ExperimentalAttribute" and not "NullableAttribute"))
+        foreach (var attribute in attributes.Where(x => x.AttributeType.Name is not "ExperimentalAttribute"
+                                                                                and not "NullableAttribute"
+                                                                                and not "NullableContextAttribute"
+                                                                                and not "IteratorStateMachineAttribute"))
         {
             sb.Append("[").Append(attribute.AttributeType.FullName);
             if (attribute.ConstructorArguments.Any())

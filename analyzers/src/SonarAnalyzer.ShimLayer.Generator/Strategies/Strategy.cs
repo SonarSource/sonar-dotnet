@@ -73,6 +73,7 @@ public abstract class Strategy
             "using Microsoft.CodeAnalysis.Text;",
             "using System;",
             "using System.Collections.Immutable;",
+            "using System.Text;",
             .. additionalUsing])}
 
         namespace SonarAnalyzer.ShimLayer;

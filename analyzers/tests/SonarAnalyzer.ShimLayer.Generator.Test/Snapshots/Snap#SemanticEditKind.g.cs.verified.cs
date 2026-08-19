@@ -23,6 +23,7 @@ using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Text;
 using System;
 using System.Collections.Immutable;
+using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
