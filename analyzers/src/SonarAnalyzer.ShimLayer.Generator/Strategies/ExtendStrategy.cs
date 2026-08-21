@@ -17,12 +17,9 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public sealed class ExtendStrategy : Strategy
+public sealed class ExtendStrategy : MemberStrategy
 {
-    public IReadOnlyList<MemberDescriptor> Members { get; }
-
-    public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest) =>
-        Members = members.Where(x => !x.IsPassthrough).ToArray();
+    public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
 
     public override string ReturnTypeSnippet() =>
         Latest.Name;
@@ -32,31 +29,23 @@ public sealed class ExtendStrategy : Strategy
 
     protected override string GenerateCore(StrategyModel model)
     {
-        var properties = Members
-            .Select(x => x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
-            .Where(x => x is not null)
-            .ToArray();
-        var methods = Members
-            .Select(x => x.Member is MethodInfo { ContainsGenericParameters: false } mi && model[mi.ReturnType] is { IsSupported: true } returnTypeStrategy && mi.GetParameters().All(x => model[x.ParameterType].IsSupported) ? new MethodWrapSnippet(this, x, returnTypeStrategy, model) : null)
-            .Where(x => x is not null)
-            .ToArray();
-
-        return properties.Any() || methods.Any()
+        var wrap = WrapMembers(model);
+        return wrap.Properties.Any() || wrap.Methods.Any()
             ? $$"""
                 {{Preamble($"using {Latest.Namespace};")}}
                 public static partial class {{Latest.Name}}ShimExtensions
                 {
                     private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet()}});
 
-                {{JoinLines(properties.Select(x => x.AccessorDeclaration()))}}
+                {{JoinLines(wrap.Properties.Select(x => x.AccessorDeclaration()))}}
 
-                {{JoinLines(methods.Select(x => x.AccessorDeclaration()))}}
+                {{JoinLines(wrap.Methods.Select(x => x.AccessorDeclaration()))}}
 
                     extension({{CompiletimeTypeSnippet()}} wrappedInstance)
                     {
-                {{JoinLines(properties.Select(x => x.MemberDeclaration(8)))}}
+                {{JoinLines(wrap.Properties.Select(x => x.MemberDeclaration(8)))}}
 
-                {{JoinLines(methods.Select(x => x.MemberDeclaration(8)))}}
+                {{JoinLines(wrap.Methods.Select(x => x.MemberDeclaration(8)))}}
                     }
                 }
                 """

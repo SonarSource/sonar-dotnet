@@ -51,7 +51,7 @@ public class OperationWrapStrategy : WrapStrategy
                 operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
         """;
 
-    public OperationWrapStrategy(Type latest, IReadOnlyList<MemberDescriptor> members) : base(latest, typeof(IOperation), members) { }
+    public OperationWrapStrategy(Type latest, MemberDescriptor[] members) : base(latest, typeof(IOperation), members) { }
 
     protected override string WrapperToWrapperConversions(StrategyModel model) =>
         WrapperToWrapperConversions(Latest.GetInterfaces().Where(x => model[x] is OperationWrapStrategy));

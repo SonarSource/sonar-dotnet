@@ -19,6 +19,9 @@ namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
 
 public abstract class Snippet
 {
+    public abstract string AccessorDeclaration();
+    public abstract string MemberDeclaration(int indentSize);
+
     public static string SerializeAttributes(IEnumerable<CustomAttributeData> attributes, int indentSize)
     {
         var sb = new StringBuilder();
@@ -71,9 +74,6 @@ public abstract class Snippet<TMember> : Snippet where TMember : MemberInfo
     protected readonly TMember member;
     protected readonly string accessorName;
     protected readonly Strategy returnType;
-
-    public abstract string AccessorDeclaration();
-    public abstract string MemberDeclaration(int indentSize);
 
     protected Snippet(Strategy strategy, MemberDescriptor member, Strategy returnType)
     {

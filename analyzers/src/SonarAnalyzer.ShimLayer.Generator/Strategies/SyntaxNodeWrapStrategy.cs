@@ -56,7 +56,7 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
                 node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
         """;
 
-    public SyntaxNodeWrapStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest, baseType, members) { }
+    public SyntaxNodeWrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, baseType, members) { }
 
     protected override string WrapperToWrapperConversions(StrategyModel model)
     {

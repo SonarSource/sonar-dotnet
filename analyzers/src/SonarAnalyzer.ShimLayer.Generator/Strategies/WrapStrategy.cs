@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public abstract class WrapStrategy : Strategy
+public abstract class WrapStrategy : MemberStrategy
 {
     protected abstract string BaseTypeSnippet { get; }
     [Obsolete("This should be removed once we remove the obsolete usages from the generated code")]
@@ -26,13 +26,9 @@ public abstract class WrapStrategy : Strategy
     protected abstract string WrapperToWrapperConversions(StrategyModel model);
 
     public Type BaseType { get; }
-    public IReadOnlyList<MemberDescriptor> Members { get; }
 
-    protected WrapStrategy(Type latest, Type baseType, IReadOnlyList<MemberDescriptor> members) : base(latest)
-    {
+    protected WrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, members) =>
         BaseType = baseType;
-        Members = members;
-    }
 
     public override string ReturnTypeSnippet() =>
         $"{Latest.Name}Wrapper";
@@ -45,23 +41,8 @@ public abstract class WrapStrategy : Strategy
 
     protected override string GenerateCore(StrategyModel model)
     {
-        var passthroughProperties = Members
-            .Select(x => x.IsPassthrough && x.Member is PropertyInfo pi ? new PropertyPassthroughSnippet(this, x, model[pi.PropertyType]) : null)
-            .Where(x => x is not null)
-            .ToArray();
-        var wrapProperties = Members
-            .Select(x => !x.IsPassthrough && x.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? new PropertyWrapSnippet(this, x, returnType) : null)
-            .Where(x => x is not null)
-            .ToArray();
-        var passthroughMethods = Members
-            .Select(x => x.IsPassthrough && x.Member is MethodInfo { ContainsGenericParameters: false } mi && model[mi.ReturnType] is { IsSupported: true } returnTypeStrategy && mi.GetParameters().All(x => model[x.ParameterType].IsSupported) ? new MethodPassthroughSnippet(this, x, returnTypeStrategy, model) : null)
-            .Where(x => x is not null)
-            .ToArray();
-        var wrapMethods = Members
-            .Select(x => !x.IsPassthrough && x.Member is MethodInfo { ContainsGenericParameters: false } mi && model[mi.ReturnType] is { IsSupported: true } returnTypeStrategy && mi.GetParameters().All(x => model[x.ParameterType].IsSupported && !IsTemporarySkipArray(x.ParameterType)) ? new MethodWrapSnippet(this, x, returnTypeStrategy, model) : null)
-            .Where(x => x is not null)
-            .ToArray();
-
+        var passthrough = PassthroughMembers(model);
+        var wrap = WrapMembers(model);
         return $$"""
             {{Preamble()}}
             public readonly partial struct {{Latest.Name}}Wrapper{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
@@ -71,9 +52,9 @@ public abstract class WrapStrategy : Strategy
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
                 private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
 
-            {{JoinLines(wrapProperties.Select(x => x.AccessorDeclaration()))}}
+            {{JoinLines(wrap.Properties.Select(x => x.AccessorDeclaration()))}}
 
-            {{JoinLines(wrapMethods.Select(x => x.AccessorDeclaration()))}}
+            {{JoinLines(wrap.Methods.Select(x => x.AccessorDeclaration()))}}
 
                 private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
@@ -82,23 +63,19 @@ public abstract class WrapStrategy : Strategy
 
                 public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
 
-            {{JoinLines(passthroughProperties.Select(x => x.MemberDeclaration(4)))}}
+            {{JoinLines(passthrough.Properties.Select(x => x.MemberDeclaration(4)))}}
 
-            {{JoinLines(wrapProperties.Select(x => x.MemberDeclaration(4)))}}
+            {{JoinLines(wrap.Properties.Select(x => x.MemberDeclaration(4)))}}
 
-            {{JoinLines(passthroughMethods.Select(x => x.MemberDeclaration(4)))}}
+            {{JoinLines(passthrough.Methods.Select(x => x.MemberDeclaration(4)))}}
 
-            {{JoinLines(wrapMethods.Select(x => x.MemberDeclaration(4)))}}
+            {{JoinLines(wrap.Methods.Select(x => x.MemberDeclaration(4)))}}
 
             {{ConversionSnippet}}
 
             {{WrapperToWrapperConversions(model)}}
             }
             """;
-
-        // ToDo: Add support for: WrappedType[] methodParam, it will need conversion from WrappedTypeWrapper[] -> WrappedType[] on the lambda invocation side
-        bool IsTemporarySkipArray(Type type) =>
-            type.IsArray && model[type.GetElementType()] is WrapStrategy;
     }
 
     protected string WrapperToWrapperConversions(IEnumerable<Type> baseTypes)

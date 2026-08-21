@@ -134,12 +134,16 @@ public class ModelBuilderTest
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
                 "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",
-                "Microsoft.CodeAnalysis.IOperation Parent",
-                "System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.IOperation] Children",
                 "Microsoft.CodeAnalysis.IOperation+OperationList ChildOperations",
-                "System.String Language",
+                "System.Collections.Generic.IEnumerable`1[Microsoft.CodeAnalysis.IOperation] Children",
+                "Microsoft.CodeAnalysis.Optional`1[System.Object] ConstantValue",
                 "System.Boolean IsImplicit",
-                "Microsoft.CodeAnalysis.SemanticModel SemanticModel"]);
+                "Microsoft.CodeAnalysis.OperationKind Kind",
+                "System.String Language",
+                "Microsoft.CodeAnalysis.IOperation Parent",
+                "Microsoft.CodeAnalysis.SemanticModel SemanticModel",
+                "Microsoft.CodeAnalysis.SyntaxNode Syntax",
+                "Microsoft.CodeAnalysis.ITypeSymbol Type"]);
     }
 
     [TestMethod]
@@ -223,7 +227,7 @@ public class ModelBuilderTest
         var latest = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(SyntaxNode));
         var model = ModelBuilder.Build([latest], [baseline]);
         model[latest.Type].Should().BeOfType<ExtendStrategy>()
-            .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
+            .Which.Members.Where(x => !x.IsPassthrough).Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "System.Boolean IsIncrementallyIdenticalTo(Microsoft.CodeAnalysis.SyntaxNode)",
                 "System.Boolean ContainsDirective(System.Int32)",
                 "TNode FirstAncestorOrSelf[TNode,TArg](System.Func`3[TNode,TArg,System.Boolean], TArg, System.Boolean)"]);

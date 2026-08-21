@@ -411,7 +411,7 @@ public class SyntaxNodeWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(
             typeof(SyntaxNode),
             typeof(SyntaxNode),
-            Enumerable.Repeat(unsupportedMember, 20).ToList());    // This should not produce 20 empty lines
+            Enumerable.Repeat(unsupportedMember, 20).ToArray());    // This should not produce 20 empty lines
 
         var result = sut.Generate(new() { { typeof(PatternSyntax), sut } });
         result.Should().BeIgnoringLineEndings(
