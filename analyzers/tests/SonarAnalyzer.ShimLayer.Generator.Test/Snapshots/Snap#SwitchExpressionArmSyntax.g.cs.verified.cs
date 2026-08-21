@@ -40,11 +40,11 @@ public readonly partial struct SwitchExpressionArmSyntaxWrapper : ISyntaxWrapper
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, PatternSyntaxWrapper, WhenClauseSyntaxWrapper, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PatternSyntaxWrapper, WhenClauseSyntaxWrapper, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithEqualsGreaterThanTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithEqualsGreaterThanToken");
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithExpression");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithPattern");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithWhenClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithWhenClause");
+    private static readonly Func<CSharpSyntaxNode, PatternSyntaxWrapper, CSharpSyntaxNode> WithPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PatternSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithPattern");
+    private static readonly Func<CSharpSyntaxNode, WhenClauseSyntaxWrapper, CSharpSyntaxNode> WithWhenClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, WhenClauseSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithWhenClause");
 
     private SwitchExpressionArmSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -135,11 +135,11 @@ public readonly partial struct SwitchExpressionArmSyntaxWrapper : ISyntaxWrapper
 
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public SwitchExpressionArmSyntaxWrapper Update(CSharpSyntaxNode pattern, CSharpSyntaxNode whenClause, SyntaxToken equalsGreaterThanToken, ExpressionSyntax expression) => SwitchExpressionArmSyntaxWrapper.From(UpdateAccessor(wrappedInstance, pattern, whenClause, equalsGreaterThanToken, expression));
+    public SwitchExpressionArmSyntaxWrapper Update(PatternSyntaxWrapper pattern, WhenClauseSyntaxWrapper whenClause, SyntaxToken equalsGreaterThanToken, ExpressionSyntax expression) => SwitchExpressionArmSyntaxWrapper.From(UpdateAccessor(wrappedInstance, pattern, whenClause, equalsGreaterThanToken, expression));
     public SwitchExpressionArmSyntaxWrapper WithEqualsGreaterThanToken(SyntaxToken equalsGreaterThanToken) => SwitchExpressionArmSyntaxWrapper.From(WithEqualsGreaterThanTokenAccessor(wrappedInstance, equalsGreaterThanToken));
     public SwitchExpressionArmSyntaxWrapper WithExpression(ExpressionSyntax expression) => SwitchExpressionArmSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
-    public SwitchExpressionArmSyntaxWrapper WithPattern(CSharpSyntaxNode pattern) => SwitchExpressionArmSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
-    public SwitchExpressionArmSyntaxWrapper WithWhenClause(CSharpSyntaxNode whenClause) => SwitchExpressionArmSyntaxWrapper.From(WithWhenClauseAccessor(wrappedInstance, whenClause));
+    public SwitchExpressionArmSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => SwitchExpressionArmSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
+    public SwitchExpressionArmSyntaxWrapper WithWhenClause(WhenClauseSyntaxWrapper whenClause) => SwitchExpressionArmSyntaxWrapper.From(WithWhenClauseAccessor(wrappedInstance, whenClause));
 
     public static explicit operator SwitchExpressionArmSyntaxWrapper(SyntaxNode node) =>
         From(node);

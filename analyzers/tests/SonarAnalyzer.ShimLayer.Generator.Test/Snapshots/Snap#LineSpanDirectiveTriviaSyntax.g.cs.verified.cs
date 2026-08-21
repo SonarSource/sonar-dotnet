@@ -42,16 +42,16 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
 
     private static readonly Func<DirectiveTriviaSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, SyntaxToken, CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, SyntaxToken, SyntaxToken, SyntaxToken, bool, DirectiveTriviaSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, SyntaxToken, CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, SyntaxToken, SyntaxToken, SyntaxToken, bool, DirectiveTriviaSyntax>>(WrappedType, "Update");
+    private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, SyntaxToken, LineDirectivePositionSyntaxWrapper, SyntaxToken, LineDirectivePositionSyntaxWrapper, SyntaxToken, SyntaxToken, SyntaxToken, bool, DirectiveTriviaSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, SyntaxToken, LineDirectivePositionSyntaxWrapper, SyntaxToken, LineDirectivePositionSyntaxWrapper, SyntaxToken, SyntaxToken, SyntaxToken, bool, DirectiveTriviaSyntax>>(WrappedType, "Update");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithCharacterOffsetAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithCharacterOffset");
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode, DirectiveTriviaSyntax> WithEndAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, CSharpSyntaxNode, DirectiveTriviaSyntax>>(WrappedType, "WithEnd");
+    private static readonly Func<DirectiveTriviaSyntax, LineDirectivePositionSyntaxWrapper, DirectiveTriviaSyntax> WithEndAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, LineDirectivePositionSyntaxWrapper, DirectiveTriviaSyntax>>(WrappedType, "WithEnd");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithEndOfDirectiveTokenAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithEndOfDirectiveToken");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithFileAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithFile");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithHashTokenAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithHashToken");
     private static readonly Func<DirectiveTriviaSyntax, bool, DirectiveTriviaSyntax> WithIsActiveAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, bool, DirectiveTriviaSyntax>>(WrappedType, "WithIsActive");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithLineKeywordAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithLineKeyword");
     private static readonly Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax> WithMinusTokenAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, SyntaxToken, DirectiveTriviaSyntax>>(WrappedType, "WithMinusToken");
-    private static readonly Func<DirectiveTriviaSyntax, CSharpSyntaxNode, DirectiveTriviaSyntax> WithStartAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, CSharpSyntaxNode, DirectiveTriviaSyntax>>(WrappedType, "WithStart");
+    private static readonly Func<DirectiveTriviaSyntax, LineDirectivePositionSyntaxWrapper, DirectiveTriviaSyntax> WithStartAccessor = AccessorFactory.CreateMethod<Func<DirectiveTriviaSyntax, LineDirectivePositionSyntaxWrapper, DirectiveTriviaSyntax>>(WrappedType, "WithStart");
 
     private LineSpanDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -151,16 +151,16 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
 
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public LineSpanDirectiveTriviaSyntaxWrapper Update(SyntaxToken hashToken, SyntaxToken lineKeyword, CSharpSyntaxNode start, SyntaxToken minusToken, CSharpSyntaxNode end, SyntaxToken characterOffset, SyntaxToken file, SyntaxToken endOfDirectiveToken, bool isActive) => LineSpanDirectiveTriviaSyntaxWrapper.From(UpdateAccessor(wrappedInstance, hashToken, lineKeyword, start, minusToken, end, characterOffset, file, endOfDirectiveToken, isActive));
+    public LineSpanDirectiveTriviaSyntaxWrapper Update(SyntaxToken hashToken, SyntaxToken lineKeyword, LineDirectivePositionSyntaxWrapper start, SyntaxToken minusToken, LineDirectivePositionSyntaxWrapper end, SyntaxToken characterOffset, SyntaxToken file, SyntaxToken endOfDirectiveToken, bool isActive) => LineSpanDirectiveTriviaSyntaxWrapper.From(UpdateAccessor(wrappedInstance, hashToken, lineKeyword, start, minusToken, end, characterOffset, file, endOfDirectiveToken, isActive));
     public LineSpanDirectiveTriviaSyntaxWrapper WithCharacterOffset(SyntaxToken characterOffset) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithCharacterOffsetAccessor(wrappedInstance, characterOffset));
-    public LineSpanDirectiveTriviaSyntaxWrapper WithEnd(CSharpSyntaxNode end) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithEndAccessor(wrappedInstance, end));
+    public LineSpanDirectiveTriviaSyntaxWrapper WithEnd(LineDirectivePositionSyntaxWrapper end) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithEndAccessor(wrappedInstance, end));
     public LineSpanDirectiveTriviaSyntaxWrapper WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken));
     public LineSpanDirectiveTriviaSyntaxWrapper WithFile(SyntaxToken file) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithFileAccessor(wrappedInstance, file));
     public LineSpanDirectiveTriviaSyntaxWrapper WithHashToken(SyntaxToken hashToken) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithHashTokenAccessor(wrappedInstance, hashToken));
     public LineSpanDirectiveTriviaSyntaxWrapper WithIsActive(bool isActive) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithIsActiveAccessor(wrappedInstance, isActive));
     public LineSpanDirectiveTriviaSyntaxWrapper WithLineKeyword(SyntaxToken lineKeyword) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithLineKeywordAccessor(wrappedInstance, lineKeyword));
     public LineSpanDirectiveTriviaSyntaxWrapper WithMinusToken(SyntaxToken minusToken) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithMinusTokenAccessor(wrappedInstance, minusToken));
-    public LineSpanDirectiveTriviaSyntaxWrapper WithStart(CSharpSyntaxNode start) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithStartAccessor(wrappedInstance, start));
+    public LineSpanDirectiveTriviaSyntaxWrapper WithStart(LineDirectivePositionSyntaxWrapper start) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithStartAccessor(wrappedInstance, start));
 
     public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
         From(node);

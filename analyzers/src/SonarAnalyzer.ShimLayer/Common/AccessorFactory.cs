@@ -138,15 +138,19 @@ internal static class AccessorFactory
     {
         if (type.IsArray    // XxxWrapper[] => Xxx[]
             && !type.IsAssignableFrom(expression.Type)
-            && expression.Type.GetElementType() is var wrapperType
-            && wrapperType.GetProperty("WrappedInstance") is { } wrappedInstance)
+            && expression.Type.GetElementType() is var elementWrapperType
+            && elementWrapperType.GetProperty("WrappedInstance") is { } elementWrappedInstance)
         {
             // Generate: result.Select(x => (Xxx)x.WrappedInstance).ToArray()
             var itemRuntimeType = type.GetElementType();
-            var selectorParameter = Expression.Parameter(wrapperType, "x");
-            var selectorLambda = Expression.Lambda(WrapConvert(Expression.Property(selectorParameter, wrappedInstance), itemRuntimeType), selectorParameter);
-            var items = Expression.Call(UnboundEnumerableSelectMethod.MakeGenericMethod(wrapperType, itemRuntimeType), expression, selectorLambda);
+            var selectorParameter = Expression.Parameter(elementWrapperType, "x");
+            var selectorLambda = Expression.Lambda(WrapConvert(Expression.Property(selectorParameter, elementWrappedInstance), itemRuntimeType), selectorParameter);
+            var items = Expression.Call(UnboundEnumerableSelectMethod.MakeGenericMethod(elementWrapperType, itemRuntimeType), expression, selectorLambda);
             return Expression.Call(UnboundEnumerableToArrayMethod.MakeGenericMethod(itemRuntimeType), items);
+        }
+        else if (expression.Type.GetProperty("WrappedInstance") is { } wrappedInstance)
+        {
+            return WrapConvert(Expression.Property(expression, wrappedInstance), type);
         }
         else
         {

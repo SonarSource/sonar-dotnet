@@ -39,11 +39,11 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, NameColonSyntax, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, NameColonSyntax, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithExpressionColonAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithExpressionColon");
+    private static readonly Func<CSharpSyntaxNode, BaseExpressionColonSyntaxWrapper, PatternSyntaxWrapper, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, BaseExpressionColonSyntaxWrapper, PatternSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, NameColonSyntax, PatternSyntaxWrapper, CSharpSyntaxNode> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, NameColonSyntax, PatternSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, BaseExpressionColonSyntaxWrapper, CSharpSyntaxNode> WithExpressionColonAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, BaseExpressionColonSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithExpressionColon");
     private static readonly Func<CSharpSyntaxNode, NameColonSyntax, CSharpSyntaxNode> WithNameColonAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, NameColonSyntax, CSharpSyntaxNode>>(WrappedType, "WithNameColon");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithPattern");
+    private static readonly Func<CSharpSyntaxNode, PatternSyntaxWrapper, CSharpSyntaxNode> WithPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PatternSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithPattern");
 
     private SubpatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -133,11 +133,11 @@ public readonly partial struct SubpatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
 
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public SubpatternSyntaxWrapper Update(CSharpSyntaxNode expressionColon, CSharpSyntaxNode pattern) => SubpatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, expressionColon, pattern));
-    public SubpatternSyntaxWrapper Update(NameColonSyntax nameColon, CSharpSyntaxNode pattern) => SubpatternSyntaxWrapper.From(UpdateAccessor_Overload2(wrappedInstance, nameColon, pattern));
-    public SubpatternSyntaxWrapper WithExpressionColon(CSharpSyntaxNode expressionColon) => SubpatternSyntaxWrapper.From(WithExpressionColonAccessor(wrappedInstance, expressionColon));
+    public SubpatternSyntaxWrapper Update(BaseExpressionColonSyntaxWrapper expressionColon, PatternSyntaxWrapper pattern) => SubpatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, expressionColon, pattern));
+    public SubpatternSyntaxWrapper Update(NameColonSyntax nameColon, PatternSyntaxWrapper pattern) => SubpatternSyntaxWrapper.From(UpdateAccessor_Overload2(wrappedInstance, nameColon, pattern));
+    public SubpatternSyntaxWrapper WithExpressionColon(BaseExpressionColonSyntaxWrapper expressionColon) => SubpatternSyntaxWrapper.From(WithExpressionColonAccessor(wrappedInstance, expressionColon));
     public SubpatternSyntaxWrapper WithNameColon(NameColonSyntax nameColon) => SubpatternSyntaxWrapper.From(WithNameColonAccessor(wrappedInstance, nameColon));
-    public SubpatternSyntaxWrapper WithPattern(CSharpSyntaxNode pattern) => SubpatternSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
+    public SubpatternSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => SubpatternSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
 
     public static explicit operator SubpatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

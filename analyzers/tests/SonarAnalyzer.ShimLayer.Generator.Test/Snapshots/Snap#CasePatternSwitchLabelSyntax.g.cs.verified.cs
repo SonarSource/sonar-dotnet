@@ -38,11 +38,11 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
 
     private static readonly Func<SwitchLabelSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<SwitchLabelSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<SwitchLabelSyntax, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode, SyntaxToken, SwitchLabelSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode, SyntaxToken, SwitchLabelSyntax>>(WrappedType, "Update");
+    private static readonly Func<SwitchLabelSyntax, SyntaxToken, PatternSyntaxWrapper, WhenClauseSyntaxWrapper, SyntaxToken, SwitchLabelSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxToken, PatternSyntaxWrapper, WhenClauseSyntaxWrapper, SyntaxToken, SwitchLabelSyntax>>(WrappedType, "Update");
     private static readonly Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax> WithColonTokenAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax>>(WrappedType, "WithColonToken");
     private static readonly Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax> WithKeywordAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax>>(WrappedType, "WithKeyword");
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode, SwitchLabelSyntax> WithPatternAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, CSharpSyntaxNode, SwitchLabelSyntax>>(WrappedType, "WithPattern");
-    private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode, SwitchLabelSyntax> WithWhenClauseAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, CSharpSyntaxNode, SwitchLabelSyntax>>(WrappedType, "WithWhenClause");
+    private static readonly Func<SwitchLabelSyntax, PatternSyntaxWrapper, SwitchLabelSyntax> WithPatternAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, PatternSyntaxWrapper, SwitchLabelSyntax>>(WrappedType, "WithPattern");
+    private static readonly Func<SwitchLabelSyntax, WhenClauseSyntaxWrapper, SwitchLabelSyntax> WithWhenClauseAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, WhenClauseSyntaxWrapper, SwitchLabelSyntax>>(WrappedType, "WithWhenClause");
 
     private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -133,11 +133,11 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
 
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public CasePatternSwitchLabelSyntaxWrapper Update(SyntaxToken keyword, CSharpSyntaxNode pattern, CSharpSyntaxNode whenClause, SyntaxToken colonToken) => CasePatternSwitchLabelSyntaxWrapper.From(UpdateAccessor(wrappedInstance, keyword, pattern, whenClause, colonToken));
+    public CasePatternSwitchLabelSyntaxWrapper Update(SyntaxToken keyword, PatternSyntaxWrapper pattern, WhenClauseSyntaxWrapper whenClause, SyntaxToken colonToken) => CasePatternSwitchLabelSyntaxWrapper.From(UpdateAccessor(wrappedInstance, keyword, pattern, whenClause, colonToken));
     public CasePatternSwitchLabelSyntaxWrapper WithColonToken(SyntaxToken colonToken) => CasePatternSwitchLabelSyntaxWrapper.From(WithColonTokenAccessor(wrappedInstance, colonToken));
     public CasePatternSwitchLabelSyntaxWrapper WithKeyword(SyntaxToken keyword) => CasePatternSwitchLabelSyntaxWrapper.From(WithKeywordAccessor(wrappedInstance, keyword));
-    public CasePatternSwitchLabelSyntaxWrapper WithPattern(CSharpSyntaxNode pattern) => CasePatternSwitchLabelSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
-    public CasePatternSwitchLabelSyntaxWrapper WithWhenClause(CSharpSyntaxNode whenClause) => CasePatternSwitchLabelSyntaxWrapper.From(WithWhenClauseAccessor(wrappedInstance, whenClause));
+    public CasePatternSwitchLabelSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => CasePatternSwitchLabelSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
+    public CasePatternSwitchLabelSyntaxWrapper WithWhenClause(WhenClauseSyntaxWrapper whenClause) => CasePatternSwitchLabelSyntaxWrapper.From(WithWhenClauseAccessor(wrappedInstance, whenClause));
 
     public static explicit operator CasePatternSwitchLabelSyntaxWrapper(SyntaxNode node) =>
         From(node);

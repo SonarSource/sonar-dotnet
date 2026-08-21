@@ -39,10 +39,10 @@ public readonly partial struct ParenthesizedPatternSyntaxWrapper : ISyntaxWrappe
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, PatternSyntaxWrapper, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, PatternSyntaxWrapper, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCloseParenToken");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOpenParenToken");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode> WithPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "WithPattern");
+    private static readonly Func<CSharpSyntaxNode, PatternSyntaxWrapper, CSharpSyntaxNode> WithPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PatternSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithPattern");
 
     private ParenthesizedPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -132,10 +132,10 @@ public readonly partial struct ParenthesizedPatternSyntaxWrapper : ISyntaxWrappe
 
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public ParenthesizedPatternSyntaxWrapper Update(SyntaxToken openParenToken, CSharpSyntaxNode pattern, SyntaxToken closeParenToken) => ParenthesizedPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, pattern, closeParenToken));
+    public ParenthesizedPatternSyntaxWrapper Update(SyntaxToken openParenToken, PatternSyntaxWrapper pattern, SyntaxToken closeParenToken) => ParenthesizedPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, pattern, closeParenToken));
     public ParenthesizedPatternSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => ParenthesizedPatternSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
     public ParenthesizedPatternSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => ParenthesizedPatternSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
-    public ParenthesizedPatternSyntaxWrapper WithPattern(CSharpSyntaxNode pattern) => ParenthesizedPatternSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
+    public ParenthesizedPatternSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => ParenthesizedPatternSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
 
     public static explicit operator ParenthesizedPatternSyntaxWrapper(SyntaxNode node) =>
         From(node);

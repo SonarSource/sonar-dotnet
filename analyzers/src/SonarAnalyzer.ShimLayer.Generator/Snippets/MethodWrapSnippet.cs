@@ -33,7 +33,7 @@ public sealed class MethodWrapSnippet : MethodSnippet
         }
         else
         {
-            var types = ((string[])[strategy.CompiletimeTypeSnippet(), .. parameters.Select(x => model[x.ParameterType].CompiletimeTypeSnippet()), returnType.CompiletimeTypeSnippet()]).JoinStr(", ");
+            var types = ((string[])[strategy.CompiletimeTypeSnippet(), .. parameters.Select(x => model[x.ParameterType].ReturnTypeSnippet()), returnType.CompiletimeTypeSnippet()]).JoinStr(", ");
             return $"""
                     private static readonly Func<{types}> {accessorName} = AccessorFactory.CreateMethod<Func<{types}>>(WrappedType, "{member.Name}");
                 """;

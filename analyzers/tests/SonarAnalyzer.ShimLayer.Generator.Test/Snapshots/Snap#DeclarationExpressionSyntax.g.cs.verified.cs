@@ -38,8 +38,8 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
 
     private static readonly Func<ExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<ExpressionSyntax, TypeSyntax, CSharpSyntaxNode, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, TypeSyntax, CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Update");
-    private static readonly Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "WithDesignation");
+    private static readonly Func<ExpressionSyntax, TypeSyntax, VariableDesignationSyntaxWrapper, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, TypeSyntax, VariableDesignationSyntaxWrapper, ExpressionSyntax>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, VariableDesignationSyntaxWrapper, ExpressionSyntax> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, VariableDesignationSyntaxWrapper, ExpressionSyntax>>(WrappedType, "WithDesignation");
     private static readonly Func<ExpressionSyntax, TypeSyntax, ExpressionSyntax> WithTypeAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, TypeSyntax, ExpressionSyntax>>(WrappedType, "WithType");
 
     private DeclarationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
@@ -129,8 +129,8 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
 
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public DeclarationExpressionSyntaxWrapper Update(TypeSyntax type, CSharpSyntaxNode designation) => DeclarationExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type, designation));
-    public DeclarationExpressionSyntaxWrapper WithDesignation(CSharpSyntaxNode designation) => DeclarationExpressionSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
+    public DeclarationExpressionSyntaxWrapper Update(TypeSyntax type, VariableDesignationSyntaxWrapper designation) => DeclarationExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type, designation));
+    public DeclarationExpressionSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => DeclarationExpressionSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
     public DeclarationExpressionSyntaxWrapper WithType(TypeSyntax type) => DeclarationExpressionSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
     public static explicit operator DeclarationExpressionSyntaxWrapper(SyntaxNode node) =>
