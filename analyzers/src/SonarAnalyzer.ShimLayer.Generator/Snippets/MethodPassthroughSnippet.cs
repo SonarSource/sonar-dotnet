@@ -26,6 +26,6 @@ public sealed class MethodPassthroughSnippet : MethodSnippet
 
     protected override string InvocationSnippet() =>
         $"""
-        wrappedInstance.{member.Name}({parameters.JoinStr(", ", SerializeParameterName)})
+        wrappedInstance.{member.Name}({parameters.JoinStr(", ", SerializeParameterArgument)})
         """;
 }

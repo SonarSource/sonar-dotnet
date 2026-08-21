@@ -37,9 +37,19 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
         {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet()} {member.Name}({parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
         """;
 
-    protected static string SerializeParameterName(ParameterInfo parameter) =>
-        SyntaxFacts.GetKeywordKind(parameter.Name) == SyntaxKind.None ? parameter.Name : $"@{parameter.Name}";
+    protected static string SerializeParameterArgument(ParameterInfo parameter)
+    {
+        var name = SerializeParameterName(parameter);
+        return parameter.IsOut ? $"out {name}" : name;
+    }
 
-    private string SerializeParameter(ParameterInfo parameter) =>
-        $"{model[parameter.ParameterType].CompiletimeTypeSnippet()} {SerializeParameterName(parameter)}";
+    protected string SerializeParameter(ParameterInfo parameter)
+    {
+        var prefix = parameter.IsOut ? "out " : null;
+        var underlyingType = parameter.IsOut ? parameter.ParameterType.GetElementType() : parameter.ParameterType;
+        return $"{prefix}{model[underlyingType].CompiletimeTypeSnippet()} {SerializeParameterName(parameter)}";
+    }
+
+    private static string SerializeParameterName(ParameterInfo parameter) =>
+        SyntaxFacts.GetKeywordKind(parameter.Name) == SyntaxKind.None ? parameter.Name : $"@{parameter.Name}";
 }

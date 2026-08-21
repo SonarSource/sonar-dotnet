@@ -23,12 +23,25 @@ public sealed class MethodWrapSnippet : MethodSnippet
 
     public override string AccessorDeclaration()
     {
-        var types = ((string[])[strategy.CompiletimeTypeSnippet(), .. parameters.Select(x => model[x.ParameterType].CompiletimeTypeSnippet()), returnType.CompiletimeTypeSnippet()]).JoinStr(", ");
-        return $"""    private static readonly Func<{types}> {accessorName} = AccessorFactory.CreateMethod<Func<{types}>>(WrappedType, "{member.Name}");""";
+        if (parameters.Any(x => x.IsOut))
+        {
+            var parametersSnippet = ((string[])[$"{strategy.CompiletimeTypeSnippet()} sender", .. parameters.Select(SerializeParameter)]).JoinStr(", ");
+            return $"""
+                    private delegate {returnType.CompiletimeTypeSnippet()} {accessorName}Delegate({parametersSnippet});
+                    private static readonly {accessorName}Delegate {accessorName} = AccessorFactory.CreateMethod<{accessorName}Delegate>(WrappedType, "{member.Name}");
+                """;
+        }
+        else
+        {
+            var types = ((string[])[strategy.CompiletimeTypeSnippet(), .. parameters.Select(x => model[x.ParameterType].CompiletimeTypeSnippet()), returnType.CompiletimeTypeSnippet()]).JoinStr(", ");
+            return $"""
+                    private static readonly Func<{types}> {accessorName} = AccessorFactory.CreateMethod<Func<{types}>>(WrappedType, "{member.Name}");
+                """;
+        }
     }
 
     protected override string InvocationSnippet() =>
         $"""
-        {returnType.ToConversionSnippet($"{accessorName}({parameters.Select(SerializeParameterName).Prepend("wrappedInstance").JoinStr(", ")})")}
+        {returnType.ToConversionSnippet($"{accessorName}({parameters.Select(SerializeParameterArgument).Prepend("wrappedInstance").JoinStr(", ")})")}
         """;
 }
