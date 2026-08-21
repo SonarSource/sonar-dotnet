@@ -37,6 +37,7 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper : I
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenParenToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper>> VariablesAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper>>>(WrappedType, "Variables");
 
+    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper[], CSharpSyntaxNode> AddVariablesAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper[], CSharpSyntaxNode>>(WrappedType, "AddVariables");
     private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
@@ -130,6 +131,7 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper : I
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
 
+    public ParenthesizedVariableDesignationSyntaxWrapper AddVariables(VariableDesignationSyntaxWrapper[] items) => ParenthesizedVariableDesignationSyntaxWrapper.From(AddVariablesAccessor(wrappedInstance, items));
     public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     public ParenthesizedVariableDesignationSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper> variables, SyntaxToken closeParenToken) => ParenthesizedVariableDesignationSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, variables, closeParenToken));

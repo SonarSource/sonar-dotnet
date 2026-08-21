@@ -38,6 +38,7 @@ public readonly partial struct ListPatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenBracketToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>> PatternsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>>>(WrappedType, "Patterns");
 
+    private static readonly Func<CSharpSyntaxNode, PatternSyntaxWrapper[], CSharpSyntaxNode> AddPatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PatternSyntaxWrapper[], CSharpSyntaxNode>>(WrappedType, "AddPatterns");
     private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
@@ -133,6 +134,7 @@ public readonly partial struct ListPatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
 
+    public ListPatternSyntaxWrapper AddPatterns(PatternSyntaxWrapper[] items) => ListPatternSyntaxWrapper.From(AddPatternsAccessor(wrappedInstance, items));
     public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     public ListPatternSyntaxWrapper Update(SyntaxToken openBracketToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns, SyntaxToken closeBracketToken, CSharpSyntaxNode designation) => ListPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openBracketToken, patterns, closeBracketToken, designation));

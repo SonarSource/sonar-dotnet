@@ -121,7 +121,7 @@ public class AccessorFactoryTest
     }
 
     [TestMethod]
-    public void CreateMethod_Shimmed()
+    public void CreateMethod_WithArrayOfCompiletimeType_Shimmed()
     {
         var accessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, ParameterSyntax[], ClassDeclarationSyntax>>(typeof(ClassDeclarationSyntax), "AddParameterListParameters");
         var result = accessor(CreateClassDeclaration(), [CreateParameter()]);
@@ -130,11 +130,25 @@ public class AccessorFactoryTest
     }
 
     [TestMethod]
-    public void CreateMethod_Fallback()
+    public void CreateMethod_WithArrayOfCompiletimeType_Fallback()
     {
         var accessor = AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, ParameterSyntax[], ClassDeclarationSyntax>>(null, "AddParameterListParameters");
         var result = accessor(CreateClassDeclaration(), [CreateParameter()]);
         result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithArrayOfWrappedType_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TupleElementSyntaxWrapper[], TypeSyntax>>(typeof(TupleTypeSyntax), nameof(TupleTypeSyntax.AddElements));
+        accessor(CreateTupleTypeSyntax(), [TupleElementSyntaxWrapper.From(SyntaxFactory.TupleElement(CreateTypeSyntax()))]).Should().BeOfType<TupleTypeSyntax>().Which.Elements.Should().HaveCount(2);
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithArrayOfWrappedType_Fallback()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TupleElementSyntaxWrapper[], TypeSyntax>>(null, nameof(TupleTypeSyntax.AddElements));
+        accessor(CreateTupleTypeSyntax(), [TupleElementSyntaxWrapper.From(SyntaxFactory.TupleElement(CreateTypeSyntax()))]).Should().BeNull();
     }
 
     [TestMethod]
@@ -172,7 +186,7 @@ public class AccessorFactoryTest
 
     private static ClassDeclarationSyntax CreateClassDeclaration() =>
         SyntaxFactory.ClassDeclaration("Sample")
-            .AddParameterListParameters(SyntaxFactory.Parameter(SyntaxFactory.Identifier("First")).WithType(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword))));
+            .AddParameterListParameters(SyntaxFactory.Parameter(SyntaxFactory.Identifier("First")).WithType(CreateTypeSyntax()));
 
     private static CollectionExpressionSyntax CreateCollectionExpression() =>
         SyntaxFactory.CollectionExpression()
@@ -181,6 +195,12 @@ public class AccessorFactoryTest
     private static TupleExpressionSyntax CreateTupleExpressionSyntax() =>
         SyntaxFactory.TupleExpression().AddArguments(SyntaxFactory.Argument(SyntaxFactory.IdentifierName("first")));
 
+    private static TupleTypeSyntax CreateTupleTypeSyntax() =>
+        SyntaxFactory.TupleType().AddElements(SyntaxFactory.TupleElement(CreateTypeSyntax()));
+
     private static ParameterSyntax CreateParameter() =>
-        SyntaxFactory.Parameter(SyntaxFactory.Identifier("Name")).WithType(SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword)));
+        SyntaxFactory.Parameter(SyntaxFactory.Identifier("Name")).WithType(CreateTypeSyntax());
+
+    private static TypeSyntax CreateTypeSyntax() =>
+        SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword));
 }

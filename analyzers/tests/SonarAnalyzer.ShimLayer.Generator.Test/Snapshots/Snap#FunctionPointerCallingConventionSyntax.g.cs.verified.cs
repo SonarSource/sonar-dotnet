@@ -36,6 +36,7 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> ManagedOrUnmanagedKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "ManagedOrUnmanagedKeyword");
     private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> UnmanagedCallingConventionListAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "UnmanagedCallingConventionList");
 
+    private static readonly Func<CSharpSyntaxNode, FunctionPointerUnmanagedCallingConventionSyntaxWrapper[], CSharpSyntaxNode> AddUnmanagedCallingConventionListCallingConventionsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, FunctionPointerUnmanagedCallingConventionSyntaxWrapper[], CSharpSyntaxNode>>(WrappedType, "AddUnmanagedCallingConventionListCallingConventions");
     private static readonly Func<CSharpSyntaxNode, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, Int32, Boolean>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Update");
@@ -127,6 +128,7 @@ public readonly partial struct FunctionPointerCallingConventionSyntaxWrapper : I
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
 
+    public FunctionPointerCallingConventionSyntaxWrapper AddUnmanagedCallingConventionListCallingConventions(FunctionPointerUnmanagedCallingConventionSyntaxWrapper[] items) => FunctionPointerCallingConventionSyntaxWrapper.From(AddUnmanagedCallingConventionListCallingConventionsAccessor(wrappedInstance, items));
     public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     public FunctionPointerCallingConventionSyntaxWrapper Update(SyntaxToken managedOrUnmanagedKeyword, CSharpSyntaxNode unmanagedCallingConventionList) => FunctionPointerCallingConventionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, managedOrUnmanagedKeyword, unmanagedCallingConventionList));

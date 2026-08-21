@@ -24,6 +24,7 @@ namespace SonarAnalyzer.ShimLayer.Common;
 internal static class AccessorFactory
 {
     private static readonly MethodInfo UnboundEnumerableSelectMethod = typeof(Enumerable).GetMethods().Single(IsEnumerableSelect);
+    private static readonly MethodInfo UnboundEnumerableToArrayMethod = typeof(Enumerable).GetMethod(nameof(Enumerable.ToArray));
 
     public static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName) where TFunc : Delegate
     {
@@ -35,7 +36,12 @@ internal static class AccessorFactory
             && types.ResultType.IsAssignableFrom(method.ReturnType)
             && method.GetParameters() is var parameters
             && parameters.Length == types.AllTypes.Length - 2       // Except the first TSender and last TResult
-            && parameters.Select((x, i) => x.ParameterType.Equals(types.AllTypes[i + 1])).All(x => x);
+            && parameters.Select((x, i) => IsParameterMatch(types.AllTypes[i + 1], x.ParameterType)).All(x => x);
+
+        static bool IsParameterMatch(Type compiletime, Type runtime) =>
+            compiletime.Equals(runtime)
+            || (compiletime.IsArray && runtime.IsArray && IsParameterMatch(compiletime.GetElementType(), runtime.GetElementType()))
+            || TypeRegister.LatestType(compiletime) == runtime;
     }
 
     public static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate
@@ -104,7 +110,7 @@ internal static class AccessorFactory
         {
             var sender = WrapConvert(senderLambdaParameter, runtimeSenderType);
             var methodParameters = method.GetParameters();
-            var result = Expression.Call(sender, method, lambdaParameters.Skip(1).Select((x, i) => WrapConvert(x, methodParameters[i].ParameterType)));
+            var result = Expression.Call(sender, method, lambdaParameters.Skip(1).Select((x, i) => ConvertArgument(x, methodParameters[i].ParameterType)));
             if (types.ResultType.IsGenericType && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>) && method.ReturnType.GenericTypeArguments.Single() is var runtimeTypeArgument && typeof(IOperation).IsAssignableFrom(runtimeTypeArgument))
             {
                 var castUp = typeof(ImmutableArray<IOperation>).GetMethod(nameof(ImmutableArray<>.CastUp)).MakeGenericMethod(runtimeTypeArgument);
@@ -129,6 +135,26 @@ internal static class AccessorFactory
             {
                 return result;
             }
+        }
+    }
+
+    private static Expression ConvertArgument(Expression expression, Type type)
+    {
+        if (type.IsArray    // XxxWrapper[] => Xxx[]
+            && !type.IsAssignableFrom(expression.Type)
+            && expression.Type.GetElementType() is var wrapperType
+            && wrapperType.GetProperty("WrappedInstance") is { } wrappedInstance)
+        {
+            // Generate: result.Select(x => (Xxx)x.WrappedInstance).ToArray()
+            var itemRuntimeType = type.GetElementType();
+            var selectorParameter = Expression.Parameter(wrapperType, "x");
+            var selectorLambda = Expression.Lambda(WrapConvert(Expression.Property(selectorParameter, wrappedInstance), itemRuntimeType), selectorParameter);
+            var items = Expression.Call(UnboundEnumerableSelectMethod.MakeGenericMethod(wrapperType, itemRuntimeType), expression, selectorLambda);
+            return Expression.Call(UnboundEnumerableToArrayMethod.MakeGenericMethod(itemRuntimeType), items);
+        }
+        else
+        {
+            return WrapConvert(expression, type);
         }
     }
 

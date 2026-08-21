@@ -39,6 +39,7 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBraceTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBraceToken");
     private static readonly Func<ExpressionSyntax, SyntaxToken> SwitchKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "SwitchKeyword");
 
+    private static readonly Func<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper[], ExpressionSyntax> AddArmsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SwitchExpressionArmSyntaxWrapper[], ExpressionSyntax>>(WrappedType, "AddArms");
     private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, SyntaxToken, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, SyntaxToken, SyntaxToken, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper>, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
@@ -136,6 +137,7 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
 
+    public SwitchExpressionSyntaxWrapper AddArms(SwitchExpressionArmSyntaxWrapper[] items) => SwitchExpressionSyntaxWrapper.From(AddArmsAccessor(wrappedInstance, items));
     public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     public SwitchExpressionSyntaxWrapper Update(ExpressionSyntax governingExpression, SyntaxToken switchKeyword, SyntaxToken openBraceToken, SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> arms, SyntaxToken closeBraceToken) => SwitchExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, governingExpression, switchKeyword, openBraceToken, arms, closeBraceToken));

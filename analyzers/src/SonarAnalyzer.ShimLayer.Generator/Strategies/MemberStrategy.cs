@@ -43,13 +43,9 @@ public abstract class MemberStrategy : Strategy
     private static Strategy ValidMethodReturnType(StrategyModel model, MemberDescriptor member) =>
         member.Member is MethodInfo { ContainsGenericParameters: false } mi
         && model[mi.ReturnType] is { IsSupported: true } returnType
-        && mi.GetParameters().All(x => model[x.ParameterType].IsSupported && !IsTemporarySkipArray(x.ParameterType, model))
+        && mi.GetParameters().All(x => model[x.ParameterType].IsSupported)
             ? returnType
             : null;
-
-    // ToDo: Add support for: WrappedType[] methodParam, it will need conversion from WrappedTypeWrapper[] -> WrappedType[] on the lambda invocation side
-    private static bool IsTemporarySkipArray(Type type, StrategyModel model) =>
-        type.IsArray && model[type.GetElementType()] is WrapStrategy;
 
     protected record struct MemberSnippets(Snippet[] Properties, Snippet[] Methods);
 }

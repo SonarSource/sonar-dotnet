@@ -37,6 +37,7 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     private static readonly Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>> ElementsAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>>>(WrappedType, "Elements");
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenBracketToken");
 
+    private static readonly Func<ExpressionSyntax, CollectionElementSyntaxWrapper[], ExpressionSyntax> AddElementsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, CollectionElementSyntaxWrapper[], ExpressionSyntax>>(WrappedType, "AddElements");
     private static readonly Func<ExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
@@ -130,6 +131,7 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     public SyntaxKind Kind() => wrappedInstance.Kind();
     public String ToFullString() => wrappedInstance.ToFullString();
 
+    public CollectionExpressionSyntaxWrapper AddElements(CollectionElementSyntaxWrapper[] items) => CollectionExpressionSyntaxWrapper.From(AddElementsAccessor(wrappedInstance, items));
     public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     public CollectionExpressionSyntaxWrapper Update(SyntaxToken openBracketToken, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper> elements, SyntaxToken closeBracketToken) => CollectionExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openBracketToken, elements, closeBracketToken));

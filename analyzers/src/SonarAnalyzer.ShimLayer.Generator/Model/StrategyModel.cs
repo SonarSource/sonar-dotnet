@@ -38,6 +38,7 @@ public class StrategyModel : IEnumerable<Strategy>
                     { Name: "SeparatedSyntaxList`1" } when this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument => new SeparatedSyntaxListStrategy(key, typeArgument),
                     { Name: "ImmutableArray`1" } when this[key.GenericTypeArguments.Single()] is OperationWrapStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
                     { Name: "Void" } => new SkipStrategy(key),    // NET-4372 not supported yet
+                    { IsArray: true } => new ArrayStrategy(key, this[key.GetElementType()]),
                     { IsGenericType: true } => new GenericTypeStrategy(key, key.GenericTypeArguments.Select(x => this[x]).ToArray()),
                     _ => new NoChangeStrategy(key)
                 };
