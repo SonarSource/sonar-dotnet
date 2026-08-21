@@ -26,6 +26,8 @@ namespace SonarAnalyzer.Core.Test.ShimLayer.Common;
 [TestClass]
 public class AccessorFactoryTest
 {
+    private delegate bool TryGetValueAccessorDelegate<T, TKey, TValue>(T instance, TKey key, out TValue value);
+
     [TestMethod]
     public void NullInstance_Throws()
     {
@@ -163,7 +165,7 @@ public class AccessorFactoryTest
     [TestMethod]
     public void CreateMethod_WithOutParameter_Shimmed()
     {
-        var accessor = AccessorFactory.CreateMethod<TryGetValueAccessor<TestAnalyzerConfigOptions, string, string>>(typeof(TestAnalyzerConfigOptions), nameof(AnalyzerConfigOptions.TryGetValue));
+        var accessor = AccessorFactory.CreateMethod<TryGetValueAccessorDelegate<TestAnalyzerConfigOptions, string, string>>(typeof(TestAnalyzerConfigOptions), nameof(AnalyzerConfigOptions.TryGetValue));
         accessor(new TestAnalyzerConfigOptions(), "AnyKey", out var value).Should().BeTrue();
         value.Should().Be("ExistingValue");
     }
@@ -171,7 +173,7 @@ public class AccessorFactoryTest
     [TestMethod]
     public void CreateMethod_WithOutParameter_Fallback()
     {
-        var accessor = AccessorFactory.CreateMethod<TryGetValueAccessor<TestAnalyzerConfigOptions, string, string>>(null, nameof(AnalyzerConfigOptions.TryGetValue));
+        var accessor = AccessorFactory.CreateMethod<TryGetValueAccessorDelegate<TestAnalyzerConfigOptions, string, string>>(null, nameof(AnalyzerConfigOptions.TryGetValue));
         accessor(new TestAnalyzerConfigOptions(), "AnyKey", out var value).Should().BeFalse();
         value.Should().BeNull();
     }

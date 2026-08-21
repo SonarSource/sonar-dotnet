@@ -14,7 +14,6 @@ namespace StyleCop.Analyzers.Lightup
     public static class SyntaxFactsEx
     {
         private static readonly Func<SyntaxNode, string> TryGetInferredMemberNameAccessor;
-        private static readonly Func<string, bool> IsReservedTupleElementNameAccessor;
 
         static SyntaxFactsEx()
         {
@@ -44,31 +43,11 @@ namespace StyleCop.Analyzers.Lightup
             {
                 TryGetInferredMemberNameAccessor = FallbackAccessor;
             }
-
-            var isReservedTupleElementNameMethod = typeof(SyntaxFacts).GetTypeInfo().GetDeclaredMethod(nameof(IsReservedTupleElementName));
-            if (isReservedTupleElementNameMethod is object)
-            {
-                var elementNameParameter = Expression.Parameter(typeof(string), "elementName");
-                Expression<Func<string, bool>> expression =
-                    Expression.Lambda<Func<string, bool>>(
-                        Expression.Call(isReservedTupleElementNameMethod, elementNameParameter),
-                        elementNameParameter);
-                IsReservedTupleElementNameAccessor = expression.Compile();
-            }
-            else
-            {
-                IsReservedTupleElementNameAccessor = _ => false;
-            }
         }
 
         public static string TryGetInferredMemberName(this SyntaxNode syntax)
         {
             return TryGetInferredMemberNameAccessor(syntax);
-        }
-
-        public static bool IsReservedTupleElementName(string elementName)
-        {
-            return IsReservedTupleElementNameAccessor(elementName);
         }
     }
 }
