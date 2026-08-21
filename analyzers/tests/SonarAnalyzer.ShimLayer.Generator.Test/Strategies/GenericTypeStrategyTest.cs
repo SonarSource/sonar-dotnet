@@ -23,26 +23,44 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 public class GenericTypeStrategyTest
 {
     [TestMethod]
-    public void IsSupported_NoChangeStrategy_True()
+    public void SingleArgument_NoChangeStrategy_IsSupported()
     {
         var sut = new GenericTypeStrategy(typeof(List<int>), [new NoChangeStrategy(typeof(int))]);
-        sut.Generate([]).Should().BeNull();
         sut.IsSupported.Should().BeTrue();
+        sut.Generate([]).Should().BeNull();
+        sut.CompiletimeTypeSnippet().Should().Be("List<Int32>");
     }
 
     [TestMethod]
-    public void IsSupported_SkipStrategy_False()
+    public void SingleArgument_SkipStrategy_NotSupported()
     {
         var sut = new GenericTypeStrategy(typeof(List<Delegate>), [new SkipStrategy(typeof(Delegate))]);
-        sut.Generate([]).Should().BeNull();
         sut.IsSupported.Should().BeFalse();
+        sut.Generate([]).Should().BeNull();
     }
 
     [TestMethod]
-    public void IsSupported_WrapStrategy_False()
+    public void SingleArgument_WrapStrategy_NotSupported()
     {
         var sut = new GenericTypeStrategy(typeof(List<FileScopedNamespaceDeclarationSyntax>), [new SyntaxNodeWrapStrategy(typeof(FileScopedNamespaceDeclarationSyntax), typeof(SyntaxNode), [])]);
-        sut.Generate([]).Should().BeNull();
         sut.IsSupported.Should().BeFalse();
+        sut.Generate([]).Should().BeNull();
+    }
+
+    [TestMethod]
+    public void MultipleArguments_AllSupportedStrategies_IsSupported()
+    {
+        var sut = new GenericTypeStrategy(typeof(Dictionary<int, string>), [new NoChangeStrategy(typeof(int)), new NoChangeStrategy(typeof(string))]);
+        sut.IsSupported.Should().BeTrue();
+        sut.Generate([]).Should().BeNull();
+        sut.CompiletimeTypeSnippet().Should().Be("Dictionary<Int32, String>");
+    }
+
+    [TestMethod]
+    public void MultipleArguments_OneUnsupportedStrategy_NotSupported()
+    {
+        var sut = new GenericTypeStrategy(typeof(Dictionary<int, string>), [new SkipStrategy(typeof(int)), new NoChangeStrategy(typeof(string))]);
+        sut.IsSupported.Should().BeFalse();
+        sut.Generate([]).Should().BeNull();
     }
 }

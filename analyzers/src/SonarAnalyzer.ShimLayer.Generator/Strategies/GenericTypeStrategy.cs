@@ -27,7 +27,7 @@ public class GenericTypeStrategy : Strategy
     public GenericTypeStrategy(Type latest, Strategy[] typeArguments) : base(latest)
     {
         this.typeArguments = typeArguments;
-        type = latest.Name.Replace("`1", null).Replace("`2", null) + "<" + typeArguments.JoinStr(", ", x => x.CompiletimeTypeSnippet()) + ">";
+        type = latest.Name.Split('`')[0] + "<" + typeArguments.JoinStr(", ", x => x.CompiletimeTypeSnippet()) + ">";
     }
 
     public override string ReturnTypeSnippet() =>
