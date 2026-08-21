@@ -31,14 +31,14 @@ public static partial class FinallyClauseSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(FinallyClauseSyntax);
 
     private static readonly Func<FinallyClauseSyntax, AttributeListSyntax[], FinallyClauseSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, AttributeListSyntax[], FinallyClauseSyntax>>(WrappedType, "AddBlockAttributeLists");
-    private static readonly Func<FinallyClauseSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<FinallyClauseSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<FinallyClauseSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<FinallyClauseSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(FinallyClauseSyntax wrappedInstance)
     {
 
         public FinallyClauseSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

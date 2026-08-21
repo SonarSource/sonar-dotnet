@@ -30,13 +30,13 @@ public static partial class XmlCommentSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(XmlCommentSyntax);
 
-    private static readonly Func<XmlCommentSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<XmlCommentSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<XmlCommentSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<XmlCommentSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<XmlCommentSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<XmlCommentSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<XmlCommentSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<XmlCommentSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(XmlCommentSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

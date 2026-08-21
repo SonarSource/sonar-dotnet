@@ -30,13 +30,13 @@ public static partial class DefaultSwitchLabelSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(DefaultSwitchLabelSyntax);
 
-    private static readonly Func<DefaultSwitchLabelSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<DefaultSwitchLabelSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<DefaultSwitchLabelSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<DefaultSwitchLabelSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<DefaultSwitchLabelSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<DefaultSwitchLabelSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<DefaultSwitchLabelSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<DefaultSwitchLabelSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(DefaultSwitchLabelSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

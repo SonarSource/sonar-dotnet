@@ -33,8 +33,8 @@ public static partial class ForStatementSyntaxShimExtensions
     private static readonly Func<ForStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<ForStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     private static readonly Func<ForStatementSyntax, AttributeListSyntax[], ForStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ForStatementSyntax, AttributeListSyntax[], ForStatementSyntax>>(WrappedType, "AddAttributeLists");
-    private static readonly Func<ForStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ForStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<ForStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ForStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ForStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ForStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ForStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ForStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ForStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, VariableDeclarationSyntax, SeparatedSyntaxList<ExpressionSyntax>, SyntaxToken, ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ExpressionSyntax>, SyntaxToken, StatementSyntax, ForStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ForStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, VariableDeclarationSyntax, SeparatedSyntaxList<ExpressionSyntax>, SyntaxToken, ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ExpressionSyntax>, SyntaxToken, StatementSyntax, ForStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<ForStatementSyntax, SyntaxList<AttributeListSyntax>, ForStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ForStatementSyntax, SyntaxList<AttributeListSyntax>, ForStatementSyntax>>(WrappedType, "WithAttributeLists");
 
@@ -43,8 +43,8 @@ public static partial class ForStatementSyntaxShimExtensions
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
 
         public ForStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ForStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken forKeyword, SyntaxToken openParenToken, VariableDeclarationSyntax declaration, SeparatedSyntaxList<ExpressionSyntax> initializers, SyntaxToken firstSemicolonToken, ExpressionSyntax condition, SyntaxToken secondSemicolonToken, SeparatedSyntaxList<ExpressionSyntax> incrementors, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, forKeyword, openParenToken, declaration, initializers, firstSemicolonToken, condition, secondSemicolonToken, incrementors, closeParenToken, statement);
         public ForStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

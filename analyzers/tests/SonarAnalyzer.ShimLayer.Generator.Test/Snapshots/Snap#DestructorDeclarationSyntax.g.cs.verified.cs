@@ -33,8 +33,8 @@ public static partial class DestructorDeclarationSyntaxShimExtensions
     private static readonly Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax> ExpressionBodyAccessor = AccessorFactory.CreateProperty<Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax>>(WrappedType, "ExpressionBody");
 
     private static readonly Func<DestructorDeclarationSyntax, AttributeListSyntax[], DestructorDeclarationSyntax> AddBodyAttributeListsAccessor = AccessorFactory.CreateMethod<Func<DestructorDeclarationSyntax, AttributeListSyntax[], DestructorDeclarationSyntax>>(WrappedType, "AddBodyAttributeLists");
-    private static readonly Func<DestructorDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<DestructorDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<DestructorDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<DestructorDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<DestructorDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<DestructorDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<DestructorDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<DestructorDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<DestructorDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, ParameterListSyntax, BlockSyntax, ArrowExpressionClauseSyntax, SyntaxToken, DestructorDeclarationSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<DestructorDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, ParameterListSyntax, BlockSyntax, ArrowExpressionClauseSyntax, SyntaxToken, DestructorDeclarationSyntax>>(WrappedType, "Update");
     private static readonly Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax, DestructorDeclarationSyntax> WithExpressionBodyAccessor = AccessorFactory.CreateMethod<Func<DestructorDeclarationSyntax, ArrowExpressionClauseSyntax, DestructorDeclarationSyntax>>(WrappedType, "WithExpressionBody");
 
@@ -43,8 +43,8 @@ public static partial class DestructorDeclarationSyntaxShimExtensions
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
 
         public DestructorDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public DestructorDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken tildeToken, SyntaxToken identifier, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, tildeToken, identifier, parameterList, body, expressionBody, semicolonToken);
         public DestructorDeclarationSyntax WithExpressionBody(ArrowExpressionClauseSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
     }

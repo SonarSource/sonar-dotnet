@@ -33,8 +33,8 @@ public static partial class YieldStatementSyntaxShimExtensions
     private static readonly Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     private static readonly Func<YieldStatementSyntax, AttributeListSyntax[], YieldStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, AttributeListSyntax[], YieldStatementSyntax>>(WrappedType, "AddAttributeLists");
-    private static readonly Func<YieldStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<YieldStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<YieldStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<YieldStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, YieldStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, YieldStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, YieldStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, YieldStatementSyntax>>(WrappedType, "WithAttributeLists");
 
@@ -43,8 +43,8 @@ public static partial class YieldStatementSyntaxShimExtensions
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
 
         public YieldStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public YieldStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken yieldKeyword, SyntaxToken returnOrBreakKeyword, ExpressionSyntax expression, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, yieldKeyword, returnOrBreakKeyword, expression, semicolonToken);
         public YieldStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

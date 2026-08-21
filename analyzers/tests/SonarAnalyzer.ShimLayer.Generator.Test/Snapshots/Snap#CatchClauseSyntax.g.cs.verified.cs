@@ -31,14 +31,14 @@ public static partial class CatchClauseSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(CatchClauseSyntax);
 
     private static readonly Func<CatchClauseSyntax, AttributeListSyntax[], CatchClauseSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CatchClauseSyntax, AttributeListSyntax[], CatchClauseSyntax>>(WrappedType, "AddBlockAttributeLists");
-    private static readonly Func<CatchClauseSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CatchClauseSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<CatchClauseSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CatchClauseSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CatchClauseSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CatchClauseSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CatchClauseSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CatchClauseSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(CatchClauseSyntax wrappedInstance)
     {
 
         public CatchClauseSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

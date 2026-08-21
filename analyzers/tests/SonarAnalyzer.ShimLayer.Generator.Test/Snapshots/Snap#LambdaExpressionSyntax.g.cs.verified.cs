@@ -39,8 +39,8 @@ public static partial class LambdaExpressionSyntaxShimExtensions
     private static readonly Func<LambdaExpressionSyntax, AttributeListSyntax[], AnonymousFunctionExpressionSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, AttributeListSyntax[], AnonymousFunctionExpressionSyntax>>(WrappedType, "AddBlockAttributeLists");
     private static readonly Func<LambdaExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax> AddBlockStatementsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax>>(WrappedType, "AddBlockStatements");
     private static readonly Func<LambdaExpressionSyntax, SyntaxToken[], LambdaExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken[], LambdaExpressionSyntax>>(WrappedType, "AddModifiers");
-    private static readonly Func<LambdaExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<LambdaExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<LambdaExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<LambdaExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax> WithArrowTokenAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax>>(WrappedType, "WithArrowToken");
     private static readonly Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax> WithAsyncKeywordAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax>>(WrappedType, "WithAsyncKeyword");
     private static readonly Func<LambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, LambdaExpressionSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, LambdaExpressionSyntax>>(WrappedType, "WithAttributeLists");
@@ -60,8 +60,8 @@ public static partial class LambdaExpressionSyntaxShimExtensions
         public AnonymousFunctionExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
         public AnonymousFunctionExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
         public LambdaExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public LambdaExpressionSyntax WithArrowToken(SyntaxToken arrowToken) => WithArrowTokenAccessor(wrappedInstance, arrowToken);
         public LambdaExpressionSyntax WithAsyncKeyword(SyntaxToken asyncKeyword) => WithAsyncKeywordAccessor(wrappedInstance, asyncKeyword);
         public LambdaExpressionSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

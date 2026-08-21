@@ -35,8 +35,8 @@ public static partial class GlobalStatementSyntaxShimExtensions
 
     private static readonly Func<GlobalStatementSyntax, AttributeListSyntax[], GlobalStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, AttributeListSyntax[], GlobalStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<GlobalStatementSyntax, SyntaxToken[], GlobalStatementSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, SyntaxToken[], GlobalStatementSyntax>>(WrappedType, "AddModifiers");
-    private static readonly Func<GlobalStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<GlobalStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<GlobalStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<GlobalStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, StatementSyntax, GlobalStatementSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, StatementSyntax, GlobalStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>, GlobalStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, SyntaxList<AttributeListSyntax>, GlobalStatementSyntax>>(WrappedType, "WithAttributeLists");
     private static readonly Func<GlobalStatementSyntax, SyntaxTokenList, GlobalStatementSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<GlobalStatementSyntax, SyntaxTokenList, GlobalStatementSyntax>>(WrappedType, "WithModifiers");
@@ -48,8 +48,8 @@ public static partial class GlobalStatementSyntaxShimExtensions
 
         public GlobalStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public GlobalStatementSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public GlobalStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, StatementSyntax statement) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, statement);
         public GlobalStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public GlobalStatementSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);

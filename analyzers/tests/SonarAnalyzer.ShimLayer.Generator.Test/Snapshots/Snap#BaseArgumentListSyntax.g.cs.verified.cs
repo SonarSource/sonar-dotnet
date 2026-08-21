@@ -31,16 +31,16 @@ public static partial class BaseArgumentListSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(BaseArgumentListSyntax);
 
     private static readonly Func<BaseArgumentListSyntax, ArgumentSyntax[], BaseArgumentListSyntax> AddArgumentsAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, ArgumentSyntax[], BaseArgumentListSyntax>>(WrappedType, "AddArguments");
-    private static readonly Func<BaseArgumentListSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BaseArgumentListSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseArgumentListSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseArgumentListSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseArgumentListSyntax, SeparatedSyntaxList<ArgumentSyntax>, BaseArgumentListSyntax> WithArgumentsAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, SeparatedSyntaxList<ArgumentSyntax>, BaseArgumentListSyntax>>(WrappedType, "WithArguments");
 
     extension(BaseArgumentListSyntax wrappedInstance)
     {
 
         public BaseArgumentListSyntax AddArguments(ArgumentSyntax[] items) => AddArgumentsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseArgumentListSyntax WithArguments(SeparatedSyntaxList<ArgumentSyntax> arguments) => WithArgumentsAccessor(wrappedInstance, arguments);
     }
 }

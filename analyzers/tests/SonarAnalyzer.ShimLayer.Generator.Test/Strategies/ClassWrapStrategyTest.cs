@@ -79,7 +79,7 @@ public class ClassWrapStrategyTest
 
                 public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
-                public Boolean TryGetValue(String key, out String value) => wrappedInstance.TryGetValue(key, out value);
+                public bool TryGetValue(string key, out string value) => wrappedInstance.TryGetValue(key, out value);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
                     From(node);
@@ -155,7 +155,7 @@ public class ClassWrapStrategyTest
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
-                private delegate Boolean TryGetValueAccessorDelegate(TypeDeclarationSyntax sender, String key, out String value);
+                private delegate bool TryGetValueAccessorDelegate(TypeDeclarationSyntax sender, string key, out string value);
                 private static readonly TryGetValueAccessorDelegate TryGetValueAccessor = AccessorFactory.CreateMethod<TryGetValueAccessorDelegate>(WrappedType, "TryGetValue");
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
@@ -169,7 +169,7 @@ public class ClassWrapStrategyTest
 
                 public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
-                public Boolean TryGetValue(String key, out String value) => (Boolean)TryGetValueAccessor(wrappedInstance, key, out value);
+                public bool TryGetValue(string key, out string value) => (bool)TryGetValueAccessor(wrappedInstance, key, out value);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
                     From(node);

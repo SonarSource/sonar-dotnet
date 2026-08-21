@@ -30,16 +30,16 @@ public static partial class BranchingDirectiveTriviaSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(BranchingDirectiveTriviaSyntax);
 
-    private static readonly Func<BranchingDirectiveTriviaSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BranchingDirectiveTriviaSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BranchingDirectiveTriviaSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BranchingDirectiveTriviaSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax> WithEndOfDirectiveTokenAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax>>(WrappedType, "WithEndOfDirectiveToken");
     private static readonly Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax> WithHashTokenAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax>>(WrappedType, "WithHashToken");
 
     extension(BranchingDirectiveTriviaSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BranchingDirectiveTriviaSyntax WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken);
         public BranchingDirectiveTriviaSyntax WithHashToken(SyntaxToken hashToken) => WithHashTokenAccessor(wrappedInstance, hashToken);
     }

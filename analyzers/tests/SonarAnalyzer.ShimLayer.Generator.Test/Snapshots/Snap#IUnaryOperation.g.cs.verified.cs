@@ -35,10 +35,10 @@ public readonly partial struct IUnaryOperationWrapper : IOperationWrapper
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "ConstrainedToType");
-    private static readonly Func<IOperation, Boolean> IsCheckedAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsChecked");
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");
-    private static readonly Func<IOperation, Boolean> IsLiftedAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsLifted");
-    private static readonly Func<IOperation, String> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, String>>(WrappedType, "Language");
+    private static readonly Func<IOperation, bool> IsCheckedAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsChecked");
+    private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, bool> IsLiftedAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsLifted");
+    private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, IOperation> OperandAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Operand");
     private static readonly Func<IOperation, UnaryOperatorKind> OperatorKindAccessor = AccessorFactory.CreateProperty<Func<IOperation, UnaryOperatorKind>>(WrappedType, "OperatorKind");
     private static readonly Func<IOperation, IMethodSymbol> OperatorMethodAccessor = AccessorFactory.CreateProperty<Func<IOperation, IMethodSymbol>>(WrappedType, "OperatorMethod");
@@ -61,10 +61,10 @@ public readonly partial struct IUnaryOperationWrapper : IOperationWrapper
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public ITypeSymbol ConstrainedToType => (ITypeSymbol)ConstrainedToTypeAccessor(wrappedInstance);
-    public Boolean IsChecked => (Boolean)IsCheckedAccessor(wrappedInstance);
-    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
-    public Boolean IsLifted => (Boolean)IsLiftedAccessor(wrappedInstance);
-    public String Language => (String)LanguageAccessor(wrappedInstance);
+    public bool IsChecked => (bool)IsCheckedAccessor(wrappedInstance);
+    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
+    public bool IsLifted => (bool)IsLiftedAccessor(wrappedInstance);
+    public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Operand => OperandAccessor(wrappedInstance);
     public UnaryOperatorKind OperatorKind => (UnaryOperatorKind)OperatorKindAccessor(wrappedInstance);
     public IMethodSymbol OperatorMethod => (IMethodSymbol)OperatorMethodAccessor(wrappedInstance);

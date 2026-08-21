@@ -31,16 +31,16 @@ public static partial class BaseCrefParameterListSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(BaseCrefParameterListSyntax);
 
     private static readonly Func<BaseCrefParameterListSyntax, CrefParameterSyntax[], BaseCrefParameterListSyntax> AddParametersAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, CrefParameterSyntax[], BaseCrefParameterListSyntax>>(WrappedType, "AddParameters");
-    private static readonly Func<BaseCrefParameterListSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BaseCrefParameterListSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseCrefParameterListSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseCrefParameterListSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseCrefParameterListSyntax, SeparatedSyntaxList<CrefParameterSyntax>, BaseCrefParameterListSyntax> WithParametersAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, SeparatedSyntaxList<CrefParameterSyntax>, BaseCrefParameterListSyntax>>(WrappedType, "WithParameters");
 
     extension(BaseCrefParameterListSyntax wrappedInstance)
     {
 
         public BaseCrefParameterListSyntax AddParameters(CrefParameterSyntax[] items) => AddParametersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseCrefParameterListSyntax WithParameters(SeparatedSyntaxList<CrefParameterSyntax> parameters) => WithParametersAccessor(wrappedInstance, parameters);
     }
 }

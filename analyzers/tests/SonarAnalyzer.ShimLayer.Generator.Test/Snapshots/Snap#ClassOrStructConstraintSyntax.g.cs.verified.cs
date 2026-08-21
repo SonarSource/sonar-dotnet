@@ -32,8 +32,8 @@ public static partial class ClassOrStructConstraintSyntaxShimExtensions
 
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxToken> QuestionTokenAccessor = AccessorFactory.CreateProperty<Func<ClassOrStructConstraintSyntax, SyntaxToken>>(WrappedType, "QuestionToken");
 
-    private static readonly Func<ClassOrStructConstraintSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<ClassOrStructConstraintSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ClassOrStructConstraintSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ClassOrStructConstraintSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxToken, SyntaxToken, ClassOrStructConstraintSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, SyntaxToken, SyntaxToken, ClassOrStructConstraintSyntax>>(WrappedType, "Update");
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxToken, ClassOrStructConstraintSyntax> WithQuestionTokenAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, SyntaxToken, ClassOrStructConstraintSyntax>>(WrappedType, "WithQuestionToken");
 
@@ -41,8 +41,8 @@ public static partial class ClassOrStructConstraintSyntaxShimExtensions
     {
         public SyntaxToken QuestionToken => (SyntaxToken)QuestionTokenAccessor(wrappedInstance);
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ClassOrStructConstraintSyntax Update(SyntaxToken classOrStructKeyword, SyntaxToken questionToken) => UpdateAccessor_Overload2(wrappedInstance, classOrStructKeyword, questionToken);
         public ClassOrStructConstraintSyntax WithQuestionToken(SyntaxToken questionToken) => WithQuestionTokenAccessor(wrappedInstance, questionToken);
     }

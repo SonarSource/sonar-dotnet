@@ -30,24 +30,24 @@ public static partial class SimpleNameSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(SimpleNameSyntax);
 
-    private static readonly Func<SimpleNameSyntax, Boolean> IsNintAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, Boolean>>(WrappedType, "IsNint");
-    private static readonly Func<SimpleNameSyntax, Boolean> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, Boolean>>(WrappedType, "IsNotNull");
-    private static readonly Func<SimpleNameSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, Boolean>>(WrappedType, "IsNuint");
-    private static readonly Func<SimpleNameSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, Boolean>>(WrappedType, "IsUnmanaged");
+    private static readonly Func<SimpleNameSyntax, bool> IsNintAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, bool>>(WrappedType, "IsNint");
+    private static readonly Func<SimpleNameSyntax, bool> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, bool>>(WrappedType, "IsNotNull");
+    private static readonly Func<SimpleNameSyntax, bool> IsNuintAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, bool>>(WrappedType, "IsNuint");
+    private static readonly Func<SimpleNameSyntax, bool> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<SimpleNameSyntax, bool>>(WrappedType, "IsUnmanaged");
 
-    private static readonly Func<SimpleNameSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SimpleNameSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<SimpleNameSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SimpleNameSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<SimpleNameSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SimpleNameSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<SimpleNameSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SimpleNameSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<SimpleNameSyntax, SyntaxToken, SimpleNameSyntax> WithIdentifierAccessor = AccessorFactory.CreateMethod<Func<SimpleNameSyntax, SyntaxToken, SimpleNameSyntax>>(WrappedType, "WithIdentifier");
 
     extension(SimpleNameSyntax wrappedInstance)
     {
-        public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
-        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
-        public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
-        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
+        public bool IsNint => (bool)IsNintAccessor(wrappedInstance);
+        public bool IsNotNull => (bool)IsNotNullAccessor(wrappedInstance);
+        public bool IsNuint => (bool)IsNuintAccessor(wrappedInstance);
+        public bool IsUnmanaged => (bool)IsUnmanagedAccessor(wrappedInstance);
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public SimpleNameSyntax WithIdentifier(SyntaxToken identifier) => WithIdentifierAccessor(wrappedInstance, identifier);
     }
 }

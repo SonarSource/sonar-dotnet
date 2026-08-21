@@ -34,8 +34,8 @@ public static partial class CheckedStatementSyntaxShimExtensions
 
     private static readonly Func<CheckedStatementSyntax, AttributeListSyntax[], CheckedStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, AttributeListSyntax[], CheckedStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<CheckedStatementSyntax, AttributeListSyntax[], CheckedStatementSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, AttributeListSyntax[], CheckedStatementSyntax>>(WrappedType, "AddBlockAttributeLists");
-    private static readonly Func<CheckedStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<CheckedStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<CheckedStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<CheckedStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, CheckedStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, CheckedStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>, CheckedStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CheckedStatementSyntax, SyntaxList<AttributeListSyntax>, CheckedStatementSyntax>>(WrappedType, "WithAttributeLists");
 
@@ -45,8 +45,8 @@ public static partial class CheckedStatementSyntaxShimExtensions
 
         public CheckedStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public CheckedStatementSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public CheckedStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken keyword, BlockSyntax block) => UpdateAccessor(wrappedInstance, attributeLists, keyword, block);
         public CheckedStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

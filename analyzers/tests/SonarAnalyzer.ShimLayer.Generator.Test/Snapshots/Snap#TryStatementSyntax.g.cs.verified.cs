@@ -34,8 +34,8 @@ public static partial class TryStatementSyntaxShimExtensions
 
     private static readonly Func<TryStatementSyntax, AttributeListSyntax[], TryStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, AttributeListSyntax[], TryStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<TryStatementSyntax, AttributeListSyntax[], TryStatementSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, AttributeListSyntax[], TryStatementSyntax>>(WrappedType, "AddBlockAttributeLists");
-    private static readonly Func<TryStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<TryStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TryStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TryStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<TryStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, SyntaxList<CatchClauseSyntax>, FinallyClauseSyntax, TryStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, SyntaxList<CatchClauseSyntax>, FinallyClauseSyntax, TryStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<TryStatementSyntax, SyntaxList<AttributeListSyntax>, TryStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<TryStatementSyntax, SyntaxList<AttributeListSyntax>, TryStatementSyntax>>(WrappedType, "WithAttributeLists");
 
@@ -45,8 +45,8 @@ public static partial class TryStatementSyntaxShimExtensions
 
         public TryStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public TryStatementSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public TryStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken tryKeyword, BlockSyntax block, SyntaxList<CatchClauseSyntax> catches, FinallyClauseSyntax @finally) => UpdateAccessor(wrappedInstance, attributeLists, tryKeyword, block, catches, @finally);
         public TryStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

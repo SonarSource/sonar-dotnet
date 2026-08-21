@@ -30,22 +30,22 @@ public static partial class ArrayTypeSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ArrayTypeSyntax);
 
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNintAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsNint");
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsNotNull");
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsNuintAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsNuint");
-    private static readonly Func<ArrayTypeSyntax, Boolean> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, Boolean>>(WrappedType, "IsUnmanaged");
+    private static readonly Func<ArrayTypeSyntax, bool> IsNintAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, bool>>(WrappedType, "IsNint");
+    private static readonly Func<ArrayTypeSyntax, bool> IsNotNullAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, bool>>(WrappedType, "IsNotNull");
+    private static readonly Func<ArrayTypeSyntax, bool> IsNuintAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, bool>>(WrappedType, "IsNuint");
+    private static readonly Func<ArrayTypeSyntax, bool> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<ArrayTypeSyntax, bool>>(WrappedType, "IsUnmanaged");
 
-    private static readonly Func<ArrayTypeSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ArrayTypeSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<ArrayTypeSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ArrayTypeSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ArrayTypeSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ArrayTypeSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ArrayTypeSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ArrayTypeSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(ArrayTypeSyntax wrappedInstance)
     {
-        public Boolean IsNint => (Boolean)IsNintAccessor(wrappedInstance);
-        public Boolean IsNotNull => (Boolean)IsNotNullAccessor(wrappedInstance);
-        public Boolean IsNuint => (Boolean)IsNuintAccessor(wrappedInstance);
-        public Boolean IsUnmanaged => (Boolean)IsUnmanagedAccessor(wrappedInstance);
+        public bool IsNint => (bool)IsNintAccessor(wrappedInstance);
+        public bool IsNotNull => (bool)IsNotNullAccessor(wrappedInstance);
+        public bool IsNuint => (bool)IsNuintAccessor(wrappedInstance);
+        public bool IsUnmanaged => (bool)IsUnmanagedAccessor(wrappedInstance);
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

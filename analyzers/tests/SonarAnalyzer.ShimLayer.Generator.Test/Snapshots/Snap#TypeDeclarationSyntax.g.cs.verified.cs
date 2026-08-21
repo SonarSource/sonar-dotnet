@@ -39,8 +39,8 @@ public static partial class TypeDeclarationSyntaxShimExtensions
     private static readonly Func<TypeDeclarationSyntax, SyntaxToken[], TypeDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken[], TypeDeclarationSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<TypeDeclarationSyntax, ParameterSyntax[], TypeDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, ParameterSyntax[], TypeDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
     private static readonly Func<TypeDeclarationSyntax, TypeParameterSyntax[], TypeDeclarationSyntax> AddTypeParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, TypeParameterSyntax[], TypeDeclarationSyntax>>(WrappedType, "AddTypeParameterListParameters");
-    private static readonly Func<TypeDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<TypeDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<TypeDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<TypeDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, TypeDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, TypeDeclarationSyntax>>(WrappedType, "WithAttributeLists");
     private static readonly Func<TypeDeclarationSyntax, BaseListSyntax, TypeDeclarationSyntax> WithBaseListAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, BaseListSyntax, TypeDeclarationSyntax>>(WrappedType, "WithBaseList");
     private static readonly Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax> WithCloseBraceTokenAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxToken, TypeDeclarationSyntax>>(WrappedType, "WithCloseBraceToken");
@@ -65,8 +65,8 @@ public static partial class TypeDeclarationSyntaxShimExtensions
         public TypeDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public TypeDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
         public TypeDeclarationSyntax AddTypeParameterListParameters(TypeParameterSyntax[] items) => AddTypeParameterListParametersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public TypeDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public TypeDeclarationSyntax WithBaseList(BaseListSyntax baseList) => WithBaseListAccessor(wrappedInstance, baseList);
         public TypeDeclarationSyntax WithCloseBraceToken(SyntaxToken closeBraceToken) => WithCloseBraceTokenAccessor(wrappedInstance, closeBraceToken);

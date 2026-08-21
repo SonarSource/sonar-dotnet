@@ -34,8 +34,8 @@ public static partial class UsingDirectiveSyntaxShimExtensions
     private static readonly Func<UsingDirectiveSyntax, TypeSyntax> NamespaceOrTypeAccessor = AccessorFactory.CreateProperty<Func<UsingDirectiveSyntax, TypeSyntax>>(WrappedType, "NamespaceOrType");
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken> UnsafeKeywordAccessor = AccessorFactory.CreateProperty<Func<UsingDirectiveSyntax, SyntaxToken>>(WrappedType, "UnsafeKeyword");
 
-    private static readonly Func<UsingDirectiveSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<UsingDirectiveSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<UsingDirectiveSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<UsingDirectiveSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, NameSyntax, SyntaxToken, UsingDirectiveSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, NameSyntax, SyntaxToken, UsingDirectiveSyntax>>(WrappedType, "Update");
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, TypeSyntax, SyntaxToken, UsingDirectiveSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, TypeSyntax, SyntaxToken, UsingDirectiveSyntax>>(WrappedType, "Update");
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken, UsingDirectiveSyntax> WithGlobalKeywordAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxToken, UsingDirectiveSyntax>>(WrappedType, "WithGlobalKeyword");
@@ -48,8 +48,8 @@ public static partial class UsingDirectiveSyntaxShimExtensions
         public TypeSyntax NamespaceOrType => NamespaceOrTypeAccessor(wrappedInstance);
         public SyntaxToken UnsafeKeyword => (SyntaxToken)UnsafeKeywordAccessor(wrappedInstance);
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public UsingDirectiveSyntax Update(SyntaxToken globalKeyword, SyntaxToken usingKeyword, SyntaxToken staticKeyword, NameEqualsSyntax alias, NameSyntax name, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, globalKeyword, usingKeyword, staticKeyword, alias, name, semicolonToken);
         public UsingDirectiveSyntax Update(SyntaxToken globalKeyword, SyntaxToken usingKeyword, SyntaxToken staticKeyword, SyntaxToken unsafeKeyword, NameEqualsSyntax alias, TypeSyntax namespaceOrType, SyntaxToken semicolonToken) => UpdateAccessor_Overload3(wrappedInstance, globalKeyword, usingKeyword, staticKeyword, unsafeKeyword, alias, namespaceOrType, semicolonToken);
         public UsingDirectiveSyntax WithGlobalKeyword(SyntaxToken globalKeyword) => WithGlobalKeywordAccessor(wrappedInstance, globalKeyword);

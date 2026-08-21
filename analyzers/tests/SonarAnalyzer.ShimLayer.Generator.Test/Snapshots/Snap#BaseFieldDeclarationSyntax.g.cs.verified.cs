@@ -33,8 +33,8 @@ public static partial class BaseFieldDeclarationSyntaxShimExtensions
     private static readonly Func<BaseFieldDeclarationSyntax, AttributeListSyntax[], BaseFieldDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, AttributeListSyntax[], BaseFieldDeclarationSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<BaseFieldDeclarationSyntax, VariableDeclaratorSyntax[], BaseFieldDeclarationSyntax> AddDeclarationVariablesAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, VariableDeclaratorSyntax[], BaseFieldDeclarationSyntax>>(WrappedType, "AddDeclarationVariables");
     private static readonly Func<BaseFieldDeclarationSyntax, SyntaxToken[], BaseFieldDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxToken[], BaseFieldDeclarationSyntax>>(WrappedType, "AddModifiers");
-    private static readonly Func<BaseFieldDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BaseFieldDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseFieldDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseFieldDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseFieldDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseFieldDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseFieldDeclarationSyntax>>(WrappedType, "WithAttributeLists");
     private static readonly Func<BaseFieldDeclarationSyntax, VariableDeclarationSyntax, BaseFieldDeclarationSyntax> WithDeclarationAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, VariableDeclarationSyntax, BaseFieldDeclarationSyntax>>(WrappedType, "WithDeclaration");
     private static readonly Func<BaseFieldDeclarationSyntax, SyntaxTokenList, BaseFieldDeclarationSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxTokenList, BaseFieldDeclarationSyntax>>(WrappedType, "WithModifiers");
@@ -46,8 +46,8 @@ public static partial class BaseFieldDeclarationSyntaxShimExtensions
         public BaseFieldDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public BaseFieldDeclarationSyntax AddDeclarationVariables(VariableDeclaratorSyntax[] items) => AddDeclarationVariablesAccessor(wrappedInstance, items);
         public BaseFieldDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseFieldDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseFieldDeclarationSyntax WithDeclaration(VariableDeclarationSyntax declaration) => WithDeclarationAccessor(wrappedInstance, declaration);
         public BaseFieldDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);

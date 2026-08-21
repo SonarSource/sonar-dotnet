@@ -33,8 +33,8 @@ public static partial class BaseTypeDeclarationSyntaxShimExtensions
     private static readonly Func<BaseTypeDeclarationSyntax, AttributeListSyntax[], BaseTypeDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, AttributeListSyntax[], BaseTypeDeclarationSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<BaseTypeDeclarationSyntax, BaseTypeSyntax[], BaseTypeDeclarationSyntax> AddBaseListTypesAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, BaseTypeSyntax[], BaseTypeDeclarationSyntax>>(WrappedType, "AddBaseListTypes");
     private static readonly Func<BaseTypeDeclarationSyntax, SyntaxToken[], BaseTypeDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, SyntaxToken[], BaseTypeDeclarationSyntax>>(WrappedType, "AddModifiers");
-    private static readonly Func<BaseTypeDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BaseTypeDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseTypeDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseTypeDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseTypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseTypeDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseTypeDeclarationSyntax>>(WrappedType, "WithAttributeLists");
     private static readonly Func<BaseTypeDeclarationSyntax, BaseListSyntax, BaseTypeDeclarationSyntax> WithBaseListAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, BaseListSyntax, BaseTypeDeclarationSyntax>>(WrappedType, "WithBaseList");
     private static readonly Func<BaseTypeDeclarationSyntax, SyntaxToken, BaseTypeDeclarationSyntax> WithCloseBraceTokenAccessor = AccessorFactory.CreateMethod<Func<BaseTypeDeclarationSyntax, SyntaxToken, BaseTypeDeclarationSyntax>>(WrappedType, "WithCloseBraceToken");
@@ -49,8 +49,8 @@ public static partial class BaseTypeDeclarationSyntaxShimExtensions
         public BaseTypeDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public BaseTypeDeclarationSyntax AddBaseListTypes(BaseTypeSyntax[] items) => AddBaseListTypesAccessor(wrappedInstance, items);
         public BaseTypeDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseTypeDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseTypeDeclarationSyntax WithBaseList(BaseListSyntax baseList) => WithBaseListAccessor(wrappedInstance, baseList);
         public BaseTypeDeclarationSyntax WithCloseBraceToken(SyntaxToken closeBraceToken) => WithCloseBraceTokenAccessor(wrappedInstance, closeBraceToken);

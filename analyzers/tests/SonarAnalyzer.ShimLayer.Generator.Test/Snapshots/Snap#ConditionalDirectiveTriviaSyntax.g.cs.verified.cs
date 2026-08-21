@@ -30,8 +30,8 @@ public static partial class ConditionalDirectiveTriviaSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ConditionalDirectiveTriviaSyntax);
 
-    private static readonly Func<ConditionalDirectiveTriviaSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<ConditionalDirectiveTriviaSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ConditionalDirectiveTriviaSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ConditionalDirectiveTriviaSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ConditionalDirectiveTriviaSyntax, ExpressionSyntax, ConditionalDirectiveTriviaSyntax> WithConditionAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, ExpressionSyntax, ConditionalDirectiveTriviaSyntax>>(WrappedType, "WithCondition");
     private static readonly Func<ConditionalDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax> WithEndOfDirectiveTokenAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax>>(WrappedType, "WithEndOfDirectiveToken");
     private static readonly Func<ConditionalDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax> WithHashTokenAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax>>(WrappedType, "WithHashToken");
@@ -39,8 +39,8 @@ public static partial class ConditionalDirectiveTriviaSyntaxShimExtensions
     extension(ConditionalDirectiveTriviaSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ConditionalDirectiveTriviaSyntax WithCondition(ExpressionSyntax condition) => WithConditionAccessor(wrappedInstance, condition);
         public BranchingDirectiveTriviaSyntax WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken);
         public BranchingDirectiveTriviaSyntax WithHashToken(SyntaxToken hashToken) => WithHashTokenAccessor(wrappedInstance, hashToken);

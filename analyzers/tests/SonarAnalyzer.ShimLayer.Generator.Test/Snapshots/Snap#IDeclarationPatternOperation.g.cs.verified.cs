@@ -36,10 +36,10 @@ public readonly partial struct IDeclarationPatternOperationWrapper : IOperationW
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ISymbol> DeclaredSymbolAccessor = AccessorFactory.CreateProperty<Func<IOperation, ISymbol>>(WrappedType, "DeclaredSymbol");
     private static readonly Func<IOperation, ITypeSymbol> InputTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "InputType");
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");
-    private static readonly Func<IOperation, String> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, String>>(WrappedType, "Language");
+    private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, ITypeSymbol> MatchedTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "MatchedType");
-    private static readonly Func<IOperation, Boolean> MatchesNullAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "MatchesNull");
+    private static readonly Func<IOperation, bool> MatchesNullAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "MatchesNull");
     private static readonly Func<IOperation, ITypeSymbol> NarrowedTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "NarrowedType");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
@@ -61,10 +61,10 @@ public readonly partial struct IDeclarationPatternOperationWrapper : IOperationW
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public ISymbol DeclaredSymbol => (ISymbol)DeclaredSymbolAccessor(wrappedInstance);
     public ITypeSymbol InputType => (ITypeSymbol)InputTypeAccessor(wrappedInstance);
-    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
-    public String Language => (String)LanguageAccessor(wrappedInstance);
+    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
+    public string Language => (string)LanguageAccessor(wrappedInstance);
     public ITypeSymbol MatchedType => (ITypeSymbol)MatchedTypeAccessor(wrappedInstance);
-    public Boolean MatchesNull => (Boolean)MatchesNullAccessor(wrappedInstance);
+    public bool MatchesNull => (bool)MatchesNullAccessor(wrappedInstance);
     public ITypeSymbol NarrowedType => (ITypeSymbol)NarrowedTypeAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);

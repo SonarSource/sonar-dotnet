@@ -30,13 +30,13 @@ public static partial class SelectOrGroupClauseSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(SelectOrGroupClauseSyntax);
 
-    private static readonly Func<SelectOrGroupClauseSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SelectOrGroupClauseSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<SelectOrGroupClauseSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SelectOrGroupClauseSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<SelectOrGroupClauseSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SelectOrGroupClauseSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<SelectOrGroupClauseSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SelectOrGroupClauseSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(SelectOrGroupClauseSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

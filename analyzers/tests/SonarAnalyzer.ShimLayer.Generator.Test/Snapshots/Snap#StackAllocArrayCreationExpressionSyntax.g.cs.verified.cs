@@ -32,8 +32,8 @@ public static partial class StackAllocArrayCreationExpressionSyntaxShimExtension
 
     private static readonly Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = AccessorFactory.CreateProperty<Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax>>(WrappedType, "Initializer");
 
-    private static readonly Func<StackAllocArrayCreationExpressionSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<StackAllocArrayCreationExpressionSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<StackAllocArrayCreationExpressionSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<StackAllocArrayCreationExpressionSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<StackAllocArrayCreationExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<StackAllocArrayCreationExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<StackAllocArrayCreationExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<StackAllocArrayCreationExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<StackAllocArrayCreationExpressionSyntax, SyntaxToken, TypeSyntax, InitializerExpressionSyntax, StackAllocArrayCreationExpressionSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<StackAllocArrayCreationExpressionSyntax, SyntaxToken, TypeSyntax, InitializerExpressionSyntax, StackAllocArrayCreationExpressionSyntax>>(WrappedType, "Update");
     private static readonly Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax, StackAllocArrayCreationExpressionSyntax> WithInitializerAccessor = AccessorFactory.CreateMethod<Func<StackAllocArrayCreationExpressionSyntax, InitializerExpressionSyntax, StackAllocArrayCreationExpressionSyntax>>(WrappedType, "WithInitializer");
 
@@ -41,8 +41,8 @@ public static partial class StackAllocArrayCreationExpressionSyntaxShimExtension
     {
         public InitializerExpressionSyntax Initializer => InitializerAccessor(wrappedInstance);
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public StackAllocArrayCreationExpressionSyntax Update(SyntaxToken stackAllocKeyword, TypeSyntax type, InitializerExpressionSyntax initializer) => UpdateAccessor_Overload2(wrappedInstance, stackAllocKeyword, type, initializer);
         public StackAllocArrayCreationExpressionSyntax WithInitializer(InitializerExpressionSyntax initializer) => WithInitializerAccessor(wrappedInstance, initializer);
     }

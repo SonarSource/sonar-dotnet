@@ -33,8 +33,8 @@ public static partial class FixedStatementSyntaxShimExtensions
     private static readonly Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     private static readonly Func<FixedStatementSyntax, AttributeListSyntax[], FixedStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<FixedStatementSyntax, AttributeListSyntax[], FixedStatementSyntax>>(WrappedType, "AddAttributeLists");
-    private static readonly Func<FixedStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<FixedStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<FixedStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<FixedStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<FixedStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<FixedStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<FixedStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<FixedStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, VariableDeclarationSyntax, SyntaxToken, StatementSyntax, FixedStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, VariableDeclarationSyntax, SyntaxToken, StatementSyntax, FixedStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>, FixedStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<FixedStatementSyntax, SyntaxList<AttributeListSyntax>, FixedStatementSyntax>>(WrappedType, "WithAttributeLists");
 
@@ -43,8 +43,8 @@ public static partial class FixedStatementSyntaxShimExtensions
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
 
         public FixedStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public FixedStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken fixedKeyword, SyntaxToken openParenToken, VariableDeclarationSyntax declaration, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, fixedKeyword, openParenToken, declaration, closeParenToken, statement);
         public FixedStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

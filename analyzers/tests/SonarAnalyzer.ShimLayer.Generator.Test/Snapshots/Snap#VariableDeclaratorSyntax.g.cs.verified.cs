@@ -30,13 +30,13 @@ public static partial class VariableDeclaratorSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(VariableDeclaratorSyntax);
 
-    private static readonly Func<VariableDeclaratorSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<VariableDeclaratorSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<VariableDeclaratorSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<VariableDeclaratorSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<VariableDeclaratorSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<VariableDeclaratorSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<VariableDeclaratorSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<VariableDeclaratorSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(VariableDeclaratorSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

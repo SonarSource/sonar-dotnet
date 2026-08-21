@@ -191,12 +191,12 @@ public class ExtendStrategyTest
             {
                 private static readonly Type WrappedType = typeof(ProcessStartInfo);
 
-                private static readonly Func<ProcessStartInfo, String> FileNameAccessor = AccessorFactory.CreateProperty<Func<ProcessStartInfo, String>>(WrappedType, "FileName");
+                private static readonly Func<ProcessStartInfo, string> FileNameAccessor = AccessorFactory.CreateProperty<Func<ProcessStartInfo, string>>(WrappedType, "FileName");
 
                 extension(ProcessStartInfo wrappedInstance)
                 {
                     [System.ComponentModel.EditorAttribute("System.Diagnostics.Design.StartFileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-                    public String FileName => (String)FileNameAccessor(wrappedInstance);
+                    public string FileName => (string)FileNameAccessor(wrappedInstance);
 
                 }
             }

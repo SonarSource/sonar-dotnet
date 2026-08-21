@@ -30,13 +30,13 @@ public static partial class AttributeListSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(AttributeListSyntax);
 
-    private static readonly Func<AttributeListSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<AttributeListSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<AttributeListSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<AttributeListSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<AttributeListSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<AttributeListSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<AttributeListSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<AttributeListSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(AttributeListSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

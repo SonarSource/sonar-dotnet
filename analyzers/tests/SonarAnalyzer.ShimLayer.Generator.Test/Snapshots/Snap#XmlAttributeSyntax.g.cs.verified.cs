@@ -30,8 +30,8 @@ public static partial class XmlAttributeSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(XmlAttributeSyntax);
 
-    private static readonly Func<XmlAttributeSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<XmlAttributeSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<XmlAttributeSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<XmlAttributeSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax> WithEndQuoteTokenAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax>>(WrappedType, "WithEndQuoteToken");
     private static readonly Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax> WithEqualsTokenAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax>>(WrappedType, "WithEqualsToken");
     private static readonly Func<XmlAttributeSyntax, XmlNameSyntax, XmlAttributeSyntax> WithNameAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, XmlNameSyntax, XmlAttributeSyntax>>(WrappedType, "WithName");
@@ -40,8 +40,8 @@ public static partial class XmlAttributeSyntaxShimExtensions
     extension(XmlAttributeSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public XmlAttributeSyntax WithEndQuoteToken(SyntaxToken endQuoteToken) => WithEndQuoteTokenAccessor(wrappedInstance, endQuoteToken);
         public XmlAttributeSyntax WithEqualsToken(SyntaxToken equalsToken) => WithEqualsTokenAccessor(wrappedInstance, equalsToken);
         public XmlAttributeSyntax WithName(XmlNameSyntax name) => WithNameAccessor(wrappedInstance, name);

@@ -37,8 +37,8 @@ public static partial class BaseMethodDeclarationSyntaxShimExtensions
     private static readonly Func<BaseMethodDeclarationSyntax, StatementSyntax[], BaseMethodDeclarationSyntax> AddBodyStatementsAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, StatementSyntax[], BaseMethodDeclarationSyntax>>(WrappedType, "AddBodyStatements");
     private static readonly Func<BaseMethodDeclarationSyntax, SyntaxToken[], BaseMethodDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxToken[], BaseMethodDeclarationSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<BaseMethodDeclarationSyntax, ParameterSyntax[], BaseMethodDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, ParameterSyntax[], BaseMethodDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
-    private static readonly Func<BaseMethodDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BaseMethodDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseMethodDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseMethodDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseMethodDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseMethodDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseMethodDeclarationSyntax>>(WrappedType, "WithAttributeLists");
     private static readonly Func<BaseMethodDeclarationSyntax, BlockSyntax, BaseMethodDeclarationSyntax> WithBodyAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, BlockSyntax, BaseMethodDeclarationSyntax>>(WrappedType, "WithBody");
     private static readonly Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax, BaseMethodDeclarationSyntax> WithExpressionBodyAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, ArrowExpressionClauseSyntax, BaseMethodDeclarationSyntax>>(WrappedType, "WithExpressionBody");
@@ -55,8 +55,8 @@ public static partial class BaseMethodDeclarationSyntaxShimExtensions
         public BaseMethodDeclarationSyntax AddBodyStatements(StatementSyntax[] items) => AddBodyStatementsAccessor(wrappedInstance, items);
         public BaseMethodDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public BaseMethodDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseMethodDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseMethodDeclarationSyntax WithBody(BlockSyntax body) => WithBodyAccessor(wrappedInstance, body);
         public BaseMethodDeclarationSyntax WithExpressionBody(ArrowExpressionClauseSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);

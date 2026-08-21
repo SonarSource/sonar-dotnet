@@ -31,14 +31,14 @@ public static partial class MethodDeclarationSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(MethodDeclarationSyntax);
 
     private static readonly Func<MethodDeclarationSyntax, AttributeListSyntax[], MethodDeclarationSyntax> AddBodyAttributeListsAccessor = AccessorFactory.CreateMethod<Func<MethodDeclarationSyntax, AttributeListSyntax[], MethodDeclarationSyntax>>(WrappedType, "AddBodyAttributeLists");
-    private static readonly Func<MethodDeclarationSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<MethodDeclarationSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<MethodDeclarationSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<MethodDeclarationSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<MethodDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<MethodDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<MethodDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<MethodDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(MethodDeclarationSyntax wrappedInstance)
     {
 
         public MethodDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

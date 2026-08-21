@@ -30,13 +30,13 @@ public static partial class ConstructorInitializerSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ConstructorInitializerSyntax);
 
-    private static readonly Func<ConstructorInitializerSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ConstructorInitializerSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<ConstructorInitializerSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ConstructorInitializerSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ConstructorInitializerSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ConstructorInitializerSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ConstructorInitializerSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ConstructorInitializerSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(ConstructorInitializerSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

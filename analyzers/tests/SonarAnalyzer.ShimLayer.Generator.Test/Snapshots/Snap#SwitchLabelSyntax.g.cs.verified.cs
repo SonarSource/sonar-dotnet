@@ -30,16 +30,16 @@ public static partial class SwitchLabelSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(SwitchLabelSyntax);
 
-    private static readonly Func<SwitchLabelSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<SwitchLabelSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<SwitchLabelSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<SwitchLabelSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax> WithColonTokenAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax>>(WrappedType, "WithColonToken");
     private static readonly Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax> WithKeywordAccessor = AccessorFactory.CreateMethod<Func<SwitchLabelSyntax, SyntaxToken, SwitchLabelSyntax>>(WrappedType, "WithKeyword");
 
     extension(SwitchLabelSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public SwitchLabelSyntax WithColonToken(SyntaxToken colonToken) => WithColonTokenAccessor(wrappedInstance, colonToken);
         public SwitchLabelSyntax WithKeyword(SyntaxToken keyword) => WithKeywordAccessor(wrappedInstance, keyword);
     }

@@ -30,13 +30,13 @@ public static partial class IncompleteMemberSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(IncompleteMemberSyntax);
 
-    private static readonly Func<IncompleteMemberSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<IncompleteMemberSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<IncompleteMemberSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<IncompleteMemberSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<IncompleteMemberSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<IncompleteMemberSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<IncompleteMemberSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<IncompleteMemberSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(IncompleteMemberSyntax wrappedInstance)
     {
 
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

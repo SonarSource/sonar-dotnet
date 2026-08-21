@@ -33,8 +33,8 @@ public static partial class ReturnStatementSyntaxShimExtensions
     private static readonly Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     private static readonly Func<ReturnStatementSyntax, AttributeListSyntax[], ReturnStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, AttributeListSyntax[], ReturnStatementSyntax>>(WrappedType, "AddAttributeLists");
-    private static readonly Func<ReturnStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<ReturnStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<ReturnStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<ReturnStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, ExpressionSyntax, SyntaxToken, ReturnStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, ExpressionSyntax, SyntaxToken, ReturnStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, ReturnStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, ReturnStatementSyntax>>(WrappedType, "WithAttributeLists");
 
@@ -43,8 +43,8 @@ public static partial class ReturnStatementSyntaxShimExtensions
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
 
         public ReturnStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ReturnStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken returnKeyword, ExpressionSyntax expression, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, returnKeyword, expression, semicolonToken);
         public ReturnStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

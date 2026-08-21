@@ -31,16 +31,16 @@ public static partial class BaseParameterListSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(BaseParameterListSyntax);
 
     private static readonly Func<BaseParameterListSyntax, ParameterSyntax[], BaseParameterListSyntax> AddParametersAccessor = AccessorFactory.CreateMethod<Func<BaseParameterListSyntax, ParameterSyntax[], BaseParameterListSyntax>>(WrappedType, "AddParameters");
-    private static readonly Func<BaseParameterListSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseParameterListSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BaseParameterListSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseParameterListSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BaseParameterListSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseParameterListSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BaseParameterListSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseParameterListSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseParameterListSyntax, SeparatedSyntaxList<ParameterSyntax>, BaseParameterListSyntax> WithParametersAccessor = AccessorFactory.CreateMethod<Func<BaseParameterListSyntax, SeparatedSyntaxList<ParameterSyntax>, BaseParameterListSyntax>>(WrappedType, "WithParameters");
 
     extension(BaseParameterListSyntax wrappedInstance)
     {
 
         public BaseParameterListSyntax AddParameters(ParameterSyntax[] items) => AddParametersAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseParameterListSyntax WithParameters(SeparatedSyntaxList<ParameterSyntax> parameters) => WithParametersAccessor(wrappedInstance, parameters);
     }
 }

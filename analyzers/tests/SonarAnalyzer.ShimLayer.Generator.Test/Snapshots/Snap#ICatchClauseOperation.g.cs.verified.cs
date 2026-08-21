@@ -38,8 +38,8 @@ public readonly partial struct ICatchClauseOperationWrapper : IOperationWrapper
     private static readonly Func<IOperation, ITypeSymbol> ExceptionTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "ExceptionType");
     private static readonly Func<IOperation, IOperation> FilterAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Filter");
     private static readonly Func<IOperation, IOperation> HandlerAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Handler");
-    private static readonly Func<IOperation, Boolean> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, Boolean>>(WrappedType, "IsImplicit");
-    private static readonly Func<IOperation, String> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, String>>(WrappedType, "Language");
+    private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
+    private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, ImmutableArray<ILocalSymbol>> LocalsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ILocalSymbol>>>(WrappedType, "Locals");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
@@ -63,8 +63,8 @@ public readonly partial struct ICatchClauseOperationWrapper : IOperationWrapper
     public ITypeSymbol ExceptionType => (ITypeSymbol)ExceptionTypeAccessor(wrappedInstance);
     public IOperation Filter => FilterAccessor(wrappedInstance);
     public IBlockOperationWrapper Handler => IBlockOperationWrapper.From(HandlerAccessor(wrappedInstance));
-    public Boolean IsImplicit => (Boolean)IsImplicitAccessor(wrappedInstance);
-    public String Language => (String)LanguageAccessor(wrappedInstance);
+    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
+    public string Language => (string)LanguageAccessor(wrappedInstance);
     public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);

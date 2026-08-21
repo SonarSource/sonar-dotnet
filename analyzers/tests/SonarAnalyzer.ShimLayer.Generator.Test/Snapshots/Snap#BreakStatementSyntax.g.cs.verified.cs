@@ -33,8 +33,8 @@ public static partial class BreakStatementSyntaxShimExtensions
     private static readonly Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
 
     private static readonly Func<BreakStatementSyntax, AttributeListSyntax[], BreakStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, AttributeListSyntax[], BreakStatementSyntax>>(WrappedType, "AddAttributeLists");
-    private static readonly Func<BreakStatementSyntax, Int32, Boolean> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, Int32, Boolean>>(WrappedType, "ContainsDirective");
-    private static readonly Func<BreakStatementSyntax, SyntaxNode, Boolean> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, SyntaxNode, Boolean>>(WrappedType, "IsIncrementallyIdenticalTo");
+    private static readonly Func<BreakStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static readonly Func<BreakStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, BreakStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, BreakStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, BreakStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, BreakStatementSyntax>>(WrappedType, "WithAttributeLists");
 
@@ -43,8 +43,8 @@ public static partial class BreakStatementSyntaxShimExtensions
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
 
         public BreakStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public Boolean ContainsDirective(Int32 rawKind) => (Boolean)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public Boolean IsIncrementallyIdenticalTo(SyntaxNode other) => (Boolean)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BreakStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken breakKeyword, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, breakKeyword, semicolonToken);
         public BreakStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }
