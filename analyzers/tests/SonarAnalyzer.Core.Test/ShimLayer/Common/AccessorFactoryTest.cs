@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
@@ -159,6 +160,22 @@ public class AccessorFactoryTest
         accessor(syntax, []).Should().NotBeNull();
     }
 
+    [TestMethod]
+    public void CreateMethod_WithOutParameter_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<TryGetValueAccessor<TestAnalyzerConfigOptions, string, string>>(typeof(TestAnalyzerConfigOptions), nameof(AnalyzerConfigOptions.TryGetValue));
+        accessor(new TestAnalyzerConfigOptions(), "AnyKey", out var value).Should().BeTrue();
+        value.Should().Be("ExistingValue");
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithOutParameter_Fallback()
+    {
+        var accessor = AccessorFactory.CreateMethod<TryGetValueAccessor<TestAnalyzerConfigOptions, string, string>>(null, nameof(AnalyzerConfigOptions.TryGetValue));
+        accessor(new TestAnalyzerConfigOptions(), "AnyKey", out var value).Should().BeFalse();
+        value.Should().BeNull();
+    }
+
     private static IInvocationOperation CreateInvocationOperation()
     {
         var compiler = new SnippetCompiler("""
@@ -203,4 +220,13 @@ public class AccessorFactoryTest
 
     private static TypeSyntax CreateTypeSyntax() =>
         SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword));
+
+    private sealed class TestAnalyzerConfigOptions : AnalyzerConfigOptions
+    {
+        public override bool TryGetValue(string key, [NotNullWhen(true)] out string value)
+        {
+            value = "ExistingValue";
+            return true;
+        }
+    }
 }
