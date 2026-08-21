@@ -33,11 +33,12 @@ public class StrategyModel : IEnumerable<Strategy>
             }
             else
             {
-                Strategy newStrategy = key.Name switch
+                Strategy newStrategy = key switch
                 {
-                    "ImmutableArray`1" when this[key.GenericTypeArguments.Single()] is OperationWrapStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
-                    "SeparatedSyntaxList`1" when this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument => new SeparatedSyntaxListStrategy(key, typeArgument),
-                    "Void" => new SkipStrategy(key),    // NET-4372 not supported yet
+                    { Name: "SeparatedSyntaxList`1" } when this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument => new SeparatedSyntaxListStrategy(key, typeArgument),
+                    { Name: "ImmutableArray`1" } when this[key.GenericTypeArguments.Single()] is OperationWrapStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
+                    { Name: "Void" } => new SkipStrategy(key),    // NET-4372 not supported yet
+                    { IsGenericType: true } => new GenericTypeStrategy(key, key.GenericTypeArguments.Select(x => this[x]).ToArray()),
                     _ => new NoChangeStrategy(key)
                 };
                 Add(key, newStrategy);

@@ -17,15 +17,27 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public class NoChangeStrategy : Strategy
+public class GenericTypeStrategy : Strategy
 {
-    public NoChangeStrategy(Type latest) : base(latest) { }
+    private readonly Strategy[] typeArguments;
+    private readonly string type;
+
+    public override bool IsSupported => typeArguments.All(x => x is not WrapStrategy && x.IsSupported);
+
+    public GenericTypeStrategy(Type latest, Strategy[] typeArguments) : base(latest)
+    {
+        this.typeArguments = typeArguments;
+        type = latest.Name.Replace("`1", null).Replace("`2", null) + "<" + typeArguments.JoinStr(", ", x => x.CompiletimeTypeSnippet()) + ">";
+    }
 
     public override string ReturnTypeSnippet() =>
-        Latest.Name;
+        type;
+
+    public override string CompiletimeTypeSnippet() =>
+        type;
 
     public override string ToConversionSnippet(string from) =>
-        $"({Latest.Name}){from}";
+        $"({type}){from}";
 
     protected override string GenerateCore(StrategyModel model) => null;
 }
