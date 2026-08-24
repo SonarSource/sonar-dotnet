@@ -36,6 +36,34 @@ public class CatchRethrowTest
             .WithCodeFixedPaths("CatchRethrow.Fixed.cs")
             .VerifyCodeFix();
 
+    /// <summary>Verifies the execution-context temporary boundary.</summary>
+    [TestMethod]
+    public void CatchRethrow_ExecutionContext() =>
+        builderCS.AddPaths("CatchRethrow.ExecutionContext.cs").Verify();
+
+    /// <summary>Verifies that unrecognized temporary-context shapes are reported.</summary>
+    [TestMethod]
+    public void CatchRethrow_TemporaryContextControls() =>
+        builderCS.AddPaths("CatchRethrow.TemporaryContextControls.cs").Verify();
+
+    /// <summary>Verifies the Windows identity temporary boundary.</summary>
+    [TestMethod]
+    public void CatchRethrow_WindowsIdentity()
+    {
+        var verifier = builderCS.AddPaths("CatchRethrow.WindowsIdentity.cs").WithNetOnly();
+#if NET
+        verifier = verifier.AddReferences([CoreMetadataReference.SystemSecurityClaims]);
+#endif
+        verifier.Verify();
+    }
+
+    /// <summary>Verifies legacy temporary-context boundaries.</summary>
+    [TestMethod]
+    public void CatchRethrow_LegacyContexts() =>
+        builderCS.AddPaths("CatchRethrow.LegacyContexts.cs")
+            .WithNetFrameworkOnly()
+            .Verify();
+
     [TestMethod]
     public void CatchRethrow_VB() =>
         new VerifierBuilder<VB.CatchRethrow>().AddPaths("CatchRethrow.vb").Verify();

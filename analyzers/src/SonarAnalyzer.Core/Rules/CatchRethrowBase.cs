@@ -28,6 +28,12 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
     protected abstract bool HasFilter(TCatchClause catchClause);
     protected abstract bool ContainsOnlyThrow(TCatchClause currentCatch);
 
+    /// <summary>Determines whether a catch clause preserves a temporary context boundary.</summary>
+    /// <param name="catchClause">The catch clause being analyzed.</param>
+    /// <param name="semanticModel">The semantic model for the analyzed file.</param>
+    /// <returns><see langword="true" /> when the catch clause must not be reported.</returns>
+    protected virtual bool IsTemporaryContextBoundary(TCatchClause catchClause, SemanticModel semanticModel) => false;
+
     protected override string MessageFormat => "Add logic to this catch clause or eliminate it and rethrow the exception automatically.";
 
     protected CatchRethrowBase() : base(DiagnosticId) { }
@@ -46,6 +52,7 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
             if (ContainsOnlyThrow(currentCatch))
             {
                 if (!HasFilter(currentCatch)
+                    && !IsTemporaryContextBoundary(currentCatch, context.Model)
                     // Make sure we report only catch clauses that will not change the method behavior if removed.
                     && (followingCatchesOnlyThrow || IsRedundantToFollowingCatches(i, catches, caughtExceptionTypes.Value, redundantCatches)))
                 {

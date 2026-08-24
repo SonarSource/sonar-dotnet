@@ -617,6 +617,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_Cryptography_X509Certificates_X509Certificate2 = new("System.Security.Cryptography.X509Certificates.X509Certificate2");
     public static readonly KnownType System_Security_Cryptography_X509Certificates_X509Chain = new("System.Security.Cryptography.X509Certificates.X509Chain");
     public static readonly KnownType System_Security_Cryptography_Xml_SignedXml = new("System.Security.Cryptography.Xml.SignedXml");
+    public static readonly KnownType System_Security_CodeAccessPermission = new("System.Security.CodeAccessPermission");
     public static readonly KnownType System_Security_Permissions_CodeAccessSecurityAttribute = new("System.Security.Permissions.CodeAccessSecurityAttribute");
     public static readonly KnownType System_Security_Permissions_PrincipalPermission = new("System.Security.Permissions.PrincipalPermission");
     public static readonly KnownType System_Security_Permissions_PrincipalPermissionAttribute = new("System.Security.Permissions.PrincipalPermissionAttribute");
@@ -626,6 +627,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_Principal_NTAccount = new("System.Security.Principal.NTAccount");
     public static readonly KnownType System_Security_Principal_SecurityIdentifier = new("System.Security.Principal.SecurityIdentifier");
     public static readonly KnownType System_Security_Principal_WindowsIdentity = new("System.Security.Principal.WindowsIdentity");
+    public static readonly KnownType System_Security_Principal_WindowsImpersonationContext = new("System.Security.Principal.WindowsImpersonationContext");
     public static readonly KnownType System_Security_SecureString = new("System.Security.SecureString");
     public static readonly KnownType System_Security_SecurityCriticalAttribute = new("System.Security.SecurityCriticalAttribute");
     public static readonly KnownType System_Security_SecuritySafeCriticalAttribute = new("System.Security.SecuritySafeCriticalAttribute");
@@ -649,6 +651,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Threading_AsyncLocal_T = new("System.Threading.AsyncLocal", "T");
     public static readonly KnownType System_Threading_CancellationToken = new("System.Threading.CancellationToken");
     public static readonly KnownType System_Threading_CancellationTokenSource = new("System.Threading.CancellationTokenSource");
+    public static readonly KnownType System_Threading_ExecutionContext = new("System.Threading.ExecutionContext");
     public static readonly KnownType System_Threading_Lock = new("System.Threading.Lock");
     public static readonly KnownType System_Threading_Lock_Scope = new("System.Threading.Lock+Scope");
     public static readonly KnownType System_Threading_Monitor = new("System.Threading.Monitor");
