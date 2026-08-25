@@ -34,7 +34,7 @@ public class ArrayStrategyTest
     [TestMethod]
     public void WrappedType()
     {
-        var sut = new ArrayStrategy(typeof(TupleTypeSyntax[]), new SyntaxNodeWrapStrategy(typeof(TupleTypeSyntax), typeof(CSharpSyntaxNode), []));
+        var sut = new ArrayStrategy(typeof(TupleTypeSyntax[]), new SyntaxNodeWrapStrategy(typeof(TupleTypeSyntax), typeof(CSharpSyntaxNode), null, []));
         sut.IsSupported.Should().BeTrue();
         sut.ReturnTypeSnippet().Should().Be("TupleTypeSyntaxWrapper[]");
     }

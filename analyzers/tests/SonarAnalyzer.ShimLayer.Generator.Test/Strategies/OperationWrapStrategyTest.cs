@@ -341,6 +341,7 @@ public class OperationWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ControlFlowGraphWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
                 private static readonly Func<IOperation, IAttributeOperationWrapper, CancellationToken, IOperation> CreateAccessor = AccessorFactory.CreateMethod<Func<IOperation, IAttributeOperationWrapper, CancellationToken, IOperation>>(WrappedType, "Create");
@@ -357,28 +358,31 @@ public class OperationWrapStrategyTest
                 public ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor(wrappedInstance, attribute, cancellationToken));
                 public ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload2(wrappedInstance, body, cancellationToken));
 
-                [Obsolete("Use From instead")]
-                public static ControlFlowGraphWrapper FromOperation(IOperation operation) =>
-                    From(operation);
+                public static ControlFlowGraphWrapper? FromOrDefault(IOperation instance) =>
+                    IsInstance(instance) ? From(instance) : null;
 
-                public static ControlFlowGraphWrapper From(IOperation operation)
+                [Obsolete("Use From instead")]
+                public static ControlFlowGraphWrapper FromOperation(IOperation instance) =>
+                    From(instance);
+
+                public static ControlFlowGraphWrapper From(IOperation instance)
                 {
-                    if (operation is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(operation))
+                    else if (IsInstance(instance))
                     {
-                        return new ControlFlowGraphWrapper(operation);
+                        return new ControlFlowGraphWrapper((IOperation)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
-                public static bool IsInstance(IOperation operation) =>
-                    operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+                public static bool IsInstance(IOperation instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);

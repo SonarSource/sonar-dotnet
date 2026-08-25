@@ -21,8 +21,6 @@ namespace SonarAnalyzer.ShimLayer;
 
 public partial struct BaseNamespaceDeclarationSyntaxWrapper
 {
-    public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.NamespaceDeclarationSyntax";
-
     public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(NamespaceDeclarationSyntax node) =>
         new(node);
 }

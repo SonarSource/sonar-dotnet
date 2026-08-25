@@ -42,7 +42,7 @@ public class GenericTypeStrategyTest
     [TestMethod]
     public void SingleArgument_WrapStrategy_NotSupported()
     {
-        var sut = new GenericTypeStrategy(typeof(List<FileScopedNamespaceDeclarationSyntax>), [new SyntaxNodeWrapStrategy(typeof(FileScopedNamespaceDeclarationSyntax), typeof(SyntaxNode), [])]);
+        var sut = new GenericTypeStrategy(typeof(List<FileScopedNamespaceDeclarationSyntax>), [new SyntaxNodeWrapStrategy(typeof(FileScopedNamespaceDeclarationSyntax), typeof(SyntaxNode), null, [])]);
         sut.IsSupported.Should().BeFalse();
         sut.Generate([]).Should().BeNull();
     }

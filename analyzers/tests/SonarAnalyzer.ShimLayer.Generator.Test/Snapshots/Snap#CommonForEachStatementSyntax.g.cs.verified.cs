@@ -29,6 +29,7 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct CommonForEachStatementSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.CommonForEachStatementSyntax";
+    public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ForEachStatementSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CommonForEachStatementSyntaxWrapper));
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();

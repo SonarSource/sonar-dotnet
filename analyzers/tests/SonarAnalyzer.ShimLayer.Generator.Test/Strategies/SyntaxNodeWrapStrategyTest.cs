@@ -30,6 +30,7 @@ public class SyntaxNodeWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(
             typeof(RecordDeclarationSyntax),
             typeof(TypeDeclarationSyntax),
+            null,
             []);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
@@ -117,6 +118,7 @@ public class SyntaxNodeWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(
             typeof(RecordDeclarationSyntax),
             typeof(TypeDeclarationSyntax),
+            null,
             [
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Span))[0], true, "SpanAccessor"),
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.ClassOrStructKeyword))[0], false, "ClassOrStructKeywordAccessor"),
@@ -225,10 +227,11 @@ public class SyntaxNodeWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(
             typeof(IsPatternExpressionSyntax),
             typeof(ExpressionSyntax),
+            null,
             [
                 new(typeof(IsPatternExpressionSyntax).GetMember(nameof(IsPatternExpressionSyntax.Pattern))[0], false, "PatternAccessor"),
             ]);
-        var patternSyntaxStrategy = new SyntaxNodeWrapStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), []);
+        var patternSyntaxStrategy = new SyntaxNodeWrapStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), null, []);
 
         var result = sut.Generate(new() { { typeof(PatternSyntax), patternSyntaxStrategy } });
         result.Should().BeIgnoringLineEndings(
@@ -316,12 +319,12 @@ public class SyntaxNodeWrapStrategyTest
     [TestMethod]
     public void Generate_ConstantPatternSyntax()
     {
-        var sut = new SyntaxNodeWrapStrategy(typeof(ConstantPatternSyntax), typeof(CSharpSyntaxNode), []);
+        var sut = new SyntaxNodeWrapStrategy(typeof(ConstantPatternSyntax), typeof(CSharpSyntaxNode), null, []);
         var model = new Dictionary<Type, Strategy>()
         {
             { typeof(ConstantPatternSyntax), sut },
-            { typeof(PatternSyntax), new SyntaxNodeWrapStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), []) },
-            { typeof(ExpressionOrPatternSyntax), new SyntaxNodeWrapStrategy(typeof(ExpressionOrPatternSyntax), typeof(CSharpSyntaxNode), []) },
+            { typeof(PatternSyntax), new SyntaxNodeWrapStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), null, []) },
+            { typeof(ExpressionOrPatternSyntax), new SyntaxNodeWrapStrategy(typeof(ExpressionOrPatternSyntax), typeof(CSharpSyntaxNode), null, []) },
         };
         var result = sut.Generate(new(model));
         result.Should().BeIgnoringLineEndings(
@@ -415,6 +418,7 @@ public class SyntaxNodeWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(
             typeof(SyntaxNode),
             typeof(SyntaxNode),
+            null,
             Enumerable.Repeat(unsupportedMember, 20).ToArray());    // This should not produce 20 empty lines
 
         var result = sut.Generate(new() { { typeof(PatternSyntax), sut } });
@@ -502,6 +506,7 @@ public class SyntaxNodeWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(
             typeof(IndexerDeclarationSyntax),
             typeof(SyntaxNode),
+            null,
             [
                 new(typeof(IndexerDeclarationSyntax).GetMember("Semicolon")[0], true, "SemicolonAccessor"),         // Has ObsoleteAttribute to render
                 new(typeof(AliasQualifiedNameSyntax).GetMember("Parent")[0], true, "ParentAccessor"),               // Has NullableAttribute to ignore
@@ -600,6 +605,7 @@ public class SyntaxNodeWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(
             typeof(RecordDeclarationSyntax),
             typeof(TypeDeclarationSyntax),
+            null,
             [
                 // This class is not authentic. There's a mix of different types to demonstrate what will be rendered
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Members))[0], false, "MembersAccessor"),               // SyntaxList with accessor
@@ -607,7 +613,7 @@ public class SyntaxNodeWrapStrategyTest
                 new(typeof(TupleExpressionSyntax).GetMember(nameof(TupleExpressionSyntax.Arguments))[0], false, "ArgumentsAccessor"),               // SeparatedSyntaxList
                 new(typeof(SwitchExpressionSyntax).GetMember(nameof(SwitchExpressionSyntax.Arms))[0], false, "ArmsAccessor")                        // SeparatedSyntaxListWrapper
             ]);
-        var result = sut.Generate(new() { { typeof(SwitchExpressionArmSyntax), new SyntaxNodeWrapStrategy(typeof(SwitchExpressionArmSyntax), typeof(CSharpSyntaxNode), []) } });
+        var result = sut.Generate(new() { { typeof(SwitchExpressionArmSyntax), new SyntaxNodeWrapStrategy(typeof(SwitchExpressionArmSyntax), typeof(CSharpSyntaxNode), null, []) } });
         result.Should().BeIgnoringLineEndings(
             """
             //<auto-generated/>

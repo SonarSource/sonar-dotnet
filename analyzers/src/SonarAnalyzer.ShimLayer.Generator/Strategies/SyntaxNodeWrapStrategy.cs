@@ -38,7 +38,7 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
                 wrapper.wrappedInstance;
         """;
 
-    public SyntaxNodeWrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, baseType, members) { }
+    public SyntaxNodeWrapStrategy(Type latest, Type baseType, Type fallbackBaseType, MemberDescriptor[] members) : base(latest, baseType, fallbackBaseType, members) { }
 
     protected override string WrapperToWrapperConversions(StrategyModel model)
     {

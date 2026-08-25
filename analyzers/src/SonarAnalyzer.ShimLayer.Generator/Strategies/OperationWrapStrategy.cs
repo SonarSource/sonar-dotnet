@@ -36,7 +36,7 @@ public class OperationWrapStrategy : WrapStrategy
                 From(instance);
         """;
 
-    public OperationWrapStrategy(Type latest, MemberDescriptor[] members) : base(latest, typeof(IOperation), members) { }
+    public OperationWrapStrategy(Type latest, MemberDescriptor[] members) : base(latest, typeof(IOperation), null, members) { }
 
     protected override string WrapperToWrapperConversions(StrategyModel model) =>
         WrapperToWrapperConversions(Latest.GetInterfaces().Where(x => model[x] is OperationWrapStrategy));

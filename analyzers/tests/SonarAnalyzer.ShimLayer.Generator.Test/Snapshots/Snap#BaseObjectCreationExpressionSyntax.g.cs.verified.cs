@@ -29,6 +29,7 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BaseObjectCreationExpressionSyntax";
+    public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ObjectCreationExpressionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BaseObjectCreationExpressionSyntaxWrapper));
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();

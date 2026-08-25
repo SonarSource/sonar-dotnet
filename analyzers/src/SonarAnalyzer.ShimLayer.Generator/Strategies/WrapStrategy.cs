@@ -27,9 +27,13 @@ public abstract class WrapStrategy : MemberStrategy
     protected abstract string WrapperToWrapperConversions(StrategyModel model);
 
     public Type BaseType { get; }
+    public Type FallbackBaseType { get; }
 
-    protected WrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, members) =>
+    protected WrapStrategy(Type latest, Type baseType, Type fallbackBaseType, MemberDescriptor[] members) : base(latest, members)
+    {
         BaseType = baseType;
+        FallbackBaseType = fallbackBaseType;
+    }
 
     public override string ReturnTypeSnippet() =>
         $"{Latest.Name}Wrapper";
@@ -49,6 +53,7 @@ public abstract class WrapStrategy : MemberStrategy
             public readonly partial struct {{Latest.Name}}Wrapper{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
             {
                 public const string WrappedTypeName = "{{Latest.FullName}}";
+                {{FallbackBaseTypeSnippet()}}
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -114,4 +119,7 @@ public abstract class WrapStrategy : MemberStrategy
         }
         return sb?.ToString();
     }
+
+    private string FallbackBaseTypeSnippet() =>
+        FallbackBaseType is null ? null : $"""public const string FallbackWrappedTypeName = "{FallbackBaseType.FullName}";""";
 }

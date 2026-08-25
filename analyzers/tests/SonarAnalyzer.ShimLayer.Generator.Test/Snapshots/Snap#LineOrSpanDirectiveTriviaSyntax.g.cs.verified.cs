@@ -29,6 +29,7 @@ namespace SonarAnalyzer.ShimLayer;
 public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineOrSpanDirectiveTriviaSyntax";
+    public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineDirectiveTriviaSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineOrSpanDirectiveTriviaSyntaxWrapper));
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();

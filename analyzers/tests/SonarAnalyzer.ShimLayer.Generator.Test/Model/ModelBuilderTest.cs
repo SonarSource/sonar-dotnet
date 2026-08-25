@@ -26,11 +26,13 @@ namespace SonarAnalyzer.ShimLayer.Generator.Model.Test;
 [TestClass]
 public class ModelBuilderTest
 {
+    private static readonly TypeDescriptor SyntaxNodeDescriptor = new(typeof(SyntaxNode), []);
+
     [TestMethod]
     public void Build_NestedTypes()
     {
         var type = typeof(IOperation.OperationList);
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<SkipStrategy>();
     }
 
@@ -38,7 +40,7 @@ public class ModelBuilderTest
     public void Build_GenericTypes()
     {
         var type = typeof(IEnumerable<int>);
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<SkipStrategy>();
     }
 
@@ -46,7 +48,7 @@ public class ModelBuilderTest
     public void Build_Delegates()
     {
         var type = typeof(SyntaxReceiverCreator);
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<SkipStrategy>();
     }
 
@@ -55,7 +57,7 @@ public class ModelBuilderTest
     {
         var type = typeof(NamespaceKind);
         var members = type.GetMembers();
-        var model = ModelBuilder.Build([new TypeDescriptor(type, members)], []);
+        var model = ModelBuilder.Build([new(type, members), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<NewEnumStrategy>()
             .Which.Fields.Select(x => x.Name).Should().BeEquivalentTo([
                 "Assembly",
@@ -74,7 +76,7 @@ public class ModelBuilderTest
         var compilation = type.GetMember("Compilation").Single();
         var module = type.GetMember("Module").Single();
 
-        var model = ModelBuilder.Build([new(type, [assembly, compilation, module])], [new(type, [assembly])]);
+        var model = ModelBuilder.Build([new(type, [assembly, compilation, module]), SyntaxNodeDescriptor], [new(type, [assembly])]);
         model[type].Should().BeOfType<PartialEnumStrategy>()
             .Which.Fields.Select(x => x.Name).Should().BeEquivalentTo([
                 "Compilation",
@@ -85,7 +87,7 @@ public class ModelBuilderTest
     public void Build_SyntaxNode_Itself()
     {
         var type = typeof(SyntaxNode);
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        var model = ModelBuilder.Build([new(type, [])], []);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>();
     }
 
@@ -93,12 +95,12 @@ public class ModelBuilderTest
     public void Build_SyntaxNode_RecordDeclaration()
     {
         var type = typeof(RecordDeclarationSyntax);
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], [
+        var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], [
             new(typeof(TypeDeclarationSyntax), []),
             new(typeof(BaseTypeDeclarationSyntax), []),
             new(typeof(MemberDeclarationSyntax), []),
             new(typeof(CSharpSyntaxNode), []),
-            new(typeof(SyntaxNode), [])]);
+            SyntaxNodeDescriptor]);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.BaseType.FullName.Should().Be(typeof(TypeDeclarationSyntax).FullName);
     }
 
@@ -106,7 +108,7 @@ public class ModelBuilderTest
     public void Build_SyntaxNode_NoCommonBaseType()
     {
         var type = typeof(RecordDeclarationSyntax);
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.BaseType.Should().Be<object>();
     }
 
@@ -115,7 +117,7 @@ public class ModelBuilderTest
     {
         using var typeLoader = new TypeLoader();
         var typeDescriptor = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(ExtensionBlockDeclarationSyntax));
-        var model = ModelBuilder.Build([typeDescriptor], typeLoader.LoadBaseline());
+        var model = ModelBuilder.Build([typeDescriptor, SyntaxNodeDescriptor], typeLoader.LoadBaseline());
         var strategy = model[typeDescriptor.Type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which;
         strategy.BaseType.FullName.Should().Be(typeof(TypeDeclarationSyntax).FullName);
         strategy.Members.Should().HaveCount(111);
@@ -129,7 +131,7 @@ public class ModelBuilderTest
         using var typeLoader = new TypeLoader();
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IOperation));
         var iOperation = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(IOperation));
-        var model = ModelBuilder.Build([type], [iOperation]);
+        var model = ModelBuilder.Build([type, SyntaxNodeDescriptor], [iOperation]);
         model[type.Type].Should().BeOfType<IOperationStrategy>()
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
@@ -152,7 +154,7 @@ public class ModelBuilderTest
         using var typeLoader = new TypeLoader();
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IInvocationOperation));
         var iOperation = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(IOperation));
-        var model = ModelBuilder.Build([type], [iOperation]);
+        var model = ModelBuilder.Build([type, SyntaxNodeDescriptor], [iOperation]);
         model[type.Type].Should().BeOfType<OperationWrapStrategy>()
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "Microsoft.CodeAnalysis.IMethodSymbol TargetMethod",
@@ -178,7 +180,7 @@ public class ModelBuilderTest
     public void Build_StaticClass()
     {
         var type = typeof(GeneratorExtensions);
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [])], []);
+        var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<SkipStrategy>();  // ToDo: This will change later, likely to StaticClassStrategy
     }
 
@@ -189,7 +191,7 @@ public class ModelBuilderTest
         var members = type.GetMembers();
 
         var model = ModelBuilder.Build(
-            [new(type, members)],
+            [new(type, members), SyntaxNodeDescriptor],
             [new(type, members.OrderByDescending(x => x.ToString()).ToArray())]);
         model[type].Should().BeOfType<NoChangeStrategy>();
     }
@@ -201,9 +203,20 @@ public class ModelBuilderTest
         var members = type.GetMembers();
 
         var model = ModelBuilder.Build(
-            [new(type, members)],
+            [new(type, members), SyntaxNodeDescriptor],
             [new(type, [])]);           // Fallback for types that do have a baseline (can be used), but do not have a dedicated strategy
         model[type].Should().BeOfType<NoChangeStrategy>();
+    }
+
+    [TestMethod]
+    public void Build_FallbackBaseType()
+    {
+        var type = typeof(BaseNamespaceDeclarationSyntax);
+        var fallbackBaseType = typeof(NamespaceDeclarationSyntax);
+        var model = ModelBuilder.Build(
+            [new(fallbackBaseType, []), new(type, []), SyntaxNodeDescriptor],
+            [new(fallbackBaseType, [])]);
+        model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.FallbackBaseType.Should().Be(fallbackBaseType);
     }
 
     [TestMethod]
@@ -212,7 +225,7 @@ public class ModelBuilderTest
         var type = typeof(SyntaxNode);
         var parent = type.GetMember("Parent").Single();
         var ancestors = type.GetMember("Ancestors").Single();
-        var model = ModelBuilder.Build([new TypeDescriptor(type, [parent, ancestors])], []);
+        var model = ModelBuilder.Build([new(type, [parent, ancestors])], []);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>()
             .Which.Members.Should().BeEquivalentTo([
                 new MemberDescriptor(parent, false, "ParentAccessor"),
@@ -239,7 +252,7 @@ public class ModelBuilderTest
         using var typeLoader = new TypeLoader();
         var baseline = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(CSharpSyntaxNode));
         var latest = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(TupleElementSyntax));
-        var model = ModelBuilder.Build([latest], [baseline]);
+        var model = ModelBuilder.Build([latest, SyntaxNodeDescriptor], [baseline]);
         var members = model[latest.Type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.Members;
         members.Should().ContainSingle(x => x.Member.Name == "Parent").Which.IsPassthrough.Should().BeTrue();
         members.Should().ContainSingle(x => x.Member.Name == "Type").Which.IsPassthrough.Should().BeFalse();
@@ -251,7 +264,7 @@ public class ModelBuilderTest
         using var typeLoader = new TypeLoader();
         var baseline = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(IOperation));
         var latest = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(ITupleOperation));
-        var model = ModelBuilder.Build([latest], [baseline]);
+        var model = ModelBuilder.Build([latest, SyntaxNodeDescriptor], [baseline]);
         var members = model[latest.Type].Should().BeOfType<OperationWrapStrategy>().Which.Members;
         members.Should().ContainSingle(x => x.Member.Name == "Syntax").Which.IsPassthrough.Should().BeTrue();
         members.Should().ContainSingle(x => x.Member.Name == "NaturalType").Which.IsPassthrough.Should().BeFalse();
@@ -280,7 +293,7 @@ public class ModelBuilderTest
         var members = type.GetMember("WithModifiers");
         var memberFromTopType = members.Single(x => x.DeclaringType == typeof(ClassDeclarationSyntax)); // Returns ClassDeclarationSyntax, shadows the base type method
         var memberFromBaseType = members.Single(x => x.DeclaringType == typeof(TypeDeclarationSyntax)); // Returns TypeDeclarationSyntax
-        var model = ModelBuilder.Build([new(type, [memberFromBaseType, memberFromTopType])], []);
+        var model = ModelBuilder.Build([new(type, [memberFromBaseType, memberFromTopType]), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.Members.Should().ContainSingle().Which.Member.Should().Be(memberFromTopType);
     }
 
@@ -289,7 +302,7 @@ public class ModelBuilderTest
     {
         var type = typeof(SimpleLambdaExpressionSyntax);
         var members = type.GetMember("Update").OrderBy(x => x.ToString()).ToArray();
-        var model = ModelBuilder.Build([new(type, members)], []);
+        var model = ModelBuilder.Build([new(type, members), SyntaxNodeDescriptor], []);
         model[type].Should().BeOfType<SyntaxNodeWrapStrategy>().Which.Members.Should().BeEquivalentTo([
             new MemberDescriptor(members[0], false, "UpdateAccessor"),
             new MemberDescriptor(members[1], false, "UpdateAccessor_Overload2"),
@@ -305,7 +318,7 @@ public class ModelBuilderTest
         var deconstructSymbol = type.GetMember("DeconstructSymbol").Single();
         var deconstructionSubpatterns = type.GetMember("DeconstructionSubpatterns").Single();
         using var scope = new CurrentCultureScope(new CultureInfo("cs-cz"));
-        var model = ModelBuilder.Build([new(type, [children, deconstructSymbol, deconstructionSubpatterns])], [new(typeof(IOperation), [])]);
+        var model = ModelBuilder.Build([new(type, [children, deconstructSymbol, deconstructionSubpatterns]), SyntaxNodeDescriptor], [new(typeof(IOperation), [])]);
         model[type].Should().BeOfType<OperationWrapStrategy>().Which.Members.Select(x => x.Member.Name).Should().ContainInOrder(
             "Children",                     // Culture-invariant, otherwise "Ch" is after "H" under cs-cz culture
             "DeconstructSymbol",

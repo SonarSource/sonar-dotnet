@@ -29,6 +29,7 @@ public class ClassWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(   // ToDo: This should use TypeWrapStrategy
             typeof(RecordDeclarationSyntax),    // ToDo: This should use AnalyzerConfigOptions
             typeof(TypeDeclarationSyntax),      // ToDo: This should not be here
+            null,
             [new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.TryGetValue))[0], true, "TryGetValueAccessor")]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
@@ -117,6 +118,7 @@ public class ClassWrapStrategyTest
         var sut = new SyntaxNodeWrapStrategy(   // ToDo: This should use TypeWrapStrategy
             typeof(RecordDeclarationSyntax),    // ToDo: This should use AnalyzerConfigOptions
             typeof(TypeDeclarationSyntax),      // ToDo: This should not be here
+            null,
             [new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.TryGetValue))[0], false, "TryGetValueAccessor")]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(

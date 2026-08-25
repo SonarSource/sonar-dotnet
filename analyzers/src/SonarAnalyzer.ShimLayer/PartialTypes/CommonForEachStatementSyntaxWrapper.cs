@@ -21,8 +21,6 @@ namespace SonarAnalyzer.ShimLayer;
 
 public partial struct CommonForEachStatementSyntaxWrapper
 {
-    public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ForEachStatementSyntax";
-
     public static implicit operator CommonForEachStatementSyntaxWrapper(ForEachStatementSyntax node) =>
         new(node);
 }
