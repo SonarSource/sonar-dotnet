@@ -55,6 +55,24 @@ public static class ExpressionSyntaxExtensions
             }
         }
 
+        /// <summary>
+        /// Climbs a member access, invocation, element access, "?." or null-forgiving chain upward to its outermost
+        /// expression, e.g. for <c>a</c> in <c>a.b.C()</c> or <c>a!.b?.C()</c> the whole chain is returned.
+        /// This is the mirror of <see cref="LeftMostInMemberAccess"/>, which instead descends to the leftmost receiver.
+        /// </summary>
+        public ExpressionSyntax ChainRoot =>
+            expression.Parent switch
+            {
+                ParenthesizedExpressionSyntax parenthesized => parenthesized.ChainRoot,
+                ConditionalAccessExpressionSyntax conditional =>
+                    conditional.GetRootConditionalAccessExpression() is { } root ? root.ChainRoot : conditional,
+                MemberAccessExpressionSyntax memberAccess when memberAccess.Expression == expression => memberAccess.ChainRoot,
+                InvocationExpressionSyntax invocation when invocation.Expression == expression => invocation.ChainRoot,
+                ElementAccessExpressionSyntax elementAccess when elementAccess.Expression == expression => elementAccess.ChainRoot,
+                PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } suppression => suppression.ChainRoot,
+                _ => expression,
+            };
+
         public bool CanBeNull(SemanticModel semanticModel) =>
             semanticModel.GetTypeInfo(expression).Type is { } expressionType
             && (expressionType.IsReferenceType || expressionType.Is(KnownType.System_Nullable_T));

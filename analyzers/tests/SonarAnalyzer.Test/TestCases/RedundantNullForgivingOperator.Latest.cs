@@ -233,6 +233,31 @@ public class NarrowedBeforeAwait
     }
 }
 
+public interface IAwaitedNullForgivingReceiverService
+{
+    Task RunAsync();
+}
+
+public class AwaitedNullForgivingReceiver
+{
+    private readonly IAwaitedNullForgivingReceiverService? service;
+
+    // "service" is never narrowed, the compiler still requires the "!" here.
+    public async Task Method() =>
+        await service!.RunAsync(); // Compliant, see https://sonarsource.atlassian.net/browse/NET-4416
+}
+
+public class NarrowedThenAwaited
+{
+    public async Task Method(IAwaitedNullForgivingReceiverService? service)
+    {
+        if (service != null)
+        {
+            await service!.RunAsync(); // Compliant, FN: narrowed here, but our await-chain opt-out doesn't check narrowing, see https://sonarsource.atlassian.net/browse/NET-4415
+        }
+    }
+}
+
 public class PropertyInitializer
 {
     public string NameWarningsEnabled { get; set; } = default!; // Compliant, "default" for a non-nullable reference type is genuinely null

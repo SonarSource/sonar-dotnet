@@ -92,6 +92,22 @@ public class ExpressionSyntaxExtensionsTest
     }
 
     [TestMethod]
+    [DataRow("$$a$$;", "a")]
+    [DataRow("$$a$$.b;", "a.b")]
+    [DataRow("$$a$$.b();", "a.b()")]
+    [DataRow("$$a$$.b().c;", "a.b().c")]
+    [DataRow("$$a$$();", "a()")]
+    [DataRow("$$a$$[b];", "a[b]")]
+    [DataRow("$$a$$!;", "a!")]
+    [DataRow("$$a$$!.b();", "a!.b()")]
+    [DataRow("$$a$$?.b();", "a?.b()")]
+    [DataRow("a?.$$b!$$.c();", "a?.b!.c()")] // Climbing from the WhenNotNull side of "?." must still reach the outer root
+    [DataRow("($$a$$.b()).c();", "(a.b()).c()")] // Intermediate parentheses must not stop the climb
+    [DataRow("await $$a$$.b();", "a.b()")] // The climb stops below "await", it is not part of the receiver chain
+    public void ChainRoot(string expression, string expected) =>
+        TestCompiler.NodeBetweenMarkersCS<ExpressionSyntax>(expression, ignoreErrors: true).Node.ChainRoot.ToString().Should().Be(expected);
+
+    [TestMethod]
     [DataRow("default", true)]
     [DataRow("default!", true)]
     [DataRow("(default)!", true)]

@@ -56,6 +56,16 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
             return false;
         }
 
+        // GetSpeculativeTypeInfo() wrongly reports NotNull when "suppression" is the receiver of a chain that is directly awaited,
+        // e.g. "await service!.RunAsync()", even without any narrowing. We can't trust the speculative result in that shape.
+        // This is a known limitation of speculative binding: https://github.com/dotnet/roslyn/issues/35037
+        // This bail-out causes an FN when the receiver was genuinely narrowed: https://sonarsource.atlassian.net/browse/NET-4415
+        var chainRoot = suppression.ChainRoot;
+        if (chainRoot is { Parent: AwaitExpressionSyntax { Expression: not null } })
+        {
+            return false;
+        }
+
         var typeInfo = model.GetSpeculativeTypeInfo(suppression.Operand.SpanStart, suppression.Operand, SpeculativeBindingOption.BindAsExpression);
         return typeInfo.Nullability().FlowState == NullableFlowState.NotNull && !IsOblivious(model, suppression.Operand) && !HasNestedNullableAnnotation(typeInfo.Type);
     }
