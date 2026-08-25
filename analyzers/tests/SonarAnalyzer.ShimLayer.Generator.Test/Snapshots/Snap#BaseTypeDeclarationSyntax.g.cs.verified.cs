@@ -58,5 +58,6 @@ public static partial class BaseTypeDeclarationSyntaxShimExtensions
         public BaseTypeDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
         public BaseTypeDeclarationSyntax WithOpenBraceToken(SyntaxToken openBraceToken) => WithOpenBraceTokenAccessor(wrappedInstance, openBraceToken);
         public BaseTypeDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
+
     }
 }

@@ -66,6 +66,9 @@ public readonly partial struct ITypePatternOperationWrapper : IOperationWrapper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static ITypePatternOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ITypePatternOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

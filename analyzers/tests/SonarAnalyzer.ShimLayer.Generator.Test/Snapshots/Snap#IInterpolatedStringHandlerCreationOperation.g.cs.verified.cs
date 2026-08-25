@@ -68,6 +68,9 @@ public readonly partial struct IInterpolatedStringHandlerCreationOperationWrappe
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IInterpolatedStringHandlerCreationOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IInterpolatedStringHandlerCreationOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

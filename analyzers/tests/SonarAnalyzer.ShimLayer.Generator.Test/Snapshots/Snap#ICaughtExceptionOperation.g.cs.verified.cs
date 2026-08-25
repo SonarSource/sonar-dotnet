@@ -60,6 +60,9 @@ public readonly partial struct ICaughtExceptionOperationWrapper : IOperationWrap
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static ICaughtExceptionOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ICaughtExceptionOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

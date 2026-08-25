@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 namespace SonarAnalyzer.ShimLayer.Generator.Model;
 
 public static class ModelBuilder
@@ -43,6 +45,10 @@ public static class ModelBuilder
             return baseline is null
                 ? new NewEnumStrategy(latest.Type, fields)
                 : new PartialEnumStrategy(latest.Type, fields);
+        }
+        else if (latest.Type.FullName == "Microsoft.CodeAnalysis.IOperation")
+        {
+            return new IOperationStrategy(latest.Type, CreateMembers(latest, baseline));
         }
         else if (IsAssignableTo(latest.Type, "Microsoft.CodeAnalysis.SyntaxNode"))
         {

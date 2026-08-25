@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
@@ -74,6 +74,9 @@ public class OperationWrapStrategyTest
                 public IOperation WrappedOperation => wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
+
+                public static IFieldInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
+                    IsInstance(instance) ? From(instance) : null;
 
                 [Obsolete("Use From instead")]
                 public static IFieldInitializerOperationWrapper FromOperation(IOperation instance) =>
@@ -158,6 +161,9 @@ public class OperationWrapStrategyTest
                 public IOperation WrappedOperation => wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
+
+                public static IFieldReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+                    IsInstance(instance) ? From(instance) : null;
 
                 [Obsolete("Use From instead")]
                 public static IFieldReferenceOperationWrapper FromOperation(IOperation instance) =>
@@ -253,6 +259,9 @@ public class OperationWrapStrategyTest
 
                 public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(wrappedInstance);
                 public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(wrappedInstance);
+
+                public static ITupleOperationWrapper? FromOrDefault(IOperation instance) =>
+                    IsInstance(instance) ? From(instance) : null;
 
                 [Obsolete("Use From instead")]
                 public static ITupleOperationWrapper FromOperation(IOperation instance) =>

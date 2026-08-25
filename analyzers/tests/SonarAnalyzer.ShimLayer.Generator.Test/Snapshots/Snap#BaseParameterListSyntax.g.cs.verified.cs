@@ -42,5 +42,6 @@ public static partial class BaseParameterListSyntaxShimExtensions
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseParameterListSyntax WithParameters(SeparatedSyntaxList<ParameterSyntax> parameters) => WithParametersAccessor(wrappedInstance, parameters);
+
     }
 }

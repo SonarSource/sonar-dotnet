@@ -130,7 +130,7 @@ public class ModelBuilderTest
         var type = typeLoader.LoadLatest().Single(x => x.Type.Name == nameof(IOperation));
         var iOperation = typeLoader.LoadBaseline().Single(x => x.Type.Name == nameof(IOperation));
         var model = ModelBuilder.Build([type], [iOperation]);
-        model[type.Type].Should().BeOfType<ExtendStrategy>()
+        model[type.Type].Should().BeOfType<IOperationStrategy>()
             .Which.Members.Select(x => x.Member.ToString()).Should().BeEquivalentTo([
                 "System.Void Accept(Microsoft.CodeAnalysis.Operations.OperationVisitor)",
                 "TResult Accept[TArgument,TResult](Microsoft.CodeAnalysis.Operations.OperationVisitor`2[TArgument,TResult], TArgument)",

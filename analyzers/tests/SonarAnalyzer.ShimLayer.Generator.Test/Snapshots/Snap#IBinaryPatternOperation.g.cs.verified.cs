@@ -70,6 +70,9 @@ public readonly partial struct IBinaryPatternOperationWrapper : IOperationWrappe
     public IPatternOperationWrapper RightPattern => IPatternOperationWrapper.From(RightPatternAccessor(wrappedInstance));
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IBinaryPatternOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IBinaryPatternOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

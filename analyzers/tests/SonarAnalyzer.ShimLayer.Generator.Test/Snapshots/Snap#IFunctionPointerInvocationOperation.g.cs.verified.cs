@@ -64,6 +64,9 @@ public readonly partial struct IFunctionPointerInvocationOperationWrapper : IOpe
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Target => TargetAccessor(wrappedInstance);
 
+    public static IFunctionPointerInvocationOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IFunctionPointerInvocationOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

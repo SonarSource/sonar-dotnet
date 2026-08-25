@@ -52,5 +52,6 @@ public static partial class BaseFieldDeclarationSyntaxShimExtensions
         public BaseFieldDeclarationSyntax WithDeclaration(VariableDeclarationSyntax declaration) => WithDeclarationAccessor(wrappedInstance, declaration);
         public BaseFieldDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
         public BaseFieldDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
+
     }
 }

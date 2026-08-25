@@ -82,6 +82,9 @@ public readonly partial struct IForToLoopOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation StepValue => StepValueAccessor(wrappedInstance);
 
+    public static IForToLoopOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IForToLoopOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

@@ -68,6 +68,9 @@ public readonly partial struct IConditionalOperationWrapper : IOperationWrapper
     public IOperation WhenFalse => WhenFalseAccessor(wrappedInstance);
     public IOperation WhenTrue => WhenTrueAccessor(wrappedInstance);
 
+    public static IConditionalOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IConditionalOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

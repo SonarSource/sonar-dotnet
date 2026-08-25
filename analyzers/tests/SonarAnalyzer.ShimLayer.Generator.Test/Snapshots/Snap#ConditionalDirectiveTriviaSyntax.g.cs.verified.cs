@@ -44,5 +44,6 @@ public static partial class ConditionalDirectiveTriviaSyntaxShimExtensions
         public ConditionalDirectiveTriviaSyntax WithCondition(ExpressionSyntax condition) => WithConditionAccessor(wrappedInstance, condition);
         public BranchingDirectiveTriviaSyntax WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken);
         public BranchingDirectiveTriviaSyntax WithHashToken(SyntaxToken hashToken) => WithHashTokenAccessor(wrappedInstance, hashToken);
+
     }
 }

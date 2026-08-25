@@ -78,6 +78,9 @@ public readonly partial struct IForEachLoopOperationWrapper : IOperationWrapper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IForEachLoopOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IForEachLoopOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

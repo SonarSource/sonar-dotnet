@@ -74,6 +74,9 @@ public readonly partial struct IRecursivePatternOperationWrapper : IOperationWra
     public ImmutableArray<IOperation> PropertySubpatterns => PropertySubpatternsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IRecursivePatternOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IRecursivePatternOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

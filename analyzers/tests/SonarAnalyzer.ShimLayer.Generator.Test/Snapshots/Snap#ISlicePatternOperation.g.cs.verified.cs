@@ -68,6 +68,9 @@ public readonly partial struct ISlicePatternOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public ISymbol SliceSymbol => (ISymbol)SliceSymbolAccessor(wrappedInstance);
 
+    public static ISlicePatternOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ISlicePatternOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

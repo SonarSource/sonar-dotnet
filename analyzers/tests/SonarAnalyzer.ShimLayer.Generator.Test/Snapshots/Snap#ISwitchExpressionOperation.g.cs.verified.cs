@@ -66,6 +66,9 @@ public readonly partial struct ISwitchExpressionOperationWrapper : IOperationWra
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static ISwitchExpressionOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ISwitchExpressionOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

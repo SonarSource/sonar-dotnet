@@ -64,6 +64,9 @@ public readonly partial struct ICoalesceOperationWrapper : IOperationWrapper
     public IOperation Value => ValueAccessor(wrappedInstance);
     public IOperation WhenNull => WhenNullAccessor(wrappedInstance);
 
+    public static ICoalesceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ICoalesceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

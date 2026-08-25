@@ -66,6 +66,9 @@ public readonly partial struct IIsTypeOperationWrapper : IOperationWrapper
     public ITypeSymbol TypeOperand => (ITypeSymbol)TypeOperandAccessor(wrappedInstance);
     public IOperation ValueOperand => ValueOperandAccessor(wrappedInstance);
 
+    public static IIsTypeOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IIsTypeOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

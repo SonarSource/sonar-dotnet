@@ -62,6 +62,9 @@ public readonly partial struct IDelegateCreationOperationWrapper : IOperationWra
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Target => TargetAccessor(wrappedInstance);
 
+    public static IDelegateCreationOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IDelegateCreationOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

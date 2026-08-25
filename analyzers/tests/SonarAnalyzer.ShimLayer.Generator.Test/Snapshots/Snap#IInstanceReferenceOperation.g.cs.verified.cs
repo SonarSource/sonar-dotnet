@@ -62,6 +62,9 @@ public readonly partial struct IInstanceReferenceOperationWrapper : IOperationWr
     public InstanceReferenceKind ReferenceKind => (InstanceReferenceKind)ReferenceKindAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IInstanceReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IInstanceReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

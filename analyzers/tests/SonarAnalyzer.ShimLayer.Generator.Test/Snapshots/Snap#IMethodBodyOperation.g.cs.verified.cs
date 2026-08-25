@@ -64,6 +64,9 @@ public readonly partial struct IMethodBodyOperationWrapper : IOperationWrapper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IMethodBodyOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IMethodBodyOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

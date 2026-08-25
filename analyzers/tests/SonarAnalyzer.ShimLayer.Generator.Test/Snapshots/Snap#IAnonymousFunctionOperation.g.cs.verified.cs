@@ -64,6 +64,9 @@ public readonly partial struct IAnonymousFunctionOperationWrapper : IOperationWr
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IMethodSymbol Symbol => (IMethodSymbol)SymbolAccessor(wrappedInstance);
 
+    public static IAnonymousFunctionOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IAnonymousFunctionOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

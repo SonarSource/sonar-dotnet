@@ -74,6 +74,9 @@ public readonly partial struct ICompoundAssignmentOperationWrapper : IOperationW
     public IOperation Target => TargetAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static ICompoundAssignmentOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ICompoundAssignmentOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

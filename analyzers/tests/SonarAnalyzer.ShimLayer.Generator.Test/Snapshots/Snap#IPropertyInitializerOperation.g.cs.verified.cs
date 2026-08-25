@@ -66,6 +66,9 @@ public readonly partial struct IPropertyInitializerOperationWrapper : IOperation
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static IPropertyInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IPropertyInitializerOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

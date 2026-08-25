@@ -70,6 +70,9 @@ public readonly partial struct IPropertyReferenceOperationWrapper : IOperationWr
     public IPropertySymbol Property => (IPropertySymbol)PropertyAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IPropertyReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IPropertyReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

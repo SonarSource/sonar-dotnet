@@ -64,6 +64,9 @@ public readonly partial struct IDeconstructionAssignmentOperationWrapper : IOper
     public IOperation Target => TargetAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static IDeconstructionAssignmentOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IDeconstructionAssignmentOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

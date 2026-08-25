@@ -68,6 +68,9 @@ public readonly partial struct IRelationalPatternOperationWrapper : IOperationWr
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static IRelationalPatternOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IRelationalPatternOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

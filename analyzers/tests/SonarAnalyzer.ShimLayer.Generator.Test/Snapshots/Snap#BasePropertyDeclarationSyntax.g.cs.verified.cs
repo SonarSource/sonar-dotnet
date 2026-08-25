@@ -54,5 +54,6 @@ public static partial class BasePropertyDeclarationSyntaxShimExtensions
         public BasePropertyDeclarationSyntax WithExplicitInterfaceSpecifier(ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier) => WithExplicitInterfaceSpecifierAccessor(wrappedInstance, explicitInterfaceSpecifier);
         public BasePropertyDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
         public BasePropertyDeclarationSyntax WithType(TypeSyntax type) => WithTypeAccessor(wrappedInstance, type);
+
     }
 }

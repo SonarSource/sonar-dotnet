@@ -64,6 +64,9 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
     public InterpolatedStringArgumentPlaceholderKind PlaceholderKind => (InterpolatedStringArgumentPlaceholderKind)PlaceholderKindAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

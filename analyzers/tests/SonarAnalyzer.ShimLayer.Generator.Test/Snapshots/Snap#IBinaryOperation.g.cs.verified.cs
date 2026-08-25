@@ -76,6 +76,9 @@ public readonly partial struct IBinaryOperationWrapper : IOperationWrapper
     public IOperation RightOperand => RightOperandAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IBinaryOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IBinaryOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

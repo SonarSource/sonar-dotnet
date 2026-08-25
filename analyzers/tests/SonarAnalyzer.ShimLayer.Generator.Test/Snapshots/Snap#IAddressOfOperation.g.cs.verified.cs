@@ -62,6 +62,9 @@ public readonly partial struct IAddressOfOperationWrapper : IOperationWrapper
     public IOperation Reference => ReferenceAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IAddressOfOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IAddressOfOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

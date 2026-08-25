@@ -61,7 +61,7 @@ public class IOperationExtensionsTest
                     }
                 }
             }
-            """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop().Should().NotBeNull();
+            """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop.Should().NotBeNull();
 
     [TestMethod]
     [DataRow("for (var i = 0; i < 9; i++) { }")]
@@ -76,15 +76,13 @@ public class IOperationExtensionsTest
                     {{loop}}
                 }
             }
-            """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop().Should().BeNull();
+            """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop.Should().BeNull();
 
     [TestMethod]
     public void ExtensionsMethodsUsedByArchitecture()
     {
         IOperation operation = null;
         // These extension methods are used by sonar-architecture. Do not remove them.
-        Assert.Throws<NullReferenceException>(() => operation.AsForEachLoop());
-        Assert.Throws<NullReferenceException>(() => operation.AsVariableDeclarator());
         operation.ToArrayCreation();
         operation.ToCatchClause();
         operation.ToConversion();

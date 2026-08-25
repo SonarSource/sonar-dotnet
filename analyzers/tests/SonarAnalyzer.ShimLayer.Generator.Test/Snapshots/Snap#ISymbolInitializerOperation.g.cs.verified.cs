@@ -64,6 +64,9 @@ public readonly partial struct ISymbolInitializerOperationWrapper : IOperationWr
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static ISymbolInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ISymbolInitializerOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

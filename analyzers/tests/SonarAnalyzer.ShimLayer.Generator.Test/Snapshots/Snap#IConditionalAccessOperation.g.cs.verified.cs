@@ -64,6 +64,9 @@ public readonly partial struct IConditionalAccessOperationWrapper : IOperationWr
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation WhenNotNull => WhenNotNullAccessor(wrappedInstance);
 
+    public static IConditionalAccessOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IConditionalAccessOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

@@ -62,6 +62,9 @@ public readonly partial struct IReturnOperationWrapper : IOperationWrapper
     public IOperation ReturnedValue => ReturnedValueAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IReturnOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IReturnOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

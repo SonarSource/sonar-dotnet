@@ -68,6 +68,9 @@ public readonly partial struct IRelationalCaseClauseOperationWrapper : IOperatio
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static IRelationalCaseClauseOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IRelationalCaseClauseOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

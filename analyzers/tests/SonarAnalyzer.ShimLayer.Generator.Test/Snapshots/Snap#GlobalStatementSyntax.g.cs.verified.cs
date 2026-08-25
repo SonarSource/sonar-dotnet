@@ -53,5 +53,6 @@ public static partial class GlobalStatementSyntaxShimExtensions
         public GlobalStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, StatementSyntax statement) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, statement);
         public GlobalStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public GlobalStatementSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
+
     }
 }

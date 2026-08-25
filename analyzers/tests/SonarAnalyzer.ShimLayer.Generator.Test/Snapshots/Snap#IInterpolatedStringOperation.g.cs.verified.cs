@@ -62,6 +62,9 @@ public readonly partial struct IInterpolatedStringOperationWrapper : IOperationW
     public ImmutableArray<IOperation> Parts => PartsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IInterpolatedStringOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IInterpolatedStringOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

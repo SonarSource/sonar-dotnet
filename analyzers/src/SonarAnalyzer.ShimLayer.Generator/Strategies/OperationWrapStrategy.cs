@@ -28,8 +28,11 @@ public class OperationWrapStrategy : WrapStrategy
         """;
 
     protected override string ConversionSnippet => $"""
+            public static {ReturnTypeSnippet()}? FromOrDefault(IOperation instance) =>
+                IsInstance(instance) ? From(instance) : null;
+
             [Obsolete("Use From instead")]
-            public static {Latest.Name}Wrapper FromOperation(IOperation instance) =>
+            public static {ReturnTypeSnippet()} FromOperation(IOperation instance) =>
                 From(instance);
         """;
 

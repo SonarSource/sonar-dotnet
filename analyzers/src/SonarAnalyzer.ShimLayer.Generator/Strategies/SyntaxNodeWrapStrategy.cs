@@ -31,7 +31,7 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
         """;
 
     protected override string ConversionSnippet => $"""
-            public static explicit operator {Latest.Name}Wrapper(SyntaxNode instance) =>
+            public static explicit operator {ReturnTypeSnippet()}(SyntaxNode instance) =>
                 From(instance);
 
             public static implicit operator {CompiletimeTypeSnippet()}({Latest.Name}Wrapper wrapper) =>

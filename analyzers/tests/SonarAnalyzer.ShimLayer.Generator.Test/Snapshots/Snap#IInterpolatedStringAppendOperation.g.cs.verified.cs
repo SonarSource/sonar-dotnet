@@ -62,6 +62,9 @@ public readonly partial struct IInterpolatedStringAppendOperationWrapper : IOper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IInterpolatedStringAppendOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IInterpolatedStringAppendOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

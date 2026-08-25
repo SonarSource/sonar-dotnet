@@ -70,6 +70,9 @@ public readonly partial struct IMethodReferenceOperationWrapper : IOperationWrap
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IMethodReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IMethodReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

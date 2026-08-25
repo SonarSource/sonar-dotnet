@@ -62,6 +62,9 @@ public readonly partial struct IInterpolatedStringTextOperationWrapper : IOperat
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Text => TextAccessor(wrappedInstance);
 
+    public static IInterpolatedStringTextOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IInterpolatedStringTextOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

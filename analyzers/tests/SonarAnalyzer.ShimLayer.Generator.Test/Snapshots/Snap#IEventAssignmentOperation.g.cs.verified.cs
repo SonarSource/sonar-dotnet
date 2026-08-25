@@ -66,6 +66,9 @@ public readonly partial struct IEventAssignmentOperationWrapper : IOperationWrap
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IEventAssignmentOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IEventAssignmentOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

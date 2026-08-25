@@ -68,6 +68,9 @@ public readonly partial struct IPatternCaseClauseOperationWrapper : IOperationWr
     public IPatternOperationWrapper Pattern => IPatternOperationWrapper.From(PatternAccessor(wrappedInstance));
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IPatternCaseClauseOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IPatternCaseClauseOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

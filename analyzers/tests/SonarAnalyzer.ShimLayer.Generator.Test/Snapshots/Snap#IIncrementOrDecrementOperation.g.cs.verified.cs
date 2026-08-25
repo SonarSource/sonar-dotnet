@@ -72,6 +72,9 @@ public readonly partial struct IIncrementOrDecrementOperationWrapper : IOperatio
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Target => TargetAccessor(wrappedInstance);
 
+    public static IIncrementOrDecrementOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IIncrementOrDecrementOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

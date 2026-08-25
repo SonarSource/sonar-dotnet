@@ -64,6 +64,9 @@ public readonly partial struct IBranchOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public ILabelSymbol Target => (ILabelSymbol)TargetAccessor(wrappedInstance);
 
+    public static IBranchOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IBranchOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

@@ -66,6 +66,9 @@ public readonly partial struct IVariableDeclaratorOperationWrapper : IOperationW
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public ILocalSymbol Symbol => (ILocalSymbol)SymbolAccessor(wrappedInstance);
 
+    public static IVariableDeclaratorOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IVariableDeclaratorOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

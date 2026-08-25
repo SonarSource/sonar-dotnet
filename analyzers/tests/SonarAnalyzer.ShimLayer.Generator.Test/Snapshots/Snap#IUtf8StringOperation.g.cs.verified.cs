@@ -62,6 +62,9 @@ public readonly partial struct IUtf8StringOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public string Value => (string)ValueAccessor(wrappedInstance);
 
+    public static IUtf8StringOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IUtf8StringOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

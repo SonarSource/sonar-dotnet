@@ -46,5 +46,6 @@ public static partial class XmlAttributeSyntaxShimExtensions
         public XmlAttributeSyntax WithEqualsToken(SyntaxToken equalsToken) => WithEqualsTokenAccessor(wrappedInstance, equalsToken);
         public XmlAttributeSyntax WithName(XmlNameSyntax name) => WithNameAccessor(wrappedInstance, name);
         public XmlAttributeSyntax WithStartQuoteToken(SyntaxToken startQuoteToken) => WithStartQuoteTokenAccessor(wrappedInstance, startQuoteToken);
+
     }
 }

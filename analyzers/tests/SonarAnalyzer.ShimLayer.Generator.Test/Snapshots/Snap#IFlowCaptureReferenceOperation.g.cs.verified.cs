@@ -64,6 +64,9 @@ public readonly partial struct IFlowCaptureReferenceOperationWrapper : IOperatio
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IFlowCaptureReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IFlowCaptureReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

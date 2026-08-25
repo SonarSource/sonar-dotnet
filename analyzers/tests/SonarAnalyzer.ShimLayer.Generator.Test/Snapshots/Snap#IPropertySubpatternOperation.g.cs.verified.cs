@@ -64,6 +64,9 @@ public readonly partial struct IPropertySubpatternOperationWrapper : IOperationW
     public IPatternOperationWrapper Pattern => IPatternOperationWrapper.From(PatternAccessor(wrappedInstance));
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IPropertySubpatternOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IPropertySubpatternOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

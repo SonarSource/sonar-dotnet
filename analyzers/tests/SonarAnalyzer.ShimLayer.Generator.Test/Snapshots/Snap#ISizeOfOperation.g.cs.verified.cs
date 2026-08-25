@@ -62,6 +62,9 @@ public readonly partial struct ISizeOfOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public ITypeSymbol TypeOperand => (ITypeSymbol)TypeOperandAccessor(wrappedInstance);
 
+    public static ISizeOfOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ISizeOfOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

@@ -64,6 +64,9 @@ public readonly partial struct ICollectionExpressionOperationWrapper : IOperatio
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static ICollectionExpressionOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ICollectionExpressionOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

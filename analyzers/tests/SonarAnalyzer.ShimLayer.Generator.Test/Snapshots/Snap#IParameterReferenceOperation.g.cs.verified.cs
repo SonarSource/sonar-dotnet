@@ -62,6 +62,9 @@ public readonly partial struct IParameterReferenceOperationWrapper : IOperationW
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IParameterReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IParameterReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

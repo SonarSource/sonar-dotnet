@@ -69,5 +69,6 @@ public static partial class SimpleLambdaExpressionSyntaxShimExtensions
         public SimpleLambdaExpressionSyntax WithBlock(BlockSyntax block) => WithBlockAccessor(wrappedInstance, block);
         public SimpleLambdaExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
         public SimpleLambdaExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
+
     }
 }

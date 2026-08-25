@@ -57,5 +57,6 @@ public static partial class LocalDeclarationStatementSyntaxShimExtensions
         public LocalDeclarationStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public LocalDeclarationStatementSyntax WithAwaitKeyword(SyntaxToken awaitKeyword) => WithAwaitKeywordAccessor(wrappedInstance, awaitKeyword);
         public LocalDeclarationStatementSyntax WithUsingKeyword(SyntaxToken usingKeyword) => WithUsingKeywordAccessor(wrappedInstance, usingKeyword);
+
     }
 }

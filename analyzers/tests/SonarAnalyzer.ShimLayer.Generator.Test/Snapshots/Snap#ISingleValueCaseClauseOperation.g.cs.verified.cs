@@ -66,6 +66,9 @@ public readonly partial struct ISingleValueCaseClauseOperationWrapper : IOperati
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 
+    public static ISingleValueCaseClauseOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ISingleValueCaseClauseOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

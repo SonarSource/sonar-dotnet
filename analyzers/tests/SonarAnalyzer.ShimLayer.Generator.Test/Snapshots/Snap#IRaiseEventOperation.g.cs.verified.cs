@@ -64,6 +64,9 @@ public readonly partial struct IRaiseEventOperationWrapper : IOperationWrapper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IRaiseEventOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IRaiseEventOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

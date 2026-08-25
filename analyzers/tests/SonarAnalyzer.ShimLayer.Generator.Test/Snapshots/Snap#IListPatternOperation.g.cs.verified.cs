@@ -72,6 +72,9 @@ public readonly partial struct IListPatternOperationWrapper : IOperationWrapper
     public ImmutableArray<IOperation> Patterns => PatternsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IListPatternOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IListPatternOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

@@ -81,91 +81,6 @@ public static class IOperationExtensions
     public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>
         Descendants(operation, true);
 
-    public static IAnonymousFunctionOperationWrapper? AsAnonymousFunction(this IOperation operation) =>
-        operation.As(OperationKindEx.AnonymousFunction, IAnonymousFunctionOperationWrapper.From);
-
-    public static IArgumentOperationWrapper? AsArgument(this IOperation operation) =>
-        operation.As(OperationKindEx.Argument, IArgumentOperationWrapper.From);
-
-    public static IAssignmentOperationWrapper? AsAssignment(this IOperation operation) =>
-        operation.As(OperationKindEx.SimpleAssignment, IAssignmentOperationWrapper.From);
-
-    public static ISimpleAssignmentOperationWrapper? AsSimpleAssignment(this IOperation operation) =>
-        operation.As(OperationKindEx.SimpleAssignment, ISimpleAssignmentOperationWrapper.From);
-
-    public static IArrayCreationOperationWrapper? AsArrayCreation(this IOperation operation) =>
-        operation.As(OperationKindEx.ArrayCreation, IArrayCreationOperationWrapper.From);
-
-    public static IArrayElementReferenceOperationWrapper? AsArrayElementReference(this IOperation operation) =>
-        operation.As(OperationKindEx.ArrayElementReference, IArrayElementReferenceOperationWrapper.From);
-
-    public static IConversionOperationWrapper? AsConversion(this IOperation operation) =>
-        operation.As(OperationKindEx.Conversion, IConversionOperationWrapper.From);
-
-    public static IDeclarationExpressionOperationWrapper? AsDeclarationExpression(this IOperation operation) =>
-        operation.As(OperationKindEx.DeclarationExpression, IDeclarationExpressionOperationWrapper.From);
-
-    public static IDeclarationPatternOperationWrapper? AsDeclarationPattern(this IOperation operation) =>
-        operation.As(OperationKindEx.DeclarationPattern, IDeclarationPatternOperationWrapper.From);
-
-    public static IFlowAnonymousFunctionOperationWrapper? AsFlowAnonymousFunction(this IOperation operation) =>
-        operation.As(OperationKindEx.FlowAnonymousFunction, IFlowAnonymousFunctionOperationWrapper.From);
-
-    public static IFlowCaptureOperationWrapper? AsFlowCapture(this IOperation operation) =>
-        operation.As(OperationKindEx.FlowCapture, IFlowCaptureOperationWrapper.From);
-
-    public static IFlowCaptureReferenceOperationWrapper? AsFlowCaptureReference(this IOperation operation) =>
-        operation.As(OperationKindEx.FlowCaptureReference, IFlowCaptureReferenceOperationWrapper.From);
-
-    public static IForEachLoopOperationWrapper? AsForEachLoop(this IOperation operation)
-    {
-        if (operation is null)  // null check to be consistent with other the other As methods
-        {
-            throw new NullReferenceException(nameof(operation));
-        }
-        // Other LoopKinds (e.g. For, While) are still OperationKindEx.Loop, but cannot be cast to IForEachLoopOperationWrapper so we need an additional check
-        return IForEachLoopOperationWrapper.IsInstance(operation) ? IForEachLoopOperationWrapper.From(operation) : null;
-    }
-
-    public static IInvocationOperationWrapper? AsInvocation(this IOperation operation) =>
-        operation.As(OperationKindEx.Invocation, IInvocationOperationWrapper.From);
-
-    public static ILocalFunctionOperationWrapper? AsLocalFunction(this IOperation operation) =>
-        operation.As(OperationKindEx.LocalFunction, ILocalFunctionOperationWrapper.From);
-
-    public static ILocalReferenceOperationWrapper? AsLocalReference(this IOperation operation) =>
-        operation.As(OperationKindEx.LocalReference, ILocalReferenceOperationWrapper.From);
-
-    public static IIsNullOperationWrapper? AsIsNull(this IOperation operation) =>
-        operation.As(OperationKindEx.IsNull, IIsNullOperationWrapper.From);
-
-    public static IIsPatternOperationWrapper? AsIsPattern(this IOperation operation) =>
-        operation.As(OperationKindEx.IsPattern, IIsPatternOperationWrapper.From);
-
-    public static IParameterReferenceOperationWrapper? AsParameterReference(this IOperation operation) =>
-        operation.As(OperationKindEx.ParameterReference, IParameterReferenceOperationWrapper.From);
-
-    public static IMethodReferenceOperationWrapper? AsMethodReference(this IOperation operation) =>
-        operation.As(OperationKindEx.MethodReference, IMethodReferenceOperationWrapper.From);
-
-    public static IObjectCreationOperationWrapper? AsObjectCreation(this IOperation operation) =>
-        operation.As(OperationKindEx.ObjectCreation, IObjectCreationOperationWrapper.From);
-
-    public static IPropertyReferenceOperationWrapper? AsPropertyReference(this IOperation operation) =>
-        operation.As(OperationKindEx.PropertyReference, IPropertyReferenceOperationWrapper.From);
-
-    public static IRecursivePatternOperationWrapper? AsRecursivePattern(this IOperation operation) =>
-        operation.As(OperationKindEx.RecursivePattern, IRecursivePatternOperationWrapper.From);
-
-    public static ISpreadOperationWrapper? AsSpread(this IOperation operation) =>
-        operation.As(OperationKindEx.Spread, ISpreadOperationWrapper.From);
-
-    public static ITupleOperationWrapper? AsTuple(this IOperation operation) =>
-        operation.As(OperationKindEx.Tuple, ITupleOperationWrapper.From);
-
-    public static IVariableDeclaratorOperationWrapper? AsVariableDeclarator(this IOperation operation) =>
-        operation.As(OperationKindEx.VariableDeclarator, IVariableDeclaratorOperationWrapper.From);
-
     public static IAddressOfOperationWrapper ToAddressOf(this IOperation operation) =>
         IAddressOfOperationWrapper.From(operation);
 
@@ -340,7 +255,4 @@ public static class IOperationExtensions
             var _ when IFlowCaptureReferenceOperationWrapper.IsInstance(op) => ": " + IFlowCaptureReferenceOperationWrapper.From(op).Id.Serialize(),
             _ => null
         };
-
-    private static T? As<T>(this IOperation operation, OperationKind kind, Func<IOperation, T> from) where T : struct =>
-        operation.Kind == kind ? from(operation) : null;
 }

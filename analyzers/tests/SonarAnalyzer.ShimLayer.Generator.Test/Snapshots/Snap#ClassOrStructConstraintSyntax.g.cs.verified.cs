@@ -45,5 +45,6 @@ public static partial class ClassOrStructConstraintSyntaxShimExtensions
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ClassOrStructConstraintSyntax Update(SyntaxToken classOrStructKeyword, SyntaxToken questionToken) => UpdateAccessor_Overload2(wrappedInstance, classOrStructKeyword, questionToken);
         public ClassOrStructConstraintSyntax WithQuestionToken(SyntaxToken questionToken) => WithQuestionTokenAccessor(wrappedInstance, questionToken);
+
     }
 }

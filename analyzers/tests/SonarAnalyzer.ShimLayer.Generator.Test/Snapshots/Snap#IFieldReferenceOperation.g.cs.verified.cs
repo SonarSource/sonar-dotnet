@@ -70,6 +70,9 @@ public readonly partial struct IFieldReferenceOperationWrapper : IOperationWrapp
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IFieldReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IFieldReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

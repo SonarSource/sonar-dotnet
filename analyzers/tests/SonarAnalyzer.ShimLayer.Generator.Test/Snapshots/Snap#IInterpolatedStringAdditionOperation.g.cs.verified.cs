@@ -64,6 +64,9 @@ public readonly partial struct IInterpolatedStringAdditionOperationWrapper : IOp
     public IOperation Right => RightAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IInterpolatedStringAdditionOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IInterpolatedStringAdditionOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

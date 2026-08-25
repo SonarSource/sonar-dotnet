@@ -64,6 +64,9 @@ public readonly partial struct IReDimClauseOperationWrapper : IOperationWrapper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IReDimClauseOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IReDimClauseOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

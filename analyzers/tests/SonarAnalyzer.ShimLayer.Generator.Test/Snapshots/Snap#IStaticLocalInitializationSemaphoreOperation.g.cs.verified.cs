@@ -62,6 +62,9 @@ public readonly partial struct IStaticLocalInitializationSemaphoreOperationWrapp
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IStaticLocalInitializationSemaphoreOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IStaticLocalInitializationSemaphoreOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

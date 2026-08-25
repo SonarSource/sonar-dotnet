@@ -75,5 +75,6 @@ public static partial class ParenthesizedLambdaExpressionSyntaxShimExtensions
         public ParenthesizedLambdaExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
         public ParenthesizedLambdaExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
         public ParenthesizedLambdaExpressionSyntax WithReturnType(TypeSyntax returnType) => WithReturnTypeAccessor(wrappedInstance, returnType);
+
     }
 }

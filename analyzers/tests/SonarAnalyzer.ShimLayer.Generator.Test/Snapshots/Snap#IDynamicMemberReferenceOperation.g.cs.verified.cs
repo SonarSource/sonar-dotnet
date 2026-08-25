@@ -68,6 +68,9 @@ public readonly partial struct IDynamicMemberReferenceOperationWrapper : IOperat
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public ImmutableArray<ITypeSymbol> TypeArguments => (ImmutableArray<ITypeSymbol>)TypeArgumentsAccessor(wrappedInstance);
 
+    public static IDynamicMemberReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IDynamicMemberReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

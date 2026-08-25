@@ -52,9 +52,9 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         var candidates = operation switch
         {
-            _ when operation.AsParameterReference() is { } parameterReference => [parameterReference.Parameter],
-            _ when operation.AsLocalReference() is { } localReference => [localReference.Local],
-            _ when operation.AsFlowCaptureReference() is { } flowCaptureReference => flowCaptures.TryGetValue(flowCaptureReference.Id, out var symbols) ? symbols : [],
+            _ when operation.AsParameterReference is { } parameterReference => [parameterReference.Parameter],
+            _ when operation.AsLocalReference is { } localReference => [localReference.Local],
+            _ when operation.AsFlowCaptureReference is { } flowCaptureReference => flowCaptures.TryGetValue(flowCaptureReference.Id, out var symbols) ? symbols : [],
             _ => []
         };
         return candidates.Where(IsLocal);
@@ -86,19 +86,19 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         foreach (var operation in cfg.Blocks.SelectMany(x => x.OperationsAndBranchValue).ToExecutionOrder())
         {
-            if (operation.AsFlowCapture() is { } flowCapture)
+            if (operation.AsFlowCapture is { } flowCapture)
             {
                 ProcessFlowCapture(flowCapture);
             }
-            else if (operation.AsFlowAnonymousFunction() is { Symbol.IsStatic: false } flowAnonymousFunction)
+            else if (operation.AsFlowAnonymousFunction is { Symbol.IsStatic: false } flowAnonymousFunction)
             {
                 ResolveCaptures(cfg.GetAnonymousFunctionControlFlowGraph(flowAnonymousFunction, Cancel), processedLocalFunctions);
             }
-            else if (operation.AsInvocation() is { } invocation && HandleLocalFunction(processedLocalFunctions, invocation.TargetMethod.ConstructedFrom) is { } invocationLocalFunction)
+            else if (operation.AsInvocation is { } invocation && HandleLocalFunction(processedLocalFunctions, invocation.TargetMethod.ConstructedFrom) is { } invocationLocalFunction)
             {
                 ResolveCaptures(cfg.FindLocalFunctionCfgInScope(invocationLocalFunction, Cancel), processedLocalFunctions);
             }
-            else if (operation.AsMethodReference() is { } reference && HandleLocalFunction(processedLocalFunctions, reference.Method.ConstructedFrom) is { } referenceLocalFunction)
+            else if (operation.AsMethodReference is { } reference && HandleLocalFunction(processedLocalFunctions, reference.Method.ConstructedFrom) is { } referenceLocalFunction)
             {
                 ResolveCaptures(cfg.FindLocalFunctionCfgInScope(referenceLocalFunction, Cancel), processedLocalFunctions);
             }
@@ -107,7 +107,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
     private void ProcessFlowCapture(IFlowCaptureOperationWrapper flowCapture)
     {
-        if (flowCapture.Value.AsFlowCaptureReference() is { } captureReference
+        if (flowCapture.Value.AsFlowCaptureReference is { } captureReference
             && flowCaptures.TryGetValue(captureReference.Id, out var symbols))
         {
             AppendFlowCaptureReference(flowCapture.Id, symbols);
@@ -293,8 +293,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             return originalOperation switch
             {
-                var _ when originalOperation.AsAnonymousFunction() is { } anonymousFunction => anonymousFunction.Symbol,
-                var _ when originalOperation.AsLocalFunction() is { } localFunction => localFunction.Symbol,
+                var _ when originalOperation.AsAnonymousFunction is { } anonymousFunction => anonymousFunction.Symbol,
+                var _ when originalOperation.AsLocalFunction is { } localFunction => localFunction.Symbol,
                 _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
             };
         }
@@ -319,31 +319,31 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         private void ProcessOperation(ControlFlowGraph cfg, IOperation operation)
         {
             // Everything that is added here needs to be considered inside ProcessCaptured as well
-            if (operation.AsLocalReference() is { } localReference)
+            if (operation.AsLocalReference is { } localReference)
             {
                 ProcessParameterOrLocalReference(localReference);
             }
-            else if (operation.AsParameterReference() is { } parameterReference)
+            else if (operation.AsParameterReference is { } parameterReference)
             {
                 ProcessParameterOrLocalReference(parameterReference);
             }
-            else if (operation.AsFlowCaptureReference() is { } flowCaptureReference)
+            else if (operation.AsFlowCaptureReference is { } flowCaptureReference)
             {
                 ProcessParameterOrLocalReference(flowCaptureReference);
             }
-            else if (operation.AsSimpleAssignment() is { } assignment)
+            else if (operation.AsSimpleAssignment is { } assignment)
             {
                 ProcessSimpleAssignment(assignment);
             }
-            else if (operation.AsFlowAnonymousFunction() is { } flowAnonymousFunction)
+            else if (operation.AsFlowAnonymousFunction is { } flowAnonymousFunction)
             {
                 ProcessFlowAnonymousFunction(cfg, flowAnonymousFunction);
             }
-            else if (operation.AsInvocation() is { } invocation)
+            else if (operation.AsInvocation is { } invocation)
             {
                 ProcessLocalFunction(cfg, invocation.TargetMethod);
             }
-            else if (operation.AsMethodReference() is { } methodReference)
+            else if (operation.AsMethodReference is { } methodReference)
             {
                 ProcessLocalFunction(cfg, methodReference.Method);
                 // For .Select(variable.MethodReference), there's no LocalReferenceOperation in the CFG for variable, so we handle it from the syntax
@@ -401,15 +401,15 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                 {
                     Captured.UnionWith(symbols);
                 }
-                else if (operation.AsFlowAnonymousFunction() is { } flowAnonymousFunction)
+                else if (operation.AsFlowAnonymousFunction is { } flowAnonymousFunction)
                 {
                     ProcessFlowAnonymousFunction(cfg, flowAnonymousFunction);
                 }
-                else if (operation.AsInvocation() is { } invocation)
+                else if (operation.AsInvocation is { } invocation)
                 {
                     ProcessCapturedLocalFunction(cfg, invocation.TargetMethod);
                 }
-                else if (operation.AsMethodReference() is { } methodReference)
+                else if (operation.AsMethodReference is { } methodReference)
                 {
                     ProcessCapturedLocalFunction(cfg, methodReference.Method);
                 }

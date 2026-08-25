@@ -68,6 +68,9 @@ public readonly partial struct IImplicitIndexerReferenceOperationWrapper : IOper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IImplicitIndexerReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IImplicitIndexerReferenceOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

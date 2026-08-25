@@ -62,6 +62,9 @@ public readonly partial struct ITypeOfOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public ITypeSymbol TypeOperand => (ITypeSymbol)TypeOperandAccessor(wrappedInstance);
 
+    public static ITypeOfOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static ITypeOfOperationWrapper FromOperation(IOperation instance) =>
         From(instance);

@@ -17,7 +17,7 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public sealed class ExtendStrategy : MemberStrategy
+public class ExtendStrategy : MemberStrategy
 {
     public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
 
@@ -46,9 +46,13 @@ public sealed class ExtendStrategy : MemberStrategy
                 {{JoinLines(wrap.Properties.Select(x => x.MemberDeclaration(8)))}}
 
                 {{JoinLines(wrap.Methods.Select(x => x.MemberDeclaration(8)))}}
+
+                {{AdditionalMembers(model)}}
                     }
                 }
                 """
             : null;
     }
+
+    protected virtual string AdditionalMembers(StrategyModel model) => null;
 }

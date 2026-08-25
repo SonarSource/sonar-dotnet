@@ -68,6 +68,9 @@ public readonly partial struct IRangeOperationWrapper : IOperationWrapper
     public IOperation RightOperand => RightOperandAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
+    public static IRangeOperationWrapper? FromOrDefault(IOperation instance) =>
+        IsInstance(instance) ? From(instance) : null;
+
     [Obsolete("Use From instead")]
     public static IRangeOperationWrapper FromOperation(IOperation instance) =>
         From(instance);
