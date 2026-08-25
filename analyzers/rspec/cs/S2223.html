@@ -1,115 +1,66 @@
 <h2>Why is this an issue?</h2>
-<p>Unlike instance fields, which can only be accessed by code having a hold on the instance, <code>static</code> fields can be accessed by any code
-having visibility of the field and its type.</p>
+<p>A <code>static</code> field belongs to the type, not to one object. A visible <code>static</code> field can therefore be read or reassigned by any
+code that can access the type.</p>
+<p>When such a field is mutable, the type does not control when or why its shared state changes. This creates hidden dependencies between callers,
+makes code harder to test, and makes it difficult to later add validation or other rules for updates.</p>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-public class Math
+public class Limits
 {
-    public static double Pi = 3.14;  // Noncompliant
+    public static int DaysInWeek = 7; // Noncompliant: this fixed value should be a const
 }
 
-// Somewhere else, where Math and Math.Pi are visible
-var pi = Math.Pi; // Reading the value
-Math.Pi = 3.1416; // Mutating the value
-</pre>
-<p>Another typical scenario of the use of a non-private mutable <code>static</code> field is the following:</p>
-<pre data-diff-id="2" data-diff-type="noncompliant">
-public class Shape
+public class ApplicationInfo
 {
-    public static Shape Empty = new EmptyShape();  // Noncompliant
-
-    private class EmptyShape : Shape
-    {
-    }
+    public static Guid InstanceId = Guid.NewGuid(); // Noncompliant: this value is created once but can later be reassigned
 }
+
+public class Counters
+{
+    public static int ErrorCount = 0; // Noncompliant: any caller can change this shared state
+}
+
+// Any caller can set or increment ErrorCount directly.
+Counters.ErrorCount = -1;
+Counters.ErrorCount++;
 </pre>
-<p>Non-private <code>static</code> fields that are neither <code>const</code> nor <code>readonly</code>, like the ones in the examples above, can lead
-to errors and unpredictable behavior.</p>
-<p>This can happen because:</p>
+<p>Choose the solution that matches the intended lifetime of the value:</p>
 <ul>
-  <li>Any object can modify these fields and alter the global state. This makes the code more difficult to read, debug and test.
-    <pre>
-class Counters
-{
-    public static int ErrorCounter = 0;
-}
-
-class Program
-{
-    public static void Thread1()
-    {
-        // ...
-        Counters.ErrorCounter = 0; // Error counter reset
-        // ...
-    }
-
-    public static void Thread2()
-    {
-        // ...
-        if (Counters.ErrorCounter &gt; 0)
-        {
-            Trace.TraceError($"There are {Counters.ErrorCounter} errors"); // It may print "There are 0 errors"
-        }
-        // ...
-    }
-}
-</pre></li>
-  <li>Correctly accessing these fields from different threads needs synchronization with <code>lock</code> or equivalent mechanisms. Improper
-  synchronization may lead to unexpected results.
-    <pre>
-class Counters
-{
-    public static volatile int ErrorCounter;
-}
-
-class Program
-{
-    public static void ImproperSynchronization()
-    {
-        Counters.ErrorCounter = 0;
-        Parallel.ForEach(Enumerable.Range(0, 1000), _ =&gt; Counters.ErrorCounter++); // Volatile is not enough
-        Console.WriteLine(Counters.ErrorCounter); // May print less than 1000
-    }
-
-    public static void ProperSynchronization()
-    {
-        Counters.ErrorCounter = 0;
-        Parallel.ForEach(Enumerable.Range(0, 1000), _ =&gt; Interlocked.Increment(ref Counters.ErrorCounter));
-        Console.WriteLine(Counters.ErrorCounter); // Always prints 1000
-    }
-}
-</pre></li>
+  <li>If the value is a fixed compile-time constant, use <code>const</code>.</li>
+  <li>If the value must be created or calculated when the application starts and must not be reassigned, use <code>static readonly</code>.</li>
+  <li>If the value must change, keep the field <code>private</code> and expose a small API that expresses the allowed updates. Prefer an instance
+  owned by the application over global state when possible.</li>
 </ul>
-<p>Publicly visible <code>static</code> fields should only be used to store shared data that does not change. To enforce this intent, these fields
-should be marked <code>readonly</code> or converted to <code>const</code>.</p>
 <pre data-diff-id="1" data-diff-type="compliant">
-public class Math
+public class Limits
 {
-    public const double Pi = 3.14;
+    public const int DaysInWeek = 7; // A fixed fact known when the code is compiled
 }
-</pre>
-<pre data-diff-id="2" data-diff-type="compliant">
-public class Shape
-{
-    public static readonly Shape Empty = new EmptyShape();
 
-    private class EmptyShape : Shape
-    {
-    }
+public class ApplicationInfo
+{
+    public static readonly Guid InstanceId = Guid.NewGuid(); // A new value created once when the application starts
+}
+
+public sealed class ErrorCounter
+{
+    private int errorCount; // A value that may change, but only through this class
+
+    public int ErrorCount =&gt; errorCount;
+
+    public void Increment() =&gt; errorCount++;
+
+    public void Reset() =&gt; errorCount = 0;
 }
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/static">static (C# Reference)</a></li>
-  <li><a href="https://learn.microsoft.com/en-us/dotnet/standard/threading/overview-of-synchronization-primitives">Overview of synchronization
-  primitives</a></li>
-  <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/volatile">volatile (C# Reference)</a></li>
 </ul>
 <h3>Articles &amp; blog posts</h3>
 <ul>
   <li><a href="https://softwareengineering.stackexchange.com/a/148154">Stack Exchange - Mutable global state is evil and alternatives to it</a></li>
   <li><a href="https://ericlippert.com/2007/11/13/immutability-in-c-part-one-kinds-of-immutability/">Fabulous adventures in coding - Eric Lippert:
   Immutability in C#</a></li>
-  <li><a href="https://stackoverflow.com/a/4628660">Stack Overflow - Eric Lippert: ++ is not "threadsafe"</a></li>
 </ul>
 
