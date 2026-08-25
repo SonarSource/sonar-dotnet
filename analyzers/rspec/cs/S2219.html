@@ -1,92 +1,74 @@
 <h2>Why is this an issue?</h2>
-<p>To check the type of an object there are several options:</p>
+<p>In .NET, several forms can check an object’s runtime type. Some are equivalent in a particular context, but one form can make the question being
+asked clearer.</p>
+<p>Choose the replacement based on what is known at that point in the code:</p>
 <ul>
-  <li><code>expr is SomeType</code> or <code>expr.GetType() == typeof(SomeType)</code> if the type is known at compile time,</li>
-  <li><code>typeInstance.IsInstanceOfType(expr)</code> if the type is calculated during runtime.</li>
+  <li>Use <code>value is T</code> when the expected type is written in the source code.</li>
+  <li>Use <code>type.IsInstanceOfType(value)</code> when the expected type is known only at runtime.</li>
+  <li>Use a null check when the expression is already known to have the target type.</li>
+  <li>Use <code>value.GetType() == typeof(T)</code> when the exact runtime type matters. Otherwise, use the form that directly expresses the intended
+  type check.</li>
 </ul>
-<p>If runtime calculated <code>Type</code>s need to be compared:</p>
-<ul>
-  <li><code>typeInstance1.IsAssignableFrom(typeInstance2)</code>.</li>
-</ul>
-<p>Depending on whether the type is returned by a <code>GetType()</code> or <code>typeof()</code> call, the <code>IsAssignableFrom()</code> and
-<code>IsInstanceOfType()</code> might be simplified. Similarly, if the type is <code>sealed</code>, the type comparison with <code>==</code> can be
-converted to an <code>is</code> call. Simplifying the calls also make <code>null</code> checking unnecessary because both <code>is</code> and
-<code>IsInstanceOfType</code> performs it already.</p>
-<p>Finally, utilizing the most concise language constructs for type checking makes the code more readable, so</p>
-<ul>
-  <li><code>expr as T != null</code> checks should be simplified to <code>expr is T</code>, and</li>
-  <li><code>expr is T</code> should be converted to <code>expr != null</code>, when <code>expr</code> is of type <code>T</code>.</li>
-</ul>
-<h3>Noncompliant code example</h3>
+<h2>How to fix it</h2>
+<h3>The type is known in the code</h3>
+<p>Use <code>is</code> instead of casting only to test whether the cast works.</p>
 <pre>
-class Fruit { }
-sealed class Apple : Fruit { }
+object fruit = new Apple();
 
-class Program
+bool isApple = fruit as Apple != null; // Noncompliant
+isApple = fruit is Apple;              // Compliant
+</pre>
+<p>The same applies to <code>GetType()</code> checks when the target type is <code>sealed</code>. A sealed type cannot have subclasses, so both checks
+have the same result.</p>
+<pre>
+sealed class Apple { }
+
+object fruit = new Apple();
+
+bool isApple = fruit.GetType() == typeof(Apple);  // Noncompliant
+isApple = fruit is Apple;                         // Compliant
+
+isApple = typeof(Apple).IsInstanceOfType(fruit);  // Noncompliant
+isApple = fruit is Apple;                         // Compliant
+</pre>
+<h3>The type is known only at runtime</h3>
+<p>When the expected type is stored in a <code>Type</code> variable, <code>is</code> cannot be used. Call <code>IsInstanceOfType()</code> with the
+object itself instead of comparing runtime types.</p>
+<pre>
+Type expectedType = GetExpectedType();
+object value = GetValue();
+
+bool matches = expectedType.IsAssignableFrom(value.GetType());  // Noncompliant
+matches = expectedType.IsInstanceOfType(value);                 // Compliant
+</pre>
+<h3>The expression already has the target type</h3>
+<p>If the compiler already knows an expression is an <code>Apple</code>, checking <code>value is Apple</code> only tests whether it is
+<code>null</code>.</p>
+<pre>
+Apple apple = GetApple();
+
+if (apple is Apple) // Noncompliant
 {
-  static void Main()
-  {
-    var apple = new Apple();
-    var b = apple != null &amp;&amp; apple.GetType() == typeof (Apple); // Noncompliant
-    b = typeof(Apple).IsInstanceOfType(apple); // Noncompliant
-    if (apple != null)
-    {
-      b = typeof(Apple).IsAssignableFrom(apple.GetType()); // Noncompliant
-    }
-    var appleType = typeof (Apple);
-    if (apple != null)
-    {
-      b = appleType.IsAssignableFrom(apple.GetType()); // Noncompliant
-    }
+}
 
-    Fruit f = apple;
-    if (f as Apple != null) // Noncompliant
-    {
-    }
-    if (apple is Apple) // Noncompliant
-    {
-    }
-  }
+if (apple != null)  // Compliant
+{
 }
 </pre>
-<h3>Compliant solution</h3>
-<pre>
-class Fruit { }
-sealed class Apple : Fruit { }
-
-class Program
-{
-  static void Main()
-  {
-    var apple = new Apple();
-    var b = apple is Apple;
-    b = apple is Apple;
-    b = apple is Apple;
-    var appleType = typeof(Apple);
-    b = appleType.IsInstanceOfType(apple);
-
-    Fruit f = apple;
-    if (f is Apple)
-    {
-    }
-    if (apple != null)
-    {
-    }
-  }
-}
-</pre>
+<p>Both <code>is</code> and <code>IsInstanceOfType()</code> return <code>false</code> for <code>null</code>, so these replacements do not need an
+extra null check.</p>
 <h3>Exceptions</h3>
-<p>Calling <code>GetType</code> on an object of <code>Nullable&lt;T&gt;</code> type returns the underlying generic type parameter <code>T</code>, thus
-a comparison with <code>typeof(Nullable&lt;T&gt;)</code> can’t be simplified to use the <code>is</code> operator, which doesn’t make difference
-between <code>T</code> and <code>T?</code>.</p>
-<pre>
-int? i = 42;
-bool condition = i.GetType() == typeof(int?); // false;
-condition = i is int?; // true
-</pre>
-<p>No issue is reported on the following expressions:</p>
 <ul>
-  <li><code>expr is T</code>&nbsp;when either operand of the <code>is</code> operator is a value type. In that case CS0183 or CS0184 reports</li>
-  <li><code>expr is object</code>, as this is a common and efficient pattern to do null checks</li>
+  <li>Keep <code>value is object</code> when it is used as a null check. It is an established idiom and is not reported by this rule.</li>
 </ul>
+<h3>Cautions</h3>
+<ul>
+  <li>Do not replace a <code>GetType()</code> comparison with <code>is</code> when the target is <code>Nullable&lt;T&gt;</code>. A nullable value with
+  a value boxes as <code>T</code>, so the checks can have different results.</li>
+</ul>
+<pre>
+int? value = 42;
 
+bool isNullableInt = value.GetType() == typeof(int?); // false
+isNullableInt = value is int?;                        // true
+</pre>
