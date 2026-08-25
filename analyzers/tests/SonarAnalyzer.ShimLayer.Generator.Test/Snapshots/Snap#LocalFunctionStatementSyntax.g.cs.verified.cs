@@ -31,6 +31,7 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper : ISyntaxWrap
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LocalFunctionStatementSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LocalFunctionStatementSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly StatementSyntax wrappedInstance;
 
     private static readonly Func<StatementSyntax, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<StatementSyntax, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
@@ -203,7 +204,7 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper : ISyntaxWrap
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

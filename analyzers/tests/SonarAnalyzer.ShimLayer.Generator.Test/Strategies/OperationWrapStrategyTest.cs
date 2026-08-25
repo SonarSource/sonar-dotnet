@@ -64,6 +64,7 @@ public class OperationWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldInitializerOperationWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
                 private IFieldInitializerOperationWrapper(IOperation wrappedInstance) =>
@@ -94,8 +95,8 @@ public class OperationWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(IOperation operation) =>
-                    operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+                public static bool IsInstance(IOperation instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);
@@ -147,6 +148,7 @@ public class OperationWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldReferenceOperationWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
                 private IFieldReferenceOperationWrapper(IOperation wrappedInstance) =>
@@ -177,8 +179,8 @@ public class OperationWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(IOperation operation) =>
-                    operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+                public static bool IsInstance(IOperation instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
                 public static implicit operator IMemberReferenceOperationWrapper(IFieldReferenceOperationWrapper up) => IMemberReferenceOperationWrapper.From(up.WrappedInstance);
                 public static explicit operator IFieldReferenceOperationWrapper(IMemberReferenceOperationWrapper down) => IFieldReferenceOperationWrapper.From(down.WrappedInstance);
@@ -233,6 +235,7 @@ public class OperationWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITupleOperation";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ITupleOperationWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
                 private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Elements");
@@ -271,8 +274,8 @@ public class OperationWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(IOperation operation) =>
-                    operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+                public static bool IsInstance(IOperation instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);

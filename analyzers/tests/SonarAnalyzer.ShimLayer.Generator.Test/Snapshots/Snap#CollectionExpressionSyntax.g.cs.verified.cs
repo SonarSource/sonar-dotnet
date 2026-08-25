@@ -31,6 +31,7 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.CollectionExpressionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CollectionExpressionSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly ExpressionSyntax wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, SyntaxToken> CloseBracketTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "CloseBracketToken");
@@ -161,7 +162,7 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

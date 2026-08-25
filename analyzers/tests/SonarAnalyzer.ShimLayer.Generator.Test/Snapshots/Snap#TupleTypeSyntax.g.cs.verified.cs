@@ -31,6 +31,7 @@ public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSynta
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleTypeSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TupleTypeSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly TypeSyntax wrappedInstance;
 
     private static readonly Func<TypeSyntax, SyntaxToken> CloseParenTokenAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "CloseParenToken");
@@ -170,7 +171,7 @@ public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSynta
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

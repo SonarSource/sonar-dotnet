@@ -31,6 +31,7 @@ public readonly partial struct ParenthesizedPatternSyntaxWrapper : ISyntaxWrappe
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ParenthesizedPatternSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ParenthesizedPatternSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseParenTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "CloseParenToken");
@@ -159,8 +160,8 @@ public readonly partial struct ParenthesizedPatternSyntaxWrapper : ISyntaxWrappe
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator PatternSyntaxWrapper(ParenthesizedPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ParenthesizedPatternSyntaxWrapper(PatternSyntaxWrapper down) => ParenthesizedPatternSyntaxWrapper.From(down.WrappedInstance);

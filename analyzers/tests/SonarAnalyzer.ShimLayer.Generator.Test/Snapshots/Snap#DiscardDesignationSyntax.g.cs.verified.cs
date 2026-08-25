@@ -31,6 +31,7 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.DiscardDesignationSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DiscardDesignationSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> UnderscoreTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "UnderscoreToken");
@@ -151,8 +152,8 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator VariableDesignationSyntaxWrapper(DiscardDesignationSyntaxWrapper up) => VariableDesignationSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator DiscardDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => DiscardDesignationSyntaxWrapper.From(down.WrappedInstance);

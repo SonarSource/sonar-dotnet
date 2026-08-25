@@ -31,6 +31,7 @@ public readonly partial struct IFieldInitializerOperationWrapper : IOperationWra
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldInitializerOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
@@ -85,8 +86,8 @@ public readonly partial struct IFieldInitializerOperationWrapper : IOperationWra
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator ISymbolInitializerOperationWrapper(IFieldInitializerOperationWrapper up) => ISymbolInitializerOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IFieldInitializerOperationWrapper(ISymbolInitializerOperationWrapper down) => IFieldInitializerOperationWrapper.From(down.WrappedInstance);

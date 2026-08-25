@@ -31,6 +31,7 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleExpressionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(TupleExpressionSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly ExpressionSyntax wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>>>(WrappedType, "Arguments");
@@ -161,7 +162,7 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

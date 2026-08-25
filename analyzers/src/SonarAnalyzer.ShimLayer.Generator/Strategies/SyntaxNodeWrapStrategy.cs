@@ -52,8 +52,8 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
                 }
             }
 
-            public static bool IsInstance(SyntaxNode node) =>
-                node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+            public static bool IsInstance(SyntaxNode instance) =>
+                WrappedType.CanWrap(CanWrapCache, instance);
         """;
 
     public SyntaxNodeWrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, baseType, members) { }

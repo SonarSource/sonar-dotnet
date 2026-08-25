@@ -31,6 +31,7 @@ public readonly partial struct SpreadElementSyntaxWrapper : ISyntaxWrapper<CShar
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.SpreadElementSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SpreadElementSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Expression");
@@ -155,8 +156,8 @@ public readonly partial struct SpreadElementSyntaxWrapper : ISyntaxWrapper<CShar
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator CollectionElementSyntaxWrapper(SpreadElementSyntaxWrapper up) => CollectionElementSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator SpreadElementSyntaxWrapper(CollectionElementSyntaxWrapper down) => SpreadElementSyntaxWrapper.From(down.WrappedInstance);

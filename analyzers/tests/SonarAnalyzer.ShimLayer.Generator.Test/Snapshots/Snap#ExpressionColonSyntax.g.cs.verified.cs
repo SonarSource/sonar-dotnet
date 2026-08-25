@@ -31,6 +31,7 @@ public readonly partial struct ExpressionColonSyntaxWrapper : ISyntaxWrapper<CSh
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ExpressionColonSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExpressionColonSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> ColonTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "ColonToken");
@@ -155,8 +156,8 @@ public readonly partial struct ExpressionColonSyntaxWrapper : ISyntaxWrapper<CSh
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator BaseExpressionColonSyntaxWrapper(ExpressionColonSyntaxWrapper up) => BaseExpressionColonSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ExpressionColonSyntaxWrapper(BaseExpressionColonSyntaxWrapper down) => ExpressionColonSyntaxWrapper.From(down.WrappedInstance);

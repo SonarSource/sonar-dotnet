@@ -31,6 +31,7 @@ public readonly partial struct ImplicitObjectCreationExpressionSyntaxWrapper : I
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ImplicitObjectCreationExpressionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ImplicitObjectCreationExpressionSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly ExpressionSyntax wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, ArgumentListSyntax> ArgumentListAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, ArgumentListSyntax>>(WrappedType, "ArgumentList");
@@ -161,8 +162,8 @@ public readonly partial struct ImplicitObjectCreationExpressionSyntaxWrapper : I
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator BaseObjectCreationExpressionSyntaxWrapper(ImplicitObjectCreationExpressionSyntaxWrapper up) => BaseObjectCreationExpressionSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ImplicitObjectCreationExpressionSyntaxWrapper(BaseObjectCreationExpressionSyntaxWrapper down) => ImplicitObjectCreationExpressionSyntaxWrapper.From(down.WrappedInstance);

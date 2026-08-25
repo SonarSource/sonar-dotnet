@@ -31,6 +31,7 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineDirectivePositionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(LineDirectivePositionSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> CharacterAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "Character");
@@ -167,7 +168,7 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapp
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

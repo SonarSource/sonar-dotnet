@@ -31,6 +31,7 @@ public readonly partial struct ICollectionElementInitializerOperationWrapper : I
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ICollectionElementInitializerOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ICollectionElementInitializerOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IMethodSymbol> AddMethodAccessor = AccessorFactory.CreateProperty<Func<IOperation, IMethodSymbol>>(WrappedType, "AddMethod");
@@ -85,7 +86,7 @@ public readonly partial struct ICollectionElementInitializerOperationWrapper : I
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

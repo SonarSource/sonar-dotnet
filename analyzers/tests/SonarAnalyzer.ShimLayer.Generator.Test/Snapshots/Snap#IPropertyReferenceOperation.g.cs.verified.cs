@@ -31,6 +31,7 @@ public readonly partial struct IPropertyReferenceOperationWrapper : IOperationWr
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IPropertyReferenceOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IPropertyReferenceOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, ImmutableArray<IOperation>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Arguments");
@@ -89,8 +90,8 @@ public readonly partial struct IPropertyReferenceOperationWrapper : IOperationWr
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator IMemberReferenceOperationWrapper(IPropertyReferenceOperationWrapper up) => IMemberReferenceOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IPropertyReferenceOperationWrapper(IMemberReferenceOperationWrapper down) => IPropertyReferenceOperationWrapper.From(down.WrappedInstance);

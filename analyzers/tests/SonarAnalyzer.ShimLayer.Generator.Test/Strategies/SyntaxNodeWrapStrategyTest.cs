@@ -67,6 +67,7 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
@@ -102,8 +103,8 @@ public class SyntaxNodeWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);
@@ -162,6 +163,7 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SyntaxToken>>(WrappedType, "ClassOrStructKeyword");
@@ -210,8 +212,8 @@ public class SyntaxNodeWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);
@@ -264,6 +266,7 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly ExpressionSyntax wrappedInstance;
 
                 private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Pattern");
@@ -303,8 +306,8 @@ public class SyntaxNodeWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);
@@ -356,6 +359,7 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ConstantPatternSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly CSharpSyntaxNode wrappedInstance;
 
                 private ConstantPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
@@ -391,8 +395,8 @@ public class SyntaxNodeWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
                 public static implicit operator PatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
                 public static explicit operator ConstantPatternSyntaxWrapper(PatternSyntaxWrapper down) => ConstantPatternSyntaxWrapper.From(down.WrappedInstance);
@@ -449,6 +453,7 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.SyntaxNode";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SyntaxNodeWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly SyntaxNode wrappedInstance;
 
                 private SyntaxNodeWrapper(SyntaxNode wrappedInstance) =>
@@ -484,8 +489,8 @@ public class SyntaxNodeWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);
@@ -538,6 +543,7 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly SyntaxNode wrappedInstance;
 
                 private IndexerDeclarationSyntaxWrapper(SyntaxNode wrappedInstance) =>
@@ -581,8 +587,8 @@ public class SyntaxNodeWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);
@@ -637,6 +643,7 @@ public class SyntaxNodeWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
                 private static readonly Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>> MembersAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SyntaxList<MemberDeclarationSyntax>>>(WrappedType, "Members");
@@ -682,8 +689,8 @@ public class SyntaxNodeWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);

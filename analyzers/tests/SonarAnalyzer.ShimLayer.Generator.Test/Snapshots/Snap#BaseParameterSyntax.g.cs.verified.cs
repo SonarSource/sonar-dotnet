@@ -31,6 +31,7 @@ public readonly partial struct BaseParameterSyntaxWrapper : ISyntaxWrapper<CShar
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BaseParameterSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BaseParameterSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
@@ -161,7 +162,7 @@ public readonly partial struct BaseParameterSyntaxWrapper : ISyntaxWrapper<CShar
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

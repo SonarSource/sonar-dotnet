@@ -31,6 +31,7 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RelationalPatternSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RelationalPatternSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, ExpressionSyntax>>(WrappedType, "Expression");
@@ -155,8 +156,8 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator PatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => PatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator RelationalPatternSyntaxWrapper(PatternSyntaxWrapper down) => RelationalPatternSyntaxWrapper.From(down.WrappedInstance);

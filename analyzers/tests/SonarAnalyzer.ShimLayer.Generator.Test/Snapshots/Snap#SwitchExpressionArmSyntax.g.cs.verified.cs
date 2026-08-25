@@ -31,6 +31,7 @@ public readonly partial struct SwitchExpressionArmSyntaxWrapper : ISyntaxWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.SwitchExpressionArmSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SwitchExpressionArmSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> EqualsGreaterThanTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "EqualsGreaterThanToken");
@@ -163,7 +164,7 @@ public readonly partial struct SwitchExpressionArmSyntaxWrapper : ISyntaxWrapper
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

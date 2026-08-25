@@ -31,6 +31,7 @@ public readonly partial struct INegatedPatternOperationWrapper : IOperationWrapp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.INegatedPatternOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(INegatedPatternOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
@@ -85,8 +86,8 @@ public readonly partial struct INegatedPatternOperationWrapper : IOperationWrapp
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator IPatternOperationWrapper(INegatedPatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
     public static explicit operator INegatedPatternOperationWrapper(IPatternOperationWrapper down) => INegatedPatternOperationWrapper.From(down.WrappedInstance);

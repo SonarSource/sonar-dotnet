@@ -66,6 +66,7 @@ public class ClassWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
@@ -103,8 +104,8 @@ public class ClassWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);
@@ -153,6 +154,7 @@ public class ClassWrapStrategyTest
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
                 private delegate bool TryGetValueAccessorDelegate(TypeDeclarationSyntax sender, string key, out string value);
@@ -193,8 +195,8 @@ public class ClassWrapStrategyTest
                     }
                 }
 
-                public static bool IsInstance(SyntaxNode node) =>
-                    node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+                public static bool IsInstance(SyntaxNode instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             }
             """);

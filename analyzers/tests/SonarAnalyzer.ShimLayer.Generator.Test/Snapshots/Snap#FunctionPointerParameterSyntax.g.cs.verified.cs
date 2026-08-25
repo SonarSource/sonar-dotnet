@@ -31,6 +31,7 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FunctionPointerParameterSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FunctionPointerParameterSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>> AttributeListsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>>>(WrappedType, "AttributeLists");
@@ -163,8 +164,8 @@ public readonly partial struct FunctionPointerParameterSyntaxWrapper : ISyntaxWr
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator BaseParameterSyntaxWrapper(FunctionPointerParameterSyntaxWrapper up) => BaseParameterSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator FunctionPointerParameterSyntaxWrapper(BaseParameterSyntaxWrapper down) => FunctionPointerParameterSyntaxWrapper.From(down.WrappedInstance);

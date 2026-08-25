@@ -31,6 +31,7 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.FieldExpressionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(FieldExpressionSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly ExpressionSyntax wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, SyntaxToken> TokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "Token");
@@ -151,7 +152,7 @@ public readonly partial struct FieldExpressionSyntaxWrapper : ISyntaxWrapper<Exp
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

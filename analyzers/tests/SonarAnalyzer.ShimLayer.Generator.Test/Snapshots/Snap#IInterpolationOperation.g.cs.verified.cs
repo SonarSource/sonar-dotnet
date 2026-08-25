@@ -31,6 +31,7 @@ public readonly partial struct IInterpolationOperationWrapper : IOperationWrappe
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolationOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IInterpolationOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IOperation> AlignmentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Alignment");
@@ -85,8 +86,8 @@ public readonly partial struct IInterpolationOperationWrapper : IOperationWrappe
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator IInterpolatedStringContentOperationWrapper(IInterpolationOperationWrapper up) => IInterpolatedStringContentOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IInterpolationOperationWrapper(IInterpolatedStringContentOperationWrapper down) => IInterpolationOperationWrapper.From(down.WrappedInstance);

@@ -31,6 +31,7 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.CasePatternSwitchLabelSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(CasePatternSwitchLabelSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly SwitchLabelSyntax wrappedInstance;
 
     private static readonly Func<SwitchLabelSyntax, CSharpSyntaxNode> PatternAccessor = AccessorFactory.CreateProperty<Func<SwitchLabelSyntax, CSharpSyntaxNode>>(WrappedType, "Pattern");
@@ -161,7 +162,7 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

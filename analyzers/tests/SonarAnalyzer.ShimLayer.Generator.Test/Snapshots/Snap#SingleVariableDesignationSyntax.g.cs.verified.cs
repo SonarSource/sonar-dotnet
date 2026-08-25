@@ -31,6 +31,7 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.SingleVariableDesignationSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SingleVariableDesignationSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> IdentifierAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "Identifier");
@@ -151,8 +152,8 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator VariableDesignationSyntaxWrapper(SingleVariableDesignationSyntaxWrapper up) => VariableDesignationSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator SingleVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => SingleVariableDesignationSyntaxWrapper.From(down.WrappedInstance);

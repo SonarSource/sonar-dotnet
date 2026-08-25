@@ -31,6 +31,7 @@ public readonly partial struct IEventReferenceOperationWrapper : IOperationWrapp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IEventReferenceOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IEventReferenceOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
@@ -87,8 +88,8 @@ public readonly partial struct IEventReferenceOperationWrapper : IOperationWrapp
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator IMemberReferenceOperationWrapper(IEventReferenceOperationWrapper up) => IMemberReferenceOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IEventReferenceOperationWrapper(IMemberReferenceOperationWrapper down) => IEventReferenceOperationWrapper.From(down.WrappedInstance);

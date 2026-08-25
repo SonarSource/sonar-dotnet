@@ -31,6 +31,7 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ExtensionMemberCrefSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ExtensionMemberCrefSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly MemberCrefSyntax wrappedInstance;
 
     private static readonly Func<MemberCrefSyntax, SyntaxToken> DotTokenAccessor = AccessorFactory.CreateProperty<Func<MemberCrefSyntax, SyntaxToken>>(WrappedType, "DotToken");
@@ -171,7 +172,7 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

@@ -31,6 +31,7 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IInterpolatedStringHandlerArgumentPlaceholderOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IInterpolatedStringHandlerArgumentPlaceholderOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, int> ArgumentIndexAccessor = AccessorFactory.CreateProperty<Func<IOperation, int>>(WrappedType, "ArgumentIndex");
@@ -83,7 +84,7 @@ public readonly partial struct IInterpolatedStringHandlerArgumentPlaceholderOper
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

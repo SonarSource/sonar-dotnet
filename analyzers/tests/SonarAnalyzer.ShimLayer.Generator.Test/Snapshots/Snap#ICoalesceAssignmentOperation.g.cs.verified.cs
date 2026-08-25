@@ -31,6 +31,7 @@ public readonly partial struct ICoalesceAssignmentOperationWrapper : IOperationW
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ICoalesceAssignmentOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ICoalesceAssignmentOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
@@ -83,8 +84,8 @@ public readonly partial struct ICoalesceAssignmentOperationWrapper : IOperationW
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator IAssignmentOperationWrapper(ICoalesceAssignmentOperationWrapper up) => IAssignmentOperationWrapper.From(up.WrappedInstance);
     public static explicit operator ICoalesceAssignmentOperationWrapper(IAssignmentOperationWrapper down) => ICoalesceAssignmentOperationWrapper.From(down.WrappedInstance);

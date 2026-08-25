@@ -31,6 +31,7 @@ public readonly partial struct IMethodBodyOperationWrapper : IOperationWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IMethodBodyOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IMethodBodyOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IOperation> BlockBodyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "BlockBody");
@@ -83,8 +84,8 @@ public readonly partial struct IMethodBodyOperationWrapper : IOperationWrapper
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator IMethodBodyBaseOperationWrapper(IMethodBodyOperationWrapper up) => IMethodBodyBaseOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IMethodBodyOperationWrapper(IMethodBodyBaseOperationWrapper down) => IMethodBodyOperationWrapper.From(down.WrappedInstance);

@@ -31,6 +31,7 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.DeclarationExpressionSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DeclarationExpressionSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly ExpressionSyntax wrappedInstance;
 
     private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> DesignationAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Designation");
@@ -155,7 +156,7 @@ public readonly partial struct DeclarationExpressionSyntaxWrapper : ISyntaxWrapp
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

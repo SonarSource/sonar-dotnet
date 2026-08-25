@@ -50,7 +50,9 @@ public abstract class WrapStrategy : MemberStrategy
                 public const string WrappedTypeName = "{{Latest.FullName}}";
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
+                private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
+
 
             {{JoinLines(wrap.Properties.Select(x => x.AccessorDeclaration()))}}
 

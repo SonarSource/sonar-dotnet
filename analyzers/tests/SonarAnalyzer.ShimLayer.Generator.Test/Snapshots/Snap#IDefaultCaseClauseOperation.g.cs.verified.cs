@@ -31,6 +31,7 @@ public readonly partial struct IDefaultCaseClauseOperationWrapper : IOperationWr
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IDefaultCaseClauseOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IDefaultCaseClauseOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, CaseKind> CaseKindAccessor = AccessorFactory.CreateProperty<Func<IOperation, CaseKind>>(WrappedType, "CaseKind");
@@ -83,8 +84,8 @@ public readonly partial struct IDefaultCaseClauseOperationWrapper : IOperationWr
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator ICaseClauseOperationWrapper(IDefaultCaseClauseOperationWrapper up) => ICaseClauseOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IDefaultCaseClauseOperationWrapper(ICaseClauseOperationWrapper down) => IDefaultCaseClauseOperationWrapper.From(down.WrappedInstance);

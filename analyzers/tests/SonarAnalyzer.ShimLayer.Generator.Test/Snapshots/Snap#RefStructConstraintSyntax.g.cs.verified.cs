@@ -31,6 +31,7 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RefStructConstraintSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefStructConstraintSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> RefKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "RefKeyword");
@@ -155,8 +156,8 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator AllowsConstraintSyntaxWrapper(RefStructConstraintSyntaxWrapper up) => AllowsConstraintSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator RefStructConstraintSyntaxWrapper(AllowsConstraintSyntaxWrapper down) => RefStructConstraintSyntaxWrapper.From(down.WrappedInstance);

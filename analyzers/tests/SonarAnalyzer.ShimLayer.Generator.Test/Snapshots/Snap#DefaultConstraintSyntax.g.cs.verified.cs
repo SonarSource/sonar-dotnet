@@ -31,6 +31,7 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.DefaultConstraintSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(DefaultConstraintSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly TypeParameterConstraintSyntax wrappedInstance;
 
     private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> DefaultKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SyntaxToken>>(WrappedType, "DefaultKeyword");
@@ -151,7 +152,7 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

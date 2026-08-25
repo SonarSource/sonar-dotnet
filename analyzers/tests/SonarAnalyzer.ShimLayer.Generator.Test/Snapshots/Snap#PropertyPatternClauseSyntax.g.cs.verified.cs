@@ -31,6 +31,7 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.PropertyPatternClauseSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PropertyPatternClauseSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBraceTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "CloseBraceToken");
@@ -161,7 +162,7 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

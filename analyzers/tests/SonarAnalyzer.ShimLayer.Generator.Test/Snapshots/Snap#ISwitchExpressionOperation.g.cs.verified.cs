@@ -31,6 +31,7 @@ public readonly partial struct ISwitchExpressionOperationWrapper : IOperationWra
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ISwitchExpressionOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ISwitchExpressionOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, ImmutableArray<IOperation>> ArmsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Arms");
@@ -85,7 +86,7 @@ public readonly partial struct ISwitchExpressionOperationWrapper : IOperationWra
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

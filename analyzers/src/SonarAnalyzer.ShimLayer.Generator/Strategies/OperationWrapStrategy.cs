@@ -47,8 +47,8 @@ public class OperationWrapStrategy : WrapStrategy
                 }
             }
 
-            public static bool IsInstance(IOperation operation) =>
-                operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+            public static bool IsInstance(IOperation instance) =>
+                WrappedType.CanWrap(CanWrapCache, instance);
         """;
 
     public OperationWrapStrategy(Type latest, MemberDescriptor[] members) : base(latest, typeof(IOperation), members) { }

@@ -31,6 +31,7 @@ public readonly partial struct PatternSyntaxWrapper : ISyntaxWrapper<CSharpSynta
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.PatternSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(PatternSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
@@ -143,8 +144,8 @@ public readonly partial struct PatternSyntaxWrapper : ISyntaxWrapper<CSharpSynta
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator ExpressionOrPatternSyntaxWrapper(PatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator PatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => PatternSyntaxWrapper.From(down.WrappedInstance);

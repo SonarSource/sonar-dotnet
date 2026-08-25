@@ -31,6 +31,7 @@ public readonly partial struct RefTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RefTypeSyntax";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RefTypeSyntaxWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly TypeSyntax wrappedInstance;
 
     private static readonly Func<TypeSyntax, bool> IsNintAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, bool>>(WrappedType, "IsNint");
@@ -170,7 +171,7 @@ public readonly partial struct RefTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
         }
     }
 
-    public static bool IsInstance(SyntaxNode node) =>
-        node is not null && LightupHelpers.CanWrapNode(node, WrappedType);
+    public static bool IsInstance(SyntaxNode instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }

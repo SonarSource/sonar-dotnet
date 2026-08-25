@@ -31,6 +31,7 @@ public readonly partial struct IParenthesizedOperationWrapper : IOperationWrappe
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IParenthesizedOperation";
 
     private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IParenthesizedOperationWrapper));
+    private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
@@ -81,7 +82,7 @@ public readonly partial struct IParenthesizedOperationWrapper : IOperationWrappe
         }
     }
 
-    public static bool IsInstance(IOperation operation) =>
-        operation is not null && LightupHelpers.CanWrapOperation(operation, WrappedType);
+    public static bool IsInstance(IOperation instance) =>
+        WrappedType.CanWrap(CanWrapCache, instance);
 
 }
