@@ -19,7 +19,7 @@ using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.ShimLayer;
+namespace SonarAnalyzer.ShimLayer.Common;
 
 internal static class TypeRegister
 {
