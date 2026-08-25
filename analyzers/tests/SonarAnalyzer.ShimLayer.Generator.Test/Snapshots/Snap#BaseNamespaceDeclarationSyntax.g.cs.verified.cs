@@ -188,4 +188,6 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
 
+    public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(NamespaceDeclarationSyntax instance) => new(instance);
+
 }

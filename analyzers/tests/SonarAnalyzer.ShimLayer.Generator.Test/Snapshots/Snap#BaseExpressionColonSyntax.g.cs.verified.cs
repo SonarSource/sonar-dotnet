@@ -158,4 +158,6 @@ public readonly partial struct BaseExpressionColonSyntaxWrapper
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
 
+    public static implicit operator BaseExpressionColonSyntaxWrapper(NameColonSyntax instance) => new(instance);
+
 }

@@ -184,4 +184,6 @@ public readonly partial struct CommonForEachStatementSyntaxWrapper
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
 
+    public static implicit operator CommonForEachStatementSyntaxWrapper(ForEachStatementSyntax instance) => new(instance);
+
 }

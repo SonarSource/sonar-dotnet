@@ -53,12 +53,11 @@ public abstract class WrapStrategy : MemberStrategy
             public readonly partial struct {{Latest.Name}}Wrapper{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
             {
                 public const string WrappedTypeName = "{{Latest.FullName}}";
-                {{FallbackBaseTypeSnippet()}}
+            {{FallbackBaseTypeSnippet()}}
 
                 private static readonly Type WrappedType = TypeRegister.LatestType(typeof({{Latest.Name}}Wrapper));
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
-
 
             {{JoinLines(wrap.Properties.Select(x => x.AccessorDeclaration()))}}
 
@@ -100,6 +99,8 @@ public abstract class WrapStrategy : MemberStrategy
                 public static bool IsInstance({{FromTypeName}} instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
 
+            {{FallbackBaseTypeConversionSnippet()}}
+
             {{WrapperToWrapperConversions(model)}}
             }
             """;
@@ -121,5 +122,12 @@ public abstract class WrapStrategy : MemberStrategy
     }
 
     private string FallbackBaseTypeSnippet() =>
-        FallbackBaseType is null ? null : $"""public const string FallbackWrappedTypeName = "{FallbackBaseType.FullName}";""";
+        FallbackBaseType is null
+            ? null
+            : $"""    public const string FallbackWrappedTypeName = "{FallbackBaseType.FullName}";""";
+
+    private string FallbackBaseTypeConversionSnippet() =>
+        FallbackBaseType is null
+            ? null
+            : $"""    public static implicit operator {Latest.Name}Wrapper({FallbackBaseType.Name} instance) => new(instance);""";
 }

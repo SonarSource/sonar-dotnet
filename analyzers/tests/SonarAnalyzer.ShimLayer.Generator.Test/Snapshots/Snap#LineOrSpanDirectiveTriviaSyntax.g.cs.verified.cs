@@ -169,4 +169,6 @@ public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
 
+    public static implicit operator LineOrSpanDirectiveTriviaSyntaxWrapper(LineDirectiveTriviaSyntax instance) => new(instance);
+
 }

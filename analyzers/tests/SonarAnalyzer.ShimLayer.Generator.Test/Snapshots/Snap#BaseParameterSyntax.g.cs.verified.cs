@@ -166,4 +166,6 @@ public readonly partial struct BaseParameterSyntaxWrapper
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
 
+    public static implicit operator BaseParameterSyntaxWrapper(ParameterSyntax instance) => new(instance);
+
 }
