@@ -17,7 +17,6 @@
 
 using System.Linq.Expressions;
 using System.Reflection;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ShimLayer.Common;
 

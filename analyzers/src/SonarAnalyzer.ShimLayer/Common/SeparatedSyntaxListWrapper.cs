@@ -16,7 +16,6 @@
  */
 
 using System.Collections;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ShimLayer.Common;
 

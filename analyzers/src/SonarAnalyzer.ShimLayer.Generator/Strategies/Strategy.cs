@@ -66,15 +66,7 @@ public abstract class Strategy
          * along with this program; if not, see https://sonarsource.com/license/ssal/
          */
 
-        {JoinLines((SortedSet<string>)[
-            "using Microsoft.CodeAnalysis;",
-            "using Microsoft.CodeAnalysis.CSharp;",
-            "using Microsoft.CodeAnalysis.CSharp.Syntax;",
-            "using Microsoft.CodeAnalysis.Text;",
-            "using System;",
-            "using System.Collections.Immutable;",
-            "using System.Text;",
-            .. additionalUsing])}
+        {JoinLines(new SortedSet<string>(additionalUsing))}
 
         namespace SonarAnalyzer.ShimLayer;
 

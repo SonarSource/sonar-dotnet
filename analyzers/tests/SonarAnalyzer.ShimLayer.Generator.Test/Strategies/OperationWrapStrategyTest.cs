@@ -49,14 +49,6 @@ public class OperationWrapStrategyTest
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
 
-            using Microsoft.CodeAnalysis;
-            using Microsoft.CodeAnalysis.CSharp;
-            using Microsoft.CodeAnalysis.CSharp.Syntax;
-            using Microsoft.CodeAnalysis.Text;
-            using System;
-            using System.Collections.Immutable;
-            using System.Text;
-
             namespace SonarAnalyzer.ShimLayer;
 
             public readonly struct IFieldInitializerOperationWrapper : IOperationWrapper
@@ -133,14 +125,6 @@ public class OperationWrapStrategyTest
              * You should have received a copy of the Sonar Source-Available License
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
-
-            using Microsoft.CodeAnalysis;
-            using Microsoft.CodeAnalysis.CSharp;
-            using Microsoft.CodeAnalysis.CSharp.Syntax;
-            using Microsoft.CodeAnalysis.Text;
-            using System;
-            using System.Collections.Immutable;
-            using System.Text;
 
             namespace SonarAnalyzer.ShimLayer;
 
@@ -222,14 +206,6 @@ public class OperationWrapStrategyTest
              * You should have received a copy of the Sonar Source-Available License
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
-
-            using Microsoft.CodeAnalysis;
-            using Microsoft.CodeAnalysis.CSharp;
-            using Microsoft.CodeAnalysis.CSharp.Syntax;
-            using Microsoft.CodeAnalysis.Text;
-            using System;
-            using System.Collections.Immutable;
-            using System.Text;
 
             namespace SonarAnalyzer.ShimLayer;
 
@@ -319,14 +295,6 @@ public class OperationWrapStrategyTest
              * You should have received a copy of the Sonar Source-Available License
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
-
-            using Microsoft.CodeAnalysis;
-            using Microsoft.CodeAnalysis.CSharp;
-            using Microsoft.CodeAnalysis.CSharp.Syntax;
-            using Microsoft.CodeAnalysis.Text;
-            using System;
-            using System.Collections.Immutable;
-            using System.Text;
 
             namespace SonarAnalyzer.ShimLayer;
 

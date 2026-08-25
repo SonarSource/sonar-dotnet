@@ -16,7 +16,12 @@
   <ItemGroup>
     <Using Include="SonarAnalyzer.ShimLayer.Common" />
     <Using Include="SonarAnalyzer.ShimLayer.Extensions" />
+    <Using Include="Microsoft.CodeAnalysis" />
+    <Using Include="Microsoft.CodeAnalysis.CSharp" />
+    <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
+    <Using Include="Microsoft.CodeAnalysis.Text" />
     <Using Include="System.Collections.Concurrent" />
+    <Using Include="System.Text" />
   </ItemGroup>
 
 </Project>
