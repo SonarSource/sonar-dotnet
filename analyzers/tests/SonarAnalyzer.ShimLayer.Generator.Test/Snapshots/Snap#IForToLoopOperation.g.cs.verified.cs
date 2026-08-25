@@ -28,9 +28,7 @@ namespace SonarAnalyzer.ShimLayer;
 
 public readonly struct IForToLoopOperationWrapper : IOperationWrapper
 {
-    public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IForToLoopOperation";
-
-    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IForToLoopOperationWrapper));
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IForToLoopOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
@@ -101,7 +99,7 @@ public readonly struct IForToLoopOperationWrapper : IOperationWrapper
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.Operations.IForToLoopOperation'");
         }
     }
 

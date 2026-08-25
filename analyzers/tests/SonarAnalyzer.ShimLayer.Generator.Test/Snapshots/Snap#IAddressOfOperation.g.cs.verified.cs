@@ -28,9 +28,7 @@ namespace SonarAnalyzer.ShimLayer;
 
 public readonly struct IAddressOfOperationWrapper : IOperationWrapper
 {
-    public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IAddressOfOperation";
-
-    private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IAddressOfOperationWrapper));
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IAddressOfOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
@@ -81,7 +79,7 @@ public readonly struct IAddressOfOperationWrapper : IOperationWrapper
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.Operations.IAddressOfOperation'");
         }
     }
 

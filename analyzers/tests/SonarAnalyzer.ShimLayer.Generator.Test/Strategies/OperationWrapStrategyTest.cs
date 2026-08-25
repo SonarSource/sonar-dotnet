@@ -61,9 +61,7 @@ public class OperationWrapStrategyTest
 
             public readonly struct IFieldInitializerOperationWrapper : IOperationWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldInitializerOperationWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
@@ -94,7 +92,7 @@ public class OperationWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation'");
                     }
                 }
 
@@ -148,9 +146,7 @@ public class OperationWrapStrategyTest
 
             public readonly struct IFieldReferenceOperationWrapper : IOperationWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IFieldReferenceOperationWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
@@ -181,7 +177,7 @@ public class OperationWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation'");
                     }
                 }
 
@@ -239,9 +235,7 @@ public class OperationWrapStrategyTest
 
             public readonly struct ITupleOperationWrapper : IOperationWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITupleOperation";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ITupleOperationWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.ITupleOperation");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
@@ -282,7 +276,7 @@ public class OperationWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.Operations.ITupleOperation'");
                     }
                 }
 
@@ -338,9 +332,7 @@ public class OperationWrapStrategyTest
 
             public readonly struct ControlFlowGraphWrapper : IOperationWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ControlFlowGraphWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
@@ -377,7 +369,7 @@ public class OperationWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph'");
                     }
                 }
 

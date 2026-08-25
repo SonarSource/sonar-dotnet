@@ -65,9 +65,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct RecordDeclarationSyntaxWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
@@ -100,7 +98,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax'");
                     }
                 }
 
@@ -162,9 +160,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct RecordDeclarationSyntaxWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
@@ -210,7 +206,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax'");
                     }
                 }
 
@@ -266,9 +262,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct IsPatternExpressionSyntaxWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IsPatternExpressionSyntaxWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly ExpressionSyntax wrappedInstance;
 
@@ -305,7 +299,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax'");
                     }
                 }
 
@@ -320,7 +314,7 @@ public class SyntaxNodeWrapStrategyTest
     public void Generate_ConstantPatternSyntax()
     {
         var sut = new SyntaxNodeWrapStrategy(typeof(ConstantPatternSyntax), typeof(CSharpSyntaxNode), null, []);
-        var model = new Dictionary<Type, Strategy>()
+        var model = new Dictionary<Type, Strategy>
         {
             { typeof(ConstantPatternSyntax), sut },
             { typeof(PatternSyntax), new SyntaxNodeWrapStrategy(typeof(PatternSyntax), typeof(CSharpSyntaxNode), null, []) },
@@ -359,9 +353,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct ConstantPatternSyntaxWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(ConstantPatternSyntaxWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly CSharpSyntaxNode wrappedInstance;
 
@@ -394,7 +386,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax'");
                     }
                 }
 
@@ -454,9 +446,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct SyntaxNodeWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.SyntaxNode";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(SyntaxNodeWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.SyntaxNode");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly SyntaxNode wrappedInstance;
 
@@ -489,7 +479,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.SyntaxNode'");
                     }
                 }
 
@@ -545,9 +535,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct IndexerDeclarationSyntaxWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(IndexerDeclarationSyntaxWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly SyntaxNode wrappedInstance;
 
@@ -588,7 +576,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax'");
                     }
                 }
 
@@ -646,9 +634,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct RecordDeclarationSyntaxWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(RecordDeclarationSyntaxWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly TypeDeclarationSyntax wrappedInstance;
 
@@ -691,7 +677,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax'");
                     }
                 }
 
@@ -743,10 +729,7 @@ public class SyntaxNodeWrapStrategyTest
 
             public readonly struct BaseNamespaceDeclarationSyntaxWrapper
             {
-                public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BaseNamespaceDeclarationSyntax";
-                public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.NamespaceDeclarationSyntax";
-
-                private static readonly Type WrappedType = TypeRegister.LatestType(typeof(BaseNamespaceDeclarationSyntaxWrapper));
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.BaseNamespaceDeclarationSyntax", "Microsoft.CodeAnalysis.CSharp.Syntax.NamespaceDeclarationSyntax");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly MemberDeclarationSyntax wrappedInstance;
 
@@ -779,7 +762,7 @@ public class SyntaxNodeWrapStrategyTest
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.CSharp.Syntax.BaseNamespaceDeclarationSyntax'");
                     }
                 }
 

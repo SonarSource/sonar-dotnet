@@ -42,7 +42,7 @@ internal static class AccessorFactory
         static bool IsParameterMatch(Type compiletime, Type runtime) =>
             compiletime.Equals(runtime)
             || (compiletime.IsArray && runtime.IsArray && IsParameterMatch(compiletime.GetElementType(), runtime.GetElementType()))
-            || TypeRegister.LatestType(compiletime) == runtime;
+            || compiletime.Name == $"{runtime.Name}Wrapper";
     }
 
     public static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate

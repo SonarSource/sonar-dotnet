@@ -26,13 +26,11 @@ internal static class TypeRegister
     // This may need to be extended to other assemblies if needed. See TypeLoader.LoadBaseline and .LoadLatest
     private static readonly Assembly[] Assemblies = [typeof(SyntaxNode).Assembly, typeof(CSharpSyntaxNode).Assembly];
 
-    public static Type LatestType(Type wrapper)
+    public static Type LatestType(string name, string fallbackName = null)
     {
-        return Load(wrapper, nameof(BaseNamespaceDeclarationSyntaxWrapper.WrappedTypeName)) ?? Load(wrapper, nameof(BaseNamespaceDeclarationSyntaxWrapper.FallbackWrappedTypeName));
+        return Load(name) ?? Load(fallbackName);
 
-        static Type Load(Type wrapper, string fieldName) =>
-            wrapper.GetField(fieldName, BindingFlags.Static | BindingFlags.Public) is { } field && field.GetValue(null) is string name
-                ? Assemblies.Select(x => x.GetType(name)).FirstOrDefault(x => x is not null)
-                : null;
+        static Type Load(string name) =>
+            name is null ? null : Assemblies.Select(x => x.GetType(name)).FirstOrDefault(x => x is not null);
     }
 }
