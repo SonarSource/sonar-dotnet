@@ -86,6 +86,9 @@ public class IOperationStrategyTest
 
                     public IInvocationOperationWrapper? AsInvocation => IInvocationOperationWrapper.FromOrDefault(wrappedInstance);
                     public IPropertyReferenceOperationWrapper? AsPropertyReference => IPropertyReferenceOperationWrapper.FromOrDefault(wrappedInstance);
+
+                    public IInvocationOperationWrapper ToInvocation() => IInvocationOperationWrapper.From(wrappedInstance);
+                    public IPropertyReferenceOperationWrapper ToPropertyReference() => IPropertyReferenceOperationWrapper.From(wrappedInstance);
                 }
             }
             """);

@@ -27,12 +27,24 @@ public sealed class IOperationStrategy : ExtendStrategy
         }
     }
 
-    protected override string AdditionalMembers(StrategyModel model) =>
-        JoinLines(model.OfType<OperationWrapStrategy>().OrderBy(x => x.ReturnTypeSnippet()).Select(AsOperationMethod));
+    protected override string AdditionalMembers(StrategyModel model)
+    {
+        var operations = model.OfType<OperationWrapStrategy>().OrderBy(x => x.ReturnTypeSnippet()).ToArray();
+        return $"""
+            {JoinLines(operations.Select(AsOperationMethod))}
+
+            {JoinLines(operations.Select(ToOperationMethod))}
+            """;
+    }
 
     private static string AsOperationMethod(OperationWrapStrategy strategy) =>
         $"""
                 public {strategy.ReturnTypeSnippet()}? As{ShortName(strategy)} => {strategy.ReturnTypeSnippet()}.FromOrDefault(wrappedInstance);
+        """;
+
+    private static string ToOperationMethod(OperationWrapStrategy strategy) =>
+        $"""
+                public {strategy.ReturnTypeSnippet()} To{ShortName(strategy)}() => {strategy.ReturnTypeSnippet()}.From(wrappedInstance);
         """;
 
     private static string ShortName(OperationWrapStrategy strategy) =>

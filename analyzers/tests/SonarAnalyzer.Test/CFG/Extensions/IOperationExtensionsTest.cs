@@ -78,24 +78,6 @@ public class IOperationExtensionsTest
             }
             """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop.Should().BeNull();
 
-    [TestMethod]
-    public void ExtensionsMethodsUsedByArchitecture()
-    {
-        IOperation operation = null;
-        // These extension methods are used by sonar-architecture. Do not remove them.
-        operation.ToArrayCreation();
-        operation.ToCatchClause();
-        operation.ToConversion();
-        operation.ToInvocation();
-        operation.ToIsType();
-        operation.ToLocalFunction();
-        operation.ToMemberReference();
-        operation.ToObjectCreation();
-        operation.ToPattern();
-        operation.ToVariableDeclaration();
-        operation.ToVariableDeclarator();
-    }
-
     private static IOperation Operation<T>(string code) where T : SyntaxNode
     {
         var (tree, model) = TestCompiler.CompileCS(code);
