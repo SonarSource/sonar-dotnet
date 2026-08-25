@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper
+public readonly struct BaseObjectCreationExpressionSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BaseObjectCreationExpressionSyntax";
     public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ObjectCreationExpressionSyntax";

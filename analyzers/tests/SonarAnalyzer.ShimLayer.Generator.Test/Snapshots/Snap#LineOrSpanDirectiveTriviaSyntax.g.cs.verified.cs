@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct LineOrSpanDirectiveTriviaSyntaxWrapper
+public readonly struct LineOrSpanDirectiveTriviaSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineOrSpanDirectiveTriviaSyntax";
     public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.LineDirectiveTriviaSyntax";

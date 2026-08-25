@@ -50,7 +50,7 @@ public abstract class WrapStrategy : MemberStrategy
         var wrap = WrapMembers(model);
         return $$"""
             {{Preamble()}}
-            public readonly partial struct {{Latest.Name}}Wrapper{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
+            public readonly struct {{Latest.Name}}Wrapper{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
             {
                 public const string WrappedTypeName = "{{Latest.FullName}}";
             {{FallbackBaseTypeSnippet()}}

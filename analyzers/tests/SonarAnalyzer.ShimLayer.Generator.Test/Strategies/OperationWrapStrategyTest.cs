@@ -59,7 +59,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct IFieldInitializerOperationWrapper : IOperationWrapper
+            public readonly struct IFieldInitializerOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation";
 
@@ -146,7 +146,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct IFieldReferenceOperationWrapper : IOperationWrapper
+            public readonly struct IFieldReferenceOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation";
 
@@ -237,7 +237,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct ITupleOperationWrapper : IOperationWrapper
+            public readonly struct ITupleOperationWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.Operations.ITupleOperation";
 
@@ -336,7 +336,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct ControlFlowGraphWrapper : IOperationWrapper
+            public readonly struct ControlFlowGraphWrapper : IOperationWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph";
 

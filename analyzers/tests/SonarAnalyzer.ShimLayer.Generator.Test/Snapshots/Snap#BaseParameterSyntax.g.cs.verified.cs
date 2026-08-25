@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct BaseParameterSyntaxWrapper
+public readonly struct BaseParameterSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BaseParameterSyntax";
     public const string FallbackWrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ParameterSyntax";
