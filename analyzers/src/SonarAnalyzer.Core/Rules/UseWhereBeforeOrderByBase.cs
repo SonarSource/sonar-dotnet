@@ -38,6 +38,7 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
                 && LeftHasCorrectName(left, out var orderByMethodDescription)
                 && MethodIsLinqExtension(left, c.Model)
                 && MethodIsLinqExtension(right, c.Model)
+                && !IsIndexedLinqWhere(invocation, c.Model)
                 && Language.Syntax.NodeIdentifier(right) is { } rightIdentifier
                 && Language.Syntax.NodeIdentifier(left) is { } leftIdentifier)
             {
@@ -62,4 +63,24 @@ public abstract class UseWhereBeforeOrderByBase<TSyntaxKind, TInvocation> : Sona
     private static bool MethodIsLinqExtension(SyntaxNode node, SemanticModel model) =>
         model.GetSymbolInfo(node).Symbol is IMethodSymbol method
         && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
+
+    private static bool IsIndexedLinqWhere(SyntaxNode invocation, SemanticModel model)
+    {
+        if (model.GetSymbolInfo(invocation).Symbol is IMethodSymbol method)
+        {
+            var originalMethod = method.ReducedFrom ?? method;
+            return originalMethod.ContainingType.Is(KnownType.System_Linq_Enumerable)
+                && originalMethod.Parameters
+                    .Select(x => x.Type)
+                    .OfType<INamedTypeSymbol>()
+                    .Any(IsIndexedPredicate);
+        }
+
+        return false;
+    }
+
+    private static bool IsIndexedPredicate(INamedTypeSymbol type) =>
+        type.DelegateInvokeMethod is { Parameters.Length: 2 } invokeMethod
+        && invokeMethod.Parameters[1].Type.SpecialType == SpecialType.System_Int32
+        && invokeMethod.ReturnType.SpecialType == SpecialType.System_Boolean;
 }

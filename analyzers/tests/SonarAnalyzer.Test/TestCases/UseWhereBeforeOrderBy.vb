@@ -68,6 +68,12 @@ Module Program
         Dim ordered = list.OrderBy(Function(x) x)
         ordered.Where(Function(x) True) ' Compliant
 
+        list.OrderBy(Function(x) x).Where(Function(element, index) element >= index) ' Compliant
+        list.OrderByDescending(Function(x) x).Where(Function(element, index) element >= index) ' Compliant
+        list.OrderBy(Function(x) x)?.Where(Function(element, index) element >= index) ' Compliant
+        list.OrderBy(Function(x) x).Where(Function(element, unusedIndex) element > 0) ' Compliant
+        list.OrderByDescending(Function(x) x).Where(AddressOf HasEvenIndex) ' Compliant
+
         Dim fake = New Fake(Of Integer)()
         fake.OrderBy(Function(x) x).Where(Function(x) True) ' Compliant
 
@@ -75,6 +81,10 @@ Module Program
         ' "Where" is the LINQ version, "OrderBy" is custom extension
         semiFake.OrderBy(Function(x) x).Where(Function(x) True) ' Compliant
     End Sub
+
+    Private Function HasEvenIndex(element As Integer, index As Integer) As Boolean
+        Return index Mod 2 = 0
+    End Function
 
     Private Sub CustomImplementation()
         Dim mine = New MyEnumerable(Of Integer)()
@@ -133,4 +143,3 @@ Module FakeExtensions
         Return source
     End Function
 End Module
-

@@ -88,6 +88,12 @@ static class Program
         var ordered = list.OrderBy(x => x);
         ordered.Where(x => true); // Compliant
 
+        list.OrderBy(x => x).Where((element, index) => element >= index); // Compliant
+        list.OrderByDescending(x => x).Where((element, index) => element >= index); // Compliant
+        list.OrderBy(x => x)?.Where((element, index) => element >= index); // Compliant
+        list.OrderBy(x => x).Where((element, unusedIndex) => element > 0); // Compliant
+        list.OrderByDescending(x => x).Where(HasEvenIndex); // Compliant
+
         var fake = new Fake<int>();
         fake.OrderBy(x => x).Where(x => true); // Compliant
 
@@ -95,6 +101,8 @@ static class Program
         // "Where" is the LINQ version, "OrderBy" is custom extension
         semiFake.OrderBy(x => x).Where(x => true); // Compliant
     }
+
+    static bool HasEvenIndex(int element, int index) => index % 2 == 0;
 
     static void CustomImplementation()
     {
@@ -132,3 +140,26 @@ static class FakeExtensions
     public static SemiFake<TSource> OrderBy<TSource, TKey>(this SemiFake<TSource> source, Func<TSource, TKey> keySelector) => source;
 }
 
+namespace CustomExtensions
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    static class Program
+    {
+        static List<int> list = new List<int>();
+
+        static void CustomWhere()
+        {
+            list.OrderBy(x => x).Where((element, index) => element >= index);
+            //                   ^^^^^ {{"Where" should be used before "OrderBy"}}
+            //   ^^^^^^^ Secondary@-1
+        }
+    }
+
+    static class EnumerableExtensions
+    {
+        public static IEnumerable<T> Where<T>(this IEnumerable<T> source, Func<T, int, bool> predicate) => source;
+    }
+}
