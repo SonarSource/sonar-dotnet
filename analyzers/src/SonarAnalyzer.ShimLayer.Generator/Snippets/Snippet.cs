@@ -29,7 +29,9 @@ public abstract class Snippet
         foreach (var attribute in attributes.Where(x => x.AttributeType.Name is not "ExperimentalAttribute"
                                                                                 and not "NullableAttribute"
                                                                                 and not "NullableContextAttribute"
-                                                                                and not "IteratorStateMachineAttribute"))
+                                                                                and not "IteratorStateMachineAttribute"
+                                                                                and not "TupleElementNamesAttribute"
+                                                                                and not "AsyncStateMachineAttribute"))
         {
             sb.Append("[").Append(attribute.AttributeType.FullName);
             if (attribute.ConstructorArguments.Any())

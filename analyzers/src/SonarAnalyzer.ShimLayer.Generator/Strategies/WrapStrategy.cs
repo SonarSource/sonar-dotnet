@@ -24,7 +24,6 @@ public abstract class WrapStrategy : MemberStrategy
     [Obsolete("This should be removed once we remove the obsolete usages from the generated code")]
     protected abstract string ObsoletePropertiesSnippet { get; }
     protected abstract string ConversionSnippet { get; }
-    protected abstract string WrapperToWrapperConversions(StrategyModel model);
 
     public Type BaseType { get; }
     public Type FallbackBaseType { get; }
@@ -101,6 +100,21 @@ public abstract class WrapStrategy : MemberStrategy
             {{WrapperToWrapperConversions(model)}}
             }
             """;
+    }
+
+    protected virtual string WrapperToWrapperConversions(StrategyModel model)
+    {
+        return WrapperToWrapperConversions(WrappedBaseTypes());
+
+        IEnumerable<Type> WrappedBaseTypes()
+        {
+            var baseType = Latest.BaseType;
+            while (baseType is not null && model[baseType] is WrapStrategy) // BaseType is also wrapped
+            {
+                yield return baseType;
+                baseType = baseType.BaseType;
+            }
+        }
     }
 
     protected string WrapperToWrapperConversions(IEnumerable<Type> baseTypes)

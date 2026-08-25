@@ -39,19 +39,4 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
         """;
 
     public SyntaxNodeWrapStrategy(Type latest, Type baseType, Type fallbackBaseType, MemberDescriptor[] members) : base(latest, baseType, fallbackBaseType, members) { }
-
-    protected override string WrapperToWrapperConversions(StrategyModel model)
-    {
-        return WrapperToWrapperConversions(WrappedBaseTypes());
-
-        IEnumerable<Type> WrappedBaseTypes()
-        {
-            var baseType = Latest.BaseType;
-            while (baseType is not null && model[baseType] is SyntaxNodeWrapStrategy) // BaseType is also wrapped
-            {
-                yield return baseType;
-                baseType = baseType.BaseType;
-            }
-        }
-    }
 }

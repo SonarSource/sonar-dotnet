@@ -76,6 +76,18 @@ public static class ModelBuilder
         {
             return new NoChangeStrategy(latest.Type);
         }
+        else if (IsNonStaticClass(latest.Type) && latest.Type.Name is not "SymbolStartAnalysisContext" and not "SemanticModel")
+        {
+            if (baseline is null)
+            {
+                var commonBase = FindCommonBaseType(latest, baselineMap);
+                return new ClassWrapStrategy(latest.Type, commonBase.Type, CreateMembers(latest, commonBase));
+            }
+            else
+            {
+                return new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
+            }
+        }
         else
         {
             // ToDo: Throw NotSupportedException instead of skip, there should be nothing left after explicitly handling all known cases
@@ -84,6 +96,9 @@ public static class ModelBuilder
                 : new NoChangeStrategy(latest.Type);
         }
     }
+
+    private static bool IsNonStaticClass(Type type) =>
+        type.IsClass && !(type.IsAbstract && type.IsSealed);
 
     private static TypeDescriptor FindCommonBaseType(TypeDescriptor latest, IReadOnlyDictionary<string, TypeDescriptor> baselineMap)
     {

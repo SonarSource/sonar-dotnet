@@ -19,8 +19,15 @@
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.CSharp" />
     <Using Include="Microsoft.CodeAnalysis.CSharp.Syntax" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
+    <Using Include="Microsoft.CodeAnalysis.Emit" />
+    <Using Include="Microsoft.CodeAnalysis.Diagnostics.Telemetry" />
     <Using Include="Microsoft.CodeAnalysis.Text" />
     <Using Include="System.Collections.Concurrent" />
+    <Using Include="System.IO" />
+    <Using Include="System.Reflection" />
+    <Using Include="System.Reflection.Metadata" />
+    <Using Include="System.Security.Cryptography" />
     <Using Include="System.Text" />
   </ItemGroup>
 
