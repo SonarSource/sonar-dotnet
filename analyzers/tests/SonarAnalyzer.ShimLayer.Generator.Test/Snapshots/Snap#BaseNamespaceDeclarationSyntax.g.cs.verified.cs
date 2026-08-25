@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWrapper<MemberDeclarationSyntax>
+public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.BaseNamespaceDeclarationSyntax";
 

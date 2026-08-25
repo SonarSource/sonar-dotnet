@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
+public readonly partial struct RefStructConstraintSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RefStructConstraintSyntax";
 

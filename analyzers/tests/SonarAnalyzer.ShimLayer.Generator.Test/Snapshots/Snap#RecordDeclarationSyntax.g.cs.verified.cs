@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
+public readonly partial struct RecordDeclarationSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 

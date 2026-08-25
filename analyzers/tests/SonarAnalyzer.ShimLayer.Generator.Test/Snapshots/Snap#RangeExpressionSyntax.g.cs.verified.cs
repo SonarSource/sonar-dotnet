@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
+public readonly partial struct RangeExpressionSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RangeExpressionSyntax";
 

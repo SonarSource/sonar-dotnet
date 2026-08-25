@@ -62,7 +62,7 @@ public class SyntaxNodeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
+            public readonly partial struct RecordDeclarationSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
@@ -158,7 +158,7 @@ public class SyntaxNodeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
+            public readonly partial struct RecordDeclarationSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
@@ -261,7 +261,7 @@ public class SyntaxNodeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
+            public readonly partial struct IsPatternExpressionSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IsPatternExpressionSyntax";
 
@@ -354,7 +354,7 @@ public class SyntaxNodeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct ConstantPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
+            public readonly partial struct ConstantPatternSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ConstantPatternSyntax";
 
@@ -448,7 +448,7 @@ public class SyntaxNodeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct SyntaxNodeWrapper : ISyntaxWrapper<SyntaxNode>
+            public readonly partial struct SyntaxNodeWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.SyntaxNode";
 
@@ -538,7 +538,7 @@ public class SyntaxNodeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct IndexerDeclarationSyntaxWrapper : ISyntaxWrapper<SyntaxNode>
+            public readonly partial struct IndexerDeclarationSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.IndexerDeclarationSyntax";
 
@@ -638,7 +638,7 @@ public class SyntaxNodeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
+            public readonly partial struct RecordDeclarationSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 

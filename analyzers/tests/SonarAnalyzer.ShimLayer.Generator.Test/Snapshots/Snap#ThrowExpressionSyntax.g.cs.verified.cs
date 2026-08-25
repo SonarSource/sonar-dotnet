@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ThrowExpressionSyntaxWrapper : ISyntaxWrapper<ExpressionSyntax>
+public readonly partial struct ThrowExpressionSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ThrowExpressionSyntax";
 

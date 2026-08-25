@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct TupleTypeSyntaxWrapper : ISyntaxWrapper<TypeSyntax>
+public readonly partial struct TupleTypeSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.TupleTypeSyntax";
 

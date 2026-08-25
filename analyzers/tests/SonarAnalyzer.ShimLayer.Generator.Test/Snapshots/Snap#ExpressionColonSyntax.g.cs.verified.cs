@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ExpressionColonSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
+public readonly partial struct ExpressionColonSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ExpressionColonSyntax";
 

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
@@ -61,7 +61,7 @@ public class ClassWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
+            public readonly partial struct RecordDeclarationSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 
@@ -149,7 +149,7 @@ public class ClassWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly partial struct RecordDeclarationSyntaxWrapper : ISyntaxWrapper<TypeDeclarationSyntax>
+            public readonly partial struct RecordDeclarationSyntaxWrapper
             {
                 public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax";
 

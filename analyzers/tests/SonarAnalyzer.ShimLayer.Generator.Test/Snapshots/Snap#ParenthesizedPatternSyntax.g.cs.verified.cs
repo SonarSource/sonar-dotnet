@@ -26,7 +26,7 @@ using System.Text;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly partial struct ParenthesizedPatternSyntaxWrapper : ISyntaxWrapper<CSharpSyntaxNode>
+public readonly partial struct ParenthesizedPatternSyntaxWrapper
 {
     public const string WrappedTypeName = "Microsoft.CodeAnalysis.CSharp.Syntax.ParenthesizedPatternSyntax";
 
