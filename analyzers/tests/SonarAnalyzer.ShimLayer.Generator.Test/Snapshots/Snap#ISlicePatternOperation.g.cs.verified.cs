@@ -69,22 +69,22 @@ public readonly partial struct ISlicePatternOperationWrapper : IOperationWrapper
     public ISymbol SliceSymbol => (ISymbol)SliceSymbolAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static ISlicePatternOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static ISlicePatternOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static ISlicePatternOperationWrapper From(IOperation operation)
+    public static ISlicePatternOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new ISlicePatternOperationWrapper(operation);
+            return new ISlicePatternOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

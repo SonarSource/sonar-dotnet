@@ -144,25 +144,25 @@ public readonly partial struct ListPatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     public ListPatternSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => ListPatternSyntaxWrapper.From(WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken));
     public ListPatternSyntaxWrapper WithPatterns(SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns) => ListPatternSyntaxWrapper.From(WithPatternsAccessor(wrappedInstance, patterns));
 
-    public static explicit operator ListPatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ListPatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(ListPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ListPatternSyntaxWrapper From(SyntaxNode node)
+    public static ListPatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ListPatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new ListPatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

@@ -148,25 +148,25 @@ public readonly partial struct SwitchExpressionSyntaxWrapper : ISyntaxWrapper<Ex
     public SwitchExpressionSyntaxWrapper WithOpenBraceToken(SyntaxToken openBraceToken) => SwitchExpressionSyntaxWrapper.From(WithOpenBraceTokenAccessor(wrappedInstance, openBraceToken));
     public SwitchExpressionSyntaxWrapper WithSwitchKeyword(SyntaxToken switchKeyword) => SwitchExpressionSyntaxWrapper.From(WithSwitchKeywordAccessor(wrappedInstance, switchKeyword));
 
-    public static explicit operator SwitchExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator SwitchExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(SwitchExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static SwitchExpressionSyntaxWrapper From(SyntaxNode node)
+    public static SwitchExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new SwitchExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new SwitchExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

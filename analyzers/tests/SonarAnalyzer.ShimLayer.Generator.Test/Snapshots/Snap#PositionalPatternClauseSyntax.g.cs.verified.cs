@@ -140,25 +140,25 @@ public readonly partial struct PositionalPatternClauseSyntaxWrapper : ISyntaxWra
     public PositionalPatternClauseSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => PositionalPatternClauseSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
     public PositionalPatternClauseSyntaxWrapper WithSubpatterns(SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns) => PositionalPatternClauseSyntaxWrapper.From(WithSubpatternsAccessor(wrappedInstance, subpatterns));
 
-    public static explicit operator PositionalPatternClauseSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator PositionalPatternClauseSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(PositionalPatternClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static PositionalPatternClauseSyntaxWrapper From(SyntaxNode node)
+    public static PositionalPatternClauseSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new PositionalPatternClauseSyntaxWrapper((CSharpSyntaxNode)node);
+            return new PositionalPatternClauseSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

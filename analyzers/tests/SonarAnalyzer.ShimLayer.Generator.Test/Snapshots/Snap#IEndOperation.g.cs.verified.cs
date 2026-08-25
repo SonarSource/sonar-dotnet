@@ -61,22 +61,22 @@ public readonly partial struct IEndOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IEndOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IEndOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IEndOperationWrapper From(IOperation operation)
+    public static IEndOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IEndOperationWrapper(operation);
+            return new IEndOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

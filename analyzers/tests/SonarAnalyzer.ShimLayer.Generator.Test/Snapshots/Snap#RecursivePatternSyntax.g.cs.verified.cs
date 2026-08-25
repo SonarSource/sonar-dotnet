@@ -146,25 +146,25 @@ public readonly partial struct RecursivePatternSyntaxWrapper : ISyntaxWrapper<CS
     public RecursivePatternSyntaxWrapper WithPropertyPatternClause(PropertyPatternClauseSyntaxWrapper propertyPatternClause) => RecursivePatternSyntaxWrapper.From(WithPropertyPatternClauseAccessor(wrappedInstance, propertyPatternClause));
     public RecursivePatternSyntaxWrapper WithType(TypeSyntax type) => RecursivePatternSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
-    public static explicit operator RecursivePatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator RecursivePatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(RecursivePatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static RecursivePatternSyntaxWrapper From(SyntaxNode node)
+    public static RecursivePatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new RecursivePatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new RecursivePatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

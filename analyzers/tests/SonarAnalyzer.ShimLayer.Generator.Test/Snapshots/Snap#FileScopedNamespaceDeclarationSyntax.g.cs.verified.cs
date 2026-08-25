@@ -168,25 +168,25 @@ public readonly partial struct FileScopedNamespaceDeclarationSyntaxWrapper : ISy
     public FileScopedNamespaceDeclarationSyntaxWrapper WithSemicolonToken(SyntaxToken semicolonToken) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithSemicolonTokenAccessor(wrappedInstance, semicolonToken));
     public FileScopedNamespaceDeclarationSyntaxWrapper WithUsings(SyntaxList<UsingDirectiveSyntax> usings) => FileScopedNamespaceDeclarationSyntaxWrapper.From(WithUsingsAccessor(wrappedInstance, usings));
 
-    public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator MemberDeclarationSyntax(FileScopedNamespaceDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static FileScopedNamespaceDeclarationSyntaxWrapper From(SyntaxNode node)
+    public static FileScopedNamespaceDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new FileScopedNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)node);
+            return new FileScopedNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

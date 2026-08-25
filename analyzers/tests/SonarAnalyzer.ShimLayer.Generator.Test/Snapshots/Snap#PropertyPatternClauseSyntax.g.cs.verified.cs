@@ -140,25 +140,25 @@ public readonly partial struct PropertyPatternClauseSyntaxWrapper : ISyntaxWrapp
     public PropertyPatternClauseSyntaxWrapper WithOpenBraceToken(SyntaxToken openBraceToken) => PropertyPatternClauseSyntaxWrapper.From(WithOpenBraceTokenAccessor(wrappedInstance, openBraceToken));
     public PropertyPatternClauseSyntaxWrapper WithSubpatterns(SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns) => PropertyPatternClauseSyntaxWrapper.From(WithSubpatternsAccessor(wrappedInstance, subpatterns));
 
-    public static explicit operator PropertyPatternClauseSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator PropertyPatternClauseSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(PropertyPatternClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static PropertyPatternClauseSyntaxWrapper From(SyntaxNode node)
+    public static PropertyPatternClauseSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new PropertyPatternClauseSyntaxWrapper((CSharpSyntaxNode)node);
+            return new PropertyPatternClauseSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

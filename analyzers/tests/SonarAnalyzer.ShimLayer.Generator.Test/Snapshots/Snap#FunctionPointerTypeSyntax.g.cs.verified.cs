@@ -153,25 +153,25 @@ public readonly partial struct FunctionPointerTypeSyntaxWrapper : ISyntaxWrapper
     public FunctionPointerTypeSyntaxWrapper WithDelegateKeyword(SyntaxToken delegateKeyword) => FunctionPointerTypeSyntaxWrapper.From(WithDelegateKeywordAccessor(wrappedInstance, delegateKeyword));
     public FunctionPointerTypeSyntaxWrapper WithParameterList(FunctionPointerParameterListSyntaxWrapper parameterList) => FunctionPointerTypeSyntaxWrapper.From(WithParameterListAccessor(wrappedInstance, parameterList));
 
-    public static explicit operator FunctionPointerTypeSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator FunctionPointerTypeSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator TypeSyntax(FunctionPointerTypeSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static FunctionPointerTypeSyntaxWrapper From(SyntaxNode node)
+    public static FunctionPointerTypeSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new FunctionPointerTypeSyntaxWrapper((TypeSyntax)node);
+            return new FunctionPointerTypeSyntaxWrapper((TypeSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

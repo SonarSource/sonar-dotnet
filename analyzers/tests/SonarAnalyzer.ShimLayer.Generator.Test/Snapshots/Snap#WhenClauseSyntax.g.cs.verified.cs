@@ -134,25 +134,25 @@ public readonly partial struct WhenClauseSyntaxWrapper : ISyntaxWrapper<CSharpSy
     public WhenClauseSyntaxWrapper WithCondition(ExpressionSyntax condition) => WhenClauseSyntaxWrapper.From(WithConditionAccessor(wrappedInstance, condition));
     public WhenClauseSyntaxWrapper WithWhenKeyword(SyntaxToken whenKeyword) => WhenClauseSyntaxWrapper.From(WithWhenKeywordAccessor(wrappedInstance, whenKeyword));
 
-    public static explicit operator WhenClauseSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator WhenClauseSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(WhenClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static WhenClauseSyntaxWrapper From(SyntaxNode node)
+    public static WhenClauseSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new WhenClauseSyntaxWrapper((CSharpSyntaxNode)node);
+            return new WhenClauseSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

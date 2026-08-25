@@ -134,25 +134,25 @@ public readonly partial struct UnaryPatternSyntaxWrapper : ISyntaxWrapper<CSharp
     public UnaryPatternSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => UnaryPatternSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
     public UnaryPatternSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => UnaryPatternSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
 
-    public static explicit operator UnaryPatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator UnaryPatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(UnaryPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static UnaryPatternSyntaxWrapper From(SyntaxNode node)
+    public static UnaryPatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new UnaryPatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new UnaryPatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

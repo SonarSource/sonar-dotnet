@@ -150,25 +150,25 @@ public readonly partial struct ExtensionMemberCrefSyntaxWrapper : ISyntaxWrapper
     public ExtensionMemberCrefSyntaxWrapper WithParameters(CrefParameterListSyntax parameters) => ExtensionMemberCrefSyntaxWrapper.From(WithParametersAccessor(wrappedInstance, parameters));
     public ExtensionMemberCrefSyntaxWrapper WithTypeArgumentList(TypeArgumentListSyntax typeArgumentList) => ExtensionMemberCrefSyntaxWrapper.From(WithTypeArgumentListAccessor(wrappedInstance, typeArgumentList));
 
-    public static explicit operator ExtensionMemberCrefSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ExtensionMemberCrefSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator MemberCrefSyntax(ExtensionMemberCrefSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ExtensionMemberCrefSyntaxWrapper From(SyntaxNode node)
+    public static ExtensionMemberCrefSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ExtensionMemberCrefSyntaxWrapper((MemberCrefSyntax)node);
+            return new ExtensionMemberCrefSyntaxWrapper((MemberCrefSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

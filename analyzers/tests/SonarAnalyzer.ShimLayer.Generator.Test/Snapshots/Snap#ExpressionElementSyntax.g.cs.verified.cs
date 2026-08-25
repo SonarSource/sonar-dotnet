@@ -130,25 +130,25 @@ public readonly partial struct ExpressionElementSyntaxWrapper : ISyntaxWrapper<C
     public ExpressionElementSyntaxWrapper Update(ExpressionSyntax expression) => ExpressionElementSyntaxWrapper.From(UpdateAccessor(wrappedInstance, expression));
     public ExpressionElementSyntaxWrapper WithExpression(ExpressionSyntax expression) => ExpressionElementSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
 
-    public static explicit operator ExpressionElementSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ExpressionElementSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(ExpressionElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ExpressionElementSyntaxWrapper From(SyntaxNode node)
+    public static ExpressionElementSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ExpressionElementSyntaxWrapper((CSharpSyntaxNode)node);
+            return new ExpressionElementSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

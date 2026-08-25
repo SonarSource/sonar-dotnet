@@ -65,22 +65,22 @@ public readonly partial struct IBranchOperationWrapper : IOperationWrapper
     public ILabelSymbol Target => (ILabelSymbol)TargetAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IBranchOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IBranchOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IBranchOperationWrapper From(IOperation operation)
+    public static IBranchOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IBranchOperationWrapper(operation);
+            return new IBranchOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

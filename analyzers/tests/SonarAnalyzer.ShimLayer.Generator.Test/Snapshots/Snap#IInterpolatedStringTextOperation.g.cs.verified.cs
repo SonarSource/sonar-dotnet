@@ -63,22 +63,22 @@ public readonly partial struct IInterpolatedStringTextOperationWrapper : IOperat
     public IOperation Text => TextAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IInterpolatedStringTextOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IInterpolatedStringTextOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IInterpolatedStringTextOperationWrapper From(IOperation operation)
+    public static IInterpolatedStringTextOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IInterpolatedStringTextOperationWrapper(operation);
+            return new IInterpolatedStringTextOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

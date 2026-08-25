@@ -140,25 +140,25 @@ public readonly partial struct TupleExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public TupleExpressionSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => TupleExpressionSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
     public TupleExpressionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => TupleExpressionSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
 
-    public static explicit operator TupleExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator TupleExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(TupleExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static TupleExpressionSyntaxWrapper From(SyntaxNode node)
+    public static TupleExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new TupleExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new TupleExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

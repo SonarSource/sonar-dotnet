@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
@@ -82,25 +82,25 @@ public class ClassWrapStrategyTest
 
                 public bool TryGetValue(string key, out string value) => wrappedInstance.TryGetValue(key, out value);
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -173,25 +173,25 @@ public class ClassWrapStrategyTest
 
                 public bool TryGetValue(string key, out string value) => (bool)TryGetValueAccessor(wrappedInstance, key, out value);
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 

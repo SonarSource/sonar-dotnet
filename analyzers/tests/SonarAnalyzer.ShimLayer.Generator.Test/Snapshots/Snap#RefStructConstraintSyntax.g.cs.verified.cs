@@ -134,25 +134,25 @@ public readonly partial struct RefStructConstraintSyntaxWrapper : ISyntaxWrapper
     public RefStructConstraintSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword) => RefStructConstraintSyntaxWrapper.From(WithRefKeywordAccessor(wrappedInstance, refKeyword));
     public RefStructConstraintSyntaxWrapper WithStructKeyword(SyntaxToken structKeyword) => RefStructConstraintSyntaxWrapper.From(WithStructKeywordAccessor(wrappedInstance, structKeyword));
 
-    public static explicit operator RefStructConstraintSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator RefStructConstraintSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(RefStructConstraintSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static RefStructConstraintSyntaxWrapper From(SyntaxNode node)
+    public static RefStructConstraintSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new RefStructConstraintSyntaxWrapper((CSharpSyntaxNode)node);
+            return new RefStructConstraintSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

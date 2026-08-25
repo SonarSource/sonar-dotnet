@@ -65,22 +65,22 @@ public readonly partial struct ICoalesceOperationWrapper : IOperationWrapper
     public IOperation WhenNull => WhenNullAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static ICoalesceOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static ICoalesceOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static ICoalesceOperationWrapper From(IOperation operation)
+    public static ICoalesceOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new ICoalesceOperationWrapper(operation);
+            return new ICoalesceOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

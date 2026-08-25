@@ -163,25 +163,25 @@ public readonly partial struct LineSpanDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public LineSpanDirectiveTriviaSyntaxWrapper WithMinusToken(SyntaxToken minusToken) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithMinusTokenAccessor(wrappedInstance, minusToken));
     public LineSpanDirectiveTriviaSyntaxWrapper WithStart(LineDirectivePositionSyntaxWrapper start) => LineSpanDirectiveTriviaSyntaxWrapper.From(WithStartAccessor(wrappedInstance, start));
 
-    public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator DirectiveTriviaSyntax(LineSpanDirectiveTriviaSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static LineSpanDirectiveTriviaSyntaxWrapper From(SyntaxNode node)
+    public static LineSpanDirectiveTriviaSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new LineSpanDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)node);
+            return new LineSpanDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

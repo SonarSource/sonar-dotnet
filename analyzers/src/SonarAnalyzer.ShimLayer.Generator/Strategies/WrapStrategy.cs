@@ -20,6 +20,7 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 public abstract class WrapStrategy : MemberStrategy
 {
     protected abstract string BaseTypeSnippet { get; }
+    protected abstract string FromTypeName { get; }
     [Obsolete("This should be removed once we remove the obsolete usages from the generated code")]
     protected abstract string ObsoletePropertiesSnippet { get; }
     protected abstract string ConversionSnippet { get; }
@@ -74,6 +75,25 @@ public abstract class WrapStrategy : MemberStrategy
             {{JoinLines(wrap.Methods.Select(x => x.MemberDeclaration(4)))}}
 
             {{ConversionSnippet}}
+
+                public static {{Latest.Name}}Wrapper From({{FromTypeName}} instance)
+                {
+                    if (instance is null)
+                    {
+                        return default;
+                    }
+                    else if (IsInstance(instance))
+                    {
+                        return new {{Latest.Name}}Wrapper(({{CompiletimeTypeSnippet()}})instance);
+                    }
+                    else
+                    {
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
+                    }
+                }
+
+                public static bool IsInstance({{FromTypeName}} instance) =>
+                    WrappedType.CanWrap(CanWrapCache, instance);
 
             {{WrapperToWrapperConversions(model)}}
             }

@@ -63,22 +63,22 @@ public readonly partial struct ITypeOfOperationWrapper : IOperationWrapper
     public ITypeSymbol TypeOperand => (ITypeSymbol)TypeOperandAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static ITypeOfOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static ITypeOfOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static ITypeOfOperationWrapper From(IOperation operation)
+    public static ITypeOfOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new ITypeOfOperationWrapper(operation);
+            return new ITypeOfOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

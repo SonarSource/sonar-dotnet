@@ -65,22 +65,22 @@ public readonly partial struct ISymbolInitializerOperationWrapper : IOperationWr
     public IOperation Value => ValueAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static ISymbolInitializerOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static ISymbolInitializerOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static ISymbolInitializerOperationWrapper From(IOperation operation)
+    public static ISymbolInitializerOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new ISymbolInitializerOperationWrapper(operation);
+            return new ISymbolInitializerOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

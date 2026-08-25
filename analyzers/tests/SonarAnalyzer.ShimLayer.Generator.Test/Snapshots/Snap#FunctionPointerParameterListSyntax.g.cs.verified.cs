@@ -140,25 +140,25 @@ public readonly partial struct FunctionPointerParameterListSyntaxWrapper : ISynt
     public FunctionPointerParameterListSyntaxWrapper WithLessThanToken(SyntaxToken lessThanToken) => FunctionPointerParameterListSyntaxWrapper.From(WithLessThanTokenAccessor(wrappedInstance, lessThanToken));
     public FunctionPointerParameterListSyntaxWrapper WithParameters(SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper> parameters) => FunctionPointerParameterListSyntaxWrapper.From(WithParametersAccessor(wrappedInstance, parameters));
 
-    public static explicit operator FunctionPointerParameterListSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator FunctionPointerParameterListSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(FunctionPointerParameterListSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static FunctionPointerParameterListSyntaxWrapper From(SyntaxNode node)
+    public static FunctionPointerParameterListSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new FunctionPointerParameterListSyntaxWrapper((CSharpSyntaxNode)node);
+            return new FunctionPointerParameterListSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

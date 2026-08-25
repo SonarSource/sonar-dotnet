@@ -144,25 +144,25 @@ public readonly partial struct ImplicitStackAllocArrayCreationExpressionSyntaxWr
     public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken));
     public ImplicitStackAllocArrayCreationExpressionSyntaxWrapper WithStackAllocKeyword(SyntaxToken stackAllocKeyword) => ImplicitStackAllocArrayCreationExpressionSyntaxWrapper.From(WithStackAllocKeywordAccessor(wrappedInstance, stackAllocKeyword));
 
-    public static explicit operator ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(ImplicitStackAllocArrayCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper From(SyntaxNode node)
+    public static ImplicitStackAllocArrayCreationExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ImplicitStackAllocArrayCreationExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new ImplicitStackAllocArrayCreationExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

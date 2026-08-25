@@ -143,25 +143,25 @@ public readonly partial struct ScopedTypeSyntaxWrapper : ISyntaxWrapper<TypeSynt
     public ScopedTypeSyntaxWrapper WithScopedKeyword(SyntaxToken scopedKeyword) => ScopedTypeSyntaxWrapper.From(WithScopedKeywordAccessor(wrappedInstance, scopedKeyword));
     public ScopedTypeSyntaxWrapper WithType(TypeSyntax type) => ScopedTypeSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
-    public static explicit operator ScopedTypeSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ScopedTypeSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator TypeSyntax(ScopedTypeSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ScopedTypeSyntaxWrapper From(SyntaxNode node)
+    public static ScopedTypeSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ScopedTypeSyntaxWrapper((TypeSyntax)node);
+            return new ScopedTypeSyntaxWrapper((TypeSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

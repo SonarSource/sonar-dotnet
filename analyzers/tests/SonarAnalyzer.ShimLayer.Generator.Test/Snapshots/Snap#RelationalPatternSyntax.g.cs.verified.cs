@@ -134,25 +134,25 @@ public readonly partial struct RelationalPatternSyntaxWrapper : ISyntaxWrapper<C
     public RelationalPatternSyntaxWrapper WithExpression(ExpressionSyntax expression) => RelationalPatternSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
     public RelationalPatternSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => RelationalPatternSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
 
-    public static explicit operator RelationalPatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator RelationalPatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(RelationalPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static RelationalPatternSyntaxWrapper From(SyntaxNode node)
+    public static RelationalPatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new RelationalPatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new RelationalPatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

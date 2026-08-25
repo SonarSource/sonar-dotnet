@@ -134,25 +134,25 @@ public readonly partial struct TupleElementSyntaxWrapper : ISyntaxWrapper<CSharp
     public TupleElementSyntaxWrapper WithIdentifier(SyntaxToken identifier) => TupleElementSyntaxWrapper.From(WithIdentifierAccessor(wrappedInstance, identifier));
     public TupleElementSyntaxWrapper WithType(TypeSyntax type) => TupleElementSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
-    public static explicit operator TupleElementSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator TupleElementSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(TupleElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static TupleElementSyntaxWrapper From(SyntaxNode node)
+    public static TupleElementSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new TupleElementSyntaxWrapper((CSharpSyntaxNode)node);
+            return new TupleElementSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

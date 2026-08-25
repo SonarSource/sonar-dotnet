@@ -69,22 +69,22 @@ public readonly partial struct ISwitchExpressionArmOperationWrapper : IOperation
     public IOperation Value => ValueAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static ISwitchExpressionArmOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static ISwitchExpressionArmOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static ISwitchExpressionArmOperationWrapper From(IOperation operation)
+    public static ISwitchExpressionArmOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new ISwitchExpressionArmOperationWrapper(operation);
+            return new ISwitchExpressionArmOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

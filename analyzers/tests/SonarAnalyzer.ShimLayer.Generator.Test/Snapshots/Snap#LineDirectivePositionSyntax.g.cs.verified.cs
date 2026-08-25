@@ -146,25 +146,25 @@ public readonly partial struct LineDirectivePositionSyntaxWrapper : ISyntaxWrapp
     public LineDirectivePositionSyntaxWrapper WithLine(SyntaxToken line) => LineDirectivePositionSyntaxWrapper.From(WithLineAccessor(wrappedInstance, line));
     public LineDirectivePositionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => LineDirectivePositionSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
 
-    public static explicit operator LineDirectivePositionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator LineDirectivePositionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(LineDirectivePositionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static LineDirectivePositionSyntaxWrapper From(SyntaxNode node)
+    public static LineDirectivePositionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new LineDirectivePositionSyntaxWrapper((CSharpSyntaxNode)node);
+            return new LineDirectivePositionSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

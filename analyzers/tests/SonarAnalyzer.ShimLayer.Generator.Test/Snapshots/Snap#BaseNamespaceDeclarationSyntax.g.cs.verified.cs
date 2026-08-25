@@ -162,25 +162,25 @@ public readonly partial struct BaseNamespaceDeclarationSyntaxWrapper : ISyntaxWr
     public BaseNamespaceDeclarationSyntaxWrapper WithNamespaceKeyword(SyntaxToken namespaceKeyword) => BaseNamespaceDeclarationSyntaxWrapper.From(WithNamespaceKeywordAccessor(wrappedInstance, namespaceKeyword));
     public BaseNamespaceDeclarationSyntaxWrapper WithUsings(SyntaxList<UsingDirectiveSyntax> usings) => BaseNamespaceDeclarationSyntaxWrapper.From(WithUsingsAccessor(wrappedInstance, usings));
 
-    public static explicit operator BaseNamespaceDeclarationSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator BaseNamespaceDeclarationSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator MemberDeclarationSyntax(BaseNamespaceDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static BaseNamespaceDeclarationSyntaxWrapper From(SyntaxNode node)
+    public static BaseNamespaceDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new BaseNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)node);
+            return new BaseNamespaceDeclarationSyntaxWrapper((MemberDeclarationSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

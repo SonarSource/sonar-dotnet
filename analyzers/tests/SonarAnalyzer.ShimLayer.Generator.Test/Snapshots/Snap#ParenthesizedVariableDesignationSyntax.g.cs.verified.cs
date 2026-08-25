@@ -140,25 +140,25 @@ public readonly partial struct ParenthesizedVariableDesignationSyntaxWrapper : I
     public ParenthesizedVariableDesignationSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => ParenthesizedVariableDesignationSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
     public ParenthesizedVariableDesignationSyntaxWrapper WithVariables(SeparatedSyntaxListWrapper<VariableDesignationSyntaxWrapper> variables) => ParenthesizedVariableDesignationSyntaxWrapper.From(WithVariablesAccessor(wrappedInstance, variables));
 
-    public static explicit operator ParenthesizedVariableDesignationSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ParenthesizedVariableDesignationSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(ParenthesizedVariableDesignationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ParenthesizedVariableDesignationSyntaxWrapper From(SyntaxNode node)
+    public static ParenthesizedVariableDesignationSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ParenthesizedVariableDesignationSyntaxWrapper((CSharpSyntaxNode)node);
+            return new ParenthesizedVariableDesignationSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

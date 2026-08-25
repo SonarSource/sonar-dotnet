@@ -134,25 +134,25 @@ public readonly partial struct SlicePatternSyntaxWrapper : ISyntaxWrapper<CSharp
     public SlicePatternSyntaxWrapper WithDotDotToken(SyntaxToken dotDotToken) => SlicePatternSyntaxWrapper.From(WithDotDotTokenAccessor(wrappedInstance, dotDotToken));
     public SlicePatternSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => SlicePatternSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
 
-    public static explicit operator SlicePatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator SlicePatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(SlicePatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static SlicePatternSyntaxWrapper From(SyntaxNode node)
+    public static SlicePatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new SlicePatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new SlicePatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

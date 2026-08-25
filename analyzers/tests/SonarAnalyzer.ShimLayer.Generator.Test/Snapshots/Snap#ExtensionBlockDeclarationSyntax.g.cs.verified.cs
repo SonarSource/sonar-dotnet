@@ -178,25 +178,25 @@ public readonly partial struct ExtensionBlockDeclarationSyntaxWrapper : ISyntaxW
     public ExtensionBlockDeclarationSyntaxWrapper WithSemicolonToken(SyntaxToken semicolonToken) => ExtensionBlockDeclarationSyntaxWrapper.From(WithSemicolonTokenAccessor(wrappedInstance, semicolonToken));
     public ExtensionBlockDeclarationSyntaxWrapper WithTypeParameterList(TypeParameterListSyntax typeParameterList) => ExtensionBlockDeclarationSyntaxWrapper.From(WithTypeParameterListAccessor(wrappedInstance, typeParameterList));
 
-    public static explicit operator ExtensionBlockDeclarationSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ExtensionBlockDeclarationSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator TypeDeclarationSyntax(ExtensionBlockDeclarationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ExtensionBlockDeclarationSyntaxWrapper From(SyntaxNode node)
+    public static ExtensionBlockDeclarationSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ExtensionBlockDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+            return new ExtensionBlockDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

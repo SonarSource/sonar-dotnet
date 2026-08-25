@@ -140,25 +140,25 @@ public readonly partial struct BaseParameterSyntaxWrapper : ISyntaxWrapper<CShar
     public BaseParameterSyntaxWrapper WithModifiers(SyntaxTokenList modifiers) => BaseParameterSyntaxWrapper.From(WithModifiersAccessor(wrappedInstance, modifiers));
     public BaseParameterSyntaxWrapper WithType(TypeSyntax type) => BaseParameterSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
-    public static explicit operator BaseParameterSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator BaseParameterSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(BaseParameterSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static BaseParameterSyntaxWrapper From(SyntaxNode node)
+    public static BaseParameterSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new BaseParameterSyntaxWrapper((CSharpSyntaxNode)node);
+            return new BaseParameterSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

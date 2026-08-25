@@ -134,25 +134,25 @@ public readonly partial struct RefExpressionSyntaxWrapper : ISyntaxWrapper<Expre
     public RefExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression) => RefExpressionSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
     public RefExpressionSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword) => RefExpressionSyntaxWrapper.From(WithRefKeywordAccessor(wrappedInstance, refKeyword));
 
-    public static explicit operator RefExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator RefExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(RefExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static RefExpressionSyntaxWrapper From(SyntaxNode node)
+    public static RefExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new RefExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new RefExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

@@ -63,22 +63,22 @@ public readonly partial struct IUtf8StringOperationWrapper : IOperationWrapper
     public string Value => (string)ValueAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IUtf8StringOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IUtf8StringOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IUtf8StringOperationWrapper From(IOperation operation)
+    public static IUtf8StringOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IUtf8StringOperationWrapper(operation);
+            return new IUtf8StringOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

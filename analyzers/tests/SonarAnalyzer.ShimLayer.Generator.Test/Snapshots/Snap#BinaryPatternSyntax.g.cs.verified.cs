@@ -138,25 +138,25 @@ public readonly partial struct BinaryPatternSyntaxWrapper : ISyntaxWrapper<CShar
     public BinaryPatternSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => BinaryPatternSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
     public BinaryPatternSyntaxWrapper WithRight(PatternSyntaxWrapper right) => BinaryPatternSyntaxWrapper.From(WithRightAccessor(wrappedInstance, right));
 
-    public static explicit operator BinaryPatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator BinaryPatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(BinaryPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static BinaryPatternSyntaxWrapper From(SyntaxNode node)
+    public static BinaryPatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new BinaryPatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new BinaryPatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

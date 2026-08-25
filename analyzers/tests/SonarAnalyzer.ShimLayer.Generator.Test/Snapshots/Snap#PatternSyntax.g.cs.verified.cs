@@ -122,25 +122,25 @@ public readonly partial struct PatternSyntaxWrapper : ISyntaxWrapper<CSharpSynta
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
 
-    public static explicit operator PatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator PatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(PatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static PatternSyntaxWrapper From(SyntaxNode node)
+    public static PatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new PatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new PatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

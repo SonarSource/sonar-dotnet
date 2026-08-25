@@ -63,22 +63,22 @@ public readonly partial struct IDelegateCreationOperationWrapper : IOperationWra
     public IOperation Target => TargetAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IDelegateCreationOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IDelegateCreationOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IDelegateCreationOperationWrapper From(IOperation operation)
+    public static IDelegateCreationOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IDelegateCreationOperationWrapper(operation);
+            return new IDelegateCreationOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

@@ -130,25 +130,25 @@ public readonly partial struct DiscardDesignationSyntaxWrapper : ISyntaxWrapper<
     public DiscardDesignationSyntaxWrapper Update(SyntaxToken underscoreToken) => DiscardDesignationSyntaxWrapper.From(UpdateAccessor(wrappedInstance, underscoreToken));
     public DiscardDesignationSyntaxWrapper WithUnderscoreToken(SyntaxToken underscoreToken) => DiscardDesignationSyntaxWrapper.From(WithUnderscoreTokenAccessor(wrappedInstance, underscoreToken));
 
-    public static explicit operator DiscardDesignationSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator DiscardDesignationSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(DiscardDesignationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static DiscardDesignationSyntaxWrapper From(SyntaxNode node)
+    public static DiscardDesignationSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new DiscardDesignationSyntaxWrapper((CSharpSyntaxNode)node);
+            return new DiscardDesignationSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

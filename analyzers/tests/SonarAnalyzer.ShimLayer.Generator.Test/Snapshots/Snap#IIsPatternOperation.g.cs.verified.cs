@@ -65,22 +65,22 @@ public readonly partial struct IIsPatternOperationWrapper : IOperationWrapper
     public IOperation Value => ValueAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IIsPatternOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IIsPatternOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IIsPatternOperationWrapper From(IOperation operation)
+    public static IIsPatternOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IIsPatternOperationWrapper(operation);
+            return new IIsPatternOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

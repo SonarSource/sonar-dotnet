@@ -130,25 +130,25 @@ public readonly partial struct SingleVariableDesignationSyntaxWrapper : ISyntaxW
     public SingleVariableDesignationSyntaxWrapper Update(SyntaxToken identifier) => SingleVariableDesignationSyntaxWrapper.From(UpdateAccessor(wrappedInstance, identifier));
     public SingleVariableDesignationSyntaxWrapper WithIdentifier(SyntaxToken identifier) => SingleVariableDesignationSyntaxWrapper.From(WithIdentifierAccessor(wrappedInstance, identifier));
 
-    public static explicit operator SingleVariableDesignationSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator SingleVariableDesignationSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(SingleVariableDesignationSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static SingleVariableDesignationSyntaxWrapper From(SyntaxNode node)
+    public static SingleVariableDesignationSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new SingleVariableDesignationSyntaxWrapper((CSharpSyntaxNode)node);
+            return new SingleVariableDesignationSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

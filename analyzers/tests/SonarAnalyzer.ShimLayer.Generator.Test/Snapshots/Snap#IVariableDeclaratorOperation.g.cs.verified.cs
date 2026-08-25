@@ -67,22 +67,22 @@ public readonly partial struct IVariableDeclaratorOperationWrapper : IOperationW
     public ILocalSymbol Symbol => (ILocalSymbol)SymbolAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IVariableDeclaratorOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IVariableDeclaratorOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IVariableDeclaratorOperationWrapper From(IOperation operation)
+    public static IVariableDeclaratorOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IVariableDeclaratorOperationWrapper(operation);
+            return new IVariableDeclaratorOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

@@ -65,22 +65,22 @@ public readonly partial struct IVariableInitializerOperationWrapper : IOperation
     public IOperation Value => ValueAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IVariableInitializerOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IVariableInitializerOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IVariableInitializerOperationWrapper From(IOperation operation)
+    public static IVariableInitializerOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IVariableInitializerOperationWrapper(operation);
+            return new IVariableInitializerOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

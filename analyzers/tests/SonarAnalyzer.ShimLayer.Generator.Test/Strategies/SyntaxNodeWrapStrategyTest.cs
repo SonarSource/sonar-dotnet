@@ -81,25 +81,25 @@ public class SyntaxNodeWrapStrategyTest
 
                 public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -190,25 +190,25 @@ public class SyntaxNodeWrapStrategyTest
 
                 public RecordDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => (RecordDeclarationSyntax)WithParameterListAccessor(wrappedInstance, parameterList);
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -284,25 +284,25 @@ public class SyntaxNodeWrapStrategyTest
 
                 public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
 
-                public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static IsPatternExpressionSyntaxWrapper From(SyntaxNode node)
+                public static IsPatternExpressionSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)node);
+                        return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -373,25 +373,25 @@ public class SyntaxNodeWrapStrategyTest
 
                 public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
-                public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static ConstantPatternSyntaxWrapper From(SyntaxNode node)
+                public static ConstantPatternSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)node);
+                        return new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -467,25 +467,25 @@ public class SyntaxNodeWrapStrategyTest
 
                 public SyntaxNode WrappedInstance => wrappedInstance;
 
-                public static explicit operator SyntaxNodeWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator SyntaxNodeWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator SyntaxNode(SyntaxNodeWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static SyntaxNodeWrapper From(SyntaxNode node)
+                public static SyntaxNodeWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new SyntaxNodeWrapper((SyntaxNode)node);
+                        return new SyntaxNodeWrapper((SyntaxNode)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -565,25 +565,25 @@ public class SyntaxNodeWrapStrategyTest
                 public bool Contains(SyntaxNode node) => wrappedInstance.Contains(node);
                 public IEnumerable<SyntaxNode> ChildNodes() => wrappedInstance.ChildNodes();
 
-                public static explicit operator IndexerDeclarationSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator IndexerDeclarationSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator SyntaxNode(IndexerDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static IndexerDeclarationSyntaxWrapper From(SyntaxNode node)
+                public static IndexerDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new IndexerDeclarationSyntaxWrapper((SyntaxNode)node);
+                        return new IndexerDeclarationSyntaxWrapper((SyntaxNode)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -667,25 +667,25 @@ public class SyntaxNodeWrapStrategyTest
                 public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(wrappedInstance);
                 public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(wrappedInstance);
 
-                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode node) =>
-                    From(node);
+                public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>
+                    From(instance);
 
                 public static implicit operator TypeDeclarationSyntax(RecordDeclarationSyntaxWrapper wrapper) =>
                     wrapper.wrappedInstance;
 
-                public static RecordDeclarationSyntaxWrapper From(SyntaxNode node)
+                public static RecordDeclarationSyntaxWrapper From(SyntaxNode instance)
                 {
-                    if (node is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(node))
+                    else if (IsInstance(instance))
                     {
-                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)node);
+                        return new RecordDeclarationSyntaxWrapper((TypeDeclarationSyntax)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 

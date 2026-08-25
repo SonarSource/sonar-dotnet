@@ -73,22 +73,22 @@ public readonly partial struct IIncrementOrDecrementOperationWrapper : IOperatio
     public IOperation Target => TargetAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IIncrementOrDecrementOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IIncrementOrDecrementOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IIncrementOrDecrementOperationWrapper From(IOperation operation)
+    public static IIncrementOrDecrementOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IIncrementOrDecrementOperationWrapper(operation);
+            return new IIncrementOrDecrementOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

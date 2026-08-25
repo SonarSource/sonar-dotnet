@@ -140,25 +140,25 @@ public readonly partial struct ImplicitObjectCreationExpressionSyntaxWrapper : I
     public ImplicitObjectCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => ImplicitObjectCreationExpressionSyntaxWrapper.From(WithInitializerAccessor(wrappedInstance, initializer));
     public ImplicitObjectCreationExpressionSyntaxWrapper WithNewKeyword(SyntaxToken newKeyword) => ImplicitObjectCreationExpressionSyntaxWrapper.From(WithNewKeywordAccessor(wrappedInstance, newKeyword));
 
-    public static explicit operator ImplicitObjectCreationExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ImplicitObjectCreationExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ImplicitObjectCreationExpressionSyntaxWrapper From(SyntaxNode node)
+    public static ImplicitObjectCreationExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ImplicitObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new ImplicitObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

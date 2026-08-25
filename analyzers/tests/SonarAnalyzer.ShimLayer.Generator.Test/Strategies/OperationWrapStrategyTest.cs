@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
@@ -76,22 +76,22 @@ public class OperationWrapStrategyTest
                 public IOperation WrappedInstance => wrappedInstance;
 
                 [Obsolete("Use From instead")]
-                public static IFieldInitializerOperationWrapper FromOperation(IOperation operation) =>
-                    From(operation);
+                public static IFieldInitializerOperationWrapper FromOperation(IOperation instance) =>
+                    From(instance);
 
-                public static IFieldInitializerOperationWrapper From(IOperation operation)
+                public static IFieldInitializerOperationWrapper From(IOperation instance)
                 {
-                    if (operation is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(operation))
+                    else if (IsInstance(instance))
                     {
-                        return new IFieldInitializerOperationWrapper(operation);
+                        return new IFieldInitializerOperationWrapper((IOperation)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -160,22 +160,22 @@ public class OperationWrapStrategyTest
                 public IOperation WrappedInstance => wrappedInstance;
 
                 [Obsolete("Use From instead")]
-                public static IFieldReferenceOperationWrapper FromOperation(IOperation operation) =>
-                    From(operation);
+                public static IFieldReferenceOperationWrapper FromOperation(IOperation instance) =>
+                    From(instance);
 
-                public static IFieldReferenceOperationWrapper From(IOperation operation)
+                public static IFieldReferenceOperationWrapper From(IOperation instance)
                 {
-                    if (operation is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(operation))
+                    else if (IsInstance(instance))
                     {
-                        return new IFieldReferenceOperationWrapper(operation);
+                        return new IFieldReferenceOperationWrapper((IOperation)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 
@@ -255,22 +255,22 @@ public class OperationWrapStrategyTest
                 public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(wrappedInstance);
 
                 [Obsolete("Use From instead")]
-                public static ITupleOperationWrapper FromOperation(IOperation operation) =>
-                    From(operation);
+                public static ITupleOperationWrapper FromOperation(IOperation instance) =>
+                    From(instance);
 
-                public static ITupleOperationWrapper From(IOperation operation)
+                public static ITupleOperationWrapper From(IOperation instance)
                 {
-                    if (operation is null)
+                    if (instance is null)
                     {
                         return default;
                     }
-                    else if (IsInstance(operation))
+                    else if (IsInstance(instance))
                     {
-                        return new ITupleOperationWrapper(operation);
+                        return new ITupleOperationWrapper((IOperation)instance);
                     }
                     else
                     {
-                        throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+                        throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
                     }
                 }
 

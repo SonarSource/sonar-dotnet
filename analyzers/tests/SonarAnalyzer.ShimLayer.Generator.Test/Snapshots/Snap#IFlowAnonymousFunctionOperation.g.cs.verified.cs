@@ -63,22 +63,22 @@ public readonly partial struct IFlowAnonymousFunctionOperationWrapper : IOperati
     public IMethodSymbol Symbol => (IMethodSymbol)SymbolAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IFlowAnonymousFunctionOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IFlowAnonymousFunctionOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IFlowAnonymousFunctionOperationWrapper From(IOperation operation)
+    public static IFlowAnonymousFunctionOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IFlowAnonymousFunctionOperationWrapper(operation);
+            return new IFlowAnonymousFunctionOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

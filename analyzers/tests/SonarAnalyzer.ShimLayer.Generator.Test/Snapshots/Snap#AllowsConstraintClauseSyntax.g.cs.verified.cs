@@ -136,25 +136,25 @@ public readonly partial struct AllowsConstraintClauseSyntaxWrapper : ISyntaxWrap
     public AllowsConstraintClauseSyntaxWrapper WithAllowsKeyword(SyntaxToken allowsKeyword) => AllowsConstraintClauseSyntaxWrapper.From(WithAllowsKeywordAccessor(wrappedInstance, allowsKeyword));
     public AllowsConstraintClauseSyntaxWrapper WithConstraints(SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> constraints) => AllowsConstraintClauseSyntaxWrapper.From(WithConstraintsAccessor(wrappedInstance, constraints));
 
-    public static explicit operator AllowsConstraintClauseSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator AllowsConstraintClauseSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator TypeParameterConstraintSyntax(AllowsConstraintClauseSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static AllowsConstraintClauseSyntaxWrapper From(SyntaxNode node)
+    public static AllowsConstraintClauseSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new AllowsConstraintClauseSyntaxWrapper((TypeParameterConstraintSyntax)node);
+            return new AllowsConstraintClauseSyntaxWrapper((TypeParameterConstraintSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

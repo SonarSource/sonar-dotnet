@@ -69,22 +69,22 @@ public readonly partial struct IDynamicMemberReferenceOperationWrapper : IOperat
     public ImmutableArray<ITypeSymbol> TypeArguments => (ImmutableArray<ITypeSymbol>)TypeArgumentsAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IDynamicMemberReferenceOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IDynamicMemberReferenceOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IDynamicMemberReferenceOperationWrapper From(IOperation operation)
+    public static IDynamicMemberReferenceOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IDynamicMemberReferenceOperationWrapper(operation);
+            return new IDynamicMemberReferenceOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

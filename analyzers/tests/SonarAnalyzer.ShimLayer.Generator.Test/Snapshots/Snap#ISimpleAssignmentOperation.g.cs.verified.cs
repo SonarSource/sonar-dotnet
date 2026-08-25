@@ -67,22 +67,22 @@ public readonly partial struct ISimpleAssignmentOperationWrapper : IOperationWra
     public IOperation Value => ValueAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static ISimpleAssignmentOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static ISimpleAssignmentOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static ISimpleAssignmentOperationWrapper From(IOperation operation)
+    public static ISimpleAssignmentOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new ISimpleAssignmentOperationWrapper(operation);
+            return new ISimpleAssignmentOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

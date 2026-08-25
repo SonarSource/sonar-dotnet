@@ -147,25 +147,25 @@ public readonly partial struct IgnoredDirectiveTriviaSyntaxWrapper : ISyntaxWrap
     public IgnoredDirectiveTriviaSyntaxWrapper WithHashToken(SyntaxToken hashToken) => IgnoredDirectiveTriviaSyntaxWrapper.From(WithHashTokenAccessor(wrappedInstance, hashToken));
     public IgnoredDirectiveTriviaSyntaxWrapper WithIsActive(bool isActive) => IgnoredDirectiveTriviaSyntaxWrapper.From(WithIsActiveAccessor(wrappedInstance, isActive));
 
-    public static explicit operator IgnoredDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator IgnoredDirectiveTriviaSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator DirectiveTriviaSyntax(IgnoredDirectiveTriviaSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static IgnoredDirectiveTriviaSyntaxWrapper From(SyntaxNode node)
+    public static IgnoredDirectiveTriviaSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new IgnoredDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)node);
+            return new IgnoredDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

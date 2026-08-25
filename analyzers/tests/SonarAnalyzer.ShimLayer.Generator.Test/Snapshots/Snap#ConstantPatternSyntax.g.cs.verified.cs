@@ -130,25 +130,25 @@ public readonly partial struct ConstantPatternSyntaxWrapper : ISyntaxWrapper<CSh
     public ConstantPatternSyntaxWrapper Update(ExpressionSyntax expression) => ConstantPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, expression));
     public ConstantPatternSyntaxWrapper WithExpression(ExpressionSyntax expression) => ConstantPatternSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
 
-    public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ConstantPatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(ConstantPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ConstantPatternSyntaxWrapper From(SyntaxNode node)
+    public static ConstantPatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new ConstantPatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

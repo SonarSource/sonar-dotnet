@@ -69,22 +69,22 @@ public readonly partial struct IConditionalOperationWrapper : IOperationWrapper
     public IOperation WhenTrue => WhenTrueAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IConditionalOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IConditionalOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IConditionalOperationWrapper From(IOperation operation)
+    public static IConditionalOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IConditionalOperationWrapper(operation);
+            return new IConditionalOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

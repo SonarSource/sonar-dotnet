@@ -122,25 +122,25 @@ public readonly partial struct AllowsConstraintSyntaxWrapper : ISyntaxWrapper<CS
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
 
-    public static explicit operator AllowsConstraintSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator AllowsConstraintSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(AllowsConstraintSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static AllowsConstraintSyntaxWrapper From(SyntaxNode node)
+    public static AllowsConstraintSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new AllowsConstraintSyntaxWrapper((CSharpSyntaxNode)node);
+            return new AllowsConstraintSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

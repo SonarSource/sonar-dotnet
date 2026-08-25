@@ -130,25 +130,25 @@ public readonly partial struct TypePatternSyntaxWrapper : ISyntaxWrapper<CSharpS
     public TypePatternSyntaxWrapper Update(TypeSyntax type) => TypePatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type));
     public TypePatternSyntaxWrapper WithType(TypeSyntax type) => TypePatternSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
 
-    public static explicit operator TypePatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator TypePatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(TypePatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static TypePatternSyntaxWrapper From(SyntaxNode node)
+    public static TypePatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new TypePatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new TypePatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

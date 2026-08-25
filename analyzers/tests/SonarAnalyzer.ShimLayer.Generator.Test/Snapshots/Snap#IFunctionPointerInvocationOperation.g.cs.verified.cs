@@ -65,22 +65,22 @@ public readonly partial struct IFunctionPointerInvocationOperationWrapper : IOpe
     public IOperation Target => TargetAccessor(wrappedInstance);
 
     [Obsolete("Use From instead")]
-    public static IFunctionPointerInvocationOperationWrapper FromOperation(IOperation operation) =>
-        From(operation);
+    public static IFunctionPointerInvocationOperationWrapper FromOperation(IOperation instance) =>
+        From(instance);
 
-    public static IFunctionPointerInvocationOperationWrapper From(IOperation operation)
+    public static IFunctionPointerInvocationOperationWrapper From(IOperation instance)
     {
-        if (operation is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(operation))
+        else if (IsInstance(instance))
         {
-            return new IFunctionPointerInvocationOperationWrapper(operation);
+            return new IFunctionPointerInvocationOperationWrapper((IOperation)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{operation.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

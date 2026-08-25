@@ -140,25 +140,25 @@ public readonly partial struct CasePatternSwitchLabelSyntaxWrapper : ISyntaxWrap
     public CasePatternSwitchLabelSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => CasePatternSwitchLabelSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
     public CasePatternSwitchLabelSyntaxWrapper WithWhenClause(WhenClauseSyntaxWrapper whenClause) => CasePatternSwitchLabelSyntaxWrapper.From(WithWhenClauseAccessor(wrappedInstance, whenClause));
 
-    public static explicit operator CasePatternSwitchLabelSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator CasePatternSwitchLabelSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator SwitchLabelSyntax(CasePatternSwitchLabelSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static CasePatternSwitchLabelSyntaxWrapper From(SyntaxNode node)
+    public static CasePatternSwitchLabelSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new CasePatternSwitchLabelSyntaxWrapper((SwitchLabelSyntax)node);
+            return new CasePatternSwitchLabelSyntaxWrapper((SwitchLabelSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

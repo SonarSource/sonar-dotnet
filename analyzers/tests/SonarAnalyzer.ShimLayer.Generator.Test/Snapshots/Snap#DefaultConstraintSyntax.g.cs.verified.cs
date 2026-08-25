@@ -130,25 +130,25 @@ public readonly partial struct DefaultConstraintSyntaxWrapper : ISyntaxWrapper<T
     public DefaultConstraintSyntaxWrapper Update(SyntaxToken defaultKeyword) => DefaultConstraintSyntaxWrapper.From(UpdateAccessor(wrappedInstance, defaultKeyword));
     public DefaultConstraintSyntaxWrapper WithDefaultKeyword(SyntaxToken defaultKeyword) => DefaultConstraintSyntaxWrapper.From(WithDefaultKeywordAccessor(wrappedInstance, defaultKeyword));
 
-    public static explicit operator DefaultConstraintSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator DefaultConstraintSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator TypeParameterConstraintSyntax(DefaultConstraintSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static DefaultConstraintSyntaxWrapper From(SyntaxNode node)
+    public static DefaultConstraintSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new DefaultConstraintSyntaxWrapper((TypeParameterConstraintSyntax)node);
+            return new DefaultConstraintSyntaxWrapper((TypeParameterConstraintSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

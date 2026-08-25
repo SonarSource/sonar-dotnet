@@ -122,25 +122,25 @@ public readonly partial struct CollectionElementSyntaxWrapper : ISyntaxWrapper<C
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
 
-    public static explicit operator CollectionElementSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator CollectionElementSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(CollectionElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static CollectionElementSyntaxWrapper From(SyntaxNode node)
+    public static CollectionElementSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new CollectionElementSyntaxWrapper((CSharpSyntaxNode)node);
+            return new CollectionElementSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

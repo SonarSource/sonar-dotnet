@@ -140,25 +140,25 @@ public readonly partial struct CollectionExpressionSyntaxWrapper : ISyntaxWrappe
     public CollectionExpressionSyntaxWrapper WithElements(SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper> elements) => CollectionExpressionSyntaxWrapper.From(WithElementsAccessor(wrappedInstance, elements));
     public CollectionExpressionSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => CollectionExpressionSyntaxWrapper.From(WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken));
 
-    public static explicit operator CollectionExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator CollectionExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(CollectionExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static CollectionExpressionSyntaxWrapper From(SyntaxNode node)
+    public static CollectionExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new CollectionExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new CollectionExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

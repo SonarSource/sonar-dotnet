@@ -20,6 +20,7 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 public class SyntaxNodeWrapStrategy : WrapStrategy
 {
     protected override string BaseTypeSnippet => $"ISyntaxWrapper<{CompiletimeTypeSnippet()}>";
+    protected override string FromTypeName => "SyntaxNode";
 
     protected override string ObsoletePropertiesSnippet => $"""
             [Obsolete("Use WrappedInstance instead")]
@@ -29,31 +30,12 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
             public {CompiletimeTypeSnippet()} SyntaxNode => wrappedInstance;
         """;
 
-    protected override string ConversionSnippet => $$"""
-            public static explicit operator {{Latest.Name}}Wrapper(SyntaxNode node) =>
-                From(node);
+    protected override string ConversionSnippet => $"""
+            public static explicit operator {Latest.Name}Wrapper(SyntaxNode instance) =>
+                From(instance);
 
-            public static implicit operator {{CompiletimeTypeSnippet()}}({{Latest.Name}}Wrapper wrapper) =>
+            public static implicit operator {CompiletimeTypeSnippet()}({Latest.Name}Wrapper wrapper) =>
                 wrapper.wrappedInstance;
-
-            public static {{Latest.Name}}Wrapper From(SyntaxNode node)
-            {
-                if (node is null)
-                {
-                    return default;
-                }
-                else if (IsInstance(node))
-                {
-                    return new {{Latest.Name}}Wrapper(({{CompiletimeTypeSnippet()}})node);
-                }
-                else
-                {
-                    throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
-                }
-            }
-
-            public static bool IsInstance(SyntaxNode instance) =>
-                WrappedType.CanWrap(CanWrapCache, instance);
         """;
 
     public SyntaxNodeWrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, baseType, members) { }

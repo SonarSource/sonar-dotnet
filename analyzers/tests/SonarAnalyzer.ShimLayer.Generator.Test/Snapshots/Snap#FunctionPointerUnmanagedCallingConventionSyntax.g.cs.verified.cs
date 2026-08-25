@@ -130,25 +130,25 @@ public readonly partial struct FunctionPointerUnmanagedCallingConventionSyntaxWr
     public FunctionPointerUnmanagedCallingConventionSyntaxWrapper Update(SyntaxToken name) => FunctionPointerUnmanagedCallingConventionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, name));
     public FunctionPointerUnmanagedCallingConventionSyntaxWrapper WithName(SyntaxToken name) => FunctionPointerUnmanagedCallingConventionSyntaxWrapper.From(WithNameAccessor(wrappedInstance, name));
 
-    public static explicit operator FunctionPointerUnmanagedCallingConventionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator FunctionPointerUnmanagedCallingConventionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(FunctionPointerUnmanagedCallingConventionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static FunctionPointerUnmanagedCallingConventionSyntaxWrapper From(SyntaxNode node)
+    public static FunctionPointerUnmanagedCallingConventionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new FunctionPointerUnmanagedCallingConventionSyntaxWrapper((CSharpSyntaxNode)node);
+            return new FunctionPointerUnmanagedCallingConventionSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

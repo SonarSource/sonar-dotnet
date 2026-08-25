@@ -138,25 +138,25 @@ public readonly partial struct IsPatternExpressionSyntaxWrapper : ISyntaxWrapper
     public IsPatternExpressionSyntaxWrapper WithIsKeyword(SyntaxToken isKeyword) => IsPatternExpressionSyntaxWrapper.From(WithIsKeywordAccessor(wrappedInstance, isKeyword));
     public IsPatternExpressionSyntaxWrapper WithPattern(PatternSyntaxWrapper pattern) => IsPatternExpressionSyntaxWrapper.From(WithPatternAccessor(wrappedInstance, pattern));
 
-    public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(IsPatternExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static IsPatternExpressionSyntaxWrapper From(SyntaxNode node)
+    public static IsPatternExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new IsPatternExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

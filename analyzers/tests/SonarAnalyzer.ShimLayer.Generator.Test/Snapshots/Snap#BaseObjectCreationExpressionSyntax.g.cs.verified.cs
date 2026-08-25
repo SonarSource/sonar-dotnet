@@ -138,25 +138,25 @@ public readonly partial struct BaseObjectCreationExpressionSyntaxWrapper : ISynt
     public BaseObjectCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => BaseObjectCreationExpressionSyntaxWrapper.From(WithInitializerAccessor(wrappedInstance, initializer));
     public BaseObjectCreationExpressionSyntaxWrapper WithNewKeyword(SyntaxToken newKeyword) => BaseObjectCreationExpressionSyntaxWrapper.From(WithNewKeywordAccessor(wrappedInstance, newKeyword));
 
-    public static explicit operator BaseObjectCreationExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator BaseObjectCreationExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(BaseObjectCreationExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static BaseObjectCreationExpressionSyntaxWrapper From(SyntaxNode node)
+    public static BaseObjectCreationExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new BaseObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new BaseObjectCreationExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

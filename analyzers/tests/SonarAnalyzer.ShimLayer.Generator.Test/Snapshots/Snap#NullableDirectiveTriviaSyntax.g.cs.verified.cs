@@ -151,25 +151,25 @@ public readonly partial struct NullableDirectiveTriviaSyntaxWrapper : ISyntaxWra
     public NullableDirectiveTriviaSyntaxWrapper WithSettingToken(SyntaxToken settingToken) => NullableDirectiveTriviaSyntaxWrapper.From(WithSettingTokenAccessor(wrappedInstance, settingToken));
     public NullableDirectiveTriviaSyntaxWrapper WithTargetToken(SyntaxToken targetToken) => NullableDirectiveTriviaSyntaxWrapper.From(WithTargetTokenAccessor(wrappedInstance, targetToken));
 
-    public static explicit operator NullableDirectiveTriviaSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator NullableDirectiveTriviaSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator DirectiveTriviaSyntax(NullableDirectiveTriviaSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static NullableDirectiveTriviaSyntaxWrapper From(SyntaxNode node)
+    public static NullableDirectiveTriviaSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new NullableDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)node);
+            return new NullableDirectiveTriviaSyntaxWrapper((DirectiveTriviaSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

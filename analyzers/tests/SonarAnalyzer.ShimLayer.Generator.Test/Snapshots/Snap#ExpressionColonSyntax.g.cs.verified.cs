@@ -134,25 +134,25 @@ public readonly partial struct ExpressionColonSyntaxWrapper : ISyntaxWrapper<CSh
     public ExpressionColonSyntaxWrapper WithColonToken(SyntaxToken colonToken) => ExpressionColonSyntaxWrapper.From(WithColonTokenAccessor(wrappedInstance, colonToken));
     public ExpressionColonSyntaxWrapper WithExpression(ExpressionSyntax expression) => ExpressionColonSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
 
-    public static explicit operator ExpressionColonSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ExpressionColonSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(ExpressionColonSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ExpressionColonSyntaxWrapper From(SyntaxNode node)
+    public static ExpressionColonSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ExpressionColonSyntaxWrapper((CSharpSyntaxNode)node);
+            return new ExpressionColonSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

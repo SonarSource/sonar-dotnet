@@ -182,25 +182,25 @@ public readonly partial struct LocalFunctionStatementSyntaxWrapper : ISyntaxWrap
     public LocalFunctionStatementSyntaxWrapper WithSemicolonToken(SyntaxToken semicolonToken) => LocalFunctionStatementSyntaxWrapper.From(WithSemicolonTokenAccessor(wrappedInstance, semicolonToken));
     public LocalFunctionStatementSyntaxWrapper WithTypeParameterList(TypeParameterListSyntax typeParameterList) => LocalFunctionStatementSyntaxWrapper.From(WithTypeParameterListAccessor(wrappedInstance, typeParameterList));
 
-    public static explicit operator LocalFunctionStatementSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator LocalFunctionStatementSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator StatementSyntax(LocalFunctionStatementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static LocalFunctionStatementSyntaxWrapper From(SyntaxNode node)
+    public static LocalFunctionStatementSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new LocalFunctionStatementSyntaxWrapper((StatementSyntax)node);
+            return new LocalFunctionStatementSyntaxWrapper((StatementSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

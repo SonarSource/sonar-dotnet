@@ -168,25 +168,25 @@ public readonly partial struct ForEachVariableStatementSyntaxWrapper : ISyntaxWr
     public ForEachVariableStatementSyntaxWrapper WithStatement(StatementSyntax statement) => ForEachVariableStatementSyntaxWrapper.From(WithStatementAccessor(wrappedInstance, statement));
     public ForEachVariableStatementSyntaxWrapper WithVariable(ExpressionSyntax variable) => ForEachVariableStatementSyntaxWrapper.From(WithVariableAccessor(wrappedInstance, variable));
 
-    public static explicit operator ForEachVariableStatementSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator ForEachVariableStatementSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator StatementSyntax(ForEachVariableStatementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static ForEachVariableStatementSyntaxWrapper From(SyntaxNode node)
+    public static ForEachVariableStatementSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new ForEachVariableStatementSyntaxWrapper((StatementSyntax)node);
+            return new ForEachVariableStatementSyntaxWrapper((StatementSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

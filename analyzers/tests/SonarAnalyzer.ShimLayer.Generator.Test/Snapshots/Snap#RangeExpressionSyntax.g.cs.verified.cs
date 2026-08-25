@@ -138,25 +138,25 @@ public readonly partial struct RangeExpressionSyntaxWrapper : ISyntaxWrapper<Exp
     public RangeExpressionSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => RangeExpressionSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
     public RangeExpressionSyntaxWrapper WithRightOperand(ExpressionSyntax rightOperand) => RangeExpressionSyntaxWrapper.From(WithRightOperandAccessor(wrappedInstance, rightOperand));
 
-    public static explicit operator RangeExpressionSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator RangeExpressionSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator ExpressionSyntax(RangeExpressionSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static RangeExpressionSyntaxWrapper From(SyntaxNode node)
+    public static RangeExpressionSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new RangeExpressionSyntaxWrapper((ExpressionSyntax)node);
+            return new RangeExpressionSyntaxWrapper((ExpressionSyntax)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

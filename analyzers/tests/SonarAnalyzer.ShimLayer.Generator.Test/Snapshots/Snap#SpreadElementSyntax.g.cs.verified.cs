@@ -134,25 +134,25 @@ public readonly partial struct SpreadElementSyntaxWrapper : ISyntaxWrapper<CShar
     public SpreadElementSyntaxWrapper WithExpression(ExpressionSyntax expression) => SpreadElementSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
     public SpreadElementSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => SpreadElementSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
 
-    public static explicit operator SpreadElementSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator SpreadElementSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(SpreadElementSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static SpreadElementSyntaxWrapper From(SyntaxNode node)
+    public static SpreadElementSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new SpreadElementSyntaxWrapper((CSharpSyntaxNode)node);
+            return new SpreadElementSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 

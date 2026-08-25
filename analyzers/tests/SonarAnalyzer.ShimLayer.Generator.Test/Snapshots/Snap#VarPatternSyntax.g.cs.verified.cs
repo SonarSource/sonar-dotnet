@@ -134,25 +134,25 @@ public readonly partial struct VarPatternSyntaxWrapper : ISyntaxWrapper<CSharpSy
     public VarPatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => VarPatternSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
     public VarPatternSyntaxWrapper WithVarKeyword(SyntaxToken varKeyword) => VarPatternSyntaxWrapper.From(WithVarKeywordAccessor(wrappedInstance, varKeyword));
 
-    public static explicit operator VarPatternSyntaxWrapper(SyntaxNode node) =>
-        From(node);
+    public static explicit operator VarPatternSyntaxWrapper(SyntaxNode instance) =>
+        From(instance);
 
     public static implicit operator CSharpSyntaxNode(VarPatternSyntaxWrapper wrapper) =>
         wrapper.wrappedInstance;
 
-    public static VarPatternSyntaxWrapper From(SyntaxNode node)
+    public static VarPatternSyntaxWrapper From(SyntaxNode instance)
     {
-        if (node is null)
+        if (instance is null)
         {
             return default;
         }
-        else if (IsInstance(node))
+        else if (IsInstance(instance))
         {
-            return new VarPatternSyntaxWrapper((CSharpSyntaxNode)node);
+            return new VarPatternSyntaxWrapper((CSharpSyntaxNode)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{node.GetType().FullName}' to '{WrappedTypeName}'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to '{WrappedTypeName}'");
         }
     }
 
