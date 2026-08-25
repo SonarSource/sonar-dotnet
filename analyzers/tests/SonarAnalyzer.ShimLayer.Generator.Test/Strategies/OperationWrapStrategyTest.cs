@@ -203,7 +203,8 @@ public class OperationWrapStrategyTest
             [
                 new(typeof(ITupleOperation).GetMember(nameof(ITupleOperation.Elements))[0], false, "ElementsAccessor"),
                 new(typeof(ITupleOperation).GetMember(nameof(ITupleOperation.NaturalType))[0], false, "NaturalTypeAccessor"),
-                new(typeof(IOperation).GetMember(nameof(IOperation.Type))[0], true, "TypeAccessor")
+                new(typeof(IOperation).GetMember(nameof(IOperation.Type))[0], true, "TypeAccessor"),
+                new(typeof(IInvocationOperation).GetMember(nameof(IInvocationOperation.Arguments))[0], false, "ArgumentsAccessor"),
             ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
@@ -246,6 +247,7 @@ public class OperationWrapStrategyTest
 
                 private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Elements");
                 private static readonly Func<IOperation, ITypeSymbol> NaturalTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "NaturalType");
+                private static readonly Func<IOperation, ImmutableArray<IArgumentOperation>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IArgumentOperation>>>(WrappedType, "Arguments");
 
                 private ITupleOperationWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
@@ -259,6 +261,7 @@ public class OperationWrapStrategyTest
 
                 public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(wrappedInstance);
                 public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(wrappedInstance);
+                public ImmutableArray<IArgumentOperation> Arguments => (ImmutableArray<IArgumentOperation>)ArgumentsAccessor(wrappedInstance);
 
                 public static ITupleOperationWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;

@@ -43,7 +43,7 @@ public readonly partial struct IListPatternOperationWrapper : IOperationWrapper
     private static readonly Func<IOperation, ISymbol> LengthSymbolAccessor = AccessorFactory.CreateProperty<Func<IOperation, ISymbol>>(WrappedType, "LengthSymbol");
     private static readonly Func<IOperation, ITypeSymbol> NarrowedTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "NarrowedType");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> PatternsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Patterns");
+    private static readonly Func<IOperation, ImmutableArray<IPatternOperationWrapper>> PatternsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IPatternOperationWrapper>>>(WrappedType, "Patterns");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
     private IListPatternOperationWrapper(IOperation wrappedInstance) =>
@@ -69,7 +69,7 @@ public readonly partial struct IListPatternOperationWrapper : IOperationWrapper
     public ISymbol LengthSymbol => (ISymbol)LengthSymbolAccessor(wrappedInstance);
     public ITypeSymbol NarrowedType => (ITypeSymbol)NarrowedTypeAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public ImmutableArray<IOperation> Patterns => PatternsAccessor(wrappedInstance);
+    public ImmutableArray<IPatternOperationWrapper> Patterns => PatternsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     public static IListPatternOperationWrapper? FromOrDefault(IOperation instance) =>

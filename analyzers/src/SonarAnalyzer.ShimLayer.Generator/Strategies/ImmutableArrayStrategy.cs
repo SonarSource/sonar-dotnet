@@ -35,7 +35,7 @@ public class ImmutableArrayStrategy : Strategy
         from;
 
     public override string CompiletimeTypeSnippet() =>
-        $"{type}<{typeArgument.CompiletimeTypeSnippet()}>";
+        $"{type}<{typeArgument.ReturnTypeSnippet()}>";
 
     protected override string GenerateCore(StrategyModel model) => null;
 }

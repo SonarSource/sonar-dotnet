@@ -38,7 +38,7 @@ public readonly partial struct IInterpolatedStringOperationWrapper : IOperationW
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> PartsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Parts");
+    private static readonly Func<IOperation, ImmutableArray<IInterpolatedStringContentOperationWrapper>> PartsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IInterpolatedStringContentOperationWrapper>>>(WrappedType, "Parts");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
     private IInterpolatedStringOperationWrapper(IOperation wrappedInstance) =>
@@ -59,7 +59,7 @@ public readonly partial struct IInterpolatedStringOperationWrapper : IOperationW
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public ImmutableArray<IOperation> Parts => PartsAccessor(wrappedInstance);
+    public ImmutableArray<IInterpolatedStringContentOperationWrapper> Parts => PartsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
 
     public static IInterpolatedStringOperationWrapper? FromOrDefault(IOperation instance) =>

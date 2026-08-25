@@ -25,6 +25,7 @@ internal static class AccessorFactory
 {
     private static readonly MethodInfo UnboundEnumerableSelectMethod = typeof(Enumerable).GetMethods().Single(IsEnumerableSelect);
     private static readonly MethodInfo UnboundEnumerableToArrayMethod = typeof(Enumerable).GetMethod(nameof(Enumerable.ToArray));
+    private static readonly MethodInfo UnboundImmutableArrayCreateRangeMethod = typeof(ImmutableArray).GetMethods().Single(IsImmutableArrayCreateRange);
 
     public static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName) where TFunc : Delegate
     {
@@ -107,21 +108,16 @@ internal static class AccessorFactory
             var sender = WrapConvert(senderLambdaParameter, runtimeSenderType);
             var methodParameters = method.GetParameters();
             var result = Expression.Call(sender, method, lambdaParameters.Skip(1).Select((x, i) => ConvertArgument(x, methodParameters[i].ParameterType)));
-            if (types.ResultType.IsGenericType && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>) && method.ReturnType.GenericTypeArguments.Single() is var runtimeTypeArgument && typeof(IOperation).IsAssignableFrom(runtimeTypeArgument))
+            if (types.ResultType.IsGenericType
+                && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>)
+                && types.ResultType.GenericTypeArguments.Single() is var wrapperTypeArgument
+                && typeof(IOperationWrapper).IsAssignableFrom(wrapperTypeArgument))
             {
-                var castUp = typeof(ImmutableArray<IOperation>).GetMethod(nameof(ImmutableArray<>.CastUp)).MakeGenericMethod(runtimeTypeArgument);
-                return Expression.Call(castUp, result);
+                return CreateImmutableArrayConversion(result, method.ReturnType, wrapperTypeArgument);
             }
             else if (types.ResultType.IsGenericType && types.ResultType.GetGenericTypeDefinition() == typeof(SeparatedSyntaxListWrapper<>))
             {
-                // Generate: new SeparatedSyntaxListWrapper<XxxWrapper>(x.Property.Select(x => XxxWrapper.From(x)), x.Property.GetSeparators())
-                var itemRuntimeType = method.ReturnType.GetGenericArguments().Single();
-                var itemWrapperType = types.ResultType.GetGenericArguments().Single();
-                var selectorParameter = Expression.Parameter(itemRuntimeType, "x");
-                var selectorLambda = Expression.Lambda(Expression.Call(itemWrapperType.GetMethod("From"), selectorParameter), selectorParameter);
-                var items = Expression.Call(UnboundEnumerableSelectMethod.MakeGenericMethod(itemRuntimeType, itemWrapperType), Expression.Convert(result, typeof(IEnumerable<>).MakeGenericType(itemRuntimeType)), selectorLambda);
-                var separators = Expression.Call(result, result.Type.GetMethod("GetSeparators"));
-                return Expression.New(types.ResultType.GetConstructors().Single(), items, separators);
+                return CreateSeparatedSyntaxListConversion(result, method.ReturnType, types.ResultType);
             }
             else if (types.ResultType.FullName == typeof(CaptureId).FullName)    // ToDo: This should be removed once we shim structs
             {
@@ -164,10 +160,36 @@ internal static class AccessorFactory
         return underlayingType.IsAssignableFrom(expression.Type) ? expression : Expression.Convert(expression, underlayingType);
     }
 
+    private static Expression CreateImmutableArrayConversion(Expression result, Type runtimeReturnType, Type wrapperTypeArgument)
+    {
+        // Generate: ImmutableArray.CreateRange(result, x => XxxWrapper.From(x))
+        var itemRuntimeType = runtimeReturnType.GetGenericArguments().Single();
+        var selectorParameter = Expression.Parameter(itemRuntimeType, "x");
+        var selectorLambda = Expression.Lambda(Expression.Call(wrapperTypeArgument.GetMethod("From"), selectorParameter), selectorParameter);
+        return Expression.Call(UnboundImmutableArrayCreateRangeMethod.MakeGenericMethod(itemRuntimeType, wrapperTypeArgument), result, selectorLambda);
+    }
+
+    private static Expression CreateSeparatedSyntaxListConversion(Expression result, Type runtimeReturnType, Type compiletimeResultType)
+    {
+        // Generate: new SeparatedSyntaxListWrapper<XxxWrapper>(x.Property.Select(x => XxxWrapper.From(x)), x.Property.GetSeparators())
+        var itemRuntimeType = runtimeReturnType.GetGenericArguments().Single();
+        var itemWrapperType = compiletimeResultType.GetGenericArguments().Single();
+        var selectorParameter = Expression.Parameter(itemRuntimeType, "x");
+        var selectorLambda = Expression.Lambda(Expression.Call(itemWrapperType.GetMethod("From"), selectorParameter), selectorParameter);
+        var items = Expression.Call(UnboundEnumerableSelectMethod.MakeGenericMethod(itemRuntimeType, itemWrapperType), Expression.Convert(result, typeof(IEnumerable<>).MakeGenericType(itemRuntimeType)), selectorLambda);
+        var separators = Expression.Call(result, result.Type.GetMethod("GetSeparators"));
+        return Expression.New(compiletimeResultType.GetConstructors().Single(), items, separators);
+    }
+
     private static bool IsEnumerableSelect(MethodInfo method) =>
         method.Name == nameof(Enumerable.Select)
         && method.GetParameters() is { Length: 2 } parameters
         && parameters[1].ParameterType.GenericTypeArguments.Length == 2;    // Func<TSource, TResult> instead of Func<TSource, int, TResult>
+
+    private static bool IsImmutableArrayCreateRange(MethodInfo method) =>
+        method.Name == nameof(ImmutableArray.CreateRange)
+        && method.GetParameters().Length == 2
+        && method.GetGenericArguments().Length == 2;
 
     private readonly struct AccessorTypes
     {

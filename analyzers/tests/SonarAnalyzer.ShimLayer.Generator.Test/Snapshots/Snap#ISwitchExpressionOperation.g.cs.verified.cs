@@ -34,7 +34,7 @@ public readonly partial struct ISwitchExpressionOperationWrapper : IOperationWra
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> ArmsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Arms");
+    private static readonly Func<IOperation, ImmutableArray<ISwitchExpressionArmOperationWrapper>> ArmsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ISwitchExpressionArmOperationWrapper>>>(WrappedType, "Arms");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, bool> IsExhaustiveAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsExhaustive");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
@@ -56,7 +56,7 @@ public readonly partial struct ISwitchExpressionOperationWrapper : IOperationWra
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public ImmutableArray<IOperation> Arms => ArmsAccessor(wrappedInstance);
+    public ImmutableArray<ISwitchExpressionArmOperationWrapper> Arms => ArmsAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public bool IsExhaustive => (bool)IsExhaustiveAccessor(wrappedInstance);

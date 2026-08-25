@@ -36,7 +36,7 @@ public readonly partial struct ISwitchCaseOperationWrapper : IOperationWrapper
 
     private static readonly Func<IOperation, ImmutableArray<IOperation>> BodyAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Body");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> ClausesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Clauses");
+    private static readonly Func<IOperation, ImmutableArray<ICaseClauseOperationWrapper>> ClausesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ICaseClauseOperationWrapper>>>(WrappedType, "Clauses");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, ImmutableArray<ILocalSymbol>> LocalsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ILocalSymbol>>>(WrappedType, "Locals");
@@ -59,7 +59,7 @@ public readonly partial struct ISwitchCaseOperationWrapper : IOperationWrapper
     public ImmutableArray<IOperation> Body => (ImmutableArray<IOperation>)BodyAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ImmutableArray<IOperation> Clauses => ClausesAccessor(wrappedInstance);
+    public ImmutableArray<ICaseClauseOperationWrapper> Clauses => ClausesAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(wrappedInstance);

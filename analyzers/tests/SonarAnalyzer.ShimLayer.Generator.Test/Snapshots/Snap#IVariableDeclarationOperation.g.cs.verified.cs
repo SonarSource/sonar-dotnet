@@ -35,7 +35,7 @@ public readonly partial struct IVariableDeclarationOperationWrapper : IOperation
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> DeclaratorsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Declarators");
+    private static readonly Func<IOperation, ImmutableArray<IVariableDeclaratorOperationWrapper>> DeclaratorsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IVariableDeclaratorOperationWrapper>>>(WrappedType, "Declarators");
     private static readonly Func<IOperation, ImmutableArray<IOperation>> IgnoredDimensionsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "IgnoredDimensions");
     private static readonly Func<IOperation, IOperation> InitializerAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Initializer");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
@@ -58,7 +58,7 @@ public readonly partial struct IVariableDeclarationOperationWrapper : IOperation
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ImmutableArray<IOperation> Declarators => DeclaratorsAccessor(wrappedInstance);
+    public ImmutableArray<IVariableDeclaratorOperationWrapper> Declarators => DeclaratorsAccessor(wrappedInstance);
     public ImmutableArray<IOperation> IgnoredDimensions => (ImmutableArray<IOperation>)IgnoredDimensionsAccessor(wrappedInstance);
     public IVariableInitializerOperationWrapper Initializer => IVariableInitializerOperationWrapper.From(InitializerAccessor(wrappedInstance));
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);

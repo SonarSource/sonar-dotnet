@@ -35,7 +35,7 @@ public readonly partial struct ITryOperationWrapper : IOperationWrapper
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IOperation> BodyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Body");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> CatchesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Catches");
+    private static readonly Func<IOperation, ImmutableArray<ICatchClauseOperationWrapper>> CatchesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ICatchClauseOperationWrapper>>>(WrappedType, "Catches");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ILabelSymbol> ExitLabelAccessor = AccessorFactory.CreateProperty<Func<IOperation, ILabelSymbol>>(WrappedType, "ExitLabel");
     private static readonly Func<IOperation, IOperation> FinallyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Finally");
@@ -58,7 +58,7 @@ public readonly partial struct ITryOperationWrapper : IOperationWrapper
     public ITypeSymbol Type => wrappedInstance.Type;
 
     public IBlockOperationWrapper Body => IBlockOperationWrapper.From(BodyAccessor(wrappedInstance));
-    public ImmutableArray<IOperation> Catches => CatchesAccessor(wrappedInstance);
+    public ImmutableArray<ICatchClauseOperationWrapper> Catches => CatchesAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public ILabelSymbol ExitLabel => (ILabelSymbol)ExitLabelAccessor(wrappedInstance);

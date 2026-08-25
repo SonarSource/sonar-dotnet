@@ -34,7 +34,7 @@ public readonly partial struct IRaiseEventOperationWrapper : IOperationWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Arguments");
+    private static readonly Func<IOperation, ImmutableArray<IArgumentOperationWrapper>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IArgumentOperationWrapper>>>(WrappedType, "Arguments");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, IOperation> EventReferenceAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "EventReference");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
@@ -55,7 +55,7 @@ public readonly partial struct IRaiseEventOperationWrapper : IOperationWrapper
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public ImmutableArray<IOperation> Arguments => ArgumentsAccessor(wrappedInstance);
+    public ImmutableArray<IArgumentOperationWrapper> Arguments => ArgumentsAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public IEventReferenceOperationWrapper EventReference => IEventReferenceOperationWrapper.From(EventReferenceAccessor(wrappedInstance));

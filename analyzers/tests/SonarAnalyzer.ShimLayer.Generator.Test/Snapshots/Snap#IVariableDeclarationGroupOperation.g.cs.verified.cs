@@ -35,7 +35,7 @@ public readonly partial struct IVariableDeclarationGroupOperationWrapper : IOper
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> DeclarationsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Declarations");
+    private static readonly Func<IOperation, ImmutableArray<IVariableDeclarationOperationWrapper>> DeclarationsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IVariableDeclarationOperationWrapper>>>(WrappedType, "Declarations");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
@@ -56,7 +56,7 @@ public readonly partial struct IVariableDeclarationGroupOperationWrapper : IOper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ImmutableArray<IOperation> Declarations => DeclarationsAccessor(wrappedInstance);
+    public ImmutableArray<IVariableDeclarationOperationWrapper> Declarations => DeclarationsAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);

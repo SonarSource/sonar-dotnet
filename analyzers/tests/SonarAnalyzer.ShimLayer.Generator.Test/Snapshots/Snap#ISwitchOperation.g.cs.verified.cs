@@ -34,7 +34,7 @@ public readonly partial struct ISwitchOperationWrapper : IOperationWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> CasesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Cases");
+    private static readonly Func<IOperation, ImmutableArray<ISwitchCaseOperationWrapper>> CasesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ISwitchCaseOperationWrapper>>>(WrappedType, "Cases");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ILabelSymbol> ExitLabelAccessor = AccessorFactory.CreateProperty<Func<IOperation, ILabelSymbol>>(WrappedType, "ExitLabel");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
@@ -57,7 +57,7 @@ public readonly partial struct ISwitchOperationWrapper : IOperationWrapper
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public ImmutableArray<IOperation> Cases => CasesAccessor(wrappedInstance);
+    public ImmutableArray<ISwitchCaseOperationWrapper> Cases => CasesAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public ILabelSymbol ExitLabel => (ILabelSymbol)ExitLabelAccessor(wrappedInstance);

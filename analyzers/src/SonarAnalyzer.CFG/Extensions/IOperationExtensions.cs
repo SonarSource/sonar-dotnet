@@ -123,11 +123,10 @@ public static class IOperationExtensions
     /// <summary>
     /// Returns the argument value corresponding to <paramref name="parameterName"/>. For <see langword="params"/> parameter an IArrayCreationOperation is returned.
     /// </summary>
-    private static IOperation ArgumentValue(ImmutableArray<IOperation> arguments, string parameterName)
+    private static IOperation ArgumentValue(ImmutableArray<IArgumentOperationWrapper> arguments, string parameterName)
     {
-        foreach (var operation in arguments)
+        foreach (var argument in arguments)
         {
-            var argument = operation.ToArgument();
             if (argument.Parameter.Name == parameterName)
             {
                 return argument.Value;

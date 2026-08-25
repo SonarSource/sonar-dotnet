@@ -16,6 +16,7 @@
  */
 
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
@@ -54,14 +55,30 @@ public class AccessorFactoryTest
     [TestMethod]
     public void ReturnType_ImmutableArrayOfIOperation_Shimmed()
     {
-        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(typeof(IInvocationOperation), nameof(IInvocationOperation.Arguments));
-        accessor(CreateInvocationOperation()).Should().NotBeNull().And.HaveCount(1);
+        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(typeof(IBlockOperation), nameof(IBlockOperation.Operations));
+        var block = CreateForEachOperation().Parent;
+        accessor(block).Should().NotBeNull().And.HaveCount(1);
     }
 
     [TestMethod]
     public void ReturnType_ImmutableArrayOfIOperation_Fallback()
     {
-        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(null, nameof(IInvocationOperation.Arguments));
+        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(null, nameof(IBlockOperation.Operations));
+        var block = CreateForEachOperation().Parent;
+        accessor(block).Should().NotBeNull().And.BeEmpty();
+    }
+
+    [TestMethod]
+    public void ReturnType_ImmutableArrayOfIArgumentOperationWrapper_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IArgumentOperationWrapper>>>(typeof(IInvocationOperation), nameof(IInvocationOperation.Arguments));
+        accessor(CreateInvocationOperation()).Should().NotBeNull().And.HaveCount(1);
+    }
+
+    [TestMethod]
+    public void ReturnType_ImmutableArrayOfIArgumentOperationWrapper_Fallback()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IArgumentOperationWrapper>>>(null, nameof(IInvocationOperation.Arguments));
         accessor(CreateInvocationOperation()).Should().NotBeNull().And.BeEmpty();
     }
 

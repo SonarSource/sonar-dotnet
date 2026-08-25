@@ -34,7 +34,7 @@ public readonly partial struct IObjectCreationOperationWrapper : IOperationWrapp
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, ImmutableArray<IOperation>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Arguments");
+    private static readonly Func<IOperation, ImmutableArray<IArgumentOperationWrapper>> ArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IArgumentOperationWrapper>>>(WrappedType, "Arguments");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, IMethodSymbol> ConstructorAccessor = AccessorFactory.CreateProperty<Func<IOperation, IMethodSymbol>>(WrappedType, "Constructor");
     private static readonly Func<IOperation, IOperation> InitializerAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Initializer");
@@ -56,7 +56,7 @@ public readonly partial struct IObjectCreationOperationWrapper : IOperationWrapp
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public ImmutableArray<IOperation> Arguments => ArgumentsAccessor(wrappedInstance);
+    public ImmutableArray<IArgumentOperationWrapper> Arguments => ArgumentsAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public IMethodSymbol Constructor => (IMethodSymbol)ConstructorAccessor(wrappedInstance);
