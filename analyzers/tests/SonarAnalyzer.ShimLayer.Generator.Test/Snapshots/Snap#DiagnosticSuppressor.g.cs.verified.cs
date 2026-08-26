@@ -49,5 +49,4 @@ public readonly struct DiagnosticSuppressorWrapper
 
     public static bool IsInstance(DiagnosticAnalyzer instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

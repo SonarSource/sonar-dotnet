@@ -147,5 +147,4 @@ public readonly struct ExpressionElementSyntaxWrapper
 
     public static implicit operator CollectionElementSyntaxWrapper(ExpressionElementSyntaxWrapper up) => CollectionElementSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ExpressionElementSyntaxWrapper(CollectionElementSyntaxWrapper down) => ExpressionElementSyntaxWrapper.From(down.WrappedInstance);
-
 }

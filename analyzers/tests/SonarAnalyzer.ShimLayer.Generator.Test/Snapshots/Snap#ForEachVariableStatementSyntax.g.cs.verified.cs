@@ -185,5 +185,4 @@ public readonly struct ForEachVariableStatementSyntaxWrapper
 
     public static implicit operator CommonForEachStatementSyntaxWrapper(ForEachVariableStatementSyntaxWrapper up) => CommonForEachStatementSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ForEachVariableStatementSyntaxWrapper(CommonForEachStatementSyntaxWrapper down) => ForEachVariableStatementSyntaxWrapper.From(down.WrappedInstance);
-
 }

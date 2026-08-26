@@ -148,5 +148,4 @@ public readonly struct BaseExpressionColonSyntaxWrapper
         WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator BaseExpressionColonSyntaxWrapper(NameColonSyntax instance) => new(instance);
-
 }

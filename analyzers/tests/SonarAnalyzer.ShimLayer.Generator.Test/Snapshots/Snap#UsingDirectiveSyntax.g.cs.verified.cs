@@ -49,6 +49,5 @@ public static partial class UsingDirectiveSyntaxShimExtensions
         public UsingDirectiveSyntax WithGlobalKeyword(SyntaxToken globalKeyword) => WithGlobalKeywordAccessor(wrappedInstance, globalKeyword);
         public UsingDirectiveSyntax WithNamespaceOrType(TypeSyntax namespaceOrType) => WithNamespaceOrTypeAccessor(wrappedInstance, namespaceOrType);
         public UsingDirectiveSyntax WithUnsafeKeyword(SyntaxToken unsafeKeyword) => WithUnsafeKeywordAccessor(wrappedInstance, unsafeKeyword);
-
     }
 }

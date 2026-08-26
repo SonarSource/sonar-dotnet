@@ -31,6 +31,5 @@ public static partial class EmitDifferenceResultShimExtensions
     {
         public ImmutableArray<TypeDefinitionHandle> ChangedTypes => (ImmutableArray<TypeDefinitionHandle>)ChangedTypesAccessor(wrappedInstance);
         public ImmutableArray<MethodDefinitionHandle> UpdatedMethods => (ImmutableArray<MethodDefinitionHandle>)UpdatedMethodsAccessor(wrappedInstance);
-
     }
 }

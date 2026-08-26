@@ -59,5 +59,4 @@ public readonly struct GeneratorAttributeWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

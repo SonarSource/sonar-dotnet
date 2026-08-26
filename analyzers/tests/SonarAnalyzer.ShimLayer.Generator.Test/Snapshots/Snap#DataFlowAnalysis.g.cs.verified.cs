@@ -37,6 +37,5 @@ public static partial class DataFlowAnalysisShimExtensions
         public ImmutableArray<ISymbol> DefinitelyAssignedOnEntry => (ImmutableArray<ISymbol>)DefinitelyAssignedOnEntryAccessor(wrappedInstance);
         public ImmutableArray<ISymbol> DefinitelyAssignedOnExit => (ImmutableArray<ISymbol>)DefinitelyAssignedOnExitAccessor(wrappedInstance);
         public ImmutableArray<IMethodSymbol> UsedLocalFunctions => (ImmutableArray<IMethodSymbol>)UsedLocalFunctionsAccessor(wrappedInstance);
-
     }
 }

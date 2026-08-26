@@ -79,5 +79,4 @@ public readonly struct ICollectionExpressionOperationWrapper : IOperationWrapper
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

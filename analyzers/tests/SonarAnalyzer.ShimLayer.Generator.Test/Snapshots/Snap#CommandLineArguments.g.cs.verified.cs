@@ -57,6 +57,5 @@ public static partial class CommandLineArgumentsShimExtensions
 
         public string GetOutputFilePath(string outputFileName) => (string)GetOutputFilePathAccessor(wrappedInstance, outputFileName);
         public string GetPdbFilePath(string outputFileName) => (string)GetPdbFilePathAccessor(wrappedInstance, outputFileName);
-
     }
 }

@@ -82,5 +82,4 @@ public readonly struct IMethodBodyOperationWrapper : IOperationWrapper
 
     public static implicit operator IMethodBodyBaseOperationWrapper(IMethodBodyOperationWrapper up) => IMethodBodyBaseOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IMethodBodyOperationWrapper(IMethodBodyBaseOperationWrapper down) => IMethodBodyOperationWrapper.From(down.WrappedInstance);
-
 }

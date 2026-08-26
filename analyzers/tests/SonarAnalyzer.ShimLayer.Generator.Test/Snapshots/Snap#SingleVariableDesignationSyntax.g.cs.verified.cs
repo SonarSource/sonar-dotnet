@@ -147,5 +147,4 @@ public readonly struct SingleVariableDesignationSyntaxWrapper
 
     public static implicit operator VariableDesignationSyntaxWrapper(SingleVariableDesignationSyntaxWrapper up) => VariableDesignationSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator SingleVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => SingleVariableDesignationSyntaxWrapper.From(down.WrappedInstance);
-
 }

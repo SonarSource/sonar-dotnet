@@ -39,7 +39,6 @@ public static partial class BaseTypeDeclarationSyntaxShimExtensions
 
     extension(BaseTypeDeclarationSyntax wrappedInstance)
     {
-
         public BaseTypeDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public BaseTypeDeclarationSyntax AddBaseListTypes(BaseTypeSyntax[] items) => AddBaseListTypesAccessor(wrappedInstance, items);
         public BaseTypeDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
@@ -52,6 +51,5 @@ public static partial class BaseTypeDeclarationSyntaxShimExtensions
         public BaseTypeDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
         public BaseTypeDeclarationSyntax WithOpenBraceToken(SyntaxToken openBraceToken) => WithOpenBraceTokenAccessor(wrappedInstance, openBraceToken);
         public BaseTypeDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
-
     }
 }

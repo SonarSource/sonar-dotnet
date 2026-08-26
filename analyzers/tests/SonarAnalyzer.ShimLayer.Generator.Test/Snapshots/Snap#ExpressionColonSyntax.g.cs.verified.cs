@@ -151,5 +151,4 @@ public readonly struct ExpressionColonSyntaxWrapper
 
     public static implicit operator BaseExpressionColonSyntaxWrapper(ExpressionColonSyntaxWrapper up) => BaseExpressionColonSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ExpressionColonSyntaxWrapper(BaseExpressionColonSyntaxWrapper down) => ExpressionColonSyntaxWrapper.From(down.WrappedInstance);
-
 }

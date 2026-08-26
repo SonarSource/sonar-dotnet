@@ -136,5 +136,4 @@ public readonly struct VariableDesignationSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

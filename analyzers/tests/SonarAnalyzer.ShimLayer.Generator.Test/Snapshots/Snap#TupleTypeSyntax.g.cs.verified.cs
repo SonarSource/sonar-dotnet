@@ -163,5 +163,4 @@ public readonly struct TupleTypeSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

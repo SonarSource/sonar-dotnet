@@ -154,5 +154,4 @@ public readonly struct FunctionPointerParameterListSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

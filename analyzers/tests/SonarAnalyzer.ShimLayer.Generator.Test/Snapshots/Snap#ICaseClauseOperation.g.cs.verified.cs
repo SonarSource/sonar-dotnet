@@ -79,5 +79,4 @@ public readonly struct ICaseClauseOperationWrapper : IOperationWrapper
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -154,5 +154,4 @@ public readonly struct BaseObjectCreationExpressionSyntaxWrapper
         WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator BaseObjectCreationExpressionSyntaxWrapper(ObjectCreationExpressionSyntax instance) => new(instance);
-
 }

@@ -30,10 +30,8 @@ public static partial class FinallyClauseSyntaxShimExtensions
 
     extension(FinallyClauseSyntax wrappedInstance)
     {
-
         public FinallyClauseSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-
     }
 }

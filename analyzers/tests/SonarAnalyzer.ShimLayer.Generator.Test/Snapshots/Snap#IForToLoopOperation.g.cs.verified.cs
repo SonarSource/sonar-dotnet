@@ -100,5 +100,4 @@ public readonly struct IForToLoopOperationWrapper : IOperationWrapper
 
     public static implicit operator ILoopOperationWrapper(IForToLoopOperationWrapper up) => ILoopOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IForToLoopOperationWrapper(ILoopOperationWrapper down) => IForToLoopOperationWrapper.From(down.WrappedInstance);
-
 }

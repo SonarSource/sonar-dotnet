@@ -92,5 +92,4 @@ public readonly struct IRecursivePatternOperationWrapper : IOperationWrapper
 
     public static implicit operator IPatternOperationWrapper(IRecursivePatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IRecursivePatternOperationWrapper(IPatternOperationWrapper down) => IRecursivePatternOperationWrapper.From(down.WrappedInstance);
-
 }

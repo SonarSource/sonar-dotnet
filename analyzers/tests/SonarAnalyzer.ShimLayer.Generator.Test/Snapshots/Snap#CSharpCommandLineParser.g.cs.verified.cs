@@ -29,6 +29,5 @@ public static partial class CSharpCommandLineParserShimExtensions
     extension(CSharpCommandLineParser wrappedInstance)
     {
         public CSharpCommandLineParser Script => ScriptAccessor(wrappedInstance);
-
     }
 }

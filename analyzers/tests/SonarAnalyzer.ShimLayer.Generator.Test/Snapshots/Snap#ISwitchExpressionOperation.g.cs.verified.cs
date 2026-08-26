@@ -81,5 +81,4 @@ public readonly struct ISwitchExpressionOperationWrapper : IOperationWrapper
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

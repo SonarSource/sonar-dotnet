@@ -63,5 +63,4 @@ public readonly struct EmbeddedTextWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

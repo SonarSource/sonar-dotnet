@@ -29,11 +29,9 @@ public static partial class EmitBaselineShimExtensions
 
     extension(EmitBaseline wrappedInstance)
     {
-
         public EmitBaseline CreateInitialBaseline(Compilation compilation, ModuleMetadata module, Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> debugInformationProvider, Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider, bool hasPortableDebugInformation) => CreateInitialBaselineAccessor(wrappedInstance, compilation, module, debugInformationProvider, localSignatureProvider, hasPortableDebugInformation);
         [System.ObsoleteAttribute("This overload is no longer supported", true)]
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         public EmitBaseline CreateInitialBaseline(ModuleMetadata module, Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> debugInformationProvider, Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider, bool hasPortableDebugInformation) => CreateInitialBaselineAccessor_Overload3(wrappedInstance, module, debugInformationProvider, localSignatureProvider, hasPortableDebugInformation);
-
     }
 }

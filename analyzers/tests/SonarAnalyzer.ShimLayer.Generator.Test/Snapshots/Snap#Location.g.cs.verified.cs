@@ -28,8 +28,6 @@ public static partial class LocationShimExtensions
 
     extension(Location wrappedInstance)
     {
-
         public Location Create(string filePath, TextSpan textSpan, LinePositionSpan lineSpan, string mappedFilePath, LinePositionSpan mappedLineSpan) => CreateAccessor_Overload3(wrappedInstance, filePath, textSpan, lineSpan, mappedFilePath, mappedLineSpan);
-
     }
 }

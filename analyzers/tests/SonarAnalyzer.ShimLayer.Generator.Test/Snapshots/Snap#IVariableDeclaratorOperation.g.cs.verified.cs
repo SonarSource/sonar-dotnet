@@ -81,5 +81,4 @@ public readonly struct IVariableDeclaratorOperationWrapper : IOperationWrapper
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

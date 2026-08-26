@@ -31,11 +31,9 @@ public static partial class BaseParameterListSyntaxShimExtensions
 
     extension(BaseParameterListSyntax wrappedInstance)
     {
-
         public BaseParameterListSyntax AddParameters(ParameterSyntax[] items) => AddParametersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseParameterListSyntax WithParameters(SeparatedSyntaxList<ParameterSyntax> parameters) => WithParametersAccessor(wrappedInstance, parameters);
-
     }
 }

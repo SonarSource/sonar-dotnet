@@ -82,5 +82,4 @@ public readonly struct ICoalesceAssignmentOperationWrapper : IOperationWrapper
 
     public static implicit operator IAssignmentOperationWrapper(ICoalesceAssignmentOperationWrapper up) => IAssignmentOperationWrapper.From(up.WrappedInstance);
     public static explicit operator ICoalesceAssignmentOperationWrapper(IAssignmentOperationWrapper down) => ICoalesceAssignmentOperationWrapper.From(down.WrappedInstance);
-
 }

@@ -59,6 +59,5 @@ public static partial class CSharpSyntaxTreeShimExtensions
         public SyntaxTree ParseText(string text, CSharpParseOptions options, string path, Encoding encoding, ImmutableDictionary<string, ReportDiagnostic> diagnosticOptions, CancellationToken cancellationToken) => ParseTextAccessor_Overload5(wrappedInstance, text, options, path, encoding, diagnosticOptions, cancellationToken);
         [System.ObsoleteAttribute("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", false)]
         public SyntaxTree WithDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic> options) => WithDiagnosticOptionsAccessor(wrappedInstance, options);
-
     }
 }

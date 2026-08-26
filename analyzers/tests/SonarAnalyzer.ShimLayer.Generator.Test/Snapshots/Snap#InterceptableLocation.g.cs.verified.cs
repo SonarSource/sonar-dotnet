@@ -57,5 +57,4 @@ public readonly struct InterceptableLocationWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

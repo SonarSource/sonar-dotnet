@@ -79,5 +79,4 @@ public readonly struct IArrayElementReferenceOperationWrapper : IOperationWrappe
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

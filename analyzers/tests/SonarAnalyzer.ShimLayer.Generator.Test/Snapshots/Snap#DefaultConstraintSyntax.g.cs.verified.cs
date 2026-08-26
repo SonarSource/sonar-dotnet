@@ -144,5 +144,4 @@ public readonly struct DefaultConstraintSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

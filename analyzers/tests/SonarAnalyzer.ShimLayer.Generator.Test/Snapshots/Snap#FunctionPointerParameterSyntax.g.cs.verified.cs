@@ -159,5 +159,4 @@ public readonly struct FunctionPointerParameterSyntaxWrapper
 
     public static implicit operator BaseParameterSyntaxWrapper(FunctionPointerParameterSyntaxWrapper up) => BaseParameterSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator FunctionPointerParameterSyntaxWrapper(BaseParameterSyntaxWrapper down) => FunctionPointerParameterSyntaxWrapper.From(down.WrappedInstance);
-
 }

@@ -50,5 +50,4 @@ public readonly struct OperationWalkerWrapper
 
     public static implicit operator OperationVisitorWrapper(OperationWalkerWrapper up) => OperationVisitorWrapper.From(up.WrappedInstance);
     public static explicit operator OperationWalkerWrapper(OperationVisitorWrapper down) => OperationWalkerWrapper.From(down.WrappedInstance);
-
 }

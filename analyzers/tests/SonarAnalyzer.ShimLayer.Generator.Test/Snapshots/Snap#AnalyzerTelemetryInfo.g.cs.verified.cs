@@ -42,6 +42,5 @@ public static partial class AnalyzerTelemetryInfoShimExtensions
         public int SymbolEndActionsCount => (int)SymbolEndActionsCountAccessor(wrappedInstance);
         [System.Runtime.Serialization.DataMemberAttribute]
         public int SymbolStartActionsCount => (int)SymbolStartActionsCountAccessor(wrappedInstance);
-
     }
 }

@@ -165,5 +165,4 @@ public readonly struct NullableDirectiveTriviaSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -37,7 +37,6 @@ public static partial class BasePropertyDeclarationSyntaxShimExtensions
 
     extension(BasePropertyDeclarationSyntax wrappedInstance)
     {
-
         public BasePropertyDeclarationSyntax AddAccessorListAccessors(AccessorDeclarationSyntax[] items) => AddAccessorListAccessorsAccessor(wrappedInstance, items);
         public BasePropertyDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public BasePropertyDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
@@ -48,6 +47,5 @@ public static partial class BasePropertyDeclarationSyntaxShimExtensions
         public BasePropertyDeclarationSyntax WithExplicitInterfaceSpecifier(ExplicitInterfaceSpecifierSyntax explicitInterfaceSpecifier) => WithExplicitInterfaceSpecifierAccessor(wrappedInstance, explicitInterfaceSpecifier);
         public BasePropertyDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
         public BasePropertyDeclarationSyntax WithType(TypeSyntax type) => WithTypeAccessor(wrappedInstance, type);
-
     }
 }

@@ -47,5 +47,4 @@ public readonly struct AnalyzerConfigSetWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

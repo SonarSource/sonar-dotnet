@@ -28,8 +28,6 @@ public static partial class DiagnosticShimExtensions
 
     extension(Diagnostic wrappedInstance)
     {
-
         public Diagnostic Create(DiagnosticDescriptor descriptor, Location location, DiagnosticSeverity effectiveSeverity, IEnumerable<Location> additionalLocations, ImmutableDictionary<string, string> properties, Object[] messageArgs) => CreateAccessor(wrappedInstance, descriptor, location, effectiveSeverity, additionalLocations, properties, messageArgs);
-
     }
 }

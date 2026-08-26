@@ -162,5 +162,4 @@ public readonly struct SwitchExpressionSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

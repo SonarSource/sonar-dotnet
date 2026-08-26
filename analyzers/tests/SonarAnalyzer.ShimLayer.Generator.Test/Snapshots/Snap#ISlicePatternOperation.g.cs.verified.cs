@@ -86,5 +86,4 @@ public readonly struct ISlicePatternOperationWrapper : IOperationWrapper
 
     public static implicit operator IPatternOperationWrapper(ISlicePatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
     public static explicit operator ISlicePatternOperationWrapper(IPatternOperationWrapper down) => ISlicePatternOperationWrapper.From(down.WrappedInstance);
-
 }

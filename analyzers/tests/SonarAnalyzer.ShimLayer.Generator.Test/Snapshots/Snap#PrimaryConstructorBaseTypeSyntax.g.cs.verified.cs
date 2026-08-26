@@ -149,5 +149,4 @@ public readonly struct PrimaryConstructorBaseTypeSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

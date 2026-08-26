@@ -73,6 +73,5 @@ public static partial class TypeDeclarationSyntaxShimExtensions
         public TypeDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => WithParameterListAccessor(wrappedInstance, parameterList);
         public TypeDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
         public TypeDeclarationSyntax WithTypeParameterList(TypeParameterListSyntax typeParameterList) => WithTypeParameterListAccessor(wrappedInstance, typeParameterList);
-
     }
 }

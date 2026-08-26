@@ -144,5 +144,4 @@ public readonly struct FieldExpressionSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

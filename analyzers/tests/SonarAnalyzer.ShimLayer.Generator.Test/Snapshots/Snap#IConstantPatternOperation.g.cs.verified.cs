@@ -84,5 +84,4 @@ public readonly struct IConstantPatternOperationWrapper : IOperationWrapper
 
     public static implicit operator IPatternOperationWrapper(IConstantPatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IConstantPatternOperationWrapper(IPatternOperationWrapper down) => IConstantPatternOperationWrapper.From(down.WrappedInstance);
-
 }

@@ -36,7 +36,6 @@ public static partial class BaseFieldDeclarationSyntaxShimExtensions
 
     extension(BaseFieldDeclarationSyntax wrappedInstance)
     {
-
         public BaseFieldDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public BaseFieldDeclarationSyntax AddDeclarationVariables(VariableDeclaratorSyntax[] items) => AddDeclarationVariablesAccessor(wrappedInstance, items);
         public BaseFieldDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
@@ -46,6 +45,5 @@ public static partial class BaseFieldDeclarationSyntaxShimExtensions
         public BaseFieldDeclarationSyntax WithDeclaration(VariableDeclarationSyntax declaration) => WithDeclarationAccessor(wrappedInstance, declaration);
         public BaseFieldDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
         public BaseFieldDeclarationSyntax WithSemicolonToken(SyntaxToken semicolonToken) => WithSemicolonTokenAccessor(wrappedInstance, semicolonToken);
-
     }
 }

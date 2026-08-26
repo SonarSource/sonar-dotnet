@@ -185,5 +185,4 @@ public readonly struct FileScopedNamespaceDeclarationSyntaxWrapper
 
     public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(FileScopedNamespaceDeclarationSyntaxWrapper up) => BaseNamespaceDeclarationSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator FileScopedNamespaceDeclarationSyntaxWrapper(BaseNamespaceDeclarationSyntaxWrapper down) => FileScopedNamespaceDeclarationSyntaxWrapper.From(down.WrappedInstance);
-
 }

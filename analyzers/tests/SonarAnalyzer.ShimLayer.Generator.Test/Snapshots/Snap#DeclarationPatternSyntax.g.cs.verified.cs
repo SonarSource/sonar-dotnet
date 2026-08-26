@@ -154,5 +154,4 @@ public readonly struct DeclarationPatternSyntaxWrapper
 
     public static implicit operator ExpressionOrPatternSyntaxWrapper(DeclarationPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator DeclarationPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => DeclarationPatternSyntaxWrapper.From(down.WrappedInstance);
-
 }

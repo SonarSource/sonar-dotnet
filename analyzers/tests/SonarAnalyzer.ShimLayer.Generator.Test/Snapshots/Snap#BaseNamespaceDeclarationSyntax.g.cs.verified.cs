@@ -178,5 +178,4 @@ public readonly struct BaseNamespaceDeclarationSyntaxWrapper
         WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(NamespaceDeclarationSyntax instance) => new(instance);
-
 }

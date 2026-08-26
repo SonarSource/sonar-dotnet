@@ -45,6 +45,5 @@ public static partial class EmitOptionsShimExtensions
         public EmitOptions WithFallbackSourceFileEncoding(Encoding fallbackSourceFileEncoding) => WithFallbackSourceFileEncodingAccessor(wrappedInstance, fallbackSourceFileEncoding);
         public EmitOptions WithInstrumentationKinds(ImmutableArray<InstrumentationKind> instrumentationKinds) => WithInstrumentationKindsAccessor(wrappedInstance, instrumentationKinds);
         public EmitOptions WithPdbChecksumAlgorithm(HashAlgorithmName name) => WithPdbChecksumAlgorithmAccessor(wrappedInstance, name);
-
     }
 }

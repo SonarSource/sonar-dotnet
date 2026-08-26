@@ -77,5 +77,4 @@ public readonly struct ITypeParameterObjectCreationOperationWrapper : IOperation
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

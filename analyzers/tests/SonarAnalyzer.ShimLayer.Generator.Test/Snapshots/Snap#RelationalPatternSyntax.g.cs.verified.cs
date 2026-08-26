@@ -154,5 +154,4 @@ public readonly struct RelationalPatternSyntaxWrapper
 
     public static implicit operator ExpressionOrPatternSyntaxWrapper(RelationalPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator RelationalPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => RelationalPatternSyntaxWrapper.From(down.WrappedInstance);
-
 }

@@ -154,5 +154,4 @@ public readonly struct PropertyPatternClauseSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -77,5 +77,4 @@ public readonly struct IStaticLocalInitializationSemaphoreOperationWrapper : IOp
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -80,5 +80,4 @@ public readonly struct IInterpolatedStringAppendOperationWrapper : IOperationWra
 
     public static implicit operator IInterpolatedStringContentOperationWrapper(IInterpolatedStringAppendOperationWrapper up) => IInterpolatedStringContentOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IInterpolatedStringAppendOperationWrapper(IInterpolatedStringContentOperationWrapper down) => IInterpolatedStringAppendOperationWrapper.From(down.WrappedInstance);
-
 }

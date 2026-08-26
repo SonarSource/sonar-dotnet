@@ -88,5 +88,4 @@ public readonly struct IBinaryPatternOperationWrapper : IOperationWrapper
 
     public static implicit operator IPatternOperationWrapper(IBinaryPatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IBinaryPatternOperationWrapper(IPatternOperationWrapper down) => IBinaryPatternOperationWrapper.From(down.WrappedInstance);
-
 }

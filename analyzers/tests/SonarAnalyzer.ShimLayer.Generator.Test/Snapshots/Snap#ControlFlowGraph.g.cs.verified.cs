@@ -79,5 +79,4 @@ public readonly struct ControlFlowGraphWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -87,7 +87,6 @@ public static partial class CSharpSyntaxRewriterShimExtensions
 
     extension(CSharpSyntaxRewriter wrappedInstance)
     {
-
         public SyntaxNode VisitAllowsConstraintClause(AllowsConstraintClauseSyntaxWrapper node) => VisitAllowsConstraintClauseAccessor(wrappedInstance, node);
         public SyntaxNode VisitBinaryPattern(BinaryPatternSyntaxWrapper node) => VisitBinaryPatternAccessor(wrappedInstance, node);
         public SyntaxNode VisitCasePatternSwitchLabel(CasePatternSwitchLabelSyntaxWrapper node) => VisitCasePatternSwitchLabelAccessor(wrappedInstance, node);
@@ -148,6 +147,5 @@ public static partial class CSharpSyntaxRewriterShimExtensions
         public SyntaxNode VisitVarPattern(VarPatternSyntaxWrapper node) => VisitVarPatternAccessor(wrappedInstance, node);
         public SyntaxNode VisitWhenClause(WhenClauseSyntaxWrapper node) => VisitWhenClauseAccessor(wrappedInstance, node);
         public SyntaxNode VisitWithExpression(WithExpressionSyntaxWrapper node) => VisitWithExpressionAccessor(wrappedInstance, node);
-
     }
 }

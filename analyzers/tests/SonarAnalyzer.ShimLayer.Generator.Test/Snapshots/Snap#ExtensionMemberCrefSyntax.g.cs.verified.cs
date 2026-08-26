@@ -164,5 +164,4 @@ public readonly struct ExtensionMemberCrefSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

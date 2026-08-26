@@ -90,7 +90,6 @@ public class OperationWrapStrategyTest
 
                 public static bool IsInstance(IOperation instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -170,7 +169,6 @@ public class OperationWrapStrategyTest
 
                 public static implicit operator IMemberReferenceOperationWrapper(IFieldReferenceOperationWrapper up) => IMemberReferenceOperationWrapper.From(up.WrappedInstance);
                 public static explicit operator IFieldReferenceOperationWrapper(IMemberReferenceOperationWrapper down) => IFieldReferenceOperationWrapper.From(down.WrappedInstance);
-
             }
             """);
     }
@@ -258,7 +256,6 @@ public class OperationWrapStrategyTest
 
                 public static bool IsInstance(IOperation instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -343,7 +340,6 @@ public class OperationWrapStrategyTest
 
                 public static bool IsInstance(IOperation instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }

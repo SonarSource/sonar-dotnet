@@ -166,5 +166,4 @@ public readonly struct RecursivePatternSyntaxWrapper
 
     public static implicit operator ExpressionOrPatternSyntaxWrapper(RecursivePatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator RecursivePatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => RecursivePatternSyntaxWrapper.From(down.WrappedInstance);
-
 }

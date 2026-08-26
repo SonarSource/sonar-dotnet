@@ -31,11 +31,9 @@ public static partial class SwitchLabelSyntaxShimExtensions
 
     extension(SwitchLabelSyntax wrappedInstance)
     {
-
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public SwitchLabelSyntax WithColonToken(SyntaxToken colonToken) => WithColonTokenAccessor(wrappedInstance, colonToken);
         public SwitchLabelSyntax WithKeyword(SyntaxToken keyword) => WithKeywordAccessor(wrappedInstance, keyword);
-
     }
 }

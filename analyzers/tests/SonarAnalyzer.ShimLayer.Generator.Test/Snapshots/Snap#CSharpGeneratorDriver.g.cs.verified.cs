@@ -73,5 +73,4 @@ public readonly struct CSharpGeneratorDriverWrapper
 
     public static implicit operator GeneratorDriverWrapper(CSharpGeneratorDriverWrapper up) => GeneratorDriverWrapper.From(up.WrappedInstance);
     public static explicit operator CSharpGeneratorDriverWrapper(GeneratorDriverWrapper down) => CSharpGeneratorDriverWrapper.From(down.WrappedInstance);
-
 }

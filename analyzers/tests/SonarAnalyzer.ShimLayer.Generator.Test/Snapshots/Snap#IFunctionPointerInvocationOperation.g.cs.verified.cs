@@ -79,5 +79,4 @@ public readonly struct IFunctionPointerInvocationOperationWrapper : IOperationWr
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

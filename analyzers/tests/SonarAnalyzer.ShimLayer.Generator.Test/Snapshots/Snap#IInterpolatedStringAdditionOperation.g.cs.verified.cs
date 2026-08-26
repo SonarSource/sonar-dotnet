@@ -79,5 +79,4 @@ public readonly struct IInterpolatedStringAdditionOperationWrapper : IOperationW
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -148,5 +148,4 @@ public readonly struct DeclarationExpressionSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -75,5 +75,4 @@ public readonly struct IConditionalAccessInstanceOperationWrapper : IOperationWr
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -63,6 +63,5 @@ public static partial class LambdaExpressionSyntaxShimExtensions
         public LambdaExpressionSyntax WithBody(CSharpSyntaxNode body) => WithBodyAccessor(wrappedInstance, body);
         public LambdaExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
         public LambdaExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
-
     }
 }

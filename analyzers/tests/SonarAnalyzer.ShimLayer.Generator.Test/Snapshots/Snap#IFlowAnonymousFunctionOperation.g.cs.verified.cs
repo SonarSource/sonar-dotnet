@@ -77,5 +77,4 @@ public readonly struct IFlowAnonymousFunctionOperationWrapper : IOperationWrappe
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

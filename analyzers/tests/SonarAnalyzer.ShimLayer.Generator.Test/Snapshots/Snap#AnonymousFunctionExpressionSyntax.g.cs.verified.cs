@@ -55,6 +55,5 @@ public static partial class AnonymousFunctionExpressionSyntaxShimExtensions
         public AnonymousFunctionExpressionSyntax WithBody(CSharpSyntaxNode body) => WithBodyAccessor(wrappedInstance, body);
         public AnonymousFunctionExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
         public AnonymousFunctionExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
-
     }
 }

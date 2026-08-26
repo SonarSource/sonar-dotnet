@@ -35,6 +35,5 @@ public static partial class CSharpParseOptionsShimExtensions
         public string Language => (string)LanguageAccessor(wrappedInstance);
         public SourceCodeKind SpecifiedKind => (SourceCodeKind)SpecifiedKindAccessor(wrappedInstance);
         public LanguageVersion SpecifiedLanguageVersion => (LanguageVersion)SpecifiedLanguageVersionAccessor(wrappedInstance);
-
     }
 }

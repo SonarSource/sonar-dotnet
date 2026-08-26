@@ -147,5 +147,4 @@ public readonly struct DiscardDesignationSyntaxWrapper
 
     public static implicit operator VariableDesignationSyntaxWrapper(DiscardDesignationSyntaxWrapper up) => VariableDesignationSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator DiscardDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => DiscardDesignationSyntaxWrapper.From(down.WrappedInstance);
-
 }

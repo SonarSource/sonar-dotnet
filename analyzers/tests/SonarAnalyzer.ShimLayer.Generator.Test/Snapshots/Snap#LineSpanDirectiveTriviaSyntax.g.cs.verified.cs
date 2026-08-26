@@ -180,5 +180,4 @@ public readonly struct LineSpanDirectiveTriviaSyntaxWrapper
 
     public static implicit operator LineOrSpanDirectiveTriviaSyntaxWrapper(LineSpanDirectiveTriviaSyntaxWrapper up) => LineOrSpanDirectiveTriviaSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator LineSpanDirectiveTriviaSyntaxWrapper(LineOrSpanDirectiveTriviaSyntaxWrapper down) => LineSpanDirectiveTriviaSyntaxWrapper.From(down.WrappedInstance);
-
 }

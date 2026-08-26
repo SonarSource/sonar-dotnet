@@ -53,5 +53,4 @@ public readonly struct GeneratorDriverRunResultWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

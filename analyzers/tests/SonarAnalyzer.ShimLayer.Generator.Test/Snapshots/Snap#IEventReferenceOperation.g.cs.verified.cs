@@ -86,5 +86,4 @@ public readonly struct IEventReferenceOperationWrapper : IOperationWrapper
 
     public static implicit operator IMemberReferenceOperationWrapper(IEventReferenceOperationWrapper up) => IMemberReferenceOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IEventReferenceOperationWrapper(IMemberReferenceOperationWrapper down) => IEventReferenceOperationWrapper.From(down.WrappedInstance);
-
 }

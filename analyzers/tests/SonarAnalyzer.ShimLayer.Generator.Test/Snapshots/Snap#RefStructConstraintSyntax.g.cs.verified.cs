@@ -151,5 +151,4 @@ public readonly struct RefStructConstraintSyntaxWrapper
 
     public static implicit operator AllowsConstraintSyntaxWrapper(RefStructConstraintSyntaxWrapper up) => AllowsConstraintSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator RefStructConstraintSyntaxWrapper(AllowsConstraintSyntaxWrapper down) => RefStructConstraintSyntaxWrapper.From(down.WrappedInstance);
-
 }

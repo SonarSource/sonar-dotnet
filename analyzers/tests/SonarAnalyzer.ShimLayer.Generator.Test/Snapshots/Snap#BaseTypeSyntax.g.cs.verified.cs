@@ -30,10 +30,8 @@ public static partial class BaseTypeSyntaxShimExtensions
 
     extension(BaseTypeSyntax wrappedInstance)
     {
-
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseTypeSyntax WithType(TypeSyntax type) => WithTypeAccessor(wrappedInstance, type);
-
     }
 }

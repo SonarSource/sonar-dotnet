@@ -39,7 +39,6 @@ public static partial class CompilationWithAnalyzersShimExtensions
 
     extension(CompilationWithAnalyzers wrappedInstance)
     {
-
         public Task<AnalysisResult> GetAnalysisResultAsync(AdditionalText file, ImmutableArray<DiagnosticAnalyzer> analyzers, CancellationToken cancellationToken) => (Task<AnalysisResult>)GetAnalysisResultAsyncAccessor(wrappedInstance, file, analyzers, cancellationToken);
         public Task<AnalysisResult> GetAnalysisResultAsync(AdditionalText file, Nullable<TextSpan> filterSpan, ImmutableArray<DiagnosticAnalyzer> analyzers, CancellationToken cancellationToken) => (Task<AnalysisResult>)GetAnalysisResultAsyncAccessor_Overload2(wrappedInstance, file, filterSpan, analyzers, cancellationToken);
         public Task<AnalysisResult> GetAnalysisResultAsync(AdditionalText file, Nullable<TextSpan> filterSpan, CancellationToken cancellationToken) => (Task<AnalysisResult>)GetAnalysisResultAsyncAccessor_Overload3(wrappedInstance, file, filterSpan, cancellationToken);
@@ -52,6 +51,5 @@ public static partial class CompilationWithAnalyzersShimExtensions
         public Task<AnalysisResult> GetAnalysisResultAsync(SyntaxTree tree, CancellationToken cancellationToken) => (Task<AnalysisResult>)GetAnalysisResultAsyncAccessor_Overload10(wrappedInstance, tree, cancellationToken);
         public Task<ImmutableArray<Diagnostic>> GetAnalyzerSyntaxDiagnosticsAsync(SyntaxTree tree, Nullable<TextSpan> filterSpan, ImmutableArray<DiagnosticAnalyzer> analyzers, CancellationToken cancellationToken) => (Task<ImmutableArray<Diagnostic>>)GetAnalyzerSyntaxDiagnosticsAsyncAccessor_Overload2(wrappedInstance, tree, filterSpan, analyzers, cancellationToken);
         public Task<ImmutableArray<Diagnostic>> GetAnalyzerSyntaxDiagnosticsAsync(SyntaxTree tree, Nullable<TextSpan> filterSpan, CancellationToken cancellationToken) => (Task<ImmutableArray<Diagnostic>>)GetAnalyzerSyntaxDiagnosticsAsyncAccessor_Overload3(wrappedInstance, tree, filterSpan, cancellationToken);
-
     }
 }

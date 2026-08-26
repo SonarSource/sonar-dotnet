@@ -57,5 +57,4 @@ public readonly struct SyntaxTreeOptionsProviderWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

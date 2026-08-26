@@ -81,5 +81,4 @@ public readonly struct ICollectionElementInitializerOperationWrapper : IOperatio
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

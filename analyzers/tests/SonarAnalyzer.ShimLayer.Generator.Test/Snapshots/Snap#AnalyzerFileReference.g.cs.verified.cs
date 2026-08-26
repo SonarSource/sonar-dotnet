@@ -29,6 +29,5 @@ public static partial class AnalyzerFileReferenceShimExtensions
     extension(AnalyzerFileReference wrappedInstance)
     {
         public IAnalyzerAssemblyLoader AssemblyLoader => (IAnalyzerAssemblyLoader)AssemblyLoaderAccessor(wrappedInstance);
-
     }
 }

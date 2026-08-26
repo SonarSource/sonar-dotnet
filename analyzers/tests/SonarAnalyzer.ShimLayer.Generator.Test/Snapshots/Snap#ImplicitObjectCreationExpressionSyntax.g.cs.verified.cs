@@ -157,5 +157,4 @@ public readonly struct ImplicitObjectCreationExpressionSyntaxWrapper
 
     public static implicit operator BaseObjectCreationExpressionSyntaxWrapper(ImplicitObjectCreationExpressionSyntaxWrapper up) => BaseObjectCreationExpressionSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ImplicitObjectCreationExpressionSyntaxWrapper(BaseObjectCreationExpressionSyntaxWrapper down) => ImplicitObjectCreationExpressionSyntaxWrapper.From(down.WrappedInstance);
-
 }

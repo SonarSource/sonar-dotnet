@@ -39,6 +39,5 @@ public static partial class StackAllocArrayCreationExpressionSyntaxShimExtension
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public StackAllocArrayCreationExpressionSyntax Update(SyntaxToken stackAllocKeyword, TypeSyntax type, InitializerExpressionSyntax initializer) => UpdateAccessor_Overload2(wrappedInstance, stackAllocKeyword, type, initializer);
         public StackAllocArrayCreationExpressionSyntax WithInitializer(InitializerExpressionSyntax initializer) => WithInitializerAccessor(wrappedInstance, initializer);
-
     }
 }

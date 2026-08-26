@@ -43,6 +43,5 @@ public static partial class CSharpCompilationOptionsShimExtensions
         public CSharpCompilationOptions WithMetadataImportOptions(MetadataImportOptions value) => WithMetadataImportOptionsAccessor(wrappedInstance, value);
         public CSharpCompilationOptions WithNullableContextOptions(NullableContextOptions options) => WithNullableContextOptionsAccessor(wrappedInstance, options);
         public CSharpCompilationOptions WithSyntaxTreeOptionsProvider(SyntaxTreeOptionsProviderWrapper provider) => WithSyntaxTreeOptionsProviderAccessor(wrappedInstance, provider);
-
     }
 }

@@ -82,5 +82,4 @@ public readonly struct IDiscardPatternOperationWrapper : IOperationWrapper
 
     public static implicit operator IPatternOperationWrapper(IDiscardPatternOperationWrapper up) => IPatternOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IDiscardPatternOperationWrapper(IPatternOperationWrapper down) => IDiscardPatternOperationWrapper.From(down.WrappedInstance);
-
 }

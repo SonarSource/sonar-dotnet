@@ -31,11 +31,9 @@ public static partial class BaseCrefParameterListSyntaxShimExtensions
 
     extension(BaseCrefParameterListSyntax wrappedInstance)
     {
-
         public BaseCrefParameterListSyntax AddParameters(CrefParameterSyntax[] items) => AddParametersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseCrefParameterListSyntax WithParameters(SeparatedSyntaxList<CrefParameterSyntax> parameters) => WithParametersAccessor(wrappedInstance, parameters);
-
     }
 }

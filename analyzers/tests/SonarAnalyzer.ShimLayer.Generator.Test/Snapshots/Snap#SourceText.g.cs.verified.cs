@@ -41,6 +41,5 @@ public static partial class SourceTextShimExtensions
         public SourceText From(TextReader reader, int length, Encoding encoding, SourceHashAlgorithm checksumAlgorithm) => FromAccessor_Overload5(wrappedInstance, reader, length, encoding, checksumAlgorithm);
         public ImmutableArray<Byte> GetChecksum() => (ImmutableArray<Byte>)GetChecksumAccessor(wrappedInstance);
         public ImmutableArray<Byte> GetContentHash() => (ImmutableArray<Byte>)GetContentHashAccessor(wrappedInstance);
-
     }
 }

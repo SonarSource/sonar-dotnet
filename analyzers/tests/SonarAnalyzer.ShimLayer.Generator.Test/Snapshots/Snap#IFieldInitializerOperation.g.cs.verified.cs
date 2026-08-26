@@ -84,5 +84,4 @@ public readonly struct IFieldInitializerOperationWrapper : IOperationWrapper
 
     public static implicit operator ISymbolInitializerOperationWrapper(IFieldInitializerOperationWrapper up) => ISymbolInitializerOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IFieldInitializerOperationWrapper(ISymbolInitializerOperationWrapper down) => IFieldInitializerOperationWrapper.From(down.WrappedInstance);
-
 }

@@ -32,12 +32,10 @@ public static partial class ConditionalDirectiveTriviaSyntaxShimExtensions
 
     extension(ConditionalDirectiveTriviaSyntax wrappedInstance)
     {
-
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ConditionalDirectiveTriviaSyntax WithCondition(ExpressionSyntax condition) => WithConditionAccessor(wrappedInstance, condition);
         public BranchingDirectiveTriviaSyntax WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken);
         public BranchingDirectiveTriviaSyntax WithHashToken(SyntaxToken hashToken) => WithHashTokenAccessor(wrappedInstance, hashToken);
-
     }
 }

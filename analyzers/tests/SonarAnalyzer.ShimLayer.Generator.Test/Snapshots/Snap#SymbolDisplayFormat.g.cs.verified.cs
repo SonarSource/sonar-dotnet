@@ -30,10 +30,8 @@ public static partial class SymbolDisplayFormatShimExtensions
 
     extension(SymbolDisplayFormat wrappedInstance)
     {
-
         public SymbolDisplayFormat RemoveGenericsOptions(SymbolDisplayGenericsOptions options) => RemoveGenericsOptionsAccessor(wrappedInstance, options);
         public SymbolDisplayFormat RemoveLocalOptions(SymbolDisplayLocalOptions options) => RemoveLocalOptionsAccessor(wrappedInstance, options);
         public SymbolDisplayFormat RemoveMiscellaneousOptions(SymbolDisplayMiscellaneousOptions options) => RemoveMiscellaneousOptionsAccessor(wrappedInstance, options);
-
     }
 }

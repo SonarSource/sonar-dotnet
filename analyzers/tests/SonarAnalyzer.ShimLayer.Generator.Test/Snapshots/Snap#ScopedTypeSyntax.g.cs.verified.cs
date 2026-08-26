@@ -157,5 +157,4 @@ public readonly struct ScopedTypeSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

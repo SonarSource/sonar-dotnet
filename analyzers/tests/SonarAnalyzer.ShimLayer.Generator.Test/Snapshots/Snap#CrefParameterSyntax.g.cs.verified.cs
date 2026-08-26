@@ -43,6 +43,5 @@ public static partial class CrefParameterSyntaxShimExtensions
         public CrefParameterSyntax Update(SyntaxToken refKindKeyword, SyntaxToken readOnlyKeyword, TypeSyntax type) => UpdateAccessor_Overload2(wrappedInstance, refKindKeyword, readOnlyKeyword, type);
         public CrefParameterSyntax WithReadOnlyKeyword(SyntaxToken readOnlyKeyword) => WithReadOnlyKeywordAccessor(wrappedInstance, readOnlyKeyword);
         public CrefParameterSyntax WithRefKindKeyword(SyntaxToken refKindKeyword) => WithRefKindKeywordAccessor(wrappedInstance, refKindKeyword);
-
     }
 }

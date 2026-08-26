@@ -82,5 +82,4 @@ public readonly struct IDefaultCaseClauseOperationWrapper : IOperationWrapper
 
     public static implicit operator ICaseClauseOperationWrapper(IDefaultCaseClauseOperationWrapper up) => ICaseClauseOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IDefaultCaseClauseOperationWrapper(ICaseClauseOperationWrapper down) => IDefaultCaseClauseOperationWrapper.From(down.WrappedInstance);
-
 }

@@ -47,5 +47,4 @@ public readonly struct SyntaxTokenParserWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

@@ -161,5 +161,4 @@ public readonly struct IgnoredDirectiveTriviaSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

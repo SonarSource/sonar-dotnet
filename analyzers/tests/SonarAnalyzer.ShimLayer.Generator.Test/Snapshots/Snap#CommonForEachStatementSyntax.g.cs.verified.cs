@@ -174,5 +174,4 @@ public readonly struct CommonForEachStatementSyntaxWrapper
         WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator CommonForEachStatementSyntaxWrapper(ForEachStatementSyntax instance) => new(instance);
-
 }

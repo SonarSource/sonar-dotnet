@@ -35,6 +35,5 @@ public static partial class SyntaxTreeShimExtensions
 
         [System.ObsoleteAttribute("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", false)]
         public SyntaxTree WithDiagnosticOptions(ImmutableDictionary<string, ReportDiagnostic> options) => WithDiagnosticOptionsAccessor(wrappedInstance, options);
-
     }
 }

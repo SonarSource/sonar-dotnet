@@ -88,5 +88,4 @@ public readonly struct IPropertyReferenceOperationWrapper : IOperationWrapper
 
     public static implicit operator IMemberReferenceOperationWrapper(IPropertyReferenceOperationWrapper up) => IMemberReferenceOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IPropertyReferenceOperationWrapper(IMemberReferenceOperationWrapper down) => IPropertyReferenceOperationWrapper.From(down.WrappedInstance);
-
 }

@@ -156,5 +156,4 @@ public readonly struct BaseParameterSyntaxWrapper
         WrappedType.CanWrap(CanWrapCache, instance);
 
     public static implicit operator BaseParameterSyntaxWrapper(ParameterSyntax instance) => new(instance);
-
 }

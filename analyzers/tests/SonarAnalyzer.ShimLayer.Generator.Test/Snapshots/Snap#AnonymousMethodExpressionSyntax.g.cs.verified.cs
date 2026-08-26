@@ -49,6 +49,5 @@ public static partial class AnonymousMethodExpressionSyntaxShimExtensions
         public AnonymousMethodExpressionSyntax Update(SyntaxTokenList modifiers, SyntaxToken delegateKeyword, ParameterListSyntax parameterList, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload3(wrappedInstance, modifiers, delegateKeyword, parameterList, block, expressionBody);
         public AnonymousMethodExpressionSyntax WithExpressionBody(ExpressionSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
         public AnonymousMethodExpressionSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
-
     }
 }

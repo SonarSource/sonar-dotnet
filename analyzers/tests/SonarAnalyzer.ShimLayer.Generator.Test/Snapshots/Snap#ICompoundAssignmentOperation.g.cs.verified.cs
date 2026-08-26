@@ -92,5 +92,4 @@ public readonly struct ICompoundAssignmentOperationWrapper : IOperationWrapper
 
     public static implicit operator IAssignmentOperationWrapper(ICompoundAssignmentOperationWrapper up) => IAssignmentOperationWrapper.From(up.WrappedInstance);
     public static explicit operator ICompoundAssignmentOperationWrapper(IAssignmentOperationWrapper down) => ICompoundAssignmentOperationWrapper.From(down.WrappedInstance);
-
 }

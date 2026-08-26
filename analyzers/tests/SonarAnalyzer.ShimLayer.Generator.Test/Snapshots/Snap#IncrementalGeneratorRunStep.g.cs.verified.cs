@@ -55,5 +55,4 @@ public readonly struct IncrementalGeneratorRunStepWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

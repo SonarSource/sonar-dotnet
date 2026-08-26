@@ -29,9 +29,7 @@ public static partial class EndRegionDirectiveTriviaSyntaxShimExtensions
 
     extension(EndRegionDirectiveTriviaSyntax wrappedInstance)
     {
-
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-
     }
 }

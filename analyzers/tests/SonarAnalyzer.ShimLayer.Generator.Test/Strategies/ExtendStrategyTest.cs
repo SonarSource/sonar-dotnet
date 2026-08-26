@@ -85,7 +85,6 @@ public class ExtendStrategyTest
                     public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(wrappedInstance);
 
                     public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => (ClassDeclarationSyntax)AddParameterListParametersAccessor(wrappedInstance, items);
-
                 }
             }
             """);
@@ -130,9 +129,7 @@ public class ExtendStrategyTest
 
                 extension(ClassDeclarationSyntax wrappedInstance)
                 {
-
                     public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => (ClassDeclarationSyntax)AddParameterListParametersAccessor(wrappedInstance, items);
-
                 }
             }
             """);
@@ -180,7 +177,6 @@ public class ExtendStrategyTest
                 {
                     [System.ComponentModel.EditorAttribute("System.Diagnostics.Design.StartFileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
                     public string FileName => (string)FileNameAccessor(wrappedInstance);
-
                 }
             }
             """);

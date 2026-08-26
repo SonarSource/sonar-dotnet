@@ -82,5 +82,4 @@ public readonly struct IDeconstructionAssignmentOperationWrapper : IOperationWra
 
     public static implicit operator IAssignmentOperationWrapper(IDeconstructionAssignmentOperationWrapper up) => IAssignmentOperationWrapper.From(up.WrappedInstance);
     public static explicit operator IDeconstructionAssignmentOperationWrapper(IAssignmentOperationWrapper down) => IDeconstructionAssignmentOperationWrapper.From(down.WrappedInstance);
-
 }

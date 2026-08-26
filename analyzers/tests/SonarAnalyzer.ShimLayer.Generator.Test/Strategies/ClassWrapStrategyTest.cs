@@ -79,7 +79,6 @@ public class ClassWrapStrategyTest
 
                 public static bool IsInstance(GeneratorDriver instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -148,7 +147,6 @@ public class ClassWrapStrategyTest
 
                 public static implicit operator GeneratorDriverWrapper(CSharpGeneratorDriverWrapper up) => GeneratorDriverWrapper.From(up.WrappedInstance);
                 public static explicit operator CSharpGeneratorDriverWrapper(GeneratorDriverWrapper down) => CSharpGeneratorDriverWrapper.From(down.WrappedInstance);
-
             }
             """);
     }
@@ -221,7 +219,6 @@ public class ClassWrapStrategyTest
 
                 public static bool IsInstance(GeneratorDriver instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -287,7 +284,6 @@ public class ClassWrapStrategyTest
 
                 public static bool IsInstance(Object instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -356,7 +352,6 @@ public class ClassWrapStrategyTest
 
                 public static bool IsInstance(Object instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }

@@ -157,5 +157,4 @@ public readonly struct ParenthesizedVariableDesignationSyntaxWrapper
 
     public static implicit operator VariableDesignationSyntaxWrapper(ParenthesizedVariableDesignationSyntaxWrapper up) => VariableDesignationSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator ParenthesizedVariableDesignationSyntaxWrapper(VariableDesignationSyntaxWrapper down) => ParenthesizedVariableDesignationSyntaxWrapper.From(down.WrappedInstance);
-
 }

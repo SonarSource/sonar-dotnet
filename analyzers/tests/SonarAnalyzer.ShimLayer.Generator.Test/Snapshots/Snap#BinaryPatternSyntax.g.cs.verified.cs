@@ -158,5 +158,4 @@ public readonly struct BinaryPatternSyntaxWrapper
 
     public static implicit operator ExpressionOrPatternSyntaxWrapper(BinaryPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator BinaryPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => BinaryPatternSyntaxWrapper.From(down.WrappedInstance);
-
 }

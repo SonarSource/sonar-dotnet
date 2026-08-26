@@ -59,6 +59,5 @@ public static partial class CompilationOptionsShimExtensions
         public CompilationOptions WithOverflowChecks(bool checkOverflow) => WithOverflowChecksAccessor(wrappedInstance, checkOverflow);
         public CompilationOptions WithScriptClassName(string scriptClassName) => WithScriptClassNameAccessor(wrappedInstance, scriptClassName);
         public CompilationOptions WithSyntaxTreeOptionsProvider(SyntaxTreeOptionsProviderWrapper provider) => WithSyntaxTreeOptionsProviderAccessor(wrappedInstance, provider);
-
     }
 }

@@ -160,5 +160,4 @@ public readonly struct LineDirectivePositionSyntaxWrapper
 
     public static bool IsInstance(SyntaxNode instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

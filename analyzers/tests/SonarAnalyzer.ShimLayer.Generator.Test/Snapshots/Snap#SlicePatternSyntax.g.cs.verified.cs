@@ -154,5 +154,4 @@ public readonly struct SlicePatternSyntaxWrapper
 
     public static implicit operator ExpressionOrPatternSyntaxWrapper(SlicePatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator SlicePatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => SlicePatternSyntaxWrapper.From(down.WrappedInstance);
-
 }

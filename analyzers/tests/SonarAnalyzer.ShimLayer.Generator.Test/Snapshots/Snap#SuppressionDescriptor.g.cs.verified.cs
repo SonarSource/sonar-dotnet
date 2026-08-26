@@ -55,5 +55,4 @@ public readonly struct SuppressionDescriptorWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

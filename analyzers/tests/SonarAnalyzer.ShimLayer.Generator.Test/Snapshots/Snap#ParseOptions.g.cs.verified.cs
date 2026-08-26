@@ -33,6 +33,5 @@ public static partial class ParseOptionsShimExtensions
         public ImmutableArray<Diagnostic> Errors => (ImmutableArray<Diagnostic>)ErrorsAccessor(wrappedInstance);
         public string Language => (string)LanguageAccessor(wrappedInstance);
         public SourceCodeKind SpecifiedKind => (SourceCodeKind)SpecifiedKindAccessor(wrappedInstance);
-
     }
 }

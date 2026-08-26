@@ -47,5 +47,4 @@ public readonly struct OperationVisitorWrapper
 
     public static bool IsInstance(Object instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

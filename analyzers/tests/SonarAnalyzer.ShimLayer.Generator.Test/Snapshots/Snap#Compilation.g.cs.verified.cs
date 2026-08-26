@@ -50,7 +50,6 @@ public static partial class CompilationShimExtensions
 
     extension(Compilation wrappedInstance)
     {
-
         public bool ContainsSymbolsWithName(string name, SymbolFilter filter, CancellationToken cancellationToken) => (bool)ContainsSymbolsWithNameAccessor_Overload2(wrappedInstance, name, filter, cancellationToken);
         public INamedTypeSymbol CreateAnonymousTypeSymbol(ImmutableArray<ITypeSymbol> memberTypes, ImmutableArray<string> memberNames, ImmutableArray<bool> memberIsReadOnly, ImmutableArray<Location> memberLocations) => (INamedTypeSymbol)CreateAnonymousTypeSymbolAccessor(wrappedInstance, memberTypes, memberNames, memberIsReadOnly, memberLocations);
         public INamedTypeSymbol CreateAnonymousTypeSymbol(ImmutableArray<ITypeSymbol> memberTypes, ImmutableArray<string> memberNames, ImmutableArray<bool> memberIsReadOnly, ImmutableArray<Location> memberLocations, ImmutableArray<NullableAnnotation> memberNullableAnnotations) => (INamedTypeSymbol)CreateAnonymousTypeSymbolAccessor_Overload2(wrappedInstance, memberTypes, memberNames, memberIsReadOnly, memberLocations, memberNullableAnnotations);
@@ -74,6 +73,5 @@ public static partial class CompilationShimExtensions
         public bool HasImplicitConversion(ITypeSymbol fromType, ITypeSymbol toType) => (bool)HasImplicitConversionAccessor(wrappedInstance, fromType, toType);
         public bool IsSymbolAccessibleWithin(ISymbol symbol, ISymbol within, ITypeSymbol throughType) => (bool)IsSymbolAccessibleWithinAccessor(wrappedInstance, symbol, within, throughType);
         public bool SupportsRuntimeCapability(RuntimeCapability capability) => (bool)SupportsRuntimeCapabilityAccessor(wrappedInstance, capability);
-
     }
 }

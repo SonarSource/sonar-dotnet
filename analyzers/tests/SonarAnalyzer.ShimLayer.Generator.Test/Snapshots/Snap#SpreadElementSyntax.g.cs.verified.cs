@@ -151,5 +151,4 @@ public readonly struct SpreadElementSyntaxWrapper
 
     public static implicit operator CollectionElementSyntaxWrapper(SpreadElementSyntaxWrapper up) => CollectionElementSyntaxWrapper.From(up.WrappedInstance);
     public static explicit operator SpreadElementSyntaxWrapper(CollectionElementSyntaxWrapper down) => SpreadElementSyntaxWrapper.From(down.WrappedInstance);
-
 }

@@ -83,5 +83,4 @@ public readonly struct IInterpolatedStringHandlerCreationOperationWrapper : IOpe
 
     public static bool IsInstance(IOperation instance) =>
         WrappedType.CanWrap(CanWrapCache, instance);
-
 }

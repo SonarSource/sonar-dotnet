@@ -96,7 +96,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static bool IsInstance(SyntaxNode instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -196,7 +195,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static bool IsInstance(SyntaxNode instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -281,7 +279,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static bool IsInstance(SyntaxNode instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -366,7 +363,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static implicit operator ExpressionOrPatternSyntaxWrapper(ConstantPatternSyntaxWrapper up) => ExpressionOrPatternSyntaxWrapper.From(up.WrappedInstance);
                 public static explicit operator ConstantPatternSyntaxWrapper(ExpressionOrPatternSyntaxWrapper down) => ConstantPatternSyntaxWrapper.From(down.WrappedInstance);
-
             }
             """);
     }
@@ -445,7 +441,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static bool IsInstance(SyntaxNode instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -534,7 +529,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static bool IsInstance(SyntaxNode instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -627,7 +621,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 public static bool IsInstance(SyntaxNode instance) =>
                     WrappedType.CanWrap(CanWrapCache, instance);
-
             }
             """);
     }
@@ -706,7 +699,6 @@ public class SyntaxNodeWrapStrategyTest
                     WrappedType.CanWrap(CanWrapCache, instance);
 
                 public static implicit operator BaseNamespaceDeclarationSyntaxWrapper(NamespaceDeclarationSyntax instance) => new(instance);
-
             }
             """);
     }

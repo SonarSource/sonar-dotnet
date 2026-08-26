@@ -29,6 +29,5 @@ public static partial class AnalyzerOptionsShimExtensions
     extension(AnalyzerOptions wrappedInstance)
     {
         public AnalyzerConfigOptionsProviderWrapper AnalyzerConfigOptionsProvider => AnalyzerConfigOptionsProviderWrapper.From(AnalyzerConfigOptionsProviderAccessor(wrappedInstance));
-
     }
 }

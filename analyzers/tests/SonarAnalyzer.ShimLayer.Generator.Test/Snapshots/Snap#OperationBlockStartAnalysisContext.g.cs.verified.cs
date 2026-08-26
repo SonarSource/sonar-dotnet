@@ -37,6 +37,5 @@ public static partial class OperationBlockStartAnalysisContextShimExtensions
         public bool IsGeneratedCode => (bool)IsGeneratedCodeAccessor(wrappedInstance);
 
         public ControlFlowGraphWrapper GetControlFlowGraph(IOperation operationBlock) => ControlFlowGraphWrapper.From(GetControlFlowGraphAccessor(wrappedInstance, operationBlock));
-
     }
 }
