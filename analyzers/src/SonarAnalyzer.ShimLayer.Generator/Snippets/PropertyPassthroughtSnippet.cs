@@ -26,6 +26,6 @@ public sealed class PropertyPassthroughSnippet : Snippet<PropertyInfo>
 
     public override string MemberDeclaration(int indentSize) =>
         $"""
-        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.CompiletimeTypeSnippet()} {member.Name} => wrappedInstance.{member.Name};
+        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.CompiletimeTypeSnippet} {member.Name} => wrappedInstance.{member.Name};
         """;
 }

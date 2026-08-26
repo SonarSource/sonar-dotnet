@@ -22,18 +22,14 @@ public class ArrayStrategy : Strategy
     private readonly string type;
 
     public override bool IsSupported { get; }
+    public override string ReturnTypeSnippet => type ?? throw new NotSupportedException();
+    public override string CompiletimeTypeSnippet => type ?? throw new NotSupportedException();
 
     public ArrayStrategy(Type latest, Strategy elementType) : base(latest)
     {
         IsSupported = elementType.IsSupported;
-        type = IsSupported ? $"{elementType.ReturnTypeSnippet()}[]" : null;
+        type = IsSupported ? $"{elementType.ReturnTypeSnippet}[]" : null;
     }
-
-    public override string ReturnTypeSnippet() =>
-        type ?? throw new NotSupportedException();
-
-    public override string CompiletimeTypeSnippet() =>
-        type ?? throw new NotSupportedException();
 
     public override string ToConversionSnippet(string from) =>
         type is null

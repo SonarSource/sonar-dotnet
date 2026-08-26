@@ -22,20 +22,17 @@ public class SeparatedSyntaxListStrategy : Strategy
     private readonly string type;
     private readonly Strategy typeArgument;
 
+    public override string ReturnTypeSnippet => $"{type}<{typeArgument.ReturnTypeSnippet}>";
+    public override string CompiletimeTypeSnippet => ReturnTypeSnippet;
+
     public SeparatedSyntaxListStrategy(Type latest, Strategy typeArgument) : base(latest)
     {
         type = latest.Name.Replace("`1", "Wrapper");
         this.typeArgument = typeArgument;
     }
 
-    public override string ReturnTypeSnippet() =>
-        $"{type}<{typeArgument.ReturnTypeSnippet()}>";
-
     public override string ToConversionSnippet(string from) =>
         from;
-
-    public override string CompiletimeTypeSnippet() =>
-        ReturnTypeSnippet();
 
     protected override string GenerateCore(StrategyModel model) => null;
 }

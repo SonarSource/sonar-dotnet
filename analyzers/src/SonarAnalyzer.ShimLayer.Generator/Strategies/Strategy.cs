@@ -26,19 +26,17 @@ public abstract class Strategy
     private static readonly Regex EmptyLineAfterBlockStart = new(@"{\n\s*\n", RegexOptions.None, TimeSpan.FromMilliseconds(100));
     private static readonly Regex EmptyLineBeforeBlockEnd = new(@"\n\s*\n(?=\s*})", RegexOptions.None, TimeSpan.FromMilliseconds(100));
 
-    public abstract string ReturnTypeSnippet();
+    public abstract string ReturnTypeSnippet { get; }
     public abstract string ToConversionSnippet(string from);
     protected abstract string GenerateCore(StrategyModel model);
 
     public virtual bool IsSupported => true;
+    public virtual string CompiletimeTypeSnippet => Latest.Name;
 
     public Type Latest { get; }
 
     protected Strategy(Type latest) =>
         Latest = latest;
-
-    public virtual string CompiletimeTypeSnippet() =>
-        Latest.Name;
 
     public string Generate(StrategyModel model)
     {

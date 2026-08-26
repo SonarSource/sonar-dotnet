@@ -23,7 +23,7 @@ public class OperationWrapStrategy : WrapStrategy
     protected override string FromTypeName => "IOperation";
 
     protected override string ConversionSnippet => $"""
-            public static {ReturnTypeSnippet()}? FromOrDefault(IOperation instance) =>
+            public static {ReturnTypeSnippet}? FromOrDefault(IOperation instance) =>
                 IsInstance(instance) ? From(instance) : null;
         """;
 

@@ -29,7 +29,7 @@ public sealed class IOperationStrategy : ExtendStrategy
 
     protected override string AdditionalMembers(StrategyModel model)
     {
-        var operations = model.OfType<OperationWrapStrategy>().OrderBy(x => x.ReturnTypeSnippet()).ToArray();
+        var operations = model.OfType<OperationWrapStrategy>().OrderBy(x => x.ReturnTypeSnippet).ToArray();
         return $"""
             {JoinLines(operations.Select(AsOperationMethod))}
 
@@ -39,12 +39,12 @@ public sealed class IOperationStrategy : ExtendStrategy
 
     private static string AsOperationMethod(OperationWrapStrategy strategy) =>
         $"""
-                public {strategy.ReturnTypeSnippet()}? As{ShortName(strategy)} => {strategy.ReturnTypeSnippet()}.FromOrDefault(wrappedInstance);
+                public {strategy.ReturnTypeSnippet}? As{ShortName(strategy)} => {strategy.ReturnTypeSnippet}.FromOrDefault(wrappedInstance);
         """;
 
     private static string ToOperationMethod(OperationWrapStrategy strategy) =>
         $"""
-                public {strategy.ReturnTypeSnippet()} To{ShortName(strategy)}() => {strategy.ReturnTypeSnippet()}.From(wrappedInstance);
+                public {strategy.ReturnTypeSnippet} To{ShortName(strategy)}() => {strategy.ReturnTypeSnippet}.From(wrappedInstance);
         """;
 
     private static string ShortName(OperationWrapStrategy strategy) =>

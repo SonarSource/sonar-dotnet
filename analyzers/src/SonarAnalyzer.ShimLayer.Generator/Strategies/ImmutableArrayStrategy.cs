@@ -22,20 +22,17 @@ public class ImmutableArrayStrategy : Strategy
     private readonly string type;
     private readonly Strategy typeArgument;
 
+    public override string ReturnTypeSnippet => $"{type}<{typeArgument.ReturnTypeSnippet}>";
+    public override string CompiletimeTypeSnippet => ReturnTypeSnippet;
+
     public ImmutableArrayStrategy(Type latest, Strategy typeArgument) : base(latest)
     {
         type = latest.Name.Replace("`1", null);
         this.typeArgument = typeArgument;
     }
 
-    public override string ReturnTypeSnippet() =>
-        CompiletimeTypeSnippet();
-
     public override string ToConversionSnippet(string from) =>
         from;
-
-    public override string CompiletimeTypeSnippet() =>
-        $"{type}<{typeArgument.ReturnTypeSnippet()}>";
 
     protected override string GenerateCore(StrategyModel model) => null;
 }

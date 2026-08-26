@@ -28,7 +28,7 @@ public class GenericTypeStrategyTest
         var sut = new GenericTypeStrategy(typeof(List<int>), [new NoChangeStrategy(typeof(int))]);
         sut.IsSupported.Should().BeTrue();
         sut.Generate([]).Should().BeNull();
-        sut.CompiletimeTypeSnippet().Should().Be("List<Int32>");
+        sut.CompiletimeTypeSnippet.Should().Be("List<Int32>");
     }
 
     [TestMethod]
@@ -53,7 +53,7 @@ public class GenericTypeStrategyTest
         var sut = new GenericTypeStrategy(typeof(Dictionary<int, string>), [new NoChangeStrategy(typeof(int)), new NoChangeStrategy(typeof(string))]);
         sut.IsSupported.Should().BeTrue();
         sut.Generate([]).Should().BeNull();
-        sut.CompiletimeTypeSnippet().Should().Be("Dictionary<Int32, String>");
+        sut.CompiletimeTypeSnippet.Should().Be("Dictionary<Int32, String>");
     }
 
     [TestMethod]

@@ -21,11 +21,10 @@ public class PartialEnumStrategy : Strategy
 {
     public FieldInfo[] Fields { get; }
 
+    public override string ReturnTypeSnippet => Latest.Name;
+
     public PartialEnumStrategy(Type latest, FieldInfo[] fields) : base(latest) =>
         Fields = fields;
-
-    public override string ReturnTypeSnippet() =>
-        Latest.Name;
 
     public override string ToConversionSnippet(string from) =>
         $"({Latest.Name}){from}";

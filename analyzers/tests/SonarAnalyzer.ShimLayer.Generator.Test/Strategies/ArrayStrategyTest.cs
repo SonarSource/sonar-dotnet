@@ -28,7 +28,7 @@ public class ArrayStrategyTest
     {
         var sut = new ArrayStrategy(typeof(SyntaxNode[]), new ExtendStrategy(typeof(SyntaxNode), []));
         sut.IsSupported.Should().BeTrue();
-        sut.ReturnTypeSnippet().Should().Be("SyntaxNode[]");
+        sut.ReturnTypeSnippet.Should().Be("SyntaxNode[]");
     }
 
     [TestMethod]
@@ -36,7 +36,7 @@ public class ArrayStrategyTest
     {
         var sut = new ArrayStrategy(typeof(TupleTypeSyntax[]), new SyntaxNodeWrapStrategy(typeof(TupleTypeSyntax), typeof(CSharpSyntaxNode), null, []));
         sut.IsSupported.Should().BeTrue();
-        sut.ReturnTypeSnippet().Should().Be("TupleTypeSyntaxWrapper[]");
+        sut.ReturnTypeSnippet.Should().Be("TupleTypeSyntaxWrapper[]");
     }
 
     [TestMethod]
@@ -44,8 +44,8 @@ public class ArrayStrategyTest
     {
         var sut = new ArrayStrategy(typeof(Action[]), new SkipStrategy(typeof(Action)));
         sut.IsSupported.Should().BeFalse();
-        sut.Invoking(x => x.ReturnTypeSnippet()).Should().Throw<NotSupportedException>();
-        sut.Invoking(x => x.CompiletimeTypeSnippet()).Should().Throw<NotSupportedException>();
+        sut.Invoking(x => x.ReturnTypeSnippet).Should().Throw<NotSupportedException>();
+        sut.Invoking(x => x.CompiletimeTypeSnippet).Should().Throw<NotSupportedException>();
         sut.Invoking(x => x.ToConversionSnippet("from")).Should().Throw<NotSupportedException>();
     }
 }

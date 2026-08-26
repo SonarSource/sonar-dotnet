@@ -23,11 +23,11 @@ public sealed class PropertyWrapSnippet : Snippet<PropertyInfo>
 
     public override string AccessorDeclaration() =>
         $"""
-            private static readonly Func<{strategy.CompiletimeTypeSnippet()}, {returnType.CompiletimeTypeSnippet()}> {accessorName} = AccessorFactory.CreateProperty<Func<{strategy.CompiletimeTypeSnippet()}, {returnType.CompiletimeTypeSnippet()}>>(WrappedType, "{member.Name}");
+            private static readonly Func<{strategy.CompiletimeTypeSnippet}, {returnType.CompiletimeTypeSnippet}> {accessorName} = AccessorFactory.CreateProperty<Func<{strategy.CompiletimeTypeSnippet}, {returnType.CompiletimeTypeSnippet}>>(WrappedType, "{member.Name}");
         """;
 
     public override string MemberDeclaration(int indentSize) =>
         $"""
-        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet()} {member.Name} => {returnType.ToConversionSnippet($"{accessorName}(wrappedInstance)")};
+        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet} {member.Name} => {returnType.ToConversionSnippet($"{accessorName}(wrappedInstance)")};
         """;
 }

@@ -29,7 +29,7 @@ public class SkipStrategyTest
 
     [TestMethod]
     public void ReturnTypeSnippet() =>
-        new SkipStrategy(typeof(SyntaxNode)).Invoking(x => x.ReturnTypeSnippet()).Should().Throw<NotSupportedException>();
+        new SkipStrategy(typeof(SyntaxNode)).Invoking(x => x.ReturnTypeSnippet).Should().Throw<NotSupportedException>();
 
     [TestMethod]
     public void ToConversionSnippet() =>

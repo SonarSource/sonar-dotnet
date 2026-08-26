@@ -21,14 +21,11 @@ public class PrimitiveStrategy : Strategy
 {
     private readonly string name;
 
+    public override string ReturnTypeSnippet => name;
+    public override string CompiletimeTypeSnippet => name;
+
     public PrimitiveStrategy(Type latest, string name) : base(latest) =>
         this.name = name;
-
-    public override string ReturnTypeSnippet() =>
-        name;
-
-    public override string CompiletimeTypeSnippet() =>
-        name;
 
     public override string ToConversionSnippet(string from) =>
         $"({name}){from}";

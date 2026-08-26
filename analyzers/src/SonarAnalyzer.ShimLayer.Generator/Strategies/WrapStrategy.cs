@@ -25,6 +25,8 @@ public abstract class WrapStrategy : MemberStrategy
 
     public Type BaseType { get; }
     public Type FallbackBaseType { get; }
+    public override string ReturnTypeSnippet => $"{Latest.Name}Wrapper";
+    public override string CompiletimeTypeSnippet => BaseType.Name;
 
     protected WrapStrategy(Type latest, Type baseType, Type fallbackBaseType, MemberDescriptor[] members) : base(latest, members)
     {
@@ -32,14 +34,8 @@ public abstract class WrapStrategy : MemberStrategy
         FallbackBaseType = fallbackBaseType;
     }
 
-    public override string ReturnTypeSnippet() =>
-        $"{Latest.Name}Wrapper";
-
     public override string ToConversionSnippet(string from) =>
         $"{Latest.Name}Wrapper.From({from})";
-
-    public override string CompiletimeTypeSnippet() =>
-        BaseType.Name;
 
     protected override string GenerateCore(StrategyModel model)
     {
@@ -47,20 +43,20 @@ public abstract class WrapStrategy : MemberStrategy
         var wrap = WrapMembers(model);
         return $$"""
             {{Preamble()}}
-            public readonly struct {{Latest.Name}}Wrapper{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
+            public readonly struct {{ReturnTypeSnippet}}{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("{{Latest.FullName}}"{{FallbackBaseTypeSnippet()}});
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
-                private readonly {{CompiletimeTypeSnippet()}} wrappedInstance;
+                private readonly {{CompiletimeTypeSnippet}} wrappedInstance;
 
             {{JoinLines(wrap.Properties.Select(x => x.AccessorDeclaration()))}}
 
             {{JoinLines(wrap.Methods.Select(x => x.AccessorDeclaration()))}}
 
-                private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
+                private {{ReturnTypeSnippet}}({{CompiletimeTypeSnippet}} wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
-                public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
+                public {{CompiletimeTypeSnippet}} WrappedInstance => wrappedInstance;
 
             {{JoinLines(passthrough.Properties.Select(x => x.MemberDeclaration(4)))}}
 
@@ -72,7 +68,7 @@ public abstract class WrapStrategy : MemberStrategy
 
             {{ConversionSnippet}}
 
-                public static {{Latest.Name}}Wrapper From({{FromTypeName}} instance)
+                public static {{ReturnTypeSnippet}} From({{FromTypeName}} instance)
                 {
                     if (instance is null)
                     {
@@ -80,7 +76,7 @@ public abstract class WrapStrategy : MemberStrategy
                     }
                     else if (IsInstance(instance))
                     {
-                        return new {{Latest.Name}}Wrapper(({{CompiletimeTypeSnippet()}})instance);
+                        return new {{ReturnTypeSnippet}}(({{CompiletimeTypeSnippet}})instance);
                     }
                     else
                     {
@@ -120,8 +116,8 @@ public abstract class WrapStrategy : MemberStrategy
         {
             sb ??= new StringBuilder();
             sb.AppendLine($"""
-                    public static implicit operator {baseType}Wrapper({Latest.Name}Wrapper up) => {baseType}Wrapper.From(up.WrappedInstance);
-                    public static explicit operator {Latest.Name}Wrapper({baseType}Wrapper down) => {Latest.Name}Wrapper.From(down.WrappedInstance);
+                    public static implicit operator {baseType}Wrapper({ReturnTypeSnippet} up) => {baseType}Wrapper.From(up.WrappedInstance);
+                    public static explicit operator {ReturnTypeSnippet}({baseType}Wrapper down) => {ReturnTypeSnippet}.From(down.WrappedInstance);
 
                 """);
         }
@@ -138,5 +134,5 @@ public abstract class WrapStrategy : MemberStrategy
     private string FallbackBaseTypeConversionSnippet() =>
         FallbackBaseType is null
             ? null
-            : $"""    public static implicit operator {Latest.Name}Wrapper({FallbackBaseType.Name} instance) => new(instance);""";
+            : $"""    public static implicit operator {ReturnTypeSnippet}({FallbackBaseType.Name} instance) => new(instance);""";
 }

@@ -19,10 +19,9 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class ExtendStrategy : MemberStrategy
 {
-    public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
+    public override string ReturnTypeSnippet => Latest.Name;
 
-    public override string ReturnTypeSnippet() =>
-        Latest.Name;
+    public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
 
     public override string ToConversionSnippet(string from) =>
         from;
@@ -35,13 +34,13 @@ public class ExtendStrategy : MemberStrategy
                 {{Preamble($"using {Latest.Namespace};")}}
                 public static partial class {{Latest.Name}}ShimExtensions
                 {
-                    private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet()}});
+                    private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet}});
 
                 {{JoinLines(wrap.Properties.Select(x => x.AccessorDeclaration()))}}
 
                 {{JoinLines(wrap.Methods.Select(x => x.AccessorDeclaration()))}}
 
-                    extension({{CompiletimeTypeSnippet()}} wrappedInstance)
+                    extension({{CompiletimeTypeSnippet}} wrappedInstance)
                     {
                 {{JoinLines(wrap.Properties.Select(x => x.MemberDeclaration(8)))}}
 

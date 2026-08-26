@@ -34,7 +34,7 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
 
     public sealed override string MemberDeclaration(int indentSize) =>
         $"""
-        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet()} {member.Name}({parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
+        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet} {member.Name}({parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
         """;
 
     protected static string SerializeParameterArgument(ParameterInfo parameter)
@@ -47,7 +47,7 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
     {
         var prefix = parameter.IsOut ? "out " : null;
         var underlyingType = parameter.IsOut ? parameter.ParameterType.GetElementType() : parameter.ParameterType;
-        return $"{prefix}{model[underlyingType].ReturnTypeSnippet()} {SerializeParameterName(parameter)}";
+        return $"{prefix}{model[underlyingType].ReturnTypeSnippet} {SerializeParameterName(parameter)}";
     }
 
     private static string SerializeParameterName(ParameterInfo parameter) =>
