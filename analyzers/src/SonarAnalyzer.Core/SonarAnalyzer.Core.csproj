@@ -21,7 +21,7 @@
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CommonsConfigurations" Version="2.29.0.5138" GeneratePathProperty="true" PrivateAssets="all" />
+    <PackageReference Include="SonarAnalyzer.CommonsConfigurations" Version="2.30.0.5193" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
