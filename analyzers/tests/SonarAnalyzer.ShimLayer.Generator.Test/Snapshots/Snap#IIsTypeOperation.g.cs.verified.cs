@@ -51,7 +51,7 @@ public readonly struct IIsTypeOperationWrapper : IOperationWrapper
     public bool IsNegated => (bool)IsNegatedAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public ITypeSymbol TypeOperand => (ITypeSymbol)TypeOperandAccessor(wrappedInstance);
     public IOperation ValueOperand => ValueOperandAccessor(wrappedInstance);
 

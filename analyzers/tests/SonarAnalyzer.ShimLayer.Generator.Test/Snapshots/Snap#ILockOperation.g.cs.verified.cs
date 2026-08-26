@@ -51,7 +51,7 @@ public readonly struct ILockOperationWrapper : IOperationWrapper
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation LockedValue => LockedValueAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

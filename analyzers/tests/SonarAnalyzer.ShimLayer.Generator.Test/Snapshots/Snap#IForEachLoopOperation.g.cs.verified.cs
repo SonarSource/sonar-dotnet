@@ -65,7 +65,7 @@ public readonly struct IForEachLoopOperationWrapper : IOperationWrapper
     public LoopKind LoopKind => (LoopKind)LoopKindAccessor(wrappedInstance);
     public ImmutableArray<IOperation> NextVariables => (ImmutableArray<IOperation>)NextVariablesAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

@@ -52,7 +52,7 @@ public readonly struct IVariableDeclaratorOperationWrapper : IOperationWrapper
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public ILocalSymbol Symbol => (ILocalSymbol)SymbolAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);

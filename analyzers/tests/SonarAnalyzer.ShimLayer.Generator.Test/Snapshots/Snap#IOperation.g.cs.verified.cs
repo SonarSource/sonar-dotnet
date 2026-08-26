@@ -39,7 +39,7 @@ public static partial class IOperationShimExtensions
         public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
         public string Language => (string)LanguageAccessor(wrappedInstance);
         public IOperation Parent => ParentAccessor(wrappedInstance);
-        public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+        public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
         public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

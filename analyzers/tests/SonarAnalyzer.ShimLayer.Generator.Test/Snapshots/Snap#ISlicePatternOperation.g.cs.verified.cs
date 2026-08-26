@@ -54,7 +54,7 @@ public readonly struct ISlicePatternOperationWrapper : IOperationWrapper
     public ITypeSymbol NarrowedType => (ITypeSymbol)NarrowedTypeAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IPatternOperationWrapper Pattern => IPatternOperationWrapper.From(PatternAccessor(wrappedInstance));
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public ISymbol SliceSymbol => (ISymbol)SliceSymbolAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);

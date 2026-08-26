@@ -76,7 +76,7 @@ public static class ModelBuilder
         {
             return new NoChangeStrategy(latest.Type);
         }
-        else if (IsNonStaticClass(latest.Type) && latest.Type.Name is not "SymbolStartAnalysisContext" and not "SemanticModel")
+        else if (IsNonStaticClass(latest.Type) && latest.Type.Name is not "SymbolStartAnalysisContext")
         {
             if (baseline is null)
             {
@@ -197,10 +197,15 @@ public static class ModelBuilder
         || typeof(Delegate).IsAssignableFrom(type);
 
     private static bool IsValid(MemberInfo member) =>
-        member switch
+        !IsExcluded(member)
+        && member switch
         {
             MethodInfo method => !method.IsSpecialName && !(method.Name is nameof(GetType) or nameof(Equals) or nameof(GetHashCode) or nameof(ToString)),   // Struct methods that would need override
             PropertyInfo => true,
             _ => false
         };
+
+    private static bool IsExcluded(MemberInfo member) =>
+        member.DeclaringType.Name == nameof(SemanticModel)
+        && member.Name is "NullableAnalysisIsDisabled";  // this would have the wrong default (nullable enabled) and is fully covered by GetNullableContext anyway.
 }

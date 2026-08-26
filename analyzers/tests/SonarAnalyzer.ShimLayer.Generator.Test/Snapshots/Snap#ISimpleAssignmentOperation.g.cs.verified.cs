@@ -51,7 +51,7 @@ public readonly struct ISimpleAssignmentOperationWrapper : IOperationWrapper
     public bool IsRef => (bool)IsRefAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public IOperation Target => TargetAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 

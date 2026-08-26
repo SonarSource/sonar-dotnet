@@ -57,7 +57,7 @@ public readonly struct IPropertyReferenceOperationWrapper : IOperationWrapper
     public ISymbol Member => (ISymbol)MemberAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IPropertySymbol Property => (IPropertySymbol)PropertyAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

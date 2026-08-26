@@ -56,7 +56,7 @@ public readonly struct IInvocationOperationWrapper : IOperationWrapper
     public bool IsVirtual => (bool)IsVirtualAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public IMethodSymbol TargetMethod => (IMethodSymbol)TargetMethodAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);

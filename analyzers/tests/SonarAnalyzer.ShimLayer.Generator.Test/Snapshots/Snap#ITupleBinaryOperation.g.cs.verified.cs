@@ -53,7 +53,7 @@ public readonly struct ITupleBinaryOperationWrapper : IOperationWrapper
     public BinaryOperatorKind OperatorKind => (BinaryOperatorKind)OperatorKindAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IOperation RightOperand => RightOperandAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

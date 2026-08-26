@@ -54,7 +54,7 @@ public readonly struct IDynamicMemberReferenceOperationWrapper : IOperationWrapp
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public string MemberName => (string)MemberNameAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public ImmutableArray<ITypeSymbol> TypeArguments => (ImmutableArray<ITypeSymbol>)TypeArgumentsAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);

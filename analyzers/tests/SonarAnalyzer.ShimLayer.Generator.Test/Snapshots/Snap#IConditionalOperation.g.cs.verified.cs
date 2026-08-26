@@ -53,7 +53,7 @@ public readonly struct IConditionalOperationWrapper : IOperationWrapper
     public bool IsRef => (bool)IsRefAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public IOperation WhenFalse => WhenFalseAccessor(wrappedInstance);
     public IOperation WhenTrue => WhenTrueAccessor(wrappedInstance);
 

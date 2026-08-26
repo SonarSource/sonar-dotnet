@@ -16,7 +16,6 @@
  */
 
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
@@ -211,6 +210,38 @@ public class AccessorFactoryTest
         var visitor = new TestVisitor();
         accessor(CreateCollectionExpression(), visitor);
         visitor.Visited.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithEnumReturnType_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<SemanticModel, int, SonarAnalyzer.ShimLayer.NullableContext>>(typeof(SemanticModel), nameof(SemanticModel.GetNullableContext));
+        accessor(CreateInvocationOperation().SemanticModel, 0).Should().Be(SonarAnalyzer.ShimLayer.NullableContext.ContextInherited);
+    }
+
+    [TestMethod]
+    public void CreateMethod_WithEnumReturnType_Fallback()
+    {
+        var accessor = AccessorFactory.CreateMethod<Func<SemanticModel, int, SonarAnalyzer.ShimLayer.NullableContext>>(null, nameof(SemanticModel.GetNullableContext));
+        accessor(CreateInvocationOperation().SemanticModel, 0).Should().Be(SonarAnalyzer.ShimLayer.NullableContext.Disabled);
+    }
+
+    [TestMethod]
+    public void Create_MethodWithEnumParameter_Shimmed()
+    {
+        var accessor = AccessorFactory
+            .CreateMethod<Func<Compilation, SyntaxTree, SonarAnalyzer.ShimLayer.SemanticModelOptions, SemanticModel>>(typeof(Compilation), nameof(Compilation.GetSemanticModel));
+        var model = CreateInvocationOperation().SemanticModel;
+        accessor(model.Compilation, model.SyntaxTree, SonarAnalyzer.ShimLayer.SemanticModelOptions.IgnoreAccessibility).Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void Create_MethodWithEnumParameter_Fallback()
+    {
+        var accessor = AccessorFactory
+            .CreateMethod<Func<Compilation, SyntaxTree, SonarAnalyzer.ShimLayer.SemanticModelOptions, SemanticModel>>(null, nameof(Compilation.GetSemanticModel));
+        var model = CreateInvocationOperation().SemanticModel;
+        accessor(model.Compilation, model.SyntaxTree, SonarAnalyzer.ShimLayer.SemanticModelOptions.IgnoreAccessibility).Should().BeNull();
     }
 
     private static IInvocationOperation CreateInvocationOperation()

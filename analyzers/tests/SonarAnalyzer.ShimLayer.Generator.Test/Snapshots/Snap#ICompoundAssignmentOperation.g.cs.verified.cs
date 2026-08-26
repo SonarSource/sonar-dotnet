@@ -59,7 +59,7 @@ public readonly struct ICompoundAssignmentOperationWrapper : IOperationWrapper
     public BinaryOperatorKind OperatorKind => (BinaryOperatorKind)OperatorKindAccessor(wrappedInstance);
     public IMethodSymbol OperatorMethod => (IMethodSymbol)OperatorMethodAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public IOperation Target => TargetAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
 

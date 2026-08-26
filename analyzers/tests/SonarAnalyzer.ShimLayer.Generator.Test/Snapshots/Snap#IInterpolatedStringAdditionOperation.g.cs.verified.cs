@@ -51,7 +51,7 @@ public readonly struct IInterpolatedStringAdditionOperationWrapper : IOperationW
     public IOperation Left => LeftAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IOperation Right => RightAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

@@ -59,7 +59,7 @@ public readonly struct IListPatternOperationWrapper : IOperationWrapper
     public ITypeSymbol NarrowedType => (ITypeSymbol)NarrowedTypeAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public ImmutableArray<IPatternOperationWrapper> Patterns => PatternsAccessor(wrappedInstance);
-    public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+    public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 
