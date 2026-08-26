@@ -56,7 +56,7 @@ public abstract class ControlFlowGraphCacheBase
                     {
                         wrapper = new(wrapper.Cfg.GetLocalFunctionControlFlowGraph(node, cancel));
                     }
-                    else if (wrapper.FlowOperation(node) is { WrappedOperation: not null } flowOperation)
+                    else if (wrapper.FlowOperation(node) is { WrappedInstance: not null } flowOperation)
                     {
                         wrapper = new(wrapper.Cfg.GetAnonymousFunctionControlFlowGraph(flowOperation, cancel));
                     }
@@ -86,7 +86,7 @@ public abstract class ControlFlowGraphCacheBase
         public IFlowAnonymousFunctionOperationWrapper FlowOperation(SyntaxNode node)
         {
             flowOperations ??= Cfg.FlowAnonymousFunctionOperations().ToArray();  // Avoid recomputing, it's expensive and called many times for a single CFG
-            return flowOperations.SingleOrDefault(x => x.WrappedOperation.Syntax == node);
+            return flowOperations.SingleOrDefault(x => x.WrappedInstance.Syntax == node);
         }
     }
 }

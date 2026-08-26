@@ -134,8 +134,8 @@ public static class TestCompiler
         }
         else if (anonymousFunctionFragment is not null)
         {
-            var anonymousFunction = cfg.FlowAnonymousFunctionOperations().SingleOrDefault(x => x.WrappedOperation.Syntax.ToString().Contains(anonymousFunctionFragment));
-            if (anonymousFunction.WrappedOperation is null)
+            var anonymousFunction = cfg.FlowAnonymousFunctionOperations().SingleOrDefault(x => x.WrappedInstance.Syntax.ToString().Contains(anonymousFunctionFragment));
+            if (anonymousFunction.WrappedInstance is null)
             {
                 throw new ArgumentException($"Anonymous function with '{anonymousFunctionFragment}' fragment was not found.");
             }

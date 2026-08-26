@@ -35,9 +35,6 @@ public readonly struct IDynamicIndexerAccessOperationWrapper : IOperationWrapper
     private IDynamicIndexerAccessOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => wrappedInstance;
-
     public IOperation WrappedInstance => wrappedInstance;
 
     public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;

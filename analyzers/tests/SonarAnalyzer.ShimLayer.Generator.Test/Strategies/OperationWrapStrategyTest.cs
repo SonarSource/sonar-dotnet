@@ -60,9 +60,6 @@ public class OperationWrapStrategyTest
                 private IFieldInitializerOperationWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
-                [Obsolete("Use WrappedInstance instead")]
-                public IOperation WrappedOperation => wrappedInstance;
-
                 public IOperation WrappedInstance => wrappedInstance;
 
                 public static IFieldInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
@@ -135,9 +132,6 @@ public class OperationWrapStrategyTest
 
                 private IFieldReferenceOperationWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public IOperation WrappedOperation => wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
 
@@ -219,9 +213,6 @@ public class OperationWrapStrategyTest
 
                 private ITupleOperationWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public IOperation WrappedOperation => wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
 
@@ -306,9 +297,6 @@ public class OperationWrapStrategyTest
 
                 private ControlFlowGraphWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public IOperation WrappedOperation => wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
 

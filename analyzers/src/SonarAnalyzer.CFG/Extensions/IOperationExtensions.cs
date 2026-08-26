@@ -26,17 +26,17 @@ public static class IOperationExtensions
         && IArgumentOperationWrapper.From(operation.Parent).Parameter.RefKind == RefKind.Out;
 
     public static bool IsAssignmentTarget(this IOperationWrapper operation) =>
-        operation.WrappedOperation.Parent is { } parent
+        operation.WrappedInstance.Parent is { } parent
         && ISimpleAssignmentOperationWrapper.IsInstance(parent)
-        && ISimpleAssignmentOperationWrapper.From(parent).Target == operation.WrappedOperation;
+        && ISimpleAssignmentOperationWrapper.From(parent).Target == operation.WrappedInstance;
 
     public static bool IsCompoundAssignmentTarget(this IOperationWrapper operation) =>
-        operation.WrappedOperation.Parent is { } parent
+        operation.WrappedInstance.Parent is { } parent
         && ICompoundAssignmentOperationWrapper.IsInstance(parent)
-        && ICompoundAssignmentOperationWrapper.From(parent).Target == operation.WrappedOperation;
+        && ICompoundAssignmentOperationWrapper.From(parent).Target == operation.WrappedInstance;
 
     public static bool IsOutArgument(this IOperationWrapper operation) =>
-        operation.WrappedOperation.Parent is { } parent
+        operation.WrappedInstance.Parent is { } parent
         && IArgumentOperationWrapper.IsInstance(parent)
         && IArgumentOperationWrapper.From(parent).Parameter.RefKind == RefKind.Out;
 

@@ -79,7 +79,7 @@ public class ControlFlowGraph
             : throw new InvalidOperationException("CFG is not available under this version of Roslyn compiler.");
 
     public ControlFlowGraph GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction, CancellationToken cancel) =>
-        GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedOperation, cancel }) is { } anonymousFunctionCfg
+        GetAnonymousFunctionControlFlowGraphMethod.Invoke(instance, new object[] { anonymousFunction.WrappedInstance, cancel }) is { } anonymousFunctionCfg
             ? Wrap(anonymousFunctionCfg)
             : null;
 

@@ -36,9 +36,6 @@ public readonly struct IParameterInitializerOperationWrapper : IOperationWrapper
     private IParameterInitializerOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => wrappedInstance;
-
     public IOperation WrappedInstance => wrappedInstance;
 
     public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;

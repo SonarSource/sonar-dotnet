@@ -34,9 +34,6 @@ public readonly struct IUtf8StringOperationWrapper : IOperationWrapper
     private IUtf8StringOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => wrappedInstance;
-
     public IOperation WrappedInstance => wrappedInstance;
 
     public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;

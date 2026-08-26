@@ -360,7 +360,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
         private void ProcessParameterOrLocalReference(IOperationWrapper reference) =>
             ProcessParameterOrLocalSymbols(
-                owner.ParameterOrLocalSymbols(reference.WrappedOperation),
+                owner.ParameterOrLocalSymbols(reference.WrappedInstance),
                 reference.IsOutArgument(),
                 reference.IsAssignmentTarget() || reference.Parent?.Kind == OperationKindEx.FlowCapture);
 

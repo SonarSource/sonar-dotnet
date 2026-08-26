@@ -19,7 +19,7 @@ namespace SonarAnalyzer.ShimLayer;
 
 public interface IOperationWrapper
 {
-    IOperation WrappedOperation { get; }
+    IOperation WrappedInstance { get; }
     IOperation Parent { get; }
     OperationKind Kind { get; }
     SyntaxNode Syntax { get; }

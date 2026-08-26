@@ -40,9 +40,6 @@ public readonly struct ICompoundAssignmentOperationWrapper : IOperationWrapper
     private ICompoundAssignmentOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public IOperation WrappedOperation => wrappedInstance;
-
     public IOperation WrappedInstance => wrappedInstance;
 
     public Optional<Object> ConstantValue => wrappedInstance.ConstantValue;

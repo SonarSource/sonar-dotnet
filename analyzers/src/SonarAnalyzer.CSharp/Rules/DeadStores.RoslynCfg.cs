@@ -70,7 +70,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 private void ProcessParameterOrLocalReference(IOperationWrapper reference)
                 {
-                    var symbols = owner.lva.ParameterOrLocalSymbols(reference.WrappedOperation).Where(x => IsSymbolRelevant(x));
+                    var symbols = owner.lva.ParameterOrLocalSymbols(reference.WrappedInstance).Where(x => IsSymbolRelevant(x));
                     if (reference.IsOutArgument())
                     {
                         liveOut.ExceptWith(symbols);
@@ -118,7 +118,7 @@ namespace SonarAnalyzer.CSharp.Rules
                             && !target.Syntax.Parent.IsKind(SyntaxKind.ForEachStatement)
                             && !IsMuted(target.Syntax, localTarget))
                         {
-                            ReportIssue(operation.WrappedOperation.Syntax.GetLocation(), localTarget);
+                            ReportIssue(operation.WrappedInstance.Syntax.GetLocation(), localTarget);
                         }
                     }
                     return targets;
@@ -131,7 +131,7 @@ namespace SonarAnalyzer.CSharp.Rules
                         localTarget is ILocalSymbol local ? local.RefKind : ((IParameterSymbol)localTarget).RefKind;
 
                     bool IsAllowedInitialization(ISymbol localTarget) =>
-                        operation.WrappedOperation.Syntax is VariableDeclaratorSyntax variableDeclarator
+                        operation.WrappedInstance.Syntax is VariableDeclaratorSyntax variableDeclarator
                         && variableDeclarator.Initializer != null
                         // Avoid collision with S1481: Unused is allowed. Used only in local function is also unused in current CFG.
                         && (IsAllowedInitializationValue(variableDeclarator.Initializer.Value, value == null ? default : value.ConstantValue) || IsUnusedInCurrentCfg(localTarget, target));
