@@ -77,8 +77,8 @@ namespace SonarAnalyzer.CSharp.Rules
                 .ToList();
 
         private static IList<SecondaryLocation> CollectSecondaryLocations(SwitchExpressionSyntaxWrapper switchExpression) =>
-            switchExpression.Arms.Where(arm => ContainsTypeCheckInPattern(arm.Pattern.SyntaxNode))
-                .Select(arm => new SecondaryLocation(arm.Pattern.SyntaxNode.GetLocation(), string.Empty))
+            switchExpression.Arms.Where(arm => ContainsTypeCheckInPattern(arm.Pattern.WrappedInstance))
+                .Select(arm => new SecondaryLocation(arm.Pattern.WrappedInstance.GetLocation(), string.Empty))
                 .ToList();
 
         private static bool ContainsTypeCheckInCaseSwitchLabel(SwitchLabelSyntax switchLabel) =>
@@ -141,7 +141,7 @@ namespace SonarAnalyzer.CSharp.Rules
             }
             else if (CasePatternSwitchLabelSyntaxWrapper.IsInstance(label))
             {
-                return ((CasePatternSwitchLabelSyntaxWrapper)label).Pattern.SyntaxNode.GetLocation();
+                return ((CasePatternSwitchLabelSyntaxWrapper)label).Pattern.WrappedInstance.GetLocation();
             }
             else
             {

@@ -47,7 +47,7 @@ public sealed class DoNotCatchSystemException : SonarDiagnosticAnalyzer
         catchClause.Filter?.FilterExpression is null
         || (catchClause.Filter.FilterExpression.IsKind(SyntaxKindEx.IsPatternExpression)
             && (IsPatternExpressionSyntaxWrapper)catchClause.Filter.FilterExpression is var patternExpression
-            && patternExpression.Node.DescendantNodes().AnyOfKind(SyntaxKindEx.NotPattern));
+            && patternExpression.WrappedInstance.DescendantNodes().AnyOfKind(SyntaxKindEx.NotPattern));
 
     private static bool IsSystemException(CatchDeclarationSyntax catchDeclaration, SemanticModel model) =>
         catchDeclaration?.Type is null || model.GetTypeInfo(catchDeclaration.Type).Type.Is(KnownType.System_Exception);

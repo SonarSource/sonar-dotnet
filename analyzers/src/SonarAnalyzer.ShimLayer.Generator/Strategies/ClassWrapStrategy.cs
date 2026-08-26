@@ -23,8 +23,6 @@ public class ClassWrapStrategy : WrapStrategy
 
     protected override string FromTypeName => CompiletimeTypeSnippet();
 
-    protected override string ObsoletePropertiesSnippet => null;
-
     protected override string ConversionSnippet => null;
 
     public ClassWrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, baseType, null, members) { }

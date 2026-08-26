@@ -86,7 +86,7 @@ public sealed class SqlKeywordsDelimitedBySpace : SonarDiagnosticAnalyzer
             c =>
             {
                 var namespaceDeclaration = (BaseNamespaceDeclarationSyntaxWrapper)c.Node;
-                if (namespaceDeclaration.Node.Parent is CompilationUnitSyntax compilationUnit
+                if (namespaceDeclaration.WrappedInstance.Parent is CompilationUnitSyntax compilationUnit
                     && (HasSqlNamespace(compilationUnit.Usings) || HasSqlNamespace(namespaceDeclaration.Usings)))
                 {
                     var visitor = new StringConcatenationWalker(c);

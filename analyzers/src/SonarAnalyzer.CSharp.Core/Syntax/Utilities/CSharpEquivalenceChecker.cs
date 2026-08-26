@@ -50,7 +50,7 @@ public static class CSharpEquivalenceChecker
         else if (node.IsKind(SyntaxKindEx.IsPatternExpression))
         {
             var isPattern = (IsPatternExpressionSyntaxWrapper)node;
-            return NullCheckPattern(isPattern.Expression, isPattern.Pattern.SyntaxNode, isPositive);
+            return NullCheckPattern(isPattern.Expression, isPattern.Pattern.WrappedInstance, isPositive);
         }
         else
         {
@@ -83,7 +83,7 @@ public static class CSharpEquivalenceChecker
         }
         else if (pattern.IsKind(SyntaxKindEx.NotPattern))
         {
-            return NullCheckPattern(expression, ((UnaryPatternSyntaxWrapper)pattern).Pattern.SyntaxNode, !isPositive);
+            return NullCheckPattern(expression, ((UnaryPatternSyntaxWrapper)pattern).Pattern.WrappedInstance, !isPositive);
         }
         else
         {

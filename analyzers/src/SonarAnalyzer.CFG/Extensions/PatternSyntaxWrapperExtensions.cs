@@ -31,6 +31,6 @@ public static class PatternSyntaxWrapperExtensions
 
         public bool IsNot => patternSyntaxWrapper.WithoutEnclosingParentheses.Kind() == SyntaxKindEx.NotPattern;
 
-        public SyntaxNode WithoutEnclosingParentheses => patternSyntaxWrapper.Node.WithoutEnclosingParentheses;
+        public SyntaxNode WithoutEnclosingParentheses => patternSyntaxWrapper.WrappedInstance.WithoutEnclosingParentheses;
     }
 }

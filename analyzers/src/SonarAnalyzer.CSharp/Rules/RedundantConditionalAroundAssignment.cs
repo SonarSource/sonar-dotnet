@@ -67,7 +67,7 @@ public sealed class RedundantConditionalAroundAssignment : SonarDiagnosticAnalyz
     {
         var switchExpression = (SwitchExpressionSyntaxWrapper)c.Node;
 
-        if (switchExpression.SyntaxNode.GetFirstNonParenthesizedParent() is not AssignmentExpressionSyntax)
+        if (switchExpression.WrappedInstance.GetFirstNonParenthesizedParent() is not AssignmentExpressionSyntax)
         {
             return;
         }
@@ -75,11 +75,11 @@ public sealed class RedundantConditionalAroundAssignment : SonarDiagnosticAnalyz
         var hasDiscard = switchExpression.Arms.Any(x => DiscardPatternSyntaxWrapper.IsInstance(x.Pattern));
         foreach (var switchArm in switchExpression.Arms)
         {
-            var condition = switchArm.Pattern.SyntaxNode;
+            var condition = switchArm.Pattern.WrappedInstance;
             var constantPattern = condition.DescendantNodesAndSelf().FirstOrDefault(x => x.IsKind(SyntaxKindEx.ConstantPattern));
             var expression = switchArm.Expression;
             if ((constantPattern is not null
-                && !(condition.IsKind(SyntaxKindEx.NotPattern) && (switchArm.WhenClause.SyntaxNode is not null || switchExpression.Arms.Count != 1))
+                && !(condition.IsKind(SyntaxKindEx.NotPattern) && (switchArm.WhenClause.WrappedInstance is not null || switchExpression.Arms.Count != 1))
                 && CSharpEquivalenceChecker.AreEquivalent(expression, ((ConstantPatternSyntaxWrapper)constantPattern).Expression) && !hasDiscard)
                 || (condition.IsKind(SyntaxKindEx.DiscardPattern) && switchExpression.Arms.Count == 1))
             {

@@ -34,7 +34,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     var namespaceDeclaration = (BaseNamespaceDeclarationSyntaxWrapper)c.Node;
                     if (!namespaceDeclaration.Members.Any())
                     {
-                        c.ReportIssue(Rule, namespaceDeclaration.SyntaxNode);
+                        c.ReportIssue(Rule, namespaceDeclaration.WrappedInstance);
                     }
                 },
                 SyntaxKind.NamespaceDeclaration,

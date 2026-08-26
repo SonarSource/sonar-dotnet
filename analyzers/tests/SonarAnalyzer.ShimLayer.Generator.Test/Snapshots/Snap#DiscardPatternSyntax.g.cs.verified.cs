@@ -34,12 +34,6 @@ public readonly struct DiscardPatternSyntaxWrapper
     private DiscardPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public CSharpSyntaxNode Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public CSharpSyntaxNode SyntaxNode => wrappedInstance;
-
     public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

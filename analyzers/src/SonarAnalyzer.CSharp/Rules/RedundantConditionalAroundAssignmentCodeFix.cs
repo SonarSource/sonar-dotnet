@@ -77,7 +77,7 @@ public sealed class RedundantConditionalAroundAssignmentCodeFix : SonarCodeFix
     private static Task HandleSwitchExpression(SyntaxNode root, SonarCodeFixContext context, SyntaxNode switchExpression)
     {
         var switchArm = ((SwitchExpressionSyntaxWrapper)switchExpression).Arms.FirstOrDefault();
-        if (switchArm.SyntaxNode is null || switchArm.SyntaxNode.Parent.ChildNodes().Count(x => x.IsKind(SyntaxKindEx.SwitchExpressionArm)) != 1)
+        if (switchArm.WrappedInstance is null || switchArm.WrappedInstance.Parent.ChildNodes().Count(x => x.IsKind(SyntaxKindEx.SwitchExpressionArm)) != 1)
         {
             return Task.CompletedTask;
         }

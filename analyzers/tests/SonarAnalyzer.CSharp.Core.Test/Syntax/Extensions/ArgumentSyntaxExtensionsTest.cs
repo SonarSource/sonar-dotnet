@@ -113,7 +113,7 @@ public class ArgumentSyntaxExtensionsTest
         else
         {
             outerMostTuple.Should().NotBeNull();
-            outerMostTuple.Value.SyntaxNode.ToString().Should().Be(expectedOuterTuple);
+            outerMostTuple.Value.WrappedInstance.ToString().Should().Be(expectedOuterTuple);
         }
     }
 

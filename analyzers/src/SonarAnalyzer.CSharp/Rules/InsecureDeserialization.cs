@@ -264,12 +264,12 @@ public sealed class InsecureDeserialization : SonarDiagnosticAnalyzer
             {
                 var arm = (SwitchExpressionArmSyntaxWrapper)node;
 
-                if (arm.Pattern.Node is not null)
+                if (arm.Pattern.WrappedInstance is not null)
                 {
                     UpdateParameterValidationStatus(arm.Pattern);
                 }
 
-                if (arm.WhenClause.Node is not null)
+                if (arm.WhenClause.WrappedInstance is not null)
                 {
                     UpdateParameterValidationStatus(arm.WhenClause);
                 }

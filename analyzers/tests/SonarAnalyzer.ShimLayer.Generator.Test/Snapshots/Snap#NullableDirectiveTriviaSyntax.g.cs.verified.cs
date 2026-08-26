@@ -41,12 +41,6 @@ public readonly struct NullableDirectiveTriviaSyntaxWrapper
     private NullableDirectiveTriviaSyntaxWrapper(DirectiveTriviaSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public DirectiveTriviaSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public DirectiveTriviaSyntax SyntaxNode => wrappedInstance;
-
     public DirectiveTriviaSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

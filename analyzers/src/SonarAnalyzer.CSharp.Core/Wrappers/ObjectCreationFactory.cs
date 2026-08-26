@@ -83,7 +83,7 @@ public class ObjectCreationFactory
 
         public InitializerExpressionSyntax Initializer => objectCreation.Initializer;
         public ArgumentListSyntax ArgumentList => objectCreation.ArgumentList;
-        public ExpressionSyntax Expression => objectCreation.SyntaxNode;
+        public ExpressionSyntax Expression => objectCreation.WrappedInstance;
         public IEnumerable<ExpressionSyntax> InitializerExpressions => objectCreation.Initializer?.Expressions;
 
         public ImplicitObjectCreation(ImplicitObjectCreationExpressionSyntaxWrapper wrapper) =>

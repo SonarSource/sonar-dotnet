@@ -93,8 +93,8 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckAndPattern(SonarSyntaxNodeReportingContext context)
         {
             var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
-            var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
-            var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+            var left = binaryPatternNode.Left.WrappedInstance.RemoveParentheses();
+            var right = binaryPatternNode.Right.WrappedInstance.RemoveParentheses();
 
             if (IsNotNullPattern(left) && IsAffirmativePatternMatch(right))
             {
@@ -119,8 +119,8 @@ namespace SonarAnalyzer.CSharp.Rules
         private static void CheckOrPattern(SonarSyntaxNodeReportingContext context)
         {
             var binaryPatternNode = (BinaryPatternSyntaxWrapper)context.Node;
-            var left = binaryPatternNode.Left.SyntaxNode.RemoveParentheses();
-            var right = binaryPatternNode.Right.SyntaxNode.RemoveParentheses();
+            var left = binaryPatternNode.Left.WrappedInstance.RemoveParentheses();
+            var right = binaryPatternNode.Right.WrappedInstance.RemoveParentheses();
             if (PatternSyntaxWrapper.IsInstance(left) && PatternSyntaxWrapper.IsInstance(right))
             {
                 var leftPattern = (PatternSyntaxWrapper)left;

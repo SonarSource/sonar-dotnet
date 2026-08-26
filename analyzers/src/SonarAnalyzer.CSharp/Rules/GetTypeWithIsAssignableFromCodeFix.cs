@@ -76,12 +76,12 @@ namespace SonarAnalyzer.CSharp.Rules
             {
                 var negationRequired = true;
                 var current = isPattern.Pattern;
-                while (current.SyntaxNode.IsKind(SyntaxKindEx.NotPattern))
+                while (current.WrappedInstance.IsKind(SyntaxKindEx.NotPattern))
                 {
                     negationRequired = !negationRequired;
                     current = ((UnaryPatternSyntaxWrapper)current).Pattern;
                 }
-                var newExpression = NegatedExpression(negationRequired, isPattern.SyntaxNode.Parent, GetIsExpression(binary));
+                var newExpression = NegatedExpression(negationRequired, isPattern.WrappedInstance.Parent, GetIsExpression(binary));
                 return root.ReplaceNode(isPattern, newExpression.WithAdditionalAnnotations(Formatter.Annotation));
             }
             else

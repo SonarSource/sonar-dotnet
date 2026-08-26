@@ -48,12 +48,6 @@ public readonly struct CommonForEachStatementSyntaxWrapper
     private CommonForEachStatementSyntaxWrapper(StatementSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public StatementSyntax SyntaxNode => wrappedInstance;
-
     public StatementSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

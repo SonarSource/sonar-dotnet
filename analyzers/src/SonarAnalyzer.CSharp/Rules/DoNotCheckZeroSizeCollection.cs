@@ -39,13 +39,13 @@ public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionB
 
         foreach (var subPattern in propertyPatternClause.Subpatterns)
         {
-            if (subPattern.ExpressionColon.Node is NameColonSyntax nameColon)
+            if (subPattern.ExpressionColon.WrappedInstance is NameColonSyntax nameColon)
             {
-                CheckPatternCondition(c, nameColon.Name, subPattern.Pattern.Node.RemoveParentheses());
+                CheckPatternCondition(c, nameColon.Name, subPattern.Pattern.WrappedInstance.RemoveParentheses());
             }
-            else if (ExpressionColonSyntaxWrapper.IsInstance(subPattern.ExpressionColon.Node) && (ExpressionColonSyntaxWrapper)subPattern.ExpressionColon.Node is var expressionColon)
+            else if (ExpressionColonSyntaxWrapper.IsInstance(subPattern.ExpressionColon.WrappedInstance) && (ExpressionColonSyntaxWrapper)subPattern.ExpressionColon.WrappedInstance is var expressionColon)
             {
-                CheckPatternCondition(c, expressionColon.Expression, subPattern.Pattern.Node.RemoveParentheses());
+                CheckPatternCondition(c, expressionColon.Expression, subPattern.Pattern.WrappedInstance.RemoveParentheses());
             }
         }
     }
@@ -70,7 +70,7 @@ public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionB
 
         foreach (var arm in switchExpression.Arms)
         {
-            AnalyzePatterns(c, switchExpression.GoverningExpression, arm.Pattern.Node);
+            AnalyzePatterns(c, switchExpression.GoverningExpression, arm.Pattern.WrappedInstance);
         }
     }
 
@@ -93,7 +93,7 @@ public sealed class DoNotCheckZeroSizeCollection : DoNotCheckZeroSizeCollectionB
             && relationalPattern.OperatorToken.ComparisonOperatorKind is not Comparison.None
             && Language.ExpressionNumericConverter.ConstantIntValue(context.Model, relationalPattern.Expression) is { } constant)
         {
-            CheckExpression(context, relationalPattern.Node, expression, constant, relationalPattern.OperatorToken.ComparisonOperatorKind);
+            CheckExpression(context, relationalPattern.WrappedInstance, expression, constant, relationalPattern.OperatorToken.ComparisonOperatorKind);
         }
     }
 }

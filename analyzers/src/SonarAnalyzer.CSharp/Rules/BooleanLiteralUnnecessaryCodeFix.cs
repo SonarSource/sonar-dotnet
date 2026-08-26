@@ -92,7 +92,7 @@ public sealed class BooleanLiteralUnnecessaryCodeFix : SonarCodeFix
 
     private static void RegisterPatternExpressionReplacement(SonarCodeFixContext context, SyntaxNode root, IsPatternExpressionSyntaxWrapper patternExpression)
     {
-        var replacement = patternExpression.Pattern.Node.IsTrue()
+        var replacement = patternExpression.Pattern.WrappedInstance.IsTrue()
             ? patternExpression.Expression
             : NegatedExpression(patternExpression.Expression);
 
@@ -109,7 +109,7 @@ public sealed class BooleanLiteralUnnecessaryCodeFix : SonarCodeFix
             Title,
             x =>
             {
-                var newRoot = root.ReplaceNode(patternExpression.Node, replacement.WithAdditionalAnnotations(Formatter.Annotation));
+                var newRoot = root.ReplaceNode(patternExpression.WrappedInstance, replacement.WithAdditionalAnnotations(Formatter.Annotation));
                 return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
             },
             context.Diagnostics);

@@ -41,7 +41,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
     private static void CasePatternSwitchLabel(SonarSyntaxNodeReportingContext analysisContext)
     {
         var casePatternSwitch = (CasePatternSwitchLabelSyntaxWrapper)analysisContext.Node;
-        if (casePatternSwitch.SyntaxNode.GetFirstNonParenthesizedParent().GetFirstNonParenthesizedParent() is SwitchStatementSyntax parentSwitchStatement)
+        if (casePatternSwitch.WrappedInstance.GetFirstNonParenthesizedParent().GetFirstNonParenthesizedParent() is SwitchStatementSyntax parentSwitchStatement)
         {
             ProcessPatternExpression(analysisContext, casePatternSwitch.Pattern, parentSwitchStatement.Expression, parentSwitchStatement);
         }
@@ -50,7 +50,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
     private static void SwitchExpressionArm(SonarSyntaxNodeReportingContext analysisContext)
     {
         var isSwitchExpression = (SwitchExpressionArmSyntaxWrapper)analysisContext.Node;
-        var parent = isSwitchExpression.SyntaxNode.GetFirstNonParenthesizedParent();
+        var parent = isSwitchExpression.WrappedInstance.GetFirstNonParenthesizedParent();
         if (parent.IsKind(SyntaxKindEx.SwitchExpression))
         {
             var switchExpression = (SwitchExpressionSyntaxWrapper)parent;
@@ -61,7 +61,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
     private static void IsPatternExpression(SonarSyntaxNodeReportingContext analysisContext)
     {
         var isPatternExpression = (IsPatternExpressionSyntaxWrapper)analysisContext.Node;
-        if (isPatternExpression.SyntaxNode.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement)
+        if (isPatternExpression.WrappedInstance.GetFirstNonParenthesizedParent() is IfStatementSyntax parentIfStatement)
         {
             ProcessPatternExpression(analysisContext, isPatternExpression.Pattern, isPatternExpression.Expression, parentIfStatement.Statement);
         }
@@ -120,11 +120,11 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
             {
                 if (DeclarationPatternSyntaxWrapper.IsInstance(subPattern) && (DeclarationPatternSyntaxWrapper)subPattern is var declarationPattern)
                 {
-                    rightPartsToCheck.Add(declarationPattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(declarationPattern.Type, subPattern.GetLocation()));
+                    rightPartsToCheck.Add(declarationPattern.Designation.WrappedInstance, new Tuple<TypeSyntax, Location>(declarationPattern.Type, subPattern.GetLocation()));
                 }
-                else if ((RecursivePatternSyntaxWrapper)subPattern is { Designation.SyntaxNode: { }, Type: { } } recursivePattern)
+                else if ((RecursivePatternSyntaxWrapper)subPattern is { Designation.WrappedInstance: { }, Type: { } } recursivePattern)
                 {
-                    rightPartsToCheck.Add(recursivePattern.Designation.SyntaxNode, new Tuple<TypeSyntax, Location>(recursivePattern.Type, subPattern.GetLocation()));
+                    rightPartsToCheck.Add(recursivePattern.Designation.WrappedInstance, new Tuple<TypeSyntax, Location>(recursivePattern.Type, subPattern.GetLocation()));
                 }
             }
 
@@ -146,7 +146,7 @@ public sealed class CastShouldNotBeDuplicated : SonarDiagnosticAnalyzer
     private static IEnumerable<TypeSyntax> GetTypesFromPattern(SyntaxNode pattern)
     {
         var targetTypes = new HashSet<TypeSyntax>();
-        if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is { PositionalPatternClause.SyntaxNode: { } } recursivePattern))
+        if (RecursivePatternSyntaxWrapper.IsInstance(pattern) && ((RecursivePatternSyntaxWrapper)pattern is { PositionalPatternClause.WrappedInstance: { } } recursivePattern))
         {
             foreach (var subpattern in recursivePattern.PositionalPatternClause.Subpatterns)
             {

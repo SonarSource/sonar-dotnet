@@ -41,11 +41,11 @@ namespace SonarAnalyzer.CSharp.Rules
             else if (IsPatternExpressionSyntaxWrapper.IsInstance(diagnosticNode))
             {
                 var isPatternExpression = (IsPatternExpressionSyntaxWrapper)diagnosticNode.RemoveParentheses();
-                RegisterBinaryExpressionCodeFix(context, root, isPatternExpression.SyntaxNode);
+                RegisterBinaryExpressionCodeFix(context, root, isPatternExpression.WrappedInstance);
             }
             else if (PatternSyntaxWrapper.IsInstance(diagnosticNode))
             {
-                RegisterBinaryPatternCodeFix(context, root, ((PatternSyntaxWrapper)diagnosticNode).SyntaxNode);
+                RegisterBinaryPatternCodeFix(context, root, ((PatternSyntaxWrapper)diagnosticNode).WrappedInstance);
             }
             else if (diagnosticNode.IsNullLiteral() && diagnosticNode.Parent.IsKind(SyntaxKindEx.ConstantPattern))
             {
@@ -80,7 +80,7 @@ namespace SonarAnalyzer.CSharp.Rules
                     if (binaryExpression != null)
                     {
                         var binaryPatternNode = (BinaryPatternSyntaxWrapper)binaryExpression;
-                        newRoot = ReplaceNode(root, binaryExpression, binaryPatternNode.Left.SyntaxNode, binaryPatternNode.Right.SyntaxNode, mustBeReplaced);
+                        newRoot = ReplaceNode(root, binaryExpression, binaryPatternNode.Left.WrappedInstance, binaryPatternNode.Right.WrappedInstance, mustBeReplaced);
                     }
                     return Task.FromResult(context.Document.WithSyntaxRoot(newRoot));
                 },

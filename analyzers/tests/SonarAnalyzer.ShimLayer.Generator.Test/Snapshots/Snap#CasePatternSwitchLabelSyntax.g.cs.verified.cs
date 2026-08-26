@@ -38,12 +38,6 @@ public readonly struct CasePatternSwitchLabelSyntaxWrapper
     private CasePatternSwitchLabelSyntaxWrapper(SwitchLabelSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public SwitchLabelSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public SwitchLabelSyntax SyntaxNode => wrappedInstance;
-
     public SwitchLabelSyntax WrappedInstance => wrappedInstance;
 
     public SyntaxToken ColonToken => wrappedInstance.ColonToken;

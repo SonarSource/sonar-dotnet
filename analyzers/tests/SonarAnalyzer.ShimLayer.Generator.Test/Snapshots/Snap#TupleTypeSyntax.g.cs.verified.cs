@@ -43,12 +43,6 @@ public readonly struct TupleTypeSyntaxWrapper
     private TupleTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeSyntax SyntaxNode => wrappedInstance;
-
     public TypeSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

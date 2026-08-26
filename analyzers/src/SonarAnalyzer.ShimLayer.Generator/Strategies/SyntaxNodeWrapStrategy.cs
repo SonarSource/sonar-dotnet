@@ -22,14 +22,6 @@ public class SyntaxNodeWrapStrategy : WrapStrategy
     protected override string BaseTypeSnippet => null;
     protected override string FromTypeName => "SyntaxNode";
 
-    protected override string ObsoletePropertiesSnippet => $"""
-            [Obsolete("Use WrappedInstance instead")]
-            public {CompiletimeTypeSnippet()} Node => wrappedInstance;
-
-            [Obsolete("Use WrappedInstance instead")]
-            public {CompiletimeTypeSnippet()} SyntaxNode => wrappedInstance;
-        """;
-
     protected override string ConversionSnippet => $"""
             public static explicit operator {ReturnTypeSnippet()}(SyntaxNode instance) =>
                 From(instance);

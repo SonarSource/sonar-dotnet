@@ -22,8 +22,6 @@ public class OperationWrapStrategy : WrapStrategy
     protected override string BaseTypeSnippet => "IOperationWrapper";
     protected override string FromTypeName => "IOperation";
 
-    protected override string ObsoletePropertiesSnippet => null;
-
     protected override string ConversionSnippet => $"""
             public static {ReturnTypeSnippet()}? FromOrDefault(IOperation instance) =>
                 IsInstance(instance) ? From(instance) : null;

@@ -92,7 +92,7 @@ public class ObjectCreationFactoryTest
         var objectCreation = (ImplicitObjectCreationExpressionSyntaxWrapper)snippet.Tree.GetRoot(TestContext.CancellationToken).DescendantNodes()
             .First(x => x.IsKind(SyntaxKindEx.ImplicitObjectCreationExpression));
         var wrapper = ObjectCreationFactory.Create(objectCreation);
-        wrapper.Expression.Should().BeEquivalentTo(objectCreation.Node);
+        wrapper.Expression.Should().BeEquivalentTo(objectCreation.WrappedInstance);
         wrapper.Initializer.Should().BeEquivalentTo(objectCreation.Initializer);
         wrapper.ArgumentList.Should().BeEquivalentTo(objectCreation.ArgumentList);
         wrapper.InitializerExpressions.Should().BeEquivalentTo(objectCreation.Initializer.Expressions);

@@ -811,7 +811,7 @@ namespace SonarAnalyzer.CFG.Sonar
         }
 
         private Block CreateWhenCloseNewTrueSuccessor(WhenClauseSyntaxWrapper whenClauseSyntax, Block trueSuccessor, Block falseSuccessor) =>
-            whenClauseSyntax.SyntaxNode != null
+            whenClauseSyntax.WrappedInstance != null
                 ? BuildCondition(whenClauseSyntax.Condition, trueSuccessor, falseSuccessor)
                 : trueSuccessor;
 
@@ -1294,7 +1294,7 @@ namespace SonarAnalyzer.CFG.Sonar
                 return currentBlock;
             }
 
-            throw new NotSupportedException($"{patternSyntaxWrapper.SyntaxNode.Kind()}");
+            throw new NotSupportedException($"{patternSyntaxWrapper.WrappedInstance.Kind()}");
         }
 
         private Block BuildTupleExpression(TupleExpressionSyntaxWrapper tuple, Block currentBlock)

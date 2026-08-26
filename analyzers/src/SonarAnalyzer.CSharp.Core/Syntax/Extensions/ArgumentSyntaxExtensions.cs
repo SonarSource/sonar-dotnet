@@ -29,7 +29,7 @@ public static class ArgumentSyntaxExtensions
 
         // (arg, b) = something
         public bool IsInTupleAssignmentTarget =>
-            argument.OutermostTuple is { SyntaxNode: { } tupleExpression }
+            argument.OutermostTuple is { WrappedInstance: { } tupleExpression }
             && tupleExpression.Parent is AssignmentExpressionSyntax assignment
             && assignment.Left == tupleExpression;
 

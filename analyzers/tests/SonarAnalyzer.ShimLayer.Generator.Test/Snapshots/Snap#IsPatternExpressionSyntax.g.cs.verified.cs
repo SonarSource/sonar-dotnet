@@ -38,12 +38,6 @@ public readonly struct IsPatternExpressionSyntaxWrapper
     private IsPatternExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax SyntaxNode => wrappedInstance;
-
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

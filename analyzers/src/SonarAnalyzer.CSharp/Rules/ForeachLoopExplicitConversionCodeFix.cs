@@ -92,7 +92,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
                 newRoot = newRoot.ReplaceNode(
                     namespaceDeclarationWrapper,
-                    namespaceWithAdditionalUsing.SyntaxNode.WithAdditionalAnnotations(Formatter.Annotation));
+                    namespaceWithAdditionalUsing.WrappedInstance.WithAdditionalAnnotations(Formatter.Annotation));
             }
             else
             {

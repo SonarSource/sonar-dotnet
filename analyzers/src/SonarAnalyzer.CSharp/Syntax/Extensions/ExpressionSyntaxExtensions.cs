@@ -45,7 +45,7 @@ internal static class ExpressionSyntaxExtensions
             && (TupleExpressionSyntaxWrapper)expression is var tupleExpression
             && RecursivePatternSyntaxWrapper.IsInstance(pattern)
             && (RecursivePatternSyntaxWrapper)pattern is var recursivePattern
-            && recursivePattern.PositionalPatternClause.SyntaxNode is not null
+            && recursivePattern.PositionalPatternClause.WrappedInstance is not null
             && recursivePattern.PositionalPatternClause.Subpatterns.Count == tupleExpression.Arguments.Count)
         {
             for (var i = 0; i < tupleExpression.Arguments.Count; i++)

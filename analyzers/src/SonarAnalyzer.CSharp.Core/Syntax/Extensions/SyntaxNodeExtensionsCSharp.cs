@@ -312,7 +312,7 @@ public static class SyntaxNodeExtensionsCSharp
             { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary)
                 && ((PrimaryConstructorBaseTypeSyntaxWrapper)primary).Type is { } type => GetIdentifier(type),
             { } refType when RefTypeSyntaxWrapper.IsInstance(refType) => GetIdentifier(((RefTypeSyntaxWrapper)refType).Type),
-            { } subPattern when SubpatternSyntaxWrapper.IsInstance(subPattern) && ((SubpatternSyntaxWrapper)subPattern).ExpressionColon is { SyntaxNode: not null } expressionColon =>
+            { } subPattern when SubpatternSyntaxWrapper.IsInstance(subPattern) && ((SubpatternSyntaxWrapper)subPattern).ExpressionColon is { WrappedInstance: not null } expressionColon =>
                 GetIdentifier(expressionColon.Expression),
             _ => null
         };
@@ -420,7 +420,7 @@ public static class SyntaxNodeExtensionsCSharp
         static SyntaxNode PushPathPositionForTuple(Stack<PathPosition> pathPositions, TupleExpressionSyntaxWrapper tuple, ArgumentSyntax argument)
         {
             pathPositions.Push(new(tuple.Arguments.IndexOf(argument), tuple.Arguments.Count));
-            return tuple.SyntaxNode.Parent;
+            return tuple.WrappedInstance.Parent;
         }
 
         static SyntaxNode PushPathPositionForParenthesizedDesignation(Stack<PathPosition> pathPositions,
@@ -428,7 +428,7 @@ public static class SyntaxNodeExtensionsCSharp
                                                                      VariableDesignationSyntaxWrapper variable)
         {
             pathPositions.Push(new(parenthesizedDesignation.Variables.IndexOf(variable), parenthesizedDesignation.Variables.Count));
-            return parenthesizedDesignation.SyntaxNode;
+            return parenthesizedDesignation.WrappedInstance;
         }
 
         static SyntaxNode StepDownInParenthesizedVariableDesignation(ParenthesizedVariableDesignationSyntaxWrapper parenthesizedVariableDesignation, PathPosition expectedPathPosition) =>

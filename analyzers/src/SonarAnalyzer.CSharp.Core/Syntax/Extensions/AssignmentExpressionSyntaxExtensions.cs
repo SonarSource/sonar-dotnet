@@ -159,7 +159,7 @@ public static class AssignmentExpressionSyntaxExtensions
                 case NestingMatch.Failed:
                     return NestingMatch.Failed;
                 case NestingMatch.Leaf:
-                    arrayBuilder.Add(new AssignmentMapping(leftVar.SyntaxNode, rightExpression));
+                    arrayBuilder.Add(new AssignmentMapping(leftVar.WrappedInstance, rightExpression));
                     break; // the switch
             }
         }

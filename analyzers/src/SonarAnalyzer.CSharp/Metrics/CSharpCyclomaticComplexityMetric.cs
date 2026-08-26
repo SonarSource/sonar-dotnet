@@ -188,7 +188,7 @@ public static class CSharpCyclomaticComplexityMetric
         public void VisitLocalFunction(LocalFunctionStatementSyntaxWrapper node)
         {
             AddLocation(node.Identifier);
-            base.Visit(node.SyntaxNode);
+            base.Visit(node.WrappedInstance);
         }
 
         public override void Visit(SyntaxNode node)

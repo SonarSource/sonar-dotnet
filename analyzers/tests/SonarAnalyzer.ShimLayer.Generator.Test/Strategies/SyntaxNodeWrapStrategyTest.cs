@@ -64,12 +64,6 @@ public class SyntaxNodeWrapStrategyTest
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax SyntaxNode => wrappedInstance;
-
                 public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>
@@ -153,12 +147,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax SyntaxNode => wrappedInstance;
 
                 public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
@@ -245,12 +233,6 @@ public class SyntaxNodeWrapStrategyTest
                 private IsPatternExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
-                [Obsolete("Use WrappedInstance instead")]
-                public ExpressionSyntax Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public ExpressionSyntax SyntaxNode => wrappedInstance;
-
                 public ExpressionSyntax WrappedInstance => wrappedInstance;
 
                 public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
@@ -324,12 +306,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 private ConstantPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public CSharpSyntaxNode Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public CSharpSyntaxNode SyntaxNode => wrappedInstance;
 
                 public CSharpSyntaxNode WrappedInstance => wrappedInstance;
 
@@ -409,12 +385,6 @@ public class SyntaxNodeWrapStrategyTest
                 private SyntaxNodeWrapper(SyntaxNode wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
-                [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode SyntaxNode => wrappedInstance;
-
                 public SyntaxNode WrappedInstance => wrappedInstance;
 
                 public static explicit operator SyntaxNodeWrapper(SyntaxNode instance) =>
@@ -488,12 +458,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 private IndexerDeclarationSyntaxWrapper(SyntaxNode wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public SyntaxNode SyntaxNode => wrappedInstance;
 
                 public SyntaxNode WrappedInstance => wrappedInstance;
 
@@ -583,12 +547,6 @@ public class SyntaxNodeWrapStrategyTest
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public TypeDeclarationSyntax SyntaxNode => wrappedInstance;
-
                 public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
                 public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;
@@ -664,12 +622,6 @@ public class SyntaxNodeWrapStrategyTest
 
                 private BaseNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public MemberDeclarationSyntax Node => wrappedInstance;
-
-                [Obsolete("Use WrappedInstance instead")]
-                public MemberDeclarationSyntax SyntaxNode => wrappedInstance;
 
                 public MemberDeclarationSyntax WrappedInstance => wrappedInstance;
 

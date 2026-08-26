@@ -23,7 +23,7 @@ public static class UnaryPatternSyntaxWrapperExtensions
 {
     extension(UnaryPatternSyntaxWrapper unaryPatternSyntaxWrapper)
     {
-        public bool IsNot => unaryPatternSyntaxWrapper.Node.WithoutEnclosingParentheses.Kind() == SyntaxKindEx.NotPattern;
+        public bool IsNot => unaryPatternSyntaxWrapper.WrappedInstance.WithoutEnclosingParentheses.Kind() == SyntaxKindEx.NotPattern;
 
         public bool IsNotNull => unaryPatternSyntaxWrapper is { IsNot: true, Pattern.IsNull: true };
     }

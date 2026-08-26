@@ -68,12 +68,12 @@ public static class CSharpCognitiveComplexityMetric
                 if ((nodeKind == SyntaxKindEx.AndPattern || nodeKind == SyntaxKindEx.OrPattern)
                     && !State.LogicalOperationsToIgnore.Contains(binaryPatternNode))
                 {
-                    if (!binaryPatternNode.Left.SyntaxNode.RemoveParentheses().IsKind(nodeKind))
+                    if (!binaryPatternNode.Left.WrappedInstance.RemoveParentheses().IsKind(nodeKind))
                     {
                         State.IncreaseComplexityByOne(binaryPatternNode.OperatorToken);
                     }
 
-                    if (binaryPatternNode.Right.SyntaxNode.RemoveParentheses() is { } right && right.IsKind(nodeKind))
+                    if (binaryPatternNode.Right.WrappedInstance.RemoveParentheses() is { } right && right.IsKind(nodeKind))
                     {
                         State.LogicalOperationsToIgnore.Add(right);
                     }
@@ -222,7 +222,7 @@ public static class CSharpCognitiveComplexityMetric
         {
             if (visitStaticLocalFunctions || !localFunction.Modifiers.Any(SyntaxKind.StaticKeyword))
             {
-                State.VisitWithNesting(localFunction.SyntaxNode, base.Visit);
+                State.VisitWithNesting(localFunction.WrappedInstance, base.Visit);
             }
         }
     }

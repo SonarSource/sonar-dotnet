@@ -36,12 +36,6 @@ public readonly struct PrimaryConstructorBaseTypeSyntaxWrapper
     private PrimaryConstructorBaseTypeSyntaxWrapper(BaseTypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public BaseTypeSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public BaseTypeSyntax SyntaxNode => wrappedInstance;
-
     public BaseTypeSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

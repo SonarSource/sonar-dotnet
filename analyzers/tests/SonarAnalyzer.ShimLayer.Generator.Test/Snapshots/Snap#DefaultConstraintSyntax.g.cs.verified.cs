@@ -34,12 +34,6 @@ public readonly struct DefaultConstraintSyntaxWrapper
     private DefaultConstraintSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeParameterConstraintSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeParameterConstraintSyntax SyntaxNode => wrappedInstance;
-
     public TypeParameterConstraintSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

@@ -76,7 +76,7 @@ public sealed class ArrayPassedAsParams : ArrayPassedAsParamsBase<SyntaxKind, CS
 
     // [x, y, ..z] is not possible to be passed as params
     private static bool ContainsSpread(CollectionExpressionSyntaxWrapper expression) =>
-        expression.Elements.Any(x => x.SyntaxNode.IsKind(SyntaxKindEx.SpreadElement));
+        expression.Elements.Any(x => x.WrappedInstance.IsKind(SyntaxKindEx.SpreadElement));
 
     private static ExpressionSyntax ArgumentExpression(CSharpSyntaxNode node) =>
         node switch

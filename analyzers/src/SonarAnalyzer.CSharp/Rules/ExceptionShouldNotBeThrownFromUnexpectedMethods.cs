@@ -117,7 +117,7 @@ public sealed class ExceptionShouldNotBeThrownFromUnexpectedMethods : SonarDiagn
         if (node.ArrowExpressionBody() is { } expressionBody
             && GetLocationToReport(
                 expressionBody.Expression.DescendantNodesAndSelf().Where(ThrowExpressionSyntaxWrapper.IsInstance).Select(x => (ThrowExpressionSyntaxWrapper)x),
-                x => x.Node,
+                x => x.WrappedInstance,
                 x => x.Expression) is { } throwExpressionLocation)
         {
             context.ReportIssue(Rule, throwExpressionLocation, "expression");

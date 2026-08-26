@@ -52,12 +52,6 @@ public readonly struct ExtensionBlockDeclarationSyntaxWrapper
     private ExtensionBlockDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeDeclarationSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public TypeDeclarationSyntax SyntaxNode => wrappedInstance;
-
     public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
 
     public int Arity => wrappedInstance.Arity;

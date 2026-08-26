@@ -68,14 +68,14 @@ public sealed class ExpressionComplexity : ExpressionComplexityBase<SyntaxKind>
                 ConditionalExpressionSyntax conditional => [conditional.Condition, conditional.WhenTrue, conditional.WhenFalse],
                 BinaryExpressionSyntax binary => [binary.Left, binary.Right],
                 { RawKind: (int)SyntaxKindEx.AndPattern or (int)SyntaxKindEx.OrPattern } pattern when (BinaryPatternSyntaxWrapper)pattern is var patternWrapper =>
-                    [patternWrapper.Left.Node, patternWrapper.Right.Node],
+                    [patternWrapper.Left.WrappedInstance, patternWrapper.Right.WrappedInstance],
                 AssignmentExpressionSyntax assigment => [assigment.Left, assigment.Right],
                 ParenthesizedExpressionSyntax { Expression: { } expression } => [expression],
                 PrefixUnaryExpressionSyntax { Operand: { } operand } => [operand],
                 { RawKind: (int)SyntaxKindEx.ParenthesizedPattern } parenthesized when (ParenthesizedPatternSyntaxWrapper)parenthesized is var parenthesizedWrapped =>
-                    [parenthesizedWrapped.Pattern.Node],
+                    [parenthesizedWrapped.Pattern.WrappedInstance],
                 { RawKind: (int)SyntaxKindEx.NotPattern } negated when (UnaryPatternSyntaxWrapper)negated is var negatedWrapper =>
-                    [negatedWrapper.Pattern.Node],
+                    [negatedWrapper.Pattern.WrappedInstance],
                 _ => [],
             }
             : [];

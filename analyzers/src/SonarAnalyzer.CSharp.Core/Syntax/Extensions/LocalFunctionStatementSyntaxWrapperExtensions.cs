@@ -21,6 +21,6 @@ public static class LocalFunctionStatementSyntaxWrapperExtensions
 {
     extension(LocalFunctionStatementSyntaxWrapper localFunction)
     {
-        public bool IsTopLevel => localFunction is { Node.Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax } };
+        public bool IsTopLevel => localFunction is { WrappedInstance.Parent: GlobalStatementSyntax { Parent: CompilationUnitSyntax } };
     }
 }

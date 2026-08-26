@@ -50,12 +50,6 @@ public readonly struct BaseNamespaceDeclarationSyntaxWrapper
     private BaseNamespaceDeclarationSyntaxWrapper(MemberDeclarationSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public MemberDeclarationSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public MemberDeclarationSyntax SyntaxNode => wrappedInstance;
-
     public MemberDeclarationSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

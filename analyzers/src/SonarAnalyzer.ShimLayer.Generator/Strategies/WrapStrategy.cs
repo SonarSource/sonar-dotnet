@@ -21,8 +21,6 @@ public abstract class WrapStrategy : MemberStrategy
 {
     protected abstract string BaseTypeSnippet { get; }
     protected abstract string FromTypeName { get; }
-    [Obsolete("This should be removed once we remove the obsolete usages from the generated code")]
-    protected abstract string ObsoletePropertiesSnippet { get; }
     protected abstract string ConversionSnippet { get; }
 
     public Type BaseType { get; }
@@ -61,8 +59,6 @@ public abstract class WrapStrategy : MemberStrategy
 
                 private {{Latest.Name}}Wrapper({{CompiletimeTypeSnippet()}} wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
-
-            {{ObsoletePropertiesSnippet}}
 
                 public {{CompiletimeTypeSnippet()}} WrappedInstance => wrappedInstance;
 

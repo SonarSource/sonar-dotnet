@@ -41,12 +41,6 @@ public readonly struct ImplicitStackAllocArrayCreationExpressionSyntaxWrapper
     private ImplicitStackAllocArrayCreationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public ExpressionSyntax SyntaxNode => wrappedInstance;
-
     public ExpressionSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

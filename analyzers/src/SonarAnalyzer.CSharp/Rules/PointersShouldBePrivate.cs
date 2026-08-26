@@ -79,7 +79,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static bool IsUnmanagedFunctionPointer(VariableDeclarationSyntax variableDeclaration) =>
             variableDeclaration.Type.IsKind(SyntaxKindEx.FunctionPointerType)
             && (FunctionPointerTypeSyntaxWrapper)variableDeclaration.Type is var functionPointerType
-            && functionPointerType.CallingConvention.SyntaxNode != null
+            && functionPointerType.CallingConvention.WrappedInstance is not null
             && !functionPointerType.CallingConvention.ManagedOrUnmanagedKeyword.IsKind(SyntaxKindEx.ManagedKeyword);
     }
 }

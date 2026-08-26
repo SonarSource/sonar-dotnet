@@ -44,12 +44,6 @@ public readonly struct ExtensionMemberCrefSyntaxWrapper
     private ExtensionMemberCrefSyntaxWrapper(MemberCrefSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
-    [Obsolete("Use WrappedInstance instead")]
-    public MemberCrefSyntax Node => wrappedInstance;
-
-    [Obsolete("Use WrappedInstance instead")]
-    public MemberCrefSyntax SyntaxNode => wrappedInstance;
-
     public MemberCrefSyntax WrappedInstance => wrappedInstance;
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;
