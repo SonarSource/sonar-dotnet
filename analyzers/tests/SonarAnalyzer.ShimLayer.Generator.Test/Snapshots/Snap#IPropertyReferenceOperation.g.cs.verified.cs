@@ -35,6 +35,8 @@ public readonly struct IPropertyReferenceOperationWrapper : IOperationWrapper
     private static readonly Func<IOperation, IPropertySymbol> PropertyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IPropertySymbol>>(WrappedType, "Property");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
+    private static readonly Action<IOperation, OperationVisitorWrapper> AcceptAccessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitorWrapper>>(WrappedType, "Accept");
+
     private IPropertyReferenceOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -56,6 +58,8 @@ public readonly struct IPropertyReferenceOperationWrapper : IOperationWrapper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IPropertySymbol Property => (IPropertySymbol)PropertyAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+
+    public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 
     public static IPropertyReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;

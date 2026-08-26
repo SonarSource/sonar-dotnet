@@ -76,6 +76,7 @@ public readonly struct CommonForEachStatementSyntaxWrapper
     public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
     public StatementSyntax Statement => StatementAccessor(wrappedInstance);
 
+    public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);
     public IEnumerable<SyntaxNode> AncestorsAndSelf(bool ascendOutOfTrivia) => wrappedInstance.AncestorsAndSelf(ascendOutOfTrivia);
     public IEnumerable<SyntaxNode> ChildNodes() => wrappedInstance.ChildNodes();
@@ -128,7 +129,10 @@ public readonly struct CommonForEachStatementSyntaxWrapper
     public bool IsEquivalentTo(SyntaxNode node, bool topLevel) => wrappedInstance.IsEquivalentTo(node, topLevel);
     public bool IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
+    [System.ObsoleteAttribute("Syntax serialization support is no longer supported", true)]
+    public void SerializeTo(Stream stream, CancellationToken cancellationToken) => wrappedInstance.SerializeTo(stream, cancellationToken);
     public string ToFullString() => wrappedInstance.ToFullString();
+    public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
     public CommonForEachStatementSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => CommonForEachStatementSyntaxWrapper.From(AddAttributeListsAccessor(wrappedInstance, items));
     public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);

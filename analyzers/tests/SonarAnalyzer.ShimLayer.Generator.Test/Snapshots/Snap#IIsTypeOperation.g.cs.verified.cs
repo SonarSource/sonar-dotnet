@@ -33,6 +33,8 @@ public readonly struct IIsTypeOperationWrapper : IOperationWrapper
     private static readonly Func<IOperation, ITypeSymbol> TypeOperandAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "TypeOperand");
     private static readonly Func<IOperation, IOperation> ValueOperandAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "ValueOperand");
 
+    private static readonly Action<IOperation, OperationVisitorWrapper> AcceptAccessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitorWrapper>>(WrappedType, "Accept");
+
     private IIsTypeOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -52,6 +54,8 @@ public readonly struct IIsTypeOperationWrapper : IOperationWrapper
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
     public ITypeSymbol TypeOperand => (ITypeSymbol)TypeOperandAccessor(wrappedInstance);
     public IOperation ValueOperand => ValueOperandAccessor(wrappedInstance);
+
+    public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 
     public static IIsTypeOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;

@@ -31,6 +31,7 @@ public readonly struct SyntaxContextReceiverCreatorWrapper
     private static readonly Func<Object, Object> CloneAccessor = AccessorFactory.CreateMethod<Func<Object, Object>>(WrappedType, "Clone");
     private static readonly Func<Object, Object[], Object> DynamicInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, Object[], Object>>(WrappedType, "DynamicInvoke");
     private static readonly Func<Object, Delegate[]> GetInvocationListAccessor = AccessorFactory.CreateMethod<Func<Object, Delegate[]>>(WrappedType, "GetInvocationList");
+    private static readonly Action<Object, SerializationInfo, StreamingContext> GetObjectDataAccessor = AccessorFactory.CreateMethod<Action<Object, SerializationInfo, StreamingContext>>(WrappedType, "GetObjectData");
 
     private SyntaxContextReceiverCreatorWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -44,6 +45,9 @@ public readonly struct SyntaxContextReceiverCreatorWrapper
     public Object Clone() => (Object)CloneAccessor(wrappedInstance);
     public Object DynamicInvoke(Object[] args) => (Object)DynamicInvokeAccessor(wrappedInstance, args);
     public Delegate[] GetInvocationList() => (Delegate[])GetInvocationListAccessor(wrappedInstance);
+    [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+    public void GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectDataAccessor(wrappedInstance, info, context);
 
     public static SyntaxContextReceiverCreatorWrapper From(Object instance)
     {

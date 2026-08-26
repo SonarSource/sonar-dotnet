@@ -27,6 +27,7 @@
     <Using Include="System.IO" />
     <Using Include="System.Reflection" />
     <Using Include="System.Reflection.Metadata" />
+    <Using Include="System.Runtime.Serialization" />
     <Using Include="System.Security.Cryptography" />
     <Using Include="System.Text" />
   </ItemGroup>

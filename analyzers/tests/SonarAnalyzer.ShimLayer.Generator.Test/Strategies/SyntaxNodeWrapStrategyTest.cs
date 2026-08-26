@@ -106,9 +106,9 @@ public class SyntaxNodeWrapStrategyTest
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Span))[0], true, "SpanAccessor"),
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.ClassOrStructKeyword))[0], false, "ClassOrStructKeywordAccessor"),
                 new(skippedPropertyTypeMember, false, "ConstraintClausesAccessor"),     // PropertyType is skipped and this should not render anything
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Accept))[0], true, "AcceptAccessor"), // ToDo: NET-4372 Add support for Void
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.FindTrivia))[0], true, "AcceptAccessor"),              // Passtrough method - with Func<..> parameter
-                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.FindTrivia))[1], true, "AcceptAccessor_Overload2"),    // Passtrough method - normal
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.Accept))[0], true, "AcceptAccessor"),                  // Passthrough method - void
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.FindTrivia))[0], true, "AcceptAccessor"),              // Passthrough method - with Func<..> parameter
+                new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.FindTrivia))[1], true, "AcceptAccessor_Overload2"),    // Passthrough method - normal
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.WithParameterList))[0], false, "WithParameterListAccessor"),   // Wrapped method
             ]);
         var model = new StrategyModel(new() { { skippedPropertyTypeMember.PropertyType, new SkipStrategy(skippedPropertyTypeMember.PropertyType) } });
@@ -154,6 +154,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(wrappedInstance);
 
+                public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
                 public SyntaxTrivia FindTrivia(int position, Func<SyntaxTrivia, bool> stepInto) => wrappedInstance.FindTrivia(position, stepInto);
                 public SyntaxTrivia FindTrivia(int position, bool findInsideTrivia) => wrappedInstance.FindTrivia(position, findInsideTrivia);
 

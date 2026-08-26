@@ -31,6 +31,8 @@ public readonly struct DiagnosticSuppressorWrapper
 
     public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => wrappedInstance.SupportedDiagnostics;
 
+    public void Initialize(AnalysisContext context) => wrappedInstance.Initialize(context);
+
     public static DiagnosticSuppressorWrapper From(DiagnosticAnalyzer instance)
     {
         if (instance is null)

@@ -36,6 +36,8 @@ public readonly struct IListPatternOperationWrapper : IOperationWrapper
     private static readonly Func<IOperation, ImmutableArray<IPatternOperationWrapper>> PatternsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IPatternOperationWrapper>>>(WrappedType, "Patterns");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
+    private static readonly Action<IOperation, OperationVisitorWrapper> AcceptAccessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitorWrapper>>(WrappedType, "Accept");
+
     private IListPatternOperationWrapper(IOperation wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -58,6 +60,8 @@ public readonly struct IListPatternOperationWrapper : IOperationWrapper
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public ImmutableArray<IPatternOperationWrapper> Patterns => PatternsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+
+    public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 
     public static IListPatternOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;

@@ -195,6 +195,24 @@ public class AccessorFactoryTest
         value.Should().BeNull();
     }
 
+    [TestMethod]
+    public void CreateMethod_Void_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<CollectionExpressionSyntax, CSharpSyntaxVisitor>>(typeof(CollectionExpressionSyntax), nameof(CollectionExpressionSyntax.Accept));
+        var visitor = new TestVisitor();
+        accessor(CreateCollectionExpression(), visitor);
+        visitor.Visited.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void CreateMethod_Void_Fallback()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<CollectionExpressionSyntax, CSharpSyntaxVisitor>>(null, nameof(CollectionExpressionSyntax.Accept));
+        var visitor = new TestVisitor();
+        accessor(CreateCollectionExpression(), visitor);
+        visitor.Visited.Should().BeFalse();
+    }
+
     private static IInvocationOperation CreateInvocationOperation()
     {
         var compiler = new SnippetCompiler("""
@@ -247,5 +265,13 @@ public class AccessorFactoryTest
             value = "ExistingValue";
             return true;
         }
+    }
+
+    private sealed class TestVisitor : CSharpSyntaxVisitor
+    {
+        public bool Visited { get; private set; }
+
+        public override void VisitCollectionExpression(CollectionExpressionSyntax node) =>
+            Visited = true;
     }
 }

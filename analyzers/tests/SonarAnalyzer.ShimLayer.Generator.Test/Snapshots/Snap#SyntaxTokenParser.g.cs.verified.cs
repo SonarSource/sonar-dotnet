@@ -24,10 +24,16 @@ public readonly struct SyntaxTokenParserWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
+    private static readonly Action<Object> DisposeAccessor = AccessorFactory.CreateMethod<Action<Object>>(WrappedType, "Dispose");
+    private static readonly Action<Object, int> SkipForwardToAccessor = AccessorFactory.CreateMethod<Action<Object, int>>(WrappedType, "SkipForwardTo");
+
     private SyntaxTokenParserWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    public void Dispose() => DisposeAccessor(wrappedInstance);
+    public void SkipForwardTo(int position) => SkipForwardToAccessor(wrappedInstance, position);
 
     public static SyntaxTokenParserWrapper From(Object instance)
     {

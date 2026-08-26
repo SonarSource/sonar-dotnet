@@ -199,14 +199,10 @@ internal static class AccessorFactory
         public AccessorTypes(Type methodDelegate)
         {
             var invoke = methodDelegate.GetMethod("Invoke");
-            if (invoke.ReturnType.FullName == typeof(void).FullName)
-            {
-                throw new NotSupportedException("This method only supports Func<..., TResult> and delegates with non-void return type");    // Fallback logic returns "default" expressin
-            }
             var parameters = invoke.GetParameters();    // As declared in our delegates, has additional TSender compared to the runtime method
             SenderType = parameters.First().ParameterType;
             ParameterTypes = parameters.Skip(1).Select(x => x.ParameterType).ToArray(); // Without TSender and TResult
-            ResultType = invoke.ReturnType;
+            ResultType = invoke.ReturnType;     // Can be also typeof(void)
         }
     }
 }

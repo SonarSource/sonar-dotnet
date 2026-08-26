@@ -37,13 +37,13 @@ public class StrategyModel : IEnumerable<Strategy>
                 {
                     { Name: "ImmutableArray`1" } when this[key.GenericTypeArguments.Single()] is OperationWrapStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
                     { Name: "SeparatedSyntaxList`1" } when this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument => new SeparatedSyntaxListStrategy(key, typeArgument),
-                    { Name: "Void" } => new SkipStrategy(key),    // NET-4372 not supported yet
                     { IsArray: true } => new ArrayStrategy(key, this[key.GetElementType()]),
                     { IsGenericType: true } => new GenericTypeStrategy(key, key.GenericTypeArguments.Select(x => this[x]).ToArray()),
                     // Primitive types can't be added in ModelBuilder, because typeof(int) (from RuntimeTypes module) is not equivalent to the Int32 we see here (from EcmaModule).
                     { Name: "Boolean" } => new PrimitiveStrategy(key, "bool"),
                     { Name: "Int32" } => new PrimitiveStrategy(key, "int"),
                     { Name: "String" } => new PrimitiveStrategy(key, "string"),
+                    { Name: "Void" } => new PrimitiveStrategy(key, "void"),
                     _ => new NoChangeStrategy(key)
                 };
                 Add(key, newStrategy);

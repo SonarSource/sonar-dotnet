@@ -30,6 +30,8 @@ public static partial class IOperationShimExtensions
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
 
+    private static readonly Action<IOperation, OperationVisitorWrapper> AcceptAccessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitorWrapper>>(WrappedType, "Accept");
+
     extension(IOperation wrappedInstance)
     {
         [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
@@ -38,6 +40,8 @@ public static partial class IOperationShimExtensions
         public string Language => (string)LanguageAccessor(wrappedInstance);
         public IOperation Parent => ParentAccessor(wrappedInstance);
         public SemanticModel SemanticModel => (SemanticModel)SemanticModelAccessor(wrappedInstance);
+
+        public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 
         public IAddressOfOperationWrapper? AsAddressOf => IAddressOfOperationWrapper.FromOrDefault(wrappedInstance);
         public IAnonymousFunctionOperationWrapper? AsAnonymousFunction => IAnonymousFunctionOperationWrapper.FromOrDefault(wrappedInstance);

@@ -32,13 +32,13 @@ public class IOperationStrategyTest
                 new(typeof(IOperation).GetMember(nameof(IOperation.Parent))[0], false, "ParentAccessor"),
                 new(typeof(IOperation).GetMember(nameof(IOperation.Children))[0], false, "ChildrenAccessor"),
                 new(typeof(IOperation).GetMember(nameof(IOperation.Syntax))[0], true, "SyntaxAccessor"),    // Existing member, should be ignored
-                new(typeof(IOperation).GetMember(nameof(IOperation.Accept))[0], false, "AcceptAccessor"),   // Unsupported return type: void
+                new(typeof(IOperation).GetMember(nameof(IOperation.Accept))[0], false, "AcceptAccessor"),   // Wrap method - void return type
             ]);
         var model = new Dictionary<Type, Strategy>
         {
-            { typeof(void), new SkipStrategy(typeof(void)) },
             { typeof(IInvocationOperation), new OperationWrapStrategy(typeof(IInvocationOperation), []) },
-            { typeof(IPropertyReferenceOperation), new OperationWrapStrategy(typeof(IPropertyReferenceOperation), []) }
+            { typeof(IPropertyReferenceOperation), new OperationWrapStrategy(typeof(IPropertyReferenceOperation), []) },
+            { typeof(OperationVisitor), new ClassWrapStrategy(typeof(OperationVisitor), null, []) }
         };
         var result = sut.Generate(new(model));
         result.Should().BeIgnoringLineEndings(
@@ -72,11 +72,15 @@ public class IOperationStrategyTest
                 private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
                 private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
 
+                private static readonly Action<IOperation, OperationVisitorWrapper> AcceptAccessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitorWrapper>>(WrappedType, "Accept");
+
                 extension(IOperation wrappedInstance)
                 {
                     public IOperation Parent => (IOperation)ParentAccessor(wrappedInstance);
                     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
                     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+
+                    public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 
                     public IInvocationOperationWrapper? AsInvocation => IInvocationOperationWrapper.FromOrDefault(wrappedInstance);
                     public IPropertyReferenceOperationWrapper? AsPropertyReference => IPropertyReferenceOperationWrapper.FromOrDefault(wrappedInstance);

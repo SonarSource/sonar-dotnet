@@ -66,6 +66,7 @@ public readonly struct RecursivePatternSyntaxWrapper
     public PropertyPatternClauseSyntaxWrapper PropertyPatternClause => PropertyPatternClauseSyntaxWrapper.From(PropertyPatternClauseAccessor(wrappedInstance));
     public TypeSyntax Type => TypeAccessor(wrappedInstance);
 
+    public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);
     public IEnumerable<SyntaxNode> AncestorsAndSelf(bool ascendOutOfTrivia) => wrappedInstance.AncestorsAndSelf(ascendOutOfTrivia);
     public IEnumerable<SyntaxNode> ChildNodes() => wrappedInstance.ChildNodes();
@@ -118,7 +119,10 @@ public readonly struct RecursivePatternSyntaxWrapper
     public bool IsEquivalentTo(SyntaxNode node, bool topLevel) => wrappedInstance.IsEquivalentTo(node, topLevel);
     public bool IsPartOfStructuredTrivia() => wrappedInstance.IsPartOfStructuredTrivia();
     public SyntaxKind Kind() => wrappedInstance.Kind();
+    [System.ObsoleteAttribute("Syntax serialization support is no longer supported", true)]
+    public void SerializeTo(Stream stream, CancellationToken cancellationToken) => wrappedInstance.SerializeTo(stream, cancellationToken);
     public string ToFullString() => wrappedInstance.ToFullString();
+    public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
     public RecursivePatternSyntaxWrapper AddPositionalPatternClauseSubpatterns(SubpatternSyntaxWrapper[] items) => RecursivePatternSyntaxWrapper.From(AddPositionalPatternClauseSubpatternsAccessor(wrappedInstance, items));
     public RecursivePatternSyntaxWrapper AddPropertyPatternClauseSubpatterns(SubpatternSyntaxWrapper[] items) => RecursivePatternSyntaxWrapper.From(AddPropertyPatternClauseSubpatternsAccessor(wrappedInstance, items));

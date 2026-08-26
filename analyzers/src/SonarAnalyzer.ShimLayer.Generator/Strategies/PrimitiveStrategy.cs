@@ -28,7 +28,7 @@ public class PrimitiveStrategy : Strategy
         this.name = name;
 
     public override string ToConversionSnippet(string from) =>
-        $"({name}){from}";
+        name == "void" ? from : $"({name}){from}";
 
     protected override string GenerateCore(StrategyModel model) => null;
 }
