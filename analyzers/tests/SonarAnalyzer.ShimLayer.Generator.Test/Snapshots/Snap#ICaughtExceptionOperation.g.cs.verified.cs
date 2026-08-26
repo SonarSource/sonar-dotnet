@@ -50,10 +50,6 @@ public readonly struct ICaughtExceptionOperationWrapper : IOperationWrapper
     public static ICaughtExceptionOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ICaughtExceptionOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ICaughtExceptionOperationWrapper From(IOperation instance)
     {
         if (instance is null)

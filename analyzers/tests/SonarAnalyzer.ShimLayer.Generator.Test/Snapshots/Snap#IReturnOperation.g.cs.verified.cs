@@ -52,10 +52,6 @@ public readonly struct IReturnOperationWrapper : IOperationWrapper
     public static IReturnOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IReturnOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IReturnOperationWrapper From(IOperation instance)
     {
         if (instance is null)

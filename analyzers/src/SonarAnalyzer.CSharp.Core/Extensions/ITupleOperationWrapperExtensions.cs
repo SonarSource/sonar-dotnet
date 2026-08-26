@@ -35,7 +35,7 @@ public static class ITupleOperationWrapperExtensions
                     {
                         if (ITupleOperationWrapper.IsInstance(element))
                         {
-                            CollectTupleElements(ITupleOperationWrapper.FromOperation(element));
+                            CollectTupleElements(ITupleOperationWrapper.From(element));
                         }
                         else
                         {

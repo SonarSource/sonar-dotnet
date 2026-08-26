@@ -54,10 +54,6 @@ public readonly struct IDefaultCaseClauseOperationWrapper : IOperationWrapper
     public static IDefaultCaseClauseOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IDefaultCaseClauseOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IDefaultCaseClauseOperationWrapper From(IOperation instance)
     {
         if (instance is null)

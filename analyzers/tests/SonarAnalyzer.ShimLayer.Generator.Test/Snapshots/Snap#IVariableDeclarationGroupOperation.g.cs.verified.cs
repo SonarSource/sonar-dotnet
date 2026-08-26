@@ -52,10 +52,6 @@ public readonly struct IVariableDeclarationGroupOperationWrapper : IOperationWra
     public static IVariableDeclarationGroupOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IVariableDeclarationGroupOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IVariableDeclarationGroupOperationWrapper From(IOperation instance)
     {
         if (instance is null)

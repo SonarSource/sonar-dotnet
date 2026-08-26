@@ -56,10 +56,6 @@ public readonly struct IWithOperationWrapper : IOperationWrapper
     public static IWithOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IWithOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IWithOperationWrapper From(IOperation instance)
     {
         if (instance is null)

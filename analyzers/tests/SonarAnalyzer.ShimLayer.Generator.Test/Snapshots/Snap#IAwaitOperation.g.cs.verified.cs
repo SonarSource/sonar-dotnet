@@ -52,10 +52,6 @@ public readonly struct IAwaitOperationWrapper : IOperationWrapper
     public static IAwaitOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IAwaitOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IAwaitOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -54,10 +54,6 @@ public readonly struct IDynamicObjectCreationOperationWrapper : IOperationWrappe
     public static IDynamicObjectCreationOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IDynamicObjectCreationOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IDynamicObjectCreationOperationWrapper From(IOperation instance)
     {
         if (instance is null)

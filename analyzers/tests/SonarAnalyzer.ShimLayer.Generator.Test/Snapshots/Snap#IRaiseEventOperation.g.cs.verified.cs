@@ -54,10 +54,6 @@ public readonly struct IRaiseEventOperationWrapper : IOperationWrapper
     public static IRaiseEventOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IRaiseEventOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IRaiseEventOperationWrapper From(IOperation instance)
     {
         if (instance is null)

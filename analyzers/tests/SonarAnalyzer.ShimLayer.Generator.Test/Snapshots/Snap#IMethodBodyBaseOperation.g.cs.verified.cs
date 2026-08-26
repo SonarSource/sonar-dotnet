@@ -54,10 +54,6 @@ public readonly struct IMethodBodyBaseOperationWrapper : IOperationWrapper
     public static IMethodBodyBaseOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IMethodBodyBaseOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IMethodBodyBaseOperationWrapper From(IOperation instance)
     {
         if (instance is null)

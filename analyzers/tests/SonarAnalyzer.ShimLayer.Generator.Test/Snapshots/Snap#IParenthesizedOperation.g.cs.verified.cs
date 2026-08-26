@@ -52,10 +52,6 @@ public readonly struct IParenthesizedOperationWrapper : IOperationWrapper
     public static IParenthesizedOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IParenthesizedOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IParenthesizedOperationWrapper From(IOperation instance)
     {
         if (instance is null)

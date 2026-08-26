@@ -72,10 +72,6 @@ public readonly struct IForToLoopOperationWrapper : IOperationWrapper
     public static IForToLoopOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IForToLoopOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IForToLoopOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -52,10 +52,6 @@ public readonly struct IInterpolatedStringAppendOperationWrapper : IOperationWra
     public static IInterpolatedStringAppendOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IInterpolatedStringAppendOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IInterpolatedStringAppendOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -165,7 +165,7 @@ public static partial class CfgSerializer
                 .Concat(cfg.Blocks.Select(x => x.BranchValue).Where(x => x is not null))
                 .SelectMany(x => x.DescendantsAndSelf())
                 .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
-                .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
+                .Select(IFlowAnonymousFunctionOperationWrapper.From);
     }
 
     private sealed class RoslynCfgIdProvider

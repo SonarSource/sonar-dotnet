@@ -60,10 +60,6 @@ public readonly struct ICatchClauseOperationWrapper : IOperationWrapper
     public static ICatchClauseOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ICatchClauseOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ICatchClauseOperationWrapper From(IOperation instance)
     {
         if (instance is null)

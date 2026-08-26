@@ -52,10 +52,6 @@ public readonly struct IExpressionStatementOperationWrapper : IOperationWrapper
     public static IExpressionStatementOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IExpressionStatementOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IExpressionStatementOperationWrapper From(IOperation instance)
     {
         if (instance is null)

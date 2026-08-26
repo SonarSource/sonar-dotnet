@@ -25,10 +25,6 @@ public class OperationWrapStrategy : WrapStrategy
     protected override string ConversionSnippet => $"""
             public static {ReturnTypeSnippet()}? FromOrDefault(IOperation instance) =>
                 IsInstance(instance) ? From(instance) : null;
-
-            [Obsolete("Use From instead")]
-            public static {ReturnTypeSnippet()} FromOperation(IOperation instance) =>
-                From(instance);
         """;
 
     public OperationWrapStrategy(Type latest, MemberDescriptor[] members) : base(latest, typeof(IOperation), null, members) { }

@@ -50,10 +50,6 @@ public readonly struct IDefaultValueOperationWrapper : IOperationWrapper
     public static IDefaultValueOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IDefaultValueOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IDefaultValueOperationWrapper From(IOperation instance)
     {
         if (instance is null)

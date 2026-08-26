@@ -56,10 +56,6 @@ public readonly struct ISwitchCaseOperationWrapper : IOperationWrapper
     public static ISwitchCaseOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ISwitchCaseOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ISwitchCaseOperationWrapper From(IOperation instance)
     {
         if (instance is null)

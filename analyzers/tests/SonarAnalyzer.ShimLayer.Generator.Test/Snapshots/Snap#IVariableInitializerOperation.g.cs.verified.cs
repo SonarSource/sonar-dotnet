@@ -54,10 +54,6 @@ public readonly struct IVariableInitializerOperationWrapper : IOperationWrapper
     public static IVariableInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IVariableInitializerOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IVariableInitializerOperationWrapper From(IOperation instance)
     {
         if (instance is null)

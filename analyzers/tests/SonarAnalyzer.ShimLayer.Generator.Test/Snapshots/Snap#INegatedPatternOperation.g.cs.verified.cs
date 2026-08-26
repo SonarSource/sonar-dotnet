@@ -56,10 +56,6 @@ public readonly struct INegatedPatternOperationWrapper : IOperationWrapper
     public static INegatedPatternOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static INegatedPatternOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static INegatedPatternOperationWrapper From(IOperation instance)
     {
         if (instance is null)

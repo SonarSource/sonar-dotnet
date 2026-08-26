@@ -54,10 +54,6 @@ public readonly struct ICoalesceOperationWrapper : IOperationWrapper
     public static ICoalesceOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ICoalesceOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ICoalesceOperationWrapper From(IOperation instance)
     {
         if (instance is null)

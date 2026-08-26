@@ -50,10 +50,6 @@ public readonly struct IInterpolatedStringContentOperationWrapper : IOperationWr
     public static IInterpolatedStringContentOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IInterpolatedStringContentOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IInterpolatedStringContentOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -52,10 +52,6 @@ public readonly struct ITypeParameterObjectCreationOperationWrapper : IOperation
     public static ITypeParameterObjectCreationOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ITypeParameterObjectCreationOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ITypeParameterObjectCreationOperationWrapper From(IOperation instance)
     {
         if (instance is null)

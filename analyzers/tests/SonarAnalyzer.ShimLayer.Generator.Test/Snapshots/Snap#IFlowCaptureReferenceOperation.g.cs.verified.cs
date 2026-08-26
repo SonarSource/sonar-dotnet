@@ -54,10 +54,6 @@ public readonly struct IFlowCaptureReferenceOperationWrapper : IOperationWrapper
     public static IFlowCaptureReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IFlowCaptureReferenceOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IFlowCaptureReferenceOperationWrapper From(IOperation instance)
     {
         if (instance is null)

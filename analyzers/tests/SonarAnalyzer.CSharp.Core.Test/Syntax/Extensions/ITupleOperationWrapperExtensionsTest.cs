@@ -109,7 +109,7 @@ public class ITupleOperationWrapperExtensionsTest
         compilation.GetDiagnostics().Should().BeEmpty();
         var model = compilation.GetSemanticModel(syntaxTree);
         var tupleExpression = syntaxTree.GetRoot().DescendantNodes().First(x => x.Kind() is SyntaxKind.TupleExpression or SyntaxKindEx.ParenthesizedVariableDesignation);
-        return ITupleOperationWrapper.FromOperation(model.GetOperation(tupleExpression));
+        return ITupleOperationWrapper.From(model.GetOperation(tupleExpression));
     }
 
     private static string WrapInMethod(string code) =>

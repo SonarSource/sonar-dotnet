@@ -58,10 +58,6 @@ public readonly struct IRangeOperationWrapper : IOperationWrapper
     public static IRangeOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IRangeOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IRangeOperationWrapper From(IOperation instance)
     {
         if (instance is null)

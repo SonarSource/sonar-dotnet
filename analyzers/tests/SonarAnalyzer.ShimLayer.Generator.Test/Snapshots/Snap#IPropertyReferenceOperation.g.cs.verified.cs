@@ -60,10 +60,6 @@ public readonly struct IPropertyReferenceOperationWrapper : IOperationWrapper
     public static IPropertyReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IPropertyReferenceOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IPropertyReferenceOperationWrapper From(IOperation instance)
     {
         if (instance is null)

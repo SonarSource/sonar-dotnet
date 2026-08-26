@@ -54,10 +54,6 @@ public readonly struct IReDimClauseOperationWrapper : IOperationWrapper
     public static IReDimClauseOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IReDimClauseOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IReDimClauseOperationWrapper From(IOperation instance)
     {
         if (instance is null)

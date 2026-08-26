@@ -28,7 +28,7 @@ public static class ControlFlowGraphExtensions
                .SelectMany(x => x.OperationsAndBranchValue)
                .SelectMany(x => x.DescendantsAndSelf())
                .Where(IFlowAnonymousFunctionOperationWrapper.IsInstance)
-               .Select(IFlowAnonymousFunctionOperationWrapper.FromOperation);
+               .Select(IFlowAnonymousFunctionOperationWrapper.From);
 
         // Similar to ControlFlowGraphExtensions.GetLocalFunctionControlFlowGraphInScope from Roslyn
         public ControlFlowGraph FindLocalFunctionCfgInScope(IMethodSymbol localFunction, CancellationToken cancel)

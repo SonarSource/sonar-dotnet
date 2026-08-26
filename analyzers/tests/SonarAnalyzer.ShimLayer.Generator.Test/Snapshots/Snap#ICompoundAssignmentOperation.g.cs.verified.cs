@@ -64,10 +64,6 @@ public readonly struct ICompoundAssignmentOperationWrapper : IOperationWrapper
     public static ICompoundAssignmentOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ICompoundAssignmentOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ICompoundAssignmentOperationWrapper From(IOperation instance)
     {
         if (instance is null)

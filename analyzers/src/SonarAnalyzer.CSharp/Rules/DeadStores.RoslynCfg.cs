@@ -46,23 +46,23 @@ namespace SonarAnalyzer.CSharp.Rules
                         switch (operation.Kind)
                         {
                             case OperationKindEx.LocalReference:
-                                ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.FromOperation(operation));
+                                ProcessParameterOrLocalReference(ILocalReferenceOperationWrapper.From(operation));
                                 break;
                             case OperationKindEx.ParameterReference:
-                                ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.FromOperation(operation));
+                                ProcessParameterOrLocalReference(IParameterReferenceOperationWrapper.From(operation));
                                 break;
                             case OperationKindEx.SimpleAssignment:
-                                ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.FromOperation(operation));
+                                ProcessSimpleAssignment(ISimpleAssignmentOperationWrapper.From(operation));
                                 break;
                             case OperationKindEx.CompoundAssignment:
-                                ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper.FromOperation(operation));
+                                ProcessCompoundAssignment(ICompoundAssignmentOperationWrapper.From(operation));
                                 break;
                             case OperationKindEx.DeconstructionAssignment:
-                                ProcessDeconstructionAssignment(IDeconstructionAssignmentOperationWrapper.FromOperation(operation));
+                                ProcessDeconstructionAssignment(IDeconstructionAssignmentOperationWrapper.From(operation));
                                 break;
                             case OperationKindEx.Increment:
                             case OperationKindEx.Decrement:
-                                ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper.FromOperation(operation));
+                                ProcessIncrementOrDecrement(IIncrementOrDecrementOperationWrapper.From(operation));
                                 break;
                         }
                     }
@@ -97,7 +97,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     if (ITupleOperationWrapper.IsInstance(deconstructionAssignment.Target))
                     {
-                        foreach (var tupleElement in ITupleOperationWrapper.FromOperation(deconstructionAssignment.Target).AllElements)
+                        foreach (var tupleElement in ITupleOperationWrapper.From(deconstructionAssignment.Target).AllElements)
                         {
                             var targets = ProcessAssignment(deconstructionAssignment, tupleElement);
                             liveOut.ExceptWith(targets);

@@ -58,10 +58,6 @@ public readonly struct IDynamicMemberReferenceOperationWrapper : IOperationWrapp
     public static IDynamicMemberReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IDynamicMemberReferenceOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IDynamicMemberReferenceOperationWrapper From(IOperation instance)
     {
         if (instance is null)

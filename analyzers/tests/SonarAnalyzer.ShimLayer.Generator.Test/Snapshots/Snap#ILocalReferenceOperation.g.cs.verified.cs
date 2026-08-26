@@ -54,10 +54,6 @@ public readonly struct ILocalReferenceOperationWrapper : IOperationWrapper
     public static ILocalReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ILocalReferenceOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ILocalReferenceOperationWrapper From(IOperation instance)
     {
         if (instance is null)

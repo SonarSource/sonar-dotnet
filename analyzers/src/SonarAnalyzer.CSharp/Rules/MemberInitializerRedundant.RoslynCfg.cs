@@ -48,7 +48,7 @@ namespace SonarAnalyzer.CSharp.Rules
                 {
                     if (checkReadBeforeWrite && operation.Kind == OperationKindEx.FlowAnonymousFunction)
                     {
-                        var anonymousFunction = IFlowAnonymousFunctionOperationWrapper.FromOperation(operation);
+                        var anonymousFunction = IFlowAnonymousFunctionOperationWrapper.From(operation);
                         var anonymousFunctionCfg = controlFlowGraph.GetAnonymousFunctionControlFlowGraph(anonymousFunction, cancel);
                         if (anonymousFunctionCfg.Blocks.Any(x => ProcessBlock(x, anonymousFunctionCfg, checkReadBeforeWrite)))
                         {
@@ -71,18 +71,18 @@ namespace SonarAnalyzer.CSharp.Rules
                     return !checkReadBeforeWrite;
                 }
 
-                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == child;
+                var isWrite = child.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.From(parent).Target == child;
                 return checkReadBeforeWrite ^ isWrite;
             }
 
             private static ISymbol MemberSymbol(IOperation operation) =>
                 operation.Kind switch
                 {
-                    OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.FromOperation(operation) is var fieldReference && InstanceReferencesThis(fieldReference.Instance) =>
+                    OperationKindEx.FieldReference when IFieldReferenceOperationWrapper.From(operation) is var fieldReference && InstanceReferencesThis(fieldReference.Instance) =>
                         fieldReference.Field,
-                    OperationKindEx.PropertyReference when IPropertyReferenceOperationWrapper.FromOperation(operation) is var propertyReference && InstanceReferencesThis(propertyReference.Instance) =>
+                    OperationKindEx.PropertyReference when IPropertyReferenceOperationWrapper.From(operation) is var propertyReference && InstanceReferencesThis(propertyReference.Instance) =>
                         propertyReference.Property,
-                    OperationKindEx.EventReference when IEventReferenceOperationWrapper.FromOperation(operation) is var eventReference && InstanceReferencesThis(eventReference.Instance) =>
+                    OperationKindEx.EventReference when IEventReferenceOperationWrapper.From(operation) is var eventReference && InstanceReferencesThis(eventReference.Instance) =>
                         eventReference.Member,
                     _ => null
                 };

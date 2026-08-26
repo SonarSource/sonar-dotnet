@@ -56,10 +56,6 @@ public readonly struct IFieldInitializerOperationWrapper : IOperationWrapper
     public static IFieldInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IFieldInitializerOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IFieldInitializerOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -52,10 +52,6 @@ public readonly struct IDelegateCreationOperationWrapper : IOperationWrapper
     public static IDelegateCreationOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IDelegateCreationOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IDelegateCreationOperationWrapper From(IOperation instance)
     {
         if (instance is null)

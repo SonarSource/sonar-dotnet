@@ -54,10 +54,6 @@ public readonly struct IInlineArrayAccessOperationWrapper : IOperationWrapper
     public static IInlineArrayAccessOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IInlineArrayAccessOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IInlineArrayAccessOperationWrapper From(IOperation instance)
     {
         if (instance is null)

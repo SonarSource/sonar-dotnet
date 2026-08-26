@@ -64,10 +64,6 @@ public readonly struct IRecursivePatternOperationWrapper : IOperationWrapper
     public static IRecursivePatternOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IRecursivePatternOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IRecursivePatternOperationWrapper From(IOperation instance)
     {
         if (instance is null)

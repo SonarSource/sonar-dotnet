@@ -58,10 +58,6 @@ public readonly struct IRangeCaseClauseOperationWrapper : IOperationWrapper
     public static IRangeCaseClauseOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IRangeCaseClauseOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IRangeCaseClauseOperationWrapper From(IOperation instance)
     {
         if (instance is null)

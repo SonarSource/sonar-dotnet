@@ -54,10 +54,6 @@ public readonly struct ISymbolInitializerOperationWrapper : IOperationWrapper
     public static ISymbolInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ISymbolInitializerOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ISymbolInitializerOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -68,10 +68,6 @@ public readonly struct IForEachLoopOperationWrapper : IOperationWrapper
     public static IForEachLoopOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IForEachLoopOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IForEachLoopOperationWrapper From(IOperation instance)
     {
         if (instance is null)

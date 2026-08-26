@@ -52,10 +52,6 @@ public readonly struct IAttributeOperationWrapper : IOperationWrapper
     public static IAttributeOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IAttributeOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IAttributeOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -58,10 +58,6 @@ public readonly struct IInterpolatedStringHandlerCreationOperationWrapper : IOpe
     public static IInterpolatedStringHandlerCreationOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IInterpolatedStringHandlerCreationOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IInterpolatedStringHandlerCreationOperationWrapper From(IOperation instance)
     {
         if (instance is null)

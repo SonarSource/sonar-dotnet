@@ -54,10 +54,6 @@ public readonly struct ICollectionExpressionOperationWrapper : IOperationWrapper
     public static ICollectionExpressionOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ICollectionExpressionOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ICollectionExpressionOperationWrapper From(IOperation instance)
     {
         if (instance is null)

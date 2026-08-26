@@ -60,10 +60,6 @@ public readonly struct IBinaryPatternOperationWrapper : IOperationWrapper
     public static IBinaryPatternOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IBinaryPatternOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IBinaryPatternOperationWrapper From(IOperation instance)
     {
         if (instance is null)

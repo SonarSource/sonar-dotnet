@@ -56,10 +56,6 @@ public readonly struct IIsTypeOperationWrapper : IOperationWrapper
     public static IIsTypeOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IIsTypeOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IIsTypeOperationWrapper From(IOperation instance)
     {
         if (instance is null)

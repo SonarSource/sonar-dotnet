@@ -56,10 +56,6 @@ public readonly struct ICollectionElementInitializerOperationWrapper : IOperatio
     public static ICollectionElementInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ICollectionElementInitializerOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ICollectionElementInitializerOperationWrapper From(IOperation instance)
     {
         if (instance is null)

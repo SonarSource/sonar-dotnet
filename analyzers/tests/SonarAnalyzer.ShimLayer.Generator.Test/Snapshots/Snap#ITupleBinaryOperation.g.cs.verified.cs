@@ -56,10 +56,6 @@ public readonly struct ITupleBinaryOperationWrapper : IOperationWrapper
     public static ITupleBinaryOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ITupleBinaryOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ITupleBinaryOperationWrapper From(IOperation instance)
     {
         if (instance is null)

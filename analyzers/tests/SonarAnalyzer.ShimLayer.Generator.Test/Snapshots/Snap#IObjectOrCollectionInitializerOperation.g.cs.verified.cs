@@ -52,10 +52,6 @@ public readonly struct IObjectOrCollectionInitializerOperationWrapper : IOperati
     public static IObjectOrCollectionInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IObjectOrCollectionInitializerOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IObjectOrCollectionInitializerOperationWrapper From(IOperation instance)
     {
         if (instance is null)

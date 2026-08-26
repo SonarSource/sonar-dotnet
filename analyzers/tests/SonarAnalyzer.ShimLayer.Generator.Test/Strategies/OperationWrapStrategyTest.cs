@@ -65,10 +65,6 @@ public class OperationWrapStrategyTest
                 public static IFieldInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;
 
-                [Obsolete("Use From instead")]
-                public static IFieldInitializerOperationWrapper FromOperation(IOperation instance) =>
-                    From(instance);
-
                 public static IFieldInitializerOperationWrapper From(IOperation instance)
                 {
                     if (instance is null)
@@ -137,10 +133,6 @@ public class OperationWrapStrategyTest
 
                 public static IFieldReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;
-
-                [Obsolete("Use From instead")]
-                public static IFieldReferenceOperationWrapper FromOperation(IOperation instance) =>
-                    From(instance);
 
                 public static IFieldReferenceOperationWrapper From(IOperation instance)
                 {
@@ -225,10 +217,6 @@ public class OperationWrapStrategyTest
                 public static ITupleOperationWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;
 
-                [Obsolete("Use From instead")]
-                public static ITupleOperationWrapper FromOperation(IOperation instance) =>
-                    From(instance);
-
                 public static ITupleOperationWrapper From(IOperation instance)
                 {
                     if (instance is null)
@@ -305,10 +293,6 @@ public class OperationWrapStrategyTest
 
                 public static ControlFlowGraphWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;
-
-                [Obsolete("Use From instead")]
-                public static ControlFlowGraphWrapper FromOperation(IOperation instance) =>
-                    From(instance);
 
                 public static ControlFlowGraphWrapper From(IOperation instance)
                 {

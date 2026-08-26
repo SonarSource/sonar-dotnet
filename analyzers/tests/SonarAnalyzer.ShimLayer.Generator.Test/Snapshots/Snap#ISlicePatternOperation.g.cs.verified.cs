@@ -58,10 +58,6 @@ public readonly struct ISlicePatternOperationWrapper : IOperationWrapper
     public static ISlicePatternOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static ISlicePatternOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static ISlicePatternOperationWrapper From(IOperation instance)
     {
         if (instance is null)

@@ -52,10 +52,6 @@ public readonly struct IStaticLocalInitializationSemaphoreOperationWrapper : IOp
     public static IStaticLocalInitializationSemaphoreOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IStaticLocalInitializationSemaphoreOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IStaticLocalInitializationSemaphoreOperationWrapper From(IOperation instance)
     {
         if (instance is null)

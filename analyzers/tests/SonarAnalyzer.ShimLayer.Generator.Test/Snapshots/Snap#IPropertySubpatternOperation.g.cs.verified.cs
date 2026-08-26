@@ -54,10 +54,6 @@ public readonly struct IPropertySubpatternOperationWrapper : IOperationWrapper
     public static IPropertySubpatternOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IPropertySubpatternOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IPropertySubpatternOperationWrapper From(IOperation instance)
     {
         if (instance is null)

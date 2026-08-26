@@ -127,7 +127,7 @@ public partial class InfiniteRecursion
             {
                 if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x))) is { } operation)
                 {
-                    var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.FromOperation(parent).Target == operation;
+                    var isWrite = operation.Parent is { Kind: OperationKindEx.SimpleAssignment } parent && ISimpleAssignmentOperationWrapper.From(parent).Target == operation;
                     return isGetAccesor ^ isWrite;
                 }
 
@@ -137,17 +137,17 @@ public partial class InfiniteRecursion
                     operation.Kind switch
                     {
                         OperationKindEx.PropertyReference
-                            when IPropertyReferenceOperationWrapper.FromOperation(operation) is var propertyReference && InstanceReferencesThis(propertyReference.Instance) =>
+                            when IPropertyReferenceOperationWrapper.From(operation) is var propertyReference && InstanceReferencesThis(propertyReference.Instance) =>
                             propertyReference.Property,
                         OperationKindEx.Invocation
-                            when IInvocationOperationWrapper.FromOperation(operation) is var invocation && (!invocation.IsVirtual || InstanceReferencesThis(invocation.Instance)) =>
+                            when IInvocationOperationWrapper.From(operation) is var invocation && (!invocation.IsVirtual || InstanceReferencesThis(invocation.Instance)) =>
                             invocation.TargetMethod,
-                        OperationKindEx.Binary => IBinaryOperationWrapper.FromOperation(operation).OperatorMethod,
-                        OperationKindEx.Decrement => IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
-                        OperationKindEx.Increment => IIncrementOrDecrementOperationWrapper.FromOperation(operation).OperatorMethod,
-                        OperationKindEx.Unary => IUnaryOperationWrapper.FromOperation(operation).OperatorMethod,
-                        OperationKindEx.Conversion => IConversionOperationWrapper.FromOperation(operation).OperatorMethod,
-                        OperationKindEx.EventReference => IEventReferenceOperationWrapper.FromOperation(operation).Member,
+                        OperationKindEx.Binary => IBinaryOperationWrapper.From(operation).OperatorMethod,
+                        OperationKindEx.Decrement => IIncrementOrDecrementOperationWrapper.From(operation).OperatorMethod,
+                        OperationKindEx.Increment => IIncrementOrDecrementOperationWrapper.From(operation).OperatorMethod,
+                        OperationKindEx.Unary => IUnaryOperationWrapper.From(operation).OperatorMethod,
+                        OperationKindEx.Conversion => IConversionOperationWrapper.From(operation).OperatorMethod,
+                        OperationKindEx.EventReference => IEventReferenceOperationWrapper.From(operation).Member,
                         _ => null
                     };
 
@@ -158,7 +158,7 @@ public partial class InfiniteRecursion
 
                 static bool IsExtensionParameterReference(IOperation instance) =>
                     instance.Kind == OperationKindEx.ParameterReference
-                    && IParameterReferenceOperationWrapper.FromOperation(instance).Parameter is { ContainingSymbol: ITypeSymbol { TypeKind: TypeKindEx.Extension } };
+                    && IParameterReferenceOperationWrapper.From(instance).Parameter is { ContainingSymbol: ITypeSymbol { TypeKind: TypeKindEx.Extension } };
             }
 
             protected override bool IsInvalid(BasicBlock block) => false;

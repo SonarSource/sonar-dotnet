@@ -56,10 +56,6 @@ public readonly struct IPropertyInitializerOperationWrapper : IOperationWrapper
     public static IPropertyInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
         IsInstance(instance) ? From(instance) : null;
 
-    [Obsolete("Use From instead")]
-    public static IPropertyInitializerOperationWrapper FromOperation(IOperation instance) =>
-        From(instance);
-
     public static IPropertyInitializerOperationWrapper From(IOperation instance)
     {
         if (instance is null)
