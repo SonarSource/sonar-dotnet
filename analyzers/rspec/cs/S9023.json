@@ -1,0 +1,26 @@
+{
+  "title": "\"Include\" calls discarded by query reshaping should be fixed",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "entity-framework-core",
+    "entity-framework",
+    "orm",
+    "database"
+  ],
+  "defaultSeverity": "Critical",
+  "ruleSpecification": "RSPEC-9023",
+  "sqKey": "S9023",
+  "scope": "Main",
+  "quickfix": "infeasible",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}

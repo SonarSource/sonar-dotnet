@@ -8944,7 +8944,7 @@ public static class RuleTypeMappingCS
         // ["S9020"],
         // ["S9021"],
         ["S9022"] = "CODE_SMELL",
-        // ["S9023"],
+        ["S9023"] = "BUG",
         // ["S9024"],
         // ["S9025"],
         // ["S9026"],

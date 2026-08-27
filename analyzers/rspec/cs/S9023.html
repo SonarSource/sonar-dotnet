@@ -1,0 +1,39 @@
+<p>An <code>Include</code> call can compile and run without error while Entity Framework Core silently drops the data it requests.</p>
+<h2>Why is this an issue?</h2>
+<p>Entity Framework Core tracks pending <code>Include</code> calls against the shape of the entity flowing through the query. An operation such as
+<code>SelectMany</code> that changes this shape to a different entity type drops any <code>Include</code> that was requested against the earlier
+shape. No exception is thrown and no warning is logged, so the missing data is only noticed once it turns out to be missing.</p>
+<h3>What is the potential impact?</h3>
+<p>Code that expects a navigation to be loaded still compiles and runs, but the property is null or empty at runtime. The resulting bug — a
+<code>NullReferenceException</code>, or silently incomplete data shown to a user — surfaces far from the query that caused it.</p>
+<h2>How to fix it</h2>
+<p>Move the <code>Include</code> after the operation that changes the shape, anchored on the new entity type. This requires a navigation back to the
+original type; if the target entity does not expose one, add it, or restructure the query so the <code>Include</code> runs before the shape-changing
+operation.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+var posts = await context.Blogs
+    .Include(b =&gt; b.Owner) // Noncompliant: dropped once SelectMany reshapes the query to Post
+    .SelectMany(b =&gt; b.Posts)
+    .ToListAsync();
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+var posts = await context.Blogs
+    .SelectMany(b =&gt; b.Posts)
+    .Include(p =&gt; p.Blog).ThenInclude(b =&gt; b.Owner)
+    .ToListAsync();
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager">Loading related data - Eager loading</a></li>
+</ul>
+<h3>Related rules</h3>
+<ul>
+  <li>{rule:csharpsquid:S8733} - covers loading multiple sibling collections in a single query; that rule’s Includes are effective but expensive, this
+  rule’s Includes are dropped entirely.</li>
+  <li>{rule:csharpsquid:S9022} - covers <code>Include</code> calls that are harmless no-ops rather than silent data loss.</li>
+</ul>
+
