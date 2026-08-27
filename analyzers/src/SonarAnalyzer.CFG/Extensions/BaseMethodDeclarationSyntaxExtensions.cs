@@ -18,7 +18,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace StyleCop.Analyzers.Lightup;
+namespace SonarAnalyzer.CFG.Extensions;
 
 public static class BaseMethodDeclarationSyntaxExtensions
 {

@@ -28,8 +28,7 @@ public static class DiagnosticDescriptorExtensions
                 // Roslyn calls an analyzer if any of the diagnostics is active. We need to remove deactivated rules from execution to improve overall performance.
                 // This is a reproduction of Roslyn activation logic:
                 // https://github.com/dotnet/roslyn/blob/0368609e1467563247e9b5e4e3fe8bff533d59b6/src/Compilers/Core/Portable/DiagnosticAnalyzer/AnalyzerDriver.cs#L1316-L1327
-                var options = CompilationOptionsWrapper.FromObject(context.Compilation.Options).SyntaxTreeOptionsProvider;
-                var severity = options.Instance is not null
+                var severity = context.Compilation.Options.SyntaxTreeOptionsProvider is { WrappedInstance: not null } options
                                 && (options.TryGetDiagnosticValue(context.Tree, descriptor.Id, default, out var severityFromOptions)
                                     || options.TryGetGlobalDiagnosticValue(descriptor.Id, default, out severityFromOptions))
                                     ? severityFromOptions                                               // .editorconfig for a specific tree

@@ -16,14 +16,12 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
-using StyleCop.Analyzers.Lightup;
 using NullableAnnotation = SonarAnalyzer.ShimLayer.NullableAnnotation;
 
-namespace SonarAnalyzer.Test.Wrappers;
+namespace SonarAnalyzer.Core.Test.ShimLayer.Generated;
 
 [TestClass]
-public class INamedTypeSymbolExtensionsTests
+public class INamedTypeSymbolShimExtensionsTest
 {
     [TestMethod]
     [DataRow("#nullable enable", "?", NullableAnnotation.Annotated)]
@@ -62,8 +60,13 @@ public class INamedTypeSymbolExtensionsTests
                 }
             }
             """;
-        ValidateTypeArgumentNullableAnnotations(code,
-            NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated, NullableAnnotation.Annotated, NullableAnnotation.NotAnnotated, NullableAnnotation.Annotated);
+        ValidateTypeArgumentNullableAnnotations(
+            code,
+            NullableAnnotation.NotAnnotated,
+            NullableAnnotation.Annotated,
+            NullableAnnotation.Annotated,
+            NullableAnnotation.NotAnnotated,
+            NullableAnnotation.Annotated);
     }
 
     [TestMethod]
@@ -87,10 +90,10 @@ public class INamedTypeSymbolExtensionsTests
     private static void ValidateTypeArgumentNullableAnnotations(string code, params NullableAnnotation[] expected)
     {
         var (tree, semanticModel) = TestCompiler.CompileCS(code);
-        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
+        var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.Identifier.ValueText == "o"); // o in o.ToString()
         var namedType = semanticModel.GetTypeInfo(identifier).Type.Should().BeAssignableTo<INamedTypeSymbol>().Which;
-        var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations;
-        var typeArgumentNullability = namedType.TypeArgumentNullableAnnotations;
-        typeArgumentNullabilityShim.Should().BeEquivalentTo(expected).And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
+        var typeArgumentNullabilityShim = INamedTypeSymbolShimExtensions.get_TypeArgumentNullableAnnotations(namedType);
+        var typeArgumentNullabilityRoslyn = namedType.TypeArgumentNullableAnnotations;
+        typeArgumentNullabilityShim.Should().BeEquivalentTo(expected).And.BeEquivalentTo(typeArgumentNullabilityRoslyn.Select(x => (NullableAnnotation)x));
     }
 }

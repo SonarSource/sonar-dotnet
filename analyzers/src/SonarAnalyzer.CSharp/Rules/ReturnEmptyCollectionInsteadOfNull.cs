@@ -69,7 +69,7 @@ public sealed class ReturnEmptyCollectionInsteadOfNull : SonarDiagnosticAnalyzer
         node is BasePropertyDeclarationSyntax property ? Accessor(property)?.Body : node.GetBody();
 
     private static bool IsReturningCollection(ITypeSymbol type) =>
-        type.DerivesOrImplementsAny(CollectionTypes) && type.NullableAnnotation() != NullableAnnotation.Annotated;
+        type.DerivesOrImplementsAny(CollectionTypes) && type.NullableAnnotation != NullableAnnotation.Annotated;
 
     private static bool IsExemptedType(ITypeSymbol type) =>
         type.Is(KnownType.System_String)

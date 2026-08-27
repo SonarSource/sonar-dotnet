@@ -91,7 +91,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
             Debug.Assert(expressionTypeArguments.Length == castTypeArguments.Length, "Always true, because otherwise the expressionType.Equals(castType) check in CheckCastExpression is false.");
             foreach (var typeArgumentPair in expressionTypeArguments.Zip(castTypeArguments, Pair.From))
             {
-                var typeArgumentNullablityMatch = typeArgumentPair.Left.NullableAnnotation() == typeArgumentPair.Right.NullableAnnotation();
+                var typeArgumentNullablityMatch = typeArgumentPair.Left.NullableAnnotation == typeArgumentPair.Right.NullableAnnotation;
                 if (!typeArgumentNullablityMatch || !InnerNullabilityEquals(model, typeArgumentPair.Left, typeArgumentPair.Right))
                 {
                     return false;
@@ -116,7 +116,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
                 }
 
                 var elementType = GetElementType(invocation, methodSymbol, context.Model);
-                if (elementType != null && elementType.Equals(castType) && elementType.NullableAnnotation() == castType.NullableAnnotation())
+                if (elementType != null && elementType.Equals(castType) && elementType.NullableAnnotation == castType.NullableAnnotation)
                 {
                     var methodCalledAsStatic = methodSymbol.MethodKind == MethodKind.Ordinary;
                     ReportIssue(context, invocation, returnType, GetReportLocation(invocation, methodCalledAsStatic));

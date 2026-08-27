@@ -16,18 +16,17 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using StyleCop.Analyzers.Lightup;
 using NullableAnnotation = SonarAnalyzer.ShimLayer.NullableAnnotation;
 
-namespace SonarAnalyzer.Test.Wrappers;
+namespace SonarAnalyzer.Core.Test.ShimLayer.Generated;
 
 [TestClass]
-public class ISymbolNullableExtensionsTest
+public class ISymbolShimExtensionsTest
 {
     [TestMethod]
     [DataRow(true)]
     [DataRow(false)]
-    public void NullableAnnotation_SimpleAnnitations(bool nullable)
+    public void NullableAnnotation_SimpleAnnotations(bool nullable)
     {
         var nullableAnnotation = nullable ? "?" : string.Empty;
         var (tree, model) = TestCompiler.CompileCS($$"""
@@ -49,13 +48,13 @@ public class ISymbolNullableExtensionsTest
             """);
         var expected = nullable ? NullableAnnotation.Annotated : NullableAnnotation.NotAnnotated;
 
-        GetSymbol<IFieldSymbol>("ObjectField").NullableAnnotation().Should().Be(expected);
-        GetSymbol<IPropertySymbol>("Property").NullableAnnotation().Should().Be(expected);
-        GetSymbol<IEventSymbol>("MyEvent").NullableAnnotation().Should().Be(expected);
-        GetSymbol<IParameterSymbol>("parameter").NullableAnnotation().Should().Be(expected);
-        GetSymbol<ILocalSymbol>("local").NullableAnnotation().Should().Be(expected);
-        GetSymbol<IFieldSymbol>("ArrayField").Type.Should().BeAssignableTo<IArrayTypeSymbol>().Which.ElementNullableAnnotation().Should().Be(expected);
-        GetSymbol<IMethodSymbol>("Method").ReturnNullableAnnotation().Should().Be(expected);
+        IFieldSymbolShimExtensions.get_NullableAnnotation(GetSymbol<IFieldSymbol>("ObjectField")).Should().Be(expected);
+        IPropertySymbolShimExtensions.get_NullableAnnotation(GetSymbol<IPropertySymbol>("Property")).Should().Be(expected);
+        IEventSymbolShimExtensions.get_NullableAnnotation(GetSymbol<IEventSymbol>("MyEvent")).Should().Be(expected);
+        IParameterSymbolShimExtensions.get_NullableAnnotation(GetSymbol<IParameterSymbol>("parameter")).Should().Be(expected);
+        ILocalSymbolShimExtensions.get_NullableAnnotation(GetSymbol<ILocalSymbol>("local")).Should().Be(expected);
+        IArrayTypeSymbolShimExtensions.get_ElementNullableAnnotation(GetSymbol<IFieldSymbol>("ArrayField").Type.Should().BeAssignableTo<IArrayTypeSymbol>().Subject).Should().Be(expected);
+        IMethodSymbolShimExtensions.get_ReturnNullableAnnotation(GetSymbol<IMethodSymbol>("Method")).Should().Be(expected);
 
         T GetSymbol<T>(string name) where T : ISymbol
         {
@@ -72,21 +71,21 @@ public class ISymbolNullableExtensionsTest
     {
         var nullableAnnotation = nullable ? "?" : string.Empty;
         var (tree, model) = TestCompiler.CompileCS($$"""
-        #nullable enable
-        using System;
-        static class C
-        {
-            static object ExtensionMethod(this object{{nullableAnnotation}} receiver)
+            #nullable enable
+            using System;
+            static class C
             {
-                return receiver.ExtensionMethod();
+                static object ExtensionMethod(this object{{nullableAnnotation}} receiver)
+                {
+                    return receiver.ExtensionMethod();
+                }
             }
-        }
-        """);
+            """);
         var invocation = tree.GetRoot().DescendantNodesAndSelf().OfType<InvocationExpressionSyntax>().First();
-        var symbol = model.GetSymbolInfo(invocation).Symbol.Should().BeAssignableTo<IMethodSymbol>().Which;
+        var symbol = model.GetSymbolInfo(invocation).Symbol.Should().BeAssignableTo<IMethodSymbol>().Subject;
 
         var expected = nullable ? NullableAnnotation.Annotated : NullableAnnotation.NotAnnotated;
-        symbol.ReceiverNullableAnnotation().Should().Be(expected);
+        IMethodSymbolShimExtensions.get_ReceiverNullableAnnotation(symbol).Should().Be(expected);
     }
 
     [TestMethod]
@@ -96,18 +95,18 @@ public class ISymbolNullableExtensionsTest
     {
         var nullableAnnotation = nullable ? "?" : string.Empty;
         var (tree, model) = TestCompiler.CompileCS($$"""
-        #nullable enable
-        using System;
-        class C<T> where T: class
-        {
-            T{{nullableAnnotation}} field;
-        }
-        """);
+            #nullable enable
+            using System;
+            class C<T> where T: class
+            {
+                T{{nullableAnnotation}} field;
+            }
+            """);
         var fieldDeclaration = tree.GetRoot().DescendantNodesAndSelf().OfType<FieldDeclarationSyntax>().First();
-        var symbol = model.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]).Should().BeAssignableTo<IFieldSymbol>().Which.Type.Should().BeAssignableTo<ITypeParameterSymbol>().Which;
+        var symbol = model.GetDeclaredSymbol(fieldDeclaration.Declaration.Variables[0]).Should().BeAssignableTo<IFieldSymbol>().Which.Type.Should().BeAssignableTo<ITypeParameterSymbol>().Subject;
 
         var expected = nullable ? NullableAnnotation.Annotated : NullableAnnotation.NotAnnotated;
-        symbol.NullableAnnotation().Should().Be(expected);
-        symbol.ReferenceTypeConstraintNullableAnnotation().Should().Be(NullableAnnotation.NotAnnotated);
+        ITypeParameterSymbolShimExtensions.get_NullableAnnotation(symbol).Should().Be(expected);
+        ITypeParameterSymbolShimExtensions.get_ReferenceTypeConstraintNullableAnnotation(symbol).Should().Be(NullableAnnotation.NotAnnotated);
     }
 }

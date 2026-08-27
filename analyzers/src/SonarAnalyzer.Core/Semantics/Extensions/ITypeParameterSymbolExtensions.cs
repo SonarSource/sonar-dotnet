@@ -26,6 +26,6 @@ internal static class ITypeParameterSymbolExtensions
             || typeParameter.HasReferenceTypeConstraint
             || typeParameter.HasValueTypeConstraint
             || !typeParameter.ConstraintTypes.IsEmpty
-            || typeParameter.HasUnmanagedTypeConstraint();
+            || typeParameter.HasUnmanagedTypeConstraint;
     }
 }

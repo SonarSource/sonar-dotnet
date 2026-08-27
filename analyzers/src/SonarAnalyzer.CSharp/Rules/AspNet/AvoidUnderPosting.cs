@@ -94,7 +94,7 @@ public sealed class AvoidUnderPosting : SonarDiagnosticAnalyzer
             CanBeNull(property.Type)
             || property.HasAnyAttribute(IgnoredAttributes)
             || IsNewtonsoftJsonPropertyRequired(property)
-            || property.IsRequired();
+            || property.IsRequired;
 
         static bool IsNewtonsoftJsonPropertyRequired(IPropertySymbol property) =>
             property.GetAttributes(KnownType.Newtonsoft_Json_JsonPropertyAttribute).FirstOrDefault() is { } attribute

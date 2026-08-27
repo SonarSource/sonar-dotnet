@@ -99,7 +99,7 @@ public abstract class MethodsShouldNotHaveIdenticalImplementationsBase<TSyntaxKi
         && first.HasConstructorConstraint == second.HasConstructorConstraint
         && first.HasReferenceTypeConstraint == second.HasReferenceTypeConstraint
         && first.HasValueTypeConstraint == second.HasValueTypeConstraint
-        && first.HasUnmanagedTypeConstraint() == second.HasUnmanagedTypeConstraint()
+        && first.HasUnmanagedTypeConstraint == second.HasUnmanagedTypeConstraint
         && first.ConstraintTypes.Length == second.ConstraintTypes.Length
         && first.ConstraintTypes.All(x => second.ConstraintTypes.Any(y => TypeConstraintsAreSame(x, y)));
 

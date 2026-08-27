@@ -17,7 +17,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.Core.Test.ShimLayer.Common;
+namespace SonarAnalyzer.Core.Test.ShimLayer.Generated;
 
 [TestClass]
 public class ClassDeclarationSyntaxShimExtensionsTest

@@ -75,9 +75,9 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
     private static bool IsOblivious(SemanticModel model, ExpressionSyntax operand) =>
         model.GetSymbolInfo(operand).Symbol switch
         {
-            IPropertySymbol property => property.NullableAnnotation() == NullableAnnotation.None,
-            IFieldSymbol field => field.NullableAnnotation() == NullableAnnotation.None,
-            IMethodSymbol method => method.ReturnNullableAnnotation() == NullableAnnotation.None,
+            IPropertySymbol property => property.NullableAnnotation == NullableAnnotation.None,
+            IFieldSymbol field => field.NullableAnnotation == NullableAnnotation.None,
+            IMethodSymbol method => method.ReturnNullableAnnotation == NullableAnnotation.None,
             // A "var" local has no annotation of its own, so we recurse into its initializer instead; explicitly-typed
             // locals are left alone. Chains can't cycle: an initializer can only reference symbols declared earlier.
             ILocalSymbol { FirstSyntaxRef: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Type.IsVar: true }, Initializer.Value: { } initializer } } => IsOblivious(model, initializer),
@@ -88,7 +88,7 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
     private static bool HasNestedNullableAnnotation(ITypeSymbol type) =>
         type switch
         {
-            IArrayTypeSymbol array => array.ElementNullableAnnotation() == NullableAnnotation.Annotated || HasNestedNullableAnnotation(array.ElementType),
+            IArrayTypeSymbol array => array.ElementNullableAnnotation == NullableAnnotation.Annotated || HasNestedNullableAnnotation(array.ElementType),
             INamedTypeSymbol { IsGenericType: true } named => named.TypeArguments.Zip(
                 named.TypeArgumentNullableAnnotations,
                 (arg, ann) => ann == NullableAnnotation.Annotated || HasNestedNullableAnnotation(arg)).Contains(true),

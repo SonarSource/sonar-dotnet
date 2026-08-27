@@ -203,11 +203,11 @@ public static class ISymbolExtensions
                         break;
                     case IPropertySymbol property:
                         yield return property;
-                        if (property.PartialImplementationPart() is { } propertyImplementation)
+                        if (property.PartialImplementationPart is { } propertyImplementation)
                         {
                             yield return propertyImplementation;
                         }
-                        else if (property.PartialDefinitionPart() is { } propertyDefinition)
+                        else if (property.PartialDefinitionPart is { } propertyDefinition)
                         {
                             yield return propertyDefinition;
                         }
