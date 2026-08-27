@@ -117,7 +117,7 @@ internal static class AccessorFactory
             if (types.ResultType.IsGenericType
                 && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>)
                 && types.ResultType.GenericTypeArguments.Single() is var wrapperTypeArgument
-                && typeof(IOperationWrapper).IsAssignableFrom(wrapperTypeArgument))
+                && (wrapperTypeArgument.IsEnum || typeof(IOperationWrapper).IsAssignableFrom(wrapperTypeArgument)))
             {
                 return CreateImmutableArrayConversion(result, method.ReturnType, wrapperTypeArgument);
             }
@@ -169,9 +169,13 @@ internal static class AccessorFactory
     private static Expression CreateImmutableArrayConversion(Expression result, Type runtimeReturnType, Type wrapperTypeArgument)
     {
         // Generate: ImmutableArray.CreateRange(result, x => XxxWrapper.From(x))
+        // For enum: ImmutableArray.CreateRange(result, x => (XxxWrapper)(object)(x))
         var itemRuntimeType = runtimeReturnType.GetGenericArguments().Single();
         var selectorParameter = Expression.Parameter(itemRuntimeType, "x");
-        var selectorLambda = Expression.Lambda(Expression.Call(wrapperTypeArgument.GetMethod("From"), selectorParameter), selectorParameter);
+        var selectorConversion = wrapperTypeArgument.IsEnum
+            ? (Expression)Expression.Convert(Expression.Convert(selectorParameter, typeof(object)), wrapperTypeArgument)
+            : Expression.Call(wrapperTypeArgument.GetMethod("From"), selectorParameter);
+        var selectorLambda = Expression.Lambda(selectorConversion, selectorParameter);
         return Expression.Call(UnboundImmutableArrayCreateRangeMethod.MakeGenericMethod(itemRuntimeType, wrapperTypeArgument), result, selectorLambda);
     }
 

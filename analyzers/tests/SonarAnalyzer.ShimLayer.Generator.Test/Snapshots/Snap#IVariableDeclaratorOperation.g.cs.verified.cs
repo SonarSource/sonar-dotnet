@@ -53,7 +53,7 @@ public readonly struct IVariableDeclaratorOperationWrapper : IOperationWrapper
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
-    public ILocalSymbol Symbol => (ILocalSymbol)SymbolAccessor(wrappedInstance);
+    public ILocalSymbol Symbol => SymbolAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

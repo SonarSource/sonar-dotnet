@@ -47,7 +47,7 @@ public readonly struct IParameterReferenceOperationWrapper : IOperationWrapper
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
-    public IParameterSymbol Parameter => (IParameterSymbol)ParameterAccessor(wrappedInstance);
+    public IParameterSymbol Parameter => ParameterAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 

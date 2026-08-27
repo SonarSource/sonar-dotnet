@@ -47,7 +47,7 @@ public readonly struct IWithOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public IMethodSymbol CloneMethod => (IMethodSymbol)CloneMethodAccessor(wrappedInstance);
+    public IMethodSymbol CloneMethod => CloneMethodAccessor(wrappedInstance);
     public IObjectOrCollectionInitializerOperationWrapper Initializer => IObjectOrCollectionInitializerOperationWrapper.From(InitializerAccessor(wrappedInstance));
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);

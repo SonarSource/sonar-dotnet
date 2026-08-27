@@ -46,7 +46,7 @@ public readonly struct ICollectionExpressionOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public IMethodSymbol ConstructMethod => (IMethodSymbol)ConstructMethodAccessor(wrappedInstance);
+    public IMethodSymbol ConstructMethod => ConstructMethodAccessor(wrappedInstance);
     public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);

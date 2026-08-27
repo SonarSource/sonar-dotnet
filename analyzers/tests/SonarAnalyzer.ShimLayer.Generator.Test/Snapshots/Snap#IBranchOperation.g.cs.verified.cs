@@ -51,7 +51,7 @@ public readonly struct IBranchOperationWrapper : IOperationWrapper
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
-    public ILabelSymbol Target => (ILabelSymbol)TargetAccessor(wrappedInstance);
+    public ILabelSymbol Target => TargetAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

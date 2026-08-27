@@ -89,7 +89,7 @@ public class INamedTypeSymbolExtensionsTests
         var (tree, semanticModel) = TestCompiler.CompileCS(code);
         var identifier = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.NameIs("o")); // o in o.ToString()
         var namedType = semanticModel.GetTypeInfo(identifier).Type.Should().BeAssignableTo<INamedTypeSymbol>().Which;
-        var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations();
+        var typeArgumentNullabilityShim = namedType.TypeArgumentNullableAnnotations;
         var typeArgumentNullability = namedType.TypeArgumentNullableAnnotations;
         typeArgumentNullabilityShim.Should().BeEquivalentTo(expected).And.BeEquivalentTo(typeArgumentNullability.Select(x => (NullableAnnotation)x));
     }

@@ -108,7 +108,7 @@ public static class KnownMethods
             Parameters.Length: 0
         }
         && ((ContainingInterface(methodSymbol) is { } containingInterface && containingInterface.Is(KnownType.System_IDisposable))  // class/record implementing System.IDisposable
-            || (methodSymbol.ContainingType is { IsValueType: true } && methodSymbol.ContainingType.IsRefLikeType()));              // or a ref struct type
+            || methodSymbol.ContainingType is { IsValueType: true, IsRefLikeType: true });                                          // or a ref struct type
 
     public static bool IsIAsyncDisposableDisposeAsync(this IMethodSymbol methodSymbol) =>
         methodSymbol is

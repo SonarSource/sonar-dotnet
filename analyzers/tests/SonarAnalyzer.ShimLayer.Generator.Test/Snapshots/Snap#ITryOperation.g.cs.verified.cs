@@ -50,7 +50,7 @@ public readonly struct ITryOperationWrapper : IOperationWrapper
     public ImmutableArray<ICatchClauseOperationWrapper> Catches => CatchesAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ILabelSymbol ExitLabel => (ILabelSymbol)ExitLabelAccessor(wrappedInstance);
+    public ILabelSymbol ExitLabel => ExitLabelAccessor(wrappedInstance);
     public IBlockOperationWrapper Finally => IBlockOperationWrapper.From(FinallyAccessor(wrappedInstance));
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);

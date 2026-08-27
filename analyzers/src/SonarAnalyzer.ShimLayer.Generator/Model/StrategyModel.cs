@@ -35,6 +35,7 @@ public class StrategyModel : IEnumerable<Strategy>
             {
                 Strategy newStrategy = key switch
                 {
+                    { Namespace: "System.Reflection.Metadata" } => new SkipStrategy(key),  // Old Roslyn throws: Could not load 'System.Reflection.Metadata, Version=1.3.0.0, ...'}
                     { Name: "ImmutableArray`1" } when this[key.GenericTypeArguments.Single()] is OperationWrapStrategy typeArgument => new ImmutableArrayStrategy(key, typeArgument),
                     { Name: "SeparatedSyntaxList`1" } when this[key.GenericTypeArguments.Single()] is SyntaxNodeWrapStrategy typeArgument => new SeparatedSyntaxListStrategy(key, typeArgument),
                     { IsArray: true } => new ArrayStrategy(key, this[key.GetElementType()]),

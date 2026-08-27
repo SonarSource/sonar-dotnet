@@ -47,7 +47,7 @@ public readonly struct IStaticLocalInitializationSemaphoreOperationWrapper : IOp
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
-    public ILocalSymbol Local => (ILocalSymbol)LocalAccessor(wrappedInstance);
+    public ILocalSymbol Local => LocalAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 

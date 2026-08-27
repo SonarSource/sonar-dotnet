@@ -48,7 +48,7 @@ public readonly struct IObjectCreationOperationWrapper : IOperationWrapper
     public ImmutableArray<IArgumentOperationWrapper> Arguments => ArgumentsAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public IMethodSymbol Constructor => (IMethodSymbol)ConstructorAccessor(wrappedInstance);
+    public IMethodSymbol Constructor => ConstructorAccessor(wrappedInstance);
     public IObjectOrCollectionInitializerOperationWrapper Initializer => IObjectOrCollectionInitializerOperationWrapper.From(InitializerAccessor(wrappedInstance));
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);

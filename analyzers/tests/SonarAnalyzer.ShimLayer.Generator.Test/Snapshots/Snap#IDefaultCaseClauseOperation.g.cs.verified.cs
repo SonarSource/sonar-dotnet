@@ -48,7 +48,7 @@ public readonly struct IDefaultCaseClauseOperationWrapper : IOperationWrapper
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public ILabelSymbol Label => (ILabelSymbol)LabelAccessor(wrappedInstance);
+    public ILabelSymbol Label => LabelAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);

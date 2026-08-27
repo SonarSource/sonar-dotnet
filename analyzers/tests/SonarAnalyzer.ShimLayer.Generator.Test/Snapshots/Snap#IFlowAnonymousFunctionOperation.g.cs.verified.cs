@@ -49,7 +49,7 @@ public readonly struct IFlowAnonymousFunctionOperationWrapper : IOperationWrappe
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
-    public IMethodSymbol Symbol => (IMethodSymbol)SymbolAccessor(wrappedInstance);
+    public IMethodSymbol Symbol => SymbolAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

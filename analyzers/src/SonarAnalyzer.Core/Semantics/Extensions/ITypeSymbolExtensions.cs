@@ -15,14 +15,10 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.Reflection;
-
 namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 public static class ITypeSymbolExtensions
 {
-    private static readonly PropertyInfo ITypeSymbolIsRecord = typeof(ITypeSymbol).GetProperty("IsRecord");
-
     extension(ITypeSymbol symbol)
     {
         public bool IsInterface => symbol is { TypeKind: TypeKind.Interface };
@@ -68,8 +64,6 @@ public static class ITypeSymbolExtensions
                 }
             }
         }
-
-        public bool IsRecord => ITypeSymbolIsRecord?.GetValue(symbol) is true;
 
         public bool Is(TypeKind typeKind) =>
             symbol?.TypeKind == typeKind;

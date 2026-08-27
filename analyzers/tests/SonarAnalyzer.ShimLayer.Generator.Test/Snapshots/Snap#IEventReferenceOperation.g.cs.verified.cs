@@ -48,12 +48,12 @@ public readonly struct IEventReferenceOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ITypeSymbol ConstrainedToType => (ITypeSymbol)ConstrainedToTypeAccessor(wrappedInstance);
-    public IEventSymbol Event => (IEventSymbol)EventAccessor(wrappedInstance);
+    public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
+    public IEventSymbol Event => EventAccessor(wrappedInstance);
     public IOperation Instance => InstanceAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
-    public ISymbol Member => (ISymbol)MemberAccessor(wrappedInstance);
+    public ISymbol Member => MemberAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 

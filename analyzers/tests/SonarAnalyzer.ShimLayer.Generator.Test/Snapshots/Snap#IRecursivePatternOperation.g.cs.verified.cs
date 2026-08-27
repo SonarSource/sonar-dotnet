@@ -51,14 +51,14 @@ public readonly struct IRecursivePatternOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ISymbol DeclaredSymbol => (ISymbol)DeclaredSymbolAccessor(wrappedInstance);
-    public ISymbol DeconstructSymbol => (ISymbol)DeconstructSymbolAccessor(wrappedInstance);
+    public ISymbol DeclaredSymbol => DeclaredSymbolAccessor(wrappedInstance);
+    public ISymbol DeconstructSymbol => DeconstructSymbolAccessor(wrappedInstance);
     public ImmutableArray<IPatternOperationWrapper> DeconstructionSubpatterns => DeconstructionSubpatternsAccessor(wrappedInstance);
-    public ITypeSymbol InputType => (ITypeSymbol)InputTypeAccessor(wrappedInstance);
+    public ITypeSymbol InputType => InputTypeAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
-    public ITypeSymbol MatchedType => (ITypeSymbol)MatchedTypeAccessor(wrappedInstance);
-    public ITypeSymbol NarrowedType => (ITypeSymbol)NarrowedTypeAccessor(wrappedInstance);
+    public ITypeSymbol MatchedType => MatchedTypeAccessor(wrappedInstance);
+    public ITypeSymbol NarrowedType => NarrowedTypeAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public ImmutableArray<IPropertySubpatternOperationWrapper> PropertySubpatterns => PropertySubpatternsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);

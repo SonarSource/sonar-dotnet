@@ -40,7 +40,7 @@ public readonly struct ControlFlowRegionWrapper
 
     public ImmutableArray<CaptureId> CaptureIds => (ImmutableArray<CaptureId>)CaptureIdsAccessor(wrappedInstance);
     public ControlFlowRegionWrapper EnclosingRegion => ControlFlowRegionWrapper.From(EnclosingRegionAccessor(wrappedInstance));
-    public ITypeSymbol ExceptionType => (ITypeSymbol)ExceptionTypeAccessor(wrappedInstance);
+    public ITypeSymbol ExceptionType => ExceptionTypeAccessor(wrappedInstance);
     public int FirstBlockOrdinal => (int)FirstBlockOrdinalAccessor(wrappedInstance);
     public ControlFlowRegionKind Kind => (ControlFlowRegionKind)KindAccessor(wrappedInstance);
     public int LastBlockOrdinal => (int)LastBlockOrdinalAccessor(wrappedInstance);

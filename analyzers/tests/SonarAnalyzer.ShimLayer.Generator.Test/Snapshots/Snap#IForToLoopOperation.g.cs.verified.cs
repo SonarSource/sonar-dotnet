@@ -56,8 +56,8 @@ public readonly struct IForToLoopOperationWrapper : IOperationWrapper
     public IOperation Body => BodyAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ILabelSymbol ContinueLabel => (ILabelSymbol)ContinueLabelAccessor(wrappedInstance);
-    public ILabelSymbol ExitLabel => (ILabelSymbol)ExitLabelAccessor(wrappedInstance);
+    public ILabelSymbol ContinueLabel => ContinueLabelAccessor(wrappedInstance);
+    public ILabelSymbol ExitLabel => ExitLabelAccessor(wrappedInstance);
     public IOperation InitialValue => InitialValueAccessor(wrappedInstance);
     public bool IsChecked => (bool)IsCheckedAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);

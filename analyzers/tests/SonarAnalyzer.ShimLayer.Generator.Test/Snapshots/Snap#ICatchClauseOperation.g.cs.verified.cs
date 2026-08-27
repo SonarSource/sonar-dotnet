@@ -50,7 +50,7 @@ public readonly struct ICatchClauseOperationWrapper : IOperationWrapper
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public IOperation ExceptionDeclarationOrExpression => ExceptionDeclarationOrExpressionAccessor(wrappedInstance);
-    public ITypeSymbol ExceptionType => (ITypeSymbol)ExceptionTypeAccessor(wrappedInstance);
+    public ITypeSymbol ExceptionType => ExceptionTypeAccessor(wrappedInstance);
     public IOperation Filter => FilterAccessor(wrappedInstance);
     public IBlockOperationWrapper Handler => IBlockOperationWrapper.From(HandlerAccessor(wrappedInstance));
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);

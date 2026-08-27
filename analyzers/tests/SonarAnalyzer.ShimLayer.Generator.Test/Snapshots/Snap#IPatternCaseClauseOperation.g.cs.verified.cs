@@ -51,7 +51,7 @@ public readonly struct IPatternCaseClauseOperationWrapper : IOperationWrapper
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public IOperation Guard => GuardAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public ILabelSymbol Label => (ILabelSymbol)LabelAccessor(wrappedInstance);
+    public ILabelSymbol Label => LabelAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IPatternOperationWrapper Pattern => IPatternOperationWrapper.From(PatternAccessor(wrappedInstance));

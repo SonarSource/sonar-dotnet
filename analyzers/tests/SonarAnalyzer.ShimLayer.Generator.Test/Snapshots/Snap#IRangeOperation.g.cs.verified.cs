@@ -52,7 +52,7 @@ public readonly struct IRangeOperationWrapper : IOperationWrapper
     public bool IsLifted => (bool)IsLiftedAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation LeftOperand => LeftOperandAccessor(wrappedInstance);
-    public IMethodSymbol Method => (IMethodSymbol)MethodAccessor(wrappedInstance);
+    public IMethodSymbol Method => MethodAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IOperation RightOperand => RightOperandAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);

@@ -50,13 +50,13 @@ public readonly struct IListPatternOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ISymbol DeclaredSymbol => (ISymbol)DeclaredSymbolAccessor(wrappedInstance);
-    public ISymbol IndexerSymbol => (ISymbol)IndexerSymbolAccessor(wrappedInstance);
-    public ITypeSymbol InputType => (ITypeSymbol)InputTypeAccessor(wrappedInstance);
+    public ISymbol DeclaredSymbol => DeclaredSymbolAccessor(wrappedInstance);
+    public ISymbol IndexerSymbol => IndexerSymbolAccessor(wrappedInstance);
+    public ITypeSymbol InputType => InputTypeAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
-    public ISymbol LengthSymbol => (ISymbol)LengthSymbolAccessor(wrappedInstance);
-    public ITypeSymbol NarrowedType => (ITypeSymbol)NarrowedTypeAccessor(wrappedInstance);
+    public ISymbol LengthSymbol => LengthSymbolAccessor(wrappedInstance);
+    public ITypeSymbol NarrowedType => NarrowedTypeAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public ImmutableArray<IPatternOperationWrapper> Patterns => PatternsAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);

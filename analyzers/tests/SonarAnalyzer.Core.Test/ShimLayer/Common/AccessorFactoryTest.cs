@@ -96,6 +96,24 @@ public class AccessorFactoryTest
     }
 
     [TestMethod]
+    public void ReturnType_ImmutableArrayOfNullableAnnotation_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, ImmutableArray<SonarAnalyzer.ShimLayer.NullableAnnotation>>>(
+            typeof(IMethodSymbol),
+            nameof(IMethodSymbol.TypeArgumentNullableAnnotations));
+        accessor(CreateMethodSymbol()).Should().NotBeNull().And.HaveCount(1);
+    }
+
+    [TestMethod]
+    public void ReturnType_ImmutableArrayOfNullableAnnotation_Fallback()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, ImmutableArray<SonarAnalyzer.ShimLayer.NullableAnnotation>>>(
+            null,
+            nameof(IMethodSymbol.TypeArgumentNullableAnnotations));
+        accessor(CreateMethodSymbol()).Should().NotBeNull().And.HaveCount(0);
+    }
+
+    [TestMethod]
     public void ReturnType_SeparatedSyntaxListOfWrappedType_Shimmed()
     {
         var accessor = AccessorFactory.CreateProperty<Func<CollectionExpressionSyntax, SeparatedSyntaxListWrapper<CollectionElementSyntaxWrapper>>>(typeof(CollectionExpressionSyntax), nameof(CollectionExpressionSyntax.Elements));
@@ -268,6 +286,14 @@ public class AccessorFactoryTest
             """);
         return (IForEachLoopOperation)compiler.Model.GetOperation(compiler.Nodes<ForEachStatementSyntax>().Single());
     }
+
+    private static IMethodSymbol CreateMethodSymbol() =>
+        new SnippetCompiler("""
+            public class Sample
+            {
+                public void Method<T>() { }
+            }
+            """).MethodSymbol("Sample.Method");
 
     private static ClassDeclarationSyntax CreateClassDeclaration() =>
         SyntaxFactory.ClassDeclaration("Sample")

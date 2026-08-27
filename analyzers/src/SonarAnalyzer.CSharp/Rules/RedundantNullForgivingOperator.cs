@@ -90,7 +90,7 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
         {
             IArrayTypeSymbol array => array.ElementNullableAnnotation() == NullableAnnotation.Annotated || HasNestedNullableAnnotation(array.ElementType),
             INamedTypeSymbol { IsGenericType: true } named => named.TypeArguments.Zip(
-                named.TypeArgumentNullableAnnotations(),
+                named.TypeArgumentNullableAnnotations,
                 (arg, ann) => ann == NullableAnnotation.Annotated || HasNestedNullableAnnotation(arg)).Contains(true),
             _ => false,
         };

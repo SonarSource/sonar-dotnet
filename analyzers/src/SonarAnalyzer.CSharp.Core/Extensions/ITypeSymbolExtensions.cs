@@ -21,9 +21,7 @@ public static class ITypeSymbolExtensions
 {
     extension(ITypeSymbol symbol)
     {
-        public bool IsRefStruct =>
-            symbol is { IsStruct: true }
-            && symbol.IsRefLikeType();
+        public bool IsRefStruct => symbol is { IsStruct: true, IsRefLikeType: true };
 
         public bool IsDisposableRefStruct(LanguageVersion languageVersion) =>
             languageVersion.IsAtLeast(LanguageVersionEx.CSharp8)

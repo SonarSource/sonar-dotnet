@@ -48,7 +48,7 @@ public readonly struct IDynamicMemberReferenceOperationWrapper : IOperationWrapp
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ITypeSymbol ContainingType => (ITypeSymbol)ContainingTypeAccessor(wrappedInstance);
+    public ITypeSymbol ContainingType => ContainingTypeAccessor(wrappedInstance);
     public IOperation Instance => InstanceAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);

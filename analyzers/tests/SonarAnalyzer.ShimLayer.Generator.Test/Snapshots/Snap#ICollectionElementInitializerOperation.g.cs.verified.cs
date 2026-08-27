@@ -45,7 +45,7 @@ public readonly struct ICollectionElementInitializerOperationWrapper : IOperatio
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public IMethodSymbol AddMethod => (IMethodSymbol)AddMethodAccessor(wrappedInstance);
+    public IMethodSymbol AddMethod => AddMethodAccessor(wrappedInstance);
     public ImmutableArray<IOperation> Arguments => (ImmutableArray<IOperation>)ArgumentsAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);

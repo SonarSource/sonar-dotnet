@@ -293,13 +293,13 @@ namespace SonarAnalyzer.CSharp.Rules
                     return true;
             }
 
-            if (namedType.IsTupleType())
+            if (namedType.IsTupleType)
             {
                 return false;
             }
 
             var currentNamedType = namedType;
-            while (currentNamedType != null)
+            while (currentNamedType is not null)
             {
                 for (var i = 0; i < currentNamedType.Arity; i++)
                 {

@@ -57,8 +57,8 @@ public readonly struct IWhileLoopOperationWrapper : IOperationWrapper
     public IOperation Condition => ConditionAccessor(wrappedInstance);
     public bool ConditionIsTop => (bool)ConditionIsTopAccessor(wrappedInstance);
     public bool ConditionIsUntil => (bool)ConditionIsUntilAccessor(wrappedInstance);
-    public ILabelSymbol ContinueLabel => (ILabelSymbol)ContinueLabelAccessor(wrappedInstance);
-    public ILabelSymbol ExitLabel => (ILabelSymbol)ExitLabelAccessor(wrappedInstance);
+    public ILabelSymbol ContinueLabel => ContinueLabelAccessor(wrappedInstance);
+    public ILabelSymbol ExitLabel => ExitLabelAccessor(wrappedInstance);
     public IOperation IgnoredCondition => IgnoredConditionAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);

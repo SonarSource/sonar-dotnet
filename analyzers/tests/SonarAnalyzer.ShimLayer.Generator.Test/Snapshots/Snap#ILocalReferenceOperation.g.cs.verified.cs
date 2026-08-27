@@ -49,7 +49,7 @@ public readonly struct ILocalReferenceOperationWrapper : IOperationWrapper
     public bool IsDeclaration => (bool)IsDeclarationAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
-    public ILocalSymbol Local => (ILocalSymbol)LocalAccessor(wrappedInstance);
+    public ILocalSymbol Local => LocalAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 

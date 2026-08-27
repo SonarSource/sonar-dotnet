@@ -46,7 +46,7 @@ public readonly struct ISpreadOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public ITypeSymbol ElementType => (ITypeSymbol)ElementTypeAccessor(wrappedInstance);
+    public ITypeSymbol ElementType => ElementTypeAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);
     public IOperation Operand => OperandAccessor(wrappedInstance);
