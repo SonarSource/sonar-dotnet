@@ -160,6 +160,8 @@ public class ClassWrapStrategyTest
             [
                 new(typeof(CSharpGeneratorDriver).GetMember(nameof(CSharpGeneratorDriver.RunGenerators))[0], false, "RunGeneratorsAccessor"),
                 new(typeof(CSharpGeneratorDriver).GetMember(nameof(CSharpGeneratorDriver.RunGenerators))[1], false, "RunGeneratorsAccessor_Overload2"),
+                new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.KeyComparer))[0], false, "KeyComparerAccessor"),   // Static wrap property
+                new(typeof(CSharpCommandLineParser).GetMember(nameof(CSharpCommandLineParser.Script))[0], true, "ScriptAccessor")           // Static passthrough property
             ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
@@ -190,6 +192,8 @@ public class ClassWrapStrategyTest
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly GeneratorDriver wrappedInstance;
 
+                private static readonly Func<StringComparer> KeyComparerAccessor = AccessorFactory.CreateStaticProperty<Func<StringComparer>>(WrappedType, "KeyComparer");
+
                 private static readonly Func<GeneratorDriver, Compilation, GeneratorDriver> RunGeneratorsAccessor = AccessorFactory.CreateMethod<Func<GeneratorDriver, Compilation, GeneratorDriver>>(WrappedType, "RunGenerators");
                 private static readonly Func<GeneratorDriver, Compilation, CancellationToken, GeneratorDriver> RunGeneratorsAccessor_Overload2 = AccessorFactory.CreateMethod<Func<GeneratorDriver, Compilation, CancellationToken, GeneratorDriver>>(WrappedType, "RunGenerators");
 
@@ -197,6 +201,10 @@ public class ClassWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public GeneratorDriver WrappedInstance => wrappedInstance;
+
+                public static CSharpCommandLineParser Script => GeneratorDriver.Script;
+
+                public static StringComparer KeyComparer => (StringComparer)KeyComparerAccessor();
 
                 public GeneratorDriver RunGenerators(Compilation compilation) => (GeneratorDriver)RunGeneratorsAccessor(wrappedInstance, compilation);
                 public GeneratorDriver RunGenerators(Compilation compilation, CancellationToken cancellationToken) => (GeneratorDriver)RunGeneratorsAccessor_Overload2(wrappedInstance, compilation, cancellationToken);

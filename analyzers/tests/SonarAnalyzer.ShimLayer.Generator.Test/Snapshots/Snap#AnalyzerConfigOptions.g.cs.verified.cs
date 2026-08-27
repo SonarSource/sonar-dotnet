@@ -24,7 +24,7 @@ public readonly struct AnalyzerConfigOptionsWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
-    private static readonly Func<Object, StringComparer> KeyComparerAccessor = AccessorFactory.CreateProperty<Func<Object, StringComparer>>(WrappedType, "KeyComparer");
+    private static readonly Func<StringComparer> KeyComparerAccessor = AccessorFactory.CreateStaticProperty<Func<StringComparer>>(WrappedType, "KeyComparer");
     private static readonly Func<Object, IEnumerable<string>> KeysAccessor = AccessorFactory.CreateProperty<Func<Object, IEnumerable<string>>>(WrappedType, "Keys");
 
     private delegate bool TryGetValueAccessorDelegate(Object sender, string key, out string value);
@@ -35,7 +35,7 @@ public readonly struct AnalyzerConfigOptionsWrapper
 
     public Object WrappedInstance => wrappedInstance;
 
-    public StringComparer KeyComparer => (StringComparer)KeyComparerAccessor(wrappedInstance);
+    public static StringComparer KeyComparer => (StringComparer)KeyComparerAccessor();
     public IEnumerable<string> Keys => (IEnumerable<string>)KeysAccessor(wrappedInstance);
 
     public bool TryGetValue(string key, out string value) => (bool)TryGetValueAccessor(wrappedInstance, key, out value);

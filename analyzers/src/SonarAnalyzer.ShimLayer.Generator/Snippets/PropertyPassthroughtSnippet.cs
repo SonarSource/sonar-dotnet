@@ -24,8 +24,11 @@ public sealed class PropertyPassthroughSnippet : Snippet<PropertyInfo>
     public override string AccessorDeclaration() =>
         null;
 
-    public override string MemberDeclaration(int indentSize) =>
-        $"""
-        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.CompiletimeTypeSnippet} {member.Name} => wrappedInstance.{member.Name};
-        """;
+    public override string MemberDeclaration(int indentSize)
+    {
+        var prefix = $"{Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public ";
+        return member.GetMethod.IsStatic
+            ? $"""{prefix}static {returnType.CompiletimeTypeSnippet} {member.Name} => {strategy.CompiletimeTypeSnippet}.{member.Name};"""
+            : $"""{prefix}{returnType.CompiletimeTypeSnippet} {member.Name} => wrappedInstance.{member.Name};""";
+    }
 }

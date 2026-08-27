@@ -27,7 +27,7 @@ internal static class AccessorFactory
 
     public static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName) where TFunc : Delegate
     {
-        var types = new AccessorTypes(typeof(TFunc));
+        var types = new AccessorTypes(typeof(TFunc), false);
         return CreateAccessor<TFunc>(types, runtimeSenderType, methodName, runtimeSenderType?.GetMethods().FirstOrDefault(IsMethodMatch));
 
         bool IsMethodMatch(MethodInfo method) =>
@@ -51,9 +51,15 @@ internal static class AccessorFactory
             compiletime.IsEnum && runtime.IsEnum && compiletime.Name == runtime.Name;
     }
 
-    public static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate
+    public static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate =>
+        CreateProperty<TFunc>(runtimeSenderType, propertyName, new(typeof(TFunc), false));
+
+    public static TFunc CreateStaticProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate =>
+        CreateProperty<TFunc>(runtimeSenderType, propertyName, new(typeof(TFunc), true));
+
+    private static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName, AccessorTypes types) where TFunc : Delegate
     {
-        return CreateAccessor<TFunc>(new(typeof(TFunc)), runtimeSenderType, propertyName, FindProperty()?.GetMethod);
+        return CreateAccessor<TFunc>(types, runtimeSenderType, propertyName, FindProperty()?.GetMethod);
 
         PropertyInfo FindProperty()
         {
@@ -74,12 +80,12 @@ internal static class AccessorFactory
 
     private static TFunc CreateAccessor<TFunc>(AccessorTypes types, Type runtimeSenderType, string memberName, MethodInfo method) where TFunc : Delegate
     {
-        var lambdaParameters = types.ParameterTypes.Prepend(types.SenderType).Select((x, i) => Expression.Parameter(x, i == 0 ? "sender" : "p" + i)).ToArray();
-        var senderLambdaParameter = lambdaParameters.First();
+        var lambdaParameters = types.ParameterTypes.Prepend(types.SenderType).Where(x => x is not null).Select((x, i) => Expression.Parameter(x, i == 0 ? "sender" : "p" + i)).ToArray();
+        var senderLambdaParameter = types.SenderType is null ? null : lambdaParameters.First();
         var lambdaReturnValue = runtimeSenderType is null || method is null
             ? CreateFallback()                                      // Fallback: return default;
             : WrapConvert(CreateWrappedCall(), types.ResultType);   // Actual shim for given method call
-        var body = senderLambdaParameter.Type.IsValueType
+        var body = senderLambdaParameter is null || senderLambdaParameter.Type.IsValueType
             ? lambdaReturnValue
             : CreateCoalesceThrow();
         var lambda = Expression.Lambda<TFunc>(body, "ShimLayer_RuntimeLambdaExpressionFor_" + memberName, lambdaParameters);
@@ -111,7 +117,7 @@ internal static class AccessorFactory
 
         Expression CreateWrappedCall()
         {
-            var sender = WrapConvert(senderLambdaParameter, runtimeSenderType);
+            var sender = senderLambdaParameter is null ? null : WrapConvert(senderLambdaParameter, runtimeSenderType);
             var methodParameters = method.GetParameters();
             var result = Expression.Call(sender, method, lambdaParameters.Skip(1).Select((x, i) => ConvertArgument(x, methodParameters[i].ParameterType)));
             if (types.ResultType.IsGenericType
@@ -207,12 +213,12 @@ internal static class AccessorFactory
         public readonly Type[] ParameterTypes;
         public readonly Type ResultType;
 
-        public AccessorTypes(Type methodDelegate)
+        public AccessorTypes(Type methodDelegate, bool isStatic)
         {
             var invoke = methodDelegate.GetMethod("Invoke");
             var parameters = invoke.GetParameters();    // As declared in our delegates, has additional TSender compared to the runtime method
-            SenderType = parameters.First().ParameterType;
-            ParameterTypes = parameters.Skip(1).Select(x => x.ParameterType).ToArray(); // Without TSender and TResult
+            SenderType = isStatic ? null : parameters.First().ParameterType;
+            ParameterTypes = parameters.Skip(isStatic ? 0 : 1).Select(x => x.ParameterType).ToArray(); // Without TSender and TResult
             ResultType = invoke.ReturnType;     // Can be also typeof(void)
         }
     }

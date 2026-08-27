@@ -245,6 +245,20 @@ public class AccessorFactoryTest
     }
 
     [TestMethod]
+    public void CreateStaticProperty_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateStaticProperty<Func<StringComparer>>(typeof(AnalyzerConfigOptions), nameof(AnalyzerConfigOptions.KeyComparer));
+        accessor().Should().NotBeNull();
+    }
+
+    [TestMethod]
+    public void CreateStaticProperty_Fallback()
+    {
+        var accessor = AccessorFactory.CreateStaticProperty<Func<StringComparer>>(null, nameof(AnalyzerConfigOptions.KeyComparer));
+        accessor().Should().BeNull();
+    }
+
+    [TestMethod]
     public void Create_MethodWithEnumParameter_Shimmed()
     {
         var accessor = AccessorFactory
