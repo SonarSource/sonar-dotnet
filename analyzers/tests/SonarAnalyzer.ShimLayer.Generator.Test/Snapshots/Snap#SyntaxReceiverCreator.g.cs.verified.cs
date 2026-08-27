@@ -30,8 +30,10 @@ public readonly struct SyntaxReceiverCreatorWrapper
     private static readonly Func<Object, AsyncCallback, Object, IAsyncResult> BeginInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, AsyncCallback, Object, IAsyncResult>>(WrappedType, "BeginInvoke");
     private static readonly Func<Object, Object> CloneAccessor = AccessorFactory.CreateMethod<Func<Object, Object>>(WrappedType, "Clone");
     private static readonly Func<Object, Object[], Object> DynamicInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, Object[], Object>>(WrappedType, "DynamicInvoke");
+    private static readonly Func<Object, IAsyncResult, Object> EndInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, IAsyncResult, Object>>(WrappedType, "EndInvoke");
     private static readonly Func<Object, Delegate[]> GetInvocationListAccessor = AccessorFactory.CreateMethod<Func<Object, Delegate[]>>(WrappedType, "GetInvocationList");
     private static readonly Action<Object, SerializationInfo, StreamingContext> GetObjectDataAccessor = AccessorFactory.CreateMethod<Action<Object, SerializationInfo, StreamingContext>>(WrappedType, "GetObjectData");
+    private static readonly Func<Object, Object> InvokeAccessor = AccessorFactory.CreateMethod<Func<Object, Object>>(WrappedType, "Invoke");
 
     private SyntaxReceiverCreatorWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -44,10 +46,12 @@ public readonly struct SyntaxReceiverCreatorWrapper
     public IAsyncResult BeginInvoke(AsyncCallback callback, Object @object) => (IAsyncResult)BeginInvokeAccessor(wrappedInstance, callback, @object);
     public Object Clone() => (Object)CloneAccessor(wrappedInstance);
     public Object DynamicInvoke(Object[] args) => (Object)DynamicInvokeAccessor(wrappedInstance, args);
+    public ISyntaxReceiverWrapper EndInvoke(IAsyncResult result) => ISyntaxReceiverWrapper.From(EndInvokeAccessor(wrappedInstance, result));
     public Delegate[] GetInvocationList() => (Delegate[])GetInvocationListAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
     public void GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectDataAccessor(wrappedInstance, info, context);
+    public ISyntaxReceiverWrapper Invoke() => ISyntaxReceiverWrapper.From(InvokeAccessor(wrappedInstance));
 
     public static SyntaxReceiverCreatorWrapper From(Object instance)
     {

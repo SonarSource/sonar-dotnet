@@ -74,7 +74,7 @@ public static class ModelBuilder
         else if (latest.Type.IsInterface)
         {
             return baseline is null
-                ? new SkipStrategy(latest.Type) // ToDo: NET-4439
+                ? new InterfaceWrapStrategy(latest.Type, typeof(object), CreateMembers(latest, null))
                 : new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
         }
         else if (latest.Type.Name == nameof(Microsoft.CodeAnalysis.FlowAnalysis.CaptureId)) // ToDo: Remove once StructStrategy exists
