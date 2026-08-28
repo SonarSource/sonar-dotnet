@@ -17,16 +17,15 @@
 
 using Microsoft.CodeAnalysis.Simplification;
 
-namespace StyleCop.Analyzers.Lightup;
+namespace SonarAnalyzer.ShimLayer;
 
+// This one is from Microsoft.CodeAnalysis.Workspaces assembly. We don't want to shim it all for one member. This should get removed if we need more things from there.
 public static class SimplifierWrapper
 {
-    private static readonly Func<SyntaxAnnotation> AddImportsAnnotationAccessor = LightupHelpers.CreateStaticPropertyAccessor<SyntaxAnnotation>(typeof(Simplifier), nameof(AddImportsAnnotation));
+    private static readonly Func<SyntaxAnnotation> AddImportsAnnotationAccessor = AccessorFactory.CreateStaticProperty<Func<SyntaxAnnotation>>(typeof(Simplifier), "AddImportsAnnotation");
 
     /// <summary>
-    /// Marker that tells the code-action cleanup pass (the import adder) where to resolve symbol-annotated nodes and add the missing
-    /// <c>using</c>. The property exists on <c>Microsoft.CodeAnalysis.Simplification.Simplifier</c> from Roslyn 2.x onwards; it is
-    /// <see langword="null"/> on the 1.x floor (the type ships, the property does not), so callers must guard before using it.
+    /// Marker that tells the code-action cleanup pass (the import adder) where to resolve symbol-annotated nodes and add the missing <c>using</c>.
     /// </summary>
     public static SyntaxAnnotation AddImportsAnnotation => AddImportsAnnotationAccessor();
 }
