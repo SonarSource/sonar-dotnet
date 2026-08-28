@@ -26,7 +26,7 @@ public readonly struct IncrementalGeneratorRunStepWrapper
 
     private static readonly Func<Object, TimeSpan> ElapsedTimeAccessor = AccessorFactory.CreateProperty<Func<Object, TimeSpan>>(WrappedType, "ElapsedTime");
     private static readonly Func<Object, string> NameAccessor = AccessorFactory.CreateProperty<Func<Object, string>>(WrappedType, "Name");
-    private static readonly Func<Object, ImmutableArray<ValueTuple<Object, IncrementalStepRunReason>>> OutputsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ValueTuple<Object, IncrementalStepRunReason>>>>(WrappedType, "Outputs");
+    private static readonly Func<Object, ImmutableArray<ValueTuple<object, IncrementalStepRunReason>>> OutputsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ValueTuple<object, IncrementalStepRunReason>>>>(WrappedType, "Outputs");
 
     private IncrementalGeneratorRunStepWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -35,7 +35,7 @@ public readonly struct IncrementalGeneratorRunStepWrapper
 
     public TimeSpan ElapsedTime => (TimeSpan)ElapsedTimeAccessor(wrappedInstance);
     public string Name => (string)NameAccessor(wrappedInstance);
-    public ImmutableArray<ValueTuple<Object, IncrementalStepRunReason>> Outputs => (ImmutableArray<ValueTuple<Object, IncrementalStepRunReason>>)OutputsAccessor(wrappedInstance);
+    public ImmutableArray<ValueTuple<object, IncrementalStepRunReason>> Outputs => (ImmutableArray<ValueTuple<object, IncrementalStepRunReason>>)OutputsAccessor(wrappedInstance);
 
     public static IncrementalGeneratorRunStepWrapper From(Object instance)
     {

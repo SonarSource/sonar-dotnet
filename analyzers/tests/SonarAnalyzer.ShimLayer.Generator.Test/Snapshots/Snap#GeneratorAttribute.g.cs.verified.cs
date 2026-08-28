@@ -25,10 +25,10 @@ public readonly struct GeneratorAttributeWrapper
     private readonly Object wrappedInstance;
 
     private static readonly Func<Object, string[]> LanguagesAccessor = AccessorFactory.CreateProperty<Func<Object, string[]>>(WrappedType, "Languages");
-    private static readonly Func<Object, Object> TypeIdAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "TypeId");
+    private static readonly Func<Object, object> TypeIdAccessor = AccessorFactory.CreateProperty<Func<Object, object>>(WrappedType, "TypeId");
 
     private static readonly Func<Object, bool> IsDefaultAttributeAccessor = AccessorFactory.CreateMethod<Func<Object, bool>>(WrappedType, "IsDefaultAttribute");
-    private static readonly Func<Object, Object, bool> MatchAccessor = AccessorFactory.CreateMethod<Func<Object, Object, bool>>(WrappedType, "Match");
+    private static readonly Func<Object, object, bool> MatchAccessor = AccessorFactory.CreateMethod<Func<Object, object, bool>>(WrappedType, "Match");
 
     private GeneratorAttributeWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -36,10 +36,10 @@ public readonly struct GeneratorAttributeWrapper
     public Object WrappedInstance => wrappedInstance;
 
     public string[] Languages => (string[])LanguagesAccessor(wrappedInstance);
-    public Object TypeId => (Object)TypeIdAccessor(wrappedInstance);
+    public object TypeId => (object)TypeIdAccessor(wrappedInstance);
 
     public bool IsDefaultAttribute() => (bool)IsDefaultAttributeAccessor(wrappedInstance);
-    public bool Match(Object obj) => (bool)MatchAccessor(wrappedInstance, obj);
+    public bool Match(object obj) => (bool)MatchAccessor(wrappedInstance, obj);
 
     public static GeneratorAttributeWrapper From(Object instance)
     {

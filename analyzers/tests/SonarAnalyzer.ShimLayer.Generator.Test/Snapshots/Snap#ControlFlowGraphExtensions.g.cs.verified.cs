@@ -16,8 +16,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-
 namespace SonarAnalyzer.ShimLayer;
 
 public static class ControlFlowGraphExtensionsEx

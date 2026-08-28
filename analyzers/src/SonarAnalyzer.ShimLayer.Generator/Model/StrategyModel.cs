@@ -44,6 +44,7 @@ public class StrategyModel : IEnumerable<Strategy>
                     // Primitive types can't be added in ModelBuilder, because typeof(int) (from RuntimeTypes module) is not equivalent to the Int32 we see here (from EcmaModule).
                     { Name: "Boolean" } => new PrimitiveStrategy(key, "bool"),
                     { Name: "Int32" } => new PrimitiveStrategy(key, "int"),
+                    { Name: "Object" } => new PrimitiveStrategy(key, "object"),
                     { Name: "String" } => new PrimitiveStrategy(key, "string"),
                     { Name: "Void" } => new PrimitiveStrategy(key, "void"),
                     _ => new NoChangeStrategy(key)

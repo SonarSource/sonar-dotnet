@@ -22,5 +22,5 @@ public class AnalyzerConfigWrapperTest
 {
     [TestMethod]
     public void StaticMethod() =>
-        AnalyzerConfig.Parse("root = true", @"C:\Project\.editorconfig").Should().NotBeNull();
+        AnalyzerConfigWrapper.Parse("root = true", @"C:\Project\.editorconfig").Should().NotBeNull();
 }

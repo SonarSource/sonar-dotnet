@@ -31,7 +31,7 @@ public class StaticClassStrategy : MemberStrategy
         var wrap = WrapMembers(model);
         return wrap.Properties.Any() || wrap.Methods.Any()
             ? $$"""
-                {{Preamble("using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;")}}
+                {{Preamble()}}
                 public static class {{Latest.Name}}Ex
                 {
                     private static readonly Type WrappedType = TypeRegister.LatestType("{{Latest.FullName}}");
