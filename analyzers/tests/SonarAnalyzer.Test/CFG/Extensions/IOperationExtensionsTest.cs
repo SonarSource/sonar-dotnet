@@ -25,8 +25,8 @@ namespace SonarAnalyzer.CFG.Extensions.Test;
 public class IOperationExtensionsTest
 {
     [TestMethod]
-    public void DescendantsAndSelf_Null_ReturnsNull() =>
-        IOperationExtensions.DescendantsAndSelf(null).Should().BeEmpty();
+    public void DescendantsAndSelf_Null_ReturnsEmpty() =>
+        OperationExtensionsEx.DescendantsAndSelf(null).Should().BeEmpty();
 
     [TestMethod]
     public void OperationWrapper_PropertyShortcuts()
@@ -51,7 +51,7 @@ public class IOperationExtensionsTest
 
     [TestMethod]
     public void AsForEachLoop_ForEachLoop_ConvertsToWrapper() =>
-        Operation<MethodDeclarationSyntax>("""
+        OperationExtensionsEx.Descendants(Operation<MethodDeclarationSyntax>("""
             public class Sample
             {
                 public void Method(int[] items)
@@ -62,14 +62,14 @@ public class IOperationExtensionsTest
                     }
                 }
             }
-            """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop.Should().NotBeNull();
+            """)).OfType<ILoopOperation>().Single().AsForEachLoop.Should().NotBeNull();
 
     [TestMethod]
     [DataRow("for (var i = 0; i < 9; i++) { }")]
     [DataRow("while (true) { }")]
     [DataRow("do { } while (true);")]
     public void AsForEachLoop_OtherLoop_ConvertsToWrapper(string loop) =>
-        Operation<MethodDeclarationSyntax>($$"""
+        OperationExtensionsEx.Descendants(Operation<MethodDeclarationSyntax>($$"""
             public class Sample
             {
                 public void Method()
@@ -77,7 +77,7 @@ public class IOperationExtensionsTest
                     {{loop}}
                 }
             }
-            """).Descendants().OfType<ILoopOperation>().Single().AsForEachLoop.Should().BeNull();
+            """)).OfType<ILoopOperation>().Single().AsForEachLoop.Should().BeNull();
 
     private static IOperation Operation<T>(string code) where T : SyntaxNode
     {

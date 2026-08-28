@@ -17,13 +17,12 @@
  */
 
 using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer;
 
 public static class SyntaxFactsEx
 {
-    private static readonly Type WrappedType = typeof(SyntaxFacts);
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.SyntaxFacts");
 
     private static readonly Func<string, bool> IsCheckedOperatorAccessor = AccessorFactory.CreateStaticMethod<Func<string, bool>>(WrappedType, "IsCheckedOperator");
     private static readonly Func<SyntaxKind, bool> IsOverloadableCompoundAssignmentOperatorAccessor = AccessorFactory.CreateStaticMethod<Func<SyntaxKind, bool>>(WrappedType, "IsOverloadableCompoundAssignmentOperator");

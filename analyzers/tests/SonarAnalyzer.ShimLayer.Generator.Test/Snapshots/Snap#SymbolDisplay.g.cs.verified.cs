@@ -17,13 +17,12 @@
  */
 
 using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer;
 
 public static class SymbolDisplayEx
 {
-    private static readonly Type WrappedType = typeof(SymbolDisplay);
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.SymbolDisplay");
 
     private static readonly Func<ITypeSymbol, NullableAnnotation, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToDisplayPartsAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<ITypeSymbol, NullableAnnotation, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToDisplayParts");
     private static readonly Func<ITypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToDisplayPartsAccessor_Overload3 = AccessorFactory.CreateStaticMethod<Func<ITypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToDisplayParts");

@@ -77,10 +77,6 @@ public static class IOperationExtensions
     public static string Serialize(this IOperation operation) =>
         $"{OperationPrefix(operation)}{OperationSuffix(operation)}: {operation.Syntax}";
 
-    // This method is taken from Roslyn implementation
-    public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) =>
-        Descendants(operation, true);
-
     public static IOperation UnwrapConversion(this IOperation operation)
     {
         while (operation?.Kind == OperationKindEx.Conversion)
@@ -88,36 +84,6 @@ public static class IOperationExtensions
             operation = operation.ToConversion().Operand;
         }
         return operation;
-    }
-
-    // This method is taken from Roslyn implementation
-    private static IEnumerable<IOperation> Descendants(IOperation operation, bool includeSelf)
-    {
-        if (operation is null)
-        {
-            yield break;
-        }
-        if (includeSelf)
-        {
-            yield return operation;
-        }
-        var stack = new Stack<IEnumerator<IOperation>>();
-        stack.Push(operation.Children.GetEnumerator());
-        while (stack.Any())
-        {
-            var iterator = stack.Pop();
-            if (!iterator.MoveNext())
-            {
-                continue;
-            }
-
-            stack.Push(iterator);
-            if (iterator.Current is { } current)
-            {
-                yield return current;
-                stack.Push(current.Children.GetEnumerator());
-            }
-        }
     }
 
     /// <summary>

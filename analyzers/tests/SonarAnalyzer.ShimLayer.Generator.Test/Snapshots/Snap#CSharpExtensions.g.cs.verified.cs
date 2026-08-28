@@ -17,13 +17,12 @@
  */
 
 using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer;
 
 public static class CSharpExtensionsEx
 {
-    private static readonly Type WrappedType = typeof(CSharpExtensions);
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.CSharpExtensions");
 
     private static readonly Func<SemanticModel, ConstructorInitializerSyntax, DataFlowAnalysis> AnalyzeDataFlowAccessor = AccessorFactory.CreateStaticMethod<Func<SemanticModel, ConstructorInitializerSyntax, DataFlowAnalysis>>(WrappedType, "AnalyzeDataFlow");
     private static readonly Func<SemanticModel, PrimaryConstructorBaseTypeSyntaxWrapper, DataFlowAnalysis> AnalyzeDataFlowAccessor_Overload3 = AccessorFactory.CreateStaticMethod<Func<SemanticModel, PrimaryConstructorBaseTypeSyntaxWrapper, DataFlowAnalysis>>(WrappedType, "AnalyzeDataFlow");

@@ -17,13 +17,12 @@
  */
 
 using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer;
 
 public static class SyntaxFactoryEx
 {
-    private static readonly Type WrappedType = typeof(SyntaxFactory);
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.SyntaxFactory");
 
     private static readonly Func<SyntaxKind, AccessorDeclarationSyntax> AccessorDeclarationAccessor = AccessorFactory.CreateStaticMethod<Func<SyntaxKind, AccessorDeclarationSyntax>>(WrappedType, "AccessorDeclaration");
     private static readonly Func<SyntaxKind, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ArrowExpressionClauseSyntax, AccessorDeclarationSyntax> AccessorDeclarationAccessor_Overload3 = AccessorFactory.CreateStaticMethod<Func<SyntaxKind, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ArrowExpressionClauseSyntax, AccessorDeclarationSyntax>>(WrappedType, "AccessorDeclaration");

@@ -17,13 +17,12 @@
  */
 
 using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace SonarAnalyzer.ShimLayer;
 
 public static class DiagnosticAnalyzerExtensionsEx
 {
-    private static readonly Type WrappedType = typeof(DiagnosticAnalyzerExtensions);
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Diagnostics.DiagnosticAnalyzerExtensions");
 
     private static readonly Func<Compilation, ImmutableArray<DiagnosticAnalyzer>, AnalyzerOptions, CompilationWithAnalyzers> WithAnalyzersAccessor = AccessorFactory.CreateStaticMethod<Func<Compilation, ImmutableArray<DiagnosticAnalyzer>, AnalyzerOptions, CompilationWithAnalyzers>>(WrappedType, "WithAnalyzers");
 

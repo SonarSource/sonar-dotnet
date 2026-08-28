@@ -83,9 +83,7 @@ public static class ModelBuilder
         }
         else if (IsStaticClass(latest.Type))
         {
-            return baseline is null
-                ? new SkipStrategy(latest.Type)
-                : new StaticClassExtendStrategy(latest.Type, CreateMembers(latest, baseline));
+            return new StaticClassStrategy(latest.Type, CreateMembers(latest, baseline));
         }
         else if (latest.Type.IsClass && latest.Type.Name is not "SymbolStartAnalysisContext")
         {

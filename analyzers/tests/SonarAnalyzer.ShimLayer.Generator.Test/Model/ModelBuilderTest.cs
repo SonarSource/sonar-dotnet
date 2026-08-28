@@ -181,7 +181,7 @@ public class ModelBuilderTest
     {
         var type = typeof(GeneratorExtensions);
         var model = ModelBuilder.Build([new(type, []), SyntaxNodeDescriptor], []);
-        model[type].Should().BeOfType<SkipStrategy>();  // ToDo: This will change later, likely to StaticClassStrategy
+        model[type].Should().BeOfType<StaticClassStrategy>();
     }
 
     [TestMethod]

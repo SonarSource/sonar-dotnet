@@ -22,20 +22,30 @@ using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 
 [TestClass]
-public class StaticClassExtendStrategyTest
+public class StaticClassStrategyTest
 {
+    [TestMethod]
+    public void UnreachableProperties_Throw()
+    {
+        var sut = new StaticClassStrategy(typeof(CSharpExtensions), []);
+        sut.Invoking(x => x.ReturnTypeSnippet).Should().Throw<NotSupportedException>();
+        sut.Invoking(x => x.ToConversionSnippet("from")).Should().Throw<NotSupportedException>();
+    }
+
+
     [TestMethod]
     public void Generate_Members()
     {
         var tryGetSpeculativeSemanticModel = typeof(CSharpExtensions).GetMethod(
             nameof(CSharpExtensions.TryGetSpeculativeSemanticModel),
             [typeof(SemanticModel), typeof(int), typeof(PrimaryConstructorBaseTypeSyntax), typeof(SemanticModel).MakeByRefType()]);
-        var sut = new StaticClassExtendStrategy(
+        var sut = new StaticClassStrategy(
             typeof(CSharpExtensions),
             [
                 new(typeof(CSharpExtensions).GetMember(nameof(CSharpExtensions.Kind))[0], true, "KindAccessor"),                            // Passthrough => ignored
                 new(typeof(CSharpExtensions).GetMember(nameof(CSharpExtensions.GetOutConversion))[0], false, "GetOutConversionAccessor"),   // Wrap method
                 new(tryGetSpeculativeSemanticModel, false, "TryGetSpeculativeSemanticModelAccessor"),                                       // Wrap method with out parameter
+                new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.KeyComparer))[0], false, "KeyComparerAccessor")    // Wrap property
             ]);
         var model = new Dictionary<Type, Strategy>
         {
@@ -64,17 +74,20 @@ public class StaticClassExtendStrategyTest
              */
 
             using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-            using Microsoft.CodeAnalysis.CSharp;
 
             namespace SonarAnalyzer.ShimLayer;
 
             public static class CSharpExtensionsEx
             {
-                private static readonly Type WrappedType = typeof(CSharpExtensions);
+                private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.CSharpExtensions");
+
+                private static readonly Func<StringComparer> KeyComparerAccessor = AccessorFactory.CreateStaticProperty<Func<StringComparer>>(WrappedType, "KeyComparer");
 
                 private static readonly Func<ICompoundAssignmentOperation, Conversion> GetOutConversionAccessor = AccessorFactory.CreateStaticMethod<Func<ICompoundAssignmentOperation, Conversion>>(WrappedType, "GetOutConversion");
                 private delegate bool TryGetSpeculativeSemanticModelAccessorDelegate(SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel);
                 private static readonly TryGetSpeculativeSemanticModelAccessorDelegate TryGetSpeculativeSemanticModelAccessor = AccessorFactory.CreateStaticMethod<TryGetSpeculativeSemanticModelAccessorDelegate>(WrappedType, "TryGetSpeculativeSemanticModel");
+
+                public static StringComparer KeyComparer => (StringComparer)KeyComparerAccessor();
 
                 public static Conversion GetOutConversion(this ICompoundAssignmentOperation compoundAssignment) => (Conversion)GetOutConversionAccessor(compoundAssignment);
                 public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel) => (bool)TryGetSpeculativeSemanticModelAccessor(semanticModel, position, constructorInitializer, out speculativeModel);

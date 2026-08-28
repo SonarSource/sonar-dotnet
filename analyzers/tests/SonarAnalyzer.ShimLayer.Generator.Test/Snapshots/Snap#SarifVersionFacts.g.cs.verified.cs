@@ -20,11 +20,12 @@ using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
 
 namespace SonarAnalyzer.ShimLayer;
 
-public static class CaseInsensitiveComparisonEx
+public static class SarifVersionFactsEx
 {
-    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CaseInsensitiveComparison");
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.SarifVersionFacts");
 
-    private static readonly Func<string, string, bool> StartsWithAccessor = AccessorFactory.CreateStaticMethod<Func<string, string, bool>>(WrappedType, "StartsWith");
+    private delegate bool TryParseAccessorDelegate(string version, out SarifVersion result);
+    private static readonly TryParseAccessorDelegate TryParseAccessor = AccessorFactory.CreateStaticMethod<TryParseAccessorDelegate>(WrappedType, "TryParse");
 
-    public static bool StartsWith(string value, string possibleStart) => (bool)StartsWithAccessor(value, possibleStart);
+    public static bool TryParse(string version, out SarifVersion result) => (bool)TryParseAccessor(version, out result);
 }

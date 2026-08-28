@@ -17,13 +17,12 @@
  */
 
 using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
-using Microsoft.CodeAnalysis;
 
 namespace SonarAnalyzer.ShimLayer;
 
 public static class SyntaxNodeExtensionsEx
 {
-    private static readonly Type WrappedType = typeof(SyntaxNodeExtensions);
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.SyntaxNodeExtensions");
 
     private static readonly Func<SyntaxToken, SyntaxToken> WithoutTriviaAccessor = AccessorFactory.CreateStaticMethod<Func<SyntaxToken, SyntaxToken>>(WrappedType, "WithoutTrivia");
 

@@ -17,11 +17,11 @@
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
-public class StaticClassExtendStrategy : MemberStrategy
+public class StaticClassStrategy : MemberStrategy
 {
     public override string ReturnTypeSnippet => throw new NotSupportedException();
 
-    public StaticClassExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
+    public StaticClassStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
 
     public override string ToConversionSnippet(string from) =>
         throw new NotSupportedException();
@@ -31,10 +31,10 @@ public class StaticClassExtendStrategy : MemberStrategy
         var wrap = WrapMembers(model);
         return wrap.Properties.Any() || wrap.Methods.Any()
             ? $$"""
-                {{Preamble($"using {Latest.Namespace};", "using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;")}}
+                {{Preamble("using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;")}}
                 public static class {{Latest.Name}}Ex
                 {
-                    private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet}});
+                    private static readonly Type WrappedType = TypeRegister.LatestType("{{Latest.FullName}}");
 
                 {{JoinLines(wrap.Properties.Select(x => x.AccessorDeclaration()))}}
 
