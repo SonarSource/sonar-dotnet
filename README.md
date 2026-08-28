@@ -1,4 +1,11 @@
-﻿# Code Quality and Security for C\# and VB.NET
+﻿<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://assets-eu-01.kc-usercontent.com/ef593040-b591-0198-9506-ed88b30bc023/a23fc7ba-23f0-489a-829d-ed88c0748521/Sonar_Logo_Dark%20Backgrounds.svg">
+    <img src="https://assets-eu-01.kc-usercontent.com/ef593040-b591-0198-9506-ed88b30bc023/82c13eba-d95c-4bb8-8007-7ce77c14e043/Sonar_Logo_Light%20Backgrounds.svg" alt="Sonar logo" width="400">
+  </picture>
+</p>
+
+# SonarQube analyzers for .NET
 
 [![Build Status](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_apis/build/status/Sonar.Net?branchName=master)](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_build/latest?definitionId=77&branchName=master)
 
@@ -7,8 +14,14 @@
 |Analyzer|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=sonaranalyzer-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=sonaranalyzer-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=sonaranalyzer-dotnet&metric=coverage)|
 |Plugin|[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=alert_status)](https://sonarcloud.io/dashboard?id=org.sonarsource.dotnet%3Asonar-dotnet)|[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)](https://sonarcloud.io/component_measures?id=org.sonarsource.dotnet%3Asonar-dotnet&metric=coverage)|
 
-[Static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) of C# and VB.NET
-languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube), [SonarQube cloud](https://www.sonarsource.com/products/sonarcloud) and [SonarQube for IDE](https://www.sonarsource.com/products/sonarlint) code quality and security products. These Roslyn analyzers allow you to deliver code with integrated code quality and security that is safe, reliable and maintainable by helping you find and correct bugs, vulnerabilities and code smells in your codebase.
+[![NuGet](https://img.shields.io/nuget/v/SonarAnalyzer.CSharp?label=NuGet)](https://www.nuget.org/packages/SonarAnalyzer.CSharp/)
+[![GitHub stars](https://img.shields.io/github/stars/SonarSource/sonar-dotnet?style=flat)](https://github.com/SonarSource/sonar-dotnet)
+[![License](https://img.shields.io/badge/license-SSALv1-blue)](#license)
+[![Community forum](https://img.shields.io/badge/community-forum-blue)](https://community.sonarsource.com/)
+
+SonarQube analyzers for .NET inspect C# and VB.NET code for bugs, vulnerabilities, and maintainability issues. They surface findings while developers work in their IDE and when teams analyze projects with SonarQube Server or SonarQube Cloud.
+
+This repository contains the source for the Roslyn analyzers and the Java plugin that integrates .NET analysis with SonarQube. The analyzers apply the same rules to developer-written and AI-generated code, giving teams a consistent way to verify code before it reaches production.
 
 ## Features
 
@@ -17,6 +30,8 @@ languages in [SonarQube server](https://www.sonarsource.com/products/sonarqube),
 * Import of [test coverage reports](https://community.sonarsource.com/t/9871) from Visual Studio Code Coverage, dotCover, OpenCover, Coverlet, Altcover.
 * Import of third-party Roslyn Analyzers results
 * Support for [custom rules](https://github.com/SonarSource/sonarqube-roslyn-sdk)
+
+The analyzers work with [SonarQube Server](https://www.sonarsource.com/products/sonarqube/server/), [SonarQube Cloud](https://www.sonarsource.com/products/sonarqube/cloud/), and [SonarQube for IDE](https://www.sonarsource.com/products/sonarqube/ide/).
 
 ## Useful public resources
 
@@ -133,4 +148,3 @@ If you believe you have discovered a security vulnerability in Sonar's products,
 Copyright SonarSource Sàrl.
 
 Licensed under the [SONAR Source-Available License v1.0](https://www.sonarsource.com/license/ssal/)
-
