@@ -81,7 +81,13 @@ public static class ModelBuilder
         {
             return new NoChangeStrategy(latest.Type);
         }
-        else if (IsNonStaticClass(latest.Type) && latest.Type.Name is not "SymbolStartAnalysisContext")
+        else if (IsStaticClass(latest.Type))
+        {
+            return baseline is null
+                ? new SkipStrategy(latest.Type)
+                : new StaticClassExtendStrategy(latest.Type, CreateMembers(latest, baseline));
+        }
+        else if (latest.Type.IsClass && latest.Type.Name is not "SymbolStartAnalysisContext")
         {
             if (baseline is null)
             {
@@ -102,8 +108,8 @@ public static class ModelBuilder
         }
     }
 
-    private static bool IsNonStaticClass(Type type) =>
-        type.IsClass && !(type.IsAbstract && type.IsSealed);
+    private static bool IsStaticClass(Type type) =>
+        type.IsClass && type.IsAbstract && type.IsSealed;
 
     private static TypeDescriptor FindCommonBaseType(TypeDescriptor latest, IReadOnlyDictionary<string, TypeDescriptor> baselineMap)
     {
@@ -199,7 +205,8 @@ public static class ModelBuilder
     private static bool IsSkipped(Type type) =>
         type.IsNested
         || type.IsGenericType
-        || typeof(Delegate).IsAssignableFrom(type);
+        || typeof(Delegate).IsAssignableFrom(type)
+        || type.FullName == "Microsoft.CodeAnalysis.CSharpExtensions";  // The useful one is in CSharp namespace
 
     private static bool IsValid(MemberInfo member) =>
         !IsExcluded(member)
