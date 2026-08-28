@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class AccessorListSyntaxShimExtensions
+public static class AccessorListSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(AccessorListSyntax);
 

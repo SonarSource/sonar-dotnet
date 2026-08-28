@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.Diagnostics.Telemetry;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class AnalyzerTelemetryInfoShimExtensions
+public static class AnalyzerTelemetryInfoShimExtensions
 {
     private static readonly Type WrappedType = typeof(AnalyzerTelemetryInfo);
 

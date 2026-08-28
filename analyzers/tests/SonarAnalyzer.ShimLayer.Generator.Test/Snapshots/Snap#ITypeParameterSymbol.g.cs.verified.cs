@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class ITypeParameterSymbolShimExtensions
+public static class ITypeParameterSymbolShimExtensions
 {
     private static readonly Type WrappedType = typeof(ITypeParameterSymbol);
 

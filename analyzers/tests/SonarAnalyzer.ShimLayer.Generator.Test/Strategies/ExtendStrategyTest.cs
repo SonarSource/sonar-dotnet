@@ -66,11 +66,9 @@ public class ExtendStrategyTest
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
 
-            using Microsoft.CodeAnalysis.CSharp.Syntax;
-
             namespace SonarAnalyzer.ShimLayer;
 
-            public static partial class ClassDeclarationSyntaxShimExtensions
+            public static class ClassDeclarationSyntaxShimExtensions
             {
                 private static readonly Type WrappedType = typeof(ClassDeclarationSyntax);
 
@@ -117,11 +115,9 @@ public class ExtendStrategyTest
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
 
-            using Microsoft.CodeAnalysis.CSharp.Syntax;
-
             namespace SonarAnalyzer.ShimLayer;
 
-            public static partial class ClassDeclarationSyntaxShimExtensions
+            public static class ClassDeclarationSyntaxShimExtensions
             {
                 private static readonly Type WrappedType = typeof(ClassDeclarationSyntax);
 
@@ -163,11 +159,9 @@ public class ExtendStrategyTest
              * along with this program; if not, see https://sonarsource.com/license/ssal/
              */
 
-            using System.Diagnostics;
-
             namespace SonarAnalyzer.ShimLayer;
 
-            public static partial class ProcessStartInfoShimExtensions
+            public static class ProcessStartInfoShimExtensions
             {
                 private static readonly Type WrappedType = typeof(ProcessStartInfo);
 

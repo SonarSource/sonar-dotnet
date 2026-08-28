@@ -31,8 +31,8 @@ public class ExtendStrategy : MemberStrategy
         var wrap = WrapMembers(model);
         return wrap.Properties.Any() || wrap.Methods.Any()
             ? $$"""
-                {{Preamble($"using {Latest.Namespace};")}}
-                public static partial class {{Latest.Name}}ShimExtensions
+                {{Preamble()}}
+                public static class {{Latest.Name}}ShimExtensions
                 {
                     private static readonly Type WrappedType = typeof({{CompiletimeTypeSnippet}});
 

@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class ConditionalExpressionSyntaxShimExtensions
+public static class ConditionalExpressionSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(ConditionalExpressionSyntax);
 

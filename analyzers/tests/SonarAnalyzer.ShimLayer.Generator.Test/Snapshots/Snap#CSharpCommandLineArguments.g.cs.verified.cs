@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class CSharpCommandLineArgumentsShimExtensions
+public static class CSharpCommandLineArgumentsShimExtensions
 {
     private static readonly Type WrappedType = typeof(CSharpCommandLineArguments);
 

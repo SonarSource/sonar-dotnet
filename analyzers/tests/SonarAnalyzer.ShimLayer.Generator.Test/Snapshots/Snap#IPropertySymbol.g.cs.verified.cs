@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class IPropertySymbolShimExtensions
+public static class IPropertySymbolShimExtensions
 {
     private static readonly Type WrappedType = typeof(IPropertySymbol);
 

@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.Emit;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class EmitOptionsShimExtensions
+public static class EmitOptionsShimExtensions
 {
     private static readonly Type WrappedType = typeof(EmitOptions);
 

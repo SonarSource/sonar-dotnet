@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class BracketedArgumentListSyntaxShimExtensions
+public static class BracketedArgumentListSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(BracketedArgumentListSyntax);
 

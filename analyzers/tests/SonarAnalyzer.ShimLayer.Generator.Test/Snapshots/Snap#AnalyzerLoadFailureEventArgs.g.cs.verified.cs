@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.Diagnostics;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class AnalyzerLoadFailureEventArgsShimExtensions
+public static class AnalyzerLoadFailureEventArgsShimExtensions
 {
     private static readonly Type WrappedType = typeof(AnalyzerLoadFailureEventArgs);
 

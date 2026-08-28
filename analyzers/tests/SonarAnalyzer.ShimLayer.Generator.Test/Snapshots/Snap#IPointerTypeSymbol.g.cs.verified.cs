@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class IPointerTypeSymbolShimExtensions
+public static class IPointerTypeSymbolShimExtensions
 {
     private static readonly Type WrappedType = typeof(IPointerTypeSymbol);
 

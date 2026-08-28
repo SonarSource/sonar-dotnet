@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class OmittedTypeArgumentSyntaxShimExtensions
+public static class OmittedTypeArgumentSyntaxShimExtensions
 {
     private static readonly Type WrappedType = typeof(OmittedTypeArgumentSyntax);
 

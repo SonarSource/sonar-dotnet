@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.Text;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class SourceTextShimExtensions
+public static class SourceTextShimExtensions
 {
     private static readonly Type WrappedType = typeof(SourceText);
 

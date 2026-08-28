@@ -16,11 +16,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis;
-
 namespace SonarAnalyzer.ShimLayer;
 
-public static partial class DataFlowAnalysisShimExtensions
+public static class DataFlowAnalysisShimExtensions
 {
     private static readonly Type WrappedType = typeof(DataFlowAnalysis);
 
