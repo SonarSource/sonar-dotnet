@@ -16,6 +16,7 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CFG.Sonar.Test;
@@ -665,10 +666,10 @@ public class SonarLiveVariableAnalysisTest
             }
             else
             {
-                var function = (LocalFunctionStatementSyntaxWrapper)method
+                var function = (LocalFunctionStatementSyntax)method
                     .DescendantNodes()
-                    .Single(x => x.IsKind(SyntaxKindEx.LocalFunctionStatement) && ((LocalFunctionStatementSyntaxWrapper)x).Identifier.Text == localFunctionName);
-                symbol = model.GetDeclaredSymbol(function) as IMethodSymbol;
+                    .Single(x => x.IsKind(SyntaxKind.LocalFunctionStatement) && ((LocalFunctionStatementSyntax)x).Identifier.Text == localFunctionName);
+                symbol = model.GetDeclaredSymbol(function);
                 body = (CSharpSyntaxNode)function.Body ?? function.ExpressionBody;
             }
             Cfg = CSharpControlFlowGraph.Create(body, model);

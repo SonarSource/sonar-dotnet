@@ -16,6 +16,7 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.ShimLayer;
 
 namespace SonarAnalyzer.CFG.Roslyn.Test;
 

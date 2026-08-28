@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis.CSharp;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
@@ -34,9 +35,11 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
 
     public sealed override string MemberDeclaration(int indentSize)
     {
+        var attributes = member.GetCustomAttributesData();
         var staticSnippet = member.IsStatic ? "static " : null;
+        var thisSnippet = attributes.Any(x => x.AttributeType.Name == nameof(ExtensionAttribute)) ? "this " : null;
         return $"""
-            {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name}({parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
+            {Indent(indentSize)}{SerializeAttributes(attributes, indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name}({thisSnippet}{parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
             """;
     }
 

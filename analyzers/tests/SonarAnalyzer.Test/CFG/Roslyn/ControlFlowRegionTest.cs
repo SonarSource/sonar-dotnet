@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.ShimLayer;
+
 namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]

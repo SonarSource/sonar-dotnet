@@ -511,11 +511,11 @@ public class Sample
             var exitBlock = cfg.ExitBlock;
 
             xBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { oBranchBlock, falseBlock });
-            xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.IsPatternExpression);
             VerifyAllInstructions(xBranchBlock, "cw0", "cw0()", "x", "10", "x is 10");
 
             oBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
-            oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.IsPatternExpression);
             VerifyAllInstructions(oBranchBlock, "o", "null", "o is null");
 
             trueBlock.SuccessorBlocks.Should().Equal(falseBlock);
@@ -540,11 +540,11 @@ public class Sample
             var exitBlock = cfg.ExitBlock;
 
             xBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { oBranchBlock, falseBlock });
-            xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            xBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.IsPatternExpression);
             VerifyAllInstructions(xBranchBlock, "cw0", "cw0()", "x", "x is int i");
 
             oBranchBlock.SuccessorBlocks.Should().BeEquivalentTo(new[] { trueBlock, falseBlock });
-            oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.IsPatternExpression);
+            oBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.IsPatternExpression);
             VerifyAllInstructions(oBranchBlock, "o", "o is string s");
 
             trueBlock.SuccessorBlocks.Should().Equal(falseBlock);
@@ -1539,7 +1539,7 @@ public class Sample
 
             branchBlock.TrueSuccessorBlock.Should().Be(blockWithB);
             branchBlock.FalseSuccessorBlock.Should().Be(assignmentBlock);
-            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+            branchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceAssignmentExpression);
             VerifyAllInstructions(branchBlock, "a");
 
             blockWithB.SuccessorBlocks.Should().Equal(assignmentBlock);
@@ -1568,12 +1568,12 @@ public class Sample
             firstBranchBlockWithA.TrueSuccessorBlock.Should().Be(secondBranchBlockWithB);
             firstBranchBlockWithA.FalseSuccessorBlock.Should().Be(simpleBlockWithFullExpression);
             firstBranchBlockWithA.Instructions.Should().ContainSingle("a");
-            firstBranchBlockWithA.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+            firstBranchBlockWithA.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceAssignmentExpression);
 
             secondBranchBlockWithB.TrueSuccessorBlock.Should().Be(simpleBlockWithC);
             secondBranchBlockWithB.FalseSuccessorBlock.Should().Be(simpleBlockWithAssignmentToB);
             secondBranchBlockWithB.Instructions.Should().ContainSingle("b");
-            secondBranchBlockWithB.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+            secondBranchBlockWithB.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceAssignmentExpression);
 
             simpleBlockWithC.SuccessorBlock.Should().Be(simpleBlockWithAssignmentToB);
             simpleBlockWithC.Instructions.Should().ContainSingle("c");
@@ -1601,7 +1601,7 @@ public class Sample
 
             coalesceAssignmentBranchBlock.TrueSuccessorBlock.Should().Be(coalesceBranchBlock);
             coalesceAssignmentBranchBlock.FalseSuccessorBlock.Should().Be(assignmentBlock);
-            coalesceAssignmentBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+            coalesceAssignmentBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceAssignmentExpression);
             coalesceAssignmentBranchBlock.Instructions.Should().ContainSingle("a");
 
             coalesceBranchBlock.TrueSuccessorBlock.Should().Be(blockWithC);
@@ -1633,7 +1633,7 @@ public class Sample
             nullCoalesceAssignmentBranchBlock.TrueSuccessorBlock.Should().Be(conditionalBranchBlock);
             nullCoalesceAssignmentBranchBlock.FalseSuccessorBlock.Should().Be(simpleBlockWithFullExpression);
             nullCoalesceAssignmentBranchBlock.Instructions.Should().ContainSingle("a");
-            nullCoalesceAssignmentBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKindEx.CoalesceAssignmentExpression);
+            nullCoalesceAssignmentBranchBlock.BranchingNode.Kind().Should().Be(SyntaxKind.CoalesceAssignmentExpression);
 
             conditionalBranchBlock.TrueSuccessorBlock.Should().Be(cBlock);
             conditionalBranchBlock.FalseSuccessorBlock.Should().Be(dBlock);

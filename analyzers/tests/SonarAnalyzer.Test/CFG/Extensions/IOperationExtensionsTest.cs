@@ -17,6 +17,7 @@
 
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.ShimLayer;
 
 namespace SonarAnalyzer.CFG.Extensions.Test;
 

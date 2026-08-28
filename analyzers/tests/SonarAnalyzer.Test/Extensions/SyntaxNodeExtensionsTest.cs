@@ -646,10 +646,10 @@ public class C
         argument = argument.AncestorsAndSelf()
             .FirstOrDefault(x => x?.Kind() is
                 SyntaxKind.Argument or
-                SyntaxKindEx.DiscardDesignation or
-                SyntaxKindEx.SingleVariableDesignation or
-                SyntaxKindEx.ParenthesizedVariableDesignation or
-                SyntaxKindEx.TupleExpression)
+                SyntaxKind.DiscardDesignation or
+                SyntaxKind.SingleVariableDesignation or
+                SyntaxKind.ParenthesizedVariableDesignation or
+                SyntaxKind.TupleExpression)
             ?? argument;
         tree.GetDiagnostics().Should().BeEmpty();
         var target = SyntaxNodeExtensionsCSharp.FindAssignmentComplement(argument);
@@ -1361,8 +1361,8 @@ End Class";
     [DataRow("""int Property { get; set; } = $$int.Parse("42")$$;""", SyntaxKind.PropertyDeclaration)]
     [DataRow("""int Property { set { $$_ = value;$$ } }""", SyntaxKind.SetAccessorDeclaration)]
     [DataRow("""int Property { set { $$_ = value;$$ } }""", SyntaxKind.SetAccessorDeclaration)]
-    [DataRow("""int Method() { return LocalFunction(); int LocalFunction() { $$return 42;$$ } }""", SyntaxKindEx.LocalFunctionStatement)]
-    [DataRow("""int Method() { return LocalFunction(); int LocalFunction() => $$42$$; }""", SyntaxKindEx.LocalFunctionStatement)]
+    [DataRow("""int Method() { return LocalFunction(); int LocalFunction() { $$return 42;$$ } }""", SyntaxKind.LocalFunctionStatement)]
+    [DataRow("""int Method() { return LocalFunction(); int LocalFunction() => $$42$$; }""", SyntaxKind.LocalFunctionStatement)]
     [DataRow("""int Method() { $$return 42;$$ }""", SyntaxKind.MethodDeclaration)]
     [DataRow("""int Method() => $$42$$;""", SyntaxKind.MethodDeclaration)]
     [DataRow("""public static Derived operator +(Derived d) => $$d$$;""", SyntaxKind.OperatorDeclaration)]
@@ -1373,8 +1373,8 @@ End Class";
     [DataRow("""enum E { A = $$1$$ }""", SyntaxKind.EnumMemberDeclaration)]
     [DataRow("""void M(int i = $$1$$) { }""", SyntaxKind.Parameter)]
 #if NET
-    [DataRow("""int Property { init { $$_ = value;$$ } }""", SyntaxKindEx.InitAccessorDeclaration)]
-    [DataRow("""record BaseRec(int I); record DerivedRec(int I): BaseRec($$I++$$);""", SyntaxKindEx.PrimaryConstructorBaseType)]
+    [DataRow("""int Property { init { $$_ = value;$$ } }""", SyntaxKind.InitAccessorDeclaration)]
+    [DataRow("""record BaseRec(int I); record DerivedRec(int I): BaseRec($$I++$$);""", SyntaxKind.PrimaryConstructorBaseType)]
 #endif
     public void EnclosingScope_Members(string member, SyntaxKind expectedSyntaxKind)
     {

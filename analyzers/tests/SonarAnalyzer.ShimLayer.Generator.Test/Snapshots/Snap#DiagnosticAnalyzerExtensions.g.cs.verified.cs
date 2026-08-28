@@ -27,5 +27,5 @@ public static class DiagnosticAnalyzerExtensionsEx
 
     private static readonly Func<Compilation, ImmutableArray<DiagnosticAnalyzer>, AnalyzerOptions, CompilationWithAnalyzers> WithAnalyzersAccessor = AccessorFactory.CreateStaticMethod<Func<Compilation, ImmutableArray<DiagnosticAnalyzer>, AnalyzerOptions, CompilationWithAnalyzers>>(WrappedType, "WithAnalyzers");
 
-    public static CompilationWithAnalyzers WithAnalyzers(Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerOptions options) => WithAnalyzersAccessor(compilation, analyzers, options);
+    public static CompilationWithAnalyzers WithAnalyzers(this Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, AnalyzerOptions options) => WithAnalyzersAccessor(compilation, analyzers, options);
 }

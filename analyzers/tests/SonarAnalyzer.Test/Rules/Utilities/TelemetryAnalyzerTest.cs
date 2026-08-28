@@ -109,7 +109,6 @@ public class TelemetryAnalyzerTest
         var syntaxTrees = new[] { CodeAnalysisCS.SyntaxFactory.ParseSyntaxTree(string.Empty, CodeAnalysisCS.CSharpParseOptions.Default.WithLanguageVersion(languageVersion)) };
         var compilation = CodeAnalysisCS.CSharpCompilation.Create(null, syntaxTrees);
         var outPath = Path.Combine(BasePath, TestContext.TestName, Interlocked.Increment(ref testNumber).ToString());
-
         var compilationWithAnalyzer = compilation.WithAnalyzers(
             [new CS.TelemetryAnalyzer()],
             new AnalyzerOptions([SonarProjectConfigXmlMock(projectName, outPath), SonarLintXmlMock()]));

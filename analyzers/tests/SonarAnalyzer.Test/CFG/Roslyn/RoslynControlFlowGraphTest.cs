@@ -18,7 +18,7 @@
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Common;
 using SonarAnalyzer.CFG.Extensions;
-using StyleCop.Analyzers.Lightup;
+using SonarAnalyzer.ShimLayer;
 using FlowAnalysis = Microsoft.CodeAnalysis.FlowAnalysis;
 
 namespace SonarAnalyzer.CFG.Roslyn.Test;

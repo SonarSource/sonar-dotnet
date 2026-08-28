@@ -33,5 +33,5 @@ public static class SyntaxFactsEx
     public static bool IsCheckedOperator(string operatorMetadataName) => (bool)IsCheckedOperatorAccessor(operatorMetadataName);
     public static bool IsOverloadableCompoundAssignmentOperator(SyntaxKind kind) => (bool)IsOverloadableCompoundAssignmentOperatorAccessor(kind);
     public static bool IsReservedTupleElementName(string elementName) => (bool)IsReservedTupleElementNameAccessor(elementName);
-    public static string TryGetInferredMemberName(SyntaxNode syntax) => (string)TryGetInferredMemberNameAccessor(syntax);
+    public static string TryGetInferredMemberName(this SyntaxNode syntax) => (string)TryGetInferredMemberNameAccessor(syntax);
 }

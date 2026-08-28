@@ -22,6 +22,7 @@ using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Syntax.Utilities;
 using SonarAnalyzer.CSharp.Core.Syntax.Extensions;
 using SonarAnalyzer.CSharp.Core.Syntax.Utilities;
+using SonarAnalyzer.ShimLayer;
 using SonarAnalyzer.VisualBasic.Core.Syntax.Utilities;
 
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;

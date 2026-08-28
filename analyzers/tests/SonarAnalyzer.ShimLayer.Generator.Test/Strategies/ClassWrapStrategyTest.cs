@@ -218,7 +218,7 @@ public class ClassWrapStrategyTest
                 public GeneratorDriver RunGenerators(Compilation compilation) => (GeneratorDriver)RunGeneratorsAccessor(wrappedInstance, compilation);
                 public GeneratorDriver RunGenerators(Compilation compilation, CancellationToken cancellationToken) => (GeneratorDriver)RunGeneratorsAccessor_Overload2(wrappedInstance, compilation, cancellationToken);
                 public static AnalyzerConfig Parse(string text, string pathToFile) => (AnalyzerConfig)ParseAccessor(text, pathToFile);
-                public static bool TryGetSpeculativeSemanticModel(SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption) => (bool)TryGetAccessor(semanticModel, position, type, out speculativeModel, bindingOption);
+                public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption) => (bool)TryGetAccessor(semanticModel, position, type, out speculativeModel, bindingOption);
 
                 public static CSharpGeneratorDriverWrapper From(GeneratorDriver instance)
                 {

@@ -76,8 +76,8 @@ public class StaticClassExtendStrategyTest
                 private delegate bool TryGetSpeculativeSemanticModelAccessorDelegate(SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel);
                 private static readonly TryGetSpeculativeSemanticModelAccessorDelegate TryGetSpeculativeSemanticModelAccessor = AccessorFactory.CreateStaticMethod<TryGetSpeculativeSemanticModelAccessorDelegate>(WrappedType, "TryGetSpeculativeSemanticModel");
 
-                public static Conversion GetOutConversion(ICompoundAssignmentOperation compoundAssignment) => (Conversion)GetOutConversionAccessor(compoundAssignment);
-                public static bool TryGetSpeculativeSemanticModel(SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel) => (bool)TryGetSpeculativeSemanticModelAccessor(semanticModel, position, constructorInitializer, out speculativeModel);
+                public static Conversion GetOutConversion(this ICompoundAssignmentOperation compoundAssignment) => (Conversion)GetOutConversionAccessor(compoundAssignment);
+                public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel) => (bool)TryGetSpeculativeSemanticModelAccessor(semanticModel, position, constructorInitializer, out speculativeModel);
             }
             """);
     }

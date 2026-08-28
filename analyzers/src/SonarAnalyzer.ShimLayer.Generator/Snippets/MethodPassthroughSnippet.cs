@@ -31,5 +31,4 @@ public sealed class MethodPassthroughSnippet : MethodSnippet
             {prefix}.{member.Name}({parameters.JoinStr(", ", SerializeParameterArgument)})
             """;
     }
-
 }
