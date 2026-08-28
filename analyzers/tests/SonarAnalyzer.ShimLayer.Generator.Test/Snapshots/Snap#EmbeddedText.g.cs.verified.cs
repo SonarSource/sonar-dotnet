@@ -28,9 +28,9 @@ public readonly struct EmbeddedTextWrapper
     private static readonly Func<Object, SourceHashAlgorithm> ChecksumAlgorithmAccessor = AccessorFactory.CreateProperty<Func<Object, SourceHashAlgorithm>>(WrappedType, "ChecksumAlgorithm");
     private static readonly Func<Object, string> FilePathAccessor = AccessorFactory.CreateProperty<Func<Object, string>>(WrappedType, "FilePath");
 
-    private static readonly Func<Object, string, ArraySegment<Byte>, SourceHashAlgorithm, Object> FromBytesAccessor = AccessorFactory.CreateMethod<Func<Object, string, ArraySegment<Byte>, SourceHashAlgorithm, Object>>(WrappedType, "FromBytes");
-    private static readonly Func<Object, string, SourceText, Object> FromSourceAccessor = AccessorFactory.CreateMethod<Func<Object, string, SourceText, Object>>(WrappedType, "FromSource");
-    private static readonly Func<Object, string, Stream, SourceHashAlgorithm, Object> FromStreamAccessor = AccessorFactory.CreateMethod<Func<Object, string, Stream, SourceHashAlgorithm, Object>>(WrappedType, "FromStream");
+    private static readonly Func<string, ArraySegment<Byte>, SourceHashAlgorithm, Object> FromBytesAccessor = AccessorFactory.CreateStaticMethod<Func<string, ArraySegment<Byte>, SourceHashAlgorithm, Object>>(WrappedType, "FromBytes");
+    private static readonly Func<string, SourceText, Object> FromSourceAccessor = AccessorFactory.CreateStaticMethod<Func<string, SourceText, Object>>(WrappedType, "FromSource");
+    private static readonly Func<string, Stream, SourceHashAlgorithm, Object> FromStreamAccessor = AccessorFactory.CreateStaticMethod<Func<string, Stream, SourceHashAlgorithm, Object>>(WrappedType, "FromStream");
 
     private EmbeddedTextWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -41,9 +41,9 @@ public readonly struct EmbeddedTextWrapper
     public SourceHashAlgorithm ChecksumAlgorithm => (SourceHashAlgorithm)ChecksumAlgorithmAccessor(wrappedInstance);
     public string FilePath => (string)FilePathAccessor(wrappedInstance);
 
-    public EmbeddedTextWrapper FromBytes(string filePath, ArraySegment<Byte> bytes, SourceHashAlgorithm checksumAlgorithm) => EmbeddedTextWrapper.From(FromBytesAccessor(wrappedInstance, filePath, bytes, checksumAlgorithm));
-    public EmbeddedTextWrapper FromSource(string filePath, SourceText text) => EmbeddedTextWrapper.From(FromSourceAccessor(wrappedInstance, filePath, text));
-    public EmbeddedTextWrapper FromStream(string filePath, Stream stream, SourceHashAlgorithm checksumAlgorithm) => EmbeddedTextWrapper.From(FromStreamAccessor(wrappedInstance, filePath, stream, checksumAlgorithm));
+    public static EmbeddedTextWrapper FromBytes(string filePath, ArraySegment<Byte> bytes, SourceHashAlgorithm checksumAlgorithm) => EmbeddedTextWrapper.From(FromBytesAccessor(filePath, bytes, checksumAlgorithm));
+    public static EmbeddedTextWrapper FromSource(string filePath, SourceText text) => EmbeddedTextWrapper.From(FromSourceAccessor(filePath, text));
+    public static EmbeddedTextWrapper FromStream(string filePath, Stream stream, SourceHashAlgorithm checksumAlgorithm) => EmbeddedTextWrapper.From(FromStreamAccessor(filePath, stream, checksumAlgorithm));
 
     public static EmbeddedTextWrapper From(Object instance)
     {

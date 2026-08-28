@@ -26,9 +26,9 @@ public static partial class SourceTextShimExtensions
 
     private static readonly Func<SourceText, bool> CanBeEmbeddedAccessor = AccessorFactory.CreateProperty<Func<SourceText, bool>>(WrappedType, "CanBeEmbedded");
 
-    private static readonly Func<SourceText, Byte[], int, Encoding, SourceHashAlgorithm, bool, bool, SourceText> FromAccessor_Overload2 = AccessorFactory.CreateMethod<Func<SourceText, Byte[], int, Encoding, SourceHashAlgorithm, bool, bool, SourceText>>(WrappedType, "From");
-    private static readonly Func<SourceText, Stream, Encoding, SourceHashAlgorithm, bool, bool, SourceText> FromAccessor_Overload4 = AccessorFactory.CreateMethod<Func<SourceText, Stream, Encoding, SourceHashAlgorithm, bool, bool, SourceText>>(WrappedType, "From");
-    private static readonly Func<SourceText, TextReader, int, Encoding, SourceHashAlgorithm, SourceText> FromAccessor_Overload5 = AccessorFactory.CreateMethod<Func<SourceText, TextReader, int, Encoding, SourceHashAlgorithm, SourceText>>(WrappedType, "From");
+    private static readonly Func<Byte[], int, Encoding, SourceHashAlgorithm, bool, bool, SourceText> FromAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<Byte[], int, Encoding, SourceHashAlgorithm, bool, bool, SourceText>>(WrappedType, "From");
+    private static readonly Func<Stream, Encoding, SourceHashAlgorithm, bool, bool, SourceText> FromAccessor_Overload4 = AccessorFactory.CreateStaticMethod<Func<Stream, Encoding, SourceHashAlgorithm, bool, bool, SourceText>>(WrappedType, "From");
+    private static readonly Func<TextReader, int, Encoding, SourceHashAlgorithm, SourceText> FromAccessor_Overload5 = AccessorFactory.CreateStaticMethod<Func<TextReader, int, Encoding, SourceHashAlgorithm, SourceText>>(WrappedType, "From");
     private static readonly Func<SourceText, ImmutableArray<Byte>> GetChecksumAccessor = AccessorFactory.CreateMethod<Func<SourceText, ImmutableArray<Byte>>>(WrappedType, "GetChecksum");
     private static readonly Func<SourceText, ImmutableArray<Byte>> GetContentHashAccessor = AccessorFactory.CreateMethod<Func<SourceText, ImmutableArray<Byte>>>(WrappedType, "GetContentHash");
 
@@ -36,9 +36,9 @@ public static partial class SourceTextShimExtensions
     {
         public bool CanBeEmbedded => (bool)CanBeEmbeddedAccessor(wrappedInstance);
 
-        public SourceText From(Byte[] buffer, int length, Encoding encoding, SourceHashAlgorithm checksumAlgorithm, bool throwIfBinaryDetected, bool canBeEmbedded) => FromAccessor_Overload2(wrappedInstance, buffer, length, encoding, checksumAlgorithm, throwIfBinaryDetected, canBeEmbedded);
-        public SourceText From(Stream stream, Encoding encoding, SourceHashAlgorithm checksumAlgorithm, bool throwIfBinaryDetected, bool canBeEmbedded) => FromAccessor_Overload4(wrappedInstance, stream, encoding, checksumAlgorithm, throwIfBinaryDetected, canBeEmbedded);
-        public SourceText From(TextReader reader, int length, Encoding encoding, SourceHashAlgorithm checksumAlgorithm) => FromAccessor_Overload5(wrappedInstance, reader, length, encoding, checksumAlgorithm);
+        public static SourceText From(Byte[] buffer, int length, Encoding encoding, SourceHashAlgorithm checksumAlgorithm, bool throwIfBinaryDetected, bool canBeEmbedded) => FromAccessor_Overload2(buffer, length, encoding, checksumAlgorithm, throwIfBinaryDetected, canBeEmbedded);
+        public static SourceText From(Stream stream, Encoding encoding, SourceHashAlgorithm checksumAlgorithm, bool throwIfBinaryDetected, bool canBeEmbedded) => FromAccessor_Overload4(stream, encoding, checksumAlgorithm, throwIfBinaryDetected, canBeEmbedded);
+        public static SourceText From(TextReader reader, int length, Encoding encoding, SourceHashAlgorithm checksumAlgorithm) => FromAccessor_Overload5(reader, length, encoding, checksumAlgorithm);
         public ImmutableArray<Byte> GetChecksum() => (ImmutableArray<Byte>)GetChecksumAccessor(wrappedInstance);
         public ImmutableArray<Byte> GetContentHash() => (ImmutableArray<Byte>)GetContentHashAccessor(wrappedInstance);
     }

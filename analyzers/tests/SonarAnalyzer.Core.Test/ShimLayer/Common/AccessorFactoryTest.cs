@@ -259,6 +259,21 @@ public class AccessorFactoryTest
     }
 
     [TestMethod]
+    public void CreateStaticMethod_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateStaticMethod<Func<string, bool>>(typeof(SyntaxFacts), nameof(SyntaxFacts.IsCheckedOperator));
+        accessor(WellKnownMemberNames.CheckedAdditionOperatorName).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void CreateStaticMethod_Fallback()
+    {
+        var accessor = AccessorFactory.CreateStaticMethod<Func<string, bool>>(null, nameof(SyntaxFacts.IsCheckedOperator));
+        accessor(WellKnownMemberNames.CheckedAdditionOperatorName).Should().BeFalse();
+    }
+
+
+    [TestMethod]
     public void Create_MethodWithEnumParameter_Shimmed()
     {
         var accessor = AccessorFactory

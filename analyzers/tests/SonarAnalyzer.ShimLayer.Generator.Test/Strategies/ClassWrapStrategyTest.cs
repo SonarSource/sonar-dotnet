@@ -17,6 +17,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.TestFramework.Extensions;
+using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
 
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 
@@ -160,8 +161,11 @@ public class ClassWrapStrategyTest
             [
                 new(typeof(CSharpGeneratorDriver).GetMember(nameof(CSharpGeneratorDriver.RunGenerators))[0], false, "RunGeneratorsAccessor"),
                 new(typeof(CSharpGeneratorDriver).GetMember(nameof(CSharpGeneratorDriver.RunGenerators))[1], false, "RunGeneratorsAccessor_Overload2"),
-                new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.KeyComparer))[0], false, "KeyComparerAccessor"),   // Static wrap property
-                new(typeof(CSharpCommandLineParser).GetMember(nameof(CSharpCommandLineParser.Script))[0], true, "ScriptAccessor")           // Static passthrough property
+                new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.KeyComparer))[0], false, "KeyComparerAccessor"),           // Static wrap property
+                new(typeof(CSharpCommandLineParser).GetMember(nameof(CSharpCommandLineParser.Script))[0], true, "ScriptAccessor"),                  // Static passthrough property
+                new(typeof(AnalyzerConfig).GetMethod(nameof(AnalyzerConfig.Parse), [typeof(string), typeof(string)]), false, "ParseAccessor"),      // Static wrap method
+                new(typeof(CSharpExtensions).GetMember(nameof(CSharpExtensions.TryGetSpeculativeSemanticModel))[0], false, "TryGetAccessor"),       // Static wrap method with out parameter
+                new(typeof(Compilation).GetMember(nameof(Compilation.GetRequiredLanguageVersion))[0], true, "GetRequiredLanguageVersionAccessor"),  // Static passthrough method
             ]);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
@@ -196,6 +200,9 @@ public class ClassWrapStrategyTest
 
                 private static readonly Func<GeneratorDriver, Compilation, GeneratorDriver> RunGeneratorsAccessor = AccessorFactory.CreateMethod<Func<GeneratorDriver, Compilation, GeneratorDriver>>(WrappedType, "RunGenerators");
                 private static readonly Func<GeneratorDriver, Compilation, CancellationToken, GeneratorDriver> RunGeneratorsAccessor_Overload2 = AccessorFactory.CreateMethod<Func<GeneratorDriver, Compilation, CancellationToken, GeneratorDriver>>(WrappedType, "RunGenerators");
+                private static readonly Func<string, string, AnalyzerConfig> ParseAccessor = AccessorFactory.CreateStaticMethod<Func<string, string, AnalyzerConfig>>(WrappedType, "Parse");
+                private delegate bool TryGetAccessorDelegate(SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption);
+                private static readonly TryGetAccessorDelegate TryGetAccessor = AccessorFactory.CreateStaticMethod<TryGetAccessorDelegate>(WrappedType, "TryGetSpeculativeSemanticModel");
 
                 private CSharpGeneratorDriverWrapper(GeneratorDriver wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
@@ -206,8 +213,12 @@ public class ClassWrapStrategyTest
 
                 public static StringComparer KeyComparer => (StringComparer)KeyComparerAccessor();
 
+                public static string GetRequiredLanguageVersion(Diagnostic diagnostic) => GeneratorDriver.GetRequiredLanguageVersion(diagnostic);
+
                 public GeneratorDriver RunGenerators(Compilation compilation) => (GeneratorDriver)RunGeneratorsAccessor(wrappedInstance, compilation);
                 public GeneratorDriver RunGenerators(Compilation compilation, CancellationToken cancellationToken) => (GeneratorDriver)RunGeneratorsAccessor_Overload2(wrappedInstance, compilation, cancellationToken);
+                public static AnalyzerConfig Parse(string text, string pathToFile) => (AnalyzerConfig)ParseAccessor(text, pathToFile);
+                public static bool TryGetSpeculativeSemanticModel(SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption) => (bool)TryGetAccessor(semanticModel, position, type, out speculativeModel, bindingOption);
 
                 public static CSharpGeneratorDriverWrapper From(GeneratorDriver instance)
                 {

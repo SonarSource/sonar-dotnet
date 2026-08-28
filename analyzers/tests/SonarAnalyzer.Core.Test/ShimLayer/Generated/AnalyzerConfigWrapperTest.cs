@@ -15,21 +15,12 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.ShimLayer.Generator.Snippets;
+namespace SonarAnalyzer.Core.Test.ShimLayer.Generated;
 
-public sealed class MethodPassthroughSnippet : MethodSnippet
+[TestClass]
+public class AnalyzerConfigWrapperTest
 {
-    public MethodPassthroughSnippet(Strategy strategy, MemberDescriptor member, Strategy returnType, StrategyModel model) : base(strategy, member, returnType, model) { }
-
-    public override string AccessorDeclaration() =>
-        null;
-
-    protected override string InvocationSnippet()
-    {
-        var prefix = member.IsStatic ? strategy.CompiletimeTypeSnippet : "wrappedInstance";
-        return $"""
-            {prefix}.{member.Name}({parameters.JoinStr(", ", SerializeParameterArgument)})
-            """;
-    }
-
+    [TestMethod]
+    public void StaticMethod() =>
+        AnalyzerConfig.Parse("root = true", @"C:\Project\.editorconfig").Should().NotBeNull();
 }

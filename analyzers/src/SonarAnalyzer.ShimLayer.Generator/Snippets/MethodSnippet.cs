@@ -32,10 +32,13 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
         parameters = this.member.GetParameters();
     }
 
-    public sealed override string MemberDeclaration(int indentSize) =>
-        $"""
-        {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {returnType.ReturnTypeSnippet} {member.Name}({parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
-        """;
+    public sealed override string MemberDeclaration(int indentSize)
+    {
+        var staticSnippet = member.IsStatic ? "static " : null;
+        return $"""
+            {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name}({parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
+            """;
+    }
 
     protected static string SerializeParameterArgument(ParameterInfo parameter)
     {

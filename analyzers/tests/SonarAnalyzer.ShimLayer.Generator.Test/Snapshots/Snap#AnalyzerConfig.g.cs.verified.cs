@@ -24,16 +24,16 @@ public readonly struct AnalyzerConfigWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
-    private static readonly Func<Object, SourceText, string, Object> ParseAccessor = AccessorFactory.CreateMethod<Func<Object, SourceText, string, Object>>(WrappedType, "Parse");
-    private static readonly Func<Object, string, string, Object> ParseAccessor_Overload2 = AccessorFactory.CreateMethod<Func<Object, string, string, Object>>(WrappedType, "Parse");
+    private static readonly Func<SourceText, string, Object> ParseAccessor = AccessorFactory.CreateStaticMethod<Func<SourceText, string, Object>>(WrappedType, "Parse");
+    private static readonly Func<string, string, Object> ParseAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<string, string, Object>>(WrappedType, "Parse");
 
     private AnalyzerConfigWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
 
-    public AnalyzerConfigWrapper Parse(SourceText text, string pathToFile) => AnalyzerConfigWrapper.From(ParseAccessor(wrappedInstance, text, pathToFile));
-    public AnalyzerConfigWrapper Parse(string text, string pathToFile) => AnalyzerConfigWrapper.From(ParseAccessor_Overload2(wrappedInstance, text, pathToFile));
+    public static AnalyzerConfigWrapper Parse(SourceText text, string pathToFile) => AnalyzerConfigWrapper.From(ParseAccessor(text, pathToFile));
+    public static AnalyzerConfigWrapper Parse(string text, string pathToFile) => AnalyzerConfigWrapper.From(ParseAccessor_Overload2(text, pathToFile));
 
     public static AnalyzerConfigWrapper From(Object instance)
     {

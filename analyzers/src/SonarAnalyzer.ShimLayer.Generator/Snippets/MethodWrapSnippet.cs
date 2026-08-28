@@ -23,18 +23,25 @@ public sealed class MethodWrapSnippet : MethodSnippet
 
     public override string AccessorDeclaration()
     {
+        var createMethodName = member.IsStatic ? "CreateStaticMethod" : "CreateMethod";
         if (parameters.Any(x => x.IsOut))
         {
-            var parametersSnippet = ((string[])[$"{strategy.CompiletimeTypeSnippet} sender", .. parameters.Select(SerializeParameter)]).JoinStr(", ");
+            var parameterSnippets = member.IsStatic
+                ? parameters.Select(SerializeParameter)
+                : parameters.Select(SerializeParameter).Prepend($"{strategy.CompiletimeTypeSnippet} sender");
             return $"""
-                    private delegate {returnType.CompiletimeTypeSnippet} {accessorName}Delegate({parametersSnippet});
-                    private static readonly {accessorName}Delegate {accessorName} = AccessorFactory.CreateMethod<{accessorName}Delegate>(WrappedType, "{member.Name}");
+                    private delegate {returnType.CompiletimeTypeSnippet} {accessorName}Delegate({parameterSnippets.JoinStr(", ")});
+                    private static readonly {accessorName}Delegate {accessorName} = AccessorFactory.{createMethodName}<{accessorName}Delegate>(WrappedType, "{member.Name}");
                 """;
         }
         else
         {
-            var types = parameters.Select(x => model[x.ParameterType].ReturnTypeSnippet).Prepend(strategy.CompiletimeTypeSnippet);
             string delegateName;
+            var types = new List<string>(parameters.Select(x => model[x.ParameterType].ReturnTypeSnippet));
+            if (!member.IsStatic)
+            {
+                types.Insert(0, strategy.CompiletimeTypeSnippet);
+            }
             if (returnType.Latest.FullName == typeof(void).FullName)
             {
                 delegateName = "Action";
@@ -42,17 +49,22 @@ public sealed class MethodWrapSnippet : MethodSnippet
             else
             {
                 delegateName = "Func";
-                types = types.Append(returnType.CompiletimeTypeSnippet);
+                types.Add(returnType.CompiletimeTypeSnippet);
             }
-            var typesSnippet = types.JoinStr(", ");
+            var typesSnippet = types.Any() ? $"<{types.JoinStr(", ")}>" : null;
             return $"""
-                    private static readonly {delegateName}<{typesSnippet}> {accessorName} = AccessorFactory.CreateMethod<{delegateName}<{typesSnippet}>>(WrappedType, "{member.Name}");
+                    private static readonly {delegateName}{typesSnippet} {accessorName} = AccessorFactory.{createMethodName}<{delegateName}{typesSnippet}>(WrappedType, "{member.Name}");
                 """;
         }
     }
 
-    protected override string InvocationSnippet() =>
-        $"""
-        {returnType.ToConversionSnippet($"{accessorName}({parameters.Select(SerializeParameterArgument).Prepend("wrappedInstance").JoinStr(", ")})")}
-        """;
+    protected override string InvocationSnippet()
+    {
+        var parameterSnippets = member.IsStatic
+            ? parameters.Select(SerializeParameterArgument)
+            : parameters.Select(SerializeParameterArgument).Prepend("wrappedInstance");
+        return $"""
+            {returnType.ToConversionSnippet($"{accessorName}({parameterSnippets.JoinStr(", ")})")}
+            """;
+    }
 }

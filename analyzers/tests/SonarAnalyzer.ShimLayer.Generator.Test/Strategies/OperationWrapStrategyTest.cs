@@ -280,16 +280,16 @@ public class OperationWrapStrategyTest
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
-                private static readonly Func<IOperation, IAttributeOperationWrapper, CancellationToken, IOperation> CreateAccessor = AccessorFactory.CreateMethod<Func<IOperation, IAttributeOperationWrapper, CancellationToken, IOperation>>(WrappedType, "Create");
-                private static readonly Func<IOperation, IBlockOperationWrapper, CancellationToken, IOperation> CreateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<IOperation, IBlockOperationWrapper, CancellationToken, IOperation>>(WrappedType, "Create");
+                private static readonly Func<IAttributeOperationWrapper, CancellationToken, IOperation> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<IAttributeOperationWrapper, CancellationToken, IOperation>>(WrappedType, "Create");
+                private static readonly Func<IBlockOperationWrapper, CancellationToken, IOperation> CreateAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<IBlockOperationWrapper, CancellationToken, IOperation>>(WrappedType, "Create");
 
                 private ControlFlowGraphWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
 
-                public ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor(wrappedInstance, attribute, cancellationToken));
-                public ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload2(wrappedInstance, body, cancellationToken));
+                public static ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor(attribute, cancellationToken));
+                public static ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload2(body, cancellationToken));
 
                 public static ControlFlowGraphWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;

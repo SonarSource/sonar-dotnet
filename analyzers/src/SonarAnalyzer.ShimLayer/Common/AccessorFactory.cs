@@ -25,9 +25,20 @@ internal static class AccessorFactory
     private static readonly MethodInfo UnboundEnumerableToArrayMethod = typeof(Enumerable).GetMethod(nameof(Enumerable.ToArray));
     private static readonly MethodInfo UnboundImmutableArrayCreateRangeMethod = typeof(ImmutableArray).GetMethods().Single(IsImmutableArrayCreateRange);
 
-    public static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName) where TFunc : Delegate
+    public static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName) where TFunc : Delegate =>
+        CreateMethod<TFunc>(runtimeSenderType, methodName, new(typeof(TFunc), false));
+
+    public static TFunc CreateStaticMethod<TFunc>(Type runtimeSenderType, string methodName) where TFunc : Delegate =>
+        CreateMethod<TFunc>(runtimeSenderType, methodName, new(typeof(TFunc), true));
+
+    public static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate =>
+        CreateProperty<TFunc>(runtimeSenderType, propertyName, new(typeof(TFunc), false));
+
+    public static TFunc CreateStaticProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate =>
+        CreateProperty<TFunc>(runtimeSenderType, propertyName, new(typeof(TFunc), true));
+
+    private static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName, AccessorTypes types) where TFunc : Delegate
     {
-        var types = new AccessorTypes(typeof(TFunc), false);
         return CreateAccessor<TFunc>(types, runtimeSenderType, methodName, runtimeSenderType?.GetMethods().FirstOrDefault(IsMethodMatch));
 
         bool IsMethodMatch(MethodInfo method) =>
@@ -50,12 +61,6 @@ internal static class AccessorFactory
         static bool IsEnumMatch(Type compiletime, Type runtime) =>
             compiletime.IsEnum && runtime.IsEnum && compiletime.Name == runtime.Name;
     }
-
-    public static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate =>
-        CreateProperty<TFunc>(runtimeSenderType, propertyName, new(typeof(TFunc), false));
-
-    public static TFunc CreateStaticProperty<TFunc>(Type runtimeSenderType, string propertyName) where TFunc : Delegate =>
-        CreateProperty<TFunc>(runtimeSenderType, propertyName, new(typeof(TFunc), true));
 
     private static TFunc CreateProperty<TFunc>(Type runtimeSenderType, string propertyName, AccessorTypes types) where TFunc : Delegate
     {
@@ -119,7 +124,7 @@ internal static class AccessorFactory
         {
             var sender = senderLambdaParameter is null ? null : WrapConvert(senderLambdaParameter, runtimeSenderType);
             var methodParameters = method.GetParameters();
-            var result = Expression.Call(sender, method, lambdaParameters.Skip(1).Select((x, i) => ConvertArgument(x, methodParameters[i].ParameterType)));
+            var result = Expression.Call(sender, method, lambdaParameters.Skip(senderLambdaParameter is null ? 0 : 1).Select((x, i) => ConvertArgument(x, methodParameters[i].ParameterType)));
             if (types.ResultType.IsGenericType
                 && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>)
                 && types.ResultType.GenericTypeArguments.Single() is var wrapperTypeArgument

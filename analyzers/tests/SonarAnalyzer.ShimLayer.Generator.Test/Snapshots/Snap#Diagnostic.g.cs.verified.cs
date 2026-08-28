@@ -24,10 +24,10 @@ public static partial class DiagnosticShimExtensions
 {
     private static readonly Type WrappedType = typeof(Diagnostic);
 
-    private static readonly Func<Diagnostic, DiagnosticDescriptor, Location, DiagnosticSeverity, IEnumerable<Location>, ImmutableDictionary<string, string>, Object[], Diagnostic> CreateAccessor = AccessorFactory.CreateMethod<Func<Diagnostic, DiagnosticDescriptor, Location, DiagnosticSeverity, IEnumerable<Location>, ImmutableDictionary<string, string>, Object[], Diagnostic>>(WrappedType, "Create");
+    private static readonly Func<DiagnosticDescriptor, Location, DiagnosticSeverity, IEnumerable<Location>, ImmutableDictionary<string, string>, Object[], Diagnostic> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<DiagnosticDescriptor, Location, DiagnosticSeverity, IEnumerable<Location>, ImmutableDictionary<string, string>, Object[], Diagnostic>>(WrappedType, "Create");
 
     extension(Diagnostic wrappedInstance)
     {
-        public Diagnostic Create(DiagnosticDescriptor descriptor, Location location, DiagnosticSeverity effectiveSeverity, IEnumerable<Location> additionalLocations, ImmutableDictionary<string, string> properties, Object[] messageArgs) => CreateAccessor(wrappedInstance, descriptor, location, effectiveSeverity, additionalLocations, properties, messageArgs);
+        public static Diagnostic Create(DiagnosticDescriptor descriptor, Location location, DiagnosticSeverity effectiveSeverity, IEnumerable<Location> additionalLocations, ImmutableDictionary<string, string> properties, Object[] messageArgs) => CreateAccessor(descriptor, location, effectiveSeverity, additionalLocations, properties, messageArgs);
     }
 }

@@ -24,10 +24,10 @@ public static partial class LocationShimExtensions
 {
     private static readonly Type WrappedType = typeof(Location);
 
-    private static readonly Func<Location, string, TextSpan, LinePositionSpan, string, LinePositionSpan, Location> CreateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<Location, string, TextSpan, LinePositionSpan, string, LinePositionSpan, Location>>(WrappedType, "Create");
+    private static readonly Func<string, TextSpan, LinePositionSpan, string, LinePositionSpan, Location> CreateAccessor_Overload3 = AccessorFactory.CreateStaticMethod<Func<string, TextSpan, LinePositionSpan, string, LinePositionSpan, Location>>(WrappedType, "Create");
 
     extension(Location wrappedInstance)
     {
-        public Location Create(string filePath, TextSpan textSpan, LinePositionSpan lineSpan, string mappedFilePath, LinePositionSpan mappedLineSpan) => CreateAccessor_Overload3(wrappedInstance, filePath, textSpan, lineSpan, mappedFilePath, mappedLineSpan);
+        public static Location Create(string filePath, TextSpan textSpan, LinePositionSpan lineSpan, string mappedFilePath, LinePositionSpan mappedLineSpan) => CreateAccessor_Overload3(filePath, textSpan, lineSpan, mappedFilePath, mappedLineSpan);
     }
 }

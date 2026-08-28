@@ -28,6 +28,7 @@ public abstract class Snippet
         var indent = Indent(indentSize);
         foreach (var attribute in attributes.Where(x => x.AttributeType.Name is not "AsyncStateMachineAttribute"
                                                                                 and not "ExperimentalAttribute"
+                                                                                and not "ExtensionAttribute"
                                                                                 and not "IteratorStateMachineAttribute"
                                                                                 and not "MemberNotNullWhenAttribute"
                                                                                 and not "NullableAttribute"
