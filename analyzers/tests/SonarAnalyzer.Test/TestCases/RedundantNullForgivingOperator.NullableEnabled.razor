@@ -1,0 +1,11 @@
+@namespace RazorNullForgiving
+
+<h3>NullableEnabled</h3>
+
+@code {
+    public void Method()
+    {
+        object a = new object();
+        _ = a!;
+    }
+}

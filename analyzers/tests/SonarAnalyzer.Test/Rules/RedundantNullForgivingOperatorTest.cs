@@ -49,6 +49,21 @@ public class RedundantNullForgivingOperatorTest
             .WithCodeFixedPaths("RedundantNullForgivingOperator.Latest.Fixed.cs")
             .VerifyCodeFix();
 
+    // The rule is disabled for Razor-generated files (see ShouldAnalyzeTreeCache.rulesDisabledForRazor).
+    [TestMethod]
+    public void RedundantNullForgivingOperator_Razor_NullableEnabled() =>
+        builder.AddPaths("RedundantNullForgivingOperator.NullableEnabled.razor")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithCompilationOptionsCustomization(x => ((CSharpCompilationOptions)x).WithNullableContextOptions(Microsoft.CodeAnalysis.NullableContextOptions.Enable))
+            .VerifyNoIssues();
+
+    [TestMethod]
+    public void RedundantNullForgivingOperator_Razor_NullableDisabled() =>
+        builder.AddPaths("RedundantNullForgivingOperator.NullableDisabled.razor")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .WithCompilationOptionsCustomization(x => ((CSharpCompilationOptions)x).WithNullableContextOptions(Microsoft.CodeAnalysis.NullableContextOptions.Disable))
+            .VerifyNoIssues();
+
     [TestMethod]
     [DataRow("enable", true)]
     [DataRow("enable warnings", true)]

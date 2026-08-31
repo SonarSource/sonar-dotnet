@@ -37,6 +37,8 @@ internal class ShouldAnalyzeTreeCache
         "S1147",
         "S1192",
         "S1451",
+        "S8969",
+        "S8970",
     ];
 
     private SyntaxTree Tree { get; }
