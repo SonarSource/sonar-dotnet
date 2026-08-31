@@ -53,7 +53,9 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
         keyWords = value;
         splitKeyWords = SplitKeyWordsByComma(keyWords);
         var credentialWordsPattern = splitKeyWords.Select(Regex.Escape).JoinStr("|");
-        keyWordPattern = new Regex($@"(?<credential>{credentialWordsPattern})\s*=\s*(?<suffix>.+)$", RegexOptions.IgnoreCase, RegexTimeout);
+        // No suffix capture here: it would be greedy to the end of the string, so a single match would consume the whole remainder and
+        // Regex.Matches could never find a later, distinct credential assignment. FindKeyWords instead slices the suffix per match itself.
+        keyWordPattern = new Regex($@"(?<credential>{credentialWordsPattern})\s*=\s*", RegexOptions.IgnoreCase, RegexTimeout);
     }
 
     protected sealed override void Initialize(SonarParametrizedAnalysisContext context)
@@ -129,12 +131,27 @@ public abstract class DoNotHardcodeCredentialsBase<TSyntaxKind> : DoNotHardcodeB
             return null;
         }
 
-        if (keyWordPattern.SafeMatch(variableValue) is { Success: true } match
-            && !IsValidKeyword(match.Groups["suffix"].Value)
-            // Redirect the "this suffix is not a real credential" filtering to the shared secret-exclusion classifier from sonar-analyzer-commons. Ignore placeholders, fake values, etc.
-            && !SecretExclusionPatterns.IsKnownNonSecret(match.Groups["suffix"].Value))
+        // Every credential assignment is inspected independently - excluding one candidate (e.g. as too short) must not hide a later, distinct
+        // one. SafeMatches finds every raw occurrence regardless of quoting, so a keyword coincidentally embedded inside an already-identified
+        // value (e.g. "pwd=" inside Password="a;pwd=b") is skipped rather than rematched as if it were a second, separate credential.
+        var nextAllowedIndex = 0;
+        foreach (Match match in keyWordPattern.SafeMatches(variableValue))
         {
-            credentialWordsFound.Add(match.Groups["credential"].Value);
+            if (match.Index < nextAllowedIndex)
+            {
+                continue;
+            }
+            // The classifier expects only the candidate secret, not the rest of the value that happens to follow it (e.g. other key=value pairs after a ';' separator).
+            var candidateMatch = SecretCandidateExtractor.ExtractCandidate(variableValue.Substring(match.Index + match.Length), KeywordSeparator);
+            // IsValidKeyword is not used here: it re-truncates at ';' internally, which would re-introduce the over-capture ExtractCandidate just resolved for quoted values.
+            if (!string.IsNullOrWhiteSpace(candidateMatch.Candidate)
+                && !ValidKeywordPattern.SafeIsMatch(candidateMatch.Candidate)
+                // Redirect the "this suffix is not a real credential" filtering to the shared secret-exclusion classifier from sonar-analyzer-commons. Ignore placeholders, fake values, etc.
+                && !SecretExclusionPatterns.IsKnownNonSecret(candidateMatch.Candidate))
+            {
+                credentialWordsFound.Add(match.Groups["credential"].Value);
+            }
+            nextAllowedIndex = match.Index + match.Length + candidateMatch.ConsumedLength;
         }
 
         // Rule was initially implemented with everything lower (which is wrong) so we have to force lower before reporting to avoid new issues to appear on SQ/SC.

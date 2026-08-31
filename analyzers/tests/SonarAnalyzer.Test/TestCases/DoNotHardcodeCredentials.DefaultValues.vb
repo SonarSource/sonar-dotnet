@@ -47,6 +47,12 @@ Namespace Tests.Diagnostics
             Dim myPassword3 As String = "   "
             Dim myPassword4 As String = "foo" 'Noncompliant
             Dim query2 As String = "password=hardcoded;user='" + User + "'" ' Noncompliant
+            ' The first candidate ("xk9Z!") is too short and excluded, but the second, distinct credential assignment must still be inspected.
+            Dim twoCredentials As String = "Password=xk9Z!;Pwd=N7vX2qLm" ' Noncompliant
+            ' The "pwd=" inside the already-extracted quoted value ("a;pwd=Xk9LqR7vNz") must not be rematched as a second, separate credential.
+            Dim quotedValueContainsKeyword As String = "Server=x;Password=""a;pwd=Xk9LqR7vNz"";Next=1" ' Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+            ' Backslash-escaped quote (\"), not a doubled one: the real value is ab\"cd;efgh, not just the "ab\" left of the misread closing quote.
+            Dim backslashEscapedQuote As String = "password=""ab\""cd;efgh""" ' Noncompliant
         End Sub
 
         Public Sub DefaultKeywords()
@@ -67,6 +73,8 @@ Namespace Tests.Diagnostics
             Const ConnectionString As String = "Server=localhost; Database=Test; User=SA; Password=SeeCr33t123"                    ' Noncompliant
             Const ConnectionStringWithSpaces As String = "Server=localhost; Database=Test; User=SA; Password   =   SeeCr33t123"    ' Noncompliant
             Const Password As String = "Secret123"  ' Noncompliant
+            ' The quote still delimits the value ("ab;cdefghijk") even though more text follows it (not connection-string syntax at all here).
+            Const sqlLiteralWithSemicolon As String = "UPDATE Users SET password='ab;cdefghijk' WHERE id=1;" ' Noncompliant
 
             Const LoginName As String = "Admin"
             Const Localhost As String = "localhost"

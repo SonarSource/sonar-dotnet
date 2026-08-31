@@ -41,6 +41,11 @@ namespace Tests.Diagnostics
                 make sure this is not
                 a hard-coded credential.";
 
+            // The credential assignment is not on the last line: the candidate must be truncated at the line break, not just at ';'.
+            string multilineCredentialNotOnLastLine = // Noncompliant
+                @"Password=hardcoded
+                some other text";
+
             string bar;
             bar = "Password=aabbCC123xyZZ"; // Noncompliant
 
@@ -70,6 +75,12 @@ namespace Tests.Diagnostics
             string myPassword3 = "        ";
             string myPassword4 = @"foo";                                // Noncompliant
             string query2 = "password=hardcoded;user='" + user + "'";   // Noncompliant
+            // The first candidate ("xk9Z!") is too short and excluded, but the second, distinct credential assignment must still be inspected.
+            string twoCredentials = "Password=xk9Z!;Pwd=N7vX2qLm";       // Noncompliant
+            // The "pwd=" inside the already-extracted quoted value ("a;pwd=Xk9LqR7vNz") must not be rematched as a second, separate credential.
+            string quotedValueContainsKeyword = "Server=x;Password=\"a;pwd=Xk9LqR7vNz\";Next=1"; // Noncompliant {{"password" detected here, make sure this is not a hard-coded credential.}}
+            // Backslash-escaped quote (\"), not a doubled one: the real value is ab\"cd;efgh, not just the "ab\" left of the misread closing quote.
+            string backslashEscapedQuote = "password=\"ab\\\"cd;efgh\""; // Noncompliant
         }
 
         public void DefaultKeywords()
@@ -94,6 +105,8 @@ namespace Tests.Diagnostics
             const string inTheMiddle = "Server=localhost; Database=Test; User=SA; Password=S3crEt@123; Application Name=Sonar";  // Noncompliant
             const string withSemicolon = @"Server=localhost; Database=Test; User=SA; Password=""S3crEt;'123""";                  // Noncompliant
             const string withApostroph = @"Server=localhost; Database=Test; User=SA; Password='S3crEt""123";                     // Noncompliant
+            // The quote still delimits the value ("ab;cdefghijk") even though more text follows it (not connection-string syntax at all here).
+            const string sqlLiteralWithSemicolon = "UPDATE Users SET password='ab;cdefghijk' WHERE id=1;"; // Noncompliant
             const string Password = "Secret123";  // Noncompliant
 
             const string LoginName = "Admin";

@@ -14,8 +14,8 @@ namespace Tests.Diagnostics
             string passKodeKode = "a"; // Noncompliant
             string passKoDe = "a"; // Compliant
 
-            string x = "kode=a;kode=a"; // Noncompliant
-            string x1 = "facal-faire=a;kode=a"; // Noncompliant
+            string x = "kode=qm4wZ8lk;kode=vB2ftR9x"; // Noncompliant
+            string x1 = "facal-faire=qm4wZ8lk;kode=vB2ftR9x"; // Noncompliant
             string x2 = @"x\*+?|}{][)(^$.# =something"; // Noncompliant {{"x\*+?|}{][)(^$.#" detected here, make sure this is not a hard-coded credential.}}
         }
 

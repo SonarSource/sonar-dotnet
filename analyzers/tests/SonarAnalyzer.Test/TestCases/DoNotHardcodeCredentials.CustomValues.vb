@@ -10,8 +10,8 @@ Namespace Tests.Diagnostics
             Dim passKode As String = "a" 'Noncompliant {{"kode" detected here, make sure this is not a hard-coded credential.}}
             Dim passKodeKode As String = "a" 'Noncompliant
             Dim passKoDe As String = "a"    ' Error [BC30288] Local variable 'passKoDe' is already declared in the current block
-            Dim x As String = "kode=a;kode=a" 'Noncompliant
-            Dim x1 As String = "facal-faire=a;kode=a" 'Noncompliant
+            Dim x As String = "kode=qm4wZ8lk;kode=vB2ftR9x" 'Noncompliant
+            Dim x1 As String = "facal-faire=qm4wZ8lk;kode=vB2ftR9x" 'Noncompliant
             Dim x2 As String = "x\*+?|}{][)(^$.# =something" ' Noncompliant {{"x\*+?|}{][)(^$.#" detected here, make sure this is not a hard-coded credential.}}
         End Sub
 
