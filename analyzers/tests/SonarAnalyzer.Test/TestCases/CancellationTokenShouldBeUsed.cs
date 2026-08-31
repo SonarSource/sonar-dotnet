@@ -472,11 +472,11 @@ public class SelfCallCases
     public void M() { }
     public void M(CancellationToken token) => M(); // Compliant - recursing into this very method
 
-    public void Retry(int n, CancellationToken token = default(CancellationToken))
+    public void Retry(int n, CancellationToken token = default(CancellationToken)) // Secondary
     {
         if (n > 0)
         {
-            Retry(n - 1); // FN — see NET-4351, guarded recursion would be a safe fix
+            Retry(n - 1); // Noncompliant — already recurses into Retry without the token, so forwarding it introduces no new recursion
         }
     }
 
@@ -488,4 +488,23 @@ public static class SelfCallExtensionCases
 {
     public static void M(this Dependency dep) { }
     public static void M(this Dependency dep, CancellationToken token) => dep.M(); // Compliant - recursing into this very method
+}
+
+public class OverloadRecursionFNCases
+{
+    public void Retry(int n)
+    {
+        if (n > 0)
+        {
+            Retry(n - 1);
+        }
+    }
+
+    public void Retry(int n, CancellationToken token)
+    {
+        if (n > 0)
+        {
+            Retry(n - 1); // FN — still guarded by the same "n > 0" check, so forwarding the token would be safe
+        }
+    }
 }

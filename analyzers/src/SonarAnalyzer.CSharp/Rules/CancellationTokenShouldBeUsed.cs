@@ -282,12 +282,13 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
         // A detached WithArgumentList() copy has Parent == null, which NREs Roslyn's binder on conditional-access
         // chains like x?.y.M() (https://github.com/dotnet/roslyn/issues/25262). ReplaceNode on the tree root keeps the parent chain intact.
         var speculatedNode = (ExpressionSyntax)invocation.SyntaxTree.GetRoot().ReplaceNode(invocation, modifiedInvocation).GetAnnotatedNodes(SpeculativeInvocationAnnotation).First();
-        // Binding skips the diagnostics pass (e.g. static-capture check CS8422), so this also succeeds inside a
-        // static local function even though the user still has to add a CT parameter there themselves.
-        // GetSpeculativeSymbolInfo matches by argument type only, so check the return type too to avoid FPs (e.g. Task<int> vs Task<string> overloads).
+        // Speculative binding also succeeds inside a static local function. Check the return type compatability too to avoid FPs (e.g. Task<int> vs Task<string>).
+        // If the token-forwarded call now binds back to the owning method, we risk introducing endless recursion - unless it already recursed there before.
         return model.GetSpeculativeSymbolInfo(invocation.SpanStart, speculatedNode, SpeculativeBindingOption.BindAsExpression).Symbol
             is IMethodSymbol resolved
             && model.Compilation.ClassifyConversion(resolved.ReturnType, calledMethod.ReturnType).IsImplicit
-            && !(resolved.ReducedFrom ?? resolved).OriginalDefinition.Equals(owningMethod.OriginalDefinition);
+            && (!IsOwningMethod(resolved) || IsOwningMethod(calledMethod));
+
+        bool IsOwningMethod(IMethodSymbol symbol) => (symbol.ReducedFrom ?? symbol).OriginalDefinition.Equals(owningMethod.OriginalDefinition);
     }
 }
