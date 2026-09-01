@@ -55,7 +55,6 @@
     <Using Include="SonarAnalyzer.Core.Syntax.Utilities" />
     <Using Include="SonarAnalyzer.CSharp.Core.Wrappers" />
     <Using Include="SonarAnalyzer.ShimLayer" />
-    <Using Include="StyleCop.Analyzers.Lightup" />
   </ItemGroup>
 
 </Project>

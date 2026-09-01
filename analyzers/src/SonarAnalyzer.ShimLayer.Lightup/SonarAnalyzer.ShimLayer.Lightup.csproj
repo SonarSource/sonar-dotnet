@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="StyleCop.Analyzers.Lightup" />
     <Using Include="Microsoft.CodeAnalysis" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="SonarAnalyzer.ShimLayer" />

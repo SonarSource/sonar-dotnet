@@ -30,7 +30,6 @@
     <Using Include="SonarAnalyzer.TestFramework.Common" />
     <Using Include="SonarAnalyzer.TestFramework.Extensions" />
     <Using Include="SonarAnalyzer.TestFramework.MetadataReferences" />
-    <Using Include="StyleCop.Analyzers.Lightup" />
   </ItemGroup>
 
 </Project>

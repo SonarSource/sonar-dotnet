@@ -17,7 +17,6 @@
 
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.CFG.Operations.Utilities;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.Operations.Utilities;
 

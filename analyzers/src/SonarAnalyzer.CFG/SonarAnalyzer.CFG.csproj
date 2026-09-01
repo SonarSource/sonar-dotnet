@@ -24,7 +24,6 @@
     <Using Include="Microsoft.CodeAnalysis.Diagnostics" />
     <Using Include="SonarAnalyzer.CFG.Extensions" />
     <Using Include="SonarAnalyzer.ShimLayer" />
-    <Using Include="StyleCop.Analyzers.Lightup" />
   </ItemGroup>
 
   <Target Name="CopyBinaries" AfterTargets="Build">

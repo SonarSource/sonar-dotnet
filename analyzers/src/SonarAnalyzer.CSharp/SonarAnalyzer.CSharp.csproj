@@ -53,7 +53,6 @@
     <Using Include="SonarAnalyzer.CSharp.Syntax.Extensions" />
     <Using Include="SonarAnalyzer.CSharp.Syntax.Utilities" />
     <Using Include="SonarAnalyzer.ShimLayer" />
-    <Using Include="StyleCop.Analyzers.Lightup" />
   </ItemGroup>
 
   <Target Name="CopyBinaries" AfterTargets="Build">

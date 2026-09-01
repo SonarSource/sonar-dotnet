@@ -16,7 +16,6 @@
  */
 
 using Microsoft.CodeAnalysis.CSharp;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Core.AnalysisContext.Test;
 

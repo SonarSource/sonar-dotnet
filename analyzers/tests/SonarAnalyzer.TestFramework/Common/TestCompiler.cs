@@ -22,7 +22,6 @@ using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.Core.Configuration;
 using SonarAnalyzer.TestFramework.Build;
-using StyleCop.Analyzers.Lightup;
 using CS = Microsoft.CodeAnalysis.CSharp;
 using VB = Microsoft.CodeAnalysis.VisualBasic;
 

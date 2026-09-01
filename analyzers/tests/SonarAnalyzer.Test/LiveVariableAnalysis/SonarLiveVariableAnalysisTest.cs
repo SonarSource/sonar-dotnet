@@ -21,7 +21,6 @@ using SonarAnalyzer.CFG;
 using SonarAnalyzer.CFG.Sonar;
 using SonarAnalyzer.CFG.Sonar.Test;
 using SonarAnalyzer.CSharp.Core.LiveVariableAnalysis;
-using StyleCop.Analyzers.Lightup;
 
 namespace SonarAnalyzer.Test.LiveVariableAnalysis;
 

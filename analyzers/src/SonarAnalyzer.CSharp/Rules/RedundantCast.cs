@@ -69,10 +69,10 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
 
     private static bool FlowStateEquals(SemanticModel model, TypeInfo expressionTypeInfo, ExpressionSyntax castTypeExpression, ITypeSymbol castType)
     {
-        // The Nullability() annotation of the castType symbol is always "None". We need to look at the syntax to determine the nullability.
+        // The Nullability annotation of the castType symbol is always "None". We need to look at the syntax to determine the nullability.
         var castingToNullable = castTypeExpression.IsKind(SyntaxKind.NullableType)
             || castType.IsNullableValueType; // Nullable<int> is considered the same as int? checked via SyntaxKind.NullableType above.
-        var outerNullability = expressionTypeInfo.Nullability().FlowState switch
+        var outerNullability = expressionTypeInfo.Nullability.FlowState switch
         {
             NullableFlowState.None => true,
             NullableFlowState.MaybeNull => castingToNullable, // false when (string)maybeNull which is a narrowing cast and therefore not redundant
@@ -86,7 +86,7 @@ public sealed class RedundantCast : SonarDiagnosticAnalyzer
         static bool InnerNullabilityEquals(SemanticModel model, ITypeSymbol expressionTypeSymbol, ITypeSymbol castTypeSymbol)
         {
             var expressionTypeArguments = (expressionTypeSymbol as INamedTypeSymbol)?.TypeArguments ?? ImmutableArray<ITypeSymbol>.Empty;
-            // In opposition to the outer Nullability(), the inner nullability is present on the cast symbol. Therefore we can use the symbols nullability for this check.
+            // In opposition to the outer Nullability, the inner nullability is present on the cast symbol. Therefore we can use the symbols nullability for this check.
             var castTypeArguments = (castTypeSymbol as INamedTypeSymbol)?.TypeArguments ?? ImmutableArray<ITypeSymbol>.Empty;
             Debug.Assert(expressionTypeArguments.Length == castTypeArguments.Length, "Always true, because otherwise the expressionType.Equals(castType) check in CheckCastExpression is false.");
             foreach (var typeArgumentPair in expressionTypeArguments.Zip(castTypeArguments, Pair.From))
