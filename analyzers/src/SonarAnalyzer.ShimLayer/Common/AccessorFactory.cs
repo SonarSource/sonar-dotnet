@@ -90,7 +90,7 @@ internal static class AccessorFactory
 
         PropertyInfo FindProperty()
         {
-            if (runtimeSenderType?.GetTypeInfo().GetDeclaredProperty(propertyName) is { } declaredProperty)
+            if (runtimeSenderType?.GetProperty(propertyName) is { } declaredProperty)
             {
                 return declaredProperty;
             }
