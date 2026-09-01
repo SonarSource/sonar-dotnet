@@ -186,10 +186,11 @@
             </goals>
             <phase>verify</phase>
             <configuration>
+              <skip>${enforcer.pluginSize.skip}</skip>
               <rules>
                 <requireFilesSize>
                   <maxsize>6000000</maxsize>
-                  <minsize>5600000</minsize>
+                  <minsize>5800000</minsize>
                   <files>
                     <file>${project.build.directory}/${project.build.finalName}.jar</file>
                   </files>

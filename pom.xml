@@ -76,6 +76,7 @@
     <rspec.directory>${project.build.directory}/../../analyzers/rspec</rspec.directory>
     <packaging.directory>${project.build.directory}/../../analyzers/packaging</packaging.directory>
     <maven.deploy.skip>false</maven.deploy.skip>
+    <enforcer.pluginSize.skip>false</enforcer.pluginSize.skip>
   </properties>
 
   <dependencyManagement>
