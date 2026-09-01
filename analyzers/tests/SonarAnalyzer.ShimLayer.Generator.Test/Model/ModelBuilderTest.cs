@@ -220,6 +220,33 @@ public class ModelBuilderTest
     }
 
     [TestMethod]
+    public void Build_GenericTypeWithoutBaseLine_IsUnsupported()
+    {
+        var openType = typeof(IncrementalValueProvider<>);
+        var closedType = openType.MakeGenericType(typeof(int));
+        var model = ModelBuilder.Build([new(openType, []), SyntaxNodeDescriptor], []);
+        model[closedType].IsSupported.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Build_GenericTypeWithBaseLine_IsSupported()
+    {
+        var openType = typeof(Optional<>);
+        var closedType = openType.MakeGenericType(typeof(int));
+        var model = ModelBuilder.Build([new(openType, []), SyntaxNodeDescriptor], [new(openType, [])]);
+        model[closedType].Should().BeOfType<GenericTypeStrategy>().Which.IsSupported.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Build_GenericTypeNotInLatest_IsSupported()
+    {
+        var openType = typeof(IEnumerable<>);
+        var closedType = openType.MakeGenericType(typeof(int));
+        var model = ModelBuilder.Build([SyntaxNodeDescriptor], []);
+        model[closedType].Should().BeOfType<GenericTypeStrategy>().Which.IsSupported.Should().BeTrue();
+    }
+
+    [TestMethod]
     public void CreateMembers_NoBaseline()
     {
         var type = typeof(SyntaxNode);

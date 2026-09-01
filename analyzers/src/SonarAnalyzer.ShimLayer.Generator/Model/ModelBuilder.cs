@@ -38,6 +38,10 @@ public static class ModelBuilder
         {
             return new SkipStrategy(latest.Type);
         }
+        else if (latest.Type.IsGenericType)
+        {
+            return baseline is null ? new SkipStrategy(latest.Type) : new NoChangeStrategy(latest.Type);
+        }
         else if (baseline is not null && latest.Members.Select(x => x.ToString()).OrderBy(x => x).SequenceEqual(baseline.Members.Select(x => x.ToString()).OrderBy(x => x)))
         {
             return new NoChangeStrategy(latest.Type);
@@ -202,7 +206,6 @@ public static class ModelBuilder
 
     private static bool IsSkipped(Type type) =>
         type.IsNested
-        || type.IsGenericType
         || typeof(Delegate).IsAssignableFrom(type)
         || type.FullName == "Microsoft.CodeAnalysis.CSharpExtensions";  // The useful one is in CSharp namespace
 
