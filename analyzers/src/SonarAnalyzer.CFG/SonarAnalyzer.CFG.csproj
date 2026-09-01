@@ -16,7 +16,7 @@
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
 
-    <ProjectReference Include="..\SonarAnalyzer.ShimLayer.Lightup\SonarAnalyzer.ShimLayer.Lightup.csproj" />
+    <ProjectReference Include="..\SonarAnalyzer.ShimLayer\SonarAnalyzer.ShimLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +30,6 @@
     <ItemGroup>
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
       <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.Lightup.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
   </Target>

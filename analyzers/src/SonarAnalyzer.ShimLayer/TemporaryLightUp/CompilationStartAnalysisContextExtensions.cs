@@ -18,7 +18,7 @@
 using System.Diagnostics.CodeAnalysis;
 using static System.Linq.Expressions.Expression;
 
-namespace SonarAnalyzer.ShimLayer.AnalysisContext;
+namespace SonarAnalyzer.ShimLayer;
 
 public static class CompilationStartAnalysisContextExtensions
 {

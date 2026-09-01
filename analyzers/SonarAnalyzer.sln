@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11205.157 d18.0
+VisualStudioVersion = 18.0.11205.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B7233F78-E142-4882-B084-7C83BE472109}"
 EndProject
@@ -27,8 +27,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp.Styling", "src\SonarAnalyzer.CSharp.Styling\SonarAnalyzer.CSharp.Styling.csproj", "{7F1A25AD-2EEF-4CF9-92D9-FE5B203EECE3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonarAnalyzer.CSharp.Styling.Test", "tests\SonarAnalyzer.CSharp.Styling.Test\SonarAnalyzer.CSharp.Styling.Test.csproj", "{6F4F7666-8A0D-47FE-A312-56010C4CE082}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.ShimLayer.Lightup", "src\SonarAnalyzer.ShimLayer.Lightup\SonarAnalyzer.ShimLayer.Lightup.csproj", "{93AF346B-C43A-4A42-AD5B-72681367180E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonarAnalyzer.CSharp.Core", "src\SonarAnalyzer.CSharp.Core\SonarAnalyzer.CSharp.Core.csproj", "{6841D9C0-1B5D-4853-87A5-9D846A165948}"
 EndProject
@@ -96,10 +94,6 @@ Global
 		{6F4F7666-8A0D-47FE-A312-56010C4CE082}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F4F7666-8A0D-47FE-A312-56010C4CE082}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F4F7666-8A0D-47FE-A312-56010C4CE082}.Release|Any CPU.Build.0 = Release|Any CPU
-		{93AF346B-C43A-4A42-AD5B-72681367180E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{93AF346B-C43A-4A42-AD5B-72681367180E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{93AF346B-C43A-4A42-AD5B-72681367180E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{93AF346B-C43A-4A42-AD5B-72681367180E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6841D9C0-1B5D-4853-87A5-9D846A165948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6841D9C0-1B5D-4853-87A5-9D846A165948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6841D9C0-1B5D-4853-87A5-9D846A165948}.Release|Any CPU.ActiveCfg = Release|Any CPU

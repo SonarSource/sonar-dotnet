@@ -17,7 +17,6 @@
 
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using SonarAnalyzer.ShimLayer.AnalysisContext;
 
 namespace SonarAnalyzer.Core.AnalysisContext;
 

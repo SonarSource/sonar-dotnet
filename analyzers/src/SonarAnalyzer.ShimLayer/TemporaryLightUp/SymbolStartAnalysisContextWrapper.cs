@@ -19,7 +19,7 @@ using System.Diagnostics.CodeAnalysis;
 using static System.Linq.Expressions.Expression;
 using CS = Microsoft.CodeAnalysis.CSharp;
 
-namespace SonarAnalyzer.ShimLayer.AnalysisContext;
+namespace SonarAnalyzer.ShimLayer;
 
 public readonly struct SymbolStartAnalysisContextWrapper
 {
