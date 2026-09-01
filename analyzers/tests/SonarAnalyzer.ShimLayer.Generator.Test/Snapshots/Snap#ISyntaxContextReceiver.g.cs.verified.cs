@@ -24,10 +24,14 @@ public readonly struct ISyntaxContextReceiverWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
+    private static readonly Action<Object, GeneratorSyntaxContextWrapper> OnVisitSyntaxNodeAccessor = AccessorFactory.CreateMethod<Action<Object, GeneratorSyntaxContextWrapper>>(WrappedType, "OnVisitSyntaxNode");
+
     private ISyntaxContextReceiverWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    public void OnVisitSyntaxNode(GeneratorSyntaxContextWrapper context) => OnVisitSyntaxNodeAccessor(wrappedInstance, context);
 
     public static ISyntaxContextReceiverWrapper From(object instance)
     {

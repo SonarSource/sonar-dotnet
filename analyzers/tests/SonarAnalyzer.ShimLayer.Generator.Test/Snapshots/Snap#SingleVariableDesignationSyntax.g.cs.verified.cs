@@ -53,7 +53,7 @@ public readonly struct SingleVariableDesignationSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(wrappedInstance);
+    public SyntaxToken Identifier => IdentifierAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

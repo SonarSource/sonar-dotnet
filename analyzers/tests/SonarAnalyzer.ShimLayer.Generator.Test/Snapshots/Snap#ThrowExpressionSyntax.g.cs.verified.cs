@@ -56,7 +56,7 @@ public readonly struct ThrowExpressionSyntaxWrapper
     public int SpanStart => wrappedInstance.SpanStart;
 
     public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
-    public SyntaxToken ThrowKeyword => (SyntaxToken)ThrowKeywordAccessor(wrappedInstance);
+    public SyntaxToken ThrowKeyword => ThrowKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

@@ -38,8 +38,8 @@ public static class LocalDeclarationStatementSyntaxShimExtensions
     extension(LocalDeclarationStatementSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
-        public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(wrappedInstance);
-        public SyntaxToken UsingKeyword => (SyntaxToken)UsingKeywordAccessor(wrappedInstance);
+        public SyntaxToken AwaitKeyword => AwaitKeywordAccessor(wrappedInstance);
+        public SyntaxToken UsingKeyword => UsingKeywordAccessor(wrappedInstance);
 
         public LocalDeclarationStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);

@@ -83,11 +83,11 @@ public readonly struct LocalFunctionStatementSyntaxWrapper
     public BlockSyntax Body => BodyAccessor(wrappedInstance);
     public SyntaxList<TypeParameterConstraintClauseSyntax> ConstraintClauses => (SyntaxList<TypeParameterConstraintClauseSyntax>)ConstraintClausesAccessor(wrappedInstance);
     public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
-    public SyntaxToken Identifier => (SyntaxToken)IdentifierAccessor(wrappedInstance);
-    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+    public SyntaxToken Identifier => IdentifierAccessor(wrappedInstance);
+    public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
     public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
     public TypeSyntax ReturnType => ReturnTypeAccessor(wrappedInstance);
-    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(wrappedInstance);
+    public SyntaxToken SemicolonToken => SemicolonTokenAccessor(wrappedInstance);
     public TypeParameterListSyntax TypeParameterList => TypeParameterListAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

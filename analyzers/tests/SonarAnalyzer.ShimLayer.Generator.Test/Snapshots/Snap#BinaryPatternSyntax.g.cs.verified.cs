@@ -58,7 +58,7 @@ public readonly struct BinaryPatternSyntaxWrapper
     public int SpanStart => wrappedInstance.SpanStart;
 
     public PatternSyntaxWrapper Left => PatternSyntaxWrapper.From(LeftAccessor(wrappedInstance));
-    public SyntaxToken OperatorToken => (SyntaxToken)OperatorTokenAccessor(wrappedInstance);
+    public SyntaxToken OperatorToken => OperatorTokenAccessor(wrappedInstance);
     public PatternSyntaxWrapper Right => PatternSyntaxWrapper.From(RightAccessor(wrappedInstance));
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

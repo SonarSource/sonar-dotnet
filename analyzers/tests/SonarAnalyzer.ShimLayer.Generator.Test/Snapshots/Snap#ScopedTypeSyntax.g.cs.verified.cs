@@ -64,7 +64,7 @@ public readonly struct ScopedTypeSyntaxWrapper
     public bool IsNotNull => (bool)IsNotNullAccessor(wrappedInstance);
     public bool IsNuint => (bool)IsNuintAccessor(wrappedInstance);
     public bool IsUnmanaged => (bool)IsUnmanagedAccessor(wrappedInstance);
-    public SyntaxToken ScopedKeyword => (SyntaxToken)ScopedKeywordAccessor(wrappedInstance);
+    public SyntaxToken ScopedKeyword => ScopedKeywordAccessor(wrappedInstance);
     public TypeSyntax Type => TypeAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

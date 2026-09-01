@@ -36,7 +36,7 @@ public static class NamespaceDeclarationSyntaxShimExtensions
     extension(NamespaceDeclarationSyntax wrappedInstance)
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+        public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
         public NamespaceDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public NamespaceDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);

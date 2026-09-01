@@ -33,8 +33,8 @@ public static class CrefParameterSyntaxShimExtensions
 
     extension(CrefParameterSyntax wrappedInstance)
     {
-        public SyntaxToken ReadOnlyKeyword => (SyntaxToken)ReadOnlyKeywordAccessor(wrappedInstance);
-        public SyntaxToken RefKindKeyword => (SyntaxToken)RefKindKeywordAccessor(wrappedInstance);
+        public SyntaxToken ReadOnlyKeyword => ReadOnlyKeywordAccessor(wrappedInstance);
+        public SyntaxToken RefKindKeyword => RefKindKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);

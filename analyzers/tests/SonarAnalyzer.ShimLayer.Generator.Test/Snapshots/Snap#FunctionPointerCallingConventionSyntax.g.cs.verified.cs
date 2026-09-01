@@ -56,7 +56,7 @@ public readonly struct FunctionPointerCallingConventionSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken ManagedOrUnmanagedKeyword => (SyntaxToken)ManagedOrUnmanagedKeywordAccessor(wrappedInstance);
+    public SyntaxToken ManagedOrUnmanagedKeyword => ManagedOrUnmanagedKeywordAccessor(wrappedInstance);
     public FunctionPointerUnmanagedCallingConventionListSyntaxWrapper UnmanagedCallingConventionList => FunctionPointerUnmanagedCallingConventionListSyntaxWrapper.From(UnmanagedCallingConventionListAccessor(wrappedInstance));
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

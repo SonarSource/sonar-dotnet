@@ -56,7 +56,7 @@ public readonly struct VarPatternSyntaxWrapper
     public int SpanStart => wrappedInstance.SpanStart;
 
     public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(wrappedInstance));
-    public SyntaxToken VarKeyword => (SyntaxToken)VarKeywordAccessor(wrappedInstance);
+    public SyntaxToken VarKeyword => VarKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

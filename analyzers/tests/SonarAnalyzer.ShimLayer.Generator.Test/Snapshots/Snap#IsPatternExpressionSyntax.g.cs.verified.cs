@@ -58,7 +58,7 @@ public readonly struct IsPatternExpressionSyntaxWrapper
     public int SpanStart => wrappedInstance.SpanStart;
 
     public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
-    public SyntaxToken IsKeyword => (SyntaxToken)IsKeywordAccessor(wrappedInstance);
+    public SyntaxToken IsKeyword => IsKeywordAccessor(wrappedInstance);
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

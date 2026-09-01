@@ -174,7 +174,8 @@ internal static class AccessorFactory
     private static Expression WrapConvert(Expression expression, Type type)
     {
         var underlayingType = type.IsByRef ? type.GetElementType() : type;
-        return underlayingType.IsAssignableFrom(expression.Type) ? expression : Expression.Convert(expression, underlayingType);
+        var needsBoxing = expression.Type.IsValueType && !underlayingType.IsValueType;
+        return underlayingType.IsAssignableFrom(expression.Type) && !needsBoxing ? expression : Expression.Convert(expression, underlayingType);
     }
 
     private static Expression CreateImmutableArrayConversion(Expression result, Type runtimeReturnType, Type wrapperTypeArgument)

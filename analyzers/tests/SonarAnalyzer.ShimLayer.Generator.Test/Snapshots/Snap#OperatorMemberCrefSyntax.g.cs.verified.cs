@@ -31,7 +31,7 @@ public static class OperatorMemberCrefSyntaxShimExtensions
 
     extension(OperatorMemberCrefSyntax wrappedInstance)
     {
-        public SyntaxToken CheckedKeyword => (SyntaxToken)CheckedKeywordAccessor(wrappedInstance);
+        public SyntaxToken CheckedKeyword => CheckedKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);

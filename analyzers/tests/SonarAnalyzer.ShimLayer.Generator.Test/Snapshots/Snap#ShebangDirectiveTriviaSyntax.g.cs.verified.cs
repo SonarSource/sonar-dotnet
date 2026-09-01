@@ -30,7 +30,7 @@ public static class ShebangDirectiveTriviaSyntaxShimExtensions
 
     extension(ShebangDirectiveTriviaSyntax wrappedInstance)
     {
-        public SyntaxToken Content => (SyntaxToken)ContentAccessor(wrappedInstance);
+        public SyntaxToken Content => ContentAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);

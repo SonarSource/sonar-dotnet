@@ -64,9 +64,9 @@ public readonly struct NullableDirectiveTriviaSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken NullableKeyword => (SyntaxToken)NullableKeywordAccessor(wrappedInstance);
-    public SyntaxToken SettingToken => (SyntaxToken)SettingTokenAccessor(wrappedInstance);
-    public SyntaxToken TargetToken => (SyntaxToken)TargetTokenAccessor(wrappedInstance);
+    public SyntaxToken NullableKeyword => NullableKeywordAccessor(wrappedInstance);
+    public SyntaxToken SettingToken => SettingTokenAccessor(wrappedInstance);
+    public SyntaxToken TargetToken => TargetTokenAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

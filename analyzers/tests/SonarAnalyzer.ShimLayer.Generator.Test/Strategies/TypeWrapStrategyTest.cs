@@ -22,12 +22,12 @@ using CSharpExtensions = Microsoft.CodeAnalysis.CSharp.CSharpExtensions;
 namespace SonarAnalyzer.ShimLayer.Generator.Strategies.Test;
 
 [TestClass]
-public class ClassWrapStrategyTest
+public class TypeWrapStrategyTest
 {
     [TestMethod]
     public void Generate_Empty()
     {
-        var sut = new ClassWrapStrategy(typeof(CSharpGeneratorDriver), typeof(GeneratorDriver), []);
+        var sut = new TypeWrapStrategy(typeof(CSharpGeneratorDriver), typeof(GeneratorDriver), []);
         var result = sut.Generate([]);
         result.Should().BeIgnoringLineEndings(
             """
@@ -87,11 +87,11 @@ public class ClassWrapStrategyTest
     [TestMethod]
     public void Generate_WrapperToWrapperConversions()
     {
-        var sut = new ClassWrapStrategy(typeof(CSharpGeneratorDriver), typeof(GeneratorDriver), []);
+        var sut = new TypeWrapStrategy(typeof(CSharpGeneratorDriver), typeof(GeneratorDriver), []);
         var model = new Dictionary<Type, Strategy>
         {
             { typeof(CSharpGeneratorDriver), sut },
-            { typeof(GeneratorDriver), new ClassWrapStrategy(typeof(GeneratorDriver), typeof(object), []) },
+            { typeof(GeneratorDriver), new TypeWrapStrategy(typeof(GeneratorDriver), typeof(object), []) },
         };
         var result = sut.Generate(new(model));
         result.Should().BeIgnoringLineEndings(
@@ -155,7 +155,7 @@ public class ClassWrapStrategyTest
     [TestMethod]
     public void Generate_Members()
     {
-        var sut = new ClassWrapStrategy(
+        var sut = new TypeWrapStrategy(
             typeof(CSharpGeneratorDriver),
             typeof(GeneratorDriver),
             [
@@ -245,7 +245,7 @@ public class ClassWrapStrategyTest
     [TestMethod]
     public void Generate_OutParameter_Passthrough()
     {
-        var sut = new ClassWrapStrategy(
+        var sut = new TypeWrapStrategy(
             typeof(AnalyzerConfigOptions),
             typeof(object),
             [new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.TryGetValue))[0], true, "TryGetValueAccessor")]);
@@ -310,7 +310,7 @@ public class ClassWrapStrategyTest
     [TestMethod]
     public void Generate_OutParameter_Wrap()
     {
-        var sut = new ClassWrapStrategy(
+        var sut = new TypeWrapStrategy(
             typeof(AnalyzerConfigOptions),
             typeof(object),
             [new(typeof(AnalyzerConfigOptions).GetMember(nameof(AnalyzerConfigOptions.TryGetValue))[0], false, "TryGetValueAccessor")]);

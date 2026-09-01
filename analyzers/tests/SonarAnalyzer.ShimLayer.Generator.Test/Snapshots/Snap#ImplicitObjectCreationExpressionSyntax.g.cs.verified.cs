@@ -60,7 +60,7 @@ public readonly struct ImplicitObjectCreationExpressionSyntaxWrapper
 
     public ArgumentListSyntax ArgumentList => ArgumentListAccessor(wrappedInstance);
     public InitializerExpressionSyntax Initializer => InitializerAccessor(wrappedInstance);
-    public SyntaxToken NewKeyword => (SyntaxToken)NewKeywordAccessor(wrappedInstance);
+    public SyntaxToken NewKeyword => NewKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

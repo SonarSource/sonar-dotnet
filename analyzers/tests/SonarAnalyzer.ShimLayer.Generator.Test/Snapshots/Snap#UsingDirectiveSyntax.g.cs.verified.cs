@@ -36,9 +36,9 @@ public static class UsingDirectiveSyntaxShimExtensions
 
     extension(UsingDirectiveSyntax wrappedInstance)
     {
-        public SyntaxToken GlobalKeyword => (SyntaxToken)GlobalKeywordAccessor(wrappedInstance);
+        public SyntaxToken GlobalKeyword => GlobalKeywordAccessor(wrappedInstance);
         public TypeSyntax NamespaceOrType => NamespaceOrTypeAccessor(wrappedInstance);
-        public SyntaxToken UnsafeKeyword => (SyntaxToken)UnsafeKeywordAccessor(wrappedInstance);
+        public SyntaxToken UnsafeKeyword => UnsafeKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);

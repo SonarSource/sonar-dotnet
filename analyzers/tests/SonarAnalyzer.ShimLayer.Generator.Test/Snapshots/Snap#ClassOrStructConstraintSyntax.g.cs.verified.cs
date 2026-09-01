@@ -31,7 +31,7 @@ public static class ClassOrStructConstraintSyntaxShimExtensions
 
     extension(ClassOrStructConstraintSyntax wrappedInstance)
     {
-        public SyntaxToken QuestionToken => (SyntaxToken)QuestionTokenAccessor(wrappedInstance);
+        public SyntaxToken QuestionToken => QuestionTokenAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);

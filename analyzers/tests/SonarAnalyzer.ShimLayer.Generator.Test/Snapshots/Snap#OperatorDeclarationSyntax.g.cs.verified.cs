@@ -35,7 +35,7 @@ public static class OperatorDeclarationSyntaxShimExtensions
 
     extension(OperatorDeclarationSyntax wrappedInstance)
     {
-        public SyntaxToken CheckedKeyword => (SyntaxToken)CheckedKeywordAccessor(wrappedInstance);
+        public SyntaxToken CheckedKeyword => CheckedKeywordAccessor(wrappedInstance);
         public ExplicitInterfaceSpecifierSyntax ExplicitInterfaceSpecifier => ExplicitInterfaceSpecifierAccessor(wrappedInstance);
 
         public OperatorDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);

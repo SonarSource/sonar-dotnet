@@ -24,5 +24,5 @@ public static class SyntaxNodeExtensionsEx
 
     private static readonly Func<SyntaxToken, SyntaxToken> WithoutTriviaAccessor = AccessorFactory.CreateStaticMethod<Func<SyntaxToken, SyntaxToken>>(WrappedType, "WithoutTrivia");
 
-    public static SyntaxToken WithoutTrivia(this SyntaxToken token) => (SyntaxToken)WithoutTriviaAccessor(token);
+    public static SyntaxToken WithoutTrivia(this SyntaxToken token) => WithoutTriviaAccessor(token);
 }

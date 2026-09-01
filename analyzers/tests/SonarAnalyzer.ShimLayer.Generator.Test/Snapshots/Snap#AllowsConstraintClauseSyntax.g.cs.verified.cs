@@ -56,7 +56,7 @@ public readonly struct AllowsConstraintClauseSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken AllowsKeyword => (SyntaxToken)AllowsKeywordAccessor(wrappedInstance);
+    public SyntaxToken AllowsKeyword => AllowsKeywordAccessor(wrappedInstance);
     public SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> Constraints => ConstraintsAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

@@ -53,7 +53,7 @@ public readonly struct DefaultConstraintSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken DefaultKeyword => (SyntaxToken)DefaultKeywordAccessor(wrappedInstance);
+    public SyntaxToken DefaultKeyword => DefaultKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

@@ -60,8 +60,8 @@ public readonly struct LineOrSpanDirectiveTriviaSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken File => (SyntaxToken)FileAccessor(wrappedInstance);
-    public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(wrappedInstance);
+    public SyntaxToken File => FileAccessor(wrappedInstance);
+    public SyntaxToken LineKeyword => LineKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

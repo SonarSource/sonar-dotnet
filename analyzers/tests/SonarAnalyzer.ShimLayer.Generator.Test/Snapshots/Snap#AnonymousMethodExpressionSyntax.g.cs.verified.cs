@@ -37,7 +37,7 @@ public static class AnonymousMethodExpressionSyntaxShimExtensions
     extension(AnonymousMethodExpressionSyntax wrappedInstance)
     {
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
-        public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+        public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
         public AnonymousMethodExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
         public AnonymousMethodExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);

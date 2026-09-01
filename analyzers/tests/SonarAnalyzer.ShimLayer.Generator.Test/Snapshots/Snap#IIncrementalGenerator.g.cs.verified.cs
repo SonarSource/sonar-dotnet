@@ -24,10 +24,14 @@ public readonly struct IIncrementalGeneratorWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
+    private static readonly Action<Object, IncrementalGeneratorInitializationContextWrapper> InitializeAccessor = AccessorFactory.CreateMethod<Action<Object, IncrementalGeneratorInitializationContextWrapper>>(WrappedType, "Initialize");
+
     private IIncrementalGeneratorWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    public void Initialize(IncrementalGeneratorInitializationContextWrapper context) => InitializeAccessor(wrappedInstance, context);
 
     public static IIncrementalGeneratorWrapper From(object instance)
     {

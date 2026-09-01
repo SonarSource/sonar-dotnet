@@ -65,9 +65,9 @@ public readonly struct FunctionPointerTypeSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken AsteriskToken => (SyntaxToken)AsteriskTokenAccessor(wrappedInstance);
+    public SyntaxToken AsteriskToken => AsteriskTokenAccessor(wrappedInstance);
     public FunctionPointerCallingConventionSyntaxWrapper CallingConvention => FunctionPointerCallingConventionSyntaxWrapper.From(CallingConventionAccessor(wrappedInstance));
-    public SyntaxToken DelegateKeyword => (SyntaxToken)DelegateKeywordAccessor(wrappedInstance);
+    public SyntaxToken DelegateKeyword => DelegateKeywordAccessor(wrappedInstance);
     public bool IsNint => (bool)IsNintAccessor(wrappedInstance);
     public bool IsNotNull => (bool)IsNotNullAccessor(wrappedInstance);
     public bool IsNuint => (bool)IsNuintAccessor(wrappedInstance);

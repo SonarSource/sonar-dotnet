@@ -58,8 +58,8 @@ public readonly struct FunctionPointerParameterListSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken GreaterThanToken => (SyntaxToken)GreaterThanTokenAccessor(wrappedInstance);
-    public SyntaxToken LessThanToken => (SyntaxToken)LessThanTokenAccessor(wrappedInstance);
+    public SyntaxToken GreaterThanToken => GreaterThanTokenAccessor(wrappedInstance);
+    public SyntaxToken LessThanToken => LessThanTokenAccessor(wrappedInstance);
     public SeparatedSyntaxListWrapper<FunctionPointerParameterSyntaxWrapper> Parameters => ParametersAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

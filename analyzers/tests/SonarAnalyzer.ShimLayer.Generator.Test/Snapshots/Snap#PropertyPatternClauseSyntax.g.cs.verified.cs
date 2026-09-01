@@ -58,8 +58,8 @@ public readonly struct PropertyPatternClauseSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken CloseBraceToken => (SyntaxToken)CloseBraceTokenAccessor(wrappedInstance);
-    public SyntaxToken OpenBraceToken => (SyntaxToken)OpenBraceTokenAccessor(wrappedInstance);
+    public SyntaxToken CloseBraceToken => CloseBraceTokenAccessor(wrappedInstance);
+    public SyntaxToken OpenBraceToken => OpenBraceTokenAccessor(wrappedInstance);
     public SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> Subpatterns => SubpatternsAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

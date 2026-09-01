@@ -75,10 +75,10 @@ public readonly struct FileScopedNamespaceDeclarationSyntaxWrapper
     public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
     public SyntaxList<ExternAliasDirectiveSyntax> Externs => (SyntaxList<ExternAliasDirectiveSyntax>)ExternsAccessor(wrappedInstance);
     public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(wrappedInstance);
-    public SyntaxTokenList Modifiers => (SyntaxTokenList)ModifiersAccessor(wrappedInstance);
+    public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
     public NameSyntax Name => NameAccessor(wrappedInstance);
-    public SyntaxToken NamespaceKeyword => (SyntaxToken)NamespaceKeywordAccessor(wrappedInstance);
-    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(wrappedInstance);
+    public SyntaxToken NamespaceKeyword => NamespaceKeywordAccessor(wrappedInstance);
+    public SyntaxToken SemicolonToken => SemicolonTokenAccessor(wrappedInstance);
     public SyntaxList<UsingDirectiveSyntax> Usings => (SyntaxList<UsingDirectiveSyntax>)UsingsAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

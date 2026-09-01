@@ -62,8 +62,8 @@ public readonly struct IgnoredDirectiveTriviaSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(wrappedInstance);
-    public SyntaxToken Content => (SyntaxToken)ContentAccessor(wrappedInstance);
+    public SyntaxToken ColonToken => ColonTokenAccessor(wrappedInstance);
+    public SyntaxToken Content => ContentAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

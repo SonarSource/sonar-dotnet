@@ -38,7 +38,7 @@ public class IOperationStrategyTest
         {
             { typeof(IInvocationOperation), new OperationWrapStrategy(typeof(IInvocationOperation), []) },
             { typeof(IPropertyReferenceOperation), new OperationWrapStrategy(typeof(IPropertyReferenceOperation), []) },
-            { typeof(OperationVisitor), new ClassWrapStrategy(typeof(OperationVisitor), null, []) }
+            { typeof(OperationVisitor), new TypeWrapStrategy(typeof(OperationVisitor), null, []) }
         };
         var result = sut.Generate(new(model));
         result.Should().BeIgnoringLineEndings(

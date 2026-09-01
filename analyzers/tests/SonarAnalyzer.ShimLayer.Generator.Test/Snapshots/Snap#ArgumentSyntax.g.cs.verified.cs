@@ -30,7 +30,7 @@ public static class ArgumentSyntaxShimExtensions
 
     extension(ArgumentSyntax wrappedInstance)
     {
-        public SyntaxToken RefKindKeyword => (SyntaxToken)RefKindKeywordAccessor(wrappedInstance);
+        public SyntaxToken RefKindKeyword => RefKindKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);

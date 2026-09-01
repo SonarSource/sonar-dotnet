@@ -24,10 +24,18 @@ public readonly struct AnalyzerConfigSetWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
+    private static readonly Func<Object, Object> GlobalConfigOptionsAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "GlobalConfigOptions");
+
+    private static readonly Func<Object, string, Object> GetOptionsForSourcePathAccessor = AccessorFactory.CreateMethod<Func<Object, string, Object>>(WrappedType, "GetOptionsForSourcePath");
+
     private AnalyzerConfigSetWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    public AnalyzerConfigOptionsResultWrapper GlobalConfigOptions => AnalyzerConfigOptionsResultWrapper.From(GlobalConfigOptionsAccessor(wrappedInstance));
+
+    public AnalyzerConfigOptionsResultWrapper GetOptionsForSourcePath(string sourcePath) => AnalyzerConfigOptionsResultWrapper.From(GetOptionsForSourcePathAccessor(wrappedInstance, sourcePath));
 
     public static AnalyzerConfigSetWrapper From(Object instance)
     {

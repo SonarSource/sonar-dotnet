@@ -70,11 +70,11 @@ public readonly struct LineSpanDirectiveTriviaSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken CharacterOffset => (SyntaxToken)CharacterOffsetAccessor(wrappedInstance);
+    public SyntaxToken CharacterOffset => CharacterOffsetAccessor(wrappedInstance);
     public LineDirectivePositionSyntaxWrapper End => LineDirectivePositionSyntaxWrapper.From(EndAccessor(wrappedInstance));
-    public SyntaxToken File => (SyntaxToken)FileAccessor(wrappedInstance);
-    public SyntaxToken LineKeyword => (SyntaxToken)LineKeywordAccessor(wrappedInstance);
-    public SyntaxToken MinusToken => (SyntaxToken)MinusTokenAccessor(wrappedInstance);
+    public SyntaxToken File => FileAccessor(wrappedInstance);
+    public SyntaxToken LineKeyword => LineKeywordAccessor(wrappedInstance);
+    public SyntaxToken MinusToken => MinusTokenAccessor(wrappedInstance);
     public LineDirectivePositionSyntaxWrapper Start => LineDirectivePositionSyntaxWrapper.From(StartAccessor(wrappedInstance));
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

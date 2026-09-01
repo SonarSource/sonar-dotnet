@@ -23,6 +23,7 @@
     <Using Include="Microsoft.CodeAnalysis.Emit" />
     <Using Include="Microsoft.CodeAnalysis.Diagnostics.Telemetry" />
     <Using Include="Microsoft.CodeAnalysis.Text" />
+    <Using Include="Microsoft.CodeAnalysis.TypeInfo" Alias="TypeInfo" />
     <Using Include="System.Collections.Concurrent" />
     <Using Include="System.Globalization" />
     <Using Include="System.IO" />

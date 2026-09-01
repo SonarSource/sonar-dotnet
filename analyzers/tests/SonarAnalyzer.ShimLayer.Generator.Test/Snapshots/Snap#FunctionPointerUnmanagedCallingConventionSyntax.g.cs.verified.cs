@@ -53,7 +53,7 @@ public readonly struct FunctionPointerUnmanagedCallingConventionSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken Name => (SyntaxToken)NameAccessor(wrappedInstance);
+    public SyntaxToken Name => NameAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

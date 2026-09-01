@@ -73,12 +73,12 @@ public readonly struct ForEachVariableStatementSyntaxWrapper
     public int SpanStart => wrappedInstance.SpanStart;
 
     public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
-    public SyntaxToken AwaitKeyword => (SyntaxToken)AwaitKeywordAccessor(wrappedInstance);
-    public SyntaxToken CloseParenToken => (SyntaxToken)CloseParenTokenAccessor(wrappedInstance);
+    public SyntaxToken AwaitKeyword => AwaitKeywordAccessor(wrappedInstance);
+    public SyntaxToken CloseParenToken => CloseParenTokenAccessor(wrappedInstance);
     public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
-    public SyntaxToken ForEachKeyword => (SyntaxToken)ForEachKeywordAccessor(wrappedInstance);
-    public SyntaxToken InKeyword => (SyntaxToken)InKeywordAccessor(wrappedInstance);
-    public SyntaxToken OpenParenToken => (SyntaxToken)OpenParenTokenAccessor(wrappedInstance);
+    public SyntaxToken ForEachKeyword => ForEachKeywordAccessor(wrappedInstance);
+    public SyntaxToken InKeyword => InKeywordAccessor(wrappedInstance);
+    public SyntaxToken OpenParenToken => OpenParenTokenAccessor(wrappedInstance);
     public StatementSyntax Statement => StatementAccessor(wrappedInstance);
     public ExpressionSyntax Variable => VariableAccessor(wrappedInstance);
 

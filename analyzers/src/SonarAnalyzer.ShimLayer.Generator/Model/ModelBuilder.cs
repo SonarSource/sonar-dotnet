@@ -89,12 +89,12 @@ public static class ModelBuilder
         {
             return new StaticClassStrategy(latest.Type, CreateMembers(latest, baseline));
         }
-        else if (latest.Type.IsClass && latest.Type.Name is not "SymbolStartAnalysisContext")
+        else if (latest.Type.Name is not "SymbolStartAnalysisContext")
         {
             if (baseline is null)
             {
                 var commonBase = FindCommonBaseType(latest, baselineMap);
-                return new ClassWrapStrategy(latest.Type, commonBase.Type, CreateMembers(latest, commonBase));
+                return new TypeWrapStrategy(latest.Type, commonBase.Type, CreateMembers(latest, commonBase));
             }
             else
             {

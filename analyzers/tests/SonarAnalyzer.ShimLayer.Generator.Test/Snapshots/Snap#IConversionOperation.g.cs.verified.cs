@@ -26,6 +26,7 @@ public readonly struct IConversionOperationWrapper : IOperationWrapper
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "ConstrainedToType");
+    private static readonly Func<IOperation, Object> ConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, Object>>(WrappedType, "Conversion");
     private static readonly Func<IOperation, bool> IsCheckedAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsChecked");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, bool> IsTryCastAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsTryCast");
@@ -50,6 +51,7 @@ public readonly struct IConversionOperationWrapper : IOperationWrapper
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
     public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
+    public CommonConversionWrapper Conversion => CommonConversionWrapper.From(ConversionAccessor(wrappedInstance));
     public bool IsChecked => (bool)IsCheckedAccessor(wrappedInstance);
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public bool IsTryCast => (bool)IsTryCastAccessor(wrappedInstance);

@@ -26,6 +26,7 @@ public readonly struct GeneratorDriverWrapper
 
     private static readonly Func<Object, ImmutableArray<AdditionalText>, Object> AddAdditionalTextsAccessor = AccessorFactory.CreateMethod<Func<Object, ImmutableArray<AdditionalText>, Object>>(WrappedType, "AddAdditionalTexts");
     private static readonly Func<Object, Object> GetRunResultAccessor = AccessorFactory.CreateMethod<Func<Object, Object>>(WrappedType, "GetRunResult");
+    private static readonly Func<Object, Object> GetTimingInfoAccessor = AccessorFactory.CreateMethod<Func<Object, Object>>(WrappedType, "GetTimingInfo");
     private static readonly Func<Object, ImmutableArray<AdditionalText>, Object> RemoveAdditionalTextsAccessor = AccessorFactory.CreateMethod<Func<Object, ImmutableArray<AdditionalText>, Object>>(WrappedType, "RemoveAdditionalTexts");
     private static readonly Func<Object, AdditionalText, AdditionalText, Object> ReplaceAdditionalTextAccessor = AccessorFactory.CreateMethod<Func<Object, AdditionalText, AdditionalText, Object>>(WrappedType, "ReplaceAdditionalText");
     private static readonly Func<Object, ImmutableArray<AdditionalText>, Object> ReplaceAdditionalTextsAccessor = AccessorFactory.CreateMethod<Func<Object, ImmutableArray<AdditionalText>, Object>>(WrappedType, "ReplaceAdditionalTexts");
@@ -43,6 +44,7 @@ public readonly struct GeneratorDriverWrapper
 
     public GeneratorDriverWrapper AddAdditionalTexts(ImmutableArray<AdditionalText> additionalTexts) => GeneratorDriverWrapper.From(AddAdditionalTextsAccessor(wrappedInstance, additionalTexts));
     public GeneratorDriverRunResultWrapper GetRunResult() => GeneratorDriverRunResultWrapper.From(GetRunResultAccessor(wrappedInstance));
+    public GeneratorDriverTimingInfoWrapper GetTimingInfo() => GeneratorDriverTimingInfoWrapper.From(GetTimingInfoAccessor(wrappedInstance));
     public GeneratorDriverWrapper RemoveAdditionalTexts(ImmutableArray<AdditionalText> additionalTexts) => GeneratorDriverWrapper.From(RemoveAdditionalTextsAccessor(wrappedInstance, additionalTexts));
     public GeneratorDriverWrapper ReplaceAdditionalText(AdditionalText oldText, AdditionalText newText) => GeneratorDriverWrapper.From(ReplaceAdditionalTextAccessor(wrappedInstance, oldText, newText));
     public GeneratorDriverWrapper ReplaceAdditionalTexts(ImmutableArray<AdditionalText> newTexts) => GeneratorDriverWrapper.From(ReplaceAdditionalTextsAccessor(wrappedInstance, newTexts));

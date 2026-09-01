@@ -60,7 +60,7 @@ public readonly struct WithExpressionSyntaxWrapper
 
     public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
     public InitializerExpressionSyntax Initializer => InitializerAccessor(wrappedInstance);
-    public SyntaxToken WithKeyword => (SyntaxToken)WithKeywordAccessor(wrappedInstance);
+    public SyntaxToken WithKeyword => WithKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);

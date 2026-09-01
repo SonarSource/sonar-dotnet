@@ -24,10 +24,18 @@ public readonly struct ISourceGeneratorWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
+    private static readonly Action<Object, GeneratorExecutionContextWrapper> ExecuteAccessor = AccessorFactory.CreateMethod<Action<Object, GeneratorExecutionContextWrapper>>(WrappedType, "Execute");
+    private static readonly Action<Object, GeneratorInitializationContextWrapper> InitializeAccessor = AccessorFactory.CreateMethod<Action<Object, GeneratorInitializationContextWrapper>>(WrappedType, "Initialize");
+
     private ISourceGeneratorWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    [System.ObsoleteAttribute("ISourceGenerator is deprecated and should not be implemented. Please implement IIncrementalGenerator instead. See https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.md.")]
+    public void Execute(GeneratorExecutionContextWrapper context) => ExecuteAccessor(wrappedInstance, context);
+    [System.ObsoleteAttribute("ISourceGenerator is deprecated and should not be implemented. Please implement IIncrementalGenerator instead. See https://github.com/dotnet/roslyn/blob/main/docs/features/incremental-generators.md.")]
+    public void Initialize(GeneratorInitializationContextWrapper context) => InitializeAccessor(wrappedInstance, context);
 
     public static ISourceGeneratorWrapper From(object instance)
     {

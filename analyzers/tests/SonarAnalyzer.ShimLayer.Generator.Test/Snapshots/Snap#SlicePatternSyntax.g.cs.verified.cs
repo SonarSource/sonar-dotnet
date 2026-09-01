@@ -55,7 +55,7 @@ public readonly struct SlicePatternSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken DotDotToken => (SyntaxToken)DotDotTokenAccessor(wrappedInstance);
+    public SyntaxToken DotDotToken => DotDotTokenAccessor(wrappedInstance);
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

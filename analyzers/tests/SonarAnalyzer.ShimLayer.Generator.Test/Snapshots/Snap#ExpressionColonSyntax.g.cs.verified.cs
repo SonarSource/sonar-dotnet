@@ -55,7 +55,7 @@ public readonly struct ExpressionColonSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken ColonToken => (SyntaxToken)ColonTokenAccessor(wrappedInstance);
+    public SyntaxToken ColonToken => ColonTokenAccessor(wrappedInstance);
     public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

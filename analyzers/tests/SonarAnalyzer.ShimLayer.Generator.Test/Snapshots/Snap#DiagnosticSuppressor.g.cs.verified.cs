@@ -24,6 +24,8 @@ public readonly struct DiagnosticSuppressorWrapper
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly DiagnosticAnalyzer wrappedInstance;
 
+    private static readonly Action<DiagnosticAnalyzer, SuppressionAnalysisContextWrapper> ReportSuppressionsAccessor = AccessorFactory.CreateMethod<Action<DiagnosticAnalyzer, SuppressionAnalysisContextWrapper>>(WrappedType, "ReportSuppressions");
+
     private DiagnosticSuppressorWrapper(DiagnosticAnalyzer wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -32,6 +34,8 @@ public readonly struct DiagnosticSuppressorWrapper
     public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => wrappedInstance.SupportedDiagnostics;
 
     public void Initialize(AnalysisContext context) => wrappedInstance.Initialize(context);
+
+    public void ReportSuppressions(SuppressionAnalysisContextWrapper context) => ReportSuppressionsAccessor(wrappedInstance, context);
 
     public static DiagnosticSuppressorWrapper From(DiagnosticAnalyzer instance)
     {

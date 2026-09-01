@@ -63,8 +63,8 @@ public readonly struct ExtensionMemberCrefSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken DotToken => (SyntaxToken)DotTokenAccessor(wrappedInstance);
-    public SyntaxToken ExtensionKeyword => (SyntaxToken)ExtensionKeywordAccessor(wrappedInstance);
+    public SyntaxToken DotToken => DotTokenAccessor(wrappedInstance);
+    public SyntaxToken ExtensionKeyword => ExtensionKeywordAccessor(wrappedInstance);
     public MemberCrefSyntax Member => MemberAccessor(wrappedInstance);
     public CrefParameterListSyntax Parameters => ParametersAccessor(wrappedInstance);
     public TypeArgumentListSyntax TypeArgumentList => TypeArgumentListAccessor(wrappedInstance);

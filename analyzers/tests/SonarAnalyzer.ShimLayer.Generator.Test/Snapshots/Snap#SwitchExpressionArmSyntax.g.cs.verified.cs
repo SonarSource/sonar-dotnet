@@ -59,7 +59,7 @@ public readonly struct SwitchExpressionArmSyntaxWrapper
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxToken EqualsGreaterThanToken => (SyntaxToken)EqualsGreaterThanTokenAccessor(wrappedInstance);
+    public SyntaxToken EqualsGreaterThanToken => EqualsGreaterThanTokenAccessor(wrappedInstance);
     public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
     public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
     public WhenClauseSyntaxWrapper WhenClause => WhenClauseSyntaxWrapper.From(WhenClauseAccessor(wrappedInstance));

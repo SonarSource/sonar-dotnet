@@ -86,7 +86,7 @@ public readonly struct RecordDeclarationSyntaxWrapper
     public int SpanStart => wrappedInstance.SpanStart;
     public TypeParameterListSyntax TypeParameterList => wrappedInstance.TypeParameterList;
 
-    public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(wrappedInstance);
+    public SyntaxToken ClassOrStructKeyword => ClassOrStructKeywordAccessor(wrappedInstance);
     public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);

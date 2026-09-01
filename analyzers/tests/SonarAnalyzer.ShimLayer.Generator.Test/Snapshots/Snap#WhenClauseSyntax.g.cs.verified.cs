@@ -56,7 +56,7 @@ public readonly struct WhenClauseSyntaxWrapper
     public int SpanStart => wrappedInstance.SpanStart;
 
     public ExpressionSyntax Condition => ConditionAccessor(wrappedInstance);
-    public SyntaxToken WhenKeyword => (SyntaxToken)WhenKeywordAccessor(wrappedInstance);
+    public SyntaxToken WhenKeyword => WhenKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);
