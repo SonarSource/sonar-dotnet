@@ -39,7 +39,29 @@ internal static class AccessorFactory
 
     private static TFunc CreateMethod<TFunc>(Type runtimeSenderType, string methodName, AccessorTypes types) where TFunc : Delegate
     {
-        return CreateAccessor<TFunc>(types, runtimeSenderType, methodName, runtimeSenderType?.GetMethods().FirstOrDefault(IsMethodMatch));
+        return CreateAccessor<TFunc>(types, runtimeSenderType, methodName, AllRuntimeMethods(runtimeSenderType).FirstOrDefault(IsMethodMatch));
+
+        static IEnumerable<MethodInfo> AllRuntimeMethods(Type type)
+        {
+            if (type is null)
+            {
+                yield break;
+            }
+            foreach (var method in type.GetMethods())
+            {
+                yield return method;
+            }
+            if (type.IsInterface)   // Methods from inherited interfaces are not present in type.GetMethods()
+            {
+                foreach (var @interface in type.GetInterfaces())
+                {
+                    foreach (var method in @interface.GetMethods())
+                    {
+                        yield return method;
+                    }
+                }
+            }
+        }
 
         bool IsMethodMatch(MethodInfo method) =>
             method.Name == methodName

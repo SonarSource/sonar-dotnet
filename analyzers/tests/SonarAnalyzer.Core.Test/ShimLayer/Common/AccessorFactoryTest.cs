@@ -231,7 +231,7 @@ public class AccessorFactoryTest
     public void CreateMethod_Void_Shimmed()
     {
         var accessor = AccessorFactory.CreateMethod<Action<CollectionExpressionSyntax, CSharpSyntaxVisitor>>(typeof(CollectionExpressionSyntax), nameof(CollectionExpressionSyntax.Accept));
-        var visitor = new TestVisitor();
+        var visitor = new TestSyntaxVisitor();
         accessor(CreateCollectionExpression(), visitor);
         visitor.Visited.Should().BeTrue();
     }
@@ -240,8 +240,26 @@ public class AccessorFactoryTest
     public void CreateMethod_Void_Fallback()
     {
         var accessor = AccessorFactory.CreateMethod<Action<CollectionExpressionSyntax, CSharpSyntaxVisitor>>(null, nameof(CollectionExpressionSyntax.Accept));
-        var visitor = new TestVisitor();
+        var visitor = new TestSyntaxVisitor();
         accessor(CreateCollectionExpression(), visitor);
+        visitor.Visited.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void CreateMethod_MethodDeclaredOnBaseInterface_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitor>>(typeof(IArgumentOperation), nameof(IOperation.Accept));
+        var visitor = new TestOperationVisitor();
+        accessor(CreateInvocationOperation().Arguments[0], visitor);
+        visitor.Visited.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void CreateMethod_MethodDeclaredOnBaseInterface_Fallback()
+    {
+        var accessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitor>>(null, nameof(IOperation.Accept));
+        var visitor = new TestOperationVisitor();
+        accessor(CreateInvocationOperation().Arguments[0], visitor);
         visitor.Visited.Should().BeFalse();
     }
 
@@ -381,11 +399,19 @@ public class AccessorFactoryTest
         }
     }
 
-    private sealed class TestVisitor : CSharpSyntaxVisitor
+    private sealed class TestSyntaxVisitor : CSharpSyntaxVisitor
     {
         public bool Visited { get; private set; }
 
         public override void VisitCollectionExpression(CollectionExpressionSyntax node) =>
+            Visited = true;
+    }
+
+    private sealed class TestOperationVisitor : OperationVisitor
+    {
+        public bool Visited { get; private set; }
+
+        public override void DefaultVisit(IOperation operation) =>
             Visited = true;
     }
 }
