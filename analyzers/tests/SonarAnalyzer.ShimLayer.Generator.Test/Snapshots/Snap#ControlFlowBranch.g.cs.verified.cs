@@ -25,7 +25,10 @@ public readonly struct ControlFlowBranchWrapper : IWrapper, IEquatable<ControlFl
     private readonly Object wrappedInstance;
 
     private static readonly Func<Object, Object> DestinationAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Destination");
+    private static readonly Func<Object, ImmutableArray<ControlFlowRegionWrapper>> EnteringRegionsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ControlFlowRegionWrapper>>>(WrappedType, "EnteringRegions");
+    private static readonly Func<Object, ImmutableArray<ControlFlowRegionWrapper>> FinallyRegionsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ControlFlowRegionWrapper>>>(WrappedType, "FinallyRegions");
     private static readonly Func<Object, bool> IsConditionalSuccessorAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsConditionalSuccessor");
+    private static readonly Func<Object, ImmutableArray<ControlFlowRegionWrapper>> LeavingRegionsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ControlFlowRegionWrapper>>>(WrappedType, "LeavingRegions");
     private static readonly Func<Object, ControlFlowBranchSemantics> SemanticsAccessor = AccessorFactory.CreateProperty<Func<Object, ControlFlowBranchSemantics>>(WrappedType, "Semantics");
     private static readonly Func<Object, Object> SourceAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Source");
 
@@ -53,7 +56,10 @@ public readonly struct ControlFlowBranchWrapper : IWrapper, IEquatable<ControlFl
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public BasicBlockWrapper Destination => BasicBlockWrapper.From(DestinationAccessor(wrappedInstance));
+    public ImmutableArray<ControlFlowRegionWrapper> EnteringRegions => EnteringRegionsAccessor(wrappedInstance);
+    public ImmutableArray<ControlFlowRegionWrapper> FinallyRegions => FinallyRegionsAccessor(wrappedInstance);
     public bool IsConditionalSuccessor => (bool)IsConditionalSuccessorAccessor(wrappedInstance);
+    public ImmutableArray<ControlFlowRegionWrapper> LeavingRegions => LeavingRegionsAccessor(wrappedInstance);
     public ControlFlowBranchSemantics Semantics => (ControlFlowBranchSemantics)SemanticsAccessor(wrappedInstance);
     public BasicBlockWrapper Source => BasicBlockWrapper.From(SourceAccessor(wrappedInstance));
 

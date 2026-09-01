@@ -24,8 +24,17 @@ public static class AnalyzerFileReferenceShimExtensions
 
     private static readonly Func<AnalyzerFileReference, IAnalyzerAssemblyLoader> AssemblyLoaderAccessor = AccessorFactory.CreateProperty<Func<AnalyzerFileReference, IAnalyzerAssemblyLoader>>(WrappedType, "AssemblyLoader");
 
+    private static readonly Func<AnalyzerFileReference, ImmutableArray<ISourceGeneratorWrapper>> GetGeneratorsAccessor = AccessorFactory.CreateMethod<Func<AnalyzerFileReference, ImmutableArray<ISourceGeneratorWrapper>>>(WrappedType, "GetGenerators");
+    private static readonly Func<AnalyzerFileReference, string, ImmutableArray<ISourceGeneratorWrapper>> GetGeneratorsAccessor_Overload2 = AccessorFactory.CreateMethod<Func<AnalyzerFileReference, string, ImmutableArray<ISourceGeneratorWrapper>>>(WrappedType, "GetGenerators");
+    private static readonly Func<AnalyzerFileReference, ImmutableArray<ISourceGeneratorWrapper>> GetGeneratorsForAllLanguagesAccessor = AccessorFactory.CreateMethod<Func<AnalyzerFileReference, ImmutableArray<ISourceGeneratorWrapper>>>(WrappedType, "GetGeneratorsForAllLanguages");
+
     extension(AnalyzerFileReference wrappedInstance)
     {
         public IAnalyzerAssemblyLoader AssemblyLoader => (IAnalyzerAssemblyLoader)AssemblyLoaderAccessor(wrappedInstance);
+
+        [System.ObsoleteAttribute("Use GetGenerators(string language) or GetGeneratorsForAllLanguages()")]
+        public ImmutableArray<ISourceGeneratorWrapper> GetGenerators() => GetGeneratorsAccessor(wrappedInstance);
+        public ImmutableArray<ISourceGeneratorWrapper> GetGenerators(string language) => GetGeneratorsAccessor_Overload2(wrappedInstance, language);
+        public ImmutableArray<ISourceGeneratorWrapper> GetGeneratorsForAllLanguages() => GetGeneratorsForAllLanguagesAccessor(wrappedInstance);
     }
 }

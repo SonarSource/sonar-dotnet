@@ -26,8 +26,11 @@ public readonly struct GeneratorRunResultWrapper : IWrapper, IEquatable<Generato
 
     private static readonly Func<Object, ImmutableArray<Diagnostic>> DiagnosticsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<Diagnostic>>>(WrappedType, "Diagnostics");
     private static readonly Func<Object, Exception> ExceptionAccessor = AccessorFactory.CreateProperty<Func<Object, Exception>>(WrappedType, "Exception");
+    private static readonly Func<Object, ImmutableArray<GeneratedSourceResultWrapper>> GeneratedSourcesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<GeneratedSourceResultWrapper>>>(WrappedType, "GeneratedSources");
     private static readonly Func<Object, Object> GeneratorAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Generator");
     private static readonly Func<Object, ImmutableDictionary<string, object>> HostOutputsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableDictionary<string, object>>>(WrappedType, "HostOutputs");
+    private static readonly Func<Object, ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>>> TrackedOutputStepsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>>>>(WrappedType, "TrackedOutputSteps");
+    private static readonly Func<Object, ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>>> TrackedStepsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>>>>(WrappedType, "TrackedSteps");
 
     private GeneratorRunResultWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -54,8 +57,11 @@ public readonly struct GeneratorRunResultWrapper : IWrapper, IEquatable<Generato
 
     public ImmutableArray<Diagnostic> Diagnostics => (ImmutableArray<Diagnostic>)DiagnosticsAccessor(wrappedInstance);
     public Exception Exception => (Exception)ExceptionAccessor(wrappedInstance);
+    public ImmutableArray<GeneratedSourceResultWrapper> GeneratedSources => GeneratedSourcesAccessor(wrappedInstance);
     public ISourceGeneratorWrapper Generator => ISourceGeneratorWrapper.From(GeneratorAccessor(wrappedInstance));
     public ImmutableDictionary<string, object> HostOutputs => (ImmutableDictionary<string, object>)HostOutputsAccessor(wrappedInstance);
+    public ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>> TrackedOutputSteps => (ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>>)TrackedOutputStepsAccessor(wrappedInstance);
+    public ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>> TrackedSteps => (ImmutableDictionary<string, ImmutableArray<IncrementalGeneratorRunStepWrapper>>)TrackedStepsAccessor(wrappedInstance);
 
     public static GeneratorRunResultWrapper From(Object instance)
     {

@@ -15,24 +15,13 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.ShimLayer;
+namespace SonarAnalyzer.CFG.Extensions;
 
-public readonly struct CaptureId : IEquatable<CaptureId>
+public static class CaptureIdWrapperExtensions
 {
-    private readonly object instance;   // Underlying struct holds only internal int Value as the identification.
-
-    public CaptureId(object instance) =>
-        this.instance = instance ?? throw new ArgumentNullException(nameof(instance));
-
-    public override bool Equals(object obj) =>
-        obj is CaptureId capture && Equals(capture);
-
-    public bool Equals(CaptureId other) =>
-        instance.Equals(other.instance);
-
-    public override int GetHashCode() =>
-        instance.GetHashCode();
-
-    public string Serialize() =>
-        "#Capture-" + GetHashCode();
+    extension(CaptureIdWrapper captureId)
+    {
+        public string Serialize() =>
+            "#Capture-" + captureId.GetHashCode();
+    }
 }

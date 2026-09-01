@@ -24,7 +24,7 @@ public readonly struct ControlFlowRegionWrapper : IWrapper, IEquatable<ControlFl
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
-    private static readonly Func<Object, ImmutableArray<CaptureId>> CaptureIdsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<CaptureId>>>(WrappedType, "CaptureIds");
+    private static readonly Func<Object, ImmutableArray<CaptureIdWrapper>> CaptureIdsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<CaptureIdWrapper>>>(WrappedType, "CaptureIds");
     private static readonly Func<Object, Object> EnclosingRegionAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "EnclosingRegion");
     private static readonly Func<Object, ITypeSymbol> ExceptionTypeAccessor = AccessorFactory.CreateProperty<Func<Object, ITypeSymbol>>(WrappedType, "ExceptionType");
     private static readonly Func<Object, int> FirstBlockOrdinalAccessor = AccessorFactory.CreateProperty<Func<Object, int>>(WrappedType, "FirstBlockOrdinal");
@@ -32,6 +32,7 @@ public readonly struct ControlFlowRegionWrapper : IWrapper, IEquatable<ControlFl
     private static readonly Func<Object, int> LastBlockOrdinalAccessor = AccessorFactory.CreateProperty<Func<Object, int>>(WrappedType, "LastBlockOrdinal");
     private static readonly Func<Object, ImmutableArray<IMethodSymbol>> LocalFunctionsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<IMethodSymbol>>>(WrappedType, "LocalFunctions");
     private static readonly Func<Object, ImmutableArray<ILocalSymbol>> LocalsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ILocalSymbol>>>(WrappedType, "Locals");
+    private static readonly Func<Object, ImmutableArray<ControlFlowRegionWrapper>> NestedRegionsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ControlFlowRegionWrapper>>>(WrappedType, "NestedRegions");
 
     private ControlFlowRegionWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -56,7 +57,7 @@ public readonly struct ControlFlowRegionWrapper : IWrapper, IEquatable<ControlFl
     public static bool operator !=(ControlFlowRegionWrapper left, ControlFlowRegionWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public ImmutableArray<CaptureId> CaptureIds => (ImmutableArray<CaptureId>)CaptureIdsAccessor(wrappedInstance);
+    public ImmutableArray<CaptureIdWrapper> CaptureIds => CaptureIdsAccessor(wrappedInstance);
     public ControlFlowRegionWrapper EnclosingRegion => ControlFlowRegionWrapper.From(EnclosingRegionAccessor(wrappedInstance));
     public ITypeSymbol ExceptionType => ExceptionTypeAccessor(wrappedInstance);
     public int FirstBlockOrdinal => (int)FirstBlockOrdinalAccessor(wrappedInstance);
@@ -64,6 +65,7 @@ public readonly struct ControlFlowRegionWrapper : IWrapper, IEquatable<ControlFl
     public int LastBlockOrdinal => (int)LastBlockOrdinalAccessor(wrappedInstance);
     public ImmutableArray<IMethodSymbol> LocalFunctions => (ImmutableArray<IMethodSymbol>)LocalFunctionsAccessor(wrappedInstance);
     public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(wrappedInstance);
+    public ImmutableArray<ControlFlowRegionWrapper> NestedRegions => NestedRegionsAccessor(wrappedInstance);
 
     public static ControlFlowRegionWrapper From(Object instance)
     {

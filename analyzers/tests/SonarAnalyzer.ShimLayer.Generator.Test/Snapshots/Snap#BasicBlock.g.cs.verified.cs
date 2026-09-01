@@ -33,6 +33,7 @@ public readonly struct BasicBlockWrapper : IWrapper, IEquatable<BasicBlockWrappe
     private static readonly Func<Object, BasicBlockKind> KindAccessor = AccessorFactory.CreateProperty<Func<Object, BasicBlockKind>>(WrappedType, "Kind");
     private static readonly Func<Object, ImmutableArray<IOperation>> OperationsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<IOperation>>>(WrappedType, "Operations");
     private static readonly Func<Object, int> OrdinalAccessor = AccessorFactory.CreateProperty<Func<Object, int>>(WrappedType, "Ordinal");
+    private static readonly Func<Object, ImmutableArray<ControlFlowBranchWrapper>> PredecessorsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ControlFlowBranchWrapper>>>(WrappedType, "Predecessors");
 
     private BasicBlockWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -66,6 +67,7 @@ public readonly struct BasicBlockWrapper : IWrapper, IEquatable<BasicBlockWrappe
     public BasicBlockKind Kind => (BasicBlockKind)KindAccessor(wrappedInstance);
     public ImmutableArray<IOperation> Operations => (ImmutableArray<IOperation>)OperationsAccessor(wrappedInstance);
     public int Ordinal => (int)OrdinalAccessor(wrappedInstance);
+    public ImmutableArray<ControlFlowBranchWrapper> Predecessors => PredecessorsAccessor(wrappedInstance);
 
     public static BasicBlockWrapper From(Object instance)
     {

@@ -26,6 +26,7 @@ public readonly struct DeconstructionInfoWrapper : IWrapper, IEquatable<Deconstr
 
     private static readonly Func<Object, Nullable<Conversion>> ConversionAccessor = AccessorFactory.CreateProperty<Func<Object, Nullable<Conversion>>>(WrappedType, "Conversion");
     private static readonly Func<Object, IMethodSymbol> MethodAccessor = AccessorFactory.CreateProperty<Func<Object, IMethodSymbol>>(WrappedType, "Method");
+    private static readonly Func<Object, ImmutableArray<DeconstructionInfoWrapper>> NestedAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<DeconstructionInfoWrapper>>>(WrappedType, "Nested");
 
     private DeconstructionInfoWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -52,6 +53,7 @@ public readonly struct DeconstructionInfoWrapper : IWrapper, IEquatable<Deconstr
 
     public Nullable<Conversion> Conversion => (Nullable<Conversion>)ConversionAccessor(wrappedInstance);
     public IMethodSymbol Method => MethodAccessor(wrappedInstance);
+    public ImmutableArray<DeconstructionInfoWrapper> Nested => NestedAccessor(wrappedInstance);
 
     public static DeconstructionInfoWrapper From(Object instance)
     {

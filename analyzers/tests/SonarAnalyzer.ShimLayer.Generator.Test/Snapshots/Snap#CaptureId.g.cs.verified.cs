@@ -18,16 +18,13 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorDriverTimingInfoWrapper : IWrapper, IEquatable<GeneratorDriverTimingInfoWrapper>
+public readonly struct CaptureIdWrapper : IWrapper, IEquatable<CaptureIdWrapper>
 {
-    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorDriverTimingInfo");
+    private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.FlowAnalysis.CaptureId");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
-    private static readonly Func<Object, TimeSpan> ElapsedTimeAccessor = AccessorFactory.CreateProperty<Func<Object, TimeSpan>>(WrappedType, "ElapsedTime");
-    private static readonly Func<Object, ImmutableArray<GeneratorTimingInfoWrapper>> GeneratorTimesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<GeneratorTimingInfoWrapper>>>(WrappedType, "GeneratorTimes");
-
-    private GeneratorDriverTimingInfoWrapper(Object wrappedInstance) =>
+    private CaptureIdWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
@@ -41,19 +38,16 @@ public readonly struct GeneratorDriverTimingInfoWrapper : IWrapper, IEquatable<G
         (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
         || Equals(wrappedInstance, obj);
 
-    public bool Equals(GeneratorDriverTimingInfoWrapper other) =>
+    public bool Equals(CaptureIdWrapper other) =>
         Equals(wrappedInstance, other.wrappedInstance);
 
-    public static bool operator ==(GeneratorDriverTimingInfoWrapper left, GeneratorDriverTimingInfoWrapper right) =>
+    public static bool operator ==(CaptureIdWrapper left, CaptureIdWrapper right) =>
         Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public static bool operator !=(GeneratorDriverTimingInfoWrapper left, GeneratorDriverTimingInfoWrapper right) =>
+    public static bool operator !=(CaptureIdWrapper left, CaptureIdWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public TimeSpan ElapsedTime => (TimeSpan)ElapsedTimeAccessor(wrappedInstance);
-    public ImmutableArray<GeneratorTimingInfoWrapper> GeneratorTimes => GeneratorTimesAccessor(wrappedInstance);
-
-    public static GeneratorDriverTimingInfoWrapper From(Object instance)
+    public static CaptureIdWrapper From(Object instance)
     {
         if (instance is null)
         {
@@ -61,11 +55,11 @@ public readonly struct GeneratorDriverTimingInfoWrapper : IWrapper, IEquatable<G
         }
         else if (IsInstance(instance))
         {
-            return new GeneratorDriverTimingInfoWrapper((Object)instance);
+            return new CaptureIdWrapper((Object)instance);
         }
         else
         {
-            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.GeneratorDriverTimingInfo'");
+            throw new InvalidCastException($"Cannot cast '{instance.GetType().FullName}' to 'Microsoft.CodeAnalysis.FlowAnalysis.CaptureId'");
         }
     }
 

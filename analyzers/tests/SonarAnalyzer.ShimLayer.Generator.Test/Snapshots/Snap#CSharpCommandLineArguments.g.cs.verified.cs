@@ -29,6 +29,7 @@ public static class CSharpCommandLineArgumentsShimExtensions
     private static readonly Func<CSharpCommandLineArguments, bool> EmitPdbFileAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, bool>>(WrappedType, "EmitPdbFile");
     private static readonly Func<CSharpCommandLineArguments, Object> ErrorLogOptionsAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, Object>>(WrappedType, "ErrorLogOptions");
     private static readonly Func<CSharpCommandLineArguments, string> GeneratedFilesOutputDirectoryAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, string>>(WrappedType, "GeneratedFilesOutputDirectory");
+    private static readonly Func<CSharpCommandLineArguments, ImmutableArray<CommandLineResourceWrapper>> ManifestResourceArgumentsAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, ImmutableArray<CommandLineResourceWrapper>>>(WrappedType, "ManifestResourceArguments");
     private static readonly Func<CSharpCommandLineArguments, string> OutputRefFilePathAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, string>>(WrappedType, "OutputRefFilePath");
     private static readonly Func<CSharpCommandLineArguments, bool> ReportInternalsVisibleToAttributesAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, bool>>(WrappedType, "ReportInternalsVisibleToAttributes");
     private static readonly Func<CSharpCommandLineArguments, string> RuleSetPathAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, string>>(WrappedType, "RuleSetPath");
@@ -47,6 +48,7 @@ public static class CSharpCommandLineArgumentsShimExtensions
         public bool EmitPdbFile => (bool)EmitPdbFileAccessor(wrappedInstance);
         public ErrorLogOptionsWrapper ErrorLogOptions => ErrorLogOptionsWrapper.From(ErrorLogOptionsAccessor(wrappedInstance));
         public string GeneratedFilesOutputDirectory => (string)GeneratedFilesOutputDirectoryAccessor(wrappedInstance);
+        public ImmutableArray<CommandLineResourceWrapper> ManifestResourceArguments => ManifestResourceArgumentsAccessor(wrappedInstance);
         public string OutputRefFilePath => (string)OutputRefFilePathAccessor(wrappedInstance);
         public bool ReportInternalsVisibleToAttributes => (bool)ReportInternalsVisibleToAttributesAccessor(wrappedInstance);
         public string RuleSetPath => (string)RuleSetPathAccessor(wrappedInstance);

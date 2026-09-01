@@ -26,6 +26,7 @@ public readonly struct GeneratorDriverRunResultWrapper : IWrapper, IEquatable<Ge
 
     private static readonly Func<Object, ImmutableArray<Diagnostic>> DiagnosticsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<Diagnostic>>>(WrappedType, "Diagnostics");
     private static readonly Func<Object, ImmutableArray<SyntaxTree>> GeneratedTreesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<SyntaxTree>>>(WrappedType, "GeneratedTrees");
+    private static readonly Func<Object, ImmutableArray<GeneratorRunResultWrapper>> ResultsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<GeneratorRunResultWrapper>>>(WrappedType, "Results");
 
     private GeneratorDriverRunResultWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -52,6 +53,7 @@ public readonly struct GeneratorDriverRunResultWrapper : IWrapper, IEquatable<Ge
 
     public ImmutableArray<Diagnostic> Diagnostics => (ImmutableArray<Diagnostic>)DiagnosticsAccessor(wrappedInstance);
     public ImmutableArray<SyntaxTree> GeneratedTrees => (ImmutableArray<SyntaxTree>)GeneratedTreesAccessor(wrappedInstance);
+    public ImmutableArray<GeneratorRunResultWrapper> Results => ResultsAccessor(wrappedInstance);
 
     public static GeneratorDriverRunResultWrapper From(Object instance)
     {

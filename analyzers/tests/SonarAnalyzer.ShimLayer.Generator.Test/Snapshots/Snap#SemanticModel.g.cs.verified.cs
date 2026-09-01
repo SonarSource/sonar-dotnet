@@ -22,10 +22,12 @@ public static class SemanticModelShimExtensions
 {
     private static readonly Type WrappedType = typeof(SemanticModel);
 
+    private static readonly Func<SemanticModel, int, CancellationToken, ImmutableArray<IImportScopeWrapper>> GetImportScopesAccessor = AccessorFactory.CreateMethod<Func<SemanticModel, int, CancellationToken, ImmutableArray<IImportScopeWrapper>>>(WrappedType, "GetImportScopes");
     private static readonly Func<SemanticModel, int, NullableContext> GetNullableContextAccessor = AccessorFactory.CreateMethod<Func<SemanticModel, int, NullableContext>>(WrappedType, "GetNullableContext");
 
     extension(SemanticModel wrappedInstance)
     {
+        public ImmutableArray<IImportScopeWrapper> GetImportScopes(int position, CancellationToken cancellationToken) => GetImportScopesAccessor(wrappedInstance, position, cancellationToken);
         public NullableContext GetNullableContext(int position) => (NullableContext)GetNullableContextAccessor(wrappedInstance, position);
     }
 }

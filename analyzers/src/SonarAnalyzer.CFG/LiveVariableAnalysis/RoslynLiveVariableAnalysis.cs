@@ -22,7 +22,7 @@ namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
 public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
 {
-    private readonly Dictionary<CaptureId, List<ISymbol>> flowCaptures = [];
+    private readonly Dictionary<CaptureIdWrapper, List<ISymbol>> flowCaptures = [];
     private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
     private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
     private readonly SyntaxClassifierBase syntaxClassifier;
@@ -133,7 +133,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void AppendFlowCaptureReference(CaptureId id, IEnumerable<ISymbol> symbols)
+    private void AppendFlowCaptureReference(CaptureIdWrapper id, IEnumerable<ISymbol> symbols)
     {
         if (!flowCaptures.TryGetValue(id, out var list))
         {

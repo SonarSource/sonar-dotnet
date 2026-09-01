@@ -24,6 +24,7 @@ public readonly struct ControlFlowGraphWrapper : IWrapper, IEquatable<ControlFlo
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
+    private static readonly Func<Object, ImmutableArray<BasicBlockWrapper>> BlocksAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<BasicBlockWrapper>>>(WrappedType, "Blocks");
     private static readonly Func<Object, ImmutableArray<IMethodSymbol>> LocalFunctionsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<IMethodSymbol>>>(WrappedType, "LocalFunctions");
     private static readonly Func<Object, IOperation> OriginalOperationAccessor = AccessorFactory.CreateProperty<Func<Object, IOperation>>(WrappedType, "OriginalOperation");
     private static readonly Func<Object, Object> ParentAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Parent");
@@ -63,6 +64,7 @@ public readonly struct ControlFlowGraphWrapper : IWrapper, IEquatable<ControlFlo
     public static bool operator !=(ControlFlowGraphWrapper left, ControlFlowGraphWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
+    public ImmutableArray<BasicBlockWrapper> Blocks => BlocksAccessor(wrappedInstance);
     public ImmutableArray<IMethodSymbol> LocalFunctions => (ImmutableArray<IMethodSymbol>)LocalFunctionsAccessor(wrappedInstance);
     public IOperation OriginalOperation => OriginalOperationAccessor(wrappedInstance);
     public ControlFlowGraphWrapper Parent => ControlFlowGraphWrapper.From(ParentAccessor(wrappedInstance));

@@ -18,6 +18,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.CodeAnalysis.Operations;
 using SonarAnalyzer.ShimLayer.Common;
 
@@ -93,6 +94,20 @@ public class AccessorFactoryTest
     {
         var accessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ILocalSymbol>>>(null, "Locals");
         accessor(CreateForEachOperation()).Should().NotBeNull().And.BeEmpty();
+    }
+
+    [TestMethod]
+    public void ReturnType_ImmutableArrayOfValueType_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<object, ImmutableArray<CaptureIdWrapper>>>(typeof(ControlFlowRegion), nameof(ControlFlowRegion.CaptureIds));
+        accessor(CreateControlFlowRegion()).Should().NotBeNull().And.HaveCount(1);
+    }
+
+    [TestMethod]
+    public void ReturnType_ImmutableArrayOfValueType_Fallback()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<object, ImmutableArray<CaptureIdWrapper>>>(null, nameof(ControlFlowRegion.CaptureIds));
+        accessor(CreateControlFlowRegion()).Should().NotBeNull().And.BeEmpty();
     }
 
     [TestMethod]
@@ -272,7 +287,6 @@ public class AccessorFactoryTest
         accessor(WellKnownMemberNames.CheckedAdditionOperatorName).Should().BeFalse();
     }
 
-
     [TestMethod]
     public void Create_MethodWithEnumParameter_Shimmed()
     {
@@ -323,6 +337,20 @@ public class AccessorFactoryTest
                 public void Method<T>() { }
             }
             """).MethodSymbol("Sample.Method");
+
+    private static ControlFlowRegion CreateControlFlowRegion()
+    {
+        var compiler = new SnippetCompiler("""
+            public class Sample
+            {
+                public string Method(object a, object b) =>
+                    a?.ToString() + b?.ToString();
+            }
+            """);
+        var method = compiler.MethodDeclaration("Sample.Method");
+        var cfg = ControlFlowGraph.Create(method, compiler.Model);
+        return cfg.Root.NestedRegions.Single().NestedRegions.First();
+    }
 
     private static ClassDeclarationSyntax CreateClassDeclaration() =>
         SyntaxFactory.ClassDeclaration("Sample")

@@ -81,10 +81,6 @@ public static class ModelBuilder
                 ? new InterfaceWrapStrategy(latest.Type, typeof(object), CreateMembers(latest, null))
                 : new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
         }
-        else if (latest.Type.Name == nameof(Microsoft.CodeAnalysis.FlowAnalysis.CaptureId)) // ToDo: Remove once StructStrategy exists
-        {
-            return new NoChangeStrategy(latest.Type);
-        }
         else if (IsStaticClass(latest.Type))
         {
             return new StaticClassStrategy(latest.Type, CreateMembers(latest, baseline));

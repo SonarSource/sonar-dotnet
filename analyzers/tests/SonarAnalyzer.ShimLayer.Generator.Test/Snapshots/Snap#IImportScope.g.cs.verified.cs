@@ -26,6 +26,8 @@ public readonly struct IImportScopeWrapper : IWrapper, IEquatable<IImportScopeWr
 
     private static readonly Func<Object, ImmutableArray<IAliasSymbol>> AliasesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<IAliasSymbol>>>(WrappedType, "Aliases");
     private static readonly Func<Object, ImmutableArray<IAliasSymbol>> ExternAliasesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<IAliasSymbol>>>(WrappedType, "ExternAliases");
+    private static readonly Func<Object, ImmutableArray<ImportedNamespaceOrTypeWrapper>> ImportsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ImportedNamespaceOrTypeWrapper>>>(WrappedType, "Imports");
+    private static readonly Func<Object, ImmutableArray<ImportedXmlNamespaceWrapper>> XmlNamespacesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ImportedXmlNamespaceWrapper>>>(WrappedType, "XmlNamespaces");
 
     private IImportScopeWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -52,6 +54,8 @@ public readonly struct IImportScopeWrapper : IWrapper, IEquatable<IImportScopeWr
 
     public ImmutableArray<IAliasSymbol> Aliases => (ImmutableArray<IAliasSymbol>)AliasesAccessor(wrappedInstance);
     public ImmutableArray<IAliasSymbol> ExternAliases => (ImmutableArray<IAliasSymbol>)ExternAliasesAccessor(wrappedInstance);
+    public ImmutableArray<ImportedNamespaceOrTypeWrapper> Imports => ImportsAccessor(wrappedInstance);
+    public ImmutableArray<ImportedXmlNamespaceWrapper> XmlNamespaces => XmlNamespacesAccessor(wrappedInstance);
 
     public static IImportScopeWrapper From(object instance)
     {

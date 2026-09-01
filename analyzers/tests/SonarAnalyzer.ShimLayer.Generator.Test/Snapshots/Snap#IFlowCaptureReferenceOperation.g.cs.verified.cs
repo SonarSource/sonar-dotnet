@@ -25,7 +25,7 @@ public readonly struct IFlowCaptureReferenceOperationWrapper : IOperationWrapper
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
-    private static readonly Func<IOperation, CaptureId> IdAccessor = AccessorFactory.CreateProperty<Func<IOperation, CaptureId>>(WrappedType, "Id");
+    private static readonly Func<IOperation, Object> IdAccessor = AccessorFactory.CreateProperty<Func<IOperation, Object>>(WrappedType, "Id");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, bool> IsInitializationAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsInitialization");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
@@ -64,7 +64,7 @@ public readonly struct IFlowCaptureReferenceOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public CaptureId Id => (CaptureId)IdAccessor(wrappedInstance);
+    public CaptureIdWrapper Id => CaptureIdWrapper.From(IdAccessor(wrappedInstance));
     public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
     public bool IsInitialization => (bool)IsInitializationAccessor(wrappedInstance);
     public string Language => (string)LanguageAccessor(wrappedInstance);

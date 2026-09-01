@@ -29,6 +29,7 @@ public static class CommandLineArgumentsShimExtensions
     private static readonly Func<CommandLineArguments, bool> EmitPdbFileAccessor = AccessorFactory.CreateProperty<Func<CommandLineArguments, bool>>(WrappedType, "EmitPdbFile");
     private static readonly Func<CommandLineArguments, Object> ErrorLogOptionsAccessor = AccessorFactory.CreateProperty<Func<CommandLineArguments, Object>>(WrappedType, "ErrorLogOptions");
     private static readonly Func<CommandLineArguments, string> GeneratedFilesOutputDirectoryAccessor = AccessorFactory.CreateProperty<Func<CommandLineArguments, string>>(WrappedType, "GeneratedFilesOutputDirectory");
+    private static readonly Func<CommandLineArguments, ImmutableArray<CommandLineResourceWrapper>> ManifestResourceArgumentsAccessor = AccessorFactory.CreateProperty<Func<CommandLineArguments, ImmutableArray<CommandLineResourceWrapper>>>(WrappedType, "ManifestResourceArguments");
     private static readonly Func<CommandLineArguments, string> OutputRefFilePathAccessor = AccessorFactory.CreateProperty<Func<CommandLineArguments, string>>(WrappedType, "OutputRefFilePath");
     private static readonly Func<CommandLineArguments, bool> ReportInternalsVisibleToAttributesAccessor = AccessorFactory.CreateProperty<Func<CommandLineArguments, bool>>(WrappedType, "ReportInternalsVisibleToAttributes");
     private static readonly Func<CommandLineArguments, string> RuleSetPathAccessor = AccessorFactory.CreateProperty<Func<CommandLineArguments, string>>(WrappedType, "RuleSetPath");
@@ -47,6 +48,7 @@ public static class CommandLineArgumentsShimExtensions
         public bool EmitPdbFile => (bool)EmitPdbFileAccessor(wrappedInstance);
         public ErrorLogOptionsWrapper ErrorLogOptions => ErrorLogOptionsWrapper.From(ErrorLogOptionsAccessor(wrappedInstance));
         public string GeneratedFilesOutputDirectory => (string)GeneratedFilesOutputDirectoryAccessor(wrappedInstance);
+        public ImmutableArray<CommandLineResourceWrapper> ManifestResourceArguments => ManifestResourceArgumentsAccessor(wrappedInstance);
         public string OutputRefFilePath => (string)OutputRefFilePathAccessor(wrappedInstance);
         public bool ReportInternalsVisibleToAttributes => (bool)ReportInternalsVisibleToAttributesAccessor(wrappedInstance);
         public string RuleSetPath => (string)RuleSetPathAccessor(wrappedInstance);

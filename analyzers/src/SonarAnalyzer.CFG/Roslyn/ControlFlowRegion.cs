@@ -42,7 +42,7 @@ public class ControlFlowRegion
     private ImmutableArray<ControlFlowRegion> nestedRegions;
     private ImmutableArray<ILocalSymbol> locals;
     private ImmutableArray<IMethodSymbol> localFunctions;
-    private ImmutableArray<CaptureId> captureIds;
+    private ImmutableArray<CaptureIdWrapper> captureIds;
 
     public ControlFlowRegionKind Kind => KindProperty.ReadCached(instance, ref kind);
     public ControlFlowRegion EnclosingRegion => EnclosingRegionProperty.ReadCached(instance, Wrap, ref enclosingRegion);
@@ -52,7 +52,7 @@ public class ControlFlowRegion
     public ImmutableArray<ControlFlowRegion> NestedRegions => NestedRegionsProperty.ReadCached(instance, Wrap, ref nestedRegions);
     public ImmutableArray<ILocalSymbol> Locals => LocalsProperty.ReadCached(instance, ref locals);
     public ImmutableArray<IMethodSymbol> LocalFunctions => LocalFunctionsProperty.ReadCached(instance, ref localFunctions);
-    public ImmutableArray<CaptureId> CaptureIds => CaptureIdsProperty.ReadCached(instance, x => new CaptureId(x), ref captureIds);
+    public ImmutableArray<CaptureIdWrapper> CaptureIds => CaptureIdsProperty.ReadCached(instance, CaptureIdWrapper.From, ref captureIds);
 
     static ControlFlowRegion()
     {

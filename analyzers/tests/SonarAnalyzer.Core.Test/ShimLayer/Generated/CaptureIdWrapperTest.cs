@@ -15,38 +15,24 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.ShimLayer;
+using SonarAnalyzer.CFG.Roslyn;
 using IFlowCaptureReferenceOperation = Microsoft.CodeAnalysis.FlowAnalysis.IFlowCaptureReferenceOperation;
 
-namespace SonarAnalyzer.CFG.Roslyn.Test;
+namespace SonarAnalyzer.Core.Test.ShimLayer.Generated;
 
 [TestClass]
-public class CaptureIdTest
+public class CaptureIdWrapperTest
 {
-    [TestMethod]
-    public void Null_ThrowsException()
-    {
-        Action a = () => new CaptureId(null).ToString();
-        a.Should().Throw<ArgumentNullException>();
-    }
-
-    [TestMethod]
-    public void Equals_ReturnsFalse()
-    {
-        var capture = new CaptureId(new object());
-        capture.Equals(42).Should().BeFalse();
-        capture.Equals(null).Should().BeFalse();
-    }
-
     [TestMethod]
     public void ValidateReflection()
     {
-        const string code = @"
-public class Sample
-{
-    public string Method(object a, object b) =>
-        a?.ToString() + b?.ToString();
-}";
+        var code = """
+            public class Sample
+            {
+                public string Method(object a, object b) =>
+                    a?.ToString() + b?.ToString();
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         var outerLocalLifetimeRegion = cfg.Root.NestedRegions.Single();
         outerLocalLifetimeRegion.Kind.Should().Be(ControlFlowRegionKind.LocalLifetime);
@@ -55,18 +41,21 @@ public class Sample
         var nestedRegionB = outerLocalLifetimeRegion.NestedRegions.Last();
         var captureA = FindCapture(nestedRegionA, "a");
         var captureB = FindCapture(nestedRegionB, "b");
-        // Assert
-        nestedRegionA.CaptureIds.Should().HaveCount(1).And.Contain(captureA).And.NotContain(captureB);
-        nestedRegionB.CaptureIds.Should().HaveCount(1).And.Contain(captureB).And.NotContain(captureA);
-        nestedRegionA.CaptureIds.Single().GetHashCode().Should().Be(captureA.GetHashCode()).And.NotBe(captureB.GetHashCode());
-        nestedRegionA.CaptureIds.Single().Equals((object)captureA).Should().BeTrue();
-        nestedRegionA.CaptureIds.Single().Equals((object)captureB).Should().BeFalse();
 
-        CaptureId FindCapture(ControlFlowRegion region, string expectedName)
+        captureA.Equals(captureA).Should().BeTrue();
+        captureA.Equals(captureB).Should().BeFalse();
+        captureA.GetHashCode().Should().NotBe(captureB.GetHashCode());
+
+        nestedRegionA.CaptureIds.Should().ContainSingle().Which.Should().Be(captureA);
+        nestedRegionB.CaptureIds.Should().ContainSingle().Which.Should().Be(captureB);
+        nestedRegionA.CaptureIds.Single().GetHashCode().Should().Be(captureA.GetHashCode());
+        nestedRegionA.CaptureIds.Single().Equals(captureA).Should().BeTrue();
+
+        CaptureIdWrapper FindCapture(ControlFlowRegion region, string expectedName)
         {
             var flowCapture = (IFlowCaptureReferenceOperation)cfg.Blocks[region.FirstBlockOrdinal].BranchValue.ChildOperations.Single();
             flowCapture.Syntax.ToString().Should().Be(expectedName);
-            return new CaptureId(flowCapture.Id);
+            return CaptureIdWrapper.From(flowCapture.Id);
         }
     }
 }

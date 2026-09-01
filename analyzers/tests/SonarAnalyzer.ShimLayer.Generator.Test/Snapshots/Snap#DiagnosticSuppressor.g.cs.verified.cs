@@ -24,6 +24,8 @@ public readonly struct DiagnosticSuppressorWrapper : IWrapper, IEquatable<Diagno
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly DiagnosticAnalyzer wrappedInstance;
 
+    private static readonly Func<DiagnosticAnalyzer, ImmutableArray<SuppressionDescriptorWrapper>> SupportedSuppressionsAccessor = AccessorFactory.CreateProperty<Func<DiagnosticAnalyzer, ImmutableArray<SuppressionDescriptorWrapper>>>(WrappedType, "SupportedSuppressions");
+
     private static readonly Action<DiagnosticAnalyzer, SuppressionAnalysisContextWrapper> ReportSuppressionsAccessor = AccessorFactory.CreateMethod<Action<DiagnosticAnalyzer, SuppressionAnalysisContextWrapper>>(WrappedType, "ReportSuppressions");
 
     private DiagnosticSuppressorWrapper(DiagnosticAnalyzer wrappedInstance) =>
@@ -50,6 +52,8 @@ public readonly struct DiagnosticSuppressorWrapper : IWrapper, IEquatable<Diagno
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => wrappedInstance.SupportedDiagnostics;
+
+    public ImmutableArray<SuppressionDescriptorWrapper> SupportedSuppressions => SupportedSuppressionsAccessor(wrappedInstance);
 
     public void Initialize(AnalysisContext context) => wrappedInstance.Initialize(context);
 
