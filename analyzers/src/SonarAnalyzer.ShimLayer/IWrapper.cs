@@ -1,4 +1,4 @@
-/*
+﻿/*
  * SonarAnalyzer for .NET
  * Copyright (C) SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
