@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct ControlFlowGraphWrapper
+public readonly struct ControlFlowGraphWrapper : IWrapper, IEquatable<ControlFlowGraphWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -44,6 +44,24 @@ public readonly struct ControlFlowGraphWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(ControlFlowGraphWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(ControlFlowGraphWrapper left, ControlFlowGraphWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(ControlFlowGraphWrapper left, ControlFlowGraphWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<IMethodSymbol> LocalFunctions => (ImmutableArray<IMethodSymbol>)LocalFunctionsAccessor(wrappedInstance);
     public IOperation OriginalOperation => OriginalOperationAccessor(wrappedInstance);

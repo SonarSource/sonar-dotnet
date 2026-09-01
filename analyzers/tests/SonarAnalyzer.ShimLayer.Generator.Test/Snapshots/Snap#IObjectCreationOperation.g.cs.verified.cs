@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IObjectCreationOperationWrapper : IOperationWrapper
+public readonly struct IObjectCreationOperationWrapper : IOperationWrapper, IWrapper, IEquatable<IObjectCreationOperationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IObjectCreationOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -39,6 +39,24 @@ public readonly struct IObjectCreationOperationWrapper : IOperationWrapper
         this.wrappedInstance = wrappedInstance;
 
     public IOperation WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IObjectCreationOperationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IObjectCreationOperationWrapper left, IObjectCreationOperationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IObjectCreationOperationWrapper left, IObjectCreationOperationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public Optional<object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;

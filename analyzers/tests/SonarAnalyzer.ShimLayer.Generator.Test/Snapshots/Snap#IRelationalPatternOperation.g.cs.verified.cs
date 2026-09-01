@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IRelationalPatternOperationWrapper : IOperationWrapper
+public readonly struct IRelationalPatternOperationWrapper : IOperationWrapper, IWrapper, IEquatable<IRelationalPatternOperationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IRelationalPatternOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -40,6 +40,24 @@ public readonly struct IRelationalPatternOperationWrapper : IOperationWrapper
         this.wrappedInstance = wrappedInstance;
 
     public IOperation WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IRelationalPatternOperationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IRelationalPatternOperationWrapper left, IRelationalPatternOperationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IRelationalPatternOperationWrapper left, IRelationalPatternOperationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public Optional<object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;

@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct AnalyzerConfigOptionsResultWrapper
+public readonly struct AnalyzerConfigOptionsResultWrapper : IWrapper, IEquatable<AnalyzerConfigOptionsResultWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.AnalyzerConfigOptionsResult");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -32,6 +32,24 @@ public readonly struct AnalyzerConfigOptionsResultWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(AnalyzerConfigOptionsResultWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(AnalyzerConfigOptionsResultWrapper left, AnalyzerConfigOptionsResultWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(AnalyzerConfigOptionsResultWrapper left, AnalyzerConfigOptionsResultWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableDictionary<string, string> AnalyzerOptions => (ImmutableDictionary<string, string>)AnalyzerOptionsAccessor(wrappedInstance);
     public ImmutableArray<Diagnostic> Diagnostics => (ImmutableArray<Diagnostic>)DiagnosticsAccessor(wrappedInstance);

@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IVariableDeclarationGroupOperationWrapper : IOperationWrapper
+public readonly struct IVariableDeclarationGroupOperationWrapper : IOperationWrapper, IWrapper, IEquatable<IVariableDeclarationGroupOperationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IVariableDeclarationGroupOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -37,6 +37,24 @@ public readonly struct IVariableDeclarationGroupOperationWrapper : IOperationWra
         this.wrappedInstance = wrappedInstance;
 
     public IOperation WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IVariableDeclarationGroupOperationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IVariableDeclarationGroupOperationWrapper left, IVariableDeclarationGroupOperationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IVariableDeclarationGroupOperationWrapper left, IVariableDeclarationGroupOperationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public Optional<object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;

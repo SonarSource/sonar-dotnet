@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct SyntaxTreeOptionsProviderWrapper
+public readonly struct SyntaxTreeOptionsProviderWrapper : IWrapper, IEquatable<SyntaxTreeOptionsProviderWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.SyntaxTreeOptionsProvider");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -34,6 +34,24 @@ public readonly struct SyntaxTreeOptionsProviderWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(SyntaxTreeOptionsProviderWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(SyntaxTreeOptionsProviderWrapper left, SyntaxTreeOptionsProviderWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(SyntaxTreeOptionsProviderWrapper left, SyntaxTreeOptionsProviderWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public GeneratedKind IsGenerated(SyntaxTree tree, CancellationToken cancellationToken) => (GeneratedKind)IsGeneratedAccessor(wrappedInstance, tree, cancellationToken);
     public bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity) => (bool)TryGetDiagnosticValueAccessor(wrappedInstance, tree, diagnosticId, cancellationToken, out severity);

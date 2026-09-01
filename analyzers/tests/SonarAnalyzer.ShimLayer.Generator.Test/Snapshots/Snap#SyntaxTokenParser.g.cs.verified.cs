@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct SyntaxTokenParserWrapper
+public readonly struct SyntaxTokenParserWrapper : IWrapper, IEquatable<SyntaxTokenParserWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.SyntaxTokenParser");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -31,6 +31,24 @@ public readonly struct SyntaxTokenParserWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(SyntaxTokenParserWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(SyntaxTokenParserWrapper left, SyntaxTokenParserWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(SyntaxTokenParserWrapper left, SyntaxTokenParserWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public void Dispose() => DisposeAccessor(wrappedInstance);
     public void SkipForwardTo(int position) => SkipForwardToAccessor(wrappedInstance, position);

@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct EmbeddedTextWrapper
+public readonly struct EmbeddedTextWrapper : IWrapper, IEquatable<EmbeddedTextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.EmbeddedText");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -36,6 +36,24 @@ public readonly struct EmbeddedTextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(EmbeddedTextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(EmbeddedTextWrapper left, EmbeddedTextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(EmbeddedTextWrapper left, EmbeddedTextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<Byte> Checksum => (ImmutableArray<Byte>)ChecksumAccessor(wrappedInstance);
     public SourceHashAlgorithm ChecksumAlgorithm => (SourceHashAlgorithm)ChecksumAlgorithmAccessor(wrappedInstance);

@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IConditionalAccessOperationWrapper : IOperationWrapper
+public readonly struct IConditionalAccessOperationWrapper : IOperationWrapper, IWrapper, IEquatable<IConditionalAccessOperationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IConditionalAccessOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -38,6 +38,24 @@ public readonly struct IConditionalAccessOperationWrapper : IOperationWrapper
         this.wrappedInstance = wrappedInstance;
 
     public IOperation WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IConditionalAccessOperationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IConditionalAccessOperationWrapper left, IConditionalAccessOperationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IConditionalAccessOperationWrapper left, IConditionalAccessOperationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public Optional<object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;

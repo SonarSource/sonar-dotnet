@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorSyntaxContextWrapper
+public readonly struct GeneratorSyntaxContextWrapper : IWrapper, IEquatable<GeneratorSyntaxContextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorSyntaxContext");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -31,6 +31,24 @@ public readonly struct GeneratorSyntaxContextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratorSyntaxContextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratorSyntaxContextWrapper left, GeneratorSyntaxContextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratorSyntaxContextWrapper left, GeneratorSyntaxContextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public SyntaxNode Node => NodeAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);

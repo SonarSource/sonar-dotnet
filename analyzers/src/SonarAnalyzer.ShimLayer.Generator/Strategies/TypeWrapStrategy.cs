@@ -19,8 +19,6 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class TypeWrapStrategy : WrapStrategy
 {
-    protected override string BaseTypeSnippet => null;
-
     protected override string FromTypeName => CompiletimeTypeSnippet;
 
     protected override string ConversionSnippet => null;

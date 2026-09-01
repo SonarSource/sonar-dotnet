@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct AnalyzerConfigWrapper
+public readonly struct AnalyzerConfigWrapper : IWrapper, IEquatable<AnalyzerConfigWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.AnalyzerConfig");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -31,6 +31,24 @@ public readonly struct AnalyzerConfigWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(AnalyzerConfigWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(AnalyzerConfigWrapper left, AnalyzerConfigWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(AnalyzerConfigWrapper left, AnalyzerConfigWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public static AnalyzerConfigWrapper Parse(SourceText text, string pathToFile) => AnalyzerConfigWrapper.From(ParseAccessor(text, pathToFile));
     public static AnalyzerConfigWrapper Parse(string text, string pathToFile) => AnalyzerConfigWrapper.From(ParseAccessor_Overload2(text, pathToFile));

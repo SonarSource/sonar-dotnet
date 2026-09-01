@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct MethodInstrumentationWrapper
+public readonly struct MethodInstrumentationWrapper : IWrapper, IEquatable<MethodInstrumentationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Emit.MethodInstrumentation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -30,6 +30,24 @@ public readonly struct MethodInstrumentationWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(MethodInstrumentationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(MethodInstrumentationWrapper left, MethodInstrumentationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(MethodInstrumentationWrapper left, MethodInstrumentationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<InstrumentationKind> Kinds => (ImmutableArray<InstrumentationKind>)KindsAccessor(wrappedInstance);
 

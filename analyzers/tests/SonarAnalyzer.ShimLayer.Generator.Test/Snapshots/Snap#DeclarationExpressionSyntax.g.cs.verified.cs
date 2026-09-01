@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct DeclarationExpressionSyntaxWrapper
+public readonly struct DeclarationExpressionSyntaxWrapper : IWrapper, IEquatable<DeclarationExpressionSyntaxWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.DeclarationExpressionSyntax");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -37,6 +37,24 @@ public readonly struct DeclarationExpressionSyntaxWrapper
         this.wrappedInstance = wrappedInstance;
 
     public ExpressionSyntax WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(DeclarationExpressionSyntaxWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(DeclarationExpressionSyntaxWrapper left, DeclarationExpressionSyntaxWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(DeclarationExpressionSyntaxWrapper left, DeclarationExpressionSyntaxWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;
     public bool ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;

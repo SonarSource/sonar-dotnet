@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct InterceptableLocationWrapper
+public readonly struct InterceptableLocationWrapper : IWrapper, IEquatable<InterceptableLocationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.InterceptableLocation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -33,6 +33,24 @@ public readonly struct InterceptableLocationWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(InterceptableLocationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(InterceptableLocationWrapper left, InterceptableLocationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(InterceptableLocationWrapper left, InterceptableLocationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public string Data => (string)DataAccessor(wrappedInstance);
     public int Version => (int)VersionAccessor(wrappedInstance);

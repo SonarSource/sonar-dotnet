@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IImportScopeWrapper
+public readonly struct IImportScopeWrapper : IWrapper, IEquatable<IImportScopeWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.IImportScope");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -31,6 +31,24 @@ public readonly struct IImportScopeWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IImportScopeWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IImportScopeWrapper left, IImportScopeWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IImportScopeWrapper left, IImportScopeWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<IAliasSymbol> Aliases => (ImmutableArray<IAliasSymbol>)AliasesAccessor(wrappedInstance);
     public ImmutableArray<IAliasSymbol> ExternAliases => (ImmutableArray<IAliasSymbol>)ExternAliasesAccessor(wrappedInstance);

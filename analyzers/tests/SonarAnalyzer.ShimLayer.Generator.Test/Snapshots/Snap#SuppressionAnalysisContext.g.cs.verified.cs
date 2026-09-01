@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct SuppressionAnalysisContextWrapper
+public readonly struct SuppressionAnalysisContextWrapper : IWrapper, IEquatable<SuppressionAnalysisContextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Diagnostics.SuppressionAnalysisContext");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -36,6 +36,24 @@ public readonly struct SuppressionAnalysisContextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(SuppressionAnalysisContextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(SuppressionAnalysisContextWrapper left, SuppressionAnalysisContextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(SuppressionAnalysisContextWrapper left, SuppressionAnalysisContextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
     public Compilation Compilation => CompilationAccessor(wrappedInstance);

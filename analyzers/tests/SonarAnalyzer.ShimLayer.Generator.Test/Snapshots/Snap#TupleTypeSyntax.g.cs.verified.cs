@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct TupleTypeSyntaxWrapper
+public readonly struct TupleTypeSyntaxWrapper : IWrapper, IEquatable<TupleTypeSyntaxWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.TupleTypeSyntax");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -44,6 +44,24 @@ public readonly struct TupleTypeSyntaxWrapper
         this.wrappedInstance = wrappedInstance;
 
     public TypeSyntax WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(TupleTypeSyntaxWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(TupleTypeSyntaxWrapper left, TupleTypeSyntaxWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(TupleTypeSyntaxWrapper left, TupleTypeSyntaxWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;
     public bool ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;

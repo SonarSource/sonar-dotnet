@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorDriverRunResultWrapper
+public readonly struct GeneratorDriverRunResultWrapper : IWrapper, IEquatable<GeneratorDriverRunResultWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorDriverRunResult");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -31,6 +31,24 @@ public readonly struct GeneratorDriverRunResultWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratorDriverRunResultWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratorDriverRunResultWrapper left, GeneratorDriverRunResultWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratorDriverRunResultWrapper left, GeneratorDriverRunResultWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<Diagnostic> Diagnostics => (ImmutableArray<Diagnostic>)DiagnosticsAccessor(wrappedInstance);
     public ImmutableArray<SyntaxTree> GeneratedTrees => (ImmutableArray<SyntaxTree>)GeneratedTreesAccessor(wrappedInstance);

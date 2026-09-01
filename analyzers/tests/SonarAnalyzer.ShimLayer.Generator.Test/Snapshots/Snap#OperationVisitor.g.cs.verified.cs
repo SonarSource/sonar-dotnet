@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct OperationVisitorWrapper
+public readonly struct OperationVisitorWrapper : IWrapper, IEquatable<OperationVisitorWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.OperationVisitor");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -158,6 +158,24 @@ public readonly struct OperationVisitorWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(OperationVisitorWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(OperationVisitorWrapper left, OperationVisitorWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(OperationVisitorWrapper left, OperationVisitorWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public void DefaultVisit(IOperation operation) => DefaultVisitAccessor(wrappedInstance, operation);
     public void Visit(IOperation operation) => VisitAccessor(wrappedInstance, operation);

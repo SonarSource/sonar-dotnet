@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct ICaughtExceptionOperationWrapper : IOperationWrapper
+public readonly struct ICaughtExceptionOperationWrapper : IOperationWrapper, IWrapper, IEquatable<ICaughtExceptionOperationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.FlowAnalysis.ICaughtExceptionOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -36,6 +36,24 @@ public readonly struct ICaughtExceptionOperationWrapper : IOperationWrapper
         this.wrappedInstance = wrappedInstance;
 
     public IOperation WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(ICaughtExceptionOperationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(ICaughtExceptionOperationWrapper left, ICaughtExceptionOperationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(ICaughtExceptionOperationWrapper left, ICaughtExceptionOperationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public Optional<object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;

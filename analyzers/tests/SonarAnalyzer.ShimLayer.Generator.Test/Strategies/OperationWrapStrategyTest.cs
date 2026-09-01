@@ -51,7 +51,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct IFieldInitializerOperationWrapper : IOperationWrapper
+            public readonly struct IFieldInitializerOperationWrapper : IOperationWrapper, IWrapper, IEquatable<IFieldInitializerOperationWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IFieldInitializerOperation");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -61,6 +61,24 @@ public class OperationWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(IFieldInitializerOperationWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(IFieldInitializerOperationWrapper left, IFieldInitializerOperationWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(IFieldInitializerOperationWrapper left, IFieldInitializerOperationWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public static IFieldInitializerOperationWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;
@@ -120,7 +138,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct IFieldReferenceOperationWrapper : IOperationWrapper
+            public readonly struct IFieldReferenceOperationWrapper : IOperationWrapper, IWrapper, IEquatable<IFieldReferenceOperationWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IFieldReferenceOperation");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -130,6 +148,24 @@ public class OperationWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(IFieldReferenceOperationWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(IFieldReferenceOperationWrapper left, IFieldReferenceOperationWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(IFieldReferenceOperationWrapper left, IFieldReferenceOperationWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public static IFieldReferenceOperationWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;
@@ -193,7 +229,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct ITupleOperationWrapper : IOperationWrapper
+            public readonly struct ITupleOperationWrapper : IOperationWrapper, IWrapper, IEquatable<ITupleOperationWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.ITupleOperation");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -207,6 +243,24 @@ public class OperationWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(ITupleOperationWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(ITupleOperationWrapper left, ITupleOperationWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(ITupleOperationWrapper left, ITupleOperationWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public ITypeSymbol Type => wrappedInstance.Type;
 
@@ -274,7 +328,7 @@ public class OperationWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct ControlFlowGraphWrapper : IOperationWrapper
+            public readonly struct ControlFlowGraphWrapper : IOperationWrapper, IWrapper, IEquatable<ControlFlowGraphWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -287,6 +341,24 @@ public class OperationWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public IOperation WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(ControlFlowGraphWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(ControlFlowGraphWrapper left, ControlFlowGraphWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(ControlFlowGraphWrapper left, ControlFlowGraphWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public static ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor(attribute, cancellationToken));
                 public static ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload2(body, cancellationToken));

@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IFunctionPointerTypeSymbolWrapper
+public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<IFunctionPointerTypeSymbolWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.IFunctionPointerTypeSymbol");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -93,6 +93,24 @@ public readonly struct IFunctionPointerTypeSymbolWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IFunctionPointerTypeSymbolWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IFunctionPointerTypeSymbolWrapper left, IFunctionPointerTypeSymbolWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IFunctionPointerTypeSymbolWrapper left, IFunctionPointerTypeSymbolWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<INamedTypeSymbol> AllInterfaces => (ImmutableArray<INamedTypeSymbol>)AllInterfacesAccessor(wrappedInstance);
     public INamedTypeSymbol BaseType => BaseTypeAccessor(wrappedInstance);

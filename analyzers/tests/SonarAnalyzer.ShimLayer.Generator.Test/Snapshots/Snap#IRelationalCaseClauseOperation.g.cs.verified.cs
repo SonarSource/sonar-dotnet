@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IRelationalCaseClauseOperationWrapper : IOperationWrapper
+public readonly struct IRelationalCaseClauseOperationWrapper : IOperationWrapper, IWrapper, IEquatable<IRelationalCaseClauseOperationWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.IRelationalCaseClauseOperation");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -40,6 +40,24 @@ public readonly struct IRelationalCaseClauseOperationWrapper : IOperationWrapper
         this.wrappedInstance = wrappedInstance;
 
     public IOperation WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IRelationalCaseClauseOperationWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IRelationalCaseClauseOperationWrapper left, IRelationalCaseClauseOperationWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IRelationalCaseClauseOperationWrapper left, IRelationalCaseClauseOperationWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public Optional<object> ConstantValue => wrappedInstance.ConstantValue;
     public OperationKind Kind => wrappedInstance.Kind;

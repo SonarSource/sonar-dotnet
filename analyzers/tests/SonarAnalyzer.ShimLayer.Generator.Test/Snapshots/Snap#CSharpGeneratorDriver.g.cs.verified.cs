@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct CSharpGeneratorDriverWrapper
+public readonly struct CSharpGeneratorDriverWrapper : IWrapper, IEquatable<CSharpGeneratorDriverWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.CSharpGeneratorDriver");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -43,6 +43,24 @@ public readonly struct CSharpGeneratorDriverWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(CSharpGeneratorDriverWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public GeneratorDriverWrapper AddAdditionalTexts(ImmutableArray<AdditionalText> additionalTexts) => GeneratorDriverWrapper.From(AddAdditionalTextsAccessor(wrappedInstance, additionalTexts));
     public static CSharpGeneratorDriverWrapper Create(IIncrementalGeneratorWrapper[] incrementalGenerators) => CSharpGeneratorDriverWrapper.From(CreateAccessor(incrementalGenerators));

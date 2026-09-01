@@ -1,4 +1,4 @@
-﻿/*
+/*
  * SonarAnalyzer for .NET
  * Copyright (C) SonarSource Sàrl
  * mailto:info AT sonarsource DOT com
@@ -15,17 +15,9 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
+namespace SonarAnalyzer.ShimLayer;
 
-public class OperationWrapStrategy : InterfaceWrapStrategy
+public interface IWrapper
 {
-    protected override string BaseTypeSnippet => $"IOperationWrapper, {base.BaseTypeSnippet}";
-    protected override string FromTypeName => "IOperation";
-
-    protected override string ConversionSnippet => $"""
-            public static {ReturnTypeSnippet}? FromOrDefault(IOperation instance) =>
-                IsInstance(instance) ? From(instance) : null;
-        """;
-
-    public OperationWrapStrategy(Type latest, MemberDescriptor[] members) : base(latest, typeof(IOperation), members) { }
+    object WrappedInstance { get; }
 }

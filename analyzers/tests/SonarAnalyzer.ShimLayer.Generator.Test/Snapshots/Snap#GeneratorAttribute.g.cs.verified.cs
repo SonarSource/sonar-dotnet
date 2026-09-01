@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorAttributeWrapper
+public readonly struct GeneratorAttributeWrapper : IWrapper, IEquatable<GeneratorAttributeWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorAttribute");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -34,6 +34,24 @@ public readonly struct GeneratorAttributeWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratorAttributeWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratorAttributeWrapper left, GeneratorAttributeWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratorAttributeWrapper left, GeneratorAttributeWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public string[] Languages => (string[])LanguagesAccessor(wrappedInstance);
     public object TypeId => (object)TypeIdAccessor(wrappedInstance);

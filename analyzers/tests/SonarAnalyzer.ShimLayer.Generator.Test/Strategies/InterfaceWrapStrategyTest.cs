@@ -52,7 +52,7 @@ public class InterfaceWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct IDiscardSymbolWrapper
+            public readonly struct IDiscardSymbolWrapper : IWrapper, IEquatable<IDiscardSymbolWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.IDiscardSymbol");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -64,6 +64,24 @@ public class InterfaceWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public Object WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(IDiscardSymbolWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(IDiscardSymbolWrapper left, IDiscardSymbolWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(IDiscardSymbolWrapper left, IDiscardSymbolWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public ITypeSymbol Type => (ITypeSymbol)TypeAccessor(wrappedInstance);
 

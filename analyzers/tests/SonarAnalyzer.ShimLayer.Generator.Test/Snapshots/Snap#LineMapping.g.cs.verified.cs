@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct LineMappingWrapper
+public readonly struct LineMappingWrapper : IWrapper, IEquatable<LineMappingWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.LineMapping");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -33,6 +33,24 @@ public readonly struct LineMappingWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(LineMappingWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(LineMappingWrapper left, LineMappingWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(LineMappingWrapper left, LineMappingWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public Nullable<int> CharacterOffset => (Nullable<int>)CharacterOffsetAccessor(wrappedInstance);
     public bool IsHidden => (bool)IsHiddenAccessor(wrappedInstance);

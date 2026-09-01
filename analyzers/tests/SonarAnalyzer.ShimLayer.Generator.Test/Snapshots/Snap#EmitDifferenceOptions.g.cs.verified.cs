@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct EmitDifferenceOptionsWrapper
+public readonly struct EmitDifferenceOptionsWrapper : IWrapper, IEquatable<EmitDifferenceOptionsWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Emit.EmitDifferenceOptions");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -31,6 +31,24 @@ public readonly struct EmitDifferenceOptionsWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(EmitDifferenceOptionsWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(EmitDifferenceOptionsWrapper left, EmitDifferenceOptionsWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(EmitDifferenceOptionsWrapper left, EmitDifferenceOptionsWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public bool EmitFieldRva => (bool)EmitFieldRvaAccessor(wrappedInstance);
     public bool MethodImplEntriesSupported => (bool)MethodImplEntriesSupportedAccessor(wrappedInstance);

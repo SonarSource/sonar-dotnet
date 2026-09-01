@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct RecordDeclarationSyntaxWrapper
+public readonly struct RecordDeclarationSyntaxWrapper : IWrapper, IEquatable<RecordDeclarationSyntaxWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.RecordDeclarationSyntax");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -56,6 +56,24 @@ public readonly struct RecordDeclarationSyntaxWrapper
         this.wrappedInstance = wrappedInstance;
 
     public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(RecordDeclarationSyntaxWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(RecordDeclarationSyntaxWrapper left, RecordDeclarationSyntaxWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(RecordDeclarationSyntaxWrapper left, RecordDeclarationSyntaxWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public int Arity => wrappedInstance.Arity;
     public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;

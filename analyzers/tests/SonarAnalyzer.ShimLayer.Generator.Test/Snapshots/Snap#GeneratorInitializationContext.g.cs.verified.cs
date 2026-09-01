@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorInitializationContextWrapper
+public readonly struct GeneratorInitializationContextWrapper : IWrapper, IEquatable<GeneratorInitializationContextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorInitializationContext");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -33,6 +33,24 @@ public readonly struct GeneratorInitializationContextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratorInitializationContextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratorInitializationContextWrapper left, GeneratorInitializationContextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratorInitializationContextWrapper left, GeneratorInitializationContextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
 

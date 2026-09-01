@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct HostOutputProductionContextWrapper
+public readonly struct HostOutputProductionContextWrapper : IWrapper, IEquatable<HostOutputProductionContextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.HostOutputProductionContext");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -32,6 +32,24 @@ public readonly struct HostOutputProductionContextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(HostOutputProductionContextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(HostOutputProductionContextWrapper left, HostOutputProductionContextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(HostOutputProductionContextWrapper left, HostOutputProductionContextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
 

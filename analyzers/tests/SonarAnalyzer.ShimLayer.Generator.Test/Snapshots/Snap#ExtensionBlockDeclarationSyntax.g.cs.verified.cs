@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct ExtensionBlockDeclarationSyntaxWrapper
+public readonly struct ExtensionBlockDeclarationSyntaxWrapper : IWrapper, IEquatable<ExtensionBlockDeclarationSyntaxWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.ExtensionBlockDeclarationSyntax");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -53,6 +53,24 @@ public readonly struct ExtensionBlockDeclarationSyntaxWrapper
         this.wrappedInstance = wrappedInstance;
 
     public TypeDeclarationSyntax WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(ExtensionBlockDeclarationSyntaxWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(ExtensionBlockDeclarationSyntaxWrapper left, ExtensionBlockDeclarationSyntaxWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(ExtensionBlockDeclarationSyntaxWrapper left, ExtensionBlockDeclarationSyntaxWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public int Arity => wrappedInstance.Arity;
     public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;

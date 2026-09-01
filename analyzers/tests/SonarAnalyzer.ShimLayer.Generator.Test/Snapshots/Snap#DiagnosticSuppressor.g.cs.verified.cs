@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct DiagnosticSuppressorWrapper
+public readonly struct DiagnosticSuppressorWrapper : IWrapper, IEquatable<DiagnosticSuppressorWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Diagnostics.DiagnosticSuppressor");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -30,6 +30,24 @@ public readonly struct DiagnosticSuppressorWrapper
         this.wrappedInstance = wrappedInstance;
 
     public DiagnosticAnalyzer WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(DiagnosticSuppressorWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(DiagnosticSuppressorWrapper left, DiagnosticSuppressorWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(DiagnosticSuppressorWrapper left, DiagnosticSuppressorWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => wrappedInstance.SupportedDiagnostics;
 

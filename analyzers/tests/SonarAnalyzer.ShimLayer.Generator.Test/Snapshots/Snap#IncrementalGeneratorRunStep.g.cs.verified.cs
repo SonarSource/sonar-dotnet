@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IncrementalGeneratorRunStepWrapper
+public readonly struct IncrementalGeneratorRunStepWrapper : IWrapper, IEquatable<IncrementalGeneratorRunStepWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.IncrementalGeneratorRunStep");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -32,6 +32,24 @@ public readonly struct IncrementalGeneratorRunStepWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IncrementalGeneratorRunStepWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IncrementalGeneratorRunStepWrapper left, IncrementalGeneratorRunStepWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IncrementalGeneratorRunStepWrapper left, IncrementalGeneratorRunStepWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public TimeSpan ElapsedTime => (TimeSpan)ElapsedTimeAccessor(wrappedInstance);
     public string Name => (string)NameAccessor(wrappedInstance);

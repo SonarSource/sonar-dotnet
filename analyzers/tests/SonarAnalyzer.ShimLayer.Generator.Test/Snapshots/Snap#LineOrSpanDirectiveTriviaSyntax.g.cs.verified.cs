@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct LineOrSpanDirectiveTriviaSyntaxWrapper
+public readonly struct LineOrSpanDirectiveTriviaSyntaxWrapper : IWrapper, IEquatable<LineOrSpanDirectiveTriviaSyntaxWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.LineOrSpanDirectiveTriviaSyntax", "Microsoft.CodeAnalysis.CSharp.Syntax.LineDirectiveTriviaSyntax");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -38,6 +38,24 @@ public readonly struct LineOrSpanDirectiveTriviaSyntaxWrapper
         this.wrappedInstance = wrappedInstance;
 
     public DirectiveTriviaSyntax WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(LineOrSpanDirectiveTriviaSyntaxWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(LineOrSpanDirectiveTriviaSyntaxWrapper left, LineOrSpanDirectiveTriviaSyntaxWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(LineOrSpanDirectiveTriviaSyntaxWrapper left, LineOrSpanDirectiveTriviaSyntaxWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;
     public bool ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;

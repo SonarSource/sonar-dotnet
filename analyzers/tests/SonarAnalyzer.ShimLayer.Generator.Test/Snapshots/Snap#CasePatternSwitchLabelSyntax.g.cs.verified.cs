@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct CasePatternSwitchLabelSyntaxWrapper
+public readonly struct CasePatternSwitchLabelSyntaxWrapper : IWrapper, IEquatable<CasePatternSwitchLabelSyntaxWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.CasePatternSwitchLabelSyntax");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -39,6 +39,24 @@ public readonly struct CasePatternSwitchLabelSyntaxWrapper
         this.wrappedInstance = wrappedInstance;
 
     public SwitchLabelSyntax WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(CasePatternSwitchLabelSyntaxWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(CasePatternSwitchLabelSyntaxWrapper left, CasePatternSwitchLabelSyntaxWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(CasePatternSwitchLabelSyntaxWrapper left, CasePatternSwitchLabelSyntaxWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public SyntaxToken ColonToken => wrappedInstance.ColonToken;
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;

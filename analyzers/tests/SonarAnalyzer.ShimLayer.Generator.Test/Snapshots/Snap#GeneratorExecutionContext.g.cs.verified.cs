@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorExecutionContextWrapper
+public readonly struct GeneratorExecutionContextWrapper : IWrapper, IEquatable<GeneratorExecutionContextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorExecutionContext");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -40,6 +40,24 @@ public readonly struct GeneratorExecutionContextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratorExecutionContextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratorExecutionContextWrapper left, GeneratorExecutionContextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratorExecutionContextWrapper left, GeneratorExecutionContextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<AdditionalText> AdditionalFiles => (ImmutableArray<AdditionalText>)AdditionalFilesAccessor(wrappedInstance);
     public AnalyzerConfigOptionsProviderWrapper AnalyzerConfigOptions => AnalyzerConfigOptionsProviderWrapper.From(AnalyzerConfigOptionsAccessor(wrappedInstance));

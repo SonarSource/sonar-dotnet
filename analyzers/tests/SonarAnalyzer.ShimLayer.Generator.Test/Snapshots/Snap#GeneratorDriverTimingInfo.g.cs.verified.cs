@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorDriverTimingInfoWrapper
+public readonly struct GeneratorDriverTimingInfoWrapper : IWrapper, IEquatable<GeneratorDriverTimingInfoWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorDriverTimingInfo");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -30,6 +30,24 @@ public readonly struct GeneratorDriverTimingInfoWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratorDriverTimingInfoWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratorDriverTimingInfoWrapper left, GeneratorDriverTimingInfoWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratorDriverTimingInfoWrapper left, GeneratorDriverTimingInfoWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public TimeSpan ElapsedTime => (TimeSpan)ElapsedTimeAccessor(wrappedInstance);
 

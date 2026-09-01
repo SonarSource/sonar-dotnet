@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct ImportedNamespaceOrTypeWrapper
+public readonly struct ImportedNamespaceOrTypeWrapper : IWrapper, IEquatable<ImportedNamespaceOrTypeWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.ImportedNamespaceOrType");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -31,6 +31,24 @@ public readonly struct ImportedNamespaceOrTypeWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(ImportedNamespaceOrTypeWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(ImportedNamespaceOrTypeWrapper left, ImportedNamespaceOrTypeWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(ImportedNamespaceOrTypeWrapper left, ImportedNamespaceOrTypeWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public SyntaxReference DeclaringSyntaxReference => (SyntaxReference)DeclaringSyntaxReferenceAccessor(wrappedInstance);
     public INamespaceOrTypeSymbol NamespaceOrType => NamespaceOrTypeAccessor(wrappedInstance);

@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratedSourceResultWrapper
+public readonly struct GeneratedSourceResultWrapper : IWrapper, IEquatable<GeneratedSourceResultWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratedSourceResult");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -32,6 +32,24 @@ public readonly struct GeneratedSourceResultWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratedSourceResultWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratedSourceResultWrapper left, GeneratedSourceResultWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratedSourceResultWrapper left, GeneratedSourceResultWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public string HintName => (string)HintNameAccessor(wrappedInstance);
     public SourceText SourceText => SourceTextAccessor(wrappedInstance);

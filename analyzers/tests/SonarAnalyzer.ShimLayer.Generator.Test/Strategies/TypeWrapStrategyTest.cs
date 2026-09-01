@@ -51,7 +51,7 @@ public class TypeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct CSharpGeneratorDriverWrapper
+            public readonly struct CSharpGeneratorDriverWrapper : IWrapper, IEquatable<CSharpGeneratorDriverWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.CSharpGeneratorDriver");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -61,6 +61,24 @@ public class TypeWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public GeneratorDriver WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(CSharpGeneratorDriverWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public static CSharpGeneratorDriverWrapper From(GeneratorDriver instance)
                 {
@@ -116,7 +134,7 @@ public class TypeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct CSharpGeneratorDriverWrapper
+            public readonly struct CSharpGeneratorDriverWrapper : IWrapper, IEquatable<CSharpGeneratorDriverWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.CSharpGeneratorDriver");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -126,6 +144,24 @@ public class TypeWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public GeneratorDriver WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(CSharpGeneratorDriverWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public static CSharpGeneratorDriverWrapper From(GeneratorDriver instance)
                 {
@@ -190,7 +226,7 @@ public class TypeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct CSharpGeneratorDriverWrapper
+            public readonly struct CSharpGeneratorDriverWrapper : IWrapper, IEquatable<CSharpGeneratorDriverWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.CSharpGeneratorDriver");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -208,6 +244,24 @@ public class TypeWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public GeneratorDriver WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(CSharpGeneratorDriverWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(CSharpGeneratorDriverWrapper left, CSharpGeneratorDriverWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public static CSharpCommandLineParser Script => GeneratorDriver.Script;
 
@@ -272,7 +326,7 @@ public class TypeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct AnalyzerConfigOptionsWrapper
+            public readonly struct AnalyzerConfigOptionsWrapper : IWrapper, IEquatable<AnalyzerConfigOptionsWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -282,6 +336,24 @@ public class TypeWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public Object WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(AnalyzerConfigOptionsWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(AnalyzerConfigOptionsWrapper left, AnalyzerConfigOptionsWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(AnalyzerConfigOptionsWrapper left, AnalyzerConfigOptionsWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public bool TryGetValue(string key, out string value) => wrappedInstance.TryGetValue(key, out value);
 
@@ -337,7 +409,7 @@ public class TypeWrapStrategyTest
 
             namespace SonarAnalyzer.ShimLayer;
 
-            public readonly struct AnalyzerConfigOptionsWrapper
+            public readonly struct AnalyzerConfigOptionsWrapper : IWrapper, IEquatable<AnalyzerConfigOptionsWrapper>
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Diagnostics.AnalyzerConfigOptions");
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -350,6 +422,24 @@ public class TypeWrapStrategyTest
                     this.wrappedInstance = wrappedInstance;
 
                 public Object WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals(AnalyzerConfigOptionsWrapper other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==(AnalyzerConfigOptionsWrapper left, AnalyzerConfigOptionsWrapper right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=(AnalyzerConfigOptionsWrapper left, AnalyzerConfigOptionsWrapper right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
                 public bool TryGetValue(string key, out string value) => (bool)TryGetValueAccessor(wrappedInstance, key, out value);
 

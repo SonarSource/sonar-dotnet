@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct CommandLineResourceWrapper
+public readonly struct CommandLineResourceWrapper : IWrapper, IEquatable<CommandLineResourceWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CommandLineResource");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -35,6 +35,24 @@ public readonly struct CommandLineResourceWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(CommandLineResourceWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(CommandLineResourceWrapper left, CommandLineResourceWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(CommandLineResourceWrapper left, CommandLineResourceWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public string FullPath => (string)FullPathAccessor(wrappedInstance);
     public bool IsEmbedded => (bool)IsEmbeddedAccessor(wrappedInstance);

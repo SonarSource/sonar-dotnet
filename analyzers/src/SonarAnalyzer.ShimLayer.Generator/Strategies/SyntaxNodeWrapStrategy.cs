@@ -19,7 +19,6 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public class SyntaxNodeWrapStrategy : WrapStrategy
 {
-    protected override string BaseTypeSnippet => null;
     protected override string FromTypeName => "SyntaxNode";
 
     protected override string ConversionSnippet => $"""

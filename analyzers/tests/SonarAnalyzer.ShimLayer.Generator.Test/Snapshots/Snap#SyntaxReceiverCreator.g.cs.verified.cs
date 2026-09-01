@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct SyntaxReceiverCreatorWrapper
+public readonly struct SyntaxReceiverCreatorWrapper : IWrapper, IEquatable<SyntaxReceiverCreatorWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.SyntaxReceiverCreator");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -39,6 +39,24 @@ public readonly struct SyntaxReceiverCreatorWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(SyntaxReceiverCreatorWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(SyntaxReceiverCreatorWrapper left, SyntaxReceiverCreatorWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(SyntaxReceiverCreatorWrapper left, SyntaxReceiverCreatorWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public MethodInfo Method => (MethodInfo)MethodAccessor(wrappedInstance);
     public object Target => (object)TargetAccessor(wrappedInstance);

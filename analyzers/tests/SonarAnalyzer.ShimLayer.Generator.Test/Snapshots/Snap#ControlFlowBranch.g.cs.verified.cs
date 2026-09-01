@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct ControlFlowBranchWrapper
+public readonly struct ControlFlowBranchWrapper : IWrapper, IEquatable<ControlFlowBranchWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowBranch");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -33,6 +33,24 @@ public readonly struct ControlFlowBranchWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(ControlFlowBranchWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(ControlFlowBranchWrapper left, ControlFlowBranchWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(ControlFlowBranchWrapper left, ControlFlowBranchWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public BasicBlockWrapper Destination => BasicBlockWrapper.From(DestinationAccessor(wrappedInstance));
     public bool IsConditionalSuccessor => (bool)IsConditionalSuccessorAccessor(wrappedInstance);

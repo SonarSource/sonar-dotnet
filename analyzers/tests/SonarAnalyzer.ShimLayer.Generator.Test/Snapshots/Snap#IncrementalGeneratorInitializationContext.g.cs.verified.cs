@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct IncrementalGeneratorInitializationContextWrapper
+public readonly struct IncrementalGeneratorInitializationContextWrapper : IWrapper, IEquatable<IncrementalGeneratorInitializationContextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.IncrementalGeneratorInitializationContext");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -30,6 +30,24 @@ public readonly struct IncrementalGeneratorInitializationContextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(IncrementalGeneratorInitializationContextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(IncrementalGeneratorInitializationContextWrapper left, IncrementalGeneratorInitializationContextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(IncrementalGeneratorInitializationContextWrapper left, IncrementalGeneratorInitializationContextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public SyntaxValueProviderWrapper SyntaxProvider => SyntaxValueProviderWrapper.From(SyntaxProviderAccessor(wrappedInstance));
 

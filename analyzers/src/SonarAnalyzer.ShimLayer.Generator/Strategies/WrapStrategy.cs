@@ -19,7 +19,6 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 
 public abstract class WrapStrategy : MemberStrategy
 {
-    protected abstract string BaseTypeSnippet { get; }
     protected abstract string FromTypeName { get; }
     protected abstract string ConversionSnippet { get; }
 
@@ -27,6 +26,7 @@ public abstract class WrapStrategy : MemberStrategy
     public Type FallbackBaseType { get; }
     public override string ReturnTypeSnippet => $"{Latest.Name}Wrapper";
     public override string CompiletimeTypeSnippet => BaseType.Name;
+    protected virtual string BaseTypeSnippet => $"IWrapper, IEquatable<{ReturnTypeSnippet}>";
 
     protected WrapStrategy(Type latest, Type baseType, Type fallbackBaseType, MemberDescriptor[] members) : base(latest, members)
     {
@@ -43,7 +43,7 @@ public abstract class WrapStrategy : MemberStrategy
         var wrap = WrapMembers(model);
         return $$"""
             {{Preamble()}}
-            public readonly struct {{ReturnTypeSnippet}}{{(BaseTypeSnippet is null ? null : $" : {BaseTypeSnippet}")}}
+            public readonly struct {{ReturnTypeSnippet}} : {{BaseTypeSnippet}}
             {
                 private static readonly Type WrappedType = TypeRegister.LatestType("{{Latest.FullName}}"{{FallbackBaseTypeSnippet()}});
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -57,6 +57,24 @@ public abstract class WrapStrategy : MemberStrategy
                     this.wrappedInstance = wrappedInstance;
 
                 public {{CompiletimeTypeSnippet}} WrappedInstance => wrappedInstance;
+
+                object IWrapper.WrappedInstance => wrappedInstance;
+
+                public override int GetHashCode() =>
+                    wrappedInstance?.GetHashCode() ?? 0;
+
+                public override bool Equals(object obj) =>
+                    (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+                    || Equals(wrappedInstance, obj);
+
+                public bool Equals({{ReturnTypeSnippet}} other) =>
+                    Equals(wrappedInstance, other.wrappedInstance);
+
+                public static bool operator ==({{ReturnTypeSnippet}} left, {{ReturnTypeSnippet}} right) =>
+                    Equals(left.wrappedInstance, right.wrappedInstance);
+
+                public static bool operator !=({{ReturnTypeSnippet}} left, {{ReturnTypeSnippet}} right) =>
+                    !Equals(left.wrappedInstance, right.wrappedInstance);
 
             {{JoinLines(passthrough.Properties.Select(x => x.MemberDeclaration(4)))}}
 

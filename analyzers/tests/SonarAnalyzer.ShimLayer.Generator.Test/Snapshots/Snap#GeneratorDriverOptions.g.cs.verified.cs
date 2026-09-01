@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct GeneratorDriverOptionsWrapper
+public readonly struct GeneratorDriverOptionsWrapper : IWrapper, IEquatable<GeneratorDriverOptionsWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorDriverOptions");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -30,6 +30,24 @@ public readonly struct GeneratorDriverOptionsWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(GeneratorDriverOptionsWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(GeneratorDriverOptionsWrapper left, GeneratorDriverOptionsWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(GeneratorDriverOptionsWrapper left, GeneratorDriverOptionsWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public string BaseDirectory => (string)BaseDirectoryAccessor(wrappedInstance);
 

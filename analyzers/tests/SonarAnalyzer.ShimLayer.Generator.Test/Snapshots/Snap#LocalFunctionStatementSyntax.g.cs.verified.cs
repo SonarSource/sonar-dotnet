@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct LocalFunctionStatementSyntaxWrapper
+public readonly struct LocalFunctionStatementSyntaxWrapper : IWrapper, IEquatable<LocalFunctionStatementSyntaxWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.CSharp.Syntax.LocalFunctionStatementSyntax");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -61,6 +61,24 @@ public readonly struct LocalFunctionStatementSyntaxWrapper
         this.wrappedInstance = wrappedInstance;
 
     public StatementSyntax WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(LocalFunctionStatementSyntaxWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(LocalFunctionStatementSyntaxWrapper left, LocalFunctionStatementSyntaxWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(LocalFunctionStatementSyntaxWrapper left, LocalFunctionStatementSyntaxWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public bool ContainsAnnotations => wrappedInstance.ContainsAnnotations;
     public bool ContainsDiagnostics => wrappedInstance.ContainsDiagnostics;

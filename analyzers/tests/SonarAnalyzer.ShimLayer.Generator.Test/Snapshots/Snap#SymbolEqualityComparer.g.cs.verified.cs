@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct SymbolEqualityComparerWrapper
+public readonly struct SymbolEqualityComparerWrapper : IWrapper, IEquatable<SymbolEqualityComparerWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.SymbolEqualityComparer");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -28,6 +28,24 @@ public readonly struct SymbolEqualityComparerWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(SymbolEqualityComparerWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(SymbolEqualityComparerWrapper left, SymbolEqualityComparerWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(SymbolEqualityComparerWrapper left, SymbolEqualityComparerWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public static SymbolEqualityComparerWrapper From(Object instance)
     {

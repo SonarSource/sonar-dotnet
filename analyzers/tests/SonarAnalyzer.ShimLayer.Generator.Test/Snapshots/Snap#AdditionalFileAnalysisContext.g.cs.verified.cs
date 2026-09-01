@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct AdditionalFileAnalysisContextWrapper
+public readonly struct AdditionalFileAnalysisContextWrapper : IWrapper, IEquatable<AdditionalFileAnalysisContextWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Diagnostics.AdditionalFileAnalysisContext");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -36,6 +36,24 @@ public readonly struct AdditionalFileAnalysisContextWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(AdditionalFileAnalysisContextWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(AdditionalFileAnalysisContextWrapper left, AdditionalFileAnalysisContextWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(AdditionalFileAnalysisContextWrapper left, AdditionalFileAnalysisContextWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public AdditionalText AdditionalFile => (AdditionalText)AdditionalFileAccessor(wrappedInstance);
     public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);

@@ -18,7 +18,7 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public readonly struct CommonConversionWrapper
+public readonly struct CommonConversionWrapper : IWrapper, IEquatable<CommonConversionWrapper>
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.Operations.CommonConversion");
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
@@ -38,6 +38,24 @@ public readonly struct CommonConversionWrapper
         this.wrappedInstance = wrappedInstance;
 
     public Object WrappedInstance => wrappedInstance;
+
+    object IWrapper.WrappedInstance => wrappedInstance;
+
+    public override int GetHashCode() =>
+        wrappedInstance?.GetHashCode() ?? 0;
+
+    public override bool Equals(object obj) =>
+        (obj is IWrapper wrapper && Equals(wrappedInstance, wrapper.WrappedInstance))
+        || Equals(wrappedInstance, obj);
+
+    public bool Equals(CommonConversionWrapper other) =>
+        Equals(wrappedInstance, other.wrappedInstance);
+
+    public static bool operator ==(CommonConversionWrapper left, CommonConversionWrapper right) =>
+        Equals(left.wrappedInstance, right.wrappedInstance);
+
+    public static bool operator !=(CommonConversionWrapper left, CommonConversionWrapper right) =>
+        !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
     public bool Exists => (bool)ExistsAccessor(wrappedInstance);
