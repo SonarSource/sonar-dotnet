@@ -15,35 +15,39 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
+namespace SonarAnalyzer.VisualBasic.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.VisualBasic)]
+public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.VisualBasic)]
-    public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
+    protected override ILanguageFacade<SyntaxKind> Language => VisualBasicFacade.Instance;
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-        {
-            SyntaxKind.ClassBlock,
-            SyntaxKind.StructureBlock
-        };
+    protected override SyntaxKind[] SyntaxKinds { get; } =
+    [
+        SyntaxKind.ClassBlock,
+        SyntaxKind.StructureBlock
+    ];
 
-        protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()
-                ?.BlockStatement?.ParameterList
-                ?.Parameters
-                .Any(p => p.Identifier.Identifier.ValueText.Equals(literalExpression.Token.ValueText, StringComparison.OrdinalIgnoreCase))
-                ?? false;
+    protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
+        literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()
+            ?.BlockStatement?.ParameterList
+            ?.Parameters
+            .Any(x => x.Identifier.Identifier.ValueText.Equals(literalExpression.Token.ValueText, StringComparison.OrdinalIgnoreCase))
+        ?? false;
 
-        protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
-            context.Node.HasAncestor(SyntaxKind.ClassBlock, SyntaxKind.StructureBlock);
+    protected override bool IsInModelConfigurationContext(LiteralExpressionSyntax literalExpression, SemanticModel model) =>
+        literalExpression.FirstAncestorOrSelf<MethodBlockBaseSyntax>()?.BlockStatement is { } methodStatement
+        && model.GetDeclaredSymbol(methodStatement) is IMethodSymbol methodSymbol
+        && IsModelConfigurationMethod(methodSymbol);
 
-        protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
-            node.DescendantNodes(n => !n.IsKind(SyntaxKind.AttributeList))
-                .Where(les => les.IsKind(SyntaxKind.StringLiteralExpression))
-                .Cast<LiteralExpressionSyntax>();
+    protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
+        context.Node.HasAncestor(SyntaxKind.ClassBlock, SyntaxKind.StructureBlock);
 
-        protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
-            literal.Token;
-    }
+    protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
+        node.DescendantNodes(x => !x.IsKind(SyntaxKind.AttributeList))
+            .Where(x => x.IsKind(SyntaxKind.StringLiteralExpression))
+            .Cast<LiteralExpressionSyntax>();
+
+    protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
+        literal.Token;
 }

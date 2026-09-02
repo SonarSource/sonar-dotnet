@@ -45,6 +45,12 @@ public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiter
     protected StringLiteralShouldNotBeDuplicatedBase() =>
         rule = Language.CreateDescriptor(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
+    protected virtual bool IsInModelConfigurationContext(TLiteralExpressionSyntax literalExpression, SemanticModel model) => false;
+
+    protected static bool IsModelConfigurationMethod(IMethodSymbol method) =>
+        IsDbContextOnModelCreatingOverride(method)
+        || method.IsImplementingInterfaceMember(KnownType.Microsoft_EntityFrameworkCore_IEntityTypeConfiguration_TEntity, "Configure");
+
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
         // Ideally we would like to report at assembly/project level for the primary and all string instances for secondary
         // locations. The problem is that this scenario is not yet supported on SonarQube side.
@@ -61,6 +67,21 @@ public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiter
     protected static bool IsNamedType(SonarSyntaxNodeReportingContext context) =>
         context.ContainingSymbol.Kind == SymbolKind.NamedType;
 
+    private static bool IsDbContextOnModelCreatingOverride(IMethodSymbol method)
+    {
+        while (method.OverriddenMethod is { } overriddenMethod)
+        {
+            if (overriddenMethod.Name == "OnModelCreating"
+                && (overriddenMethod.ContainingType.Is(KnownType.Microsoft_EntityFramework_DbContext)
+                    || overriddenMethod.ContainingType.Is(KnownType.Microsoft_EntityFrameworkCore_DbContext)))
+            {
+                return true;
+            }
+            method = overriddenMethod;
+        }
+        return false;
+    }
+
     private void ReportOnViolation(SonarSyntaxNodeReportingContext context, bool usingDapper)
     {
         if (!IsNamedTypeOrTopLevelMain(context) || IsInnerInstance(context))
@@ -73,6 +94,7 @@ public abstract class StringLiteralShouldNotBeDuplicatedBase<TSyntaxKind, TLiter
             .Where(x => x.literalToken.ValueText is { Length: >= MinimumStringLength }
                         && !IsMatchingMethodParameterName(x.literal)
                         && !IsInEFMigration(x.literal, context.Model)
+                        && !IsInModelConfigurationContext(x.literal, context.Model)
                         && !(usingDapper && x.literalToken.ValueText.StartsWith("@")))
             .GroupBy(x => x.literalToken.ValueText, x => x.literalToken)
             .Where(x => x.Count() > Threshold);

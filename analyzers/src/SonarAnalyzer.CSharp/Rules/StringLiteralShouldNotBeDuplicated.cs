@@ -15,51 +15,55 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class StringLiteralShouldNotBeDuplicated : StringLiteralShouldNotBeDuplicatedBase<SyntaxKind, LiteralExpressionSyntax>
-    {
-        protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
+    private static readonly HashSet<SyntaxKind> TypeDeclarationSyntaxKinds =
+    [
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKindEx.RecordDeclaration,
+        SyntaxKindEx.RecordStructDeclaration
+    ];
 
-        protected override SyntaxKind[] SyntaxKinds { get; } =
-        {
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration,
-            SyntaxKind.CompilationUnit
-        };
+    protected override ILanguageFacade<SyntaxKind> Language => CSharpFacade.Instance;
 
-        private HashSet<SyntaxKind> TypeDeclarationSyntaxKinds { get; } =
-        [
-            SyntaxKind.ClassDeclaration,
-            SyntaxKind.StructDeclaration,
-            SyntaxKindEx.RecordDeclaration,
-            SyntaxKindEx.RecordStructDeclaration
-        ];
+    protected override SyntaxKind[] SyntaxKinds { get; } =
+    [
+        SyntaxKind.ClassDeclaration,
+        SyntaxKind.StructDeclaration,
+        SyntaxKindEx.RecordDeclaration,
+        SyntaxKindEx.RecordStructDeclaration,
+        SyntaxKind.CompilationUnit
+    ];
 
-        protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
-            literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()
-                ?.ParameterList
-                ?.Parameters
-                .Any(p => p.Identifier.ValueText == literalExpression.Token.ValueText)
-            ?? false;
+    protected override bool IsMatchingMethodParameterName(LiteralExpressionSyntax literalExpression) =>
+        literalExpression.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>()
+            ?.ParameterList
+            ?.Parameters
+            .Any(x => x.Identifier.ValueText == literalExpression.Token.ValueText)
+        ?? false;
 
-        protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
-            context.Node.Ancestors().Any(x =>
-                x.IsAnyKind(TypeDeclarationSyntaxKinds)
-                || (x.IsKind(SyntaxKind.CompilationUnit) && x.ChildNodes().Any(y => y.IsKind(SyntaxKind.GlobalStatement))));
+    protected override bool IsInModelConfigurationContext(LiteralExpressionSyntax literalExpression, SemanticModel model) =>
+        literalExpression.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } methodDeclaration
+        && model.GetDeclaredSymbol(methodDeclaration) is { } methodSymbol
+        && IsModelConfigurationMethod(methodSymbol);
 
-        protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
-            node.DescendantNodes(x => !x.IsKind(SyntaxKind.AttributeList))
-                .Where(x => x.IsKind(SyntaxKind.StringLiteralExpression))
-                .Cast<LiteralExpressionSyntax>();
+    protected override bool IsInnerInstance(SonarSyntaxNodeReportingContext context) =>
+        context.Node.Ancestors().Any(x =>
+            x.IsAnyKind(TypeDeclarationSyntaxKinds)
+            || (x.IsKind(SyntaxKind.CompilationUnit) && x.ChildNodes().Any(y => y.IsKind(SyntaxKind.GlobalStatement))));
 
-        protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
-            literal.Token;
+    protected override IEnumerable<LiteralExpressionSyntax> FindLiteralExpressions(SyntaxNode node) =>
+        node.DescendantNodes(x => !x.IsKind(SyntaxKind.AttributeList))
+            .Where(x => x.IsKind(SyntaxKind.StringLiteralExpression))
+            .Cast<LiteralExpressionSyntax>();
 
-        protected override bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeReportingContext context) =>
-            IsNamedType(context) || context.IsTopLevelMain;
-    }
+    protected override SyntaxToken LiteralToken(LiteralExpressionSyntax literal) =>
+        literal.Token;
+
+    protected override bool IsNamedTypeOrTopLevelMain(SonarSyntaxNodeReportingContext context) =>
+        IsNamedType(context) || context.IsTopLevelMain;
 }

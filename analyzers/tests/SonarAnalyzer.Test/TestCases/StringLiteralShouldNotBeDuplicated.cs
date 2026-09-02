@@ -1,5 +1,14 @@
 ﻿using System.Data.Entity.Migrations;
 
+// https://sonarsource.atlassian.net/browse/NET-3281
+public class EfClassicContext : System.Data.Entity.DbContext
+{
+    protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+    {
+        var columnNames = new[] { "ColumnName", "ColumnName", "ColumnName", "ColumnName" }; // Compliant - model configuration
+    }
+}
+
 // https://sonarsource.atlassian.net/browse/NET-2276
 public class EfClassicMigration : DbMigration
 {
@@ -169,4 +178,3 @@ namespace Tests.Diagnostics
         private string b = "crossfile";
     }
 }
-

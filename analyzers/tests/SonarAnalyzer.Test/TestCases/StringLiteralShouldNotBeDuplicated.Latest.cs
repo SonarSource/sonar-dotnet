@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CSharp9
@@ -192,6 +194,150 @@ public class EfCoreMigration : Migration
             name: "IX_CustomerOrders_OldStatus",
             table: "CustomerOrders",
             column: "OldStatus");
+    }
+}
+
+// https://sonarsource.atlassian.net/browse/NET-3281
+namespace EntityFrameworkModelConfiguration
+{
+    public class Entity { }
+
+    public class Context : DbContext
+    {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var columnNames = new[] { "ColumnName", "ColumnName", "ColumnName", "ColumnName" }; // Compliant - model configuration
+            var sharedNames = new[] { "SharedName", "SharedName" }; // Compliant - model configuration
+
+            modelBuilder.Entity<Entity>(builder =>
+            {
+                var lambdaColumnNames = new[] { "LambdaColumn", "LambdaColumn", "LambdaColumn", "LambdaColumn" }; // Compliant - model configuration
+            });
+
+            void ConfigureEntity()
+            {
+                var localFunctionColumnNames = new[] { "LocalColumn", "LocalColumn", "LocalColumn", "LocalColumn" }; // Compliant - model configuration
+            }
+        }
+
+        public void OnModelCreating()
+        {
+            var values = new[]
+            {
+                "NotAnOverride", // Noncompliant {{Define a constant instead of using this literal 'NotAnOverride' 4 times.}}
+                "NotAnOverride", // Secondary
+                "NotAnOverride", // Secondary
+                "NotAnOverride"  // Secondary
+            };
+        }
+
+        public void Other()
+        {
+            var values = new[]
+            {
+                "SharedName", // Noncompliant {{Define a constant instead of using this literal 'SharedName' 4 times.}}
+                "SharedName", // Secondary
+                "SharedName", // Secondary
+                "SharedName"  // Secondary
+            };
+        }
+    }
+
+    public abstract class BaseAppContext : DbContext
+    {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+    }
+
+    public class DerivedAppContext : BaseAppContext
+    {
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var columnNames = new[] { "InheritedColumn", "InheritedColumn", "InheritedColumn", "InheritedColumn" }; // Compliant - model configuration
+        }
+    }
+
+    public class EntityConfiguration : IEntityTypeConfiguration<Entity>
+    {
+        public void Configure(EntityTypeBuilder<Entity> builder)
+        {
+            var columnNames = new[] { "ColumnName", "ColumnName", "ColumnName", "ColumnName" }; // Compliant - model configuration
+        }
+
+        public void Configure(string value)
+        {
+            var values = new[]
+            {
+                "NotInterfaceImplementation", // Noncompliant {{Define a constant instead of using this literal 'NotInterfaceImplementation' 4 times.}}
+                "NotInterfaceImplementation", // Secondary
+                "NotInterfaceImplementation", // Secondary
+                "NotInterfaceImplementation"  // Secondary
+            };
+        }
+    }
+
+    public class ExplicitEntityConfiguration : IEntityTypeConfiguration<Entity>
+    {
+        void IEntityTypeConfiguration<Entity>.Configure(EntityTypeBuilder<Entity> builder)
+        {
+            var columnNames = new[] { "ExplicitColumn", "ExplicitColumn", "ExplicitColumn", "ExplicitColumn" }; // Compliant - model configuration
+        }
+    }
+
+    public abstract class NotADbContext
+    {
+        protected abstract void OnModelCreating(object modelBuilder);
+    }
+
+    public class FakeContext : NotADbContext
+    {
+        protected override void OnModelCreating(object modelBuilder)
+        {
+            var values = new[]
+            {
+                "NotADbContext", // Noncompliant {{Define a constant instead of using this literal 'NotADbContext' 4 times.}}
+                "NotADbContext", // Secondary
+                "NotADbContext", // Secondary
+                "NotADbContext"  // Secondary
+            };
+        }
+    }
+
+    public abstract class DbContextWithCustomOnModelCreating : DbContext
+    {
+        protected virtual void OnModelCreating(string value) { }
+    }
+
+    public class CustomOnModelCreatingContext : DbContextWithCustomOnModelCreating
+    {
+        protected override void OnModelCreating(string value)
+        {
+            var values = new[]
+            {
+                "CustomOverload", // Noncompliant {{Define a constant instead of using this literal 'CustomOverload' 4 times.}}
+                "CustomOverload", // Secondary
+                "CustomOverload", // Secondary
+                "CustomOverload"  // Secondary
+            };
+        }
+    }
+
+    public interface IStartupThing
+    {
+        void Configure(string value);
+    }
+
+    public class NotEfConfiguration : IStartupThing
+    {
+        public void Configure(string value)
+        {
+            var values = new[]
+            {
+                "NotEfConfigure", // Noncompliant {{Define a constant instead of using this literal 'NotEfConfigure' 4 times.}}
+                "NotEfConfigure", // Secondary
+                "NotEfConfigure", // Secondary
+                "NotEfConfigure"  // Secondary
+            };
+        }
     }
 }
 

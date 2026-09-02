@@ -71,6 +71,15 @@ public class StringLiteralShouldNotBeDuplicatedTest
             .AddReferences(DapperReferences)
             .VerifyNoIssues();
 
+    [TestMethod]
+    public void StringLiteralShouldNotBeDuplicated_VB_Latest() =>
+        new VerifierBuilder<VB.StringLiteralShouldNotBeDuplicated>()
+            .AddPaths("StringLiteralShouldNotBeDuplicated.Latest.vb")
+            .WithOptions(LanguageOptions.VisualBasicLatest)
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational("2.2.6"))
+            .AddReferences(NuGetMetadataReference.MicrosoftEntityFrameworkCore("2.2.6"))
+            .Verify();
+
 #endif
 
     [TestMethod]
@@ -88,7 +97,7 @@ public class StringLiteralShouldNotBeDuplicatedTest
 
     [TestMethod]
     public void StringLiteralShouldNotBeDuplicated_Attributes_VB() =>
-        new VerifierBuilder().AddAnalyzer(() => new VB.StringLiteralShouldNotBeDuplicated() { Threshold = 2 })
+        new VerifierBuilder().AddAnalyzer(() => new VB.StringLiteralShouldNotBeDuplicated { Threshold = 2 })
             .AddPaths("StringLiteralShouldNotBeDuplicated_Attributes.vb")
             .WithConcurrentAnalysis(false)
             .Verify();
