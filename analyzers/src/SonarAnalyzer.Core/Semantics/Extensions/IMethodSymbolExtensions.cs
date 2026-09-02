@@ -42,6 +42,15 @@ public static class IMethodSymbolExtensions
 
     extension(IMethodSymbol method)
     {
+        public ITypeSymbol EffectiveReceiverType =>
+            method switch
+            {
+                { MethodKind: MethodKind.ReducedExtension, ReceiverType: { } receiverType } => receiverType,
+                { AssociatedExtensionImplementation: not null } => method.ContainingType.ExtensionParameter?.Type,
+                { IsExtension: true, Parameters.Length: > 0 } => method.Parameters[0].Type,
+                _ => method.ReceiverType,
+            };
+
         public bool IsExtensionOn(KnownType type)
         {
             if (method is { IsExtensionMethod: true })

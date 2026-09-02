@@ -487,6 +487,54 @@ public class IMethodSymbolExtensionsTest
             false,
             AnalyzerLanguage.VisualBasic).DeclaredSymbols<IMethodSymbol>().Should().AllSatisfy(x => x.IsExtension.Should().BeFalse());
 
+    [TestMethod]
+    [DataRow("public static Wrapper ClassicExtension(this Entity e) => null;", "$$e.ClassicExtension()$$;", "Entity")]
+    [DataRow("public static Wrapper ClassicExtension(this Entity e) => null;", "$$Extensions.ClassicExtension(e)$$;", "Entity")]
+    [DataRow("extension(Entity e) { public Wrapper BlockExtension() => null; }", "$$e.BlockExtension()$$;", "Entity")]
+    [DataRow("extension(Entity e) { public Wrapper BlockExtension() => null; }", "$$Extensions.BlockExtension(e)$$;", "Entity")]
+    [DataRow("", "$$e.ToString()$$;", "Object")]
+    [DataRow("", "$$object.ReferenceEquals(e, e)$$;", "Object")]
+    [DataRow("extension(Entity e) { public Wrapper BlockProperty => null; }", "_ = $$e.BlockProperty$$;", "Entity")]
+    [DataRow("extension(Entity e) { public Wrapper BlockProperty { get => null; set { } } }", "$$e.BlockProperty$$ = null;", "Entity")]
+    [DataRow("extension(Entity e) { public static Wrapper operator +(Entity a, Entity b) => null; }", "_ = $$e + e$$;", "Entity")]
+    [DataRow("extension(Entity e) { public void operator +=(int right) { } }", "$$e += 1$$;", "Entity")]
+    [DataRow("extension(Entity e) { public static Entity operator -(Entity value) => value; }", "_ = $$-e$$;", "Entity")]
+    [DataRow("extension(Entity e) { public void operator ++() { } }", "$$e++$$;", "Entity")]
+    [DataRow("", "$$e += 1$$;", "Entity", "public void operator +=(int right) { }")]
+    [DataRow("", "$$e++$$;", "Entity", "public void operator ++() { }")]
+    public void EffectiveReceiverType_CoversEveryInvocationForm_CS(string member, string usage, string expectedReceiverTypeName, string entityMember = "")
+    {
+        var (node, model) = TestCompiler.NodeBetweenMarkersCS($$"""
+            public class Entity
+            {
+                {{entityMember}}
+            }
+            public class Wrapper { }
+
+            public static class Extensions
+            {
+                {{member}}
+            }
+
+            public class Test
+            {
+                public void M(Entity e)
+                {
+                    {{usage}}
+                }
+            }
+            """);
+
+        var method = model.GetSymbolInfo(node).Symbol switch
+        {
+            IPropertySymbol property => node.Parent is AssignmentExpressionSyntax assignment && assignment.Left == node ? property.SetMethod : property.GetMethod,
+            IMethodSymbol symbol => symbol,
+            var symbol => throw new ArgumentOutOfRangeException(nameof(symbol)),
+        };
+
+        method.EffectiveReceiverType.Name.Should().Be(expectedReceiverTypeName);
+    }
+
     private IMethodSymbol MethodSymbolForIndex(int index)
     {
         var statement = (ExpressionStatementSyntax)statements[index];
