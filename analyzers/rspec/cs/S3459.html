@@ -31,5 +31,7 @@ class MyClass
 <h3>Exceptions</h3>
 <ul>
   <li>Fields on types decorated with <code>System.SerializableAttribute</code> attribute.</li>
+  <li>Non-static auto-properties with a public <code>set</code> or <code>init</code> accessor whose effective accessibility is <code>private</code>.
+  Such properties can be populated by external framework code, such as a serializer or model binder.</li>
 </ul>
 

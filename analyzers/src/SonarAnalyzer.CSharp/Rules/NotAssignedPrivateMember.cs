@@ -75,7 +75,8 @@ public sealed class NotAssignedPrivateMember : SonarDiagnosticAnalyzer
                         && !x.Symbol.ContainingType.HasAnyAttribute(ExcludedAttributes));
         var candidateProperties = removableDeclarationCollector.RemovableDeclarations(new HashSet<SyntaxKind> { SyntaxKind.PropertyDeclaration }, MaxAccessibility)
             .Where(x => IsAutoPropertyWithNoInitializer((PropertyDeclarationSyntax)x.Node)
-                        && !x.Symbol.ContainingType.HasAnyAttribute(ExcludedAttributes));
+                        && !x.Symbol.ContainingType.HasAnyAttribute(ExcludedAttributes)
+                        && x.Symbol is not IPropertySymbol { IsStatic: false, SetMethod.DeclaredAccessibility: Accessibility.Public });
         return candidateFields.Concat(candidateProperties).ToList();
     }
 

@@ -110,3 +110,25 @@ public static class Extensions
         }
     }
 }
+
+public class PublicWritablePropertiesOnEffectivelyPrivateTypes
+{
+    private sealed class PublicSetter
+    {
+        public string[] Enable { get; set; } // Compliant https://sonarsource.atlassian.net/browse/NET-4483
+        public int Count { get; init; } // Compliant: Public init accessors may be populated by external code
+        public int EnabledCount => Enable.Length + Count;
+    }
+
+    private class Controls
+    {
+        public int ReadOnly { get; } // Noncompliant
+        public int PrivateSetter { get; private set; } // Noncompliant
+        public int ProtectedSetter { get; protected set; } // Noncompliant
+        internal int Internal { get; set; } // Noncompliant
+        private int Private { get; set; } // Noncompliant
+        public static int StaticWritable { get; set; } // Noncompliant
+        public int Used => ReadOnly + PrivateSetter + ProtectedSetter + Internal + Private;
+        public static int UsedStatic => StaticWritable;
+    }
+}
