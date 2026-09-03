@@ -27,11 +27,7 @@
   </ItemGroup>
 
   <Target Name="CopyBinaries" AfterTargets="Build">
-    <ItemGroup>
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.CFG.dll" />
-      <BinariesToCopy Include="$(OutputPath)SonarAnalyzer.ShimLayer.dll" />
-    </ItemGroup>
-    <Copy SourceFiles="@(BinariesToCopy)" DestinationFolder="$(BinariesFolder)" />
+    <Copy SourceFiles="$(OutputPath)SonarAnalyzer.CFG.dll" DestinationFolder="$(BinariesFolder)" />
   </Target>
 
 </Project>

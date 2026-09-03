@@ -34,4 +34,8 @@
     <Using Include="System.Text" />
   </ItemGroup>
 
+  <Target Name="CopyBinaries" AfterTargets="Build">
+    <Copy SourceFiles="$(OutputPath)SonarAnalyzer.ShimLayer.dll" DestinationFolder="$(BinariesFolder)" />
+  </Target>
+
 </Project>
