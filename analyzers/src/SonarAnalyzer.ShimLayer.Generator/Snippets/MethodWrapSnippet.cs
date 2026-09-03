@@ -37,7 +37,7 @@ public sealed class MethodWrapSnippet : MethodSnippet
         else
         {
             string delegateName;
-            var types = new List<string>(parameters.Select(x => model[x.ParameterType].ReturnTypeSnippet));
+            var types = new List<string>(parameters.Select(x => model[x.ParameterType].TypeSnippet));
             if (!member.IsStatic)
             {
                 types.Insert(0, strategy.CompiletimeTypeSnippet);

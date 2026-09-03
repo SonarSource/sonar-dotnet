@@ -67,7 +67,7 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
         }
 
         var typeInfo = model.GetSpeculativeTypeInfo(suppression.Operand.SpanStart, suppression.Operand, SpeculativeBindingOption.BindAsExpression);
-        return typeInfo.Nullability.FlowState == NullableFlowState.NotNull && !IsOblivious(model, suppression.Operand) && !HasNestedNullableAnnotation(typeInfo.Type);
+        return typeInfo.Nullability is { FlowState: NullableFlowState.NotNull } && !IsOblivious(model, suppression.Operand) && !HasNestedNullableAnnotation(typeInfo.Type);
     }
 
     // Oblivious members (no nullable annotation, e.g. "#nullable disable" or an unannotated TFM) default to NotNull

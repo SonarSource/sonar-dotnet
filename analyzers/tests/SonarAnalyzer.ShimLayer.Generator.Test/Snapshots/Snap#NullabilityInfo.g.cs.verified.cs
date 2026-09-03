@@ -53,7 +53,7 @@ public readonly struct NullabilityInfoWrapper : IWrapper, IEquatable<Nullability
     public NullableAnnotation Annotation => AnnotationAccessor(wrappedInstance);
     public NullableFlowState FlowState => FlowStateAccessor(wrappedInstance);
 
-    public static NullabilityInfoWrapper From(Object instance)
+    public static NullabilityInfoWrapper? From(Object instance)
     {
         if (instance is null)
         {

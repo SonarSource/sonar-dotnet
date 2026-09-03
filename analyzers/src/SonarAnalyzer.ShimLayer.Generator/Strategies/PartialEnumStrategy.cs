@@ -21,7 +21,7 @@ public class PartialEnumStrategy : Strategy
 {
     public FieldInfo[] Fields { get; }
 
-    public override string ReturnTypeSnippet => Latest.Name;
+    public override string TypeSnippet => Latest.Name;
 
     public PartialEnumStrategy(Type latest, FieldInfo[] fields) : base(latest) =>
         Fields = fields;

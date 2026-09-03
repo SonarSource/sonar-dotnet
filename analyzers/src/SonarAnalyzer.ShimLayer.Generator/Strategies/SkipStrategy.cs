@@ -20,7 +20,7 @@ namespace SonarAnalyzer.ShimLayer.Generator.Strategies;
 public class SkipStrategy : Strategy
 {
     public override bool IsSupported => false;
-    public override string ReturnTypeSnippet => throw new NotSupportedException();
+    public override string TypeSnippet => throw new NotSupportedException();
 
     public SkipStrategy(Type latest) : base(latest) { }
 

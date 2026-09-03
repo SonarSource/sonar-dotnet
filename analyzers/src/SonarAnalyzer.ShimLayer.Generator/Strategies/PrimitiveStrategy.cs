@@ -21,7 +21,7 @@ public class PrimitiveStrategy : Strategy
 {
     private readonly string name;
 
-    public override string ReturnTypeSnippet => name;
+    public override string TypeSnippet => name;
     public override string CompiletimeTypeSnippet => name;
 
     public PrimitiveStrategy(Type latest, string name) : base(latest) =>

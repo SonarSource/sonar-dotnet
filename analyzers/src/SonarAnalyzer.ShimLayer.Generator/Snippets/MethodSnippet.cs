@@ -53,7 +53,7 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
     {
         var prefix = parameter.IsOut ? "out " : null;
         var underlyingType = parameter.IsOut ? parameter.ParameterType.GetElementType() : parameter.ParameterType;
-        return $"{prefix}{model[underlyingType].ReturnTypeSnippet} {SerializeParameterName(parameter)}";
+        return $"{prefix}{model[underlyingType].TypeSnippet} {SerializeParameterName(parameter)}";
     }
 
     private static string SerializeParameterName(ParameterInfo parameter) =>

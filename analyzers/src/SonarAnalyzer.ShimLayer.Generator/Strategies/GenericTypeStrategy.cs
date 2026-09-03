@@ -23,7 +23,7 @@ public class GenericTypeStrategy : Strategy
     private readonly string type;
 
     public override bool IsSupported => typeArguments.All(x => x is not WrapStrategy && x.IsSupported);
-    public override string ReturnTypeSnippet => type;
+    public override string TypeSnippet => type;
     public override string CompiletimeTypeSnippet => type;
 
     public GenericTypeStrategy(Type latest, Strategy[] typeArguments) : base(latest)

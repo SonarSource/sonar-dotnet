@@ -21,7 +21,7 @@ public class NewEnumStrategy : Strategy
 {
     public FieldInfo[] Fields { get; }
 
-    public override string ReturnTypeSnippet => Latest.Name;
+    public override string TypeSnippet => Latest.Name;
 
     public NewEnumStrategy(Type latest, FieldInfo[] fields) : base(latest) =>
         Fields = fields;

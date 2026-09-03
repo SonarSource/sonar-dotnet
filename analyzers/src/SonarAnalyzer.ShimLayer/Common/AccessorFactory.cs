@@ -117,7 +117,9 @@ internal static class AccessorFactory
         {
             // Generate expression: _ = sender ?? throw new NullReferenceException("Object reference ... ");     // The discard is implicit
             var message = $"Object reference not set to an instance of an object. This ShimLayer accessor for {memberName} was called with 'null' sender.";
-            var coalesceThrow = Expression.Coalesce(senderLambdaParameter, Expression.Throw(Expression.New(typeof(NullReferenceException).GetConstructor([typeof(string)]), Expression.Constant(message)), types.SenderType));
+            var coalesceThrow = Expression.Coalesce(
+                senderLambdaParameter,
+                Expression.Throw(Expression.New(typeof(NullReferenceException).GetConstructor([typeof(string)]), Expression.Constant(message)), types.SenderType));
             return Expression.Block(types.ResultType, coalesceThrow, lambdaReturnValue);
         }
 
@@ -145,6 +147,14 @@ internal static class AccessorFactory
             if (typeof(IWrapper).IsAssignableFrom(types.ResultType))
             {
                 var fromMethod = types.ResultType.GetMethod("From");
+                return Expression.Call(fromMethod, WrapConvert(result, fromMethod.GetParameters().Single().ParameterType));
+            }
+            else if (types.ResultType.IsGenericType
+                && types.ResultType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                && types.ResultType.GenericTypeArguments.Single() is var nullableTypeArgument
+                && typeof(IWrapper).IsAssignableFrom(nullableTypeArgument))
+            {
+                var fromMethod = nullableTypeArgument.GetMethod("From");
                 return Expression.Call(fromMethod, WrapConvert(result, fromMethod.GetParameters().Single().ParameterType));
             }
             else if (types.ResultType.IsGenericType
@@ -217,7 +227,10 @@ internal static class AccessorFactory
         var itemWrapperType = compiletimeResultType.GetGenericArguments().Single();
         var selectorParameter = Expression.Parameter(itemRuntimeType, "x");
         var selectorLambda = Expression.Lambda(Expression.Call(itemWrapperType.GetMethod("From"), selectorParameter), selectorParameter);
-        var items = Expression.Call(UnboundEnumerableSelectMethod.MakeGenericMethod(itemRuntimeType, itemWrapperType), Expression.Convert(result, typeof(IEnumerable<>).MakeGenericType(itemRuntimeType)), selectorLambda);
+        var items = Expression.Call(
+            UnboundEnumerableSelectMethod.MakeGenericMethod(itemRuntimeType, itemWrapperType),
+            Expression.Convert(result, typeof(IEnumerable<>).MakeGenericType(itemRuntimeType)),
+            selectorLambda);
         var separators = Expression.Call(result, result.Type.GetMethod("GetSeparators"));
         return Expression.New(compiletimeResultType.GetConstructors().Single(), items, separators);
     }

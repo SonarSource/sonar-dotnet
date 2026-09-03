@@ -22,8 +22,8 @@ public class SeparatedSyntaxListStrategy : Strategy
     private readonly string type;
     private readonly Strategy typeArgument;
 
-    public override string ReturnTypeSnippet => $"{type}<{typeArgument.ReturnTypeSnippet}>";
-    public override string CompiletimeTypeSnippet => ReturnTypeSnippet;
+    public override string TypeSnippet => $"{type}<{typeArgument.TypeSnippet}>";
+    public override string CompiletimeTypeSnippet => TypeSnippet;
 
     public SeparatedSyntaxListStrategy(Type latest, Strategy typeArgument) : base(latest)
     {

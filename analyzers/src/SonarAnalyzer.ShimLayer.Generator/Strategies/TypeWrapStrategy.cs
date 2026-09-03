@@ -23,5 +23,7 @@ public class TypeWrapStrategy : WrapStrategy
 
     protected override string ConversionSnippet => null;
 
+    protected override bool IsNullable => Latest.Name == nameof(NullabilityInfo); // Force this to return NullabilityInfoWrapper?
+
     public TypeWrapStrategy(Type latest, Type baseType, MemberDescriptor[] members) : base(latest, baseType, null, members) { }
 }

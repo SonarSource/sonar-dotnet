@@ -20,6 +20,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.CodeAnalysis.Operations;
+using NuGet.ContentModel;
 using SonarAnalyzer.ShimLayer.Common;
 
 namespace SonarAnalyzer.Core.Test.ShimLayer.Common;
@@ -177,6 +178,22 @@ public class AccessorFactoryTest
     {
         var accessor = AccessorFactory.CreateProperty<Func<TupleExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>>>(null, nameof(TupleExpressionSyntax.Arguments));
         accessor(CreateTupleExpressionSyntax()).Should().NotBeNull().And.BeEmpty();
+    }
+
+    [TestMethod]
+    public void ReturnType_NullableWrapper_Shimmed()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<TypeInfo, NullabilityInfoWrapper?>>(typeof(TypeInfo), nameof(TypeInfo.Nullability));
+        var result = accessor(CreateTypeInfo());
+        result.Should().NotBeNull();
+        result.Value.FlowState.Should().Be(SonarAnalyzer.ShimLayer.NullableFlowState.NotNull);
+    }
+
+    [TestMethod]
+    public void ReturnType_NullableWrapper_Fallback()
+    {
+        var accessor = AccessorFactory.CreateProperty<Func<TypeInfo, NullabilityInfoWrapper?>>(null, nameof(TypeInfo.Nullability));
+        accessor(CreateTypeInfo()).Should().BeNull();
     }
 
     [TestMethod]
@@ -399,6 +416,18 @@ public class AccessorFactoryTest
         var method = compiler.MethodDeclaration("Sample.Method");
         var cfg = ControlFlowGraph.Create(method, compiler.Model);
         return cfg.Root.NestedRegions.Single().NestedRegions.First();
+    }
+
+    private static TypeInfo CreateTypeInfo()
+    {
+        var compiler = new SnippetCompiler("""
+            #nullable enable
+            public class Sample
+            {
+                public string Method() => "value";
+            }
+            """);
+        return compiler.Model.GetTypeInfo(compiler.Nodes<LiteralExpressionSyntax>().Single());
     }
 
     private static ClassDeclarationSyntax CreateClassDeclaration() =>
