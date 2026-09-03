@@ -66,12 +66,12 @@ public readonly struct IMethodReferenceOperationWrapper : IOperationWrapper, IWr
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
     public IOperation Instance => InstanceAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public bool IsVirtual => (bool)IsVirtualAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public bool IsVirtual => IsVirtualAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public ISymbol Member => MemberAccessor(wrappedInstance);
     public IMethodSymbol Method => MethodAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);

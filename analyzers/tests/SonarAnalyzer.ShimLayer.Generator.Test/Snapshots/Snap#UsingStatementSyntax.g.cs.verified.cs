@@ -35,12 +35,12 @@ public static class UsingStatementSyntaxShimExtensions
 
     extension(UsingStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
         public SyntaxToken AwaitKeyword => AwaitKeywordAccessor(wrappedInstance);
 
         public UsingStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public UsingStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken awaitKeyword, SyntaxToken usingKeyword, SyntaxToken openParenToken, VariableDeclarationSyntax declaration, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, awaitKeyword, usingKeyword, openParenToken, declaration, expression, closeParenToken, statement);
         public UsingStatementSyntax Update(SyntaxToken awaitKeyword, SyntaxToken usingKeyword, SyntaxToken openParenToken, VariableDeclarationSyntax declaration, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor_Overload3(wrappedInstance, awaitKeyword, usingKeyword, openParenToken, declaration, expression, closeParenToken, statement);
         public UsingStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

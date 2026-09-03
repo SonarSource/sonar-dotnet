@@ -24,5 +24,5 @@ public static class CaseInsensitiveComparisonEx
 
     private static readonly Func<string, string, bool> StartsWithAccessor = AccessorFactory.CreateStaticMethod<Func<string, string, bool>>(WrappedType, "StartsWith");
 
-    public static bool StartsWith(string value, string possibleStart) => (bool)StartsWithAccessor(value, possibleStart);
+    public static bool StartsWith(string value, string possibleStart) => StartsWithAccessor(value, possibleStart);
 }

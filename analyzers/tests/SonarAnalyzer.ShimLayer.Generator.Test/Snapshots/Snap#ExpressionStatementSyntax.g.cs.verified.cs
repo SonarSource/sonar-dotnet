@@ -32,11 +32,11 @@ public static class ExpressionStatementSyntaxShimExtensions
 
     extension(ExpressionStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
 
         public ExpressionStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ExpressionStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, ExpressionSyntax expression, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, expression, semicolonToken);
         public ExpressionStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

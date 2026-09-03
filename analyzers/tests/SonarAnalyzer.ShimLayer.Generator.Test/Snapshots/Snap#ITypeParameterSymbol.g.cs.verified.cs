@@ -46,28 +46,28 @@ public static class ITypeParameterSymbolShimExtensions
 
     extension(ITypeParameterSymbol wrappedInstance)
     {
-        public bool AllowsRefLikeType => (bool)AllowsRefLikeTypeAccessor(wrappedInstance);
-        public ImmutableArray<NullableAnnotation> ConstraintNullableAnnotations => (ImmutableArray<NullableAnnotation>)ConstraintNullableAnnotationsAccessor(wrappedInstance);
+        public bool AllowsRefLikeType => AllowsRefLikeTypeAccessor(wrappedInstance);
+        public ImmutableArray<NullableAnnotation> ConstraintNullableAnnotations => ConstraintNullableAnnotationsAccessor(wrappedInstance);
         [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.ExtensionParameter instead.")]
         public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(wrappedInstance);
-        public bool HasNotNullConstraint => (bool)HasNotNullConstraintAccessor(wrappedInstance);
-        public bool HasUnmanagedTypeConstraint => (bool)HasUnmanagedTypeConstraintAccessor(wrappedInstance);
+        public bool HasNotNullConstraint => HasNotNullConstraintAccessor(wrappedInstance);
+        public bool HasUnmanagedTypeConstraint => HasUnmanagedTypeConstraintAccessor(wrappedInstance);
         [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.IsExtension instead.")]
-        public bool IsExtension => (bool)IsExtensionAccessor(wrappedInstance);
-        public bool IsNativeIntegerType => (bool)IsNativeIntegerTypeAccessor(wrappedInstance);
-        public bool IsReadOnly => (bool)IsReadOnlyAccessor(wrappedInstance);
-        public bool IsRecord => (bool)IsRecordAccessor(wrappedInstance);
-        public bool IsRefLikeType => (bool)IsRefLikeTypeAccessor(wrappedInstance);
-        public bool IsTupleType => (bool)IsTupleTypeAccessor(wrappedInstance);
-        public bool IsUnmanagedType => (bool)IsUnmanagedTypeAccessor(wrappedInstance);
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
-        public NullableAnnotation NullableAnnotation => (NullableAnnotation)NullableAnnotationAccessor(wrappedInstance);
-        public NullableAnnotation ReferenceTypeConstraintNullableAnnotation => (NullableAnnotation)ReferenceTypeConstraintNullableAnnotationAccessor(wrappedInstance);
+        public bool IsExtension => IsExtensionAccessor(wrappedInstance);
+        public bool IsNativeIntegerType => IsNativeIntegerTypeAccessor(wrappedInstance);
+        public bool IsReadOnly => IsReadOnlyAccessor(wrappedInstance);
+        public bool IsRecord => IsRecordAccessor(wrappedInstance);
+        public bool IsRefLikeType => IsRefLikeTypeAccessor(wrappedInstance);
+        public bool IsTupleType => IsTupleTypeAccessor(wrappedInstance);
+        public bool IsUnmanagedType => IsUnmanagedTypeAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
+        public NullableAnnotation ReferenceTypeConstraintNullableAnnotation => ReferenceTypeConstraintNullableAnnotationAccessor(wrappedInstance);
 
-        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => (ImmutableArray<SymbolDisplayPart>)ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
-        public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => (string)ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);
-        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => (ImmutableArray<SymbolDisplayPart>)ToMinimalDisplayPartsAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
-        public string ToMinimalDisplayString(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => (string)ToMinimalDisplayStringAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
+        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
+        public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);
+        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => ToMinimalDisplayPartsAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
+        public string ToMinimalDisplayString(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => ToMinimalDisplayStringAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
         public ITypeSymbol WithNullableAnnotation(NullableAnnotation nullableAnnotation) => WithNullableAnnotationAccessor(wrappedInstance, nullableAnnotation);
     }
 }

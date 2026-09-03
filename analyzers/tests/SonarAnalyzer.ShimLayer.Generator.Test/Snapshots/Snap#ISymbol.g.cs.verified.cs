@@ -26,6 +26,6 @@ public static class ISymbolShimExtensions
 
     extension(ISymbol wrappedInstance)
     {
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
     }
 }

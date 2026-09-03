@@ -23,9 +23,6 @@ public class StaticClassStrategy : MemberStrategy
 
     public StaticClassStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
 
-    public override string ToConversionSnippet(string from) =>
-        throw new NotSupportedException();
-
     protected override string GenerateCore(StrategyModel model)
     {
         var wrap = WrapMembers(model);

@@ -29,8 +29,8 @@ public readonly struct BaseExpressionColonSyntaxWrapper : IWrapper, IEquatable<B
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithColonTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithColonToken");
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithExpression");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, BaseExpressionColonSyntaxWrapper> WithColonTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, BaseExpressionColonSyntaxWrapper>>(WrappedType, "WithColonToken");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, BaseExpressionColonSyntaxWrapper> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, BaseExpressionColonSyntaxWrapper>>(WrappedType, "WithExpression");
 
     private BaseExpressionColonSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -133,10 +133,10 @@ public readonly struct BaseExpressionColonSyntaxWrapper : IWrapper, IEquatable<B
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public BaseExpressionColonSyntaxWrapper WithColonToken(SyntaxToken colonToken) => BaseExpressionColonSyntaxWrapper.From(WithColonTokenAccessor(wrappedInstance, colonToken));
-    public BaseExpressionColonSyntaxWrapper WithExpression(ExpressionSyntax expression) => BaseExpressionColonSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public BaseExpressionColonSyntaxWrapper WithColonToken(SyntaxToken colonToken) => WithColonTokenAccessor(wrappedInstance, colonToken);
+    public BaseExpressionColonSyntaxWrapper WithExpression(ExpressionSyntax expression) => WithExpressionAccessor(wrappedInstance, expression);
 
     public static explicit operator BaseExpressionColonSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

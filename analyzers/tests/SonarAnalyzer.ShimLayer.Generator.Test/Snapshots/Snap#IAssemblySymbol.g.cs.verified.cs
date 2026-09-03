@@ -28,8 +28,8 @@ public static class IAssemblySymbolShimExtensions
 
     extension(IAssemblySymbol wrappedInstance)
     {
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
 
-        public ImmutableArray<INamedTypeSymbol> GetForwardedTypes() => (ImmutableArray<INamedTypeSymbol>)GetForwardedTypesAccessor(wrappedInstance);
+        public ImmutableArray<INamedTypeSymbol> GetForwardedTypes() => GetForwardedTypesAccessor(wrappedInstance);
     }
 }

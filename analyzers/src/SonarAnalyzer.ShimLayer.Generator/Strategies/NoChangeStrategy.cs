@@ -23,8 +23,5 @@ public class NoChangeStrategy : Strategy
 
     public NoChangeStrategy(Type latest) : base(latest) { }
 
-    public override string ToConversionSnippet(string from) =>
-        $"({Latest.Name}){from}";
-
     protected override string GenerateCore(StrategyModel model) => null;
 }

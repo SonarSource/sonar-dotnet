@@ -32,11 +32,11 @@ public static class GotoStatementSyntaxShimExtensions
 
     extension(GotoStatementSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
 
         public GotoStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public GotoStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken gotoKeyword, SyntaxToken caseOrDefaultKeyword, ExpressionSyntax expression, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, gotoKeyword, caseOrDefaultKeyword, expression, semicolonToken);
         public GotoStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
     }

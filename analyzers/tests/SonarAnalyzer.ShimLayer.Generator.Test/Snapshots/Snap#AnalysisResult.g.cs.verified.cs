@@ -26,6 +26,6 @@ public static class AnalysisResultShimExtensions
 
     extension(AnalysisResult wrappedInstance)
     {
-        public ImmutableDictionary<AdditionalText, ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>>> AdditionalFileDiagnostics => (ImmutableDictionary<AdditionalText, ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>>>)AdditionalFileDiagnosticsAccessor(wrappedInstance);
+        public ImmutableDictionary<AdditionalText, ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>>> AdditionalFileDiagnostics => AdditionalFileDiagnosticsAccessor(wrappedInstance);
     }
 }

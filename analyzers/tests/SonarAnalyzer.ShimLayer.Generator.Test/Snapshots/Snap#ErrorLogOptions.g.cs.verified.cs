@@ -50,8 +50,8 @@ public readonly struct ErrorLogOptionsWrapper : IWrapper, IEquatable<ErrorLogOpt
     public static bool operator !=(ErrorLogOptionsWrapper left, ErrorLogOptionsWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public string Path => (string)PathAccessor(wrappedInstance);
-    public SarifVersion SarifVersion => (SarifVersion)SarifVersionAccessor(wrappedInstance);
+    public string Path => PathAccessor(wrappedInstance);
+    public SarifVersion SarifVersion => SarifVersionAccessor(wrappedInstance);
 
     public static ErrorLogOptionsWrapper From(Object instance)
     {

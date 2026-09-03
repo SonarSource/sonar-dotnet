@@ -65,11 +65,11 @@ public readonly struct IInterpolationOperationWrapper : IOperationWrapper, IWrap
 
     public IOperation Alignment => AlignmentAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public IOperation Expression => ExpressionAccessor(wrappedInstance);
     public IOperation FormatString => FormatStringAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 

@@ -25,12 +25,12 @@ public readonly struct GeneratorExecutionContextWrapper : IWrapper, IEquatable<G
     private readonly Object wrappedInstance;
 
     private static readonly Func<Object, ImmutableArray<AdditionalText>> AdditionalFilesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<AdditionalText>>>(WrappedType, "AdditionalFiles");
-    private static readonly Func<Object, Object> AnalyzerConfigOptionsAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "AnalyzerConfigOptions");
+    private static readonly Func<Object, AnalyzerConfigOptionsProviderWrapper> AnalyzerConfigOptionsAccessor = AccessorFactory.CreateProperty<Func<Object, AnalyzerConfigOptionsProviderWrapper>>(WrappedType, "AnalyzerConfigOptions");
     private static readonly Func<Object, CancellationToken> CancellationTokenAccessor = AccessorFactory.CreateProperty<Func<Object, CancellationToken>>(WrappedType, "CancellationToken");
     private static readonly Func<Object, Compilation> CompilationAccessor = AccessorFactory.CreateProperty<Func<Object, Compilation>>(WrappedType, "Compilation");
     private static readonly Func<Object, ParseOptions> ParseOptionsAccessor = AccessorFactory.CreateProperty<Func<Object, ParseOptions>>(WrappedType, "ParseOptions");
-    private static readonly Func<Object, Object> SyntaxContextReceiverAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "SyntaxContextReceiver");
-    private static readonly Func<Object, Object> SyntaxReceiverAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "SyntaxReceiver");
+    private static readonly Func<Object, ISyntaxContextReceiverWrapper> SyntaxContextReceiverAccessor = AccessorFactory.CreateProperty<Func<Object, ISyntaxContextReceiverWrapper>>(WrappedType, "SyntaxContextReceiver");
+    private static readonly Func<Object, ISyntaxReceiverWrapper> SyntaxReceiverAccessor = AccessorFactory.CreateProperty<Func<Object, ISyntaxReceiverWrapper>>(WrappedType, "SyntaxReceiver");
 
     private static readonly Action<Object, string, SourceText> AddSourceAccessor = AccessorFactory.CreateMethod<Action<Object, string, SourceText>>(WrappedType, "AddSource");
     private static readonly Action<Object, string, string> AddSourceAccessor_Overload2 = AccessorFactory.CreateMethod<Action<Object, string, string>>(WrappedType, "AddSource");
@@ -59,13 +59,13 @@ public readonly struct GeneratorExecutionContextWrapper : IWrapper, IEquatable<G
     public static bool operator !=(GeneratorExecutionContextWrapper left, GeneratorExecutionContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public ImmutableArray<AdditionalText> AdditionalFiles => (ImmutableArray<AdditionalText>)AdditionalFilesAccessor(wrappedInstance);
-    public AnalyzerConfigOptionsProviderWrapper AnalyzerConfigOptions => AnalyzerConfigOptionsProviderWrapper.From(AnalyzerConfigOptionsAccessor(wrappedInstance));
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public ImmutableArray<AdditionalText> AdditionalFiles => AdditionalFilesAccessor(wrappedInstance);
+    public AnalyzerConfigOptionsProviderWrapper AnalyzerConfigOptions => AnalyzerConfigOptionsAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
     public Compilation Compilation => CompilationAccessor(wrappedInstance);
     public ParseOptions ParseOptions => ParseOptionsAccessor(wrappedInstance);
-    public ISyntaxContextReceiverWrapper SyntaxContextReceiver => ISyntaxContextReceiverWrapper.From(SyntaxContextReceiverAccessor(wrappedInstance));
-    public ISyntaxReceiverWrapper SyntaxReceiver => ISyntaxReceiverWrapper.From(SyntaxReceiverAccessor(wrappedInstance));
+    public ISyntaxContextReceiverWrapper SyntaxContextReceiver => SyntaxContextReceiverAccessor(wrappedInstance);
+    public ISyntaxReceiverWrapper SyntaxReceiver => SyntaxReceiverAccessor(wrappedInstance);
 
     public void AddSource(string hintName, SourceText sourceText) => AddSourceAccessor(wrappedInstance, hintName, sourceText);
     public void AddSource(string hintName, string source) => AddSourceAccessor_Overload2(wrappedInstance, hintName, source);

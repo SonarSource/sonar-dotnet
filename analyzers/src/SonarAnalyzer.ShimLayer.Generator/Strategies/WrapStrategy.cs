@@ -34,9 +34,6 @@ public abstract class WrapStrategy : MemberStrategy
         FallbackBaseType = fallbackBaseType;
     }
 
-    public override string ToConversionSnippet(string from) =>
-        $"{Latest.Name}Wrapper.From({from})";
-
     protected override string GenerateCore(StrategyModel model)
     {
         var passthrough = PassthroughMembers(model);

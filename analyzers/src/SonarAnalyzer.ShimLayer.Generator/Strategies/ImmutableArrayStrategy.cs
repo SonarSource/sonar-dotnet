@@ -31,8 +31,5 @@ public class ImmutableArrayStrategy : Strategy
         this.typeArgument = typeArgument;
     }
 
-    public override string ToConversionSnippet(string from) =>
-        from;
-
     protected override string GenerateCore(StrategyModel model) => null;
 }

@@ -29,9 +29,9 @@ public static class CSharpParseOptionsShimExtensions
 
     extension(CSharpParseOptions wrappedInstance)
     {
-        public ImmutableArray<Diagnostic> Errors => (ImmutableArray<Diagnostic>)ErrorsAccessor(wrappedInstance);
-        public string Language => (string)LanguageAccessor(wrappedInstance);
-        public SourceCodeKind SpecifiedKind => (SourceCodeKind)SpecifiedKindAccessor(wrappedInstance);
-        public LanguageVersion SpecifiedLanguageVersion => (LanguageVersion)SpecifiedLanguageVersionAccessor(wrappedInstance);
+        public ImmutableArray<Diagnostic> Errors => ErrorsAccessor(wrappedInstance);
+        public string Language => LanguageAccessor(wrappedInstance);
+        public SourceCodeKind SpecifiedKind => SpecifiedKindAccessor(wrappedInstance);
+        public LanguageVersion SpecifiedLanguageVersion => SpecifiedLanguageVersionAccessor(wrappedInstance);
     }
 }

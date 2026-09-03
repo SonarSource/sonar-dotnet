@@ -24,11 +24,11 @@ public readonly struct ITryOperationWrapper : IOperationWrapper, IWrapper, IEqua
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly IOperation wrappedInstance;
 
-    private static readonly Func<IOperation, IOperation> BodyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Body");
+    private static readonly Func<IOperation, IBlockOperationWrapper> BodyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IBlockOperationWrapper>>(WrappedType, "Body");
     private static readonly Func<IOperation, ImmutableArray<ICatchClauseOperationWrapper>> CatchesAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<ICatchClauseOperationWrapper>>>(WrappedType, "Catches");
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ILabelSymbol> ExitLabelAccessor = AccessorFactory.CreateProperty<Func<IOperation, ILabelSymbol>>(WrappedType, "ExitLabel");
-    private static readonly Func<IOperation, IOperation> FinallyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Finally");
+    private static readonly Func<IOperation, IBlockOperationWrapper> FinallyAccessor = AccessorFactory.CreateProperty<Func<IOperation, IBlockOperationWrapper>>(WrappedType, "Finally");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
@@ -64,14 +64,14 @@ public readonly struct ITryOperationWrapper : IOperationWrapper, IWrapper, IEqua
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public IBlockOperationWrapper Body => IBlockOperationWrapper.From(BodyAccessor(wrappedInstance));
+    public IBlockOperationWrapper Body => BodyAccessor(wrappedInstance);
     public ImmutableArray<ICatchClauseOperationWrapper> Catches => CatchesAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ILabelSymbol ExitLabel => ExitLabelAccessor(wrappedInstance);
-    public IBlockOperationWrapper Finally => IBlockOperationWrapper.From(FinallyAccessor(wrappedInstance));
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public IBlockOperationWrapper Finally => FinallyAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 

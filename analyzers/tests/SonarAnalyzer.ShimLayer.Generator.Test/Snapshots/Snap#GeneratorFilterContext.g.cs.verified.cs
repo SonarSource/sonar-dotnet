@@ -25,7 +25,7 @@ public readonly struct GeneratorFilterContextWrapper : IWrapper, IEquatable<Gene
     private readonly Object wrappedInstance;
 
     private static readonly Func<Object, CancellationToken> CancellationTokenAccessor = AccessorFactory.CreateProperty<Func<Object, CancellationToken>>(WrappedType, "CancellationToken");
-    private static readonly Func<Object, Object> GeneratorAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Generator");
+    private static readonly Func<Object, ISourceGeneratorWrapper> GeneratorAccessor = AccessorFactory.CreateProperty<Func<Object, ISourceGeneratorWrapper>>(WrappedType, "Generator");
 
     private GeneratorFilterContextWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -50,8 +50,8 @@ public readonly struct GeneratorFilterContextWrapper : IWrapper, IEquatable<Gene
     public static bool operator !=(GeneratorFilterContextWrapper left, GeneratorFilterContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
-    public ISourceGeneratorWrapper Generator => ISourceGeneratorWrapper.From(GeneratorAccessor(wrappedInstance));
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
+    public ISourceGeneratorWrapper Generator => GeneratorAccessor(wrappedInstance);
 
     public static GeneratorFilterContextWrapper From(Object instance)
     {

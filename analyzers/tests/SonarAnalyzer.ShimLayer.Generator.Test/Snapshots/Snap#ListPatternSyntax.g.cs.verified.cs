@@ -25,18 +25,18 @@ public readonly struct ListPatternSyntaxWrapper : IWrapper, IEquatable<ListPatte
     private readonly CSharpSyntaxNode wrappedInstance;
 
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> CloseBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "CloseBracketToken");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Designation");
+    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper> DesignationAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper>>(WrappedType, "Designation");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenBracketTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenBracketToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>> PatternsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>>>(WrappedType, "Patterns");
 
-    private static readonly Func<CSharpSyntaxNode, PatternSyntaxWrapper[], CSharpSyntaxNode> AddPatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PatternSyntaxWrapper[], CSharpSyntaxNode>>(WrappedType, "AddPatterns");
+    private static readonly Func<CSharpSyntaxNode, PatternSyntaxWrapper[], ListPatternSyntaxWrapper> AddPatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PatternSyntaxWrapper[], ListPatternSyntaxWrapper>>(WrappedType, "AddPatterns");
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, VariableDesignationSyntaxWrapper, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, VariableDesignationSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCloseBracketTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCloseBracketToken");
-    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, CSharpSyntaxNode> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithDesignation");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOpenBracketTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOpenBracketToken");
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, CSharpSyntaxNode> WithPatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, CSharpSyntaxNode>>(WrappedType, "WithPatterns");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, VariableDesignationSyntaxWrapper, ListPatternSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, SyntaxToken, VariableDesignationSyntaxWrapper, ListPatternSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, ListPatternSyntaxWrapper> WithCloseBracketTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, ListPatternSyntaxWrapper>>(WrappedType, "WithCloseBracketToken");
+    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, ListPatternSyntaxWrapper> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, ListPatternSyntaxWrapper>>(WrappedType, "WithDesignation");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, ListPatternSyntaxWrapper> WithOpenBracketTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, ListPatternSyntaxWrapper>>(WrappedType, "WithOpenBracketToken");
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, ListPatternSyntaxWrapper> WithPatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<PatternSyntaxWrapper>, ListPatternSyntaxWrapper>>(WrappedType, "WithPatterns");
 
     private ListPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -79,7 +79,7 @@ public readonly struct ListPatternSyntaxWrapper : IWrapper, IEquatable<ListPatte
     public int SpanStart => wrappedInstance.SpanStart;
 
     public SyntaxToken CloseBracketToken => CloseBracketTokenAccessor(wrappedInstance);
-    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(wrappedInstance));
+    public VariableDesignationSyntaxWrapper Designation => DesignationAccessor(wrappedInstance);
     public SyntaxToken OpenBracketToken => OpenBracketTokenAccessor(wrappedInstance);
     public SeparatedSyntaxListWrapper<PatternSyntaxWrapper> Patterns => PatternsAccessor(wrappedInstance);
 
@@ -141,14 +141,14 @@ public readonly struct ListPatternSyntaxWrapper : IWrapper, IEquatable<ListPatte
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public ListPatternSyntaxWrapper AddPatterns(PatternSyntaxWrapper[] items) => ListPatternSyntaxWrapper.From(AddPatternsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public ListPatternSyntaxWrapper Update(SyntaxToken openBracketToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns, SyntaxToken closeBracketToken, VariableDesignationSyntaxWrapper designation) => ListPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openBracketToken, patterns, closeBracketToken, designation));
-    public ListPatternSyntaxWrapper WithCloseBracketToken(SyntaxToken closeBracketToken) => ListPatternSyntaxWrapper.From(WithCloseBracketTokenAccessor(wrappedInstance, closeBracketToken));
-    public ListPatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => ListPatternSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
-    public ListPatternSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => ListPatternSyntaxWrapper.From(WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken));
-    public ListPatternSyntaxWrapper WithPatterns(SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns) => ListPatternSyntaxWrapper.From(WithPatternsAccessor(wrappedInstance, patterns));
+    public ListPatternSyntaxWrapper AddPatterns(PatternSyntaxWrapper[] items) => AddPatternsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ListPatternSyntaxWrapper Update(SyntaxToken openBracketToken, SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns, SyntaxToken closeBracketToken, VariableDesignationSyntaxWrapper designation) => UpdateAccessor(wrappedInstance, openBracketToken, patterns, closeBracketToken, designation);
+    public ListPatternSyntaxWrapper WithCloseBracketToken(SyntaxToken closeBracketToken) => WithCloseBracketTokenAccessor(wrappedInstance, closeBracketToken);
+    public ListPatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => WithDesignationAccessor(wrappedInstance, designation);
+    public ListPatternSyntaxWrapper WithOpenBracketToken(SyntaxToken openBracketToken) => WithOpenBracketTokenAccessor(wrappedInstance, openBracketToken);
+    public ListPatternSyntaxWrapper WithPatterns(SeparatedSyntaxListWrapper<PatternSyntaxWrapper> patterns) => WithPatternsAccessor(wrappedInstance, patterns);
 
     public static explicit operator ListPatternSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

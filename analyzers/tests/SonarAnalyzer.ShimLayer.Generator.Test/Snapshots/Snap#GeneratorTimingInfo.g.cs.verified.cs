@@ -25,7 +25,7 @@ public readonly struct GeneratorTimingInfoWrapper : IWrapper, IEquatable<Generat
     private readonly Object wrappedInstance;
 
     private static readonly Func<Object, TimeSpan> ElapsedTimeAccessor = AccessorFactory.CreateProperty<Func<Object, TimeSpan>>(WrappedType, "ElapsedTime");
-    private static readonly Func<Object, Object> GeneratorAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Generator");
+    private static readonly Func<Object, ISourceGeneratorWrapper> GeneratorAccessor = AccessorFactory.CreateProperty<Func<Object, ISourceGeneratorWrapper>>(WrappedType, "Generator");
 
     private GeneratorTimingInfoWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -50,8 +50,8 @@ public readonly struct GeneratorTimingInfoWrapper : IWrapper, IEquatable<Generat
     public static bool operator !=(GeneratorTimingInfoWrapper left, GeneratorTimingInfoWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public TimeSpan ElapsedTime => (TimeSpan)ElapsedTimeAccessor(wrappedInstance);
-    public ISourceGeneratorWrapper Generator => ISourceGeneratorWrapper.From(GeneratorAccessor(wrappedInstance));
+    public TimeSpan ElapsedTime => ElapsedTimeAccessor(wrappedInstance);
+    public ISourceGeneratorWrapper Generator => GeneratorAccessor(wrappedInstance);
 
     public static GeneratorTimingInfoWrapper From(Object instance)
     {

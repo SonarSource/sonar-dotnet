@@ -32,12 +32,12 @@ public static class SourceTextShimExtensions
 
     extension(SourceText wrappedInstance)
     {
-        public bool CanBeEmbedded => (bool)CanBeEmbeddedAccessor(wrappedInstance);
+        public bool CanBeEmbedded => CanBeEmbeddedAccessor(wrappedInstance);
 
         public static SourceText From(Byte[] buffer, int length, Encoding encoding, SourceHashAlgorithm checksumAlgorithm, bool throwIfBinaryDetected, bool canBeEmbedded) => FromAccessor_Overload2(buffer, length, encoding, checksumAlgorithm, throwIfBinaryDetected, canBeEmbedded);
         public static SourceText From(Stream stream, Encoding encoding, SourceHashAlgorithm checksumAlgorithm, bool throwIfBinaryDetected, bool canBeEmbedded) => FromAccessor_Overload4(stream, encoding, checksumAlgorithm, throwIfBinaryDetected, canBeEmbedded);
         public static SourceText From(TextReader reader, int length, Encoding encoding, SourceHashAlgorithm checksumAlgorithm) => FromAccessor_Overload5(reader, length, encoding, checksumAlgorithm);
-        public ImmutableArray<Byte> GetChecksum() => (ImmutableArray<Byte>)GetChecksumAccessor(wrappedInstance);
-        public ImmutableArray<Byte> GetContentHash() => (ImmutableArray<Byte>)GetContentHashAccessor(wrappedInstance);
+        public ImmutableArray<Byte> GetChecksum() => GetChecksumAccessor(wrappedInstance);
+        public ImmutableArray<Byte> GetContentHash() => GetContentHashAccessor(wrappedInstance);
     }
 }

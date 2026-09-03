@@ -264,9 +264,9 @@ public class OperationWrapStrategyTest
 
                 public ITypeSymbol Type => wrappedInstance.Type;
 
-                public ImmutableArray<IOperation> Elements => (ImmutableArray<IOperation>)ElementsAccessor(wrappedInstance);
-                public ITypeSymbol NaturalType => (ITypeSymbol)NaturalTypeAccessor(wrappedInstance);
-                public ImmutableArray<IArgumentOperation> Arguments => (ImmutableArray<IArgumentOperation>)ArgumentsAccessor(wrappedInstance);
+                public ImmutableArray<IOperation> Elements => ElementsAccessor(wrappedInstance);
+                public ITypeSymbol NaturalType => NaturalTypeAccessor(wrappedInstance);
+                public ImmutableArray<IArgumentOperation> Arguments => ArgumentsAccessor(wrappedInstance);
 
                 public static ITupleOperationWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;
@@ -334,8 +334,8 @@ public class OperationWrapStrategyTest
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly IOperation wrappedInstance;
 
-                private static readonly Func<IAttributeOperationWrapper, CancellationToken, IOperation> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<IAttributeOperationWrapper, CancellationToken, IOperation>>(WrappedType, "Create");
-                private static readonly Func<IBlockOperationWrapper, CancellationToken, IOperation> CreateAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<IBlockOperationWrapper, CancellationToken, IOperation>>(WrappedType, "Create");
+                private static readonly Func<IAttributeOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<IAttributeOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+                private static readonly Func<IBlockOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<IBlockOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
 
                 private ControlFlowGraphWrapper(IOperation wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
@@ -360,8 +360,8 @@ public class OperationWrapStrategyTest
                 public static bool operator !=(ControlFlowGraphWrapper left, ControlFlowGraphWrapper right) =>
                     !Equals(left.wrappedInstance, right.wrappedInstance);
 
-                public static ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor(attribute, cancellationToken));
-                public static ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload2(body, cancellationToken));
+                public static ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => CreateAccessor(attribute, cancellationToken);
+                public static ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => CreateAccessor_Overload2(body, cancellationToken);
 
                 public static ControlFlowGraphWrapper? FromOrDefault(IOperation instance) =>
                     IsInstance(instance) ? From(instance) : null;

@@ -28,14 +28,14 @@ public readonly struct FunctionPointerParameterSyntaxWrapper : IWrapper, IEquata
     private static readonly Func<CSharpSyntaxNode, SyntaxTokenList> ModifiersAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxTokenList>>(WrappedType, "Modifiers");
     private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, TypeSyntax>>(WrappedType, "Type");
 
-    private static readonly Func<CSharpSyntaxNode, AttributeListSyntax[], CSharpSyntaxNode> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, AttributeListSyntax[], CSharpSyntaxNode>>(WrappedType, "AddAttributeLists");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken[], CSharpSyntaxNode> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken[], CSharpSyntaxNode>>(WrappedType, "AddModifiers");
+    private static readonly Func<CSharpSyntaxNode, AttributeListSyntax[], FunctionPointerParameterSyntaxWrapper> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, AttributeListSyntax[], FunctionPointerParameterSyntaxWrapper>>(WrappedType, "AddAttributeLists");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken[], FunctionPointerParameterSyntaxWrapper> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken[], FunctionPointerParameterSyntaxWrapper>>(WrappedType, "AddModifiers");
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, CSharpSyntaxNode> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, CSharpSyntaxNode>>(WrappedType, "WithAttributeLists");
-    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList, CSharpSyntaxNode> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxTokenList, CSharpSyntaxNode>>(WrappedType, "WithModifiers");
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "WithType");
+    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, FunctionPointerParameterSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, FunctionPointerParameterSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, FunctionPointerParameterSyntaxWrapper> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxList<AttributeListSyntax>, FunctionPointerParameterSyntaxWrapper>>(WrappedType, "WithAttributeLists");
+    private static readonly Func<CSharpSyntaxNode, SyntaxTokenList, FunctionPointerParameterSyntaxWrapper> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxTokenList, FunctionPointerParameterSyntaxWrapper>>(WrappedType, "WithModifiers");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, FunctionPointerParameterSyntaxWrapper> WithTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, FunctionPointerParameterSyntaxWrapper>>(WrappedType, "WithType");
 
     private FunctionPointerParameterSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -77,7 +77,7 @@ public readonly struct FunctionPointerParameterSyntaxWrapper : IWrapper, IEquata
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+    public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
     public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
     public TypeSyntax Type => TypeAccessor(wrappedInstance);
 
@@ -139,14 +139,14 @@ public readonly struct FunctionPointerParameterSyntaxWrapper : IWrapper, IEquata
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public FunctionPointerParameterSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => FunctionPointerParameterSyntaxWrapper.From(AddAttributeListsAccessor(wrappedInstance, items));
-    public FunctionPointerParameterSyntaxWrapper AddModifiers(SyntaxToken[] items) => FunctionPointerParameterSyntaxWrapper.From(AddModifiersAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public FunctionPointerParameterSyntaxWrapper Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, TypeSyntax type) => FunctionPointerParameterSyntaxWrapper.From(UpdateAccessor(wrappedInstance, attributeLists, modifiers, type));
-    public FunctionPointerParameterSyntaxWrapper WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => FunctionPointerParameterSyntaxWrapper.From(WithAttributeListsAccessor(wrappedInstance, attributeLists));
-    public FunctionPointerParameterSyntaxWrapper WithModifiers(SyntaxTokenList modifiers) => FunctionPointerParameterSyntaxWrapper.From(WithModifiersAccessor(wrappedInstance, modifiers));
-    public FunctionPointerParameterSyntaxWrapper WithType(TypeSyntax type) => FunctionPointerParameterSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
+    public FunctionPointerParameterSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+    public FunctionPointerParameterSyntaxWrapper AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FunctionPointerParameterSyntaxWrapper Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, TypeSyntax type) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, type);
+    public FunctionPointerParameterSyntaxWrapper WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
+    public FunctionPointerParameterSyntaxWrapper WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
+    public FunctionPointerParameterSyntaxWrapper WithType(TypeSyntax type) => WithTypeAccessor(wrappedInstance, type);
 
     public static explicit operator FunctionPointerParameterSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

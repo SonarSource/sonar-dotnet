@@ -30,7 +30,7 @@ public static class AnalyzerFileReferenceShimExtensions
 
     extension(AnalyzerFileReference wrappedInstance)
     {
-        public IAnalyzerAssemblyLoader AssemblyLoader => (IAnalyzerAssemblyLoader)AssemblyLoaderAccessor(wrappedInstance);
+        public IAnalyzerAssemblyLoader AssemblyLoader => AssemblyLoaderAccessor(wrappedInstance);
 
         [System.ObsoleteAttribute("Use GetGenerators(string language) or GetGeneratorsForAllLanguages()")]
         public ImmutableArray<ISourceGeneratorWrapper> GetGenerators() => GetGeneratorsAccessor(wrappedInstance);

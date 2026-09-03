@@ -29,7 +29,6 @@ public class StaticClassStrategyTest
     {
         var sut = new StaticClassStrategy(typeof(CSharpExtensions), []);
         sut.Invoking(x => x.ReturnTypeSnippet).Should().Throw<NotSupportedException>();
-        sut.Invoking(x => x.ToConversionSnippet("from")).Should().Throw<NotSupportedException>();
     }
 
     [TestMethod]
@@ -84,10 +83,10 @@ public class StaticClassStrategyTest
                 private delegate bool TryGetSpeculativeSemanticModelAccessorDelegate(SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel);
                 private static readonly TryGetSpeculativeSemanticModelAccessorDelegate TryGetSpeculativeSemanticModelAccessor = AccessorFactory.CreateStaticMethod<TryGetSpeculativeSemanticModelAccessorDelegate>(WrappedType, "TryGetSpeculativeSemanticModel");
 
-                public static StringComparer KeyComparer => (StringComparer)KeyComparerAccessor();
+                public static StringComparer KeyComparer => KeyComparerAccessor();
 
-                public static Conversion GetOutConversion(this ICompoundAssignmentOperation compoundAssignment) => (Conversion)GetOutConversionAccessor(compoundAssignment);
-                public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel) => (bool)TryGetSpeculativeSemanticModelAccessor(semanticModel, position, constructorInitializer, out speculativeModel);
+                public static Conversion GetOutConversion(this ICompoundAssignmentOperation compoundAssignment) => GetOutConversionAccessor(compoundAssignment);
+                public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel) => TryGetSpeculativeSemanticModelAccessor(semanticModel, position, constructorInitializer, out speculativeModel);
             }
             """);
     }

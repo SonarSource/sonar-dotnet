@@ -63,13 +63,13 @@ public readonly struct ISwitchCaseOperationWrapper : IOperationWrapper, IWrapper
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public ImmutableArray<IOperation> Body => (ImmutableArray<IOperation>)BodyAccessor(wrappedInstance);
+    public ImmutableArray<IOperation> Body => BodyAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ImmutableArray<ICaseClauseOperationWrapper> Clauses => ClausesAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
-    public ImmutableArray<ILocalSymbol> Locals => (ImmutableArray<ILocalSymbol>)LocalsAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
+    public ImmutableArray<ILocalSymbol> Locals => LocalsAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 

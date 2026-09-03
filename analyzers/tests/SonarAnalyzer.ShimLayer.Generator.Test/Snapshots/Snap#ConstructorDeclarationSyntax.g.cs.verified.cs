@@ -35,8 +35,8 @@ public static class ConstructorDeclarationSyntaxShimExtensions
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
 
         public ConstructorDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ConstructorDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken identifier, ParameterListSyntax parameterList, ConstructorInitializerSyntax initializer, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, identifier, parameterList, initializer, body, expressionBody, semicolonToken);
         public ConstructorDeclarationSyntax WithExpressionBody(ArrowExpressionClauseSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
     }

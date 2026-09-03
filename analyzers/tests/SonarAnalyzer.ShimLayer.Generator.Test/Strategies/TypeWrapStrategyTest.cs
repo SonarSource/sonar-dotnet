@@ -265,14 +265,14 @@ public class TypeWrapStrategyTest
 
                 public static CSharpCommandLineParser Script => GeneratorDriver.Script;
 
-                public static StringComparer KeyComparer => (StringComparer)KeyComparerAccessor();
+                public static StringComparer KeyComparer => KeyComparerAccessor();
 
                 public static string GetRequiredLanguageVersion(Diagnostic diagnostic) => GeneratorDriver.GetRequiredLanguageVersion(diagnostic);
 
-                public GeneratorDriver RunGenerators(Compilation compilation) => (GeneratorDriver)RunGeneratorsAccessor(wrappedInstance, compilation);
-                public GeneratorDriver RunGenerators(Compilation compilation, CancellationToken cancellationToken) => (GeneratorDriver)RunGeneratorsAccessor_Overload2(wrappedInstance, compilation, cancellationToken);
-                public static AnalyzerConfig Parse(string text, string pathToFile) => (AnalyzerConfig)ParseAccessor(text, pathToFile);
-                public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption) => (bool)TryGetAccessor(semanticModel, position, type, out speculativeModel, bindingOption);
+                public GeneratorDriver RunGenerators(Compilation compilation) => RunGeneratorsAccessor(wrappedInstance, compilation);
+                public GeneratorDriver RunGenerators(Compilation compilation, CancellationToken cancellationToken) => RunGeneratorsAccessor_Overload2(wrappedInstance, compilation, cancellationToken);
+                public static AnalyzerConfig Parse(string text, string pathToFile) => ParseAccessor(text, pathToFile);
+                public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption) => TryGetAccessor(semanticModel, position, type, out speculativeModel, bindingOption);
 
                 public static CSharpGeneratorDriverWrapper From(GeneratorDriver instance)
                 {
@@ -441,7 +441,7 @@ public class TypeWrapStrategyTest
                 public static bool operator !=(AnalyzerConfigOptionsWrapper left, AnalyzerConfigOptionsWrapper right) =>
                     !Equals(left.wrappedInstance, right.wrappedInstance);
 
-                public bool TryGetValue(string key, out string value) => (bool)TryGetValueAccessor(wrappedInstance, key, out value);
+                public bool TryGetValue(string key, out string value) => TryGetValueAccessor(wrappedInstance, key, out value);
 
                 public static AnalyzerConfigOptionsWrapper From(Object instance)
                 {

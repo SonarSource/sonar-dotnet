@@ -27,7 +27,7 @@ public static class CSharpCommandLineArgumentsShimExtensions
     private static readonly Func<CSharpCommandLineArguments, bool> DisplayVersionAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, bool>>(WrappedType, "DisplayVersion");
     private static readonly Func<CSharpCommandLineArguments, ImmutableArray<CommandLineSourceFile>> EmbeddedFilesAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, ImmutableArray<CommandLineSourceFile>>>(WrappedType, "EmbeddedFiles");
     private static readonly Func<CSharpCommandLineArguments, bool> EmitPdbFileAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, bool>>(WrappedType, "EmitPdbFile");
-    private static readonly Func<CSharpCommandLineArguments, Object> ErrorLogOptionsAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, Object>>(WrappedType, "ErrorLogOptions");
+    private static readonly Func<CSharpCommandLineArguments, ErrorLogOptionsWrapper> ErrorLogOptionsAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, ErrorLogOptionsWrapper>>(WrappedType, "ErrorLogOptions");
     private static readonly Func<CSharpCommandLineArguments, string> GeneratedFilesOutputDirectoryAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, string>>(WrappedType, "GeneratedFilesOutputDirectory");
     private static readonly Func<CSharpCommandLineArguments, ImmutableArray<CommandLineResourceWrapper>> ManifestResourceArgumentsAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, ImmutableArray<CommandLineResourceWrapper>>>(WrappedType, "ManifestResourceArguments");
     private static readonly Func<CSharpCommandLineArguments, string> OutputRefFilePathAccessor = AccessorFactory.CreateProperty<Func<CSharpCommandLineArguments, string>>(WrappedType, "OutputRefFilePath");
@@ -41,21 +41,21 @@ public static class CSharpCommandLineArgumentsShimExtensions
 
     extension(CSharpCommandLineArguments wrappedInstance)
     {
-        public ImmutableArray<string> AnalyzerConfigPaths => (ImmutableArray<string>)AnalyzerConfigPathsAccessor(wrappedInstance);
-        public bool DisplayLangVersions => (bool)DisplayLangVersionsAccessor(wrappedInstance);
-        public bool DisplayVersion => (bool)DisplayVersionAccessor(wrappedInstance);
-        public ImmutableArray<CommandLineSourceFile> EmbeddedFiles => (ImmutableArray<CommandLineSourceFile>)EmbeddedFilesAccessor(wrappedInstance);
-        public bool EmitPdbFile => (bool)EmitPdbFileAccessor(wrappedInstance);
-        public ErrorLogOptionsWrapper ErrorLogOptions => ErrorLogOptionsWrapper.From(ErrorLogOptionsAccessor(wrappedInstance));
-        public string GeneratedFilesOutputDirectory => (string)GeneratedFilesOutputDirectoryAccessor(wrappedInstance);
+        public ImmutableArray<string> AnalyzerConfigPaths => AnalyzerConfigPathsAccessor(wrappedInstance);
+        public bool DisplayLangVersions => DisplayLangVersionsAccessor(wrappedInstance);
+        public bool DisplayVersion => DisplayVersionAccessor(wrappedInstance);
+        public ImmutableArray<CommandLineSourceFile> EmbeddedFiles => EmbeddedFilesAccessor(wrappedInstance);
+        public bool EmitPdbFile => EmitPdbFileAccessor(wrappedInstance);
+        public ErrorLogOptionsWrapper ErrorLogOptions => ErrorLogOptionsAccessor(wrappedInstance);
+        public string GeneratedFilesOutputDirectory => GeneratedFilesOutputDirectoryAccessor(wrappedInstance);
         public ImmutableArray<CommandLineResourceWrapper> ManifestResourceArguments => ManifestResourceArgumentsAccessor(wrappedInstance);
-        public string OutputRefFilePath => (string)OutputRefFilePathAccessor(wrappedInstance);
-        public bool ReportInternalsVisibleToAttributes => (bool)ReportInternalsVisibleToAttributesAccessor(wrappedInstance);
-        public string RuleSetPath => (string)RuleSetPathAccessor(wrappedInstance);
-        public bool SkipAnalyzers => (bool)SkipAnalyzersAccessor(wrappedInstance);
-        public string SourceLink => (string)SourceLinkAccessor(wrappedInstance);
+        public string OutputRefFilePath => OutputRefFilePathAccessor(wrappedInstance);
+        public bool ReportInternalsVisibleToAttributes => ReportInternalsVisibleToAttributesAccessor(wrappedInstance);
+        public string RuleSetPath => RuleSetPathAccessor(wrappedInstance);
+        public bool SkipAnalyzers => SkipAnalyzersAccessor(wrappedInstance);
+        public string SourceLink => SourceLinkAccessor(wrappedInstance);
 
-        public string GetOutputFilePath(string outputFileName) => (string)GetOutputFilePathAccessor(wrappedInstance, outputFileName);
-        public string GetPdbFilePath(string outputFileName) => (string)GetPdbFilePathAccessor(wrappedInstance, outputFileName);
+        public string GetOutputFilePath(string outputFileName) => GetOutputFilePathAccessor(wrappedInstance, outputFileName);
+        public string GetPdbFilePath(string outputFileName) => GetPdbFilePathAccessor(wrappedInstance, outputFileName);
     }
 }

@@ -52,32 +52,32 @@ public static class INamedTypeSymbolShimExtensions
 
     extension(INamedTypeSymbol wrappedInstance)
     {
-        public string ExtensionGroupingName => (string)ExtensionGroupingNameAccessor(wrappedInstance);
-        public string ExtensionMarkerName => (string)ExtensionMarkerNameAccessor(wrappedInstance);
+        public string ExtensionGroupingName => ExtensionGroupingNameAccessor(wrappedInstance);
+        public string ExtensionMarkerName => ExtensionMarkerNameAccessor(wrappedInstance);
         public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(wrappedInstance);
-        public bool IsComImport => (bool)IsComImportAccessor(wrappedInstance);
-        public bool IsExtension => (bool)IsExtensionAccessor(wrappedInstance);
-        public bool IsFileLocal => (bool)IsFileLocalAccessor(wrappedInstance);
-        public bool IsNativeIntegerType => (bool)IsNativeIntegerTypeAccessor(wrappedInstance);
-        public bool IsReadOnly => (bool)IsReadOnlyAccessor(wrappedInstance);
-        public bool IsRecord => (bool)IsRecordAccessor(wrappedInstance);
-        public bool IsRefLikeType => (bool)IsRefLikeTypeAccessor(wrappedInstance);
-        public bool IsSerializable => (bool)IsSerializableAccessor(wrappedInstance);
-        public bool IsTupleType => (bool)IsTupleTypeAccessor(wrappedInstance);
-        public bool IsUnmanagedType => (bool)IsUnmanagedTypeAccessor(wrappedInstance);
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
+        public bool IsComImport => IsComImportAccessor(wrappedInstance);
+        public bool IsExtension => IsExtensionAccessor(wrappedInstance);
+        public bool IsFileLocal => IsFileLocalAccessor(wrappedInstance);
+        public bool IsNativeIntegerType => IsNativeIntegerTypeAccessor(wrappedInstance);
+        public bool IsReadOnly => IsReadOnlyAccessor(wrappedInstance);
+        public bool IsRecord => IsRecordAccessor(wrappedInstance);
+        public bool IsRefLikeType => IsRefLikeTypeAccessor(wrappedInstance);
+        public bool IsSerializable => IsSerializableAccessor(wrappedInstance);
+        public bool IsTupleType => IsTupleTypeAccessor(wrappedInstance);
+        public bool IsUnmanagedType => IsUnmanagedTypeAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
         public INamedTypeSymbol NativeIntegerUnderlyingType => NativeIntegerUnderlyingTypeAccessor(wrappedInstance);
-        public NullableAnnotation NullableAnnotation => (NullableAnnotation)NullableAnnotationAccessor(wrappedInstance);
-        public ImmutableArray<IFieldSymbol> TupleElements => (ImmutableArray<IFieldSymbol>)TupleElementsAccessor(wrappedInstance);
+        public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
+        public ImmutableArray<IFieldSymbol> TupleElements => TupleElementsAccessor(wrappedInstance);
         public INamedTypeSymbol TupleUnderlyingType => TupleUnderlyingTypeAccessor(wrappedInstance);
-        public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => (ImmutableArray<NullableAnnotation>)TypeArgumentNullableAnnotationsAccessor(wrappedInstance);
+        public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => TypeArgumentNullableAnnotationsAccessor(wrappedInstance);
 
         public INamedTypeSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations) => ConstructAccessor_Overload2(wrappedInstance, typeArguments, typeArgumentNullableAnnotations);
-        public ImmutableArray<CustomModifier> GetTypeArgumentCustomModifiers(int ordinal) => (ImmutableArray<CustomModifier>)GetTypeArgumentCustomModifiersAccessor(wrappedInstance, ordinal);
-        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => (ImmutableArray<SymbolDisplayPart>)ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
-        public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => (string)ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);
-        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => (ImmutableArray<SymbolDisplayPart>)ToMinimalDisplayPartsAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
-        public string ToMinimalDisplayString(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => (string)ToMinimalDisplayStringAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
+        public ImmutableArray<CustomModifier> GetTypeArgumentCustomModifiers(int ordinal) => GetTypeArgumentCustomModifiersAccessor(wrappedInstance, ordinal);
+        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
+        public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);
+        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => ToMinimalDisplayPartsAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
+        public string ToMinimalDisplayString(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => ToMinimalDisplayStringAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);
         public ITypeSymbol WithNullableAnnotation(NullableAnnotation nullableAnnotation) => WithNullableAnnotationAccessor(wrappedInstance, nullableAnnotation);
     }
 }

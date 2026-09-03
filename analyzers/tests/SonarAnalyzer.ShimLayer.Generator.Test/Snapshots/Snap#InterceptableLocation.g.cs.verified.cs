@@ -52,10 +52,10 @@ public readonly struct InterceptableLocationWrapper : IWrapper, IEquatable<Inter
     public static bool operator !=(InterceptableLocationWrapper left, InterceptableLocationWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public string Data => (string)DataAccessor(wrappedInstance);
-    public int Version => (int)VersionAccessor(wrappedInstance);
+    public string Data => DataAccessor(wrappedInstance);
+    public int Version => VersionAccessor(wrappedInstance);
 
-    public string GetDisplayLocation() => (string)GetDisplayLocationAccessor(wrappedInstance);
+    public string GetDisplayLocation() => GetDisplayLocationAccessor(wrappedInstance);
 
     public static InterceptableLocationWrapper From(Object instance)
     {

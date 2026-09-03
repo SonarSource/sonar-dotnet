@@ -28,8 +28,8 @@ public readonly struct FieldExpressionSyntaxWrapper : IWrapper, IEquatable<Field
 
     private static readonly Func<ExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithToken");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, FieldExpressionSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, FieldExpressionSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, FieldExpressionSyntaxWrapper> WithTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, FieldExpressionSyntaxWrapper>>(WrappedType, "WithToken");
 
     private FieldExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -131,10 +131,10 @@ public readonly struct FieldExpressionSyntaxWrapper : IWrapper, IEquatable<Field
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public FieldExpressionSyntaxWrapper Update(SyntaxToken token) => FieldExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, token));
-    public FieldExpressionSyntaxWrapper WithToken(SyntaxToken token) => FieldExpressionSyntaxWrapper.From(WithTokenAccessor(wrappedInstance, token));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FieldExpressionSyntaxWrapper Update(SyntaxToken token) => UpdateAccessor(wrappedInstance, token);
+    public FieldExpressionSyntaxWrapper WithToken(SyntaxToken token) => WithTokenAccessor(wrappedInstance, token);
 
     public static explicit operator FieldExpressionSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

@@ -28,13 +28,13 @@ public readonly struct ImplicitObjectCreationExpressionSyntaxWrapper : IWrapper,
     private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, InitializerExpressionSyntax>>(WrappedType, "Initializer");
     private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "NewKeyword");
 
-    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax> AddArgumentListArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax>>(WrappedType, "AddArgumentListArguments");
+    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], ImplicitObjectCreationExpressionSyntaxWrapper> AddArgumentListArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], ImplicitObjectCreationExpressionSyntaxWrapper>>(WrappedType, "AddArgumentListArguments");
     private static readonly Func<ExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ArgumentListSyntax, InitializerExpressionSyntax, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ArgumentListSyntax, InitializerExpressionSyntax, ExpressionSyntax>>(WrappedType, "Update");
-    private static readonly Func<ExpressionSyntax, ArgumentListSyntax, ExpressionSyntax> WithArgumentListAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentListSyntax, ExpressionSyntax>>(WrappedType, "WithArgumentList");
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax> WithInitializerAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithInitializer");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithNewKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithNewKeyword");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ArgumentListSyntax, InitializerExpressionSyntax, ImplicitObjectCreationExpressionSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ArgumentListSyntax, InitializerExpressionSyntax, ImplicitObjectCreationExpressionSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, ArgumentListSyntax, ImplicitObjectCreationExpressionSyntaxWrapper> WithArgumentListAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentListSyntax, ImplicitObjectCreationExpressionSyntaxWrapper>>(WrappedType, "WithArgumentList");
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax, ImplicitObjectCreationExpressionSyntaxWrapper> WithInitializerAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, InitializerExpressionSyntax, ImplicitObjectCreationExpressionSyntaxWrapper>>(WrappedType, "WithInitializer");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ImplicitObjectCreationExpressionSyntaxWrapper> WithNewKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ImplicitObjectCreationExpressionSyntaxWrapper>>(WrappedType, "WithNewKeyword");
 
     private ImplicitObjectCreationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -138,13 +138,13 @@ public readonly struct ImplicitObjectCreationExpressionSyntaxWrapper : IWrapper,
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public ImplicitObjectCreationExpressionSyntaxWrapper AddArgumentListArguments(ArgumentSyntax[] items) => ImplicitObjectCreationExpressionSyntaxWrapper.From(AddArgumentListArgumentsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public ImplicitObjectCreationExpressionSyntaxWrapper Update(SyntaxToken newKeyword, ArgumentListSyntax argumentList, InitializerExpressionSyntax initializer) => ImplicitObjectCreationExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, newKeyword, argumentList, initializer));
-    public ImplicitObjectCreationExpressionSyntaxWrapper WithArgumentList(ArgumentListSyntax argumentList) => ImplicitObjectCreationExpressionSyntaxWrapper.From(WithArgumentListAccessor(wrappedInstance, argumentList));
-    public ImplicitObjectCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => ImplicitObjectCreationExpressionSyntaxWrapper.From(WithInitializerAccessor(wrappedInstance, initializer));
-    public ImplicitObjectCreationExpressionSyntaxWrapper WithNewKeyword(SyntaxToken newKeyword) => ImplicitObjectCreationExpressionSyntaxWrapper.From(WithNewKeywordAccessor(wrappedInstance, newKeyword));
+    public ImplicitObjectCreationExpressionSyntaxWrapper AddArgumentListArguments(ArgumentSyntax[] items) => AddArgumentListArgumentsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ImplicitObjectCreationExpressionSyntaxWrapper Update(SyntaxToken newKeyword, ArgumentListSyntax argumentList, InitializerExpressionSyntax initializer) => UpdateAccessor(wrappedInstance, newKeyword, argumentList, initializer);
+    public ImplicitObjectCreationExpressionSyntaxWrapper WithArgumentList(ArgumentListSyntax argumentList) => WithArgumentListAccessor(wrappedInstance, argumentList);
+    public ImplicitObjectCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => WithInitializerAccessor(wrappedInstance, initializer);
+    public ImplicitObjectCreationExpressionSyntaxWrapper WithNewKeyword(SyntaxToken newKeyword) => WithNewKeywordAccessor(wrappedInstance, newKeyword);
 
     public static explicit operator ImplicitObjectCreationExpressionSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

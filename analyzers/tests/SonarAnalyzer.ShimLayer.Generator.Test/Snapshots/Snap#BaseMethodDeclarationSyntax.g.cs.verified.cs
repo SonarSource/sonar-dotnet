@@ -47,8 +47,8 @@ public static class BaseMethodDeclarationSyntaxShimExtensions
         public BaseMethodDeclarationSyntax AddBodyStatements(StatementSyntax[] items) => AddBodyStatementsAccessor(wrappedInstance, items);
         public BaseMethodDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public BaseMethodDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseMethodDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseMethodDeclarationSyntax WithBody(BlockSyntax body) => WithBodyAccessor(wrappedInstance, body);
         public BaseMethodDeclarationSyntax WithExpressionBody(ArrowExpressionClauseSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);

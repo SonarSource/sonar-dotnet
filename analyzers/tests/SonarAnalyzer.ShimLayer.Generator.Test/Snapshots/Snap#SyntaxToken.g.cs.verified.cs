@@ -26,6 +26,6 @@ public static class SyntaxTokenShimExtensions
 
     extension(SyntaxToken wrappedInstance)
     {
-        public bool IsIncrementallyIdenticalTo(SyntaxToken token) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, token);
+        public bool IsIncrementallyIdenticalTo(SyntaxToken token) => IsIncrementallyIdenticalToAccessor(wrappedInstance, token);
     }
 }

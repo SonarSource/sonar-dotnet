@@ -40,8 +40,8 @@ public static class BaseTypeDeclarationSyntaxShimExtensions
         public BaseTypeDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public BaseTypeDeclarationSyntax AddBaseListTypes(BaseTypeSyntax[] items) => AddBaseListTypesAccessor(wrappedInstance, items);
         public BaseTypeDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseTypeDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseTypeDeclarationSyntax WithBaseList(BaseListSyntax baseList) => WithBaseListAccessor(wrappedInstance, baseList);
         public BaseTypeDeclarationSyntax WithCloseBraceToken(SyntaxToken closeBraceToken) => WithCloseBraceTokenAccessor(wrappedInstance, closeBraceToken);

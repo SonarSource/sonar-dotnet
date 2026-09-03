@@ -34,11 +34,11 @@ public readonly struct RefTypeSyntaxWrapper : IWrapper, IEquatable<RefTypeSyntax
 
     private static readonly Func<TypeSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<TypeSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax, TypeSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax, TypeSyntax>>(WrappedType, "Update");
-    private static readonly Func<TypeSyntax, SyntaxToken, SyntaxToken, TypeSyntax, TypeSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, SyntaxToken, TypeSyntax, TypeSyntax>>(WrappedType, "Update");
-    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithReadOnlyKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithReadOnlyKeyword");
-    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithRefKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithRefKeyword");
-    private static readonly Func<TypeSyntax, TypeSyntax, TypeSyntax> WithTypeAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TypeSyntax, TypeSyntax>>(WrappedType, "WithType");
+    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax, RefTypeSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax, RefTypeSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<TypeSyntax, SyntaxToken, SyntaxToken, TypeSyntax, RefTypeSyntaxWrapper> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, SyntaxToken, TypeSyntax, RefTypeSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<TypeSyntax, SyntaxToken, RefTypeSyntaxWrapper> WithReadOnlyKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, RefTypeSyntaxWrapper>>(WrappedType, "WithReadOnlyKeyword");
+    private static readonly Func<TypeSyntax, SyntaxToken, RefTypeSyntaxWrapper> WithRefKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, RefTypeSyntaxWrapper>>(WrappedType, "WithRefKeyword");
+    private static readonly Func<TypeSyntax, TypeSyntax, RefTypeSyntaxWrapper> WithTypeAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TypeSyntax, RefTypeSyntaxWrapper>>(WrappedType, "WithType");
 
     private RefTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -81,10 +81,10 @@ public readonly struct RefTypeSyntaxWrapper : IWrapper, IEquatable<RefTypeSyntax
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public bool IsNint => (bool)IsNintAccessor(wrappedInstance);
-    public bool IsNotNull => (bool)IsNotNullAccessor(wrappedInstance);
-    public bool IsNuint => (bool)IsNuintAccessor(wrappedInstance);
-    public bool IsUnmanaged => (bool)IsUnmanagedAccessor(wrappedInstance);
+    public bool IsNint => IsNintAccessor(wrappedInstance);
+    public bool IsNotNull => IsNotNullAccessor(wrappedInstance);
+    public bool IsNuint => IsNuintAccessor(wrappedInstance);
+    public bool IsUnmanaged => IsUnmanagedAccessor(wrappedInstance);
     public SyntaxToken ReadOnlyKeyword => ReadOnlyKeywordAccessor(wrappedInstance);
     public SyntaxToken RefKeyword => RefKeywordAccessor(wrappedInstance);
     public TypeSyntax Type => TypeAccessor(wrappedInstance);
@@ -147,13 +147,13 @@ public readonly struct RefTypeSyntaxWrapper : IWrapper, IEquatable<RefTypeSyntax
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public RefTypeSyntaxWrapper Update(SyntaxToken refKeyword, TypeSyntax type) => RefTypeSyntaxWrapper.From(UpdateAccessor(wrappedInstance, refKeyword, type));
-    public RefTypeSyntaxWrapper Update(SyntaxToken refKeyword, SyntaxToken readOnlyKeyword, TypeSyntax type) => RefTypeSyntaxWrapper.From(UpdateAccessor_Overload2(wrappedInstance, refKeyword, readOnlyKeyword, type));
-    public RefTypeSyntaxWrapper WithReadOnlyKeyword(SyntaxToken readOnlyKeyword) => RefTypeSyntaxWrapper.From(WithReadOnlyKeywordAccessor(wrappedInstance, readOnlyKeyword));
-    public RefTypeSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword) => RefTypeSyntaxWrapper.From(WithRefKeywordAccessor(wrappedInstance, refKeyword));
-    public RefTypeSyntaxWrapper WithType(TypeSyntax type) => RefTypeSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public RefTypeSyntaxWrapper Update(SyntaxToken refKeyword, TypeSyntax type) => UpdateAccessor(wrappedInstance, refKeyword, type);
+    public RefTypeSyntaxWrapper Update(SyntaxToken refKeyword, SyntaxToken readOnlyKeyword, TypeSyntax type) => UpdateAccessor_Overload2(wrappedInstance, refKeyword, readOnlyKeyword, type);
+    public RefTypeSyntaxWrapper WithReadOnlyKeyword(SyntaxToken readOnlyKeyword) => WithReadOnlyKeywordAccessor(wrappedInstance, readOnlyKeyword);
+    public RefTypeSyntaxWrapper WithRefKeyword(SyntaxToken refKeyword) => WithRefKeywordAccessor(wrappedInstance, refKeyword);
+    public RefTypeSyntaxWrapper WithType(TypeSyntax type) => WithTypeAccessor(wrappedInstance, type);
 
     public static explicit operator RefTypeSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

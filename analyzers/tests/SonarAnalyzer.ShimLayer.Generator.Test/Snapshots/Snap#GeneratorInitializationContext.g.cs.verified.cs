@@ -52,7 +52,7 @@ public readonly struct GeneratorInitializationContextWrapper : IWrapper, IEquata
     public static bool operator !=(GeneratorInitializationContextWrapper left, GeneratorInitializationContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
 
     public void RegisterForSyntaxNotifications(SyntaxContextReceiverCreatorWrapper receiverCreator) => RegisterForSyntaxNotificationsAccessor(wrappedInstance, receiverCreator);
     public void RegisterForSyntaxNotifications(SyntaxReceiverCreatorWrapper receiverCreator) => RegisterForSyntaxNotificationsAccessor_Overload2(wrappedInstance, receiverCreator);

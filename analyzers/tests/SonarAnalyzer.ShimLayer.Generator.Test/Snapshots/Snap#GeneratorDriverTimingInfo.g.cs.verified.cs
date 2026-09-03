@@ -50,7 +50,7 @@ public readonly struct GeneratorDriverTimingInfoWrapper : IWrapper, IEquatable<G
     public static bool operator !=(GeneratorDriverTimingInfoWrapper left, GeneratorDriverTimingInfoWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public TimeSpan ElapsedTime => (TimeSpan)ElapsedTimeAccessor(wrappedInstance);
+    public TimeSpan ElapsedTime => ElapsedTimeAccessor(wrappedInstance);
     public ImmutableArray<GeneratorTimingInfoWrapper> GeneratorTimes => GeneratorTimesAccessor(wrappedInstance);
 
     public static GeneratorDriverTimingInfoWrapper From(Object instance)

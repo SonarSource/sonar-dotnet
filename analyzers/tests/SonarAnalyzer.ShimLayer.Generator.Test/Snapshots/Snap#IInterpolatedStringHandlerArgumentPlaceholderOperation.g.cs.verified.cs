@@ -62,13 +62,13 @@ public readonly struct IInterpolatedStringHandlerArgumentPlaceholderOperationWra
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public int ArgumentIndex => (int)ArgumentIndexAccessor(wrappedInstance);
+    public int ArgumentIndex => ArgumentIndexAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public InterpolatedStringArgumentPlaceholderKind PlaceholderKind => (InterpolatedStringArgumentPlaceholderKind)PlaceholderKindAccessor(wrappedInstance);
+    public InterpolatedStringArgumentPlaceholderKind PlaceholderKind => PlaceholderKindAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);

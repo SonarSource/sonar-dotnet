@@ -74,9 +74,9 @@ public class IOperationStrategyTest
 
                 extension(IOperation wrappedInstance)
                 {
-                    public IOperation Parent => (IOperation)ParentAccessor(wrappedInstance);
+                    public IOperation Parent => ParentAccessor(wrappedInstance);
                     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-                    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+                    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
 
                     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

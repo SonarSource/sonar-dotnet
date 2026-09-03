@@ -25,7 +25,7 @@ public static class CSharpCompilationOptionsShimExtensions
     private static readonly Func<CSharpCompilationOptions, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<CSharpCompilationOptions, string>>(WrappedType, "Language");
     private static readonly Func<CSharpCompilationOptions, MetadataImportOptions> MetadataImportOptionsAccessor = AccessorFactory.CreateProperty<Func<CSharpCompilationOptions, MetadataImportOptions>>(WrappedType, "MetadataImportOptions");
     private static readonly Func<CSharpCompilationOptions, NullableContextOptions> NullableContextOptionsAccessor = AccessorFactory.CreateProperty<Func<CSharpCompilationOptions, NullableContextOptions>>(WrappedType, "NullableContextOptions");
-    private static readonly Func<CSharpCompilationOptions, Object> SyntaxTreeOptionsProviderAccessor = AccessorFactory.CreateProperty<Func<CSharpCompilationOptions, Object>>(WrappedType, "SyntaxTreeOptionsProvider");
+    private static readonly Func<CSharpCompilationOptions, SyntaxTreeOptionsProviderWrapper> SyntaxTreeOptionsProviderAccessor = AccessorFactory.CreateProperty<Func<CSharpCompilationOptions, SyntaxTreeOptionsProviderWrapper>>(WrappedType, "SyntaxTreeOptionsProvider");
 
     private static readonly Func<CSharpCompilationOptions, MetadataImportOptions, CSharpCompilationOptions> WithMetadataImportOptionsAccessor = AccessorFactory.CreateMethod<Func<CSharpCompilationOptions, MetadataImportOptions, CSharpCompilationOptions>>(WrappedType, "WithMetadataImportOptions");
     private static readonly Func<CSharpCompilationOptions, NullableContextOptions, CSharpCompilationOptions> WithNullableContextOptionsAccessor = AccessorFactory.CreateMethod<Func<CSharpCompilationOptions, NullableContextOptions, CSharpCompilationOptions>>(WrappedType, "WithNullableContextOptions");
@@ -33,10 +33,10 @@ public static class CSharpCompilationOptionsShimExtensions
 
     extension(CSharpCompilationOptions wrappedInstance)
     {
-        public string Language => (string)LanguageAccessor(wrappedInstance);
-        public MetadataImportOptions MetadataImportOptions => (MetadataImportOptions)MetadataImportOptionsAccessor(wrappedInstance);
-        public NullableContextOptions NullableContextOptions => (NullableContextOptions)NullableContextOptionsAccessor(wrappedInstance);
-        public SyntaxTreeOptionsProviderWrapper SyntaxTreeOptionsProvider => SyntaxTreeOptionsProviderWrapper.From(SyntaxTreeOptionsProviderAccessor(wrappedInstance));
+        public string Language => LanguageAccessor(wrappedInstance);
+        public MetadataImportOptions MetadataImportOptions => MetadataImportOptionsAccessor(wrappedInstance);
+        public NullableContextOptions NullableContextOptions => NullableContextOptionsAccessor(wrappedInstance);
+        public SyntaxTreeOptionsProviderWrapper SyntaxTreeOptionsProvider => SyntaxTreeOptionsProviderAccessor(wrappedInstance);
 
         public CSharpCompilationOptions WithMetadataImportOptions(MetadataImportOptions value) => WithMetadataImportOptionsAccessor(wrappedInstance, value);
         public CSharpCompilationOptions WithNullableContextOptions(NullableContextOptions options) => WithNullableContextOptionsAccessor(wrappedInstance, options);

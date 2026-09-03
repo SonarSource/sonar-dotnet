@@ -26,14 +26,14 @@ public readonly struct ICompoundAssignmentOperationWrapper : IOperationWrapper, 
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
     private static readonly Func<IOperation, ITypeSymbol> ConstrainedToTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "ConstrainedToType");
-    private static readonly Func<IOperation, Object> InConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, Object>>(WrappedType, "InConversion");
+    private static readonly Func<IOperation, CommonConversionWrapper> InConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, CommonConversionWrapper>>(WrappedType, "InConversion");
     private static readonly Func<IOperation, bool> IsCheckedAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsChecked");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, bool> IsLiftedAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsLifted");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, BinaryOperatorKind> OperatorKindAccessor = AccessorFactory.CreateProperty<Func<IOperation, BinaryOperatorKind>>(WrappedType, "OperatorKind");
     private static readonly Func<IOperation, IMethodSymbol> OperatorMethodAccessor = AccessorFactory.CreateProperty<Func<IOperation, IMethodSymbol>>(WrappedType, "OperatorMethod");
-    private static readonly Func<IOperation, Object> OutConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, Object>>(WrappedType, "OutConversion");
+    private static readonly Func<IOperation, CommonConversionWrapper> OutConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, CommonConversionWrapper>>(WrappedType, "OutConversion");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
     private static readonly Func<IOperation, IOperation> TargetAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Target");
@@ -70,16 +70,16 @@ public readonly struct ICompoundAssignmentOperationWrapper : IOperationWrapper, 
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
-    public CommonConversionWrapper InConversion => CommonConversionWrapper.From(InConversionAccessor(wrappedInstance));
-    public bool IsChecked => (bool)IsCheckedAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public bool IsLifted => (bool)IsLiftedAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
-    public BinaryOperatorKind OperatorKind => (BinaryOperatorKind)OperatorKindAccessor(wrappedInstance);
+    public CommonConversionWrapper InConversion => InConversionAccessor(wrappedInstance);
+    public bool IsChecked => IsCheckedAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public bool IsLifted => IsLiftedAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
+    public BinaryOperatorKind OperatorKind => OperatorKindAccessor(wrappedInstance);
     public IMethodSymbol OperatorMethod => OperatorMethodAccessor(wrappedInstance);
-    public CommonConversionWrapper OutConversion => CommonConversionWrapper.From(OutConversionAccessor(wrappedInstance));
+    public CommonConversionWrapper OutConversion => OutConversionAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public IOperation Target => TargetAccessor(wrappedInstance);

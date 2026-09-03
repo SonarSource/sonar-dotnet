@@ -24,20 +24,20 @@ public readonly struct RecursivePatternSyntaxWrapper : IWrapper, IEquatable<Recu
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Designation");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PositionalPatternClauseAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "PositionalPatternClause");
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> PropertyPatternClauseAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "PropertyPatternClause");
+    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper> DesignationAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper>>(WrappedType, "Designation");
+    private static readonly Func<CSharpSyntaxNode, PositionalPatternClauseSyntaxWrapper> PositionalPatternClauseAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, PositionalPatternClauseSyntaxWrapper>>(WrappedType, "PositionalPatternClause");
+    private static readonly Func<CSharpSyntaxNode, PropertyPatternClauseSyntaxWrapper> PropertyPatternClauseAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, PropertyPatternClauseSyntaxWrapper>>(WrappedType, "PropertyPatternClause");
     private static readonly Func<CSharpSyntaxNode, TypeSyntax> TypeAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, TypeSyntax>>(WrappedType, "Type");
 
-    private static readonly Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], CSharpSyntaxNode> AddPositionalPatternClauseSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], CSharpSyntaxNode>>(WrappedType, "AddPositionalPatternClauseSubpatterns");
-    private static readonly Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], CSharpSyntaxNode> AddPropertyPatternClauseSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], CSharpSyntaxNode>>(WrappedType, "AddPropertyPatternClauseSubpatterns");
+    private static readonly Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], RecursivePatternSyntaxWrapper> AddPositionalPatternClauseSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], RecursivePatternSyntaxWrapper>>(WrappedType, "AddPositionalPatternClauseSubpatterns");
+    private static readonly Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], RecursivePatternSyntaxWrapper> AddPropertyPatternClauseSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], RecursivePatternSyntaxWrapper>>(WrappedType, "AddPropertyPatternClauseSubpatterns");
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax, PositionalPatternClauseSyntaxWrapper, PropertyPatternClauseSyntaxWrapper, VariableDesignationSyntaxWrapper, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, PositionalPatternClauseSyntaxWrapper, PropertyPatternClauseSyntaxWrapper, VariableDesignationSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, CSharpSyntaxNode> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithDesignation");
-    private static readonly Func<CSharpSyntaxNode, PositionalPatternClauseSyntaxWrapper, CSharpSyntaxNode> WithPositionalPatternClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PositionalPatternClauseSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithPositionalPatternClause");
-    private static readonly Func<CSharpSyntaxNode, PropertyPatternClauseSyntaxWrapper, CSharpSyntaxNode> WithPropertyPatternClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PropertyPatternClauseSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithPropertyPatternClause");
-    private static readonly Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode> WithTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, CSharpSyntaxNode>>(WrappedType, "WithType");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, PositionalPatternClauseSyntaxWrapper, PropertyPatternClauseSyntaxWrapper, VariableDesignationSyntaxWrapper, RecursivePatternSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, PositionalPatternClauseSyntaxWrapper, PropertyPatternClauseSyntaxWrapper, VariableDesignationSyntaxWrapper, RecursivePatternSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, RecursivePatternSyntaxWrapper> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, RecursivePatternSyntaxWrapper>>(WrappedType, "WithDesignation");
+    private static readonly Func<CSharpSyntaxNode, PositionalPatternClauseSyntaxWrapper, RecursivePatternSyntaxWrapper> WithPositionalPatternClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PositionalPatternClauseSyntaxWrapper, RecursivePatternSyntaxWrapper>>(WrappedType, "WithPositionalPatternClause");
+    private static readonly Func<CSharpSyntaxNode, PropertyPatternClauseSyntaxWrapper, RecursivePatternSyntaxWrapper> WithPropertyPatternClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, PropertyPatternClauseSyntaxWrapper, RecursivePatternSyntaxWrapper>>(WrappedType, "WithPropertyPatternClause");
+    private static readonly Func<CSharpSyntaxNode, TypeSyntax, RecursivePatternSyntaxWrapper> WithTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, TypeSyntax, RecursivePatternSyntaxWrapper>>(WrappedType, "WithType");
 
     private RecursivePatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -79,9 +79,9 @@ public readonly struct RecursivePatternSyntaxWrapper : IWrapper, IEquatable<Recu
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(wrappedInstance));
-    public PositionalPatternClauseSyntaxWrapper PositionalPatternClause => PositionalPatternClauseSyntaxWrapper.From(PositionalPatternClauseAccessor(wrappedInstance));
-    public PropertyPatternClauseSyntaxWrapper PropertyPatternClause => PropertyPatternClauseSyntaxWrapper.From(PropertyPatternClauseAccessor(wrappedInstance));
+    public VariableDesignationSyntaxWrapper Designation => DesignationAccessor(wrappedInstance);
+    public PositionalPatternClauseSyntaxWrapper PositionalPatternClause => PositionalPatternClauseAccessor(wrappedInstance);
+    public PropertyPatternClauseSyntaxWrapper PropertyPatternClause => PropertyPatternClauseAccessor(wrappedInstance);
     public TypeSyntax Type => TypeAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
@@ -142,15 +142,15 @@ public readonly struct RecursivePatternSyntaxWrapper : IWrapper, IEquatable<Recu
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public RecursivePatternSyntaxWrapper AddPositionalPatternClauseSubpatterns(SubpatternSyntaxWrapper[] items) => RecursivePatternSyntaxWrapper.From(AddPositionalPatternClauseSubpatternsAccessor(wrappedInstance, items));
-    public RecursivePatternSyntaxWrapper AddPropertyPatternClauseSubpatterns(SubpatternSyntaxWrapper[] items) => RecursivePatternSyntaxWrapper.From(AddPropertyPatternClauseSubpatternsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public RecursivePatternSyntaxWrapper Update(TypeSyntax type, PositionalPatternClauseSyntaxWrapper positionalPatternClause, PropertyPatternClauseSyntaxWrapper propertyPatternClause, VariableDesignationSyntaxWrapper designation) => RecursivePatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, type, positionalPatternClause, propertyPatternClause, designation));
-    public RecursivePatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => RecursivePatternSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
-    public RecursivePatternSyntaxWrapper WithPositionalPatternClause(PositionalPatternClauseSyntaxWrapper positionalPatternClause) => RecursivePatternSyntaxWrapper.From(WithPositionalPatternClauseAccessor(wrappedInstance, positionalPatternClause));
-    public RecursivePatternSyntaxWrapper WithPropertyPatternClause(PropertyPatternClauseSyntaxWrapper propertyPatternClause) => RecursivePatternSyntaxWrapper.From(WithPropertyPatternClauseAccessor(wrappedInstance, propertyPatternClause));
-    public RecursivePatternSyntaxWrapper WithType(TypeSyntax type) => RecursivePatternSyntaxWrapper.From(WithTypeAccessor(wrappedInstance, type));
+    public RecursivePatternSyntaxWrapper AddPositionalPatternClauseSubpatterns(SubpatternSyntaxWrapper[] items) => AddPositionalPatternClauseSubpatternsAccessor(wrappedInstance, items);
+    public RecursivePatternSyntaxWrapper AddPropertyPatternClauseSubpatterns(SubpatternSyntaxWrapper[] items) => AddPropertyPatternClauseSubpatternsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public RecursivePatternSyntaxWrapper Update(TypeSyntax type, PositionalPatternClauseSyntaxWrapper positionalPatternClause, PropertyPatternClauseSyntaxWrapper propertyPatternClause, VariableDesignationSyntaxWrapper designation) => UpdateAccessor(wrappedInstance, type, positionalPatternClause, propertyPatternClause, designation);
+    public RecursivePatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => WithDesignationAccessor(wrappedInstance, designation);
+    public RecursivePatternSyntaxWrapper WithPositionalPatternClause(PositionalPatternClauseSyntaxWrapper positionalPatternClause) => WithPositionalPatternClauseAccessor(wrappedInstance, positionalPatternClause);
+    public RecursivePatternSyntaxWrapper WithPropertyPatternClause(PropertyPatternClauseSyntaxWrapper propertyPatternClause) => WithPropertyPatternClauseAccessor(wrappedInstance, propertyPatternClause);
+    public RecursivePatternSyntaxWrapper WithType(TypeSyntax type) => WithTypeAccessor(wrappedInstance, type);
 
     public static explicit operator RecursivePatternSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

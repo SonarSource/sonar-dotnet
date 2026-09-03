@@ -24,7 +24,7 @@ public readonly struct IncrementalGeneratorInitializationContextWrapper : IWrapp
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
-    private static readonly Func<Object, Object> SyntaxProviderAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "SyntaxProvider");
+    private static readonly Func<Object, SyntaxValueProviderWrapper> SyntaxProviderAccessor = AccessorFactory.CreateProperty<Func<Object, SyntaxValueProviderWrapper>>(WrappedType, "SyntaxProvider");
 
     private IncrementalGeneratorInitializationContextWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -49,7 +49,7 @@ public readonly struct IncrementalGeneratorInitializationContextWrapper : IWrapp
     public static bool operator !=(IncrementalGeneratorInitializationContextWrapper left, IncrementalGeneratorInitializationContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public SyntaxValueProviderWrapper SyntaxProvider => SyntaxValueProviderWrapper.From(SyntaxProviderAccessor(wrappedInstance));
+    public SyntaxValueProviderWrapper SyntaxProvider => SyntaxProviderAccessor(wrappedInstance);
 
     public static IncrementalGeneratorInitializationContextWrapper From(Object instance)
     {

@@ -40,8 +40,8 @@ public static class UsingDirectiveSyntaxShimExtensions
         public TypeSyntax NamespaceOrType => NamespaceOrTypeAccessor(wrappedInstance);
         public SyntaxToken UnsafeKeyword => UnsafeKeywordAccessor(wrappedInstance);
 
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public UsingDirectiveSyntax Update(SyntaxToken globalKeyword, SyntaxToken usingKeyword, SyntaxToken staticKeyword, NameEqualsSyntax alias, NameSyntax name, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, globalKeyword, usingKeyword, staticKeyword, alias, name, semicolonToken);
         public UsingDirectiveSyntax Update(SyntaxToken globalKeyword, SyntaxToken usingKeyword, SyntaxToken staticKeyword, SyntaxToken unsafeKeyword, NameEqualsSyntax alias, TypeSyntax namespaceOrType, SyntaxToken semicolonToken) => UpdateAccessor_Overload3(wrappedInstance, globalKeyword, usingKeyword, staticKeyword, unsafeKeyword, alias, namespaceOrType, semicolonToken);
         public UsingDirectiveSyntax WithGlobalKeyword(SyntaxToken globalKeyword) => WithGlobalKeywordAccessor(wrappedInstance, globalKeyword);

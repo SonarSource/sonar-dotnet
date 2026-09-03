@@ -51,9 +51,9 @@ public readonly struct AnalyzerConfigOptionsResultWrapper : IWrapper, IEquatable
     public static bool operator !=(AnalyzerConfigOptionsResultWrapper left, AnalyzerConfigOptionsResultWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public ImmutableDictionary<string, string> AnalyzerOptions => (ImmutableDictionary<string, string>)AnalyzerOptionsAccessor(wrappedInstance);
-    public ImmutableArray<Diagnostic> Diagnostics => (ImmutableArray<Diagnostic>)DiagnosticsAccessor(wrappedInstance);
-    public ImmutableDictionary<string, ReportDiagnostic> TreeOptions => (ImmutableDictionary<string, ReportDiagnostic>)TreeOptionsAccessor(wrappedInstance);
+    public ImmutableDictionary<string, string> AnalyzerOptions => AnalyzerOptionsAccessor(wrappedInstance);
+    public ImmutableArray<Diagnostic> Diagnostics => DiagnosticsAccessor(wrappedInstance);
+    public ImmutableDictionary<string, ReportDiagnostic> TreeOptions => TreeOptionsAccessor(wrappedInstance);
 
     public static AnalyzerConfigOptionsResultWrapper From(Object instance)
     {

@@ -129,7 +129,11 @@ public class SyntaxNodeWrapStrategyTest
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.FindTrivia))[1], true, "AcceptAccessor_Overload2"),    // Passthrough method - normal
                 new(typeof(RecordDeclarationSyntax).GetMember(nameof(RecordDeclarationSyntax.WithParameterList))[0], false, "WithParameterListAccessor"),   // Wrapped method
             ]);
-        var model = new StrategyModel(new() { { skippedPropertyTypeMember.PropertyType, new SkipStrategy(skippedPropertyTypeMember.PropertyType) } });
+        var model = new StrategyModel(new()
+        {
+            { skippedPropertyTypeMember.PropertyType, new SkipStrategy(skippedPropertyTypeMember.PropertyType) },
+            { typeof(RecordDeclarationSyntax), sut },
+        });
 
         sut.Generate(model).Should().BeIgnoringLineEndings(
             """
@@ -161,7 +165,7 @@ public class SyntaxNodeWrapStrategyTest
 
                 private static readonly Func<TypeDeclarationSyntax, SyntaxToken> ClassOrStructKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeDeclarationSyntax, SyntaxToken>>(WrappedType, "ClassOrStructKeyword");
 
-                private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax, RecordDeclarationSyntax> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, ParameterListSyntax, RecordDeclarationSyntax>>(WrappedType, "WithParameterList");
+                private static readonly Func<TypeDeclarationSyntax, ParameterListSyntax, RecordDeclarationSyntaxWrapper> WithParameterListAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, ParameterListSyntax, RecordDeclarationSyntaxWrapper>>(WrappedType, "WithParameterList");
 
                 private RecordDeclarationSyntaxWrapper(TypeDeclarationSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
@@ -188,13 +192,13 @@ public class SyntaxNodeWrapStrategyTest
 
                 public TextSpan Span => wrappedInstance.Span;
 
-                public SyntaxToken ClassOrStructKeyword => (SyntaxToken)ClassOrStructKeywordAccessor(wrappedInstance);
+                public SyntaxToken ClassOrStructKeyword => ClassOrStructKeywordAccessor(wrappedInstance);
 
                 public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
                 public SyntaxTrivia FindTrivia(int position, Func<SyntaxTrivia, bool> stepInto) => wrappedInstance.FindTrivia(position, stepInto);
                 public SyntaxTrivia FindTrivia(int position, bool findInsideTrivia) => wrappedInstance.FindTrivia(position, findInsideTrivia);
 
-                public RecordDeclarationSyntax WithParameterList(ParameterListSyntax parameterList) => (RecordDeclarationSyntax)WithParameterListAccessor(wrappedInstance, parameterList);
+                public RecordDeclarationSyntaxWrapper WithParameterList(ParameterListSyntax parameterList) => WithParameterListAccessor(wrappedInstance, parameterList);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>
                     From(instance);
@@ -265,7 +269,7 @@ public class SyntaxNodeWrapStrategyTest
                 private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
                 private readonly ExpressionSyntax wrappedInstance;
 
-                private static readonly Func<ExpressionSyntax, CSharpSyntaxNode> PatternAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Pattern");
+                private static readonly Func<ExpressionSyntax, PatternSyntaxWrapper> PatternAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, PatternSyntaxWrapper>>(WrappedType, "Pattern");
 
                 private IsPatternExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
@@ -290,7 +294,7 @@ public class SyntaxNodeWrapStrategyTest
                 public static bool operator !=(IsPatternExpressionSyntaxWrapper left, IsPatternExpressionSyntaxWrapper right) =>
                     !Equals(left.wrappedInstance, right.wrappedInstance);
 
-                public PatternSyntaxWrapper Pattern => PatternSyntaxWrapper.From(PatternAccessor(wrappedInstance));
+                public PatternSyntaxWrapper Pattern => PatternAccessor(wrappedInstance);
 
                 public static explicit operator IsPatternExpressionSyntaxWrapper(SyntaxNode instance) =>
                     From(instance);
@@ -678,8 +682,8 @@ public class SyntaxNodeWrapStrategyTest
 
                 public SyntaxList<AttributeListSyntax> AttributeLists => wrappedInstance.AttributeLists;
 
-                public SyntaxList<MemberDeclarationSyntax> Members => (SyntaxList<MemberDeclarationSyntax>)MembersAccessor(wrappedInstance);
-                public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(wrappedInstance);
+                public SyntaxList<MemberDeclarationSyntax> Members => MembersAccessor(wrappedInstance);
+                public SeparatedSyntaxList<ArgumentSyntax> Arguments => ArgumentsAccessor(wrappedInstance);
                 public SeparatedSyntaxListWrapper<SwitchExpressionArmSyntaxWrapper> Arms => ArmsAccessor(wrappedInstance);
 
                 public static explicit operator RecordDeclarationSyntaxWrapper(SyntaxNode instance) =>

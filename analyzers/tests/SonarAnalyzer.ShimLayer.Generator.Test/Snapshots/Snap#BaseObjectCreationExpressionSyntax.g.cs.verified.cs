@@ -28,12 +28,12 @@ public readonly struct BaseObjectCreationExpressionSyntaxWrapper : IWrapper, IEq
     private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax> InitializerAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, InitializerExpressionSyntax>>(WrappedType, "Initializer");
     private static readonly Func<ExpressionSyntax, SyntaxToken> NewKeywordAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "NewKeyword");
 
-    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax> AddArgumentListArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax>>(WrappedType, "AddArgumentListArguments");
+    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], BaseObjectCreationExpressionSyntaxWrapper> AddArgumentListArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], BaseObjectCreationExpressionSyntaxWrapper>>(WrappedType, "AddArgumentListArguments");
     private static readonly Func<ExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<ExpressionSyntax, ArgumentListSyntax, ExpressionSyntax> WithArgumentListAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentListSyntax, ExpressionSyntax>>(WrappedType, "WithArgumentList");
-    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax> WithInitializerAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, InitializerExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithInitializer");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithNewKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithNewKeyword");
+    private static readonly Func<ExpressionSyntax, ArgumentListSyntax, BaseObjectCreationExpressionSyntaxWrapper> WithArgumentListAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentListSyntax, BaseObjectCreationExpressionSyntaxWrapper>>(WrappedType, "WithArgumentList");
+    private static readonly Func<ExpressionSyntax, InitializerExpressionSyntax, BaseObjectCreationExpressionSyntaxWrapper> WithInitializerAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, InitializerExpressionSyntax, BaseObjectCreationExpressionSyntaxWrapper>>(WrappedType, "WithInitializer");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, BaseObjectCreationExpressionSyntaxWrapper> WithNewKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, BaseObjectCreationExpressionSyntaxWrapper>>(WrappedType, "WithNewKeyword");
 
     private BaseObjectCreationExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -137,12 +137,12 @@ public readonly struct BaseObjectCreationExpressionSyntaxWrapper : IWrapper, IEq
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public BaseObjectCreationExpressionSyntaxWrapper AddArgumentListArguments(ArgumentSyntax[] items) => BaseObjectCreationExpressionSyntaxWrapper.From(AddArgumentListArgumentsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public BaseObjectCreationExpressionSyntaxWrapper WithArgumentList(ArgumentListSyntax argumentList) => BaseObjectCreationExpressionSyntaxWrapper.From(WithArgumentListAccessor(wrappedInstance, argumentList));
-    public BaseObjectCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => BaseObjectCreationExpressionSyntaxWrapper.From(WithInitializerAccessor(wrappedInstance, initializer));
-    public BaseObjectCreationExpressionSyntaxWrapper WithNewKeyword(SyntaxToken newKeyword) => BaseObjectCreationExpressionSyntaxWrapper.From(WithNewKeywordAccessor(wrappedInstance, newKeyword));
+    public BaseObjectCreationExpressionSyntaxWrapper AddArgumentListArguments(ArgumentSyntax[] items) => AddArgumentListArgumentsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public BaseObjectCreationExpressionSyntaxWrapper WithArgumentList(ArgumentListSyntax argumentList) => WithArgumentListAccessor(wrappedInstance, argumentList);
+    public BaseObjectCreationExpressionSyntaxWrapper WithInitializer(InitializerExpressionSyntax initializer) => WithInitializerAccessor(wrappedInstance, initializer);
+    public BaseObjectCreationExpressionSyntaxWrapper WithNewKeyword(SyntaxToken newKeyword) => WithNewKeywordAccessor(wrappedInstance, newKeyword);
 
     public static explicit operator BaseObjectCreationExpressionSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

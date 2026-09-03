@@ -30,7 +30,7 @@ public readonly struct ICoalesceOperationWrapper : IOperationWrapper, IWrapper, 
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
     private static readonly Func<IOperation, IOperation> ValueAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Value");
-    private static readonly Func<IOperation, Object> ValueConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, Object>>(WrappedType, "ValueConversion");
+    private static readonly Func<IOperation, CommonConversionWrapper> ValueConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, CommonConversionWrapper>>(WrappedType, "ValueConversion");
     private static readonly Func<IOperation, IOperation> WhenNullAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "WhenNull");
 
     private static readonly Action<IOperation, OperationVisitorWrapper> AcceptAccessor = AccessorFactory.CreateMethod<Action<IOperation, OperationVisitorWrapper>>(WrappedType, "Accept");
@@ -64,13 +64,13 @@ public readonly struct ICoalesceOperationWrapper : IOperationWrapper, IWrapper, 
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);
-    public CommonConversionWrapper ValueConversion => CommonConversionWrapper.From(ValueConversionAccessor(wrappedInstance));
+    public CommonConversionWrapper ValueConversion => ValueConversionAccessor(wrappedInstance);
     public IOperation WhenNull => WhenNullAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);

@@ -37,16 +37,16 @@ public static class IPropertySymbolShimExtensions
 
     extension(IPropertySymbol wrappedInstance)
     {
-        public bool IsPartialDefinition => (bool)IsPartialDefinitionAccessor(wrappedInstance);
-        public bool IsRequired => (bool)IsRequiredAccessor(wrappedInstance);
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
-        public NullableAnnotation NullableAnnotation => (NullableAnnotation)NullableAnnotationAccessor(wrappedInstance);
+        public bool IsPartialDefinition => IsPartialDefinitionAccessor(wrappedInstance);
+        public bool IsRequired => IsRequiredAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
         public IPropertySymbol PartialDefinitionPart => PartialDefinitionPartAccessor(wrappedInstance);
         public IPropertySymbol PartialImplementationPart => PartialImplementationPartAccessor(wrappedInstance);
-        public ImmutableArray<CustomModifier> RefCustomModifiers => (ImmutableArray<CustomModifier>)RefCustomModifiersAccessor(wrappedInstance);
-        public RefKind RefKind => (RefKind)RefKindAccessor(wrappedInstance);
-        public bool ReturnsByRef => (bool)ReturnsByRefAccessor(wrappedInstance);
-        public bool ReturnsByRefReadonly => (bool)ReturnsByRefReadonlyAccessor(wrappedInstance);
+        public ImmutableArray<CustomModifier> RefCustomModifiers => RefCustomModifiersAccessor(wrappedInstance);
+        public RefKind RefKind => RefKindAccessor(wrappedInstance);
+        public bool ReturnsByRef => ReturnsByRefAccessor(wrappedInstance);
+        public bool ReturnsByRefReadonly => ReturnsByRefReadonlyAccessor(wrappedInstance);
 
         public IPropertySymbol ReduceExtensionMember(ITypeSymbol receiverType) => ReduceExtensionMemberAccessor(wrappedInstance, receiverType);
     }

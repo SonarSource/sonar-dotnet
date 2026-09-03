@@ -51,7 +51,7 @@ public readonly struct GeneratedSourceResultWrapper : IWrapper, IEquatable<Gener
     public static bool operator !=(GeneratedSourceResultWrapper left, GeneratedSourceResultWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public string HintName => (string)HintNameAccessor(wrappedInstance);
+    public string HintName => HintNameAccessor(wrappedInstance);
     public SourceText SourceText => SourceTextAccessor(wrappedInstance);
     public SyntaxTree SyntaxTree => SyntaxTreeAccessor(wrappedInstance);
 

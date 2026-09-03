@@ -32,13 +32,13 @@ public readonly struct TupleTypeSyntaxWrapper : IWrapper, IEquatable<TupleTypeSy
     private static readonly Func<TypeSyntax, bool> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, bool>>(WrappedType, "IsUnmanaged");
     private static readonly Func<TypeSyntax, SyntaxToken> OpenParenTokenAccessor = AccessorFactory.CreateProperty<Func<TypeSyntax, SyntaxToken>>(WrappedType, "OpenParenToken");
 
-    private static readonly Func<TypeSyntax, TupleElementSyntaxWrapper[], TypeSyntax> AddElementsAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TupleElementSyntaxWrapper[], TypeSyntax>>(WrappedType, "AddElements");
+    private static readonly Func<TypeSyntax, TupleElementSyntaxWrapper[], TupleTypeSyntaxWrapper> AddElementsAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, TupleElementSyntaxWrapper[], TupleTypeSyntaxWrapper>>(WrappedType, "AddElements");
     private static readonly Func<TypeSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<TypeSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<TypeSyntax, SyntaxToken, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, SyntaxToken, TypeSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, SyntaxToken, TypeSyntax>>(WrappedType, "Update");
-    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithCloseParenToken");
-    private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, TypeSyntax> WithElementsAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, TypeSyntax>>(WrappedType, "WithElements");
-    private static readonly Func<TypeSyntax, SyntaxToken, TypeSyntax> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TypeSyntax>>(WrappedType, "WithOpenParenToken");
+    private static readonly Func<TypeSyntax, SyntaxToken, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, SyntaxToken, TupleTypeSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, SyntaxToken, TupleTypeSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<TypeSyntax, SyntaxToken, TupleTypeSyntaxWrapper> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TupleTypeSyntaxWrapper>>(WrappedType, "WithCloseParenToken");
+    private static readonly Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, TupleTypeSyntaxWrapper> WithElementsAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper>, TupleTypeSyntaxWrapper>>(WrappedType, "WithElements");
+    private static readonly Func<TypeSyntax, SyntaxToken, TupleTypeSyntaxWrapper> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<TypeSyntax, SyntaxToken, TupleTypeSyntaxWrapper>>(WrappedType, "WithOpenParenToken");
 
     private TupleTypeSyntaxWrapper(TypeSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -83,10 +83,10 @@ public readonly struct TupleTypeSyntaxWrapper : IWrapper, IEquatable<TupleTypeSy
 
     public SyntaxToken CloseParenToken => CloseParenTokenAccessor(wrappedInstance);
     public SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> Elements => ElementsAccessor(wrappedInstance);
-    public bool IsNint => (bool)IsNintAccessor(wrappedInstance);
-    public bool IsNotNull => (bool)IsNotNullAccessor(wrappedInstance);
-    public bool IsNuint => (bool)IsNuintAccessor(wrappedInstance);
-    public bool IsUnmanaged => (bool)IsUnmanagedAccessor(wrappedInstance);
+    public bool IsNint => IsNintAccessor(wrappedInstance);
+    public bool IsNotNull => IsNotNullAccessor(wrappedInstance);
+    public bool IsNuint => IsNuintAccessor(wrappedInstance);
+    public bool IsUnmanaged => IsUnmanagedAccessor(wrappedInstance);
     public SyntaxToken OpenParenToken => OpenParenTokenAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
@@ -147,13 +147,13 @@ public readonly struct TupleTypeSyntaxWrapper : IWrapper, IEquatable<TupleTypeSy
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public TupleTypeSyntaxWrapper AddElements(TupleElementSyntaxWrapper[] items) => TupleTypeSyntaxWrapper.From(AddElementsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public TupleTypeSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> elements, SyntaxToken closeParenToken) => TupleTypeSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, elements, closeParenToken));
-    public TupleTypeSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => TupleTypeSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
-    public TupleTypeSyntaxWrapper WithElements(SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> elements) => TupleTypeSyntaxWrapper.From(WithElementsAccessor(wrappedInstance, elements));
-    public TupleTypeSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => TupleTypeSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
+    public TupleTypeSyntaxWrapper AddElements(TupleElementSyntaxWrapper[] items) => AddElementsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public TupleTypeSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> elements, SyntaxToken closeParenToken) => UpdateAccessor(wrappedInstance, openParenToken, elements, closeParenToken);
+    public TupleTypeSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => WithCloseParenTokenAccessor(wrappedInstance, closeParenToken);
+    public TupleTypeSyntaxWrapper WithElements(SeparatedSyntaxListWrapper<TupleElementSyntaxWrapper> elements) => WithElementsAccessor(wrappedInstance, elements);
+    public TupleTypeSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => WithOpenParenTokenAccessor(wrappedInstance, openParenToken);
 
     public static explicit operator TupleTypeSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

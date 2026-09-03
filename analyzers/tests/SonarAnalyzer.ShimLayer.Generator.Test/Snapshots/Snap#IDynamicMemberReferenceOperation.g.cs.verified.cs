@@ -65,15 +65,15 @@ public readonly struct IDynamicMemberReferenceOperationWrapper : IOperationWrapp
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ITypeSymbol ContainingType => ContainingTypeAccessor(wrappedInstance);
     public IOperation Instance => InstanceAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
-    public string MemberName => (string)MemberNameAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
+    public string MemberName => MemberNameAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
-    public ImmutableArray<ITypeSymbol> TypeArguments => (ImmutableArray<ITypeSymbol>)TypeArgumentsAccessor(wrappedInstance);
+    public ImmutableArray<ITypeSymbol> TypeArguments => TypeArgumentsAccessor(wrappedInstance);
 
     public void Accept(OperationVisitorWrapper visitor) => AcceptAccessor(wrappedInstance, visitor);
 

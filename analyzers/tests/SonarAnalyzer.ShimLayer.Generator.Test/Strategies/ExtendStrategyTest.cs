@@ -79,10 +79,10 @@ public class ExtendStrategyTest
 
                 extension(ClassDeclarationSyntax wrappedInstance)
                 {
-                    public ParameterListSyntax ParameterList => (ParameterListSyntax)ParameterListAccessor(wrappedInstance);
-                    public SyntaxToken SemicolonToken => (SyntaxToken)SemicolonTokenAccessor(wrappedInstance);
+                    public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
+                    public SyntaxToken SemicolonToken => SemicolonTokenAccessor(wrappedInstance);
 
-                    public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => (ClassDeclarationSyntax)AddParameterListParametersAccessor(wrappedInstance, items);
+                    public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
                 }
             }
             """);
@@ -125,7 +125,7 @@ public class ExtendStrategyTest
 
                 extension(ClassDeclarationSyntax wrappedInstance)
                 {
-                    public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => (ClassDeclarationSyntax)AddParameterListParametersAccessor(wrappedInstance, items);
+                    public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
                 }
             }
             """);
@@ -170,7 +170,7 @@ public class ExtendStrategyTest
                 extension(ProcessStartInfo wrappedInstance)
                 {
                     [System.ComponentModel.EditorAttribute("System.Diagnostics.Design.StartFileNameEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-                    public string FileName => (string)FileNameAccessor(wrappedInstance);
+                    public string FileName => FileNameAccessor(wrappedInstance);
                 }
             }
             """);

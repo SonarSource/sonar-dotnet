@@ -26,6 +26,6 @@ public static class IModuleSymbolShimExtensions
 
     extension(IModuleSymbol wrappedInstance)
     {
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
     }
 }

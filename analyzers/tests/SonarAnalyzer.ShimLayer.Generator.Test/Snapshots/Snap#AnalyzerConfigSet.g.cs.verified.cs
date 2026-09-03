@@ -24,9 +24,9 @@ public readonly struct AnalyzerConfigSetWrapper : IWrapper, IEquatable<AnalyzerC
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
-    private static readonly Func<Object, Object> GlobalConfigOptionsAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "GlobalConfigOptions");
+    private static readonly Func<Object, AnalyzerConfigOptionsResultWrapper> GlobalConfigOptionsAccessor = AccessorFactory.CreateProperty<Func<Object, AnalyzerConfigOptionsResultWrapper>>(WrappedType, "GlobalConfigOptions");
 
-    private static readonly Func<Object, string, Object> GetOptionsForSourcePathAccessor = AccessorFactory.CreateMethod<Func<Object, string, Object>>(WrappedType, "GetOptionsForSourcePath");
+    private static readonly Func<Object, string, AnalyzerConfigOptionsResultWrapper> GetOptionsForSourcePathAccessor = AccessorFactory.CreateMethod<Func<Object, string, AnalyzerConfigOptionsResultWrapper>>(WrappedType, "GetOptionsForSourcePath");
 
     private AnalyzerConfigSetWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -51,9 +51,9 @@ public readonly struct AnalyzerConfigSetWrapper : IWrapper, IEquatable<AnalyzerC
     public static bool operator !=(AnalyzerConfigSetWrapper left, AnalyzerConfigSetWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public AnalyzerConfigOptionsResultWrapper GlobalConfigOptions => AnalyzerConfigOptionsResultWrapper.From(GlobalConfigOptionsAccessor(wrappedInstance));
+    public AnalyzerConfigOptionsResultWrapper GlobalConfigOptions => GlobalConfigOptionsAccessor(wrappedInstance);
 
-    public AnalyzerConfigOptionsResultWrapper GetOptionsForSourcePath(string sourcePath) => AnalyzerConfigOptionsResultWrapper.From(GetOptionsForSourcePathAccessor(wrappedInstance, sourcePath));
+    public AnalyzerConfigOptionsResultWrapper GetOptionsForSourcePath(string sourcePath) => GetOptionsForSourcePathAccessor(wrappedInstance, sourcePath);
 
     public static AnalyzerConfigSetWrapper From(Object instance)
     {

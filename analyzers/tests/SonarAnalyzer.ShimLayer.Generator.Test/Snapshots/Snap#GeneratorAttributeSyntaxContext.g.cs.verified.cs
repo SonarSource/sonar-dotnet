@@ -52,7 +52,7 @@ public readonly struct GeneratorAttributeSyntaxContextWrapper : IWrapper, IEquat
     public static bool operator !=(GeneratorAttributeSyntaxContextWrapper left, GeneratorAttributeSyntaxContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public ImmutableArray<AttributeData> Attributes => (ImmutableArray<AttributeData>)AttributesAccessor(wrappedInstance);
+    public ImmutableArray<AttributeData> Attributes => AttributesAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public SyntaxNode TargetNode => TargetNodeAccessor(wrappedInstance);
     public ISymbol TargetSymbol => TargetSymbolAccessor(wrappedInstance);

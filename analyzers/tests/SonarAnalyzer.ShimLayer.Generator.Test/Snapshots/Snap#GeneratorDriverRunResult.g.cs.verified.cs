@@ -51,8 +51,8 @@ public readonly struct GeneratorDriverRunResultWrapper : IWrapper, IEquatable<Ge
     public static bool operator !=(GeneratorDriverRunResultWrapper left, GeneratorDriverRunResultWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public ImmutableArray<Diagnostic> Diagnostics => (ImmutableArray<Diagnostic>)DiagnosticsAccessor(wrappedInstance);
-    public ImmutableArray<SyntaxTree> GeneratedTrees => (ImmutableArray<SyntaxTree>)GeneratedTreesAccessor(wrappedInstance);
+    public ImmutableArray<Diagnostic> Diagnostics => DiagnosticsAccessor(wrappedInstance);
+    public ImmutableArray<SyntaxTree> GeneratedTrees => GeneratedTreesAccessor(wrappedInstance);
     public ImmutableArray<GeneratorRunResultWrapper> Results => ResultsAccessor(wrappedInstance);
 
     public static GeneratorDriverRunResultWrapper From(Object instance)

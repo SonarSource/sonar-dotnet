@@ -49,7 +49,7 @@ public readonly struct GeneratorDriverOptionsWrapper : IWrapper, IEquatable<Gene
     public static bool operator !=(GeneratorDriverOptionsWrapper left, GeneratorDriverOptionsWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public string BaseDirectory => (string)BaseDirectoryAccessor(wrappedInstance);
+    public string BaseDirectory => BaseDirectoryAccessor(wrappedInstance);
 
     public static GeneratorDriverOptionsWrapper From(Object instance)
     {

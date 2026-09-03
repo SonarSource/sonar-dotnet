@@ -27,7 +27,6 @@ public abstract class Strategy
     private static readonly Regex EmptyLineBeforeBlockEnd = new(@"\n\s*\n(?=\s*})", RegexOptions.None, TimeSpan.FromMilliseconds(100));
 
     public abstract string ReturnTypeSnippet { get; }
-    public abstract string ToConversionSnippet(string from);
     protected abstract string GenerateCore(StrategyModel model);
 
     public virtual bool IsSupported => true;

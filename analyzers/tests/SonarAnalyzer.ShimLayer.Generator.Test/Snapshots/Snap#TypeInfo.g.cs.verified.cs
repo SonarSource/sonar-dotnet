@@ -22,12 +22,12 @@ public static class TypeInfoShimExtensions
 {
     private static readonly Type WrappedType = typeof(TypeInfo);
 
-    private static readonly Func<TypeInfo, Object> ConvertedNullabilityAccessor = AccessorFactory.CreateProperty<Func<TypeInfo, Object>>(WrappedType, "ConvertedNullability");
-    private static readonly Func<TypeInfo, Object> NullabilityAccessor = AccessorFactory.CreateProperty<Func<TypeInfo, Object>>(WrappedType, "Nullability");
+    private static readonly Func<TypeInfo, NullabilityInfoWrapper> ConvertedNullabilityAccessor = AccessorFactory.CreateProperty<Func<TypeInfo, NullabilityInfoWrapper>>(WrappedType, "ConvertedNullability");
+    private static readonly Func<TypeInfo, NullabilityInfoWrapper> NullabilityAccessor = AccessorFactory.CreateProperty<Func<TypeInfo, NullabilityInfoWrapper>>(WrappedType, "Nullability");
 
     extension(TypeInfo wrappedInstance)
     {
-        public NullabilityInfoWrapper ConvertedNullability => NullabilityInfoWrapper.From(ConvertedNullabilityAccessor(wrappedInstance));
-        public NullabilityInfoWrapper Nullability => NullabilityInfoWrapper.From(NullabilityAccessor(wrappedInstance));
+        public NullabilityInfoWrapper ConvertedNullability => ConvertedNullabilityAccessor(wrappedInstance);
+        public NullabilityInfoWrapper Nullability => NullabilityAccessor(wrappedInstance);
     }
 }

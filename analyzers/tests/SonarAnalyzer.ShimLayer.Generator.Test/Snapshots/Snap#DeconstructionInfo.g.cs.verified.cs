@@ -51,7 +51,7 @@ public readonly struct DeconstructionInfoWrapper : IWrapper, IEquatable<Deconstr
     public static bool operator !=(DeconstructionInfoWrapper left, DeconstructionInfoWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public Nullable<Conversion> Conversion => (Nullable<Conversion>)ConversionAccessor(wrappedInstance);
+    public Nullable<Conversion> Conversion => ConversionAccessor(wrappedInstance);
     public IMethodSymbol Method => MethodAccessor(wrappedInstance);
     public ImmutableArray<DeconstructionInfoWrapper> Nested => NestedAccessor(wrappedInstance);
 

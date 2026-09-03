@@ -51,9 +51,9 @@ public readonly struct IncrementalGeneratorRunStepWrapper : IWrapper, IEquatable
     public static bool operator !=(IncrementalGeneratorRunStepWrapper left, IncrementalGeneratorRunStepWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public TimeSpan ElapsedTime => (TimeSpan)ElapsedTimeAccessor(wrappedInstance);
-    public string Name => (string)NameAccessor(wrappedInstance);
-    public ImmutableArray<ValueTuple<object, IncrementalStepRunReason>> Outputs => (ImmutableArray<ValueTuple<object, IncrementalStepRunReason>>)OutputsAccessor(wrappedInstance);
+    public TimeSpan ElapsedTime => ElapsedTimeAccessor(wrappedInstance);
+    public string Name => NameAccessor(wrappedInstance);
+    public ImmutableArray<ValueTuple<object, IncrementalStepRunReason>> Outputs => OutputsAccessor(wrappedInstance);
 
     public static IncrementalGeneratorRunStepWrapper From(Object instance)
     {

@@ -43,7 +43,7 @@ public static class SimpleLambdaExpressionSyntaxShimExtensions
 
     extension(SimpleLambdaExpressionSyntax wrappedInstance)
     {
-        public SyntaxList<AttributeListSyntax> AttributeLists => (SyntaxList<AttributeListSyntax>)AttributeListsAccessor(wrappedInstance);
+        public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
         public BlockSyntax Block => BlockAccessor(wrappedInstance);
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
@@ -52,8 +52,8 @@ public static class SimpleLambdaExpressionSyntaxShimExtensions
         public SimpleLambdaExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
         public SimpleLambdaExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
         public SimpleLambdaExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public SimpleLambdaExpressionSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, parameter, arrowToken, block, expressionBody);
         public SimpleLambdaExpressionSyntax Update(SyntaxToken asyncKeyword, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload3(wrappedInstance, asyncKeyword, parameter, arrowToken, block, expressionBody);
         public SimpleLambdaExpressionSyntax Update(SyntaxTokenList modifiers, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload4(wrappedInstance, modifiers, parameter, arrowToken, block, expressionBody);

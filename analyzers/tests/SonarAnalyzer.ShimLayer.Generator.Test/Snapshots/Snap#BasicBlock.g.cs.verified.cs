@@ -26,9 +26,9 @@ public readonly struct BasicBlockWrapper : IWrapper, IEquatable<BasicBlockWrappe
 
     private static readonly Func<Object, IOperation> BranchValueAccessor = AccessorFactory.CreateProperty<Func<Object, IOperation>>(WrappedType, "BranchValue");
     private static readonly Func<Object, ControlFlowConditionKind> ConditionKindAccessor = AccessorFactory.CreateProperty<Func<Object, ControlFlowConditionKind>>(WrappedType, "ConditionKind");
-    private static readonly Func<Object, Object> ConditionalSuccessorAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "ConditionalSuccessor");
-    private static readonly Func<Object, Object> EnclosingRegionAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "EnclosingRegion");
-    private static readonly Func<Object, Object> FallThroughSuccessorAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "FallThroughSuccessor");
+    private static readonly Func<Object, ControlFlowBranchWrapper> ConditionalSuccessorAccessor = AccessorFactory.CreateProperty<Func<Object, ControlFlowBranchWrapper>>(WrappedType, "ConditionalSuccessor");
+    private static readonly Func<Object, ControlFlowRegionWrapper> EnclosingRegionAccessor = AccessorFactory.CreateProperty<Func<Object, ControlFlowRegionWrapper>>(WrappedType, "EnclosingRegion");
+    private static readonly Func<Object, ControlFlowBranchWrapper> FallThroughSuccessorAccessor = AccessorFactory.CreateProperty<Func<Object, ControlFlowBranchWrapper>>(WrappedType, "FallThroughSuccessor");
     private static readonly Func<Object, bool> IsReachableAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsReachable");
     private static readonly Func<Object, BasicBlockKind> KindAccessor = AccessorFactory.CreateProperty<Func<Object, BasicBlockKind>>(WrappedType, "Kind");
     private static readonly Func<Object, ImmutableArray<IOperation>> OperationsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<IOperation>>>(WrappedType, "Operations");
@@ -59,14 +59,14 @@ public readonly struct BasicBlockWrapper : IWrapper, IEquatable<BasicBlockWrappe
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public IOperation BranchValue => BranchValueAccessor(wrappedInstance);
-    public ControlFlowConditionKind ConditionKind => (ControlFlowConditionKind)ConditionKindAccessor(wrappedInstance);
-    public ControlFlowBranchWrapper ConditionalSuccessor => ControlFlowBranchWrapper.From(ConditionalSuccessorAccessor(wrappedInstance));
-    public ControlFlowRegionWrapper EnclosingRegion => ControlFlowRegionWrapper.From(EnclosingRegionAccessor(wrappedInstance));
-    public ControlFlowBranchWrapper FallThroughSuccessor => ControlFlowBranchWrapper.From(FallThroughSuccessorAccessor(wrappedInstance));
-    public bool IsReachable => (bool)IsReachableAccessor(wrappedInstance);
-    public BasicBlockKind Kind => (BasicBlockKind)KindAccessor(wrappedInstance);
-    public ImmutableArray<IOperation> Operations => (ImmutableArray<IOperation>)OperationsAccessor(wrappedInstance);
-    public int Ordinal => (int)OrdinalAccessor(wrappedInstance);
+    public ControlFlowConditionKind ConditionKind => ConditionKindAccessor(wrappedInstance);
+    public ControlFlowBranchWrapper ConditionalSuccessor => ConditionalSuccessorAccessor(wrappedInstance);
+    public ControlFlowRegionWrapper EnclosingRegion => EnclosingRegionAccessor(wrappedInstance);
+    public ControlFlowBranchWrapper FallThroughSuccessor => FallThroughSuccessorAccessor(wrappedInstance);
+    public bool IsReachable => IsReachableAccessor(wrappedInstance);
+    public BasicBlockKind Kind => KindAccessor(wrappedInstance);
+    public ImmutableArray<IOperation> Operations => OperationsAccessor(wrappedInstance);
+    public int Ordinal => OrdinalAccessor(wrappedInstance);
     public ImmutableArray<ControlFlowBranchWrapper> Predecessors => PredecessorsAccessor(wrappedInstance);
 
     public static BasicBlockWrapper From(Object instance)

@@ -28,8 +28,8 @@ public static class CodeBlockAnalysisContextShimExtensions
 
     extension(CodeBlockAnalysisContext wrappedInstance)
     {
-        public Nullable<TextSpan> FilterSpan => (Nullable<TextSpan>)FilterSpanAccessor(wrappedInstance);
+        public Nullable<TextSpan> FilterSpan => FilterSpanAccessor(wrappedInstance);
         public SyntaxTree FilterTree => FilterTreeAccessor(wrappedInstance);
-        public bool IsGeneratedCode => (bool)IsGeneratedCodeAccessor(wrappedInstance);
+        public bool IsGeneratedCode => IsGeneratedCodeAccessor(wrappedInstance);
     }
 }

@@ -50,8 +50,8 @@ public readonly struct ImportedXmlNamespaceWrapper : IWrapper, IEquatable<Import
     public static bool operator !=(ImportedXmlNamespaceWrapper left, ImportedXmlNamespaceWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public SyntaxReference DeclaringSyntaxReference => (SyntaxReference)DeclaringSyntaxReferenceAccessor(wrappedInstance);
-    public string XmlNamespace => (string)XmlNamespaceAccessor(wrappedInstance);
+    public SyntaxReference DeclaringSyntaxReference => DeclaringSyntaxReferenceAccessor(wrappedInstance);
+    public string XmlNamespace => XmlNamespaceAccessor(wrappedInstance);
 
     public static ImportedXmlNamespaceWrapper From(Object instance)
     {

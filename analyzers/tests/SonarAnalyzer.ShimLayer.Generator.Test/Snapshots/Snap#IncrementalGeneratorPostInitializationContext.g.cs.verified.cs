@@ -53,7 +53,7 @@ public readonly struct IncrementalGeneratorPostInitializationContextWrapper : IW
     public static bool operator !=(IncrementalGeneratorPostInitializationContextWrapper left, IncrementalGeneratorPostInitializationContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
 
     public void AddEmbeddedAttributeDefinition() => AddEmbeddedAttributeDefinitionAccessor(wrappedInstance);
     public void AddSource(string hintName, SourceText sourceText) => AddSourceAccessor(wrappedInstance, hintName, sourceText);

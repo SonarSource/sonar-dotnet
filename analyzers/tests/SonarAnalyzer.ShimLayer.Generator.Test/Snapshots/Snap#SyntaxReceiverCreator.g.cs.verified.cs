@@ -30,10 +30,10 @@ public readonly struct SyntaxReceiverCreatorWrapper : IWrapper, IEquatable<Synta
     private static readonly Func<Object, AsyncCallback, object, IAsyncResult> BeginInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, AsyncCallback, object, IAsyncResult>>(WrappedType, "BeginInvoke");
     private static readonly Func<Object, object> CloneAccessor = AccessorFactory.CreateMethod<Func<Object, object>>(WrappedType, "Clone");
     private static readonly Func<Object, object[], object> DynamicInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, object[], object>>(WrappedType, "DynamicInvoke");
-    private static readonly Func<Object, IAsyncResult, Object> EndInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, IAsyncResult, Object>>(WrappedType, "EndInvoke");
+    private static readonly Func<Object, IAsyncResult, ISyntaxReceiverWrapper> EndInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, IAsyncResult, ISyntaxReceiverWrapper>>(WrappedType, "EndInvoke");
     private static readonly Func<Object, Delegate[]> GetInvocationListAccessor = AccessorFactory.CreateMethod<Func<Object, Delegate[]>>(WrappedType, "GetInvocationList");
     private static readonly Action<Object, SerializationInfo, StreamingContext> GetObjectDataAccessor = AccessorFactory.CreateMethod<Action<Object, SerializationInfo, StreamingContext>>(WrappedType, "GetObjectData");
-    private static readonly Func<Object, Object> InvokeAccessor = AccessorFactory.CreateMethod<Func<Object, Object>>(WrappedType, "Invoke");
+    private static readonly Func<Object, ISyntaxReceiverWrapper> InvokeAccessor = AccessorFactory.CreateMethod<Func<Object, ISyntaxReceiverWrapper>>(WrappedType, "Invoke");
 
     private SyntaxReceiverCreatorWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -58,18 +58,18 @@ public readonly struct SyntaxReceiverCreatorWrapper : IWrapper, IEquatable<Synta
     public static bool operator !=(SyntaxReceiverCreatorWrapper left, SyntaxReceiverCreatorWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public MethodInfo Method => (MethodInfo)MethodAccessor(wrappedInstance);
-    public object Target => (object)TargetAccessor(wrappedInstance);
+    public MethodInfo Method => MethodAccessor(wrappedInstance);
+    public object Target => TargetAccessor(wrappedInstance);
 
-    public IAsyncResult BeginInvoke(AsyncCallback callback, object @object) => (IAsyncResult)BeginInvokeAccessor(wrappedInstance, callback, @object);
-    public object Clone() => (object)CloneAccessor(wrappedInstance);
-    public object DynamicInvoke(object[] args) => (object)DynamicInvokeAccessor(wrappedInstance, args);
-    public ISyntaxReceiverWrapper EndInvoke(IAsyncResult result) => ISyntaxReceiverWrapper.From(EndInvokeAccessor(wrappedInstance, result));
-    public Delegate[] GetInvocationList() => (Delegate[])GetInvocationListAccessor(wrappedInstance);
+    public IAsyncResult BeginInvoke(AsyncCallback callback, object @object) => BeginInvokeAccessor(wrappedInstance, callback, @object);
+    public object Clone() => CloneAccessor(wrappedInstance);
+    public object DynamicInvoke(object[] args) => DynamicInvokeAccessor(wrappedInstance, args);
+    public ISyntaxReceiverWrapper EndInvoke(IAsyncResult result) => EndInvokeAccessor(wrappedInstance, result);
+    public Delegate[] GetInvocationList() => GetInvocationListAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
     public void GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectDataAccessor(wrappedInstance, info, context);
-    public ISyntaxReceiverWrapper Invoke() => ISyntaxReceiverWrapper.From(InvokeAccessor(wrappedInstance));
+    public ISyntaxReceiverWrapper Invoke() => InvokeAccessor(wrappedInstance);
 
     public static SyntaxReceiverCreatorWrapper From(Object instance)
     {

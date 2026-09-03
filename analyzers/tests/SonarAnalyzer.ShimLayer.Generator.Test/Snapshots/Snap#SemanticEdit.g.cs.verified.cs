@@ -22,10 +22,10 @@ public static class SemanticEditShimExtensions
 {
     private static readonly Type WrappedType = typeof(SemanticEdit);
 
-    private static readonly Func<SemanticEdit, Object> InstrumentationAccessor = AccessorFactory.CreateProperty<Func<SemanticEdit, Object>>(WrappedType, "Instrumentation");
+    private static readonly Func<SemanticEdit, MethodInstrumentationWrapper> InstrumentationAccessor = AccessorFactory.CreateProperty<Func<SemanticEdit, MethodInstrumentationWrapper>>(WrappedType, "Instrumentation");
 
     extension(SemanticEdit wrappedInstance)
     {
-        public MethodInstrumentationWrapper Instrumentation => MethodInstrumentationWrapper.From(InstrumentationAccessor(wrappedInstance));
+        public MethodInstrumentationWrapper Instrumentation => InstrumentationAccessor(wrappedInstance);
     }
 }

@@ -25,7 +25,7 @@ public readonly struct ISpreadOperationWrapper : IOperationWrapper, IWrapper, IE
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
-    private static readonly Func<IOperation, Object> ElementConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, Object>>(WrappedType, "ElementConversion");
+    private static readonly Func<IOperation, CommonConversionWrapper> ElementConversionAccessor = AccessorFactory.CreateProperty<Func<IOperation, CommonConversionWrapper>>(WrappedType, "ElementConversion");
     private static readonly Func<IOperation, ITypeSymbol> ElementTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "ElementType");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
@@ -64,11 +64,11 @@ public readonly struct ISpreadOperationWrapper : IOperationWrapper, IWrapper, IE
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public CommonConversionWrapper ElementConversion => CommonConversionWrapper.From(ElementConversionAccessor(wrappedInstance));
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
+    public CommonConversionWrapper ElementConversion => ElementConversionAccessor(wrappedInstance);
     public ITypeSymbol ElementType => ElementTypeAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IOperation Operand => OperandAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);

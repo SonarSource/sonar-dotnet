@@ -22,10 +22,10 @@ public static class AnalyzerOptionsShimExtensions
 {
     private static readonly Type WrappedType = typeof(AnalyzerOptions);
 
-    private static readonly Func<AnalyzerOptions, Object> AnalyzerConfigOptionsProviderAccessor = AccessorFactory.CreateProperty<Func<AnalyzerOptions, Object>>(WrappedType, "AnalyzerConfigOptionsProvider");
+    private static readonly Func<AnalyzerOptions, AnalyzerConfigOptionsProviderWrapper> AnalyzerConfigOptionsProviderAccessor = AccessorFactory.CreateProperty<Func<AnalyzerOptions, AnalyzerConfigOptionsProviderWrapper>>(WrappedType, "AnalyzerConfigOptionsProvider");
 
     extension(AnalyzerOptions wrappedInstance)
     {
-        public AnalyzerConfigOptionsProviderWrapper AnalyzerConfigOptionsProvider => AnalyzerConfigOptionsProviderWrapper.From(AnalyzerConfigOptionsProviderAccessor(wrappedInstance));
+        public AnalyzerConfigOptionsProviderWrapper AnalyzerConfigOptionsProvider => AnalyzerConfigOptionsProviderAccessor(wrappedInstance);
     }
 }

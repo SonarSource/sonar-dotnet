@@ -24,10 +24,10 @@ public readonly struct SuppressionWrapper : IWrapper, IEquatable<SuppressionWrap
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
-    private static readonly Func<Object, Object> DescriptorAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Descriptor");
+    private static readonly Func<Object, SuppressionDescriptorWrapper> DescriptorAccessor = AccessorFactory.CreateProperty<Func<Object, SuppressionDescriptorWrapper>>(WrappedType, "Descriptor");
     private static readonly Func<Object, Diagnostic> SuppressedDiagnosticAccessor = AccessorFactory.CreateProperty<Func<Object, Diagnostic>>(WrappedType, "SuppressedDiagnostic");
 
-    private static readonly Func<SuppressionDescriptorWrapper, Diagnostic, Object> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<SuppressionDescriptorWrapper, Diagnostic, Object>>(WrappedType, "Create");
+    private static readonly Func<SuppressionDescriptorWrapper, Diagnostic, SuppressionWrapper> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<SuppressionDescriptorWrapper, Diagnostic, SuppressionWrapper>>(WrappedType, "Create");
 
     private SuppressionWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -52,10 +52,10 @@ public readonly struct SuppressionWrapper : IWrapper, IEquatable<SuppressionWrap
     public static bool operator !=(SuppressionWrapper left, SuppressionWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public SuppressionDescriptorWrapper Descriptor => SuppressionDescriptorWrapper.From(DescriptorAccessor(wrappedInstance));
+    public SuppressionDescriptorWrapper Descriptor => DescriptorAccessor(wrappedInstance);
     public Diagnostic SuppressedDiagnostic => SuppressedDiagnosticAccessor(wrappedInstance);
 
-    public static SuppressionWrapper Create(SuppressionDescriptorWrapper descriptor, Diagnostic suppressedDiagnostic) => SuppressionWrapper.From(CreateAccessor(descriptor, suppressedDiagnostic));
+    public static SuppressionWrapper Create(SuppressionDescriptorWrapper descriptor, Diagnostic suppressedDiagnostic) => CreateAccessor(descriptor, suppressedDiagnostic);
 
     public static SuppressionWrapper From(Object instance)
     {

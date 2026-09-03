@@ -50,7 +50,7 @@ public readonly struct ImportedNamespaceOrTypeWrapper : IWrapper, IEquatable<Imp
     public static bool operator !=(ImportedNamespaceOrTypeWrapper left, ImportedNamespaceOrTypeWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public SyntaxReference DeclaringSyntaxReference => (SyntaxReference)DeclaringSyntaxReferenceAccessor(wrappedInstance);
+    public SyntaxReference DeclaringSyntaxReference => DeclaringSyntaxReferenceAccessor(wrappedInstance);
     public INamespaceOrTypeSymbol NamespaceOrType => NamespaceOrTypeAccessor(wrappedInstance);
 
     public static ImportedNamespaceOrTypeWrapper From(Object instance)

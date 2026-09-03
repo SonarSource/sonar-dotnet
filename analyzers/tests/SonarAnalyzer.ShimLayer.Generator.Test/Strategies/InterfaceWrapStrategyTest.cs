@@ -83,7 +83,7 @@ public class InterfaceWrapStrategyTest
                 public static bool operator !=(IDiscardSymbolWrapper left, IDiscardSymbolWrapper right) =>
                     !Equals(left.wrappedInstance, right.wrappedInstance);
 
-                public ITypeSymbol Type => (ITypeSymbol)TypeAccessor(wrappedInstance);
+                public ITypeSymbol Type => TypeAccessor(wrappedInstance);
 
                 public static IDiscardSymbolWrapper From(object instance)
                 {

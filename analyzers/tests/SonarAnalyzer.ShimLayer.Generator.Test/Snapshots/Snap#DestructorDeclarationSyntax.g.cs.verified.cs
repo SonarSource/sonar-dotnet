@@ -35,8 +35,8 @@ public static class DestructorDeclarationSyntaxShimExtensions
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
 
         public DestructorDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public DestructorDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken tildeToken, SyntaxToken identifier, ParameterListSyntax parameterList, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, tildeToken, identifier, parameterList, body, expressionBody, semicolonToken);
         public DestructorDeclarationSyntax WithExpressionBody(ArrowExpressionClauseSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);
     }

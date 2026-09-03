@@ -64,12 +64,12 @@ public readonly struct IRangeCaseClauseOperationWrapper : IOperationWrapper, IWr
     public SyntaxNode Syntax => wrappedInstance.Syntax;
     public ITypeSymbol Type => wrappedInstance.Type;
 
-    public CaseKind CaseKind => (CaseKind)CaseKindAccessor(wrappedInstance);
+    public CaseKind CaseKind => CaseKindAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
     public ILabelSymbol Label => LabelAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IOperation MaximumValue => MaximumValueAccessor(wrappedInstance);
     public IOperation MinimumValue => MinimumValueAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);

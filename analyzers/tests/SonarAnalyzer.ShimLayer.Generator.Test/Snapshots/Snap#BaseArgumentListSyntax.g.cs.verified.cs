@@ -30,8 +30,8 @@ public static class BaseArgumentListSyntaxShimExtensions
     extension(BaseArgumentListSyntax wrappedInstance)
     {
         public BaseArgumentListSyntax AddArguments(ArgumentSyntax[] items) => AddArgumentsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseArgumentListSyntax WithArguments(SeparatedSyntaxList<ArgumentSyntax> arguments) => WithArgumentsAccessor(wrappedInstance, arguments);
     }
 }

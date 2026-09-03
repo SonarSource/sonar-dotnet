@@ -51,7 +51,7 @@ public readonly struct HostOutputProductionContextWrapper : IWrapper, IEquatable
     public static bool operator !=(HostOutputProductionContextWrapper left, HostOutputProductionContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
 
     public void AddOutput(string name, object value) => AddOutputAccessor(wrappedInstance, name, value);
 

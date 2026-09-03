@@ -28,8 +28,8 @@ public static class ParseOptionsShimExtensions
 
     extension(ParseOptions wrappedInstance)
     {
-        public ImmutableArray<Diagnostic> Errors => (ImmutableArray<Diagnostic>)ErrorsAccessor(wrappedInstance);
-        public string Language => (string)LanguageAccessor(wrappedInstance);
-        public SourceCodeKind SpecifiedKind => (SourceCodeKind)SpecifiedKindAccessor(wrappedInstance);
+        public ImmutableArray<Diagnostic> Errors => ErrorsAccessor(wrappedInstance);
+        public string Language => LanguageAccessor(wrappedInstance);
+        public SourceCodeKind SpecifiedKind => SpecifiedKindAccessor(wrappedInstance);
     }
 }

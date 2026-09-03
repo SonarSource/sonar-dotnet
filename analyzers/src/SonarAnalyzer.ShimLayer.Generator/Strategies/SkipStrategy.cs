@@ -24,8 +24,5 @@ public class SkipStrategy : Strategy
 
     public SkipStrategy(Type latest) : base(latest) { }
 
-    public override string ToConversionSnippet(string from) =>
-        throw new NotSupportedException();
-
     protected override string GenerateCore(StrategyModel model) => null;
 }

@@ -30,7 +30,7 @@ public readonly struct ISlicePatternOperationWrapper : IOperationWrapper, IWrapp
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, ITypeSymbol> NarrowedTypeAccessor = AccessorFactory.CreateProperty<Func<IOperation, ITypeSymbol>>(WrappedType, "NarrowedType");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
-    private static readonly Func<IOperation, IOperation> PatternAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Pattern");
+    private static readonly Func<IOperation, IPatternOperationWrapper> PatternAccessor = AccessorFactory.CreateProperty<Func<IOperation, IPatternOperationWrapper>>(WrappedType, "Pattern");
     private static readonly Func<IOperation, SemanticModel> SemanticModelAccessor = AccessorFactory.CreateProperty<Func<IOperation, SemanticModel>>(WrappedType, "SemanticModel");
     private static readonly Func<IOperation, ISymbol> SliceSymbolAccessor = AccessorFactory.CreateProperty<Func<IOperation, ISymbol>>(WrappedType, "SliceSymbol");
 
@@ -65,13 +65,13 @@ public readonly struct ISlicePatternOperationWrapper : IOperationWrapper, IWrapp
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ITypeSymbol InputType => InputTypeAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public ITypeSymbol NarrowedType => NarrowedTypeAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
-    public IPatternOperationWrapper Pattern => IPatternOperationWrapper.From(PatternAccessor(wrappedInstance));
+    public IPatternOperationWrapper Pattern => PatternAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public ISymbol SliceSymbol => SliceSymbolAccessor(wrappedInstance);
 

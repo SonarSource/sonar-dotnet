@@ -24,14 +24,14 @@ public readonly struct VarPatternSyntaxWrapper : IWrapper, IEquatable<VarPattern
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly CSharpSyntaxNode wrappedInstance;
 
-    private static readonly Func<CSharpSyntaxNode, CSharpSyntaxNode> DesignationAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, CSharpSyntaxNode>>(WrappedType, "Designation");
+    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper> DesignationAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper>>(WrappedType, "Designation");
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> VarKeywordAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "VarKeyword");
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, VariableDesignationSyntaxWrapper, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, VariableDesignationSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, CSharpSyntaxNode> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, CSharpSyntaxNode>>(WrappedType, "WithDesignation");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithVarKeywordAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithVarKeyword");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, VariableDesignationSyntaxWrapper, VarPatternSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, VariableDesignationSyntaxWrapper, VarPatternSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, VarPatternSyntaxWrapper> WithDesignationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, VariableDesignationSyntaxWrapper, VarPatternSyntaxWrapper>>(WrappedType, "WithDesignation");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, VarPatternSyntaxWrapper> WithVarKeywordAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, VarPatternSyntaxWrapper>>(WrappedType, "WithVarKeyword");
 
     private VarPatternSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -73,7 +73,7 @@ public readonly struct VarPatternSyntaxWrapper : IWrapper, IEquatable<VarPattern
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public VariableDesignationSyntaxWrapper Designation => VariableDesignationSyntaxWrapper.From(DesignationAccessor(wrappedInstance));
+    public VariableDesignationSyntaxWrapper Designation => DesignationAccessor(wrappedInstance);
     public SyntaxToken VarKeyword => VarKeywordAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
@@ -134,11 +134,11 @@ public readonly struct VarPatternSyntaxWrapper : IWrapper, IEquatable<VarPattern
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public VarPatternSyntaxWrapper Update(SyntaxToken varKeyword, VariableDesignationSyntaxWrapper designation) => VarPatternSyntaxWrapper.From(UpdateAccessor(wrappedInstance, varKeyword, designation));
-    public VarPatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => VarPatternSyntaxWrapper.From(WithDesignationAccessor(wrappedInstance, designation));
-    public VarPatternSyntaxWrapper WithVarKeyword(SyntaxToken varKeyword) => VarPatternSyntaxWrapper.From(WithVarKeywordAccessor(wrappedInstance, varKeyword));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public VarPatternSyntaxWrapper Update(SyntaxToken varKeyword, VariableDesignationSyntaxWrapper designation) => UpdateAccessor(wrappedInstance, varKeyword, designation);
+    public VarPatternSyntaxWrapper WithDesignation(VariableDesignationSyntaxWrapper designation) => WithDesignationAccessor(wrappedInstance, designation);
+    public VarPatternSyntaxWrapper WithVarKeyword(SyntaxToken varKeyword) => WithVarKeywordAccessor(wrappedInstance, varKeyword);
 
     public static explicit operator VarPatternSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

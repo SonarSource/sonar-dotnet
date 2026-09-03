@@ -53,10 +53,10 @@ public readonly struct AnalyzerConfigOptionsWrapper : IWrapper, IEquatable<Analy
     public static bool operator !=(AnalyzerConfigOptionsWrapper left, AnalyzerConfigOptionsWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public static StringComparer KeyComparer => (StringComparer)KeyComparerAccessor();
-    public IEnumerable<string> Keys => (IEnumerable<string>)KeysAccessor(wrappedInstance);
+    public static StringComparer KeyComparer => KeyComparerAccessor();
+    public IEnumerable<string> Keys => KeysAccessor(wrappedInstance);
 
-    public bool TryGetValue(string key, out string value) => (bool)TryGetValueAccessor(wrappedInstance, key, out value);
+    public bool TryGetValue(string key, out string value) => TryGetValueAccessor(wrappedInstance, key, out value);
 
     public static AnalyzerConfigOptionsWrapper From(Object instance)
     {

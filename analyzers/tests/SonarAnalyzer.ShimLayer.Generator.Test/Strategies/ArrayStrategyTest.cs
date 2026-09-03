@@ -46,6 +46,5 @@ public class ArrayStrategyTest
         sut.IsSupported.Should().BeFalse();
         sut.Invoking(x => x.ReturnTypeSnippet).Should().Throw<NotSupportedException>();
         sut.Invoking(x => x.CompiletimeTypeSnippet).Should().Throw<NotSupportedException>();
-        sut.Invoking(x => x.ToConversionSnippet("from")).Should().Throw<NotSupportedException>();
     }
 }

@@ -29,7 +29,7 @@ public static class MethodDeclarationSyntaxShimExtensions
     extension(MethodDeclarationSyntax wrappedInstance)
     {
         public MethodDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

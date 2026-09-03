@@ -51,9 +51,9 @@ public readonly struct SuppressionDescriptorWrapper : IWrapper, IEquatable<Suppr
     public static bool operator !=(SuppressionDescriptorWrapper left, SuppressionDescriptorWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public string Id => (string)IdAccessor(wrappedInstance);
-    public LocalizableString Justification => (LocalizableString)JustificationAccessor(wrappedInstance);
-    public string SuppressedDiagnosticId => (string)SuppressedDiagnosticIdAccessor(wrappedInstance);
+    public string Id => IdAccessor(wrappedInstance);
+    public LocalizableString Justification => JustificationAccessor(wrappedInstance);
+    public string SuppressedDiagnosticId => SuppressedDiagnosticIdAccessor(wrappedInstance);
 
     public static SuppressionDescriptorWrapper From(Object instance)
     {

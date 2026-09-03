@@ -29,8 +29,8 @@ public static class BranchingDirectiveTriviaSyntaxShimExtensions
 
     extension(BranchingDirectiveTriviaSyntax wrappedInstance)
     {
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BranchingDirectiveTriviaSyntax WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken);
         public BranchingDirectiveTriviaSyntax WithHashToken(SyntaxToken hashToken) => WithHashTokenAccessor(wrappedInstance, hashToken);
     }

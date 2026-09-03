@@ -36,8 +36,8 @@ public static class CrefParameterSyntaxShimExtensions
         public SyntaxToken ReadOnlyKeyword => ReadOnlyKeywordAccessor(wrappedInstance);
         public SyntaxToken RefKindKeyword => RefKindKeywordAccessor(wrappedInstance);
 
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public CrefParameterSyntax Update(SyntaxToken refKindKeyword, SyntaxToken readOnlyKeyword, TypeSyntax type) => UpdateAccessor_Overload2(wrappedInstance, refKindKeyword, readOnlyKeyword, type);
         public CrefParameterSyntax WithReadOnlyKeyword(SyntaxToken readOnlyKeyword) => WithReadOnlyKeywordAccessor(wrappedInstance, readOnlyKeyword);
         public CrefParameterSyntax WithRefKindKeyword(SyntaxToken refKindKeyword) => WithRefKindKeywordAccessor(wrappedInstance, refKindKeyword);

@@ -29,7 +29,7 @@ public static class CatchClauseSyntaxShimExtensions
     extension(CatchClauseSyntax wrappedInstance)
     {
         public CatchClauseSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

@@ -28,7 +28,7 @@ public static class ModuleMetadataShimExtensions
 
     extension(ModuleMetadata wrappedInstance)
     {
-        public bool IsDisposed => (bool)IsDisposedAccessor(wrappedInstance);
+        public bool IsDisposed => IsDisposedAccessor(wrappedInstance);
 
         public static ModuleMetadata CreateFromMetadata(IntPtr metadata, int size, Action onDispose) => CreateFromMetadataAccessor_Overload2(metadata, size, onDispose);
     }

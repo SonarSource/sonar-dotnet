@@ -53,11 +53,11 @@ public readonly struct GeneratorAttributeWrapper : IWrapper, IEquatable<Generato
     public static bool operator !=(GeneratorAttributeWrapper left, GeneratorAttributeWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public string[] Languages => (string[])LanguagesAccessor(wrappedInstance);
-    public object TypeId => (object)TypeIdAccessor(wrappedInstance);
+    public string[] Languages => LanguagesAccessor(wrappedInstance);
+    public object TypeId => TypeIdAccessor(wrappedInstance);
 
-    public bool IsDefaultAttribute() => (bool)IsDefaultAttributeAccessor(wrappedInstance);
-    public bool Match(object obj) => (bool)MatchAccessor(wrappedInstance, obj);
+    public bool IsDefaultAttribute() => IsDefaultAttributeAccessor(wrappedInstance);
+    public bool Match(object obj) => MatchAccessor(wrappedInstance, obj);
 
     public static GeneratorAttributeWrapper From(Object instance)
     {

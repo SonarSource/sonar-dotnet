@@ -27,8 +27,8 @@ public static class SyntaxFactsEx
     private static readonly Func<string, bool> IsReservedTupleElementNameAccessor = AccessorFactory.CreateStaticMethod<Func<string, bool>>(WrappedType, "IsReservedTupleElementName");
     private static readonly Func<SyntaxNode, string> TryGetInferredMemberNameAccessor = AccessorFactory.CreateStaticMethod<Func<SyntaxNode, string>>(WrappedType, "TryGetInferredMemberName");
 
-    public static bool IsCheckedOperator(string operatorMetadataName) => (bool)IsCheckedOperatorAccessor(operatorMetadataName);
-    public static bool IsOverloadableCompoundAssignmentOperator(SyntaxKind kind) => (bool)IsOverloadableCompoundAssignmentOperatorAccessor(kind);
-    public static bool IsReservedTupleElementName(string elementName) => (bool)IsReservedTupleElementNameAccessor(elementName);
-    public static string TryGetInferredMemberName(this SyntaxNode syntax) => (string)TryGetInferredMemberNameAccessor(syntax);
+    public static bool IsCheckedOperator(string operatorMetadataName) => IsCheckedOperatorAccessor(operatorMetadataName);
+    public static bool IsOverloadableCompoundAssignmentOperator(SyntaxKind kind) => IsOverloadableCompoundAssignmentOperatorAccessor(kind);
+    public static bool IsReservedTupleElementName(string elementName) => IsReservedTupleElementNameAccessor(elementName);
+    public static string TryGetInferredMemberName(this SyntaxNode syntax) => TryGetInferredMemberNameAccessor(syntax);
 }

@@ -35,8 +35,8 @@ public static class EnumMemberDeclarationSyntaxShimExtensions
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
         public EnumMemberDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public EnumMemberDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken identifier, EqualsValueClauseSyntax equalsValue) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, identifier, equalsValue);
         public EnumMemberDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);
     }

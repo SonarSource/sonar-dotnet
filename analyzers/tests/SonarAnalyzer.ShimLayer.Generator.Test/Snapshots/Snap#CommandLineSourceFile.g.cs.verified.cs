@@ -26,6 +26,6 @@ public static class CommandLineSourceFileShimExtensions
 
     extension(CommandLineSourceFile wrappedInstance)
     {
-        public bool IsInputRedirected => (bool)IsInputRedirectedAccessor(wrappedInstance);
+        public bool IsInputRedirected => IsInputRedirectedAccessor(wrappedInstance);
     }
 }

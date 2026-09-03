@@ -30,10 +30,10 @@ public readonly struct SyntaxContextReceiverCreatorWrapper : IWrapper, IEquatabl
     private static readonly Func<Object, AsyncCallback, object, IAsyncResult> BeginInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, AsyncCallback, object, IAsyncResult>>(WrappedType, "BeginInvoke");
     private static readonly Func<Object, object> CloneAccessor = AccessorFactory.CreateMethod<Func<Object, object>>(WrappedType, "Clone");
     private static readonly Func<Object, object[], object> DynamicInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, object[], object>>(WrappedType, "DynamicInvoke");
-    private static readonly Func<Object, IAsyncResult, Object> EndInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, IAsyncResult, Object>>(WrappedType, "EndInvoke");
+    private static readonly Func<Object, IAsyncResult, ISyntaxContextReceiverWrapper> EndInvokeAccessor = AccessorFactory.CreateMethod<Func<Object, IAsyncResult, ISyntaxContextReceiverWrapper>>(WrappedType, "EndInvoke");
     private static readonly Func<Object, Delegate[]> GetInvocationListAccessor = AccessorFactory.CreateMethod<Func<Object, Delegate[]>>(WrappedType, "GetInvocationList");
     private static readonly Action<Object, SerializationInfo, StreamingContext> GetObjectDataAccessor = AccessorFactory.CreateMethod<Action<Object, SerializationInfo, StreamingContext>>(WrappedType, "GetObjectData");
-    private static readonly Func<Object, Object> InvokeAccessor = AccessorFactory.CreateMethod<Func<Object, Object>>(WrappedType, "Invoke");
+    private static readonly Func<Object, ISyntaxContextReceiverWrapper> InvokeAccessor = AccessorFactory.CreateMethod<Func<Object, ISyntaxContextReceiverWrapper>>(WrappedType, "Invoke");
 
     private SyntaxContextReceiverCreatorWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -58,18 +58,18 @@ public readonly struct SyntaxContextReceiverCreatorWrapper : IWrapper, IEquatabl
     public static bool operator !=(SyntaxContextReceiverCreatorWrapper left, SyntaxContextReceiverCreatorWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public MethodInfo Method => (MethodInfo)MethodAccessor(wrappedInstance);
-    public object Target => (object)TargetAccessor(wrappedInstance);
+    public MethodInfo Method => MethodAccessor(wrappedInstance);
+    public object Target => TargetAccessor(wrappedInstance);
 
-    public IAsyncResult BeginInvoke(AsyncCallback callback, object @object) => (IAsyncResult)BeginInvokeAccessor(wrappedInstance, callback, @object);
-    public object Clone() => (object)CloneAccessor(wrappedInstance);
-    public object DynamicInvoke(object[] args) => (object)DynamicInvokeAccessor(wrappedInstance, args);
-    public ISyntaxContextReceiverWrapper EndInvoke(IAsyncResult result) => ISyntaxContextReceiverWrapper.From(EndInvokeAccessor(wrappedInstance, result));
-    public Delegate[] GetInvocationList() => (Delegate[])GetInvocationListAccessor(wrappedInstance);
+    public IAsyncResult BeginInvoke(AsyncCallback callback, object @object) => BeginInvokeAccessor(wrappedInstance, callback, @object);
+    public object Clone() => CloneAccessor(wrappedInstance);
+    public object DynamicInvoke(object[] args) => DynamicInvokeAccessor(wrappedInstance, args);
+    public ISyntaxContextReceiverWrapper EndInvoke(IAsyncResult result) => EndInvokeAccessor(wrappedInstance, result);
+    public Delegate[] GetInvocationList() => GetInvocationListAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
     public void GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectDataAccessor(wrappedInstance, info, context);
-    public ISyntaxContextReceiverWrapper Invoke() => ISyntaxContextReceiverWrapper.From(InvokeAccessor(wrappedInstance));
+    public ISyntaxContextReceiverWrapper Invoke() => InvokeAccessor(wrappedInstance);
 
     public static SyntaxContextReceiverCreatorWrapper From(Object instance)
     {

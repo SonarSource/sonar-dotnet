@@ -27,7 +27,7 @@ public static class LanguageVersionFactsEx
     private delegate bool TryParseAccessorDelegate(string version, out LanguageVersion result);
     private static readonly TryParseAccessorDelegate TryParseAccessor = AccessorFactory.CreateStaticMethod<TryParseAccessorDelegate>(WrappedType, "TryParse");
 
-    public static LanguageVersion MapSpecifiedToEffectiveVersion(this LanguageVersion version) => (LanguageVersion)MapSpecifiedToEffectiveVersionAccessor(version);
-    public static string ToDisplayString(this LanguageVersion version) => (string)ToDisplayStringAccessor(version);
-    public static bool TryParse(string version, out LanguageVersion result) => (bool)TryParseAccessor(version, out result);
+    public static LanguageVersion MapSpecifiedToEffectiveVersion(this LanguageVersion version) => MapSpecifiedToEffectiveVersionAccessor(version);
+    public static string ToDisplayString(this LanguageVersion version) => ToDisplayStringAccessor(version);
+    public static bool TryParse(string version, out LanguageVersion result) => TryParseAccessor(version, out result);
 }

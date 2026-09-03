@@ -26,6 +26,6 @@ public static class AnalysisContextShimExtensions
 
     extension(AnalysisContext wrappedInstance)
     {
-        public DiagnosticSeverity MinimumReportedSeverity => (DiagnosticSeverity)MinimumReportedSeverityAccessor(wrappedInstance);
+        public DiagnosticSeverity MinimumReportedSeverity => MinimumReportedSeverityAccessor(wrappedInstance);
     }
 }

@@ -30,9 +30,9 @@ public static class IEventSymbolShimExtensions
 
     extension(IEventSymbol wrappedInstance)
     {
-        public bool IsPartialDefinition => (bool)IsPartialDefinitionAccessor(wrappedInstance);
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
-        public NullableAnnotation NullableAnnotation => (NullableAnnotation)NullableAnnotationAccessor(wrappedInstance);
+        public bool IsPartialDefinition => IsPartialDefinitionAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
         public IEventSymbol PartialDefinitionPart => PartialDefinitionPartAccessor(wrappedInstance);
         public IEventSymbol PartialImplementationPart => PartialImplementationPartAccessor(wrappedInstance);
     }

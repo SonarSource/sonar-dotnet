@@ -67,13 +67,13 @@ public readonly struct IIncrementOrDecrementOperationWrapper : IOperationWrapper
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
-    public bool IsChecked => (bool)IsCheckedAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public bool IsLifted => (bool)IsLiftedAccessor(wrappedInstance);
-    public bool IsPostfix => (bool)IsPostfixAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public bool IsChecked => IsCheckedAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public bool IsLifted => IsLiftedAccessor(wrappedInstance);
+    public bool IsPostfix => IsPostfixAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IMethodSymbol OperatorMethod => OperatorMethodAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);

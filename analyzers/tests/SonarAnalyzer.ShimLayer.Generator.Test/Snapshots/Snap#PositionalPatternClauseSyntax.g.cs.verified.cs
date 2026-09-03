@@ -28,13 +28,13 @@ public readonly struct PositionalPatternClauseSyntaxWrapper : IWrapper, IEquatab
     private static readonly Func<CSharpSyntaxNode, SyntaxToken> OpenParenTokenAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SyntaxToken>>(WrappedType, "OpenParenToken");
     private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>> SubpatternsAccessor = AccessorFactory.CreateProperty<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>>>(WrappedType, "Subpatterns");
 
-    private static readonly Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], CSharpSyntaxNode> AddSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], CSharpSyntaxNode>>(WrappedType, "AddSubpatterns");
+    private static readonly Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], PositionalPatternClauseSyntaxWrapper> AddSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SubpatternSyntaxWrapper[], PositionalPatternClauseSyntaxWrapper>>(WrappedType, "AddSubpatterns");
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCloseParenToken");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOpenParenToken");
-    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, CSharpSyntaxNode> WithSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, CSharpSyntaxNode>>(WrappedType, "WithSubpatterns");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, SyntaxToken, PositionalPatternClauseSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, SyntaxToken, PositionalPatternClauseSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, PositionalPatternClauseSyntaxWrapper> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, PositionalPatternClauseSyntaxWrapper>>(WrappedType, "WithCloseParenToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, PositionalPatternClauseSyntaxWrapper> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, PositionalPatternClauseSyntaxWrapper>>(WrappedType, "WithOpenParenToken");
+    private static readonly Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, PositionalPatternClauseSyntaxWrapper> WithSubpatternsAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper>, PositionalPatternClauseSyntaxWrapper>>(WrappedType, "WithSubpatterns");
 
     private PositionalPatternClauseSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -138,13 +138,13 @@ public readonly struct PositionalPatternClauseSyntaxWrapper : IWrapper, IEquatab
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public PositionalPatternClauseSyntaxWrapper AddSubpatterns(SubpatternSyntaxWrapper[] items) => PositionalPatternClauseSyntaxWrapper.From(AddSubpatternsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public PositionalPatternClauseSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns, SyntaxToken closeParenToken) => PositionalPatternClauseSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, subpatterns, closeParenToken));
-    public PositionalPatternClauseSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => PositionalPatternClauseSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
-    public PositionalPatternClauseSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => PositionalPatternClauseSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
-    public PositionalPatternClauseSyntaxWrapper WithSubpatterns(SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns) => PositionalPatternClauseSyntaxWrapper.From(WithSubpatternsAccessor(wrappedInstance, subpatterns));
+    public PositionalPatternClauseSyntaxWrapper AddSubpatterns(SubpatternSyntaxWrapper[] items) => AddSubpatternsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public PositionalPatternClauseSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns, SyntaxToken closeParenToken) => UpdateAccessor(wrappedInstance, openParenToken, subpatterns, closeParenToken);
+    public PositionalPatternClauseSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => WithCloseParenTokenAccessor(wrappedInstance, closeParenToken);
+    public PositionalPatternClauseSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => WithOpenParenTokenAccessor(wrappedInstance, openParenToken);
+    public PositionalPatternClauseSyntaxWrapper WithSubpatterns(SeparatedSyntaxListWrapper<SubpatternSyntaxWrapper> subpatterns) => WithSubpatternsAccessor(wrappedInstance, subpatterns);
 
     public static explicit operator PositionalPatternClauseSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

@@ -29,7 +29,7 @@ public static class ForEachStatementInfoShimExtensions
     extension(ForEachStatementInfo wrappedInstance)
     {
         public AwaitExpressionInfo DisposeAwaitableInfo => DisposeAwaitableInfoAccessor(wrappedInstance);
-        public bool IsAsynchronous => (bool)IsAsynchronousAccessor(wrappedInstance);
+        public bool IsAsynchronous => IsAsynchronousAccessor(wrappedInstance);
         public AwaitExpressionInfo MoveNextAwaitableInfo => MoveNextAwaitableInfoAccessor(wrappedInstance);
     }
 }

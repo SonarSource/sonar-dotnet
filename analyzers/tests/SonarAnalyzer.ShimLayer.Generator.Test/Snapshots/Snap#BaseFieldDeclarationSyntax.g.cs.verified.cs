@@ -37,8 +37,8 @@ public static class BaseFieldDeclarationSyntaxShimExtensions
         public BaseFieldDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public BaseFieldDeclarationSyntax AddDeclarationVariables(VariableDeclaratorSyntax[] items) => AddDeclarationVariablesAccessor(wrappedInstance, items);
         public BaseFieldDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseFieldDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseFieldDeclarationSyntax WithDeclaration(VariableDeclarationSyntax declaration) => WithDeclarationAccessor(wrappedInstance, declaration);
         public BaseFieldDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);

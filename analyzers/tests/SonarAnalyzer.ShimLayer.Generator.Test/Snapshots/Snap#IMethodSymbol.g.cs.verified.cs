@@ -45,21 +45,21 @@ public static class IMethodSymbolShimExtensions
     extension(IMethodSymbol wrappedInstance)
     {
         public IMethodSymbol AssociatedExtensionImplementation => AssociatedExtensionImplementationAccessor(wrappedInstance);
-        public bool IsConditional => (bool)IsConditionalAccessor(wrappedInstance);
-        public bool IsInitOnly => (bool)IsInitOnlyAccessor(wrappedInstance);
-        public bool IsIterator => (bool)IsIteratorAccessor(wrappedInstance);
-        public bool IsPartialDefinition => (bool)IsPartialDefinitionAccessor(wrappedInstance);
-        public bool IsReadOnly => (bool)IsReadOnlyAccessor(wrappedInstance);
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
-        public MethodImplAttributes MethodImplementationFlags => (MethodImplAttributes)MethodImplementationFlagsAccessor(wrappedInstance);
-        public NullableAnnotation ReceiverNullableAnnotation => (NullableAnnotation)ReceiverNullableAnnotationAccessor(wrappedInstance);
-        public ImmutableArray<CustomModifier> RefCustomModifiers => (ImmutableArray<CustomModifier>)RefCustomModifiersAccessor(wrappedInstance);
-        public RefKind RefKind => (RefKind)RefKindAccessor(wrappedInstance);
-        public NullableAnnotation ReturnNullableAnnotation => (NullableAnnotation)ReturnNullableAnnotationAccessor(wrappedInstance);
-        public bool ReturnsByRef => (bool)ReturnsByRefAccessor(wrappedInstance);
-        public bool ReturnsByRefReadonly => (bool)ReturnsByRefReadonlyAccessor(wrappedInstance);
-        public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => (ImmutableArray<NullableAnnotation>)TypeArgumentNullableAnnotationsAccessor(wrappedInstance);
-        public ImmutableArray<INamedTypeSymbol> UnmanagedCallingConventionTypes => (ImmutableArray<INamedTypeSymbol>)UnmanagedCallingConventionTypesAccessor(wrappedInstance);
+        public bool IsConditional => IsConditionalAccessor(wrappedInstance);
+        public bool IsInitOnly => IsInitOnlyAccessor(wrappedInstance);
+        public bool IsIterator => IsIteratorAccessor(wrappedInstance);
+        public bool IsPartialDefinition => IsPartialDefinitionAccessor(wrappedInstance);
+        public bool IsReadOnly => IsReadOnlyAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public MethodImplAttributes MethodImplementationFlags => MethodImplementationFlagsAccessor(wrappedInstance);
+        public NullableAnnotation ReceiverNullableAnnotation => ReceiverNullableAnnotationAccessor(wrappedInstance);
+        public ImmutableArray<CustomModifier> RefCustomModifiers => RefCustomModifiersAccessor(wrappedInstance);
+        public RefKind RefKind => RefKindAccessor(wrappedInstance);
+        public NullableAnnotation ReturnNullableAnnotation => ReturnNullableAnnotationAccessor(wrappedInstance);
+        public bool ReturnsByRef => ReturnsByRefAccessor(wrappedInstance);
+        public bool ReturnsByRefReadonly => ReturnsByRefReadonlyAccessor(wrappedInstance);
+        public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => TypeArgumentNullableAnnotationsAccessor(wrappedInstance);
+        public ImmutableArray<INamedTypeSymbol> UnmanagedCallingConventionTypes => UnmanagedCallingConventionTypesAccessor(wrappedInstance);
 
         public IMethodSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations) => ConstructAccessor_Overload2(wrappedInstance, typeArguments, typeArgumentNullableAnnotations);
         public IMethodSymbol ReduceExtensionMember(ITypeSymbol receiverType) => ReduceExtensionMemberAccessor(wrappedInstance, receiverType);

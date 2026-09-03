@@ -28,13 +28,13 @@ public readonly struct TupleExpressionSyntaxWrapper : IWrapper, IEquatable<Tuple
     private static readonly Func<ExpressionSyntax, SyntaxToken> CloseParenTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "CloseParenToken");
     private static readonly Func<ExpressionSyntax, SyntaxToken> OpenParenTokenAccessor = AccessorFactory.CreateProperty<Func<ExpressionSyntax, SyntaxToken>>(WrappedType, "OpenParenToken");
 
-    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax> AddArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], ExpressionSyntax>>(WrappedType, "AddArguments");
+    private static readonly Func<ExpressionSyntax, ArgumentSyntax[], TupleExpressionSyntaxWrapper> AddArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ArgumentSyntax[], TupleExpressionSyntaxWrapper>>(WrappedType, "AddArguments");
     private static readonly Func<ExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ArgumentSyntax>, SyntaxToken, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ArgumentSyntax>, SyntaxToken, ExpressionSyntax>>(WrappedType, "Update");
-    private static readonly Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>, ExpressionSyntax> WithArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>, ExpressionSyntax>>(WrappedType, "WithArguments");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithCloseParenToken");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithOpenParenToken");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ArgumentSyntax>, SyntaxToken, TupleExpressionSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, SeparatedSyntaxList<ArgumentSyntax>, SyntaxToken, TupleExpressionSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>, TupleExpressionSyntaxWrapper> WithArgumentsAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SeparatedSyntaxList<ArgumentSyntax>, TupleExpressionSyntaxWrapper>>(WrappedType, "WithArguments");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, TupleExpressionSyntaxWrapper> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, TupleExpressionSyntaxWrapper>>(WrappedType, "WithCloseParenToken");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, TupleExpressionSyntaxWrapper> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, TupleExpressionSyntaxWrapper>>(WrappedType, "WithOpenParenToken");
 
     private TupleExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -76,7 +76,7 @@ public readonly struct TupleExpressionSyntaxWrapper : IWrapper, IEquatable<Tuple
     public TextSpan Span => wrappedInstance.Span;
     public int SpanStart => wrappedInstance.SpanStart;
 
-    public SeparatedSyntaxList<ArgumentSyntax> Arguments => (SeparatedSyntaxList<ArgumentSyntax>)ArgumentsAccessor(wrappedInstance);
+    public SeparatedSyntaxList<ArgumentSyntax> Arguments => ArgumentsAccessor(wrappedInstance);
     public SyntaxToken CloseParenToken => CloseParenTokenAccessor(wrappedInstance);
     public SyntaxToken OpenParenToken => OpenParenTokenAccessor(wrappedInstance);
 
@@ -138,13 +138,13 @@ public readonly struct TupleExpressionSyntaxWrapper : IWrapper, IEquatable<Tuple
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public TupleExpressionSyntaxWrapper AddArguments(ArgumentSyntax[] items) => TupleExpressionSyntaxWrapper.From(AddArgumentsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public TupleExpressionSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxToken closeParenToken) => TupleExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, arguments, closeParenToken));
-    public TupleExpressionSyntaxWrapper WithArguments(SeparatedSyntaxList<ArgumentSyntax> arguments) => TupleExpressionSyntaxWrapper.From(WithArgumentsAccessor(wrappedInstance, arguments));
-    public TupleExpressionSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => TupleExpressionSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
-    public TupleExpressionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => TupleExpressionSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
+    public TupleExpressionSyntaxWrapper AddArguments(ArgumentSyntax[] items) => AddArgumentsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public TupleExpressionSyntaxWrapper Update(SyntaxToken openParenToken, SeparatedSyntaxList<ArgumentSyntax> arguments, SyntaxToken closeParenToken) => UpdateAccessor(wrappedInstance, openParenToken, arguments, closeParenToken);
+    public TupleExpressionSyntaxWrapper WithArguments(SeparatedSyntaxList<ArgumentSyntax> arguments) => WithArgumentsAccessor(wrappedInstance, arguments);
+    public TupleExpressionSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => WithCloseParenTokenAccessor(wrappedInstance, closeParenToken);
+    public TupleExpressionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => WithOpenParenTokenAccessor(wrappedInstance, openParenToken);
 
     public static explicit operator TupleExpressionSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

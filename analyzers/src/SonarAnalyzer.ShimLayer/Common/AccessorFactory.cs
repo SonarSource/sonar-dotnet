@@ -65,7 +65,6 @@ internal static class AccessorFactory
 
         bool IsMethodMatch(MethodInfo method) =>
             method.Name == methodName
-            && IsReturnTypeMatch(method, types)
             && method.GetParameters() is var parameters
             && parameters.Length == types.ParameterTypes.Length
             && parameters.Select((x, i) => IsParameterMatch(types.ParameterTypes[i], x.ParameterType)).All(x => x);
@@ -75,10 +74,6 @@ internal static class AccessorFactory
             || (compiletime.IsArray && runtime.IsArray && IsParameterMatch(compiletime.GetElementType(), runtime.GetElementType()))
             || IsEnumMatch(compiletime, runtime)
             || compiletime.Name == $"{runtime.Name}Wrapper";
-
-        static bool IsReturnTypeMatch(MethodInfo method, AccessorTypes types) =>
-            types.ResultType.IsAssignableFrom(method.ReturnType)
-            || IsEnumMatch(types.ResultType, method.ReturnType);
 
         static bool IsEnumMatch(Type compiletime, Type runtime) =>
             compiletime.IsEnum && runtime.IsEnum && compiletime.Name == runtime.Name;
@@ -147,7 +142,12 @@ internal static class AccessorFactory
             var sender = senderLambdaParameter is null ? null : WrapConvert(senderLambdaParameter, runtimeSenderType);
             var methodParameters = method.GetParameters();
             var result = Expression.Call(sender, method, lambdaParameters.Skip(senderLambdaParameter is null ? 0 : 1).Select((x, i) => ConvertArgument(x, methodParameters[i].ParameterType)));
-            if (types.ResultType.IsGenericType
+            if (typeof(IWrapper).IsAssignableFrom(types.ResultType))
+            {
+                var fromMethod = types.ResultType.GetMethod("From");
+                return Expression.Call(fromMethod, WrapConvert(result, fromMethod.GetParameters().Single().ParameterType));
+            }
+            else if (types.ResultType.IsGenericType
                 && types.ResultType.GetGenericTypeDefinition() == typeof(ImmutableArray<>)
                 && types.ResultType.GenericTypeArguments.Single() is var wrapperTypeArgument
                 && (wrapperTypeArgument.IsEnum || typeof(IWrapper).IsAssignableFrom(wrapperTypeArgument)))

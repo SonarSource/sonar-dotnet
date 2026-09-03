@@ -32,12 +32,12 @@ public static class IParameterSymbolShimExtensions
 
     extension(IParameterSymbol wrappedInstance)
     {
-        public bool IsDiscard => (bool)IsDiscardAccessor(wrappedInstance);
-        public bool IsParamsArray => (bool)IsParamsArrayAccessor(wrappedInstance);
-        public bool IsParamsCollection => (bool)IsParamsCollectionAccessor(wrappedInstance);
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
-        public NullableAnnotation NullableAnnotation => (NullableAnnotation)NullableAnnotationAccessor(wrappedInstance);
-        public ImmutableArray<CustomModifier> RefCustomModifiers => (ImmutableArray<CustomModifier>)RefCustomModifiersAccessor(wrappedInstance);
-        public ScopedKind ScopedKind => (ScopedKind)ScopedKindAccessor(wrappedInstance);
+        public bool IsDiscard => IsDiscardAccessor(wrappedInstance);
+        public bool IsParamsArray => IsParamsArrayAccessor(wrappedInstance);
+        public bool IsParamsCollection => IsParamsCollectionAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
+        public ImmutableArray<CustomModifier> RefCustomModifiers => RefCustomModifiersAccessor(wrappedInstance);
+        public ScopedKind ScopedKind => ScopedKindAccessor(wrappedInstance);
     }
 }

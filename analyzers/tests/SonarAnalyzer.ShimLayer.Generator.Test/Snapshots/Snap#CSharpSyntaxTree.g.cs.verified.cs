@@ -35,7 +35,7 @@ public static class CSharpSyntaxTreeShimExtensions
     extension(CSharpSyntaxTree wrappedInstance)
     {
         [System.ObsoleteAttribute("Obsolete due to performance problems, use CompilationOptions.SyntaxTreeOptionsProvider instead", false)]
-        public ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions => (ImmutableDictionary<string, ReportDiagnostic>)DiagnosticOptionsAccessor(wrappedInstance);
+        public ImmutableDictionary<string, ReportDiagnostic> DiagnosticOptions => DiagnosticOptionsAccessor(wrappedInstance);
 
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         [System.ObsoleteAttribute("The diagnosticOptions parameter is obsolete due to performance problems, if you are passing non-null use CompilationOptions.SyntaxTreeOptionsProvider instead", false)]

@@ -50,8 +50,8 @@ public readonly struct EmitDifferenceOptionsWrapper : IWrapper, IEquatable<EmitD
     public static bool operator !=(EmitDifferenceOptionsWrapper left, EmitDifferenceOptionsWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public bool EmitFieldRva => (bool)EmitFieldRvaAccessor(wrappedInstance);
-    public bool MethodImplEntriesSupported => (bool)MethodImplEntriesSupportedAccessor(wrappedInstance);
+    public bool EmitFieldRva => EmitFieldRvaAccessor(wrappedInstance);
+    public bool MethodImplEntriesSupported => MethodImplEntriesSupportedAccessor(wrappedInstance);
 
     public static EmitDifferenceOptionsWrapper From(Object instance)
     {

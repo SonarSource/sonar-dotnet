@@ -29,9 +29,9 @@ public readonly struct ThrowExpressionSyntaxWrapper : IWrapper, IEquatable<Throw
 
     private static readonly Func<ExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<ExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax, ExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax, ExpressionSyntax>>(WrappedType, "Update");
-    private static readonly Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, ExpressionSyntax>>(WrappedType, "WithExpression");
-    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax> WithThrowKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax>>(WrappedType, "WithThrowKeyword");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax, ThrowExpressionSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ExpressionSyntax, ThrowExpressionSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<ExpressionSyntax, ExpressionSyntax, ThrowExpressionSyntaxWrapper> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, ExpressionSyntax, ThrowExpressionSyntaxWrapper>>(WrappedType, "WithExpression");
+    private static readonly Func<ExpressionSyntax, SyntaxToken, ThrowExpressionSyntaxWrapper> WithThrowKeywordAccessor = AccessorFactory.CreateMethod<Func<ExpressionSyntax, SyntaxToken, ThrowExpressionSyntaxWrapper>>(WrappedType, "WithThrowKeyword");
 
     private ThrowExpressionSyntaxWrapper(ExpressionSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -134,11 +134,11 @@ public readonly struct ThrowExpressionSyntaxWrapper : IWrapper, IEquatable<Throw
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public ThrowExpressionSyntaxWrapper Update(SyntaxToken throwKeyword, ExpressionSyntax expression) => ThrowExpressionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, throwKeyword, expression));
-    public ThrowExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression) => ThrowExpressionSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
-    public ThrowExpressionSyntaxWrapper WithThrowKeyword(SyntaxToken throwKeyword) => ThrowExpressionSyntaxWrapper.From(WithThrowKeywordAccessor(wrappedInstance, throwKeyword));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public ThrowExpressionSyntaxWrapper Update(SyntaxToken throwKeyword, ExpressionSyntax expression) => UpdateAccessor(wrappedInstance, throwKeyword, expression);
+    public ThrowExpressionSyntaxWrapper WithExpression(ExpressionSyntax expression) => WithExpressionAccessor(wrappedInstance, expression);
+    public ThrowExpressionSyntaxWrapper WithThrowKeyword(SyntaxToken throwKeyword) => WithThrowKeywordAccessor(wrappedInstance, throwKeyword);
 
     public static explicit operator ThrowExpressionSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

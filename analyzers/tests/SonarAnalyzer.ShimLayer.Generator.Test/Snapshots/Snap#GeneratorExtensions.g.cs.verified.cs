@@ -22,13 +22,13 @@ public static class GeneratorExtensionsEx
 {
     private static readonly Type WrappedType = TypeRegister.LatestType("Microsoft.CodeAnalysis.GeneratorExtensions");
 
-    private static readonly Func<ISourceGeneratorWrapper, Object> AsIncrementalGeneratorAccessor = AccessorFactory.CreateStaticMethod<Func<ISourceGeneratorWrapper, Object>>(WrappedType, "AsIncrementalGenerator");
-    private static readonly Func<IIncrementalGeneratorWrapper, Object> AsSourceGeneratorAccessor = AccessorFactory.CreateStaticMethod<Func<IIncrementalGeneratorWrapper, Object>>(WrappedType, "AsSourceGenerator");
+    private static readonly Func<ISourceGeneratorWrapper, IIncrementalGeneratorWrapper> AsIncrementalGeneratorAccessor = AccessorFactory.CreateStaticMethod<Func<ISourceGeneratorWrapper, IIncrementalGeneratorWrapper>>(WrappedType, "AsIncrementalGenerator");
+    private static readonly Func<IIncrementalGeneratorWrapper, ISourceGeneratorWrapper> AsSourceGeneratorAccessor = AccessorFactory.CreateStaticMethod<Func<IIncrementalGeneratorWrapper, ISourceGeneratorWrapper>>(WrappedType, "AsSourceGenerator");
     private static readonly Func<IIncrementalGeneratorWrapper, Type> GetGeneratorTypeAccessor = AccessorFactory.CreateStaticMethod<Func<IIncrementalGeneratorWrapper, Type>>(WrappedType, "GetGeneratorType");
     private static readonly Func<ISourceGeneratorWrapper, Type> GetGeneratorTypeAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<ISourceGeneratorWrapper, Type>>(WrappedType, "GetGeneratorType");
 
-    public static IIncrementalGeneratorWrapper AsIncrementalGenerator(this ISourceGeneratorWrapper sourceGenerator) => IIncrementalGeneratorWrapper.From(AsIncrementalGeneratorAccessor(sourceGenerator));
-    public static ISourceGeneratorWrapper AsSourceGenerator(this IIncrementalGeneratorWrapper incrementalGenerator) => ISourceGeneratorWrapper.From(AsSourceGeneratorAccessor(incrementalGenerator));
-    public static Type GetGeneratorType(this IIncrementalGeneratorWrapper generator) => (Type)GetGeneratorTypeAccessor(generator);
-    public static Type GetGeneratorType(this ISourceGeneratorWrapper generator) => (Type)GetGeneratorTypeAccessor_Overload2(generator);
+    public static IIncrementalGeneratorWrapper AsIncrementalGenerator(this ISourceGeneratorWrapper sourceGenerator) => AsIncrementalGeneratorAccessor(sourceGenerator);
+    public static ISourceGeneratorWrapper AsSourceGenerator(this IIncrementalGeneratorWrapper incrementalGenerator) => AsSourceGeneratorAccessor(incrementalGenerator);
+    public static Type GetGeneratorType(this IIncrementalGeneratorWrapper generator) => GetGeneratorTypeAccessor(generator);
+    public static Type GetGeneratorType(this ISourceGeneratorWrapper generator) => GetGeneratorTypeAccessor_Overload2(generator);
 }

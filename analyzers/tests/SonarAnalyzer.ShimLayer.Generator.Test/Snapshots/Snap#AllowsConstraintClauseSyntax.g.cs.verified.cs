@@ -27,12 +27,12 @@ public readonly struct AllowsConstraintClauseSyntaxWrapper : IWrapper, IEquatabl
     private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken> AllowsKeywordAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SyntaxToken>>(WrappedType, "AllowsKeyword");
     private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>> ConstraintsAccessor = AccessorFactory.CreateProperty<Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>>>(WrappedType, "Constraints");
 
-    private static readonly Func<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper[], TypeParameterConstraintSyntax> AddConstraintsAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper[], TypeParameterConstraintSyntax>>(WrappedType, "AddConstraints");
+    private static readonly Func<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper[], AllowsConstraintClauseSyntaxWrapper> AddConstraintsAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, AllowsConstraintSyntaxWrapper[], AllowsConstraintClauseSyntaxWrapper>>(WrappedType, "AddConstraints");
     private static readonly Func<TypeParameterConstraintSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<TypeParameterConstraintSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax>>(WrappedType, "Update");
-    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax> WithAllowsKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, TypeParameterConstraintSyntax>>(WrappedType, "WithAllowsKeyword");
-    private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax> WithConstraintsAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, TypeParameterConstraintSyntax>>(WrappedType, "WithConstraints");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, AllowsConstraintClauseSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, AllowsConstraintClauseSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<TypeParameterConstraintSyntax, SyntaxToken, AllowsConstraintClauseSyntaxWrapper> WithAllowsKeywordAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SyntaxToken, AllowsConstraintClauseSyntaxWrapper>>(WrappedType, "WithAllowsKeyword");
+    private static readonly Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, AllowsConstraintClauseSyntaxWrapper> WithConstraintsAccessor = AccessorFactory.CreateMethod<Func<TypeParameterConstraintSyntax, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper>, AllowsConstraintClauseSyntaxWrapper>>(WrappedType, "WithConstraints");
 
     private AllowsConstraintClauseSyntaxWrapper(TypeParameterConstraintSyntax wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -135,12 +135,12 @@ public readonly struct AllowsConstraintClauseSyntaxWrapper : IWrapper, IEquatabl
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public AllowsConstraintClauseSyntaxWrapper AddConstraints(AllowsConstraintSyntaxWrapper[] items) => AllowsConstraintClauseSyntaxWrapper.From(AddConstraintsAccessor(wrappedInstance, items));
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public AllowsConstraintClauseSyntaxWrapper Update(SyntaxToken allowsKeyword, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> constraints) => AllowsConstraintClauseSyntaxWrapper.From(UpdateAccessor(wrappedInstance, allowsKeyword, constraints));
-    public AllowsConstraintClauseSyntaxWrapper WithAllowsKeyword(SyntaxToken allowsKeyword) => AllowsConstraintClauseSyntaxWrapper.From(WithAllowsKeywordAccessor(wrappedInstance, allowsKeyword));
-    public AllowsConstraintClauseSyntaxWrapper WithConstraints(SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> constraints) => AllowsConstraintClauseSyntaxWrapper.From(WithConstraintsAccessor(wrappedInstance, constraints));
+    public AllowsConstraintClauseSyntaxWrapper AddConstraints(AllowsConstraintSyntaxWrapper[] items) => AddConstraintsAccessor(wrappedInstance, items);
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public AllowsConstraintClauseSyntaxWrapper Update(SyntaxToken allowsKeyword, SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> constraints) => UpdateAccessor(wrappedInstance, allowsKeyword, constraints);
+    public AllowsConstraintClauseSyntaxWrapper WithAllowsKeyword(SyntaxToken allowsKeyword) => WithAllowsKeywordAccessor(wrappedInstance, allowsKeyword);
+    public AllowsConstraintClauseSyntaxWrapper WithConstraints(SeparatedSyntaxListWrapper<AllowsConstraintSyntaxWrapper> constraints) => WithConstraintsAccessor(wrappedInstance, constraints);
 
     public static explicit operator AllowsConstraintClauseSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

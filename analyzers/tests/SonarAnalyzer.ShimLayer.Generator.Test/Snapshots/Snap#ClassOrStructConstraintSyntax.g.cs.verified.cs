@@ -33,8 +33,8 @@ public static class ClassOrStructConstraintSyntaxShimExtensions
     {
         public SyntaxToken QuestionToken => QuestionTokenAccessor(wrappedInstance);
 
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ClassOrStructConstraintSyntax Update(SyntaxToken classOrStructKeyword, SyntaxToken questionToken) => UpdateAccessor_Overload2(wrappedInstance, classOrStructKeyword, questionToken);
         public ClassOrStructConstraintSyntax WithQuestionToken(SyntaxToken questionToken) => WithQuestionTokenAccessor(wrappedInstance, questionToken);
     }

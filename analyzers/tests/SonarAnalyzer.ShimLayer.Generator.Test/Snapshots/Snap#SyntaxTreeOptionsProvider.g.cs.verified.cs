@@ -53,9 +53,9 @@ public readonly struct SyntaxTreeOptionsProviderWrapper : IWrapper, IEquatable<S
     public static bool operator !=(SyntaxTreeOptionsProviderWrapper left, SyntaxTreeOptionsProviderWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public GeneratedKind IsGenerated(SyntaxTree tree, CancellationToken cancellationToken) => (GeneratedKind)IsGeneratedAccessor(wrappedInstance, tree, cancellationToken);
-    public bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity) => (bool)TryGetDiagnosticValueAccessor(wrappedInstance, tree, diagnosticId, cancellationToken, out severity);
-    public bool TryGetGlobalDiagnosticValue(string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity) => (bool)TryGetGlobalDiagnosticValueAccessor(wrappedInstance, diagnosticId, cancellationToken, out severity);
+    public GeneratedKind IsGenerated(SyntaxTree tree, CancellationToken cancellationToken) => IsGeneratedAccessor(wrappedInstance, tree, cancellationToken);
+    public bool TryGetDiagnosticValue(SyntaxTree tree, string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity) => TryGetDiagnosticValueAccessor(wrappedInstance, tree, diagnosticId, cancellationToken, out severity);
+    public bool TryGetGlobalDiagnosticValue(string diagnosticId, CancellationToken cancellationToken, out ReportDiagnostic severity) => TryGetGlobalDiagnosticValueAccessor(wrappedInstance, diagnosticId, cancellationToken, out severity);
 
     public static SyntaxTreeOptionsProviderWrapper From(Object instance)
     {

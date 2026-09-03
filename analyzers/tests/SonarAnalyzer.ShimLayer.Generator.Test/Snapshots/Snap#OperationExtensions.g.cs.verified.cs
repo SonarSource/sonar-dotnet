@@ -34,19 +34,19 @@ public static class OperationExtensionsEx
     private static readonly Func<IVariableDeclarationGroupOperationWrapper, ImmutableArray<ILocalSymbol>> GetDeclaredVariablesAccessor = AccessorFactory.CreateStaticMethod<Func<IVariableDeclarationGroupOperationWrapper, ImmutableArray<ILocalSymbol>>>(WrappedType, "GetDeclaredVariables");
     private static readonly Func<IVariableDeclarationOperationWrapper, ImmutableArray<ILocalSymbol>> GetDeclaredVariablesAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<IVariableDeclarationOperationWrapper, ImmutableArray<ILocalSymbol>>>(WrappedType, "GetDeclaredVariables");
     private static readonly Func<IFunctionPointerInvocationOperationWrapper, IMethodSymbol> GetFunctionPointerSignatureAccessor = AccessorFactory.CreateStaticMethod<Func<IFunctionPointerInvocationOperationWrapper, IMethodSymbol>>(WrappedType, "GetFunctionPointerSignature");
-    private static readonly Func<IVariableDeclaratorOperationWrapper, IOperation> GetVariableInitializerAccessor = AccessorFactory.CreateStaticMethod<Func<IVariableDeclaratorOperationWrapper, IOperation>>(WrappedType, "GetVariableInitializer");
+    private static readonly Func<IVariableDeclaratorOperationWrapper, IVariableInitializerOperationWrapper> GetVariableInitializerAccessor = AccessorFactory.CreateStaticMethod<Func<IVariableDeclaratorOperationWrapper, IVariableInitializerOperationWrapper>>(WrappedType, "GetVariableInitializer");
 
-    public static IEnumerable<IOperation> Descendants(this IOperation operation) => (IEnumerable<IOperation>)DescendantsAccessor(operation);
-    public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) => (IEnumerable<IOperation>)DescendantsAndSelfAccessor(operation);
-    public static string GetArgumentName(this IDynamicIndexerAccessOperationWrapper dynamicOperation, int index) => (string)GetArgumentNameAccessor(dynamicOperation, index);
-    public static string GetArgumentName(this IDynamicInvocationOperationWrapper dynamicOperation, int index) => (string)GetArgumentNameAccessor_Overload2(dynamicOperation, index);
-    public static string GetArgumentName(this IDynamicObjectCreationOperationWrapper dynamicOperation, int index) => (string)GetArgumentNameAccessor_Overload3(dynamicOperation, index);
-    public static Nullable<RefKind> GetArgumentRefKind(this IDynamicIndexerAccessOperationWrapper dynamicOperation, int index) => (Nullable<RefKind>)GetArgumentRefKindAccessor(dynamicOperation, index);
-    public static Nullable<RefKind> GetArgumentRefKind(this IDynamicInvocationOperationWrapper dynamicOperation, int index) => (Nullable<RefKind>)GetArgumentRefKindAccessor_Overload2(dynamicOperation, index);
-    public static Nullable<RefKind> GetArgumentRefKind(this IDynamicObjectCreationOperationWrapper dynamicOperation, int index) => (Nullable<RefKind>)GetArgumentRefKindAccessor_Overload3(dynamicOperation, index);
+    public static IEnumerable<IOperation> Descendants(this IOperation operation) => DescendantsAccessor(operation);
+    public static IEnumerable<IOperation> DescendantsAndSelf(this IOperation operation) => DescendantsAndSelfAccessor(operation);
+    public static string GetArgumentName(this IDynamicIndexerAccessOperationWrapper dynamicOperation, int index) => GetArgumentNameAccessor(dynamicOperation, index);
+    public static string GetArgumentName(this IDynamicInvocationOperationWrapper dynamicOperation, int index) => GetArgumentNameAccessor_Overload2(dynamicOperation, index);
+    public static string GetArgumentName(this IDynamicObjectCreationOperationWrapper dynamicOperation, int index) => GetArgumentNameAccessor_Overload3(dynamicOperation, index);
+    public static Nullable<RefKind> GetArgumentRefKind(this IDynamicIndexerAccessOperationWrapper dynamicOperation, int index) => GetArgumentRefKindAccessor(dynamicOperation, index);
+    public static Nullable<RefKind> GetArgumentRefKind(this IDynamicInvocationOperationWrapper dynamicOperation, int index) => GetArgumentRefKindAccessor_Overload2(dynamicOperation, index);
+    public static Nullable<RefKind> GetArgumentRefKind(this IDynamicObjectCreationOperationWrapper dynamicOperation, int index) => GetArgumentRefKindAccessor_Overload3(dynamicOperation, index);
     public static IOperation GetCorrespondingOperation(this IBranchOperationWrapper operation) => GetCorrespondingOperationAccessor(operation);
-    public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(this IVariableDeclarationGroupOperationWrapper declarationGroup) => (ImmutableArray<ILocalSymbol>)GetDeclaredVariablesAccessor(declarationGroup);
-    public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(this IVariableDeclarationOperationWrapper declaration) => (ImmutableArray<ILocalSymbol>)GetDeclaredVariablesAccessor_Overload2(declaration);
+    public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(this IVariableDeclarationGroupOperationWrapper declarationGroup) => GetDeclaredVariablesAccessor(declarationGroup);
+    public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(this IVariableDeclarationOperationWrapper declaration) => GetDeclaredVariablesAccessor_Overload2(declaration);
     public static IMethodSymbol GetFunctionPointerSignature(this IFunctionPointerInvocationOperationWrapper functionPointer) => GetFunctionPointerSignatureAccessor(functionPointer);
-    public static IVariableInitializerOperationWrapper GetVariableInitializer(this IVariableDeclaratorOperationWrapper declarationOperation) => IVariableInitializerOperationWrapper.From(GetVariableInitializerAccessor(declarationOperation));
+    public static IVariableInitializerOperationWrapper GetVariableInitializer(this IVariableDeclaratorOperationWrapper declarationOperation) => GetVariableInitializerAccessor(declarationOperation);
 }

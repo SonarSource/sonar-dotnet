@@ -33,8 +33,8 @@ public static class ConversionOperatorMemberCrefSyntaxShimExtensions
     {
         public SyntaxToken CheckedKeyword => CheckedKeywordAccessor(wrappedInstance);
 
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ConversionOperatorMemberCrefSyntax Update(SyntaxToken implicitOrExplicitKeyword, SyntaxToken operatorKeyword, SyntaxToken checkedKeyword, TypeSyntax type, CrefParameterListSyntax parameters) => UpdateAccessor_Overload2(wrappedInstance, implicitOrExplicitKeyword, operatorKeyword, checkedKeyword, type, parameters);
         public ConversionOperatorMemberCrefSyntax WithCheckedKeyword(SyntaxToken checkedKeyword) => WithCheckedKeywordAccessor(wrappedInstance, checkedKeyword);
     }

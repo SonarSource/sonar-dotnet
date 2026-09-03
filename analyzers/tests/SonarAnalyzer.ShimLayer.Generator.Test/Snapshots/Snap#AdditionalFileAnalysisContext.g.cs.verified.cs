@@ -55,10 +55,10 @@ public readonly struct AdditionalFileAnalysisContextWrapper : IWrapper, IEquatab
     public static bool operator !=(AdditionalFileAnalysisContextWrapper left, AdditionalFileAnalysisContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public AdditionalText AdditionalFile => (AdditionalText)AdditionalFileAccessor(wrappedInstance);
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public AdditionalText AdditionalFile => AdditionalFileAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
     public Compilation Compilation => CompilationAccessor(wrappedInstance);
-    public Nullable<TextSpan> FilterSpan => (Nullable<TextSpan>)FilterSpanAccessor(wrappedInstance);
+    public Nullable<TextSpan> FilterSpan => FilterSpanAccessor(wrappedInstance);
     public AnalyzerOptions Options => OptionsAccessor(wrappedInstance);
 
     public void ReportDiagnostic(Diagnostic diagnostic) => ReportDiagnosticAccessor(wrappedInstance, diagnostic);

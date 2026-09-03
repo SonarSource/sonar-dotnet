@@ -32,8 +32,5 @@ public class GenericTypeStrategy : Strategy
         type = latest.Name.Split('`')[0] + "<" + typeArguments.JoinStr(", ", x => x.CompiletimeTypeSnippet) + ">";
     }
 
-    public override string ToConversionSnippet(string from) =>
-        $"({type}){from}";
-
     protected override string GenerateCore(StrategyModel model) => null;
 }

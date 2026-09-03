@@ -31,8 +31,8 @@ public static class XmlAttributeSyntaxShimExtensions
 
     extension(XmlAttributeSyntax wrappedInstance)
     {
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public XmlAttributeSyntax WithEndQuoteToken(SyntaxToken endQuoteToken) => WithEndQuoteTokenAccessor(wrappedInstance, endQuoteToken);
         public XmlAttributeSyntax WithEqualsToken(SyntaxToken equalsToken) => WithEqualsTokenAccessor(wrappedInstance, equalsToken);
         public XmlAttributeSyntax WithName(XmlNameSyntax name) => WithNameAccessor(wrappedInstance, name);

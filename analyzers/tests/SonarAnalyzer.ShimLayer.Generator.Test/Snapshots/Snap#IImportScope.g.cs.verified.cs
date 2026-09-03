@@ -52,8 +52,8 @@ public readonly struct IImportScopeWrapper : IWrapper, IEquatable<IImportScopeWr
     public static bool operator !=(IImportScopeWrapper left, IImportScopeWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public ImmutableArray<IAliasSymbol> Aliases => (ImmutableArray<IAliasSymbol>)AliasesAccessor(wrappedInstance);
-    public ImmutableArray<IAliasSymbol> ExternAliases => (ImmutableArray<IAliasSymbol>)ExternAliasesAccessor(wrappedInstance);
+    public ImmutableArray<IAliasSymbol> Aliases => AliasesAccessor(wrappedInstance);
+    public ImmutableArray<IAliasSymbol> ExternAliases => ExternAliasesAccessor(wrappedInstance);
     public ImmutableArray<ImportedNamespaceOrTypeWrapper> Imports => ImportsAccessor(wrappedInstance);
     public ImmutableArray<ImportedXmlNamespaceWrapper> XmlNamespaces => XmlNamespacesAccessor(wrappedInstance);
 

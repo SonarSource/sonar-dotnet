@@ -50,8 +50,8 @@ public readonly struct NullabilityInfoWrapper : IWrapper, IEquatable<Nullability
     public static bool operator !=(NullabilityInfoWrapper left, NullabilityInfoWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public NullableAnnotation Annotation => (NullableAnnotation)AnnotationAccessor(wrappedInstance);
-    public NullableFlowState FlowState => (NullableFlowState)FlowStateAccessor(wrappedInstance);
+    public NullableAnnotation Annotation => AnnotationAccessor(wrappedInstance);
+    public NullableFlowState FlowState => FlowStateAccessor(wrappedInstance);
 
     public static NullabilityInfoWrapper From(Object instance)
     {

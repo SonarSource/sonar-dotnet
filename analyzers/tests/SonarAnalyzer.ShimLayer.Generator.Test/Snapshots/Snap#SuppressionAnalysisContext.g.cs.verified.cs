@@ -55,10 +55,10 @@ public readonly struct SuppressionAnalysisContextWrapper : IWrapper, IEquatable<
     public static bool operator !=(SuppressionAnalysisContextWrapper left, SuppressionAnalysisContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
     public Compilation Compilation => CompilationAccessor(wrappedInstance);
     public AnalyzerOptions Options => OptionsAccessor(wrappedInstance);
-    public ImmutableArray<Diagnostic> ReportedDiagnostics => (ImmutableArray<Diagnostic>)ReportedDiagnosticsAccessor(wrappedInstance);
+    public ImmutableArray<Diagnostic> ReportedDiagnostics => ReportedDiagnosticsAccessor(wrappedInstance);
 
     public SemanticModel GetSemanticModel(SyntaxTree syntaxTree) => GetSemanticModelAccessor(wrappedInstance, syntaxTree);
     public void ReportSuppression(SuppressionWrapper suppression) => ReportSuppressionAccessor(wrappedInstance, suppression);

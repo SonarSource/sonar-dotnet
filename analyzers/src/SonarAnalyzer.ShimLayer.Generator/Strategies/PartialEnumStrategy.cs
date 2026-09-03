@@ -26,9 +26,6 @@ public class PartialEnumStrategy : Strategy
     public PartialEnumStrategy(Type latest, FieldInfo[] fields) : base(latest) =>
         Fields = fields;
 
-    public override string ToConversionSnippet(string from) =>
-        $"({Latest.Name}){from}";
-
     protected override string GenerateCore(StrategyModel model)
     {
         var sb = new StringBuilder();

@@ -32,12 +32,12 @@ public readonly struct LineDirectivePositionSyntaxWrapper : IWrapper, IEquatable
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCharacterAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCharacter");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCloseParenToken");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithCommaTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithCommaToken");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithLineAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithLine");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOpenParenToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, LineDirectivePositionSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, LineDirectivePositionSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper> WithCharacterAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper>>(WrappedType, "WithCharacter");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper> WithCloseParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper>>(WrappedType, "WithCloseParenToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper> WithCommaTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper>>(WrappedType, "WithCommaToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper> WithLineAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper>>(WrappedType, "WithLine");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper> WithOpenParenTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, LineDirectivePositionSyntaxWrapper>>(WrappedType, "WithOpenParenToken");
 
     private LineDirectivePositionSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -143,14 +143,14 @@ public readonly struct LineDirectivePositionSyntaxWrapper : IWrapper, IEquatable
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public LineDirectivePositionSyntaxWrapper Update(SyntaxToken openParenToken, SyntaxToken line, SyntaxToken commaToken, SyntaxToken character, SyntaxToken closeParenToken) => LineDirectivePositionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, openParenToken, line, commaToken, character, closeParenToken));
-    public LineDirectivePositionSyntaxWrapper WithCharacter(SyntaxToken character) => LineDirectivePositionSyntaxWrapper.From(WithCharacterAccessor(wrappedInstance, character));
-    public LineDirectivePositionSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => LineDirectivePositionSyntaxWrapper.From(WithCloseParenTokenAccessor(wrappedInstance, closeParenToken));
-    public LineDirectivePositionSyntaxWrapper WithCommaToken(SyntaxToken commaToken) => LineDirectivePositionSyntaxWrapper.From(WithCommaTokenAccessor(wrappedInstance, commaToken));
-    public LineDirectivePositionSyntaxWrapper WithLine(SyntaxToken line) => LineDirectivePositionSyntaxWrapper.From(WithLineAccessor(wrappedInstance, line));
-    public LineDirectivePositionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => LineDirectivePositionSyntaxWrapper.From(WithOpenParenTokenAccessor(wrappedInstance, openParenToken));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public LineDirectivePositionSyntaxWrapper Update(SyntaxToken openParenToken, SyntaxToken line, SyntaxToken commaToken, SyntaxToken character, SyntaxToken closeParenToken) => UpdateAccessor(wrappedInstance, openParenToken, line, commaToken, character, closeParenToken);
+    public LineDirectivePositionSyntaxWrapper WithCharacter(SyntaxToken character) => WithCharacterAccessor(wrappedInstance, character);
+    public LineDirectivePositionSyntaxWrapper WithCloseParenToken(SyntaxToken closeParenToken) => WithCloseParenTokenAccessor(wrappedInstance, closeParenToken);
+    public LineDirectivePositionSyntaxWrapper WithCommaToken(SyntaxToken commaToken) => WithCommaTokenAccessor(wrappedInstance, commaToken);
+    public LineDirectivePositionSyntaxWrapper WithLine(SyntaxToken line) => WithLineAccessor(wrappedInstance, line);
+    public LineDirectivePositionSyntaxWrapper WithOpenParenToken(SyntaxToken openParenToken) => WithOpenParenTokenAccessor(wrappedInstance, openParenToken);
 
     public static explicit operator LineDirectivePositionSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

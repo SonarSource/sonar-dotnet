@@ -26,6 +26,6 @@ public static class AnalyzerLoadFailureEventArgsShimExtensions
 
     extension(AnalyzerLoadFailureEventArgs wrappedInstance)
     {
-        public Version ReferencedCompilerVersion => (Version)ReferencedCompilerVersionAccessor(wrappedInstance);
+        public Version ReferencedCompilerVersion => ReferencedCompilerVersionAccessor(wrappedInstance);
     }
 }

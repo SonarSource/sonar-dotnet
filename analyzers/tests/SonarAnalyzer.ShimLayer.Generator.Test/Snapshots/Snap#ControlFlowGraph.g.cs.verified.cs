@@ -27,19 +27,19 @@ public readonly struct ControlFlowGraphWrapper : IWrapper, IEquatable<ControlFlo
     private static readonly Func<Object, ImmutableArray<BasicBlockWrapper>> BlocksAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<BasicBlockWrapper>>>(WrappedType, "Blocks");
     private static readonly Func<Object, ImmutableArray<IMethodSymbol>> LocalFunctionsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<IMethodSymbol>>>(WrappedType, "LocalFunctions");
     private static readonly Func<Object, IOperation> OriginalOperationAccessor = AccessorFactory.CreateProperty<Func<Object, IOperation>>(WrappedType, "OriginalOperation");
-    private static readonly Func<Object, Object> ParentAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Parent");
-    private static readonly Func<Object, Object> RootAccessor = AccessorFactory.CreateProperty<Func<Object, Object>>(WrappedType, "Root");
+    private static readonly Func<Object, ControlFlowGraphWrapper> ParentAccessor = AccessorFactory.CreateProperty<Func<Object, ControlFlowGraphWrapper>>(WrappedType, "Parent");
+    private static readonly Func<Object, ControlFlowRegionWrapper> RootAccessor = AccessorFactory.CreateProperty<Func<Object, ControlFlowRegionWrapper>>(WrappedType, "Root");
 
-    private static readonly Func<IAttributeOperationWrapper, CancellationToken, Object> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<IAttributeOperationWrapper, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<IBlockOperationWrapper, CancellationToken, Object> CreateAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<IBlockOperationWrapper, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<IConstructorBodyOperationWrapper, CancellationToken, Object> CreateAccessor_Overload3 = AccessorFactory.CreateStaticMethod<Func<IConstructorBodyOperationWrapper, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<IFieldInitializerOperationWrapper, CancellationToken, Object> CreateAccessor_Overload4 = AccessorFactory.CreateStaticMethod<Func<IFieldInitializerOperationWrapper, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<IMethodBodyOperationWrapper, CancellationToken, Object> CreateAccessor_Overload5 = AccessorFactory.CreateStaticMethod<Func<IMethodBodyOperationWrapper, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<IParameterInitializerOperationWrapper, CancellationToken, Object> CreateAccessor_Overload6 = AccessorFactory.CreateStaticMethod<Func<IParameterInitializerOperationWrapper, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<IPropertyInitializerOperationWrapper, CancellationToken, Object> CreateAccessor_Overload7 = AccessorFactory.CreateStaticMethod<Func<IPropertyInitializerOperationWrapper, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<SyntaxNode, SemanticModel, CancellationToken, Object> CreateAccessor_Overload8 = AccessorFactory.CreateStaticMethod<Func<SyntaxNode, SemanticModel, CancellationToken, Object>>(WrappedType, "Create");
-    private static readonly Func<Object, IFlowAnonymousFunctionOperationWrapper, CancellationToken, Object> GetAnonymousFunctionControlFlowGraphAccessor = AccessorFactory.CreateMethod<Func<Object, IFlowAnonymousFunctionOperationWrapper, CancellationToken, Object>>(WrappedType, "GetAnonymousFunctionControlFlowGraph");
-    private static readonly Func<Object, IMethodSymbol, CancellationToken, Object> GetLocalFunctionControlFlowGraphAccessor = AccessorFactory.CreateMethod<Func<Object, IMethodSymbol, CancellationToken, Object>>(WrappedType, "GetLocalFunctionControlFlowGraph");
+    private static readonly Func<IAttributeOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor = AccessorFactory.CreateStaticMethod<Func<IAttributeOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<IBlockOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload2 = AccessorFactory.CreateStaticMethod<Func<IBlockOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<IConstructorBodyOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload3 = AccessorFactory.CreateStaticMethod<Func<IConstructorBodyOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<IFieldInitializerOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload4 = AccessorFactory.CreateStaticMethod<Func<IFieldInitializerOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<IMethodBodyOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload5 = AccessorFactory.CreateStaticMethod<Func<IMethodBodyOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<IParameterInitializerOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload6 = AccessorFactory.CreateStaticMethod<Func<IParameterInitializerOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<IPropertyInitializerOperationWrapper, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload7 = AccessorFactory.CreateStaticMethod<Func<IPropertyInitializerOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<SyntaxNode, SemanticModel, CancellationToken, ControlFlowGraphWrapper> CreateAccessor_Overload8 = AccessorFactory.CreateStaticMethod<Func<SyntaxNode, SemanticModel, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "Create");
+    private static readonly Func<Object, IFlowAnonymousFunctionOperationWrapper, CancellationToken, ControlFlowGraphWrapper> GetAnonymousFunctionControlFlowGraphAccessor = AccessorFactory.CreateMethod<Func<Object, IFlowAnonymousFunctionOperationWrapper, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "GetAnonymousFunctionControlFlowGraph");
+    private static readonly Func<Object, IMethodSymbol, CancellationToken, ControlFlowGraphWrapper> GetLocalFunctionControlFlowGraphAccessor = AccessorFactory.CreateMethod<Func<Object, IMethodSymbol, CancellationToken, ControlFlowGraphWrapper>>(WrappedType, "GetLocalFunctionControlFlowGraph");
 
     private ControlFlowGraphWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -65,21 +65,21 @@ public readonly struct ControlFlowGraphWrapper : IWrapper, IEquatable<ControlFlo
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ImmutableArray<BasicBlockWrapper> Blocks => BlocksAccessor(wrappedInstance);
-    public ImmutableArray<IMethodSymbol> LocalFunctions => (ImmutableArray<IMethodSymbol>)LocalFunctionsAccessor(wrappedInstance);
+    public ImmutableArray<IMethodSymbol> LocalFunctions => LocalFunctionsAccessor(wrappedInstance);
     public IOperation OriginalOperation => OriginalOperationAccessor(wrappedInstance);
-    public ControlFlowGraphWrapper Parent => ControlFlowGraphWrapper.From(ParentAccessor(wrappedInstance));
-    public ControlFlowRegionWrapper Root => ControlFlowRegionWrapper.From(RootAccessor(wrappedInstance));
+    public ControlFlowGraphWrapper Parent => ParentAccessor(wrappedInstance);
+    public ControlFlowRegionWrapper Root => RootAccessor(wrappedInstance);
 
-    public static ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor(attribute, cancellationToken));
-    public static ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload2(body, cancellationToken));
-    public static ControlFlowGraphWrapper Create(IConstructorBodyOperationWrapper constructorBody, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload3(constructorBody, cancellationToken));
-    public static ControlFlowGraphWrapper Create(IFieldInitializerOperationWrapper initializer, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload4(initializer, cancellationToken));
-    public static ControlFlowGraphWrapper Create(IMethodBodyOperationWrapper methodBody, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload5(methodBody, cancellationToken));
-    public static ControlFlowGraphWrapper Create(IParameterInitializerOperationWrapper initializer, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload6(initializer, cancellationToken));
-    public static ControlFlowGraphWrapper Create(IPropertyInitializerOperationWrapper initializer, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload7(initializer, cancellationToken));
-    public static ControlFlowGraphWrapper Create(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(CreateAccessor_Overload8(node, semanticModel, cancellationToken));
-    public ControlFlowGraphWrapper GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(GetAnonymousFunctionControlFlowGraphAccessor(wrappedInstance, anonymousFunction, cancellationToken));
-    public ControlFlowGraphWrapper GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction, CancellationToken cancellationToken) => ControlFlowGraphWrapper.From(GetLocalFunctionControlFlowGraphAccessor(wrappedInstance, localFunction, cancellationToken));
+    public static ControlFlowGraphWrapper Create(IAttributeOperationWrapper attribute, CancellationToken cancellationToken) => CreateAccessor(attribute, cancellationToken);
+    public static ControlFlowGraphWrapper Create(IBlockOperationWrapper body, CancellationToken cancellationToken) => CreateAccessor_Overload2(body, cancellationToken);
+    public static ControlFlowGraphWrapper Create(IConstructorBodyOperationWrapper constructorBody, CancellationToken cancellationToken) => CreateAccessor_Overload3(constructorBody, cancellationToken);
+    public static ControlFlowGraphWrapper Create(IFieldInitializerOperationWrapper initializer, CancellationToken cancellationToken) => CreateAccessor_Overload4(initializer, cancellationToken);
+    public static ControlFlowGraphWrapper Create(IMethodBodyOperationWrapper methodBody, CancellationToken cancellationToken) => CreateAccessor_Overload5(methodBody, cancellationToken);
+    public static ControlFlowGraphWrapper Create(IParameterInitializerOperationWrapper initializer, CancellationToken cancellationToken) => CreateAccessor_Overload6(initializer, cancellationToken);
+    public static ControlFlowGraphWrapper Create(IPropertyInitializerOperationWrapper initializer, CancellationToken cancellationToken) => CreateAccessor_Overload7(initializer, cancellationToken);
+    public static ControlFlowGraphWrapper Create(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken) => CreateAccessor_Overload8(node, semanticModel, cancellationToken);
+    public ControlFlowGraphWrapper GetAnonymousFunctionControlFlowGraph(IFlowAnonymousFunctionOperationWrapper anonymousFunction, CancellationToken cancellationToken) => GetAnonymousFunctionControlFlowGraphAccessor(wrappedInstance, anonymousFunction, cancellationToken);
+    public ControlFlowGraphWrapper GetLocalFunctionControlFlowGraph(IMethodSymbol localFunction, CancellationToken cancellationToken) => GetLocalFunctionControlFlowGraphAccessor(wrappedInstance, localFunction, cancellationToken);
 
     public static ControlFlowGraphWrapper From(Object instance)
     {

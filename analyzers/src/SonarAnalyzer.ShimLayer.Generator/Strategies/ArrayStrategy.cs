@@ -31,10 +31,5 @@ public class ArrayStrategy : Strategy
         type = IsSupported ? $"{elementType.ReturnTypeSnippet}[]" : null;
     }
 
-    public override string ToConversionSnippet(string from) =>
-        type is null
-            ? throw new NotSupportedException()
-            : $"({type}){from}";
-
     protected override string GenerateCore(StrategyModel model) => null;
 }

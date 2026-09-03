@@ -27,7 +27,7 @@ public static class SyntaxTreeAnalysisContextShimExtensions
 
     extension(SyntaxTreeAnalysisContext wrappedInstance)
     {
-        public Nullable<TextSpan> FilterSpan => (Nullable<TextSpan>)FilterSpanAccessor(wrappedInstance);
-        public bool IsGeneratedCode => (bool)IsGeneratedCodeAccessor(wrappedInstance);
+        public Nullable<TextSpan> FilterSpan => FilterSpanAccessor(wrappedInstance);
+        public bool IsGeneratedCode => IsGeneratedCodeAccessor(wrappedInstance);
     }
 }

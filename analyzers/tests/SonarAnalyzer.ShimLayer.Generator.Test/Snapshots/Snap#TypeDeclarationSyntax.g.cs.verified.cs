@@ -57,8 +57,8 @@ public static class TypeDeclarationSyntaxShimExtensions
         public TypeDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public TypeDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
         public TypeDeclarationSyntax AddTypeParameterListParameters(TypeParameterSyntax[] items) => AddTypeParameterListParametersAccessor(wrappedInstance, items);
-        public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+        public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public TypeDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public TypeDeclarationSyntax WithBaseList(BaseListSyntax baseList) => WithBaseListAccessor(wrappedInstance, baseList);
         public TypeDeclarationSyntax WithCloseBraceToken(SyntaxToken closeBraceToken) => WithCloseBraceTokenAccessor(wrappedInstance, closeBraceToken);

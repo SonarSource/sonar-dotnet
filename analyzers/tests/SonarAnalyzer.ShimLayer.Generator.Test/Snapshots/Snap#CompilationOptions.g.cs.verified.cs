@@ -25,7 +25,7 @@ public static class CompilationOptionsShimExtensions
     private static readonly Func<CompilationOptions, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<CompilationOptions, string>>(WrappedType, "Language");
     private static readonly Func<CompilationOptions, MetadataImportOptions> MetadataImportOptionsAccessor = AccessorFactory.CreateProperty<Func<CompilationOptions, MetadataImportOptions>>(WrappedType, "MetadataImportOptions");
     private static readonly Func<CompilationOptions, NullableContextOptions> NullableContextOptionsAccessor = AccessorFactory.CreateProperty<Func<CompilationOptions, NullableContextOptions>>(WrappedType, "NullableContextOptions");
-    private static readonly Func<CompilationOptions, Object> SyntaxTreeOptionsProviderAccessor = AccessorFactory.CreateProperty<Func<CompilationOptions, Object>>(WrappedType, "SyntaxTreeOptionsProvider");
+    private static readonly Func<CompilationOptions, SyntaxTreeOptionsProviderWrapper> SyntaxTreeOptionsProviderAccessor = AccessorFactory.CreateProperty<Func<CompilationOptions, SyntaxTreeOptionsProviderWrapper>>(WrappedType, "SyntaxTreeOptionsProvider");
 
     private static readonly Func<CompilationOptions, bool, CompilationOptions> WithConcurrentBuildAccessor = AccessorFactory.CreateMethod<Func<CompilationOptions, bool, CompilationOptions>>(WrappedType, "WithConcurrentBuild");
     private static readonly Func<CompilationOptions, string, CompilationOptions> WithCryptoKeyContainerAccessor = AccessorFactory.CreateMethod<Func<CompilationOptions, string, CompilationOptions>>(WrappedType, "WithCryptoKeyContainer");
@@ -41,10 +41,10 @@ public static class CompilationOptionsShimExtensions
 
     extension(CompilationOptions wrappedInstance)
     {
-        public string Language => (string)LanguageAccessor(wrappedInstance);
-        public MetadataImportOptions MetadataImportOptions => (MetadataImportOptions)MetadataImportOptionsAccessor(wrappedInstance);
-        public NullableContextOptions NullableContextOptions => (NullableContextOptions)NullableContextOptionsAccessor(wrappedInstance);
-        public SyntaxTreeOptionsProviderWrapper SyntaxTreeOptionsProvider => SyntaxTreeOptionsProviderWrapper.From(SyntaxTreeOptionsProviderAccessor(wrappedInstance));
+        public string Language => LanguageAccessor(wrappedInstance);
+        public MetadataImportOptions MetadataImportOptions => MetadataImportOptionsAccessor(wrappedInstance);
+        public NullableContextOptions NullableContextOptions => NullableContextOptionsAccessor(wrappedInstance);
+        public SyntaxTreeOptionsProviderWrapper SyntaxTreeOptionsProvider => SyntaxTreeOptionsProviderAccessor(wrappedInstance);
 
         public CompilationOptions WithConcurrentBuild(bool concurrent) => WithConcurrentBuildAccessor(wrappedInstance, concurrent);
         public CompilationOptions WithCryptoKeyContainer(string cryptoKeyContainer) => WithCryptoKeyContainerAccessor(wrappedInstance, cryptoKeyContainer);

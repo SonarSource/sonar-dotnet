@@ -25,6 +25,6 @@ public static class NullableContextOptionsExtensionsEx
     private static readonly Func<NullableContextOptions, bool> AnnotationsEnabledAccessor = AccessorFactory.CreateStaticMethod<Func<NullableContextOptions, bool>>(WrappedType, "AnnotationsEnabled");
     private static readonly Func<NullableContextOptions, bool> WarningsEnabledAccessor = AccessorFactory.CreateStaticMethod<Func<NullableContextOptions, bool>>(WrappedType, "WarningsEnabled");
 
-    public static bool AnnotationsEnabled(this NullableContextOptions context) => (bool)AnnotationsEnabledAccessor(context);
-    public static bool WarningsEnabled(this NullableContextOptions context) => (bool)WarningsEnabledAccessor(context);
+    public static bool AnnotationsEnabled(this NullableContextOptions context) => AnnotationsEnabledAccessor(context);
+    public static bool WarningsEnabled(this NullableContextOptions context) => WarningsEnabledAccessor(context);
 }

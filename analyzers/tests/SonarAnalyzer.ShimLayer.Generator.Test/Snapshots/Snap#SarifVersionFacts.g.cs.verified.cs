@@ -25,5 +25,5 @@ public static class SarifVersionFactsEx
     private delegate bool TryParseAccessorDelegate(string version, out SarifVersion result);
     private static readonly TryParseAccessorDelegate TryParseAccessor = AccessorFactory.CreateStaticMethod<TryParseAccessorDelegate>(WrappedType, "TryParse");
 
-    public static bool TryParse(string version, out SarifVersion result) => (bool)TryParseAccessor(version, out result);
+    public static bool TryParse(string version, out SarifVersion result) => TryParseAccessor(version, out result);
 }

@@ -29,9 +29,9 @@ public readonly struct SpreadElementSyntaxWrapper : IWrapper, IEquatable<SpreadE
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, CSharpSyntaxNode>>(WrappedType, "WithExpression");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithOperatorTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithOperatorToken");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, SpreadElementSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, ExpressionSyntax, SpreadElementSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, ExpressionSyntax, SpreadElementSyntaxWrapper> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, ExpressionSyntax, SpreadElementSyntaxWrapper>>(WrappedType, "WithExpression");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, SpreadElementSyntaxWrapper> WithOperatorTokenAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, SpreadElementSyntaxWrapper>>(WrappedType, "WithOperatorToken");
 
     private SpreadElementSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -134,11 +134,11 @@ public readonly struct SpreadElementSyntaxWrapper : IWrapper, IEquatable<SpreadE
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public SpreadElementSyntaxWrapper Update(SyntaxToken operatorToken, ExpressionSyntax expression) => SpreadElementSyntaxWrapper.From(UpdateAccessor(wrappedInstance, operatorToken, expression));
-    public SpreadElementSyntaxWrapper WithExpression(ExpressionSyntax expression) => SpreadElementSyntaxWrapper.From(WithExpressionAccessor(wrappedInstance, expression));
-    public SpreadElementSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => SpreadElementSyntaxWrapper.From(WithOperatorTokenAccessor(wrappedInstance, operatorToken));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public SpreadElementSyntaxWrapper Update(SyntaxToken operatorToken, ExpressionSyntax expression) => UpdateAccessor(wrappedInstance, operatorToken, expression);
+    public SpreadElementSyntaxWrapper WithExpression(ExpressionSyntax expression) => WithExpressionAccessor(wrappedInstance, expression);
+    public SpreadElementSyntaxWrapper WithOperatorToken(SyntaxToken operatorToken) => WithOperatorTokenAccessor(wrappedInstance, operatorToken);
 
     public static explicit operator SpreadElementSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

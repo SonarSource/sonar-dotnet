@@ -49,7 +49,7 @@ public readonly struct MethodInstrumentationWrapper : IWrapper, IEquatable<Metho
     public static bool operator !=(MethodInstrumentationWrapper left, MethodInstrumentationWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public ImmutableArray<InstrumentationKind> Kinds => (ImmutableArray<InstrumentationKind>)KindsAccessor(wrappedInstance);
+    public ImmutableArray<InstrumentationKind> Kinds => KindsAccessor(wrappedInstance);
 
     public static MethodInstrumentationWrapper From(Object instance)
     {

@@ -31,14 +31,14 @@ public static class AnalyzerTelemetryInfoShimExtensions
     extension(AnalyzerTelemetryInfo wrappedInstance)
     {
         [System.Runtime.Serialization.DataMemberAttribute]
-        public int AdditionalFileActionsCount => (int)AdditionalFileActionsCountAccessor(wrappedInstance);
+        public int AdditionalFileActionsCount => AdditionalFileActionsCountAccessor(wrappedInstance);
         [System.Runtime.Serialization.DataMemberAttribute]
-        public bool Concurrent => (bool)ConcurrentAccessor(wrappedInstance);
+        public bool Concurrent => ConcurrentAccessor(wrappedInstance);
         [System.Runtime.Serialization.DataMemberAttribute]
-        public int SuppressionActionsCount => (int)SuppressionActionsCountAccessor(wrappedInstance);
+        public int SuppressionActionsCount => SuppressionActionsCountAccessor(wrappedInstance);
         [System.Runtime.Serialization.DataMemberAttribute]
-        public int SymbolEndActionsCount => (int)SymbolEndActionsCountAccessor(wrappedInstance);
+        public int SymbolEndActionsCount => SymbolEndActionsCountAccessor(wrappedInstance);
         [System.Runtime.Serialization.DataMemberAttribute]
-        public int SymbolStartActionsCount => (int)SymbolStartActionsCountAccessor(wrappedInstance);
+        public int SymbolStartActionsCount => SymbolStartActionsCountAccessor(wrappedInstance);
     }
 }

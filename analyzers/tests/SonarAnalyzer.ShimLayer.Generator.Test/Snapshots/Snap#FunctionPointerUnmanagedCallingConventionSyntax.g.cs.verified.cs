@@ -28,8 +28,8 @@ public readonly struct FunctionPointerUnmanagedCallingConventionSyntaxWrapper : 
 
     private static readonly Func<CSharpSyntaxNode, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, int, bool>>(WrappedType, "ContainsDirective");
     private static readonly Func<CSharpSyntaxNode, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "Update");
-    private static readonly Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode> WithNameAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, CSharpSyntaxNode>>(WrappedType, "WithName");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, FunctionPointerUnmanagedCallingConventionSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, FunctionPointerUnmanagedCallingConventionSyntaxWrapper>>(WrappedType, "Update");
+    private static readonly Func<CSharpSyntaxNode, SyntaxToken, FunctionPointerUnmanagedCallingConventionSyntaxWrapper> WithNameAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxNode, SyntaxToken, FunctionPointerUnmanagedCallingConventionSyntaxWrapper>>(WrappedType, "WithName");
 
     private FunctionPointerUnmanagedCallingConventionSyntaxWrapper(CSharpSyntaxNode wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -131,10 +131,10 @@ public readonly struct FunctionPointerUnmanagedCallingConventionSyntaxWrapper : 
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public bool ContainsDirective(int rawKind) => (bool)ContainsDirectiveAccessor(wrappedInstance, rawKind);
-    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => (bool)IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
-    public FunctionPointerUnmanagedCallingConventionSyntaxWrapper Update(SyntaxToken name) => FunctionPointerUnmanagedCallingConventionSyntaxWrapper.From(UpdateAccessor(wrappedInstance, name));
-    public FunctionPointerUnmanagedCallingConventionSyntaxWrapper WithName(SyntaxToken name) => FunctionPointerUnmanagedCallingConventionSyntaxWrapper.From(WithNameAccessor(wrappedInstance, name));
+    public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
+    public FunctionPointerUnmanagedCallingConventionSyntaxWrapper Update(SyntaxToken name) => UpdateAccessor(wrappedInstance, name);
+    public FunctionPointerUnmanagedCallingConventionSyntaxWrapper WithName(SyntaxToken name) => WithNameAccessor(wrappedInstance, name);
 
     public static explicit operator FunctionPointerUnmanagedCallingConventionSyntaxWrapper(SyntaxNode instance) =>
         From(instance);

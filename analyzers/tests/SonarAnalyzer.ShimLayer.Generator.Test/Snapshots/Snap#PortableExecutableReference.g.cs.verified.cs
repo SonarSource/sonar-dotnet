@@ -26,6 +26,6 @@ public static class PortableExecutableReferenceShimExtensions
 
     extension(PortableExecutableReference wrappedInstance)
     {
-        public MetadataId GetMetadataId() => (MetadataId)GetMetadataIdAccessor(wrappedInstance);
+        public MetadataId GetMetadataId() => GetMetadataIdAccessor(wrappedInstance);
     }
 }

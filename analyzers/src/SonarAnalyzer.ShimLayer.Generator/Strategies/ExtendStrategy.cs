@@ -23,9 +23,6 @@ public class ExtendStrategy : MemberStrategy
 
     public ExtendStrategy(Type latest, MemberDescriptor[] members) : base(latest, members) { }
 
-    public override string ToConversionSnippet(string from) =>
-        from;
-
     protected override string GenerateCore(StrategyModel model)
     {
         var wrap = WrapMembers(model);

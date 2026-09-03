@@ -52,7 +52,7 @@ public readonly struct GeneratorPostInitializationContextWrapper : IWrapper, IEq
     public static bool operator !=(GeneratorPostInitializationContextWrapper left, GeneratorPostInitializationContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
 
     public void AddSource(string hintName, SourceText sourceText) => AddSourceAccessor(wrappedInstance, hintName, sourceText);
     public void AddSource(string hintName, string source) => AddSourceAccessor_Overload2(wrappedInstance, hintName, source);

@@ -52,10 +52,10 @@ public readonly struct LineMappingWrapper : IWrapper, IEquatable<LineMappingWrap
     public static bool operator !=(LineMappingWrapper left, LineMappingWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public Nullable<int> CharacterOffset => (Nullable<int>)CharacterOffsetAccessor(wrappedInstance);
-    public bool IsHidden => (bool)IsHiddenAccessor(wrappedInstance);
+    public Nullable<int> CharacterOffset => CharacterOffsetAccessor(wrappedInstance);
+    public bool IsHidden => IsHiddenAccessor(wrappedInstance);
     public FileLinePositionSpan MappedSpan => MappedSpanAccessor(wrappedInstance);
-    public LinePositionSpan Span => (LinePositionSpan)SpanAccessor(wrappedInstance);
+    public LinePositionSpan Span => SpanAccessor(wrappedInstance);
 
     public static LineMappingWrapper From(Object instance)
     {

@@ -50,8 +50,8 @@ public readonly struct RuntimeRudeEditWrapper : IWrapper, IEquatable<RuntimeRude
     public static bool operator !=(RuntimeRudeEditWrapper left, RuntimeRudeEditWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public int ErrorCode => (int)ErrorCodeAccessor(wrappedInstance);
-    public string Message => (string)MessageAccessor(wrappedInstance);
+    public int ErrorCode => ErrorCodeAccessor(wrappedInstance);
+    public string Message => MessageAccessor(wrappedInstance);
 
     public static RuntimeRudeEditWrapper From(Object instance)
     {

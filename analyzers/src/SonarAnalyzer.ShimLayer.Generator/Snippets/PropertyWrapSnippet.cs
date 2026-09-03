@@ -23,15 +23,15 @@ public sealed class PropertyWrapSnippet : Snippet<PropertyInfo>
 
     public override string AccessorDeclaration() =>
         member.GetMethod.IsStatic
-            ? $"""    private static readonly Func<{returnType.CompiletimeTypeSnippet}> {accessorName} = AccessorFactory.CreateStaticProperty<Func<{returnType.CompiletimeTypeSnippet}>>(WrappedType, "{member.Name}");"""
-            : $"""    private static readonly Func<{strategy.CompiletimeTypeSnippet}, {returnType.CompiletimeTypeSnippet}> {accessorName} = AccessorFactory.CreateProperty<Func<{strategy.CompiletimeTypeSnippet}, {returnType.CompiletimeTypeSnippet}>>(WrappedType, "{member.Name}");""";
+            ? $"""    private static readonly Func<{returnType.ReturnTypeSnippet}> {accessorName} = AccessorFactory.CreateStaticProperty<Func<{returnType.ReturnTypeSnippet}>>(WrappedType, "{member.Name}");"""
+            : $"""    private static readonly Func<{strategy.CompiletimeTypeSnippet}, {returnType.ReturnTypeSnippet}> {accessorName} = AccessorFactory.CreateProperty<Func<{strategy.CompiletimeTypeSnippet}, {returnType.ReturnTypeSnippet}>>(WrappedType, "{member.Name}");""";
 
     public override string MemberDeclaration(int indentSize)
     {
         var sender = member.GetMethod.IsStatic ? null : "wrappedInstance";
         var staticSnippet = member.GetMethod.IsStatic ? "static " : null;
         return $"""
-            {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name} => {returnType.ToConversionSnippet($"{accessorName}({sender})")};
+            {Indent(indentSize)}{SerializeAttributes(member.GetCustomAttributesData(), indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name} => {accessorName}({sender});
             """;
     }
 }

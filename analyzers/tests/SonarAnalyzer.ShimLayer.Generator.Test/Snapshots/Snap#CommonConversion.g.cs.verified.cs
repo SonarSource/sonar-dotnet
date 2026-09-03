@@ -58,13 +58,13 @@ public readonly struct CommonConversionWrapper : IWrapper, IEquatable<CommonConv
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
-    public bool Exists => (bool)ExistsAccessor(wrappedInstance);
-    public bool IsIdentity => (bool)IsIdentityAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public bool IsNullable => (bool)IsNullableAccessor(wrappedInstance);
-    public bool IsNumeric => (bool)IsNumericAccessor(wrappedInstance);
-    public bool IsReference => (bool)IsReferenceAccessor(wrappedInstance);
-    public bool IsUserDefined => (bool)IsUserDefinedAccessor(wrappedInstance);
+    public bool Exists => ExistsAccessor(wrappedInstance);
+    public bool IsIdentity => IsIdentityAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public bool IsNullable => IsNullableAccessor(wrappedInstance);
+    public bool IsNumeric => IsNumericAccessor(wrappedInstance);
+    public bool IsReference => IsReferenceAccessor(wrappedInstance);
+    public bool IsUserDefined => IsUserDefinedAccessor(wrappedInstance);
     public IMethodSymbol MethodSymbol => MethodSymbolAccessor(wrappedInstance);
 
     public static CommonConversionWrapper From(Object instance)

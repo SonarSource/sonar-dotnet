@@ -26,14 +26,14 @@ public static class OperationAnalysisContextShimExtensions
     private static readonly Func<OperationAnalysisContext, SyntaxTree> FilterTreeAccessor = AccessorFactory.CreateProperty<Func<OperationAnalysisContext, SyntaxTree>>(WrappedType, "FilterTree");
     private static readonly Func<OperationAnalysisContext, bool> IsGeneratedCodeAccessor = AccessorFactory.CreateProperty<Func<OperationAnalysisContext, bool>>(WrappedType, "IsGeneratedCode");
 
-    private static readonly Func<OperationAnalysisContext, Object> GetControlFlowGraphAccessor = AccessorFactory.CreateMethod<Func<OperationAnalysisContext, Object>>(WrappedType, "GetControlFlowGraph");
+    private static readonly Func<OperationAnalysisContext, ControlFlowGraphWrapper> GetControlFlowGraphAccessor = AccessorFactory.CreateMethod<Func<OperationAnalysisContext, ControlFlowGraphWrapper>>(WrappedType, "GetControlFlowGraph");
 
     extension(OperationAnalysisContext wrappedInstance)
     {
-        public Nullable<TextSpan> FilterSpan => (Nullable<TextSpan>)FilterSpanAccessor(wrappedInstance);
+        public Nullable<TextSpan> FilterSpan => FilterSpanAccessor(wrappedInstance);
         public SyntaxTree FilterTree => FilterTreeAccessor(wrappedInstance);
-        public bool IsGeneratedCode => (bool)IsGeneratedCodeAccessor(wrappedInstance);
+        public bool IsGeneratedCode => IsGeneratedCodeAccessor(wrappedInstance);
 
-        public ControlFlowGraphWrapper GetControlFlowGraph() => ControlFlowGraphWrapper.From(GetControlFlowGraphAccessor(wrappedInstance));
+        public ControlFlowGraphWrapper GetControlFlowGraph() => GetControlFlowGraphAccessor(wrappedInstance);
     }
 }

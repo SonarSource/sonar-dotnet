@@ -36,24 +36,24 @@ public static class ConversionShimExtensions
     private static readonly Func<Conversion, bool> IsTupleConversionAccessor = AccessorFactory.CreateProperty<Func<Conversion, bool>>(WrappedType, "IsTupleConversion");
     private static readonly Func<Conversion, bool> IsTupleLiteralConversionAccessor = AccessorFactory.CreateProperty<Func<Conversion, bool>>(WrappedType, "IsTupleLiteralConversion");
 
-    private static readonly Func<Conversion, Object> ToCommonConversionAccessor = AccessorFactory.CreateMethod<Func<Conversion, Object>>(WrappedType, "ToCommonConversion");
+    private static readonly Func<Conversion, CommonConversionWrapper> ToCommonConversionAccessor = AccessorFactory.CreateMethod<Func<Conversion, CommonConversionWrapper>>(WrappedType, "ToCommonConversion");
 
     extension(Conversion wrappedInstance)
     {
         public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
-        public bool IsCollectionExpression => (bool)IsCollectionExpressionAccessor(wrappedInstance);
-        public bool IsConditionalExpression => (bool)IsConditionalExpressionAccessor(wrappedInstance);
-        public bool IsDefaultLiteral => (bool)IsDefaultLiteralAccessor(wrappedInstance);
-        public bool IsInlineArray => (bool)IsInlineArrayAccessor(wrappedInstance);
-        public bool IsInterpolatedStringHandler => (bool)IsInterpolatedStringHandlerAccessor(wrappedInstance);
-        public bool IsObjectCreation => (bool)IsObjectCreationAccessor(wrappedInstance);
-        public bool IsSpan => (bool)IsSpanAccessor(wrappedInstance);
-        public bool IsStackAlloc => (bool)IsStackAllocAccessor(wrappedInstance);
-        public bool IsSwitchExpression => (bool)IsSwitchExpressionAccessor(wrappedInstance);
-        public bool IsThrow => (bool)IsThrowAccessor(wrappedInstance);
-        public bool IsTupleConversion => (bool)IsTupleConversionAccessor(wrappedInstance);
-        public bool IsTupleLiteralConversion => (bool)IsTupleLiteralConversionAccessor(wrappedInstance);
+        public bool IsCollectionExpression => IsCollectionExpressionAccessor(wrappedInstance);
+        public bool IsConditionalExpression => IsConditionalExpressionAccessor(wrappedInstance);
+        public bool IsDefaultLiteral => IsDefaultLiteralAccessor(wrappedInstance);
+        public bool IsInlineArray => IsInlineArrayAccessor(wrappedInstance);
+        public bool IsInterpolatedStringHandler => IsInterpolatedStringHandlerAccessor(wrappedInstance);
+        public bool IsObjectCreation => IsObjectCreationAccessor(wrappedInstance);
+        public bool IsSpan => IsSpanAccessor(wrappedInstance);
+        public bool IsStackAlloc => IsStackAllocAccessor(wrappedInstance);
+        public bool IsSwitchExpression => IsSwitchExpressionAccessor(wrappedInstance);
+        public bool IsThrow => IsThrowAccessor(wrappedInstance);
+        public bool IsTupleConversion => IsTupleConversionAccessor(wrappedInstance);
+        public bool IsTupleLiteralConversion => IsTupleLiteralConversionAccessor(wrappedInstance);
 
-        public CommonConversionWrapper ToCommonConversion() => CommonConversionWrapper.From(ToCommonConversionAccessor(wrappedInstance));
+        public CommonConversionWrapper ToCommonConversion() => ToCommonConversionAccessor(wrappedInstance);
     }
 }

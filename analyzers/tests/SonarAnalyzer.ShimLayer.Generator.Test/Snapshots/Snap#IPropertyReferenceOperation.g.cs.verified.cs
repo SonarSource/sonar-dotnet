@@ -67,11 +67,11 @@ public readonly struct IPropertyReferenceOperationWrapper : IOperationWrapper, I
 
     public ImmutableArray<IArgumentOperationWrapper> Arguments => ArgumentsAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
     public ITypeSymbol ConstrainedToType => ConstrainedToTypeAccessor(wrappedInstance);
     public IOperation Instance => InstanceAccessor(wrappedInstance);
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public ISymbol Member => MemberAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public IPropertySymbol Property => PropertyAccessor(wrappedInstance);

@@ -22,7 +22,7 @@ public static class CompilationShimExtensions
 {
     private static readonly Type WrappedType = typeof(Compilation);
 
-    private static readonly Func<Compilation, ITypeSymbol, ITypeSymbol, Object> ClassifyCommonConversionAccessor = AccessorFactory.CreateMethod<Func<Compilation, ITypeSymbol, ITypeSymbol, Object>>(WrappedType, "ClassifyCommonConversion");
+    private static readonly Func<Compilation, ITypeSymbol, ITypeSymbol, CommonConversionWrapper> ClassifyCommonConversionAccessor = AccessorFactory.CreateMethod<Func<Compilation, ITypeSymbol, ITypeSymbol, CommonConversionWrapper>>(WrappedType, "ClassifyCommonConversion");
     private static readonly Func<Compilation, string, SymbolFilter, CancellationToken, bool> ContainsSymbolsWithNameAccessor_Overload2 = AccessorFactory.CreateMethod<Func<Compilation, string, SymbolFilter, CancellationToken, bool>>(WrappedType, "ContainsSymbolsWithName");
     private static readonly Func<Compilation, ImmutableArray<ITypeSymbol>, ImmutableArray<string>, ImmutableArray<bool>, ImmutableArray<Location>, INamedTypeSymbol> CreateAnonymousTypeSymbolAccessor = AccessorFactory.CreateMethod<Func<Compilation, ImmutableArray<ITypeSymbol>, ImmutableArray<string>, ImmutableArray<bool>, ImmutableArray<Location>, INamedTypeSymbol>>(WrappedType, "CreateAnonymousTypeSymbol");
     private static readonly Func<Compilation, ImmutableArray<ITypeSymbol>, ImmutableArray<string>, ImmutableArray<bool>, ImmutableArray<Location>, ImmutableArray<NullableAnnotation>, INamedTypeSymbol> CreateAnonymousTypeSymbolAccessor_Overload2 = AccessorFactory.CreateMethod<Func<Compilation, ImmutableArray<ITypeSymbol>, ImmutableArray<string>, ImmutableArray<bool>, ImmutableArray<Location>, ImmutableArray<NullableAnnotation>, INamedTypeSymbol>>(WrappedType, "CreateAnonymousTypeSymbol");
@@ -50,8 +50,8 @@ public static class CompilationShimExtensions
 
     extension(Compilation wrappedInstance)
     {
-        public CommonConversionWrapper ClassifyCommonConversion(ITypeSymbol source, ITypeSymbol destination) => CommonConversionWrapper.From(ClassifyCommonConversionAccessor(wrappedInstance, source, destination));
-        public bool ContainsSymbolsWithName(string name, SymbolFilter filter, CancellationToken cancellationToken) => (bool)ContainsSymbolsWithNameAccessor_Overload2(wrappedInstance, name, filter, cancellationToken);
+        public CommonConversionWrapper ClassifyCommonConversion(ITypeSymbol source, ITypeSymbol destination) => ClassifyCommonConversionAccessor(wrappedInstance, source, destination);
+        public bool ContainsSymbolsWithName(string name, SymbolFilter filter, CancellationToken cancellationToken) => ContainsSymbolsWithNameAccessor_Overload2(wrappedInstance, name, filter, cancellationToken);
         public INamedTypeSymbol CreateAnonymousTypeSymbol(ImmutableArray<ITypeSymbol> memberTypes, ImmutableArray<string> memberNames, ImmutableArray<bool> memberIsReadOnly, ImmutableArray<Location> memberLocations) => CreateAnonymousTypeSymbolAccessor(wrappedInstance, memberTypes, memberNames, memberIsReadOnly, memberLocations);
         public INamedTypeSymbol CreateAnonymousTypeSymbol(ImmutableArray<ITypeSymbol> memberTypes, ImmutableArray<string> memberNames, ImmutableArray<bool> memberIsReadOnly, ImmutableArray<Location> memberLocations, ImmutableArray<NullableAnnotation> memberNullableAnnotations) => CreateAnonymousTypeSymbolAccessor_Overload2(wrappedInstance, memberTypes, memberNames, memberIsReadOnly, memberLocations, memberNullableAnnotations);
         public IArrayTypeSymbol CreateArrayTypeSymbol(ITypeSymbol elementType, int rank, NullableAnnotation elementNullableAnnotation) => CreateArrayTypeSymbolAccessor_Overload2(wrappedInstance, elementType, rank, elementNullableAnnotation);
@@ -66,14 +66,14 @@ public static class CompilationShimExtensions
         public INamedTypeSymbol CreateTupleTypeSymbol(ImmutableArray<ITypeSymbol> elementTypes, ImmutableArray<string> elementNames, ImmutableArray<Location> elementLocations, ImmutableArray<NullableAnnotation> elementNullableAnnotations) => CreateTupleTypeSymbolAccessor_Overload4(wrappedInstance, elementTypes, elementNames, elementLocations, elementNullableAnnotations);
         public EmitDifferenceResult EmitDifference(EmitBaseline baseline, IEnumerable<SemanticEdit> edits, Func<ISymbol, bool> isAddedSymbol, Stream metadataStream, Stream ilStream, Stream pdbStream, EmitDifferenceOptionsWrapper options, CancellationToken cancellationToken) => EmitDifferenceAccessor(wrappedInstance, baseline, edits, isAddedSymbol, metadataStream, ilStream, pdbStream, options, cancellationToken);
         public EmitDifferenceResult EmitDifference(EmitBaseline baseline, IEnumerable<SemanticEdit> edits, Func<ISymbol, bool> isAddedSymbol, Stream metadataStream, Stream ilStream, Stream pdbStream, CancellationToken cancellationToken) => EmitDifferenceAccessor_Overload3(wrappedInstance, baseline, edits, isAddedSymbol, metadataStream, ilStream, pdbStream, cancellationToken);
-        public static string GetRequiredLanguageVersion(Diagnostic diagnostic) => (string)GetRequiredLanguageVersionAccessor(diagnostic);
+        public static string GetRequiredLanguageVersion(Diagnostic diagnostic) => GetRequiredLanguageVersionAccessor(diagnostic);
         public SemanticModel GetSemanticModel(SyntaxTree syntaxTree, SemanticModelOptions options) => GetSemanticModelAccessor(wrappedInstance, syntaxTree, options);
-        public IEnumerable<ISymbol> GetSymbolsWithName(string name, SymbolFilter filter, CancellationToken cancellationToken) => (IEnumerable<ISymbol>)GetSymbolsWithNameAccessor_Overload2(wrappedInstance, name, filter, cancellationToken);
-        public ImmutableArray<INamedTypeSymbol> GetTypesByMetadataName(string fullyQualifiedMetadataName) => (ImmutableArray<INamedTypeSymbol>)GetTypesByMetadataNameAccessor(wrappedInstance, fullyQualifiedMetadataName);
-        public ImmutableArray<AssemblyIdentity> GetUnreferencedAssemblyIdentities(Diagnostic diagnostic) => (ImmutableArray<AssemblyIdentity>)GetUnreferencedAssemblyIdentitiesAccessor(wrappedInstance, diagnostic);
-        public ImmutableArray<MetadataReference> GetUsedAssemblyReferences(CancellationToken cancellationToken) => (ImmutableArray<MetadataReference>)GetUsedAssemblyReferencesAccessor(wrappedInstance, cancellationToken);
-        public bool HasImplicitConversion(ITypeSymbol fromType, ITypeSymbol toType) => (bool)HasImplicitConversionAccessor(wrappedInstance, fromType, toType);
-        public bool IsSymbolAccessibleWithin(ISymbol symbol, ISymbol within, ITypeSymbol throughType) => (bool)IsSymbolAccessibleWithinAccessor(wrappedInstance, symbol, within, throughType);
-        public bool SupportsRuntimeCapability(RuntimeCapability capability) => (bool)SupportsRuntimeCapabilityAccessor(wrappedInstance, capability);
+        public IEnumerable<ISymbol> GetSymbolsWithName(string name, SymbolFilter filter, CancellationToken cancellationToken) => GetSymbolsWithNameAccessor_Overload2(wrappedInstance, name, filter, cancellationToken);
+        public ImmutableArray<INamedTypeSymbol> GetTypesByMetadataName(string fullyQualifiedMetadataName) => GetTypesByMetadataNameAccessor(wrappedInstance, fullyQualifiedMetadataName);
+        public ImmutableArray<AssemblyIdentity> GetUnreferencedAssemblyIdentities(Diagnostic diagnostic) => GetUnreferencedAssemblyIdentitiesAccessor(wrappedInstance, diagnostic);
+        public ImmutableArray<MetadataReference> GetUsedAssemblyReferences(CancellationToken cancellationToken) => GetUsedAssemblyReferencesAccessor(wrappedInstance, cancellationToken);
+        public bool HasImplicitConversion(ITypeSymbol fromType, ITypeSymbol toType) => HasImplicitConversionAccessor(wrappedInstance, fromType, toType);
+        public bool IsSymbolAccessibleWithin(ISymbol symbol, ISymbol within, ITypeSymbol throughType) => IsSymbolAccessibleWithinAccessor(wrappedInstance, symbol, within, throughType);
+        public bool SupportsRuntimeCapability(RuntimeCapability capability) => SupportsRuntimeCapabilityAccessor(wrappedInstance, capability);
     }
 }

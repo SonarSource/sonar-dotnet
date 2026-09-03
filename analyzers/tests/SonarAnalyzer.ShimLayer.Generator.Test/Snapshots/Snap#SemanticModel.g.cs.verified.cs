@@ -28,6 +28,6 @@ public static class SemanticModelShimExtensions
     extension(SemanticModel wrappedInstance)
     {
         public ImmutableArray<IImportScopeWrapper> GetImportScopes(int position, CancellationToken cancellationToken) => GetImportScopesAccessor(wrappedInstance, position, cancellationToken);
-        public NullableContext GetNullableContext(int position) => (NullableContext)GetNullableContextAccessor(wrappedInstance, position);
+        public NullableContext GetNullableContext(int position) => GetNullableContextAccessor(wrappedInstance, position);
     }
 }

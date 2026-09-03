@@ -26,6 +26,6 @@ public static class IPreprocessingSymbolShimExtensions
 
     extension(IPreprocessingSymbol wrappedInstance)
     {
-        public int MetadataToken => (int)MetadataTokenAccessor(wrappedInstance);
+        public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
     }
 }

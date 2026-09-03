@@ -27,8 +27,8 @@ public static class NullableContextExtensionsEx
     private static readonly Func<NullableContext, bool> WarningsEnabledAccessor = AccessorFactory.CreateStaticMethod<Func<NullableContext, bool>>(WrappedType, "WarningsEnabled");
     private static readonly Func<NullableContext, bool> WarningsInheritedAccessor = AccessorFactory.CreateStaticMethod<Func<NullableContext, bool>>(WrappedType, "WarningsInherited");
 
-    public static bool AnnotationsEnabled(this NullableContext context) => (bool)AnnotationsEnabledAccessor(context);
-    public static bool AnnotationsInherited(this NullableContext context) => (bool)AnnotationsInheritedAccessor(context);
-    public static bool WarningsEnabled(this NullableContext context) => (bool)WarningsEnabledAccessor(context);
-    public static bool WarningsInherited(this NullableContext context) => (bool)WarningsInheritedAccessor(context);
+    public static bool AnnotationsEnabled(this NullableContext context) => AnnotationsEnabledAccessor(context);
+    public static bool AnnotationsInherited(this NullableContext context) => AnnotationsInheritedAccessor(context);
+    public static bool WarningsEnabled(this NullableContext context) => WarningsEnabledAccessor(context);
+    public static bool WarningsInherited(this NullableContext context) => WarningsInheritedAccessor(context);
 }

@@ -25,7 +25,7 @@ public readonly struct IFlowCaptureOperationWrapper : IOperationWrapper, IWrappe
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
-    private static readonly Func<IOperation, Object> IdAccessor = AccessorFactory.CreateProperty<Func<IOperation, Object>>(WrappedType, "Id");
+    private static readonly Func<IOperation, CaptureIdWrapper> IdAccessor = AccessorFactory.CreateProperty<Func<IOperation, CaptureIdWrapper>>(WrappedType, "Id");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
     private static readonly Func<IOperation, string> LanguageAccessor = AccessorFactory.CreateProperty<Func<IOperation, string>>(WrappedType, "Language");
     private static readonly Func<IOperation, IOperation> ParentAccessor = AccessorFactory.CreateProperty<Func<IOperation, IOperation>>(WrappedType, "Parent");
@@ -63,10 +63,10 @@ public readonly struct IFlowCaptureOperationWrapper : IOperationWrapper, IWrappe
     public ITypeSymbol Type => wrappedInstance.Type;
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
-    public IEnumerable<IOperation> Children => (IEnumerable<IOperation>)ChildrenAccessor(wrappedInstance);
-    public CaptureIdWrapper Id => CaptureIdWrapper.From(IdAccessor(wrappedInstance));
-    public bool IsImplicit => (bool)IsImplicitAccessor(wrappedInstance);
-    public string Language => (string)LanguageAccessor(wrappedInstance);
+    public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
+    public CaptureIdWrapper Id => IdAccessor(wrappedInstance);
+    public bool IsImplicit => IsImplicitAccessor(wrappedInstance);
+    public string Language => LanguageAccessor(wrappedInstance);
     public IOperation Parent => ParentAccessor(wrappedInstance);
     public SemanticModel SemanticModel => SemanticModelAccessor(wrappedInstance);
     public IOperation Value => ValueAccessor(wrappedInstance);

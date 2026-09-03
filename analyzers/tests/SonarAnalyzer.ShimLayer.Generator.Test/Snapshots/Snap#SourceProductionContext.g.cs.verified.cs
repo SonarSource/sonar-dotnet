@@ -53,7 +53,7 @@ public readonly struct SourceProductionContextWrapper : IWrapper, IEquatable<Sou
     public static bool operator !=(SourceProductionContextWrapper left, SourceProductionContextWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public CancellationToken CancellationToken => (CancellationToken)CancellationTokenAccessor(wrappedInstance);
+    public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
 
     public void AddSource(string hintName, SourceText sourceText) => AddSourceAccessor(wrappedInstance, hintName, sourceText);
     public void AddSource(string hintName, string source) => AddSourceAccessor_Overload2(wrappedInstance, hintName, source);

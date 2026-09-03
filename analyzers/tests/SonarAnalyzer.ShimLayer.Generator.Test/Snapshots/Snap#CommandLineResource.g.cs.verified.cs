@@ -54,12 +54,12 @@ public readonly struct CommandLineResourceWrapper : IWrapper, IEquatable<Command
     public static bool operator !=(CommandLineResourceWrapper left, CommandLineResourceWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
-    public string FullPath => (string)FullPathAccessor(wrappedInstance);
-    public bool IsEmbedded => (bool)IsEmbeddedAccessor(wrappedInstance);
-    public bool IsLinked => (bool)IsLinkedAccessor(wrappedInstance);
-    public bool IsPublic => (bool)IsPublicAccessor(wrappedInstance);
-    public string LinkedResourceFileName => (string)LinkedResourceFileNameAccessor(wrappedInstance);
-    public string ResourceName => (string)ResourceNameAccessor(wrappedInstance);
+    public string FullPath => FullPathAccessor(wrappedInstance);
+    public bool IsEmbedded => IsEmbeddedAccessor(wrappedInstance);
+    public bool IsLinked => IsLinkedAccessor(wrappedInstance);
+    public bool IsPublic => IsPublicAccessor(wrappedInstance);
+    public string LinkedResourceFileName => LinkedResourceFileNameAccessor(wrappedInstance);
+    public string ResourceName => ResourceNameAccessor(wrappedInstance);
 
     public static CommandLineResourceWrapper From(Object instance)
     {
