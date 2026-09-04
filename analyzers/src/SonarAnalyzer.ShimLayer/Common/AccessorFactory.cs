@@ -70,8 +70,16 @@ internal static class AccessorFactory
             && parameters.Select((x, i) => IsParameterMatch(types.ParameterTypes[i], x.ParameterType)).All(x => x);
 
         static bool IsParameterMatch(Type compiletime, Type runtime) =>
+            IsParameterMatchFlat(compiletime, runtime)
+            || (compiletime.IsArray && runtime.IsArray && IsParameterMatchFlat(compiletime.GetElementType(), runtime.GetElementType()))
+            || (compiletime.IsGenericType
+                && runtime.IsGenericType
+                && IsParameterMatchFlat(compiletime.GetGenericTypeDefinition(), runtime.GetGenericTypeDefinition())
+                && compiletime.GenericTypeArguments.Length == runtime.GenericTypeArguments.Length
+                && compiletime.GenericTypeArguments.Select((x, i) => IsParameterMatch(x, runtime.GenericTypeArguments[i])).All(x => x));
+
+        static bool IsParameterMatchFlat(Type compiletime, Type runtime) =>
             compiletime.Equals(runtime)
-            || (compiletime.IsArray && runtime.IsArray && IsParameterMatch(compiletime.GetElementType(), runtime.GetElementType()))
             || IsEnumMatch(compiletime, runtime)
             || compiletime.Name == $"{runtime.Name}Wrapper";
 
@@ -189,6 +197,24 @@ internal static class AccessorFactory
             var items = Expression.Call(UnboundEnumerableSelectMethod.MakeGenericMethod(elementWrapperType, itemRuntimeType), expression, selectorLambda);
             return Expression.Call(UnboundEnumerableToArrayMethod.MakeGenericMethod(itemRuntimeType), items);
         }
+        else if (type.IsGenericType // ImmutableArray<XxxWrapper> => ImmutableArray<Xxx>
+            && type.GetGenericTypeDefinition() == typeof(ImmutableArray<>)
+            && !type.IsAssignableFrom(expression.Type)
+            && expression.Type.GenericTypeArguments.Single() is var wrapperTypeArgument
+            && wrapperTypeArgument.IsEnum)   // Only for enums for now. Supporting other Wrappers requires unwrapping in the CreateImmutableArrayConversion
+        {
+            return CreateImmutableArrayConversion(expression, expression.Type, type.GenericTypeArguments[0]);
+        }
+        else if (type.Name == "Action`1"    // Action<XxxWrapper> => Action<Xxx>
+            && expression.Type.GetGenericArguments().Single() is var wrapperType
+            && typeof(IWrapper).IsAssignableFrom(wrapperType)
+            && wrapperType.GetMethod("From") is { } fromMethod)
+        {
+            // Generate: x => expression.Invoke(XxxWrapper.From((object)x))
+            var lambdaParameter = Expression.Parameter(type.GetGenericArguments().Single(), "x");
+            var wrapped = Expression.Call(fromMethod, WrapConvert(lambdaParameter, fromMethod.GetParameters().Single().ParameterType));
+            return Expression.Lambda(type, Expression.Invoke(expression, wrapped), lambdaParameter);
+        }
         else if (expression.Type.GetProperty("WrappedInstance") is { } wrappedInstance)
         {
             return WrapConvert(Expression.Property(expression, wrappedInstance), type);
@@ -206,18 +232,18 @@ internal static class AccessorFactory
         return underlayingType.IsAssignableFrom(expression.Type) && !needsBoxing ? expression : Expression.Convert(expression, underlayingType);
     }
 
-    private static Expression CreateImmutableArrayConversion(Expression result, Type runtimeReturnType, Type wrapperTypeArgument)
+    private static Expression CreateImmutableArrayConversion(Expression result, Type inputType, Type outputTypeArgument)
     {
         // Generate: ImmutableArray.CreateRange(result, x => XxxWrapper.From(x))
         // For enum: ImmutableArray.CreateRange(result, x => (XxxWrapper)(object)(x))
-        var itemRuntimeType = runtimeReturnType.GetGenericArguments().Single();
+        var itemRuntimeType = inputType.GetGenericArguments().Single();
         var selectorParameter = Expression.Parameter(itemRuntimeType, "x");
-        var fromMethod = wrapperTypeArgument.GetMethod("From");
-        var selectorConversion = wrapperTypeArgument.IsEnum
-            ? (Expression)Expression.Convert(Expression.Convert(selectorParameter, typeof(object)), wrapperTypeArgument)
+        var fromMethod = outputTypeArgument.GetMethod("From");
+        var selectorConversion = outputTypeArgument.IsEnum
+            ? (Expression)Expression.Convert(Expression.Convert(selectorParameter, typeof(object)), outputTypeArgument)
             : Expression.Call(fromMethod, WrapConvert(selectorParameter, fromMethod.GetParameters().Single().ParameterType));
         var selectorLambda = Expression.Lambda(selectorConversion, selectorParameter);
-        return Expression.Call(UnboundImmutableArrayCreateRangeMethod.MakeGenericMethod(itemRuntimeType, wrapperTypeArgument), result, selectorLambda);
+        return Expression.Call(UnboundImmutableArrayCreateRangeMethod.MakeGenericMethod(itemRuntimeType, outputTypeArgument), result, selectorLambda);
     }
 
     private static Expression CreateSeparatedSyntaxListConversion(Expression result, Type runtimeReturnType, Type compiletimeResultType)
