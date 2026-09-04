@@ -18,7 +18,11 @@ package org.sonarsource.dotnet.shared.plugins;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import org.junit.Assume;
+import org.junit.AssumptionViolatedException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -68,11 +72,46 @@ public class RealPathProviderTest {
   }
 
   @Test
+  public void when_file_is_a_symbolic_link_returns_the_link_path() throws IOException { // NET-1883
+    Path target = temp.newFile("Target.cs").toPath();
+    Path link = createSymbolicLink(root().resolve("Link.cs"), target);
+
+    assertThat(new RealPathProvider().getRealPath(link.toString())).isEqualTo(link.toString());
+    assertThat(logger.logs(Level.DEBUG)).isEmpty();
+  }
+
+  @Test
+  public void when_parent_directory_is_a_symbolic_link_returns_the_link_path() throws IOException { // NET-1883
+    Path targetDirectory = temp.newFolder("target").toPath();
+    Files.createFile(targetDirectory.resolve("File.cs"));
+    Path linkedDirectory = createSymbolicLink(root().resolve("link"), targetDirectory);
+    Path linkedFile = linkedDirectory.resolve("File.cs");
+
+    assertThat(new RealPathProvider().getRealPath(linkedFile.toString())).isEqualTo(linkedFile.toString());
+    assertThat(logger.logs(Level.DEBUG)).isEmpty();
+  }
+
+  @Test
   public void cache_process_value_only_once() {
     RealPathProvider testSubject = new RealPathProvider();
     assertThat(testSubject.apply("File.cs")).isEqualTo("File.cs");
     assertThat(testSubject.apply("File.cs")).isEqualTo("File.cs");
     assertThat(testSubject.apply("File.cs")).isEqualTo("File.cs");
     assertThat(logger.logs(Level.DEBUG)).containsOnlyOnce("Failed to retrieve the real full path for 'File.cs'");
+  }
+
+  private Path root() throws IOException {
+    return temp.getRoot().toPath().toRealPath(LinkOption.NOFOLLOW_LINKS);
+  }
+
+  /**
+   * Creating a symbolic link on Windows requires administrator privileges or developer mode, so the test is skipped when it is not possible.
+   */
+  private static Path createSymbolicLink(Path link, Path target) {
+    try {
+      return Files.createSymbolicLink(link, target);
+    } catch (IOException | UnsupportedOperationException | SecurityException e) {
+      throw new AssumptionViolatedException("Symbolic links cannot be created on this machine", e);
+    }
   }
 }
