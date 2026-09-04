@@ -301,6 +301,23 @@ public class AccessorFactoryTest
     }
 
     [TestMethod]
+    public void CreateMethod_Generic_Shimmed()
+    {
+        var accessor = CreateFirstAncestorOrSelfAccessor<SyntaxNode, string>(typeof(ClassDeclarationSyntax));
+        var instance = CreateClassDeclaration();
+        string capturedArg = null;
+        accessor(instance, (x, arg) => { capturedArg = arg; return true; }, "TArg value", false).Should().NotBeNull();
+        capturedArg.Should().Be("TArg value");
+    }
+
+    [TestMethod]
+    public void CreateMethod_Generic_Fallback()
+    {
+        var accessor = CreateFirstAncestorOrSelfAccessor<SyntaxNode, string>(null);
+        accessor(CreateClassDeclaration(), (x, arg) => throw new NotSupportedException("This should not be executed in fallback scenario"), "TArg value", false).Should().BeNull();
+    }
+
+    [TestMethod]
     public void CreateMethod_Void_Shimmed()
     {
         var accessor = AccessorFactory.CreateMethod<Action<CollectionExpressionSyntax, CSharpSyntaxVisitor>>(typeof(CollectionExpressionSyntax), nameof(CollectionExpressionSyntax.Accept));
@@ -500,6 +517,9 @@ public class AccessorFactoryTest
 
     private static TypeSyntax CreateTypeSyntax() =>
         SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword));
+
+    private static Func<ClassDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> CreateFirstAncestorOrSelfAccessor<TNode, TArg>(Type wrappedType) =>
+        AccessorFactory.CreateMethod<Func<ClassDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(wrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
 
     private sealed class TestAnalyzerConfigOptions : AnalyzerConfigOptions
     {
