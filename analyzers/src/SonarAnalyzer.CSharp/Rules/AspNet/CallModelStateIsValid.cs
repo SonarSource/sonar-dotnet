@@ -66,45 +66,42 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             && methodSymbol.Parameters.Any(RequiresValidation)
             && !HasActionFilterAttribute(methodSymbol))
         {
-            var isModelValidated = false;
-            codeBlockContext.RegisterNodeAction(nodeContext =>
-                {
-                    if (!isModelValidated)
-                    {
-                        isModelValidated = IsCheckingValidityProperty(nodeContext.Node, nodeContext.Model);
-                    }
-                },
-                PropertyAccessSyntaxNodesToVisit);
-
-            codeBlockContext.RegisterNodeAction(nodeContext =>
-                {
-                    if (!isModelValidated)
-                    {
-                        isModelValidated = IsTryValidateInvocation(nodeContext.Node, nodeContext.Model);
-                    }
-                },
-                SyntaxKind.InvocationExpression);
-
-            codeBlockContext.RegisterCodeBlockEndAction(blockEnd =>
-                {
-                    if (!isModelValidated)
-                    {
-                        blockEnd.ReportIssue(Rule, methodDeclaration.Identifier);
-                    }
-                });
+            RegisterCodeBlockActions(codeBlockContext, methodDeclaration);
         }
     }
 
-    // The rule raises for an action parameter only when validation actually applies to it. Mirroring the
-    // recursive traversal ASP.NET performs (ValidationVisitor walks the object graph), the parameter needs
-    // validation when the parameter itself, the parameter type (or one of its base types) or one of its
-    // instance members is decorated with a validation attribute, when the type implements IValidatableObject,
-    // when - for arrays and collections - an element type requires validation, or when a nested complex
-    // member type requires validation. To avoid walking the framework object graph, recursion into member
-    // types is limited to types declared in source; the visited set guards against cyclic graphs. Types with
-    // no such surface (primitives, dynamic, framework types, collections of such types) yield nothing to
-    // validate, matching the RSPEC: the rule does not raise when neither the model nor its members are
-    // decorated with validation attributes.
+    private static void RegisterCodeBlockActions(
+        SonarCodeBlockStartAnalysisContext<SyntaxKind> codeBlockContext,
+        MethodDeclarationSyntax methodDeclaration)
+    {
+        var isModelValidated = false;
+        codeBlockContext.RegisterNodeAction(nodeContext =>
+            {
+                if (!isModelValidated)
+                {
+                    isModelValidated = IsCheckingValidityProperty(nodeContext.Node, nodeContext.Model);
+                }
+            },
+            PropertyAccessSyntaxNodesToVisit);
+
+        codeBlockContext.RegisterNodeAction(nodeContext =>
+            {
+                if (!isModelValidated)
+                {
+                    isModelValidated = IsValidationInvocation(nodeContext.Node, nodeContext.Model);
+                }
+            },
+            SyntaxKind.InvocationExpression);
+
+        codeBlockContext.RegisterCodeBlockEndAction(blockEnd =>
+            {
+                if (!isModelValidated)
+                {
+                    blockEnd.ReportIssue(Rule, methodDeclaration.Identifier);
+                }
+            });
+    }
+
     private static bool RequiresValidation(IParameterSymbol parameter) =>
         HasValidationAttribute(parameter)
         || RequiresValidation(parameter.Type, []);
@@ -117,11 +114,6 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             || ElementTypesToValidate(type).Any(x => RequiresValidation(x, visited))
             || (type.DeclaringSyntaxReferences.Length > 0 && MemberTypes(type).Any(x => RequiresValidation(x, visited))));
 
-    // ASP.NET model validation recurses into arrays and collections, validating each element, so the
-    // rule inspects the element type(s) of arrays and IEnumerable<T> implementations. Both the collection's
-    // own type arguments (e.g. the value type of Dictionary<TKey, TValue>) and the type argument of the
-    // implemented IEnumerable<T> interface (e.g. for a non-generic subclass like CustomList : List<Model>)
-    // are considered.
     private static IEnumerable<ITypeSymbol> ElementTypesToValidate(ITypeSymbol type) =>
         type switch
         {
@@ -133,8 +125,6 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             _ => [],
         };
 
-    // The types of the instance members (properties and fields) declared on the type or its base types.
-    // ASP.NET validation recurses into these nested complex members.
     private static IEnumerable<ITypeSymbol> MemberTypes(ITypeSymbol type) =>
         type.SelfAndBaseTypes
             .SelectMany(x => x.GetMembers())
@@ -146,8 +136,6 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
             })
             .Where(x => x is not null);
 
-    // A type contributes validation surface when the type itself, or one of its declared instance
-    // members (property or field), is decorated with a validation attribute.
     private static bool HasValidationSurface(INamedTypeSymbol type) =>
         HasValidationAttribute(type)
         || type.GetMembers().Any(x => x is IPropertySymbol { IsStatic: false } or IFieldSymbol { IsStatic: false } && HasValidationAttribute(x));
@@ -166,9 +154,25 @@ public sealed class CallModelStateIsValid : SonarDiagnosticAnalyzer
         && model.GetSymbolInfo(nodeIdentifier.Parent).Symbol is IPropertySymbol propertySymbol
         && propertySymbol.ContainingType.Is(KnownType.Microsoft_AspNetCore_Mvc_ModelBinding_ModelStateDictionary);
 
+    private static bool IsValidationInvocation(SyntaxNode node, SemanticModel model) =>
+        IsTryValidateInvocation(node, model)
+        || (node is InvocationExpressionSyntax invocation
+            && model.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol { ImplementationSyntax: { } implementation }
+            && implementation.SyntaxTree.SemanticModelOrDefault(model) is { } implementationModel
+            && implementation.DescendantNodes().Any(x =>
+            IsCheckingValidityProperty(x, implementationModel)
+            || IsTryValidateInvocation(x, implementationModel)));
+
     private static bool IsTryValidateInvocation(SyntaxNode node, SemanticModel model) =>
         node is InvocationExpressionSyntax invocation
-        && invocation.GetName() == "TryValidateModel"
         && model.GetSymbolInfo(invocation.Expression).Symbol is IMethodSymbol method
-        && method.ContainingType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase);
+        && ((invocation.GetName() == "TryValidateModel"
+                && method.ContainingType.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase))
+            || IsCompletelyValidatedInstance(invocation, method));
+
+    private static bool IsCompletelyValidatedInstance(InvocationExpressionSyntax invocation, IMethodSymbol method) =>
+        method.Is(KnownType.System_ComponentModel_DataAnnotations_Validator, "TryValidateObject")
+        && new CSharpMethodParameterLookup(invocation, method).TryGetSyntax("validateAllProperties", out var validateAllProperties)
+        && validateAllProperties.Length == 1
+        && validateAllProperties[0].RawKind == (int)SyntaxKind.TrueLiteralExpression;
 }

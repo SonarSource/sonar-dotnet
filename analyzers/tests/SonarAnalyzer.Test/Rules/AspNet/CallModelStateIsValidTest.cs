@@ -39,7 +39,9 @@ public class CallModelStateIsValidTest
 
     [TestMethod]
     public void CallModelStateIsValid_CS_Latest() =>
-        builder.AddPaths("CallModelStateIsValid.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
+        builder.AddPaths("CallModelStateIsValid.Latest.cs", "CallModelStateIsValid.Latest.Partial.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 
     [TestMethod]
     public void CallModelStateIsValid_AssemblyLevelControllerAttribute_CS() =>
@@ -175,6 +177,59 @@ public class CallModelStateIsValidTest
                 }
             }
             """).WithOptions(LanguageOptions.FromCSharp10).VerifyNoIssues();
+
+    [TestMethod]
+    public void CallModelStateIsValid_ManualDataAnnotationsValidationInReferencedCompilation_CS()
+    {
+        var helperReference = new SnippetCompiler(
+                """
+                using System.Collections.Generic;
+                using System.ComponentModel.DataAnnotations;
+
+                public static class ReferencedValidation
+                {
+                    public static string FirstError(object model)
+                    {
+                        var results = new List<ValidationResult>();
+                        return Validator.TryValidateObject(model, new ValidationContext(model), results, validateAllProperties: true)
+                            ? null
+                            : results[0].ErrorMessage;
+                    }
+                }
+                """,
+                NuGetMetadataReference.SystemComponentModelAnnotations(TestConstants.NuGetLatestVersion))
+            .Compilation
+            .ToMetadataReference();
+
+        builder.AddReferences([helperReference])
+            .AddSnippet(
+                """
+                using System.ComponentModel.DataAnnotations;
+                using Microsoft.AspNetCore.Mvc;
+
+                public sealed class Input
+                {
+                    [Required]
+                    public string Name { get; set; }
+                }
+
+                public sealed class Controller : ControllerBase
+                {
+                    [HttpPost]
+                    public IActionResult Create(Input input) // Noncompliant
+                    {
+                        var error = ReferencedValidation.FirstError(input);
+                        if (error is not null)
+                        {
+                            return BadRequest(error);
+                        }
+                        return Ok();
+                    }
+                }
+                """)
+            .WithOptions(LanguageOptions.FromCSharp10)
+            .Verify();
+    }
 }
 
 #endif

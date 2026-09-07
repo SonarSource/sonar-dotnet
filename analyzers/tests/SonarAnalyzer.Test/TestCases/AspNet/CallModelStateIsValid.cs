@@ -373,7 +373,7 @@ namespace Repro_9325
     public class MyController : ControllerBase
     {
         [HttpGet("/[controller]")]
-        public string Get([Required, FromQuery] string id)                      // Noncompliant - FP: the Model State is checked in a method that's called from the Controller Action
+        public string Get([Required, FromQuery] string id)                      // Compliant - the Model State is checked in a method that's called from the Controller Action
         {
             if (!CheckModelState())
             {
