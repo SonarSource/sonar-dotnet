@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Tests.TestCases
 {
@@ -142,6 +143,60 @@ namespace Tests.TestCases
                 throw;
             }
         }
+    }
+
+    class CatchRethrowTemporaryContext
+    {
+        void OrdinaryUsing()
+        {
+            try
+            {
+                using (File.OpenRead("file"))
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+            catch // Noncompliant
+            {
+                throw;
+            }
+        }
+
+        void LookAlikeMethods()
+        {
+            try
+            {
+                Impersonate();
+                Run();
+                Revert();
+                throw new InvalidOperationException();
+            }
+            catch // Noncompliant
+            {
+                throw;
+            }
+        }
+
+        void SpecificCatchBeforeRethrow()
+        {
+            try
+            {
+                throw new InvalidOperationException();
+            }
+            catch (ArgumentException)
+            {
+            }
+            catch // Noncompliant
+            {
+                throw;
+            }
+        }
+
+        void Impersonate() { }
+
+        void Run() { }
+
+        void Revert() { }
     }
 
     // Reproducer for https://github.com/SonarSource/sonar-dotnet/issues/8199

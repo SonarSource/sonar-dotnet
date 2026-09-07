@@ -47,7 +47,8 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
             {
                 if (!HasFilter(currentCatch)
                     // Make sure we report only catch clauses that will not change the method behavior if removed.
-                    && (followingCatchesOnlyThrow || IsRedundantToFollowingCatches(i, catches, caughtExceptionTypes.Value, redundantCatches)))
+                    && (followingCatchesOnlyThrow || IsRedundantToFollowingCatches(i, catches, caughtExceptionTypes.Value, redundantCatches))
+                    && !IsRequiredUnwindBoundary(currentCatch, context.Model))
                 {
                     redundantCatches.Add(currentCatch);
                 }
@@ -63,6 +64,9 @@ public abstract class CatchRethrowBase<TSyntaxKind, TCatchClause> : SonarDiagnos
             context.ReportIssue(Rule, redundantCatch);
         }
     }
+
+    protected virtual bool IsRequiredUnwindBoundary(TCatchClause catchClause, SemanticModel model) =>
+        false;
 
     private static bool IsRedundantToFollowingCatches(int catchIndex, TCatchClause[] catches, INamedTypeSymbol[] caughtExceptionTypes, ISet<TCatchClause> redundantCatches)
     {

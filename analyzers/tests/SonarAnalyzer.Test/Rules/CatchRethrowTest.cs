@@ -30,6 +30,20 @@ public class CatchRethrowTest
         builderCS.AddPaths("CatchRethrow.cs").Verify();
 
     [TestMethod]
+    public void CatchRethrow_TemporaryContext_Net() =>
+        builderCS.AddPaths("CatchRethrow.TemporaryContext.Net.cs")
+            .AddReferences(MetadataReferenceFacade.SystemThreading)
+            .AddReferences(MetadataReferenceFacade.SystemSecurityClaims)
+            .WithNetOnly()
+            .Verify();
+
+    [TestMethod]
+    public void CatchRethrow_TemporaryContext_NetFramework() =>
+        builderCS.AddPaths("CatchRethrow.TemporaryContext.NetFramework.cs")
+            .WithNetFrameworkOnly()
+            .Verify();
+
+    [TestMethod]
     public void CatchRethrow_CodeFix() =>
         builderCS.AddPaths("CatchRethrow.cs")
             .WithCodeFix<CS.CatchRethrowCodeFix>()

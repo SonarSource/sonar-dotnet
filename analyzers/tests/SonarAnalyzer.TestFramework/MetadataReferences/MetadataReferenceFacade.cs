@@ -179,6 +179,13 @@ public static class MetadataReferenceFacade
         ];
 #endif
 
+    public static References SystemSecurityClaims =>
+#if NETFRAMEWORK
+        [];
+#else
+        [CoreMetadataReference.SystemSecurityClaims];
+#endif
+
     public static References SystemSecurityPermissions =>
 #if NETFRAMEWORK
         [];

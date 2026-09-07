@@ -48,4 +48,46 @@ catch (Exception)  // Compliant: does more than just rethrow
     throw;
 }
 </pre>
+<p>A bare <code>catch</code>, or an unfiltered <code>catch (Exception)</code>, that only rethrows is also allowed when it creates a required unwind
+boundary for one of these temporary execution or security contexts:</p>
+<ul>
+  <li><code>ExecutionContext.Run</code></li>
+  <li><code>WindowsIdentity.RunImpersonated</code></li>
+  <li><code>WindowsIdentity.Impersonate</code> used as a <code>using</code> resource</li>
+  <li><code>CodeAccessPermission.Assert</code> reverted by <code>CodeAccessPermission.RevertAssert</code> in a nested
+  <code>try</code>/<code>finally</code></li>
+</ul>
+<p>Only these patterns are recognized. Other scopes that restore ambient state, such as a <code>TransactionScope</code>, a saved
+<code>CultureInfo</code>, or a custom impersonation helper, remain reported. Catch clauses with a filter or an exception type other than
+<code>Exception</code> also remain reported.</p>
+<p>The CLR evaluates exception filters in a first pass, before unwinding intervening <code>finally</code> and <code>using</code> scopes in a second
+pass. Without a local catch, a filter higher in the call stack can therefore observe the temporary context before it is restored. The local catch
+makes the inner cleanup run first, then propagates the original exception from the restored context.</p>
+<pre>
+try
+{
+    WindowsIdentity.RunImpersonated(token, () =&gt; DoWork());
+}
+catch // Compliant: impersonation is restored before an upstream exception filter runs
+{
+    throw;
+}
+</pre>
+<p>The cleanup must run in a scope entered inside the protected <code>try</code>, including inside a method it calls, as with
+<code>RunImpersonated</code> above. A <code>finally</code> attached to the same <code>try</code> as the rethrowing catch does not create this boundary
+because it runs only after the catch rethrows.</p>
+<pre>
+try
+{
+    DoWork();
+}
+catch // Noncompliant: the attached finally does not run before an upstream exception filter
+{
+    throw;
+}
+finally
+{
+    RestoreContext();
+}
+</pre>
 
