@@ -36,6 +36,10 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
         "Session_End",
         "Session_Start");
 
+    private static readonly ImmutableHashSet<string> LambdaStartupMethodNames = ImmutableHashSet.Create(
+        "ConfigureHostBuilder",
+        "ConfigureServices");
+
     private static readonly ImmutableHashSet<SymbolKind> InstanceSymbolKinds = ImmutableHashSet.Create(
         SymbolKind.Field,
         SymbolKind.Property,
@@ -90,8 +94,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             || IsExcludedByEnclosingType()
             || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
             || IsAutoProperty(methodOrPropertySymbol)
-            || IsPublicControllerMethod(methodOrPropertySymbol)
-            || IsWindowsDesktopEventHandler(methodOrPropertySymbol))
+            || IsFrameworkInvokedMethod(methodOrPropertySymbol))
         {
             return;
         }
@@ -144,10 +147,20 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             .OfType<PropertyDeclarationSyntax>()
             .Any(x => x.AccessorList is not null && x.AccessorList.Accessors.All(a => a.Body is null && a.ExpressionBody is null));
 
+    private static bool IsFrameworkInvokedMethod(ISymbol symbol) =>
+        IsPublicControllerMethod(symbol)
+        || IsLambdaStartupMethod(symbol)
+        || IsWindowsDesktopEventHandler(symbol);
+
     private static bool IsPublicControllerMethod(ISymbol symbol) =>
         symbol is IMethodSymbol methodSymbol
         && methodSymbol.EffectiveAccessibility == Accessibility.Public
         && methodSymbol.ContainingType.DerivesFromAny(WebControllerTypes);
+
+    private static bool IsLambdaStartupMethod(ISymbol symbol) =>
+        symbol is IMethodSymbol methodSymbol
+        && LambdaStartupMethodNames.Contains(methodSymbol.Name)
+        && methodSymbol.ContainingType.HasAttribute(KnownType.Amazon_Lambda_Annotations_LambdaStartupAttribute);
 
     private static bool IsWindowsDesktopEventHandler(ISymbol symbol) =>
         symbol is IMethodSymbol { Parameters.Length: 2 } methodSymbol

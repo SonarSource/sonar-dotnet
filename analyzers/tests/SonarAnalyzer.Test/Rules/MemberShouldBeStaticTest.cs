@@ -45,6 +45,61 @@ public class MemberShouldBeStaticTest
         builder.AddPaths("MemberShouldBeStatic.Xaml.cs").AddReferences(MetadataReferenceFacade.PresentationFramework).Verify();
 
     [TestMethod]
+    public void MemberShouldBeStatic_LambdaStartup() =>
+        builder.AddSnippet("""
+            using Microsoft.Extensions.DependencyInjection;
+            using Microsoft.Extensions.Hosting;
+
+            namespace Amazon.Lambda.Annotations
+            {
+                [System.AttributeUsage(System.AttributeTargets.Class)]
+                public sealed class LambdaStartupAttribute : System.Attribute { }
+            }
+
+            namespace Other
+            {
+                public sealed class LambdaStartupAttribute : System.Attribute { }
+            }
+
+            namespace Microsoft.Extensions.DependencyInjection
+            {
+                public interface IServiceCollection { }
+            }
+
+            namespace Microsoft.Extensions.Hosting
+            {
+                public interface IHostApplicationBuilder { }
+                public sealed class HostApplicationBuilder : IHostApplicationBuilder { }
+            }
+
+            [Amazon.Lambda.Annotations.LambdaStartup]
+            public class Startup
+            {
+                public IHostApplicationBuilder ConfigureHostBuilder() => new HostApplicationBuilder();      // Compliant: invoked by the Lambda source generator
+                public void ConfigureServices(IServiceCollection services) => System.Console.WriteLine();   // Compliant: invoked by the Lambda source generator
+                public void OtherMethod() => System.Console.WriteLine(); // Noncompliant
+            }
+
+            [Amazon.Lambda.Annotations.LambdaStartup]
+            public class StartupWithProperty
+            {
+                public int ConfigureServices => 42; // Noncompliant
+            }
+
+            public class UnannotatedStartup
+            {
+                public object ConfigureHostBuilder() => new object();           // Noncompliant
+                public void ConfigureServices() => System.Console.WriteLine();  // Noncompliant
+            }
+
+            [Other.LambdaStartup]
+            public class StartupWithDifferentAttribute
+            {
+                public void ConfigureServices() => System.Console.WriteLine(); // Noncompliant
+            }
+            """).Verify();
+
+    [TestMethod]
     public void MemberShouldBeStatic_Latest() =>
         builder.AddPaths("MemberShouldBeStatic.Latest.cs")
             .AddPaths("MemberShouldBeStatic.Latest.Partial.cs")

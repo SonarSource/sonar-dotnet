@@ -25,6 +25,7 @@ public sealed partial class KnownType
 #pragma warning disable SA1307  // Field 'log4net_Config_XmlConfigurator' should begin with upper-case letter
 #pragma warning disable T0016   // Empty lines between multiline declarations
 
+    public static readonly KnownType Amazon_Lambda_Annotations_LambdaStartupAttribute = new("Amazon.Lambda.Annotations.LambdaStartupAttribute");
     public static readonly KnownType AutoConstructorAttribute = new("AutoConstructorAttribute");
     public static readonly KnownType Azure_Messaging_ServiceBus_Administration_ServiceBusAdministrationClient = new("Azure.Messaging.ServiceBus.Administration.ServiceBusAdministrationClient");
     public static readonly KnownType Azure_Messaging_ServiceBus_ServiceBusClient = new("Azure.Messaging.ServiceBus.ServiceBusClient");
