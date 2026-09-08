@@ -21,17 +21,6 @@ namespace SonarAnalyzer.Core.Common.Test;
 public class SecretExclusionPatternsTest
 {
     [TestMethod]
-    // Realistic high-entropy tokens must stay candidates.
-    [DataRow("Xk9Lm2Qp7Rs4Tv1Wz0")]
-    [DataRow("9f8e7d6c5b4a392817")]
-    [DataRow("Tr0ub4dor&3xpl0!t")]
-    // Credential words are exact-match only, so a value that merely contains one is not excluded.
-    [DataRow("mytoken123")]
-    [DataRow("this_should_remain_unknown")]
-    public void IsKnownNonSecret_RealSecretsAndCredentialWordSubstrings_ReturnsFalse(string value) =>
-        SecretExclusionPatterns.IsKnownNonSecret(value).Should().BeFalse();
-
-    [TestMethod]
     public void IsKnownNonSecret_Null_ReturnsFalse() =>
         SecretExclusionPatterns.IsKnownNonSecret(null).Should().BeFalse();
 
@@ -40,34 +29,39 @@ public class SecretExclusionPatternsTest
     {
         SecretExclusionPatterns.Regexes.Should().NotBeEmpty();
         SecretExclusionPatterns.ExactMatches.Should().NotBeEmpty();
+        SecretExclusionCorpus.KnownNonSecrets.Should().NotBeEmpty();
+        SecretExclusionCorpus.SecretCandidates.Should().NotBeEmpty();
     }
 
-    // ToDo: Use secret-exclusion-corpus.json instead, once SonarAnalyzer.CommonsConfigurations publishes it.
     [TestMethod]
-    public void Regexes_AreValid()
-    {
-        // Subset of SecretClassifierTest.KNOWN_NON_SECRETS from sonar-analyzer-commons
-        var knownNonSecrets = new[]
-        {
-            // SECRET (exact match, case-insensitive)
-            "hunter2", "letmein", "abc123",
-            "changeme", "changeit", "unknown", "optional", "enabled", "disabled", "string", "random", "token",
-            // PLACEHOLDER
-            "${secret}", "value-${pwd}", "#{{secret}}", "((db-password))",
-            "$(echo $PASSWORD)", "`echo $PASSWORD`", "$foo_bar",
-            "{secret}", "%{secret}", "{{secret}}",
-            "System.getenv(\"secret\")", "process.env.MY_SECRET", "%GITHUB_TOKEN%", "config['secret']", "Read-Host",
-            "<password>", "(password)", "[password]", "%(password)s", "@variables('name')", "__secret__",
-            // ENCRYPTED
-            "encrypted:YWJjZGVm", "{cipher}1e3faa2cdab2deae117dca102e52922a", "enc[QUJDRA==]", "ENC{abcdef}", "%enc{QUJDRA==}", "ENC(abcdef)",
-            // REFERENCE
-            "arn:aws:secretsmanager:us-east-1:123456789012:secret:db-pass", "op://vault/item/password", "VAULT[path/to/secret access_token]",
-            // STRUCTURED_FORMAT
-            "/var/keys/gsa-key.json", "v1.2.3", ">=1.0.0", "~1.4.5-alpha", "4.0.9(@types/node@22.13.4)"
-        };
-        foreach (var value in knownNonSecrets)
-        {
-            SecretExclusionPatterns.IsKnownNonSecret(value).Should().BeTrue($"value '{value}' should be known non-secret");
-        }
-    }
+    public void KnownNonSecrets_AreAllExcluded() =>
+        SecretExclusionCorpus.KnownNonSecrets.Should().OnlyContain(
+            x => SecretExclusionPatterns.IsKnownNonSecret(x),
+            "every corpus value classified as a known non-secret upstream must be excluded by the .NET Regex engine as well");
+
+    [TestMethod]
+    public void SecretCandidates_AreNotExcluded() =>
+        SecretExclusionCorpus.SecretCandidates.Should().NotContain(
+            x => SecretExclusionPatterns.IsKnownNonSecret(x),
+            "a pattern that is too broad in .NET hides real hardcoded secrets instead of merely adding noise");
+
+    [TestMethod]
+    // "token" is an exact-match value, and ExactMatches is matched in full: a value that merely contains one stays a secret candidate.
+    [DataRow("mytoken123")]
+    [DataRow("this_should_remain_unknown")]
+    public void IsKnownNonSecret_ValueContainingExactMatch_ReturnsFalse(string value) =>
+        SecretExclusionPatterns.IsKnownNonSecret(value).Should().BeFalse();
+
+    [TestMethod]
+    public void Regexes_EveryPatternIsExercisedByTheCorpus() =>
+        SecretExclusionPatterns.Regexes.Should().OnlyContain(
+            x => SecretExclusionCorpus.KnownNonSecrets.Any(x.SafeIsMatch),
+            "upstream guarantees every pattern is covered by at least one known non-secret, so an unmatched one means .NET reads it differently");
+
+    [TestMethod]
+    public void ExactMatches_EveryValueIsExercisedByTheCorpus() =>
+        // ExactMatches is a case-insensitive HashSet in production, so casing must not decide whether a value counts as covered.
+        SecretExclusionPatterns.ExactMatches.Should().OnlyContain(
+            x => SecretExclusionCorpus.KnownNonSecrets.Contains(x, StringComparer.OrdinalIgnoreCase),
+            "upstream guarantees every exact-match value is covered by at least one known non-secret");
 }

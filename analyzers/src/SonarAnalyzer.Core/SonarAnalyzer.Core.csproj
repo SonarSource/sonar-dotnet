@@ -21,7 +21,7 @@
       <!-- Downgrade System.Collections.Immutable to support VS2015 Update 3 -->
       <NoWarn>NU1605, NU1701</NoWarn>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CommonsConfigurations" Version="2.30.0.5193" GeneratePathProperty="true" PrivateAssets="all" />
+    <PackageReference Include="SonarAnalyzer.CommonsConfigurations" Version="2.31.0.5284" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,11 +33,14 @@
 
   <ItemGroup>
     <!--
-      Feeds the shared content/secret-patterns.json from SonarAnalyzer.CommonsConfigurations to SecretExclusionPatternsGenerator. The JSON is surfaced as an AdditionalFile the generator picks up via the SecretPatternsFile metadata.
-      To refresh the shared regexes, bump the SonarAnalyzer.CommonsConfigurations package version.
+      Feeds the shared content/secret-patterns.json and its validation corpus content/secret-exclusion-corpus.json from SonarAnalyzer.CommonsConfigurations to SecretExclusionPatternsGenerator.
+      Both are surfaced as AdditionalFiles the generator picks up via the SecretPatternsFile and SecretExclusionCorpusFile metadata.
+      To refresh the shared regexes and the corpus that proves the .NET Regex engine reproduces the JVM behavior, bump the SonarAnalyzer.CommonsConfigurations package version.
     -->
     <AdditionalFiles Include="$(PKGSonarAnalyzer_CommonsConfigurations)\content\secret-patterns.json" SecretPatternsFile="true" />
+    <AdditionalFiles Include="$(PKGSonarAnalyzer_CommonsConfigurations)\content\secret-exclusion-corpus.json" SecretExclusionCorpusFile="true" />
     <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SecretPatternsFile" />
+    <CompilerVisibleItemMetadata Include="AdditionalFiles" MetadataName="SecretExclusionCorpusFile" />
   </ItemGroup>
 
   <ItemGroup>
