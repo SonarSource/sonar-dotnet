@@ -27,7 +27,8 @@ public class AnalysisConfigReader
 {
     private readonly AnalysisConfig analysisConfig;
 
-    public bool IsCloud => analysisConfig.SonarQubeVersion.StartsWith("8.0.0");    // This analyzer will never be backported to Server 8.0, so we don't care about release version
+    public bool IsCloud => analysisConfig.SonarQubeVersion == "Cloud"                   // S4NET from version 12.0 onwards
+                            || analysisConfig.SonarQubeVersion.StartsWith("8.0.0");     // S4NET up to 11.3. We don't care about exact SQ 8.0 release version, this will never be used there
 
     public AnalysisConfigReader(string analysisConfigPath)
     {

@@ -84,6 +84,9 @@ public class AnalysisConfigReaderTest
     [DataRow("8.0.0.82356", true)]  // Actual SQ-C version
     [DataRow("8.0.0.29455", true)]  // While this is SQ-S 8.0 and not cloud, we expect true, because this analyzer will never be backported there
     [DataRow("8.0.0.99999", true)]
+    [DataRow("Cloud", true)]
+    [DataRow("cloud", false)]       // S4NET does not produce lowercase value
+    [DataRow("Cloudy", false)]
     [DataRow("2026.1.0.1234", false)]
     [DataRow("whatever", false)]
     [DataRow("", false)]
