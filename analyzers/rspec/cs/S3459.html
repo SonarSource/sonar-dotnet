@@ -31,7 +31,21 @@ class MyClass
 <h3>Exceptions</h3>
 <ul>
   <li>Fields on types decorated with <code>System.SerializableAttribute</code> attribute.</li>
-  <li>Non-static auto-properties with a public <code>set</code> or <code>init</code> accessor whose effective accessibility is <code>private</code>.
-  Such properties can be populated by external framework code, such as a serializer or model binder.</li>
+  <li>Non-static auto-properties with a public <code>set</code> or <code>init</code> accessor, declared inside a private nested type. Since no code
+  outside the enclosing type can reach such a type, a <code>public</code> accessor signals that the property is meant to be populated by
+  reflection-based code. Fields, static properties, get-only properties, and properties with a non-public setter are still reported.
+    <pre>
+public class ConfigurationLoader
+{
+  public string LoadName(string json) =&gt;
+    JsonSerializer.Deserialize&lt;Settings&gt;(json).Name;
+
+  private class Settings
+  {
+    public string Name { get; set; } // Compliant: a serializer or model binder can set this property
+    public string DisplayName =&gt; Name;
+  }
+}
+</pre></li>
 </ul>
 

@@ -1,10 +1,21 @@
 <p>An <code>Include</code> or <code>ThenInclude</code> call can be entirely inert: Entity Framework Core generates the exact same SQL with or without
 it.</p>
 <h2>Why is this an issue?</h2>
-<p>Entity Framework Core resolves the navigation path of every <code>Include</code>/<code>ThenInclude</code> call and merges calls that resolve to the
-same path into a single join. Repeating <code>Include</code> for a navigation that is already included, without adding a new <code>ThenInclude</code>
-afterwards, generates identical SQL to removing the repeated call — it adds nothing but noise and can mislead a reader into thinking it changes what
-is loaded.</p>
+<p><code>Include</code> and <code>ThenInclude</code> tell Entity Framework Core to eagerly load a related navigation together with the entity that
+owns it. In each of the following cases, that instruction has no effect on the generated SQL — it adds nothing but noise, and can safely be
+removed:</p>
+<ul>
+  <li>it repeats a navigation path already included elsewhere in the query, without adding a <code>ThenInclude</code> that goes deeper than the
+  earlier call. Entity Framework Core resolves the navigation path of every <code>Include</code>/<code>ThenInclude</code> call and merges calls that
+  resolve to the same path into a single join.</li>
+  <li>a <code>Select</code>, <code>SelectMany</code>, or <code>Join</code> further downstream projects the same navigation directly — bare, or wrapped
+  in an anonymous type or constructor call. Entity Framework Core materializes that navigation because the projection asks for it, independently of
+  any <code>Include</code>.</li>
+  <li>the query ends in an aggregate or scalar operator — such as <code>Count</code>, <code>Sum</code>, <code>Any</code>, <code>All</code>,
+  <code>Average</code>, or <code>Max</code>/<code>Min</code> with a selector, and their async equivalents — that never returns the entity at all. An
+  <code>Include</code> only affects entities the query actually returns.</li>
+</ul>
+<p>In every case, it can also mislead a reader into thinking it changes what is loaded.</p>
 <h3>Exceptions</h3>
 <p>The rule does not apply when:</p>
 <ul>
@@ -13,6 +24,8 @@ is loaded.</p>
   independent nested navigations or collections.</li>
   <li>one of the calls applies a filter (through <code>Where</code>, <code>Skip</code>, <code>Take</code>, or similar) that the other does not carry,
   regardless of which one is written first — removing the filtered call would change which rows are loaded.</li>
+  <li>the <code>Include</code> carries a customization (<code>Where</code>, <code>OrderBy</code>, <code>Skip</code>, <code>Take</code>, or similar)
+  that the downstream projection does not reproduce — see {rule:csharpsquid:S9023}, which covers that case.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Remove the <code>Include</code> (or <code>ThenInclude</code>) call that has no effect.</p>
@@ -36,6 +49,28 @@ var students = await context.Students
     .Include(s =&gt; s.Enrollments).ThenInclude(e =&gt; e.Course)
     .Include(s =&gt; s.Enrollments).ThenInclude(e =&gt; e.Student) // Compliant: re-anchors before a different ThenInclude
     .ToListAsync();
+</pre>
+<p>An <code>Include</code> is redundant the same way when a projection further down the query already returns the navigation directly:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+var students = await context.Students
+    .Include(s =&gt; s.Enrollments) // Noncompliant: "Enrollments" is already returned by the projection below
+    .Select(s =&gt; new { s.LastName, s.Enrollments })
+    .ToListAsync();
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+var students = await context.Students
+    .Select(s =&gt; new { s.LastName, s.Enrollments })
+    .ToListAsync();
+</pre>
+<p>It is also redundant when the query never returns the entity at all:</p>
+<pre data-diff-id="3" data-diff-type="noncompliant">
+var studentCount = await context.Students
+    .Include(s =&gt; s.Enrollments) // Noncompliant: this "Include" has no effect; the following call to "CountAsync" never returns the entity
+    .CountAsync();
+</pre>
+<pre data-diff-id="3" data-diff-type="compliant">
+var studentCount = await context.Students
+    .CountAsync();
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

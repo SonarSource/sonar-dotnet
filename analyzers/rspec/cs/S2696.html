@@ -2,8 +2,7 @@
 <h2>Why is this an issue?</h2>
 <p>A <code>static</code> field is shared by every instance of the type, so when an instance method or property writes to it, multiple objects — and
 multiple threads — can read and modify the same field concurrently. This leads to unintended consequences for other instances or threads: unexpected
-values, <a href="https://www.c-sharpcorner.com/UploadFile/1d42da/race-conditions-in-threading-C-Sharp/">race conditions</a> and synchronization
-problems that are hard to reproduce and debug.</p>
+values, race conditions and synchronization problems that are hard to reproduce and debug.</p>
 <h3>Exceptions</h3>
 <p>This rule targets unsynchronized writes to shared <code>static</code> state. A reported write can be intentional when the access is properly
 synchronized (for example, guarded by a <code>lock</code> or performed through <code>System.Threading.Interlocked</code>), or when the type is only

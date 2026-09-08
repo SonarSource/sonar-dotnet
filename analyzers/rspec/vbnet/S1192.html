@@ -7,6 +7,8 @@ occurrences.</p>
   <li>literals with fewer than 5 characters</li>
   <li>literals matching one of the parameter names</li>
   <li>literals used in attributes</li>
+  <li>literals in Entity Framework Core model configuration methods: <code>DbContext.OnModelCreating</code> overrides and
+  <code>IEntityTypeConfiguration&lt;TEntity&gt;.Configure</code> implementations</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Use constants to replace the duplicated string literals. Constants can be referenced from many places, but only need to be updated in a single

@@ -18,9 +18,9 @@ redirecting users to malicious endpoints, injecting malicious content into respo
 interception.</p>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-var urlHttp = "http://example.com";                 // Noncompliant
-var urlFtp = "ftp://anonymous@example.com";         // Noncompliant
-var urlTelnet = "telnet://anonymous@example.com";   // Noncompliant
+var urlHttp = "http://sonar.com";                 // Noncompliant
+var urlFtp = "ftp://anonymous@sonar.com";         // Noncompliant
+var urlTelnet = "telnet://anonymous@sonar.com";   // Noncompliant
 </pre>
 <pre data-diff-id="2" data-diff-type="noncompliant">
 using var smtp = new SmtpClient("host", 25); // Noncompliant, EnableSsl is not set
@@ -28,9 +28,9 @@ using var telnet = new MyTelnet.Client("host", port); // Noncompliant, Telnet is
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-var urlHttps = "https://example.com";
-var urlSftp = "sftp://anonymous@example.com";
-var urlSsh = "ssh://anonymous@example.com";
+var urlHttps = "https://sonar.com";
+var urlSftp = "sftp://anonymous@sonar.com";
+var urlSsh = "ssh://anonymous@sonar.com";
 </pre>
 <pre data-diff-id="2" data-diff-type="compliant">
 using var smtp = new SmtpClient("host", 25) { EnableSsl = true };

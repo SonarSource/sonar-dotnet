@@ -1,39 +1,71 @@
-<p>An <code>Include</code> call can compile and run without error while Entity Framework Core silently drops the data it requests.</p>
+<p>An <code>Include</code> call can compile and run without error while Entity Framework Core silently drops what it requested — sometimes the related
+data itself, sometimes just a filtering, ordering, or paging customization applied to it.</p>
 <h2>Why is this an issue?</h2>
-<p>Entity Framework Core tracks pending <code>Include</code> calls against the shape of the entity flowing through the query. An operation such as
-<code>SelectMany</code> that changes this shape to a different entity type drops any <code>Include</code> that was requested against the earlier
-shape. No exception is thrown and no warning is logged, so the missing data is only noticed once it turns out to be missing.</p>
+<p>Entity Framework Core tracks pending <code>Include</code> calls against the entity type currently flowing through the query. A reshaping operation
+downstream can invalidate that tracking in two ways:</p>
+<ul>
+  <li>An operation such as <code>SelectMany</code> that reshapes the query to a different entity type drops any <code>Include</code> requested before
+  it, without an exception or a warning — the missing data goes unnoticed until something depending on it breaks.</li>
+  <li>A <code>Select</code> that reprojects the same navigation property directly keeps the navigation itself, but drops any customization chained
+  onto it inside the <code>Include</code> (<code>Where</code>, <code>OrderBy</code>, <code>Skip</code>, <code>Take</code>, or similar). The projection
+  re-derives the navigation on its own, independently of the <code>Include</code>, so it returns the full, uncustomized collection instead of the one
+  the <code>Include</code> asked for.</li>
+</ul>
 <h3>What is the potential impact?</h3>
-<p>Code that expects a navigation to be loaded still compiles and runs, but the property is null or empty at runtime. The resulting bug — a
-<code>NullReferenceException</code>, or silently incomplete data shown to a user — surfaces far from the query that caused it.</p>
+<p>A dropped <code>Include</code> defeats the purpose of asking for eager loading. What happens next depends on whether <a
+href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/lazy">lazy loading</a> is enabled. Without it, the navigation stays unloaded —
+<code>null</code> for a reference, empty for a collection — surfacing as a <code>NullReferenceException</code> or as silently incomplete data far from
+the query that caused it. With it, EF Core fetches the navigation on first access instead, trading the one intended query for many.</p>
+<p>When it’s the customization that’s lost instead, the navigation is still there, but with more rows than expected: a "5 most recent comments" widget
+quietly shows every comment ever posted, or an "approved only" filter quietly lets unapproved rows through too. Because the query still runs and still
+returns data, this surfaces as a subtly wrong result rather than an exception — easy to miss in review, and easy to miss in testing with a small
+enough dataset.</p>
 <h2>How to fix it</h2>
-<p>Move the <code>Include</code> after the operation that changes the shape, anchored on the new entity type. This requires a navigation back to the
-original type; if the target entity does not expose one, add it, or restructure the query so the <code>Include</code> runs before the shape-changing
-operation.</p>
+<p>Move the <code>Include</code> to after the reshaping operation, anchored on the new entity type — see the compliant example below, where the
+<code>Include</code> moves from <code>Course</code> to <code>Enrollment</code> once the query is reshaped by <code>SelectMany</code>. This requires
+<code>Enrollment</code> to expose a navigation property back to <code>Course</code>, as it does here.</p>
+<p>When the reshape instead reprojects the navigation directly and only a customization on it is lost, move that customization into the projection
+itself — see the second example below, where the filter moves from the <code>Include</code> into the <code>Select</code>.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">
-var posts = await context.Blogs
-    .Include(b =&gt; b.Owner) // Noncompliant: dropped once SelectMany reshapes the query to Post
-    .SelectMany(b =&gt; b.Posts)
+var enrollments = await context.Courses
+    .Include(c =&gt; c.Announcements) // Noncompliant: dropped once SelectMany reshapes the query to Enrollment
+    .SelectMany(c =&gt; c.Enrollments)
+    .ToListAsync();
+</pre>
+<p>A <code>Select</code> that reprojects a navigation directly loses less, but still loses something: the navigation itself survives, while any
+customization chained onto it inside the <code>Include</code> does not:</p>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+var posts = await context.Posts
+    .Include(p =&gt; p.Comments.Where(c =&gt; c.IsApproved)) // Noncompliant: filtering is lost once Select reprojects Comments directly
+    .Select(p =&gt; new { p.Title, p.Comments })
     .ToListAsync();
 </pre>
 <h4>Compliant solution</h4>
 <pre data-diff-id="1" data-diff-type="compliant">
-var posts = await context.Blogs
-    .SelectMany(b =&gt; b.Posts)
-    .Include(p =&gt; p.Blog).ThenInclude(b =&gt; b.Owner)
+var enrollments = await context.Courses
+    .SelectMany(c =&gt; c.Enrollments)
+    .Include(e =&gt; e.Course).ThenInclude(c =&gt; c.Announcements)
     .ToListAsync();
 </pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+var posts = await context.Posts
+    .Select(p =&gt; new { p.Title, Comments = p.Comments.Where(c =&gt; c.IsApproved).ToList() })
+    .ToListAsync();
+</pre>
+<p>The same applies to <code>OrderBy</code>, <code>Skip</code>, and <code>Take</code> chained the same way — moving them into the projection is the
+fix in every case.</p>
 <h2>Resources</h2>
 <h3>Documentation</h3>
 <ul>
   <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/eager">Loading related data - Eager loading</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/ef/core/querying/related-data/lazy">Loading related data - Lazy loading</a></li>
 </ul>
 <h3>Related rules</h3>
 <ul>
-  <li>{rule:csharpsquid:S8733} - covers loading multiple sibling collections in a single query; that rule’s Includes are effective but expensive, this
-  rule’s Includes are dropped entirely.</li>
+  <li>{rule:csharpsquid:S8733} - covers <code>Include</code> calls that are effective but expensive; this rule covers <code>Include</code> calls that
+  are silently dropped.</li>
   <li>{rule:csharpsquid:S9022} - covers <code>Include</code> calls that are harmless no-ops rather than silent data loss.</li>
 </ul>
 
