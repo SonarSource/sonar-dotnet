@@ -51,8 +51,22 @@ internal static partial class NuGetMetadataFactory
             var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, Id, PackageVersionPrefix + version, runtime is null ? string.Empty : $@"runtimes\{runtime}\"));
             if (!Directory.Exists(packageDir))
             {
-                LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
-                InstallPackageAsync(packageDir).Wait();
+                // Multiple test processes (e.g. net48 and net10.0 runs) can race to install the same package into the shared cache.
+                // Serialize the installation across processes to avoid concurrent writes/reads of the same DLL files.
+                using var mutex = new Mutex(false, $@"Global\SonarAnalyzer.TestFramework.NuGetInstall.{Id}.{version}.{runtime}");
+                mutex.WaitOne();
+                try
+                {
+                    if (!Directory.Exists(packageDir))
+                    {
+                        LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
+                        InstallPackageAsync(packageDir).Wait();
+                    }
+                }
+                finally
+                {
+                    mutex.ReleaseMutex();
+                }
             }
 
             return packageDir;
