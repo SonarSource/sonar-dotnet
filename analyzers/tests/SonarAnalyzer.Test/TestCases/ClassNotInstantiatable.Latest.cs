@@ -42,15 +42,52 @@ namespace CSharp9
         public Person5() : this("") { }
     }
 
-    public record StaticUsage // Noncompliant
+    // https://sonarsource.atlassian.net/browse/NET-4315
+    public record StaticUsage // Compliant - Same exemption as the equivalent class: the synthesized record members are not taken into account
     {
         private StaticUsage() { }
         public static void M() { }
     }
 
+    // https://sonarsource.atlassian.net/browse/NET-4315
+    public record RecordWithOnlyNestedType // Compliant - The nested type is accessible without an instance of the containing record
+    {
+        private RecordWithOnlyNestedType() { }
+
+        public record Nested { }
+    }
+
+    public record RecordWithOnlyPrivateNestedType // Noncompliant - Neither the record nor its private nested type can be reached from the outside
+    {
+        private RecordWithOnlyPrivateNestedType() { }
+
+        private record Nested { }
+    }
+
+    public class ClassWithOnlyNestedRecord // Compliant
+    {
+        private ClassWithOnlyNestedRecord() { }
+
+        public record Nested { }
+    }
+
+    public class ClassWithOnlyPrivateProtectedNestedType // Noncompliant - 'private protected' is only reachable from derived types, which cannot exist outside the class
+    {
+        private ClassWithOnlyPrivateProtectedNestedType() { }
+
+        private protected class Nested { }
+    }
+
+    public record struct RecordStructWithPrivateConstructor // Compliant - Only classes are checked, a record struct is always instantiatable
+    {
+        private RecordStructWithPrivateConstructor(int i) { }
+    }
+
     public record OuterRecord // Compliant
     {
         private OuterRecord() { }
+
+        public void M() { } // Instance member, so the record is not exempted and the nested type inheriting from it is what makes it compliant
 
         public record Intermediate
         {
@@ -61,9 +98,11 @@ namespace CSharp9
         }
     }
 
-    public record MyGenericRecord<T>
+    public record MyGenericRecord<T> // Compliant
     {
         private MyGenericRecord() { }
+        public void M() { } // Instance member, so the record is not exempted and the nested type inheriting from it is what makes it compliant
+
         public record Nested : MyGenericRecord<int> { }
     }
 
@@ -128,6 +167,19 @@ namespace CSharp11
 
 namespace CSharp14
 {
+    // The members of every part are taken into account, the exemption is based on the symbol and not on a single declaration
+    public partial class PartialWithNestedTypeInOtherFile // Compliant - The nested type is declared in ClassNotInstantiatable.Latest.Partial.cs
+    {
+        private PartialWithNestedTypeInOtherFile() { }
+    }
+
+    public partial class PartialWithInstanceMemberInOtherFile // Noncompliant - The instance member declared in the other part prevents the exemption
+    {
+        private PartialWithInstanceMemberInOtherFile() { }
+
+        public class Nested { }
+    }
+
     partial class PartialPublicConstructor
     {
         public partial PartialPublicConstructor();

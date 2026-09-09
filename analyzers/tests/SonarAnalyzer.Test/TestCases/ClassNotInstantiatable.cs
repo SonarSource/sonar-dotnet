@@ -29,7 +29,15 @@ namespace Tests.Diagnostics
         public static void M() { }
     }
 
-    public class ClassWithPrivateNestedType // Noncompliant FP - Classes with static members, a non-static constructor, and non-static nested types should be ignored.
+    public class ClassWithOnlyConstants // Compliant, suggested solution of S1118 - Constants are static, even when they are private
+    {
+        private ClassWithOnlyConstants() { }
+
+        private const int Value = 1;
+    }
+
+    // https://sonarsource.atlassian.net/browse/NET-4315
+    public class ClassWithPrivateNestedType // Compliant - Only static members and nested types, none of which needs an instance of the containing type
     {
         private ClassWithPrivateNestedType() { }
 
@@ -39,6 +47,96 @@ namespace Tests.Diagnostics
         {
             public int GetValue() => GetHashCode();
         }
+    }
+
+    // https://sonarsource.atlassian.net/browse/NET-4315
+    public class ClassWithOnlyNestedType // Compliant - Nested types are accessible without an instance of the containing type
+    {
+        private ClassWithOnlyNestedType() { }
+
+        public class Nested { }
+    }
+
+    // The exemption applies to every nested type kind, not just nested classes
+    public class ClassWithOnlyNestedStruct // Compliant
+    {
+        private ClassWithOnlyNestedStruct() { }
+
+        public struct Nested { }
+    }
+
+    public class ClassWithOnlyNestedEnum // Compliant
+    {
+        private ClassWithOnlyNestedEnum() { }
+
+        public enum Nested { A }
+    }
+
+    public class ClassWithOnlyNestedInterface // Compliant
+    {
+        private ClassWithOnlyNestedInterface() { }
+
+        public interface INested { }
+    }
+
+    public class ClassWithOnlyNestedDelegate // Compliant
+    {
+        private ClassWithOnlyNestedDelegate() { }
+
+        public delegate void NestedDelegate();
+    }
+
+    public class ClassWithOnlyInternalNestedType // Compliant - An internal nested type is reachable from the rest of the assembly
+    {
+        private ClassWithOnlyInternalNestedType() { }
+
+        internal class Nested { }
+    }
+
+    public class ClassWithOnlyProtectedInternalNestedType // Compliant - 'protected internal' is also internal, so it is reachable from the rest of the assembly
+    {
+        private ClassWithOnlyProtectedInternalNestedType() { }
+
+        protected internal class Nested { }
+    }
+
+    public class ClassWithOnlyProtectedNestedType // Noncompliant - All the constructors are private, so nothing outside can derive from the class and reach the nested type
+    {
+        private ClassWithOnlyProtectedNestedType() { }
+
+        protected class Nested { }
+    }
+
+    public class ClassWithOnlyPrivateStaticNestedType // Compliant - A static nested type is a static member, even when it is private
+    {
+        private ClassWithOnlyPrivateStaticNestedType() { }
+
+        private static class Nested { }
+    }
+
+    public class ClassWithPrivateAndPublicNestedTypes // Compliant - It is enough that one of the nested types is reachable from the outside
+    {
+        private ClassWithPrivateAndPublicNestedTypes() { }
+
+        private struct Hidden { }
+
+        public enum Visible { A }
+    }
+
+    public class ClassWithOnlyPrivateNestedType // Noncompliant - Neither the class nor its private nested type can be reached from the outside
+    {
+        private ClassWithOnlyPrivateNestedType() { }
+
+        private class Nested { }
+    }
+
+    public class ClassWithOnlyPrivateNestedTypes // Noncompliant - Same as above, no matter the kind of the nested types
+    {
+        private ClassWithOnlyPrivateNestedTypes() { }
+
+        private struct Hidden { }
+
+        private enum AlsoHidden { A }
     }
 
     public class ClassWithPrivateNestedType2 // Noncompliant
@@ -72,6 +170,8 @@ namespace Tests.Diagnostics
     {
         private Class6() { }
 
+        public void M() { } // Instance member, so the class is not exempted and the nested type inheriting from it is what makes it compliant
+
         public class Intermediate
         {
             public class Nested : Class6 // Noncompliant
@@ -92,12 +192,14 @@ namespace Tests.Diagnostics
         public static Class0 instance => new Class0();
     }
 
-    public class MyClassGeneric<T>
+    public class MyClassGeneric<T> // Compliant
     {
         private MyClassGeneric()
         {
 
         }
+        public void M() { } // Instance member, so the class is not exempted and the nested type inheriting from it is what makes it compliant
+
         public class Nested : MyClassGeneric<int> { }
     }
 
@@ -111,6 +213,11 @@ namespace Tests.Diagnostics
         {
             return new MyClassGeneric2<int>();
         }
+    }
+
+    public struct StructWithPrivateConstructor // Compliant - Only classes are checked, a struct is always instantiatable
+    {
+        private StructWithPrivateConstructor(int i) { }
     }
 
     public class MyAttribute : System.Attribute { }

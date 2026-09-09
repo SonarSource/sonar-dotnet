@@ -26,7 +26,7 @@ namespace SonarAnalyzer.VisualBasic.Rules
         {
             var typeDeclarations = new VisualBasicRemovableDeclarationCollector(namedType, compilation).TypeDeclarations;
 
-            return typeDeclarations.Select(x => new ConstructorContext(x, Diagnostic.Create(Rule, x.Node.BlockStatement.Identifier.GetLocation(), "class", messageArg)));
+            return typeDeclarations.Select(x => new ConstructorContext(x, x.Node.BlockStatement.Identifier.GetLocation(), "class", messageArg));
         }
     }
 }
