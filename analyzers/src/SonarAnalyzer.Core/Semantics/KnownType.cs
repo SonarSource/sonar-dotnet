@@ -165,6 +165,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_NpgsqlDbContextOptionsBuilderExtensions = new("Microsoft.EntityFrameworkCore.NpgsqlDbContextOptionsBuilderExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_OracleDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.OracleDbContextOptionsExtensions");
+    public static readonly KnownType Microsoft_EntityFrameworkCore_OwnedAttribute = new("Microsoft.EntityFrameworkCore.OwnedAttribute");
     public static readonly KnownType Microsoft_EntityFrameworkCore_PrimaryKeyAttribute = new("Microsoft.EntityFrameworkCore.PrimaryKeyAttribute");
     public static readonly KnownType Microsoft_EntityFrameworkCore_RawSqlString = new("Microsoft.EntityFrameworkCore.RawSqlString");
     public static readonly KnownType Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions = new("Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions");
