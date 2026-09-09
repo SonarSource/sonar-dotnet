@@ -15,8 +15,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.Threading;
-
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 internal static partial class NuGetMetadataFactory

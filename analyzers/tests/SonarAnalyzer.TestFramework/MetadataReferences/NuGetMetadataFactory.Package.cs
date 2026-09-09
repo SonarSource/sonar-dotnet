@@ -52,7 +52,18 @@ internal static partial class NuGetMetadataFactory
             if (!Directory.Exists(packageDir))
             {
                 LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
-                InstallPackageAsync(packageDir).Wait();
+                // Extract to a private temp directory and publish it atomically, so a parallel test process never observes
+                // a half-extracted packageDir (it short-circuits on Directory.Exists and would read/miss files being written).
+                var tempDir = packageDir.TrimEnd(Path.DirectorySeparatorChar) + ".tmp." + Guid.NewGuid().ToString("N");
+                InstallPackageAsync(tempDir).Wait();
+                try
+                {
+                    Directory.Move(tempDir, packageDir);
+                }
+                catch (IOException) when (Directory.Exists(packageDir)) // Another process published it first
+                {
+                    Directory.Delete(tempDir, true);
+                }
             }
 
             return packageDir;
