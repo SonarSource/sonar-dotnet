@@ -47,23 +47,34 @@ internal static partial class NuGetMetadataFactory
 
         public string EnsureInstalled()
         {
-            // Check to see if the specific package is already installed
             var packageDir = Path.GetFullPath(Path.Combine(PackagesFolder, Id, PackageVersionPrefix + version, runtime is null ? string.Empty : $@"runtimes\{runtime}\"));
-            if (!Directory.Exists(packageDir))
+            // Multiple test processes (e.g. net48 and net10.0 runs) can race to install the same package into the shared cache.
+            // The mutex must also cover the existence check: an in-progress extraction creates packageDir before it is complete.
+            using var mutex = new Mutex(false, $@"Global\SonarAnalyzer.TestFramework.NuGetInstall.{Id}.{version}.{runtime}");
+            var acquired = false;
+            try
             {
-                // Multiple test processes (e.g. net48 and net10.0 runs) can race to install the same package into the shared cache.
-                // Serialize the installation across processes to avoid concurrent writes/reads of the same DLL files.
-                using var mutex = new Mutex(false, $@"Global\SonarAnalyzer.TestFramework.NuGetInstall.{Id}.{version}.{runtime}");
-                mutex.WaitOne();
                 try
                 {
-                    if (!Directory.Exists(packageDir))
-                    {
-                        LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
-                        InstallPackageAsync(packageDir).Wait();
-                    }
+                    acquired = mutex.WaitOne(TimeSpan.FromMinutes(5));
                 }
-                finally
+                catch (AbandonedMutexException)
+                {
+                    acquired = true;   // Wait succeeded; the previous owner died without releasing.
+                }
+                if (!acquired)
+                {
+                    throw new InvalidOperationException($"Test setup error: timed out waiting for another process to install {Id} {version}.");
+                }
+                if (!Directory.Exists(packageDir))
+                {
+                    LogMessage($"Package not found at {packageDir}, will attempt to download and install.");
+                    InstallPackageAsync(packageDir).Wait();
+                }
+            }
+            finally
+            {
+                if (acquired)
                 {
                     mutex.ReleaseMutex();
                 }
@@ -107,22 +118,47 @@ internal static partial class NuGetMetadataFactory
         {
             const int VersionCheckDays = 5;
             var path = Path.Combine(PackagesFolder, Id, "Sonar.Latest.txt");
-            var (nextCheck, latest) =
-                File.Exists(path)
-                && File.ReadAllText(path).Split(';') is var values
-                && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
-                    ? Pair.From(nextCheckValue, values[1])
-                    : new(DateTime.MinValue, null);
-            LogMessage($"Next check for latest NuGets: {nextCheck}");
-            if (nextCheck < DateTime.Now)
+            // Multiple test processes (e.g. net48 and net10.0 runs) can race to read/write the same Sonar.Latest.txt file.
+            using var mutex = new Mutex(false, $@"Global\SonarAnalyzer.TestFramework.NuGetLatestVersion.{Id}");
+            var acquired = false;
+            try
             {
-                var resource = await NuGetRepository().ConfigureAwait(false);
-                var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
-                latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
-                new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
-                File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");
+                try
+                {
+                    acquired = mutex.WaitOne(TimeSpan.FromMinutes(5));
+                }
+                catch (AbandonedMutexException)
+                {
+                    acquired = true;   // Wait succeeded; the previous owner died without releasing.
+                }
+                if (!acquired)
+                {
+                    throw new InvalidOperationException($"Test setup error: timed out waiting for another process to determine the latest version of {Id}.");
+                }
+                var (nextCheck, latest) =
+                    File.Exists(path)
+                    && File.ReadAllText(path).Split(';') is var values
+                    && DateTime.TryParseExact(values[0], "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var nextCheckValue)
+                        ? Pair.From(nextCheckValue, values[1])
+                        : new(DateTime.MinValue, null);
+                LogMessage($"Next check for latest NuGets: {nextCheck}");
+                if (nextCheck < DateTime.Now)
+                {
+                    var resource = await NuGetRepository().ConfigureAwait(false);
+                    var versions = await resource.GetAllVersionsAsync(Id, new SourceCacheContext(), NullLogger.Instance, default).ConfigureAwait(false);
+                    latest = versions.OrderByDescending(x => x.Version).First(x => !x.IsPrerelease).OriginalVersion;
+                    new FileInfo(path).Directory.Create(); // Ensure that folder exists, if not create one
+                    File.WriteAllText(path, $"{DateTime.Today.AddDays(VersionCheckDays):yyyy-MM-dd};{latest}");
+                }
+                return latest;
             }
-            return latest;
+            finally
+            {
+                if (acquired)
+                {
+                    mutex.ReleaseMutex();
+                }
+            }
         }
     }
 }

@@ -30,9 +30,32 @@ public class NuGetMetadataFactoryTest
         var packagesFolder = Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? Path.Combine(Paths.AnalyzersRoot, "packages"); // Same as NuGetMetadataFactory.PackagesFolder
         var packageDir = Path.GetFullPath(Path.Combine(packagesFolder, id, "Sonar." + version, string.Empty));
         // We need to delete the package from local cache to force the factory to always download it. Otherwise, the code would (almost*) never be covered on CI runs.
-        if (Directory.Exists(packageDir))
+        // Deletion must be synchronized with the same mutex NuGetMetadataFactory.Package.EnsureInstalled uses, otherwise a concurrent process could be reading the directory we are deleting.
+        using (var mutex = new Mutex(false, $@"Global\SonarAnalyzer.TestFramework.NuGetInstall.{id}.{version}."))
         {
-            Directory.Delete(packageDir, true);
+            var acquired = false;
+            try
+            {
+                try
+                {
+                    acquired = mutex.WaitOne(TimeSpan.FromMinutes(5));
+                }
+                catch (AbandonedMutexException)
+                {
+                    acquired = true;   // Wait succeeded; the previous owner died without releasing.
+                }
+                if (Directory.Exists(packageDir))
+                {
+                    Directory.Delete(packageDir, true);
+                }
+            }
+            finally
+            {
+                if (acquired)
+                {
+                    mutex.ReleaseMutex();
+                }
+            }
         }
         NuGetMetadataFactory.Create(id, version).Should().NotBeEmpty();
         Directory.Exists(packageDir).Should().BeTrue();
