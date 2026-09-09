@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.Threading;
+
 namespace SonarAnalyzer.TestFramework.MetadataReferences;
 
 internal static partial class NuGetMetadataFactory
@@ -88,11 +90,32 @@ internal static partial class NuGetMetadataFactory
                 {
                     LogMessage("File: " + dllPath);
                 }
-                return dllPaths.Select(x => MetadataReference.CreateFromFile(x)).ToArray();
+                return dllPaths.Select(CreateMetadataReferenceFromFile).ToArray();
             }
         }
 
         throw new InvalidOperationException($"No allowed DLL directory was found in {packageDir}. Add new target framework to SortedAllowedDirectories or set dllDirectory argument explicitly.");
+    }
+
+    // Multiple test processes (e.g. net48 and net10.0 runs) may read the same file from the shared NuGet cache at the same time.
+    // This can result in a transient IOException on Windows when one process momentarily locks the file. Retry a few times before giving up.
+    private static MetadataReference CreateMetadataReferenceFromFile(string path)
+    {
+        const int maxAttempts = 5;
+        for (var attempt = 1; attempt <= maxAttempts; attempt++)
+        {
+            try
+            {
+                return MetadataReference.CreateFromFile(path);
+            }
+            catch (IOException) when (attempt < maxAttempts)
+            {
+                LogMessage($"Retrying to read {path} after IOException (attempt {attempt} of {maxAttempts}).");
+                Thread.Sleep(TimeSpan.FromMilliseconds(200 * attempt));
+            }
+        }
+        // Unreachable, the last attempt above either returns or rethrows.
+        throw new InvalidOperationException($"Failed to read {path} after {maxAttempts} attempts.");
     }
 
     private static void LogMessage(string message) =>
