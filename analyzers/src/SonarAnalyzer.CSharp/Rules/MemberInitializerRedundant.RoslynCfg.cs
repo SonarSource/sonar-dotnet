@@ -65,7 +65,7 @@ namespace SonarAnalyzer.CSharp.Rules
 
             private bool IsReadOrWrite(IOperation child, bool checkReadBeforeWrite)
             {
-                if (child.IsOutArgumentReference())
+                if (child.IsOutArgumentReference)
                 {
                     // it is out argument - that means that this is write
                     return !checkReadBeforeWrite;

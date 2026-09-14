@@ -52,9 +52,9 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     {
         var candidates = operation switch
         {
-            _ when operation.AsParameterReference is { } parameterReference => [parameterReference.Parameter],
-            _ when operation.AsLocalReference is { } localReference => [localReference.Local],
-            _ when operation.AsFlowCaptureReference is { } flowCaptureReference => flowCaptures.TryGetValue(flowCaptureReference.Id, out var symbols) ? symbols : [],
+            { AsParameterReference.Parameter: { } parameter } => [parameter],
+            { AsLocalReference.Local: { } local } => [local],
+            { AsFlowCaptureReference.Id: { } id } when flowCaptures.TryGetValue(id, out var symbols) => symbols,
             _ => []
         };
         return candidates.Where(IsLocal);
@@ -293,8 +293,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             return originalOperation switch
             {
-                var _ when originalOperation.AsAnonymousFunction is { } anonymousFunction => anonymousFunction.Symbol,
-                var _ when originalOperation.AsLocalFunction is { } localFunction => localFunction.Symbol,
+                { AsAnonymousFunction.Symbol: { } symbol } => symbol,
+                { AsLocalFunction.Symbol: { } symbol } => symbol,
                 _ => throw new NotSupportedException($"Operations of kind: {originalOperation.Kind} are not supported.")
             };
         }
@@ -361,8 +361,8 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         private void ProcessParameterOrLocalReference(IOperationWrapper reference) =>
             ProcessParameterOrLocalSymbols(
                 owner.ParameterOrLocalSymbols(reference.WrappedInstance),
-                reference.IsOutArgument(),
-                reference.IsAssignmentTarget() || reference.Parent?.Kind == OperationKindEx.FlowCapture);
+                reference.IsOutArgument,
+                reference.IsAssignmentTarget || reference.Parent?.Kind == OperationKindEx.FlowCapture);
 
         private void ProcessParameterOrLocalSymbols(IEnumerable<ISymbol> symbols, bool isOutArgument, bool isAssignmentTarget)
         {

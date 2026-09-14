@@ -40,7 +40,7 @@ public abstract class ControlFlowGraphCacheBase
 
         if (cfgInputNode is not null && model.GetOperation(cfgInputNode) is { } declarationOperation)
         {
-            var rootSyntax = declarationOperation.RootOperation().Syntax;
+            var rootSyntax = declarationOperation.RootOperation.Syntax;
             var nodeCache = compilationCache.GetValue(model.Compilation, x => new());
             if (!nodeCache.TryGetValue(rootSyntax, out var wrapper))
             {

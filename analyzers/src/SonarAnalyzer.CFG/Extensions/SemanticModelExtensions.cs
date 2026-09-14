@@ -19,23 +19,26 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 public static class SemanticModelExtensions
 {
-    /// <summary>
-    /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
-    /// </summary>
-    /// <param name="model">Semantic model</param>
-    /// /// <param name="node">Node for which it gets the symbol</param>
-    /// <returns>
-    /// The symbol if resolved.
-    /// The first candidate symbol if resolution failed.
-    /// Null if no symbol was found.
-    /// </returns>
-    public static ISymbol GetSymbolOrCandidateSymbol(this SemanticModel model, SyntaxNode node)
+    extension(SemanticModel model)
     {
-        var symbolInfo = model.GetSymbolInfo(node);
-        if (symbolInfo.Symbol is not null)
+        /// <summary>
+        /// Starting .NET Framework 4.6.1, we've noticed that LINQ methods aren't resolved properly, so we need to use the CandidateSymbol.
+        /// </summary>
+        /// <param name="model">Semantic model</param>
+        /// /// <param name="node">Node for which it gets the symbol</param>
+        /// <returns>
+        /// The symbol if resolved.
+        /// The first candidate symbol if resolution failed.
+        /// Null if no symbol was found.
+        /// </returns>
+        public ISymbol GetSymbolOrCandidateSymbol(SyntaxNode node)
         {
-            return symbolInfo.Symbol;
+            var symbolInfo = model.GetSymbolInfo(node);
+            if (symbolInfo.Symbol is not null)
+            {
+                return symbolInfo.Symbol;
+            }
+            return symbolInfo.CandidateSymbols.FirstOrDefault();
         }
-        return symbolInfo.CandidateSymbols.FirstOrDefault();
     }
 }

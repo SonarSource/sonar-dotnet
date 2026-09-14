@@ -21,69 +21,96 @@ namespace SonarAnalyzer.CFG.Extensions;
 
 public static class IOperationExtensions
 {
-    public static bool IsOutArgumentReference(this IOperation operation) =>
-        IArgumentOperationWrapper.IsInstance(operation.Parent)
-        && IArgumentOperationWrapper.From(operation.Parent).Parameter.RefKind == RefKind.Out;
-
-    public static bool IsAssignmentTarget(this IOperationWrapper operation) =>
-        operation.WrappedInstance.Parent is { } parent
-        && ISimpleAssignmentOperationWrapper.IsInstance(parent)
-        && ISimpleAssignmentOperationWrapper.From(parent).Target == operation.WrappedInstance;
-
-    public static bool IsCompoundAssignmentTarget(this IOperationWrapper operation) =>
-        operation.WrappedInstance.Parent is { } parent
-        && ICompoundAssignmentOperationWrapper.IsInstance(parent)
-        && ICompoundAssignmentOperationWrapper.From(parent).Target == operation.WrappedInstance;
-
-    public static bool IsOutArgument(this IOperationWrapper operation) =>
-        operation.WrappedInstance.Parent is { } parent
-        && IArgumentOperationWrapper.IsInstance(parent)
-        && IArgumentOperationWrapper.From(parent).Parameter.RefKind == RefKind.Out;
-
-    public static bool IsAnyKind(this IOperation operation, params OperationKind[] kinds) =>
-        kinds.Contains(operation.Kind);
-
-    public static IOperation RootOperation(this IOperation operation)
+    extension(IOperation operation)
     {
-        while (operation.Parent is not null)
+        public bool IsOutArgumentReference =>
+            IArgumentOperationWrapper.IsInstance(operation.Parent)
+            && IArgumentOperationWrapper.From(operation.Parent).Parameter.RefKind == RefKind.Out;
+
+        public bool IsAnyKind(params OperationKind[] kinds) =>
+            kinds.Contains(operation.Kind);
+
+        public IOperation RootOperation
         {
-            operation = operation.Parent;
+            get
+            {
+                while (operation.Parent is not null)
+                {
+                    operation = operation.Parent;
+                }
+                return operation;
+            }
         }
-        return operation;
+
+        public string Serialize() =>
+            $"{OperationPrefix(operation)}{OperationSuffix(operation)}: {operation.Syntax}";
+
+        public IOperation WithoutEnclosingConversions
+        {
+            get
+            {
+                while (operation?.Kind == OperationKindEx.Conversion)
+                {
+                    operation = operation.ToConversion().Operand;
+                }
+                return operation;
+            }
+        }
     }
 
-    /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
-    public static IOperation ArgumentValue(this IInvocationOperationWrapper invocation, string parameterName) =>
-        ArgumentValue(invocation.Arguments, parameterName);
-
-    /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
-    public static IOperation ArgumentValue(this IObjectCreationOperationWrapper objectCreation, string parameterName) =>
-        ArgumentValue(objectCreation.Arguments, parameterName);
-
-    /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
-    public static IOperation ArgumentValue(this IPropertyReferenceOperationWrapper propertyReference, string parameterName) =>
-        ArgumentValue(propertyReference.Arguments, parameterName);
-
-    /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
-    public static IOperation ArgumentValue(this IRaiseEventOperationWrapper raiseEvent, string parameterName) =>
-        ArgumentValue(raiseEvent.Arguments, parameterName);
-
-    public static OperationExecutionOrder ToExecutionOrder(this IEnumerable<IOperation> operations) =>
-        new(operations, false);
-
-    public static OperationExecutionOrder ToReversedExecutionOrder(this IEnumerable<IOperation> operations) =>
-        new(operations, true);
-
-    public static string Serialize(this IOperation operation) =>
-        $"{OperationPrefix(operation)}{OperationSuffix(operation)}: {operation.Syntax}";
-
-    public static IOperation UnwrapConversion(this IOperation operation)
+    extension(IOperationWrapper operation)
     {
-        while (operation?.Kind == OperationKindEx.Conversion)
-        {
-            operation = operation.ToConversion().Operand;
-        }
-        return operation;
+        public bool IsAssignmentTarget =>
+            operation.WrappedInstance.Parent is { } parent
+            && ISimpleAssignmentOperationWrapper.IsInstance(parent)
+            && ISimpleAssignmentOperationWrapper.From(parent).Target == operation.WrappedInstance;
+
+        public bool IsCompoundAssignmentTarget =>
+            operation.WrappedInstance.Parent is { } parent
+            && ICompoundAssignmentOperationWrapper.IsInstance(parent)
+            && ICompoundAssignmentOperationWrapper.From(parent).Target == operation.WrappedInstance;
+
+        public bool IsOutArgument =>
+            operation.WrappedInstance.Parent is { } parent
+            && IArgumentOperationWrapper.IsInstance(parent)
+            && IArgumentOperationWrapper.From(parent).Parameter.RefKind == RefKind.Out;
+    }
+
+    extension(IInvocationOperationWrapper invocation)
+    {
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public IOperation ArgumentValue(string parameterName) =>
+            ArgumentValue(invocation.Arguments, parameterName);
+    }
+
+    extension(IObjectCreationOperationWrapper objectCreation)
+    {
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public IOperation ArgumentValue(string parameterName) =>
+            ArgumentValue(objectCreation.Arguments, parameterName);
+    }
+
+    extension(IPropertyReferenceOperationWrapper propertyReference)
+    {
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public IOperation ArgumentValue(string parameterName) =>
+            ArgumentValue(propertyReference.Arguments, parameterName);
+    }
+
+    extension(IRaiseEventOperationWrapper raiseEvent)
+    {
+        /// <inheritdoc cref="ArgumentValue(ImmutableArray{IOperation}, string)"/>
+        public IOperation ArgumentValue(string parameterName) =>
+            ArgumentValue(raiseEvent.Arguments, parameterName);
+    }
+
+    extension(IEnumerable<IOperation> operations)
+    {
+        public OperationExecutionOrder ToExecutionOrder() =>
+            new(operations, false);
+
+        public OperationExecutionOrder ToReversedExecutionOrder() =>
+            new(operations, true);
     }
 
     /// <summary>

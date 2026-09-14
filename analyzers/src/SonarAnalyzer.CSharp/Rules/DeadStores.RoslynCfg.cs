@@ -71,11 +71,11 @@ namespace SonarAnalyzer.CSharp.Rules
                 private void ProcessParameterOrLocalReference(IOperationWrapper reference)
                 {
                     var symbols = owner.lva.ParameterOrLocalSymbols(reference.WrappedInstance).Where(x => IsSymbolRelevant(x));
-                    if (reference.IsOutArgument())
+                    if (reference.IsOutArgument)
                     {
                         liveOut.ExceptWith(symbols);
                     }
-                    else if (!reference.IsAssignmentTarget() && !reference.IsCompoundAssignmentTarget())
+                    else if (reference is { IsAssignmentTarget: false, IsCompoundAssignmentTarget: false })
                     {
                         liveOut.UnionWith(symbols);
                     }
