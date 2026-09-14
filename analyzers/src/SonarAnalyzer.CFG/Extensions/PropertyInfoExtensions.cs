@@ -33,6 +33,9 @@ internal static class PropertyInfoExtensions
         public T ReadCached<T>(object instance, Func<object, T> createInstance, ref T cache) where T : class =>
             cache ??= createInstance(property.GetValue(instance));
 
+        public T ReadCached<T>(object instance, Func<object, T> createInstance, ref T? cache) where T : struct =>
+            cache ??= createInstance(property.GetValue(instance));
+
         public ImmutableArray<T> ReadCached<T>(object instance, ref ImmutableArray<T> cache) =>
             property.ReadCached(instance, x => (T)x, ref cache);
 

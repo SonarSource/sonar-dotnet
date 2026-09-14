@@ -36,17 +36,17 @@ public class ControlFlowBranch
     private BasicBlock destination;
     private ControlFlowBranchSemantics? semantics;
     private bool? isConditionalSuccessor;
-    private ImmutableArray<ControlFlowRegion> enteringRegions;
-    private ImmutableArray<ControlFlowRegion> leavingRegions;
-    private ImmutableArray<ControlFlowRegion> finallyRegions;
+    private ImmutableArray<ControlFlowRegionWrapper> enteringRegions;
+    private ImmutableArray<ControlFlowRegionWrapper> leavingRegions;
+    private ImmutableArray<ControlFlowRegionWrapper> finallyRegions;
 
     public BasicBlock Source => SourceProperty.ReadCached(instance, BasicBlock.Wrap, ref source);
     public BasicBlock Destination => DestinationProperty.ReadCached(instance, BasicBlock.Wrap, ref destination);
     public ControlFlowBranchSemantics Semantics => SemanticsProperty.ReadCached(instance, ref semantics);
     public bool IsConditionalSuccessor => IsConditionalSuccessorProperty.ReadCached(instance, ref isConditionalSuccessor);
-    public ImmutableArray<ControlFlowRegion> EnteringRegions => EnteringRegionsProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref enteringRegions);
-    public ImmutableArray<ControlFlowRegion> LeavingRegions => LeavingRegionsProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref leavingRegions);
-    public ImmutableArray<ControlFlowRegion> FinallyRegions => FinallyRegionsProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref finallyRegions);
+    public ImmutableArray<ControlFlowRegionWrapper> EnteringRegions => EnteringRegionsProperty.ReadCached(instance, ControlFlowRegionWrapper.From, ref enteringRegions);
+    public ImmutableArray<ControlFlowRegionWrapper> LeavingRegions => LeavingRegionsProperty.ReadCached(instance, ControlFlowRegionWrapper.From, ref leavingRegions);
+    public ImmutableArray<ControlFlowRegionWrapper> FinallyRegions => FinallyRegionsProperty.ReadCached(instance, ControlFlowRegionWrapper.From, ref finallyRegions);
 
     static ControlFlowBranch()
     {

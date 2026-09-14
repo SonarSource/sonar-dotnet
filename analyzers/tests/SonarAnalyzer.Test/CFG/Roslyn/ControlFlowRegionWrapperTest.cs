@@ -20,41 +20,42 @@ using SonarAnalyzer.ShimLayer;
 namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]
-public class ControlFlowRegionTest
+public class ControlFlowRegionWrapperTest
 {
     [TestMethod]
     public void ValidateReflection()
     {
-        const string code = @"
-public class Sample
-{
-    public void Method()
-    {
-        var value = LocalMethod();
-        try
-        {
-           throw new System.Exception();
-        }
-        catch(System.InvalidOperationException)
-        {
-        }
-        finally
-        {
-            value = 0;
-        }
+        const string code = """
+            public class Sample
+            {
+                public void Method()
+                {
+                    var value = LocalMethod();
+                    try
+                    {
+                       throw new System.Exception();
+                    }
+                    catch(System.InvalidOperationException)
+                    {
+                    }
+                    finally
+                    {
+                        value = 0;
+                    }
 
-        int LocalMethod() => 42;
-    }
-}";
+                    int LocalMethod() => 42;
+                }
+            }
+            """;
         var root = TestCompiler.CompileCfgCS(code).Root;
 
         root.Should().NotBeNull();
         root.Kind.Should().Be(ControlFlowRegionKind.Root);
-        root.EnclosingRegion.Should().BeNull();
+        root.EnclosingRegion.WrappedInstance.Should().BeNull();
         root.ExceptionType.Should().BeNull();
         root.FirstBlockOrdinal.Should().Be(0);
         root.LastBlockOrdinal.Should().Be(5);
-        root.NestedRegions.Should().HaveCount(1);
+        root.NestedRegions.Should().ContainSingle();
         root.Locals.Should().BeEmpty();
         root.LocalFunctions.Should().BeEmpty();
         root.CaptureIds.Should().BeEmpty();
@@ -65,9 +66,9 @@ public class Sample
         localLifetime.ExceptionType.Should().BeNull();
         localLifetime.FirstBlockOrdinal.Should().Be(1);
         localLifetime.LastBlockOrdinal.Should().Be(4);
-        localLifetime.NestedRegions.Should().HaveCount(1);
-        localLifetime.Locals.Should().HaveCount(1).And.Contain(x => x.Name == "value");
-        localLifetime.LocalFunctions.Should().HaveCount(1).And.Contain(x => x.Name == "LocalMethod");
+        localLifetime.NestedRegions.Should().ContainSingle();
+        localLifetime.Locals.Should().ContainSingle().Which.Name.Should().Be("value");
+        localLifetime.LocalFunctions.Should().ContainSingle().Which.Name.Should().Be("LocalMethod");
         localLifetime.CaptureIds.Should().BeEmpty();
 
         var tryFinallyRegion = localLifetime.NestedRegions.Single();

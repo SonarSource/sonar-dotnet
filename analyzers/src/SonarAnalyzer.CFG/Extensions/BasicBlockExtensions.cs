@@ -29,9 +29,9 @@ public static class BasicBlockExtensions
             return enclosing.Kind == kind;
         }
 
-        public ControlFlowRegion EnclosingNonLocalLifetimeRegion => block.EnclosingRegion.EnclosingNonLocalLifetimeRegion;
+        public ControlFlowRegionWrapper EnclosingNonLocalLifetimeRegion => block.EnclosingRegion.EnclosingNonLocalLifetimeRegion;
 
-        public ControlFlowRegion EnclosingRegion(ControlFlowRegionKind kind) =>
+        public ControlFlowRegionWrapper? EnclosingRegion(ControlFlowRegionKind kind) =>
             block.EnclosingRegion.EnclosingRegionOrSelf(kind);
     }
 }

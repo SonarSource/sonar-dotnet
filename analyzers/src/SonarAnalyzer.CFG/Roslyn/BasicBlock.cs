@@ -41,7 +41,7 @@ public class BasicBlock
     private IOperation branchValue;
     private ControlFlowBranch conditionalSuccessor;
     private ControlFlowConditionKind? conditionKind;
-    private ControlFlowRegion enclosingRegion;
+    private ControlFlowRegionWrapper? enclosingRegion;
     private ControlFlowBranch fallThroughSuccessor;
     private bool? isReachable;
     private BasicBlockKind? kind;
@@ -52,7 +52,7 @@ public class BasicBlock
     public IOperation BranchValue => BranchValueProperty.ReadCached(instance, ref branchValue);
     public ControlFlowBranch ConditionalSuccessor => ConditionalSuccessorProperty.ReadCached(instance, ControlFlowBranch.Wrap, ref conditionalSuccessor);
     public ControlFlowConditionKind ConditionKind => ConditionKindProperty.ReadCached(instance, ref conditionKind);
-    public ControlFlowRegion EnclosingRegion => EnclosingRegionProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref enclosingRegion);
+    public ControlFlowRegionWrapper EnclosingRegion => EnclosingRegionProperty.ReadCached(instance, ControlFlowRegionWrapper.From, ref enclosingRegion);
     public ControlFlowBranch FallThroughSuccessor => FallThroughSuccessorProperty.ReadCached(instance, ControlFlowBranch.Wrap, ref fallThroughSuccessor);
     public bool IsReachable => IsReachableProperty.ReadCached(instance, ref isReachable);
     public BasicBlockKind Kind => KindProperty.ReadCached(instance, ref kind);

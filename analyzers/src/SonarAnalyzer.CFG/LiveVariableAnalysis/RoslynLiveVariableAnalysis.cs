@@ -210,7 +210,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void BuildBranchesToOuterCatch(BasicBlock source, ControlFlowRegion region)
+    private void BuildBranchesToOuterCatch(BasicBlock source, ControlFlowRegionWrapper region)
     {
         if (region.EnclosingRegion(ControlFlowRegionKind.Try) is { } outerTry
             && outerTry.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } outerTryCatch)
@@ -222,12 +222,12 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void BuildBranchesFinally(BasicBlock source, ControlFlowRegion finallyRegion)
+    private void BuildBranchesFinally(BasicBlock source, ControlFlowRegionWrapper finallyRegion)
     {
         foreach (var trySuccessor in TryRegionSuccessors(source.EnclosingRegion))
         {
             // Redirect exit from finally to the next block
-            var destination = trySuccessor.FinallyRegions.SkipWhile(x => x != finallyRegion).Skip(1).FirstOrDefault() is { } nextOuterFinally
+            var destination = trySuccessor.FinallyRegions.SkipWhile(x => x != finallyRegion).Skip(1).FirstOrDefault() is { WrappedInstance: not null } nextOuterFinally
                 ? Cfg.Blocks[nextOuterFinally.FirstBlockOrdinal]    // Outer finally that directly follows this finally
                 : trySuccessor.Destination;                         // Normal block directly after this finally
             AddBranch(source, destination);
@@ -236,7 +236,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
 
     private void BuildBranchesRethrow(BasicBlock block)
     {
-        var currentTryCatchRegion = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch);
+        var currentTryCatchRegion = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch).Value;
         var reachableHandlerRegions = currentTryCatchRegion.NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers;
         var reachableCatchAndFinallyBlocks = reachableHandlerRegions.Where(x => x.FirstBlockOrdinal > currentTryCatchRegion.LastBlockOrdinal).SelectMany(x => x.Blocks(Cfg));
         // On the use of `EnclosingRegion` below: Other than a finally region, a `Catch` region also acts as a `LocalLifetime` region.
@@ -257,13 +257,13 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         blockPredecessors[destination.Ordinal].Add(source);
     }
 
-    private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegion finallyRegion)
+    private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegionWrapper finallyRegion)
     {
         var tryRegion = finallyRegion.EnclosingRegion.NestedRegion(ControlFlowRegionKind.Try);
         return tryRegion.Blocks(Cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
     }
 
-    private static IEnumerable<ControlFlowRegion> CatchOrFilterRegions(ControlFlowRegion tryAndCatchRegion)
+    private static IEnumerable<ControlFlowRegionWrapper> CatchOrFilterRegions(ControlFlowRegionWrapper tryAndCatchRegion)
     {
         foreach (var region in tryAndCatchRegion.NestedRegions)
         {

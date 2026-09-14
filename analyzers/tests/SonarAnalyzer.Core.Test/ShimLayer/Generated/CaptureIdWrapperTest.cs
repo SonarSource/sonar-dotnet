@@ -51,7 +51,7 @@ public class CaptureIdWrapperTest
         nestedRegionA.CaptureIds.Single().GetHashCode().Should().Be(captureA.GetHashCode());
         nestedRegionA.CaptureIds.Single().Equals(captureA).Should().BeTrue();
 
-        CaptureIdWrapper FindCapture(ControlFlowRegion region, string expectedName)
+        CaptureIdWrapper FindCapture(ControlFlowRegionWrapper region, string expectedName)
         {
             var flowCapture = (IFlowCaptureReferenceOperation)cfg.Blocks[region.FirstBlockOrdinal].BranchValue.ChildOperations.Single();
             flowCapture.Syntax.ToString().Should().Be(expectedName);

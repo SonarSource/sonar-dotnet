@@ -93,7 +93,7 @@ public static partial class CfgSerializer
             }
         }
 
-        private void Visit(ControlFlowGraph cfg, ControlFlowRegion region)
+        private void Visit(ControlFlowGraph cfg, ControlFlowRegionWrapper region)
         {
             writer.WriteSubGraphStart(cfgIdProvider.Next(), SerializeRegion(region));
             foreach (var nested in region.NestedRegions)
@@ -140,7 +140,7 @@ public static partial class CfgSerializer
             return ret;
         }
 
-        private static string SerializeRegion(ControlFlowRegion region)
+        private static string SerializeRegion(ControlFlowRegionWrapper region)
         {
             var sb = new StringBuilder();
             sb.Append(region.Kind.ToString()).Append(" region");

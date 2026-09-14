@@ -38,14 +38,14 @@ public class ControlFlowGraph
     private ImmutableArray<IMethodSymbol> localFunctions;
     private ControlFlowGraph parent;
     private IOperation originalOperation;
-    private ControlFlowRegion root;
+    private ControlFlowRegionWrapper? root;
 
     public static bool IsAvailable { get; }
     public ImmutableArray<BasicBlock> Blocks => BlocksProperty.ReadCached(instance, BasicBlock.Wrap, ref blocks);
     public ImmutableArray<IMethodSymbol> LocalFunctions => LocalFunctionsProperty.ReadCached<IMethodSymbol>(instance, ref localFunctions);
     public IOperation OriginalOperation => OriginalOperationProperty.ReadCached(instance, ref originalOperation);
     public ControlFlowGraph Parent => ParentProperty.ReadCached(instance, Wrap, ref parent);
-    public ControlFlowRegion Root => RootProperty.ReadCached(instance, ControlFlowRegion.Wrap, ref root);
+    public ControlFlowRegionWrapper Root => RootProperty.ReadCached(instance, ControlFlowRegionWrapper.From, ref root);
     public BasicBlock EntryBlock => Blocks[Root.FirstBlockOrdinal];
     public BasicBlock ExitBlock => Blocks[Root.LastBlockOrdinal];
 
