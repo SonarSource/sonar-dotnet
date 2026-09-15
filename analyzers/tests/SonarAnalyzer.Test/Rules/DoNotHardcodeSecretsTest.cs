@@ -42,6 +42,12 @@ public class DoNotHardcodeSecretsTest
         builderVB.AddPaths("DoNotHardcodeSecrets.vb").Verify();
 
     [TestMethod]
+    public void DoNotHardcodeSecrets_RandomnessSensibilityFromSonarLintXml_CS() => // NET-4546 The parameter was ignored, because ParameterLoader did not convert PropertyType.Float
+        builderCS.AddPaths("DoNotHardcodeSecrets.RandomnessSensibility.cs")
+            .WithAdditionalFilePath(CreateSonarLintXmlWithRandomnessSensibility("5.2"))
+            .Verify();
+
+    [TestMethod]
     public void DoNotHardcodeSecrets_WebConfig_CS() =>
         DoNotHardcodeCredentials_ExternalFiles(builderCS, "WebConfig", "*.config");
 
@@ -75,5 +81,18 @@ public class DoNotHardcodeSecretsTest
             .WithAdditionalFilePath(AnalysisScaffolding.CreateSonarProjectConfigWithFilesToAnalyze(TestContext, paths))
             .AddAdditionalSourceFiles(paths)
             .Verify();
+    }
+
+    private string CreateSonarLintXmlWithRandomnessSensibility(string value)
+    {
+        List<SonarLintXmlRule> ruleParameters =
+        [
+            new()
+            {
+                Key = "S6418",
+                Parameters = [new() { Key = "randomnessSensibility", Value = value }]
+            }
+        ];
+        return AnalysisScaffolding.CreateSonarLintXml(TestContext, rulesParameters: ruleParameters);
     }
 }

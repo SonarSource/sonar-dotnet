@@ -24,6 +24,8 @@ public class LoggerMembersNamesShouldComplyTest
 {
     private static readonly VerifierBuilder Builder = new VerifierBuilder<LoggerMembersNamesShouldComply>();
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     [DataRow("log")]
     [DataRow("_log")]
@@ -54,124 +56,31 @@ public class LoggerMembersNamesShouldComplyTest
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_MicrosoftExtensionsLogging_CS() =>
-        Builder.AddSnippet("""
-            using System;
-            using Microsoft.Extensions.Logging;
-
-            public class Program
-            {
-                string mylogger;                        // Compliant
-
-                ILogger _log2;                          // Noncompliant {{Rename this field '_log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                ILogger<Program> mylog { get; set; }    // Noncompliant {{Rename this property 'mylog' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //               ^^^^^
-
-                ILogger myLogger, _Log2, _logger;
-                //      ^^^^^^^^ {{Rename this field 'myLogger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //                ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-            }
-            """)
+        Builder.AddPaths("LoggerMembersNamesShouldComply.MicrosoftExtensionsLogging.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_Serilog_CS() =>
-        Builder.AddSnippet("""
-            using Serilog;
-
-            public class Program
-            {
-                string mylogger;                        // Compliant
-                ILogger _Logger;                        // Compliant
-                ILogger log;                            // Compliant
-
-                ILogger _log2;                          // Noncompliant {{Rename this field '_log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                ILogger mylog { get; set; }             // Noncompliant {{Rename this property 'mylog' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //      ^^^^^
-
-                ILogger myLogger, _Log2, _logger;
-                //      ^^^^^^^^ {{Rename this field 'myLogger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //                ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-            }
-            """)
+        Builder.AddPaths("LoggerMembersNamesShouldComply.Serilog.cs")
             .AddReferences(NuGetMetadataReference.Serilog())
             .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_NLog_CS() =>
-        Builder.AddSnippet("""
-            using NLog;
-
-            public class Program
-            {
-                string mylogger;                        // Compliant
-                ILogger _Logger;                        // Compliant
-                ILoggerBase log;                        // Compliant
-
-                MyLogger _log2;                         // Noncompliant {{Rename this field '_log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                ILoggerBase my_logger;                  // Noncompliant {{Rename this field 'my_logger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                Logger mylog { get; set; }              // Noncompliant {{Rename this property 'mylog' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //     ^^^^^
-
-                ILogger myLogger, _Log2, _logger;
-                //      ^^^^^^^^ {{Rename this field 'myLogger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //                ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-            }
-            public class MyLogger : Logger { }
-            """)
+        Builder.AddPaths("LoggerMembersNamesShouldComply.NLog.cs")
             .AddReferences(NuGetMetadataReference.NLog())
             .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_log4net_CS() =>
-        Builder.AddSnippet("""
-            using log4net;
-            using log4net.Core;
-            using log4net.Repository.Hierarchy;
-
-            public class Program
-            {
-                string mylogger;                        // Compliant
-                ILog log;                               // Compliant
-                ILogger _Logger;                        // Compliant
-                Logger _log;                            // Compliant
-
-                ILogger _log2;                          // Noncompliant {{Rename this field '_log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                ILog my_logger;                         // Noncompliant {{Rename this field 'my_logger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                Logger mylog { get; set; }              // Noncompliant {{Rename this property 'mylog' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //     ^^^^^
-
-                MyLogger myLogger, _Log2, _logger;
-                //       ^^^^^^^^ {{Rename this field 'myLogger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //                 ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-            }
-            public class MyLogger : Logger
-            {
-                public MyLogger(string name) : base(name) { }
-            }
-            """)
+        Builder.AddPaths("LoggerMembersNamesShouldComply.log4net.cs")
             .AddReferences(NuGetMetadataReference.Log4Net(TestConstants.NuGetLatestVersion, "netstandard2.0"))
             .Verify();
 
     [TestMethod]
     public void LoggerMembersNamesShouldComply_CastleCore_CS() =>
-        Builder.AddSnippet("""
-            using Castle.Core.Logging;
-
-            public class Program
-            {
-                string mylogger;                        // Compliant
-                ILogger log;                            // Compliant
-
-                ILogger _log2;                          // Noncompliant {{Rename this field '_log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                ILogger mylog { get; set; }             // Noncompliant {{Rename this property 'mylog' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //      ^^^^^
-
-                ILogger myLogger, _Log2, _logger;
-                //      ^^^^^^^^ {{Rename this field 'myLogger' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-                //                ^^^^^ @-1 {{Rename this field '_Log2' to match the regular expression '^_?[Ll]og(ger)?$'.}}
-            }
-            """)
+        Builder.AddPaths("LoggerMembersNamesShouldComply.CastleCore.cs")
             .AddReferences(NuGetMetadataReference.CastleCore())
             .Verify();
 
@@ -179,16 +88,31 @@ public class LoggerMembersNamesShouldComplyTest
     public void LoggerMembersNamesShouldComply_Parameterized_CS() =>
         new VerifierBuilder()
             .AddAnalyzer(() => new LoggerMembersNamesShouldComply { Format = "^chocolate$" })
-            .AddSnippet("""
-                using System;
-                using Microsoft.Extensions.Logging;
-
-                public class Program
-                {
-                    ILogger chocolate;                      // Compliant
-                    ILogger running;                        // Noncompliant {{Rename this field 'running' to match the regular expression '^chocolate$'.}}
-                }
-                """)
+            .AddPaths("LoggerMembersNamesShouldComply.Parameterized.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
+
+    [TestMethod]
+    public void LoggerMembersNamesShouldComply_FormatFromSonarLintXml_CS() => // NET-4546 The 'format' parameter was ignored, because ParameterLoader did not convert PropertyType.RegularExpression
+        Builder.AddPaths("LoggerMembersNamesShouldComply.FormatFromSonarLintXml.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .WithAdditionalFilePath(CreateSonarLintXmlWithFormat("^chocolate$"))
+            .Verify();
+
+    [TestMethod]
+    public void LoggerMembersNamesShouldComply_InvalidFormatFromSonarLintXml_FallsBackToDefault_CS() =>
+        Builder.AddPaths("LoggerMembersNamesShouldComply.InvalidFormatFromSonarLintXml.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .WithAdditionalFilePath(CreateSonarLintXmlWithFormat("^m?Logger($")) // Unbalanced parenthesis, the analysis should not fail
+            .Verify();
+
+    private string CreateSonarLintXmlWithFormat(string format) =>
+        AnalysisScaffolding.CreateSonarLintXml(TestContext, rulesParameters:
+        [
+            new()
+            {
+                Key = "S6669",
+                Parameters = [new() { Key = "format", Value = format }]
+            }
+        ]);
 }

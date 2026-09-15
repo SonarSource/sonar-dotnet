@@ -40,16 +40,6 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat, isEnabledByDefault: false);
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-        ImmutableArray.Create(Rule);
-
-    [RuleParameter("format", PropertyType.RegularExpression, "Regular expression used to check the field or property names against", DefaultFormat)]
-    public string Format { get; set; } = DefaultFormat;
-
-    private bool UsesDefaultFormat => Format == DefaultFormat;
-
-    private Regex NameRegex { get; set; }
-
     private static readonly ImmutableArray<KnownType> Loggers = ImmutableArray.Create(
         KnownType.Microsoft_Extensions_Logging_ILogger,
         KnownType.Microsoft_Extensions_Logging_ILogger_TCategoryName,
@@ -70,34 +60,77 @@ public sealed class LoggerMembersNamesShouldComply : ParametrizedDiagnosticAnaly
         KnownAssembly.CastleCore
     ];
 
+    // NET-4105: assumes a single SonarLint.xml for this instance's lifetime - not thread-safe, and concurrently
+    // analyzed compilations with a different "format" override will clobber this field.
+    private Regex nameRegex;
+
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+
+    [RuleParameter("format", PropertyType.RegularExpression, "Regular expression used to check the field or property names against", DefaultFormat)]
+    public string Format { get; set; } = DefaultFormat;
+
+    private bool UsesDefaultFormat => Format == DefaultFormat;
+
+    // The format the members were actually matched against, which is the default one when the configured regex could not be compiled.
+    private string EffectiveFormat => nameRegex is null ? DefaultFormat : Format;
+
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
-        {
-            if (cc.Compilation.ReferencesAny(Assemblies))
             {
-                NameRegex = UsesDefaultFormat ? null : new(Format, RegexOptions.Compiled, Constants.DefaultRegexTimeout);
-
-                cc.RegisterNodeAction(c =>
+                if (cc.Compilation.ReferencesAny(Assemblies))
                 {
-                    foreach (var memberData in Declarations(c.Node))
-                    {
-                        if (!MatchesFormat(memberData.Name)
-                            && c.Model.GetDeclaredSymbol(memberData.Member).SymbolType is { } type
-                            && type.DerivesOrImplementsAny(Loggers))
+                    UpdateNameRegex();
+
+                    cc.RegisterNodeAction(c =>
                         {
-                            c.ReportIssue(Rule, memberData.Location, memberData.MemberType, memberData.Name, Format);
-                        }
-                    }
-                },
-                SyntaxKind.FieldDeclaration,
-                SyntaxKind.PropertyDeclaration);
-            }
-        });
+                            foreach (var memberData in Declarations(c.Node))
+                            {
+                                if (!MatchesFormat(memberData.Name)
+                                    && c.Model.GetDeclaredSymbol(memberData.Member).SymbolType is { } type
+                                    && type.DerivesOrImplementsAny(Loggers))
+                                {
+                                    c.ReportIssue(Rule, memberData.Location, memberData.MemberType, memberData.Name, EffectiveFormat);
+                                }
+                            }
+                        },
+                        SyntaxKind.FieldDeclaration,
+                        SyntaxKind.PropertyDeclaration);
+                }
+            });
+
+    // Regex.ToString() returns the pattern it was built from, so the regex is only rebuilt when "format" actually changed
+    // since the previous compilation start.
+    private void UpdateNameRegex()
+    {
+        if (UsesDefaultFormat)
+        {
+            nameRegex = null;
+        }
+        else if (nameRegex?.ToString() != Format)
+        {
+            nameRegex = CreateRegex(Format);
+        }
+    }
+
+    // Returns null for an invalid user-provided pattern, so that analysis falls back to the default names instead of failing with AD0001.
+    // RegexOptions.Compiled is deliberately not used: the emitted IL is never reclaimed on .NET Framework, so the compilation cost
+    // would outweigh the matching gain on these short member names.
+    private static Regex CreateRegex(string format)
+    {
+        try
+        {
+            return new(format, RegexOptions.None, Constants.DefaultRegexTimeout);
+        }
+        catch (ArgumentException)
+        {
+            return null;
+        }
+    }
 
     private bool MatchesFormat(string name) =>
-        UsesDefaultFormat
-        ? DefaultAllowedNames.Contains(name) // for performance, if the user doesn't change the regex, we can use a hashtable lookup
-        : NameRegex.SafeIsMatch(name);
+        nameRegex is null
+            ? DefaultAllowedNames.Contains(name) // for performance, if the user doesn't change the regex, we can use a hashtable lookup
+            : nameRegex.SafeIsMatch(name);
 
     private static IEnumerable<MemberData> Declarations(SyntaxNode node)
     {

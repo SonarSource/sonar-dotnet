@@ -32,14 +32,10 @@ public class ParameterLoaderTest
     [DataRow("path//SonarLint.xmla")] // different extension
     public void SetParameterValues_WithInvalidSonarLintPath_DoesNotPopulateParameters(string filePath)
     {
-        // Arrange
         var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml")));
         var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.Maximum.Should().Be(3); // Default value
     }
 
@@ -48,109 +44,128 @@ public class ParameterLoaderTest
     [DataRow(@"a\SonarLint.xml")]
     public void SetParameterValues_WithValidSonarLintPath_PopulatesProperties(string filePath)
     {
-        // Arrange
         var compilation = CreateCompilationWithOption(filePath, SourceText.From(File.ReadAllText(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml")));
         var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.Maximum.Should().Be(1); // Value from the xml file
     }
 
     [TestMethod]
     public void SetParameterValues_SonarLintFileWithIntParameterType_PopulatesProperties()
     {
-        // Arrange
         var compilation = CreateCompilationWithOption(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml");
         var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.Maximum.Should().Be(1); // Value from the xml file
     }
 
     [TestMethod]
     public void SetParameterValues_SonarLintFileWithStringParameterType_PopulatesProperty()
     {
-        // Arrange
         var parameterValue = "1";
         var filePath = GenerateSonarLintXmlWithParametrizedRule("S2342", "flagsAttributeFormat", parameterValue);
         var compilation = CreateCompilationWithOption(filePath);
         var analyzer = new EnumNameShouldFollowRegex(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.FlagsEnumNamePattern.Should().Be(parameterValue); // value from XML file
+    }
+
+    [TestMethod]
+    public void SetParameterValues_SonarLintFileWithTextParameterType_PopulatesProperty()
+    {
+        var parameterValue = "// Copyright (c) Contoso";
+        var filePath = GenerateSonarLintXmlWithParametrizedRule("S1451", "headerFormat", parameterValue);
+        var compilation = CreateCompilationWithOption(filePath);
+        var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
+
+        ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
+        analyzer.HeaderFormat.Should().Be(parameterValue); // value from XML file
+    }
+
+    [TestMethod]
+    public void SetParameterValues_SonarLintFileWithRegularExpressionParameterType_PopulatesProperty()
+    {
+        var parameterValue = "^m?Logger$";
+        var filePath = GenerateSonarLintXmlWithParametrizedRule("S6669", "format", parameterValue);
+        var compilation = CreateCompilationWithOption(filePath);
+        var analyzer = new LoggerMembersNamesShouldComply(); // Cannot use mock because we use reflection to find properties.
+
+        ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
+        analyzer.Format.Should().Be(parameterValue); // value from XML file
+    }
+
+    [TestMethod]
+    public void SetParameterValues_SonarLintFileWithFloatParameterType_PopulatesProperty()
+    {
+        var filePath = GenerateSonarLintXmlWithParametrizedRule("S6418", "randomnessSensibility", "2.5");
+        var compilation = CreateCompilationWithOption(filePath);
+        var analyzer = new DoNotHardcodeSecrets(); // Cannot use mock because we use reflection to find properties.
+
+        ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
+        analyzer.RandomnessSensibility.Should().Be(2.5); // value from XML file
+    }
+
+    [TestMethod]
+    [DataRow("fooBar")]
+    [DataRow("2,5")] // Comma decimal separator is not invariant culture
+    public void SetParameterValues_SonarLintFileWithStringInsteadOfFloatParameterType_DoesNotPopulateProperty(string parameterValue)
+    {
+        var filePath = GenerateSonarLintXmlWithParametrizedRule("S6418", "randomnessSensibility", parameterValue);
+        var compilation = CreateCompilationWithOption(filePath);
+        var analyzer = new DoNotHardcodeSecrets(); // Cannot use mock because we use reflection to find properties.
+
+        ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
+        analyzer.RandomnessSensibility.Should().Be(3); // Default value
     }
 
     [TestMethod]
     public void SetParameterValues_SonarLintFileWithBooleanParameterType_PopulatesProperty()
     {
-        // Arrange
         var parameterValue = true;
         var filePath = GenerateSonarLintXmlWithParametrizedRule("S1451", "isRegularExpression", parameterValue.ToString());
         var compilation = CreateCompilationWithOption(filePath);
         var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.IsRegularExpression.Should().Be(parameterValue); // value from XML file
     }
 
     [TestMethod]
     public void SetParameterValues_SonarLintFileWithoutRuleParameters_DoesNotPopulateProperties()
     {
-        // Arrange
         var compilation = CreateCompilationWithOption(@"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml");
         var analyzer = new LineLength(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.Maximum.Should().Be(200); // Default value
     }
 
     [TestMethod]
     public void SetParameterValues_CalledTwiceAfterChangeInConfigFile_UpdatesProperties()
     {
-        // Arrange
         var maxValue = 1;
-        var ruleParameters = new List<SonarLintXmlRule>()
-        {
-            new SonarLintXmlRule()
+        List<SonarLintXmlRule> ruleParameters =
+        [
+            new()
             {
                 Key = "S1067",
-                Parameters = new List<SonarLintXmlKeyValuePair>()
-                {
-                    new SonarLintXmlKeyValuePair()
-                    {
-                        Key = "max",
-                        Value = maxValue.ToString()
-                    }
-                }
+                Parameters = [new() { Key = "max", Value = maxValue.ToString() }]
             }
-        };
+        ];
         var sonarLintXml = AnalysisScaffolding.GenerateSonarLintXmlContent(rulesParameters: ruleParameters);
         var filePath = TestFiles.WriteFile(TestContext, "SonarLint.xml", sonarLintXml);
         var compilation = CreateCompilationWithOption(filePath);
         var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
         analyzer.Maximum.Should().Be(maxValue);
 
         // Modify the in-memory additional file
         maxValue = 42;
-        ruleParameters.First().Parameters.First().Value = maxValue.ToString();
+        ruleParameters[0].Parameters[0].Value = maxValue.ToString();
         var modifiedSonarLintXml = AnalysisScaffolding.GenerateSonarLintXmlContent(rulesParameters: ruleParameters);
         var modifiedFilePath = TestFiles.WriteFile(TestContext, "SonarLint.xml", modifiedSonarLintXml);
         compilation = CreateCompilationWithOption(modifiedFilePath);
@@ -165,47 +180,65 @@ public class ParameterLoaderTest
     [DataRow(@"<?xml version=""1.0"" encoding=""UTF - 8""?><AnalysisInput><Settings>")]
     public void SetParameterValues_WithMalformedXml_DoesNotPopulateProperties(string sonarLintXmlContent)
     {
-        // Arrange
         var compilation = CreateCompilationWithOption(@"fakePath\SonarLint.xml", SourceText.From(sonarLintXmlContent));
         var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.Maximum.Should().Be(3); // Default value
     }
 
     [TestMethod]
     public void SetParameterValues_SonarLintFileWithStringInsteadOfIntParameterType_PopulatesProperty()
     {
-        // Arrange
         var parameterValue = "fooBar";
         var filePath = GenerateSonarLintXmlWithParametrizedRule("S1067", "max", parameterValue);
         var compilation = CreateCompilationWithOption(filePath);
         var analyzer = new ExpressionComplexity(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.Maximum.Should().Be(3); // Default value
     }
 
     [TestMethod]
     public void SetParameterValues_SonarLintFileWithStringInsteadOfBooleanParameterType_PopulatesProperty()
     {
-        // Arrange
         var parameterValue = "fooBar";
         var filePath = GenerateSonarLintXmlWithParametrizedRule("S1451", "isRegularExpression", parameterValue);
         var compilation = CreateCompilationWithOption(filePath);
         var analyzer = new CheckFileLicense(); // Cannot use mock because we use reflection to find properties.
 
-        // Act
         ParameterLoader.SetParameterValues(analyzer, compilation.SonarLintXml());
-
-        // Assert
         analyzer.IsRegularExpression.Should().BeFalse(); // Default value
+    }
+
+    [TestMethod]
+    public void PropertyType_AllMembersAreConvertedByParameterLoader()
+    {
+        // Guard: every PropertyType member needs a matching case in ParameterLoader.TryConvertToParameterType, otherwise
+        // overrides of that type are silently ignored (NET-4546). When adding a member, add a sample value here.
+        var samples = new Dictionary<PropertyType, string>
+        {
+            { PropertyType.String, "a string" },
+            { PropertyType.Text, "a text" },
+            { PropertyType.Boolean, "true" },
+            { PropertyType.Integer, "42" },
+            { PropertyType.Float, "2.5" },
+            { PropertyType.RegularExpression, "^a$" },
+        };
+
+        foreach (PropertyType type in Enum.GetValues(typeof(PropertyType))) // Enum.GetValues<PropertyType>() is not available on net48
+        {
+            samples.Should().ContainKey(type, "every PropertyType needs a sample value and a ParameterLoader case");
+            ParameterLoader.TryConvertToParameterType(samples[type], type, out _).Should().BeTrue("{0} must be converted by ParameterLoader", type);
+        }
+    }
+
+    [TestMethod]
+    public void TryConvertToParameterType_WithUnknownParameterType_Throws()
+    {
+        var convert = () => ParameterLoader.TryConvertToParameterType("a value", (PropertyType)42, out _);
+
+        convert.Should().Throw<UnexpectedValueException>().WithMessage("Unexpected type value: 42");
     }
 
     private static SonarCompilationReportingContext CreateCompilationWithOption(string filePath, SourceText text = null)
@@ -220,21 +253,14 @@ public class ParameterLoaderTest
 
     private string GenerateSonarLintXmlWithParametrizedRule(string ruleId, string key, string value)
     {
-        var ruleParameters = new List<SonarLintXmlRule>()
-        {
-            new SonarLintXmlRule()
+        List<SonarLintXmlRule> ruleParameters =
+        [
+            new()
             {
                 Key = ruleId,
-                Parameters = new List<SonarLintXmlKeyValuePair>()
-                {
-                    new SonarLintXmlKeyValuePair()
-                    {
-                        Key = key,
-                        Value = value
-                    }
-                }
+                Parameters = [new() { Key = key, Value = value }]
             }
-        };
+        ];
         return AnalysisScaffolding.CreateSonarLintXml(TestContext, rulesParameters: ruleParameters);
     }
 }

@@ -57,31 +57,21 @@ internal static class ParameterLoader
         }
     }
 
-    private static bool TryConvertToParameterType(string parameter, PropertyType type, out object result)
+    internal static bool TryConvertToParameterType(string parameter, PropertyType type, out object result)
     {
-        if (parameter is null)
-        {
-            result = null;
-            return false;
-        }
-        switch (type)
-        {
-            case PropertyType.Text:
-            case PropertyType.String:
-                result = parameter;
-                return true;
-
-            case PropertyType.Integer when int.TryParse(parameter, NumberStyles.None, CultureInfo.InvariantCulture, out var parsedInt):
-                result = parsedInt;
-                return true;
-
-            case PropertyType.Boolean when bool.TryParse(parameter, out var parsedBool):
-                result = parsedBool;
-                return true;
-
-            default:
-                result = null;
-                return false;
-        }
+        result = parameter is null ? null : ConvertToParameterType(parameter, type);
+        return result is not null;
     }
+
+    // Returns null when the user-provided value cannot be parsed, so that the property keeps its default value.
+    // An unhandled PropertyType is a bug on our side, so it throws instead of silently ignoring the parameter (NET-4546).
+    private static object ConvertToParameterType(string parameter, PropertyType type) =>
+        type switch
+        {
+            PropertyType.String or PropertyType.Text or PropertyType.RegularExpression => parameter,
+            PropertyType.Integer => int.TryParse(parameter, NumberStyles.None, CultureInfo.InvariantCulture, out var parsedInt) ? parsedInt : null,
+            PropertyType.Float => double.TryParse(parameter, NumberStyles.Float, CultureInfo.InvariantCulture, out var parsedDouble) ? parsedDouble : null,
+            PropertyType.Boolean => bool.TryParse(parameter, out var parsedBool) ? parsedBool : null,
+            _ => throw new UnexpectedValueException(nameof(type), type)
+        };
 }
