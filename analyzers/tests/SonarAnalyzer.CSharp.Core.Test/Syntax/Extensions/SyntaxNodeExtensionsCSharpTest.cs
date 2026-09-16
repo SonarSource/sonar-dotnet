@@ -20,6 +20,8 @@ namespace SonarAnalyzer.Test.Syntax.Extensions;
 [TestClass]
 public class SyntaxNodeExtensionsCSharpTest
 {
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void NameIs()
     {
@@ -92,6 +94,9 @@ public class SyntaxNodeExtensionsCSharpTest
     [DataRow("""[Priority(42)] void M() { }""")]
     [DataRow("""[Priority(Order = 42)] void M() { }""")]
     [DataRow("""void M(int i = 42) { }""")]
+    [DataRow("""enum NestedEnum { A = 42 }""")]
+    [DataRow("""event EventHandler NestedEvent = (s, e) => { var x = 42; };""")]
+    [DataRow("""class NestedBase(int i); class NestedDerived() : NestedBase(42);""")]
     public void ChangeSyntaxElement_ReturnsNewNodeAndModel(string expressionScope)
     {
         var code = $$"""
@@ -118,6 +123,46 @@ public class SyntaxNodeExtensionsCSharpTest
         newLiteral.Token.ValueText.Should().Be("-42");
         model.GetConstantValue(literal).Value.Should().Be(42);
         newModel.GetConstantValue(newLiteral).Value.Should().Be(-42);
+    }
+
+    [TestMethod]
+    public void ChangeSyntaxElement_TopLevelStatement()
+    {
+        const string code = "int i = 42;";
+        var (tree, model) = TestCompiler.Compile(code, false, AnalyzerLanguage.CSharp, outputKind: OutputKind.ConsoleApplication);
+        var literal = tree.GetRoot(TestContext.CancellationToken).DescendantNodes().OfType<LiteralExpressionSyntax>().Single();
+        var newLiteral = literal.ChangeSyntaxElement(literal.WithToken(SyntaxFactory.Literal(-42)), model, out var newModel);
+        newLiteral.Should().NotBeNull();
+        newModel.Should().NotBeNull();
+        newLiteral.Token.ValueText.Should().Be("-42");
+        model.GetConstantValue(literal, TestContext.CancellationToken).Value.Should().Be(42);
+        newModel.GetConstantValue(newLiteral, TestContext.CancellationToken).Value.Should().Be(-42);
+    }
+
+    // Guards the EqualsValueClauseSyntax allow-list scoping: TryGetSpeculativeSemanticModel(EqualsValueClauseSyntax) doesn't
+    // support a local variable's own initializer clause (it returns false), so a local's declaration must NOT match here -
+    // the ancestor search has to keep climbing to the enclosing method body, which redoes real flow analysis over it instead.
+    [TestMethod]
+    public void ChangeSyntaxElement_LocalDeclarationKeepsNarrowing()
+    {
+        var code = """
+            #nullable enable
+            public class Sample
+            {
+                public void M(string? s)
+                {
+                    if (s != null)
+                    {
+                        var x = s;
+                    }
+                }
+            }
+            """;
+        var (tree, model) = TestCompiler.CompileCS(code);
+        var s = tree.GetRoot(TestContext.CancellationToken).DescendantNodes().OfType<IdentifierNameSyntax>().Last(x => x.Identifier.ValueText == "s");
+        var newS = s.ChangeSyntaxElement(s, model, out var newModel);
+        newS.Should().NotBeNull();
+        newModel.GetTypeInfo(newS, TestContext.CancellationToken).Nullability.FlowState.Should().Be(Microsoft.CodeAnalysis.NullableFlowState.NotNull);
     }
 
     [TestMethod]

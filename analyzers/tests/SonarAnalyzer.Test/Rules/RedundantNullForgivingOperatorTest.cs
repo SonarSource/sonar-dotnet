@@ -83,6 +83,71 @@ public class RedundantNullForgivingOperatorTest
     }
 
     [TestMethod]
+    public void RedundantNullForgivingOperator_TopLevelStatement_AwaitedReceiver_Narrowed() =>
+        AwaitedReceiverVerifier("""
+            if (service != null)
+            {
+                await service!.RunAsync(); // Noncompliant
+            }
+            """).Verify();
+
+    [TestMethod]
+    public void RedundantNullForgivingOperator_TopLevelStatement_AwaitedReceiver_NotNarrowed() =>
+        AwaitedReceiverVerifier("await service!.RunAsync();").VerifyNoIssues();
+
+    [TestMethod]
+    public void RedundantNullForgivingOperator_RecordPrimaryConstructorBaseArgument() =>
+        builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet("""
+            #nullable enable
+            public record Base(string Name);
+            public record Derived(string S) : Base(S!); // Noncompliant
+            """).Verify();
+
+    [TestMethod]
+    public void RedundantNullForgivingOperator_EventFieldInitializer() =>
+        builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet("""
+            #nullable enable
+            using System;
+            public class Sample
+            {
+                private static readonly EventHandler Handler = (_, _) => { };
+                public event EventHandler MyEvent = Handler!; // Noncompliant
+            }
+            """).Verify();
+
+    // FN: the primary speculation inside an attribute argument yields FlowState.None, unlike a parameter default
+    // (see the test below), so the redundancy check never fires: https://sonarsource.atlassian.net/browse/NET-4589
+    [TestMethod]
+    public void RedundantNullForgivingOperator_AttributeArgument_ConstReference_FN() =>
+        builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet("""
+            #nullable enable
+            using System;
+            public class PriorityAttribute : Attribute
+            {
+                public PriorityAttribute(string name) { }
+            }
+            public class Sample
+            {
+                private const string Value = "x";
+                [Priority(Value!)] // FN
+                public void Method() { }
+            }
+            """).VerifyNoIssues();
+
+    // Regression guard: a parameter default is a constant-expression position, so confirmation reports FlowState.None
+    // rather than MaybeNull here - that must not be treated as a contradiction.
+    [TestMethod]
+    public void RedundantNullForgivingOperator_ParameterDefault_ConstReference() =>
+        builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet("""
+            #nullable enable
+            public class Sample
+            {
+                private const string Value = "x";
+                public void Method(string s = Value!) { } // Noncompliant
+            }
+            """).Verify();
+
+    [TestMethod]
     [DataRow(Microsoft.CodeAnalysis.NullableContextOptions.Enable, true)]
     [DataRow(Microsoft.CodeAnalysis.NullableContextOptions.Warnings, true)]
     [DataRow(Microsoft.CodeAnalysis.NullableContextOptions.Disable, false)]
@@ -299,6 +364,25 @@ public class RedundantNullForgivingOperatorTest
         {
             verifier.Verify();
         }
+    }
+
+    private VerifierBuilder AwaitedReceiverVerifier(string body)
+    {
+        var code = $$"""
+            #nullable enable
+            using System.Threading.Tasks;
+
+            IService? service = GetService();
+            {{body}}
+
+            static IService? GetService() => null;
+
+            interface IService
+            {
+                Task RunAsync();
+            }
+            """;
+        return builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet(code).WithTopLevelStatements();
     }
 
     private static string LibrarySnippet(bool annotated) =>

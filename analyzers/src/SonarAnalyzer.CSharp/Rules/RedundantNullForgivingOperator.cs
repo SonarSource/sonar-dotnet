@@ -56,19 +56,20 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
             return false;
         }
 
-        // GetSpeculativeTypeInfo() wrongly reports NotNull when "suppression" is the receiver of a chain that is directly awaited,
-        // e.g. "await service!.RunAsync()", even without any narrowing. We can't trust the speculative result in that shape.
-        // This is a known limitation of speculative binding: https://github.com/dotnet/roslyn/issues/35037
-        // This bail-out causes an FN when the receiver was genuinely narrowed: https://sonarsource.atlassian.net/browse/NET-4415
-        var chainRoot = suppression.ChainRoot;
-        if (chainRoot is { Parent: AwaitExpressionSyntax { Expression: not null } })
-        {
-            return false;
-        }
-
         var typeInfo = model.GetSpeculativeTypeInfo(suppression.Operand.SpanStart, suppression.Operand, SpeculativeBindingOption.BindAsExpression);
-        return typeInfo.Nullability is { FlowState: NullableFlowState.NotNull } && !IsOblivious(model, suppression.Operand) && !HasNestedNullableAnnotation(typeInfo.Type);
+        return typeInfo.Nullability is { FlowState: NullableFlowState.NotNull }
+            && !IsOblivious(model, suppression.Operand)
+            && !HasNestedNullableAnnotation(typeInfo.Type)
+            && !ContradictedByWholeContainerSpeculation(model, suppression);
     }
+
+    // GetSpeculativeTypeInfo() above only rebinds the isolated operand, missing surrounding control flow, so confirm by
+    // re-speculating the whole enclosing member instead: https://github.com/dotnet/roslyn/issues/35037
+    // Only a real MaybeNull contradicts the cheap check; FlowState.None (no flow info, e.g. in a constant-expression
+    // position like an attribute argument or parameter default) must fall back to trusting it.
+    private static bool ContradictedByWholeContainerSpeculation(SemanticModel model, PostfixUnaryExpressionSyntax suppression) =>
+        suppression.ChangeSyntaxElement(suppression.Operand, model, out var speculativeModel) is { } replaced
+        && speculativeModel?.GetTypeInfo(replaced).Nullability is { FlowState: NullableFlowState.MaybeNull };
 
     // Oblivious members (no nullable annotation, e.g. "#nullable disable" or an unannotated TFM) default to NotNull
     // without the compiler ever proving it, so we check the member's own declared annotation instead of trusting that.

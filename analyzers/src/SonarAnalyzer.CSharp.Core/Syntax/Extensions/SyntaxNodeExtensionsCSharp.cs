@@ -618,6 +618,10 @@ public static class SyntaxNodeExtensionsCSharp
     /// This model can then be used to analyze the new syntax element within the context of the new tree. Use the <paramref name="newModel"/>
     /// and the returned <typeparamref name="T"/> for semantic queries.
     /// </summary>
+    /// <remarks>
+    /// Warning: this reparses and rebinds the enclosing method/global-statement (or forks the whole tree for global statements) on every
+    /// call. Make sure to call it sparingly.
+    /// </remarks>
     /// <typeparam name="T">The node type to replace.</typeparam>
     /// <param name="originalNode">The node of the tree associated with the <paramref name="originalModel"/>.</param>
     /// <param name="newNode">The replacement, constructed via <see cref="SyntaxFactory"/> or similar methods.</param>
@@ -629,18 +633,12 @@ public static class SyntaxNodeExtensionsCSharp
         where T : SyntaxNode
     {
         newModel = null;
-        if (originalNode.AncestorsAndSelf().FirstOrDefault(x => x is BaseMethodDeclarationSyntax
-            or AccessorDeclarationSyntax
-            or EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: FieldDeclarationSyntax } } }
-            or EqualsValueClauseSyntax { Parent: PropertyDeclarationSyntax }
-            or EqualsValueClauseSyntax { Parent: ParameterSyntax }
-            or ArrowExpressionClauseSyntax
-            or ConstructorInitializerSyntax
-            or AttributeSyntax) is { } enclosingNode)
+        if (originalNode.AncestorsAndSelf().FirstOrDefault(IsSupportedContainer) is { } enclosingNode)
         {
             var annotation = new SyntaxAnnotation();
             var annotated = newNode.WithAdditionalAnnotations(annotation);
             var replaced = enclosingNode.ReplaceNode(originalNode, annotated);
+            var searchRoot = replaced;
             if (replaced switch
             {
                 BaseMethodDeclarationSyntax baseMethod => originalModel.TryGetSpeculativeSemanticModelForMethodBody(originalNode.SpanStart, baseMethod, out newModel),
@@ -649,13 +647,41 @@ public static class SyntaxNodeExtensionsCSharp
                 ArrowExpressionClauseSyntax arrow => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, arrow, out newModel),
                 ConstructorInitializerSyntax initializer => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, initializer, out newModel),
                 AttributeSyntax attribute => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, attribute, out newModel),
+                GlobalStatementSyntax globalStatement => ReplaceGlobalStatement(originalModel, enclosingNode, globalStatement, out newModel, out searchRoot),
+                { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary) =>
+                    originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, (PrimaryConstructorBaseTypeSyntaxWrapper)primary, out newModel),
                 _ => throw new NotSupportedException("Unreachable case. Make sure to handle all node kinds from the ancestors if."),
             })
             {
-                return replaced.GetAnnotatedNodes(annotation).FirstOrDefault() as T;
+                return searchRoot.GetAnnotatedNodes(annotation).FirstOrDefault() as T;
             }
         }
         return null;
+    }
+
+    private static bool IsSupportedContainer(SyntaxNode node) =>
+        node is BaseMethodDeclarationSyntax
+                or AccessorDeclarationSyntax
+                or ArrowExpressionClauseSyntax
+                or ConstructorInitializerSyntax
+                or AttributeSyntax
+                or GlobalStatementSyntax
+        || IsSupportedEqualsValueClause(node)
+        || PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node);
+
+    private static bool IsSupportedEqualsValueClause(SyntaxNode node) =>
+        node is EqualsValueClauseSyntax { Parent: VariableDeclaratorSyntax { Parent: VariableDeclarationSyntax { Parent: FieldDeclarationSyntax or EventFieldDeclarationSyntax } } }
+                or EqualsValueClauseSyntax { Parent: PropertyDeclarationSyntax }
+                or EqualsValueClauseSyntax { Parent: ParameterSyntax }
+                or EqualsValueClauseSyntax { Parent: EnumMemberDeclarationSyntax };
+
+    private static bool ReplaceGlobalStatement(SemanticModel originalModel, SyntaxNode originalStatement, GlobalStatementSyntax replacedStatement, out SemanticModel newModel, out SyntaxNode newRoot)
+    {
+        var originalTree = originalStatement.SyntaxTree;
+        var newTree = originalTree.WithRootAndOptions(originalTree.GetRoot().ReplaceNode(originalStatement, replacedStatement), originalTree.Options);
+        newModel = originalModel.Compilation.ReplaceSyntaxTree(originalTree, newTree).GetSemanticModel(newTree);
+        newRoot = newTree.GetRoot();
+        return true;
     }
 
     private readonly record struct PathPosition(int Index, int TupleLength);

@@ -252,7 +252,7 @@ public class NarrowedThenAwaited
     {
         if (service != null)
         {
-            await service!.RunAsync(); // Compliant, FN: narrowed here, but our await-chain opt-out doesn't check narrowing, see https://sonarsource.atlassian.net/browse/NET-4415
+            await service.RunAsync(); // Fixed
         }
     }
 }

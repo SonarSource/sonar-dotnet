@@ -92,7 +92,7 @@ public sealed class RedundantDeclaration : SonarDiagnosticAnalyzer
 
         var newParameterList = SyntaxFactory.ParameterList(SyntaxFactory.SeparatedList(lambda.ParameterList.Parameters.Select(x => SyntaxFactory.Parameter(x.Identifier))));
         if (lambda.ChangeSyntaxElement(lambda.WithParameterList(newParameterList), context.Model, out var newSemanticModel) is { } newLambda
-            && newSemanticModel.GetSymbolInfo(newLambda) is { Symbol: IMethodSymbol newSymbol }
+            && newSemanticModel?.GetSymbolInfo(newLambda) is { Symbol: IMethodSymbol newSymbol }
             && ParameterTypesMatch(symbol, newSymbol))
         {
             foreach (var parameter in lambda.ParameterList.Parameters)
