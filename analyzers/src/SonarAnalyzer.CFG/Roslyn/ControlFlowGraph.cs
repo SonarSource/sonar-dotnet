@@ -34,20 +34,20 @@ public class ControlFlowGraph
     private static readonly MethodInfo GetLocalFunctionControlFlowGraphMethod;
 
     private readonly object instance;
-    private ImmutableArray<BasicBlock> blocks;
+    private ImmutableArray<BasicBlockWrapper> blocks;
     private ImmutableArray<IMethodSymbol> localFunctions;
     private ControlFlowGraph parent;
     private IOperation originalOperation;
     private ControlFlowRegionWrapper? root;
 
     public static bool IsAvailable { get; }
-    public ImmutableArray<BasicBlock> Blocks => BlocksProperty.ReadCached(instance, BasicBlock.Wrap, ref blocks);
+    public ImmutableArray<BasicBlockWrapper> Blocks => BlocksProperty.ReadCached(instance, BasicBlockWrapper.From, ref blocks);
     public ImmutableArray<IMethodSymbol> LocalFunctions => LocalFunctionsProperty.ReadCached<IMethodSymbol>(instance, ref localFunctions);
     public IOperation OriginalOperation => OriginalOperationProperty.ReadCached(instance, ref originalOperation);
     public ControlFlowGraph Parent => ParentProperty.ReadCached(instance, Wrap, ref parent);
     public ControlFlowRegionWrapper Root => RootProperty.ReadCached(instance, ControlFlowRegionWrapper.From, ref root);
-    public BasicBlock EntryBlock => Blocks[Root.FirstBlockOrdinal];
-    public BasicBlock ExitBlock => Blocks[Root.LastBlockOrdinal];
+    public BasicBlockWrapper EntryBlock => Blocks[Root.FirstBlockOrdinal];
+    public BasicBlockWrapper ExitBlock => Blocks[Root.LastBlockOrdinal];
 
     static ControlFlowGraph()
     {

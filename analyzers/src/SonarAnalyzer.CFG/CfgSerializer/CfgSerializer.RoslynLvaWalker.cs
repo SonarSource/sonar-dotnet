@@ -16,7 +16,6 @@
  */
 
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
-using SonarAnalyzer.CFG.Roslyn;
 
 namespace SonarAnalyzer.CFG;
 
@@ -26,12 +25,10 @@ public static partial class CfgSerializer
     {
         private readonly RoslynLiveVariableAnalysis lva;
 
-        public RoslynLvaWalker(RoslynLiveVariableAnalysis lva, DotWriter writer, RoslynCfgIdProvider cfgIdProvider) : base(writer, cfgIdProvider)
-        {
+        public RoslynLvaWalker(RoslynLiveVariableAnalysis lva, DotWriter writer, RoslynCfgIdProvider cfgIdProvider) : base(writer, cfgIdProvider) =>
             this.lva = lva;
-        }
 
-        protected override void WriteEdges(BasicBlock block)
+        protected override void WriteEdges(BasicBlockWrapper block)
         {
             foreach (var predecessor in lva.BlockPredecessors[block.Ordinal].Where(x => !block.Predecessors.Any(y => y.Source == x)))
             {

@@ -44,7 +44,7 @@ public static class ControlFlowRegionWrapperExtensions
                 : region.EnclosingRegion.NestedRegions.Where(x => x.Kind != ControlFlowRegionKind.Try)
                     .Concat(region.EnclosingRegion(ControlFlowRegionKind.Try)?.ReachableHandlers ?? []);    // Use also all outer candidates for nested try/catch.
 
-        public IEnumerable<BasicBlock> Blocks(ControlFlowGraph cfg) =>
+        public IEnumerable<BasicBlockWrapper> Blocks(ControlFlowGraph cfg) =>
             cfg.Blocks.Where((_, i) => region.FirstBlockOrdinal <= i && i <= region.LastBlockOrdinal);
 
         public ControlFlowRegionWrapper? EnclosingRegionOrSelf(ControlFlowRegionKind kind)

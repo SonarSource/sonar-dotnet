@@ -25,7 +25,7 @@ public static partial class CfgSerializer
     private class RoslynCfgWalker
     {
         protected readonly DotWriter writer;
-        private readonly HashSet<BasicBlock> visited = [];
+        private readonly HashSet<BasicBlockWrapper> visited = [];
         private readonly RoslynCfgIdProvider cfgIdProvider;
         private readonly int cfgId;
 
@@ -43,7 +43,7 @@ public static partial class CfgSerializer
             writer.WriteGraphEnd();
         }
 
-        protected virtual void WriteEdges(BasicBlock block)
+        protected virtual void WriteEdges(BasicBlockWrapper block)
         {
             foreach (var predecessor in block.Predecessors)
             {
@@ -55,13 +55,13 @@ public static partial class CfgSerializer
                 var semantics = predecessor.Semantics == ControlFlowBranchSemantics.Regular ? null : predecessor.Semantics.ToString();
                 writer.WriteEdge(BlockId(predecessor.Source), BlockId(block), $"{semantics} {condition}".Trim());
             }
-            if (block.FallThroughSuccessor is { Destination: null })
+            if (block.FallThroughSuccessor is { WrappedInstance: not null, Destination.WrappedInstance: null })
             {
                 writer.WriteEdge(BlockId(block), "NoDestination_" + BlockId(block), block.FallThroughSuccessor.Semantics.ToString());
             }
         }
 
-        protected string BlockId(BasicBlock block) =>
+        protected string BlockId(BasicBlockWrapper block) =>
             $"cfg{cfgId}_block{block.Ordinal}";
 
         private void VisitSubGraph(ControlFlowGraph cfg, string title)
@@ -107,14 +107,14 @@ public static partial class CfgSerializer
             writer.WriteSubGraphEnd();
         }
 
-        private void Visit(BasicBlock block)
+        private void Visit(BasicBlockWrapper block)
         {
             visited.Add(block);
             WriteNode(block);
             WriteEdges(block);
         }
 
-        private void WriteNode(BasicBlock block)
+        private void WriteNode(BasicBlockWrapper block)
         {
             var header = block.Kind.ToString().ToUpperInvariant() + " #" + block.Ordinal;
             writer.WriteRecordNode(BlockId(block), header, block.Operations.SelectMany(SerializeOperation).Concat(SerializeBranchValue(block.BranchValue)).ToArray());

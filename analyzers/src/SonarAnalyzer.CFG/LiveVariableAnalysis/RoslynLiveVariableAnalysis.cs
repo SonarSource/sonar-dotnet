@@ -20,16 +20,16 @@ using SonarAnalyzer.CFG.Syntax.Utilities;
 
 namespace SonarAnalyzer.CFG.LiveVariableAnalysis;
 
-public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlock>
+public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<ControlFlowGraph, BasicBlockWrapper>
 {
     private readonly Dictionary<CaptureIdWrapper, List<ISymbol>> flowCaptures = [];
-    private readonly Dictionary<int, List<BasicBlock>> blockPredecessors = [];
-    private readonly Dictionary<int, List<BasicBlock>> blockSuccessors = [];
+    private readonly Dictionary<int, List<BasicBlockWrapper>> blockPredecessors = [];
+    private readonly Dictionary<int, List<BasicBlockWrapper>> blockSuccessors = [];
     private readonly SyntaxClassifierBase syntaxClassifier;
 
-    internal ImmutableDictionary<int, List<BasicBlock>> BlockPredecessors => blockPredecessors.ToImmutableDictionary();
+    internal ImmutableDictionary<int, List<BasicBlockWrapper>> BlockPredecessors => blockPredecessors.ToImmutableDictionary();
 
-    protected override BasicBlock ExitBlock => Cfg.ExitBlock;
+    protected override BasicBlockWrapper ExitBlock => Cfg.ExitBlock;
 
     public RoslynLiveVariableAnalysis(ControlFlowGraph cfg, SyntaxClassifierBase syntaxClassifier, CancellationToken cancel)
         : base(cfg, OriginalDeclaration(cfg.OriginalOperation), cancel)
@@ -63,16 +63,16 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
     public override bool IsLocal(ISymbol symbol) =>
         originalDeclaration.Equals(symbol?.ContainingSymbol);
 
-    protected override IEnumerable<BasicBlock> ReversedBlocks() =>
+    protected override IEnumerable<BasicBlockWrapper> ReversedBlocks() =>
         Cfg.Blocks.Reverse();
 
-    protected override IEnumerable<BasicBlock> Predecessors(BasicBlock block) =>
+    protected override IEnumerable<BasicBlockWrapper> Predecessors(BasicBlockWrapper block) =>
         blockPredecessors[block.Ordinal];
 
-    protected override IEnumerable<BasicBlock> Successors(BasicBlock block) =>
+    protected override IEnumerable<BasicBlockWrapper> Successors(BasicBlockWrapper block) =>
         blockSuccessors[block.Ordinal];
 
-    protected override State ProcessBlock(BasicBlock block)
+    protected override State ProcessBlock(BasicBlockWrapper block)
     {
         var ret = new RoslynState(this);
         ret.ProcessBlock(Cfg, block);
@@ -143,11 +143,11 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         list.AddRange(symbols);
     }
 
-    private void BuildBranches(BasicBlock block)
+    private void BuildBranches(BasicBlockWrapper block)
     {
         foreach (var successor in block.Successors)
         {
-            if (successor.Destination is not null)
+            if (successor.Destination.WrappedInstance is not null)
             {
                 // When exiting finally region, redirect to finally instead of the normal destination
                 AddBranch(successor.Source, successor.FinallyRegions.Any() ? Cfg.Blocks[successor.FinallyRegions.First().FirstBlockOrdinal] : successor.Destination);
@@ -172,7 +172,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
                     catchesAll = catchesAll || (catchOrFilterRegion.Kind == ControlFlowRegionKind.Catch && IsCatchAllType(catchOrFilterRegion.ExceptionType));
                 }
             }
-            if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { } finallyRegion)
+            if (!catchesAll && block.EnclosingRegion(ControlFlowRegionKind.TryAndFinally)?.NestedRegion(ControlFlowRegionKind.Finally) is { WrappedInstance: not null } finallyRegion)
             {
                 var finallyBlock = Cfg.Blocks[finallyRegion.FirstBlockOrdinal];
                 AddBranch(block, finallyBlock);
@@ -188,7 +188,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
             BuildBranchesToOuterCatch(block, nonLocalFinally.EnclosingRegion);
         }
 
-        void AddPredecessorsOutsideRegion(BasicBlock destination)
+        void AddPredecessorsOutsideRegion(BasicBlockWrapper destination)
         {
             // We assume that current block can throw in its first operation. Therefore predecessors outside this tryRegion need to be redirected to catch/filter/finally
             foreach (var predecessor in block.Predecessors.Where(x => x.Source.Ordinal < tryRegion.FirstBlockOrdinal || x.Source.Ordinal > tryRegion.LastBlockOrdinal))
@@ -198,7 +198,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void BuildBranchesCatch(BasicBlock source)
+    private void BuildBranchesCatch(BasicBlockWrapper source)
     {
         if (source.Successors.Any(x => x.Semantics is ControlFlowBranchSemantics.Rethrow or ControlFlowBranchSemantics.Throw))
         {
@@ -210,7 +210,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void BuildBranchesToOuterCatch(BasicBlock source, ControlFlowRegionWrapper region)
+    private void BuildBranchesToOuterCatch(BasicBlockWrapper source, ControlFlowRegionWrapper region)
     {
         if (region.EnclosingRegion(ControlFlowRegionKind.Try) is { } outerTry
             && outerTry.EnclosingRegion(ControlFlowRegionKind.TryAndCatch) is { } outerTryCatch)
@@ -222,7 +222,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void BuildBranchesFinally(BasicBlock source, ControlFlowRegionWrapper finallyRegion)
+    private void BuildBranchesFinally(BasicBlockWrapper source, ControlFlowRegionWrapper finallyRegion)
     {
         foreach (var trySuccessor in TryRegionSuccessors(source.EnclosingRegion))
         {
@@ -234,7 +234,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         }
     }
 
-    private void BuildBranchesRethrow(BasicBlock block)
+    private void BuildBranchesRethrow(BasicBlockWrapper block)
     {
         var currentTryCatchRegion = block.EnclosingRegion(ControlFlowRegionKind.TryAndCatch).Value;
         var reachableHandlerRegions = currentTryCatchRegion.NestedRegion(ControlFlowRegionKind.Try).ReachableHandlers;
@@ -245,19 +245,19 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         {
             AddBranch(block, catchBlock);
         }
-        if (reachableCatchAndFinallyBlocks.FirstOrDefault(x => x.IsEnclosedIn(ControlFlowRegionKind.Finally)) is { } finallyBlock)
+        if (reachableCatchAndFinallyBlocks.FirstOrDefault(x => x.IsEnclosedIn(ControlFlowRegionKind.Finally)) is { WrappedInstance: not null } finallyBlock)
         {
             AddBranch(block, finallyBlock);
         }
     }
 
-    private void AddBranch(BasicBlock source, BasicBlock destination)
+    private void AddBranch(BasicBlockWrapper source, BasicBlockWrapper destination)
     {
         blockSuccessors[source.Ordinal].Add(destination);
         blockPredecessors[destination.Ordinal].Add(source);
     }
 
-    private IEnumerable<ControlFlowBranch> TryRegionSuccessors(ControlFlowRegionWrapper finallyRegion)
+    private IEnumerable<ControlFlowBranchWrapper> TryRegionSuccessors(ControlFlowRegionWrapper finallyRegion)
     {
         var tryRegion = finallyRegion.EnclosingRegion.NestedRegion(ControlFlowRegionKind.Try);
         return tryRegion.Blocks(Cfg).SelectMany(x => x.Successors).Where(x => x.FinallyRegions.Contains(finallyRegion));
@@ -308,7 +308,7 @@ public sealed class RoslynLiveVariableAnalysis : LiveVariableAnalysisBase<Contro
         public RoslynState(RoslynLiveVariableAnalysis owner) =>
             this.owner = owner;
 
-        public void ProcessBlock(ControlFlowGraph cfg, BasicBlock block)
+        public void ProcessBlock(ControlFlowGraph cfg, BasicBlockWrapper block)
         {
             foreach (var operation in block.OperationsAndBranchValue.ToReversedExecutionOrder())
             {

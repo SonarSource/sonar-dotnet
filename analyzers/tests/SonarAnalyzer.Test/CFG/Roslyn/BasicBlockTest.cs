@@ -16,6 +16,7 @@
  */
 
 using Microsoft.CodeAnalysis.Operations;
+using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.ShimLayer;
 
 namespace SonarAnalyzer.CFG.Roslyn.Test;
@@ -24,23 +25,20 @@ namespace SonarAnalyzer.CFG.Roslyn.Test;
 public class BasicBlockTest
 {
     [TestMethod]
-    public void Wrap_ReturnsNull() =>
-        BasicBlock.Wrap(null).Should().BeNull();
-
-    [TestMethod]
     public void ValidateReflection()
     {
-        const string code = @"
-public class Sample
-{
-    int field;
+        const string code = """
+            public class Sample
+            {
+                int field;
 
-    public void Method(bool condition)
-    {
-        if (condition)
-            field = 42;
-    }
-}";
+                public void Method(bool condition)
+                {
+                    if (condition)
+                        field = 42;
+                }
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         /*
          *           Entry 0
@@ -73,10 +71,10 @@ public class Sample
         assign.BranchValue.Should().BeNull();
         exit.BranchValue.Should().BeNull();
 
-        entry.ConditionalSuccessor.Should().BeNull();
-        branch.ConditionalSuccessor.Should().NotBeNull();
-        assign.ConditionalSuccessor.Should().BeNull();
-        exit.ConditionalSuccessor.Should().BeNull();
+        entry.ConditionalSuccessor.WrappedInstance.Should().BeNull();
+        branch.ConditionalSuccessor.WrappedInstance.Should().NotBeNull();
+        assign.ConditionalSuccessor.WrappedInstance.Should().BeNull();
+        exit.ConditionalSuccessor.WrappedInstance.Should().BeNull();
 
         entry.ConditionKind.Should().Be(ControlFlowConditionKind.None);
         branch.ConditionKind.Should().Be(ControlFlowConditionKind.WhenFalse);
@@ -88,10 +86,10 @@ public class Sample
         assign.EnclosingRegion.Should().Be(cfg.Root);
         exit.EnclosingRegion.Should().Be(cfg.Root);
 
-        entry.FallThroughSuccessor.Should().NotBeNull();
-        branch.FallThroughSuccessor.Should().NotBeNull();
-        assign.FallThroughSuccessor.Should().NotBeNull();
-        exit.FallThroughSuccessor.Should().BeNull();
+        entry.FallThroughSuccessor.WrappedInstance.Should().NotBeNull();
+        branch.FallThroughSuccessor.WrappedInstance.Should().NotBeNull();
+        assign.FallThroughSuccessor.WrappedInstance.Should().NotBeNull();
+        exit.FallThroughSuccessor.WrappedInstance.Should().BeNull();
 
         entry.IsReachable.Should().Be(true);
         branch.IsReachable.Should().Be(true);
@@ -127,15 +125,16 @@ public class Sample
     [TestMethod]
     public void ValidateOperations()
     {
-        const string code = @"
-public class Sample
-{
-    int Pow(int num, int exponent)
-    {
-        num = num * Pow(num, exponent - 1);
-        return 42;
-    }
-}";
+        const string code = """
+            public class Sample
+            {
+                int Pow(int num, int exponent)
+                {
+                    num = num * Pow(num, exponent - 1);
+                    return 42;
+                }
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         var entry = cfg.EntryBlock;
         var body = cfg.Blocks[1];
@@ -153,16 +152,17 @@ public class Sample
     [TestMethod]
     public void ValidateSwitchExpressionCase()
     {
-        const string code = @"
-public class Sample
-{
-    public int Method(bool condition) =>
-        condition switch
-        {
-            true => 42,
-            _ => 43
-        };
-}";
+        const string code = """
+            public class Sample
+            {
+                public int Method(bool condition) =>
+                    condition switch
+                    {
+                        true => 42,
+                        _ => 43
+                    };
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         /*
          *
@@ -195,7 +195,7 @@ public class Sample
         block1.ConditionalSuccessor.Destination.Should().Be(block3);
         block1.SuccessorBlocks.Should().ContainInOrder(block2, block3);
         block2.FallThroughSuccessor.Destination.Should().Be(block6);
-        block2.ConditionalSuccessor.Should().BeNull();
+        block2.ConditionalSuccessor.WrappedInstance.Should().BeNull();
         block2.SuccessorBlocks.Single().Should().Be(block6);
         block3.FallThroughSuccessor.Destination.Should().Be(block4);
         block3.ConditionalSuccessor.Destination.Should().Be(block5);

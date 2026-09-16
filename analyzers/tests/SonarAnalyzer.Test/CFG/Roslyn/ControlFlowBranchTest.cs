@@ -25,11 +25,12 @@ public class ControlFlowBranchTest
     [TestMethod]
     public void ValidateReflection()
     {
-        const string code = @"
-public class Sample
-{
-    public void Method(bool condition) { } // Empty, just Entry and Exit block
-}";
+        const string code = """
+            public class Sample
+            {
+                public void Method(bool condition) { } // Empty, just Entry and Exit block
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         var entry = cfg.EntryBlock;
         var exit = cfg.ExitBlock;
@@ -47,24 +48,25 @@ public class Sample
     [TestMethod]
     public void ValidateReflection_Regions()
     {
-        const string code = @"
-public class Sample
-{
-    int field;
+        const string code = """
+            public class Sample
+            {
+                int field;
 
-    public void Method(bool condition)
-    {
-        field = 0;
-        try
-        {
-            field = 1;
-        }
-        finally
-        {
-            field = 42;
-        }
-    }
-}";
+                public void Method(bool condition)
+                {
+                    field = 0;
+                    try
+                    {
+                        field = 1;
+                    }
+                    finally
+                    {
+                        field = 42;
+                    }
+                }
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         /*
          *          Entry 0
@@ -116,7 +118,7 @@ public class Sample
         exiting.FinallyRegions.Should().HaveCount(1).And.Contain(finallyRegion);
 
         var insideFinally = finallyBlock.FallThroughSuccessor;
-        insideFinally.Destination.Should().BeNull();
+        insideFinally.Destination.WrappedInstance.Should().BeNull();
         insideFinally.Semantics.Should().Be(ControlFlowBranchSemantics.StructuredExceptionHandling);
         entering.EnteringRegions.Should().HaveCount(2).And.ContainInOrder(tryAndFinallyRegion, tryRegion); // Weird, but Roslyn does it this way.
         entering.LeavingRegions.Should().BeEmpty();

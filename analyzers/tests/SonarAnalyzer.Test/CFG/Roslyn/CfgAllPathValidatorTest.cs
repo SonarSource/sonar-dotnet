@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.ShimLayer;
+
 namespace SonarAnalyzer.CFG.Roslyn.Test;
 
 [TestClass]
@@ -23,17 +25,18 @@ public class CfgAllPathValidatorTest
     [TestMethod]
     public void ValidateCfgPaths()
     {
-        const string code = @"
-public class Sample
-{
-    public int Method2(bool condition)
-    {
-        if (condition)
-            return 42;
-        else
-            return 1;
-    }
-}";
+        const string code = """
+            public class Sample
+            {
+                public int Method2(bool condition)
+                {
+                    if (condition)
+                        return 42;
+                    else
+                        return 1;
+                }
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         /*
          *           Entry 0
@@ -68,17 +71,17 @@ public class Sample
     [TestMethod]
     public void ValidAfterBranching()
     {
-        const string code = @"
-public class Sample
-{
-    internal string Prop;
-    public void Method(string input)
-    {
-        var x = true && true;
-        Prop = input;
-    }
-}
-";
+        const string code = """
+            public class Sample
+            {
+                internal string Prop;
+                public void Method(string input)
+                {
+                    var x = true && true;
+                    Prop = input;
+                }
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         /*
          *           Entry 0
@@ -107,25 +110,25 @@ public class Sample
     [TestMethod]
     public void LoopInCfg()
     {
-        const string code = @"
-public class Sample
-{
-    public void Method(string input)
-    {
-        var a = input;
-    A:
-        if (input != """")
-            goto C;
-        else
-            goto B;
-    C:
-        input = System.String.Empty;
-        goto A;
-    B:
-        input = input;
-    }
-}
-";
+        const string code = """
+            public class Sample
+            {
+                public void Method(string input)
+                {
+                    var a = input;
+                A:
+                    if (input != "")
+                        goto C;
+                    else
+                        goto B;
+                C:
+                    input = System.String.Empty;
+                    goto A;
+                B:
+                    input = input;
+                }
+            }
+            """;
         var cfg = TestCompiler.CompileCfgCS(code);
         /*
          *           Entry 0
@@ -146,9 +149,10 @@ public class Sample
     {
         public TestNonEntryBlockValidator(ControlFlowGraph cfg) : base(cfg) { }
 
-        protected override bool IsValid(BasicBlock block) => block.Ordinal > 0;
+        protected override bool IsValid(BasicBlockWrapper block) =>
+            block.Ordinal > 0;
 
-        protected override bool IsInvalid(BasicBlock block) => false;
+        protected override bool IsInvalid(BasicBlockWrapper block) => false;
     }
 
     private class TestCfgValidator : CfgAllPathValidator
@@ -158,10 +162,10 @@ public class Sample
         public TestCfgValidator(ControlFlowGraph cfg, params int[] validBlocks) : base(cfg) =>
             this.validBlocks = validBlocks;
 
-        protected override bool IsValid(BasicBlock block) =>
+        protected override bool IsValid(BasicBlockWrapper block) =>
             validBlocks.Contains(block.Ordinal);
 
-        protected override bool IsInvalid(BasicBlock block) =>
+        protected override bool IsInvalid(BasicBlockWrapper block) =>
             !validBlocks.Contains(block.Ordinal);
     }
 
@@ -172,9 +176,9 @@ public class Sample
         public OnlyOneBlockIsValid(ControlFlowGraph cfg, int validBlock) : base(cfg) =>
             this.validBlock = validBlock;
 
-        protected override bool IsValid(BasicBlock block) =>
+        protected override bool IsValid(BasicBlockWrapper block) =>
             validBlock == block.Ordinal;
 
-        protected override bool IsInvalid(BasicBlock block) => false;
+        protected override bool IsInvalid(BasicBlockWrapper block) => false;
     }
 }

@@ -123,7 +123,7 @@ public partial class InfiniteRecursion
                 }
             }
 
-            protected override bool IsValid(BasicBlock block)
+            protected override bool IsValid(BasicBlockWrapper block)
             {
                 if (block.OperationsAndBranchValue.ToReversedExecutionOrder().FirstOrDefault(x => context.AnalyzedSymbol.Equals(MemberSymbol(x))) is { } operation)
                 {
@@ -161,11 +161,11 @@ public partial class InfiniteRecursion
                     && IParameterReferenceOperationWrapper.From(instance).Parameter is { ContainingSymbol: ITypeSymbol { TypeKind: TypeKindEx.Extension } };
             }
 
-            protected override bool IsInvalid(BasicBlock block) => false;
+            protected override bool IsInvalid(BasicBlockWrapper block) => false;
 
             private bool CfgCanExit() =>
                 context.ControlFlowGraph.ExitBlock.IsReachable
-                || context.ControlFlowGraph.Blocks.Any(x => x.FallThroughSuccessor?.Semantics == ControlFlowBranchSemantics.Throw && x.IsReachable);
+                || context.ControlFlowGraph.Blocks.Any(x => x.FallThroughSuccessor is { WrappedInstance: not null, Semantics: ControlFlowBranchSemantics.Throw } && x.IsReachable);
         }
     }
 }

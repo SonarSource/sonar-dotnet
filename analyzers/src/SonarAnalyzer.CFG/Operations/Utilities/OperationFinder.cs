@@ -15,15 +15,13 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using SonarAnalyzer.CFG.Roslyn;
-
 namespace SonarAnalyzer.CFG.Operations.Utilities;
 
 public abstract class OperationFinder<TResult>
 {
     protected abstract bool TryFindOperation(IOperation operation, out TResult result);
 
-    public bool TryFind(BasicBlock block, out TResult result) =>
+    public bool TryFind(BasicBlockWrapper block, out TResult result) =>
         TryFind(block.OperationsAndBranchValue, out result);
 
     protected bool TryFind(IEnumerable<IOperation> operations, out TResult result)

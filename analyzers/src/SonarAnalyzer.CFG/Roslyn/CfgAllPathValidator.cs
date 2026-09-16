@@ -21,16 +21,16 @@ public abstract class CfgAllPathValidator
 {
     private readonly ControlFlowGraph cfg;
 
-    protected abstract bool IsValid(BasicBlock block);
-    protected abstract bool IsInvalid(BasicBlock block);
+    protected abstract bool IsValid(BasicBlockWrapper block);
+    protected abstract bool IsInvalid(BasicBlockWrapper block);
 
     protected CfgAllPathValidator(ControlFlowGraph cfg) =>
         this.cfg = cfg;
 
     public bool CheckAllPaths()
     {
-        HashSet<BasicBlock> visited = [];
-        var blocks = new Stack<BasicBlock>();
+        HashSet<BasicBlockWrapper> visited = [];
+        var blocks = new Stack<BasicBlockWrapper>();
         blocks.Push(cfg.EntryBlock);
         while (blocks.Count > 0)
         {

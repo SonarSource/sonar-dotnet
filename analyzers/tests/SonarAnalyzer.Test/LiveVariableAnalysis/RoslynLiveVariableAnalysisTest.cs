@@ -17,6 +17,7 @@
 
 using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CFG;
+using SonarAnalyzer.CFG.Extensions;
 using SonarAnalyzer.CFG.LiveVariableAnalysis;
 using SonarAnalyzer.CFG.Roslyn;
 using SonarAnalyzer.CFG.Syntax.Utilities;
@@ -1127,10 +1128,10 @@ public partial class RoslynLiveVariableAnalysisTest
             Validate(block, withSyntax, expected);
         }
 
-        public void Validate(BasicBlock block, params Expected[] expected) =>
+        public void Validate(BasicBlockWrapper block, params Expected[] expected) =>
             Validate(block, null, expected);
 
-        public void Validate(BasicBlock block, string blockSuffix, params Expected[] expected)
+        public void Validate(BasicBlockWrapper block, string blockSuffix, params Expected[] expected)
         {
             var empty = new Expected([], ExpectedKind.None);
             var expectedLiveIn = expected.SingleOrDefault(x => x.Kind == ExpectedKind.LiveIn) ?? empty;
