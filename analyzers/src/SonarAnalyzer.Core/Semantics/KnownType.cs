@@ -64,8 +64,15 @@ public sealed partial class KnownType
     public static readonly KnownType log4net_ILog = new("log4net.ILog");
     public static readonly KnownType log4net_LogManager = new("log4net.LogManager");
     public static readonly KnownType log4net_Util_ILogExtensions = new("log4net.Util.ILogExtensions");
+    public static readonly KnownType MassTransit_IConsumer = new("MassTransit.IConsumer");    // Marker interface implemented by every IConsumer<TMessage>
+    public static readonly KnownType MediatR_INotificationHandler_TNotification = new("MediatR.INotificationHandler", "TNotification");
+    public static readonly KnownType MediatR_IPipelineBehavior_TRequest_TResponse = new("MediatR.IPipelineBehavior", "TRequest", "TResponse");
+    public static readonly KnownType MediatR_IRequestHandler_TRequest = new("MediatR.IRequestHandler", "TRequest");    // Handler of a request without response. It does not inherit IRequestHandler<TRequest, TResponse>.
+    public static readonly KnownType MediatR_IRequestHandler_TRequest_TResponse = new("MediatR.IRequestHandler", "TRequest", "TResponse");
     public static readonly KnownType Microsoft_AspNet_Identity_PasswordHasherOptions = new("Microsoft.AspNet.Identity.PasswordHasherOptions");
     public static readonly KnownType Microsoft_AspNet_SignalR_Hub = new("Microsoft.AspNet.SignalR.Hub");
+    public static readonly KnownType Microsoft_AspNetCore_Authorization_AuthorizationHandler_TRequirement = new("Microsoft.AspNetCore.Authorization.AuthorizationHandler", "TRequirement");
+    public static readonly KnownType Microsoft_AspNetCore_Authorization_IAuthorizationHandler = new("Microsoft.AspNetCore.Authorization.IAuthorizationHandler");
     public static readonly KnownType Microsoft_AspNetCore_Builder_DeveloperExceptionPageExtensions = new("Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions");
     public static readonly KnownType Microsoft_AspNetCore_Builder_DatabaseErrorPageExtensions = new("Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions");
     public static readonly KnownType Microsoft_AspNetCore_Components_Forms_IBrowserFile = new("Microsoft.AspNetCore.Components.Forms.IBrowserFile");
@@ -85,6 +92,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_AspNetCore_Http_IFormFile = new("Microsoft.AspNetCore.Http.IFormFile");
     public static readonly KnownType Microsoft_AspNetCore_Http_IFormFileCollection = new("Microsoft.AspNetCore.Http.IFormFileCollection");
     public static readonly KnownType Microsoft_AspNetCore_Http_IHeaderDictionary = new("Microsoft.AspNetCore.Http.IHeaderDictionary");
+    public static readonly KnownType Microsoft_AspNetCore_Http_IMiddleware = new("Microsoft.AspNetCore.Http.IMiddleware");
     public static readonly KnownType Microsoft_AspNetCore_Http_IQueryCollection = new("Microsoft.AspNetCore.Http.IQueryCollection");
     public static readonly KnownType Microsoft_AspNetCore_Http_IRequestCookieCollection = new("Microsoft.AspNetCore.Http.IRequestCookieCollection");
     public static readonly KnownType Microsoft_AspNetCore_Http_IResponseCookies = new("Microsoft.AspNetCore.Http.IResponseCookies");
@@ -103,6 +111,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_ActionFilterAttribute = new("Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_IActionFilter = new("Microsoft.AspNetCore.Mvc.Filters.IActionFilter");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_IAsyncActionFilter = new("Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter");
+    public static readonly KnownType Microsoft_AspNetCore_Mvc_Filters_IFilterMetadata = new("Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_FromServicesAttribute = new("Microsoft.AspNetCore.Mvc.FromServicesAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_FromStateAttribute = new("Microsoft.AspNetCore.Mvc.FromStateAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_HttpDeleteAttribute = new("Microsoft.AspNetCore.Mvc.HttpDeleteAttribute");
@@ -132,8 +141,13 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_AspNetCore_Mvc_RouteAttribute = new("Microsoft.AspNetCore.Mvc.RouteAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_HttpMethodAttribute = new("Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute");
     public static readonly KnownType Microsoft_AspNetCore_Mvc_Routing_IRouteTemplateProvider = new("Microsoft.AspNetCore.Mvc.Routing.IRouteTemplateProvider");
+    public static readonly KnownType Microsoft_AspNetCore_Mvc_ViewComponent = new("Microsoft.AspNetCore.Mvc.ViewComponent");
     public static readonly KnownType Microsoft_AspNetCore_Razor_Hosting_RazorCompiledItemAttribute = new("Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemAttribute");
+    public static readonly KnownType Microsoft_AspNetCore_Razor_TagHelpers_ITagHelper = new("Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper");
+    public static readonly KnownType Microsoft_AspNetCore_Razor_TagHelpers_TagHelper = new("Microsoft.AspNetCore.Razor.TagHelpers.TagHelper");
     public static readonly KnownType Microsoft_AspNetCore_Routing_RouteValueDictionary = new("Microsoft.AspNetCore.Routing.RouteValueDictionary");
+    public static readonly KnownType Microsoft_AspNetCore_SignalR_Hub = new("Microsoft.AspNetCore.SignalR.Hub");
+    public static readonly KnownType Microsoft_AspNetCore_SignalR_Hub_T = new("Microsoft.AspNetCore.SignalR.Hub", "T");
     public static readonly KnownType Microsoft_Azure_Cosmos_CosmosClient = new("Microsoft.Azure.Cosmos.CosmosClient");
     public static readonly KnownType Microsoft_Azure_Cosmos_Container = new("Microsoft.Azure.Cosmos.Container");
     public static readonly KnownType Microsoft_Azure_Cosmos_QueryDefinition = new("Microsoft.Azure.Cosmos.QueryDefinition");
@@ -174,13 +188,16 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_EntityFrameworkCore_SqliteDbContextOptionsBuilderExtensions = new("Microsoft.EntityFrameworkCore.SqliteDbContextOptionsBuilderExtensions");
     public static readonly KnownType Microsoft_EntityFrameworkCore_SqlServerDbContextOptionsExtensions = new("Microsoft.EntityFrameworkCore.SqlServerDbContextOptionsExtensions");
     public static readonly KnownType Microsoft_Extensions_Configuration_IConfiguration = new("Microsoft.Extensions.Configuration.IConfiguration");
+    public static readonly KnownType Microsoft_Extensions_DependencyInjection_ActivatorUtilitiesConstructorAttribute = new("Microsoft.Extensions.DependencyInjection.ActivatorUtilitiesConstructorAttribute");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_LoggingServiceCollectionExtensions = new("Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_ServiceCollectionServiceExtensions = new("Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_Extensions_ServiceCollectionDescriptorExtensions = new("Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_FromKeyedServicesAttribute = new("Microsoft.Extensions.DependencyInjection.FromKeyedServicesAttribute");
     public static readonly KnownType Microsoft_Extensions_DependencyInjection_ServiceDescriptor = new("Microsoft.Extensions.DependencyInjection.ServiceDescriptor");
+    public static readonly KnownType Microsoft_Extensions_Hosting_BackgroundService = new("Microsoft.Extensions.Hosting.BackgroundService");
     public static readonly KnownType Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions = new("Microsoft.Extensions.Hosting.HostEnvironmentEnvExtensions");
     public static readonly KnownType Microsoft_Extensions_Hosting_IHostApplicationLifetime = new("Microsoft.Extensions.Hosting.IHostApplicationLifetime");
+    public static readonly KnownType Microsoft_Extensions_Hosting_IHostedService = new("Microsoft.Extensions.Hosting.IHostedService");
     public static readonly KnownType Microsoft_Extensions_Logging_AzureAppServicesLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.AzureAppServicesLoggerFactoryExtensions");
     public static readonly KnownType Microsoft_Extensions_Logging_ConsoleLoggerExtensions = new("Microsoft.Extensions.Logging.ConsoleLoggerExtensions");
     public static readonly KnownType Microsoft_Extensions_Logging_DebugLoggerFactoryExtensions = new("Microsoft.Extensions.Logging.DebugLoggerFactoryExtensions");
@@ -853,5 +870,4 @@ public sealed partial class KnownType
             // Note: XUnit doesn't have a separate "Ignore" attribute. It has a "Skip" parameter on the test attribute
             Microsoft_VisualStudio_TestTools_UnitTesting_IgnoreAttribute,
             NUnit_Framework_IgnoreAttribute);
-
 }

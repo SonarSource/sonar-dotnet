@@ -19,6 +19,37 @@ namespace SonarAnalyzer.Core.Semantics.Extensions;
 
 public static class INamedTypeSymbolExtensions
 {
+    // Base types and interfaces of types instantiated by a dependency injection container or a framework. Intentionally a superset of ControllerTypes.
+    // Internal so that INamedTypeSymbolExtensionsTest can assert every entry against the real framework assemblies.
+    internal static readonly ImmutableArray<KnownType> DependencyInjectionManagedTypes = ImmutableArray.Create(
+        KnownType.MassTransit_IConsumer,
+        KnownType.MediatR_INotificationHandler_TNotification,
+        KnownType.MediatR_IPipelineBehavior_TRequest_TResponse,
+        KnownType.MediatR_IRequestHandler_TRequest,
+        KnownType.MediatR_IRequestHandler_TRequest_TResponse,
+        KnownType.Microsoft_AspNet_SignalR_Hub,
+        KnownType.Microsoft_AspNetCore_Authorization_AuthorizationHandler_TRequirement,
+        KnownType.Microsoft_AspNetCore_Authorization_IAuthorizationHandler,
+        KnownType.Microsoft_AspNetCore_Http_IMiddleware,
+        KnownType.Microsoft_AspNetCore_Mvc_Controller,
+        KnownType.Microsoft_AspNetCore_Mvc_ControllerBase,
+        KnownType.Microsoft_AspNetCore_Mvc_Filters_IFilterMetadata,
+        KnownType.Microsoft_AspNetCore_Mvc_RazorPages_PageModel,
+        KnownType.Microsoft_AspNetCore_Mvc_ViewComponent,
+        KnownType.Microsoft_AspNetCore_Razor_TagHelpers_ITagHelper,
+        KnownType.Microsoft_AspNetCore_Razor_TagHelpers_TagHelper,
+        KnownType.Microsoft_AspNetCore_SignalR_Hub,
+        KnownType.Microsoft_AspNetCore_SignalR_Hub_T,
+        KnownType.Microsoft_Extensions_Hosting_BackgroundService,
+        KnownType.Microsoft_Extensions_Hosting_IHostedService,
+        KnownType.System_Web_Http_ApiController,
+        KnownType.System_Web_Mvc_Controller);
+
+    // Attributes marking the annotated type, and types deriving from it, as managed by a dependency injection container or a framework.
+    internal static readonly ImmutableArray<KnownType> DependencyInjectionTypeAttributes = ImmutableArray.Create(
+        KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute,
+        KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute);
+
     private static readonly ImmutableArray<KnownType> ControllerTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase, KnownType.System_Web_Mvc_Controller);
     private static readonly ImmutableArray<KnownType> ControllerAttributeTypes = ImmutableArray.Create(KnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute);
 
@@ -71,6 +102,17 @@ public static class INamedTypeSymbolExtensions
             symbol.IsControllerType
             && (symbol.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ApiControllerAttribute))
                 || (symbol.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_ControllerBase) && !symbol.DerivesFrom(KnownType.Microsoft_AspNetCore_Mvc_Controller)));
+
+        /// <summary>
+        /// Whether the type is instantiated by a dependency injection container or by a framework, instead of by a caller.
+        /// <see cref="KnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute"/> opts a type out explicitly.
+        /// </summary>
+        public bool IsDependencyInjectionManagedType =>
+            symbol is not null
+            && !symbol.DerivesFrom(KnownType.System_Attribute)   // An attribute is instantiated by its usage site, which writes the arguments. MVC filter attributes implement IFilterMetadata.
+            && !symbol.GetAttributes(NonControllerAttributeTypes).Any()
+            && (symbol.DerivesOrImplementsAny(DependencyInjectionManagedTypes)
+                || symbol.AttributesWithInherited.Any(x => x.AttributeClass.DerivesFromAny(DependencyInjectionTypeAttributes)));
 
         /// <summary>
         /// Returns whether the class has an attribute that marks the class
