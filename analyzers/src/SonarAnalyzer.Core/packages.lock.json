@@ -50,9 +50,9 @@
       },
       "SonarAnalyzer.CommonsConfigurations": {
         "type": "Direct",
-        "requested": "[2.31.0.5284, )",
-        "resolved": "2.31.0.5284",
-        "contentHash": "ggoQ5PhAU8vQbOvploh5bxM7mQdzAUsgZU4sQXo3K9KQe4bWSZhY5yoLajUrEAP5odStFUUnlUaG5ZUZyDz0/A=="
+        "requested": "[2.32.0.5319, )",
+        "resolved": "2.32.0.5319",
+        "contentHash": "E4kQPy+lfmq8tdDuTvtqP0mFBCT1iY/bUyv26PUxkyEh/w936lNoe5ff5ofSB3hsEwVy3+vcUc11vwkxc5p9dQ=="
       },
       "SonarAnalyzer.CSharp.Styling": {
         "type": "Direct",
