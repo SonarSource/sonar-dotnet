@@ -167,7 +167,7 @@ namespace Tests.Diagnostics
         {
             var result = new List<int>();
 
-            foreach (var element in collection) // Noncompliant {{Loop should be simplified by calling Select(element => element.Length))}}
+            foreach (var element in collection) // Noncompliant {{Loop should be simplified by calling Select(element => element.Length)}}
             //                      ^^^^^^^^^^
             {
                 var someValue = element.Length;
@@ -178,7 +178,7 @@ namespace Tests.Diagnostics
                 Foo(element.Length);
             }
 
-            foreach (var element in collection) // Noncompliant {{Loop should be simplified by calling Select(element => element.Length))}}
+            foreach (var element in collection) // Noncompliant {{Loop should be simplified by calling Select(element => element.Length)}}
             //                      ^^^^^^^^^^
             {
                 var someValue = element.Length;
@@ -236,7 +236,8 @@ namespace Tests.Diagnostics
                 sum -= values[i];
 
             var min = 0;
-            foreach (var t in values)   // Noncompliant
+            // "Min" is not suggested: the loop computes Math.Min(min, values.Min()) and does not throw on an empty sequence.
+            foreach (var t in values)   // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if (min > t)            // Secondary
                 {
@@ -245,7 +246,7 @@ namespace Tests.Diagnostics
             }
 
             var max = 0;
-            foreach (var t in values)   // Noncompliant
+            foreach (var t in values)   // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if (max < t)            // Secondary
                 {
@@ -254,7 +255,7 @@ namespace Tests.Diagnostics
             }
 
             bool test = false;
-            foreach (var t in values)   // Noncompliant
+            foreach (var t in values)   // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if(test)                // Secondary
                 {
@@ -262,7 +263,7 @@ namespace Tests.Diagnostics
                 }
             }
 
-            foreach (var t in values)   // Noncompliant
+            foreach (var t in values)   // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if (!test)              // Secondary
                 {
@@ -591,7 +592,7 @@ namespace Tests.Diagnostics
     {
         public static T FirstOrNone<T>(IEnumerable<T> enumerable, Predicate<T> predicate) where T : struct
         {
-            foreach (var element in enumerable) // Noncompliant
+            foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "FirstOrDefault" LINQ method}}
             {
                 if (predicate(element))         // Secondary
                 {
@@ -607,7 +608,8 @@ namespace Tests.Diagnostics
         public static int LocalFunction()
         {
             int value = 0;
-            foreach (var i in GetEnumerable<int>()) // Noncompliant
+            // "FirstOrDefault" is not suggested: the assigned value is the element, so the rewrite depends on "value" being seeded with default(int).
+            foreach (var i in GetEnumerable<int>()) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if (Filter(i))                      // Secondary
                 {
@@ -615,7 +617,8 @@ namespace Tests.Diagnostics
                     break;
                 }
             }
-            foreach (var element in GetEnumerable<int>()) // Noncompliant
+            // "FirstOrDefault" is not suggested: the loop falls through to a return that is not null/default.
+            foreach (var element in GetEnumerable<int>()) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if (Filter(element))                      // Secondary
                     return element;
@@ -623,7 +626,7 @@ namespace Tests.Diagnostics
             return 0;
             int MyLocalFunction(IEnumerable<int> enumerable, Predicate<int> predicate)
             {
-                foreach (var element in enumerable) // Noncompliant
+                foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
                 {
                     if (predicate(element))         // Secondary
                     {
@@ -680,7 +683,7 @@ namespace Tests.Diagnostics
     {
         public static void MyMethod<T>(IEnumerable<T> enumerable, Predicate<T> predicate) where T : struct
         {
-            foreach (var element in enumerable) // Noncompliant
+            foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
             {
                 if (predicate(element))         // Secondary
                 {
@@ -695,7 +698,7 @@ namespace Tests.Diagnostics
         private Predicate<Object> LambdaMethod(IEnumerable<int> enumerable, Predicate<int> predicate)
         {
             Predicate<Object> lambda = null;
-            foreach (var element in enumerable) // Noncompliant
+            foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
             {
                 if (predicate(element))         // Secondary
                 {
@@ -758,6 +761,238 @@ namespace Tests.Diagnostics
                     result.Add(element);
                 }
             }
+        }
+    }
+
+    // https://sonarsource.atlassian.net/browse/NET-1313
+    class LinqMethodSuggestions
+    {
+        private static bool Filter(string v) => true;
+        private static string Other() => null;
+        private static void Log() { }
+
+        bool Any_ReturnTrue(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void Any_EmptyReturn(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return;
+            }
+        }
+
+        string Any_ReturnConstant(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return "constant";
+            }
+            return null;
+        }
+
+        bool Any_ReturnFalse_WithoutTrailingReturnTrue(IEnumerable<string> source)
+        {
+            // "All" needs the loop to fall through to "return true;"
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return false;
+            }
+            Log();
+            return true;
+        }
+
+        bool Any_BreakingAssignment(IEnumerable<string> source)
+        {
+            var found = false;
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
+        }
+
+        bool All_ReturnFalseThenTrue(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "All" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return false;
+            }
+            return true;
+        }
+
+        bool All_NegatedLiterals(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "All" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return !true;
+            }
+            return !false;
+        }
+
+        bool All_InSwitchSection(IEnumerable<string> source, int key)
+        {
+            switch (key)
+            {
+                case 1:
+                    foreach (var element in source) // Noncompliant {{Loops should be simplified using the "All" LINQ method}}
+                    {
+                        if (Filter(element))        // Secondary
+                            return false;
+                    }
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        string FirstOrDefault_ReturnNull(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "FirstOrDefault" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return element;
+            }
+            return null;
+        }
+
+        string FirstOrDefault_ReturnDefaultExpression(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "FirstOrDefault" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return element;
+            }
+            return default(string);
+        }
+
+        string Where_ReturnElementWithOtherFallback(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return element;
+            }
+            return Other();
+        }
+
+        int Where_ReturnedExpressionUsesElement(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return element.Length;
+            }
+            return 0;
+        }
+
+        object Where_ReturnedCastUsesElement(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return (object)element;
+            }
+            return null;
+        }
+
+        IEnumerable<string> Where_YieldReturnIsNotAReturn(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    yield return element;
+            }
+        }
+
+        string Where_BreakingAssignmentOfElement(IEnumerable<string> source)
+        {
+            string found = null;
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                {
+                    found = element;
+                    break;
+                }
+            }
+            return found;
+        }
+
+        // "Any" only returns a bool, so it cannot supply the element the assignment target needs.
+        void Where_BreakingAssignmentTargetIsIndexedByElement(IEnumerable<string> source, Dictionary<string, int> map)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                {
+                    map[element] = 1;
+                    break;
+                }
+            }
+        }
+
+        void Where_BreakingAssignmentTargetIsMemberOfElement(IEnumerable<S3267.Point> source, Predicate<S3267.Point> condition)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (condition(element))     // Secondary
+                {
+                    element.X = 1;
+                    break;
+                }
+            }
+        }
+
+        // int -> object is a boxing conversion, so FirstOrDefault would return a boxed 0 where the loop returns null.
+        object Where_BoxedElementWithNullFallback(IEnumerable<int> source, Predicate<int> condition)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (condition(element))     // Secondary
+                    return element;
+            }
+            return null;
+        }
+
+        // string -> object is an implicit reference conversion, so FirstOrDefault does return null. Still valid.
+        object FirstOrDefault_ReferenceElementWithNullFallback(IEnumerable<string> source)
+        {
+            foreach (var element in source) // Noncompliant {{Loops should be simplified using the "FirstOrDefault" LINQ method}}
+            {
+                if (Filter(element))        // Secondary
+                    return element;
+            }
+            return null;
+        }
+
+        // A down-casting foreach additionally needs a Cast<T>/OfType<T>, so no specific method is suggested.
+        Type Where_DownCastingForeach(IEnumerable<object> source)
+        {
+            foreach (Type element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (element != null)         // Secondary
+                    return element;
+            }
+            return null;
         }
     }
 

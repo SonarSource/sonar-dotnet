@@ -304,7 +304,7 @@ namespace CSharpEleven
         // Transient ref struct created inside the lambda — not captured from outer scope, so LINQ conversion is valid
         bool IsMatchTransient(IReadOnlyList<string> segments, string value)
         {
-            foreach (var segment in segments) // Noncompliant
+            foreach (var segment in segments) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
             {
                 if (segment.AsSpan().Equals(value, StringComparison.Ordinal)) return true; // Secondary
             }
@@ -335,7 +335,9 @@ namespace CSharp13
     {
         async void WhenEach(List<Task<string>> tasks)
         {
-            await foreach (var s in Task.WhenEach(tasks)) // Noncompliant IAsyncEnumerable
+            // On IAsyncEnumerable "Any"/"All"/"FirstOrDefault" are named "AnyAsync"/"AllAsync"/"FirstOrDefaultAsync",
+            // so the suggestion falls back to "Where".
+            await foreach (var s in Task.WhenEach(tasks)) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
             {
                 if (s.Result is "42")  // Secondary
                 {
@@ -354,6 +356,20 @@ namespace CSharp13
                 }
             }
         }
+
+        // https://sonarsource.atlassian.net/browse/NET-1313
+        async Task<bool> AsyncReturnTrue(IAsyncEnumerable<int> source)
+        {
+            // Synchronously this would be "Any", but on IAsyncEnumerable the method is "AnyAsync".
+            await foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+            {
+                if (element is 42)                // Secondary
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     class ReturnNull
@@ -362,7 +378,7 @@ namespace CSharp13
 
         private IInterface? ReturnNullInterface(IEnumerable<int> enumerable, Predicate<int> predicate)
         {
-            foreach (var element in enumerable) // Noncompliant
+            foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
             {
                 if (predicate(element))         // Secondary
                 {
@@ -375,7 +391,7 @@ namespace CSharp13
 
         private int? ReturnDefault(IEnumerable<int> enumerable, Predicate<int> predicate)
         {
-            foreach (var element in enumerable) // Noncompliant
+            foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
             {
                 if (predicate(element))         // Secondary
                 {
@@ -383,7 +399,7 @@ namespace CSharp13
                 }
             }
 
-            foreach (var element in enumerable) // Noncompliant
+            foreach (var element in enumerable) // Noncompliant {{Loops should be simplified using the "Any" LINQ method}}
             {
                 if (predicate(element))         // Secondary
                 {

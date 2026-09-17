@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
@@ -34,5 +35,38 @@ public class LoopsAndLinqTest
     public void LoopsAndLinq_CS_Latest() =>
         builder.AddPaths("LoopsAndLinq.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
+
+    [TestMethod]
+    [DataRow("class", "null")]
+    [DataRow("class", "default")]
+    [DataRow("class", "default(string)")]
+    [DataRow("struct", "null")]
+    [DataRow("struct", "default")]
+    [DataRow("struct", "default(string)")]
+    public void LoopsAndLinq_UserDefinedReturnConversion(string elementKind, string fallback) =>
+        builder.AddSnippet($$$"""
+            using System;
+            using System.Collections.Generic;
+
+            {{{elementKind}}} Element
+            {
+                public static implicit operator string(Element element) => "none";
+            }
+
+            class Example
+            {
+                string Find(IEnumerable<Element> source, Predicate<Element> condition)
+                {
+                    foreach (var element in source) // Noncompliant {{Loops should be simplified using the "Where" LINQ method}}
+                    {
+                        if (condition(element))     // Secondary
+                            return element;
+                    }
+                    return {{{fallback}}};
+                }
+            }
+            """)
+            .WithOptions(LanguageOptions.Between(LanguageVersion.CSharp7_1, LanguageVersion.CSharp14))
             .Verify();
 }

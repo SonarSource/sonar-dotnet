@@ -24,8 +24,12 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
 {
     private const string DiagnosticId = "S3267";
     private const string MessageFormat = "{0}";
-    private const string WhereMessageFormat = @"Loops should be simplified using the ""Where"" LINQ method";
-    private const string SelectMessageFormat = "Loop should be simplified by calling Select({0} => {0}.{1}))";
+    private const string LinqMethodMessageFormat = @"Loops should be simplified using the ""{0}"" LINQ method";
+    private const string SelectMessageFormat = "Loop should be simplified by calling Select({0} => {0}.{1})";
+    private const string WhereMethod = "Where";
+    private const string AnyMethod = "Any";
+    private const string AllMethod = "All";
+    private const string FirstOrDefaultMethod = "FirstOrDefault";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -42,9 +46,13 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
                     return;
                 }
 
-                if (CanBeSimplifiedUsingWhere(forEachStatementSyntax.Statement, c, out var ifConditionLocation))
+                if (SimplifiableIf(forEachStatementSyntax.Statement, c) is { } ifStatement)
                 {
-                    c.ReportIssue(Rule, forEachStatementSyntax.Expression, [ifConditionLocation], WhereMessageFormat);
+                    c.ReportIssue(
+                        Rule,
+                        forEachStatementSyntax.Expression,
+                        [ifStatement.Condition.ToSecondaryLocation()],
+                        string.Format(LinqMethodMessageFormat, SuggestedMethod(forEachStatementSyntax, ifStatement, c)));
                 }
                 else
                 {
@@ -58,23 +66,69 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
         // If AllowGenericEnumeration property is configured to true, in the context of the rule, we are not in a performance sensitive context
         && (!attribute.TryGetAttributeValue<bool>(nameof(PerformanceSensitiveAttribute.AllowGenericEnumeration), out var allow) || allow);
 
-    private static bool CanBeSimplifiedUsingWhere(SyntaxNode statement, SonarSyntaxNodeReportingContext context, out SecondaryLocation ifConditionLocation)
-    {
-        if (IfStatement(statement) is { } ifStatementSyntax
-            && CanIfStatementBeMoved(ifStatementSyntax)
-            && !ContainsRefStructReference(ifStatementSyntax, context.Model))
-        {
-            ifConditionLocation = ifStatementSyntax.Condition.ToSecondaryLocation();
-            // If the 'if' block contains a single return or assignment with a break,
-            // we cannot simplify the loop using LINQ if the return or assignment is a nullable conversion.
-            // also see https://sonarsource.atlassian.net/browse/NET-1222
-            return SingleReturnOrBreakingAssignment(ifStatementSyntax) is not { } returnOrAssignment
-                || !RequiresNullableConversion(returnOrAssignment, context);
-        }
+    private static IfStatementSyntax SimplifiableIf(SyntaxNode statement, SonarSyntaxNodeReportingContext context) =>
+        IfStatement(statement) is { } ifStatementSyntax
+        && CanIfStatementBeMoved(ifStatementSyntax)
+        && !ContainsRefStructReference(ifStatementSyntax, context.Model)
+        && !HasNullableConversion(ifStatementSyntax, context)
+            ? ifStatementSyntax
+            : null;
 
-        ifConditionLocation = null;
-        return false;
-    }
+    // A single return, or an assignment followed by a break, is not expressible in LINQ when it is a nullable conversion.
+    // also see https://sonarsource.atlassian.net/browse/NET-1222
+    private static bool HasNullableConversion(IfStatementSyntax ifStatementSyntax, SonarSyntaxNodeReportingContext context) =>
+        SingleReturnOrBreakingAssignment(ifStatementSyntax) is { } returnOrAssignment
+        && RequiresNullableConversion(returnOrAssignment, context);
+
+    private static string SuggestedMethod(ForEachStatementSyntax forEachStatementSyntax, IfStatementSyntax ifStatementSyntax, SonarSyntaxNodeReportingContext context) =>
+        !IsOrImplementsIAsyncEnumerable(context.Model, forEachStatementSyntax)
+        // A down-casting foreach would additionally need a Cast<T>/OfType<T>, so no specific method fits.
+        && context.Model.GetForEachStatementInfo(forEachStatementSyntax).ElementConversion.IsIdentity
+            ? SingleReturnOrBreakingAssignment(ifStatementSyntax) switch
+            {
+                ReturnStatementSyntax returnStatement => SuggestedMethodForReturn(forEachStatementSyntax, returnStatement, context),
+                // The whole assignment is checked: "Any" returns a bool and cannot supply the matched element, so neither
+                // the assigned value nor the assignment target may depend on it.
+                AssignmentExpressionSyntax assignment when !ReferencesLoopVariable(assignment, forEachStatementSyntax) => AnyMethod,
+                _ => WhereMethod
+            }
+            : WhereMethod;
+
+    /// <remarks>
+    /// "FirstOrDefault" needs the element type and the returned type to share the same default value.
+    /// <see cref="RequiresNullableConversion"/> already excluded the nullable conversions, see
+    /// https://sonarsource.atlassian.net/browse/NET-1222. Boxing and user-defined conversions are excluded here
+    /// because they can change default(T) where the loop returns null or default.
+    /// </remarks>
+    private static string SuggestedMethodForReturn(ForEachStatementSyntax forEachStatementSyntax, ReturnStatementSyntax returnStatement, SonarSyntaxNodeReportingContext context) =>
+        returnStatement.Expression?.WithoutEnclosingParentheses switch
+        {
+            null => AnyMethod,
+            { } returned when !ReferencesLoopVariable(returned, forEachStatementSyntax) =>
+                returned.IsFalse() && ReturnsTrue(forEachStatementSyntax.FollowingStatement) ? AllMethod : AnyMethod,
+            IdentifierNameSyntax identifier when identifier.Identifier.ValueText == forEachStatementSyntax.Identifier.ValueText
+                && !RequiresBoxingOrUserDefinedConversion(identifier, context)
+                && ReturnsNullOrDefault(forEachStatementSyntax.FollowingStatement) => FirstOrDefaultMethod,
+            _ => WhereMethod
+        };
+
+    private static bool RequiresBoxingOrUserDefinedConversion(ExpressionSyntax expression, SonarSyntaxNodeReportingContext context) =>
+        context.Model.GetTypeInfo(expression, context.Cancel) is { Type: { } type, ConvertedType: { } convertedType }
+        && context.Compilation.ClassifyConversion(type, convertedType) is { IsBoxing: true } or { IsUserDefined: true };
+
+    private static bool ReturnsTrue(StatementSyntax statement) =>
+        statement is ReturnStatementSyntax { Expression: { } expression } && expression.IsTrue();
+
+    private static bool ReturnsNullOrDefault(StatementSyntax statement) =>
+        statement is ReturnStatementSyntax { Expression: { } expression }
+        && (expression.IsDefaultLiteral
+            || expression.WithoutEnclosingParentheses.IsNullLiteral()
+            || expression.WithoutEnclosingParentheses.Kind() is SyntaxKind.DefaultExpression);
+
+    private static bool ReferencesLoopVariable(SyntaxNode node, ForEachStatementSyntax forEachStatementSyntax) =>
+        node.DescendantNodesAndSelf()
+            .OfType<IdentifierNameSyntax>()
+            .Any(x => x.Identifier.ValueText == forEachStatementSyntax.Identifier.ValueText);
 
     private static bool ContainsRefStructReference(IfStatementSyntax ifStatement, SemanticModel model) =>
         ifStatement.DescendantNodes()
@@ -203,19 +257,23 @@ public sealed class LoopsAndLinq : SonarDiagnosticAnalyzer
     }
 
     private static bool IsOrImplementsIEnumerable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
-        model.GetTypeInfo(forEachStatementSyntax.Expression).Type is var expressionType
-        && (expressionType.Is(KnownType.System_Collections_Generic_IEnumerable_T)
-            || expressionType.Implements(KnownType.System_Collections_Generic_IEnumerable_T)
-            || expressionType.Is(KnownType.System_Collections_Generic_IAsyncEnumerable_T)
-            || expressionType.Implements(KnownType.System_Collections_Generic_IAsyncEnumerable_T));
+        IsOrImplements(model, forEachStatementSyntax, KnownType.System_Collections_Generic_IEnumerable_T)
+        || IsOrImplementsIAsyncEnumerable(model, forEachStatementSyntax);
+
+    // On IAsyncEnumerable the terminal operators are named "AnyAsync", "AllAsync" and "FirstOrDefaultAsync", so those
+    // suggestions would be wrong. "Where" is deferred and keeps its name, which makes it the correct fallback.
+    private static bool IsOrImplementsIAsyncEnumerable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
+        IsOrImplements(model, forEachStatementSyntax, KnownType.System_Collections_Generic_IAsyncEnumerable_T);
 
     // For IQueryable the "Where"/"Select" rewrite is translated by the query provider (e.g. EF Core -> SQL) and executed
     // server-side, unlike the in-memory foreach+if. The rewrite is therefore not equivalent and can throw at runtime for a
     // predicate the provider cannot translate, so the rule should not raise on IQueryable sources.
     private static bool IsOrImplementsIQueryable(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax) =>
+        IsOrImplements(model, forEachStatementSyntax, KnownType.System_Linq_IQueryable);
+
+    private static bool IsOrImplements(SemanticModel model, ForEachStatementSyntax forEachStatementSyntax, KnownType type) =>
         model.GetTypeInfo(forEachStatementSyntax.Expression).Type is { } expressionType
-        && (expressionType.Is(KnownType.System_Linq_IQueryable)
-            || expressionType.Implements(KnownType.System_Linq_IQueryable));
+        && (expressionType.Is(type) || expressionType.Implements(type));
 
     private sealed class UsageStats
     {
