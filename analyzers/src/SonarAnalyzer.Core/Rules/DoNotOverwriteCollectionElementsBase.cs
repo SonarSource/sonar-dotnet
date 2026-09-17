@@ -27,14 +27,14 @@ public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStateme
     /// Returns the index or key from the provided InvocationExpression or SimpleAssignmentExpression.
     /// Returns null if the provided SyntaxNode is not an InvocationExpression or SimpleAssignmentExpression.
     /// </summary>
-    protected abstract SyntaxNode GetIndexOrKey(TStatementSyntax statement);
+    protected abstract SyntaxNode IndexOrKey(TStatementSyntax statement);
 
     /// <summary>
     /// Returns the identifier of a collection that is modified in the provided InvocationExpression
     /// or SimpleAssignmentExpression. Returns null if the provided SyntaxNode is not an
     /// InvocationExpression or SimpleAssignmentExpression.
     /// </summary>
-    protected abstract SyntaxNode GetCollectionIdentifier(TStatementSyntax statement);
+    protected abstract SyntaxNode CollectionIdentifier(TStatementSyntax statement, bool includeCompoundAssignments);
 
     /// <summary>
     /// Returns a value specifying whether the provided SyntaxNode is an identifier or
@@ -42,8 +42,7 @@ public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStateme
     /// </summary>
     protected abstract bool IsIdentifierOrLiteral(SyntaxNode node);
 
-    protected override string MessageFormat => "Verify this is the index/key that was intended; " +
-        "a value has already been set for it.";
+    protected override string MessageFormat => "Verify this is the index/key that was intended; a value has already been set for it.";
 
     private static string SecondaryMessage => "The index/key set here gets set again later.";
 
@@ -52,34 +51,21 @@ public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStateme
     protected void AnalysisAction(SonarSyntaxNodeReportingContext context)
     {
         var statement = (TStatementSyntax)context.Node;
-        var collectionIdentifier = GetCollectionIdentifier(statement);
-        var indexOrKey = GetIndexOrKey(statement);
-
-        if (collectionIdentifier is null
-            || indexOrKey is null
-            || !IsIdentifierOrLiteral(indexOrKey)
-            || !IsDictionaryOrCollection(collectionIdentifier, context.Model))
-        {
-            return;
-        }
-
-        var previousSet = GetPreviousStatements(statement)
-            .TakeWhile(IsSameCollection(collectionIdentifier))
-            .FirstOrDefault(IsSameIndexOrKey(indexOrKey));
-
-        if (previousSet is not null)
+        if (CollectionIdentifier(statement, false) is { } collectionIdentifier
+            && IndexOrKey(statement) is { } indexOrKey
+            && IsIdentifierOrLiteral(indexOrKey)
+            && IsDictionaryOrCollection(collectionIdentifier, context.Model)
+            && PreviousStatements(statement).TakeWhile(IsSameCollection(collectionIdentifier)).FirstOrDefault(IsSameIndexOrKey(indexOrKey)) is { } previousSet)
         {
             context.ReportIssue(Rule, context.Node, [previousSet.ToSecondaryLocation(SecondaryMessage)]);
         }
     }
 
     private Func<TStatementSyntax, bool> IsSameCollection(SyntaxNode collectionIdentifier) =>
-        x =>
-            GetCollectionIdentifier(x) is { } identifier &&
-            identifier.ToString() == collectionIdentifier.ToString();
+        x => CollectionIdentifier(x, true) is { } identifier && identifier.ToString() == collectionIdentifier.ToString();
 
     private Func<TStatementSyntax, bool> IsSameIndexOrKey(SyntaxNode indexOrKey) =>
-        x => GetIndexOrKey(x)?.ToString() == indexOrKey.ToString();
+        x => IndexOrKey(x)?.ToString() == indexOrKey.ToString();
 
     private static bool IsDictionaryOrCollection(SyntaxNode identifier, SemanticModel model)
     {
@@ -92,15 +78,11 @@ public abstract class DoNotOverwriteCollectionElementsBase<TSyntaxKind, TStateme
     /// Returns all statements before the specified statement within the containing method.
     /// This method recursively traverses all parent blocks of the provided statement.
     /// </summary>
-    private static IEnumerable<TStatementSyntax> GetPreviousStatements(TStatementSyntax statement)
+    private static IEnumerable<TStatementSyntax> PreviousStatements(TStatementSyntax statement)
     {
-        var previousStatements = statement.Parent.ChildNodes()
-            .OfType<TStatementSyntax>()
-            .TakeWhile(x => x != statement)
-            .Reverse();
-
+        var previousStatements = statement.Parent.ChildNodes().OfType<TStatementSyntax>().TakeWhile(x => x != statement).Reverse();
         return statement.Parent is TStatementSyntax parentStatement
-            ? previousStatements.Union(GetPreviousStatements(parentStatement))
+            ? previousStatements.Union(PreviousStatements(parentStatement))
             : previousStatements;
     }
 }

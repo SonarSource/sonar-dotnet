@@ -31,8 +31,7 @@ public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionE
         SyntaxKind.FalseLiteralExpression
     ];
 
-    private static readonly HashSet<string> CollectionModifyingMethods =
-        new(StringComparer.InvariantCultureIgnoreCase) // VB is case-insensitive
+    private static readonly HashSet<string> CollectionModifyingMethods = new(StringComparer.InvariantCultureIgnoreCase) // VB is case-insensitive
         {
             "Item",
             "Add",
@@ -46,85 +45,42 @@ public sealed class DoNotOverwriteCollectionElements : DoNotOverwriteCollectionE
             SyntaxKind.ExpressionStatement,
             SyntaxKind.SimpleAssignmentStatement);
 
-    protected override SyntaxNode GetCollectionIdentifier(StatementSyntax statement)
-    {
-        var invocation = GetInvocation(statement);
-        return invocation is not null
-            ? GetInvokedMethodContainer(invocation).RemoveParentheses()
-            : null;
-    }
+    protected override SyntaxNode CollectionIdentifier(StatementSyntax statement, bool includeCompoundAssignments) =>
+        Invocation(statement) is { } invocation ? InvokedMethodContainer(invocation).RemoveParentheses() : null;
 
-    protected override SyntaxNode GetIndexOrKey(StatementSyntax statement)
-    {
-        var invocation = GetInvocation(statement);
-        return invocation is not null
-            ? GetFirstArgumentExpression(invocation).RemoveParentheses()
-            : null;
-    }
+    protected override SyntaxNode IndexOrKey(StatementSyntax statement) =>
+        Invocation(statement) is { } invocation ? FirstArgumentExpression(invocation).RemoveParentheses() : null;
 
     protected override bool IsIdentifierOrLiteral(SyntaxNode node) =>
         node.IsAnyKind(IdentifierOrLiteral);
 
     // In Visual Basic all collection/dictionary item sets are made through invocations
-    private static InvocationExpressionSyntax GetInvocation(StatementSyntax statement)
-    {
-        switch (statement.Kind())
+    private static InvocationExpressionSyntax Invocation(StatementSyntax statement) =>
+        statement switch
         {
-            case SyntaxKind.SimpleAssignmentStatement:
-                var assignmentStatement = (AssignmentStatementSyntax)statement;
-                return assignmentStatement.Left as InvocationExpressionSyntax;
+            AssignmentStatementSyntax assignment => assignment.Left,
+            ExpressionStatementSyntax { Expression: ConditionalAccessExpressionSyntax conditionalAccess } => conditionalAccess.WhenNotNull,
+            ExpressionStatementSyntax expression => expression.Expression,
+            _ => null
+        } as InvocationExpressionSyntax;
 
-            case SyntaxKind.ExpressionStatement:
-                var expression = ((ExpressionStatementSyntax)statement).Expression;
-
-                return expression.IsKind(SyntaxKind.ConditionalAccessExpression)
-                    ? ((ConditionalAccessExpressionSyntax)expression).WhenNotNull as InvocationExpressionSyntax
-                    : expression as InvocationExpressionSyntax;
-
-            default:
-                return null;
-        }
-    }
-
-    private static SyntaxNode GetInvokedMethodContainer(InvocationExpressionSyntax invocation)
-    {
+    private static SyntaxNode InvokedMethodContainer(InvocationExpressionSyntax invocation) =>
         // Supported syntax structures:
         // dictionary(key) = value
         // dictionary.Item(key) = value
         // dictionary.Add(key, value)
         // list(index) = value
         // list.Item(index) = value
-        var expression = invocation.Expression.RemoveParentheses();
-        switch (expression.Kind())
+        invocation.Expression.RemoveParentheses() switch
         {
-            case SyntaxKind.SimpleMemberAccessExpression:
-                var memberAccess = (MemberAccessExpressionSyntax)expression;
-                if (!CollectionModifyingMethods.Contains(memberAccess.Name.ToString()))
-                {
-                    // Possibly an indexer syntax
-                    return memberAccess;
-                }
-                if (memberAccess.Expression is null) // Possibly in a ConditionalAccess
-                {
-                    var conditionalAccess = memberAccess.Parent.Parent as ConditionalAccessExpressionSyntax;
-                    return conditionalAccess?.Expression;
-                }
+            MemberAccessExpressionSyntax memberAccess when !CollectionModifyingMethods.Contains(memberAccess.Name.ToString()) => memberAccess,  // Possibly an indexer syntax
+            MemberAccessExpressionSyntax { Expression: null, Parent.Parent: ConditionalAccessExpressionSyntax conditionalAccess } => conditionalAccess.Expression,
+            MemberAccessExpressionSyntax memberAccess when memberAccess.Name.ToString().Equals("Add", StringComparison.OrdinalIgnoreCase) && invocation.ArgumentList?.Arguments.Count == 1 => null,
+            MemberAccessExpressionSyntax memberAccess => memberAccess.Expression, // "a" from a.Add(item)
+            IdentifierNameSyntax identifier => identifier,
+            _ => null
+        };
 
-                if (memberAccess.Name.ToString().Equals("Add", StringComparison.OrdinalIgnoreCase) && invocation.ArgumentList?.Arguments.Count == 1)
-                {
-                    return null;    // #2674 Do not raise on ICollection.Add(item)
-                }
-
-                return memberAccess.Expression; // Return the collection identifier containing the method
-
-            case SyntaxKind.IdentifierName:
-                return expression;
-
-            default:
-                return null;
-        }
-    }
-
-    private static ExpressionSyntax GetFirstArgumentExpression(InvocationExpressionSyntax invocation) =>
-        invocation.ArgumentList?.Arguments.ElementAtOrDefault(0)?.GetExpression().RemoveParentheses();
+    private static ExpressionSyntax FirstArgumentExpression(InvocationExpressionSyntax invocation) =>
+        invocation.ArgumentList?.Arguments.ElementAtOrDefault(0)?.GetExpression();
 }

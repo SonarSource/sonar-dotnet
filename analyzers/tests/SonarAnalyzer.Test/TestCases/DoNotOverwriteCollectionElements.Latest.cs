@@ -1,6 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
+class CSharp8
+{
+    private void CoalesceAssignment(Dictionary<int, string> dict)
+    {
+        dict[0] ??= "thrown away or useless";   // Secondary
+        dict[0] = "always win";                 // Noncompliant
+    }
+}
+
 class CSharp11
 {
     Dictionary<string, int> dictionary = new();

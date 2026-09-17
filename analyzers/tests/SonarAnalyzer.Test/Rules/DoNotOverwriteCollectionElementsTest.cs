@@ -18,26 +18,25 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class DoNotOverwriteCollectionElementsTest
 {
-    [TestClass]
-    public class DoNotOverwriteCollectionElementsTest
-    {
-        private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotOverwriteCollectionElements>();
-        private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotOverwriteCollectionElements>();
+    private readonly VerifierBuilder builderCS = new VerifierBuilder<CS.DoNotOverwriteCollectionElements>();
+    private readonly VerifierBuilder builderVB = new VerifierBuilder<VB.DoNotOverwriteCollectionElements>();
 
-        [TestMethod]
-        public void DoNotOverwriteCollectionElements_CS() =>
-            builderCS.AddPaths("DoNotOverwriteCollectionElements.cs").Verify();
+    [TestMethod]
+    public void DoNotOverwriteCollectionElements_CS() =>
+        builderCS.AddPaths("DoNotOverwriteCollectionElements.cs").Verify();
 
-        [TestMethod]
-        public void DoNotOverwriteCollectionElements_VB() =>
-            builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
+    [TestMethod]
+    public void DoNotOverwriteCollectionElements_VB() =>
+        builderVB.AddPaths("DoNotOverwriteCollectionElements.vb").WithOptions(LanguageOptions.FromVisualBasic14).Verify();
 
-        [TestMethod]
-        public void DoNotOverwriteCollectionElements_CS_Latest() =>
-            builderCS.AddPaths("DoNotOverwriteCollectionElements.Latest.cs")
-                .WithOptions(LanguageOptions.CSharpLatest)
-                .Verify();
-    }
+    [TestMethod]
+    public void DoNotOverwriteCollectionElements_CS_Latest() =>
+        builderCS.AddPaths("DoNotOverwriteCollectionElements.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .Verify();
 }
