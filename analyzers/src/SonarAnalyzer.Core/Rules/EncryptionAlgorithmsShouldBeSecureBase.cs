@@ -26,8 +26,9 @@ public abstract class EncryptionAlgorithmsShouldBeSecureBase<TSyntaxKind> : Sona
 
     protected abstract TrackerBase<TSyntaxKind, PropertyAccessContext>.Condition IsInsideObjectInitializer();
     protected abstract TrackerBase<TSyntaxKind, InvocationContext>.Condition HasPkcs1PaddingArgument();
+    protected abstract SyntaxNode InvocationReceiver(SyntaxNode invocation);
 
-    protected override string MessageFormat => "Use secure mode and padding scheme.";
+    protected override string MessageFormat => "Use secure mode and padding scheme.{0}";
 
     protected EncryptionAlgorithmsShouldBeSecureBase() : base(DiagnosticId) { }
 
@@ -39,6 +40,7 @@ public abstract class EncryptionAlgorithmsShouldBeSecureBase<TSyntaxKind> : Sona
         var inv = Language.Tracker.Invocation;
         inv.Track(
             input,
+            [string.Empty],
             inv.MatchMethod(
                 new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "Encrypt"),
                 new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "TryEncrypt")),
@@ -51,11 +53,40 @@ public abstract class EncryptionAlgorithmsShouldBeSecureBase<TSyntaxKind> : Sona
         var pa = Language.Tracker.PropertyAccess;
         pa.Track(
             input,
+            [string.Empty],
             pa.MatchProperty(new MemberDescriptor(KnownType.System_Security_Cryptography_AesManaged, "Mode")),
             pa.MatchSetter(),
             pa.ExceptWhen(IsInsideObjectInitializer()));
 
         var oc = Language.Tracker.ObjectCreation;
-        oc.Track(input, oc.MatchConstructor(KnownType.System_Security_Cryptography_AesManaged));
+        oc.Track(input, [string.Empty], oc.MatchConstructor(KnownType.System_Security_Cryptography_AesManaged));
+
+        var signData = inv.MatchMethod(
+            new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "SignData"),
+            new MemberDescriptor(KnownType.System_Security_Cryptography_RSA, "SignHash"));
+        var receiverIsRSACryptoServiceProvider = ReceiverTypeIs(KnownType.System_Security_Cryptography_RSACryptoServiceProvider);
+
+        inv.Track(
+            input,
+            [" RSACryptoServiceProvider does not support RSASSA-PSS, switch to RSACng."],
+            signData,
+            HasPkcs1PaddingArgument(),
+            receiverIsRSACryptoServiceProvider);
+
+        // For any other concrete receiver type (e.g. RSACng), RSASSA-PSS is a simple, reachable fix on any TFM.
+        // For the abstract RSA type itself (RSA.Create(), or an RSA-typed parameter/field), the concrete
+        // implementation is unknown, so we fall back to the documented per-TFM default: CAPI-only (no PSS) on
+        // .NET Framework, PSS-capable on modern .NET.
+        inv.Track(
+            input,
+            [string.Empty],
+            signData,
+            HasPkcs1PaddingArgument(),
+            inv.ExceptWhen(receiverIsRSACryptoServiceProvider),
+            inv.ExceptWhen(x => ReceiverTypeIs(KnownType.System_Security_Cryptography_RSA)(x) && x.Model.Compilation.IsNetFrameworkTarget));
     }
+
+    private TrackerBase<TSyntaxKind, InvocationContext>.Condition ReceiverTypeIs(KnownType knownType) =>
+        x => InvocationReceiver(x.Node) is { } receiver
+                && x.Model.GetTypeInfo(receiver).Type.Is(knownType);
 }

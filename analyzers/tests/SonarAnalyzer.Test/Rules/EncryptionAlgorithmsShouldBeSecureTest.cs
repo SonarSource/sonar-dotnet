@@ -53,6 +53,14 @@ namespace SonarAnalyzer.Test.Rules
                 .AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences()))
                 .Verify();
 
+        [TestMethod]
+        public void EncryptionAlgorithmsShouldBeSecure_CS_NetCore() =>
+            builderCS.AddPaths(@"EncryptionAlgorithmsShouldBeSecure.NetCore.cs").WithOptions(LanguageOptions.CSharpLatest).AddReferences(GetAdditionalReferences()).Verify();
+
+        [TestMethod]
+        public void EncryptionAlgorithmsShouldBeSecure_VB_NetCore() =>
+            builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure.NetCore.vb").AddReferences(GetAdditionalReferences()).Verify();
+
 #else
 
         [TestMethod]
@@ -61,6 +69,14 @@ namespace SonarAnalyzer.Test.Rules
                      .WithOptions(LanguageOptions.VisualBasicLatest)
                      .AddReferences(MetadataReferenceFacade.NetStandard21.Concat(GetAdditionalReferences()))
                      .Verify();
+
+        [TestMethod]
+        public void EncryptionAlgorithmsShouldBeSecure_CS_NetFx() =>
+            builderCS.AddPaths(@"EncryptionAlgorithmsShouldBeSecure.NetFx.cs").AddReferences(GetAdditionalReferences()).Verify();
+
+        [TestMethod]
+        public void EncryptionAlgorithmsShouldBeSecure_VB_NetFx() =>
+            builderVB.AddPaths(@"EncryptionAlgorithmsShouldBeSecure.NetFx.vb").AddReferences(GetAdditionalReferences()).Verify();
 
 #endif
 

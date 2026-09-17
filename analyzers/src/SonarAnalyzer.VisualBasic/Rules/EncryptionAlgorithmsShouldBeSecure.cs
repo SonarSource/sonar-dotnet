@@ -37,4 +37,9 @@ public sealed class EncryptionAlgorithmsShouldBeSecure : EncryptionAlgorithmsSho
                 && context.Model.GetSymbolInfo(valueSyntax).Symbol is ISymbol symbol
                 && symbol.Name == "Pkcs1";
         };
+
+    protected override SyntaxNode InvocationReceiver(SyntaxNode invocation) =>
+        invocation is InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax access }
+            ? access.Expression ?? invocation.GetParentConditionalAccessExpression()?.Expression
+            : null;
 }
