@@ -57,11 +57,6 @@ public abstract class UtilityAnalyzerBase : SonarDiagnosticAnalyzer
     protected virtual UtilityAnalyzerParameters ReadParameters(IAnalysisContext context)
     {
         var outPath = context.ProjectConfiguration().OutPath;
-        // For backward compatibility with S4MSB <= 5.0
-        if (outPath is null && context.Options.ProjectOutFolderPath() is { } projectOutFolderAdditionalFile)
-        {
-            outPath = projectOutFolderAdditionalFile.GetText().ToString().TrimEnd();
-        }
         if (context.Options.SonarLintXml() is not null && !string.IsNullOrEmpty(outPath))
         {
             var language = context.Compilation.Language;

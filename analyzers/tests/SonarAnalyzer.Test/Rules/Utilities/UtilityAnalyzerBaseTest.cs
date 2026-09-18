@@ -27,13 +27,10 @@ namespace SonarAnalyzer.Test.Rules.Utilities;
 public class UtilityAnalyzerBaseTest
 {
     private const string DefaultSonarProjectConfig = @"TestResources\SonarProjectConfig\Path_Windows\SonarProjectConfig.xml";
-    private const string DefaultProjectOutFolderPath = @"TestResources\ProjectOutFolderPath.txt";
 
     public TestContext TestContext { get; set; }
 
     [TestMethod]
-    [DataRow(LanguageNames.CSharp, DefaultProjectOutFolderPath, @"path\output-cs")]
-    [DataRow(LanguageNames.VisualBasic, DefaultProjectOutFolderPath, @"path\output-vbnet")]
     [DataRow(LanguageNames.CSharp, DefaultSonarProjectConfig, @"C:\foo\bar\.sonarqube\out\0\output-cs")]
     [DataRow(LanguageNames.VisualBasic, DefaultSonarProjectConfig, @"C:\foo\bar\.sonarqube\out\0\output-vbnet")]
     public void ReadConfig_OutPath(string language, string additionalPath, string expectedOutPath)
@@ -42,18 +39,6 @@ public class UtilityAnalyzerBaseTest
         var utilityAnalyzer = new TestUtilityAnalyzer(language, @"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml", additionalPath);
 
         utilityAnalyzer.Parameters.OutPath.Should().Be(expectedOutPath);
-        utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
-    }
-
-    [TestMethod]
-    [DataRow(DefaultProjectOutFolderPath, DefaultSonarProjectConfig)]
-    [DataRow(DefaultSonarProjectConfig, DefaultProjectOutFolderPath)]
-    public void ReadConfig_OutPath_FromSonarProjectConfig_HasPriority(string firstFile, string secondFile)
-    {
-        // We do not test what is read from the SonarLint file, but we need it
-        var utilityAnalyzer = new TestUtilityAnalyzer(LanguageNames.CSharp, @"TestResources\SonarLintXml\All_properties_cs\SonarLint.xml", firstFile, secondFile);
-
-        utilityAnalyzer.Parameters.OutPath.Should().Be(@"C:\foo\bar\.sonarqube\out\0\output-cs");
         utilityAnalyzer.Parameters.IsAnalyzerEnabled.Should().BeTrue();
     }
 
@@ -86,11 +71,8 @@ public class UtilityAnalyzerBaseTest
     }
 
     [TestMethod]
-    public void NoSonarLintXml_AnalyzerNotEnabled()
-    {
-        new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultProjectOutFolderPath).Parameters.IsAnalyzerEnabled.Should().BeFalse();
+    public void NoSonarLintXml_AnalyzerNotEnabled() =>
         new TestUtilityAnalyzer(LanguageNames.CSharp, DefaultSonarProjectConfig).Parameters.IsAnalyzerEnabled.Should().BeFalse();
-    }
 
     [TestMethod]
     public void NoOutputPath_AnalyzerNotEnabled() =>

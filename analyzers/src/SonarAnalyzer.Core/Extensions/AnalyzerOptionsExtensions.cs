@@ -15,9 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using System.Collections.Immutable;
 using System.IO;
-using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.CodeAnalysis.Text;
@@ -39,8 +37,8 @@ public static class AnalyzerOptionsExtensions
             {
                 return sonarLintXml.GetText() is { } sourceText
                     && context.TryGetValue(sourceText, SonarLintXmlProvider, out var sonarLintXmlReader)
-                    ? sonarLintXmlReader
-                    : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
+                        ? sonarLintXmlReader
+                        : throw new InvalidOperationException($"File '{Path.GetFileName(sonarLintXml.Path)}' has been added as an AdditionalFile but could not be read and parsed.");
             }
             else
             {
@@ -53,9 +51,6 @@ public static class AnalyzerOptionsExtensions
 
         public AdditionalText SonarProjectConfig() =>
             options.AdditionalFile("SonarProjectConfig.xml");
-
-        public AdditionalText ProjectOutFolderPath() =>
-            options.AdditionalFile("ProjectOutFolderPath.txt");
 
         public AdditionalText CustomDictionary() =>
             options.AdditionalFile("CustomDictionary.xml");
