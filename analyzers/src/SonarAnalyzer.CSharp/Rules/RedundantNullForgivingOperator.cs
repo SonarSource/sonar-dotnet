@@ -63,13 +63,12 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
             && !ContradictedByWholeContainerSpeculation(model, suppression);
     }
 
-    // GetSpeculativeTypeInfo() above only rebinds the isolated operand, missing surrounding control flow, so confirm by
-    // re-speculating the whole enclosing member instead: https://github.com/dotnet/roslyn/issues/35037
-    // Only a real MaybeNull contradicts the cheap check; FlowState.None (no flow info, e.g. in a constant-expression
-    // position like an attribute argument or parameter default) must fall back to trusting it.
+    // Confirms the cheap check by re-speculating the whole enclosing member: https://github.com/dotnet/roslyn/issues/35037
+    // Anything but a confirmed NotNull is treated as a contradiction: an inconclusive FlowState.None (e.g. a constant-expression
+    // position, or a container the re-speculation can't fully replay) is not trustworthy enough to keep the cheap check's verdict.
     private static bool ContradictedByWholeContainerSpeculation(SemanticModel model, PostfixUnaryExpressionSyntax suppression) =>
         suppression.ChangeSyntaxElement(suppression.Operand, model, out var speculativeModel) is { } replaced
-        && speculativeModel?.GetTypeInfo(replaced).Nullability is { FlowState: NullableFlowState.MaybeNull };
+        && speculativeModel?.GetTypeInfo(replaced).Nullability is not { FlowState: NullableFlowState.NotNull };
 
     // Oblivious members (no nullable annotation, e.g. "#nullable disable" or an unannotated TFM) default to NotNull
     // without the compiler ever proving it, so we check the member's own declared annotation instead of trusting that.

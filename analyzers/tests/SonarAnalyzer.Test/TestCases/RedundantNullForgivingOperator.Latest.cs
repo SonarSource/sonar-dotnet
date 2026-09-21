@@ -258,6 +258,34 @@ public class NarrowedThenAwaited
     }
 }
 
+public class DeconstructedNullForgivingReceiverGenerator
+{
+    public (string Token, long ExpiryMs) Generate() => ("token", 0);
+}
+
+public class DeconstructedNullForgivingReceiver
+{
+    private readonly DeconstructedNullForgivingReceiverGenerator? generator;
+
+    // "generator" is never narrowed, the compiler still requires the "!" here.
+    public void Method()
+    {
+        var (token, expiryMs) = generator!.Generate(); // Compliant, see https://sonarsource.atlassian.net/browse/NET-4618
+    }
+}
+
+public class NarrowedThenDeconstructed
+{
+    // FN: narrowing before the deconstruction still leaves the re-speculation unable to replay flow analysis, so it yields FlowState.None, which is now treated as a contradiction.
+    public void Method(DeconstructedNullForgivingReceiverGenerator? generator)
+    {
+        if (generator != null)
+        {
+            var (token, expiryMs) = generator!.Generate(); // FN, see https://sonarsource.atlassian.net/browse/NET-4618
+        }
+    }
+}
+
 public class PropertyInitializer
 {
     public string NameWarningsEnabled { get; set; } = default!; // Compliant, "default" for a non-nullable reference type is genuinely null

@@ -115,8 +115,8 @@ public class RedundantNullForgivingOperatorTest
             }
             """).Verify();
 
-    // FN: the primary speculation inside an attribute argument yields FlowState.None, unlike a parameter default
-    // (see the test below), so the redundancy check never fires: https://sonarsource.atlassian.net/browse/NET-4589
+    // FN: the primary speculation inside an attribute argument yields FlowState.None, so the redundancy check
+    // never fires: https://sonarsource.atlassian.net/browse/NET-4589
     [TestMethod]
     public void RedundantNullForgivingOperator_AttributeArgument_ConstReference_FN() =>
         builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet("""
@@ -134,18 +134,17 @@ public class RedundantNullForgivingOperatorTest
             }
             """).VerifyNoIssues();
 
-    // Regression guard: a parameter default is a constant-expression position, so confirmation reports FlowState.None
-    // rather than MaybeNull here - that must not be treated as a contradiction.
+    // FN: a parameter default is a constant-expression position, so the confirmation pass yields FlowState.None, which is now treated as a contradiction.
     [TestMethod]
-    public void RedundantNullForgivingOperator_ParameterDefault_ConstReference() =>
+    public void RedundantNullForgivingOperator_ParameterDefault_ConstReference_FN() =>
         builder.WithOptions(LanguageOptions.CSharpLatest).AddSnippet("""
             #nullable enable
             public class Sample
             {
                 private const string Value = "x";
-                public void Method(string s = Value!) { } // Noncompliant
+                public void Method(string s = Value!) { } // FN
             }
-            """).Verify();
+            """).VerifyNoIssues();
 
     [TestMethod]
     [DataRow(Microsoft.CodeAnalysis.NullableContextOptions.Enable, true)]
