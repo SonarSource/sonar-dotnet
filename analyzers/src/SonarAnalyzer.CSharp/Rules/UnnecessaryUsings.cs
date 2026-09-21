@@ -49,26 +49,25 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
                 var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias is null).ToList();
                 var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
 
-                var visitor = new CSharpRemovableUsingWalker(c, globalUsingDirectives, null);
-                VisitContent(visitor, compilationUnit.Members);
-                foreach (var attribute in compilationUnit.AttributeLists)
+                var visitor = new CSharpRemovableUsingWalker(c.Model, x => c.ReportIssue(Rule, x), globalUsingDirectives, null);
+                if (VisitCompilationUnit(visitor, compilationUnit))
                 {
-                    visitor.SafeVisit(attribute);
+                    CheckUnnecessaryUsings(c.Model, x => c.ReportIssue(Rule, x), simpleNamespaces, visitor.NecessaryNamespaces);
                 }
-
-                CheckUnnecessaryUsings(c, simpleNamespaces, visitor.NecessaryNamespaces);
             },
             SyntaxKind.CompilationUnit);
 
-    private static void VisitContent(ISafeSyntaxWalker visitor, SyntaxList<MemberDeclarationSyntax> members)
+    internal static bool VisitCompilationUnit(CSharpRemovableUsingWalker visitor, CompilationUnitSyntax compilationUnit)
     {
-        foreach (var member in members)
-        {
-            visitor.SafeVisit(member);
-        }
+        visitor.VisitAll(compilationUnit.Members);
+        visitor.VisitAll(compilationUnit.AttributeLists);
+        return visitor.AllVisited;
     }
 
-    private static void CheckUnnecessaryUsings(SonarSyntaxNodeReportingContext context, IEnumerable<UsingDirectiveSyntax> usingDirectives, ISet<INamespaceSymbol> necessaryNamespaces)
+    internal static void CheckUnnecessaryUsings(SemanticModel model,
+                                                Action<UsingDirectiveSyntax> reportIssue,
+                                                IEnumerable<UsingDirectiveSyntax> usingDirectives,
+                                                ISet<INamespaceSymbol> necessaryNamespaces)
     {
         foreach (var usingDirective in usingDirectives)
         {
@@ -81,31 +80,49 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
             {
                 continue;
             }
-            if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol && !necessaryNamespaces.Contains(namespaceSymbol))
+            if (model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol && !necessaryNamespaces.Contains(namespaceSymbol))
             {
-                context.ReportIssue(Rule, usingDirective);
+                reportIssue(usingDirective);
             }
         }
     }
 
-    private sealed class CSharpRemovableUsingWalker : SafeCSharpSyntaxWalker
+    internal sealed class CSharpRemovableUsingWalker : SafeCSharpSyntaxWalker
     {
         public readonly HashSet<INamespaceSymbol> NecessaryNamespaces = new(NamespaceComparer.Instance);
 
-        private readonly SonarSyntaxNodeReportingContext context;
+        private readonly SemanticModel model;
+        private readonly Action<UsingDirectiveSyntax> reportIssue;
         private readonly IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent;
         private readonly HashSet<INamespaceSymbol> currentNamespaceAndAncestors = new(NamespaceComparer.Instance);
         private bool linqQueryVisited;
 
-        public CSharpRemovableUsingWalker(SonarSyntaxNodeReportingContext context, IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent, INamespaceSymbol currentNamespace)
+        public bool AllVisited { get; private set; } = true;
+
+        public CSharpRemovableUsingWalker(SemanticModel model,
+                                          Action<UsingDirectiveSyntax> reportIssue,
+                                          IImmutableSet<EquivalentNameSyntax> usingDirectivesFromParent,
+                                          INamespaceSymbol currentNamespace)
             : base(SyntaxWalkerDepth.StructuredTrivia)
         {
-            this.context = context;
+            this.model = model;
+            this.reportIssue = reportIssue;
             this.usingDirectivesFromParent = usingDirectivesFromParent;
             for (var ancestor = currentNamespace; ancestor is not null; ancestor = ancestor.ContainingNamespace)
             {
                 currentNamespaceAndAncestors.Add(ancestor);
             }
+        }
+
+        public bool VisitAll(IEnumerable<SyntaxNode> nodes)
+        {
+            foreach (var node in nodes)
+            {
+                // SafeVisit can recurse into VisitNamespace, which mutates AllVisited as a side effect - it must be read only after SafeVisit returns.
+                var visited = SafeVisit(node);
+                AllVisited &= visited;
+            }
+            return AllVisited;
         }
 
         public override void VisitNamespaceDeclaration(NamespaceDeclarationSyntax node) =>
@@ -117,7 +134,7 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
             {
                 foreach (var addExpression in node.Expressions)
                 {
-                    VisitSymbol(context.Model.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
+                    VisitSymbol(model.GetCollectionInitializerSymbolInfo(addExpression).Symbol);
                 }
             }
             base.VisitInitializerExpression(node);
@@ -137,7 +154,7 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
 
         public override void VisitAwaitExpression(AwaitExpressionSyntax node)
         {
-            VisitSymbol(context.Model.GetAwaitExpressionInfo(node).GetAwaiterMethod);
+            VisitSymbol(model.GetAwaitExpressionInfo(node).GetAwaiterMethod);
             base.VisitAwaitExpression(node);
         }
 
@@ -165,7 +182,7 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
             }
             if (node.IsKind(SyntaxKindEx.ParenthesizedVariableDesignation)) // Tuple deconstruction declaration
             {
-                NecessaryNamespaces.Add(context.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
+                NecessaryNamespaces.Add(model.Compilation.GetSpecialType(SpecialType.System_Object).ContainingNamespace);
             }
             base.Visit(node);
         }
@@ -178,20 +195,24 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
             newUsingDirectives.UnionWith(simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)));
 
             // We visit the namespace declaration with the updated set of parent 'usings', this is needed in case of nested namespaces
-            var visitingNamespace = context.Model.GetSymbolInfo(name).Symbol as INamespaceSymbol;
-            var visitor = new CSharpRemovableUsingWalker(context, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
+            var visitingNamespace = model.GetSymbolInfo(name).Symbol as INamespaceSymbol;
+            var visitor = new CSharpRemovableUsingWalker(model, reportIssue, newUsingDirectives.ToImmutableHashSet(), visitingNamespace);
 
-            VisitContent(visitor, members);
-            CheckUnnecessaryUsings(context, simpleNamespaces, visitor.NecessaryNamespaces);
+            var fullyVisited = visitor.VisitAll(members);
+            if (fullyVisited)
+            {
+                CheckUnnecessaryUsings(model, reportIssue, simpleNamespaces, visitor.NecessaryNamespaces);
+            }
 
             NecessaryNamespaces.UnionWith(visitor.NecessaryNamespaces);
+            AllVisited &= fullyVisited;
         }
 
         private bool TryGetSystemLinkNamespace(out INamespaceSymbol systemLinqNamespace)
         {
             foreach (var usingDirective in usingDirectivesFromParent)
             {
-                if (context.Model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol && namespaceSymbol.ToDisplayString() == "System.Linq")
+                if (model.GetSymbolInfo(usingDirective.Name).Symbol is INamespaceSymbol namespaceSymbol && namespaceSymbol.ToDisplayString() == "System.Linq")
                 {
                     systemLinqNamespace = namespaceSymbol;
                     return true;
@@ -207,7 +228,7 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
         /// importing that namespace is indeed necessary.
         /// </summary>
         private void VisitNameNode(ExpressionSyntax node) =>
-            VisitSymbol(context.Model.GetSymbolInfo(node).Symbol);
+            VisitSymbol(model.GetSymbolInfo(node).Symbol);
 
         private void VisitSymbol(ISymbol symbol)
         {

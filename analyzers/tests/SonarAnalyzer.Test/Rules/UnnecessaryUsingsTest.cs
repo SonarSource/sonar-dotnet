@@ -18,6 +18,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Rules;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -159,9 +160,9 @@ public class UnnecessaryUsingsTest
     [TestMethod]
     public void EquivalentNameSyntax_Equals_Object()
     {
-        var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-        object same = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-        object different = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
+        var main = new EquivalentNameSyntax(IdentifierName("Lorem"));
+        object same = new EquivalentNameSyntax(IdentifierName("Lorem"));
+        object different = new EquivalentNameSyntax(IdentifierName("Ipsum"));
 
         main.Equals(same).Should().BeTrue();
         main.Equals(null).Should().BeFalse();
@@ -172,9 +173,9 @@ public class UnnecessaryUsingsTest
     [TestMethod]
     public void EquivalentNameSyntax_Equals_EquivalentNameSyntax()
     {
-        var main = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-        var same = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Lorem"));
-        var different = new EquivalentNameSyntax(SyntaxFactory.IdentifierName("Ipsum"));
+        var main = new EquivalentNameSyntax(IdentifierName("Lorem"));
+        var same = new EquivalentNameSyntax(IdentifierName("Lorem"));
+        var different = new EquivalentNameSyntax(IdentifierName("Ipsum"));
 
         main.Equals(same).Should().BeTrue();
         main.Equals(null).Should().BeFalse();
@@ -202,5 +203,96 @@ public class UnnecessaryUsingsTest
 
         NamespaceComparer.Instance.GetHashCode(fromDeclaration).Should().Be(NamespaceComparer.Instance.GetHashCode(fromType));
         NamespaceComparer.Instance.Equals(fromDeclaration, fromType).Should().BeTrue();
+    }
+
+    // NET-4556: SafeVisit() silently aborts past Roslyn's ~2050-node recursion guard, dropping namespace usage found only beyond that point.
+    [TestMethod]
+    public void UnnecessaryUsings_NecessaryUsingOnlyReferencedInDeeplyNestedCode_NotReported()
+    {
+        var (fullyVisited, reportedUsings) = VisitDeeplyNestedCode(DeeplyNestedCompilationUnit(), "DeeplyNested.cs");
+
+        // The walk must report itself as incomplete, otherwise the analyzer would report the (necessary) using as unnecessary.
+        fullyVisited.Should().BeFalse();
+        reportedUsings.Should().BeEmpty();
+    }
+
+    // NET-4556: a SafeVisit abort inside a nested namespace's own child walker must also suppress reporting for the enclosing scope's usings.
+    [TestMethod]
+    public void UnnecessaryUsings_NecessaryUsingOnlyReferencedInDeeplyNestedNamespace_NotReportedAtParentLevel()
+    {
+        var (fullyVisited, reportedUsings) = VisitDeeplyNestedCode(DeeplyNestedNamespaceCompilationUnit(), "DeeplyNestedNamespace.cs");
+
+        fullyVisited.Should().BeFalse();
+        reportedUsings.Should().BeEmpty();
+    }
+
+    // NET-4556: VisitAll no longer short-circuits on an aborted member, so a later namespace's own genuinely unnecessary using is still reported.
+    [TestMethod]
+    public void UnnecessaryUsings_UnnecessaryUsingInNamespaceAfterAbortedTopLevelMember_StillReported()
+    {
+        var (fullyVisited, reportedUsings) = VisitDeeplyNestedCode(AbortedTopLevelMemberFollowedBySiblingNamespaceCompilationUnit(), "AbortedTopLevelMemberFollowedBySiblingNamespace.cs");
+
+        // The overall walk is still marked incomplete because of the first, aborting top-level member...
+        fullyVisited.Should().BeFalse();
+        // ...but the sibling namespace after it was still fully visited on its own, so its unnecessary using is correctly reported.
+        reportedUsings.Should().ContainSingle(x => x.Name.ToString() == "System.Text");
+    }
+
+    private (bool FullyVisited, List<UsingDirectiveSyntax> ReportedUsings) VisitDeeplyNestedCode(CompilationUnitSyntax syntax, string path)
+    {
+        var tree = CSharpSyntaxTree.Create(syntax, path: path);
+        var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation().AddSyntaxTrees(tree);
+        var model = compilation.GetSemanticModel(tree);
+        var compilationUnit = (CompilationUnitSyntax)tree.GetRoot(TestContext.CancellationToken);
+        var reportedUsings = new List<UsingDirectiveSyntax>();
+
+        // Fully qualified: "UnnecessaryUsings" alone would bind to this test class's own UnnecessaryUsings() test method, not the analyzer type.
+        var visitor = new SonarAnalyzer.CSharp.Rules.UnnecessaryUsings.CSharpRemovableUsingWalker(model, reportedUsings.Add, ImmutableHashSet<EquivalentNameSyntax>.Empty, null);
+        var fullyVisited = SonarAnalyzer.CSharp.Rules.UnnecessaryUsings.VisitCompilationUnit(visitor, compilationUnit);
+        if (fullyVisited)
+        {
+            SonarAnalyzer.CSharp.Rules.UnnecessaryUsings.CheckUnnecessaryUsings(model, reportedUsings.Add, compilationUnit.Usings, visitor.NecessaryNamespaces);
+        }
+        return (fullyVisited, reportedUsings);
+    }
+
+    private static CompilationUnitSyntax DeeplyNestedCompilationUnit() =>
+        CompilationUnit()
+            .AddUsings(UsingDirective(ParseName("System")))
+            .AddMembers(ClassDeclaration("C").AddMembers(DeeplyNestedMethod()));
+
+    private static CompilationUnitSyntax DeeplyNestedNamespaceCompilationUnit() =>
+        CompilationUnit()
+            .AddUsings(UsingDirective(ParseName("System")))
+            .AddMembers(NamespaceDeclaration(ParseName("Outer")).AddMembers(ClassDeclaration("C").AddMembers(DeeplyNestedMethod())));
+
+    private static CompilationUnitSyntax AbortedTopLevelMemberFollowedBySiblingNamespaceCompilationUnit() =>
+        CompilationUnit()
+            .AddMembers(
+                // Aborts in the top-level walker's own SafeVisit call directly (no child walker swallows it), so VisitAll must not short-circuit here.
+                ClassDeclaration("C").AddMembers(DeeplyNestedMethod()),
+                NamespaceDeclaration(ParseName("Sibling")).AddUsings(UsingDirective(ParseName("System.Text"))).AddMembers(ClassDeclaration("Foo")));
+
+    // 5000 nested if-statements with Console.WriteLine at the bottom, past where SafeVisit is expected to abort.
+    private static MethodDeclarationSyntax DeeplyNestedMethod()
+    {
+        var condition = BinaryExpression(
+            SyntaxKind.NotEqualsExpression,
+            LiteralExpression(SyntaxKind.StringLiteralExpression, Literal("a")),
+            LiteralExpression(SyntaxKind.StringLiteralExpression, Literal("b")));
+
+        var consoleWriteLine = ExpressionStatement(
+            InvocationExpression(
+                MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, IdentifierName("Console"), IdentifierName("WriteLine")),
+                ArgumentList(SingletonSeparatedList(
+                    Argument(LiteralExpression(SyntaxKind.StringLiteralExpression, Literal("Deep")))))));
+
+        var node = IfStatement(condition, Block(consoleWriteLine));
+        for (var i = 0; i < 5000; i++)
+        {
+            node = IfStatement(condition, Block(node));
+        }
+
+        return MethodDeclaration(PredefinedType(Token(SyntaxKind.VoidKeyword)), "Method").AddBodyStatements(node);
     }
 }
