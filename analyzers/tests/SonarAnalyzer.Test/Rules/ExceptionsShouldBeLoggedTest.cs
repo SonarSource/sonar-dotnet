@@ -30,7 +30,17 @@ public class ExceptionsShouldBeLoggedTest
     [TestMethod]
     public void ExceptionsShouldBeLogged_CS() =>
         builder
+            .AddAnalyzer(() => new ExceptionsShouldBeLoggedOrThrown())
             .AddPaths("ExceptionsShouldBeLogged.cs")
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .Verify();
+
+    [TestMethod]
+    public void ExceptionsShouldBeLogged_CSharp8() =>
+        builder
+            .AddAnalyzer(() => new ExceptionsShouldBeLoggedOrThrown())
+            .AddPaths("ExceptionsShouldBeLogged.CSharp8.cs")
+            .WithOptions(LanguageOptions.FromCSharp8)
             .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
             .Verify();
 
@@ -82,8 +92,8 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .Verify();
 
     [TestMethod]
     [DataRow("Error")]
@@ -120,8 +130,8 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.CastleCore())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.CastleCore())
+            .Verify();
 
     [TestMethod]
     [DataRow("Error")]
@@ -248,8 +258,8 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.NLog())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.NLog())
+            .Verify();
 
     [TestMethod]
     public void ExceptionsShouldBeLogged_NLog_ILoggerBase_CS() =>
@@ -281,8 +291,8 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.NLog())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.NLog())
+            .Verify();
 
     [TestMethod]
     [DataRow("ConditionalDebug")]
@@ -315,15 +325,20 @@ public class ExceptionsShouldBeLoggedTest
                 }
             }
             """)
-           .AddReferences(NuGetMetadataReference.NLog())
-           .Verify();
+            .AddReferences(NuGetMetadataReference.NLog())
+            .Verify();
 
     // Smoke test: every framework listed in SupportedLoggingFrameworks must be detected (the rule subscribes
     // and reports on a plain Noncompliant invocation, and does not report when the exception is passed).
     // Guards against future omissions like the Serilog miss in #9806.
     public static IEnumerable<object[]> FrameworkDetectionData() =>
     [
-        ["Microsoft.Extensions.Logging.ILogger", "Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(logger, message)", "Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(logger, e, message)", NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()],
+        [
+            "Microsoft.Extensions.Logging.ILogger",
+            "Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(logger, message)",
+            "Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(logger, e, message)",
+            NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions()
+        ],
         ["Castle.Core.Logging.ILogger", "logger.Warn(message)", "logger.Warn(message, e)", NuGetMetadataReference.CastleCore()],
         ["Common.Logging.ILog", "logger.Warn(message)", "logger.Warn(message, e)", NuGetMetadataReference.CommonLoggingCore()],
         ["log4net.ILog", "logger.Warn(message)", "logger.Warn(message, e)", NuGetMetadataReference.Log4Net("3.0.1", "netstandard2.0")],
@@ -344,6 +359,10 @@ public class ExceptionsShouldBeLoggedTest
                     {
                         try { } catch (Exception e) { {{noncompliantCall}}; } // Noncompliant
                         try { } catch (Exception e) { {{compliantCall}}; }    // Compliant
+                        try { } catch (Exception e) { {{noncompliantCall}}; throw; }
+                        try { } catch (Exception e) { {{noncompliantCall}}; throw e; }
+                        try { } catch (Exception) { {{noncompliantCall}}; throw; }
+                        try { } catch { {{noncompliantCall}}; throw; }
                     }
                 }
                 """)

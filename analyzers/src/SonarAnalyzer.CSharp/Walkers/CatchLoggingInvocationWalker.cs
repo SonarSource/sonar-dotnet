@@ -26,19 +26,8 @@ namespace SonarAnalyzer.CSharp.Walkers;
 // - find all the logging invocations and check if the exception is logged
 // - if the exception is logged, it will stop looking for the other invocations and set IsExceptionLogged to true
 // - if the exception is not logged, it will visit all the invocations
-public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSyntaxWalker
+public class CatchLoggingInvocationWalker : SafeCSharpSyntaxWalker
 {
-    internal readonly SemanticModel Model = model;
-
-    private bool isFirstCatchClauseVisited;
-    private bool hasWhenFilterWithDeclarations;
-
-    internal ISymbol CaughtException;
-
-    public bool IsExceptionLogged { get; private set; }
-    public InvocationExpressionSyntax LoggingInvocationWithException { get; private set; }
-    public IList<InvocationExpressionSyntax> LoggingInvocationsWithoutException { get; } = new List<InvocationExpressionSyntax>();
-
     private static readonly ImmutableArray<LoggingInvocationDescriptor> LoggingInvocationDescriptors = ImmutableArray.Create(
         new LoggingInvocationDescriptor(MicrosoftExtensionsLogging, KnownType.Microsoft_Extensions_Logging_LoggerExtensions, false),
         new LoggingInvocationDescriptor(CastleCoreOrCommonCore, KnownType.Castle_Core_Logging_ILogger, true),
@@ -51,6 +40,19 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
         new LoggingInvocationDescriptor(Serilog, KnownType.Serilog_ILogger, true),
         new LoggingInvocationDescriptor(Serilog, KnownType.Serilog_Log, false));
 
+    private bool isFirstCatchClauseVisited;
+    private bool hasWhenFilterWithDeclarations;
+
+    public bool IsExceptionLogged { get; private set; }
+    public InvocationExpressionSyntax LoggingInvocationWithException { get; private set; }
+    public IList<InvocationExpressionSyntax> LoggingInvocationsWithoutException { get; } = [];
+
+    internal SemanticModel Model { get; }
+    internal ISymbol CaughtException { get; private set; }
+
+    public CatchLoggingInvocationWalker(SemanticModel model) =>
+        Model = model;
+
     public override void VisitCatchClause(CatchClauseSyntax node)
     {
         // We want to look for logging invocations only in the main catch clause.
@@ -60,8 +62,8 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
         }
 
         isFirstCatchClauseVisited = true;
-        hasWhenFilterWithDeclarations = node.Filter != null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
-        if (node.Declaration != null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
+        hasWhenFilterWithDeclarations = node.Filter is not null && node.Filter.DescendantNodes().Any(DeclarationPatternSyntaxWrapper.IsInstance);
+        if (node.Declaration is not null && !node.Declaration.Identifier.IsKind(SyntaxKind.None))
         {
             CaughtException = Model.GetDeclaredSymbol(node.Declaration);
         }
@@ -72,7 +74,7 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
     {
         if (!IsExceptionLogged && IsLoggingInvocation(node, Model))
         {
-            if (GetArgumentSymbolDerivedFromException(node, Model) is { } currentException
+            if (ArgumentSymbolDerivedFromException(node, Model) is { } currentException
                 && (hasWhenFilterWithDeclarations || currentException.Equals(CaughtException)))
             {
                 IsExceptionLogged = true;
@@ -97,12 +99,25 @@ public class CatchLoggingInvocationWalker(SemanticModel model) : SafeCSharpSynta
         // Skip processing to avoid false positives.
     }
 
-    private static ISymbol GetArgumentSymbolDerivedFromException(InvocationExpressionSyntax invocation, SemanticModel semanticModel) =>
+    // A null expression is a bare "throw;", which always rethrows the caught exception.
+    internal bool RethrowsCaughtException(ExpressionSyntax expression) =>
+        expression is null
+        || (Model.GetSymbolInfo(expression).Symbol is { } thrown
+            && (Equals(thrown, CaughtException) || IsCaughtExceptionAlias(thrown)));
+
+    private bool IsCaughtExceptionAlias(ISymbol symbol) =>
+        CaughtException is not null
+        && symbol.DeclaringSyntaxReferences is { Length: 1 } declarations
+        && declarations[0].GetSyntax().AncestorsAndSelf().FirstOrDefault(DeclarationPatternSyntaxWrapper.IsInstance) is { Parent: { } isPattern }
+        && IsPatternExpressionSyntaxWrapper.IsInstance(isPattern)
+        && Equals(Model.GetSymbolInfo(((IsPatternExpressionSyntaxWrapper)isPattern).Expression).Symbol, CaughtException);
+
+    private static ISymbol ArgumentSymbolDerivedFromException(InvocationExpressionSyntax invocation, SemanticModel model) =>
         invocation.ArgumentList.Arguments
-            .Where(x => semanticModel.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception))
+            .Where(x => model.GetTypeInfo(x.Expression).Type.DerivesFrom(KnownType.System_Exception))
             .Select(x => x.Expression is MemberAccessExpressionSyntax memberAccess && memberAccess.NameIs("InnerException")
-                ? semanticModel.GetSymbolInfo(memberAccess.Expression).Symbol
-                : semanticModel.GetSymbolInfo(x.Expression).Symbol)
+                            ? model.GetSymbolInfo(memberAccess.Expression).Symbol
+                            : model.GetSymbolInfo(x.Expression).Symbol)
             .FirstOrDefault();
 
     private static bool IsLoggingInvocation(InvocationExpressionSyntax invocation, SemanticModel model) =>

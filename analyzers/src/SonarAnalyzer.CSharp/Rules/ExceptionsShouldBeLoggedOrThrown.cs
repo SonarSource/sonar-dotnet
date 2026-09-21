@@ -28,13 +28,16 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
     private const string ThrownExceptionMessage = "Thrown exception.";
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
-    private static readonly KnownAssembly[] SupportedLoggingFrameworks = [
+
+    private static readonly KnownAssembly[] SupportedLoggingFrameworks =
+    [
         KnownAssembly.MicrosoftExtensionsLoggingAbstractions,
         KnownAssembly.Log4Net,
         KnownAssembly.NLog,
         KnownAssembly.CastleCore,
         KnownAssembly.CommonLoggingCore,
-        KnownAssembly.Serilog];
+        KnownAssembly.Serilog
+    ];
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
@@ -43,31 +46,33 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
             {
                 if (cc.Compilation.ReferencesAny(SupportedLoggingFrameworks))
                 {
-                     cc.RegisterNodeAction(c =>
-                         {
-                             var catchClauseSyntax = (CatchClauseSyntax)c.Node;
-                             var walker = new LoggingInvocationWalker(c.Model);
-                             if (catchClauseSyntax.Declaration?.Identifier is { } exceptionIdentifier // there is an exception to log
-                                 && catchClauseSyntax.DescendantNodes().Any(x => x.Kind() is SyntaxKind.ThrowStatement or SyntaxKindEx.ThrowExpression) // and a throw statement (preliminary check)
-                                 && walker.SafeVisit(catchClauseSyntax)
-                                 && walker.IsExceptionLogged
-                                 && walker.ThrowNode is { } throwStatement)
-                             {
-                                 var secondaryLocations = new List<SecondaryLocation>
-                                 {
-                                     new(walker.LoggingInvocationWithException.GetLocation(), LoggingStatementMessage),
-                                     new(throwStatement.GetLocation(), ThrownExceptionMessage)
-                                 };
-                                 c.ReportIssue(Rule, exceptionIdentifier, secondaryLocations);
-                             }
-                         },
-                         SyntaxKind.CatchClause);
+                    cc.RegisterNodeAction(c =>
+                        {
+                            var catchClauseSyntax = (CatchClauseSyntax)c.Node;
+                            var walker = new LoggingInvocationWalker(c.Model);
+                            if (catchClauseSyntax.Declaration?.Identifier is { } exceptionIdentifier // there is an exception to log
+                                && catchClauseSyntax.DescendantNodes().Any(x => x.Kind() is SyntaxKind.ThrowStatement or SyntaxKindEx.ThrowExpression) // and a throw statement (preliminary check)
+                                && walker.SafeVisit(catchClauseSyntax)
+                                && walker.IsExceptionLogged
+                                && walker.ThrowNode is { } throwStatement)
+                            {
+                                var secondaryLocations = new List<SecondaryLocation>
+                                {
+                                    new(walker.LoggingInvocationWithException.GetLocation(), LoggingStatementMessage),
+                                    new(throwStatement.GetLocation(), ThrownExceptionMessage)
+                                };
+                                c.ReportIssue(Rule, exceptionIdentifier, secondaryLocations);
+                            }
+                        },
+                        SyntaxKind.CatchClause);
                 }
             });
 
-    private sealed class LoggingInvocationWalker(SemanticModel model) : CatchLoggingInvocationWalker(model)
+    private sealed class LoggingInvocationWalker : CatchLoggingInvocationWalker
     {
         public SyntaxNode ThrowNode { get; private set; }
+
+        public LoggingInvocationWalker(SemanticModel model) : base(model) { }
 
         public override void VisitIfStatement(IfStatementSyntax node)
         {
@@ -95,15 +100,12 @@ public sealed class ExceptionsShouldBeLoggedOrThrown : SonarDiagnosticAnalyzer
 
         public override void VisitThrowStatement(ThrowStatementSyntax node)
         {
-            if (ThrowNode == null
+            if (ThrowNode is null
                 && RethrowsCaughtException(node.Expression))
             {
                 ThrowNode = node;
             }
             base.VisitThrowStatement(node);
         }
-
-        private bool RethrowsCaughtException(ExpressionSyntax expression) =>
-            expression is null || Equals(Model.GetSymbolInfo(expression).Symbol, CaughtException);
     }
 }

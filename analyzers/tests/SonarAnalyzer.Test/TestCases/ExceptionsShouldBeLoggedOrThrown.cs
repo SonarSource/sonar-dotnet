@@ -141,10 +141,10 @@ public class ExceptionsShouldBeEitherLoggedOrThrown
         }
 
         try {}
-        catch (Exception ex) when (ex is DivideByZeroException d)       // FN
+        catch (Exception ex) when (ex is DivideByZeroException d)       // Noncompliant - d is an alias of ex
         {
-            logger.LogError(ex, "Message!");
-            throw d;
+            logger.LogError(ex, "Message!");                            // Secondary
+            throw d;                                                    // Secondary
         }
     }
 
