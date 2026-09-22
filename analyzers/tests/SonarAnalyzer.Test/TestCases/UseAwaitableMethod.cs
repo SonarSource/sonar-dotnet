@@ -106,10 +106,71 @@ public class C
     }
 }
 
+public class IndexedNode
+{
+    public IndexedNode Child() => this;
+    public Task<IndexedNode> ChildAsync() => Task.FromResult(this);
+    public IndexedNode this[string key] => this;
+    public IndexedNode Property => this;
+
+    public IndexedNode WithoutAlternative() => this;
+    public IndexedNode WithParameter(int value) => this;
+    public Task<IndexedNode> WithParameterAsync(string value) => Task.FromResult(this);
+    public Task[] Tasks() => new[] { Task.CompletedTask };
+    public Task<Task[]> TasksAsync() => Task.FromResult(Tasks());
+    public IndexedNode[] Array() => new[] { this };
+    public Task<IndexedNode[]> ArrayAsync() => Task.FromResult(Array());
+    public IndexedNode[,] Matrix() => new IndexedNode[2, 2];
+    public Task<IndexedNode[,]> MatrixAsync() => Task.FromResult(Matrix());
+    public T Generic<T>() => default(T);
+    public Task<T> GenericAsync<T>() => Task.FromResult(default(T));
+
+    public async Task IndexedInvocations(IndexedNode node)
+    {
+        _ = node.Child()["k"]; // Noncompliant {{Await ChildAsync instead.}}
+        _ = node?.Child()["k"]; // Noncompliant {{Await ChildAsync instead.}}
+        _ = (node?.Child())["k"]; // Noncompliant
+        _ = (node?.Child()["k"]); // Noncompliant
+        _ = node?.Child()["k"]["nested"]; // Noncompliant
+        _ = node?.Child()["k"].Property; // Noncompliant
+        _ = node?.Child()["k"]?.Property; // Noncompliant
+        _ = node?.Property.Child()["k"]; // Noncompliant
+        _ = node.Child()?["k"]; // Noncompliant
+        _ = node?.Child()?["k"]; // Noncompliant
+        _ = node?["k"].Child()["nested"]; // Noncompliant
+        _ = node?["k"]?.Child()["nested"]; // Noncompliant
+        _ = node?.Array()[0]; // Noncompliant {{Await ArrayAsync instead.}}
+        _ = node?.Matrix()[0, 1]; // Noncompliant {{Await MatrixAsync instead.}}
+        _ = node?.Generic<IndexedNode>()["k"]; // Noncompliant {{Await GenericAsync instead.}}
+        await node.Tasks()[0]; // Noncompliant {{Await TasksAsync instead.}}
+        await (node.Tasks())[0]; // Noncompliant
+        await node?.Tasks()[0]; // Noncompliant {{Await TasksAsync instead.}}
+        await (node?.Tasks()[0]); // Noncompliant
+        await (node?.Tasks())[0]; // Noncompliant
+        await node.Tasks()?[0]; // Noncompliant
+        await node?.Tasks()?[0]; // Noncompliant
+        await node?.Property?.Tasks()[0]; // Noncompliant
+        _ = node?.WithoutAlternative()["k"]; // Compliant
+        _ = node?.WithParameter(42)["k"]; // Compliant: The async overload is not applicable.
+    }
+
+    public async Task AlreadyAwaited(IndexedNode node)
+    {
+        // The arrays are awaitable via the GetAwaiter extension method.
+        await node.Tasks(); // Compliant
+        await (node.Tasks()); // Compliant
+        await node?.Tasks(); // Compliant
+        await (node?.Tasks()); // Compliant
+        await node?.Property?.Tasks(); // Compliant
+        await node?["k"].Tasks(); // Compliant
+    }
+}
+
 public static class Extensions
 {
     public static void ExtVoidMethod(this C c) { }
     public static Task ExtVoidMethodAsync(this C c) => Task.CompletedTask;
+    public static System.Runtime.CompilerServices.TaskAwaiter GetAwaiter(this Task[] tasks) => Task.WhenAll(tasks).GetAwaiter();
 }
 
 public class Overloads

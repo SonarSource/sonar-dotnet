@@ -130,7 +130,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         CancellationToken cancel)
     {
         var awaitableRoot = FetchAwaitableRootOfInvocation(invocationExpression);
-        if (awaitableRoot is not { Parent: AwaitExpressionSyntax } // Invocation result is already awaited.
+        if (!IsAwaited(invocationExpression)
             && invocationExpression.EnclosingScope() is { } scope
             && IsAsyncCodeBlock(scope)
             && invocationExpression.Ancestors().TakeWhile(x => x != scope).All(x => x is not LockStatementSyntax) // Awaiting inside a lock produces CS1996.
@@ -236,9 +236,21 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             { Parent: ConditionalAccessExpressionSyntax conditional } => conditional.GetRootConditionalAccessExpression(),
             { Parent: MemberAccessExpressionSyntax memberAccess } => memberAccess.GetRootConditionalAccessExpression() ?? FetchAwaitableRootOfInvocation(memberAccess),
+            { Parent: ElementAccessExpressionSyntax elementAccess } => elementAccess.GetRootConditionalAccessExpression() ?? expression,
+            { Parent: InvocationExpressionSyntax invocation } => invocation.GetRootConditionalAccessExpression() ?? expression,
             { Parent: PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } parent } => FetchAwaitableRootOfInvocation(parent),
             { Parent: ParenthesizedExpressionSyntax parent } => FetchAwaitableRootOfInvocation(parent),
             { } self => self,
+        };
+
+    private static bool IsAwaited(ExpressionSyntax expression) =>
+        expression.Parent switch
+        {
+            AwaitExpressionSyntax => true,
+            ConditionalAccessExpressionSyntax conditional when conditional.WhenNotNull == expression => IsAwaited(conditional),
+            ParenthesizedExpressionSyntax parent => IsAwaited(parent),
+            PostfixUnaryExpressionSyntax { RawKind: (int)SyntaxKindEx.SuppressNullableWarningExpression } parent => IsAwaited(parent),
+            _ => false,
         };
 
     private static bool IsAsyncCodeBlock(SyntaxNode codeBlock) =>
