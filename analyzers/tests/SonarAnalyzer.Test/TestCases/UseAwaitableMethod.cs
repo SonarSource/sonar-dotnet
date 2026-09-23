@@ -193,6 +193,43 @@ public class Overloads
     }
 }
 
+// Repro for https://sonarsource.atlassian.net/browse/NET-4466
+public class MixedAwaitableOverloads
+{
+    public long VoidOverload(int i, byte j) => 0;
+    public void VoidOverloadAsync(long i, int j) { }
+    public Task<byte> VoidOverloadAsync(byte i, byte j) => Task.FromResult((byte)0);
+
+    public long IntOverload(int i, byte j) => 0;
+    public int IntOverloadAsync(long i, int j) => 0;
+    public Task<byte> IntOverloadAsync(byte i, byte j) => Task.FromResult((byte)0);
+
+    public long DynamicOverload(int i, byte j) => 0;
+    public dynamic DynamicOverloadAsync(long i, int j) => Task.CompletedTask;
+    public Task<byte> DynamicOverloadAsync(byte i, byte j) => Task.FromResult((byte)0);
+
+    public long GenericOverload(int i, byte j) => 0;
+    public T GenericOverloadAsync<T>(T i, int j) => i;
+    public Task<byte> GenericOverloadAsync(byte i, byte j) => Task.FromResult((byte)0);
+
+    public async Task Test(int i, byte j)
+    {
+        VoidOverload(i, j);             // Compliant: The applicable Async overload returns void.
+        this.VoidOverload(i, j);        // Compliant
+        this?.VoidOverload(i, j);       // Compliant
+        IntOverload(i, j);              // Compliant: The applicable Async overload returns int.
+        DynamicOverload(i, j);          // Compliant: The applicable Async overload returns dynamic.
+        GenericOverload(i, j);          // Compliant: The applicable Async overload is generic and returns int.
+
+        VoidOverload((byte)i, j);       // Noncompliant {{Await VoidOverloadAsync instead.}}
+        this.VoidOverload((byte)i, j);  // Noncompliant
+        this?.VoidOverload((byte)i, j); // Noncompliant
+        IntOverload((byte)i, j);        // Noncompliant {{Await IntOverloadAsync instead.}}
+        DynamicOverload((byte)i, j);    // Noncompliant {{Await DynamicOverloadAsync instead.}}
+        GenericOverload((byte)i, j);    // Noncompliant {{Await GenericOverloadAsync instead.}}
+    }
+}
+
 public class Inheritance
 {
     class Child : Inheritance
