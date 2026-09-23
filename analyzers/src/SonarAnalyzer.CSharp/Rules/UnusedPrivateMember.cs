@@ -41,6 +41,16 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(RuleS1144, RuleS4487);
     protected override bool EnableConcurrentExecution => false;
 
+    internal static bool VisitInternalTypeUsages(Compilation compilation, ISet<ISymbol> removableInternalTypes, bool isRazorAnalysisEnabled, out SymbolUsageCollector usageCollector)
+    {
+        var collector = new SymbolUsageCollector(compilation, removableInternalTypes);
+        var fullyVisited = compilation.SyntaxTrees
+            .Where(x => !x.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, isRazorAnalysisEnabled))
+            .All(x => collector.SafeVisit(x.GetRoot()));
+        usageCollector = collector;
+        return fullyVisited;
+    }
+
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(
             c =>
@@ -60,12 +70,10 @@ public sealed class UnusedPrivateMember : SonarDiagnosticAnalyzer
                             return;
                         }
 
-                        var usageCollector = new SymbolUsageCollector(cc.Compilation, removableInternalTypes);
-                        foreach (var syntaxTree in cc.Compilation.SyntaxTrees.Where(tree => !tree.IsConsideredGenerated(CSharpGeneratedCodeRecognizer.Instance, cc.IsRazorAnalysisEnabled())))
+                        if (VisitInternalTypeUsages(cc.Compilation, removableInternalTypes, cc.IsRazorAnalysisEnabled(), out var usageCollector))
                         {
-                            usageCollector.SafeVisit(syntaxTree.GetRoot());
+                            ReportUnusedPrivateMembers(cc, usageCollector, removableInternalTypes, SyntaxConstants.Internal, new());
                         }
-                        ReportUnusedPrivateMembers(cc, usageCollector, removableInternalTypes, SyntaxConstants.Internal, new());
                     });
             });
 

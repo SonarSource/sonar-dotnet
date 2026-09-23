@@ -16,7 +16,10 @@
  */
 
 using FluentAssertions.Extensions;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SonarAnalyzer.CSharp.Rules;
+using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.Test.Rules;
 
@@ -24,6 +27,8 @@ namespace SonarAnalyzer.Test.Rules;
 public partial class UnusedPrivateMemberTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<UnusedPrivateMember>();
+
+    public TestContext TestContext { get; set; }
 
     [TestMethod]
     public void UnusedPrivateMember_DebuggerDisplay_Attribute() =>
@@ -232,9 +237,52 @@ public partial class UnusedPrivateMemberTest
             .ExecutionTime()
             .Should().BeLessOrEqualTo(30.Seconds());
 
+    // NET-4632: exercise the helper directly because the normal verifier fails on the required nesting depth.
+    [TestMethod]
+    [DataRow(1, true)]
+    [DataRow(5000, false)]
+    public void UnusedPrivateMember_InternalTypeUsages_TraversalCompleteness(int nestingDepth, bool expectedFullyVisited)
+    {
+        var declaringTree = CSharpSyntaxTree.ParseText(
+            "public class DeclaringType { internal class InternalType { } }",
+            path: "Declaring.cs",
+            cancellationToken: TestContext.CancellationToken);
+        var usageTree = CSharpSyntaxTree.Create(UsageCompilationUnit(nestingDepth), path: "Usage.cs");
+        var compilation = SolutionBuilder.Create().AddProject(AnalyzerLanguage.CSharp).GetCompilation().AddSyntaxTrees(declaringTree, usageTree);
+        var symbol = compilation.GetTypeByMetadataName("DeclaringType+InternalType");
+        symbol.Should().NotBeNull();
+        var removableInternalTypes = new HashSet<ISymbol>(SymbolEqualityComparer.Default) { symbol };
+
+        var fullyVisited = SonarAnalyzer.CSharp.Rules.UnusedPrivateMember.VisitInternalTypeUsages(compilation, removableInternalTypes, isRazorAnalysisEnabled: false, out var usageCollector);
+
+        fullyVisited.Should().Be(expectedFullyVisited);
+        if (expectedFullyVisited)
+        {
+            usageCollector.UsedSymbols.Should().Contain(symbol);
+        }
+        else
+        {
+            usageCollector.UsedSymbols.Should().NotContain(symbol);
+        }
+    }
+
     private static ImmutableArray<MetadataReference> EntityFrameworkCoreReferences(string entityFrameworkVersion) =>
         MetadataReferenceFacade.NetStandard
             .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreSqlServer(entityFrameworkVersion))
             .Concat(NuGetMetadataReference.MicrosoftEntityFrameworkCoreRelational(entityFrameworkVersion))
             .ToImmutableArray();
+
+    private static CompilationUnitSyntax UsageCompilationUnit(int nestingDepth)
+    {
+        var statement = ParseStatement("new DeclaringType.InternalType();");
+        for (var i = 0; i < nestingDepth; i++)
+        {
+            statement = IfStatement(LiteralExpression(SyntaxKind.TrueLiteralExpression), Block(statement));
+        }
+
+        return CompilationUnit().AddMembers(
+            ClassDeclaration("UsageType").AddMembers(
+                MethodDeclaration(PredefinedType(Token(SyntaxKind.VoidKeyword)), "Method")
+                    .AddBodyStatements(statement)));
+    }
 }
