@@ -42,6 +42,7 @@ public sealed partial class KnownType
     public static readonly KnownType FluentAssertions_AssertionExtensions = new("FluentAssertions.AssertionExtensions");
     public static readonly KnownType FluentAssertions_Execution_AssertionScope = new("FluentAssertions.Execution.AssertionScope");
     public static readonly KnownType FluentAssertions_Primitives_ReferenceTypeAssertions = new("FluentAssertions.Primitives.ReferenceTypeAssertions", "TSubject", "TAssertions");
+    public static readonly KnownType FluentValidation_DefaultValidatorExtensions = new("FluentValidation.DefaultValidatorExtensions");
     public static readonly KnownType FluentValidation_IValidator = new("FluentValidation.IValidator");
     public static readonly KnownType FluentValidation_IValidator_T = new("FluentValidation.IValidator", "T");
     public static readonly KnownType FsCheck_NUnit_PropertyAttribute = new("FsCheck.NUnit.PropertyAttribute");

@@ -108,6 +108,7 @@ public sealed class UseAwaitableMethod : SonarDiagnosticAnalyzer
         {
             exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.FluentValidation_IValidator, "Validate"));   // https://github.com/SonarSource/sonar-dotnet/issues/9339
             exclusions.Add(x => x.IsImplementingInterfaceMember(KnownType.FluentValidation_IValidator_T, "Validate")); // https://github.com/SonarSource/sonar-dotnet/issues/9339
+            exclusions.Add(x => x.IsAny(KnownType.FluentValidation_DefaultValidatorExtensions, "Validate", "ValidateAndThrow")); // https://sonarsource.atlassian.net/browse/NET-1559
         }
         if (compilation.GetTypeByMetadataName(KnownType.MongoDB_Driver_IMongoCollectionExtensions) is not null)
         {

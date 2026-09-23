@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
+using FluentValidation.Internal;
 using FluentValidation.Results;
 
 public class FluentValidationTests_IValidatorT
@@ -35,13 +36,23 @@ public class FluentValidationTests_IValidatorT
     {
         var intAbstractValidator = new IntAbstractValidator();
         intAbstractValidator.Validate(0); // Compliant
+        intAbstractValidator.Validate(0, options => options.IncludeRuleSets("x")); // Compliant
+        DefaultValidatorExtensions.Validate(intAbstractValidator, 0, options => options.IncludeRuleSets("x")); // Compliant
+        intAbstractValidator.ValidateAndThrow(0); // Compliant
+        DefaultValidatorExtensions.ValidateAndThrow(intAbstractValidator, 0); // Compliant
 
         var intIValidatorT = new IntIValidatorT();
         intIValidatorT.Validate(0); // Compliant
+        intIValidatorT.Validate(0, options => options.IncludeRuleSets("x")); // Compliant
+        intIValidatorT.ValidateAndThrow(0); // Compliant
 
         var explicitIntIValidatorT = new ExplicitIntIValidatorT();
         explicitIntIValidatorT.Validate(0); // Compliant
         ((IValidator<int>)explicitIntIValidatorT).Validate(0); // Compliant
+        explicitIntIValidatorT.Validate(0, options => options.IncludeRuleSets("x")); // Compliant
+        ((IValidator<int>)explicitIntIValidatorT).Validate(0, options => options.IncludeRuleSets("x")); // Compliant
+        explicitIntIValidatorT.ValidateAndThrow(0); // Compliant
+        ((IValidator<int>)explicitIntIValidatorT).ValidateAndThrow(0); // Compliant
     }
 }
 
@@ -84,9 +95,17 @@ public class FluentValidationTests_NotFluentValidation
     public ValidationResult Validate<T>(T instance) => null;
     public Task<ValidationResult> ValidateAsync<T>(T instance, CancellationToken cancellation = new CancellationToken()) => null;
 
+    public ValidationResult Validate<T>(T instance, Action<ValidationStrategy<T>> options) => null;
+    public Task<ValidationResult> ValidateAsync<T>(T instance, Action<ValidationStrategy<T>> options, CancellationToken cancellation = new CancellationToken()) => null;
+
+    public void ValidateAndThrow<T>(T instance) { }
+    public Task ValidateAndThrowAsync<T>(T instance, CancellationToken cancellation = new CancellationToken()) => null;
+
     public async Task Validate()
     {
         Validate(new ValidationContext<int>(0)); // Noncompliant This method does not implement IValidation
         Validate<int>(0);                        // Noncompliant This method does not implement IValidation<T>
+        Validate(0, options => options.IncludeRuleSets("x")); // Noncompliant This method does not belong to FluentValidation
+        ValidateAndThrow<int>(0);                // Noncompliant This method does not belong to FluentValidation
     }
 }
