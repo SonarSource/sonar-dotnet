@@ -1,10 +1,12 @@
 ﻿// Copyright © 2011 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// Noncompliant {{Remove this commented out code.}} : ;
+// Noncompliant@+1 {{Remove this commented out code.}}
+// ;
 using System;
 
-// Noncompliant: ;
+// Noncompliant@+1
+// ;
 using System;
 // Noncompliant@+1
 // {
@@ -24,15 +26,20 @@ using System;
 using System;
 // Noncompliant: ++
 using System;
-// Noncompliant: for    ( .. i != 5
+// Noncompliant@+1
+// for    ( .. i != 5
 using System;
-// Noncompliant: if ( 1==2
+// Noncompliant@+1
+// if ( 1==2
 using System;
-// Noncompliant: while( i > 5
+// Noncompliant@+1
+// while( i > 5
 using System;
-// Noncompliant: catch(
+// Noncompliant@+1
+// catch(
 using System;
-// Noncompliant: switch(
+// Noncompliant@+1
+// switch(
 using System;
 // Noncompliant@+1
 // try{
@@ -55,11 +62,9 @@ using System;
 
     hello
 
-    // Noncompliant: ;
+    // Noncompliant: || && ||
 
     ; world
-
-    || && ||
 
     ;
 
@@ -116,7 +121,8 @@ namespace Tests.Diagnostics
             ///
 
             M();
-            // Noncompliant: Debug.Assert(this.MemberTypeName != null == storage.HasFlag(StorageClass.Member));
+            _ = "separator"; // Noncompliant@+1
+            // Debug.Assert(this.MemberTypeName != null == storage.HasFlag(StorageClass.Member));
             //
             //if (storage.HasFlag(StorageClass.Member))
             //{

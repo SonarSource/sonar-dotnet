@@ -1,10 +1,13 @@
 ﻿// Copyright © 2011 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
-// Noncompliant {{Remove this commented out code.}} : ;
+// Noncompliant@+1 {{Remove this commented out code.}}
+// ;
 using System;
+using System.Collections.Generic;
 
-// Noncompliant: ;
+// Noncompliant@+1
+// ;
 using System;
 // Noncompliant@+1
 // {
@@ -24,15 +27,20 @@ using System;
 using System;
 // Noncompliant: ++
 using System;
-// Noncompliant: for    ( .. i != 5
+// Noncompliant@+1
+// for    ( .. i != 5
 using System;
-// Noncompliant: if ( 1==2
+// Noncompliant@+1
+// if ( 1==2
 using System;
-// Noncompliant: while( i > 5
+// Noncompliant@+1
+// while( i > 5
 using System;
-// Noncompliant: catch(
+// Noncompliant@+1
+// catch(
 using System;
-// Noncompliant: switch(
+// Noncompliant@+1
+// switch(
 using System;
 // Noncompliant@+1
 // try{
@@ -55,11 +63,9 @@ using System;
 
     hello
 
-    // Noncompliant: ;
+    // Noncompliant: || && ||
 
     ; world
-
-    || && ||
 
     ;
 
@@ -73,18 +79,13 @@ using System;
 
 /*
 
-
-
-
     // Noncompliant: Console.WriteLine();
-
 
     Console.WriteLine();
     */
 
 namespace Tests.Diagnostics
 {
-
 
     /// <summary>
     /// ...
@@ -178,12 +179,12 @@ namespace Tests.Diagnostics
             ///
             ///
 
-
             /// The C++ access level for a member function, e.g. private
             ///
 
             SentenceWithSemicolon();
-            // Noncompliant: Debug.Assert(this.MemberTypeName != null == storage.HasFlag(StorageClass.Member));
+            _ = "separator"; // Noncompliant@+1
+            // Debug.Assert(this.MemberTypeName != null == storage.HasFlag(StorageClass.Member));
             //
             //if (storage.HasFlag(StorageClass.Member))
             //{
@@ -193,19 +194,150 @@ namespace Tests.Diagnostics
             // output = false;
             //}
 
-            // FP: Short phrases with fewer than 3 words are not recognized as natural language sentences and are still flagged.
-            _ = "separator"; // Noncompliant@+1 FP
+            _ = "separator";
             // process items;
 
-            // FP: Natural language that starts with a statement keyword followed by a code keyword is still flagged.
-            _ = "separator"; // Noncompliant@+1 FP
+            _ = "separator";
             // return null if the value is not found;
 
-            // FN: Code where the second word is not in CodeKeywords is treated as a sentence and not detected.
-            _ = "separator";
-            // FN: extern alias MyAlias;
+            _ = "separator"; // Noncompliant@+1
+            // extern alias MyAlias;
         }
 
+        void WhitespaceInExclusions()
+        {
+            _ = "separator";
+            // Li cense: x = 1;
+
+            _ = "separator";
+            // C + +: x = 1;
+
+            _ = "separator";
+            // Li	cense: x = 1;
+
+            _ = "separator";
+            // c	+	+: x = 1;
+
+            // Non-breaking space (U+00A0).
+            _ = "separator";
+            // Li cense: x = 1;
+
+            // Em spaces (U+2003).
+            _ = "separator";
+            // C + +: x = 1;
+
+            // Task tags still use the original word boundaries.
+            _ = "separator"; // Noncompliant@+1
+            // TO DO: x = 1;
+        }
+
+        void TaskCommentsAreExcluded()
+        {
+            _ = "separator";
+            // TODO: x = 1;
+
+            _ = "separator";
+            //	FIXME: x = 1;
+
+            _ = "separator";
+            /*
+             * HACK: x = 1;
+             */
+
+            _ = "separator";
+            /* // XXX: x = 1; */
+
+            _ = "separator";
+            // - TODO: x = 1;
+
+            _ = "separator";
+            // [alice] TODO: x = 1;
+
+            _ = "separator";
+            // NET-123 fixMe: x = 1;
+
+            _ = "separator";
+            // Temporary workaround - HACK: x = 1;
+
+            _ = "separator";
+            /* Note: XXX x = 1; */
+
+            _ = "separator";
+            // 2026-09-17 Victor - TODO: x = 1;
+
+            _ = "separator";
+            // [a.contributor.with.a.long.name] 2026-09-17 - TODO: x = 1;
+
+            _ = "separator";
+            // TODOHandler TODO: x = 1;
+        }
+
+        void TaskTagsInsideCodeAreDetected()
+        {
+            _ = "separator"; // Noncompliant@+1
+            // var message = "TODO: retry";
+
+            _ = "separator"; // Noncompliant@+1
+            // name = "xxx";
+
+            _ = "separator"; // Noncompliant@+1
+            // hack = ComputeHack();
+
+            _ = "separator"; // Noncompliant@+1
+            // HACK += ComputeHack();
+
+            _ = "separator"; // Noncompliant@+1
+            // TODO();
+
+            _ = "separator"; // Noncompliant@+1
+            // FIXME.Run();
+
+            _ = "separator"; // Noncompliant@+1
+            // if (ready) { TODO
+
+            _ = "separator"; // Noncompliant@+1
+            /* var message = "TODO: retry"; */
+
+            _ = "separator"; // Noncompliant@+1
+            /* hack = ComputeHack(); */
+
+            // FN: the trailing tag hides the semicolon from code recognition.
+            _ = "separator";
+            // x = 1; TODO
+        }
+
+        void TaskTagsInsideIdentifiersAreDetected()
+        {
+            _ = "separator"; // Noncompliant@+1
+            // TODOHandler = 1;
+
+            _ = "separator"; // Noncompliant@+1
+            // myTODO = 1;
+
+            _ = "separator"; // Noncompliant@+1
+            // _TODO = 1;
+
+            _ = "separator"; // Noncompliant@+1
+            // TODO_ = 1;
+
+            _ = "separator"; // Noncompliant@+1
+            // TODO2 = 1;
+
+            _ = "separator"; // Noncompliant@+1
+            // TODOé = 1;
+        }
+
+        void TaskTagsOnlyExcludeTheirOwnLine()
+        {
+            _ = "separator"; // Noncompliant@+2
+            // [alice] TODO: x = 1;
+            // x = 1;
+
+            _ = "separator"; // Noncompliant@+2
+            /* [alice] FIXME: x = 1;
+             * x = 1;
+             */
+        }
 
         int a; // Noncompliant: Console.WriteLine();
         int b; // Noncompliant: Console.WriteLine();
@@ -254,6 +386,24 @@ namespace Tests.Diagnostics
     {
     }
 
+    public class CommentedOutCodeXmlDoc
+    {
+        /// <summary>
+        /// See <see cref="Method(int, string)"/> and <seealso cref="Dictionary{TKey, TValue}"/>.
+        /// </summary>
+        /// <param name="value">See <paramref name="value"/> for details.</param>
+        /// <exception cref="ArgumentException">Thrown if <paramref name="value"/> is negative.</exception>
+        /// <returns>See <see cref="List{T}.Add(T)"/>.</returns>
+        /// <code>
+        /// var result = Method(42, "test");
+        /// if (result > 0) { return result; }
+        /// </code>
+        public int Method(int value, string text) => value;
+
+        //// Four slashes are not documentation either, but are still excluded: if (x > 0) { return x; }
+        public int Field;
+    }
+
     // Some C++ reference
     class X { }
     // Some c++ reference
@@ -272,7 +422,7 @@ class Repro_8819
         _ = "separator";
         // Natural language sentence with semicolon at the end;
 
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with open-brace at the end{
 
         _ = "separator";
@@ -293,61 +443,462 @@ class Repro_8819
         _ = "separator"; // Compliant: Natural language sentence with comma at the end,
         _ = "separator"; // Compliant: Natural language sentence with period at the end.
         _ = "separator"; // Compliant: Natural language sentence with close-brace at the end}
+        _ = "separator"; // Compliant: Natural language sentence with closing parenthesis at the end)
+        _ = "separator"; // Compliant: Natural language sentence with an opening parenthesis (in the middle
 
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // The empty set is indicated either with ∅ or with {}
     }
 
-    // Natural-language comments that are misclassified as code. https://sonarsource.atlassian.net/browse/NET-3964
+    // Natural-language comments that used to be misclassified as code. https://sonarsource.atlassian.net/browse/NET-3964
     // Remark: separators are required to consider comments as independent sentences.
     void NaturalLanguageMisclassifiedAsCode()
     {
-        // A line ending in a semicolon is treated as code unless it is recognized as a natural-language
-        // sentence. The recognizer only accepts words made of word-characters separated by single spaces,
-        // with a small set of trailing punctuation. A single foreign character anywhere on the line breaks
-        // the match, so the whole prose sentence is flagged as commented-out code.
-
-        // The hyphen inside a compound word stops it from being recognized as natural language.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with a hyphenated-word ending in semicolon;
 
-        // The em dash stops the line from being recognized as natural language.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with an interruption — an aside — ending in semicolon;
 
-        // The possessive apostrophe stops the line from being recognized as natural language.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with the module's possessive noun ending in semicolon;
 
-        // The dotted member-access token stops the line from being recognized as natural language.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with a Namespace.Member dotted token ending in semicolon;
 
-        // The inner period of an abbreviation stops the line from being recognized as natural language.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with an abbreviation e.g. this one ending in semicolon;
 
-        // The parentheses stop the line from being recognized as natural language.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence with a (parenthetical aside) ending in semicolon;
 
-        // The following do not even end in a semicolon: any fragment that resembles a code token is flagged.
-
-        // Prose that mentions the increment operator is treated as code.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence mentioning the ++ operator in passing
 
-        // Prose that describes an exception-handler clause is treated as code.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence describing a catch (Exception) clause
 
-        // Prose that describes a code block is treated as code.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence describing a try { } block
 
-        // Prose that quotes a guarded comparison is treated as code.
-        _ = "separator"; // Noncompliant@+1 FP
+        _ = "separator";
         // Natural language sentence quoting an if (value != null) guard
+
+        // Double quotes around a quoted code token do not turn prose into code.
+        _ = "separator";
+        // Natural language sentence that quotes a "catch (Exception)" block in prose
+    }
+
+    void KeywordsFromTheCompilerTableAreDetected()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // ushort x;
+
+        _ = "separator"; // Noncompliant@+1
+        // value from nameof lookup;
+
+        _ = "separator"; // Noncompliant@+1
+        // nint offset;
+
+        _ = "separator"; // Noncompliant@+1
+        // nuint value;
+
+        _ = "separator"; // Noncompliant@+1
+        // generic constraint notnull required;
+    }
+
+    void TerseStatementsAndDeclarationsAreDetected()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // x = 1;
+
+        _ = "separator"; // Noncompliant@+1
+        // flag = true;
+
+        _ = "separator"; // Noncompliant@+1
+        // result = null;
+
+        _ = "separator"; // Noncompliant@+1
+        // object x;
+
+        _ = "separator"; // Noncompliant@+1
+        //object val = null;
+
+        _ = "separator"; // Noncompliant@+1
+        // string name;
+
+        _ = "separator"; // Noncompliant@+1
+        // new byte[10];
+
+        _ = "separator"; // Noncompliant@+1
+        // int value = 42;
+
+        _ = "separator"; // Noncompliant@+1
+        // value = other ?? fallback;
+
+        _ = "separator"; // Noncompliant@+1
+        // var result = Compute(input);
+
+        _ = "separator"; // Noncompliant@+1
+        // await Task.Delay(100);
+
+        _ = "separator"; // Noncompliant@+1
+        // collection.Add(key, value);
+
+        _ = "separator"; // Noncompliant@+1
+        // message = "Please provide a value.";
+
+        _ = "separator"; // Noncompliant@+1
+        // throw new InvalidOperationException("Cannot create SomeType: configuration not found");
+
+        _ = "separator"; // Noncompliant@+1
+        // public static readonly string SomeConstant = "value";
+
+        // A field declaration whose call and English-looking string literal both sit on one line.
+        _ = "separator"; // Noncompliant@+1
+        // private static readonly Logger DefaultLogger = LoggerFactory.Create<Program>("startup message text");
+
+        _ = "separator"; // Noncompliant@+1
+        // base.dispose(disposing);
+
+        _ = "separator"; // Noncompliant@+1
+        // return;
+
+        _ = "separator"; // Noncompliant@+1
+        // break;
+    }
+
+    void StringLiteralContentsDoNotCountAsProse()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // Method("a sentence containing several ordinary words separated by spaces");
+
+        _ = "separator";
+        // "first" natural language sentence containing several ordinary words "second";
+
+        // Unpaired quotes leave the whole line available for prose detection.
+        _ = "separator";
+        // Method("a sentence containing several ordinary words separated by spaces", ");
+    }
+
+    void AssignmentsWithoutSurroundingWhitespaceAreDetected()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // buffer[position&mask]=current=lookup[index];
+
+        _ = "separator"; // Noncompliant@+1
+        // _fieldName=owner.fieldName.EnumValue;
+    }
+
+    void CompoundAssignmentsAreDetected()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // total += count;
+
+        _ = "separator"; // Noncompliant@+1
+        //buffer.Changed -= OnChanged;
+
+        _ = "separator"; // Noncompliant@+1
+        // items.Count += Bar.Count;
+
+        // Fixed FP (NET-4429): a negated regex character class excluding '=' is not an XOR-assignment. Written
+        // as a trailing comment because the verifier reads a caret in an own-line comment as a location marker.
+        _ = "carrier"; // (?<key>([^=\s\p{Cc}]|\s+[^=\s\p{Cc}]|\s+==|==)+)
+    }
+
+    void TernariesAndWrappedContinuationsAreDetected()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // var result = current != null ? current.Value : fallback.Value;
+
+        _ = "separator"; // Noncompliant@+1
+        // Label: (current != null && other != null) ? current.Value : fallback.Value);
+
+        _ = "separator"; // Noncompliant@+1
+        // does the equivalent of: var items = CreateArray(4);
+    }
+
+    void ControlFlowInStatementPositionIsDetected()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // if (x)
+
+        _ = "separator"; // Noncompliant@+1
+        // if (index < count && IsValid(items[index])) {
+
+        _ = "separator"; // Noncompliant@+1
+        // } else if (someCondition && otherCondition) {
+
+        // Comment decoration counts as punctuation.
+        _ = "separator"; // Noncompliant@+1
+        // * if (x) {
+
+        _ = "separator"; // Noncompliant@+1
+        // try { if (value != null) { Process(); } }
+
+        _ = "separator"; // Noncompliant@+1
+        // for (Node current = node.Parent; current != null; current = current.Parent)
+
+        _ = "separator"; // Noncompliant@+1
+        // case SomeEnum.Double : result.value = (SomeCastType)left.value / (SomeCastType)right.value; break;
+
+        _ = "separator"; // Noncompliant@+1
+        // if (!((kind == SomeKind.First || kind == SomeKind.Second || kind == SomeKind.Third) && scope is SomeScope))
+
+        _ = "separator"; // Noncompliant@+1
+        // if (value.Length < threshold) { throw "Value exceeds the allowed length" }
+    }
+
+    void ProseQuotingCodeStaysCompliant()
+    {
+        _ = "separator";
+        // Natural language sentence describing a generic call Foo<T>()
+
+        _ = "separator";
+        // Natural language sentence describing a generic call Foo<T>();
+
+        _ = "separator";
+        // Natural language sentence noting the ratio is greater than (the threshold) allows;
+
+        _ = "separator";
+        // Natural language sentence noting the ratio is greater than(the threshold) allows;
+
+        _ = "separator";
+        // Generates the code for an if(condition)-then-else branch.
+
+        _ = "separator";
+        // This follows the same approach as is used in SomeType.SomeMethod(int, int, out int)
+
+        // A keyword used as an ordinary English word, alongside a real call shape.
+        _ = "separator";
+        // Natural language sentence noting that in case the value is null, the callback HandleMessage() is invoked
+
+        // Pseudo-code notation in a documentation comment, with an '=' and two '||'.
+        _ = "separator";
+        // Combine the parts: result = Merge(partOne || partTwo || partThree)
+
+        _ = "separator";
+        // returning if(x) to the caller whenever the flag is set
+
+        _ = "separator";
+        // treat the input as "trusted and carry on;
+
+        _ = "separator";
+        // lookup constants: k=2, n=5, m=32 : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
+    }
+
+    void TrailingDocumentationCommentStaysCompliant()
+    {
+        _ = "separator";
+        int value = 42; // This is TheComputedValue;
+    }
+
+    void TrailingCodeShapedCommentsAreKnownFalsePositives()
+    {
+        _ = "separator"; // Noncompliant@+1
+        _ = "carrier"; // while (true)
+
+        _ = "separator"; // Noncompliant@+1
+        _ = "carrier"; // if (!ready)
+
+        _ = "separator"; // Noncompliant@+1
+        _ = "carrier"; // value == null || count != limit || offset >= length
+    }
+
+    void DecorativeMarkupAndBannersStayCompliant()
+    {
+        _ = "separator";
+        // in case this happens; **
+
+        _ = "separator";
+        // **Natural language text with emphasis**
+
+        _ = "separator";
+        // _Natural language text with emphasis_
+
+        _ = "separator";
+        //===============================================================================
+
+        _ = "separator";
+        // ========================================================
+
+        _ = "separator";
+        // ===================== SECTION TITLE =====================
+
+        _ = "separator";
+        // ------------------------------
+
+        _ = "separator";
+        // ******************************
+
+        _ = "separator";
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+        _ = "separator";
+        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+        _ = "separator";
+        // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+        _ = "separator";
+        // ||||||||||||||||||||||||||||||
+
+        _ = "separator";
+        // +---+---+---|---+---+---+---|
+
+        _ = "separator";
+        // +----------------+----------------+
+
+        _ = "separator";
+        // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    }
+
+    void ForeignNotationIsJudgedOnCodeShapeAlone()
+    {
+        _ = "separator"; // Noncompliant@+1
+        // System.out.println("value: " + result);
+
+        _ = "separator";
+        // assert matches(value, offset, length, out result);
+
+        _ = "separator";
+        // PATTERN: [AnnotateSomething] outer:(Something input:*) => (AddPattern outer {Category}) AND (AddArgument outer {Key} input) AND { }
+    }
+
+    void MathematicalAndTabularNotationAreKnownFalsePositives()
+    {
+        // 0.9536 against a threshold of 0.9105: Assignment@0.60 + Call@0.884 (5 matches); language score 0.10.
+        _ = "separator"; // Noncompliant@+1
+        // f(x) = g(x) + h(x) = k(x)*m(x)
+
+        _ = "separator"; // Noncompliant@+1
+        // q(a) = f(b) * g(c) + h(d) - k(e)
+
+        // 0.9585 against a threshold of 0.9022: Comparison@0.45 + Call@0.9246 (6 matches); language score 0.4347.
+        _ = "separator"; // Noncompliant@+1
+        // log(f(x)) <= exp(g(x)) * sqrt(h(x))
+
+        _ = "separator"; // Noncompliant@+1
+        // && || == != > < >= <=
+
+        _ = "separator"; // Noncompliant@+1
+        // allowed types: bool, byte, char, double, float, int, long, sbyte, short, ushort, uint
+
+        _ = "separator"; // Noncompliant@+1
+        // store(T, load(items), load(offset), Op(load(items), load(offset)), Next(T))
+    }
+
+    // Ordinary prose that happens to end in ';' and to use words that are also C# keywords.
+    void ProseUsingKeywordsStaysCompliant()
+    {
+        _ = "separator";
+        // Otherwise, do nothing;
+
+        _ = "separator";
+        // See the notes below;
+
+        _ = "separator";
+        // Returns true on success;
+
+        _ = "separator";
+        // Set to true to enable;
+
+        _ = "separator";
+        // the value is null if not set;
+
+        _ = "separator";
+        // true for success, false for failure;
+
+        _ = "separator";
+        // do this in case the lock is held;
+
+        _ = "separator";
+        // returns the object as a string;
+
+        _ = "separator";
+        // this is the default for new events;
+
+        _ = "separator";
+        // out of range if the index is negative;
+    }
+
+    void ShortProseEndingInSemicolonStaysCompliant()
+    {
+        _ = "separator";
+        // Use this as needed;
+
+        _ = "separator";
+        // in case of failure;
+
+        _ = "separator";
+        // for each item in turn;
+
+        _ = "separator";
+        // Reset to default if set;
+
+        _ = "separator";
+        // true if enabled, false otherwise;
+
+        _ = "separator";
+        // is null or empty;
+    }
+
+    void AcceptedGapsAndKnownFalsePositives()
+    {
+        _ = "separator";
+        // Node item;
+
+        _ = "separator";
+        // SomeExpressionType localExpr;
+
+        _ = "separator"; // Noncompliant@+1
+        // default is null;
+
+        _ = "separator";
+        // collection.Add (key, value);
+
+        _ = "separator";
+        // counter++; // NOTE: kept for backward compatibility
+
+        _ = "separator";
+        // throw;
+
+        _ = "separator";
+        // remainingCharacters++;
+
+        _ = "separator";
+        // remainingCapacity--;
+
+        _ = "separator";
+        // && value < items.Length && Contains(items, ++i, sep)
+
+        // Bare argument-list continuation: 0.9000 against a threshold of 0.9123.
+        _ = "separator";
+        // value, offset, count);
+
+        // Arithmetic expression fragment: 0.9000 against a threshold of 0.9142.
+        _ = "separator";
+        // total + count - offset;
+
+        // Member-access chain statement: 0.9000 against a threshold of 0.9061.
+        _ = "separator";
+        // currentHandler.ActiveSelection.Content;
+
+        // Long call statement: 0.9350 against a threshold of 0.9549.
+        _ = "separator";
+        // Handler.Process(value, offset, count, buffer, flag, mode, extra);
+
+        // Long assignment-plus-call statement: 0.9740 against a threshold of 0.9790.
+        _ = "separator";
+        // totalValue = ComputeResult(firstItem, secondItem, thirdItem, fourthItem, fifthItem, sixthItem, seventhItem, eighthItem);
+
+        _ = "separator"; // Noncompliant@+1
+        // equivalent to accumulator /= baseValue;
+
+        // Exceeds its threshold by only 0.0040, the tightest margin in this file: if it flips, the payload is the
+        // thing to leave alone.
+        _ = "separator"; // Noncompliant@+1
+        // rank is SubTreeSize(Node.Left)+1, we do +1 here to offset the +1 done in rank. index -= rank;
     }
 
     void CommentedOutCommentsSeparatedByEmptyLine()
@@ -370,4 +921,5 @@ class Repro_8819
         { }
         // Noncompliant: var y = 42;
     }
+
 }

@@ -26,30 +26,57 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
     internal const string MessageFormat = "Remove this commented out code.";
     private const int CommentMarkLength = 2;
 
-    private static readonly string[] CodeEndings = ["{", ";}", "{}"];
-    private static readonly string[] CodeParts = ["++", "catch(", "switch(", "try{", "else{"];
-    private static readonly string[] CodePartsWithRelationalOperator = ["for(", "if(", "while("];
-    private static readonly string[] RelationalOperators = ["<", ">", "<=", ">=", "==", "!="];
+    // These values were tuned against unit tests and Peach, resulting in 1.13% FP and 2.01% FN among reports.
+    private const double MinimumThreshold = 0.87;
+    private const double NaturalLanguageWeight = 0.005;
+    private const double WordWeight = 0.010;
+    private const int WordCountCap = 9;
+    private const double MaximumThreshold = 0.99;
 
-    // Groups 1 and 2 capture the first two words for keyword detection.
-    private static readonly Regex SentencePattern =
-        new(
-            @"^\s*(?:[*\-]|->|=>)?\s*(\w+)[.,?:!']*\s+(\w+)[.,?:!']*\s+(?:\w+[.,?:!']*\s+)*\w+[.,?:!']*$",
-            RegexOptions.None,
-            Constants.DefaultRegexTimeout);
-
-    private static readonly HashSet<string> CodeKeywords =
+    internal static readonly string[] WeakKeywordNames =
     [
-        "abstract", "as", "async", "await", "base", "bool", "break", "byte", "catch", "char",
-        "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double",
-        "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for",
-        "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock",
-        "long", "namespace", "new", "null", "object", "operator", "out", "override", "params",
-        "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short",
-        "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true",
-        "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "using", "virtual", "void",
-        "volatile", "while", "yield",
+        "is", "as", "in", "case", "if", "for", "while", "else", "true", "false", "null", "default", "do", "this", "base", "event", "out",
     ];
+
+    // Subset of contextual keywords that are uncommon in prose.
+    internal static readonly string[] ContextualKeywordNames = ["var", "async", "await", "yield", "nameof", "nint", "nuint", "notnull"];
+
+    internal static readonly Detector BlockBoundaryAtLineEnd = CreateDetector(0.95, @"(?:\A\}|[;{]\}|\{)\z", ignoreWhitespace: true);
+
+    internal static readonly Detector ControlFlowStart = CreateDetector(
+        0.95,
+        @"(?<=\A(?:[{}();,*\-/=<>!&|?:]|else|do|try|return|yield|await|case|default|break)*)(?:if\(|for\(|while\(|catch\(|switch\(|try\{|else\{)",
+        ignoreWhitespace: true);
+
+    internal static readonly Detector Increment = CreateDetector(0.95, CreateDelimitedTokenPattern(["++"]));
+    internal static readonly Detector LogicalOperators = CreateDetector(0.55, CreateDelimitedTokenPattern(["&&", "||", "??"]));
+    internal static readonly Detector TrailingSemicolon = CreateDetector(0.90, @";\s*\z");
+
+    internal static readonly Detector Assignment = CreateDetector(0.60, @"(?:(?<![=!<>])(?<!\[\^)|(?<=<<|>>))=(?![=>]).*\z");
+
+    internal static readonly Detector Comparison = CreateDetector(0.45, @"(?<!=)[!<>=]=(?!=)", ignoreWhitespace: true);
+
+    internal static readonly Detector Call = CreateDetector(0.35, @"(?<![\p{L}\p{Nd}_])(?!(?:if|for|while|catch|switch)\()[\p{L}\p{Nd}_]+\(|>\(");
+
+    internal static readonly Detector StrongKeywords = CreateDetector(
+        0.35,
+        CreateDelimitedTokenPattern(SyntaxFacts.GetKeywordKinds().Select(SyntaxFacts.GetText)
+            .Where(x => SyntaxFacts.GetKeywordKind(x) != SyntaxKind.None)
+            .Concat(ContextualKeywordNames)
+            .Except(WeakKeywordNames, StringComparer.Ordinal)));
+    internal static readonly Detector WeakKeywords = CreateDetector(0.10, CreateDelimitedTokenPattern(WeakKeywordNames));
+
+    private static readonly Detector[] Detectors =
+    [
+        BlockBoundaryAtLineEnd, ControlFlowStart, Increment, LogicalOperators, TrailingSemicolon, Assignment, Comparison, Call, StrongKeywords, WeakKeywords,
+    ];
+
+    private static readonly Regex TaskTagPattern = new(
+        @"\A[\w \t*/\-\[\]:.]*?\b(?:TODO|FIXME|HACK|XXX)(?=:|\s+\p{L}|\s*\z)",
+        RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
+        Constants.DefaultRegexTimeout);
+
+    private static readonly Regex StringLiteralPattern = new("\".*?\"", RegexOptions.None, Constants.DefaultRegexTimeout);
 
     private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
 
@@ -57,18 +84,40 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
 
     internal static bool IsCode(string line)
     {
-        var checkedLine = line.Replace(" ", string.Empty).Replace("\t", string.Empty);
-
-        if (checkedLine.Contains("License") || checkedLine.Contains("c++") || checkedLine.Contains("C++"))
+        var lineWithoutWhitespace = RemoveWhitespace(line);
+        if (IsExcluded(line, lineWithoutWhitespace))
         {
             return false;
         }
-
-        return EndsWithCode(checkedLine, line)
-            || ContainsCodeParts(checkedLine)
-            || ContainsMultipleLogicalOperators(checkedLine)
-            || ContainsCodePartsWithRelationalOperator(checkedLine);
+        var codeScore = CalculateCodeScore(line, lineWithoutWhitespace);
+        return codeScore > MinimumThreshold && codeScore > CalculateThreshold(line);
     }
+
+    internal static double CalculateCodeScore(string line, string lineWithoutWhitespace)
+    {
+        var probability = 0d;
+        foreach (var detector in Detectors)
+        {
+            var matchCount = CountMatches(detector, line, lineWithoutWhitespace);
+            var detectorProbability = 1d - Math.Pow(1d - detector.Weight, matchCount);
+            probability = 1d - ((1d - probability) * (1d - detectorProbability));
+        }
+        return probability;
+    }
+
+    internal static int CountMatches(Detector detector, string line, string lineWithoutWhitespace)
+    {
+        var input = detector.IgnoreWhitespace ? lineWithoutWhitespace : line;
+        // In testing this reduces allocations from this rule by ~90%
+        if (!detector.Regex.SafeIsMatch(input))
+        {
+            return 0;
+        }
+        return detector.Regex.SafeMatches(input).Count;
+    }
+
+    internal static string RemoveWhitespace(string line) =>
+        new(line.Where(x => !char.IsWhiteSpace(x)).ToArray());
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterTreeAction(c =>
@@ -79,6 +128,22 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
                     CheckTrivia(c, token.TrailingTrivia);
                 }
             });
+
+    private static double CalculateThreshold(string line)
+    {
+        var lineWithoutStringLiterals = WithoutStringLiterals(line);
+        return Math.Min(
+            MinimumThreshold
+            + (NaturalLanguageWeight * NaturalLanguageDetector.HumanLanguageScore(lineWithoutStringLiterals))
+            + (WordWeight * Math.Min(WordCount(lineWithoutStringLiterals), WordCountCap)),
+            MaximumThreshold);
+    }
+
+    // Leave lines with unpaired quotes unchanged.
+    private static string WithoutStringLiterals(string line) =>
+        line.Count(x => x == '"') % 2 == 0
+            ? StringLiteralPattern.SafeReplace(line, " ")
+            : line;
 
     private static void CheckTrivia(SonarSyntaxTreeReportingContext context, SyntaxTriviaList trivia)
     {
@@ -105,19 +170,14 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
     private static void CheckMultilineComment(SonarSyntaxTreeReportingContext context, SyntaxTrivia trivia)
     {
         var triviaLines = TriviaContent().Split(Constants.LineTerminators, StringSplitOptions.None);
-
-        for (var triviaLineNumber = 0; triviaLineNumber < triviaLines.Length; triviaLineNumber++)
+        var triviaLineNumber = Array.FindIndex(triviaLines, IsCode);
+        if (triviaLineNumber >= 0)
         {
-            if (IsCode(triviaLines[triviaLineNumber]))
-            {
-                var triviaStartingLineNumber = trivia.GetLocation().StartLine;
-                var lineNumber = triviaStartingLineNumber + triviaLineNumber;
-                var lineSpan = context.Tree.GetText().Lines[lineNumber].Span;
-                var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);
-                var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
-                context.ReportIssue(Rule, location);
-                return;
-            }
+            var lineNumber = trivia.GetLocation().StartLine + triviaLineNumber;
+            var lineSpan = context.Tree.GetText(context.Cancel).Lines[lineNumber].Span;
+            var commentLineSpan = lineSpan.Intersection(trivia.GetLocation().SourceSpan);
+            var location = Location.Create(context.Tree, commentLineSpan ?? lineSpan);
+            context.ReportIssue(Rule, location);
         }
 
         string TriviaContent()
@@ -127,35 +187,20 @@ public sealed class CommentedOutCode : SonarDiagnosticAnalyzer
         }
     }
 
-    private static bool ContainsMultipleLogicalOperators(string checkedLine)
-    {
-        const int lengthOfOperator = 2;
-        const int operatorCountLimit = 3;
-        var lineLengthWithoutLogicalOperators = checkedLine.Replace("&&", string.Empty).Replace("||", string.Empty).Length;
+    private static bool IsExcluded(string line, string lineWithoutWhitespace) =>
+        lineWithoutWhitespace.Contains("License")
+        || lineWithoutWhitespace.Contains("c++")
+        || lineWithoutWhitespace.Contains("C++")
+        || TaskTagPattern.SafeIsMatch(line);
 
-        return checkedLine.Length - lineLengthWithoutLogicalOperators >= operatorCountLimit * lengthOfOperator;
-    }
+    private static int WordCount(string line) =>
+        line.Split().Count(x => x.Any(char.IsLetter));
 
-    private static bool ContainsCodeParts(string checkedLine) =>
-        CodeParts.Any(checkedLine.Contains);
+    private static Detector CreateDetector(double weight, string pattern, bool ignoreWhitespace = false) =>
+        new(weight, new Regex(pattern, RegexOptions.None, Constants.DefaultRegexTimeout), ignoreWhitespace);
 
-    private static bool ContainsCodePartsWithRelationalOperator(string checkedLine)
-    {
-        return CodePartsWithRelationalOperator.Any(ContainsRelationalOperator);
+    private static string CreateDelimitedTokenPattern(IEnumerable<string> tokens) =>
+        @"(?<=\A|[ \t(),{}])(?:" + string.Join("|", tokens.Select(Regex.Escape)) + @")(?=\z|[ \t(),{}])";
 
-        bool ContainsRelationalOperator(string codePart)
-        {
-            var index = checkedLine.IndexOf(codePart, StringComparison.Ordinal);
-            return index >= 0 && RelationalOperators.Any(x => checkedLine.IndexOf(x, index, StringComparison.Ordinal) >= 0);
-        }
-    }
-
-    private static bool EndsWithCode(string checkedLine, string originalLine) =>
-        checkedLine == "}"
-        || CodeEndings.Any(x => checkedLine.EndsWith(x, StringComparison.Ordinal))
-        || (checkedLine.EndsWith(";", StringComparison.Ordinal) && !LooksLikeSentence(originalLine.Trim().TrimEnd(';')));
-
-    private static bool LooksLikeSentence(string trimmedLine) =>
-        SentencePattern.SafeMatch(trimmedLine) is { Success: true } match
-        && !(CodeKeywords.Contains(match.Groups[1].Value) && CodeKeywords.Contains(match.Groups[2].Value));
+    internal sealed record Detector(double Weight, Regex Regex, bool IgnoreWhitespace);
 }
