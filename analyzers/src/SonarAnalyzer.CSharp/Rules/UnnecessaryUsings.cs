@@ -35,28 +35,6 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(
-            c =>
-            {
-                // When using top level statements, we are called twice for the same compilation unit. The second call has the containing symbol kind equal to `Method`.
-                if (c.ContainingSymbol.Kind == SymbolKind.Method)
-                {
-                    return;
-                }
-
-                var compilationUnit = (CompilationUnitSyntax)c.Node;
-                var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias is null).ToList();
-                var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
-
-                var visitor = new CSharpRemovableUsingWalker(c.Model, x => c.ReportIssue(Rule, x), globalUsingDirectives, null);
-                if (VisitCompilationUnit(visitor, compilationUnit))
-                {
-                    CheckUnnecessaryUsings(c.Model, x => c.ReportIssue(Rule, x), simpleNamespaces, visitor.NecessaryNamespaces);
-                }
-            },
-            SyntaxKind.CompilationUnit);
-
     internal static bool VisitCompilationUnit(CSharpRemovableUsingWalker visitor, CompilationUnitSyntax compilationUnit)
     {
         visitor.VisitAll(compilationUnit.Members);
@@ -86,6 +64,28 @@ public sealed class UnnecessaryUsings : SonarDiagnosticAnalyzer
             }
         }
     }
+
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(
+            c =>
+            {
+                // When using top level statements, we are called twice for the same compilation unit. The second call has the containing symbol kind equal to `Method`.
+                if (c.ContainingSymbol.Kind == SymbolKind.Method)
+                {
+                    return;
+                }
+
+                var compilationUnit = (CompilationUnitSyntax)c.Node;
+                var simpleNamespaces = compilationUnit.Usings.Where(usingDirective => usingDirective.Alias is null).ToList();
+                var globalUsingDirectives = simpleNamespaces.Select(x => new EquivalentNameSyntax(x.Name)).ToImmutableHashSet();
+
+                var visitor = new CSharpRemovableUsingWalker(c.Model, x => c.ReportIssue(Rule, x), globalUsingDirectives, null);
+                if (VisitCompilationUnit(visitor, compilationUnit))
+                {
+                    CheckUnnecessaryUsings(c.Model, x => c.ReportIssue(Rule, x), simpleNamespaces, visitor.NecessaryNamespaces);
+                }
+            },
+            SyntaxKind.CompilationUnit);
 
     internal sealed class CSharpRemovableUsingWalker : SafeCSharpSyntaxWalker
     {
