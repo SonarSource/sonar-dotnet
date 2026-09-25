@@ -3,7 +3,7 @@ Following the <a href="https://en.wikipedia.org/wiki/Single_responsibility_princ
 lean and <a href="https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles#separation-of-concerns">focused
 on a single, separate concern</a>. In short, they should have a <em>single reason to change</em>.</p>
 <p>The rule identifies different responsibilities by looking at groups of actions that use different sets of services defined in the controller.</p>
-<p>Basic services that are typically required by most controllers are not considered:</p>
+<p>Basic services that are typically required by most controllers are not considered by default:</p>
 <ul>
   <li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/"><code>ILogger</code></a></li>
   <li><a href="https://en.wikipedia.org/wiki/Mediator_pattern"><code>IMediator</code></a></li>
@@ -11,7 +11,9 @@ on a single, separate concern</a>. In short, they should have a <em>single reaso
   <li><a href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/"><code>IConfiguration</code></a></li>
   <li><a href="https://masstransit.io/documentation/configuration#configuration"><code>IBus</code></a></li>
   <li><a href="https://wolverinefx.io/guide/messaging/message-bus.html"><code>IMessageBus</code></a></li>
+  <li><a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.ihttpclientfactory"><code>IHttpClientFactory</code></a></li>
 </ul>
+<p>This list can be configured via the <code>excludedServices</code> rule parameter (comma-separated type names).</p>
 <p>The rule currently applies to ASP.NET Core only, and doesn’t cover <a
 href="https://learn.microsoft.com/en-us/aspnet/core/fundamentals/choose-aspnet-framework">ASP.NET MVC 4.x</a>.</p>
 <p>It also only takes into account web APIs controllers, i.e. the ones marked with the <a
