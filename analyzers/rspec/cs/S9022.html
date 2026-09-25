@@ -14,6 +14,9 @@ removed:</p>
   <li>the query ends in an aggregate or scalar operator — such as <code>Count</code>, <code>Sum</code>, <code>Any</code>, <code>All</code>,
   <code>Average</code>, or <code>Max</code>/<code>Min</code> with a selector, and their async equivalents — that never returns the entity at all. An
   <code>Include</code> only affects entities the query actually returns.</li>
+  <li>the navigation’s type is annotated with <code>[Owned]</code>. Entity Framework Core always loads an owned entity together with its owner,
+  whether the navigation is a single owned reference (<code>OwnsOne</code>) or an owned collection (<code>OwnsMany</code>), so an <code>Include</code>
+  targeting it changes nothing.</li>
 </ul>
 <p>In every case, it can also mislead a reader into thinking it changes what is loaded.</p>
 <h3>Exceptions</h3>
@@ -26,6 +29,9 @@ removed:</p>
   regardless of which one is written first — removing the filtered call would change which rows are loaded.</li>
   <li>the <code>Include</code> carries a customization (<code>Where</code>, <code>OrderBy</code>, <code>Skip</code>, <code>Take</code>, or similar)
   that the downstream projection does not reproduce — see {rule:csharpsquid:S9023}, which covers that case.</li>
+  <li>the navigation is configured as owned only through the Fluent API (<code>OwnsOne</code>/<code>OwnsMany</code> in <code>OnModelCreating</code>),
+  without an <code>[Owned]</code> attribute on the type. That configuration isn’t visible to static analysis, so the rule does not flag it — even
+  though the same always-loaded behavior applies.</li>
 </ul>
 <h2>How to fix it</h2>
 <p>Remove the <code>Include</code> (or <code>ThenInclude</code>) call that has no effect.</p>
@@ -71,6 +77,16 @@ var studentCount = await context.Students
 <pre data-diff-id="3" data-diff-type="compliant">
 var studentCount = await context.Students
     .CountAsync();
+</pre>
+<p>An <code>Include</code> is also redundant when it targets an owned entity — Entity Framework Core loads it together with its owner regardless:</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
+var students = await context.Students
+    .Include(s =&gt; s.HomeAddress) // Noncompliant: "HomeAddress" is an owned entity and is always loaded with its owner
+    .ToListAsync();
+</pre>
+<pre data-diff-id="4" data-diff-type="compliant">
+var students = await context.Students
+    .ToListAsync();
 </pre>
 <h2>Resources</h2>
 <h3>Documentation</h3>

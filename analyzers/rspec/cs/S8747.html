@@ -16,13 +16,14 @@ migration aborts and halts the deployment, requiring manual intervention. On dat
 have been suppressed, the schema can additionally be left partially migrated.</p>
 <h3>Exceptions</h3>
 <p>This rule does not raise an issue when the migration explicitly converts the existing data to fit the new type before narrowing the column, for
-example with a <code>migrationBuilder.Sql</code> statement that updates the affected column.</p>
+example with a <code>migrationBuilder.Sql</code> statement or a <code>migrationBuilder.UpdateData</code> call that updates the affected column.</p>
 <h2>How to fix it in Entity Framework Core</h2>
 <p>Before narrowing the column, convert the existing data so that every value fits the new type. Run an <code>UPDATE</code> statement through
-<code>migrationBuilder.Sql</code> to truncate, round, or otherwise transform the values, then call <code>AlterColumn</code>. Performing the conversion
-explicitly is what lets the migration succeed where it would otherwise abort, and it makes the data transformation visible and reviewable instead of
-leaving it to the database engine. This conversion is irreversible, so confirm that the transformed values are acceptable. When the narrowing is not
-actually required, keep the wider type instead.</p>
+<code>migrationBuilder.Sql</code> to truncate, round, or otherwise transform the values, or call <code>migrationBuilder.UpdateData</code> when the
+affected rows can be identified by known key values and their replacement values are known upfront, then call <code>AlterColumn</code>. Performing the
+conversion explicitly is what lets the migration succeed where it would otherwise abort, and it makes the data transformation visible and reviewable
+instead of leaving it to the database engine. This conversion is irreversible, so confirm that the transformed values are acceptable. When the
+narrowing is not actually required, keep the wider type instead.</p>
 <h3>Code examples</h3>
 <h4>Noncompliant code example</h4>
 <pre data-diff-id="1" data-diff-type="noncompliant">

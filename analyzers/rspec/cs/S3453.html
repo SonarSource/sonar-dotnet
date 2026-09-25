@@ -6,7 +6,8 @@
   <li>Classes that access their private constructors (<a href="https://en.wikipedia.org/wiki/Singleton_pattern">singletons</a> or <a
   href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/enumeration-classes-over-enum-types">smart
   enums</a>) are ignored.</li>
-  <li>Classes with only <code>static</code> members are also ignored because they are covered by Rule {rule:csharpsquid:S1118}.</li>
+  <li>Classes containing only <code>static</code> members, nested types, or both are ignored. Classes with only <code>static</code> members are
+  covered by Rule {rule:csharpsquid:S1118}.</li>
   <li>Classes that derive from <a href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.safehandle">SafeHandle</a> since
   they can be instantiate through <a href="https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke">P/Invoke</a>.</li>
 </ul>

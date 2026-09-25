@@ -56,4 +56,81 @@ public class DerivedClass : BaseClass
     }
 }
 </pre>
+<p>The rule does not count a parameter that a framework, a dependency injection container, or a runtime binding supplies, because it is not part of
+the argument list a caller writes. Such a parameter is annotated with one of the following attributes, or with an attribute deriving from one of
+them:</p>
+<ul>
+  <li>ASP.NET Core: <code>Microsoft.AspNetCore.Mvc.FromServicesAttribute</code>, <code>Microsoft.AspNetCore.Mvc.FromStateAttribute</code></li>
+  <li>Dependency injection: <code>Microsoft.Extensions.DependencyInjection.FromKeyedServicesAttribute</code></li>
+  <li>Azure Functions input bindings: <code>Microsoft.Azure.WebJobs.BlobAttribute</code>, <code>Microsoft.Azure.WebJobs.CosmosDBAttribute</code></li>
+  <li>Orleans: <code>Orleans.Runtime.PersistentStateAttribute</code></li>
+  <li>Hot Chocolate: <code>HotChocolate.ParentAttribute</code>, <code>HotChocolate.ServiceAttribute</code>,
+  <code>HotChocolate.SchemaServiceAttribute</code>, <code>HotChocolate.ScopedServiceAttribute</code>, <code>HotChocolate.EventMessageAttribute</code>,
+  <code>HotChocolate.GlobalStateAttribute</code>, <code>HotChocolate.ScopedStateAttribute</code>, <code>HotChocolate.LocalStateAttribute</code></li>
+</ul>
+<p>The remaining parameters are still counted, so an issue is raised when they alone exceed the threshold. With a maximum number of 4 parameters:</p>
+<pre>
+public class OrderController : ControllerBase
+{
+    public IActionResult Create([FromServices] IOrderService service, int param1, int param2, int param3, long param4) // Compliant by exception: 'service' is not counted
+    {
+        // ...
+    }
+
+    public IActionResult Update([FromServices] IOrderService service, int param1, int param2, int param3, long param4, string param5) // Noncompliant: 5 parameters are supplied by the caller
+    {
+        // ...
+    }
+}
+</pre>
+<p>The rule does not raise on the constructor of a type that a dependency injection container or a framework instantiates, because a caller never
+writes its argument list.</p>
+<p>This is the case for a constructor marked with <code>Microsoft.Extensions.DependencyInjection.ActivatorUtilitiesConstructorAttribute</code>. Only
+the marked constructor is exempt, and the attribute is not inherited by derived types.</p>
+<p>Still with a maximum number of 4 parameters:</p>
+<pre>
+public class Service
+{
+    [ActivatorUtilitiesConstructor]
+    public Service(int param1, int param2, int param3, string param4, long param5) // Compliant by exception
+    {
+        // ...
+    }
+}
+</pre>
+<p>It is also the case for every constructor of a type annotated with <code>Microsoft.AspNetCore.Mvc.ApiControllerAttribute</code> or
+<code>Microsoft.AspNetCore.Mvc.ControllerAttribute</code>, and of a type deriving from or implementing one of the following:</p>
+<ul>
+  <li>ASP.NET Core: <code>Microsoft.AspNetCore.Mvc.ControllerBase</code>, <code>Microsoft.AspNetCore.Mvc.Controller</code>,
+  <code>Microsoft.AspNetCore.Mvc.ViewComponent</code>, <code>Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata</code>,
+  <code>Microsoft.AspNetCore.Mvc.RazorPages.PageModel</code>, <code>Microsoft.AspNetCore.Razor.TagHelpers.TagHelper</code>,
+  <code>Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper</code>, <code>Microsoft.AspNetCore.Http.IMiddleware</code>,
+  <code>Microsoft.AspNetCore.Authorization.AuthorizationHandler&lt;TRequirement&gt;</code>,
+  <code>Microsoft.AspNetCore.Authorization.IAuthorizationHandler</code></li>
+  <li>SignalR: <code>Microsoft.AspNetCore.SignalR.Hub</code>, <code>Microsoft.AspNetCore.SignalR.Hub&lt;T&gt;</code>,
+  <code>Microsoft.AspNet.SignalR.Hub</code></li>
+  <li>Hosting: <code>Microsoft.Extensions.Hosting.BackgroundService</code>, <code>Microsoft.Extensions.Hosting.IHostedService</code></li>
+  <li>ASP.NET: <code>System.Web.Mvc.Controller</code>, <code>System.Web.Http.ApiController</code></li>
+  <li>MediatR: <code>MediatR.IRequestHandler&lt;TRequest&gt;</code>, <code>MediatR.IRequestHandler&lt;TRequest, TResponse&gt;</code>,
+  <code>MediatR.INotificationHandler&lt;TNotification&gt;</code>, <code>MediatR.IPipelineBehavior&lt;TRequest, TResponse&gt;</code></li>
+  <li>MassTransit: <code>MassTransit.IConsumer</code></li>
+</ul>
+<p>Still with a maximum number of 4 parameters:</p>
+<pre>
+public class HomeController : Controller
+{
+    public HomeController(int param1, int param2, int param3, string param4, long param5) // Compliant by exception
+    {
+        // ...
+    }
+}
+</pre>
+<p>Two cases fall outside this exception:</p>
+<ul>
+  <li>Attribute types, because their arguments are written at every usage site. MVC filter attributes such as
+  <code>Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute</code> implement <code>IFilterMetadata</code>, yet the rule still raises on their
+  constructors unless the constructor is marked with <code>ActivatorUtilitiesConstructorAttribute</code>.</li>
+  <li>Types annotated with <code>Microsoft.AspNetCore.Mvc.NonControllerAttribute</code>, which excludes a type and its derived types from MVC
+  controller discovery.</li>
+</ul>
 
