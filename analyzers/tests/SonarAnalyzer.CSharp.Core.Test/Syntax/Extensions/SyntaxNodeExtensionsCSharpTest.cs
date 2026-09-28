@@ -166,6 +166,29 @@ public class SyntaxNodeExtensionsCSharpTest
     }
 
     [TestMethod]
+    public void ChangeSyntaxElement_AttributeArgument_FileScopedPragma_NullableContextDetected()
+    {
+        var (value, model) = TestCompiler.NodeBetweenMarkersCS<IdentifierNameSyntax>("""
+            #nullable enable
+            using System;
+            public class PriorityAttribute : Attribute
+            {
+                public PriorityAttribute(string name) { }
+            }
+            public class Sample
+            {
+                private const string Value = "x";
+                [Priority($$Value$$)]
+                public void Method() { }
+            }
+            """,
+            getInnermostNodeForTie: true);
+        var newValue = value.ChangeSyntaxElement(value, model, out var newModel);
+        newValue.Should().NotBeNull();
+        newModel.GetTypeInfo(newValue, TestContext.CancellationToken).Nullability.FlowState.Should().Be(Microsoft.CodeAnalysis.NullableFlowState.NotNull);
+    }
+
+    [TestMethod]
     public void ChangeSyntaxElement_FailsForUnsupportedSyntaxKind()
     {
         var (tree, model) = TestCompiler.CompileCS("""namespace N { }""");

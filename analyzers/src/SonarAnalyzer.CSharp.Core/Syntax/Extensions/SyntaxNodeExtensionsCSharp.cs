@@ -633,11 +633,12 @@ public static class SyntaxNodeExtensionsCSharp
         where T : SyntaxNode
     {
         newModel = null;
-        if (originalNode.AncestorsAndSelf().FirstOrDefault(IsSupportedContainer) is { } enclosingNode)
+        if (originalNode.AncestorsAndSelf().Any(IsSupportedContainer))
         {
             var annotation = new SyntaxAnnotation();
             var annotated = newNode.WithAdditionalAnnotations(annotation);
-            var replaced = enclosingNode.ReplaceNode(originalNode, annotated);
+            var newTreeRoot = originalNode.SyntaxTree.GetRoot().ReplaceNode(originalNode, annotated);
+            var replaced = newTreeRoot.GetAnnotatedNodes(annotation).First().AncestorsAndSelf().First(IsSupportedContainer);
             var searchRoot = replaced;
             if (replaced switch
             {
@@ -647,7 +648,7 @@ public static class SyntaxNodeExtensionsCSharp
                 ArrowExpressionClauseSyntax arrow => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, arrow, out newModel),
                 ConstructorInitializerSyntax initializer => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, initializer, out newModel),
                 AttributeSyntax attribute => originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, attribute, out newModel),
-                GlobalStatementSyntax globalStatement => ReplaceGlobalStatement(originalModel, enclosingNode, globalStatement, out newModel, out searchRoot),
+                GlobalStatementSyntax => ReplaceGlobalStatement(originalModel, newTreeRoot, out newModel, out searchRoot),
                 { } primary when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(primary) =>
                     originalModel.TryGetSpeculativeSemanticModel(originalNode.SpanStart, (PrimaryConstructorBaseTypeSyntaxWrapper)primary, out newModel),
                 _ => throw new NotSupportedException("Unreachable case. Make sure to handle all node kinds from the ancestors if."),
@@ -675,10 +676,10 @@ public static class SyntaxNodeExtensionsCSharp
                 or EqualsValueClauseSyntax { Parent: ParameterSyntax }
                 or EqualsValueClauseSyntax { Parent: EnumMemberDeclarationSyntax };
 
-    private static bool ReplaceGlobalStatement(SemanticModel originalModel, SyntaxNode originalStatement, GlobalStatementSyntax replacedStatement, out SemanticModel newModel, out SyntaxNode newRoot)
+    private static bool ReplaceGlobalStatement(SemanticModel originalModel, SyntaxNode newTreeRoot, out SemanticModel newModel, out SyntaxNode newRoot)
     {
-        var originalTree = originalStatement.SyntaxTree;
-        var newTree = originalTree.WithRootAndOptions(originalTree.GetRoot().ReplaceNode(originalStatement, replacedStatement), originalTree.Options);
+        var originalTree = originalModel.SyntaxTree;
+        var newTree = originalTree.WithRootAndOptions(newTreeRoot, originalTree.Options);
         newModel = originalModel.Compilation.ReplaceSyntaxTree(originalTree, newTree).GetSemanticModel(newTree);
         newRoot = newTree.GetRoot();
         return true;
