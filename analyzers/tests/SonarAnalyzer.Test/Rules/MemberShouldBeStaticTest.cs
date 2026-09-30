@@ -45,6 +45,14 @@ public class MemberShouldBeStaticTest
         builder.AddPaths("MemberShouldBeStatic.Xaml.cs").AddReferences(MetadataReferenceFacade.PresentationFramework).Verify();
 
     [TestMethod]
+    public void MemberShouldBeStatic_Maui() =>
+        builder.AddPaths("MemberShouldBeStatic.Maui.cs", "MemberShouldBeStatic.Maui.Partial.cs")
+            .AddReferences(NuGetMetadataReference.Package("Microsoft.Maui.Controls.Core", "8.0.100"))
+            .AddReferences(NuGetMetadataReference.Package("Microsoft.Maui.Core", "8.0.100"))
+            .WithOptions(LanguageOptions.FromCSharp9)
+            .Verify();
+
+    [TestMethod]
     public void MemberShouldBeStatic_LambdaStartup() =>
         builder.AddSnippet("""
             using Microsoft.Extensions.DependencyInjection;

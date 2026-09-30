@@ -52,6 +52,11 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
         KnownType.Microsoft_AspNetCore_Mvc_Controller,
         KnownType.System_Web_HttpApplication);
 
+    private static readonly ImmutableArray<KnownType> XamlTypes = ImmutableArray.Create(
+        KnownType.System_Windows_FrameworkElement,
+        KnownType.System_Windows_Application,
+        KnownType.Microsoft_Maui_Controls_Element);
+
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
     protected override void Initialize(SonarAnalysisContext context)
@@ -87,7 +92,8 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             return;
         }
 
-        if (context.Model.GetDeclaredSymbol(declaration) is not { } methodOrPropertySymbol
+        var methodOrPropertySymbol = context.Model.GetDeclaredSymbol(declaration, context.Cancel);
+        if (methodOrPropertySymbol is null
             || IsStaticVirtualAbstractOrOverride()
             || MethodNameWhitelist.Contains(methodOrPropertySymbol.Name)
             || IsOverrideInterfaceOrNew()
@@ -150,7 +156,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
     private static bool IsFrameworkInvokedMethod(ISymbol symbol) =>
         IsPublicControllerMethod(symbol)
         || IsLambdaStartupMethod(symbol)
-        || IsWindowsDesktopEventHandler(symbol);
+        || IsUiEventHandler(symbol);
 
     private static bool IsPublicControllerMethod(ISymbol symbol) =>
         symbol is IMethodSymbol methodSymbol
@@ -162,18 +168,18 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
         && LambdaStartupMethodNames.Contains(methodSymbol.Name)
         && methodSymbol.ContainingType.HasAttribute(KnownType.Amazon_Lambda_Annotations_LambdaStartupAttribute);
 
-    private static bool IsWindowsDesktopEventHandler(ISymbol symbol) =>
-        symbol is IMethodSymbol { Parameters.Length: 2 } methodSymbol
+    private static bool IsUiEventHandler(ISymbol symbol) =>
+        symbol is IMethodSymbol { ReturnsVoid: true, Parameters.Length: 2 } methodSymbol
         && methodSymbol.Parameters[0].Type.Is(KnownType.System_Object)
         && methodSymbol.Parameters[1].Type.DerivesFrom(KnownType.System_EventArgs)
         && (IsContainingTypeWindowsForm(methodSymbol)
-            || IsContainingTypeWpf(methodSymbol));
+            || IsContainingTypeXaml(methodSymbol));
 
     private static bool IsContainingTypeWindowsForm(IMethodSymbol methodSymbol) =>
         methodSymbol.ContainingType.Implements(KnownType.System_Windows_Forms_IContainerControl);
 
-    private static bool IsContainingTypeWpf(IMethodSymbol methodSymbol) =>
-        methodSymbol.ContainingType.DerivesFrom(KnownType.System_Windows_FrameworkElement);
+    private static bool IsContainingTypeXaml(IMethodSymbol methodSymbol) =>
+        methodSymbol.ContainingType.DerivesFromAny(XamlTypes);
 
     private static bool HasInstanceReferences(IEnumerable<SyntaxNode> nodes, SemanticModel model) =>
         nodes.OfType<ExpressionSyntax>()

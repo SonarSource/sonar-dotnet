@@ -11,6 +11,7 @@ namespace MemberShouldBeStatic
         private void SenderArgumentNotObject(string input, MyEventArgs e) { Handle(); }            // Noncompliant
         private void EventArgs_Handler(object sender, EventArgs e) { Handle(); }                   // Compliant
         private void MyEventArgs_Handler(object sender, MyEventArgs e) { Handle(); }               // Compliant
+        private int OnButtonClickHelper(object sender, EventArgs e) => 0;                          // Noncompliant
         static void Handle() { }
     }
 
@@ -28,9 +29,9 @@ namespace MemberShouldBeStatic
         private void MethodWith1Argument(object sender) { Handle(); }                               // Noncompliant
         private void MethodWith3Argument(object sender, MyEventArgs e, string other) { Handle(); }  // Noncompliant
         private void SenderArgumentNotObject(string input, MyEventArgs e) { Handle(); }             // Noncompliant
-        private void EventArgs_Handler(object sender, EventArgs e) { Handle(); }                    // Noncompliant FP
-        private void MyEventArgs_Handler(object sender, MyEventArgs e) { Handle(); }                // Noncompliant FP
-        private void App_OnStartup(object sender, StartupEventArgs e)                               // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2677
+        private void EventArgs_Handler(object sender, EventArgs e) { Handle(); }                    // Compliant
+        private void MyEventArgs_Handler(object sender, MyEventArgs e) { Handle(); }                // Compliant
+        private void App_OnStartup(object sender, StartupEventArgs e)                               // Compliant https://sonarsource.atlassian.net/browse/NET-2677
         {
             Console.WriteLine("Hello World!");
         }

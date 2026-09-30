@@ -213,6 +213,7 @@ public sealed partial class KnownType
     public static readonly KnownType Microsoft_Extensions_Logging_LogLevel = new("Microsoft.Extensions.Logging.LogLevel");
     public static readonly KnownType Microsoft_Extensions_Primitives_StringValues = new("Microsoft.Extensions.Primitives.StringValues");
     public static readonly KnownType Microsoft_IdentityModel_Tokens_SymmetricSecurityKey = new("Microsoft.IdentityModel.Tokens.SymmetricSecurityKey");
+    public static readonly KnownType Microsoft_Maui_Controls_Element = new("Microsoft.Maui.Controls.Element");
     public static readonly KnownType Microsoft_Net_Http_Headers_HeaderNames = new("Microsoft.Net.Http.Headers.HeaderNames");
     public static readonly KnownType Microsoft_JSInterop_JSInvokable = new("Microsoft.JSInterop.JSInvokableAttribute");
     public static readonly KnownType Microsoft_VisualBasic_Information = new("Microsoft.VisualBasic.Information");
@@ -721,6 +722,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Web_Script_Serialization_JavaScriptTypeResolver = new("System.Web.Script.Serialization.JavaScriptTypeResolver");
     public static readonly KnownType System_Web_Script_Serialization_SimpleTypeResolver = new("System.Web.Script.Serialization.SimpleTypeResolver");
     public static readonly KnownType System_Web_UI_LosFormatter = new("System.Web.UI.LosFormatter");
+    public static readonly KnownType System_Windows_Application = new("System.Windows.Application");
     public static readonly KnownType System_Windows_DependencyObject = new("System.Windows.DependencyObject");
     public static readonly KnownType System_Windows_Forms_Application = new("System.Windows.Forms.Application");
     public static readonly KnownType System_Windows_Forms_IContainerControl = new("System.Windows.Forms.IContainerControl");
