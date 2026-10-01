@@ -15,21 +15,16 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.VisualBasic.Rules
-{
-    [ExportCodeFixProvider(LanguageNames.VisualBasic)]
-    public sealed class UseShortCircuitingOperatorCodeFix : UseShortCircuitingOperatorCodeFixBase<SyntaxKind, BinaryExpressionSyntax>
-    {
-        internal override bool IsCandidateExpression(BinaryExpressionSyntax expression)
-        {
-            return UseShortCircuitingOperator.ShortCircuitingAlternative.ContainsKey(expression.Kind());
-        }
+namespace SonarAnalyzer.VisualBasic.Rules;
 
-        protected override BinaryExpressionSyntax GetShortCircuitingExpressionNode(BinaryExpressionSyntax expression)
-        {
-            return expression.IsKind(SyntaxKind.AndExpression)
-                ? SyntaxFactory.AndAlsoExpression(expression.Left, expression.Right)
-                : SyntaxFactory.OrElseExpression(expression.Left, expression.Right);
-        }
-    }
+[ExportCodeFixProvider(LanguageNames.VisualBasic)]
+public sealed class UseShortCircuitingOperatorCodeFix : UseShortCircuitingOperatorCodeFixBase<SyntaxKind, BinaryExpressionSyntax>
+{
+    internal override bool IsCandidateExpression(BinaryExpressionSyntax expression) =>
+        UseShortCircuitingOperator.ShortCircuitingAlternative.ContainsKey(expression.Kind());
+
+    protected override SyntaxNode GetShortCircuitingExpressionNode(BinaryExpressionSyntax expression) =>
+        expression.IsKind(SyntaxKind.AndExpression)
+            ? SyntaxFactory.AndAlsoExpression(expression.Left, expression.Right)
+            : SyntaxFactory.OrElseExpression(expression.Left, expression.Right);
 }

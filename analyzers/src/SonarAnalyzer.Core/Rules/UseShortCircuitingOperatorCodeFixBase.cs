@@ -53,6 +53,6 @@ namespace SonarAnalyzer.Core.Rules
             return Task.FromResult(document.WithSyntaxRoot(newRoot));
         }
 
-        protected abstract TBinaryExpression GetShortCircuitingExpressionNode(TBinaryExpression expression);
+        protected abstract SyntaxNode GetShortCircuitingExpressionNode(TBinaryExpression expression);
     }
 }

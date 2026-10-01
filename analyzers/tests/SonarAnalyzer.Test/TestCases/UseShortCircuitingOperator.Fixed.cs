@@ -36,8 +36,30 @@ namespace Tests.Diagnostics
 
         public void Repro_8834(bool a, bool b, bool c)
         {
-            // CodeFix should add parantheses to preserve operator precedence
-            _ = a && b || c; // Fixed
+            // CodeFix should add parentheses to preserve operator precedence
+            _ = a && (b || c); // Fixed
+        }
+
+        public void OperatorPrecedence(bool a, bool b, bool c)
+        {
+            _ = (a || b) && c;     // Fixed
+            _ = (a && b) ^ c;      // Fixed
+            _ = a ^ (b && c);      // Fixed
+            _ = a ^ b || c;      // Fixed
+            _ = a || b ^ c;      // Fixed
+            _ = a && b && c;     // Fixed
+            _ = a && b && c;     // Fixed
+            _ = a || b || c;     // Fixed
+            _ = a || b || c;     // Fixed
+            _ = a && b || c;     // Fixed
+            _ = a || b && c;     // Fixed
+            _ = a && (b || c);   // Fixed
+            _ = (a && b) ^ c;    // Fixed
+            _ = !(a || b);       // Fixed
+            _ = a || b ? a : c;  // Fixed
+            _ = a && b || c;      // Fixed
+            _ = a || b && c;      // Fixed
+            _ = a && (b || c);    // Fixed
         }
     }
 }

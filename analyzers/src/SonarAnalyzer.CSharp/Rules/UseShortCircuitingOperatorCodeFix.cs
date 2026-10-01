@@ -15,23 +15,23 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-namespace SonarAnalyzer.CSharp.Rules
+using Microsoft.CodeAnalysis.Simplification;
+
+namespace SonarAnalyzer.CSharp.Rules;
+
+[ExportCodeFixProvider(LanguageNames.CSharp)]
+public class UseShortCircuitingOperatorCodeFix : UseShortCircuitingOperatorCodeFixBase<SyntaxKind, BinaryExpressionSyntax>
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp)]
-    public class UseShortCircuitingOperatorCodeFix : UseShortCircuitingOperatorCodeFixBase<SyntaxKind, BinaryExpressionSyntax>
+    internal override bool IsCandidateExpression(BinaryExpressionSyntax expression) =>
+        UseShortCircuitingOperator.ShortCircuitingAlternative.ContainsKey(expression.Kind());
+
+    protected override SyntaxNode GetShortCircuitingExpressionNode(BinaryExpressionSyntax expression)
     {
-        internal override bool IsCandidateExpression(BinaryExpressionSyntax expression)
-        {
-            return UseShortCircuitingOperator.ShortCircuitingAlternative.ContainsKey(expression.Kind());
-        }
+        var alternativeKind = expression.IsKind(SyntaxKind.BitwiseAndExpression)
+            ? SyntaxKind.LogicalAndExpression
+            : SyntaxKind.LogicalOrExpression;
 
-        protected override BinaryExpressionSyntax GetShortCircuitingExpressionNode(BinaryExpressionSyntax expression)
-        {
-            var alternativeKind = expression.IsKind(SyntaxKind.BitwiseAndExpression)
-                ? SyntaxKind.LogicalAndExpression
-                : SyntaxKind.LogicalOrExpression;
-
-            return SyntaxFactory.BinaryExpression(alternativeKind, expression.Left, expression.Right);
-        }
+        return SyntaxFactory.ParenthesizedExpression(SyntaxFactory.BinaryExpression(alternativeKind, expression.Left, expression.Right).WithoutTrivia())
+            .WithAdditionalAnnotations(Simplifier.Annotation);
     }
 }
