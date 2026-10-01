@@ -1,11 +1,10 @@
-﻿<p align="center">
+﻿<!-- Sonar Marketing hosts these approved brand assets on its Kentico Kontent CDN (assets-eu-01.kc-usercontent.com). Shared URLs are intentional; consult Marketing before replacing them. -->
+<p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://assets-eu-01.kc-usercontent.com/ef593040-b591-0198-9506-ed88b30bc023/a23fc7ba-23f0-489a-829d-ed88c0748521/Sonar_Logo_Dark%20Backgrounds.svg">
     <img src="https://assets-eu-01.kc-usercontent.com/ef593040-b591-0198-9506-ed88b30bc023/82c13eba-d95c-4bb8-8007-7ce77c14e043/Sonar_Logo_Light%20Backgrounds.svg" alt="Sonar logo" width="400">
   </picture>
 </p>
-
-# SonarQube analyzers for .NET
 
 [![Build Status](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_apis/build/status/Sonar.Net?branchName=master)](https://dev.azure.com/sonarsource/DotNetTeam%20Project/_build/latest?definitionId=77&branchName=master)
 
@@ -19,9 +18,18 @@
 [![License](https://img.shields.io/badge/license-SSALv1-blue)](#license)
 [![Community forum](https://img.shields.io/badge/community-forum-blue)](https://community.sonarsource.com/)
 
+<!-- sonar-marketing:start -->
+<!-- Marketing maintains this section. For wording changes, consult the relevant Product Marketing Manager (PMM). Repository CODEOWNERS review accuracy and merge changes. -->
+
+# SonarQube analyzers for .NET
+
 SonarQube analyzers for .NET inspect C# and VB.NET code for bugs, vulnerabilities, and maintainability issues. They surface findings while developers work in their IDE and when teams analyze projects with SonarQube Server or SonarQube Cloud.
 
 This repository contains the source for the Roslyn analyzers and the Java plugin that integrates .NET analysis with SonarQube. The analyzers apply the same rules to developer-written and AI-generated code, giving teams a consistent way to verify code before it reaches production.
+
+Learn more about [SonarQube analysis for C#](https://www.sonarsource.com/knowledge/languages/csharp/).
+
+<!-- sonar-marketing:end -->
 
 ## Features
 
