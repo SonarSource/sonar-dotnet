@@ -1,0 +1,24 @@
+{
+  "title": "Local functions should be marked \"static\" when they don\u0027t capture variables",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "clarity",
+    "idiomatic"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-9415",
+  "sqKey": "S9415",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CLEAR"
+  }
+}

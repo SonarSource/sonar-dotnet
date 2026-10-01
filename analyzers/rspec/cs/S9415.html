@@ -1,0 +1,60 @@
+<p>This rule raises an issue when a nested function does not use any variables from its enclosing scope but is not marked with a qualifier indicating
+it doesn’t capture outer variables.</p>
+<h2>Why is this an issue?</h2>
+<p>Nested functions can access variables from their enclosing scope (known as "capturing" or "closing over" variables). When a nested function doesn’t
+capture any variables, it is completely independent of the surrounding function’s state.</p>
+<p>Some languages provide mechanisms to explicitly mark nested functions as non-capturing, making this independence explicit. When you mark a nested
+function as non-capturing, you are communicating to other developers that:</p>
+<ul>
+  <li>The function operates independently of the enclosing scope</li>
+  <li>The function cannot accidentally capture variables in the future</li>
+  <li>The function’s behavior depends only on its parameters</li>
+</ul>
+<p>Without such explicit marking, readers must examine the entire function body to determine whether it captures variables. This creates unnecessary
+cognitive load and makes the code’s intent less clear.</p>
+<p>Additionally, language tools can prevent accidental captures when a function is explicitly marked as non-capturing. If someone later tries to use a
+variable from the enclosing scope, the compiler or linter will produce an error, preventing subtle bugs.</p>
+<p>In C#, this mechanism is the <code>static</code> modifier for local functions, introduced in C# 8.0.</p>
+<h3>What is the potential impact?</h3>
+<p>The impact of this issue is limited to code maintainability and clarity:</p>
+<ul>
+  <li><strong>Reduced code clarity</strong>: Without explicitly marking the nested function as not accessing outer scope, developers must read the
+  entire function to understand its dependencies</li>
+  <li><strong>Harder maintenance</strong>: Future modifications might accidentally introduce variable captures, changing the function’s behavior in
+  unexpected ways</li>
+  <li><strong>Missed optimization opportunities</strong>: In some cases, the compiler may generate slightly more efficient code for nested functions
+  that are marked as not capturing variables because it knows no closure allocation is needed</li>
+</ul>
+<p>In C#, nested functions are marked with the <code>static</code> modifier to indicate they don’t capture variables from the outer scope.</p>
+<h2>How to fix it</h2>
+<p>Add the <code>static</code> modifier to the local function declaration. This explicitly marks the function as independent of the enclosing
+scope.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+void ProcessData()
+{
+    Console.WriteLine(FormatText("test  "));
+
+    string FormatText(string input) =&gt; input.Trim(); // Noncompliant
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+void ProcessData()
+{
+    Console.WriteLine(FormatText("test  "));
+
+    static string FormatText(string input) =&gt; input.Trim();
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/local-functions">Local
+  functions - C# Programming Guide</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-8.0/static-local-functions">Static local functions - C#
+  8.0 draft feature specification</a></li>
+</ul>
+
