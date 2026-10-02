@@ -136,7 +136,6 @@
           <pluginClass>org.sonar.plugins.vbnet.VbNetPlugin</pluginClass>
           <skipDependenciesPackaging>true</skipDependenciesPackaging>
           <sonarLintSupported>false</sonarLintSupported>
-          <pluginApiMinVersion>${plugin.api.min.version}</pluginApiMinVersion>
           <requiredForLanguages>vbnet</requiredForLanguages>
         </configuration>
       </plugin>
