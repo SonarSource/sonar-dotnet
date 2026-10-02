@@ -29,7 +29,8 @@ public class ClearTextProtocolsAreSensitiveTest
             .Concat(MetadataReferenceFacade.SystemComponentModelPrimitives)
             .Concat(MetadataReferenceFacade.SystemXml)
             .Concat(MetadataReferenceFacade.SystemXmlLinq)
-            .Concat(MetadataReferenceFacade.SystemWeb);
+            .Concat(MetadataReferenceFacade.SystemWeb)
+            .Concat(MetadataReferenceFacade.SystemServiceModel);
 
     [TestMethod]
     public void ClearTextProtocolsAreSensitive() =>

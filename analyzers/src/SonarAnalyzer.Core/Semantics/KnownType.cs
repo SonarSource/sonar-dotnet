@@ -536,6 +536,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Net_Sockets_TcpClient = new("System.Net.Sockets.TcpClient");
     public static readonly KnownType System_Net_Sockets_UdpClient = new("System.Net.Sockets.UdpClient");
     public static readonly KnownType System_Net_WebClient = new("System.Net.WebClient");
+    public static readonly KnownType System_Net_WebHeaderCollection = new("System.Net.WebHeaderCollection");
     public static readonly KnownType System_NonSerializedAttribute = new("System.NonSerializedAttribute");
     public static readonly KnownType System_NotImplementedException = new("System.NotImplementedException");
     public static readonly KnownType System_NotSupportedException = new("System.NotSupportedException");
@@ -655,6 +656,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Security_SecurityCriticalAttribute = new("System.Security.SecurityCriticalAttribute");
     public static readonly KnownType System_Security_SecuritySafeCriticalAttribute = new("System.Security.SecuritySafeCriticalAttribute");
     public static readonly KnownType System_SerializableAttribute = new("System.SerializableAttribute");
+    public static readonly KnownType System_ServiceModel_FaultContractAttribute = new("System.ServiceModel.FaultContractAttribute");
     public static readonly KnownType System_ServiceModel_OperationContractAttribute = new("System.ServiceModel.OperationContractAttribute");
     public static readonly KnownType System_ServiceModel_ServiceContractAttribute = new("System.ServiceModel.ServiceContractAttribute");
     public static readonly KnownType System_Single = new("System.Single");
@@ -721,6 +723,8 @@ public sealed partial class KnownType
     public static readonly KnownType System_Web_Script_Serialization_JavaScriptSerializer = new("System.Web.Script.Serialization.JavaScriptSerializer");
     public static readonly KnownType System_Web_Script_Serialization_JavaScriptTypeResolver = new("System.Web.Script.Serialization.JavaScriptTypeResolver");
     public static readonly KnownType System_Web_Script_Serialization_SimpleTypeResolver = new("System.Web.Script.Serialization.SimpleTypeResolver");
+    public static readonly KnownType System_Web_Services_Protocols_SoapDocumentMethodAttribute = new("System.Web.Services.Protocols.SoapDocumentMethodAttribute");
+    public static readonly KnownType System_Web_Services_Protocols_SoapRpcMethodAttribute = new("System.Web.Services.Protocols.SoapRpcMethodAttribute");
     public static readonly KnownType System_Web_UI_LosFormatter = new("System.Web.UI.LosFormatter");
     public static readonly KnownType System_Windows_Application = new("System.Windows.Application");
     public static readonly KnownType System_Windows_DependencyObject = new("System.Windows.DependencyObject");

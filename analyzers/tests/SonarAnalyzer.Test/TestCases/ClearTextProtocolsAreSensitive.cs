@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
+using System.ServiceModel;
 using System.Windows.Markup;
 using System.Xml;
 using System.Xml.Linq;
@@ -352,6 +354,78 @@ namespace Tests.Diagnostics
             XNamespace.Get("http://www.cpandl.com");
             XNamespace ns = "http://www.cpandl.com"; // Noncompliant FP. Implicit conversion from string to XNamespace is not supported
         }
+    }
+
+    public class SoapActionHeaders
+    {
+        public void HttpHeaders(HttpRequestMessage request, string actionBaseUrl, string soapAction, string headerName)
+        {
+            request.Headers.Add("SOAPAction", "http://www.contoso.com/GetUserName");
+            request.Headers.Add("SOAPAction", $"http://tempuri.org/{actionBaseUrl}/{soapAction}"); // NET-1596
+            request.Headers.Add("soapaction", "http://www.contoso.com/GetUserName");
+            request.Headers.Add(value: "http://www.contoso.com/GetUserName", name: "SOAPAction");
+            request.Headers.TryAddWithoutValidation("SOAPAction", "http://www.contoso.com/GetUserName");
+            const string actionHeader = "SOAPAction";
+            request.Headers.Add(actionHeader, ("http://www.contoso.com/GetUserName"));
+            request.Headers.Add("SOAPAction", "http://www.contoso.com/" + soapAction);
+            request.Headers.Add("SOAPAction", actionBaseUrl + "http://www.contoso.com/" + soapAction);
+            request.Headers.Add("SOAPAction", ("http://www.contoso.com/" + actionBaseUrl) + "/" + soapAction);
+            request.Headers.Add("SOAPAction", new[] { "http://www.contoso.com/GetUserName" });
+            request.Headers.Add("SOAPAction", new string[] { "http://www.contoso.com/" + soapAction });
+            request.Headers.TryAddWithoutValidation("SOAPAction", new[] { "http://www.contoso.com/GetUserName" });
+
+            request.Headers.Add("Location", "http://www.contoso.com/GetUserName"); // Noncompliant
+            request.Headers.Add("Location", "http://www.contoso.com/" + soapAction); // Noncompliant
+            request.Headers.Add("Location", new[] { "http://www.contoso.com/GetUserName" }); // Noncompliant
+            request.Headers.Add(headerName, "http://www.contoso.com/GetUserName"); // Noncompliant
+            request.Headers.Add("SOAPAction-Other", "http://www.contoso.com/GetUserName"); // Noncompliant
+            request.Headers.Add("http://www.contoso.com/GetUserName", "SOAPAction"); // Noncompliant
+            request.Headers.Add("SOAPAction", "ftp://user@www.contoso.com/GetUserName"); // Noncompliant
+            request.RequestUri = new Uri("http://tempuri.org/service"); // Noncompliant
+        }
+
+        public void WebHeaders(WebRequest request)
+        {
+            request.Headers.Add("SOAPAction", "http://www.contoso.com/GetUserName");
+            request.Headers.Set("SOAPAction", "http://www.contoso.com/GetUserName");
+            request.Headers["SOAPAction"] = "http://www.contoso.com/GetUserName";
+            request.Headers["soapaction"] = ("http://www.contoso.com/GetUserName");
+            request.Headers["SOAPAction"] = "http://www.contoso.com/" + request.Method;
+            request.Headers.Add("Location", "http://www.contoso.com/GetUserName"); // Noncompliant
+            request.Headers["Location"] = "http://www.contoso.com/GetUserName"; // Noncompliant
+            request.Headers[HttpRequestHeader.Referer] = "http://www.contoso.com/GetUserName"; // Noncompliant
+            request.Headers["SOAPAction"] = "ftp://user@www.contoso.com/GetUserName"; // Noncompliant
+        }
+
+        public void UnrelatedMethods(Dictionary<string, string> dictionary)
+        {
+            dictionary.Add("SOAPAction", "http://www.contoso.com/GetUserName"); // Noncompliant
+            dictionary["SOAPAction"] = "http://www.contoso.com/GetUserName"; // Noncompliant
+        }
+
+        public void UntrackedValue(HttpRequestMessage request)
+        {
+            var action = "http://www.contoso.com/GetUserName"; // Noncompliant - FP, the value is not tracked to the header
+            request.Headers.Add("SOAPAction", action);
+        }
+    }
+
+    [ServiceContract]
+    public interface ISoapActionService
+    {
+        [OperationContract(Action = "http://www.contoso.com/IService/GetUserName", ReplyAction = "http://www.contoso.com/IService/GetUserNameResponse")]
+        [FaultContract(typeof(string), Action = "http://www.contoso.com/IService/GetUserNameFault")]
+        string GetUserName();
+
+        [OperationContract(Action = "http://www.contoso.com/IService/" + nameof(ConcatenatedAction))]
+        void ConcatenatedAction();
+
+        [OperationContract(Name = "http://www.contoso.com/GetUserName")] // Noncompliant
+        void UnrelatedOperationProperty();
+
+        [OperationContract]
+        [FaultContract(typeof(string), Name = "http://www.contoso.com/GetUserNameFault")] // Noncompliant
+        void UnrelatedFaultProperty();
     }
 
     public class ConstructorInitializerTest

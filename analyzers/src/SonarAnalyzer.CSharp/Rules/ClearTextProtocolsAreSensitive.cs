@@ -35,10 +35,10 @@ public sealed class ClearTextProtocolsAreSensitive : SonarDiagnosticAnalyzer
 
     private static readonly Dictionary<string, string> RecommendedProtocols = new()
     {
-        {"telnet", "ssh"},
-        {"ftp", "sftp, scp or ftps"},
-        {"http", "https"},
-        {"clear-text SMTP", "SMTP over SSL/TLS or SMTP with STARTTLS" }
+        { "telnet", "ssh" },
+        { "ftp", "sftp, scp or ftps" },
+        { "http", "https" },
+        { "clear-text SMTP", "SMTP over SSL/TLS or SMTP with STARTTLS" }
     };
 
     private static readonly string[] CommonlyUsedXmlDomains =
@@ -208,12 +208,80 @@ public sealed class ClearTextProtocolsAreSensitive : SonarDiagnosticAnalyzer
             token.Text.IndexOf("Namespace", StringComparison.OrdinalIgnoreCase) != -1;
     }
 
+    private static class SoapActionFilter
+    {
+        private static readonly KnownType[] SoapActionAttributes =
+        [
+            KnownType.System_Web_Services_Protocols_SoapDocumentMethodAttribute,
+            KnownType.System_Web_Services_Protocols_SoapRpcMethodAttribute,
+            KnownType.System_ServiceModel_OperationContractAttribute,
+            KnownType.System_ServiceModel_FaultContractAttribute,
+        ];
+
+        private static readonly HashSet<SyntaxKind> ValueCompositionKinds =
+        [
+            SyntaxKind.AddExpression,
+            SyntaxKind.ArrayInitializerExpression,
+            SyntaxKind.ArrayCreationExpression,
+            SyntaxKind.ImplicitArrayCreationExpression,
+            SyntaxKindEx.CollectionExpression,
+            SyntaxKindEx.ExpressionElement,
+        ];
+
+        internal static bool IsSoapAction(SemanticModel model, SyntaxNode node) =>
+            ValueParent(node) switch
+            {
+                AttributeArgumentSyntax { Parent.Parent: AttributeSyntax attribute } argument =>
+                    (argument.NameEquals is null || argument.NameEquals.Name.Identifier.ValueText is "Action" or "ReplyAction")
+                    && model.GetSymbolInfo(attribute).Symbol is IMethodSymbol constructor
+                    && constructor.ContainingType.IsAny(SoapActionAttributes),
+                ArgumentSyntax { Parent.Parent: InvocationExpressionSyntax invocation } argument => IsSoapActionHeader(model, invocation, argument),
+                AssignmentExpressionSyntax { Left: ElementAccessExpressionSyntax elementAccess } => IsSoapActionHeaderIndexer(model, elementAccess),
+                _ => false,
+            };
+
+        private static SyntaxNode ValueParent(SyntaxNode node)
+        {
+            var parent = node.GetFirstNonParenthesizedParent();
+            while (parent.IsAnyKind(ValueCompositionKinds))
+            {
+                parent = parent.GetFirstNonParenthesizedParent();
+            }
+            return parent;
+        }
+
+        private static bool IsSoapActionHeader(SemanticModel model, InvocationExpressionSyntax invocation, ArgumentSyntax argument)
+        {
+            var lookup = CSharpFacade.Instance.MethodParameterLookup(invocation, model);
+            return lookup.MethodSymbol is { } method
+                && IsHeaderSetter(method)
+                && lookup.TryGetSymbol(argument, out var parameter)
+                && parameter.Name is "value" or "values"
+                && lookup.TryGetSyntax("name", out var names)
+                && IsSoapActionName(model, names[0]);
+        }
+
+        private static bool IsSoapActionHeaderIndexer(SemanticModel model, ElementAccessExpressionSyntax elementAccess) =>
+            elementAccess.ArgumentList.Arguments.Count == 1
+            && IsSoapActionName(model, elementAccess.ArgumentList.Arguments[0].Expression)
+            && model.GetTypeInfo(elementAccess.Expression).Type.Is(KnownType.System_Net_WebHeaderCollection);
+
+        private static bool IsHeaderSetter(IMethodSymbol method) =>
+            (method.Name is "Add" or "TryAddWithoutValidation" && method.ContainingType.Is(KnownType.System_Net_Http_Headers_HttpHeaders))
+            || (method.Name is "Add" or "Set" && method.ContainingType.Is(KnownType.System_Net_WebHeaderCollection));
+
+        private static bool IsSoapActionName(SemanticModel model, SyntaxNode name) =>
+            name.FindConstantValue(model) is string value && value.Equals("SOAPAction", StringComparison.OrdinalIgnoreCase);
+    }
+
     private static class UrlAnalyzer
     {
         internal static string UnsafeProtocol(SyntaxNode node, SemanticModel model)
         {
             var text = Text(node, model);
-            if (HttpRegex.SafeIsMatch(text) && !NamespaceFilter.IsNamespace(model, node.Parent))
+            if (HttpRegex.SafeIsMatch(text)
+                && !NamespaceFilter.IsNamespace(model, node.Parent)
+                && !SoapActionFilter.IsSoapAction(model, node))
             {
                 return "http";
             }

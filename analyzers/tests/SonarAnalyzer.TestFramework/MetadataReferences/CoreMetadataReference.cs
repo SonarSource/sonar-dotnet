@@ -59,6 +59,7 @@ public static class CoreMetadataReference
     public static MetadataReference SystemNetSockets { get; } = CreateReference("System.Net.Sockets.dll");
     public static MetadataReference SystemNetPrimitives { get; } = CreateReference("System.Net.Primitives.dll");
     public static MetadataReference SystemNetWebClient { get; } = CreateReference("System.Net.WebClient.dll");
+    public static MetadataReference SystemNetWebHeaderCollection { get; } = CreateReference("System.Net.WebHeaderCollection.dll");
     public static MetadataReference SystemObjectModel { get; } = CreateReference("System.ObjectModel.dll");
     public static MetadataReference SystemPrivateCoreLib { get; } = CreateReference("System.Private.CoreLib.dll");
     public static MetadataReference SystemPrivateUri { get; } = CreateReference("System.Private.Uri.dll");

@@ -162,7 +162,8 @@ public static class MetadataReferenceFacade
             CoreMetadataReference.SystemNetServicePoint,
             CoreMetadataReference.SystemNetSockets,
             CoreMetadataReference.SystemNetPrimitives,
-            CoreMetadataReference.SystemNetWebClient
+            CoreMetadataReference.SystemNetWebClient,
+            CoreMetadataReference.SystemNetWebHeaderCollection
         ];
 #endif
 

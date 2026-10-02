@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
 
 public class Usings
@@ -169,5 +170,15 @@ public class NullConditionalAssignment
     {
         sample?.Url = "https://foo.com";  // Compliant
         sample?.Url = "http://foo.com";  // Noncompliant
+    }
+}
+
+public class SoapActionCollectionExpression
+{
+    public void Method(HttpRequestMessage request, string soapAction)
+    {
+        request.Headers.Add("SOAPAction", ["http://www.contoso.com/GetUserName"]);
+        request.Headers.Add("SOAPAction", ["http://www.contoso.com/" + soapAction]);
+        request.Headers.Add("Location", ["http://www.contoso.com/GetUserName"]); // Noncompliant
     }
 }
