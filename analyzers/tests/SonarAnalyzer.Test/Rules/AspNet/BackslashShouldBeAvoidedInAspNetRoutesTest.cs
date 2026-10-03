@@ -176,6 +176,27 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             .VerifyNoIssues();
 
     [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_TupleInUserDefinedConversion_DoesNotThrow() =>
+        builderCS
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .AddSnippet("""
+                using Microsoft.AspNetCore.Mvc;
+
+                public class MyController : Controller
+                {
+                    public IActionResult Index() => View();
+                }
+
+                public class Wrapper
+                {
+                    public static explicit operator Wrapper((string, int) value) => new Wrapper();
+
+                    public Wrapper Create() => (Wrapper)(@"\", 1);
+                }
+                """)
+            .VerifyNoIssues();
+
+    [TestMethod]
     [DynamicData(nameof(AspNetCore2xVersionsUnderTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_CS(string aspNetCoreVersion) =>
         builderCS
