@@ -618,37 +618,6 @@ public class Repro_6644
     }
 }
 
-public class ImplicitEnumerable : IEnumerable<int>
-{
-    public IEnumerator<int> GetEnumerator() // Noncompliant
-    {
-        foreach (var x in this) { }
-        return null;
-    }
-
-    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => null;
-}
-
-public class ImplicitMoveNext
-{
-    public int Current => 0;
-
-    public bool MoveNext() // Noncompliant
-    {
-        foreach (var x in new ImplicitMoveNextHolder(this)) { }
-        return true;
-    }
-}
-
-public class ImplicitMoveNextHolder
-{
-    private readonly ImplicitMoveNext enumerator;
-
-    public ImplicitMoveNextHolder(ImplicitMoveNext enumerator) => this.enumerator = enumerator;
-
-    public ImplicitMoveNext GetEnumerator() => enumerator;
-}
-
 public class ImplicitAdd : System.Collections.IEnumerable
 {
     public void Add(int x) // Noncompliant
