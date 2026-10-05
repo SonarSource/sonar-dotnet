@@ -32,7 +32,6 @@ stages:
       clean: all
 
     steps:
-    - powershell: |
     - task: CmdLine@2
       displayName: "NuGet Restore"
       inputs:
