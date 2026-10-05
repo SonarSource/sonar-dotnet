@@ -1,0 +1,25 @@
+{
+  "title": "Local variable declarations and assignments should be joined",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "2 min"
+  },
+  "tags": [
+    "convention",
+    "readability",
+    "clumsy"
+  ],
+  "defaultSeverity": "Minor",
+  "ruleSpecification": "RSPEC-9414",
+  "sqKey": "S9414",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "LOW"
+    },
+    "attribute": "CLEAR"
+  }
+}

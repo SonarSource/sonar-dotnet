@@ -1,0 +1,68 @@
+<p>This rule raises an issue when a local variable is declared without initialization and the immediately following statement unconditionally assigns a
+value to it.</p>
+<h2>Why is this an issue?</h2>
+<p>Separating variable declarations from their first assignments reduces code readability and makes it harder to understand the variable’s purpose and
+initial value at a glance.</p>
+<p>When a declaration is immediately followed by an unconditional assignment to that variable, the two statements should be combined. This practice
+makes the code more concise and easier to follow.</p>
+<p>Combining declaration and initialization also helps prevent bugs from accidentally using uninitialized variables and makes the variable’s scope and
+lifetime clearer.</p>
+<p>This rule only reports a declaration when the assignment is the very next statement. If other statements appear in between, or the value depends on
+conditional logic such as an <code>if</code>, a loop, a <code>switch</code> or a <code>try</code> block, no issue is raised, because moving the
+declaration could change the meaning of the code.</p>
+<p>No issue is raised either when the assigned expression refers to the variable being declared, as in a recursive lambda or a self-unsubscribing event
+handler. Joining those statements would not compile.</p>
+<h3>What is the potential impact?</h3>
+<p>This is primarily a code readability issue. While it doesn’t directly cause bugs, it can make code harder to understand and maintain, potentially
+leading to mistakes when modifying the code later.</p>
+<h2>How to fix it</h2>
+<p>Merge the declaration and the assignment into a single statement. You can use either an explicit type or the <code>var</code> keyword based on your
+coding style preferences.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+int Bar()
+{
+  int myInt; // Noncompliant
+  myInt = 3;
+  return myInt - 1;
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+int Bar()
+{
+  var myInt = 3;
+  return myInt - 1;
+}
+</pre>
+<h3>Exceptions</h3>
+<p>No issue is raised when a statement separates the declaration from the assignment, or when the assigned value depends on conditional logic.</p>
+<pre>
+int Bar(bool condition)
+{
+  int myInt;      // Compliant - a statement separates the declaration from the assignment
+  DoSomething();
+  myInt = 3;
+
+  int other;      // Compliant - the value is determined by conditional logic
+  if (condition)
+  {
+    other = 1;
+  }
+  else
+  {
+    other = 2;
+  }
+
+  return myInt + other;
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions#implicitly-typed-local-variables">C# Coding
+  Conventions - Implicitly typed local variables</a></li>
+</ul>
+
