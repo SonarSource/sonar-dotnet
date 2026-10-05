@@ -66,9 +66,11 @@ public sealed class RedundantNullForgivingOperator : SonarDiagnosticAnalyzer
     // Confirms the cheap check by re-speculating the whole enclosing member: https://github.com/dotnet/roslyn/issues/35037
     // Anything but a confirmed NotNull is treated as a contradiction: an inconclusive FlowState.None (e.g. a constant-expression
     // position, or a container the re-speculation can't fully replay) is not trustworthy enough to keep the cheap check's verdict.
+    // ConvertedNullability (not Nullability) also catches a user-defined conversion with its own nullable return type, and
+    // equals Nullability whenever no real conversion applies, so this loses no precision: https://github.com/dotnet/roslyn/issues/48248
     private static bool ContradictedByWholeContainerSpeculation(SemanticModel model, PostfixUnaryExpressionSyntax suppression) =>
         suppression.ChangeSyntaxElement(suppression.Operand, model, out var speculativeModel) is { } replaced
-        && speculativeModel?.GetTypeInfo(replaced).Nullability is not { FlowState: NullableFlowState.NotNull };
+        && speculativeModel?.GetTypeInfo(replaced).ConvertedNullability is not { FlowState: NullableFlowState.NotNull };
 
     // Oblivious members (no nullable annotation, e.g. "#nullable disable" or an unannotated TFM) default to NotNull
     // without the compiler ever proving it, so we check the member's own declared annotation instead of trusting that.

@@ -316,6 +316,47 @@ public class PragmaInsideExpression
     }
 }
 
+public class NullableConversionOperand
+{
+    public static implicit operator string?(NullableConversionOperand value) => value.ToString();
+}
+
+public class NarrowedThenConvertedByNullableOperator
+{
+    // The compiler doesn't propagate "operand proven not-null" through a user-defined conversion whose own return type is independently
+    // nullable-annotated, so removing "!" here produces a real CS8604 even though "a" itself is correctly narrowed by the guard clause.
+    public int Method(NullableConversionOperand? a)
+    {
+        if (a is null)
+        {
+            return 0;
+        }
+
+        return int.Parse(a!); // Compliant, see https://sonarsource.atlassian.net/browse/NET-4710
+    }
+}
+
+public class NotNullIfNotNullConversionOperand
+{
+    [return: NotNullIfNotNull(nameof(value))]
+    public static implicit operator string?(NotNullIfNotNullConversionOperand? value) => value?.ToString();
+}
+
+public class NarrowedThenConvertedByNotNullIfNotNullOperator
+{
+    // Unlike NarrowedThenConvertedByNullableOperator above, this conversion operator is annotated [NotNullIfNotNull], so the compiler
+    // does prove the converted result is non-null when the operand is, and the "!" really is redundant here.
+    public int Method(NotNullIfNotNullConversionOperand? a)
+    {
+        if (a is null)
+        {
+            return 0;
+        }
+
+        return int.Parse(a!); // Noncompliant, see https://sonarsource.atlassian.net/browse/NET-4710
+    }
+}
+
 #endregion
 
 #region S8970 - null-forgiving operator used where nullable warnings are disabled
