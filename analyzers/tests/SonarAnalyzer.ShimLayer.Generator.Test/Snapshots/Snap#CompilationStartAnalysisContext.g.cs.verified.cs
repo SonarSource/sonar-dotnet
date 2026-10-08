@@ -18,14 +18,14 @@
 
 namespace SonarAnalyzer.ShimLayer;
 
-public static class AnalyzerFileReferenceShimExtensions
+public static class CompilationStartAnalysisContextShimExtensions
 {
-    private static readonly Type WrappedType = typeof(AnalyzerFileReference);
+    private static readonly Type WrappedType = typeof(CompilationStartAnalysisContext);
 
-    private static readonly Func<AnalyzerFileReference, IAnalyzerAssemblyLoader> AssemblyLoaderAccessor = AccessorFactory.CreateProperty<Func<AnalyzerFileReference, IAnalyzerAssemblyLoader>>(WrappedType, "AssemblyLoader");
+    private static readonly Action<CompilationStartAnalysisContext, Action<AdditionalFileAnalysisContextWrapper>> RegisterAdditionalFileActionAccessor = AccessorFactory.CreateMethod<Action<CompilationStartAnalysisContext, Action<AdditionalFileAnalysisContextWrapper>>>(WrappedType, "RegisterAdditionalFileAction");
 
-    extension(AnalyzerFileReference wrappedInstance)
+    extension(CompilationStartAnalysisContext wrappedInstance)
     {
-        public IAnalyzerAssemblyLoader AssemblyLoader => AssemblyLoaderAccessor(wrappedInstance);
+        public void RegisterAdditionalFileAction(Action<AdditionalFileAnalysisContextWrapper> action) => RegisterAdditionalFileActionAccessor(wrappedInstance, action);
     }
 }

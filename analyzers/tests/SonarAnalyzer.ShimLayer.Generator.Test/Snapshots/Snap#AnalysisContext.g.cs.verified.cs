@@ -24,8 +24,12 @@ public static class AnalysisContextShimExtensions
 
     private static readonly Func<AnalysisContext, DiagnosticSeverity> MinimumReportedSeverityAccessor = AccessorFactory.CreateProperty<Func<AnalysisContext, DiagnosticSeverity>>(WrappedType, "MinimumReportedSeverity");
 
+    private static readonly Action<AnalysisContext, Action<AdditionalFileAnalysisContextWrapper>> RegisterAdditionalFileActionAccessor = AccessorFactory.CreateMethod<Action<AnalysisContext, Action<AdditionalFileAnalysisContextWrapper>>>(WrappedType, "RegisterAdditionalFileAction");
+
     extension(AnalysisContext wrappedInstance)
     {
         public DiagnosticSeverity MinimumReportedSeverity => MinimumReportedSeverityAccessor(wrappedInstance);
+
+        public void RegisterAdditionalFileAction(Action<AdditionalFileAnalysisContextWrapper> action) => RegisterAdditionalFileActionAccessor(wrappedInstance, action);
     }
 }

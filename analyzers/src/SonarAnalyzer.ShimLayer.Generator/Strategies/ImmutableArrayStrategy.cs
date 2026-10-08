@@ -22,6 +22,16 @@ public class ImmutableArrayStrategy : Strategy
     private readonly string type;
     private readonly Strategy typeArgument;
 
+    // We can use only those, that assign directly, or we convert them in AccessorFactory. We can remove the strategy list once we implement missing WrapStrategy conversions there
+    public override bool IsSupported => typeArgument.IsSupported
+                                        && typeArgument is ExtendStrategy
+                                                            or IOperationStrategy
+                                                            or NewEnumStrategy
+                                                            or NoChangeStrategy
+                                                            or OperationWrapStrategy
+                                                            or PartialEnumStrategy
+                                                            or PrimitiveStrategy
+                                                            or TypeWrapStrategy;
     public override string TypeSnippet => $"{type}<{typeArgument.TypeSnippet}>";
     public override string CompiletimeTypeSnippet => TypeSnippet;
 

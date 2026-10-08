@@ -199,7 +199,7 @@ public class ModelBuilderTest
     [TestMethod]
     public void Build_NoChangeStrategy_DifferentMembers()
     {
-        var type = typeof(IEnumerable<>);
+        var type = typeof(SymbolStartAnalysisContext);
         var members = type.GetMembers();
 
         var model = ModelBuilder.Build(

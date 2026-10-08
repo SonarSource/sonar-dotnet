@@ -203,7 +203,8 @@ public static class ModelBuilder
     private static bool IsSkipped(Type type) =>
         type.IsNested
         || typeof(Delegate).IsAssignableFrom(type)
-        || type.FullName == "Microsoft.CodeAnalysis.CSharpExtensions";  // The useful one is in CSharp namespace
+        || type.FullName == "Microsoft.CodeAnalysis.CSharpExtensions"   // The useful one is in CSharp namespace
+        || type.FullName == "Microsoft.CodeAnalysis.AnalyzerConfigSet"; // Generic type constraints have IReadOnlyList<AnalyzerConfig>, and does not contain anything useful to shim
 
     private static bool IsValid(MemberInfo member) =>
         !IsExcluded(member)

@@ -37,6 +37,8 @@ public class GenericTypeStrategyTest
         var sut = new GenericTypeStrategy(typeof(List<Delegate>), [new SkipStrategy(typeof(Delegate))]);
         sut.IsSupported.Should().BeFalse();
         sut.Generate([]).Should().BeNull();
+        sut.Invoking(x => x.TypeSnippet).Should().Throw<NotSupportedException>();
+        sut.Invoking(x => x.CompiletimeTypeSnippet).Should().Throw<NotSupportedException>();
     }
 
     [TestMethod]

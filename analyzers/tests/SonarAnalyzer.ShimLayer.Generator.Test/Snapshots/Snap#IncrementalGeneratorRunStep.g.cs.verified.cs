@@ -26,7 +26,6 @@ public readonly struct IncrementalGeneratorRunStepWrapper : IWrapper, IEquatable
 
     private static readonly Func<Object, TimeSpan> ElapsedTimeAccessor = AccessorFactory.CreateProperty<Func<Object, TimeSpan>>(WrappedType, "ElapsedTime");
     private static readonly Func<Object, string> NameAccessor = AccessorFactory.CreateProperty<Func<Object, string>>(WrappedType, "Name");
-    private static readonly Func<Object, ImmutableArray<ValueTuple<object, IncrementalStepRunReason>>> OutputsAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ValueTuple<object, IncrementalStepRunReason>>>>(WrappedType, "Outputs");
 
     private IncrementalGeneratorRunStepWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
@@ -53,7 +52,6 @@ public readonly struct IncrementalGeneratorRunStepWrapper : IWrapper, IEquatable
 
     public TimeSpan ElapsedTime => ElapsedTimeAccessor(wrappedInstance);
     public string Name => NameAccessor(wrappedInstance);
-    public ImmutableArray<ValueTuple<object, IncrementalStepRunReason>> Outputs => OutputsAccessor(wrappedInstance);
 
     public static IncrementalGeneratorRunStepWrapper From(Object instance)
     {

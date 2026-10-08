@@ -22,14 +22,14 @@ public class GenericTypeStrategy : Strategy
     private readonly Strategy[] typeArguments;
     private readonly string type;
 
-    public override bool IsSupported => typeArguments.All(x => x is not WrapStrategy && x.IsSupported);
-    public override string TypeSnippet => type;
-    public override string CompiletimeTypeSnippet => type;
+    public override bool IsSupported => (Latest.Name == "Action`1" && typeArguments.All(x => x.IsSupported)) || typeArguments.All(x => x is not WrapStrategy && x.IsSupported);
+    public override string TypeSnippet => type ?? throw new NotSupportedException();
+    public override string CompiletimeTypeSnippet => type ?? throw new NotSupportedException();
 
     public GenericTypeStrategy(Type latest, Strategy[] typeArguments) : base(latest)
     {
         this.typeArguments = typeArguments;
-        type = latest.Name.Split('`')[0] + "<" + typeArguments.JoinStr(", ", x => x.CompiletimeTypeSnippet) + ">";
+        type = IsSupported ? latest.Name.Split('`')[0] + "<" + typeArguments.JoinStr(", ", x => x.ReturnTypeSnippet) + ">" : null;
     }
 
     protected override string GenerateCore(StrategyModel model) => null;

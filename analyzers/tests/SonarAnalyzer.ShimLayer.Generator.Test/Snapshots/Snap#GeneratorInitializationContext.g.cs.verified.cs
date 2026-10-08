@@ -26,6 +26,7 @@ public readonly struct GeneratorInitializationContextWrapper : IWrapper, IEquata
 
     private static readonly Func<Object, CancellationToken> CancellationTokenAccessor = AccessorFactory.CreateProperty<Func<Object, CancellationToken>>(WrappedType, "CancellationToken");
 
+    private static readonly Action<Object, Action<GeneratorPostInitializationContextWrapper>> RegisterForPostInitializationAccessor = AccessorFactory.CreateMethod<Action<Object, Action<GeneratorPostInitializationContextWrapper>>>(WrappedType, "RegisterForPostInitialization");
     private static readonly Action<Object, SyntaxContextReceiverCreatorWrapper> RegisterForSyntaxNotificationsAccessor = AccessorFactory.CreateMethod<Action<Object, SyntaxContextReceiverCreatorWrapper>>(WrappedType, "RegisterForSyntaxNotifications");
     private static readonly Action<Object, SyntaxReceiverCreatorWrapper> RegisterForSyntaxNotificationsAccessor_Overload2 = AccessorFactory.CreateMethod<Action<Object, SyntaxReceiverCreatorWrapper>>(WrappedType, "RegisterForSyntaxNotifications");
 
@@ -54,6 +55,7 @@ public readonly struct GeneratorInitializationContextWrapper : IWrapper, IEquata
 
     public CancellationToken CancellationToken => CancellationTokenAccessor(wrappedInstance);
 
+    public void RegisterForPostInitialization(Action<GeneratorPostInitializationContextWrapper> callback) => RegisterForPostInitializationAccessor(wrappedInstance, callback);
     public void RegisterForSyntaxNotifications(SyntaxContextReceiverCreatorWrapper receiverCreator) => RegisterForSyntaxNotificationsAccessor(wrappedInstance, receiverCreator);
     public void RegisterForSyntaxNotifications(SyntaxReceiverCreatorWrapper receiverCreator) => RegisterForSyntaxNotificationsAccessor_Overload2(wrappedInstance, receiverCreator);
 

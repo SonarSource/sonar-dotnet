@@ -26,6 +26,8 @@ public readonly struct IncrementalGeneratorInitializationContextWrapper : IWrapp
 
     private static readonly Func<Object, SyntaxValueProviderWrapper> SyntaxProviderAccessor = AccessorFactory.CreateProperty<Func<Object, SyntaxValueProviderWrapper>>(WrappedType, "SyntaxProvider");
 
+    private static readonly Action<Object, Action<IncrementalGeneratorPostInitializationContextWrapper>> RegisterPostInitializationOutputAccessor = AccessorFactory.CreateMethod<Action<Object, Action<IncrementalGeneratorPostInitializationContextWrapper>>>(WrappedType, "RegisterPostInitializationOutput");
+
     private IncrementalGeneratorInitializationContextWrapper(Object wrappedInstance) =>
         this.wrappedInstance = wrappedInstance;
 
@@ -50,6 +52,8 @@ public readonly struct IncrementalGeneratorInitializationContextWrapper : IWrapp
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public SyntaxValueProviderWrapper SyntaxProvider => SyntaxProviderAccessor(wrappedInstance);
+
+    public void RegisterPostInitializationOutput(Action<IncrementalGeneratorPostInitializationContextWrapper> callback) => RegisterPostInitializationOutputAccessor(wrappedInstance, callback);
 
     public static IncrementalGeneratorInitializationContextWrapper From(Object instance)
     {
