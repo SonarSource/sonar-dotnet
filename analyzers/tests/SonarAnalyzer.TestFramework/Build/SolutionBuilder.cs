@@ -61,7 +61,7 @@ public readonly struct SolutionBuilder
         solution.Projects.SelectMany(x => Compile(x, parseOptions)).ToImmutableArray();
 
     private static IEnumerable<Compilation> Compile(Project project, ParseOptions[] parseOptions) =>
-        parseOptions.OrDefault(project.Language).Select(x => project.WithParseOptions(x).GetCompilationAsync().Result);
+        parseOptions.OrDefault(project.Language).Select(x => ProjectCompiler.Compile(project, x));
 
     private ProjectBuilder AddProject(AnalyzerLanguage language, string projectName, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
     {

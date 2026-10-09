@@ -207,7 +207,6 @@ internal class Verifier
         var paths = builder.Paths.Select(TestCasePath).ToList();
         var sourceFilePaths = paths.Except(razorFilePaths).ToArray();
         var sourceSnippets = builder.Snippets.Where(x => !IsRazorOrCshtml(x.FileName)).ToArray();
-        var editorConfigGenerator = new EditorConfigGenerator(Directory.GetCurrentDirectory());
         var hasRazorFiles = razorFilePaths.Length > 0;
         concurrentAnalysis = !hasRazorFiles && concurrentAnalysis; // Concurrent analysis is not supported for Razor or cshtml files due to namespace issues
         var concurrentSourceFiles = concurrentAnalysis && builder.AutogenerateConcurrentFiles ? CreateConcurrencyTest(sourceFilePaths) : [];
@@ -226,11 +225,7 @@ internal class Verifier
             projectBuilder = projectBuilder
                 .AddAdditionalDocuments(razorFilePaths)
                 .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreAppRef("7.0.17"))
-                .AddReferences(NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0"))
-                .AddAnalyzerReferences(SdkPathProvider.SourceGenerators)
-                .AddAnalyzerConfigDocument(
-                    Path.Combine(Directory.GetCurrentDirectory(), ".editorconfig"),
-                    editorConfigGenerator.Generate(razorFilePaths));
+                .AddReferences(NuGetMetadataReference.SystemTextEncodingsWeb("7.0.0"));
         }
         return projectBuilder;
     }
