@@ -23,8 +23,8 @@ class Noncompliant
     {
         _ = array.First().First(); // Noncompliant
         _ = array.First()?.First(); // Noncompliant
-        _ = array.First().[2]; // Noncompliant
-        _ = array.[42].First(); // Noncompliant
+        _ = array.First()[2]; // Noncompliant
+        _ = array[42].First(); // Noncompliant
     }
 
     void Complex(FluentList fluent)

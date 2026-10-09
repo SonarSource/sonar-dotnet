@@ -21,10 +21,10 @@ class Noncompliant
 
     void Jagged(int[][] array)
     {
-        _ = array.[0].[0]; // Fixed
-        _ = array.[0]?.[0]; // Fixed
-        _ = array.[0].[2]; // Fixed
-        _ = array.[42].[0]; // Fixed
+        _ = array[0][0]; // Fixed
+        _ = array[0]?[0]; // Fixed
+        _ = array[0][2]; // Fixed
+        _ = array[42][0]; // Fixed
     }
 
     void Complex(FluentList fluent)
