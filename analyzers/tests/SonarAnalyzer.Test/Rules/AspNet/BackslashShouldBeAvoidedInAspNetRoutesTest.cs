@@ -176,6 +176,56 @@ public class BackslashShouldBeAvoidedInAspNetRoutesTest
             .VerifyNoIssues();
 
     [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_TupleInUserDefinedConversion_CS_DoesNotThrow() =>
+        builderCS
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .AddSnippet("""
+                using System.Diagnostics.CodeAnalysis;
+                using Microsoft.AspNetCore.Mvc;
+
+                public class MyController : Controller
+                {
+                    public IActionResult Index() => View();
+                }
+
+                public class Wrapper
+                {
+                    public static explicit operator Wrapper([StringSyntax("Route")] (string, int) value) => new Wrapper();
+
+                    public Wrapper Create() => (Wrapper)(@"\", 1);
+                }
+                """)
+            .VerifyNoIssues();
+
+    [TestMethod]
+    public void BackslashShouldBeAvoidedInAspNetRoutes_TupleInUserDefinedConversion_VB_DoesNotThrow() =>
+        builderVB
+            .AddReferences(AspNetCore3AndAboveReferences)
+            .AddSnippet("""
+                Imports System.Diagnostics.CodeAnalysis
+                Imports Microsoft.AspNetCore.Mvc
+
+                Public Class MyController
+                    Inherits Controller
+
+                    Public Function Index() As IActionResult
+                        Return View()
+                    End Function
+                End Class
+
+                Public Class Wrapper
+                    Public Shared Narrowing Operator CType(<StringSyntax("Route")> value As (String, Integer)) As Wrapper
+                        Return New Wrapper()
+                    End Operator
+
+                    Public Function Create() As Wrapper
+                        Return CType(("\", 1), Wrapper)
+                    End Function
+                End Class
+                """)
+            .VerifyNoIssues();
+
+    [TestMethod]
     [DynamicData(nameof(AspNetCore2xVersionsUnderTest))]
     public void BackslashShouldBeAvoidedInAspNetRoutes_AspNetCore2x_CS(string aspNetCoreVersion) =>
         builderCS
