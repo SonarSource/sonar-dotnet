@@ -203,7 +203,8 @@ public class TypeWrapStrategyTest
                 new(typeof(AnalyzerConfig).GetMethod(nameof(AnalyzerConfig.Parse), [typeof(string), typeof(string)]), false, "ParseAccessor"),          // Static wrap method
                 new(typeof(CSharpExtensions).GetMember(nameof(CSharpExtensions.TryGetSpeculativeSemanticModel))[0], false, "TryGetAccessor"),           // Static wrap method with out parameter
                 new(typeof(Compilation).GetMember(nameof(Compilation.GetRequiredLanguageVersion))[0], true, "GetRequiredLanguageVersionAccessor"),      // Static passthrough method
-                new(typeof(AnalysisContext).GetMember(nameof(AnalysisContext.RegisterAdditionalFileAction))[0], false, "RegisterFileActionAccessor")    // Method with Action<Wrapper> parameter
+                new(typeof(AnalysisContext).GetMember(nameof(AnalysisContext.RegisterAdditionalFileAction))[0], false, "RegisterFileActionAccessor"),   // Method with Action<Wrapper> parameter
+                new(typeof(CompilationStartAnalysisContext).GetMember(nameof(CompilationStartAnalysisContext.RegisterSymbolStartAction))[0], false, "RegisterSymbolStartActionAccessor")
             ]);
         var model = new Dictionary<Type, Strategy>
         {
@@ -246,6 +247,7 @@ public class TypeWrapStrategyTest
                 private delegate bool TryGetAccessorDelegate(SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption);
                 private static readonly TryGetAccessorDelegate TryGetAccessor = AccessorFactory.CreateStaticMethod<TryGetAccessorDelegate>(WrappedType, "TryGetSpeculativeSemanticModel");
                 private static readonly Action<GeneratorDriver, Action<AdditionalFileAnalysisContextWrapper>> RegisterFileActionAccessor = AccessorFactory.CreateMethod<Action<GeneratorDriver, Action<AdditionalFileAnalysisContextWrapper>>>(WrappedType, "RegisterAdditionalFileAction");
+                private static readonly Action<GeneratorDriver, Action<SymbolStartAnalysisContext>, SymbolKind> RegisterSymbolStartActionAccessor = AccessorFactory.CreateMethod<Action<GeneratorDriver, Action<SymbolStartAnalysisContext>, SymbolKind>>(WrappedType, "RegisterSymbolStartAction");
 
                 private CSharpGeneratorDriverWrapper(GeneratorDriver wrappedInstance) =>
                     this.wrappedInstance = wrappedInstance;
@@ -281,6 +283,7 @@ public class TypeWrapStrategyTest
                 public static AnalyzerConfig Parse(string text, string pathToFile) => ParseAccessor(text, pathToFile);
                 public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, TypeSyntax type, out SemanticModel speculativeModel, SpeculativeBindingOption bindingOption) => TryGetAccessor(semanticModel, position, type, out speculativeModel, bindingOption);
                 public void RegisterAdditionalFileAction(Action<AdditionalFileAnalysisContextWrapper> action) => RegisterFileActionAccessor(wrappedInstance, action);
+                public void RegisterSymbolStartAction(Action<SymbolStartAnalysisContext> action, SymbolKind symbolKind) => RegisterSymbolStartActionAccessor(wrappedInstance, action, symbolKind);
 
                 public static CSharpGeneratorDriverWrapper From(GeneratorDriver instance)
                 {

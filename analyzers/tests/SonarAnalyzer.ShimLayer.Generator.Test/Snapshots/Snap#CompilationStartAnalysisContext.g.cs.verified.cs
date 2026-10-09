@@ -23,9 +23,11 @@ public static class CompilationStartAnalysisContextShimExtensions
     private static readonly Type WrappedType = typeof(CompilationStartAnalysisContext);
 
     private static readonly Action<CompilationStartAnalysisContext, Action<AdditionalFileAnalysisContextWrapper>> RegisterAdditionalFileActionAccessor = AccessorFactory.CreateMethod<Action<CompilationStartAnalysisContext, Action<AdditionalFileAnalysisContextWrapper>>>(WrappedType, "RegisterAdditionalFileAction");
+    private static readonly Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionAccessor = AccessorFactory.CreateMethod<Action<CompilationStartAnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind>>(WrappedType, "RegisterSymbolStartAction");
 
     extension(CompilationStartAnalysisContext wrappedInstance)
     {
         public void RegisterAdditionalFileAction(Action<AdditionalFileAnalysisContextWrapper> action) => RegisterAdditionalFileActionAccessor(wrappedInstance, action);
+        public void RegisterSymbolStartAction(Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind) => RegisterSymbolStartActionAccessor(wrappedInstance, action, symbolKind);
     }
 }

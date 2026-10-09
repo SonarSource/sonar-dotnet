@@ -25,11 +25,13 @@ public static class AnalysisContextShimExtensions
     private static readonly Func<AnalysisContext, DiagnosticSeverity> MinimumReportedSeverityAccessor = AccessorFactory.CreateProperty<Func<AnalysisContext, DiagnosticSeverity>>(WrappedType, "MinimumReportedSeverity");
 
     private static readonly Action<AnalysisContext, Action<AdditionalFileAnalysisContextWrapper>> RegisterAdditionalFileActionAccessor = AccessorFactory.CreateMethod<Action<AnalysisContext, Action<AdditionalFileAnalysisContextWrapper>>>(WrappedType, "RegisterAdditionalFileAction");
+    private static readonly Action<AnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind> RegisterSymbolStartActionAccessor = AccessorFactory.CreateMethod<Action<AnalysisContext, Action<SymbolStartAnalysisContextWrapper>, SymbolKind>>(WrappedType, "RegisterSymbolStartAction");
 
     extension(AnalysisContext wrappedInstance)
     {
         public DiagnosticSeverity MinimumReportedSeverity => MinimumReportedSeverityAccessor(wrappedInstance);
 
         public void RegisterAdditionalFileAction(Action<AdditionalFileAnalysisContextWrapper> action) => RegisterAdditionalFileActionAccessor(wrappedInstance, action);
+        public void RegisterSymbolStartAction(Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind) => RegisterSymbolStartActionAccessor(wrappedInstance, action, symbolKind);
     }
 }

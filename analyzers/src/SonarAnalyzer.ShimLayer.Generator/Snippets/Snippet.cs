@@ -33,6 +33,7 @@ public abstract class Snippet
                                                                                 and not "MemberNotNullWhenAttribute"
                                                                                 and not "NullableAttribute"
                                                                                 and not "NullableContextAttribute"
+                                                                                and not "OverloadResolutionPriorityAttribute"
                                                                                 and not "TupleElementNamesAttribute"))
         {
             sb.Append("[").Append(attribute.AttributeType.FullName);

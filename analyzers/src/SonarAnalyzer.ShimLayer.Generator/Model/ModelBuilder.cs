@@ -85,7 +85,7 @@ public static class ModelBuilder
         {
             return new StaticClassStrategy(latest.Type, CreateMembers(latest, baseline));
         }
-        else if (latest.Type.Name is not "SymbolStartAnalysisContext")
+        else
         {
             if (baseline is null)
             {
@@ -96,13 +96,6 @@ public static class ModelBuilder
             {
                 return new ExtendStrategy(latest.Type, CreateMembers(latest, baseline));
             }
-        }
-        else
-        {
-            // ToDo: Throw NotSupportedException instead of skip, there should be nothing left after explicitly handling all known cases
-            return baseline is null
-                ? new SkipStrategy(latest.Type)
-                : new NoChangeStrategy(latest.Type);
         }
     }
 

@@ -197,18 +197,6 @@ public class ModelBuilderTest
     }
 
     [TestMethod]
-    public void Build_NoChangeStrategy_DifferentMembers()
-    {
-        var type = typeof(SymbolStartAnalysisContext);
-        var members = type.GetMembers();
-
-        var model = ModelBuilder.Build(
-            [new(type, members), SyntaxNodeDescriptor],
-            [new(type, [])]);           // Fallback for types that do have a baseline (can be used), but do not have a dedicated strategy
-        model[type].Should().BeOfType<NoChangeStrategy>();
-    }
-
-    [TestMethod]
     public void Build_FallbackBaseType()
     {
         var type = typeof(BaseNamespaceDeclarationSyntax);

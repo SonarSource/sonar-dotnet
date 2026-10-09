@@ -185,7 +185,7 @@ public class RegisterSymbolStartActionWrapperTest
                 {
                     var operation = operationContext.Operation.Syntax.ToString();
                     visited.Add(operation);
-                }, [OperationKind.Invocation]);
+                }, OperationKind.Invocation);
             }, SymbolKind.NamedType)]);
         var diagnostics = await compilation.GetAnalyzerDiagnosticsAsync();
         diagnostics.Should().BeEmpty();
@@ -322,8 +322,7 @@ public class RegisterSymbolStartActionWrapperTest
     {
         public Action<SymbolStartAnalysisContextWrapper> Action { get; }
         public SymbolKind SymbolKind { get; }
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-            [AnalysisScaffolding.CreateDescriptor("TEST")];
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => [AnalysisScaffolding.CreateDescriptor("TEST")];
 
         public TestDiagnosticAnalyzer(Action<SymbolStartAnalysisContextWrapper> action, SymbolKind symbolKind)
         {
@@ -333,6 +332,6 @@ public class RegisterSymbolStartActionWrapperTest
 
         public override void Initialize(Microsoft.CodeAnalysis.Diagnostics.AnalysisContext context) =>
             context.RegisterCompilationStartAction(x =>
-                CompilationStartAnalysisContextExtensions.RegisterSymbolStartAction(x, Action, SymbolKind));
+                CompilationStartAnalysisContextShimExtensions.RegisterSymbolStartAction(x, Action, SymbolKind));
     }
 }

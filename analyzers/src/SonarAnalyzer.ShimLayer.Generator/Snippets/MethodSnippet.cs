@@ -78,19 +78,19 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
     private static string SerializeGenericConstraint(Type parameter)
     {
         var parts = new List<string>();
-        Add(GenericParameterAttributes.ReferenceTypeConstraint, "class");
-        Add(GenericParameterAttributes.NotNullableValueTypeConstraint, "struct");
+        TryAdd(GenericParameterAttributes.ReferenceTypeConstraint, "class");
+        TryAdd(GenericParameterAttributes.NotNullableValueTypeConstraint, "struct");
         parts.AddRange(parameter.GetGenericParameterConstraints().Where(x => x.FullName != typeof(ValueType).FullName).Select(TypeName));
         if (!HasFlag(GenericParameterAttributes.NotNullableValueTypeConstraint))    // struct implies new() and can not be rendered together
         {
-            Add(GenericParameterAttributes.DefaultConstructorConstraint, "new()");
+            TryAdd(GenericParameterAttributes.DefaultConstructorConstraint, "new()");
         }
         return parts.Any() ? $" where {parameter.Name} : {parts.JoinStr(", ")}" : null;
 
         bool HasFlag(GenericParameterAttributes flag) =>
             (parameter.GenericParameterAttributes & flag) == flag;
 
-        void Add(GenericParameterAttributes flag, string value)
+        void TryAdd(GenericParameterAttributes flag, string value)
         {
             if (HasFlag(flag))
             {
