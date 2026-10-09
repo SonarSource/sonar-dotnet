@@ -34,7 +34,7 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
         {
             context.RegisterCodeFix(
                 Title,
-                _ => Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, Change(expression, Args(index))).WithTriviaFrom(expression))),
+                _ => Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, Change(expression, Args(index)).WithTriviaFrom(expression)))),
                 context.Diagnostics);
         }
         return Task.CompletedTask;
