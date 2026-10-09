@@ -29,8 +29,7 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
     protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
         if (context.FindNode(root).FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } expression
-            && expression.GetName() is { } name
-            && Index(name, expression.ArgumentList.Arguments) is { } index)
+            && Index(expression, expression.ArgumentList.Arguments) is { } index)
         {
             context.RegisterCodeFix(
                 Title,
@@ -48,15 +47,19 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
             ? ElementAccessExpression(member.Expression, arguments)
             : ElementBindingExpression(arguments);
 
-    private static ExpressionSyntax Index(string method, SeparatedSyntaxList<ArgumentSyntax> args) =>
-        method switch
+    private static ExpressionSyntax Index(SyntaxNode expression, SeparatedSyntaxList<ArgumentSyntax> args) =>
+        expression.GetName() switch
         {
             nameof(Enumerable.First) when args.Count is 0 => Int(0),
-            nameof(Enumerable.Last) when args.Count is 0 => PrefixUnaryExpression(SyntaxKindEx.IndexExpression, Int(1)),
+            nameof(Enumerable.Last) when args.Count is 0 && SupportsFromEnd(expression) => PrefixUnaryExpression(SyntaxKindEx.IndexExpression, Int(1)),
             nameof(Enumerable.ElementAt) when args.Count is 1 => args[0].Expression.WithoutTrivia(),
             _ => null,
         };
 
     private static LiteralExpressionSyntax Int(int value) =>
         LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(value));
+
+    private static bool SupportsFromEnd(SyntaxNode node) =>
+      node.SyntaxTree.Options is CSharpParseOptions options
+      && options.LanguageVersion >= LanguageVersionEx.CSharp8;
 }
