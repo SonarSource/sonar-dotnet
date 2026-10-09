@@ -30,6 +30,9 @@ public readonly struct SonarCodeFixContext
     public readonly ImmutableArray<Diagnostic> Diagnostics => context.Diagnostics;
     public readonly TextSpan Span => context.Span;
 
+    public SyntaxNode FindNode(SyntaxNode root) =>
+        root.FindNode(context.Diagnostics.First().Location.SourceSpan);
+
     public SonarCodeFixContext(CodeFixContext context) =>
         this.context = context;
 
