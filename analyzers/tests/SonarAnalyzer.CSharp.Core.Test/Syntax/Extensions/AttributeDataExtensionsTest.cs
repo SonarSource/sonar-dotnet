@@ -23,6 +23,13 @@ namespace SonarAnalyzer.CSharp.Core.Test.Syntax.Extensions;
 [TestClass]
 public class AttributeDataExtensionsTest
 {
+    private enum SmallByteEnum : byte
+    {
+        A,
+        B,
+        C
+    }
+
     [TestMethod]
     [DataRow(true, "Test", "Test")]
     [DataRow(true, "TestAttribute", "TestAttribute")]
@@ -118,6 +125,47 @@ public class AttributeDataExtensionsTest
         var actualSuccess = attributeData.TryGetAttributeValue("Result", out DateTime actualValue);
         actualSuccess.Should().BeTrue();
         actualValue.Should().Be(new DateTime(2022, 12, 24));
+    }
+
+    [TestMethod]
+    public void TryGetAttributeValue_EnumConversion()
+    {
+        const string code = """
+            using System;
+
+            public class MyAttribute : Attribute
+            {
+                public MyAttribute(DayOfWeek day) { }
+            }
+
+            [My(DayOfWeek.Friday)]
+            public class Program { }
+            """;
+        var actualSuccess = CompileAttribute(code).TryGetAttributeValue("day", out DayOfWeek actualValue);
+        actualSuccess.Should().BeTrue();
+        actualValue.Should().Be(DayOfWeek.Friday);
+    }
+
+    // Enum.ToObject() truncates on an underlying-type mismatch instead of throwing, so the mismatch is checked explicitly.
+    [TestMethod]
+    public void TryGetAttributeValue_EnumConversion_UnderlyingTypeMismatch_ReturnsFalse()
+    {
+        const string code = """
+            using System;
+
+            public enum BigEnum : long { Big = 9999999999 }
+
+            public class MyAttribute : Attribute
+            {
+                public MyAttribute(BigEnum value) { }
+            }
+
+            [My(BigEnum.Big)]
+            public class Program { }
+            """;
+        var actualSuccess = CompileAttribute(code).TryGetAttributeValue("value", out SmallByteEnum actualValue);
+        actualSuccess.Should().BeFalse();
+        actualValue.Should().Be(default);
     }
 
     [TestMethod]

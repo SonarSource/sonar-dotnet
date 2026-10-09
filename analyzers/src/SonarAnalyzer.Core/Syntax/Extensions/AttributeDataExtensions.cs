@@ -76,6 +76,19 @@ public static class AttributeDataExtensions
             value = result;
             return true;
         }
+        else if (typeof(T).IsEnum)
+        {
+            // TypedConstant.Value boxes enum arguments as their underlying integral type, never as the enum type itself,
+            // so the "is T" check above never matches. Convert.ChangeType() doesn't special-case enum target types either.
+            // Enum.ToObject() doesn't validate that the source value's type matches T's underlying type - it would
+            // silently truncate/reinterpret a mismatched one - so that's checked explicitly first.
+            if (constant.Value.GetType() != Enum.GetUnderlyingType(typeof(T)))
+            {
+                return false;
+            }
+            value = (T)Enum.ToObject(typeof(T), constant.Value);
+            return true;
+        }
         else if (constant.Value is IConvertible)
         {
             try
@@ -83,7 +96,7 @@ public static class AttributeDataExtensions
                 value = (T)Convert.ChangeType(constant.Value, typeof(T));
                 return true;
             }
-            catch
+            catch (Exception ex) when (ex is InvalidCastException or FormatException or OverflowException)
             {
                 return false;
             }

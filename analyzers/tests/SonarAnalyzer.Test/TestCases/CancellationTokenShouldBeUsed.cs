@@ -64,7 +64,9 @@ public class BasicParameterCases
     //                                         ^^^^^
     {
         _dep.Do();    // Noncompliant [nc1] {{Pass the 'token' to this method to allow cancellation of the operation, or use 'CancellationToken.None' to opt out explicitly.}}
+        //   ^^
         _dep.Do("s"); // Noncompliant [nc2] {{Pass the 'token' to this method to allow cancellation of the operation, or use 'CancellationToken.None' to opt out explicitly.}}
+        //   ^^
     }
 
     public void AlreadyPassingToken(CancellationToken token)
@@ -506,5 +508,85 @@ public class OverloadRecursionFNCases
         {
             Retry(n - 1); // FN — still guarded by the same "n > 0" check, so forwarding the token would be safe
         }
+    }
+}
+
+// ─── NET-4705: obsolete CT overload must not be suggested ─────────────────────
+
+public class ObsoleteCtOverloadCases
+{
+    public void Do() { }
+
+    [Obsolete]
+    public void Do(CancellationToken ct) { }
+}
+
+public class ObsoleteCtOverloadCallerCases
+{
+    private readonly ObsoleteCtOverloadCases _dep = new ObsoleteCtOverloadCases();
+
+    public void Compliant(CancellationToken token)
+    {
+        _dep.Do(); // Compliant — the only CT overload is marked [Obsolete]
+    }
+}
+
+// ─── NET-4705: [EditorBrowsable(Never)] CT overload must not be suggested ─────
+
+public class EditorBrowsableNeverCtOverloadCases
+{
+    public void Do() { }
+
+    [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+    public void Do(CancellationToken ct) { }
+}
+
+public class EditorBrowsableNeverCtOverloadCallerCases
+{
+    private readonly EditorBrowsableNeverCtOverloadCases _dep = new EditorBrowsableNeverCtOverloadCases();
+
+    public void Compliant(CancellationToken token)
+    {
+        _dep.Do(); // Compliant — the only CT overload is marked [EditorBrowsable(Never)]
+    }
+}
+
+// ─── NET-4705: hidden overload must not be reached via a name shared with a visible sibling ──
+// Candidate names are collected only from visible overloads, but speculative binding resolves
+// by name against the full method group — if a hidden overload shares its CT parameter name with
+// a visible sibling, binding can still land on the hidden one.
+
+public class HiddenOverloadNameCollisionCases
+{
+    public void Do() { }
+
+    [Obsolete]
+    public void Do(CancellationToken cancellationToken) { }
+
+    public void Do(string s, CancellationToken cancellationToken) { }
+}
+
+public class HiddenOverloadNameCollisionCallerCases
+{
+    private readonly HiddenOverloadNameCollisionCases _dep = new HiddenOverloadNameCollisionCases();
+
+    public void Compliant(CancellationToken token)
+    {
+        _dep.Do(); // Compliant — speculative binding on 'cancellationToken' resolves to the [Obsolete] overload
+    }
+}
+
+// ─── NET-4705: primary location narrowed to the invoked member ───────────────
+
+public class ChainedCallLocationCases
+{
+    private readonly Dependency _dep = new Dependency();
+
+    public Dependency Self() => _dep;
+
+    public void Noncompliant(CancellationToken token) // Secondary
+    {
+        Self().Do(); // Noncompliant
+        //     ^^
     }
 }

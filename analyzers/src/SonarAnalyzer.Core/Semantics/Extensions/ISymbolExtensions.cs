@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 
 namespace SonarAnalyzer.Core.Semantics.Extensions;
@@ -218,6 +219,15 @@ public static class ISymbolExtensions
                 }
             }
         }
+
+        /// <summary>
+        /// <see langword="true"/> if <paramref name="symbol"/> is marked <c>[Obsolete]</c> or <c>[EditorBrowsable(EditorBrowsableState.Never)]</c> -
+        /// both signal "don't call this", even though it's public, so it's not a usable suggestion.
+        /// </summary>
+        public bool IsHiddenFromIntelliSense =>
+            symbol.HasAttribute(KnownType.System_ObsoleteAttribute)
+            || symbol.GetAttributes(KnownType.System_ComponentModel_EditorBrowsableAttribute)
+                .Any(x => x.TryGetAttributeValue<EditorBrowsableState>("state", out var state) && state == EditorBrowsableState.Never);
 
         public bool HasAnyAttribute(ImmutableArray<KnownType> types) =>
             symbol.GetAttributes(types).Any();

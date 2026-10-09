@@ -244,7 +244,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
             {
                 if (arg.Expression.RawKind is (int)SyntaxKind.DefaultExpression or (int)SyntaxKindEx.DefaultLiteralExpression)
                 {
-                    nodeContext.ReportIssue(Rule, invocation.Expression, [ctSource.DeclarationToken?.ToSecondaryLocation()], string.Format(MessageFormatDefault, ctSource.Expression));
+                    ReportIssue(nodeContext, invocation, ctSource, MessageFormatDefault);
                 }
                 return;
             }
@@ -255,6 +255,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
             x.Type
                 .GetMembers(x.Name)
                 .OfType<IMethodSymbol>()
+                .Where(x => !x.IsHiddenFromIntelliSense)
                 .Select(x => x.Parameters.FirstOrDefault(p => p.Type.NullableUnderlyingTypeOrSelf().Is(KnownType.System_Threading_CancellationToken))?.Name)
                 .WhereNotNull()
                 .Distinct()
@@ -262,9 +263,16 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
 
         if (!ctParamNames.IsDefaultOrEmpty && ctParamNames.Any(x => CanSpeculativelyPassCt(nodeContext.Model, invocation, method, x, ctSource.Expression, owningMethod)))
         {
-            nodeContext.ReportIssue(Rule, invocation.Expression, [ctSource.DeclarationToken?.ToSecondaryLocation()], string.Format(MessageFormat, ctSource.Expression));
+            ReportIssue(nodeContext, invocation, ctSource, MessageFormat);
         }
     }
+
+    private static void ReportIssue(SonarSyntaxNodeReportingContext nodeContext, InvocationExpressionSyntax invocation, MemberCtSource ctSource, string messageFormat) =>
+        nodeContext.ReportIssue(
+            Rule,
+            invocation.MethodCallIdentifier?.GetLocation() ?? invocation.GetLocation(),
+            [ctSource.DeclarationToken?.ToSecondaryLocation()],
+            string.Format(messageFormat, ctSource.Expression));
 
     private static bool CanSpeculativelyPassCt(
         SemanticModel model,
@@ -286,6 +294,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
         // If the token-forwarded call now binds back to the owning method, we risk introducing endless recursion - unless it already recursed there before.
         return model.GetSpeculativeSymbolInfo(invocation.SpanStart, speculatedNode, SpeculativeBindingOption.BindAsExpression).Symbol
             is IMethodSymbol resolved
+            && !(resolved.ReducedFrom ?? resolved).IsHiddenFromIntelliSense
             && model.Compilation.ClassifyConversion(resolved.ReturnType, calledMethod.ReturnType).IsImplicit
             && (!IsOwningMethod(resolved) || IsOwningMethod(calledMethod));
 

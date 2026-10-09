@@ -518,6 +518,63 @@ public class ISymbolExtensionsTest
     public void IsCountable_Null_ReturnsFalse() =>
         ((ISymbol)null).IsCountable().Should().BeFalse();
 
+    [TestMethod]
+    public void IsHiddenFromIntelliSense_Plain_ReturnsFalse()
+    {
+        const string code = """
+            public class Sample
+            {
+                public void SymbolMember() { }
+            }
+            """;
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsHiddenFromIntelliSense.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsHiddenFromIntelliSense_Obsolete_ReturnsTrue()
+    {
+        const string code = """
+            public class Sample
+            {
+                [System.Obsolete]
+                public void SymbolMember() { }
+            }
+            """;
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsHiddenFromIntelliSense.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsHiddenFromIntelliSense_EditorBrowsableNever_ReturnsTrue()
+    {
+        const string code = """
+            public class Sample
+            {
+                [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+                public void SymbolMember() { }
+            }
+            """;
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsHiddenFromIntelliSense.Should().BeTrue();
+    }
+
+    [TestMethod]
+    [DataRow("System.ComponentModel.EditorBrowsableState.Always")]
+    [DataRow("System.ComponentModel.EditorBrowsableState.Advanced")]
+    public void IsHiddenFromIntelliSense_EditorBrowsableOtherState_ReturnsFalse(string state)
+    {
+        var code = $$"""
+            public class Sample
+            {
+                [System.ComponentModel.EditorBrowsable({{state}})]
+                public void SymbolMember() { }
+            }
+            """;
+        CreateSymbol(code, AnalyzerLanguage.CSharp).IsHiddenFromIntelliSense.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsHiddenFromIntelliSense_Null_ReturnsFalse() =>
+        ((ISymbol)null).IsHiddenFromIntelliSense.Should().BeFalse();
+
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {
         var (tree, semanticModel) = TestCompiler.Compile(snippet, false, language, parseOptions: parseOptions);
