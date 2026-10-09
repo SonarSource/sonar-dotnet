@@ -27,6 +27,10 @@ public static class UsingDirectiveSyntaxShimExtensions
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken> UnsafeKeywordAccessor = AccessorFactory.CreateProperty<Func<UsingDirectiveSyntax, SyntaxToken>>(WrappedType, "UnsafeKeyword");
 
     private static readonly Func<UsingDirectiveSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<UsingDirectiveSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<UsingDirectiveSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, NameSyntax, SyntaxToken, UsingDirectiveSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, NameSyntax, SyntaxToken, UsingDirectiveSyntax>>(WrappedType, "Update");
     private static readonly Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, TypeSyntax, SyntaxToken, UsingDirectiveSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<UsingDirectiveSyntax, SyntaxToken, SyntaxToken, SyntaxToken, SyntaxToken, NameEqualsSyntax, TypeSyntax, SyntaxToken, UsingDirectiveSyntax>>(WrappedType, "Update");
@@ -41,6 +45,7 @@ public static class UsingDirectiveSyntaxShimExtensions
         public SyntaxToken UnsafeKeyword => UnsafeKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public UsingDirectiveSyntax Update(SyntaxToken globalKeyword, SyntaxToken usingKeyword, SyntaxToken staticKeyword, NameEqualsSyntax alias, NameSyntax name, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, globalKeyword, usingKeyword, staticKeyword, alias, name, semicolonToken);
         public UsingDirectiveSyntax Update(SyntaxToken globalKeyword, SyntaxToken usingKeyword, SyntaxToken staticKeyword, SyntaxToken unsafeKeyword, NameEqualsSyntax alias, TypeSyntax namespaceOrType, SyntaxToken semicolonToken) => UpdateAccessor_Overload3(wrappedInstance, globalKeyword, usingKeyword, staticKeyword, unsafeKeyword, alias, namespaceOrType, semicolonToken);

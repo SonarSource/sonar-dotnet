@@ -23,11 +23,16 @@ public static class IncompleteMemberSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(IncompleteMemberSyntax);
 
     private static readonly Func<IncompleteMemberSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<IncompleteMemberSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<IncompleteMemberSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<IncompleteMemberSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<IncompleteMemberSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<IncompleteMemberSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(IncompleteMemberSyntax wrappedInstance)
     {
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

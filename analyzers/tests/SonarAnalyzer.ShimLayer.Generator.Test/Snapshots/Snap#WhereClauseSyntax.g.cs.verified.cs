@@ -23,11 +23,16 @@ public static class WhereClauseSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(WhereClauseSyntax);
 
     private static readonly Func<WhereClauseSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<WhereClauseSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<WhereClauseSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<WhereClauseSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<WhereClauseSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<WhereClauseSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(WhereClauseSyntax wrappedInstance)
     {
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

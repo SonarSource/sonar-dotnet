@@ -25,6 +25,10 @@ public static class NameColonSyntaxShimExtensions
     private static readonly Func<NameColonSyntax, ExpressionSyntax> ExpressionAccessor = AccessorFactory.CreateProperty<Func<NameColonSyntax, ExpressionSyntax>>(WrappedType, "Expression");
 
     private static readonly Func<NameColonSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<NameColonSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<NameColonSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<NameColonSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<NameColonSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<NameColonSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<NameColonSyntax, ExpressionSyntax, BaseExpressionColonSyntaxWrapper> WithExpressionAccessor = AccessorFactory.CreateMethod<Func<NameColonSyntax, ExpressionSyntax, BaseExpressionColonSyntaxWrapper>>(WrappedType, "WithExpression");
 
@@ -33,6 +37,7 @@ public static class NameColonSyntaxShimExtensions
         public ExpressionSyntax Expression => ExpressionAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseExpressionColonSyntaxWrapper WithExpression(ExpressionSyntax expression) => WithExpressionAccessor(wrappedInstance, expression);
     }

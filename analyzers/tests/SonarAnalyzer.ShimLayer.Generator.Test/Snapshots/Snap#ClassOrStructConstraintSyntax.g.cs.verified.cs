@@ -25,6 +25,10 @@ public static class ClassOrStructConstraintSyntaxShimExtensions
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxToken> QuestionTokenAccessor = AccessorFactory.CreateProperty<Func<ClassOrStructConstraintSyntax, SyntaxToken>>(WrappedType, "QuestionToken");
 
     private static readonly Func<ClassOrStructConstraintSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ClassOrStructConstraintSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxToken, SyntaxToken, ClassOrStructConstraintSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, SyntaxToken, SyntaxToken, ClassOrStructConstraintSyntax>>(WrappedType, "Update");
     private static readonly Func<ClassOrStructConstraintSyntax, SyntaxToken, ClassOrStructConstraintSyntax> WithQuestionTokenAccessor = AccessorFactory.CreateMethod<Func<ClassOrStructConstraintSyntax, SyntaxToken, ClassOrStructConstraintSyntax>>(WrappedType, "WithQuestionToken");
@@ -34,6 +38,7 @@ public static class ClassOrStructConstraintSyntaxShimExtensions
         public SyntaxToken QuestionToken => QuestionTokenAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ClassOrStructConstraintSyntax Update(SyntaxToken classOrStructKeyword, SyntaxToken questionToken) => UpdateAccessor_Overload2(wrappedInstance, classOrStructKeyword, questionToken);
         public ClassOrStructConstraintSyntax WithQuestionToken(SyntaxToken questionToken) => WithQuestionTokenAccessor(wrappedInstance, questionToken);

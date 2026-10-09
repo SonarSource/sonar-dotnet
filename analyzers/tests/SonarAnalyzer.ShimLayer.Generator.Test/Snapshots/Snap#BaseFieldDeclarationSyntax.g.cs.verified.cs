@@ -26,6 +26,10 @@ public static class BaseFieldDeclarationSyntaxShimExtensions
     private static readonly Func<BaseFieldDeclarationSyntax, VariableDeclaratorSyntax[], BaseFieldDeclarationSyntax> AddDeclarationVariablesAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, VariableDeclaratorSyntax[], BaseFieldDeclarationSyntax>>(WrappedType, "AddDeclarationVariables");
     private static readonly Func<BaseFieldDeclarationSyntax, SyntaxToken[], BaseFieldDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxToken[], BaseFieldDeclarationSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<BaseFieldDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<BaseFieldDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<BaseFieldDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseFieldDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseFieldDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseFieldDeclarationSyntax>>(WrappedType, "WithAttributeLists");
     private static readonly Func<BaseFieldDeclarationSyntax, VariableDeclarationSyntax, BaseFieldDeclarationSyntax> WithDeclarationAccessor = AccessorFactory.CreateMethod<Func<BaseFieldDeclarationSyntax, VariableDeclarationSyntax, BaseFieldDeclarationSyntax>>(WrappedType, "WithDeclaration");
@@ -34,10 +38,11 @@ public static class BaseFieldDeclarationSyntaxShimExtensions
 
     extension(BaseFieldDeclarationSyntax wrappedInstance)
     {
-        public BaseFieldDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public BaseFieldDeclarationSyntax AddDeclarationVariables(VariableDeclaratorSyntax[] items) => AddDeclarationVariablesAccessor(wrappedInstance, items);
-        public BaseFieldDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public BaseFieldDeclarationSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public BaseFieldDeclarationSyntax AddDeclarationVariables(params VariableDeclaratorSyntax[] items) => AddDeclarationVariablesAccessor(wrappedInstance, items);
+        public BaseFieldDeclarationSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseFieldDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseFieldDeclarationSyntax WithDeclaration(VariableDeclarationSyntax declaration) => WithDeclarationAccessor(wrappedInstance, declaration);

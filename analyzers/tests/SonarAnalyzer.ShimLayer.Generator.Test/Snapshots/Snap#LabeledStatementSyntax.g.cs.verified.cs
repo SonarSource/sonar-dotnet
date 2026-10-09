@@ -26,6 +26,10 @@ public static class LabeledStatementSyntaxShimExtensions
 
     private static readonly Func<LabeledStatementSyntax, AttributeListSyntax[], LabeledStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, AttributeListSyntax[], LabeledStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<LabeledStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<LabeledStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<LabeledStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, StatementSyntax, LabeledStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, StatementSyntax, LabeledStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, LabeledStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LabeledStatementSyntax, SyntaxList<AttributeListSyntax>, LabeledStatementSyntax>>(WrappedType, "WithAttributeLists");
@@ -34,8 +38,9 @@ public static class LabeledStatementSyntaxShimExtensions
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
 
-        public LabeledStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public LabeledStatementSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public LabeledStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken identifier, SyntaxToken colonToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, identifier, colonToken, statement);
         public LabeledStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

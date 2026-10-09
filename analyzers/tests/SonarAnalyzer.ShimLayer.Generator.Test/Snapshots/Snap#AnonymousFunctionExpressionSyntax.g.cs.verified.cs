@@ -30,6 +30,10 @@ public static class AnonymousFunctionExpressionSyntaxShimExtensions
     private static readonly Func<AnonymousFunctionExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax> AddBlockStatementsAccessor = AccessorFactory.CreateMethod<Func<AnonymousFunctionExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax>>(WrappedType, "AddBlockStatements");
     private static readonly Func<AnonymousFunctionExpressionSyntax, SyntaxToken[], AnonymousFunctionExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<AnonymousFunctionExpressionSyntax, SyntaxToken[], AnonymousFunctionExpressionSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<AnonymousFunctionExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<AnonymousFunctionExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<AnonymousFunctionExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<AnonymousFunctionExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<AnonymousFunctionExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<AnonymousFunctionExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<AnonymousFunctionExpressionSyntax, SyntaxToken, AnonymousFunctionExpressionSyntax> WithAsyncKeywordAccessor = AccessorFactory.CreateMethod<Func<AnonymousFunctionExpressionSyntax, SyntaxToken, AnonymousFunctionExpressionSyntax>>(WrappedType, "WithAsyncKeyword");
     private static readonly Func<AnonymousFunctionExpressionSyntax, BlockSyntax, AnonymousFunctionExpressionSyntax> WithBlockAccessor = AccessorFactory.CreateMethod<Func<AnonymousFunctionExpressionSyntax, BlockSyntax, AnonymousFunctionExpressionSyntax>>(WrappedType, "WithBlock");
@@ -43,10 +47,11 @@ public static class AnonymousFunctionExpressionSyntaxShimExtensions
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
-        public AnonymousFunctionExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public AnonymousFunctionExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
-        public AnonymousFunctionExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public AnonymousFunctionExpressionSyntax AddBlockAttributeLists(params AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public AnonymousFunctionExpressionSyntax AddBlockStatements(params StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
+        public AnonymousFunctionExpressionSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public AnonymousFunctionExpressionSyntax WithAsyncKeyword(SyntaxToken asyncKeyword) => WithAsyncKeywordAccessor(wrappedInstance, asyncKeyword);
         public AnonymousFunctionExpressionSyntax WithBlock(BlockSyntax block) => WithBlockAccessor(wrappedInstance, block);

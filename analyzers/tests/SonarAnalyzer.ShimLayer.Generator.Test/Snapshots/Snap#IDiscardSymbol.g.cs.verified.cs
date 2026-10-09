@@ -52,6 +52,10 @@ public readonly struct IDiscardSymbolWrapper : IWrapper, IEquatable<IDiscardSymb
     private static readonly Func<Object, ITypeSymbol> TypeAccessor = AccessorFactory.CreateProperty<Func<Object, ITypeSymbol>>(WrappedType, "Type");
 
     private static readonly Action<Object, SymbolVisitor> AcceptAccessor = AccessorFactory.CreateMethod<Action<Object, SymbolVisitor>>(WrappedType, "Accept");
+    private static class AcceptAccessor_Overload3_GenericStore<TResult>
+    {
+        public static readonly Func<Object, SymbolVisitor<TResult>, TResult> AcceptAccessor_Overload3 = AccessorFactory.CreateMethod<Func<Object, SymbolVisitor<TResult>, TResult>>(WrappedType, "Accept", typeof(TResult));
+    }
     private static readonly Func<Object, ImmutableArray<AttributeData>> GetAttributesAccessor = AccessorFactory.CreateMethod<Func<Object, ImmutableArray<AttributeData>>>(WrappedType, "GetAttributes");
     private static readonly Func<Object, string> GetDocumentationCommentIdAccessor = AccessorFactory.CreateMethod<Func<Object, string>>(WrappedType, "GetDocumentationCommentId");
     private static readonly Func<Object, CultureInfo, bool, CancellationToken, string> GetDocumentationCommentXmlAccessor = AccessorFactory.CreateMethod<Func<Object, CultureInfo, bool, CancellationToken, string>>(WrappedType, "GetDocumentationCommentXml");
@@ -111,6 +115,7 @@ public readonly struct IDiscardSymbolWrapper : IWrapper, IEquatable<IDiscardSymb
     public ITypeSymbol Type => TypeAccessor(wrappedInstance);
 
     public void Accept(SymbolVisitor visitor) => AcceptAccessor(wrappedInstance, visitor);
+    public TResult Accept<TResult>(SymbolVisitor<TResult> visitor) => AcceptAccessor_Overload3_GenericStore<TResult>.AcceptAccessor_Overload3(wrappedInstance, visitor);
     public ImmutableArray<AttributeData> GetAttributes() => GetAttributesAccessor(wrappedInstance);
     public string GetDocumentationCommentId() => GetDocumentationCommentIdAccessor(wrappedInstance);
     public string GetDocumentationCommentXml(CultureInfo preferredCulture, bool expandIncludes, CancellationToken cancellationToken) => GetDocumentationCommentXmlAccessor(wrappedInstance, preferredCulture, expandIncludes, cancellationToken);

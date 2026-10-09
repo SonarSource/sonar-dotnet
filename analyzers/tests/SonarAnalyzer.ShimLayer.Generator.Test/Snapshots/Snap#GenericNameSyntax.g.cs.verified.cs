@@ -28,6 +28,10 @@ public static class GenericNameSyntaxShimExtensions
     private static readonly Func<GenericNameSyntax, bool> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<GenericNameSyntax, bool>>(WrappedType, "IsUnmanaged");
 
     private static readonly Func<GenericNameSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<GenericNameSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<GenericNameSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<GenericNameSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<GenericNameSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<GenericNameSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(GenericNameSyntax wrappedInstance)
@@ -38,6 +42,7 @@ public static class GenericNameSyntaxShimExtensions
         public bool IsUnmanaged => IsUnmanagedAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

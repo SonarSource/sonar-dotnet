@@ -26,6 +26,10 @@ public static class EnumMemberDeclarationSyntaxShimExtensions
 
     private static readonly Func<EnumMemberDeclarationSyntax, SyntaxToken[], EnumMemberDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxToken[], EnumMemberDeclarationSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<EnumMemberDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<EnumMemberDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<EnumMemberDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<EnumMemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, EqualsValueClauseSyntax, EnumMemberDeclarationSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, EqualsValueClauseSyntax, EnumMemberDeclarationSyntax>>(WrappedType, "Update");
     private static readonly Func<EnumMemberDeclarationSyntax, SyntaxTokenList, EnumMemberDeclarationSyntax> WithModifiersAccessor = AccessorFactory.CreateMethod<Func<EnumMemberDeclarationSyntax, SyntaxTokenList, EnumMemberDeclarationSyntax>>(WrappedType, "WithModifiers");
@@ -34,8 +38,9 @@ public static class EnumMemberDeclarationSyntaxShimExtensions
     {
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
-        public EnumMemberDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public EnumMemberDeclarationSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public EnumMemberDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken identifier, EqualsValueClauseSyntax equalsValue) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, identifier, equalsValue);
         public EnumMemberDeclarationSyntax WithModifiers(SyntaxTokenList modifiers) => WithModifiersAccessor(wrappedInstance, modifiers);

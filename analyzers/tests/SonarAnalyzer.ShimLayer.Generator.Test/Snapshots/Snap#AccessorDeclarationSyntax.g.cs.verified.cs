@@ -26,6 +26,10 @@ public static class AccessorDeclarationSyntaxShimExtensions
 
     private static readonly Func<AccessorDeclarationSyntax, AttributeListSyntax[], AccessorDeclarationSyntax> AddBodyAttributeListsAccessor = AccessorFactory.CreateMethod<Func<AccessorDeclarationSyntax, AttributeListSyntax[], AccessorDeclarationSyntax>>(WrappedType, "AddBodyAttributeLists");
     private static readonly Func<AccessorDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<AccessorDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<AccessorDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<AccessorDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<AccessorDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<AccessorDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<AccessorDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, BlockSyntax, ArrowExpressionClauseSyntax, SyntaxToken, AccessorDeclarationSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<AccessorDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, BlockSyntax, ArrowExpressionClauseSyntax, SyntaxToken, AccessorDeclarationSyntax>>(WrappedType, "Update");
     private static readonly Func<AccessorDeclarationSyntax, ArrowExpressionClauseSyntax, AccessorDeclarationSyntax> WithExpressionBodyAccessor = AccessorFactory.CreateMethod<Func<AccessorDeclarationSyntax, ArrowExpressionClauseSyntax, AccessorDeclarationSyntax>>(WrappedType, "WithExpressionBody");
@@ -34,8 +38,9 @@ public static class AccessorDeclarationSyntaxShimExtensions
     {
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
 
-        public AccessorDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
+        public AccessorDeclarationSyntax AddBodyAttributeLists(params AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public AccessorDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, BlockSyntax body, ArrowExpressionClauseSyntax expressionBody, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, keyword, body, expressionBody, semicolonToken);
         public AccessorDeclarationSyntax WithExpressionBody(ArrowExpressionClauseSyntax expressionBody) => WithExpressionBodyAccessor(wrappedInstance, expressionBody);

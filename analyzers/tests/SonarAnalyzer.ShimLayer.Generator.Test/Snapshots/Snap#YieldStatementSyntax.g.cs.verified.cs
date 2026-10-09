@@ -26,6 +26,10 @@ public static class YieldStatementSyntaxShimExtensions
 
     private static readonly Func<YieldStatementSyntax, AttributeListSyntax[], YieldStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, AttributeListSyntax[], YieldStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<YieldStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<YieldStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<YieldStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, YieldStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, YieldStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, YieldStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<YieldStatementSyntax, SyntaxList<AttributeListSyntax>, YieldStatementSyntax>>(WrappedType, "WithAttributeLists");
@@ -34,8 +38,9 @@ public static class YieldStatementSyntaxShimExtensions
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
 
-        public YieldStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public YieldStatementSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public YieldStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken yieldKeyword, SyntaxToken returnOrBreakKeyword, ExpressionSyntax expression, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, yieldKeyword, returnOrBreakKeyword, expression, semicolonToken);
         public YieldStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

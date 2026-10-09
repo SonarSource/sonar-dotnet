@@ -23,6 +23,10 @@ public static class ConditionalDirectiveTriviaSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(ConditionalDirectiveTriviaSyntax);
 
     private static readonly Func<ConditionalDirectiveTriviaSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ConditionalDirectiveTriviaSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ConditionalDirectiveTriviaSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ConditionalDirectiveTriviaSyntax, ExpressionSyntax, ConditionalDirectiveTriviaSyntax> WithConditionAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, ExpressionSyntax, ConditionalDirectiveTriviaSyntax>>(WrappedType, "WithCondition");
     private static readonly Func<ConditionalDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax> WithEndOfDirectiveTokenAccessor = AccessorFactory.CreateMethod<Func<ConditionalDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax>>(WrappedType, "WithEndOfDirectiveToken");
@@ -31,6 +35,7 @@ public static class ConditionalDirectiveTriviaSyntaxShimExtensions
     extension(ConditionalDirectiveTriviaSyntax wrappedInstance)
     {
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ConditionalDirectiveTriviaSyntax WithCondition(ExpressionSyntax condition) => WithConditionAccessor(wrappedInstance, condition);
         public BranchingDirectiveTriviaSyntax WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken);

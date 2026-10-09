@@ -25,6 +25,10 @@ public static class ArgumentSyntaxShimExtensions
     private static readonly Func<ArgumentSyntax, SyntaxToken> RefKindKeywordAccessor = AccessorFactory.CreateProperty<Func<ArgumentSyntax, SyntaxToken>>(WrappedType, "RefKindKeyword");
 
     private static readonly Func<ArgumentSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ArgumentSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ArgumentSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ArgumentSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ArgumentSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ArgumentSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ArgumentSyntax, SyntaxToken, ArgumentSyntax> WithRefKindKeywordAccessor = AccessorFactory.CreateMethod<Func<ArgumentSyntax, SyntaxToken, ArgumentSyntax>>(WrappedType, "WithRefKindKeyword");
 
@@ -33,6 +37,7 @@ public static class ArgumentSyntaxShimExtensions
         public SyntaxToken RefKindKeyword => RefKindKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ArgumentSyntax WithRefKindKeyword(SyntaxToken refKindKeyword) => WithRefKindKeywordAccessor(wrappedInstance, refKindKeyword);
     }

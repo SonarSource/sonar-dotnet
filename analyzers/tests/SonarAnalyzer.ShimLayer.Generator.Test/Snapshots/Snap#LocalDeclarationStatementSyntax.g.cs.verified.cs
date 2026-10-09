@@ -28,6 +28,10 @@ public static class LocalDeclarationStatementSyntaxShimExtensions
 
     private static readonly Func<LocalDeclarationStatementSyntax, AttributeListSyntax[], LocalDeclarationStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<LocalDeclarationStatementSyntax, AttributeListSyntax[], LocalDeclarationStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<LocalDeclarationStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LocalDeclarationStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<LocalDeclarationStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<LocalDeclarationStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<LocalDeclarationStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LocalDeclarationStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<LocalDeclarationStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, SyntaxTokenList, VariableDeclarationSyntax, SyntaxToken, LocalDeclarationStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<LocalDeclarationStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, SyntaxTokenList, VariableDeclarationSyntax, SyntaxToken, LocalDeclarationStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<LocalDeclarationStatementSyntax, SyntaxToken, SyntaxToken, SyntaxTokenList, VariableDeclarationSyntax, SyntaxToken, LocalDeclarationStatementSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<LocalDeclarationStatementSyntax, SyntaxToken, SyntaxToken, SyntaxTokenList, VariableDeclarationSyntax, SyntaxToken, LocalDeclarationStatementSyntax>>(WrappedType, "Update");
@@ -41,8 +45,9 @@ public static class LocalDeclarationStatementSyntaxShimExtensions
         public SyntaxToken AwaitKeyword => AwaitKeywordAccessor(wrappedInstance);
         public SyntaxToken UsingKeyword => UsingKeywordAccessor(wrappedInstance);
 
-        public LocalDeclarationStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public LocalDeclarationStatementSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public LocalDeclarationStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken awaitKeyword, SyntaxToken usingKeyword, SyntaxTokenList modifiers, VariableDeclarationSyntax declaration, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, awaitKeyword, usingKeyword, modifiers, declaration, semicolonToken);
         public LocalDeclarationStatementSyntax Update(SyntaxToken awaitKeyword, SyntaxToken usingKeyword, SyntaxTokenList modifiers, VariableDeclarationSyntax declaration, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, awaitKeyword, usingKeyword, modifiers, declaration, semicolonToken);

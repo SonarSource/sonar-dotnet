@@ -27,6 +27,10 @@ public static class ForEachStatementSyntaxShimExtensions
 
     private static readonly Func<ForEachStatementSyntax, AttributeListSyntax[], ForEachStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, AttributeListSyntax[], ForEachStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<ForEachStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ForEachStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ForEachStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<ForEachStatementSyntax, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<ForEachStatementSyntax, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, SyntaxToken, SyntaxToken, ExpressionSyntax, SyntaxToken, StatementSyntax, ForEachStatementSyntax>>(WrappedType, "Update");
@@ -38,8 +42,9 @@ public static class ForEachStatementSyntaxShimExtensions
         public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
         public SyntaxToken AwaitKeyword => AwaitKeywordAccessor(wrappedInstance);
 
-        public ForEachStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public ForEachStatementSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ForEachStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken awaitKeyword, SyntaxToken forEachKeyword, SyntaxToken openParenToken, TypeSyntax type, SyntaxToken identifier, SyntaxToken inKeyword, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor(wrappedInstance, attributeLists, awaitKeyword, forEachKeyword, openParenToken, type, identifier, inKeyword, expression, closeParenToken, statement);
         public ForEachStatementSyntax Update(SyntaxToken awaitKeyword, SyntaxToken forEachKeyword, SyntaxToken openParenToken, TypeSyntax type, SyntaxToken identifier, SyntaxToken inKeyword, ExpressionSyntax expression, SyntaxToken closeParenToken, StatementSyntax statement) => UpdateAccessor_Overload3(wrappedInstance, awaitKeyword, forEachKeyword, openParenToken, type, identifier, inKeyword, expression, closeParenToken, statement);

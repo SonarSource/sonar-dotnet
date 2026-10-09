@@ -32,6 +32,10 @@ public static class SimpleLambdaExpressionSyntaxShimExtensions
     private static readonly Func<SimpleLambdaExpressionSyntax, StatementSyntax[], SimpleLambdaExpressionSyntax> AddBlockStatementsAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, StatementSyntax[], SimpleLambdaExpressionSyntax>>(WrappedType, "AddBlockStatements");
     private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxToken[], SimpleLambdaExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxToken[], SimpleLambdaExpressionSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<SimpleLambdaExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<SimpleLambdaExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax>>(WrappedType, "Update");
     private static readonly Func<SimpleLambdaExpressionSyntax, SyntaxToken, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<SimpleLambdaExpressionSyntax, SyntaxToken, ParameterSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, SimpleLambdaExpressionSyntax>>(WrappedType, "Update");
@@ -48,11 +52,12 @@ public static class SimpleLambdaExpressionSyntaxShimExtensions
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
-        public SimpleLambdaExpressionSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public SimpleLambdaExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public SimpleLambdaExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
-        public SimpleLambdaExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public SimpleLambdaExpressionSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public SimpleLambdaExpressionSyntax AddBlockAttributeLists(params AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public SimpleLambdaExpressionSyntax AddBlockStatements(params StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
+        public SimpleLambdaExpressionSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public SimpleLambdaExpressionSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, parameter, arrowToken, block, expressionBody);
         public SimpleLambdaExpressionSyntax Update(SyntaxToken asyncKeyword, ParameterSyntax parameter, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload3(wrappedInstance, asyncKeyword, parameter, arrowToken, block, expressionBody);

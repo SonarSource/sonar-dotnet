@@ -63,8 +63,8 @@ public readonly struct CSharpGeneratorDriverWrapper : IWrapper, IEquatable<CShar
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
     public GeneratorDriverWrapper AddAdditionalTexts(ImmutableArray<AdditionalText> additionalTexts) => AddAdditionalTextsAccessor(wrappedInstance, additionalTexts);
-    public static CSharpGeneratorDriverWrapper Create(IIncrementalGeneratorWrapper[] incrementalGenerators) => CreateAccessor(incrementalGenerators);
-    public static CSharpGeneratorDriverWrapper Create(ISourceGeneratorWrapper[] generators) => CreateAccessor_Overload2(generators);
+    public static CSharpGeneratorDriverWrapper Create(params IIncrementalGeneratorWrapper[] incrementalGenerators) => CreateAccessor(incrementalGenerators);
+    public static CSharpGeneratorDriverWrapper Create(params ISourceGeneratorWrapper[] generators) => CreateAccessor_Overload2(generators);
     public GeneratorDriverRunResultWrapper GetRunResult() => GetRunResultAccessor(wrappedInstance);
     public GeneratorDriverTimingInfoWrapper GetTimingInfo() => GetTimingInfoAccessor(wrappedInstance);
     public GeneratorDriverWrapper RemoveAdditionalTexts(ImmutableArray<AdditionalText> additionalTexts) => RemoveAdditionalTextsAccessor(wrappedInstance, additionalTexts);

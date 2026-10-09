@@ -30,6 +30,10 @@ public static class BaseMethodDeclarationSyntaxShimExtensions
     private static readonly Func<BaseMethodDeclarationSyntax, SyntaxToken[], BaseMethodDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxToken[], BaseMethodDeclarationSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<BaseMethodDeclarationSyntax, ParameterSyntax[], BaseMethodDeclarationSyntax> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, ParameterSyntax[], BaseMethodDeclarationSyntax>>(WrappedType, "AddParameterListParameters");
     private static readonly Func<BaseMethodDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<BaseMethodDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<BaseMethodDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseMethodDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseMethodDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, SyntaxList<AttributeListSyntax>, BaseMethodDeclarationSyntax>>(WrappedType, "WithAttributeLists");
     private static readonly Func<BaseMethodDeclarationSyntax, BlockSyntax, BaseMethodDeclarationSyntax> WithBodyAccessor = AccessorFactory.CreateMethod<Func<BaseMethodDeclarationSyntax, BlockSyntax, BaseMethodDeclarationSyntax>>(WrappedType, "WithBody");
@@ -42,12 +46,13 @@ public static class BaseMethodDeclarationSyntaxShimExtensions
     {
         public ArrowExpressionClauseSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
 
-        public BaseMethodDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public BaseMethodDeclarationSyntax AddBodyAttributeLists(AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
-        public BaseMethodDeclarationSyntax AddBodyStatements(StatementSyntax[] items) => AddBodyStatementsAccessor(wrappedInstance, items);
-        public BaseMethodDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-        public BaseMethodDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddBodyAttributeLists(params AttributeListSyntax[] items) => AddBodyAttributeListsAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddBodyStatements(params StatementSyntax[] items) => AddBodyStatementsAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public BaseMethodDeclarationSyntax AddParameterListParameters(params ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseMethodDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
         public BaseMethodDeclarationSyntax WithBody(BlockSyntax body) => WithBodyAccessor(wrappedInstance, body);

@@ -23,6 +23,10 @@ public static class XmlAttributeSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(XmlAttributeSyntax);
 
     private static readonly Func<XmlAttributeSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<XmlAttributeSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<XmlAttributeSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax> WithEndQuoteTokenAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax>>(WrappedType, "WithEndQuoteToken");
     private static readonly Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax> WithEqualsTokenAccessor = AccessorFactory.CreateMethod<Func<XmlAttributeSyntax, SyntaxToken, XmlAttributeSyntax>>(WrappedType, "WithEqualsToken");
@@ -32,6 +36,7 @@ public static class XmlAttributeSyntaxShimExtensions
     extension(XmlAttributeSyntax wrappedInstance)
     {
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public XmlAttributeSyntax WithEndQuoteToken(SyntaxToken endQuoteToken) => WithEndQuoteTokenAccessor(wrappedInstance, endQuoteToken);
         public XmlAttributeSyntax WithEqualsToken(SyntaxToken equalsToken) => WithEqualsTokenAccessor(wrappedInstance, equalsToken);

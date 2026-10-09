@@ -41,9 +41,9 @@ public abstract class MemberStrategy : Strategy
         member.Member is PropertyInfo pi && model[pi.PropertyType] is { IsSupported: true } returnType ? returnType : null;
 
     private static Strategy ValidMethodReturnType(StrategyModel model, MemberDescriptor member) =>
-        member.Member is MethodInfo { ContainsGenericParameters: false } mi
-        && model[mi.ReturnType] is { IsSupported: true } returnType
-        && mi.GetParameters().All(x => model[x.ParameterType].IsSupported)
+        member.Member is MethodInfo method
+        && model[method.ReturnType] is { IsSupported: true } returnType
+        && method.GetParameters().All(x => model[x.ParameterType].IsSupported)
             ? returnType
             : null;
 

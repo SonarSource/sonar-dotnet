@@ -26,6 +26,10 @@ public static class BreakStatementSyntaxShimExtensions
 
     private static readonly Func<BreakStatementSyntax, AttributeListSyntax[], BreakStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, AttributeListSyntax[], BreakStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<BreakStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<BreakStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<BreakStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, BreakStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, SyntaxToken, BreakStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, BreakStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BreakStatementSyntax, SyntaxList<AttributeListSyntax>, BreakStatementSyntax>>(WrappedType, "WithAttributeLists");
@@ -34,8 +38,9 @@ public static class BreakStatementSyntaxShimExtensions
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
 
-        public BreakStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public BreakStatementSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BreakStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken breakKeyword, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, breakKeyword, semicolonToken);
         public BreakStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

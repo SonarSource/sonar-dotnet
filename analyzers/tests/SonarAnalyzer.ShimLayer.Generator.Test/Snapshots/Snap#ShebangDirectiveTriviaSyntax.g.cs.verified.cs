@@ -25,6 +25,10 @@ public static class ShebangDirectiveTriviaSyntaxShimExtensions
     private static readonly Func<ShebangDirectiveTriviaSyntax, SyntaxToken> ContentAccessor = AccessorFactory.CreateProperty<Func<ShebangDirectiveTriviaSyntax, SyntaxToken>>(WrappedType, "Content");
 
     private static readonly Func<ShebangDirectiveTriviaSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ShebangDirectiveTriviaSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ShebangDirectiveTriviaSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ShebangDirectiveTriviaSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ShebangDirectiveTriviaSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ShebangDirectiveTriviaSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ShebangDirectiveTriviaSyntax, SyntaxToken, ShebangDirectiveTriviaSyntax> WithContentAccessor = AccessorFactory.CreateMethod<Func<ShebangDirectiveTriviaSyntax, SyntaxToken, ShebangDirectiveTriviaSyntax>>(WrappedType, "WithContent");
 
@@ -33,6 +37,7 @@ public static class ShebangDirectiveTriviaSyntaxShimExtensions
         public SyntaxToken Content => ContentAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ShebangDirectiveTriviaSyntax WithContent(SyntaxToken content) => WithContentAccessor(wrappedInstance, content);
     }

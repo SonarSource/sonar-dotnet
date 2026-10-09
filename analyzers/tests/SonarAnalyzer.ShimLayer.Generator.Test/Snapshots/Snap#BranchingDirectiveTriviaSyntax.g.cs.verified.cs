@@ -23,6 +23,10 @@ public static class BranchingDirectiveTriviaSyntaxShimExtensions
     private static readonly Type WrappedType = typeof(BranchingDirectiveTriviaSyntax);
 
     private static readonly Func<BranchingDirectiveTriviaSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<BranchingDirectiveTriviaSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<BranchingDirectiveTriviaSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax> WithEndOfDirectiveTokenAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax>>(WrappedType, "WithEndOfDirectiveToken");
     private static readonly Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax> WithHashTokenAccessor = AccessorFactory.CreateMethod<Func<BranchingDirectiveTriviaSyntax, SyntaxToken, BranchingDirectiveTriviaSyntax>>(WrappedType, "WithHashToken");
@@ -30,6 +34,7 @@ public static class BranchingDirectiveTriviaSyntaxShimExtensions
     extension(BranchingDirectiveTriviaSyntax wrappedInstance)
     {
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BranchingDirectiveTriviaSyntax WithEndOfDirectiveToken(SyntaxToken endOfDirectiveToken) => WithEndOfDirectiveTokenAccessor(wrappedInstance, endOfDirectiveToken);
         public BranchingDirectiveTriviaSyntax WithHashToken(SyntaxToken hashToken) => WithHashTokenAccessor(wrappedInstance, hashToken);

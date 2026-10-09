@@ -24,13 +24,18 @@ public static class BaseCrefParameterListSyntaxShimExtensions
 
     private static readonly Func<BaseCrefParameterListSyntax, CrefParameterSyntax[], BaseCrefParameterListSyntax> AddParametersAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, CrefParameterSyntax[], BaseCrefParameterListSyntax>>(WrappedType, "AddParameters");
     private static readonly Func<BaseCrefParameterListSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<BaseCrefParameterListSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<BaseCrefParameterListSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseCrefParameterListSyntax, SeparatedSyntaxList<CrefParameterSyntax>, BaseCrefParameterListSyntax> WithParametersAccessor = AccessorFactory.CreateMethod<Func<BaseCrefParameterListSyntax, SeparatedSyntaxList<CrefParameterSyntax>, BaseCrefParameterListSyntax>>(WrappedType, "WithParameters");
 
     extension(BaseCrefParameterListSyntax wrappedInstance)
     {
-        public BaseCrefParameterListSyntax AddParameters(CrefParameterSyntax[] items) => AddParametersAccessor(wrappedInstance, items);
+        public BaseCrefParameterListSyntax AddParameters(params CrefParameterSyntax[] items) => AddParametersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseCrefParameterListSyntax WithParameters(SeparatedSyntaxList<CrefParameterSyntax> parameters) => WithParametersAccessor(wrappedInstance, parameters);
     }

@@ -70,6 +70,10 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     private static readonly Func<Object, TypeKind> TypeKindAccessor = AccessorFactory.CreateProperty<Func<Object, TypeKind>>(WrappedType, "TypeKind");
 
     private static readonly Action<Object, SymbolVisitor> AcceptAccessor = AccessorFactory.CreateMethod<Action<Object, SymbolVisitor>>(WrappedType, "Accept");
+    private static class AcceptAccessor_Overload3_GenericStore<TResult>
+    {
+        public static readonly Func<Object, SymbolVisitor<TResult>, TResult> AcceptAccessor_Overload3 = AccessorFactory.CreateMethod<Func<Object, SymbolVisitor<TResult>, TResult>>(WrappedType, "Accept", typeof(TResult));
+    }
     private static readonly Func<Object, ISymbol, ISymbol> FindImplementationForInterfaceMemberAccessor = AccessorFactory.CreateMethod<Func<Object, ISymbol, ISymbol>>(WrappedType, "FindImplementationForInterfaceMember");
     private static readonly Func<Object, ImmutableArray<AttributeData>> GetAttributesAccessor = AccessorFactory.CreateMethod<Func<Object, ImmutableArray<AttributeData>>>(WrappedType, "GetAttributes");
     private static readonly Func<Object, string> GetDocumentationCommentIdAccessor = AccessorFactory.CreateMethod<Func<Object, string>>(WrappedType, "GetDocumentationCommentId");
@@ -160,6 +164,7 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     public TypeKind TypeKind => TypeKindAccessor(wrappedInstance);
 
     public void Accept(SymbolVisitor visitor) => AcceptAccessor(wrappedInstance, visitor);
+    public TResult Accept<TResult>(SymbolVisitor<TResult> visitor) => AcceptAccessor_Overload3_GenericStore<TResult>.AcceptAccessor_Overload3(wrappedInstance, visitor);
     public ISymbol FindImplementationForInterfaceMember(ISymbol interfaceMember) => FindImplementationForInterfaceMemberAccessor(wrappedInstance, interfaceMember);
     public ImmutableArray<AttributeData> GetAttributes() => GetAttributesAccessor(wrappedInstance);
     public string GetDocumentationCommentId() => GetDocumentationCommentIdAccessor(wrappedInstance);

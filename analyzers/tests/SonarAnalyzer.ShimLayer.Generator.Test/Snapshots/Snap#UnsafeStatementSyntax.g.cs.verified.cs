@@ -27,6 +27,10 @@ public static class UnsafeStatementSyntaxShimExtensions
     private static readonly Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, AttributeListSyntax[], UnsafeStatementSyntax>>(WrappedType, "AddBlockAttributeLists");
     private static readonly Func<UnsafeStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<UnsafeStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<UnsafeStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, UnsafeStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, BlockSyntax, UnsafeStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, UnsafeStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<UnsafeStatementSyntax, SyntaxList<AttributeListSyntax>, UnsafeStatementSyntax>>(WrappedType, "WithAttributeLists");
@@ -35,9 +39,10 @@ public static class UnsafeStatementSyntaxShimExtensions
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
 
-        public UnsafeStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public UnsafeStatementSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public UnsafeStatementSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public UnsafeStatementSyntax AddBlockAttributeLists(params AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public UnsafeStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken unsafeKeyword, BlockSyntax block) => UpdateAccessor(wrappedInstance, attributeLists, unsafeKeyword, block);
         public UnsafeStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

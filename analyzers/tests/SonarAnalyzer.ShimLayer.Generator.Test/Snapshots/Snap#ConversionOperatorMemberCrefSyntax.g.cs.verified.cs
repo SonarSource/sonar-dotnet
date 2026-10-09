@@ -25,6 +25,10 @@ public static class ConversionOperatorMemberCrefSyntaxShimExtensions
     private static readonly Func<ConversionOperatorMemberCrefSyntax, SyntaxToken> CheckedKeywordAccessor = AccessorFactory.CreateProperty<Func<ConversionOperatorMemberCrefSyntax, SyntaxToken>>(WrappedType, "CheckedKeyword");
 
     private static readonly Func<ConversionOperatorMemberCrefSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ConversionOperatorMemberCrefSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ConversionOperatorMemberCrefSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ConversionOperatorMemberCrefSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ConversionOperatorMemberCrefSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ConversionOperatorMemberCrefSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ConversionOperatorMemberCrefSyntax, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, CrefParameterListSyntax, ConversionOperatorMemberCrefSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<ConversionOperatorMemberCrefSyntax, SyntaxToken, SyntaxToken, SyntaxToken, TypeSyntax, CrefParameterListSyntax, ConversionOperatorMemberCrefSyntax>>(WrappedType, "Update");
     private static readonly Func<ConversionOperatorMemberCrefSyntax, SyntaxToken, ConversionOperatorMemberCrefSyntax> WithCheckedKeywordAccessor = AccessorFactory.CreateMethod<Func<ConversionOperatorMemberCrefSyntax, SyntaxToken, ConversionOperatorMemberCrefSyntax>>(WrappedType, "WithCheckedKeyword");
@@ -34,6 +38,7 @@ public static class ConversionOperatorMemberCrefSyntaxShimExtensions
         public SyntaxToken CheckedKeyword => CheckedKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ConversionOperatorMemberCrefSyntax Update(SyntaxToken implicitOrExplicitKeyword, SyntaxToken operatorKeyword, SyntaxToken checkedKeyword, TypeSyntax type, CrefParameterListSyntax parameters) => UpdateAccessor_Overload2(wrappedInstance, implicitOrExplicitKeyword, operatorKeyword, checkedKeyword, type, parameters);
         public ConversionOperatorMemberCrefSyntax WithCheckedKeyword(SyntaxToken checkedKeyword) => WithCheckedKeywordAccessor(wrappedInstance, checkedKeyword);

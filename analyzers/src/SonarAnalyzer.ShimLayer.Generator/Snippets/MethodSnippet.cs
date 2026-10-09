@@ -38,8 +38,9 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
         var attributes = member.GetCustomAttributesData();
         var staticSnippet = member.IsStatic ? "static " : null;
         var thisSnippet = attributes.Any(x => x.AttributeType.Name == nameof(ExtensionAttribute)) ? "this " : null;
+        var genericArgumentsSnippet = member.ContainsGenericParameters ? $"<{member.GetGenericArguments().JoinStr(", ", x => x.Name)}>" : null;
         return $"""
-            {Indent(indentSize)}{SerializeAttributes(attributes, indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name}({thisSnippet}{parameters.JoinStr(", ", SerializeParameter)}) => {InvocationSnippet()};
+            {Indent(indentSize)}{SerializeAttributes(attributes, indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name}{genericArgumentsSnippet}({thisSnippet}{parameters.JoinStr(", ", SerializeParameter)}){SerializeGenericConstraints()} => {InvocationSnippet()};
             """;
     }
 
@@ -51,9 +52,56 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
 
     protected string SerializeParameter(ParameterInfo parameter)
     {
-        var prefix = parameter.IsOut ? "out " : null;
         var underlyingType = parameter.IsOut ? parameter.ParameterType.GetElementType() : parameter.ParameterType;
-        return $"{prefix}{model[underlyingType].TypeSnippet} {SerializeParameterName(parameter)}";
+        return $"{Prefix()}{model[underlyingType].TypeSnippet} {SerializeParameterName(parameter)}";
+
+        string Prefix()
+        {
+            if (parameter.IsOut)
+            {
+                return "out ";
+            }
+            else if (parameter.GetCustomAttributesData().Any(x => x.AttributeType.Name == nameof(ParamArrayAttribute)))
+            {
+                return "params ";
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+
+    protected string SerializeGenericConstraints() =>
+        member.GetGenericArguments().Select(SerializeGenericConstraint).Where(x => x is not null).JoinStr(" ");
+
+    private static string SerializeGenericConstraint(Type parameter)
+    {
+        var parts = new List<string>();
+        Add(GenericParameterAttributes.ReferenceTypeConstraint, "class");
+        Add(GenericParameterAttributes.NotNullableValueTypeConstraint, "struct");
+        parts.AddRange(parameter.GetGenericParameterConstraints().Where(x => x.FullName != typeof(ValueType).FullName).Select(TypeName));
+        if (!HasFlag(GenericParameterAttributes.NotNullableValueTypeConstraint))    // struct implies new() and can not be rendered together
+        {
+            Add(GenericParameterAttributes.DefaultConstructorConstraint, "new()");
+        }
+        return parts.Any() ? $" where {parameter.Name} : {parts.JoinStr(", ")}" : null;
+
+        bool HasFlag(GenericParameterAttributes flag) =>
+            (parameter.GenericParameterAttributes & flag) == flag;
+
+        void Add(GenericParameterAttributes flag, string value)
+        {
+            if (HasFlag(flag))
+            {
+                parts.Add(value);
+            }
+        }
+
+        static string TypeName(Type type) =>
+            type.IsGenericType
+                ? $"{type.Name.Substring(0, type.Name.IndexOf('`'))}<{string.Join(", ", type.GetGenericArguments().Select(TypeName))}>"
+                : type.Name;
     }
 
     private static string SerializeParameterName(ParameterInfo parameter) =>

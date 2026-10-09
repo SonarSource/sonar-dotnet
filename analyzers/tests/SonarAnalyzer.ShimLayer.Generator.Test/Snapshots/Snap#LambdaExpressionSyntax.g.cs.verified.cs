@@ -32,6 +32,10 @@ public static class LambdaExpressionSyntaxShimExtensions
     private static readonly Func<LambdaExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax> AddBlockStatementsAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, StatementSyntax[], AnonymousFunctionExpressionSyntax>>(WrappedType, "AddBlockStatements");
     private static readonly Func<LambdaExpressionSyntax, SyntaxToken[], LambdaExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken[], LambdaExpressionSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<LambdaExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<LambdaExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<LambdaExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax> WithArrowTokenAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax>>(WrappedType, "WithArrowToken");
     private static readonly Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax> WithAsyncKeywordAccessor = AccessorFactory.CreateMethod<Func<LambdaExpressionSyntax, SyntaxToken, LambdaExpressionSyntax>>(WrappedType, "WithAsyncKeyword");
@@ -48,11 +52,12 @@ public static class LambdaExpressionSyntaxShimExtensions
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
-        public LambdaExpressionSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public AnonymousFunctionExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public AnonymousFunctionExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
-        public LambdaExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public LambdaExpressionSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public AnonymousFunctionExpressionSyntax AddBlockAttributeLists(params AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public AnonymousFunctionExpressionSyntax AddBlockStatements(params StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
+        public LambdaExpressionSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public LambdaExpressionSyntax WithArrowToken(SyntaxToken arrowToken) => WithArrowTokenAccessor(wrappedInstance, arrowToken);
         public LambdaExpressionSyntax WithAsyncKeyword(SyntaxToken asyncKeyword) => WithAsyncKeywordAccessor(wrappedInstance, asyncKeyword);

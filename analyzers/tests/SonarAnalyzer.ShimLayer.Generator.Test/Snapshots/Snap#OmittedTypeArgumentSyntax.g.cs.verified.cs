@@ -28,6 +28,10 @@ public static class OmittedTypeArgumentSyntaxShimExtensions
     private static readonly Func<OmittedTypeArgumentSyntax, bool> IsUnmanagedAccessor = AccessorFactory.CreateProperty<Func<OmittedTypeArgumentSyntax, bool>>(WrappedType, "IsUnmanaged");
 
     private static readonly Func<OmittedTypeArgumentSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<OmittedTypeArgumentSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<OmittedTypeArgumentSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<OmittedTypeArgumentSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<OmittedTypeArgumentSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<OmittedTypeArgumentSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(OmittedTypeArgumentSyntax wrappedInstance)
@@ -38,6 +42,7 @@ public static class OmittedTypeArgumentSyntaxShimExtensions
         public bool IsUnmanaged => IsUnmanagedAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

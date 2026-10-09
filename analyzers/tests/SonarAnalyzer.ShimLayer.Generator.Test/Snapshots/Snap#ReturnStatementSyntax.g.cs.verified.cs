@@ -26,6 +26,10 @@ public static class ReturnStatementSyntaxShimExtensions
 
     private static readonly Func<ReturnStatementSyntax, AttributeListSyntax[], ReturnStatementSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, AttributeListSyntax[], ReturnStatementSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<ReturnStatementSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ReturnStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ReturnStatementSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, ExpressionSyntax, SyntaxToken, ReturnStatementSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, SyntaxToken, ExpressionSyntax, SyntaxToken, ReturnStatementSyntax>>(WrappedType, "Update");
     private static readonly Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, ReturnStatementSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<ReturnStatementSyntax, SyntaxList<AttributeListSyntax>, ReturnStatementSyntax>>(WrappedType, "WithAttributeLists");
@@ -34,8 +38,9 @@ public static class ReturnStatementSyntaxShimExtensions
     {
         public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
 
-        public ReturnStatementSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public ReturnStatementSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ReturnStatementSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken returnKeyword, ExpressionSyntax expression, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, returnKeyword, expression, semicolonToken);
         public ReturnStatementSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

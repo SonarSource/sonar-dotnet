@@ -25,6 +25,10 @@ public static class OperatorMemberCrefSyntaxShimExtensions
     private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken> CheckedKeywordAccessor = AccessorFactory.CreateProperty<Func<OperatorMemberCrefSyntax, SyntaxToken>>(WrappedType, "CheckedKeyword");
 
     private static readonly Func<OperatorMemberCrefSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<OperatorMemberCrefSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<OperatorMemberCrefSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken, SyntaxToken, SyntaxToken, CrefParameterListSyntax, OperatorMemberCrefSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, SyntaxToken, SyntaxToken, SyntaxToken, CrefParameterListSyntax, OperatorMemberCrefSyntax>>(WrappedType, "Update");
     private static readonly Func<OperatorMemberCrefSyntax, SyntaxToken, OperatorMemberCrefSyntax> WithCheckedKeywordAccessor = AccessorFactory.CreateMethod<Func<OperatorMemberCrefSyntax, SyntaxToken, OperatorMemberCrefSyntax>>(WrappedType, "WithCheckedKeyword");
@@ -34,6 +38,7 @@ public static class OperatorMemberCrefSyntaxShimExtensions
         public SyntaxToken CheckedKeyword => CheckedKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public OperatorMemberCrefSyntax Update(SyntaxToken operatorKeyword, SyntaxToken checkedKeyword, SyntaxToken operatorToken, CrefParameterListSyntax parameters) => UpdateAccessor_Overload2(wrappedInstance, operatorKeyword, checkedKeyword, operatorToken, parameters);
         public OperatorMemberCrefSyntax WithCheckedKeyword(SyntaxToken checkedKeyword) => WithCheckedKeywordAccessor(wrappedInstance, checkedKeyword);

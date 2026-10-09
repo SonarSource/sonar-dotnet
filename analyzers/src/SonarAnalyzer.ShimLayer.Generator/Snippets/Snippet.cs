@@ -83,7 +83,7 @@ public abstract class Snippet<TMember> : Snippet where TMember : MemberInfo
     {
         this.strategy = strategy;
         this.member = (TMember)member.Member;
-        this.accessorName = member.AccessorName;
+        accessorName = member.AccessorName;
         this.returnType = returnType;
     }
 }

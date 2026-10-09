@@ -63,7 +63,7 @@ public readonly struct SyntaxReceiverCreatorWrapper : IWrapper, IEquatable<Synta
 
     public IAsyncResult BeginInvoke(AsyncCallback callback, object @object) => BeginInvokeAccessor(wrappedInstance, callback, @object);
     public object Clone() => CloneAccessor(wrappedInstance);
-    public object DynamicInvoke(object[] args) => DynamicInvokeAccessor(wrappedInstance, args);
+    public object DynamicInvoke(params object[] args) => DynamicInvokeAccessor(wrappedInstance, args);
     public ISyntaxReceiverWrapper EndInvoke(IAsyncResult result) => EndInvokeAccessor(wrappedInstance, result);
     public Delegate[] GetInvocationList() => GetInvocationListAccessor(wrappedInstance);
     [System.ObsoleteAttribute("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]

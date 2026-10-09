@@ -36,7 +36,7 @@ public class ExtendStrategyTest
         var sut = new ExtendStrategy(typeof(ClassDeclarationSyntax), [
             new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.ParameterList))[0], false, "ParameterListAccessor"),
             new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.SemicolonToken))[0], false, "SemicolonTokenAccessor"),
-            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.Span))[0], true, "SpanAccessor"),                                        // Exisiting member => ignored
+            new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.Span))[0], true, "SpanAccessor"),                                        // Existing member => ignored
             new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntaxShimExtensions.AddParameterListParameters))[0], false, "AddParameterListParametersAccessor"),
             new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.FirstAncestorOrSelf))[0], false, "FirstAncestorOrSelfAccessor"),         // Generic => ignored
             new(typeof(ClassDeclarationSyntax).GetMember(nameof(ClassDeclarationSyntax.IsIncrementallyIdenticalTo))[0], false, "IsIncrementallyIdenticalTo"),   // Unsupported parameter => ignored
@@ -82,7 +82,7 @@ public class ExtendStrategyTest
                     public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
                     public SyntaxToken SemicolonToken => SemicolonTokenAccessor(wrappedInstance);
 
-                    public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+                    public ClassDeclarationSyntax AddParameterListParameters(params ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
                 }
             }
             """);
@@ -125,7 +125,7 @@ public class ExtendStrategyTest
 
                 extension(ClassDeclarationSyntax wrappedInstance)
                 {
-                    public ClassDeclarationSyntax AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+                    public ClassDeclarationSyntax AddParameterListParameters(params ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
                 }
             }
             """);

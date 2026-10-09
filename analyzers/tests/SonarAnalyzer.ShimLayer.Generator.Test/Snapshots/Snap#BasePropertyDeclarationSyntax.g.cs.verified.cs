@@ -26,6 +26,10 @@ public static class BasePropertyDeclarationSyntaxShimExtensions
     private static readonly Func<BasePropertyDeclarationSyntax, AttributeListSyntax[], BasePropertyDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BasePropertyDeclarationSyntax, AttributeListSyntax[], BasePropertyDeclarationSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<BasePropertyDeclarationSyntax, SyntaxToken[], BasePropertyDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<BasePropertyDeclarationSyntax, SyntaxToken[], BasePropertyDeclarationSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<BasePropertyDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BasePropertyDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<BasePropertyDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<BasePropertyDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<BasePropertyDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BasePropertyDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BasePropertyDeclarationSyntax, AccessorListSyntax, BasePropertyDeclarationSyntax> WithAccessorListAccessor = AccessorFactory.CreateMethod<Func<BasePropertyDeclarationSyntax, AccessorListSyntax, BasePropertyDeclarationSyntax>>(WrappedType, "WithAccessorList");
     private static readonly Func<BasePropertyDeclarationSyntax, SyntaxList<AttributeListSyntax>, BasePropertyDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<BasePropertyDeclarationSyntax, SyntaxList<AttributeListSyntax>, BasePropertyDeclarationSyntax>>(WrappedType, "WithAttributeLists");
@@ -35,10 +39,11 @@ public static class BasePropertyDeclarationSyntaxShimExtensions
 
     extension(BasePropertyDeclarationSyntax wrappedInstance)
     {
-        public BasePropertyDeclarationSyntax AddAccessorListAccessors(AccessorDeclarationSyntax[] items) => AddAccessorListAccessorsAccessor(wrappedInstance, items);
-        public BasePropertyDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public BasePropertyDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public BasePropertyDeclarationSyntax AddAccessorListAccessors(params AccessorDeclarationSyntax[] items) => AddAccessorListAccessorsAccessor(wrappedInstance, items);
+        public BasePropertyDeclarationSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public BasePropertyDeclarationSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BasePropertyDeclarationSyntax WithAccessorList(AccessorListSyntax accessorList) => WithAccessorListAccessor(wrappedInstance, accessorList);
         public BasePropertyDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);

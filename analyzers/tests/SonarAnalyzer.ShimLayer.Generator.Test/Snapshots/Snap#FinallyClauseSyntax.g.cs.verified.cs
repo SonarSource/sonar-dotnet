@@ -24,12 +24,17 @@ public static class FinallyClauseSyntaxShimExtensions
 
     private static readonly Func<FinallyClauseSyntax, AttributeListSyntax[], FinallyClauseSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, AttributeListSyntax[], FinallyClauseSyntax>>(WrappedType, "AddBlockAttributeLists");
     private static readonly Func<FinallyClauseSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<FinallyClauseSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<FinallyClauseSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<FinallyClauseSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
 
     extension(FinallyClauseSyntax wrappedInstance)
     {
-        public FinallyClauseSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public FinallyClauseSyntax AddBlockAttributeLists(params AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     }
 }

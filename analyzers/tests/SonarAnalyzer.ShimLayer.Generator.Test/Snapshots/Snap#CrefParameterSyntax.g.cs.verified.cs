@@ -26,6 +26,10 @@ public static class CrefParameterSyntaxShimExtensions
     private static readonly Func<CrefParameterSyntax, SyntaxToken> RefKindKeywordAccessor = AccessorFactory.CreateProperty<Func<CrefParameterSyntax, SyntaxToken>>(WrappedType, "RefKindKeyword");
 
     private static readonly Func<CrefParameterSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<CrefParameterSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<CrefParameterSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<CrefParameterSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<CrefParameterSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<CrefParameterSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<CrefParameterSyntax, SyntaxToken, SyntaxToken, TypeSyntax, CrefParameterSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<CrefParameterSyntax, SyntaxToken, SyntaxToken, TypeSyntax, CrefParameterSyntax>>(WrappedType, "Update");
     private static readonly Func<CrefParameterSyntax, SyntaxToken, CrefParameterSyntax> WithReadOnlyKeywordAccessor = AccessorFactory.CreateMethod<Func<CrefParameterSyntax, SyntaxToken, CrefParameterSyntax>>(WrappedType, "WithReadOnlyKeyword");
@@ -37,6 +41,7 @@ public static class CrefParameterSyntaxShimExtensions
         public SyntaxToken RefKindKeyword => RefKindKeywordAccessor(wrappedInstance);
 
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public CrefParameterSyntax Update(SyntaxToken refKindKeyword, SyntaxToken readOnlyKeyword, TypeSyntax type) => UpdateAccessor_Overload2(wrappedInstance, refKindKeyword, readOnlyKeyword, type);
         public CrefParameterSyntax WithReadOnlyKeyword(SyntaxToken readOnlyKeyword) => WithReadOnlyKeywordAccessor(wrappedInstance, readOnlyKeyword);

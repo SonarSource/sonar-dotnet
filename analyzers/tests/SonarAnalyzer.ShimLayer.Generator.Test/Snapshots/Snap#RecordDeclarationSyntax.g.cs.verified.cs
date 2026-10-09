@@ -35,6 +35,10 @@ public readonly struct RecordDeclarationSyntaxWrapper : IWrapper, IEquatable<Rec
     private static readonly Func<TypeDeclarationSyntax, ParameterSyntax[], RecordDeclarationSyntaxWrapper> AddParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, ParameterSyntax[], RecordDeclarationSyntaxWrapper>>(WrappedType, "AddParameterListParameters");
     private static readonly Func<TypeDeclarationSyntax, TypeParameterSyntax[], RecordDeclarationSyntaxWrapper> AddTypeParameterListParametersAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, TypeParameterSyntax[], RecordDeclarationSyntaxWrapper>>(WrappedType, "AddTypeParameterListParameters");
     private static readonly Func<TypeDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<TypeDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<TypeDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, RecordDeclarationSyntaxWrapper> UpdateAccessor = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, RecordDeclarationSyntaxWrapper>>(WrappedType, "Update");
     private static readonly Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, RecordDeclarationSyntaxWrapper> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<TypeDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, SyntaxToken, SyntaxToken, TypeParameterListSyntax, ParameterListSyntax, BaseListSyntax, SyntaxList<TypeParameterConstraintClauseSyntax>, SyntaxToken, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, RecordDeclarationSyntaxWrapper>>(WrappedType, "Update");
@@ -108,6 +112,7 @@ public readonly struct RecordDeclarationSyntaxWrapper : IWrapper, IEquatable<Rec
     public ParameterListSyntax ParameterList => ParameterListAccessor(wrappedInstance);
 
     public void Accept(CSharpSyntaxVisitor visitor) => wrappedInstance.Accept(visitor);
+    public TResult Accept<TResult>(CSharpSyntaxVisitor<TResult> visitor) => wrappedInstance.Accept(visitor);
     public IEnumerable<SyntaxNode> Ancestors(bool ascendOutOfTrivia) => wrappedInstance.Ancestors(ascendOutOfTrivia);
     public IEnumerable<SyntaxNode> AncestorsAndSelf(bool ascendOutOfTrivia) => wrappedInstance.AncestorsAndSelf(ascendOutOfTrivia);
     public IEnumerable<SyntaxNode> ChildNodes() => wrappedInstance.ChildNodes();
@@ -115,6 +120,7 @@ public readonly struct RecordDeclarationSyntaxWrapper : IWrapper, IEquatable<Rec
     public SyntaxNodeOrToken ChildThatContainsPosition(int position) => wrappedInstance.ChildThatContainsPosition(position);
     public IEnumerable<SyntaxToken> ChildTokens() => wrappedInstance.ChildTokens();
     public bool Contains(SyntaxNode node) => wrappedInstance.Contains(node);
+    public T CopyAnnotationsTo<T>(T node) where T : SyntaxNode => wrappedInstance.CopyAnnotationsTo(node);
     public IEnumerable<SyntaxNode> DescendantNodes(TextSpan span, Func<SyntaxNode, bool> descendIntoChildren, bool descendIntoTrivia) => wrappedInstance.DescendantNodes(span, descendIntoChildren, descendIntoTrivia);
     public IEnumerable<SyntaxNode> DescendantNodes(Func<SyntaxNode, bool> descendIntoChildren, bool descendIntoTrivia) => wrappedInstance.DescendantNodes(descendIntoChildren, descendIntoTrivia);
     public IEnumerable<SyntaxNode> DescendantNodesAndSelf(TextSpan span, Func<SyntaxNode, bool> descendIntoChildren, bool descendIntoTrivia) => wrappedInstance.DescendantNodesAndSelf(span, descendIntoChildren, descendIntoTrivia);
@@ -131,16 +137,17 @@ public readonly struct RecordDeclarationSyntaxWrapper : IWrapper, IEquatable<Rec
     public SyntaxToken FindToken(int position, bool findInsideTrivia) => wrappedInstance.FindToken(position, findInsideTrivia);
     public SyntaxTrivia FindTrivia(int position, bool findInsideTrivia) => wrappedInstance.FindTrivia(position, findInsideTrivia);
     public SyntaxTrivia FindTrivia(int position, Func<SyntaxTrivia, bool> stepInto) => wrappedInstance.FindTrivia(position, stepInto);
+    public TNode FirstAncestorOrSelf<TNode>(Func<TNode, bool> predicate, bool ascendOutOfTrivia) where TNode : SyntaxNode => wrappedInstance.FirstAncestorOrSelf(predicate, ascendOutOfTrivia);
     public IEnumerable<SyntaxNode> GetAnnotatedNodes(SyntaxAnnotation syntaxAnnotation) => wrappedInstance.GetAnnotatedNodes(syntaxAnnotation);
     public IEnumerable<SyntaxNode> GetAnnotatedNodes(string annotationKind) => wrappedInstance.GetAnnotatedNodes(annotationKind);
     public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens(SyntaxAnnotation annotation) => wrappedInstance.GetAnnotatedNodesAndTokens(annotation);
     public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens(string annotationKind) => wrappedInstance.GetAnnotatedNodesAndTokens(annotationKind);
-    public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens(string[] annotationKinds) => wrappedInstance.GetAnnotatedNodesAndTokens(annotationKinds);
+    public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens(params string[] annotationKinds) => wrappedInstance.GetAnnotatedNodesAndTokens(annotationKinds);
     public IEnumerable<SyntaxToken> GetAnnotatedTokens(SyntaxAnnotation syntaxAnnotation) => wrappedInstance.GetAnnotatedTokens(syntaxAnnotation);
     public IEnumerable<SyntaxToken> GetAnnotatedTokens(string annotationKind) => wrappedInstance.GetAnnotatedTokens(annotationKind);
     public IEnumerable<SyntaxTrivia> GetAnnotatedTrivia(SyntaxAnnotation annotation) => wrappedInstance.GetAnnotatedTrivia(annotation);
     public IEnumerable<SyntaxTrivia> GetAnnotatedTrivia(string annotationKind) => wrappedInstance.GetAnnotatedTrivia(annotationKind);
-    public IEnumerable<SyntaxTrivia> GetAnnotatedTrivia(string[] annotationKinds) => wrappedInstance.GetAnnotatedTrivia(annotationKinds);
+    public IEnumerable<SyntaxTrivia> GetAnnotatedTrivia(params string[] annotationKinds) => wrappedInstance.GetAnnotatedTrivia(annotationKinds);
     public IEnumerable<SyntaxAnnotation> GetAnnotations(IEnumerable<string> annotationKinds) => wrappedInstance.GetAnnotations(annotationKinds);
     public IEnumerable<SyntaxAnnotation> GetAnnotations(string annotationKind) => wrappedInstance.GetAnnotations(annotationKind);
     public IEnumerable<Diagnostic> GetDiagnostics() => wrappedInstance.GetDiagnostics();
@@ -165,14 +172,15 @@ public readonly struct RecordDeclarationSyntaxWrapper : IWrapper, IEquatable<Rec
     public string ToFullString() => wrappedInstance.ToFullString();
     public void WriteTo(TextWriter writer) => wrappedInstance.WriteTo(writer);
 
-    public RecordDeclarationSyntaxWrapper AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-    public RecordDeclarationSyntaxWrapper AddBaseListTypes(BaseTypeSyntax[] items) => AddBaseListTypesAccessor(wrappedInstance, items);
-    public RecordDeclarationSyntaxWrapper AddConstraintClauses(TypeParameterConstraintClauseSyntax[] items) => AddConstraintClausesAccessor(wrappedInstance, items);
-    public RecordDeclarationSyntaxWrapper AddMembers(MemberDeclarationSyntax[] items) => AddMembersAccessor(wrappedInstance, items);
-    public RecordDeclarationSyntaxWrapper AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
-    public RecordDeclarationSyntaxWrapper AddParameterListParameters(ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
-    public RecordDeclarationSyntaxWrapper AddTypeParameterListParameters(TypeParameterSyntax[] items) => AddTypeParameterListParametersAccessor(wrappedInstance, items);
+    public RecordDeclarationSyntaxWrapper AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+    public RecordDeclarationSyntaxWrapper AddBaseListTypes(params BaseTypeSyntax[] items) => AddBaseListTypesAccessor(wrappedInstance, items);
+    public RecordDeclarationSyntaxWrapper AddConstraintClauses(params TypeParameterConstraintClauseSyntax[] items) => AddConstraintClausesAccessor(wrappedInstance, items);
+    public RecordDeclarationSyntaxWrapper AddMembers(params MemberDeclarationSyntax[] items) => AddMembersAccessor(wrappedInstance, items);
+    public RecordDeclarationSyntaxWrapper AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+    public RecordDeclarationSyntaxWrapper AddParameterListParameters(params ParameterSyntax[] items) => AddParameterListParametersAccessor(wrappedInstance, items);
+    public RecordDeclarationSyntaxWrapper AddTypeParameterListParameters(params TypeParameterSyntax[] items) => AddTypeParameterListParametersAccessor(wrappedInstance, items);
     public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+    public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
     public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
     public RecordDeclarationSyntaxWrapper Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, BaseListSyntax baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, SyntaxToken openBraceToken, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, keyword, identifier, typeParameterList, parameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);
     public RecordDeclarationSyntaxWrapper Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken keyword, SyntaxToken classOrStructKeyword, SyntaxToken identifier, TypeParameterListSyntax typeParameterList, ParameterListSyntax parameterList, BaseListSyntax baseList, SyntaxList<TypeParameterConstraintClauseSyntax> constraintClauses, SyntaxToken openBraceToken, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, keyword, classOrStructKeyword, identifier, typeParameterList, parameterList, baseList, constraintClauses, openBraceToken, members, closeBraceToken, semicolonToken);

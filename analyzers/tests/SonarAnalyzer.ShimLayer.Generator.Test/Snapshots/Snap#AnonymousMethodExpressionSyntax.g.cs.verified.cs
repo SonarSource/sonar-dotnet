@@ -28,6 +28,10 @@ public static class AnonymousMethodExpressionSyntaxShimExtensions
     private static readonly Func<AnonymousMethodExpressionSyntax, AttributeListSyntax[], AnonymousMethodExpressionSyntax> AddBlockAttributeListsAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, AttributeListSyntax[], AnonymousMethodExpressionSyntax>>(WrappedType, "AddBlockAttributeLists");
     private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxToken[], AnonymousMethodExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxToken[], AnonymousMethodExpressionSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<AnonymousMethodExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<AnonymousMethodExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxToken, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxToken, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax>>(WrappedType, "Update");
     private static readonly Func<AnonymousMethodExpressionSyntax, SyntaxTokenList, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax> UpdateAccessor_Overload3 = AccessorFactory.CreateMethod<Func<AnonymousMethodExpressionSyntax, SyntaxTokenList, SyntaxToken, ParameterListSyntax, BlockSyntax, ExpressionSyntax, AnonymousMethodExpressionSyntax>>(WrappedType, "Update");
@@ -39,9 +43,10 @@ public static class AnonymousMethodExpressionSyntaxShimExtensions
         public ExpressionSyntax ExpressionBody => ExpressionBodyAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
-        public AnonymousMethodExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public AnonymousMethodExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public AnonymousMethodExpressionSyntax AddBlockAttributeLists(params AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public AnonymousMethodExpressionSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public AnonymousMethodExpressionSyntax Update(SyntaxToken asyncKeyword, SyntaxToken delegateKeyword, ParameterListSyntax parameterList, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload2(wrappedInstance, asyncKeyword, delegateKeyword, parameterList, block, expressionBody);
         public AnonymousMethodExpressionSyntax Update(SyntaxTokenList modifiers, SyntaxToken delegateKeyword, ParameterListSyntax parameterList, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload3(wrappedInstance, modifiers, delegateKeyword, parameterList, block, expressionBody);

@@ -33,6 +33,10 @@ public static class ParenthesizedLambdaExpressionSyntaxShimExtensions
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, StatementSyntax[], ParenthesizedLambdaExpressionSyntax> AddBlockStatementsAccessor = AccessorFactory.CreateMethod<Func<ParenthesizedLambdaExpressionSyntax, StatementSyntax[], ParenthesizedLambdaExpressionSyntax>>(WrappedType, "AddBlockStatements");
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, SyntaxToken[], ParenthesizedLambdaExpressionSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<ParenthesizedLambdaExpressionSyntax, SyntaxToken[], ParenthesizedLambdaExpressionSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<ParenthesizedLambdaExpressionSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<ParenthesizedLambdaExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<ParenthesizedLambdaExpressionSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<ParenthesizedLambdaExpressionSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ParameterListSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, ParenthesizedLambdaExpressionSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<ParenthesizedLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, ParameterListSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, ParenthesizedLambdaExpressionSyntax>>(WrappedType, "Update");
     private static readonly Func<ParenthesizedLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, ParameterListSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, ParenthesizedLambdaExpressionSyntax> UpdateAccessor_Overload2 = AccessorFactory.CreateMethod<Func<ParenthesizedLambdaExpressionSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, TypeSyntax, ParameterListSyntax, SyntaxToken, BlockSyntax, ExpressionSyntax, ParenthesizedLambdaExpressionSyntax>>(WrappedType, "Update");
@@ -52,11 +56,12 @@ public static class ParenthesizedLambdaExpressionSyntaxShimExtensions
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
         public TypeSyntax ReturnType => ReturnTypeAccessor(wrappedInstance);
 
-        public ParenthesizedLambdaExpressionSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public ParenthesizedLambdaExpressionSyntax AddBlockAttributeLists(AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
-        public ParenthesizedLambdaExpressionSyntax AddBlockStatements(StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
-        public ParenthesizedLambdaExpressionSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public ParenthesizedLambdaExpressionSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public ParenthesizedLambdaExpressionSyntax AddBlockAttributeLists(params AttributeListSyntax[] items) => AddBlockAttributeListsAccessor(wrappedInstance, items);
+        public ParenthesizedLambdaExpressionSyntax AddBlockStatements(params StatementSyntax[] items) => AddBlockStatementsAccessor(wrappedInstance, items);
+        public ParenthesizedLambdaExpressionSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public ParenthesizedLambdaExpressionSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, ParameterListSyntax parameterList, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, parameterList, arrowToken, block, expressionBody);
         public ParenthesizedLambdaExpressionSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, TypeSyntax returnType, ParameterListSyntax parameterList, SyntaxToken arrowToken, BlockSyntax block, ExpressionSyntax expressionBody) => UpdateAccessor_Overload2(wrappedInstance, attributeLists, modifiers, returnType, parameterList, arrowToken, block, expressionBody);

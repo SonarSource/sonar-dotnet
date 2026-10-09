@@ -24,13 +24,18 @@ public static class BaseArgumentListSyntaxShimExtensions
 
     private static readonly Func<BaseArgumentListSyntax, ArgumentSyntax[], BaseArgumentListSyntax> AddArgumentsAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, ArgumentSyntax[], BaseArgumentListSyntax>>(WrappedType, "AddArguments");
     private static readonly Func<BaseArgumentListSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<BaseArgumentListSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<BaseArgumentListSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<BaseArgumentListSyntax, SeparatedSyntaxList<ArgumentSyntax>, BaseArgumentListSyntax> WithArgumentsAccessor = AccessorFactory.CreateMethod<Func<BaseArgumentListSyntax, SeparatedSyntaxList<ArgumentSyntax>, BaseArgumentListSyntax>>(WrappedType, "WithArguments");
 
     extension(BaseArgumentListSyntax wrappedInstance)
     {
-        public BaseArgumentListSyntax AddArguments(ArgumentSyntax[] items) => AddArgumentsAccessor(wrappedInstance, items);
+        public BaseArgumentListSyntax AddArguments(params ArgumentSyntax[] items) => AddArgumentsAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public BaseArgumentListSyntax WithArguments(SeparatedSyntaxList<ArgumentSyntax> arguments) => WithArgumentsAccessor(wrappedInstance, arguments);
     }

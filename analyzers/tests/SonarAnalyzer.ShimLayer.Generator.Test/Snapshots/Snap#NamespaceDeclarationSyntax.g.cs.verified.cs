@@ -28,6 +28,10 @@ public static class NamespaceDeclarationSyntaxShimExtensions
     private static readonly Func<NamespaceDeclarationSyntax, AttributeListSyntax[], NamespaceDeclarationSyntax> AddAttributeListsAccessor = AccessorFactory.CreateMethod<Func<NamespaceDeclarationSyntax, AttributeListSyntax[], NamespaceDeclarationSyntax>>(WrappedType, "AddAttributeLists");
     private static readonly Func<NamespaceDeclarationSyntax, SyntaxToken[], NamespaceDeclarationSyntax> AddModifiersAccessor = AccessorFactory.CreateMethod<Func<NamespaceDeclarationSyntax, SyntaxToken[], NamespaceDeclarationSyntax>>(WrappedType, "AddModifiers");
     private static readonly Func<NamespaceDeclarationSyntax, int, bool> ContainsDirectiveAccessor = AccessorFactory.CreateMethod<Func<NamespaceDeclarationSyntax, int, bool>>(WrappedType, "ContainsDirective");
+    private static class FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg> where TNode : SyntaxNode
+    {
+        public static readonly Func<NamespaceDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode> FirstAncestorOrSelfAccessor = AccessorFactory.CreateMethod<Func<NamespaceDeclarationSyntax, Func<TNode, TArg, bool>, TArg, bool, TNode>>(WrappedType, "FirstAncestorOrSelf", typeof(TNode), typeof(TArg));
+    }
     private static readonly Func<NamespaceDeclarationSyntax, SyntaxNode, bool> IsIncrementallyIdenticalToAccessor = AccessorFactory.CreateMethod<Func<NamespaceDeclarationSyntax, SyntaxNode, bool>>(WrappedType, "IsIncrementallyIdenticalTo");
     private static readonly Func<NamespaceDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, NameSyntax, SyntaxToken, SyntaxList<ExternAliasDirectiveSyntax>, SyntaxList<UsingDirectiveSyntax>, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, NamespaceDeclarationSyntax> UpdateAccessor = AccessorFactory.CreateMethod<Func<NamespaceDeclarationSyntax, SyntaxList<AttributeListSyntax>, SyntaxTokenList, SyntaxToken, NameSyntax, SyntaxToken, SyntaxList<ExternAliasDirectiveSyntax>, SyntaxList<UsingDirectiveSyntax>, SyntaxList<MemberDeclarationSyntax>, SyntaxToken, SyntaxToken, NamespaceDeclarationSyntax>>(WrappedType, "Update");
     private static readonly Func<NamespaceDeclarationSyntax, SyntaxList<AttributeListSyntax>, NamespaceDeclarationSyntax> WithAttributeListsAccessor = AccessorFactory.CreateMethod<Func<NamespaceDeclarationSyntax, SyntaxList<AttributeListSyntax>, NamespaceDeclarationSyntax>>(WrappedType, "WithAttributeLists");
@@ -38,9 +42,10 @@ public static class NamespaceDeclarationSyntaxShimExtensions
         public SyntaxList<AttributeListSyntax> AttributeLists => AttributeListsAccessor(wrappedInstance);
         public SyntaxTokenList Modifiers => ModifiersAccessor(wrappedInstance);
 
-        public NamespaceDeclarationSyntax AddAttributeLists(AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
-        public NamespaceDeclarationSyntax AddModifiers(SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
+        public NamespaceDeclarationSyntax AddAttributeLists(params AttributeListSyntax[] items) => AddAttributeListsAccessor(wrappedInstance, items);
+        public NamespaceDeclarationSyntax AddModifiers(params SyntaxToken[] items) => AddModifiersAccessor(wrappedInstance, items);
         public bool ContainsDirective(int rawKind) => ContainsDirectiveAccessor(wrappedInstance, rawKind);
+        public TNode FirstAncestorOrSelf<TNode, TArg>(Func<TNode, TArg, bool> predicate, TArg argument, bool ascendOutOfTrivia) where TNode : SyntaxNode => FirstAncestorOrSelfAccessor_GenericStore<TNode, TArg>.FirstAncestorOrSelfAccessor(wrappedInstance, predicate, argument, ascendOutOfTrivia);
         public bool IsIncrementallyIdenticalTo(SyntaxNode other) => IsIncrementallyIdenticalToAccessor(wrappedInstance, other);
         public NamespaceDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxTokenList modifiers, SyntaxToken namespaceKeyword, NameSyntax name, SyntaxToken openBraceToken, SyntaxList<ExternAliasDirectiveSyntax> externs, SyntaxList<UsingDirectiveSyntax> usings, SyntaxList<MemberDeclarationSyntax> members, SyntaxToken closeBraceToken, SyntaxToken semicolonToken) => UpdateAccessor(wrappedInstance, attributeLists, modifiers, namespaceKeyword, name, openBraceToken, externs, usings, members, closeBraceToken, semicolonToken);
         public NamespaceDeclarationSyntax WithAttributeLists(SyntaxList<AttributeListSyntax> attributeLists) => WithAttributeListsAccessor(wrappedInstance, attributeLists);
