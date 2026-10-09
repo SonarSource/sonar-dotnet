@@ -21,37 +21,48 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
     where TSyntaxKind : struct
     where TInvocation : SyntaxNode
 {
-    private const string DiagnosticId = "S6608";
-    protected override string MessageFormat => "{0} should be used instead of the \"Enumerable\" extension method \"{1}\"";
+    internal const string DiagnosticId = "S6608";
 
     private static readonly ImmutableArray<KnownType> TargetInterfaces = ImmutableArray.Create(
         KnownType.System_Collections_IList,
         KnownType.System_Collections_Generic_IList_T,
         KnownType.System_Collections_Generic_IReadOnlyList_T);
 
-    protected abstract int GetArgumentCount(TInvocation invocation);
+    protected abstract int ArgumentCount(TInvocation invocation);
+
+    protected override string MessageFormat => "{0} should be used instead of the \"Enumerable\" extension method \"{1}\"";
 
     protected UseIndexingInsteadOfLinqMethodsBase() : base(DiagnosticId) { }
 
     protected override void Initialize(SonarAnalysisContext context) =>
-        context.RegisterNodeAction(Language.GeneratedCodeRecognizer, c =>
-        {
-            var invocation = (TInvocation)c.Node;
-
-            if (HasValidSignature(invocation, out var methodName, out var indexDescriptor)
-                && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
-                && IsCorrectType(left, c.Model)
-                && IsCorrectCall(right, c.Model)
-                && !IsInEntityFrameworkExpressionTree(c))
+        context.RegisterNodeAction(
+            Language.GeneratedCodeRecognizer,
+            c =>
             {
-                c.ReportIssue(
-                    Rule,
-                    Language.Syntax.NodeIdentifier(invocation)?.GetLocation(),
-                    indexDescriptor is null ? "Indexing" : $"Indexing at {indexDescriptor}",
-                    methodName);
-            }
-        },
-        Language.SyntaxKind.InvocationExpression);
+                var invocation = (TInvocation)c.Node;
+
+                if (HasValidSignature(invocation, out var methodName, out var indexDescriptor)
+                    && Language.Syntax.Operands(invocation) is { Left: { } left, Right: { } right }
+                    && IsCorrectType(left, c.Model)
+                    && IsCorrectCall(right, c.Model)
+                    && !IsInEntityFrameworkExpressionTree(c))
+                {
+                    c.ReportIssue(
+                        Rule,
+                        Language.Syntax.NodeIdentifier(invocation)?.GetLocation(),
+                        indexDescriptor is null ? "Indexing" : $"Indexing at {indexDescriptor}",
+                        methodName);
+                }
+            },
+            Language.SyntaxKind.InvocationExpression);
+
+    protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
+        model.GetTypeInfo(left).Type is { } type
+        && (type.ImplementsAny(TargetInterfaces) || type.IsAny(TargetInterfaces));
+
+    protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
+        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
+        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
     private bool HasValidSignature(TInvocation invocation, out string methodName, out string indexDescriptor)
     {
@@ -61,28 +72,20 @@ public abstract class UseIndexingInsteadOfLinqMethodsBase<TSyntaxKind, TInvocati
         if (methodName.Equals(nameof(Enumerable.First), Language.NameComparison))
         {
             indexDescriptor = "0";
-            return GetArgumentCount(invocation) == 0;
+            return ArgumentCount(invocation) == 0;
         }
         if (methodName.Equals(nameof(Enumerable.Last), Language.NameComparison))
         {
             indexDescriptor = "Count-1";
-            return GetArgumentCount(invocation) == 0;
+            return ArgumentCount(invocation) == 0;
         }
         if (methodName.Equals(nameof(Enumerable.ElementAt), Language.NameComparison))
         {
-            return GetArgumentCount(invocation) == 1;
+            return ArgumentCount(invocation) == 1;
         }
 
         return false;
     }
-
-    protected static bool IsCorrectType(SyntaxNode left, SemanticModel model) =>
-        model.GetTypeInfo(left).Type is { } type
-        && (type.ImplementsAny(TargetInterfaces) || type.IsAny(TargetInterfaces));
-
-    protected static bool IsCorrectCall(SyntaxNode right, SemanticModel model) =>
-        model.GetSymbolInfo(right).Symbol is IMethodSymbol method
-        && method.IsExtensionOn(KnownType.System_Collections_Generic_IEnumerable_T);
 
     private bool IsInEntityFrameworkExpressionTree(SonarSyntaxNodeReportingContext context) =>
         context.Compilation.ReferencesAny(KnownAssembly.MicrosoftEntityFrameworkCore, KnownAssembly.MicrosoftEntityFramework)
