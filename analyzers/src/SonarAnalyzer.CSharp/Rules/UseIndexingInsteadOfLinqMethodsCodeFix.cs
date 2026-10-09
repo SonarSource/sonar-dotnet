@@ -14,7 +14,6 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-using Microsoft.CodeAnalysis.Semantics;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.CSharp.Rules;
