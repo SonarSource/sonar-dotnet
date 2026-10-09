@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,6 +17,14 @@ class Noncompliant
         _ = list?[0]; // Fixed
         _ = list?[^1]; // Fixed
         _ = list?[42]; // Fixed
+    }
+
+    void Jagged(int[][] array)
+    {
+        _ = array.[0].[0]; // Fixed
+        _ = array.[0]?.[0]; // Fixed
+        _ = array.[0].[2]; // Fixed
+        _ = array.[42].[0]; // Fixed
     }
 
     void Complex(FluentList fluent)

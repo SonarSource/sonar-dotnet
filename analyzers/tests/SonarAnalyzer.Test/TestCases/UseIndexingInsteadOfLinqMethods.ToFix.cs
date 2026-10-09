@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,6 +17,14 @@ class Noncompliant
         _ = list?.First(); // Noncompliant
         _ = list?.Last(); // Noncompliant
         _ = list?.ElementAt(42); // Noncompliant
+    }
+
+    void Jagged(int[][] array)
+    {
+        _ = array.First().First(); // Noncompliant
+        _ = array.First()?.First(); // Noncompliant
+        _ = array.First().[2]; // Noncompliant
+        _ = array.[42].First(); // Noncompliant
     }
 
     void Complex(FluentList fluent)
