@@ -1,4 +1,4 @@
-// File header
+﻿// File header
 #pragma warning disable CS0219
 
 using System;
@@ -59,15 +59,15 @@ class Noncompliant
         Func<List<int>, int> func = l => l.First(); // Noncompliant
 
         Expression<Func<List<int>, int>> exprFirst = l => l.First(); // Noncompliant
-        Expression<Func<List<int>, int>> exprLast = l => l.Last(); // Noncompliant
+        Expression<Func<List<int>, int>> exprLast = l => l.Last();
         Expression<Func<List<int>, int>> exprElementAt = l => l.ElementAt(42); // Noncompliant
 
         Expression<Func<IList<int>, int>> ilistExprFirst = l => l.First(); // Noncompliant
-        Expression<Func<IList<int>, int>> ilistExprLast = l => l.Last(); // Noncompliant
+        Expression<Func<IList<int>, int>> ilistExprLast = l => l.Last();
         Expression<Func<IList<int>, int>> ilistExprElementAt = l => l.ElementAt(42); // Noncompliant
 
         Expression<Func<IReadOnlyList<int>, int>> readonlyExprFirst = l => l.First(); // Noncompliant
-        Expression<Func<IReadOnlyList<int>, int>> readonlyExprLast = l => l.Last(); // Noncompliant
+        Expression<Func<IReadOnlyList<int>, int>> readonlyExprLast = l => l.Last();
         Expression<Func<IReadOnlyList<int>, int>> readonlyExprElementAt = l => l.ElementAt(42); // Noncompliant
 
         _ = new List<int> { 42 }.First(); // Noncompliant

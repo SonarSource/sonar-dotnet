@@ -26,17 +26,16 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
     public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(UseIndexingInsteadOfLinqMethods.DiagnosticId);
 
     /// <inheritdoc />
-    protected override Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
+    protected override async Task RegisterCodeFixesAsync(SyntaxNode root, SonarCodeFixContext context)
     {
         if (context.FindNode(root).FirstAncestorOrSelf<InvocationExpressionSyntax>() is { } expression
-            && Index(expression, expression.ArgumentList.Arguments) is { } index)
+            && await Index(expression, expression.ArgumentList.Arguments, context).ConfigureAwait(false) is { } index)
         {
             context.RegisterCodeFix(
                 Title,
                 _ => Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, Change(expression, Args(index)).WithTriviaFrom(expression)))),
                 context.Diagnostics);
         }
-        return Task.CompletedTask;
     }
 
     private static BracketedArgumentListSyntax Args(ExpressionSyntax index) =>
@@ -47,11 +46,11 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
             ? ElementAccessExpression(member.Expression, arguments)
             : ElementBindingExpression(arguments);
 
-    private static ExpressionSyntax Index(SyntaxNode expression, SeparatedSyntaxList<ArgumentSyntax> args) =>
+    private static async Task<ExpressionSyntax> Index(SyntaxNode expression, SeparatedSyntaxList<ArgumentSyntax> args, SonarCodeFixContext context) =>
         expression.GetName() switch
         {
             nameof(Enumerable.First) when args.Count is 0 => Int(0),
-            nameof(Enumerable.Last) when args.Count is 0 && SupportsFromEnd(expression) => PrefixUnaryExpression(SyntaxKindEx.IndexExpression, Int(1)),
+            nameof(Enumerable.Last) when args.Count is 0 && await CanUseIndexFromEnd(expression, context) => PrefixUnaryExpression(SyntaxKindEx.IndexExpression, Int(1)),
             nameof(Enumerable.ElementAt) when args.Count is 1 => args[0].Expression.WithoutTrivia(),
             _ => null,
         };
@@ -59,7 +58,10 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
     private static LiteralExpressionSyntax Int(int value) =>
         LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(value));
 
-    private static bool SupportsFromEnd(SyntaxNode node) =>
-      node.SyntaxTree.Options is CSharpParseOptions options
-      && options.LanguageVersion >= LanguageVersionEx.CSharp8;
+    // Index from end (^1) requires C# 8 and is not allowed in expression trees (CS8790).
+    private static async Task<bool> CanUseIndexFromEnd(SyntaxNode node, SonarCodeFixContext context) =>
+        node.SyntaxTree.Options is CSharpParseOptions options
+        && options.LanguageVersion >= LanguageVersionEx.CSharp8
+        && await context.Document.GetSemanticModelAsync(context.Cancel).ConfigureAwait(false) is { } model
+        && !node.IsInExpressionTree(model);
 }

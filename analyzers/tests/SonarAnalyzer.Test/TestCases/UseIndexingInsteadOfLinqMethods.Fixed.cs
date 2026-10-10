@@ -1,4 +1,4 @@
-// File header
+﻿// File header
 #pragma warning disable CS0219
 
 using System;
@@ -59,15 +59,15 @@ class Noncompliant
         Func<List<int>, int> func = l => l[0]; // Fixed
 
         Expression<Func<List<int>, int>> exprFirst = l => l[0]; // Fixed
-        Expression<Func<List<int>, int>> exprLast = l => l[^1]; // Fixed
+        Expression<Func<List<int>, int>> exprLast = l => l.Last();
         Expression<Func<List<int>, int>> exprElementAt = l => l[42]; // Fixed
 
         Expression<Func<IList<int>, int>> ilistExprFirst = l => l[0]; // Fixed
-        Expression<Func<IList<int>, int>> ilistExprLast = l => l[^1]; // Fixed
+        Expression<Func<IList<int>, int>> ilistExprLast = l => l.Last();
         Expression<Func<IList<int>, int>> ilistExprElementAt = l => l[42]; // Fixed
 
         Expression<Func<IReadOnlyList<int>, int>> readonlyExprFirst = l => l[0]; // Fixed
-        Expression<Func<IReadOnlyList<int>, int>> readonlyExprLast = l => l[^1]; // Fixed
+        Expression<Func<IReadOnlyList<int>, int>> readonlyExprLast = l => l.Last();
         Expression<Func<IReadOnlyList<int>, int>> readonlyExprElementAt = l => l[42]; // Fixed
 
         _ = new List<int> { 42 }[0]; // Fixed
