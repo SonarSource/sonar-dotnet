@@ -1,4 +1,4 @@
-﻿// File header
+// File header
 #pragma warning disable CS0219
 
 using System;
@@ -28,6 +28,13 @@ class Noncompliant
         _ = array.First()?.First(); // Noncompliant
         _ = array.First()[2]; // Noncompliant
         _ = array[42].First(); // Noncompliant
+    }
+
+    void ArrayCreation()
+    {
+        _ = new int[42].First(); // Noncompliant
+        _ = new[] { 1, 2 }.ElementAt(1); // Noncompliant
+        _ = new int[42]?.First(); // Noncompliant
     }
 
     void Complex(FluentList fluent)

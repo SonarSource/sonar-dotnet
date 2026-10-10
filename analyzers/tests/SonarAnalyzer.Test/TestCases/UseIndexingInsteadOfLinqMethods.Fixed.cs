@@ -1,4 +1,4 @@
-﻿// File header
+// File header
 #pragma warning disable CS0219
 
 using System;
@@ -28,6 +28,13 @@ class Noncompliant
         _ = array[0]?[0]; // Fixed
         _ = array[0][2]; // Fixed
         _ = array[42][0]; // Fixed
+    }
+
+    void ArrayCreation()
+    {
+        _ = (new int[42])[0]; // Fixed
+        _ = (new[] { 1, 2 })[1]; // Fixed
+        _ = (new int[42])?[0]; // Fixed
     }
 
     void Complex(FluentList fluent)

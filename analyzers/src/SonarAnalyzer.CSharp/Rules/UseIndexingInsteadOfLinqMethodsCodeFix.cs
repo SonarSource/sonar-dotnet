@@ -14,6 +14,7 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
+
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
 namespace SonarAnalyzer.CSharp.Rules;
@@ -33,7 +34,7 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
         {
             context.RegisterCodeFix(
                 Title,
-                _ => Task.FromResult(context.Document.WithSyntaxRoot(root.ReplaceNode(expression, Change(expression, Args(index)).WithTriviaFrom(expression)))),
+                _ => Task.FromResult(context.Document.WithSyntaxRoot(Replace(root, expression, Args(index)))),
                 context.Diagnostics);
         }
     }
@@ -41,10 +42,29 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
     private static BracketedArgumentListSyntax Args(ExpressionSyntax index) =>
         BracketedArgumentList(SingletonSeparatedList(Argument(index)));
 
+    private static SyntaxNode Replace(SyntaxNode root, InvocationExpressionSyntax expression, BracketedArgumentListSyntax arguments) =>
+        expression.Parent is ConditionalAccessExpressionSyntax { Expression: var receiver } && IsArrayCreation(receiver)
+            ? root.ReplaceNodes(
+                [expression, receiver],
+                (original, _) => Parenthesize(original, expression, receiver, arguments))
+            : root.ReplaceNode(expression, Change(expression, arguments).WithTriviaFrom(expression));
+
     private static ExpressionSyntax Change(InvocationExpressionSyntax expression, BracketedArgumentListSyntax arguments) =>
         expression.Expression is MemberAccessExpressionSyntax member
-            ? ElementAccessExpression(member.Expression, arguments)
+            ? ElementAccessExpression(Parenthesize(member.Expression), arguments)
             : ElementBindingExpression(arguments);
+
+    private static ExpressionSyntax Parenthesize(
+        ExpressionSyntax original,
+        InvocationExpressionSyntax expression,
+        ExpressionSyntax receiver,
+        BracketedArgumentListSyntax arguments) =>
+        original == expression
+            ? Change(expression, arguments).WithTriviaFrom(expression)
+            : ParenthesizedExpression(receiver.WithoutTrivia()).WithTriviaFrom(receiver);
+
+    private static ExpressionSyntax Parenthesize(ExpressionSyntax member) =>
+        IsArrayCreation(member) ? ParenthesizedExpression(member) : member;
 
     private static async Task<ExpressionSyntax> Index(SyntaxNode expression, SeparatedSyntaxList<ArgumentSyntax> args, SonarCodeFixContext context) =>
         expression.GetName() switch
@@ -57,6 +77,9 @@ public sealed class UseIndexingInsteadOfLinqMethodsCodeFix : SonarCodeFix
 
     private static LiteralExpressionSyntax Int(int value) =>
         LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(value));
+
+    private static bool IsArrayCreation(ExpressionSyntax expression) =>
+        expression is ArrayCreationExpressionSyntax or ImplicitArrayCreationExpressionSyntax;
 
     // Index from end (^1) requires C# 8 and is not allowed in expression trees (CS8790).
     private static async Task<bool> CanUseIndexFromEnd(SyntaxNode node, SonarCodeFixContext context) =>
