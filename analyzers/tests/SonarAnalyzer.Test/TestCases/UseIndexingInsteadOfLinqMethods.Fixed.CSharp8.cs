@@ -1,4 +1,4 @@
-﻿// File header
+// File header
 #pragma warning disable CS0219
 
 using System;
@@ -11,14 +11,14 @@ class Noncompliant
     void Simple(List<int> list)
     {
         _ = list[0]; // Fixed
-        _ = list.Last(); // Fixed
+        _ = list[^1]; // Fixed
         _ = list[42]; // Fixed
     }
 
     void Nullable(List<int> list)
     {
         _ = list?[0]; // Fixed
-        _ = list?.Last(); // Fixed
+        _ = list?[^1]; // Fixed
         _ = list?[42]; // Fixed
     }
 
@@ -40,9 +40,9 @@ class Noncompliant
     void Complex(FluentList fluent)
     {
         _ = ((IList<int>)new List<int> { 42 })[0]; // Fixed
-        _ = ((IList<int>)new List<int> { 42 })?.Last(); // Fixed
-        _ = fluent.Fluent().Fluent().Fluent().Last(); // Fixed
-        _ = fluent.Fluent().Fluent().Fluent()?.Last(); // Fixed
+        _ = ((IList<int>)new List<int> { 42 })?[^1]; // Fixed
+        _ = fluent.Fluent().Fluent().Fluent()[^1]; // Fixed
+        _ = fluent.Fluent().Fluent().Fluent()?[^1]; // Fixed
     }
 
     int[] DoWork()
@@ -53,11 +53,11 @@ class Noncompliant
     void MethodCall()
     {
         _ = DoWork()[0]; // Fixed
-        _ = DoWork().Last(); // Fixed
+        _ = DoWork()[^1]; // Fixed
         _ = DoWork()[42]; // Fixed
 
         _ = DoWork()?[0]; // Fixed
-        _ = DoWork()?.Last(); // Fixed
+        _ = DoWork()?[^1]; // Fixed
         _ = DoWork()?[42]; // Fixed
     }
 
@@ -78,7 +78,7 @@ class Noncompliant
         Expression<Func<IReadOnlyList<int>, int>> readonlyExprElementAt = l => l[42]; // Fixed
 
         _ = new List<int> { 42 }[0]; // Fixed
-        _ = new List<int> { 42 }.Last(); // Fixed
+        _ = new List<int> { 42 }[^1]; // Fixed
         _ = new List<int> { 42 }[42]; // Fixed
     }
 }

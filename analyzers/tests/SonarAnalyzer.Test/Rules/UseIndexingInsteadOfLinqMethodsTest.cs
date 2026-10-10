@@ -37,10 +37,19 @@ public class UseIndexingInsteadOfLinqMethodsTest
             .VerifyNoIssues();
 
     [TestMethod]
-    public void UseIndexingInsteadOfLinqMethods_CodeFix_CS() =>
+    public void UseIndexingInsteadOfLinqMethods_CodeFix_CSharp8() =>
         builderCS
             .AddPaths("UseIndexingInsteadOfLinqMethods.ToFix.cs")
             .WithOptions(LanguageOptions.FromCSharp8)
+            .WithCodeFix<CS.UseIndexingInsteadOfLinqMethodsCodeFix>()
+            .WithCodeFixedPaths("UseIndexingInsteadOfLinqMethods.Fixed.CSharp8.cs")
+            .VerifyCodeFix();
+
+    [TestMethod]
+    public void UseIndexingInsteadOfLinqMethods_CodeFix_CS() =>
+        builderCS
+            .AddPaths("UseIndexingInsteadOfLinqMethods.ToFix.cs")
+            .WithOptions(LanguageOptions.BeforeCSharp8)
             .WithCodeFix<CS.UseIndexingInsteadOfLinqMethodsCodeFix>()
             .WithCodeFixedPaths("UseIndexingInsteadOfLinqMethods.Fixed.cs")
             .VerifyCodeFix();
