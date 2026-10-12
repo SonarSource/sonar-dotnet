@@ -39,6 +39,8 @@ public class LocalFunctionLocation : StylingAnalyzer
             Parent: BaseMethodDeclarationSyntax
                     or BasePropertyDeclarationSyntax
                     or AccessorDeclarationSyntax
+                    or AnonymousFunctionExpressionSyntax
+                    or LocalFunctionStatementSyntax
         };
 
     private static bool IsLastStatement(LocalFunctionStatementSyntax function) =>

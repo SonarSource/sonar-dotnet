@@ -1,4 +1,6 @@
-﻿class Noncompliant
+﻿using System;
+
+class Noncompliant
 {
     public string Value
     {
@@ -83,6 +85,48 @@
 
         void LocalFunction2() { }
     }
+
+    void LocalFunctionInLambdaNotLast()
+    {
+        Action a = () =>
+        {
+            void LocalFunction() { } // Noncompliant
+
+            LocalFunction();
+        };
+    }
+
+    void LocalFunctionInSimpleLambdaNotLast()
+    {
+        Action<int> a = x =>
+        {
+            void LocalFunction() { } // Noncompliant
+
+            LocalFunction();
+        };
+    }
+
+    void LocalFunctionInAnonymousMethodNotLast()
+    {
+        Action a = delegate
+        {
+            void LocalFunction() { } // Noncompliant
+
+            LocalFunction();
+        };
+    }
+
+    void LocalFunctionInNestedLocalFunctionNotLast()
+    {
+        void Outer() // Noncompliant
+        {
+            void Inner() { } // Noncompliant
+
+            Inner();
+        }
+
+        Outer();
+    }
 }
 
 class Compliant
@@ -149,5 +193,47 @@ class Compliant
 
         void LocalFunction() { }
         void LocalFunction2() { }
+    }
+
+    void LocalFunctionInLambda()
+    {
+        Action a = () =>
+        {
+            LocalFunction();
+
+            void LocalFunction() { }
+        };
+    }
+
+    void LocalFunctionInSimpleLambda()
+    {
+        Action<int> a = x =>
+        {
+            LocalFunction();
+
+            void LocalFunction() { }
+        };
+    }
+
+    void LocalFunctionInAnonymousMethod()
+    {
+        Action a = delegate
+        {
+            LocalFunction();
+
+            void LocalFunction() { }
+        };
+    }
+
+    void LocalFunctionInNestedLocalFunction()
+    {
+        Outer();
+
+        void Outer()
+        {
+            Inner();
+
+            void Inner() { }
+        }
     }
 }
