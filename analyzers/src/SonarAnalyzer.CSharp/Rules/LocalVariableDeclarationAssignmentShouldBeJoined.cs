@@ -56,9 +56,7 @@ public sealed class LocalVariableDeclarationAssignmentShouldBeJoined : SonarDiag
         && !ReferencesSymbol(assignment.Right, declaredSymbol, model)
         && assignment.AssignmentTargets.Select(x => x is IdentifierNameSyntax ? model.GetSymbolInfo(x).Symbol : null).ToArray() is var targetSymbols
         && targetSymbols.Any(declaredSymbol.Equals)
-        // Mixing a declaration with existing variables in a deconstruction requires C# 10
-        && (model.Compilation.IsAtLeastLanguageVersion(LanguageVersionEx.CSharp10)
-            || targetSymbols.All(x => declaredSymbol.Equals(x) || x is { Kind: SymbolKindEx.Discard }));
+        && targetSymbols.All(x => declaredSymbol.Equals(x) || x is { Kind: SymbolKindEx.Discard });
 
     private static bool ReferencesSymbol(SyntaxNode node, ISymbol symbol, SemanticModel model) =>
         node.DescendantNodesAndSelf()

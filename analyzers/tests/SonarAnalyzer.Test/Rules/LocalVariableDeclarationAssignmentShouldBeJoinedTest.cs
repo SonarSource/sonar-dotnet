@@ -15,7 +15,6 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
-using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Rules;
 
 namespace SonarAnalyzer.Test.Rules;
@@ -28,12 +27,6 @@ public class LocalVariableDeclarationAssignmentShouldBeJoinedTest
     [TestMethod]
     public void LocalVariableDeclarationAssignmentShouldBeJoined() =>
         verifier.AddPaths("LocalVariableDeclarationAssignmentShouldBeJoined.cs").Verify();
-
-    [TestMethod]
-    public void LocalVariableDeclarationAssignmentShouldBeJoined_CSharp7_9() =>
-        verifier.AddPaths("LocalVariableDeclarationAssignmentShouldBeJoined.CSharp7-9.cs")
-            .WithOptions(LanguageOptions.Between(LanguageVersion.CSharp7, LanguageVersion.CSharp9))
-            .Verify();
 
 #if NET
 

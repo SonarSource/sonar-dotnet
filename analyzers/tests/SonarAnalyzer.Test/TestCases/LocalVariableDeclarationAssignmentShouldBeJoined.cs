@@ -237,6 +237,32 @@ class LocalVariableDeclarationAssignmentShouldBeJoined
         (_, y) = (1, 2);
     }
 
+    void MixedDeconstruction()
+    {
+        int y = 0;
+        int x;                      // Compliant - y is already declared https://sonarsource.atlassian.net/browse/NET-4775
+        (x, y) = (1, 2);
+    }
+
+    void MixedDeconstructionWithDiscard()
+    {
+        int y = 0;
+        int x;                      // Compliant - y is already declared https://sonarsource.atlassian.net/browse/NET-4775
+        (x, y, _) = (1, 2, 3);
+    }
+
+    void MixedDeconstructionWithOutParameter(out int existing)
+    {
+        int declared;               // Compliant - existing is an out parameter https://sonarsource.atlassian.net/browse/NET-4775
+        (declared, existing) = (1, 2);
+    }
+
+    void MixedDeconstructionWithField()
+    {
+        int a;                      // Compliant - x is a field https://sonarsource.atlassian.net/browse/NET-4775
+        (a, x) = (1, 2);
+    }
+
     unsafe void PointerType(int value)
     {
         int* p;                     // Compliant - pointer type

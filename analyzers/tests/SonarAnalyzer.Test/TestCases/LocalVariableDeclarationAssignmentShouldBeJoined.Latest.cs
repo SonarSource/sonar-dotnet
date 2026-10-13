@@ -26,15 +26,8 @@ class LocalVariableDeclarationAssignmentShouldBeJoined
     void TupleDeconstruction()
     {
         int x;                                    // Compliant - next statement is a declaration
-        string s;                                 // Noncompliant
+        string s;                                 // Compliant - x is already declared, mixed deconstruction https://sonarsource.atlassian.net/browse/NET-4775
         (x, s) = (1, "a");
-    }
-
-    void MixedDeconstruction()
-    {
-        int y = 0;
-        int x;                                    // Noncompliant - can be joined into "(int x, y) = ..." since C# 10
-        (x, y) = (1, 2);
     }
 
     void SpanLocal(int[] array)
