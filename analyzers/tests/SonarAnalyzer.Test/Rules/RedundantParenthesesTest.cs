@@ -18,17 +18,26 @@
 using CS = SonarAnalyzer.CSharp.Rules;
 using VB = SonarAnalyzer.VisualBasic.Rules;
 
-namespace SonarAnalyzer.Test.Rules
-{
-    [TestClass]
-    public class RedundantParenthesesTest
-    {
-        [TestMethod]
-        public void RedundantParentheses_CS() =>
-            new VerifierBuilder<CS.RedundantParentheses>().AddPaths("RedundantParenthesesExpression.cs").Verify();
+namespace SonarAnalyzer.Test.Rules;
 
-        [TestMethod]
-        public void RedundantParentheses_VB() =>
-            new VerifierBuilder<VB.RedundantParentheses>().AddPaths("RedundantParentheses.vb").Verify();
+[TestClass]
+public class RedundantParenthesesTest
+{
+    [TestMethod]
+    public void RedundantParentheses_CS() =>
+        new VerifierBuilder<CS.RedundantParentheses>().AddPaths("RedundantParenthesesExpression.cs").Verify();
+
+    [TestMethod]
+    public void RedundantParentheses_CodeFix_CS()
+    {
+        var builder = new VerifierBuilder<CS.RedundantParentheses>().WithOptions(LanguageOptions.FromCSharp9).AddPaths("RedundantParenthesesExpression.CodeFix.cs");
+        builder.Verify();
+        builder.WithCodeFix<CS.RedundantParenthesesCodeFix>()
+            .WithCodeFixedPaths("RedundantParenthesesExpression.CodeFix.Fixed.cs")
+            .VerifyCodeFix();
     }
+
+    [TestMethod]
+    public void RedundantParentheses_VB() =>
+        new VerifierBuilder<VB.RedundantParentheses>().AddPaths("RedundantParentheses.vb").Verify();
 }
