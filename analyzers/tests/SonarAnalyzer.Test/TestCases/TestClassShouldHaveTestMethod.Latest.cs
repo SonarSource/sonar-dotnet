@@ -35,6 +35,23 @@
     }
 
     [TestClass]
+    record ConditionalTestSuite
+    {
+#if DEBUG
+        [TestMethod]
+        public void Method() { }
+#endif
+    }
+
+    [TestClass]
+    class NullableDirectiveWithoutTests // Noncompliant
+    {
+#nullable enable
+        public void Helper() { }
+#nullable restore
+    }
+
+    [TestClass]
     record PositionalRecord(string SomeProperty)
     {
         [TestMethod]

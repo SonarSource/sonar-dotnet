@@ -70,13 +70,13 @@ internal static class SyntaxNodeExtensions
             }
         }
 
-        public bool IsInConditionalDebug(SemanticModel model)
-        {
-            var method = node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
-                ? model.GetDeclaredSymbol(containingMethod)
-                : null;
-            return method.IsConditionalDebugMethod;
-        }
+        public IReadOnlyList<ConditionalCompilationRegion> ConditionalCompilationRegions() =>
+            node.SyntaxTree.ConditionalCompilationRegions.Where(x => x.Range.Span.OverlapsWith(node.FullSpan)).ToList();
+
+        public bool IsInConditionalDebug(SemanticModel model) =>
+            node.FirstAncestorOrSelf<MethodDeclarationSyntax>() is { } containingMethod
+            && model.GetDeclaredSymbol(containingMethod) is { } method
+            && method.IsConditionalDebugMethod;
     }
 
     private static string FindDirectiveName(BranchingDirectiveTriviaSyntax directiveTriviaSyntax) =>
@@ -105,23 +105,18 @@ internal static class SyntaxNodeExtensions
         return walker.SafeVisit(root) ? walker.CollectedDirectives : [];
     }
 
-    /// <summary>
-    /// Collects all of the #if, #else, #elsif and #endif directives occuring in the
-    /// syntax tree up to the specified node
-    /// </summary>
     private sealed class BranchingDirectiveCollector : SafeCSharpSyntaxWalker
     {
         private readonly SyntaxNode terminatingNode;
         private bool found;
 
-        public List<DirectiveTriviaSyntax> CollectedDirectives { get; } = new();
+        public List<DirectiveTriviaSyntax> CollectedDirectives { get; } = [];
 
         public BranchingDirectiveCollector(SyntaxNode terminatingNode) : base(SyntaxWalkerDepth.StructuredTrivia) =>
             this.terminatingNode = terminatingNode;
 
         public override void Visit(SyntaxNode node)
         {
-            // Stop traversing once we've walked down to the terminating node
             if (found)
             {
                 return;

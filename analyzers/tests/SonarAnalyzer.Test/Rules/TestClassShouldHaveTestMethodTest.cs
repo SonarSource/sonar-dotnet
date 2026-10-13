@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.CSharp;
 using SonarAnalyzer.CSharp.Rules;
 using static SonarAnalyzer.TestFramework.MetadataReferences.NugetPackageVersions;
 
@@ -24,6 +25,129 @@ namespace SonarAnalyzer.Test.Rules;
 public class TestClassShouldHaveTestMethodTest
 {
     private readonly VerifierBuilder builder = new VerifierBuilder<TestClassShouldHaveTestMethod>();
+
+    [TestMethod]
+    [DataRow(false)]
+    [DataRow(true)]
+    public void TestClassShouldHaveTestMethod_Preprocessor(bool defineSymbols) =>
+        builder
+            .AddPaths("TestClassShouldHaveTestMethod.Preprocessor.cs")
+            .AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                [TestClass]
+                public partial class PartialTests { }
+                """)
+            .WithOptions([new CSharpParseOptions(LanguageVersion.CSharp7, preprocessorSymbols: defineSymbols ? ["NET", "DEBUG", "CUSTOM"] : [])])
+            .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV3)
+            .AddReferences(NuGetMetadataReference.NUnit(NUnit.Ver3Latest))
+            .Verify();
+
+    [TestMethod]
+    public void TestClassShouldHaveTestMethod_Preprocessor_RegionStartsBeforeType() =>
+        builder
+            .AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                #if DEBUG
+                public class Sibling { }
+
+                [TestClass]
+                public class CrossBoundaryBodyHidden // Noncompliant
+                {
+                    public void Helper()
+                    {
+                #else
+                [TestClass]
+                public class CrossBoundaryBodyHidden
+                {
+                    public void Helper()
+                    {
+                        System.Console.WriteLine("hidden");
+                #endif
+                    }
+                }
+                """)
+            .WithOptions([new CSharpParseOptions(LanguageVersion.CSharp7, preprocessorSymbols: ["DEBUG"])])
+            .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV3)
+            .Verify();
+
+    [TestMethod]
+    [DataRow(false)]
+    [DataRow(true)]
+    public void TestClassShouldHaveTestMethod_Preprocessor_RegionStartsBeforeType_WholeClassSwap(bool defineDebug) =>
+        builder
+            .AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                #if DEBUG
+                public class Sibling { }
+
+                [TestClass]
+                public class CrossBoundaryWholeClassSwap
+                {
+                    public void Helper() { }
+                #else
+                [TestClass]
+                public class CrossBoundaryWholeClassSwap
+                {
+                    [TestMethod]
+                    public void Test() { }
+                #endif
+                }
+                """)
+            .WithOptions([new CSharpParseOptions(LanguageVersion.CSharp7, preprocessorSymbols: defineDebug ? ["DEBUG"] : [])])
+            .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV3)
+            .VerifyNoIssues();
+
+    [TestMethod]
+    public void TestClassShouldHaveTestMethod_Preprocessor_SharedClosingBrace_KnownLimitation() =>
+        builder
+            .AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                #if DEBUG
+                public class Sibling { }
+
+                [TestClass]
+                public class CrossBoundaryHiddenTest // Noncompliant FP: the shared closing brace makes the region cut through the active member.
+                {
+                    public void Helper()
+                    {
+                #else
+                [TestClass]
+                public class CrossBoundaryHiddenTest
+                {
+                    [TestMethod]
+                    public void Test()
+                    {
+                #endif
+                    }
+                }
+                """)
+            .WithOptions([new CSharpParseOptions(LanguageVersion.CSharp7, preprocessorSymbols: ["DEBUG"])])
+            .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV3)
+            .Verify();
+
+    [TestMethod]
+    public void TestClassShouldHaveTestMethod_Preprocessor_InactiveHelperInUnrelatedBaseClass() =>
+        builder
+            .AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                public class Base
+                {
+                #if DEBUG
+                    private void SomeUnrelatedHelper() { }
+                #endif
+                }
+
+                [TestClass]
+                public class Derived : Base { } // Exempt: inactive base members might be tests in another compilation.
+                """)
+            .WithOptions([new CSharpParseOptions(LanguageVersion.CSharp7, preprocessorSymbols: [])])
+            .AddReferences(NuGetMetadataReference.MSTestTestFrameworkV3)
+            .VerifyNoIssues();
 
     [TestMethod]
     [DataRow(NUnit.Ver25)]

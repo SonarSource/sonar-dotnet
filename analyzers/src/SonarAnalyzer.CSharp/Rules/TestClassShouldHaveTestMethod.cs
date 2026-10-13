@@ -15,6 +15,8 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using Microsoft.CodeAnalysis.Text;
+
 namespace SonarAnalyzer.CSharp.Rules;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
@@ -52,7 +54,7 @@ public sealed class TestClassShouldHaveTestMethod : SonarDiagnosticAnalyzer
             SyntaxKindEx.RecordDeclaration);
 
     private static bool HasAnyTestMethod(INamespaceOrTypeSymbol symbol) =>
-        symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.IsTestMethod);
+        symbol.GetMembers().OfType<IMethodSymbol>().Any(x => x.IsTestMethod);
 
     private static bool IsViolatingRule(INamedTypeSymbol symbol) =>
         symbol.IsTestClass
@@ -60,9 +62,44 @@ public sealed class TestClassShouldHaveTestMethod : SonarDiagnosticAnalyzer
 
     private static bool IsExceptionToTheRule(ITypeSymbol symbol) =>
         symbol.IsAbstract
-        || symbol.SelfAndBaseTypes.Any(HasAnyTestMethod)
+        // Inactive declarations may contain inherited tests, even when the base type is not a test class.
+        || symbol.SelfAndBaseTypes.Any(x => HasAnyTestMethod(x) || HasInactiveMemberDeclarations(x))
         || HasSetupOrCleanupAttributes(symbol);
 
+    private static bool HasInactiveMemberDeclarations(ITypeSymbol symbol) =>
+        symbol.DeclaringSyntaxReferences.Any(x => x.GetSyntax() is TypeDeclarationSyntax type && ContainsInactiveMemberDeclarations(type));
+
+    private static bool ContainsInactiveMemberDeclarations(TypeDeclarationSyntax type)
+    {
+        if (!type.ContainsDirectives)
+        {
+            return false;
+        }
+        var body = TextSpan.FromBounds(type.OpenBraceToken.Span.End, type.CloseBraceToken.SpanStart);
+        var regions = type.ConditionalCompilationRegions()
+            .Where(x => body.OverlapsWith(x.Range.Span) && !x.Range.Span.Contains(type.Span))
+            .ToList();
+        var declarationSpans = DeclarationSpans(type);
+        var regionsCuttingDeclarations = regions.Where(x => CutsThroughDeclaration(x, declarationSpans)).ToList();
+        return regions.SelectMany(x => x.DisabledSpans).Any(x => !regionsCuttingDeclarations.Any(y => y.Range.Span.Contains(x)));
+    }
+
+    private static List<TextSpan> DeclarationSpans(TypeDeclarationSyntax type) =>
+        type.Members.Select(DeclarationSpan)
+            .Concat(type.DescendantNodes().OfType<AttributeArgumentListSyntax>().Select(x => x.Span))
+            .ToList();
+
+    private static TextSpan DeclarationSpan(MemberDeclarationSyntax member)
+    {
+        var declarationStart = member.ChildNodesAndTokens().FirstOrDefault(x => !x.IsKind(SyntaxKind.AttributeList));
+        return declarationStart.IsKind(SyntaxKind.None) ? member.Span : TextSpan.FromBounds(declarationStart.SpanStart, member.Span.End);
+    }
+
+    // An active member sharing its closing brace with an inactive alternative extends past the region.
+    // Such alternatives are excluded too: spans alone cannot distinguish hidden tests from hidden statements.
+    private static bool CutsThroughDeclaration(ConditionalCompilationRegion region, List<TextSpan> declarationSpans) =>
+        declarationSpans.Any(x => region.Range.Span.OverlapsPartially(x));
+
     private static bool HasSetupOrCleanupAttributes(INamespaceOrTypeSymbol symbol) =>
-        symbol.GetMembers().OfType<IMethodSymbol>().Any(m => m.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
+        symbol.GetMembers().OfType<IMethodSymbol>().Any(x => x.GetAttributes(HandledSetupAndCleanUpAttributes).Any());
 }

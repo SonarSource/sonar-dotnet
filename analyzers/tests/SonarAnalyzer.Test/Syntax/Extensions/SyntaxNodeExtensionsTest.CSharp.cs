@@ -25,6 +25,8 @@ namespace SonarAnalyzer.Test.Syntax.Extensions;
 [TestClass]
 public class SyntaxNodeExtensionsTest
 {
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void NoDirectives()
     {
@@ -34,7 +36,7 @@ public class SyntaxNodeExtensionsTest
                 void Main(){}
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -74,7 +76,7 @@ public class SyntaxNodeExtensionsTest
 
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -85,7 +87,6 @@ public class SyntaxNodeExtensionsTest
     [TestMethod]
     public void ActiveBlocks_NestedIfs()
     {
-        // Arrange
         var source = """
             #define BLOCK1
             #define BLOCK2
@@ -114,7 +115,7 @@ public class SyntaxNodeExtensionsTest
 
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -153,7 +154,7 @@ public class SyntaxNodeExtensionsTest
 
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -186,7 +187,7 @@ public class SyntaxNodeExtensionsTest
             }
             #endif
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -208,7 +209,7 @@ public class SyntaxNodeExtensionsTest
             #endif
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -232,7 +233,7 @@ public class SyntaxNodeExtensionsTest
             #endif
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -257,7 +258,7 @@ public class SyntaxNodeExtensionsTest
                     void Main() {}
             #endif
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -282,7 +283,7 @@ public class SyntaxNodeExtensionsTest
                     void Main() {}
             #endif
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -310,7 +311,7 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -337,7 +338,7 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -363,7 +364,7 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -388,7 +389,7 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -429,7 +430,7 @@ public class SyntaxNodeExtensionsTest
 
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
@@ -459,11 +460,73 @@ public class SyntaxNodeExtensionsTest
                 }
             }
             """;
-        var node = GetMainNode(source);
+        var node = MainNode(source);
         var activeSections = node.ActiveConditionalCompilationSections;
 
         activeSections.Should().NotBeNull();
         activeSections.Should().BeEquivalentTo("BLOCK2");
+    }
+
+    [TestMethod]
+    public void ConditionalCompilationRegions_OnlyOverlappingRegions()
+    {
+        var source = """
+            #if DEBUG
+            class Before { }
+            #endif
+            class Between { }
+            class Sample
+            {
+            #if DEBUG
+                void Main() { }
+            #endif
+            }
+            #if DEBUG
+            class After { }
+            #endif
+            """;
+        var node = ClassNode(source, "Sample");
+
+        node.ConditionalCompilationRegions().Should().ContainSingle().Which.Range.Span.Start.Should().BeGreaterThan(node.SpanStart);
+    }
+
+    [TestMethod]
+    public void ConditionalCompilationRegions_RegionInLeadingTrivia()
+    {
+        var source = """
+            #if DEBUG
+            [System.Obsolete]
+            #endif
+            class Sample { }
+            """;
+        var node = ClassNode(source, "Sample");
+
+        node.ConditionalCompilationRegions().Should().ContainSingle().Which.HidesContent.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void ConditionalCompilationRegions_RegionStartsBeforeNode()
+    {
+        var source = """
+            #if DEBUG
+            class Sibling { }
+            class Sample
+            {
+                void Main()
+                {
+            #else
+            class Sample
+            {
+                void Main()
+                {
+                    System.Console.WriteLine();
+            #endif
+                }
+            }
+            """;
+        var node = ClassNode(source, "Sample", "DEBUG");
+
+        node.ConditionalCompilationRegions().Should().ContainSingle().Which.Range.Start.SpanStart.Should().BeLessThan(node.FullSpan.Start);
     }
 
     [TestMethod]
@@ -502,7 +565,7 @@ public class SyntaxNodeExtensionsTest
             }
             """;
 
-        var nodes = CSharpSyntaxTree.ParseText(code).GetRoot().DescendantNodes().ToArray();
+        var nodes = CSharpSyntaxTree.ParseText(code, cancellationToken: TestContext.CancellationToken).GetRoot(TestContext.CancellationToken).DescendantNodes().ToArray();
         Assert<AliasQualifiedNameSyntax>("System");
         Assert<ArrayTypeSyntax>("byte");
         Assert<BaseTypeDeclarationSyntax>("Example", "MyEnum", "MyRefStruct");
@@ -511,7 +574,11 @@ public class SyntaxNodeExtensionsTest
         Assert<DelegateDeclarationSyntax>("MyDelegate");
         Assert<DestructorDeclarationSyntax>("Example");
         Assert<EnumMemberDeclarationSyntax>("MyEnumValue");
-        Assert<IdentifierNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Action", "fun", "input", "result", "Example", "Example");
+        Assert<IdentifierNameSyntax>(
+            [
+                "System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception",
+                "input", "ToString", "ToString", "Action", "fun", "input", "result", "Example", "Example"
+            ]);
         Assert<InvocationExpressionSyntax>("ToString", "ToString", string.Empty, "fun");
         Assert<MethodDeclarationSyntax>("Method");
         Assert<MemberAccessExpressionSyntax>("ToString");
@@ -524,7 +591,11 @@ public class SyntaxNodeExtensionsTest
         Assert<PointerTypeSyntax>("int");
         Assert<PredefinedTypeSyntax>("void", "int", "int", "int", "int", "int", "byte", "byte", "byte");
         Assert<QualifiedNameSyntax>("Collections", "MyNamespaceNested", "Exception", "Exception");
-        Assert<SimpleNameSyntax>("System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception", "input", "ToString", "ToString", "Func", "Action", "fun", "input", "result", "Example", "Example");
+        Assert<SimpleNameSyntax>(
+            [
+                "System", "C", "System", "Collections", "MyNamespace", "MyNamespaceNested", "T", "System", "Exception", "global", "System", "Exception",
+                "input", "ToString", "ToString", "Func", "Action", "fun", "input", "result", "Example", "Example"
+            ]);
         Assert<TypeParameterConstraintClauseSyntax>("T");
         Assert<TypeParameterSyntax>("T");
         Assert<UsingDirectiveSyntax>(string.Empty, "C");
@@ -540,9 +611,15 @@ public class SyntaxNodeExtensionsTest
     public void IsNullLiteral_Null_CS() =>
         SyntaxNodeExtensionsCSharp.IsNullLiteral(null).Should().BeFalse();
 
-    private static MethodDeclarationSyntax GetMainNode(string source) =>
+    private static MethodDeclarationSyntax MainNode(string source) =>
         CSharpSyntaxTree.ParseText(source).GetRoot()
             .DescendantNodes()
             .OfType<MethodDeclarationSyntax>()
             .First(x => x.Identifier.ValueText == "Main");
+
+    private static ClassDeclarationSyntax ClassNode(string source, string name, params string[] preprocessorSymbols) =>
+        CSharpSyntaxTree.ParseText(source, new CSharpParseOptions(preprocessorSymbols: preprocessorSymbols)).GetRoot()
+            .DescendantNodes()
+            .OfType<ClassDeclarationSyntax>()
+            .Single(x => x.Identifier.ValueText == name);
 }
