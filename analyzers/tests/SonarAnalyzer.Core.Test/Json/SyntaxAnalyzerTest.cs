@@ -28,7 +28,6 @@ public class SyntaxAnalyzerTest
     [DataRow("[true]", true)]
     [DataRow("[false]", false)]
     [DataRow("[42]", 42)]
-    [DataRow("[42.42]", 42.42)]
     [DataRow("[\"Lorem Ipsum\"]", "Lorem Ipsum")]
     public void StandaloneValue(string source, object expected)
     {
@@ -39,6 +38,18 @@ public class SyntaxAnalyzerTest
         var value = ret.Single();
         value.Kind.Should().Be(Kind.Value);
         value.Value.Should().Be(expected);
+    }
+
+    [TestMethod]
+    public void StandaloneValue_Decimal()
+    {
+        var sut = new SyntaxAnalyzer("[42.42]");
+        var ret = sut.Parse();
+        ret.Kind.Should().Be(Kind.List);
+        ret.Should().ContainSingle();
+        var value = ret.Single();
+        value.Kind.Should().Be(Kind.Value);
+        value.Value.Should().Be(42.42M);
     }
 
     [TestMethod]

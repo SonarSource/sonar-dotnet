@@ -38,6 +38,7 @@ public class SdkPathProviderTest
     public void RazorSourceGenerator_LoadsCorrectAssembly() =>
         RazorSourceGenerator.GetAssembly().GetName().Name.Should().Be("Microsoft.CodeAnalysis.Razor.Compiler");
 
+    [Ignore("FixMe: SDK pinned to 10.0.204 until https://sonarsource.atlassian.net/browse/NET-3786 is fixed. Until then this test has to be skipped.")]
     [TestMethod]
     public void LatestSdkVersion_ReturnsAssemblyMajor()
     {

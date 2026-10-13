@@ -24,6 +24,7 @@ public readonly struct SyntaxContextReceiverCreatorWrapper : IWrapper, IEquatabl
     private static readonly ConcurrentDictionary<Type, bool> CanWrapCache = new();
     private readonly Object wrappedInstance;
 
+    private static readonly Func<Object, bool> HasSingleTargetAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "HasSingleTarget");
     private static readonly Func<Object, MethodInfo> MethodAccessor = AccessorFactory.CreateProperty<Func<Object, MethodInfo>>(WrappedType, "Method");
     private static readonly Func<Object, object> TargetAccessor = AccessorFactory.CreateProperty<Func<Object, object>>(WrappedType, "Target");
 
@@ -58,6 +59,7 @@ public readonly struct SyntaxContextReceiverCreatorWrapper : IWrapper, IEquatabl
     public static bool operator !=(SyntaxContextReceiverCreatorWrapper left, SyntaxContextReceiverCreatorWrapper right) =>
         !Equals(left.wrappedInstance, right.wrappedInstance);
 
+    public bool HasSingleTarget => HasSingleTargetAccessor(wrappedInstance);
     public MethodInfo Method => MethodAccessor(wrappedInstance);
     public object Target => TargetAccessor(wrappedInstance);
 
