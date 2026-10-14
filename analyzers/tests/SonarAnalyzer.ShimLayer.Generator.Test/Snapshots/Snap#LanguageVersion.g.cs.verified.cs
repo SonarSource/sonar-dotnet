@@ -33,6 +33,7 @@ public static class LanguageVersionEx
     public const LanguageVersion CSharp12 = (LanguageVersion)1200;
     public const LanguageVersion CSharp13 = (LanguageVersion)1300;
     public const LanguageVersion CSharp14 = (LanguageVersion)1400;
+    public const LanguageVersion CSharp15 = (LanguageVersion)1500;
     public const LanguageVersion LatestMajor = (LanguageVersion)2147483645;
     public const LanguageVersion Preview = (LanguageVersion)2147483646;
     public const LanguageVersion Latest = (LanguageVersion)2147483647;

@@ -45,6 +45,7 @@ public readonly struct OperationWalkerWrapper : IWrapper, IEquatable<OperationWa
     private static readonly Action<Object, ICoalesceAssignmentOperationWrapper> VisitCoalesceAssignmentAccessor = AccessorFactory.CreateMethod<Action<Object, ICoalesceAssignmentOperationWrapper>>(WrappedType, "VisitCoalesceAssignment");
     private static readonly Action<Object, ICollectionElementInitializerOperationWrapper> VisitCollectionElementInitializerAccessor = AccessorFactory.CreateMethod<Action<Object, ICollectionElementInitializerOperationWrapper>>(WrappedType, "VisitCollectionElementInitializer");
     private static readonly Action<Object, ICollectionExpressionOperationWrapper> VisitCollectionExpressionAccessor = AccessorFactory.CreateMethod<Action<Object, ICollectionExpressionOperationWrapper>>(WrappedType, "VisitCollectionExpression");
+    private static readonly Action<Object, ICollectionExpressionElementsPlaceholderOperationWrapper> VisitCollectionExpressionElementsPlaceholderAccessor = AccessorFactory.CreateMethod<Action<Object, ICollectionExpressionElementsPlaceholderOperationWrapper>>(WrappedType, "VisitCollectionExpressionElementsPlaceholder");
     private static readonly Action<Object, ICompoundAssignmentOperationWrapper> VisitCompoundAssignmentAccessor = AccessorFactory.CreateMethod<Action<Object, ICompoundAssignmentOperationWrapper>>(WrappedType, "VisitCompoundAssignment");
     private static readonly Action<Object, IConditionalOperationWrapper> VisitConditionalAccessor = AccessorFactory.CreateMethod<Action<Object, IConditionalOperationWrapper>>(WrappedType, "VisitConditional");
     private static readonly Action<Object, IConditionalAccessOperationWrapper> VisitConditionalAccessAccessor = AccessorFactory.CreateMethod<Action<Object, IConditionalAccessOperationWrapper>>(WrappedType, "VisitConditionalAccess");
@@ -199,6 +200,7 @@ public readonly struct OperationWalkerWrapper : IWrapper, IEquatable<OperationWa
     [System.ObsoleteAttribute("ICollectionElementInitializerOperation has been replaced with IInvocationOperation and IDynamicInvocationOperation", true)]
     public void VisitCollectionElementInitializer(ICollectionElementInitializerOperationWrapper operation) => VisitCollectionElementInitializerAccessor(wrappedInstance, operation);
     public void VisitCollectionExpression(ICollectionExpressionOperationWrapper operation) => VisitCollectionExpressionAccessor(wrappedInstance, operation);
+    public void VisitCollectionExpressionElementsPlaceholder(ICollectionExpressionElementsPlaceholderOperationWrapper operation) => VisitCollectionExpressionElementsPlaceholderAccessor(wrappedInstance, operation);
     public void VisitCompoundAssignment(ICompoundAssignmentOperationWrapper operation) => VisitCompoundAssignmentAccessor(wrappedInstance, operation);
     public void VisitConditional(IConditionalOperationWrapper operation) => VisitConditionalAccessor(wrappedInstance, operation);
     public void VisitConditionalAccess(IConditionalAccessOperationWrapper operation) => VisitConditionalAccessAccessor(wrappedInstance, operation);

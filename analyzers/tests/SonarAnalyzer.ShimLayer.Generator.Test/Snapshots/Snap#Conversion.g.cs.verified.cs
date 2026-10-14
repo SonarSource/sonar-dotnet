@@ -35,6 +35,7 @@ public static class ConversionShimExtensions
     private static readonly Func<Conversion, bool> IsThrowAccessor = AccessorFactory.CreateProperty<Func<Conversion, bool>>(WrappedType, "IsThrow");
     private static readonly Func<Conversion, bool> IsTupleConversionAccessor = AccessorFactory.CreateProperty<Func<Conversion, bool>>(WrappedType, "IsTupleConversion");
     private static readonly Func<Conversion, bool> IsTupleLiteralConversionAccessor = AccessorFactory.CreateProperty<Func<Conversion, bool>>(WrappedType, "IsTupleLiteralConversion");
+    private static readonly Func<Conversion, bool> IsUnionAccessor = AccessorFactory.CreateProperty<Func<Conversion, bool>>(WrappedType, "IsUnion");
 
     private static readonly Func<Conversion, CommonConversionWrapper> ToCommonConversionAccessor = AccessorFactory.CreateMethod<Func<Conversion, CommonConversionWrapper>>(WrappedType, "ToCommonConversion");
 
@@ -53,6 +54,7 @@ public static class ConversionShimExtensions
         public bool IsThrow => IsThrowAccessor(wrappedInstance);
         public bool IsTupleConversion => IsTupleConversionAccessor(wrappedInstance);
         public bool IsTupleLiteralConversion => IsTupleLiteralConversionAccessor(wrappedInstance);
+        public bool IsUnion => IsUnionAccessor(wrappedInstance);
 
         public CommonConversionWrapper ToCommonConversion() => ToCommonConversionAccessor(wrappedInstance);
     }

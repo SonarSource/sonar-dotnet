@@ -25,6 +25,7 @@ public readonly struct ICollectionExpressionOperationWrapper : IOperationWrapper
     private readonly IOperation wrappedInstance;
 
     private static readonly Func<IOperation, IEnumerable<IOperation>> ChildrenAccessor = AccessorFactory.CreateProperty<Func<IOperation, IEnumerable<IOperation>>>(WrappedType, "Children");
+    private static readonly Func<IOperation, ImmutableArray<IOperation>> ConstructArgumentsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "ConstructArguments");
     private static readonly Func<IOperation, IMethodSymbol> ConstructMethodAccessor = AccessorFactory.CreateProperty<Func<IOperation, IMethodSymbol>>(WrappedType, "ConstructMethod");
     private static readonly Func<IOperation, ImmutableArray<IOperation>> ElementsAccessor = AccessorFactory.CreateProperty<Func<IOperation, ImmutableArray<IOperation>>>(WrappedType, "Elements");
     private static readonly Func<IOperation, bool> IsImplicitAccessor = AccessorFactory.CreateProperty<Func<IOperation, bool>>(WrappedType, "IsImplicit");
@@ -64,6 +65,7 @@ public readonly struct ICollectionExpressionOperationWrapper : IOperationWrapper
 
     [System.ObsoleteAttribute("This API has performance penalties, please use ChildOperations instead.", false)]
     public IEnumerable<IOperation> Children => ChildrenAccessor(wrappedInstance);
+    public ImmutableArray<IOperation> ConstructArguments => ConstructArgumentsAccessor(wrappedInstance);
     public IMethodSymbol ConstructMethod => ConstructMethodAccessor(wrappedInstance);
     public ImmutableArray<IOperation> Elements => ElementsAccessor(wrappedInstance);
     public bool IsImplicit => IsImplicitAccessor(wrappedInstance);

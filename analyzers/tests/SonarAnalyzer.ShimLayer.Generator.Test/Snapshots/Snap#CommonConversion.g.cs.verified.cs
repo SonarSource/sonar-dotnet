@@ -31,6 +31,7 @@ public readonly struct CommonConversionWrapper : IWrapper, IEquatable<CommonConv
     private static readonly Func<Object, bool> IsNullableAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsNullable");
     private static readonly Func<Object, bool> IsNumericAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsNumeric");
     private static readonly Func<Object, bool> IsReferenceAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsReference");
+    private static readonly Func<Object, bool> IsUnionAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsUnion");
     private static readonly Func<Object, bool> IsUserDefinedAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsUserDefined");
     private static readonly Func<Object, IMethodSymbol> MethodSymbolAccessor = AccessorFactory.CreateProperty<Func<Object, IMethodSymbol>>(WrappedType, "MethodSymbol");
 
@@ -64,6 +65,7 @@ public readonly struct CommonConversionWrapper : IWrapper, IEquatable<CommonConv
     public bool IsNullable => IsNullableAccessor(wrappedInstance);
     public bool IsNumeric => IsNumericAccessor(wrappedInstance);
     public bool IsReference => IsReferenceAccessor(wrappedInstance);
+    public bool IsUnion => IsUnionAccessor(wrappedInstance);
     public bool IsUserDefined => IsUserDefinedAccessor(wrappedInstance);
     public IMethodSymbol MethodSymbol => MethodSymbolAccessor(wrappedInstance);
 

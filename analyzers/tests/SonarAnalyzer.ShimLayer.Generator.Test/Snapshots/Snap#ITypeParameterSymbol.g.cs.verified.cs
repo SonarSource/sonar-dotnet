@@ -27,17 +27,22 @@ public static class ITypeParameterSymbolShimExtensions
     private static readonly Func<ITypeParameterSymbol, IParameterSymbol> ExtensionParameterAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, IParameterSymbol>>(WrappedType, "ExtensionParameter");
     private static readonly Func<ITypeParameterSymbol, bool> HasNotNullConstraintAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "HasNotNullConstraint");
     private static readonly Func<ITypeParameterSymbol, bool> HasUnmanagedTypeConstraintAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "HasUnmanagedTypeConstraint");
+    private static readonly Func<ITypeParameterSymbol, bool> IsClosedAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsClosed");
     private static readonly Func<ITypeParameterSymbol, bool> IsExtensionAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsExtension");
     private static readonly Func<ITypeParameterSymbol, bool> IsNativeIntegerTypeAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsNativeIntegerType");
     private static readonly Func<ITypeParameterSymbol, bool> IsReadOnlyAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsReadOnly");
     private static readonly Func<ITypeParameterSymbol, bool> IsRecordAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsRecord");
     private static readonly Func<ITypeParameterSymbol, bool> IsRefLikeTypeAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsRefLikeType");
     private static readonly Func<ITypeParameterSymbol, bool> IsTupleTypeAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsTupleType");
+    private static readonly Func<ITypeParameterSymbol, bool> IsUnionAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsUnion");
     private static readonly Func<ITypeParameterSymbol, bool> IsUnmanagedTypeAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "IsUnmanagedType");
     private static readonly Func<ITypeParameterSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, int>>(WrappedType, "MetadataToken");
     private static readonly Func<ITypeParameterSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
     private static readonly Func<ITypeParameterSymbol, NullableAnnotation> ReferenceTypeConstraintNullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, NullableAnnotation>>(WrappedType, "ReferenceTypeConstraintNullableAnnotation");
+    private static readonly Func<ITypeParameterSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
+    private static readonly Func<ITypeParameterSymbol, ImmutableArray<ITypeSymbol>> UnionCaseTypesAccessor = AccessorFactory.CreateProperty<Func<ITypeParameterSymbol, ImmutableArray<ITypeSymbol>>>(WrappedType, "UnionCaseTypes");
 
+    private static readonly Func<ITypeParameterSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper> GetClosedDerivedTypeInfoAccessor = AccessorFactory.CreateMethod<Func<ITypeParameterSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper>>(WrappedType, "GetClosedDerivedTypeInfo");
     private static readonly Func<ITypeParameterSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToDisplayPartsAccessor = AccessorFactory.CreateMethod<Func<ITypeParameterSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToDisplayParts");
     private static readonly Func<ITypeParameterSymbol, NullableFlowState, SymbolDisplayFormat, string> ToDisplayStringAccessor = AccessorFactory.CreateMethod<Func<ITypeParameterSymbol, NullableFlowState, SymbolDisplayFormat, string>>(WrappedType, "ToDisplayString");
     private static readonly Func<ITypeParameterSymbol, SemanticModel, NullableFlowState, int, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToMinimalDisplayPartsAccessor = AccessorFactory.CreateMethod<Func<ITypeParameterSymbol, SemanticModel, NullableFlowState, int, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToMinimalDisplayParts");
@@ -48,22 +53,27 @@ public static class ITypeParameterSymbolShimExtensions
     {
         public bool AllowsRefLikeType => AllowsRefLikeTypeAccessor(wrappedInstance);
         public ImmutableArray<NullableAnnotation> ConstraintNullableAnnotations => ConstraintNullableAnnotationsAccessor(wrappedInstance);
-        [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.ExtensionParameter instead.")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(wrappedInstance);
         public bool HasNotNullConstraint => HasNotNullConstraintAccessor(wrappedInstance);
         public bool HasUnmanagedTypeConstraint => HasUnmanagedTypeConstraintAccessor(wrappedInstance);
-        [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.IsExtension instead.")]
+        public bool IsClosed => IsClosedAccessor(wrappedInstance);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         public bool IsExtension => IsExtensionAccessor(wrappedInstance);
         public bool IsNativeIntegerType => IsNativeIntegerTypeAccessor(wrappedInstance);
         public bool IsReadOnly => IsReadOnlyAccessor(wrappedInstance);
         public bool IsRecord => IsRecordAccessor(wrappedInstance);
         public bool IsRefLikeType => IsRefLikeTypeAccessor(wrappedInstance);
         public bool IsTupleType => IsTupleTypeAccessor(wrappedInstance);
+        public bool IsUnion => IsUnionAccessor(wrappedInstance);
         public bool IsUnmanagedType => IsUnmanagedTypeAccessor(wrappedInstance);
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
         public NullableAnnotation ReferenceTypeConstraintNullableAnnotation => ReferenceTypeConstraintNullableAnnotationAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
+        public ImmutableArray<ITypeSymbol> UnionCaseTypes => UnionCaseTypesAccessor(wrappedInstance);
 
+        public ClosedDerivedTypeInfoWrapper GetClosedDerivedTypeInfo(CancellationToken cancellationToken) => GetClosedDerivedTypeInfoAccessor(wrappedInstance, cancellationToken);
         public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
         public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);
         public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => ToMinimalDisplayPartsAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);

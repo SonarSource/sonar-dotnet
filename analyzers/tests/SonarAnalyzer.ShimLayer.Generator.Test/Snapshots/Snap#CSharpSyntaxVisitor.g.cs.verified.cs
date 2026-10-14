@@ -79,8 +79,11 @@ public static class CSharpSyntaxVisitorShimExtensions
     private static readonly Action<CSharpSyntaxVisitor, TupleTypeSyntaxWrapper> VisitTupleTypeAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, TupleTypeSyntaxWrapper>>(WrappedType, "VisitTupleType");
     private static readonly Action<CSharpSyntaxVisitor, TypePatternSyntaxWrapper> VisitTypePatternAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, TypePatternSyntaxWrapper>>(WrappedType, "VisitTypePattern");
     private static readonly Action<CSharpSyntaxVisitor, UnaryPatternSyntaxWrapper> VisitUnaryPatternAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, UnaryPatternSyntaxWrapper>>(WrappedType, "VisitUnaryPattern");
+    private static readonly Action<CSharpSyntaxVisitor, UnionDeclarationSyntaxWrapper> VisitUnionDeclarationAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, UnionDeclarationSyntaxWrapper>>(WrappedType, "VisitUnionDeclaration");
+    private static readonly Action<CSharpSyntaxVisitor, UnsafeExpressionSyntaxWrapper> VisitUnsafeExpressionAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, UnsafeExpressionSyntaxWrapper>>(WrappedType, "VisitUnsafeExpression");
     private static readonly Action<CSharpSyntaxVisitor, VarPatternSyntaxWrapper> VisitVarPatternAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, VarPatternSyntaxWrapper>>(WrappedType, "VisitVarPattern");
     private static readonly Action<CSharpSyntaxVisitor, WhenClauseSyntaxWrapper> VisitWhenClauseAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, WhenClauseSyntaxWrapper>>(WrappedType, "VisitWhenClause");
+    private static readonly Action<CSharpSyntaxVisitor, WithElementSyntaxWrapper> VisitWithElementAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, WithElementSyntaxWrapper>>(WrappedType, "VisitWithElement");
     private static readonly Action<CSharpSyntaxVisitor, WithExpressionSyntaxWrapper> VisitWithExpressionAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxVisitor, WithExpressionSyntaxWrapper>>(WrappedType, "VisitWithExpression");
 
     extension(CSharpSyntaxVisitor wrappedInstance)
@@ -142,8 +145,11 @@ public static class CSharpSyntaxVisitorShimExtensions
         public void VisitTupleType(TupleTypeSyntaxWrapper node) => VisitTupleTypeAccessor(wrappedInstance, node);
         public void VisitTypePattern(TypePatternSyntaxWrapper node) => VisitTypePatternAccessor(wrappedInstance, node);
         public void VisitUnaryPattern(UnaryPatternSyntaxWrapper node) => VisitUnaryPatternAccessor(wrappedInstance, node);
+        public void VisitUnionDeclaration(UnionDeclarationSyntaxWrapper node) => VisitUnionDeclarationAccessor(wrappedInstance, node);
+        public void VisitUnsafeExpression(UnsafeExpressionSyntaxWrapper node) => VisitUnsafeExpressionAccessor(wrappedInstance, node);
         public void VisitVarPattern(VarPatternSyntaxWrapper node) => VisitVarPatternAccessor(wrappedInstance, node);
         public void VisitWhenClause(WhenClauseSyntaxWrapper node) => VisitWhenClauseAccessor(wrappedInstance, node);
+        public void VisitWithElement(WithElementSyntaxWrapper node) => VisitWithElementAccessor(wrappedInstance, node);
         public void VisitWithExpression(WithExpressionSyntaxWrapper node) => VisitWithExpressionAccessor(wrappedInstance, node);
     }
 }

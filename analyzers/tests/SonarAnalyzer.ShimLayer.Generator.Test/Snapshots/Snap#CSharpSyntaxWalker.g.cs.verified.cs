@@ -79,8 +79,11 @@ public static class CSharpSyntaxWalkerShimExtensions
     private static readonly Action<CSharpSyntaxWalker, TupleTypeSyntaxWrapper> VisitTupleTypeAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, TupleTypeSyntaxWrapper>>(WrappedType, "VisitTupleType");
     private static readonly Action<CSharpSyntaxWalker, TypePatternSyntaxWrapper> VisitTypePatternAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, TypePatternSyntaxWrapper>>(WrappedType, "VisitTypePattern");
     private static readonly Action<CSharpSyntaxWalker, UnaryPatternSyntaxWrapper> VisitUnaryPatternAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, UnaryPatternSyntaxWrapper>>(WrappedType, "VisitUnaryPattern");
+    private static readonly Action<CSharpSyntaxWalker, UnionDeclarationSyntaxWrapper> VisitUnionDeclarationAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, UnionDeclarationSyntaxWrapper>>(WrappedType, "VisitUnionDeclaration");
+    private static readonly Action<CSharpSyntaxWalker, UnsafeExpressionSyntaxWrapper> VisitUnsafeExpressionAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, UnsafeExpressionSyntaxWrapper>>(WrappedType, "VisitUnsafeExpression");
     private static readonly Action<CSharpSyntaxWalker, VarPatternSyntaxWrapper> VisitVarPatternAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, VarPatternSyntaxWrapper>>(WrappedType, "VisitVarPattern");
     private static readonly Action<CSharpSyntaxWalker, WhenClauseSyntaxWrapper> VisitWhenClauseAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, WhenClauseSyntaxWrapper>>(WrappedType, "VisitWhenClause");
+    private static readonly Action<CSharpSyntaxWalker, WithElementSyntaxWrapper> VisitWithElementAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, WithElementSyntaxWrapper>>(WrappedType, "VisitWithElement");
     private static readonly Action<CSharpSyntaxWalker, WithExpressionSyntaxWrapper> VisitWithExpressionAccessor = AccessorFactory.CreateMethod<Action<CSharpSyntaxWalker, WithExpressionSyntaxWrapper>>(WrappedType, "VisitWithExpression");
 
     extension(CSharpSyntaxWalker wrappedInstance)
@@ -142,8 +145,11 @@ public static class CSharpSyntaxWalkerShimExtensions
         public void VisitTupleType(TupleTypeSyntaxWrapper node) => VisitTupleTypeAccessor(wrappedInstance, node);
         public void VisitTypePattern(TypePatternSyntaxWrapper node) => VisitTypePatternAccessor(wrappedInstance, node);
         public void VisitUnaryPattern(UnaryPatternSyntaxWrapper node) => VisitUnaryPatternAccessor(wrappedInstance, node);
+        public void VisitUnionDeclaration(UnionDeclarationSyntaxWrapper node) => VisitUnionDeclarationAccessor(wrappedInstance, node);
+        public void VisitUnsafeExpression(UnsafeExpressionSyntaxWrapper node) => VisitUnsafeExpressionAccessor(wrappedInstance, node);
         public void VisitVarPattern(VarPatternSyntaxWrapper node) => VisitVarPatternAccessor(wrappedInstance, node);
         public void VisitWhenClause(WhenClauseSyntaxWrapper node) => VisitWhenClauseAccessor(wrappedInstance, node);
+        public void VisitWithElement(WithElementSyntaxWrapper node) => VisitWithElementAccessor(wrappedInstance, node);
         public void VisitWithExpression(WithExpressionSyntaxWrapper node) => VisitWithExpressionAccessor(wrappedInstance, node);
     }
 }

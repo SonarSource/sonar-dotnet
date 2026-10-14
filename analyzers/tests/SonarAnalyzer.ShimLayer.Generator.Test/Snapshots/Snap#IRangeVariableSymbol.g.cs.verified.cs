@@ -23,9 +23,11 @@ public static class IRangeVariableSymbolShimExtensions
     private static readonly Type WrappedType = typeof(IRangeVariableSymbol);
 
     private static readonly Func<IRangeVariableSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IRangeVariableSymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<IRangeVariableSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IRangeVariableSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(IRangeVariableSymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

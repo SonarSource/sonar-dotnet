@@ -30,6 +30,7 @@ public static class IPropertySymbolShimExtensions
     private static readonly Func<IPropertySymbol, IPropertySymbol> PartialImplementationPartAccessor = AccessorFactory.CreateProperty<Func<IPropertySymbol, IPropertySymbol>>(WrappedType, "PartialImplementationPart");
     private static readonly Func<IPropertySymbol, ImmutableArray<CustomModifier>> RefCustomModifiersAccessor = AccessorFactory.CreateProperty<Func<IPropertySymbol, ImmutableArray<CustomModifier>>>(WrappedType, "RefCustomModifiers");
     private static readonly Func<IPropertySymbol, RefKind> RefKindAccessor = AccessorFactory.CreateProperty<Func<IPropertySymbol, RefKind>>(WrappedType, "RefKind");
+    private static readonly Func<IPropertySymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IPropertySymbol, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<IPropertySymbol, bool> ReturnsByRefAccessor = AccessorFactory.CreateProperty<Func<IPropertySymbol, bool>>(WrappedType, "ReturnsByRef");
     private static readonly Func<IPropertySymbol, bool> ReturnsByRefReadonlyAccessor = AccessorFactory.CreateProperty<Func<IPropertySymbol, bool>>(WrappedType, "ReturnsByRefReadonly");
 
@@ -45,6 +46,7 @@ public static class IPropertySymbolShimExtensions
         public IPropertySymbol PartialImplementationPart => PartialImplementationPartAccessor(wrappedInstance);
         public ImmutableArray<CustomModifier> RefCustomModifiers => RefCustomModifiersAccessor(wrappedInstance);
         public RefKind RefKind => RefKindAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
         public bool ReturnsByRef => ReturnsByRefAccessor(wrappedInstance);
         public bool ReturnsByRefReadonly => ReturnsByRefReadonlyAccessor(wrappedInstance);
 

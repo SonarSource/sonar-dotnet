@@ -83,8 +83,8 @@ internal static partial class NuGetMetadataFactory
             // We don't read and verify trustedSigners. These packages are stored in dedicated directories that are not used by regular NuGet restore.
             const string fileName = "NuGet.Config";
             var source = File.Exists(Path.Combine(Paths.AnalyzersRoot, fileName))
-                ? PackageSourceProvider.LoadPackageSources(Settings.LoadSpecificSettings(Paths.AnalyzersRoot, fileName)).Single()   // CI, or Sonar local machine
-                : new PackageSource("https://api.nuget.org/v3/index.json");                                                         // External contributor local machine, or public CI.
+                ? PackageSourceProvider.LoadPackageSources(Settings.LoadSpecificSettings(Paths.AnalyzersRoot, fileName)).Single(x => x.Name == "Repox")   // CI, or Sonar local machine
+                : new PackageSource("https://api.nuget.org/v3/index.json");                                                                               // External contributor local machine, or public CI.
 
             return await Repository.Factory.GetCoreV3(source).GetResourceAsync<FindPackageByIdResource>().ConfigureAwait(false);
         }

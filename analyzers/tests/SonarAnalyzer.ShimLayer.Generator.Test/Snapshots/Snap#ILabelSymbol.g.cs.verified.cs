@@ -23,9 +23,11 @@ public static class ILabelSymbolShimExtensions
     private static readonly Type WrappedType = typeof(ILabelSymbol);
 
     private static readonly Func<ILabelSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<ILabelSymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<ILabelSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<ILabelSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(ILabelSymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

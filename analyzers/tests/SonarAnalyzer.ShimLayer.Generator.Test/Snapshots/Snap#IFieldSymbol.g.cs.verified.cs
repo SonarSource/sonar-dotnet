@@ -31,6 +31,7 @@ public static class IFieldSymbolShimExtensions
     private static readonly Func<IFieldSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IFieldSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
     private static readonly Func<IFieldSymbol, ImmutableArray<CustomModifier>> RefCustomModifiersAccessor = AccessorFactory.CreateProperty<Func<IFieldSymbol, ImmutableArray<CustomModifier>>>(WrappedType, "RefCustomModifiers");
     private static readonly Func<IFieldSymbol, RefKind> RefKindAccessor = AccessorFactory.CreateProperty<Func<IFieldSymbol, RefKind>>(WrappedType, "RefKind");
+    private static readonly Func<IFieldSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IFieldSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(IFieldSymbol wrappedInstance)
     {
@@ -43,5 +44,6 @@ public static class IFieldSymbolShimExtensions
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
         public ImmutableArray<CustomModifier> RefCustomModifiers => RefCustomModifiersAccessor(wrappedInstance);
         public RefKind RefKind => RefKindAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

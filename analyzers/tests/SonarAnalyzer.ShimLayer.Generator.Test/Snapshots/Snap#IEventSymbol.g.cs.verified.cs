@@ -27,6 +27,7 @@ public static class IEventSymbolShimExtensions
     private static readonly Func<IEventSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IEventSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
     private static readonly Func<IEventSymbol, IEventSymbol> PartialDefinitionPartAccessor = AccessorFactory.CreateProperty<Func<IEventSymbol, IEventSymbol>>(WrappedType, "PartialDefinitionPart");
     private static readonly Func<IEventSymbol, IEventSymbol> PartialImplementationPartAccessor = AccessorFactory.CreateProperty<Func<IEventSymbol, IEventSymbol>>(WrappedType, "PartialImplementationPart");
+    private static readonly Func<IEventSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IEventSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(IEventSymbol wrappedInstance)
     {
@@ -35,5 +36,6 @@ public static class IEventSymbolShimExtensions
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
         public IEventSymbol PartialDefinitionPart => PartialDefinitionPartAccessor(wrappedInstance);
         public IEventSymbol PartialImplementationPart => PartialImplementationPartAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

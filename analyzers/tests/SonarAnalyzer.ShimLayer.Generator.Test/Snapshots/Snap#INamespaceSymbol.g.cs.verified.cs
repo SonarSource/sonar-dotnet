@@ -23,9 +23,11 @@ public static class INamespaceSymbolShimExtensions
     private static readonly Type WrappedType = typeof(INamespaceSymbol);
 
     private static readonly Func<INamespaceSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<INamespaceSymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<INamespaceSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<INamespaceSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(INamespaceSymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

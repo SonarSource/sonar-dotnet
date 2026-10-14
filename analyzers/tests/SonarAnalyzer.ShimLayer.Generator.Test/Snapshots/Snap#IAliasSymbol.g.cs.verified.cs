@@ -23,9 +23,11 @@ public static class IAliasSymbolShimExtensions
     private static readonly Type WrappedType = typeof(IAliasSymbol);
 
     private static readonly Func<IAliasSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IAliasSymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<IAliasSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IAliasSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(IAliasSymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

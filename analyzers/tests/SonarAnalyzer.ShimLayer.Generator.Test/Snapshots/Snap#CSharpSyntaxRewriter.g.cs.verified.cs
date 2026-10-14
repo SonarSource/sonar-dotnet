@@ -79,8 +79,11 @@ public static class CSharpSyntaxRewriterShimExtensions
     private static readonly Func<CSharpSyntaxRewriter, TupleTypeSyntaxWrapper, SyntaxNode> VisitTupleTypeAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, TupleTypeSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitTupleType");
     private static readonly Func<CSharpSyntaxRewriter, TypePatternSyntaxWrapper, SyntaxNode> VisitTypePatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, TypePatternSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitTypePattern");
     private static readonly Func<CSharpSyntaxRewriter, UnaryPatternSyntaxWrapper, SyntaxNode> VisitUnaryPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, UnaryPatternSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitUnaryPattern");
+    private static readonly Func<CSharpSyntaxRewriter, UnionDeclarationSyntaxWrapper, SyntaxNode> VisitUnionDeclarationAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, UnionDeclarationSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitUnionDeclaration");
+    private static readonly Func<CSharpSyntaxRewriter, UnsafeExpressionSyntaxWrapper, SyntaxNode> VisitUnsafeExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, UnsafeExpressionSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitUnsafeExpression");
     private static readonly Func<CSharpSyntaxRewriter, VarPatternSyntaxWrapper, SyntaxNode> VisitVarPatternAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, VarPatternSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitVarPattern");
     private static readonly Func<CSharpSyntaxRewriter, WhenClauseSyntaxWrapper, SyntaxNode> VisitWhenClauseAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, WhenClauseSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitWhenClause");
+    private static readonly Func<CSharpSyntaxRewriter, WithElementSyntaxWrapper, SyntaxNode> VisitWithElementAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, WithElementSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitWithElement");
     private static readonly Func<CSharpSyntaxRewriter, WithExpressionSyntaxWrapper, SyntaxNode> VisitWithExpressionAccessor = AccessorFactory.CreateMethod<Func<CSharpSyntaxRewriter, WithExpressionSyntaxWrapper, SyntaxNode>>(WrappedType, "VisitWithExpression");
 
     extension(CSharpSyntaxRewriter wrappedInstance)
@@ -142,8 +145,11 @@ public static class CSharpSyntaxRewriterShimExtensions
         public SyntaxNode VisitTupleType(TupleTypeSyntaxWrapper node) => VisitTupleTypeAccessor(wrappedInstance, node);
         public SyntaxNode VisitTypePattern(TypePatternSyntaxWrapper node) => VisitTypePatternAccessor(wrappedInstance, node);
         public SyntaxNode VisitUnaryPattern(UnaryPatternSyntaxWrapper node) => VisitUnaryPatternAccessor(wrappedInstance, node);
+        public SyntaxNode VisitUnionDeclaration(UnionDeclarationSyntaxWrapper node) => VisitUnionDeclarationAccessor(wrappedInstance, node);
+        public SyntaxNode VisitUnsafeExpression(UnsafeExpressionSyntaxWrapper node) => VisitUnsafeExpressionAccessor(wrappedInstance, node);
         public SyntaxNode VisitVarPattern(VarPatternSyntaxWrapper node) => VisitVarPatternAccessor(wrappedInstance, node);
         public SyntaxNode VisitWhenClause(WhenClauseSyntaxWrapper node) => VisitWhenClauseAccessor(wrappedInstance, node);
+        public SyntaxNode VisitWithElement(WithElementSyntaxWrapper node) => VisitWithElementAccessor(wrappedInstance, node);
         public SyntaxNode VisitWithExpression(WithExpressionSyntaxWrapper node) => VisitWithExpressionAccessor(wrappedInstance, node);
     }
 }

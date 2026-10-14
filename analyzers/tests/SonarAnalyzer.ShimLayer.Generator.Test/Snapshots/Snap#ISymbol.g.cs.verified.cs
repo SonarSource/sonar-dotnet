@@ -23,9 +23,11 @@ public static class ISymbolShimExtensions
     private static readonly Type WrappedType = typeof(ISymbol);
 
     private static readonly Func<ISymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<ISymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<ISymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<ISymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(ISymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

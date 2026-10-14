@@ -23,9 +23,11 @@ public static class IPreprocessingSymbolShimExtensions
     private static readonly Type WrappedType = typeof(IPreprocessingSymbol);
 
     private static readonly Func<IPreprocessingSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IPreprocessingSymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<IPreprocessingSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IPreprocessingSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(IPreprocessingSymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

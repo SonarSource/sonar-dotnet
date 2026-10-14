@@ -24,6 +24,7 @@ public static class IArrayTypeSymbolShimExtensions
 
     private static readonly Func<IArrayTypeSymbol, NullableAnnotation> ElementNullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, NullableAnnotation>>(WrappedType, "ElementNullableAnnotation");
     private static readonly Func<IArrayTypeSymbol, IParameterSymbol> ExtensionParameterAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, IParameterSymbol>>(WrappedType, "ExtensionParameter");
+    private static readonly Func<IArrayTypeSymbol, bool> IsClosedAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsClosed");
     private static readonly Func<IArrayTypeSymbol, bool> IsExtensionAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsExtension");
     private static readonly Func<IArrayTypeSymbol, bool> IsNativeIntegerTypeAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsNativeIntegerType");
     private static readonly Func<IArrayTypeSymbol, bool> IsReadOnlyAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsReadOnly");
@@ -31,12 +32,16 @@ public static class IArrayTypeSymbolShimExtensions
     private static readonly Func<IArrayTypeSymbol, bool> IsRefLikeTypeAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsRefLikeType");
     private static readonly Func<IArrayTypeSymbol, bool> IsSZArrayAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsSZArray");
     private static readonly Func<IArrayTypeSymbol, bool> IsTupleTypeAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsTupleType");
+    private static readonly Func<IArrayTypeSymbol, bool> IsUnionAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsUnion");
     private static readonly Func<IArrayTypeSymbol, bool> IsUnmanagedTypeAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "IsUnmanagedType");
     private static readonly Func<IArrayTypeSymbol, ImmutableArray<int>> LowerBoundsAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, ImmutableArray<int>>>(WrappedType, "LowerBounds");
     private static readonly Func<IArrayTypeSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, int>>(WrappedType, "MetadataToken");
     private static readonly Func<IArrayTypeSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
+    private static readonly Func<IArrayTypeSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<IArrayTypeSymbol, ImmutableArray<int>> SizesAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, ImmutableArray<int>>>(WrappedType, "Sizes");
+    private static readonly Func<IArrayTypeSymbol, ImmutableArray<ITypeSymbol>> UnionCaseTypesAccessor = AccessorFactory.CreateProperty<Func<IArrayTypeSymbol, ImmutableArray<ITypeSymbol>>>(WrappedType, "UnionCaseTypes");
 
+    private static readonly Func<IArrayTypeSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper> GetClosedDerivedTypeInfoAccessor = AccessorFactory.CreateMethod<Func<IArrayTypeSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper>>(WrappedType, "GetClosedDerivedTypeInfo");
     private static readonly Func<IArrayTypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToDisplayPartsAccessor = AccessorFactory.CreateMethod<Func<IArrayTypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToDisplayParts");
     private static readonly Func<IArrayTypeSymbol, NullableFlowState, SymbolDisplayFormat, string> ToDisplayStringAccessor = AccessorFactory.CreateMethod<Func<IArrayTypeSymbol, NullableFlowState, SymbolDisplayFormat, string>>(WrappedType, "ToDisplayString");
     private static readonly Func<IArrayTypeSymbol, SemanticModel, NullableFlowState, int, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToMinimalDisplayPartsAccessor = AccessorFactory.CreateMethod<Func<IArrayTypeSymbol, SemanticModel, NullableFlowState, int, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToMinimalDisplayParts");
@@ -46,9 +51,10 @@ public static class IArrayTypeSymbolShimExtensions
     extension(IArrayTypeSymbol wrappedInstance)
     {
         public NullableAnnotation ElementNullableAnnotation => ElementNullableAnnotationAccessor(wrappedInstance);
-        [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.ExtensionParameter instead.")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(wrappedInstance);
-        [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.IsExtension instead.")]
+        public bool IsClosed => IsClosedAccessor(wrappedInstance);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         public bool IsExtension => IsExtensionAccessor(wrappedInstance);
         public bool IsNativeIntegerType => IsNativeIntegerTypeAccessor(wrappedInstance);
         public bool IsReadOnly => IsReadOnlyAccessor(wrappedInstance);
@@ -56,12 +62,16 @@ public static class IArrayTypeSymbolShimExtensions
         public bool IsRefLikeType => IsRefLikeTypeAccessor(wrappedInstance);
         public bool IsSZArray => IsSZArrayAccessor(wrappedInstance);
         public bool IsTupleType => IsTupleTypeAccessor(wrappedInstance);
+        public bool IsUnion => IsUnionAccessor(wrappedInstance);
         public bool IsUnmanagedType => IsUnmanagedTypeAccessor(wrappedInstance);
         public ImmutableArray<int> LowerBounds => LowerBoundsAccessor(wrappedInstance);
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
         public ImmutableArray<int> Sizes => SizesAccessor(wrappedInstance);
+        public ImmutableArray<ITypeSymbol> UnionCaseTypes => UnionCaseTypesAccessor(wrappedInstance);
 
+        public ClosedDerivedTypeInfoWrapper GetClosedDerivedTypeInfo(CancellationToken cancellationToken) => GetClosedDerivedTypeInfoAccessor(wrappedInstance, cancellationToken);
         public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
         public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);
         public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => ToMinimalDisplayPartsAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);

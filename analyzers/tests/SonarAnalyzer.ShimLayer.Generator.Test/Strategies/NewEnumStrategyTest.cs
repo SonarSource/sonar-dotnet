@@ -65,6 +65,7 @@ public class NewEnumStrategyTest
                 PostInit = 2,
                 Implementation = 4,
                 Host = 8,
+                PreCompilation = 16,
             }
 
             """);

@@ -23,9 +23,11 @@ public static class IModuleSymbolShimExtensions
     private static readonly Type WrappedType = typeof(IModuleSymbol);
 
     private static readonly Func<IModuleSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IModuleSymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<IModuleSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IModuleSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     extension(IModuleSymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     }
 }

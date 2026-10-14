@@ -23,16 +23,21 @@ public static class IDynamicTypeSymbolShimExtensions
     private static readonly Type WrappedType = typeof(IDynamicTypeSymbol);
 
     private static readonly Func<IDynamicTypeSymbol, IParameterSymbol> ExtensionParameterAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, IParameterSymbol>>(WrappedType, "ExtensionParameter");
+    private static readonly Func<IDynamicTypeSymbol, bool> IsClosedAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsClosed");
     private static readonly Func<IDynamicTypeSymbol, bool> IsExtensionAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsExtension");
     private static readonly Func<IDynamicTypeSymbol, bool> IsNativeIntegerTypeAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsNativeIntegerType");
     private static readonly Func<IDynamicTypeSymbol, bool> IsReadOnlyAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsReadOnly");
     private static readonly Func<IDynamicTypeSymbol, bool> IsRecordAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsRecord");
     private static readonly Func<IDynamicTypeSymbol, bool> IsRefLikeTypeAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsRefLikeType");
     private static readonly Func<IDynamicTypeSymbol, bool> IsTupleTypeAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsTupleType");
+    private static readonly Func<IDynamicTypeSymbol, bool> IsUnionAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsUnion");
     private static readonly Func<IDynamicTypeSymbol, bool> IsUnmanagedTypeAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "IsUnmanagedType");
     private static readonly Func<IDynamicTypeSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, int>>(WrappedType, "MetadataToken");
     private static readonly Func<IDynamicTypeSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
+    private static readonly Func<IDynamicTypeSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
+    private static readonly Func<IDynamicTypeSymbol, ImmutableArray<ITypeSymbol>> UnionCaseTypesAccessor = AccessorFactory.CreateProperty<Func<IDynamicTypeSymbol, ImmutableArray<ITypeSymbol>>>(WrappedType, "UnionCaseTypes");
 
+    private static readonly Func<IDynamicTypeSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper> GetClosedDerivedTypeInfoAccessor = AccessorFactory.CreateMethod<Func<IDynamicTypeSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper>>(WrappedType, "GetClosedDerivedTypeInfo");
     private static readonly Func<IDynamicTypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToDisplayPartsAccessor = AccessorFactory.CreateMethod<Func<IDynamicTypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToDisplayParts");
     private static readonly Func<IDynamicTypeSymbol, NullableFlowState, SymbolDisplayFormat, string> ToDisplayStringAccessor = AccessorFactory.CreateMethod<Func<IDynamicTypeSymbol, NullableFlowState, SymbolDisplayFormat, string>>(WrappedType, "ToDisplayString");
     private static readonly Func<IDynamicTypeSymbol, SemanticModel, NullableFlowState, int, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToMinimalDisplayPartsAccessor = AccessorFactory.CreateMethod<Func<IDynamicTypeSymbol, SemanticModel, NullableFlowState, int, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToMinimalDisplayParts");
@@ -41,19 +46,24 @@ public static class IDynamicTypeSymbolShimExtensions
 
     extension(IDynamicTypeSymbol wrappedInstance)
     {
-        [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.ExtensionParameter instead.")]
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(wrappedInstance);
-        [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.IsExtension instead.")]
+        public bool IsClosed => IsClosedAccessor(wrappedInstance);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         public bool IsExtension => IsExtensionAccessor(wrappedInstance);
         public bool IsNativeIntegerType => IsNativeIntegerTypeAccessor(wrappedInstance);
         public bool IsReadOnly => IsReadOnlyAccessor(wrappedInstance);
         public bool IsRecord => IsRecordAccessor(wrappedInstance);
         public bool IsRefLikeType => IsRefLikeTypeAccessor(wrappedInstance);
         public bool IsTupleType => IsTupleTypeAccessor(wrappedInstance);
+        public bool IsUnion => IsUnionAccessor(wrappedInstance);
         public bool IsUnmanagedType => IsUnmanagedTypeAccessor(wrappedInstance);
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
+        public ImmutableArray<ITypeSymbol> UnionCaseTypes => UnionCaseTypesAccessor(wrappedInstance);
 
+        public ClosedDerivedTypeInfoWrapper GetClosedDerivedTypeInfo(CancellationToken cancellationToken) => GetClosedDerivedTypeInfoAccessor(wrappedInstance, cancellationToken);
         public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
         public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);
         public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format) => ToMinimalDisplayPartsAccessor(wrappedInstance, semanticModel, topLevelNullability, position, format);

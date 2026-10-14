@@ -23,12 +23,14 @@ public static class ISourceAssemblySymbolShimExtensions
     private static readonly Type WrappedType = typeof(ISourceAssemblySymbol);
 
     private static readonly Func<ISourceAssemblySymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<ISourceAssemblySymbol, int>>(WrappedType, "MetadataToken");
+    private static readonly Func<ISourceAssemblySymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<ISourceAssemblySymbol, bool>>(WrappedType, "RequiresUnsafeContext");
 
     private static readonly Func<ISourceAssemblySymbol, ImmutableArray<INamedTypeSymbol>> GetForwardedTypesAccessor = AccessorFactory.CreateMethod<Func<ISourceAssemblySymbol, ImmutableArray<INamedTypeSymbol>>>(WrappedType, "GetForwardedTypes");
 
     extension(ISourceAssemblySymbol wrappedInstance)
     {
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
 
         public ImmutableArray<INamedTypeSymbol> GetForwardedTypes() => GetForwardedTypesAccessor(wrappedInstance);
     }

@@ -39,6 +39,7 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     private static readonly Func<Object, ImmutableArray<INamedTypeSymbol>> InterfacesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<INamedTypeSymbol>>>(WrappedType, "Interfaces");
     private static readonly Func<Object, bool> IsAbstractAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsAbstract");
     private static readonly Func<Object, bool> IsAnonymousTypeAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsAnonymousType");
+    private static readonly Func<Object, bool> IsClosedAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsClosed");
     private static readonly Func<Object, bool> IsDefinitionAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsDefinition");
     private static readonly Func<Object, bool> IsExtensionAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsExtension");
     private static readonly Func<Object, bool> IsExternAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsExtern");
@@ -54,6 +55,7 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     private static readonly Func<Object, bool> IsStaticAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsStatic");
     private static readonly Func<Object, bool> IsTupleTypeAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsTupleType");
     private static readonly Func<Object, bool> IsTypeAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsType");
+    private static readonly Func<Object, bool> IsUnionAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsUnion");
     private static readonly Func<Object, bool> IsUnmanagedTypeAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsUnmanagedType");
     private static readonly Func<Object, bool> IsValueTypeAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsValueType");
     private static readonly Func<Object, bool> IsVirtualAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "IsVirtual");
@@ -65,9 +67,11 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     private static readonly Func<Object, string> NameAccessor = AccessorFactory.CreateProperty<Func<Object, string>>(WrappedType, "Name");
     private static readonly Func<Object, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<Object, NullableAnnotation>>(WrappedType, "NullableAnnotation");
     private static readonly Func<Object, ITypeSymbol> OriginalDefinitionAccessor = AccessorFactory.CreateProperty<Func<Object, ITypeSymbol>>(WrappedType, "OriginalDefinition");
+    private static readonly Func<Object, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<Object, IMethodSymbol> SignatureAccessor = AccessorFactory.CreateProperty<Func<Object, IMethodSymbol>>(WrappedType, "Signature");
     private static readonly Func<Object, SpecialType> SpecialTypeAccessor = AccessorFactory.CreateProperty<Func<Object, SpecialType>>(WrappedType, "SpecialType");
     private static readonly Func<Object, TypeKind> TypeKindAccessor = AccessorFactory.CreateProperty<Func<Object, TypeKind>>(WrappedType, "TypeKind");
+    private static readonly Func<Object, ImmutableArray<ITypeSymbol>> UnionCaseTypesAccessor = AccessorFactory.CreateProperty<Func<Object, ImmutableArray<ITypeSymbol>>>(WrappedType, "UnionCaseTypes");
 
     private static readonly Action<Object, SymbolVisitor> AcceptAccessor = AccessorFactory.CreateMethod<Action<Object, SymbolVisitor>>(WrappedType, "Accept");
     private static class AcceptAccessor_Overload3_GenericStore<TResult>
@@ -76,6 +80,7 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     }
     private static readonly Func<Object, ISymbol, ISymbol> FindImplementationForInterfaceMemberAccessor = AccessorFactory.CreateMethod<Func<Object, ISymbol, ISymbol>>(WrappedType, "FindImplementationForInterfaceMember");
     private static readonly Func<Object, ImmutableArray<AttributeData>> GetAttributesAccessor = AccessorFactory.CreateMethod<Func<Object, ImmutableArray<AttributeData>>>(WrappedType, "GetAttributes");
+    private static readonly Func<Object, CancellationToken, ClosedDerivedTypeInfoWrapper> GetClosedDerivedTypeInfoAccessor = AccessorFactory.CreateMethod<Func<Object, CancellationToken, ClosedDerivedTypeInfoWrapper>>(WrappedType, "GetClosedDerivedTypeInfo");
     private static readonly Func<Object, string> GetDocumentationCommentIdAccessor = AccessorFactory.CreateMethod<Func<Object, string>>(WrappedType, "GetDocumentationCommentId");
     private static readonly Func<Object, CultureInfo, bool, CancellationToken, string> GetDocumentationCommentXmlAccessor = AccessorFactory.CreateMethod<Func<Object, CultureInfo, bool, CancellationToken, string>>(WrappedType, "GetDocumentationCommentXml");
     private static readonly Func<Object, ImmutableArray<ISymbol>> GetMembersAccessor = AccessorFactory.CreateMethod<Func<Object, ImmutableArray<ISymbol>>>(WrappedType, "GetMembers");
@@ -126,14 +131,15 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     public INamedTypeSymbol ContainingType => ContainingTypeAccessor(wrappedInstance);
     public Accessibility DeclaredAccessibility => DeclaredAccessibilityAccessor(wrappedInstance);
     public ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => DeclaringSyntaxReferencesAccessor(wrappedInstance);
-    [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.ExtensionParameter instead.")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
     public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(wrappedInstance);
     public bool HasUnsupportedMetadata => HasUnsupportedMetadataAccessor(wrappedInstance);
     public ImmutableArray<INamedTypeSymbol> Interfaces => InterfacesAccessor(wrappedInstance);
     public bool IsAbstract => IsAbstractAccessor(wrappedInstance);
     public bool IsAnonymousType => IsAnonymousTypeAccessor(wrappedInstance);
+    public bool IsClosed => IsClosedAccessor(wrappedInstance);
     public bool IsDefinition => IsDefinitionAccessor(wrappedInstance);
-    [System.ObsoleteAttribute("This API will be removed in the future. Use INamedTypeSymbol.IsExtension instead.")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
     public bool IsExtension => IsExtensionAccessor(wrappedInstance);
     public bool IsExtern => IsExternAccessor(wrappedInstance);
     public bool IsImplicitlyDeclared => IsImplicitlyDeclaredAccessor(wrappedInstance);
@@ -148,6 +154,7 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     public bool IsStatic => IsStaticAccessor(wrappedInstance);
     public bool IsTupleType => IsTupleTypeAccessor(wrappedInstance);
     public bool IsType => IsTypeAccessor(wrappedInstance);
+    public bool IsUnion => IsUnionAccessor(wrappedInstance);
     public bool IsUnmanagedType => IsUnmanagedTypeAccessor(wrappedInstance);
     public bool IsValueType => IsValueTypeAccessor(wrappedInstance);
     public bool IsVirtual => IsVirtualAccessor(wrappedInstance);
@@ -159,14 +166,17 @@ public readonly struct IFunctionPointerTypeSymbolWrapper : IWrapper, IEquatable<
     public string Name => NameAccessor(wrappedInstance);
     public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
     public ITypeSymbol OriginalDefinition => OriginalDefinitionAccessor(wrappedInstance);
+    public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     public IMethodSymbol Signature => SignatureAccessor(wrappedInstance);
     public SpecialType SpecialType => SpecialTypeAccessor(wrappedInstance);
     public TypeKind TypeKind => TypeKindAccessor(wrappedInstance);
+    public ImmutableArray<ITypeSymbol> UnionCaseTypes => UnionCaseTypesAccessor(wrappedInstance);
 
     public void Accept(SymbolVisitor visitor) => AcceptAccessor(wrappedInstance, visitor);
     public TResult Accept<TResult>(SymbolVisitor<TResult> visitor) => AcceptAccessor_Overload3_GenericStore<TResult>.AcceptAccessor_Overload3(wrappedInstance, visitor);
     public ISymbol FindImplementationForInterfaceMember(ISymbol interfaceMember) => FindImplementationForInterfaceMemberAccessor(wrappedInstance, interfaceMember);
     public ImmutableArray<AttributeData> GetAttributes() => GetAttributesAccessor(wrappedInstance);
+    public ClosedDerivedTypeInfoWrapper GetClosedDerivedTypeInfo(CancellationToken cancellationToken) => GetClosedDerivedTypeInfoAccessor(wrappedInstance, cancellationToken);
     public string GetDocumentationCommentId() => GetDocumentationCommentIdAccessor(wrappedInstance);
     public string GetDocumentationCommentXml(CultureInfo preferredCulture, bool expandIncludes, CancellationToken cancellationToken) => GetDocumentationCommentXmlAccessor(wrappedInstance, preferredCulture, expandIncludes, cancellationToken);
     public ImmutableArray<ISymbol> GetMembers() => GetMembersAccessor(wrappedInstance);

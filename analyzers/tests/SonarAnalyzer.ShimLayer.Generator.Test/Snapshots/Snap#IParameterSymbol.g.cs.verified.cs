@@ -28,6 +28,7 @@ public static class IParameterSymbolShimExtensions
     private static readonly Func<IParameterSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IParameterSymbol, int>>(WrappedType, "MetadataToken");
     private static readonly Func<IParameterSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IParameterSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
     private static readonly Func<IParameterSymbol, ImmutableArray<CustomModifier>> RefCustomModifiersAccessor = AccessorFactory.CreateProperty<Func<IParameterSymbol, ImmutableArray<CustomModifier>>>(WrappedType, "RefCustomModifiers");
+    private static readonly Func<IParameterSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IParameterSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<IParameterSymbol, ScopedKind> ScopedKindAccessor = AccessorFactory.CreateProperty<Func<IParameterSymbol, ScopedKind>>(WrappedType, "ScopedKind");
 
     extension(IParameterSymbol wrappedInstance)
@@ -38,6 +39,7 @@ public static class IParameterSymbolShimExtensions
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
         public ImmutableArray<CustomModifier> RefCustomModifiers => RefCustomModifiersAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
         public ScopedKind ScopedKind => ScopedKindAccessor(wrappedInstance);
     }
 }

@@ -49,6 +49,7 @@ public readonly struct IDiscardSymbolWrapper : IWrapper, IEquatable<IDiscardSymb
     private static readonly Func<Object, string> NameAccessor = AccessorFactory.CreateProperty<Func<Object, string>>(WrappedType, "Name");
     private static readonly Func<Object, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<Object, NullableAnnotation>>(WrappedType, "NullableAnnotation");
     private static readonly Func<Object, ISymbol> OriginalDefinitionAccessor = AccessorFactory.CreateProperty<Func<Object, ISymbol>>(WrappedType, "OriginalDefinition");
+    private static readonly Func<Object, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<Object, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<Object, ITypeSymbol> TypeAccessor = AccessorFactory.CreateProperty<Func<Object, ITypeSymbol>>(WrappedType, "Type");
 
     private static readonly Action<Object, SymbolVisitor> AcceptAccessor = AccessorFactory.CreateMethod<Action<Object, SymbolVisitor>>(WrappedType, "Accept");
@@ -112,6 +113,7 @@ public readonly struct IDiscardSymbolWrapper : IWrapper, IEquatable<IDiscardSymb
     public string Name => NameAccessor(wrappedInstance);
     public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
     public ISymbol OriginalDefinition => OriginalDefinitionAccessor(wrappedInstance);
+    public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
     public ITypeSymbol Type => TypeAccessor(wrappedInstance);
 
     public void Accept(SymbolVisitor visitor) => AcceptAccessor(wrappedInstance, visitor);

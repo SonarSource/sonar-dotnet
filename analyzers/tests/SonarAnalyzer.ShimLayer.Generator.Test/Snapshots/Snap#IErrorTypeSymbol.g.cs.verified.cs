@@ -25,6 +25,7 @@ public static class IErrorTypeSymbolShimExtensions
     private static readonly Func<IErrorTypeSymbol, string> ExtensionGroupingNameAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, string>>(WrappedType, "ExtensionGroupingName");
     private static readonly Func<IErrorTypeSymbol, string> ExtensionMarkerNameAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, string>>(WrappedType, "ExtensionMarkerName");
     private static readonly Func<IErrorTypeSymbol, IParameterSymbol> ExtensionParameterAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, IParameterSymbol>>(WrappedType, "ExtensionParameter");
+    private static readonly Func<IErrorTypeSymbol, bool> IsClosedAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsClosed");
     private static readonly Func<IErrorTypeSymbol, bool> IsComImportAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsComImport");
     private static readonly Func<IErrorTypeSymbol, bool> IsExtensionAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsExtension");
     private static readonly Func<IErrorTypeSymbol, bool> IsFileLocalAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsFileLocal");
@@ -34,15 +35,19 @@ public static class IErrorTypeSymbolShimExtensions
     private static readonly Func<IErrorTypeSymbol, bool> IsRefLikeTypeAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsRefLikeType");
     private static readonly Func<IErrorTypeSymbol, bool> IsSerializableAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsSerializable");
     private static readonly Func<IErrorTypeSymbol, bool> IsTupleTypeAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsTupleType");
+    private static readonly Func<IErrorTypeSymbol, bool> IsUnionAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsUnion");
     private static readonly Func<IErrorTypeSymbol, bool> IsUnmanagedTypeAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "IsUnmanagedType");
     private static readonly Func<IErrorTypeSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, int>>(WrappedType, "MetadataToken");
     private static readonly Func<IErrorTypeSymbol, INamedTypeSymbol> NativeIntegerUnderlyingTypeAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, INamedTypeSymbol>>(WrappedType, "NativeIntegerUnderlyingType");
     private static readonly Func<IErrorTypeSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
+    private static readonly Func<IErrorTypeSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<IErrorTypeSymbol, ImmutableArray<IFieldSymbol>> TupleElementsAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, ImmutableArray<IFieldSymbol>>>(WrappedType, "TupleElements");
     private static readonly Func<IErrorTypeSymbol, INamedTypeSymbol> TupleUnderlyingTypeAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, INamedTypeSymbol>>(WrappedType, "TupleUnderlyingType");
     private static readonly Func<IErrorTypeSymbol, ImmutableArray<NullableAnnotation>> TypeArgumentNullableAnnotationsAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, ImmutableArray<NullableAnnotation>>>(WrappedType, "TypeArgumentNullableAnnotations");
+    private static readonly Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>> UnionCaseTypesAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>>>(WrappedType, "UnionCaseTypes");
 
     private static readonly Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>, ImmutableArray<NullableAnnotation>, INamedTypeSymbol> ConstructAccessor_Overload2 = AccessorFactory.CreateMethod<Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>, ImmutableArray<NullableAnnotation>, INamedTypeSymbol>>(WrappedType, "Construct");
+    private static readonly Func<IErrorTypeSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper> GetClosedDerivedTypeInfoAccessor = AccessorFactory.CreateMethod<Func<IErrorTypeSymbol, CancellationToken, ClosedDerivedTypeInfoWrapper>>(WrappedType, "GetClosedDerivedTypeInfo");
     private static readonly Func<IErrorTypeSymbol, int, ImmutableArray<CustomModifier>> GetTypeArgumentCustomModifiersAccessor = AccessorFactory.CreateMethod<Func<IErrorTypeSymbol, int, ImmutableArray<CustomModifier>>>(WrappedType, "GetTypeArgumentCustomModifiers");
     private static readonly Func<IErrorTypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>> ToDisplayPartsAccessor = AccessorFactory.CreateMethod<Func<IErrorTypeSymbol, NullableFlowState, SymbolDisplayFormat, ImmutableArray<SymbolDisplayPart>>>(WrappedType, "ToDisplayParts");
     private static readonly Func<IErrorTypeSymbol, NullableFlowState, SymbolDisplayFormat, string> ToDisplayStringAccessor = AccessorFactory.CreateMethod<Func<IErrorTypeSymbol, NullableFlowState, SymbolDisplayFormat, string>>(WrappedType, "ToDisplayString");
@@ -55,6 +60,7 @@ public static class IErrorTypeSymbolShimExtensions
         public string ExtensionGroupingName => ExtensionGroupingNameAccessor(wrappedInstance);
         public string ExtensionMarkerName => ExtensionMarkerNameAccessor(wrappedInstance);
         public IParameterSymbol ExtensionParameter => ExtensionParameterAccessor(wrappedInstance);
+        public bool IsClosed => IsClosedAccessor(wrappedInstance);
         public bool IsComImport => IsComImportAccessor(wrappedInstance);
         public bool IsExtension => IsExtensionAccessor(wrappedInstance);
         public bool IsFileLocal => IsFileLocalAccessor(wrappedInstance);
@@ -64,15 +70,19 @@ public static class IErrorTypeSymbolShimExtensions
         public bool IsRefLikeType => IsRefLikeTypeAccessor(wrappedInstance);
         public bool IsSerializable => IsSerializableAccessor(wrappedInstance);
         public bool IsTupleType => IsTupleTypeAccessor(wrappedInstance);
+        public bool IsUnion => IsUnionAccessor(wrappedInstance);
         public bool IsUnmanagedType => IsUnmanagedTypeAccessor(wrappedInstance);
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
         public INamedTypeSymbol NativeIntegerUnderlyingType => NativeIntegerUnderlyingTypeAccessor(wrappedInstance);
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
         public ImmutableArray<IFieldSymbol> TupleElements => TupleElementsAccessor(wrappedInstance);
         public INamedTypeSymbol TupleUnderlyingType => TupleUnderlyingTypeAccessor(wrappedInstance);
         public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => TypeArgumentNullableAnnotationsAccessor(wrappedInstance);
+        public ImmutableArray<ITypeSymbol> UnionCaseTypes => UnionCaseTypesAccessor(wrappedInstance);
 
         public INamedTypeSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations) => ConstructAccessor_Overload2(wrappedInstance, typeArguments, typeArgumentNullableAnnotations);
+        public ClosedDerivedTypeInfoWrapper GetClosedDerivedTypeInfo(CancellationToken cancellationToken) => GetClosedDerivedTypeInfoAccessor(wrappedInstance, cancellationToken);
         public ImmutableArray<CustomModifier> GetTypeArgumentCustomModifiers(int ordinal) => GetTypeArgumentCustomModifiersAccessor(wrappedInstance, ordinal);
         public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayPartsAccessor(wrappedInstance, topLevelNullability, format);
         public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format) => ToDisplayStringAccessor(wrappedInstance, topLevelNullability, format);

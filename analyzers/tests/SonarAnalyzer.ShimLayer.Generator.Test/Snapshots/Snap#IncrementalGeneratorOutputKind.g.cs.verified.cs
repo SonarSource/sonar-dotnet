@@ -26,4 +26,5 @@ public enum IncrementalGeneratorOutputKind : System.Int32
     PostInit = 2,
     Implementation = 4,
     Host = 8,
+    PreCompilation = 16,
 }

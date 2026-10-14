@@ -29,6 +29,7 @@ public static class ILocalSymbolShimExtensions
     private static readonly Func<ILocalSymbol, int> MetadataTokenAccessor = AccessorFactory.CreateProperty<Func<ILocalSymbol, int>>(WrappedType, "MetadataToken");
     private static readonly Func<ILocalSymbol, NullableAnnotation> NullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<ILocalSymbol, NullableAnnotation>>(WrappedType, "NullableAnnotation");
     private static readonly Func<ILocalSymbol, RefKind> RefKindAccessor = AccessorFactory.CreateProperty<Func<ILocalSymbol, RefKind>>(WrappedType, "RefKind");
+    private static readonly Func<ILocalSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<ILocalSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<ILocalSymbol, ScopedKind> ScopedKindAccessor = AccessorFactory.CreateProperty<Func<ILocalSymbol, ScopedKind>>(WrappedType, "ScopedKind");
 
     extension(ILocalSymbol wrappedInstance)
@@ -40,6 +41,7 @@ public static class ILocalSymbolShimExtensions
         public int MetadataToken => MetadataTokenAccessor(wrappedInstance);
         public NullableAnnotation NullableAnnotation => NullableAnnotationAccessor(wrappedInstance);
         public RefKind RefKind => RefKindAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
         public ScopedKind ScopedKind => ScopedKindAccessor(wrappedInstance);
     }
 }

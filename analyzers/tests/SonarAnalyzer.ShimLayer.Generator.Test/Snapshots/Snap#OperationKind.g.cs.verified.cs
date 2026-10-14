@@ -153,4 +153,5 @@ public static class OperationKindEx
     public const OperationKind InlineArrayAccess = (OperationKind)126;
     public const OperationKind CollectionExpression = (OperationKind)127;
     public const OperationKind Spread = (OperationKind)128;
+    public const OperationKind CollectionExpressionElementsPlaceholder = (OperationKind)129;
 }

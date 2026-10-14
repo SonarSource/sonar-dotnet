@@ -33,6 +33,7 @@ public static class IMethodSymbolShimExtensions
     private static readonly Func<IMethodSymbol, NullableAnnotation> ReceiverNullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, NullableAnnotation>>(WrappedType, "ReceiverNullableAnnotation");
     private static readonly Func<IMethodSymbol, ImmutableArray<CustomModifier>> RefCustomModifiersAccessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, ImmutableArray<CustomModifier>>>(WrappedType, "RefCustomModifiers");
     private static readonly Func<IMethodSymbol, RefKind> RefKindAccessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, RefKind>>(WrappedType, "RefKind");
+    private static readonly Func<IMethodSymbol, bool> RequiresUnsafeContextAccessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, bool>>(WrappedType, "RequiresUnsafeContext");
     private static readonly Func<IMethodSymbol, NullableAnnotation> ReturnNullableAnnotationAccessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, NullableAnnotation>>(WrappedType, "ReturnNullableAnnotation");
     private static readonly Func<IMethodSymbol, bool> ReturnsByRefAccessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, bool>>(WrappedType, "ReturnsByRef");
     private static readonly Func<IMethodSymbol, bool> ReturnsByRefReadonlyAccessor = AccessorFactory.CreateProperty<Func<IMethodSymbol, bool>>(WrappedType, "ReturnsByRefReadonly");
@@ -55,6 +56,7 @@ public static class IMethodSymbolShimExtensions
         public NullableAnnotation ReceiverNullableAnnotation => ReceiverNullableAnnotationAccessor(wrappedInstance);
         public ImmutableArray<CustomModifier> RefCustomModifiers => RefCustomModifiersAccessor(wrappedInstance);
         public RefKind RefKind => RefKindAccessor(wrappedInstance);
+        public bool RequiresUnsafeContext => RequiresUnsafeContextAccessor(wrappedInstance);
         public NullableAnnotation ReturnNullableAnnotation => ReturnNullableAnnotationAccessor(wrappedInstance);
         public bool ReturnsByRef => ReturnsByRefAccessor(wrappedInstance);
         public bool ReturnsByRefReadonly => ReturnsByRefReadonlyAccessor(wrappedInstance);

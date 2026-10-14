@@ -61,6 +61,7 @@ public static class IOperationShimExtensions
         public ICoalesceAssignmentOperationWrapper? AsCoalesceAssignment => ICoalesceAssignmentOperationWrapper.FromOrDefault(wrappedInstance);
         public ICoalesceOperationWrapper? AsCoalesce => ICoalesceOperationWrapper.FromOrDefault(wrappedInstance);
         public ICollectionElementInitializerOperationWrapper? AsCollectionElementInitializer => ICollectionElementInitializerOperationWrapper.FromOrDefault(wrappedInstance);
+        public ICollectionExpressionElementsPlaceholderOperationWrapper? AsCollectionExpressionElementsPlaceholder => ICollectionExpressionElementsPlaceholderOperationWrapper.FromOrDefault(wrappedInstance);
         public ICollectionExpressionOperationWrapper? AsCollectionExpression => ICollectionExpressionOperationWrapper.FromOrDefault(wrappedInstance);
         public ICompoundAssignmentOperationWrapper? AsCompoundAssignment => ICompoundAssignmentOperationWrapper.FromOrDefault(wrappedInstance);
         public IConditionalAccessInstanceOperationWrapper? AsConditionalAccessInstance => IConditionalAccessInstanceOperationWrapper.FromOrDefault(wrappedInstance);
@@ -197,6 +198,7 @@ public static class IOperationShimExtensions
         public ICoalesceAssignmentOperationWrapper ToCoalesceAssignment() => ICoalesceAssignmentOperationWrapper.From(wrappedInstance);
         public ICoalesceOperationWrapper ToCoalesce() => ICoalesceOperationWrapper.From(wrappedInstance);
         public ICollectionElementInitializerOperationWrapper ToCollectionElementInitializer() => ICollectionElementInitializerOperationWrapper.From(wrappedInstance);
+        public ICollectionExpressionElementsPlaceholderOperationWrapper ToCollectionExpressionElementsPlaceholder() => ICollectionExpressionElementsPlaceholderOperationWrapper.From(wrappedInstance);
         public ICollectionExpressionOperationWrapper ToCollectionExpression() => ICollectionExpressionOperationWrapper.From(wrappedInstance);
         public ICompoundAssignmentOperationWrapper ToCompoundAssignment() => ICompoundAssignmentOperationWrapper.From(wrappedInstance);
         public IConditionalAccessInstanceOperationWrapper ToConditionalAccessInstance() => IConditionalAccessInstanceOperationWrapper.From(wrappedInstance);

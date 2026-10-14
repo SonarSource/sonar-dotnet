@@ -39,6 +39,9 @@ public static class SyntaxKindEx
     public const SyntaxKind FileKeyword = (SyntaxKind)8449;
     public const SyntaxKind AllowsKeyword = (SyntaxKind)8450;
     public const SyntaxKind ExtensionKeyword = (SyntaxKind)8451;
+    public const SyntaxKind UnionKeyword = (SyntaxKind)8452;
+    public const SyntaxKind ClosedKeyword = (SyntaxKind)8453;
+    public const SyntaxKind SafeKeyword = (SyntaxKind)8454;
     public const SyntaxKind NullableKeyword = (SyntaxKind)8486;
     public const SyntaxKind EnableKeyword = (SyntaxKind)8487;
     public const SyntaxKind WarningsKeyword = (SyntaxKind)8488;
@@ -63,6 +66,7 @@ public static class SyntaxKindEx
     public const SyntaxKind DefaultLiteralExpression = (SyntaxKind)8755;
     public const SyntaxKind Utf8StringLiteralExpression = (SyntaxKind)8756;
     public const SyntaxKind FieldExpression = (SyntaxKind)8757;
+    public const SyntaxKind UnsafeExpression = (SyntaxKind)8769;
     public const SyntaxKind LocalFunctionStatement = (SyntaxKind)8830;
     public const SyntaxKind FileScopedNamespaceDeclaration = (SyntaxKind)8845;
     public const SyntaxKind AllowsConstraintClause = (SyntaxKind)8879;
@@ -126,4 +130,6 @@ public static class SyntaxKindEx
     public const SyntaxKind SpreadElement = (SyntaxKind)9078;
     public const SyntaxKind ExtensionBlockDeclaration = (SyntaxKind)9079;
     public const SyntaxKind IgnoredDirectiveTrivia = (SyntaxKind)9080;
+    public const SyntaxKind WithElement = (SyntaxKind)9081;
+    public const SyntaxKind UnionDeclaration = (SyntaxKind)9082;
 }
