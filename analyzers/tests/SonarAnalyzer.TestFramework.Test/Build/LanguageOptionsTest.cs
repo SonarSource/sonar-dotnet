@@ -48,7 +48,8 @@ public class LanguageOptionsTest
                 CS.LanguageVersion.CSharp11,
                 CS.LanguageVersion.CSharp12,
                 CS.LanguageVersion.CSharp13,
-                CS.LanguageVersion.CSharp14
+                CS.LanguageVersion.CSharp14,
+                CS.LanguageVersion.CSharp15
             ]);
 
             vbOptions.Should().BeEquivalentTo([
