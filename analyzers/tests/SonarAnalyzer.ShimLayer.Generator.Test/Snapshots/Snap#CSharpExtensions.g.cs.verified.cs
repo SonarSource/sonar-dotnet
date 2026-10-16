@@ -45,6 +45,7 @@ public static class CSharpExtensionsEx
     private static readonly Func<ICompoundAssignmentOperationWrapper, Conversion> GetOutConversionAccessor = AccessorFactory.CreateStaticMethod<Func<ICompoundAssignmentOperationWrapper, Conversion>>(WrappedType, "GetOutConversion");
     private static readonly Func<SemanticModel, int, PrimaryConstructorBaseTypeSyntaxWrapper, SymbolInfo> GetSpeculativeSymbolInfoAccessor_Overload5 = AccessorFactory.CreateStaticMethod<Func<SemanticModel, int, PrimaryConstructorBaseTypeSyntaxWrapper, SymbolInfo>>(WrappedType, "GetSpeculativeSymbolInfo");
     private static readonly Func<SemanticModel, PrimaryConstructorBaseTypeSyntaxWrapper, CancellationToken, SymbolInfo> GetSymbolInfoAccessor_Overload6 = AccessorFactory.CreateStaticMethod<Func<SemanticModel, PrimaryConstructorBaseTypeSyntaxWrapper, CancellationToken, SymbolInfo>>(WrappedType, "GetSymbolInfo");
+    private static readonly Func<ICoalesceOperationWrapper, Conversion> GetValueConversionAccessor = AccessorFactory.CreateStaticMethod<Func<ICoalesceOperationWrapper, Conversion>>(WrappedType, "GetValueConversion");
     private delegate bool TryGetSpeculativeSemanticModelAccessor_Overload6Delegate(SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel);
     private static readonly TryGetSpeculativeSemanticModelAccessor_Overload6Delegate TryGetSpeculativeSemanticModelAccessor_Overload6 = AccessorFactory.CreateStaticMethod<TryGetSpeculativeSemanticModelAccessor_Overload6Delegate>(WrappedType, "TryGetSpeculativeSemanticModel");
 
@@ -71,5 +72,6 @@ public static class CSharpExtensionsEx
     public static Conversion GetOutConversion(this ICompoundAssignmentOperationWrapper compoundAssignment) => GetOutConversionAccessor(compoundAssignment);
     public static SymbolInfo GetSpeculativeSymbolInfo(this SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer) => GetSpeculativeSymbolInfoAccessor_Overload5(semanticModel, position, constructorInitializer);
     public static SymbolInfo GetSymbolInfo(this SemanticModel semanticModel, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, CancellationToken cancellationToken) => GetSymbolInfoAccessor_Overload6(semanticModel, constructorInitializer, cancellationToken);
+    public static Conversion GetValueConversion(this ICoalesceOperationWrapper coalesceExpression) => GetValueConversionAccessor(coalesceExpression);
     public static bool TryGetSpeculativeSemanticModel(this SemanticModel semanticModel, int position, PrimaryConstructorBaseTypeSyntaxWrapper constructorInitializer, out SemanticModel speculativeModel) => TryGetSpeculativeSemanticModelAccessor_Overload6(semanticModel, position, constructorInitializer, out speculativeModel);
 }

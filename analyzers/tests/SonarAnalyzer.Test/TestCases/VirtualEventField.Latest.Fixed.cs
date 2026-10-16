@@ -20,6 +20,5 @@ public partial class PartialEvents
 {
     public partial event EventHandler Compliant; // Compliant, a partial event cannot be virtual
     public partial event EventHandler BadEvent; // Fixed
-                                                            // Error@-1 [CS0621]
-                                                            // Error@-2 [CS1585]
+                                                            // Error@-1 [CS0267]
 }

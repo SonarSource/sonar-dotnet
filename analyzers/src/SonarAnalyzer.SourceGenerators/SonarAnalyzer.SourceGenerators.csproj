@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <!-- Must match the Roslyn build shipped with the SDK in global.json: find the SDK's tag in dotnet/sdk, then check eng/Version.Details.xml at that tag for the Microsoft.CodeAnalysis version. -->
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.11.0-1.26421.101" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.12.0-1.26473.112" PrivateAssets="all" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
 

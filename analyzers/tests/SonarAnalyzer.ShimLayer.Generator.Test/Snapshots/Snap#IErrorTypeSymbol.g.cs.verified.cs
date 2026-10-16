@@ -44,6 +44,7 @@ public static class IErrorTypeSymbolShimExtensions
     private static readonly Func<IErrorTypeSymbol, ImmutableArray<IFieldSymbol>> TupleElementsAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, ImmutableArray<IFieldSymbol>>>(WrappedType, "TupleElements");
     private static readonly Func<IErrorTypeSymbol, INamedTypeSymbol> TupleUnderlyingTypeAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, INamedTypeSymbol>>(WrappedType, "TupleUnderlyingType");
     private static readonly Func<IErrorTypeSymbol, ImmutableArray<NullableAnnotation>> TypeArgumentNullableAnnotationsAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, ImmutableArray<NullableAnnotation>>>(WrappedType, "TypeArgumentNullableAnnotations");
+    private static readonly Func<IErrorTypeSymbol, TypeLayoutWrapper> TypeLayoutAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, TypeLayoutWrapper>>(WrappedType, "TypeLayout");
     private static readonly Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>> UnionCaseTypesAccessor = AccessorFactory.CreateProperty<Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>>>(WrappedType, "UnionCaseTypes");
 
     private static readonly Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>, ImmutableArray<NullableAnnotation>, INamedTypeSymbol> ConstructAccessor_Overload2 = AccessorFactory.CreateMethod<Func<IErrorTypeSymbol, ImmutableArray<ITypeSymbol>, ImmutableArray<NullableAnnotation>, INamedTypeSymbol>>(WrappedType, "Construct");
@@ -79,6 +80,7 @@ public static class IErrorTypeSymbolShimExtensions
         public ImmutableArray<IFieldSymbol> TupleElements => TupleElementsAccessor(wrappedInstance);
         public INamedTypeSymbol TupleUnderlyingType => TupleUnderlyingTypeAccessor(wrappedInstance);
         public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => TypeArgumentNullableAnnotationsAccessor(wrappedInstance);
+        public TypeLayoutWrapper TypeLayout => TypeLayoutAccessor(wrappedInstance);
         public ImmutableArray<ITypeSymbol> UnionCaseTypes => UnionCaseTypesAccessor(wrappedInstance);
 
         public INamedTypeSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<NullableAnnotation> typeArgumentNullableAnnotations) => ConstructAccessor_Overload2(wrappedInstance, typeArguments, typeArgumentNullableAnnotations);
