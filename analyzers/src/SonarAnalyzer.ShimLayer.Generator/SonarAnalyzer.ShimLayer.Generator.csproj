@@ -10,7 +10,7 @@
     <!-- Must match the Roslyn build shipped with the SDK in global.json: find the SDK's tag in dotnet/sdk, then check eng/Version.Details.xml at that tag for the Microsoft.CodeAnalysis version. -->
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="5.12.0-1.26473.112" PrivateAssets="all" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="5.12.0-1.26473.112" PrivateAssets="all" />
-    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.12" GeneratePathProperty="true" />
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="10.0.13" GeneratePathProperty="true" />
     <!-- Downloaded (not referenced) so the DLLs below are guaranteed present in $(NuGetPackageRoot) regardless of what other projects in the solution restore. -->
     <PackageDownload Include="Microsoft.CodeAnalysis.CSharp" Version="[1.3.2]" />
     <PackageDownload Include="Microsoft.CodeAnalysis.Common" Version="[1.3.2]" />
