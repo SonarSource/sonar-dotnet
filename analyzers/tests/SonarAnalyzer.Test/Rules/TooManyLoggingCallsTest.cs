@@ -55,6 +55,12 @@ public class TooManyLoggingCallsTest
                 logger.LogError("Error 2");         // Secondary
 
                 logger.LogWarning("Warn 1");        // Compliant
+
+                logger.LogTrace("Trace");           // Compliant
+                logger.LogDebug("Debug 1");
+                logger.LogDebug("Debug 2");
+                logger.LogDebug("Debug 3");
+                logger.LogDebug("Debug 4");
                 """).Verify();
 
     [TestMethod]
@@ -99,11 +105,54 @@ public class TooManyLoggingCallsTest
                     {
                         // The threshold was set to 1
                         logger.LogDebug("Debug 1");     // Noncompliant {{Reduce the number of Debug logging calls within this code block from 2 to the 1 allowed.}}
+                        logger.LogTrace("Trace");
                         logger.LogDebug("Debug 2");     // Secondary
 
                         // The threshold was not configured, so it remains the default 1
                         logger.LogError("Error 1");     // Noncompliant {{Reduce the number of Error logging calls within this code block from 2 to the 1 allowed.}}
                         logger.LogError("Error 2");     // Secondary
+                    }
+                }
+                """)
+            .Verify();
+
+    [TestMethod]
+    [DataRow(0)]
+    [DataRow(-1)]
+    public void TooManyLoggingCalls_Trace_ZeroOrNegativeDebugThreshold_CS(int debugThreshold) =>
+        new VerifierBuilder().AddAnalyzer(() => new TooManyLoggingCalls { DebugThreshold = debugThreshold })
+            .AddReferences(NuGetMetadataReference.MicrosoftExtensionsLoggingAbstractions())
+            .AddReferences(NuGetMetadataReference.NLog())
+            .AddReferences(NuGetMetadataReference.CastleCore())
+            .AddSnippet("""
+                using Microsoft.Extensions.Logging;
+
+                public class Program
+                {
+                    public static void Method(ILogger microsoft, NLog.ILogger nlog, Castle.Core.Logging.ILogger castle)
+                    {
+                        {
+                            microsoft.LogTrace("Trace");                       // Compliant
+                        }
+                        {
+                            microsoft.Log(LogLevel.Trace, "Trace");            // Compliant
+                        }
+                        {
+                            nlog.Trace("Trace");                               // Compliant
+                        }
+                        {
+                            NLog.ILoggerExtensions.ConditionalTrace(nlog, "Trace"); // Compliant
+                        }
+                        {
+                            nlog.Log(NLog.LogLevel.Trace, "Trace");            // Compliant
+                        }
+                        {
+                            castle.Trace("Trace");                             // Compliant
+                        }
+                        {
+                            castle.TraceFormat("Trace {0}", 42);               // Compliant
+                        }
+                        microsoft.LogDebug("Debug");                           // Noncompliant
                     }
                 }
                 """).Verify();

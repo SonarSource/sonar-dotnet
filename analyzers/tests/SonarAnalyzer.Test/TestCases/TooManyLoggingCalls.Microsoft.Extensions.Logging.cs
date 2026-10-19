@@ -5,22 +5,43 @@ public class Program
 {
     public void Log_Debug(ILogger logger)
     {
-        logger.LogDebug("Debug 1");                                     // Noncompliant
-        logger.LogDebug("Debug 2: {Arg}", 42);                          // Secondary
-        logger.LogDebug(new Exception(), "Debug 2");                    // Secondary
-        logger.LogTrace("Debug 4");                                     // Secondary - FP NET-3295
-        logger.LogTrace("Debug 5: {Arg}", 42);                          // Secondary - FP NET-3295
-        logger.LogTrace(new Exception(), "Debug 6");                    // Secondary - FP NET-3295
-        logger.Log(LogLevel.Debug, "Debug 7");                          // Secondary
-        logger.Log(LogLevel.Trace, "Debug 8");                          // Secondary - FP NET-3295
+        logger.LogDebug("Debug 1");                                     // Compliant
+        logger.LogDebug("Debug 2: {Arg}", 42);
+        logger.LogDebug(new Exception(), "Debug 2");
+        logger.LogTrace("Debug 4");
+        logger.LogTrace("Debug 5: {Arg}", 42);
+        logger.LogTrace(new Exception(), "Debug 6");
+        logger.Log(LogLevel.Debug, "Debug 7");
+        logger.Log(LogLevel.Trace, "Debug 8");
 
         while (true)
         {
             logger.LogDebug("Debug 1");                                 // Compliant
             logger.LogDebug("Debug 2: {Arg}", 42);
-            logger.LogDebug(new Exception(), "Debug 2");
-            logger.LogTrace("Debug 4");
+            logger.LogDebug(new Exception(), "Debug 3");
+            logger.LogDebug("Debug 4");
+            logger.LogTrace("Trace");
         }
+    }
+
+    public static void Log_Trace(ILogger logger)
+    {
+        logger.LogTrace("Trace 1");                                    // Compliant
+        logger.Log(LogLevel.Trace, "Trace 2");
+        logger.Log(message: "Trace 3", logLevel: LogLevel.Trace);
+        LoggerExtensions.LogTrace(logger, "Trace 4");
+        LoggerExtensions.Log(logger, LogLevel.Trace, "Trace 5");
+    }
+
+    public static void Log_DebugAndTrace(ILogger logger)
+    {
+        logger.LogTrace("Trace 1");                                    // Compliant
+        logger.LogDebug("Debug 1");                                    // Noncompliant {{Reduce the number of Debug logging calls within this code block from 5 to the 4 allowed.}}
+        logger.LogDebug("Debug 2");                                    // Secondary
+        logger.Log(LogLevel.Trace, "Trace 2");
+        logger.LogDebug("Debug 3");                                    // Secondary
+        logger.LogDebug("Debug 4");                                    // Secondary
+        logger.Log(LogLevel.Debug, "Debug 5");                         // Secondary
     }
 
     public void Log_Error(ILogger logger)

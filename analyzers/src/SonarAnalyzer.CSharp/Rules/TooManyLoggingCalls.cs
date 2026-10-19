@@ -47,14 +47,14 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
         KnownType.Castle_Core_Logging_ILogger);
 
     private static readonly ImmutableArray<LoggingCategory> LoggingCategories = ImmutableArray.Create<LoggingCategory>(
-        new(CategoryNames.Debug, ImmutableHashSet.Create("ConditionalDebug", "ConditionalTrace", "Debug", "DebugFormat", "LogDebug", "LogTrace", "Trace", "TraceFormat", "Verbose")),
+        new(CategoryNames.Debug, ImmutableHashSet.Create("ConditionalDebug", "Debug", "DebugFormat", "LogDebug", "Verbose")),
         new(CategoryNames.Error, ImmutableHashSet.Create("Error", "ErrorFormat", "Fatal", "FatalFormat", "LogCritical", "LogError")),
         new(CategoryNames.Information, ImmutableHashSet.Create("Info", "InfoFormat", "Information", "LogInformation")),
         new(CategoryNames.Warning, ImmutableHashSet.Create("LogWarning", "Warn", "WarnFormat", "Warning")));
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
-    [RuleParameter("debugThreshold", PropertyType.Integer, "The maximum number of DEBUG, TRACE and VERBOSE statements allowed in the same code block.", DefaultThresholds.Debug)]
+    [RuleParameter("debugThreshold", PropertyType.Integer, "The maximum number of DEBUG and VERBOSE statements allowed in the same code block.", DefaultThresholds.Debug)]
     public int DebugThreshold { get; set; } = DefaultThresholds.Debug;
 
     [RuleParameter("errorThreshold", PropertyType.Integer, "The maximum number of ERROR and FATAL statements allowed in the same code block.", DefaultThresholds.Error)]
@@ -68,12 +68,12 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
 
     protected override void Initialize(SonarParametrizedAnalysisContext context) =>
         context.RegisterCompilationStartAction(cc =>
-        {
-            if (cc.Compilation.ReferencesAny(SupportedLoggingLibraries))
             {
-                cc.RegisterNodeAction(Process, SyntaxKind.Block, SyntaxKind.CompilationUnit);
-            }
-        });
+                if (cc.Compilation.ReferencesAny(SupportedLoggingLibraries))
+                {
+                    cc.RegisterNodeAction(Process, SyntaxKind.Block, SyntaxKind.CompilationUnit);
+                }
+            });
 
     private void Process(SonarSyntaxNodeReportingContext context)
     {
@@ -177,14 +177,13 @@ public sealed class TooManyLoggingCalls : ParametrizedDiagnosticAnalyzer
             || LoggingCategories.Any(x => x.LoggingMethods.Contains(methodName));
 
         private static string LoggingCategoryName(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
-            LoggingCategories.FirstOrDefault(x => x.LoggingMethods.Contains(invocation.GetName()))?.CategoryName
-                ?? CategoryNameForLogLevel(invocation, methodSymbol);
+            LoggingCategories.FirstOrDefault(x => x.LoggingMethods.Contains(invocation.GetName()))?.CategoryName ?? CategoryNameForLogLevel(invocation, methodSymbol);
 
         private static string CategoryNameForLogLevel(InvocationExpressionSyntax invocation, IMethodSymbol methodSymbol) =>
                 LogLevelArgumentName(invocation, methodSymbol) is { } logLevel
                     ? logLevel switch
                     {
-                        "Debug" or "Trace" or "Verbose" => CategoryNames.Debug,
+                        "Debug" or "Verbose" => CategoryNames.Debug,
                         "Critical" or "Error" or "Fatal" => CategoryNames.Error,
                         "Information" => CategoryNames.Information,
                         "Warning" => CategoryNames.Warning,

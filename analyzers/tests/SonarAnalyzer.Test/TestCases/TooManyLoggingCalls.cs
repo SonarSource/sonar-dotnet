@@ -34,11 +34,11 @@ public class Program
 
     public void DifferentMethods_InSameLoggingCategory()
     {
-        logger.LogDebug("Debug 1");         // Noncompliant
-        logger.LogDebug("Debug 2");         // Secondary
-        logger.LogTrace("Trace 1");         // Secondary
-        logger.LogTrace("Trace 2");         // Secondary
-        logger.LogTrace("Trace 3");         // Secondary
+        logger.LogDebug("Debug 1");         // Compliant
+        logger.LogDebug("Debug 2");
+        logger.LogTrace("Trace 1");
+        logger.LogTrace("Trace 2");
+        logger.LogTrace("Trace 3");
 
         logger.LogError("Error 1");         // Noncompliant
         logger.LogCritical("Critical 1");   // Secondary
@@ -120,11 +120,11 @@ public class Program
 
     public void LogMethod_WithLogLevelParameter()
     {
-        logger.Log(LogLevel.Debug, "Debug 1");                      // Noncompliant
-        logger.Log(message: "Debug 2", logLevel: LogLevel.Trace);   // Secondary
-        logger.LogDebug("Debug 3");                                 // Secondary
-        logger.LogTrace("Debug 4");                                 // Secondary
-        logger.Log(LogLevel.Debug, "Debug 5");                      // Secondary
+        logger.Log(LogLevel.Debug, "Debug 1");                      // Compliant
+        logger.Log(message: "Debug 2", logLevel: LogLevel.Trace);
+        logger.LogDebug("Debug 3");
+        logger.LogTrace("Debug 4");
+        logger.Log(LogLevel.Debug, "Debug 5");
 
         logger.Log(LogLevel.Error, "Error 1");                      // Noncompliant
         logger.LogError("Error 2");                                 // Secondary

@@ -17,16 +17,17 @@ public class Program
             logger.Debug("Debug 2", new Exception());
             logger.DebugFormat("Debug 3: {0}", 42);
             logger.DebugFormat("Debug 4: {0} {1}", 42, 42);
+            logger.Trace("Trace");
         }
     }
 
     public void Log_Trace(ILogger logger)
     {
-        logger.Trace("Trace 1");                                    // Noncompliant - FP NET-3295
-        logger.Trace("Trace 2", new Exception());                   // Secondary - FP NET-3295
-        logger.TraceFormat("Trace 3: {0}", 42);                     // Secondary - FP NET-3295
-        logger.TraceFormat("Trace 4: {0} {1}", 42, 42);             // Secondary - FP NET-3295
-        logger.Trace("Trace 5");                                    // Secondary - FP NET-3295
+        logger.Trace("Trace 1");                                    // Compliant
+        logger.Trace("Trace 2", new Exception());
+        logger.TraceFormat("Trace 3: {0}", 42);
+        logger.TraceFormat("Trace 4: {0} {1}", 42, 42);
+        logger.Trace("Trace 5");
 
         while (true)
         {
