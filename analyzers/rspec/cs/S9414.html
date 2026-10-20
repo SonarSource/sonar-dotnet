@@ -1,5 +1,5 @@
-<p>This rule raises an issue when a local variable is declared without initialization and the immediately following statement unconditionally assigns a
-value to it.</p>
+<p>This rule raises an issue when a local variable is declared without initialization and the immediately following statement unconditionally assigns
+a value to it.</p>
 <h2>Why is this an issue?</h2>
 <p>Separating variable declarations from their first assignments reduces code readability and makes it harder to understand the variable’s purpose and
 initial value at a glance.</p>
@@ -10,8 +10,8 @@ lifetime clearer.</p>
 <p>This rule only reports a declaration when the assignment is the very next statement. If other statements appear in between, or the value depends on
 conditional logic such as an <code>if</code>, a loop, a <code>switch</code> or a <code>try</code> block, no issue is raised, because moving the
 declaration could change the meaning of the code.</p>
-<p>No issue is raised either when the assigned expression refers to the variable being declared, as in a recursive lambda or a self-unsubscribing event
-handler. Joining those statements would not compile.</p>
+<p>No issue is raised either when the assigned expression refers to the variable being declared, as in a recursive lambda or a self-unsubscribing
+event handler. Joining those statements would not compile.</p>
 <h3>What is the potential impact?</h3>
 <p>This is primarily a code readability issue. While it doesn’t directly cause bugs, it can make code harder to understand and maintain, potentially
 leading to mistakes when modifying the code later.</p>

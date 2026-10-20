@@ -11,6 +11,9 @@ removed:</p>
   <li>a <code>Select</code>, <code>SelectMany</code>, or <code>Join</code> further downstream projects the same navigation directly — bare, or wrapped
   in an anonymous type or constructor call. Entity Framework Core materializes that navigation because the projection asks for it, independently of
   any <code>Include</code>.</li>
+  <li>a <code>Select</code>, <code>SelectMany</code>, or <code>Join</code> further downstream dereferences into the navigation without returning it
+  directly — a nested property, a value derived from its elements, or a boolean fact about it (a null check, for example). Entity Framework Core still
+  needs the same join to compute that value, independently of any <code>Include</code>.</li>
   <li>the query ends in an aggregate or scalar operator — such as <code>Count</code>, <code>Sum</code>, <code>Any</code>, <code>All</code>,
   <code>Average</code>, or <code>Max</code>/<code>Min</code> with a selector, and their async equivalents — that never returns the entity at all. An
   <code>Include</code> only affects entities the query actually returns.</li>
@@ -59,7 +62,7 @@ var students = await context.Students
 <p>An <code>Include</code> is redundant the same way when a projection further down the query already returns the navigation directly:</p>
 <pre data-diff-id="2" data-diff-type="noncompliant">
 var students = await context.Students
-    .Include(s =&gt; s.Enrollments) // Noncompliant: "Enrollments" is already returned by the projection below
+    .Include(s =&gt; s.Enrollments) // Noncompliant: "Enrollments" is already required by the projection below
     .Select(s =&gt; new { s.LastName, s.Enrollments })
     .ToListAsync();
 </pre>
@@ -68,23 +71,36 @@ var students = await context.Students
     .Select(s =&gt; new { s.LastName, s.Enrollments })
     .ToListAsync();
 </pre>
-<p>It is also redundant when the query never returns the entity at all:</p>
+<p>A projection that only dereferences into the navigation — instead of returning it, as in the example above — makes the <code>Include</code>
+redundant just the same, because Entity Framework Core still needs the same join to compute that value:</p>
 <pre data-diff-id="3" data-diff-type="noncompliant">
+var principals = await context.Students
+    .Include(s =&gt; s.School) // Noncompliant: "School" is already required by the projection below
+    .Select(s =&gt; s.School.Principal)
+    .ToListAsync();
+</pre>
+<pre data-diff-id="3" data-diff-type="compliant">
+var principals = await context.Students
+    .Select(s =&gt; s.School.Principal)
+    .ToListAsync();
+</pre>
+<p>It is also redundant when the query never returns the entity at all:</p>
+<pre data-diff-id="4" data-diff-type="noncompliant">
 var studentCount = await context.Students
     .Include(s =&gt; s.Enrollments) // Noncompliant: this "Include" has no effect; the following call to "CountAsync" never returns the entity
     .CountAsync();
 </pre>
-<pre data-diff-id="3" data-diff-type="compliant">
+<pre data-diff-id="4" data-diff-type="compliant">
 var studentCount = await context.Students
     .CountAsync();
 </pre>
 <p>An <code>Include</code> is also redundant when it targets an owned entity — Entity Framework Core loads it together with its owner regardless:</p>
-<pre data-diff-id="4" data-diff-type="noncompliant">
+<pre data-diff-id="5" data-diff-type="noncompliant">
 var students = await context.Students
     .Include(s =&gt; s.HomeAddress) // Noncompliant: "HomeAddress" is an owned entity and is always loaded with its owner
     .ToListAsync();
 </pre>
-<pre data-diff-id="4" data-diff-type="compliant">
+<pre data-diff-id="5" data-diff-type="compliant">
 var students = await context.Students
     .ToListAsync();
 </pre>
