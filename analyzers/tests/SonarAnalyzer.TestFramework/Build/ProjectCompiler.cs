@@ -38,7 +38,11 @@ public static class ProjectCompiler
         }
         else
         {
-            GeneratorDriver driver = CSharpGeneratorDriver.Create(Generators.Value, razorFiles, (CSharpParseOptions)parseOptions, new RazorAnalyzerConfigOptionsProvider(Directory.GetCurrentDirectory()));
+            GeneratorDriver driver = CSharpGeneratorDriver.Create(
+                Generators.Value,
+                razorFiles,
+                (CSharpParseOptions)parseOptions,
+                new RazorAnalyzerConfigOptionsProvider(Directory.GetCurrentDirectory()));
             driver.RunGeneratorsAndUpdateCompilation(compilation, out var outputCompilation, out var diagnostics);
             if (diagnostics.FirstOrDefault(x => x.Id == "CS8785") is { } generatorFailure)
             {

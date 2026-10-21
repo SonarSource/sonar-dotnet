@@ -25,6 +25,8 @@ public class RazorAnalyzerConfigOptionsProviderTest
     private const string RootPath = "C:/Users/Johnny/source/repos/WebApplication";
     private const string TargetPathKey = "build_metadata.AdditionalFiles.TargetPath";
 
+    public TestContext TestContext { get; set; }
+
     [TestMethod]
     public void Constructor_NullRootPath() =>
         FluentActions.Invoking(() => new RazorAnalyzerConfigOptionsProvider(null)).Should().Throw<ArgumentNullException>().Which.ParamName.Should().Be("rootPath");
@@ -56,7 +58,7 @@ public class RazorAnalyzerConfigOptionsProviderTest
     [TestMethod]
     public void GetOptions_SyntaxTree()
     {
-        new RazorAnalyzerConfigOptionsProvider(RootPath).GetOptions(CSharpSyntaxTree.ParseText("class Sample { }")).TryGetValue(TargetPathKey, out var value).Should().BeFalse();
+        new RazorAnalyzerConfigOptionsProvider(RootPath).GetOptions(CSharpSyntaxTree.ParseText("class Sample { }", cancellationToken: TestContext.CancellationToken)).TryGetValue(TargetPathKey, out var value).Should().BeFalse();
         value.Should().BeNull();
     }
 }
