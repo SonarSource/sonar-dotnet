@@ -127,6 +127,15 @@ namespace Tests.Diagnostics
             app.UseDatabaseErrorPage(); // FN
         }
 
+        public static void ConfigureNotProduction(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            // https://sonarsource.atlassian.net/browse/NET-4818
+            if (!env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant FP: the guard excludes production.
+            }
+        }
+
         public void ConfigureAsArrow(IApplicationBuilder app, IHostingEnvironment env) =>
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
     }

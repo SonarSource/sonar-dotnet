@@ -63,6 +63,15 @@ namespace NetCore3
             app.UseDeveloperExceptionPage(); // FN
         }
 
+        public static void ConfigureNotProduction(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            // https://sonarsource.atlassian.net/browse/NET-4818
+            if (!env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant FP: the guard excludes production.
+            }
+        }
+
         public void ConfigureAsArrow(IApplicationBuilder app, IWebHostEnvironment env) =>
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant
     }
