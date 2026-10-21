@@ -31,59 +31,43 @@ public partial class SonarAnalysisContextBaseTest
     private const string OtherFileName = "OtherFile";
 
     [TestMethod]
-    public void ShouldAnalyzeTree_SonarLint()
-    {
-        var options = AnalysisScaffolding.CreateOptions();   // No SonarProjectConfig.xml
-
-        ShouldAnalyzeTree(options).Should().BeTrue();
-    }
+    public void ShouldAnalyzeTree_SonarLint() =>
+        ShouldAnalyzeTree(AnalysisScaffolding.CreateOptions()).Should().BeTrue(); // No SonarProjectConfig.xml
 
     [TestMethod]
-    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_NotAvailable()
-    {
-        var options = AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product));  // SonarProjectConfig.xml without UnchangedFiles.txt
-
-        ShouldAnalyzeTree(options).Should().BeTrue();
-    }
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_NotAvailable() =>
+        ShouldAnalyzeTree(AnalysisScaffolding.CreateOptions(AnalysisScaffolding.CreateSonarProjectConfig(TestContext, ProjectType.Product))).Should().BeTrue(); // SonarProjectConfig.xml without UnchangedFiles.txt
 
     [TestMethod]
-    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_Empty()
-    {
-        var options = CreateOptions(Array.Empty<string>());
-
-        ShouldAnalyzeTree(options).Should().BeTrue();
-    }
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_Empty() =>
+        ShouldAnalyzeTree(CreateOptions([])).Should().BeTrue();
 
     [TestMethod]
-    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_ContainsTreeFile()
-    {
-        var options = CreateOptions(new[] { OtherFileName + ".cs" });
-
-        ShouldAnalyzeTree(options).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
-    }
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_ContainsTreeFile() =>
+        ShouldAnalyzeTree(CreateOptions([OtherFileName + ".cs"])).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis");
 
     [TestMethod]
-    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_ContainsOtherFile()
-    {
-        var options = CreateOptions(new[] { "ThisIsNotInCompilation.cs", "SomethingElse.cs" });
-
-        ShouldAnalyzeTree(options).Should().BeTrue();
-    }
+    public void ShouldAnalyzeTree_Scanner_UnchangedFiles_ContainsOtherFile() =>
+        ShouldAnalyzeTree(CreateOptions(["ThisIsNotInCompilation.cs", "SomethingElse.cs"])).Should().BeTrue();
 
     [TestMethod]
-    public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedGeneratedFile()
-    {
-        // The generated files have a different root that is not absolute and might not exist on disk.
-        const string generatedFileName = "Microsoft.NET.Sdk.Razor.SourceGenerators\\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\\Pages_Component_razor.g";
-        const string content =
+    public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedGeneratedFile() =>
+        ShouldAnalyzeTree(
+            CreateOptions([@"C:\Component.razor"]),
+            @"Microsoft.NET.Sdk.Razor.SourceGenerators\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.g",
             """
             #pragma checksum "C:\Component.razor" "{8829d00f-11b8-4213-878b-770e8597ac16}" "35c3e85c77eb4f50f311a96f96be44f36c36b570ce2579ec311010076f7ac44d"
-            """;
+            """).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis.");
 
-        var options = CreateOptions(new[] { @"C:\Component.razor" }); // In the configuration file we always provide full paths.
-
-        ShouldAnalyzeTree(options, generatedFileName, content).Should().BeFalse("File is known to be Unchanged in Incremental PR analysis.");
-    }
+    // Since .NET 11 the Razor source generator emits an additional declaration partial per component (e.g. Pages_Component_razor.decl.g.cs).
+    [TestMethod]
+    public void ShouldAnalyzeTree_Scanner_WhenRazorFileHasNotChanged_ReturnsFalseForTheAssociatedDeclGeneratedFile() =>
+        ShouldAnalyzeTree(
+            CreateOptions([@"C:\Component.razor"]),
+            @"Microsoft.CodeAnalysis.Razor.Compiler\Microsoft.NET.Sdk.Razor.SourceGenerators.RazorSourceGenerator\Pages_Component_razor.decl.g",
+            """
+            #line (1,1)-(1,1) "C:\Component.razor"
+            """).Should().BeFalse();
 
     [TestMethod]
     [DataRow(GeneratedFileName, false)]
@@ -92,9 +76,8 @@ public partial class SonarAnalysisContextBaseTest
     {
         var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
-        var sut = CreateSut(compilation, CreateOptions(sonarLintXml, @"TestResources\Foo.xml"));
+        CreateSut(compilation, CreateOptions(sonarLintXml, @"TestResources\Foo.xml")).ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
 
-        sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().Be(expected);
         sonarLintXml.ToStringCallCount.Should().Be(0, "this file doesn't have 'SonarLint.xml' name");
     }
 
@@ -143,9 +126,7 @@ public partial class SonarAnalysisContextBaseTest
     {
         var sonarLintXml = new DummySourceText(AnalysisScaffolding.GenerateSonarLintXmlContent(analyzeGeneratedCode: true));
         var (compilation, tree) = CreateDummyCompilation(AnalyzerLanguage.CSharp, fileName);
-        var sut = CreateSut(compilation, CreateOptions(sonarLintXml));
-
-        sut.ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
+        CreateSut(compilation, CreateOptions(sonarLintXml)).ShouldAnalyzeTree(tree, CSharpGeneratedCodeRecognizer.Instance).Should().BeTrue();
     }
 
     [TestMethod]
@@ -175,8 +156,7 @@ public partial class SonarAnalysisContextBaseTest
     [DataRow("Contains FooGenerated methods")]
     [DataRow("Windows Form Designer generated code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
     [DataRow("Windows Form Designer GeNeRaTed code")] // legacy Windows Forms used to include generated code in dev files, surrounded by such a region
-    public void ShouldAnalyzeTree_IssuesRaisedOnPartiallyGenerated_LegacyWinFormsFile(string regionName)
-    {
+    public void ShouldAnalyzeTree_IssuesRaisedOnPartiallyGenerated_LegacyWinFormsFile(string regionName) =>
         new VerifierBuilder<CS.EmptyStatement>()
             .AddSnippet($$"""
                 class Sample
@@ -194,7 +174,6 @@ public partial class SonarAnalysisContextBaseTest
                 }
                 """)
             .Verify();
-    }
 
     [TestMethod]
     public void ShouldAnalyzeTree_NoIssue_OnGeneratedFile_WithGeneratedName()
@@ -476,9 +455,11 @@ public partial class SonarAnalysisContextBaseTest
         private readonly string textToReturn;
 
         public int ToStringCallCount { get; private set; }
-        public override char this[int position] => throw new NotImplementedException();
+
         public override Encoding Encoding => throw new NotImplementedException();
         public override int Length => throw new NotImplementedException();
+
+        public override char this[int position] => throw new NotImplementedException();
 
         public DummySourceText(string textToReturn) =>
             this.textToReturn = textToReturn;

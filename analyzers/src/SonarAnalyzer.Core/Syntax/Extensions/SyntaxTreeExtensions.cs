@@ -26,6 +26,8 @@ public static class SyntaxTreeExtensions
 
     extension(SyntaxTree tree)
     {
+        public string OriginalFilePath => tree.GetRoot().DescendantNodes(_ => true, true).Select(FileFromDirective).FirstOrDefault(static x => x is not null) ?? tree.FilePath;
+
         public SemanticModel SemanticModelOrDefault(SemanticModel model)
         {
             // See https://github.com/dotnet/roslyn/issues/18730
@@ -38,12 +40,6 @@ public static class SyntaxTreeExtensions
                 ? model.Compilation.GetSemanticModel(tree)
                 : null;
         }
-
-        public string OriginalFilePath =>
-            // Currently we support only C# based generated files.
-            tree.GetRoot().DescendantNodes(_ => true, true).OfType<Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax>().FirstOrDefault() is { } pragmaChecksum
-                ? pragmaChecksum.File.ValueText
-                : tree.FilePath;
 
         [PerformanceSensitive("https://github.com/SonarSource/sonar-dotnet/issues/7439", AllowCaptures = false, AllowGenericEnumeration = false, AllowImplicitBoxing = false)]
         public bool IsGenerated(GeneratedCodeRecognizer generatedCodeRecognizer)
@@ -71,4 +67,18 @@ public static class SyntaxTreeExtensions
 
     private static bool IsGeneratedGetOrAdd(SyntaxTree tree, GeneratedCodeRecognizer generatedCodeRecognizer) =>
         (bool)GeneratedCodeCache.GetValue(tree, x => generatedCodeRecognizer.IsGenerated(x));
+
+    private static string FileFromDirective(SyntaxNode node)
+    {
+        return node switch
+        {
+            Microsoft.CodeAnalysis.CSharp.Syntax.PragmaChecksumDirectiveTriviaSyntax { File: { } file } => FileOrNull(file),
+            Microsoft.CodeAnalysis.CSharp.Syntax.LineDirectiveTriviaSyntax { File: { } file } => FileOrNull(file),
+            _ when LineSpanDirectiveTriviaSyntaxWrapper.IsInstance(node) => FileOrNull(LineSpanDirectiveTriviaSyntaxWrapper.From(node).File),
+            _ => null,
+        };
+
+        static string FileOrNull(SyntaxToken file) =>
+            file is { IsMissing: false, RawKind: not (int)Microsoft.CodeAnalysis.CSharp.SyntaxKind.None } ? file.ValueText : null;
+    }
 }

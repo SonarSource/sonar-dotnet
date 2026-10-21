@@ -15,6 +15,7 @@
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
 
+using SonarAnalyzer.Core.Syntax.Extensions;
 using SonarAnalyzer.TestFramework.Verification.IssueValidation;
 
 namespace SonarAnalyzer.TestFramework.Verification;
@@ -173,8 +174,9 @@ public static class DiagnosticVerifier
 
     private static IEnumerable<SyntaxTree> ExceptRazorGeneratedFiles(IEnumerable<SyntaxTree> syntaxTrees) =>
         syntaxTrees.Where(x =>
-            !x.FilePath.EndsWith("razor.g.cs", StringComparison.OrdinalIgnoreCase)
-            && !x.FilePath.EndsWith("cshtml.g.cs", StringComparison.OrdinalIgnoreCase));
+            !x.EndsWith("razor.g.cs")
+            && !x.EndsWith("cshtml.g.cs")
+            && !x.EndsWith("razor.decl.g.cs"));
 
     private static IEnumerable<Diagnostic> VerifyNoExceptionThrown(IEnumerable<Diagnostic> diagnostics) =>
         diagnostics.Should().NotContain(x => x.Id == AD0001).And.Subject;

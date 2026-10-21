@@ -26,6 +26,7 @@ namespace SonarAnalyzer.Core.Extensions;
 public static class IAnalysisContextExtensions
 {
     private const string RazorGeneratedFileSuffix = "_razor.g.cs";
+    private const string RazorDeclGeneratedFileSuffix = "_razor.decl.g.cs";
 
     private static readonly ConditionalWeakTable<Compilation, ImmutableHashSet<string>> UnchangedFilesCache = new();
     private static readonly ConditionalWeakTable<Compilation, ConcurrentDictionary<string, bool>> FileInclusionCache = new();
@@ -129,7 +130,7 @@ public static class IAnalysisContextExtensions
         // In order to avoid rebuilding the original file path we have to read it from the pragma directive.
         //
         // This should be updated for .cshtml files as well once https://github.com/SonarSource/sonar-dotnet/issues/8032 is done.
-        tree.FilePath.EndsWith(RazorGeneratedFileSuffix, StringComparison.OrdinalIgnoreCase)
+        tree.EndsWith(RazorGeneratedFileSuffix) || tree.EndsWith(RazorDeclGeneratedFileSuffix)
             ? tree.OriginalFilePath
             : tree.FilePath;
 }

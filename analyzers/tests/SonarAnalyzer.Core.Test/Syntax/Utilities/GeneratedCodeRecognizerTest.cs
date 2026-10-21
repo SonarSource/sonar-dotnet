@@ -38,6 +38,7 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile_razor.ide.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.ide.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_RAZOR.g.cS")]
+    [DataRow(@"C:\SonarSource\SomeFile_razor.decl.g.cs")]           // .NET 11 Razor declaration partial
     public void IsGenerated_GeneratedFiles_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -60,6 +61,8 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs")]
     [DataRow(@"SomeFile_razor.ide.g.cs")]
     [DataRow(@"SomeFile.razor.-6NXeWT5Akt4vxdz.ide.g.cs")]
+    [DataRow(@"C:\SonarSource\SomeFile_razor.decl.g.cs")]
+    [DataRow(@"SomeFile_razor.decl.g.cs")]
     public void IsRazorGeneratedFile_RazorGeneratedFiles_Razor_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -98,6 +101,9 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"virtualcsharp-razor:///c:/dev/Project/Views/Home/Index.razor__viRtUaL.cs")]
     [DataRow(@"virtualcsharp-razor:///c:/dev/Project/Views/Home/Index.cshtml__VIRTUAL.cs")]
     [DataRow(@"SomeFile.php.-ABC.ide.g.cs")]
+    [DataRow(@"C:\SonarSource\Foo.decl.g.cs")]
+    [DataRow(@"C:\SonarSource\TypeDecl.g.cs")]
+    [DataRow(@"C:\SonarSource\ModelDecl.g.cs")]
     public void IsRazorGeneratedFile_NonRazorGeneratedFiles_ReturnsFalse(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
@@ -115,6 +121,9 @@ public class GeneratedCodeRecognizerTest
     [DataRow(@"C:\SonarSource\SomeFile_cshtml.g.cs")]
     [DataRow(@"C:\SonarSource\SomeFile_CSHTML.g.cS")]
     [DataRow(@"SomeFile_csHTML.g.cS")]
+    [DataRow(@"C:\SonarSource\SomeFile_razor.decl.g.cs")]
+    [DataRow(@"SomeFile_razor.decl.g.cs")]
+    [DataRow(@"C:\SonarSource\SomeFile_RAZOR.DECL.g.cS")]
     public void IsBuildTimeRazorGeneratedFile_ReturnsTrue(string path)
     {
         var tree = Substitute.For<SyntaxTree>();
