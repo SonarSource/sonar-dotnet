@@ -23,6 +23,15 @@ namespace Tests.Diagnostics
         {
         }
 
+        public static void DefaultLiteralAssignments()
+        {
+            bool flag;
+            while ((flag = default)) { GC.KeepAlive(flag); } // Noncompliant
+            while (((flag = (default)))) { GC.KeepAlive(flag); } // Noncompliant
+            do { GC.KeepAlive(flag); } while ((flag = default)); // Noncompliant
+            do { GC.KeepAlive(flag); } while (((flag = (default)))); // Noncompliant
+        }
+
         void Foo()
         {
             int i = 0;

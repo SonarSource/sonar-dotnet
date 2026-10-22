@@ -139,12 +139,234 @@ namespace Tests.Diagnostics
         public async void Process()
         {
             bool evaluated;
-            while ((evaluated = await GetTask().ConfigureAwait(false))) // Noncompliant FP
+            while ((evaluated = await GetTask().ConfigureAwait(false))) // Compliant
             {
                 // do processing
             }
         }
 
         internal abstract Task<bool> GetTask();
+    }
+
+    // https://sonarsource.atlassian.net/browse/NET-4671
+    public abstract class ParenthesizedLoopCondition
+    {
+        private bool field;
+        public bool Flag { get; set; }
+
+        internal abstract bool GetFlag();
+        internal abstract Task<bool> GetFlagAsync();
+        internal abstract int GetNumber();
+        internal abstract bool Check(bool value);
+        internal abstract void Consume(bool value);
+        internal abstract void Consume(int value);
+
+        public void While_Synchronous()
+        {
+            bool flag;
+            while ((flag = GetFlag())) // Compliant
+            {
+                Consume(flag);
+            }
+
+            while (((flag = GetFlag()))) // Compliant
+            {
+                Consume(flag);
+            }
+        }
+
+        public async Task While_Asynchronous()
+        {
+            bool flag;
+            while ((flag = await GetFlagAsync())) // Compliant
+            {
+                Consume(flag);
+            }
+
+            while ((flag = await GetFlagAsync().ConfigureAwait(false))) // Compliant
+            {
+                Consume(flag);
+            }
+        }
+
+        public void While_Field()
+        {
+            while ((field = GetFlag())) // Compliant
+            {
+                Consume(field);
+            }
+        }
+
+        public void While_Property()
+        {
+            while ((Flag = GetFlag())) // Compliant
+            {
+                Consume(Flag);
+            }
+        }
+
+        public void While_Indexer(bool[] flags, int index)
+        {
+            while ((flags[index] = GetFlag())) // Compliant
+            {
+                Consume(flags[index]);
+            }
+        }
+
+        public void DoWhile_Synchronous()
+        {
+            bool flag = false;
+            do
+            {
+                Consume(flag);
+            }
+            while ((flag = GetFlag())); // Compliant
+        }
+
+        public async Task DoWhile_Asynchronous()
+        {
+            bool flag = false;
+            do
+            {
+                Consume(flag);
+            }
+            while ((flag = await GetFlagAsync())); // Compliant
+
+            do
+            {
+                Consume(flag);
+            }
+            while ((flag = await GetFlagAsync().ConfigureAwait(false))); // Compliant
+        }
+
+        public void CompoundAssignments()
+        {
+            bool flag = false;
+            while ((flag &= GetFlag())) { Consume(flag); } // Compliant
+            while ((flag |= GetFlag())) { Consume(flag); } // Compliant
+            while ((flag ^= GetFlag())) { Consume(flag); } // Compliant
+
+            do { Consume(flag); } while ((flag &= GetFlag())); // Compliant
+            do { Consume(flag); } while ((flag |= GetFlag())); // Compliant
+            do { Consume(flag); } while ((flag ^= GetFlag())); // Compliant
+        }
+
+        public void LiteralAssignments()
+        {
+            bool flag;
+            while ((flag = false)) { Consume(flag); } // Noncompliant {{Extract the assignment of 'flag' from this expression.}}
+            while ((flag = true)) { Consume(flag); } // Noncompliant
+            while (((flag = (false)))) { Consume(flag); } // Noncompliant
+            while (((flag = (true)))) { Consume(flag); } // Noncompliant
+
+            do { Consume(flag); } while ((flag = false)); // Noncompliant
+            do { Consume(flag); } while ((flag = true)); // Noncompliant
+            do { Consume(flag); } while (((flag = (false)))); // Noncompliant
+            do { Consume(flag); } while (((flag = (true)))); // Noncompliant
+
+            while ((flag = default(bool))) { Consume(flag); } // Noncompliant
+            while (((flag = (default(bool))))) { Consume(flag); } // Noncompliant
+            do { Consume(flag); } while ((flag = default(bool))); // Noncompliant
+            do { Consume(flag); } while (((flag = (default(bool))))); // Noncompliant
+        }
+
+        public void EqualityComparisons(bool flag)
+        {
+            while ((flag == true)) // Compliant
+            {
+                flag = GetFlag();
+            }
+
+            while ((flag == false)) // Compliant
+            {
+                flag = GetFlag();
+            }
+
+            do
+            {
+                flag = GetFlag();
+            }
+            while ((flag == true)); // Compliant
+
+            do
+            {
+                flag = GetFlag();
+            }
+            while ((flag == false)); // Compliant
+        }
+
+        public void WithoutExplicitParentheses()
+        {
+            bool flag;
+            while (flag = GetFlag()) // Noncompliant
+            {
+                Consume(flag);
+            }
+
+            do
+            {
+                Consume(flag);
+            }
+            while (flag = GetFlag()); // Noncompliant
+        }
+
+        public void OtherStatementConditions()
+        {
+            bool flag;
+            if ((flag = GetFlag())) // Noncompliant
+            {
+                Consume(flag);
+            }
+
+            for (; (flag = GetFlag());) // Noncompliant
+            {
+                Consume(flag);
+            }
+        }
+
+        public void NestedExpressions(bool ready)
+        {
+            bool flag;
+            while (Check((flag = GetFlag()))) // Noncompliant
+            {
+                Consume(flag);
+            }
+
+            while ((flag = GetFlag()) && ready) // Noncompliant
+            {
+                Consume(flag);
+            }
+
+            while ((flag = GetFlag()) || ready) // Noncompliant
+            {
+                Consume(flag);
+            }
+
+            while (!(flag = GetFlag())) // Noncompliant
+            {
+                Consume(flag);
+            }
+        }
+
+        public void Comparisons()
+        {
+            bool flag;
+            while ((flag = GetFlag()) == true) // Compliant
+            {
+                Consume(flag);
+            }
+
+            do
+            {
+                Consume(flag);
+            }
+            while ((flag = GetFlag()) == true); // Compliant
+
+            int number;
+            while ((number = GetNumber()) > 0) // Compliant
+            {
+                Consume(number);
+            }
+        }
     }
 }

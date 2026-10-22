@@ -100,12 +100,17 @@ public sealed class AssignmentInsideSubExpression : SonarDiagnosticAnalyzer
             .OfType<BinaryExpressionSyntax>()
             .FirstOrDefault(x => x.IsKind(SyntaxKind.CoalesceExpression));
 
-    private static bool IsDirectlyInStatementCondition(ExpressionSyntax expression, ExpressionSyntax topParenthesizedExpression)
+    private static bool IsDirectlyInStatementCondition(AssignmentExpressionSyntax expression, ExpressionSyntax topParenthesizedExpression)
     {
         return IsDirectlyInStatementCondition<IfStatementSyntax>(x => x.Condition)
             || IsDirectlyInStatementCondition<ForStatementSyntax>(x => x.Condition)
-            || IsDirectlyInStatementCondition<WhileStatementSyntax>(x => x.Condition)
-            || IsDirectlyInStatementCondition<DoStatementSyntax>(x => x.Condition);
+            || ((topParenthesizedExpression is not ParenthesizedExpressionSyntax
+                    || expression.Right.WithoutEnclosingParentheses.Kind() is SyntaxKind.TrueLiteralExpression
+                    or SyntaxKind.FalseLiteralExpression
+                    or SyntaxKind.DefaultExpression
+                    or SyntaxKindEx.DefaultLiteralExpression)
+                && (IsDirectlyInStatementCondition<WhileStatementSyntax>(x => x.Condition)
+                    || IsDirectlyInStatementCondition<DoStatementSyntax>(x => x.Condition)));
 
         bool IsDirectlyInStatementCondition<T>(Func<T, ExpressionSyntax> conditionSelector) where T : SyntaxNode =>
             topParenthesizedExpression.Parent.FirstAncestorOrSelf<T>() is { } statement && conditionSelector(statement).WithoutEnclosingParentheses == expression;
