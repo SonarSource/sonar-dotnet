@@ -26,6 +26,23 @@ namespace Exceptions
     }
 }
 
+namespace Awaiters
+{
+    public readonly struct ThreadPoolAwaiter : System.Runtime.CompilerServices.ICriticalNotifyCompletion
+    {
+        public ThreadPoolAwaiter GetAwaiter() => this;
+        public bool IsCompleted => System.Threading.Thread.CurrentThread.IsThreadPoolThread; // Compliant https://sonarsource.atlassian.net/browse/NET-2937
+        public void GetResult() { }
+        public void OnCompleted(Action continuation) => System.Threading.ThreadPool.QueueUserWorkItem(_ => continuation());
+        public void UnsafeOnCompleted(Action continuation) => System.Threading.ThreadPool.QueueUserWorkItem(_ => continuation());
+    }
+
+    public static class Consumer
+    {
+        public static async System.Threading.Tasks.Task AwaitThreadPool() => await new ThreadPoolAwaiter();
+    }
+}
+
 namespace CSharp8
 {
     public interface IUtilities

@@ -78,6 +78,35 @@ public static class ISymbolExtensions
         public bool IsConstructor => symbol.Kind == SymbolKind.Method && symbol.Name == ".ctor";
 
         /// <summary>
+        /// <see langword="true"/> if the symbol is any of the members that make up the <see langword="await"/> pattern.
+        /// </summary>
+        /// <remarks>
+        /// See the <see href="https://learn.microsoft.com/dotnet/csharp/language-reference/language-specification/expressions#12992-awaitable-expressions">awaitable expressions</see> specification.
+        /// </remarks>
+        public bool IsAwaitPatternMember => symbol.IsAwaitableGetAwaiter || symbol.IsAwaiterGetResult || symbol.IsAwaiterIsCompleted;
+
+        /// <summary>
+        /// <see langword="true"/> if the symbol is the <c>GetAwaiter()</c> method that makes its containing type awaitable.
+        /// </summary>
+        public bool IsAwaitableGetAwaiter =>
+            symbol is IMethodSymbol { Name: WellKnownMemberNames.GetAwaiter, IsStatic: false, Parameters.IsEmpty: true, Arity: 0 } getAwaiter
+            && getAwaiter.ReturnType.CanBeAwaiter;
+
+        /// <summary>
+        /// <see langword="true"/> if the symbol is the <c>IsCompleted</c> property that an awaiter has to expose.
+        /// </summary>
+        public bool IsAwaiterIsCompleted =>
+            symbol is IPropertySymbol { Name: WellKnownMemberNames.IsCompleted, IsStatic: false, GetMethod: not null, Type.SpecialType: SpecialType.System_Boolean }
+            && symbol.ContainingType.CanBeAwaiter;
+
+        /// <summary>
+        /// <see langword="true"/> if the symbol is the <c>GetResult()</c> method that an awaiter has to expose.
+        /// </summary>
+        public bool IsAwaiterGetResult =>
+            symbol is IMethodSymbol { Name: WellKnownMemberNames.GetResult, IsStatic: false, Parameters.IsEmpty: true, Arity: 0 }
+            && symbol.ContainingType.CanBeAwaiter;
+
+        /// <summary>
         /// Returns attributes for the symbol by also respecting <see cref="AttributeUsageAttribute.Inherited"/>.
         /// The returned <see cref="AttributeData"/> is consistent with the results from <see cref="MemberInfo.GetCustomAttributes(bool)"/>.
         /// </summary>

@@ -100,6 +100,7 @@ public sealed class MemberShouldBeStatic : SonarDiagnosticAnalyzer
             || IsExcludedByEnclosingType()
             || methodOrPropertySymbol.GetAttributes().Any(IsIgnoredAttribute)
             || IsAutoProperty(methodOrPropertySymbol)
+            || methodOrPropertySymbol.IsAwaitPatternMember
             || IsFrameworkInvokedMethod(methodOrPropertySymbol))
         {
             return;

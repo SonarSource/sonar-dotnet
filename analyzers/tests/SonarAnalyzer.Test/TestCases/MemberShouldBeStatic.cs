@@ -330,12 +330,120 @@ namespace Tests.Diagnostics
         }
     }
 
-    public class Awaitable : INotifyCompletion  // inorder for a type to be awaitable, must implement instanced `IsCompleted` property
+    public class Awaitable : INotifyCompletion
     {
         public Awaitable GetAwaiter() => this;
 
         public void GetResult() { }
-        public bool IsCompleted => !true;       // Noncompliant FP https://sonarsource.atlassian.net/browse/NET-2937
+        public bool IsCompleted => !true;       // Compliant https://sonarsource.atlassian.net/browse/NET-2937
         public void OnCompleted(Action continuation) { }
+
+        public bool OtherProperty => true; // Noncompliant
+        public bool OtherMethod() => true; // Noncompliant
+    }
+
+    public abstract class CompletionBase : INotifyCompletion
+    {
+        public void OnCompleted(Action continuation) { }
+    }
+
+    public class BlockAwaiter : CompletionBase
+    {
+        public bool IsCompleted // Compliant https://sonarsource.atlassian.net/browse/NET-2937
+        {
+            get { return true; }
+            set { }
+        }
+
+        public BlockAwaiter GetAwaiter() => this;
+        public void GetResult() { }
+    }
+
+    public class SeparateAwaitable
+    {
+        private readonly InternalAwaiter awaiter = new InternalAwaiter();
+
+        public InternalAwaiter GetAwaiter() => awaiter;
+    }
+
+    public class InternalAwaiter : INotifyCompletion
+    {
+        internal bool IsCompleted => true; // Compliant https://sonarsource.atlassian.net/browse/NET-2937
+        public void GetResult()
+        {
+            Console.WriteLine();
+        }
+        void INotifyCompletion.OnCompleted(Action continuation) { }
+    }
+
+    public class NewAwaiterAwaitable
+    {
+        public InternalAwaiter GetAwaiter() => new InternalAwaiter(); // Compliant https://sonarsource.atlassian.net/browse/NET-2937
+    }
+
+    public class ExtensionAwaitable { }
+
+    public static class AwaitableExtensions
+    {
+        public static InternalAwaiter GetAwaiter(this ExtensionAwaitable value) => new InternalAwaiter();
+
+        public static async System.Threading.Tasks.Task AwaitAll()
+        {
+            await new Awaitable();
+            await new BlockAwaiter();
+            await new SeparateAwaitable();
+            await new NewAwaiterAwaitable();
+            await new ExtensionAwaitable();
+        }
+    }
+
+    public class CompletionWithoutInterface
+    {
+        public bool IsCompleted => true; // Noncompliant
+    }
+
+    public class CompletionWithWrongType : CompletionBase
+    {
+        public int IsCompleted => 42; // Noncompliant
+    }
+
+    public class WriteOnlyCompletion : CompletionBase
+    {
+        public bool IsCompleted { set { } } // Noncompliant
+    }
+
+    public class CompletionMethod : CompletionBase
+    {
+        public bool IsCompleted() => true; // Noncompliant
+    }
+
+    public class StaticCompletion : CompletionBase
+    {
+        public static bool IsCompleted => true; // Compliant, already static
+    }
+
+    public class NotAwaitable
+    {
+        public int GetAwaiter() => 42; // Noncompliant, the returned type is not an awaiter
+    }
+
+    public class ResultWithoutInterface
+    {
+        public bool GetResult() => true; // Noncompliant
+    }
+
+    public class ResultWithParameter : CompletionBase
+    {
+        public bool GetResult(int value) => true; // Noncompliant
+    }
+
+    public class UnrelatedNotification
+    {
+        public interface INotifyCompletion { }
+
+        public class Awaiter : INotifyCompletion
+        {
+            public bool IsCompleted => true; // Noncompliant
+        }
     }
 }

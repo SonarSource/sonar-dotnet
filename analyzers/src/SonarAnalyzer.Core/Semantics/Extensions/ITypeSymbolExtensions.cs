@@ -47,6 +47,14 @@ public static class ITypeSymbolExtensions
 
         public bool IsNullableBoolean => symbol.IsNullableOf(KnownType.System_Boolean);
 
+        /// <summary>
+        /// <see langword="true"/> if the type can act as the awaiter of an <see langword="await"/> expression.
+        /// </summary>
+        /// <remarks>
+        /// A usable awaiter also needs <c>IsCompleted</c> and <c>GetResult()</c>, but we avoid the member scan of this and all base types for performance reasons.
+        /// </remarks>
+        public bool CanBeAwaiter => symbol.Implements(KnownType.System_Runtime_CompilerServices_INotifyCompletion);
+
         public IEnumerable<INamedTypeSymbol> SelfAndBaseTypes
         {
             get

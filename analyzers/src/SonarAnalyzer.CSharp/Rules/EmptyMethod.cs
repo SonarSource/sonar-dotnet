@@ -49,16 +49,8 @@ public sealed class EmptyMethod : EmptyMethodBase<SyntaxKind>
             && (symbol is { IsVirtual: true }
                 || symbol is { IsOverride: true, OverriddenMethod.IsAbstract: true }
                 || !symbol.ExplicitOrImplicitInterfaceImplementations().IsEmpty
-                || IsAwaiterGetResult(symbol)))
+                || symbol.IsAwaiterGetResult))
         || (modifiers.Any(SyntaxKind.OverrideKeyword) && context.IsTestProject());
-
-    // An awaitable type must have a GetAwaiter() method that returns a type that has an IsCompleted property, a GetResult() method, and implements INotifyCompletion.
-    // GetResult() is required for this implementation and should not raise.
-    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/expressions#12992-awaitable-expressions
-    private static bool IsAwaiterGetResult(IMethodSymbol symbol) =>
-        symbol is { IsStatic: false, Parameters.IsEmpty: true, Arity: 0 }
-        && symbol.Name == WellKnownMemberNames.GetResult
-        && symbol.ContainingType.Implements(KnownType.System_Runtime_CompilerServices_INotifyCompletion);
 
     private static SyntaxToken ReportingToken(SyntaxNode node) =>
         node switch

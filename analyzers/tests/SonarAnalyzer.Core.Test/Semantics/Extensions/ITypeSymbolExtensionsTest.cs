@@ -693,6 +693,50 @@ public class ITypeSymbolExtensionsTest
     public void NullableUnderlyingTypeOrSelf_Null_ReturnsNull() =>
         ((ITypeSymbol)null).NullableUnderlyingTypeOrSelf().Should().BeNull();
 
+    [TestMethod]
+    [DataRow("DirectAwaiter", true)]
+    [DataRow("InheritedAwaiter", true)]
+    [DataRow("ExplicitAwaiter", true)]
+    [DataRow("CriticalAwaiter", true)]
+    [DataRow("NotAnAwaiter", false)]
+    [DataRow("LookalikeAwaiter", false)]
+    public void CanBeAwaiter(string typeName, bool expected) =>
+        new SnippetCompiler("""
+            using System;
+            using System.Runtime.CompilerServices;
+
+            public class DirectAwaiter : INotifyCompletion
+            {
+                public void OnCompleted(Action continuation) { }
+            }
+
+            public class InheritedAwaiter : DirectAwaiter { }
+
+            public class ExplicitAwaiter : INotifyCompletion
+            {
+                void INotifyCompletion.OnCompleted(Action continuation) { }
+            }
+
+            public class CriticalAwaiter : ICriticalNotifyCompletion
+            {
+                public void OnCompleted(Action continuation) { }
+                public void UnsafeOnCompleted(Action continuation) { }
+            }
+
+            public class NotAnAwaiter { }
+
+            namespace Lookalike
+            {
+                public interface INotifyCompletion { }
+
+                public class LookalikeAwaiter : INotifyCompletion { }
+            }
+            """).DeclaredSymbol<INamedTypeSymbol>(typeName).CanBeAwaiter.Should().Be(expected);
+
+    [TestMethod]
+    public void CanBeAwaiter_Null_ReturnsFalse() =>
+        ((ITypeSymbol)null).CanBeAwaiter.Should().BeFalse();
+
     private static IFieldSymbol FirstFieldSymbolFromCode(string code)
     {
         var (tree, model) = TestCompiler.CompileCS(code);

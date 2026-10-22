@@ -77,6 +77,64 @@ public class ISymbolExtensionsTest
         }
         """;
 
+    private static readonly SnippetCompiler AwaitPattern = new("""
+        using System;
+        using System.Runtime.CompilerServices;
+
+        public class SelfAwaiter : INotifyCompletion
+        {
+            public SelfAwaiter GetAwaiter() => this;
+            public bool IsCompleted => true;
+            public void GetResult() { }
+            public void OnCompleted(Action continuation) { }
+        }
+
+        public abstract class CompletionBase : INotifyCompletion
+        {
+            public void OnCompleted(Action continuation) { }
+        }
+
+        public class InheritedAwaiter : CompletionBase
+        {
+            public bool IsCompleted { get { return true; } set { } }
+            public void GetResult() { }
+        }
+
+        public class SeparateAwaitable
+        {
+            public InheritedAwaiter GetAwaiter() => new InheritedAwaiter();
+        }
+
+        public class NotAwaitable
+        {
+            public int GetAwaiter() => 42;
+            public static bool IsCompleted => true;
+        }
+
+        public class NotAwaiter
+        {
+            public bool IsCompleted => true;
+            public void GetResult() { }
+        }
+
+        public class WrongShape : CompletionBase
+        {
+            public int IsCompleted => 42;
+            public bool GetResult(int value) => true;
+        }
+
+        public class WriteOnly : CompletionBase
+        {
+            public bool IsCompleted { set { } }
+        }
+
+        public class Unrelated : CompletionBase
+        {
+            public bool OtherProperty => true;
+            public void OtherMethod() { }
+        }
+        """);
+
     private SnippetCompiler testSnippet;
 
     [TestInitialize]
@@ -574,6 +632,55 @@ public class ISymbolExtensionsTest
     [TestMethod]
     public void IsHiddenFromIntelliSense_Null_ReturnsFalse() =>
         ((ISymbol)null).IsHiddenFromIntelliSense.Should().BeFalse();
+
+    [TestMethod]
+    [DataRow("SelfAwaiter.GetAwaiter", true)]
+    [DataRow("SeparateAwaitable.GetAwaiter", true)]
+    [DataRow("NotAwaitable.GetAwaiter", false)]           // The returned type is not an awaiter
+    [DataRow("SelfAwaiter.GetResult", false)]
+    [DataRow("Unrelated.OtherMethod", false)]
+    public void IsAwaitableGetAwaiter(string typeDotMethodName, bool expected) =>
+        AwaitPattern.MethodSymbol(typeDotMethodName).IsAwaitableGetAwaiter.Should().Be(expected);
+
+    [TestMethod]
+    [DataRow("SelfAwaiter.GetResult", true)]
+    [DataRow("InheritedAwaiter.GetResult", true)]         // INotifyCompletion comes from the base type
+    [DataRow("NotAwaiter.GetResult", false)]              // The containing type is not an awaiter
+    [DataRow("WrongShape.GetResult", false)]              // Takes a parameter
+    [DataRow("SelfAwaiter.GetAwaiter", false)]
+    [DataRow("Unrelated.OtherMethod", false)]
+    public void IsAwaiterGetResult(string typeDotMethodName, bool expected) =>
+        AwaitPattern.MethodSymbol(typeDotMethodName).IsAwaiterGetResult.Should().Be(expected);
+
+    [TestMethod]
+    [DataRow("SelfAwaiter.IsCompleted", true)]
+    [DataRow("InheritedAwaiter.IsCompleted", true)]       // INotifyCompletion comes from the base type
+    [DataRow("NotAwaiter.IsCompleted", false)]            // The containing type is not an awaiter
+    [DataRow("WrongShape.IsCompleted", false)]            // Not a bool
+    [DataRow("WriteOnly.IsCompleted", false)]             // Has no getter
+    [DataRow("NotAwaitable.IsCompleted", false)]          // Already static
+    [DataRow("Unrelated.OtherProperty", false)]
+    public void IsAwaiterIsCompleted(string typeDotPropertyName, bool expected) =>
+        AwaitPattern.PropertySymbol(typeDotPropertyName).IsAwaiterIsCompleted.Should().Be(expected);
+
+    [TestMethod]
+    [DataRow("SelfAwaiter", "GetAwaiter", true)]
+    [DataRow("SelfAwaiter", "IsCompleted", true)]
+    [DataRow("SelfAwaiter", "GetResult", true)]
+    [DataRow("SelfAwaiter", "OnCompleted", false)]        // OnCompleted is bound through the interface, not by the await pattern
+    [DataRow("Unrelated", "OtherProperty", false)]
+    [DataRow("Unrelated", "OtherMethod", false)]
+    public void IsAwaitPatternMember(string typeName, string memberName, bool expected) =>
+        AwaitPattern.DeclaredSymbol<INamedTypeSymbol>(typeName).GetMembers(memberName).Single().IsAwaitPatternMember.Should().Be(expected);
+
+    [TestMethod]
+    public void IsAwaitPatternMember_Null_ReturnsFalse()
+    {
+        ((ISymbol)null).IsAwaitPatternMember.Should().BeFalse();
+        ((ISymbol)null).IsAwaitableGetAwaiter.Should().BeFalse();
+        ((ISymbol)null).IsAwaiterIsCompleted.Should().BeFalse();
+        ((ISymbol)null).IsAwaiterGetResult.Should().BeFalse();
+    }
 
     private static ISymbol CreateSymbol(string snippet, AnalyzerLanguage language, ParseOptions parseOptions = null)
     {
