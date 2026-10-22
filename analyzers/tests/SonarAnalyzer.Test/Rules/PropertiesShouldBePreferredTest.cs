@@ -17,27 +17,18 @@
 
 using SonarAnalyzer.CSharp.Rules;
 
-namespace SonarAnalyzer.Test.Rules
+namespace SonarAnalyzer.Test.Rules;
+
+[TestClass]
+public class PropertiesShouldBePreferredTest
 {
-    [TestClass]
-    public class PropertiesShouldBePreferredTest
-    {
-        private readonly VerifierBuilder builder = new VerifierBuilder<PropertiesShouldBePreferred>();
+    private readonly VerifierBuilder builder = new VerifierBuilder<PropertiesShouldBePreferred>();
 
-        [TestMethod]
-        public void PropertiesShouldBePreferred() =>
-            builder.AddPaths("PropertiesShouldBePreferred.cs").AddReferences(MetadataReferenceFacade.SystemThreadingTasks).Verify();
+    [TestMethod]
+    public void PropertiesShouldBePreferred() =>
+        builder.AddPaths("PropertiesShouldBePreferred.cs").AddReferences(MetadataReferenceFacade.SystemThreadingTasks).Verify();
 
-        [TestMethod]
-        public void PropertiesShouldBePreferred_CSharp9() =>
-            builder.AddPaths("PropertiesShouldBePreferred.CSharp9.cs").WithOptions(LanguageOptions.FromCSharp9).Verify();
-
-        [TestMethod]
-        public void PropertiesShouldBePreferred_CSharp10() =>
-            builder.AddPaths("PropertiesShouldBePreferred.CSharp10.cs").WithOptions(LanguageOptions.FromCSharp10).Verify();
-
-        [TestMethod]
-        public void PropertiesShouldBePreferred_CSharp11() =>
-            builder.AddPaths("PropertiesShouldBePreferred.CSharp11.cs").WithOptions(LanguageOptions.FromCSharp11).Verify();
-    }
+    [TestMethod]
+    public void PropertiesShouldBePreferred_CS_Latest() =>
+        builder.AddPaths("PropertiesShouldBePreferred.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 }

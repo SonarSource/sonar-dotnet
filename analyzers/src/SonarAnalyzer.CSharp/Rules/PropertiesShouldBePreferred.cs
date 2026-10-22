@@ -17,69 +17,67 @@
 
 using System.Collections;
 
-namespace SonarAnalyzer.CSharp.Rules
+namespace SonarAnalyzer.CSharp.Rules;
+
+[DiagnosticAnalyzer(LanguageNames.CSharp)]
+public sealed class PropertiesShouldBePreferred : SonarDiagnosticAnalyzer
 {
-    [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public sealed class PropertiesShouldBePreferred : SonarDiagnosticAnalyzer
-    {
-        private const string DiagnosticId = "S4049";
-        private const string MessageFormat = "Consider making method '{0}' a property.";
+    private const string DiagnosticId = "S4049";
+    private const string MessageFormat = "Consider making method '{0}' a property.";
 
-        private static readonly DiagnosticDescriptor Rule =
-            DescriptorFactory.Create(DiagnosticId, MessageFormat);
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
+    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, MessageFormat);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
 
-        protected override void Initialize(SonarAnalysisContext context) =>
-            context.RegisterNodeAction(c =>
+    protected override void Initialize(SonarAnalysisContext context) =>
+        context.RegisterNodeAction(c =>
+            {
+                if (!c.IsRedundantPositionalRecordContext() && c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol typeSymbol)
                 {
-                    if (c.IsRedundantPositionalRecordContext()
-                        || c.Model.GetDeclaredSymbol(c.Node) is not INamedTypeSymbol typeSymbol)
-                    {
-                        return;
-                    }
-
-                    var propertyCandidates = typeSymbol
-                        .GetMembers()
-                        .OfType<IMethodSymbol>()
-                        .Where(x => HasCandidateName(x) && HasCandidateReturnType(x) && HasCandidateSignature(x) && UsageAttributesAllowProperties(x) && !x.IsGenericMethod);
-
-                    foreach (var candidate in propertyCandidates)
+                    foreach (var candidate in Candidates(typeSymbol)
+                        .Where(x => HasCandidateName(x) && HasCandidateReturnType(x) && HasCandidateSignature(x) && UsageAttributesAllowProperties(x) && !x.IsGenericMethod))
                     {
                         c.ReportIssue(Rule, candidate.Locations.FirstOrDefault(), candidate.Name);
                     }
-                },
-                SyntaxKind.ClassDeclaration,
-                SyntaxKind.InterfaceDeclaration,
-                SyntaxKind.StructDeclaration,
-                SyntaxKindEx.RecordDeclaration,
-                SyntaxKindEx.RecordStructDeclaration);
+                }
+            },
+            SyntaxKind.ClassDeclaration,
+            SyntaxKind.InterfaceDeclaration,
+            SyntaxKind.StructDeclaration,
+            SyntaxKindEx.RecordDeclaration,
+            SyntaxKindEx.RecordStructDeclaration);
 
-        private static bool HasCandidateSignature(IMethodSymbol method) =>
-            method is { IsPubliclyAccessible: true, Parameters.Length: 0, IsConstructor: false, IsOverride: false, MethodKind: not MethodKind.PropertyGet }
-            && method.InterfaceMembers().IsEmpty;
-
-        private static bool HasCandidateReturnType(IMethodSymbol method) =>
-            !method.ReturnsVoid
-            && !method.IsAsync
-            && !method.ReturnType.Is(TypeKind.Array)
-            && !method.ReturnType.OriginalDefinition.IsAny(KnownType.SystemTasks);
-
-        private static bool HasCandidateName(IMethodSymbol method)
-        {
-            if (method.Name is nameof(IEnumerable.GetEnumerator) or nameof(Task.GetAwaiter))
-            {
-                return false;
-            }
-            var nameParts = method.Name.SplitCamelCaseToWords().ToList();
-            return nameParts.Count > 1 && nameParts[0] == "GET";
-        }
-
-        private static bool UsageAttributesAllowProperties(IMethodSymbol method) =>
-            method.GetAttributes()
-                .Select(attribute => attribute.AttributeClass)
-                .SelectMany(cls => cls.GetAttributes(KnownType.System_AttributeUsageAttribute))
-                .Select(attr => attr.ConstructorArguments[0].Value)
-                .Cast<AttributeTargets>()
-                .All(targets => targets.HasFlag(AttributeTargets.Property));
+    private static IEnumerable<IMethodSymbol> Candidates(INamedTypeSymbol type)
+    {
+        var members = type.GetMembers();
+        return members.OfType<IMethodSymbol>().Where(x => !x.IsImplicitlyDeclared).Concat(members.OfType<INamedTypeSymbol>().Where(x => x.IsExtensionBlock)
+            .SelectMany(x => x.GetMembers().OfType<IMethodSymbol>()));
     }
+
+    private static bool HasCandidateSignature(IMethodSymbol method) =>
+        method is { IsPubliclyAccessible: true, Parameters.Length: 0, IsConstructor: false, IsOverride: false, MethodKind: not MethodKind.PropertyGet }
+        && method.InterfaceMembers().IsEmpty;
+
+    private static bool HasCandidateReturnType(IMethodSymbol method) =>
+        !method.ReturnsVoid
+        && !method.IsAsync
+        && !method.ReturnType.Is(TypeKind.Array)
+        && !method.ReturnType.OriginalDefinition.IsAny(KnownType.SystemTasks);
+
+    private static bool HasCandidateName(IMethodSymbol method)
+    {
+        if (method.Name is nameof(IEnumerable.GetEnumerator) or nameof(Task.GetAwaiter))
+        {
+            return false;
+        }
+        var nameParts = method.Name.SplitCamelCaseToWords().ToList();
+        return nameParts.Count > 1 && nameParts[0] == "GET";
+    }
+
+    private static bool UsageAttributesAllowProperties(IMethodSymbol method) =>
+        method.GetAttributes()
+            .Select(x => x.AttributeClass)
+            .SelectMany(x => x.GetAttributes(KnownType.System_AttributeUsageAttribute))
+            .Select(x => x.ConstructorArguments[0].Value)
+            .Cast<AttributeTargets>()
+            .All(x => x.HasFlag(AttributeTargets.Property));
 }
