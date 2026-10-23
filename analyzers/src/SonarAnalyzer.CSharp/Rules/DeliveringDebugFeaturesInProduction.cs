@@ -24,16 +24,30 @@ public sealed class DeliveringDebugFeaturesInProduction : DeliveringDebugFeature
 
     // For simplicity we will avoid creating noise if the validation is invoked in the same method (https://github.com/SonarSource/sonar-dotnet/issues/5032)
     protected override bool IsDevelopmentCheckInvoked(SyntaxNode node, SemanticModel model) =>
-        node.EnclosingScope()
-            .DescendantNodes()
-            .Any(x => IsDevelopmentCheck(x, model));
+        node.EnclosingScope().DescendantNodes().Any(x => IsDevelopmentCheck(x, model))
+        || node.Ancestors().OfType<IfStatementSyntax>().Any(x => IsInNonProductionBranch(x, node, model));
 
     protected override bool IsInDevelopmentContext(SyntaxNode node) =>
         node.Ancestors()
             .OfType<ClassDeclarationSyntax>()
             .Any(x => x.Identifier.Text == StartupDevelopment);
 
+    // Only one branch excludes production: if (!IsProduction()) { here } or if (IsProduction()) { } else { here }
+    private bool IsInNonProductionBranch(IfStatementSyntax statement, SyntaxNode node, SemanticModel model) =>
+        statement.Else is { } elseClause && elseClause.Statement.Span.Contains(node.Span)
+            ? IsProductionCheck(statement.Condition, model)
+            : statement.Statement.Span.Contains(node.Span) && IsNegatedProductionCheck(statement.Condition, model);
+
     private bool IsDevelopmentCheck(SyntaxNode node, SemanticModel model) =>
         node is InvocationExpressionSyntax condition
         && IsValidationMethod(model, condition, condition.Expression.GetIdentifier()?.ValueText);
+
+    private bool IsProductionCheck(ExpressionSyntax condition, SemanticModel model) =>
+        condition.RemoveParentheses() is InvocationExpressionSyntax invocation
+        && IsProductionMethod(model, invocation, invocation.Expression.GetIdentifier()?.ValueText);
+
+    private bool IsNegatedProductionCheck(ExpressionSyntax condition, SemanticModel model) =>
+        condition.RemoveParentheses() is PrefixUnaryExpressionSyntax negation
+        && negation.IsKind(SyntaxKind.LogicalNotExpression)
+        && IsProductionCheck(negation.Operand, model);
 }

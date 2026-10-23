@@ -25,9 +25,8 @@ public abstract class DeliveringDebugFeaturesInProductionBase<TSyntaxKind> : Son
     protected const string StartupDevelopment = "StartupDevelopment";
     private const string DiagnosticId = "S4507";
 
-    private readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = ImmutableArray.Create(
-        new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, "IsDevelopment"),
-        new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, "IsDevelopment"));
+    private readonly ImmutableArray<MemberDescriptor> isDevelopmentMethods = EnvironmentChecks("IsDevelopment");
+    private readonly ImmutableArray<MemberDescriptor> isProductionMethods = EnvironmentChecks("IsProduction");
 
     protected abstract bool IsDevelopmentCheckInvoked(SyntaxNode node, SemanticModel model);
 
@@ -51,6 +50,17 @@ public abstract class DeliveringDebugFeaturesInProductionBase<TSyntaxKind> : Son
     }
 
     protected bool IsValidationMethod(SemanticModel model, SyntaxNode condition, string methodName) =>
+        IsMatch(isDevelopmentMethods, model, condition, methodName);
+
+    protected bool IsProductionMethod(SemanticModel model, SyntaxNode condition, string methodName) =>
+        IsMatch(isProductionMethods, model, condition, methodName);
+
+    private bool IsMatch(ImmutableArray<MemberDescriptor> methods, SemanticModel model, SyntaxNode condition, string methodName) =>
         new Lazy<IMethodSymbol>(() => model.GetSymbolInfo(condition).Symbol as IMethodSymbol) is var lazySymbol
-        && isDevelopmentMethods.Any(x => x.IsMatch(methodName, lazySymbol, Language.NameComparison));
+        && methods.Any(x => x.IsMatch(methodName, lazySymbol, Language.NameComparison));
+
+    private static ImmutableArray<MemberDescriptor> EnvironmentChecks(string name) =>
+        ImmutableArray.Create(
+            new MemberDescriptor(KnownType.Microsoft_AspNetCore_Hosting_HostingEnvironmentExtensions, name),
+            new MemberDescriptor(KnownType.Microsoft_Extensions_Hosting_HostEnvironmentEnvExtensions, name));
 }

@@ -10,4 +10,14 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+ConfigureNonProduction(app);
 app.Run();
+
+static void ConfigureNonProduction(WebApplication app)
+{
+    // https://sonarsource.atlassian.net/browse/NET-4818
+    if (!app.Environment.IsProduction())
+    {
+        app.UseDeveloperExceptionPage(); // Compliant
+    }
+}

@@ -68,9 +68,65 @@ namespace NetCore3
             // https://sonarsource.atlassian.net/browse/NET-4818
             if (!env.IsProduction())
             {
-                app.UseDeveloperExceptionPage(); // Noncompliant FP: the guard excludes production.
+                app.UseDeveloperExceptionPage(); // Compliant
+                System.Action configure = () => app.UseDeveloperExceptionPage(); // Compliant
+                configure();
+            }
+            else
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant
             }
         }
+
+        public static void ConfigureNotProductionStatic(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (!HostEnvironmentEnvExtensions.IsProduction(env))
+            {
+                DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Compliant
+            }
+        }
+
+        public static void ConfigureProductionElse(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsProduction())
+            {
+                // Production-only setup
+            }
+            else
+            {
+                app.UseDeveloperExceptionPage(); // Compliant
+            }
+        }
+
+        public static void ConfigureProductionElseIf(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsProduction())
+            {
+                app.UseExceptionHandler("/Error");
+            }
+            else if (env.EnvironmentName == "Staging")
+            {
+                app.UseDeveloperExceptionPage(); // Compliant
+            }
+        }
+
+        public static void ConfigureInProduction(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant
+            }
+        }
+
+        public static void ConfigureNotProductionUnrelated(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (!IsProduction(env))
+            {
+                app.UseDeveloperExceptionPage(); // Noncompliant: unrelated method
+            }
+        }
+
+        private static bool IsProduction(IWebHostEnvironment env) => env.EnvironmentName == "Production";
 
         public void ConfigureAsArrow(IApplicationBuilder app, IWebHostEnvironment env) =>
             DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app); // Noncompliant

@@ -55,6 +55,64 @@ Namespace Tests.Diagnostics
             If Not env.IsDevelopment() Then app.UseDatabaseErrorPage() ' Noncompliant
         End Sub
 
+        Public Shared Sub ConfigureNotProduction(ByVal app As IApplicationBuilder, ByVal env As IHostingEnvironment)
+            ' https://sonarsource.atlassian.net/browse/NET-4818
+            If Not env.IsProduction() Then
+                app.UseDeveloperExceptionPage() ' Compliant
+                app.UseDatabaseErrorPage() ' Compliant
+                Dim configure As Action = Sub() app.UseDeveloperExceptionPage() ' Compliant
+                configure()
+            Else
+                app.UseDeveloperExceptionPage() ' Noncompliant
+            End If
+
+            If Not HostingEnvironmentExtensions.IsProduction(env) Then
+                DeveloperExceptionPageExtensions.UseDeveloperExceptionPage(app) ' Compliant
+            End If
+
+            If Not env.IsProduction() Then app.UseDeveloperExceptionPage() ' Compliant
+            If Not env.IsProduction Then app.UseDatabaseErrorPage() ' Compliant
+
+            If env.IsProduction() Then
+                ' Production-only setup
+            Else
+                app.UseDeveloperExceptionPage() ' Compliant
+            End If
+
+            If env.IsProduction() Then
+                app.UseExceptionHandler("/Error")
+            ElseIf env.EnvironmentName = "Staging" Then
+                app.UseDeveloperExceptionPage() ' Compliant
+            End If
+
+            If env.IsProduction() Then
+                app.UseDeveloperExceptionPage() ' Noncompliant
+            End If
+
+            If env.IsProduction() Then app.UseExceptionHandler("/Error") Else app.UseDeveloperExceptionPage() ' Compliant
+            If Not IsProduction(env) Then app.UseDeveloperExceptionPage() ' Noncompliant: unrelated method
+        End Sub
+
+        Public Shared Sub ConfigureElseIf(ByVal app As IApplicationBuilder, ByVal env As IHostingEnvironment)
+            If env.EnvironmentName = "Staging" Then
+                ' Staging-only setup
+            ElseIf Not env.IsProduction() Then
+                app.UseDeveloperExceptionPage() ' Compliant
+            Else
+                app.UseDeveloperExceptionPage() ' Noncompliant
+            End If
+
+            If env.EnvironmentName = "Staging" Then
+                ' Staging-only setup
+            ElseIf env.IsDevelopment() Then
+                app.UseDeveloperExceptionPage() ' Compliant
+            End If
+        End Sub
+
+        Private Shared Function IsProduction(env As IHostingEnvironment) As Boolean
+            Return env.EnvironmentName = "Production"
+        End Function
+
     End Class
 
 End Namespace
