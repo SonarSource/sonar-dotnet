@@ -34,7 +34,7 @@ public sealed class PropertiesShouldBePreferred : SonarDiagnosticAnalyzer
                 if (!c.IsRedundantPositionalRecordContext() && c.Model.GetDeclaredSymbol(c.Node) is INamedTypeSymbol typeSymbol)
                 {
                     foreach (var candidate in Candidates(typeSymbol)
-                        .Where(x => HasCandidateName(x) && HasCandidateReturnType(x) && HasCandidateSignature(x) && UsageAttributesAllowProperties(x) && !x.IsGenericMethod))
+                        .Where(x => !x.IsGenericMethod && !x.IsAwaiterGetResult && HasCandidateName(x) && HasCandidateReturnType(x) && HasCandidateSignature(x) && UsageAttributesAllowProperties(x)))
                     {
                         c.ReportIssue(Rule, candidate.Locations.FirstOrDefault(), candidate.Name);
                     }

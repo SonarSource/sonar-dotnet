@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace MyLibrary
 {
@@ -196,4 +197,29 @@ public class Repro_8739
         public IEnumerable<T> GetNodes() =>  // Noncompliant, this can be a property
             Calculate<T>();
     }
+}
+
+public class ValueAwaiter : INotifyCompletion
+{
+    public bool IsCompleted => true;
+    public int GetResult() => 42; // Compliant: required for the awaiter
+    public int GetValue() => 1;   // Noncompliant: only GetResult is exempt on an awaiter
+    public void OnCompleted(Action continuation) { }
+}
+
+public class Awaitable
+{
+    public ValueAwaiter GetAwaiter() => new ValueAwaiter();   // Compliant, get awaiter is required
+}
+
+public class NotAnAwaiter
+{
+    public int GetResult() => 42; // Noncompliant
+}
+
+public class StaticResultAwaiter : INotifyCompletion
+{
+    public bool IsCompleted => true;
+    public static int GetResult() => 42; // Noncompliant: Awaiter GetResult cannot be static
+    public void OnCompleted(Action continuation) { }
 }
