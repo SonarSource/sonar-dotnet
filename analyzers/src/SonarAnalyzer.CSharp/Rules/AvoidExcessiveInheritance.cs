@@ -91,7 +91,7 @@ namespace SonarAnalyzer.CSharp.Rules
         private static Regex WildcardPatternToRegularExpression(string pattern)
         {
             var regexPattern = string.Concat("^", Regex.Escape(pattern).Replace("\\*", ".*"), "$");
-            return new Regex(regexPattern, RegexOptions.Compiled, Constants.DefaultRegexTimeout);
+            return new Regex(regexPattern, RegexOptions.None, Constants.DefaultRegexTimeout);
         }
 
         private readonly struct ObjectTypeInfo
