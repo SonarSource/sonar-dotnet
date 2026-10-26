@@ -1,0 +1,25 @@
+{
+  "title": "Lock object fields should use \"System.Threading.Lock\" type",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "5 min"
+  },
+  "tags": [
+    "threading",
+    "performance",
+    "modernization"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-9422",
+  "sqKey": "S9422",
+  "scope": "All",
+  "quickfix": "unknown",
+  "code": {
+    "impacts": {
+      "MAINTAINABILITY": "MEDIUM"
+    },
+    "attribute": "CONVENTIONAL"
+  }
+}

@@ -33,7 +33,7 @@ Learn more about [SonarQube analysis for C#](https://www.sonarsource.com/knowled
 
 ## Features
 
-* 480+ C# rules and 210+ VB.&#8203;NET rules
+* 490+ C# rules and 210+ VB.&#8203;NET rules
 * Metrics (cognitive complexity, duplications, number of lines, etc.)
 * Import of [test coverage reports](https://community.sonarsource.com/t/9871) from Visual Studio Code Coverage, dotCover, OpenCover, Coverlet, Altcover.
 * Import of third-party Roslyn Analyzers results

@@ -1,0 +1,72 @@
+<p>This rule raises an issue when a field used in a <code>lock</code> statement is declared with type <code>object</code> or another non-specialized
+type instead of <code>System.Threading.Lock</code>.</p>
+<p>This applies to projects targeting C# 13 and .NET 9 or later, where <code>System.Threading.Lock</code> is available.</p>
+<h2>Why is this an issue?</h2>
+<p>When using the <code>lock</code> statement in C#, you need an object to serve as the synchronization point. Traditionally, developers have used
+<code>private readonly object _lock = new();</code> for this purpose.</p>
+<p>Starting with C# 13 and .NET 9, Microsoft introduced <code>System.Threading.Lock</code> as a dedicated type specifically designed for use with
+<code>lock</code> statements. This new type offers several advantages:</p>
+<ul>
+  <li><strong>Better performance</strong>: <code>System.Threading.Lock</code> is optimized for locking scenarios and can provide performance
+  improvements over the traditional <code>object</code>-based approach</li>
+  <li><strong>Clearer intent</strong>: Using a dedicated lock type makes your code’s synchronization intent explicit</li>
+  <li><strong>Type safety</strong>: The compiler can better understand and optimize code using the specialized type</li>
+</ul>
+<p>Continuing to use <code>object</code> or other non-specialized types for lock fields means missing out on these benefits, especially in
+performance-critical code sections.</p>
+<h3>What is the potential impact?</h3>
+<p>Using <code>object</code> instead of <code>System.Threading.Lock</code> for synchronization can lead to:</p>
+<ul>
+  <li><strong>Performance degradation</strong>: The traditional <code>Monitor</code>-based synchronization used with <code>object</code> is less
+  efficient than the optimized implementation of <code>System.Threading.Lock</code></li>
+  <li><strong>Less maintainable code</strong>: Using a generic <code>object</code> type doesn’t clearly communicate that the field is intended
+  exclusively for synchronization</li>
+  <li><strong>Missed optimization opportunities</strong>: The compiler and runtime can apply specific optimizations when they recognize the dedicated
+  lock type</li>
+</ul>
+<h2>How to fix it</h2>
+<p>Change the field declaration from <code>object</code> to <code>System.Threading.Lock</code>. All existing <code>lock</code> statements using the
+field continue to work without modification.</p>
+<p>Note: This fix requires your project to target .NET 9 or later and use C# 13 or later.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public class Sample
+{
+    readonly List&lt;int&gt; _list = [];
+    readonly object _lock = new(); // Noncompliant
+
+    public void Add(int k)
+    {
+        lock (_lock)
+        {
+            _list.Add(k);
+        }
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public class Sample
+{
+    readonly List&lt;int&gt; _list = [];
+    readonly Lock _lock = new();
+
+    public void Add(int k)
+    {
+        lock (_lock)
+        {
+            _list.Add(k);
+        }
+    }
+}
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/api/system.threading.lock">Lock Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/lock">lock statement - C#
+  reference</a></li>
+  <li>Microsoft DevBlogs - <a href="https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-9/#lock-object">Performance Improvements in
+  .NET 9 - Lock object</a></li>
+</ul>
