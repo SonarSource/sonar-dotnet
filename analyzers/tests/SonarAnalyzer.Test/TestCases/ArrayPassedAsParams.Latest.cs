@@ -116,3 +116,14 @@ public class ImplicitSpanConversion
 
     public static void DoSomething(params Span<string> arr) { }
 }
+
+public class CollectionExpressionWithArgument
+{
+    public static void Test()
+    {
+        WithComparer([with(StringComparer.OrdinalIgnoreCase), "s1", "S1"]); // Noncompliant FP NET-4875
+        WithComparer("s1", "S1");                                          // Compliant
+    }
+
+    public static void WithComparer(params HashSet<string> set) { }
+}

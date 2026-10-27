@@ -54,3 +54,11 @@ namespace CSharp14
         public NonPartialConstructor() { }  // Noncompliant
     }
 }
+
+namespace CSharp15
+{
+    public closed class ClosedWithPublicCtor
+    {
+        public ClosedWithPublicCtor() { } // FN NET-4874
+    }
+}

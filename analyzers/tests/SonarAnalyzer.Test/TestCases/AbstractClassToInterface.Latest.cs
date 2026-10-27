@@ -149,3 +149,16 @@ namespace CSharp14
         public partial event System.EventHandler<System.EventArgs> PartialEvent;
     }
 }
+
+namespace CSharp15
+{
+    public closed class ClosedAllAbstract // Noncompliant {{Convert this 'abstract' class to an interface.}} FP NET-4873
+    {
+        public abstract void Move();
+    }
+
+    public class ClosedAllAbstractDerived : ClosedAllAbstract
+    {
+        public override void Move() { }
+    }
+}

@@ -160,3 +160,21 @@ namespace CSharp13
         }
     }
 }
+
+namespace CSharp15
+{
+    public union Shape(Circle, Square);
+    public class Circle { public int Radius { get; set; } }
+    public class Square { public int Side { get; set; } }
+
+    public class Model
+    {
+        public Shape ShapeProperty { get; set; }              // Noncompliant
+        public Shape? NullableShapeProperty { get; set; }      // Compliant
+    }
+
+    public class DerivedFromController : Controller
+    {
+        [HttpPost] public IActionResult Create(Model model) => View(model);
+    }
+}
