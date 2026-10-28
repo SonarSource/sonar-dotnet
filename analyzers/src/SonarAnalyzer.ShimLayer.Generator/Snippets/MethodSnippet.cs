@@ -39,10 +39,8 @@ public abstract class MethodSnippet : Snippet<MethodInfo>
         var staticSnippet = member.IsStatic ? "static " : null;
         var thisSnippet = attributes.Any(x => x.AttributeType.Name == nameof(ExtensionAttribute)) ? "this " : null;
         var genericArgumentsSnippet = member.ContainsGenericParameters ? $"<{member.GetGenericArguments().JoinStr(", ", x => x.Name)}>" : null;
-        var modifiersSnippet = $"{SerializeAttributes(attributes, indentSize)}public {staticSnippet}";
-        var parametersSnippet = $"{thisSnippet}{parameters.JoinStr(", ", SerializeParameter)}";
         return $"""
-            {Indent(indentSize)}{modifiersSnippet}{returnType.ReturnTypeSnippet} {member.Name}{genericArgumentsSnippet}({parametersSnippet}){SerializeGenericConstraints()} => {InvocationSnippet()};
+            {Indent(indentSize)}{SerializeAttributes(attributes, indentSize)}public {staticSnippet}{returnType.ReturnTypeSnippet} {member.Name}{genericArgumentsSnippet}({thisSnippet}{parameters.JoinStr(", ", SerializeParameter)}){SerializeGenericConstraints()} => {InvocationSnippet()};
             """;
     }
 
