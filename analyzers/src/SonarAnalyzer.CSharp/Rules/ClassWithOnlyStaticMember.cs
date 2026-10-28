@@ -79,17 +79,15 @@ namespace SonarAnalyzer.CSharp.Rules
                 var syntaxReferences = constructor.DeclaringSyntaxReferences;
                 foreach (var syntaxReference in syntaxReferences)
                 {
-                    switch (syntaxReference.GetSyntax())
+                    var syntax = syntaxReference.GetSyntax();
+                    if (syntax is ConstructorDeclarationSyntax constructorDeclaration)
                     {
-                        case ConstructorDeclarationSyntax constructorDeclaration:
-                            var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
-                            context.ReportIssue(Rule, constructorDeclaration.Identifier, reportMessage);
-                            break;
-                        case ClassDeclarationSyntax classDeclaration when classDeclaration.ParameterList() is { Parameters.Count: 0 }:
-                            context.ReportIssue(Rule, classDeclaration.Identifier, MessageFormatPrimaryConstructor);
-                            break;
-                        default:
-                            break;
+                        var reportMessage = string.Format(MessageFormatConstructor, utilityClass.IsSealed ? SyntaxConstants.Private : SyntaxConstants.Protected);
+                        context.ReportIssue(Rule, constructorDeclaration.Identifier, reportMessage);
+                    }
+                    else if (syntax is ClassDeclarationSyntax classDeclaration && classDeclaration.ParameterList() is { Parameters.Count: 0 })
+                    {
+                        context.ReportIssue(Rule, classDeclaration.Identifier, MessageFormatPrimaryConstructor);
                     }
                 }
             }

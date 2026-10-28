@@ -28,7 +28,7 @@ internal static class WildcardPatternMatcher
 
     public static bool IsMatch(string pattern, string input, bool timeoutFallbackResult) =>
         !(string.IsNullOrWhiteSpace(pattern) || string.IsNullOrWhiteSpace(input))
-        && Cache.GetOrAdd(pattern, _ => new Regex(ToRegex(pattern), RegexOptions.None, Constants.DefaultRegexTimeout)) is var regex
+        && Cache.GetOrAdd(pattern, x => new Regex(ToRegex(x), RegexOptions.None, Constants.DefaultRegexTimeout)) is var regex
         && regex.SafeIsMatch(input.Trim('/'), timeoutFallbackResult);
 
     /// <summary>
