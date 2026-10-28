@@ -47,3 +47,16 @@ public class FieldKeyword
         }
     }
 }
+
+public class UnionDog { }
+public class UnionCat { }
+public union UnionPet(UnionDog, UnionCat);
+
+public class UnionForeach
+{
+    public void CaseToUnion(List<UnionDog> dogs)
+    {
+        foreach (UnionPet pet in dogs)
+        { }
+    }
+}

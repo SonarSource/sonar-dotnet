@@ -115,3 +115,67 @@ public class NullConditionalAssignment
     public void Assign() =>
         this?.value = 100;
 }
+
+public static class BitExtensions
+{
+    extension(ref int bits)
+    {
+        public int this[int bit]
+        {
+            get => (bits >> bit) & 1;
+            set => bits |= value << bit;
+        }
+    }
+}
+
+public class ExtensionIndexerOnRefReceiver
+{
+    private int flags = 42; // Noncompliant FP NET-744
+
+    public void Set(int bit) =>
+        flags[bit] = 1;
+}
+
+public class ExtensionIndexerOnRefReceiverVariants
+{
+    private int compound = 42;      // Noncompliant FP NET-744
+    private int postfix = 42;       // Noncompliant FP NET-744
+    private int prefix = 42;        // Noncompliant FP NET-744
+    private int thisAccess = 42;    // Noncompliant FP NET-744
+
+    public void Compound(int bit) =>
+        compound[bit] |= 1;
+
+    public void Postfix(int bit) =>
+        postfix[bit]++;
+
+    public void Prefix(int bit) =>
+        --prefix[bit];
+
+    public void ThisAccess(int bit) =>
+        this.thisAccess[bit] = 1;
+}
+
+public class ExtensionPropertyOnRefReceiver
+{
+    private int propertyRead = 42;  // Noncompliant FP NET-744
+    private int propertyWrite = 42; // Compliant
+
+    public bool Read() =>
+        propertyRead.Low;
+
+    public void Write() =>
+        propertyWrite.Low = true;
+}
+
+public static class BitPropertyExtensions
+{
+    extension(ref int bits)
+    {
+        public bool Low
+        {
+            get => (bits & 1) == 1;
+            set => bits |= value ? 1 : 0;
+        }
+    }
+}
