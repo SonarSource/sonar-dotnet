@@ -39,9 +39,15 @@ public static class IssueReporter
         RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
         Constants.DefaultRegexTimeout);
 
-    // Minimum supported version for Razor IDE is Visual Studio 17.9/Roslyn 4.9.2
+    // Minimum supported version for Razor IDE is Visual Studio 17.9/Roslyn 4.9.2.
     // https://learn.microsoft.com/en-us/visualstudio/extensibility/roslyn-version-support?view=vs-2022
-    private static Version minimumDesignTimeRoslynVersion = new("4.9.2");
+    internal static Version MinimumDesignTimeRoslynVersion { get; set; } = new("4.9.2");
+
+    // The build-time and design-time gates are intentionally separate: Roslyn 4.9.0 maps build-time Razor
+    // locations when writing SARIF, while the existing Razor IDE support requires the later 4.9.2 version.
+    // https://learn.microsoft.com/en-us/visualstudio/extensibility/roslyn-version-support?view=vs-2022
+    // https://github.com/dotnet/roslyn/pull/71454
+    internal static Version MinimumBuildTimeRoslynVersion { get; set; } = new("4.9.0");
 
     public static void ReportIssueCore(Compilation compilation,
                                        Func<DiagnosticDescriptor, bool> hasMatchingScope,
@@ -89,26 +95,22 @@ public static class IssueReporter
         }
     }
 
-    internal static void SetMinimumDesignTimeRoslynVersion(Version version) =>
-     minimumDesignTimeRoslynVersion = version;
-
-    internal static Version GetMinimumDesignTimeRoslynVersion() =>
-        minimumDesignTimeRoslynVersion;
-
     internal static bool IsTextMatchingVbcErrorPattern(string text) =>
         text is not null && VbNetErrorPattern.SafeIsMatch(text);
 
     private static bool ShouldRaiseOnRazorFile(ref Diagnostic diagnostic)
     {
-        // On build time, if the diagnostic has a mapped location, we do the mapping ourselves and raise there.
-        if (GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
+        var sourceTree = diagnostic.Location.SourceTree;
+        if (GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(sourceTree))
         {
             if (diagnostic.Location.GetMappedLineSpan().HasMappedPath)
             {
-                // we want to map the locations of razor files exclusively during compile time, and not design time (IDE).
-                // The reason is that for IDE, the correct way to raise issues is directly on the generated files.
-                // source: https://github.com/dotnet/razor/issues/9308#issuecomment-1883869224
-                diagnostic = MapDiagnostic(diagnostic);
+                // Roslyn 4.9.0+ maps generated Razor locations in SARIF. Keep the generated location so source suppressions apply.
+                // Older versions need manual mapping before reporting the diagnostic.
+                if (RoslynVersion.IsVersionLessThan(MinimumBuildTimeRoslynVersion))
+                {
+                    diagnostic = MapDiagnostic(diagnostic);
+                }
                 return true;
             }
             else
@@ -116,16 +118,16 @@ public static class IssueReporter
                 return false;
             }
         }
-        // On design time, we only raise on generated .ide.g.cs files if the diagnostic has a mapped location.
-        else if (GeneratedCodeRecognizer.IsDesignTimeRazorGeneratedFile(diagnostic.Location.SourceTree))
+        else if (GeneratedCodeRecognizer.IsDesignTimeRazorGeneratedFile(sourceTree))
         {
+            // On design time, we only raise on generated .ide.g.cs files if the diagnostic has a mapped location.
             return diagnostic.Location.GetMappedLineSpan().HasMappedPath
                 && !ExcludedFromDesignTimeRuleIds.Contains(diagnostic.Id)
-                && !RoslynVersion.IsVersionLessThan(minimumDesignTimeRoslynVersion);
+                && !RoslynVersion.IsVersionLessThan(MinimumDesignTimeRoslynVersion);
         }
-        // If it is not a build/design-time generated file, it is a normal file.
         else
         {
+            // If it is not a build/design-time generated file, it is a normal file.
             return true;
         }
     }

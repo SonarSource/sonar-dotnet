@@ -16,6 +16,7 @@
  */
 
 using SonarAnalyzer.Core.Syntax.Extensions;
+using SonarAnalyzer.Core.Syntax.Utilities;
 using HashCode = SonarAnalyzer.Core.Common.HashCode;
 
 namespace SonarAnalyzer.TestFramework.Verification.IssueValidation;
@@ -44,10 +45,16 @@ internal sealed class IssueLocation
     public int? Length { get; set; }
 
     public IssueLocation(Diagnostic diagnostic)
-        : this(diagnostic.Severity == DiagnosticSeverity.Error ? IssueType.Error : IssueType.Primary, diagnostic.Id, diagnostic.GetMessage(), diagnostic.Location, diagnostic.Location.GetLineSpan()) =>
+        : this(
+            diagnostic.Severity == DiagnosticSeverity.Error ? IssueType.Error : IssueType.Primary,
+            diagnostic.Id,
+            diagnostic.GetMessage(),
+            diagnostic.Location,
+            MapLocation(diagnostic.Location)) =>
         issueId = diagnostic.Severity == DiagnosticSeverity.Error ? diagnostic.Id : null;   // Error [CS1001] should assert that expected issueId matches the actual RuleId
 
-    public IssueLocation(IssueLocation primary, SecondaryLocation secondary) : this(IssueType.Secondary, primary.RuleId, secondary.Message, secondary.Location, secondary.Location.GetLineSpan()) =>
+    public IssueLocation(IssueLocation primary, SecondaryLocation secondary)
+        : this(IssueType.Secondary, primary.RuleId, secondary.Message, secondary.Location, MapLocation(secondary.Location)) =>
         Primary = primary;
 
     public IssueLocation(IssueType type, string filePath, int lineNumber, string message, string issueId, int? start, int? length, string ruleId = null)
@@ -86,6 +93,11 @@ internal sealed class IssueLocation
         && EqualOrNull(issue.Message, Message)
         && EqualOrNull(issue.Start, Start)
         && EqualOrNull(issue.Length, Length);
+
+    private static FileLinePositionSpan MapLocation(Location location) =>
+        GeneratedCodeRecognizer.IsBuildTimeRazorGeneratedFile(location.SourceTree)
+            ? location.GetMappedLineSpan()
+            : location.GetLineSpan();
 
     private static bool EqualOrNull(string first, string second) =>
         first is null || second is null || first == second;
