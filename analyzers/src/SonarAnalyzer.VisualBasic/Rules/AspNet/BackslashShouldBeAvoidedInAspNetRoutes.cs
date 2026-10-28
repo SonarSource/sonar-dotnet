@@ -25,4 +25,7 @@ public sealed class BackslashShouldBeAvoidedInAspNetRoutes : BackslashShouldBeAv
     protected override SyntaxKind[] SyntaxKinds => [SyntaxKind.SimpleArgument];
 
     protected override bool IsNamedAttributeArgument(SyntaxNode node) => false;
+
+    protected override bool IsInArgumentList(SyntaxNode node) =>
+        node.Parent is ArgumentListSyntax;
 }
