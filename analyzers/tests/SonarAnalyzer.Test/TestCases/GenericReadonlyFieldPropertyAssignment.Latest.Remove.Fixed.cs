@@ -76,3 +76,26 @@ record PointManagerCompliant<T> where T : class, IPoint
         set => point.X = value; // Compliant
     }
 }
+
+static class PointExtensions
+{
+    extension<T>(T point) where T : IPoint
+    {
+        public int Sum
+        {
+            get => point.X + point.Y;
+            set { }
+        }
+    }
+}
+
+class ExtensionPropertyOnReadonlyField<T> where T : IPoint
+{
+    private readonly T point;
+
+    public ExtensionPropertyOnReadonlyField(T point) => this.point = point;
+
+    public void Update()
+    {
+    }
+}

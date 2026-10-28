@@ -51,3 +51,11 @@ public record struct IgnoreRecordStruct
 
 public struct IgnoreStructPrimaryConstructor(ILogger<Wrong> logger);                  // Compliant
 public record struct IgnoreRecordStructPrimaryConstructor(ILogger<Wrong> logger);     // Compliant
+
+public union LoggerChoice(ILogger<UnionHolder>, ILogger<Wrong>);
+
+public class UnionHolder
+{
+    public UnionHolder(LoggerChoice logger) { }             // Compliant
+    public UnionHolder(ILogger<Wrong> logger, int i) { }    // Noncompliant
+}

@@ -31,3 +31,10 @@ public static class Extensions
         T Extension(T item) => item;    // Doesn't make the interface compliant
     }
 }
+
+public union Result<T>(T, Exception);
+
+public interface IUnionProducer<T> // Compliant, the union struct is invariant in T
+{
+    Result<T> Get();
+}
