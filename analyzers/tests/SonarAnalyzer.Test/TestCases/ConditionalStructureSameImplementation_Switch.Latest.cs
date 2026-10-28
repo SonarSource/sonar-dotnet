@@ -51,3 +51,38 @@ namespace CShar14
         }
     }
 }
+
+namespace CSharp15
+{
+    class LabeledBreakAndContinue
+    {
+        public void Switch(int[] values)
+        {
+            outer: foreach (var value in values)
+            {
+                switch (value)
+                {
+                    case 1:                 // Secondary
+                        DoSomething();
+                        SomethingElse();
+                        break outer;
+                    case 2:
+                        DoSomething();
+                        SomethingElse();
+                        break;
+                    case 3:
+                        DoSomething();
+                        SomethingElse();
+                        continue outer;
+                    case 4:                 // Noncompliant
+                        DoSomething();
+                        SomethingElse();
+                        break outer;
+                }
+            }
+        }
+
+        private void DoSomething() { }
+        private void SomethingElse() { }
+    }
+}

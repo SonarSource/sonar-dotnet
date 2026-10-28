@@ -142,3 +142,31 @@ namespace Tests.Diagnostics.FileScopedTypeTests
         public int CompareTo(object obj) => 0;
     }
 }
+
+namespace Tests.Diagnostics.UnionTests
+{
+    public record Cat(string Name);
+    public record Dog(string Name);
+
+    public union Pet(Cat, Dog) : IComparable<Pet> // FN NET-4879
+    {
+        public int CompareTo(Pet other) => 0;
+    }
+
+    public union PetNonGeneric(Cat, Dog) : IComparable // FN NET-4879
+    {
+        public int CompareTo(object obj) => 0;
+    }
+
+    public union CompliantPet(Cat, Dog) : IComparable<CompliantPet>
+    {
+        public int CompareTo(CompliantPet other) => 0;
+
+        public override bool Equals(object obj) => false;
+        public override int GetHashCode() => 0;
+        public static bool operator <(CompliantPet left, CompliantPet right) => true;
+        public static bool operator >(CompliantPet left, CompliantPet right) => true;
+        public static bool operator <=(CompliantPet left, CompliantPet right) => true;
+        public static bool operator >=(CompliantPet left, CompliantPet right) => true;
+    }
+}

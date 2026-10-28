@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Threading.Tasks;
 
 public class Program
 {
@@ -50,5 +51,23 @@ class NewEscapeSequence
         Process.Start(".\efile.fake");   // Noncompliant
         Process.Start("\e/file.exe");    // Noncompliant
         Process.Start($"{fileName}.exe");   // Noncompliant
+    }
+}
+
+class ProcessRunMethods
+{
+    async Task Methods(ProcessStartInfo startInfo)
+    {
+        Process.Run("file.exe");                                                // FN NET-4878
+        Process.Run("file.exe", ["arg"], silent: true);                         // FN NET-4878
+        await Process.RunAsync("file.exe");                                     // FN NET-4878
+        Process.RunAndCaptureText("file.exe");                                  // FN NET-4878
+        await Process.RunAndCaptureTextAsync("file.exe");                       // FN NET-4878
+        Process.StartAndForget("file.exe");                                     // FN NET-4878
+        Process.Run(@"C:\file.exe");
+        Process.StartAndForget("/usr/bin/file");
+        Process.Run(startInfo);
+        Process.Run(new ProcessStartInfo("file.exe"));                          // Noncompliant
+        Process.StartAndForget(new ProcessStartInfo { FileName = "file.exe" }); // Noncompliant
     }
 }
