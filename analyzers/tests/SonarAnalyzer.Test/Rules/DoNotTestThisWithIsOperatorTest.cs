@@ -45,5 +45,11 @@ namespace SonarAnalyzer.Test.Rules
             builder.AddPaths("DoNotTestThisWithIsOperator.CSharp11.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)
                 .Verify();
+
+        [TestMethod]
+        public void DoNotTestThisWithIsOperator_Latest() =>
+            builder.AddPaths("DoNotTestThisWithIsOperator.Latest.cs")
+                .WithOptions(LanguageOptions.CSharpLatest)
+                .Verify();
     }
 }

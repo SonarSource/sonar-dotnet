@@ -86,5 +86,22 @@ namespace SonarAnalyzer.Test.Rules
                     }
                 }
                 """).Verify();
+
+        [TestMethod]
+        public void DoNotUseLiteralBoolInAssertions_MsTest_Union() =>
+            builder.AddReferences(NuGetMetadataReference.MSTestTestFramework(TestConstants.NuGetLatestVersion)).AddSnippet("""
+                using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+                public union BoolOrString(bool, string);
+
+                class Foo
+                {
+                    public void Test(BoolOrString value, bool b)
+                    {
+                        Assert.AreEqual(true, value); // Noncompliant FP NET-4908
+                        Assert.AreEqual(true, b);     // Noncompliant
+                    }
+                }
+                """).WithOptions(LanguageOptions.FromCSharp15).Verify();
     }
 }

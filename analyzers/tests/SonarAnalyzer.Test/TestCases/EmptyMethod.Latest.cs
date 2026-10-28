@@ -50,3 +50,25 @@ public partial class PartialProperty
 {
     public partial int Property_01 { set { } } // Noncompliant
 }
+
+public static class ExtensionIndexerSetter
+{
+    extension(System.Collections.Generic.List<int> list)
+    {
+        public int this[string key]
+        {
+            get => 0;
+            set { } // Noncompliant
+        }
+
+        public void EmptyExtensionMethod() { } // Noncompliant
+    }
+}
+
+public class A;
+public class B;
+
+public union AOrB(A, B)
+{
+    public void EmptyUnionMethod() { } // Noncompliant
+}

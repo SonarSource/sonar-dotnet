@@ -25,4 +25,8 @@ public class DoNotUseCollectionInItsOwnMethodCallsTest
     [TestMethod]
     public void DoNotUseCollectionInItsOwnMethodCalls() =>
         new VerifierBuilder<DoNotUseCollectionInItsOwnMethodCalls>().AddPaths("DoNotUseCollectionInItsOwnMethodCalls.cs").Verify();
+
+    [TestMethod]
+    public void DoNotUseCollectionInItsOwnMethodCalls_Latest() =>
+        new VerifierBuilder<DoNotUseCollectionInItsOwnMethodCalls>().AddPaths("DoNotUseCollectionInItsOwnMethodCalls.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).VerifyNoIssues();
 }
