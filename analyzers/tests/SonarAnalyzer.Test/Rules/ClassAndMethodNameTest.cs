@@ -65,6 +65,10 @@ public class ClassAndMethodNameTest
         builderCS.AddPaths("ClassAndMethodName.TopLevelStatement.Test.cs").AddTestReference().WithTopLevelStatements().Verify();
 
     [TestMethod]
+    public void ClassAndMethodName_TypeName_CS_Latest() =>
+        builderCS.AddPaths("ClassAndMethodName.Latest.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
+
+    [TestMethod]
     public void ClassAndMethodName_MethodName_CS_Latest() =>
         builderCS.AddPaths("ClassAndMethodName.MethodName.Latest.cs", "ClassAndMethodName.MethodName.Latest.Partial.cs").WithOptions(LanguageOptions.CSharpLatest).Verify();
 

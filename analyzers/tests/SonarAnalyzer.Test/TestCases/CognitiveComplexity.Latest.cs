@@ -277,3 +277,43 @@ public class NullConditionalAssignment
     }
 
 }
+
+namespace CSharp15
+{
+    public class LabeledJumps
+    {
+        public void LabeledContinue(int[][] grid) // Noncompliant {{Refactor this method to reduce its Cognitive Complexity from 6 to the 0 allowed.}}
+        {
+        outer:
+            foreach (var row in grid)       // Secondary {{+1}}
+            {
+                foreach (var cell in row)   // Secondary {{+2 (incl 1 for nesting)}}
+                {
+                    if (cell == 0)          // Secondary {{+3 (incl 2 for nesting)}}
+                    {
+                        continue outer; // FN NET-4896
+                    }
+                }
+            }
+        }
+    }
+
+    public class PlainIndexer
+    {
+        public int this[bool first] => first ? 1 : 2;   // FN NET-4897
+    }
+
+    public static class Extensions
+    {
+        extension(int[] source)
+        {
+            public int this[bool first] => first ? source[0] : source[^1];   // FN NET-4897
+
+            public int this[string name]
+            {
+                get => name == null ? source[0] : source[1];   // Noncompliant {{Refactor this accessor to reduce its Cognitive Complexity from 1 to the 0 allowed.}}
+                                                              // Secondary@-1 {{+1}}
+            }
+        }
+    }
+}

@@ -129,3 +129,14 @@ public partial class PartialEvent
 {
     public partial event EventHandler MyEvent;
 }
+
+namespace CSharp15
+{
+    public closed class ClosedEmpty { }         // Noncompliant FP NET-4893
+    public sealed class ClosedA : ClosedEmpty { }
+    public sealed class ClosedB : ClosedEmpty { }
+
+    public union Result(Success, Failure);
+    public class Success { public int Value { get; } }
+    public class Failure { }                    // Noncompliant FP NET-4894
+}

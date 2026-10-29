@@ -527,7 +527,7 @@ public class MetricsTest
             .AddSnippet(csharpLatestText)
             .GetCompilation();
         var csharpLatestTree = csharpLatestCompilation.SyntaxTrees.Single();
-        new CSharpMetrics(csharpLatestTree, csharpLatestCompilation.GetSemanticModel(csharpLatestTree)).CognitiveComplexity.Should().Be(49);
+        new CSharpMetrics(csharpLatestTree, csharpLatestCompilation.GetSemanticModel(csharpLatestTree)).CognitiveComplexity.Should().Be(58);
 
         var visualBasicCode = System.IO.File.ReadAllText(@"TestCases\CognitiveComplexity.vb");
         CognitiveComplexity(AnalyzerLanguage.VisualBasic, visualBasicCode).Should().Be(122);

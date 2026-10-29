@@ -87,3 +87,11 @@ namespace CSharp14
         public partial event System.EventHandler<System.EventArgs> PartialEvent;
     }
 }
+
+namespace CSharp15
+{
+    public closed class ClosedUtility // Compliant
+    {
+        public static void Method() { }
+    }
+}

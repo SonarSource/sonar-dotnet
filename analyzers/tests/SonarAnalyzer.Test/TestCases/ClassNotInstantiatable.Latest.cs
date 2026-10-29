@@ -190,3 +190,31 @@ namespace CSharp14
         private partial PartialPrivateConstructor();
     }
 }
+
+namespace CSharp15
+{
+    public closed class ClosedPrivateConstructor // Noncompliant {{This class can't be instantiated; make its constructor 'public'.}}
+    {
+        private ClosedPrivateConstructor() { }
+    }
+
+    public closed class ClosedWithNestedDerived // Compliant - the nested type derives from it
+    {
+        private ClosedWithNestedDerived() { }
+
+        public sealed class Derived : ClosedWithNestedDerived { }
+    }
+
+    public class CollectionWithArguments : IEnumerable<int> // Noncompliant FP NET-4892
+    {
+        private CollectionWithArguments(int capacity) { }
+
+        public void Add(int item) { }
+
+        public IEnumerator<int> GetEnumerator() => throw new NotImplementedException();
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public static CollectionWithArguments Create() => [with(10), 1, 2];
+    }
+}
