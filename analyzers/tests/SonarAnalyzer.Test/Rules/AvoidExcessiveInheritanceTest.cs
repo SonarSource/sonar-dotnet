@@ -44,6 +44,12 @@ namespace SonarAnalyzer.Test.Rules
                 .Verify();
 
         [TestMethod]
+        public void AvoidExcessiveInheritance_DefaultValues_CSharpLatest() =>
+            defaultBuilder.AddPaths("AvoidExcessiveInheritance.Latest.cs")
+                .WithOptions(LanguageOptions.CSharpLatest)
+                .Verify();
+
+        [TestMethod]
         public void AvoidExcessiveInheritance_DefaultValues_FileScopedTypes() =>
             defaultBuilder.AddPaths("AvoidExcessiveInheritance_DefaultValues.FileScopedTypes.cs")
                 .WithOptions(LanguageOptions.FromCSharp11)

@@ -263,3 +263,41 @@ public partial class CrossTreeCallbackField
     private static void AsyncMethod(string msg, int i) =>
         Console.WriteLine($"AsyncMethod: {msg} {i}");
 }
+
+namespace CSharp15
+{
+    public delegate int Calc(int x);
+
+    public class Indexers
+    {
+        private static int Compute(int x) => x;
+
+        public int this[int i]
+        {
+            get
+            {
+                var calc = new Calc(Compute);
+                var result = calc.BeginInvoke(i, null, null); // Noncompliant FP NET-4889
+                return calc.EndInvoke(result);
+            }
+        }
+    }
+
+    public static class ExtensionIndexers
+    {
+        private static int Compute(int x) => x;
+
+        extension(string s)
+        {
+            public int this[int i]
+            {
+                get
+                {
+                    var calc = new Calc(Compute);
+                    var result = calc.BeginInvoke(i, null, null); // Noncompliant FP NET-4889
+                    return calc.EndInvoke(result);
+                }
+            }
+        }
+    }
+}

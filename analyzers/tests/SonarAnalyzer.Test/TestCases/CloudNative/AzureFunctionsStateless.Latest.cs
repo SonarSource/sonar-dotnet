@@ -22,3 +22,25 @@ public static partial class StaticPartialClass
     [FunctionName("Sample")]
     public static partial void Update(int value);
 }
+
+public static class ExtensionIndexers
+{
+    private static readonly List<int> Items = new();
+
+    extension(List<int> list)
+    {
+        public int this[string key]
+        {
+            get => 0;
+            set { }
+        }
+    }
+
+    [FunctionName("Sample")]
+    public static void Run()
+    {
+        Items["a"] = 1;     // Noncompliant
+        var local = new List<int>();
+        local["a"] = 1;     // Compliant
+    }
+}

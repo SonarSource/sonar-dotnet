@@ -23,3 +23,15 @@ namespace Tests.Diagnostics
         }
     }
 }
+
+namespace CSharp15
+{
+    public class NumericTypes
+    {
+        public void Test(System.Numerics.Decimal32 a, System.Numerics.Decimal32 b, System.Numerics.BFloat16 c, System.Numerics.BFloat16 d)
+        {
+            _ = !(a < b);   // Noncompliant {{Use the opposite operator ('>=') instead.}} FP NET-4890
+            _ = !(c < d);   // Noncompliant {{Use the opposite operator ('>=') instead.}} FP NET-4890
+        }
+    }
+}

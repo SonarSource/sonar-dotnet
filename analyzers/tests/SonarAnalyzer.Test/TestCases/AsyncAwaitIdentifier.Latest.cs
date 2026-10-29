@@ -22,3 +22,26 @@ namespace Tests.Diagnostics
     public class A { }
     public class B { }
 }
+
+namespace CSharp15
+{
+    public class LabeledJumps
+    {
+        public void Test()
+        {
+            async: for (var i = 0; i < 10; i++) // Noncompliant
+            {
+                for (var j = 0; j < 10; j++)
+                {
+                    if (j == 1) { continue async; }
+                    if (j == 2) { break async; }
+                }
+            }
+
+            await: while (true) // Noncompliant
+            {
+                break await;
+            }
+        }
+    }
+}

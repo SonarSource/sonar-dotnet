@@ -53,4 +53,11 @@ public class BlazorQueryParameterRoutableComponentTest
         builder.AddPaths("BlazorQueryParameterRoutableComponent.Compliant.cs", "BlazorQueryParameterRoutableComponent.Noncompliant.cs")
             .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
             .Verify();
+
+    [TestMethod]
+    public void BlazorQueryParameterRoutableComponent_CS_Latest() =>
+        builder.AddPaths("BlazorQueryParameterRoutableComponent.Latest.cs")
+            .WithOptions(LanguageOptions.CSharpLatest)
+            .AddReferences(NuGetMetadataReference.MicrosoftAspNetCoreComponents("7.0.13"))
+            .Verify();
 }

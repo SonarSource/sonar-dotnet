@@ -242,3 +242,13 @@ public static class Extensions
         }
     }
 }
+
+namespace CSharp15
+{
+    public union UnionJob(int, string)
+    {
+        public void Start() => Task.Run(Work);
+
+        private async void Work() { await Task.Delay(1); } // Noncompliant {{Return 'Task' instead.}} FP NET-4888
+    }
+}
