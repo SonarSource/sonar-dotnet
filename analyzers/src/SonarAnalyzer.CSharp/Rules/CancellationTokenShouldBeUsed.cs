@@ -19,27 +19,22 @@ using System.Collections.Concurrent;
 
 namespace SonarAnalyzer.CSharp.Rules;
 
+// S8949 (this file + .MethodInvocation.cs) and S9426 (.AwaitForEach.cs) both flag a missed opportunity to forward an
+// accessible CancellationToken, just at different consumption sites (method calls vs. 'await foreach'). They're merged
+// into one analyzer, split via partials per rule, so the "is a CancellationToken in scope for this method" computation
+// below - the only part they actually share - runs once per method per compilation instead of twice.
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
+public sealed partial class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
 {
-    private readonly record struct MethodGroupKey(ITypeSymbol Type, string Name);
-
-    private readonly record struct MemberCtSource(ExpressionSyntax Expression, bool IsStatic, SyntaxToken? DeclarationToken)
+    private readonly record struct CtSource(ExpressionSyntax Expression, bool IsStatic, SyntaxToken? DeclarationToken)
     {
-        public MemberCtSource? For(IMethodSymbol method) =>
+        public CtSource? For(IMethodSymbol method) =>
             !method.IsStatic || IsStatic ? this : null;
     }
 
-    private const string DiagnosticId = "S8949";
-    private const string MessageFormat = "Pass the '{0}' to this method to allow cancellation of the operation, or use 'CancellationToken.None' to opt out explicitly.";
-    private const string MessageFormatDefault = "Pass the '{0}' instead of 'default' to allow cancellation of the operation, or use 'CancellationToken.None' to opt out explicitly.";
-
-    private static readonly DiagnosticDescriptor Rule = DescriptorFactory.Create(DiagnosticId, "{0}");
     private static readonly ImmutableArray<string> ExcludedHostLifetimeTokens = ImmutableArray.Create("ApplicationStarted", "ApplicationStopped");
-    // Reused across calls: each call's ReplaceNode produces its own private tree, so there's no cross-call collision to guard against.
-    private static readonly SyntaxAnnotation SpeculativeInvocationAnnotation = new();
 
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(RuleS8949, RuleS9426);
 
     protected override void Initialize(SonarAnalysisContext context) =>
         context.RegisterCompilationStartAction(
@@ -66,17 +61,29 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
                                     {
                                         // Invocations in base()/this() initializer arguments are part of this code block
                                         // but 'this' is not accessible there. Skip them via span intersection (O(1));
-                                        // static CT could be passed but the FN is acceptable, FPs are not.
+                                        // static CT could be passed but the FN is acceptable, FPs are not. A constructor
+                                        // can't be async, so this guard is a no-op for await-foreach-based node kinds.
                                         var initializerSpan = (codeBlockStart.CodeBlock as ConstructorDeclarationSyntax)?.Initializer?.Span;
                                         codeBlockStart.RegisterNodeAction(
                                             nodeContext =>
                                             {
                                                 if (initializerSpan?.Contains(nodeContext.Node.Span) != true)
                                                 {
-                                                    Analyze(nodeContext, (InvocationExpressionSyntax)nodeContext.Node, ctSource, owningMethod, candidateCache);
+                                                    switch (nodeContext.Node.Kind())
+                                                    {
+                                                        case SyntaxKind.InvocationExpression:
+                                                            AnalyzeInvocation(nodeContext, ctSource, owningMethod, candidateCache);
+                                                            break;
+                                                        case SyntaxKind.ForEachStatement:
+                                                        case SyntaxKindEx.ForEachVariableStatement:
+                                                            AnalyzeAwaitForEach(nodeContext, ctSource, owningMethod);
+                                                            break;
+                                                    }
                                                 }
                                             },
-                                            SyntaxKind.InvocationExpression);
+                                            SyntaxKind.InvocationExpression,
+                                            SyntaxKind.ForEachStatement,
+                                            SyntaxKindEx.ForEachVariableStatement);
                                     }
                                 });
                         },
@@ -86,10 +93,10 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
 
     /// <summary>
     /// Returns the first field or property of <paramref name="type"/> that is, or wraps (one level deep), a <see cref="CancellationToken"/>.
-    /// The <see cref="MemberCtSource.IsStatic"/> flag is preserved so callers can exclude instance sources from static contexts.
+    /// The <see cref="CtSource.IsStatic"/> flag is preserved so callers can exclude instance sources from static contexts.
     /// Returns <see langword="default"/> when no such member exists.
     /// </summary>
-    private static MemberCtSource? FindMemberCtSource(ConcurrentDictionary<ITypeSymbol, IdentifierNameSyntax> ctTypeCache, INamedTypeSymbol type)
+    private static CtSource? FindMemberCtSource(ConcurrentDictionary<ITypeSymbol, IdentifierNameSyntax> ctTypeCache, INamedTypeSymbol type)
     {
         foreach (var member in type.GetMembers())
         {
@@ -115,7 +122,7 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
     /// Returns a syntax expression referencing the first parameter of <paramref name="method"/> that is, or wraps (one level deep),
     /// a <see cref="CancellationToken"/>. Returns <see langword="null"/> when no such parameter exists.
     /// </summary>
-    private static MemberCtSource? FindParameterCtSource(ConcurrentDictionary<ITypeSymbol, IdentifierNameSyntax> ctTypeCache, IMethodSymbol method)
+    private static CtSource? FindParameterCtSource(ConcurrentDictionary<ITypeSymbol, IdentifierNameSyntax> ctTypeCache, IMethodSymbol method)
     {
         foreach (var param in method.Parameters)
         {
@@ -220,84 +227,4 @@ public sealed class CancellationTokenShouldBeUsed : SonarDiagnosticAnalyzer
     private static bool IsNewCancellationTokenTrue(ExpressionSyntax expression) =>
         ObjectCreationFactory.TryCreate(expression) is { ArgumentList.Arguments: { Count: 1 } arguments }
         && arguments[0].Expression.IsKind(SyntaxKind.TrueLiteralExpression);
-
-    private static void Analyze(
-        SonarSyntaxNodeReportingContext nodeContext,
-        InvocationExpressionSyntax invocation,
-        MemberCtSource ctSource,
-        IMethodSymbol owningMethod,
-        ConcurrentDictionary<MethodGroupKey, ImmutableArray<string>> candidateCache)
-    {
-        if (nodeContext.Model.GetSymbolInfo(invocation).Symbol is not IMethodSymbol method)
-        {
-            return;
-        }
-
-        // An arg bound to a CT parameter means we are already on the CT overload.
-        // Speculative binding would produce a duplicate CT arg and fail; handle directly.
-        // ParameterLookup resolves named and reordered args correctly; params CT[] is
-        // skipped because its element type (CancellationToken[]) does not match CT.
-        var paramLookup = new CSharpMethodParameterLookup(invocation.ArgumentList, method);
-        foreach (var arg in invocation.ArgumentList.Arguments)
-        {
-            if (paramLookup.TryGetSymbol(arg, out var param) && param.Type.NullableUnderlyingTypeOrSelf().Is(KnownType.System_Threading_CancellationToken))
-            {
-                if (arg.Expression.RawKind is (int)SyntaxKind.DefaultExpression or (int)SyntaxKindEx.DefaultLiteralExpression)
-                {
-                    ReportIssue(nodeContext, invocation, ctSource, MessageFormatDefault);
-                }
-                return;
-            }
-        }
-
-        var searchType = (method.ReducedFrom ?? method).ContainingType;
-        var ctParamNames = candidateCache.GetOrAdd(new MethodGroupKey(searchType, method.Name), x =>
-            x.Type
-                .GetMembers(x.Name)
-                .OfType<IMethodSymbol>()
-                .Where(x => !x.IsHiddenFromIntelliSense)
-                .Select(x => x.Parameters.FirstOrDefault(p => p.Type.NullableUnderlyingTypeOrSelf().Is(KnownType.System_Threading_CancellationToken))?.Name)
-                .WhereNotNull()
-                .Distinct()
-                .ToImmutableArray());
-
-        if (!ctParamNames.IsDefaultOrEmpty && ctParamNames.Any(x => CanSpeculativelyPassCt(nodeContext.Model, invocation, method, x, ctSource.Expression, owningMethod)))
-        {
-            ReportIssue(nodeContext, invocation, ctSource, MessageFormat);
-        }
-    }
-
-    private static void ReportIssue(SonarSyntaxNodeReportingContext nodeContext, InvocationExpressionSyntax invocation, MemberCtSource ctSource, string messageFormat) =>
-        nodeContext.ReportIssue(
-            Rule,
-            invocation.MethodCallIdentifier?.GetLocation() ?? invocation.GetLocation(),
-            [ctSource.DeclarationToken?.ToSecondaryLocation()],
-            string.Format(messageFormat, ctSource.Expression));
-
-    private static bool CanSpeculativelyPassCt(
-        SemanticModel model,
-        InvocationExpressionSyntax invocation,
-        IMethodSymbol calledMethod,
-        string ctParamName,
-        ExpressionSyntax ctSource,
-        IMethodSymbol owningMethod)
-    {
-        var ctArg = SyntaxFactory.Argument(
-            SyntaxFactory.NameColon(ctParamName.EscapedIdentifierName),
-            default,
-            ctSource);
-        var modifiedInvocation = invocation.WithArgumentList(invocation.ArgumentList.AddArguments(ctArg)).WithAdditionalAnnotations(SpeculativeInvocationAnnotation);
-        // A detached WithArgumentList() copy has Parent == null, which NREs Roslyn's binder on conditional-access
-        // chains like x?.y.M() (https://github.com/dotnet/roslyn/issues/25262). ReplaceNode on the tree root keeps the parent chain intact.
-        var speculatedNode = (ExpressionSyntax)invocation.SyntaxTree.GetRoot().ReplaceNode(invocation, modifiedInvocation).GetAnnotatedNodes(SpeculativeInvocationAnnotation).First();
-        // Speculative binding also succeeds inside a static local function. Check the return type compatability too to avoid FPs (e.g. Task<int> vs Task<string>).
-        // If the token-forwarded call now binds back to the owning method, we risk introducing endless recursion - unless it already recursed there before.
-        return model.GetSpeculativeSymbolInfo(invocation.SpanStart, speculatedNode, SpeculativeBindingOption.BindAsExpression).Symbol
-            is IMethodSymbol resolved
-            && !(resolved.ReducedFrom ?? resolved).IsHiddenFromIntelliSense
-            && model.Compilation.ClassifyConversion(resolved.ReturnType, calledMethod.ReturnType).IsImplicit
-            && (!IsOwningMethod(resolved) || IsOwningMethod(calledMethod));
-
-        bool IsOwningMethod(IMethodSymbol symbol) => (symbol.ReducedFrom ?? symbol).OriginalDefinition.Equals(owningMethod.OriginalDefinition);
-    }
 }

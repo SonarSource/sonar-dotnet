@@ -1,0 +1,24 @@
+{
+  "title": "Available cancellation tokens should be passed to \"await foreach\" via \"WithCancellation\"",
+  "type": "BUG",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "1min"
+  },
+  "tags": [
+    "async",
+    "concurrency"
+  ],
+  "defaultSeverity": "Major",
+  "ruleSpecification": "RSPEC-9426",
+  "sqKey": "S9426",
+  "scope": "All",
+  "quickfix": "targeted",
+  "code": {
+    "impacts": {
+      "RELIABILITY": "HIGH"
+    },
+    "attribute": "LOGICAL"
+  }
+}

@@ -565,9 +565,11 @@ public sealed partial class KnownType
     public static readonly KnownType System_Runtime_CompilerServices_CallerFilePathAttribute = new("System.Runtime.CompilerServices.CallerFilePathAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_CallerLineNumberAttribute = new("System.Runtime.CompilerServices.CallerLineNumberAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_CallerMemberNameAttribute = new("System.Runtime.CompilerServices.CallerMemberNameAttribute");
+    public static readonly KnownType System_Runtime_CompilerServices_EnumeratorCancellationAttribute = new("System.Runtime.CompilerServices.EnumeratorCancellationAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_InternalsVisibleToAttribute = new("System.Runtime.CompilerServices.InternalsVisibleToAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_ModuleInitializerAttribute = new("System.Runtime.CompilerServices.ModuleInitializerAttribute");
     public static readonly KnownType System_Runtime_CompilerServices_INotifyCompletion = new("System.Runtime.CompilerServices.INotifyCompletion");
+    public static readonly KnownType System_Runtime_CompilerServices_ConfiguredCancelableAsyncEnumerable_T = new("System.Runtime.CompilerServices.ConfiguredCancelableAsyncEnumerable", "T");
     public static readonly KnownType System_Runtime_CompilerServices_ValueTaskAwaiter = new("System.Runtime.CompilerServices.ValueTaskAwaiter");
     public static readonly KnownType System_Runtime_CompilerServices_ValueTaskAwaiter_TResult = new("System.Runtime.CompilerServices.ValueTaskAwaiter", "TResult");
     public static readonly KnownType System_Runtime_CompilerServices_TaskAwaiter = new("System.Runtime.CompilerServices.TaskAwaiter");
@@ -687,6 +689,7 @@ public sealed partial class KnownType
     public static readonly KnownType System_Threading_SemaphoreSlim = new("System.Threading.SemaphoreSlim");
     public static readonly KnownType System_Threading_SpinLock = new("System.Threading.SpinLock");
     public static readonly KnownType System_Threading_Tasks_Task = new("System.Threading.Tasks.Task");
+    public static readonly KnownType System_Threading_Tasks_TaskAsyncEnumerableExtensions = new("System.Threading.Tasks.TaskAsyncEnumerableExtensions");
     public static readonly KnownType System_Threading_Tasks_Task_T = new("System.Threading.Tasks.Task", "TResult");
     public static readonly KnownType System_Threading_Tasks_TaskFactory = new("System.Threading.Tasks.TaskFactory");
     public static readonly KnownType System_Threading_Tasks_ValueTask = new("System.Threading.Tasks.ValueTask");

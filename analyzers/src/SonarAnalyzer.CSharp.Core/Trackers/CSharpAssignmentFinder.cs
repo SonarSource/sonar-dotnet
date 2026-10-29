@@ -67,6 +67,9 @@ public class CSharpAssignmentFinder : AssignmentFinder
     protected override bool IsLoop(SyntaxNode node) =>
         node?.Kind() is SyntaxKind.ForStatement or SyntaxKind.ForEachStatement or SyntaxKind.WhileStatement or SyntaxKind.DoStatement;
 
+    protected override bool IsFunctionBoundary(SyntaxNode node) =>
+        node is AnonymousFunctionExpressionSyntax || LocalFunctionStatementSyntaxWrapper.IsInstance(node);
+
     /// <summary>
     /// If <paramref name="identifierName"/> is mutated inside <paramref name="mutation"/> then
     /// the expression representing the new value is returned. The returned expression might be

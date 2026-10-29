@@ -23,6 +23,7 @@ public abstract class AssignmentFinder
     protected abstract bool IsAssignmentToIdentifier(SyntaxNode node, string identifierName, bool anyAssignmentKind, out SyntaxNode rightExpression);
     protected abstract bool IsIdentifierDeclaration(SyntaxNode node, string identifierName, out SyntaxNode initializer);
     protected abstract bool IsLoop(SyntaxNode node);
+    protected abstract bool IsFunctionBoundary(SyntaxNode node);
     protected abstract SyntaxNode GetTopMostContainingMethod(SyntaxNode node);
 
     public PrecedingAssignment FindLinearPrecedingAssignment(string identifierName, SyntaxNode current)
@@ -30,6 +31,13 @@ public abstract class AssignmentFinder
         var method = GetTopMostContainingMethod(current);
         while (current != method && current?.Parent is not null)
         {
+            // A name match here could be an unrelated symbol declared in the outer scope - a local function or lambda
+            // parameter/local can shadow it, and even without shadowing, control flow isn't linear across the boundary.
+            if (IsFunctionBoundary(current))
+            {
+                return PrecedingAssignment.None.Instance;
+            }
+
             if (IsLoop(current) && ContainsNestedAssignmentToIdentifier(current))
             {
                 return PrecedingAssignment.Uncertain.Instance; // There's assignment inside this loop, value can be altered by each iteration

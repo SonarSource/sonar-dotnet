@@ -1,0 +1,70 @@
+<h2>Why is this an issue?</h2>
+<p>Enumerating an <code>IAsyncEnumerable&lt;T&gt;</code> with <code>await foreach</code> does not automatically propagate a
+<code>CancellationToken</code> that is available in the enclosing scope. Async-iterator methods only receive a forwarded cancellation token through
+the compiler-generated plumbing triggered by <code>IAsyncEnumerable&lt;T&gt;.GetAsyncEnumerator(CancellationToken)</code>, which
+<code>WithCancellation(token)</code> calls under the hood.</p>
+<p>Without an explicit <code>WithCancellation(token)</code> at the consumption site, that plumbing never runs, and the enumeration cannot be cancelled
+even if the producer method correctly supports cancellation: it continues running after cancellation is requested, wasting resources.</p>
+<p>This is silent: no compiler warning is raised for this case. The compiler only warns (<a
+href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/foreach-diagnostics#enumeratorcancellation-attribute-usage">CS8425</a>)
+about the opposite, producer-side mistake of declaring a <code>CancellationToken</code> parameter on an async-iterator method without decorating it
+with <code>[EnumeratorCancellation]</code> — it does not inspect <code>await foreach</code> call sites.</p>
+<h3>Exceptions</h3>
+<p>The rule does not flag an <code>await foreach</code> loop that already calls <code>.WithCancellation(…​)</code> — except when the argument is a
+bare <code>default</code>, which is not treated as a deliberate cancellation opt-out (unlike an explicitly passed
+<code>CancellationToken.None</code>).</p>
+<p>The rule also does not flag a call that already passes some <code>CancellationToken</code> directly into a parameter of the producer method
+decorated with <code>[EnumeratorCancellation]</code>, e.g. <code>GetItemsAsync(token)</code> where <code>GetItemsAsync</code> is declared as
+<code>IAsyncEnumerable&lt;T&gt; GetItemsAsync([EnumeratorCancellation] CancellationToken token = default)</code>. In that case, the compiler-generated
+<code>GetAsyncEnumerator(CancellationToken)</code> override keeps the already-supplied value when called with the default token, so the enumeration is
+already cancellable without <code>WithCancellation</code>.</p>
+<p>Both exceptions above still apply when the enumerated expression is further wrapped in a trailing <code>.ConfigureAwait(false)</code> (a common
+idiom in library code, to avoid capturing the synchronization context on every <code>await</code> in the loop), in either order, e.g.
+<code>GetItemsAsync().WithCancellation(token).ConfigureAwait(false)</code> or
+<code>GetItemsAsync().ConfigureAwait(false).WithCancellation(token)</code> are both treated as compliant, as is
+<code>GetItemsAsync(token).ConfigureAwait(false)</code> when the token parameter of <code>GetItemsAsync</code> is decorated with
+<code>[EnumeratorCancellation]</code>.</p>
+<h2>How to fix it</h2>
+<p>Pass the accessible <code>CancellationToken</code> to the enumeration via <code>WithCancellation</code>.</p>
+<h3>Code examples</h3>
+<h4>Noncompliant code example</h4>
+<pre data-diff-id="1" data-diff-type="noncompliant">
+public async Task ProcessAsync(CancellationToken token = default)
+{
+    await foreach (var item in GetItemsAsync()) // Noncompliant - pass 'token' to allow cancellation
+    {
+        Process(item);
+    }
+}
+</pre>
+<h4>Compliant solution</h4>
+<pre data-diff-id="1" data-diff-type="compliant">
+public async Task ProcessAsync(CancellationToken token = default)
+{
+    await foreach (var item in GetItemsAsync().WithCancellation(token))
+    {
+        Process(item);
+    }
+}
+</pre>
+<pre data-diff-id="2" data-diff-type="noncompliant">
+await foreach (var item in GetItemsAsync().WithCancellation(default)) // Noncompliant - not a deliberate opt-out
+</pre>
+<pre data-diff-id="2" data-diff-type="compliant">
+await foreach (var item in GetItemsAsync().WithCancellation(CancellationToken.None)) // Compliant - deliberate opt-out
+</pre>
+<h2>Resources</h2>
+<h3>Documentation</h3>
+<ul>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.enumeratorcancellationattribute">EnumeratorCancellationAttribute
+  Class</a></li>
+  <li>Microsoft Learn - <a href="https://learn.microsoft.com/en-us/dotnet/csharp/iterators">Iterators - C#</a></li>
+  <li>Microsoft Learn - <a
+  href="https://learn.microsoft.com/en-us/dotnet/csharp/asynchronous-programming/generate-consume-asynchronous-stream">Generate and consume async
+  streams</a></li>
+  <li>dotnet/csharplang - <a href="https://github.com/dotnet/csharplang/blob/main/proposals/csharp-8.0/async-streams.md">Async Streams
+  proposal</a></li>
+  <li>{rule:csharpsquid:S8949} - The overload accepting a 'CancellationToken' should be used</li>
+</ul>
+

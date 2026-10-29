@@ -61,4 +61,7 @@ public class VisualBasicAssignmentFinder : AssignmentFinder
                        SyntaxKind.DoLoopWhileBlock,
                        SyntaxKind.DoUntilLoopBlock,
                        SyntaxKind.DoWhileLoopBlock);
+
+    protected override bool IsFunctionBoundary(SyntaxNode node) =>
+        node is LambdaExpressionSyntax;
 }
