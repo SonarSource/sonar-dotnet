@@ -236,3 +236,16 @@ public static class Extensions
         }
     }
 }
+
+[System.Runtime.CompilerServices.InterpolatedStringHandler]
+public ref struct ImplicitAppendLiteral
+{
+    public ImplicitAppendLiteral(int literalLength, int formattedCount) { }
+
+    public void AppendLiteral(string value) // Noncompliant
+    {
+        ImplicitAppendLiteral handler = $"text";
+    }
+
+    public void AppendFormatted<T>(T value) { }
+}

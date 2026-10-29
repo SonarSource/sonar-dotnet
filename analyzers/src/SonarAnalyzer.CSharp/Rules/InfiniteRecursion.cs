@@ -23,6 +23,35 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
     private const string DiagnosticId = "S2190";
     private const string MessageFormat = "Add a way to break out of this {0}.";
 
+    private static readonly HashSet<string> ImplicitlyCalledMethodNames =
+    [
+        "Add",
+        "AppendFormatted",
+        "AppendLiteral",
+        "Cast",
+        "Deconstruct",
+        "Dispose",
+        "DisposeAsync",
+        "GetAsyncEnumerator",
+        "GetAwaiter",
+        "GetEnumerator",
+        "GetPinnableReference",
+        "GetResult",
+        "GroupBy",
+        "GroupJoin",
+        "Join",
+        "MoveNext",
+        "MoveNextAsync",
+        "OrderBy",
+        "OrderByDescending",
+        "Select",
+        "SelectMany",
+        "Slice",
+        "ThenBy",
+        "ThenByDescending",
+        "Where",
+    ];
+
     private readonly IChecker checker;
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(Rule);
@@ -94,11 +123,25 @@ public partial class InfiniteRecursion : SonarDiagnosticAnalyzer
 
     private void CheckForNoExitMethod(SonarSyntaxNodeReportingContext c, SyntaxToken identifier)
     {
-        if (c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
+        if (MayNotExit(c.Node, identifier) && c.Model.GetDeclaredSymbol(c.Node) is IMethodSymbol symbol)
         {
             checker.CheckForNoExitMethod(c, c.Node, identifier, symbol);
         }
     }
+
+    private static bool MayNotExit(SyntaxNode node, SyntaxToken identifier) =>
+        !identifier.IsKind(SyntaxKind.IdentifierToken)
+        || ImplicitlyCalledMethodNames.Contains(identifier.ValueText)
+        || node.DescendantNodesAndTokens().Any(x => x.IsToken
+            ? x.IsKind(SyntaxKind.IdentifierToken) && x.AsToken() != identifier && x.AsToken().ValueText == identifier.ValueText
+            : x.Kind() is SyntaxKind.WhileStatement
+                or SyntaxKind.DoStatement
+                or SyntaxKind.ForStatement
+                or SyntaxKind.ForEachStatement
+                or SyntaxKindEx.ForEachVariableStatement
+                or SyntaxKind.GotoStatement
+                or SyntaxKind.GotoCaseStatement
+                or SyntaxKind.GotoDefaultStatement);
 
     private static bool IsInstructionOnThisAndMatchesDeclaringSymbol(SyntaxNode node, ISymbol declaringSymbol, SemanticModel semanticModel)
     {
