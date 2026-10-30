@@ -23,6 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CoverageTest {
 
+  private static final String FILE = "Foo.cs";
+
   @Test
   public void test() {
     Coverage coverage = new Coverage();
@@ -364,5 +366,61 @@ public class CoverageTest {
 
     sut.getBranchCoverage(filePath);
     assertThat(sut.getBranchCoverageUnderreported()).isFalse();
+  }
+
+  @Test
+  public void mergeWith_otherHasFewerLines_keepsUncoveredLines() {
+    Coverage sut = allLinesUncovered();
+
+    sut.mergeWith(onlyFirstMethodCovered());
+
+    // Lines 12 and 13 are executable and uncovered. They must stay in the lines to cover.
+    assertThat(sut.hits(FILE)).isEqualTo(Map.of(10, 1, 11, 1, 12, 0, 13, 0));
+  }
+
+  @Test
+  public void mergeWith_isOrderIndependent() {
+    Coverage fullFirst = allLinesUncovered();
+    fullFirst.mergeWith(onlyFirstMethodCovered());
+
+    Coverage partialFirst = onlyFirstMethodCovered();
+    partialFirst.mergeWith(allLinesUncovered());
+
+    assertThat(fullFirst.hits(FILE)).isEqualTo(partialFirst.hits(FILE));
+  }
+
+  @Test
+  public void mergeWith_disjointLines_keepsHits() {
+    Coverage sut = onlyFirstMethodCovered();
+
+    sut.mergeWith(onlySecondMethodCovered());
+
+    // Each report covers a different method. No hit may be lost.
+    assertThat(sut.hits(FILE)).isEqualTo(Map.of(10, 1, 11, 1, 12, 1, 13, 1));
+  }
+
+  // A report listing every sequence point of the file (lines 10 to 13), none of them executed.
+  private static Coverage allLinesUncovered() {
+    Coverage coverage = new Coverage();
+    for (int line = 10; line <= 13; line++) {
+      coverage.addHits(FILE, line, 0);
+    }
+    return coverage;
+  }
+
+  // A report listing only the first method (lines 10 and 11), executed once.
+  private static Coverage onlyFirstMethodCovered() {
+    Coverage coverage = new Coverage();
+    coverage.addHits(FILE, 10, 1);
+    coverage.addHits(FILE, 11, 1);
+    return coverage;
+  }
+
+  // A report listing only the second method (lines 12 and 13), executed once.
+  private static Coverage onlySecondMethodCovered() {
+    Coverage coverage = new Coverage();
+    coverage.addHits(FILE, 12, 1);
+    coverage.addHits(FILE, 13, 1);
+    return coverage;
   }
 }
