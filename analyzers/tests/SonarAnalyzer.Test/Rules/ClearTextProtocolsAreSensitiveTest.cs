@@ -57,7 +57,6 @@ public class ClearTextProtocolsAreSensitiveTest
             .Verify();
 
     [TestMethod]
-    [Ignore("NET-4895 AD0001: 'The node of kind WithElement does not have an ArgumentList.' on a string argument in a collection expression with(...) element")]
     public void ClearTextProtocolsAreSensitive_CS_CollectionExpressionArguments() =>
         builder.AddPaths("ClearTextProtocolsAreSensitive.CollectionExpressionArguments.Latest.cs")
             .WithOptions(LanguageOptions.CSharpLatest)

@@ -477,6 +477,7 @@ public static class SyntaxNodeExtensionsCSharp
             null => null,
             _ when PrimaryConstructorBaseTypeSyntaxWrapper.IsInstance(node) => ((PrimaryConstructorBaseTypeSyntaxWrapper)node).ArgumentList,
             _ when ImplicitObjectCreationExpressionSyntaxWrapper.IsInstance(node) => ((ImplicitObjectCreationExpressionSyntaxWrapper)node).ArgumentList,
+            _ when WithElementSyntaxWrapper.IsInstance(node) => ((WithElementSyntaxWrapper)node).ArgumentList,
             _ => throw new InvalidOperationException($"The {nameof(node)} of kind {node.Kind()} does not have an {nameof(ArgumentList)}."),
         };
 
