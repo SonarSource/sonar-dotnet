@@ -1,4 +1,35 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace CSharp15
+{
+    public class SwappableArgsCollection : IEnumerable<int>
+    {
+        public int First { get; }
+        public int Second { get; }
+
+        public SwappableArgsCollection(int first, int second)
+        {
+            First = first;
+            Second = second;
+        }
+
+        public void Add(int item) { }
+        public IEnumerator<int> GetEnumerator() => new List<int> { First, Second }.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
+    // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions#collection-expression-arguments
+    public class CollectionExpressionArgumentsRepro
+    {
+        void M(int first, int second)
+        {
+            SwappableArgsCollection c = [with(second: first, first: second)]; // FN NET-4955
+            SwappableArgsCollection ok = [with(first: first, second: second)]; // Compliant
+        }
+    }
+}
 
 namespace Tests.Diagnostics
 {
